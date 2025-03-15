@@ -1,4 +1,3 @@
-import "@typespec/versioning";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
@@ -6,10 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
 namespace Azure.Batch;
@@ -18,7 +14,20 @@ namespace Azure.Batch;
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get
 op ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
-  BatchCommonListHeaders & TFilter,
+  CommonListParameters & TFilter,
+  BatchResponseHeaders & TResponse,
+  NoFilter,
+  BatchError
+>;
+
+// TODO: Once we migrate all ListOperation methods in routes.tsp to use this, delete original ListOperation (above) and rename this to ListOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@get
+op ListOperationNew<
+  TFilter extends TypeSpec.Reflection.Model,
+  TResponse
+> is Azure.Core.RpcOperation<
+  TFilter,
   BatchResponseHeaders & TResponse,
   NoFilter,
   BatchError
@@ -30,7 +39,20 @@ op ReadOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TPathParams,
+  CommonParameters & TPathParams,
+  TResource & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
+// TODO: Once we migrate all ReadOperation methods in routes.tsp to use this, delete original ReadOperation (above) and rename this to ReadOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@get
+op ReadOperationNew<
+  TPathParams extends TypeSpec.Reflection.Model,
+  TResource
+> is Azure.Core.RpcOperation<
+  TPathParams,
   TResource & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -42,7 +64,7 @@ op FileOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TPathParams,
+  CommonParameters & TPathParams,
   TResource & FileResponseHeaders,
   NoFilter,
   BatchError
@@ -54,7 +76,7 @@ op HeadFileOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TPathParams,
+  CommonParameters & TPathParams,
   TResource & FileResponseHeaders,
   NoFilter,
   BatchError
@@ -66,16 +88,37 @@ op DeleteOperation<
   TFilter,
   TResponse extends TypeSpec.Reflection.Model
 > is Azure.Core.RpcOperation<
-  BatchClientRequestHeaders & TFilter,
+  CommonParameters & TFilter,
   TResponse,
   NoFilter,
   BatchError
 >;
 
+// TODO: Once we migrate all DeleteOperation methods in routes.tsp to use this, delete original DeleteOperation (above) and rename this to DeleteOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@delete
+op DeleteOperationNew<
+  TFilter extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model
+> is Azure.Core.RpcOperation<TFilter, TResponse, NoFilter, BatchError>;
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
 op CreateOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & MinimalMetadata & TResource,
+  CommonJsonParameters & TResource,
+  Created<TResponse> & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
+// TODO: Once we migrate all CreateOperation methods in routes.tsp to use this, delete original CreateOperation (above) and rename this to CreateOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@post
+op CreateOperationNew<
+  TResource extends TypeSpec.Reflection.Model,
+  TResponse
+> is RpcOperation<
+  TResource,
   Created<TResponse> & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -84,7 +127,20 @@ op CreateOperation<TResource, TResponse> is RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @patch
 op UpdateOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & MinimalMetadata & TResource,
+  CommonJsonParameters & TResource,
+  TResponse & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
+// TODO: Once we migrate all UpdateOperation methods in routes.tsp to use this, delete original UpdateOperation (above) and rename this to UpdateOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@patch
+op UpdateOperationNew<
+  TResource extends TypeSpec.Reflection.Model,
+  TResponse
+> is RpcOperation<
+  TResource,
   TResponse & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -93,7 +149,20 @@ op UpdateOperation<TResource, TResponse> is RpcOperation<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @put
 op ReplaceOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & MinimalMetadata & TResource,
+  CommonJsonParameters & TResource,
+  TResponse & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
+// TODO: Once we migrate all ReplaceOperation methods in routes.tsp to use this, delete original ReplaceOperation (above) and rename this to ReplaceOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@put
+op ReplaceOperationNew<
+  TResource extends TypeSpec.Reflection.Model,
+  TResponse
+> is RpcOperation<
+  TResource,
   TResponse & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -114,10 +183,39 @@ op ResourceInfoOperationWithAdditionalResponse<
   BatchError
 >;
 
+// TODO: Once we migrate all ResourceInfoOperationWithAdditionalResponse methods in routes.tsp to use this, delete original ResourceInfoOperationWithAdditionalResponse (above) and rename this to ResourceInfoOperationWithAdditionalResponse
+#suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@doc("New rpc operation allowing multiple responses")
+@head
+op ResourceInfoOperationWithAdditionalResponseNew<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  TAdditionalResponse extends {} = {}
+> is Foundations.Operation<
+  TParams,
+  TResponse | TAdditionalResponse,
+  NoFilter,
+  BatchError
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
 op PostOperation<TResource, TResponse> is RpcOperation<
-  BatchClientRequestHeaders & TResource,
+  CommonParameters & TResource,
+  TResponse & BatchResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
+// TODO: Once we migrate all PostOperation methods in routes.tsp to use this, delete original PostOperation (above) and rename this to PostOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@post
+op PostOperationNew<
+  TResource extends TypeSpec.Reflection.Model,
+  TResponse
+> is RpcOperation<
+  TResource,
   TResponse & BatchResponseHeaders,
   NoFilter,
   BatchError
@@ -139,8 +237,11 @@ alias Created<T> = {
   @header("DataServiceId")
   @doc("The OData ID of the resource to which the request applied.")
   dataServiceId: string;
+};
 
-  ...T;
+alias CommonJsonParameters = {
+  ...CommonParameters;
+  ...MinimalMetadata;
 };
 
 // headers ////////////////////
@@ -333,8 +434,8 @@ alias DeleteResponseHeaders = {
   requestid?: string;
 };
 
-alias BatchCommonListHeaders = {
-  ...BatchClientRequestHeaders;
+alias CommonListParameters = {
+  ...CommonParameters;
 
   @doc("""
     The maximum number of items to return in the response. A maximum of 1000
@@ -376,7 +477,7 @@ alias BatchTaskFileClientPathContent = {
   filePath: string;
 };
 
-alias BatchClientRequestHeaders = {
+alias CommonParameters = {
   @doc("""
     The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
     """)

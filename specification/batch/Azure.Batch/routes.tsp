@@ -1,4 +1,3 @@
-import "@typespec/versioning";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
@@ -7,16 +6,20 @@ import "./models.tsp";
 import "./common.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
 namespace Azure.Batch;
 
 // Interfaces ////////////////////
 
+// Application Parameter Aliases
+alias GetApplicationRequiredParameters = {
+  @doc("The ID of the Application")
+  @path
+  applicationId: string;
+};
+
+// Application Interface
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @tag("Applications")
 interface Applications {
@@ -29,8 +32,12 @@ interface Applications {
     API.
     """)
   @route("/applications")
-  @clientName("listApplicationsInternal", "java")
-  listApplications is ListOperation<{}, BatchApplicationListResult>;
+  listApplications is ListOperationNew<
+    {
+      ...CommonListParameters;
+    },
+    BatchApplicationListResult
+  >;
 
   @summary("Gets information about the specified Application.")
   @doc("""
@@ -41,16 +48,194 @@ interface Applications {
     API.
     """)
   @route("/applications/{applicationId}")
-  @clientName("getApplicationInternal", "java")
-  getApplication is ReadOperation<
+  getApplication is ReadOperationNew<
     {
-      @doc("The ID of the Application")
-      @path
-      applicationId: string;
+      ...CommonParameters;
+      ...GetApplicationRequiredParameters;
     },
     BatchApplication
   >;
 }
+
+// Pool Parameter Aliases
+
+alias ListPoolUsageMetricsParameters = {
+  @doc("""
+    The earliest time from which to include metrics. This must be at least two and
+    a half hours before the current time. If not specified this defaults to the
+    start time of the last aggregation interval currently available.
+    """)
+  @query
+  @clientName("starttime", "csharp,python,javascript,go")
+  startTime?: utcDateTime;
+
+  @doc("""
+    The latest time from which to include metrics. This must be at least two hours
+    before the current time. If not specified this defaults to the end time of the
+    last aggregation interval currently available.
+    """)
+  @query
+  endtime?: utcDateTime;
+
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+};
+
+alias CreatePoolParameters = {
+  @body
+  @doc("The Pool to be created.")
+  pool: BatchPoolCreateContent;
+};
+
+alias ListPoolsParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias DisablePoolAutoscaleParameters = {
+  @doc("The ID of the Pool on which to disable automatic scaling.")
+  @path
+  poolId: string;
+};
+
+alias ListSupportedImagesParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+};
+
+alias ListPoolNodeCountsParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+};
+
+// Pool Parameter Aliases
+alias GetPoolRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+};
+
+alias GetPoolOptionalParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias DeletePoolRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+};
+
+alias UpdatePoolRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+
+  @doc("The pool properties to update.")
+  @bodyRoot
+  pool: BatchPoolUpdateContent;
+};
+
+alias EnablePoolAutoscaleRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for enabling automatic scaling.")
+  @bodyRoot
+  content: BatchPoolEnableAutoScaleContent;
+};
+
+alias EvaluatePoolAutoScaleRequiredParameters = {
+  @doc("The ID of the Pool on which to evaluate the automatic scaling formula.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for evaluating the automatic scaling formula.")
+  @bodyRoot
+  content: BatchPoolEvaluateAutoScaleContent;
+};
+
+alias ResizePoolRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for resizing the pool.")
+  @bodyRoot
+  content: BatchPoolResizeContent;
+};
+
+alias StopPoolResizeRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+};
+
+alias ReplacePoolPropertiesRequiredParameters = {
+  @doc("The ID of the Pool to update.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for replacing properties on the pool.")
+  @bodyRoot
+  pool: BatchPoolReplaceContent;
+};
+
+alias PoolExistsRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+};
+
+alias RemoveNodesRequiredParameters = {
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+
+  @doc("The options to use for removing the node.")
+  @bodyRoot
+  content: BatchNodeRemoveContent;
+};
+
+// Pool Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -71,33 +256,10 @@ interface Pools {
     last aggregation interval is returned.
     """)
   @route("/poolusagemetrics")
-  @clientName("listPoolUsageMetricsInternal", "java")
-  listPoolUsageMetrics is ListOperation<
+  listPoolUsageMetrics is ListOperationNew<
     {
-      @doc("""
-        The earliest time from which to include metrics. This must be at least two and
-        a half hours before the current time. If not specified this defaults to the
-        start time of the last aggregation interval currently available.
-        """)
-      @query
-      @clientName("starttime", "csharp,python,javascript,go")
-      startTime?: utcDateTime;
-
-      @doc("""
-        The latest time from which to include metrics. This must be at least two hours
-        before the current time. If not specified this defaults to the end time of the
-        last aggregation interval currently available.
-        """)
-      @query
-      endtime?: utcDateTime;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
+      ...CommonListParameters;
+      ...ListPoolUsageMetricsParameters;
     },
     BatchPoolListUsageMetricsResult
   >;
@@ -109,12 +271,10 @@ interface Pools {
     to Microsoft Support engineers.
     """)
   @route("/pools")
-  @clientName("createPoolInternal", "java")
-  createPool is CreateOperation<
+  createPool is CreateOperationNew<
     {
-      @bodyRoot
-      @doc("The Pool to be created.")
-      pool: BatchPoolCreateContent;
+      ...CommonJsonParameters;
+      ...CreatePoolParameters;
     },
     {}
   >;
@@ -122,26 +282,10 @@ interface Pools {
   @summary("Lists all of the Pools which be mounted.")
   @doc("Lists all of the Pools which be mounted.")
   @route("/pools")
-  @clientName("listPoolsInternal", "java")
-  listPools is ListOperation<
+  listPools is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListPoolsParameters;
     },
     BatchPoolListResult
   >;
@@ -162,32 +306,35 @@ interface Pools {
     error code PoolBeingDeleted.
     """)
   @route("/pools/{poolId}")
-  @clientName("deletePoolInternal", "java")
-  deletePool is DeleteOperation<BatchPoolHeaders, DeleteResponseHeaders>;
+  deletePool is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...DeletePoolRequiredParameters;
+    },
+    DeleteResponseHeaders
+  >;
 
   @doc("Gets basic properties of a Pool.")
   @route("/pools/{poolId}")
-  @clientName("poolExistsInternal", "java")
-  poolExists is ResourceInfoOperationWithAdditionalResponse<
-    BatchClientRequestHeaders & BatchPoolHeaders,
+  poolExists is ResourceInfoOperationWithAdditionalResponseNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...PoolExistsRequiredParameters;
+    },
     PoolDoesNotExistResponseHeaders,
     PoolDoesExistResponseHeaders
   >;
 
   @doc("Gets information about the specified Pool.")
   @route("/pools/{poolId}")
-  @clientName("getPoolInternal", "java")
-  getPool is ReadOperation<
-    BatchPoolHeaders & {
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+  getPool is ReadOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...GetPoolRequiredParameters;
+      ...GetPoolOptionalParameters;
     },
     BatchPool
   >;
@@ -199,12 +346,11 @@ interface Pools {
     a StartTask element, then the Pool keeps the existing StartTask.
     """)
   @route("/pools/{poolId}")
-  @clientName("updatePoolInternal", "java")
-  updatePool is UpdateOperation<
-    BatchPoolHeaders & {
-      @doc("The pool properties to update.")
-      @bodyRoot
-      pool: BatchPoolUpdateContent;
+  updatePool is UpdateOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...UpdatePoolRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
@@ -212,12 +358,10 @@ interface Pools {
   @summary("Disables automatic scaling for a Pool.")
   @doc("Disables automatic scaling for a Pool.")
   @route("/pools/{poolId}/disableautoscale")
-  @clientName("disablePoolAutoScaleInternal", "java")
-  disablePoolAutoScale is PostOperation<
+  disablePoolAutoScale is PostOperationNew<
     {
-      @doc("The ID of the Pool on which to disable automatic scaling.")
-      @path
-      poolId: string;
+      ...CommonParameters;
+      ...DisablePoolAutoscaleParameters;
     },
     RequestSuccessResponseHeaders
   >;
@@ -232,14 +376,12 @@ interface Pools {
     more than once every 30 seconds.
     """)
   @route("/pools/{poolId}/enableautoscale")
-  @clientName("enablePoolAutoScaleInternal", "java")
-  enablePoolAutoScale is PostOperation<
-    BatchPoolHeaders &
-      MinimalMetadata & {
-        @doc("The options to use for enabling automatic scaling.")
-        @bodyRoot
-        content: BatchPoolEnableAutoScaleContent;
-      },
+  enablePoolAutoScale is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...EnablePoolAutoscaleRequiredParameters;
+    },
     RequestSuccessResponseHeaders
   >;
 
@@ -250,16 +392,10 @@ interface Pools {
     scaling enabled in order to evaluate a formula.
     """)
   @route("/pools/{poolId}/evaluateautoscale")
-  @clientName("evaluatePoolAutoScaleInternal", "java")
-  evaluatePoolAutoScale is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool on which to evaluate the automatic scaling formula.")
-      @path
-      poolId: string;
-
-      @doc("The options to use for evaluating the automatic scaling formula.")
-      @bodyRoot
-      content: BatchPoolEvaluateAutoScaleContent;
+  evaluatePoolAutoScale is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...EvaluatePoolAutoScaleRequiredParameters;
     },
     AutoScaleRun & RequestSuccessResponseHeaders
   >;
@@ -275,14 +411,12 @@ interface Pools {
     Nodes, use the Pool remove Compute Nodes API instead.
     """)
   @route("/pools/{poolId}/resize")
-  @clientName("resizePoolInternal", "java")
-  resizePool is PostOperation<
-    BatchPoolHeaders &
-      MinimalMetadata & {
-        @doc("The options to use for resizing the pool.")
-        @bodyRoot
-        content: BatchPoolResizeContent;
-      },
+  resizePool is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...ResizePoolRequiredParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 
@@ -297,9 +431,12 @@ interface Pools {
     be used to halt the initial sizing of the Pool when it is created.
     """)
   @route("/pools/{poolId}/stopresize")
-  @clientName("stopPoolResizeInternal", "java")
-  stopPoolResize is PostOperation<
-    BatchPoolHeaders,
+  stopPoolResize is PostOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...StopPoolResizeRequiredParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 
@@ -310,16 +447,10 @@ interface Pools {
     with this request, then the Batch service will remove the existing StartTask.
     """)
   @route("/pools/{poolId}/updateproperties")
-  @clientName("replacePoolPropertiesInternal", "java")
-  replacePoolProperties is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool to update.")
-      @path
-      poolId: string;
-
-      @doc("The options to use for replacing properties on the pool.")
-      @bodyRoot
-      pool: BatchPoolReplaceContent;
+  replacePoolProperties is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...ReplacePoolPropertiesRequiredParameters;
     },
     NoContentSuccessResponseHeaders
   >;
@@ -331,30 +462,22 @@ interface Pools {
     Each request may remove up to 100 nodes.
     """)
   @route("/pools/{poolId}/removenodes")
-  @clientName("removeNodesInternal", "java")
-  removeNodes is PostOperation<
-    BatchPoolHeaders &
-      MinimalMetadata & {
-        @doc("The options to use for removing the node.")
-        @bodyRoot
-        content: BatchNodeRemoveContent;
-      },
+  removeNodes is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...RemoveNodesRequiredParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @doc("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @route("/supportedimages")
-  @clientName("listSupportedImagesInternal", "java")
-  listSupportedImages is ListOperation<
+  listSupportedImages is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
+      ...CommonListParameters;
+      ...ListSupportedImagesParameters;
     },
     BatchAccountListSupportedImagesResult
   >;
@@ -365,21 +488,178 @@ interface Pools {
     use a list query.
     """)
   @route("/nodecounts")
-  @clientName("listPoolNodeCountsInternal", "java")
-  listPoolNodeCounts is ListOperation<
+  listPoolNodeCounts is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
+      ...CommonListParameters;
+      ...ListPoolNodeCountsParameters;
     },
     BatchPoolNodeCountsListResult
   >;
 }
 
+// Job Parameter Aliases
+alias DeleteJobRequiredParameters = {
+  @doc("The ID of the Job to delete.")
+  @path
+  jobId: string;
+};
+
+alias DeleteJobOptionalParameters = {
+  @doc("If true, the server will delete the Job even if the corresponding nodes have not fully processed the deletion. The default value is false.")
+  @query
+  force?: boolean;
+};
+
+alias GetJobRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+alias GetJobOptionalParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias UpdateJobRequiredParameters = {
+  @doc("The ID of the Job whose properties you want to update.")
+  @path
+  jobId: string;
+
+  @doc("The options to use for updating the Job.")
+  @bodyRoot
+  job: BatchJobUpdateContent;
+};
+
+alias ReplaceJobRequiredParameters = {
+  @doc("The ID of the Job whose properties you want to update.")
+  @path
+  jobId: string;
+
+  @doc("A job with updated properties")
+  @bodyRoot
+  job: BatchJob;
+};
+
+alias DisableJobRequiredParameters = {
+  @doc("The ID of the Job to disable.")
+  @path
+  jobId: string;
+
+  @doc("The options to use for disabling the Job.")
+  @bodyRoot
+  content: BatchJobDisableContent;
+};
+
+alias EnableJobRequiredParameters = {
+  @doc("The ID of the Job to enable.")
+  @path
+  jobId: string;
+};
+
+alias TerminateJobRequiredParameters = {
+  @doc("The ID of the Job to terminate.")
+  @path
+  jobId: string;
+};
+
+alias TerminateJobOptionalParameters = {
+  @doc("The options to use for terminating the Job.")
+  @bodyRoot
+  parameters?: BatchJobTerminateContent;
+
+  @doc("If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.")
+  @query
+  force?: boolean;
+};
+
+alias CreateJobRequiredParameters = {
+  @doc("The Job to be created.")
+  @bodyRoot
+  job: BatchJobCreateContent;
+};
+
+alias ListJobsParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias ListJobsFromScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
+  @path
+  jobScheduleId: string;
+};
+
+alias ListJobsFromScheduleParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias ListJobPreparationAndReleaseTaskStatusRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+alias ListJobPreparationAndReleaseTaskStatusParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+};
+
+alias getJobTaskCountsParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+// Job Interface
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 @tag("Jobs")
@@ -396,16 +676,12 @@ interface Jobs {
     that the Job is being deleted.
     """)
   @route("/jobs/{jobId}")
-  @clientName("deleteJobInternal", "java")
-  deleteJob is DeleteOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job to delete.")
-      @path
-      jobId: string;
-
-      @doc("If true, the server will delete the Job even if the corresponding nodes have not fully processed the deletion. The default value is false.")
-      @query
-      force?: boolean;
+  deleteJob is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...DeleteJobRequiredParameters;
+      ...DeleteJobOptionalParameters;
     },
     DeleteResponseHeaders
   >;
@@ -413,22 +689,12 @@ interface Jobs {
   @summary("Gets information about the specified Job.")
   @doc("Gets information about the specified Job.")
   @route("/jobs/{jobId}")
-  @clientName("getJobInternal", "java")
-  getJob is ReadOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+  getJob is ReadOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...GetJobRequiredParameters;
+      ...GetJobOptionalParameters;
     },
     BatchJob
   >;
@@ -440,16 +706,11 @@ interface Jobs {
     element, then the Job keeps the existing constraints.
     """)
   @route("/jobs/{jobId}")
-  @clientName("updateJobInternal", "java")
-  updateJob is UpdateOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job whose properties you want to update.")
-      @path
-      jobId: string;
-
-      @doc("The options to use for updating the Job.")
-      @bodyRoot
-      job: BatchJobUpdateContent;
+  updateJob is UpdateOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...UpdateJobRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
@@ -461,16 +722,11 @@ interface Jobs {
     with this request, then the Batch service will remove the existing constraints.
     """)
   @route("/jobs/{jobId}")
-  @clientName("replaceJobInternal", "java")
-  replaceJob is ReplaceOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job whose properties you want to update.")
-      @path
-      jobId: string;
-
-      @doc("A job with updated properties")
-      @bodyRoot
-      job: BatchJob;
+  replaceJob is ReplaceOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...ReplaceJobRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
@@ -487,18 +743,12 @@ interface Jobs {
     the request fails with status code 409.
     """)
   @route("/jobs/{jobId}/disable")
-  @clientName("disableJobInternal", "java")
-  disableJob is PostOperation<
-    BatchMatchHeaders &
-      MinimalMetadata & {
-        @doc("The ID of the Job to disable.")
-        @path
-        jobId: string;
-
-        @doc("The options to use for disabling the Job.")
-        @bodyRoot
-        content: BatchJobDisableContent;
-      },
+  disableJob is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...DisableJobRequiredParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 
@@ -512,12 +762,11 @@ interface Jobs {
     than 180 days ago, those Tasks will not run.
     """)
   @route("/jobs/{jobId}/enable")
-  @clientName("enableJobInternal", "java")
-  enableJob is PostOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job to enable.")
-      @path
-      jobId: string;
+  enableJob is PostOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...EnableJobRequiredParameters;
     },
     AcceptedProcessingResponseHeaders
   >;
@@ -532,22 +781,13 @@ interface Jobs {
     Tasks cannot be added and any remaining active Tasks will not be scheduled.
     """)
   @route("/jobs/{jobId}/terminate")
-  @clientName("terminateJobInternal", "java")
-  terminateJob is PostOperation<
-    BatchMatchHeaders &
-      MinimalMetadata & {
-        @doc("The ID of the Job to terminate.")
-        @path
-        jobId: string;
-
-        @doc("The options to use for terminating the Job.")
-        @bodyRoot
-        parameters?: BatchJobTerminateContent;
-
-        @doc("If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.")
-        @query
-        force?: boolean;
-      },
+  terminateJob is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...TerminateJobRequiredParameters;
+      ...TerminateJobOptionalParameters;
+    },
     AcceptedProcessingResponseHeaders
   >;
 
@@ -564,12 +804,10 @@ interface Jobs {
     engineers.
     """)
   @route("/jobs")
-  @clientName("createJobInternal", "java")
-  createJob is CreateOperation<
+  createJob is CreateOperationNew<
     {
-      @doc("The Job to be created.")
-      @bodyRoot
-      job: BatchJobCreateContent;
+      ...CommonJsonParameters;
+      ...CreateJobRequiredParameters;
     },
     {}
   >;
@@ -577,26 +815,10 @@ interface Jobs {
   @summary("Lists all of the Jobs in the specified Account.")
   @doc("Lists all of the Jobs in the specified Account.")
   @route("/jobs")
-  @clientName("listJobsInternal", "java")
-  listJobs is ListOperation<
+  listJobs is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListJobsParameters;
     },
     BatchJobListResult
   >;
@@ -604,30 +826,11 @@ interface Jobs {
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
   @doc("Lists the Jobs that have been created under the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/jobs")
-  @clientName("listJobsFromScheduleInternal", "java")
-  listJobsFromSchedule is ListOperation<
+  listJobsFromSchedule is ListOperationNew<
     {
-      @doc("The ID of the Job Schedule from which you want to get a list of Jobs.")
-      @path
-      jobScheduleId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListJobsFromScheduleRequiredParameters;
+      ...ListJobsFromScheduleParameters;
     },
     BatchJobListResult
   >;
@@ -645,25 +848,11 @@ interface Jobs {
     JobPreparationTaskNotSpecified.
     """)
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
-  @clientName("listJobPreparationAndReleaseTaskStatusInternal", "java")
-  listJobPreparationAndReleaseTaskStatus is ListOperation<
+  listJobPreparationAndReleaseTaskStatus is ListOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonListParameters;
+      ...ListJobPreparationAndReleaseTaskStatusRequiredParameters;
+      ...ListJobPreparationAndReleaseTaskStatusParameters;
     },
     BatchJobPreparationAndReleaseTaskStatusListResult
   >;
@@ -676,12 +865,10 @@ interface Jobs {
     up to date. If you need exact task counts, use a list query.
     """)
   @route("/jobs/{jobId}/taskcounts")
-  @clientName("getJobTaskCountsInternal", "java")
-  getJobTaskCounts is ReadOperation<
+  getJobTaskCounts is ReadOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
+      ...CommonParameters;
+      ...getJobTaskCountsParameters;
     },
     BatchTaskCountsResult
   >;
@@ -809,6 +996,34 @@ interface Certificates {
   >;
 }
 
+// Job Schedule Parameter Aliases
+alias CreateJobScheduleParameters = {
+  @doc("The Job Schedule to be created.")
+  @bodyRoot
+  jobSchedule: BatchJobScheduleCreateContent;
+};
+
+alias ListJobSchedulesParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+// Job Schedule Interface
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" ""
@@ -820,7 +1035,7 @@ interface JobSchedules {
   @route("/jobschedules/{jobScheduleId}")
   @clientName("jobScheduleExistsInternal", "java")
   jobScheduleExists is ResourceInfoOperationWithAdditionalResponse<
-    BatchClientRequestHeaders &
+    CommonParameters &
       BatchMatchHeaders & {
         @doc("The ID of the Job Schedule which you want to check.")
         @path
@@ -967,12 +1182,10 @@ interface JobSchedules {
   @summary("Creates a Job Schedule to the specified Account.")
   @doc("Creates a Job Schedule to the specified Account.")
   @route("/jobschedules")
-  @clientName("createJobScheduleInternal", "java")
-  createJobSchedule is CreateOperation<
+  createJobSchedule is CreateOperationNew<
     {
-      @doc("The Job Schedule to be created.")
-      @bodyRoot
-      jobSchedule: BatchJobScheduleCreateContent;
+      ...CommonJsonParameters;
+      ...CreateJobScheduleParameters;
     },
     {}
   >;
@@ -980,30 +1193,124 @@ interface JobSchedules {
   @summary("Lists all of the Job Schedules in the specified Account.")
   @doc("Lists all of the Job Schedules in the specified Account.")
   @route("/jobschedules")
-  @clientName("listJobSchedulesInternal", "java")
-  listJobSchedules is ListOperation<
+  listJobSchedules is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListJobSchedulesParameters;
     },
     BatchJobScheduleListResult
   >;
 }
+
+// Task Parameter Aliases
+alias CreateTaskRequiredParameters = {
+  @doc("The ID of the Job to which the Task is to be created.")
+  @path
+  jobId: string;
+
+  @doc("The Task to be created.")
+  @bodyRoot
+  task: BatchTaskCreateContent;
+};
+
+alias ListTasksRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+};
+
+alias ListTasksParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
+alias CreateTaskCollectionParameters = {
+  @doc("The ID of the Job to which the Task collection is to be added.")
+  @path
+  jobId: string;
+
+  @doc("The Tasks to be added.")
+  @bodyRoot
+  taskCollection: BatchTaskGroup;
+};
+
+alias ListSubTasksRequiredParameters = {
+  @doc("The ID of the Job.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task.")
+  @path
+  taskId: string;
+};
+
+alias ListSubTasksParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+};
+
+alias ListTaskFilesRequiredParameters = {
+  @doc("The ID of the Job that contains the Task.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task whose files you want to list.")
+  @path
+  taskId: string;
+};
+
+alias ListTaskFilesOptionalParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("""
+    Whether to list children of the Task directory. This parameter can be used in
+    combination with the filter parameter to list specific type of files.
+    """)
+  @query
+  recursive?: boolean;
+};
+
+alias DeleteTaskFileOptionalParameters = {
+  @doc("""
+    Whether to delete children of a directory. If the filePath parameter represents
+    a directory instead of a file, you can set recursive to true to delete the
+    directory and all of the files and subdirectories in it. If recursive is false
+    then the directory must be empty or deletion will fail.
+    """)
+  @query
+  recursive?: boolean;
+};
+
+alias DeleteTaskFileResponse = BatchClientResponseHeaders & {
+  @doc("A process exit code.")
+  @statusCode
+  code: "200";
+};
+
+// Task Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -1017,16 +1324,10 @@ interface Tasks {
     the Batch service and left in whatever state it was in at that time.
     """)
   @route("/jobs/{jobId}/tasks")
-  @clientName("createTaskInternal", "java")
-  createTask is CreateOperation<
+  createTask is CreateOperationNew<
     {
-      @doc("The ID of the Job to which the Task is to be created.")
-      @path
-      jobId: string;
-
-      @doc("The Task to be created.")
-      @bodyRoot
-      task: BatchTaskCreateContent;
+      ...CommonJsonParameters;
+      ...CreateTaskRequiredParameters;
     },
     {}
   >;
@@ -1038,30 +1339,11 @@ interface Tasks {
     information about subtasks.
     """)
   @route("/jobs/{jobId}/tasks")
-  @clientName("listTasksInternal", "java")
-  listTasks is ListOperation<
+  listTasks is ListOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+      ...CommonListParameters;
+      ...ListTasksRequiredParameters;
+      ...ListTasksParameters;
     },
     BatchTaskListResult
   >;
@@ -1084,16 +1366,10 @@ interface Tasks {
     service and left in whatever state it was in at that time.
     """)
   @route("/jobs/{jobId}/addtaskcollection")
-  @clientName("createTaskCollectionInternal", "java")
-  createTaskCollection is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Job to which the Task collection is to be added.")
-      @path
-      jobId: string;
-
-      @doc("The Tasks to be added.")
-      @bodyRoot
-      taskCollection: BatchTaskGroup;
+  createTaskCollection is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...CreateTaskCollectionParameters;
     },
     BatchTaskAddCollectionResult
   >;
@@ -1183,21 +1459,11 @@ interface Tasks {
     """)
   @doc("If the Task is not a multi-instance Task then this returns an empty collection.")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
-  @clientName("listSubTasksInternal", "java")
-  listSubTasks is ReadOperation<
+  listSubTasks is ReadOperationNew<
     {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task.")
-      @path
-      taskId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonParameters;
+      ...ListSubTasksRequiredParameters;
+      ...ListSubTasksParameters;
     },
     BatchTaskListSubtasksResult
   >;
@@ -1254,23 +1520,13 @@ interface Tasks {
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
   @doc("Deletes the specified Task file from the Compute Node where the Task ran.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-  @clientName("deleteTaskFileInternal", "java")
-  deleteTaskFile is DeleteOperation<
-    BatchTaskFileClientPathContent & {
-      @doc("""
-        Whether to delete children of a directory. If the filePath parameter represents
-        a directory instead of a file, you can set recursive to true to delete the
-        directory and all of the files and subdirectories in it. If recursive is false
-        then the directory must be empty or deletion will fail.
-        """)
-      @query
-      recursive?: boolean;
+  deleteTaskFile is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchTaskFileClientPathContent;
+      ...DeleteTaskFileOptionalParameters;
     },
-    BatchClientResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "200";
-    }
+    DeleteTaskFileResponse
   >;
 
   @doc("Returns the content of the specified Task file.")
@@ -1308,35 +1564,129 @@ interface Tasks {
   @summary("Lists the files in a Task's directory on its Compute Node.")
   @doc("Lists the files in a Task's directory on its Compute Node.")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
-  @clientName("listTaskFilesInternal", "java")
-  listTaskFiles is ListOperation<
+  listTaskFiles is ListOperationNew<
     {
-      @doc("The ID of the Job that contains the Task.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task whose files you want to list.")
-      @path
-      taskId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("""
-        Whether to list children of the Task directory. This parameter can be used in
-        combination with the filter parameter to list specific type of files.
-        """)
-      @query
-      recursive?: boolean;
+      ...CommonListParameters;
+      ...ListTaskFilesRequiredParameters;
+      ...ListTaskFilesOptionalParameters;
     },
     BatchNodeFileListResult
   >;
 }
+
+// Nodes Parameter Aliases
+alias CreateNodeUserRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the machine on which you want to create a user Account.")
+  @path
+  nodeId: string;
+
+  @doc("The options to use for creating the user.")
+  @bodyRoot
+  user: BatchNodeUserCreateContent;
+};
+
+alias DeleteNodeUserRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the machine on which you want to delete a user Account.")
+  @path
+  nodeId: string;
+
+  @doc("The name of the user Account to delete.")
+  @path
+  userName: string;
+};
+
+alias DeleteNodeUserResponse = BatchClientResponseHeaders & {
+  @doc("A process exit code.")
+  @statusCode
+  code: "200";
+};
+
+alias ReplaceNodeUserRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the machine on which you want to update a user Account.")
+  @path
+  nodeId: string;
+
+  @doc("The name of the user Account to update.")
+  @path
+  userName: string;
+
+  @doc("The options to use for updating the user.")
+  @bodyRoot
+  content: BatchNodeUserUpdateContent;
+};
+
+alias GetNodeRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node that you want to get information about.")
+  @path
+  nodeId: string;
+};
+
+alias GetNodeOptionalParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+};
+
+alias StartNodeRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node that you want to restart.")
+  @path
+  nodeId: string;
+};
+
+alias RebootNodeRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node that you want to restart.")
+  @path
+  nodeId: string;
+};
+
+alias RebootNodeOptionalParameters = {
+  @doc("The options to use for rebooting the Compute Node.")
+  @bodyRoot
+  parameters?: BatchNodeRebootContent;
+};
+
+alias DeallocateNodeRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node that you want to restart.")
+  @path
+  nodeId: string;
+};
+
+alias DeallocateNodeOptionalParameters = {
+  @doc("The options to use for deallocating the Compute Node.")
+  @bodyRoot
+  parameters?: BatchNodeDeallocateContent;
+};
+
+// Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
@@ -1349,20 +1699,10 @@ interface Nodes {
     running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users")
-  @clientName("createNodeUserInternal", "java")
-  createNodeUser is CreateOperation<
+  createNodeUser is CreateOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the machine on which you want to create a user Account.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for creating the user.")
-      @bodyRoot
-      user: BatchNodeUserCreateContent;
+      ...CommonJsonParameters;
+      ...CreateNodeUserRequiredParameters;
     },
     {}
   >;
@@ -1373,26 +1713,12 @@ interface Nodes {
     running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
-  @clientName("deleteNodeUserInternal", "java")
-  deleteNodeUser is DeleteOperation<
+  deleteNodeUser is DeleteOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the machine on which you want to delete a user Account.")
-      @path
-      nodeId: string;
-
-      @doc("The name of the user Account to delete.")
-      @path
-      userName: string;
+      ...CommonParameters;
+      ...DeleteNodeUserRequiredParameters;
     },
-    BatchClientResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "200";
-    }
+    DeleteNodeUserResponse
   >;
 
   @summary("""
@@ -1405,24 +1731,10 @@ interface Nodes {
     Account on a Compute Node only when it is in the idle or running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
-  @clientName("replaceNodeUserInternal", "java")
-  replaceNodeUser is ReplaceOperation<
+  replaceNodeUser is ReplaceOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the machine on which you want to update a user Account.")
-      @path
-      nodeId: string;
-
-      @doc("The name of the user Account to update.")
-      @path
-      userName: string;
-
-      @doc("The options to use for updating the user.")
-      @bodyRoot
-      content: BatchNodeUserUpdateContent;
+      ...CommonJsonParameters;
+      ...ReplaceNodeUserRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
@@ -1430,21 +1742,11 @@ interface Nodes {
   @summary("Gets information about the specified Compute Node.")
   @doc("Gets information about the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}")
-  @clientName("getNodeInternal", "java")
-  getNode is ReadOperation<
+  getNode is ReadOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to get information about.")
-      @path
-      nodeId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonParameters;
+      ...GetNodeRequiredParameters;
+      ...GetNodeOptionalParameters;
     },
     BatchNode
   >;
@@ -1452,20 +1754,11 @@ interface Nodes {
   @summary("Restarts the specified Compute Node.")
   @doc("You can restart a Compute Node only if it is in an idle or running state.")
   @route("/pools/{poolId}/nodes/{nodeId}/reboot")
-  @clientName("rebootNodeInternal", "java")
-  rebootNode is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to restart.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for rebooting the Compute Node.")
-      @bodyRoot
-      parameters?: BatchNodeRebootContent;
+  rebootNode is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...RebootNodeOptionalParameters;
+      ...RebootNodeRequiredParameters;
     },
     AcceptedProcessingResponseHeaders
   >;
@@ -1473,16 +1766,10 @@ interface Nodes {
   @summary("Starts the specified Compute Node.")
   @doc("You can start a Compute Node only if it has been deallocated.")
   @route("/pools/{poolId}/nodes/{nodeId}/start")
-  @clientName("startNodeInternal", "java")
-  startNode is PostOperation<
+  startNode is PostOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to restart.")
-      @path
-      nodeId: string;
+      ...CommonParameters;
+      ...StartNodeRequiredParameters;
     },
     AcceptedProcessingResponseHeaders
   >;
@@ -1490,20 +1777,11 @@ interface Nodes {
   @summary("Deallocates the specified Compute Node.")
   @doc("You can deallocate a Compute Node only if it is in an idle or running state.")
   @route("/pools/{poolId}/nodes/{nodeId}/deallocate")
-  @clientName("deallocateNodeInternal", "java")
-  deallocateNode is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to restart.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for deallocating the Compute Node.")
-      @bodyRoot
-      parameters?: BatchNodeDeallocateContent;
+  deallocateNode is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...DeallocateNodeOptionalParameters;
+      ...DeallocateNodeRequiredParameters;
     },
     AcceptedProcessingResponseHeaders
   >;
