@@ -12,12 +12,7 @@ using MdsSolution.CopilotService.Models;
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService;
 
-// alias ServiceTraits = NoRepeatableRequests &
-//   NoConditionalRequests &
-//   NoClientRequestId;
-
-// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
-
+@doc("Query validation job client operations")
 interface QueryValidateJobClient {
   @doc("Validate a query")
   run is apiOperations.ResourceCollectionAction<

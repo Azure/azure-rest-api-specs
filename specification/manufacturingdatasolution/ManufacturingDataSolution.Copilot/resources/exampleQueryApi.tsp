@@ -12,12 +12,7 @@ using MdsSolution.CopilotService.Models;
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService;
 
-// alias ServiceTraits = NoRepeatableRequests &
-//   NoConditionalRequests &
-//   NoClientRequestId;
-
-// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
-
+@doc("Example query client operations")
 interface QueryExampleServiceClient {
   @doc("get the example query")
   getExample is apiOperations.ResourceRead<ExampleQueryRequest>;

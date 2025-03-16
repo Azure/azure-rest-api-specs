@@ -13,12 +13,6 @@ using MdsSolution.CopilotService.Models;
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService.Instructions;
 
-// alias ServiceTraits = NoRepeatableRequests &
-//   NoConditionalRequests &
-//   NoClientRequestId;
-
-// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
-
 alias jobLocationResponseHeaders = ResponseHeadersTrait<
   {
     @doc("The background job location.")
@@ -29,7 +23,7 @@ alias jobLocationResponseHeaders = ResponseHeadersTrait<
   TraitContext.Create | TraitContext.Update | TraitContext.Delete
 >;
 
-@doc("Instructions")
+@doc("Instructions Service client operations")
 interface InstructionServiceClient {
   @doc("Gets single instruction.")
   get is apiOperations.ResourceRead<Instruction>;

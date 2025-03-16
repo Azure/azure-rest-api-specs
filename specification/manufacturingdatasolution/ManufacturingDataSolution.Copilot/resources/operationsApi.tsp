@@ -10,13 +10,7 @@ using MdsSolution.CopilotService.Models;
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService;
 
-// alias ServiceTraits = NoRepeatableRequests &
-//   NoConditionalRequests &
-//   NoClientRequestId;
-
-// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
-
-@doc("Get operation progress")
+@doc("Operations Service client operations")
 interface OperationServiceClient {
   @doc("Get operation progress")
   get is apiOperations.ResourceRead<OperationResponse>;

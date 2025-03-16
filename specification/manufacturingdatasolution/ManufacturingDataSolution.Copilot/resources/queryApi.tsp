@@ -11,12 +11,7 @@ using MdsSolution.CopilotService.Models;
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService;
 
-// alias ServiceTraits = NoRepeatableRequests &
-//   NoConditionalRequests &
-//   NoClientRequestId;
-
-// alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
-
+@doc("Query client operations")
 interface QueryServiceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
   @post
