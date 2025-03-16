@@ -3,7 +3,7 @@
   "info": {
     "title": "ContainerServiceClient",
     "description": "The Container Service Client.",
-    "version": "2024-10-01"
+    "version": "2025-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -607,6 +607,9 @@
           },
           "Create Managed Cluster with Dedicated Host Group": {
             "$ref": "./examples/ManagedClustersCreate_DedicatedHostGroup.json"
+          },
+          "Create Managed Cluster with Custom CA Trust Certificates": {
+            "$ref": "./examples/ManagedClustersCreate_CustomCATrustCertificates.json"
           },
           "Create/Update Managed Cluster with Azure Service Mesh": {
             "$ref": "./examples/ManagedClustersCreate_AzureServiceMesh.json"
@@ -3272,7 +3275,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of the agent pool VMs.",
-          "description": "VM size availability varies by region. If a node contains insufficient compute resources (memory, cpu, etc) pods might fail to run correctly. If this field is not specified, AKS will attempt to find an appropriate VM SKU for your pool, based on quota and capacity. For more details on restricted VM sizes, see: https://docs.microsoft.com/azure/aks/quotas-skus-regions"
+          "description": "VM size availability varies by region. If a node contains insufficient compute resources (memory, cpu, etc) pods might fail to run correctly. For more details on restricted VM sizes, see: https://docs.microsoft.com/azure/aks/quotas-skus-regions"
         },
         "osDiskSizeGB": {
           "$ref": "#/definitions/ContainerServiceOSDisk"
@@ -3505,6 +3508,10 @@
         "securityProfile": {
           "$ref": "#/definitions/AgentPoolSecurityProfile",
           "description": "The security settings of an agent pool."
+        },
+        "gpuProfile": {
+          "$ref": "#/definitions/GPUProfile",
+          "description": "GPU settings for the Agent Pool."
         }
       },
       "description": "Properties for the container service agent pool profile."
@@ -3997,7 +4004,8 @@
             "loadBalancer",
             "userDefinedRouting",
             "managedNATGateway",
-            "userAssignedNATGateway"
+            "userAssignedNATGateway",
+            "none"
           ],
           "x-ms-enum": {
             "name": "outboundType",
@@ -4018,6 +4026,10 @@
               {
                 "value": "userAssignedNATGateway",
                 "description": "The user-assigned NAT gateway associated to the cluster subnet is used for egress. This is an advanced scenario and requires proper network configuration."
+              },
+              {
+                "value": "none",
+                "description": "The AKS cluster is not set with any outbound-type. All AKS nodes follows Azure VM default outbound behavior. Please refer to https://azure.microsoft.com/en-us/updates/default-outbound-access-for-vms-in-azure-will-be-retired-transition-to-a-new-method-of-internet-access/"
               }
             ]
           },
@@ -4546,6 +4558,7 @@
         },
         "effectiveOutboundIPs": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ResourceReference"
           },
@@ -4629,6 +4642,7 @@
         },
         "effectiveOutboundIPs": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ResourceReference"
           },
@@ -5116,6 +5130,10 @@
         "metricsProfile": {
           "$ref": "#/definitions/ManagedClusterMetricsProfile",
           "description": "Optional cluster metrics configuration."
+        },
+        "bootstrapProfile": {
+          "$ref": "#/definitions/ManagedClusterBootstrapProfile",
+          "description": "Profile of the cluster bootstrap configuration."
         }
       },
       "description": "Properties of the managed cluster."
@@ -6654,6 +6672,34 @@
       },
       "description": "GPUInstanceProfile to be used to specify GPU MIG instance profile for supported GPU VM SKU."
     },
+    "GPUProfile": {
+      "type": "object",
+      "description": "GPU settings for the Agent Pool.",
+      "properties": {
+        "driver": {
+          "type": "string",
+          "description": "Whether to install GPU drivers. When it's not specified, default is Install.",
+          "enum": [
+            "Install",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "GPUDriver",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Install",
+                "description": "Install driver."
+              },
+              {
+                "value": "None",
+                "description": "Skip driver install."
+              }
+            ]
+          }
+        }
+      }
+    },
     "ExtendedLocationType": {
       "type": "string",
       "description": "The type of extendedLocation.",
@@ -6823,6 +6869,10 @@
         "imageCleaner": {
           "$ref": "#/definitions/ManagedClusterSecurityProfileImageCleaner",
           "description": "Image Cleaner settings for the security profile."
+        },
+        "customCATrustCertificates": {
+          "$ref": "#/definitions/ManagedClusterSecurityProfileCustomCATrustCertificates",
+          "description": "A list of up to 10 base64 encoded CAs that will be added to the trust store on all nodes in the cluster. For more information see [Custom CA Trust Certificates](https://learn.microsoft.com/en-us/azure/aks/custom-certificate-authority)."
         }
       },
       "description": "Security profile for the container service cluster."
@@ -6945,6 +6995,17 @@
         }
       },
       "description": "Microsoft Defender settings for the security profile threat detection."
+    },
+    "ManagedClusterSecurityProfileCustomCATrustCertificates": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "byte"
+      },
+      "minItems": 0,
+      "maxItems": 10,
+      "title": "The list of base64 encoded certificate strings that will be added to the node trust store. At most 10 certificates can be provided.",
+      "description": "Certificates will be added to trust stores of all the nodes in the cluster. If updated, the new list of certificates will be installed in the trust store in place of the old certificates. For node pools of VMSS type, updating the value of this field will result in nodes being reimaged."
     },
     "ManagedClusterStorageProfileDiskCSIDriver": {
       "type": "object",
@@ -7581,6 +7642,48 @@
           "description": "The Managed Cluster sku.tier must be set to 'Standard' or 'Premium' to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. If not specified, the default is false. For more information see aka.ms/aks/docs/cost-analysis."
         }
       }
+    },
+    "ManagedClusterBootstrapProfile": {
+      "description": "The bootstrap profile.",
+      "properties": {
+        "artifactSource": {
+          "type": "string",
+          "enum": [
+            "Direct",
+            "Cache"
+          ],
+          "x-ms-enum": {
+            "name": "ArtifactSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Cache",
+                "description": "pull images from Azure Container Registry with cache"
+              },
+              {
+                "value": "Direct",
+                "description": "pull images from Microsoft Artifact Registry"
+              }
+            ]
+          },
+          "default": "Direct",
+          "title": "The artifact source.",
+          "description": "The source where the artifacts are downloaded from."
+        },
+        "containerRegistryId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerRegistry/registries"
+              }
+            ]
+          },
+          "description": "The resource Id of Azure Container Registry. The registry must have private network access, premium SKU and zone redundancy."
+        }
+      },
+      "type": "object"
     },
     "AgentPoolDeleteMachinesParameter": {
       "type": "object",
