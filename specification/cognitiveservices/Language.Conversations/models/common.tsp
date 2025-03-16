@@ -399,9 +399,9 @@ model AnalyzeConversationTaskResult {
   kind: AnalyzeConversationTaskResultsKind;
 }
 
-@added(Versions.v2025_05_15)
 /** A conversational AI task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15)
 model ConversationalAITask extends AnalyzeConversationTask {
   /** Task kind. */
   kind: AnalyzeConversationTaskKind.ConversationalAI;
@@ -413,16 +413,16 @@ model ConversationalAITask extends AnalyzeConversationTask {
   parameters: BaseConversationTaskParameters;
 }
 
-@added(Versions.v2025_05_15)
 /** The input ConversationItem and its optional parameters */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15)
 model ConversationalAIAnalysisOptions {
   /** List of multiple conversations */
   conversations: Conversation[];
 }
 
-@added(Versions.v2025_05_15)
 /** The Conversations for ai conversation analysis */
+@added(Versions.v2025_05_15)
 model Conversations {
   /** The ID of the conversation. */
   id: string;
@@ -469,7 +469,7 @@ model ConversationItemBase {
 
   /** The participant ID of a conversation item. */
   participantId: string;
-  
+
   /** Role of the participant. */
   @added(Versions.v2023_04_01)
   role?: role;
@@ -483,10 +483,9 @@ model TextConversationItem is ConversationItemBase {
 
   /** Enumeration of supported conversational modalities. */
   modality?: InputModality;
-  
+
   /** The text input */
   text: string;
-
 }
 
 /** This is the parameter set of either the Orchestration project itself or one of the target services. */
@@ -578,8 +577,8 @@ model ConversationPrediction extends BasePrediction {
 }
 
 /** Represents the prediction section of a Conversation project. */
-@added(Versions.v2025_05_15)
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15)
 model ConversationalAIPrediction extends BasePrediction {
   /** Represents the prediction section of a Conversation project. */
   projectKind: projectKind.ConversationalAI;
@@ -1012,7 +1011,6 @@ model TranscriptConversation extends Conversation {
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @added(Versions.v2023_04_01)
 model TranscriptConversationItem is ConversationItemBase {
-  
   /** The override language of a conversation item in BCP 47 language representation. */
   language?: string;
 
@@ -1124,8 +1122,7 @@ model BaseConversationTaskParameters {
 }
 
 /** Input parameters necessary for a Conversation task. */
-model ConversationTaskParameters is BaseConversationTaskParameters{
-
+model ConversationTaskParameters is BaseConversationTaskParameters {
   /** If true, the service will return more detailed information in the response. */
   verbose?: boolean;
 
@@ -1140,8 +1137,8 @@ model ConversationTaskParameters is BaseConversationTaskParameters{
 }
 
 /** The results of a ConversationalAI task. */
-@added(Versions.v2025_05_15)
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15)
 model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
   /** The results of a Conversational AI task. */
   kind: AnalyzeConversationTaskResultsKind.ConversationalAIResult;
@@ -1150,9 +1147,9 @@ model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
   result: ConversationalAIResult;
 }
 
-@added(Versions.v2025_05_15)
 /** Represents the conversational analysis response. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15)
 model ConversationalAIResult {
   /** Multiple multi-turn conversations analyzed. */
   conversations: ConversationalAIAnalysis[];
@@ -1161,9 +1158,9 @@ model ConversationalAIResult {
   warnings?: string[];
 }
 
-@added(Versions.v2025_05_15)
 /** Multiple multi-turn conversations analyzed. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15)
 model ConversationalAIAnalysis {
   /** The ID of the conversation. */
   id: string;
