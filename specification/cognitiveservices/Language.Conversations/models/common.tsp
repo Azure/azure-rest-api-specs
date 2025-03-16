@@ -401,6 +401,7 @@ model AnalyzeConversationTaskResult {
 
 @added(Versions.v2025_05_15)
 /** A conversational AI task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ConversationalAITask extends AnalyzeConversationTask {
   /** Task kind. */
   kind: AnalyzeConversationTaskKind.ConversationalAI;
@@ -413,12 +414,15 @@ model ConversationalAITask extends AnalyzeConversationTask {
 }
 
 @added(Versions.v2025_05_15)
+/** The input ConversationItem and its optional parameters */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ConversationalAIAnalysisOptions {
   /** List of multiple conversations */
   conversations: Conversation[];
 }
 
 @added(Versions.v2025_05_15)
+/** The Conversations for ai conversation analysis */
 model Conversations {
   /** The ID of the conversation. */
   id: string;
@@ -433,6 +437,8 @@ model Conversations {
   conversationItems: ConversationalAIItem[];
 }
 
+/** List of conversation items. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ConversationalAIItem is ConversationItemBase {
   /** The text input */
   text: string;
@@ -1105,6 +1111,7 @@ model ConversationRequestStatistics is RequestStatistics {
 @added(Versions.v2023_04_01)
 model ConversationItemLevelTiming is AudioTiming;
 
+/** Input parameters base for a Conversation task. */
 model BaseConversationTaskParameters {
   /** The name of the project to use. */
   projectName: string;
@@ -1134,6 +1141,7 @@ model ConversationTaskParameters is BaseConversationTaskParameters{
 
 /** The results of a ConversationalAI task. */
 @added(Versions.v2025_05_15)
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
   /** The results of a Conversational AI task. */
   kind: AnalyzeConversationTaskResultsKind.ConversationalAIResult;
@@ -1143,6 +1151,8 @@ model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
 }
 
 @added(Versions.v2025_05_15)
+/** Represents the conversational analysis response. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ConversationalAIResult {
   /** Multiple multi-turn conversations analyzed. */
   conversations: ConversationalAIAnalysis[];
@@ -1152,6 +1162,8 @@ model ConversationalAIResult {
 }
 
 @added(Versions.v2025_05_15)
+/** Multiple multi-turn conversations analyzed. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ConversationalAIAnalysis {
   /** The ID of the conversation. */
   id: string;
@@ -1163,6 +1175,8 @@ model ConversationalAIAnalysis {
   entities?: Array<ConversationalAIEntity>;
 }
 
+/** The intent classification result for this conversation. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ConversationalAIIntent {
   /** The name of the detected intent. */
   name: string;
@@ -1177,6 +1191,7 @@ model ConversationalAIIntent {
   entities: Array<ConversationalAIEntity>;
 }
 
+/** The ranges of conversation items where this intent was identified. */
 model ConversationItemRange {
   /** The starting index of the intent occurrence within the conversation. */
   offset: int32;
@@ -1185,6 +1200,8 @@ model ConversationItemRange {
   length: int32;
 }
 
+/** The entity associated with this intent. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ConversationalAIEntity {
   /** The entity name or category. */
   name: string;
