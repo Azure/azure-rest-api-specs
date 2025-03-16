@@ -388,7 +388,7 @@ model CustomResult {
 model AnalyzeConversationTask {
   /** The base class of a conversation input task. */
   @key
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
   kind: AnalyzeConversationTaskKind;
 }
 
@@ -889,7 +889,7 @@ model AnalyzeConversationJobsInput {
 
   /** Analysis Input */
   @key
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
   analysisInput: MultiLanguageConversationAnalysisInput;
 
   /** Set of tasks to execute on the input conversation. */
