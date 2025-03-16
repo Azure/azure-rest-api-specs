@@ -531,12 +531,17 @@
     "MetricQueryCriteria": {
       "type": "object",
       "required": [
-        "query"
+        "query",
+        "timeAggregation"
       ],
       "properties": {
         "query": {
           "type": "string",
           "description": "The query used to evaluate the alert rule"
+        },
+        "timeAggregation": {
+          "type": "string",
+          "description": "The time aggregation type used to evaluate the query"
         }
       }
     },
