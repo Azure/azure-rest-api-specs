@@ -6,7 +6,7 @@
     "api-version": "2024-03-01-preview",
     "parameters": {
       "location": "global",
-      "kind": "Query",
+      "kind": "Metric",
       "tags": {
         "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
       },
@@ -18,12 +18,10 @@
           "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
         ],
         "evaluationFrequency": "PT1M",
-        "resolveConfiguration": {
-          "autoResolved": true,
-          "timeToResolve": "PT15M"
-        },
+        "windowSize": "PT5M",
         "criteria": {
-          "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
+          "threshold": 75,
+          "operator": "GreaterThan"
         },
         "actions": [
           {
@@ -40,7 +38,7 @@
         "type": "Microsoft.Insights/metricAlerts",
         "name": "dynamiccpu",
         "location": "global",
-        "kind": "Query",
+        "kind": "Metric",
         "tags": {
           "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
         },
@@ -52,12 +50,10 @@
             "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
           ],
           "evaluationFrequency": "PT1M",
-          "resolveConfiguration": {
-            "autoResolved": true,
-            "timeToResolve": "PT15M"
-          },
+          "windowSize": "PT5M",
           "criteria": {
-            "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
+            "threshold": 75,
+            "operator": "GreaterThan"
           },
           "actions": [
             {
@@ -73,7 +69,7 @@
         "type": "Microsoft.Insights/metricAlerts",
         "name": "dynamiccpu",
         "location": "global",
-        "kind": "Query",
+        "kind": "Metric",
         "tags": {
           "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
         },
@@ -85,12 +81,10 @@
             "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
           ],
           "evaluationFrequency": "PT1M",
-          "resolveConfiguration": {
-            "autoResolved": true,
-            "timeToResolve": "PT15M"
-          },
+          "windowSize": "PT5M",
           "criteria": {
-            "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
+            "threshold": 75,
+            "operator": "GreaterThan"
           },
           "actions": [
             {
