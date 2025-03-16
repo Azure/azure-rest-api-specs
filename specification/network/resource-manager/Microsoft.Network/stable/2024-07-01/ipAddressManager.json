@@ -129,6 +129,13 @@
             "schema": {
               "$ref": "#/definitions/IpamPool"
             }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
           }
         ],
         "responses": {
@@ -206,6 +213,13 @@
             "schema": {
               "$ref": "#/definitions/IpamPoolUpdate"
             }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
           }
         ],
         "responses": {
@@ -308,6 +322,13 @@
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
           }
         ],
         "responses": {
