@@ -240,7 +240,7 @@
     "/admin/version": {
       "get": {
         "operationId": "DataVersionApis_ListAllVersions",
-        "description": "Operation that lists resources in a non-paginated way.",
+        "description": "Resource list operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -250,11 +250,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AdminModels.DataVersion"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/PagedDataVersion"
             }
           },
           "default": {
@@ -274,6 +270,9 @@
           "DataVersionApis_ListAllVersions": {
             "$ref": "./examples/DataVersionApis_ListAllVersions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -289,7 +288,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AdminModels.DataVersion"
+              "$ref": "#/definitions/AdminModels.DataVersionCreate"
             }
           }
         ],
@@ -420,14 +419,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AdminModels.DataVersionId"
-            }
           }
         ],
         "responses": {
@@ -525,19 +516,14 @@
             "description": "Return up to the specified number of items from the top. Default is 10.",
             "required": false,
             "type": "integer",
-            "format": "int32",
-            "default": 10
+            "format": "int32"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ServiceModels.EntityInfo"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/PagedEntityInfo"
             }
           },
           "default": {
@@ -557,6 +543,9 @@
           "ServiceApis_ListAllEntities": {
             "$ref": "./examples/ServiceApis_ListAllEntities.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -837,12 +826,33 @@
       "get": {
         "operationId": "ServiceApis_GetServiceHealth",
         "description": "Get the health of the service.    ",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "API version.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Represents a generic response.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ServiceModels.MdsHealth"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/MdsCommon.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
             }
           }
         },
@@ -866,7 +876,9 @@
             "in": "path",
             "description": "The name of the normalizationTable.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9_]+$"
           },
           {
             "name": "version",
@@ -914,7 +926,9 @@
             "in": "path",
             "description": "The name of the normalizationTable.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9_]+$"
           },
           {
             "name": "resource",
@@ -973,7 +987,9 @@
             "in": "path",
             "description": "The name of the normalizationTable.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9_]+$"
           },
           {
             "name": "resource",
@@ -1029,7 +1045,9 @@
             "in": "path",
             "description": "The name of the normalizationTable.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9_]+$"
           },
           {
             "name": "version",
@@ -1039,12 +1057,11 @@
             "type": "string"
           },
           {
-            "name": "force-delete",
+            "name": "forceDelete",
             "in": "query",
             "description": "Force delete the resource.",
             "required": true,
-            "type": "boolean",
-            "x-ms-client-name": "forceDelete"
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -1130,7 +1147,9 @@
             "in": "path",
             "description": "The name of the entity.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9_]+$"
           },
           {
             "name": "resource",
@@ -1189,7 +1208,9 @@
             "in": "path",
             "description": "The name of the entity.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9_]+$"
           },
           {
             "name": "resource",
@@ -1498,7 +1519,9 @@
         "jobId": {
           "type": "string",
           "description": "The job identifier.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "status": {
           "$ref": "#/definitions/MdsCommon.JobStatus",
@@ -1510,28 +1533,23 @@
         },
         "cleanupAdxPropertyEventsAndRedisJobStatus": {
           "type": "string",
-          "description": "The status of the cleanup ADX property events and Redis job.",
-          "readOnly": true
+          "description": "The status of the cleanup ADX property events and Redis job."
         },
         "cleanupAdxTwinEventsJobStatus": {
           "type": "string",
-          "description": "The status of the cleanup ADX twin events job.",
-          "readOnly": true
+          "description": "The status of the cleanup ADX twin events job."
         },
         "cleanupAdxRelationsJobStatus": {
           "type": "string",
-          "description": "The status of the cleanup ADX relations job.",
-          "readOnly": true
+          "description": "The status of the cleanup ADX relations job."
         },
         "cleanupAdxVectorsJobStatus": {
           "type": "string",
-          "description": "The status of the cleanup ADX vectors job.",
-          "readOnly": true
+          "description": "The status of the cleanup ADX vectors job."
         },
         "cleanupAdxReferenceDataJobStatus": {
           "type": "string",
-          "description": "The status of the cleanup ADX reference data job.",
-          "readOnly": true
+          "description": "The status of the cleanup ADX reference data job."
         }
       },
       "required": [
@@ -1546,7 +1564,9 @@
         "versionId": {
           "type": "string",
           "description": "The identifier for the data version.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "description": {
           "type": "string",
@@ -1559,7 +1579,9 @@
         "isActive": {
           "type": "boolean",
           "description": "A flag indicating whether the data version is active.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "required": [
@@ -1567,17 +1589,21 @@
         "description"
       ]
     },
-    "AdminModels.DataVersionId": {
+    "AdminModels.DataVersionCreate": {
       "type": "object",
-      "description": "Represents the Version Id",
+      "description": "Represents a data version.",
       "properties": {
-        "versionId": {
+        "description": {
           "type": "string",
-          "description": "The identifier for the data version."
+          "description": "A description for the data version.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
-        "versionId"
+        "description"
       ]
     },
     "AdminModels.MdsJobStatusResponse": {
@@ -1587,7 +1613,9 @@
         "jobId": {
           "type": "string",
           "description": "The job identifier.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "status": {
           "$ref": "#/definitions/MdsCommon.JobStatus",
@@ -1706,6 +1734,23 @@
         ]
       }
     },
+    "MdsCommon.ErrorResponse": {
+      "type": "object",
+      "description": "Represents an error response.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "error": {
+          "type": "string",
+          "description": "The error details."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "MdsCommon.JobStatus": {
       "type": "string",
       "description": "Represents the status of a long-running operation.",
@@ -1753,6 +1798,50 @@
           }
         ]
       }
+    },
+    "PagedDataVersion": {
+      "type": "object",
+      "description": "Paged collection of DataVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/AdminModels.DataVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEntityInfo": {
+      "type": "object",
+      "description": "Paged collection of EntityInfo items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EntityInfo items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceModels.EntityInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PagedOpcuaMappingModel": {
       "type": "object",
@@ -1924,7 +2013,6 @@
       },
       "required": [
         "fieldName",
-        "operator",
         "value"
       ]
     },
@@ -2208,8 +2296,7 @@
       "required": [
         "entityName",
         "relatedEntities",
-        "maxHops",
-        "pageIndex"
+        "maxHops"
       ]
     },
     "QueryModels.QueryRequestRelatedNodes": {
@@ -2260,58 +2347,50 @@
         "id": {
           "type": "string",
           "description": "The unique identifier for the entity.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "description": {
           "type": "string",
-          "description": "Description of the query entity.",
-          "readOnly": true
+          "description": "Description of the query entity."
         },
         "hierarchyScope": {
           "type": "string",
-          "description": "Hierarchy scope of the entity.",
-          "readOnly": true
+          "description": "Hierarchy scope of the entity."
         },
         "equipmentLevel": {
           "type": "string",
-          "description": "Equipment level.",
-          "readOnly": true
+          "description": "Equipment level."
         },
         "operationLocation": {
           "type": "string",
-          "description": "Location of the operation ",
-          "readOnly": true
+          "description": "Location of the operation "
         },
         "operationLocationType": {
           "type": "string",
-          "description": "Location type of the operation.",
-          "readOnly": true
+          "description": "Location type of the operation."
         },
         "assetsystemrefid": {
           "type": "string",
-          "description": "Asset ID for the HR system.",
-          "readOnly": true
+          "description": "Asset ID for the HR system."
         },
         "hrsystemrefid": {
           "type": "string",
-          "description": "Reference ID for the HR system.",
-          "readOnly": true
+          "description": "Reference ID for the HR system."
         },
         "messystemrefid": {
           "type": "string",
-          "description": "Reference ID for the MES system.",
-          "readOnly": true
+          "description": "Reference ID for the MES system."
         },
         "dtId": {
           "type": "string",
-          "description": "Digital twin ID.",
-          "readOnly": true
+          "description": "Digital twin ID."
         },
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of the entity.",
-          "readOnly": true
+          "description": "Timestamp of the entity."
         }
       },
       "required": [
@@ -2742,9 +2821,7 @@
         "dtdlSchema": {
           "type": "object",
           "description": "The DTDL schema of the entity.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {}
         },
         "isBaseEntity": {
           "type": "boolean",
@@ -2761,7 +2838,6 @@
       },
       "required": [
         "name",
-        "version",
         "isDefault",
         "tags",
         "storageInfo",
@@ -2940,12 +3016,13 @@
         "jobId": {
           "type": "string",
           "description": "The identifier of the job.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "type": {
           "type": "string",
-          "description": "The type of the job.",
-          "readOnly": true
+          "description": "The type of the job."
         },
         "message": {
           "$ref": "#/definitions/ServiceModels.UpdateEntityJobStatusResponse",
@@ -2955,7 +3032,7 @@
           "type": "string",
           "description": "The URL of the resource location."
         },
-        "createdDateTime": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "The date and time when the resource was created."
@@ -3050,6 +3127,8 @@
         "name": {
           "type": "string",
           "description": "The name of the normalizationTable.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_]+$",
           "x-ms-mutability": [
             "read",
             "update"
@@ -3096,6 +3175,8 @@
         "name": {
           "type": "string",
           "description": "The name of the normalizationTable.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_]+$",
           "x-ms-mutability": [
             "read",
             "update"
@@ -3158,6 +3239,7 @@
     },
     "ServiceModels.OpcuaMappingData": {
       "type": "object",
+      "description": "Represents the mapping data for Opcua.",
       "properties": {
         "dmmKeys": {
           "type": "array",
@@ -3191,6 +3273,8 @@
         "entityName": {
           "type": "string",
           "description": "The name of the entity.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3246,6 +3330,8 @@
         "entityName": {
           "type": "string",
           "description": "The name of the entity.",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_]+$",
           "x-ms-mutability": [
             "read",
             "create"

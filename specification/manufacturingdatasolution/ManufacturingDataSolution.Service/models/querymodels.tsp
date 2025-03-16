@@ -99,50 +99,41 @@ model PagedQueryResult {
 }
 
 @doc("Represents the result of a query.")
+@parentResource(BasicQueryRequest)
 model QueryResult {
   @doc("The unique identifier for the entity.")
   @key
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Query, Lifecycle.Read)
   id: string;
 
   @doc("Description of the query entity.")
-  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("Hierarchy scope of the entity.")
-  @visibility(Lifecycle.Read)
   hierarchyScope?: string;
 
   @doc("Equipment level.")
-  @visibility(Lifecycle.Read)
   equipmentLevel?: string;
 
   @doc("Location of the operation ")
-  @visibility(Lifecycle.Read)
   operationLocation?: string;
 
   @doc("Location type of the operation.")
-  @visibility(Lifecycle.Read)
   operationLocationType?: string;
 
   @doc("Asset ID for the HR system.")
-  @visibility(Lifecycle.Read)
   assetsystemrefid?: string;
 
   @doc("Reference ID for the HR system.")
-  @visibility(Lifecycle.Read)
   hrsystemrefid?: string;
 
   @doc("Reference ID for the MES system.")
-  @visibility(Lifecycle.Read)
   messystemrefid?: string;
 
   @doc("Digital twin ID.")
-  @visibility(Lifecycle.Read)
   dtId: string;
 
   @doc("Timestamp of the entity.")
-  @visibility(Lifecycle.Read)
   timestamp: utcDateTime;
 }
 
@@ -242,7 +233,7 @@ model QueryRequestRelatedEntitiesData is BasicQueryRequest {
 
   @doc("The page index.")
   @pageIndex
-  pageIndex: int32 = 1;
+  pageIndex?: int32 = 1;
 }
 
 @doc("Represents a filter for a query.")
@@ -251,7 +242,7 @@ model Filter {
   fieldName: string = "";
 
   @doc("The operator to use for the filter.")
-  operator: QueryOperator = QueryOperator.EQ;
+  operator?: QueryOperator = QueryOperator.EQ;
 
   @doc("The value to filter by.")
   value: string = "";

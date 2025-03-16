@@ -16,6 +16,20 @@ model GenericOkResponse<T> {
   data: T;
 }
 
+@doc("Represents an error response.")
+@error
+model ErrorResponse {
+  @doc("The error code.")
+  @header("x-ms-error-code")
+  code: string;
+
+  @doc("The error message.")
+  message?: string;
+
+  @doc("The error details.")
+  error: string;
+}
+
 @doc("Represents the status of a long-running operation.")
 @lroStatus
 union JobStatus {

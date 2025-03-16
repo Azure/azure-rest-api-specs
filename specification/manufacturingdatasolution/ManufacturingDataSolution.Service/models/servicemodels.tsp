@@ -53,6 +53,8 @@ model NormalizationTable {
   @doc("The name of the normalizationTable.")
   @key
   @visibility(Lifecycle.Read, Lifecycle.Update)
+  @maxLength(128)
+  @pattern("^[a-zA-Z0-9_]+$")
   name: string;
 
   @doc("The version of the table.")
@@ -90,6 +92,8 @@ model OpcuaMappingModel {
   @doc("The name of the entity.")
   @key
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @maxLength(128)
+  @pattern("^[a-zA-Z0-9_]+$")
   entityName: string;
 
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -109,7 +113,7 @@ model OpcuaMappingModel {
   relationshipType?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@doc("Represents the mapping data for Opcua.")
 model OpcuaMappingData {
   @doc("The DMM keys for the response.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -145,11 +149,10 @@ model UpdateEntityJobStatusResponse {
 model JobStatusResponse {
   @key
   @doc("The identifier of the job.")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Query, Lifecycle.Read)
   jobId: string;
 
   @doc("The type of the job.")
-  @visibility(Lifecycle.Read)
   type?: string;
 
   @doc("The message of the job status.")
@@ -159,7 +162,7 @@ model JobStatusResponse {
   resourceLocationUrl?: string;
 
   @doc("The date and time when the resource was created.")
-  createdDateTime?: utcDateTime;
+  createdAt?: utcDateTime;
 
   @doc("The final status of the job.")
   @lroResult
@@ -362,7 +365,7 @@ model Entity is EntityInfo {
   id?: string;
 
   @doc("The version of the entity.")
-  version: int32 = 1;
+  version?: int32 = 1;
 
   @doc("Indicates if the entity is the default entity.")
   isDefault: boolean;
@@ -375,7 +378,7 @@ model Entity is EntityInfo {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Represents Json object"
   @doc("The DTDL schema of the entity.")
-  dtdlSchema?: Record<string>;
+  dtdlSchema?: Record<unknown>;
 
   @doc("Indicates if the entity is a base entity.")
   isBaseEntity?: boolean;

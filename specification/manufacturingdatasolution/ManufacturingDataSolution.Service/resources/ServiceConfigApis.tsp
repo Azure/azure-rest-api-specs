@@ -14,24 +14,24 @@ using Azure.Core.Traits;
 
 @versioned(MdsSolution.Versions)
 namespace MdsSolution.ServiceApis {
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is not a versioned operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
   @doc("Get the health of the service.    ")
   @route("health")
   @get
-  op getServiceHealth(): GenericOkResponse<MdsHealth>;
+  op getServiceHealth(
+    @doc("API version.") @query("api-version") apiVersion: string,
+  ): MdsHealth | ErrorResponse;
 
   @doc("Get the status of an entity job.")
   op getEntityJobStatus is Operations.ResourceRead<JobStatusResponse>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
   @doc("Get all entities.")
-  op listAllEntities is Azure.Core.Foundations.NonPagedResourceList<
+  op listAllEntities is Operations.ResourceList<
     EntityInfo,
     QueryParametersTrait<{
       @query("top")
       @doc("Return up to the specified number of items from the top. Default is 10.")
-      top?: int32 = 10;
+      top?: int32;
     }>
   >;
 
@@ -93,7 +93,7 @@ namespace MdsSolution.ServiceApis {
         @doc("Version of the table.")
         version: string;
 
-        @query("force-delete")
+        @query("forceDelete")
         @doc("Force delete the resource.")
         forceDelete: boolean;
       },

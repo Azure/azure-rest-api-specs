@@ -12,8 +12,11 @@ using MdsCommon;
 namespace AdminModels;
 
 @doc("Represents the Version Id")
+@resource("versionId")
 model DataVersionId {
   @doc("The identifier for the data version.")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @key
   versionId: string;
 }
 
@@ -21,7 +24,7 @@ model DataVersionId {
 @resource("version")
 model DataVersion {
   @doc("The identifier for the data version.")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Query, Lifecycle.Read)
   @key
   versionId: string;
 
@@ -30,7 +33,7 @@ model DataVersion {
   description: string;
 
   @doc("A flag indicating whether the data version is active.")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Query, Lifecycle.Read)
   isActive?: boolean;
 }
 
@@ -60,22 +63,17 @@ model CleanupEntityRequest {
 @resource("cleanup/status")
 model CleanupJobStatusResponse is MdsJobStatusResponse {
   @doc("The status of the cleanup ADX property events and Redis job.")
-  @visibility(Lifecycle.Read)
   cleanupAdxPropertyEventsAndRedisJobStatus?: string;
 
   @doc("The status of the cleanup ADX twin events job.")
-  @visibility(Lifecycle.Read)
   cleanupAdxTwinEventsJobStatus?: string;
 
   @doc("The status of the cleanup ADX relations job.")
-  @visibility(Lifecycle.Read)
   cleanupAdxRelationsJobStatus?: string;
 
   @doc("The status of the cleanup ADX vectors job.")
-  @visibility(Lifecycle.Read)
   cleanupAdxVectorsJobStatus?: string;
 
-  @visibility(Lifecycle.Read)
   @doc("The status of the cleanup ADX reference data job.")
   cleanupAdxReferenceDataJobStatus?: string;
 }
@@ -85,7 +83,7 @@ model CleanupJobStatusResponse is MdsJobStatusResponse {
 model MdsJobStatusResponse {
   @doc("The job identifier.")
   @key
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Query, Lifecycle.Read)
   jobId: string;
 
   @doc("The job status.")
