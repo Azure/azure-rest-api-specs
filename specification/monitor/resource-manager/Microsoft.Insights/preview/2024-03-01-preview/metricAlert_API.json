@@ -57,6 +57,9 @@
           },
           "Get a dynamic metric alert": {
             "$ref": "./examples/getDynamicMetricAlert.json"
+          },
+          "Get a query alert": {
+            "$ref": "./examples/getQueryAlert.json"
           }
         }
       },
@@ -115,6 +118,9 @@
           },
           "Create or update a dynamic metric alert": {
             "$ref": "./examples/createOrUpdateDynamicMetricAlert.json"
+          },
+          "Create or update a query alert": {
+            "$ref": "./examples/createOrUpdateQueryAlert.json"
           }
         }
       },
@@ -167,6 +173,9 @@
           },
           "Update a dynamic metric alert": {
             "$ref": "./examples/updateDynamicMetricAlert.json"
+          },
+          "Update a query alert": {
+            "$ref": "./examples/updateQueryAlert.json"
           }
         }
       },
@@ -332,7 +341,8 @@
         }
       ],
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "properties": {
         "kind": {
@@ -341,16 +351,23 @@
             "Metric",
             "Query"
           ],
-          "description": "Indicates the type of metric alert"
+          "description": "Indicates the type of metric alert",
+          "x-ms-enum": {
+            "name": "AlertKind",
+            "modelAsString": true
+          }
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "oneOf": [
+          "type": "object",
+          "discriminator": "kind",
+          "x-ms-discriminator-value": {
+            "Metric": "#/definitions/MetricAlertsMetricProperties",
+            "Query": "#/definitions/MetricAlertsQueryProperties"
+          },
+          "allOf": [
             {
-              "$ref": "#/definitions/MetricAlertsMetricProperties"
-            },
-            {
-              "$ref": "#/definitions/MetricAlertsQueryProperties"
+              "$ref": "#/definitions/MetricAlertsPropertiesBase"
             }
           ],
           "description": "The alert rule properties of the resource."
@@ -444,6 +461,7 @@
       }
     },
     "MetricAlertsMetricProperties": {
+      "x-ms-discriminator-value": "Metric",
       "allOf": [
         {
           "$ref": "#/definitions/MetricAlertsPropertiesBase"
@@ -465,6 +483,7 @@
       }
     },
     "MetricAlertsQueryProperties": {
+      "x-ms-discriminator-value": "Query",
       "allOf": [
         {
           "$ref": "#/definitions/MetricAlertsPropertiesBase"
@@ -515,6 +534,9 @@
     },
     "MetricQueryCriteria": {
       "type": "object",
+      "required": [
+        "query"
+      ],
       "properties": {
         "query": {
           "type": "string",
