@@ -92,6 +92,45 @@ export function getAllTags(readMeContent: string): string[] {
   return [...allTags];
 }
 
+type TagInputFile = { tagName: string; inputFiles: readonly string[] };
+
+export async function getTagsAndInputFiles(
+  tags: string[],
+  readmeContent: string,
+): Promise<TagInputFile[]> {
+  const tagResults: TagInputFile[] = [];
+  for (const tag of tags) {
+    const inputFiles = (await getInputFiles(readmeContent, tag)) || [];
+    if (inputFiles.length > 0) {
+      tagResults.push({ tagName: tag, inputFiles });
+    }
+  }
+  return tagResults;
+}
+
+/**
+ * Given a list of tags and the content of a readme file, remove tags that are
+ * subsets of other tags (reduces number of times autorest is called).
+ *
+ * @param tags
+ * @param readmeContent
+ * @returns
+ */
+export function deduplicateTags(tagInfo: TagInputFile[]) {
+  // TODO: This was ported straight across and can probably be done more cleanly
+  const sortedTags = tagInfo.sort((a, b) => a.inputFiles.length - b.inputFiles.length);
+  return sortedTags
+    .filter((tag, index) => {
+      for (const restTag of sortedTags.slice(index + 1)) {
+        if (tag.inputFiles.every((file) => restTag.inputFiles.includes(file))) {
+          return false;
+        }
+      }
+      return true;
+    })
+    .map((tag) => tag.tagName);
+}
+
 export async function getInputFiles(readMeContent: string, tag: string) {
   const cmd = parseMarkdown(readMeContent);
   return amd.getInputFilesForTag(cmd.markDown, tag);
