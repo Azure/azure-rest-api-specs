@@ -15,6 +15,9 @@ export async function getLabelAndAction({ github, context, core }) {
   let labelAction;
   let labelName = "";
   let checkRun = context.payload.check_run;
+  core.info(`context: ${JSON.stringify(context)}`);
+  core.info(`github: ${JSON.stringify(github)}`);
+  core.info(`core: ${JSON.stringify(core)}`);
   // Determine check run ID to use (from manual input or hardcoded default)
   if (check_run_id) {
     core.info(`Fetching check run with ID from input: ${check_run_id}`);
