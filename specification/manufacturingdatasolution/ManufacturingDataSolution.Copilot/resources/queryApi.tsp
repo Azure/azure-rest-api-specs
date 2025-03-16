@@ -17,39 +17,41 @@ namespace MdsSolution.CopilotService;
 
 // alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
-@post
-@route("/query")
-@doc("execute the query")
-op queryExecute(
-  @doc("api-version to use")
-  @query("api-version")
-  apiVersion: string,
+interface QueryServiceClient {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
+  @post
+  @route("/query")
+  @doc("execute the query")
+  queryExecute(
+    @doc("api-version to use")
+    @query("api-version")
+    apiVersion: string,
 
-  @doc("conversation id")
-  @header("conversationId")
-  conversationId?: string,
+    @doc("conversation id")
+    @header("conversationId")
+    conversationId?: string,
 
-  @doc("Accept-Language header")
-  @header("Accept-Language")
-  acceptLanguage?: string,
+    @doc("Accept-Language header")
+    @header("Accept-Language")
+    acceptLanguage?: string,
 
-  @doc("maximum number of retries")
-  @query("maxRetry")
-  maxRetry?: int32 = 2,
+    @doc("maximum number of retries")
+    @query("maxRetry")
+    maxRetry?: int32 = 2,
 
-  @doc("Include summary in the response.")
-  @query("includeSummary")
-  includeSummary?: choice,
+    @doc("Include summary in the response.")
+    @query("includeSummary")
+    includeSummary?: choice,
 
-  @doc("request body")
-  @body
-  request: QueryRequest,
-): QueryResponse;
+    @doc("request body")
+    @body
+    request: QueryRequest,
+  ): QueryResponse;
 
-@doc("Share feedback for the copilot's query response")
-op submitFeedback is apiOperations.ResourceCollectionAction<
-  FeedbackRequest,
-  FeedbackRequest,
-  FeedbackRequest
->;
+  @doc("Share feedback for the copilot's query response")
+  submitFeedback is apiOperations.ResourceCollectionAction<
+    FeedbackRequest,
+    FeedbackRequest,
+    FeedbackRequest
+  >;
+}

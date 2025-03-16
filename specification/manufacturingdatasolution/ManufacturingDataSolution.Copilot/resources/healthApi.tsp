@@ -22,7 +22,7 @@ interface HeathServiceClient {
   @doc("Get the health status of the service.")
   @route("/health")
   @get
-  op getHealthStatus(
+  getHealthStatus(
     @doc("The API version to use for this operation.")
     @query("api-version")
     apiVersion: string,

@@ -30,7 +30,7 @@ alias jobLocationResponseHeaders = ResponseHeadersTrait<
 >;
 
 @doc("Instructions")
-interface Instructions {
+interface InstructionServiceClient {
   @doc("Gets single instruction.")
   get is apiOperations.ResourceRead<Instruction>;
 
@@ -54,10 +54,10 @@ interface Instructions {
   // >;
 
   @doc("create Or Replace instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationApi.get)
+  @pollingOperation(MdsSolution.CopilotService.OperationServiceClient.get)
   createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Instruction>;
 
   @doc("Delete instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationApi.get)
+  @pollingOperation(MdsSolution.CopilotService.OperationServiceClient.get)
   delete is apiOperations.LongRunningResourceDelete<Instruction>;
 }

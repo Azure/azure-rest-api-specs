@@ -18,7 +18,7 @@ namespace MdsSolution.CopilotService;
 
 // alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-interface ValidateQueryApi {
+interface QueryValidateJobClient {
   @doc("Validate a query")
   run is apiOperations.ResourceCollectionAction<
     QueryValidationJobRequest,

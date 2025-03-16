@@ -29,12 +29,13 @@ alias jobLocationResponseHeaders = ResponseHeadersTrait<
   TraitContext.Create | TraitContext.Update | TraitContext.Delete
 >;
 
-interface Aliases {
+@doc("Aliases client operations")
+interface AliasesServiceClient {
   @doc("Get an alias by Id")
   get is apiOperations.ResourceRead<Alias>;
 
   @doc("Update an alias")
-  @pollingOperation(MdsSolution.CopilotService.OperationApi.get)
+  @pollingOperation(MdsSolution.CopilotService.OperationServiceClient.get)
   createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Alias>;
 
   @doc("Delete an alias")

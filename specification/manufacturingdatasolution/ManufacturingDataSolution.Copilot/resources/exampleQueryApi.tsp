@@ -18,7 +18,7 @@ namespace MdsSolution.CopilotService;
 
 // alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-interface ExampleQueryOperations {
+interface QueryExampleServiceClient {
   @doc("get the example query")
   getExample is apiOperations.ResourceRead<ExampleQueryRequest>;
 

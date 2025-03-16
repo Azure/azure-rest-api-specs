@@ -17,7 +17,7 @@ namespace MdsSolution.CopilotService;
 // alias apiOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @doc("Get operation progress")
-interface OperationApi {
+interface OperationServiceClient {
   @doc("Get operation progress")
   get is apiOperations.ResourceRead<OperationResponse>;
 }
