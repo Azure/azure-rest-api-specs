@@ -40,7 +40,7 @@
   "security": [
     {
       "AadOauth2Auth": [
-        "https://azure-mds-service/.default"
+        "https://azure-mds-service.com/.default"
       ]
     }
   ],
@@ -51,7 +51,7 @@
       "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "https://azure-mds-service/.default": ""
+        "https://azure-mds-service.com/.default": ""
       },
       "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
@@ -89,7 +89,7 @@
         },
         "x-ms-examples": {
           "AliasesServiceClient_List_MaximumSet": {
-            "$ref": "./examples/AliasesServiceClient_List_MaximumSet_Gen.json"
+            "$ref": "./examples/examples/AliasesServiceClient_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -137,7 +137,7 @@
         },
         "x-ms-examples": {
           "AliasesServiceClient_Get_MaximumSet": {
-            "$ref": "./examples/AliasesServiceClient_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/examples/AliasesServiceClient_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -209,7 +209,7 @@
         },
         "x-ms-examples": {
           "AliasesServiceClient_CreateOrReplace_MaximumSet": {
-            "$ref": "./examples/AliasesServiceClient_CreateOrReplace_MaximumSet_Gen.json"
+            "$ref": "./examples/examples/AliasesServiceClient_CreateOrReplace_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -253,14 +253,14 @@
         },
         "x-ms-examples": {
           "AliasesServiceClient_Delete_MaximumSet": {
-            "$ref": "./examples/AliasesServiceClient_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/examples/AliasesServiceClient_Delete_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/copilot/health": {
       "get": {
-        "operationId": "HeathServiceClient_GetHealthStatus",
+        "operationId": "HeathServiceClient_GetServiceHealth",
         "description": "Get the health status of the service.",
         "parameters": [
           {
@@ -274,18 +274,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Represents a generic response.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Models.CopilotHealth"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
         "x-ms-examples": {
-          "HeathServiceClient_GetHealthStatus_MaximumSet": {
-            "$ref": "./examples/HeathServiceClient_GetHealthStatus_MaximumSet_Gen.json"
-          },
-          "HeathServiceClient_GetHealthStatus_MinimumSet": {
-            "$ref": "./examples/HeathServiceClient_GetHealthStatus_MinimumSet_Gen.json"
+          "HeathServiceClient_GetServiceHealth_MaximumSet": {
+            "$ref": "./examples/examples/HeathServiceClient_GetServiceHealth_MaximumSet_Gen.json"
           }
         }
       }
@@ -348,7 +357,7 @@
         },
         "x-ms-examples": {
           "InstructionServiceClient_List_MaximumSet": {
-            "$ref": "./examples/InstructionServiceClient_List_MaximumSet_Gen.json"
+            "$ref": "./examples/examples/InstructionServiceClient_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -396,7 +405,7 @@
         },
         "x-ms-examples": {
           "InstructionServiceClient_Get_MaximumSet": {
-            "$ref": "./examples/InstructionServiceClient_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/examples/InstructionServiceClient_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -468,7 +477,7 @@
         },
         "x-ms-examples": {
           "InstructionServiceClient_CreateOrReplace_MaximumSet": {
-            "$ref": "./examples/InstructionServiceClient_CreateOrReplace_MaximumSet_Gen.json"
+            "$ref": "./examples/examples/InstructionServiceClient_CreateOrReplace_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -541,25 +550,22 @@
         },
         "x-ms-examples": {
           "InstructionServiceClient_Delete_MaximumSet": {
-            "$ref": "./examples/InstructionServiceClient_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/examples/InstructionServiceClient_Delete_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/copilot/operation/{operationId}": {
+    "/copilot/operation/{id}": {
       "get": {
-        "operationId": "OperationServiceClient_Get",
+        "operationId": "OperationServiceClient_GetOperationResult",
         "description": "Get operation progress",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "operationId",
+            "name": "id",
             "in": "path",
             "description": "The operation id.",
             "required": true,
@@ -587,11 +593,8 @@
           }
         },
         "x-ms-examples": {
-          "OperationServiceClient_Get_MaximumSet": {
-            "$ref": "./examples/OperationServiceClient_Get_MaximumSet_Gen.json"
-          },
-          "OperationServiceClient_Get_MinimumSet": {
-            "$ref": "./examples/OperationServiceClient_Get_MinimumSet_Gen.json"
+          "OperationServiceClient_GetOperationResult_MaximumSet": {
+            "$ref": "./examples/examples/OperationServiceClient_GetOperationResult_MaximumSet_Gen.json"
           }
         }
       }
@@ -610,11 +613,12 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "conversationId",
+            "name": "conversation-id",
             "in": "header",
             "description": "conversation id",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "conversationId"
           },
           {
             "name": "Accept-Language",
@@ -644,7 +648,7 @@
               "No"
             ],
             "x-ms-enum": {
-              "name": "choice",
+              "name": "Choice",
               "modelAsString": true,
               "values": [
                 {
@@ -666,7 +670,7 @@
             "description": "request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Models.QueryRequest"
+              "$ref": "#/definitions/Models.UserQueryRequest"
             }
           }
         ],
@@ -676,19 +680,28 @@
             "schema": {
               "$ref": "#/definitions/Models.QueryResponse"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         },
         "x-ms-examples": {
           "QueryServiceClient_QueryExecute_MaximumSet": {
-            "$ref": "./examples/QueryServiceClient_QueryExecute_MaximumSet_Gen.json"
-          },
-          "QueryServiceClient_QueryExecute_MinimumSet": {
-            "$ref": "./examples/QueryServiceClient_QueryExecute_MinimumSet_Gen.json"
+            "$ref": "./examples/examples/QueryServiceClient_QueryExecute_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/copilot/query:submitFeedback": {
+    "/copilot/query/{operationId}:submitFeedback": {
       "post": {
         "operationId": "QueryServiceClient_SubmitFeedback",
         "description": "Share feedback for the copilot's query response",
@@ -697,12 +710,11 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
-            "in": "body",
+            "name": "operationId",
+            "in": "path",
+            "description": "operation Id",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Models.FeedbackRequest"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -727,10 +739,7 @@
         },
         "x-ms-examples": {
           "QueryServiceClient_SubmitFeedback_MaximumSet": {
-            "$ref": "./examples/QueryServiceClient_SubmitFeedback_MaximumSet_Gen.json"
-          },
-          "QueryServiceClient_SubmitFeedback_MinimumSet": {
-            "$ref": "./examples/QueryServiceClient_SubmitFeedback_MinimumSet_Gen.json"
+            "$ref": "./examples/examples/QueryServiceClient_SubmitFeedback_MaximumSet_Gen.json"
           }
         }
       }
@@ -773,10 +782,7 @@
         },
         "x-ms-examples": {
           "QueryExampleServiceClient_ListAllExamples_MaximumSet": {
-            "$ref": "./examples/QueryExampleServiceClient_ListAllExamples_MaximumSet_Gen.json"
-          },
-          "QueryExampleServiceClient_ListAllExamples_MinimumSet": {
-            "$ref": "./examples/QueryExampleServiceClient_ListAllExamples_MinimumSet_Gen.json"
+            "$ref": "./examples/examples/QueryExampleServiceClient_ListAllExamples_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -797,7 +803,9 @@
             "in": "path",
             "description": "The ID of the example query.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -822,10 +830,7 @@
         },
         "x-ms-examples": {
           "QueryExampleServiceClient_GetExample_MaximumSet": {
-            "$ref": "./examples/QueryExampleServiceClient_GetExample_MaximumSet_Gen.json"
-          },
-          "QueryExampleServiceClient_GetExample_MinimumSet": {
-            "$ref": "./examples/QueryExampleServiceClient_GetExample_MinimumSet_Gen.json"
+            "$ref": "./examples/examples/QueryExampleServiceClient_GetExample_MaximumSet_Gen.json"
           }
         }
       },
@@ -841,7 +846,9 @@
             "in": "path",
             "description": "The ID of the example query.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_]*$"
           },
           {
             "name": "resource",
@@ -881,10 +888,7 @@
         },
         "x-ms-examples": {
           "QueryExampleServiceClient_CreateOrReplace_MaximumSet": {
-            "$ref": "./examples/QueryExampleServiceClient_CreateOrReplace_MaximumSet_Gen.json"
-          },
-          "QueryExampleServiceClient_CreateOrReplace_MinimumSet": {
-            "$ref": "./examples/QueryExampleServiceClient_CreateOrReplace_MinimumSet_Gen.json"
+            "$ref": "./examples/examples/QueryExampleServiceClient_CreateOrReplace_MaximumSet_Gen.json"
           }
         }
       },
@@ -900,7 +904,9 @@
             "in": "path",
             "description": "The ID of the example query.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -922,15 +928,125 @@
         },
         "x-ms-examples": {
           "QueryExampleServiceClient_DeleteExample_MaximumSet": {
-            "$ref": "./examples/QueryExampleServiceClient_DeleteExample_MaximumSet_Gen.json"
-          },
-          "QueryExampleServiceClient_DeleteExample_MinimumSet": {
-            "$ref": "./examples/QueryExampleServiceClient_DeleteExample_MinimumSet_Gen.json"
+            "$ref": "./examples/examples/QueryExampleServiceClient_DeleteExample_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/copilot/validationJob/{testId}": {
+    "/copilot/validationJob/{testName}:run": {
+      "post": {
+        "operationId": "QueryValidateJobClient_Run",
+        "description": "Validate a query",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testName",
+            "in": "path",
+            "description": "The unique identifier of the test.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Models.QueryValidationJobRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Models.QueryValidationJobScheduleConfirmation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryValidateJobClient_Run_MaximumSet": {
+            "$ref": "./examples/examples/QueryValidateJobClient_Run_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/copilot/validationJob/runs": {
+      "get": {
+        "operationId": "QueryValidateJobClient_ListQueryValidationJobHistory",
+        "description": "List validate test requests",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fromDateAt",
+            "in": "query",
+            "description": "start date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "endDateAt",
+            "in": "query",
+            "description": "end date",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "testRunId",
+            "in": "query",
+            "description": "test run id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQueryValidationJobRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryValidateJobClient_ListQueryValidationJobHistory_MaximumSet": {
+            "$ref": "./examples/examples/QueryValidateJobClient_ListQueryValidationJobHistory_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/copilot/validationJobDetails/{testId}": {
       "get": {
         "operationId": "QueryValidateJobClient_GetQueryValidationJobDetails",
         "description": "Get the details of a validation job",
@@ -968,123 +1084,7 @@
         },
         "x-ms-examples": {
           "QueryValidateJobClient_GetQueryValidationJobDetails_MaximumSet": {
-            "$ref": "./examples/QueryValidateJobClient_GetQueryValidationJobDetails_MaximumSet_Gen.json"
-          },
-          "QueryValidateJobClient_GetQueryValidationJobDetails_MinimumSet": {
-            "$ref": "./examples/QueryValidateJobClient_GetQueryValidationJobDetails_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/copilot/validationJob/runs": {
-      "get": {
-        "operationId": "QueryValidateJobClient_ListQueryValidationJobHistory",
-        "description": "List validate test requests",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "fromDate",
-            "in": "query",
-            "description": "start date",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "end date",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "testRunId",
-            "in": "query",
-            "description": "start date",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedQueryValidationJobRun"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "QueryValidateJobClient_ListQueryValidationJobHistory_MaximumSet": {
-            "$ref": "./examples/QueryValidateJobClient_ListQueryValidationJobHistory_MaximumSet_Gen.json"
-          },
-          "QueryValidateJobClient_ListQueryValidationJobHistory_MinimumSet": {
-            "$ref": "./examples/QueryValidateJobClient_ListQueryValidationJobHistory_MinimumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/copilot/validationJob:run": {
-      "post": {
-        "operationId": "QueryValidateJobClient_Run",
-        "description": "Validate a query",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Models.QueryValidationJobRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Models.QueryValidationJobScheduleConfirmation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "QueryValidateJobClient_Run_MaximumSet": {
-            "$ref": "./examples/QueryValidateJobClient_Run_MaximumSet_Gen.json"
-          },
-          "QueryValidateJobClient_Run_MinimumSet": {
-            "$ref": "./examples/QueryValidateJobClient_Run_MinimumSet_Gen.json"
+            "$ref": "./examples/examples/QueryValidateJobClient_GetQueryValidationJobDetails_MaximumSet_Gen.json"
           }
         }
       }
@@ -1251,12 +1251,12 @@
           }
         },
         "isCustom": {
-          "$ref": "#/definitions/Models.choice",
+          "$ref": "#/definitions/Models.Choice",
           "description": "Indicates if the alias is enabled",
           "readOnly": true
         },
         "enabled": {
-          "$ref": "#/definitions/Models.choice",
+          "$ref": "#/definitions/Models.Choice",
           "description": "Indicates if the alias is enabled",
           "x-ms-mutability": [
             "update"
@@ -1270,6 +1270,30 @@
         "isCustom",
         "enabled"
       ]
+    },
+    "Models.Choice": {
+      "type": "string",
+      "description": "choice of yes or no. Use this for boolean properties.",
+      "enum": [
+        "Yes",
+        "No"
+      ],
+      "x-ms-enum": {
+        "name": "Choice",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "yes",
+            "value": "Yes",
+            "description": "Yes"
+          },
+          {
+            "name": "no",
+            "value": "No",
+            "description": "No"
+          }
+        ]
+      }
     },
     "Models.ContentProperties": {
       "type": "object",
@@ -1355,6 +1379,8 @@
         "exampleId": {
           "type": "string",
           "description": "The ID of the example query.",
+          "maxLength": 50,
+          "pattern": "^[a-zA-Z0-9_]*$",
           "readOnly": true
         },
         "userQuestion": {
@@ -1676,10 +1702,12 @@
           "$ref": "#/definitions/Models.OperationStatusValue",
           "description": "The operation status."
         },
-        "operationId": {
+        "id": {
           "type": "string",
           "description": "The operation id.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "errorMessage": {
           "type": "array",
@@ -1691,7 +1719,7 @@
       },
       "required": [
         "status",
-        "operationId",
+        "id",
         "errorMessage"
       ]
     },
@@ -1851,23 +1879,6 @@
         ]
       }
     },
-    "Models.QueryRequest": {
-      "type": "object",
-      "description": "query request",
-      "properties": {
-        "ask": {
-          "type": "string",
-          "description": "User query in natural language",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        }
-      },
-      "required": [
-        "ask"
-      ]
-    },
     "Models.QueryResponse": {
       "type": "object",
       "description": "Query Response Result",
@@ -1889,7 +1900,9 @@
         "testId": {
           "type": "string",
           "description": "Test Id",
-          "readOnly": true
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "testRunStatus": {
           "$ref": "#/definitions/Models.OperationStatus",
@@ -1910,17 +1923,10 @@
         "testResults"
       ]
     },
-    "Models.QueryValidationJobRequest": {
+    "Models.QueryValidationJobRequestBody": {
       "type": "object",
-      "description": "Validate job Request",
+      "description": "Validate job Request body",
       "properties": {
-        "testName": {
-          "type": "string",
-          "description": "The unique identifier of the test.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
         "testCases": {
           "type": "array",
           "description": "The test cases for validation.",
@@ -1930,12 +1936,11 @@
           "x-ms-identifiers": []
         },
         "runInConversationContext": {
-          "$ref": "#/definitions/Models.choice",
+          "$ref": "#/definitions/Models.Choice",
           "description": "run in the conversation context"
         }
       },
       "required": [
-        "testName",
         "testCases",
         "runInConversationContext"
       ]
@@ -1947,7 +1952,9 @@
         "testId": {
           "type": "string",
           "description": "The unique identifier of the test.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "update"
+          ]
         },
         "createdAt": {
           "type": "string",
@@ -1968,7 +1975,11 @@
       "type": "object",
       "description": "Validate Response",
       "properties": {
-        "testRunId": {
+        "testName": {
+          "type": "string",
+          "description": "Test Name"
+        },
+        "runId": {
           "type": "string",
           "description": "Test Run Id"
         },
@@ -1987,7 +1998,8 @@
         }
       },
       "required": [
-        "testRunId",
+        "testName",
+        "runId",
         "status",
         "createdAt",
         "createdBy"
@@ -2006,7 +2018,7 @@
           "description": "The expected kql query for the test case."
         },
         "skip": {
-          "$ref": "#/definitions/Models.choice",
+          "$ref": "#/definitions/Models.Choice",
           "description": "skip the test run"
         }
       },
@@ -2033,71 +2045,8 @@
           "default": 0
         },
         "status": {
-          "type": "string",
-          "description": "The status of the operation.",
-          "default": "InProgress",
-          "enum": [
-            "Accepted",
-            "InProgress",
-            "TransientFailure",
-            "Succeeded",
-            "Failed",
-            "Deleting",
-            "Canceled",
-            "Unknown",
-            "Skipped"
-          ],
-          "x-ms-enum": {
-            "name": "OperationStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Accepted",
-                "value": "Accepted",
-                "description": "The operation is Accepted."
-              },
-              {
-                "name": "InProgress",
-                "value": "InProgress",
-                "description": "The operation is in progress."
-              },
-              {
-                "name": "TransientFailure",
-                "value": "TransientFailure",
-                "description": "The operation encountered a transient failure."
-              },
-              {
-                "name": "Succeeded",
-                "value": "Succeeded",
-                "description": "The operation succeeded."
-              },
-              {
-                "name": "Failed",
-                "value": "Failed",
-                "description": "The operation failed."
-              },
-              {
-                "name": "Deleting",
-                "value": "Deleting",
-                "description": "The operation is being deleted."
-              },
-              {
-                "name": "Canceled",
-                "value": "Canceled",
-                "description": "The operation was canceled."
-              },
-              {
-                "name": "Unknown",
-                "value": "Unknown",
-                "description": "The status of the operation is unknown."
-              },
-              {
-                "name": "Skipped",
-                "value": "Skipped",
-                "description": "The operation was skipped."
-              }
-            ]
-          }
+          "$ref": "#/definitions/Models.OperationStatus",
+          "description": "The status of the operation."
         },
         "errorMessage": {
           "type": "string",
@@ -2173,8 +2122,7 @@
       "properties": {
         "language": {
           "type": "string",
-          "description": "The query language.",
-          "default": "KQL"
+          "description": "The query language."
         },
         "query": {
           "type": "string",
@@ -2204,29 +2152,18 @@
         "steps"
       ]
     },
-    "Models.choice": {
-      "type": "string",
-      "description": "choice of yes or no. Use this for boolean properties.",
-      "enum": [
-        "Yes",
-        "No"
-      ],
-      "x-ms-enum": {
-        "name": "choice",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "yes",
-            "value": "Yes",
-            "description": "Yes"
-          },
-          {
-            "name": "no",
-            "value": "No",
-            "description": "No"
-          }
-        ]
-      }
+    "Models.UserQueryRequest": {
+      "type": "object",
+      "description": "Query Response",
+      "properties": {
+        "ask": {
+          "type": "string",
+          "description": "User query in natural language"
+        }
+      },
+      "required": [
+        "ask"
+      ]
     },
     "PagedAlias": {
       "type": "object",

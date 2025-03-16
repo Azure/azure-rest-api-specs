@@ -29,7 +29,9 @@ interface AliasesServiceClient {
   get is apiOperations.ResourceRead<Alias>;
 
   @doc("Update an alias")
-  @pollingOperation(MdsSolution.CopilotService.OperationServiceClient.get)
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationServiceClient.getOperationResult
+  )
   createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Alias>;
 
   @doc("Delete an alias")

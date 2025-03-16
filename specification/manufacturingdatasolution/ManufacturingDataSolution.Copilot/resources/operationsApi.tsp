@@ -13,5 +13,5 @@ namespace MdsSolution.CopilotService;
 @doc("Operations Service client operations")
 interface OperationServiceClient {
   @doc("Get operation progress")
-  get is apiOperations.ResourceRead<OperationResponse>;
+  getOperationResult is apiOperations.ResourceRead<OperationResponse>;
 }

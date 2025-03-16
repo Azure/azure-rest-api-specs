@@ -48,10 +48,14 @@ interface InstructionServiceClient {
   // >;
 
   @doc("create Or Replace instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationServiceClient.get)
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationServiceClient.getOperationResult
+  )
   createOrReplace is apiOperations.LongRunningResourceCreateOrReplace<Instruction>;
 
   @doc("Delete instructions.")
-  @pollingOperation(MdsSolution.CopilotService.OperationServiceClient.get)
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationServiceClient.getOperationResult
+  )
   delete is apiOperations.LongRunningResourceDelete<Instruction>;
 }

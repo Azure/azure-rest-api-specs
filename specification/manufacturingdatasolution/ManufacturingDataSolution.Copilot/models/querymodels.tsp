@@ -9,10 +9,16 @@ namespace MdsSolution.CopilotService.Models;
 
 @doc("query request")
 @resource("query")
-model QueryRequest {
+model UserQuery {
+  @doc("requestId")
   @key
+  @visibility(Lifecycle.Read)
+  requestId: string;
+}
+
+@doc("Query Response")
+model UserQueryRequest {
   @doc("User query in natural language")
-  @visibility(Lifecycle.Read, Lifecycle.Update)
   ask: string;
 }
 

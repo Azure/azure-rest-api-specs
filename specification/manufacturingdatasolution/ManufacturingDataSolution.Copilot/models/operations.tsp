@@ -15,9 +15,9 @@ model OperationResponse {
   status: OperationStatusValue;
 
   @doc("The operation id.")
-  @key("operationId")
-  @visibility(Lifecycle.Read)
-  operationId: string;
+  @key("id")
+  @visibility(Lifecycle.Update)
+  id: string;
 
   @doc("The error message.")
   errorMessage: string[];

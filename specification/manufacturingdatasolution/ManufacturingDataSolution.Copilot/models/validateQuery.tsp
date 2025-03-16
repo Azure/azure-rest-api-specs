@@ -12,15 +12,18 @@ namespace MdsSolution.CopilotService.Models;
 @resource("validationJob")
 model QueryValidationJobRequest {
   @key
-  @visibility(Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   @doc("The unique identifier of the test.")
   testName: string;
+}
 
+@doc("Validate job Request body")
+model QueryValidationJobRequestBody {
   @doc("The test cases for validation.")
   testCases: QueryValidationTestCase[];
 
   @doc("run in the conversation context")
-  runInConversationContext: choice;
+  runInConversationContext: Choice;
 }
 
 @doc("Test Case for validation job")
@@ -32,13 +35,16 @@ model QueryValidationTestCase {
   expectedKqlQuery?: string;
 
   @doc("skip the test run")
-  skip: choice;
+  skip: Choice;
 }
 
 @doc("Validate Response")
 model QueryValidationJobScheduleConfirmation {
+  @doc("Test Name")
+  testName: string;
+
   @doc("Test Run Id")
-  testRunId: string;
+  runId: string;
 
   @doc("Test Run Status")
   status: OperationStatus;
@@ -51,11 +57,11 @@ model QueryValidationJobScheduleConfirmation {
 }
 
 @doc("Test Details Response")
-@resource("validationJob")
+@resource("validationJobDetails")
 model QueryValidationJobDetails {
   @doc("Test Id")
   @key
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Update)
   testId: string;
 
   @doc("Test Run Status")
@@ -77,7 +83,7 @@ model QueryValidationTestCaseResult {
   consolidatedScore: int64 = 0;
 
   @doc("The status of the operation.")
-  status: OperationStatus = OperationStatus.InProgress;
+  status: OperationStatus;
 
   @doc("The error message, if any.")
   errorMessage?: string;
@@ -87,7 +93,7 @@ model QueryValidationTestCaseResult {
 @resource("validationJob/runs")
 model QueryValidationJobRun {
   @key
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Update)
   @doc("The unique identifier of the test.")
   testId: string;
 

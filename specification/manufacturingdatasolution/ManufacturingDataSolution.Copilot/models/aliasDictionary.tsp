@@ -26,9 +26,9 @@ model Alias {
 
   @doc("Indicates if the alias is enabled")
   @visibility(Lifecycle.Read)
-  isCustom: choice;
+  isCustom: Choice;
 
   @doc("Indicates if the alias is enabled")
   @visibility(Lifecycle.Update)
-  enabled: choice;
+  enabled: Choice;
 }

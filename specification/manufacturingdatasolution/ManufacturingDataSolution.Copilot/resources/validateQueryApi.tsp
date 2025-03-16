@@ -15,9 +15,9 @@ namespace MdsSolution.CopilotService;
 @doc("Query validation job client operations")
 interface QueryValidateJobClient {
   @doc("Validate a query")
-  run is apiOperations.ResourceCollectionAction<
+  run is apiOperations.ResourceAction<
     QueryValidationJobRequest,
-    QueryValidationJobRequest,
+    QueryValidationJobRequestBody,
     QueryValidationJobScheduleConfirmation
   >;
 
@@ -30,15 +30,15 @@ interface QueryValidateJobClient {
     QueryParametersTrait<{
       @doc("start date")
       @query
-      fromDate?: utcDateTime;
+      fromDateAt?: utcDateTime;
 
       @doc("end date")
       @query
-      endDate?: utcDateTime;
+      endDateAt?: utcDateTime;
 
-      @doc("start date")
+      @doc("test run id")
       @query
-      testRunId?: utcDateTime;
+      testRunId?: string;
     }>
   >;
 }

@@ -24,7 +24,7 @@ using Azure.Core.Traits;
     location: string = "mds.azure.com",
   }
 )
-@useAuth(AadOauth2Auth<["https://azure-mds-service/.default"]>)
+@useAuth(AadOauth2Auth<["https://azure-mds-service.com/.default"]>)
 @versioned(MdsSolution.CopilotService.Versions)
 namespace MdsSolution.CopilotService;
 

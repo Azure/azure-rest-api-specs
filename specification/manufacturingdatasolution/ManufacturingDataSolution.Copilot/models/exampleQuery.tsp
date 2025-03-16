@@ -10,7 +10,7 @@ namespace MdsSolution.CopilotService.Models;
 @doc("The sample query resource.")
 model SampleQuery {
   @doc("The query language.")
-  language: string = "KQL";
+  language: string;
 
   @doc("The query string.")
   query: string;
@@ -22,6 +22,8 @@ model ExampleQueryRequest {
   @key("exampleId")
   @doc("The ID of the example query.")
   @visibility(Lifecycle.Read)
+  @maxLength(50)
+  @pattern("^[a-zA-Z0-9_]*$")
   exampleId: string;
 
   @doc("The user question associated with the example.")

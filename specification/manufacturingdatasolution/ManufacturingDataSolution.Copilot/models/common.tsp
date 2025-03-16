@@ -38,7 +38,7 @@ union OperationStatusValue {
 }
 
 @doc("choice of yes or no. Use this for boolean properties.")
-union choice {
+union Choice {
   @doc("Yes")
   yes: "Yes",
 
