@@ -116,10 +116,6 @@ interface BatchClient {
 );
 
 // client name overrides
-@@clientName(BatchClient.createCertificate,
-  "createCertificateInternal",
-  "java"
-);
 @@clientName(BatchClient.listCertificates, "listCertificatesInternal", "java");
 @@clientName(BatchClient.cancelCertificateDeletion,
   "cancelCertificateDeletionInternal",

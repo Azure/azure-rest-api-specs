@@ -712,6 +712,30 @@ op getJobTaskCountsCustomization is Azure.Batch.ReadOperationNew<
   "java"
 );
 
+// Create Certificate Operation
+@doc("Optional parameters for Create Certificate operation.")
+model CreateBatchCertificateOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Create Certificate operation.")
+@route("/certificates")
+op createCertificateCustomization is Azure.Batch.CreateOperationNew<
+  {
+    ...Azure.Batch.CreateCertificateRequiredParameters;
+
+    @doc("Optional parameters for Create Certificate operation.")
+    options?: CreateBatchCertificateOptions;
+  },
+  void
+>;
+
+@@override(Azure.Batch.Certificates.createCertificate,
+  createCertificateCustomization,
+  "java"
+);
+
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
 model CreateBatchJobScheduleOptions {

@@ -874,6 +874,14 @@ interface Jobs {
   >;
 }
 
+// Certificate Parameter Aliases
+alias CreateCertificateRequiredParameters = {
+  @doc("The Certificate to be created.")
+  @body
+  certificate: BatchCertificate;
+};
+
+// Certificate Interface
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @tag("Certificates")
@@ -882,12 +890,10 @@ interface Certificates {
   @summary("Creates a Certificate to the specified Account.")
   @doc("Creates a Certificate to the specified Account.")
   @route("/certificates")
-  @clientName("createCertificateInternal", "java")
-  createCertificate is CreateOperation<
+  createCertificate is CreateOperationNew<
     {
-      @doc("The Certificate to be created.")
-      @body
-      certificate: BatchCertificate;
+      ...CommonJsonParameters;
+      ...CreateCertificateRequiredParameters;
     },
     {}
   >;
