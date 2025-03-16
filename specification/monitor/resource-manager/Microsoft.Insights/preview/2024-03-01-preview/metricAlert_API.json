@@ -360,12 +360,21 @@
         "properties": {
           "x-ms-client-flatten": true,
           "type": "object",
-          "discriminator": "kind",
-          "allOf": [
+          "oneOf": [
             {
-              "$ref": "#/definitions/MetricAlertsPropertiesBase"
+              "$ref": "#/definitions/MetricAlertsMetricProperties"
+            },
+            {
+              "$ref": "#/definitions/MetricAlertsQueryProperties"
             }
           ],
+          "discriminator": {
+            "propertyName": "kind",
+            "mapping": {
+              "Metric": "#/definitions/MetricAlertsMetricProperties",
+              "Query": "#/definitions/MetricAlertsQueryProperties"
+            }
+          },
           "description": "The alert rule properties of the resource."
         }
       },
@@ -389,9 +398,14 @@
         "severity",
         "enabled",
         "scopes",
-        "evaluationFrequency"
+        "evaluationFrequency",
+        "kind"
       ],
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The type of metric alert properties"
+        },
         "description": {
           "type": "string",
           "maxLength": 4096,
@@ -457,13 +471,13 @@
       }
     },
     "MetricAlertsMetricProperties": {
-      "x-ms-discriminator-value": "Metric",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MetricAlertsPropertiesBase"
         }
       ],
-      "type": "object",
+      "x-ms-discriminator-value": "Metric",
       "required": [
         "windowSize",
         "criteria"
@@ -479,13 +493,13 @@
       }
     },
     "MetricAlertsQueryProperties": {
-      "x-ms-discriminator-value": "Query",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MetricAlertsPropertiesBase"
         }
       ],
-      "type": "object",
+      "x-ms-discriminator-value": "Query",
       "required": [
         "criteria"
       ],
