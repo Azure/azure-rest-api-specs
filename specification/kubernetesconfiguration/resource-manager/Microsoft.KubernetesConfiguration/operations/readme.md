@@ -28,7 +28,31 @@ These are the global settings for the operations in KubernetesConfiguration.
 title: OperationsClient
 description: Operations Client
 openapi-type: arm
-tag: package-2024-11
+tag: package-2025-04
+```
+
+---
+
+### Tag: package-2025-04
+
+These settings apply only when `--tag=package-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04'
+input-file:
+  - stable/2025-04-01/operations.json
+suppressions:
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: OperationsApiTenantLevelOnly
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: ResourceNameRestriction
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: OperationsApiResponseSchema
+    from: operations.json
+    reason: Existing service contract needs to be backward compatible.            
 ```
 
 ---
