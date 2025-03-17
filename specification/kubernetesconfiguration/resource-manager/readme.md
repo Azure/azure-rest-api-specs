@@ -39,6 +39,15 @@ These settings apply only when `--tag=package-2025-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-04-01'
 input-file:
+  - Microsoft.KubernetesConfiguration/operations/stable/2025-04-01/operations.json
+```
+
+### Tag: package-2025-04-01
+
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-01'
+input-file:
   - Microsoft.KubernetesConfiguration/fluxConfigurations/stable/2025-04-01/fluxconfiguration.json
 ```
 
