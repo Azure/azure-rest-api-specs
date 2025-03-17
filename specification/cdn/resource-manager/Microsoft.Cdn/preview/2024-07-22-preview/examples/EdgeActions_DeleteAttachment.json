@@ -1,0 +1,23 @@
+{
+  "operationId": "EdgeActions_DeleteAttachment",
+  "title": "DeleteAttachment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-07-22-preview",
+    "edgeActionName": "edgeAction1",
+    "body": {
+      "attachedResourceId": "/subscriptions/sub1/resourceGroups/rs1/providers/Microsoft.Cdn/Profiles/myProfile/afdEndpoints/ep1/routes/route1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2024-07-22-preview"
+      }
+    }
+  }
+}
