@@ -141,7 +141,9 @@ model CredentialsSASAuth {
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
 #suppress "@azure-tools/typespec-azure-core/no-enum"
 @doc("The Type (or category) of the connection")
-enum ConnectionType {
+union ConnectionType {
+  string,
+
   @doc("Azure OpenAI Service")
   AzureOpenAI: "AzureOpenAI", //TODO: In Python this results in .AZURE_OPEN_AI. How do I make it .AZURE_OPENAI?
 
