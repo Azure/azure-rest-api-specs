@@ -368,7 +368,7 @@ model Entity is EntityInfo {
   version?: int32 = 1;
 
   @doc("Indicates if the entity is the default entity.")
-  isDefault: boolean;
+  defaultEntity: boolean;
 
   @doc("The metadata tags associated with the entity.")
   tags: EntityMetadata;
@@ -381,7 +381,7 @@ model Entity is EntityInfo {
   dtdlSchema?: Record<unknown>;
 
   @doc("Indicates if the entity is a base entity.")
-  isBaseEntity?: boolean;
+  baseEntity?: boolean;
 
   @doc("The storage information of the entity.")
   storageInfo: StorageInfo;

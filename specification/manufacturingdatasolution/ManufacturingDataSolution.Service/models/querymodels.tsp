@@ -87,7 +87,7 @@ model QueryRequest is BasicQueryRequest {
 model PagedQueryRequest is QueryRequest {
   @doc("The page index.")
   @pageIndex
-  pageIndex: int32 = 1;
+  pageIndex?: int32 = 1;
 }
 
 @doc("Represents a paged result of query results.")
@@ -147,7 +147,7 @@ model QueryRequestRelatedNodes is BasicQueryRequest {
 
   @doc("The page index.")
   @pageIndex
-  pageIndex: int32 = 1;
+  pageIndex?: int32 = 1;
 }
 
 @doc("Represents a paged result of related entity data.")

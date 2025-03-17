@@ -1,12 +1,10 @@
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./../models/common.tsp";
 import "./../models/servicemodels.tsp";
 
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
-using MdsCommon;
 using TypeSpec.Http;
 using ServiceModels;
 using Azure.Core;
@@ -20,7 +18,7 @@ namespace MdsSolution.ServiceApis {
   @get
   op getServiceHealth(
     @doc("API version.") @query("api-version") apiVersion: string,
-  ): MdsHealth | ErrorResponse;
+  ): MdsHealth | Azure.Core.Foundations.ErrorResponse;
 
   @doc("Get the status of an entity job.")
   op getEntityJobStatus is Operations.ResourceRead<JobStatusResponse>;

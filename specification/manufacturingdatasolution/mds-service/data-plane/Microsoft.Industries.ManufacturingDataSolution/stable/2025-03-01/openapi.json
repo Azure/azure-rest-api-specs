@@ -846,12 +846,12 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/MdsCommon.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
-                "description": "The error code."
+                "description": "String error code indicating what went wrong."
               }
             }
           }
@@ -1261,6 +1261,14 @@
         "description": "Get the ingestion status.",
         "parameters": [
           {
+            "name": "api-version",
+            "in": "query",
+            "description": "API version.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
             "name": "operators",
             "in": "query",
             "description": "Time series operator.",
@@ -1300,7 +1308,7 @@
             }
           },
           {
-            "name": "startTime",
+            "name": "startedAt",
             "in": "query",
             "description": "Start time.",
             "required": false,
@@ -1308,7 +1316,7 @@
             "format": "date-time"
           },
           {
-            "name": "endTime",
+            "name": "endedAt",
             "in": "query",
             "description": "End time.",
             "required": false,
@@ -1318,9 +1326,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Represents a generic response.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/QueryModels.IngestionStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -1734,23 +1754,6 @@
         ]
       }
     },
-    "MdsCommon.ErrorResponse": {
-      "type": "object",
-      "description": "Represents an error response.",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "error": {
-          "type": "string",
-          "description": "The error details."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
     "MdsCommon.JobStatus": {
       "type": "string",
       "description": "Represents the status of a long-running operation.",
@@ -2111,8 +2114,7 @@
         }
       },
       "required": [
-        "entityName",
-        "pageIndex"
+        "entityName"
       ]
     },
     "QueryModels.PagedQueryResult": {
@@ -2336,8 +2338,7 @@
         }
       },
       "required": [
-        "entityName",
-        "pageIndex"
+        "entityName"
       ]
     },
     "QueryModels.QueryResult": {
@@ -2806,7 +2807,7 @@
           "description": "The version of the entity.",
           "default": 1
         },
-        "isDefault": {
+        "defaultEntity": {
           "type": "boolean",
           "description": "Indicates if the entity is the default entity."
         },
@@ -2823,7 +2824,7 @@
           "description": "The DTDL schema of the entity.",
           "additionalProperties": {}
         },
-        "isBaseEntity": {
+        "baseEntity": {
           "type": "boolean",
           "description": "Indicates if the entity is a base entity."
         },
@@ -2838,7 +2839,7 @@
       },
       "required": [
         "name",
-        "isDefault",
+        "defaultEntity",
         "tags",
         "storageInfo",
         "semanticRelevantFlag"

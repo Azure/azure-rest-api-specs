@@ -1,35 +1,36 @@
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "./../models/common.tsp";
 import "./../models/querymodels.tsp";
 
 using TypeSpec.Rest;
-using MdsCommon;
 using QueryModels;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @versioned(MdsSolution.Versions)
 namespace MdsSolution.QueryApis {
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is not a versioned operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
   @doc("Get the ingestion status.")
   @route("query/ingestionStatus")
   @get
   op getIngestionStatus(
+    @doc("API version.")
+    @query("api-version")
+    apiVersion: string,
+
     @doc("Time series operator.")
     @query
     operators?: TimeSeriesOperator,
 
     @doc("Start time.")
     @query
-    startTime?: utcDateTime,
+    startedAt?: utcDateTime,
 
     @doc("End time.")
     @query
-    endTime?: utcDateTime,
-  ): GenericOkResponse<IngestionStatusResponse>;
+    endedAt?: utcDateTime,
+  ): IngestionStatusResponse | Azure.Core.Foundations.ErrorResponse;
 
   @doc("Query the data.")
   @action("entityData")
