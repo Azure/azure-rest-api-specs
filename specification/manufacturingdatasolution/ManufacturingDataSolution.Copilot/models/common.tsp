@@ -48,14 +48,14 @@ union Choice {
   string,
 }
 
-@doc("Instruction Status Enums")
+@doc("Resource Status Enums")
 union ResourceState {
-  @doc("Instruction is active")
+  @doc("Resource is active")
   Active: "Active",
 
-  @doc("Instruction is inactive")
+  @doc("Resource is inactive")
   Inactive: "Inactive",
 
-  @doc("Extensible status type")
+  @doc("Extensible state type")
   string,
 }

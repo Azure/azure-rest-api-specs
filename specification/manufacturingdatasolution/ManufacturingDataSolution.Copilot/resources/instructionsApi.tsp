@@ -32,7 +32,7 @@ interface InstructionServiceClient {
   list is apiOperations.ResourceList<
     Instruction,
     QueryParametersTrait<{
-      @doc("Get all active instructions by status.")
+      @doc("Get all active instructions by state.")
       @query
       state: ResourceState;
     }>

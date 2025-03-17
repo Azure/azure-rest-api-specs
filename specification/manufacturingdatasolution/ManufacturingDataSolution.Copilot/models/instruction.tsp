@@ -47,7 +47,7 @@ model Instruction {
   @doc("audit record for the instruction")
   administrativeDetails: AdministrativeDetails;
 
-  @doc("Status for the instruction")
+  @doc("state for the instruction")
   state: ResourceState;
 }
 
@@ -60,7 +60,7 @@ model InstructionVersion {
   @visibility(Lifecycle.Read)
   version: string;
 
-  @doc("Status for the instruction")
+  @doc("State for the instruction")
   @visibility(Lifecycle.Read)
   state: ResourceState;
 
@@ -82,7 +82,7 @@ model InstructionVersion {
 
 @doc("Instruction Patch Request")
 model InstructionPatchRequest {
-  @doc("The instruction status.")
+  @doc("The instruction state.")
   state: ResourceState;
 }
 
@@ -223,6 +223,6 @@ model AdministrativeDetails {
 
 @doc("This is the patch request to update the status of instruction")
 model UpdateStatusRequest {
-  @doc("status of the instruction")
+  @doc("state of the instruction")
   state: ResourceState;
 }
