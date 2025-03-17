@@ -2155,7 +2155,29 @@
           ],
           "x-ms-enum": {
             "name": "SharedPrivateLinkResourceStatus",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Pending",
+                "name": "Pending",
+                "description": "The shared private link resource has been created and is pending approval."
+              },
+              {
+                "value": "Approved",
+                "name": "Approved",
+                "description": "The shared private link resource is approved and is ready for use."
+              },
+              {
+                "value": "Rejected",
+                "name": "Rejected",
+                "description": "The shared private link resource has been rejected and cannot be used."
+              },
+              {
+                "value": "Disconnected",
+                "name": "Disconnected",
+                "description": "The shared private link resource has been removed from the service."
+              }
+            ]
           }
         },
         "provisioningState": {
@@ -2170,7 +2192,34 @@
           ],
           "x-ms-enum": {
             "name": "SharedPrivateLinkResourceProvisioningState",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Updating",
+                "name": "Updating",
+                "description": "The shared private link resource is in the process of being created along with other resources for it to be fully functional."
+              },
+              {
+                "value": "Deleting",
+                "name": "Deleting",
+                "description": "The shared private link resource is in the process of being deleted."
+              },
+              {
+                "value": "Failed",
+                "name": "Failed",
+                "description": "The shared private link resource has failed to be provisioned or deleted."
+              },
+              {
+                "value": "Succeeded",
+                "name": "Succeeded",
+                "description": "The shared private link resource has finished provisioning and is ready for approval."
+              },
+              {
+                "value": "Incomplete",
+                "name": "Incomplete",
+                "description": "Provisioning request for the shared private link resource has been accepted but the process of creation has not commenced yet."
+              }
+            ]
           }
         }
       },
