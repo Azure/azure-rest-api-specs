@@ -54,4 +54,10 @@ union ConnectionType {
 
   @doc("Generic connection that uses API Key authentication")
   APIKey: "ApiKey",
+
+  @doc("Application Insights")
+  ApplicationInsights: "AppInsights",
+
+  @doc("Custom Keys")
+  Custom: "CustomKeys",
 }
