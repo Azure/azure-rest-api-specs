@@ -1159,6 +1159,29 @@ op createTaskCollectionCustomization is Azure.Batch.PostOperationNew<
   "java"
 );
 
+// Delete Task Operation
+@doc("Optional parameters for Delete Task operation.")
+model DeleteBatchTaskOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Delete Task operation.")
+@route("/jobs/{jobId}/tasks/{taskId}")
+op deleteTaskCustomization is Azure.Batch.DeleteOperationNew<
+  {
+    ...Azure.Batch.DeleteTaskRequiredParameters;
+
+    @doc("Optional parameters for Delete Task operation.")
+    options?: DeleteBatchTaskOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.DeleteTaskResponse
+>;
+
+@@override(Azure.Batch.Tasks.deleteTask, deleteTaskCustomization, "java");
+
 // List SubTasks Operation
 @doc("Optional parameters for List SubTasks operation.")
 model ListBatchSubTasksOptions {

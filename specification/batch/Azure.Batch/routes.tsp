@@ -1324,6 +1324,22 @@ alias CreateTaskCollectionParameters = {
   taskCollection: BatchTaskGroup;
 };
 
+alias DeleteTaskRequiredParameters = {
+  @doc("The ID of the Job from which to delete the Task.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task to delete.")
+  @path
+  taskId: string;
+};
+
+alias DeleteTaskResponse = BatchClientResponseHeaders & {
+  @doc("A process exit code.")
+  @statusCode
+  code: "200";
+};
+
 alias ListSubTasksRequiredParameters = {
   @doc("The ID of the Job.")
   @path
@@ -1458,22 +1474,13 @@ interface Tasks {
     background.
     """)
   @route("/jobs/{jobId}/tasks/{taskId}")
-  @clientName("deleteTaskInternal", "java")
-  deleteTask is DeleteOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job from which to delete the Task.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task to delete.")
-      @path
-      taskId: string;
+  deleteTask is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...DeleteTaskRequiredParameters;
     },
-    BatchClientResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "200";
-    }
+    DeleteTaskResponse
   >;
 
   @summary("Gets information about the specified Task.")
