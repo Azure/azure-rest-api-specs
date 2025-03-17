@@ -102,7 +102,7 @@ export async function extractInputs(github, context, core) {
       inputs = {
         owner: context.payload.repository.owner.login,
         repo: context.payload.repository.name,
-        head_sha: context.payload.check_run.head_sha,
+        head_sha: checkRun.head_sha,
         ado_build_id: match[2],
         ado_project_url: match[1],
       };
@@ -264,7 +264,7 @@ export async function extractInputs(github, context, core) {
     inputs = {
       owner: context.payload.repository.owner.login,
       repo: context.payload.repository.name,
-      head_sha: context.payload.check_run.head_sha,
+      head_sha: checkRun.head_sha,
       ado_build_id: match[2],
       ado_project_url: match[1],
     };
