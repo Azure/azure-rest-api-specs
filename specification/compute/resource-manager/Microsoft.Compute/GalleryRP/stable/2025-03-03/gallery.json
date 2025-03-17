@@ -1400,6 +1400,536 @@
         }
       }
     },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{galleryScriptName}": {
+    "put": {
+      "tags": [
+        "GalleryScripts"
+      ],
+      "operationId": "GalleryScripts_CreateOrUpdate",
+      "description": "Create or update a Gallery Script Definition. Gallery scripts allow the storage, sharing and reuse of common scripts",
+      "parameters": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "galleryName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the Gallery in which the Script Definition is to be created."
+        },
+        {
+          "name": "galleryScriptName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Definition to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+        },
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "galleryScript",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GalleryScript"
+          },
+          "description": "Parameters supplied to the create or update gallery Script operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/GalleryScript"
+          }
+        },
+        "201": {
+          "description": "Created",
+          "schema": {
+            "$ref": "#/definitions/GalleryScript"
+          }
+        },
+        "202": {
+          "description": "Accepted",
+          "schema": {
+            "$ref": "#/definitions/GalleryScript"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-examples": {
+        "Create or update a simple gallery Script.": {
+          "$ref": "./examples/galleryExamples/GalleryScript_Create.json"
+        }
+      }
+    },
+    "patch": {
+      "tags": [
+        "GalleryScripts"
+      ],
+      "operationId": "GalleryScripts_Update",
+      "description": "Update a gallery Script Definition.",
+      "parameters": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "galleryName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the Gallery in which the Script Definition is to be updated."
+        },
+        {
+          "name": "galleryScriptName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+        },
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "galleryScript",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GalleryScriptUpdate"
+          },
+          "description": "Parameters supplied to the update gallery Script operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/GalleryScript"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-examples": {
+        "Update a simple gallery Script.": {
+          "$ref": "./examples/galleryExamples/GalleryScript_Update.json"
+        }
+      }
+    },
+    "get": {
+      "tags": [
+        "GalleryScripts"
+      ],
+      "operationId": "GalleryScripts_Get",
+      "description": "Retrieves information about a gallery Script Definition.",
+      "parameters": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "galleryName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the Gallery from which the Script Definitions are to be retrieved."
+        },
+        {
+          "name": "galleryScriptName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Definition to be retrieved."
+        },
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/GalleryScript"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Get a gallery Script.": {
+          "$ref": "./examples/galleryExamples/GalleryScript_Get.json"
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "GalleryScripts"
+      ],
+      "operationId": "GalleryScripts_Delete",
+      "description": "Delete a gallery Script.",
+      "parameters": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "galleryName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the Gallery in which the Script Definition is to be deleted."
+        },
+        {
+          "name": "galleryScriptName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Definition to be deleted."
+        },
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK"
+        },
+        "202": {
+          "description": "Accepted"
+        },
+        "204": {
+          "description": "No Content"
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-examples": {
+        "Delete a gallery Script.": {
+          "$ref": "./examples/galleryExamples/GalleryScript_Delete.json"
+        }
+      }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{galleryScriptName}/versions/{galleryScriptVersionName}": {
+    "put": {
+      "tags": [
+        "GalleryScriptVersions"
+      ],
+      "operationId": "GalleryScriptVersions_CreateOrUpdate",
+      "description": "Create or update a gallery Script Version. Script versions helps save different states/iterations of a Gallery script. They are referred in format: <MajorVersion>.<MinorVersion>.<Patch>",
+      "parameters": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "galleryName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the Gallery in which the Script Definition resides."
+        },
+        {
+          "name": "galleryScriptName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Definition in which the Script Version is to be created."
+        },
+        {
+          "name": "galleryScriptVersionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+        },
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "galleryScriptVersion",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GalleryScriptVersion"
+          },
+          "description": "Parameters supplied to the create or update gallery Script Version operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/GalleryScriptVersion"
+          }
+        },
+        "201": {
+          "description": "Created",
+          "schema": {
+            "$ref": "#/definitions/GalleryScriptVersion"
+          }
+        },
+        "202": {
+          "description": "Accepted",
+          "schema": {
+            "$ref": "#/definitions/GalleryScriptVersion"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-examples": {
+        "Create or update a simple gallery Script Version.": {
+          "$ref": "./examples/galleryExamples/GalleryScriptVersion_Create.json"
+        }
+      }
+    },
+    "patch": {
+      "tags": [
+        "GalleryScriptVersions"
+      ],
+      "operationId": "GalleryScriptVersions_Update",
+      "description": "Update a gallery Script Version.",
+      "parameters": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "galleryName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the Gallery in which the Script Definition resides."
+        },
+        {
+          "name": "galleryScriptName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Definition in which the Script Version is to be updated."
+        },
+        {
+          "name": "galleryScriptVersionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+        },
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "name": "galleryScriptVersion",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GalleryScriptVersionUpdate"
+          },
+          "description": "Parameters supplied to the update gallery Script Version operation."
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/GalleryScriptVersion"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-examples": {
+        "Update a simple gallery Script Version.": {
+          "$ref": "./examples/galleryExamples/GalleryScriptVersion_Update.json"
+        }
+      }
+    },
+    "get": {
+      "tags": [
+        "GalleryScriptVersions"
+      ],
+      "operationId": "GalleryScriptVersions_Get",
+      "description": "Retrieves information about a gallery Script Version.",
+      "parameters": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "galleryName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the Gallery in which the Script Definition resides."
+        },
+        {
+          "name": "galleryScriptName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Definition in which the Script Version resides."
+        },
+        {
+          "name": "galleryScriptVersionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Version to be retrieved."
+        },
+        {
+          "name": "$expand",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "The expand expression to apply on the operation.",
+          "enum": [
+            "ReplicationStatus",
+            "UefiSettings"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationStatusTypes",
+            "modelAsString": true
+          }
+        },
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/GalleryScriptVersion"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Get a gallery Script Version.": {
+          "$ref": "./examples/galleryExamples/GalleryScriptVersion_Get.json"
+        },
+        "Get a gallery Script Version with replication status.": {
+          "$ref": "./examples/galleryExamples/GalleryScriptVersion_Get_WithReplicationStatus.json"
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "GalleryScriptVersions"
+      ],
+      "operationId": "GalleryScriptVersions_Delete",
+      "description": "Delete a gallery Script Version.",
+      "parameters": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "galleryName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the Gallery in which the Script Definition resides."
+        },
+        {
+          "name": "galleryScriptName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Definition in which the Script Version resides."
+        },
+        {
+          "name": "galleryScriptVersionName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the gallery Script Version to be deleted."
+        },
+        {
+          "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK"
+        },
+        "202": {
+          "description": "Accepted"
+        },
+        "204": {
+          "description": "No Content"
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-examples": {
+        "Delete a gallery Script Version.": {
+          "$ref": "./examples/galleryExamples/GalleryScriptVersion_Delete.json"
+        }
+      }
+    }
+  },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries": {
       "get": {
         "tags": [
@@ -1684,6 +2214,111 @@
         "x-ms-examples": {
           "List gallery Application Versions in a gallery Application Definition.": {
             "$ref": "./examples/galleryExamples/GalleryApplicationVersion_ListByGalleryApplication.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts": {
+      "get": {
+        "tags": [
+          "GalleryScripts"
+        ],
+        "operationId": "GalleryScripts_ListByGallery",
+        "description": "List gallery Script Definitions in a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Gallery from which Script Definitions are to be listed."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryScriptList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery Scripts in a gallery.": {
+            "$ref": "./examples/galleryExamples/GalleryScript_ListByGallery.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{galleryScriptName}/versions": {
+      "get": {
+        "tags": [
+          "GalleryScriptVersions"
+        ],
+        "operationId": "GalleryScriptVersions_ListByGalleryScript",
+        "description": "List gallery Script Versions in a gallery Script Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Gallery in which the Script Definition resides."
+          },
+          {
+            "name": "galleryScriptName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Gallery Script Definition from which the Script Versions are to be listed."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryScriptVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery Script Versions in a gallery Script Definition.": {
+            "$ref": "./examples/galleryExamples/GalleryScriptVersion_ListByGalleryScript.json"
           }
         },
         "x-ms-pageable": {
@@ -2930,15 +3565,12 @@
     },
     "GalleryApplicationCustomActionParameter": {
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenericGalleryParameter"
+        }
+      ],
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the custom action.  Must be unique within the Gallery Application Version."
-        },
-        "required": {
-          "type": "boolean",
-          "description": "Indicates whether this parameter must be passed when running the custom action."
-        },
         "type": {
           "type": "string",
           "description": "Specifies the type of the custom action parameter. Possible values are: String, ConfigurationDataBlob or LogOutputBlob",
@@ -2951,10 +3583,229 @@
             "name": "GalleryApplicationCustomActionParameterType",
             "modelAsString": false
           }
+        }
+      },
+      "description": "The definition of a parameter that can be passed to a custom action of a Gallery Application Version."
+    },
+    "GalleryScript": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryScriptProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the gallery Script Definition that you want to create or update."
+    },
+    "GalleryScriptUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryScriptProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResourceDefinition"
+        }
+      ],
+      "description": "Specifies information about the gallery Script Definition that you want to update."
+    },
+    "GalleryScriptProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of this gallery Script Definition resource. This property is updatable."
+        },
+        "eula": {
+          "type": "string",
+          "description": "The Eula agreement for the gallery Script Definition."
+        },
+        "privacyStatementUri": {
+          "type": "string",
+          "description": "The privacy statement uri."
+        },
+        "releaseNoteUri": {
+          "type": "string",
+          "description": "The release note uri."
+        },
+        "endOfLifeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of life date of the gallery Script Definition. This property can be used for decommissioning purposes. This property is updatable."
+        },
+        "supportedOSType": {
+          "type": "string",
+          "description": "This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "supportedOSType"
+      ],
+      "description": "Describes the properties of a gallery Script Definition."
+    },
+    "GalleryScriptVersion": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryScriptVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the gallery Script Version that you want to create or update."
+    },
+    "GalleryScriptVersionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryScriptVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResourceDefinition"
+        }
+      ],
+      "description": "Specifies information about the gallery Script Version that you want to update."
+    },
+    "GalleryScriptVersionProperties": {
+      "properties": {
+        "publishingProfile": {
+          "$ref": "#/definitions/GalleryScriptVersionPublishingProfile"
+        },
+        "safetyProfile": {
+          "$ref": "#/definitions/GalleryScriptVersionSafetyProfile"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/GalleryProvisioningState"
+        },
+        "replicationStatus": {
+          "readOnly": true,
+          "$ref": "#/definitions/ReplicationStatus"
+        }
+      },
+      "required": [
+        "publishingProfile"
+      ],
+      "description": "Describes the properties of a gallery script version."
+    },
+    "GalleryScriptVersionPublishingProfile": {
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ScriptSource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactPublishingProfileBase"
+        }
+      ],
+      "required": [
+        "source"
+      ],
+      "description": "The publishing profile of a gallery image version."
+    },
+    "GalleryScriptVersionSafetyProfile": {
+      "type": "object",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactSafetyProfileBase"
+        }
+      ],
+      "description": "The safety profile of the Gallery Script Version."
+    },
+    "ScriptSource": {
+      "properties": {
+        "scriptLink": {
+          "type": "string",
+          "description": "Required. The link of the source script, it must be a readable storage blob with SAS URI or publicly accessible URI or managed identity enabled."
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryScriptParameter"
+          },
+          "description": "Optional. Any input parameters that needs to passed to the script and are accessed within the script for its execution."
+        }
+      },
+      "required": [
+        "scriptLink"
+      ],
+      "description": "The source script from which the Script Version is going to be created."
+    },
+    "GalleryScriptParameter": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenericGalleryParameter"
+        }
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the Gallery Script parameter. Possible values are: String, Int, Double, Boolean, Enum",
+          "enum": [
+            "String",
+            "Int",
+            "Double",
+            "Boolean",
+            "Enum"
+          ],
+          "x-ms-enum": {
+            "name": "GalleryScriptParameterType",
+            "modelAsString": false
+          }
+        },
+        "minValue": {
+          "type": "string",
+          "description": "The minimum value of parameter."
+        },
+        "maxValue": {
+          "type": "string",
+          "description": "The minimum value of parameter."
+        },
+        "enumValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": " A list of permissible values. Only applies to the Enum type."
+        }
+      },
+      "description": "The definition of a parameter that can be passed to a script of a Gallery Script Version."
+    },
+    "GenericGalleryParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the parameter.."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Indicates whether this parameter must be passed."
         },
         "defaultValue": {
           "type": "string",
-          "description": "The default value of the parameter.  Only applies to string types"
+          "description": "The default value of the parameter, only applies to string types."
         },
         "description": {
           "type": "string",
@@ -2964,7 +3815,7 @@
       "required": [
         "name"
       ],
-      "description": "The definition of a parameter that can be passed to a custom action of a Gallery Application Version."
+      "description": "The definition of a generic gallery parameter."
     },
     "UserArtifactSource": {
       "properties": {
@@ -3935,6 +4786,44 @@
         "value"
       ],
       "description": "The List Gallery Application version operation response."
+    },
+    "GalleryScriptList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryScript"
+          },
+          "description": "A list of Gallery Scripts."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Script Definitions in the Gallery. Call ListNext() with this to fetch the next page of gallery Script Definitions."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Gallery Scripts operation response."
+    },
+    "GalleryScriptVersionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryScriptVersion"
+          },
+          "description": "A list of gallery Script Versions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of gallery Script Versions. Call ListNext() with this to fetch the next page of gallery Script Versions."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Gallery Script version operation response."
     },
     "GallerySoftDeletedResourceList": {
       "properties": {
