@@ -1340,6 +1340,28 @@ alias DeleteTaskResponse = BatchClientResponseHeaders & {
   code: "200";
 };
 
+alias GetTaskRequiredParameters = {
+  @doc("The ID of the Job that contains the Task.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task to get information about.")
+  @path
+  taskId: string;
+};
+
+alias GetTaskOptionalParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
 alias ListSubTasksRequiredParameters = {
   @doc("The ID of the Job.")
   @path
@@ -1490,26 +1512,12 @@ interface Tasks {
     information about subtasks.
     """)
   @route("/jobs/{jobId}/tasks/{taskId}")
-  @clientName("getTaskInternal", "java")
-  getTask is ReadOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job that contains the Task.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task to get information about.")
-      @path
-      taskId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+  getTask is ReadOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...GetTaskRequiredParameters;
+      ...GetTaskOptionalParameters;
     },
     BatchTask & DataServiceResponseHeaders
   >;
