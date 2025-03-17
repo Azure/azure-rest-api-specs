@@ -940,6 +940,32 @@ op updateJobScheduleCustomization is Azure.Batch.UpdateOperationNew<
   "java"
 );
 
+// Replace Job Schedule Operation
+@doc("Optional parameters for Replace Job Schedule operation.")
+model ReplaceBatchJobScheduleOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Replace Job Schedule operation.")
+@route("/jobschedules/{jobScheduleId}")
+op replaceJobScheduleCustomization is Azure.Batch.ReplaceOperationNew<
+  {
+    ...Azure.Batch.ReplaceJobScheduleRequiredParameters;
+
+    @doc("Optional parameters for Replace Job Schedule operation.")
+    options?: ReplaceBatchJobScheduleOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.RequestSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.JobSchedules.replaceJobSchedule,
+  replaceJobScheduleCustomization,
+  "java"
+);
+
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
 model CreateBatchJobScheduleOptions {

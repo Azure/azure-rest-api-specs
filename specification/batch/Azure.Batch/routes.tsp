@@ -1070,6 +1070,16 @@ alias UpdateJobScheduleRequiredParameters = {
   jobSchedule: BatchJobScheduleUpdateContent;
 };
 
+alias ReplaceJobScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule to update.")
+  @path
+  jobScheduleId: string;
+
+  @doc("A Job Schedule with updated properties")
+  @bodyRoot
+  jobSchedule: BatchJobSchedule;
+};
+
 alias CreateJobScheduleParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
@@ -1174,16 +1184,11 @@ interface JobSchedules {
     running Jobs are unaffected.
     """)
   @route("/jobschedules/{jobScheduleId}")
-  @clientName("replaceJobScheduleInternal", "java")
-  replaceJobSchedule is ReplaceOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to update.")
-      @path
-      jobScheduleId: string;
-
-      @doc("A Job Schedule with updated properties")
-      @bodyRoot
-      jobSchedule: BatchJobSchedule;
+  replaceJobSchedule is ReplaceOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...ReplaceJobScheduleRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
