@@ -19,9 +19,7 @@ using TypeSpec.Http;
     }
   ]>
 )
-@service({
-  title: "DevCenter",
-})
+@service(#{ title: "DevCenter" })
 @server(
   "{endpoint}",
   "DevCenter service",
@@ -63,4 +61,8 @@ enum APIVersions {
   @doc("The 2025-02-01 service API version")
   @useDependency(Versions.v1_0_Preview_2)
   v2025_02_01: "2025-02-01",
+
+  @doc("The 2025-03-01-preview service API version")
+  @useDependency(Versions.v1_0_Preview_2)
+  v2025_03_01_preview: "2025-03-01-preview",
 }
