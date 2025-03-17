@@ -27,7 +27,9 @@ alias languageOperations = ResourceOperations<
 /**
  * Lists the deployments belonging to a project.
  */
-op listDeployments is languageOperations.ResourceList<
+@clientName("listDeployments", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op conversationAuthoringListDeployments is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectDeployment,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -35,7 +37,9 @@ op listDeployments is languageOperations.ResourceList<
 /**
  * Lists the existing projects.
  */
-op listProjects is languageOperations.ResourceList<
+@clientName("listProjects", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op conversationAuthoringListProjects is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -43,7 +47,9 @@ op listProjects is languageOperations.ResourceList<
 /**
  * Lists the supported languages for the given project type.
  */
-op listSupportedLanguages is languageOperations.ResourceList<
+@clientName("listSupportedLanguages", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op conversationAuthoringListSupportedLanguages is languageOperations.ResourceList<
   AnalyzeConversationAuthoringSupportedLanguage,
   ListQueryParametersTrait<StandardListQueryParameters &
     ProjectKindQueryParameter>
@@ -52,8 +58,10 @@ op listSupportedLanguages is languageOperations.ResourceList<
 /**
  * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
  */
+@clientName("listAssignedResourceDeployments", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2023_04_15_preview)
-op listAssignedResourceDeployments is languageOperations.ResourceList<
+op conversationAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -61,8 +69,10 @@ op listAssignedResourceDeployments is languageOperations.ResourceList<
 /**
  * Lists the deployments resources assigned to the project.
  */
+@clientName("listDeploymentResources", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2023_04_15_preview)
-op listDeploymentResources is languageOperations.ResourceList<
+op conversationAuthoringListDeploymentResources is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedDeploymentResource,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -70,7 +80,9 @@ op listDeploymentResources is languageOperations.ResourceList<
 /**
  * Lists the supported prebuilt entities that can be used while creating composed entities.
  */
-op listSupportedPrebuiltEntities is languageOperations.ResourceList<
+@clientName("listSupportedPrebuiltEntities", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op conversationAuthoringListSupportedPrebuiltEntities is languageOperations.ResourceList<
   AnalyzeConversationAuthoringPrebuiltEntity,
   ListQueryParametersTrait<StandardListQueryParameters &
     SupportedPrebuiltEntitiesQueryParameter>
@@ -79,7 +91,9 @@ op listSupportedPrebuiltEntities is languageOperations.ResourceList<
 /**
  * Lists the support training config version for a given project type.
  */
-op listTrainingConfigVersions is languageOperations.ResourceList<
+@clientName("listTrainingConfigVersions", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op conversationAuthoringListTrainingConfigVersions is languageOperations.ResourceList<
   AnalyzeConversationAuthoringTrainingConfigVersion,
   ListQueryParametersTrait<StandardListQueryParameters &
     ProjectKindQueryParameter>
@@ -88,7 +102,9 @@ op listTrainingConfigVersions is languageOperations.ResourceList<
 /**
  * Lists the non-expired training jobs created for a project.
  */
-op listTrainingJobs is languageOperations.ResourceList<
+@clientName("listTrainingJobs", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op conversationAuthoringListTrainingJobs is languageOperations.ResourceList<
   AnalyzeConversationAuthoringTrainingJobState,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -96,7 +112,9 @@ op listTrainingJobs is languageOperations.ResourceList<
 /**
  * Lists the trained models belonging to a project.
  */
-op listTrainedModels is languageOperations.ResourceList<
+@clientName("listTrainedModels", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op conversationAuthoringListTrainedModels is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -104,8 +122,10 @@ op listTrainedModels is languageOperations.ResourceList<
 /**
  * Lists the exported models belonging to a project.
  */
+@clientName("listExportedModels", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2024_11_15_preview)
-op listExportedModels is languageOperations.ResourceList<
+op conversationAuthoringListExportedModels is languageOperations.ResourceList<
   AnalyzeConversationAuthoringExportedTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;

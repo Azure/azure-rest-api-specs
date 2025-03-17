@@ -62,7 +62,7 @@
   "paths": {
     "/authoring/analyze-conversations/projects": {
       "get": {
-        "operationId": "ListProjects",
+        "operationId": "ConversationAuthoringListProjects",
         "description": "Lists the existing projects.",
         "parameters": [
           {
@@ -96,11 +96,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Projects": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListProjects.json"
           }
         },
         "x-ms-pageable": {
@@ -688,7 +683,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments": {
       "get": {
-        "operationId": "ListDeployments",
+        "operationId": "ConversationAuthoringListDeployments",
         "description": "Lists the deployments belonging to a project.",
         "parameters": [
           {
@@ -730,11 +725,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Deployments": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListDeployments.json"
           }
         },
         "x-ms-pageable": {
@@ -1304,7 +1294,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/models": {
       "get": {
-        "operationId": "ListTrainedModels",
+        "operationId": "ConversationAuthoringListTrainedModels",
         "description": "Lists the trained models belonging to a project.",
         "parameters": [
           {
@@ -1346,11 +1336,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Models": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListModels.json"
           }
         },
         "x-ms-pageable": {
@@ -1811,7 +1796,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/resources": {
       "get": {
-        "operationId": "ListDeploymentResources",
+        "operationId": "ConversationAuthoringListDeploymentResources",
         "description": "Lists the deployments resources assigned to the project.",
         "parameters": [
           {
@@ -1853,11 +1838,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Deployment Resources": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListDeploymentResources.json"
           }
         },
         "x-ms-pageable": {
@@ -2085,7 +2065,7 @@
     },
     "/authoring/analyze-conversations/projects/{projectName}/train/jobs": {
       "get": {
-        "operationId": "ListTrainingJobs",
+        "operationId": "ConversationAuthoringListTrainingJobs",
         "description": "Lists the non-expired training jobs created for a project.",
         "parameters": [
           {
@@ -2127,11 +2107,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful List Training Jobs": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListTrainingJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -2291,7 +2266,7 @@
     },
     "/authoring/analyze-conversations/projects/global/deployments/resources": {
       "get": {
-        "operationId": "ListAssignedResourceDeployments",
+        "operationId": "ConversationAuthoringListAssignedResourceDeployments",
         "description": "Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.",
         "parameters": [
           {
@@ -2327,11 +2302,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful List Assigned Resource Deployments": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListAssignedResourceDeployments.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2339,7 +2309,7 @@
     },
     "/authoring/analyze-conversations/projects/global/languages": {
       "get": {
-        "operationId": "ListSupportedLanguages",
+        "operationId": "ConversationAuthoringListSupportedLanguages",
         "description": "Lists the supported languages for the given project type.",
         "parameters": [
           {
@@ -2378,11 +2348,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Get Supported Languages": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSupportedLanguages.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2390,7 +2355,7 @@
     },
     "/authoring/analyze-conversations/projects/global/prebuilt-entities": {
       "get": {
-        "operationId": "ListSupportedPrebuiltEntities",
+        "operationId": "ConversationAuthoringListSupportedPrebuiltEntities",
         "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
         "parameters": [
           {
@@ -2432,11 +2397,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Successful Get Supported Prebuilt Entities": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSupportedPrebuiltEntities.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2444,7 +2404,7 @@
     },
     "/authoring/analyze-conversations/projects/global/training-config-versions": {
       "get": {
-        "operationId": "ListTrainingConfigVersions",
+        "operationId": "ConversationAuthoringListTrainingConfigVersions",
         "description": "Lists the support training config version for a given project type.",
         "parameters": [
           {
@@ -2481,11 +2441,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Supported Training Config Versions": {
-            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetSupportedTrainingConfigVersions.json"
           }
         },
         "x-ms-pageable": {

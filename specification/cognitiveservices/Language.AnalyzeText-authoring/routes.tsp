@@ -26,7 +26,9 @@ alias languageOperations = ResourceOperations<
 /**
  * Lists the existing projects.
  */
-op listProjects is languageOperations.ResourceList<
+@clientName("listProjects", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op textAnalysisAuthoringListProjects is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -34,7 +36,9 @@ op listProjects is languageOperations.ResourceList<
 /**
  * Lists the deployments belonging to a project.
  */
-op listDeployments is languageOperations.ResourceList<
+@clientName("listDeployments", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op textAnalysisAuthoringListDeployments is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectDeployment,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -42,8 +46,10 @@ op listDeployments is languageOperations.ResourceList<
 /**
  * Lists the exported models belonging to a project.
  */
+@clientName("listExportedModels", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2023_04_15_preview)
-op listExportedModels is languageOperations.ResourceList<
+op textAnalysisAuthoringListExportedModels is languageOperations.ResourceList<
   TextAnalysisAuthoringExportedTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -51,7 +57,9 @@ op listExportedModels is languageOperations.ResourceList<
 /**
  * Lists the trained models belonging to a project.
  */
-op listTrainedModels is languageOperations.ResourceList<
+@clientName("listTrainedModels", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op textAnalysisAuthoringListTrainedModels is languageOperations.ResourceList<
   TextAnalysisAuthoringProjectTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -59,8 +67,10 @@ op listTrainedModels is languageOperations.ResourceList<
 /**
  * Lists the deployments resources assigned to the project.
  */
+@clientName("listDeploymentResources", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2023_04_15_preview)
-op listDeploymentResources is languageOperations.ResourceList<
+op textAnalysisAuthoringListDeploymentResources is languageOperations.ResourceList<
   TextAnalysisAuthoringAssignedDeploymentResource,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -68,7 +78,9 @@ op listDeploymentResources is languageOperations.ResourceList<
 /**
  * Lists the non-expired training jobs created for a project.
  */
-op listTrainingJobs is languageOperations.ResourceList<
+@clientName("listTrainingJobs", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op textAnalysisAuthoringListTrainingJobs is languageOperations.ResourceList<
   TextAnalysisAuthoringTrainingJobState,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -76,8 +88,10 @@ op listTrainingJobs is languageOperations.ResourceList<
 /**
  * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
  */
+@clientName("listAssignedResourceDeployments", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2023_04_15_preview)
-op listAssignedResourceDeployments is languageOperations.ResourceList<
+op textAnalysisAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -85,8 +99,9 @@ op listAssignedResourceDeployments is languageOperations.ResourceList<
 /**
  * Lists the supported languages.
  */
+@clientName("getSupportedLanguages", "csharp")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
-op getSupportedLanguages is languageOperations.ResourceList<
+op textAnalysisAuthoringGetSupportedLanguages is languageOperations.ResourceList<
   TextAnalysisAuthoringSupportedLanguage,
   ListQueryParametersTrait<ProjectKindQueryParameter &
     StandardListQueryParameters>
@@ -95,9 +110,10 @@ op getSupportedLanguages is languageOperations.ResourceList<
 /**
  * Lists the supported prebuilt entities that can be used while creating composed entities.
  */
+@clientName("getSupportedPrebuiltEntities", "csharp")
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
 @added(Versions.v2023_04_15_preview)
-op getSupportedPrebuiltEntities is languageOperations.ResourceList<
+op textAnalysisAuthoringGetSupportedPrebuiltEntities is languageOperations.ResourceList<
   TextAnalysisAuthoringPrebuiltEntity,
   SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters
 >;
@@ -105,7 +121,9 @@ op getSupportedPrebuiltEntities is languageOperations.ResourceList<
 /**
  * Lists the support training config version for a given project type.
  */
-op listTrainingConfigVersions is languageOperations.ResourceList<
+@clientName("listTrainingConfigVersions", "csharp")
+#suppress "@azure-tools/typespec-azure-core/use-standard-names"
+op textAnalysisAuthoringListTrainingConfigVersions is languageOperations.ResourceList<
   TextAnalysisAuthoringTrainingConfigVersion,
   ListQueryParametersTrait<ProjectKindQueryParameter &
     StandardListQueryParameters>
