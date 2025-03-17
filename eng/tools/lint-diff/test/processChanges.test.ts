@@ -6,6 +6,7 @@ import {
   getAffectedSwaggers,
   getAffectedServices,
   getService,
+  reconcileChangedFilesAndTags,
 } from "../src/processChanges.js";
 
 describe("getSwaggerDependenciesMap", () => {
@@ -187,4 +188,43 @@ describe("getService", () => {
       await expect(() => getService(filePath)).toThrow("Could not find service for file path");
     },
   );
+});
+
+describe("reconcileChangedFilesAndTags", () => {
+  test.concurrent(
+    "if a tag is deleted in after and exists in before, remove the tag from before",
+    ({ expect }) => {
+      const before = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
+      const after = new Map<string, string[]>([["specification/1/readme.md", ["tag1"]]]);
+
+      const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
+      expect(beforeFinal).toEqual(
+        new Map<string, string[]>([["specification/1/readme.md", ["tag1"]]]),
+      );
+      expect(afterFinal).toEqual(after);
+    },
+  );
+
+  test.concurrent("does not change if there is no change", ({ expect }) => {
+    const before = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
+    const after = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
+
+    const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
+    expect(beforeFinal).toEqual(before);
+    expect(afterFinal).toEqual(after);
+  });
+
+  // TODO: Test this and ensure the behavior matches
+  test.concurrent("keeps a specification in before if it is deleted in after", ({ expect }) => {
+    const before = new Map<string, string[]>([["specification/1/readme.md", ["tag1", "tag2"]]]);
+    const after = new Map<string, string[]>();
+
+    const [beforeFinal, afterFinal] = reconcileChangedFilesAndTags(before, after);
+    expect(beforeFinal).toEqual(beforeFinal);
+    expect(afterFinal).toEqual(after);
+  });
+});
+
+describe("getRunList", () => {
+  // TODO:
 });

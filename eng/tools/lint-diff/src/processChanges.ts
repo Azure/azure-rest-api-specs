@@ -11,20 +11,6 @@ import {
 } from "./markdown-utils.js";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 
-type State = {
-  // TODO: Narrow this object to specific properties that are used in later
-  // steps.
-  rootPath: string;
-  existingChangedFiles: string[];
-  affectedServiceDirectories: Set<string>;
-  affectedSwaggerMap: Map<string, string[]>;
-  affectedReadmes: string[];
-  readmeTags: Map<string, Set<string>>;
-
-  // Final list of things to work on
-  changedFileAndTagsMap: Map<string, string[]>;
-};
-
 export async function getRunList(
   beforePath: string,
   afterPath: string,
@@ -58,7 +44,10 @@ export async function getRunList(
   return reconcileChangedFilesAndTags(beforeState, afterState);
 }
 
-export async function buildState(changedSpecFiles: string[], rootPath: string): Promise<State> {
+export async function buildState(
+  changedSpecFiles: string[],
+  rootPath: string,
+): Promise<Map<string, string[]>> {
   // Filter changed files to include only those that exist in the rootPath
   const existingChangedFiles = [];
   for (const file of changedSpecFiles) {
@@ -134,10 +123,6 @@ export async function buildState(changedSpecFiles: string[], rootPath: string): 
     changedFileAndTagsMap.set(readme, dedupedTags);
   }
 
-  // TODO: How do we ensure directly edited readme.md files are handled
-  // properly? e.g. is the whole file scanned or is it constrained to
-  // specific tags?
-
   // For readme files that have changed but there are no affected swaggers,
   // add them to the map with no tags
   for (const changedReadme of affectedReadmes) {
@@ -146,15 +131,7 @@ export async function buildState(changedSpecFiles: string[], rootPath: string): 
     }
   }
 
-  return {
-    rootPath,
-    existingChangedFiles,
-    affectedServiceDirectories,
-    affectedSwaggerMap,
-    affectedReadmes,
-    readmeTags,
-    changedFileAndTagsMap,
-  };
+  return changedFileAndTagsMap;
 }
 
 /**
@@ -164,15 +141,18 @@ export async function buildState(changedSpecFiles: string[], rootPath: string): 
  * @param after after the change
  * @returns maps of readme files and tags to scan
  */
-export function reconcileChangedFilesAndTags(before: State, after: State): Map<string, string[]>[] {
+export function reconcileChangedFilesAndTags(
+  before: Map<string, string[]>,
+  after: Map<string, string[]>,
+): Map<string, string[]>[] {
   const beforeFinal = new Map<string, string[]>();
   const afterFinal = new Map<string, string[]>();
 
   // Clone the maps so that changes to maps do not affect original object
-  for (const [readme, tags] of before.changedFileAndTagsMap.entries()) {
+  for (const [readme, tags] of before.entries()) {
     beforeFinal.set(readme, [...tags]);
   }
-  for (const [readme, tags] of after.changedFileAndTagsMap.entries()) {
+  for (const [readme, tags] of after.entries()) {
     afterFinal.set(readme, [...tags]);
   }
 

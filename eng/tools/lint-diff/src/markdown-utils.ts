@@ -144,13 +144,13 @@ export function getDocRawUrl(code: string) {
 const rpcInfoCache = new Map<string, string[]>();
 
 // TODO: Tests
-export async function getRelatedArmRpcFromDoc(ruleName: string) {
+export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[]> {
   if (ruleName == "FATAL") {
     return [];
   }
 
   if (rpcInfoCache.has(ruleName)) {
-    return rpcInfoCache.get(ruleName);
+    return rpcInfoCache.get(ruleName)!;
   }
   const docUrl = getDocRawUrl(ruleName);
   const rpcRules: string[] = [];

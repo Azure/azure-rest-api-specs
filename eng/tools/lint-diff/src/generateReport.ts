@@ -20,6 +20,8 @@ export type Source = {
   document: string;
   position: {
     line: number;
+    // TODO: this is misspelled in momentOfTruthUtils.ts. Is this value ever
+    // properly populated?
     colomn: number;
   };
 };
@@ -158,12 +160,17 @@ export async function generateReport(
       (v) => isFailure(v.level) || isWarning(v.level),
     );
 
-    const [newitems, existingItems] = await getNewItems(beforeViolations, afterViolations);
+    const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
     console.log(`New violations: ${newitems.length}`);
     console.log(`Existing violations: ${existingItems.length}`);
 
     newViolations.push(...newitems);
     existingViolations.push(...existingItems);
+  }
+
+  for (const newItem of newViolations) {
+    // TODO: Potential performance issue, make parallel
+    newItem.armRpcs = await getRelatedArmRpcFromDoc(newItem.code);
   }
 
   newViolations.sort(compareLintDiffViolations);
@@ -184,7 +191,7 @@ export async function generateReport(
 
     for (const violation of newViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(normalizePath(getFile(violation) || ""))}#L${getLine(violation)}](${getFileLink(compareSha, normalizePath(getFile(violation) || ""), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
     }
 
     outputMarkdown += "\n";
@@ -206,7 +213,7 @@ export async function generateReport(
 
     for (const violation of existingViolations.slice(0, 50)) {
       const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(normalizePath(getFile(violation) || ""))}#L${getLine(violation)}](${getFileLink(compareSha, normalizePath(getFile(violation) || ""), getLine(violation))}) |\n`;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) |\n`;
     }
 
     outputMarkdown += `\n`;
@@ -248,17 +255,27 @@ export function compareLintDiffViolations(a: LintDiffViolation, b: LintDiffViola
   return 0;
 }
 
+/**
+ * Returns relevant parts of a longer file path
+ * Input: /specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2025-01-01/service.json
+ * Output: Microsoft.RecoveryServices/stable/2025-01-01/service.json
+ * @param path path to a file in the repo
+ * @returns
+ */
 export function getPathSegment(path: string): string {
   return path.split("/").slice(-4).join("/");
 }
 
 export function getFileLink(sha: string, path: string, line: number | null = null) {
-  // TODO: Ensure proper path separator behavior (including, not including leaidng '/')
+  // Paths can sometimes contain a preceeding slash if coming from a nomralized
+  // filesystem path. In this case, remove it so the link doesn't contain two
+  // forward slashes.
+  const urlPath = path.startsWith("/") ? path.slice(1) : path;
   if (line === null) {
-    return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}${path}`;
+    return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}/${urlPath}`;
   }
 
-  return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}${path}#L${line}`;
+  return `https://github.com/Azure/azure-rest-api-specs/blob/${sha}/${urlPath}#L${line}`;
 }
 
 export function getDocUrl(id: string) {
@@ -272,13 +289,11 @@ export function getDocUrl(id: string) {
 /**
  * Normalize a path to be relative to a given directory.
  * @param path File path with separators from the current system
- * @param by A directory name to treat as the root (e.g. /specification/)
+ * @param from A directory name to treat as the root (e.g. /specification/)
  */
-// TODO: maybe use a different name so as not to be confused with path normalize
 // TODO: Review use of sep
-export function normalizePath(path: string, by: string = `${sep}specification${sep}`): string {
-  const indexOfBy = path.indexOf(by);
-  // TODO: how to handle case where `by` is not found?
+export function relativizePath(path: string, from: string = `${sep}specification${sep}`): string {
+  const indexOfBy = path.lastIndexOf(from);
   if (indexOfBy === -1) {
     return path;
   }
@@ -286,27 +301,20 @@ export function normalizePath(path: string, by: string = `${sep}specification${s
   return path.substring(indexOfBy);
 }
 
-export function getFile(lintDiffViolation: LintDiffViolation) {
-  try {
-    return lintDiffViolation.source?.[0]?.document;
-  } catch (error) {
-    return undefined;
-  }
+export function getFile(lintDiffViolation: LintDiffViolation): string {
+  return lintDiffViolation.source?.[0]?.document || "";
 }
 
 export function getLine(lintDiffViolation: LintDiffViolation): number | undefined {
-  try {
-    return lintDiffViolation.source?.[0]?.position?.line;
-  } catch (error) {
-    return undefined;
+  const result = lintDiffViolation.source?.[0]?.position?.line;
+  if (typeof result === "number" && Number.isFinite(result)) {
+    return result;
   }
+
+  return undefined;
 }
 
-function iconFor(type: string, num: unknown = undefined) {
-  if (num === 0) {
-    return ":white_check_mark:";
-  }
-
+export function iconFor(type: string) {
   if (type.toLowerCase().includes("error")) {
     return ":x:";
   } else {
@@ -352,25 +360,18 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
 }
 
 export function isFailure(level: string) {
-  if (level === undefined) {
-    return false;
-  }
-
   return ["error", "fatal"].includes(level.toLowerCase());
 }
 
 export function isWarning(level: string) {
-  if (level === undefined) {
-    return false;
-  }
-
   return level.toLowerCase() === "warning";
 }
 
-export async function getNewItems(
+// This logic is duplicated from momentOfTruthPostProcessing.ts:140
+export function getNewItems(
   before: LintDiffViolation[],
   after: LintDiffViolation[],
-): Promise<[LintDiffViolation[], LintDiffViolation[]]> {
+): [LintDiffViolation[], LintDiffViolation[]] {
   const newItems = [];
   const existingItems = [];
 
@@ -407,11 +408,6 @@ export async function getNewItems(
     if (errorIsNew) {
       newItems.push(afterViolation);
     }
-  }
-
-  for (const newItem of newItems) {
-    // TODO: Parallelize
-    newItem.armRpcs = await getRelatedArmRpcFromDoc(newItem.code);
   }
 
   return [newItems, existingItems];

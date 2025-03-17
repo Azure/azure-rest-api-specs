@@ -1,8 +1,10 @@
-import { getAffectedReadmes } from "../src/processChanges.js";
-import { vol } from "memfs";
 import { beforeEach, vi, test, describe } from "vitest";
+import { vol } from "memfs";
 
-// This test is in a separate module because fs mocking is difficult to undo
+import { getAffectedReadmes, readFileList } from "../src/processChanges.js";
+import { afterEach } from "node:test";
+
+// These tests are in a separate module because fs mocking is difficult to undo
 
 vi.mock("fs/promises", async () => {
   const memfs = await import("memfs");
@@ -81,5 +83,33 @@ describe("getAffectedReadmes", () => {
     const changedFiles = ["some.json", "readme.md", "specification/a/readme.md"];
     const affectedReadmes = await getAffectedReadmes(changedFiles, "./repo-root");
     expect(affectedReadmes).toEqual(["specification/a/readme.md"]);
+  });
+});
+
+describe("readFileList", async () => {
+  afterEach(() => {
+    vol.reset();
+  });
+
+  test.concurrent("returns a list of items", async ({ expect }) => {
+    // Using test1.txt because somehow another test affects the
+    // value of test.txt in this context.
+    const files = {
+      "./test1.txt": "line1\nline2",
+    };
+    vol.fromJSON(files, ".");
+
+    const fileList = await readFileList("./test1.txt");
+    expect(fileList).toEqual(["line1", "line2"]);
+  });
+
+  test.concurrent("returns an empty list if the file is empty", async ({ expect }) => {
+    const files = {
+      "./test.txt": "",
+    };
+    vol.fromJSON(files, ".");
+
+    const fileList = await readFileList("./test.txt");
+    expect(fileList).toEqual([]);
   });
 });
