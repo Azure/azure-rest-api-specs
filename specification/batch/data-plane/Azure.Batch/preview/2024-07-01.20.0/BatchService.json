@@ -62,6 +62,9 @@
       "name": "Jobs"
     },
     {
+      "name": "Certificates"
+    },
+    {
       "name": "Job Schedules"
     },
     {
@@ -265,6 +268,545 @@
         "x-ms-examples": {
           "Get applications": {
             "$ref": "./examples/Applications_GetApplication.json"
+          }
+        }
+      }
+    },
+    "/certificates": {
+      "get": {
+        "operationId": "Certificates_ListCertificates",
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Lists all of the Certificates that have been added to the specified Account.",
+        "description": "Lists all of the Certificates that have been added to the specified Account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "timeOut",
+            "in": "query",
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.\".",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnClientRequestId"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "maxresults",
+            "in": "query",
+            "description": "The maximum number of items to return in the response. A maximum of 1000\napplications can be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "An OData $select clause.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BatchCertificateListResult"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        },
+        "deprecated": true,
+        "x-ms-examples": {
+          "Certificate list": {
+            "$ref": "./examples/Certificates_ListCertificates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Certificates_CreateCertificate",
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Creates a Certificate to the specified Account.",
+        "description": "Creates a Certificate to the specified Account.",
+        "consumes": [
+          "application/json; odata=minimalmetadata"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "timeOut",
+            "in": "query",
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.\".",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnClientRequestId"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "certificate",
+            "in": "body",
+            "description": "The Certificate to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchCertificate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "DataServiceId": {
+                "type": "string",
+                "description": "The OData ID of the resource to which the request applied."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        },
+        "deprecated": true,
+        "x-ms-examples": {
+          "Certificate create": {
+            "$ref": "./examples/Certificates_CreateCertificate.json"
+          }
+        }
+      }
+    },
+    "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})": {
+      "get": {
+        "operationId": "Certificates_GetCertificate",
+        "tags": [
+          "Certificates"
+        ],
+        "description": "Gets information about the specified Certificate.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "timeOut",
+            "in": "query",
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.\".",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnClientRequestId"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "thumbprintAlgorithm",
+            "in": "path",
+            "description": "The algorithm used to derive the thumbprint parameter. This must be sha1.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "thumbprint",
+            "in": "path",
+            "description": "The thumbprint of the Certificate to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "An OData $select clause.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BatchCertificate"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        },
+        "deprecated": true,
+        "x-ms-examples": {
+          "Certificate get": {
+            "$ref": "./examples/Certificates_GetCertificate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Certificates_DeleteCertificate",
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Deletes a Certificate from the specified Account.",
+        "description": "You cannot delete a Certificate if a resource (Pool or Compute Node) is using\nit. Before you can delete a Certificate, you must therefore make sure that the\nCertificate is not associated with any existing Pools, the Certificate is not\ninstalled on any Nodes (even if you remove a Certificate from a Pool, it is not\nremoved from existing Compute Nodes in that Pool until they restart), and no\nrunning Tasks depend on the Certificate. If you try to delete a Certificate\nthat is in use, the deletion fails. The Certificate status changes to\ndeleteFailed. You can use Cancel Delete Certificate to set the status back to\nactive if you decide that you want to continue using the Certificate.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "timeOut",
+            "in": "query",
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.\".",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnClientRequestId"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "thumbprintAlgorithm",
+            "in": "path",
+            "description": "The algorithm used to derive the thumbprint parameter. This must be sha1.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "thumbprint",
+            "in": "path",
+            "description": "The thumbprint of the Certificate to be deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        },
+        "deprecated": true,
+        "x-ms-examples": {
+          "Certificate delete": {
+            "$ref": "./examples/Certificates_DeleteCertificate.json"
+          }
+        }
+      }
+    },
+    "/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete": {
+      "post": {
+        "operationId": "Certificates_CancelCertificateDeletion",
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Cancels a failed deletion of a Certificate from the specified Account.",
+        "description": "If you try to delete a Certificate that is being used by a Pool or Compute\nNode, the status of the Certificate changes to deleteFailed. If you decide that\nyou want to continue using the Certificate, you can use this operation to set\nthe status of the Certificate back to active. If you intend to delete the\nCertificate, you do not need to run this operation after the deletion failed.\nYou must make sure that the Certificate is not being used by any resources, and\nthen you can try again to delete the Certificate.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "timeOut",
+            "in": "query",
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.\".",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration\nsuch as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "return-client-request-id",
+            "in": "header",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "x-ms-client-name": "returnClientRequestId"
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "description": "The time the request was issued. Client libraries typically set this to the\ncurrent system clock time; set it explicitly if you are calling the REST API\ndirectly.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "ocpdate"
+          },
+          {
+            "name": "thumbprintAlgorithm",
+            "in": "path",
+            "description": "The algorithm used to derive the thumbprint parameter. This must be sha1.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "thumbprint",
+            "in": "path",
+            "description": "The thumbprint of the Certificate being deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "DataServiceId": {
+                "type": "string",
+                "description": "The OData ID of the resource to which the request applied."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers."
+              },
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time at which the resource was last modified."
+              },
+              "client-request-id": {
+                "type": "string",
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true."
+              },
+              "request-id": {
+                "type": "string",
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        },
+        "deprecated": true,
+        "x-ms-examples": {
+          "Certificate cancel delete": {
+            "$ref": "./examples/Certificates_CancelCertificateDeletion.json"
           }
         }
       }
@@ -9266,7 +9808,7 @@
       "properties": {
         "scope": {
           "$ref": "#/definitions/AutoUserScope",
-          "description": "The scope for the auto user. The default value is pool. If the pool is running Windows, a value of Task should be specified if stricter isolation between tasks is required, such as if the task mutates the registry in a way which could impact other tasks."
+          "description": "The scope for the auto user. The default value is pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by StartTasks."
         },
         "elevationLevel": {
           "$ref": "#/definitions/ElevationLevel",
@@ -9497,6 +10039,242 @@
           "$ref": "#/definitions/BatchPoolSpecificationUpdate",
           "description": "The Pool specification for the auto Pool."
         }
+      }
+    },
+    "BatchCertificate": {
+      "type": "object",
+      "description": "A Certificate that can be installed on Compute Nodes and can be used to\nauthenticate operations on the machine.",
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "The X.509 thumbprint of the Certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed)."
+        },
+        "thumbprintAlgorithm": {
+          "type": "string",
+          "description": "The algorithm used to derive the thumbprint. This must be sha1."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the Certificate.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/BatchCertificateState",
+          "description": "The state of the Certificate.",
+          "readOnly": true
+        },
+        "stateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the Certificate entered its current state.",
+          "readOnly": true
+        },
+        "previousState": {
+          "$ref": "#/definitions/BatchCertificateState",
+          "description": "The previous state of the Certificate. This property is not set if the Certificate is in its initial active state.",
+          "readOnly": true
+        },
+        "previousStateTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the Certificate entered its previous state. This property is not set if the Certificate is in its initial Active state.",
+          "readOnly": true
+        },
+        "publicData": {
+          "type": "string",
+          "description": "The public part of the Certificate as a base-64 encoded .cer file.",
+          "readOnly": true
+        },
+        "deleteCertificateError": {
+          "$ref": "#/definitions/DeleteBatchCertificateError",
+          "description": "The error that occurred on the last attempt to delete this Certificate. This property is set only if the Certificate is in the DeleteFailed state.",
+          "readOnly": true
+        },
+        "data": {
+          "type": "string",
+          "description": "The base64-encoded contents of the Certificate. The maximum size is 10KB.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "certificateFormat": {
+          "$ref": "#/definitions/BatchCertificateFormat",
+          "description": "The format of the Certificate data.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "password": {
+          "type": "string",
+          "description": "The password to access the Certificate's private key. This must be omitted if the Certificate format is cer.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "thumbprint",
+        "thumbprintAlgorithm",
+        "data"
+      ]
+    },
+    "BatchCertificateFormat": {
+      "type": "string",
+      "description": "BatchCertificateFormat enums",
+      "enum": [
+        "pfx",
+        "cer"
+      ],
+      "x-ms-enum": {
+        "name": "BatchCertificateFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pfx",
+            "value": "pfx",
+            "description": "The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain."
+          },
+          {
+            "name": "Cer",
+            "value": "cer",
+            "description": "The Certificate is a base64-encoded X.509 Certificate."
+          }
+        ]
+      }
+    },
+    "BatchCertificateListResult": {
+      "type": "object",
+      "description": "The result of listing the Certificates in the Account.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of Certificates.",
+          "items": {
+            "$ref": "#/definitions/BatchCertificate"
+          },
+          "x-ms-identifiers": []
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "BatchCertificateReference": {
+      "type": "object",
+      "description": "A reference to a Certificate to be installed on Compute Nodes in a Pool. Warning: This object is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "The thumbprint of the Certificate."
+        },
+        "thumbprintAlgorithm": {
+          "type": "string",
+          "description": "The algorithm with which the thumbprint is associated. This must be sha1."
+        },
+        "storeLocation": {
+          "$ref": "#/definitions/BatchCertificateStoreLocation",
+          "description": "The location of the Certificate store on the Compute Node into which to install the Certificate. The default value is currentuser. This property is applicable only for Pools configured with Windows Compute Nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows Image reference). For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory."
+        },
+        "storeName": {
+          "type": "string",
+          "description": "The name of the Certificate store on the Compute Node into which to install the Certificate. This property is applicable only for Pools configured with Windows Compute Nodes (that is, created with cloudServiceConfiguration, or with virtualMachineConfiguration using a Windows Image reference). Common store names include: My, Root, CA, Trust, Disallowed, TrustedPeople, TrustedPublisher, AuthRoot, AddressBook, but any custom store name can also be used. The default value is My."
+        },
+        "visibility": {
+          "type": "array",
+          "description": "Which user Accounts on the Compute Node should have access to the private data of the Certificate. You can specify more than one visibility in this collection. The default is all Accounts.",
+          "items": {
+            "$ref": "#/definitions/BatchCertificateVisibility"
+          }
+        }
+      },
+      "required": [
+        "thumbprint",
+        "thumbprintAlgorithm"
+      ]
+    },
+    "BatchCertificateState": {
+      "type": "string",
+      "description": "BatchCertificateState enums",
+      "enum": [
+        "active",
+        "deleting",
+        "deletefailed"
+      ],
+      "x-ms-enum": {
+        "name": "BatchCertificateState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "The Certificate is available for use in Pools."
+          },
+          {
+            "name": "Deleting",
+            "value": "deleting",
+            "description": "The user has requested that the Certificate be deleted, but the delete operation has not yet completed. You may not reference the Certificate when creating or updating Pools."
+          },
+          {
+            "name": "DeleteFailed",
+            "value": "deletefailed",
+            "description": "The user requested that the Certificate be deleted, but there are Pools that still have references to the Certificate, or it is still installed on one or more Nodes. (The latter can occur if the Certificate has been removed from the Pool, but the Compute Node has not yet restarted. Compute Nodes refresh their Certificates only when they restart.) You may use the cancel Certificate delete operation to cancel the delete, or the delete Certificate operation to retry the delete."
+          }
+        ]
+      }
+    },
+    "BatchCertificateStoreLocation": {
+      "type": "string",
+      "description": "BatchCertificateStoreLocation enums",
+      "enum": [
+        "currentuser",
+        "localmachine"
+      ],
+      "x-ms-enum": {
+        "name": "BatchCertificateStoreLocation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CurrentUser",
+            "value": "currentuser",
+            "description": "Certificates should be installed to the CurrentUser Certificate store."
+          },
+          {
+            "name": "LocalMachine",
+            "value": "localmachine",
+            "description": "Certificates should be installed to the LocalMachine Certificate store."
+          }
+        ]
+      }
+    },
+    "BatchCertificateVisibility": {
+      "type": "string",
+      "description": "BatchCertificateVisibility enums",
+      "enum": [
+        "starttask",
+        "task",
+        "remoteuser"
+      ],
+      "x-ms-enum": {
+        "name": "BatchCertificateVisibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StartTask",
+            "value": "starttask",
+            "description": "The Certificate should be visible to the user account under which the StartTask is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well."
+          },
+          {
+            "name": "Task",
+            "value": "task",
+            "description": "The Certificate should be visible to the user accounts under which Job Tasks are run."
+          },
+          {
+            "name": "RemoteUser",
+            "value": "remoteuser",
+            "description": "The Certificate should be visible to the user accounts under which users remotely access the Compute Node."
+          }
+        ]
       }
     },
     "BatchError": {
@@ -11310,6 +12088,14 @@
           "$ref": "#/definitions/BatchStartTaskInfo",
           "description": "Runtime information about the execution of the StartTask on the Compute Node."
         },
+        "certificateReferences": {
+          "type": "array",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "items": {
+            "$ref": "#/definitions/BatchCertificateReference"
+          },
+          "x-ms-identifiers": []
+        },
         "errors": {
           "type": "array",
           "description": "The list of errors that are currently being encountered by the Compute Node.",
@@ -12296,6 +13082,15 @@
           "$ref": "#/definitions/BatchStartTask",
           "description": "A Task specified to run on each Compute Node as it joins the Pool."
         },
+        "certificateReferences": {
+          "type": "array",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "items": {
+            "$ref": "#/definitions/BatchCertificateReference"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "applicationPackageReferences": {
           "type": "array",
           "description": "The list of Packages to be installed on each Compute Node in the Pool. Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.",
@@ -12434,6 +13229,14 @@
         "startTask": {
           "$ref": "#/definitions/BatchStartTask",
           "description": "A Task specified to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted."
+        },
+        "certificateReferences": {
+          "type": "array",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "items": {
+            "$ref": "#/definitions/BatchCertificateReference"
+          },
+          "x-ms-identifiers": []
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -12730,6 +13533,14 @@
           "$ref": "#/definitions/BatchStartTask",
           "description": "A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is removed from the Pool."
         },
+        "certificateReferences": {
+          "type": "array",
+          "description": "This list replaces any existing Certificate references configured on the Pool.\nIf you specify an empty collection, any existing Certificate references are removed from the Pool.\nFor Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "items": {
+            "$ref": "#/definitions/BatchCertificateReference"
+          },
+          "x-ms-identifiers": []
+        },
         "applicationPackageReferences": {
           "type": "array",
           "description": "The list of Application Packages to be installed on each Compute Node in the Pool. The list replaces any existing Application Package references on the Pool. Changes to Application Package references affect all new Compute Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Application Package references on any given Pool. If omitted, or if you specify an empty collection, any existing Application Packages references are removed from the Pool. A maximum of 10 references may be specified on a given Pool.",
@@ -12752,6 +13563,7 @@
         }
       },
       "required": [
+        "certificateReferences",
         "applicationPackageReferences",
         "metadata"
       ]
@@ -12937,6 +13749,14 @@
           "$ref": "#/definitions/BatchStartTask",
           "description": "A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted."
         },
+        "certificateReferences": {
+          "type": "array",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024.\nPlease use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "items": {
+            "$ref": "#/definitions/BatchCertificateReference"
+          },
+          "x-ms-identifiers": []
+        },
         "applicationPackageReferences": {
           "type": "array",
           "description": "The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.",
@@ -13050,6 +13870,14 @@
         "startTask": {
           "$ref": "#/definitions/BatchStartTaskUpdate",
           "description": "A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted."
+        },
+        "certificateReferences": {
+          "type": "array",
+          "description": "For Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location. For Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location. For Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024.\nPlease use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "items": {
+            "$ref": "#/definitions/BatchCertificateReference"
+          },
+          "x-ms-identifiers": []
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -13169,6 +13997,14 @@
         "startTask": {
           "$ref": "#/definitions/BatchStartTaskUpdate",
           "description": "A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is left unchanged."
+        },
+        "certificateReferences": {
+          "type": "array",
+          "description": "If this element is present, it replaces any existing Certificate references configured on the Pool.\nIf omitted, any existing Certificate references are left unchanged.\nFor Windows Nodes, the Batch service installs the Certificates to the specified Certificate store and location.\nFor Linux Compute Nodes, the Certificates are stored in a directory inside the Task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the Task to query for this location.\nFor Certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and Certificates are placed in that directory.\nWarning: This property is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.",
+          "items": {
+            "$ref": "#/definitions/BatchCertificateReference"
+          },
+          "x-ms-identifiers": []
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -14770,6 +15606,28 @@
         "lun",
         "diskSizeGB"
       ]
+    },
+    "DeleteBatchCertificateError": {
+      "type": "object",
+      "description": "An error encountered by the Batch service when deleting a Certificate.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the Certificate deletion error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the Certificate deletion error, intended to be suitable for display in a user interface."
+        },
+        "values": {
+          "type": "array",
+          "description": "A list of additional error details related to the Certificate deletion error. This list includes details such as the active Pools and Compute Nodes referencing this Certificate. However, if a large number of resources reference the Certificate, the list contains only about the first hundred.",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "DependencyAction": {
       "type": "string",
