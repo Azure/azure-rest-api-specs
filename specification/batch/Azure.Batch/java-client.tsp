@@ -1206,6 +1206,29 @@ op getTaskCustomization is Azure.Batch.ReadOperationNew<
 
 @@override(Azure.Batch.Tasks.getTask, getTaskCustomization, "java");
 
+// Replace Task Operation
+@doc("Optional parameters for Replace Task operation.")
+model ReplaceBatchTaskOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Replace Task operation.")
+@route("/jobs/{jobId}/tasks/{taskId}")
+op replaceTaskCustomization is Azure.Batch.ReplaceOperationNew<
+  {
+    ...Azure.Batch.ReplaceTaskRequiredParameters;
+
+    @doc("Optional parameters for Replace Task operation.")
+    options?: ReplaceBatchTaskOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.RequestSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.Tasks.replaceTask, replaceTaskCustomization, "java");
+
 // List SubTasks Operation
 @doc("Optional parameters for List SubTasks operation.")
 model ListBatchSubTasksOptions {

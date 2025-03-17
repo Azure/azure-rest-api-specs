@@ -1362,6 +1362,20 @@ alias GetTaskOptionalParameters = {
   $expand?: string[];
 };
 
+alias ReplaceTaskRequiredParameters = {
+  @doc("The ID of the Job containing the Task.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task to update.")
+  @path
+  taskId: string;
+
+  @doc("The Task to update.")
+  @bodyRoot
+  task: BatchTask;
+};
+
 alias ListSubTasksRequiredParameters = {
   @doc("The ID of the Job.")
   @path
@@ -1524,20 +1538,11 @@ interface Tasks {
 
   @doc("Updates the properties of the specified Task.")
   @route("/jobs/{jobId}/tasks/{taskId}")
-  @clientName("replaceTaskInternal", "java")
-  replaceTask is ReplaceOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job containing the Task.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task to update.")
-      @path
-      taskId: string;
-
-      @doc("The Task to update.")
-      @bodyRoot
-      task: BatchTask;
+  replaceTask is ReplaceOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...ReplaceTaskRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
