@@ -13,7 +13,9 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
-alias ConnectionServiceTraits = SupportsClientRequestId;
+alias ConnectionServiceTraits = SupportsClientRequestId &
+  NoRepeatableRequests &
+  NoConditionalRequests;
 
 alias ConnectionOperations = Azure.Core.ResourceOperations<ConnectionServiceTraits>;
 

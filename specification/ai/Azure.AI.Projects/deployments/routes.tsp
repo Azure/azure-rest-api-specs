@@ -13,7 +13,9 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
-alias DeploymentServiceTraits = SupportsClientRequestId;
+alias DeploymentServiceTraits = SupportsClientRequestId &
+  NoRepeatableRequests &
+  NoConditionalRequests;
 
 alias DeploymentOperations = Azure.Core.ResourceOperations<DeploymentServiceTraits>;
 
