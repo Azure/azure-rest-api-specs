@@ -41,8 +41,8 @@ model AzureAISearchIndex extends Index {
   @doc("Type of index")
   indexType: IndexType.azureSearch;
 
-  @doc("Connection id to Azure AI Search")
-  connectionId: string;
+  @doc("Name of connection to Azure AI Search")
+  connectionName: string;
 
   @doc("Name of index in Azure AI Search resource to attach")
   indexName: string;
@@ -62,8 +62,8 @@ model CosmosDBIndex extends Index {
   @doc("Type of index")
   indexType: IndexType.cosmosDB;
 
-  @doc("Connection id to CosmosDB")
-  connectionId: string;
+  @doc("Name of connection to CosmosDB")
+  connectionName: string;
 
   @doc("Name of the CosmosDB Database")
   databaseName: string;
@@ -77,11 +77,8 @@ model CosmosDBIndex extends Index {
 
 @doc("Embedding configuration class")
 model EmbeddingConfiguration {
-  @doc("Connection id to embedding model")
-  connectionId?: string;
-
-  @doc("Deployment name of embedding model")
-  deploymentName: string;
+  @doc("Deployment name of embedding model. It can point to a model deployment either in the parent AIServices or a connection.")
+  modelDeploymentName: string;
 
   @doc("Embedding field")
   embeddingField: string;
