@@ -783,6 +783,30 @@ op cancelCertificateDeletionCustomization is Azure.Batch.PostOperationNew<
   "java"
 );
 
+// Delete Certificate Operation
+@doc("Optional parameters for Delete Certificate operation.")
+model DeleteBatchCertificateOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Delete Certificate operation.")
+@route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
+op deleteCertificateCustomization is Azure.Batch.DeleteOperationNew<
+  {
+    ...Azure.Batch.DeleteCertificateRequiredParameters;
+
+    @doc("Optional parameters for Delete Certificate operation.")
+    options?: DeleteBatchCertificateOptions;
+  },
+  Azure.Batch.DeleteCertificateResponse
+>;
+
+@@override(Azure.Batch.Certificates.deleteCertificate,
+  deleteCertificateCustomization,
+  "java"
+);
+
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
 model CreateBatchJobScheduleOptions {

@@ -906,6 +906,22 @@ alias CancelCertificateDeletionRequiredParameters = {
   thumbprint: string;
 };
 
+alias DeleteCertificateRequiredParameters = {
+  @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
+  @path
+  thumbprintAlgorithm: string;
+
+  @doc("The thumbprint of the Certificate to be deleted.")
+  @path
+  thumbprint: string;
+};
+
+alias DeleteCertificateResponse = BatchResponseHeaders & {
+  @doc("A process exit code.")
+  @statusCode
+  code: "202";
+};
+
 // Certificate Interface
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -969,22 +985,12 @@ interface Certificates {
     active if you decide that you want to continue using the Certificate.
     """)
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-  @clientName("deleteCertificateInternal", "java")
-  deleteCertificate is DeleteOperation<
+  deleteCertificate is DeleteOperationNew<
     {
-      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
-      @path
-      thumbprintAlgorithm: string;
-
-      @doc("The thumbprint of the Certificate to be deleted.")
-      @path
-      thumbprint: string;
+      ...CommonParameters;
+      ...DeleteCertificateRequiredParameters;
     },
-    BatchResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "202";
-    }
+    DeleteCertificateResponse
   >;
 
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
