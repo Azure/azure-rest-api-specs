@@ -3435,6 +3435,39 @@
       ],
       "x-ms-discriminator-value": "AOAI"
     },
+    "Agents.AISearchIndexResource": {
+      "type": "object",
+      "description": "A AI Search Index resource.",
+      "properties": {
+        "index_connection_id": {
+          "type": "string",
+          "description": "An index connection id in an IndexResource attached to this agent.",
+          "x-ms-client-name": "indexConnectionId"
+        },
+        "index_name": {
+          "type": "string",
+          "description": "The name of an index in an IndexResource attached to this agent.",
+          "x-ms-client-name": "indexName"
+        },
+        "query_type": {
+          "$ref": "#/definitions/Agents.AzureAISearchQueryType",
+          "description": "Type of query in an AIIndexResource attached to this agent.",
+          "x-ms-client-name": "queryType"
+        },
+        "top_k": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents to retrieve from search and present to the model.",
+          "x-ms-client-name": "topK"
+        }
+      },
+      "required": [
+        "index_connection_id",
+        "index_name",
+        "query_type",
+        "top_k"
+      ]
+    },
     "Agents.Agent": {
       "type": "object",
       "description": "Represents an agent that can call the model and use tools.",
@@ -3971,6 +4004,48 @@
         ]
       }
     },
+    "Agents.AzureAISearchQueryType": {
+      "type": "string",
+      "description": "Available query types for Azure AI Search tool.",
+      "enum": [
+        "simple",
+        "semantic",
+        "vector",
+        "vector_simple_hybrid",
+        "vector_semantic_hybrid"
+      ],
+      "x-ms-enum": {
+        "name": "AzureAISearchQueryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simple",
+            "value": "simple",
+            "description": "Query type `simple`"
+          },
+          {
+            "name": "semantic",
+            "value": "semantic",
+            "description": "Query type `semantic`"
+          },
+          {
+            "name": "vector",
+            "value": "vector",
+            "description": "Query type `vector`"
+          },
+          {
+            "name": "vector_simple_hybrid",
+            "value": "vector_simple_hybrid",
+            "description": "Query type `vector_simple_hybrid`"
+          },
+          {
+            "name": "vector_semantic_hybrid",
+            "value": "vector_semantic_hybrid",
+            "description": "Query type `vector_semantic_hybrid`"
+          }
+        ]
+      }
+    },
     "Agents.AzureAISearchResource": {
       "type": "object",
       "description": "A set of index resources used by the `azure_ai_search` tool.",
@@ -3980,7 +4055,7 @@
           "description": "The indices attached to this agent. There can be a maximum of 1 index\nresource attached to the agent.",
           "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/Agents.IndexResource"
+            "$ref": "#/definitions/Agents.AISearchIndexResource"
           },
           "x-ms-client-name": "indexList",
           "x-ms-identifiers": []

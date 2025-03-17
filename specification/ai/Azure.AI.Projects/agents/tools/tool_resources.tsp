@@ -81,7 +81,7 @@ model AzureAISearchResource {
    */
   @maxItems(1)
   @encodedName("application/json", "indexes")
-  indexList?: IndexResource[];
+  indexList?: AISearchIndexResource[];
 }
 
 /**
@@ -99,6 +99,25 @@ model IndexResource {
    */
   @encodedName("application/json", "index_name")
   indexName: string;
+}
+
+/**
+ * A AI Search Index resource.
+ */
+model AISearchIndexResource {
+  ...IndexResource;
+  
+  /**
+   *  Type of query in an AIIndexResource attached to this agent.
+   */
+  @encodedName("application/json", "query_type")
+  queryType: AzureAISearchQueryType;
+
+  /**
+   * Number of documents to retrieve from search and present to the model.
+   */
+  @encodedName("application/json", "top_k")
+  topK: int32;
 }
 
 //
@@ -217,4 +236,24 @@ model UpdateFileSearchToolResourceOptions {
   @maxItems(1)
   @encodedName("application/json", "vector_store_ids")
   vectorStoreIds?: string[];
+}
+
+/** Available query types for Azure AI Search tool. */
+union AzureAISearchQueryType {
+  string,
+
+  /** Query type `simple` */
+  simple: "simple",
+
+  /** Query type `semantic` */
+  semantic: "semantic",
+
+  /** Query type `vector` */
+  vector: "vector",
+
+  /** Query type `vector_simple_hybrid` */
+  vector_simple_hybrid: "vector_simple_hybrid",
+
+  /** Query type `vector_semantic_hybrid` */
+  vector_semantic_hybrid: "vector_semantic_hybrid",
 }
