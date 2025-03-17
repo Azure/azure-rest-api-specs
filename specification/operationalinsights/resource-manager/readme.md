@@ -35,9 +35,38 @@ title: LogAnalyticsManagementClient
 ``` yaml
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2023-09
+tag: package-2025-02-01
 ```
 
+
+### Tag: package-2025-02-01
+
+These settings apply only when `--tag=package-2025-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01'
+input-file:
+  - Microsoft.OperationalInsights/stable/2025-02-01/AvailableServiceTiers.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Clusters.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/DataExports.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/DataSources.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Gateways.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/IntelligencePacks.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/LinkedServices.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/LinkedStorageAccounts.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/ManagementGroups.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Operations.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/OperationStatuses.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/QueryPackQueries.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/QueryPacks.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/SavedSearches.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Schema.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/SharedKeys.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/StorageInsightConfigs.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Tables.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Usages.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/WorkspacePurge.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/Workspaces.json
+```
 
 ### Tag: package-2023-09
 
