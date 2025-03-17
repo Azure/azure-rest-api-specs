@@ -72,11 +72,24 @@ model BlobServiceClientParameters {
 );
 
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
-@@clientName(ObjectReplicationHeaders.objectReplicationRules, "objectReplicationRules", "rust");
+@@clientName(ObjectReplicationHeaders.objectReplicationRules,
+  "objectReplicationRules",
+  "rust"
+);
 
 @@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.blobContentLength, uint64, "rust");
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
 @@alternateType(ContentLengthParameter.contentLength, uint64, "rust");
-@@alternateType(StructuredContentLengthParameter.structuredContentLength, uint64, "rust");
-@@alternateType(StructuredContentLengthResponseHeader.structuredContentLength, uint64, "rust");
+@@alternateType(StructuredContentLengthParameter.structuredContentLength,
+  uint64,
+  "rust"
+);
+@@alternateType(StructuredContentLengthResponseHeader.structuredContentLength,
+  uint64,
+  "rust"
+);
+
+@@access(Azure.Core.ClientRequestIdHeader, Access.internal);
+@@access(Azure.Core.RequestIdResponseHeader, Access.internal);
+@@access(DateResponseHeader, Access.internal);
