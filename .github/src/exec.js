@@ -5,14 +5,18 @@
 
 import child_process from "child_process";
 import { promisify } from "util";
+import { ILogger } from "./logger.js";
 const exec = promisify(child_process.exec);
 
 /**
  * @param {string} command
- * @param {import('github-script').AsyncFunctionArguments['core']} core
+ * @param {Object} [options]
+ * @param {ILogger} [options.logger]
  */
-export async function execRoot(command, core) {
-  core.info(`execRoot("${command}")`);
+export async function execRoot(command, options = {}) {
+  const { logger } = options;
+
+  logger?.info(`execRoot("${command}")`);
 
   // TODO: Handle errors
   const result = await exec(command, {
@@ -22,8 +26,8 @@ export async function execRoot(command, core) {
     maxBuffer: 16 * 1024 * 1024,
   });
 
-  core.debug(`stdout: '${result.stdout}'`);
-  core.debug(`stderr: '${result.stderr}'`);
+  logger?.debug(`stdout: '${result.stdout}'`);
+  logger?.debug(`stderr: '${result.stderr}'`);
 
   return result.stdout;
 }
