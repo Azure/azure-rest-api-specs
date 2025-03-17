@@ -116,10 +116,6 @@ interface BatchClient {
 );
 
 // client name overrides
-@@clientName(BatchClient.disableJobSchedule,
-  "disableJobScheduleInternal",
-  "java"
-);
 @@clientName(BatchClient.enableJobSchedule,
   "enableJobScheduleInternal",
   "java"

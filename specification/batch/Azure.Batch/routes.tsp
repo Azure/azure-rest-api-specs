@@ -1080,6 +1080,12 @@ alias ReplaceJobScheduleRequiredParameters = {
   jobSchedule: BatchJobSchedule;
 };
 
+alias DisableJobScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule to disable.")
+  @path
+  jobScheduleId: string;
+};
+
 alias CreateJobScheduleParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
@@ -1196,12 +1202,11 @@ interface JobSchedules {
   @summary("Disables a Job Schedule.")
   @doc("No new Jobs will be created until the Job Schedule is enabled again.")
   @route("/jobschedules/{jobScheduleId}/disable")
-  @clientName("disableJobScheduleInternal", "java")
-  disableJobSchedule is PostOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to disable.")
-      @path
-      jobScheduleId: string;
+  disableJobSchedule is PostOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...DisableJobScheduleRequiredParameters;
     },
     NoContentSuccessResponseHeaders
   >;
