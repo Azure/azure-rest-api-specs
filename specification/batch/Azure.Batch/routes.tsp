@@ -896,6 +896,16 @@ alias ListCertificatesOptionalParameters = {
   $select?: string[];
 };
 
+alias CancelCertificateDeletionRequiredParameters = {
+  @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
+  @path
+  thumbprintAlgorithm: string;
+
+  @doc("The thumbprint of the Certificate being deleted.")
+  @path
+  thumbprint: string;
+};
+
 // Certificate Interface
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -937,16 +947,10 @@ interface Certificates {
     then you can try again to delete the Certificate.
     """)
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
-  @clientName("cancelCertificateDeletionInternal", "java")
-  cancelCertificateDeletion is PostOperation<
+  cancelCertificateDeletion is PostOperationNew<
     {
-      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
-      @path
-      thumbprintAlgorithm: string;
-
-      @doc("The thumbprint of the Certificate being deleted.")
-      @path
-      thumbprint: string;
+      ...CommonParameters;
+      ...CancelCertificateDeletionRequiredParameters;
     },
     NoContentSuccessResponseHeaders
   >;
