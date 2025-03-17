@@ -46,7 +46,14 @@ namespace Azure.AI.Projects.ServicePatterns {
       Http.NoContentResponse
     >;
 
-    create is BuildingBlocks.RepeatableCoreOps.ResourceCreateWithServiceProvidedName<TEntityType>;
+    @Rest.actionSeparator("/")
+    versions is BuildingBlocks.RepeatableCoreOps.ResourceAction<
+      TEntityType,
+      {
+        @Http.bodyRoot body: TEntityType;
+      },
+      TEntityType
+    >;
 
     @Http.put
     createVersion is Azure.Core.Foundations.ResourceOperation<
@@ -74,7 +81,7 @@ namespace Azure.AI.Projects.ServicePatterns {
       @Http.path
       version: string;
 
-      @Http.bodyRoot body: TEntityType;
+      @Http.bodyRoot body: TParams;
     },
     TResponse
   >;
