@@ -3693,7 +3693,8 @@
           "enum": [
             "Connected",
             "Disconnected",
-            "Error"
+            "Error",
+            "NeverConnected"
           ],
           "x-ms-enum": {
             "name": "StatusTypes",
@@ -3817,6 +3818,10 @@
         "parentClusterResourceId": {
           "type": "string",
           "description": "The resource id of the parent cluster (Azure HCI) this machine is assigned to, if any."
+        },
+        "hardwareResourceId": {
+          "type": "string",
+          "description": "Specifies the resource ID of the associated hardware device. Only settable by HCI RP."
         },
         "mssqlDiscovered": {
           "type": "string",
