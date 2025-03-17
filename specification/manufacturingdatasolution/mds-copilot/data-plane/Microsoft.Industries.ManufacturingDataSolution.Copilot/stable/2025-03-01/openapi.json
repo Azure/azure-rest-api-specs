@@ -310,7 +310,7 @@
           {
             "name": "state",
             "in": "query",
-            "description": "Get all active instructions by status.",
+            "description": "Get all active instructions by state.",
             "required": true,
             "type": "string",
             "enum": [
@@ -324,12 +324,12 @@
                 {
                   "name": "Active",
                   "value": "Active",
-                  "description": "Instruction is active"
+                  "description": "Resource is active"
                 },
                 {
                   "name": "Inactive",
                   "value": "Inactive",
-                  "description": "Instruction is inactive"
+                  "description": "Resource is inactive"
                 }
               ]
             }
@@ -1413,7 +1413,7 @@
         },
         "state": {
           "$ref": "#/definitions/Models.ResourceState",
-          "description": "Status for the instruction"
+          "description": "state for the instruction"
         }
       },
       "required": [
@@ -1728,7 +1728,7 @@
     },
     "Models.ResourceState": {
       "type": "string",
-      "description": "Instruction Status Enums",
+      "description": "Resource Status Enums",
       "enum": [
         "Active",
         "Inactive"
@@ -1740,12 +1740,12 @@
           {
             "name": "Active",
             "value": "Active",
-            "description": "Instruction is active"
+            "description": "Resource is active"
           },
           {
             "name": "Inactive",
             "value": "Inactive",
-            "description": "Instruction is inactive"
+            "description": "Resource is inactive"
           }
         ]
       }
