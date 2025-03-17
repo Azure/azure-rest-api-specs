@@ -224,6 +224,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Get usages",
+        "description": "Get current subscription usages",
+        "operationId": "NetAppResourceUsages_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsagesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Usages_List": {
+            "$ref": "examples/Usages_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}": {
+      "get": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Get specific type of usage",
+        "description": "Get current subscription usage of the specific type",
+        "operationId": "NetAppResourceUsages_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/UsageType"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsageResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Usages_Get": {
+            "$ref": "examples/Usages_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/quotaLimits": {
       "get": {
         "tags": [
@@ -5965,6 +6051,80 @@
         }
       }
     },
+    "UsagesListResult": {
+      "description": "Usages result",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of usages",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "UsageResult": {
+      "description": "Usages entity model",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id of the usage.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the usage.",
+          "$ref": "#/definitions/usageName"
+        },
+        "properties": {
+          "description": "Usage properties",
+          "$ref": "#/definitions/usageProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "usageProperties": {
+      "description": "Usage properties",
+      "type": "object",
+      "properties": {
+        "currentValue": {
+          "description": "The current usage value for the subscription.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "description": "The limit of the usage.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "unit": {
+          "description": "The unit of the usage.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "usageName": {
+      "description": "The name of the usage.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The name of the usage.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "The localized name of the usage.",
+          "type": "string"
+        }
+      }
+    },
     "netAppAccountList": {
       "description": "List of NetApp account resources",
       "type": "object",
@@ -6077,6 +6237,17 @@
           "readOnly": true,
           "x-nullable": true,
           "description": "Shows the status of disableShowmount for all volumes under the subscription, null equals false"
+        },
+        "nfsV4IDDomain": {
+          "type": "string",
+          "description": "Domain for NFSv4 user ID mapping. This property will be set for all NetApp accounts in the subscription and region and only affect non ldap NFSv4 volumes.",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$",
+          "x-nullable": true,
+          "example": "defaultv4iddomain.com"
+        },
+        "multiAdStatus": {
+          "$ref": "#/definitions/multiAdStatus"
         }
       }
     },
@@ -6409,6 +6580,11 @@
         "userAssignedIdentity": {
           "type": "string",
           "description": "The ARM resource identifier of the user assigned identity used to authenticate with key vault. Applicable if identity.type has 'UserAssigned'. It should match key of identity.userAssignedIdentities."
+        },
+        "federatedClientId": {
+          "type": "string",
+          "description": "ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults.",
+          "example": "87654321-1234-1234-1234-876543214321"
         }
       }
     },
@@ -6750,7 +6926,11 @@
           "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$",
           "minLength": 1,
           "maxLength": 80,
-          "example": "some-amazing-filepath"
+          "example": "some-amazing-filepath",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "serviceLevel": {
           "title": "serviceLevel",
@@ -6816,7 +6996,7 @@
             "create"
           ],
           "description": "Resource identifier used to identify the Snapshot.",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/snapshots/snapshot1"
+          "example": "/subscriptions/{subscriptionId}/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/snapshots/snapshot1"
         },
         "deleteBaseSnapshot": {
           "type": "boolean",
@@ -6839,7 +7019,7 @@
             "create"
           ],
           "description": "Resource identifier used to identify the Backup.",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1/backups/backup1"
+          "example": "/subscriptions/{subscriptionId}/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1/backups/backup1"
         },
         "baremetalTenantId": {
           "title": "Baremetal Tenant ID",
@@ -6855,7 +7035,11 @@
         "networkFeatures": {
           "$ref": "#/definitions/networkFeatures",
           "description": "The original value of the network features type available to the volume at the time it was created.",
-          "example": "Basic"
+          "example": "Basic",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "effectiveNetworkFeatures": {
           "$ref": "#/definitions/networkFeatures",
@@ -6923,7 +7107,11 @@
         "volumeType": {
           "type": "string",
           "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection",
-          "example": "DataProtection"
+          "example": "DataProtection",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "dataProtection": {
           "title": "DataProtection",
@@ -6956,7 +7144,8 @@
         },
         "isRestoring": {
           "type": "boolean",
-          "description": "Restoring"
+          "description": "Restoring",
+          "readOnly": true
         },
         "snapshotDirectoryVisible": {
           "type": "boolean",
@@ -6984,7 +7173,11 @@
           "x-ms-enum": {
             "name": "SecurityStyle",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "smbEncryption": {
           "type": "boolean",
@@ -7047,7 +7240,11 @@
           "type": "boolean",
           "description": "Specifies whether LDAP is enabled or not for a given NFS volume.",
           "example": false,
-          "default": false
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "coolAccess": {
           "type": "boolean",
@@ -7133,7 +7330,11 @@
             ]
           },
           "example": "Enabled",
-          "default": "Disabled"
+          "default": "Disabled",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "dataStoreResourceId": {
           "title": "dataStoreResourceId",
@@ -7183,7 +7384,7 @@
         "proximityPlacementGroup": {
           "type": "string",
           "description": "Proximity placement group associated with the volume",
-          "example": "/subscriptions/aaaaaaaa-1234-1234-1224-234567891011/resourceGroups/testGroup/providers/Microsoft.Compute/proximityPlacementGroups/testppg"
+          "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup/providers/Microsoft.Compute/proximityPlacementGroups/testppg"
         },
         "t2Network": {
           "type": "string",
@@ -7249,13 +7450,17 @@
           "type": "boolean",
           "description": "Specifies whether volume is a Large Volume or Regular Volume.",
           "example": false,
-          "default": false
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "originatingResourceId": {
           "title": "Originating Resource Id",
           "type": "string",
           "description": "Id of the snapshot or backup that the volume is restored from.",
-          "example": "/subscriptions/aaaaaaaa-1234-1234-1224-234567891011/resourceGroups/testGroup/providers/Microsoft.NetApp/netAppAccounts/accountOriginatingResourceId/capacityPools/originatingResourceIdPool/volumes/theOriginalVolume/snapshots/theSnapshot",
+          "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup/providers/Microsoft.NetApp/netAppAccounts/accountOriginatingResourceId/capacityPools/originatingResourceIdPool/volumes/theOriginalVolume/snapshots/theSnapshot",
           "readOnly": true,
           "x-nullable": true
         }
@@ -7401,6 +7606,17 @@
         "remoteVolumeRegion": {
           "type": "string",
           "description": "The remote region for the other end of the Volume Replication."
+        },
+        "destinationReplications": {
+          "description": "A list of destination replications",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/destinationReplication"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
         }
       }
     },
@@ -7557,6 +7773,54 @@
             "$ref": "#/definitions/replication"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "destinationReplication": {
+      "description": "Destination replication properties",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes"
+              }
+            ]
+          },
+          "description": "The resource ID of the remote volume"
+        },
+        "replicationType": {
+          "type": "string",
+          "description": "Indicates whether the replication is cross zone or cross region.",
+          "enum": [
+            "CrossRegionReplication",
+            "CrossZoneReplication"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CrossRegionReplication",
+                "description": "Cross region replication"
+              },
+              {
+                "value": "CrossZoneReplication",
+                "description": "Cross zone replication"
+              }
+            ]
+          }
+        },
+        "region": {
+          "type": "string",
+          "description": "The remote region for the destination volume."
+        },
+        "zone": {
+          "type": "string",
+          "description": "The remote zone for the destination volume."
         }
       }
     },
@@ -8544,7 +8808,7 @@
           },
           {
             "value": "StandardZRS",
-            "description": "Zone redundant storage service level"
+            "description": "Zone redundant storage service level. This will be deprecated soon."
           }
         ]
       }
@@ -9076,7 +9340,11 @@
             "type": "Microsoft.Network/virtualNetworks/subnets"
           }
         ]
-      }
+      },
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ]
     },
     "snapshotRestoreFiles": {
       "description": "Restore payload for Single File Snapshot Restore",
@@ -9341,7 +9609,7 @@
             ]
           },
           "description": "Identifier for the virtual network",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1"
+          "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1"
         },
         "privateEndpointId": {
           "title": "privateEndpointId",
@@ -9355,7 +9623,7 @@
             ]
           },
           "description": "Identifier of the private endpoint to reach the Azure Key Vault",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
+          "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
         }
       }
     },
@@ -9478,6 +9746,31 @@
       },
       "example": "Enabled"
     },
+    "multiAdStatus": {
+      "title": "multiAdStatus",
+      "type": "string",
+      "readOnly": true,
+      "description": "MultiAD Status for the account",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "multiAdStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "Account is MultiAD disabled, Means its a SharedAD or SingleAD account."
+          },
+          {
+            "value": "Enabled",
+            "description": "Account is MultiAD enabled"
+          }
+        ]
+      },
+      "example": "Enabled"
+    },
     "backupRestoreFiles": {
       "description": "Restore payload for Single File Backup Restore",
       "type": "object",
@@ -9510,7 +9803,7 @@
         "destinationVolumeId": {
           "description": "Resource Id of the destination volume on which the files need to be restored",
           "type": "string",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1"
+          "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1"
         }
       }
     },
@@ -9620,6 +9913,24 @@
           "description": "The creation date of the backup",
           "example": "2017-08-15 13:23:33"
         },
+        "snapshotCreationDate": {
+          "title": "snapshotCreationDate",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The snapshot creation date of the backup",
+          "example": "2018-11-29T20:32:50.459Z",
+          "x-nullable": true
+        },
+        "completionDate": {
+          "title": "completionDate",
+          "type": "string",
+          "format": "date-time",
+          "description": "The completion date of the backup",
+          "example": "2018-11-29T20:32:50.459Z",
+          "readOnly": true,
+          "x-nullable": true
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
@@ -9711,6 +10022,12 @@
               }
             ]
           }
+        },
+        "isLargeVolume": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Specifies if the backup is for a large volume.",
+          "example": false
         }
       }
     },
@@ -9875,7 +10192,7 @@
             ]
           },
           "description": "The ResourceId of the Backup Vault",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1"
+          "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1"
         }
       }
     },
@@ -9905,7 +10222,7 @@
           "title": "keyVaultResourceId",
           "description": "Azure resource ID of the key vault/managed HSM that should be used for encryption.",
           "type": "string",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm",
+          "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm",
           "format": "arm-id",
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -9960,7 +10277,7 @@
           "title": "keyVaultResourceId",
           "description": "Azure resource ID of the key vault/managed HSM that should be used for encryption.",
           "type": "string",
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm",
+          "example": "/subscriptions/{subscriptionId}/resourceGroups/myRG/providers/Microsoft.KeyVault/managedHSMs/my-hsm",
           "format": "arm-id",
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -10000,7 +10317,7 @@
               }
             ]
           },
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1"
+          "example": "/subscriptions/{subscriptionId}/resourceGroups/myRG/providers/Microsoft.Network/virtualNetworks/vnet1"
         },
         "privateEndpointId": {
           "title": "privateEndpointId",
@@ -10014,7 +10331,7 @@
               }
             ]
           },
-          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
+          "example": "/subscriptions/{subscriptionId}/resourceGroups/myRG/providers/Microsoft.Network/privateEndpoints/privateIP1"
         }
       }
     }
@@ -10089,6 +10406,14 @@
       "in": "path",
       "required": true,
       "description": "The name of the Quota Limit",
+      "x-ms-parameter-location": "method"
+    },
+    "UsageType": {
+      "name": "usageType",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The type of usage",
       "x-ms-parameter-location": "method"
     },
     "VolumeGroupName": {
