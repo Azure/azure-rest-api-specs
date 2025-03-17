@@ -1,6 +1,6 @@
 // @ts-check
 
-import { ILogger } from "../../src/logger";
+import { ILogger } from "../../src/logger.js";
 
 /**
  * @implements {ILogger}

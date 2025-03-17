@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getInputFiles } from "../src/readme";
+import { getInputFiles } from "../src/readme.js";
 import { contosoReadme } from "./examples.js";
 
 describe("readme", () => {

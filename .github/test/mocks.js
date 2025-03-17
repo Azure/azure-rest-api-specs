@@ -1,7 +1,7 @@
 // @ts-check
 
 import { vi } from "vitest";
-import { ILogger } from "../src/logger";
+import { ILogger } from "../src/logger.js";
 
 /**
  * @returns {ILogger}
