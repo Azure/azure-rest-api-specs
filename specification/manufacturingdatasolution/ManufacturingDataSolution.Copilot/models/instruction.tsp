@@ -17,7 +17,7 @@ model Instruction {
   @doc("Id for the instruction")
   id: string;
 
-  @doc("intruction Id for the instruction") 
+  @doc("intruction Id for the instruction")
   instructionId: string;
 
   @doc("Version for the instruction")
@@ -85,8 +85,6 @@ model InstructionPatchRequest {
   @doc("The instruction status.")
   state: ResourceState;
 }
-
-
 
 @doc("Instruction Sub Domain Enums")
 union InstrustionDomainEnum {
