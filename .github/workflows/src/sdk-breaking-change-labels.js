@@ -32,11 +32,10 @@ async function getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, c
   let labelAction;
   let labelName = "";
 
-  const artifactName = "spec-gen-sdk_fewf";
-  const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts/${artifactName}?api-version=7.0`;
-  // Call Azure DevOps REST API to list artifacts
+  const artifactName = "spec-gen-sdk_azure-sdk-for-js_true";
+  const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}?api-version=7.0`;
   try {
-    core.info(`Calling Azure DevOps API to get the artifacts: ${apiUrl}`);
+    core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
 
     // Use Node.js fetch to call the API
     const response = await fetch(apiUrl, {
@@ -47,8 +46,37 @@ async function getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, c
     });
 
     if (response.ok) {
+      // Step 1: Get the download URL for the artifact
       const artifacts = await response.json();
       core.info(`Artifacts found: ${stringify(artifacts)}`);
+      if (!artifacts.resource || !artifacts.resource.downloadUrl) {
+        throw new Error(`Download URL not found for the artifact ${artifactName}`);
+      }
+
+      let downloadUrl = artifacts.resource.downloadUrl;
+      const index = downloadUrl.indexOf("?format=zip");
+      if (index !== -1) {
+        // Keep everything up to (but not including) "?format=zip"
+        downloadUrl = downloadUrl.substring(0, index);
+      }
+      downloadUrl += `?format=file&subPath=/${artifactName}`;
+      core.info(`Downloading artifact from: ${downloadUrl}`);
+
+      // Step 2: Fetch Artifact Content (as a Buffer)
+      const artifactResponse = await fetch(downloadUrl);
+      if (!artifactResponse.ok) {
+        throw new Error(`Failed to fetch artifact: ${artifactResponse.statusText}`);
+      }
+
+      const artifactData = await artifactResponse.text();
+      core.info(`Artifact content: ${artifactData}`);
+      /*
+      try {
+          const jsonData = JSON.parse(artifactData);
+          console.log('Parsed JSON Data:', jsonData);
+      } catch (err) {
+          console.log('Artifact is not JSON. Raw content:\n', artifactData);
+      }*/
       /*
       core.info(`Artifacts found: ${artifacts.count}`);
 

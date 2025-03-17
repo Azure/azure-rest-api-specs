@@ -17,8 +17,13 @@ export interface SpecGenSdkCmdInput {
   headBranch?: string;
 }
 
-export type VsoLogs = {
-  task: string;
-  errors?: string[];
-  warnings?: string[];
-};
+/*
+ * VsoLogs is a map of task names to log entries. Each log entry contains an array of errors and warnings.
+ */
+export type VsoLogs = Map<
+  string,
+  {
+    errors?: string[];
+    warnings?: string[];
+  }
+>;

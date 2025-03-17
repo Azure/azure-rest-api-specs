@@ -7,6 +7,7 @@ import {
   runSpecGenSdkCommand,
   getAllTypeSpecPaths,
   resetGitRepo,
+  objectToMap,
 } from "./utils.js";
 import { LogLevel, logMessage, setVsoVariable, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
@@ -35,9 +36,9 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     commandInput.workingFolder,
     `${commandInput.sdkRepoName}_tmp/execution-report.json`,
   );
+  let executionReport;
   try {
-    const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
     const executionResult = executionReport.executionResult;
     logMessage(`Runner command execution result:${executionResult}`);
   } catch (error) {
@@ -49,10 +50,8 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   }
   logMessage("ending group logging", LogLevel.EndGroup);
   logIssuesToPipeline(
-    commandInput.workingFolder,
+    path.join(commandInput.workingFolder, executionReport.vsoLogPath),
     specConfigPathText,
-    commandInput.tspConfigPath,
-    commandInput.readmePath,
   );
 
   return statusCode;
@@ -71,6 +70,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let pushedSpecConfigCount;
   let shouldLabelBreakingChange = false;
   let breakingChangeLabel = "";
+  let executionReport;
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
@@ -106,8 +106,9 @@ export async function generateSdkForSpecPr(): Promise<number> {
       commandInput.workingFolder,
       `${commandInput.sdkRepoName}_tmp/execution-report.json`,
     );
+
     try {
-      const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
+      executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
       const executionResult = executionReport.executionResult;
       [shouldLabelBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
       logMessage(`Runner command execution result:${executionResult}`);
@@ -120,10 +121,8 @@ export async function generateSdkForSpecPr(): Promise<number> {
     }
     logMessage("ending group logging", LogLevel.EndGroup);
     logIssuesToPipeline(
-      commandInput.workingFolder,
+      path.join(commandInput.workingFolder, executionReport.vsoLogPath),
       changedSpecPathText,
-      changedSpec.typespecProject,
-      changedSpec.readmeMd,
     );
   }
   // Process the breaking change label artifacts
@@ -155,8 +154,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
   let failedCount = 0;
   let notEnabledCount = 0;
   let succeededCount = 0;
-  let tspConfigPath = "";
-  let readmePath = "";
+  let executionReport;
 
   // Generate SDKs for each spec
   for (const specConfigPath of specConfigPaths) {
@@ -164,10 +162,8 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
 
     if (specConfigPath.endsWith("tspconfig.yaml")) {
       specGenSdkCommand.push("--tsp-config-relative-path", specConfigPath);
-      tspConfigPath = specConfigPath;
     } else {
       specGenSdkCommand.push("--readme-relative-path", specConfigPath);
-      readmePath = specConfigPath;
     }
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
     try {
@@ -188,7 +184,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       `${commandInput.sdkRepoName}_tmp/execution-report.json`,
     );
     try {
-      const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
+      executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
       const executionResult = executionReport.executionResult;
       logMessage(`Runner: command execution result:${executionResult}`);
 
@@ -210,7 +206,10 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(commandInput.workingFolder, specConfigPath, tspConfigPath, readmePath);
+    logIssuesToPipeline(
+      path.join(commandInput.workingFolder, executionReport.vsoLogPath),
+      specConfigPath,
+    );
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -358,64 +357,22 @@ function getSpecPaths(runMode: string, specRepoPath: string): string[] {
 }
 
 /**
- * Extract and format the prefix from tspConfigPath or readmePath.
- * This function is copied from 'spec-gen-sdk'.
- * Source code: [Azure SDK Tools - spec-gen-sdk](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/utils/utils.ts#L171)
- * @param {string | undefined} tspConfigPath The tspConfigPath to extract the prefix from.
- * @param {string | undefined} readmePath The readmePath to extract the prefix from.
- * @returns {string} The formatted prefix.
- */
-function extractPathFromSpecConfig(
-  tspConfigPath: string | undefined,
-  readmePath: string | undefined,
-): string {
-  let prefix = "";
-  if (tspConfigPath) {
-    const regex = /specification\/(.+)\/tspconfig\.yaml$/;
-    const match = regex.exec(tspConfigPath);
-    if (match) {
-      const segments = match[1].split("/");
-      prefix = segments.join("-").toLowerCase().replaceAll(".", "-");
-    }
-  } else if (readmePath) {
-    const regex = /specification\/(.+?)\/readme\.md$/i;
-    const match = regex.exec(readmePath);
-    if (match) {
-      const segments = match[1].split("/");
-      prefix = segments.join("-").toLowerCase().replaceAll(".", "-");
-    }
-  }
-  return prefix;
-}
-
-/**
  * Logs issues to Azure DevOps Pipeline *
- * @param workingFolder - The working directory for the SDK generation process.
- * @param specConfigDisplayText - The display text for the spec configuration. *
- * @param tspConfigPath - The path to the TypeSpec configuration file.
- * @param readmePath - The path to the README file.
+ * @param logPath - The vso log file path.
+ * @param specConfigDisplayText - The display text for the spec configuration.
  */
-function logIssuesToPipeline(
-  workingFolder: string,
-  specConfigDisplayText: string,
-  tspConfigPath?: string,
-  readmePath?: string,
-): void {
-  const fileNamePrefix = extractPathFromSpecConfig(tspConfigPath, readmePath);
-  const logFolder = path.join(workingFolder, "out/logs");
-  const logPath = path.join(logFolder, `${fileNamePrefix}-filtered.log`);
-  let vsoLogs: VsoLogs[] = [];
+function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): void {
+  let vsoLogs: VsoLogs;
   try {
     const logContent = JSON.parse(fs.readFileSync(logPath, "utf8"));
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    vsoLogs = logContent.vsoLogs;
+    vsoLogs = objectToMap(logContent);
   } catch (error) {
-    logMessage(`Runner: error reading log at ${logPath}:${error}`, LogLevel.Warn);
+    throw new Error(`Runner: error reading log at ${logPath}:${error}`);
   }
 
-  if (vsoLogs.length > 0) {
-    const errors = vsoLogs.flatMap((entry) => entry.errors ?? []);
-    const warnings = vsoLogs.flatMap((entry) => entry.warnings ?? []);
+  if (vsoLogs) {
+    const errors = [...vsoLogs.values()].flatMap((entry) => entry.errors ?? []);
+    const warnings = [...vsoLogs.values()].flatMap((entry) => entry.warnings ?? []);
     if (errors.length > 0) {
       const errorTitle = `Errors occurred while generating SDK from ${specConfigDisplayText}`;
       logMessage(errorTitle, LogLevel.Group);
