@@ -262,8 +262,20 @@ union TestKind {
 @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
 union CreateByTypes {
   string,
-  @doc("Entity was created by a user.") "User",
-  @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
+  
+  @doc("Entity was created by a user.")
+  "User",
+
+  @doc("Entity was created by a scheduled trigger.")
+  "ScheduledTrigger",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by Azure DevOps pipelines.")
+  "AzurePipelines",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by GitHub Workflows.")
+  "GithubWorkFlows"
 }
 
 @doc("Test file info.")
@@ -829,6 +841,11 @@ model TestRun {
   @added(APIVersions.v2024_07_01_preview)
   @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
   createdByType?: CreateByTypes;
+
+  @visibility("read")
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("The URI pointing to the entity that created the test run.")
+  createdByUri?: url;
 
   ...SystemMetaData;
 }
