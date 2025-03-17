@@ -1030,6 +1030,18 @@ alias JobScheduleExistsRequiredParameters = {
   jobScheduleId: string;
 };
 
+alias DeleteJobScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule to delete.")
+  @path
+  jobScheduleId: string;
+};
+
+alias DeleteJobScheduleOptionalParameters = {
+  @doc("If true, the server will delete the JobSchedule even if the corresponding nodes have not fully processed the deletion. The default value is false.")
+  @query
+  force?: boolean;
+};
+
 alias CreateJobScheduleParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
@@ -1085,16 +1097,12 @@ interface JobSchedules {
     though they are still counted towards Account lifetime statistics.
     """)
   @route("/jobschedules/{jobScheduleId}")
-  @clientName("deleteJobScheduleInternal", "java")
-  deleteJobSchedule is DeleteOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to delete.")
-      @path
-      jobScheduleId: string;
-
-      @doc("If true, the server will delete the JobSchedule even if the corresponding nodes have not fully processed the deletion. The default value is false.")
-      @query
-      force?: boolean;
+  deleteJobSchedule is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...DeleteJobScheduleRequiredParameters;
+      ...DeleteJobScheduleOptionalParameters;
     },
     DeleteResponseHeaders
   >;

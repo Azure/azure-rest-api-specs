@@ -859,6 +859,33 @@ op jobScheduleExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditi
   "java"
 );
 
+// Delete Job Schedule Operation
+@doc("Optional parameters for Delete Job Schedule operation.")
+model DeleteBatchJobScheduleOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.DeleteJobScheduleOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Delete Job Schedule operation.")
+@route("/jobschedules/{jobScheduleId}")
+op deleteJobScheduleCustomization is Azure.Batch.DeleteOperationNew<
+  {
+    ...Azure.Batch.DeleteJobScheduleRequiredParameters;
+
+    @doc("Optional parameters for Delete Job Schedule operation.")
+    options?: DeleteBatchJobScheduleOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.DeleteResponseHeaders
+>;
+
+@@override(Azure.Batch.JobSchedules.deleteJobSchedule,
+  deleteJobScheduleCustomization,
+  "java"
+);
+
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
 model CreateBatchJobScheduleOptions {
