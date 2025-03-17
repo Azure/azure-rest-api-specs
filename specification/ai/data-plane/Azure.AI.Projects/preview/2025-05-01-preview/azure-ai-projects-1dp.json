@@ -346,7 +346,9 @@
               "AzureBlob",
               "CognitiveSearch",
               "CosmosDB",
-              "ApiKey"
+              "ApiKey",
+              "AppInsights",
+              "CustomKeys"
             ],
             "x-ms-enum": {
               "name": "ConnectionType",
@@ -376,6 +378,16 @@
                   "name": "APIKey",
                   "value": "ApiKey",
                   "description": "Generic connection that uses API Key authentication"
+                },
+                {
+                  "name": "ApplicationInsights",
+                  "value": "AppInsights",
+                  "description": "Application Insights"
+                },
+                {
+                  "name": "Custom",
+                  "value": "CustomKeys",
+                  "description": "Custom Keys"
                 }
               ]
             },
@@ -443,18 +455,6 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           }
         ],
         "responses": {
@@ -464,10 +464,6 @@
               "$ref": "#/definitions/Connection"
             },
             "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -850,7 +846,7 @@
         }
       }
     },
-    "/deployments/{deploymentName}": {
+    "/deployments/{name}": {
       "get": {
         "operationId": "Deployments_Get",
         "description": "Get a deployed model.",
@@ -859,26 +855,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "deploymentName",
+            "name": "name",
             "in": "path",
-            "description": "Name of the deployment for the model",
+            "description": "Name of the deployment",
             "required": true,
             "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
           }
         ],
         "responses": {
@@ -888,10 +872,6 @@
               "$ref": "#/definitions/Deployment"
             },
             "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The entity tag for the response."
-              },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
@@ -914,10 +894,10 @@
         }
       }
     },
-    "/evaluations": {
+    "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
-        "description": "List evaluations",
+        "description": "List evaluation runs",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -930,6 +910,9 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -937,6 +920,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedEvaluation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -957,22 +947,23 @@
         }
       }
     },
-    "/evaluations/{id}": {
+    "/evaluations/runs/{name}": {
       "get": {
         "operationId": "Evaluations_Get",
-        "description": "Get an evaluation.",
+        "description": "Get an evaluation run by name.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
             "description": "Identifier of the evaluation.",
             "required": true,
-            "type": "string",
-            "maxLength": 254,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$"
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
@@ -980,6 +971,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Evaluation"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -997,18 +995,18 @@
         }
       }
     },
-    "/evaluations:create": {
+    "/evaluations/runs:run": {
       "post": {
-        "operationId": "Evaluations_Create",
-        "description": "Creates an evaluation.",
+        "operationId": "Evaluations_CreateRun",
+        "description": "Creates an evaluation run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "evaluation",
             "in": "body",
-            "description": "Properties of Evaluation.",
+            "description": "Evalution to be run",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Evaluation"
@@ -1016,8 +1014,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Evaluation"
             }
@@ -9313,11 +9311,6 @@
       "type": "object",
       "description": "Response from the listSecrets operation",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource identifier",
-          "readOnly": true
-        },
         "name": {
           "type": "string",
           "description": "The name of the resource",
@@ -9342,7 +9335,6 @@
         }
       },
       "required": [
-        "id",
         "name",
         "type",
         "target",
@@ -9357,7 +9349,9 @@
         "AzureBlob",
         "CognitiveSearch",
         "CosmosDB",
-        "ApiKey"
+        "ApiKey",
+        "AppInsights",
+        "CustomKeys"
       ],
       "x-ms-enum": {
         "name": "ConnectionType",
@@ -9387,6 +9381,16 @@
             "name": "APIKey",
             "value": "ApiKey",
             "description": "Generic connection that uses API Key authentication"
+          },
+          {
+            "name": "ApplicationInsights",
+            "value": "AppInsights",
+            "description": "Application Insights"
+          },
+          {
+            "name": "Custom",
+            "value": "CustomKeys",
+            "description": "Custom Keys"
           }
         ]
       }
@@ -9471,25 +9475,6 @@
         }
       ],
       "x-ms-discriminator-value": "DataPath"
-    },
-    "Dataset": {
-      "type": "object",
-      "description": "Dataset as source for evaluation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Evaluation input data"
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/InputData"
-        }
-      ],
-      "x-ms-discriminator-value": "dataset"
     },
     "DatasetType": {
       "type": "string",
@@ -9577,37 +9562,32 @@
       "type": "object",
       "description": "Model Deployment Definition",
       "properties": {
-        "deploymentName": {
+        "name": {
           "type": "string",
-          "description": "Name of the deployment for the model",
+          "description": "Name of the deployment",
           "readOnly": true
         },
         "modelName": {
           "type": "string",
-          "description": "Publisher-specific name of the model",
+          "description": "Publisher-specific name of the deployed model",
           "readOnly": true
         },
         "modelVersion": {
           "type": "string",
-          "description": "Publisher-specific version of the model",
+          "description": "Publisher-specific version of the deployed model",
           "readOnly": true
         },
-        "publisher": {
+        "modelPublisher": {
           "type": "string",
-          "description": "Name of the model publisher",
+          "description": "Name of the deployed model's publisher",
           "readOnly": true
         },
         "capabilities": {
           "type": "object",
-          "description": "Capabilities of model",
+          "description": "Capabilities of deployed model",
           "additionalProperties": {
             "type": "string"
           },
-          "readOnly": true
-        },
-        "raiPolicyName": {
-          "type": "string",
-          "description": "RAI policy enabled for model",
           "readOnly": true
         },
         "sku": {
@@ -9617,24 +9597,17 @@
         },
         "connectionName": {
           "type": "string",
-          "description": "Name of the connection the model comes from",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System data of the resource",
+          "description": "Name of the connection the deployment comes from",
           "readOnly": true
         }
       },
       "required": [
-        "deploymentName",
+        "name",
         "modelName",
         "modelVersion",
-        "publisher",
+        "modelPublisher",
         "capabilities",
-        "raiPolicyName",
-        "sku",
-        "systemData"
+        "sku"
       ]
     },
     "EmbeddingConfiguration": {
@@ -9665,7 +9638,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier of the evaluation."
+          "description": "Identifier of the evaluation.",
+          "readOnly": true
         },
         "data": {
           "$ref": "#/definitions/InputData",
@@ -9673,7 +9647,7 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development."
+          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
         },
         "description": {
           "type": "string",
@@ -9712,6 +9686,7 @@
         }
       },
       "required": [
+        "id",
         "data",
         "evaluators"
       ]
@@ -9889,6 +9864,25 @@
         "type"
       ]
     },
+    "InputDataset": {
+      "type": "object",
+      "description": "Dataset as source for evaluation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Evaluation input data"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "dataset"
+    },
     "ListSortOrder": {
       "type": "string",
       "description": "The available sorting options when requesting a list of response objects.",
@@ -10015,7 +10009,8 @@
           "description": "The Connection items on this page",
           "items": {
             "$ref": "#/definitions/Connection"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -10072,15 +10067,14 @@
     },
     "PagedEvaluation": {
       "type": "object",
-      "description": "Paged evaluation items",
+      "description": "Paged collection of Evaluation items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of Evaluations.",
+          "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -10347,44 +10341,6 @@
       "format": "uuid",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "clientRequestId"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
-      "name": "If-Match",
-      "in": "header",
-      "description": "The request should only proceed if an entity matches this string.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifMatch"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
-      "name": "If-Modified-Since",
-      "in": "header",
-      "description": "The request should only proceed if the entity was modified after this time.",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifModifiedSince"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
-      "name": "If-None-Match",
-      "in": "header",
-      "description": "The request should only proceed if no entity matches this string.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifNoneMatch"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
-      "name": "If-Unmodified-Since",
-      "in": "header",
-      "description": "The request should only proceed if the entity was not modified after this time.",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifUnmodifiedSince"
     },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
