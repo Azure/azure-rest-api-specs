@@ -33,7 +33,7 @@ async function getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, c
   let labelName = "";
 
   const artifactName = "spec-gen-sdk_azure-sdk-for-js_true";
-  const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}?api-version=7.0`;
+  const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   try {
     core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
 
