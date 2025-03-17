@@ -8,14 +8,18 @@
     "yaml": "^2.7.0"
   },
   "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.0.0",
     "@types/github-script": "github:actions/github-script",
     "@octokit/webhooks-types": "^7.5.1",
     "@vitest/coverage-v8": "^3.0.7",
     "prettier": "~3.5.3",
+    "typescript": "~5.8.2",
     "vitest": "^3.0.7"
   },
   "scripts": {
+    "lint": "npm run lint:tsc",
+    "lint:tsc": "npx tsc && echo 'Type checking completed successfully'",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   }
