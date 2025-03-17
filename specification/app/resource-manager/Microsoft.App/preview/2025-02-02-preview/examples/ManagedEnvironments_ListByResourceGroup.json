@@ -62,6 +62,16 @@
                   "workloadProfileType": "Consumption"
                 }
               ],
+              "ingressConfiguration": {
+                "workloadProfileName": "My-GP-01",
+                "scale": {
+                  "maxReplicas": 2,
+                  "minReplicas": 2
+                },
+                "terminationGracePeriodSeconds": 600,
+                "headerCountLimit": 50,
+                "requestIdleTimeout": null
+              },
               "infrastructureResourceGroup": "capp-svc-jlaw-demo1-northcentralus"
             }
           },
@@ -94,6 +104,7 @@
               "vnetConfiguration": {
                 "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
               },
+              "ingressConfiguration": null,
               "infrastructureResourceGroup": "capp-svc-demo1-northcentralus"
             }
           }
@@ -102,4 +113,3 @@
     }
   }
 }
-
