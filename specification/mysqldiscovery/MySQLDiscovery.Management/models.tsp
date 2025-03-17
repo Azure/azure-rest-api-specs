@@ -123,7 +123,7 @@ model MySQLSiteProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For Backward compatibility"
   provisioningState?: ProvisioningState;
 }
 
@@ -257,7 +257,7 @@ model MySQLServerProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For Backward compatibility"
   provisioningState?: ProvisioningState;
 
   /**
@@ -358,7 +358,7 @@ model ErrorSummariesProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For Backward compatibility"
   provisioningState?: ProvisioningState;
 }
 
@@ -384,6 +384,6 @@ model SummariesProperties {
   /**
    * Gets or sets the provisioning state.
    */
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For Backward compatibility"
   provisioningState?: ProvisioningState;
 }
