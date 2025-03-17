@@ -18,10 +18,6 @@ namespace Azure.AI.Projects;
 @doc("Response from the listSecrets operation")
 @resource("connections")
 model Connection {
-  @doc("Fully qualified resource identifier")
-  @visibility("read")
-  id: string;
-
   @doc("The name of the resource")
   @visibility("read")
   @key("connectionName")
