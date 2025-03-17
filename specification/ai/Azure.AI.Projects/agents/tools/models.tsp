@@ -58,11 +58,11 @@ model BingGroundingToolDefinition extends ToolDefinition {
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
 model MicrosoftFabricToolDefinition extends ToolDefinition {
-  @doc("The object type, which is always 'fabric_aiskill'.")
-  type: "fabric_aiskill";
+  @doc("The object type, which is always 'fabric_dataagent'.")
+  type: "fabric_dataagent";
 
   @doc("The list of connections used by the Microsoft Fabric tool.")
-  fabric_aiskill: ToolConnectionList;
+  fabric_dataagent: ToolConnectionList;
 }
 
 @doc("The input definition information for a sharepoint tool as used to configure an agent.")
@@ -400,11 +400,11 @@ model RunStepSharepointToolCall extends RunStepToolCall {
   executed Microsoft Fabric operations.
   """)
 model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
-  @doc("The object type, which is always 'fabric_aiskill'.")
-  type: "fabric_aiskill";
+  @doc("The object type, which is always 'fabric_dataagent'.")
+  type: "fabric_dataagent";
 
   @doc("Reserved for future use.")
-  @encodedName("application/json", "fabric_aiskill")
+  @encodedName("application/json", "fabric_dataagent")
   microsoftFabric: Record<string>;
 }
 
@@ -548,8 +548,8 @@ union AgentsNamedToolChoiceType {
   /** Tool type `bing_grounding` */
   bingGrounding: "bing_grounding",
 
-  /** Tool type `fabric_aiskill` */
-  microsoftFabric: "fabric_aiskill",
+  /** Tool type `fabric_dataagent` */
+  microsoftFabric: "fabric_dataagent",
 
   /** Tool type `sharepoint_grounding` */
   sharepoint: "sharepoint_grounding",
@@ -565,7 +565,7 @@ model FunctionName {
 }
 
 /**
- * A set of connection resources currently used by either the `bing_grounding`, `fabric_aiskill`, or `sharepoint_grounding` tools.
+ * A set of connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools.
  */
 model ToolConnectionList {
   /**
