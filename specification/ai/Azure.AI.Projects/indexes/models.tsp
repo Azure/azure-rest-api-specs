@@ -15,10 +15,10 @@ using Azure.Core.Traits;
 namespace Azure.AI.Projects;
 
 @doc("Index resource Definition")
-@discriminator("indexType")
+@discriminator("type")
 model Index {
   @doc("Type of index")
-  indexType: IndexType;
+  type: IndexType;
 
   ...AssetBase;
 }
@@ -39,7 +39,7 @@ model PagedIndex {
 @doc("Azure AI Search Index Definition")
 model AzureAISearchIndex extends Index {
   @doc("Type of index")
-  indexType: IndexType.azureSearch;
+  type: IndexType.azureSearch;
 
   @doc("Name of connection to Azure AI Search")
   connectionName: string;
@@ -51,7 +51,7 @@ model AzureAISearchIndex extends Index {
 @doc("Managed Azure AI Search Index Definition")
 model ManagedAzureAISearchIndex extends Index {
   @doc("Type of index")
-  indexType: IndexType.managedAzureSearch;
+  type: IndexType.managedAzureSearch;
 
   @doc("Vector store id of managed index")
   vectorStoreId: string;
@@ -60,7 +60,7 @@ model ManagedAzureAISearchIndex extends Index {
 @doc("CosmosDB Vector Store Index Definition")
 model CosmosDBIndex extends Index {
   @doc("Type of index")
-  indexType: IndexType.cosmosDB;
+  type: IndexType.cosmosDB;
 
   @doc("Name of connection to CosmosDB")
   connectionName: string;
