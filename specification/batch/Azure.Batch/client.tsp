@@ -116,10 +116,6 @@ interface BatchClient {
 );
 
 // client name overrides
-@@clientName(BatchClient.updateJobSchedule,
-  "updateJobScheduleInternal",
-  "java"
-);
 @@clientName(BatchClient.replaceJobSchedule,
   "replaceJobScheduleInternal",
   "java"

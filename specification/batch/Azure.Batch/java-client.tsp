@@ -839,6 +839,7 @@ model BatchJobScheduleExistsOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for Job Schedule Exists operation.")
 @route("/jobschedules/{jobScheduleId}")
 op jobScheduleExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalResponseNew<
@@ -910,6 +911,32 @@ op getJobScheduleCustomization is Azure.Batch.ReadOperationNew<
 
 @@override(Azure.Batch.JobSchedules.getJobSchedule,
   getJobScheduleCustomization,
+  "java"
+);
+
+// Update Job Schedule Operation
+@doc("Optional parameters for Get Job Schedule operation.")
+model UpdateBatchJobScheduleOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Update Job Schedule operation.")
+@route("/jobschedules/{jobScheduleId}")
+op updateJobScheduleCustomization is Azure.Batch.UpdateOperationNew<
+  {
+    ...Azure.Batch.UpdateJobScheduleRequiredParameters;
+
+    @doc("Optional parameters for Update Job Schedule operation.")
+    options?: UpdateBatchJobScheduleOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.RequestSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.JobSchedules.updateJobSchedule,
+  updateJobScheduleCustomization,
   "java"
 );
 

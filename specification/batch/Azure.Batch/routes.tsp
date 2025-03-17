@@ -1060,6 +1060,16 @@ alias GetJobScheduleOptionalParameters = {
   $expand?: string[];
 };
 
+alias UpdateJobScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule to update.")
+  @path
+  jobScheduleId: string;
+
+  @doc("The options to use for updating the Job Schedule.")
+  @bodyRoot
+  jobSchedule: BatchJobScheduleUpdateContent;
+};
+
 alias CreateJobScheduleParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
@@ -1146,16 +1156,11 @@ interface JobSchedules {
     running Jobs are unaffected.
     """)
   @route("/jobschedules/{jobScheduleId}")
-  @clientName("updateJobScheduleInternal", "java")
-  updateJobSchedule is UpdateOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to update.")
-      @path
-      jobScheduleId: string;
-
-      @doc("The options to use for updating the Job Schedule.")
-      @bodyRoot
-      jobSchedule: BatchJobScheduleUpdateContent;
+  updateJobSchedule is UpdateOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...BatchMatchHeaders;
+      ...UpdateJobScheduleRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
