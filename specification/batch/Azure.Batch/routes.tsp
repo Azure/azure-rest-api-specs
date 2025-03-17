@@ -1024,6 +1024,12 @@ interface Certificates {
 }
 
 // Job Schedule Parameter Aliases
+alias JobScheduleExistsRequiredParameters = {
+  @doc("The ID of the Job Schedule which you want to check.")
+  @path
+  jobScheduleId: string;
+};
+
 alias CreateJobScheduleParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
@@ -1060,14 +1066,12 @@ interface JobSchedules {
   @summary("Checks the specified Job Schedule exists.")
   @doc("Checks the specified Job Schedule exists.")
   @route("/jobschedules/{jobScheduleId}")
-  @clientName("jobScheduleExistsInternal", "java")
-  jobScheduleExists is ResourceInfoOperationWithAdditionalResponse<
-    CommonParameters &
-      BatchMatchHeaders & {
-        @doc("The ID of the Job Schedule which you want to check.")
-        @path
-        jobScheduleId: string;
-      },
+  jobScheduleExists is ResourceInfoOperationWithAdditionalResponseNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...JobScheduleExistsRequiredParameters;
+    },
     JobScheduleDoesExistResponseHeaders,
     JobScheduleDoesNotExistResponseHeaders
   >;

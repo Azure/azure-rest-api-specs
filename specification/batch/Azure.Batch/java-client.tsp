@@ -832,6 +832,33 @@ op getCertificateCustomization is Azure.Batch.ReadOperationNew<
   "java"
 );
 
+// Job Schedule Exists Operation
+@doc("Optional parameters for Job Schedule Exists operation.")
+model BatchJobScheduleExistsOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Job Schedule Exists operation.")
+@route("/jobschedules/{jobScheduleId}")
+op jobScheduleExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalResponseNew<
+  {
+    ...Azure.Batch.JobScheduleExistsRequiredParameters;
+
+    @doc("Optional parameters for Job Schedule Exists operation.")
+    options?: BatchJobScheduleExistsOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.JobScheduleDoesExistResponseHeaders,
+  Azure.Batch.JobScheduleDoesNotExistResponseHeaders
+>;
+
+@@override(Azure.Batch.JobSchedules.jobScheduleExists,
+  jobScheduleExistsCustomization,
+  "java"
+);
+
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
 model CreateBatchJobScheduleOptions {
