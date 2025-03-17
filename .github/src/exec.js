@@ -5,7 +5,7 @@
 
 import child_process from "child_process";
 import { promisify } from "util";
-import { ILogger } from "./logger";
+import { ILogger } from "./logger.js";
 const exec = promisify(child_process.exec);
 
 /**
