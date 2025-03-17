@@ -34,6 +34,7 @@
         "properties": {
           "replicaCount": 2,
           "partitionCount": 1,
+          "endpoint": "https://mysearchservice.search.windows.net/",
           "status": "provisioning",
           "statusDetails": "",
           "hostingMode": "default",
@@ -41,7 +42,8 @@
           "provisioningState": "Provisioning",
           "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "ipRules": []
+            "ipRules": [],
+            "bypass": "None"
           },
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": [],
@@ -53,7 +55,9 @@
           "authOptions": {
             "apiKeyOnly": {}
           },
-          "upgradeAvailable": true
+          "disabledDataExfiltrationOptions": [],
+          "upgradeAvailable": false,
+          "serviceUpgradeDate": null
         },
         "systemData": {
           "createdBy": "My e-commerce app",

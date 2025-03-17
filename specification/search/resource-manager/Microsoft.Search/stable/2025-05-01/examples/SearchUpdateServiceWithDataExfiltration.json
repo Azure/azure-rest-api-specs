@@ -5,11 +5,15 @@
     "api-version": "2025-05-01",
     "subscriptionId": "subid",
     "service": {
-      "sku": {
-        "name": "standard"
+      "tags": {
+        "app-name": "My e-commerce app",
+        "new-tag": "Adding a new tag"
       },
-      "identity": {
-        "type": "None"
+      "properties": {
+        "replicaCount": 2,
+        "disabledDataExfiltrationOptions": [
+          "All"
+        ]
       }
     }
   },
@@ -20,19 +24,22 @@
         "name": "mysearchservice",
         "location": "westus",
         "type": "Microsoft.Search/searchServices",
-        "tags": {},
+        "tags": {
+          "app-name": "My e-commerce app",
+          "new-tag": "Adding a new tag"
+        },
         "sku": {
           "name": "standard"
         },
         "properties": {
-          "replicaCount": 3,
+          "replicaCount": 2,
           "partitionCount": 1,
           "endpoint": "https://mysearchservice.search.windows.net/",
-          "status": "running",
+          "status": "provisioning",
           "statusDetails": "",
           "hostingMode": "default",
           "computeType": "default",
-          "provisioningState": "Succeeded",
+          "provisioningState": "Provisioning",
           "publicNetworkAccess": "enabled",
           "networkRuleSet": {
             "ipRules": [],
@@ -48,7 +55,9 @@
           "authOptions": {
             "apiKeyOnly": {}
           },
-          "disabledDataExfiltrationOptions": [],
+          "disabledDataExfiltrationOptions": [
+            "All"
+          ],
           "upgradeAvailable": false,
           "serviceUpgradeDate": null
         },

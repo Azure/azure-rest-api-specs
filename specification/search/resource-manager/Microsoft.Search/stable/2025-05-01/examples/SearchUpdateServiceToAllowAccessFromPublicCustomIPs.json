@@ -17,8 +17,7 @@
             {
               "value": "123.4.6.0/18"
             }
-          ],
-          "bypass": "AzureServices"
+          ]
         }
       }
     }
@@ -40,6 +39,7 @@
         "properties": {
           "replicaCount": 3,
           "partitionCount": 1,
+          "endpoint": "https://mysearchservice.search.windows.net/",
           "status": "running",
           "statusDetails": "",
           "hostingMode": "default",
@@ -51,11 +51,21 @@
               {
                 "value": "10.2.3.4"
               }
-            ],
-            "bypass": "AzureServices"
+            ]
           },
           "privateEndpointConnections": [],
-          "upgradeAvailable": true
+          "sharedPrivateLinkResources": [],
+          "encryptionWithCmk": {
+            "enforcement": "Unspecified",
+            "encryptionComplianceStatus": "Compliant"
+          },
+          "disableLocalAuth": false,
+          "authOptions": {
+            "apiKeyOnly": {}
+          },
+          "disabledDataExfiltrationOptions": [],
+          "upgradeAvailable": false,
+          "serviceUpgradeDate": null
         },
         "systemData": {
           "createdBy": "My e-commerce app",

@@ -13,20 +13,13 @@
         "name": "standard"
       },
       "properties": {
-        "replicaCount": 1,
+        "replicaCount": 3,
         "partitionCount": 1,
-        "networkRuleSet": {
-          "ipRules": [
-            {
-              "value": "123.4.5.6"
-            },
-            {
-              "value": "123.4.6.0/18"
-            }
-          ]
-        },
         "hostingMode": "default",
-        "computeType": "default"
+        "computeType": "default",
+        "disabledDataExfiltrationOptions": [
+          "All"
+        ]
       }
     }
   },
@@ -44,7 +37,7 @@
           "name": "standard"
         },
         "properties": {
-          "replicaCount": 1,
+          "replicaCount": 3,
           "partitionCount": 1,
           "endpoint": "https://mysearchservice.search.windows.net/",
           "status": "provisioning",
@@ -54,14 +47,8 @@
           "provisioningState": "Provisioning",
           "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "ipRules": [
-              {
-                "value": "123.4.5.6"
-              },
-              {
-                "value": "123.4.6.0/18"
-              }
-            ]
+            "ipRules": [],
+            "bypass": "None"
           },
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": [],
@@ -73,7 +60,9 @@
           "authOptions": {
             "apiKeyOnly": {}
           },
-          "disabledDataExfiltrationOptions": [],
+          "disabledDataExfiltrationOptions": [
+            "All"
+          ],
           "upgradeAvailable": false,
           "serviceUpgradeDate": null
         },
@@ -100,7 +89,7 @@
           "name": "standard"
         },
         "properties": {
-          "replicaCount": 1,
+          "replicaCount": 3,
           "partitionCount": 1,
           "endpoint": "https://mysearchservice.search.windows.net/",
           "status": "provisioning",
@@ -110,14 +99,8 @@
           "provisioningState": "Provisioning",
           "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "ipRules": [
-              {
-                "value": "123.4.5.6"
-              },
-              {
-                "value": "123.4.6.0/18"
-              }
-            ]
+            "ipRules": [],
+            "bypass": "None"
           },
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": [],
@@ -129,7 +112,9 @@
           "authOptions": {
             "apiKeyOnly": {}
           },
-          "disabledDataExfiltrationOptions": [],
+          "disabledDataExfiltrationOptions": [
+            "All"
+          ],
           "upgradeAvailable": false,
           "serviceUpgradeDate": null
         },

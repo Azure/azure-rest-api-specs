@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SearchManagementClient",
-    "description": "Client that can be used to manage search services and API keys.",
+    "description": "Client that can be used to manage Azure AI Search services and API keys.",
     "version": "2025-05-01"
   },
   "host": "management.azure.com",
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Microsoft Entra ID OAuth2 authorization flow.",
+      "description": "Specifies an implicit grant flow, as supported on the Microsoft Identity platform.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -42,8 +42,8 @@
         "description": "Lists all of the available REST API operations of the Microsoft.Search provider.",
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "OperationsList": {
-            "$ref": "./examples/OperationsList.json"
+          "SearchListOperations": {
+            "$ref": "./examples/SearchListOperations.json"
           }
         },
         "parameters": [
@@ -81,7 +81,7 @@
             "$ref": "./examples/SearchGetAdminKeys.json"
           }
         },
-        "description": "Gets the primary and secondary admin API keys for the specified search service.",
+        "description": "Gets the primary and secondary admin API keys for the specified Azure AI Search service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -104,7 +104,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the 'api-key' parameter in the data plane REST API or an Azure SDK to perform any operations on your search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.",
+            "description": "The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the 'api-key' parameter in the Azure AI Search service REST API or SDK to perform any operations on your search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.",
             "schema": {
               "$ref": "#/definitions/AdminKeyResult"
             }
@@ -234,7 +234,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the data plane REST API or an Azure SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
+            "description": "The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the Azure AI Search service REST API or SDK to perform read-only operations on your search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/QueryKey"
             }
@@ -262,7 +262,7 @@
             "$ref": "./examples/SearchListQueryKeysBySearchService.json"
           }
         },
-        "description": "Returns the list of query API keys for the given search service.",
+        "description": "Returns the list of query API keys for the given Azure AI Search service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -285,7 +285,7 @@
         ],
         "responses": {
           "200": {
-            "description": "All query keys for the given search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the data plane REST API or an Azure SDK to perform read-only operations on the documents collection of your search indexes such as querying and looking up documents by ID.",
+            "description": "All query keys for the given search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure AI Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
             }
@@ -388,6 +388,9 @@
           "SearchCreateOrUpdateServiceWithCmkEnforcement": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithCmkEnforcement.json"
           },
+          "SearchCreateOrUpdateServiceWithDataExfiltration": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceWithDataExfiltration.json"
+          },
           "SearchCreateOrUpdateWithSemanticSearch": {
             "$ref": "./examples/SearchCreateOrUpdateWithSemanticSearch.json"
           }
@@ -405,7 +408,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
+            "description": "The name of the Azure AI Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
           },
           {
             "name": "service",
@@ -428,19 +431,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.",
+            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property of a Get Service request.",
             "schema": {
               "$ref": "#/definitions/SearchService"
             }
           },
           "201": {
-            "description": "If you requested creation of a free search service, the service is now provisioned and ready to use, subject to DNS propagation delay. For other SKU types, provisioning happens asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.",
+            "description": "If you requested creation of a free search service, the service is now provisioned and ready to use, subject to DNS propagation delay. For other SKU types, provisioning happens asynchronously. You can check the status of a scale operation through the provisioningState property of a Get Service request.",
             "schema": {
               "$ref": "#/definitions/SearchService"
             }
           },
           "default": {
-            "description": "HTTP 400 (Bad Request): The given service name or service definition is invalid; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription or resource group could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "description": "HTTP 400 (Bad Request): The given service name or service definition is invalid. See the error code and message in the response for details. HTTP 404 (Not Found): The subscription or resource group could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -478,6 +481,9 @@
           "SearchUpdateServiceWithCmkEnforcement": {
             "$ref": "./examples/SearchUpdateServiceWithCmkEnforcement.json"
           },
+          "SearchUpdateServiceWithDataExfiltration": {
+            "$ref": "./examples/SearchUpdateServiceWithDataExfiltration.json"
+          },
           "SearchUpdateServiceWithSemanticSearch": {
             "$ref": "./examples/SearchUpdateServiceWithSemanticSearch.json"
           },
@@ -498,7 +504,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the search service to update."
+            "description": "The name of the Azure AI Search service to update."
           },
           {
             "name": "service",
@@ -521,13 +527,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can periodically get your service definition and monitor progress via the provisioningState property.",
+            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property of a Get Service request.",
             "schema": {
               "$ref": "#/definitions/SearchService"
             }
           },
           "default": {
-            "description": "HTTP 400 (Bad Request): The given service definition is invalid or you attempted to change a property that is immutable; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription or resource group could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "description": "HTTP 400 (Bad Request): The given service definition is invalid or you attempted to change a property that is immutable. See the error code and message in the response for details. HTTP 404 (Not Found): The subscription or resource group could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -740,7 +746,7 @@
             "$ref": "./examples/UpdatePrivateEndpointConnection.json"
           }
         },
-        "description": "Updates a Private Endpoint connection to the search service in the given resource group.",
+        "description": "Updates a private endpoint connection to the search service in the given resource group.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -781,7 +787,7 @@
             }
           },
           "default": {
-            "description": "HTTP 400 (Bad Request): The given private endpoint connection name or the private endpoint connection definition is invalid; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription, resource group, search service or private endpoint connection could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "description": "HTTP 400 (Bad Request): The given private endpoint connection name or the private endpoint connection definition is invalid. See the error code and message in the response for details. HTTP 404 (Not Found): The subscription, resource group, search service or private endpoint connection could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -1275,7 +1281,7 @@
             "$ref": "./examples/GetQuotaUsagesList.json"
           }
         },
-        "description": "Gets a list of all Search quota usages in the given subscription.",
+        "description": "Get a list of all Azure AI Search quota usages across the subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1295,7 +1301,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the list of all Search quota usages for the given subscription.",
+            "description": "The operation succeeded. The response contains the list of all search service quota usages for the given subscription.",
             "schema": {
               "$ref": "#/definitions/QuotaUsagesListResult"
             }
@@ -1517,7 +1523,7 @@
         "tags": [
           "Services"
         ],
-        "operationId": "Service_Upgrade",
+        "operationId": "Services_Upgrade",
         "x-ms-examples": {
           "UpgradeSearchServiceToLatestVersion": {
             "$ref": "./examples/UpgradeSearchServiceToLatestVersion.json"
@@ -1624,7 +1630,7 @@
               {
                 "value": "Invalid",
                 "name": "Invalid",
-                "description": "The search service name does not match naming requirements."
+                "description": "The search service name doesn't match naming requirements."
               },
               {
                 "value": "AlreadyExists",
@@ -1655,14 +1661,14 @@
           "description": "The secondary admin API key of the search service."
         }
       },
-      "description": "Response containing the primary and secondary admin API keys for a given search service."
+      "description": "Response containing the primary and secondary admin API keys for a given Azure AI Search service."
     },
     "QueryKey": {
       "properties": {
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the query API key; may be empty."
+          "description": "The name of the query API key. Query names are optional, but assigning a name can help you remember how it's used."
         },
         "key": {
           "readOnly": true,
@@ -1670,7 +1676,7 @@
           "description": "The value of the query API key."
         }
       },
-      "description": "Describes an API key for a given search service that has permissions for query operations only."
+      "description": "Describes an API key for a given Azure AI Search service that conveys read-only permissions on the docs collection of an index."
     },
     "ListQueryKeysResult": {
       "properties": {
@@ -1680,7 +1686,7 @@
           "items": {
             "$ref": "#/definitions/QueryKey"
           },
-          "description": "The query keys for the search service."
+          "description": "The query keys for the Azure AI Search service."
         },
         "nextLink": {
           "readOnly": true,
@@ -1688,7 +1694,7 @@
           "description": "Request URL that can be used to query next page of query keys. Returned when the total number of requested query keys exceed maximum page size."
         }
       },
-      "description": "Response containing the query API keys for a given search service.",
+      "description": "Response containing the query API keys for a given Azure AI Search service.",
       "x-ms-external": true
     },
     "Sku": {
@@ -1707,7 +1713,7 @@
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "free",
@@ -1798,11 +1804,29 @@
       },
       "description": "Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication."
     },
+    "DisabledDataExfiltrationOption": {
+      "type": "string",
+      "enum": [
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "SearchDisabledDataExfiltrationOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "All",
+            "name": "All",
+            "description": "Indicates that all data exfiltration scenarios are disabled."
+          }
+        ]
+      },
+      "description": "A specific data exfiltration scenario that is disabled for the service."
+    },
     "EncryptionWithCmk": {
       "type": "object",
       "properties": {
         "enforcement": {
-          "description": "Describes how a search service should enforce having one or more non-customer-encrypted resources.",
+          "description": "Describes how a search service should enforce compliance if it finds objects that aren't encrypted with the customer-managed key.",
           "type": "string",
           "enum": [
             "Disabled",
@@ -1816,12 +1840,12 @@
               {
                 "value": "Disabled",
                 "name": "Disabled",
-                "description": "No enforcement will be made and the search service can have non-customer-encrypted resources."
+                "description": "No enforcement of customer-managed key encryption will be made. Only the built-in service-managed encryption is used."
               },
               {
                 "value": "Enabled",
                 "name": "Enabled",
-                "description": "Search service will be marked as non-compliant if there are one or more non-customer-encrypted resources."
+                "description": "Search service will be marked as non-compliant if one or more objects aren't encrypted with a customer-managed key."
               },
               {
                 "value": "Unspecified",
@@ -1833,7 +1857,7 @@
         },
         "encryptionComplianceStatus": {
           "readOnly": true,
-          "description": "Describes whether the search service is compliant or not with respect to having non-customer-encrypted resources. If a service has more than one non-customer-encrypted resource and 'Enforcement' is 'enabled' then the service will be marked as 'nonCompliant'.",
+          "description": "Returns the status of search service compliance with respect to non-CMK-encrypted objects. If a service has more than one unencrypted object, and enforcement is enabled, the service is marked as noncompliant.",
           "type": "string",
           "enum": [
             "Compliant",
@@ -1846,24 +1870,24 @@
               {
                 "value": "Compliant",
                 "name": "Compliant",
-                "description": "Indicates that the search service is compliant, either because number of non-customer-encrypted resources is zero or enforcement is disabled."
+                "description": "Indicates that the search service is compliant, either because the number of non-CMK-encrypted objects is zero or enforcement is disabled."
               },
               {
                 "value": "NonCompliant",
                 "name": "NonCompliant",
-                "description": "Indicates that the search service has more than one non-customer-encrypted resources."
+                "description": "Indicates that the search service has more than one non-CMK-encrypted objects."
               }
             ]
           }
         }
       },
-      "description": "Describes a policy that determines how resources within the search service are to be encrypted with customer=managed keys."
+      "description": "Describes a policy that determines how resources within the search service are to be encrypted with customer managed keys."
     },
     "PrivateEndpointConnection": {
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Describes the properties of an existing private endpoint connection to the search service."
+          "description": "Describes the properties of an existing private endpoint connection to the Azure AI Search service."
         }
       },
       "allOf": [
@@ -1871,7 +1895,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "Describes an existing private endpoint connection to the search service."
+      "description": "Describes an existing private endpoint connection to the Azure AI Search service."
     },
     "NetworkRuleSet": {
       "properties": {
@@ -1913,10 +1937,10 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Value corresponding to a single IPv4 address (for example, 123.1.2.3) or an IP range in CIDR format (for example, 123.1.2.3/24) to be allowed."
+          "description": "Value corresponding to a single IPv4 address (eg., 123.1.2.3) or an IP range in CIDR format (eg., 123.1.2.3/24) to be allowed."
         }
       },
-      "description": "The IP restriction rule of the search service."
+      "description": "The IP restriction rule of the Azure AI Search service."
     },
     "PrivateEndpointConnectionProperties": {
       "properties": {
@@ -1924,7 +1948,7 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "The resource id of the private endpoint resource from Microsoft.Network provider."
+              "description": "The resource ID of the private endpoint resource from Microsoft.Network provider."
             }
           },
           "description": "The private endpoint resource from Microsoft.Network provider."
@@ -1978,15 +2002,15 @@
               "default": "None"
             }
           },
-          "description": "Describes the current state of an existing Private Link Service connection to the Azure Private Endpoint."
+          "description": "Describes the current state of an existing Azure Private Link service connection to the private endpoint."
         },
         "groupId": {
           "type": "string",
-          "description": "The group id from the provider of resource the private link service connection is for."
+          "description": "The group ID of the Azure resource for which the private link service is for."
         },
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the private link service connection. Valid values are Updating, Deleting, Failed, Succeeded, or Incomplete",
+          "description": "The provisioning state of the private link service connection. Valid values are Updating, Deleting, Failed, Succeeded, Incomplete, or Canceled.",
           "enum": [
             "Updating",
             "Deleting",
@@ -2027,13 +2051,13 @@
               {
                 "value": "Canceled",
                 "name": "Canceled",
-                "description": "Provisioning request for the private link service connection resource has been canceled"
+                "description": "Provisioning request for the private link service connection resource has been canceled."
               }
             ]
           }
         }
       },
-      "description": "Describes the properties of an existing Private Endpoint connection to the search service."
+      "description": "Describes the properties of an existing private endpoint connection to the search service."
     },
     "PrivateEndpointConnectionListResult": {
       "properties": {
@@ -2043,7 +2067,7 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
-          "description": "The list of Private Endpoint connections."
+          "description": "The list of private endpoint connections."
         },
         "nextLink": {
           "readOnly": true,
@@ -2051,7 +2075,7 @@
           "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size."
         }
       },
-      "description": "Response containing a list of Private Endpoint connections.",
+      "description": "Response containing a list of private endpoint connections.",
       "x-ms-external": true
     },
     "SemanticSearch": {
@@ -2068,27 +2092,27 @@
           {
             "value": "disabled",
             "name": "disabled",
-            "description": "Indicates that semantic ranking is disabled for the search service."
+            "description": "Indicates that semantic reranker is disabled for the search service. This is the default."
           },
           {
             "value": "free",
             "name": "free",
-            "description": "Enables semantic ranking on a search service and indicates that it is to be used within the limits of the free tier. This would cap the volume of semantic ranking requests and is offered at no extra charge. This is the default for newly provisioned search services."
+            "description": "Enables semantic reranker on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of semantic ranking requests and is offered at no extra charge. This is the default for newly provisioned search services."
           },
           {
             "value": "standard",
             "name": "standard",
-            "description": "Enables semantic ranking on a search service as a billable feature, with higher throughput and volume of semantic ranking requests."
+            "description": "Enables semantic reranker on a search service as a billable feature, with higher throughput and volume of semantically reranked queries."
           }
         ]
       },
-      "description": "Sets options that control the availability of semantic ranking. This configuration is only possible for certain search SKUs in certain locations."
+      "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations."
     },
     "SharedPrivateLinkResource": {
       "properties": {
         "properties": {
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
-          "description": "Describes the properties of a Shared Private Link Resource managed by the search service."
+          "description": "Describes the properties of a shared private link resource managed by the Azure AI Search service."
         }
       },
       "allOf": [
@@ -2096,25 +2120,25 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "Describes a Shared Private Link Resource managed by the search service."
+      "description": "Describes a shared private link resource managed by the Azure AI Search service."
     },
     "SharedPrivateLinkResourceProperties": {
       "properties": {
         "privateLinkResourceId": {
           "type": "string",
-          "description": "The resource id of the resource the shared private link resource is for."
+          "description": "The resource ID of the resource the shared private link resource is for."
         },
         "groupId": {
           "type": "string",
-          "description": "The group id from the provider of resource the shared private link resource is for."
+          "description": "The group ID from the provider of resource the shared private link resource is for."
         },
         "requestMessage": {
           "type": "string",
-          "description": "The request message for requesting approval of the shared private link resource."
+          "description": "The message for requesting approval of the shared private link resource."
         },
         "resourceRegion": {
           "type": "string",
-          "description": "Optional. Can be used to specify the Azure Resource Manager location of the resource to which a shared private link is to be created. This is only required for those resources whose DNS configuration are regional (such as Azure Kubernetes Service).",
+          "description": "Optional. Can be used to specify the Azure Resource Manager location of the resource for which a shared private link is being created. This is only required for those resources whose DNS configuration are regional (such as Azure Kubernetes Service).",
           "externalDocs": {
             "description": "List of all Azure resources which have a regional DNS configuration requirement can be found here.",
             "url": "https://docs.microsoft.com/azure/private-link/private-endpoint-dns"
@@ -2150,7 +2174,7 @@
           }
         }
       },
-      "description": "Describes the properties of an existing Shared Private Link Resource managed by the search service."
+      "description": "Describes the properties of an existing shared private link resource managed by the Azure AI Search service."
     },
     "SharedPrivateLinkResourceListResult": {
       "properties": {
@@ -2160,14 +2184,14 @@
           "items": {
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
-          "description": "The list of Shared Private Link Resources."
+          "description": "The list of shared private link resources."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of shared private link resources, if there are any."
         }
       },
-      "description": "Response containing a list of Shared Private Link Resources.",
+      "description": "Response containing a list of shared private link resources.",
       "x-ms-external": true
     },
     "PrivateLinkResourcesResult": {
@@ -2189,7 +2213,7 @@
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "readOnly": true,
-          "description": "Describes the properties of a supported private link resource for the search service."
+          "description": "Describes the properties of a supported private link resource for the Azure AI Search service."
         }
       },
       "allOf": [
@@ -2197,7 +2221,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "Describes a supported private link resource for the search service."
+      "description": "Describes a supported private link resource for the Azure AI Search service."
     },
     "PrivateLinkResourceProperties": {
       "properties": {
@@ -2228,45 +2252,45 @@
           "items": {
             "$ref": "#/definitions/ShareablePrivateLinkResourceType"
           },
-          "description": "The list of resources that are onboarded to private link service and that are supported by search."
+          "description": "The list of resources that are onboarded to private link service, that are supported by Azure AI Search."
         }
       },
-      "description": "Describes the properties of a supported private link resource for the search service. For a given API version, this represents the 'supported' groupIds when creating a shared private link resource."
+      "description": "Describes the properties of a supported private link resource for the Azure AI Search service. For a given API version, this represents the 'supported' groupIds when creating a shared private link resource."
     },
     "ShareablePrivateLinkResourceType": {
       "properties": {
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the resource type that has been onboarded to private link service and that's supported by search."
+          "description": "The name of the resource type that has been onboarded to private link service, supported by Azure AI Search."
         },
         "properties": {
           "$ref": "#/definitions/ShareablePrivateLinkResourceProperties",
           "readOnly": true,
-          "description": "Describes the properties of a resource type that has been onboarded to private link service and that's supported by search."
+          "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure AI Search."
         }
       },
-      "description": "Describes a resource type that has been onboarded to private link service and that's supported by search."
+      "description": "Describes an resource type that has been onboarded to private link service, supported by Azure AI Search."
     },
     "ShareablePrivateLinkResourceProperties": {
       "properties": {
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource provider type for the resource that has been onboarded to private link service and that's supported by search."
+          "description": "The resource provider type for the resource that has been onboarded to private link service, supported by Azure AI Search."
         },
         "groupId": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource provider group id for the resource that has been onboarded to private link service and that's supported by search."
+          "description": "The resource provider group id for the resource that has been onboarded to private link service, supported by Azure AI Search."
         },
         "description": {
           "readOnly": true,
           "type": "string",
-          "description": "The description of the resource type that has been onboarded to private link service and that's supported by search."
+          "description": "The description of the resource type that has been onboarded to private link service, supported by Azure AI Search."
         }
       },
-      "description": "Describes the properties of a resource type that has been onboarded to private link service and that's supported by search."
+      "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure AI Search."
     },
     "SearchService": {
       "properties": {
@@ -2308,7 +2332,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU of the search service, which determines the billing rate and capacity limits. This property is required when creating a new search service.",
+          "description": "The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service.",
           "externalDocs": {
             "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
           }
@@ -2333,7 +2357,12 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "description": "The identity of the resource."
+          "description": "Details about the search service identity. A null value indicates that the search service has no identity assigned."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -2341,7 +2370,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "The parameters used to update a search service."
+      "description": "The parameters used to update an Azure AI Search service."
     },
     "SearchServiceProperties": {
       "properties": {
@@ -2393,7 +2422,7 @@
         },
         "computeType": {
           "type": "string",
-          "description": "Configure this property to support the search service using either the Default Compute or Azure Confidential Compute.",
+          "description": "Configure this property to support the search service using either the default compute or Azure Confidential Compute.",
           "enum": [
             "default",
             "confidential"
@@ -2405,7 +2434,7 @@
               {
                 "value": "default",
                 "name": "Default",
-                "description": "Create the service with the Default Compute."
+                "description": "Create the service with the default compute."
               },
               {
                 "value": "confidential",
@@ -2425,24 +2454,37 @@
           ],
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
-            "modelAsString": false
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "enabled",
+                "name": "Enabled",
+                "description": "The search service is accessible from traffic originating from the public internet."
+              },
+              {
+                "value": "disabled",
+                "name": "Disabled",
+                "description": "The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections."
+              }
+            ]
           }
         },
         "status": {
           "readOnly": true,
           "type": "string",
-          "description": "The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. If your service is in the degraded, disabled, or error states, Microsoft is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
+          "description": "The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. 'stopped': The search service is in a subscription that's disabled. If your service is in the degraded, disabled, or error states, it means the Azure AI Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
           "enum": [
             "running",
             "provisioning",
             "deleting",
             "degraded",
             "disabled",
-            "error"
+            "error",
+            "stopped"
           ],
           "x-ms-enum": {
             "name": "SearchServiceStatus",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "running",
@@ -2473,6 +2515,11 @@
                 "value": "error",
                 "name": "Error",
                 "description": "The search service is in error state, indicating either a failure to provision or to be deleted."
+              },
+              {
+                "value": "stopped",
+                "name": "Stopped",
+                "description": "The search service is in a subscription that's disabled."
               }
             ]
           }
@@ -2493,7 +2540,7 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "value": "Succeeded",
@@ -2517,6 +2564,13 @@
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network specific rules that determine how the Azure AI Search service may be reached."
         },
+        "disabledDataExfiltrationOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DisabledDataExfiltrationOption"
+          },
+          "description": "A list of data exfiltration scenarios that are explicitly disallowed for the search service. Currently, the only supported value is 'All' to disable all possible data export scenarios with more fine grained controls planned for the future."
+        },
         "encryptionWithCmk": {
           "$ref": "#/definitions/EncryptionWithCmk",
           "description": "Specifies any policy regarding encryption of resources (such as indexes) using customer manager keys within a search service."
@@ -2530,18 +2584,18 @@
           "$ref": "#/definitions/DataPlaneAuthOptions",
           "description": "Defines the options for how the data plane API of a search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true."
         },
+        "semanticSearch": {
+          "$ref": "#/definitions/SemanticSearch",
+          "x-nullable": true,
+          "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations."
+        },
         "privateEndpointConnections": {
           "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
-          "description": "The list of private endpoint connections to the search service."
-        },
-        "semanticSearch": {
-          "$ref": "#/definitions/SemanticSearch",
-          "x-nullable": true,
-          "description": "Sets options that control the availability of semantic search. This configuration is only possible for certain search SKUs in certain locations."
+          "description": "The list of private endpoint connections to the Azure AI Search service."
         },
         "sharedPrivateLinkResources": {
           "readOnly": true,
@@ -2549,7 +2603,12 @@
           "items": {
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
-          "description": "The list of shared private link resources managed by the search service."
+          "description": "The list of shared private link resources managed by the Azure AI Search service."
+        },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
         },
         "upgradeAvailable": {
           "readOnly": true,
@@ -2581,7 +2640,7 @@
           "description": "Request URL that can be used to query next page of search services. Returned when the total number of requested search services exceed maximum page size."
         }
       },
-      "description": "Response containing a list of search services.",
+      "description": "Response containing a list of Azure AI Search services.",
       "x-ms-external": true
     },
     "AsyncOperationResult": {
@@ -2601,7 +2660,7 @@
           }
         }
       },
-      "description": "The details of a long running asynchronous shared private link resource operation"
+      "description": "The details of a long running asynchronous shared private link resource operation."
     },
     "CloudError": {
       "type": "object",
@@ -2609,6 +2668,10 @@
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
           "description": "Describes a particular API error with an error code and a message."
+        },
+        "message": {
+          "type": "string",
+          "description": "A brief description of the error that hints at what went wrong (for details/debugging information refer to the 'error.message' property)."
         }
       },
       "description": "Contains information about an API error.",
@@ -2839,7 +2902,7 @@
             "$ref": "#/definitions/Operation"
           },
           "readOnly": true,
-          "description": "The list of operations supported by the resource provider."
+          "description": "The list of operations by Azure AI Search, some supported by the resource provider and others by data plane APIs."
         },
         "nextLink": {
           "type": "string",
@@ -3226,7 +3289,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the private endpoint connection to the search service with the specified resource group.",
+      "description": "The name of the private endpoint connection to the Azure AI Search service with the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "SharedPrivateLinkResourceNameParameter": {
@@ -3234,7 +3297,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the shared private link resource managed by the search service within the specified resource group.",
+      "description": "The name of the shared private link resource managed by the Azure AI Search service within the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "OperationNameParameter": {
@@ -3264,7 +3327,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The unique identifier for a Microsoft Azure subscription. You can obtain this value from the Azure Resource Manager API, command line tools, or the portal."
+      "description": "The unique identifier for a Microsoft Azure subscription. You can obtain this value from the Azure Resource Manager API or the portal."
     },
     "ApiVersionParameter": {
       "name": "api-version",
