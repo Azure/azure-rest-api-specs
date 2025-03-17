@@ -37,6 +37,9 @@ jobs:
           node-version: 20.x
           working-directory: ./.github
 
+      - name: Check types
+        run: npx tsc && echo "Type checking completed successfully!"
+
       - name: Run tests
         run: npm run test:ci
 
