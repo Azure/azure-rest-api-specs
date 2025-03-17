@@ -2871,7 +2871,9 @@
       "description": "The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).",
       "enum": [
         "User",
-        "ScheduledTrigger"
+        "ScheduledTrigger",
+        "AzurePipelines",
+        "GithubWorkFlows"
       ],
       "x-ms-enum": {
         "name": "CreateByTypes",
@@ -2886,6 +2888,16 @@
             "name": "ScheduledTrigger",
             "value": "ScheduledTrigger",
             "description": "Entity was created by a scheduled trigger."
+          },
+          {
+            "name": "AzurePipelines",
+            "value": "AzurePipelines",
+            "description": "Entity was created by Azure DevOps pipelines."
+          },
+          {
+            "name": "GithubWorkFlows",
+            "value": "GithubWorkFlows",
+            "description": "Entity was created by GitHub Workflows."
           }
         ]
       }
@@ -5803,6 +5815,12 @@
         "createdByType": {
           "$ref": "#/definitions/CreateByTypes",
           "description": "The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc)."
+        },
+        "createdByUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI pointing to the entity that created the test run.",
+          "readOnly": true
         },
         "createdDateTime": {
           "type": "string",
