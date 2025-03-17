@@ -1042,6 +1042,24 @@ alias DeleteJobScheduleOptionalParameters = {
   force?: boolean;
 };
 
+alias GetJobScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule to get.")
+  @path
+  jobScheduleId: string;
+};
+
+alias GetJobScheduleOptionalParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+
+  @doc("An OData $expand clause.")
+  @query
+  @clientName("expand", "!autorest")
+  $expand?: string[];
+};
+
 alias CreateJobScheduleParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
@@ -1109,22 +1127,12 @@ interface JobSchedules {
 
   @doc("Gets information about the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}")
-  @clientName("getJobScheduleInternal", "java")
-  getJobSchedule is ReadOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to get.")
-      @path
-      jobScheduleId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
-
-      @doc("An OData $expand clause.")
-      @query
-      @clientName("expand", "!autorest")
-      $expand?: string[];
+  getJobSchedule is ReadOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...GetJobScheduleRequiredParameters;
+      ...GetJobScheduleOptionalParameters;
     },
     BatchJobSchedule
   >;
