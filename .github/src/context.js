@@ -209,7 +209,7 @@ export async function extractInputs(github, context, core) {
       issue_number: issue_number,
       run_id: payload.workflow_run.id,
     };
-  } else if (context.eventName === "check_run") {
+  } else if (context.eventName === "check_run" || (context.eventName === "workflow_dispatch" && process.env.CHECK_RUN_ID)) {
     let checkRun = context.payload.check_run;
     if (process.env.CHECK_RUN_ID) {
       core.info(`Fetching check run with ID from input: ${process.env.CHECK_RUN_ID}`);
