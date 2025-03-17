@@ -881,6 +881,21 @@ alias CreateCertificateRequiredParameters = {
   certificate: BatchCertificate;
 };
 
+alias ListCertificatesOptionalParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.
+    """)
+  @query
+  @clientName("filter")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select")
+  $select?: string[];
+};
+
 // Certificate Interface
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -902,21 +917,10 @@ interface Certificates {
   @summary("Lists all of the Certificates that have been added to the specified Account.")
   @doc("Lists all of the Certificates that have been added to the specified Account.")
   @route("/certificates")
-  @clientName("listCertificatesInternal", "java")
-  listCertificates is ListOperation<
+  listCertificates is ListOperationNew<
     {
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.
-        """)
-      @query
-      @clientName("filter")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select")
-      $select?: string[];
+      ...CommonListParameters;
+      ...ListCertificatesOptionalParameters;
     },
     BatchCertificateListResult
   >;

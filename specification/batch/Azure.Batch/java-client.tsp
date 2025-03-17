@@ -736,6 +736,29 @@ op createCertificateCustomization is Azure.Batch.CreateOperationNew<
   "java"
 );
 
+// List Certificates Operation
+@doc("Optional parameters for List Certificates operation.")
+model ListBatchCertificatesOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListCertificatesOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List Certificates operation.")
+@route("/certificates")
+op listCertificatesCustomization is Azure.Batch.ListOperationNew<
+  {
+    @doc("Optional parameters for List Certificates operation.")
+    options?: ListBatchCertificatesOptions;
+  },
+  Azure.Batch.BatchCertificateListResult
+>;
+
+@@override(Azure.Batch.Certificates.listCertificates,
+  listCertificatesCustomization,
+  "java"
+);
+
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
 model CreateBatchJobScheduleOptions {
