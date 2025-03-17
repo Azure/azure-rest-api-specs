@@ -1086,6 +1086,12 @@ alias DisableJobScheduleRequiredParameters = {
   jobScheduleId: string;
 };
 
+alias EnableJobScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule to enable.")
+  @path
+  jobScheduleId: string;
+};
+
 alias CreateJobScheduleParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
@@ -1214,12 +1220,11 @@ interface JobSchedules {
   @summary("Enables a Job Schedule.")
   @doc("Enables a Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/enable")
-  @clientName("enableJobScheduleInternal", "java")
-  enableJobSchedule is PostOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to enable.")
-      @path
-      jobScheduleId: string;
+  enableJobSchedule is PostOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...EnableJobScheduleRequiredParameters;
     },
     NoContentSuccessResponseHeaders
   >;

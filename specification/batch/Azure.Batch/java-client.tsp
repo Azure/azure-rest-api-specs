@@ -992,6 +992,32 @@ op disableJobScheduleCustomization is Azure.Batch.PostOperationNew<
   "java"
 );
 
+// Enable Job Schedule Operation
+@doc("Optional parameters for Enable Job Schedule operation.")
+model EnableBatchJobScheduleOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Enable Job Schedule operation.")
+@route("/jobschedules/{jobScheduleId}/enable")
+op enableJobScheduleCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.EnableJobScheduleRequiredParameters;
+
+    @doc("Optional parameters for Enable Job Schedule operation.")
+    options?: EnableBatchJobScheduleOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.NoContentSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.JobSchedules.enableJobSchedule,
+  enableJobScheduleCustomization,
+  "java"
+);
+
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
 model CreateBatchJobScheduleOptions {
