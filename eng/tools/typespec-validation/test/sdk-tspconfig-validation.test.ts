@@ -328,7 +328,7 @@ const mixTsManagementPackageNameTestCases = {
   tspconfigContent: createEmitterOptionExample(
     "@azure-tools/typespec-ts",
     { key: "packageDetails.name", value: "@azure/arm-aaa-bbb" },
-    { key: "package-details.name", value: "@azure/arm-aaa-bbb" },
+    { key: "package-details.name", value: "@azure/aaa-bbb" },
   ),
   success: false,
   subRules: [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
