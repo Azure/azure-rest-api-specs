@@ -127,100 +127,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sovereign/landingZoneAccounts/{landingZoneAccountName}/landingZoneConfigurations": {
-      "get": {
-        "operationId": "LandingZoneConfigurationOperations_ListBySubscription",
-        "tags": [
-          "LandingZoneConfigurationOperations"
-        ],
-        "description": "List the landing zone configurations within a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "landingZoneAccountName",
-            "in": "path",
-            "description": "The landing zone account.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LandingZoneConfigurationResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LandingZoneConfigurationOperations_ListBySubscription": {
-            "$ref": "./examples/LandingZoneConfigurationOperations_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sovereign/landingZoneAccounts/{landingZoneAccountName}/landingZoneRegistrations": {
-      "get": {
-        "operationId": "LandingZoneRegistrationOperations_ListBySubscription",
-        "tags": [
-          "LandingZoneRegistrationOperations"
-        ],
-        "description": "List the landing zone registrations within a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "landingZoneAccountName",
-            "in": "path",
-            "description": "The landing zone account.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/LandingZoneRegistrationResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LandingZoneRegistrationOperations_ListBySubscription": {
-            "$ref": "./examples/LandingZoneRegistrationOperations_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sovereign/landingZoneAccounts": {
       "get": {
         "operationId": "LandingZoneAccountOperations_ListByResourceGroup",
@@ -519,11 +425,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sovereign/landingZoneAccounts/{landingZoneAccountName}/landingZoneConfigurations": {
       "get": {
-        "operationId": "LandingZoneConfigurationOperations_ListByResourceGroup",
+        "operationId": "LandingZoneConfigurationOperations_List",
         "tags": [
           "LandingZoneConfigurationOperations"
         ],
-        "description": "List the landing zone configurations within a resource group.",
+        "description": "List the landing zone configurations within a landing zone account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -558,8 +464,8 @@
           }
         },
         "x-ms-examples": {
-          "LandingZoneConfigurationOperations_ListByResourceGroup": {
-            "$ref": "./examples/LandingZoneConfigurationOperations_ListByResourceGroup.json"
+          "LandingZoneConfigurationOperations_List": {
+            "$ref": "./examples/LandingZoneConfigurationOperations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1101,11 +1007,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sovereign/landingZoneAccounts/{landingZoneAccountName}/landingZoneRegistrations": {
       "get": {
-        "operationId": "LandingZoneRegistrationOperations_ListByResourceGroup",
+        "operationId": "LandingZoneRegistrationOperations_List",
         "tags": [
           "LandingZoneRegistrationOperations"
         ],
-        "description": "List the landing zone registrations within a resource group.",
+        "description": "List the landing zone registrations within a landing zone account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1140,8 +1046,8 @@
           }
         },
         "x-ms-examples": {
-          "LandingZoneRegistrationOperations_ListByResourceGroup": {
-            "$ref": "./examples/LandingZoneRegistrationOperations_ListByResourceGroup.json"
+          "LandingZoneRegistrationOperations_List": {
+            "$ref": "./examples/LandingZoneRegistrationOperations_List.json"
           }
         },
         "x-ms-pageable": {
