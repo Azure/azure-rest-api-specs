@@ -10,6 +10,7 @@ using TypeSpec.Versioning;
 using OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
+
 namespace Microsoft.DeviceOnboarding;
 
 // ------------------------------------------------------------------
