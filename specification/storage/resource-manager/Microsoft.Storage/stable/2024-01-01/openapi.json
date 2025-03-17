@@ -335,9 +335,6 @@
           "SkuList": {
             "$ref": "./examples/SKUList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextlink"
         }
       }
     },
@@ -1060,10 +1057,7 @@
             "in": "query",
             "description": "Optional. Specified maximum number of containers that can be included in the list.",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 5000
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -2148,7 +2142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/EncryptionScopeListResult"
             }
@@ -2400,11 +2394,19 @@
             "description": "The parameter is set to 'Planned' to indicate whether a Planned failover is requested.",
             "required": false,
             "type": "string",
+            "default": "Planned",
             "enum": [
               "Planned"
             ],
             "x-ms-enum": {
-              "modelAsString": false
+              "name": "FailoverType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Planned",
+                  "value": "Planned"
+                }
+              ]
             }
           }
         ],
@@ -3693,11 +3695,19 @@
             "description": "Specifies type of the key to be listed. Possible value is kerb.",
             "required": false,
             "type": "string",
+            "default": "kerb",
             "enum": [
               "kerb"
             ],
             "x-ms-enum": {
-              "modelAsString": false
+              "name": "ListKeyExpand",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "kerb",
+                  "value": "kerb"
+                }
+              ]
             }
           }
         ],
@@ -7949,24 +7959,20 @@
     },
     "DeletedAccountListResult": {
       "type": "object",
-      "description": "The response of a DeletedAccount list operation.",
+      "description": "The response from the List Deleted Accounts operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DeletedAccount items on this page",
+          "description": "Gets the list of deleted accounts and their properties.",
           "items": {
             "$ref": "#/definitions/DeletedAccount"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to query next page of deleted accounts. Returned when total number of requested deleted accounts exceed maximum page size."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DeletedAccountProperties": {
       "type": "object",
@@ -8195,24 +8201,20 @@
     },
     "EncryptionScopeListResult": {
       "type": "object",
-      "description": "The response of a EncryptionScope list operation.",
+      "description": "List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The EncryptionScope items on this page",
+          "description": "List of encryption scopes requested.",
           "items": {
             "$ref": "#/definitions/EncryptionScope"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to query next page of encryption scopes. Returned when total number of requested encryption scopes exceeds the maximum page size."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "EncryptionScopeProperties": {
       "type": "object",
@@ -8570,7 +8572,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The FileServiceUsage items on this page",
+          "description": "List of file service usages returned.",
           "items": {
             "$ref": "#/definitions/FileServiceUsage"
           }
@@ -8578,7 +8580,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to query next page of file service usages. Returned when total number of requested file service usages exceed maximum page size. "
         }
       },
       "required": [
@@ -8628,7 +8630,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The FileShareItem items on this page",
+          "description": "List of file shares returned.",
           "items": {
             "$ref": "#/definitions/FileShareItem"
           }
@@ -8636,7 +8638,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to query next page of shares. Returned when total number of requested shares exceed maximum page size."
         }
       },
       "required": [
@@ -8999,10 +9001,12 @@
         "action": {
           "type": "string",
           "description": "The action of IP ACL rule.",
+          "default": "Allow",
           "enum": [
             "Allow"
           ],
           "x-ms-enum": {
+            "name": "Action",
             "modelAsString": false
           }
         }
@@ -9101,11 +9105,6 @@
       "type": "object",
       "description": "The properties of an ImmutabilityPolicy of a blob container.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ImmutabilityPolicyProperty",
-          "description": "The properties of an ImmutabilityPolicy of a blob container.",
-          "x-ms-client-flatten": true
-        },
         "etag": {
           "type": "string",
           "description": "ImmutabilityPolicy Etag.",
@@ -9119,6 +9118,11 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "properties": {
+          "$ref": "#/definitions/ImmutabilityPolicyProperty",
+          "description": "The properties of an ImmutabilityPolicy of a blob container.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -9899,7 +9903,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to query next page of tables."
         }
       },
       "required": [
@@ -10527,7 +10531,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The NetworkSecurityPerimeterConfiguration items on this page",
+          "description": "A collection of Network Security Perimeter configurations.",
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
           }
@@ -10535,7 +10539,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The URI that can be used to request the next set of paged results."
         }
       },
       "required": [
@@ -11467,6 +11471,16 @@
         ]
       }
     },
+    "ResourceType": {
+      "type": "string",
+      "enum": [
+        "Microsoft.Storage/storageAccounts"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": false
+      }
+    },
     "RestorePolicyProperties": {
       "type": "object",
       "description": "The blob service properties for blob restore policy",
@@ -12285,14 +12299,8 @@
           "description": "The storage account name."
         },
         "type": {
-          "type": "string",
-          "description": "The type of resource, Microsoft.Storage/storageAccounts",
-          "enum": [
-            "Microsoft.Storage/storageAccounts"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource, Microsoft.Storage/storageAccounts"
         }
       },
       "required": [
@@ -13021,9 +13029,6 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        },
-        "nextlink": {
-          "type": "string"
         }
       }
     },
@@ -13195,7 +13200,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The StorageTaskAssignment items on this page",
+          "description": "Gets the list of storage task assignments and their properties. ",
           "items": {
             "$ref": "#/definitions/StorageTaskAssignment"
           }
@@ -13203,7 +13208,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to query next page of storage task assignments. Returned when total number of requested storage task assignments exceed maximum page size."
         }
       },
       "required": [
@@ -13331,7 +13336,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The StorageTaskReportInstance items on this page",
+          "description": "Gets storage tasks run result summary.",
           "items": {
             "$ref": "#/definitions/StorageTaskReportInstance"
           }
@@ -13339,7 +13344,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to query next page of storage task run results summary. Returned when the number of run instances and summary reports exceed maximum page size."
         }
       },
       "required": [
@@ -13521,11 +13526,19 @@
         "intervalUnit": {
           "type": "string",
           "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
+          "default": "Days",
           "enum": [
             "Days"
           ],
           "x-ms-enum": {
-            "modelAsString": false
+            "name": "IntervalUnit",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "days",
+                "value": "Days"
+              }
+            ]
           }
         },
         "endBy": {
@@ -13558,11 +13571,19 @@
         "intervalUnit": {
           "type": "string",
           "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
+          "default": "Days",
           "enum": [
             "Days"
           ],
           "x-ms-enum": {
-            "modelAsString": false
+            "name": "IntervalUnit",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "days",
+                "value": "Days"
+              }
+            ]
           }
         },
         "endBy": {
@@ -13725,10 +13746,12 @@
         "action": {
           "type": "string",
           "description": "The action of virtual network rule.",
+          "default": "Allow",
           "enum": [
             "Allow"
           ],
           "x-ms-enum": {
+            "name": "Action",
             "modelAsString": false
           }
         },

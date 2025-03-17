@@ -59,7 +59,7 @@ interface DeletedAccountsResourceGroup {
   @action("deletedAccounts")
   @tag("DeletedAccounts")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<DeletedAccount>,
+    Response = DeletedAccountListResult,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;

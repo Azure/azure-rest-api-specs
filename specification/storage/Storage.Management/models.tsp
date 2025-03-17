@@ -1338,13 +1338,6 @@ model ContainerProperties {
  */
 model ImmutabilityPolicyProperties {
   /**
-   * The properties of an ImmutabilityPolicy of a blob container.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: ImmutabilityPolicyProperty;
-
-  /**
    * ImmutabilityPolicy Etag.
    */
   @visibility("read")
@@ -1356,6 +1349,13 @@ model ImmutabilityPolicyProperties {
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", [])
   updateHistory?: UpdateHistoryProperty[];
+
+  /**
+   * The properties of an ImmutabilityPolicy of a blob container.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: ImmutabilityPolicyProperty;
 }
 
 /**
@@ -2405,10 +2405,6 @@ model StorageSkuListResult {
   @items
   @OpenAPI.extension("x-ms-identifiers", [])
   value?: SkuInformation[];
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-  @nextLink
-  nextlink?: string;
 }
 
 /**
@@ -2510,9 +2506,13 @@ model StorageAccountCheckNameAvailabilityParameters {
   /**
    * The type of resource, Microsoft.Storage/storageAccounts
    */
-  type: "Microsoft.Storage/storageAccounts";
+  type: ResourceType = ResourceType.`Microsoft.Storage/storageAccounts`;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" ""
+enum ResourceType {
+  `Microsoft.Storage/storageAccounts`,
+}
 /**
  * The CheckNameAvailability operation response.
  */
@@ -2999,7 +2999,7 @@ model VirtualNetworkRule {
   /**
    * The action of virtual network rule.
    */
-  action?: "Allow";
+  action?: Action = Action.Allow;
 
   /**
    * Gets the state of virtual network rule.
@@ -3021,9 +3021,39 @@ model IPRule {
   /**
    * The action of IP ACL rule.
    */
-  action?: "Allow";
+  action?: Action = Action.Allow;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-enum" ""
+enum Action {
+  Allow,
+}
+
+/**
+ * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
+ */
+union FailoverType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  Planned: "Planned",
+}
+
+/**
+ * Specifies type of the key to be listed. Possible value is kerb.
+ */
+union ListKeyExpand {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  kerb: "kerb",
+}
+/**
+ * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+ */
+union IntervalUnit {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+  days: "Days",
+}
 /**
  * Settings for Azure Files identity based authentication.
  */
@@ -4704,6 +4734,24 @@ model PrivateLinkResourceListResult {
 }
 
 /**
+ * The response from the List Deleted Accounts operation.
+ */
+@pagedResult
+model DeletedAccountListResult {
+  /**
+   * Gets the list of deleted accounts and their properties.
+   */
+  @items
+  value?: DeletedAccount[];
+
+  /**
+   *Request URL that can be used to query next page of deleted accounts. Returned when total number of requested deleted accounts exceed maximum page size.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
  * A private link resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -5408,7 +5456,7 @@ model TriggerParameters {
   /**
    * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
    */
-  intervalUnit?: "Days";
+  intervalUnit?: IntervalUnit = IntervalUnit.days;
 
   /**
    * When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
@@ -5635,7 +5683,7 @@ model TriggerParametersUpdate {
   /**
    * Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
    */
-  intervalUnit?: "Days";
+  intervalUnit?: IntervalUnit = IntervalUnit.days;
 
   /**
    * When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'

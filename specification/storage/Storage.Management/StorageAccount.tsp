@@ -118,7 +118,7 @@ interface StorageAccounts {
        * Specifies type of the key to be listed. Possible value is kerb.
        */
       @query("$expand")
-      $expand?: "kerb";
+      $expand?: ListKeyExpand = ListKeyExpand.kerb;
     }
   >;
 
@@ -169,7 +169,7 @@ interface StorageAccounts {
        * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
        */
       @query("failoverType")
-      failoverType?: "Planned";
+      failoverType?: FailoverType = FailoverType.Planned;
     }
   >;
 

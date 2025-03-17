@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.Core;
 
 namespace Microsoft.Storage;
 /**
@@ -23,6 +24,24 @@ model EncryptionScope
     SegmentName = "encryptionScopes",
     NamePattern = ""
   >;
+}
+
+/**
+ * List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes.
+ */
+@pagedResult
+model EncryptionScopeListResult {
+  /**
+   * List of encryption scopes requested.
+   */
+  @items
+  value?: EncryptionScope[];
+
+  /**
+   *Request URL that can be used to query next page of encryption scopes. Returned when total number of requested encryption scopes exceeds the maximum page size.
+   */
+  @nextLink
+  nextLink?: string;
 }
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
@@ -48,6 +67,7 @@ interface EncryptionScopes {
    */
   list is ArmResourceListByParent<
     EncryptionScope,
+    Response = EncryptionScopeListResult,
     Parameters = {
       /**
        * Optional, specifies the maximum number of encryption scopes that will be included in the list response.

@@ -105,10 +105,8 @@ interface BlobContainers {
       /**
        * Optional. Specified maximum number of containers that can be included in the list.
        */
-      @maxValue(5000)
-      @minValue(1)
       @query("$maxpagesize")
-      $maxpagesize?: int32;
+      $maxpagesize?: string;
 
       /**
        * Optional. When specified, only container names starting with the filter will be listed.

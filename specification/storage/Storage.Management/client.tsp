@@ -28,7 +28,6 @@ using Azure.Core;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);
 
-//@@clientName(BlobServicePropertiesOperationGroup, "BlobServiceProperties");
 @@clientName(BlobServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -39,6 +38,7 @@ using Azure.Core;
 @@clientName(BlobContainers.update::parameters.properties, "blobContainer");
 @@clientName(BlobContainers.setLegalHold::parameters.body, "LegalHold");
 @@clientName(BlobContainers.clearLegalHold::parameters.body, "LegalHold");
+
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BlobContainer.properties);
 
@@ -48,7 +48,6 @@ using Azure.Core;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ImmutabilityPolicy.properties);
 
-// @@clientName(FileServicePropertiesOperationGroup, "FileServiceProperties");
 @@clientName(FileServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -124,7 +123,6 @@ using Azure.Core;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(EncryptionScope.properties);
 
-// @@clientName(TableServicePropertiesOperationGroup, "TableServiceProperties");
 @@clientName(TableServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -202,7 +200,6 @@ using Azure.Core;
 @@clientName(BlobInventoryPolicySchema.enabled, "IsEnabled", "csharp");
 @@clientName(InventoryRuleType, "BlobInventoryRuleType", "csharp");
 @@clientName(BlobInventoryPolicySchema.type, "RuleType", "csharp");
-@@clientName(BlobRestoreParameters.timeToRestore, "timeToRestore", "csharp");
 @@clientName(ChangeFeed.enabled, "IsEnabled", "csharp");
 @@clientName(DefaultSharePermission.StorageFileDataSmbShareReader,
   "Reader",
@@ -220,8 +217,8 @@ using Azure.Core;
 @@clientName(DirectoryServiceOptions.AADDS, "Aadds", "csharp");
 @@clientName(DirectoryServiceOptions.AADKERB, "Aadkerb", "csharp");
 @@alternateType(EncryptionScopeKeyVaultProperties.keyUri, url, "csharp");
-@@clientName(TriggerParameters.intervalUnit, "ExecutionIntervalUnit", "csharp");
 @@clientName(TriggerParameters, "ExecutionTriggerParameters", "csharp");
+@@clientName(IntervalUnit, "ExecutionIntervalUnit", "csharp");
 @@clientName(TriggerType, "ExecutionTriggerType ", "csharp");
 @@clientName(ExecutionTrigger.type, "triggerType", "csharp");
 @@clientName(TriggerParametersUpdate,
@@ -253,6 +250,7 @@ using Azure.Core;
 @@alternateType(LocalUsers.nextLink, string, "csharp");
 @@clientName(LocalUser, "StorageAccountLocalUser", "csharp");
 @@clientName(TagFilter, "ManagementPolicyTagFilter", "csharp");
+@@clientName(TagFilter.`op`, "Operator", "csharp");
 @@clientName(RuleType, "ManagementPolicyRuleType", "csharp");
 @@clientName(ManagementPolicyRule.type, "ruleType", "csharp");
 @@clientName(ManagementPolicyRule.enabled, "IsEnabled", "csharp");
@@ -409,7 +407,6 @@ using Azure.Core;
 @@clientName(Format, "BlobInventoryPolicyFormat", "csharp");
 @@clientName(Schedule, "BlobInventoryPolicySchedule", "csharp");
 @@clientName(ObjectType, "BlobInventoryPolicyObjectType", "csharp");
-@@clientName(BlobRestoreParameters.timeToRestore, "timetoRestore", "csharp"); //不管用
 @@clientName(AccountLimits, "FileServiceAccountLimits", "csharp");
 @@clientName(AccountUsage, "FileServiceAccountUsage", "csharp");
 @@clientName(ActiveDirectoryProperties,
@@ -451,7 +448,7 @@ using Azure.Core;
 @@clientName(AccessPolicy, "StorageServiceAccessPolicy", "csharp");
 @@clientName(RoutingChoice, "StorageTaskRoutingChoice", "csharp");
 @@clientName(SKUCapability, "StorageSkuCapability", "csharp");
-// @@clientName(ListKeyExpand, "StorageListKeyExpand", "csharp");
+@@clientName(ListKeyExpand, "StorageListKeyExpand", "csharp");
 @@clientName(Bypass, "StorageNetworkBypass", "csharp");
 @@clientName(DefaultAction, "StorageNetworkDefaultAction", "csharp");
 @@clientName(VirtualNetworkRule, "StorageAccountVirtualNetworkRule", "csharp");
@@ -467,7 +464,6 @@ using Azure.Core;
   "NetworkSecurityPerimeterProvisioningIssueSeverity",
   "csharp"
 );
-// @@clientName(NetworkRuleAction, "StorageAccountNetworkRuleAction", "csharp");
 @@clientName(CheckNameAvailabilityResult,
   "StorageAccountNameAvailabilityResult",
   "csharp"
@@ -483,7 +479,6 @@ using Azure.Core;
 @@clientName(FileServiceProperties, "FileService", "csharp");
 @@clientName(FileShareItem, "FileShareData", "csharp");
 
-// @@clientName(FailoverType, "StorageAccountFailoverType", "csharp");
 @@clientName(RestorePolicyProperties, "RestorePolicy", "csharp");
 @@clientName(ListQueue, "StorageQueueData", "csharp");
 @@alternateType(ListQueueResource.nextLink, string, "csharp");
@@ -497,8 +492,96 @@ using Azure.Core;
   "Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size."
 );
 @@doc(ListContainerItems.value, "List of blobs containers returned.");
+@@alternateType(StorageTaskAssignmentsList.nextLink, string, "csharp");
+@@doc(StorageTaskAssignmentsList.nextLink,
+  "Request URL that can be used to query next page of storage task assignments. Returned when total number of requested storage task assignments exceed maximum page size."
+);
+@@doc(StorageTaskAssignmentsList.value,
+  "Gets the list of storage task assignments and their properties. "
+);
 
-@@clientName(StorageAccountIPRuleAction,
-  "StorageAccountNetworkRuleAction",
+@@clientName(Action, "StorageAccountNetworkRuleAction", "csharp");
+@@clientName(FailoverType, "StorageAccountFailoverType", "csharp");
+
+@@clientName(StorageAccountProperties.accountMigrationInProgress,
+  "IsAccountMigrationInProgress",
   "csharp"
 );
+@@clientName(StorageAccountCheckNameAvailabilityParameters.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(RoutingPreference.publishMicrosoftEndpoints,
+  "IsMicrosoftEndpointsPublished",
+  "csharp"
+);
+@@clientName(RoutingPreference.publishInternetEndpoints,
+  "IsInternetEndpointsPublished",
+  "csharp"
+);
+@@clientName(AccessPolicy.expiryTime, "expireOn", "csharp");
+@@clientName(TableAccessPolicy.expiryTime, "expireOn", "csharp");
+@@clientName(Restriction.type, "restrictionType", "csharp");
+@@clientName(StorageTaskAssignmentUpdateProperties.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(StorageTaskAssignmentProperties.enabled, "IsEnabled", "csharp");
+@@clientName(StorageTaskReportProperties.startTime, "startedOn", "csharp");
+@@alternateType(StorageTaskReportProperties.startTime,
+  offsetDateTime,
+  "csharp"
+);
+@@alternateType(StorageTaskReportProperties.finishTime,
+  offsetDateTime,
+  "csharp"
+);
+
+@@clientName(StorageTaskReportProperties.finishTime, "finishedOn", "csharp");
+@@alternateType(StorageTaskReportSummary.nextLink, string, "csharp");
+@@doc(StorageTaskReportSummary.nextLink,
+  "Request URL that can be used to query next page of storage task run results summary. Returned when the number of run instances and summary reports exceed maximum page size."
+);
+@@doc(StorageTaskReportSummary.value, "Gets storage tasks run result summary.");
+@@clientName(UpdateHistoryProperty.update, "UpdateType", "csharp");
+@@alternateType(UpdateHistoryProperty.tenantId, uuid, "csharp");
+@@clientName(ProtocolSettings.smb, "SmbSetting", "csharp");
+@@alternateType(ImmutabilityPolicyProperties.etag, eTag, "csharp");
+
+@@alternateType(FileServiceUsages.nextLink, string, "csharp");
+@@doc(FileServiceUsages.nextLink,
+  "Request URL that can be used to query next page of file service usages. Returned when total number of requested file service usages exceed maximum page size. "
+);
+@@doc(FileServiceUsages.value, "List of file service usages returned.");
+
+@@alternateType(FileShareItems.nextLink, string, "csharp");
+@@doc(FileShareItems.nextLink,
+  "Request URL that can be used to query next page of shares. Returned when total number of requested shares exceed maximum page size."
+);
+@@doc(FileShareItems.value, "List of file shares returned.");
+
+@@doc(ListTableResource.nextLink,
+  "Request URL that can be used to query next page of tables."
+);
+
+@@clientName(ListTableResource.value, "Value", "csharp");
+@@alternateType(NetworkSecurityPerimeter.perimeterGuid, uuid, "csharp");
+@@alternateType(NetworkSecurityPerimeter.location, azureLocation, "csharp");
+
+@@alternateType(NetworkSecurityPerimeterConfigurationList.nextLink,
+  string,
+  "csharp"
+);
+@@doc(NetworkSecurityPerimeterConfigurationList.nextLink,
+  "The URI that can be used to request the next set of paged results."
+);
+@@doc(NetworkSecurityPerimeterConfigurationList.value,
+  "A collection of Network Security Perimeter configurations."
+);
+@@clientName(RestorePolicyProperties.enabled, "IsEnabled", "csharp");
+@@clientName(Endpoints.blob, "BlobUri", "csharp");
+@@clientName(Endpoints.queue, "QueueUri", "csharp");
+@@clientName(Endpoints.table, "TableUri", "csharp");
+@@clientName(Endpoints.file, "FileUri", "csharp");
+@@clientName(Endpoints.web, "WebUri", "csharp");
+@@clientName(Endpoints.dfs, "DfsUri", "csharp");
