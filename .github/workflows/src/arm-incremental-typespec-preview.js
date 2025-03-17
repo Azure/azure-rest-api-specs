@@ -1,6 +1,7 @@
 // @ts-check
 
-import { dirname, join } from "path";
+// For now, treat all paths as posix, since this is the format returned from git commands
+import { dirname, join } from "path/posix";
 import {
   example,
   getChangedFiles,
