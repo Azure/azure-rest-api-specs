@@ -79,14 +79,42 @@ export async function extractInputs(github, context, core) {
       /** @type {import("@octokit/webhooks-types").WorkflowDispatchEvent} */ (
         context.payload
       );
+    if (process.env.CHECK_RUN_ID) {
+      core.info(`Fetching check run with ID from input: ${process.env.CHECK_RUN_ID}`);
 
-    inputs = {
-      owner: payload.repository.owner.login,
-      repo: payload.repository.name,
-      head_sha: "",
-      issue_number: NaN,
-      run_id: NaN,
-    };
+      // fetch the check run with specific ID in case of dispatch run
+      let checkRun = (await github.rest.checks.get({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        check_run_id: parseInt(process.env.CHECK_RUN_ID)
+      })).data;
+      if (!checkRun) {
+        throw new Error('No check run data found in the API response');
+      }
+      // Extract the ADO build ID and project URL from the check run details URL
+      const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
+      const match = checkRun.details_url.match(buildUrlRegex);
+      if (!match) {
+        throw new Error(
+          `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
+        );
+      }
+      inputs = {
+        owner: context.payload.repository.owner.login,
+        repo: context.payload.repository.name,
+        head_sha: context.payload.check_run.head_sha,
+        ado_build_id: match[2],
+        ado_project_url: match[1],
+      };
+    } else {
+      inputs = {
+        owner: payload.repository.owner.login,
+        repo: payload.repository.name,
+        head_sha: "",
+        issue_number: NaN,
+        run_id: NaN,
+      };
+    }
   } else if (
     context.eventName === "workflow_run" &&
     context.payload.action === "completed"
@@ -209,7 +237,7 @@ export async function extractInputs(github, context, core) {
       issue_number: issue_number,
       run_id: payload.workflow_run.id,
     };
-  } else if (context.eventName === "check_run" || (context.eventName === "workflow_dispatch" && process.env.CHECK_RUN_ID)) {
+  } else if (context.eventName === "check_run") {
     let checkRun = context.payload.check_run;
     if (process.env.CHECK_RUN_ID) {
       core.info(`Fetching check run with ID from input: ${process.env.CHECK_RUN_ID}`);
