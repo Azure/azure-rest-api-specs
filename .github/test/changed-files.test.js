@@ -13,7 +13,7 @@ import * as git from "../src/git.js";
 import { createMockLogger } from "./mocks.js";
 
 describe("changedFiles", () => {
-  it.each([{ logger: null }, { logger: createMockLogger() }])(
+  it.each([{}, { logger: createMockLogger() }])(
     `getChangedFiles(%o)`,
     async ({ logger }) => {
       const files = [
