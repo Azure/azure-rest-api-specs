@@ -275,7 +275,7 @@ union CreateByTypes {
 
   @added(APIVersions.v2025_03_01_preview)
   @doc("Entity was created by GitHub Workflows.")
-  "GithubWorkFlows"
+  "GitHubWorkflows"
 }
 
 @doc("Test file info.")
