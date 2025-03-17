@@ -37,11 +37,9 @@ jobs:
           node-version: 20.x
           working-directory: ./.github
 
-      - name: Check types
-        run: npx tsc && echo "Type checking completed successfully!"
+      - run: npm run lint
 
-      - name: Run tests
-        run: npm run test:ci
+      - run: npm run test:ci
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
