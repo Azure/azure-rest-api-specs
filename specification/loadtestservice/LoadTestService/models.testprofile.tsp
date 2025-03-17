@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -48,25 +49,25 @@ union TestProfileRunStatus {
   string,
 
   @doc("Test profile run request is accepted.")
-  ACCEPTED: "ACCEPTED",
+  Accepted: "ACCEPTED",
 
   @doc("Test profile run is not yet started.")
-  NOTSTARTED: "NOTSTARTED",
+  NotStarted: "NOTSTARTED",
 
   @doc("Test profile run has started executing.")
-  EXECUTING: "EXECUTING",
+  Executing: "EXECUTING",
 
   @doc("Test profile run has completed successfully.")
-  DONE: "DONE",
+  Done: "DONE",
 
   @doc("Test profile run is being cancelled.")
-  CANCELLING: "CANCELLING",
+  Cancelling: "CANCELLING",
 
   @doc("Test profile run is cancelled.")
-  CANCELLED: "CANCELLED",
+  Cancelled: "CANCELLED",
 
   @doc("Test profile run has failed.")
-  FAILED: "FAILED",
+  Failed: "FAILED",
 }
 
 @doc("Category of Recommendation.")
@@ -89,14 +90,14 @@ model FunctionFlexConsumptionResourceConfiguration {
   instanceMemoryMB: int64;
 
   @doc("HTTP Concurrency for the function app.")
-  httpConcurrency: int64;
+  httpConcurrency?: int64;
 }
 
 @doc("Details of a particular test run for a test profile run.")
 @added(APIVersions.v2024_05_01_preview)
 model TestRunDetail {
   @doc("Status of the test run.")
-  status: Status;
+  status: TestRunStatus;
 
   @doc("ID of the configuration on which the test ran.")
   configurationId: string;
@@ -160,7 +161,7 @@ model TestProfile {
 
   @doc("Target resource ID on which the test profile is created. This property is required for creating a Test Profile and it's not allowed to be updated.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  targetResourceId?: string;
+  targetResourceId?: armResourceIdentifier;
 
   @doc("Configurations of the target resource on which testing would be done.")
   targetResourceConfigurations?: TargetResourceConfigurations;
@@ -194,7 +195,7 @@ model TestProfileRun {
   // Begin section: Properties populated from Test Profile
   @doc("Target resource ID on which the test profile run is created")
   @visibility(Lifecycle.Read)
-  targetResourceId?: string;
+  targetResourceId?: armResourceIdentifier;
 
   @doc("Configurations of the target resource on which the test profile ran.")
   @visibility(Lifecycle.Read)

@@ -1,0 +1,216 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroup1",
+    "workflowName": "workflow1",
+    "parameters": {
+      "location": "location1",
+      "tags": {
+        "appname": "testApp"
+      },
+      "properties": {
+        "templateWorkflowProfile": {
+          "repositoryProvider": "github",
+          "gitHubProviderProfile": {
+            "repository": {
+              "repositoryOwner": "test-owner",
+              "repositoryName": "test-repo",
+              "branchName": "main"
+            },
+            "oidcCredentials": {
+              "azureClientId": "test-client-id",
+              "azureTenantId": "test"
+            }
+          },
+          "workflowTemplate": {
+            "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+            "destination": ".",
+            "parameters": {
+              "key1": "value1"
+            }
+          },
+          "deploymentTemplate": {
+            "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+            "destination": ".",
+            "parameters": {
+              "key1": "value1"
+            }
+          },
+          "dockerfileTemplate": {
+            "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+            "destination": ".",
+            "parameters": {
+              "key1": "value1"
+            }
+          },
+          "manifestTemplates": [
+            {
+              "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+              "destination": ".",
+              "parameters": {
+                "key1": "value1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/workflow/workflow1",
+        "location": "location1",
+        "name": "workflow1",
+        "type": "Micfosoft.DevHub/Workflow",
+        "tags": {
+          "appname": "testapp"
+        },
+        "systemData": {
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+        },
+        "properties": {
+          "templateWorkflowProfile": {
+            "repositoryProvider": "github",
+            "gitHubProviderProfile": {
+              "repository": {
+                "repositoryOwner": "test-owner",
+                "repositoryName": "test-repo",
+                "branchName": "main"
+              },
+              "oidcCredentials": {
+                "azureClientId": "test-client-id",
+                "azureTenantId": "test"
+              }
+            },
+            "workflowTemplate": {
+              "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+              "destination": ".",
+              "parameters": {
+                "key1": "value1"
+              }
+            },
+            "deploymentTemplate": {
+              "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+              "destination": ".",
+              "parameters": {
+                "key1": "value1"
+              }
+            },
+            "dockerfileTemplate": {
+              "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+              "destination": ".",
+              "parameters": {
+                "key1": "value1"
+              }
+            },
+            "manifestTemplates": [
+              {
+                "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+                "destination": ".",
+                "parameters": {
+                  "key1": "value1"
+                }
+              }
+            ],
+            "pullRequest": {
+              "prURL": "testurl",
+              "pullNumber": 1234,
+              "prStatus": "submitted"
+            },
+            "lastWorkflowRun": {
+              "succeeded": false,
+              "workflowRunURL": "testurl",
+              "lastRunAt": "2023-10-01T00:00:00Z",
+              "workflowRunStatus": "queued"
+            },
+            "authStatus": "Authorized"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/workflow/workflow1",
+        "location": "location1",
+        "name": "workflow1",
+        "type": "Micfosoft.DevHub/Workflow",
+        "tags": {
+          "appname": "testapp"
+        },
+        "systemData": {
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+        },
+        "properties": {
+          "templateWorkflowProfile": {
+            "repositoryProvider": "github",
+            "gitHubProviderProfile": {
+              "repository": {
+                "repositoryOwner": "test-owner",
+                "repositoryName": "test-repo",
+                "branchName": "main"
+              },
+              "oidcCredentials": {
+                "azureClientId": "test-client-id",
+                "azureTenantId": "test"
+              }
+            },
+            "workflowTemplate": {
+              "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+              "destination": ".",
+              "parameters": {
+                "key1": "value1"
+              }
+            },
+            "deploymentTemplate": {
+              "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+              "destination": ".",
+              "parameters": {
+                "key1": "value1"
+              }
+            },
+            "dockerfileTemplate": {
+              "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+              "destination": ".",
+              "parameters": {
+                "key1": "value1"
+              }
+            },
+            "manifestTemplates": [
+              {
+                "templateId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/templates/test-template/versions/0.0.1",
+                "destination": ".",
+                "parameters": {
+                  "key1": "value1"
+                }
+              }
+            ],
+            "pullRequest": {
+              "prURL": "testurl",
+              "pullNumber": 1234,
+              "prStatus": "submitted"
+            },
+            "lastWorkflowRun": {
+              "succeeded": false,
+              "workflowRunURL": "testurl",
+              "lastRunAt": "2023-10-01T00:00:00Z",
+              "workflowRunStatus": "queued"
+            },
+            "authStatus": "Authorized"
+          }
+        }
+      }
+    }
+  }
+}

@@ -83,10 +83,10 @@ model TriggerDisabledNotificationEventFilter
 @doc("TestRunEnded Event condition.")
 model TestRunEndedEventCondition {
   @doc("The test run statuses to send notification for.")
-  testRunStatuses?: Status[];
+  testRunStatuses?: TestRunStatus[];
 
   @doc("The test run results to send notification for.")
-  testRunResults?: PFTestResult[];
+  testRunResults?: PassFailTestResult[];
 }
 
 @added(APIVersions.v2024_12_01_preview)
