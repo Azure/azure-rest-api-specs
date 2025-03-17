@@ -116,8 +116,6 @@ interface BatchClient {
 );
 
 // client name overrides
-@@clientName(BatchClient.getCertificate, "getCertificateInternal", "java");
-
 @@clientName(BatchClient.jobScheduleExists,
   "jobScheduleExistsInternal",
   "java"

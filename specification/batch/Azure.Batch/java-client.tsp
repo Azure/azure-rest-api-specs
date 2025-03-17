@@ -807,6 +807,31 @@ op deleteCertificateCustomization is Azure.Batch.DeleteOperationNew<
   "java"
 );
 
+// Get Certificate Operation
+@doc("Optional parameters for Get Certificate operation.")
+model GetBatchCertificateOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.GetCertificateOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Certificate operation.")
+@route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
+op getCertificateCustomization is Azure.Batch.ReadOperationNew<
+  {
+    ...Azure.Batch.GetCertificateRequiredParameters;
+
+    @doc("Optional parameters for Get Certificate operation.")
+    options?: GetBatchCertificateOptions;
+  },
+  Azure.Batch.BatchCertificate
+>;
+
+@@override(Azure.Batch.Certificates.getCertificate,
+  getCertificateCustomization,
+  "java"
+);
+
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
 model CreateBatchJobScheduleOptions {
