@@ -99,7 +99,7 @@ export async function buildState(changedSpecFiles: string[], rootPath: string): 
     // made more efficient.
     const readmeContent = await readFile(join(rootPath, readme), { encoding: "utf-8" });
     for (const tag of getAllTags(readmeContent)) {
-      const inputFiles = (await getInputFiles(readmeContent, tag))?.map((file) =>
+      const inputFiles = getInputFiles(readmeContent, tag).map((file) =>
         join(dirname(readme), file),
       );
       if (inputFiles === undefined || inputFiles.length === 0) {

@@ -9,14 +9,18 @@ import { kebabCase } from "change-case";
 import axios from "axios";
 import * as YAML from "js-yaml";
 
-export type MarkdownType = "arm" | "data-plane" | "default";
+export enum MarkdownType {
+  Arm = "arm",
+  DataPlane = "data-plane",
+  Default = "default",
+}
 
 /**
  *
  * @param markdownFile Path to the markdown file to parse
  * @returns {Promise<MarkdownType>} The type of OpenAPI spec in the markdown file, or "default" if not found
  */
-export const getOpenapiType = async function (markdownFile: string): Promise<MarkdownType> {
+export async function getOpenapiType(markdownFile: string): Promise<MarkdownType> {
   let markdownContent = await readFile(markdownFile, { encoding: "utf-8" });
   for (const codeBlock of parseCodeblocks(markdownContent)) {
     if (
@@ -28,37 +32,30 @@ export const getOpenapiType = async function (markdownFile: string): Promise<Mar
     }
 
     let lines = codeBlock.literal.trim().split("\n");
-    if (!lines) {
-      continue;
-    }
 
     for (const line of lines) {
       if (line.trim().startsWith("openapi-type:")) {
         let openapiType = line.trim().split(":")[1].trim().toLowerCase();
 
-        // Try to convert to MarkdownType enum and return result. If conversion
-        // fails, keep looking for another openapi-type
-        try {
+        if (Object.values(MarkdownType).includes(openapiType as MarkdownType)) {
           return openapiType as MarkdownType;
-        } catch (e) {
-          continue;
         }
       }
     }
   }
 
   // Fallback, no openapi-type found in the file. Look at path to determine type
-  // resource-manager: "arm"
-  // data-plane: "data-plane"
+  // resource-manager: Arm
+  // data-plane: DataPlane
   if (markdownFile.match(/.*specification\/.*\/resource-manager\/.*readme.md$/g)) {
-    return "arm";
+    return MarkdownType.Arm;
   } else if (markdownFile.match(/.*specification\/.*\/data-plane\/.*readme.md$/g)) {
-    return "data-plane";
+    return MarkdownType.DataPlane;
   }
 
-  // No type was found, return "default"
-  return "default";
-};
+  // No type was found, return Default
+  return MarkdownType.Default;
+}
 
 // TODO: Direct copy/paste from utils, factor appropriately
 function* parseCodeblocks(markdown: string): Iterable<commonmark.Node> {
@@ -94,13 +91,10 @@ export function getAllTags(readMeContent: string): string[] {
 
 type TagInputFile = { tagName: string; inputFiles: readonly string[] };
 
-export async function getTagsAndInputFiles(
-  tags: string[],
-  readmeContent: string,
-): Promise<TagInputFile[]> {
+export function getTagsAndInputFiles(tags: string[], readmeContent: string): TagInputFile[] {
   const tagResults: TagInputFile[] = [];
   for (const tag of tags) {
-    const inputFiles = (await getInputFiles(readmeContent, tag)) || [];
+    const inputFiles = getInputFiles(readmeContent, tag);
     if (inputFiles.length > 0) {
       tagResults.push({ tagName: tag, inputFiles });
     }
@@ -131,9 +125,10 @@ export function deduplicateTags(tagInfo: TagInputFile[]) {
     .map((tag) => tag.tagName);
 }
 
-export async function getInputFiles(readMeContent: string, tag: string) {
+export function getInputFiles(readMeContent: string, tag: string): readonly string[] {
   const cmd = parseMarkdown(readMeContent);
-  return amd.getInputFilesForTag(cmd.markDown, tag);
+  const inputFiles = amd.getInputFilesForTag(cmd.markDown, tag);
+  return inputFiles || [];
 }
 
 export function getDocRawUrl(code: string) {
@@ -165,7 +160,7 @@ export async function getRelatedArmRpcFromDoc(ruleName: string) {
   } catch (e: any) {
     // TODO: Retry? Fail ungracefully?
     console.log(`GET ${docUrl} failed with ${e.message} .`);
-    rpcInfoCache.set(ruleName, []);
+    rpcInfoCache.set(ruleName, rpcRules);
     return rpcRules;
   }
 
@@ -176,7 +171,7 @@ export async function getRelatedArmRpcFromDoc(ruleName: string) {
     if (
       event.entering &&
       node.type === "heading" &&
-      node.firstChild?.literal === "Related ARM Guideline Code"
+      node.firstChild?.literal?.toLowerCase() === "related arm guideline code"
     ) {
       const next = node.next;
       if (next?.type == "list") {
@@ -184,7 +179,7 @@ export async function getRelatedArmRpcFromDoc(ruleName: string) {
         while (currentItem) {
           const code = currentItem?.firstChild?.firstChild?.literal;
           if (code) {
-            rpcRules.push(code);
+            rpcRules.push(...code.split(",").map((c) => c.trim()));
           }
           currentItem = currentItem.next;
         }
