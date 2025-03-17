@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { createMockCore, createMockGithub } from "../../test/mocks.js";
 import { PER_PAGE_MAX } from "../src/github.js";
 import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
+import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("updateLabels", () => {
   it("loads inputs from env", async () => {

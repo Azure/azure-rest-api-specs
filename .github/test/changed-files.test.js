@@ -10,21 +10,25 @@ import {
   swagger,
 } from "../src/changed-files.js";
 import * as git from "../src/git.js";
-import { createMockCore } from "./mocks.js";
+import { createMockLogger } from "./mocks.js";
 
 describe("changedFiles", () => {
-  it("getChangedFiles", async () => {
-    const files = [
-      ".github/src/git.js",
-      "specification/contosowidgetmanager/Contoso.Management/main.tsp",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
-    ];
+  it.each([{}, { logger: createMockLogger() }])(
+    `getChangedFiles(%o)`,
+    async ({ logger }) => {
+      const files = [
+        ".github/src/git.js",
+        "specification/contosowidgetmanager/Contoso.Management/main.tsp",
+        "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
+        "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
+      ];
 
-    vi.spyOn(git, "diff").mockResolvedValue(files.join("\n"));
+      vi.spyOn(git, "diff").mockResolvedValue(files.join("\n"));
 
-    await expect(getChangedFiles(createMockCore())).resolves.toEqual(files);
-  });
+      // test with and without logger
+      await expect(getChangedFiles({ logger })).resolves.toEqual(files);
+    },
+  );
 
   const files = [
     "cspell.json",
