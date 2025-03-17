@@ -1092,6 +1092,18 @@ alias EnableJobScheduleRequiredParameters = {
   jobScheduleId: string;
 };
 
+alias TerminateJobScheduleRequiredParameters = {
+  @doc("The ID of the Job Schedule to terminates.")
+  @path
+  jobScheduleId: string;
+};
+
+alias TerminateJobScheduleOptionalParameters = {
+  @doc("If true, the server will terminate the JobSchedule even if the corresponding nodes have not fully processed the termination. The default value is false.")
+  @query
+  force?: boolean;
+};
+
 alias CreateJobScheduleParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
@@ -1232,16 +1244,12 @@ interface JobSchedules {
   @summary("Terminates a Job Schedule.")
   @doc("Terminates a Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/terminate")
-  @clientName("terminateJobScheduleInternal", "java")
-  terminateJobSchedule is PostOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to terminates.")
-      @path
-      jobScheduleId: string;
-
-      @doc("If true, the server will terminate the JobSchedule even if the corresponding nodes have not fully processed the termination. The default value is false.")
-      @query
-      force?: boolean;
+  terminateJobSchedule is PostOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...TerminateJobScheduleRequiredParameters;
+      ...TerminateJobScheduleOptionalParameters;
     },
     AcceptedProcessingResponseHeaders
   >;

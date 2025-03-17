@@ -1018,6 +1018,33 @@ op enableJobScheduleCustomization is Azure.Batch.PostOperationNew<
   "java"
 );
 
+// Terminate Job Schedule Operation
+@doc("Optional parameters for Terminate Job Schedule operation.")
+model TerminateBatchJobScheduleOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.TerminateJobScheduleOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Terminate Job Schedule operation.")
+@route("/jobschedules/{jobScheduleId}/terminate")
+op terminateJobScheduleCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.TerminateJobScheduleRequiredParameters;
+
+    @doc("Optional parameters for Terminate Job Schedule operation.")
+    options?: TerminateBatchJobScheduleOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.JobSchedules.terminateJobSchedule,
+  terminateJobScheduleCustomization,
+  "java"
+);
+
 // Create Job Schedule Operation
 @doc("Optional parameters for Create Job Schedule operation.")
 model CreateBatchJobScheduleOptions {
