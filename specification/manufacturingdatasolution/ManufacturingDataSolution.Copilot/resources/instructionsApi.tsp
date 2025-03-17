@@ -34,18 +34,18 @@ interface InstructionServiceClient {
     QueryParametersTrait<{
       @doc("Get all active instructions by status.")
       @query
-      status: InstructionStatusEnum;
+      state: ResourceState;
     }>
   >;
 
-  // @doc("Create an instruction.")
-  // @pollingOperation(
-  //   MdsSolution.CopilotService.OperationStatus.OperationProgress.getOperationResult
-  // )
-  // create is apiOperations.LongRunningResourceCreateWithServiceProvidedName<
-  //   Instruction,
-  //   jobLocationResponseHeaders
-  // >;
+  @doc("Create an instruction.")
+  @pollingOperation(
+    MdsSolution.CopilotService.OperationServiceClient.getOperationResult
+  )
+  create is apiOperations.LongRunningResourceCreateWithServiceProvidedName<
+    Instruction,
+    jobLocationResponseHeaders
+  >;
 
   @doc("create Or Replace instructions.")
   @pollingOperation(

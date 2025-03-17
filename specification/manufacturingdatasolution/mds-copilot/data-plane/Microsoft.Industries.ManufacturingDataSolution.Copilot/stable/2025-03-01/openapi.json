@@ -308,7 +308,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "status",
+            "name": "state",
             "in": "query",
             "description": "Get all active instructions by status.",
             "required": true,
@@ -318,7 +318,7 @@
               "Inactive"
             ],
             "x-ms-enum": {
-              "name": "InstructionStatusEnum",
+              "name": "ResourceState",
               "modelAsString": true,
               "values": [
                 {
@@ -363,6 +363,56 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "post": {
+        "operationId": "InstructionServiceClient_Create",
+        "description": "Create an instruction.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Models.Instruction"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Instruction"
+              },
+              "operation-location": {
+                "type": "string",
+                "description": "The background job location."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/copilot/instructions/{id}": {
@@ -376,7 +426,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "intruction Id for the instruction",
+            "description": "Id for the instruction",
             "required": true,
             "type": "string",
             "maxLength": 60,
@@ -419,7 +469,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "intruction Id for the instruction",
+            "description": "Id for the instruction",
             "required": true,
             "type": "string",
             "maxLength": 60,
@@ -495,7 +545,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "intruction Id for the instruction",
+            "description": "Id for the instruction",
             "required": true,
             "type": "string",
             "maxLength": 60,
@@ -932,162 +982,6 @@
           }
         }
       }
-    },
-    "/copilot/validationJob/{testName}:run": {
-      "post": {
-        "operationId": "QueryValidateJobClient_Run",
-        "description": "Validate a query",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testName",
-            "in": "path",
-            "description": "The unique identifier of the test.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Models.QueryValidationJobRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Models.QueryValidationJobScheduleConfirmation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "QueryValidateJobClient_Run_MaximumSet": {
-            "$ref": "./examples/QueryValidateJobClient_Run_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/copilot/validationJob/runs": {
-      "get": {
-        "operationId": "QueryValidateJobClient_ListQueryValidationJobHistory",
-        "description": "List validate test requests",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "fromDateAt",
-            "in": "query",
-            "description": "start date",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "endDateAt",
-            "in": "query",
-            "description": "end date",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "testRunId",
-            "in": "query",
-            "description": "test run id",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedQueryValidationJobRun"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "QueryValidateJobClient_ListQueryValidationJobHistory_MaximumSet": {
-            "$ref": "./examples/QueryValidateJobClient_ListQueryValidationJobHistory_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/copilot/validationJobDetails/{testId}": {
-      "get": {
-        "operationId": "QueryValidateJobClient_GetQueryValidationJobDetails",
-        "description": "Get the details of a validation job",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "testId",
-            "in": "path",
-            "description": "Test Id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Models.QueryValidationJobDetails"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "QueryValidateJobClient_GetQueryValidationJobDetails_MaximumSet": {
-            "$ref": "./examples/QueryValidateJobClient_GetQueryValidationJobDetails_MaximumSet_Gen.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1255,8 +1149,8 @@
           "description": "Indicates if the alias is enabled",
           "readOnly": true
         },
-        "enabled": {
-          "$ref": "#/definitions/Models.Choice",
+        "state": {
+          "$ref": "#/definitions/Models.ResourceState",
           "description": "Indicates if the alias is enabled",
           "x-ms-mutability": [
             "update"
@@ -1268,7 +1162,7 @@
         "name",
         "aliases",
         "isCustom",
-        "enabled"
+        "state"
       ]
     },
     "Models.Choice": {
@@ -1470,12 +1364,16 @@
       "type": "object",
       "description": "This is the request model for Instruction",
       "properties": {
-        "instructionId": {
+        "id": {
           "type": "string",
-          "description": "intruction Id for the instruction",
+          "description": "Id for the instruction",
           "maxLength": 60,
           "pattern": "^[a-zA-Z0-9_]*$",
           "readOnly": true
+        },
+        "instructionId": {
+          "type": "string",
+          "description": "intruction Id for the instruction"
         },
         "instructionVersion": {
           "type": "string",
@@ -1513,12 +1411,13 @@
           "$ref": "#/definitions/Models.AdministrativeDetails",
           "description": "audit record for the instruction"
         },
-        "status": {
-          "$ref": "#/definitions/Models.InstructionStatusEnum",
+        "state": {
+          "$ref": "#/definitions/Models.ResourceState",
           "description": "Status for the instruction"
         }
       },
       "required": [
+        "id",
         "instructionId",
         "instructionVersion",
         "domain",
@@ -1529,7 +1428,7 @@
         "content",
         "relationships",
         "administrativeDetails",
-        "status"
+        "state"
       ]
     },
     "Models.InstructionCategoryEnum": {
@@ -1582,30 +1481,6 @@
             "name": "EN",
             "value": "EN",
             "description": "English"
-          }
-        ]
-      }
-    },
-    "Models.InstructionStatusEnum": {
-      "type": "string",
-      "description": "Instruction Status Enums",
-      "enum": [
-        "Active",
-        "Inactive"
-      ],
-      "x-ms-enum": {
-        "name": "InstructionStatusEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "Instruction is active"
-          },
-          {
-            "name": "Inactive",
-            "value": "Inactive",
-            "description": "Instruction is inactive"
           }
         ]
       }
@@ -1723,72 +1598,6 @@
         "errorMessage"
       ]
     },
-    "Models.OperationStatus": {
-      "type": "string",
-      "description": "Operation Status",
-      "enum": [
-        "Accepted",
-        "InProgress",
-        "TransientFailure",
-        "Succeeded",
-        "Failed",
-        "Deleting",
-        "Canceled",
-        "Unknown",
-        "Skipped"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The operation is Accepted."
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The operation is in progress."
-          },
-          {
-            "name": "TransientFailure",
-            "value": "TransientFailure",
-            "description": "The operation encountered a transient failure."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation succeeded."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation failed."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The operation is being deleted."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation was canceled."
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The status of the operation is unknown."
-          },
-          {
-            "name": "Skipped",
-            "value": "Skipped",
-            "description": "The operation was skipped."
-          }
-        ]
-      }
-    },
     "Models.OperationStatusValue": {
       "type": "string",
       "description": "Operation Status",
@@ -1893,173 +1702,6 @@
         }
       }
     },
-    "Models.QueryValidationJobDetails": {
-      "type": "object",
-      "description": "Test Details Response",
-      "properties": {
-        "testId": {
-          "type": "string",
-          "description": "Test Id",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "testRunStatus": {
-          "$ref": "#/definitions/Models.OperationStatus",
-          "description": "Test Run Status"
-        },
-        "testResults": {
-          "type": "array",
-          "description": "Test Results",
-          "items": {
-            "$ref": "#/definitions/Models.QueryValidationTestCaseResult"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "testId",
-        "testRunStatus",
-        "testResults"
-      ]
-    },
-    "Models.QueryValidationJobRequestBody": {
-      "type": "object",
-      "description": "Validate job Request body",
-      "properties": {
-        "testCases": {
-          "type": "array",
-          "description": "The test cases for validation.",
-          "items": {
-            "$ref": "#/definitions/Models.QueryValidationTestCase"
-          },
-          "x-ms-identifiers": []
-        },
-        "runInConversationContext": {
-          "$ref": "#/definitions/Models.Choice",
-          "description": "run in the conversation context"
-        }
-      },
-      "required": [
-        "testCases",
-        "runInConversationContext"
-      ]
-    },
-    "Models.QueryValidationJobRun": {
-      "type": "object",
-      "description": "Validate Test Response",
-      "properties": {
-        "testId": {
-          "type": "string",
-          "description": "The unique identifier of the test.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "createdAt": {
-          "type": "string",
-          "description": "Date of test run"
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "Test owner"
-        }
-      },
-      "required": [
-        "testId",
-        "createdAt",
-        "createdBy"
-      ]
-    },
-    "Models.QueryValidationJobScheduleConfirmation": {
-      "type": "object",
-      "description": "Validate Response",
-      "properties": {
-        "testName": {
-          "type": "string",
-          "description": "Test Name"
-        },
-        "runId": {
-          "type": "string",
-          "description": "Test Run Id"
-        },
-        "status": {
-          "$ref": "#/definitions/Models.OperationStatus",
-          "description": "Test Run Status"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "creation date"
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "created by"
-        }
-      },
-      "required": [
-        "testName",
-        "runId",
-        "status",
-        "createdAt",
-        "createdBy"
-      ]
-    },
-    "Models.QueryValidationTestCase": {
-      "type": "object",
-      "description": "Test Case for validation job",
-      "properties": {
-        "ask": {
-          "type": "string",
-          "description": "The natural language input for the test case."
-        },
-        "expectedKqlQuery": {
-          "type": "string",
-          "description": "The expected kql query for the test case."
-        },
-        "skip": {
-          "$ref": "#/definitions/Models.Choice",
-          "description": "skip the test run"
-        }
-      },
-      "required": [
-        "skip"
-      ]
-    },
-    "Models.QueryValidationTestCaseResult": {
-      "type": "object",
-      "description": "Test Case Result",
-      "properties": {
-        "ask": {
-          "type": "string",
-          "description": "The query to be asked."
-        },
-        "expectedKqlQuery": {
-          "type": "string",
-          "description": "The expected KQL query."
-        },
-        "consolidatedScore": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The consolidated score of the test case.",
-          "default": 0
-        },
-        "status": {
-          "$ref": "#/definitions/Models.OperationStatus",
-          "description": "The status of the operation."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "The error message, if any."
-        }
-      },
-      "required": [
-        "ask",
-        "expectedKqlQuery",
-        "consolidatedScore",
-        "status"
-      ]
-    },
     "Models.Relationships": {
       "type": "object",
       "description": "Relationships",
@@ -2083,6 +1725,30 @@
         "dependencies",
         "exclusions"
       ]
+    },
+    "Models.ResourceState": {
+      "type": "string",
+      "description": "Instruction Status Enums",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Instruction is active"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Instruction is inactive"
+          }
+        ]
+      }
     },
     "Models.RetrievalProperties": {
       "type": "object",
@@ -2217,30 +1883,7 @@
           "description": "The Instruction items on this page",
           "items": {
             "$ref": "#/definitions/Models.Instruction"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedQueryValidationJobRun": {
-      "type": "object",
-      "description": "Paged collection of QueryValidationJobRun items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The QueryValidationJobRun items on this page",
-          "items": {
-            "$ref": "#/definitions/Models.QueryValidationJobRun"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",

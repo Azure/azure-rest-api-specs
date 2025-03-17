@@ -30,5 +30,5 @@ model Alias {
 
   @doc("Indicates if the alias is enabled")
   @visibility(Lifecycle.Update)
-  enabled: Choice;
+  state: ResourceState;
 }

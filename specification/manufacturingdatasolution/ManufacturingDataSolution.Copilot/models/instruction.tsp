@@ -10,16 +10,14 @@ namespace MdsSolution.CopilotService.Models;
 @resource("instructions")
 @doc("This is the request model for Instruction")
 model Instruction {
-  // @key("id")
-  // @visibility(Lifecycle.Read)
-  // @doc("Id for the instruction")
-  // id: string;
-
-  @doc("intruction Id for the instruction")
   @key("id")
   @visibility(Lifecycle.Read)
   @maxLength(60)
   @pattern("^[a-zA-Z0-9_]*$")
+  @doc("Id for the instruction")
+  id: string;
+
+  @doc("intruction Id for the instruction") 
   instructionId: string;
 
   @doc("Version for the instruction")
@@ -50,7 +48,7 @@ model Instruction {
   administrativeDetails: AdministrativeDetails;
 
   @doc("Status for the instruction")
-  status: InstructionStatusEnum;
+  state: ResourceState;
 }
 
 @resource("versions")
@@ -64,7 +62,7 @@ model InstructionVersion {
 
   @doc("Status for the instruction")
   @visibility(Lifecycle.Read)
-  status: InstructionStatusEnum;
+  state: ResourceState;
 
   @doc("The language of the instruction.")
   language: InstructionLanguageEnum;
@@ -85,20 +83,10 @@ model InstructionVersion {
 @doc("Instruction Patch Request")
 model InstructionPatchRequest {
   @doc("The instruction status.")
-  status: InstructionStatusEnum;
+  state: ResourceState;
 }
 
-@doc("Instruction Status Enums")
-union InstructionStatusEnum {
-  @doc("Instruction is active")
-  Active: "Active",
 
-  @doc("Instruction is inactive")
-  Inactive: "Inactive",
-
-  @doc("Extensible status type")
-  string,
-}
 
 @doc("Instruction Sub Domain Enums")
 union InstrustionDomainEnum {
@@ -238,5 +226,5 @@ model AdministrativeDetails {
 @doc("This is the patch request to update the status of instruction")
 model UpdateStatusRequest {
   @doc("status of the instruction")
-  status: InstructionStatusEnum;
+  state: ResourceState;
 }
