@@ -1578,3 +1578,27 @@ op disableNodeSchedulingCustomization is Azure.Batch.PostOperationNew<
   disableNodeSchedulingCustomization,
   "java"
 );
+
+// Enable Node Scheduling Operation
+@doc("Optional parameters for Enable Node Scheduling operation.")
+model EnableBatchNodeSchedulingOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Enable Node Scheduling operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/enablescheduling")
+op enableNodeSchedulingCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.EnableNodeSchedulingRequiredParameters;
+
+    @doc("Optional parameters for Enable Node Scheduling operation.")
+    options?: EnableBatchNodeSchedulingOptions;
+  },
+  Azure.Batch.RequestSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.Nodes.enableNodeScheduling,
+  enableNodeSchedulingCustomization,
+  "java"
+);

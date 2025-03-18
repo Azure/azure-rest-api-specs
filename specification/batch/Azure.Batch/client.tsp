@@ -121,10 +121,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.enableNodeScheduling,
-  "enableNodeSchedulingInternal",
-  "java"
-);
 @@clientName(BatchClient.getNodeRemoteLoginSettings,
   "getNodeRemoteLoginSettingsInternal",
   "java"

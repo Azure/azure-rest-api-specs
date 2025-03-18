@@ -1831,6 +1831,16 @@ alias DisableNodeSchedulingOptionalParameters = {
   parameters?: BatchNodeDisableSchedulingContent;
 };
 
+alias EnableNodeSchedulingRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node on which you want to enable Task scheduling.")
+  @path
+  nodeId: string;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1968,16 +1978,10 @@ interface Nodes {
     state is disabled
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/enablescheduling")
-  @clientName("enableNodeSchedulingInternal", "java")
-  enableNodeScheduling is PostOperation<
+  enableNodeScheduling is PostOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node on which you want to enable Task scheduling.")
-      @path
-      nodeId: string;
+      ...CommonParameters;
+      ...EnableNodeSchedulingRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
