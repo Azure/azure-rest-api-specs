@@ -1553,3 +1553,28 @@ op reimageNodeCustomization is Azure.Batch.PostOperationNew<
 >;
 
 @@override(Azure.Batch.Nodes.reimageNode, reimageNodeCustomization, "java");
+
+// Disable Node Scheduling Operation
+@doc("Optional parameters for Disable Node Scheduling operation.")
+model DisableBatchNodeSchedulingOptions {
+  ...Azure.Batch.CommonJsonParameters;
+  ...Azure.Batch.DisableNodeSchedulingOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Disable Node Scheduling operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/disablescheduling")
+op disableNodeSchedulingCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.DisableNodeSchedulingRequiredParameters;
+
+    @doc("Optional parameters for Disable Node Scheduling operation.")
+    options?: DisableBatchNodeSchedulingOptions;
+  },
+  Azure.Batch.RequestSuccessResponseHeaders
+>;
+
+@@override(Azure.Batch.Nodes.disableNodeScheduling,
+  disableNodeSchedulingCustomization,
+  "java"
+);

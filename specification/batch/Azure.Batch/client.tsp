@@ -121,10 +121,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.disableNodeScheduling,
-  "disableNodeSchedulingInternal",
-  "java"
-);
 @@clientName(BatchClient.enableNodeScheduling,
   "enableNodeSchedulingInternal",
   "java"

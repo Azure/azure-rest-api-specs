@@ -1815,6 +1815,22 @@ alias ReimageNodeOptionalParameters = {
   parameters?: BatchNodeReimageContent;
 };
 
+alias DisableNodeSchedulingRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node on which you want to disable Task scheduling.")
+  @path
+  nodeId: string;
+};
+
+alias DisableNodeSchedulingOptionalParameters = {
+  @doc("The options to use for disabling scheduling on the Compute Node.")
+  @bodyRoot
+  parameters?: BatchNodeDisableSchedulingContent;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1937,20 +1953,11 @@ interface Nodes {
     scheduling state is enabled.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/disablescheduling")
-  @clientName("disableNodeSchedulingInternal", "java")
-  disableNodeScheduling is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node on which you want to disable Task scheduling.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for disabling scheduling on the Compute Node.")
-      @bodyRoot
-      parameters?: BatchNodeDisableSchedulingContent;
+  disableNodeScheduling is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...DisableNodeSchedulingRequiredParameters;
+      ...DisableNodeSchedulingOptionalParameters;
     },
     RequestSuccessResponseHeaders
   >;
