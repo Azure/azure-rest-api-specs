@@ -1,6 +1,7 @@
 // @ts-check
 
-import { dirname, join } from "path";
+// For now, treat all paths as posix, since this is the format returned from git commands
+import { dirname, join } from "path/posix";
 import {
   example,
   getChangedFiles,
@@ -10,13 +11,16 @@ import {
 } from "../../src/changed-files.js";
 import { lsTree, show } from "../../src/git.js";
 import { getInputFiles } from "../../src/readme.js";
+import { CoreLogger } from "./core-logger.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<boolean>}
  */
 export default async function incrementalTypeSpec({ github, context, core }) {
-  const changedFiles = await getChangedFiles(core);
+  const options = { logger: new CoreLogger(core) };
+
+  const changedFiles = await getChangedFiles(options);
 
   // Includes swaggers, readmes, and examples
   const changedRmFiles = changedFiles.filter(resourceManager);
@@ -31,7 +35,7 @@ export default async function incrementalTypeSpec({ github, context, core }) {
     /** @type string */
     let swaggerText;
     try {
-      swaggerText = await show("HEAD", file, core);
+      swaggerText = await show("HEAD", file, options);
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
         // To simplify logic, if PR deletes a swagger file, it's not "incremental typespec"
@@ -66,7 +70,7 @@ export default async function incrementalTypeSpec({ github, context, core }) {
 
     let readmeText;
     try {
-      readmeText = await show("HEAD", readmeFile, core);
+      readmeText = await show("HEAD", readmeFile, options);
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
         // To simplify logic, if PR deletes a readme file, it's not "incremental typespec"
@@ -79,7 +83,7 @@ export default async function incrementalTypeSpec({ github, context, core }) {
     }
 
     // If a readme is changed, to be conservative, handle as if every input file in the readme were changed
-    const inputFiles = await getInputFiles(readmeText, core);
+    const inputFiles = await getInputFiles(readmeText, options);
 
     inputFiles.forEach((f) => {
       changedReadmeInputFiles.add(join(dirname(readmeFile), f));
@@ -102,12 +106,10 @@ export default async function incrementalTypeSpec({ github, context, core }) {
 
   // Ensure that each changed spec dir contained at least one typespec-generated swagger in the base commitish
   for (const changedSpecDir of changedSpecDirs) {
-    const specFilesBaseBranch = await lsTree(
-      "HEAD^",
-      changedSpecDir,
-      core,
-      "-r --name-only",
-    );
+    const specFilesBaseBranch = await lsTree("HEAD^", changedSpecDir, {
+      args: "-r --name-only",
+      ...options,
+    });
 
     // Filter files to only include RM swagger files
     const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
@@ -124,7 +126,7 @@ export default async function incrementalTypeSpec({ github, context, core }) {
     let containsTypeSpecGeneratedSwagger = false;
     // TODO: Add lint rule to prevent using "for...in" instead of "for...of"
     for (const file of specRmSwaggerFilesBaseBranch) {
-      const baseSwagger = await show("HEAD^", file, core);
+      const baseSwagger = await show("HEAD^", file, options);
       const baseSwaggerObj = JSON.parse(baseSwagger);
       if (baseSwaggerObj["info"]?.["x-typespec-generated"]) {
         core.info(

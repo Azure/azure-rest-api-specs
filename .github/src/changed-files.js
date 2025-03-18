@@ -1,32 +1,35 @@
 // @ts-check
 
 import { diff } from "./git.js";
+import { ILogger } from "./logger.js";
 
 /**
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @param {string} [baseCommitish] Defaults to "HEAD^".
- * @param {string} [headCommitish] Defaults to "HEAD".
+ * @param {Object} [options]
+ * @param {string} [options.baseCommitish] Defaults to "HEAD^"
+ * @param {string} [options.headCommitish] Defaults to "HEAD"
+ * @param {ILogger} [options.logger]
  * @returns {Promise<string[]>} List of changed files, relative to the repo root.  Example: ["specification/foo/Microsoft.Foo/main.tsp"]
  */
-export async function getChangedFiles(
-  core,
-  baseCommitish = "HEAD^",
-  headCommitish = "HEAD",
-) {
+export async function getChangedFiles(options = {}) {
+  const { baseCommitish = "HEAD^", headCommitish = "HEAD", logger } = options;
+
   // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
   // consider using "--name-status" instead of "--name-only", and return an array of objects like
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await diff(baseCommitish, headCommitish, core, "--name-only");
+  const result = await diff(baseCommitish, headCommitish, {
+    args: "--name-only",
+    logger: logger,
+  });
 
   const files = result.trim().split("\n");
 
-  core.info("Changed Files:");
+  logger?.info("Changed Files:");
   for (const file of files) {
-    core.info(`  ${file}`);
+    logger?.info(`  ${file}`);
   }
-  core.info("");
+  logger?.info("");
 
   return files;
 }
