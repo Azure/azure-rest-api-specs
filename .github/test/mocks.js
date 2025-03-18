@@ -12,4 +12,3 @@ export function createMockLogger() {
     isDebug: vi.fn().mockReturnValue(false),
   };
 }
-
