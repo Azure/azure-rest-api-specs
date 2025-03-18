@@ -88,6 +88,7 @@ namespace Azure.AI.Projects.ServicePatterns {
 
   namespace BuildingBlocks {
     alias CoreOps = Azure.Core.StandardResourceOperations;
-    alias RepeatableCoreOps = Azure.Core.ResourceOperations<Azure.Core.Traits.SupportsRepeatableRequests>;
+    alias RepeatableCoreOps = Azure.Core.ResourceOperations<Azure.Core.Traits.SupportsRepeatableRequests &
+      Azure.Core.Traits.SupportsClientRequestId>;
   }
 }
