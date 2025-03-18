@@ -1333,6 +1333,10 @@
           "type": "string",
           "x-ms-secret": true
         },
+        "accountKeyVaultProperties": {
+          "description": "Storage account key stored as an Azure Key Vault secret.",
+          "$ref": "#/definitions/SecretKeyVaultProperties"
+        },
         "accessMode": {
           "description": "Access mode for storage",
           "enum": [
@@ -1413,6 +1417,20 @@
             "name": "AccessMode",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "SecretKeyVaultProperties": {
+      "description": "Properties for a secret stored in a Key Vault.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "Resource ID of a managed identity to authenticate with Azure Key Vault, or System to use a system-assigned identity.",
+          "type": "string"
+        },
+        "keyVaultUrl": {
+          "description": "URL pointing to the Azure Key Vault secret.",
+          "type": "string"
         }
       }
     },
