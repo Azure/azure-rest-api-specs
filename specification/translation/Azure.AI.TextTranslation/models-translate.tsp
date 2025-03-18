@@ -13,10 +13,8 @@ namespace TextTranslation;
 model TranslateParameters {
   ...CommonParameters;
 
-  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Existing Spec"
-  @query({
-    format: "multi",
-  })
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing Spec"
+  @query(#{ explode: true })
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
     in the translation scope. For example, use to=de to translate to German.
@@ -30,7 +28,7 @@ model TranslateParameters {
     Specifies the language of the input text. Find which languages are available to translate from by 
     looking up supported languages using the translation scope. If the from parameter isn't specified, 
     automatic language detection is applied to determine the source language.
-
+    
     You must use the from parameter rather than autodetection when using the dynamic dictionary feature. 
     Note: the dynamic dictionary feature is case-sensitive.
     """)
@@ -56,14 +54,14 @@ model TranslateParameters {
     Specifies how profanities should be treated in translations.
     Possible values are: NoAction (default), Marked or Deleted.
     """)
-  profanityAction?: ProfanityAction = "NoAction";
+  profanityAction?: ProfanityAction = ProfanityAction.NoAction;
 
   @query
   @doc("""
     Specifies how profanities should be marked in translations.
     Possible values are: Asterisk (default) or Tag. 
     """)
-  profanityMarker?: ProfanityMarker = "Asterisk";
+  profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
   @query
   @doc("""
@@ -103,7 +101,7 @@ model TranslateParameters {
   @doc("""
     Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
     Possible values are: true (default) or false.
-
+    
     allowFallback=false specifies that the translation should only use systems trained for the category specified 
     by the request. If a translation for language X to language Y requires chaining through a pivot language E, 
     then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. 
@@ -117,7 +115,7 @@ model TranslateParameters {
 model TranslationResult {
   ...CommonResultHeaders;
 
-  @body
+  @bodyRoot
   @doc("Array of the translated text elements.")
   result: TranslatedTextItem[];
 
@@ -125,7 +123,7 @@ model TranslationResult {
   @doc("""
     Specifies the system type that was used for translation for each 'to' language requested for translation. 
     The value is a comma-separated list of strings. Each string indicates a type:
-
+    
     * Custom - Request includes a custom system and at least one custom system was used during translation.
     * Team - All other requests
     """)
@@ -140,36 +138,43 @@ model TranslationResult {
   meteredUsage: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum TextTypeKnownValues {
+@doc("Translation text type")
+union TextType {
+  string,
+
+  @doc("Plain text.")
   Plain: "Plain",
+
+  @doc("HTML-encoded text.")
   Html: "Html",
 }
 
-@doc("Translation text type")
-@knownValues(TextTypeKnownValues)
-scalar TextType extends string;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ProfanityActionKnownValues {
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
+@doc("Translator profanity actions")
+enum ProfanityAction {
+  @doc("No Action is taken on profanity")
   NoAction: "NoAction",
+
+  @doc("Profanity is marked.")
   Marked: "Marked",
+
+  @doc("Profanity is deleted from the translated text.")
   Deleted: "Deleted",
 }
 
-@doc("Translator profanity actions")
-@knownValues(ProfanityActionKnownValues)
-scalar ProfanityAction extends string;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ProfanityMarkerKnownValues {
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the `@fixed` decorator."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Azure services should not use the enum keyword."
+@fixed
+@doc("Translator profanity markers")
+enum ProfanityMarker {
+  @doc("Profanity is marked with asterisk.")
   Asterisk: "Asterisk",
+
+  @doc("Profanity is marked with the tags.")
   Tag: "Tag",
 }
-
-@doc("Translator profanity markers")
-@knownValues(ProfanityMarkerKnownValues)
-scalar ProfanityMarker extends string;
 
 @doc("Element containing the translated text")
 model TranslatedTextItem {
@@ -180,7 +185,7 @@ model TranslatedTextItem {
     An array of translation results. The size of the array matches the number of target 
     languages specified through the to query parameter.
     """)
-  translations: Translation[];
+  translations: TranslationText[];
 
   @doc("""
     Input text in the default script of the source language. sourceText property is present only when 
@@ -204,7 +209,7 @@ model DetectedLanguage {
 }
 
 @doc("Translation result")
-model Translation {
+model TranslationText {
   @doc("A string representing the language code of the target language.")
   to: string;
 
@@ -224,7 +229,7 @@ model Translation {
   @doc("""
     Sentence boundaries in the input and output texts.
     """)
-  sentLen?: SentenceLength;
+  sentLen?: SentenceBoundaries;
 }
 
 @doc("Alignment information object.")
@@ -241,7 +246,7 @@ model TranslatedTextAlignment {
 }
 
 @doc("An object returning sentence boundaries in the input and output texts.")
-model SentenceLength {
+model SentenceBoundaries {
   @doc("""
     An integer array representing the lengths of the sentences in the input text. 
     The length of the array is the number of sentences, and the values are the length of each sentence.

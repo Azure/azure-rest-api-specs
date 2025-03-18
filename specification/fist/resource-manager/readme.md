@@ -27,15 +27,38 @@ These are the global settings for the fist.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-02-08-preview
+tag: package-2024-01-10
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
+### Tag: package-2024-01-10
+
+These settings apply only when `--tag=package-2024-01-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-10'
+input-file:
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/binaryHardeningResults.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/common.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/cryptoCertificates.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/cryptoKeys.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/cves.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/firmwares.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/operations.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/passwordHashes.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/sbomComponents.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/summaries.json
+  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/workspaces.json
+```
 
 ### Tag: package-2023-02-08-preview
 
 These settings apply only when `--tag=package-2023-02-08-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02-08-preview'
+``` yaml $(tag) == 'package-2023-02-08-preview'
 input-file:
   - Microsoft.IoTFirmwareDefense/preview/2023-02-08-preview/common.json
   - Microsoft.IoTFirmwareDefense/preview/2023-02-08-preview/firmwares.json
@@ -54,9 +77,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
@@ -81,7 +104,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)

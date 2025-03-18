@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2024-02-13",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "body": {
+      "searchFilters": {
+        "cloud": "azure",
+        "region": "eastus",
+        "packages": "ADVANCED,ESSENTIALS"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "sgreg-7",
+            "kind": "Region",
+            "properties": {
+              "metadata": {
+                "createdTimestamp": "2023-04-06T10:24:09.840788Z",
+                "resourceName": "crn://confluent.cloud/schema-registry-region=sgreg-7",
+                "self": "https://api.stag.cpdev.cloud/srcm/v2/regions/sgreg-7",
+                "updatedTimestamp": "2023-04-06T10:24:09.840788Z"
+              },
+              "spec": {
+                "cloud": "AZURE",
+                "name": "Iowa (centralus)",
+                "packages": [
+                  "ADVANCED"
+                ],
+                "regionName": "centralus"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

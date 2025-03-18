@@ -2688,7 +2688,7 @@
           }
         ]
       },
-      "description": "Defines the names of all text analyzers supported by Azure Cognitive Search.",
+      "description": "Defines the names of all text analyzers supported by the search engine.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
       }
@@ -2781,7 +2781,7 @@
           }
         ]
       },
-      "description": "Defines the names of all tokenizers supported by Azure Cognitive Search.",
+      "description": "Defines the names of all tokenizers supported by the search engine.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
       }
@@ -3000,7 +3000,7 @@
           }
         ]
       },
-      "description": "Defines the names of all token filters supported by Azure Cognitive Search.",
+      "description": "Defines the names of all token filters supported by the search engine.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
       }
@@ -3045,7 +3045,7 @@
           }
         ]
       },
-      "description": "Defines the names of all text normalizers supported by Azure Cognitive Search.",
+      "description": "Defines the names of all text normalizers supported by the search engine.",
       "externalDocs": {
         "url": "https://aka.ms/azs-normalizers"
       }
@@ -3066,7 +3066,7 @@
           }
         ]
       },
-      "description": "Defines the names of all character filters supported by Azure Cognitive Search.",
+      "description": "Defines the names of all character filters supported by the search engine.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
       }
@@ -3205,7 +3205,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the analyzer."
+          "description": "A URI fragment specifying the type of analyzer. "
         },
         "name": {
           "type": "string",
@@ -3345,7 +3345,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the normalizer."
+          "description": "A URI fragment specifying the type of normalizer."
         },
         "name": {
           "type": "string",
@@ -3396,7 +3396,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the tokenizer."
+          "description": "A URI fragment specifying the type of tokenizer."
         },
         "name": {
           "type": "string",
@@ -4335,7 +4335,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the token filter."
+          "description": "A URI fragment specifying the type of token filter."
         },
         "name": {
           "type": "string",
@@ -5932,7 +5932,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the char filter."
+          "description": "A URI fragment specifying the type of char filter."
         },
         "name": {
           "type": "string",
@@ -6049,8 +6049,10 @@
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
     },
     "SemanticSettings": {
+      "x-ms-client-name": "SemanticSearch",
       "properties": {
         "defaultConfiguration": {
+          "x-ms-client-name": "defaultConfigurationName",
           "type": "string",
           "description": "Allows you to set the name of a default semantic configuration in your index, making it optional to pass it on as a query parameter every time."
         },
@@ -6093,12 +6095,14 @@
       "description": "Defines a specific configuration to be used in the context of semantic capabilities."
     },
     "PrioritizedFields": {
+      "x-ms-client-name": "SemanticPrioritizedFields",
       "properties": {
         "titleField": {
           "$ref": "#/definitions/SemanticField",
           "description": "Defines the title field to be used for semantic ranking, captions, highlights, and answers. If you don't have a title field in your index, leave this blank."
         },
         "prioritizedContentFields": {
+          "x-ms-client-name": "contentFields",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField"
@@ -6106,6 +6110,7 @@
           "description": "Defines the content fields to be used for semantic ranking, captions, highlights, and answers. For the best result, the selected fields should contain text in natural language form. The order of the fields in the array represents their priority. Fields with lower priority may get truncated if the content is long."
         },
         "prioritizedKeywordsFields": {
+          "x-ms-client-name": "keywordsFields",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SemanticField"
@@ -6126,6 +6131,9 @@
           "x-nullable": false
         }
       },
+      "required": [
+        "fieldName"
+      ],
       "description": "A field that is used as part of the semantic configuration."
     },
     "VectorSearch": {
@@ -6143,7 +6151,7 @@
           "items": {
             "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
           },
-          "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
+          "description": "Contains configuration options specific to the algorithm used during indexing or querying."
         },
         "vectorizers": {
           "type": "array",
@@ -6167,6 +6175,7 @@
           "x-nullable": false
         },
         "algorithm": {
+          "x-ms-client-name": "algorithmConfigurationName",
           "type": "string",
           "description": "The name of the vector search algorithm configuration that specifies the algorithm and optional parameters.",
           "x-nullable": false
@@ -6205,9 +6214,10 @@
         "name",
         "kind"
       ],
-      "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
+      "description": "Contains configuration options specific to the algorithm used during indexing or querying."
     },
     "HnswVectorSearchAlgorithmConfiguration": {
+      "x-ms-client-name": "HnswAlgorithmConfiguration",
       "type": "object",
       "x-ms-discriminator-value": "hnsw",
       "allOf": [
@@ -6219,10 +6229,10 @@
         "hnswParameters": {
           "x-ms-client-name": "Parameters",
           "$ref": "#/definitions/HnswParameters",
-          "description": "Contains the parameters specific to hnsw algorithm."
+          "description": "Contains the parameters specific to HNSW algorithm."
         }
       },
-      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing and querying. The hnsw algorithm offers a tunable trade-off between search speed and accuracy."
+      "description": "Contains configuration options specific to the HNSW approximate nearest neighbors algorithm used during indexing and querying. The HNSW algorithm offers a tunable trade-off between search speed and accuracy."
     },
     "HnswParameters": {
       "type": "object",
@@ -6260,9 +6270,10 @@
           "description": "The similarity metric to use for vector comparisons."
         }
       },
-      "description": "Contains the parameters specific to hnsw algorithm."
+      "description": "Contains the parameters specific to the HNSW algorithm."
     },
     "ExhaustiveKnnVectorSearchAlgorithmConfiguration": {
+      "x-ms-client-name": "ExhaustiveKnnAlgorithmConfiguration",
       "type": "object",
       "x-ms-discriminator-value": "exhaustiveKnn",
       "allOf": [
@@ -6330,7 +6341,7 @@
           {
             "value": "hnsw",
             "name": "Hnsw",
-            "description": "Hnsw (Hierarchical Navigable Small World), a type of approximate nearest neighbors algorithm."
+            "description": "HNSW (Hierarchical Navigable Small World), a type of approximate nearest neighbors algorithm."
           },
           {
             "value": "exhaustiveKnn",
@@ -6363,7 +6374,7 @@
         "name",
         "kind"
       ],
-      "description": "Contains specific details for a vectorization method to be used during query time."
+      "description": "Specifies the vectorization method to be used during query time."
     },
     "AzureOpenAIVectorizer": {
       "type": "object",
@@ -6377,10 +6388,10 @@
         "azureOpenAIParameters": {
           "x-ms-client-name": "AzureOpenAIParameters",
           "$ref": "#/definitions/AzureOpenAIParameters",
-          "description": "Contains the parameters specific to Azure Open AI embedding vectorization."
+          "description": "Contains the parameters specific to Azure OpenAI embedding vectorization."
         }
       },
-      "description": "Contains the parameters specific to using an Azure Open AI service for vectorization at query time."
+      "description": "Specifies the Azure OpenAI resource used to vectorize a query string."
     },
     "AzureOpenAIParameters": {
       "type": "object",
@@ -6388,15 +6399,15 @@
         "resourceUri": {
           "type": "string",
           "format": "uri",
-          "description": "The resource uri for your Azure Open AI resource."
+          "description": "The resource URI of the Azure OpenAI resource."
         },
         "deploymentId": {
           "type": "string",
-          "description": "ID of your Azure Open AI model deployment on the designated resource."
+          "description": "ID of the Azure OpenAI model deployment on the designated resource."
         },
         "apiKey": {
           "type": "string",
-          "description": "API key for the designated Azure Open AI resource."
+          "description": "API key of the designated Azure OpenAI resource."
         },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
@@ -6404,7 +6415,7 @@
           "description": "The user-assigned managed identity used for outbound connections."
         }
       },
-      "description": "Contains the parameters specific to using an Azure Open AI service for vectorization at query time."
+      "description": "Specifies the parameters for connecting to the Azure OpenAI resource."
     },
     "CustomVectorizer": {
       "type": "object",
@@ -6415,29 +6426,29 @@
         }
       ],
       "properties": {
-        "customVectorizerParameters": {
-          "x-ms-client-name": "CustomVectorizerParameters",
-          "$ref": "#/definitions/CustomVectorizerParameters",
-          "description": "Contains the parameters specific to generating vector embeddings via a custom endpoint."
+        "customWebApiParameters": {
+          "x-ms-client-name": "CustomWebApiParameters",
+          "$ref": "#/definitions/CustomWebApiParameters",
+          "description": "Specifies the properties of the user-defined vectorizer."
         }
       },
-      "description": "Contains the parameters specific to generating vector embeddings via a custom endpoint."
+      "description": "Specifies a user-defined vectorizer for generating the vector embedding of a query string. Integration of an external vectorizer is achieved using the custom Web API interface of a skillset."
     },
-    "CustomVectorizerParameters": {
+    "CustomWebApiParameters": {
       "type": "object",
       "properties": {
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "The uri for the Web API."
+          "description": "The URI of the Web API providing the vectorizer."
         },
         "httpHeaders": {
           "$ref": "#/definitions/WebApiHttpHeaders",
-          "description": "The headers required to make the http request."
+          "description": "The headers required to make the HTTP request."
         },
         "httpMethod": {
           "type": "string",
-          "description": "The method for the http request."
+          "description": "The method for the HTTP request."
         },
         "timeout": {
           "type": "string",
@@ -6455,7 +6466,7 @@
           "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
         }
       },
-      "description": "Contains the parameters specific to generating vector embeddings via a custom endpoint."
+      "description": "Specifies the properties for connecting to a user-defined vectorizer."
     },
     "VectorSearchVectorizerKind": {
       "type": "string",
@@ -6470,7 +6481,7 @@
           {
             "value": "azureOpenAI",
             "name": "AzureOpenAI",
-            "description": "Generate embeddings using an Azure Open AI service at query time."
+            "description": "Generate embeddings using an Azure OpenAI resource at query time."
           },
           {
             "value": "customWebApi",
@@ -6488,7 +6499,7 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Data-Source"
           },
           "type": "string",
-          "description": "The connection string for the datasource. Set to '<unchanged>' if you do not want the connection string updated."
+          "description": "The connection string for the datasource. Set to `<unchanged>` (with brackets) if you don't want the connection string updated. Set to `<redacted>` if you want to remove the connection string value from the datasource."
         }
       },
       "description": "Represents credentials that can be used to connect to a datasource."
@@ -6514,7 +6525,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the identity."
+          "description": "A URI fragment specifying the type of identity."
         }
       },
       "required": [
@@ -6554,7 +6565,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the data change detection policy."
+          "description": "A URI fragment specifying the type of data change detection policy."
         }
       },
       "required": [
@@ -6594,7 +6605,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the data deletion detection policy."
+          "description": "A URI fragment specifying the type of data deletion detection policy."
         }
       },
       "required": [
@@ -6725,7 +6736,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your datasource definition when you want full assurance that no one, not even Microsoft, can decrypt your data source definition in Azure Cognitive Search. Once you have encrypted your data source definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your datasource definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your datasource definition when you want full assurance that no one, not even Microsoft, can decrypt your data source definition. Once you have encrypted your data source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your datasource definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -6920,12 +6931,12 @@
           {
             "value": "jsonArray",
             "name": "JsonArray",
-            "description": "Set to jsonArray to extract individual elements of a JSON array as separate documents in Azure Cognitive Search."
+            "description": "Set to jsonArray to extract individual elements of a JSON array as separate documents."
           },
           {
             "value": "jsonLines",
             "name": "JsonLines",
-            "description": "Set to jsonLines to extract individual JSON entities, separated by a new line, as separate documents in Azure Cognitive Search."
+            "description": "Set to jsonLines to extract individual JSON entities, separated by a new line, as separate documents."
           }
         ]
       },
@@ -7032,7 +7043,7 @@
           {
             "value": "standard",
             "name": "standard",
-            "description": "Indicates that Azure Cognitive Search can determine where the indexer should execute. This is the default environment when nothing is specified and is the recommended value."
+            "description": "Indicates that the search service can determine where the indexer should execute. This is the default environment when nothing is specified and is the recommended value."
           },
           {
             "value": "private",
@@ -7158,7 +7169,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them in Azure Cognitive Search. Once you have encrypted your indexer definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your indexer definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -7599,7 +7610,7 @@
         },
         "searchable": {
           "type": "boolean",
-          "description": "A value indicating whether the field is full-text searchable. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like \"sunny day\", internally it will be split into the individual tokens \"sunny\" and \"day\". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. This property must be false for simple fields of other non-string data types, and it must be null for complex fields. Note: searchable fields consume extra space in your index since Azure Cognitive Search will store an additional tokenized version of the field value for full-text searches. If you want to save space in your index and you don't need a field to be included in searches, set searchable to false."
+          "description": "A value indicating whether the field is full-text searchable. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like \"sunny day\", internally it will be split into the individual tokens \"sunny\" and \"day\". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. This property must be false for simple fields of other non-string data types, and it must be null for complex fields. Note: searchable fields consume extra space in your index to accommodate additional tokenized versions of the field value for full-text searches. If you want to save space in your index and you don't need a field to be included in searches, set searchable to false."
         },
         "filterable": {
           "type": "boolean",
@@ -7607,7 +7618,7 @@
         },
         "sortable": {
           "type": "boolean",
-          "description": "A value indicating whether to enable the field to be referenced in $orderby expressions. By default Azure Cognitive Search sorts results by score, but in many experiences users will want to sort by fields in the documents. A simple field can be sortable only if it is single-valued (it has a single value in the scope of the parent document). Simple collection fields cannot be sortable, since they are multi-valued. Simple sub-fields of complex collections are also multi-valued, and therefore cannot be sortable. This is true whether it's an immediate parent field, or an ancestor field, that's the complex collection. Complex fields cannot be sortable and the sortable property must be null for such fields. The default for sortable is true for single-valued simple fields, false for multi-valued simple fields, and null for complex fields."
+          "description": "A value indicating whether to enable the field to be referenced in $orderby expressions. By default, the search engine sorts results by score, but in many experiences users will want to sort by fields in the documents. A simple field can be sortable only if it is single-valued (it has a single value in the scope of the parent document). Simple collection fields cannot be sortable, since they are multi-valued. Simple sub-fields of complex collections are also multi-valued, and therefore cannot be sortable. This is true whether it's an immediate parent field, or an ancestor field, that's the complex collection. Complex fields cannot be sortable and the sortable property must be null for such fields. The default for sortable is true for single-valued simple fields, false for multi-valued simple fields, and null for complex fields."
         },
         "facetable": {
           "type": "boolean",
@@ -7646,6 +7657,7 @@
           "x-nullable": true
         },
         "dimensions": {
+          "x-ms-client-name": "vectorSearchDimensions",
           "type": "integer",
           "format": "int32",
           "x-nullable": true,
@@ -7654,6 +7666,7 @@
           "description": "The dimensionality of the vector field."
         },
         "vectorSearchProfile": {
+          "x-ms-client-name": "vectorSearchProfileName",
           "type": "string",
           "x-nullable": true,
           "description": "The name of the vector search profile that specifies the algorithm and vectorizer to use when searching the vector field."
@@ -8155,7 +8168,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -8174,7 +8187,7 @@
           "externalDocs": {
             "url": "https://docs.microsoft.com/azure/search/semantic-search-overview"
           },
-          "x-ms-client-name": "SemanticSettings",
+          "x-ms-client-name": "SemanticSearch",
           "x-nullable": true
         },
         "vectorSearch": {
@@ -8307,11 +8320,11 @@
         "cognitiveServices": {
           "x-ms-client-name": "CognitiveServicesAccount",
           "$ref": "#/definitions/CognitiveServicesAccount",
-          "description": "Details about cognitive services to be used when running skills."
+          "description": "Details about the Azure AI service to be used when running skills."
         },
         "knowledgeStore": {
           "$ref": "#/definitions/SearchIndexerKnowledgeStore",
-          "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
+          "description": "Definition of additional projections to Azure blob, table, or files, of enriched data."
         },
         "indexProjections": {
           "$ref": "#/definitions/SearchIndexerIndexProjections",
@@ -8324,7 +8337,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your skillset definition when you want full assurance that no one, not even Microsoft, can decrypt your skillset definition in Azure Cognitive Search. Once you have encrypted your skillset definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your skillset definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your skillset definition when you want full assurance that no one, not even Microsoft, can decrypt your skillset definition. Once you have encrypted your skillset definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your skillset definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -8345,17 +8358,17 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the cognitive service resource attached to a skillset."
+          "description": "A URI fragment specifying the type of Azure AI service resource attached to a skillset."
         },
         "description": {
           "type": "string",
-          "description": "Description of the cognitive service resource attached to a skillset."
+          "description": "Description of the Azure AI service resource attached to a skillset."
         }
       },
       "required": [
         "@odata.type"
       ],
-      "description": "Base type for describing any cognitive service resource attached to a skillset."
+      "description": "Base type for describing any Azure AI service resource attached to a skillset."
     },
     "SearchIndexerKnowledgeStore": {
       "properties": {
@@ -8595,7 +8608,7 @@
       "description": "Defines behavior of the index projections in relation to the rest of the indexer."
     },
     "DefaultCognitiveServicesAccount": {
-      "description": "An empty object that represents the default cognitive service resource for a skillset.",
+      "description": "An empty object that represents the default Azure AI service resource for a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
       "allOf": [
         {
@@ -8604,7 +8617,7 @@
       ]
     },
     "CognitiveServicesAccountKey": {
-      "description": "A cognitive service resource provisioned with a key that is attached to a skillset.",
+      "description": "The multi-region account key of an Azure AI service resource that's attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
       "allOf": [
         {
@@ -8614,7 +8627,7 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key used to provision the cognitive service resource attached to a skillset."
+          "description": "The key used to provision the Azure AI service resource attached to a skillset."
         }
       },
       "required": [
@@ -8626,7 +8639,7 @@
       "properties": {
         "@odata.type": {
           "type": "string",
-          "description": "Identifies the concrete type of the skill."
+          "description": "A URI fragment specifying the type of skill."
         },
         "name": {
           "type": "string",
@@ -8833,7 +8846,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/KeyPhraseExtractionSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "maxKeyPhraseCount": {
           "type": "integer",
@@ -8862,7 +8875,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/OcrSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "detectOrientation": {
           "x-ms-client-name": "ShouldDetectOrientation",
@@ -8890,7 +8903,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/ImageAnalysisSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "visualFeatures": {
           "type": "array",
@@ -8992,7 +9005,7 @@
         },
         "defaultLanguageCode": {
           "$ref": "#/definitions/EntityRecognitionSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "includeTypelessEntities": {
           "type": "boolean",
@@ -9022,7 +9035,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/SentimentSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         }
       },
       "externalDocs": {
@@ -9042,7 +9055,7 @@
         "defaultLanguageCode": {
           "type": "string",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "includeOpinionMining": {
           "type": "boolean",
@@ -9071,7 +9084,7 @@
         "defaultLanguageCode": {
           "type": "string",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "minimumPrecision": {
           "type": "number",
@@ -9111,7 +9124,7 @@
         "defaultLanguageCode": {
           "type": "string",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "minimumPrecision": {
           "type": "number",
@@ -9124,7 +9137,7 @@
         "modelVersion": {
           "type": "string",
           "x-nullable": true,
-          "description": "The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
+          "description": "The version of the model to use when calling the Text Analytics API. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary."
         }
       },
       "externalDocs": {
@@ -9143,7 +9156,7 @@
         "defaultLanguageCode": {
           "type": "string",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "minimumPrecision": {
           "type": "number",
@@ -9158,6 +9171,7 @@
           "description": "A parameter that provides various ways to mask the personal information detected in the input text. Default is 'none'."
         },
         "maskingCharacter": {
+          "x-ms-client-name": "mask",
           "type": "string",
           "x-nullable": true,
           "maxLength": 1,
@@ -9197,7 +9211,7 @@
       "properties": {
         "defaultLanguageCode": {
           "$ref": "#/definitions/SplitSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "textSplitMode": {
           "$ref": "#/definitions/TextSplitMode",
@@ -9239,7 +9253,7 @@
         "defaultLanguageCode": {
           "$ref": "#/definitions/CustomEntityLookupSkillLanguage",
           "x-nullable": true,
-          "description": "A value indicating which language code to use. Default is en."
+          "description": "A value indicating which language code to use. Default is `en`."
         },
         "entitiesDefinitionUri": {
           "type": "string",
@@ -9295,7 +9309,7 @@
         "suggestedFrom": {
           "$ref": "#/definitions/TextTranslationSkillLanguage",
           "x-nullable": true,
-          "description": "The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is en."
+          "description": "The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is `en`."
         }
       },
       "required": [
@@ -9376,6 +9390,7 @@
         "authResourceId": {
           "type": "string",
           "x-nullable": true,
+          "x-ms-format": "arm-id",
           "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
         },
         "authIdentity": {
@@ -9462,15 +9477,15 @@
         "resourceUri": {
           "type": "string",
           "format": "uri",
-          "description": "The resource uri for your Azure Open AI resource."
+          "description": "The resource URI for your Azure OpenAI resource."
         },
         "deploymentId": {
           "type": "string",
-          "description": "ID of your Azure Open AI model deployment on the designated resource."
+          "description": "ID of your Azure OpenAI model deployment on the designated resource."
         },
         "apiKey": {
           "type": "string",
-          "description": "API key for the designated Azure Open AI resource."
+          "description": "API key for the designated Azure OpenAI resource."
         },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
@@ -9478,7 +9493,7 @@
           "description": "The user-assigned managed identity used for outbound connections."
         }
       },
-      "description": "Allows you to generate a vector embedding for a given text input using the Azure Open AI service."
+      "description": "Allows you to generate a vector embedding for a given text input using the Azure OpenAI resource."
     },
     "ListSkillsetsResult": {
       "properties": {
@@ -10758,20 +10773,56 @@
     "SplitSkillLanguage": {
       "type": "string",
       "enum": [
+        "am",
+        "bs",
+        "cs",
         "da",
         "de",
         "en",
         "es",
+        "et",
         "fi",
         "fr",
+        "he",
+        "hi",
+        "hr",
+        "hu",
+        "id",
+        "is",
         "it",
+        "ja",
         "ko",
-        "pt"
+        "lv",
+        "nb",
+        "nl",
+        "pl",
+        "pt",
+        "pt-br",
+        "ru",
+        "sk",
+        "sl",
+        "sr",
+        "sv",
+        "tr",
+        "ur",
+        "zh"
       ],
       "x-ms-enum": {
         "name": "SplitSkillLanguage",
         "modelAsString": true,
         "values": [
+          {
+            "value": "am",
+            "description": "Amharic"
+          },
+          {
+            "value": "bs",
+            "description": "Bosnian"
+          },
+          {
+            "value": "cs",
+            "description": "Czech"
+          },
           {
             "value": "da",
             "description": "Danish"
@@ -10789,6 +10840,10 @@
             "description": "Spanish"
           },
           {
+            "value": "et",
+            "description": "Estonian"
+          },
+          {
             "value": "fi",
             "description": "Finnish"
           },
@@ -10797,16 +10852,96 @@
             "description": "French"
           },
           {
+            "value": "he",
+            "description": "Hebrew"
+          },
+          {
+            "value": "hi",
+            "description": "Hindi"
+          },
+          {
+            "value": "hr",
+            "description": "Croatian"
+          },
+          {
+            "value": "hu",
+            "description": "Hungarian"
+          },
+          {
+            "value": "id",
+            "description": "Indonesian"
+          },
+          {
+            "value": "is",
+            "description": "Icelandic"
+          },
+          {
             "value": "it",
             "description": "Italian"
+          },
+          {
+            "value": "ja",
+            "description": "Japanese"
           },
           {
             "value": "ko",
             "description": "Korean"
           },
           {
+            "value": "lv",
+            "description": "Latvian"
+          },
+          {
+            "value": "nb",
+            "description": "Norwegian"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
             "value": "pt",
-            "description": "Portuguese"
+            "description": "Portuguese (Portugal)"
+          },
+          {
+            "value": "pt-br",
+            "description": "Portuguese (Brazil)"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "sk",
+            "description": "Slovak"
+          },
+          {
+            "value": "sl",
+            "description": "Slovenian"
+          },
+          {
+            "value": "sr",
+            "description": "Serbian"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          },
+          {
+            "value": "ur",
+            "description": "Urdu"
+          },
+          {
+            "value": "zh",
+            "description": "Chinese (Simplified)"
           }
         ]
       },
@@ -11677,7 +11812,7 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -11728,7 +11863,7 @@
         "keyVaultUri": {
           "x-ms-client-name": "vaultUri",
           "type": "string",
-          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net."
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`."
         },
         "accessCredentials": {
           "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
@@ -11748,7 +11883,7 @@
         "keyVaultKeyVersion",
         "keyVaultUri"
       ],
-      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest in Azure Cognitive Search, such as indexes and synonym maps."
+      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest, such as indexes and synonym maps."
     },
     "SearchIndexerCache": {
       "properties": {
@@ -11935,7 +12070,7 @@
       "required": [
         "message"
       ],
-      "description": "Describes an error condition for the Azure Cognitive Search API."
+      "description": "Describes an error condition for the API."
     }
   },
   "parameters": {

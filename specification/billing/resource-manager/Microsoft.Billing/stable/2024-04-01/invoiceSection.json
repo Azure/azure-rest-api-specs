@@ -1,0 +1,523 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/validateDeleteEligibility": {
+      "post": {
+        "tags": [
+          "InvoiceSection"
+        ],
+        "description": "Validates if the invoice section can be deleted. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "InvoiceSections_ValidateDeleteEligibility",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Eligibility to delete an invoice section result.",
+            "schema": {
+              "$ref": "#/definitions/DeleteInvoiceSectionEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoiceSectionsValidateDeleteEligibilitySuccess": {
+            "$ref": "./examples/invoiceSectionsValidateDeleteEligibilitySuccess.json"
+          },
+          "InvoiceSectionsValidateDeleteEligibilityFailure": {
+            "$ref": "./examples/invoiceSectionsValidateDeleteEligibilityFailure.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}": {
+      "delete": {
+        "tags": [
+          "InvoiceSection"
+        ],
+        "description": "Deletes an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "InvoiceSections_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoiceSectionsDelete": {
+            "$ref": "./examples/invoiceSectionsDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "InvoiceSection"
+        ],
+        "description": "Gets an invoice section by its ID. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "InvoiceSections_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An invoice section.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoiceSectionsGet": {
+            "$ref": "./examples/invoiceSectionsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "InvoiceSection"
+        ],
+        "description": "Creates or updates an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "InvoiceSections_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceSectionName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "An invoice section.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An invoice section.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          },
+          "201": {
+            "description": "An invoice section.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSection"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoiceSectionsCreateOrUpdate": {
+            "$ref": "./examples/invoiceSectionsCreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections": {
+      "get": {
+        "tags": [
+          "InvoiceSection"
+        ],
+        "description": "Lists the invoice sections that a user has access to. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "InvoiceSections_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "in": "query",
+            "name": "includeDeleted",
+            "description": "Can be used to get deleted invoice sections.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of invoice sections.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoiceSectionsListByBillingProfile": {
+            "$ref": "./examples/invoiceSectionsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeleteInvoiceSectionEligibilityDetail": {
+      "description": "The details of delete invoice section eligibility result.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Code for the delete invoice section validation.",
+          "enum": [
+            "Other",
+            "LastInvoiceSection",
+            "ActiveAzurePlans",
+            "ReservedInstances",
+            "ActiveBillingSubscriptions"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeleteInvoiceSectionEligibilityCode",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "Validation message.",
+          "type": "string"
+        }
+      }
+    },
+    "DeleteInvoiceSectionEligibilityResult": {
+      "description": "Eligibility to delete an invoice section result.",
+      "type": "object",
+      "properties": {
+        "eligibilityStatus": {
+          "description": "Status describing if invoice section is eligible to be deleted.",
+          "enum": [
+            "Allowed",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeleteInvoiceSectionEligibilityStatus",
+            "modelAsString": true
+          }
+        },
+        "eligibilityDetails": {
+          "description": "A list of delete invoice section eligibility result details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeleteInvoiceSectionEligibilityDetail"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "InvoiceSection": {
+      "description": "An invoice section.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InvoiceSectionProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "InvoiceSectionListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceSection"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "InvoiceSectionProperties": {
+      "description": "An invoice section.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "description": "The name of the invoice section.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Identifies the status of an invoice section.",
+          "enum": [
+            "Other",
+            "Active",
+            "Deleted",
+            "Disabled",
+            "UnderReview",
+            "Warned",
+            "Restricted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InvoiceSectionState",
+            "modelAsString": true
+          }
+        },
+        "reasonCode": {
+          "description": "Reason for the specified invoice section status.",
+          "enum": [
+            "Other",
+            "PastDue",
+            "UnusualActivity",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InvoiceSectionStateReasonCode",
+            "modelAsString": true
+          }
+        },
+        "systemId": {
+          "description": "The system generated unique identifier for an invoice section.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetCloud": {
+          "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
+          "enum": [
+            "Other",
+            "Internal",
+            "USGov",
+            "USNat",
+            "USSec"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TargetCloud",
+            "modelAsString": true
+          }
+        },
+        "tags": {
+          "description": "Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

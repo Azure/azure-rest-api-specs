@@ -1,0 +1,334 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "sitef6141",
+    "api-version": "2023-12-01",
+    "siteEnvelope": {
+      "location": "East US",
+      "kind": "functionapp,linux",
+      "properties": {
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "AzureWebJobsStorage",
+              "value": "DefaultEndpointsProtocol=https;AccountName=StorageAccountName;AccountKey=Sanitized;EndpointSuffix=core.windows.net"
+            },
+            {
+              "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+              "value": "InstrumentationKey=Sanitized;IngestionEndpoint=Sanitized;LiveEndpoint=Sanitized"
+            }
+          ]
+        },
+        "functionAppConfig": {
+          "deployment": {
+            "storage": {
+              "type": "blobContainer",
+              "value": "https://storageAccountName.blob.core.windows.net/containername",
+              "authentication": {
+                "type": "StorageAccountConnectionString",
+                "storageAccountConnectionStringName": "TheAppSettingName"
+              }
+            }
+          },
+          "runtime": {
+            "name": "python",
+            "version": "3.11"
+          },
+          "scaleAndConcurrency": {
+            "maximumInstanceCount": 100,
+            "instanceMemoryMB": 2048
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141",
+        "name": "sitef6141",
+        "type": "Microsoft.Web/sites",
+        "location": "East US",
+        "properties": {
+          "state": "Running",
+          "hostNames": [
+            "sitef6141.azurewebsites.net"
+          ],
+          "repositorySiteName": "sitef6141",
+          "usageState": "Normal",
+          "enabled": true,
+          "enabledHostNames": [
+            "sitef6141.azurewebsites.net",
+            "sitef6141.scm.azurewebsites.net"
+          ],
+          "availabilityState": "Normal",
+          "hostNameSslStates": [
+            {
+              "name": "sitef6141.azurewebsites.net",
+              "sslState": "Disabled",
+              "hostType": "Standard"
+            },
+            {
+              "name": "sitef6141.scm.azurewebsites.net",
+              "sslState": "Disabled",
+              "hostType": "Repository"
+            }
+          ],
+          "serverFarmId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/DefaultAsp",
+          "reserved": null,
+          "isXenon": false,
+          "hyperV": false,
+          "lastModifiedTimeUtc": "2024-01-09T00:24:54.8",
+          "vnetRouteAllEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetContentShareEnabled": false,
+          "siteConfig": {
+            "numberOfWorkers": 1,
+            "netFrameworkVersion": "",
+            "phpVersion": "",
+            "pythonVersion": "",
+            "nodeVersion": "",
+            "powerShellVersion": "",
+            "linuxFxVersion": "",
+            "requestTracingEnabled": false,
+            "remoteDebuggingEnabled": false,
+            "httpLoggingEnabled": false,
+            "acrUseManagedIdentityCreds": false,
+            "logsDirectorySizeLimit": 35,
+            "detailedErrorLoggingEnabled": false,
+            "use32BitWorkerProcess": false,
+            "webSocketsEnabled": false,
+            "alwaysOn": false,
+            "appCommandLine": "",
+            "managedPipelineMode": "Integrated",
+            "virtualApplications": [
+              {
+                "virtualPath": "/",
+                "physicalPath": "site\\wwwroot",
+                "preloadEnabled": false
+              }
+            ],
+            "loadBalancing": "LeastRequests",
+            "autoHealEnabled": false,
+            "vnetName": "",
+            "vnetRouteAllEnabled": false,
+            "vnetPrivatePortsCount": 0,
+            "keyVaultReferenceIdentity": "",
+            "ipSecurityRestrictions": [
+              {
+                "ipAddress": "Any",
+                "action": "Allow",
+                "priority": 2147483647,
+                "name": "Allow all",
+                "description": "Allow all access"
+              }
+            ],
+            "scmIpSecurityRestrictions": [
+              {
+                "ipAddress": "Any",
+                "action": "Allow",
+                "priority": 2147483647,
+                "name": "Allow all",
+                "description": "Allow all access"
+              }
+            ],
+            "http20Enabled": false,
+            "minTlsVersion": "1.2",
+            "scmMinTlsVersion": "1.2",
+            "ftpsState": "AllAllowed",
+            "functionAppScaleLimit": 0,
+            "functionsRuntimeScaleMonitoringEnabled": false,
+            "minimumElasticInstanceCount": 0,
+            "azureStorageAccounts": {}
+          },
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "type": "blobContainer",
+                "value": "https://storageAccountName.blob.core.windows.net/containername",
+                "authentication": {
+                  "type": "StorageAccountConnectionString",
+                  "storageAccountConnectionStringName": "TheAppSettingName"
+                }
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.11"
+            },
+            "scaleAndConcurrency": {
+              "alwaysReady": null,
+              "maximumInstanceCount": 100,
+              "instanceMemoryMB": 2048,
+              "triggers": null
+            }
+          },
+          "scmSiteAlsoStopped": false,
+          "clientAffinityEnabled": false,
+          "clientCertEnabled": false,
+          "vnetBackupRestoreEnabled": false,
+          "resourceConfig": {
+            "cpu": 1.0,
+            "memory": "2.0Gi"
+          },
+          "outboundIpAddresses": "70.37.102.201,20.225.43.144",
+          "possibleOutboundIpAddresses": "70.37.102.201,20.225.43.144,20.225.184.122,20.225.184.188",
+          "containerSize": 2048,
+          "dailyMemoryTimeQuota": 0,
+          "resourceGroup": "testrg123",
+          "defaultHostName": "sitef6141.azurewebsites.net",
+          "httpsOnly": true,
+          "redundancyMode": "None",
+          "publicNetworkAccess": "Enabled",
+          "storageAccountRequired": false
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/sites/sitef6141/operationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2023-12-01"
+      },
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141",
+        "name": "sitef6141",
+        "type": "Microsoft.Web/sites",
+        "location": "East US",
+        "properties": {
+          "state": "Running",
+          "hostNames": [
+            "sitef6141.azurewebsites.net"
+          ],
+          "repositorySiteName": "sitef6141",
+          "usageState": "Normal",
+          "enabled": true,
+          "enabledHostNames": [
+            "sitef6141.azurewebsites.net",
+            "sitef6141.scm.azurewebsites.net"
+          ],
+          "availabilityState": "Normal",
+          "hostNameSslStates": [
+            {
+              "name": "sitef6141.azurewebsites.net",
+              "sslState": "Disabled",
+              "hostType": "Standard"
+            },
+            {
+              "name": "sitef6141.scm.azurewebsites.net",
+              "sslState": "Disabled",
+              "hostType": "Repository"
+            }
+          ],
+          "serverFarmId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/DefaultAsp",
+          "reserved": null,
+          "isXenon": false,
+          "hyperV": false,
+          "lastModifiedTimeUtc": "2024-01-09T00:24:54.8",
+          "vnetRouteAllEnabled": false,
+          "vnetImagePullEnabled": false,
+          "vnetContentShareEnabled": false,
+          "siteConfig": {
+            "numberOfWorkers": 1,
+            "netFrameworkVersion": "",
+            "phpVersion": "",
+            "pythonVersion": "",
+            "nodeVersion": "",
+            "powerShellVersion": "",
+            "linuxFxVersion": "",
+            "requestTracingEnabled": false,
+            "remoteDebuggingEnabled": false,
+            "httpLoggingEnabled": false,
+            "acrUseManagedIdentityCreds": false,
+            "logsDirectorySizeLimit": 35,
+            "detailedErrorLoggingEnabled": false,
+            "use32BitWorkerProcess": false,
+            "webSocketsEnabled": false,
+            "alwaysOn": false,
+            "appCommandLine": "",
+            "managedPipelineMode": "Integrated",
+            "virtualApplications": [
+              {
+                "virtualPath": "/",
+                "physicalPath": "site\\wwwroot",
+                "preloadEnabled": false
+              }
+            ],
+            "loadBalancing": "LeastRequests",
+            "autoHealEnabled": false,
+            "vnetName": "",
+            "vnetRouteAllEnabled": false,
+            "vnetPrivatePortsCount": 0,
+            "keyVaultReferenceIdentity": "",
+            "ipSecurityRestrictions": [
+              {
+                "ipAddress": "Any",
+                "action": "Allow",
+                "priority": 2147483647,
+                "name": "Allow all",
+                "description": "Allow all access"
+              }
+            ],
+            "scmIpSecurityRestrictions": [
+              {
+                "ipAddress": "Any",
+                "action": "Allow",
+                "priority": 2147483647,
+                "name": "Allow all",
+                "description": "Allow all access"
+              }
+            ],
+            "http20Enabled": false,
+            "minTlsVersion": "1.2",
+            "scmMinTlsVersion": "1.2",
+            "ftpsState": "AllAllowed",
+            "functionAppScaleLimit": 0,
+            "functionsRuntimeScaleMonitoringEnabled": false,
+            "minimumElasticInstanceCount": 0,
+            "azureStorageAccounts": {}
+          },
+          "functionAppConfig": {
+            "deployment": {
+              "storage": {
+                "type": "blobContainer",
+                "value": "https://storageAccountName.blob.core.windows.net/containername",
+                "authentication": {
+                  "type": "StorageAccountConnectionString",
+                  "storageAccountConnectionStringName": "TheAppSettingName"
+                }
+              }
+            },
+            "runtime": {
+              "name": "python",
+              "version": "3.11"
+            },
+            "scaleAndConcurrency": {
+              "alwaysReady": null,
+              "maximumInstanceCount": 100,
+              "instanceMemoryMB": 2048,
+              "triggers": null
+            }
+          },
+          "scmSiteAlsoStopped": false,
+          "clientAffinityEnabled": false,
+          "clientCertEnabled": false,
+          "vnetBackupRestoreEnabled": false,
+          "resourceConfig": {
+            "cpu": 1.0,
+            "memory": "2.0Gi"
+          },
+          "outboundIpAddresses": "70.37.102.201,20.225.43.144",
+          "possibleOutboundIpAddresses": "70.37.102.201,20.225.43.144,20.225.184.122,20.225.184.188",
+          "containerSize": 2048,
+          "dailyMemoryTimeQuota": 0,
+          "resourceGroup": "testrg123",
+          "defaultHostName": "sitef6141.azurewebsites.net",
+          "httpsOnly": true,
+          "redundancyMode": "None",
+          "publicNetworkAccess": "Enabled",
+          "storageAccountRequired": false
+        }
+      }
+    }
+  }
+}

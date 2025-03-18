@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2023-06-01-preview",
+    "serviceClassificationRequest": {
+      "issueSummary": "Can not connect to Windows VM",
+      "resourceId": "/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/resourceGroups/rgname/providers/Microsoft.Compute/virtualMachines/vmname"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ServiceClassificationResults": [
+          {
+            "serviceId": "/providers/Microsoft.Support/services/5c41904f-1bcf-76e4-7a54-5fc07468f3cc",
+            "displayName": "Azure Update Manager",
+            "resourceTypes": [
+              "Microsoft.HybridCompute/machines",
+              "Microsoft.Maintenance/maintenanceConfigurations",
+              "Microsoft.Maintenance/configurationAssignments",
+              "MICROSOFT.AUTOMATION/AUTOMATIONACCOUNTS",
+              "MICROSOFT.COMPUTE/VIRTUALMACHINES"
+            ]
+          },
+          {
+            "serviceId": "/providers/Microsoft.Support/services/40ef020e-8ae7-8d57-b538-9153c47cee69",
+            "displayName": "SQL Server in VM - Linux",
+            "resourceTypes": [
+              "MICROSOFT.CLASSICCOMPUTE/VIRTUALMACHINES",
+              "MICROSOFT.COMPUTE/VIRTUALMACHINES"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

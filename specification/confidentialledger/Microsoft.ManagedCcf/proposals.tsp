@@ -20,24 +20,26 @@ model Action {
 }
 
 @doc("Possible states for a proposal.")
-enum ProposalState {
+union ProposalState {
+  string,
+
   @doc("Proposal is active and can be voted on.")
-  Open,
+  "Open",
 
   @doc("Proposal passed a successful vote and was enacted.")
-  Accepted,
+  "Accepted",
 
   @doc("Proposal was removed by proposing member. Will never be enacted.")
-  Withdrawn,
+  "Withdrawn",
 
   @doc("Proposal was rejected by vote. Will never be enacted.")
-  Rejected,
+  "Rejected",
 
   @doc("Proposal passed a successful vote, but its proposed actions failed. Will never be enacted.")
-  Failed,
+  "Failed",
 
   @doc("Proposal was open when its semantics were potentially changed (code or constitution were modified), so it was automatically invalidated.")
-  Dropped,
+  "Dropped",
 }
 
 @doc("Description of why governance execution failed.")

@@ -58,14 +58,11 @@ See the [README.md](./README.md) for a description of the directory structure to
 
 If you want to contribute to the repository, follow these steps:
   1. Fork the repository and create a new branch for your changes.
-  2. If you are introducing a new api-version, create a new directory for that api-version and copy all the files from the previous version into the new directory. Make this the very first commit in your branch and then make your changes in subsequent commits.
-  3. Use the [linting tools](#coding-style) to check your changes for compliance with the OpenAPI v2 standard, the Azure REST API Guidelines and that Azure API Style Guide.
-  4. Push the changes to the branch in your fork until the branch is ready to be integrated.
-  5. Rebase your branch if needed to incorporate any changes to **main** and submit a pull request to the **main** branch using either the "control plane" or "data plane" PR template -- the main PR template lets you select which one.
-  5. Resolve any issues flagged by the [Pull Request checks](#pull-request-checks).
-  6. Contact the ARM API Review board or Azure API Stewardship team to request PR review. 
+  2. Push the changes to the branch in your fork until the branch is ready to be integrated.
+  3. Rebase your branch if needed to incorporate any changes to **main** and submit a pull request to the **main** branch using either the "control plane" or "data plane" PR template -- the main PR template lets you select which one.
+  4. Resolve any issues flagged by the [Pull Request checks](#pull-request-checks).
 
-Microsoft employees can use [OpenAPI Hub](https://aka.ms/openapihub) for adding a new API version.
+**Note:** Microsoft employees can use tooling for adding a new API version available [here](https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-specs), specially if not working with TypeSpec.
 
 ## Pull Request Checks
 

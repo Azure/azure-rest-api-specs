@@ -27,7 +27,40 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-01
+tag: package-2024-01
+```
+
+``` yaml
+directive:
+  - suppress: ResourceNameRestriction
+    from: azurearcdata.json
+    reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
+```
+
+``` yaml
+directive:
+  - suppress: ResourceNameRestriction
+    from: sqlServerAvailabilityGroups.json
+    reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - Microsoft.AzureArcData/stable/2024-01-01/activeDirectoryConnectors.json
+  - Microsoft.AzureArcData/stable/2024-01-01/azurearcdata.json
+  - Microsoft.AzureArcData/stable/2024-01-01/common.json
+  - Microsoft.AzureArcData/stable/2024-01-01/dataControllers.json
+  - Microsoft.AzureArcData/stable/2024-01-01/failoverGroups.json
+  - Microsoft.AzureArcData/stable/2024-01-01/operations.json
+  - Microsoft.AzureArcData/stable/2024-01-01/postgresInstances.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlManagedInstances.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerAvailabilityGroups.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerDatabases.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerInstances.json  
 ```
 
 ### Tag: package-preview-2023-01
@@ -127,7 +160,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

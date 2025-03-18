@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "endpoint": "contoso.api.adu.microsoft.com",
+    "instanceId": "blue",
+    "deviceId": "deviceId",
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "deviceId": "device1",
+        "deviceClassId": "deviceClass1",
+        "lastAttemptedUpdate": {
+          "updateId": {
+            "provider": "provider1",
+            "name": "name1",
+            "version": "2.0.0.0"
+          },
+          "description": "Fixes performance issue."
+        },
+        "deploymentStatus": "Failed",
+        "installedUpdate": {
+          "updateId": {
+            "provider": "provider1",
+            "name": "name1",
+            "version": "1.0.0.0"
+          },
+          "description": "Fixes security issue."
+        },
+        "onLatestUpdate": false,
+        "lastInstallResult": {
+          "resultCode": 200,
+          "extendedResultCode": 0,
+          "resultDetails": "",
+          "stepResults": [
+            {
+              "update": {
+                "updateId": {
+                  "provider": "microsoft",
+                  "name": "peripheralcamera",
+                  "version": "1.0"
+                },
+                "friendlyName": "Microsoft Peripheral Camera 1.0"
+              },
+              "resultCode": 200,
+              "extendedResultCode": 0,
+              "resultDetails": ""
+            },
+            {
+              "update": {
+                "updateId": {
+                  "provider": "microsoft",
+                  "name": "peripheralspeaker",
+                  "version": "1.0"
+                },
+                "friendlyName": "Microsoft Peripheral Speaker 1.0"
+              },
+              "resultCode": 200,
+              "extendedResultCode": 0,
+              "resultDetails": ""
+            }
+          ]
+        }
+      }
+    }
+  }
+}

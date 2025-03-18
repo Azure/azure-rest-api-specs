@@ -12,6 +12,7 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2023-11-preview
   - tag: package-2023-08-preview
   - tag: package-2023-07
   - tag: package-2023-01-preview
@@ -24,9 +25,17 @@ batch:
   - tag: package-2020-11-preview
   - tag: package-2019-12-preview
   - tag: package-2017-10
-  - tag: package-2017-06-preview
   - tag: package-2017-03
-  - tag: package-2016-06-preview
+```
+
+### Tag: package-2023-11-preview and ruby
+
+These settings apply only when `--tag=package-2023-11-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2023-11-preview' && $(ruby)
+namespace: "Azure::ContainerRegistry::Mgmt::V2023_11_01_preview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_registry/lib
 ```
 
 ### Tag: package-2023-08-preview and ruby
@@ -149,16 +158,6 @@ namespace: "Azure::ContainerRegistry::Mgmt::V2017_10_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_registry/lib
 ```
 
-### Tag: package-2017-06-preview and ruby
-
-These settings apply only when `--tag=package-2017-06-preview --ruby` is specified on the command line.
-Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
-
-``` yaml $(tag) == 'package-2017-06-preview' && $(ruby)
-namespace: "Azure::ContainerRegistry::Mgmt::V2017_06_01_preview"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_registry/lib
-```
-
 ### Tag: package-2017-03 and ruby
 
 These settings apply only when `--tag=package-2017-03 --ruby` is specified on the command line.
@@ -166,16 +165,6 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2017-03' && $(ruby)
 namespace: "Azure::ContainerRegistry::Mgmt::V2017_03_01"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_registry/lib
-```
-
-### Tag: package-2016-06-preview and ruby
-
-These settings apply only when `--tag=package-2016-06-preview --ruby` is specified on the command line.
-Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
-
-``` yaml $(tag) == 'package-2016-06-preview' && $(ruby)
-namespace: "Azure::ContainerRegistry::Mgmt::V2016_06_27_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_container_registry/lib
 ```
 

@@ -1,0 +1,45 @@
+{
+  "operationId": "ObservabilityServices_ListBySubscription",
+  "title": "ObservabilityServices_ListBySubscription",
+  "parameters": {
+    "api-version": "2023-10-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "observabilityService1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobilePacketCore/observabilityServices/observabilityService1",
+            "type": "Microsoft.MobilePacketCore/observabilityServices",
+            "location": "eastus",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2023-10-15T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-10-15T17:18:19.1234567Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "operationalStatus": {
+                "workload": "Fully deployed",
+                "healthCheck": "No errors"
+              },
+              "componentParameters": [
+                {
+                  "type": "fed-crds",
+                  "parameters": "{\"global\": {\"registry\": {\"docker\": []}}}"
+                }
+              ],
+              "clusterService": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobilePacketCore/clusterServices/byoCluster"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

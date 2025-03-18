@@ -319,6 +319,14 @@
               "$ref": "#/definitions/Cluster"
             }
           },
+          "202": {
+            "description": "Accepted response definition.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -361,7 +369,8 @@
           "readOnly": false,
           "description": "Configures whether cluster will use double encryption. This Property can not be modified after cluster creation. Default value is 'true'",
           "x-ms-mutability": [
-            "create"
+            "create",
+            "read"
           ]
         },
         "isAvailabilityZonesEnabled": {

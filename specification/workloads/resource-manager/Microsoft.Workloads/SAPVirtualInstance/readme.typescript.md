@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-workloads-sapvirtualinstance"
-  output-folder: "$(typescript-sdks-folder)/sdk/workloads/arm-sapvirtualinstance"
+  package-name: "@azure/arm-workloadssapvirtualinstance"
+  output-folder: "$(typescript-sdks-folder)/sdk/workloads/arm-workloadssapvirtualinstance"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true

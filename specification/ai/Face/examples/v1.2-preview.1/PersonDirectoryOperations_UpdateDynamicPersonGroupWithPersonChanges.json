@@ -1,0 +1,25 @@
+{
+  "title": "Update DynamicPersonGroup",
+  "operationId": "PersonDirectoryOperations_UpdateDynamicPersonGroupWithPersonChanges",
+  "parameters": {
+    "apiVersion": "v1.2-preview.1",
+    "dynamicPersonGroupId": "your_dynamic_person_group_id",
+    "body": {
+      "name": "your_dynamic_person_group_name",
+      "userData": "your_user_data",
+      "addPersonIds": [
+        "85c0c630-c9c9-40f8-8a4e-f9ae4f926ea5"
+      ],
+      "removePersonIds": [
+        "67f7e96d-823a-4318-9bf6-e9a2a2608899"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-Location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

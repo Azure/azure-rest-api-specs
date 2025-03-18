@@ -1,0 +1,1324 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2024-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/addPaymentTerms": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Adds payment terms to all the billing profiles under the billing account. Currently, payment terms can be added only on billing accounts that have Agreement Type as 'Microsoft Customer Agreement' and AccountType as 'Enterprise'. This action needs pre-authorization and only Field Sellers are authorized to add the payment terms and is not a self-serve action.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_AddPaymentTerms",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The properties of payment term.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PaymentTerm"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing accounts.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "PaymentTermsAdd": {
+            "$ref": "./examples/paymentTermsAdd.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/cancelPaymentTerms": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Cancels all the payment terms on billing account that falls after the cancellation date in the request. Currently, cancel payment terms is only served by admin actions and is not a self-serve action.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_CancelPaymentTerms",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Date after which any payment terms that needs to be cancelled.",
+            "required": true,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing accounts.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "PaymentTermsCancel": {
+            "$ref": "./examples/paymentTermsCancel.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/confirmTransition": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Gets the transition details for a billing account that has transitioned from agreement type Microsoft Online Services Program to agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_ConfirmTransition",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details for a billing account transitioned from agreement type Microsoft Online Services Program to agreement type Microsoft Customer Agreement.",
+            "schema": {
+              "$ref": "#/definitions/TransitionDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingAccountsConfirmTransition": {
+            "$ref": "./examples/billingAccountsConfirmTransition.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Lists the invoice sections for which the user has permission to create Azure subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_ListInvoiceSectionsByCreateSubscriptionPermission",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionWithCreateSubPermissionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoiceSectionsWithCreateSubscriptionPermissionList": {
+            "$ref": "./examples/invoiceSectionsWithCreateSubscriptionPermissionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/validatePaymentTerms": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Validates payment terms on a billing account with agreement type 'Microsoft Customer Agreement' and account type 'Enterprise'.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_ValidatePaymentTerms",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The properties of payment term.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PaymentTerm"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of the payment terms eligibility.",
+            "schema": {
+              "$ref": "#/definitions/PaymentTermsEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaymentTermInvalid": {
+            "$ref": "./examples/paymentTermInvalid.json"
+          },
+          "PaymentTermValid": {
+            "$ref": "./examples/paymentTermValid.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}": {
+      "get": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Gets a billing account by its ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A billing account.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingAccountsGet": {
+            "$ref": "./examples/billingAccountsGet.json"
+          },
+          "BillingAccountsGetWithExpand": {
+            "$ref": "./examples/billingAccountsGetWithExpand.json"
+          },
+          "BillingAccountWithRegistrationNumberWithDefaultType": {
+            "$ref": "./examples/billingAccountWithRegistrationNumberWithDefaultType.json"
+          },
+          "BillingAccountWithRegistrationNumberWithType": {
+            "$ref": "./examples/billingAccountWithRegistrationNumberWithType.json"
+          },
+          "BillingAccountsGetEA": {
+            "$ref": "./examples/billingAccountsGetEA.json"
+          },
+          "BillingAccountWithExpandForPONumber": {
+            "$ref": "./examples/billingAccountWithExpandForPONumber.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Updates the properties of a billing account. Currently, displayName and address can be updated for billing accounts with agreement type Microsoft Customer Agreement. Currently address and notification email address can be updated for billing accounts with agreement type Microsoft Online Services Agreement. Currently, purchase order number can be edited for billing accounts with agreement type Enterprise Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A billing account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingAccountPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A billing account.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BillingAccountsUpdate": {
+            "$ref": "./examples/billingAccountsUpdate.json"
+          },
+          "BillingAccountUpdateWithPONumber": {
+            "$ref": "./examples/billingAccountUpdateWithPONumber.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts": {
+      "get": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Lists the billing accounts that a user has access to.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "includeAll",
+            "description": "When true, results will include Billing Accounts that the user does not have a direct role assignment on if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includeAllWithoutBillingProfiles",
+            "description": "When true, results will include Billing Accounts that are not fully created if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includeDeleted",
+            "description": "When true, results will include any billing accounts in a deleted state.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includePendingAgreement",
+            "description": "Includes billing accounts with agreement pending signature that the user has access to.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "includeResellee",
+            "description": "Includes the customer's billing account of Microsoft Partner Agreement that the user has access to.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "name": "legalOwnerTID",
+            "description": "Must be combined with legalOwnerOID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "legalOwnerOID",
+            "description": "Must be combined with legalOwnerTID, results will only include Billing Accounts for whom is legally responsible for the Billing Accounts. Optional.",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "in": "query",
+            "name": "expand",
+            "description": "Expand is allowed for SoldTo and EnrollmentDetails/PONumber.",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing accounts.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BillingAccountsList": {
+            "$ref": "./examples/billingAccountsList.json"
+          },
+          "BillingAccountForLegacyAccountDetails": {
+            "$ref": "./examples/billingAccountForLegacyAccountDetails.json"
+          },
+          "BillingAccountsListWithExpandForPONumber": {
+            "$ref": "./examples/billingAccountsListWithExpandForPONumber.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/validateAddress": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Validates an address. Use the operation to validate an address before using it as soldTo or a billTo address.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Address_Validate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Address details.",
+            "required": true,
+            "schema": {
+              "$ref": "./types.json#/definitions/AddressDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of the address validation.",
+            "schema": {
+              "$ref": "#/definitions/AddressValidationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AddressValidateValid": {
+            "$ref": "./examples/addressValidateValid.json"
+          },
+          "AddressValidateInvalid": {
+            "$ref": "./examples/addressValidateInvalid.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddressValidationResponse": {
+      "description": "Result of the address validation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the address validation.",
+          "enum": [
+            "Other",
+            "Valid",
+            "Invalid"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AddressValidationStatus",
+            "modelAsString": true
+          }
+        },
+        "suggestedAddresses": {
+          "description": "The list of suggested addresses.",
+          "type": "array",
+          "items": {
+            "$ref": "./types.json#/definitions/AddressDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "validationMessage": {
+          "description": "Validation error message.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "BillingAccount": {
+      "description": "A billing account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingAccountProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BillingAccountListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingAccount"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "BillingAccountPatch": {
+      "description": "A billing account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BillingAccountProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BillingAccountProperties": {
+      "description": "A billing account.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "accountStatus": {
+          "description": "The current status of the billing account.",
+          "enum": [
+            "Other",
+            "Active",
+            "UnderReview",
+            "Disabled",
+            "Deleted",
+            "Extended",
+            "Pending",
+            "New",
+            "Expired",
+            "Terminated",
+            "Transferred"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AccountStatus",
+            "modelAsString": true
+          }
+        },
+        "accountType": {
+          "description": "The type of customer.",
+          "enum": [
+            "Other",
+            "Enterprise",
+            "Individual",
+            "Partner",
+            "Reseller",
+            "ClassicPartner",
+            "Internal",
+            "Tenant",
+            "Business"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AccountType",
+            "modelAsString": true
+          }
+        },
+        "accountSubType": {
+          "description": "The tier of the account.",
+          "enum": [
+            "Other",
+            "None",
+            "Individual",
+            "Professional",
+            "Enterprise"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AccountSubType",
+            "modelAsString": true
+          }
+        },
+        "accountStatusReasonCode": {
+          "description": "Reason for the specified billing account status.",
+          "enum": [
+            "Other",
+            "UnusualActivity",
+            "ManuallyTerminated",
+            "Expired",
+            "Transferred",
+            "TerminateProcessing"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingAccountStatusReasonCode",
+            "modelAsString": true
+          }
+        },
+        "agreementType": {
+          "description": "The type of agreement.",
+          "enum": [
+            "Other",
+            "MicrosoftCustomerAgreement",
+            "EnterpriseAgreement",
+            "MicrosoftOnlineServicesProgram",
+            "MicrosoftPartnerAgreement"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AgreementType",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "description": "The billing account name.",
+          "type": "string"
+        },
+        "enrollmentDetails": {
+          "description": "The properties of an enrollment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnrollmentDetails"
+            }
+          ]
+        },
+        "hasReadAccess": {
+          "description": "Indicates whether user has read access to the billing account.",
+          "type": "boolean"
+        },
+        "hasNoBillingProfiles": {
+          "description": "Indicates whether or not the billing account has any billing profiles.",
+          "type": "boolean"
+        },
+        "notificationEmailAddress": {
+          "description": "Notification email address for legacy account. Available for agreement type Microsoft Online Services Program.",
+          "type": "string"
+        },
+        "primaryBillingTenantId": {
+          "description": "The tenant that was used to set up the billing account. By default, only users from this tenant can get role assignments on the billing account and all purchases are provisioned in this tenant.",
+          "type": "string"
+        },
+        "soldTo": {
+          "description": "The address of the individual or organization that is responsible for the billing account.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/AddressDetails"
+            }
+          ]
+        },
+        "registrationNumber": {
+          "description": "Describes the registration number of the organization linked with the billing account.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/RegistrationNumber"
+            }
+          ]
+        },
+        "billingRelationshipTypes": {
+          "description": "Identifies the billing relationships represented by a billing account. The billing relationship may be between Microsoft, the customer, and/or a third-party.",
+          "type": "array",
+          "items": {
+            "description": "Identifies the billing relationships represented by a billing account or billing profile. The billing relationship may be between Microsoft, the customer, and/or a third-party.",
+            "enum": [
+              "Other",
+              "Direct",
+              "IndirectCustomer",
+              "IndirectPartner",
+              "CSPPartner",
+              "CSPCustomer"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "BillingRelationshipType",
+              "modelAsString": true
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "qualifications": {
+          "description": "Qualifications for pricing on a billing account. Values may be Commercial, Education, Charity or Government.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "taxIds": {
+          "description": "A list of tax identifiers for the billing account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaxIdentifier"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "EnrollmentDetails": {
+      "description": "The properties of an enrollment.",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "format": "date-time",
+          "description": "The start date of the enrollment.",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "The end date of the enrollment.",
+          "type": "string"
+        },
+        "currency": {
+          "description": "The billing currency for the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "channel": {
+          "description": "The channel type of the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "language": {
+          "description": "The language for the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCode": {
+          "description": "The country code of the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCycle": {
+          "description": "The billing cycle for the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "extendedTermOption": {
+          "description": "The billing account extension opted by the company.",
+          "enum": [
+            "Other",
+            "Opted-In",
+            "Opted-Out"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ExtendedTermOption",
+            "modelAsString": true
+          }
+        },
+        "supportLevel": {
+          "description": "The support level offer associated with an enrollment.",
+          "enum": [
+            "Other",
+            "Standard",
+            "Pro-Direct",
+            "Developer"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SupportLevel",
+            "modelAsString": true
+          }
+        },
+        "supportCoverage": {
+          "description": "The support coverage period for the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cloud": {
+          "description": "The cloud of the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "poNumber": {
+          "description": "The purchase order number of the enrollment.",
+          "type": "string"
+        },
+        "markupStatus": {
+          "description": "Markup status of enrollment, applicable only for indirect enrollments.",
+          "enum": [
+            "Other",
+            "Disabled",
+            "Preview",
+            "Published",
+            "Locked"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MarkupStatus",
+            "modelAsString": true
+          }
+        },
+        "indirectRelationshipInfo": {
+          "description": "The properties of an enrollment which are applicable only for indirect enrollments.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/IndirectRelationshipInfo"
+            }
+          ]
+        },
+        "invoiceRecipient": {
+          "description": "The contact who receives invoices of the enrollment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InvoiceSectionWithCreateSubPermission": {
+      "description": "Invoice section properties with create subscription permission.",
+      "type": "object",
+      "properties": {
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "The fully qualified ID that uniquely identifies a billing profile.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileSystemId": {
+          "description": "The system generated unique identifier for a billing profile.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileStatus": {
+          "description": "The status of the billing profile.",
+          "enum": [
+            "Other",
+            "Active",
+            "Disabled",
+            "Warned",
+            "Deleted",
+            "UnderReview"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingProfileStatus",
+            "modelAsString": true
+          }
+        },
+        "billingProfileStatusReasonCode": {
+          "description": "Reason for the specified billing profile status.",
+          "enum": [
+            "Other",
+            "PastDue",
+            "UnusualActivity",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingProfileStatusReasonCode",
+            "modelAsString": true
+          }
+        },
+        "billingProfileSpendingLimit": {
+          "description": "The billing profile spending limit.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SpendingLimit",
+            "modelAsString": true
+          }
+        },
+        "enabledAzurePlans": {
+          "description": "Enabled azure plans for the associated billing profile.",
+          "type": "array",
+          "items": {
+            "$ref": "./types.json#/definitions/AzurePlan"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "The fully qualified ID that uniquely identifies an invoice section.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionSystemId": {
+          "description": "The system generated unique identifier for an invoice section.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InvoiceSectionWithCreateSubPermissionListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceSectionWithCreateSubPermission"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "invoiceSectionId"
+          ]
+        }
+      }
+    },
+    "PaymentTerm": {
+      "description": "The properties of payment term.",
+      "type": "object",
+      "properties": {
+        "term": {
+          "description": "Represents duration in netXX format. Always in days.",
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "description": "The date on when the defined 'Payment Term' will be effective from and is always in UTC.",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "The date on when the defined 'Payment Term' will end and is always in UTC.",
+          "type": "string"
+        },
+        "isDefault": {
+          "description": "Indicates payment term is the standard payment term.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "PaymentTermsEligibilityDetail": {
+      "description": "Details of the payment terms eligibility.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Indicates the reason for the ineligibility of the payment terms.",
+          "enum": [
+            "Other",
+            "OverlappingPaymentTerms",
+            "InvalidDateFormat",
+            "InvalidDateRange",
+            "InactiveBillingAccount",
+            "InvalidBillingAccountType",
+            "NullOrEmptyPaymentTerms",
+            "BillingAccountNotFound",
+            "IneligibleBillingAccountStatus",
+            "InvalidTerms"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PaymentTermsEligibilityCode",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "Indicates the message for the ineligibility of the payment terms.",
+          "type": "string"
+        }
+      }
+    },
+    "PaymentTermsEligibilityResult": {
+      "description": "Result of the payment terms eligibility.",
+      "type": "object",
+      "properties": {
+        "eligibilityStatus": {
+          "description": "Indicates the eligibility status of the payment terms.",
+          "enum": [
+            "Other",
+            "Valid",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PaymentTermsEligibilityStatus",
+            "modelAsString": true
+          }
+        },
+        "eligibilityDetails": {
+          "description": "Details of the payment terms eligibility.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentTermsEligibilityDetail"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "RegistrationNumber": {
+      "description": "Describes the registration number of the organization linked with the billing account.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique identification number of the organization linked with the billing account.",
+          "type": "string"
+        },
+        "required": {
+          "description": "Identifies if the registration number is required for the billing account.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The types of registration number allowed based on the country of the billing account.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TaxIdentifier": {
+      "description": "A tax identifier for the billing account.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id of the tax identifier.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the tax identifier.",
+          "enum": [
+            "Other",
+            "BrazilCcmId",
+            "BrazilCnpjId",
+            "BrazilCpfId",
+            "CanadianFederalExempt",
+            "CanadianProvinceExempt",
+            "ExternalTaxation",
+            "IndiaFederalTanId",
+            "IndiaFederalServiceTaxId",
+            "IndiaPanId",
+            "IndiaStateCstId",
+            "IndiaStateGstINId",
+            "IndiaStateVatId",
+            "IntlExempt",
+            "USExempt",
+            "VatId",
+            "LoveCode",
+            "MobileBarCode",
+            "NationalIdentificationNumber",
+            "PublicSectorId"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TaxIdentifierType",
+            "modelAsString": true
+          }
+        },
+        "scope": {
+          "description": "The scope of the tax identifier.",
+          "type": "string"
+        },
+        "country": {
+          "description": "The country of the tax identifier.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the tax identifier.",
+          "enum": [
+            "Other",
+            "Valid",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TaxIdentifierStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TransitionDetails": {
+      "description": "The details for a billing account transitioned from agreement type Microsoft Online Services Program to agreement type Microsoft Customer Agreement.",
+      "type": "object",
+      "properties": {
+        "transitionDate": {
+          "format": "date-time",
+          "description": "The transition completion date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "anniversaryDay": {
+          "format": "int32",
+          "description": "The anniversary day of the pre-transitioned account of type Microsoft Online Services Program.",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

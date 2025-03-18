@@ -1,0 +1,32 @@
+{
+  "operationId": "OracleSubscriptions_listSaasSubscriptionDetails",
+  "title": "OracleSubscriptions_listSaasSubscriptionDetails",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "1234567890",
+        "subscriptionName": "Oracle",
+        "timeCreated": "2022-03-07T00:00:00Z",
+        "offerId": "offer1",
+        "planId": "silver",
+        "saasSubscriptionStatus": "PendingFulfillmentStart",
+        "publisherId": "Oracle",
+        "purchaserEmailId": "test@test.com",
+        "purchaserTenantId": "1234567890",
+        "termUnit": "P1M",
+        "isAutoRenew": true,
+        "isFreeTrial": false
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 10000000,
+        "Location": "eastus"
+      }
+    }
+  }
+}
