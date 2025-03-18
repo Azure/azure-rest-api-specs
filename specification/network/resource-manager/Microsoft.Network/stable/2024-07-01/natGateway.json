@@ -142,6 +142,9 @@
         "x-ms-examples": {
           "Get nat gateway": {
             "$ref": "./examples/NatGatewayGet.json"
+          },
+          "Get nat gateway with StandardV2 Sku": {
+            "$ref": "./examples/NatGatewayGet.json"
           }
         }
       },
@@ -208,6 +211,9 @@
         "x-ms-examples": {
           "Create nat gateway": {
             "$ref": "./examples/NatGatewayCreateOrUpdate.json"
+          },
+          "Create nat gateway with StandardV2 Sku": {
+            "$ref": "./examples/NatGatewayCreateOrUpdateStandardV2Sku.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -269,6 +275,9 @@
         "x-ms-examples": {
           "Update nat gateway tags": {
             "$ref": "./examples/NatGatewayUpdateTags.json"
+          },
+          "Update nat gateway with StandardV2 Sku tags": {
+            "$ref": "./examples/NatGatewayUpdateTagsStandardV2Sku.json"
           }
         }
       }
@@ -366,7 +375,8 @@
           "type": "string",
           "description": "Name of Nat Gateway SKU.",
           "enum": [
-            "Standard"
+            "Standard",
+            "StandardV2"
           ],
           "x-ms-enum": {
             "name": "NatGatewaySkuName",
