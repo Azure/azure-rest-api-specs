@@ -116,7 +116,6 @@ interface BatchClient {
 );
 
 // client name overrides
-@@clientName(BatchClient.reactivateTask, "reactivateTaskInternal", "java");
 @@clientName(BatchClient.getTaskFile, "getTaskFileInternal", "java");
 @@clientName(BatchClient.getTaskFileProperties,
   "getTaskFilePropertiesInternal",

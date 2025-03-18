@@ -1274,6 +1274,32 @@ op terminateTaskCustomization is Azure.Batch.PostOperationNew<
 
 @@override(Azure.Batch.Tasks.terminateTask, terminateTaskCustomization, "java");
 
+// Reactivate Task Operation
+@doc("Optional parameters for Reactivate Task operation.")
+model ReactivateBatchTaskOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Reactivate Task operation.")
+@route("/jobs/{jobId}/tasks/{taskId}/reactivate")
+op reactivateTaskCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.ReactivateTaskRequiredParameters;
+
+    @doc("Optional parameters for Reactivate Task operation.")
+    options?: ReactivateBatchTaskOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  NoContentResponse & Azure.Batch.DataServiceResponseHeaders
+>;
+
+@@override(Azure.Batch.Tasks.reactivateTask,
+  reactivateTaskCustomization,
+  "java"
+);
+
 // Delete Task File Operation
 @doc("Optional parameters for Delete Task File operation.")
 model DeleteBatchTaskFileOptions {

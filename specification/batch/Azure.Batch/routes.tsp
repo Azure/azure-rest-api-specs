@@ -1403,6 +1403,16 @@ alias TerminateTaskRequiredParameters = {
   taskId: string;
 };
 
+alias ReactivateTaskRequiredParameters = {
+  @doc("The ID of the Job containing the Task.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task to reactivate.")
+  @path
+  taskId: string;
+};
+
 alias ListTaskFilesRequiredParameters = {
   @doc("The ID of the Job that contains the Task.")
   @path
@@ -1603,16 +1613,11 @@ interface Tasks {
     will fail if the Job has completed (or is terminating or deleting).
     """)
   @route("/jobs/{jobId}/tasks/{taskId}/reactivate")
-  @clientName("reactivateTaskInternal", "java")
-  reactivateTask is PostOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job containing the Task.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task to reactivate.")
-      @path
-      taskId: string;
+  reactivateTask is PostOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...ReactivateTaskRequiredParameters;
     },
     NoContentResponse & DataServiceResponseHeaders
   >;
