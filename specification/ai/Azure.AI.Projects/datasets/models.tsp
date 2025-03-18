@@ -38,6 +38,7 @@ model DatasetVersion {
   type: DatasetType;
 
   @doc("Indicates if dataset is reference only or managed by dataset service. If true, the underlying data will be deleted when the dataset version is deleted")
+  @visibility("read")
   isReference?: boolean;
 
   ...AssetBase;
