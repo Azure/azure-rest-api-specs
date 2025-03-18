@@ -63,3 +63,13 @@ interface ConversationThreadClient
   "notificationContent",
   "csharp,java"
 );
+
+@@clientName(Azure.Communication.MessagesService.LinkContent.url,
+  "uri",
+  "csharp"
+);
+
+@@clientName(Azure.Communication.MessagesService.MediaMessageContent.mediaUri,
+  "mediaUrl",
+  "java"
+);

@@ -16,9 +16,7 @@ using Azure.Core.Traits;
     "Authorization"
   > | BearerAuth
 )
-@service({
-  title: "CommunicationMessagesClient",
-})
+@service(#{ title: "CommunicationMessagesClient" })
 @server(
   "{endpoint}",
   "Azure Communication Messages Service",

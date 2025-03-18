@@ -6,7 +6,8 @@ on:
   #   types: [labeled, unlabeled]
   # If an upstream workflow if completed, get only the artifacts from that workflow, and update labels
   workflow_run:
-    workflows: ["TypeSpec Requirement", "SDK Suppressions"]
+    workflows:
+      ["ARM Auto SignOff (Preview)", "SDK Suppressions", "TypeSpec Requirement"]
     types: [completed]
   workflow_dispatch:
     inputs:
@@ -29,13 +30,17 @@ on:
         required: false
         type: number
 
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+
 jobs:
   update-labels:
     name: Update Labels
 
-    permissions:
-      contents: read
-      pull-requests: write
+    # Only process labels from successful workflows
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     runs-on: ubuntu-24.04
 
@@ -46,9 +51,14 @@ jobs:
             .github
 
       - name: Update Labels
-        uses: ./.github/actions/update-labels
+        uses: actions/github-script@v7
+        env:
+          OWNER: ${{ inputs.owner }}
+          REPO: ${{ inputs.repo }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          RUN_ID: ${{ inputs.run_id }}
         with:
-          owner: ${{ inputs.owner }}
-          repo: ${{ inputs.repo }}
-          issue_number: ${{ inputs.issue_number }}
-          run_id: ${{ inputs.run_id }}
+          script: |
+            const { default: updateLabels } =
+              await import('${{ github.workspace }}/.github/workflows/src/update-labels.js');
+            await updateLabels({ github, context, core });

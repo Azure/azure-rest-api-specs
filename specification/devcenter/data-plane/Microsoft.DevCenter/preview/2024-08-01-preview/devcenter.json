@@ -2132,7 +2132,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/customizationGroups": {
       "get": {
         "operationId": "DevBoxes_ListCustomizationGroups",
-        "description": "  Lists customization groups on the Dev Box. Listed customization groups exclude \n  task information unless specified via the include parameter.",
+        "description": "  Lists customization groups on the Dev Box. Listed customization groups exclude\n  task information unless specified via the include parameter.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3981,7 +3981,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -5511,7 +5513,9 @@
           "maximum": 100
         },
         "properties": {
-          "description": "Custom operation properties, populated only for a successful operation."
+          "type": "object",
+          "description": "Custom operation properties, populated only for a successful operation.",
+          "additionalProperties": {}
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
