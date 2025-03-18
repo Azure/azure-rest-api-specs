@@ -68,4 +68,7 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("EvaluationResult Uri: output asset type. Uploaded for local runs. Example: azureml://registries/azureml/evaluationresults/name/{name}/version/{version}")
+  evaluationResultId: string;
 }
