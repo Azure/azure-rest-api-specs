@@ -121,7 +121,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.uploadNodeLogs, "uploadNodeLogsInternal", "java");
 @@clientName(BatchClient.listNodes, "listNodesInternal", "java");
 @@clientName(BatchClient.getNodeExtension, "getNodeExtensionInternal", "java");
 @@clientName(BatchClient.listNodeExtensions,

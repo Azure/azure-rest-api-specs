@@ -1626,3 +1626,27 @@ op getNodeRemoteLoginSettingsCustomization is Azure.Batch.ReadOperationNew<
   getNodeRemoteLoginSettingsCustomization,
   "java"
 );
+
+// Upload Node Logs Operation
+@doc("Optional parameters for Upload Node Logs operation.")
+model UploadBatchNodeLogsOptions {
+  ...Azure.Batch.CommonJsonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Upload Node Logs operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
+op uploadNodeLogsCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.UploadNodeLogsRequiredParameters;
+
+    @doc("Optional parameters for Upload Node Logs operation.")
+    options?: UploadBatchNodeLogsOptions;
+  },
+  Azure.Batch.UploadBatchServiceLogsResult
+>;
+
+@@override(Azure.Batch.Nodes.uploadNodeLogs,
+  uploadNodeLogsCustomization,
+  "java"
+);

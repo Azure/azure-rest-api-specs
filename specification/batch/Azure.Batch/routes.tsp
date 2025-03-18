@@ -1851,6 +1851,23 @@ alias GetNodeRemoteLoginSettingsRequiredParameters = {
   nodeId: string;
 };
 
+alias UploadNodeLogsRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("""
+    The ID of the Compute Node for which you want to get the Remote Desktop
+    Protocol file.
+    """)
+  @path
+  nodeId: string;
+
+  @doc("The Azure Batch service log files upload options.")
+  @bodyRoot
+  content: UploadBatchServiceLogsContent;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -2021,23 +2038,10 @@ interface Nodes {
     support to aid in debugging issues with the Batch service.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
-  @clientName("uploadNodeLogsInternal", "java")
-  uploadNodeLogs is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("""
-        The ID of the Compute Node for which you want to get the Remote Desktop
-        Protocol file.
-        """)
-      @path
-      nodeId: string;
-
-      @doc("The Azure Batch service log files upload options.")
-      @bodyRoot
-      content: UploadBatchServiceLogsContent;
+  uploadNodeLogs is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...UploadNodeLogsRequiredParameters;
     },
     UploadBatchServiceLogsResult
   >;
