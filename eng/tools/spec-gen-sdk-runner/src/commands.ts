@@ -49,10 +49,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     statusCode = 1;
   }
   logMessage("ending group logging", LogLevel.EndGroup);
-  logIssuesToPipeline(
-    path.join(commandInput.workingFolder, executionReport.vsoLogPath),
-    specConfigPathText,
-  );
+  logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
 
   return statusCode;
 }
@@ -120,10 +117,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(
-      path.join(commandInput.workingFolder, executionReport.vsoLogPath),
-      changedSpecPathText,
-    );
+    logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
   }
   // Process the breaking change label artifacts
   statusCode = processBreakingChangeLabelArtifacts(
@@ -206,10 +200,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(
-      path.join(commandInput.workingFolder, executionReport.vsoLogPath),
-      specConfigPath,
-    );
+    logIssuesToPipeline(executionReport.vsoLogPath, specConfigPath);
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
