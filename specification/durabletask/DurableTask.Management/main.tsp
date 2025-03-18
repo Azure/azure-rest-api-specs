@@ -121,15 +121,9 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-#suppress "@azure-tools/typespec-azure-core/friendly-name"
 @doc("The update request model for the Scheduler resource")
-@friendlyName("Scheduler")
-model SchedulerUpdate is Foundations.TrackedResource {
-  /**
-   * properties: The scheduler properties to be updated
-   */
-  properties?: SchedulerPropertiesUpdate;
-}
+model SchedulerUpdate
+  is UpdateableProperties<Azure.ResourceManager.TrackedResource<SchedulerPropertiesUpdate>>;
 
 @doc("The Scheduler resource properties to be updated")
 model SchedulerPropertiesUpdate {

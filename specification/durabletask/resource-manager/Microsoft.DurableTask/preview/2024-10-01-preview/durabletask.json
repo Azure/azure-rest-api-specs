@@ -898,23 +898,18 @@
       "type": "object",
       "description": "The update request model for the Scheduler resource",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchedulerPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/SchedulerPropertiesUpdate",
-          "description": "properties: The scheduler properties to be updated"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
+      }
     },
     "TaskHub": {
       "type": "object",
