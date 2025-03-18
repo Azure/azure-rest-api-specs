@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.DurableTask" })
@@ -131,7 +132,7 @@ interface Schedulers {
   @errorsDoc("Validation error: required parameters are missing")
   update is ArmCustomPatchAsync<
     Scheduler,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    ResourceUpdateModel<
       Scheduler,
       SchedulerProperties
     >
