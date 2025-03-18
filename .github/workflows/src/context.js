@@ -9,7 +9,7 @@ import { PER_PAGE_MAX } from "./github.js";
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number?: number, run_id?: number, ado_project_url?: string, ado_build_id?: string }>}
+ * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }>}
  */
 export async function extractInputs(github, context, core) {
   core.info("extractInputs()");
@@ -23,7 +23,7 @@ export async function extractInputs(github, context, core) {
   // with debug enabled to replay the previous context.
   core.isDebug() && core.debug(`context: ${JSON.stringify(context)}`);
 
-  /** @type {{ owner: string, repo: string, head_sha: string, issue_number?: number, run_id?: number, ado_project_url?: string, ado_build_id?: string }} */
+  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }} */
   let inputs;
 
   // Add support for more event types as needed
@@ -219,12 +219,19 @@ export async function extractInputs(github, context, core) {
         `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
       );
     }
+    if (!context.payload.repository || !context.payload.repository.owner || !context.payload.repository.owner.login || !context.payload.repository.name) {
+      throw new Error(
+        `Could not extract repository owner or name from context payload: ${JSON.stringify(context.payload.repository)}`,
+      );
+    }
     inputs = {
       owner: context.payload.repository.owner.login,
       repo: context.payload.repository.name,
       head_sha: checkRun.head_sha,
       ado_build_id: match[2],
       ado_project_url: match[1],
+      issue_number: NaN,
+      run_id: NaN,
     };
   } else {
     throw new Error(

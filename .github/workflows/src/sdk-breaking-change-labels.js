@@ -6,6 +6,16 @@ import { extractInputs } from "./context.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
+ * @typedef {Object} ArtifactResource
+ * @property {string} [downloadUrl]
+ */
+
+/**
+ * @typedef {Object} Artifacts
+ * @property {ArtifactResource} [resource]
+ */
+
+/**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<{labelName: string, labelAction: LabelAction, issueNumber: number}>}
  */
@@ -49,8 +59,9 @@ export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head
 
     if (response.ok) {
       // Step 1: Get the download URL for the artifact
-      const artifacts = await response.json();
-      core.info(`Artifacts found: ${stringify(artifacts)}`);
+      /** @type {Artifacts} */
+      const artifacts = /** @type {Artifacts} */ (await response.json());
+      core.info(`Artifacts found: ${JSON.stringify(artifacts)}`);
       if (!artifacts.resource || !artifacts.resource.downloadUrl) {
         throw new Error(`Download URL not found for the artifact ${artifactName}`);
       }
@@ -99,7 +110,7 @@ export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head
       core.error(`Error details: ${errorText}`);
     }
   } catch (error) {
-    core.error(`Error processing breaking change label artifact: ${error}`);
+    throw error;
   }
 
   if (!labelAction) {

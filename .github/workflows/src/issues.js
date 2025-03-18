@@ -3,7 +3,7 @@
  * @param {Object} params
  * @param {String} params.head_sha - The head_sha
  * @param {typeof import("@actions/core")} params.core - GitHub Actions core for logging
- * @param {import('github-script').GitHub} params.github - GitHub API client
+ * @param {import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api} params.github - GitHub API client
  * @returns {Promise<{issueNumber: number}>} - The PR number or NaN if not found
  */
 export async function getIssueNumber({head_sha, core, github})
@@ -39,7 +39,7 @@ export async function getIssueNumber({head_sha, core, github})
       core.info(`No open PRs found for commit ${head_sha}`);
     }
   } catch (error) {
-    core.error(`Error searching for PRs with commit ${head_sha}: ${error.message}`);
+    core.error(`Error searching for PRs with commit ${head_sha}: ${error}`);
     throw error;
   }
 

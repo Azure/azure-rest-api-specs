@@ -228,18 +228,15 @@ describe('sdk-breaking-change-labels', () => {
         }
       });
 
-      // Call function
-      const result = await getLabelAndActionImpl({ ado_build_id: inputs.ado_build_id, ado_project_url: inputs.ado_project_url, head_sha: inputs.head_sha, github: mockGithub, core: mockCore });
-
-      // Verify result
-      expect(result).toEqual({
-        labelName: '',
-        labelAction: LabelAction.None,
-        issueNumber: NaN
-      });
-
-      // Verify error was logged
-      expect(mockCore.error).toHaveBeenCalledWith(expect.stringContaining('Error processing breaking change label artifact'));
+      // Call function and expect it to throw
+      await expect(getLabelAndActionImpl(
+        {
+          ado_build_id: inputs.ado_build_id,
+          ado_project_url: inputs.ado_project_url,
+          head_sha: inputs.head_sha,
+          github: mockGithub,
+          core: mockCore
+        })).rejects.toThrow();
     });
 
     it('should throw error if missing download url from the artifact api response', async () => {
@@ -266,18 +263,15 @@ describe('sdk-breaking-change-labels', () => {
         }
       });
 
-      // Call function
-      const result = await getLabelAndActionImpl({ ado_build_id: inputs.ado_build_id, ado_project_url: inputs.ado_project_url, head_sha: inputs.head_sha, github: mockGithub, core: mockCore });
-
-      // Verify result
-      expect(result).toEqual({
-        labelName: '',
-        labelAction: LabelAction.None,
-        issueNumber: NaN
-      });
-
-      // Verify error was logged
-      expect(mockCore.error).toHaveBeenCalledWith(expect.stringContaining('Error processing breaking change label artifact'));
+      // Call function and expect it to throw
+      await expect(getLabelAndActionImpl(
+        {
+          ado_build_id: inputs.ado_build_id,
+          ado_project_url: inputs.ado_project_url,
+          head_sha: inputs.head_sha,
+          github: mockGithub,
+          core: mockCore
+        })).rejects.toThrow();
     });
 
     it('should throw error when fail to fetch artifact content', async () => {
@@ -317,18 +311,15 @@ describe('sdk-breaking-change-labels', () => {
         }
       });
 
-      // Call function
-      const result = await getLabelAndActionImpl({ ado_build_id: inputs.ado_build_id, ado_project_url: inputs.ado_project_url, head_sha: inputs.head_sha, github: mockGithub, core: mockCore });
-
-      // Verify result
-      expect(result).toEqual({
-        labelName: '',
-        labelAction: LabelAction.None,
-        issueNumber: NaN
-      });
-
-      // Verify error was logged
-      expect(mockCore.error).toHaveBeenCalledWith(expect.stringContaining('Error processing breaking change label artifact'));
+    // Call function and expect it to throw
+    await expect(getLabelAndActionImpl(
+      {
+        ado_build_id: inputs.ado_build_id,
+        ado_project_url: inputs.ado_project_url,
+        head_sha: inputs.head_sha,
+        github: mockGithub,
+        core: mockCore
+      })).rejects.toThrow();
     });
 
     it('should handle exception during processing', async () => {
@@ -352,18 +343,15 @@ describe('sdk-breaking-change-labels', () => {
         }
       });
 
-      // Call function
-      const result = await getLabelAndActionImpl({ ado_build_id: inputs.ado_build_id, ado_project_url: inputs.ado_project_url, head_sha: inputs.head_sha, github: mockGithub, core: mockCore });
-
-      // Verify result
-      expect(result).toEqual({
-        labelName: '',
-        labelAction: LabelAction.None,
-        issueNumber: NaN
-      });
-
-      // Verify error was logged
-      expect(mockCore.error).toHaveBeenCalledWith(expect.stringContaining('Error processing breaking change label artifact'));
+      // Call function and expect it to throw
+      await expect(getLabelAndActionImpl(
+        {
+          ado_build_id: inputs.ado_build_id,
+          ado_project_url: inputs.ado_project_url,
+          head_sha: inputs.head_sha,
+          github: mockGithub,
+          core: mockCore
+        })).rejects.toThrow();
     });
   });
 });

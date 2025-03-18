@@ -394,7 +394,9 @@ it("check_run:completed", async () => {
   ).resolves.toEqual({
     owner: "TestRepoOwnerLogin",
     repo: "TestRepoName",
+    issue_number: NaN,
     head_sha: "abc123",
+    run_id: NaN,
     ado_build_id: "56789",
     ado_project_url: "https://dev.azure.com/abc/123-456",
   });
