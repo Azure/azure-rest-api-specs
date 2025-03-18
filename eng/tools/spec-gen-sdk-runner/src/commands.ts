@@ -428,14 +428,10 @@ function processBreakingChangeLabelArtifacts(
         breakingChangeLabelArtifactPath,
         breakingChangeLabelArtifactName,
       ),
-      JSON.stringify(
-        {
-          language: commandInput.sdkRepoName,
-          labelAction: shouldLabelBreakingChange,
-        },
-        undefined,
-        2,
-      ),
+      JSON.stringify({
+        language: commandInput.sdkRepoName,
+        labelAction: shouldLabelBreakingChange,
+      }),
     );
     setVsoVariable("BreakingChangeLabelArtifactName", breakingChangeLabelArtifactName);
     setVsoVariable("BreakingChangeLabelArtifactPath", breakingChangeLabelArtifactPath);

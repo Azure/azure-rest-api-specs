@@ -12,9 +12,12 @@ const wfName = 'sdk-breaking-change-labels';
  */
 export async function getLabelAndAction({ github, context, core }) {
   const inputs = await extractInputs(github, context, core);
-  const ado_build_id = inputs.ado_build_id || "";
-  const ado_project_url = inputs.ado_project_url || "";
+  const ado_build_id = inputs.ado_build_id;
+  const ado_project_url = inputs.ado_project_url;
   const head_sha = inputs.head_sha;
+  if(!ado_build_id || !ado_project_url || !head_sha) {
+    throw new Error(`Required inputs are not valid: ado_build_id:${ado_build_id}, ado_project_url:${ado_project_url}, head_sha:${head_sha}`);
+  }
   return await getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, core, github});
 }
 
@@ -27,11 +30,10 @@ export async function getLabelAndAction({ github, context, core }) {
  * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<{labelName: string, labelAction: LabelAction, issueNumber: number}>}
  */
-async function getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, core, github }) {
+export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, core, github }) {
   let issue_number = NaN;
   let labelAction;
   let labelName = "";
-
   const artifactName = "spec-gen-sdk_azure-sdk-for-js_true";
   const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   try {
@@ -70,57 +72,34 @@ async function getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, c
 
       const artifactData = await artifactResponse.text();
       core.info(`Artifact content: ${artifactData}`);
-      /*
-      try {
-          const jsonData = JSON.parse(artifactData);
-          console.log('Parsed JSON Data:', jsonData);
-      } catch (err) {
-          console.log('Artifact is not JSON. Raw content:\n', artifactData);
-      }*/
-      /*
-      core.info(`Artifacts found: ${artifacts.count}`);
 
-      // Process artifacts as needed
-      let addLabel = false;
-      let removeLabel = false;
-      let language = "";
-      for (const artifact of artifacts.value) {
-
-        // label artifact name example: 'spec-gen-sdk-azure-sdk-for-js-true'
-        if (artifact.name.startsWith("spec-gen-sdk_")) {
-          core.info(`Artifact: ${artifact.name}`);
-          if(artifact.name.endsWith("true")) {
-            addLabel = true;
-            language = artifact.name.split("_")[1];
-          } else if(artifact.name.endsWith("false")) {
-            removeLabel = true;
-            language = artifact.name.split("_")[1];
-          }
-        }
+      // Parse the JSON data
+      const breakingChangeResult = JSON.parse(artifactData);
+      const labelActionText = breakingChangeResult.labelAction;
+      const breakingChangeLanguage = breakingChangeResult.language;
+      if (breakingChangeLanguage) {
+        labelName = sdkLabels[`${breakingChangeLanguage}`].breakingChange;
       }
 
       // Set label action and name based on the artifacts
-      if (addLabel) {
+      if (labelActionText === "add") {
         labelAction = LabelAction.Add;
-      } else if (removeLabel) {
+      } else if (labelActionText === "remove") {
         labelAction = LabelAction.Remove;
       }
-      if (language) {
-        labelName = sdkLabels[`${language}`].breakingChange;
-      }*/
+
+      // Get the issue number from the check run
+      if (!issue_number) {
+        const { issueNumber } = await getIssueNumber({head_sha, core, github});
+        issue_number = issueNumber;
+      }
     } else {
       core.error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
       const errorText = await response.text();
       core.error(`Error details: ${errorText}`);
     }
-  } catch (apiError) {
-    core.error(`Error calling Azure DevOps API: ${apiError}`);
-  }
-
-  // Get the issue number from the check run
-  if (Number.isNaN(issue_number)) {
-    const { issueNumber } = await getIssueNumber({head_sha, core, github});
-    issue_number = issueNumber;
+  } catch (error) {
+    core.error(`Error processing breaking change label artifact: ${error}`);
   }
 
   if (!labelAction) {
@@ -139,7 +118,7 @@ async function getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, c
  * @param {import('github-script').GitHub} params.github - GitHub API client
  * @returns {Promise<{issueNumber: number}>} - The PR number or NaN if not found
  */
-async function getIssueNumber({head_sha, core, github})
+export async function getIssueNumber({head_sha, core, github})
 {
   let issueNumber = NaN;
 
