@@ -39,7 +39,7 @@ model FileSystemResourceProperties {
   /**
    * Provisioning State of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -71,6 +71,7 @@ model FileSystemResourceProperties {
   /**
    * Initial administrator password of the resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
   @extension("x-ms-secret", true)
   adminPassword: string;
 
@@ -92,6 +93,7 @@ model FileSystemResourceUpdate {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   tags?: Record<string>;
 
   /**
@@ -128,7 +130,7 @@ model FileSystemResource
   @path
   @key("fileSystemName")
   @segment("fileSystems")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9_-]*$")
   name: string;
 

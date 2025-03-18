@@ -80,11 +80,12 @@ interface ProviderActions {
     ListInUseStorageAccountsResponse
   >;
 }
-
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(ArmProviderActionAsync::parameters.body,
   "application/json",
   "parameters"
 );
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(ArmProviderActionSync::parameters.body,
   "application/json",
   "parameters"

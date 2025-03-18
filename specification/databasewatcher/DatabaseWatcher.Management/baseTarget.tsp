@@ -38,18 +38,18 @@ model TargetProperties {
   @doc("To use SQL authentication when connecting to targets, specify the vault where the login name and password secrets are stored.")
   targetVault?: VaultSecret;
 
-  @doc("The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.")
+  @doc("The FQDN host name of the server to use in the connection string when connecting to a target. For example, for an Azure SQL logical server in the Azure commercial cloud, the value might be 'sql-logical-server-22092780.database.windows.net'; for an Azure SQL managed instance in the Azure commercial cloud, the value might be 'sql-mi-39441134.767d5869f605.database.windows.net'. Port number and instance name must be specified separately.")
   @maxLength(200)
   connectionServerName: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the resource.")
   provisioningState?: ResourceProvisioningState;
 }
 
 @doc("The vault specific details required if using SQL authentication to connect to a target.")
 model VaultSecret {
-  @doc("The Azure ResourceId of the Key Vault instance storing database authentication secrets.")
+  @doc("The Azure resource ID of the Key Vault instance storing database authentication secrets.")
   akvResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.KeyVault/vaults";

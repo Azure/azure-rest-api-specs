@@ -21,7 +21,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   @key("fleetMemberName")
   @path
   @segment("members")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -40,7 +40,7 @@ model FleetMemberProperties {
   // omitting it for now as response headers do not impact SDK generation.
   // ...EtagResponseEnvelope;
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The ARM resource id of the cluster that joins the Fleet. Must be a valid Azure resource id. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{clusterName}'.")
   clusterResourceId: ClusterResourceId;
 
@@ -51,7 +51,7 @@ model FleetMemberProperties {
   @added(Versions.v2023_03_15_preview)
   group?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: FleetMemberProvisioningState;
 }
@@ -100,15 +100,13 @@ interface FleetMembers {
       IfMatchParameters<FleetMember>
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Use operationId to keep same name as deprecated sync operation"
   @sharedRoute
   @added(Versions.v2023_06_15_preview)
   @operationId("FleetMembers_Update")
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "original-uri",
-    }
+    #{ `final-state-via`: "original-uri" }
   )
   updateAsync is ArmCustomPatchAsync<
     FleetMember,

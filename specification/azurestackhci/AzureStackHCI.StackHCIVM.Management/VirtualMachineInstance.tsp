@@ -11,9 +11,9 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
 @doc("The virtual machine instance resource definition.")
 @extension("x-ms-azure-resource", true)
-@extension("x-ms-client-flatten", true)
 @singleton("default")
 model VirtualMachineInstance
   is ExtensionResource<VirtualMachineInstanceProperties> {
@@ -21,7 +21,7 @@ model VirtualMachineInstance
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @key("virtualMachineInstance")
   @segment("virtualMachineInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 
@@ -45,7 +45,7 @@ interface VirtualMachineInstances {
   >;
 
   @doc("The operation to update a virtual machine instance.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
     VirtualMachineInstanceUpdateRequest

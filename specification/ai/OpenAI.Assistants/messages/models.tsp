@@ -444,3 +444,13 @@ model MessageDeltaTextFilePathAnnotation {
   @encodedName("application/json", "file_id")
   fileId?: string;
 }
+
+/** A representation of the URL used for the text citation. */
+@added(ServiceApiVersions.v2024_07_01_preview)
+model MessageDeltaTextUrlCitationDetails {
+  /** The URL where the citation is from. */
+  url?: string;
+
+  /** The title of the URL. */
+  title?: string;
+}

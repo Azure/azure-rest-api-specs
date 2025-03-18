@@ -26,26 +26,23 @@ model BrokerListenerResource is ProxyResource<BrokerListenerProperties> {
   // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
 @doc("Defines a Broker listener. A listener is a collection of ports on which the broker accepts connections from clients.")
 model BrokerListenerProperties {
-  @doc("Broker associated with this listener.")
-  brokerRef: string;
-
   @doc("Kubernetes Service name of this listener.")
-  serviceName?: string = "aio-mq-dmqtt-frontend";
+  serviceName?: string;
 
   @doc("Ports on which this listener accepts client connections.")
-  @OpenAPI.extension("x-ms-identifiers", ["port"])
+  @OpenAPI.extension("x-ms-identifiers", #["port"])
   ports: ListenerPort[];
 
   @doc("Kubernetes Service type of this listener.")
   serviceType?: ServiceType = ServiceType.ClusterIp;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -95,7 +92,7 @@ model TlsCertMethod {
   mode: TlsCertMethodMode;
 
   @doc("Option 1 - Automatic TLS server certificate management with cert-manager.")
-  automatic?: AutomaticCertMethod;
+  certManagerCertificateSpec?: CertManagerCertificateSpec;
 
   @doc("Option 2 - Manual TLS server certificate management through a defined secret.")
   manual?: X509ManualCertificate;
@@ -113,12 +110,12 @@ union TlsCertMethodMode {
 }
 
 @doc("Automatic TLS server certificate management with cert-manager")
-model AutomaticCertMethod {
+model CertManagerCertificateSpec {
   @doc("Lifetime of certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   duration?: string;
 
   @doc("Secret for storing server certificate. Any existing data will be overwritten. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretRef?: string;
+  secretName?: string;
 
   @doc("When to begin renewing certificate. Must be specified using a Go time.Duration format (h|m|s). E.g. 240h for 240 hours and 45m for 45 minutes.")
   renewBefore?: string;

@@ -5,6 +5,7 @@ import "./extensions/oyd/azure_search_options.tsp";
 import "./extensions/oyd/azure_machinelearning_index_options.tsp";
 import "./extensions/oyd/azure_cosmosdb_options.tsp";
 import "./extensions/oyd/elasticsearch_options.tsp";
+import "./extensions/oyd/mongodb_options.tsp";
 import "./extensions/oyd/pinecone_options.tsp";
 
 namespace Azure.OpenAI;
@@ -24,6 +25,7 @@ union AzureChatExtensionType {
   azureSearch: "azure_search",
 
   @doc("Represents the use of Azure Machine Learning index as an Azure OpenAI chat extension.")
+  @removed(ServiceApiVersions.v2024_08_01_Preview)
   azureMachineLearningIndex: "azure_ml_index",
 
   @doc("Represents the use of Azure Cosmos DB as an Azure OpenAI chat extension.")
@@ -34,6 +36,10 @@ union AzureChatExtensionType {
 
   @doc("Represents the use of Pinecone index as an Azure OpenAI chat extension.")
   pinecone: "pinecone",
+
+  @added(ServiceApiVersions.v2024_08_01_Preview)
+  @doc("Represents the use of a MongoDB chat extension.")
+  mongoDB: "mongo_db",
 }
 
 @discriminator("type")
@@ -97,6 +103,10 @@ model AzureChatExtensionDataSourceResponseCitation {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
   @doc("The chunk ID of the citation.")
   chunk_id?: string;
+
+  /** The rerank score of the retrieved document. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+  rerank_score?: float64;
 }
 
 /** The retrieved document. */
@@ -115,10 +125,6 @@ model AzureChatExtensionRetrievedDocument {
   /** The original search score of the retrieved document. */
   @encodedName("application/json", "original_search_score")
   originalSearchScore?: float64;
-
-  /** The rerank score of the retrieved document. */
-  @encodedName("application/json", "rerank_score")
-  rerankScore?: float64;
 
   /**
    * Represents the rationale for filtering the document. If the document does not undergo filtering,
@@ -222,4 +228,30 @@ model AzureGroundingEnhancementCoordinatePoint {
 
   @doc("The y-coordinate (vertical axis) of the point.")
   y: float32;
+}
+
+/**
+ * User security context contains several parameters that describe the AI application itself,
+ * and the end user that interacts with the AI application. These fields assist your security
+ * operations teams to investigate and mitigate security incidents by providing a comprehensive
+ * approach to protecting your AI applications. (Learn more at https://aka.ms/TP4AI/Documentation/EndUserContext)
+ * about protecting AI applications using Microsoft Defender for Cloud.
+ */
+@added(ServiceApiVersions.v2025_01_01_Preview)
+model UserSecurityContext {
+  /** The name of the application. Sensitive personal information should not be included in this field. */
+  @encodedName("application/json", "application_name")
+  applicationName?: string;
+
+  /** This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field. */
+  @encodedName("application/json", "end_user_id")
+  endUserId?: Azure.Core.uuid;
+
+  /** The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multi tenant. */
+  @encodedName("application/json", "end_user_tenant_id")
+  endUserTenantId?: Azure.Core.uuid;
+
+  /** Captures the original client's IP address, accepting both IPv4 and IPv6 formats. */
+  @encodedName("application/json", "source_ip")
+  sourceIp?: string;
 }

@@ -26,15 +26,14 @@ using OpenAPI;
 using Autorest;
 
 @armProviderNamespace
-@service({
-  title: "Oracle Database Resource Manager",
-})
+@service(#{ title: "Oracle Database Resource Manager" })
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @versioned(Oracle.Database.Versions)
 namespace Oracle.Database;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(Operations.list,
   "./examples/operations_list.json",
   "List Operations"

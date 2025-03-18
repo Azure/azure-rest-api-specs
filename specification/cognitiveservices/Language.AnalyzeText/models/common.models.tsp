@@ -12,7 +12,7 @@ using Azure.Core.Traits;
 
 namespace Language.Text;
 
-/** These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts. */
+/** These are the [Azure Active Directory OAuth2](https://learn.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://learn.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://learn.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 model AADToken
   is OAuth2Auth<[
@@ -44,10 +44,6 @@ union AnalyzeTextTaskKind {
 
   /** Entity linking task */
   EntityLinking: "EntityLinking",
-
-  /** Dynamic classification task */
-  @added(Versions.v2023_11_15_preview)
-  DynamicClassification: "DynamicClassification",
 }
 
 /** The kind of the long running analyze text tasks supported. */
@@ -88,18 +84,6 @@ union AnalyzeTextLROTaskKind {
   /** Abstractive summarization task */
   @added(Versions.v2023_04_01)
   AbstractiveSummarization: "AbstractiveSummarization",
-
-  /** Custom healthcare task */
-  @added(Versions.v2023_11_15_preview)
-  CustomHealthcare: "CustomHealthcare",
-
-  /** Custom sentiment analysis task */
-  @added(Versions.v2023_11_15_preview)
-  CustomSentimentAnalysis: "CustomSentimentAnalysis",
-
-  /** Custom abstractive summarization task */
-  @added(Versions.v2023_11_15_preview)
-  CustomAbstractiveSummarization: "CustomAbstractiveSummarization",
 }
 
 /** The kind of the response object returned by the analyze-text task. */
@@ -123,10 +107,6 @@ union AnalyzeTextTaskResultsKind {
 
   /** Entity linking results */
   EntityLinkingResults: "EntityLinkingResults",
-
-  /** Dynamic classification results */
-  @added(Versions.v2023_11_15_preview)
-  DynamicClassificationResults: "DynamicClassificationResults",
 }
 
 /** The kind of the response object returned by the analyze-text long running task. */
@@ -167,18 +147,6 @@ union AnalyzeTextLROResultsKind {
   /** Abstractive summarization LRO results */
   @added(Versions.v2023_04_01)
   AbstractiveSummarizationLROResults: "AbstractiveSummarizationLROResults",
-
-  /** Custom healthcare LRO results */
-  @added(Versions.v2023_11_15_preview)
-  CustomHealthcareLROResults: "CustomHealthcareLROResults",
-
-  /** Custom sentiment analysis LRO results */
-  @added(Versions.v2023_11_15_preview)
-  CustomSentimentAnalysisLROResults: "CustomSentimentAnalysisLROResults",
-
-  /** Custom abstractive summarization LRO results */
-  @added(Versions.v2023_11_15_preview)
-  CustomAbstractiveSummarizationLROResults: "CustomAbstractiveSummarizationLROResults",
 }
 
 /** Collection of input documents to be analyzed by the service. */
@@ -220,7 +188,7 @@ model AnalyzeTextJobsInput {
   tasks: Array<AnalyzeTextLROTask>;
 
   /** Default language to use for records requesting automatic language detection. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_15_preview)
   defaultLanguage?: string;
 }
 
@@ -386,7 +354,7 @@ model MultiLanguageInput {
 }
 
 /** Defines the detected language for the document. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model DocumentDetectedLanguage {
   /** If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document. */
   detectedLanguage?: DetectedLanguage;
@@ -533,7 +501,7 @@ model JobState {
 
   /** job ID */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobId: uuid;
 
   /** last updated date and time */
@@ -738,7 +706,7 @@ model SentimentConfidenceScores {
 }
 
 /** Enum that defines the length of the output summaries. */
-@added(Versions.v2023_11_15_preview)
+@added(Versions.v2024_11_01)
 union SummaryLengthBucket {
   string,
 
@@ -762,7 +730,7 @@ model AbstractiveSummarizationTaskParametersBase {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** (NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries. */
-  @added(Versions.v2023_11_15_preview)
+  @added(Versions.v2024_11_01)
   summaryLength?: SummaryLengthBucket;
 }
 

@@ -2,6 +2,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureSphere;
 /**
@@ -16,7 +17,7 @@ model Device is ProxyResource<DeviceProperties> {
   @path
   @key("deviceName")
   @segment("devices")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -41,7 +42,7 @@ interface Devices {
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Device,
     DeviceUpdate,
@@ -74,11 +75,6 @@ interface Devices {
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );
-@@encodedName(Devices.generateCapabilityImage::parameters.body,
-  "application/json",
-  "generateDeviceCapabilityRequest"
-);
-@@extension(Devices.generateCapabilityImage::parameters.body,
-  "x-ms-client-name",
+@@clientName(Devices.generateCapabilityImage::parameters.body,
   "generateDeviceCapabilityRequest"
 );

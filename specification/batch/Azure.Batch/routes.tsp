@@ -80,7 +80,7 @@ interface Pools {
         start time of the last aggregation interval currently available.
         """)
       @query
-      @clientName("starttime")
+      @clientName("starttime", "csharp,python,javascript,go")
       startTime?: utcDateTime;
 
       @doc("""
@@ -93,10 +93,10 @@ interface Pools {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
     },
     BatchPoolListUsageMetricsResult
@@ -119,28 +119,28 @@ interface Pools {
     {}
   >;
 
-  @summary("Lists all of the Pools in the specified Account.")
-  @doc("Lists all of the Pools in the specified Account.")
+  @summary("Lists all of the Pools which be mounted.")
+  @doc("Lists all of the Pools which be mounted.")
   @route("/pools")
   @clientName("listPoolsInternal", "java")
   listPools is ListOperation<
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchPoolListResult
@@ -181,12 +181,12 @@ interface Pools {
     BatchPoolHeaders & {
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchPool
@@ -350,10 +350,10 @@ interface Pools {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
     },
     BatchAccountListSupportedImagesResult
@@ -370,10 +370,10 @@ interface Pools {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
     },
     BatchPoolNodeCountsListResult
@@ -402,6 +402,10 @@ interface Jobs {
       @doc("The ID of the Job to delete.")
       @path
       jobId: string;
+
+      @doc("If true, the server will delete the Job even if the corresponding nodes have not fully processed the deletion. The default value is false.")
+      @query
+      force?: boolean;
     },
     DeleteResponseHeaders
   >;
@@ -418,12 +422,12 @@ interface Jobs {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJob
@@ -539,6 +543,10 @@ interface Jobs {
         @doc("The options to use for terminating the Job.")
         @bodyRoot
         parameters?: BatchJobTerminateContent;
+
+        @doc("If true, the server will terminate the Job even if the corresponding nodes have not fully processed the termination. The default value is false.")
+        @query
+        force?: boolean;
       },
     AcceptedProcessingResponseHeaders
   >;
@@ -574,20 +582,20 @@ interface Jobs {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJobListResult
@@ -605,20 +613,20 @@ interface Jobs {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJobListResult
@@ -646,15 +654,15 @@ interface Jobs {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchJobPreparationAndReleaseTaskStatusListResult
@@ -676,6 +684,128 @@ interface Jobs {
       jobId: string;
     },
     BatchTaskCountsResult
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@tag("Certificates")
+interface Certificates {
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @summary("Creates a Certificate to the specified Account.")
+  @doc("Creates a Certificate to the specified Account.")
+  @route("/certificates")
+  @clientName("createCertificateInternal", "java")
+  createCertificate is CreateOperation<
+    {
+      @doc("The Certificate to be created.")
+      @body
+      certificate: BatchCertificate;
+    },
+    {}
+  >;
+
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @summary("Lists all of the Certificates that have been added to the specified Account.")
+  @doc("Lists all of the Certificates that have been added to the specified Account.")
+  @route("/certificates")
+  @clientName("listCertificatesInternal", "java")
+  listCertificates is ListOperation<
+    {
+      @doc("""
+        An OData $filter clause. For more information on constructing this filter, see
+        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.
+        """)
+      @query
+      @clientName("filter")
+      $filter?: string;
+
+      @doc("An OData $select clause.")
+      @query
+      @clientName("select")
+      $select?: string[];
+    },
+    BatchCertificateListResult
+  >;
+
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @summary("Cancels a failed deletion of a Certificate from the specified Account.")
+  @doc("""
+    If you try to delete a Certificate that is being used by a Pool or Compute
+    Node, the status of the Certificate changes to deleteFailed. If you decide that
+    you want to continue using the Certificate, you can use this operation to set
+    the status of the Certificate back to active. If you intend to delete the
+    Certificate, you do not need to run this operation after the deletion failed.
+    You must make sure that the Certificate is not being used by any resources, and
+    then you can try again to delete the Certificate.
+    """)
+  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
+  @clientName("cancelCertificateDeletionInternal", "java")
+  cancelCertificateDeletion is PostOperation<
+    {
+      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
+      @path
+      thumbprintAlgorithm: string;
+
+      @doc("The thumbprint of the Certificate being deleted.")
+      @path
+      thumbprint: string;
+    },
+    NoContentSuccessResponseHeaders
+  >;
+
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @summary("Deletes a Certificate from the specified Account.")
+  @doc("""
+    You cannot delete a Certificate if a resource (Pool or Compute Node) is using
+    it. Before you can delete a Certificate, you must therefore make sure that the
+    Certificate is not associated with any existing Pools, the Certificate is not
+    installed on any Nodes (even if you remove a Certificate from a Pool, it is not
+    removed from existing Compute Nodes in that Pool until they restart), and no
+    running Tasks depend on the Certificate. If you try to delete a Certificate
+    that is in use, the deletion fails. The Certificate status changes to
+    deleteFailed. You can use Cancel Delete Certificate to set the status back to
+    active if you decide that you want to continue using the Certificate.
+    """)
+  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
+  @clientName("deleteCertificateInternal", "java")
+  deleteCertificate is DeleteOperation<
+    {
+      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
+      @path
+      thumbprintAlgorithm: string;
+
+      @doc("The thumbprint of the Certificate to be deleted.")
+      @path
+      thumbprint: string;
+    },
+    BatchResponseHeaders & {
+      @doc("A process exit code.")
+      @statusCode
+      code: "202";
+    }
+  >;
+
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @doc("Gets information about the specified Certificate.")
+  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
+  @clientName("getCertificateInternal", "java")
+  getCertificate is ReadOperation<
+    {
+      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
+      @path
+      thumbprintAlgorithm: string;
+
+      @doc("The thumbprint of the Certificate to get.")
+      @path
+      thumbprint: string;
+
+      @doc("An OData $select clause.")
+      @query
+      @clientName("select")
+      $select?: string[];
+    },
+    BatchCertificate
   >;
 }
 
@@ -715,6 +845,10 @@ interface JobSchedules {
       @doc("The ID of the Job Schedule to delete.")
       @path
       jobScheduleId: string;
+
+      @doc("If true, the server will delete the JobSchedule even if the corresponding nodes have not fully processed the deletion. The default value is false.")
+      @query
+      force?: boolean;
     },
     DeleteResponseHeaders
   >;
@@ -730,12 +864,12 @@ interface JobSchedules {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJobSchedule
@@ -822,6 +956,10 @@ interface JobSchedules {
       @doc("The ID of the Job Schedule to terminates.")
       @path
       jobScheduleId: string;
+
+      @doc("If true, the server will terminate the JobSchedule even if the corresponding nodes have not fully processed the termination. The default value is false.")
+      @query
+      force?: boolean;
     },
     AcceptedProcessingResponseHeaders
   >;
@@ -847,20 +985,20 @@ interface JobSchedules {
     {
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchJobScheduleListResult
@@ -909,20 +1047,20 @@ interface Tasks {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-tasks.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchTaskListResult
@@ -1007,12 +1145,12 @@ interface Tasks {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
 
       @doc("An OData $expand clause.")
       @query
-      @clientName("expand")
+      @clientName("expand", "!autorest")
       $expand?: string[];
     },
     BatchTask & DataServiceResponseHeaders
@@ -1058,7 +1196,7 @@ interface Tasks {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchTaskListSubtasksResult
@@ -1162,7 +1300,6 @@ interface Tasks {
   @doc("Gets the properties of the specified Task file.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @clientName("getTaskFilePropertiesInternal", "java")
-  @clientName("getTaskFilePropertiesInternal", "csharp")
   getTaskFileProperties is HeadFileOperation<
     BatchTaskFileClientPathContent & BatchModifiedSinceHeaders,
     {}
@@ -1184,10 +1321,10 @@ interface Tasks {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-task-files.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-task-files.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("""
@@ -1306,7 +1443,7 @@ interface Nodes {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchNode
@@ -1329,6 +1466,69 @@ interface Nodes {
       @doc("The options to use for rebooting the Compute Node.")
       @bodyRoot
       parameters?: BatchNodeRebootContent;
+    },
+    AcceptedProcessingResponseHeaders
+  >;
+
+  @summary("Starts the specified Compute Node.")
+  @doc("You can start a Compute Node only if it has been deallocated.")
+  @route("/pools/{poolId}/nodes/{nodeId}/start")
+  @clientName("startNodeInternal", "java")
+  startNode is PostOperation<
+    {
+      @doc("The ID of the Pool that contains the Compute Node.")
+      @path
+      poolId: string;
+
+      @doc("The ID of the Compute Node that you want to restart.")
+      @path
+      nodeId: string;
+    },
+    AcceptedProcessingResponseHeaders
+  >;
+
+  @summary("Deallocates the specified Compute Node.")
+  @doc("You can deallocate a Compute Node only if it is in an idle or running state.")
+  @route("/pools/{poolId}/nodes/{nodeId}/deallocate")
+  @clientName("deallocateNodeInternal", "java")
+  deallocateNode is PostOperation<
+    MinimalMetadata & {
+      @doc("The ID of the Pool that contains the Compute Node.")
+      @path
+      poolId: string;
+
+      @doc("The ID of the Compute Node that you want to restart.")
+      @path
+      nodeId: string;
+
+      @doc("The options to use for deallocating the Compute Node.")
+      @bodyRoot
+      parameters?: BatchNodeDeallocateContent;
+    },
+    AcceptedProcessingResponseHeaders
+  >;
+
+  @summary("Reinstalls the operating system on the specified Compute Node.")
+  @doc("""
+    You can reinstall the operating system on a Compute Node only if it is in an
+    idle or running state. This API can be invoked only on Pools created with the
+    cloud service configuration property.
+    """)
+  @route("/pools/{poolId}/nodes/{nodeId}/reimage")
+  @clientName("reimageNodeInternal", "java")
+  reimageNode is PostOperation<
+    MinimalMetadata & {
+      @doc("The ID of the Pool that contains the Compute Node.")
+      @path
+      poolId: string;
+
+      @doc("The ID of the Compute Node that you want to restart.")
+      @path
+      nodeId: string;
+
+      @doc("The options to use for reimaging the Compute Node.")
+      @body
+      parameters?: BatchNodeReimageContent;
     },
     AcceptedProcessingResponseHeaders
   >;
@@ -1379,9 +1579,8 @@ interface Nodes {
 
   @summary("Gets the settings required for remote login to a Compute Node.")
   @doc("""
-    Before you can remotely login to a Compute Node using the remote login
-    settings, you must create a user Account on the Compute Node. This API can be
-    invoked only on Pools created with the virtual machine configuration property.
+    Before you can remotely login to a Compute Node using the remote login settings, 
+    you must create a user Account on the Compute Node.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @clientName("getNodeRemoteLoginSettingsInternal", "java")
@@ -1442,15 +1641,15 @@ interface Nodes {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchNodeListResult
@@ -1478,7 +1677,7 @@ interface Nodes {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchNodeVMExtension
@@ -1500,7 +1699,7 @@ interface Nodes {
 
       @doc("An OData $select clause.")
       @query
-      @clientName("select")
+      @clientName("select", "!autorest")
       $select?: string[];
     },
     BatchNodeVMExtensionListResult
@@ -1555,7 +1754,6 @@ interface Nodes {
   @doc("Gets the properties of the specified Compute Node file.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @clientName("getNodeFilePropertiesInternal", "java")
-  @clientName("getNodeFilePropertiesInternal", "csharp")
   getNodeFileProperties is HeadFileOperation<
     BatchNodeFileClientPathContent & BatchModifiedSinceHeaders,
     {}
@@ -1577,10 +1775,10 @@ interface Nodes {
 
       @doc("""
         An OData $filter clause. For more information on constructing this filter, see
-        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
+        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
         """)
       @query
-      @clientName("filter")
+      @clientName("filter", "!autorest")
       $filter?: string;
 
       @doc("Whether to list children of a directory.")

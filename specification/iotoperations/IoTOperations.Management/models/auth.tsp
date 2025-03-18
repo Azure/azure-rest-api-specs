@@ -8,35 +8,41 @@ namespace Microsoft.IoTOperations;
  *
  * Dataflow Authentication Models
  */
-@doc("DataFlowEndpoint Authentication SystemAssignedManagedIdentity properties")
-model DataFlowEndpointAuthenticationSystemAssignedManagedIdentity {
+@doc("DataflowEndpoint Authentication SystemAssignedManagedIdentity properties")
+model DataflowEndpointAuthenticationSystemAssignedManagedIdentity {
   @doc("Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration.")
-  audience: string;
+  audience?: string;
 }
 
-@doc("DataFlowEndpoint Authentication UserAssignedManagedIdentity properties")
-model DataFlowEndpointAuthenticationUserAssignedManagedIdentity {
+@doc("DataflowEndpoint Authentication UserAssignedManagedIdentity properties")
+model DataflowEndpointAuthenticationUserAssignedManagedIdentity {
   @doc("Client ID for the user-assigned managed identity.")
   clientId: string;
 
   @doc("Resource identifier (application ID URI) of the resource, affixed with the .default suffix.")
-  audience: string;
+  scope?: string;
 
   @doc("Tenant ID.")
   tenantId: string;
 }
 
-@doc("DataFlowEndpoint Authentication Sasl properties")
-model DataFlowEndpointAuthenticationSasl {
+@doc("DataflowEndpoint Authentication Sasl properties")
+model DataflowEndpointAuthenticationSasl {
   @doc("Type of SASL authentication. Can be PLAIN, SCRAM-SHA-256, or SCRAM-SHA-512.")
-  saslType: DataFlowEndpointAuthenticationSaslType;
+  saslType: DataflowEndpointAuthenticationSaslType;
 
   @doc("Token secret name.")
-  tokenSecretRef: string;
+  secretRef: string;
 }
 
-@doc("DataFlowEndpoint Authentication Sasl Type properties")
-union DataFlowEndpointAuthenticationSaslType {
+@doc("DataflowEndpoint Authentication Access Token properties")
+model DataflowEndpointAuthenticationAccessToken {
+  @doc("Token secret name.")
+  secretRef: string;
+}
+
+@doc("DataflowEndpoint Authentication Sasl Type properties")
+union DataflowEndpointAuthenticationSaslType {
   string,
 
   @doc("PLAIN Type")
@@ -50,13 +56,13 @@ union DataFlowEndpointAuthenticationSaslType {
 }
 
 @doc("Service Account Token for BrokerAuthentication")
-model DataFlowEndpointAuthenticationServiceAccountToken {
+model DataflowEndpointAuthenticationServiceAccountToken {
   @doc("Audience of the service account. Optional, defaults to the broker internal service account audience.")
   audience: string;
 }
 
-@doc("DataFlowEndpoint Authentication X509 properties")
-model DataFlowEndpointAuthenticationX509 {
+@doc("DataflowEndpoint Authentication X509 properties")
+model DataflowEndpointAuthenticationX509 {
   @doc("Secret reference of the X.509 certificate.")
   secretRef: string;
 }
@@ -118,4 +124,13 @@ model BrokerAuthenticatorMethodX509Attributes {
 
   @doc("Subject of the X509 attribute.")
   subject: string;
+}
+
+@doc("System and Use Assigned Managed Identity properties")
+model ManagedIdentity {
+  @doc("System-assigned managed identity authentication.")
+  systemAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationSystemAssignedManagedIdentity;
+
+  @doc("User-assigned managed identity authentication.")
+  userAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationUserAssignedManagedIdentity;
 }

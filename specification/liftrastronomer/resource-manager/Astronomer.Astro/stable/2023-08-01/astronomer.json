@@ -462,6 +462,7 @@
           "description": "Marketplace details of the resource.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -572,6 +573,24 @@
         "offerDetails"
       ]
     },
+    "LiftrBase.MarketplaceDetailsUpdate": {
+      "type": "object",
+      "description": "Marketplace details for an organization",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "Azure subscription id for the the marketplace offer is purchased from"
+        },
+        "subscriptionStatus": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status"
+        },
+        "offerDetails": {
+          "$ref": "#/definitions/LiftrBase.OfferDetailsUpdate",
+          "description": "Offer details for the marketplace that is selected by the user"
+        }
+      }
+    },
     "LiftrBase.MarketplaceSubscriptionStatus": {
       "type": "string",
       "description": "Marketplace subscription status of a resource.",
@@ -642,6 +661,36 @@
         "offerId",
         "planId"
       ]
+    },
+    "LiftrBase.OfferDetailsUpdate": {
+      "type": "object",
+      "description": "Offer details for the marketplace that is selected by the user",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id for the marketplace offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id for the marketplace offer"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id for the marketplace offer"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name for the marketplace offer"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        },
+        "termId": {
+          "type": "string",
+          "description": "Plan Display Name for the marketplace offer"
+        }
+      }
     },
     "LiftrBase.SingleSignOnProperties": {
       "type": "object",
@@ -836,6 +885,15 @@
       "type": "object",
       "description": "The updatable properties of the OrganizationResource.",
       "properties": {
+        "marketplace": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
+          "description": "Marketplace details of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "user": {
           "$ref": "#/definitions/LiftrBase.UserDetailsUpdate",
           "description": "Details of the user."

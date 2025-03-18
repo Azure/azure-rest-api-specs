@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "privateEndpointConnectionName": "testprivateEndpointConnection",
+    "api-version": "2024-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/privateEndpointConnections/testprivateEndpointConnection",
+            "name": "testprivateEndpointConnection",
+            "type": "Microsoft.Batch/batchAccounts/privateEndpointConnections",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateEndpoint": {
+                "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Network/privateEndpoints/testprivateEndpoint"
+              },
+              "groupIds": [
+                "batchAccount"
+              ],
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Approved by xyz.abc@company.com"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

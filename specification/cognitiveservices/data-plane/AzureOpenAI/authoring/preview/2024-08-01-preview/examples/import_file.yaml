@@ -1,0 +1,47 @@
+parameters:
+  endpoint: https://aoairesource.openai.azure.com
+  api-key: "{api key}"
+  api-version: 2024-08-01-preview
+  fileImport:
+    purpose: fine-tune
+    filename: puppy.jsonl
+    content_url: &o0
+      absolutePath: /trainingdata/puppy.jsonl
+      absoluteUri: *o0
+      localPath: /trainingdata/puppy.jsonl
+      authority: www.contoso.com
+      hostNameType: Dns
+      isDefaultPort: true
+      isFile: false
+      isLoopback: false
+      pathAndQuery: /trainingdata/puppy.jsonl
+      segments:
+        - /
+        - trainingdata/
+        - puppy.jsonl
+      isUnc: false
+      host: www.contoso.com
+      port: 443
+      query: ""
+      fragment: ""
+      scheme: https
+      originalString: *o0
+      dnsSafeHost: www.contoso.com
+      idnHost: www.contoso.com
+      isAbsoluteUri: true
+      userEscaped: false
+      userInfo: ""
+    metadata:
+  Content-Type: application/json
+responses:
+  201:
+    headers:
+      Location: https://aoairesource.openai.azure.com/openai/files/file-181a1cbdcdcf4677ada87f63a0928099
+    body:
+      metadata:
+      bytes:
+      purpose: fine-tune
+      filename: puppy.jsonl
+      id: file-181a1cbdcdcf4677ada87f63a0928099
+      created_at: 1646126127
+      object: file

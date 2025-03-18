@@ -4,6 +4,10 @@ using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
+@doc("A string with a minimum length of 1.")
+@minLength(1)
+scalar NonEmptyString extends string;
+
 @doc("Extended location is an extension of Azure locations. They provide a way to use their Azure ARC enabled Kubernetes clusters as target locations for deploying Azure services instances.")
 model ExtendedLocation {
   @doc("The name of the extended location.")
@@ -52,37 +56,12 @@ union OperationalMode {
 
 @doc("Diagnostic Log properties")
 model DiagnosticsLogs {
-  @doc("The open telemetry export configuration.")
-  opentelemetryExportConfig?: OpenTelemetryLogExportConfig;
-
   @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
   level?: string = "info";
 }
 
-@doc("OpenTelemetry Log Export Configuration properties")
-model OpenTelemetryLogExportConfig {
-  ...OpenTelemetryExportConfig;
-
-  @doc("The log level. Examples - 'debug', 'info', 'warn', 'error', 'trace'.")
-  level?: string = "error";
-}
-
-@doc("OpenTelemetry Export Configuration properties")
-model OpenTelemetryExportConfig {
-  @doc("The open telemetry collector endpoint to export to.")
-  otlpGrpcEndpoint: string;
-
-  @doc("How often to export the metrics to the open telemetry collector.")
-  @minValue(1)
-  @maxValue(300)
-  intervalSeconds?: int32 = 30;
-}
-
 @doc("Diagnostic Metrics properties")
 model Metrics {
-  @doc("The open telemetry export configuration.")
-  opentelemetryExportConfig?: OpenTelemetryExportConfig;
-
   @doc("The prometheus port to expose the metrics.")
   @minValue(0)
   @maxValue(65535)
@@ -165,7 +144,7 @@ model LocalKubernetesReference {
 @doc("Cert-Manager issuerRef properties")
 model CertManagerIssuerRef {
   @doc("group of issuer.")
-  apiGroup: string = "cert-manager.io";
+  group: string = "cert-manager.io";
 
   @doc("kind of issuer (Issuer or ClusterIssuer).")
   kind: CertManagerIssuerKind;
@@ -184,3 +163,69 @@ union CertManagerIssuerKind {
   @doc("ClusterIssuer kind.")
   ClusterIssuer: "ClusterIssuer",
 }
+
+alias SystemAssignedManagedIdentity = "SystemAssignedManagedIdentity";
+alias UserAssignedManagedIdentity = "UserAssignedManagedIdentity";
+alias AccessToken = "AccessToken";
+alias Sasl = "Sasl";
+alias X509Certificate = "X509Certificate";
+alias Anonymous = "Anonymous";
+alias ServiceAccountToken = "ServiceAccountToken";
+
+@doc("Managed Identity Method")
+union ManagedIdentityMethod {
+  string,
+
+  @doc("SystemAssignedManagedIdentity type")
+  SystemAssignedManagedIdentity: SystemAssignedManagedIdentity,
+
+  @doc("UserAssignedManagedIdentity type")
+  UserAssignedManagedIdentity: UserAssignedManagedIdentity,
+}
+
+@doc("Access Token Method")
+union AccessTokenMethod {
+  string,
+
+  @doc("AccessToken Option")
+  AccessToken: AccessToken,
+}
+
+@doc("Sasl Method")
+union SaslMethod {
+  string,
+
+  @doc("Sasl Option")
+  Sasl: Sasl,
+}
+
+@doc("x509 Certificate Method")
+union x509CertificateMethod {
+  string,
+
+  @doc("x509Certificate Option")
+  X509Certificate: X509Certificate,
+}
+
+@doc("x509 Certificate Method")
+union AnonymousMethod {
+  string,
+
+  @doc("Anonymous Option")
+  Anonymous: Anonymous,
+}
+
+@doc("Service Account Token Method")
+union ServiceAccountTokenMethod {
+  string,
+
+  @doc("ServiceAccountToken Option")
+  ServiceAccountToken: ServiceAccountToken,
+}
+
+scalar SchemaRegistryID
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/schemaRegistries",
+    }
+  ]>;

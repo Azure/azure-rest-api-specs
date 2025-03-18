@@ -6,7 +6,7 @@ This is the AutoRest configuration file for CognitiveServices.
 
 # Notice
 
-Microsoft will use data you send to Bing Search Services or the Translator Speech API to improve Microsoft products and services. Where you send personal data to these Cognitive Services, you are responsible for obtaining sufficient consent from the data subjects. The General Privacy and Security Terms in the Online Services Terms do not apply to these Cognitive Services. Please refer to the Microsoft Cognitive Services section in the [Online Services Terms](https://www.microsoft.com/en-us/Licensing/product-licensing/products.aspx) for details. Microsoft offers policy controls that may be used to [disable new Cognitive Services deployments](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account).
+Microsoft will use data you send to Bing Search Services or the Translator Speech API to improve Microsoft products and services. Where you send personal data to these Cognitive Services, you are responsible for obtaining sufficient consent from the data subjects. The General Privacy and Security Terms in the Online Services Terms do not apply to these Cognitive Services. Please refer to the Microsoft Cognitive Services section in the [Online Services Terms](https://www.microsoft.com/en-us/Licensing/product-licensing/products.aspx) for details. Microsoft offers policy controls that may be used to [disable new Cognitive Services deployments](https://learn.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account).
 
 ---
 
@@ -30,9 +30,66 @@ These are the global settings for the CognitiveServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-06
+tag: package-preview-2025-04-01-preview
 ```
 
+### Tag: package-preview-2025-04-01-preview
+
+These settings apply only when `--tag=package-preview-2025-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-04-01-preview'
+input-file:
+  - Microsoft.CognitiveServices/preview/2025-04-01-preview/cognitiveservices.json
+suppressions: 
+- code: PutResponseCodes
+  reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].put
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].put
+- code: PatchResponseCodes
+  reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch
+- code: PatchBodyParametersSchema
+  reason: this is a required field for in a optional property this experience exist in other stable schemas as well.
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.properties
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
+- code: GuidUsage
+  reason: Approved to be suppressed in AML swagger.
+  where:
+    - $.definitions.ConnectionOAuth2.properties.clientId.format
+- code: DeleteResponseCodes
+  reason: Behavior is align with other existing API for this RP
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete
+    
+- code: AvoidAdditionalProperties
+  reason: Approved to be suppressed in AML swagger
+  where:
+    - $.definitions.ConnectionPropertiesV2.properties.metadata
+    - $.definitions.CustomKeys.properties.keys
+- code: NestedResourcesMustHaveListOperation
+  reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
+  where:
+    - $.definitions["CapabilityHostResource"]
+- code: LroLocationHeader
+  reason: Align with existing API behavior in other APIs
+  where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put.responses.202
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.responses.202
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete.responses.202
+```
+
+### Tag: package-2024-10
+These settings apply only when `--tag=package-2024-10` is specified on the command line.
+```yaml $(tag) == 'package-2024-10'
+input-file:
+  - Microsoft.CognitiveServices/stable/2024-10-01/cognitiveservices.json
+```
 
 ### Tag: package-preview-2024-06
 
@@ -157,7 +214,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -168,20 +225,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_cognitive_services']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.CognitiveServices
-  output-folder: $(csharp-sdks-folder)/cognitiveservices/Microsoft.Azure.Management.CognitiveServices/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python

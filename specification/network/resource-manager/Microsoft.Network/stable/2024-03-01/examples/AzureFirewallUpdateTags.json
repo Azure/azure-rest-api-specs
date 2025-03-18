@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "azfwtest",
+    "azureFirewallName": "fw1",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2024-03-01&t=1234567890&c=abc-123&s=def-456&h=xyz-789"
+      }
+    },
+    "200": {
+      "body": {
+        "name": "fw1",
+        "id": "/subscriptions/subid/resourceGroups/azfwtest/providers/Microsoft.Network/azureFirewalls/fw1",
+        "type": "Microsoft.Network/azureFirewalls",
+        "location": "brazilsouth",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "threatIntelMode": "Alert"
+        }
+      }
+    }
+  }
+}

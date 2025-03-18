@@ -26,9 +26,59 @@ These are the global settings for the DeveloperHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-05
+tag: package-preview-2025-03
 ```
 
+### Tag: package-preview-2025-03
+
+These settings apply only when `--tag=package-preview-2025-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03'
+input-file:
+  - Microsoft.DevHub/preview/2025-03-01-preview/iac.json
+  - Microsoft.DevHub/preview/2025-03-01-preview/workflow.json
+  - Microsoft.DevHub/preview/2025-03-01-preview/template.json
+suppressions:
+  - code: XmsPageableForListCalls
+    reason: False positive error for singleton resource Get API.
+    from: workflow.json
+  - code: AvoidAdditionalProperties
+    reason: Removing additionalProperties from the models will result in breaking changes.
+    from: workflow.json
+    where:
+      - $.definitions.TemplateReference.properties.parameters
+      - $.definitions.Deployment.properties.overrides
+      - $.definitions.GeneratePreviewArtifactsResponse
+  - code: BodyTopLevelProperties
+    reason: False positive error for Collection Get API
+    from: workflow.json
+  - code: AvoidAdditionalProperties
+    where:
+      - $.definitions.GenerateVersionedTemplateResponse.properties.generatedFiles
+      - $.definitions.GenerateVersionedTemplateRequest
+    reason: Templates need additional properties for input/responses.
+    from: template.json
+```
+
+### Tag: package-preview-2024-08
+
+These settings apply only when `--tag=package-preview-2024-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-08'
+input-file:
+  - Microsoft.DevHub/preview/2024-08-01-preview/workflow.json
+  - Microsoft.DevHub/preview/2024-08-01-preview/iac.json
+suppressions:
+  - code: XmsPageableForListCalls
+    reason: False positive error for singleton resource Get API.
+    from: workflow.json
+  - code: AvoidAdditionalProperties
+    reason: Removing additionalProperties from the models will result in breaking changes.
+    from: workflow.json
+  - code: BodyTopLevelProperties
+    reason: False positive error for Collection Get API
+    from: workflow.json
+```
 
 ### Tag: package-preview-2024-05
 
@@ -48,6 +98,7 @@ These settings apply only when `--tag=package-2023-08` is specified on the comma
 input-file:
   - Microsoft.DevHub/stable/2023-08-01/workflow.json
 ```
+
 ### Tag: package-preview-2022-10
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.

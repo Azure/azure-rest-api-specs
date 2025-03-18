@@ -27,7 +27,6 @@ options:
     output-file: "{azure-resource-provider-folder}/Messages/{version-status}/{version}/communicationservicesmessages.json"
     emitter-output-dir: "{project-root}/.."
     omit-unreachable-types: true
-    examples-directory: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
     model-namespace: false
@@ -43,13 +42,15 @@ options:
     package-name: "{package-dir}"
     package-version: 1.0.0
     flavor: azure
+    generate-test: true
+    generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-communication-messages"
     namespace: com.azure.communication.messages
     partial-update: true
     service-name: Messages
     custom-types-subpackage: "models.channels"
-    custom-types: "WhatsAppMessageButtonSubType,WhatsAppMessageTemplateBindings,WhatsAppMessageTemplateBindingsButton,WhatsAppMessageTemplateBindingsComponent,WhatsAppMessageTemplateItem"
+    custom-types: "WhatsAppButtonActionBindings,WhatsAppListActionBindings,WhatsAppUrlActionBindings,WhatsAppMessageButtonSubType,WhatsAppMessageTemplateBindings,WhatsAppMessageTemplateBindingsButton,WhatsAppMessageTemplateBindingsComponent,WhatsAppMessageTemplateItem"
     customization-class: customization/src/main/java/MessagesSdkCustomization.java
     flavor: azure
   "@azure-tools/typespec-ts":
@@ -57,5 +58,4 @@ options:
     packageDetails:
       name: "@azure-rest/communication-messages"
       description: "Azure client library for Azure Communication Messages services"
-      version: "1.0.0-beta.2"
     flavor: azure

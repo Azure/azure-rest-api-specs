@@ -17,7 +17,7 @@ model MongoCluster is TrackedResource<MongoClusterProperties> {
   @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
   @key("mongoClusterName")
   @segment("mongoClusters")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -34,6 +34,7 @@ interface MongoClusters {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   /** Updates an existing mongo cluster. The request body can contain one to many of the properties present in the normal mongo cluster definition. */
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     MongoCluster,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -76,55 +77,87 @@ scalar MongoClusterResourceId
 /** The properties of a mongo cluster. */
 model MongoClusterProperties {
   /** The mode to create a mongo cluster. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   createMode?: CreateMode;
 
   /** The parameters to create a point-in-time restore mongo cluster. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   restoreParameters?: MongoClusterRestoreParameters;
 
   /** The parameters to create a replica mongo cluster. */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
   replicaParameters?: MongoClusterReplicaParameters;
 
   /** The administrator's login for the mongo cluster. */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @removed(Versions.v2024_07_01)
   administratorLogin?: string;
 
   /** The password of the administrator login. */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @removed(Versions.v2024_07_01)
   @secret
   administratorLoginPassword?: string;
+
+  /** The local administrator properties for the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  administrator?: AdministratorProperties;
 
   /** The Mongo DB server version. Defaults to the latest available version if not specified. */
   serverVersion?: string;
 
   /** The default mongo connection string for the cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionString?: string;
 
   /** Earliest restore timestamp in UTC ISO8601 format. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  @removed(Versions.v2024_07_01)
   earliestRestoreTime?: string;
 
   /** The provisioning state of the mongo cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /** The status of the mongo cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterStatus?: MongoClusterStatus;
 
   /** Whether or not public endpoint access is allowed for this mongo cluster. */
   publicNetworkAccess?: PublicNetworkAccess;
 
   /** The list of node group specs in the cluster. */
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
+  @removed(Versions.v2024_07_01)
   nodeGroupSpecs?: NodeGroupSpec[];
 
+  /** The high availability properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  highAvailability?: HighAvailabilityProperties;
+
+  /** The storage properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  storage?: StorageProperties;
+
+  /** The sharding properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  sharding?: ShardingProperties;
+
+  /** The compute properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  compute?: ComputeProperties;
+
+  /** The backup properties of the mongo cluster. */
+  @added(Versions.v2024_07_01)
+  backup?: BackupProperties;
+
+  /** The Data API properties of the mongo cluster. */
+  @added(Versions.v2024_10_01_preview)
+  dataApi?: DataApiProperties;
+
   /** List of private endpoint connections. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /** List of private endpoint connections. */
@@ -133,12 +166,12 @@ model MongoClusterProperties {
 
   /** The replication properties for the mongo cluster */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replica?: ReplicationProperties;
 
   /** The infrastructure version the cluster is provisioned on. */
   @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   infrastructureVersion?: string;
 }
 
@@ -161,14 +194,6 @@ union CreateMode {
   "Replica",
 }
 
-/** The kind of the node on the cluster. */
-union NodeKind {
-  string,
-
-  /** The node is a shard kind. */
-  "Shard",
-}
-
 /** Parameters used for restore operations */
 model MongoClusterRestoreParameters {
   /** UTC point in time to restore a mongo cluster */
@@ -180,33 +205,55 @@ model MongoClusterRestoreParameters {
   sourceResourceId?: MongoClusterResourceId;
 }
 
-/** Specification for a node group. */
-model NodeGroupSpec is NodeGroupProperties {
-  /** The node type deployed in the node group. */
-  kind?: NodeKind;
-
-  /** The number of nodes in the node group. */
-  nodeCount?: int32;
+/** The compute properties of the cluster. This includes the virtual-cores/memory and scaling options applied to servers in the cluster. */
+@added(Versions.v2024_07_01)
+model ComputeProperties {
+  /** The compute tier to assign to the cluster, where each tier maps to a virtual-core and memory size. Example values: 'M30', 'M40'. */
+  tier?: string;
 }
 
-/** The properties of the node group on a cluster. */
-model NodeGroupProperties {
-  /** The resource sku for the node group. This defines the size of CPU and memory that is provisioned for each node. Example values: 'M30', 'M40'. */
-  sku?: string;
+/** The storage properties of the cluster. This includes the data storage size and scaling applied to servers in the cluster. */
+@added(Versions.v2024_07_01)
+model StorageProperties {
+  /** The size of the data disk assigned to each server. */
+  sizeGb?: int64;
+}
 
-  /** The disk storage size for the node group in GB. Example values: 128, 256, 512, 1024. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitialized acronym in the property name."
-  diskSizeGB?: int64;
+/** The sharding properties of the cluster. This includes the shard count and scaling options for the cluster. */
+@added(Versions.v2024_07_01)
+model ShardingProperties {
+  /** Number of shards to provision on the cluster. */
+  shardCount?: int32;
+}
 
-  /** Whether high availability is enabled on the node group. */
-  enableHa?: boolean;
+/** The high availability modes for a cluster. */
+@added(Versions.v2024_07_01)
+union HighAvailabilityMode {
+  string,
+
+  /** High availability mode is disabled. This mode is can see availability impact during faults or maintenance and is not recommended for production. */
+  "Disabled",
+
+  /** High availability mode is enabled, where each server in a shard is placed in the same availability zone. */
+  "SameZone",
+
+  /** High availability mode is enabled and preferences ZoneRedundant if availability zones capacity is available in the region, otherwise falls-back to provisioning with SameZone. */
+  "ZoneRedundantPreferred",
+}
+
+/** The backup properties of the cluster. This includes the earliest restore time and retention settings. */
+@added(Versions.v2024_07_01)
+model BackupProperties {
+  /** Earliest restore timestamp in UTC ISO8601 format. */
+  @visibility(Lifecycle.Read)
+  earliestRestoreTime?: string;
 }
 
 /** The connection strings for the given mongo cluster. */
 model ListConnectionStringsResult {
   /** An array that contains the connection strings for a mongo cluster. */
-  @visibility("read")
-  @extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   connectionStrings?: ConnectionString[];
 }
 
@@ -214,13 +261,18 @@ model ListConnectionStringsResult {
 model ConnectionString {
   /** Value of the connection string */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @clientName("uri", "csharp")
   connectionString?: string;
 
   /** Description of the connection string */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
+
+  /** Name of the connection string. */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2024_07_01)
+  name?: string;
 }
 
 /** The status of the Mongo cluster resource. */
@@ -312,15 +364,15 @@ union PromoteMode {
 @added(Microsoft.DocumentDB.Versions.v2024_06_01_preview)
 model ReplicationProperties {
   /** The resource id the source cluster for the replica cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceResourceId?: MongoClusterResourceId;
 
   /** The replication role of the cluster */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   role?: ReplicationRole;
 
   /** The replication link state of the replica cluster. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationState?: ReplicationState;
 }
 
@@ -361,4 +413,76 @@ union ReplicationState {
 
   /** Replication link is re-configuring due to a promotion event. */
   "Reconfiguring",
+}
+
+/** Specification for a node group. */
+@removed(Versions.v2024_07_01)
+model NodeGroupSpec is NodeGroupProperties {
+  /** The node type deployed in the node group. */
+  kind?: NodeKind;
+
+  /** The number of nodes in the node group. */
+  nodeCount?: int32;
+}
+
+/** The properties of the node group on a cluster. */
+@removed(Versions.v2024_07_01)
+model NodeGroupProperties {
+  /** The resource sku for the node group. This defines the size of CPU and memory that is provisioned for each node. Example values: 'M30', 'M40'. */
+  sku?: string;
+
+  /** The disk storage size for the node group in GB. Example values: 128, 256, 512, 1024. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Capitialized acronym in the property name."
+  diskSizeGB?: int64;
+
+  /** Whether high availability is enabled on the node group. */
+  enableHa?: boolean;
+}
+
+/** The high availability properties of the cluster. */
+@added(Versions.v2024_07_01)
+model HighAvailabilityProperties {
+  /** The target high availability mode requested for the cluster. */
+  targetMode?: HighAvailabilityMode;
+}
+
+/** The kind of the node on the cluster. */
+@removed(Versions.v2024_07_01)
+union NodeKind {
+  string,
+
+  /** The node is a shard kind. */
+  "Shard",
+}
+
+/** The local administrator login properties. */
+@added(Versions.v2024_07_01)
+model AdministratorProperties {
+  /** The administrator user name. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  userName?: string;
+
+  /** The administrator password. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
+  password?: string;
+}
+
+/** Data API properties. */
+@added(Microsoft.DocumentDB.Versions.v2024_10_01_preview)
+model DataApiProperties {
+  /** The mode to indicate whether the Mongo Data API is enabled for a cluster. */
+  mode?: DataApiMode;
+}
+
+/** The mode to apply to the Mongo Data API. */
+@added(Microsoft.DocumentDB.Versions.v2024_10_01_preview)
+union DataApiMode {
+  string,
+
+  /** Mongo Data API is enabled for the cluster. */
+  "Enabled",
+
+  /** Mongo Data API is disabled for the cluster. */
+  "Disabled",
 }

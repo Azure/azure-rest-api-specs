@@ -1,3 +1,4 @@
+import { Suppression } from "suppressions";
 import { RuleResult } from "./rule-result.js";
 
 export interface TsvHost {
@@ -5,10 +6,11 @@ export interface TsvHost {
   isDirectory(path: string): Promise<boolean>;
   gitOperation(folder: string): IGitOperation;
   readTspConfig(folder: string): Promise<string>;
-  runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]>;
+  runCmd(cmd: string, cwd?: string): Promise<[Error | null, string, string]>;
   normalizePath(folder: string): string;
   gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult>;
   globby(patterns: string[]): Promise<string[]>;
+  getSuppressions(path: string): Promise<Suppression[]>;
 }
 
 export interface IGitOperation {
