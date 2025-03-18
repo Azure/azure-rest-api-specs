@@ -42,7 +42,19 @@ describe("exec", () => {
       undefined,
       // Arg is *not* trimmed, so leading whitespace is preserved
       " spaceBefore",
+      // Test non-string values, both truthy and falsy
+      true,
+      false,
+      -1,
+      0,
+      1,
+      "",
+      NaN,
+      // Invalid, but we currently don't exclude it, so test it
+      {},
     );
-    expect(cmd).toBe("foo spaceAfter   spaceBefore");
+    expect(cmd).toBe(
+      "foo spaceAfter   spaceBefore true false -1 0 1 NaN [object Object]",
+    );
   });
 });
