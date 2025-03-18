@@ -68,5 +68,7 @@ async function execGit(args, options) {
   // Ensure that git displays filenames as they are (without escaping)
   const defaultConfig = "-c core.quotepath=off";
 
-  return await execRoot(`git ${defaultConfig} ${args}`, options);
+  const cmd = buildCmd("git", defaultConfig, args);
+
+  return await execRoot(cmd, options);
 }
