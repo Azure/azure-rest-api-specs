@@ -131,4 +131,7 @@ suppressions:
   - code: LroExtension
     from: blob.json
     reason: Legacy operations not defined as lro
+  - code: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: blob.json
+    reason: XML examples are not supported
 ```
