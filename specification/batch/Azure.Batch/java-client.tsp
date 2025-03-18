@@ -1325,6 +1325,29 @@ op deleteTaskFileCustomization is Azure.Batch.DeleteOperationNew<
   "java"
 );
 
+// Get Task File Operation
+@doc("Optional parameters for Get Task File operation.")
+model GetBatchTaskFileOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.BatchModifiedSinceHeaders;
+  ...Azure.Batch.GetTaskFileOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Task File operation.")
+@route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
+op getTaskFileCustomization is Azure.Batch.FileOperationNew<
+  {
+    ...Azure.Batch.BatchTaskFileClientPathContent;
+
+    @doc("Optional parameters for Get Task File operation.")
+    options?: GetBatchTaskFileOptions;
+  },
+  Azure.Batch.GetTaskFileResponse
+>;
+
+@@override(Azure.Batch.Tasks.getTaskFile, getTaskFileCustomization, "java");
+
 // List Task Files Operation
 @doc("Optional parameters for List Task Files operation.")
 model ListBatchTaskFilesOptions {

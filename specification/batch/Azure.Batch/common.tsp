@@ -70,6 +70,19 @@ op FileOperation<
   BatchError
 >;
 
+// TODO: Once we migrate all FileOperation methods in routes.tsp to use this, delete original FileOperation (above) and rename this to FileOperation
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@get
+op FileOperationNew<
+  TPathParams extends TypeSpec.Reflection.Model,
+  TResource
+> is Azure.Core.RpcOperation<
+  TPathParams,
+  TResource & FileResponseHeaders,
+  NoFilter,
+  BatchError
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @head
 op HeadFileOperation<

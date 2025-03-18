@@ -1457,6 +1457,26 @@ alias DeleteTaskFileResponse = BatchClientResponseHeaders & {
   code: "200";
 };
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+alias GetTaskFileOptionalParameters = {
+  @doc("""
+    The byte range to be retrieved. The default is to retrieve the entire file. The
+    format is bytes=startRange-endRange.
+    """)
+  @header
+  `ocp-range`?: string;
+};
+
+alias GetTaskFileResponse = {
+  @doc("Type of content")
+  @header("content-type")
+  contentType: "application/octet-stream";
+
+  @bodyRoot
+  @doc("A response containing the file content.")
+  file: bytes;
+};
+
 // Task Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1636,26 +1656,14 @@ interface Tasks {
 
   @doc("Returns the content of the specified Task file.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-  @clientName("getTaskFileInternal", "java")
-  getTaskFile is FileOperation<
-    BatchTaskFileClientPathContent &
-      BatchModifiedSinceHeaders & {
-        @doc("""
-          The byte range to be retrieved. The default is to retrieve the entire file. The
-          format is bytes=startRange-endRange.
-          """)
-        @header
-        `ocp-range`?: string;
-      },
+  getTaskFile is FileOperationNew<
     {
-      @doc("Type of content")
-      @header("content-type")
-      contentType: "application/octet-stream";
-
-      @bodyRoot
-      @doc("A response containing the file content.")
-      file: bytes;
-    }
+      ...CommonParameters;
+      ...BatchTaskFileClientPathContent;
+      ...BatchModifiedSinceHeaders;
+      ...GetTaskFileOptionalParameters;
+    },
+    GetTaskFileResponse
   >;
 
   @doc("Gets the properties of the specified Task file.")
