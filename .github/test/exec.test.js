@@ -1,6 +1,6 @@
 import { EOL } from "os";
 import { describe, expect, it } from "vitest";
-import { execRoot } from "../src/exec.js";
+import { buildCmd, execRoot } from "../src/exec.js";
 import { createMockLogger } from "./mocks.js";
 
 describe("exec", () => {
@@ -27,5 +27,22 @@ describe("exec", () => {
     ).rejects.toThrowError(
       expect.objectContaining({ code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER" }),
     );
+  });
+
+  it("buildCmd", () => {
+    const cmd = buildCmd(
+      "foo",
+      // Excluded
+      null,
+      // Arg is *not* trimmed, so trailing whitespace is preserved
+      "spaceAfter ",
+      // Excluded since all-whitespace
+      " \t",
+      // Excluded
+      undefined,
+      // Arg is *not* trimmed, so leading whitespace is preserved
+      " spaceBefore",
+    );
+    expect(cmd).toBe("foo spaceAfter   spaceBefore");
   });
 });

@@ -30,3 +30,23 @@ export async function execRoot(command, options = {}) {
 
   return result.stdout;
 }
+
+/**
+ * Joins a list of arguments to build a command-line, skipping elements that convert
+ * to empty or whitespace, to prevent extra spaces.
+ *
+ * @param {any[]} args
+ * @returns string
+ */
+export function buildCmd(...args) {
+  return (
+    args
+      // Exclude null and undefined
+      .filter((arg) => arg !== null && arg !== undefined)
+      // Convert to string
+      .map((arg) => String(arg))
+      // Exclude empty and all-whitespace
+      .filter((str) => str.trim() !== "")
+      .join(" ")
+  );
+}
