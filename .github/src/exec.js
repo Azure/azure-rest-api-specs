@@ -32,8 +32,8 @@ export async function execRoot(command, options = {}) {
 }
 
 /**
- * Joins a list of arguments to build a command-line, skipping elements that convert
- * to empty or whitespace, to prevent extra spaces.
+ * Joins a list of arguments to build a command-line without extra spaces.
+ * Ignores null, undefined, and elements that convert to empty or all-whitespace.
  *
  * @param {any[]} args
  * @returns string
