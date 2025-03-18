@@ -14,27 +14,6 @@ model CopilotHealth {
   @doc("The operation status.")
   operationStatus: OperationStatusValue;
 
-  @doc("copilot setup info")
-  copilotSetupInfo: CopilotSetupInfo;
-
   @doc("The error message.")
   errorMessage: string[];
-}
-
-@doc("Copilot Setup Info")
-model CopilotSetupInfo {
-  @doc("create ADX function job status")
-  createAzureDataExplorerFunctionJobStatus: OperationStatusValue;
-
-  @doc("register in built instruction job status")
-  registerInBuiltInstructionJobStatus: OperationStatusValue;
-
-  @doc("register in built example query job status")
-  registerInbuiltExampleQueryJobStatus: OperationStatusValue;
-
-  @doc("register in built example query job status")
-  registerInBuiltAliasJobStatus: OperationStatusValue;
-
-  @doc("register in built example query job status")
-  registerAssistantViewJobStatus: OperationStatusValue;
 }

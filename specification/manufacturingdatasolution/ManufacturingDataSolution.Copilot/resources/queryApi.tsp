@@ -36,15 +36,6 @@ alias headerParams = RequestHeadersTrait<{
 
 @doc("Query client operations")
 interface QueryServiceClient {
-  // Need to discuss with the Team
-  // @doc("Get the details of a query")
-  // execute is apiOperations.ResourceCollectionAction<
-  //   UserQuery,
-  //   UserQueryRequest,
-  //   QueryResponse,
-  //   queryParams & headerParams
-  // >;
-
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
   @post
   @route("/query")
@@ -66,6 +57,10 @@ interface QueryServiceClient {
     @query("maxRetry")
     maxRetry?: int32 = 2,
 
+    @doc("Supported datatable format: Markdown, Json. Default is Json.")
+    @query
+    dataTableFormat?: DataTableFormat = DataTableFormat.Json,
+
     @doc("Include summary in the response.")
     @query("includeSummary")
     includeSummary?: Choice,
@@ -76,9 +71,9 @@ interface QueryServiceClient {
   ): QueryResponse | Azure.Core.Foundations.ErrorResponse;
 
   @doc("Share feedback for the copilot's query response")
-  submitFeedback is apiOperations.ResourceAction<
+  submitFeedback is apiOperations.ResourceCollectionAction<
     FeedbackRequest,
-    {},
+    FeedbackRequest,
     FeedbackRequest
   >;
 }

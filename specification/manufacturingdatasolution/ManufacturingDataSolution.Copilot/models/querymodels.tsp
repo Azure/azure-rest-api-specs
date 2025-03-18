@@ -24,7 +24,7 @@ model UserQueryRequest {
 
 @doc("Query Response Result")
 model QueryResponse {
-  @doc("Resultant Query Query or Query query execution response (JArray string)")
+  @doc("Resultant Query Query or Query query execution response (JArray string). If Markdown format is requested, the result will be in Markdown format and only first 100 records will be presented here.")
   result?: string;
 
   @doc("Summary of the Resultant Query Query or Query query execution response (JArray string)")
@@ -34,10 +34,10 @@ model QueryResponse {
 @doc("feedbackRequest")
 @resource("query")
 model FeedbackRequest {
-  @doc("operation Id")
+  @doc("query request Id")
   @key
   @visibility(Lifecycle.Update)
-  operationId: string;
+  queryResquestId: string;
 
   @doc("conversation id")
   conversationId?: string;
@@ -70,6 +70,17 @@ union QueryEndpoint {
 
   @doc("Assistant endpoint")
   Assistant: "Assistant",
+
+  string,
+}
+
+@doc("Supported datatable format")
+union DataTableFormat {
+  @doc("Markdown format")
+  Markdown: "Markdown",
+
+  @doc("Json format")
+  Json: "Json",
 
   string,
 }
