@@ -78,7 +78,7 @@ suppressions:
   - code: PatchBodyParametersSchema
     reason: The required part is within a property, the whole property itself is not required.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schem
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema
  ```
 
 ### Tag: package-preview-2025-01
