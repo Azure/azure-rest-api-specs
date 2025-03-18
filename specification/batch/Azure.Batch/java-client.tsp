@@ -1747,3 +1747,26 @@ op deleteNodeFileCustomization is Azure.Batch.DeleteOperationNew<
   deleteNodeFileCustomization,
   "java"
 );
+
+// Get Node File Operation
+@doc("Optional parameters for Get Node File operation.")
+model GetBatchNodeFileOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.BatchModifiedSinceHeaders;
+  ...Azure.Batch.GetNodeFileOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Node File operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
+op getNodeFileCustomization is Azure.Batch.FileOperationNew<
+  {
+    ...Azure.Batch.BatchNodeFileClientPathContent;
+
+    @doc("Optional parameters for Get Node File operation.")
+    options?: GetBatchNodeFileOptions;
+  },
+  Azure.Batch.GetNodeFileResponse
+>;
+
+@@override(Azure.Batch.Nodes.getNodeFile, getNodeFileCustomization, "java");

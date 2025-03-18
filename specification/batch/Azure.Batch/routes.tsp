@@ -1946,6 +1946,26 @@ alias DeleteNodeFileResponse = BatchClientResponseHeaders & {
   code: "200";
 };
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+alias GetNodeFileOptionalParameters = {
+  @doc("""
+    The byte range to be retrieved. The default is to retrieve the entire file. The
+    format is bytes=startRange-endRange.
+    """)
+  @header
+  `ocp-range`?: string;
+};
+
+alias GetNodeFileResponse = {
+  @doc("Type of content")
+  @header("content-type")
+  contentType: "application/octet-stream";
+
+  @bodyRoot
+  @doc("A response containing the file content.")
+  file: bytes;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -2174,26 +2194,14 @@ interface Nodes {
 
   @doc("Returns the content of the specified Compute Node file.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
-  @clientName("getNodeFileInternal", "java")
-  getNodeFile is FileOperation<
-    BatchNodeFileClientPathContent &
-      BatchModifiedSinceHeaders & {
-        @doc("""
-          The byte range to be retrieved. The default is to retrieve the entire file. The
-          format is bytes=startRange-endRange.
-          """)
-        @header
-        `ocp-range`?: string;
-      },
+  getNodeFile is FileOperationNew<
     {
-      @doc("Type of content")
-      @header("content-type")
-      contentType: "application/octet-stream";
-
-      @bodyRoot
-      @doc("A response containing the file content.")
-      file: bytes;
-    }
+      ...CommonParameters;
+      ...BatchNodeFileClientPathContent;
+      ...BatchModifiedSinceHeaders;
+      ...GetNodeFileOptionalParameters;
+    },
+    GetNodeFileResponse
   >;
 
   @doc("Gets the properties of the specified Compute Node file.")

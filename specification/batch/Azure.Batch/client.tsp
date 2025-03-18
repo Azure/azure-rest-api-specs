@@ -121,7 +121,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.getNodeFile, "getNodeFileInternal", "java");
 @@clientName(BatchClient.getNodeFileProperties,
   "getNodeFilePropertiesInternal",
   "java"
