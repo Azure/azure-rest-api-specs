@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   sdk-breaking-change-labels:
-    # if: ${{ contains(github.event.check_run.name, '(SDK Generation Job)') }}
+    if: ${{ contains(github.event.check_run.name, '(SDK Generation Job)') }}
     name: SDK Breaking Change Labels (Preview)
     runs-on: ubuntu-24.04
     steps:
