@@ -317,7 +317,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SchedulerUpdate"
+              "$ref": "#/definitions/SchedulerUpdateUpdate"
             }
           }
         ],
@@ -824,6 +824,33 @@
         "sku"
       ]
     },
+    "SchedulerPropertiesUpdate": {
+      "type": "object",
+      "description": "The Scheduler resource properties to be updated",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "URL of the durable task scheduler",
+          "readOnly": true
+        },
+        "ipAllowlist": {
+          "type": "array",
+          "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/SchedulerSkuUpdate",
+          "description": "SKU of the durable task scheduler"
+        }
+      }
+    },
     "SchedulerSku": {
       "type": "object",
       "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
@@ -849,7 +876,7 @@
     },
     "SchedulerSkuUpdate": {
       "type": "object",
-      "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
+      "description": "The SKU (Stock Keeping Unit) properties to be updated",
       "properties": {
         "name": {
           "type": "string",
@@ -859,12 +886,17 @@
           "type": "integer",
           "format": "int32",
           "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
+        },
+        "redundancyState": {
+          "$ref": "#/definitions/RedundancyState",
+          "description": "Indicates whether the current SKU configuration is zone redundant",
+          "readOnly": true
         }
       }
     },
-    "SchedulerUpdate": {
+    "SchedulerUpdateUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Scheduler.",
+      "description": "The update request model for the Scheduler resource",
       "properties": {
         "tags": {
           "type": "object",
@@ -874,27 +906,15 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/SchedulerUpdateProperties",
-          "description": "The resource-specific properties for this resource."
+          "$ref": "#/definitions/SchedulerPropertiesUpdate",
+          "description": "properties: The scheduler properties to be updated"
         }
-      }
-    },
-    "SchedulerUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Scheduler.",
-      "properties": {
-        "ipAllowlist": {
-          "type": "array",
-          "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sku": {
-          "$ref": "#/definitions/SchedulerSkuUpdate",
-          "description": "SKU of the durable task scheduler"
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
-      }
+      ]
     },
     "TaskHub": {
       "type": "object",
