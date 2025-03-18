@@ -37,6 +37,9 @@ model DatasetVersion {
   @doc("Dataset type")
   type: DatasetType;
 
+  @doc("Indicates if dataset is reference only or managed by dataset service. If true, the underlying data will be deleted when the dataset version is deleted")
+  isReference?: boolean;
+
   ...AssetBase;
 }
 
@@ -54,7 +57,6 @@ model FolderDatasetVersion extends DatasetVersion {
   @doc("Dataset type")
   type: DatasetType.uri_folder;
 }
-
 
 @doc("PagedDataVersionBase Definition")
 @pagedResult

@@ -323,6 +323,9 @@ model PendingUploadResponse {
   @doc("ID for this upload request.")
   pendingUploadId: string;
 
+  @doc("Version of dataset to be created if user did not specify version when initially creating upload")
+  dataset_version?: string;
+
   @doc("TemporaryBlobReference is the only supported type")
   pendingUploadType: PendingUploadType.temporaryBlobReference;
 }
