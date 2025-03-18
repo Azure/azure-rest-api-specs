@@ -15,7 +15,7 @@ namespace Microsoft.MySQLDiscovery;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 model MySQLSite
-  is Azure.ResourceManager.TrackedResource<MySQLSiteProperties, false> {
+  is Azure.ResourceManager.TrackedResource<MySQLSiteProperties, true> {
   ...ResourceNameParameter<
     Resource = MySQLSite,
     KeyName = "siteName",
@@ -92,7 +92,7 @@ interface MySQLSites {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Can not change existing operationId."
   @operationId("MySQLSites_TriggerRefresh")
   @action("refresh")
-  triggerRefresh is ArmResourceActionAsync<MySQLSite, void, void>;
+  triggerRefresh is ArmResourceActionNoResponseContentAsync<MySQLSite, void>;
 }
 
 @@maxLength(MySQLSite.name, 63);
