@@ -7,4 +7,5 @@
  * @property {() => boolean} isDebug
  */
 
+// Empty export to make valid module
 export {};
