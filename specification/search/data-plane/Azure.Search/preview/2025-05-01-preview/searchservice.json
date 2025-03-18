@@ -714,6 +714,50 @@
         }
       }
     },
+    "/indexers('{indexerName}')/search.refreshdocs": {
+      "post": {
+        "tags": [
+          "Indexers"
+        ],
+        "operationId": "Indexers_RefreshDocs",
+        "x-ms-examples": {
+          "SearchServiceRefreshDocs": {
+            "$ref": "./examples/SearchServiceRefreshDocs.json"
+          }
+        },
+        "description": "Refreshes specific documents in the datasource to be selectively re-ingested by the indexer.",
+        "externalDocs": {
+          "url": "https://aka.ms/refresh-documents"
+        },
+        "parameters": [
+          {
+            "name": "indexerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the indexer to refresh documents for."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/indexers('{indexerName}')/search.run": {
       "post": {
         "tags": [
@@ -7847,6 +7891,42 @@
         "userAssignedIdentity"
       ]
     },
+    "IndexerPermissionOption": {
+      "type": "string",
+      "enum": [
+        "none",
+        "userIds",
+        "groupIds",
+        "roles"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerPermissionOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "No permission to index."
+          },
+          {
+            "value": "userIds",
+            "name": "UserIds",
+            "description": "Acls user ids permission to index."
+          },
+          {
+            "value": "groupIds",
+            "name": "GroupIds",
+            "description": "Acls group ids permission to index."
+          },
+          {
+            "value": "roles",
+            "name": "Roles",
+            "description": "RBAC roles permission to index."
+          }
+        ]
+      },
+      "description": "Options with various types of permission data to index."
+    },
     "DataChangeDetectionPolicy": {
       "type": "object",
       "discriminator": "@odata.type",
@@ -8018,6 +8098,14 @@
           "$ref": "#/definitions/SearchIndexerDataIdentity",
           "x-nullable": true,
           "description": "An explicit managed identity to use for this datasource. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared."
+        },
+        "indexerPermissionOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndexerPermissionOption",
+            "x-nullable": false
+          },
+          "description": "Ingestion options with various types of permission data."
         },
         "dataChangeDetectionPolicy": {
           "$ref": "#/definitions/DataChangeDetectionPolicy",
@@ -8770,6 +8858,94 @@
       ],
       "description": "Represents the result of an individual indexer execution."
     },
+    "PermissionIndexerExecutionResult": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/IndexerExecutionStatus",
+          "readOnly": true,
+          "description": "The outcome of this indexer execution."
+        },
+        "statusDetail": {
+          "$ref": "#/definitions/IndexerExecutionStatusDetail",
+          "readOnly": true,
+          "description": "The outcome of this indexer execution."
+        },
+        "currentState": {
+          "$ref": "#/definitions/IndexerCurrentState",
+          "readOnly": true,
+          "description": "All of the state that defines and dictates the indexer's current execution."
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message indicating the top-level error, if any."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The start time of this indexer execution."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-nullable": true,
+          "description": "The end time of this indexer execution, if the execution has already completed."
+        },
+        "errors": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchIndexerError"
+          },
+          "description": "The item-level indexing errors."
+        },
+        "warnings": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchIndexerWarning"
+          },
+          "description": "The item-level indexing warnings."
+        },
+        "itemsProcessed": {
+          "x-ms-client-name": "ItemCount",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed."
+        },
+        "itemsFailed": {
+          "x-ms-client-name": "FailedItemCount",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": false,
+          "readOnly": true,
+          "description": "The number of items that failed to be indexed during this indexer execution."
+        },
+        "initialTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state with which an indexer execution started."
+        },
+        "finalTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state with which an indexer execution finished."
+        }
+      },
+      "required": [
+        "status",
+        "errors",
+        "warnings",
+        "itemsProcessed",
+        "itemsFailed"
+      ],
+      "description": "Represents the result of an individual permission indexer execution."
+    },
     "IndexerExecutionStatus": {
       "type": "string",
       "enum": [
@@ -8828,6 +9004,19 @@
           },
           "description": "History of the recent indexer executions, sorted in reverse chronological order."
         },
+        "lastPermissionRefreshResult": {
+          "$ref": "#/definitions/PermissionIndexerExecutionResult",
+          "readOnly": true,
+          "description": "The result of the most recent or an in-progress indexer execution for permission."
+        },
+        "permissionRefreshHistory": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PermissionIndexerExecutionResult"
+          },
+          "description": "History of the recent indexer executions for permission, sorted in reverse chronological order."
+        },
         "limits": {
           "$ref": "#/definitions/SearchIndexerLimits",
           "readOnly": true,
@@ -8875,7 +9064,8 @@
     "IndexerExecutionStatusDetail": {
       "type": "string",
       "enum": [
-        "resetDocs"
+        "resetDocs",
+        "refreshDocs"
       ],
       "x-ms-enum": {
         "name": "IndexerExecutionStatusDetail",
@@ -8885,6 +9075,11 @@
             "value": "resetDocs",
             "name": "ResetDocs",
             "description": "Indicates that the reset that occurred was for a call to ResetDocs."
+          },
+          {
+            "value": "refreshDocs",
+            "name": "RefreshDocs",
+            "description": "Indicates that the refresh that occurred was for a call to RefreshDocs."
           }
         ]
       },
@@ -8933,6 +9128,32 @@
           },
           "readOnly": true,
           "description": "The list of datasource document ids that have been reset. The datasource document id is the unique identifier for the data in the datasource. The indexer will prioritize selectively re-ingesting these ids."
+        },
+        "refreshDocsInitialChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state used when indexing starts on select, refresh documents in the datasource."
+        },
+        "refreshDocsFinalChangeTrackingState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Change tracking state value when indexing finishes on select, refresh documents in the datasource."
+        },
+        "refreshDocumentKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The list of document keys that have been refreshed. The document key is the document's unique identifier for the data in the search index. The indexer will prioritize selectively re-ingesting these keys."
+        },
+        "refreshDatasourceDocumentIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "The list of datasource document ids that have been refreshed. The datasource document id is the unique identifier for the data in the datasource. The indexer will prioritize selectively re-ingesting these ids."
         }
       },
       "description": "Represents all of the state that defines and dictates the indexer's current execution."
@@ -8941,7 +9162,8 @@
       "type": "string",
       "enum": [
         "indexingAllDocs",
-        "indexingResetDocs"
+        "indexingResetDocs",
+        "indexingRefreshDocs"
       ],
       "x-ms-enum": {
         "name": "IndexingMode",
@@ -8956,6 +9178,11 @@
             "value": "indexingResetDocs",
             "name": "indexingResetDocs",
             "description": "The indexer is indexing selective, reset documents in the datasource. The documents being indexed are defined on indexer status."
+          },
+          {
+            "value": "indexingRefreshDocs",
+            "name": "IndexingRefreshDocs",
+            "description": "The indexer is indexing selective, refresh documents in the datasource. The documents being indexed are defined on indexer status."
           }
         ]
       },
