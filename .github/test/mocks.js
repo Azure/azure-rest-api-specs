@@ -1,10 +1,9 @@
 // @ts-check
 
 import { vi } from "vitest";
-import { ILogger } from "../src/logger.js";
 
 /**
- * @returns {ILogger}
+ * @returns {import('../src/types.js').ILogger}
  */
 export function createMockLogger() {
   return {

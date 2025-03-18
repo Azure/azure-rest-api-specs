@@ -4,7 +4,10 @@
 /* v8 ignore start */
 
 import { execRoot } from "./exec.js";
-import { ILogger } from "./logger.js";
+
+/**
+ * @typedef {import('./types.js').ILogger} ILogger
+ */
 
 /**
  * @param {string} baseCommitish
@@ -54,7 +57,8 @@ export async function show(treeIsh, path, options = {}) {
 
 /**
  * @param {string} args
- * @param {{logger?: ILogger}} options
+ * @param {Object} [options]
+ * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
 async function execGit(args, options) {
