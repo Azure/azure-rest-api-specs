@@ -83,9 +83,9 @@ export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head
       }
 
       // Set label action and name based on the artifacts
-      if (labelActionText === "add") {
+      if (labelActionText === true) {
         labelAction = LabelAction.Add;
-      } else if (labelActionText === "remove") {
+      } else if (labelActionText === false) {
         labelAction = LabelAction.Remove;
       }
 
