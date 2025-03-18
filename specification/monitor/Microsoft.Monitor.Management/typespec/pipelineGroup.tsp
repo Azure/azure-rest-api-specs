@@ -31,7 +31,7 @@ model PipelineGroup is TrackedResource<PipelineGroupProperties> {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Extended location is not included in TrackedResource yet."
   @doc("The extended location for given pipeline group.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation?: CommonTypes.ExtendedLocation;
 }
 
@@ -41,26 +41,26 @@ model PipelineGroupProperties {
   replicas?: int32;
 
   @doc("The receivers specified for a pipeline group instance.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   receivers: Receiver[];
 
   @doc("The processors specified for a pipeline group instance.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   processors: Processor[];
 
   @doc("The exporters specified for a pipeline group instance.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   exporters: Exporter[];
 
   @doc("The service section for a given pipeline group instance.")
   service: Service;
 
   @doc("Networking configurations for the pipeline group instance.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   networkingConfigurations?: NetworkingConfiguration[];
 
   @doc("The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -154,11 +154,10 @@ union ExporterType {
 @doc("Service Info.")
 model Service {
   @doc("Pipelines belonging to a given pipeline group.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   pipelines: Pipeline[];
 
   @doc("Persistence options to all pipelines in the instance.")
-  @extension("x-ms-identifiers", [])
   persistence?: PersistenceConfigurations;
 }
 
@@ -172,15 +171,12 @@ model Pipeline {
   type: PipelineType;
 
   @doc("Reference to receivers configured for the pipeline.")
-  @extension("x-ms-identifiers", [])
   receivers: string[];
 
   @doc("Reference to processors configured for the pipeline.")
-  @extension("x-ms-identifiers", [])
   processors?: string[];
 
   @doc("Reference to exporters configured for the pipeline.")
-  @extension("x-ms-identifiers", [])
   exporters: string[];
 }
 
@@ -202,7 +198,7 @@ model NetworkingConfiguration {
   host?: string;
 
   @doc("Networking routes configuration.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   routes: NetworkingRoute[];
 }
 
@@ -257,7 +253,7 @@ interface PipelineGroups {
   delete is ArmResourceDeleteWithoutOkAsync<PipelineGroup>;
 
   @doc("Updates a pipeline group instance")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PipelineGroup,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

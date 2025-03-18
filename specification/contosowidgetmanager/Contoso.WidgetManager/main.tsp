@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)
-@service({
-  title: "Contoso Widget Manager",
-})
+@service(#{ title: "Contoso Widget Manager" })
 @versioned(Contoso.WidgetManager.Versions)
 namespace Azure.Contoso.WidgetManager;
 
@@ -21,6 +19,10 @@ enum Versions {
   @doc("The 2022-11-01-preview version.")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_11_01_Preview: "2022-11-01-preview",
+
+  @doc("The 2022-12-01 version.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2022_12_01: "2022-12-01",
 }
 
 @doc("A widget.")
@@ -28,7 +30,7 @@ enum Versions {
 model WidgetSuite {
   @key("widgetName")
   @doc("The widget name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The ID of the widget's manufacturer.")
