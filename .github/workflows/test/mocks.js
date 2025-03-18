@@ -37,7 +37,7 @@ export function createMockGithub() {
         }),
       },
       search: {
-        issuesAndPullRequests: vi.fn()
+        issuesAndPullRequests: vi.fn(),
       },
     },
   };
@@ -72,5 +72,5 @@ export function createMockContext() {
       owner: "owner",
       repo: "repo",
     },
-  }
+  };
 }

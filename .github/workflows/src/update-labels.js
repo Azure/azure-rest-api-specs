@@ -98,8 +98,13 @@ export async function updateLabelsImpl({
   core.info(`labelsToAdd: ${JSON.stringify(labelsToAdd)}`);
   core.info(`labelsToRemove: ${JSON.stringify(labelsToRemove)}`);
 
-  if ((labelsToAdd.length > 0 || labelsToRemove.length > 0) && Number.isNaN(issue_number)) {
-    throw new Error(`Invalid value for 'issue_number':${issue_number}. Expected an 'issue-number' artifact created by the workflow run.`);
+  if (
+    (labelsToAdd.length > 0 || labelsToRemove.length > 0) &&
+    Number.isNaN(issue_number)
+  ) {
+    throw new Error(
+      `Invalid value for 'issue_number':${issue_number}. Expected an 'issue-number' artifact created by the workflow run.`,
+    );
   }
 
   const pullRequestUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;

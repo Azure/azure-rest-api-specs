@@ -25,26 +25,26 @@ export const sdkLabels = {
     breakingChange: undefined,
     breakingChangeApproved: undefined,
     breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined
+    breakingChangeSuppressionApproved: undefined,
   },
   "azure-sdk-for-js": {
     breakingChange: "BreakingChange-JavaScript-Sdk",
     breakingChangeApproved: "BreakingChange-JavaScript-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-JavaScript-Sdk-Suppression",
     breakingChangeSuppressionApproved:
-      "BreakingChange-JavaScript-Sdk-Suppression-Approved"
+      "BreakingChange-JavaScript-Sdk-Suppression-Approved",
   },
   "azure-sdk-for-net": {
     breakingChange: undefined,
     breakingChangeApproved: undefined,
     breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined
+    breakingChangeSuppressionApproved: undefined,
   },
   "azure-sdk-for-python": {
     breakingChange: "BreakingChange-Python-Sdk",
     breakingChangeApproved: "BreakingChange-Python-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
     breakingChangeSuppressionApproved:
-      "BreakingChange-Python-Sdk-Suppression-Approved"
-  }
+      "BreakingChange-Python-Sdk-Suppression-Approved",
+  },
 };

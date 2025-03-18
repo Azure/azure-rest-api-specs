@@ -23,10 +23,18 @@ export async function getLabelAndAction({ github, context, core }) {
   const ado_build_id = inputs.ado_build_id;
   const ado_project_url = inputs.ado_project_url;
   const head_sha = inputs.head_sha;
-  if(!ado_build_id || !ado_project_url || !head_sha) {
-    throw new Error(`Required inputs are not valid: ado_build_id:${ado_build_id}, ado_project_url:${ado_project_url}, head_sha:${head_sha}`);
+  if (!ado_build_id || !ado_project_url || !head_sha) {
+    throw new Error(
+      `Required inputs are not valid: ado_build_id:${ado_build_id}, ado_project_url:${ado_project_url}, head_sha:${head_sha}`,
+    );
   }
-  return await getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, core, github});
+  return await getLabelAndActionImpl({
+    ado_build_id,
+    ado_project_url,
+    head_sha,
+    core,
+    github,
+  });
 }
 
 /**
@@ -38,7 +46,13 @@ export async function getLabelAndAction({ github, context, core }) {
  * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<{labelName: string, labelAction: LabelAction, issueNumber: number}>}
  */
-export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head_sha, core, github }) {
+export async function getLabelAndActionImpl({
+  ado_build_id,
+  ado_project_url,
+  head_sha,
+  core,
+  github,
+}) {
   let issue_number = NaN;
   let labelAction;
   let labelName = "";
@@ -49,10 +63,10 @@ export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head
 
   // Use Node.js fetch to call the API
   const response = await fetch(apiUrl, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   });
 
   if (response.ok) {
@@ -61,7 +75,9 @@ export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head
     const artifacts = /** @type {Artifacts} */ (await response.json());
     core.info(`Artifacts found: ${JSON.stringify(artifacts)}`);
     if (!artifacts.resource || !artifacts.resource.downloadUrl) {
-      throw new Error(`Download URL not found for the artifact ${artifactName}`);
+      throw new Error(
+        `Download URL not found for the artifact ${artifactName}`,
+      );
     }
 
     let downloadUrl = artifacts.resource.downloadUrl;
@@ -76,7 +92,9 @@ export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head
     // Step 2: Fetch Artifact Content (as a Buffer)
     const artifactResponse = await fetch(downloadUrl);
     if (!artifactResponse.ok) {
-      throw new Error(`Failed to fetch artifact: ${artifactResponse.statusText}`);
+      throw new Error(
+        `Failed to fetch artifact: ${artifactResponse.statusText}`,
+      );
     }
 
     const artifactData = await artifactResponse.text();
@@ -99,19 +117,21 @@ export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head
 
     // Get the issue number from the check run
     if (!issue_number) {
-      const { issueNumber } = await getIssueNumber({head_sha, core, github});
+      const { issueNumber } = await getIssueNumber({ head_sha, core, github });
       issue_number = issueNumber;
     }
   } else {
-    core.error(`Failed to fetch artifacts: ${response.status}, ${response.statusText}`);
+    core.error(
+      `Failed to fetch artifacts: ${response.status}, ${response.statusText}`,
+    );
     const errorText = await response.text();
     core.error(`Error details: ${errorText}`);
   }
 
   if (!labelAction) {
-    core.info('No label action found, defaulting to None');
+    core.info("No label action found, defaulting to None");
     labelAction = LabelAction.None;
-  }  
-  
+  }
+
   return { labelName, labelAction, issueNumber: issue_number };
 }

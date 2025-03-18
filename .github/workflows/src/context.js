@@ -192,7 +192,9 @@ export async function extractInputs(github, context, core) {
         }
       }
       if (!issue_number) {
-        core.info(`Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`);
+        core.info(
+          `Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`,
+        );
         issue_number = NaN;
       }
     } else {
@@ -219,7 +221,12 @@ export async function extractInputs(github, context, core) {
         `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
       );
     }
-    if (!context.payload.repository || !context.payload.repository.owner || !context.payload.repository.owner.login || !context.payload.repository.name) {
+    if (
+      !context.payload.repository ||
+      !context.payload.repository.owner ||
+      !context.payload.repository.owner.login ||
+      !context.payload.repository.name
+    ) {
       throw new Error(
         `Could not extract repository owner or name from context payload: ${JSON.stringify(context.payload.repository)}`,
       );

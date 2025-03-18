@@ -6,12 +6,11 @@
  * @param {import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api} params.github - GitHub API client
  * @returns {Promise<{issueNumber: number}>} - The PR number or NaN if not found
  */
-export async function getIssueNumber({head_sha, core, github})
-{
+export async function getIssueNumber({ head_sha, core, github }) {
   let issueNumber = NaN;
 
   if (!head_sha) {
-    core.info('No head_sha found in check run');
+    core.info("No head_sha found in check run");
     return { issueNumber };
   }
 
@@ -19,21 +18,27 @@ export async function getIssueNumber({head_sha, core, github})
 
   try {
     const searchResponse = await github.rest.search.issuesAndPullRequests({
-      q: `sha:${head_sha} type:pr state:open`
+      q: `sha:${head_sha} type:pr state:open`,
     });
 
     const totalCount = searchResponse.data.total_count;
     const itemsCount = searchResponse.data.items.length;
 
-    core.info(`Search results: ${totalCount} total matches, ${itemsCount} items returned`);
+    core.info(
+      `Search results: ${totalCount} total matches, ${itemsCount} items returned`,
+    );
 
     if (itemsCount > 0) {
       const firstItem = searchResponse.data.items[0];
       issueNumber = firstItem.number;
-      core.info(`Found the first matched PR #${issueNumber}: ${firstItem.html_url}`);
+      core.info(
+        `Found the first matched PR #${issueNumber}: ${firstItem.html_url}`,
+      );
 
       if (itemsCount > 1) {
-        core.warning(`Multiple PRs found for commit ${head_sha}: ${searchResponse.data.items.map(item => `#${item.html_url}`).join(', ')}`);
+        core.warning(
+          `Multiple PRs found for commit ${head_sha}: ${searchResponse.data.items.map((item) => `#${item.html_url}`).join(", ")}`,
+        );
       }
     } else {
       core.info(`No open PRs found for commit ${head_sha}`);

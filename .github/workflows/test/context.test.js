@@ -377,7 +377,8 @@ it("check_run:completed", async () => {
     payload: {
       action: "completed",
       check_run: {
-        details_url: "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
+        details_url:
+          "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
         head_sha: "abc123",
       },
       repository: {
