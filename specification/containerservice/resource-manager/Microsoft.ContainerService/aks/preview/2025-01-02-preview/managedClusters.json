@@ -4540,7 +4540,7 @@
           "description": "The security settings of an agent pool."
         },
         "gpuProfile": {
-          "$ref": "#/definitions/AgentPoolGPUProfile",
+          "$ref": "#/definitions/GPUProfile",
           "description": "The GPU settings of an agent pool."
         },
         "artifactStreamingProfile": {
@@ -7838,35 +7838,31 @@
       },
       "description": "The security settings of an agent pool."
     },
-    "AgentPoolGPUProfile": {
+    "GPUProfile": {
       "type": "object",
+      "description": "GPU settings for the Agent Pool.",
       "properties": {
-        "installGPUDriver": {
-          "type": "boolean",
-          "title": "Whether to auto install GPU drivers or not.",
-          "description": "The default value is true when the vmSize of the agent pool contains a GPU, false otherwise. GPU Driver Installation can only be set true when VM has an associated GPU resource. Setting this field to false prevents automatic GPU driver installation. In that case, in order for the GPU to be usable, the user must perform GPU driver installation themselves."
-        },
-        "driverType": {
+        "driver": {
           "type": "string",
+          "description": "Whether to install GPU drivers. When it's not specified, default is Install.",
           "enum": [
-            "GRID",
-            "CUDA"
+            "Install",
+            "None"
           ],
           "x-ms-enum": {
-            "name": "DriverType",
+            "name": "GPUDriver",
             "modelAsString": true,
             "values": [
               {
-                "value": "GRID",
-                "description": "Install the GRID driver for the GPU, suitable for applications requiring virtualization support."
+                "value": "Install",
+                "description": "Install driver."
               },
               {
-                "value": "CUDA",
-                "description": "Install the CUDA driver for the GPU, optimized for computational tasks in scientific computing and data-intensive applications."
+                "value": "None",
+                "description": "Skip driver install."
               }
             ]
-          },
-          "description": "Specify the type of GPU driver to install when creating Windows agent pools. If not provided, AKS selects the driver based on system compatibility. This cannot be changed once the AgentPool has been created. This cannot be set on Linux AgentPools. For Linux AgentPools, the driver is selected based on system compatibility."
+          }
         }
       }
     },
