@@ -51,7 +51,7 @@
           }
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
@@ -5578,6 +5578,12 @@
             "name"
           ],
           "description": "List of Storage operations supported by the Storage resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
         }
       }
     },
@@ -6081,6 +6087,11 @@
           "description": "The name of the usage.",
           "readOnly": true,
           "$ref": "#/definitions/usageName"
+        },
+        "type": {
+          "description": "The type of the usage.",
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
           "description": "Usage properties",
