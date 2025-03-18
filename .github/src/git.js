@@ -1,9 +1,6 @@
 // @ts-check
 
-// Ignore code coverage since code is simple but hard to mock
-/* v8 ignore start */
-
-import { execRoot } from "./exec.js";
+import { buildCmd, execRoot } from "./exec.js";
 
 /**
  * @typedef {import('./types.js').ILogger} ILogger
@@ -20,7 +17,9 @@ import { execRoot } from "./exec.js";
 export async function diff(baseCommitish, headCommitish, options = {}) {
   const { args, logger } = options;
 
-  return await execGit(`diff ${args} ${baseCommitish} ${headCommitish}`, {
+  const cmd = buildCmd("diff", args, baseCommitish, headCommitish);
+
+  return await execGit(cmd, {
     logger: logger,
   });
 }
@@ -36,7 +35,9 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
 export async function lsTree(treeIsh, path, options = {}) {
   const { args, logger } = options;
 
-  return await execGit(`ls-tree ${args} ${treeIsh} ${path}`, {
+  const cmd = buildCmd("ls-tree", args, `${treeIsh}:${path}`);
+
+  return await execGit(cmd, {
     logger: logger,
   });
 }
@@ -52,7 +53,9 @@ export async function lsTree(treeIsh, path, options = {}) {
 export async function show(treeIsh, path, options = {}) {
   const { args, logger } = options;
 
-  return await execGit(`show ${args} ${treeIsh}:${path}`, { logger: logger });
+  const cmd = buildCmd("show", args, `${treeIsh}:${path}`);
+
+  return await execGit(cmd, { logger: logger });
 }
 
 /**
@@ -65,5 +68,7 @@ async function execGit(args, options) {
   // Ensure that git displays filenames as they are (without escaping)
   const defaultConfig = "-c core.quotepath=off";
 
-  return await execRoot(`git ${defaultConfig} ${args}`, options);
+  const cmd = buildCmd("git", defaultConfig, args);
+
+  return await execRoot(cmd, options);
 }
