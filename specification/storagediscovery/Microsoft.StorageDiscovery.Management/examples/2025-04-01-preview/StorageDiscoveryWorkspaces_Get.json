@@ -4,7 +4,7 @@
   "parameters": {
     "storageDiscoveryWorkspaceName": "sampleworkspace",
     "resourceGroupName": "sample-rg",
-    "api-version": "2025-01-01-preview",
+    "api-version": "2025-04-01-preview",
     "subscriptionId": "b79cb3ba-745e-5d9a-8903-4a02327a7e09"
   },
   "responses": {
@@ -20,11 +20,14 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
+          "sku": "Standard",
+          "workspaceState": "Enabled",
           "exportState": "Running",
-          "tier": "Standard",
-          "storageEstateViewLevel": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09",
+          "discoveryScopeLevels": [
+            "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09"
+          ],
           "description": "Sample Storage Discovery Workspace",
-          "storageCollections": [
+          "discoveryScopes": [
             {
               "displayName": "Sample Collection 1",
               "resourceTypes": ["Microsoft.Storage/storageAccounts"],
@@ -42,7 +45,10 @@
                 "filterTag6": "value6"
               }
             }
-          ]
+          ],
+          "destinations": {
+            "storageAccountResourceId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+          }
         },
         "systemData": {
           "createdBy": "iewyxsnriqktsvp",

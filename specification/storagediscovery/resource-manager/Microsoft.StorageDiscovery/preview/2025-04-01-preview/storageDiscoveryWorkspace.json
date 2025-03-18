@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "StorageDiscoveryClient",
-    "version": "2025-03-01-preview",
+    "version": "2025-04-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -346,6 +346,78 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/report": {
+      "post": {
+        "operationId": "StorageDiscoveryWorkspaces_Report",
+        "tags": ["StorageDiscoveryWorkspaces"],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageDiscoveryWorkspaceName",
+            "in": "path",
+            "description": "The name of the StorageDiscoveryWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]{3,18}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GetReportResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the StorageDiscoveryWorkspace data from workspace": {
+            "$ref": "./examples/StorageDiscoveryWorkspaces_Report.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -413,6 +485,79 @@
             "description": "Data export is running continuously"
           }
         ]
+      }
+    },
+    "GetReportRequest": {
+      "type": "object",
+      "description": "Request to get StorageDiscoveryWorkspace data from ADX",
+      "properties": {
+        "queries": {
+          "type": "array",
+          "description": "The list of queries",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["queries"]
+    },
+    "GetReportResponse": {
+      "type": "object",
+      "description": "The response of the report operation",
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "One or more result sets, in the same order as the queries in the request body.",
+          "items": {
+            "$ref": "#/definitions/ReportResponseResultSet"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": ["results"]
+    },
+    "ReportResponseColumn": {
+      "type": "object",
+      "description": "The column of the response result set",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the column"
+        },
+        "type": {
+          "type": "string",
+          "description": "ADX type of the column"
+        }
+      },
+      "required": ["name", "type"]
+    },
+    "ReportResponseResultSet": {
+      "type": "object",
+      "description": "The result set of the report operation",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "Array of columns. Present only if the query succeeded.",
+          "items": {
+            "$ref": "#/definitions/ReportResponseColumn"
+          },
+          "x-ms-identifiers": []
+        },
+        "rows": {
+          "type": "array",
+          "description": "Array of Rows. Each row is an array of strings, where the item count matches the number of columns. Present only if the query succeeded.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "Present only if the query failed. Provides an error about the query. The error will be query errors and what is returned from ADX. Note that if any of the content doesn’t pass validation (a KQL injection attack is detected), the whole call fails."
+        }
       }
     },
     "StorageDiscoveryDestination": {
