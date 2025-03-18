@@ -3,7 +3,7 @@
   "info": {
     "title": "Resource Mover Service API",
     "description": "A first party Azure service orchestrating the move of Azure resources from one Azure region to another or between zones within a region.",
-    "version": "2023-08-01"
+    "version": "2025-01-01-privatepreview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1339,6 +1339,13 @@
             }
           ],
           "readOnly": true
+        },
+        "childMoveResourcesProperties": {
+          "description": "Gets or sets the child move resources properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChildMoveResourceProperties"
+          }
         }
       }
     },
@@ -1369,6 +1376,42 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true,
           "description": "Metadata pertaining to creation and last modification of the resource."
+        }
+      }
+    },
+    "ChildMoveResourceProperties": {
+      "description": "Defines the child move resource properties.",
+      "type": "object",
+      "required": [
+        "sourceId"
+      ],
+      "properties": {
+        "sourceId": {
+          "description": "Gets or sets the Source ARM Id of the child resource.",
+          "type": "string"
+        },
+        "resourceSettings": {
+          "description": "Gets or sets the resource settings.",
+          "$ref": "#/definitions/ResourceSettings"
+        },
+        "sourceResourceSettings": {
+          "description": "Gets or sets the source resource settings.",
+          "$ref": "#/definitions/ResourceSettings",
+          "readOnly": true
+        },
+        "moveState": {
+          "description": "Defines the child move resource state.",
+          "$ref": "#/definitions/MoveState",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Defines the child move resource errors.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MoveResourceError"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -1942,6 +1985,10 @@
         "targetAvailabilitySetId": {
           "description": "Gets or sets the target availability set id for virtual machines not in an availability set at source.",
           "type": "string"
+        },
+        "targetFaultDomain": {
+          "description": "Gets or sets the target fault domain.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
@@ -1976,6 +2023,10 @@
           "minimum": 1,
           "maximum": 20,
           "x-nullable": true
+        },
+        "targetVirtualMachineScaleSetFlexId": {
+          "description": "Gets or sets the target virtual machine scale set Id.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Microsoft.Compute/availabilitySets"
