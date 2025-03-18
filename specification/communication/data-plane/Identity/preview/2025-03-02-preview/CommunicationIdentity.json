@@ -673,12 +673,7 @@
           "type": "string"
         },
         "principalType": {
-          "description": "Principal type of the assignment.",
-          "type": "string",
-          "enum": [
-            "teamsResourceAccount",
-            "user"
-          ]
+          "$ref": "#/definitions/TeamsPhonePrincipalType"
         },
         "clientIds": {
           "description": "Client IDs associated with the assignment.",
@@ -697,12 +692,7 @@
       "type": "object",
       "properties": {
         "principalType": {
-          "description": "Principal type of the assignment.",
-          "type": "string",
-          "enum": [
-            "teamsResourceAccount",
-            "user"
-          ]
+          "$ref": "#/definitions/TeamsPhonePrincipalType"
         },
         "clientIds": {
           "description": "Client IDs associated with the assignment.",
@@ -712,6 +702,18 @@
           }
         }
       }
+    }
+  },
+  "TeamsPhonePrincipalType": {
+    "description": "Principal type of the assignment.",
+    "enum": [
+      "teamsResourceAccount",
+      "user"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "TeamsPhonePrincipalType",
+      "modelAsString": true
     }
   },
   "parameters": {
