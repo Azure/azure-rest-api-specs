@@ -121,10 +121,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.listNodeExtensions,
-  "listNodeExtensionsInternal",
-  "java"
-);
 @@clientName(BatchClient.deleteNodeFile, "deleteNodeFileInternal", "java");
 @@clientName(BatchClient.getNodeFile, "getNodeFileInternal", "java");
 @@clientName(BatchClient.getNodeFileProperties,

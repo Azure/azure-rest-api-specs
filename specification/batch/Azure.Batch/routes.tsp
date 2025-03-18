@@ -1912,6 +1912,23 @@ alias GetNodeExtensionOptionalParameters = {
   $select?: string[];
 };
 
+alias ListNodeExtensionsRequiredParameters = {
+  @doc("The ID of the Pool that contains Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node that you want to list extensions.")
+  @path
+  nodeId: string;
+};
+
+alias ListNodeExtensionsOptionalParameters = {
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -2117,21 +2134,11 @@ interface Nodes {
   @summary("Lists the Compute Nodes Extensions in the specified Pool.")
   @doc("Lists the Compute Nodes Extensions in the specified Pool.")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
-  @clientName("listNodeExtensionsInternal", "java")
-  listNodeExtensions is ListOperation<
+  listNodeExtensions is ListOperationNew<
     {
-      @doc("The ID of the Pool that contains Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to list extensions.")
-      @path
-      nodeId: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonListParameters;
+      ...ListNodeExtensionsRequiredParameters;
+      ...ListNodeExtensionsOptionalParameters;
     },
     BatchNodeVMExtensionListResult
   >;
