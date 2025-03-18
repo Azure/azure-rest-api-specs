@@ -411,7 +411,14 @@ function processBreakingChangeLabelArtifacts(
 ): number {
   const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact.json";
   const breakingChangeLabelArtifactPath = "out/breaking-change-label-artifact";
+  const breakingChangeLabelArtifactFullPath = path.join(
+    commandInput.workingFolder,
+    breakingChangeLabelArtifactPath,
+  );
   try {
+    if (!fs.existsSync(breakingChangeLabelArtifactFullPath)) {
+      fs.mkdirSync(breakingChangeLabelArtifactFullPath, { recursive: true });
+    }
     // Write breaking change label artifact
     fs.writeFileSync(
       path.join(
