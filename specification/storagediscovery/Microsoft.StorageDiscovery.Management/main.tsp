@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 
 // The Azure Storage Management API.
 @armProviderNamespace
-@service(#{ title: "StorageDiscoveryClient"})
+@service(#{ title: "StorageDiscoveryClient" })
 @versioned(ApiVersion)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.StorageDiscovery;
@@ -42,18 +42,21 @@ model StorageDiscoveryWorkspaceProperties {
   @doc("The state of storage discovery data export")
   @madeOptional(ApiVersion.v2025_03_01_preview)
   exportState?: DataExportState;
- 
+
   @doc("The description of the storage discovery workspace")
   description?: string;
 
   @doc("The view level storage discovery data estate")
   @added(ApiVersion.v2025_01_01_preview)
   @renamedFrom(ApiVersion.v2025_03_01_preview, "storageEstateViewLevel")
-  @typeChangedFrom(ApiVersion.v2025_03_01_preview, Azure.Core.armResourceIdentifier)
-  discoveryScopeLevels : Azure.Core.armResourceIdentifier<[
+  @typeChangedFrom(
+    ApiVersion.v2025_03_01_preview,
+    Azure.Core.armResourceIdentifier
+  )
+  discoveryScopeLevels: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Storage/storageAccounts",
-      scopes: ["tenant","subscription","resourceGroup"]
+      type: "Microsoft.Storage/storageAccounts";
+      scopes: ["tenant", "subscription", "resourceGroup"];
     }
   ]>[];
 
@@ -95,7 +98,7 @@ union WorkspaceState {
 union DataExportState {
   @doc("Data export is stopped.")
   Stopped: "Stopped",
-  
+
   @doc("Data export is running continuously")
   Running: "Running",
 
@@ -172,7 +175,7 @@ model StorageDiscoveryScope {
 @added(ApiVersion.v2025_01_01_preview)
 union StorageDiscoveryResourceType {
   @doc("Storage Account Resource Type")
-  StorageAccounts : "Microsoft.Storage/storageAccounts",
+  StorageAccounts: "Microsoft.Storage/storageAccounts",
 
   string,
 }
@@ -198,23 +201,23 @@ enum ApiVersion {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_12_01_preview: "2024-12-01-preview",
 
-   /** 2025-01-01-preview version */
-   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-   v2025_01_01_preview: "2025-01-01-preview",
+  /** 2025-01-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_01_01_preview: "2025-01-01-preview",
 
-   /** 2025-03-01-preview version */
-   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-   v2025_03_01_preview: "2025-03-01-preview",
+  /** 2025-03-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_03_01_preview: "2025-03-01-preview",
 
-    /** 2025-04-01-preview version */
-    @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-    v2025_04_01_preview: "2025-04-01-preview",
+  /** 2025-04-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_04_01_preview: "2025-04-01-preview",
 }
 
 @doc("Request to get StorageDiscoveryWorkspace data from ADX")
@@ -268,7 +271,7 @@ interface StorageDiscoveryWorkspaces {
   delete is ArmResourceDeleteSync<StorageDiscoveryWorkspace>;
   listByResourceGroup is ArmResourceListByParent<StorageDiscoveryWorkspace>;
   listBySubscription is ArmListBySubscription<StorageDiscoveryWorkspace>;
-  
+
   @autoRoute
   @post
   @added(ApiVersion.v2025_04_01_preview)
