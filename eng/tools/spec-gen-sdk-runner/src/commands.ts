@@ -409,22 +409,23 @@ function processBreakingChangeLabelArtifacts(
   shouldLabelBreakingChange: boolean,
   breakingChangeLabel: string,
 ): number {
-  const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact.json";
+  const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact";
+  const breakingChangeLabelArtifactFileName = breakingChangeLabelArtifactName + ".json";
   const breakingChangeLabelArtifactPath = "out/breaking-change-label-artifact";
-  const breakingChangeLabelArtifactFullPath = path.join(
+  const breakingChangeLabelArtifactAbsoluteFolder = path.join(
     commandInput.workingFolder,
     breakingChangeLabelArtifactPath,
   );
   try {
-    if (!fs.existsSync(breakingChangeLabelArtifactFullPath)) {
-      fs.mkdirSync(breakingChangeLabelArtifactFullPath, { recursive: true });
+    if (!fs.existsSync(breakingChangeLabelArtifactAbsoluteFolder)) {
+      fs.mkdirSync(breakingChangeLabelArtifactAbsoluteFolder, { recursive: true });
     }
     // Write breaking change label artifact
     fs.writeFileSync(
       path.join(
         commandInput.workingFolder,
         breakingChangeLabelArtifactPath,
-        breakingChangeLabelArtifactName,
+        breakingChangeLabelArtifactFileName,
       ),
       JSON.stringify({
         language: commandInput.sdkRepoName,

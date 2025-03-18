@@ -34,7 +34,8 @@ export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head
   let issue_number = NaN;
   let labelAction;
   let labelName = "";
-  const artifactName = "spec-gen-sdk_azure-sdk-for-js_true";
+  const artifactName = "spec-gen-sdk-breaking-change-artifact";
+  const artifactFileName = artifactName + ".json";
   const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   try {
     core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
@@ -61,7 +62,7 @@ export async function getLabelAndActionImpl({ado_build_id, ado_project_url, head
         // Keep everything up to (but not including) "?format=zip"
         downloadUrl = downloadUrl.substring(0, index);
       }
-      downloadUrl += `?format=file&subPath=/${artifactName}`;
+      downloadUrl += `?format=file&subPath=/${artifactFileName}`;
       core.info(`Downloading artifact from: ${downloadUrl}`);
 
       // Step 2: Fetch Artifact Content (as a Buffer)
