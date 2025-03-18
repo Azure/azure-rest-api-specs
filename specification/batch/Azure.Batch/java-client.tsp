@@ -1770,3 +1770,25 @@ op getNodeFileCustomization is Azure.Batch.FileOperationNew<
 >;
 
 @@override(Azure.Batch.Nodes.getNodeFile, getNodeFileCustomization, "java");
+
+// List Node Files Operation
+@doc("Optional parameters for List Node Files operation.")
+model ListBatchNodeFilesOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListNodeFilesOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List Node Files operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/files")
+op listNodeFilesCustomization is Azure.Batch.ListOperationNew<
+  {
+    ...Azure.Batch.ListNodeFilesRequiredParameters;
+
+    @doc("Optional parameters for List Node Files operation.")
+    options?: ListBatchNodeFilesOptions;
+  },
+  Azure.Batch.BatchNodeFileListResult
+>;
+
+@@override(Azure.Batch.Nodes.listNodeFiles, listNodeFilesCustomization, "java");

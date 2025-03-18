@@ -1966,6 +1966,30 @@ alias GetNodeFileResponse = {
   file: bytes;
 };
 
+alias ListNodeFilesRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node whose files you want to list.")
+  @path
+  nodeId: string;
+};
+
+alias ListNodeFilesOptionalParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("Whether to list children of a directory.")
+  @query
+  recursive?: boolean;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -2215,28 +2239,11 @@ interface Nodes {
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
   @doc("Lists all of the files in Task directories on the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files")
-  @clientName("listNodeFilesInternal", "java")
-  listNodeFiles is ListOperation<
+  listNodeFiles is ListOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node whose files you want to list.")
-      @path
-      nodeId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("Whether to list children of a directory.")
-      @query
-      recursive?: boolean;
+      ...CommonListParameters;
+      ...ListNodeFilesRequiredParameters;
+      ...ListNodeFilesOptionalParameters;
     },
     BatchNodeFileListResult
   >;

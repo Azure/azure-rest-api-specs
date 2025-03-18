@@ -125,7 +125,6 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "java"
 );
-@@clientName(BatchClient.listNodeFiles, "listNodeFilesInternal", "java");
 
 // operation overrides
 @@access(Azure.Batch.DeleteOperation, Access.internal, "java");
