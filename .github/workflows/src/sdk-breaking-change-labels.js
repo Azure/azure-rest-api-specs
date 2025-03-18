@@ -1,8 +1,8 @@
 // @ts-check
 import { sdkLabels } from "../../src/sdk-types.js";
-import { LabelAction } from "../../src/label.js";
+import { LabelAction } from "./label.js";
 import { stringify } from "querystring";
-import { extractInputs } from "../../src/context.js";
+import { extractInputs } from "./context.js";
 
 const wfName = 'sdk-breaking-change-labels';
 
