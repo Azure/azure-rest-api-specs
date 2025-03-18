@@ -925,7 +925,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SolutionConfiguration"
+              "$ref": "#/definitions/SolutionConfigurationUpdate"
             }
           }
         ],
@@ -1504,7 +1504,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PublicCloudConnector"
+              "$ref": "#/definitions/PublicCloudConnectorUpdate"
             }
           }
         ],
@@ -1778,6 +1778,37 @@
       },
       "required": [
         "accountId"
+      ]
+    },
+    "AwsCloudProfileUpdate": {
+      "type": "object",
+      "description": "cloud profile for AWS.",
+      "properties": {
+        "excludedAccounts": {
+          "type": "array",
+          "description": "List of AWS accounts which need to be excluded.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
       ]
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
@@ -2209,6 +2240,32 @@
         "hostType"
       ]
     },
+    "PublicCloudConnectorPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties of public cloud connectors.",
+      "properties": {
+        "awsCloudProfile": {
+          "$ref": "#/definitions/AwsCloudProfileUpdate",
+          "description": "Cloud profile for AWS."
+        }
+      }
+    },
+    "PublicCloudConnectorUpdate": {
+      "type": "object",
+      "description": "Public Cloud Connector",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicCloudConnectorPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "RelayNamespaceAccessProperties": {
       "type": "object",
       "description": "Azure relay hybrid connection access properties",
@@ -2434,6 +2491,20 @@
         "solutionType"
       ]
     },
+    "SolutionConfigurationPropertiesUpdate": {
+      "type": "object",
+      "description": "Solution configuration resource.",
+      "properties": {
+        "solutionType": {
+          "type": "string",
+          "description": "The type of the solution"
+        },
+        "solutionSettings": {
+          "$ref": "#/definitions/SolutionSettings",
+          "description": "Solution settings"
+        }
+      }
+    },
     "SolutionConfigurationStatus": {
       "type": "string",
       "description": "Solution Configuration Status.",
@@ -2469,6 +2540,22 @@
           }
         ]
       }
+    },
+    "SolutionConfigurationUpdate": {
+      "type": "object",
+      "description": "Solution Configuration",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SolutionConfigurationPropertiesUpdate",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SolutionSettings": {
       "type": "object",
