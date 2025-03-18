@@ -1868,6 +1868,27 @@ alias UploadNodeLogsRequiredParameters = {
   content: UploadBatchServiceLogsContent;
 };
 
+alias ListNodesRequiredParameters = {
+  @doc("The ID of the Pool from which you want to list Compute Nodes.")
+  @path
+  poolId: string;
+};
+
+alias ListNodesOptionalParameters = {
+  @doc("""
+    An OData $filter clause. For more information on constructing this filter, see
+    https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
+    """)
+  @query
+  @clientName("filter", "!autorest")
+  $filter?: string;
+
+  @doc("An OData $select clause.")
+  @query
+  @clientName("select", "!autorest")
+  $select?: string[];
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -2049,25 +2070,11 @@ interface Nodes {
   @summary("Lists the Compute Nodes in the specified Pool.")
   @doc("Lists the Compute Nodes in the specified Pool.")
   @route("/pools/{poolId}/nodes")
-  @clientName("listNodesInternal", "java")
-  listNodes is ListOperation<
+  listNodes is ListOperationNew<
     {
-      @doc("The ID of the Pool from which you want to list Compute Nodes.")
-      @path
-      poolId: string;
-
-      @doc("""
-        An OData $filter clause. For more information on constructing this filter, see
-        https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
-        """)
-      @query
-      @clientName("filter", "!autorest")
-      $filter?: string;
-
-      @doc("An OData $select clause.")
-      @query
-      @clientName("select", "!autorest")
-      $select?: string[];
+      ...CommonListParameters;
+      ...ListNodesRequiredParameters;
+      ...ListNodesOptionalParameters;
     },
     BatchNodeListResult
   >;

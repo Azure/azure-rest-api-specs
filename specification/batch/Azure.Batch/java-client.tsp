@@ -1650,3 +1650,25 @@ op uploadNodeLogsCustomization is Azure.Batch.PostOperationNew<
   uploadNodeLogsCustomization,
   "java"
 );
+
+// List Nodes Operation
+@doc("Optional parameters for List Nodes operation.")
+model ListBatchNodesOptions {
+  ...Azure.Batch.CommonListParameters;
+  ...Azure.Batch.ListNodesOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for List Nodes operation.")
+@route("/pools/{poolId}/nodes")
+op listNodesCustomization is Azure.Batch.ListOperationNew<
+  {
+    ...Azure.Batch.ListNodesRequiredParameters;
+
+    @doc("Optional parameters for List Nodes operation.")
+    options?: ListBatchNodesOptions;
+  },
+  Azure.Batch.BatchNodeListResult
+>;
+
+@@override(Azure.Batch.Nodes.listNodes, listNodesCustomization, "java");
