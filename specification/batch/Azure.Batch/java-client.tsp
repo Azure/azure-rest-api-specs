@@ -1251,6 +1251,29 @@ op listSubTasksCustomization is Azure.Batch.ReadOperationNew<
 
 @@override(Azure.Batch.Tasks.listSubTasks, listSubTasksCustomization, "java");
 
+// Terminate Task Operation
+@doc("Optional parameters for Terminate Task operation.")
+model TerminateBatchTaskOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Terminate Task operation.")
+@route("/jobs/{jobId}/tasks/{taskId}/terminate")
+op terminateTaskCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.TerminateTaskRequiredParameters;
+
+    @doc("Optional parameters for Terminate Task operation.")
+    options?: TerminateBatchTaskOptions;
+
+    ...Azure.Batch.BatchMatchHeaders;
+  },
+  NoContentResponse & Azure.Batch.DataServiceResponseHeaders
+>;
+
+@@override(Azure.Batch.Tasks.terminateTask, terminateTaskCustomization, "java");
+
 // Delete Task File Operation
 @doc("Optional parameters for Delete Task File operation.")
 model DeleteBatchTaskFileOptions {

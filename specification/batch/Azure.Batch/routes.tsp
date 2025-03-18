@@ -1393,6 +1393,16 @@ alias ListSubTasksParameters = {
   $select?: string[];
 };
 
+alias TerminateTaskRequiredParameters = {
+  @doc("The ID of the Job containing the Task.")
+  @path
+  jobId: string;
+
+  @doc("The ID of the Task to terminate.")
+  @path
+  taskId: string;
+};
+
 alias ListTaskFilesRequiredParameters = {
   @doc("The ID of the Job that contains the Task.")
   @path
@@ -1570,16 +1580,11 @@ interface Tasks {
     primary task; subtasks are then terminated asynchronously in the background.
     """)
   @route("/jobs/{jobId}/tasks/{taskId}/terminate")
-  @clientName("terminateTaskInternal", "java")
-  terminateTask is PostOperation<
-    BatchMatchHeaders & {
-      @doc("The ID of the Job containing the Task.")
-      @path
-      jobId: string;
-
-      @doc("The ID of the Task to terminate.")
-      @path
-      taskId: string;
+  terminateTask is PostOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchMatchHeaders;
+      ...TerminateTaskRequiredParameters;
     },
     NoContentResponse & DataServiceResponseHeaders
   >;
