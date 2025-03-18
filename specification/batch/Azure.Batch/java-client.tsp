@@ -1672,3 +1672,28 @@ op listNodesCustomization is Azure.Batch.ListOperationNew<
 >;
 
 @@override(Azure.Batch.Nodes.listNodes, listNodesCustomization, "java");
+
+// Get Node Extension Operation
+@doc("Optional parameters for Get Node Extension operation.")
+model GetBatchNodeExtensionOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.GetNodeExtensionOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Node Extension operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}")
+op getNodeExtensionCustomization is Azure.Batch.ReadOperationNew<
+  {
+    ...Azure.Batch.GetNodeExtensionRequiredParameters;
+
+    @doc("Optional parameters for Get Node Extension operation.")
+    options?: GetBatchNodeExtensionOptions;
+  },
+  Azure.Batch.BatchNodeVMExtension
+>;
+
+@@override(Azure.Batch.Nodes.getNodeExtension,
+  getNodeExtensionCustomization,
+  "java"
+);

@@ -121,7 +121,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.getNodeExtension, "getNodeExtensionInternal", "java");
 @@clientName(BatchClient.listNodeExtensions,
   "listNodeExtensionsInternal",
   "java"
