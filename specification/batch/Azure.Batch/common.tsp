@@ -13,17 +13,7 @@ namespace Azure.Batch;
 // Batch operation definitions
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get
-op ListOperation<TFilter, TResponse> is Azure.Core.RpcOperation<
-  CommonListParameters & TFilter,
-  BatchResponseHeaders & TResponse,
-  NoFilter,
-  BatchError
->;
-
-// TODO: Once we migrate all ListOperation methods in routes.tsp to use this, delete original ListOperation (above) and rename this to ListOperation
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@get
-op ListOperationNew<
+op ListOperation<
   TFilter extends TypeSpec.Reflection.Model,
   TResponse
 > is Azure.Core.RpcOperation<
@@ -39,19 +29,6 @@ op ReadOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  CommonParameters & TPathParams,
-  TResource & BatchResponseHeaders,
-  NoFilter,
-  BatchError
->;
-
-// TODO: Once we migrate all ReadOperation methods in routes.tsp to use this, delete original ReadOperation (above) and rename this to ReadOperation
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@get
-op ReadOperationNew<
-  TPathParams extends TypeSpec.Reflection.Model,
-  TResource
-> is Azure.Core.RpcOperation<
   TPathParams,
   TResource & BatchResponseHeaders,
   NoFilter,
@@ -61,19 +38,6 @@ op ReadOperationNew<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @get
 op FileOperation<
-  TPathParams extends TypeSpec.Reflection.Model,
-  TResource
-> is Azure.Core.RpcOperation<
-  CommonParameters & TPathParams,
-  TResource & FileResponseHeaders,
-  NoFilter,
-  BatchError
->;
-
-// TODO: Once we migrate all FileOperation methods in routes.tsp to use this, delete original FileOperation (above) and rename this to FileOperation
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@get
-op FileOperationNew<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
@@ -98,36 +62,13 @@ op HeadFileOperation<
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @delete
 op DeleteOperation<
-  TFilter,
-  TResponse extends TypeSpec.Reflection.Model
-> is Azure.Core.RpcOperation<
-  CommonParameters & TFilter,
-  TResponse,
-  NoFilter,
-  BatchError
->;
-
-// TODO: Once we migrate all DeleteOperation methods in routes.tsp to use this, delete original DeleteOperation (above) and rename this to DeleteOperation
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@delete
-op DeleteOperationNew<
   TFilter extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model
 > is Azure.Core.RpcOperation<TFilter, TResponse, NoFilter, BatchError>;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
-op CreateOperation<TResource, TResponse> is RpcOperation<
-  CommonJsonParameters & TResource,
-  Created<TResponse> & BatchResponseHeaders,
-  NoFilter,
-  BatchError
->;
-
-// TODO: Once we migrate all CreateOperation methods in routes.tsp to use this, delete original CreateOperation (above) and rename this to CreateOperation
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@post
-op CreateOperationNew<
+op CreateOperation<
   TResource extends TypeSpec.Reflection.Model,
   TResponse
 > is RpcOperation<
@@ -139,17 +80,7 @@ op CreateOperationNew<
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @patch
-op UpdateOperation<TResource, TResponse> is RpcOperation<
-  CommonJsonParameters & TResource,
-  TResponse & BatchResponseHeaders,
-  NoFilter,
-  BatchError
->;
-
-// TODO: Once we migrate all UpdateOperation methods in routes.tsp to use this, delete original UpdateOperation (above) and rename this to UpdateOperation
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@patch
-op UpdateOperationNew<
+op UpdateOperation<
   TResource extends TypeSpec.Reflection.Model,
   TResponse
 > is RpcOperation<
@@ -161,17 +92,7 @@ op UpdateOperationNew<
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @put
-op ReplaceOperation<TResource, TResponse> is RpcOperation<
-  CommonJsonParameters & TResource,
-  TResponse & BatchResponseHeaders,
-  NoFilter,
-  BatchError
->;
-
-// TODO: Once we migrate all ReplaceOperation methods in routes.tsp to use this, delete original ReplaceOperation (above) and rename this to ReplaceOperation
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@put
-op ReplaceOperationNew<
+op ReplaceOperation<
   TResource extends TypeSpec.Reflection.Model,
   TResponse
 > is RpcOperation<
@@ -196,35 +117,9 @@ op ResourceInfoOperationWithAdditionalResponse<
   BatchError
 >;
 
-// TODO: Once we migrate all ResourceInfoOperationWithAdditionalResponse methods in routes.tsp to use this, delete original ResourceInfoOperationWithAdditionalResponse (above) and rename this to ResourceInfoOperationWithAdditionalResponse
-#suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Azure REST API guidelines recommend using 'default' error response for all error cases. Avoid defining custom 4xx or 5xx error cases."
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@doc("New rpc operation allowing multiple responses")
-@head
-op ResourceInfoOperationWithAdditionalResponseNew<
-  TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model,
-  TAdditionalResponse extends {} = {}
-> is Foundations.Operation<
-  TParams,
-  TResponse | TAdditionalResponse,
-  NoFilter,
-  BatchError
->;
-
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @post
-op PostOperation<TResource, TResponse> is RpcOperation<
-  CommonParameters & TResource,
-  TResponse & BatchResponseHeaders,
-  NoFilter,
-  BatchError
->;
-
-// TODO: Once we migrate all PostOperation methods in routes.tsp to use this, delete original PostOperation (above) and rename this to PostOperation
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@post
-op PostOperationNew<
+op PostOperation<
   TResource extends TypeSpec.Reflection.Model,
   TResponse
 > is RpcOperation<

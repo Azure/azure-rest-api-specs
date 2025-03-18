@@ -20,7 +20,7 @@ model GetApplicationOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Application operation.")
 @route("/applications/{applicationId}")
-op getApplicationCustomization is Azure.Batch.ReadOperationNew<
+op getApplicationCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.GetApplicationRequiredParameters;
 
@@ -45,7 +45,7 @@ model ListBatchApplicationsOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for List Applications operation.")
 @route("/applications")
-op listApplicationsCustomization is Azure.Batch.ListOperationNew<
+op listApplicationsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Applications operation.")
     options?: ListBatchApplicationsOptions;
@@ -68,7 +68,7 @@ model ListBatchPoolUsageMetricsOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for List Pool Usage Metrics operation.")
 @route("/poolusagemetrics")
-op listPoolUsageMetricsCustomization is Azure.Batch.ListOperationNew<
+op listPoolUsageMetricsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Pool Usage Metrics operation.")
     options?: ListBatchPoolUsageMetricsOptions;
@@ -90,7 +90,7 @@ model CreateBatchPoolOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for Create Pool operation.")
 @route("/pools")
-op createPoolCustomization is Azure.Batch.CreateOperationNew<
+op createPoolCustomization is Azure.Batch.CreateOperation<
   {
     ...Azure.Batch.CreatePoolParameters;
 
@@ -112,7 +112,7 @@ model ListBatchPoolsOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for List Pools operation.")
 @route("/pools")
-op listPoolsCustomization is Azure.Batch.ListOperationNew<
+op listPoolsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Pools operation.")
     options?: ListBatchPoolsOptions;
@@ -131,7 +131,7 @@ model DeleteBatchPoolOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Delete Pool operation.")
 @route("/pools/{poolId}")
-op deletePoolCustomization is Azure.Batch.DeleteOperationNew<
+op deletePoolCustomization is Azure.Batch.DeleteOperation<
   {
     ...Azure.Batch.DeletePoolRequiredParameters;
 
@@ -155,7 +155,7 @@ model BatchPoolExistsOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for Pool Exists operation.")
 @route("/pools/{poolId}")
-op poolExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalResponseNew<
+op poolExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalResponse<
   {
     ...Azure.Batch.PoolExistsRequiredParameters;
 
@@ -180,7 +180,7 @@ model GetBatchPoolOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Pool operation.")
 @route("/pools/{poolId}")
-op getPoolCustomization is Azure.Batch.ReadOperationNew<
+op getPoolCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.GetPoolRequiredParameters;
 
@@ -203,7 +203,7 @@ model UpdateBatchPoolOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Update Pool operation.")
 @route("/pools/{poolId}")
-op updatePoolCustomization is Azure.Batch.UpdateOperationNew<
+op updatePoolCustomization is Azure.Batch.UpdateOperation<
   {
     ...Azure.Batch.UpdatePoolRequiredParameters;
 
@@ -226,7 +226,7 @@ model DisableBatchPoolAutoScaleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Disable Pool AutoScale operation.")
 @route("/pools/{poolId}/disableautoscale")
-op disablePoolAutoScaleCustomization is Azure.Batch.PostOperationNew<
+op disablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.DisablePoolAutoscaleParameters;
 
@@ -250,7 +250,7 @@ model EnableBatchPoolAutoScaleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Enable Pool AutoScale operation.")
 @route("/pools/{poolId}/enableautoscale")
-op enablePoolAutoScaleCustomization is Azure.Batch.PostOperationNew<
+op enablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.EnablePoolAutoscaleRequiredParameters;
 
@@ -276,7 +276,7 @@ model EvaluateBatchPoolAutoScaleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Evaluate Pool AutoScale operation.")
 @route("/pools/{poolId}/evaluateautoscale")
-op evaluatePoolAutoScaleCustomization is Azure.Batch.PostOperationNew<
+op evaluatePoolAutoScaleCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.EvaluatePoolAutoScaleRequiredParameters;
 
@@ -300,7 +300,7 @@ model ResizeBatchPoolOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Resize Pool operation.")
 @route("/pools/{poolId}/resize")
-op resizePoolCustomization is Azure.Batch.PostOperationNew<
+op resizePoolCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.ResizePoolRequiredParameters;
 
@@ -323,7 +323,7 @@ model StopBatchPoolResizeOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Stop Pool Resize operation.")
 @route("/pools/{poolId}/stopresize")
-op stopPoolResizeCustomization is Azure.Batch.PostOperationNew<
+op stopPoolResizeCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.StopPoolResizeRequiredParameters;
 
@@ -349,7 +349,7 @@ model ReplaceBatchPoolPropertiesOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Replace Pool Properties operation.")
 @route("/pools/{poolId}/updateproperties")
-op replacePoolPropertiesCustomization is Azure.Batch.PostOperationNew<
+op replacePoolPropertiesCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.ReplacePoolPropertiesRequiredParameters;
 
@@ -373,7 +373,7 @@ model RemoveBatchNodesOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Remove Nodes operation.")
 @route("/pools/{poolId}/removenodes")
-op removeNodesCustomization is Azure.Batch.PostOperationNew<
+op removeNodesCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.RemoveNodesRequiredParameters;
 
@@ -397,7 +397,7 @@ model ListSupportedBatchImagesOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Supported Images operation.")
 @route("/supportedimages")
-op listSupportedImagesCustomization is Azure.Batch.ListOperationNew<
+op listSupportedImagesCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Supported Images operation.")
     options?: ListSupportedBatchImagesOptions;
@@ -420,7 +420,7 @@ model ListBatchPoolNodeCountsOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Pool Node Counts operation.")
 @route("/nodecounts")
-op listPoolNodeCountsCustomization is Azure.Batch.ListOperationNew<
+op listPoolNodeCountsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Pool Node Counts operation.")
     options?: ListBatchPoolNodeCountsOptions;
@@ -443,7 +443,7 @@ model DeleteBatchJobOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Delete Job operation.")
 @route("/jobs/{jobId}")
-op deleteJobCustomization is Azure.Batch.DeleteOperationNew<
+op deleteJobCustomization is Azure.Batch.DeleteOperation<
   {
     ...Azure.Batch.DeleteJobRequiredParameters;
 
@@ -467,7 +467,7 @@ model GetBatchJobOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Job operation.")
 @route("/jobs/{jobId}")
-op getJobCustomization is Azure.Batch.ReadOperationNew<
+op getJobCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.GetJobRequiredParameters;
 
@@ -490,7 +490,7 @@ model UpdateBatchJobOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Update Job operation.")
 @route("/jobs/{jobId}")
-op updateJobCustomization is Azure.Batch.UpdateOperationNew<
+op updateJobCustomization is Azure.Batch.UpdateOperation<
   {
     ...Azure.Batch.UpdateJobRequiredParameters;
 
@@ -513,7 +513,7 @@ model ReplaceBatchJobOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Replace Job operation.")
 @route("/jobs/{jobId}")
-op replaceJobCustomization is Azure.Batch.ReplaceOperationNew<
+op replaceJobCustomization is Azure.Batch.ReplaceOperation<
   {
     ...Azure.Batch.ReplaceJobRequiredParameters;
 
@@ -536,7 +536,7 @@ model DisableBatchJobOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Disable Job operation.")
 @route("/jobs/{jobId}/disable")
-op disableJobCustomization is Azure.Batch.PostOperationNew<
+op disableJobCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.DisableJobRequiredParameters;
 
@@ -559,7 +559,7 @@ model EnableBatchJobOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Enable Job operation.")
 @route("/jobs/{jobId}/enable")
-op enableJobCustomization is Azure.Batch.PostOperationNew<
+op enableJobCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.EnableJobRequiredParameters;
 
@@ -583,7 +583,7 @@ model TerminateBatchJobOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Terminate Job operation.")
 @route("/jobs/{jobId}/terminate")
-op terminateJobCustomization is Azure.Batch.PostOperationNew<
+op terminateJobCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.TerminateJobRequiredParameters;
 
@@ -606,7 +606,7 @@ model CreateBatchJobOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Create Job operation.")
 @route("/jobs")
-op createJobCustomization is Azure.Batch.CreateOperationNew<
+op createJobCustomization is Azure.Batch.CreateOperation<
   {
     ...Azure.Batch.CreateJobRequiredParameters;
 
@@ -628,7 +628,7 @@ model ListBatchJobsOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Jobs operation.")
 @route("/jobs")
-op listJobsCustomization is Azure.Batch.ListOperationNew<
+op listJobsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Jobs operation.")
     options?: ListBatchJobsOptions;
@@ -648,7 +648,7 @@ model ListBatchJobsFromScheduleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Jobs From Schedule operation.")
 @route("/jobschedules/{jobScheduleId}/jobs")
-op listJobsFromScheduleCustomization is Azure.Batch.ListOperationNew<
+op listJobsFromScheduleCustomization is Azure.Batch.ListOperation<
   {
     ...Azure.Batch.ListJobsFromScheduleRequiredParameters;
 
@@ -673,7 +673,7 @@ model ListBatchJobPreparationAndReleaseTaskStatusOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Jobs Preparation and Release Task Status operation.")
 @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
-op listJobPreparationAndReleaseTaskStatusCustomization is Azure.Batch.ListOperationNew<
+op listJobPreparationAndReleaseTaskStatusCustomization is Azure.Batch.ListOperation<
   {
     ...Azure.Batch.ListJobPreparationAndReleaseTaskStatusRequiredParameters;
 
@@ -697,7 +697,7 @@ model GetBatchJobTaskCountsOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Job Task Counts operation.")
 @route("/jobs/{jobId}/taskcounts")
-op getJobTaskCountsCustomization is Azure.Batch.ReadOperationNew<
+op getJobTaskCountsCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.getJobTaskCountsParameters;
 
@@ -721,7 +721,7 @@ model CreateBatchCertificateOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Create Certificate operation.")
 @route("/certificates")
-op createCertificateCustomization is Azure.Batch.CreateOperationNew<
+op createCertificateCustomization is Azure.Batch.CreateOperation<
   {
     ...Azure.Batch.CreateCertificateRequiredParameters;
 
@@ -746,7 +746,7 @@ model ListBatchCertificatesOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Certificates operation.")
 @route("/certificates")
-op listCertificatesCustomization is Azure.Batch.ListOperationNew<
+op listCertificatesCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Certificates operation.")
     options?: ListBatchCertificatesOptions;
@@ -768,7 +768,7 @@ model CancelBatchCertificateDeletionOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Cancel Certificate Deletion operation.")
 @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
-op cancelCertificateDeletionCustomization is Azure.Batch.PostOperationNew<
+op cancelCertificateDeletionCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.CancelCertificateDeletionRequiredParameters;
 
@@ -792,7 +792,7 @@ model DeleteBatchCertificateOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Delete Certificate operation.")
 @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-op deleteCertificateCustomization is Azure.Batch.DeleteOperationNew<
+op deleteCertificateCustomization is Azure.Batch.DeleteOperation<
   {
     ...Azure.Batch.DeleteCertificateRequiredParameters;
 
@@ -817,7 +817,7 @@ model GetBatchCertificateOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Certificate operation.")
 @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-op getCertificateCustomization is Azure.Batch.ReadOperationNew<
+op getCertificateCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.GetCertificateRequiredParameters;
 
@@ -842,7 +842,7 @@ model BatchJobScheduleExistsOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for Job Schedule Exists operation.")
 @route("/jobschedules/{jobScheduleId}")
-op jobScheduleExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalResponseNew<
+op jobScheduleExistsCustomization is Azure.Batch.ResourceInfoOperationWithAdditionalResponse<
   {
     ...Azure.Batch.JobScheduleExistsRequiredParameters;
 
@@ -870,7 +870,7 @@ model DeleteBatchJobScheduleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Delete Job Schedule operation.")
 @route("/jobschedules/{jobScheduleId}")
-op deleteJobScheduleCustomization is Azure.Batch.DeleteOperationNew<
+op deleteJobScheduleCustomization is Azure.Batch.DeleteOperation<
   {
     ...Azure.Batch.DeleteJobScheduleRequiredParameters;
 
@@ -897,7 +897,7 @@ model GetBatchJobScheduleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Job Schedule operation.")
 @route("/jobschedules/{jobScheduleId}")
-op getJobScheduleCustomization is Azure.Batch.ReadOperationNew<
+op getJobScheduleCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.GetJobScheduleRequiredParameters;
 
@@ -923,7 +923,7 @@ model UpdateBatchJobScheduleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Update Job Schedule operation.")
 @route("/jobschedules/{jobScheduleId}")
-op updateJobScheduleCustomization is Azure.Batch.UpdateOperationNew<
+op updateJobScheduleCustomization is Azure.Batch.UpdateOperation<
   {
     ...Azure.Batch.UpdateJobScheduleRequiredParameters;
 
@@ -949,7 +949,7 @@ model ReplaceBatchJobScheduleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Replace Job Schedule operation.")
 @route("/jobschedules/{jobScheduleId}")
-op replaceJobScheduleCustomization is Azure.Batch.ReplaceOperationNew<
+op replaceJobScheduleCustomization is Azure.Batch.ReplaceOperation<
   {
     ...Azure.Batch.ReplaceJobScheduleRequiredParameters;
 
@@ -975,7 +975,7 @@ model DisableBatchJobScheduleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Disable Job Schedule operation.")
 @route("/jobschedules/{jobScheduleId}/disable")
-op disableJobScheduleCustomization is Azure.Batch.PostOperationNew<
+op disableJobScheduleCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.DisableJobScheduleRequiredParameters;
 
@@ -1001,7 +1001,7 @@ model EnableBatchJobScheduleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Enable Job Schedule operation.")
 @route("/jobschedules/{jobScheduleId}/enable")
-op enableJobScheduleCustomization is Azure.Batch.PostOperationNew<
+op enableJobScheduleCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.EnableJobScheduleRequiredParameters;
 
@@ -1028,7 +1028,7 @@ model TerminateBatchJobScheduleOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Terminate Job Schedule operation.")
 @route("/jobschedules/{jobScheduleId}/terminate")
-op terminateJobScheduleCustomization is Azure.Batch.PostOperationNew<
+op terminateJobScheduleCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.TerminateJobScheduleRequiredParameters;
 
@@ -1054,7 +1054,7 @@ model CreateBatchJobScheduleOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for Create Job Schedule operation.")
 @route("/jobschedules")
-op createJobScheduleCustomization is Azure.Batch.CreateOperationNew<
+op createJobScheduleCustomization is Azure.Batch.CreateOperation<
   {
     ...Azure.Batch.CreateJobScheduleParameters;
 
@@ -1079,7 +1079,7 @@ model ListBatchJobSchedulesOptions {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @doc("Custom override for List Job Schedules operation.")
 @route("/jobschedules")
-op listJobSchedulesCustomization is Azure.Batch.ListOperationNew<
+op listJobSchedulesCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Job Schedules operation.")
     options?: ListBatchJobSchedulesOptions;
@@ -1101,7 +1101,7 @@ model CreateBatchTaskOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Create Task operation.")
 @route("/jobs/{jobId}/tasks")
-op createTaskCustomization is Azure.Batch.CreateOperationNew<
+op createTaskCustomization is Azure.Batch.CreateOperation<
   {
     ...Azure.Batch.CreateTaskRequiredParameters;
 
@@ -1123,7 +1123,7 @@ model ListBatchTasksOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Tasks operation.")
 @route("/jobs")
-op listTasksCustomization is Azure.Batch.ListOperationNew<
+op listTasksCustomization is Azure.Batch.ListOperation<
   {
     ...Azure.Batch.ListTasksRequiredParameters;
 
@@ -1144,7 +1144,7 @@ model CreateBatchTaskCollectionOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Create Task Collection operation.")
 @route("/jobs/{jobId}/addtaskcollection")
-op createTaskCollectionCustomization is Azure.Batch.PostOperationNew<
+op createTaskCollectionCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.CreateTaskCollectionParameters;
 
@@ -1168,7 +1168,7 @@ model DeleteBatchTaskOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Delete Task operation.")
 @route("/jobs/{jobId}/tasks/{taskId}")
-op deleteTaskCustomization is Azure.Batch.DeleteOperationNew<
+op deleteTaskCustomization is Azure.Batch.DeleteOperation<
   {
     ...Azure.Batch.DeleteTaskRequiredParameters;
 
@@ -1192,7 +1192,7 @@ model GetBatchTaskOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Task operation.")
 @route("/jobs/{jobId}/tasks/{taskId}")
-op getTaskCustomization is Azure.Batch.ReadOperationNew<
+op getTaskCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.GetTaskRequiredParameters;
 
@@ -1215,7 +1215,7 @@ model ReplaceBatchTaskOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Replace Task operation.")
 @route("/jobs/{jobId}/tasks/{taskId}")
-op replaceTaskCustomization is Azure.Batch.ReplaceOperationNew<
+op replaceTaskCustomization is Azure.Batch.ReplaceOperation<
   {
     ...Azure.Batch.ReplaceTaskRequiredParameters;
 
@@ -1239,7 +1239,7 @@ model ListBatchSubTasksOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List SubTasks operation.")
 @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
-op listSubTasksCustomization is Azure.Batch.ReadOperationNew<
+op listSubTasksCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.ListSubTasksRequiredParameters;
 
@@ -1260,7 +1260,7 @@ model TerminateBatchTaskOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Terminate Task operation.")
 @route("/jobs/{jobId}/tasks/{taskId}/terminate")
-op terminateTaskCustomization is Azure.Batch.PostOperationNew<
+op terminateTaskCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.TerminateTaskRequiredParameters;
 
@@ -1283,7 +1283,7 @@ model ReactivateBatchTaskOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Reactivate Task operation.")
 @route("/jobs/{jobId}/tasks/{taskId}/reactivate")
-op reactivateTaskCustomization is Azure.Batch.PostOperationNew<
+op reactivateTaskCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.ReactivateTaskRequiredParameters;
 
@@ -1310,7 +1310,7 @@ model DeleteBatchTaskFileOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Delete Task File operation.")
 @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-op deleteTaskFileCustomization is Azure.Batch.DeleteOperationNew<
+op deleteTaskFileCustomization is Azure.Batch.DeleteOperation<
   {
     ...Azure.Batch.BatchTaskFileClientPathContent;
 
@@ -1336,7 +1336,7 @@ model GetBatchTaskFileOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Task File operation.")
 @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-op getTaskFileCustomization is Azure.Batch.FileOperationNew<
+op getTaskFileCustomization is Azure.Batch.FileOperation<
   {
     ...Azure.Batch.BatchTaskFileClientPathContent;
 
@@ -1358,7 +1358,7 @@ model ListBatchTaskFilesOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Task Files operation.")
 @route("/jobs/{jobId}/tasks/{taskId}/files")
-op listTaskFilesCustomization is Azure.Batch.ListOperationNew<
+op listTaskFilesCustomization is Azure.Batch.ListOperation<
   {
     ...Azure.Batch.ListTaskFilesRequiredParameters;
 
@@ -1379,7 +1379,7 @@ model CreateBatchNodeUserOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Create Node User operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/users")
-op createNodeUserCustomization is Azure.Batch.CreateOperationNew<
+op createNodeUserCustomization is Azure.Batch.CreateOperation<
   {
     ...Azure.Batch.CreateNodeUserRequiredParameters;
 
@@ -1403,7 +1403,7 @@ model DeleteBatchNodeUserOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Delete Node User operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
-op deleteNodeUserCustomization is Azure.Batch.DeleteOperationNew<
+op deleteNodeUserCustomization is Azure.Batch.DeleteOperation<
   {
     ...Azure.Batch.DeleteNodeUserRequiredParameters;
 
@@ -1427,7 +1427,7 @@ model ReplaceBatchNodeUserOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Replace Node User operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
-op replaceNodeUserCustomization is Azure.Batch.ReplaceOperationNew<
+op replaceNodeUserCustomization is Azure.Batch.ReplaceOperation<
   {
     ...Azure.Batch.ReplaceNodeUserRequiredParameters;
 
@@ -1452,7 +1452,7 @@ model GetBatchNodeOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Node operation.")
 @route("/pools/{poolId}/nodes/{nodeId}")
-op getNodeCustomization is Azure.Batch.ReadOperationNew<
+op getNodeCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.GetNodeRequiredParameters;
 
@@ -1474,7 +1474,7 @@ model RebootBatchNodeOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Reboot Node operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/reboot")
-op rebootNodeCustomization is Azure.Batch.PostOperationNew<
+op rebootNodeCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.RebootNodeRequiredParameters;
 
@@ -1495,7 +1495,7 @@ model StartBatchNodeOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Start Node operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/start")
-op startNodeCustomization is Azure.Batch.PostOperationNew<
+op startNodeCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.StartNodeRequiredParameters;
 
@@ -1517,7 +1517,7 @@ model DeallocateBatchNodeOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Deallocate Node operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/deallocate")
-op deallocateNodeCustomization is Azure.Batch.PostOperationNew<
+op deallocateNodeCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.DeallocateNodeRequiredParameters;
 
@@ -1542,7 +1542,7 @@ model ReimageBatchNodeOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Reimage Node operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/reimage")
-op reimageNodeCustomization is Azure.Batch.PostOperationNew<
+op reimageNodeCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.ReimageNodeRequiredParameters;
 
@@ -1564,7 +1564,7 @@ model DisableBatchNodeSchedulingOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Disable Node Scheduling operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/disablescheduling")
-op disableNodeSchedulingCustomization is Azure.Batch.PostOperationNew<
+op disableNodeSchedulingCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.DisableNodeSchedulingRequiredParameters;
 
@@ -1588,7 +1588,7 @@ model EnableBatchNodeSchedulingOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Enable Node Scheduling operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/enablescheduling")
-op enableNodeSchedulingCustomization is Azure.Batch.PostOperationNew<
+op enableNodeSchedulingCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.EnableNodeSchedulingRequiredParameters;
 
@@ -1612,7 +1612,7 @@ model GetBatchNodeRemoteLoginSettingsOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Node Remote Login Settings operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
-op getNodeRemoteLoginSettingsCustomization is Azure.Batch.ReadOperationNew<
+op getNodeRemoteLoginSettingsCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.GetNodeRemoteLoginSettingsRequiredParameters;
 
@@ -1636,7 +1636,7 @@ model UploadBatchNodeLogsOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Upload Node Logs operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
-op uploadNodeLogsCustomization is Azure.Batch.PostOperationNew<
+op uploadNodeLogsCustomization is Azure.Batch.PostOperation<
   {
     ...Azure.Batch.UploadNodeLogsRequiredParameters;
 
@@ -1661,7 +1661,7 @@ model ListBatchNodesOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Nodes operation.")
 @route("/pools/{poolId}/nodes")
-op listNodesCustomization is Azure.Batch.ListOperationNew<
+op listNodesCustomization is Azure.Batch.ListOperation<
   {
     ...Azure.Batch.ListNodesRequiredParameters;
 
@@ -1683,7 +1683,7 @@ model GetBatchNodeExtensionOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Node Extension operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}")
-op getNodeExtensionCustomization is Azure.Batch.ReadOperationNew<
+op getNodeExtensionCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.GetNodeExtensionRequiredParameters;
 
@@ -1708,7 +1708,7 @@ model ListBatchNodeExtensionsOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Node Extensions operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/extensions")
-op listNodeExtensionsCustomization is Azure.Batch.ListOperationNew<
+op listNodeExtensionsCustomization is Azure.Batch.ListOperation<
   {
     ...Azure.Batch.ListNodeExtensionsRequiredParameters;
 
@@ -1733,7 +1733,7 @@ model DeleteBatchNodeFileOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Delete Node File operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
-op deleteNodeFileCustomization is Azure.Batch.DeleteOperationNew<
+op deleteNodeFileCustomization is Azure.Batch.DeleteOperation<
   {
     ...Azure.Batch.BatchNodeFileClientPathContent;
 
@@ -1759,7 +1759,7 @@ model GetBatchNodeFileOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for Get Node File operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
-op getNodeFileCustomization is Azure.Batch.FileOperationNew<
+op getNodeFileCustomization is Azure.Batch.FileOperation<
   {
     ...Azure.Batch.BatchNodeFileClientPathContent;
 
@@ -1781,7 +1781,7 @@ model ListBatchNodeFilesOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List Node Files operation.")
 @route("/pools/{poolId}/nodes/{nodeId}/files")
-op listNodeFilesCustomization is Azure.Batch.ListOperationNew<
+op listNodeFilesCustomization is Azure.Batch.ListOperation<
   {
     ...Azure.Batch.ListNodeFilesRequiredParameters;
 

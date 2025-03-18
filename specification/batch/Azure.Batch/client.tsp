@@ -126,19 +126,6 @@ interface BatchClient {
   "java"
 );
 
-// operation overrides
-@@access(Azure.Batch.DeleteOperation, Access.internal, "java");
-@@access(Azure.Batch.CreateOperation, Access.internal, "java");
-@@access(Azure.Batch.UpdateOperation, Access.internal, "java");
-@@access(Azure.Batch.ReplaceOperation, Access.internal, "java");
-@@access(Azure.Batch.PostOperation, Access.internal, "java");
-@@access(Azure.Batch.FileOperation, Access.internal, "java");
-@@access(Azure.Batch.HeadFileOperation, Access.internal, "java");
-@@access(Azure.Batch.ResourceInfoOperationWithAdditionalResponse,
-  Access.internal,
-  "java"
-);
-
 // model overrides
 @@access(Azure.Batch.BatchApplicationListResult, Access.public, "java");
 @@access(Azure.Batch.BatchApplication, Access.public, "java");

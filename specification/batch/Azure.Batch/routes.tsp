@@ -32,7 +32,7 @@ interface Applications {
     API.
     """)
   @route("/applications")
-  listApplications is ListOperationNew<
+  listApplications is ListOperation<
     {
       ...CommonListParameters;
     },
@@ -48,7 +48,7 @@ interface Applications {
     API.
     """)
   @route("/applications/{applicationId}")
-  getApplication is ReadOperationNew<
+  getApplication is ReadOperation<
     {
       ...CommonParameters;
       ...GetApplicationRequiredParameters;
@@ -256,7 +256,7 @@ interface Pools {
     last aggregation interval is returned.
     """)
   @route("/poolusagemetrics")
-  listPoolUsageMetrics is ListOperationNew<
+  listPoolUsageMetrics is ListOperation<
     {
       ...CommonListParameters;
       ...ListPoolUsageMetricsParameters;
@@ -271,7 +271,7 @@ interface Pools {
     to Microsoft Support engineers.
     """)
   @route("/pools")
-  createPool is CreateOperationNew<
+  createPool is CreateOperation<
     {
       ...CommonJsonParameters;
       ...CreatePoolParameters;
@@ -282,7 +282,7 @@ interface Pools {
   @summary("Lists all of the Pools which be mounted.")
   @doc("Lists all of the Pools which be mounted.")
   @route("/pools")
-  listPools is ListOperationNew<
+  listPools is ListOperation<
     {
       ...CommonListParameters;
       ...ListPoolsParameters;
@@ -306,7 +306,7 @@ interface Pools {
     error code PoolBeingDeleted.
     """)
   @route("/pools/{poolId}")
-  deletePool is DeleteOperationNew<
+  deletePool is DeleteOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -317,7 +317,7 @@ interface Pools {
 
   @doc("Gets basic properties of a Pool.")
   @route("/pools/{poolId}")
-  poolExists is ResourceInfoOperationWithAdditionalResponseNew<
+  poolExists is ResourceInfoOperationWithAdditionalResponse<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -329,7 +329,7 @@ interface Pools {
 
   @doc("Gets information about the specified Pool.")
   @route("/pools/{poolId}")
-  getPool is ReadOperationNew<
+  getPool is ReadOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -346,7 +346,7 @@ interface Pools {
     a StartTask element, then the Pool keeps the existing StartTask.
     """)
   @route("/pools/{poolId}")
-  updatePool is UpdateOperationNew<
+  updatePool is UpdateOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -358,7 +358,7 @@ interface Pools {
   @summary("Disables automatic scaling for a Pool.")
   @doc("Disables automatic scaling for a Pool.")
   @route("/pools/{poolId}/disableautoscale")
-  disablePoolAutoScale is PostOperationNew<
+  disablePoolAutoScale is PostOperation<
     {
       ...CommonParameters;
       ...DisablePoolAutoscaleParameters;
@@ -376,7 +376,7 @@ interface Pools {
     more than once every 30 seconds.
     """)
   @route("/pools/{poolId}/enableautoscale")
-  enablePoolAutoScale is PostOperationNew<
+  enablePoolAutoScale is PostOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -392,7 +392,7 @@ interface Pools {
     scaling enabled in order to evaluate a formula.
     """)
   @route("/pools/{poolId}/evaluateautoscale")
-  evaluatePoolAutoScale is PostOperationNew<
+  evaluatePoolAutoScale is PostOperation<
     {
       ...CommonJsonParameters;
       ...EvaluatePoolAutoScaleRequiredParameters;
@@ -411,7 +411,7 @@ interface Pools {
     Nodes, use the Pool remove Compute Nodes API instead.
     """)
   @route("/pools/{poolId}/resize")
-  resizePool is PostOperationNew<
+  resizePool is PostOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -431,7 +431,7 @@ interface Pools {
     be used to halt the initial sizing of the Pool when it is created.
     """)
   @route("/pools/{poolId}/stopresize")
-  stopPoolResize is PostOperationNew<
+  stopPoolResize is PostOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -447,7 +447,7 @@ interface Pools {
     with this request, then the Batch service will remove the existing StartTask.
     """)
   @route("/pools/{poolId}/updateproperties")
-  replacePoolProperties is PostOperationNew<
+  replacePoolProperties is PostOperation<
     {
       ...CommonJsonParameters;
       ...ReplacePoolPropertiesRequiredParameters;
@@ -462,7 +462,7 @@ interface Pools {
     Each request may remove up to 100 nodes.
     """)
   @route("/pools/{poolId}/removenodes")
-  removeNodes is PostOperationNew<
+  removeNodes is PostOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -474,7 +474,7 @@ interface Pools {
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @doc("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @route("/supportedimages")
-  listSupportedImages is ListOperationNew<
+  listSupportedImages is ListOperation<
     {
       ...CommonListParameters;
       ...ListSupportedImagesParameters;
@@ -488,7 +488,7 @@ interface Pools {
     use a list query.
     """)
   @route("/nodecounts")
-  listPoolNodeCounts is ListOperationNew<
+  listPoolNodeCounts is ListOperation<
     {
       ...CommonListParameters;
       ...ListPoolNodeCountsParameters;
@@ -676,7 +676,7 @@ interface Jobs {
     that the Job is being deleted.
     """)
   @route("/jobs/{jobId}")
-  deleteJob is DeleteOperationNew<
+  deleteJob is DeleteOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -689,7 +689,7 @@ interface Jobs {
   @summary("Gets information about the specified Job.")
   @doc("Gets information about the specified Job.")
   @route("/jobs/{jobId}")
-  getJob is ReadOperationNew<
+  getJob is ReadOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -706,7 +706,7 @@ interface Jobs {
     element, then the Job keeps the existing constraints.
     """)
   @route("/jobs/{jobId}")
-  updateJob is UpdateOperationNew<
+  updateJob is UpdateOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -722,7 +722,7 @@ interface Jobs {
     with this request, then the Batch service will remove the existing constraints.
     """)
   @route("/jobs/{jobId}")
-  replaceJob is ReplaceOperationNew<
+  replaceJob is ReplaceOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -743,7 +743,7 @@ interface Jobs {
     the request fails with status code 409.
     """)
   @route("/jobs/{jobId}/disable")
-  disableJob is PostOperationNew<
+  disableJob is PostOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -762,7 +762,7 @@ interface Jobs {
     than 180 days ago, those Tasks will not run.
     """)
   @route("/jobs/{jobId}/enable")
-  enableJob is PostOperationNew<
+  enableJob is PostOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -781,7 +781,7 @@ interface Jobs {
     Tasks cannot be added and any remaining active Tasks will not be scheduled.
     """)
   @route("/jobs/{jobId}/terminate")
-  terminateJob is PostOperationNew<
+  terminateJob is PostOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -804,7 +804,7 @@ interface Jobs {
     engineers.
     """)
   @route("/jobs")
-  createJob is CreateOperationNew<
+  createJob is CreateOperation<
     {
       ...CommonJsonParameters;
       ...CreateJobRequiredParameters;
@@ -815,7 +815,7 @@ interface Jobs {
   @summary("Lists all of the Jobs in the specified Account.")
   @doc("Lists all of the Jobs in the specified Account.")
   @route("/jobs")
-  listJobs is ListOperationNew<
+  listJobs is ListOperation<
     {
       ...CommonListParameters;
       ...ListJobsParameters;
@@ -826,7 +826,7 @@ interface Jobs {
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
   @doc("Lists the Jobs that have been created under the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/jobs")
-  listJobsFromSchedule is ListOperationNew<
+  listJobsFromSchedule is ListOperation<
     {
       ...CommonListParameters;
       ...ListJobsFromScheduleRequiredParameters;
@@ -848,7 +848,7 @@ interface Jobs {
     JobPreparationTaskNotSpecified.
     """)
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
-  listJobPreparationAndReleaseTaskStatus is ListOperationNew<
+  listJobPreparationAndReleaseTaskStatus is ListOperation<
     {
       ...CommonListParameters;
       ...ListJobPreparationAndReleaseTaskStatusRequiredParameters;
@@ -865,7 +865,7 @@ interface Jobs {
     up to date. If you need exact task counts, use a list query.
     """)
   @route("/jobs/{jobId}/taskcounts")
-  getJobTaskCounts is ReadOperationNew<
+  getJobTaskCounts is ReadOperation<
     {
       ...CommonParameters;
       ...getJobTaskCountsParameters;
@@ -948,7 +948,7 @@ interface Certificates {
   @summary("Creates a Certificate to the specified Account.")
   @doc("Creates a Certificate to the specified Account.")
   @route("/certificates")
-  createCertificate is CreateOperationNew<
+  createCertificate is CreateOperation<
     {
       ...CommonJsonParameters;
       ...CreateCertificateRequiredParameters;
@@ -960,7 +960,7 @@ interface Certificates {
   @summary("Lists all of the Certificates that have been added to the specified Account.")
   @doc("Lists all of the Certificates that have been added to the specified Account.")
   @route("/certificates")
-  listCertificates is ListOperationNew<
+  listCertificates is ListOperation<
     {
       ...CommonListParameters;
       ...ListCertificatesOptionalParameters;
@@ -980,7 +980,7 @@ interface Certificates {
     then you can try again to delete the Certificate.
     """)
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
-  cancelCertificateDeletion is PostOperationNew<
+  cancelCertificateDeletion is PostOperation<
     {
       ...CommonParameters;
       ...CancelCertificateDeletionRequiredParameters;
@@ -1002,7 +1002,7 @@ interface Certificates {
     active if you decide that you want to continue using the Certificate.
     """)
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-  deleteCertificate is DeleteOperationNew<
+  deleteCertificate is DeleteOperation<
     {
       ...CommonParameters;
       ...DeleteCertificateRequiredParameters;
@@ -1013,7 +1013,7 @@ interface Certificates {
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
   @doc("Gets information about the specified Certificate.")
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-  getCertificate is ReadOperationNew<
+  getCertificate is ReadOperation<
     {
       ...CommonParameters;
       ...GetCertificateRequiredParameters;
@@ -1140,7 +1140,7 @@ interface JobSchedules {
   @summary("Checks the specified Job Schedule exists.")
   @doc("Checks the specified Job Schedule exists.")
   @route("/jobschedules/{jobScheduleId}")
-  jobScheduleExists is ResourceInfoOperationWithAdditionalResponseNew<
+  jobScheduleExists is ResourceInfoOperationWithAdditionalResponse<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1159,7 +1159,7 @@ interface JobSchedules {
     though they are still counted towards Account lifetime statistics.
     """)
   @route("/jobschedules/{jobScheduleId}")
-  deleteJobSchedule is DeleteOperationNew<
+  deleteJobSchedule is DeleteOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1171,7 +1171,7 @@ interface JobSchedules {
 
   @doc("Gets information about the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}")
-  getJobSchedule is ReadOperationNew<
+  getJobSchedule is ReadOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1190,7 +1190,7 @@ interface JobSchedules {
     running Jobs are unaffected.
     """)
   @route("/jobschedules/{jobScheduleId}")
-  updateJobSchedule is UpdateOperationNew<
+  updateJobSchedule is UpdateOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -1208,7 +1208,7 @@ interface JobSchedules {
     running Jobs are unaffected.
     """)
   @route("/jobschedules/{jobScheduleId}")
-  replaceJobSchedule is ReplaceOperationNew<
+  replaceJobSchedule is ReplaceOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -1220,7 +1220,7 @@ interface JobSchedules {
   @summary("Disables a Job Schedule.")
   @doc("No new Jobs will be created until the Job Schedule is enabled again.")
   @route("/jobschedules/{jobScheduleId}/disable")
-  disableJobSchedule is PostOperationNew<
+  disableJobSchedule is PostOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1232,7 +1232,7 @@ interface JobSchedules {
   @summary("Enables a Job Schedule.")
   @doc("Enables a Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/enable")
-  enableJobSchedule is PostOperationNew<
+  enableJobSchedule is PostOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1244,7 +1244,7 @@ interface JobSchedules {
   @summary("Terminates a Job Schedule.")
   @doc("Terminates a Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/terminate")
-  terminateJobSchedule is PostOperationNew<
+  terminateJobSchedule is PostOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1257,7 +1257,7 @@ interface JobSchedules {
   @summary("Creates a Job Schedule to the specified Account.")
   @doc("Creates a Job Schedule to the specified Account.")
   @route("/jobschedules")
-  createJobSchedule is CreateOperationNew<
+  createJobSchedule is CreateOperation<
     {
       ...CommonJsonParameters;
       ...CreateJobScheduleParameters;
@@ -1268,7 +1268,7 @@ interface JobSchedules {
   @summary("Lists all of the Job Schedules in the specified Account.")
   @doc("Lists all of the Job Schedules in the specified Account.")
   @route("/jobschedules")
-  listJobSchedules is ListOperationNew<
+  listJobSchedules is ListOperation<
     {
       ...CommonListParameters;
       ...ListJobSchedulesParameters;
@@ -1491,7 +1491,7 @@ interface Tasks {
     the Batch service and left in whatever state it was in at that time.
     """)
   @route("/jobs/{jobId}/tasks")
-  createTask is CreateOperationNew<
+  createTask is CreateOperation<
     {
       ...CommonJsonParameters;
       ...CreateTaskRequiredParameters;
@@ -1506,7 +1506,7 @@ interface Tasks {
     information about subtasks.
     """)
   @route("/jobs/{jobId}/tasks")
-  listTasks is ListOperationNew<
+  listTasks is ListOperation<
     {
       ...CommonListParameters;
       ...ListTasksRequiredParameters;
@@ -1533,7 +1533,7 @@ interface Tasks {
     service and left in whatever state it was in at that time.
     """)
   @route("/jobs/{jobId}/addtaskcollection")
-  createTaskCollection is PostOperationNew<
+  createTaskCollection is PostOperation<
     {
       ...CommonJsonParameters;
       ...CreateTaskCollectionParameters;
@@ -1550,7 +1550,7 @@ interface Tasks {
     background.
     """)
   @route("/jobs/{jobId}/tasks/{taskId}")
-  deleteTask is DeleteOperationNew<
+  deleteTask is DeleteOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1566,7 +1566,7 @@ interface Tasks {
     information about subtasks.
     """)
   @route("/jobs/{jobId}/tasks/{taskId}")
-  getTask is ReadOperationNew<
+  getTask is ReadOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1578,7 +1578,7 @@ interface Tasks {
 
   @doc("Updates the properties of the specified Task.")
   @route("/jobs/{jobId}/tasks/{taskId}")
-  replaceTask is ReplaceOperationNew<
+  replaceTask is ReplaceOperation<
     {
       ...CommonJsonParameters;
       ...BatchMatchHeaders;
@@ -1594,7 +1594,7 @@ interface Tasks {
     """)
   @doc("If the Task is not a multi-instance Task then this returns an empty collection.")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
-  listSubTasks is ReadOperationNew<
+  listSubTasks is ReadOperation<
     {
       ...CommonParameters;
       ...ListSubTasksRequiredParameters;
@@ -1610,7 +1610,7 @@ interface Tasks {
     primary task; subtasks are then terminated asynchronously in the background.
     """)
   @route("/jobs/{jobId}/tasks/{taskId}/terminate")
-  terminateTask is PostOperationNew<
+  terminateTask is PostOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1633,7 +1633,7 @@ interface Tasks {
     will fail if the Job has completed (or is terminating or deleting).
     """)
   @route("/jobs/{jobId}/tasks/{taskId}/reactivate")
-  reactivateTask is PostOperationNew<
+  reactivateTask is PostOperation<
     {
       ...CommonParameters;
       ...BatchMatchHeaders;
@@ -1645,7 +1645,7 @@ interface Tasks {
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
   @doc("Deletes the specified Task file from the Compute Node where the Task ran.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-  deleteTaskFile is DeleteOperationNew<
+  deleteTaskFile is DeleteOperation<
     {
       ...CommonParameters;
       ...BatchTaskFileClientPathContent;
@@ -1656,7 +1656,7 @@ interface Tasks {
 
   @doc("Returns the content of the specified Task file.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-  getTaskFile is FileOperationNew<
+  getTaskFile is FileOperation<
     {
       ...CommonParameters;
       ...BatchTaskFileClientPathContent;
@@ -1677,7 +1677,7 @@ interface Tasks {
   @summary("Lists the files in a Task's directory on its Compute Node.")
   @doc("Lists the files in a Task's directory on its Compute Node.")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
-  listTaskFiles is ListOperationNew<
+  listTaskFiles is ListOperation<
     {
       ...CommonListParameters;
       ...ListTaskFilesRequiredParameters;
@@ -2003,7 +2003,7 @@ interface Nodes {
     running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users")
-  createNodeUser is CreateOperationNew<
+  createNodeUser is CreateOperation<
     {
       ...CommonJsonParameters;
       ...CreateNodeUserRequiredParameters;
@@ -2017,7 +2017,7 @@ interface Nodes {
     running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
-  deleteNodeUser is DeleteOperationNew<
+  deleteNodeUser is DeleteOperation<
     {
       ...CommonParameters;
       ...DeleteNodeUserRequiredParameters;
@@ -2035,7 +2035,7 @@ interface Nodes {
     Account on a Compute Node only when it is in the idle or running state.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
-  replaceNodeUser is ReplaceOperationNew<
+  replaceNodeUser is ReplaceOperation<
     {
       ...CommonJsonParameters;
       ...ReplaceNodeUserRequiredParameters;
@@ -2046,7 +2046,7 @@ interface Nodes {
   @summary("Gets information about the specified Compute Node.")
   @doc("Gets information about the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}")
-  getNode is ReadOperationNew<
+  getNode is ReadOperation<
     {
       ...CommonParameters;
       ...GetNodeRequiredParameters;
@@ -2058,7 +2058,7 @@ interface Nodes {
   @summary("Restarts the specified Compute Node.")
   @doc("You can restart a Compute Node only if it is in an idle or running state.")
   @route("/pools/{poolId}/nodes/{nodeId}/reboot")
-  rebootNode is PostOperationNew<
+  rebootNode is PostOperation<
     {
       ...CommonJsonParameters;
       ...RebootNodeOptionalParameters;
@@ -2070,7 +2070,7 @@ interface Nodes {
   @summary("Starts the specified Compute Node.")
   @doc("You can start a Compute Node only if it has been deallocated.")
   @route("/pools/{poolId}/nodes/{nodeId}/start")
-  startNode is PostOperationNew<
+  startNode is PostOperation<
     {
       ...CommonParameters;
       ...StartNodeRequiredParameters;
@@ -2081,7 +2081,7 @@ interface Nodes {
   @summary("Deallocates the specified Compute Node.")
   @doc("You can deallocate a Compute Node only if it is in an idle or running state.")
   @route("/pools/{poolId}/nodes/{nodeId}/deallocate")
-  deallocateNode is PostOperationNew<
+  deallocateNode is PostOperation<
     {
       ...CommonJsonParameters;
       ...DeallocateNodeOptionalParameters;
@@ -2097,7 +2097,7 @@ interface Nodes {
     cloud service configuration property.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/reimage")
-  reimageNode is PostOperationNew<
+  reimageNode is PostOperation<
     {
       ...CommonJsonParameters;
       ...ReimageNodeRequiredParameters;
@@ -2112,7 +2112,7 @@ interface Nodes {
     scheduling state is enabled.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/disablescheduling")
-  disableNodeScheduling is PostOperationNew<
+  disableNodeScheduling is PostOperation<
     {
       ...CommonJsonParameters;
       ...DisableNodeSchedulingRequiredParameters;
@@ -2127,7 +2127,7 @@ interface Nodes {
     state is disabled
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/enablescheduling")
-  enableNodeScheduling is PostOperationNew<
+  enableNodeScheduling is PostOperation<
     {
       ...CommonParameters;
       ...EnableNodeSchedulingRequiredParameters;
@@ -2141,7 +2141,7 @@ interface Nodes {
     you must create a user Account on the Compute Node.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
-  getNodeRemoteLoginSettings is ReadOperationNew<
+  getNodeRemoteLoginSettings is ReadOperation<
     {
       ...CommonParameters;
       ...GetNodeRemoteLoginSettingsRequiredParameters;
@@ -2160,7 +2160,7 @@ interface Nodes {
     support to aid in debugging issues with the Batch service.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
-  uploadNodeLogs is PostOperationNew<
+  uploadNodeLogs is PostOperation<
     {
       ...CommonJsonParameters;
       ...UploadNodeLogsRequiredParameters;
@@ -2171,7 +2171,7 @@ interface Nodes {
   @summary("Lists the Compute Nodes in the specified Pool.")
   @doc("Lists the Compute Nodes in the specified Pool.")
   @route("/pools/{poolId}/nodes")
-  listNodes is ListOperationNew<
+  listNodes is ListOperation<
     {
       ...CommonListParameters;
       ...ListNodesRequiredParameters;
@@ -2183,7 +2183,7 @@ interface Nodes {
   @summary("Gets information about the specified Compute Node Extension.")
   @doc("Gets information about the specified Compute Node Extension.")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}")
-  getNodeExtension is ReadOperationNew<
+  getNodeExtension is ReadOperation<
     {
       ...CommonParameters;
       ...GetNodeExtensionRequiredParameters;
@@ -2195,7 +2195,7 @@ interface Nodes {
   @summary("Lists the Compute Nodes Extensions in the specified Pool.")
   @doc("Lists the Compute Nodes Extensions in the specified Pool.")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
-  listNodeExtensions is ListOperationNew<
+  listNodeExtensions is ListOperation<
     {
       ...CommonListParameters;
       ...ListNodeExtensionsRequiredParameters;
@@ -2207,7 +2207,7 @@ interface Nodes {
   @summary("Deletes the specified file from the Compute Node.")
   @doc("Deletes the specified file from the Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
-  deleteNodeFile is DeleteOperationNew<
+  deleteNodeFile is DeleteOperation<
     {
       ...CommonParameters;
       ...BatchNodeFileClientPathContent;
@@ -2218,7 +2218,7 @@ interface Nodes {
 
   @doc("Returns the content of the specified Compute Node file.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
-  getNodeFile is FileOperationNew<
+  getNodeFile is FileOperation<
     {
       ...CommonParameters;
       ...BatchNodeFileClientPathContent;
@@ -2239,7 +2239,7 @@ interface Nodes {
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
   @doc("Lists all of the files in Task directories on the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files")
-  listNodeFiles is ListOperationNew<
+  listNodeFiles is ListOperation<
     {
       ...CommonListParameters;
       ...ListNodeFilesRequiredParameters;
