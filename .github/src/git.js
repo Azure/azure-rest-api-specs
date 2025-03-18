@@ -4,7 +4,10 @@
 /* v8 ignore start */
 
 import { execRoot } from "./exec.js";
-import { ILogger } from "./logger.js";
+
+/**
+ * @typedef {import('./logger.js').ILogger} ILogger
+ */
 
 /**
  * @param {string} baseCommitish

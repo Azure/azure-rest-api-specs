@@ -1,6 +1,8 @@
 // @ts-check
 
-import { ILogger } from "../../src/logger.js";
+/**
+ * @typedef {import('../../src/logger.js').ILogger} ILogger
+ */
 
 /**
  * @implements {ILogger}

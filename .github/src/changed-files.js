@@ -1,7 +1,10 @@
 // @ts-check
 
 import { diff } from "./git.js";
-import { ILogger } from "./logger.js";
+
+/**
+ * @typedef {import('./logger.js').ILogger} ILogger
+ */
 
 /**
  * @param {Object} [options]

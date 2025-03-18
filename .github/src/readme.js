@@ -2,7 +2,10 @@
 
 import { marked } from "marked";
 import yaml from "yaml";
-import { ILogger } from "./logger.js";
+
+/**
+ * @typedef {import('./logger.js').ILogger} ILogger
+ */
 
 /**
  * @param {string} markdown

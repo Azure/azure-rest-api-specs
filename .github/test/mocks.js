@@ -1,7 +1,10 @@
 // @ts-check
 
 import { vi } from "vitest";
-import { ILogger } from "../src/logger.js";
+
+/**
+ * @typedef {import('../src/logger.js').ILogger} ILogger
+ */
 
 /**
  * @returns {ILogger}
