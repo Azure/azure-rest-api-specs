@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   sdk-breaking-change-labels:
-    if: ${{ contains(github.event.check_run.name, '(SDK Generation Job)') }}
+    if: ${{ contains(github.event.check_run.name, '(SDK Generation Job)') && github.event.check_run.check_suite.app.name == 'Azure Pipelines'}}
     name: SDK Breaking Change Labels (Preview)
     runs-on: ubuntu-24.04
     steps:
