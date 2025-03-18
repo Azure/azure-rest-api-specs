@@ -738,8 +738,8 @@ model NotificationMessagesSendRequestBody {
   body: NotificationContent;
 }
 
-@added(Versions.c2025_03_01_Preview)
-@doc("The options of the outbound delivery strategy for messages sent by emplyees in a conversation.")
+@added(Versions.c2025_04_01_Preview)
+@doc("The options of the outbound delivery strategy for messages sent by participants in a conversation.")
 union OutboundDeliveryStrategyKind {
   string,
 
@@ -751,14 +751,14 @@ union OutboundDeliveryStrategyKind {
 }
 
 @clientName("ConversationMessage", "csharp")
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Details of a message.")
 model Message {
   @doc("Content of the message.")
   content: string;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @discriminator("kind")
 @resource("participants") // participants add/remove
 @parentResource(Conversation)
@@ -776,7 +776,7 @@ model ConversationParticipant {
   kind: ParticipantKind;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Internal conversation participant.")
 model InternalConversationParticipant extends ConversationParticipant {
   @doc("Participant type is internal.")
@@ -786,7 +786,7 @@ model InternalConversationParticipant extends ConversationParticipant {
   contact: Contact;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("External conversation participant.")
 model ExternalConversationParticipant extends ConversationParticipant {
   @doc("Participant type is external.")
@@ -796,7 +796,7 @@ model ExternalConversationParticipant extends ConversationParticipant {
   contacts: Contact[];
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("The type of a participant in a threaded conversation.")
 union ParticipantKind {
   string,
@@ -808,24 +808,24 @@ union ParticipantKind {
   external: "external",
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Request payload for sending a conversation message.")
 model SendConversationMessageOptions {
   @doc("Details of a send conversation message request.")
   request: ConversationMessageContent;
 
-  @doc("The options of the outbound delivery strategy for messages sent by emplyees in a conversation.\r\nSupports internalOnly, allChannels.")
+  @doc("The options of the outbound delivery strategy for messages sent by participants in a conversation.\r\nSupports internalOnly, allChannels.")
   outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Result of the send conversation message operation.")
 model SendConversationMessageResult {
   @doc("A server-generated Advanced Messaging conversation message id.")
   messageId: string;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @resource("messages/conversations")
 @doc("Request payload for creating a conversation.")
 model CreateConversationRequest {
@@ -838,14 +838,14 @@ model CreateConversationRequest {
   initialMessage?: Message;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Response for the create conversation operation.")
 model CreateConversationResult {
   @doc("Server-generated conversation ID.")
   id: string;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @resource("messages/conversations")
 @doc("A conversation.")
 @clientName("CommunicationConversation")
@@ -861,16 +861,16 @@ model Conversation {
   @doc("List of delivery channel IDs.")
   deliveryChannelIds?: string[];
 
-  @added(Versions.c2025_03_01_Preview)
+  @added(Versions.c2025_04_01_Preview)
   @doc("Outbound delivery strategy for the conversation.")
   outboundDeliveryStrategy?: OutboundDeliveryStrategyKind;
 
-  @added(Versions.c2025_03_01_Preview)
+  @added(Versions.c2025_04_01_Preview)
   @doc("List of participants involved in the conversation.")
   participants?: ConversationParticipant[];
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Conversation message send request body.")
 model ConversationThreadSendRequestBody {
   @doc("Details of the conversation message to send.")
@@ -878,7 +878,7 @@ model ConversationThreadSendRequestBody {
   options: SendConversationMessageOptions;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Add participants to a conversation request body.")
 model AddParticipantsRequestBody {
   @doc("Details of the payload for adding participants to a conversation.")
@@ -886,7 +886,7 @@ model AddParticipantsRequestBody {
   options: AddParticipantsOptions;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Remove participants request body.")
 model RemoveParticipantsRequestBody {
   @doc("Details of the request body for removing participants from a conversation.")
@@ -894,21 +894,21 @@ model RemoveParticipantsRequestBody {
   options: RemoveParticipantsOptions;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Response for the add participants operation.")
 model AddParticipantsResult {
   @doc("List of Ids with Errors if failed to be added")
   invalidParticipants: UpdateParticipantsResult[];
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Response for the remove participants operation.")
 model RemoveParticipantsResult {
   @doc("List of Ids with Errors if failed to be added")
   invalidParticipants: UpdateParticipantsResult[];
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Response for the remove participants operation.")
 model UpdateParticipantsResult {
   @doc("Participant User Id.")
@@ -918,7 +918,7 @@ model UpdateParticipantsResult {
   error?: Azure.Core.Foundations.Error;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @resource("messages")
 @parentResource(Conversation)
 @doc("The conversation message as returned from the service.")
@@ -946,7 +946,7 @@ model ConversationMessageItem {
 
 @clientName("ConversationContact", "csharp")
 @discriminator("kind")
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Details of an external platform contact.")
 model Contact {
   @doc("External platform identifier.")
@@ -956,7 +956,7 @@ model Contact {
   kind: MessagePlatformKind;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Communication Contact.")
 model CommunicationContact extends Contact
 {
@@ -964,7 +964,7 @@ model CommunicationContact extends Contact
   kind: MessagePlatformKind.communication;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Bot Contact.")
 model BotContact extends Contact
 {
@@ -975,7 +975,7 @@ model BotContact extends Contact
   botAppId: string;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("WhatsApp Contact.")
 model WhatsAppContact extends Contact
 {
@@ -983,7 +983,7 @@ model WhatsAppContact extends Contact
   kind: MessagePlatformKind.whatsApp;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Defines the type of message platform.")
 union MessagePlatformKind {
   string,
@@ -998,14 +998,14 @@ union MessagePlatformKind {
   whatsApp: "whatsApp",
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Request payload for adding participants to a conversation.")
 model AddParticipantsOptions {
   @doc("List of participants to add.")
   participants: ConversationParticipant[];
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @doc("Request payload for removing participants from a conversation.")
 model RemoveParticipantsOptions {
   @doc("The participant IDs to remove.")
@@ -1018,7 +1018,7 @@ model GetConversationThreadAnalysisResult {
   summary: string;
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @discriminator("kind")
 @withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("Details of the conversation message content.")
@@ -1026,42 +1026,42 @@ model ConversationMessageContent {
   ...NotificationContent
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send a text conversation message.")
 model TextConversationMessageContent extends ConversationMessageContent {
   ...TextNotificationContent
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send an image conversation message.")
 model ImageConversationMessageContent extends ConversationMessageContent {
   ...ImageNotificationContent
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send a document conversation message.")
 model DocumentConversationMessageContent extends ConversationMessageContent {
   ...DocumentNotificationContent
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send a video conversation message.")
 model VideoConversationMessageContent extends ConversationMessageContent {
   ...VideoNotificationContent
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send an audio conversation message.")
 model AudioConversationMessageContent  extends ConversationMessageContent {
   ...AudioNotificationContent
 }
 
-@added(Versions.c2025_03_01_Preview)
+@added(Versions.c2025_04_01_Preview)
 @withoutOmittedProperties("to"|"channelRegistrationId")
 @doc("A request to send a template conversation message.")
 model TemplateConversationMessageContent extends ConversationMessageContent {
@@ -1082,7 +1082,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2025_01_15_Preview: "2025-01-15-preview",
 
-  @doc("Azure Communication Messages 2025-03-01-preview api version")
+  @doc("Azure Communication Messages 2025-04-01-preview api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  c2025_03_01_Preview: "2025-03-01-preview",
+  c2025_04_01_Preview: "2025-04-01-preview",
 }

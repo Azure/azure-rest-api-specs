@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "CommunicationMessagesClient",
-    "version": "2025-03-01-preview",
+    "version": "2025-04-01-preview",
     "description": "Azure Communication Messages Service",
     "x-typespec-generated": [
       {
@@ -993,6 +993,92 @@
     }
   },
   "definitions": {
+    "ActionBindings": {
+      "type": "object",
+      "description": "Binding actions to the interactive message.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MessageActionBindingKind",
+          "description": "Kind of the MessageActionBinding."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "ActionGroup": {
+      "type": "object",
+      "description": "The Action Group content.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the ActionGroup."
+        },
+        "items": {
+          "type": "array",
+          "description": "Array of items in ActionGroup.",
+          "items": {
+            "$ref": "#/definitions/ActionGroupItem"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "items"
+      ]
+    },
+    "ActionGroupContent": {
+      "type": "object",
+      "description": "The action content of type ActionGroup.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the actionGroup content."
+        },
+        "groups": {
+          "type": "array",
+          "description": "Set or group of actions.",
+          "items": {
+            "$ref": "#/definitions/ActionGroup"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "title",
+        "groups"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "group"
+    },
+    "ActionGroupItem": {
+      "type": "object",
+      "description": "The Action group item in the content.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the Item."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the Item."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Item."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description"
+      ]
+    },
     "AddParticipantsOptions": {
       "type": "object",
       "description": "Request payload for adding participants to a conversation.",
@@ -1150,6 +1236,46 @@
       ],
       "x-ms-discriminator-value": "bot"
     },
+    "ButtonContent": {
+      "type": "object",
+      "description": "The message content of type Button information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Id of the button content."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the button content."
+        }
+      },
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "ButtonSetContent": {
+      "type": "object",
+      "description": "The message content of type ButtonSet/ List of buttons information.",
+      "properties": {
+        "buttons": {
+          "type": "array",
+          "description": "Unique Id of the button content.",
+          "items": {
+            "$ref": "#/definitions/ButtonContent"
+          }
+        }
+      },
+      "required": [
+        "buttons"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "buttonSet"
+    },
     "CommunicationContact": {
       "type": "object",
       "description": "Communication Contact.",
@@ -1206,7 +1332,10 @@
         "document",
         "video",
         "audio",
-        "template"
+        "template",
+        "sticker",
+        "reaction",
+        "interactive"
       ],
       "x-ms-enum": {
         "name": "CommunicationMessageKind",
@@ -1246,6 +1375,21 @@
             "name": "template",
             "value": "template",
             "description": "Template message type."
+          },
+          {
+            "name": "sticker",
+            "value": "sticker",
+            "description": "Sticker message type."
+          },
+          {
+            "name": "reaction",
+            "value": "reaction",
+            "description": "Reaction message type."
+          },
+          {
+            "name": "interactive",
+            "value": "interactive",
+            "description": "Interactive Actionable message type."
           }
         ]
       }
@@ -1412,6 +1556,26 @@
       ],
       "x-ms-discriminator-value": "document"
     },
+    "DocumentMessageContent": {
+      "type": "object",
+      "description": "The message content of type document information.",
+      "properties": {
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "MediaUri of the media content."
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "document"
+    },
     "DocumentNotificationContent": {
       "type": "object",
       "description": "A request to send a document notification.",
@@ -1499,6 +1663,26 @@
       ],
       "x-ms-discriminator-value": "image"
     },
+    "ImageMessageContent": {
+      "type": "object",
+      "description": "The message content of type image information.",
+      "properties": {
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "MediaUri of the media content."
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
+    },
     "ImageNotificationContent": {
       "type": "object",
       "description": "A request to send an image notification.",
@@ -1523,6 +1707,51 @@
       ],
       "x-ms-discriminator-value": "image"
     },
+    "InteractiveMessage": {
+      "type": "object",
+      "description": "The Interactive message content to which user can read and respond.",
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/MessageContent",
+          "description": "Gets or Sets Header content. Supports the following types:text, images etc."
+        },
+        "body": {
+          "$ref": "#/definitions/TextMessageContent",
+          "description": "Gets or Sets Message body content. Emojis, markdown, and links are supported."
+        },
+        "footer": {
+          "$ref": "#/definitions/TextMessageContent",
+          "description": "Gets or Sets Message footer content. Emojis, markdown, and links are supported."
+        },
+        "action": {
+          "$ref": "#/definitions/ActionBindings",
+          "description": "The binding object to get or set Action which describes options user have to respond to message."
+        }
+      },
+      "required": [
+        "body",
+        "action"
+      ]
+    },
+    "InteractiveNotificationContent": {
+      "type": "object",
+      "description": "A request to send an Interactive message notification.",
+      "properties": {
+        "interactiveMessage": {
+          "$ref": "#/definitions/InteractiveMessage",
+          "description": "The interactive message content."
+        }
+      },
+      "required": [
+        "interactiveMessage"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "interactive"
+    },
     "InternalConversationParticipant": {
       "type": "object",
       "description": "Internal conversation participant.",
@@ -1541,6 +1770,31 @@
         }
       ],
       "x-ms-discriminator-value": "internal"
+    },
+    "LinkContent": {
+      "type": "object",
+      "description": "The message content of type Url information.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the url content."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The url in the content."
+        }
+      },
+      "required": [
+        "title",
+        "url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "url"
     },
     "MediaNotificationContent": {
       "type": "object",
@@ -1578,6 +1832,104 @@
       "required": [
         "content"
       ]
+    },
+    "MessageActionBindingKind": {
+      "type": "string",
+      "description": "The Kind of interactive message channel action binding like WhatsAppListAction.",
+      "enum": [
+        "whatsAppListAction",
+        "whatsAppButtonAction",
+        "whatsAppUrlAction"
+      ],
+      "x-ms-enum": {
+        "name": "MessageActionBindingKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "whatsAppListAction",
+            "value": "whatsAppListAction",
+            "description": "The WhatsApp List action binding kind."
+          },
+          {
+            "name": "whatsAppButtonAction",
+            "value": "whatsAppButtonAction",
+            "description": "The WhatsApp Button action binding kind."
+          },
+          {
+            "name": "whatsAppUrlAction",
+            "value": "whatsAppUrlAction",
+            "description": "The WhatsApp Url action binding kind."
+          }
+        ]
+      }
+    },
+    "MessageContent": {
+      "type": "object",
+      "description": "The message content object used to create interactive messages components.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MessageContentKind",
+          "description": "Kind of MessageContent."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "MessageContentKind": {
+      "type": "string",
+      "description": "The kind of Interactive message content.",
+      "enum": [
+        "text",
+        "image",
+        "video",
+        "document",
+        "group",
+        "buttonSet",
+        "url"
+      ],
+      "x-ms-enum": {
+        "name": "MessageContentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "The text content type."
+          },
+          {
+            "name": "image",
+            "value": "image",
+            "description": "The image content type."
+          },
+          {
+            "name": "video",
+            "value": "video",
+            "description": "The video content type."
+          },
+          {
+            "name": "document",
+            "value": "document",
+            "description": "The document content type."
+          },
+          {
+            "name": "group",
+            "value": "group",
+            "description": "The ActionSet content type."
+          },
+          {
+            "name": "buttonSet",
+            "value": "buttonSet",
+            "description": "The ButtonSet content type."
+          },
+          {
+            "name": "url",
+            "value": "url",
+            "description": "The Url content type."
+          }
+        ]
+      }
     },
     "MessagePlatformKind": {
       "type": "string",
@@ -2008,7 +2360,7 @@
     },
     "OutboundDeliveryStrategyKind": {
       "type": "string",
-      "description": "The options of the outbound delivery strategy for messages sent by emplyees in a conversation.",
+      "description": "The options of the outbound delivery strategy for messages sent by participants in a conversation.",
       "enum": [
         "internalOnly",
         "allParticipants"
@@ -2118,6 +2470,30 @@
         ]
       }
     },
+    "ReactionNotificationContent": {
+      "type": "object",
+      "description": "A request to send a Reaction notification.",
+      "properties": {
+        "emoji": {
+          "type": "string",
+          "description": "emoji content like \\uD83D\\uDE00."
+        },
+        "messageId": {
+          "type": "string",
+          "description": "ID of the previous message you want to reply to."
+        }
+      },
+      "required": [
+        "emoji",
+        "messageId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "reaction"
+    },
     "RemoveParticipantsOptions": {
       "type": "object",
       "description": "Request payload for removing participants from a conversation.",
@@ -2160,7 +2536,7 @@
         },
         "outboundDeliveryStrategy": {
           "$ref": "#/definitions/OutboundDeliveryStrategyKind",
-          "description": "The options of the outbound delivery strategy for messages sent by emplyees in a conversation.\r\nSupports internalOnly, allChannels."
+          "description": "The options of the outbound delivery strategy for messages sent by participants in a conversation.\r\nSupports internalOnly, allChannels."
         }
       },
       "required": [
@@ -2196,6 +2572,26 @@
       "required": [
         "receipts"
       ]
+    },
+    "StickerNotificationContent": {
+      "type": "object",
+      "description": "A request to send a Sticker notification.",
+      "properties": {
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A media url for the file. Required if the type is one of the supported media types, e.g. image"
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NotificationContent"
+        }
+      ],
+      "x-ms-discriminator-value": "sticker"
     },
     "TemplateConversationMessageContent": {
       "type": "object",
@@ -2250,6 +2646,25 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConversationMessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "TextMessageContent": {
+      "type": "object",
+      "description": "The message content of type text information.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text value."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContent"
         }
       ],
       "x-ms-discriminator-value": "text"
@@ -2314,6 +2729,26 @@
       ],
       "x-ms-discriminator-value": "video"
     },
+    "VideoMessageContent": {
+      "type": "object",
+      "description": "The message content of type video information.",
+      "properties": {
+        "mediaUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "MediaUri of the media content."
+        }
+      },
+      "required": [
+        "mediaUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageContent"
+        }
+      ],
+      "x-ms-discriminator-value": "video"
+    },
     "VideoNotificationContent": {
       "type": "object",
       "description": "A request to send a video notification.",
@@ -2338,6 +2773,25 @@
       ],
       "x-ms-discriminator-value": "video"
     },
+    "WhatsAppButtonActionBindings": {
+      "type": "object",
+      "description": "WhatsApp Binding actions to the interactive message.",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ButtonSetContent",
+          "description": "Action content of Interactive message."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionBindings"
+        }
+      ],
+      "x-ms-discriminator-value": "whatsAppButtonAction"
+    },
     "WhatsAppContact": {
       "type": "object",
       "description": "WhatsApp Contact.",
@@ -2347,6 +2801,25 @@
         }
       ],
       "x-ms-discriminator-value": "whatsApp"
+    },
+    "WhatsAppListActionBindings": {
+      "type": "object",
+      "description": "WhatsApp List Binding actions to the interactive message.",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ActionGroupContent",
+          "description": "Action content of Interactive message."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionBindings"
+        }
+      ],
+      "x-ms-discriminator-value": "whatsAppListAction"
     },
     "WhatsAppMessageButtonSubType": {
       "type": "string",
@@ -2461,6 +2934,25 @@
         }
       ],
       "x-ms-discriminator-value": "whatsApp"
+    },
+    "WhatsAppUrlActionBindings": {
+      "type": "object",
+      "description": "WhatsApp Binding actions to the interactive message.",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/LinkContent",
+          "description": "Action content of Interactive message."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionBindings"
+        }
+      ],
+      "x-ms-discriminator-value": "whatsAppUrlAction"
     }
   },
   "parameters": {

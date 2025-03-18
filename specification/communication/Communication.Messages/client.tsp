@@ -7,7 +7,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@useDependency(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
+@useDependency(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview)
 namespace ClientForAcsMessages;
 
 @client({
@@ -28,7 +28,7 @@ interface NotificationMessagesClient
 interface MessageTemplateClient
   extends Azure.Communication.MessagesService.TemplateOperations {}
 
-@added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
+@added(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview)
 @client({
   name: "ConversationAdministrationClient",
   service: Azure.Communication.MessagesService,
@@ -42,7 +42,7 @@ interface ConversationAdministrationClient
     analyzeConversation is Azure.Communication.MessagesService.ConversationThreadOperations.analyzeConversation;
   }
 
-@added(Azure.Communication.MessagesService.Versions.c2025_03_01_Preview)
+@added(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview)
 @client({
   name: "ConversationThreadClient",
   service: Azure.Communication.MessagesService,
