@@ -21,8 +21,9 @@
     "vitest": "^3.0.7"
   },
   "scripts": {
-    "lint": "npm run lint:tsc",
-    "lint:tsc": "npx tsc && echo 'Type checking completed successfully'",
+    "lint": "npm run lint:eslint && npm run lint:tsc",
+    "lint:eslint": "eslint",
+    "lint:tsc": "tsc && echo 'Type checking completed successfully'",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   }
