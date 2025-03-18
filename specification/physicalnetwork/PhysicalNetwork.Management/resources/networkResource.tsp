@@ -14,9 +14,7 @@ using Azure.ResourceManager.Foundations;
 
 /** Microsoft.PhysicalNetwork Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.PhysicalNetwork management service",
-})
+@service(#{ title: "Microsoft.PhysicalNetwork management service" })
 @versioned(Versions)
 namespace Microsoft.PhysicalNetwork;
 

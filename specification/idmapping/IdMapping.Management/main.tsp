@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.IdMapping Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.IdMapping management service",
-})
+@service(#{ title: "Microsoft.IdMapping management service" })
 @versioned(Versions)
 namespace Microsoft.IdMapping;
 

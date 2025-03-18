@@ -17,7 +17,7 @@ model NetworkFabricSku extends Azure.ResourceManager.Foundations.ProxyResource {
   @path
   @key("networkFabricSkuName")
   @segment("networkFabricSkus")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The Network Fabric Sku properties */

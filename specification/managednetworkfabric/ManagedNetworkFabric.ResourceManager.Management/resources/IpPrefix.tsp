@@ -16,7 +16,7 @@ model IpPrefix extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("ipPrefixName")
   @segment("ipPrefixes")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The IP Prefix properties */
@@ -32,7 +32,7 @@ interface IpPrefixes {
   create is ArmResourceCreateOrReplaceAsync<IpPrefix>;
 
   @doc("API to update certain properties of the IP Prefix resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<IpPrefix, IpPrefixPatch>;
 
   @doc("Implements IP Prefix DELETE method.")

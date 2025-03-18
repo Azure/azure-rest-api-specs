@@ -23,7 +23,7 @@ model RoutingInfoModel is ProxyResource<RoutingInfoPropertiesFormat> {
   @path
   @key("routingInfo")
   @segment("routingInfo")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

@@ -66,7 +66,7 @@ model BfdProfileProperties {
   @doc("Minimum TTL")
   minimumTtl?: int32;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource provision state")
   provisioningState?: ProvisioningState;
 }

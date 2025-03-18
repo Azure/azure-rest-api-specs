@@ -5,11 +5,11 @@ namespace Microsoft.MobileNetwork;
 @doc("Site properties.")
 model SitePropertiesFormat {
   @doc("The provisioning state of the site resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("An array of IDs of the network functions deployed in the site. Deleting the site will delete any network functions that are deployed in the site.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkFunctions?: SubResource[];
 }
 

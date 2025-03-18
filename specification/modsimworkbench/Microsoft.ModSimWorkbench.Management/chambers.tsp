@@ -14,9 +14,7 @@ using Azure.Core.Traits;
 using TypeSpec.OpenAPI;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @armProviderNamespace
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
@@ -74,19 +72,19 @@ model Synopsys {
 
 @doc("License service settings.")
 model LicenseServices {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Cadence settings")
   cadence?: Cadence;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Ansys settings")
   ansys?: Ansys;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Synopsys settings")
   synopsys?: Synopsys;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Siemens settings")
   siemens?: Siemens;
 }
@@ -131,22 +129,22 @@ model ChamberProperties {
   ...PowerStateProperty;
   ...RestartAtProperty;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("License service settings.")
   licenseServices?: LicenseServices;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Directory for the chamber data pipeline inbound. E.g. /mount/datapipeline/datain")
   dataPipelineInboundPath?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Directory for the chamber data pipeline inbound. E.g. /mount/datapipeline/dataout")
   dataPipelineOutboundPath?: string;
 
   @removed(Versions.`2024-05-01-preview`)
   // Song and dance to remove default in new API version.
   @renamedFrom(Versions.`2024-05-01-preview`, "sku")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("SKU name.")
   oldSku?: string = "Standard";
 
@@ -154,7 +152,7 @@ model ChamberProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Sku is a valid envelope property"
   #deprecated "Use top-level sku.name"
   @added(Versions.`2024-05-01-preview`)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("SKU name.")
   sku?: string; // TODO: Deprecated. Use top-level sku.
 }
@@ -163,7 +161,7 @@ model ChamberProperties {
 @parentResource(Workbench)
 model Chamber is TrackedResource<ChamberProperties> {
   @doc("The name of the Chamber")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @segment("chambers")
   @key("chamberName")
   @TypeSpec.Http.path
@@ -172,13 +170,13 @@ model Chamber is TrackedResource<ChamberProperties> {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Availability Zones are a valid envelope property"
   @added(Versions.`2024-05-01-preview`)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The availability zones.")
   zones?: Array<string>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Sku is a valid envelope property"
   @added(Versions.`2024-05-01-preview`)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
   sku?: ChamberSku;
 }

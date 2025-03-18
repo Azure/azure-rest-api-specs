@@ -22,19 +22,19 @@ union PacketCaptureStatus {
 @doc("Packet capture session properties.")
 model PacketCapturePropertiesFormat {
   @doc("The provisioning state of the packet capture session resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The status of the packet capture session.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: PacketCaptureStatus;
 
   @doc("The reason the current packet capture session state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reason?: string;
 
   @doc("The start time of the packet capture session.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   captureStartTime?: utcDateTime;
 
   @doc("List of network interfaces to capture on.")
@@ -57,6 +57,6 @@ model PacketCapturePropertiesFormat {
   timeLimitInSeconds?: int32 = 18000;
 
   @doc("The list of output files of a packet capture session.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   outputFiles?: string[];
 }

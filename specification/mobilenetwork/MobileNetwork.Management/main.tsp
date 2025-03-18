@@ -47,9 +47,7 @@ using TypeSpec.Versioning;
 @doc("Mobile Network Management API")
 @armProviderNamespace("Microsoft.MobileNetwork")
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@service({
-  title: "MobileNetworkManagementClient",
-})
+@service(#{ title: "MobileNetworkManagementClient" })
 @versioned(Versions)
 namespace Microsoft.MobileNetwork;
 

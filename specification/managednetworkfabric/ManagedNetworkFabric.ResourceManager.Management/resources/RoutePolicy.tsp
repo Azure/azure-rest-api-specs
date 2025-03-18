@@ -17,7 +17,7 @@ model RoutePolicy extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("routePolicyName")
   @segment("routePolicies")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The RoutePolicy properties */
@@ -33,7 +33,7 @@ interface RoutePolicies {
   create is ArmResourceCreateOrReplaceAsync<RoutePolicy>;
 
   @doc("API to update certain properties of the Route Policy resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<RoutePolicy, RoutePolicyPatch>;
 
   @doc("Implements Route Policy DELETE method.")

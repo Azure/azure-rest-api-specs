@@ -31,11 +31,11 @@ model DiscoveryService
 @doc("Details of the Discovery Service.")
 @added(Versions.v2024_12_01_preview)
 model DiscoveryServiceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The discovery service rendezvous endpoints.")
   endpoints?: RendezvousEndpoints;
 }
@@ -44,7 +44,7 @@ model DiscoveryServiceProperties {
 @added(Versions.v2024_12_01_preview)
 model RendezvousEndpoints {
   @doc("The device endpoint for discovery")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deviceEndpoint?: RendezvousEndpoint;
 }
 
@@ -52,7 +52,7 @@ model RendezvousEndpoints {
 @added(Versions.v2024_12_01_preview)
 model RendezvousEndpoint {
   @doc("Hostname of the Rendezvous Endpoint.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostName?: string;
 }
 

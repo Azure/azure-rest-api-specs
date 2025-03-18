@@ -30,7 +30,7 @@ model WebhookResource extends Foundations.ProxyResource {
   @path
   @key("webhookName")
   @segment("webhooks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**

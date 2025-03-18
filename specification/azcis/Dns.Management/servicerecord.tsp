@@ -38,7 +38,7 @@ model ServiceRecordResourceProperties {
   azureLocation?: azureLocation;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ServiceRecordProvisioningState;
 }
 
@@ -49,7 +49,7 @@ model ServiceRecordResource is ProxyResource<ServiceRecordResourceProperties> {
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("serviceRecords") // start with lower case
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

@@ -177,7 +177,7 @@ union HomeNetworkPrivateKeysProvisioningState {
 @doc("Packet core control plane properties.")
 model PacketCoreControlPlanePropertiesFormat {
   @doc("The provisioning state of the packet core control plane resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The installation state of the packet core control plane resource.")
@@ -200,11 +200,11 @@ model PacketCoreControlPlanePropertiesFormat {
   version?: string;
 
   @doc("The currently installed version of the packet core software.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   installedVersion?: string;
 
   @doc("The previous version of the packet core software that was deployed. Used when performing the rollback action.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rollbackVersion?: string;
 
   @doc("The control plane interface on the access network. For 5G networks, this is the N2 interface. For 4G networks, this is the S1-MME interface.")
@@ -237,11 +237,11 @@ model PacketCoreControlPlanePropertiesFormat {
   interopSettings?: {};
 
   @doc("The provisioning state of the secret containing private keys and keyIds for SUPI concealment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   homeNetworkPrivateKeysProvisioning?: HomeNetworkPrivateKeysProvisioning;
 
   @doc("Managed-On-Behalf-Of configuration for packet core to manage the kubernetes cluster resources on behalf of the resource owner for the deployment on Nexus. This is a read-only property, valid only for the packet core deployments on Nexus.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 }
 
@@ -251,19 +251,19 @@ model Installation {
   desiredState?: DesiredInstallationState = DesiredInstallationState.Installed;
 
   @doc("Installation state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: InstallationState;
 
   @doc("Whether a reinstall of the packet core is required to pick up the latest configuration changes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reinstallRequired?: ReinstallRequired;
 
   @doc("Reason(s) for the current installation state of the packet core.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reasons?: InstallationReason[];
 
   @doc("A reference to an in-progress installation operation")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operation?: AsyncOperationId;
 }
 
@@ -283,7 +283,7 @@ model PlatformConfiguration {
   azureStackEdgeDevice?: AzureStackEdgeDeviceResourceId;
 
   @doc("The Azure Stack Edge devices where the packet core is deployed. If the packet core is deployed across multiple devices, all devices will appear in this list.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azureStackEdgeDevices?: AzureStackEdgeDeviceResourceId[];
 
   @doc("The Azure Stack HCI cluster where the packet core is deployed.")
@@ -329,18 +329,18 @@ model HttpsServerCertificate {
   certificateUrl: string;
 
   @doc("The provisioning state of the certificate.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioning?: CertificateProvisioning;
 }
 
 @doc("Certificate provisioning state")
 model CertificateProvisioning {
   @doc("The certificate's provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: CertificateProvisioningState;
 
   @doc("Reason for certificate provisioning failure.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reason?: string;
 }
 
@@ -379,7 +379,7 @@ model NASRerouteConfiguration {
 @doc("Home network private keys provisioning state.")
 model HomeNetworkPrivateKeysProvisioning {
   @doc("The provisioning state of the private keys for SUPI concealment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state: HomeNetworkPrivateKeysProvisioningState;
 }
 

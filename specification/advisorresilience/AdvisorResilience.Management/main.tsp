@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.AdvisorResilience Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.AdvisorResilience management service",
-})
+@service(#{ title: "Microsoft.AdvisorResilience management service" })
 @versioned(Microsoft.AdvisorResilience.Versions)
 namespace Microsoft.AdvisorResilience;
 

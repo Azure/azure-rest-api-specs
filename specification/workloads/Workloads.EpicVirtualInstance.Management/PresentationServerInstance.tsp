@@ -24,7 +24,7 @@ model PresentationServerInstance
   @path
   @key("presentationInstanceName")
   @segment("presentationInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -43,7 +43,7 @@ interface PresentationServerInstances {
   /**
    * Updates the Epic Presentation Services Instance resource. &lt;br&gt;&lt;br&gt;This can be used to update tags on the resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmTagsPatchSync<PresentationServerInstance>;
 
   /**

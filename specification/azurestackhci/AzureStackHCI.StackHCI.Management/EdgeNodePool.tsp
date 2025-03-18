@@ -21,7 +21,7 @@ model EdgeNodePoolResource is TrackedResource<EdgeNodePoolResourceProperties> {
   @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @segment("edgeNodePools")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -88,7 +88,7 @@ model NodePropertyForTheCategory {
   edgeNodeCategoryUid: string;
 
   @doc("The list of node models")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   nodeModels: NodeModelDetails[];
 
   @doc("The count of nodes")
@@ -104,7 +104,7 @@ model EdgeNodePoolResourceProperties {
   poolType: PoolTypeEnum;
 
   @doc("Properties of the pool")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   poolProperties: NodePropertyForTheCategory[];
 
   @doc("Allowed node categories for the pool based on the pool type")
@@ -120,6 +120,6 @@ model EdgeNodePoolResourceProperties {
   k8sClusterList: string[];
 
   @doc("Provisioning state of the storage container")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

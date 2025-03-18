@@ -23,7 +23,7 @@ model DatabaseServerInstance is TrackedResource<DatabaseServerProperties> {
   @path
   @key("databaseInstanceName")
   @segment("databaseInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -42,7 +42,7 @@ interface DatabaseServerInstances {
   /**
    * Updates the Database resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmTagsPatchSync<DatabaseServerInstance>;
 
   /**

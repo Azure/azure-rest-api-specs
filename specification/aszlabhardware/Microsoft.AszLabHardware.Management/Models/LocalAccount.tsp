@@ -1,10 +1,10 @@
 @doc("Base model representing a local BMC account")
 model LocalAccount {
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   @doc("Username for local account")
   username: string;
 
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("Password for local account")
   @secret
   password: string;

@@ -31,6 +31,6 @@ model ConnectionUriProperties {
 
   @doc("connection uri returned for the database")
   @secret
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionStringUri?: string;
 }

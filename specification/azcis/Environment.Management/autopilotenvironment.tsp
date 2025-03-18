@@ -27,7 +27,7 @@ model EnvironmentResourceProperties {
 
   @doc("The mode property indicates which files will be cloned to the new environment. There are two options. All: Will clone all the files including customer files to the new environment. Basic: Will clone only the environment basic files which is deployment.ini, allocation.ini, environment.ini, VirtualEnvironment.ini, UserProperty.ini, Machines.csv, owners.txt, access.txt.")
   @madeRequired(Versions.v2024_06_24_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   mode: EnvironmentMode;
 
   @doc("The Azure location")
@@ -35,7 +35,7 @@ model EnvironmentResourceProperties {
   azureLocation?: azureLocation;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EnvironmentProvisioningState;
 }
 
@@ -46,7 +46,7 @@ model EnvironmentResource
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("autopilotEnvironments") // start with lower case
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -76,4 +76,4 @@ union EnvironmentMode {
   All: "All",
 }
 
-@@visibility(EnvironmentResource.properties, "read", "create");
+@@visibility(EnvironmentResource.properties, Lifecycle.Read, Lifecycle.Create);

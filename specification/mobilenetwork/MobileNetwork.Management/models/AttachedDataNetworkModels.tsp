@@ -20,7 +20,7 @@ union NaptEnabled {
 @doc("Data network properties.")
 model AttachedDataNetworkPropertiesFormat {
   @doc("The provisioning state of the attached data network resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The user plane interface on the data network. For 5G networks, this is the N6 interface. For 4G networks, this is the SGi interface.")
@@ -42,7 +42,7 @@ model AttachedDataNetworkPropertiesFormat {
 
   @doc("The user equipment (UE) address pool prefixes for the attached data network from which the packet core instance will assign IP addresses to UEs. Can contain either static or dynamic UE IP Pools.\nThe packet core instance assigns an IP address to a UE when the UE sets up a PDU session. For a static UE IP Pool, the static IP address for a specific UE is set in StaticIPConfiguration on the corresponding SIM resource.\nYou must define either userEquipmentAddressPools, or at least one of userEquipmentAddressPoolPrefix or userEquipmentStaticAddressPoolPrefix. If you define more than one, they must be of the same size.")
   @minItems(1)
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   userEquipmentAddressPools?: UserEquipmentAddressPool[];
 }
 

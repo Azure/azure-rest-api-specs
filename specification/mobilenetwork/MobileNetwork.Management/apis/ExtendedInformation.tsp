@@ -23,7 +23,7 @@ model ExtendedUeInfo is ProxyResource<ExtendedUeInfoProperties> {
   @path
   @key("extendedInformation")
   @segment("extendedInformation")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

@@ -15,9 +15,7 @@ using TypeSpec.OpenAPI;
 
 @doc("Microsoft.MessagingConnectors Resource Provider management API.")
 @armProviderNamespace
-@service({
-  title: "Microsoft.MessagingConnectors management service",
-})
+@service(#{ title: "Microsoft.MessagingConnectors management service" })
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
@@ -29,7 +27,7 @@ model SchemaResource is TrackedResource<SchemaRequestProperties> {
   @path
   @key("schema")
   @segment("schema")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^default$")
   name: string;
 }

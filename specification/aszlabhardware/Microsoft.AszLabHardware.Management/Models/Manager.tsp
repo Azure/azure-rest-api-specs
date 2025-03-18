@@ -4,20 +4,20 @@ using OpenAPI;
 
 @doc("The model representing the BMC")
 model Manager {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Manufacturer of BMC")
   manufacturer?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Model of BMC")
   `model`?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Firmware version of BMC")
   firmwareVersion?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("List of BMC accounts")
-  @extension("x-ms-identifiers", ["username"])
+  @extension("x-ms-identifiers", #["username"])
   accounts?: InventoryLocalAccount[];
 }

@@ -27,44 +27,44 @@ model ChangeState is ProxyResource<ChangeStateProperties> {
 
 @doc("Detailed properties of the ChangeState resource.")
 model ChangeStateProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Describes the type of the change.")
   changeType: ChangeType;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Brief description about the change.")
   @maxLength(2000)
   description?: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Azure resource Id of the referenced StageMap.")
   stageMapResourceId: StageMapResourceId;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Object that describes the change payload.")
   changeArtifact: ChangeArtifact;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Change is expected to be expired by date, in ISO 8601 format.")
   expirationDate: utcDateTime;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("URI to the external service catalog reference.")
   serviceCatalogReference?: url;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("URI to the work item related to this change.")
   workItemReference?: url;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Internal status of the changestate resource.")
   state: ChangeStatus;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Comments about the last update to the changeState resource.")
   @maxLength(2000)
   comments?: string;
@@ -72,12 +72,8 @@ model ChangeStateProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
   @doc("Schema of parameters that will be provided for each stageProgression.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   stageParameters: Record<Parameter>;
-
-  @doc("Referenced stagemap snapshot.")
-  @visibility("hidden")
-  stageMapSnapshot?: string;
 }
 
 @doc("RetrieveNextStage POST Action response.")
@@ -89,20 +85,20 @@ model RetrieveNextStagesResponse {
   lastStageSequence: int32;
 
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
-  @OpenAPI.extension("x-ms-identifiers", ["stageReference"])
+  @Azure.ResourceManager.identifiers(#["stageReference"])
   nextStages: RetrieveNextStagesResponseItem[];
 }
 
 @doc("StageProgression data comes from RetrieveNextStages API.")
 model RetrieveNextStagesResponseItem {
   @doc("Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changestate resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stageReference: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need the Parameters to be strong type. So need to provide all the supported types which are string & int for now."
   @doc("Parameters to apply on the change for the stage.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   parameterValues: Record<string | int32>;
 }
 
@@ -146,11 +142,11 @@ union ChangeType {
 @doc("Base type for the ChangeArtifact, which is polymorphic based on ArtifactType")
 @discriminator("artifactType")
 model ChangeArtifact {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Artifact label.")
   name: string;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The type of the artifact.")
   artifactType: ArtifactType;
 }
@@ -158,11 +154,11 @@ model ChangeArtifact {
 /* ChangeArtifact for InlineArmTemplate. */
 @doc("Describes the change payload for InlineArmTemplate or InlineBicep")
 model InlineArmTemplateChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The type of the artifact.")
   artifactType: ArtifactType.InlineArmTemplate;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The actual payload content.")
   artifactPayload: InlineArtifactContent;
 }
@@ -170,11 +166,11 @@ model InlineArmTemplateChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for InlineBicep. */
 @doc("Describes the change payload for InlineBicep")
 model InlineBicepTemplateChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The type of the artifact.")
   artifactType: ArtifactType.InlineBicep;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The actual payload content.")
   artifactPayload: InlineArtifactContent;
 }
@@ -182,11 +178,11 @@ model InlineBicepTemplateChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for ArmOperation. */
 @doc("Describes the change payload for artifactType='ArmOperation'")
 model ArmOperationChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The type of the artifact.")
   artifactType: ArtifactType.ArmOperation;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The actual payload content.")
   artifactPayload: ArmOperationArtifactContent;
 }
@@ -194,11 +190,11 @@ model ArmOperationChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for external ARM Template.*/
 @doc("Describes the change payload for External ArmTemplate file.")
 model ExternalArmTemplateChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The type of the artifact.")
   artifactType: ArtifactType.ExternalArmTemplate;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The actual payload content.")
   artifactPayload: ExternalArtifactContent;
 }
@@ -206,11 +202,11 @@ model ExternalArmTemplateChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for external bicep file.*/
 @doc("Describes the change payload for External Bicep file.")
 model ExternalBicepTemplateChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The type of the artifact.")
   artifactType: ArtifactType.ExternalBicep;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The actual payload content.")
   artifactPayload: ExternalArtifactContent;
 }
@@ -218,11 +214,11 @@ model ExternalBicepTemplateChangeArtifact extends ChangeArtifact {
 /* ChangeArtifact for TemplateSpec.*/
 @doc("Describes the change payload for artifactType=External & artifactType='ArmTemplate' or Bicep.")
 model TemplateSpecChangeArtifact extends ChangeArtifact {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("TemplateSpec Artifact type.")
   artifactType: ArtifactType.TemplateSpec;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The actual payload content.")
   artifactPayload: TemplateSpecArtifactContent;
 }
@@ -230,7 +226,7 @@ model TemplateSpecChangeArtifact extends ChangeArtifact {
 /* Various content type definitions, based on the artifactType. */
 @doc("Artifact content model for Inline template or bicep content.")
 model InlineArtifactContent {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Inline ArmTemplate string or Bicep content.")
   script: string;
 }
@@ -238,33 +234,33 @@ model InlineArtifactContent {
 @doc("Artifact model when artifactType is ArmOperation.")
 model ArmOperationArtifactContent {
   @doc("Arm Operation array.")
-  @visibility("read", "create", "update")
-  @OpenAPI.extension("x-ms-identifiers", ["resourceId"])
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   operations: ArmOperationResource[];
 }
 
 @doc("Artifact content model for Inline ArmOperations.")
 model ArmOperationResource {
   @doc("Target resource Id that needs to be changed.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId: string;
 
   @doc("ARM operation. eg: DELETE")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   operation: ArmOperation;
 }
 
 @doc("Artifact content model for External ArmTemplates or Bicep files.")
 model ExternalArtifactContent {
   @doc("URI for the external ARM template or Bicep file.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   uri: url;
 }
 
 @doc("Artifact content model for TemplateSpec resource.")
 model TemplateSpecArtifactContent {
   @doc("TemplateSpec resource Id in ARM.")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId: armResourceIdentifier;
 }
 

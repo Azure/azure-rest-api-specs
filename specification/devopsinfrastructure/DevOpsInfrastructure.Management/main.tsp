@@ -10,9 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Managed DevOps Infrastructure",
-})
+@service(#{ title: "Managed DevOps Infrastructure" })
 @versioned(Versions)
 namespace Microsoft.DevOpsInfrastructure;
 
@@ -36,7 +34,7 @@ model Pool is TrackedResource<PoolProperties> {
 @doc("Pool properties")
 model PoolProperties {
   @doc("The status of the current operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @minValue(1)

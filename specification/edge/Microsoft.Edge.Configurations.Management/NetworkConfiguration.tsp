@@ -44,7 +44,7 @@ model NetworkConfiguration is ProxyResource<LanNetworkConfigurationProperties> {
 @doc("NetworkConfiguration Properties")
 model NetworkConfigurationProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Scenario in which this configuration is used")

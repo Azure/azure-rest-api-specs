@@ -97,48 +97,48 @@ union DeploymentMode {
 @doc("Validation / deployment status details for Job.")
 model EceActionStatus {
   @doc("Job status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("List of steps of Edge device job.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #["name"])
   steps?: Step[];
 }
 
 @doc("Step details during job execution.")
 model Step {
   @doc("Name of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Description of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("FullStepIndex of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fullStepIndex?: string;
 
   @doc("Start time in utc of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTimeUtc?: string;
 
   @doc("End time in utc of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTimeUtc?: string;
 
   @doc("Status of step. Allowed values are 'Error', 'Success', 'InProgress'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("List of nested steps during job execution..")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #["name"])
   steps?: Step[];
 
   @doc("List of exceptions in job execution.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exception?: string[];
 }
 
@@ -224,14 +224,14 @@ union EdgeSolutionType {
 @doc("Reported Properties for job triggered from cloud.")
 model JobReportedProperties {
   @doc("The percentage of the job that is complete.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   percentComplete?: int32;
 
   @doc("Validation status of job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validationStatus?: EceActionStatus;
 
   @doc("Deployment status of job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deploymentStatus?: EceActionStatus;
 }

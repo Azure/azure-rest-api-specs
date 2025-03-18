@@ -16,7 +16,7 @@ model NeighborGroup extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("neighborGroupName")
   @segment("neighborGroups")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NeighborGroup Properties */
@@ -32,7 +32,7 @@ interface NeighborGroups {
   create is ArmResourceCreateOrReplaceAsync<NeighborGroup>;
 
   @doc("Updates the Neighbor Group.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NeighborGroup, NeighborGroupPatch>;
 
   @doc("Implements Neighbor Group DELETE method.")

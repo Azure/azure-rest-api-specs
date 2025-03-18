@@ -16,7 +16,7 @@ model Identifier is ExtensionResource<IdentifierProperties> {
   /** Name of the Identifier. */
   @key("resourceid")
   @segment("identifiers")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("[a-zA-Z0-9-_\\.]")
   @path
   name: string;
@@ -31,14 +31,14 @@ model IdentifierProperties {
   resourceId: string;
 
   /** Provisioning state of the activation. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   /** Timestamp in UTC format. */
   identifierCreationTimestamp?: utcDateTime;
 
   /** The new created resourceIdentifier for the resource */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   resourceIdentifiers: ResourceIdentifier[];
 }
 

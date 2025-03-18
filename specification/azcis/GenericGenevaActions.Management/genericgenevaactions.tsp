@@ -39,16 +39,16 @@ model GenericGenevaActionsResourceProperties {
   azureLocation?: azureLocation;
 
   @doc("The parameter list for geneva action")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   parameters?: Array<Parameter>;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: GenericGenevaActionsProvisioningState;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Resource event argument result; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   genericGenevaActionsOpResult?: string;
 }
 
@@ -59,7 +59,7 @@ model GenericGenevaActionsResource
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("genericGenevaActions") // start with lower case
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -87,4 +87,7 @@ interface GenericGenevaActions {
   get is ArmResourceRead<GenericGenevaActionsResource>;
 }
 
-@@visibility(GenericGenevaActionsResource.properties, "read", "create");
+@@visibility(GenericGenevaActionsResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);

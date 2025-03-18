@@ -18,7 +18,7 @@ model L2IsolationDomain
   @path
   @key("l2IsolationDomainName")
   @segment("l2IsolationDomains")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
@@ -35,7 +35,7 @@ interface L2IsolationDomains {
   create is ArmResourceCreateOrReplaceAsync<L2IsolationDomain>;
 
   @doc("API to update certain properties of the L2 Isolation Domain resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<L2IsolationDomain, L2IsolationDomainPatch>;
 
   @doc("Deletes layer 2 connectivity between compute nodes by managed by named L2 Isolation name.")

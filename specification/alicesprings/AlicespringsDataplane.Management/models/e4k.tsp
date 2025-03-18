@@ -25,7 +25,7 @@ model E4kResource is TrackedResource<E4kProperties> {
 
 @doc("E4k Resource properties")
 model E4kProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

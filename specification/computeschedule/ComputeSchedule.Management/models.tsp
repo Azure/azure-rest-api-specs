@@ -228,10 +228,10 @@ model DeallocateResourceOperationResponse {
   type: string;
 
   @doc("The location of the deallocate request eg westus")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location: string;
 
-  @extension("x-ms-identifiers", ["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   @doc("The results from the deallocate request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -261,10 +261,10 @@ model StartResourceOperationResponse {
   type: string;
 
   @doc("The location of the start request eg westus")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location: string;
 
-  @extension("x-ms-identifiers", ["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -294,10 +294,10 @@ model HibernateResourceOperationResponse {
   type: string;
 
   @doc("The location of the Hibernate request eg westus")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location: string;
 
-  @extension("x-ms-identifiers", ["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   @doc("The results from the Hibernate request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -351,7 +351,7 @@ model GetOperationStatusRequest {
 
 @doc("This is the response from a get operations status request")
 model GetOperationStatusResponse {
-  @extension("x-ms-identifiers", ["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   @doc("An array of resource operations based on their operation ids")
   results: Array<ResourceOperation>;
 }
@@ -368,7 +368,7 @@ model CancelOperationsRequest {
 
 @doc("This is the response from a cancel operations request")
 model CancelOperationsResponse {
-  @extension("x-ms-identifiers", ["resourceId"])
+  @Azure.ResourceManager.identifiers(#["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
 }

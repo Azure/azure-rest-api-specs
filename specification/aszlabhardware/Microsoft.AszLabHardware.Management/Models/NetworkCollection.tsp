@@ -8,6 +8,6 @@ model NetworkCollection {
   systemMacs?: string[];
 
   @doc("Information about the individual network devices of the server")
-  @extension("x-ms-identifiers", ["netDeviceId"])
+  @extension("x-ms-identifiers", #["netDeviceId"])
   netDevices?: NetDevice[];
 }

@@ -15,9 +15,7 @@ using TypeSpec.Versioning;
  * Windows Image Builder Client
  */
 @armProviderNamespace
-@service({
-  title: "WindowsImageBuilder",
-})
+@service(#{ title: "WindowsImageBuilder" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.WindowsImageBuilder;

@@ -18,7 +18,7 @@ model NetworkFabricController
   @path
   @key("networkFabricControllerName")
   @segment("networkFabricControllers")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The NetworkFabricController Properties")
@@ -34,7 +34,7 @@ interface NetworkFabricControllers {
   create is ArmResourceCreateOrReplaceAsync<NetworkFabricController>;
 
   @doc("Updates are currently not supported for the Network Fabric Controller resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     NetworkFabricController,
     NetworkFabricControllerPatch

@@ -10,29 +10,29 @@ namespace Microsoft.MobileNetwork;
 @doc("Virtualized MME Deployment Properties.")
 model VirtualizedMmeDeploymentResourceProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Operational status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operationalStatus?: OperationalStatus;
 
   @doc("Virtual Network Function (VNF) Agent instance managing this Virtualized MME")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   vnfAgent: VnfAgentDeploymentIdProperty;
 
   @doc("Azure for Operators 5G Core Release Version for Virtualized MME.")
   releaseVersion: ReleaseVersion;
 
   @doc("Virtualized MME parameters")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   parameters: VirtualizedMmeParameters;
 
   @doc("Virtualized MME non-builtin local users")
   additionalLocalUsernames?: AdditionalLocalUsername[];
 
   @doc("Managed On Behalf Of Configuration.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 }
 

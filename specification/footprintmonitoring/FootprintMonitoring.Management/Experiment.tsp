@@ -26,7 +26,7 @@ model Experiment is Azure.ResourceManager.ProxyResource<ExperimentProperties> {
   /**
    * The type of the resource.
    */
-  // @visibility("read")
+  //@visibility(Lifecycle.Read)
   // type?: string;
 }
 
@@ -38,16 +38,16 @@ interface Experiments {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Get a Footprint experiment (max).`: {
+    #{
+      `Get a Footprint experiment (max).`: #{
         $ref: "./examples/Experiments_Get_MaximumSet_Gen.json",
       },
     }
   )
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Get a Footprint experiment (min).`: {
+    #{
+      `Get a Footprint experiment (min).`: #{
         $ref: "./examples/Experiments_Get_MinimumSet_Gen.json",
       },
     }
@@ -60,8 +60,8 @@ interface Experiments {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Create or update a Footprint experiment (max).`: {
+    #{
+      `Create or update a Footprint experiment (max).`: #{
         $ref: "./examples/Experiments_CreateOrUpdate_MaximumSet_Gen.json",
       },
     }
@@ -74,8 +74,8 @@ interface Experiments {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `Delete a Footprint experiment (max).`: {
+    #{
+      `Delete a Footprint experiment (max).`: #{
         $ref: "./examples/Experiments_Delete_MaximumSet_Gen.json",
       },
     }
@@ -96,8 +96,8 @@ interface Experiments {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @OpenAPI.extension(
     "x-ms-examples",
-    {
-      `List all Footprint experiments (max).`: {
+    #{
+      `List all Footprint experiments (max).`: #{
         $ref: "./examples/Experiments_ListByProfile_MaximumSet_Gen.json",
       },
     }

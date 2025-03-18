@@ -21,6 +21,6 @@ model DatacenterProperties {
   azureRegionId: AzureRegionResourceId;
 
   @doc("Provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }

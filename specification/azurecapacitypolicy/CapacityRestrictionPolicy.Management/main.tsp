@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.CapacityRestrictionPolicy Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.CapacityRestrictionPolicy management service",
-})
+@service(#{ title: "Microsoft.CapacityRestrictionPolicy management service" })
 @versioned(Microsoft.CapacityRestrictionPolicy.Versions)
 namespace Microsoft.CapacityRestrictionPolicy;
 

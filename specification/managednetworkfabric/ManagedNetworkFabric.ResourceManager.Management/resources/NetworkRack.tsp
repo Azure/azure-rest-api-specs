@@ -16,7 +16,7 @@ model NetworkRack extends Azure.ResourceManager.Foundations.TrackedResource {
   @path
   @key("networkRackName")
   @segment("networkRacks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkRack properties */
@@ -32,7 +32,7 @@ interface NetworkRacks {
   create is ArmResourceCreateOrReplaceAsync<NetworkRack>;
 
   @doc("Update certain properties of the Network Rack resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkRack, NetworkRackPatch>;
 
   @doc("Delete Network Rack resource.")

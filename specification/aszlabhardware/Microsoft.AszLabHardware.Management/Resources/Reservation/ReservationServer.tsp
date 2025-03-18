@@ -23,11 +23,11 @@ model ReservationServer is ProxyResource<ReservationServerProperties> {
 model ReservationServerProperties {
   ...ServerPropertiesBase;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Endpoint for managing the server")
   managementEndpoint?: string;
 }

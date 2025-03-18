@@ -1,15 +1,15 @@
 @doc("Inventory local account")
 model InventoryLocalAccount {
   @doc("Username of local account")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   username: string;
 
   @doc("The account type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accountType: InventoryLocalAccountType;
 
   @doc("The status of the account")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accountStatus: AccountStatus;
 }
 

@@ -18,9 +18,7 @@ using Azure.ResourceManager.Foundations;
 
 /** Microsoft.Fabric Management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.Fabric Management Service",
-})
+@service(#{ title: "Microsoft.Fabric Management Service" })
 @versioned(Microsoft.Fabric.Versions)
 namespace Microsoft.Fabric;
 

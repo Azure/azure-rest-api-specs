@@ -17,21 +17,24 @@ namespace Neon.Postgres.Models;
 @added(Neon.Postgres.Versions.v2_preview)
 model BaseEntity {
   @doc("Unique identifier for the entity")
+  @visibility(Lifecycle.Read)
+  @pattern("^[a-z0-9-]{1,60}$")
   entityId?: string;
 
   @doc("Name of the resource")
+  @pattern("^\\S.{0,62}\\S$|^\\S$")
   entityName?: string;
 
   @doc("Timestamp indicating when the entity was created")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdAt?: string;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Additional attributes for the entity")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   attributes?: Attributes[];
 }
 
@@ -43,4 +46,19 @@ model Attributes {
 
   @doc("Value of the attribute")
   value: string;
+}
+
+@doc("PostgreSQL Version model")
+@added(Neon.Postgres.Versions.v2_preview)
+model PgVersion {
+  @doc("The major PostgreSQL version number")
+  version?: int32;
+}
+
+@doc("Response model for PostgreSQL versions")
+@added(Neon.Postgres.Versions.v2_preview)
+model PgVersionsResponse {
+  @doc("List of PostgreSQL versions")
+  @Azure.ResourceManager.identifiers(#[])
+  versions: PgVersion[];
 }

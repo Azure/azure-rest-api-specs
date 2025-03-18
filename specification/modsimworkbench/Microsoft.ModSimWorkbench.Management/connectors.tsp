@@ -10,9 +10,7 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
-@service({
-  title: "ModSimWorkbench Control Plane API",
-})
+@service(#{ title: "ModSimWorkbench Control Plane API" })
 @armProviderNamespace
 @versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
@@ -41,23 +39,23 @@ union GatewayType {
 
 @doc("Access configuration")
 model AccessConfiguration {
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Access type")
   accessType: AccessType;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Gateway type.")
   gatewayType: GatewayType;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Access URL.")
   accessUrl?: string;
 
-  @visibility("read") // TODO: Remove from RP code then delete from spec
+  @visibility(Lifecycle.Read) // TODO: Remove from RP code then delete from spec
   @doc("Load balancer IP address.")
   ipAddress?: string;
 
-  @visibility("read", "create", "update") // TODO: Determine how RP handles patch connectorSubnetId which is not yet implemented.
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update) // TODO: Determine how RP handles patch connectorSubnetId which is not yet implemented.
   @doc("Connector subnet ID.")
   connectorSubnetId?: string;
 }
@@ -86,37 +84,37 @@ union CopyPasteSetting {
 
 @doc("ETX configuration")
 model Etx {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Connection node count")
   connectionNodeCount?: int32;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("License activated")
   licenseActivated?: LicenseActivated;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("URL of ETX Server for Azure AD app.")
   replyUrlEtx?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("URL of OTDS for Azure AD app.")
   replyUrlOtds?: string;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("License key URI.")
   licenseKeyUri?: string;
 }
 
 @doc("Remote desktop configuration")
 model RemoteDesktop {
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("ETX configuration")
   etx?: Etx;
 }
 
 @doc("Access configuration properties.")
 model NetworkAcls {
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Allowed address spaces")
   allowedAddressSpaces: Array<string>;
 }
@@ -139,19 +137,19 @@ model ConnectorProperties {
   ...PowerStateProperty;
   ...RestartAtProperty;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Connector access configuration")
   accessConfigurations: AccessConfiguration;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Copy and paste permissions.")
   copyPasteSetting?: CopyPasteSetting = CopyPasteSetting.disabled;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Remote desktop configuration.")
   remoteDesktop?: RemoteDesktop;
 
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Access configuration properties.")
   networkAcls: NetworkAcls;
 }
@@ -160,7 +158,7 @@ model ConnectorProperties {
 @parentResource(Chamber)
 model Connector is TrackedResource<ConnectorProperties> {
   @doc("The name of the Connector")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @segment("connectors")
   @key("connectorName")
   @TypeSpec.Http.path

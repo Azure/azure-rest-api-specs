@@ -23,7 +23,7 @@ model PrivateLinkServiceForFabric
   @key("privateLinkServiceName")
   @path
   @segment("privateLinkServicesForFabric")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -36,11 +36,11 @@ model PrivateLinkServiceForFabricProperties {
   workspaceObjectId: string;
 
   @doc("Private Endpoint Connections")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   privateEndpointConnections: PrivateEndpointConnection[];
 
   @doc("Provisioning State")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -68,19 +68,19 @@ model OperationIdParameter {
 @doc("Arm Operation Status")
 model ArmOperationStatus {
   @doc("Operation Id")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Operation Name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Operation Start Time in UTC and ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
   @doc("Operation End Time in UTC and ISO 8601 DateTime format yyyy-MM-ddTHH:mm:ss.fffffffZ")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 
   @doc("Status Value")
@@ -88,7 +88,7 @@ model ArmOperationStatus {
   status: ResourceProvisioningState;
 
   @doc("Operation Error Detail")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 

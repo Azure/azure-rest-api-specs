@@ -55,9 +55,7 @@ model ArmCreatedResponseSync<TResource extends Azure.ResourceManager.Foundations
 @extension("x-ms-long-running-operation", true)
 @extension(
   "x-ms-long-running-operation-options",
-  {
-    `final-state-via`: "azure-async-operation",
-  }
+  #{ `final-state-via`: "azure-async-operation" }
 )
 @armResourceCreateOrUpdate(TResource)
 @put

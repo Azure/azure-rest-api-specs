@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "SecurityCopilotClient",
-})
+@service(#{ title: "SecurityCopilotClient" })
 @doc("SecurityCopilot Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.SecurityCopilot;
@@ -41,7 +39,7 @@ model Capacity is TrackedResource<CapacityProperties> {
 @doc("Capacity properties")
 model CapacityProperties {
   @doc("No of Units")
-  @minValue(1)
+  @minValue(0)
   @maxValue(100)
   numberOfUnits: int64;
 
@@ -49,10 +47,10 @@ model CapacityProperties {
   crossGeoCompute: IsAllowed;
 
   @doc("Geo location of the capacity unit")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   geo: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -61,7 +59,7 @@ model CapacityProperties {
   overageState?: OverageState;
 
   @doc("Overage limit if overageState is Limited.")
-  @minValue(1)
+  @minValue(0)
   @maxValue(999)
   @added(Versions.`2024-11-01-preview`)
   overageAmount?: int64;

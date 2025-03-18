@@ -33,7 +33,7 @@ interface NetworkProfiles {
   create is ArmResourceCreateOrReplaceSync<NetworkProfile>;
 
   @doc("Update a Network Profile.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<NetworkProfile, NetworkProfile>;
 
   @doc("Delete a Network Profile.")
@@ -51,76 +51,76 @@ interface NetworkProfiles {
 @doc("Network Profile properties.")
 model NetworkProfileProperties {
   @doc("Network profile properties reported from the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: NetworkProfileReportedProperties;
 
   @doc("Network profile resource Last sync timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 }
 
 @doc("Network Profile properties reported by the cluster.")
 model NetworkProfileReportedProperties {
   @doc("The IP address of the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterIpAddress?: string;
 
   @doc("The subnet associated with the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnet?: string;
 
   @doc("Whether auto-selection for VM migration network is enabled.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoSelectMigrationNetwork?: boolean;
 
   @doc("Whether network naming is enabled.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   enableNetworkNaming?: boolean;
 
   @doc("Whether auto-selection for VM migration performance is enabled.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoSelectVmMigrationPerformance?: boolean;
 
   @doc("The maximum number of VM migrations allowed.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxVmMigration?: int32;
 
   @doc("The performance type for VM migration.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmMigrationPerformance?: string;
 
   @doc("Maximum bandwidth for SMB migration.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxSmbMigrationBandwidth?: string;
 
   @doc("Details of nodes in the network profile.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   nodes?: Node[];
 
   @doc("Details of physical adapters.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   physicalAdapters?: PhysicalAdapter[];
 
   @doc("Details of virtual switches.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   virtualSwitches?: VirtualSwitch[];
 
   @doc("Details of networks.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   networks?: Network[];
 
   @doc("Details of virtual adapters.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   virtualAdapters?: VirtualAdapter[];
 
   @doc("Details of network intents.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   intents?: NetworkIntent[];
 }
 

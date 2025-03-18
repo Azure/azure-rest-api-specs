@@ -56,7 +56,7 @@ union InternalConnectionState {
 @doc("Describes the properties of an Internal Connection.")
 model InternalConnectionProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Specifies the type of internal connection. \n Possible values are:\n PrivateLink \n NetworkSecurityGroup")

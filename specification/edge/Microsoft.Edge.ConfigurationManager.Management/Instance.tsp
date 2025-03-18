@@ -66,15 +66,15 @@ model InstanceProperties {
   solutionScope?: string;
 
   @doc("Status of instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DeploymentStatus;
 
   @doc("Deployment timestamp of instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deploymentTimestampEpoch?: int64;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

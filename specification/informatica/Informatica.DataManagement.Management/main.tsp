@@ -5,10 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 @armProviderNamespace
-@service({
-  title: "Informatica.DataManagement",
-  description: "Azure Native Services Informatica DataManagement",
-})
+@service(#{ title: "Informatica.DataManagement" })
 @versioned(Versions)
 @armCommonTypesVersion("v5")
 namespace Informatica.DataManagement;
@@ -267,7 +264,7 @@ model InfaServerlessFetchConfigProperties {
   supplementaryFileLocation?: string;
 
   @doc("Serverless runtime data disks")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2024_07_22_preview)
   serverlessRuntimeDataDisks?: ServerlessRuntimeDataDisk[];
 
@@ -315,7 +312,7 @@ model InformaticaServerlessRuntimeResource
 
 @doc("Properties specific to the Informatica DataManagement Organization resource.")
 model OrganizationProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource.")
   provisioningState?: ProvisioningState;
 
@@ -362,7 +359,7 @@ model MarketplaceDetails {
   marketplaceSubscriptionId?: string;
 
   @added(Versions.v2024_11_29_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Marketplace subscription status of a resource")
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 
@@ -453,7 +450,7 @@ model ServerlessMetadataResponse {
 
 @doc("Serverless Runtime properties.")
 model InformaticaServerlessRuntimeProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource.")
   provisioningState?: ProvisioningState;
 
@@ -479,14 +476,14 @@ model InformaticaServerlessRuntimeProperties {
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfile;
 
   @doc("String KV pairs indicating Advanced custom properties.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   advancedCustomProperties?: AdvancedCustomProperties[];
 
   @doc("Supplementary file location.")
   supplementaryFileLocation?: string;
 
   @doc("Serverless runtime data disks")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2024_07_22_preview)
   serverlessRuntimeDataDisks?: ServerlessRuntimeDataDisk[];
 
@@ -494,7 +491,7 @@ model InformaticaServerlessRuntimeProperties {
   serverlessRuntimeConfig?: ServerlessRuntimeConfigProperties;
 
   @doc("Serverless Runtime Tags")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   serverlessRuntimeTags?: ServerlessRuntimeTag[];
 
   @doc("Serverless runtime user context properties")
@@ -504,11 +501,11 @@ model InformaticaServerlessRuntimeProperties {
 @doc("Serverless Runtime config properties.")
 model ServerlessRuntimeConfigProperties {
   @doc("The List of Informatica Serverless Runtime CDI Config Properties.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   cdiConfigProps?: CdiConfigProps[];
 
   @doc("The List of Informatica Serverless Runtime CDIE Config Properties.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   cdieConfigProps?: CdiConfigProps[];
 }
 
@@ -518,18 +515,18 @@ model ServerlessConfigProperties {
   platform?: PlatformType;
 
   @doc("List of application types supported by informatica")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   applicationTypes?: ApplicationTypeMetadata[];
 
   @doc("The list of compute units with possible array of values")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   computeUnits?: ComputeUnitsMetadata[];
 
   @doc("Serverless Runtime execution timeout")
   executionTimeout?: string;
 
   @doc("List of supported serverless informatica regions")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   regions?: RegionsMetadata[];
 }
 
@@ -593,7 +590,7 @@ model CdiConfigProps {
   engineVersion: string;
 
   @doc("ApplicationConfigs of the CDI or CDIE.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   applicationConfigs: ApplicationConfigs[];
 }
 
@@ -747,7 +744,7 @@ model MarketplaceDetailsUpdate {
   marketplaceSubscriptionId?: string;
 
   @added(Versions.v2024_11_29_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Marketplace subscription status of a resource")
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
 
@@ -801,14 +798,14 @@ model ServerlessRuntimePropertiesCustomUpdate {
   serverlessRuntimeNetworkProfile?: ServerlessRuntimeNetworkProfileUpdate;
 
   @doc("String KV pairs indicating Advanced custom properties.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   advancedCustomProperties?: AdvancedCustomProperties[];
 
   @doc("Supplementary file location.")
   supplementaryFileLocation?: string;
 
   @doc("Serverless runtime data disks")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2024_07_22_preview)
   serverlessRuntimeDataDisks?: ServerlessRuntimeDataDisk[];
 
@@ -816,7 +813,7 @@ model ServerlessRuntimePropertiesCustomUpdate {
   serverlessRuntimeConfig?: ServerlessRuntimeConfigPropertiesUpdate;
 
   @doc("Serverless Runtime Tags")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   serverlessRuntimeTags?: ServerlessRuntimeTag[];
 
   @doc("Serverless runtime user context properties")

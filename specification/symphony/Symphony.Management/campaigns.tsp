@@ -13,7 +13,7 @@ namespace Microsoft.ToolchainOrchestrator;
 @doc("The properties of the campaign.")
 model CampaignProperties {
   @doc("Provisioning state of the campaign.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -31,7 +31,7 @@ model Campaign is TrackedResource<CampaignProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 

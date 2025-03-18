@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "SecurityPlatformClient",
-})
+@service(#{ title: "SecurityPlatformClient" })
 @doc("SecurityPlatform Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.SecurityPlatform;
@@ -38,7 +36,7 @@ model AccountLink is TrackedResource<AccountLinkProperties> {
 
 @doc("AccountLink properties")
 model AccountLinkProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

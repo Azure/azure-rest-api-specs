@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.Falcon Resource Provider management API. */
 @armProviderNamespace("Microsoft.Falcon")
-@service({
-  title: "Microsoft.Falcon management service",
-})
+@service(#{ title: "Microsoft.Falcon management service" })
 @versioned(Microsoft.Falcon.Versions)
 namespace Microsoft.Falcon;
 

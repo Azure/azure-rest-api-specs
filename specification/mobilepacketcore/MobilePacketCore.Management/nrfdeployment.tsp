@@ -26,14 +26,14 @@ model NrfDeploymentResource
   @key("nrfDeploymentName")
   @path
   @segment("nrfDeployments")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 }
 
 @doc("NRF Deployment Properties.")
 model NrfDeploymentResourceProperties {
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Azure for Operators 5G Core NRF component parameters")
@@ -41,19 +41,19 @@ model NrfDeploymentResourceProperties {
 
   @doc("Azure for Operators 5G Core NRF secrets parameters")
   @secret
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   secretsParameters?: ComponentDeploymentSecrets;
 
   @doc("Reference to cluster where the Network Function is deployed")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   clusterService: ClusterServiceIdProperty;
 
   @doc("Release version. This is inherited from the cluster")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   releaseVersion?: ReleaseVersion;
 
   @doc("Operational status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operationalStatus?: OperationalStatus;
 }
 

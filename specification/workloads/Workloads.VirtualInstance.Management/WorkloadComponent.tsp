@@ -1,8 +1,10 @@
+import "@typespec/http";
 import "@typespec/openapi";
 import "./models.tsp";
 import "./VirtualInstance.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 
 namespace Microsoft.Workloads;
@@ -34,7 +36,7 @@ interface WorkloadComponents {
   /**
    * Updates a workload component corresponding to the Virtual Instance resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     WorkloadComponent,
     UpdateWorkloadComponentRequest

@@ -56,30 +56,30 @@ model TargetSnapshot {
 @doc("Instance History Properties")
 model InstanceHistoryProperties {
   @doc("Solution version of instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   solutionVersion: SolutionVersionSnapshot;
 
   @doc("Target of instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target: TargetSnapshot;
 
   @doc("Scope of instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   solutionScope?: string;
 
   @doc("State of instance")
   activeState?: ActiveState;
 
   @doc("Reconciliation policy of instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reconciliationPolicy?: ReconciliationPolicyProperties;
 
   @doc("Deployment Status of instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DeploymentStatus;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

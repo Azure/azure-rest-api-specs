@@ -24,7 +24,7 @@ model PacketCoreDataPlane
   @path
   @key("packetCoreDataPlaneName")
   @segment("packetCoreDataPlanes")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -37,7 +37,7 @@ interface PacketCoreDataPlanes {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<PacketCoreDataPlane>;
 
   @doc("Updates packet core data planes tags.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<PacketCoreDataPlane, TagsObject>;
 
   @doc("Deletes the specified packet core data plane.")

@@ -98,18 +98,18 @@ model OperationStatus {
   id?: string;
 
   @doc("The fully qualified resource id of the resource for which the operation was performed.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceId?: string;
 
   @doc("The operation name.")
   name?: string;
 
   @doc("The start time of the operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
   @doc("The end time of the operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 
   @doc("The status of the operation.")
@@ -141,6 +141,6 @@ model ExportResult {
   skippedResources?: string[];
 
   @doc("A list of errors derived during exporting each resource")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   errors?: ErrorDetail[];
 }

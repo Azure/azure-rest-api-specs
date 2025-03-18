@@ -14,9 +14,7 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
 @armProviderNamespace
-@service({
-  title: "winfields service",
-})
+@service(#{ title: "winfields service" })
 @versioned(Versions)
 @doc("Arc-A winfields Service API.")
 @armCommonTypesVersion(CommonTypes.Versions.v5)
