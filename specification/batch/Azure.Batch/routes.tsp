@@ -1929,6 +1929,23 @@ alias ListNodeExtensionsOptionalParameters = {
   $select?: string[];
 };
 
+alias DeleteNodeFileOptionalParameters = {
+  @doc("""
+    Whether to delete children of a directory. If the filePath parameter represents
+    a directory instead of a file, you can set recursive to true to delete the
+    directory and all of the files and subdirectories in it. If recursive is false
+    then the directory must be empty or deletion will fail.
+    """)
+  @query
+  recursive?: boolean;
+};
+
+alias DeleteNodeFileResponse = BatchClientResponseHeaders & {
+  @doc("A process exit code.")
+  @statusCode
+  code: "200";
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -2146,23 +2163,13 @@ interface Nodes {
   @summary("Deletes the specified file from the Compute Node.")
   @doc("Deletes the specified file from the Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
-  @clientName("deleteNodeFileInternal", "java")
-  deleteNodeFile is DeleteOperation<
-    BatchNodeFileClientPathContent & {
-      @doc("""
-        Whether to delete children of a directory. If the filePath parameter represents
-        a directory instead of a file, you can set recursive to true to delete the
-        directory and all of the files and subdirectories in it. If recursive is false
-        then the directory must be empty or deletion will fail.
-        """)
-      @query
-      recursive?: boolean;
+  deleteNodeFile is DeleteOperationNew<
+    {
+      ...CommonParameters;
+      ...BatchNodeFileClientPathContent;
+      ...DeleteNodeFileOptionalParameters;
     },
-    BatchClientResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode
-      code: "200";
-    }
+    DeleteNodeFileResponse
   >;
 
   @doc("Returns the content of the specified Compute Node file.")

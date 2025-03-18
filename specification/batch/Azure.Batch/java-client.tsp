@@ -1722,3 +1722,28 @@ op listNodeExtensionsCustomization is Azure.Batch.ListOperationNew<
   listNodeExtensionsCustomization,
   "java"
 );
+
+// Delete Node File Operation
+@doc("Optional parameters for Delete Node File operation.")
+model DeleteBatchNodeFileOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.DeleteNodeFileOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Delete Node File operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
+op deleteNodeFileCustomization is Azure.Batch.DeleteOperationNew<
+  {
+    ...Azure.Batch.BatchNodeFileClientPathContent;
+
+    @doc("Optional parameters for Delete Node File operation.")
+    options?: DeleteBatchNodeFileOptions;
+  },
+  Azure.Batch.DeleteNodeFileResponse
+>;
+
+@@override(Azure.Batch.Nodes.deleteNodeFile,
+  deleteNodeFileCustomization,
+  "java"
+);
