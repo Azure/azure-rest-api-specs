@@ -132,10 +132,7 @@ interface Schedulers {
   @errorsDoc("Validation error: required parameters are missing")
   update is ArmCustomPatchAsync<
     Scheduler,
-    ResourceUpdateModel<
-      Scheduler,
-      SchedulerProperties
-    >
+    ResourceUpdateModel<Scheduler, SchedulerProperties>
   >;
   @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
