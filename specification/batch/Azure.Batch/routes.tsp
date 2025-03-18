@@ -1799,6 +1799,22 @@ alias DeallocateNodeOptionalParameters = {
   parameters?: BatchNodeDeallocateContent;
 };
 
+alias ReimageNodeRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node that you want to restart.")
+  @path
+  nodeId: string;
+};
+
+alias ReimageNodeOptionalParameters = {
+  @doc("The options to use for reimaging the Compute Node.")
+  @body
+  parameters?: BatchNodeReimageContent;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1906,20 +1922,11 @@ interface Nodes {
     cloud service configuration property.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/reimage")
-  @clientName("reimageNodeInternal", "java")
-  reimageNode is PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to restart.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for reimaging the Compute Node.")
-      @body
-      parameters?: BatchNodeReimageContent;
+  reimageNode is PostOperationNew<
+    {
+      ...CommonJsonParameters;
+      ...ReimageNodeRequiredParameters;
+      ...ReimageNodeOptionalParameters;
     },
     AcceptedProcessingResponseHeaders
   >;

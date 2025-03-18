@@ -121,7 +121,6 @@ interface BatchClient {
   "java"
 );
 
-@@clientName(BatchClient.reimageNode, "reimageNodeInternal", "java");
 @@clientName(BatchClient.disableNodeScheduling,
   "disableNodeSchedulingInternal",
   "java"

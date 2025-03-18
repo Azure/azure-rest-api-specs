@@ -1531,3 +1531,25 @@ op deallocateNodeCustomization is Azure.Batch.PostOperationNew<
   deallocateNodeCustomization,
   "java"
 );
+
+// Reimage Node Operation
+@doc("Optional parameters for Reimage Node operation.")
+model ReimageBatchNodeOptions {
+  ...Azure.Batch.CommonJsonParameters;
+  ...Azure.Batch.ReimageNodeOptionalParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Reimage Node operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/reimage")
+op reimageNodeCustomization is Azure.Batch.PostOperationNew<
+  {
+    ...Azure.Batch.ReimageNodeRequiredParameters;
+
+    @doc("Optional parameters for Reimage Node operation.")
+    options?: ReimageBatchNodeOptions;
+  },
+  Azure.Batch.AcceptedProcessingResponseHeaders
+>;
+
+@@override(Azure.Batch.Nodes.reimageNode, reimageNodeCustomization, "java");
