@@ -251,11 +251,11 @@ alias AssetBase = {
   systemData?: SystemData;
 };
 
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create responses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
   T;
 
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create responses correctly"
 alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
 
