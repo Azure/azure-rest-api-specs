@@ -6922,6 +6922,144 @@
       },
       "description": "Contains configuration options related to vector search."
     },
+    "AssetProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "externalDocs": {
+            "url": "https://learn.microsoft.com/rest/api/searchservice/Naming-rules"
+          },
+          "type": "string",
+          "description": "The name to associate with this particular asset profile.",
+          "x-nullable": false
+        },
+        "assetType": {
+          "type": "string",
+          "enum": [
+            "path"
+          ],
+          "x-ms-enum": {
+            "name": "AssetType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "path",
+                "name": "Path",
+                "description": "The part of the Url path after the first compoenet, which is determined by the container name configured in asset store."
+              }
+            ]
+          },
+          "description": "The asset type determines how to locate an asset in the asset store."
+        },
+        "servingType": {
+          "type": "string",
+          "enum": [
+            "sasUrl"
+          ],
+          "x-ms-enum": {
+            "name": "ServingType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "sasUrl",
+                "name": "SasUrl",
+                "description": "A secure URL that grants restricted access to a resource, allowing users to perform specific actions for a limited period without exposing the account key."
+              }
+            ]
+          },
+          "description": "The serving type determines how to serve assets to API callers."
+        },
+        "servingOptions": {
+          "type": "object",
+          "properties": {
+            "sasExpiry": {
+              "type": "string",
+              "pattern": "^P(?=\\d|T\\d)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+S)?)?$",
+              "example": "PT1H",
+              "default": "PT1H",
+              "description": "Specifies the duration for which the generated SAS URL will remain valid, formatted as an ISO 8601 duration."
+            }
+          }
+        },
+        "assetStore": {
+          "$ref": "#/definitions/SearchAssetStore",
+          "description": "The definition of an asset store that stores the assets."
+        }
+      }
+    },
+    "SearchAssetStoreType": {
+      "type": "string",
+      "enum": [
+        "azureblob"
+      ],
+      "x-ms-enum": {
+        "name": "SearchAssetStoreType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "azureblob",
+            "name": "AzureBlob",
+            "description": "Indicates an Azure Blob asset store."
+          }
+        ]
+      },
+      "description": "Defines the type of an asset store."
+    },
+    "AssetStoreCredentials": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "externalDocs": {
+            "url": "https://to-be-created"
+          },
+          "type": "string",
+          "description": "The connection string for the asset store. Set to `<unchanged>` (with brackets) if you don't want the connection string updated. Set to `<redacted>` if you want to remove the connection string value from the assset store."
+        }
+      },
+      "description": "Represents credentials that can be used to connect to an asset store."
+    },
+    "SearchAssetStoreContainer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the container in the asset store that will be used to store assets."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The container in the asset store that will be used to store assets."
+    },
+    "SearchAssetStore": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SearchAssetStoreType",
+          "description": "The type of the asset store."
+        },
+        "credentials": {
+          "$ref": "#/definitions/AssetStoreCredentials",
+          "description": "Credentials for the asset store."
+        },
+        "container": {
+          "$ref": "#/definitions/SearchAssetStoreContainer",
+          "description": "The data container for the asset store."
+        },
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "An explicit managed identity to use for this asset store. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "credentials",
+        "container"
+      ],
+      "description": "Represents an asset store definition."
+    },
     "VectorSearchProfile": {
       "type": "object",
       "properties": {
@@ -8955,6 +9093,12 @@
           },
           "description": "A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields."
         },
+        "assetProfile": {
+          "x-ms-client-name": "assetProfileName",
+          "type": "string",
+          "description": "The name of the asset profile that specifies configuration to use when serving assets.",
+          "x-nullable": true
+        },
         "fields": {
           "type": "array",
           "items": {
@@ -9484,6 +9628,13 @@
           "x-ms-client-name": "VectorSearch",
           "x-nullable": true
         },
+        "assetProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetProfile"
+          },
+          "description": "Defines configurations to use with asset serving."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -9674,6 +9825,10 @@
         "indexProjections": {
           "$ref": "#/definitions/SearchIndexerIndexProjections",
           "description": "Definition of additional projections to secondary search index(es)."
+        },
+        "assetProjections": {
+          "$ref": "#/definitions/SearchIndexerAssetProjections",
+          "description": "Definition of additional projections to asset store(s)."
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
@@ -9959,6 +10114,62 @@
         ]
       },
       "description": "Defines behavior of the index projections in relation to the rest of the indexer."
+    },
+    "SearchIndexerAssetProjections": {
+      "type": "object",
+      "properties": {
+        "selectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerAssetProjectionSelector"
+          },
+          "description": "A list of projections to be performed to asset store(s)."
+        }
+      },
+      "required": [
+        "selectors"
+      ],
+      "description": "Definition of additional projections to asset store(s)."
+    },
+    "SearchIndexerAssetProjectionSelector": {
+      "type": "object",
+      "properties": {
+        "targetIndexName": {
+          "type": "string",
+          "description": "The name of the search index that assets are associated with."
+        },
+        "targetIndexAssetProfileName": {
+          "type": "string",
+          "description": "The name of the asset profile to be used in the projection."
+        },
+        "mappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchIndexerAssetProjectionMappingEntry"
+          },
+          "description": "The mappings for the projection."
+        }
+      },
+      "required": [
+        "targetIndexName",
+        "targetIndexAssetProfileName",
+        "mappings"
+      ],
+      "description": "Description for what assets and where to store in the asset store."
+    },
+    "SearchIndexerAssetProjectionMappingEntry":{
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the mapping."        
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of assets to project."
+        }
+      },
+      "description": "Specifies what assets to be projected to asset store."
     },
     "DefaultCognitiveServicesAccount": {
       "type": "object",

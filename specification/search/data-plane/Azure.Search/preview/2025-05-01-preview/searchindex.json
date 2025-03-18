@@ -622,6 +622,19 @@
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
+          },
+          {
+            "name": "assetServing",
+            "in": "query",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of asset field names to use for asset serving. Only asset fields can be used for asset serving.",
+            "x-ms-client-name": "AssetServingFields",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
           }
         ],
         "x-ms-request-id": "request-id",
@@ -1426,6 +1439,12 @@
           "x-ms-client-name": "DocumentDebugInfo",
           "x-nullable": true,
           "description": "Contains debugging information that can be used to further explore your search results."
+        },
+        "@search.assets": {
+          "$ref": "#/definitions/AssetServingResultType",
+          "readOnly": true,
+          "x-ms-client-name": "AssetServingResultType",
+          "description": "Contains asset serving information that can be used to access the assets."
         }
       },
       "required": [
@@ -2634,6 +2653,11 @@
         "hybridSearch": {
           "$ref": "#/definitions/HybridSearch",
           "description": "The query parameters to configure hybrid search behaviors."
+        },
+        "assetServing": {
+          "type": "string",
+          "description": "The comma-separated list of asset field names to use for asset serving. Only asset fields can be used for asset serving.",
+          "x-ms-client-name": "AssetServingFields"
         }
       },
       "description": "Parameters for filtering, sorting, faceting, paging, and other search query behaviors."
@@ -3075,6 +3099,29 @@
           "description": "The raw concatenated strings that were sent to the semantic enrichment process."
         }
       }
+    },
+    "AssetServingResultType": {
+      "type": "object",
+      "properties": {
+        "serving": {
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The mapping from json pointers to values of the serving type specified in the asset profile."
+        },
+        "errors": {
+          "type": "array",
+          "readOnly": true,
+          "x-nullable": false,
+          "items": {
+            "type": "string"
+          },
+          "description": "Contains a list of errors ocurred during asset serving."
+        }
+      },
+      "description": "Contains asset serving information that can be used to access the assets."
     },
     "QueryResultDocumentSemanticField": {
       "type": "object",
