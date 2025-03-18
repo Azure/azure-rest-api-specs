@@ -1110,6 +1110,295 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationUsages/{location}": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "GroupQuotaUsages"
+        ],
+        "summary": "Gets the GroupQuotas usages and limits(quota) for the resourceProvider/location.",
+        "description": "Gets the GroupQuotas usages and limits(quota). Location is required paramter.",
+        "operationId": "GroupQuotaUsages_List",
+        "x-ms-examples": {
+          "GroupQuotasUsages_List": {
+            "$ref": "./examples/GroupQuotaUsages/GetGroupQuotaUsages.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ResourceUsageList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationSettings/{location}": {
+      "put": {
+        "tags": [
+          "GroupQuotaLocationSettings"
+        ],
+        "summary": "Enables the GroupQuotas enforcement settings for the resource provider and the location specified.",
+        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level.\nThe subscriptions share the GroupQuotaLimits assigned to the GroupQuota. If the GroupQuotaLimits is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource.\nOnce the GroupQuota Enforcement is enabled then, it cannot be deleted or reverted back. To disable GroupQuota Enforcement -\n 1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).\n 2. Ten delete the GroupQuota (Check the example - GroupQuotas_Delete).",
+        "operationId": "GroupQuotaLocationSettings_CreateOrUpdate",
+        "x-ms-examples": {
+          "GroupQuotaLocationSettings_CreateOrUpdate": {
+            "$ref": "./examples/GroupQuotasEnforcement/PutGroupQuotaEnforcement.json"
+          },
+          "GroupQuotaLocationSettings_CreateOrUpdate_Failed": {
+            "$ref": "./examples/GroupQuotasEnforcement/PutGroupQuotaEnforcementFailed.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "LocationSettings",
+            "in": "body",
+            "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, Create or Update",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+            }
+          },
+          "201": {
+            "description": "Request Accepted, Create or Update",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers.  New guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#131-resource-based-long-running-operations-relo",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/LROResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GroupQuotaLocationSettings"
+        ],
+        "summary": "Enables the GroupQuotas enforcement settings for the resource provider and the location specified.",
+        "description": "Enables the GroupQuotas enforcement for the resource provider and the location specified. The resource provider will start using the group quotas as the overall quota for the subscriptions included in the GroupQuota. The subscriptions cannot request quota at subscription level.\nThe subscriptions share the GroupQuotaLimits assigned to the GroupQuota. If the GroupQuotaLimits is used, then submit a groupQuotaLimit request for the specific resource - provider/location/resource.\nOnce the GroupQuota Enforcement is enabled then, it cannot be deleted or reverted back. To disable GroupQuota Enforcement -\n 1. Remove all the subscriptions from the groupQuota using the delete API for Subscriptions (Check the example - GroupQuotaSubscriptions_Delete).\n 2. Ten delete the GroupQuota (Check the example - GroupQuotas_Delete).",
+        "operationId": "GroupQuotaLocationSettings_Update",
+        "x-ms-examples": {
+          "GroupQuotaLocationSettings_Patch": {
+            "$ref": "./examples/GroupQuotasEnforcement/PatchGroupQuotaEnforcement.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "LocationSettings",
+            "in": "body",
+            "description": "The GroupQuota body details for creation or update of a GroupQuota entity.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+            }
+          },
+          "202": {
+            "description": "Request Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GroupQuotaLocationSettings"
+        ],
+        "summary": "Gets the GroupQuotas enforcement settings for the resource provider/location.",
+        "description": "Gets the GroupQuotas enforcement settings for the ResourceProvider/location. The locations, where GroupQuota enforcement is not enabled will return Not Found.",
+        "operationId": "GroupQuotaLocationSettings_Get",
+        "x-ms-examples": {
+          "GroupQuotasEnforcement_Get": {
+            "$ref": "./examples/GroupQuotasEnforcement/GetGroupQuotaEnforcement.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationSettings": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "GroupQuotaLocationSettings"
+        ],
+        "summary": "Returns a list of the Azure regions settings, where the GroupQuotas enforcement is enabled.",
+        "description": "Returns only the list of the Azure regions settings, where the GroupQuotas enforcement is enabled. The locations not included in GroupQuota Enforcement will not be listed, the regions in failed status with listed as status Failed.",
+        "operationId": "GroupQuotaLocationSettings_List",
+        "x-ms-examples": {
+          "GroupQuotaEnforcement_List": {
+            "$ref": "./examples/GroupQuotasEnforcement/ListGroupQuotaEnforcement.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/GroupQuotasEnforcementListResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1322,7 +1611,7 @@
           "description": "Group Quota properties for the specified resource.",
           "allOf": [
             {
-              "$ref": "#/definitions/GroupQuotaDetails"
+          "$ref": "#/definitions/GroupQuotaDetails"
             }
           ]
         }
@@ -1550,7 +1839,7 @@
           "description": "Quota properties for the specified resource.",
           "allOf": [
             {
-              "$ref": "#/definitions/SubscriptionQuotaDetails"
+          "$ref": "#/definitions/SubscriptionQuotaDetails"
             }
           ]
         }
@@ -1834,7 +2123,7 @@
           "type": "object",
           "allOf": [
             {
-              "$ref": "#/definitions/GroupQuotasEntityBasePatch"
+          "$ref": "#/definitions/GroupQuotasEntityBasePatch"
             }
           ]
         }
@@ -1849,16 +2138,16 @@
         },
         {
           "type": "object",
-          "properties": {
-            "properties": {
-              "title": "Properties",
-              "type": "object",
+      "properties": {
+        "properties": {
+          "title": "Properties",
+          "type": "object",
               "allOf": [
                 {
-                  "$ref": "#/definitions/GroupQuotasEntityBase"
-                }
+          "$ref": "#/definitions/GroupQuotasEntityBase"
+        }
               ]
-            }
+      }
           }
         }
       ]
@@ -1878,6 +2167,66 @@
           "description": "The URL to use for getting the next set of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "GroupQuotasEnforcementListResponse": {
+      "type": "object",
+      "description": "List of Azure regions, where the group quotas is enabled for enforcement.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Azure Regions.",
+          "items": {
+            "$ref": "#/definitions/GroupQuotasEnforcementResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnforcementState": {
+      "description": "Enforcement status.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "NotAvailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EnforcementState",
+        "modelAsString": true
+      }
+    },
+    "GroupQuotasEnforcementResponse": {
+      "type": "object",
+      "description": "The GroupQuota Enforcement status for a Azure Location/Region.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "enforcementEnabled": {
+              "$ref": "#/definitions/EnforcementState",
+              "description": "Is the GroupQuota Enforcement enabled for the Azure region."
+            },
+            "provisioningState": {
+              "$ref": "#/definitions/RequestState",
+              "readOnly": true
+            },
+            "faultCode": {
+              "type": "string",
+              "description": "Details of the failure.",
+              "readOnly": true
+            }
+          }
         }
       }
     }
