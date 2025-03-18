@@ -224,7 +224,3 @@ describe("reconcileChangedFilesAndTags", () => {
     expect(afterFinal).toEqual(after);
   });
 });
-
-describe("getRunList", () => {
-  // TODO:
-});
