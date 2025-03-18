@@ -16,12 +16,15 @@ permissions:
 
 defaults:
   run:
-    shell: bash
     working-directory: ./.github
 
 jobs:
   test:
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        os: [ubuntu, windows]
+
+    runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
     steps:
       - name: Checkout
@@ -37,12 +40,13 @@ jobs:
           node-version: 20.x
           working-directory: ./.github
 
-      - name: Run tests
-        run: npm run test:ci
+      - run: npm run lint
+
+      - run: npm run test:ci
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-report
+          name: code-coverage-report-${{ matrix.os }}
           path: ./.github/coverage
           if-no-files-found: ignore
