@@ -234,27 +234,27 @@ export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspConfig
   }
 }
 
-export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "hierarchyClient", false);
+    super("hierarchyClient", "hierarchy-client", false);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
   }
 }
 
-export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "experimentalExtensibleEnums", true);
+    super("experimentalExtensibleEnums", "experimental-extensible-enums", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
   }
 }
 
-export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "enableOperationGroup", true);
+    super("enableOperationGroup", "enable-operation-group", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -270,13 +270,9 @@ export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmit
   }
 }
 
-export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
-    super(
-      "@azure-tools/typespec-ts",
-      "packageDetails.name",
-      new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
-    );
+    super("packageDetails.name", "package-details.name", new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/));
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
