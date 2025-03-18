@@ -43,6 +43,7 @@ alias ListLatestDataSetVersionParameters = {
   listViewType?: ListViewType;
 };
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 interface Datasets
   extends ServicePatterns.VersionedOperations<
       DatasetVersion,

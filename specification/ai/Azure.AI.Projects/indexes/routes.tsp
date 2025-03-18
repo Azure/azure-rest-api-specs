@@ -39,6 +39,8 @@ alias ListLatestIndexParameters = {
   @query("listViewType")
   listViewType?: ListViewType;
 };
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 interface Indexes
   extends ServicePatterns.VersionedOperations<
       Index,
