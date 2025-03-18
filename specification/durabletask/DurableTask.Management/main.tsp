@@ -130,6 +130,7 @@ interface Schedulers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   @doc("Update a Scheduler")
   @errorsDoc("Validation error: required parameters are missing")
+  @parameterVisibility(Lifecycle.Update)
   update is ArmCustomPatchAsync<
     Scheduler,
     ResourceUpdateModel<Scheduler, SchedulerProperties>
