@@ -7,79 +7,65 @@ import { getPathToDependency, AutorestRunResult } from "./util.js";
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
 export async function runChecks(
-  beforePath: string,
-  afterPath: string,
-  runList: Map<string, string[]>[],
-): Promise<Map<"before" | "after", AutorestRunResult[]>> {
-  // TODO: Should this be set globally?
+  path: string,
+  runList: Map<string, string[]>,
+): Promise<AutorestRunResult[]> {
   const dependenciesDir = await getPathToDependency("@microsoft.azure/openapi-validator");
+  const result: AutorestRunResult[] = [];
 
-  const [beforeMap, afterMap] = runList;
-  const reportMap = new Map<"before" | "after", AutorestRunResult[]>();
+  for (const [readme, tags] of runList.entries()) {
+    const changedFilePath = join(path, readme);
+    console.log(`Linting ${changedFilePath}`);
 
-  // TODO: Structure legibly
-  for (const { path, map, state } of [
-    { path: beforePath, map: beforeMap, state: "before" },
-    { path: afterPath, map: afterMap, state: "after" },
-  ]) {
-    for (const [readme, tags] of map.entries()) {
-      const changedFilePath = join(path, readme);
-      console.log(`Linting ${changedFilePath}`);
+    // TODO: Move this into getRunList
+    let openApiType = await getOpenapiType(changedFilePath);
 
-      // TODO: Move this into getRunList
-      let openApiType = await getOpenapiType(changedFilePath);
+    // From momentOfTruth.ts:executeAutoRestWithLintDiff
+    // This is a quick workaround for https://github.com/Azure/azure-sdk-tools/issues/6549
+    // We override the openapi-subtype with the value of openapi-type,
+    // to prevent LintDiff from reading openapi-subtype from the AutoRest config file (README)
+    // and overriding openapi-type with it.
+    let openApiSubType = openApiType;
 
-      // From momentOfTruth.ts:executeAutoRestWithLintDiff
-      // This is a quick workaround for https://github.com/Azure/azure-sdk-tools/issues/6549
-      // We override the openapi-subtype with the value of openapi-type,
-      // to prevent LintDiff from reading openapi-subtype from the AutoRest config file (README)
-      // and overriding openapi-type with it.
-      let openApiSubType = openApiType;
+    // If the tags array is empty run the loop once but with a null tag
+    const coalescedTags = tags?.length ? tags : [null];
+    for (const tag of coalescedTags) {
+      let tagArg = tag ? `--tag=${tag} ` : "";
 
-      // If the tags array is empty run the loop once but with a null tag
-      const coalescedTags = tags?.length ? tags : [null];
-      for (const tag of coalescedTags) {
-        let tagArg = tag ? `--tag=${tag} ` : "";
+      let autorestCommand =
+        `npm exec --no -- autorest ` +
+        `--v3 ` +
+        `--spectral ` +
+        `--azure-validator ` +
+        `--semantic-validator=false ` +
+        `--model-validator=false ` +
+        `--message-format=json ` +
+        `--openapi-type=${openApiType} ` +
+        `--openapi-subtype=${openApiSubType} ` +
+        `--use=${dependenciesDir} ` +
+        `${tagArg} ` +
+        `${changedFilePath}`;
 
-        let autorestCommand =
-          `npm exec --no -- autorest ` +
-          `--v3 ` +
-          `--spectral ` +
-          `--azure-validator ` +
-          `--semantic-validator=false ` +
-          `--model-validator=false ` +
-          `--message-format=json ` +
-          `--openapi-type=${openApiType} ` +
-          `--openapi-subtype=${openApiSubType} ` +
-          `--use=${dependenciesDir} ` +
-          `${tagArg} ` +
-          `${changedFilePath}`;
-
-        console.log(`autorest command: ${autorestCommand}`);
-        const executionResult = await executeCommand(autorestCommand);
-        const lintDiffResult = {
-          autorestCommand,
-          rootPath: path,
-          readme,
-          tag: tag ? tag : "",
-          openApiType,
-          ...executionResult,
-        };
-        logAutorestExecutionErrors(lintDiffResult);
-        if (!reportMap.has(state as "before" | "after")) {
-          reportMap.set(state as "before" | "after", []);
-        }
-
-        reportMap.get(state as "before" | "after")!.push(lintDiffResult);
-        console.log("Lint diff result length:", lintDiffResult.stdout.length);
-      }
+      console.log(`autorest command: ${autorestCommand}`);
+      const executionResult = await executeCommand(autorestCommand);
+      const lintDiffResult = {
+        autorestCommand,
+        rootPath: path,
+        readme,
+        tag: tag ? tag : "",
+        openApiType,
+        ...executionResult,
+      };
+      logAutorestExecutionErrors(lintDiffResult);
+      result.push(lintDiffResult);
+      console.log("Lint diff result length:", lintDiffResult.stdout.length);
     }
   }
 
-  return reportMap;
+  return result;
 }
 
-async function executeCommand(
+export async function executeCommand(
   command: string,
   cwd: string = ".",
 ): Promise<{ error: ExecException | null; stdout: string; stderr: string }> {

@@ -45,26 +45,26 @@ export type LintDiffViolation = LintingResultMessage & {
   armRpcs?: string[];
 };
 
+const LIMIT_50_MESSAGE = "Only 50 items are listed, please refer to log for more details.";
+
 export async function generateReport(
-  beforePath: string, // TODO: is beforePath required?
-  reportMap: Map<string, AutorestRunResult[]>,
+  beforePath: string,
+  beforeChecks: AutorestRunResult[],
+  afterChecks: AutorestRunResult[],
   outFile: string,
   baseBranch: string,
   compareSha: string,
 ) {
-  // Build map of compared readmes and tags from autorest runs. This can be
-  // removed when "before" state is removed.
   const runCorrelations = new Map<string, BeforeAfter>();
-  for (const results of reportMap.get("after")!) {
+  for (const results of afterChecks) {
     const { readme, tag } = results;
     const key = tag ? `${readme}#${tag}` : readme;
     if (runCorrelations.has(key)) {
       throw new Error(`Duplicate key found correlating autorest runs: ${key}`);
     }
 
-    const beforeCandidates = reportMap
-      .get("before")!
-      .filter((r) => r.readme === readme && r.tag === tag);
+    // Look for candidates matching readme and tag
+    const beforeCandidates = beforeChecks.filter((r) => r.readme === readme && r.tag === tag);
     if (beforeCandidates.length === 1) {
       runCorrelations.set(key, {
         before: beforeCandidates[0],
@@ -83,9 +83,9 @@ export async function generateReport(
       if (!defaultTag) {
         throw new Error(`No default tag found for readme ${readme} in before state`);
       }
-      const beforeDefaultTagCandidates = reportMap
-        .get("before")!
-        .filter((r) => r.readme === readme && r.tag === defaultTag);
+      const beforeDefaultTagCandidates = beforeChecks.filter(
+        (r) => r.readme === readme && r.tag === defaultTag,
+      );
 
       if (beforeDefaultTagCandidates.length === 1) {
         runCorrelations.set(key, {
@@ -99,7 +99,8 @@ export async function generateReport(
         );
       }
 
-      const beforeReadmeCandidate = reportMap.get("before")!.filter((r) => r.readme === readme);
+      // Look for candidates matching just the readme file
+      const beforeReadmeCandidate = beforeChecks.filter((r) => r.readme === readme);
       if (beforeReadmeCandidate.length === 1) {
         runCorrelations.set(key, {
           before: beforeReadmeCandidate[0],
@@ -130,18 +131,12 @@ export async function generateReport(
   // <tag name> | link: readme.md#tag-<tag-name> | link: readme.md#tag-<tag-name>
   // ... | ... | ...
   for (const [_, { before, after }] of runCorrelations.entries()) {
-    // TODO: DRY
-    const afterName = after.tag ? after.tag : "default";
-    const beforeName = before?.tag ? before?.tag : "default";
-    const afterPath = after.tag ? `${after.readme}#tag-${after.tag}` : after.readme;
-    // TODO: Clean this up
-    const beforePath = before
-      ? before?.tag
-        ? `${before?.readme}#tag-${before?.tag}`
-        : before?.readme
-      : "";
+    const afterName = getName(after);
+    const beforeName = before ? getName(before) : "default";
+    const afterPath = getPath(after);
+    const beforePath = before ? getPath(before) : "";
 
-    outputMarkdown += `| ${afterName} | link: [${afterName}](${getFileLink(compareSha, `/${afterPath}`)}) | link: [${beforeName}](${getFileLink(baseBranch, `/${beforePath}`)}) |\n`;
+    outputMarkdown += `| ${afterName} | link: [${afterName}](${getFileLink(compareSha, afterPath)}) | link: [${beforeName}](${getFileLink(baseBranch, beforePath)}) |\n`;
   }
 
   outputMarkdown += `\n\n`;
@@ -149,7 +144,7 @@ export async function generateReport(
   const newViolations: LintDiffViolation[] = [];
   const existingViolations: LintDiffViolation[] = [];
 
-  for (const [_, { before, after }] of runCorrelations.entries()) {
+  for (const [runKey, { before, after }] of runCorrelations.entries()) {
     // TODO: May need to do some filtering of unrelated swaggers, see
     // momentOfTruthPostProcessing.ts:421
     // TODO: Trinary, should this happen?
@@ -161,6 +156,7 @@ export async function generateReport(
     );
 
     const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
+    console.log(`Correlated Run: ${runKey}`);
     console.log(`New violations: ${newitems.length}`);
     console.log(`Existing violations: ${existingItems.length}`);
 
@@ -168,6 +164,7 @@ export async function generateReport(
     existingViolations.push(...existingItems);
   }
 
+  console.log("Populating armRpcs for new violations");
   for (const newItem of newViolations) {
     // TODO: Potential performance issue, make parallel
     newItem.armRpcs = await getRelatedArmRpcFromDoc(newItem.code);
@@ -176,13 +173,10 @@ export async function generateReport(
   newViolations.sort(compareLintDiffViolations);
   existingViolations.sort(compareLintDiffViolations);
 
-  // MUST FIX Following errors/warnings are introduced by the current PR
-  // Rule | Message | Related RPC [For API reviewers]
   if (newViolations.length > 0) {
     outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
     if (newViolations.length > 50) {
-      // TODO: Const
-      outputMarkdown += "Only 50 items are listed, please refer to log for more details.\n";
+      outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
     }
     outputMarkdown += "\n";
 
@@ -202,12 +196,9 @@ export async function generateReport(
   if (existingViolations.length > 0) {
     outputMarkdown += "**The following errors/warnings exist before current PR submission:**\n";
     if (existingViolations.length > 50) {
-      // TODO: Const
-      outputMarkdown += "Only 50 items are listed, please refer to log for more details.\n";
+      outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
     }
     outputMarkdown += "\n";
-
-    // TODO: ensure columns are correct
     outputMarkdown += "| Rule | Message |\n";
     outputMarkdown += "| ---- | ------- |\n";
 
@@ -338,6 +329,8 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
   const violations: LintDiffViolation[] = [];
 
   for (const line of (runResult.stderr + runResult.stdout).split("\n")) {
+    // TODO: Check for fatal autorest run errors and surface those
+
     if (!line.includes('"extensionName":"@microsoft.azure/openapi-validator"')) {
       continue;
     }
@@ -411,6 +404,15 @@ export function getNewItems(
   }
 
   return [newItems, existingItems];
+}
+
+export function getName(result: AutorestRunResult) {
+  return result.tag ? result.tag : "default";
+}
+
+export function getPath(result: AutorestRunResult) {
+  const { readme, tag } = result;
+  return tag ? `${readme}#tag-${tag}` : readme;
 }
 
 export function arrayIsEqual(a: any[], b: any[]) {

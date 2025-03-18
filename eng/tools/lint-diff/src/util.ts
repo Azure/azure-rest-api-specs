@@ -34,7 +34,6 @@ export type AutorestRunResult = {
   readme: string;
   tag: string;
 
-  // TODO: Is there a shorthand way to mix in the output of executeCommand?
   error: ExecException | null;
   stdout: string;
   stderr: string;
