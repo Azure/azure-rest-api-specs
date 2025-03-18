@@ -60,14 +60,6 @@ using Microsoft.DatabaseWatcher;
   "DatabaseWatcherResourceProvisioningState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
-  "DatabaseWatcherManagedServiceIdentity",
-  "csharp"
-);
-@@clientName(Azure.ResourceManager.Legacy.ManagedServiceIdentityType,
-  "DatabaseWatcherManagedServiceIdentityType",
-  "csharp"
-);
 @@alternateType(Datastore.kustoClusterUri, url, "csharp");
 @@alternateType(Datastore.kustoDataIngestionUri, url, "csharp");
 @@alternateType(Datastore.kustoManagementUrl, url, "csharp");
