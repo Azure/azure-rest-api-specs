@@ -4,13 +4,9 @@ import { marked } from "marked";
 import yaml from "yaml";
 
 /**
- * @typedef {import('./types.js').ILogger} ILogger
- */
-
-/**
  * @param {string} markdown
  * @param {Object} [options]
- * @param {ILogger} [options.logger]
+ * @param {import('./types.js').ILogger} [options.logger]
  * @returns {Promise<Set<string>>} All input files for all tags
  */
 export async function getInputFiles(markdown, options = {}) {

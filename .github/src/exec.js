@@ -5,13 +5,9 @@ import { promisify } from "util";
 const exec = promisify(child_process.exec);
 
 /**
- * @typedef {import('./types.js').ILogger} ILogger
- */
-
-/**
  * @param {string} command
  * @param {Object} [options]
- * @param {ILogger} [options.logger]
+ * @param {import('./types.js').ILogger} [options.logger]
  * @param {number} [options.maxBuffer]
  */
 export async function execRoot(command, options = {}) {
