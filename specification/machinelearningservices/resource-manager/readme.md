@@ -43,7 +43,7 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2025-04-01-preview/workspaceRP.json
 suppressions:
   - code: NestedResourcesMustHaveListOperation
-    reason: >
+    reason: 
       This resource will have many kinds, and we currently only start with the first kind
       that will have a 1-to-1 mapping with the parent resource. We have not implemented
       the List API yet but will add it when needed in the future.
@@ -68,7 +68,7 @@ suppressions:
     reason: Exists in Swagger, unsure why it's flagged.
 
   - code: PutResponseCodes
-    reason: >
+    reason: 
       Caused by Swagger file refactor, this is already in production.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].put
@@ -79,7 +79,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"].put
 
   - code: ProvisioningStateSpecifiedForLROPut
-    reason: >
+    reason: 
       This should exist in 2024-10-01-preview and was suppressed already, unsure why it's triggered again.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
