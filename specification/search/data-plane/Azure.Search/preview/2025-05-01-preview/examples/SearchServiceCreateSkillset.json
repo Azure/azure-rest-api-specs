@@ -121,7 +121,39 @@
               "targetName": "markdown_document"
             }
           ]
-        }
+        },
+        {
+          "outputMode": "oneToMany",
+          "outputFormat": "text",
+          "extractionOptions": [
+            "images",
+            "locationMetadata"
+          ],
+          "chunkingProperties": {
+            "unit": "characters",
+            "maximumLength": 500,
+            "overlapLength": 50
+          },
+          "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+          "name": "docIntelligenceLayoutSkill#2",
+          "context": "/document",
+          "inputs": [
+            {
+              "name": "file_data",
+              "source": "/document/content"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "text_chunks",
+              "targetName": "text_chunks"
+            },
+            {
+              "name": "images",
+              "targetName": "images"
+            }
+          ]
+        }        
       ],
       "cognitiveServices": {
         "key": "myKey",
@@ -268,7 +300,40 @@
                 "targetName": "markdown_document"
               }
             ]
-          }
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill#2",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "outputFormat": "text",
+            "extractionOptions": [
+              "images",
+              "locationMetadata"
+            ],
+            "chunkingProperties": {
+              "unit": "characters",
+              "maximumLength": 500,
+              "overlapLength": 50
+            },
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "text_chunks",
+                "targetName": "text_chunks"
+              },
+              {
+                "name": "images",
+                "targetName": "images"
+              }
+            ]
+          }          
         ],
         "cognitiveServices": {
           "@odata.type": "#Microsoft.Azure.Search.AIServicesByKey",

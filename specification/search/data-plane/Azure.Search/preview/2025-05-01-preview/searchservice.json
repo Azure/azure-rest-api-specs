@@ -11005,6 +11005,11 @@
         }
       ],
       "properties": {
+        "outputFormat": {
+          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillOutputFormat",
+          "x-nullable": true,
+          "description": "Controls the cardinality of the output format. Default is 'markdown'."
+        },        
         "outputMode": {
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillOutputMode",
           "x-nullable": true,
@@ -11014,13 +11019,26 @@
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillMarkdownHeaderDepth",
           "x-nullable": true,
           "description": "The depth of headers in the markdown output. Default is h6."
-        }
+        },
+        "extractionOptions": {
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentIntelligenceLayoutSkillExtractionOptions"
+          },
+          "description": "Controls the cardinality of the content extracted from the document by the skill"    
+        },
+        "chunkProperties": {
+          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkProperties",
+          "x-nullable": true,
+          "description": "Controls the cardinality for chunking the content."       
+        }            
       },
       "externalDocs": {
         "url": "https://learn.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
       },
-      "description": "A skill that extracts content and layout information (as markdown), via Azure AI Services, from files within the enrichment pipeline."
-    },
+      "description": "A skill that extracts content and layout information, via Azure AI Services, from files within the enrichment pipeline."
+    },    
     "DocumentIntelligenceLayoutSkillOutputMode": {
       "type": "string",
       "enum": [
@@ -11033,13 +11051,38 @@
           {
             "value": "oneToMany",
             "name": "OneToMany",
-            "description": "Specify the deepest markdown header section to parse."
+            "description": "Specify that the output should be parsed as 'oneToMany'."
           }
         ]
       },
       "default": "oneToMany",
-      "description": "Controls the cardinality of the output produced by the skill. Default is 'oneToMany'"
+      "description": "Controls the cardinality of the output produced by the skill. Default is 'oneToMany'."
     },
+    "DocumentIntelligenceLayoutSkillOutputFormat": {
+      "type": "string",
+      "enum": [
+        "text",
+        "markdown"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentIntelligenceLayoutSkillOutputFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "text",
+            "name": "Text",
+            "description": "Specify the format of the output as text."
+          },
+          {
+            "value": "markdown",
+            "name": "Markdown",
+            "description": "Specify the format of the output as markdown."
+          }          
+        ]
+      },
+      "default": "markdown",
+      "description": "Controls the cardinality of the output format. Default is 'markdown'."
+    },    
     "DocumentIntelligenceLayoutSkillMarkdownHeaderDepth": {
       "type": "string",
       "enum": [
@@ -11089,6 +11132,72 @@
       "default": "h6",
       "description": "The depth of headers in the markdown output. Default is h6."
     },
+    "DocumentIntelligenceLayoutSkillExtractionOptions": {
+      "type": "string",
+      "enum": [
+        "image",
+        "locationMetadata"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentIntelligenceLayoutSkillExtractionOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "image",
+            "name": "Image",
+            "description": "Specify that image content should be extracted from the document."
+          },
+          {
+            "value": "locationMetadata",
+            "name": "LocationMetadata",
+            "description": "Specify that location metadata should be extracted from the document."
+          }       
+        ]
+      },
+      "description": "Controls the cardinality of the content extracted from the document by the skill."
+    },
+    "DocumentIntelligenceLayoutSkillChunkProperties": {
+      "type": "object",
+      "description": "Controls the cardinality for chunking the content.",
+      "properties": {
+        "unit": {
+          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkUnit",
+          "x-nullable": true,
+          "description": "The unit of the chunk."
+        },
+        "maximumLength": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The maximum chunk length in characters. Default is 500."
+        },
+        "overlapLength": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The length of overlap provided between two text chunks. Default is 0."
+        }
+      }
+    },    
+    "DocumentIntelligenceLayoutSkillChunkUnit": {
+      "type": "string",
+      "enum": [
+        "characters"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentIntelligenceLayoutSkillChunkUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "characters",
+            "name": "Characters",
+            "description": "Specifies chunk by characters."
+          }
+        ]
+      },
+      "default": "characters",
+      "description": "Controls the cardinality of the chunk unit. Default is 'characters'"
+    },    
     "WebApiSkill": {
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
