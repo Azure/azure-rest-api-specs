@@ -3,11 +3,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.DurableTask" })
@@ -131,7 +129,13 @@ interface Schedulers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   @doc("Update a Scheduler")
   @errorsDoc("Validation error: required parameters are missing")
-  update is ArmResourcePatchAsync<Scheduler, SchedulerProperties>;
+  update is ArmCustomPatchAsync<
+    Scheduler,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Scheduler,
+      SchedulerProperties
+    >
+  >;
   @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
   @doc("List Schedulers by resource group")

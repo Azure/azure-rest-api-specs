@@ -678,24 +678,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation",
@@ -842,23 +824,6 @@
         "sku"
       ]
     },
-    "SchedulerPropertiesUpdate": {
-      "type": "object",
-      "description": "Details of the Scheduler",
-      "properties": {
-        "ipAllowlist": {
-          "type": "array",
-          "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sku": {
-          "$ref": "#/definitions/SchedulerSkuUpdate",
-          "description": "SKU of the durable task scheduler"
-        }
-      }
-    },
     "SchedulerSku": {
       "type": "object",
       "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
@@ -899,18 +864,37 @@
     },
     "SchedulerUpdate": {
       "type": "object",
-      "description": "A Durable Task Scheduler resource",
+      "description": "The type used for update operations of the Scheduler.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/SchedulerPropertiesUpdate",
+          "$ref": "#/definitions/SchedulerUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "SchedulerUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Scheduler.",
+      "properties": {
+        "ipAllowlist": {
+          "type": "array",
+          "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/SchedulerSkuUpdate",
+          "description": "SKU of the durable task scheduler"
         }
-      ]
+      }
     },
     "TaskHub": {
       "type": "object",
