@@ -3,7 +3,7 @@
 import { diff } from "./git.js";
 
 /**
- * @typedef {import('./logger.js').ILogger} ILogger
+ * @typedef {import('./types.js').ILogger} ILogger
  */
 
 /**

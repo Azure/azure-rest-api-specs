@@ -6,7 +6,7 @@
 import { execRoot } from "./exec.js";
 
 /**
- * @typedef {import('./logger.js').ILogger} ILogger
+ * @typedef {import('./types.js').ILogger} ILogger
  */
 
 /**

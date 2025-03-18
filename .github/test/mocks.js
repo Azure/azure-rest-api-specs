@@ -3,7 +3,7 @@
 import { vi } from "vitest";
 
 /**
- * @typedef {import('../src/logger.js').ILogger} ILogger
+ * @typedef {import('../src/types.js').ILogger} ILogger
  */
 
 /**

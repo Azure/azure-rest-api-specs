@@ -4,7 +4,7 @@ import { marked } from "marked";
 import yaml from "yaml";
 
 /**
- * @typedef {import('./logger.js').ILogger} ILogger
+ * @typedef {import('./types.js').ILogger} ILogger
  */
 
 /**

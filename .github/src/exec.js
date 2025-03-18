@@ -5,7 +5,7 @@ import { promisify } from "util";
 const exec = promisify(child_process.exec);
 
 /**
- * @typedef {import('./logger.js').ILogger} ILogger
+ * @typedef {import('./types.js').ILogger} ILogger
  */
 
 /**
