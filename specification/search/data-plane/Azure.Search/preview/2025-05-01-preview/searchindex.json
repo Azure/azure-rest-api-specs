@@ -515,6 +515,7 @@
               "semantic",
               "vector",
               "queryRewrites",
+              "innerHits",
               "all"
             ],
             "x-ms-enum": {
@@ -540,6 +541,11 @@
                   "value": "queryRewrites",
                   "name": "QueryRewrites",
                   "description": "Allows the user to explore the list of query rewrites generated for their search request."
+                },
+                {
+                  "value": "innerHits",
+                  "name": "InnerHits",
+                  "description": "Allows the user to retrieve scoring information regarding vectors matched within a collection of complex types."
                 },
                 {
                   "value": "all",
@@ -1580,6 +1586,7 @@
         "semantic",
         "vector",
         "queryRewrites",
+        "innerHits",
         "all"
       ],
       "x-ms-enum": {
@@ -1605,6 +1612,11 @@
             "value": "queryRewrites",
             "name": "QueryRewrites",
             "description": "Allows the user to explore the list of query rewrites generated for their search request."
+          },
+          {
+            "value": "innerHits",
+            "name": "InnerHits",
+            "description": "Allows the user to retrieve scoring information regarding vectors matched within a collection of complex types."
           },
           {
             "value": "all",
@@ -1732,6 +1744,11 @@
         "filterOverride": {
           "type": "string",
           "description": "The OData filter expression to apply to this specific vector query. If no filter expression is defined at the vector level, the expression defined in the top level filter parameter is used instead."
+        },
+        "perDocumentVectorLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched."
         }
       },
       "required": [
@@ -3065,6 +3082,11 @@
           "$ref": "#/definitions/VectorsDebugInfo",
           "readOnly": true,
           "description": "Contains debugging information specific to vector and hybrid search."
+        },
+        "innerHits": {
+          "$ref": "#/definitions/InnerHitsDebugInfo",
+          "readOnly": true,
+          "description": "Contains debugging information specific to vectors matched within a collection of complex types."
         }
       },
       "description": "Contains debugging information that can be used to further explore your search results."
@@ -3305,6 +3327,37 @@
       },
       "readOnly": true,
       "description": "Contains debugging information specific to query rewrites."
+    },
+    "QueryResultDocumentInnerHits": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/QueryResultDocumentInnerHit"
+        }
+      },
+      "readOnly": true,
+      "description": "Detailed scoring information for individual elements of a complex collection that matched the search request."
+    },
+    "QueryResultDocumentInnerHit": {
+      "type": "object",
+      "properties": {
+        "ordinal": {
+         "type": "integer",
+         "format": "int64",
+         "readOnly": true,
+         "description": "Position of this specific matching element within it's original collection. Position starts at 0."
+        },
+        "vectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryResultDocumentVectorSubscores"
+          },
+          "readOnly": true,
+          "description": "Detailed scoring information for an individual element of a complex collection that matched a vector query."
+        }
+      },
+      "description": "Detailed scoring information for an individual element of a complex collection."
     }
   },
   "parameters": {
