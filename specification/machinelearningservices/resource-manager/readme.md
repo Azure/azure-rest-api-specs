@@ -42,7 +42,7 @@ input-file:
   - Microsoft.MachineLearningServices/stable/2025-04-01/workspaceFeatures.json
   - Microsoft.MachineLearningServices/stable/2025-04-01/workspaceRP.json
 suppressions:
- - code: ResourceNameRestriction
+  - code: ResourceNameRestriction
     reason: Experience is the same as previous GA version, adding restriction will be a breaking change.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"]
@@ -51,6 +51,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/start"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/stop"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart"]
+
   - code: AvoidAdditionalProperties
     reason: Existing property in previous GA version.
     where:
@@ -58,24 +59,27 @@ suppressions:
       - $.definitions.SparkJob.properties.environmentVariables
       - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-- code: GuidUsage
+
+  - code: GuidUsage
     reason: Existing property in previous GA version.
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
-- code: XmsPageableForListCalls
+
+  - code: XmsPageableForListCalls
     reason: Existing API behavior.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources"].get
-- code: PatchBodyParametersSchema
-    reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
+
+  - code: PatchBodyParametersSchema
+    reason: Suppress as instructed, this patch is for an abstract class and the type-discriminator needs to be required.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties  
-- code: PatchBodyParametersSchema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
+
+  - code: PatchBodyParametersSchema
     reason: The required part is within a property, the whole property itself is not required.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
-  
-```
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schem
+ ```
 
 ### Tag: package-preview-2025-01
 
