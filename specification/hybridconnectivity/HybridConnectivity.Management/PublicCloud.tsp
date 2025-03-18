@@ -95,6 +95,35 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("Public Cloud Connector")
+model PublicCloudConnectorUpdate extends TrackedResourceUpdate {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: PublicCloudConnectorPropertiesUpdate;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'")
+model TrackedResourceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+@doc("Properties of public cloud connectors.")
+model PublicCloudConnectorPropertiesUpdate {
+  @doc("Cloud profile for AWS.")
+  awsCloudProfile?: AwsCloudProfileUpdate;
+}
+
+@doc("cloud profile for AWS.")
+model AwsCloudProfileUpdate {
+  @doc("List of AWS accounts which need to be excluded.")
+  excludedAccounts?: string[];
+}
+
 @doc("Properties of public cloud connectors.")
 model PublicCloudConnectorProperties {
   @doc("Cloud profile for AWS.")
@@ -316,9 +345,10 @@ interface GenerateAwsTemplate {
 interface PublicCloudConnectors {
   get is ArmResourceRead<PublicCloudConnector>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PublicCloudConnector>;
-  update is ArmResourcePatchSync<
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
     PublicCloudConnector,
-    PublicCloudConnectorProperties
+    PublicCloudConnectorUpdate
   >;
   delete is ArmResourceDeleteSync<PublicCloudConnector>;
   listByResourceGroup is ArmResourceListByParent<PublicCloudConnector>;
