@@ -16,7 +16,7 @@ namespace Microsoft.MySQLDiscovery;
  */
 @parentResource(MySQLSite)
 model Summary
-  is Azure.ResourceManager.ProxyResource<SummariesProperties, false> {
+  is Azure.ResourceManager.ProxyResource<SummariesProperties, true> {
   ...ResourceNameParameter<
     Resource = Summary,
     KeyName = "summaryName",

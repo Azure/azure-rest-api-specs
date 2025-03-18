@@ -16,7 +16,7 @@ namespace Microsoft.MySQLDiscovery;
  */
 @parentResource(MySQLSite)
 model ErrorSummary
-  is Azure.ResourceManager.ProxyResource<ErrorSummariesProperties, false> {
+  is Azure.ResourceManager.ProxyResource<ErrorSummariesProperties, true> {
   ...ResourceNameParameter<
     Resource = ErrorSummary,
     KeyName = "errorSummaryName",

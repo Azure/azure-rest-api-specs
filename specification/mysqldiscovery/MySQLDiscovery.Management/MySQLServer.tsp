@@ -17,7 +17,7 @@ namespace Microsoft.MySQLDiscovery;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "MySQL is a technical term cannot follow pascal case"
 @parentResource(MySQLSite)
 model MySQLServer
-  is Azure.ResourceManager.ProxyResource<MySQLServerProperties, false> {
+  is Azure.ResourceManager.ProxyResource<MySQLServerProperties, true> {
   ...ResourceNameParameter<
     Resource = MySQLServer,
     KeyName = "serverName",
