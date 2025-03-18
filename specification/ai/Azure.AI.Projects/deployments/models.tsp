@@ -18,42 +18,34 @@ namespace Azure.AI.Projects;
 @doc("Model Deployment Definition")
 @resource("deployments")
 model Deployment {
-  @doc("Name of the deployment for the model")
+  @doc("Name of the deployment")
   @visibility("read")
-  @key("deploymentName")
-  deploymentName: string;
+  @key("name")
+  name: string;
 
-  @doc("Publisher-specific name of the model")
+  @doc("Publisher-specific name of the deployed model")
   @visibility("read")
   modelName: string;
 
-  @doc("Publisher-specific version of the model")
+  @doc("Publisher-specific version of the deployed model")
   @visibility("read")
   modelVersion: string;
 
-  @doc("Name of the model publisher")
+  @doc("Name of the deployed model's publisher")
   @visibility("read")
-  publisher: string;
+  modelPublisher: string;
 
-  @doc("Capabilities of model")
+  @doc("Capabilities of deployed model")
   @visibility("read")
   capabilities: Record<string>;
-
-  @doc("RAI policy enabled for model")
-  @visibility("read")
-  raiPolicyName: string;
 
   @doc("Sku of the model deployment")
   @visibility("read")
   sku: Sku;
 
-  @doc("Name of the connection the model comes from")
+  @doc("Name of the connection the deployment comes from")
   @visibility("read")
   connectionName?: string;
-
-  @doc("System data of the resource")
-  @visibility("read")
-  systemData: SystemData;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"

@@ -18,10 +18,6 @@ namespace Azure.AI.Projects;
 @doc("Response from the listSecrets operation")
 @resource("connections")
 model Connection {
-  @doc("Fully qualified resource identifier")
-  @visibility("read")
-  id: string;
-
   @doc("The name of the resource")
   @visibility("read")
   @key("connectionName")
@@ -58,4 +54,10 @@ union ConnectionType {
 
   @doc("Generic connection that uses API Key authentication")
   APIKey: "ApiKey",
+
+  @doc("Application Insights")
+  ApplicationInsights: "AppInsights",
+
+  @doc("Custom Keys")
+  Custom: "CustomKeys",
 }
