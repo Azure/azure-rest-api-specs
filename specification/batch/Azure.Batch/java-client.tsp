@@ -1602,3 +1602,27 @@ op enableNodeSchedulingCustomization is Azure.Batch.PostOperationNew<
   enableNodeSchedulingCustomization,
   "java"
 );
+
+// Get Node Remote Login Settings Operation
+@doc("Optional parameters for Get Node Remote Login Settings operation.")
+model GetBatchNodeRemoteLoginSettingsOptions {
+  ...Azure.Batch.CommonParameters;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Node Remote Login Settings operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
+op getNodeRemoteLoginSettingsCustomization is Azure.Batch.ReadOperationNew<
+  {
+    ...Azure.Batch.GetNodeRemoteLoginSettingsRequiredParameters;
+
+    @doc("Optional parameters for Get Node Remote Login Settings operation.")
+    options?: GetBatchNodeRemoteLoginSettingsOptions;
+  },
+  Azure.Batch.BatchNodeRemoteLoginSettings
+>;
+
+@@override(Azure.Batch.Nodes.getNodeRemoteLoginSettings,
+  getNodeRemoteLoginSettingsCustomization,
+  "java"
+);

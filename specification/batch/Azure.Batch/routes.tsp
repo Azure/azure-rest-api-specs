@@ -1841,6 +1841,16 @@ alias EnableNodeSchedulingRequiredParameters = {
   nodeId: string;
 };
 
+alias GetNodeRemoteLoginSettingsRequiredParameters = {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
+
+  @doc("The ID of the Compute Node for which to obtain the remote login settings.")
+  @path
+  nodeId: string;
+};
+
 // Node Interface
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1992,16 +2002,10 @@ interface Nodes {
     you must create a user Account on the Compute Node.
     """)
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
-  @clientName("getNodeRemoteLoginSettingsInternal", "java")
-  getNodeRemoteLoginSettings is ReadOperation<
+  getNodeRemoteLoginSettings is ReadOperationNew<
     {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node for which to obtain the remote login settings.")
-      @path
-      nodeId: string;
+      ...CommonParameters;
+      ...GetNodeRemoteLoginSettingsRequiredParameters;
     },
     BatchNodeRemoteLoginSettings
   >;
