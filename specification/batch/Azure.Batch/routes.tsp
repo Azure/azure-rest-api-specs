@@ -73,7 +73,7 @@ interface Pools {
   listPoolUsageMetrics is ListOperation<
     {
       ...CommonListParameters;
-      ...ListPoolUsageMetricsParameters;
+      ...ListPoolUsageMetricsOptionalParameters;
     },
     BatchPoolListUsageMetricsResult
   >;
@@ -88,7 +88,7 @@ interface Pools {
   createPool is CreateOperation<
     {
       ...CommonJsonParameters;
-      ...CreatePoolParameters;
+      ...CreatePoolRequiredParameters;
     },
     {}
   >;
@@ -99,7 +99,7 @@ interface Pools {
   listPools is ListOperation<
     {
       ...CommonListParameters;
-      ...ListPoolsParameters;
+      ...ListPoolsOptionalParameters;
     },
     BatchPoolListResult
   >;
@@ -175,7 +175,7 @@ interface Pools {
   disablePoolAutoScale is PostOperation<
     {
       ...CommonParameters;
-      ...DisablePoolAutoscaleParameters;
+      ...DisablePoolAutoscaleRequiredParameters;
     },
     RequestSuccessResponseHeaders
   >;
@@ -291,7 +291,7 @@ interface Pools {
   listSupportedImages is ListOperation<
     {
       ...CommonListParameters;
-      ...ListSupportedImagesParameters;
+      ...ListSupportedImagesOptionalParameters;
     },
     BatchAccountListSupportedImagesResult
   >;
@@ -305,7 +305,7 @@ interface Pools {
   listPoolNodeCounts is ListOperation<
     {
       ...CommonListParameters;
-      ...ListPoolNodeCountsParameters;
+      ...ListPoolNodeCountsOptionalParameters;
     },
     BatchPoolNodeCountsListResult
   >;
@@ -470,7 +470,7 @@ interface Jobs {
   listJobs is ListOperation<
     {
       ...CommonListParameters;
-      ...ListJobsParameters;
+      ...ListJobsOptionalParameters;
     },
     BatchJobListResult
   >;
@@ -482,7 +482,7 @@ interface Jobs {
     {
       ...CommonListParameters;
       ...ListJobsFromScheduleRequiredParameters;
-      ...ListJobsFromScheduleParameters;
+      ...ListJobsFromScheduleOptionalParameters;
     },
     BatchJobListResult
   >;
@@ -504,7 +504,7 @@ interface Jobs {
     {
       ...CommonListParameters;
       ...ListJobPreparationAndReleaseTaskStatusRequiredParameters;
-      ...ListJobPreparationAndReleaseTaskStatusParameters;
+      ...ListJobPreparationAndReleaseTaskStatusOptionalParameters;
     },
     BatchJobPreparationAndReleaseTaskStatusListResult
   >;
@@ -520,7 +520,7 @@ interface Jobs {
   getJobTaskCounts is ReadOperation<
     {
       ...CommonParameters;
-      ...getJobTaskCountsParameters;
+      ...GetJobTaskCountsRequiredParameters;
     },
     BatchTaskCountsResult
   >;
@@ -740,7 +740,7 @@ interface JobSchedules {
   createJobSchedule is CreateOperation<
     {
       ...CommonJsonParameters;
-      ...CreateJobScheduleParameters;
+      ...CreateJobScheduleRequiredParameters;
     },
     {}
   >;
@@ -751,7 +751,7 @@ interface JobSchedules {
   listJobSchedules is ListOperation<
     {
       ...CommonListParameters;
-      ...ListJobSchedulesParameters;
+      ...ListJobSchedulesOptionalParameters;
     },
     BatchJobScheduleListResult
   >;
@@ -789,7 +789,7 @@ interface Tasks {
     {
       ...CommonListParameters;
       ...ListTasksRequiredParameters;
-      ...ListTasksParameters;
+      ...ListTasksOptionalParameters;
     },
     BatchTaskListResult
   >;
@@ -815,7 +815,7 @@ interface Tasks {
   createTaskCollection is PostOperation<
     {
       ...CommonJsonParameters;
-      ...CreateTaskCollectionParameters;
+      ...CreateTaskCollectionRequiredParameters;
     },
     BatchTaskAddCollectionResult
   >;
@@ -877,7 +877,7 @@ interface Tasks {
     {
       ...CommonParameters;
       ...ListSubTasksRequiredParameters;
-      ...ListSubTasksParameters;
+      ...ListSubTasksOptionalParameters;
     },
     BatchTaskListSubtasksResult
   >;

@@ -427,7 +427,7 @@ alias GetApplicationRequiredParameters = {
 };
 
 // Pool Aliases
-alias ListPoolUsageMetricsParameters = {
+alias ListPoolUsageMetricsOptionalParameters = {
   @doc("""
     The earliest time from which to include metrics. This must be at least two and
     a half hours before the current time. If not specified this defaults to the
@@ -454,13 +454,13 @@ alias ListPoolUsageMetricsParameters = {
   $filter?: string;
 };
 
-alias CreatePoolParameters = {
+alias CreatePoolRequiredParameters = {
   @body
   @doc("The Pool to be created.")
   pool: BatchPoolCreateContent;
 };
 
-alias ListPoolsParameters = {
+alias ListPoolsOptionalParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
     https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-pools.
@@ -480,13 +480,13 @@ alias ListPoolsParameters = {
   $expand?: string[];
 };
 
-alias DisablePoolAutoscaleParameters = {
+alias DisablePoolAutoscaleRequiredParameters = {
   @doc("The ID of the Pool on which to disable automatic scaling.")
   @path
   poolId: string;
 };
 
-alias ListSupportedImagesParameters = {
+alias ListSupportedImagesOptionalParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
     https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
@@ -496,7 +496,7 @@ alias ListSupportedImagesParameters = {
   $filter?: string;
 };
 
-alias ListPoolNodeCountsParameters = {
+alias ListPoolNodeCountsOptionalParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
     https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-support-images.
@@ -691,7 +691,7 @@ alias CreateJobRequiredParameters = {
   job: BatchJobCreateContent;
 };
 
-alias ListJobsParameters = {
+alias ListJobsOptionalParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
     https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs.
@@ -717,7 +717,7 @@ alias ListJobsFromScheduleRequiredParameters = {
   jobScheduleId: string;
 };
 
-alias ListJobsFromScheduleParameters = {
+alias ListJobsFromScheduleOptionalParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
     https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
@@ -743,7 +743,7 @@ alias ListJobPreparationAndReleaseTaskStatusRequiredParameters = {
   jobId: string;
 };
 
-alias ListJobPreparationAndReleaseTaskStatusParameters = {
+alias ListJobPreparationAndReleaseTaskStatusOptionalParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
     https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
@@ -758,7 +758,7 @@ alias ListJobPreparationAndReleaseTaskStatusParameters = {
   $select?: string[];
 };
 
-alias getJobTaskCountsParameters = {
+alias GetJobTaskCountsRequiredParameters = {
   @doc("The ID of the Job.")
   @path
   jobId: string;
@@ -910,13 +910,13 @@ alias TerminateJobScheduleOptionalParameters = {
   force?: boolean;
 };
 
-alias CreateJobScheduleParameters = {
+alias CreateJobScheduleRequiredParameters = {
   @doc("The Job Schedule to be created.")
   @bodyRoot
   jobSchedule: BatchJobScheduleCreateContent;
 };
 
-alias ListJobSchedulesParameters = {
+alias ListJobSchedulesOptionalParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
     https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-job-schedules.
@@ -953,7 +953,7 @@ alias ListTasksRequiredParameters = {
   jobId: string;
 };
 
-alias ListTasksParameters = {
+alias ListTasksOptionalParameters = {
   @doc("""
     An OData $filter clause. For more information on constructing this filter, see
     https://learn.microsoft.com/rest/api/batchservice/odata-filters-in-batch#list-tasks.
@@ -973,7 +973,7 @@ alias ListTasksParameters = {
   $expand?: string[];
 };
 
-alias CreateTaskCollectionParameters = {
+alias CreateTaskCollectionRequiredParameters = {
   @doc("The ID of the Job to which the Task collection is to be added.")
   @path
   jobId: string;
@@ -1045,7 +1045,7 @@ alias ListSubTasksRequiredParameters = {
   taskId: string;
 };
 
-alias ListSubTasksParameters = {
+alias ListSubTasksOptionalParameters = {
   @doc("An OData $select clause.")
   @query
   @clientName("select", "!autorest")

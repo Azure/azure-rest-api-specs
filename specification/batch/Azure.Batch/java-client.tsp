@@ -62,7 +62,7 @@ op listApplicationsCustomization is Azure.Batch.ListOperation<
 @doc("Optional parameters for List Pool Usage Metrics operation.")
 model ListBatchPoolUsageMetricsOptions {
   ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListPoolUsageMetricsParameters;
+  ...Azure.Batch.ListPoolUsageMetricsOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -92,7 +92,7 @@ model CreateBatchPoolOptions {
 @route("/pools")
 op createPoolCustomization is Azure.Batch.CreateOperation<
   {
-    ...Azure.Batch.CreatePoolParameters;
+    ...Azure.Batch.CreatePoolRequiredParameters;
 
     @doc("Optional parameters for Create Pool operation.")
     options?: CreateBatchPoolOptions;
@@ -106,7 +106,7 @@ op createPoolCustomization is Azure.Batch.CreateOperation<
 @doc("Optional parameters for List Pools operation.")
 model ListBatchPoolsOptions {
   ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListPoolsParameters;
+  ...Azure.Batch.ListPoolsOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -228,7 +228,7 @@ model DisableBatchPoolAutoScaleOptions {
 @route("/pools/{poolId}/disableautoscale")
 op disablePoolAutoScaleCustomization is Azure.Batch.PostOperation<
   {
-    ...Azure.Batch.DisablePoolAutoscaleParameters;
+    ...Azure.Batch.DisablePoolAutoscaleRequiredParameters;
 
     @doc("Optional parameters for Disable Pool AutoScale operation.")
     options?: DisableBatchPoolAutoScaleOptions;
@@ -391,7 +391,7 @@ op removeNodesCustomization is Azure.Batch.PostOperation<
 @doc("Optional parameters for List Supported Images operation.")
 model ListSupportedBatchImagesOptions {
   ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListSupportedImagesParameters;
+  ...Azure.Batch.ListSupportedImagesOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -414,7 +414,7 @@ op listSupportedImagesCustomization is Azure.Batch.ListOperation<
 @doc("Optional parameters for List Pool Node Counts operation.")
 model ListBatchPoolNodeCountsOptions {
   ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListPoolNodeCountsParameters;
+  ...Azure.Batch.ListPoolNodeCountsOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -622,7 +622,7 @@ op createJobCustomization is Azure.Batch.CreateOperation<
 @doc("Optional parameters for List Jobs operation.")
 model ListBatchJobsOptions {
   ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListJobsParameters;
+  ...Azure.Batch.ListJobsOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -642,7 +642,7 @@ op listJobsCustomization is Azure.Batch.ListOperation<
 @doc("Optional parameters for List Jobs From Schedule operation.")
 model ListBatchJobsFromScheduleOptions {
   ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListJobsFromScheduleParameters;
+  ...Azure.Batch.ListJobsFromScheduleOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -667,7 +667,7 @@ op listJobsFromScheduleCustomization is Azure.Batch.ListOperation<
 @doc("Optional parameters for List Jobs From Schedule operation.")
 model ListBatchJobPreparationAndReleaseTaskStatusOptions {
   ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListJobPreparationAndReleaseTaskStatusParameters;
+  ...Azure.Batch.ListJobPreparationAndReleaseTaskStatusOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -699,7 +699,7 @@ model GetBatchJobTaskCountsOptions {
 @route("/jobs/{jobId}/taskcounts")
 op getJobTaskCountsCustomization is Azure.Batch.ReadOperation<
   {
-    ...Azure.Batch.getJobTaskCountsParameters;
+    ...Azure.Batch.GetJobTaskCountsRequiredParameters;
 
     @doc("Optional parameters for Get Job Task Counts operation.")
     options?: GetBatchJobTaskCountsOptions;
@@ -1056,7 +1056,7 @@ model CreateBatchJobScheduleOptions {
 @route("/jobschedules")
 op createJobScheduleCustomization is Azure.Batch.CreateOperation<
   {
-    ...Azure.Batch.CreateJobScheduleParameters;
+    ...Azure.Batch.CreateJobScheduleRequiredParameters;
 
     @doc("Optional parameters for Create Job Schedule operation.")
     options?: CreateBatchJobScheduleOptions;
@@ -1073,7 +1073,7 @@ op createJobScheduleCustomization is Azure.Batch.CreateOperation<
 @doc("Optional parameters for List Job Schedules operation.")
 model ListBatchJobSchedulesOptions {
   ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListJobSchedulesParameters;
+  ...Azure.Batch.ListJobSchedulesOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
@@ -1117,7 +1117,7 @@ op createTaskCustomization is Azure.Batch.CreateOperation<
 @doc("Optional parameters for List Tasks operation.")
 model ListBatchTasksOptions {
   ...Azure.Batch.CommonListParameters;
-  ...Azure.Batch.ListTasksParameters;
+  ...Azure.Batch.ListTasksOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
@@ -1146,7 +1146,7 @@ model CreateBatchTaskCollectionOptions {
 @route("/jobs/{jobId}/addtaskcollection")
 op createTaskCollectionCustomization is Azure.Batch.PostOperation<
   {
-    ...Azure.Batch.CreateTaskCollectionParameters;
+    ...Azure.Batch.CreateTaskCollectionRequiredParameters;
 
     @doc("Optional parameters for Create Task Collection operation.")
     options?: CreateBatchTaskCollectionOptions;
@@ -1233,7 +1233,7 @@ op replaceTaskCustomization is Azure.Batch.ReplaceOperation<
 @doc("Optional parameters for List SubTasks operation.")
 model ListBatchSubTasksOptions {
   ...Azure.Batch.CommonParameters;
-  ...Azure.Batch.ListSubTasksParameters;
+  ...Azure.Batch.ListSubTasksOptionalParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
