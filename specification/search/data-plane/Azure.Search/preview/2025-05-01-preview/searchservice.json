@@ -24,6 +24,311 @@
     "application/json"
   ],
   "paths": {
+    "/agents('{agentName}')": {
+      "put": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_CreateOrUpdate",
+        "description": "Creates a new agent or updates an agent if it already exists.",
+        "parameters": [
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent to create or update."
+          },
+          {
+            "name": "agent",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgent"
+            },
+            "description": "The definition of the agent to create or update."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/PreferHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgent"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgent"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_Delete",
+        "description": "Deletes an agent.",
+        "parameters": [
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent to delete."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_Get",
+        "description": "Retrieves an agent definition.",
+        "parameters": [
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgent"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/agents": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_List",
+        "description": "Lists all agents available for a search service.",
+        "parameters": [
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Selects which top-level properties of the agents to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListKnowledgeAgentsResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "Agents_Create",
+        "description": "Creates a new agent.",
+        "parameters": [
+          {
+            "name": "agent",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgent"
+            },
+            "description": "The definition of the agent to create."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgent"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/agents('{agentName}')/toolinstructions": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "KnowledgeAgents_GetToolInstructions",
+        "description": "Retrieves tool instructions for a specific agent.",
+        "parameters": [
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent to retrieve tool instructions for."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "The tool instructions are successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgentToolInstructions"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/agents('{agentName}')/retrieve": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "operationId": "KnowledgeAgents_Retrieve",
+        "description": "Processes retrieval requests for a specific agent.",
+        "parameters": [
+          {
+            "name": "agentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent to process retrieval requests for."
+          },
+          {
+            "name": "retrievalRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgentRetrievalRequest"
+            },
+            "description": "The retrieval request to process."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "The retrieval response is successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeAgentRetrievalResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/datasources('{dataSourceName}')": {
       "put": {
         "tags": [
@@ -2067,6 +2372,405 @@
     }
   },
   "definitions": {
+    "KnowledgeAgent": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the knowledge agent."
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentModel"
+          },
+          "description": "Contains configuration options on how to connect to AI models."
+        },
+        "targetIndexes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentTargetIndex"
+          }
+        },
+        "requestLimits": {
+          "type": "object",
+          "$ref": "#/definitions/KnowledgeAgentRequestLimits"
+        }
+      }
+    },
+    "KnowledgeAgentTargetIndex": {
+      "type": "object",
+      "properties": {
+        "indexName": {
+          "type": "string",
+          "description": "The name of the target index."
+        }
+      }
+    },
+    "KnowledgeAgentRequestLimits": {
+      "type": "object",
+      "properties": {
+        "modelTokenLimit": {
+          "type": "integer",
+          "description": "The token limit for the model."
+        },
+        "rankerTokenLimit": {
+          "type": "integer",
+          "description": "The token limit for the ranker."
+        },
+        "outputTokensLimit": {
+          "type": "integer",
+          "description": "The token limit for the output."
+        },
+        "maxRuntimeInSeconds": {
+          "type": "string",
+          "description": "The maximum runtime in seconds."
+        },
+        "maxDegreesOfParallelism": {
+          "type": "integer",
+          "description": "The maximum degrees of parallelism."
+        }
+      },
+      "description": "Guardrails to limit how much resources are utilized for a single agent retrieval request."
+    },
+    "KnowledgeAgentAzureOpenAIModel": {
+      "type": "object",
+      "x-ms-discriminator-value": "azureOpenAI",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentModel"
+        }
+      ],
+      "properties": {
+        "azureOpenAIParameters": {
+          "x-ms-client-name": "AzureOpenAIParameters",
+          "$ref": "#/definitions/AzureOpenAIParameters",
+          "description": "Contains the parameters specific to Azure OpenAI model endpoint"
+        }
+      },
+      "description": "Specifies the Azure OpenAI resource used to do query planning"
+    },
+    "ListKnowledgeAgentsResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgent"
+          }
+        }
+      }
+    },
+    "KnowledgeAgentModel": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/KnowledgeAgentModelKind",
+          "description": "The type of AI model",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "description": "Specifies the vectorization method to be used during query time."
+    },
+    "KnowledgeAgentModelKind": {
+      "type": "string",
+      "enum": [
+        "azureOpenAI"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeAgentModelKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "azureOpenAI",
+            "name": "AzureOpenAI",
+            "description": "Use Azure Open AI models for query planning."
+          }
+        ]
+      },
+      "description": "The AI model to be used for query planning."
+    },
+    "KnowledgeAgentToolInstructions": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "KnowledgeAgentRetrievalRequest": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A simple flat string input. Mutually exclusive with messages."
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "The role of the message sender."
+              },
+              "content": {
+                "type": "string",
+                "description": "The content of the message. Mutually exclusive with multimodalContent."
+              },
+              "multimodalContent": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "The type of the message content."
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "The text of a string message content."
+                    },
+                    "image": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "The url of the image"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": [ "role" ]
+          }
+        },
+        "includeReferenceSourceData": {
+          "type": "boolean",
+          "description": "Whether to include the source data in the response references."
+        }
+      },
+      "description": "The input contract for the retrieval request."
+    },
+    "KnowledgeAgentRetrievalResponse": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string",
+                "description": "The role of the tool response."
+              },
+              "content": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "description": "The type of the message content."
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "The text of a string message content."
+                    },
+                    "image": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "The url of the image"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": [ "role", "content" ]
+          }
+        },
+        "activity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+          },
+          "description": "The activity records for tracking progress and billing implications."
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentReference"
+          },
+          "description": "The references for the retrieval data used in the response."
+        }
+      },
+      "description": "The output contract for the retrieval response."
+    },
+    "KnowledgeAgentActivityRecord": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The ID of the activity record."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the activity record."
+        }
+      },
+      "required": [ "id", "type" ],
+      "description": "Base type for activity records."
+    },
+    "KnowledgeAgentSearchActivityRecord": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+        }
+      ],
+      "properties": {
+        "targetIndex": {
+          "type": "string",
+          "description": "The target index for the retrieval activity."
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "search": {
+              "type": "string",
+              "description": "The search string"
+            }
+          },
+          "description": "The query details for the retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "description": "The count of documents retrieved."
+        },
+        "ellapsedMs": {
+          "type": "integer",
+          "description": "The elapsed time in milliseconds for the retrieval activity."
+        }
+      },
+      "description": "Represents a retrieval activity record."
+    },
+    "KnowledgeAgentModelQueryPlanningActivityRecord": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+        }
+      ],
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "description": "The number of input tokens for the LLM query planning activity."
+        },
+        "outputTokens": {
+          "type": "integer",
+          "description": "The number of output tokens for the LLM query planning activity."
+        },
+        "ellapsedMs": {
+          "type": "integer",
+          "description": "The elapsed time in milliseconds for the model activity."
+        }
+      },
+      "description": "Represents an LLM query planning activity record."
+    },
+    "KnowledgeAgentSemanticRankerActivityRecord": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
+        }
+      ],
+      "properties": {
+        "inputTokens": {
+          "type": "integer",
+          "description": "The number of input tokens for the semantic ranker activity."
+        },
+        "ellapsedMs": {
+          "type": "integer",
+          "description": "The elapsed time in milliseconds for the model activity."
+        }
+      },
+      "description": "Represents a semantic ranker activity record."
+    },
+    "KnowledgeAgentReference": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the reference."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the reference."
+        },
+        "activitySource": {
+          "type": "integer",
+          "description": "The source activity ID for the reference."
+        }
+      },
+      "required": [ "type", "id", "activitySource" ],
+      "description": "Base type for references."
+    },
+    "KnowledgeAgentAzureSearchDocReference": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentReference"
+        }
+      ],
+      "properties": {
+        "docKey": {
+          "type": "string",
+          "description": "The document key for the reference."
+        },
+        "slices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "charOffsets": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "description": "Optional character offsets within retrieved field."
+              },
+              "pointer": {
+                "type": "string",
+                "description": "Json pointer describing where in the document the data came from"
+              },
+              "sasUri": {
+                "type": "string",
+                "description": "The SAS URI for the Azure Search asset reference."
+              }
+            }
+          }
+        },
+        "sourceData": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "description": "Represents an Azure Search reference."
+    },
     "AnalyzeRequest": {
       "type": "object",
       "properties": {
