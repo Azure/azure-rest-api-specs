@@ -6,3 +6,5 @@
  * @property {(message:string) => void} info
  * @property {() => boolean} isDebug
  */
+
+export {};
