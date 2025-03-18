@@ -6,7 +6,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
-
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
