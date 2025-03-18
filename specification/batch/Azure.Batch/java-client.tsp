@@ -1348,6 +1348,31 @@ op getTaskFileCustomization is Azure.Batch.FileOperation<
 
 @@override(Azure.Batch.Tasks.getTaskFile, getTaskFileCustomization, "java");
 
+// Get Task File Properties Operation
+@doc("Optional parameters for Get Task File Properties operation.")
+model GetBatchTaskFilePropertiesOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.BatchModifiedSinceHeaders;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Task File Properties operation.")
+@route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
+op getTaskFilePropertiesCustomization is Azure.Batch.HeadFileOperation<
+  {
+    ...Azure.Batch.BatchTaskFileClientPathContent;
+
+    @doc("Optional parameters for Get Task File Properties operation.")
+    options?: GetBatchTaskFilePropertiesOptions;
+  },
+  {}
+>;
+
+@@override(Azure.Batch.Tasks.getTaskFileProperties,
+  getTaskFilePropertiesCustomization,
+  "java"
+);
+
 // List Task Files Operation
 @doc("Optional parameters for List Task Files operation.")
 model ListBatchTaskFilesOptions {
@@ -1770,6 +1795,31 @@ op getNodeFileCustomization is Azure.Batch.FileOperation<
 >;
 
 @@override(Azure.Batch.Nodes.getNodeFile, getNodeFileCustomization, "java");
+
+// Get Node File Properties Operation
+@doc("Optional parameters for Get Node File Properties operation.")
+model GetBatchNodeFilePropertiesOptions {
+  ...Azure.Batch.CommonParameters;
+  ...Azure.Batch.BatchModifiedSinceHeaders;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@doc("Custom override for Get Node File Properties operation.")
+@route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
+op getNodeFilePropertiesCustomization is Azure.Batch.HeadFileOperation<
+  {
+    ...Azure.Batch.BatchNodeFileClientPathContent;
+
+    @doc("Optional parameters for Get Node File Properties operation.")
+    options?: GetBatchNodeFilePropertiesOptions;
+  },
+  {}
+>;
+
+@@override(Azure.Batch.Nodes.getNodeFileProperties,
+  getNodeFilePropertiesCustomization,
+  "java"
+);
 
 // List Node Files Operation
 @doc("Optional parameters for List Node Files operation.")

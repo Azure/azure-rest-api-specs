@@ -53,7 +53,7 @@ op HeadFileOperation<
   TPathParams extends TypeSpec.Reflection.Model,
   TResource
 > is Azure.Core.RpcOperation<
-  CommonParameters & TPathParams,
+  TPathParams,
   TResource & FileResponseHeaders,
   NoFilter,
   BatchError

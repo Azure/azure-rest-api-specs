@@ -1668,9 +1668,12 @@ interface Tasks {
 
   @doc("Gets the properties of the specified Task file.")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-  @clientName("getTaskFilePropertiesInternal", "java")
   getTaskFileProperties is HeadFileOperation<
-    BatchTaskFileClientPathContent & BatchModifiedSinceHeaders,
+    {
+      ...CommonParameters;
+      ...BatchTaskFileClientPathContent;
+      ...BatchModifiedSinceHeaders;
+    },
     {}
   >;
 
@@ -2230,9 +2233,12 @@ interface Nodes {
 
   @doc("Gets the properties of the specified Compute Node file.")
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
-  @clientName("getNodeFilePropertiesInternal", "java")
   getNodeFileProperties is HeadFileOperation<
-    BatchNodeFileClientPathContent & BatchModifiedSinceHeaders,
+    {
+      ...CommonParameters;
+      ...BatchNodeFileClientPathContent;
+      ...BatchModifiedSinceHeaders;
+    },
     {}
   >;
 

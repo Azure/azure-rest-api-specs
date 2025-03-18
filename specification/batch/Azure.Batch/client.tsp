@@ -115,17 +115,6 @@ interface BatchClient {
   "csharp"
 );
 
-// client name overrides
-@@clientName(BatchClient.getTaskFileProperties,
-  "getTaskFilePropertiesInternal",
-  "java"
-);
-
-@@clientName(BatchClient.getNodeFileProperties,
-  "getNodeFilePropertiesInternal",
-  "java"
-);
-
 // model overrides
 @@access(Azure.Batch.BatchApplicationListResult, Access.public, "java");
 @@access(Azure.Batch.BatchApplication, Access.public, "java");
