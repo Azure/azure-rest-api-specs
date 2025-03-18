@@ -81,6 +81,10 @@ These settings apply only when `--tag=package-2025-01-01-privatepreview` is spec
 ``` yaml $(tag) == 'package-2025-01-01-privatepreview'
 input-file:
   - Microsoft.Migrate/preview/2025-01-01-privatepreview/resourcemovercollection.json
+suppressions:
+  - code: APIVersionPattern
+    from: resourcemovercollection.json
+    reason: This is a private preview API version therefore in order to keep privatepreview tag in the API version, this suppression is required.
 ```
 
 ---
