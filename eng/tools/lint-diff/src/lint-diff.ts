@@ -115,7 +115,7 @@ async function runLintDiff(
   const beforeChecks = await runChecks(beforePath, beforeList);
   const afterChecks = await runChecks(afterPath, afterList);
 
-  await generateReport(
+  const pass = await generateReport(
     beforePath,
     beforeChecks,
     afterChecks,
@@ -124,4 +124,9 @@ async function runLintDiff(
     baseBranch,
     compareSha,
   );
+
+  if (!pass) { 
+    process.exitCode = 1;
+    console.error(`Lint-diff failed. See workflow summary report in ${outFile} for details.`);
+  }
 }

@@ -55,7 +55,8 @@ export async function generateReport(
   outFile: string,
   baseBranch: string,
   compareSha: string,
-) {
+): Promise<boolean> {
+  let pass = true;
   const runCorrelations = await correlateRuns(beforePath, beforeChecks, afterChecks);
 
   // See unifiedPipelineHelper.ts:386
@@ -120,6 +121,8 @@ export async function generateReport(
   existingViolations.sort(compareLintDiffViolations);
 
   if (newViolations.length > 0) {
+    // New violations fail the build
+    pass = false;
     outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
     if (newViolations.length > 50) {
       outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
@@ -158,6 +161,8 @@ export async function generateReport(
 
   console.log(`Writing output to ${outFile}`);
   await writeFile(outFile, outputMarkdown);
+
+  return pass;
 }
 
 export async function correlateRuns(
@@ -408,14 +413,11 @@ export function getNewItems(
         beforeViolation.source?.length &&
         afterViolation.source?.length &&
         isSameSources(beforeViolation.source, afterViolation.source) &&
-        // TODO: details?
         arrayIsEqual(beforeViolation.details?.jsonpath, afterViolation.details?.jsonpath)
       ) {
         errorIsNew = false;
         existingItems.push(afterViolation);
-        console.log(
-          `::debug:: Found existing violation ${JSON.stringify(beforeViolation)} === ${JSON.stringify(afterViolation)}`,
-        );
+
         // Only need to find one match
         break;
       }
@@ -423,7 +425,6 @@ export function getNewItems(
 
     // If no match is found, add to new
     if (errorIsNew) {
-      console.log(`::debug:: Found new violation ${JSON.stringify(afterViolation)}`);
       newItems.push(afterViolation);
     }
   }
