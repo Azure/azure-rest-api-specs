@@ -15,7 +15,6 @@ namespace Microsoft.AzureStackHCI;
 @doc("The attestation status of the virtual machine")
 @singleton("default")
 @parentResource(VirtualMachineInstance)
-@includeInapplicableMetadataInPayload(false)
 model AttestationStatus is ProxyResource<AttestationStatusProperties> {
   @doc("Name of attestation status")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")

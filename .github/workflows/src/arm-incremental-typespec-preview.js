@@ -17,7 +17,7 @@ import { CoreLogger } from "./core-logger.js";
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<boolean>}
  */
-export default async function incrementalTypeSpec({ github, context, core }) {
+export default async function incrementalTypeSpec({ core }) {
   const options = { logger: new CoreLogger(core) };
 
   const changedFiles = await getChangedFiles(options);

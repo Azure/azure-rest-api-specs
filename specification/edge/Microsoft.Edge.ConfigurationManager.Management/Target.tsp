@@ -34,7 +34,7 @@ model SolutionTemplateParameter {
 
   @doc("Solution Instance Name")
   @maxLength(24)
-  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   solutionInstanceName?: string;
 
   @doc("Solution Dependencies")
@@ -67,7 +67,7 @@ model SolutionDependencyParameter {
 
   @doc("Solution Instance Name")
   @maxLength(24)
-  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   solutionInstanceName?: string;
 
   @doc("Target Id")

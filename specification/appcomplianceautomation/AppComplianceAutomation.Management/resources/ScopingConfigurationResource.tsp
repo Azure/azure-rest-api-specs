@@ -21,7 +21,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
 @singleton("default")
 @parentResource(ReportResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ScopingConfigurationProperties
 )
