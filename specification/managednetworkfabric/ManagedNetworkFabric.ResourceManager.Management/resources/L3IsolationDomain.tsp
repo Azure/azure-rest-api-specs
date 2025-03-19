@@ -11,7 +11,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The L3 Isolation Domain resource definition.")
 @Azure.ResourceManager.Private.armResourceInternal(L3IsolationDomainProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model L3IsolationDomain
   extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the L3 Isolation Domain.")

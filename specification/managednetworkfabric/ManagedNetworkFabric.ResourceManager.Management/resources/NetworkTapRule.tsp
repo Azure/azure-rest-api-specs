@@ -9,7 +9,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkTapRule resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkTapRule extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Tap Rule.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")

@@ -151,7 +151,7 @@ model FileSystemResourceUpdateProperties {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
 model FileSystemResource
   is Azure.ResourceManager.TrackedResource<FileSystemResourceProperties> {
