@@ -311,6 +311,9 @@ model PendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
   pendingUploadId?: string;
 
+  @doc("Name of Azure blob storage connection to use for generating temporary SAS token")
+  connectionName?: string;
+
   @doc("TemporaryBlobReference is the only supported type.")
   pendingUploadType: PendingUploadType.temporaryBlobReference;
 }
@@ -322,6 +325,9 @@ model PendingUploadResponse {
 
   @doc("ID for this upload request.")
   pendingUploadId: string;
+
+  @doc("Version of dataset to be created if user did not specify version when initially creating upload")
+  datasetVersion?: string;
 
   @doc("TemporaryBlobReference is the only supported type")
   pendingUploadType: PendingUploadType.temporaryBlobReference;

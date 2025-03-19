@@ -22,10 +22,14 @@ union DatasetType {
 
   @doc("URI file.")
   uri_file: "uri_file",
+
+  @doc("URI folder.")
+  uri_folder: "uri_folder",
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DatasetVersion Definition")
+@discriminator("type")
 model DatasetVersion {
   @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
   @visibility("read", "create")
@@ -33,10 +37,29 @@ model DatasetVersion {
   @pattern("[a-zA-Z0-9_]")
   datasetUri: string;
 
-  @doc("Data type")
-  datasetType: DatasetType;
+  @doc("Dataset type")
+  type: DatasetType;
+
+  @doc("Indicates if dataset is reference only or managed by dataset service. If true, the underlying data will be deleted when the dataset version is deleted")
+  @visibility("read")
+  isReference?: boolean;
 
   ...AssetBase;
+}
+
+@doc("FileDatasetVersion Definition")
+model FileDatasetVersion extends DatasetVersion {
+  @doc("Dataset type")
+  type: DatasetType.uri_file;
+
+  @doc("Indicates OpenAI Purpose. FileDatasets created with this field will be compatible with OpenAI-specific features")
+  openAIPurpose: string;
+}
+
+@doc("FileDatasetVersion Definition")
+model FolderDatasetVersion extends DatasetVersion {
+  @doc("Dataset type")
+  type: DatasetType.uri_folder;
 }
 
 @doc("PagedDataVersionBase Definition")
