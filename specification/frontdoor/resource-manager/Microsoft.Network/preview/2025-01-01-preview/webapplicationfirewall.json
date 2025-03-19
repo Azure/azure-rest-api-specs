@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-02-01",
+    "version": "2025-01-01-preview",
     "title": "WebApplicationFirewallManagement",
     "description": "APIs to manage web application firewall rules."
   },
@@ -529,6 +529,13 @@
           "minimum": 5,
           "maximum": 1440
         },
+        "captchaExpirationInMinutes": {
+          "description": "Defines the Captcha cookie validity lifetime in minutes. This setting is only applicable to Premium_AzureFrontDoor. Value must be an integer between 5 and 1440 with the default value being 30.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5,
+          "maximum": 1440
+        },
         "logScrubbing": {
           "description": "Defines rules that scrub sensitive fields in the Web Application Firewall logs.",
           "type": "object",
@@ -1023,7 +1030,8 @@
         "Log",
         "Redirect",
         "AnomalyScoring",
-        "JSChallenge"
+        "JSChallenge",
+        "CAPTCHA"
       ],
       "x-ms-enum": {
         "name": "ActionType",
