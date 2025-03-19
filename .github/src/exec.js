@@ -2,13 +2,12 @@
 
 import child_process from "child_process";
 import { promisify } from "util";
-import { ILogger } from "./logger.js";
 const exec = promisify(child_process.exec);
 
 /**
  * @param {string} command
  * @param {Object} [options]
- * @param {ILogger} [options.logger]
+ * @param {import('./types.js').ILogger} [options.logger]
  * @param {number} [options.maxBuffer]
  */
 export async function execRoot(command, options = {}) {
@@ -30,4 +29,24 @@ export async function execRoot(command, options = {}) {
   logger?.debug(`stderr: '${result.stderr}'`);
 
   return result.stdout;
+}
+
+/**
+ * Joins a list of arguments to build a command-line without extra spaces.
+ * Ignores null, undefined, and elements that convert to empty or all-whitespace.
+ *
+ * @param {any[]} args
+ * @returns string
+ */
+export function buildCmd(...args) {
+  return (
+    args
+      // Exclude null and undefined
+      .filter((arg) => arg !== null && arg !== undefined)
+      // Convert to string
+      .map((arg) => String(arg))
+      // Exclude empty and all-whitespace
+      .filter((str) => str.trim() !== "")
+      .join(" ")
+  );
 }
