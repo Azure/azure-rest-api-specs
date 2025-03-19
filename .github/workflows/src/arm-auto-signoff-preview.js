@@ -182,17 +182,54 @@ export async function getLabelActionImpl({
     `Swagger LintDiff: Status='${swaggerLintDiff?.status}', Conclusion='${swaggerLintDiff?.conclusion}'`,
   );
 
-  if (swaggerLintDiff && swaggerLintDiff.status === "completed") {
-    if (swaggerLintDiff.conclusion === "success") {
-      core.info("All requirements met for auto-signoff");
-      return labelActions[LabelAction.Add];
-    } else {
-      core.info("Swagger LintDiff did not succeed");
-      return labelActions[LabelAction.Remove];
-    }
-  } else {
-    // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
-    core.info("Swagger LintDiff is in-progress");
-    return labelActions[LabelAction.None];
+  if (
+    swaggerLintDiff &&
+    swaggerLintDiff.status === "completed" &&
+    swaggerLintDiff.conclusion !== "success"
+  ) {
+    core.info("Swagger LintDiff did not succeed");
+    return labelActions[LabelAction.Remove];
   }
+
+  const swaggerAvocados = checkRuns.filter(
+    (run) => run.name === "Swagger Avocado",
+  );
+
+  if (swaggerAvocados.length > 1) {
+    throw new Error(
+      `Unexpected number of checks named 'Swagger Avocado': ${swaggerAvocados.length}`,
+    );
+  }
+
+  const swaggerAvocado =
+    swaggerAvocados.length === 1 ? swaggerAvocados[0] : undefined;
+
+  core.info(
+    `Swagger Avocado: Status='${swaggerAvocado?.status}', Conclusion='${swaggerAvocado?.conclusion}'`,
+  );
+
+  if (
+    swaggerAvocado &&
+    swaggerAvocado.status === "completed" &&
+    swaggerAvocado.conclusion !== "success"
+  ) {
+    core.info("Swagger Avocado did not succeed");
+    return labelActions[LabelAction.Remove];
+  }
+
+  if (
+    swaggerLintDiff &&
+    swaggerLintDiff.status === "completed" &&
+    swaggerLintDiff.conclusion === "success" &&
+    swaggerAvocado &&
+    swaggerAvocado.status === "completed" &&
+    swaggerAvocado.conclusion === "success"
+  ) {
+    core.info("All requirements met for auto-signoff");
+    return labelActions[LabelAction.Add];
+  }
+
+  // No-op if any checks are missing or not completed, to prevent frequent remove/add label as checks re-run
+  core.info("One or more checks is still in-progress");
+  return labelActions[LabelAction.None];
 }

@@ -173,6 +173,11 @@ describe("getLabelActionImpl", () => {
             status: "completed",
             conclusion: "success",
           },
+          {
+            name: "Swagger Avocado",
+            status: "completed",
+            conclusion: "success",
+          },
         ],
       },
     });
