@@ -51,10 +51,120 @@ export async function generateReport(
   beforePath: string,
   beforeChecks: AutorestRunResult[],
   afterChecks: AutorestRunResult[],
+  affectedSwaggers: Set<string>,
   outFile: string,
   baseBranch: string,
   compareSha: string,
 ) {
+  const runCorrelations = await correlateRuns(beforePath, beforeChecks, afterChecks);
+
+  // See unifiedPipelineHelper.ts:386
+  // Compared specs (link to npm package: @microsoft.azure/openapi-validator/v/<version>)
+  const dependencyVersion = await getDependencyVersion(
+    await getPathToDependency("@microsoft.azure/openapi-validator"),
+  );
+  let outputMarkdown = `| Compared specs ([v${dependencyVersion}](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/${dependencyVersion})) | new version | base version |\n`;
+  outputMarkdown += `| --- | --- | --- |\n`;
+
+  // Compared Specs | New Version | Base Version
+  // <tag name> | link: readme.md#tag-<tag-name> | link: readme.md#tag-<tag-name>
+  // ... | ... | ...
+  for (const [_, { before, after }] of runCorrelations.entries()) {
+    const afterName = getName(after);
+    const beforeName = before ? getName(before) : "default";
+    const afterPath = getPath(after);
+    const beforePath = before ? getPath(before) : "";
+
+    outputMarkdown += `| ${afterName} | link: [${afterName}](${getFileLink(compareSha, afterPath)}) | link: [${beforeName}](${getFileLink(baseBranch, beforePath)}) |\n`;
+  }
+
+  outputMarkdown += `\n\n`;
+
+  const newViolations: LintDiffViolation[] = [];
+  const existingViolations: LintDiffViolation[] = [];
+
+  for (const [runKey, { before, after }] of runCorrelations.entries()) {
+    const beforeViolations = before
+      ? getLintDiffViolations(before).filter(
+          (v) =>
+            (isFailure(v.level) || isWarning(v.level)) &&
+            v.source?.length > 0 &&
+            // TODO: Calculate relativized path outside of loop
+            affectedSwaggers.has(relativizePath(v.source[0].document).slice(1)),
+        )
+      : [];
+    const afterViolations = getLintDiffViolations(after).filter(
+      (v) =>
+        (isFailure(v.level) || isWarning(v.level)) &&
+        v.source?.length > 0 &&
+        // TODO: Calculate relativized path outside of loop
+        affectedSwaggers.has(relativizePath(v.source[0].document).slice(1)),
+    );
+
+    const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
+    console.log(`Correlated Run: ${runKey}`);
+    console.log(`New violations: ${newitems.length}`);
+    console.log(`Existing violations: ${existingItems.length}`);
+
+    newViolations.push(...newitems);
+    existingViolations.push(...existingItems);
+  }
+
+  console.log("Populating armRpcs for new violations");
+  for (const newItem of newViolations) {
+    // TODO: Potential performance issue, make parallel
+    newItem.armRpcs = await getRelatedArmRpcFromDoc(newItem.code);
+  }
+
+  newViolations.sort(compareLintDiffViolations);
+  existingViolations.sort(compareLintDiffViolations);
+
+  if (newViolations.length > 0) {
+    outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
+    if (newViolations.length > 50) {
+      outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
+    }
+    outputMarkdown += "\n";
+
+    outputMarkdown += "| Rule | Message | Related RPC [For API reviewers] |\n";
+    outputMarkdown += "| ---- | ------- | ------------------------------- |\n";
+
+    for (const violation of newViolations.slice(0, 50)) {
+      const { level, code, message } = violation;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
+    }
+
+    outputMarkdown += "\n";
+  }
+
+  // The following errors/warnings exist before current PR submission
+  // Rule | Message | Location (link to file, line # at SHA)
+  if (existingViolations.length > 0) {
+    outputMarkdown += "**The following errors/warnings exist before current PR submission:**\n";
+    if (existingViolations.length > 50) {
+      outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
+    }
+    outputMarkdown += "\n";
+    outputMarkdown += "| Rule | Message |\n";
+    outputMarkdown += "| ---- | ------- |\n";
+
+    for (const violation of existingViolations.slice(0, 50)) {
+      const { level, code, message } = violation;
+      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) |\n`;
+    }
+
+    outputMarkdown += `\n`;
+  }
+
+  console.log(`Writing output to ${outFile}`);
+  await writeFile(outFile, outputMarkdown);
+}
+
+export async function correlateRuns(
+  beforePath: string,
+  beforeChecks: AutorestRunResult[],
+  afterChecks: AutorestRunResult[],
+): Promise<Map<string, BeforeAfter>> {
   const runCorrelations = new Map<string, BeforeAfter>();
   for (const results of afterChecks) {
     const { readme, tag } = results;
@@ -119,99 +229,7 @@ export async function generateReport(
     });
   }
 
-  // See unifiedPipelineHelper.ts:386
-  // Compared specs (link to npm package: @microsoft.azure/openapi-validator/v/<version>)
-  const dependencyVersion = await getDependencyVersion(
-    await getPathToDependency("@microsoft.azure/openapi-validator"),
-  );
-  let outputMarkdown = `| Compared specs ([v${dependencyVersion}](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/${dependencyVersion})) | new version | base version |\n`;
-  outputMarkdown += `| --- | --- | --- |\n`;
-
-  // Compared Specs | New Version | Base Version
-  // <tag name> | link: readme.md#tag-<tag-name> | link: readme.md#tag-<tag-name>
-  // ... | ... | ...
-  for (const [_, { before, after }] of runCorrelations.entries()) {
-    const afterName = getName(after);
-    const beforeName = before ? getName(before) : "default";
-    const afterPath = getPath(after);
-    const beforePath = before ? getPath(before) : "";
-
-    outputMarkdown += `| ${afterName} | link: [${afterName}](${getFileLink(compareSha, afterPath)}) | link: [${beforeName}](${getFileLink(baseBranch, beforePath)}) |\n`;
-  }
-
-  outputMarkdown += `\n\n`;
-
-  const newViolations: LintDiffViolation[] = [];
-  const existingViolations: LintDiffViolation[] = [];
-
-  for (const [runKey, { before, after }] of runCorrelations.entries()) {
-    // TODO: May need to do some filtering of unrelated swaggers, see
-    // momentOfTruthPostProcessing.ts:421
-    // TODO: Trinary, should this happen?
-    const beforeViolations = before
-      ? getLintDiffViolations(before).filter((v) => isFailure(v.level) || isWarning(v.level))
-      : [];
-    const afterViolations = getLintDiffViolations(after).filter(
-      (v) => isFailure(v.level) || isWarning(v.level),
-    );
-
-    const [newitems, existingItems] = getNewItems(beforeViolations, afterViolations);
-    console.log(`Correlated Run: ${runKey}`);
-    console.log(`New violations: ${newitems.length}`);
-    console.log(`Existing violations: ${existingItems.length}`);
-
-    newViolations.push(...newitems);
-    existingViolations.push(...existingItems);
-  }
-
-  console.log("Populating armRpcs for new violations");
-  for (const newItem of newViolations) {
-    // TODO: Potential performance issue, make parallel
-    newItem.armRpcs = await getRelatedArmRpcFromDoc(newItem.code);
-  }
-
-  newViolations.sort(compareLintDiffViolations);
-  existingViolations.sort(compareLintDiffViolations);
-
-  if (newViolations.length > 0) {
-    outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
-    if (newViolations.length > 50) {
-      outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
-    }
-    outputMarkdown += "\n";
-
-    outputMarkdown += "| Rule | Message | Related RPC [For API reviewers] |\n";
-    outputMarkdown += "| ---- | ------- | ------------------------------- |\n";
-
-    for (const violation of newViolations.slice(0, 50)) {
-      const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) | ${violation.armRpcs?.join(", ")} |\n`;
-    }
-
-    outputMarkdown += "\n";
-  }
-
-  // The following errors/warnings exist before current PR submission
-  // Rule | Message | Location (link to file, line # at SHA)
-  if (existingViolations.length > 0) {
-    outputMarkdown += "**The following errors/warnings exist before current PR submission:**\n";
-    if (existingViolations.length > 50) {
-      outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
-    }
-    outputMarkdown += "\n";
-    outputMarkdown += "| Rule | Message |\n";
-    outputMarkdown += "| ---- | ------- |\n";
-
-    for (const violation of existingViolations.slice(0, 50)) {
-      const { level, code, message } = violation;
-      outputMarkdown += `| ${iconFor(level)} [${code}](${getDocUrl(code)}) | ${message}<br />Location: [${getPathSegment(relativizePath(getFile(violation)))}#L${getLine(violation)}](${getFileLink(compareSha, relativizePath(getFile(violation)), getLine(violation))}) |\n`;
-    }
-
-    outputMarkdown += `\n`;
-  }
-
-  console.log(`Writing output to ${outFile}`);
-  await writeFile(outFile, outputMarkdown);
+  return runCorrelations;
 }
 
 /**
@@ -228,9 +246,12 @@ export function compareLintDiffViolations(a: LintDiffViolation, b: LintDiffViola
     return 1;
   }
 
+  const fileA = getFile(a) || "";
+  const fileB = getFile(b) || "";
+
   // Sort by file name
-  if (getFile(a) !== getFile(b)) {
-    return getFile(a)!.localeCompare(getFile(b)!);
+  if (fileA !== fileB) {
+    return fileA.localeCompare(fileB);
   }
 
   // Sort by line number
@@ -384,14 +405,17 @@ export function getNewItems(
         beforeViolation.code == afterViolation.code &&
         beforeViolation.message == afterViolation.message &&
         beforeViolation.source?.length == afterViolation.source?.length &&
-        // TODO: this is a direct copy, see if there is a better way
-        basename(beforeViolation.source?.[0]?.document) ==
-          basename(afterViolation.source?.[0]?.document) &&
+        beforeViolation.source?.length &&
+        afterViolation.source?.length &&
+        isSameSources(beforeViolation.source, afterViolation.source) &&
         // TODO: details?
         arrayIsEqual(beforeViolation.details?.jsonpath, afterViolation.details?.jsonpath)
       ) {
         errorIsNew = false;
         existingItems.push(afterViolation);
+        console.log(
+          `::debug:: Found existing violation ${JSON.stringify(beforeViolation)} === ${JSON.stringify(afterViolation)}`,
+        );
         // Only need to find one match
         break;
       }
@@ -399,11 +423,19 @@ export function getNewItems(
 
     // If no match is found, add to new
     if (errorIsNew) {
+      console.log(`::debug:: Found new violation ${JSON.stringify(afterViolation)}`);
       newItems.push(afterViolation);
     }
   }
 
   return [newItems, existingItems];
+}
+
+export function isSameSources(a: Source[], b: Source[]) {
+  if (a?.length && b?.length) {
+    return basename(a?.[0]?.document) === basename(b?.[0]?.document);
+  }
+  return true;
 }
 
 export function getName(result: AutorestRunResult) {

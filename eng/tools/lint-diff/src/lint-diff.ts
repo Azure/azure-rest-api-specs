@@ -104,12 +104,24 @@ async function runLintDiff(
   baseBranch: string,
   compareSha: string,
 ) {
-  const [beforeList, afterList] = await getRunList(beforePath, afterPath, changedFilesPath);
+  const [beforeList, afterList, affectedSwaggers] = await getRunList(
+    beforePath,
+    afterPath,
+    changedFilesPath,
+  );
 
   // It may be possible to run these in parallel as they're running against
   // different directories.
   const beforeChecks = await runChecks(beforePath, beforeList);
   const afterChecks = await runChecks(afterPath, afterList);
 
-  await generateReport(beforePath, beforeChecks, afterChecks, outFile, baseBranch, compareSha);
+  await generateReport(
+    beforePath,
+    beforeChecks,
+    afterChecks,
+    affectedSwaggers,
+    outFile,
+    baseBranch,
+    compareSha,
+  );
 }

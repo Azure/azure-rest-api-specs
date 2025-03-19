@@ -81,17 +81,17 @@ export async function executeCommand(
 }
 
 export function logAutorestExecutionErrors(runResult: AutorestRunResult) {
-  const errorIsNotNull = runResult.error !== null;
-  const autoRestPrefix = `{`;
-  const stdoutContainsLevelError = runResult.stdout.includes(`${autoRestPrefix}"level":"error"`);
-  const stdoutContainsLevelFatal = runResult.stdout.includes(`${autoRestPrefix}"level":"fatal"`);
-  const stderrContainsLevelError = runResult.stderr.includes(`${autoRestPrefix}"level":"error"`);
-  const stderrContainsLevelFatal = runResult.stderr.includes(`${autoRestPrefix}"level":"fatal"`);
-  if (errorIsNotNull) {
+  if (runResult.error !== null) {
+    const autoRestPrefix = `{`;
+    const stdoutContainsLevelError = runResult.stdout.includes(`${autoRestPrefix}"level":"error"`);
+    const stdoutContainsLevelFatal = runResult.stdout.includes(`${autoRestPrefix}"level":"fatal"`);
+    const stderrContainsLevelError = runResult.stderr.includes(`${autoRestPrefix}"level":"error"`);
+    const stderrContainsLevelFatal = runResult.stderr.includes(`${autoRestPrefix}"level":"fatal"`);
+
     // TODO: Clean up output formatting to be consistent with new output standards
     console.log(
       `Execution of AutoRest with LintDiff done. ` +
-        `Error is not null: ${errorIsNotNull}, ` +
+        `Error is not null: true, ` +
         `stdout contains AutoRest 'error': ${stdoutContainsLevelError}, ` +
         `stdout contains AutoRest 'fatal': ${stdoutContainsLevelFatal}, ` +
         `stderr contains AutoRest 'error': ${stderrContainsLevelError}, ` +

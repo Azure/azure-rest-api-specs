@@ -1,7 +1,7 @@
-import { specification } from "../../../../.github/src/changed-files.js";
 import { join, dirname, sep } from "path";
 import { readFile, readdir } from "fs/promises";
 import { pathExists } from "./util.js";
+import { specification } from "../../../../.github/src/changed-files.js";
 
 import {
   getAllTags,
@@ -15,7 +15,7 @@ export async function getRunList(
   beforePath: string,
   afterPath: string,
   changedFilesPath: string,
-): Promise<Map<string, string[]>[]> {
+): Promise<[Map<string, string[]>, Map<string, string[]>, Set<string>]> {
   // Forward slashes are OK list coming from changedFilesPath is from git which
   // always uses forward slashes as path separators
 
@@ -38,16 +38,20 @@ export async function getRunList(
 
   // In the future, the loop involving [beforePath, afterPath] can be eliminated
   // as well as beforeState
-  const beforeState = await buildState(changedSpecFiles, beforePath);
-  const afterState = await buildState(changedSpecFiles, afterPath);
+  const [beforeState, _] = await buildState(changedSpecFiles, beforePath);
+  const [afterState, afterSwaggers] = await buildState(changedSpecFiles, afterPath);
+  const affectedSwaggers = new Set<string>(afterSwaggers);
 
-  return reconcileChangedFilesAndTags(beforeState, afterState);
+  console.log(`affected swaggers: ${[...affectedSwaggers].join(", ")}`);
+  const [beforeTagMap, afterTagMap] = reconcileChangedFilesAndTags(beforeState, afterState);
+
+  return [beforeTagMap, afterTagMap, affectedSwaggers];
 }
 
 export async function buildState(
   changedSpecFiles: string[],
   rootPath: string,
-): Promise<Map<string, string[]>> {
+): Promise<[Map<string, string[]>, string[]]> {
   // Filter changed files to include only those that exist in the rootPath
   const existingChangedFiles = [];
   for (const file of changedSpecFiles) {
@@ -131,7 +135,7 @@ export async function buildState(
     }
   }
 
-  return changedFileAndTagsMap;
+  return [changedFileAndTagsMap, Array.from(affectedSwaggerMap.values()).flat()];
 }
 
 /**
