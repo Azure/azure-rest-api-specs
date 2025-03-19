@@ -45,7 +45,7 @@ directive:
 ```
 
 
-### Tag: package-preview-2025-04-01-preview
+### Tag: package-preview-2025-04-01
 
 These settings apply only when `--tag=package-preview-2025-04-01-preview` is specified on the command line.
 
@@ -66,7 +66,7 @@ input-file:
   - Microsoft.AzureArcData/preview/2025-04-01-preview/sqlServerLicenses.json
 ```
 
-### Tag: package-preview-2024-12-01-preview
+### Tag: package-preview-2024-12-01
 
 These settings apply only when `--tag=package-preview-2024-12-01-preview` is specified on the command line.
 
