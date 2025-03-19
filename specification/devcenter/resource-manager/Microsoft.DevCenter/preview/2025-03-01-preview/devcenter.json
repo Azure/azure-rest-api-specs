@@ -34,575 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/plans": {
-      "get": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Lists all devcenter plans in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "commonDefinitions.json#/parameters/TopParameter"
-          }
-        ],
-        "operationId": "Plans_ListBySubscription",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PlanListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_ListBySubscription": {
-            "$ref": "./examples/Plans_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/plans": {
-      "get": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Lists all devcenter plans in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "commonDefinitions.json#/parameters/TopParameter"
-          }
-        ],
-        "operationId": "Plans_ListByResourceGroup",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PlanListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_ListByResourceGroup": {
-            "$ref": "./examples/Plans_ListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/plans/{planName}": {
-      "get": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Gets a devcenter plan.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanNameParameter"
-          }
-        ],
-        "operationId": "Plans_Get",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlan"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_Get": {
-            "$ref": "./examples/Plans_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Creates or updates a devcenter plan resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Represents a devcenter plan.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlan"
-            }
-          }
-        ],
-        "operationId": "Plans_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlan"
-            }
-          },
-          "201": {
-            "description": "Created. The request will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlan"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_Create": {
-            "$ref": "./examples/Plans_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Partially updates a devcenter plan.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Updatable devcenter plan properties.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PlanUpdate"
-            }
-          }
-        ],
-        "operationId": "Plans_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlan"
-            }
-          },
-          "202": {
-            "description": "Accepted. The request will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_Update": {
-            "$ref": "./examples/Plans_Patch.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Deletes a devcenter plan",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanNameParameter"
-          }
-        ],
-        "operationId": "Plans_Delete",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "202": {
-            "description": "Accepted. Operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_Delete": {
-            "$ref": "./examples/Plans_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/plans/{planName}/members": {
-      "get": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Lists all of the members assigned to a devcenter plan.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanNameParameter"
-          },
-          {
-            "$ref": "commonDefinitions.json#/parameters/TopParameter"
-          }
-        ],
-        "operationId": "PlanMembers_List",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PlanMembersListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_ListByResourceGroup": {
-            "$ref": "./examples/PlanMembers_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/plans/{planName}/members/{memberName}": {
-      "get": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Gets a devcenter plan member.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanMemberNameParameter"
-          }
-        ],
-        "operationId": "PlanMembers_Get",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlanMember"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_Get": {
-            "$ref": "./examples/PlanMembers_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Creates or updates a devcenter plan member resource",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanMemberNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Represents a devcenter plan.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlanMember"
-            }
-          }
-        ],
-        "operationId": "PlanMembers_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlanMember"
-            }
-          },
-          "201": {
-            "description": "Created. The request will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlanMember"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_Create": {
-            "$ref": "./examples/PlanMembers_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Partially updates a devcenter plan member.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanMemberNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Updatable devcenter plan properties.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PlanMemberUpdate"
-            }
-          }
-        ],
-        "operationId": "PlanMembers_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DevCenterPlanMember"
-            }
-          },
-          "202": {
-            "description": "Accepted. The request will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_Update": {
-            "$ref": "./examples/PlanMembers_Patch.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Plans"
-        ],
-        "description": "Deletes a devcenter plan member",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanNameParameter"
-          },
-          {
-            "$ref": "#/parameters/PlanMemberNameParameter"
-          }
-        ],
-        "operationId": "PlanMembers_Delete",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "202": {
-            "description": "Accepted. Operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Plans_Delete": {
-            "$ref": "./examples/PlanMembers_Delete.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/devcenters": {
       "get": {
         "tags": [
@@ -788,9 +219,6 @@
           "DevCenters_Create": {
             "$ref": "./examples/DevCenters_Create.json"
           },
-          "DevCenters_CreateWithPlanId": {
-            "$ref": "./examples/DevCenters_CreateWithPlanId.json"
-          },
           "DevCenters_CreateWithUserIdentity": {
             "$ref": "./examples/DevCenters_CreateWithUserIdentity.json"
           },
@@ -799,9 +227,6 @@
           },
           "DevCenters_CreateWithDisabledManagedNetworks": {
             "$ref": "./examples/DevCenters_CreateWithDisabledManagedNetworks.json"
-          },
-          "DevCenters_CreateWithRestrictedResourceUsage": {
-            "$ref": "./examples/DevCenters_CreateWithRestrictedResourceUsage.json"
           }
         }
       },
@@ -1183,277 +608,6 @@
         "x-ms-examples": {
           "EncryptionSets_Delete": {
             "$ref": "./examples/DevCenterEncryptionSets_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/curationProfiles": {
-      "get": {
-        "tags": [
-          "Curation Profiles"
-        ],
-        "description": "Lists all curation profiles in the dev center",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DevCenterNameParameter"
-          },
-          {
-            "$ref": "commonDefinitions.json#/parameters/TopParameter"
-          }
-        ],
-        "operationId": "CurationProfiles_ListByDevCenter",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CurationProfileListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CurationProfiles_ListByDevCenter": {
-            "$ref": "./examples/CurationProfiles_ListByDevCenter.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/curationProfiles/{curationProfileName}": {
-      "get": {
-        "tags": [
-          "Curation Profiles"
-        ],
-        "description": "Gets a specific curation profile.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DevCenterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CurationProfileNameParameter"
-          }
-        ],
-        "operationId": "CurationProfiles_Get",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CurationProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CurationProfiles_Get": {
-            "$ref": "./examples/CurationProfiles_Get.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Curation Profiles"
-        ],
-        "description": "Creates or updates an curation profile.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DevCenterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CurationProfileNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Represents an curation profile.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CurationProfile"
-            }
-          }
-        ],
-        "operationId": "CurationProfiles_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "200": {
-            "description": "Succeeded",
-            "schema": {
-              "$ref": "#/definitions/CurationProfile"
-            }
-          },
-          "201": {
-            "description": "Accepted. Operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/CurationProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CurationProfiles_CreateOrUpdate": {
-            "$ref": "./examples/CurationProfiles_Put.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Curation Profiles"
-        ],
-        "description": "Partially updates an curation profile.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DevCenterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CurationProfileNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Updatable curation profile properties.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CurationProfileUpdate"
-            }
-          }
-        ],
-        "operationId": "CurationProfiles_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "200": {
-            "description": "Succeeded",
-            "schema": {
-              "$ref": "#/definitions/CurationProfile"
-            }
-          },
-          "202": {
-            "description": "Accepted. Operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CurationProfiles_Update": {
-            "$ref": "./examples/CurationProfiles_Patch.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Curation Profiles"
-        ],
-        "description": "Deletes an curation profile.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DevCenterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CurationProfileNameParameter"
-          }
-        ],
-        "operationId": "CurationProfiles_Delete",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "responses": {
-          "202": {
-            "description": "Accepted. Operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CurationProfiles_Delete": {
-            "$ref": "./examples/CurationProfiles_Delete.json"
           }
         }
       }
@@ -1916,6 +1070,12 @@
           },
           "Projects_CreateOrUpdateWithLimitsPerDev": {
             "$ref": "./examples/Projects_PutWithMaxDevBoxPerUser.json"
+          },
+          "Projects_CreateOrUpdateWithCustomizationSettings": {
+            "$ref": "./examples/Projects_PutWithCustomizationSettings.json"
+          },
+          "Projects_CreateOrUpdateWithCustomizationSettings_SystemIdentity": {
+            "$ref": "./examples/Projects_PutWithCustomizationSettings_SystemIdentity.json"
           }
         }
       },
@@ -5477,6 +4637,429 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "List Image Definitions in the catalog.",
+        "operationId": "DevCenterCatalogImageDefinitions_ListByDevCenterCatalog",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ImageDefinitions_ListByDevCenterCatalog": {
+            "$ref": "./examples/ImageDefinitions_ListByDevCenterCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets an Image Definition from the catalog",
+        "operationId": "DevCenterCatalogImageDefinitions_GetByDevCenterCatalog",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevCenterCatalogImageDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageDefinitions_GetByDevCenterCatalog": {
+            "$ref": "./examples/ImageDefinitions_GetByDevCenterCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/getErrorDetails": {
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets Image Definition error details",
+        "operationId": "DevCenterCatalogImageDefinitions_GetErrorDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageDefinitionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "vdi.json#/definitions/CatalogResourceValidationErrorDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenterImageDefinitions_GetErrorDetails": {
+            "$ref": "./examples/DevCenterImageDefinitions_GetErrorDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/buildImage": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Builds an image for the specified Image Definition.",
+        "operationId": "DevCenterCatalogImageDefinitions_BuildImage",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DevCenterCatalogImageDefinitions_BuildImage": {
+            "$ref": "./examples/DevCenterImageDefinitions_BuildImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Lists builds for a specified image definition.",
+        "operationId": "DevCenterCatalogImageDefinitionBuilds_ListByImageDefinition",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionBuildListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenterImageDefinitionBuilds_ListByImageDefinition": {
+            "$ref": "./examples/DevCenterImageDefinitions_ListImageBuildsByImageDefinition.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets a build for a specified image definition.",
+        "operationId": "DevCenterCatalogImageDefinitionBuild_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionBuild"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenterImageDefinitionBuilds_GetByImageDefinition": {
+            "$ref": "./examples/DevCenterImageDefinitions_GetImageBuild.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/cancel": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Cancels the specified build for an image definition.",
+        "operationId": "DevCenterCatalogImageDefinitionBuild_Cancel",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DevCenterImageDefinitionBuilds_CancelByImageDefinition": {
+            "$ref": "./examples/DevCenterImageDefinitions_CancelImageBuild.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/getBuildDetails": {
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets Build details",
+        "operationId": "DevCenterCatalogImageDefinitionBuild_GetBuildDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionBuildDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenterCatalogImageDefinitionBuild_GetErrorDetails": {
+            "$ref": "./examples/DevCenterImageDefinitions_GetImageBuildDetails.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions": {
       "parameters": [
         {
@@ -5574,6 +5157,54 @@
         "x-ms-examples": {
           "ImageDefinitions_GetByProjectCatalog": {
             "$ref": "./examples/ImageDefinitions_GetByProjectCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/getErrorDetails": {
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets Image Definition error details",
+        "operationId": "ProjectCatalogImageDefinitions_GetErrorDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageDefinitionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "vdi.json#/definitions/CatalogResourceValidationErrorDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProjectCatalogImageDefinitions_GetErrorDetails": {
+            "$ref": "./examples/ProjectCatalogImageDefinitions_GetErrorDetails.json"
           }
         }
       }
@@ -5854,151 +5485,6 @@
     }
   },
   "definitions": {
-    "DevCenterPlan": {
-      "type": "object",
-      "description": "Represents a devcenter plan resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Plan properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PlanProperties"
-        },
-        "sku": {
-          "description": "The SKU for DevCenters created using this definition.",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku"
-        }
-      }
-    },
-    "PlanProperties": {
-      "description": "Properties of the devcenter plan.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "description": "The provisioning state of the resource.",
-          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "DevCenterPlanMember": {
-      "type": "object",
-      "description": "Represents a devcenter plan member resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Plan member properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PlanMemberProperties"
-        },
-        "tags": {
-          "$ref": "commonDefinitions.json#/definitions/Tags",
-          "description": "Resource tags."
-        }
-      }
-    },
-    "PlanMemberProperties": {
-      "description": "Properties of the devcenter plan member.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PlanMemberUpdateProperties"
-        }
-      ],
-      "properties": {
-        "memberId": {
-          "description": "The unique id of the member.",
-          "type": "string"
-        },
-        "memberType": {
-          "description": "The type of the member (user, group)",
-          "enum": [
-            "User",
-            "Group"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PlanMemberType",
-            "modelAsString": true
-          }
-        },
-        "syncStatus": {
-          "description": "The sync status of the member.",
-          "$ref": "#/definitions/PlanMemberSyncStatus",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "description": "The provisioning state of the resource.",
-          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "PlanMemberUpdateProperties": {
-      "description": "Properties of the devcenter plan member.",
-      "type": "object",
-      "properties": {
-        "tier": {
-          "description": "The tier of the member.",
-          "type": "string"
-        }
-      }
-    },
-    "PlanMemberSyncStatus": {
-      "description": "The sync status of the plan member.",
-      "type": "object",
-      "properties": {
-        "syncState": {
-          "enum": [
-            "Succeeded",
-            "InProgress",
-            "NotStarted",
-            "Failed",
-            "Canceled"
-          ],
-          "description": "The synchronization state of the plan member.",
-          "readOnly": true,
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PlanMemberSyncState",
-            "modelAsString": true
-          }
-        },
-        "lastSyncError": {
-          "description": "Error response describing why the sync failed.",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
-        },
-        "lastSyncTime": {
-          "description": "When the plan member was last synced.",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        }
-      }
-    },
-    "PlanMemberUpdate": {
-      "description": "The devcenter plan member resource for partial updates. Properties not provided in the update request will not be changed.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "Plan member update properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PlanMemberUpdateProperties"
-        },
-        "tags": {
-          "$ref": "commonDefinitions.json#/definitions/Tags",
-          "description": "Resource tags."
-        }
-      }
-    },
     "DevCenter": {
       "type": "object",
       "description": "Represents a devcenter resource.",
@@ -6044,10 +5530,6 @@
       "description": "Properties of the devcenter. These properties can be updated after the resource has been created.",
       "type": "object",
       "properties": {
-        "planId": {
-          "type": "string",
-          "description": "Resource Id of an associated Plan"
-        },
         "encryption": {
           "$ref": "#/definitions/Encryption",
           "description": "Encryption settings to be used for server-side encryption for proprietary content (such as catalogs, logs, customizations)."
@@ -6067,13 +5549,6 @@
         "devBoxProvisioningSettings": {
           "$ref": "#/definitions/DevBoxProvisioningSettings",
           "description": "Settings to be used in the provisioning of all Dev Boxes that belong to this dev center."
-        },
-        "restrictedResourceTypes": {
-          "description": "Indicates the resource types that are restricted from being accessed by a project unless allowed by a project policy.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DevCenterResourceType"
-          }
         }
       }
     },
@@ -6215,6 +5690,18 @@
         "modelAsString": true
       }
     },
+    "ConfigurationPolicyEnableStatus":{
+      "description": "Indicates whether configuration policies are enabled for a project.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ConfigurationPolicyEnableStatus",
+        "modelAsString": true
+      }
+    },
     "Encryption": {
       "type": "object",
       "properties": {
@@ -6233,21 +5720,6 @@
       "x-ms-enum": {
         "name": "InstallAzureMonitorAgentEnableStatus",
         "modelAsString": true
-      }
-    },
-    "PlanUpdate": {
-      "description": "The devcenter plan resource for partial updates. Properties not provided in the update request will not be changed.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
-        }
-      ],
-      "properties": {
-        "sku": {
-          "description": "The SKU for DevCenters created using this definition.",
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku"
-        }
       }
     },
     "DevCenterUpdate": {
@@ -6287,44 +5759,6 @@
         "identity": {
           "description": "Managed identity properties",
           "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity"
-        }
-      }
-    },
-    "PlanListResult": {
-      "description": "Result of the list devcenter plans operation",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Current page of results.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DevCenterPlan"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PlanMembersListResult": {
-      "description": "Result of the list devcenter plan members operation",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Current page of results.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DevCenterPlanMember"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of results if there are any.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -6416,6 +5850,10 @@
         "catalogSettings": {
           "$ref": "#/definitions/ProjectCatalogSettings",
           "description": "Settings to be used when associating a project with a catalog."
+        },
+        "customizationSettings": {
+          "$ref": "#/definitions/ProjectCustomizationSettings",
+          "description": "Settings to be used for customizations."
         }
       }
     },
@@ -6428,6 +5866,41 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CatalogItemType"
+          }
+        }
+      }
+    },
+    "ProjectCustomizationManagedIdentity": {
+      "description": "A reference to a Managed Identity that is attached to the Project.",
+      "type": "object",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "enum": [
+            "systemAssignedIdentity",
+            "userAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "ProjectCustomizationIdentityType",
+            "modelAsString": true
+          },
+          "description": "Values can be systemAssignedIdentity or userAssignedIdentity"
+        },
+        "identityResourceId": {
+          "type": "string",
+          "description": "Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
+        }
+      }
+    },
+    "ProjectCustomizationSettings": {
+      "description": "Settings to be used for customizations.",
+      "type": "object",
+      "properties": {
+        "identities": {
+          "description": "The identities that can to be used in customization scenarios; e.g., to clone a repository.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectCustomizationManagedIdentity"
           }
         }
       }
@@ -6508,77 +5981,6 @@
         }
       }
     },
-    "CurationProfileListResult": {
-      "description": "Results of the curation profile list operation.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Current page of results.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CurationProfile"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of results if there are any.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "CurationProfile": {
-      "description": "Represents an curation profile resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CurationProfileProperties",
-          "description": "Properties of an curation profile."
-        }
-      }
-    },
-    "CurationProfileProperties": {
-      "description": "Properties of an curation profile.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CurationProfileUpdateProperties"
-        }
-      ],
-      "properties": {
-        "provisioningState": {
-          "description": "The provisioning state of the resource.",
-          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
-          "readOnly": true
-        }
-      }
-    },
-    "CurationProfileUpdateProperties": {
-      "description": "Properties of an curation profile. These properties can be updated after the resource has been created.",
-      "type": "object",
-      "properties": {
-        "resourcePolicies": {
-          "description": "Resource policies that are a part of this curation profile.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourcePolicy"
-          }
-        },
-        "scopes": {
-          "description": "Resources that have access to the shared resources that are a part of this curation profile.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ResourcePolicy": {
       "description": "A resource policy.",
       "type": "object",
@@ -6590,18 +5992,27 @@
         "filter": {
           "description": "Optional. When specified, this expression is used to filter the resources.",
           "type": "string"
+        },
+        "action": {
+          "description": "Policy action to be taken on the resources. This is optional, and defaults to allow",
+          "$ref": "#/definitions/PolicyAction"
+        },
+        "resourceType": {
+          "description": "Optional. The resource type being restricted or allowed by a project policy. Used with a given action to restrict or allow access to a resource type.",
+          "$ref": "#/definitions/DevCenterResourceType"
         }
       }
     },
-    "CurationProfileUpdate": {
-      "description": "The curation profile properties for partial update. Properties not provided in the update request will not be changed.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CurationProfileUpdateProperties",
-          "description": "Properties of an curation profile to be updated."
-        }
+    "PolicyAction": {
+      "description": "Indicates what action to perform for the policy.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PolicyAction",
+        "modelAsString": true
       }
     },
     "ProjectPolicyListResult": {
@@ -6672,6 +6083,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "configurationPolicies": {
+          "description": "Configuration Policies part of this project policy.",
+          "type": "object",
+          "$ref": "#/definitions/ConfigurationPolicies"
         }
       }
     },
@@ -6683,6 +6099,16 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProjectPolicyUpdateProperties",
           "description": "Properties of an project policy to be updated."
+        }
+      }
+    },
+    "ConfigurationPolicies": {
+      "description": "Represents policies to enforce configuration settings on a project.",
+      "type": "object",
+      "properties": {
+        "userCustomizationsEnableStatus": {
+          "description": "The property indicates whether user customizations are enabled.",
+          "$ref": "#/definitions/ConfigurationPolicyEnableStatus"
         }
       }
     },
@@ -7732,6 +7158,18 @@
         "modelAsString": true
       }
     },
+    "AutoImageBuildStatus": {
+      "description": "Indicates whether auto image build is enabled/disabled.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AutoImageBuildStatus",
+        "modelAsString": true
+      }
+    },
     "ListUsagesResult": {
       "description": "List of Core Usages.",
       "type": "object",
@@ -8083,22 +7521,33 @@
         "properties": {
           "description": "Image Definition properties",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ImageDefinitionProperties"
+          "$ref": "#/definitions/CatalogImageDefinitionMetadataProperties"
         }
       }
     },
-    "ImageDefinitionProperties": {
+    "DevCenterCatalogImageDefinition": {
+      "description": "Represents a definition for an Image.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Image Definition properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CatalogImageDefinitionProperties"
+        }
+      }
+    },
+    "ImageDefinitionMetadataProperties": {
       "description": "Properties of an Image Definition.",
       "type": "object",
       "properties": {
         "imageReference": {
           "$ref": "vdi.json#/definitions/ImageReference",
           "description": "Image reference information."
-        },
-        "fileUrl": {
-          "description": "The URL to the repository file containing the image definition.",
-          "type": "string",
-          "readOnly": true
         },
         "latestBuild": {
           "$ref": "#/definitions/LatestImageBuild",
@@ -8123,6 +7572,127 @@
           "$ref": "vdi.json#/definitions/ImageReference",
           "description": "Image reference information for the currently active image (only populated during updates).",
           "readOnly": true
+        },
+        "autoImageBuild": {
+          "description": "Indicates if automatic image builds will be triggered for image definition updates",
+          "$ref": "#/definitions/AutoImageBuildStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogImageDefinitionMetadataProperties": {
+      "type": "object",
+      "description": "Properties of an Image Definition that is sourced from a Catalog.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageDefinitionMetadataProperties"
+        }
+      ],
+      "properties": {
+        "fileUrl": {
+          "description": "The URL to the repository file containing the image definition.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageDefinitionUserContentProperties": {
+      "type": "object",
+      "description": "Properties of an Image Definition.",
+      "properties": {
+        "tasks": {
+          "description": "Tasks to run at Dev Box provisioning time.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskInstance"
+          }
+        },
+        "userTasks": {
+          "description": "Tasks to run when a user first logs into a Dev Box.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskInstance"
+          }
+        },
+        "extends": {
+          "description": "Another Image Definition that this one extends.",
+          "$ref": "#/definitions/ImageDefinitionReference"
+        }
+      }
+    },
+    "ImageDefinitionProperties": {
+      "type": "object",
+      "description": "Properties of an Image Definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageDefinitionMetadataProperties"
+        },
+        {
+          "$ref": "#/definitions/ImageDefinitionUserContentProperties"
+        }
+      ]
+    },
+    "CatalogImageDefinitionProperties": {
+      "type": "object",
+      "description": "Properties of an Image Definition that is sourced from a Catalog.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogImageDefinitionMetadataProperties"
+        },
+        {
+          "$ref": "#/definitions/ImageDefinitionUserContentProperties"
+        }
+      ]
+    },
+    "ImageDefinitionReference": {
+      "type": "object",
+      "description": "A reference to an Image Definition.",
+      "required": [
+        "imageDefinition"
+      ],
+      "properties": {
+        "imageDefinition": {
+          "type": "string",
+          "description": "Name of the referenced Image Definition."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters for the referenced Image Definition.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomizationTaskInstance": {
+      "type": "object",
+      "description": "A customization task to run.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the task."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters for the task.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name to help differentiate multiple instances of the same task."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "description": "Timeout, in seconds. Overrides any timeout provided on the task definition."
+        },
+        "condition": {
+          "type": "string",
+          "description": "The condition that needs to be met to run the task."
         }
       }
     },
@@ -8423,28 +7993,6 @@
     }
   },
   "parameters": {
-    "PlanNameParameter": {
-      "name": "planName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the devcenter plan.",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63
-    },
-    "PlanMemberNameParameter": {
-      "name": "memberName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of a devcenter plan member.",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$",
-      "minLength": 3,
-      "maxLength": 63
-    },
     "DevCenterNameParameter": {
       "name": "devCenterName",
       "in": "path",
@@ -8464,17 +8012,6 @@
       "description": "The name of the devcenter encryption set.",
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$",
-      "minLength": 3,
-      "maxLength": 63
-    },
-    "CurationProfileNameParameter": {
-      "name": "curationProfileName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the curation profile.",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63
     },
@@ -8658,4 +8195,3 @@
     }
   }
 }
-

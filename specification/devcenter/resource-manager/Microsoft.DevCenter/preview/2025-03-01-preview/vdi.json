@@ -1144,6 +1144,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "activeHoursConfiguration": {
+          "description": "Active hours configuration settings for Dev Boxes created in this pool.",
+          "$ref": "#/definitions/ActiveHoursConfiguration"
         }
       }
     },
@@ -1616,7 +1620,8 @@
         "Running",
         "Passed",
         "Warning",
-        "Failed"
+        "Failed",
+        "Informational"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1941,6 +1946,58 @@
         "name": "ScheduleEnableStatus",
         "modelAsString": true
       }
+    },
+    "ActiveHoursConfiguration": {
+      "type": "object",
+      "description": "Active hours configuration.",
+      "properties": {
+        "keepAwakeEnableStatus": {
+          "$ref": "#/definitions/KeepAwakeEnableStatus",
+          "description": "Enables or disables whether the Dev Box should be kept awake during active hours."
+        },
+        "autoStartEnableStatus": {
+          "$ref": "#/definitions/AutoStartEnableStatus",
+          "description": "Enables or disables whether the Dev Box should be automatically started at commencement of active hours."
+        },
+        "defaultTimeZone": {
+          "type": "string",
+          "description": "The default IANA timezone id of the active hours."
+        },
+        "defaultStartTimeHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default start time of the active hours."
+        },
+        "defaultEndTimeHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default end time of the active hours"
+        }
+      }
+    },
+    "KeepAwakeEnableStatus": {
+      "type": "string",
+      "description": "Enables or disables whether Dev Boxes should be kept awake during active hours.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "KeepAwakeEnableStatus",
+        "modelAsString": true
+      }
+    },
+    "AutoStartEnableStatus": {
+      "type": "string",
+      "description": "Enables or disables whether Dev Boxes should be automatically started at commencement of active hours.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AutoStartEnableStatus",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
@@ -1987,4 +2044,3 @@
     }
   }
 }
-
