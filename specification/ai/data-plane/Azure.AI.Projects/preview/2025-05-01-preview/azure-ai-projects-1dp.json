@@ -9755,7 +9755,8 @@
       "type": "string",
       "description": "Enum to determine the type of data.",
       "enum": [
-        "uri_file"
+        "uri_file",
+        "uri_folder"
       ],
       "x-ms-enum": {
         "name": "DatasetType",
@@ -9765,6 +9766,11 @@
             "name": "uri_file",
             "value": "uri_file",
             "description": "URI file."
+          },
+          {
+            "name": "uri_folder",
+            "value": "uri_folder",
+            "description": "URI folder."
           }
         ]
       }
@@ -9783,9 +9789,14 @@
             "create"
           ]
         },
-        "datasetType": {
+        "type": {
           "$ref": "#/definitions/DatasetType",
-          "description": "Data type"
+          "description": "Dataset type"
+        },
+        "isReference": {
+          "type": "boolean",
+          "description": "Indicates if dataset is reference only or managed by dataset service. If true, the underlying data will be deleted when the dataset version is deleted",
+          "readOnly": true
         },
         "stage": {
           "type": "string",
@@ -9828,9 +9839,10 @@
           "readOnly": true
         }
       },
+      "discriminator": "type",
       "required": [
         "datasetUri",
-        "datasetType",
+        "type",
         "name",
         "version"
       ]
@@ -10022,6 +10034,35 @@
           }
         ]
       }
+    },
+    "FileDatasetVersion": {
+      "type": "object",
+      "description": "FileDatasetVersion Definition",
+      "properties": {
+        "openAIPurpose": {
+          "type": "string",
+          "description": "Indicates OpenAI Purpose. FileDatasets created with this field will be compatible with OpenAI-specific features"
+        }
+      },
+      "required": [
+        "openAIPurpose"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetVersion"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_file"
+    },
+    "FolderDatasetVersion": {
+      "type": "object",
+      "description": "FileDatasetVersion Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetVersion"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_folder"
     },
     "IdAssetReference": {
       "type": "object",
@@ -10412,6 +10453,10 @@
           "type": "string",
           "description": "If PendingUploadId is not provided, a random GUID will be used."
         },
+        "connectionName": {
+          "type": "string",
+          "description": "Name of Azure blob storage connection to use for generating temporary SAS token"
+        },
         "pendingUploadType": {
           "type": "string",
           "description": "TemporaryBlobReference is the only supported type.",
@@ -10438,6 +10483,10 @@
         "pendingUploadId": {
           "type": "string",
           "description": "ID for this upload request."
+        },
+        "datasetVersion": {
+          "type": "string",
+          "description": "Version of dataset to be created if user did not specify version when initially creating upload"
         },
         "pendingUploadType": {
           "type": "string",
