@@ -61,3 +61,7 @@ using Microsoft.DatabaseWatcher;
 @@alternateType(Datastore.kustoClusterUri, url, "csharp");
 @@alternateType(Datastore.kustoDataIngestionUri, url, "csharp");
 @@alternateType(Datastore.kustoManagementUrl, url, "csharp");
+@@alternateType(ValidationIssue.relatedResourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
