@@ -1265,4 +1265,12 @@ directive:
     from: managedClusters.json
     where: $.definitions.ManagedClusterOIDCIssuerProfile.properties.issuerURL
     reason: For managedCluster.properties.oidcIssuerProfile.issuerURL, already used in preview API
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResultList
+    reason: The model referenced in the common type does not conform to the definition of the rule, more details see https://github.com/Azure/azure-openapi-validator/issues/773
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.NodeImageVersionsListResult
+    reason: The tool compared the stable API version and mistakenly scanned out that this model was not newly added, more details see https://github.com/Azure/azure-openapi-validator/issues/773
 ```
