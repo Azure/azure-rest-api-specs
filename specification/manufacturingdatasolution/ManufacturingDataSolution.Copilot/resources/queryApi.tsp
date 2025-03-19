@@ -36,7 +36,7 @@ alias headerParams = RequestHeadersTrait<{
 
 @doc("Query client operations")
 interface QueryServiceClient {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario. Issue: https://github.com/Azure/typespec-azure/issues/2409"
   @post
   @route("/query")
   @doc("execute the query")
