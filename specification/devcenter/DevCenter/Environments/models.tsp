@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 @doc("Type of the output value.")
 @added(APIVersions.v2024_02_01)

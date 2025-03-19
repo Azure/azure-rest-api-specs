@@ -11,7 +11,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 alias DevCenterOps = DevCenterResourceOperations<Traits.NoConditionalRequests &
   Traits.NoRepeatableRequests &
