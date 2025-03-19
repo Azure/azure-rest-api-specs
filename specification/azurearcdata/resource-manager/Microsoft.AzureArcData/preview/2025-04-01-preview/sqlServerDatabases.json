@@ -426,6 +426,10 @@
             },
             "isTrustworthyOn": {
               "type": "boolean"
+            },
+            "isHekatonFilesOn": {
+              "type": "boolean",
+              "description": "Whether the database uses the In-Memory OLTP feature for storing in-memory objects."
             }
           }
         },
@@ -468,7 +472,8 @@
         },
         "sourceDatabaseId": {
           "description": "The name of the source database associated with create operation of this database.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "vmId": {
           "type": "string",
