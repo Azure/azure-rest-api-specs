@@ -1,10 +1,10 @@
-import { vi, test, describe } from "vitest";
+import { test, describe, vi } from "vitest";
 import { vol } from "memfs";
 import { pathExists } from "../src/util.js";
 import { beforeEach } from "node:test";
 
-vi.mock("fs/promises", async () => {
-  const memfs = await import("memfs");
+vi.mock("fs/promises", () => {
+  const memfs = require("memfs");
   return {
     ...memfs.fs.promises,
   };

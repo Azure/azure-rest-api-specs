@@ -6,8 +6,14 @@ import { afterEach } from "node:test";
 
 // These tests are in a separate module because fs mocking is difficult to undo
 
-vi.mock("fs/promises", async () => {
-  const memfs = await import("memfs");
+vi.mock("node:fs", () => {
+  const memfs = require("memfs");
+  return {
+    ...memfs.fs,
+  };
+});
+vi.mock("node:fs/promises", () => {
+  const memfs = require("memfs");
   return {
     ...memfs.fs.promises,
   };
