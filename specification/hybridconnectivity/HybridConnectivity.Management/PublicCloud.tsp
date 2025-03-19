@@ -334,7 +334,10 @@ interface GenerateAwsTemplate {
 interface PublicCloudConnectors {
   get is ArmResourceRead<PublicCloudConnector>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PublicCloudConnector>;
-  update is ArmCustomPatchSync<PublicCloudConnector, PublicCloudConnector>;
+  update is ArmResourcePatchSync<
+    PublicCloudConnector,
+    PublicCloudConnectorProperties
+  >;
   delete is ArmResourceDeleteSync<PublicCloudConnector>;
   listByResourceGroup is ArmResourceListByParent<PublicCloudConnector>;
   listBySubscription is ArmListBySubscription<PublicCloudConnector>;
