@@ -5168,12 +5168,19 @@
         },
         "rebillDetails": {
           "description": "Rebill details for an invoice.",
-          "type": "object",
-          "readOnly": true,
-          "additionalProperties": {
-            "type": "object",
-            "$ref": "#/definitions/RebillDetails"
-          }
+          "properties": {
+            "creditNoteDocumentId": {
+              "description": "The ID of credit note.",
+              "type": "string",
+              "readOnly": true
+            },
+            "invoiceDocumentId": {
+              "description": "The ID of invoice.",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "readOnly": true
         },
         "documentType": {
           "description": "The type of the document.",
