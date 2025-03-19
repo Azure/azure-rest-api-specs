@@ -80,35 +80,38 @@ describe("getLabelActionImpl", () => {
     ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
   });
 
-  it("removes label if check failed", async () => {
-    const github = createMockGithub({ incrementalTypeSpec: true });
+  it.each(["Swagger Avocado", "Swagger LintDiff"])(
+    "removes label if check %s failed",
+    async (check) => {
+      const github = createMockGithub({ incrementalTypeSpec: true });
 
-    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
-      data: [{ name: "ARMReview" }],
-    });
-    github.rest.checks.listForRef.mockResolvedValue({
-      data: {
-        check_runs: [
-          {
-            name: "Swagger LintDiff",
-            status: "completed",
-            conclusion: "failure",
-          },
-        ],
-      },
-    });
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: [{ name: "ARMReview" }],
+      });
+      github.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              name: check,
+              status: "completed",
+              conclusion: "failure",
+            },
+          ],
+        },
+      });
 
-    await expect(
-      getLabelActionImpl({
-        owner: "TestOwner",
-        repo: "TestRepo",
-        issue_number: 123,
-        head_sha: "abc123",
-        github: github,
-        core: core,
-      }),
-    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
-  });
+      await expect(
+        getLabelActionImpl({
+          owner: "TestOwner",
+          repo: "TestRepo",
+          issue_number: 123,
+          head_sha: "abc123",
+          github: github,
+          core: core,
+        }),
+      ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
+    },
+  );
 
   it("no-ops if check not found or not completed", async () => {
     const github = createMockGithub({ incrementalTypeSpec: true });
@@ -167,6 +170,11 @@ describe("getLabelActionImpl", () => {
         check_runs: [
           {
             name: "Swagger LintDiff",
+            status: "completed",
+            conclusion: "success",
+          },
+          {
+            name: "Swagger Avocado",
             status: "completed",
             conclusion: "success",
           },
