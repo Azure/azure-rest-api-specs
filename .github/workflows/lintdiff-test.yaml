@@ -4,10 +4,15 @@ on:
   push:
     branches:
       - main
-    paths:
-      - eng/tools/lint-diff/**
   pull_request:
     paths:
+      - package-lock.json
+      - package.json
+      - tsconfig.json
+      - .github/workflows/_reusable-eng-tools-test.yaml
+      - .github/workflows/specs-model-test.yaml
+      - eng/tools/package.json
+      - eng/tools/tsconfig.json
       - eng/tools/lint-diff/**
   workflow_dispatch:
 
@@ -20,28 +25,13 @@ defaults:
     working-directory: eng/tools/lint-diff
 
 jobs:
-  test:
-    runs-on: ubuntu-24.04
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            .github/
-            eng/tools/
-            package.json
-            package-lock.json
-
-      - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
-
-      - name: Run tests
-        run: npm run test:ci
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v4
-        with:
-          name: code-coverage-report
-          path: eng/tools/lint-diff/coverage
-          if-no-files-found: ignore
+  lintDiff:
+    name: Lint Diff
+    uses: ./.github/workflows/_reusable-eng-tools-test.yaml
+    with:
+      package: lint-diff
+      lint: true
+      prettier: true
+      sparse-checkout-paths: |
+        package.json
+        package-lock.json
