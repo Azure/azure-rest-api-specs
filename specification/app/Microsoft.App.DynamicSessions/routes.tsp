@@ -72,8 +72,11 @@ interface SessionResourceFiles {
       @header("content-type")
       contentType: "multipart/form-data";
 
-      @doc("The file to upload.")
-      file: bytes;
+      /** Multipart body */
+      @multipartBody body: {
+        @doc("The file to upload.")
+        file: HttpPart<bytes>;
+      };
     },
     SessionResourceFile,
     SessionResourceFilesTraits
