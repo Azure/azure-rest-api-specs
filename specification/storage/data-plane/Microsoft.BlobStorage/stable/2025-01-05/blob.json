@@ -60,196 +60,6 @@
   },
   "tags": [],
   "paths": {
-    "": {
-      "get": {
-        "operationId": "GetProperties",
-        "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/StorageServiceProperties"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "SetProperties",
-        "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
-        "consumes": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageServiceProperties"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "GetUserDelegationKey",
-        "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "consumes": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UserDelegationKey"
-            },
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      }
-    },
     "/{containerName}": {
       "get": {
         "operationId": "Container_GetProperties",
@@ -3111,6 +2921,198 @@
     }
   },
   "x-ms-paths": {
+    "/?restype=service&comp=properties": {
+      "get": {
+        "operationId": "GetProperties",
+        "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SetProperties",
+        "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
+        "consumes": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      }
+    },
+    "/?restype=service&comp=userdelegationkey": {
+      "post": {
+        "operationId": "GetUserDelegationKey",
+        "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDelegationKey"
+            },
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      }
+    },
     "/{containerName}?restype=container&comp=metadata": {
       "put": {
         "operationId": "Container_SetMetadata",
