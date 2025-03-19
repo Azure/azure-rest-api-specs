@@ -286,7 +286,7 @@
     "/access/teamsExtension/:exchangeAccessToken": {
       "post": {
         "tags": [
-          "TeamsExtensionAccess"
+          "TeamsPhone"
         ],
         "summary": "Exchanges a Teams Phone token for an ACS user access token.",
         "operationId": "ExchangeTeamsPhoneToken",
@@ -488,6 +488,54 @@
         "x-ms-examples": {
           "Delete Assignment": {
             "$ref": "./examples/DeleteTeamsPhoneAssignment.json"
+          }
+        }
+      }
+    },
+    "/access/entra/:exchangeAccessToken": {
+      "post": {
+        "tags": [
+          "EntraId"
+        ],
+        "summary": "Exchanges an Entra ID token for an ACS user access token.",
+        "operationId": "ExchangeEntraIdToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload for the token exchange.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntraExchangeTokenRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Exchange a Teams Phone token": {
+            "$ref": "./examples/ExchangeEntraIdToken.json"
           }
         }
       }
@@ -950,6 +998,10 @@
         "name": "TeamsPhonePrincipalType",
         "modelAsString": true
       }
+    },
+    "EntraExchangeTokenRequest": {
+      "type": "object",
+      "properties": {}
     },
     "EntraAssignment": {
       "required": [
