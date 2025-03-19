@@ -148,6 +148,9 @@
         "x-ms-examples": {
           "Get public IP address": {
             "$ref": "./examples/PublicIpAddressGet.json"
+          },
+          "Get public IP address with StandardV2 sku": {
+            "$ref": "./examples/PublicIpAddressGetStandardV2Sku.json"
           }
         }
       },
@@ -220,6 +223,9 @@
           },
           "Create public IP address DNS with Domain Name Label Scope": {
             "$ref": "./examples/PublicIpAddressCreateDnsWithDomainNameLabelScope.json"
+          },
+          "Create public IP address defaults with StandardV2 Sku": {
+            "$ref": "./examples/PublicIpAddressCreateDefaultsStandardV2Sku.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -442,7 +448,8 @@
           "description": "Name of a public IP address SKU.",
           "enum": [
             "Basic",
-            "Standard"
+            "Standard",
+            "StandardV2"
           ],
           "x-ms-enum": {
             "name": "PublicIPAddressSkuName",
