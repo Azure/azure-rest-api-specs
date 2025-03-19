@@ -6,8 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Http;
 using Rest;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager.Legacy {
   interface LegacyOperations<

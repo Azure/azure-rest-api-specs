@@ -5,10 +5,8 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./CustomOperations.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
