@@ -24,7 +24,7 @@ union DatasetType {
   uri_file: "uri_file",
 
   @doc("URI folder.")
-  uri_file: "uri_folder",
+  uri_folder: "uri_folder",
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
