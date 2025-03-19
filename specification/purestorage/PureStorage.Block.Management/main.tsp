@@ -4,9 +4,7 @@ import "@typespec/openapi";
 @armProviderNamespace
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 @useLibraryNamespace(LiftrBase.Storage)
-@service(#{
-  title: "PureStorage.Block",
-})
+@service(#{ title: "PureStorage.Block" })
 @versioned(PureStorage.Block.Versions)
 namespace PureStorage.Block;
 
@@ -77,9 +75,7 @@ interface Reservations
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   changePlan(
@@ -355,9 +351,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   enableAvs(
@@ -379,9 +373,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   enableAvsConnection(
@@ -403,9 +395,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   disableAvs(
@@ -423,9 +413,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   disableAvsConnection(
@@ -443,9 +431,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   finalizeAvs(
@@ -463,9 +449,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   finalizeAvsConnection(
@@ -487,9 +471,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   repairAvsConnection(
@@ -507,9 +489,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   enableVspherePlugin(
@@ -531,9 +511,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   disableVspherePlugin(
@@ -551,9 +529,7 @@ interface StoragePools {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    #{
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   @post
   upgradeVspherePlugin(
