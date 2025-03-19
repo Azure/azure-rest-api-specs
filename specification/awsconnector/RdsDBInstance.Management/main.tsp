@@ -54,7 +54,7 @@ model RdsDBInstance is TrackedResource<RdsDBInstanceProperties> {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RdsDBInstance")
 model RdsDBInstanceProperties {
   @doc("AWS Properties")
@@ -66,7 +66,7 @@ model RdsDBInstanceProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsRdsDBInstance")
 model AwsRdsDBInstanceProperties {
   @doc("The amount of storage in gibibytes (GiB) to be initially allocated for the database instance.  If any value is set in the ``Iops`` parameter, ``AllocatedStorage`` must be at least 100 GiB, which corresponds to the minimum Iops value of 1,000. If you increase the ``Iops`` value (in 1,000 IOPS increments), then you must also increase the ``AllocatedStorage`` value (in 100-GiB increments).    *Amazon Aurora*  Not applicable. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  *Db2*  Constraints to the amount of storage for each storage type are the following:  +  General Purpose (SSD) storage (gp3): Must be an integer from 20 to 64000.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 64000.    *MySQL*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.  +  Magnetic storage (standard): Must be an integer from 5 to 3072.    *MariaDB*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.  +  Magnetic storage (standard): Must be an integer from 5 to 3072.    *PostgreSQL*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.  +  Magnetic storage (standard): Must be an integer from 5 to 3072.    *Oracle*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.  +  Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.  +  Magnetic storage (standard): Must be an integer from 10 to 3072.    *SQL Server*  Constraints to the amount of storage for each storage type are the following:   +  General Purpose (SSD) storage (gp2):  +  Enterprise and Standard editions: Must be an integer from 20 to 16384.  +  Web and Express editions: Must be an integer from 20 to 16384.    +  Provisioned IOPS storage (io1):  +  Enterprise and Standard editions: Must be an integer from 20 to 16384.  +  Web and Express editions: Must be an integer from 20 to 16384.    +  Magnetic storage (standard):  +  Enterprise and Standard editions: Must be an integer from 20 to 1024.  +  Web and Express editions: Must be an integer from 20 to 1024.")
@@ -316,7 +316,7 @@ model AwsRdsDBInstanceProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DBInstanceRole")
 model DBInstanceRole {
   @doc("The name of the feature associated with the AWS Identity and Access Management (IAM) role. IAM roles that are associated with a DB instance grant permission for the DB instance to access other AWS services on your behalf. For the list of supported feature names, see the ``SupportedFeatureNames`` description in [DBEngineVersion](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DBEngineVersion.html) in the *Amazon RDS API Reference*.")
@@ -329,7 +329,7 @@ model DBInstanceRole {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CertificateDetails")
 model CertificateDetails {
   @doc("The CA identifier of the CA certificate used for the DB instance's server certificate.")
@@ -342,7 +342,7 @@ model CertificateDetails {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Endpoint")
 model Endpoint {
   @doc("Specifies the DNS address of the DB instance.")
@@ -358,7 +358,7 @@ model Endpoint {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MasterUserSecret")
 model MasterUserSecret {
   @doc("The AWS KMS key identifier that is used to encrypt the secret.")
@@ -371,7 +371,7 @@ model MasterUserSecret {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ProcessorFeature")
 model ProcessorFeature {
   @doc("The name of the processor feature. Valid names are ``coreCount`` and ``threadsPerCore``.")
@@ -395,7 +395,7 @@ union ProcessorFeatureName {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
   @doc("A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: '^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$').")
