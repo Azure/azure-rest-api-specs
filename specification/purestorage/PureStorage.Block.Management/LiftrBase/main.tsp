@@ -57,7 +57,7 @@ scalar Uri extends string;
 @doc("Marketplace details")
 model MarketplaceDetails {
   @doc("Marketplace subscription ID")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subscriptionId?: string;
 
   @doc("Marketplace subscription status")
@@ -163,14 +163,14 @@ model UserDetails<TExtraProperties extends Model = UserDetailsDefaultExtraProper
 @doc("Base resource properties that can be extended for arm resources.")
 model BaseResourceProperties<TUserDetailsExtraProperties extends Model = UserDetailsDefaultExtraProperties> {
   @doc("Marketplace details")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   marketplace: MarketplaceDetails;
 
   @doc("User details")
   user: UserDetails<TUserDetailsExtraProperties>;
 
   @doc("Provisioning state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -188,7 +188,7 @@ model SingleSignOnProperties {
   @doc("List of AAD domains fetched from Microsoft Graph for user.")
   aadDomains?: string[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the resource")
   provisioningState?: ProvisioningState;
 }
