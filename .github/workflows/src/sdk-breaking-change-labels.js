@@ -69,7 +69,11 @@ export async function getLabelAndActionImpl({
     },
   });
 
-  if (response.ok) {
+  if (response.status === 404) {
+    core.info(
+      `Artifact '${artifactName}' not found (404). This might be expected if there are no breaking changes.`,
+    );
+  } else if (response.ok) {
     // Step 1: Get the download URL for the artifact
     /** @type {Artifacts} */
     const artifacts = /** @type {Artifacts} */ (await response.json());
@@ -127,7 +131,6 @@ export async function getLabelAndActionImpl({
     const errorText = await response.text();
     core.error(`Error details: ${errorText}`);
   }
-
   if (!labelAction) {
     core.info("No label action found, defaulting to None");
     labelAction = LabelAction.None;

@@ -203,8 +203,8 @@ describe("sdk-breaking-change-labels", () => {
       // Mock fetch failure
       global.fetch.mockResolvedValue({
         ok: false,
-        status: 404,
-        statusText: "Not Found",
+        status: 500,
+        statusText: "Server Error",
         text: vi.fn().mockResolvedValue("Artifact not found"),
       });
 
@@ -236,6 +236,47 @@ describe("sdk-breaking-change-labels", () => {
       expect(mockCore.error).toHaveBeenCalledWith(
         expect.stringContaining("Failed to fetch artifacts"),
       );
+    });
+
+    it("should complete without op when artifact does not exist", async () => {
+      // Setup inputs
+      const inputs = {
+        ado_build_id: "12345",
+        ado_project_url: "https://dev.azure.com/project",
+        head_sha: "abc123",
+      };
+
+      // Mock fetch failure
+      global.fetch.mockResolvedValue({
+        ok: false,
+        status: 404,
+        statusText: "Not Found",
+        text: vi.fn().mockResolvedValue("Artifact not found"),
+      });
+
+      // Mock PR search success
+      mockGithub.rest.search.issuesAndPullRequests.mockResolvedValue({
+        data: {
+          total_count: 1,
+          items: [{ number: 123, html_url: "https://github.com/pr/123" }],
+        },
+      });
+
+      // Call function
+      const result = await getLabelAndActionImpl({
+        ado_build_id: inputs.ado_build_id,
+        ado_project_url: inputs.ado_project_url,
+        head_sha: inputs.head_sha,
+        github: mockGithub,
+        core: mockCore,
+      });
+
+      // Verify result uses default values when artifact fetch fails
+      expect(result).toEqual({
+        labelName: "",
+        labelAction: LabelAction.None,
+        issueNumber: NaN,
+      });
     });
 
     it("should throw error if resource is empty from the artifact api response", async () => {
