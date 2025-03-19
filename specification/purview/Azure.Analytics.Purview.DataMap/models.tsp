@@ -1122,7 +1122,7 @@ model SearchResultValue {
   description?: string;
 
   @doc("The endorsement of the asset.")
-  endorsement?: string;
+  endorsement?: string[];
 
   @doc("The owner of the record.")
   owner?: string;
@@ -1282,7 +1282,7 @@ model SuggestResultValue {
   description?: string;
 
   @doc("The endorsement of the asset.")
-  endorsement?: string;
+  endorsement?: string[];
 
   @doc("The owner of the record.")
   owner?: string;
