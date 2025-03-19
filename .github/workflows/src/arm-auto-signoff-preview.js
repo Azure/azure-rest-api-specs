@@ -193,7 +193,7 @@ export async function getLabelActionImpl({
       matchingRun.status === "completed" &&
       matchingRun.conclusion !== "success"
     ) {
-      core.info("Swagger LintDiff did not succeed");
+      core.info(`Check '${checkName}' did not succeed`);
       return labelActions[LabelAction.Remove];
     }
 
@@ -215,7 +215,7 @@ export async function getLabelActionImpl({
     return labelActions[LabelAction.Add];
   }
 
-  // No-op if any checks are missing or not completed, to prevent frequent remove/add label as checks re-run
+  // If any checks are missing or not completed, no-op to prevent frequent remove/add label as checks re-run
   core.info("One or more checks are still in-progress");
   return labelActions[LabelAction.None];
 }

@@ -5,7 +5,7 @@ import { setEquals } from "../src/equality.js";
 
 describe("equality", () => {
   it.each([
-    // not instanceof Set: null and undefined
+    // not instanceof Set: null, undefined
     [null, null, false],
     [undefined, undefined, false],
     [null, undefined, false],
