@@ -282,6 +282,203 @@
           }
         }
       }
+    },
+    "/access/teamsExtension/:exchangeAccessToken": {
+      "post": {
+        "tags": [
+          "TeamsPhone"
+        ],
+        "summary": "Exchanges a Teams Phone token for an ACS user access token.",
+        "operationId": "ExchangeTeamsPhoneToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request payload for the token exchange.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneExchangeTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Exchange a Teams Phone token": {
+            "$ref": "./examples/ExchangeTeamsPhoneToken.json"
+          }
+        }
+      }
+    },
+    "/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}": {
+      "get": {
+        "tags": [
+          "TeamsPhone"
+        ],
+        "summary": "Get Teams Phone access assignment by object id.",
+        "operationId": "GetTeamsPhoneAssignment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant ID we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object ID we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneAssignmentResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assignment": {
+            "$ref": "./examples/GetTeamsPhoneAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TeamsPhone"
+        ],
+        "summary": "Creates or replaces a Teams Phone access assignment.",
+        "operationId": "CreateOrReplaceTeamsPhoneAssignment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant ID we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object ID we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Values we want to set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneAssignmentCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneAssignmentResponse"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TeamsPhoneAssignmentResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Assignment": {
+            "$ref": "./examples/CreateOrReplaceTeamsPhoneAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TeamsPhone"
+        ],
+        "summary": "Removes a Teams Phone access assignment.",
+        "operationId": "DeleteTeamsPhoneAssignment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tenantId",
+            "description": "Tenant ID we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "objectId",
+            "description": "Object ID we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Assignment": {
+            "$ref": "./examples/DeleteTeamsPhoneAssignment.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -452,6 +649,70 @@
           "description": "Object ID of an Azure AD user (Teams User) to be verified against the oid claim in the Azure AD access token.",
           "type": "string"
         }
+      }
+    },
+    "TeamsPhoneExchangeTokenRequest": {
+      "type": "object",
+      "properties": {}
+    },
+    "TeamsPhoneAssignmentResponse": {
+      "description": "A Teams Phone assignment response.",
+      "required": [
+        "objectId",
+        "tenantId",
+        "principalType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "description": "Object ID of the assignment.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Tenant ID of the assignment.",
+          "type": "string"
+        },
+        "principalType": {
+          "$ref": "#/definitions/TeamsPhonePrincipalType"
+        },
+        "clientIds": {
+          "description": "Client IDs associated with the assignment.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TeamsPhoneAssignmentCreateOrUpdateRequest": {
+      "description": "A request to create or update a Teams Phone assignment.",
+      "required": [
+        "principalType"
+      ],
+      "type": "object",
+      "properties": {
+        "principalType": {
+          "$ref": "#/definitions/TeamsPhonePrincipalType"
+        },
+        "clientIds": {
+          "description": "Client IDs associated with the assignment.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TeamsPhonePrincipalType": {
+      "description": "The type of Entra object the assignment is for.",
+      "enum": [
+        "resourceAccount",
+        "user"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TeamsPhonePrincipalType",
+        "modelAsString": true
       }
     }
   },
