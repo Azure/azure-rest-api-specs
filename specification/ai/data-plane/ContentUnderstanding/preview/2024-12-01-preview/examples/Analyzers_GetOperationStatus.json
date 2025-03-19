@@ -1,0 +1,54 @@
+{
+  "title": "Get Analyzer Operation Status",
+  "operationId": "Analyzers_GetOperationStatus",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "analyzerId": "myAnalyzer",
+    "operationId": "3b31320d-8bab-4f88-b19c-2322a7f11034"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "3b31320d-8bab-4f88-b19c-2322a7f11034",
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "myAnalyzer",
+          "description": "My custom analyzer",
+          "tags": {
+            "createdBy": "John"
+          },
+          "status": "creating",
+          "createdAt": "2024-10-14T18:46:36.051Z",
+          "lastModifiedAt": "2024-10-14T18:46:36.051Z",
+          "scenario": "document",
+          "config": {
+            "locales": null,
+            "enableFace": false,
+            "enableOcr": true,
+            "enableLayout": true,
+            "enableBarcode": true,
+            "enableFormula": false,
+            "returnDetails": true
+          },
+          "fieldSchema": {
+            "name": "MyForm",
+            "description": "My custom form",
+            "fields": {
+              "Company": {
+                "type": "string",
+                "description": "Name of company."
+              }
+            },
+            "definitions": {}
+          },
+          "trainingData": {
+            "kind": "blob",
+            "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+            "prefix": "trainingData",
+            "fileListPath": "trainingData/fileList.jsonl"
+          }
+        }
+      }
+    }
+  }
+}
