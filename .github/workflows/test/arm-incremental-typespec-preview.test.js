@@ -215,7 +215,7 @@ describe("incrementalTypeSpec", () => {
 
     const showSpy = vi
       .spyOn(git, "show")
-      .mockImplementation(async (_treeIsh, path, _core, _options) => {
+      .mockImplementation(async (_treeIsh, path) => {
         if (path === swaggerPath) {
           return swaggerTypeSpecGenerated;
         } else if (path === readmePath) {
