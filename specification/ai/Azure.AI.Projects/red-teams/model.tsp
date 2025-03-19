@@ -56,58 +56,51 @@ enum RiskCategory {
   Violence: "Violence",
   Sexual: "Sexual",
   SelfHarm: "SelfHarm",
-  ProtectedMaterial: "ProtectedMaterial",,
-  IndirectJailbreak: "IndirectJailbreak",
-  DirectJailbreak: "DirectJailbreak",
-  Codevulnerability: "Codevulnerability",
-  InferenceSensitiveAttributes: "InferenceSensitiveAttributess"
+  ProtectedMaterial: "ProtectedMaterial",
+  CodeVulnerability: "CodeVulnerability",
+  UngroundedAttributes: "UngroundedAttributes"
 }
 
-// Todo how we map this to the service needs more work, especially for dynamic. Right now we can just this be a placeholder for static.
-model AttackObjective {
-  @doc("List of risk categories to generate attack objectives for.")
-  riskCategories: RiskCategories[];
 
-  @doc("The number of objectives per risk category.")
-  numObjectives: int;
-}
-
-// orchestration APIs - todo find this: red_team_operation 
-@doc("Customization Parameters")
+@doc("Red team details.")
 model RedTeam {
-    // one idea is to integrate this with the PyRIT target: https://azure.github.io/PyRIT/code/architecture.html#target
-    // todo - how would this map to c#?
-    @doc("Target configuration for the red team operation.")
-    target: Callable | AzureOpenAIModelConfiguration | OpenAIModelConfiguration | PromptChatTarget;
+    @doc("Identifier of the red team.")
+    @key("name")
+    @visibility("read")
+    id: string;
 
-    // TODO needs to be reconstructed given the service integration.
-    @doc("Name of the evaluation for the run when you upload the result.")
-    evaluationName: string;
+    @doc("Name of the red-team scan.")
+    scanName: string;
 
     @doc("Number of simulation rounds.")
     numTurns: int;
 
-    // todo - how would this map to c#?
     @doc("List of attack strategies or nested lists of attack strategies.")
-    attackStrategy: AttackStrategy | AttackStrategy[][];
+    attackStrategy: AttackStrategy[];
 
-    //todo what is this?
-    @doc("data only.")
-    dataOnly: boolean;
+    @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
+    simulationOnly: boolean;
 
-    // TODO this needs to align with EvaluationResult asset type - which is going to map to this json.
-    // https://github.com/Azure/azureml_run_specification/blob/3ac2cf1cb5eb80d929898c1be5800667e066cd1c/specs/rai/Automated-Redteaming.md#sample-evaluation-results-json
-    // RedTeamAgentResult | Record<string, string | PathLike> - is actually going to get lumped into this
-    @doc("Output EvaluationResult json.")
-    outputPath: string;
+    @doc("Output EvaluationResult json in the EvaluationResult asset. Example - azureml://project/azureml/evaluationresults/myevaluationresult1")
+    outputId: string;
 
-    // Todo - attack ObjectiveGenerator - this would be better as a data pointer...the object doesn't give much
-    @doc("Attack ObjectiveGenerator.")
-    attackObjectiveGenerator: AttackObjectiveGenerator;
+    @doc("List of risk categories to generate attack objectives for.")
+    riskCategories: RiskCategories[];
 
-
-    // application_scenario: Optional[str] = None) -> Union[RedTeamAgentResult, Dict[str, Union[str, os.PathLike]]]:
-    // todo can't we lump this into target?
-    @doc("Application scenario for the red team operation.")
+    @doc("Application scenario for the red team operation, to generate scenario specific attacks.")
     applicationScenario?: string;
+
+    @doc("Red team's tags. Unlike properties, tags are fully mutable.")
+    tags?: Record<string>;
+
+    @doc("Red team's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+    properties?: Record<string>;
+
+    @doc("Metadata containing createdBy and modifiedBy information.")
+    @visibility("read")
+    systemData?: SystemData;
+
+    @doc("Status of the red team. It is set by service and is read-only.")
+    @visibility("read")
+    status?: string;
 }

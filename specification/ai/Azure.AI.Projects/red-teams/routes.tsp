@@ -30,7 +30,7 @@ interface RedTeams {
   // create is Operations.ResourceCreateWithServiceProvidedName<RedTeam>;
   // run is Operations.ResourceCollectionAction<RedTeam, {}, RedTeam>;
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @route("attack")
+  @route("scan")
   @post
   @doc("Run the RedTeam.")
   create(
@@ -49,33 +49,4 @@ interface RedTeams {
   >;
 
   update is RedTeamsOperations.ResourceUpdate<RedTeam>;
-}
-
-@route("/attack-objectives")
-interface AttackObjectives {
-  get is AttackObjectiveOperations.ResourceRead<AttackObjective>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  // create is Operations.ResourceCreateWithServiceProvidedName<RedTeam>;
-  // run is Operations.ResourceCollectionAction<RedTeam, {}, RedTeam>;
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @route("Generator")
-  @post
-  @doc("Generate attack objectives: statically or dynamically for Red Teaming.")
-  create(
-    @query
-    @doc("The API version to use for this operation.")
-    apiVersion: string,
-
-    @body
-    @doc("Attack objectives to create.")
-    attackObjective: AttackObjective,
-  ): CreatedAttackObjectivesResponse;
-
-  list is AttackObjectiveOperations.ResourceList<
-    AttackObjective,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
-  update is AttackObjectiveOperations.ResourceUpdate<AttackObjective>;
 }
