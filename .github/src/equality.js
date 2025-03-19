@@ -4,7 +4,7 @@
  *
  * @param {Set<any>} set1
  * @param {Set<any>} set2
- * @returns {boolean} True if the sets are the same size and have the same elements
+ * @returns {boolean} True if sets are the same size and have the same elements
  */
 export function setEquals(set1, set2) {
   if (!(set1 instanceof Set) || !(set2 instanceof Set)) {
