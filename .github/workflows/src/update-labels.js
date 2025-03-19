@@ -1,7 +1,8 @@
 // @ts-check
 
-import { extractInputs } from "../../src/context.js";
-import { PER_PAGE_MAX } from "../../src/github.js";
+import { RequestError } from "@octokit/request-error";
+import { extractInputs } from "../src/context.js";
+import { PER_PAGE_MAX } from "./github.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -117,7 +118,7 @@ export async function updateLabelsImpl({
           name: name,
         });
       } catch (error) {
-        if (error.status === 404) {
+        if (error instanceof RequestError && error.status === 404) {
           core.info(`Ignoring error: ${error.status} - ${error.message}`);
         } else {
           throw error;

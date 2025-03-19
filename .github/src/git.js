@@ -4,50 +4,62 @@
 /* v8 ignore start */
 
 import { execRoot } from "./exec.js";
+import { ILogger } from "./logger.js";
 
 /**
  * @param {string} baseCommitish
  * @param {string} headCommitish
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @param {string} options
+ * @param {Object} [options]
+ * @param {string} [options.args]
+ * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
-export async function diff(baseCommitish, headCommitish, core, options = "") {
-  return await execGit(
-    `diff ${options} ${baseCommitish} ${headCommitish}`,
-    core,
-  );
+export async function diff(baseCommitish, headCommitish, options = {}) {
+  const { args, logger } = options;
+
+  return await execGit(`diff ${args} ${baseCommitish} ${headCommitish}`, {
+    logger: logger,
+  });
 }
 
 /**
  * @param {string} treeIsh
  * @param {string} path
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @param {string} options
+ * @param {Object} [options]
+ * @param {string} [options.args]
+ * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
-export async function lsTree(treeIsh, path, core, options = "") {
-  return await execGit(`ls-tree ${options} ${treeIsh} ${path}`, core);
+export async function lsTree(treeIsh, path, options = {}) {
+  const { args, logger } = options;
+
+  return await execGit(`ls-tree ${args} ${treeIsh} ${path}`, {
+    logger: logger,
+  });
 }
 
 /**
  * @param {string} treeIsh
  * @param {string} path
- * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @param {string} options
+ * @param {Object} [options]
+ * @param {string} [options.args]
+ * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
-export async function show(treeIsh, path, core, options = "") {
-  return await execGit(`show ${options} ${treeIsh}:${path}`, core);
+export async function show(treeIsh, path, options = {}) {
+  const { args, logger } = options;
+
+  return await execGit(`show ${args} ${treeIsh}:${path}`, { logger: logger });
 }
 
 /**
  * @param {string} args
- * @param {import('github-script').AsyncFunctionArguments['core']} core
+ * @param {{logger?: ILogger}} options
  * @returns {Promise<string>}
  */
-async function execGit(args, core) {
+async function execGit(args, options) {
   // Ensure that git displays filenames as they are (without escaping)
   const defaultConfig = "-c core.quotepath=off";
-  return await execRoot(`git ${defaultConfig} ${args}`, core);
+
+  return await execRoot(`git ${defaultConfig} ${args}`, options);
 }

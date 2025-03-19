@@ -6,8 +6,8 @@ import {
   swaggerHandWritten,
   swaggerTypeSpecGenerated,
 } from "../../test/examples.js";
-import { createMockCore } from "../../test/mocks.js";
 import incrementalTypeSpec from "../src/arm-incremental-typespec-preview.js";
+import { createMockCore } from "./mocks.js";
 
 const core = createMockCore();
 
@@ -56,8 +56,9 @@ describe("incrementalTypeSpec", () => {
     expect(lsTreeSpy).toBeCalledWith(
       "HEAD^",
       specDir,
-      expect.anything(),
-      "-r --name-only",
+      expect.objectContaining({
+        args: "-r --name-only",
+      }),
     );
   });
 
@@ -144,8 +145,7 @@ describe("incrementalTypeSpec", () => {
     expect(lsTreeSpy).toBeCalledWith(
       "HEAD^",
       specDir,
-      expect.anything(),
-      "-r --name-only",
+      expect.objectContaining({ args: "-r --name-only" }),
     );
   });
 
@@ -196,8 +196,9 @@ describe("incrementalTypeSpec", () => {
     expect(lsTreeSpy).toBeCalledWith(
       "HEAD^",
       specDir,
-      expect.anything(),
-      "-r --name-only",
+      expect.objectContaining({
+        args: "-r --name-only",
+      }),
     );
   });
 
@@ -234,8 +235,7 @@ describe("incrementalTypeSpec", () => {
     expect(lsTreeSpy).toHaveBeenCalledWith(
       "HEAD^",
       specDir,
-      expect.anything(),
-      "-r --name-only",
+      expect.objectContaining({ args: "-r --name-only" }),
     );
   });
 
@@ -261,8 +261,7 @@ describe("incrementalTypeSpec", () => {
     expect(lsTreeSpy).toHaveBeenCalledWith(
       "HEAD^",
       specDir,
-      expect.anything(),
-      "-r --name-only",
+      expect.objectContaining({ args: "-r --name-only" }),
     );
   });
 });
