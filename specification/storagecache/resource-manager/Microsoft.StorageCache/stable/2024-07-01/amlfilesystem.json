@@ -1710,10 +1710,10 @@
             "adminStatus": {
               "type": "string",
               "description": "The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.",
-              "default": "Enable",
+              "default": "Active",
               "enum": [
-                "Enable",
-                "Disable"
+                "Active",
+                "Cancel"
               ],
               "x-ms-enum": {
                 "name": "AutoExportJobAdminStatus",
@@ -1854,24 +1854,6 @@
             "type": "string"
           },
           "description": "Resource tags."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "type": "object",
-          "properties": {
-            "adminStatus": {
-              "type": "string",
-              "description": "The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.",
-              "enum": [
-                "Enable",
-                "Disable"
-              ],
-              "x-ms-enum": {
-                "name": "AutoExportJobAdminStatus",
-                "modelAsString": true
-              }
-            }
-          }
         }
       }
     },
@@ -1926,7 +1908,7 @@
             },
             "adminStatus": {
               "type": "string",
-              "description": "The administrative status of the import job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active import job. By default it is set to 'Active'.",
+              "description": "The administrative status of the import job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will cancel the current active import job. By default it is set to 'Enable'.",
               "default": "Active",
               "enum": [
                 "Active",
@@ -2109,24 +2091,6 @@
             "type": "string"
           },
           "description": "Resource tags."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "type": "object",
-          "properties": {
-            "adminStatus": {
-              "type": "string",
-              "description": "The administrative status of the import job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active import job.",
-              "enum": [
-                "Active",
-                "Cancel"
-              ],
-              "x-ms-enum": {
-                "name": "ImportJobAdminStatus",
-                "modelAsString": true
-              }
-            }
-          }
         }
       }
     },
