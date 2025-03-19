@@ -7,7 +7,7 @@ using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 interface OperationStatuses {
   @doc("Get the status of an operation.")

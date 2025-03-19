@@ -5,7 +5,7 @@ using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 /**
  * Interface containing common resource operations.
