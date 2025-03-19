@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -110,7 +108,6 @@ model RecordingGroup {
   recordingStrategy?: RecordingStrategy;
 
   @doc("<p>A comma-separated list that specifies which resource types Config records.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>Resource Type Value</b> column in <a href='https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources'>Supported Amazon Web Services resource Types</a> in the <i>Config developer guide</i>.</p> <note> <p> <b>Required and optional fields</b> </p> <p>Optionally, you can set the <code>useOnly</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html'>RecordingStrategy</a> to <code>INCLUSION_BY_RESOURCE_TYPES</code>.</p> <p>To record all configuration changes, set the <code>allSupported</code> field of <a href='https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html'>RecordingGroup</a> to <code>true</code>, and either omit this field or don't specify any resource types in this field. If you set the <code>allSupported</code> field to <code>false</code> and specify values for <code>resourceTypes</code>, when Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> </note> <note> <p> <b>Region availability</b> </p> <p>Before specifying a resource type for Config to track, check <a href='https://docs.aws.amazon.com/config/latest/developerguide/what-is-resource-config-coverage.html'>Resource Coverage by Region Availability</a> to see if the resource type is supported in the Amazon Web Services Region where you set up Config. If a resource type is supported by Config in at least one Region, you can enable the recording of that resource type in all Regions supported by Config, even if the specified resource type is not supported in the Amazon Web Services Region where you set up Config.</p> </note>")
-  @extension("x-ms-identifiers", [])
   resourceTypes?: ResourceType[];
 }
 
@@ -1360,7 +1357,7 @@ model RecordingMode {
   recordingFrequency?: RecordingFrequencyEnumValue;
 
   @doc("<p>An array of <code>recordingModeOverride</code> objects for you to specify your overrides for the recording mode. The <code>recordingModeOverride</code> object in the <code>recordingModeOverrides</code> array consists of three fields: a <code>description</code>, the new <code>recordingFrequency</code>, and an array of <code>resourceTypes</code> to override.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   recordingModeOverrides?: RecordingModeOverride[];
 }
 
@@ -1392,7 +1389,6 @@ model RecordingFrequencyEnumValue {
 @doc("Definition of ExclusionByResourceTypes")
 model ExclusionByResourceTypes {
   @doc("<p>A comma-separated list of resource types to exclude from recording by the configuration recorder.</p>")
-  @extension("x-ms-identifiers", [])
   resourceTypes?: ResourceType[];
 }
 
@@ -1443,7 +1439,6 @@ model RecordingModeOverride {
   recordingFrequency?: RecordingFrequencyEnumValue;
 
   @doc("<p>A comma-separated list that specifies which resource types Config includes in the override.</p> <important> <p>Daily recording is not supported for the following resource types:</p> <ul> <li> <p> <code>AWS::Config::ResourceCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConformancePackCompliance</code> </p> </li> <li> <p> <code>AWS::Config::ConfigurationRecorder</code> </p> </li> </ul> </important>")
-  @extension("x-ms-identifiers", [])
   resourceTypes?: ResourceType[];
 }
 

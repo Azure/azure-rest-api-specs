@@ -17,9 +17,7 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -70,7 +68,7 @@ model AwsEc2InstanceProperties {
   architecture?: ArchitectureValuesEnumValue;
 
   @doc("<p>Any block device mapping entries for the instance.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   blockDeviceMappings?: InstanceBlockDeviceMapping[];
 
   @doc("<p>The boot mode that was specified by the AMI. If the value is <code>uefi-preferred</code>, the AMI supports both UEFI and Legacy BIOS. The <code>currentInstanceBootMode</code> parameter is the boot mode that is used to boot the instance at launch or start.</p> <note> <p>The operating system contained in the AMI must be configured to support the specified boot mode.</p> </note> <p>For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html'>Boot modes</a> in the <i>Amazon EC2 User Guide</i>.</p>")
@@ -95,11 +93,11 @@ model AwsEc2InstanceProperties {
   ebsOptimized?: boolean;
 
   @doc("<p>Deprecated.</p> <note> <p>Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.</p> </note>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   elasticGpuAssociations?: ElasticGpuAssociation[];
 
   @doc("<p>The elastic inference accelerator associated with the instance.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   elasticInferenceAcceleratorAssociations?: ElasticInferenceAcceleratorAssociation[];
 
   @doc("<p>Specifies whether enhanced networking with ENA is enabled.</p>")
@@ -142,7 +140,7 @@ model AwsEc2InstanceProperties {
   launchTime?: utcDateTime;
 
   @doc("<p>The license configurations for the instance.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   licenses?: LicenseConfiguration[];
 
   @doc("<p>Provides information on the recovery and maintenance options of your instance.</p>")
@@ -155,7 +153,7 @@ model AwsEc2InstanceProperties {
   monitoring?: Monitoring;
 
   @doc("<p>The network interfaces for the instance.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   networkInterfaces?: InstanceNetworkInterface[];
 
   @doc("<p>The Amazon Resource Name (ARN) of the Outpost.</p>")
@@ -180,7 +178,7 @@ model AwsEc2InstanceProperties {
   privateIpAddress?: string;
 
   @doc("<p>The product codes attached to this instance, if applicable.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   productCodes?: ProductCode[];
 
   @doc("<p>[IPv4 only] The public DNS name assigned to the instance. This name is not available until the instance enters the <code>running</code> state. This name is only available if you've enabled DNS hostnames for your VPC.</p>")
@@ -199,7 +197,7 @@ model AwsEc2InstanceProperties {
   rootDeviceType?: DeviceTypeEnumValue;
 
   @doc("<p>The security groups for the instance.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   securityGroups?: GroupIdentifier[];
 
   @doc("<p>Indicates whether source/destination checking is enabled.</p>")
@@ -224,7 +222,7 @@ model AwsEc2InstanceProperties {
   subnetId?: string;
 
   @doc("<p>Any tags assigned to the instance.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>If the instance is configured for NitroTPM support, the value is <code>v2.0</code>. For more information, see <a href='https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html'>NitroTPM</a> in the <i>Amazon EC2 User Guide</i>.</p>")
@@ -3187,22 +3185,22 @@ model InstanceNetworkInterface {
   description?: string;
 
   @doc("<p>The security groups.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   groups?: GroupIdentifier[];
 
   @doc("<p>The type of network interface.</p> <p>Valid values: <code>interface</code> | <code>efa</code> | <code>trunk</code> </p>")
   interfaceType?: string;
 
   @doc("<p>The IPv4 delegated prefixes that are assigned to the network interface.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   ipv4Prefixes?: InstanceIpv4Prefix[];
 
   @doc("<p>The IPv6 addresses associated with the network interface.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   ipv6Addresses?: InstanceIpv6Address[];
 
   @doc("<p>The IPv6 delegated prefixes that are assigned to the network interface.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   ipv6Prefixes?: InstanceIpv6Prefix[];
 
   @doc("<p>The MAC address.</p>")
@@ -3221,7 +3219,7 @@ model InstanceNetworkInterface {
   privateIpAddress?: string;
 
   @doc("<p>The private IPv4 addresses associated with the network interface.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   privateIpAddresses?: InstancePrivateIpAddress[];
 
   @doc("<p>Indicates whether source/destination checking is enabled.</p>")

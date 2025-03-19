@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -102,7 +100,6 @@ model AwsRedshiftClusterProperties {
   clusterParameterGroupName?: string;
 
   @doc("A list of security groups to be associated with this cluster.")
-  @extension("x-ms-identifiers", [])
   clusterSecurityGroups?: string[];
 
   @doc("The name of a cluster subnet group to be associated with this cluster.")
@@ -154,7 +151,6 @@ model AwsRedshiftClusterProperties {
   hsmConfigurationIdentifier?: string;
 
   @doc("A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 50 IAM roles in a single request")
-  @extension("x-ms-identifiers", [])
   iamRoles?: string[];
 
   @doc("The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.")
@@ -233,11 +229,10 @@ model AwsRedshiftClusterProperties {
   snapshotIdentifier?: string;
 
   @doc("The list of tags for the cluster parameter group.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.")
-  @extension("x-ms-identifiers", [])
   vpcSecurityGroupIds?: string[];
 }
 

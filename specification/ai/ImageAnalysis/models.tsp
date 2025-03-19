@@ -101,14 +101,14 @@ model DetectedObject {
 @doc("Represents a person detected in an image.")
 model DetectedPerson {
   @doc("A rectangular boundary where the person was detected.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   boundingBox: ImageBoundingBox;
 
   @doc("""
     A score, in the range of 0 to 1 (inclusive), representing the confidence that this detection was accurate.
     Higher values indicating higher confidence.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minValue(0.0)
   @maxValue(1.0)
   confidence: float32;

@@ -1,6 +1,11 @@
-import { describe, expect, it, vi } from "vitest";
-import { createMockCore } from "../../test/mocks.js";
+import { describe, expect, it } from "vitest";
+import { PER_PAGE_MAX } from "../src/github.js";
 import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
+import {
+  createMockCore,
+  createMockGithub,
+  createMockRequestError,
+} from "./mocks.js";
 
 describe("updateLabels", () => {
   it("loads inputs from env", async () => {
@@ -35,6 +40,7 @@ describe("updateLabels", () => {
       owner: "TestRepoOwnerLoginEnv",
       repo: "TestRepoNameEnv",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLoginEnv",
@@ -58,6 +64,7 @@ describe("updateLabels", () => {
       payload: {
         action: "completed",
         workflow_run: {
+          event: "pull_request",
           head_sha: "abc123",
           id: 456,
           repository: {
@@ -83,6 +90,7 @@ describe("updateLabels", () => {
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLogin",
@@ -106,6 +114,7 @@ describe("updateLabels", () => {
       payload: {
         action: "completed",
         workflow_run: {
+          event: "pull_request",
           head_sha: "abc123",
           id: 456,
           repository: {
@@ -139,6 +148,7 @@ describe("updateLabels", () => {
       owner: "TestRepoOwnerLoginEnv",
       repo: "TestRepoNameEnv",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "TestRepoOwnerLoginEnv",
@@ -200,6 +210,7 @@ describe("updateLabelsImpl", () => {
       owner: "owner",
       repo: "repo",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
     expect(github.rest.issues.addLabels).toBeCalledWith({
       owner: "owner",
@@ -249,6 +260,7 @@ describe("updateLabelsImpl", () => {
       owner: "owner",
       repo: "repo",
       run_id: 456,
+      per_page: PER_PAGE_MAX,
     });
 
     // Ensure no labels are added or removed if any are invalid
@@ -265,7 +277,9 @@ describe("updateLabelsImpl", () => {
           artifacts: [{ name: "label-foo=false" }],
         },
       });
-      github.rest.issues.removeLabel.mockRejectedValue({ status: status });
+      github.rest.issues.removeLabel.mockRejectedValue(
+        createMockRequestError(status),
+      );
 
       const updateLabelsImplPromise = updateLabelsImpl({
         owner: "owner",
@@ -286,6 +300,7 @@ describe("updateLabelsImpl", () => {
         owner: "owner",
         repo: "repo",
         run_id: 456,
+        per_page: PER_PAGE_MAX,
       });
       expect(github.rest.issues.addLabels).toBeCalledTimes(0);
       expect(github.rest.issues.removeLabel).toBeCalledWith({
@@ -297,19 +312,3 @@ describe("updateLabelsImpl", () => {
     },
   );
 });
-
-function createMockGithub() {
-  return {
-    rest: {
-      actions: {
-        listWorkflowRunArtifacts: vi
-          .fn()
-          .mockResolvedValue({ data: { artifacts: [] } }),
-      },
-      issues: {
-        addLabels: vi.fn(),
-        removeLabel: vi.fn(),
-      },
-    },
-  };
-}
