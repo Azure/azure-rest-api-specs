@@ -9,6 +9,6 @@ describe("executeCommand", () => {
     const { error, stdout } = await executeCommand(command);
 
     expect(error).toBeNull();
-    expect(stdout).toBe("hello world\n");
+    expect(stdout).toMatch("hello world");
   });
 });

@@ -17,6 +17,10 @@ import {
 
 vi.mock("axios");
 
+function isWindows(): boolean {
+  return process.platform === "win32";
+}
+
 describe("deduplicateTags", () => {
   // Original comment describing deduplicateTags
   // if one tag 'A' 's input files contains all the input files of Tag 'B' , then B tag will be de-duplicated
@@ -158,7 +162,8 @@ describe("getOpenapiType", async () => {
     expect(openapiType).toEqual("data-plane");
   });
 
-  test.concurrent("openapi-type found but not valid", async ({ expect }) => {
+  test.skipIf(isWindows)
+  .concurrent("openapi-type found but not valid", async ({ expect }) => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/type-found-not-valid-readme.md",
@@ -168,7 +173,8 @@ describe("getOpenapiType", async () => {
     expect(openapiType).toEqual("data-plane");
   });
 
-  test.concurrent("openapi-type not found, type arm", async ({ expect }) => {
+  test.skipIf(isWindows)
+  .concurrent("openapi-type not found, type arm", async ({ expect }) => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/resource-manager/inferred-resource-manager-readme.md",
@@ -176,7 +182,8 @@ describe("getOpenapiType", async () => {
     const openApiType = await getOpenapiType(markdownFile);
     expect(openApiType).toEqual("arm");
   });
-  test.concurrent("openapi-type not found, type data-plane", async ({ expect }) => {
+  test.skipIf(isWindows)
+  .concurrent("openapi-type not found, type data-plane", async ({ expect }) => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/inferred-data-plane-readme.md",

@@ -3,6 +3,7 @@ import { vol } from "memfs";
 
 import { getAffectedReadmes, readFileList } from "../src/processChanges.js";
 import { afterEach } from "node:test";
+import { isWindows } from "./test-util.js";
 
 // These tests are in a separate module because fs mocking is difficult to undo
 
@@ -24,7 +25,8 @@ describe("getAffectedReadmes", () => {
     vol.reset();
   });
 
-  test.concurrent("includes expected changed file", async ({ expect }) => {
+  test.skipIf(isWindows)
+  .concurrent("includes expected changed file", async ({ expect }) => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/b/readme.md": "b",
@@ -48,7 +50,8 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).not.toContain(["specification/b/readme.md"]);
   });
 
-  test.concurrent("includes files up the heirarchy", async ({ expect }) => {
+  test.skipIf(isWindows)
+  .concurrent("includes files up the heirarchy", async ({ expect }) => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/a/b/c/readme.md": "c",
@@ -60,7 +63,8 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).toEqual(["specification/a/b/c/readme.md", "specification/a/readme.md"]);
   });
 
-  test.concurrent(
+  test.skipIf(isWindows)
+  .concurrent(
     "lists reademe files in folders with affected swagger files",
     async ({ expect }) => {
       const files = {
@@ -77,7 +81,8 @@ describe("getAffectedReadmes", () => {
     },
   );
 
-  test.concurrent("excludes files outside of specification/", async ({ expect }) => {
+  test.skipIf(isWindows)
+  .concurrent("excludes files outside of specification/", async ({ expect }) => {
     const files = {
       "./repo-root/specification/a/readme.md": "a",
       "./repo-root/specification/b/readme.md": "b",

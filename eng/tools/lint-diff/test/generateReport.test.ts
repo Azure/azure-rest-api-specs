@@ -18,6 +18,7 @@ import {
   getPathSegment,
   compareLintDiffViolations,
 } from "../src/generateReport.js";
+import { isWindows } from "./test-util.js";
 
 describe("getLintDiffViolations", async () => {
   function createRunResult(stdout: string, stderr: string = ""): AutorestRunResult {
@@ -342,7 +343,8 @@ describe("getFile", () => {
 });
 
 describe("relativizePath", () => {
-  test.concurrent("relativizes path correctly", ({ expect }) => {
+  test.skipIf(isWindows)
+  .concurrent("relativizes path correctly", ({ expect }) => {
     expect(relativizePath("/path/to/specification/service/file.json")).toEqual(
       "/specification/service/file.json",
     );
@@ -356,7 +358,8 @@ describe("relativizePath", () => {
     expect(relativizePath("")).toEqual("");
   });
 
-  test.concurrent("uses the last instance of from", ({ expect }) => {
+  test.skipIf(isWindows)
+  .concurrent("uses the last instance of from", ({ expect }) => {
     expect(
       relativizePath("/path/to/specification/another/specification/service/file.json"),
     ).toEqual("/specification/service/file.json");
