@@ -15,6 +15,7 @@ export function setEquals(set1, set2) {
     return false;
   }
 
+  // Should be O(N), since set lookup should be O(1)
   for (const item of set1) {
     if (!set2.has(item)) {
       return false;
