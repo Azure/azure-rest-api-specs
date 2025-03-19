@@ -197,3 +197,60 @@ op isEcsFlightEnabled(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
 @body flightEnabledRequest : FlightEnabledRequest,
 ): boolean;
+
+//TODO: move this to a different file
+// Dynamic Prompts API
+@post
+@route("/dynamicPrompts/search")
+@doc("Performs a search operation using the provided search request.")
+op searchAsync(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body request: DynamicPromptsSearchRequest
+): DynamicPromptsSearchResponse;
+
+@post
+@route("/dynamicPrompts/hybridsearch")
+@doc("Performs a hybrid search operation using the provided search request.")
+op hybridSearchAsync(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body request: DynamicPromptsSearchRequest
+): DynamicPromptsSearchResponse;
+
+@post
+@route("/dynamicPrompts/filter")
+@doc("Filters the dynamic prompts based on the provided filter request.")
+op filterAsync(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body request?: DynamicPromptsFilterRequest
+): DynamicPromptsFilterResponse;
+
+@post
+@route("/dynamicPrompts/count")
+@doc("Gets the document count based on the provided base request.")
+op getDocumentCountAsync(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body request: DynamicPromptsBaseRequest
+): DocumentCountResponse;
+
+@post
+@route("/dynamicPrompts/indexfilter")
+@doc("Filters the dynamic prompts by index based on the provided index filter request.")
+op indexFilterAsync(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body request: DynamicPromptsIndexFilterRequest
+): DynamicPromptsIndexFilterResponse;
+
+@get
+@route("/dynamicPrompts/exists")
+@doc("Checks if the physical index exists.")
+op physicalIndexExistsAsync(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string
+): PhysicalIndexExistsResponse;
+
+@post
+@route("/dynamicPrompts/suggestedprompts")
+@doc("Gets the suggested prompts based on the provided suggested prompts request.")
+op getSuggestedPromptsAsync(
+    @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
+    @body request: DynamicPromptsSuggestedPromptsRequest
+): SuggestedPromptsResponse;
