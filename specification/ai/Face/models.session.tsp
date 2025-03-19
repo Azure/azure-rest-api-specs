@@ -329,6 +329,7 @@ model CreateLivenessWithVerifySessionRequestBeforeV1_2 {
   @header("content-type")
   contentType: "multipart/form-data";
 
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Request content of liveness with verify session creation.")
   @body
   body: CreateLivenessWithVerifySessionMultipartContent;
@@ -504,6 +505,7 @@ model CreateLivenessWithVerifySessionRequest {
   @header("content-type")
   contentType: "multipart/form-data";
 
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Request content of liveness with verify session creation.")
   @body
   body: CreateLivenessWithVerifySessionContent;
