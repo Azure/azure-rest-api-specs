@@ -225,6 +225,7 @@ model GetAudioTranscriptionBody {
   /**
    * The configuration information for an audio transcription request.
    */
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @body
   body: AudioTranscriptionOptions;
 }
