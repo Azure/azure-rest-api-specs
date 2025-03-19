@@ -2025,6 +2025,59 @@
         }
       }
     },
+    "/indexes('{indexName}')/search.permissionFiltering": {
+      "post": {
+        "tags": [
+          "Indexes"
+        ],
+        "operationId": "Indexes_PermissionFiltering",
+        "externalDocs": {
+          "url": "https://learn.microsoft.com/rest/api/searchservice/document-permission-filtering"
+        },
+        "x-ms-examples": {
+          "SearchIndexPermissionFiltering": {
+            "$ref": "./examples/SearchIndexPermissionFiltering.json"
+          }
+        },
+        "description": "Enable or disable document-level permission filtering.",
+        "parameters": [
+          {
+            "name": "indexName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the index for which to set permission filtering."
+          },
+          {
+            "name": "permissionFilteringSetting",
+            "in": "body",
+            "description": "The value for the permission filtering setting.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchIndexPermissionFilteringSetting"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/indexes('{indexName}')/search.analyze": {
       "post": {
         "tags": [
@@ -9212,6 +9265,23 @@
         }
       }
     },
+    "SearchIndexPermissionFilteringSetting": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "description": "The setting for document-level permission filtering."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Contains the setting for the document-level permission filtering feature."
+    },
     "SearchField": {
       "type": "object",
       "properties": {
@@ -9256,6 +9326,15 @@
         "facetable": {
           "type": "boolean",
           "description": "A value indicating whether to enable the field to be referenced in facet queries. Typically used in a presentation of search results that includes hit count by category (for example, search for digital cameras and see hits by brand, by megapixels, by price, and so on). This property must be null for complex fields. Fields of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot be facetable. Default is true for all other simple fields."
+        },
+        "permissionFilter": {
+          "type": "string",
+          "enum": [
+            "userIds",
+            "groupIds",
+            "roles"
+          ],
+          "description": "A value indicating whether the field should be used as a permission filter."
         },
         "analyzer": {
           "externalDocs": {
@@ -9861,6 +9940,15 @@
             "$ref": "#/definitions/AssetProfile"
           },
           "description": "Defines configurations to use with asset serving."
+        },
+        "permissionFiltering": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled",
+            "null"
+          ],
+          "description": "A value indicating whether permission filtering is enabled for the index."
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
