@@ -13,7 +13,7 @@ namespace JavaClient;
 
 // Get Application Operation
 @doc("Optional parameters for Get Application operation.")
-model GetApplicationOptions {
+model GetBatchApplicationOptions {
   ...Azure.Batch.CommonParameters;
 }
 
@@ -25,7 +25,7 @@ op getApplicationCustomization is Azure.Batch.ReadOperation<
     ...Azure.Batch.GetApplicationRequiredParameters;
 
     @doc("Optional parameters for Get Application operation.")
-    options?: GetApplicationOptions;
+    options?: GetBatchApplicationOptions;
   },
   Azure.Batch.BatchApplication
 >;
