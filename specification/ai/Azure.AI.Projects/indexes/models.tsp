@@ -16,24 +16,12 @@ namespace Azure.AI.Projects;
 
 @doc("Index resource Definition")
 @discriminator("indexType")
+@Rest.resource("indexes")
 model Index {
   @doc("Type of index")
   indexType: IndexType;
 
   ...AssetBase;
-}
-
-@doc("Paged collection of Index items.")
-@pagedResult
-model PagedIndex {
-  @doc("The list of Indexes.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: Index[];
-
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<Index>;
 }
 
 @doc("Azure AI Search Index Definition")

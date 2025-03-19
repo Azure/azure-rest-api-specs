@@ -29,6 +29,7 @@ union DatasetType {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("DatasetVersion Definition")
+@Rest.resource("datasets")
 @discriminator("type")
 model DatasetVersion {
   @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
@@ -60,17 +61,4 @@ model FileDatasetVersion extends DatasetVersion {
 model FolderDatasetVersion extends DatasetVersion {
   @doc("Dataset type")
   type: DatasetType.uri_folder;
-}
-
-@doc("PagedDataVersionBase Definition")
-@pagedResult
-model PagedDatasetVersion {
-  @doc("The list of DatasetVersions.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: DatasetVersion[];
-
-  @doc("The link to the next page of results, if any.")
-  @nextLink
-  nextLink?: string;
 }

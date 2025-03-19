@@ -36,7 +36,7 @@ interface Evaluations {
   @post
   createRun is Azure.Core.Foundations.Operation<
     {
-      @doc("Evalution to be run")
+      @doc("Evaluation to be run")
       @body
       evaluation: Evaluation;
     },
