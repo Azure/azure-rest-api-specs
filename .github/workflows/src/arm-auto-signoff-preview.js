@@ -1,5 +1,6 @@
 // @ts-check
 
+import { setEquals } from "../../src/equality.js";
 import { extractInputs } from "./context.js";
 import { PER_PAGE_MAX } from "./github.js";
 import { LabelAction } from "./label.js";
@@ -165,71 +166,56 @@ export async function getLabelActionImpl({
     per_page: PER_PAGE_MAX,
   });
 
-  const swaggerLintDiffs = checkRuns.filter(
-    (run) => run.name === "Swagger LintDiff",
-  );
+  const requiredCheckNames = ["Swagger LintDiff", "Swagger Avocado"];
 
-  if (swaggerLintDiffs.length > 1) {
-    throw new Error(
-      `Unexpected number of checks named 'Swagger LintDiff': ${swaggerLintDiffs.length}`,
+  /**
+   * @type {typeof checkRuns.check_runs}
+   */
+  let requiredCheckRuns = [];
+
+  for (const checkName of requiredCheckNames) {
+    const matchingRuns = checkRuns.filter((run) => run.name === checkName);
+
+    if (matchingRuns.length > 1) {
+      throw new Error(
+        `Unexpected number of checks named '${checkName}': ${matchingRuns.length}`,
+      );
+    }
+
+    const matchingRun = matchingRuns.length === 1 ? matchingRuns[0] : undefined;
+
+    core.info(
+      `${checkName}: Status='${matchingRun?.status}', Conclusion='${matchingRun?.conclusion}'`,
     );
-  }
 
-  const swaggerLintDiff =
-    swaggerLintDiffs.length === 1 ? swaggerLintDiffs[0] : undefined;
+    if (
+      matchingRun &&
+      matchingRun.status === "completed" &&
+      matchingRun.conclusion !== "success"
+    ) {
+      core.info("Swagger LintDiff did not succeed");
+      return labelActions[LabelAction.Remove];
+    }
 
-  core.info(
-    `Swagger LintDiff: Status='${swaggerLintDiff?.status}', Conclusion='${swaggerLintDiff?.conclusion}'`,
-  );
-
-  if (
-    swaggerLintDiff &&
-    swaggerLintDiff.status === "completed" &&
-    swaggerLintDiff.conclusion !== "success"
-  ) {
-    core.info("Swagger LintDiff did not succeed");
-    return labelActions[LabelAction.Remove];
-  }
-
-  const swaggerAvocados = checkRuns.filter(
-    (run) => run.name === "Swagger Avocado",
-  );
-
-  if (swaggerAvocados.length > 1) {
-    throw new Error(
-      `Unexpected number of checks named 'Swagger Avocado': ${swaggerAvocados.length}`,
-    );
-  }
-
-  const swaggerAvocado =
-    swaggerAvocados.length === 1 ? swaggerAvocados[0] : undefined;
-
-  core.info(
-    `Swagger Avocado: Status='${swaggerAvocado?.status}', Conclusion='${swaggerAvocado?.conclusion}'`,
-  );
-
-  if (
-    swaggerAvocado &&
-    swaggerAvocado.status === "completed" &&
-    swaggerAvocado.conclusion !== "success"
-  ) {
-    core.info("Swagger Avocado did not succeed");
-    return labelActions[LabelAction.Remove];
+    if (matchingRun) {
+      requiredCheckRuns.push(matchingRun);
+    }
   }
 
   if (
-    swaggerLintDiff &&
-    swaggerLintDiff.status === "completed" &&
-    swaggerLintDiff.conclusion === "success" &&
-    swaggerAvocado &&
-    swaggerAvocado.status === "completed" &&
-    swaggerAvocado.conclusion === "success"
+    setEquals(
+      new Set(requiredCheckRuns.map((run) => run.name)),
+      new Set(requiredCheckNames),
+    ) &&
+    requiredCheckRuns.every(
+      (run) => run.status === "completed" && run.conclusion === "success",
+    )
   ) {
     core.info("All requirements met for auto-signoff");
     return labelActions[LabelAction.Add];
   }
 
   // No-op if any checks are missing or not completed, to prevent frequent remove/add label as checks re-run
-  core.info("One or more checks is still in-progress");
+  core.info("One or more checks are still in-progress");
   return labelActions[LabelAction.None];
 }
