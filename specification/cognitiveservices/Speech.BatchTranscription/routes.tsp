@@ -1,12 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
-import "../models/batch.tsp";
+import "./models.tsp";
 
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace SpeechToText.BatchTranscriptionClient;
+namespace Azure.Ai.Speech.BatchTranscription;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &

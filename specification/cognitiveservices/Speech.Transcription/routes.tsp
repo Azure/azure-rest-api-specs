@@ -3,15 +3,11 @@ import "@typespec/versioning";
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/openapi";
-import "../models/fast.tsp";
+import "./models.tsp";
 
-using Azure.Core;
 using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using OpenAPI;
 
-namespace SpeechToText.FastTranscriptionClient;
+namespace Azure.Ai.Speech.Transcription;
 
 #suppress "@azure-tools/typespec-azure-core/byos" "Support streaming input files"
 @post

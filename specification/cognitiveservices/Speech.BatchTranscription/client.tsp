@@ -1,17 +1,10 @@
 import "./main.tsp";
-import "./models/batch.tsp";
-import "./models/fast.tsp";
+import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using SpeechToText.FastTranscriptionClient;
-using SpeechToText.BatchTranscriptionClient;
 
-namespace SpeechToText;
-
-@@clientName(Phrase, "TranscribedPhrase");
-@@clientName(Word, "TranscribedWord");
-@@clientName(TranscribeDefinition, "TranscribeConfig");
+namespace Azure.Ai.Speech.BatchTranscription;
 
 @@clientName(TranscriptionProperties.destinationContainerUrl,
   "destinationContainer",
@@ -23,5 +16,3 @@ namespace SpeechToText;
 @@clientName(TranscriptionProperties.languageIdentification,
   "languageIdentificationProperties"
 );
-@@clientName(TranscribeDefinition.diarization, "diarizationProperties");
-@@clientName(TranscribeDefinition.channels, "activeChannels");

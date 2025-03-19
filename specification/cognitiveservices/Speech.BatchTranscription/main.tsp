@@ -4,18 +4,12 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
-import "./routes/batch.tsp";
-import "./routes/fast.tsp";
+import "./routes.tsp";
 
-using Azure.Core;
-using Azure.Core.Traits;
-using Azure.Core.Traits.Private;
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
 
-@service(#{ title: "Azure Speech Services SpeechToText API" })
+@service(#{ title: "Azure Speech BatchTranscription API" })
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
   "{endpoint}/speechtotext",
@@ -26,7 +20,7 @@ using OpenAPI;
   }
 )
 @versioned(ServiceApiVersions)
-namespace SpeechToText;
+namespace Azure.Ai.Speech.BatchTranscription;
 
 @doc("Service API versions.")
 enum ServiceApiVersions {
