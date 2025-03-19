@@ -44,16 +44,31 @@ model InputDataset extends InputData {
   id: string;
 }
 
+@doc("Safety evaluation metric")
+model Metric {
+  @doc("The metric name.")
+  name: string;
+
+  @doc("The label.")
+  label: string;
+
+  @doc("The reason.")
+  reason: string;
+}
+
 @doc("Dataset as source for evaluation.")
 model RawDataset extends InputData {
-  type: "dataset";
-
-  @doc("Evaluation input raw data batch id")
-  id: string;
+  type: "raw";
 
   @doc("The collection of context messages associated with this chat completions that need to be evaluated.")
   @minItems(1)
   value: ChatCompletions[];
+
+  @visibility("read")
+  metric: Metric[];
+
+  @doc("Raw Data's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  properties?: Record<string>;
 }
 
 @doc("Evaluation Definition")
