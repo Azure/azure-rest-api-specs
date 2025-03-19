@@ -31,7 +31,7 @@ namespace Microsoft.IoTFirmwareDefense;
  */
 enum Versions {
   /**
-   * The 2024-08-07 API version.
+   * The 2025-04-01 API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
