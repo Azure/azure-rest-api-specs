@@ -799,9 +799,6 @@
           },
           "Create or Update Database Migration resource with Maximum parameters.": {
             "$ref": "./examples/SqlMiCreateOrUpdateDatabaseMigrationMAX.json"
-          },
-          "Create or Update Database Migration resource with Azure Blob Managed Identity Authentication.": {
-            "$ref": "./examples/SqlMiCreateOrUpdateDatabaseMigrationBlobMiAuth.json"
           }
         }
       }
@@ -2824,11 +2821,25 @@
       "properties": {
         "authType": {
           "description": "Authentication type used for accessing Azure Blob Storage.",
+          "type": "string",
           "enum": [
             "AccountKey",
             "ManagedIdentity"
           ],
-          "type": "string"
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "AccountKey",
+                "description": "Use an account key for authentication."
+              },
+              {
+                "value": "ManagedIdentity",
+                "description": "Use a managed identity for authentication."
+              }
+            ]
+          }
         },
         "identity": {
           "$ref": "#/definitions/Identity",
@@ -2850,6 +2861,7 @@
       }
     },
     "Identity": {
+      "description": "Identity details for authentication using a Managed Identity.",
       "type": "object",
       "properties": {
         "type": {
@@ -2866,6 +2878,7 @@
       }
     },
     "UserAssignedIdentityProperties": {
+      "description": "User Assigned Identity Properties",
       "type": "object",
       "properties": {}
     },
