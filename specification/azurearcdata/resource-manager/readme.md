@@ -47,7 +47,7 @@ directive:
 
 ### Tag: package-preview-2025-04-01
 
-These settings apply only when `--tag=package-preview-2025-04-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-04-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2025-04-01-preview'
 input-file:
