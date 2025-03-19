@@ -286,34 +286,7 @@
       "title": "A query response table.",
       "description": "Contains the columns and rows for one table in a query response.",
       "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the table.",
-          "type": "string"
-        },
-        "columns": {
-          "description": "The list of columns in this table.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/column"
-          }
-        },
-        "rows": {
-          "description": "The resulting rows from this query.",
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "required": [
-        "name",
-        "columns",
-        "rows"
-      ]
+      "additionalProperties": true
     },
     "column": {
       "title": "A table column.",
@@ -1206,7 +1179,7 @@
           "description": "Inner error details if they exist.",
           "$ref": "#/definitions/errorInfo"
         },
-        "additionalProperties": {
+        "additionalInfo": {
           "description": "Additional properties that can be provided on the error info object",
           "type": "object"
         }
