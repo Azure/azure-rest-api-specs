@@ -148,6 +148,24 @@ model SolutionConfiguration
   @segment("solutionConfigurations")
   name: string;
 }
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("Solution Configuration")
+model SolutionConfigurationUpdate
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SolutionConfigurationPropertiesUpdate;
+}
+
+@doc("Solution configuration resource.")
+model SolutionConfigurationPropertiesUpdate {
+  @doc("The type of the solution")
+  solutionType?: string;
+
+  @doc("Solution settings")
+  solutionSettings?: SolutionSettings;
+}
 
 @doc("Solution configuration resource.")
 model SolutionConfigurationProperties {
@@ -332,7 +350,11 @@ interface PublicCloudConnectors {
 interface SolutionConfigurations {
   get is ArmResourceRead<SolutionConfiguration>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<SolutionConfiguration>;
-  update is ArmCustomPatchSync<SolutionConfiguration, SolutionConfiguration>;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    SolutionConfiguration,
+    SolutionConfigurationUpdate
+  >;
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
   listByWidget is ArmResourceListAtScope<SolutionConfiguration>;
 
