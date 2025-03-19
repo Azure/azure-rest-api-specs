@@ -230,7 +230,7 @@ model GetReportRequest {
 @doc("The response of the report operation")
 @added(ApiVersion.v2025_04_01_preview)
 model GetReportResponse {
-  @doc("One or more result sets, in the same order as the queries in the request body.")
+  @doc("One or more result sets, in the same order as the queries in the request body")
   @identifiers(#[])
   results: ReportResponseResultSet[];
 }
@@ -238,15 +238,15 @@ model GetReportResponse {
 @doc("The result set of the report operation")
 @added(ApiVersion.v2025_04_01_preview)
 model ReportResponseResultSet {
-  @doc("Array of columns. Present only if the query succeeded.")
+  @doc("Array of columns object, present only if the query succeeded")
   @identifiers(#[])
   columns?: ReportResponseColumn[];
 
-  @doc("Array of Rows. Each row is an array of strings, where the item count matches the number of columns. Present only if the query succeeded.")
+  @doc("Array of all rows from ADX, present only if the query succeeded")
   @identifiers(#[])
   rows?: string[][];
 
-  @doc("Present only if the query failed. Provides an error about the query. The error will be query errors and what is returned from ADX. Note that if any of the content doesn’t pass validation (a KQL injection attack is detected), the whole call fails.")
+  @doc("Provides an error about the query, present only if the query fails")
   errorCode?: string;
 }
 

@@ -540,7 +540,7 @@
       "properties": {
         "results": {
           "type": "array",
-          "description": "One or more result sets, in the same order as the queries in the request body.",
+          "description": "One or more result sets, in the same order as the queries in the request body",
           "items": {
             "$ref": "#/definitions/ReportResponseResultSet"
           },
@@ -575,7 +575,7 @@
       "properties": {
         "columns": {
           "type": "array",
-          "description": "Array of columns. Present only if the query succeeded.",
+          "description": "Array of columns object, present only if the query succeeded",
           "items": {
             "$ref": "#/definitions/ReportResponseColumn"
           },
@@ -583,7 +583,7 @@
         },
         "rows": {
           "type": "array",
-          "description": "Array of Rows. Each row is an array of strings, where the item count matches the number of columns. Present only if the query succeeded.",
+          "description": "Array of all rows from ADX, present only if the query succeeded",
           "items": {
             "type": "array",
             "items": {
@@ -594,7 +594,7 @@
         },
         "errorCode": {
           "type": "string",
-          "description": "Present only if the query failed. Provides an error about the query. The error will be query errors and what is returned from ADX. Note that if any of the content doesn’t pass validation (a KQL injection attack is detected), the whole call fails."
+          "description": "Provides an error about the query, present only if the query fails"
         }
       }
     },
