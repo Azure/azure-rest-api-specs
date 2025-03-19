@@ -1,3 +1,4 @@
+import { RequestError } from "@octokit/request-error";
 import { vi } from "vitest";
 
 // Partial mock of `github` parameter passed into github-script actions
@@ -49,4 +50,11 @@ export function createMockCore() {
       console.log(`setOutput('${name}', '${value}')`),
     ),
   };
+}
+
+export function createMockRequestError(status) {
+  return new RequestError(`mock RequestError with status '${status}'`, status, {
+    // request properties "url" and "headers" must be defined to prevent errors
+    request: { url: "test url", headers: {} },
+  });
 }

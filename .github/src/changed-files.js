@@ -1,13 +1,12 @@
 // @ts-check
 
 import { diff } from "./git.js";
-import { ILogger } from "./logger.js";
 
 /**
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Defaults to "HEAD^"
  * @param {string} [options.headCommitish] Defaults to "HEAD"
- * @param {ILogger} [options.logger]
+ * @param {import('./types.js').ILogger} [options.logger]
  * @returns {Promise<string[]>} List of changed files, relative to the repo root.  Example: ["specification/foo/Microsoft.Foo/main.tsp"]
  */
 export async function getChangedFiles(options = {}) {
