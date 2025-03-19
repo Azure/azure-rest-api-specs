@@ -28,6 +28,13 @@ model Group is Azure.ResourceManager.TrackedResource<GroupProperties> {
     SegmentName = "groups",
     NamePattern = "^[a-zA-Z0-9-._~]*$"
   >;
+
+  // Extended location is not included in TrackedResource yet
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Edge location of the Group.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_05_01_preview)
+  extendedLocation?: ExtendedLocation;
 }
 
 @added(Versions.v2025_05_01_preview)
