@@ -80,4 +80,7 @@ model Evaluation {
 
   @doc("EvaluationResult Uri: output asset type. Uploaded for local runs. Example: azureml://registries/azureml/evaluationresults/name/{name}/version/{version}")
   evaluationResultId: string;
+
+  @doc("Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureml://project/azureml/evaluationresults/myevaluationresult1', 'logId': 'azureml://project/azureml/datasets/joblogs' }")
+  outputs: Record<string>;
 }
