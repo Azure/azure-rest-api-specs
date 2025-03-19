@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { createMockCore, createMockGithub } from "../../test/mocks.js";
 import { extractInputs } from "../src/context.js";
 import { PER_PAGE_MAX } from "../src/github.js";
+import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("extractInputs", () => {
   it("unsupported_event", async () => {

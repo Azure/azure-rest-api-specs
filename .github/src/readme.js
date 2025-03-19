@@ -5,10 +5,13 @@ import yaml from "yaml";
 
 /**
  * @param {string} markdown
- * @param {import('github-script').AsyncFunctionArguments['core']} core
+ * @param {Object} [options]
+ * @param {import('./types.js').ILogger} [options.logger]
  * @returns {Promise<Set<string>>} All input files for all tags
  */
-export async function getInputFiles(markdown, core) {
+export async function getInputFiles(markdown, options = {}) {
+  const { logger } = options;
+
   const tokens = marked.lexer(markdown);
 
   const yamlBlocks = tokens
@@ -24,7 +27,7 @@ export async function getInputFiles(markdown, core) {
     const obj = yaml.parse(block.text);
     const blockFiles = /** @type string[] */ (obj["input-file"] || []);
 
-    core.info(`Input files for tag '${tag}': ${JSON.stringify(blockFiles)}`);
+    logger?.info(`Input files for tag '${tag}': ${JSON.stringify(blockFiles)}`);
 
     return blockFiles;
   });

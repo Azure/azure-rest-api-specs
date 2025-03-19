@@ -3,200 +3,228 @@
   "operationId": "LandingZoneConfigurationOperations_Update",
   "parameters": {
     "api-version": "2025-02-27-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000001",
-    "resourceGroupName": "ExampleResourceGroup",
-    "landingZoneAccountName": "ExampleLZA",
-    "landingZoneConfigurationName": "ExampleLZC",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-RemApiExample",
+    "landingZoneAccountName": "lza-RemApiExample",
+    "landingZoneConfigurationName": "lzc-RemApiExample",
     "properties": {
       "properties": {
-        "ddosProtectionCreationOption": "Yes",
-        "logAnalyticsWorkspaceCreationOption": "No",
-        "firewallCreationOption": "Standard",
-        "logRetentionInDays": 540,
-        "hubNetworkCidrBlock": "10.20.255.0/24",
-        "azureBastionCreationOption": "Yes",
-        "existingDdosProtectionId": null,
-        "existingLogAnalyticsWorkspaceId": null,
-        "tags": [
-          {
-            "name": "tag1",
-            "value": "do"
-          },
-          {
-            "name": "tag2",
-            "value": "do"
-          }
-        ],
-        "firewallSubnetCidrBlock": "10.20.255.0/24",
-        "gatewaySubnetCidrBlock": "10.20.255.0/24",
-        "existingAzureBastionId": null,
-        "azureBastionSubnetCidrBlock": "10.20.255.0/24",
-        "landingZonesMgChildren": [
-          {
-            "policyInitiativesAssignmentProperties": [],
-            "name": "Corp"
-          }
-        ],
-        "topLevelMgMetadata": {
-          "policyInitiativesAssignmentProperties": [
-            {
-              "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/0a2ebd47-3fb9-4735-a006-b7f31ddadd9f",
-              "assignmentParameters": {
-                "Effect": "Audit"
-              }
-            }
-          ]
-        },
-        "landingZonesMgMetadata": {
-          "policyInitiativesAssignmentProperties": []
-        },
-        "platformMgMetadata": {
-          "policyInitiativesAssignmentProperties": []
-        },
-        "platformManagementMgMetadata": {
-          "policyInitiativesAssignmentProperties": []
-        },
-        "platformConnectivityMgMetadata": {
-          "policyInitiativesAssignmentProperties": []
-        },
-        "platformIdentityMgMetadata": {
-          "policyInitiativesAssignmentProperties": []
-        },
-        "decommissionedMgMetadata": {
-          "policyInitiativesAssignmentProperties": [],
-          "create": false
-        },
-        "sandboxMgMetadata": {
-          "policyInitiativesAssignmentProperties": [],
-          "create": true
-        },
-        "managedIdentity": {
-          "type": "SystemAssigned"
-        },
-        "platformMgChildren": [
-          {
-            "policyInitiativesAssignmentProperties": [],
-            "name": "childmg1"
-          },
-          {
-            "policyInitiativesAssignmentProperties": [],
-            "name": "childmg2"
-          }
-        ],
-        "namingConventionFormula": "{ResourceTypeAbbreviation}",
-        "customNamingConvention": [
-          {
-            "formula": "{DeploymentSuffix}",
-            "resourceType": "azureFirewalls"
-          }
-        ]
+        "logRetentionInDays": 300
       }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample/landingZoneConfigurations/lzc-RemApiExample",
+        "name": "lzc-RemApiExample",
+        "type": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
+        "systemData": {
+          "createdBy": "ExampleUser@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-03-12T21:19:01.316093Z",
+          "lastModifiedBy": "ExampleUser@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-03-12T21:19:01.316093Z"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "authoringStatus": "Authoring",
-          "ddosProtectionCreationOption": "Yes",
-          "logAnalyticsWorkspaceCreationOption": "No",
-          "firewallCreationOption": "Standard",
-          "logRetentionInDays": 540,
-          "hubNetworkCidrBlock": "10.20.255.0/24",
-          "azureBastionCreationOption": "Yes",
-          "existingDdosProtectionId": null,
-          "existingLogAnalyticsWorkspaceId": null,
+          "ddosProtectionCreationOption": "UseExisting",
+          "existingDdosProtectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Network/ddosProtectionPlans/ddos-RemApiExample",
+          "logAnalyticsWorkspaceCreationOption": "UseExisting",
+          "existingLogAnalyticsWorkspaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.OperationalInsights/workspaces/log-RemApiExample",
           "tags": [
             {
               "name": "tag1",
-              "value": "do"
+              "value": "Lorem"
             },
             {
               "name": "tag2",
-              "value": "do"
+              "value": "Ipsum"
             }
           ],
-          "firewallSubnetCidrBlock": "10.20.255.0/24",
-          "gatewaySubnetCidrBlock": "10.20.255.0/24",
-          "existingAzureBastionId": null,
-          "azureBastionSubnetCidrBlock": "10.20.255.0/24",
+          "firewallCreationOption": "Premium",
+          "firewallSubnetCidrBlock": "10.20.254.0/24",
+          "gatewaySubnetCidrBlock": "10.20.252.0/24",
+          "logRetentionInDays": 300,
+          "hubNetworkCidrBlock": "10.20.0.0/16",
+          "azureBastionCreationOption": "UseExisting",
+          "existingAzureBastionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Network/bastionHosts/bas-RemApiExample",
+          "azureBastionSubnetCidrBlock": null,
           "landingZonesMgChildren": [
             {
               "policyInitiativesAssignmentProperties": [],
               "name": "Corp"
+            },
+            {
+              "policyInitiativesAssignmentProperties": [],
+              "name": "Online"
+            },
+            {
+              "policyInitiativesAssignmentProperties": [
+                {
+                  "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/03de05a4-c324-4ccd-882f-a814ea8ab9ea",
+                  "assignmentParameters": {}
+                }
+              ],
+              "name": "Confidential Corp"
+            },
+            {
+              "policyInitiativesAssignmentProperties": [
+                {
+                  "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/03de05a4-c324-4ccd-882f-a814ea8ab9ea",
+                  "assignmentParameters": {}
+                }
+              ],
+              "name": "Confidential Online"
             }
           ],
           "topLevelMgMetadata": {
             "policyInitiativesAssignmentProperties": [
               {
-                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/0a2ebd47-3fb9-4735-a006-b7f31ddadd9f",
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
                 "assignmentParameters": {
-                  "Effect": "Audit"
+                  "listOfAllowedLocations": [
+                    "swedencentral",
+                    "eastus2",
+                    "uksouth"
+                  ]
                 }
               }
             ]
           },
           "landingZonesMgMetadata": {
-            "policyInitiativesAssignmentProperties": []
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
+                "assignmentParameters": {
+                  "listOfAllowedLocations": [
+                    "swedencentral"
+                  ]
+                }
+              }
+            ]
           },
           "platformMgMetadata": {
-            "policyInitiativesAssignmentProperties": []
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
+                "assignmentParameters": {
+                  "listOfAllowedLocations": [
+                    "swedencentral"
+                  ]
+                }
+              }
+            ]
           },
           "platformManagementMgMetadata": {
-            "policyInitiativesAssignmentProperties": []
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
+                "assignmentParameters": {
+                  "listOfAllowedLocations": [
+                    "swedencentral"
+                  ]
+                }
+              }
+            ]
           },
           "platformConnectivityMgMetadata": {
-            "policyInitiativesAssignmentProperties": []
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
+                "assignmentParameters": {
+                  "listOfAllowedLocations": [
+                    "swedencentral"
+                  ]
+                }
+              }
+            ]
           },
           "platformIdentityMgMetadata": {
-            "policyInitiativesAssignmentProperties": []
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
+                "assignmentParameters": {
+                  "listOfAllowedLocations": [
+                    "swedencentral"
+                  ]
+                }
+              }
+            ]
           },
           "decommissionedMgMetadata": {
-            "policyInitiativesAssignmentProperties": [],
-            "create": false
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
+                "assignmentParameters": {
+                  "listOfAllowedLocations": [
+                    "swedencentral"
+                  ]
+                }
+              }
+            ],
+            "create": true
           },
           "sandboxMgMetadata": {
-            "policyInitiativesAssignmentProperties": [],
+            "policyInitiativesAssignmentProperties": [
+              {
+                "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
+                "assignmentParameters": {
+                  "listOfAllowedLocations": [
+                    "swedencentral"
+                  ]
+                }
+              }
+            ],
             "create": true
           },
           "managedIdentity": {
-            "type": "SystemAssigned"
+            "type": "UserAssigned",
+            "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample"
           },
           "platformMgChildren": [
             {
-              "policyInitiativesAssignmentProperties": [],
-              "name": "childmg1"
+              "policyInitiativesAssignmentProperties": [
+                {
+                  "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
+                  "assignmentParameters": {
+                    "listOfAllowedLocations": [
+                      "swedencentral"
+                    ]
+                  }
+                }
+              ],
+              "name": "Telemetry"
             },
             {
-              "policyInitiativesAssignmentProperties": [],
-              "name": "childmg2"
+              "policyInitiativesAssignmentProperties": [
+                {
+                  "policyInitiativeId": "/providers/Microsoft.Authorization/policySetDefinitions/c1cbff38-87c0-4b9f-9f70-035c7a3b5523",
+                  "assignmentParameters": {
+                    "listOfAllowedLocations": [
+                      "swedencentral"
+                    ]
+                  }
+                }
+              ],
+              "name": "Security"
             }
           ],
-          "namingConventionFormula": "{ResourceTypeAbbreviation}",
+          "namingConventionFormula": "{ResourceTypeAbbreviation}-{DeploymentPrefix}-Contoso-{DeploymentSuffix}-{Environment}",
           "customNamingConvention": [
             {
-              "formula": "{DeploymentSuffix}",
-              "resourceType": "azureFirewalls"
+              "resourceType": "ddosProtectionPlans",
+              "formula": "{ResourceTypeAbbreviation}-{DeploymentPrefix}-Contoso-{DeploymentSuffix}"
             }
           ]
-        },
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/TestResourceGroup/providers/Microsoft.Sovereign/landingZoneAccounts/ExampleLZA/landingZoneConfigurations/ExampleLZC",
-        "name": "ExampleLZC",
-        "type": "microsoft.sovereign/landingzoneaccounts/landingzoneconfigurations",
-        "systemData": {
-          "createdBy": "example@example.com",
-          "createdByType": "User",
-          "createdAt": "2025-01-25T20:19:04.5255905Z",
-          "lastModifiedBy": "example@example.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-01-25T20:19:04.5255905Z"
         }
       }
     },
     "202": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "location": "https://example.com/operationstatus"
       }
     }
   }

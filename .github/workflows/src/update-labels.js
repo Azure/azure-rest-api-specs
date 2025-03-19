@@ -117,7 +117,11 @@ export async function updateLabelsImpl({
           name: name,
         });
       } catch (error) {
-        if (error.status === 404) {
+        if (
+          error instanceof Error &&
+          "status" in error &&
+          error.status === 404
+        ) {
           core.info(`Ignoring error: ${error.status} - ${error.message}`);
         } else {
           throw error;
