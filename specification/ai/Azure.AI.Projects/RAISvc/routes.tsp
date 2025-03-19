@@ -56,7 +56,7 @@ interface RAISvc {
   getAttackObjectives is Azure.Core.Foundations.Operation<
     {
       @doc("Risk types for the attack objectives dataset")
-      @query
+      @query(#{ explode: true })
       riskTypes?: string[];
 
       @doc("The language for the attack objectives dataset, defaults to 'en'")
