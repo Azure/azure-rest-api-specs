@@ -14,7 +14,7 @@ namespace Microsoft.AzureCis;
 
 @doc("azCopy properties")
 model AzCopyResourceProperties {
-  @doc("Specifies the azcopy command to run. Acceptable values: cp, copy, rm, remove. Default: cp.")
+  @doc("Specifies the azcopy command to run. Acceptable values: cp, copy. Default: cp.")
   command: CommandType;
 
   @doc("The SAS token for the source object. This should be the full URL. This can target an account, container, virtual directory, or blob.")
