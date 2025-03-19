@@ -21,8 +21,6 @@ using Microsoft.DatabaseWatcher;
   "DatabaseWatcherHealthValidationProperties",
   "csharp"
 );
-@@clientName(HealthValidationProperties.startTime, "StartOn", "csharp");
-@@clientName(HealthValidationProperties.endTime, "EndOn", "csharp");
 @@clientName(SharedPrivateLinkResource,
   "DatabaseWatcherSharedPrivateLinkResource",
   "csharp"
