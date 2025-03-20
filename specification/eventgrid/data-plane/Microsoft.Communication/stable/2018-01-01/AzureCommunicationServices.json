@@ -1338,7 +1338,12 @@
           "description": "Customer Content",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "deliveryStatus",
+        "deliveryStatusDetails",
+        "deliveryAttempts"
+      ]
     },
     "AcsSmsReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSReceived event.",
@@ -1365,7 +1370,8 @@
         }
       },
       "required": [
-        "segmentCount"
+        "segmentCount",
+        "message"
       ]
     },
     "AcsRecordingFileStatusUpdatedEventData": {
@@ -1958,7 +1964,12 @@
           "description": "The identity of SMS message receiver",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "from",
+        "to"
+      ]
     },
     "AcsSmsDeliveryAttemptProperties": {
       "description": "Schema for details of a delivery attempt",
