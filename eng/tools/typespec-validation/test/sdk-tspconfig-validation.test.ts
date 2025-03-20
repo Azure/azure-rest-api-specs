@@ -3,7 +3,6 @@ import { describe, it } from "vitest";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigTsMgmtModularGenerateMetadataTrueSubRule,
   TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
@@ -172,36 +171,6 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
   "sdka/aaa",
   [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
 );
-
-const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "generateMetadata",
-  true,
-  false,
-  [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-);
-
-const newTsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "generate-metadata",
-  true,
-  false,
-  [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-);
-
-const mixTsManagementGenerateMetadataTestCase = {
-  description: `Validate @azure-tools/typespec-ts's mix options: generate-metadata/generateMetadata with different values`,
-  folder: "aaa.Management",
-  tspconfigContent: createEmitterOptionExample(
-    "@azure-tools/typespec-ts",
-    { key: "generateMetadata", value: true },
-    { key: "generate-metadata", value: false },
-  ),
-  success: false,
-  subRules: [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-};
 
 const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
@@ -538,14 +507,11 @@ describe("tspconfig", function () {
     // common
     ...commonAzureServiceDirTestCases,
     // ts
-    ...newTsManagementGenerateMetadataTestCases,
-    ...tsManagementGenerateMetadataTestCases,
     ...newTsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementPackageDirTestCases,
     ...newTsManagementPackageNameTestCases,
     ...tsManagementPackageNameTestCases,
-    mixTsManagementGenerateMetadataTestCase,
     mixTsManagementExperimentalExtensibleEnumsTestCases,
     mixTsManagementPackageNameTestCases,
     // go
