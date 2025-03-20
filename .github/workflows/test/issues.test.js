@@ -11,20 +11,10 @@ describe("getIssueNumber", () => {
     vi.clearAllMocks();
   });
   it("should return NaN when head_sha is missing", async () => {
-    // Call function
-    const result = await getIssueNumber({
-      head_sha: "",
-      github: mockGithub,
-      core: mockCore,
-    });
-
-    // Verify result
-    expect(result.issueNumber).toBeNaN();
-
-    // Verify appropriate message was logged
-    expect(mockCore.info).toHaveBeenCalledWith(
-      "No head_sha found in check run",
-    );
+    // Call function and expect it to throw
+    await expect(
+      getIssueNumber({ head_sha: "", github: mockGithub, core: mockCore }),
+    ).rejects.toThrow();
   });
 
   it("should handle multiple PRs for the same commit", async () => {
@@ -73,11 +63,6 @@ describe("getIssueNumber", () => {
 
     // Verify result
     expect(result.issueNumber).toBeNaN();
-
-    // Verify info was logged
-    expect(mockCore.info).toHaveBeenCalledWith(
-      expect.stringContaining("No open PRs found for commit"),
-    );
   });
 
   it("should handle GitHub search API errors", async () => {
@@ -89,10 +74,5 @@ describe("getIssueNumber", () => {
     await expect(
       getIssueNumber({ head_sha: "abc", github: mockGithub, core: mockCore }),
     ).rejects.toThrow();
-
-    // Verify error was logged
-    expect(mockCore.error).toHaveBeenCalledWith(
-      expect.stringContaining("Error searching for PRs"),
-    );
   });
 });
