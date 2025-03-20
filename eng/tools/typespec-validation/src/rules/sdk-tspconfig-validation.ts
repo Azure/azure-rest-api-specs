@@ -189,9 +189,45 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
 }
 
 // ----- TS management modular sub rules -----
-export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+// NOTE: this is only used when TS emitter is migrating to the new option style
+//       will be deleted when the migration is done
+class TspConfigTsOptionMigrationSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
+  private oldOptionStyleSubRule: TspconfigEmitterOptionsSubRuleBase & {
+    validateOption(config: any): RuleResult;
+  };
+  private newOptionStyleSubRule: TspconfigEmitterOptionsSubRuleBase & {
+    validateOption(config: any): RuleResult;
+  };
+  constructor(oldOptionName: string, newOptionName: string, expectedValue: ExpectedValueType) {
+    class PrivateOptionStyleSubRule extends TspconfigEmitterOptionsSubRuleBase {
+      constructor(optionName: string, expectedValue: ExpectedValueType) {
+        super("@azure-tools/typespec-ts", optionName, expectedValue);
+      }
+      public validateOption(config: any): RuleResult {
+        return this.validate(config);
+      }
+    }
+
+    // the parameters are not used, but are required to be passed to the super constructor
+    super("", "", "");
+    this.oldOptionStyleSubRule = new PrivateOptionStyleSubRule(oldOptionName, expectedValue);
+    this.newOptionStyleSubRule = new PrivateOptionStyleSubRule(newOptionName, expectedValue);
+  }
+
+  protected validate(config: any): RuleResult {
+    var newResult = this.newOptionStyleSubRule.validateOption(config);
+    // if success == true, then the option is found and passes validation
+    // if success == false, and "Failed to find" is not in errorOutput, then the option is found but fails validation
+    if (newResult.success || !newResult.errorOutput?.includes("Failed to find")) return newResult;
+
+    var oldResult = this.oldOptionStyleSubRule.validateOption(config);
+    return oldResult;
+  }
+}
+
+export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "generateMetadata", true);
+    super("generateMetadata", "generate-metadata", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
