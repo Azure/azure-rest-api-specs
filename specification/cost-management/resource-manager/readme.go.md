@@ -25,21 +25,21 @@ directive:
     from: 'CostManagementProxyResource'
     to: 'ProxyResourceForCostManagement'
 - from: costmanagement.json
-  where:
+  where: 
     - $.definitions.View.allOf[0]
     - $.definitions.Alert.allOf[0]
-  transform: >
+  transform: > 
     $['$ref'] = "common-types.json#/definitions/ProxyResourceForCostManagement";
 - from: costmanagement.exports.json
-  where:
+  where: 
     - $.definitions.Export.allOf[0]
     - $.definitions.ExportRun.allOf[0]
-  transform: >
+  transform: > 
     $['$ref'] = "common-types.json#/definitions/ProxyResourceForCostManagement";
 - from: costmanagement.budgets.json
-  where:
+  where: 
     - $.definitions.Budget.allOf[0]
-  transform: >
+  transform: > 
     $['$ref'] = "common-types.json#/definitions/ProxyResourceForCostManagement";
 - rename-model:
     from: 'CostManagementResource'
@@ -130,12 +130,4 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-preview-2024-10' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2024-10-01-preview/$(namespace)
-```
-
-### Tag: package-2025-03 and go
-These settings apply only when `--tag=package-2025-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2025-03' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2025-03-01/$(namespace)
 ```
