@@ -86,6 +86,10 @@ model EdgeMachineProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  @doc("Unique, immutable resource id.")
+  @visibility(Lifecycle.Read)
+  cloudId?: string;
+
   @doc("Resource group where the onboarding arc machine instance created.")
   onboardingMachineResourceGroupId?: Azure.Core.armResourceIdentifier;
 
@@ -271,6 +275,9 @@ union EdgeMachineState {
 
   @doc("EdgeMachine failed state and only option to recover is to re-provisioning machine")
   Failed: "Failed",
+
+  @doc("Preparing EdgeMachine")
+  Preparing: "Preparing",
 }
 
 @doc("Order Item Details")
