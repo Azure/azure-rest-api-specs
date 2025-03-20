@@ -34,45 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/profiles": {
-      "get": {
-        "tags": [
-          "Profiles"
-        ],
-        "description": "Lists all of the Azure Front Door Standard, Azure Front Door Premium, and CDN profiles within an Azure subscription.",
-        "operationId": "Profiles_List",
-        "x-ms-examples": {
-          "Profiles_List": {
-            "$ref": "./examples/Profiles_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ProfileListResult"
-            }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles": {
       "get": {
         "tags": [
