@@ -1,12 +1,17 @@
 parameters:
-  "service-dir":
+  service-dir:
     default: "sdk/onlineexperimentation"
-  "dependencies":
-    "additionalDirectories": []
+  dependencies:
+    additionalDirectories: []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
   #- "@typespec/openapi3"
+  #- "@azure-tools/typespec-go"
+  #- "@azure-tools/typespec-python"
+  #- "@azure-tools/typespec-csharp"
+  #- "@azure-tools/typespec-ts"
+  #- "@azure-tools/typespec-java"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
@@ -38,20 +43,20 @@ options:
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "onlineexperimentation"
-    namespace: "Azure.Analytics.OnlineExperimentation"
+    package-dir: "Azure.Analytics.OnlineExperimentation"
+    namespace: "{package-dir}"
     generate-convenience-methods: true
     generate-protocol-methods: true
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "onlineexperimentation"
-    packageDetails:
-      name: "@azure-rest/azure-analytics-onlineexperimentation-rest"
-      description: "Azure.Analytics.OnlineExperimentation Service"
-    generateMetadata: true
-    generateTest: true
+    package-dir: "onlineexperimentation-rest"
+    package-details:
+      name: "@azure-rest/onlineexperimentation"
+      description: "Azure Online Experimentation Service"
+    generate-metadata: true
+    generate-test: true
     flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-analytics-onlineexperimentation"
