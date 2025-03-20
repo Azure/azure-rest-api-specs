@@ -86,7 +86,7 @@ model AggregatedValue {
 }
 
 @doc("How the metric should be calculated from the event data.")
-union MetricType {
+union ExperimentMetricType {
   @doc("Count the observations of an event. Experiment analysis accounts for unequal traffic allocation.")
   EventCount: "EventCount",
 
@@ -112,27 +112,27 @@ union MetricType {
 }
 
 @doc("The definition of an EventCount metric. This metric type counts the observations of an event. Experiment analysis accounts for unequal traffic allocation.")
-model EventCountDefinition extends ExperimentMetricDefinition {
+model EventCountMetricDefinition extends ExperimentMetricDefinition {
   @doc("The type of metric.")
-  type: MetricType.EventCount;
+  type: ExperimentMetricType.EventCount;
 
   @doc("Event to observe.")
   event: ObservedEvent;
 }
 
 @doc("The definition of a UserCount metric. This metric type counts the users who encounter an event. Experiment analysis accounts for unequal traffic allocation.")
-model UserCountDefinition extends ExperimentMetricDefinition {
+model UserCountMetricDefinition extends ExperimentMetricDefinition {
   @doc("The type of metric.")
-  type: MetricType.UserCount;
+  type: ExperimentMetricType.UserCount;
 
   @doc("Event to observe.")
   event: ObservedEvent;
 }
 
 @doc("The definition of an EventRate metric. This metric type counts the percentage of events that satisfy a condition.")
-model EventRateDefinition extends ExperimentMetricDefinition {
+model EventRateMetricDefinition extends ExperimentMetricDefinition {
   @doc("The type of metric.")
-  type: MetricType.EventRate;
+  type: ExperimentMetricType.EventRate;
 
   @doc("Event to observe as the rate denominator.")
   event: ObservedEvent;
@@ -142,9 +142,9 @@ model EventRateDefinition extends ExperimentMetricDefinition {
 }
 
 @doc("The definition of a UserRate metric. This metric type counts the percentage of users with the start event that then encounter the end event. The metric denominator counts the number of users who encounter the start event at least once. The metric numerator counts the number of users who encounter both the start and end events at least once. The computation is ordered, so the start event must occur before the end event.")
-model UserRateDefinition extends ExperimentMetricDefinition {
+model UserRateMetricDefinition extends ExperimentMetricDefinition {
   @doc("The type of metric.")
-  type: MetricType.UserRate;
+  type: ExperimentMetricType.UserRate;
 
   @doc("The start event to observe as the rate denominator.")
   startEvent: ObservedEvent;
@@ -154,27 +154,27 @@ model UserRateDefinition extends ExperimentMetricDefinition {
 }
 
 @doc("The definition of a Sum metric. This metric type measures the sum of an event property. Experiment analysis accounts for unequal traffic allocation.")
-model SumDefinition extends ExperimentMetricDefinition {
+model SumMetricDefinition extends ExperimentMetricDefinition {
   @doc("The type of metric.")
-  type: MetricType.Sum;
+  type: ExperimentMetricType.Sum;
 
   @doc("The value to aggregate.")
   value: AggregatedValue;
 }
 
 @doc("The definition of an Average metric. This metric type measures the average of an event property.")
-model AverageDefinition extends ExperimentMetricDefinition {
+model AverageMetricDefinition extends ExperimentMetricDefinition {
   @doc("The type of metric.")
-  type: MetricType.Average;
+  type: ExperimentMetricType.Average;
 
   @doc("The value to aggregate.")
   value: AggregatedValue;
 }
 
 @doc("The definition of a Percentile metric. This metric type measures the percentile of an event property.")
-model PercentileDefinition extends ExperimentMetricDefinition {
+model PercentileMetricDefinition extends ExperimentMetricDefinition {
   @doc("The type of metric.")
-  type: MetricType.Percentile;
+  type: ExperimentMetricType.Percentile;
 
   @doc("The value to aggregate.")
   value: AggregatedValue;
@@ -243,17 +243,6 @@ model ExperimentMetric {
   lastModifiedAt: utcDateTime;
 }
 
-@doc("The result of validating a Metric.")
-union ValidationResultOption {
-  @doc("The metric is valid.")
-  Valid: "Valid",
-
-  @doc("The metric is invalid.")
-  Invalid: "Invalid",
-
-  string,
-}
-
 @doc("The diagnostic error codes.")
 union DiagnosticCode {
   @doc("The metric definition is not according to Json Schema.")
@@ -277,7 +266,7 @@ union DiagnosticCode {
 }
 
 @doc("The diagnostic information.")
-model DiagnosticInfo {
+model DiagnosticDetail {
   @doc("The error message.")
   @visibility(Lifecycle.Read)
   message: string;
@@ -287,14 +276,25 @@ model DiagnosticInfo {
   code: DiagnosticCode;
 }
 
+@doc("The result of validating a Metric.")
+union ValidationResult {
+  @doc("The metric is valid.")
+  Valid: "Valid",
+
+  @doc("The metric is invalid.")
+  Invalid: "Invalid",
+
+  string,
+}
+
 @doc("The result of validating a metric.")
 model ExperimentMetricValidateResult {
   @doc("The validation result.")
   @visibility(Lifecycle.Read)
-  diagnostics: DiagnosticInfo[];
+  diagnostics: DiagnosticDetail[];
 
   @doc("Whether the metric is valid.")
-  result: ValidationResultOption;
+  result: ValidationResult;
 }
 
 alias ServiceTraits = Traits.NoRepeatableRequests &
@@ -309,29 +309,28 @@ alias BodyParameter<T, TDoc extends valueof string> = {
   body: T;
 };
 
-interface ExperimentMetricsClient {
-  @doc("Fetch a ExperimentMetric by Id.")
-  get is Operations.ResourceRead<ExperimentMetric>;
+@doc("Fetch a ExperimentMetric by Id.")
+op getMetric is Operations.ResourceRead<ExperimentMetric>;
 
-  @doc("Creates or updates a ExperimentMetric asynchronously.")
-  createOrUpdate is Operations.ResourceCreateOrUpdate<ExperimentMetric>;
+@doc("Creates or updates a ExperimentMetric asynchronously.")
+op createOrUpdateMetric is Operations.ResourceCreateOrUpdate<ExperimentMetric>;
 
-  @doc("Validates a ExperimentMetric.")
-  validate is Operations.ResourceAction<
-    ExperimentMetric,
-    BodyParameter<ExperimentMetric, "Metric input to validate">,
-    ExperimentMetricValidateResult,
-    {}
-  >;
+@doc("Validates a ExperimentMetric.")
+@action("validate")
+op validateMetric is Operations.ResourceAction<
+  ExperimentMetric,
+  BodyParameter<ExperimentMetric, "Metric input to validate">,
+  ExperimentMetricValidateResult,
+  {}
+>;
 
-  @doc("Delete a ExperimentMetric asynchronously.")
-  delete is Operations.ResourceDelete<ExperimentMetric>;
+@doc("Delete a ExperimentMetric asynchronously.")
+op deleteMetric is Operations.ResourceDelete<ExperimentMetric>;
 
-  @doc("List ExperimentMetric resources")
-  list is Operations.ResourceList<
-    ExperimentMetric,
-    {
-      parameters: StandardListQueryParameters;
-    }
-  >;
-}
+@doc("List ExperimentMetric resources")
+op listMetrics is Operations.ResourceList<
+  ExperimentMetric,
+  {
+    parameters: StandardListQueryParameters;
+  }
+>;

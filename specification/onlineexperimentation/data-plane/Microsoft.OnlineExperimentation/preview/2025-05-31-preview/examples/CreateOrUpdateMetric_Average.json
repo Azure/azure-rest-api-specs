@@ -1,8 +1,8 @@
 {
-  "title": "ExperimentMetricsClient_CreateOrUpdate_EventCount",
-  "operationId": "ExperimentMetricsClient_CreateOrUpdate",
+  "title": "CreateOrUpdateMetric_Average",
+  "operationId": "CreateOrUpdateMetric",
   "parameters": {
-    "experimentMetricId": "events_purchase_creditcard",
+    "experimentMetricId": "avg_purchase_revenue",
     "region": "use2",
     "workspaceId": "workspace-id",
     "api-version": "2025-05-31-preview",
@@ -12,18 +12,19 @@
     "If-Modified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "resource": {
-      "displayName": "Number of purchases (credit card)",
-      "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
+      "displayName": "Average revenue per purchase [USD]",
+      "description": "The average revenue per purchase transaction in USD. Refund transactions are excluded from this metric. The total revenue might increase while this metric decreases if the number of purchases increases.",
       "lifecycle": "Active",
       "categories": [
         "Monetization"
       ],
       "desiredDirection": "Increase",
       "definition": {
-        "type": "EventCount",
-        "event": {
+        "type": "Average",
+        "value": {
           "eventName": "Transaction",
-          "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
+          "eventProperty": "Revenue",
+          "filter": "Revenue > 0"
         }
       }
     }
@@ -35,19 +36,20 @@
         "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
       },
       "body": {
-        "id": "events_purchase_creditcard",
-        "displayName": "Number of purchases (credit card)",
-        "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
+        "id": "avg_purchase_revenue",
+        "displayName": "Average revenue per purchase [USD]",
+        "description": "The average revenue per purchase transaction in USD. Refund transactions are excluded from this metric. The total revenue might increase while this metric decreases if the number of purchases increases.",
         "lifecycle": "Active",
         "categories": [
           "Monetization"
         ],
         "desiredDirection": "Increase",
         "definition": {
-          "type": "EventCount",
-          "event": {
+          "type": "Average",
+          "value": {
             "eventName": "Transaction",
-            "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
+            "eventProperty": "Revenue",
+            "filter": "Revenue > 0"
           }
         },
         "eTag": "ckswkavwgassdlocwuzxz",
@@ -60,19 +62,20 @@
         "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
       },
       "body": {
-        "id": "events_purchase_creditcard",
-        "displayName": "Number of purchases (credit card)",
-        "description": "The number of purchase transactions made with credit card. Refund transactions are excluded from this metric.",
+        "id": "avg_purchase_revenue",
+        "displayName": "Average revenue per purchase [USD]",
+        "description": "The average revenue per purchase transaction in USD. Refund transactions are excluded from this metric. The total revenue might increase while this metric decreases if the number of purchases increases.",
         "lifecycle": "Active",
         "categories": [
           "Monetization"
         ],
         "desiredDirection": "Increase",
         "definition": {
-          "type": "EventCount",
-          "event": {
+          "type": "Average",
+          "value": {
             "eventName": "Transaction",
-            "filter": "Revenue > 0 and ['payment.method'] == 'credit_card'"
+            "eventProperty": "Revenue",
+            "filter": "Revenue > 0"
           }
         },
         "eTag": "ckswkavwgassdlocwuzxz",

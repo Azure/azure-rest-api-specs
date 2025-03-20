@@ -56,7 +56,7 @@
   "paths": {
     "/experiment-metrics": {
       "get": {
-        "operationId": "ExperimentMetricsClient_List",
+        "operationId": "ListMetrics",
         "description": "List ExperimentMetric resources",
         "parameters": [
           {
@@ -94,8 +94,8 @@
           }
         },
         "x-ms-examples": {
-          "ExperimentMetricsClient_List": {
-            "$ref": "./examples/ExperimentMetricsClient_List.json"
+          "ListMetrics": {
+            "$ref": "./examples/ListMetrics.json"
           }
         },
         "x-ms-pageable": {
@@ -105,7 +105,7 @@
     },
     "/experiment-metrics/{experimentMetricId}": {
       "get": {
-        "operationId": "ExperimentMetricsClient_Get",
+        "operationId": "GetMetric",
         "description": "Fetch a ExperimentMetric by Id.",
         "parameters": [
           {
@@ -169,13 +169,13 @@
           }
         },
         "x-ms-examples": {
-          "Get metric by metric name.": {
-            "$ref": "./examples/ExperimentMetricsClient_Get.json"
+          "GetMetric": {
+            "$ref": "./examples/GetMetric.json"
           }
         }
       },
       "patch": {
-        "operationId": "ExperimentMetricsClient_CreateOrUpdate",
+        "operationId": "CreateOrUpdateMetric",
         "description": "Creates or updates a ExperimentMetric asynchronously.",
         "consumes": [
           "application/merge-patch+json"
@@ -268,31 +268,31 @@
           }
         },
         "x-ms-examples": {
-          "ExperimentMetricsClient_CreateOrUpdate_Average": {
-            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_Average.json"
+          "CreateOrUpdateMetric_Average": {
+            "$ref": "./examples/CreateOrUpdateMetric_Average.json"
           },
-          "ExperimentMetricsClient_CreateOrUpdate_EventCount": {
-            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_EventCount.json"
+          "CreateOrUpdateMetric_EventCount": {
+            "$ref": "./examples/CreateOrUpdateMetric_EventCount.json"
           },
-          "ExperimentMetricsClient_CreateOrUpdate_EventRate": {
-            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_EventRate.json"
+          "CreateOrUpdateMetric_EventRate": {
+            "$ref": "./examples/CreateOrUpdateMetric_EventRate.json"
           },
-          "ExperimentMetricsClient_CreateOrUpdate_Percentile": {
-            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_Percentile.json"
+          "CreateOrUpdateMetric_Percentile": {
+            "$ref": "./examples/CreateOrUpdateMetric_Percentile.json"
           },
-          "ExperimentMetricsClient_CreateOrUpdate_Sum": {
-            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_Sum.json"
+          "CreateOrUpdateMetric_Sum": {
+            "$ref": "./examples/CreateOrUpdateMetric_Sum.json"
           },
-          "ExperimentMetricsClient_CreateOrUpdate_UserCount": {
-            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_UserCount.json"
+          "CreateOrUpdateMetric_UserCount": {
+            "$ref": "./examples/CreateOrUpdateMetric_UserCount.json"
           },
-          "ExperimentMetricsClient_CreateOrUpdate_UserRate": {
-            "$ref": "./examples/ExperimentMetricsClient_CreateOrUpdate_UserRate.json"
+          "CreateOrUpdateMetric_UserRate": {
+            "$ref": "./examples/CreateOrUpdateMetric_UserRate.json"
           }
         }
       },
       "delete": {
-        "operationId": "ExperimentMetricsClient_Delete",
+        "operationId": "DeleteMetric",
         "description": "Delete a ExperimentMetric asynchronously.",
         "parameters": [
           {
@@ -349,15 +349,15 @@
           }
         },
         "x-ms-examples": {
-          "Delete metric by metric name using long-running operation.": {
-            "$ref": "./examples/ExperimentMetricsClient_Delete.json"
+          "DeleteMetric": {
+            "$ref": "./examples/DeleteMetric.json"
           }
         }
       }
     },
     "/experiment-metrics/{experimentMetricId}:validate": {
       "post": {
-        "operationId": "ExperimentMetricsClient_Validate",
+        "operationId": "ValidateMetric",
         "description": "Validates a ExperimentMetric.",
         "parameters": [
           {
@@ -414,8 +414,8 @@
           }
         },
         "x-ms-examples": {
-          "ExperimentMetricsClient_Validate": {
-            "$ref": "./examples/ExperimentMetricsClient_Validate.json"
+          "ValidateMetric": {
+            "$ref": "./examples/ValidateMetric.json"
           }
         }
       }
@@ -449,7 +449,7 @@
         "eventProperty"
       ]
     },
-    "AverageDefinition": {
+    "AverageMetricDefinition": {
       "type": "object",
       "description": "The definition of an Average metric. This metric type measures the average of an event property.",
       "properties": {
@@ -606,7 +606,7 @@
         ]
       }
     },
-    "DiagnosticInfo": {
+    "DiagnosticDetail": {
       "type": "object",
       "description": "The diagnostic information.",
       "properties": {
@@ -632,7 +632,7 @@
       "minLength": 1,
       "maxLength": 1000
     },
-    "EventCountDefinition": {
+    "EventCountMetricDefinition": {
       "type": "object",
       "description": "The definition of an EventCount metric. This metric type counts the observations of an event. Experiment analysis accounts for unequal traffic allocation.",
       "properties": {
@@ -651,7 +651,7 @@
       ],
       "x-ms-discriminator-value": "EventCount"
     },
-    "EventRateDefinition": {
+    "EventRateMetricDefinition": {
       "type": "object",
       "description": "The definition of an EventRate metric. This metric type counts the percentage of events that satisfy a condition.",
       "properties": {
@@ -801,13 +801,13 @@
           "type": "array",
           "description": "The validation result.",
           "items": {
-            "$ref": "#/definitions/DiagnosticInfo"
+            "$ref": "#/definitions/DiagnosticDetail"
           },
           "readOnly": true,
           "x-ms-identifiers": []
         },
         "result": {
-          "$ref": "#/definitions/ValidationResultOption",
+          "$ref": "#/definitions/ValidationResult",
           "description": "Whether the metric is valid."
         }
       },
@@ -880,7 +880,7 @@
         "value"
       ]
     },
-    "PercentileDefinition": {
+    "PercentileMetricDefinition": {
       "type": "object",
       "description": "The definition of a Percentile metric. This metric type measures the percentile of an event property.",
       "properties": {
@@ -905,7 +905,7 @@
       ],
       "x-ms-discriminator-value": "Percentile"
     },
-    "SumDefinition": {
+    "SumMetricDefinition": {
       "type": "object",
       "description": "The definition of a Sum metric. This metric type measures the sum of an event property. Experiment analysis accounts for unequal traffic allocation.",
       "properties": {
@@ -924,7 +924,7 @@
       ],
       "x-ms-discriminator-value": "Sum"
     },
-    "UserCountDefinition": {
+    "UserCountMetricDefinition": {
       "type": "object",
       "description": "The definition of a UserCount metric. This metric type counts the users who encounter an event. Experiment analysis accounts for unequal traffic allocation.",
       "properties": {
@@ -943,7 +943,7 @@
       ],
       "x-ms-discriminator-value": "UserCount"
     },
-    "UserRateDefinition": {
+    "UserRateMetricDefinition": {
       "type": "object",
       "description": "The definition of a UserRate metric. This metric type counts the percentage of users with the start event that then encounter the end event. The metric denominator counts the number of users who encounter the start event at least once. The metric numerator counts the number of users who encounter both the start and end events at least once. The computation is ordered, so the start event must occur before the end event.",
       "properties": {
@@ -967,7 +967,7 @@
       ],
       "x-ms-discriminator-value": "UserRate"
     },
-    "ValidationResultOption": {
+    "ValidationResult": {
       "type": "string",
       "description": "The result of validating a Metric.",
       "enum": [
@@ -975,7 +975,7 @@
         "Invalid"
       ],
       "x-ms-enum": {
-        "name": "ValidationResultOption",
+        "name": "ValidationResult",
         "modelAsString": true,
         "values": [
           {
