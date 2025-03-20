@@ -306,7 +306,13 @@ describe("extractInputs", () => {
     });
     await expect(
       extractInputs(github, context, createMockCore()),
-    ).rejects.toThrow(/could not find/i);
+    ).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "abc123",
+      issue_number: NaN,
+      run_id: 456,
+    });
   });
 
   it("workflow_run:completed:unsupported", async () => {
@@ -324,4 +330,99 @@ describe("extractInputs", () => {
       extractInputs(null, context, createMockCore()),
     ).rejects.toThrow();
   });
+});
+
+it("workflow_run:completed:check_run", async () => {
+  const github = createMockGithub();
+  github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+    data: { artifacts: [] },
+  });
+
+  const context = {
+    eventName: "workflow_run",
+    payload: {
+      action: "completed",
+      workflow_run: {
+        event: "check_run",
+        head_sha: "abc123",
+        id: 456,
+        repository: {
+          name: "TestRepoName",
+          owner: {
+            login: "TestRepoOwnerLogin",
+          },
+        },
+      },
+    },
+  };
+
+  github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+    data: { artifacts: [] },
+  });
+  await expect(
+    extractInputs(github, context, createMockCore()),
+  ).resolves.toEqual({
+    owner: "TestRepoOwnerLogin",
+    repo: "TestRepoName",
+    head_sha: "abc123",
+    issue_number: NaN,
+    run_id: 456,
+  });
+});
+
+it("check_run:completed", async () => {
+  const github = createMockGithub();
+  const context = {
+    eventName: "check_run",
+    payload: {
+      action: "completed",
+      check_run: {
+        details_url:
+          "https://dev.azure.com/abc/123-456/_build/results?buildId=56789",
+        head_sha: "abc123",
+      },
+      repository: {
+        name: "TestRepoName",
+        owner: {
+          login: "TestRepoOwnerLogin",
+        },
+      },
+    },
+  };
+
+  await expect(
+    extractInputs(github, context, createMockCore()),
+  ).resolves.toEqual({
+    owner: "TestRepoOwnerLogin",
+    repo: "TestRepoName",
+    issue_number: NaN,
+    head_sha: "abc123",
+    run_id: NaN,
+    ado_build_id: "56789",
+    ado_project_url: "https://dev.azure.com/abc/123-456",
+  });
+});
+
+it("check_run:completed throw error when the build url is invalid", async () => {
+  const github = createMockGithub();
+  const context = {
+    eventName: "check_run",
+    payload: {
+      action: "completed",
+      check_run: {
+        details_url: "https://debc/123-456/_build/result/buildId=56789",
+        head_sha: "abc123",
+      },
+      repository: {
+        name: "TestRepoName",
+        owner: {
+          login: "TestRepoOwnerLogin",
+        },
+      },
+    },
+  };
+
+  await expect(
+    extractInputs(github, context, createMockCore()),
+  ).rejects.toThrow();
 });
