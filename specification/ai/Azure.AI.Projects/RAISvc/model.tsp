@@ -65,6 +65,69 @@ model AttackObjective {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("The Evaluation Metric")
+model EvaluationMetric {
+  @doc("The metric name.")
+  name: string;
+
+  @doc("The metric label.")
+  label?: string;
+
+  @doc("The metric label's reason")
+  reason: string;
+
+  @doc("Additional metric properties.")
+  properties?: Record<string>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Safety Evaluation Output")
+model SafetyEvaluationOutput {
+  @doc("The annotation task.")
+  type: SafetyEvaluationType;
+
+  @doc("The evaluation metrics.")
+  metrics?: EvaluationMetric[];
+
+  @doc("List of sources.")
+  version: string;
+}
+
+@doc("Safety Evaluation Output")
+enum SafetyEvaluationType {
+  ContentSafety: "content safety",
+  Groundedness: "groundedness",
+  XPIA: "xpia",
+  ECI: "eci",
+  ProtectedMaterial: "protected material",
+  CodeVulnerability: "code vulnerability",
+  UngroundedAttributes: "ungrounded attributes"
+}
+
+@doc("Dataset as source for evaluation.")
+model Data {
+  @doc("The collection of context messages associated with this chat completions that need to be evaluated.")
+  @minItems(1)
+  value: ChatCompletions[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Safety Evaluation Output")
+model SafetyEvaluation {
+  @doc("The safety evaluation type.")
+  type: SafetyEvaluationType;
+
+  @doc("The metrics to evaluate.")
+  metrics?: Array<string>;
+
+  @doc("List of sources.")
+  version: string;
+
+  @doc("Data to evaluate")
+  data: Data;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Customization Parameters")
 model CustomizationParameters {
   @doc("Application scenario.")
@@ -282,3 +345,119 @@ model LongRunningResponse {
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
 alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<202> &
   T;
+
+model ChatCompletions {
+  @doc("The collection of context messages associated with this chat completions that need to be evaluated.")
+  @minItems(1)
+  messages: ChatRequestMessage[];
+}
+
+
+@doc("A description of the intended purpose of a message within a chat completions interaction.")
+union ChatRole {
+  string,
+
+  @doc("The role that instructs or sets the behavior of the assistant.")
+  system: "system",
+
+  @doc("The role that provides input for chat completions.")
+  user: "user",
+
+  @doc("The role that provides responses to system-instructed, user-prompted input.")
+  assistant: "assistant",
+}
+
+@doc("An abstract representation of a structured content item within a chat message.")
+model ChatMessageContentItem {
+  @doc("The discriminated object type.")
+  type: string;
+}
+
+@doc("A structured chat content item containing plain text.")
+model ChatMessageTextContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'text' for this type.")
+  type: "text";
+
+  @doc("The content of the message.")
+  text: string;
+}
+
+@doc("A structured chat content item containing an image reference.")
+model ChatMessageImageContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'image_url' for this type.")
+  type: "image_url";
+
+  @doc("An internet location, which must be accessible to the model,from which the image may be retrieved.")
+  @encodedName("application/json", "image_url")
+  imageUrl: ChatMessageImageUrl;
+}
+
+@doc("An internet location from which the model may retrieve an image.")
+model ChatMessageImageUrl {
+  @doc("The URL of the image.")
+  url: string;
+
+  @doc("""
+    The evaluation quality setting to use, which controls relative prioritization of speed, token consumption, and
+    accuracy.
+    """)
+  detail?: ChatMessageImageDetailLevel;
+}
+
+@doc("A representation of the possible image detail levels for image-based chat completions message content.")
+union ChatMessageImageDetailLevel {
+  string,
+
+  @doc("Specifies that the model should determine which detail level to apply using heuristics like image size.")
+  auto: "auto",
+
+  @doc("""
+    Specifies that image evaluation should be constrained to the 'low-res' model that may be faster and consume fewer
+    tokens but may also be less accurate for highly detailed images.
+    """)
+  low: "low",
+
+  @doc("""
+    Specifies that image evaluation should enable the 'high-res' model that may be more accurate for highly detailed
+    images but may also be slower and consume more tokens.
+    """)
+  high: "high",
+}
+
+@doc("An abstract representation of a chat message as provided in a request.")
+model ChatRequestMessage {
+  @doc("The chat role associated with this message.")
+  role: ChatRole;
+}
+
+@doc("""
+  A request chat message containing system instructions that influence how the model will generate a chat completions
+  response.
+  """)
+model ChatRequestSystemMessage extends ChatRequestMessage {
+  @doc("The chat role associated with this message, which is always 'system' for system messages.")
+  role: ChatRole.system;
+
+  @doc("The contents of the system message.")
+  content: string;
+}
+
+@doc("A request chat message representing user input to the assistant.")
+model ChatRequestUserMessage extends ChatRequestMessage {
+  @doc("The chat role associated with this message, which is always 'user' for user messages.")
+  role: ChatRole.user;
+
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+  @doc("The contents of the user message, with available input types varying by selected model.")
+  content: string | ChatMessageContentItem[];
+}
+
+@doc("A request chat message representing response or action from the assistant.")
+model ChatRequestAssistantMessage extends ChatRequestMessage {
+  @doc("The chat role associated with this message, which is always 'assistant' for assistant messages.")
+  role: ChatRole.assistant;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The content of the message.")
+  content?: string | ChatMessageContentItem[];
+}
