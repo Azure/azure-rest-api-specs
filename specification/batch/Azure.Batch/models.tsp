@@ -98,6 +98,9 @@ union OutputFileUploadCondition {
 
   @doc("Upload the file(s) after the Task process exits, no matter what the exit code was.")
   TaskCompletion: "taskcompletion",
+
+  @doc("Upload the file(s) after the Task process exits, no matter what the exit code was.")
+  TaskCancelled: "taskcancelled",
 }
 
 @doc("AutoUserScope enums")
