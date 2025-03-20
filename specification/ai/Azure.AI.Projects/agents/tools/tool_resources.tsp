@@ -111,18 +111,18 @@ model AISearchIndexResource {
    *  Type of query in an AIIndexResource attached to this agent.
    */
   @encodedName("application/json", "query_type")
-  queryType: AzureAISearchQueryType;
+  queryType?: AzureAISearchQueryType;
 
   /**
    * Number of documents to retrieve from search and present to the model.
    */
   @encodedName("application/json", "top_k")
-  topK: int32;
+  topK?: int32;
 
   /**
    * Odata filter string for search resource.
    */
-  filter: string;
+  filter?: string;
 }
 
 //
