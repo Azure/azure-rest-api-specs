@@ -25,8 +25,8 @@ model AvailabilitySet
   /**
    * Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  sku?: Microsoft.Compute.Sku;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  sku?: Sku;
 }
 
 @armResourceOperations
@@ -90,6 +90,49 @@ interface AvailabilitySets {
     void,
     VirtualMachineSizeListResult
   >;
+
+  /**
+   * Start migration operation on an Availability Set to move its Virtual Machines to a Virtual Machine Scale Set. This should be followed by a migrate operation on each Virtual Machine that triggers a downtime on the Virtual Machine.
+   */
+  startMigrationToVirtualMachineScaleSet is ArmResourceActionSync<
+    AvailabilitySet,
+    MigrateToVirtualMachineScaleSetInput,
+    NoContentResponse
+  >;
+
+  /**
+   * Cancel the migration operation on an Availability Set.
+   */
+  cancelMigrationToVirtualMachineScaleSet is ArmResourceActionSync<
+    AvailabilitySet,
+    void,
+    NoContentResponse
+  >;
+
+  /**
+   * Validates that the Virtual Machines in the Availability Set can be migrated to the provided Virtual Machine Scale Set.
+   */
+  validateMigrationToVirtualMachineScaleSet is ArmResourceActionSync<
+    AvailabilitySet,
+    MigrateToVirtualMachineScaleSetInput,
+    NoContentResponse
+  >;
+
+  /**
+   * Create a new Flexible Virtual Machine Scale Set and migrate all the Virtual Machines in the Availability Set. This does not trigger a downtime on the Virtual Machines.
+   */
+  convertToVirtualMachineScaleSet is ArmResourceActionAsyncBase<
+    AvailabilitySet,
+    {
+      /**
+       * Parameters supplied to the migrate operation on the availability set.
+       */
+      @bodyRoot
+      parameters?: ConvertToVirtualMachineScaleSetInput;
+    },
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AvailabilitySet>
+  >;
 }
 
 @@doc(AvailabilitySet.name, "The name of the availability set.");
@@ -99,4 +142,10 @@ interface AvailabilitySets {
 );
 @@doc(AvailabilitySets.update::parameters.properties,
   "Parameters supplied to the Update Availability Set operation."
+);
+@@doc(AvailabilitySets.startMigrationToVirtualMachineScaleSet::parameters.body,
+  "Parameters supplied to the migrate operation on the availability set."
+);
+@@doc(AvailabilitySets.validateMigrationToVirtualMachineScaleSet::parameters.body,
+  "Parameters supplied to the migrate operation on the availability set."
 );

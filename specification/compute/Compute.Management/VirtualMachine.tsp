@@ -25,47 +25,44 @@ model VirtualMachine
   /**
    * Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   plan?: Plan;
 
   /**
    * The virtual machine child extension resources.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   resources?: VirtualMachineExtension[];
 
   /**
    * The identity of the virtual machine, if configured.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: VirtualMachineIdentity;
 
-  /**
-   * The virtual machine zones.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  zones?: string[];
+  ...Azure.ResourceManager.AvailabilityZonesProperty;
 
   /**
    * The extended location of the Virtual Machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
   /**
    * ManagedBy is set to Virtual Machine Scale Set(VMSS) flex ARM resourceID, if the VM is part of the VMSS. This property is used by platform for internal resource group delete optimization.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   managedBy?: string;
 
+  ...Azure.ResourceManager.EntityTagProperty;
+
   /**
-   * Etag is property returned in Create/Update/Get response of the VM, so that customer can supply it in the header to ensure optimistic updates.
+   * Placement section specifies the user-defined constraints for virtual machine hardware placement. This property cannot be changed once VM is provisioned. Minimum api-version: 2024-11-01.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility(Lifecycle.Read)
-  etag?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  placement?: Placement;
 }
 
 @armResourceOperations
@@ -374,6 +371,25 @@ interface VirtualMachines {
     VirtualMachine,
     RunCommandInput,
     RunCommandResult
+  >;
+
+  /**
+   * Migrate a virtual machine from availability set to Flexible Virtual Machine Scale Set.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("migrateToVirtualMachineScaleSet")
+  @operationId("VirtualMachines_migrateToVMScaleSet")
+  migrateToVMScaleSet is ArmResourceActionAsyncBase<
+    VirtualMachine,
+    {
+      /**
+       * Parameters supplied to the Migrate Virtual Machine operation.
+       */
+      @bodyRoot
+      parameters?: MigrateVMToVirtualMachineScaleSetInput;
+    },
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 }
 

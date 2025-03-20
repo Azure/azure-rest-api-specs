@@ -59,12 +59,7 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
-  /**
-   * Etag is property returned in Create/Update/Get response of the VMSS, so that customer can supply it in the header to ensure optimistic updates
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @visibility(Lifecycle.Read)
-  etag?: string;
+  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 @armResourceOperations

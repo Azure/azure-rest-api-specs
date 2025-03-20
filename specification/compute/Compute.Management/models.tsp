@@ -324,6 +324,8 @@ union NetworkApiVersion {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `2020-11-01`: "2020-11-01",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `2022-11-01`: "2022-11-01",
 }
 
 /**
@@ -346,6 +348,19 @@ union Mode {
   Audit: "Audit",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enforce: "Enforce",
+}
+
+/**
+ * Specifies the execution mode. In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints. In Enforce mode, the system will enforce the access control and it is the recommended mode of operation.
+ */
+union Modes {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Audit: "Audit",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enforce: "Enforce",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
 }
 
 /**
@@ -395,6 +410,24 @@ union OrchestrationMode {
 }
 
 /**
+ * Type of rebalance strategy that will be used for rebalancing virtual machines in the scale set across availability zones. Default and only supported value for now is Recreate.
+ */
+union RebalanceStrategy {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Recreate: "Recreate",
+}
+
+/**
+ * Type of rebalance behavior that will be used for recreating virtual machines in the scale set across availability zones. Default and only supported value for now is CreateBeforeDelete.
+ */
+union RebalanceBehavior {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  CreateBeforeDelete: "CreateBeforeDelete",
+}
+
+/**
  * Specifies the align mode between Virtual Machine Scale Set compute and storage Fault Domain count.
  */
 union ZonalPlatformFaultDomainAlignMode {
@@ -414,6 +447,8 @@ union AllocationStrategy {
   LowestPrice: "LowestPrice",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CapacityOptimized: "CapacityOptimized",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Prioritized: "Prioritized",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -807,6 +842,21 @@ union VirtualMachineSizeTypes {
 }
 
 /**
+ * Specifies the resilient VM deletion status for the virtual machine.
+ */
+union ResilientVMDeletionStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  InProgress: "InProgress",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+}
+
+/**
  * Specifies the detach behavior to be used while detaching a disk or which is already in the process of detachment from the virtual machine. Supported values are: **ForceDetach.** detachOption: **ForceDetach** is applicable only for managed data disks. If a previous detachment attempt of the data disk did not complete due to an unexpected failure from the virtual machine and the disk is still not released then use force-detach as a last resort option to detach the disk forcibly from the VM. All writes might not have been flushed when using this detach behavior. **This feature is still in preview**. To force-detach a data disk update toBeDetached to 'true' along with setting detachOption: 'ForceDetach'.
  */
 union DiskDetachOptionTypes {
@@ -874,6 +924,15 @@ union PatchOperationStatus {
   Succeeded: "Succeeded",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CompletedWithWarnings: "CompletedWithWarnings",
+}
+
+/**
+ * Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.
+ */
+union ZonePlacementPolicyType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Any: "Any",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1056,6 +1115,13 @@ union AlternativeType {
   Offer: "Offer",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Plan: "Plan",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union Expand {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Properties: "Properties",
 }
 
 /**
@@ -1340,8 +1406,8 @@ enum MaintenanceOperationResultCodeTypes {
 enum InstanceViewTypes {
   instanceView,
   userData,
+  resiliencyView,
 }
-
 /**
  * Specifies the software license type that will be applied to the VMs deployed on the dedicated host. Possible values are: **None,** **Windows_Server_Hybrid,** **Windows_Server_Perpetual.** The default value is: **None.**
  */
@@ -2852,7 +2918,7 @@ model EncryptionIdentity {
 }
 
 /**
- * Specifies ProxyAgent settings while creating the virtual machine. Minimum api-version: 2023-09-01.
+ * Specifies ProxyAgent settings for the virtual machine or virtual machine scale set. Minimum api-version: 2023-09-01.
  */
 model ProxyAgentSettings {
   /**
@@ -2861,14 +2927,39 @@ model ProxyAgentSettings {
   enabled?: boolean;
 
   /**
-   * Specifies the mode that ProxyAgent will execute on if the feature is enabled. ProxyAgent will start to audit or monitor but not enforce access control over requests to host endpoints in Audit mode, while in Enforce mode it will enforce access control. The default value is Enforce mode.
+   * Specifies the mode that ProxyAgent will execute on. Warning: this property has been deprecated, please specify 'mode' under particular hostendpoint setting.
    */
   mode?: Mode;
 
   /**
-   * Increase the value of this property allows user to reset the key used for securing communication channel between guest and host.
+   * Increase the value of this property allows users to reset the key used for securing communication channel between guest and host.
    */
   keyIncarnationId?: int32;
+
+  /**
+   * Specifies the Wire Server endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
+   */
+  wireServer?: HostEndpointSettings;
+
+  /**
+   * Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
+   */
+  imds?: HostEndpointSettings;
+}
+
+/**
+ * Specifies particular host endpoint settings.
+ */
+model HostEndpointSettings {
+  /**
+   * Specifies the execution mode. In Audit mode, the system acts as if it is enforcing the access control policy, including emitting access denial entries in the logs but it does not actually deny any requests to host endpoints. In Enforce mode, the system will enforce the access control and it is the recommended mode of operation.
+   */
+  mode?: Modes;
+
+  /**
+   * Specifies the InVMAccessControlProfileVersion resource id in the format of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}
+   */
+  inVMAccessControlProfileReferenceId?: string;
 }
 
 /**
@@ -3184,6 +3275,11 @@ model ScaleInPolicy {
    * This property allows you to specify if virtual machines chosen for removal have to be force deleted when a virtual machine scale set is being scaled-in.(Feature in Preview)
    */
   forceDeletion?: boolean;
+
+  /**
+   * This property allows you to prioritize the deletion of unhealthy and inactive VMs when a virtual machine scale set is being scaled-in.(Feature in Preview)
+   */
+  prioritizeUnhealthyVMs?: boolean;
 }
 
 /**
@@ -3218,7 +3314,7 @@ model PriorityMixPolicy {
 }
 
 /**
- * Describes an resiliency policy - resilientVMCreationPolicy and/or resilientVMDeletionPolicy.
+ * Describes an resiliency policy - AutomaticZoneRebalancingPolicy, ResilientVMCreationPolicy and/or ResilientVMDeletionPolicy.
  */
 model ResiliencyPolicy {
   /**
@@ -3230,6 +3326,11 @@ model ResiliencyPolicy {
    * The configuration parameters used while performing resilient VM deletion.
    */
   resilientVMDeletionPolicy?: ResilientVMDeletionPolicy;
+
+  /**
+   * The configuration parameters used while performing automatic AZ balancing.
+   */
+  automaticZoneRebalancingPolicy?: AutomaticZoneRebalancingPolicy;
 }
 
 /**
@@ -3250,6 +3351,26 @@ model ResilientVMDeletionPolicy {
    * Specifies whether resilient VM deletion should be enabled on the virtual machine scale set. The default value is false.
    */
   enabled?: boolean;
+}
+
+/**
+ * The configuration parameters used while performing automatic AZ balancing.
+ */
+model AutomaticZoneRebalancingPolicy {
+  /**
+   * Specifies whether Automatic AZ Balancing should be enabled on the virtual machine scale set. The default value is false.
+   */
+  enabled?: boolean;
+
+  /**
+   * Type of rebalance strategy that will be used for rebalancing virtual machines in the scale set across availability zones. Default and only supported value for now is Recreate.
+   */
+  rebalanceStrategy?: RebalanceStrategy;
+
+  /**
+   * Type of rebalance behavior that will be used for recreating virtual machines in the scale set across availability zones. Default and only supported value for now is CreateBeforeDelete.
+   */
+  rebalanceBehavior?: RebalanceBehavior;
 }
 
 /**
@@ -3276,6 +3397,11 @@ model SkuProfileVMSize {
    * Specifies the name of the VM Size.
    */
   name?: string;
+
+  /**
+   * Specifies the rank (a.k.a priority) associated with the VM Size.
+   */
+  rank?: int32;
 }
 
 /**
@@ -4433,6 +4559,11 @@ model VirtualMachineScaleSetVMProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
+   * Specifies the resilient VM deletion status for the virtual machine.
+   */
+  resilientVMDeletionStatus?: ResilientVMDeletionStatus;
+
+  /**
    * Specifies the storage settings for the virtual machine disks.
    */
   storageProfile?: StorageProfile;
@@ -4841,6 +4972,11 @@ model StorageProfile {
    * Specifies the disk controller type configured for the VM. **Note:** This property will be set to the default disk controller type if not specified provided virtual machine is being created with 'hyperVGeneration' set to V2 based on the capabilities of the operating system disk and VM size from the the specified minimum api version. You need to deallocate the VM before updating its disk controller type unless you are updating the VM size in the VM configuration which implicitly deallocates and reallocates the VM. Minimum api-version: 2022-08-01.
    */
   diskControllerType?: DiskControllerTypes;
+
+  /**
+   * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
+   */
+  alignRegionalDisksToVMZone?: boolean;
 }
 
 /**
@@ -6056,6 +6192,28 @@ model LastPatchInstallationSummary {
 }
 
 /**
+ * Describes the user-defined constraints for virtual machine hardware placement.
+ */
+model Placement {
+  /**
+   * Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.
+   */
+  zonePlacementPolicy?: ZonePlacementPolicyType;
+
+  /**
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  includeZones?: string[];
+
+  /**
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  excludeZones?: string[];
+}
+
+/**
  * Describes a Virtual Machine Update.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -6478,6 +6636,26 @@ model PatchInstallationDetail {
 }
 
 /**
+ * The input of virtual machine migration from Availability Set to Flexible Virtual Machine Scale Set.
+ */
+model MigrateVMToVirtualMachineScaleSetInput {
+  /**
+   * The target zone of VM migration to Flexible Virtual Machine Scale Set.
+   */
+  targetZone?: string;
+
+  /**
+   * The target compute fault domain of VM migration to Flexible Virtual Machine Scale Set.
+   */
+  targetFaultDomain?: int32;
+
+  /**
+   * The target Virtual Machine size of VM migration to Flexible Virtual Machine Scale Set.
+   */
+  targetVMSize?: string;
+}
+
+/**
  * Virtual machine image resource information.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -6694,6 +6872,12 @@ model VmImagesInEdgeZoneListResult {
 }
 
 /**
+ * The List Virtual Machine Images operation response.
+ */
+model VirtualMachineImagesWithPropertiesListResult
+  is Azure.Core.Page<VirtualMachineImage>;
+
+/**
  * Describes the properties of a Virtual Machine Extension Image.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -6770,8 +6954,67 @@ model AvailabilitySetProperties {
    * Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the availability set.
    */
   scheduledEventsPolicy?: ScheduledEventsPolicy;
+
+  /**
+   * Describes the migration properties on the Availability Set.
+   */
+  @visibility(Lifecycle.Read)
+  virtualMachineScaleSetMigrationInfo?: VirtualMachineScaleSetMigrationInfo;
 }
 
+/**
+ * Describes the Availability Set properties related to migration to Flexible Virtual Machine Scale Set.
+ */
+model VirtualMachineScaleSetMigrationInfo {
+  /**
+   * Indicates the target Virtual Machine ScaleSet properties upon triggering a seamless migration without downtime of the VMs via the ConvertToVirtualMachineScaleSet API.
+   */
+  @visibility(Lifecycle.Read)
+  defaultVirtualMachineScaleSetInfo?: DefaultVirtualMachineScaleSetInfo;
+
+  /**
+   * Specifies the Virtual Machine Scale Set that the Availability Set is migrated to.
+   */
+  @visibility(Lifecycle.Read)
+  migrateToVirtualMachineScaleSet?: SubResource;
+}
+
+/**
+ * Indicates the target Virtual Machine ScaleSet properties upon triggering a seamless migration without downtime of the VMs via the ConvertToVirtualMachineScaleSet API.
+ */
+model DefaultVirtualMachineScaleSetInfo {
+  /**
+   *  Indicates if the the maximum capacity of the default migrated Virtual Machine Scale Set after its migration will be constrained to a limited number of VMs.
+   */
+  @visibility(Lifecycle.Read)
+  constrainedMaximumCapacity?: boolean;
+
+  /**
+   *  The default Virtual Machine ScaleSet Uri that the Availability Set will be moved to upon triggering a seamless migration via the ConvertToVirtualMachineScaleSet API.
+   */
+  @visibility(Lifecycle.Read)
+  defaultVirtualMachineScaleSet?: SubResource;
+}
+
+/**
+ * Describes the Virtual Machine Scale Set to migrate from Availability Set.
+ */
+model MigrateToVirtualMachineScaleSetInput {
+  /**
+   * Specifies information about the Virtual Machine Scale Set that the Availability Set should be migrated to. Minimum api‐version: 2024‐11‐01.
+   */
+  virtualMachineScaleSetFlexible: SubResource;
+}
+
+/**
+ * Describes the Virtual Machine Scale Set to convert from Availability Set.
+ */
+model ConvertToVirtualMachineScaleSetInput {
+  /**
+   * Specifies information about the Virtual Machine Scale Set that the Availability Set should be converted to.
+   */
+  virtualMachineScaleSetName?: string;
+}
 /**
  * Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated.
  */

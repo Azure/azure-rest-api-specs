@@ -225,7 +225,7 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineRunCommand.properties);
 
-@@clientName(LogAnalyticsOperations.exportRequestRateByInterval::parameters.body,
+@@clientName(LogAnalyticsOperationGroup.exportRequestRateByInterval::parameters.body,
   "parameters"
 );
 
@@ -282,6 +282,6 @@ using Microsoft.Compute;
 );
 @@clientName(VirtualMachines.createOrUpdate::parameters.resource, "parameters");
 
-@@clientName(LogAnalyticsOperations.exportThrottledRequests::parameters.body,
+@@clientName(LogAnalyticsOperationGroup.exportThrottledRequests::parameters.body,
   "parameters"
 );

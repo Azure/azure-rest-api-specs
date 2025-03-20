@@ -13,8 +13,8 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-interface UsageOperations {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface UsageOperationGroup {
   /**
    * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
    */
@@ -30,8 +30,8 @@ interface UsageOperations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-interface VirtualMachineSizesOperations {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface VirtualMachineSizesOperationGroup {
   /**
    * This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
    */
@@ -47,8 +47,8 @@ interface VirtualMachineSizesOperations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-interface VirtualMachineScaleSetsOperations {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface VirtualMachineScaleSetsOperationGroup {
   /**
    * Gets all the VM scale sets under the specified subscription for the specified location.
    */
@@ -64,8 +64,8 @@ interface VirtualMachineScaleSetsOperations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-interface VirtualMachinesOperations {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface VirtualMachinesOperationGroup {
   /**
    * Gets all the virtual machines under the specified subscription for the specified location.
    */
@@ -81,8 +81,8 @@ interface VirtualMachinesOperations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-interface VirtualMachineImagesEdgeZoneOperations {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface VirtualMachineImagesEdgeZoneOperationGroup {
   /**
    * Gets a list of virtual machine image publishers for the specified Azure location and edge zone.
    */
@@ -298,8 +298,8 @@ interface VirtualMachineImagesEdgeZoneOperations {
   ): ArmResponse<VirtualMachineImage> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-interface VirtualMachineImagesOperations {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface VirtualMachineImagesOperationGroup {
   /**
    * Gets a list of all virtual machine image versions for the specified edge zone
    */
@@ -458,6 +458,55 @@ interface VirtualMachineImagesOperations {
       $orderby?: string;
     }
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("VirtualMachineImages_ListWithProperties")
+  @autoRoute
+  @get
+  @action("versions")
+  listWithProperties is ArmProviderActionSync<
+    Response = VirtualMachineImagesWithPropertiesListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {
+      ...LocationParameter;
+
+      /**
+       * A valid image publisher.
+       */
+      @path
+      @segment("publishers")
+      publisherName: string;
+
+      /**
+       * A valid image publisher offer.
+       */
+      @path
+      @segment("offers")
+      offer: string;
+
+      /**
+       * A valid image SKU.
+       */
+      @path
+      @segment("skus")
+      skus: string;
+
+      /**
+       * The expand expression to apply on the operation.
+       */
+      @query("$expand")
+      $expand: Expand;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @query("$top")
+      $top?: int32;
+
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+      @query("$orderby")
+      $orderby?: string;
+    }
+  >;
   /**
    * Gets a virtual machine image.
    */
@@ -497,13 +546,13 @@ interface VirtualMachineImagesOperations {
   ): ArmResponse<VirtualMachineImage> | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-interface LogAnalyticsOperations {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface LogAnalyticsOperationGroup {
   /**
    * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   @operationId("LogAnalytics_ExportRequestRateByInterval")
   @autoRoute
   @post
@@ -519,11 +568,10 @@ interface LogAnalyticsOperations {
   /**
    * Export logs that show total throttled Api requests for this subscription in the given time window.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header"
   @operationId("LogAnalytics_ExportThrottledRequests")
   @autoRoute
-  @post
   @action("logAnalytics/apiAccess/getThrottledRequests")
   exportThrottledRequests is ComputeProviderActionAsync<
     Response = LogAnalyticsOperationResult,
@@ -535,8 +583,8 @@ interface LogAnalyticsOperations {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
-interface VirtualMachineRunCommandsOperations {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface VirtualMachineRunCommandsOperationGroup {
   /**
    * Lists all available run commands for a subscription in a location.
    */
@@ -579,6 +627,6 @@ interface VirtualMachineRunCommandsOperations {
   }> | CloudError;
 }
 
-@@doc(LogAnalyticsOperations.exportRequestRateByInterval::parameters.body,
+@@doc(LogAnalyticsOperationGroup.exportRequestRateByInterval::parameters.body,
   "Parameters supplied to the LogAnalytics getRequestRateByInterval Api."
 );
