@@ -560,13 +560,10 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Map of values to be upserted or deleted for objectIds in keys.",
+            "description": "Set of assignments to be upserted or deleted.",
             "required": true,
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/EntraAssignmentCreateOrUpdateRequest"
-              }
+              "$ref": "#/definitions/EntraAssignmentUpdateBulkRequest"
             }
           }
         ],
@@ -987,7 +984,7 @@
       }
     },
     "TeamsPhonePrincipalType": {
-      "description": "The type of Entra principal the assignment is for.",
+      "description": "The type of principal the assignment is for.",
       "enum": [
         "resourceAccount",
         "user"
@@ -1048,6 +1045,25 @@
             "type": "string"
           }
         }
+      }
+    },
+    "EntraAssignmentUpdateBulkRequest": {
+      "type": "object",
+      "description": "Map of values to be upserted or deleted for objectIds in keys.",
+      "properties": {
+        "additionalProperties": {
+          "$ref": "#/definitions/EntraAssignmentCreateOrUpdateRequest"
+        }
+      },
+      "example": {
+        "350adb03-7be9-4846-b078-35adb0d0e119": {
+          "principalType": "user",
+          "tenantId": "3f14cf17-84d5-42c2-8689-a6365c474b4e",
+          "clientIds": [
+            "07474a86-625a-452f-977b-db4e13f21260"
+          ]
+        },
+        "d7233e76-d261-46c6-94b3-39073103ae81": null
       }
     },
     "EntraAssignmentsResponse": {
