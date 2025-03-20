@@ -74,7 +74,7 @@ model LivenessSessionData {
 model LivenessSessionItem {
   @doc("The unique ID to reference this session.")
   @key("sessionId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("DateTime when this session was created.")
@@ -329,6 +329,7 @@ model CreateLivenessWithVerifySessionRequestBeforeV1_2 {
   @header("content-type")
   contentType: "multipart/form-data";
 
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Request content of liveness with verify session creation.")
   @body
   body: CreateLivenessWithVerifySessionMultipartContent;
@@ -351,7 +352,7 @@ model SessionImageStream {
 model LivenessSessionCommonData {
   @doc("The unique ID to reference this session.")
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionId: string;
 
   @doc("Bearer token to provide authentication for the Vision SDK running on a client application. This Bearer token has limited permissions to perform only the required action and expires after the TTL time. It is also auditable.")
@@ -504,6 +505,7 @@ model CreateLivenessWithVerifySessionRequest {
   @header("content-type")
   contentType: "multipart/form-data";
 
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Request content of liveness with verify session creation.")
   @body
   body: CreateLivenessWithVerifySessionContent;
