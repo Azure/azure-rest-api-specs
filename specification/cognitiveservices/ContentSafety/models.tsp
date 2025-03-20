@@ -86,6 +86,7 @@ model AnalyzeTextResult {
   @doc("The blocklist match details.")
   blocklistsMatch?: TextBlocklistMatch[];
 
+  @removed(Versions.v2024_09_01)
   @doc("Analysis result for categories.")
   categoriesAnalysis: TextCategoriesAnalysis[];
 }
@@ -100,6 +101,7 @@ model TextBlocklistMatch {
   @maxLength(64)
   blocklistItemId: string;
 
+  @removed(Versions.v2024_09_01)
   @doc("The content of the matched item.")
   @maxLength(128)
   blocklistItemText: string;
