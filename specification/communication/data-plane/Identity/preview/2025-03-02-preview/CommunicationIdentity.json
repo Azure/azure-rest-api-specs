@@ -11,7 +11,7 @@
         "tags": [
           "Identity"
         ],
-        "summary": "Create a new identity with an optional customId mapping, and optionally, an access token.",
+        "summary": "Create a new identity with an optional customId mapping, and optionally, an access token. If called again with the same customId, the returned identity will be the same as the one returned previously.",
         "operationId": "CommunicationIdentity_Create",
         "consumes": [
           "application/json"
@@ -39,8 +39,8 @@
               "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
-          "200": {
-            "description": "OK - Returns the existing identity for a customId if any.",
+          "201": {
+            "description": "Created - Returns the created identity.",
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
             }
