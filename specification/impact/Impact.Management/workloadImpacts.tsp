@@ -60,6 +60,7 @@ model WorkloadImpactProperties is ResourceProperties {
   connectivity?: Connectivity;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing use case"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   @doc("Additional fields related to impact, applicable fields per resource type are list under /impactCategories API")
   additionalProperties?: Record<unknown>;
 
