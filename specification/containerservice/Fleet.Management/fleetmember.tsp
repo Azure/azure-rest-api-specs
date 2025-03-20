@@ -25,6 +25,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
   name: string;
 
   ...EntityTagProperty;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
 
 scalar ClusterResourceId
