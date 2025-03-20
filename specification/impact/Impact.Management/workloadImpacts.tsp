@@ -61,7 +61,7 @@ model WorkloadImpactProperties is ResourceProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
   @doc("Additional fields related to impact, applicable fields per resource type are list under /impactCategories API")
-  additionalProperties?: {};
+  additionalProperties?: Record<unknown>;
 
   @doc("ARM error code and error message associated with the impact")
   errorDetails?: ErrorDetailProperties;
