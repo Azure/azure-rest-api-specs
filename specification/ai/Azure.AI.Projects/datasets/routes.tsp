@@ -18,7 +18,7 @@ namespace Azure.AI.Projects;
 alias ListDatasetVersionsParameters = {
   @doc("Please choose OrderBy value from ['createdtime', 'modifiedtime']")
   @query("$orderBy")
-  $orderBy?: string;
+  $orderBy?: OrderBy;
 
   @doc("Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned")
   @query("$top")
