@@ -225,36 +225,9 @@ class TspConfigTsOptionMigrationSubRuleBase extends TspconfigEmitterOptionsSubRu
   }
 }
 
-export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
-  constructor() {
-    super("generateMetadata", "generate-metadata", true);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspConfigTsOptionMigrationSubRuleBase {
-  constructor() {
-    super("hierarchyClient", "hierarchy-client", false);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
 export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
     super("experimentalExtensibleEnums", "experimental-extensible-enums", true);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
-  constructor() {
-    super("enableOperationGroup", "enable-operation-group", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -457,10 +430,7 @@ export class TspConfigCsharpMgmtPackageDirectorySubRule extends TspconfigEmitter
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
-  new TspConfigTsMgmtModularGenerateMetadataTrueSubRule(),
-  new TspConfigTsMgmtModularHierarchyClientFalseSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
-  new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
