@@ -3201,7 +3201,7 @@
           "description": "Neon Organization properties"
         },
         "projectProperties": {
-          "$ref": "#/definitions/Models.ProjectProperties",
+          "$ref": "#/definitions/Models.ProjectPropertiesUpdate",
           "description": "Neon Project Properties"
         }
       }
@@ -3682,6 +3682,42 @@
         }
       }
     },
+    "Models.DefaultEndpointSettings": {
+      "type": "object",
+      "description": "Default Endpoint Settings for the project.",
+      "properties": {
+        "autoscalingLimitMinCu": {
+          "type": "number",
+          "format": "float",
+          "description": "Minimum compute units for autoscaling."
+        },
+        "autoscalingLimitMaxCu": {
+          "type": "number",
+          "format": "float",
+          "description": "Maximum compute units for autoscaling."
+        }
+      },
+      "required": [
+        "autoscalingLimitMinCu",
+        "autoscalingLimitMaxCu"
+      ]
+    },
+    "Models.DefaultEndpointSettingsUpdate": {
+      "type": "object",
+      "description": "Default Endpoint Settings for the project.",
+      "properties": {
+        "autoscalingLimitMinCu": {
+          "type": "number",
+          "format": "float",
+          "description": "Minimum compute units for autoscaling."
+        },
+        "autoscalingLimitMaxCu": {
+          "type": "number",
+          "format": "float",
+          "description": "Maximum compute units for autoscaling."
+        }
+      }
+    },
     "Models.Endpoint": {
       "type": "object",
       "description": "The Neon compute endpoint resource type.",
@@ -3981,6 +4017,85 @@
           "format": "int32",
           "description": "Postgres version for the project"
         },
+        "historyRetention": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The retention period for project history in seconds."
+        },
+        "defaultEndpointSettings": {
+          "$ref": "#/definitions/Models.DefaultEndpointSettings",
+          "description": "Default endpoint settings for the project."
+        },
+        "branch": {
+          "$ref": "#/definitions/Models.BranchProperties",
+          "description": "The Branch properties of the project. This is optional"
+        },
+        "roles": {
+          "type": "array",
+          "description": "Roles associated with the project",
+          "items": {
+            "$ref": "#/definitions/Models.NeonRoleProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "databases": {
+          "type": "array",
+          "description": "Neon Databases associated with the project",
+          "items": {
+            "$ref": "#/definitions/Models.NeonDatabaseProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Endpoints associated with the project",
+          "items": {
+            "$ref": "#/definitions/Models.EndpointProperties"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Models.ProjectPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties specific to Project",
+      "properties": {
+        "entityName": {
+          "type": "string",
+          "description": "Name of the resource",
+          "pattern": "^\\S.{0,62}\\S$|^\\S$"
+        },
+        "attributes": {
+          "type": "array",
+          "description": "Additional attributes for the entity",
+          "items": {
+            "$ref": "#/definitions/Models.Attributes"
+          },
+          "x-ms-identifiers": []
+        },
+        "regionId": {
+          "type": "string",
+          "description": "Region where the project is created"
+        },
+        "storage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Data Storage bytes per hour for the project"
+        },
+        "pgVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Postgres version for the project"
+        },
+        "historyRetention": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The retention period for project history in seconds."
+        },
+        "defaultEndpointSettings": {
+          "$ref": "#/definitions/Models.DefaultEndpointSettingsUpdate",
+          "description": "Default endpoint settings for the project."
+        },
         "branch": {
           "$ref": "#/definitions/Models.BranchProperties",
           "description": "The Branch properties of the project. This is optional"
@@ -4205,7 +4320,7 @@
       "description": "The Project resource type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/Models.ProjectProperties",
+          "$ref": "#/definitions/Models.ProjectPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
       },

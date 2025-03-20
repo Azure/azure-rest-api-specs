@@ -21,6 +21,16 @@ model Project is ProxyResource<ProjectProperties> {
   >;
 }
 
+@doc("Default Endpoint Settings for the project.")
+@added(Neon.Postgres.Versions.v2_preview)
+model DefaultEndpointSettings {
+  @doc("Minimum compute units for autoscaling.")
+  autoscalingLimitMinCu: float32;
+
+  @doc("Maximum compute units for autoscaling.")
+  autoscalingLimitMaxCu: float32;
+}
+
 @doc("Properties specific to Project")
 @added(Neon.Postgres.Versions.v2_preview)
 model ProjectProperties {
@@ -34,6 +44,12 @@ model ProjectProperties {
 
   @doc("Postgres version for the project")
   pgVersion?: int32;
+
+  @doc("The retention period for project history in seconds.")
+  historyRetention?: int32;
+
+  @doc("Default endpoint settings for the project.")
+  defaultEndpointSettings?: DefaultEndpointSettings;
 
   @doc("The Branch properties of the project. This is optional")
   branch?: BranchProperties;
