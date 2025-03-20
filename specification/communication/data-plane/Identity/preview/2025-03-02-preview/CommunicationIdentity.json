@@ -36,7 +36,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "201": {
@@ -85,7 +85,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -123,7 +123,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -166,7 +166,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -185,7 +185,7 @@
         "tags": [
           "TeamsUser"
         ],
-        "summary": "Exchange an Azure Active Directory (Azure AD) access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
+        "summary": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
         "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
         "consumes": [
           "application/json"
@@ -211,7 +211,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -266,7 +266,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -314,7 +314,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -364,7 +364,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -424,7 +424,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -478,7 +478,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -523,7 +523,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -571,7 +571,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -612,7 +612,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -655,7 +655,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -708,7 +708,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -755,7 +755,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -789,7 +789,6 @@
         },
         "id": {
           "description": "Identifier of the identity.",
-          "minLength": 1,
           "type": "string"
         }
       }
@@ -804,7 +803,6 @@
       "properties": {
         "token": {
           "description": "The access token issued for the identity.",
-          "minLength": 1,
           "type": "string"
         },
         "expiresOn": {
@@ -925,18 +923,15 @@
       "type": "object",
       "properties": {
         "token": {
-          "description": "Azure AD access token of a Teams User to acquire a new Communication Identity access token.",
-          "minLength": 1,
+          "description": "Entra ID access token of a Teams User to acquire a new Communication Identity access token.",
           "type": "string"
         },
         "appId": {
-          "description": "Client ID of an Azure AD application to be verified against the appid claim in the Azure AD access token.",
-          "minLength": 1,
+          "description": "Client ID of an Entra ID application to be verified against the appid claim in the Entra ID access token.",
           "type": "string"
         },
         "userId": {
-          "description": "Object ID of an Azure AD user (Teams User) to be verified against the oid claim in the Azure AD access token.",
-          "minLength": 1,
+          "description": "Object ID of an Entra ID user (Teams User) to be verified against the oid claim in the Entra ID access token.",
           "type": "string"
         }
       }
@@ -1096,9 +1091,6 @@
         "name": "EntraPrincipalType",
         "modelAsString": true
       }
-    },
-    "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
     }
   },
   "parameters": {
