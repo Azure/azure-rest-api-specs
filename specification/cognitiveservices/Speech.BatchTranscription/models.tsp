@@ -93,7 +93,7 @@ model TranscriptionJob {
 
   @doc("The status of the object")
   @visibility(Lifecycle.Read)
-  status: JobStatus;
+  status: TranscriptionStatus;
 
   @visibility(Lifecycle.Read)
   @doc("The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
@@ -139,7 +139,7 @@ model TranscriptionProperties {
 
 @doc("Describe the current state of the API.")
 @lroStatus
-union JobStatus {
+union TranscriptionStatus {
   @doc("The long running operation has not yet started.")
   NotStarted: "NotStarted",
 

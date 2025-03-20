@@ -19,18 +19,13 @@ alias CustomOperations = CustomResourceOperations<ServiceTraits>;
 #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "This is an existing service, we have a non-conforming operation."
 @post
 @route("/transcriptions:submit")
-@doc("Submits a new transcription job.")
-op submitTranscription is CustomOperations.ResourceCreate<TranscriptionJob>;
+@doc("Starts a new transcription job.")
+op startTranscription is CustomOperations.ResourceCreate<TranscriptionJob>;
 
 @get
 @sharedRoute
 @doc("Gets the transcription identified by the given ID.")
 op getTranscription is Operations.ResourceRead<TranscriptionJob>;
-
-@patch
-@doc("Updates the mutable details of the transcription identified by its ID.")
-@sharedRoute
-op patchTranscription is Operations.ResourceUpdate<TranscriptionJob>;
 
 @delete
 @doc("Deletes the specified transcription task.")

@@ -16,3 +16,6 @@ namespace Azure.Ai.Speech.BatchTranscription;
 @@clientName(TranscriptionProperties.languageIdentification,
   "languageIdentificationProperties"
 );
+@@clientName(TranscriptionJob.contentContainerUrl, "sourceContainerUrl");
+@@clientName(TranscriptionJob.createdDateTime, "created");
+@@clientName(TranscriptionFile.createdDateTime, "created");

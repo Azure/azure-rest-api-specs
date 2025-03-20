@@ -6,8 +6,5 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.Ai.Speech.Transcription;
 
-@@clientName(Phrase, "TranscribedPhrase");
-@@clientName(Word, "TranscribedWord");
-@@clientName(TranscribeDefinition, "TranscribeConfig");
-@@clientName(TranscribeDefinition.diarization, "diarizationProperties");
-@@clientName(TranscribeDefinition.channels, "activeChannels");
+@@clientName(TranscriptionOptions.diarization, "diarizationProperties");
+@@clientName(TranscriptionOptions.channels, "activeChannels");

@@ -18,8 +18,8 @@ union ProfanityFilterMode {
 }
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Support streaming input files"
-@doc("Metadata for a fast transcription request.")
-model TranscribeDefinition {
+@doc("Metadata for a transcription request.")
+model TranscriptionOptions {
   @doc("A list of possible locales for the transcription. If not specified, the locale of the speech in the audio is detected automatically from all supported locales.")
   locales?: Array<string>;
 
@@ -30,14 +30,14 @@ model TranscribeDefinition {
   profanityFilterMode?: ProfanityFilterMode;
 
   @doc("Mode of diarization.")
-  diarization?: TranscribeDiarizationProperties;
+  diarization?: TranscriptionDiarizationOptions;
 
   @doc("The 0-based indices of the channels to be transcribed separately. If not specified, multiple channels are merged and transcribed jointly. Only up to two channels are supported.")
   channels?: Array<int32>;
 }
 
 @doc("The Speaker Identification settings. Diarization settings must be specified to enable speaker identification.")
-model TranscribeDiarizationProperties {
+model TranscriptionDiarizationOptions {
   @doc("Gets or sets a value indicating whether speaker diarization is enabled.")
   enabled?: boolean;
 
@@ -48,7 +48,7 @@ model TranscribeDiarizationProperties {
 }
 
 @doc("The result of the transcribe operation.")
-model TranscribeResult {
+model TranscriptionResult {
   @doc("The duration of the audio in milliseconds.")
   durationMilliseconds: int32;
 
@@ -56,7 +56,7 @@ model TranscribeResult {
   combinedPhrases: Array<ChannelCombinedPhrases>;
 
   @doc("The transcription results segmented into phrases.")
-  phrases: Array<Phrase>;
+  phrases: Array<TranscribedPhrase>;
 }
 
 @doc("The full transcript per channel.")
@@ -68,7 +68,7 @@ model ChannelCombinedPhrases {
 }
 
 @doc("A transcribed phrase.")
-model Phrase {
+model TranscribedPhrase {
   @doc("The 0-based channel index. Only present if channel separation is enabled.")
   channel?: int32;
 
@@ -84,14 +84,14 @@ model Phrase {
   @doc("The transcribed text of the phrase.") text: string;
 
   @doc("The words that make up the phrase. Only present if word-level timestamps are enabled.")
-  words?: Array<Word>;
+  words?: Array<TranscribedWord>;
 
   @doc("The locale of the phrase.") locale?: string;
   @doc("The confidence value for the phrase.") confidence: float32;
 }
 
 @doc("Time-stamped word in the display form.")
-model Word {
+model TranscribedWord {
   @doc("The recognized word, including punctuation.") text: string;
 
   @doc("The start offset of the word in milliseconds.")
