@@ -80,7 +80,7 @@ model EvaluationMetric {
   properties?: Record<string>;
 }
 
-@doc("Safety Evaluation Output")
+@doc("Safety Evaluation Type")
 enum SafetyEvaluationType {
   ContentSafety: "content safety",
   Groundedness: "groundedness",
@@ -92,7 +92,7 @@ enum SafetyEvaluationType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
-@doc("Safety Evaluation Output")
+@doc("Safety Evaluation")
 model SafetyEvaluation {
   @doc("Identifier of the evaluation.")
   @key("name")
@@ -105,7 +105,7 @@ model SafetyEvaluation {
   @doc("The metrics to evaluate.")
   metrics?: Array<string>;
 
-  @doc("List of sources.")
+  @doc("The safety evaluation version (aka prompt version).")
   version: string;
 
   @doc("The collection of context messages associated with this chat completions that need to be evaluated.")
