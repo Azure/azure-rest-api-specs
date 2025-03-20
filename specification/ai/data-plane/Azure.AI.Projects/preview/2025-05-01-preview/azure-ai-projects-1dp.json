@@ -573,7 +573,27 @@
             "in": "query",
             "description": "Please choose OrderBy value from ['createdtime', 'modifiedtime']",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "createdtime",
+              "modifiedtime"
+            ],
+            "x-ms-enum": {
+              "name": "OrderBy",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CreatedTime",
+                  "value": "createdtime",
+                  "description": "Order by created time"
+                },
+                {
+                  "name": "ModifiedTime",
+                  "value": "modifiedtime",
+                  "description": "Order by modified time."
+                }
+              ]
+            }
           },
           {
             "name": "$top",
@@ -1603,14 +1623,27 @@
             "in": "query",
             "description": "Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].",
             "required": false,
-            "type": "string"
-          },
-          {
-            "name": "orderby",
-            "in": "query",
-            "description": "Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].",
-            "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "createdtime",
+              "modifiedtime"
+            ],
+            "x-ms-enum": {
+              "name": "OrderBy",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CreatedTime",
+                  "value": "createdtime",
+                  "description": "Order by created time"
+                },
+                {
+                  "name": "ModifiedTime",
+                  "value": "modifiedtime",
+                  "description": "Order by modified time."
+                }
+              ]
+            }
           },
           {
             "name": "tags",
@@ -10296,6 +10329,30 @@
             "name": "assistant",
             "value": "assistant",
             "description": "The role representing the assistant."
+          }
+        ]
+      }
+    },
+    "OrderBy": {
+      "type": "string",
+      "description": "List order options",
+      "enum": [
+        "createdtime",
+        "modifiedtime"
+      ],
+      "x-ms-enum": {
+        "name": "OrderBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CreatedTime",
+            "value": "createdtime",
+            "description": "Order by created time"
+          },
+          {
+            "name": "ModifiedTime",
+            "value": "modifiedtime",
+            "description": "Order by modified time."
           }
         ]
       }
