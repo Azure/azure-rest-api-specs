@@ -592,7 +592,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -603,7 +603,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
+          "nextLinkName": null,
           "itemName": "value"
         }
       }
@@ -675,10 +675,10 @@
             "$ref": "#/parameters/FluidRelayServerName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -688,8 +688,11 @@
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
             "headers": {
               "Location": {
                 "type": "string",
@@ -704,7 +707,8 @@
             "description": "Error in operation.",
             "x-ms-error-response": true
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "FluidRelayPrivateEndpoint_DeletePrivateEndpointConnections",
@@ -735,9 +739,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -757,10 +758,11 @@
             "description": "Error in operation.",
             "x-ms-error-response": true
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}/privateLinkResources": {
       "get": {
         "operationId": "FluidRelayPrivateEndpoint_ListPrivateLinkResources",
         "tags": [
@@ -790,7 +792,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -802,12 +804,12 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink",
+          "nextLinkName": null,
           "itemName": "value"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}/privateLinkResources/{privateLinkResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FluidRelay/fluidRelayServers/{fluidRelayServerName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "operationId": "FluidRelayPrivateEndpoint_GetPrivateLinkResource",
         "tags": [
@@ -837,7 +839,8 @@
             "in": "path",
             "description": "The name of the private link resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.{1,50}$"
           }
         ],
         "responses": {
@@ -1308,6 +1311,39 @@
         }
       },
       "description": "The Fluid Relay endpoints for this server"
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The array of all private link resources",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A link to the next page of results, if any."
+        }
+      },
+      "description": "List of all private link resources"
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "A link to the next page of results, if any."
+        }
+      }
     }
   },
   "parameters": {
