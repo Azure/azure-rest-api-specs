@@ -44,8 +44,7 @@ interface Workspaces {
   /**
    * Updates an existing Workspace's tags.
    */
-  @parameterVisibility
-  updateTags is ArmCustomPatchSync<QuantumWorkspace, PatchModel = TagsObject>;
+  updateTags is ArmTagsPatchSync<QuantumWorkspace>;
 
   /**
    * Deletes a Workspace resource.

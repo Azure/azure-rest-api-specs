@@ -293,7 +293,7 @@ op encrypt is KeyVaultOperation<
 >;
 
 /**
- * The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission. Microsoft recommends not to use CBC algorithms for decryption without first ensuring the integrity of the ciphertext using an HMAC, for example. See https://docs.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode for more information.
+ * The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission. Microsoft recommends not to use CBC algorithms for decryption without first ensuring the integrity of the ciphertext using an HMAC, for example. See https://learn.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode for more information.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
@@ -648,4 +648,34 @@ op getRandomBytes is KeyVaultOperation<
     parameters: GetRandomBytesRequest;
   },
   RandomBytes
+>;
+
+/**
+ * The get key attestation operation returns the key along with its attestation blob. This operation requires the keys/get permission.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
+@Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
+@summary("Gets the public part of a stored key along with its attestation blob.")
+@route("/keys/{key-name}/{key-version}/attestation")
+@get
+op getKeyAttestation is KeyVaultOperation<
+  {
+    /**
+     * The name of the key to retrieve attestation for.
+     */
+    @path("key-name")
+    @clientName("name", "go")
+    keyName: string;
+
+    /**
+     * Adding the version parameter retrieves attestation blob for specific version of a key. This URI fragment is optional. If not specified, the latest version of the key attestation blob is returned.
+     */
+    @path("key-version")
+    @clientName("version", "go")
+    keyVersion: string;
+  },
+  /**
+   * A key bundle containing the key, its attributes and attestation blob.
+   */
+  KeyBundle
 >;

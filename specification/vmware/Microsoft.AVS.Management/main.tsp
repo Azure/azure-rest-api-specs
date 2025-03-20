@@ -39,9 +39,7 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
 @armProviderNamespace("Microsoft.AVS")
-@service({
-  title: "Azure VMware Solution API",
-})
+@service(#{ title: "Azure VMware Solution API" })
 @doc("Azure VMware Solution API")
 @versioned(Versions)
 namespace Microsoft.AVS;

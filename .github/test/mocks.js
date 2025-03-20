@@ -1,9 +1,14 @@
+// @ts-check
+
 import { vi } from "vitest";
 
-// Partial mock of `core` parameter passed into to github-script actions
-export function createMockCore() {
+/**
+ * @returns {import('../src/types.js').ILogger}
+ */
+export function createMockLogger() {
   return {
-    debug: vi.fn(console.debug),
-    info: vi.fn(console.log),
+    debug: vi.fn(),
+    info: vi.fn(),
+    isDebug: vi.fn().mockReturnValue(false),
   };
 }
