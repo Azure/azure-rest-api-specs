@@ -1,0 +1,157 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "routeName": "route1",
+    "routeUpdateProperties": {
+      "properties": {
+        "routeLayer": "Layer4",
+        "customDomains": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+          }
+        ],
+        "originGroup": {
+          "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+        },
+        "originPath": null,
+        "ruleSets": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+          }
+        ],
+        "supportedProtocols": [
+          "TCP"
+        ],
+        "patternsToMatch": [
+          "/*"
+        ],
+        "cacheConfiguration": {
+          "compressionSettings": {
+            "contentTypesToCompress": [
+              "text/html",
+              "application/octet-stream"
+            ],
+            "isCompressionEnabled": true
+          },
+          "queryStringCachingBehavior": "IgnoreQueryString"
+        },
+        "forwardingProtocol": "MatchRequest",
+        "frontEndPorts": [
+          "8080", "8081-8085", "8087"
+        ],
+        "linkToDefaultDomain": "Enabled",
+        "httpsRedirect": "Enabled",
+        "enabledState": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "route1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/routes/route1",
+        "type": "Microsoft.Cdn/profiles/afdendpoints/routes",
+        "properties": {
+          "routeLayer": "Layer4",
+          "customDomains": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+            }
+          ],
+          "originGroup": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+          },
+          "originPath": null,
+          "ruleSets": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+            }
+          ],
+          "supportedProtocols": [
+            "TCP"
+          ],
+          "patternsToMatch": [
+            "/*"
+          ],
+          "cacheConfiguration": {
+            "compressionSettings": {
+              "contentTypesToCompress": [
+                "text/html",
+                "application/octet-stream"
+              ],
+              "isCompressionEnabled": true
+            },
+            "queryStringCachingBehavior": "IgnoreQueryString",
+            "queryParameters": null
+          },
+          "forwardingProtocol": "MatchRequest",
+          "frontEndPorts": [
+            "8080", "8081-8085", "8087"
+          ],
+          "linkToDefaultDomain": "Enabled",
+          "httpsRedirect": "Enabled",
+          "enabledState": "Enabled",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2023-06-15-preview"
+      },
+      "body": {
+        "name": "route1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/routes/route1",
+        "type": "Microsoft.Cdn/profiles/afdendpoints/routes",
+        "properties": {
+          "routeLayer": "Layer4",
+          "customDomains": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+            }
+          ],
+          "originGroup": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+          },
+          "originPath": null,
+          "ruleSets": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+            }
+          ],
+          "supportedProtocols": [
+            "TCP"
+          ],
+          "patternsToMatch": [
+            "/*"
+          ],
+          "cacheConfiguration": {
+            "compressionSettings": {
+              "contentTypesToCompress": [
+                "text/html",
+                "application/octet-stream"
+              ],
+              "isCompressionEnabled": true
+            },
+            "queryStringCachingBehavior": "IgnoreQueryString",
+            "queryParameters": null
+          },
+          "forwardingProtocol": "MatchRequest",
+          "frontEndPorts": [
+            "8080", "8081-8085", "8087"
+          ],
+          "linkToDefaultDomain": "Enabled",
+          "httpsRedirect": "Enabled",
+          "enabledState": "Enabled",
+          "provisioningState": "Updating",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}
