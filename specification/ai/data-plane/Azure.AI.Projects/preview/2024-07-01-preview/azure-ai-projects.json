@@ -3960,7 +3960,7 @@
         "code_interpreter",
         "file_search",
         "bing_grounding",
-        "fabric_aiskill",
+        "fabric_dataagent",
         "sharepoint_grounding",
         "azure_ai_search"
       ],
@@ -3990,8 +3990,8 @@
           },
           {
             "name": "microsoftFabric",
-            "value": "fabric_aiskill",
-            "description": "Tool type `fabric_aiskill`"
+            "value": "fabric_dataagent",
+            "description": "Tool type `fabric_dataagent`"
           },
           {
             "name": "sharepoint",
@@ -5772,20 +5772,20 @@
       "type": "object",
       "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
       "properties": {
-        "fabric_aiskill": {
+        "fabric_dataagent": {
           "$ref": "#/definitions/Agents.ToolConnectionList",
           "description": "The list of connections used by the Microsoft Fabric tool."
         }
       },
       "required": [
-        "fabric_aiskill"
+        "fabric_dataagent"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.ToolDefinition"
         }
       ],
-      "x-ms-discriminator-value": "fabric_aiskill"
+      "x-ms-discriminator-value": "fabric_dataagent"
     },
     "Agents.OpenAIFile": {
       "type": "object",
@@ -7076,7 +7076,7 @@
       "type": "object",
       "description": "A record of a call to a Microsoft Fabric tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Microsoft Fabric operations.",
       "properties": {
-        "fabric_aiskill": {
+        "fabric_dataagent": {
           "type": "object",
           "description": "Reserved for future use.",
           "additionalProperties": {
@@ -7086,14 +7086,14 @@
         }
       },
       "required": [
-        "fabric_aiskill"
+        "fabric_dataagent"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Agents.RunStepToolCall"
         }
       ],
-      "x-ms-discriminator-value": "fabric_aiskill"
+      "x-ms-discriminator-value": "fabric_dataagent"
     },
     "Agents.RunStepSharepointToolCall": {
       "type": "object",
@@ -7858,7 +7858,7 @@
     },
     "Agents.ToolConnectionList": {
       "type": "object",
-      "description": "A set of connection resources currently used by either the `bing_grounding`, `fabric_aiskill`, or `sharepoint_grounding` tools.",
+      "description": "A set of connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools.",
       "properties": {
         "connections": {
           "type": "array",
