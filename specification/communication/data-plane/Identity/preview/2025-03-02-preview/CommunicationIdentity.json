@@ -334,7 +334,7 @@
     "/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}": {
       "get": {
         "tags": [
-          "TeamsExtensionAccess"
+          "TeamsExtension"
         ],
         "summary": "Get Teams Phone access assignment by object id.",
         "operationId": "TeamsExtensionAssignment_Get",
@@ -382,7 +382,7 @@
       },
       "put": {
         "tags": [
-          "TeamsExtensionAccess"
+          "TeamsExtension"
         ],
         "summary": "Creates or replaces a Teams Phone access assignment.",
         "operationId": "TeamsExtensionAssignment_Upsert",
@@ -448,7 +448,7 @@
       },
       "delete": {
         "tags": [
-          "TeamsExtensionAccess"
+          "TeamsExtension"
         ],
         "summary": "Removes a Teams Phone access assignment.",
         "operationId": "TeamsExtensionAssignment_Delete",
@@ -543,9 +543,9 @@
     "/access/entra/assignments": {
       "patch": {
         "tags": [
-          "EntraIdAccess"
+          "EntraId"
         ],
-        "summary": "Updates Entra access assignments.",
+        "summary": "Updates Entra access assignments in bulk.",
         "operationId": "EntraIdAssignments_Update",
         "consumes": [
           "application/merge-patch+json"
@@ -560,7 +560,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Map of values to be updated for objectIds in keys. AcsResourceId is taken from authentication.",
+            "description": "Map of values to be upserted or deleted for objectIds in keys.",
             "required": true,
             "schema": {
               "type": "object",
@@ -595,7 +595,7 @@
       },
       "get": {
         "tags": [
-          "EntraIdAccess"
+          "EntraId"
         ],
         "summary": "Lists Entra access assignments.",
         "operationId": "EntraIdAssignments_List",
@@ -603,12 +603,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "query",
-            "name": "nextLink",
-            "description": "If not empty, continue from previous query.",
-            "type": "string"
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -637,7 +631,7 @@
     "/access/entra/assignments/{objectId}": {
       "get": {
         "tags": [
-          "EntraIdAccess"
+          "EntraId"
         ],
         "summary": "Get Entra access assignment by object id.",
         "operationId": "EntraIdAssignment_Get",
@@ -678,7 +672,7 @@
       },
       "put": {
         "tags": [
-          "EntraIdAccess"
+          "EntraId"
         ],
         "summary": "Creates or replaces an Entra access assignment.",
         "operationId": "EntraIdAssignment_Upsert",
@@ -737,7 +731,7 @@
       },
       "delete": {
         "tags": [
-          "EntraIdAccess"
+          "EntraId"
         ],
         "summary": "Removes an Entra access assignment.",
         "operationId": "EntraIdAssignment_Delete",
@@ -1012,7 +1006,8 @@
       "required": [
         "objectId",
         "principalType",
-        "tenantId"
+        "tenantId",
+        "clientIds"
       ],
       "type": "object",
       "properties": {
@@ -1036,7 +1031,8 @@
     "EntraAssignmentCreateOrUpdateRequest": {
       "required": [
         "principalType",
-        "tenantId"
+        "tenantId",
+        "clientIds"
       ],
       "type": "object",
       "properties": {
@@ -1073,7 +1069,6 @@
     },
     "EntraPrincipalType": {
       "enum": [
-        "teamsResourceAccount",
         "user",
         "group",
         "tenant"
@@ -1083,6 +1078,9 @@
         "name": "EntraPrincipalType",
         "modelAsString": true
       }
+    },
+    "CommunicationErrorResponse": {
+      "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
     }
   },
   "parameters": {
