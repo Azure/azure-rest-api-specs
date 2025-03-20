@@ -1,5 +1,8 @@
 emit:
   - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/dependencymap"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -9,14 +12,12 @@ options:
     arm-resource-flattening: true
     version-enum-strategy: true
   "@azure-tools/typespec-csharp":
-    service-dir: "sdk/resourcemanager/dependencymap"
     flavor: azure
     package-dir: "Azure.ResourceManager.DependencyMap"
     clear-output-folder: true
     model-namespace: false
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
-    service-dir: "sdk/resourcemanager/dependencymap"
     package-dir: "azure-mgmt-dependencymap"
     package-name: "{package-dir}"
     generate-test: true
@@ -24,14 +25,12 @@ options:
     examples-dir: "{project-root}/examples"
     flavor: "azure"
   "@azure-tools/typespec-java":
-    service-dir: "sdk/resourcemanager/dependencymap"
     package-dir: "azure-resourcemanager-dependencymap"
     namespace: "com.azure.resourcemanager.dependencymap"
     service-name: "dependencymap"
     examples-directory: "{project-root}/examples"
     flavor: azure
   "@azure-tools/typespec-ts":
-    service-dir: "sdk/resourcemanager/dependencymap"
     package-dir: "arm-dependencymap"
     azureSdkForJs: true
     isModularLibrary: true
