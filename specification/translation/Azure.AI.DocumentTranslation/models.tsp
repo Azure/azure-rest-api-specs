@@ -274,7 +274,7 @@ model TranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""
@@ -308,7 +308,7 @@ model InnerTranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""

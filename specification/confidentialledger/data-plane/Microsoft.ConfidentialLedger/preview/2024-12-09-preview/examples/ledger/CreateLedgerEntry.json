@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2024-12-09-preview",
+    "ledgerUri": "myledger.confidentialledger.azure.com",
+    "entry": {
+      "contents": "New ledger entry contents.",
+      "preHooks": [
+        {
+          "functionId": "myFunction1",
+          "properties": {
+            "arguments": [
+              "arg1",
+              "arg2"
+            ],
+            "exportedFunctionName": "main",
+            "runtimeOptions": {
+              "log_exception_details": true,
+              "max_cached_interpreters": 0,
+              "max_execution_time_ms": 0,
+              "max_heap_bytes": 0,
+              "max_stack_bytes": 0,
+              "return_exception_details": true
+            }
+          }
+        }
+      ],
+      "postHooks": [
+        {
+          "functionId": "myFunction2",
+          "properties": {
+            "arguments": [
+              "arg3",
+              "arg4"
+            ],
+            "exportedFunctionName": "main",
+            "runtimeOptions": {
+              "log_exception_details": true,
+              "max_cached_interpreters": 0,
+              "max_execution_time_ms": 0,
+              "max_heap_bytes": 0,
+              "max_stack_bytes": 0,
+              "return_exception_details": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-ccf-transaction-id": "2.15"
+      },
+      "body": {
+        "collectionId": "subledger:0"
+      }
+    }
+  }
+}

@@ -55,7 +55,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -422,7 +422,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -582,7 +582,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -748,7 +748,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -890,7 +890,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -1142,7 +1142,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -1225,7 +1225,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -1358,6 +1358,7 @@ components:
           enum:
             - text
             - json_object
+            - json_schema
       description: Possible API response formats.
     Assistant:
       type: object
@@ -1627,15 +1628,35 @@ components:
       description: The details used to create a new assistant thread.
     AssistantsApiResponseFormat:
       type: object
+      required:
+        - type
       properties:
         type:
           allOf:
             - $ref: '#/components/schemas/ApiResponseFormat'
-          description: Must be one of `text` or `json_object`.
+          description: Must be one of `text`, `json_object` or `json_schema` .
           default: text
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/AssistantsApiResponseFormatText'
+          json_object: '#/components/schemas/AssistantsApiResponseFormatJsonObject'
       description: |-
         An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.
         If `text` the model can return text or any value needed.
+    AssistantsApiResponseFormatJsonObject:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - json_object
+          description: 'The type of response format being defined: `json_object`'
+      allOf:
+        - $ref: '#/components/schemas/AssistantsApiResponseFormat'
+      description: An object describing expected output of the model as a JSON object.
     AssistantsApiResponseFormatMode:
       anyOf:
         - type: string
@@ -1650,14 +1671,30 @@ components:
         - $ref: '#/components/schemas/AssistantsApiResponseFormatMode'
         - $ref: '#/components/schemas/AssistantsApiResponseFormat'
       description: |-
-        Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+        Specifies the format that the model must output. Compatible with GPT-4o, GPT-4 Turbo, and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
 
-        Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
+        Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON
+        schema. Learn more in the Structured Outputs guide.
+
+        Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
 
         **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message.
         Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit,
         resulting in a long-running and seemingly "stuck" request. Also note that the message content may be partially cut off
         if `finish_reason="length"`, which indicates the generation exceeded `max_tokens` or the conversation exceeded the max context length.
+    AssistantsApiResponseFormatText:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+          description: 'The type of response format being defined: `text`'
+      allOf:
+        - $ref: '#/components/schemas/AssistantsApiResponseFormat'
+      description: An object describing expected output of the model as text.
     AssistantsApiToolChoiceOption:
       anyOf:
         - type: string
@@ -3279,7 +3316,7 @@ components:
           type: object
           additionalProperties:
             type: string
-          description: Reserved for future use.
+          description: The results of the file search.
       allOf:
         - $ref: '#/components/schemas/RunStepToolCall'
       description: |-
@@ -3443,6 +3480,7 @@ components:
         - 2024-07-01-preview
         - 2024-09-01-preview
         - 2024-10-01-preview
+        - 2025-01-01-preview
       description: The known set of supported API versions.
     SubmitToolOutputsAction:
       type: object

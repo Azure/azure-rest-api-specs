@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -75,7 +73,7 @@ model AwsEc2InstanceStatusProperties {
   availabilityZone?: string;
 
   @doc("<p>Any scheduled events associated with the instance.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   events?: InstanceStatusEvent[];
 
   @doc("<p>The ID of the instance.</p>")
@@ -202,7 +200,7 @@ model InstanceStateNameEnumValue {
 @doc("Definition of InstanceStatusSummary")
 model InstanceStatusSummary {
   @doc("<p>The system instance health or application instance health.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   details?: InstanceStatusDetails[];
 
   @doc("<p>The status.</p>")

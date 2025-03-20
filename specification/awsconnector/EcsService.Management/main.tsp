@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -72,7 +70,7 @@ model EcsServiceProperties {
 @doc("Definition of awsEcsService")
 model AwsEcsServiceProperties {
   @doc("The capacity provider strategy to use for the service. If a ``capacityProviderStrategy`` is specified, the ``launchType`` parameter must be omitted. If no ``capacityProviderStrategy`` or ``launchType`` is specified, the ``defaultCapacityProviderStrategy`` for the cluster is used. A capacity provider strategy may contain a maximum of 6 capacity providers.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   capacityProviderStrategy?: CapacityProviderStrategyItem[];
 
   @doc("The short name or full Amazon Resource Name (ARN) of the cluster that you run your service on. If you do not specify a cluster, the default cluster is assumed.")
@@ -100,7 +98,7 @@ model AwsEcsServiceProperties {
   launchType?: LaunchType;
 
   @doc("A list of load balancer objects to associate with the service. If you specify the ``Role`` property, ``LoadBalancers`` must be specified as well. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the *Amazon Elastic Container Service Developer Guide*.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   loadBalancers?: LoadBalancer[];
 
   @doc("Property name")
@@ -110,11 +108,11 @@ model AwsEcsServiceProperties {
   networkConfiguration?: NetworkConfiguration;
 
   @doc("An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints for each task. This limit includes constraints in the task definition and those specified at runtime.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   placementConstraints?: PlacementConstraint[];
 
   @doc("The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules for each service.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   placementStrategies?: PlacementStrategy[];
 
   @doc("The platform version that your tasks in the service are running on. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the ``LATEST`` platform version is used. For more information, see [platform versions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html) in the *Amazon Elastic Container Service Developer Guide*.")
@@ -139,18 +137,18 @@ model AwsEcsServiceProperties {
   serviceName?: string;
 
   @doc("The details of the service discovery registry to associate with this service. For more information, see [Service discovery](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).  Each service may be associated with one service registry. Multiple service registries for each service isn't supported.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   serviceRegistries?: ServiceRegistry[];
 
   @doc("The metadata that you apply to the service to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. When a service is deleted, the tags are deleted as well. The following basic restrictions apply to tags:  +  Maximum number of tags per resource - 50  +  For each resource, each tag key must be unique, and each tag key can have only one value.  +  Maximum key length - 128 Unicode characters in UTF-8  +  Maximum value length - 256 Unicode characters in UTF-8  +  If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.  +  Tag keys and values are case-sensitive.  +  Do not use ``aws:``, ``AWS:``, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The ``family`` and ``revision`` (``family:revision``) or full ARN of the task definition to run in your service. If a ``revision`` isn't specified, the latest ``ACTIVE`` revision is used. A task definition must be specified if the service uses either the ``ECS`` or ``CODE_DEPLOY`` deployment controllers. For more information about deployment types, see [Amazon ECS deployment types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html).")
   taskDefinition?: string;
 
   @doc("The configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   volumeConfigurations?: ServiceVolumeConfiguration[];
 }
 
@@ -345,7 +343,7 @@ model ServiceConnectConfiguration {
   `namespace`?: string;
 
   @doc("The list of Service Connect service objects. These are names and aliases (also known as endpoints) that are used by other Amazon ECS services to connect to this service.  This field is not required for a 'client' Amazon ECS service that's a member of a namespace only to connect to other services within the namespace. An example of this would be a frontend application that accepts incoming requests from either a load balancer that's attached to the service or by other means. An object selects a port from the task definition, assigns a name for the CMAPlong service, and a list of aliases (endpoints) and ports for client applications to refer to this service.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   services?: ServiceConnectService[];
 }
 
@@ -401,7 +399,6 @@ model ServiceVolumeConfiguration {
 @doc("Definition of DeploymentAlarms")
 model DeploymentAlarms {
   @doc("One or more CloudWatch alarm names. Use a ',' to separate the alarms.")
-  @extension("x-ms-identifiers", [])
   alarmNames?: string[];
 
   @doc("Determines whether to use the CloudWatch alarm option in the service deployment process.")
@@ -434,11 +431,9 @@ model AwsVpcConfiguration {
   assignPublicIp?: AwsVpcConfigurationAssignPublicIp;
 
   @doc("The IDs of the security groups associated with the task or service. If you don't specify a security group, the default security group for the VPC is used. There's a limit of 5 security groups that can be specified per ``AwsVpcConfiguration``.  All specified security groups must be from the same VPC.")
-  @extension("x-ms-identifiers", [])
   securityGroups?: string[];
 
   @doc("The IDs of the subnets associated with the task or service. There's a limit of 16 subnets that can be specified per ``AwsVpcConfiguration``.  All specified subnets must be from the same VPC.")
-  @extension("x-ms-identifiers", [])
   subnets?: string[];
 }
 
@@ -466,7 +461,7 @@ model LogConfiguration {
   options?: unknown;
 
   @doc("The secrets to pass to the log configuration. For more information, see [Specifying sensitive data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the *Amazon Elastic Container Service Developer Guide*.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   secretOptions?: Secret[];
 }
 
@@ -477,7 +472,7 @@ model LogConfiguration {
 @doc("Definition of ServiceConnectService")
 model ServiceConnectService {
   @doc("The list of client aliases for this Service Connect service. You use these to assign names that can be used by client applications. The maximum number of client aliases that you can have in this list is 1. Each alias ('endpoint') is a fully-qualified name and port number that other Amazon ECS tasks ('clients') can use to connect to this service. Each name and port mapping must be unique within the namespace. For each ``ServiceConnectService``, you must provide at least one ``clientAlias`` with one ``port``.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   clientAliases?: ServiceConnectClientAlias[];
 
   @doc("The ``discoveryName`` is the name of the new CMAP service that Amazon ECS creates for this Amazon ECS service. This must be unique within the CMAP namespace. The name can contain up to 64 characters. The name can include lowercase letters, numbers, underscores (_), and hyphens (-). The name can't start with a hyphen. If the ``discoveryName`` isn't specified, the port mapping name from the task definition is used in ``portName.namespace``.")
@@ -505,7 +500,7 @@ model ServiceManagedEBSVolumeConfiguration {
   @doc("Indicates whether the volume should be encrypted. If no value is specified, encryption is turned on by default. This parameter maps 1:1 with the ``Encrypted`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.")
   encrypted?: boolean;
 
-  @doc("The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start. The available filesystem types are  ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.")
+  @doc("The Linux filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the task will fail to start. The available filesystem types are ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.")
   filesystemType?: string;
 
   @doc("The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. The following are the supported values for each volume type.  +   ``gp3``: 3,000 - 16,000 IOPS  +   ``io1``: 100 - 64,000 IOPS  +   ``io2``: 100 - 256,000 IOPS   This parameter is required for ``io1`` and ``io2`` volume types. The default for ``gp3`` volumes is ``3,000 IOPS``. This parameter is not supported for ``st1``, ``sc1``, or ``standard`` volume types. This parameter maps 1:1 with the ``Iops`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.")
@@ -524,7 +519,7 @@ model ServiceManagedEBSVolumeConfiguration {
   snapshotId?: string;
 
   @doc("The tags to apply to the volume. Amazon ECS applies service-managed tags by default. This parameter maps 1:1 with the ``TagSpecifications.N`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tagSpecifications?: EBSTagSpecification[];
 
   @doc("The throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s. This parameter maps 1:1 with the ``Throughput`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.  This parameter is only supported for the ``gp3`` volume type.")
@@ -595,14 +590,14 @@ model ServiceConnectTlsConfiguration {
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EBSTagSpecification")
 model EBSTagSpecification {
-  @doc("Determines whether to propagate the tags from the task definition to  the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in  ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't  propagated.")
+  @doc("Determines whether to propagate the tags from the task definition to the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't propagated.")
   propagateTags?: EBSTagSpecificationPropagateTags;
 
   @doc("The type of volume resource.")
   resourceType?: string;
 
   @doc("The tags applied to this Amazon EBS volume. ``AmazonECSCreated`` and ``AmazonECSManaged`` are reserved tags that can't be used.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 }
 

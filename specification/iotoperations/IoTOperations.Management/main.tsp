@@ -24,9 +24,7 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @armProviderNamespace
-@service({
-  title: "Microsoft.IoTOperations management service.",
-})
+@service(#{ title: "Microsoft.IoTOperations management service." })
 @doc("Microsoft.IoTOperations Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.IoTOperations;
@@ -46,7 +44,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Instance {
   get is ArmResourceRead<InstanceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InstanceResource>;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<InstanceResource, InstancePatchModel>;
   delete is ArmResourceDeleteWithoutOkAsync<InstanceResource>;
   listByResourceGroup is ArmResourceListByParent<InstanceResource>;

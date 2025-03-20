@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -75,7 +73,7 @@ model AwsMacie2JobSummaryProperties {
   bucketCriteria?: S3BucketCriteriaForJob;
 
   @doc("<p>An array of objects, one for each Amazon Web Services account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   bucketDefinitions?: S3BucketDefinitionForJob[];
 
   @doc("<p>The date and time, in UTC and extended ISO 8601 format, when the job was created.</p>")
@@ -177,7 +175,6 @@ model S3BucketDefinitionForJob {
   accountId?: string;
 
   @doc("<p>An array that lists the names of the buckets.</p>")
-  @extension("x-ms-identifiers", [])
   buckets?: string[];
 }
 
@@ -235,7 +232,7 @@ model UserPausedDetails {
 @doc("Definition of CriteriaBlockForJob")
 model CriteriaBlockForJob {
   @doc("<p>An array of conditions, one for each condition that determines which buckets to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   and?: CriteriaForJob[];
 }
 
@@ -265,7 +262,6 @@ model SimpleCriterionForJob {
   key?: SimpleCriterionKeyForJobEnumValue;
 
   @doc("<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href='https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission'>BucketPublicAccess.effectivePermission</a> property of a bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of a bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href='https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess'>BucketMetadata.sharedAccess</a> property of a bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.</p>")
-  @extension("x-ms-identifiers", [])
   values?: string[];
 }
 
@@ -318,7 +314,7 @@ model TagCriterionForJob {
   comparator?: JobComparatorEnumValue;
 
   @doc("<p>The tag keys, tag values, or tag key and value pairs to use in the condition.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tagValues?: TagCriterionPairForJob[];
 }
 
