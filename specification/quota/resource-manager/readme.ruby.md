@@ -4,7 +4,7 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
 package-name: azure_mgmt_quota
-package-version: 2024-10-15-preview
+package-version: 2025-03-15-preview
 azure-arm: true
 ```
 
