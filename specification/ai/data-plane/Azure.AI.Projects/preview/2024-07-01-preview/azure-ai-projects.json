@@ -3459,13 +3459,18 @@
           "format": "int32",
           "description": "Number of documents to retrieve from search and present to the model.",
           "x-ms-client-name": "topK"
+        },
+        "filter": {
+          "type": "string",
+          "description": "Odata filter string for search resource."
         }
       },
       "required": [
         "index_connection_id",
         "index_name",
         "query_type",
-        "top_k"
+        "top_k",
+        "filter"
       ]
     },
     "Agents.Agent": {
