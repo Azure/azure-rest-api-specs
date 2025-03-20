@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "migrationServiceName": "testagent",
+    "api-version": "2023-07-15-preview",
+    "parameters": {
+      "tags": {
+        "mytag": "myval"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {},
+        "location": "northeurope",
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/migrationServices/testagent",
+        "name": "testagent",
+        "type": "Microsoft.DataMigration/migrationServices"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DataMigration/locations/westus2/migrationServiceOperationResults/00000000-0000-0000-0000-000000000000?api-version=2023-07-15-preview"
+      }
+    }
+  }
+}

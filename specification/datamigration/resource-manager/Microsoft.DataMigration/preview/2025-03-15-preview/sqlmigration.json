@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-07-15-preview",
+    "version": "2025-03-15-preview",
     "title": "SqlMigrationManagementClient",
     "description": "The SQL Migration management API provides a RESTful set of web APIs that allow users to migrate their SQL Server databases to Azure SQL."
   },
@@ -2819,6 +2819,32 @@
       "description": "Azure Blob Details",
       "type": "object",
       "properties": {
+        "authType": {
+          "description": "Authentication type used for accessing Azure Blob Storage.",
+          "type": "string",
+          "enum": [
+            "AccountKey",
+            "ManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "AccountKey",
+                "description": "Use an account key for authentication."
+              },
+              {
+                "value": "ManagedIdentity",
+                "description": "Use a managed identity for authentication."
+              }
+            ]
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity details for authentication using a Managed Identity."
+        },
         "storageAccountResourceId": {
           "description": "Resource Id of the storage account where backups are stored.",
           "type": "string"
@@ -2833,6 +2859,28 @@
           "type": "string"
         }
       }
+    },
+    "Identity": {
+      "description": "Identity details for authentication using a Managed Identity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of identity used for authentication.",
+          "type": "string"
+        },
+        "userAssignedIdentities": {
+          "description": "Details of user-assigned identities.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityProperties"
+          }
+        }
+      }
+    },
+    "UserAssignedIdentityProperties": {
+      "description": "User Assigned Identity Properties",
+      "type": "object",
+      "properties": {}
     },
     "DatabaseMigrationBase": {
       "description": "Database Migration Resource.",
