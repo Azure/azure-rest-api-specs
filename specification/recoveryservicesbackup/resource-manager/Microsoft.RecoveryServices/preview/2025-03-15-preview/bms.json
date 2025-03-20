@@ -4233,30 +4233,30 @@
         "objectType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
-        }
-      },
-      "threatStatus": {
-        "description": "Threat status of the recovery point",
-        "enum": [
-          "Unknown",
-          "Healthy",
-          "UnHealthy",
-          "Warning",
-          "NotAvailable"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ThreatStatus",
-          "modelAsString": true
-        }
-      },
-      "threatInfo": {
-        "description": "Recovery point threat information.",
-        "type": "object",
-        "items": {
-          "$ref": "#/definitions/ThreatInfo"
         },
-        "x-ms-identifiers": []
+        "threatStatus": {
+          "description": "Threat status of the recovery point",
+          "enum": [
+            "Unknown",
+            "Healthy",
+            "UnHealthy",
+            "Warning",
+            "NotAvailable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ThreatStatus",
+            "modelAsString": true
+          }
+        },
+        "threatInfo": {
+          "description": "Recovery point threat information.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ThreatInfo"
+          },
+          "x-ms-identifiers": []
+        }
       },
       "discriminator": "objectType"
     },
@@ -4561,7 +4561,7 @@
         },
         "lastUpdatedTime": {
           "format": "date-time",
-          "description": "Timestamp when the last (latest)theat information was sent",
+          "description": "Timestamp when the last (latest) threat information was sent",
           "type": "string"
         },
         "threatState": {
@@ -4738,4 +4738,3 @@
     }
   ]
 }
-
