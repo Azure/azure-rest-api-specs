@@ -92,13 +92,49 @@ model IndexResource {
    * An index connection id in an IndexResource attached to this agent.
    */
   @encodedName("application/json", "index_connection_id")
-  indexConnectionId: string;
+  indexConnectionId?: string;
 
   /**
    * The name of an index in an IndexResource attached to this agent.
    */
   @encodedName("application/json", "index_name")
-  indexName: string;
+  indexName?: string;
+
+  /**
+   * Specifies what kind of search to do
+   */
+  @encodedName("application/json", "query_type")
+  queryType?: QueryTypes;
+
+  /**
+   * Number of documents to retrieve from search and present to the model
+   */
+  @encodedName("application/json", "top_k")
+  topK?: int64;
+
+  /**
+   * OData filter string configured by the client
+   */
+  @encodedName("application/json", "filter")
+  filter?: string;
+
+  /**
+   * Asset id of a registered index. Can be used in place of index_name + index_connection_id
+   */
+  @encodedName("application/json", "index_asset_id")
+  indexAssetId?: string;
+
+  /**
+   * Specifies whether query rewrites should be generated to augment the search query
+   */
+  @encodedName("application/json", "query_rewrites")
+  queryRewrites?: string;
+
+  /**
+   * A value that specifies the language of the search query.
+   */
+  @encodedName("application/json", "query_language")
+  queryLanguage?: string;
 }
 
 //
@@ -217,4 +253,36 @@ model UpdateFileSearchToolResourceOptions {
   @maxItems(1)
   @encodedName("application/json", "vector_store_ids")
   vectorStoreIds?: string[];
+}
+
+/**
+ * Types of Azure AI Search retrieval queries
+ */
+union QueryTypes {
+  string,
+
+  /**
+   * Represents the default, simple query parser.
+   */
+  simple: "simple",
+
+  /**
+   * Represents the semantic query parser for advanced semantic modeling.
+   */
+  semantic: "semantic",
+
+  /**
+   * Represents vector search over computed data.
+   */
+  vector: "vector",
+
+  /**
+   * Represents a combination of the simple query strategy with vector data.
+   */
+  vectorSimpleHybrid: "vector_simple_hybrid",
+
+  /**
+   * Represents a combination of semantic search and vector data querying.
+   */
+  vectorSemanticHybrid: "vector_semantic_hybrid",
 }
