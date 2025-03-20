@@ -102,22 +102,22 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Type of action of the operation */
   union AppAction {
     /** Web app was restarted. */
-    "Restarted",
+    Restarted: "Restarted",
 
     /** Web app was stopped. */
-    "Stopped",
+    Stopped: "Stopped",
 
     /** There was an operation to change app setting on the web app. */
-    "ChangedAppSettings",
+    ChangedAppSettings: "ChangedAppSettings",
 
     /** The job has started. */
-    "Started",
+    Started: "Started",
 
     /** The job has completed. */
-    "Completed",
+    Completed: "Completed",
 
     /** The job has failed to complete. */
-    "Failed",
+    Failed: "Failed",
 
     string,
   }
@@ -125,13 +125,13 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Kind of environment where app service plan is. */
   union StampKind {
     /** App Service Plan is running on a public stamp. */
-    "Public",
+    Public: "Public",
 
     /** App Service Plan is running on an App Service Environment V1. */
-    "AseV1",
+    AseV1: "AseV1",
 
     /** App Service Plan is running on an App Service Environment V2. */
-    "AseV2",
+    AseV2: "AseV2",
 
     string,
   }
@@ -139,7 +139,7 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Type of action on the app service plan. */
   union AppServicePlanAction {
     /** App Service plan is being updated. */
-    "Updated",
+    Updated: "Updated",
 
     string,
   }
@@ -162,13 +162,13 @@ namespace Microsoft.EventGrid.SystemEvents {
   /** Asynchronous operation status of the operation on the app service plan. */
   union AsyncStatus {
     /** Async operation has started. */
-    "Started",
+    Started: "Started",
 
     /** Async operation has completed. */
-    "Completed",
+    Completed: "Completed",
 
     /** Async operation failed to complete. */
-    "Failed",
+    Failed: "Failed",
 
     string,
   }

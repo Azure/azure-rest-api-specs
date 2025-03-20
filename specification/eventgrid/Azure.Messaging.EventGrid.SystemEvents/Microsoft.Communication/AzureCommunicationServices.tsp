@@ -420,40 +420,40 @@ model AcsRouterJobReceivedEventData extends AcsRouterJobEventData {
 /** Acs Router Job Status */
 union AcsRouterJobStatus {
   /** Router Job Status Pending Classification */
-  "PendingClassification",
+  PendingClassification:"PendingClassification",
 
   /** Router Job Status Queued */
-  "Queued",
+  Queued: "Queued",
 
   /** Router Job Status Assigned */
-  "Assigned",
+  Assigned: "Assigned",
 
   /** Router Job Status Completed */
-  "Completed",
+  Completed: "Completed",
 
   /** Router Job Status Closed */
-  "Closed",
+  Closed: "Closed",
 
   /** Router Job Status Cancelled */
-  "Cancelled",
+  Cancelled: "Cancelled",
 
   /** Router Job Status Classification Failed */
-  "ClassificationFailed",
+  ClassificationFailed: "ClassificationFailed",
 
   /** Router Job Status Created */
-  "Created",
+  Created: "Created",
 
   /** Router Job Status Pending Schedule */
-  "PendingSchedule",
+  PendingSchedule: "PendingSchedule",
 
   /** Router Job Status Scheduled */
-  "Scheduled",
+  Scheduled: "Scheduled",
 
   /** Router Job Status Schedule Failed */
-  "ScheduleFailed",
+  ScheduleFailed: "ScheduleFailed",
 
   /** Router Job Status Waiting For Activation */
-  "WaitingForActivation",
+  WaitingForActivation: "WaitingForActivation",
 
   string,
 }
@@ -808,10 +808,10 @@ alias AcsChatParticipantBaseEventData = {
 /** Recording content type */
 union recordingContentType {
   /** AudioVideo content type */
-  "AudioVideo",
+  AudioVideo: "AudioVideo",
 
   /** Audio content type */
-  "Audio",
+  Audio: "Audio",
 
   string,
 }
@@ -819,10 +819,10 @@ union recordingContentType {
 /** Recording channel type */
 union recordingChannelType {
   /** Mixed channel type */
-  "Mixed",
+  Mixed: "Mixed",
 
   /** Unmixed channel type */
-  "Unmixed",
+  Unmixed: "Unmixed",
 
   string,
 }
@@ -830,13 +830,13 @@ union recordingChannelType {
 /** Recording format type */
 union recordingFormatType {
   /** WAV format */
-  "Wav",
+  Wav: "Wav",
 
   /** MP3 format */
-  "Mp3",
+  Mp3: "Mp3",
 
   /** MP4 format */
-  "Mp4",
+  Mp4: "Mp4",
 
   string,
 }
@@ -844,22 +844,22 @@ union recordingFormatType {
 /** Router Job Worker Selector Label Operator */
 union AcsRouterLabelOperator {
   /** Router Label Operator Equal */
-  "Equal",
+  Equal: "Equal",
 
   /** Router Label Operator Not Equal */
-  "NotEqual",
+  NotEqual: "NotEqual",
 
   /** Router Label Operator Greater */
-  "Greater",
+  Greater: "Greater",
 
   /** Router Label Operator Less */
-  "Less",
+  Less: "Less",
 
   /** Router Label Operator Greater than or equal */
-  "GreaterThanOrEqual",
+  GreaterThanOrEqual: "GreaterThanOrEqual",
 
   /** Router Label Operator Less than or equal */
-  "LessThanOrEqual",
+  LessThanOrEqual: "LessThanOrEqual",
 
   string,
 }
@@ -867,10 +867,10 @@ union AcsRouterLabelOperator {
 /** Router Worker Selector State */
 union AcsRouterWorkerSelectorState {
   /** Router Worker Selector State Active */
-  Active: "active",
+  active: "active",
 
   /** Router Worker Selector State Expired */
-  Expired: "expired",
+  expired: "expired",
 
   string,
 }
@@ -878,22 +878,22 @@ union AcsRouterWorkerSelectorState {
 /** The status of the email. Any value other than Delivered is considered failed. */
 union AcsEmailDeliveryReportStatus {
   /** Hard bounce detected while sending the email */
-  "Bounced",
+  Bounced: "Bounced",
 
   /** The email was delivered */
-  "Delivered",
+  Delivered: "Delivered",
 
   /** The email failed to be delivered */
-  "Failed",
+  Failed: "Failed",
 
   /** The message was identified as spam and was rejected or blocked (not quarantined). */
-  "FilteredSpam",
+  FilteredSpam: "FilteredSpam",
 
   /** The message was quarantined (as spam, bulk mail, or phishing). For more information, see Quarantined email messages in EOP (EXCHANGE ONLINE PROTECTION). */
-  "Quarantined",
+  Quarantined: "Quarantined",
 
   /** The email was suppressed */
-  "Suppressed",
+  Suppressed: "Suppressed",
 
   string,
 }
@@ -1070,10 +1070,10 @@ model AcsIncomingCallCustomContext {
 /** The type of engagement user have with email. */
 union AcsUserEngagement {
   /** View */
-  "view",
+  view: "view",
 
   /** Click */
-  "click",
+  click: "click",
 
   string,
 }
@@ -1103,16 +1103,19 @@ model CommunicationIdentifierModel {
 /** Communication model identifier kind */
 union CommunicationIdentifierModelKind {
   /** Unknown */
-  "unknown",
+  `unknown`: "unknown",
 
   /** Communication User */
-  "communicationUser",
+  communicationUser: "communicationUser",
 
   /** Phone Number */
-  "phoneNumber",
+  phoneNumber: "phoneNumber",
 
   /** Microsoft Teams User */
-  "microsoftTeamsUser",
+  microsoftTeamsUser: "microsoftTeamsUser",
+
+  /** Microsoft Teams Application */
+  microsoftTeamsApp: "microsoftTeamsApp",
 
   string,
 }
@@ -1330,13 +1333,13 @@ model AcsMessageChannelEventError {
 /** Interactive reply kind */
 union AcsInteractiveReplyKind {
   /** Messaged interactive reply type is ButtonReply */
-  "buttonReply",
+  buttonReply: "buttonReply",
 
   /** Messaged interactive reply type is ListReply */
-  "listReply",
+  listReply: "listReply",
 
   /** Messaged interactive reply type is Unknown */
-  "unknown",
+  `unknown`: "unknown",
 
   string,
 }
@@ -1344,7 +1347,7 @@ union AcsInteractiveReplyKind {
 /** Message channel kind */
 union AcsMessageChannelKind {
   /** Updated message channel type is WhatsApp */
-  "whatsapp",
+  whatsapp: "whatsapp",
 
   string,
 }
@@ -1352,22 +1355,22 @@ union AcsMessageChannelKind {
 /** Message delivery status */
 union AcsMessageDeliveryStatus {
   /** Read */
-  "read",
+  Read: "Read",
 
   /** Delivered */
-  "delivered",
+  Delivered: "delivered",
 
   /** Failed */
-  "failed",
+  Failed: "failed",
 
   /** Sent */
-  "sent",
+  Sent: "sent",
 
   /** Warning */
-  "warning",
+  Warning: "warning",
 
   /** Unknown */
-  "unknown",
+  Unknown: "unknown",
 
   string,
 }
@@ -1375,22 +1378,22 @@ union AcsMessageDeliveryStatus {
 /** Worker properties that can be updated */
 union AcsRouterUpdatedWorkerProperty {
   /** AvailableForOffers */
-  "AvailableForOffers",
+  AvailableForOffers: "AvailableForOffers",
 
   /** TotalCapacity */
-  "TotalCapacity",
+  TotalCapacity: "TotalCapacity",
 
   /** QueueAssignments */
-  "QueueAssignments",
+  QueueAssignments: "QueueAssignments",
 
   /** Labels */
-  "Labels",
+  Labels: "Labels",
 
   /** Tags */
-  "Tags",
+  Tags: "Tags",
 
   /** ChannelConfigurations */
-  "ChannelConfigurations",
+  ChannelConfigurations: "ChannelConfigurations",
 
   string,
 }
@@ -1398,13 +1401,13 @@ union AcsRouterUpdatedWorkerProperty {
 /** Communication cloud environment model. */
 union CommunicationCloudEnvironmentModel {
   /** Public */
-  "public",
+  Public: "public",
 
   /** Dod */
-  "dod",
+  Dod: "dod",
 
   /** Gcch */
-  "gcch",
+  Gcch: "gcch",
 
   string,
 }

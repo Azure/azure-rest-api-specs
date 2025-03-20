@@ -6,10 +6,10 @@ namespace Microsoft.EventGrid.SystemEvents;
 /** EventGrid MQTT Client State */
 union EventGridMQTTClientState {
   /** Enabled */
-  "Enabled",
+  Enabled: "Enabled",
 
   /** Disabled */
-  "Disabled",
+  Disabled: "Disabled",
 
   string,
 }
@@ -17,37 +17,37 @@ union EventGridMQTTClientState {
 /** EventGrid MQTT Client Disconnection Reason */
 union EventGridMQTTClientDisconnectionReason {
   /** The client got disconnected for any authentication reasons (for example, certificate expired, client got disabled, or client configuration changed). */
-  "ClientAuthenticationError",
+  ClientAuthenticationError: "ClientAuthenticationError",
 
   /** The client got disconnected for any authorization reasons (for example, because of a change in the configuration of topic spaces, permission bindings, or client groups). */
-  "ClientAuthorizationError",
+  ClientAuthorizationError: "ClientAuthorizationError",
 
   /** The client sent a bad request or used one of the unsupported features that resulted in a connection termination by the service. */
-  "ClientError",
+  ClientError: "ClientError",
 
   /** The client initiated a graceful disconnect through a DISCONNECT packet for MQTT or a close frame for MQTT over WebSocket. */
-  "ClientInitiatedDisconnect",
+  ClientInitiatedDisconnect: "ClientInitiatedDisconnect",
 
   /** The client-server connection is lost. (EXCHANGE ONLINE PROTECTION). */
-  "ConnectionLost",
+  ConnectionLost: "ConnectionLost",
 
   /** The client's IP address is blocked by IP filter or Private links configuration. */
-  "IpForbidden",
+  IpForbidden: "IpForbidden",
 
   /** The client exceeded one or more of the throttling limits that resulted in a connection termination by the service. */
-  "QuotaExceeded",
+  QuotaExceeded: "QuotaExceeded",
 
   /** The connection got terminated due to an unexpected server error. */
-  "ServerError",
+  ServerError: "ServerError",
 
   /** The server initiates a graceful disconnect for any operational reason. */
-  "ServerInitiatedDisconnect",
+  ServerInitiatedDisconnect: "ServerInitiatedDisconnect",
 
   /** The client's queue for unacknowledged QoS1 messages reached its limit, which resulted in a connection termination by the server. */
-  "SessionOverflow",
+  SessionOverflow: "SessionOverflow",
 
   /** The client reconnected with the same authentication name, which resulted in the termination of the previous connection. */
-  "SessionTakenOver",
+  SessionTakenOver: "SessionTakenOver",
 
   string,
 }
