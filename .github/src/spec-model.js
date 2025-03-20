@@ -40,7 +40,12 @@ export async function getSpecModel(folder, options = {}) {
     readmes: new Map(
       readmes.map((r) => [
         join(folder, r),
-        { path: r, content: "", globalConfig: {}, tags: new Map() },
+        {
+          path: join(folder, r),
+          content: "",
+          globalConfig: {},
+          tags: new Map(),
+        },
       ]),
     ),
   };

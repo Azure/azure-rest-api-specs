@@ -9,7 +9,10 @@ describe("readme", () => {
       readmes: new Map([
         [
           "specification/contosowidgetmanager/resource-manager/readme.md",
-          expect.anything(),
+          expect.objectContaining({
+            path: "specification/contosowidgetmanager/resource-manager/readme.md",
+            globalConfig: expect.anything(),
+          }),
         ],
       ]),
     });
