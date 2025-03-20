@@ -74,7 +74,7 @@ interface Organizations {
     @doc("Post Action to retrieve the PostgreSQL versions.")
     @body
     parameters?: Models.PgVersion,
-  ): ArmResponse<Models.PgVersionsResponse> | ErrorResponse;
+  ): ArmResponse<Models.PgVersionsResult> | ErrorResponse;
 }
 
 @armResourceOperations

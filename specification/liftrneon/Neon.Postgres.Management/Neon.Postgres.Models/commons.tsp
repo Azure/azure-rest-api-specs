@@ -57,7 +57,7 @@ model PgVersion {
 
 @doc("Response model for PostgreSQL versions")
 @added(Neon.Postgres.Versions.v2_preview)
-model PgVersionsResponse {
+model PgVersionsResult {
   @doc("List of PostgreSQL versions")
   @Azure.ResourceManager.identifiers(#[])
   versions: PgVersion[];
