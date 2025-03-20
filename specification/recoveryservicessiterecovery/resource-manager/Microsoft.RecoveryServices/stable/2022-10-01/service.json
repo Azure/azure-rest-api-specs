@@ -10879,10 +10879,25 @@
         }
       }
     },
-    "DisableProtectionProviderSpecificInput": {
-      "description": "Disable protection provider specific input.",
+    "ProviderSpecificInput": {
+      "type": "object",
       "required": [
         "instanceType"
+      ],
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "DisableProtectionProviderSpecificInput": {
+      "description": "Disable protection provider specific input.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProviderSpecificInput"
+        }
       ],
       "type": "object",
       "properties": {
@@ -10891,7 +10906,7 @@
           "type": "string"
         }
       },
-      "discriminator": "instanceType"
+      "x-ms-discriminator-value": "DisableProtectionProviderSpecificInput"
     },
     "DiscoverProtectableItemRequest": {
       "description": "Request to add a physical machine as a protectable item in a container.",
@@ -14524,7 +14539,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/DisableProtectionProviderSpecificInput"
+          "$ref": "#/definitions/ProviderSpecificInput"
         }
       ],
       "properties": {
