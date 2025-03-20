@@ -546,7 +546,7 @@
           "EntraIdAccess"
         ],
         "summary": "Updates Entra access assignments.",
-		"operationId": "EntraIdAssignments_Update",
+        "operationId": "EntraIdAssignments_Update",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -598,7 +598,7 @@
           "EntraIdAccess"
         ],
         "summary": "Lists Entra access assignments.",
-		"operationId": "EntraIdAssignments_List",
+        "operationId": "EntraIdAssignments_List",
         "produces": [
           "application/json"
         ],
@@ -640,7 +640,7 @@
           "EntraIdAccess"
         ],
         "summary": "Get Entra access assignment by object id.",
-		"operationId": "EntraIdAssignment_Get",
+        "operationId": "EntraIdAssignment_Get",
         "produces": [
           "application/json"
         ],
@@ -681,7 +681,7 @@
           "EntraIdAccess"
         ],
         "summary": "Creates or replaces an Entra access assignment.",
-		"operationId": "EntraIdAssignment_CreateOrUpdate",
+        "operationId": "EntraIdAssignment_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -740,7 +740,7 @@
           "EntraIdAccess"
         ],
         "summary": "Removes an Entra access assignment.",
-		"operationId": "EntraIdAssignment_Delete",
+        "operationId": "EntraIdAssignment_Delete",
         "produces": [
           "application/json"
         ],
@@ -1087,6 +1087,7 @@
   },
   "parameters": {
     "ApiVersionParameter": {
+      "x-ms-parameter-location": "client",
       "in": "query",
       "name": "api-version",
       "description": "Version of API to invoke.",
@@ -1113,6 +1114,7 @@
         "description": "The communication resource, for example https://my-resource.communication.azure.com",
         "required": true,
         "type": "string",
+        "format": "url",
         "in": "path",
         "x-ms-skip-url-encoding": true,
         "x-ms-parameter-location": "client"
