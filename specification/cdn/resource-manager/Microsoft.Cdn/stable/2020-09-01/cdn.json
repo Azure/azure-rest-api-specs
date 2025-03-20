@@ -3979,6 +3979,7 @@
       "description": "Defines the parameters for the origin group override action.",
       "required": [
         "originGroup",
+        "routeType",
         "@odata.type"
       ],
       "properties": {
@@ -3992,6 +3993,83 @@
           "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
           "type": "object",
           "$ref": "#/definitions/ResourceReference"
+        },
+        "routeType": {
+          "type": "string",
+          "enum": [
+            "Forward",
+            "Redirect"
+          ],
+          "x-ms-enum": {
+            "name": "RouteType",
+            "modelAsString": true
+          }
+        },
+        "forwardingProtocol": {
+          "description": "Protocol this rule will use when forwarding traffic to backends.",
+          "type": "string",
+          "enum": [
+            "HttpOnly",
+            "HttpsOnly",
+            "MatchRequest"
+          ],
+          "x-ms-enum": {
+            "name": "ForwardingProtocol",
+            "modelAsString": true
+          }
+        },
+        "cacheConfiguration": {
+          "description": "The caching configuration associated with this rule.",
+          "$ref": "#/definitions/CacheConfiguration"
+        },
+        "urlRewriteConfiguration":{
+          "description": "The url rewrite configuration associated with this rule.",
+          "$ref": "#/definitions/UrlRewriteActionParameters"
+        },
+        "urlRedirectConfiguration":{
+          "description": "The url redirect configuration associated with this rule.",
+          "$ref": "#/definitions/UrlRedirectActionParameters"
+        }
+      }
+    },
+    "CacheConfiguration": {
+      "description": "Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.",
+      "type": "object",
+      "properties": {
+        "queryStringBehavior": {
+          "description": "Caching behavior for the requests",
+          "type": "string",
+          "enum": [
+            "Include",
+            "IncludeAll",
+            "Exclude",
+            "ExcludeAll"
+          ],
+          "x-ms-enum": {
+            "name": "queryStringBehavior",
+            "modelAsString": true
+          }
+        },
+        "queryParameters": {
+          "description": "query parameters to include or exclude (comma separated).",
+          "type": "string"
+        },
+        "dynamicCompression": {
+          "description": "Whether to use dynamic compression for cached content",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DynamicCompressionEnabled",
+            "modelAsString": true
+          }
+        },
+        "cacheDuration": {
+          "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
+          "type": "string",
+          "format": "duration"
         }
       }
     },
