@@ -89,10 +89,8 @@ interface LandingZoneConfigurationOperations {
   >;
   @doc("Delete a landing zone configuration.")
   delete is ArmResourceDeleteWithoutOkAsync<LandingZoneConfigurationResource>;
-  @doc("List the landing zone configurations within a resource group.")
-  listByResourceGroup is ArmResourceListByParent<LandingZoneConfigurationResource>;
-  @doc("List the landing zone configurations within a subscription.")
-  listBySubscription is ArmListBySubscription<LandingZoneConfigurationResource>;
+  @doc("List the landing zone configurations within a landing zone account.")
+  list is ArmResourceListByParent<LandingZoneConfigurationResource>;
 
   @action("generateLandingZone")
   @doc("Generate infrastructure as code (IaC) for a landing zone deployment.")
@@ -154,8 +152,6 @@ interface LandingZoneRegistrationOperations {
   >;
   @doc("Delete a landing zone registration.")
   delete is ArmResourceDeleteSync<LandingZoneRegistrationResource>;
-  @doc("List the landing zone registrations within a resource group.")
-  listByResourceGroup is ArmResourceListByParent<LandingZoneRegistrationResource>;
-  @doc("List the landing zone registrations within a subscription.")
-  listBySubscription is ArmListBySubscription<LandingZoneRegistrationResource>;
+  @doc("List the landing zone registrations within a landing zone account.")
+  list is ArmResourceListByParent<LandingZoneRegistrationResource>;
 }
