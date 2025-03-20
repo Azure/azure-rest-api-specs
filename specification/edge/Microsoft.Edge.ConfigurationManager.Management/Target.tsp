@@ -129,6 +129,7 @@ model TargetProperties {
   status?: DeploymentStatus;
 
   @doc("Scope of the target resource")
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   solutionScope?: string;
 
   @doc("State of resource")
