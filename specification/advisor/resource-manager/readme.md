@@ -38,6 +38,14 @@ input-file:
   - Microsoft.Advisor/preview/2024-11-18-preview/resiliencyReviews.json
 ```
 
+### Tag: package-2025-01
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01'
+input-file:
+  - Microsoft.Advisor/stable/2025-01-01/advisor.json
+```
+
 ### Tag: package-2023-09-preview
 
 These settings apply only when `--tag=package-2023-09-preview` is specified on the command line.
