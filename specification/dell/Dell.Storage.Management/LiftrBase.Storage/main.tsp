@@ -19,7 +19,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2_preview: "2024-08-28-preview",
+  v2_preview: "2025-02-11-preview",
 }
 
 /**
@@ -68,6 +68,21 @@ model FileSystemResourceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is the correct name"
   privateIPs?: string[];
+
+  /**
+   * Smart Connect FQDN of the resource
+   */
+  smartConnectFqdn?: string;
+
+  /**
+   * DellReferenceNumber of the resource
+   */
+  dellReferenceNumber: string;
+
+  /**
+   * EncryptionProperties of the resource
+   */
+  encryption: LiftrBase.EncryptionProperties;
 }
 
 /**
@@ -149,6 +164,11 @@ model FileSystemResourceUpdateProperties {
    * Initial capacity for Dell Filesystem in bytes
    */
   initialCapacity?: int64;
+
+  /**
+   * Encryption Details of the resource
+   */
+  encryption?: LiftrBase.EncryptionUpdateProperties;
 }
 
 /**
