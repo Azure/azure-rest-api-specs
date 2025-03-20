@@ -80,19 +80,6 @@ model EvaluationMetric {
   properties?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
-@doc("Safety Evaluation Output")
-model SafetyEvaluationOutput {
-  @doc("The annotation task.")
-  type: SafetyEvaluationType;
-
-  @doc("The evaluation metrics.")
-  metrics?: EvaluationMetric[];
-
-  @doc("List of sources.")
-  version: string;
-}
-
 @doc("Safety Evaluation Output")
 enum SafetyEvaluationType {
   ContentSafety: "content safety",
@@ -104,16 +91,14 @@ enum SafetyEvaluationType {
   UngroundedAttributes: "ungrounded attributes"
 }
 
-@doc("Dataset as source for evaluation.")
-model Data {
-  @doc("The collection of context messages associated with this chat completions that need to be evaluated.")
-  @minItems(1)
-  value: ChatCompletions[];
-}
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Safety Evaluation Output")
 model SafetyEvaluation {
+  @doc("Identifier of the evaluation.")
+  @key("name")
+  @visibility("read")
+  id: string;
+
   @doc("The safety evaluation type.")
   type: SafetyEvaluationType;
 
@@ -123,8 +108,13 @@ model SafetyEvaluation {
   @doc("List of sources.")
   version: string;
 
-  @doc("Data to evaluate")
-  data: Data;
+  @doc("The collection of context messages associated with this chat completions that need to be evaluated.")
+  @minItems(1)
+  inputs: ChatCompletions[];
+
+  @doc("The evaluated metrics for the inputs.")
+  @visibility("read")
+  outputs: EvaluationMetric[][];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
