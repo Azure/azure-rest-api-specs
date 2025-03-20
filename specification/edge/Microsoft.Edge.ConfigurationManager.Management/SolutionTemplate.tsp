@@ -51,6 +51,10 @@ model SolutionTemplateVersionWithUpdateType {
   @doc("Update type")
   updateType?: UpdateType;
 
+  @doc("Version to create")
+  @pattern("^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$")
+  version?: string;
+
   @doc("Solution Template Version")
   solutionTemplateVersion: SolutionTemplateVersion;
 }

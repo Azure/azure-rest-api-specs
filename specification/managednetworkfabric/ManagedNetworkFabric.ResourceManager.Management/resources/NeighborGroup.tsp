@@ -9,7 +9,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the Neighbor Group.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NeighborGroup extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Neighbor Group.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")

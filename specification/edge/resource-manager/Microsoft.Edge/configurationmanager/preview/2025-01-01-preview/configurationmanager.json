@@ -9446,6 +9446,11 @@
           "$ref": "#/definitions/UpdateType",
           "description": "Update type"
         },
+        "version": {
+          "type": "string",
+          "description": "Version to create",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
         "configTemplateVersion": {
           "$ref": "#/definitions/ConfigTemplateVersion",
           "description": "Config Template Version"
@@ -9634,6 +9639,11 @@
         "updateType": {
           "$ref": "#/definitions/UpdateType",
           "description": "Update type"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version to create",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
         "configurationTemplateVersion": {
           "$ref": "#/definitions/ConfigurationTemplateVersion",
@@ -10080,8 +10090,7 @@
       "properties": {
         "workflowVersionId": {
           "type": "string",
-          "description": "Workflow version of execution",
-          "readOnly": true
+          "description": "Workflow version of execution"
         },
         "specification": {
           "type": "object",
@@ -10107,6 +10116,10 @@
       "type": "object",
       "description": "Execution Properties",
       "properties": {
+        "workflowVersionId": {
+          "type": "string",
+          "description": "Workflow version of execution"
+        },
         "specification": {
           "type": "object",
           "description": "Execution specification",
@@ -10355,7 +10368,8 @@
         },
         "solutionScope": {
           "type": "string",
-          "description": "Scope of instance"
+          "description": "Scope of instance",
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         },
         "status": {
           "$ref": "#/definitions/DeploymentStatus",
@@ -10401,7 +10415,8 @@
         },
         "solutionScope": {
           "type": "string",
-          "description": "Scope of instance"
+          "description": "Scope of instance",
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         }
       }
     },
@@ -10433,7 +10448,7 @@
           {
             "name": "TO",
             "value": "TO",
-            "description": "Toolchain Orchestrator type"
+            "description": "Default type"
           }
         ]
       }
@@ -10845,6 +10860,11 @@
           "$ref": "#/definitions/UpdateType",
           "description": "Update type"
         },
+        "version": {
+          "type": "string",
+          "description": "Version to create",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
         "schemaVersion": {
           "$ref": "#/definitions/SchemaVersion",
           "description": "Schema Version"
@@ -10968,6 +10988,12 @@
           "type": "string",
           "description": "Solution Version Id"
         },
+        "solutionInstanceName": {
+          "type": "string",
+          "description": "Solution Instance Name",
+          "maxLength": 24,
+          "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
         "solutionTemplateVersionId": {
           "type": "string",
           "description": "Solution Template Version Id"
@@ -11011,7 +11037,7 @@
           "type": "string",
           "description": "Solution Instance Name",
           "maxLength": 24,
-          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         },
         "targetId": {
           "type": "string",
@@ -11130,7 +11156,7 @@
           "type": "string",
           "description": "Solution Instance Name",
           "maxLength": 24,
-          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$"
+          "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         },
         "solutionDependencies": {
           "type": "array",
@@ -11283,8 +11309,7 @@
       },
       "required": [
         "configurations",
-        "specification",
-        "orchestratorType"
+        "specification"
       ]
     },
     "SolutionTemplateVersionWithUpdateType": {
@@ -11294,6 +11319,11 @@
         "updateType": {
           "$ref": "#/definitions/UpdateType",
           "description": "Update type"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version to create",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
         "solutionTemplateVersion": {
           "$ref": "#/definitions/SolutionTemplateVersion",
@@ -11433,7 +11463,8 @@
         "solutionInstanceName": {
           "type": "string",
           "description": "Solution instance name",
-          "pattern": "^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$",
+          "maxLength": 24,
+          "pattern": "^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$",
           "readOnly": true
         },
         "solutionDependencies": {
@@ -11721,7 +11752,8 @@
         },
         "solutionScope": {
           "type": "string",
-          "description": "Scope of the target resource"
+          "description": "Scope of the target resource",
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         },
         "state": {
           "$ref": "#/definitions/ResourceState",
@@ -11771,7 +11803,8 @@
         },
         "solutionScope": {
           "type": "string",
-          "description": "Scope of the target resource"
+          "description": "Scope of the target resource",
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
         },
         "state": {
           "$ref": "#/definitions/ResourceState",
@@ -11894,8 +11927,7 @@
       },
       "required": [
         "description",
-        "targetSpec",
-        "orchestratorType"
+        "targetSpec"
       ]
     },
     "TargetTemplatePropertiesUpdate": {
@@ -12418,7 +12450,6 @@
           "items": {
             "$ref": "#/definitions/StageSpec"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "reviewId": {
@@ -12450,6 +12481,14 @@
       "type": "object",
       "description": "Workflow Version Properties",
       "properties": {
+        "stageSpec": {
+          "type": "array",
+          "description": "A list of stage specs",
+          "items": {
+            "$ref": "#/definitions/StageSpec"
+          },
+          "x-ms-identifiers": []
+        },
         "specification": {
           "type": "object",
           "description": "Execution specification",
