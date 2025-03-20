@@ -286,7 +286,7 @@
     "/access/teamsExtension/:exchangeAccessToken": {
       "post": {
         "tags": [
-          "TeamsPhone"
+          "TeamsExtension"
         ],
         "summary": "Exchanges a Teams Phone token for an ACS user access token.",
         "operationId": "TeamsExtensionToken_Exchange",
@@ -303,7 +303,7 @@
             "description": "Request payload for the token exchange.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TeamsPhoneExchangeTokenRequest"
+              "$ref": "#/definitions/TeamsExtensionExchangeTokenRequest"
             }
           },
           {
@@ -370,13 +370,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/TeamsPhoneAssignmentResponse"
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
             }
           }
         },
         "x-ms-examples": {
           "Get Assignment": {
-            "$ref": "./examples/GetTeamsPhoneAssignment.json"
+            "$ref": "./examples/GetTeamsExtensionAssignment.json"
           }
         }
       },
@@ -385,7 +385,7 @@
           "TeamsExtensionAccess"
         ],
         "summary": "Creates or replaces a Teams Phone access assignment.",
-        "operationId": "TeamsExtensionAssignment_CreateOrReplace",
+        "operationId": "TeamsExtensionAssignment_Upsert",
         "consumes": [
           "application/json"
         ],
@@ -416,7 +416,7 @@
             "description": "Values we want to set.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TeamsPhoneAssignmentCreateOrUpdateRequest"
+              "$ref": "#/definitions/TeamsExtensionAssignmentCreateOrUpdateRequest"
             }
           }
         ],
@@ -430,19 +430,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/TeamsPhoneAssignmentResponse"
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/TeamsPhoneAssignmentResponse"
+              "$ref": "#/definitions/TeamsExtensionPhoneAssignmentResponse"
             }
           }
         },
         "x-ms-examples": {
           "Create or Update Assignment": {
-            "$ref": "./examples/CreateOrReplaceTeamsPhoneAssignment.json"
+            "$ref": "./examples/CreateOrReplaceTeamsExtensionAssignment.json"
           }
         }
       },
@@ -487,7 +487,7 @@
         },
         "x-ms-examples": {
           "Delete Assignment": {
-            "$ref": "./examples/DeleteTeamsPhoneAssignment.json"
+            "$ref": "./examples/DeleteTeamsExtensionAssignment.json"
           }
         }
       }
@@ -681,7 +681,7 @@
           "EntraIdAccess"
         ],
         "summary": "Creates or replaces an Entra access assignment.",
-        "operationId": "EntraIdAssignment_CreateOrUpdate",
+        "operationId": "EntraIdAssignment_Upsert",
         "consumes": [
           "application/json"
         ],
@@ -950,7 +950,7 @@
       "type": "object",
       "properties": {}
     },
-    "TeamsPhoneAssignmentCreateOrUpdateRequest": {
+    "TeamsExtensionAssignmentCreateOrUpdateRequest": {
       "required": [
         "principalType"
       ],
@@ -967,7 +967,7 @@
         }
       }
     },
-    "TeamsPhoneAssignmentResponse": {
+    "TeamsExtensionAssignmentResponse": {
       "required": [
         "objectId",
         "principalType",
