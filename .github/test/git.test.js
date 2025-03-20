@@ -26,7 +26,7 @@ describe("git", () => {
     ).resolves.toBe("test lstree");
 
     expect(execRootSpy).toBeCalledWith(
-      "git -c core.quotepath=off ls-tree HEAD:specification/contosowidgetmanager",
+      "git -c core.quotepath=off ls-tree HEAD specification/contosowidgetmanager",
       expect.anything(),
     );
   });

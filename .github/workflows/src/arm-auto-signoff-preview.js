@@ -1,5 +1,6 @@
 // @ts-check
 
+import { setEquals } from "../../src/equality.js";
 import { extractInputs } from "./context.js";
 import { PER_PAGE_MAX } from "./github.js";
 import { LabelAction } from "./label.js";
@@ -165,34 +166,56 @@ export async function getLabelActionImpl({
     per_page: PER_PAGE_MAX,
   });
 
-  const swaggerLintDiffs = checkRuns.filter(
-    (run) => run.name === "Swagger LintDiff",
-  );
+  const requiredCheckNames = ["Swagger LintDiff", "Swagger Avocado"];
 
-  if (swaggerLintDiffs.length > 1) {
-    throw new Error(
-      `Unexpected number of checks named 'Swagger LintDiff': ${swaggerLintDiffs.length}`,
+  /**
+   * @type {typeof checkRuns.check_runs}
+   */
+  let requiredCheckRuns = [];
+
+  for (const checkName of requiredCheckNames) {
+    const matchingRuns = checkRuns.filter((run) => run.name === checkName);
+
+    if (matchingRuns.length > 1) {
+      throw new Error(
+        `Unexpected number of checks named '${checkName}': ${matchingRuns.length}`,
+      );
+    }
+
+    const matchingRun = matchingRuns.length === 1 ? matchingRuns[0] : undefined;
+
+    core.info(
+      `${checkName}: Status='${matchingRun?.status}', Conclusion='${matchingRun?.conclusion}'`,
     );
-  }
 
-  const swaggerLintDiff =
-    swaggerLintDiffs.length === 1 ? swaggerLintDiffs[0] : undefined;
-
-  core.info(
-    `Swagger LintDiff: Status='${swaggerLintDiff?.status}', Conclusion='${swaggerLintDiff?.conclusion}'`,
-  );
-
-  if (swaggerLintDiff && swaggerLintDiff.status === "completed") {
-    if (swaggerLintDiff.conclusion === "success") {
-      core.info("All requirements met for auto-signoff");
-      return labelActions[LabelAction.Add];
-    } else {
-      core.info("Swagger LintDiff did not succeed");
+    if (
+      matchingRun &&
+      matchingRun.status === "completed" &&
+      matchingRun.conclusion !== "success"
+    ) {
+      core.info(`Check '${checkName}' did not succeed`);
       return labelActions[LabelAction.Remove];
     }
-  } else {
-    // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
-    core.info("Swagger LintDiff is in-progress");
-    return labelActions[LabelAction.None];
+
+    if (matchingRun) {
+      requiredCheckRuns.push(matchingRun);
+    }
   }
+
+  if (
+    setEquals(
+      new Set(requiredCheckRuns.map((run) => run.name)),
+      new Set(requiredCheckNames),
+    ) &&
+    requiredCheckRuns.every(
+      (run) => run.status === "completed" && run.conclusion === "success",
+    )
+  ) {
+    core.info("All requirements met for auto-signoff");
+    return labelActions[LabelAction.Add];
+  }
+
+  // If any checks are missing or not completed, no-op to prevent frequent remove/add label as checks re-run
+  core.info("One or more checks are still in-progress");
+  return labelActions[LabelAction.None];
 }

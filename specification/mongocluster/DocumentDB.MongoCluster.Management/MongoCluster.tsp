@@ -260,7 +260,6 @@ model ListConnectionStringsResult {
 /** Connection string for the mongo cluster */
 model ConnectionString {
   /** Value of the connection string */
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @visibility(Lifecycle.Read)
   @clientName("uri", "csharp")
   connectionString?: string;

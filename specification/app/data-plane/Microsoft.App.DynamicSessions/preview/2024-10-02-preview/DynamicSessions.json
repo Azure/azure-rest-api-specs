@@ -246,7 +246,6 @@
           {
             "name": "file",
             "in": "formData",
-            "description": "The file to upload.",
             "required": true,
             "type": "file"
           }
@@ -375,6 +374,10 @@
       "get": {
         "operationId": "SessionResourceFiles_GetContent",
         "description": "Get the content of the file.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -397,8 +400,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           },
           "default": {
