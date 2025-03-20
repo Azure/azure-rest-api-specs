@@ -36,7 +36,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "201": {
@@ -85,7 +85,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -123,7 +123,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -166,7 +166,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -211,7 +211,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -266,7 +266,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -314,7 +314,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -326,7 +326,7 @@
         },
         "x-ms-examples": {
           "Exchange a Teams Phone token": {
-            "$ref": "./examples/ExchangeTeamsPhoneToken.json"
+            "$ref": "./examples/ExchangeTeamsExtensionToken.json"
           }
         }
       }
@@ -364,7 +364,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -424,7 +424,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -478,7 +478,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -523,7 +523,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -571,7 +571,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -608,7 +608,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -651,7 +651,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -704,7 +704,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -751,7 +751,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -948,7 +948,7 @@
       "type": "object",
       "properties": {
         "principalType": {
-          "$ref": "#/definitions/TeamsPhonePrincipalType"
+          "$ref": "#/definitions/TeamsExtensionPrincipalType"
         },
         "clientIds": {
           "type": "array",
@@ -973,7 +973,7 @@
           "type": "string"
         },
         "principalType": {
-          "$ref": "#/definitions/TeamsPhonePrincipalType"
+          "$ref": "#/definitions/TeamsExtensionPrincipalType"
         },
         "clientIds": {
           "type": "array",
@@ -983,7 +983,7 @@
         }
       }
     },
-    "TeamsPhonePrincipalType": {
+    "TeamsExtensionPrincipalType": {
       "description": "The type of principal the assignment is for.",
       "enum": [
         "resourceAccount",
@@ -991,7 +991,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "TeamsPhonePrincipalType",
+        "name": "TeamsExtensionPrincipalType",
         "modelAsString": true
       }
     },
@@ -1050,10 +1050,8 @@
     "EntraAssignmentUpdateBulkRequest": {
       "type": "object",
       "description": "Map of values to be added, updated or removed for objectIds in keys.",
-      "properties": {
-        "additionalProperties": {
-          "$ref": "#/definitions/EntraAssignmentCreateOrUpdateRequest"
-        }
+      "additionalProperties": {
+        "$ref": "#/definitions/EntraAssignmentCreateOrUpdateRequest"
       },
       "example": {
         "350adb03-7be9-4846-b078-35adb0d0e119": {
