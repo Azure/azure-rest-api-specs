@@ -138,6 +138,11 @@ model ContentFilterResultsForChoice {
   @encodedName("application/json", "protected_material_code")
   @doc("Information about detection of protected code material.")
   protectedMaterialCode?: ContentFilterCitedDetectionResult;
+
+  @added(ServiceApiVersions.v2024_10_01_Preview)
+  @encodedName("application/json", "ungrounded_material")
+  @doc("Information about detection of ungrounded material.")
+  ungroundedMaterial?: ContentFilterCompletionTextSpanResult;
 }
 
 @added(ServiceApiVersions.v2023_06_01_Preview)
@@ -176,6 +181,31 @@ model ContentFilterCitedDetectionResult {
   license?: string;
 }
 
+@added(ServiceApiVersions.v2024_10_01_Preview)
+@doc("Describes a span within generated completion text.")
+model ContentFilterCompletionTextSpanResult {
+  ...ContentFilterDetectionResult;
+
+  @doc("The collection of completion text spans.")
+  details: ContentFilterCompletionTextSpan[];
+}
+
+@added(ServiceApiVersions.v2024_10_01_Preview)
+@doc("Describes a span within generated completion text. Offset 0 is the first UTF32 code point of the completion text.")
+model ContentFilterCompletionTextSpan {
+  @doc("Offset of the UTF32 code point which begins the span.")
+  @encodedName("application/json", "completion_start_offset")
+  completionStartOffset: int32;
+
+  @doc("""
+    Offset of the first UTF32 code point which is excluded from the span. 
+    This field is always equal to completion_start_offset for empty spans. 
+    This field is always larger than completion_start_offset for non-empty spans.
+    """)
+  @encodedName("application/json", "completion_end_offset")
+  completionEndOffset: int32;
+}
+
 @doc("Represents the outcome of an evaluation against a custom blocklist as performed by content filtering.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
 model ContentFilterBlocklistIdResult {
@@ -191,5 +221,6 @@ model ContentFilterDetailedResults {
   ...FilteredResultBase;
 
   @doc("The collection of detailed blocklist result information.")
-  details?: ContentFilterBlocklistIdResult[];
+  @madeRequired(ServiceApiVersions.v2024_10_01_Preview)
+  details: ContentFilterBlocklistIdResult[];
 }

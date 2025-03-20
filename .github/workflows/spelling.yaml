@@ -1,0 +1,31 @@
+name: SpellCheck
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  spellcheck:
+    name: SpellCheck
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Run spelling check
+        run: |
+          ./eng/common/scripts/check-spelling-in-changed-files.ps1 `
+              -CSpellConfigPath 'cspell.json' `
+              -SourceCommittish HEAD `
+              -TargetCommittish HEAD^ `
+              -SpellCheckRoot (Resolve-Path specification) `
+              -ExitWithError
+          if ($LASTEXITCODE) {
+            Write-Host "Spelling errors found in changed files. See https://aka.ms/ci-fix#spell-check"
+            exit $LASTEXITCODE
+          }
+        shell: pwsh

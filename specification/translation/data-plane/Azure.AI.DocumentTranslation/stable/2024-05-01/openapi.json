@@ -72,84 +72,28 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "top indicates the total number of records the user wants to be returned across\nall pages.\n            \nClients MAY use top and skip query parameters to\nspecify a number of results to return and an offset into the collection.\nWhen\nboth top and skip are given by a client, the server SHOULD first apply skip\nand then top on the collection.\n            \nNote: If the server can't honor\ntop and/or skip, the server MUST return an error to the client informing\nabout it instead of just ignoring the query options.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "maximum": 2147483647
+            "$ref": "#/parameters/GetTranslationsStatusOptions.top"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "skip indicates the number of records to skip from the list of records held by\nthe server based on the sorting method specified.  By default, we sort by\ndescending start time.\n            \nClients MAY use top and skip query\nparameters to specify a number of results to return and an offset into the\ncollection.\nWhen both top and skip are given by a client, the server SHOULD\nfirst apply skip and then top on the collection.\n            \nNote: If the\nserver can't honor top and/or skip, the server MUST return an error to the\nclient informing about it instead of just ignoring the query options.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "maximum": 2147483647
+            "$ref": "#/parameters/GetTranslationsStatusOptions.skip"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "maxpagesize is the maximum items returned in a page.  If more items are\nrequested via top (or top is not specified and there are more items to be\nreturned), @nextLink will contain the link to the next page.\n           \n\nClients MAY request server-driven paging with a specific page size by\nspecifying a maxpagesize preference. The server SHOULD honor this preference\nif the specified page size is smaller than the server's default page size.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "minimum": 1,
-            "maximum": 100
+            "$ref": "#/parameters/GetTranslationsStatusOptions.maxpagesize"
           },
           {
-            "name": "ids",
-            "in": "query",
-            "description": "Ids to use in filtering",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "collectionFormat": "csv",
-            "x-ms-client-name": "translationIds"
+            "$ref": "#/parameters/GetTranslationsStatusOptions.ids"
           },
           {
-            "name": "statuses",
-            "in": "query",
-            "description": "Statuses to use in filtering",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/GetTranslationsStatusOptions.statuses"
           },
           {
-            "name": "createdDateTimeUtcStart",
-            "in": "query",
-            "description": "the start datetime to get items after",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/GetTranslationsStatusOptions.createdDateTimeUtcStart"
           },
           {
-            "name": "createdDateTimeUtcEnd",
-            "in": "query",
-            "description": "the end datetime to get items before",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/GetTranslationsStatusOptions.createdDateTimeUtcEnd"
           },
           {
-            "name": "orderby",
-            "in": "query",
-            "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/GetTranslationsStatusOptions.orderby"
           }
         ],
         "responses": {
@@ -328,93 +272,31 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "id",
-            "in": "path",
-            "description": "Format - uuid.  The operation id",
-            "required": true,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "translationId"
+            "$ref": "#/parameters/GetDocumentsStatusOptions.id"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "top indicates the total number of records the user wants to be returned across\nall pages.\n            \nClients MAY use top and skip query parameters to\nspecify a number of results to return and an offset into the collection.\nWhen\nboth top and skip are given by a client, the server SHOULD first apply skip\nand then top on the collection.\n            \nNote: If the server can't honor\ntop and/or skip, the server MUST return an error to the client informing\nabout it instead of just ignoring the query options.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "maximum": 2147483647
+            "$ref": "#/parameters/GetDocumentsStatusOptions.top"
           },
           {
-            "name": "skip",
-            "in": "query",
-            "description": "skip indicates the number of records to skip from the list of records held by\nthe server based on the sorting method specified.  By default, we sort by\ndescending start time.\n            \nClients MAY use top and skip query\nparameters to specify a number of results to return and an offset into the\ncollection.\nWhen both top and skip are given by a client, the server SHOULD\nfirst apply skip and then top on the collection.\n            \nNote: If the\nserver can't honor top and/or skip, the server MUST return an error to the\nclient informing about it instead of just ignoring the query options.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "maximum": 2147483647
+            "$ref": "#/parameters/GetDocumentsStatusOptions.skip"
           },
           {
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "maxpagesize is the maximum items returned in a page.  If more items are\nrequested via top (or top is not specified and there are more items to be\nreturned), @nextLink will contain the link to the next page.\n           \n\nClients MAY request server-driven paging with a specific page size by\nspecifying a maxpagesize preference. The server SHOULD honor this preference\nif the specified page size is smaller than the server's default page size.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "minimum": 1,
-            "maximum": 100
+            "$ref": "#/parameters/GetDocumentsStatusOptions.maxpagesize"
           },
           {
-            "name": "ids",
-            "in": "query",
-            "description": "Ids to use in filtering",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            },
-            "collectionFormat": "csv",
-            "x-ms-client-name": "documentIds"
+            "$ref": "#/parameters/GetDocumentsStatusOptions.ids"
           },
           {
-            "name": "statuses",
-            "in": "query",
-            "description": "Statuses to use in filtering",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/GetDocumentsStatusOptions.statuses"
           },
           {
-            "name": "createdDateTimeUtcStart",
-            "in": "query",
-            "description": "the start datetime to get items after",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/GetDocumentsStatusOptions.createdDateTimeUtcStart"
           },
           {
-            "name": "createdDateTimeUtcEnd",
-            "in": "query",
-            "description": "the end datetime to get items before",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/parameters/GetDocumentsStatusOptions.createdDateTimeUtcEnd"
           },
           {
-            "name": "orderby",
-            "in": "query",
-            "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/GetDocumentsStatusOptions.orderby"
           }
         ],
         "responses": {
@@ -1460,6 +1342,189 @@
       "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de ",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.createdDateTimeUtcEnd": {
+      "name": "createdDateTimeUtcEnd",
+      "in": "query",
+      "description": "the end datetime to get items before",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.createdDateTimeUtcStart": {
+      "name": "createdDateTimeUtcStart",
+      "in": "query",
+      "description": "the start datetime to get items after",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.id": {
+      "name": "id",
+      "in": "path",
+      "description": "Format - uuid.  The operation id",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.ids": {
+      "name": "ids",
+      "in": "query",
+      "description": "Ids to use in filtering",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "maxpagesize is the maximum items returned in a page.  If more items are\nrequested via top (or top is not specified and there are more items to be\nreturned), @nextLink will contain the link to the next page.\n            \n\nClients MAY request server-driven paging with a specific page size by\nspecifying a maxpagesize preference. The server SHOULD honor this preference\nif the specified page size is smaller than the server's default page size.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.orderby": {
+      "name": "orderby",
+      "in": "query",
+      "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.skip": {
+      "name": "skip",
+      "in": "query",
+      "description": "skip indicates the number of records to skip from the list of records held by\nthe server based on the sorting method specified.  By default, we sort by\ndescending start time.\n            \nClients MAY use top and skip query\nparameters to specify a number of results to return and an offset into the\ncollection.\nWhen both top and skip are given by a client, the server SHOULD\nfirst apply skip and then top on the collection.\n            \nNote: If the\nserver can't honor top and/or skip, the server MUST return an error to the\nclient informing about it instead of just ignoring the query options.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "maximum": 2147483647,
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.statuses": {
+      "name": "statuses",
+      "in": "query",
+      "description": "Statuses to use in filtering",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDocumentsStatusOptions.top": {
+      "name": "top",
+      "in": "query",
+      "description": "top indicates the total number of records the user wants to be returned across\nall pages.\n            \nClients MAY use top and skip query parameters to\nspecify a number of results to return and an offset into the collection.\nWhen\nboth top and skip are given by a client, the server SHOULD first apply skip\nand then top on the collection.\n            \nNote: If the server can't honor\ntop and/or skip, the server MUST return an error to the client informing\nabout it instead of just ignoring the query options.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "maximum": 2147483647,
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.createdDateTimeUtcEnd": {
+      "name": "createdDateTimeUtcEnd",
+      "in": "query",
+      "description": "the end datetime to get items before",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.createdDateTimeUtcStart": {
+      "name": "createdDateTimeUtcStart",
+      "in": "query",
+      "description": "the start datetime to get items after",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.ids": {
+      "name": "ids",
+      "in": "query",
+      "description": "Ids to use in filtering",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.maxpagesize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "maxpagesize is the maximum items returned in a page.  If more items are\nrequested via top (or top is not specified and there are more items to be\nreturned), @nextLink will contain the link to the next page.\n            \n\nClients MAY request server-driven paging with a specific page size by\nspecifying a maxpagesize preference. The server SHOULD honor this preference\nif the specified page size is smaller than the server's default page size.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.orderby": {
+      "name": "orderby",
+      "in": "query",
+      "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.skip": {
+      "name": "skip",
+      "in": "query",
+      "description": "skip indicates the number of records to skip from the list of records held by\nthe server based on the sorting method specified.  By default, we sort by\ndescending start time.\n            \nClients MAY use top and skip query\nparameters to specify a number of results to return and an offset into the\ncollection.\nWhen both top and skip are given by a client, the server SHOULD\nfirst apply skip and then top on the collection.\n            \nNote: If the\nserver can't honor top and/or skip, the server MUST return an error to the\nclient informing about it instead of just ignoring the query options.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "maximum": 2147483647,
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.statuses": {
+      "name": "statuses",
+      "in": "query",
+      "description": "Statuses to use in filtering",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "GetTranslationsStatusOptions.top": {
+      "name": "top",
+      "in": "query",
+      "description": "top indicates the total number of records the user wants to be returned across\nall pages.\n            \nClients MAY use top and skip query parameters to\nspecify a number of results to return and an offset into the collection.\nWhen\nboth top and skip are given by a client, the server SHOULD first apply skip\nand then top on the collection.\n            \nNote: If the server can't honor\ntop and/or skip, the server MUST return an error to the client informing\nabout it instead of just ignoring the query options.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "maximum": 2147483647,
       "x-ms-parameter-location": "method"
     },
     "StartTranslationBody": {
