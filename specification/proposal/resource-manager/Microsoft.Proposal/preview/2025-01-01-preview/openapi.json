@@ -49,7 +49,7 @@
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Proposal/products/{productCode}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Proposal/products/{productCode}": {
       "get": {
         "operationId": "ProductResources_Get",
         "tags": [
@@ -61,15 +61,20 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+            "name": "billingAccountName",
+            "in": "path",
+            "description": "The name of the billing account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]+$"
           },
           {
             "name": "productCode",
             "in": "path",
-            "description": "The name of the product",
+            "description": "The name of the ProductResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]+$"
           }
         ],
         "responses": {
@@ -690,15 +695,5 @@
       "readOnly": true
     }
   },
-  "parameters": {
-    "Azure.ResourceManager.ResourceUriParameter": {
-      "name": "resourceUri",
-      "in": "path",
-      "description": "The fully qualified Azure Resource manager identifier of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    }
-  }
+  "parameters": {}
 }
