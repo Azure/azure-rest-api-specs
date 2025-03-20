@@ -14,7 +14,34 @@ using Azure.Core.Foundations;
 
 namespace Microsoft.MachineLearningServices;
 
+alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+
 interface RAISvc {
+
+  @doc("Get safety evaluation by id.")
+  @route("/evaluator/safety/{id}")
+  getSafetyEvaluation is EvaluationsOperations.ResourceRead<SafetyEvaluation>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates a safety evaluation.")
+  @route("/evaluator/safety")
+  @post
+  createSafetyEvaluation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Safety Evalution to be executed.")
+      @body
+      evaluation: SafetyEvaluation;
+    },
+    SafetyEvaluation
+  >;
+
+  // Evaluation APIs
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the supported annotation tasks.")
+  @route("/checkannotation")
+  @get
+  getAnnotation is Azure.Core.Foundations.Operation<{}, string[]>;
+
   // Evaluation APIs
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("Get the supported annotation tasks.")
