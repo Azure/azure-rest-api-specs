@@ -37,7 +37,7 @@ tag: package-preview-2025-03
 
 These settings apply only when `--tag=package-preview-2025-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-07'
+```yaml $(tag) == 'package-preview-2025-03'
 input-file:
   - Microsoft.DataMigration/preview/2025-03-15-preview/sqlmigration.json
   - Microsoft.DataMigration/preview/2025-03-15-preview/datamigration.json
