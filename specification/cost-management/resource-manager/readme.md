@@ -33,11 +33,11 @@ azure-validator: false
 ---
 
 
-### Tag: package-2025-03-01
+### Tag: package-2025-03
 
-These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-03-01'
+```yaml $(tag) == 'package-2025-03'
 input-file:
   - Microsoft.CostManagement/stable/2025-03-01/common-types.json
   - Microsoft.CostManagement/stable/2025-03-01/costallocation.json
