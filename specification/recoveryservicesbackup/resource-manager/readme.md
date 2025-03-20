@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-preview-2025-03-15
+tag: package-2024-10
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -41,7 +41,7 @@ tag: package-preview-2025-03-15
 ```
 
 ```yaml $(package-activestamp)
-tag: package-preview-2025-03-15
+tag: package-2024-10
 ```
 
 ### Validations
