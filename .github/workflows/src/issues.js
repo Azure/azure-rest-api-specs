@@ -10,8 +10,7 @@ export async function getIssueNumber({ head_sha, core, github }) {
   let issueNumber = NaN;
 
   if (!head_sha) {
-    core.info("No head_sha found in check run");
-    return { issueNumber };
+    throw new Error("head_sha is required when trying to search a PR.");
   }
 
   core.info(`Searching for PRs with commit SHA: ${head_sha}`);
