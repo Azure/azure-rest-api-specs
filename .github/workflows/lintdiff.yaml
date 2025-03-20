@@ -1,0 +1,55 @@
+name: "[TEST-IGNORE] Swagger LintDiff"
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  lintdiff:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout eng
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            eng/
+            .github/
+
+      - name: Checkout 'after' state
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          path: after
+
+      - name: Checkout 'before' state
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: before
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      # TODO: This can probably be updated to run directly from JS
+      # TODO: default workspace is the after/ folder
+      - name: Get changed files
+        run: |
+          ."./eng/scripts/ChangedFiles-Functions.ps1"
+          Set-Location ./after
+          Get-ChangedFiles | Set-Content -Path ../changed-files.txt
+          Get-Location
+          Get-Content ../changed-files.txt
+        shell: pwsh
+
+      # TODO: Could be github.sha for merge commit
+      - name: Run LintDiff
+        run: |
+          npm exec --no -- lint-diff \
+            --before before \
+            --after after \
+            --changed-files-path changed-files.txt \
+            --base-branch ${{ github.event.pull_request.base.ref }} \
+            --compare-sha ${{ github.event.pull_request.head.sha }} \
+            --out-file $GITHUB_STEP_SUMMARY
