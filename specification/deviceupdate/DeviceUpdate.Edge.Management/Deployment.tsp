@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./UpdateAccount.tsp";
 
@@ -11,6 +12,7 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DeviceUpdate;
 /**
@@ -25,6 +27,13 @@ model Deployment
     SegmentName = "deployments",
     NamePattern = "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
   >;
+
+  // Extended location is not included in TrackedResource yet
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Edge location of the Deployment.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_04_01_preview)
+  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations

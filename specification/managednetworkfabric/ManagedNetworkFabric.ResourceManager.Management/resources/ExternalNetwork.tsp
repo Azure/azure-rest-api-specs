@@ -11,7 +11,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the External Network resource.")
 @parentResource(L3IsolationDomain)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ExternalNetworkProperties)
 model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the External Network.")

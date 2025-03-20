@@ -63,6 +63,7 @@ model InstanceProperties {
   reconciliationPolicy?: ReconciliationPolicyProperties;
 
   @doc("Scope of instance")
+  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   solutionScope?: string;
 
   @doc("Status of instance")

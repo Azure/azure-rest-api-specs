@@ -50,7 +50,8 @@ model SolutionVersionProperties {
 
   @doc("Solution instance name")
   @visibility(Lifecycle.Read)
-  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  @maxLength(24)
+  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   solutionInstanceName?: string;
 
   @doc("Solution Dependency Context")
@@ -86,6 +87,11 @@ model SolutionVersion
 model SolutionDependency {
   @doc("Solution Version Id")
   solutionVersionId: string;
+
+  @doc("Solution Instance Name")
+  @maxLength(24)
+  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  solutionInstanceName?: string;
 
   @doc("Solution Template Version Id")
   solutionTemplateVersionId: string;

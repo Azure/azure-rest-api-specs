@@ -10,7 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The L2 Isolation Domain resource definition.")
 @Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model L2IsolationDomain
   extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the L2 Isolation Domain.")
