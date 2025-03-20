@@ -11,7 +11,11 @@ describe("readme", () => {
           "specification/contosowidgetmanager/resource-manager/readme.md",
           expect.objectContaining({
             path: "specification/contosowidgetmanager/resource-manager/readme.md",
-            globalConfig: expect.anything(),
+            globalConfig: {
+              "openapi-type": "arm",
+              "openapi-subtype": "rpaas",
+              tag: "package-2021-11-01",
+            },
           }),
         ],
       ]),
