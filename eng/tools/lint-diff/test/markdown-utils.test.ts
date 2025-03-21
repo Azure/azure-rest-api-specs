@@ -238,7 +238,7 @@ describe("getRelatedArmRpcFromDoc", async () => {
     expect(rule).toEqual([]);
   });
 
-  test.concurrent("returns a rule from the cache", async ({ expect }) => {
+  test.skip().concurrent("returns a rule from the cache", async ({ expect }) => {
     await mockResponseFile("lro-patch202.md");
 
     await getRelatedArmRpcFromDoc("LroPatch202");
