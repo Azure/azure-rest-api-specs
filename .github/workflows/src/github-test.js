@@ -15,11 +15,13 @@ export default async function importAllModules({ core }) {
   }
 
   const githubPath = join(workspace, ".github");
-  const scripts = (await readdir(githubPath, { recursive: true })).filter(
-    (f) =>
-      normalize(f).split(sep).includes("src") &&
-      basename(f).toLowerCase().endsWith(".js"),
-  );
+  const scripts = (await readdir(githubPath, { recursive: true }))
+    .filter(
+      (f) =>
+        normalize(f).split(sep).includes("src") &&
+        basename(f).toLowerCase().endsWith(".js"),
+    )
+    .sort();
 
   core.info(JSON.stringify(scripts));
 }
