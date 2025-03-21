@@ -55,6 +55,9 @@ jobs:
             --compare-sha ${{ github.event.pull_request.head.sha }} \
             --out-file $GITHUB_STEP_SUMMARY
 
+          echo "⚠️ THIS IS A TEST ONLY FOR A LINTDIFF REPLACEMENT. IT'S OK IF THIS JOB FAILS. THIS WILL NOT BLOCK YOUR PR."
+          echo "SEE OTHER LintDiff JOBS IN PR CHECKS FOR DEFINITIVE RESULTS."
+
       - name: Prepend test notice to summary
         run: |
           temp_file=$(mktemp)
