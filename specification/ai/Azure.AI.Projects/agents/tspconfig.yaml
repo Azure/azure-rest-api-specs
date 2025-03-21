@@ -1,0 +1,22 @@
+# extends: ../tspconfig.yaml                    # Extend another config file
+emit:                                         # Emitter name
+  - "@typespec/openapi3"
+  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-python"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
+options:                                      # Emitter options
+  "@azure-tools/typespec-python":
+    package-dir: "azure-foundry-agents"
+    package-name: "{package-dir}" 
+# environment-variables:                        # Environment variables which can be used to interpolate emitter options
+#   <variable-name>:
+#     default: "<variable-default>"
+# parameters:                                   # Parameters which can be used to interpolate emitter options
+#   <param-name>:
+#     default: "<param-default>"
+# trace:                                        # Trace areas to enable tracing
+#  - "<trace-name>"
+# warn-as-error: true                           # Treat warnings as errors
+# output-dir: "{project-root}/_generated"       # Configure the base output directory for all emitters
