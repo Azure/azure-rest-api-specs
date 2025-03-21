@@ -7,6 +7,7 @@ permissions:
 
 jobs:
   lintdiff:
+    name: "[TEST-IGNORE] Swagger LintDiff"
     runs-on: ubuntu-24.04
 
     steps:
@@ -53,3 +54,9 @@ jobs:
             --base-branch ${{ github.event.pull_request.base.ref }} \
             --compare-sha ${{ github.event.pull_request.head.sha }} \
             --out-file $GITHUB_STEP_SUMMARY
+
+      - name: Prepend test notice to summary
+        run: |
+          temp_file=$(mktemp)
+          echo "> [!IMPORTANT]\n> THIS IS A TEST FOR A LintDiff REPLACEMENT.\n>Failure DOES NOT block your build. You can ignore any failures" | cat - $GITHUB_STEP_SUMMARY > $temp_file
+          mv $temp_file $GITHUB_STEP_SUMMARY
