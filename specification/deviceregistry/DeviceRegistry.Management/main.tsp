@@ -17,9 +17,7 @@ using Azure.ResourceManager.Private;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.DeviceRegistry management service",
-})
+@service(#{ title: "Microsoft.DeviceRegistry management service" })
 @doc("Microsoft.DeviceRegistry Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.DeviceRegistry;
@@ -29,16 +27,19 @@ namespace Microsoft.DeviceRegistry;
 enum Versions {
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2023-11-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2023_11_01_preview: "2023-11-01-preview",
 
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-09-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_09_01_preview: "2024-09-01-preview",
 
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-11-01.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_11_01: "2024-11-01",
 }
