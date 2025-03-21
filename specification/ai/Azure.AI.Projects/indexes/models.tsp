@@ -15,11 +15,11 @@ using Azure.Core.Traits;
 namespace Azure.AI.Projects;
 
 @doc("Index resource Definition")
-@discriminator("indexType")
+@discriminator("type")
 @Rest.resource("indexes")
 model Index {
   @doc("Type of index")
-  indexType: IndexType;
+  type: IndexType;
 
   ...AssetBase;
 }
@@ -27,10 +27,10 @@ model Index {
 @doc("Azure AI Search Index Definition")
 model AzureAISearchIndex extends Index {
   @doc("Type of index")
-  indexType: IndexType.azureSearch;
+  type: IndexType.azureSearch;
 
-  @doc("Connection id to Azure AI Search")
-  connectionId: string;
+  @doc("Name of connection to Azure AI Search")
+  connectionName: string;
 
   @doc("Name of index in Azure AI Search resource to attach")
   indexName: string;
@@ -39,7 +39,7 @@ model AzureAISearchIndex extends Index {
 @doc("Managed Azure AI Search Index Definition")
 model ManagedAzureAISearchIndex extends Index {
   @doc("Type of index")
-  indexType: IndexType.managedAzureSearch;
+  type: IndexType.managedAzureSearch;
 
   @doc("Vector store id of managed index")
   vectorStoreId: string;
@@ -48,10 +48,10 @@ model ManagedAzureAISearchIndex extends Index {
 @doc("CosmosDB Vector Store Index Definition")
 model CosmosDBIndex extends Index {
   @doc("Type of index")
-  indexType: IndexType.cosmosDB;
+  type: IndexType.cosmosDB;
 
-  @doc("Connection id to CosmosDB")
-  connectionId: string;
+  @doc("Name of connection to CosmosDB")
+  connectionName: string;
 
   @doc("Name of the CosmosDB Database")
   databaseName: string;
@@ -65,11 +65,8 @@ model CosmosDBIndex extends Index {
 
 @doc("Embedding configuration class")
 model EmbeddingConfiguration {
-  @doc("Connection id to embedding model")
-  connectionId?: string;
-
-  @doc("Deployment name of embedding model")
-  deploymentName: string;
+  @doc("Deployment name of embedding model. It can point to a model deployment either in the parent AIServices or a connection.")
+  modelDeploymentName: string;
 
   @doc("Embedding field")
   embeddingField: string;

@@ -9524,9 +9524,9 @@
       "type": "object",
       "description": "Azure AI Search Index Definition",
       "properties": {
-        "connectionId": {
+        "connectionName": {
           "type": "string",
-          "description": "Connection id to Azure AI Search"
+          "description": "Name of connection to Azure AI Search"
         },
         "indexName": {
           "type": "string",
@@ -9534,7 +9534,7 @@
         }
       },
       "required": [
-        "connectionId",
+        "connectionName",
         "indexName"
       ],
       "allOf": [
@@ -9674,9 +9674,9 @@
       "type": "object",
       "description": "CosmosDB Vector Store Index Definition",
       "properties": {
-        "connectionId": {
+        "connectionName": {
           "type": "string",
-          "description": "Connection id to CosmosDB"
+          "description": "Name of connection to CosmosDB"
         },
         "databaseName": {
           "type": "string",
@@ -9692,7 +9692,7 @@
         }
       },
       "required": [
-        "connectionId",
+        "connectionName",
         "databaseName",
         "containerName",
         "embeddingConfiguration"
@@ -9903,13 +9903,9 @@
       "type": "object",
       "description": "Embedding configuration class",
       "properties": {
-        "connectionId": {
+        "modelDeploymentName": {
           "type": "string",
-          "description": "Connection id to embedding model"
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "Deployment name of embedding model"
+          "description": "Deployment name of embedding model. It can point to a model deployment either in the parent AIServices or a connection."
         },
         "embeddingField": {
           "type": "string",
@@ -9917,7 +9913,7 @@
         }
       },
       "required": [
-        "deploymentName",
+        "modelDeploymentName",
         "embeddingField"
       ]
     },
@@ -10089,7 +10085,7 @@
       "type": "object",
       "description": "Index resource Definition",
       "properties": {
-        "indexType": {
+        "type": {
           "$ref": "#/definitions/IndexType",
           "description": "Type of index"
         },
@@ -10134,9 +10130,9 @@
           "readOnly": true
         }
       },
-      "discriminator": "indexType",
+      "discriminator": "type",
       "required": [
-        "indexType",
+        "type",
         "name",
         "version"
       ]
