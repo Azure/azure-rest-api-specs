@@ -310,6 +310,12 @@ function New-SwaggerAPIViewTokens {
     }
   }
 
+  if ($autoRestConfigInfo.Count -eq 0) {
+    LogWarning " No AutoRest configuration found for the changed swagger files in the current PR..."
+    Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
+    exit 0
+  }
+
   LogGroupStart " Swagger APIView Tokens will be generated for the following configuration files..."
   $autoRestConfigInfo.GetEnumerator() | ForEach-Object {
     LogInfo " - $($_.Key)"
@@ -355,9 +361,15 @@ function New-SwaggerAPIViewTokens {
   }
 
   git checkout $currentBranch
+  $generatedSwaggerArtifacts = Get-ChildItem -Path $swaggerAPIViewArtifactsDirectory -Recurse
+  if ($generatedSwaggerArtifacts.Count -eq 0) {
+    LogWarning " No Swagger APIView Tokens generated..."
+    Write-Host "##vso[task.complete result=SucceededWithIssues;]DONE"
+    exit 0
+  }
 
   LogGroupStart " See all generated Swagger APIView Artifacts..."
-  Get-ChildItem -Path $swaggerAPIViewArtifactsDirectory -Recurse
+  $generatedSwaggerArtifacts
   LogGroupEnd
 }
 
