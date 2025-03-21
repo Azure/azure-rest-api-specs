@@ -9,8 +9,6 @@ import { inspect } from "util";
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export default async function importAllModules({ core }) {
-  core.info("importAllModules()");
-
   const workspace = process.env.GITHUB_WORKSPACE;
   if (!workspace) {
     throw new Error("Env var GITHUB_WORKSPACE must be set");
