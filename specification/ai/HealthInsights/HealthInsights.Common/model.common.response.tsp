@@ -8,28 +8,28 @@ namespace AzureHealthInsights;
 alias Response = {
   #suppress "@azure-tools/typespec-azure-core/no-format" "This is an old spec"
   @doc("A processing job identifier.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key
   jobId: Azure.Core.uuid;
 
   @doc("The date and time when the processing job was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDateTime: utcDateTime;
 
   @doc("The date and time when the processing job is set to expire.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   expirationDateTime: utcDateTime;
 
   @doc("The date and time when the processing job was last updated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdateDateTime: utcDateTime;
 
   @doc("The status of the processing job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status: JobStatus;
 
   @doc("An array of errors, if any errors occurred during the processing job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errors?: Azure.Core.Foundations.Error[];
 };
 

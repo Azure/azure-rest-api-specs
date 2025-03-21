@@ -22,7 +22,7 @@ model OncoPhenotypeResult {
   ...Response;
 
   @doc("The inference results for the Onco Phenotype request.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @lroResult
   results?: OncoPhenotypeResults;
 }
