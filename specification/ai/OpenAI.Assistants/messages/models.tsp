@@ -18,7 +18,7 @@ model ThreadInitializationMessage {
   A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
   access files.
   """)
-  fileIds?: string[] = [];
+  fileIds?: string[] = #[];
 
   ...OptionalNullableMetadata;
 }

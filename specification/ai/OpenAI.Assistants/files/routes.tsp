@@ -42,7 +42,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 @route("/files")
 op uploadFile(
   @header contentType: "multipart/form-data",
-  @projectedName("csharp", "Data") file: bytes,
+  @clientName("Data", "csharp") file: bytes,
   purpose: FilePurpose,
 
   /*
