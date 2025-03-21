@@ -89,35 +89,35 @@ model Environment {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Environment type.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentType: string;
 
   @doc("The AAD object id of the owner of this Environment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   user?: Azure.Core.uuid;
 
   @doc("The provisioning state of the environment.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: EnvironmentProvisioningState;
 
   @doc("The identifier of the resource group containing the environment's resources.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGroupId?: string;
 
   @doc("Name of the catalog.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   catalogName: string;
 
   @doc("Name of the environment definition.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   environmentDefinitionName: string;
 
   @doc("Provisioning error details. Populated only for error states.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Azure.Core.Foundations.Error;
 }
 
@@ -140,7 +140,7 @@ model Catalog {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -159,7 +159,7 @@ model EnvironmentDefinition {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Name of the catalog.")

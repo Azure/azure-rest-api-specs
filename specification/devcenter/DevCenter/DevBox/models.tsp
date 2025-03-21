@@ -192,7 +192,7 @@ union DevBoxActionDelayResultStatus {
 @parentResource(Project)
 model Pool {
   @key("poolName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Pool name")
   name: string;
 
@@ -233,17 +233,17 @@ available to create Dev Boxes.
 @doc("Hardware specifications for the Dev Box.")
 model HardwareProfile {
   @doc("The name of the SKU")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   skuName?: SkuName;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The number of vCPUs available for the Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vCPUs?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The amount of memory available for the Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memoryGB?: int32;
 }
 
@@ -257,30 +257,30 @@ model StorageProfile {
 model OsDisk {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The size of the OS Disk in gigabytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeGB?: int32;
 }
 
 @doc("Specifies information about the image used")
 model ImageReference {
   @doc("The name of the image used.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("The version of the image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   @doc("The operating system of the image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operatingSystem?: string;
 
   @doc("The operating system build number of the image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osBuildNumber?: string;
 
   @doc("The datetime that the backing image version was published.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publishedDate?: utcDateTime;
 }
 
@@ -304,7 +304,7 @@ is detected.
 @parentResource(Pool)
 model Schedule {
   @key("scheduleName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Display name for the Schedule")
   name: string;
 
@@ -334,83 +334,83 @@ model DevBox {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Name of the project this Dev Box belongs to")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   projectName?: string;
 
   @doc("The name of the Dev Box pool this machine belongs to.")
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   poolName: string;
 
   @doc("Indicates whether hibernate is enabled/disabled or unknown.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hibernateSupport?: HibernateSupport;
 
   @doc("The current provisioning state of the Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: DevBoxProvisioningState;
 
   @doc("""
 The current action state of the Dev Box. This is state is based on previous
 action performed by user.
 """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actionState?: string;
 
   @doc("The current power state of the Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   powerState?: PowerState;
 
   @doc("""
 A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
 00000000-0000-0000-0000-000000000000).
 """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: Azure.Core.uuid;
 
   @doc("Provisioning or action error details. Populated only for error states.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Azure.Core.Foundations.Error;
 
   @doc("""
 Azure region where this Dev Box is located. This will be the same region as the
 Virtual Network it is attached to.
 """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: Azure.Core.azureLocation;
 
   @doc("The operating system type of this Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OsType;
 
   @doc("The AAD object id of the user this Dev Box is assigned to.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   user?: Azure.Core.uuid;
 
   @doc("Information about the Dev Box's hardware resources")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hardwareProfile?: HardwareProfile;
 
   @doc("Storage settings for this Dev Box")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageProfile?: StorageProfile;
 
   @doc("Information about the image used for this Dev Box")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   imageReference?: ImageReference;
 
   @doc("Creation time of this Dev Box")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdTime?: utcDateTime;
 
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   localAdministrator?: LocalAdminStatus;
 }
 
@@ -432,7 +432,7 @@ model DevBoxAction {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The action that will be taken.")
