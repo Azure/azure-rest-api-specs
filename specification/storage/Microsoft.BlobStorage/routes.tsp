@@ -1346,848 +1346,845 @@ namespace Storage.Blob {
           ...DateResponseHeader;
         }
       >;
-    }
 
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @route("{containerName}")
-    namespace PageBlob {
-      /** The Create operation creates a new page blob. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      @put
-      @route("{blobName}?PageBlob")
-      op create is StorageOperation<
-        {
-          ...MetadataHeaders;
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...TimeoutParameter;
-          ...ContentLengthParameter;
+      #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+      namespace PageBlob {
+        /** The Create operation creates a new page blob. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        @put
+        @route("{blobName}?PageBlob")
+        op create is StorageOperation<
+          {
+            ...MetadataHeaders;
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...TimeoutParameter;
+            ...ContentLengthParameter;
 
-          /** Optional. Indicates the tier to be set on the page blob. */
-          @header("x-ms-access-tier")
-          tier?: PremiumPageBlobAccessTier;
+            /** Optional. Indicates the tier to be set on the page blob. */
+            @header("x-ms-access-tier")
+            tier?: PremiumPageBlobAccessTier;
 
-          ...BlobContentTypeParameter;
-          ...BlobContentEncodingParameter;
-          ...BlobContentLanguageParameter;
-          ...BlobContentMd5Parameter;
-          ...BlobCacheControlParameter;
-          ...LeaseIdOptionalParameter;
-          ...BlobContentDispositionParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...BlobContentLengthRequired;
-          ...BlobSequenceNumberParameter;
-          ...BlobTagsHeaderParameter;
-          ...ImmutabilityPolicyExpiryParameter;
-          ...ImmutabilityPolicyModeParameter;
-          ...LegalHoldOptionalParameter;
+            ...BlobContentTypeParameter;
+            ...BlobContentEncodingParameter;
+            ...BlobContentLanguageParameter;
+            ...BlobContentMd5Parameter;
+            ...BlobCacheControlParameter;
+            ...LeaseIdOptionalParameter;
+            ...BlobContentDispositionParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...BlobContentLengthRequired;
+            ...BlobSequenceNumberParameter;
+            ...BlobTagsHeaderParameter;
+            ...ImmutabilityPolicyExpiryParameter;
+            ...ImmutabilityPolicyModeParameter;
+            ...LegalHoldOptionalParameter;
 
-          /** The type of the blob. */
-          @header("x-ms-blob-type")
-          blobType: BlobType.PageBlob;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...VersionIdResponseHeader;
-          ...DateResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-        },
-        "application/octet-stream"
-      >;
+            /** The type of the blob. */
+            @header("x-ms-blob-type")
+            blobType: BlobType.PageBlob;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...VersionIdResponseHeader;
+            ...DateResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+          },
+          "application/octet-stream"
+        >;
 
-      /** The Upload Pages operation writes a range of pages to a page blob */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-      @put
-      @route("{blobName}?comp=page&update")
-      op uploadPages is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
+        /** The Upload Pages operation writes a range of pages to a page blob */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+        @put
+        @route("{blobName}?comp=page&update")
+        op uploadPages is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
 
-          /** The data to upload. */
-          ...BodyParameter;
+            /** The data to upload. */
+            ...BodyParameter;
 
-          ...ContentLengthParameter;
-          ...ContentMd5Parameter;
-          ...ContentCrc64Parameter;
-          ...TimeoutParameter;
-          ...RangeParameter;
-          ...LeaseIdOptionalParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...IfSequenceNumberLessThanOrEqualToParameter;
-          ...IfSequenceNumberLessThanParameter;
-          ...IfSequenceNumberEqualToParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...StructuredBodyPut;
-          ...StructuredContentLengthParameter;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...ContentCrc64ResponseHeader;
-          ...BlobSequenceNumberResponseHeader;
-          ...DateResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-          ...StructuredBodyTypeResponseHeader;
-        },
-        "application/octet-stream"
-      >;
+            ...ContentLengthParameter;
+            ...ContentMd5Parameter;
+            ...ContentCrc64Parameter;
+            ...TimeoutParameter;
+            ...RangeParameter;
+            ...LeaseIdOptionalParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...IfSequenceNumberLessThanOrEqualToParameter;
+            ...IfSequenceNumberLessThanParameter;
+            ...IfSequenceNumberEqualToParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...StructuredBodyPut;
+            ...StructuredContentLengthParameter;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...ContentCrc64ResponseHeader;
+            ...BlobSequenceNumberResponseHeader;
+            ...DateResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+            ...StructuredBodyTypeResponseHeader;
+          },
+          "application/octet-stream"
+        >;
 
-      /** The Clear Pages operation clears a range of pages from a page blob */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @put
-      @route("{blobName}?comp=page&clear")
-      op clearPages is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...ContentLengthParameter;
-          ...TimeoutParameter;
-          ...RangeParameter;
-          ...LeaseIdOptionalParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...IfSequenceNumberLessThanOrEqualToParameter;
-          ...IfSequenceNumberLessThanParameter;
-          ...IfSequenceNumberEqualToParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...ContentCrc64ResponseHeader;
-          ...BlobSequenceNumberResponseHeader;
-          ...DateResponseHeader;
-        },
-        "application/octet-stream"
-      >;
+        /** The Clear Pages operation clears a range of pages from a page blob */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @put
+        @route("{blobName}?comp=page&clear")
+        op clearPages is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...ContentLengthParameter;
+            ...TimeoutParameter;
+            ...RangeParameter;
+            ...LeaseIdOptionalParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...IfSequenceNumberLessThanOrEqualToParameter;
+            ...IfSequenceNumberLessThanParameter;
+            ...IfSequenceNumberEqualToParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...ContentCrc64ResponseHeader;
+            ...BlobSequenceNumberResponseHeader;
+            ...DateResponseHeader;
+          },
+          "application/octet-stream"
+        >;
 
-      /** The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      @put
-      @route("{blobName}?comp=page&update&fromUrl")
-      op uploadPagesFromUrl is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...SourceUrlParameter;
+        /** The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        @put
+        @route("{blobName}?comp=page&update&fromUrl")
+        op uploadPagesFromUrl is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...SourceUrlParameter;
 
-          /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
-          @header("x-ms-source-range")
-          sourceRange: string;
+            /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
+            @header("x-ms-source-range")
+            sourceRange: string;
 
-          ...SourceContentMd5Parameter;
-          ...SourceContentCrc64Parameter;
-          ...ContentLengthParameter;
-          ...TimeoutParameter;
+            ...SourceContentMd5Parameter;
+            ...SourceContentCrc64Parameter;
+            ...ContentLengthParameter;
+            ...TimeoutParameter;
 
-          /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
-          @header("x-ms-range")
-          range: string;
+            /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
+            @header("x-ms-range")
+            range: string;
 
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...LeaseIdOptionalParameter;
-          ...IfSequenceNumberLessThanOrEqualToParameter;
-          ...IfSequenceNumberLessThanParameter;
-          ...IfSequenceNumberEqualToParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...SourceIfModifiedSinceParameter;
-          ...SourceIfUnmodifiedSinceParameter;
-          ...SourceIfMatchParameter;
-          ...SourceIfNoneMatchParameter;
-          ...CopySourceAuthorizationParameter;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...ContentCrc64ResponseHeader;
-          ...BlobSequenceNumberResponseHeader;
-          ...DateResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-        },
-        "application/octet-stream"
-      >;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...LeaseIdOptionalParameter;
+            ...IfSequenceNumberLessThanOrEqualToParameter;
+            ...IfSequenceNumberLessThanParameter;
+            ...IfSequenceNumberEqualToParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...SourceIfModifiedSinceParameter;
+            ...SourceIfUnmodifiedSinceParameter;
+            ...SourceIfMatchParameter;
+            ...SourceIfNoneMatchParameter;
+            ...CopySourceAuthorizationParameter;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...ContentCrc64ResponseHeader;
+            ...BlobSequenceNumberResponseHeader;
+            ...DateResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+          },
+          "application/octet-stream"
+        >;
 
-      /** The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @get
-      @route("{blobName}?comp=pagelist")
-      op getPageRanges is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...SnapshotParameter;
-          ...TimeoutParameter;
-          ...RangeParameter;
-          ...LeaseIdOptionalParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...MarkerParameter;
-          ...MaxResultsParameter;
-        },
-        PageList & {
-          ...LastModifiedResponseHeader;
-          ...EtagResponseHeader;
-          ...BlobContentLengthRequired;
-          ...DateResponseHeader;
-        }
-      >;
+        /** The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @get
+        @route("{blobName}?comp=pagelist")
+        op getPageRanges is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...SnapshotParameter;
+            ...TimeoutParameter;
+            ...RangeParameter;
+            ...LeaseIdOptionalParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...MarkerParameter;
+            ...MaxResultsParameter;
+          },
+          PageList & {
+            ...LastModifiedResponseHeader;
+            ...EtagResponseHeader;
+            ...BlobContentLengthRequired;
+            ...DateResponseHeader;
+          }
+        >;
 
-      /** The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @get
-      @route("{blobName}?comp=pagelist&diff")
-      op getPageRangesDiff is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...SnapshotParameter;
-          ...TimeoutParameter;
+        /** The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @get
+        @route("{blobName}?comp=pagelist&diff")
+        op getPageRangesDiff is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...SnapshotParameter;
+            ...TimeoutParameter;
 
-          /** Optional in version 2015-07-08 and newer. The prevsnapshot parameter is a DateTime value that specifies that the response will contain only pages that were changed between target blob and previous snapshot. Changed pages include both updated and cleared pages. The target blob may be a snapshot, as long as the snapshot specified by prevsnapshot is the older of the two. Note that incremental snapshots are currently supported only for blobs created on or after January 1, 2016. */
-          @query
-          prevsnapshot?: string;
+            /** Optional in version 2015-07-08 and newer. The prevsnapshot parameter is a DateTime value that specifies that the response will contain only pages that were changed between target blob and previous snapshot. Changed pages include both updated and cleared pages. The target blob may be a snapshot, as long as the snapshot specified by prevsnapshot is the older of the two. Note that incremental snapshots are currently supported only for blobs created on or after January 1, 2016. */
+            @query
+            prevsnapshot?: string;
 
-          /** Optional. This header is only supported in service versions 2019-04-19 and after and specifies the URL of a previous snapshot of the target blob. The response will only contain pages that were changed between the target blob and its previous snapshot. */
-          @header("x-ms-previous-snapshot-url")
-          prevSnapshotUrl?: string;
+            /** Optional. This header is only supported in service versions 2019-04-19 and after and specifies the URL of a previous snapshot of the target blob. The response will only contain pages that were changed between the target blob and its previous snapshot. */
+            @header("x-ms-previous-snapshot-url")
+            prevSnapshotUrl?: string;
 
-          ...RangeParameter;
-          ...LeaseIdOptionalParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...MarkerParameter;
-          ...MaxResultsParameter;
-        },
-        PageList & {
-          ...LastModifiedResponseHeader;
-          ...EtagResponseHeader;
-          ...BlobContentLengthRequired;
-          ...DateResponseHeader;
-        }
-      >;
+            ...RangeParameter;
+            ...LeaseIdOptionalParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...MarkerParameter;
+            ...MaxResultsParameter;
+          },
+          PageList & {
+            ...LastModifiedResponseHeader;
+            ...EtagResponseHeader;
+            ...BlobContentLengthRequired;
+            ...DateResponseHeader;
+          }
+        >;
 
-      /** The Resize operation increases the size of the page blob to the specified size. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @put
-      @route("{blobName}?comp=properties&Resize")
-      op resize is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...TimeoutParameter;
-          ...LeaseIdOptionalParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...BlobContentLengthRequired;
-        },
-        {
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...BlobSequenceNumberResponseHeader;
-          ...DateResponseHeader;
-        }
-      >;
+        /** The Resize operation increases the size of the page blob to the specified size. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @put
+        @route("{blobName}?comp=properties&Resize")
+        op resize is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...TimeoutParameter;
+            ...LeaseIdOptionalParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...BlobContentLengthRequired;
+          },
+          {
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...BlobSequenceNumberResponseHeader;
+            ...DateResponseHeader;
+          }
+        >;
 
-      /** The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @put
-      @route("{blobName}?comp=properties&UpdateSequenceNumber")
-      op updateSequenceNumber is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...TimeoutParameter;
-          ...LeaseIdOptionalParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...SequenceNumberActionParameter;
-          ...SequenceNumberParameter;
-        },
-        {
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...BlobSequenceNumberResponseHeader;
-          ...DateResponseHeader;
-        }
-      >;
+        /** The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @put
+        @route("{blobName}?comp=properties&UpdateSequenceNumber")
+        op updateSequenceNumber is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...TimeoutParameter;
+            ...LeaseIdOptionalParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...SequenceNumberActionParameter;
+            ...SequenceNumberParameter;
+          },
+          {
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...BlobSequenceNumberResponseHeader;
+            ...DateResponseHeader;
+          }
+        >;
 
-      /** The Copy Incremental operation copies a snapshot of the source page blob to a destination page blob. The snapshot is copied such that only the differential changes between the previously copied snapshot are transferred to the destination. The copied snapshots are complete copies of the original snapshot and can be read or copied from as usual. This API is supported since REST version 2016-05-31. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      @put
-      @route("{blobName}?comp=incrementalcopy")
-      op copyIncremental is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...TimeoutParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...CopySourceParameter;
-        },
-        {
-          @statusCode statusCode: 202;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...DateResponseHeader;
-          ...CopyIdResponseHeader;
-          ...CopyStatusResponseHeader;
-        }
-      >;
-    }
+        /** The Copy Incremental operation copies a snapshot of the source page blob to a destination page blob. The snapshot is copied such that only the differential changes between the previously copied snapshot are transferred to the destination. The copied snapshots are complete copies of the original snapshot and can be read or copied from as usual. This API is supported since REST version 2016-05-31. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        @put
+        @route("{blobName}?comp=incrementalcopy")
+        op copyIncremental is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...TimeoutParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...CopySourceParameter;
+          },
+          {
+            @statusCode statusCode: 202;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...DateResponseHeader;
+            ...CopyIdResponseHeader;
+            ...CopyStatusResponseHeader;
+          }
+        >;
+      }
 
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @route("{containerName}")
-    namespace AppendBlob {
-      /** The Create operation creates a new append blob. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      @put
-      @route("{blobName}?AppendBlob")
-      op create is StorageOperation<
-        {
-          ...MetadataHeaders;
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...TimeoutParameter;
-          ...ContentLengthParameter;
-          ...BlobContentTypeParameter;
-          ...BlobContentEncodingParameter;
-          ...BlobContentLanguageParameter;
-          ...BlobContentMd5Parameter;
-          ...BlobCacheControlParameter;
-          ...LeaseIdOptionalParameter;
-          ...BlobContentDispositionParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...BlobTagsHeaderParameter;
-          ...ImmutabilityPolicyExpiryParameter;
-          ...ImmutabilityPolicyModeParameter;
-          ...LegalHoldOptionalParameter;
+      #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+      namespace AppendBlob {
+        /** The Create operation creates a new append blob. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        @put
+        @route("{blobName}?AppendBlob")
+        op create is StorageOperation<
+          {
+            ...MetadataHeaders;
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...TimeoutParameter;
+            ...ContentLengthParameter;
+            ...BlobContentTypeParameter;
+            ...BlobContentEncodingParameter;
+            ...BlobContentLanguageParameter;
+            ...BlobContentMd5Parameter;
+            ...BlobCacheControlParameter;
+            ...LeaseIdOptionalParameter;
+            ...BlobContentDispositionParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...BlobTagsHeaderParameter;
+            ...ImmutabilityPolicyExpiryParameter;
+            ...ImmutabilityPolicyModeParameter;
+            ...LegalHoldOptionalParameter;
 
-          /** The type of the blob. */
-          @header("x-ms-blob-type")
-          blobType: BlobType.AppendBlob;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...VersionIdResponseHeader;
-          ...DateResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-        },
-        "application/octet-stream"
-      >;
+            /** The type of the blob. */
+            @header("x-ms-blob-type")
+            blobType: BlobType.AppendBlob;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...VersionIdResponseHeader;
+            ...DateResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+          },
+          "application/octet-stream"
+        >;
 
-      /** The Append Block operation commits a new block of data to the end of an append blob. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-      @put
-      @route("{blobName}?comp=appendblock")
-      op appendBlock is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
+        /** The Append Block operation commits a new block of data to the end of an append blob. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+        @put
+        @route("{blobName}?comp=appendblock")
+        op appendBlock is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
 
-          /** The data to upload. */
-          ...BodyParameter;
+            /** The data to upload. */
+            ...BodyParameter;
 
-          ...TimeoutParameter;
-          ...ContentLengthParameter;
-          ...ContentMd5Parameter;
-          ...ContentCrc64Parameter;
-          ...LeaseIdOptionalParameter;
-          ...BlobConditionMaxSizeParameter;
-          ...BlobConditionAppendPosParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...StructuredBodyPut;
-          ...StructuredContentLengthParameter;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...ContentCrc64ResponseHeader;
-          ...DateResponseHeader;
-          ...BlobAppendOffsetResponseHeader;
-          ...BlobCommittedBlockCountResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-          ...StructuredBodyTypeResponseHeader;
-        },
-        "application/octet-stream"
-      >;
+            ...TimeoutParameter;
+            ...ContentLengthParameter;
+            ...ContentMd5Parameter;
+            ...ContentCrc64Parameter;
+            ...LeaseIdOptionalParameter;
+            ...BlobConditionMaxSizeParameter;
+            ...BlobConditionAppendPosParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...StructuredBodyPut;
+            ...StructuredContentLengthParameter;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...ContentCrc64ResponseHeader;
+            ...DateResponseHeader;
+            ...BlobAppendOffsetResponseHeader;
+            ...BlobCommittedBlockCountResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+            ...StructuredBodyTypeResponseHeader;
+          },
+          "application/octet-stream"
+        >;
 
-      /** The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @put
-      @route("{blobName}?comp=appendblock&fromUrl")
-      op appendBlockFromUrl is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...SourceUrlParameter;
-          ...SourceRangeParameter;
-          ...SourceContentMd5Parameter;
-          ...SourceContentCrc64Parameter;
-          ...TimeoutParameter;
-          ...ContentLengthParameter;
-          ...ContentMd5Parameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...LeaseIdOptionalParameter;
-          ...BlobConditionMaxSizeParameter;
-          ...BlobConditionAppendPosParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...SourceIfModifiedSinceParameter;
-          ...SourceIfUnmodifiedSinceParameter;
-          ...SourceIfMatchParameter;
-          ...SourceIfNoneMatchParameter;
-          ...CopySourceAuthorizationParameter;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...ContentCrc64ResponseHeader;
-          ...DateResponseHeader;
-          ...BlobAppendOffsetResponseHeader;
-          ...BlobCommittedBlockCountResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-        }
-      >;
+        /** The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @put
+        @route("{blobName}?comp=appendblock&fromUrl")
+        op appendBlockFromUrl is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...SourceUrlParameter;
+            ...SourceRangeParameter;
+            ...SourceContentMd5Parameter;
+            ...SourceContentCrc64Parameter;
+            ...TimeoutParameter;
+            ...ContentLengthParameter;
+            ...ContentMd5Parameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...LeaseIdOptionalParameter;
+            ...BlobConditionMaxSizeParameter;
+            ...BlobConditionAppendPosParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...SourceIfModifiedSinceParameter;
+            ...SourceIfUnmodifiedSinceParameter;
+            ...SourceIfMatchParameter;
+            ...SourceIfNoneMatchParameter;
+            ...CopySourceAuthorizationParameter;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...ContentCrc64ResponseHeader;
+            ...DateResponseHeader;
+            ...BlobAppendOffsetResponseHeader;
+            ...BlobCommittedBlockCountResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+          }
+        >;
 
-      /** The Seal operation seals the Append Blob to make it read-only. Seal is supported only on version 2019-12-12 version or later. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @put
-      @route("{blobName}?comp=seal")
-      op seal is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...TimeoutParameter;
-          ...LeaseIdOptionalParameter;
-          ...ConditionalRequestHeaders;
-          ...BlobConditionAppendPosParameter;
-        },
-        {
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...DateResponseHeader;
-          ...IsSealedResponseHeader;
-        }
-      >;
-    }
+        /** The Seal operation seals the Append Blob to make it read-only. Seal is supported only on version 2019-12-12 version or later. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @put
+        @route("{blobName}?comp=seal")
+        op seal is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...TimeoutParameter;
+            ...LeaseIdOptionalParameter;
+            ...ConditionalRequestHeaders;
+            ...BlobConditionAppendPosParameter;
+          },
+          {
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...DateResponseHeader;
+            ...IsSealedResponseHeader;
+          }
+        >;
+      }
 
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @route("{containerName}")
-    namespace BlockBlob {
-      /** The Upload Block Blob operation updates the content of an existing block blob. Updating an existing block blob overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob; the content of the existing blob is overwritten with the content of the new blob. To perform a partial update of the content of a block blob, use the Put Block List operation. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-      @put
-      @route("{blobName}?BlockBlob")
-      op upload is StorageOperation<
-        {
-          ...MetadataHeaders;
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...BodyParameter;
-          ...TimeoutParameter;
-          ...ContentMd5Parameter;
-          ...ContentLengthParameter;
-          ...BlobContentTypeParameter;
-          ...BlobContentEncodingParameter;
-          ...BlobContentLanguageParameter;
-          ...BlobContentMd5Parameter;
-          ...BlobCacheControlParameter;
-          ...LeaseIdOptionalParameter;
-          ...BlobContentDispositionParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...AccessTierOptional;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...BlobTagsHeaderParameter;
-          ...ImmutabilityPolicyExpiryParameter;
-          ...ImmutabilityPolicyModeParameter;
-          ...LegalHoldOptionalParameter;
-          ...ContentCrc64Parameter;
-          ...StructuredBodyPut;
-          ...StructuredContentLengthParameter;
+      #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+      namespace BlockBlob {
+        /** The Upload Block Blob operation updates the content of an existing block blob. Updating an existing block blob overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob; the content of the existing blob is overwritten with the content of the new blob. To perform a partial update of the content of a block blob, use the Put Block List operation. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+        @put
+        @route("{blobName}?BlockBlob")
+        op upload is StorageOperation<
+          {
+            ...MetadataHeaders;
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...BodyParameter;
+            ...TimeoutParameter;
+            ...ContentMd5Parameter;
+            ...ContentLengthParameter;
+            ...BlobContentTypeParameter;
+            ...BlobContentEncodingParameter;
+            ...BlobContentLanguageParameter;
+            ...BlobContentMd5Parameter;
+            ...BlobCacheControlParameter;
+            ...LeaseIdOptionalParameter;
+            ...BlobContentDispositionParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...AccessTierOptional;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...BlobTagsHeaderParameter;
+            ...ImmutabilityPolicyExpiryParameter;
+            ...ImmutabilityPolicyModeParameter;
+            ...LegalHoldOptionalParameter;
+            ...ContentCrc64Parameter;
+            ...StructuredBodyPut;
+            ...StructuredContentLengthParameter;
 
-          /** The type of the blob. */
-          @header("x-ms-blob-type")
-          blobType: BlobType.BlockBlob;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...VersionIdResponseHeader;
-          ...DateResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-          ...StructuredBodyTypeResponseHeader;
-        },
-        "application/octet-stream"
-      >;
+            /** The type of the blob. */
+            @header("x-ms-blob-type")
+            blobType: BlobType.BlockBlob;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...VersionIdResponseHeader;
+            ...DateResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+            ...StructuredBodyTypeResponseHeader;
+          },
+          "application/octet-stream"
+        >;
 
-      /** The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @put
-      @route("{blobName}?BlockBlob&fromUrl")
-      op putBlobFromUrl is StorageOperation<
-        {
-          ...MetadataHeaders;
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...TimeoutParameter;
-          ...ContentMd5Parameter;
-          ...ContentLengthParameter;
-          ...BlobContentTypeParameter;
-          ...BlobContentEncodingParameter;
-          ...BlobContentLanguageParameter;
-          ...BlobContentMd5Parameter;
-          ...BlobCacheControlParameter;
-          ...LeaseIdOptionalParameter;
-          ...BlobContentDispositionParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...AccessTierOptional;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-          ...SourceIfModifiedSinceParameter;
-          ...SourceIfUnmodifiedSinceParameter;
-          ...SourceIfMatchParameter;
-          ...SourceIfNoneMatchParameter;
-          ...SourceIfTagsParameter;
-          ...SourceContentMd5Parameter;
-          ...BlobTagsHeaderParameter;
-          ...CopySourceParameter;
-          ...CopySourceBlobPropertiesParameter;
-          ...CopySourceAuthorizationParameter;
-          ...CopySourceTagsParameter;
+        /** The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @put
+        @route("{blobName}?BlockBlob&fromUrl")
+        op putBlobFromUrl is StorageOperation<
+          {
+            ...MetadataHeaders;
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...TimeoutParameter;
+            ...ContentMd5Parameter;
+            ...ContentLengthParameter;
+            ...BlobContentTypeParameter;
+            ...BlobContentEncodingParameter;
+            ...BlobContentLanguageParameter;
+            ...BlobContentMd5Parameter;
+            ...BlobCacheControlParameter;
+            ...LeaseIdOptionalParameter;
+            ...BlobContentDispositionParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...AccessTierOptional;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+            ...SourceIfModifiedSinceParameter;
+            ...SourceIfUnmodifiedSinceParameter;
+            ...SourceIfMatchParameter;
+            ...SourceIfNoneMatchParameter;
+            ...SourceIfTagsParameter;
+            ...SourceContentMd5Parameter;
+            ...BlobTagsHeaderParameter;
+            ...CopySourceParameter;
+            ...CopySourceBlobPropertiesParameter;
+            ...CopySourceAuthorizationParameter;
+            ...CopySourceTagsParameter;
 
-          /** The type of the blob. */
-          @header("x-ms-blob-type")
-          blobType: BlobType.BlockBlob;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...VersionIdResponseHeader;
-          ...DateResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-        },
-        "application/octet-stream"
-      >;
+            /** The type of the blob. */
+            @header("x-ms-blob-type")
+            blobType: BlobType.BlockBlob;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...VersionIdResponseHeader;
+            ...DateResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+          },
+          "application/octet-stream"
+        >;
 
-      /** The Stage Block operation creates a new block to be committed as part of a blob */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-      @put
-      @route("{blobName}?comp=block")
-      op stageBlock is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...BlockIdParameter;
-          ...ContentLengthParameter;
-          ...ContentMd5Parameter;
-          ...ContentCrc64Parameter;
-          ...BodyParameter;
-          ...TimeoutParameter;
-          ...LeaseIdOptionalParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...StructuredBodyPut;
-          ...StructuredContentLengthParameter;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...DateResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...ContentCrc64ResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-          ...StructuredBodyTypeResponseHeader;
-        },
-        "application/octet-stream"
-      >;
+        /** The Stage Block operation creates a new block to be committed as part of a blob */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+        @put
+        @route("{blobName}?comp=block")
+        op stageBlock is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...BlockIdParameter;
+            ...ContentLengthParameter;
+            ...ContentMd5Parameter;
+            ...ContentCrc64Parameter;
+            ...BodyParameter;
+            ...TimeoutParameter;
+            ...LeaseIdOptionalParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...StructuredBodyPut;
+            ...StructuredContentLengthParameter;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...DateResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...ContentCrc64ResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+            ...StructuredBodyTypeResponseHeader;
+          },
+          "application/octet-stream"
+        >;
 
-      /** The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @put
-      @route("{blobName}?comp=block&fromURL")
-      op stageBlockFromUrl is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...BlockIdParameter;
-          ...ContentLengthParameter;
-          ...SourceUrlParameter;
-          ...SourceRangeParameter;
-          ...SourceContentMd5Parameter;
-          ...SourceContentCrc64Parameter;
-          ...TimeoutParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...LeaseIdOptionalParameter;
-          ...SourceIfModifiedSinceParameter;
-          ...SourceIfUnmodifiedSinceParameter;
-          ...SourceIfMatchParameter;
-          ...SourceIfNoneMatchParameter;
-          ...CopySourceAuthorizationParameter;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...DateResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...ContentCrc64ResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-        }
-      >;
+        /** The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @put
+        @route("{blobName}?comp=block&fromURL")
+        op stageBlockFromUrl is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...BlockIdParameter;
+            ...ContentLengthParameter;
+            ...SourceUrlParameter;
+            ...SourceRangeParameter;
+            ...SourceContentMd5Parameter;
+            ...SourceContentCrc64Parameter;
+            ...TimeoutParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...LeaseIdOptionalParameter;
+            ...SourceIfModifiedSinceParameter;
+            ...SourceIfUnmodifiedSinceParameter;
+            ...SourceIfMatchParameter;
+            ...SourceIfNoneMatchParameter;
+            ...CopySourceAuthorizationParameter;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...DateResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...ContentCrc64ResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+          }
+        >;
 
-      /** The Commit Block List operation writes a blob by specifying the list of block IDs that make up the blob. In order to be written as part of a blob, a block must have been successfully written to the server in a prior Put Block operation. You can call Put Block List to update a blob by uploading only those blocks that have changed, then committing the new and existing blocks together. You can do this by specifying whether to commit a block from the committed block list or from the uncommitted block list, or to commit the most recently uploaded version of the block, whichever list it may belong to. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-      @put
-      @route("{blobName}?comp=blocklist")
-      op commitBlockList is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...TimeoutParameter;
-          ...BlobCacheControlParameter;
-          ...BlobContentTypeParameter;
-          ...BlobContentEncodingParameter;
-          ...BlobContentLanguageParameter;
-          ...BlobContentMd5Parameter;
-          ...ContentMd5Parameter;
-          ...ContentCrc64Parameter;
-          ...MetadataHeaders;
-          ...LeaseIdOptionalParameter;
-          ...BlobContentDispositionParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...EncryptionScopeParameter;
-          ...AccessTierOptional;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
+        /** The Commit Block List operation writes a blob by specifying the list of block IDs that make up the blob. In order to be written as part of a blob, a block must have been successfully written to the server in a prior Put Block operation. You can call Put Block List to update a blob by uploading only those blocks that have changed, then committing the new and existing blocks together. You can do this by specifying whether to commit a block from the committed block list or from the uncommitted block list, or to commit the most recently uploaded version of the block, whichever list it may belong to. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+        @put
+        @route("{blobName}?comp=blocklist")
+        op commitBlockList is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...TimeoutParameter;
+            ...BlobCacheControlParameter;
+            ...BlobContentTypeParameter;
+            ...BlobContentEncodingParameter;
+            ...BlobContentLanguageParameter;
+            ...BlobContentMd5Parameter;
+            ...ContentMd5Parameter;
+            ...ContentCrc64Parameter;
+            ...MetadataHeaders;
+            ...LeaseIdOptionalParameter;
+            ...BlobContentDispositionParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...EncryptionScopeParameter;
+            ...AccessTierOptional;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
 
-          /** Blob Blocks. */
-          @body blocks: BlockLookupList;
+            /** Blob Blocks. */
+            @body blocks: BlockLookupList;
 
-          ...BlobTagsHeaderParameter;
-          ...ImmutabilityPolicyExpiryParameter;
-          ...ImmutabilityPolicyModeParameter;
-          ...LegalHoldOptionalParameter;
-        },
-        {
-          @statusCode statusCode: 201;
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...ContentCrc64ResponseHeader;
-          ...VersionIdResponseHeader;
-          ...DateResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-        }
-      >;
+            ...BlobTagsHeaderParameter;
+            ...ImmutabilityPolicyExpiryParameter;
+            ...ImmutabilityPolicyModeParameter;
+            ...LegalHoldOptionalParameter;
+          },
+          {
+            @statusCode statusCode: 201;
+            ...EtagResponseHeader;
+            ...LastModifiedResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...ContentCrc64ResponseHeader;
+            ...VersionIdResponseHeader;
+            ...DateResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+          }
+        >;
 
-      /** The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      @get
-      @route("{blobName}?comp=blocklist")
-      op getBlockList is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
-          ...SnapshotParameter;
+        /** The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        @get
+        @route("{blobName}?comp=blocklist")
+        op getBlockList is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
+            ...SnapshotParameter;
 
-          /** Specifies whether to return the list of committed blocks, the list of uncommitted blocks, or both lists together. */
-          @query
-          @clientName("listType")
-          blocklisttype: BlockListType;
+            /** Specifies whether to return the list of committed blocks, the list of uncommitted blocks, or both lists together. */
+            @query
+            @clientName("listType")
+            blocklisttype: BlockListType;
 
-          ...TimeoutParameter;
-          ...LeaseIdOptionalParameter;
-          ...IfTagsParameter;
-        },
-        BlockList & {
-          ...LastModifiedResponseHeader;
-          ...EtagResponseHeader;
-          ...BlobContentLengthRequired;
-          ...DateResponseHeader;
-        }
-      >;
+            ...TimeoutParameter;
+            ...LeaseIdOptionalParameter;
+            ...IfTagsParameter;
+          },
+          BlockList & {
+            ...LastModifiedResponseHeader;
+            ...EtagResponseHeader;
+            ...BlobContentLengthRequired;
+            ...DateResponseHeader;
+          }
+        >;
 
-      /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
-      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-      #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-      @post
-      @route("{blobName}?comp=query")
-      op query is StorageOperation<
-        {
-          ...ContainerNamePathParameter;
-          ...BlobPathParameter;
+        /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+        #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
+        @post
+        @route("{blobName}?comp=query")
+        op query is StorageOperation<
+          {
+            ...ContainerNamePathParameter;
+            ...BlobPathParameter;
 
-          /** The query request */
-          @body
-          queryRequest: QueryRequest;
+            /** The query request */
+            @body
+            queryRequest: QueryRequest;
 
-          ...SnapshotParameter;
-          ...TimeoutParameter;
-          ...LeaseIdOptionalParameter;
-          ...EncryptionKeyParameter;
-          ...EncryptionKeySha256Parameter;
-          ...EncryptionAlgorithmParameter;
-          ...ConditionalRequestHeaders;
-          ...IfTagsParameter;
-        },
-        BodyParameter & {
-          #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
-          @statusCode statusCode: 200 | 206;
-          ...MetadataHeaders;
-          ...LastModifiedResponseHeader;
-          ...ContentLengthResponseHeader;
-          ...ContentRangeResponseHeader;
-          ...EtagResponseHeader;
-          ...ContentMd5ResponseHeader;
-          ...ContentEncodingResponseParameter;
-          ...CacheControlResponseHeader;
-          ...ContentDispositionResponseHeader;
-          ...ContentLanguageResponseHeader;
-          ...BlobSequenceNumberResponseHeader;
-          ...BlobTypeResponseHeader;
-          ...ContentCrc64ResponseHeader;
-          ...CopyCompletionTimeResponseHeader;
-          ...CopyStatusDescriptionResponseHeader;
-          ...CopyIdResponseHeader;
-          ...CopyProgressResponseHeader;
-          ...CopySourceResponseHeader;
-          ...CopyStatusResponseHeader;
-          ...LeaseDurationHeader;
-          ...LeaseStateResponseHeader;
-          ...LeaseStatusResponseHeader;
-          ...AcceptRangesResponseHeader;
-          ...DateResponseHeader;
-          ...BlobCommittedBlockCountResponseHeader;
-          ...IsServerEncryptedResponseHeader;
-          ...EncryptionKeySha256ResponseHeader;
-          ...EncryptionScopeResponseHeader;
-          ...BlobContentMd5ResponseHeader;
-        },
-        "application/xml",
-        "application/octet-stream"
-      >;
+            ...SnapshotParameter;
+            ...TimeoutParameter;
+            ...LeaseIdOptionalParameter;
+            ...EncryptionKeyParameter;
+            ...EncryptionKeySha256Parameter;
+            ...EncryptionAlgorithmParameter;
+            ...ConditionalRequestHeaders;
+            ...IfTagsParameter;
+          },
+          BodyParameter & {
+            #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
+            @statusCode statusCode: 200 | 206;
+            ...MetadataHeaders;
+            ...LastModifiedResponseHeader;
+            ...ContentLengthResponseHeader;
+            ...ContentRangeResponseHeader;
+            ...EtagResponseHeader;
+            ...ContentMd5ResponseHeader;
+            ...ContentEncodingResponseParameter;
+            ...CacheControlResponseHeader;
+            ...ContentDispositionResponseHeader;
+            ...ContentLanguageResponseHeader;
+            ...BlobSequenceNumberResponseHeader;
+            ...BlobTypeResponseHeader;
+            ...ContentCrc64ResponseHeader;
+            ...CopyCompletionTimeResponseHeader;
+            ...CopyStatusDescriptionResponseHeader;
+            ...CopyIdResponseHeader;
+            ...CopyProgressResponseHeader;
+            ...CopySourceResponseHeader;
+            ...CopyStatusResponseHeader;
+            ...LeaseDurationHeader;
+            ...LeaseStateResponseHeader;
+            ...LeaseStatusResponseHeader;
+            ...AcceptRangesResponseHeader;
+            ...DateResponseHeader;
+            ...BlobCommittedBlockCountResponseHeader;
+            ...IsServerEncryptedResponseHeader;
+            ...EncryptionKeySha256ResponseHeader;
+            ...EncryptionScopeResponseHeader;
+            ...BlobContentMd5ResponseHeader;
+          },
+          "application/xml",
+          "application/octet-stream"
+        >;
+      }
     }
   }
 }

@@ -16,16 +16,16 @@ model BlobServiceClientParameters {
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container.Blob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.Container.AppendBlob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.Container.BlockBlob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.Container.PageBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container.Blob.AppendBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container.Blob.BlockBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container.Blob.PageBlob, "Azure.Storage.Blobs");
 
 @@clientName(Storage.Blob, "BlobServiceClient", "rust");
 @@clientName(Storage.Blob.Container, "BlobContainerClient", "rust");
 @@clientName(Storage.Blob.Container.Blob, "BlobClient", "rust");
-@@clientName(Storage.Blob.Container.AppendBlob, "AppendBlobClient", "rust");
-@@clientName(Storage.Blob.Container.BlockBlob, "BlockBlobClient", "rust");
-@@clientName(Storage.Blob.Container.PageBlob, "PageBlobClient", "rust");
+@@clientName(Storage.Blob.Container.Blob.AppendBlob, "AppendBlobClient", "rust");
+@@clientName(Storage.Blob.Container.Blob.BlockBlob, "BlockBlobClient", "rust");
+@@clientName(Storage.Blob.Container.Blob.PageBlob, "PageBlobClient", "rust");
 
 @@clientInitialization(Storage.Blob.Container,
   {
@@ -39,19 +39,19 @@ model BlobServiceClientParameters {
     initializedBy: InitializedBy.parent | InitializedBy.individually,
   }
 );
-@@clientInitialization(Storage.Blob.Container.AppendBlob,
+@@clientInitialization(Storage.Blob.Container.Blob.AppendBlob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
   }
 );
-@@clientInitialization(Storage.Blob.Container.BlockBlob,
+@@clientInitialization(Storage.Blob.Container.Blob.BlockBlob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
   }
 );
-@@clientInitialization(Storage.Blob.Container.PageBlob,
+@@clientInitialization(Storage.Blob.Container.Blob.PageBlob,
   {
     parameters: BlobServiceClientParameters,
     initializedBy: InitializedBy.parent | InitializedBy.individually,
@@ -89,7 +89,3 @@ model BlobServiceClientParameters {
   uint64,
   "rust"
 );
-
-@@access(Azure.Core.ClientRequestIdHeader, Access.internal);
-@@access(Azure.Core.RequestIdResponseHeader, Access.internal);
-@@access(DateResponseHeader, Access.internal);
