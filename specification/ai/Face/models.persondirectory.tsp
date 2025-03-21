@@ -50,7 +50,7 @@ model OperationResult {
 model PersonDirectoryRecognitionModel {
   @key
   @doc("The 'recognitionModel' associated with faces.")
-  @visibility("create", Lifecycle.Read)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   recognitionModel: RecognitionModel;
 }
 
