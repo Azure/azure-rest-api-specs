@@ -1484,7 +1484,7 @@
           "format": "int32",
           "description": "The starting index of the intent occurrence within the conversation."
         },
-        "length": {
+        "count": {
           "type": "integer",
           "format": "int32",
           "description": "The number of continuous conversation items for this intent."
@@ -1492,7 +1492,7 @@
       },
       "required": [
         "offset",
-        "length"
+        "count"
       ]
     },
     "ConversationParameters": {
@@ -2332,10 +2332,18 @@
         "result": {
           "$ref": "#/definitions/ConversationalAIResult",
           "description": "Represents the conversational analysis response."
+        },
+        "warning": {
+          "type": "array",
+          "description": "Represents the warnings of the response.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
-        "result"
+        "result",
+        "warning"
       ],
       "allOf": [
         {

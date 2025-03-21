@@ -1160,6 +1160,9 @@ model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
 
   /** Represents the conversational analysis response. */
   result: ConversationalAIResult;
+
+  /** Represents the warnings of the response. */
+  warning: string[];
 }
 
 /** Represents the conversational analysis response. */
@@ -1211,7 +1214,7 @@ model ConversationItemRange {
   offset: int32;
 
   /** The number of continuous conversation items for this intent. */
-  length: int32;
+  count: int32;
 }
 
 /** The entity associated with this intent. */
