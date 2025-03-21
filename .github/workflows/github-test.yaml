@@ -22,8 +22,7 @@ jobs:
   test:
     strategy:
       matrix:
-        # os: [ubuntu, windows]
-        os: [ubuntu]
+        os: [ubuntu, windows]
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
