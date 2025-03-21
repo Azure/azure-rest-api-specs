@@ -1,6 +1,5 @@
 // @ts-check
 
-import { EOL } from "os";
 import { describe, expect, it, vi } from "vitest";
 import * as exec from "../src/exec.js";
 import { diff, lsTree, show } from "../src/git.js";
@@ -12,9 +11,12 @@ describe("git", () => {
     });
 
     it("lsTree", async () => {
+      // git always uses "\n" in output, even on windows
+      const expected = ".github\n";
+
       await expect(
         lsTree("HEAD", ".github", { args: "--full-tree --name-only" }),
-      ).resolves.toBe(`.github${EOL}`);
+      ).resolves.toBe(expected);
     });
 
     it("show", async () => {
