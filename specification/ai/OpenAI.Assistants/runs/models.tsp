@@ -2,10 +2,12 @@ import "@typespec/versioning";
 import "../common/models.tsp";
 import "../threads/models.tsp";
 import "../tools/models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 namespace Azure.AI.OpenAI.Assistants;
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 @doc("Data representing a single evaluation run of an assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
@@ -49,11 +51,11 @@ model ThreadRun {
   instructions: string;
 
   @doc("The overridden enabled tools used for this assistant thread run.")
-  tools: ToolDefinition[] = [];
+  tools: ToolDefinition[] = #[];
 
   @encodedName("application/json", "file_ids")
   @doc("A list of attached file IDs, ordered by creation date in ascending order.")
-  fileIds: string[] = [];
+  fileIds: string[] = #[];
 
   @encodedName("application/json", "created_at")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
@@ -204,15 +206,15 @@ model CreateAndRunThreadOptions {
   thread?: AssistantThreadCreationOptions;
 
   @doc("The overridden model that the assistant should use to run the thread.")
-  @projectedName("csharp", "overrideModelName")
+  @clientName("overrideModelName", "csharp")
   `model`?: string;
 
   @doc("The overridden system instructions the assistant should use to run the thread.")
-  @projectedName("csharp", "overrideInstructions")
+  @clientName("overrideInstructions", "csharp")
   instructions?: string;
 
   @doc("The overridden list of enabled tools the assistant should use to run the thread.")
-  @projectedName("csharp", "overrideTools")
+  @clientName("overrideTools", "csharp")
   tools?: ToolDefinition[];
 
   ...OptionalNullableMetadata;
