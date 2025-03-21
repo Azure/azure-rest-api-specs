@@ -17,6 +17,8 @@ export default async function importAllModules({ core }) {
   }
 
   const githubDir = join(workspace, ".github");
+
+  // find all files matching "**/src/**/*.js", sorted for readability
   const scriptFiles = (await readdir(githubDir, { recursive: true }))
     .filter(
       (f) =>
@@ -31,9 +33,12 @@ export default async function importAllModules({ core }) {
 
   for (const file of scriptFiles) {
     core.info(`Importing ${file}`);
+
     const fullPath = join(githubDir, file);
     const fileUrl = pathToFileURL(fullPath).href;
+
     const module = await import(fileUrl);
+
     core.info(inspect(module));
     core.info("");
   }
