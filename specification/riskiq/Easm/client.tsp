@@ -24,17 +24,17 @@ interface EasmClient {
   createOrReplaceDataConnection is Easm.DataConnections.createOrReplaceDataConnection;
   deleteDataConnection is Easm.DataConnections.deleteDataConnection;
 
-  listDiscoGroup is Easm.DiscoveryGroups.listDiscoGroup;
-  validateDiscoGroup is Easm.DiscoveryGroups.validateDiscoGroup;
-  getDiscoGroup is Easm.DiscoveryGroups.getDiscoGroup;
+  getDiscoveryGroups is Easm.DiscoveryGroups.listDiscoGroup;
+  validateDiscoveryGroup is Easm.DiscoveryGroups.validateDiscoGroup;
+  getDiscoveryGroup is Easm.DiscoveryGroups.getDiscoGroup;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  createOrReplaceDiscoGroup is Easm.DiscoveryGroups.createOrReplaceDiscoGroup;
-  runDiscoGroup is Easm.DiscoveryGroups.runDiscoGroup;
+  createOrReplaceDiscoveryGroup is Easm.DiscoveryGroups.createOrReplaceDiscoGroup;
+  runDiscoveryGroup is Easm.DiscoveryGroups.runDiscoGroup;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  listRuns is Easm.DiscoveryGroups.listRuns;
+  getDiscoveryGroupRuns is Easm.DiscoveryGroups.listRuns;
 
-  listDiscoTemplate is Easm.DiscoveryTemplates.listDiscoTemplate;
-  getDiscoTemplate is Easm.DiscoveryTemplates.getDiscoTemplate;
+  getDiscoveryTemplates is Easm.DiscoveryTemplates.listDiscoTemplate;
+  getDiscoveryTemplate is Easm.DiscoveryTemplates.getDiscoTemplate;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getBillable is Easm.Reports.getBillable;
