@@ -41,4 +41,6 @@ export default async function importAllModules({ core }) {
     core.info(inspect(module));
     core.info("");
   }
+
+  core.info("All script files are importable");
 }
