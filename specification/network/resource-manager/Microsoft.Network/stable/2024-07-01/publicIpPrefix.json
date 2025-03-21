@@ -142,6 +142,9 @@
         "x-ms-examples": {
           "Get public IP prefix": {
             "$ref": "./examples/PublicIpPrefixGet.json"
+          },
+          "Get public IP prefix with StandardV2 sku": {
+            "$ref": "./examples/PublicIpPrefixGetStandardV2Sku.json"
           }
         }
       },
@@ -208,6 +211,9 @@
           },
           "Create public IP prefix allocation method": {
             "$ref": "./examples/PublicIpPrefixCreateCustomizedValues.json"
+          },
+          "Create public IP prefix defaults with StandardV2 Sku": {
+            "$ref": "./examples/PublicIpPrefixCreateDefaultsStandardV2Sku.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -366,7 +372,8 @@
           "type": "string",
           "description": "Name of a public IP prefix SKU.",
           "enum": [
-            "Standard"
+            "Standard",
+            "StandardV2"
           ],
           "x-ms-enum": {
             "name": "PublicIPPrefixSkuName",

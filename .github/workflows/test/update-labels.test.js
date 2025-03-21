@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { createMockCore, createMockGithub } from "../../test/mocks.js";
 import { PER_PAGE_MAX } from "../src/github.js";
 import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
+import {
+  createMockCore,
+  createMockGithub,
+  createMockRequestError,
+} from "./mocks.js";
 
 describe("updateLabels", () => {
   it("loads inputs from env", async () => {
@@ -273,7 +277,9 @@ describe("updateLabelsImpl", () => {
           artifacts: [{ name: "label-foo=false" }],
         },
       });
-      github.rest.issues.removeLabel.mockRejectedValue({ status: status });
+      github.rest.issues.removeLabel.mockRejectedValue(
+        createMockRequestError(status),
+      );
 
       const updateLabelsImplPromise = updateLabelsImpl({
         owner: "owner",
