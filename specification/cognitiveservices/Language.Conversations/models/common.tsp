@@ -1237,7 +1237,7 @@ model ConversationalAIEntity {
   conversationItemId: string;
 
   /** The index of the conversation item where the entity appears. */
-  conversationItemIndex: int32;
+  conversationItemIndex?: int32;
 
   /** Entity resolution details, if available. */
   resolutions?: Array<BaseResolution>;
