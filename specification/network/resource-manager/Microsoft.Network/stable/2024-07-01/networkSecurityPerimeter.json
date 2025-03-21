@@ -915,7 +915,7 @@
           }
         },
         "x-ms-examples": {
-          "Check Dns Name Availability": {
+          "NetworkSecurityPerimeterAssociableResourceTypes": {
             "$ref": "./examples/PerimeterAssociableResourcesList.json"
           }
         }
@@ -1497,7 +1497,10 @@
   },
   "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/nspServiceTags": {
     "get": {
-      "operationId": "NspServiceTags_List",
+      "tags": [
+        "NetworkSecurityPerimeterServiceTags"
+      ],
+      "operationId": "NetworkSecurityPerimeterServiceTags_List",
       "description": "Gets the list of service tags supported by NSP. These service tags can be used to create access rules in NSP.",
       "x-ms-pageable": {
         "nextLinkName": "nextLink"
@@ -1528,7 +1531,7 @@
         }
       },
       "x-ms-examples": {
-        "Check Dns Name Availability": {
+        "NSPServiceTagsList": {
           "$ref": "./examples/NspServiceTagsList.json"
         }
       }
