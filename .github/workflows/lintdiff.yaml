@@ -61,5 +61,5 @@ jobs:
       - name: Prepend test notice to summary
         run: |
           temp_file=$(mktemp)
-          echo "> [!IMPORTANT]\n> THIS IS A TEST FOR A LintDiff REPLACEMENT.\n>Failure DOES NOT block your build. You can ignore any failures" | cat - $GITHUB_STEP_SUMMARY > $temp_file
+          echo -e "> [!IMPORTANT]\n> THIS IS A TEST FOR A LintDiff REPLACEMENT.\n>Failure DOES NOT block your build. You can ignore any failures" | cat - $GITHUB_STEP_SUMMARY > $temp_file
           mv $temp_file $GITHUB_STEP_SUMMARY
