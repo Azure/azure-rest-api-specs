@@ -9851,7 +9851,7 @@
       "type": "object",
       "description": "Model Deployment Definition",
       "properties": {
-        "name": {
+        "deploymentName": {
           "type": "string",
           "description": "Name of the deployment",
           "readOnly": true
@@ -9866,9 +9866,9 @@
           "description": "Publisher-specific version of the deployed model",
           "readOnly": true
         },
-        "modelPublisher": {
+        "publisher": {
           "type": "string",
-          "description": "Name of the deployed model's publisher",
+          "description": "The publisher of the deployed model",
           "readOnly": true
         },
         "capabilities": {
@@ -9891,10 +9891,10 @@
         }
       },
       "required": [
-        "name",
+        "deploymentName",
         "modelName",
         "modelVersion",
-        "modelPublisher",
+        "publisher",
         "capabilities",
         "sku"
       ]
