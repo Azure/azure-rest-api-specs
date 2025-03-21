@@ -19,34 +19,28 @@ alias ServiceTraits = SupportsClientRequestId &
   NoConditionalRequests; // NoRetryRequests supresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
 
 alias RedTeamOperations = Azure.Core.ResourceOperations<ServiceTraits>;
-alias AttackObjectiveOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-
-@route("/red-teams")
+@route("red-teams")
 interface RedTeams {
-  get is RedTeamsOperations.ResourceRead<red-team>;
+  @doc("Get a redteam by name.")
+  get is RedTeamOperations.ResourceRead<RedTeam>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  // create is Operations.ResourceCreateWithServiceProvidedName<RedTeam>;
-  // run is Operations.ResourceCollectionAction<RedTeam, {}, RedTeam>;
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @route("scan")
-  @post
-  @doc("Run the RedTeam.")
-  create(
-    @query
-    @doc("The API version to use for this operation.")
-    apiVersion: string,
-
-    @body
-    @doc("RedTeam to run.")
-    RedTeam: RedTeam,
-  ): CreatedRedTeamResponse;
-
-  list is RedTeamsOperations.ResourceList<
+  @doc("List a redteam by name.")
+  list is RedTeamOperations.ResourceList<
     RedTeam,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
-  update is RedTeamsOperations.ResourceUpdate<RedTeam>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates a redteam run.")
+  @route("scan")
+  @post
+  createRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Redteam to be run")
+      @body
+      RedTeam: RedTeam;
+    },
+    RedTeam
+  >;
 }

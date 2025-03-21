@@ -4,6 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
+import "../common/models.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -63,6 +64,7 @@ enum RiskCategory {
 
 
 @doc("Red team details.")
+@resource("scan")
 model RedTeam {
     @doc("Identifier of the red team.")
     @key("name")
@@ -81,11 +83,11 @@ model RedTeam {
     @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
     simulationOnly: boolean;
 
-    @doc("Output EvaluationResult json in the EvaluationResult asset. Example - azureml://project/azureml/evaluationresults/myevaluationresult1")
-    outputId: string;
+    @doc("Result outputs. Example: { 'redTeamResultId': 'azureml://project/azureml/evaluationresults/myreadteamresult', 'logId': 'azureml://project/azureml/datasets/joblogs' }")
+    outputs: Record<string>;
 
     @doc("List of risk categories to generate attack objectives for.")
-    riskCategories: RiskCategories[];
+    riskCategories: RiskCategory[];
 
     @doc("Application scenario for the red team operation, to generate scenario specific attacks.")
     applicationScenario?: string;
