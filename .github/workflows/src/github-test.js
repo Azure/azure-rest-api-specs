@@ -3,6 +3,7 @@
 import { readdir } from "fs/promises";
 import { basename, join, normalize, sep } from "path";
 import { pathToFileURL } from "url";
+import { inspect } from "util";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
@@ -33,7 +34,7 @@ export default async function importAllModules({ core }) {
     const fullPath = join(githubDir, file);
     const fileUrl = pathToFileURL(fullPath).href;
     const module = await import(fileUrl);
-    core.info(JSON.stringify(module));
+    core.info(inspect(module));
     core.info("");
   }
 }
