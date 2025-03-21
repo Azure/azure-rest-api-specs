@@ -48,7 +48,7 @@ jobs:
         if: always()
         run: |
           temp_file=$(mktemp)
-          echo -e "> [!IMPORTANT]\n> THIS IS A TEST FOR A LintDiff REPLACEMENT.\n>Failure DOES NOT block your build. You can ignore any failures\n" > $GITHUB_STEP_SUMMARY
+          echo -e "> [!IMPORTANT]\n> THIS IS A TEST FOR A LintDiff REPLACEMENT.\n>Failure DOES NOT block your build. You can ignore any failures.\n" > $GITHUB_STEP_SUMMARY
 
       # TODO: Could be github.sha for merge commit
       - name: Run LintDiff
