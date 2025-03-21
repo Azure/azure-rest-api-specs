@@ -410,7 +410,7 @@ model ConversationalAITask extends AnalyzeConversationTask {
   analysisInput: ConversationalAIAnalysisOptions;
 
   /** Input parameters necessary for a Conversation language understanding task. */
-  parameters: BaseConversationTaskParameters;
+  parameters: BaseConversationalAITaskParameters;
 }
 
 /** The input ConversationItem and its optional parameters */
@@ -439,7 +439,17 @@ model Conversations {
 
 /** List of conversation items. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model ConversationalAIItem is ConversationItemBase {
+@added(Versions.v2025_05_15)
+model ConversationalAIItem {
+  /** The ID of a conversation item. */
+  id: string;
+
+  /** The participant ID of a conversation item. */
+  participantId: string;
+
+  /** Role of the participant. */
+  role?: role;
+
   /** The text input */
   text: string;
 }
@@ -470,6 +480,12 @@ model ConversationItemBase {
   /** The participant ID of a conversation item. */
   participantId: string;
 
+  /** The override language of a conversation item in BCP 47 language representation. */
+  language?: string;
+
+  /** Enumeration of supported conversational modalities. */
+  modality?: InputModality;
+
   /** Role of the participant. */
   @added(Versions.v2023_04_01)
   role?: role;
@@ -478,12 +494,6 @@ model ConversationItemBase {
 /** The text modality of an input conversation. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model TextConversationItem is ConversationItemBase {
-  /** The override language of a conversation item in BCP 47 language representation. */
-  language?: string;
-
-  /** Enumeration of supported conversational modalities. */
-  modality?: InputModality;
-
   /** The text input */
   text: string;
 }
@@ -1011,12 +1021,6 @@ model TranscriptConversation extends Conversation {
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @added(Versions.v2023_04_01)
 model TranscriptConversationItem is ConversationItemBase {
-  /** The override language of a conversation item in BCP 47 language representation. */
-  language?: string;
-
-  /** Enumeration of supported conversational modalities. */
-  modality?: InputModality;
-
   /** Inverse text normalization (ITN) representation of input. The inverse-text-normalized form is the recognized text from Microsoft's speech-to-text API, with phone numbers, numbers, abbreviations, and other transformations applied. */
   itn: string;
 
@@ -1110,7 +1114,9 @@ model ConversationRequestStatistics is RequestStatistics {
 model ConversationItemLevelTiming is AudioTiming;
 
 /** Input parameters base for a Conversation task. */
-model BaseConversationTaskParameters {
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15)
+model BaseConversationalAITaskParameters {
   /** The name of the project to use. */
   projectName: string;
 
@@ -1122,12 +1128,21 @@ model BaseConversationTaskParameters {
 }
 
 /** Input parameters necessary for a Conversation task. */
-model ConversationTaskParameters is BaseConversationTaskParameters {
+model ConversationTaskParameters {
+  /** The name of the project to use. */
+  projectName: string;
+
+  /** The name of the deployment to use. */
+  deploymentName: string;
+
   /** If true, the service will return more detailed information in the response. */
   verbose?: boolean;
 
   /** If true, the service will keep the query for further review. */
   isLoggingEnabled?: boolean;
+
+  /** Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets. */
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** The name of a target project to forward the request to. */
   directTarget?: string;
@@ -1174,6 +1189,7 @@ model ConversationalAIAnalysis {
 
 /** The intent classification result for this conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15)
 model ConversationalAIIntent {
   /** The name of the detected intent. */
   name: string;
@@ -1189,6 +1205,7 @@ model ConversationalAIIntent {
 }
 
 /** The ranges of conversation items where this intent was identified. */
+@added(Versions.v2025_05_15)
 model ConversationItemRange {
   /** The starting index of the intent occurrence within the conversation. */
   offset: int32;
@@ -1199,6 +1216,7 @@ model ConversationItemRange {
 
 /** The entity associated with this intent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15)
 model ConversationalAIEntity {
   /** The entity name or category. */
   name: string;
