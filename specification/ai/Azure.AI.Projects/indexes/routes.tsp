@@ -21,11 +21,7 @@ alias ListIndexVersionParameters = {
 
   @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
   @query
-  orderBy?: string;
-
-  @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
-  @query
-  orderby?: string;
+  orderBy?: OrderBy;
 
   @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.")
   @query

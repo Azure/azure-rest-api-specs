@@ -152,6 +152,17 @@ model SystemData {
   lastModifiedAt?: utcDateTime;
 }
 
+@doc("List order options")
+union OrderBy {
+  string,
+
+  @doc("Order by created time")
+  CreatedTime: "createdtime",
+
+  @doc("Order by modified time.")
+  ModifiedTime: "modifiedtime",
+}
+
 @doc("List View Type Definition")
 union ListViewType {
   string,
