@@ -11,7 +11,7 @@ describe("git", () => {
     });
 
     it("lsTree", async () => {
-      // git always uses "\n" in output, even on windows
+      // lsTree always uses "\n" in output, even on windows
       const expected = ".github\n";
 
       await expect(
