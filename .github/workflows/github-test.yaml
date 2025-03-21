@@ -49,7 +49,7 @@ jobs:
           script: |
             const { default: importAllModules } =
               await import('${{ github.workspace }}/.github/workflows/src/github-test.js');
-            return await importAllModules({ core });
+            await importAllModules({ core });
 
       # - name: Install dev deps
       #   uses: ./.github/actions/setup-node-install-deps
