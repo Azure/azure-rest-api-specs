@@ -10231,12 +10231,20 @@
           "additionalProperties": {
             "$ref": "#/definitions/EvaluatorConfiguration"
           }
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureml://project/azureml/evaluationresults/myevaluationresult1', 'logId': 'azureml://project/azureml/datasets/joblogs' }",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "id",
         "data",
-        "evaluators"
+        "evaluators",
+        "outputs"
       ]
     },
     "EvaluatorConfiguration": {
