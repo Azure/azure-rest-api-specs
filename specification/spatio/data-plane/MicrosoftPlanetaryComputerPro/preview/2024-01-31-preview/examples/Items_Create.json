@@ -1,0 +1,125 @@
+{
+  "title": "Items_Create",
+  "operationId": "Items_Create",
+  "parameters": {
+    "collectionId": "36fcb8da-9b15-49e0-b400-0d2e751e2061",
+    "api-version": "2024-01-31-preview",
+    "resource": {
+      "id": "{{itemId}}",
+      "bbox": [
+        -80.627296,
+        27.997976,
+        -80.560208,
+        28.064522
+      ],
+      "type": "Feature",
+      "links": [],
+      "assets": {
+        "sample_external": {
+          "title": "Sample external image",
+          "href": "https://learn.microsoft.com/en-us/azure/remote-rendering/samples/media/sample-model.png",
+          "type": "image/png",
+          "roles": [
+            "tiles"
+          ]
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.560478,
+              27.997976
+            ],
+            [
+              -80.560208,
+              28.064325
+            ],
+            [
+              -80.627067,
+              28.064522
+            ],
+            [
+              -80.627296,
+              27.998174
+            ],
+            [
+              -80.560478,
+              27.997976
+            ]
+          ]
+        ]
+      },
+      "collection": "{{collectionId}}",
+      "properties": {
+        "gsd": 0.6,
+        "datetime": "2019-12-15T00:00:00Z",
+        "naip:year": "2019",
+        "proj:bbox": [
+          536646,
+          3097056,
+          543216,
+          3104406
+        ],
+        "proj:epsg": 26917,
+        "naip:state": "fl",
+        "proj:shape": [
+          12250,
+          10950
+        ],
+        "proj:transform": [
+          0.6,
+          0,
+          536646,
+          0,
+          -0.6,
+          3104406,
+          0,
+          0,
+          1
+        ]
+      },
+      "stac_version": "1.0.0",
+      "stac_extensions": [
+        "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+        "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "operationId": "05d6f60f-f30f-43af-b5fc-908e6302b6ff",
+        "status": "Pending",
+        "statusHistory": [
+          {
+            "status": "Pending",
+            "timestamp": "2024-10-09T09:22:20.0502586Z"
+          }
+        ],
+        "creationTime": "2024-10-09T09:22:20.050257Z",
+        "totalItems": 0,
+        "totalPendingItems": 0,
+        "totalSuccessfulItems": 0,
+        "totalFailedItems": 0
+      }
+    },
+    "400": {
+      "body": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+        "title": "One or more validation errors occurred.",
+        "status": 400,
+        "errors": {
+          "": [
+            "A non-empty request body is required."
+          ]
+        },
+        "traceId": "00-c9172ff8d6ef60f5490e424d2bad866d-0e428e191d31e295-01"
+      }
+    },
+    "404": {
+      "body": "Collection does not exist."
+    }
+  }
+}
