@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "./main.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
