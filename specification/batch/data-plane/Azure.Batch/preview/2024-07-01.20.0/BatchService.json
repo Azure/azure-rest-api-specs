@@ -10850,7 +10850,8 @@
         },
         "skipWithdrawFromVNet": {
           "type": "boolean",
-          "description": "Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false."
+          "description": "Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.",
+          "x-ms-client-name": "skipWithdrawFromVnet"
         }
       },
       "required": [
@@ -10868,7 +10869,8 @@
         },
         "skipWithdrawFromVNet": {
           "type": "boolean",
-          "description": "Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false."
+          "description": "Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.",
+          "x-ms-client-name": "skipWithdrawFromVnet"
         }
       }
     },
@@ -11542,12 +11544,14 @@
         "readIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk read operations made by all Tasks in all Jobs created under the schedule."
+          "description": "The total number of disk read operations made by all Tasks in all Jobs created under the schedule.",
+          "x-ms-client-name": "readIops"
         },
         "writeIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk write operations made by all Tasks in all Jobs created under the schedule."
+          "description": "The total number of disk write operations made by all Tasks in all Jobs created under the schedule.",
+          "x-ms-client-name": "writeIops"
         },
         "readIOGiB": {
           "type": "number",
@@ -11895,12 +11899,14 @@
         "readIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk read operations made by all Tasks in the Job."
+          "description": "The total number of disk read operations made by all Tasks in the Job.",
+          "x-ms-client-name": "readIops"
         },
         "writeIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk write operations made by all Tasks in the Job."
+          "description": "The total number of disk write operations made by all Tasks in the Job.",
+          "x-ms-client-name": "writeIops"
         },
         "readIOGiB": {
           "type": "number",
@@ -13636,12 +13642,14 @@
         "diskReadIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk read operations across all Compute Nodes in the Pool."
+          "description": "The total number of disk read operations across all Compute Nodes in the Pool.",
+          "x-ms-client-name": "diskReadIops"
         },
         "diskWriteIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk write operations across all Compute Nodes in the Pool."
+          "description": "The total number of disk write operations across all Compute Nodes in the Pool.",
+          "x-ms-client-name": "diskWriteIops"
         },
         "diskReadGiB": {
           "type": "number",
@@ -15289,12 +15297,14 @@
         "readIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk read operations made by the Task."
+          "description": "The total number of disk read operations made by the Task.",
+          "x-ms-client-name": "readIops"
         },
         "writeIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk write operations made by the Task."
+          "description": "The total number of disk write operations made by the Task.",
+          "x-ms-client-name": "writeIops"
         },
         "readIOGiB": {
           "type": "number",
@@ -16358,7 +16368,8 @@
         },
         "dynamicVNetAssignmentScope": {
           "$ref": "#/definitions/DynamicVNetAssignmentScope",
-          "description": "The scope of dynamic vnet assignment."
+          "description": "The scope of dynamic vnet assignment.",
+          "x-ms-client-name": "dynamicVnetAssignmentScope"
         },
         "endpointConfiguration": {
           "$ref": "#/definitions/BatchPoolEndpointConfiguration",
@@ -16385,7 +16396,8 @@
         },
         "dynamicVNetAssignmentScope": {
           "$ref": "#/definitions/DynamicVNetAssignmentScope",
-          "description": "The scope of dynamic vnet assignment."
+          "description": "The scope of dynamic vnet assignment.",
+          "x-ms-client-name": "dynamicVnetAssignmentScope"
         },
         "endpointConfiguration": {
           "$ref": "#/definitions/BatchPoolEndpointConfigurationUpdate",
