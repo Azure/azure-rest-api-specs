@@ -22,31 +22,13 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
-  v1_preview: "2023-06-01-preview",
+  v1_preview: "2024-10-01-preview",
 
   @doc("Version 2 preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
-  v2_preview: "2024-06-01-preview",
-
-  @doc("Version 3 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v3_preview)
-  @useDependency(LiftrBase.Storage.Versions.v1_preview)
-  v3_preview: "2024-08-01-preview",
-
-  @doc("Version 4 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v4_preview)
-  @useDependency(LiftrBase.Storage.Versions.v1_preview)
-  v4_preview: "2024-10-01-preview",
-
-  @doc("Version 5 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v5_preview)
-  @useDependency(LiftrBase.Storage.Versions.v1_preview)
-  v5_preview: "2024-11-01-preview",
+  v2_preview: "2024-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -66,30 +48,7 @@ interface Reservations
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<LimitDetails> | ErrorResponse;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @removed(Versions.v4_preview)
   @added(Versions.v2_preview)
-  @doc("Change the marketplace plan of the reservation.")
-  @armResourceAction(Reservation)
-  @action("changePlan")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  changePlan(
-    ...ResourceInstanceParameters<Reservation>,
-
-    /** The payload containing change plan parameters */
-    @body
-    changePlanParameters: MarketplacePlanUpdate,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
-
-  @added(Versions.v5_preview)
   @doc("Provides various statistics about resources billed via given reservation.")
   @armResourceAction(Reservation)
   @action("getBillingStatus")
@@ -98,7 +57,7 @@ interface Reservations
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<ReservationBillingStatus> | ErrorResponse;
 
-  @added(Versions.v5_preview)
+  @added(Versions.v2_preview)
   @doc("Provides a summarized report along with actions for resources billed via given reservation")
   @armResourceAction(Reservation)
   @action("getBillingReport")
@@ -108,7 +67,7 @@ interface Reservations
   ): ArmResponse<ReservationBillingUsageReport> | ErrorResponse;
 }
 
-@added(Versions.v5_preview)
+@added(Versions.v2_preview)
 @doc("Represents a billing usage report, including overall status and detailed properties")
 model ReservationBillingUsageReport {
   @doc("Latest formatted billing report for this reservation")
@@ -122,7 +81,7 @@ model ReservationBillingUsageReport {
   overallStatusMessage: string;
 }
 
-@added(Versions.v5_preview)
+@added(Versions.v2_preview)
 @doc("Represents an individual billing usage property")
 model BillingUsageProperty {
   @doc("Unique identifier for the billing usage property")
@@ -148,7 +107,7 @@ model BillingUsageProperty {
   subProperties?: BillingUsageProperty[];
 }
 
-@added(Versions.v5_preview)
+@added(Versions.v2_preview)
 @doc("Severity levels for billing usage properties")
 union UsageSeverity {
   @doc("Indicates an alert condition")
@@ -166,7 +125,7 @@ union UsageSeverity {
   string,
 }
 
-@added(Versions.v5_preview)
+@added(Versions.v2_preview)
 @doc("Latest billing status for this reservation")
 model ReservationBillingStatus {
   @doc("Timestamp for the latest update of this billing status, in RFC 3339 format")
@@ -282,7 +241,7 @@ model AzureVmwareService {
   @doc("Azure resource ID of the AVS SDDC the storage pool is connected to")
   sddcResourceId?: string;
 
-  @removed(Versions.v4_preview)
+  @removed(Versions.v1_preview)
   @doc("Immutable identifier for the vSpherePlugin provided by Pure Storage. The value is available if the vSpherePlugin has been enabled for the storage pool.")
   vSpherePluginKey?: string;
 }
@@ -316,16 +275,6 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<HealthResponse> | ErrorResponse;
 
-  @removed(Versions.v4_preview)
-  @doc("Lists AVS properties for specific Storage Pool.")
-  @armResourceAction(StoragePool)
-  @action("getAvsParameters")
-  @post
-  getAvsParameters(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmResponse<AvsDetails> | ErrorResponse;
-
-  @added(Versions.v3_preview)
   @doc("Returns current information about an on-going connection to an AVS instance")
   @armResourceAction(StoragePool)
   @action("getAvsConnection")
@@ -334,7 +283,6 @@ interface StoragePools {
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmResponse<AvsConnection> | ErrorResponse;
 
-  @added(Versions.v3_preview)
   @doc("Returns the status of the storage pool connection to AVS")
   @armResourceAction(StoragePool)
   @action("getAvsStatus")
@@ -344,29 +292,6 @@ interface StoragePools {
   ): ArmResponse<AvsStatus> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @removed(Versions.v4_preview)
-  @doc("Enable AVS on storage pool")
-  @armResourceAction(StoragePool)
-  @action("enableAvs")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  enableAvs(
-    ...ResourceInstanceParameters<StoragePool>,
-
-    @doc("Storage pool enable Avs properties")
-    @body
-    properties: StoragePoolEnableAvs,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @added(Versions.v3_preview)
   @doc("Initiate a connection between the storage pool and a specified AVS SDDC resource")
   @armResourceAction(StoragePool)
   @action("enableAvsConnection")
@@ -388,25 +313,6 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @removed(Versions.v4_preview)
-  @doc("Disable AVS on storage pool")
-  @armResourceAction(StoragePool)
-  @action("disableAvs")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  disableAvs(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @added(Versions.v3_preview)
   @doc("Disable the existing AVS connection")
   @armResourceAction(StoragePool)
   @action("disableAvsConnection")
@@ -424,25 +330,6 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @removed(Versions.v4_preview)
-  @doc("Finalize AVS on storage pool")
-  @armResourceAction(StoragePool)
-  @action("finalizeAvs")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  finalizeAvs(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @added(Versions.v3_preview)
   @doc("Finalize an already started AVS connection to a specific AVS SDDC")
   @armResourceAction(StoragePool)
   @action("finalizeAvsConnection")
@@ -464,7 +351,6 @@ interface StoragePools {
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @added(Versions.v3_preview)
   @doc("Test and repair, if needed, all configuration elements of the storage pool connection to the AVS instance")
   @armResourceAction(StoragePool)
   @action("repairAvsConnection")
@@ -475,64 +361,6 @@ interface StoragePools {
   )
   @post
   repairAvsConnection(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @removed(Versions.v4_preview)
-  @doc("Enable VSphere plugin on storage pool")
-  @armResourceAction(StoragePool)
-  @action("enableVspherePlugin")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  enableVspherePlugin(
-    ...ResourceInstanceParameters<StoragePool>,
-
-    @doc("VSphere plugin properties")
-    @body
-    properties: StoragePoolEnableVspherePlugin,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @removed(Versions.v4_preview)
-  @doc("Disable VSphere plugin on storage pool")
-  @armResourceAction(StoragePool)
-  @action("disableVspherePlugin")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  disableVspherePlugin(
-    ...ResourceInstanceParameters<StoragePool>,
-  ): ArmAcceptedLroResponse<
-    "Resource Operation accepted",
-    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
-  > | ErrorResponse;
-
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  @removed(Versions.v4_preview)
-  @doc("Upgrade VSphere plugin on storage pool")
-  @armResourceAction(StoragePool)
-  @action("upgradeVspherePlugin")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  @post
-  upgradeVspherePlugin(
     ...ResourceInstanceParameters<StoragePool>,
   ): ArmAcceptedLroResponse<
     "Resource Operation accepted",
@@ -590,90 +418,6 @@ model PerformancePolicyLimits {
   bandwidthLimit: RangeLimits;
 }
 
-@removed(Versions.v4_preview)
-@doc("AVS (Azure VMware Solution) related properties.")
-model AvsDetails {
-  @doc("Flag which tells if the AVS support is enabled.")
-  avsEnabled: boolean;
-
-  @doc("AVS configuration properties")
-  avs?: Avs;
-
-  @doc("vSphere configuration properties")
-  vSphere?: Vsphere;
-
-  @doc("tells if the plugin has been enabled or not")
-  vSpherePluginEnabled: boolean;
-
-  @doc("vSpherePluginKey associated with the plugin")
-  vSpherePluginKey?: string;
-
-  @doc("vSphere plugin configuration properties")
-  vSpherePlugin?: VspherePlugin;
-}
-
-@removed(Versions.v4_preview)
-@doc("vSphere plugin configuration properties")
-model VspherePlugin {
-  @doc("URL for registration of vSphere plugin")
-  registrationUrl: string;
-
-  @doc("Company name for vSphere plugin")
-  companyName: string;
-
-  @doc("Description of vSphere plugin")
-  description: string;
-
-  @doc("Protocol used by vSphere plugin")
-  protocol: string;
-
-  @doc("Admin email for vSphere plugin")
-  adminEmail: string;
-
-  @doc("Version of vSphere plugin")
-  version: string;
-
-  @doc("Certificate for vSphere plugin")
-  certificate: string;
-}
-
-@removed(Versions.v4_preview)
-@doc("vSphere configuration properties")
-model Vsphere {
-  @doc("Resource id pointing at the AVS SDDC the pool is configured with")
-  sddcResourceId: string;
-
-  @doc("IP address of the vSphere software installed in the SDDC")
-  vSphereIp: string;
-}
-
-@removed(Versions.v4_preview)
-@doc("AVS (Azure VMware Solution) related properties.")
-model Avs {
-  @doc("Username for VMware VASA service login.")
-  vasaProviderUsername: string;
-
-  @doc("URLs to use for VMware VASA.")
-  vasaProviderUrls: string[];
-
-  @doc("Array of iSCSI endpoint and IQN.")
-  @extension("x-ms-identifiers", #[])
-  vasaIscsiEndpoints: VasaIscsiEndpoints[];
-}
-
-@removed(Versions.v4_preview)
-@doc("iSCSI endpoint and IQN.")
-model VasaIscsiEndpoints {
-  @doc("IP address of the iSCSI endpoint.")
-  address: string;
-
-  @doc("Port of the iSCSI endpoint.")
-  port: int32;
-
-  @doc("IQN the Volume Group is available under.")
-  iqn: string;
-}
-
 @doc("Minimum and maximum values for a property")
 model RangeLimits {
   @doc("Minimum value of the property")
@@ -710,7 +454,6 @@ model HealthDetails {
   @doc("Data reduction ratio achieved on this pool")
   dataReductionRatio: float64;
 
-  @added(Versions.v3_preview)
   @doc("Estimated maximum capacity of the pool, in bytes, based on current usage and data reduction ratio")
   estimatedMaxCapacity: int64;
 }
@@ -762,18 +505,6 @@ union AlertLevel {
   string,
 }
 
-@removed(Versions.v4_preview)
-@doc("Storage Pool enable AVS")
-model StoragePoolEnableAvs {
-  @doc("Resource id pointing at the AVS SDDC the pool is configured with.")
-  sddcResourceId: string;
-
-  @doc("Password for VASA service login.")
-  @secret
-  vasaProviderPassword: string;
-}
-
-@added(Versions.v3_preview)
 @doc("Initialization handle used to configure the AVS SDDC to communicate with the storage pool")
 model ServiceInitializationHandle {
   @doc("Azure resource ID of the AVS SDDC the pool is connecting to")
@@ -783,7 +514,6 @@ model ServiceInitializationHandle {
   serviceAccountUsername?: string;
 }
 
-@added(Versions.v3_preview)
 @doc("Transient information about an on-going connection to an AVS instance")
 model AvsConnection {
   @doc("Indicates whether service initialization is complete")
@@ -796,7 +526,6 @@ model AvsConnection {
   serviceInitializationHandle?: ServiceInitializationHandle;
 }
 
-@added(Versions.v3_preview)
 @doc("Status of storage pool / AVS connection")
 model AvsStatus {
   @doc("If true, an AVS connection has been successfully completed")
@@ -809,14 +538,12 @@ model AvsStatus {
   sddcResourceId?: string;
 }
 
-@added(Versions.v3_preview)
 @doc("EnableAvsConnection payload information")
 model StoragePoolEnableAvsConnectionPost {
   @doc("Azure resource ID of the AVS SDDC to connect to")
   sddcResourceId: string;
 }
 
-@added(Versions.v3_preview)
 @doc("Explicit service initialization data")
 model ServiceInitializationData {
   @doc("Service account username")
@@ -833,7 +560,6 @@ model ServiceInitializationData {
   vSphereCertificate?: string;
 }
 
-@added(Versions.v3_preview)
 @doc("FinalizeAvsConnection payload information, either encoded or explicit")
 model StoragePoolFinalizeAvsConnectionPost {
   @doc("Encoded AVS connection information")
@@ -841,16 +567,6 @@ model StoragePoolFinalizeAvsConnectionPost {
 
   @doc("Explicit AVS connection information")
   serviceInitializationData?: ServiceInitializationData;
-}
-
-@removed(Versions.v4_preview)
-@doc("Storage Pool enable VSphere plugins")
-model StoragePoolEnableVspherePlugin {
-  @doc("Storage Pool Vsphere IP")
-  vSphereIp: string;
-
-  @doc("Storage Pool Vsphere cert thumb print")
-  vSphereCertThumbprint?: string;
 }
 
 @doc("AVS storage container resource type, representing a VMware storage container in a storage pool, which can be associated to and mounted as a datastore")
@@ -874,53 +590,39 @@ model AvsStorageContainerProperties {
   @doc("Name of the storage used.")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   @visibility(Lifecycle.Read)
-  @madeOptional(Versions.v3_preview)
-  @removed(Versions.v5_preview)
+  @removed(Versions.v2_preview)
   storageName?: string;
 
-  @added(Versions.v3_preview)
   @doc("Name of the storage container")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   @visibility(Lifecycle.Read)
   resourceName: string;
 
-  @removed(Versions.v4_preview)
-  @doc("Provisioning state of the resource")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
-
   @doc("Maximum amount of bytes that can be provisioned in this storage container; it must be a multiple of 512; each time a volume is provisioned in this container, its provisionedSize will be counted against the provisionLimit and the provisioning will fail if it goes over (minimum: 1048576 (1MiB), maximum: 4503599627370496 (4PiB)); by default it is unrestricted")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   provisionedLimit?: int64;
 
-  @added(Versions.v4_preview)
   @doc("VMware datastore associated with this storage container (if any)")
   @pattern("(^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9])?$")
   @visibility(Lifecycle.Read)
   datastore?: string;
 
-  @added(Versions.v4_preview)
   @doc("Whether the datastore is mounted in VMware or not")
   @visibility(Lifecycle.Read)
   mounted?: boolean;
+
+  @removed(Versions.v1_preview)
+  @doc("Provisioning state of the resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
 }
 
 @armResourceOperations
 interface AvsStorageContainers {
-  @removed(Versions.v4_preview)
-  create is ArmResourceCreateOrUpdateAsync<AvsStorageContainer>;
   @doc("Get an AVS storage container")
   get is ArmResourceRead<AvsStorageContainer>;
   @doc("Delete an AVS storage container")
   delete is ArmResourceDeleteWithoutOkAsync<AvsStorageContainer>;
-  @removed(Versions.v4_preview)
-  update is ArmCustomPatchAsync<
-    AvsStorageContainer,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      AvsStorageContainer,
-      AvsStorageContainerProperties
-    >
-  >;
   @doc("List AVS storage containers by storage pool")
   listByStoragePool is ArmResourceListByParent<AvsStorageContainer>;
 }
@@ -962,19 +664,9 @@ model VolumeProperties {
   @visibility(Lifecycle.Read)
   space?: Space;
 
-  @removed(Versions.v4_preview)
-  @doc("Name of the Performance Policy applied to the Volume.")
-  @visibility(Lifecycle.Read)
-  performancePolicy?: VolumePerformancePolicy;
-
   @doc("Volume's soft-deletion state")
   @visibility(Lifecycle.Read, Lifecycle.Update)
   softDeletion: SoftDeletion;
-
-  @removed(Versions.v4_preview)
-  @doc("Consistency Group the Volume belongs to.")
-  @visibility(Lifecycle.Read)
-  consistencyGroup?: VolumeConsistencyGroup;
 
   @doc("Volume creation date, as an RFC 3339 timestamp")
   @visibility(Lifecycle.Read)
@@ -992,21 +684,9 @@ model VolumeProperties {
   @visibility(Lifecycle.Read)
   avs?: AvsDiskDetails;
 
-  @removed(Versions.v4_preview)
-  @doc("Azure Volume Group assigned to the volume.")
-  @visibility(Lifecycle.Read)
-  azure?: AzureProperties;
-
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
-}
-
-@removed(Versions.v4_preview)
-@doc("Name of the Performance Policy applied to the Volume")
-model VolumePerformancePolicy {
-  @doc("Resource id of the Performance Policy")
-  policyResourceId: string;
 }
 
 @doc("Soft-deletion state")
@@ -1018,26 +698,10 @@ model SoftDeletion {
   @doc("Date at which the resource will be eradicated and impossible to recover, as an RFC 3339 timestamp; invalid if destroyed is false;")
   @visibility(Lifecycle.Read)
   eradicationTimestamp?: string;
-
-  @removed(Versions.v4_preview)
-  @doc("Set to the previous volumeResourceId for this volume if destroyed is true, and this used to be a VolumeGroup/Volume, the former Azure resourceId for that VolumeGroup/Volume before it was delete.")
-  @visibility(Lifecycle.Read)
-  previousResourceId?: string;
-}
-
-@removed(Versions.v4_preview)
-@doc("Consistency Group the Volume belongs to.")
-model VolumeConsistencyGroup {
-  @doc("ID for the Consistency Group the Volume belongs to.")
-  consistencyGroupId: string;
 }
 
 @doc("Specify which control plane handles the lifecycle of the volume")
 union VolumeType {
-  /** Azure Volume Type */
-  @removed(Versions.v4_preview)
-  Azure: "azure",
-
   /** AVS/VMware */
   AVS: "avs",
 
@@ -1066,13 +730,6 @@ model AvsDiskDetails {
 
   @doc("Azure resource ID of the AVS storage container containing this disk/volume")
   avsStorageContainerResourceId: string;
-}
-
-@removed(Versions.v5_preview)
-@doc("Azure Volume Group assigned to the volume.")
-model AzureProperties {
-  @doc("Azure Volume Group ID assigned to the volume.")
-  volumeGroupInternalId: string;
 }
 
 @armResourceOperations
@@ -1185,10 +842,6 @@ union VmType {
 
 @doc("Specify which control plane handles the lifecycle of the volume container")
 union VolumeContainerType {
-  /** Azure Volume Container Type */
-  @removed(Versions.v4_preview)
-  Azure: "azure",
-
   /** AVS/VMware */
   AVS: "avs",
 
@@ -1242,4 +895,11 @@ interface AvsVmVolumes {
   delete is ArmResourceDeleteWithoutOkAsync<AvsVmVolume>;
   @doc("List volumes in an AVS VM")
   listByAvsVm is ArmResourceListByParent<AvsVmVolume>;
+}
+
+@removed(Versions.v2_preview)
+@doc("Azure Volume Group assigned to the volume.")
+model AzureProperties {
+  @doc("Azure Volume Group ID assigned to the volume.")
+  volumeGroupInternalId: string;
 }

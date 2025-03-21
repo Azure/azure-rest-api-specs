@@ -15,23 +15,11 @@ namespace LiftrBase;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v1_preview: "2023-06-01-preview",
+  v1_preview: "2024-10-01-preview",
 
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2_preview: "2024-06-01-preview",
-
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v3_preview: "2024-08-01-preview",
-
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v4_preview: "2024-10-01-preview",
-
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v5_preview: "2024-11-01-preview",
+  v2_preview: "2024-11-01-preview",
 }
 
 @doc("Marketplace subscription status")
@@ -65,14 +53,6 @@ model MarketplaceDetails {
 
   @doc("Offer details of the marketplace subscription")
   offerDetails: OfferDetails;
-}
-
-@removed(Versions.v4_preview)
-@added(Versions.v2_preview)
-@doc("Marketplace plan details")
-model MarketplacePlanUpdate {
-  @doc("The plan id to change to.")
-  planId: string;
 }
 
 @doc("Offer details for the marketplace that is selected by the user")
