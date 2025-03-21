@@ -19,7 +19,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2_preview: "2025-02-11-preview",
+  v2_preview: "2025-03-21-preview",
 }
 
 /**
@@ -34,7 +34,7 @@ model FileSystemResourceProperties {
   /**
    * Marketplace details
    */
-  marketplaceDetails: LiftrBase.MarketplaceDetails;
+  marketplace: LiftrBase.MarketplaceDetails;
 
   /**
    * Provisioning State of the resource
@@ -56,7 +56,7 @@ model FileSystemResourceProperties {
   /**
    * User Details
    */
-  userDetails: LiftrBase.UserDetails;
+  user: LiftrBase.UserDetails;
 
   /**
    * File system Id of the resource
