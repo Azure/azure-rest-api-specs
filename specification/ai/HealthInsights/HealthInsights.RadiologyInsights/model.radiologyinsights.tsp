@@ -62,11 +62,11 @@ model FindingOptions {
 @resource("radiology-insights/jobs")
 model RadiologyInsightsJob {
   @doc("The request data for the operation.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   jobData?: RadiologyInsightsData;
 
   @doc("The result of the operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   result?: RadiologyInsightsInferenceResult;
 
   ...HealthInsightsJobBase;
