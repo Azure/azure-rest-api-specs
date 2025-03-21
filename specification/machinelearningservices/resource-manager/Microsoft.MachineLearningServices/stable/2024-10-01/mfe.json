@@ -17868,6 +17868,11 @@
           "description": "The route to check the readiness of the inference server container.",
           "$ref": "#/definitions/Route"
         },
+        "startupRoute": {
+          "description": "The route to check the startup of the application in the container.",
+          "$ref": "#/definitions/Route",
+          "x-nullable": true
+        },
         "scoringRoute": {
           "description": "The port to send the scoring requests to, within the inference server container.",
           "$ref": "#/definitions/Route"
@@ -20426,7 +20431,7 @@
           "x-nullable": true
         },
         "startupProbe": {
-          "description": "This verifies whether the application within a container is started. Startup probes run before any other probe, and, unless it finishes successfully, disables other probes.",
+          "description": "Startup probe verify whether an application within a container has started successfully.",
           "$ref": "#/definitions/ProbeSettings",
           "x-nullable": true
         },
