@@ -1,3 +1,5 @@
+// @ts-check
+
 import { EOL } from "os";
 import { describe, expect, it, vi } from "vitest";
 import * as exec from "../src/exec.js";
