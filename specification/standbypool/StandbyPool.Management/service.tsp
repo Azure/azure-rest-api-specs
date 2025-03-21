@@ -17,9 +17,7 @@ using TypeSpec.Versioning;
 using OpenAPI;
 
 @armProviderNamespace("Microsoft.StandbyPool")
-@service({
-  title: "Microsoft.StandbyPool",
-})
+@service(#{ title: "Microsoft.StandbyPool" })
 @versioned(Microsoft.StandbyPool.Versions)
 namespace Microsoft.StandbyPool;
 
