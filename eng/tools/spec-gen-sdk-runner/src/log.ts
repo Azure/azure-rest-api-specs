@@ -30,6 +30,10 @@ export function logMessage(message: string, level?: LogLevel): void {
       console.error(message);
       break;
     }
+    case LogLevel.Warn: {
+      console.warn(message);
+      break;
+    }
     default: {
       console.log(message);
       break;
@@ -43,4 +47,10 @@ export function vsoAddAttachment(name: string, path: string): void {
 
 export function vsoLogIssue(message: string, type = "error"): void {
   console.log(`##vso[task.logissue type=${type}]${message}`);
+}
+
+export function setVsoVariable(variable: string, value: string, isOutput = false): void {
+  console.log(
+    `##vso[task.setVariable variable=${variable}${isOutput ? ";isoutput=true" : ""}]${value}`,
+  );
 }
