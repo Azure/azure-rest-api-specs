@@ -1160,9 +1160,6 @@ model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
 
   /** Represents the conversational analysis response. */
   result: ConversationalAIResult;
-
-  /** Represents the warnings of the response. */
-  warning: string[];
 }
 
 /** Represents the conversational analysis response. */
