@@ -35,7 +35,7 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
 export async function lsTree(treeIsh, path, options = {}) {
   const { args, logger } = options;
 
-  const cmd = buildCmd("ls-tree", args, `${treeIsh}:${path}`);
+  const cmd = buildCmd("ls-tree", args, treeIsh, path);
 
   return await execGit(cmd, {
     logger: logger,
