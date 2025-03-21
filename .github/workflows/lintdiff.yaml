@@ -62,6 +62,7 @@ jobs:
           exit 1
 
       - name: Prepend test notice to summary
+        if: always()
         run: |
           temp_file=$(mktemp)
           echo -e "> [!IMPORTANT]\n> THIS IS A TEST FOR A LintDiff REPLACEMENT.\n>Failure DOES NOT block your build. You can ignore any failures" | cat - $GITHUB_STEP_SUMMARY > $temp_file
