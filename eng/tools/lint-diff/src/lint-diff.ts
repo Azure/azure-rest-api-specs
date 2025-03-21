@@ -127,9 +127,6 @@ async function runLintDiff(
 
   if (!pass) { 
     process.exitCode = 1;
-    console.error(`TEST ONLY. OK TO IGNORE - Lint-diff failed. See workflow summary report in ${outFile} for details.`);
+    console.error(`Lint-diff failed. See workflow summary report in ${outFile} for details.`);
   }
-
-  console.log("⚠️ THIS IS A TEST ONLY FOR A LINTDIFF REPLACEMENT. IT'S OK IF THIS JOB FAILS. THIS WILL NOT BLOCK YOUR PR.");
-  console.log("SEE THE OTHER LintDiff JOB FOR DEFINITIVE RESULTS.");
 }
