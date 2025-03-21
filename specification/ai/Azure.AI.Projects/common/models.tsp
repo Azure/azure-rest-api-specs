@@ -233,11 +233,12 @@ alias AssetBase = {
 
   @doc("The name of the resource")
   @visibility("read")
-  name?: string;
+  @key
+  name: string;
 
   @doc("The version of the resource")
   @visibility("read")
-  version?: string;
+  version: string;
 
   @doc("The asset description text.")
   description?: string;
@@ -250,11 +251,11 @@ alias AssetBase = {
   systemData?: SystemData;
 };
 
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create responses correctly"
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
   T;
 
-#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create responses correctly"
 alias OkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
 
@@ -311,6 +312,9 @@ model PendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
   pendingUploadId?: string;
 
+  @doc("Name of Azure blob storage connection to use for generating temporary SAS token")
+  connectionName?: string;
+
   @doc("TemporaryBlobReference is the only supported type.")
   pendingUploadType: PendingUploadType.temporaryBlobReference;
 }
@@ -322,6 +326,9 @@ model PendingUploadResponse {
 
   @doc("ID for this upload request.")
   pendingUploadId: string;
+
+  @doc("Version of dataset to be created if user did not specify version when initially creating upload")
+  datasetVersion?: string;
 
   @doc("TemporaryBlobReference is the only supported type")
   pendingUploadType: PendingUploadType.temporaryBlobReference;
