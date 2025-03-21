@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ScVmm",
-    "version": "2024-06-01",
+    "version": "2025-03-13",
     "description": "The Microsoft.ScVmm Rest API spec.",
     "x-typespec-generated": [
       {
@@ -3311,6 +3311,12 @@
           "format": "int64",
           "description": "VMCount gives the max number of VMs that can be deployed in the cloud.",
           "readOnly": true
+        },
+        "storageGB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "StorageGB gives the storage in GB present in the cloud.",
+          "readOnly": true
         }
       }
     },
@@ -4158,6 +4164,10 @@
       "type": "object",
       "description": "Defines the resource properties.",
       "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "Gets or sets the admin username."
+        },
         "adminPassword": {
           "type": "string",
           "format": "password",
@@ -4765,6 +4775,12 @@
         "powerState": {
           "type": "string",
           "description": "Gets the power state of the virtual machine.",
+          "readOnly": true
+        },
+        "generation": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets vm generation.",
           "readOnly": true
         },
         "ipAddresses": {
