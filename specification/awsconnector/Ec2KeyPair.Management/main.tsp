@@ -88,7 +88,7 @@ model AwsEc2KeyPairProperties {
   publicKeyMaterial?: string;
 
   @doc("The tags to apply to the key pair.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 }
 

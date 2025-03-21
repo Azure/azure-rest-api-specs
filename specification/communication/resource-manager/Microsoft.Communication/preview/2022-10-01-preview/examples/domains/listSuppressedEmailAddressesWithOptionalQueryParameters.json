@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "emailServiceName": "MyEmailServiceResource",
+    "domainName": "mydomain.com",
+    "api-version": "2022-10-01-preview",
+    "$top": 5,
+    "parameters": {
+      "validSenderUsername": "test"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "email": "nbernhard@example.net",
+            "listId": "test@mydomain.com",
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "lastUpdated": "2020-07-06T17:06:26.100Z",
+            "notes": "Notes from C1 customer."
+          },
+          {
+            "email": "shayne02@example.org",
+            "listId": "test@mydomain.com",
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "lastUpdated": "2020-07-06T17:06:26.100Z",
+            "notes": "Notes from C1 customer."
+          },
+          {
+            "email": "brock.stiedemann@example.com",
+            "listId": "test@mydomain.com",
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "lastUpdated": "2020-07-06T17:06:26.100Z",
+            "notes": "Notes from C1 customer."
+          },
+          {
+            "email": "hpollich@example.net",
+            "listId": "test@mydomain.com",
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "lastUpdated": "2020-07-06T17:06:26.100Z",
+            "notes": "Notes from C1 customer."
+          },
+          {
+            "email": "cfritsch@example.com",
+            "listId": "test@mydomain.com",
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "lastUpdated": "2020-07-06T17:06:26.100Z",
+            "notes": "Notes from C1 customer."
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/11112222-3333-4444-5554-666677778888/resourceGroups/myResourceGroupName/providers/Microsoft.Communication/emailServices/myEemailServiceName/domains/myDomainName/listSuppressedEmailAddresses?api-version=2021-10-01-preview&$skipToken=dummySkipToken"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The requested resource was not found"
+        }
+      }
+    }
+  }
+}

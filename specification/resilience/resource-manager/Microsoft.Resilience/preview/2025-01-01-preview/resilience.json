@@ -1,0 +1,599 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Resilience",
+    "version": "2025-01-01-preview",
+    "description": "Microsoft.Resilience Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Resilience"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Resilience/resilienceStates": {
+      "get": {
+        "operationId": "Resilience_List",
+        "tags": [
+          "Resilience"
+        ],
+        "description": "List ResilienceResource resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResilienceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resilience_List": {
+            "$ref": "./examples/Resilience_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Resilience/resilienceStates/{resilienceState}": {
+      "get": {
+        "operationId": "Resilience_Get",
+        "tags": [
+          "Resilience"
+        ],
+        "description": "Get a ResilienceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "resilienceState",
+            "in": "path",
+            "description": "The resilience resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,24}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResilienceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resilience_Get": {
+            "$ref": "./examples/Resilience_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resilience/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArnEventType": {
+      "type": "string",
+      "description": "Azure Resource Notification Event Types.",
+      "enum": [
+        "Snapshot",
+        "Delete",
+        "Move",
+        "Write"
+      ],
+      "x-ms-enum": {
+        "name": "ArnEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Snapshot",
+            "value": "Snapshot",
+            "description": "Snapshot event."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Resource delete event."
+          },
+          {
+            "name": "Move",
+            "value": "Move",
+            "description": "Resource move event."
+          },
+          {
+            "name": "Write",
+            "value": "Write",
+            "description": "Resource write event."
+          }
+        ]
+      }
+    },
+    "AzoresClassification": {
+      "type": "object",
+      "description": "Azores Classification tags applied for resource exclusion/assertion.",
+      "properties": {
+        "classification": {
+          "type": "string",
+          "description": "Classification of the resource. e.g. 'Non-Service Critical'."
+        },
+        "categorization": {
+          "type": "string",
+          "description": "Categorization of the resource. e.g. 'DataPlane'."
+        },
+        "usage": {
+          "type": "string",
+          "description": "Usage of the resource."
+        }
+      },
+      "required": [
+        "classification",
+        "categorization",
+        "usage"
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "EvaluationResult": {
+      "type": "string",
+      "description": "Evaluation Results.",
+      "enum": [
+        "None",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No evaluation results available."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Evaluation Failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Evaluation Succeeded."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ResilienceProperties": {
+      "type": "object",
+      "description": "Resilience Properties",
+      "properties": {
+        "eventType": {
+          "$ref": "#/definitions/ArnEventType",
+          "description": "Type of event that triggered the resilience evaluation.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID of the resource(s) being evaluated.",
+          "readOnly": true
+        },
+        "resilienceState": {
+          "$ref": "#/definitions/ResilienceState",
+          "description": "Resilience state of the resource after evaluating all its related resources' resilience states.",
+          "readOnly": true
+        },
+        "resilienceProfiles": {
+          "type": "array",
+          "description": "Resilience evaluation for the resource and all its related resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceResilienceProfile"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "eventType",
+        "tenantId",
+        "resilienceState",
+        "resilienceProfiles"
+      ]
+    },
+    "ResilienceResource": {
+      "type": "object",
+      "description": "Resilience Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResilienceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ResilienceResourceListResult": {
+      "type": "object",
+      "description": "The response of a ResilienceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResilienceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ResilienceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ResilienceRuleEvaluation": {
+      "type": "object",
+      "description": "Resilience Rule Evaluation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resilience Rule ID (GUID)."
+        },
+        "targetState": {
+          "$ref": "#/definitions/ResilienceState",
+          "description": "Resilience State that the rule is targeting."
+        },
+        "result": {
+          "$ref": "#/definitions/EvaluationResult",
+          "description": "Evaluation result of the rule."
+        }
+      },
+      "required": [
+        "id",
+        "targetState",
+        "result"
+      ]
+    },
+    "ResilienceState": {
+      "type": "string",
+      "description": "Resilience states",
+      "enum": [
+        "Undefined",
+        "NotApplicable",
+        "NonZoneResilient",
+        "ZoneAligned",
+        "ZoneRedundant",
+        "AlwaysAvailable"
+      ],
+      "x-ms-enum": {
+        "name": "ResilienceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Undefined",
+            "value": "Undefined",
+            "description": "Undefined state."
+          },
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "Not Applicable state."
+          },
+          {
+            "name": "NonZoneResilient",
+            "value": "NonZoneResilient",
+            "description": "Non-zone-resilient state."
+          },
+          {
+            "name": "ZoneAligned",
+            "value": "ZoneAligned",
+            "description": "Zone Aligned state."
+          },
+          {
+            "name": "ZoneRedundant",
+            "value": "ZoneRedundant",
+            "description": "Zone Redundant state."
+          },
+          {
+            "name": "AlwaysAvailable",
+            "value": "AlwaysAvailable",
+            "description": "Always Available state."
+          }
+        ]
+      }
+    },
+    "ResilienceStateReason": {
+      "type": "string",
+      "description": "Resilience state reasons",
+      "enum": [
+        "PlatformError",
+        "RelatedResourceEvaluationFailed",
+        "SkuNonAZ",
+        "SkuCapacityLessThanThree",
+        "RegionNonAZ",
+        "ZonesCountNotOne",
+        "ZonesCountLessThanTwo",
+        "ZonesCountLessThanThree",
+        "ZonesFlagNotSet",
+        "ZonesNotAligned"
+      ],
+      "x-ms-enum": {
+        "name": "ResilienceStateReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PlatformError",
+            "value": "PlatformError",
+            "description": "Platform Error."
+          },
+          {
+            "name": "RelatedResourceEvaluationFailed",
+            "value": "RelatedResourceEvaluationFailed",
+            "description": "Related resource evaluation Failed."
+          },
+          {
+            "name": "SkuNonAZ",
+            "value": "SkuNonAZ",
+            "description": "SKU doesn't support Availability Zones."
+          },
+          {
+            "name": "SkuCapacityLessThanThree",
+            "value": "SkuCapacityLessThanThree",
+            "description": "Sku capacity is not configured to support zone resilient deployment."
+          },
+          {
+            "name": "RegionNonAZ",
+            "value": "RegionNonAZ",
+            "description": "Region doesn't support Availability Zones."
+          },
+          {
+            "name": "ZonesCountNotOne",
+            "value": "ZonesCountNotOne",
+            "description": "Zones count is not one."
+          },
+          {
+            "name": "ZonesCountLessThanTwo",
+            "value": "ZonesCountLessThanTwo",
+            "description": "Zones count is less than two."
+          },
+          {
+            "name": "ZonesCountLessThanThree",
+            "value": "ZonesCountLessThanThree",
+            "description": "Zones count is less than three."
+          },
+          {
+            "name": "ZonesFlagNotSet",
+            "value": "ZonesFlagNotSet",
+            "description": "Zones flag is not set."
+          },
+          {
+            "name": "ZonesNotAligned",
+            "value": "ZonesNotAligned",
+            "description": "Zones not aligned."
+          }
+        ]
+      }
+    },
+    "ResourceResilienceProfile": {
+      "type": "object",
+      "description": "Resilience Profile for a resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure Resource ID of the resource being evaluated.",
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource Type of the resource being evaluated."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource being evaluated.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "zones": {
+          "type": "array",
+          "description": "Zones where the resource being evaluated is deployed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "SKU of the resource being evaluated."
+        },
+        "azoresClassification": {
+          "$ref": "#/definitions/AzoresClassification",
+          "description": "Classification assigned to the resource being evaluated."
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC Date and time when the resource was created."
+        },
+        "resilienceEvaluations": {
+          "type": "array",
+          "description": "Resilience Rules for the resource and their evaluation results.",
+          "items": {
+            "$ref": "#/definitions/ResilienceRuleEvaluation"
+          }
+        },
+        "resilienceState": {
+          "$ref": "#/definitions/ResilienceState",
+          "description": "Resilience State of the resource."
+        },
+        "resilienceStateReasons": {
+          "type": "array",
+          "description": "Reasons for the resilience state of the resource.",
+          "items": {
+            "$ref": "#/definitions/ResilienceStateReason"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "location",
+        "zones",
+        "sku",
+        "azoresClassification",
+        "creationDate",
+        "resilienceEvaluations",
+        "resilienceState",
+        "resilienceStateReasons"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

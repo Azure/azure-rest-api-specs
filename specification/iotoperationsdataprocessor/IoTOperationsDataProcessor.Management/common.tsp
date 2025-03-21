@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -23,19 +24,29 @@ model ExtendedLocation {
 
 @lroStatus
 @doc("The provisioning status of the resource.")
-union ProvisioningState {
-  string,
-  ResourceProvisioningState,
+enum ProvisioningState {
+  ...ResourceProvisioningState,
 
   @doc("The resource is being created.")
-  Provisioning: "Provisioning",
+  Provisioning,
 
   @doc("The resource is being updated.")
-  Updating: "Updating",
+  Updating,
 
   @doc("The resource is being deleted.")
-  Deleting: "Deleting",
+  Deleting,
 
   @doc("The resource was accepted by the server.")
-  Accepted: "Accepted",
+  Accepted,
+}
+
+@doc("The Microsoft.IoTOperationsDataProcessor versions.")
+enum Versions {
+  @doc("Microsoft IoT Operations Data Processor version 2023-10-04-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  Preview20230928: "2023-10-04-preview",
+
+  @doc("Microsoft IoT Operations Data Processor version 2024-02-01-preview.")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  Preview20240201: "2024-02-01-preview",
 }

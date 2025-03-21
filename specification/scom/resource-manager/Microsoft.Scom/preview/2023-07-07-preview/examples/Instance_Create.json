@@ -9,7 +9,8 @@
       "properties": {
         "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
         "databaseInstance": {
-          "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1"
+          "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1",
+          "databaseFqdn": "inst1.public.99e6c0ec1d52.database.windows.net,3342"
         },
         "domainController": {
           "domainName": "domain.com",
@@ -17,8 +18,8 @@
         },
         "domainUserCredentials": {
           "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/",
-          "userNameSecret": "userNameSecret",
-          "passwordSecret": "passwordSecret"
+          "userNameSecret": "userName",
+          "passwordSecret": "password"
         },
         "gmsaDetails": {
           "loadBalancerIP": "10.10.10.10",
@@ -44,9 +45,9 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.SCOM/managedInstances/myManagedInstace",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Scom/managedInstances/myManagedInstace",
         "name": "myInstace",
-        "type": "Microsoft.SCOM/managedInstances",
+        "type": "Microsoft.Scom/managedInstances",
         "location": "eastus2",
         "identity": {
           "type": "SystemAssigned,UserAssigned",
@@ -69,9 +70,9 @@
             "ouPath": "AsiaPacific"
           },
           "domainUserCredentials": {
-            "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/",
-            "userNameSecret": "userNameSecret",
-            "passwordSecret": "passwordSecret"
+            "keyVaultUrl": null,
+            "userNameSecret": "userName",
+            "passwordSecret": null
           },
           "gmsaDetails": {
             "loadBalancerIP": "10.10.10.10",
@@ -89,9 +90,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.SCOM/managedInstances/myManagedInstace",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Scom/managedInstances/myManagedInstace",
         "name": "myInstace",
-        "type": "Microsoft.SCOM/managedInstances",
+        "type": "Microsoft.Scom/managedInstances",
         "location": "eastus2",
         "identity": {
           "type": "SystemAssigned,UserAssigned",
@@ -114,9 +115,9 @@
             "ouPath": "AsiaPacific"
           },
           "domainUserCredentials": {
-            "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/",
-            "userNameSecret": "userNameSecret",
-            "passwordSecret": "passwordSecret"
+            "keyVaultUrl": null,
+            "userNameSecret": "userName",
+            "passwordSecret": null
           },
           "gmsaDetails": {
             "loadBalancerIP": "10.10.10.10",
@@ -136,61 +137,6 @@
             }
           ]
         }
-      }
-    },
-    "202": {
-      "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.SCOM/managedInstances/myManagedInstace",
-        "name": "myInstace",
-        "type": "Microsoft.SCOM/managedInstances",
-        "location": "eastus2",
-        "identity": {
-          "type": "SystemAssigned,UserAssigned",
-          "userAssignedIdentities": {
-            "/subscriptions/subid/resourceGroups/mySCOMMIGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
-              "principalId": "principalId1",
-              "clientId": "clientId1"
-            }
-          }
-        },
-        "properties": {
-          "productVersion": "1.0.81.2",
-          "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
-          "databaseInstance": {
-            "databaseInstanceId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.sql/managedInstances/inst1"
-          },
-          "domainController": {
-            "domainName": "domain.com",
-            "dnsServer": "10.10.10.10",
-            "ouPath": "AsiaPacific"
-          },
-          "domainUserCredentials": {
-            "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/",
-            "userNameSecret": "userNameSecret",
-            "passwordSecret": "passwordSecret"
-          },
-          "gmsaDetails": {
-            "loadBalancerIP": "10.10.10.10",
-            "gmsaAccount": "vmsslb2$",
-            "managementServerGroupName": "servergroup",
-            "dnsName": "dnsname.com"
-          },
-          "azureHybridBenefit": {
-            "scomLicenseType": "None",
-            "windowsServerLicenseType": "None",
-            "sqlServerLicenseType": "None"
-          },
-          "operationsStatus": [
-            {
-              "operationName": "Scaling",
-              "operationState": "Success"
-            }
-          ]
-        }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://eastus2euap.management.azure.com/providers/Microsoft.Scom/locations/EASTUS2EUAP/operationStatuses/d44b3a97-32ad-41e4-9ae4-44058a40a15d*5ED52B8AA9C36ECD6FE0456CD6A3BE3EE9A3CDB33D2E4611E5A43DC6F54DCF2C?api-version=2023-07-07-preview",
-        "Location": "https://eastus2euap.management.azure.com/providers/Microsoft.Scom/locations/EASTUS2EUAP/operationStatuses/d44b3a97-32ad-41e4-9ae4-44058a40a15d*5ED52B8AA9C36ECD6FE0456CD6A3BE3EE9A3CDB33D2E4611E5A43DC6F54DCF2C?api-version=2023-07-07-preview"
       }
     }
   }

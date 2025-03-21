@@ -97,7 +97,7 @@ model AwsOrganizationsAccountProperties {
   status?: Status;
 
   @doc("A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 }
 

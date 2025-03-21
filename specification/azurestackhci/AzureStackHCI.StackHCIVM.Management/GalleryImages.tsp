@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
 @doc("The gallery images resource definition.")
 @extension("x-ms-azure-resource", true)
 model GalleryImage is TrackedResource<GalleryImageProperties> {
@@ -33,13 +33,8 @@ interface GalleryImages {
   @doc("Gets a gallery image")
   get is ArmResourceRead<GalleryImage>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a gallery image. Please note some properties can be set only during gallery image creation.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    GalleryImage,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImage>;
 
   @doc("The operation to update a gallery image.")
   @patch(#{ implicitOptionality: false })

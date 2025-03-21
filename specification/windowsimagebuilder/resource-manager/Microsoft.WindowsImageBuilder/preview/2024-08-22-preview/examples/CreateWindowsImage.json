@@ -1,0 +1,217 @@
+{
+  "title": "Create Windows Image",
+  "operationId": "WindowsImages_Create",
+  "parameters": {
+    "subscriptionId": "e12d9eff-5d52-4dc4-b4a0-a0c285c01e2e",
+    "resourceGroupName": "myResourceGroup",
+    "imageName": "myImage",
+    "api-version": "2024-08-22-preview",
+    "resource": {
+      "location": "westus",
+      "tags": {
+        "imagetemplate_tag1": "IT_T1",
+        "imagetemplate_tag2": "IT_T2"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {}
+        }
+      },
+      "properties": {
+        "source": {
+          "os": "Windows server 2022",
+          "edition": "Server Data Center",
+          "arch": "amd64fre",
+          "language": "en-us",
+          "size": 30,
+          "generation": "Gen1",
+          "trigger": true,
+          "type": "MediaFactoryImage"
+        },
+        "customize": [
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (inline) Customizer Example",
+            "inline": [
+              "Powershell command-1",
+              "Powershell command-2",
+              "Powershell command-3"
+            ]
+          },
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (inline) Customizer Elevated user Example",
+            "inline": [
+              "Powershell command-1",
+              "Powershell command-2",
+              "Powershell command-3"
+            ],
+            "runElevated": true
+          },
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (inline) Customizer Elevated Local System user Example",
+            "inline": [
+              "Powershell command-1",
+              "Powershell command-2",
+              "Powershell command-3"
+            ],
+            "runElevated": true,
+            "runAsSystem": true
+          },
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (script) Customizer Example",
+            "scriptUri": "https://example.com/path/to/script.ps1",
+            "validExitCodes": [
+              0,
+              1
+            ]
+          },
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (script) Customizer Elevated Local System user Example",
+            "scriptUri": "https://example.com/path/to/script.ps1",
+            "runElevated": true,
+            "validExitCodes": [
+              0,
+              1
+            ]
+          },
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (script) Customizer Elevated Local System user Example",
+            "scriptUri": "https://example.com/path/to/script.ps1",
+            "runElevated": true,
+            "runAsSystem": true,
+            "validExitCodes": [
+              0,
+              1
+            ]
+          },
+          {
+            "type": "WindowsRestart",
+            "name": "Restart Customizer Example",
+            "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
+            "restartCheckCommand": "powershell -command \"& {Write-Output 'restarted.'}\"",
+            "restartTimeout": "10m"
+          },
+          {
+            "type": "WindowsUpdate",
+            "name": "Windows Update Customizer Example",
+            "searchCriteria": "BrowseOnly=0 and IsInstalled=0",
+            "filters": [
+              "$_.BrowseOnly"
+            ],
+            "updateLimit": 100
+          }
+        ],
+        "distribute": [
+          {
+            "type": "ManagedImage",
+            "runOutputName": "image_it_pir_1",
+            "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+            "artifactTags": {
+              "tagName": "value"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.WindowsImageBuilder/WindowsImages/myImage",
+        "name": "myImage",
+        "location": "westus",
+        "type": "Microsoft.WindowsImageBuilder/WindowsImages",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "source": {
+            "os": "Windows server 2022",
+            "edition": "Server Data Center",
+            "arch": "amd64fre",
+            "language": "en-us",
+            "size": 30,
+            "generation": "Gen1",
+            "trigger": true,
+            "type": "MediaFactoryImage"
+          },
+          "customize": [
+            {
+              "type": "Shell",
+              "name": "Shell customization example",
+              "scriptUri": "https://example.com/path/to/script.sh"
+            }
+          ],
+          "distribute": [
+            {
+              "type": "ManagedImage",
+              "runOutputName": "image_it_pir_1",
+              "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "artifactTags": {
+                "tagName": "value"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.WindowsImageBuilder/WindowsImages/myImage",
+        "name": "myImage",
+        "location": "westus",
+        "type": "Microsoft.WindowsImageBuilder/WindowsImages",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity_1": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "source": {
+            "os": "Windows server 2022",
+            "edition": "Server Data Center",
+            "arch": "amd64fre",
+            "language": "en-us",
+            "size": 30,
+            "generation": "Gen1",
+            "trigger": true,
+            "type": "MediaFactoryImage"
+          },
+          "customize": [
+            {
+              "type": "Shell",
+              "name": "Shell customization example",
+              "scriptUri": "https://example.com/path/to/script.sh"
+            }
+          ],
+          "distribute": [
+            {
+              "type": "ManagedImage",
+              "runOutputName": "image_it_pir_1",
+              "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
+              "artifactTags": {
+                "tagName": "value"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

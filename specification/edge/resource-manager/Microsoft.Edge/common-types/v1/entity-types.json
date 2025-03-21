@@ -1,0 +1,75 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Common types"
+  },
+  "paths": {},
+  "definitions": {
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The ProvisioningState",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is in provisioning state."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is in updating state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is in deleting state."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource is in accepted state."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

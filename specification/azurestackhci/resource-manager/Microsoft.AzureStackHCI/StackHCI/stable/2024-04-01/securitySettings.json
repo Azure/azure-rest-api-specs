@@ -242,14 +242,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -333,7 +333,6 @@
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource.",
-      "readOnly": true,
       "enum": [
         "Succeeded",
         "Failed",
@@ -383,7 +382,8 @@
             "description": "The resource create request has been accepted"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "SecurityComplianceStatus": {
       "type": "object",
@@ -493,9 +493,9 @@
     "ClusterNameParameter": {
       "name": "clusterName",
       "in": "path",
+      "description": "The name of the cluster.",
       "required": true,
       "type": "string",
-      "description": "The name of the cluster.",
       "x-ms-parameter-location": "method"
     }
   }

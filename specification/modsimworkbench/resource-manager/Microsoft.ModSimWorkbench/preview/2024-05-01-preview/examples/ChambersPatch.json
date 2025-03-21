@@ -1,0 +1,71 @@
+{
+  "title": "Chambers_Update",
+  "operationId": "Chambers_Update",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2024-05-01-preview",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber",
+    "properties": {},
+    "tags": {
+      "tag-name": "tag-value"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber-name",
+        "type": "Microsoft.ModSimWorkbench/workbenches/chambers",
+        "location": "Central US",
+        "zones": [
+          "1",
+          "2"
+        ],
+        "sku": {
+          "name": "Standard_ZR",
+          "tier": "Standard"
+        },
+        "tags": {
+          "tag-name": "tag-value"
+        },
+        "properties": {
+          "licenseServices": {
+            "cadence": {
+              "enable": true,
+              "lmhostId": [
+                "000d3a6f40a1"
+              ]
+            },
+            "ansys": {
+              "enable": true,
+              "lmhostId": [
+                "000d3a6f40a1"
+              ]
+            },
+            "siemens": {
+              "enable": true,
+              "lmhostId": [
+                "000d3a6f40a1"
+              ]
+            },
+            "synopsys": {
+              "enable": true,
+              "vmUuid": [
+                "AA31075F-AFEB-0442-B40A-9AAE5D3C2830"
+              ]
+            }
+          },
+          "dataPipelineInboundPath": "/mount/dataPipeline/datain",
+          "dataPipelineOutboundPath": "/mount/dataPipeline/dataout"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2021-10-01&operationResultResponseType=Location",
+        "x-ms-async-operation-timeout": "PT2H30M"
+      }
+    }
+  }
+}

@@ -33,17 +33,27 @@ model StandbyVirtualMachinePoolResource
 
 @doc("Details of the StandbyVirtualMachinePool.")
 model StandbyVirtualMachinePoolResourceProperties {
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
+  @doc("Specifies maximum number of standby VMs. When the pool is attached to VMScaleSets, the limit applies to each VMScaleSet.")
+  @maxValue(2000)
+  @removed(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
+  maxReadyCapacity: int64;
+
   @doc("Specifies the elasticity profile of the standby virtual machine pools.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
 
   @doc("Specifies the desired state of virtual machines in the pool.")
-  @extension("x-ms-identifiers", #["vmState"])
   virtualMachineState: VirtualMachineState;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
+  @doc("Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently.")
+  @removed(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
+  attachedVirtualMachineScaleSetIds?: string[];
 
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-  attachedVirtualMachineScaleSetId?: armResourceIdentifier<[
+  attachedVirtualMachineScaleSetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachineScaleSet";
     }
@@ -56,17 +66,17 @@ model StandbyVirtualMachinePoolResourceProperties {
 
 @doc("State of standby virtual machines")
 union VirtualMachineState {
-  string,
-
   @doc("The virtual machine is up and running.")
   Running: "Running",
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
   Deallocated: "Deallocated",
 
-  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @added(Microsoft.StandbyPool.Versions.`2024-08-01-preview`)
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
   Hibernated: "Hibernated",
+
+  string,
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
@@ -87,14 +97,8 @@ model StandbyVirtualMachinePoolElasticityProfile {
 @armResourceOperations
 interface StandbyVirtualMachinePools {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    StandbyVirtualMachinePoolResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyVirtualMachinePoolResource>;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
-  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     StandbyVirtualMachinePoolResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

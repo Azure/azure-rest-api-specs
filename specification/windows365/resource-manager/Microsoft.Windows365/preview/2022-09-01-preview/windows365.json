@@ -1,0 +1,483 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Windows365",
+    "version": "2022-09-01-preview",
+    "description": "Windows365 Resource Provider management API."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Windows365/cloudPcDelegatedMsis/{cloudPcDelegatedMsiName}": {
+      "get": {
+        "operationId": "CloudPcDelegatedMsi_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CloudPcDelegatedMsiNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the CloudPcDelegatedMsi resource.",
+            "schema": {
+              "$ref": "#/definitions/CloudPcDelegatedMsi"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/CloudPcDelegatedMsi_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates a CloudPcDelegatedMsi resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CloudPcDelegatedMsiNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a CloudPcDelegatedMsi.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudPcDelegatedMsi"
+            }
+          }
+        ],
+        "operationId": "CloudPcDelegatedMsi_CreateOrUpdate",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudPcDelegatedMsi"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudPcDelegatedMsi_Create": {
+            "$ref": "./examples/CloudPcDelegatedMsi_Create.json"
+          },
+          "CloudPcDelegatedMsi_CreateWithUserIdentity": {
+            "$ref": "./examples/CloudPcDelegatedMsi_CreateWithUserIdentity.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Partially updates a CloudPcDelegatedMsi.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CloudPcDelegatedMsiNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable CloudPcDelegatedMsi properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudPcDelegatedMsiUpdate"
+            }
+          }
+        ],
+        "operationId": "CloudPcDelegatedMsi_Update",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudPcDelegatedMsi"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudPcDelegatedMsi_Update": {
+            "$ref": "./examples/CloudPcDelegatedMsi_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a CloudPcDelegatedMsi",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CloudPcDelegatedMsiNameParameter"
+          }
+        ],
+        "operationId": "CloudPcDelegatedMsi_Delete",
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudPcDelegatedMsi_Delete": {
+            "$ref": "./examples/CloudPcDelegatedMsi_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Windows365/cloudPcDelegatedMsis": {
+      "get": {
+        "description": "Lists all CloudPcDelegatedMsi in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "CloudPcDelegatedMsi_ListBySubscription",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudPcDelegatedMsiListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudPcDelegatedMsi_ListBySubscription": {
+            "$ref": "./examples/CloudPcDelegatedMsi_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Windows365/cloudPcDelegatedMsis": {
+      "get": {
+        "tags": [
+          "CloudPcDelegatedMsi"
+        ],
+        "description": "Lists all CloudPcDelegatedMsi in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "CloudPcDelegatedMsi_ListByResourceGroup",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudPcDelegatedMsiListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudPcDelegatedMsi_ListByResourceGroup": {
+            "$ref": "./examples/CloudPcDelegatedMsi_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Windows365/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available resource provider operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/Operations_Get.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudPcDelegatedMsi": {
+      "type": "object",
+      "description": "Represents a cloudPcDelegatedMsi resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "CloudPcDelegatedMsi properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudPcDelegatedMsiProperties"
+        },
+        "identity": {
+          "description": "Delegated Managed identity properties",
+          "$ref": "managedidentitywithdelegation.json#/definitions/ManagedServiceIdentityWithDelegation"
+        }
+      }
+    },
+    "CloudPcDelegatedMsiProperties": {
+      "description": "Properties of the cloudPcDelegatedMsi.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "readOnly": true,
+      "enum": [
+        "Succeeded",
+        "Canceled",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "CloudPcDelegatedMsiListResult": {
+      "description": "Result of the list cloudPcDelegatedMsis operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudPcDelegatedMsi"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudPcDelegatedMsiUpdate": {
+      "description": "The CloudPcDelegatedMsi resource for partial updates. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "Managed identity properties",
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error body",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Windows365 RP service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": [],
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Windows365 RP service."
+    }
+  },
+  "parameters": {
+    "CloudPcDelegatedMsiNameParameter": {
+      "name": "cloudPcDelegatedMsiName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cloudPcDelegatedMsi.",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "name": "$top",
+      "in": "query",
+      "description": "The maximum number of resources to return from the operation. Example: '$top=10'.",
+      "type": "integer",
+      "format": "int32",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

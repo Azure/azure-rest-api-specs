@@ -1,0 +1,83 @@
+namespace Microsoft.AzureLinuxTestingService;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Autorest;
+using Azure.Core;
+using Azure.Core.Foundations;
+using OpenAPI;
+
+@doc("The test results for a job")
+@parentResource(Job)
+model TestResult is ProxyResource<TestResultProperties> {
+    @doc("Test results from a job")
+    @key("testResult")
+    @segment("testResults")
+    @visibility("read")
+    @path()
+    name: string;
+}
+
+@doc("Test results for a particular test case")
+model TestResultProperties is ResourceProperties {
+    @doc("The job name")
+    jobName: string;
+
+    @doc("The test case")
+    caseName: string;
+
+    @doc("The test status")
+    status: string;
+
+    @doc("Message")
+    message: string;
+
+    @doc("Log URL")
+    logUrl: string;
+
+    @doc("Image name source string")
+    image: string;
+
+    @doc("VM Size used")
+    vmSize: string;
+
+    @doc("Region test ran")
+    location: string;
+
+    @doc("Kernel version used")
+    kernelVersion: string;
+
+    @doc("Distro version used")
+    distroVersion: string;
+
+    @doc("VHD Generation")
+    vhdGeneration: string;
+
+    @doc("Wala Version")
+    walaVersion: string;
+
+    @doc("Extra fields")
+    extraFields: object;
+
+    @doc("Test duration")
+    duration: string;
+
+    @doc("Start time")
+    startTime: zonedDateTime;
+
+    @doc("End time")
+    endTime: zonedDateTime;
+}
+
+
+@doc("Test result operations")
+@armResourceOperations(TestResult)
+interface TestResults {
+    get is ArmResourceRead<TestResult>;
+    listByResourceGroup is ArmResourceListByParent<TestResult>;
+    listbySubscription is ArmListBySubscription<TestResult>;
+
+}

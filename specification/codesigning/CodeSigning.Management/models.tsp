@@ -1,10 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@typespec/openapi";
-import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/versioning";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -12,7 +10,6 @@ using Azure.Core;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.Versioning;
 
 namespace Microsoft.CodeSigning;
 
@@ -45,20 +42,23 @@ union ProvisioningState {
 union ProfileType {
   string,
 
-  @doc("Used for signing files which are distributed publicly.")
+  @doc("Used for signing code files which are distributed publicly.")
   PublicTrust: "PublicTrust",
 
-  @doc("Used for signing files which are distributed internally within organization or group boundary.")
+  @doc("Used for signing code files which are distributed internally within organization or group boundary.")
   PrivateTrust: "PrivateTrust",
 
   @doc("Used for signing CI policy files.")
   PrivateTrustCIPolicy: "PrivateTrustCIPolicy",
 
-  @doc("Used for signing files which are run in secure vbs enclave.")
+  @doc("Used for signing code files which are run in secure vbs enclave.")
   VBSEnclave: "VBSEnclave",
 
-  @doc("Used for signing files for testing purpose.")
+  @doc("Used for signing code files for testing purpose.")
   PublicTrustTest: "PublicTrustTest",
+
+  @doc("Used for signing content files.")
+  C2PAContentCredentials: "C2PAContentCredentials",
 }
 
 @doc("Status of the certificate profiles.")
@@ -147,11 +147,11 @@ model AccountSku {
 
 @doc("Parameters for creating or updating a trusted signing account.")
 model CodeSigningAccountPatch {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the trusted signing account.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: CodeSigningAccountPatchProperties;
@@ -160,15 +160,7 @@ model CodeSigningAccountPatch {
 @doc("Properties of the trusted signing account.")
 model CodeSigningAccountPatchProperties {
   @doc("SKU of the trusted signing account.")
-  @typeChangedFrom(Versions.v2024_09_30_preview, AccountSku)
-  sku?: AccountSkuPatch;
-}
-
-@doc("SKU of the trusted signing account.")
-@added(Versions.v2024_09_30_preview)
-model AccountSkuPatch {
-  @doc("Name of the SKU.")
-  name?: SkuName;
+  sku?: AccountSku;
 }
 
 @doc("Properties of the certificate profile.")
@@ -176,22 +168,18 @@ model CertificateProfileProperties {
   @doc("Profile type of the certificate.")
   profileType: ProfileType;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as CN in the certificate subject name.")
   @visibility(Lifecycle.Read)
   commonName?: string;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as O in the certificate subject name.")
   @visibility(Lifecycle.Read)
   organization?: string;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as OU in the private trust certificate subject name.")
   @visibility(Lifecycle.Read)
   organizationUnit?: string;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as STREET in the certificate subject name.")
   @visibility(Lifecycle.Read)
   streetAddress?: string;
@@ -199,7 +187,6 @@ model CertificateProfileProperties {
   @doc("Whether to include STREET in the certificate subject name.")
   includeStreetAddress?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as L in the certificate subject name.")
   @visibility(Lifecycle.Read)
   city?: string;
@@ -207,7 +194,6 @@ model CertificateProfileProperties {
   @doc("Whether to include L in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeCity?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as S in the certificate subject name.")
   @visibility(Lifecycle.Read)
   state?: string;
@@ -215,7 +201,6 @@ model CertificateProfileProperties {
   @doc("Whether to include S in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeState?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as C in the certificate subject name.")
   @visibility(Lifecycle.Read)
   country?: string;
@@ -223,7 +208,6 @@ model CertificateProfileProperties {
   @doc("Whether to include C in the certificate subject name. Applicable only for private trust, private trust ci profile types")
   includeCountry?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Used as PC in the certificate subject name.")
   @visibility(Lifecycle.Read)
   postalCode?: string;
@@ -231,14 +215,12 @@ model CertificateProfileProperties {
   @doc("Whether to include PC in the certificate subject name.")
   includePostalCode?: boolean = false;
 
-  @removed(Versions.v2024_09_30_preview)
   @doc("Enhanced key usage of the certificate.")
   @visibility(Lifecycle.Read)
   enhancedKeyUsage?: string;
 
   @doc("Identity validation id used for the certificate subject name.")
-  @madeRequired(Versions.v2024_09_30_preview)
-  identityValidationId: string;
+  identityValidationId?: string;
 
   @doc("Status of the current operation on certificate profile.")
   @visibility(Lifecycle.Read)
@@ -248,10 +230,10 @@ model CertificateProfileProperties {
   @visibility(Lifecycle.Read)
   status?: CertificateProfileStatus;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "deprecated" "Legacy flattening"
   @doc("List of renewed certificates.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   @Azure.ClientGenerator.Core.flattenProperty
   certificates?: Certificate[];
 }
@@ -260,10 +242,6 @@ model CertificateProfileProperties {
 model Certificate {
   @doc("Serial number of the certificate.")
   serialNumber?: string;
-
-  @doc("Enhanced key usage of the certificate.")
-  @added(Versions.v2024_09_30_preview)
-  enhancedKeyUsage?: string;
 
   @doc("Subject name of the certificate.")
   subjectName?: string;
@@ -280,7 +258,7 @@ model Certificate {
   @doc("Status of the certificate.")
   status?: CertificateStatus;
 
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Revocations history of a certificate.")
   @Azure.ClientGenerator.Core.flattenProperty
   revocation?: Revocation;

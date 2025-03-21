@@ -246,13 +246,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Delete SAP monitor"
+          },
           "202": {
-            "description": "Deleting SAP monitor",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Deleting SAP monitor"
           },
           "204": {
             "description": "No SAP monitor to delete"
@@ -351,6 +349,52 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ProviderInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/db2JobConfigurations": {
+      "get": {
+        "tags": [
+          "Db2JobConfigurations"
+        ],
+        "operationId": "Db2JobConfigurations_List",
+        "summary": "Gets a list of DB2 job configurations in the specified SAP monitor.",
+        "description": "Gets a list of DB2 job configurations in the specified SAP monitor. The operations returns various properties of each DB2 job configurations.",
+        "x-ms-examples": {
+          "List all SAP monitors providers in a subscription": {
+            "$ref": "./examples/Db2JobConfigurations/Db2JobConfigurations_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/db2JobConfigurationsListResult"
             }
           },
           "default": {
@@ -555,16 +599,171 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Deleted provider instance"
+          },
           "202": {
-            "description": "Deleting provider instance",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Deleting provider instance"
           },
           "204": {
             "description": "No provider instance to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/db2JobConfigurations/{jobConfigurationName}": {
+      "get": {
+        "tags": [
+          "Db2JobConfigurations"
+        ],
+        "operationId": "Db2JobConfigurations_Get",
+        "summary": "Gets db2 job configurations.",
+        "description": "Gets db2 job configuration for the specified subscription, resource group, SAP monitor name and job configurations name.",
+        "x-ms-examples": {
+          "Get db2 job configuration": {
+            "$ref": "./examples/Db2JobConfigurations/Db2JobConfigurations_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/db2JobConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Db2JobConfigurations"
+        ],
+        "operationId": "Db2JobConfigurations_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Create db2 job configuration.",
+        "description": "Create db2 job configuration for the specified subscription, resource group, SAP monitor name and job configurations Name",
+        "x-ms-examples": {
+          "Create db2 job configuration": {
+            "$ref": "./examples/Db2JobConfigurations/Db2JobConfigurations_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobConfigurationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/db2JobConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created DB2 job configurations",
+            "schema": {
+              "$ref": "#/definitions/db2JobConfiguration"
+            }
+          },
+          "201": {
+            "description": "Creating DB2 job configurations",
+            "schema": {
+              "$ref": "#/definitions/db2JobConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Db2JobConfigurations"
+        ],
+        "operationId": "Db2JobConfigurations_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Delete db2 job configuration.",
+        "description": "Delete db2 job configuration for the specified subscription, resource group, SAP monitor name, and job configurations Name.",
+        "x-ms-examples": {
+          "Delete db2 job configuration": {
+            "$ref": "./examples/Db2JobConfigurations/Db2JobConfigurations_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted DB2 job configurations"
+          },
+          "202": {
+            "description": "Deleting DB2 job configurations"
+          },
+          "204": {
+            "description": "No DB2 job configurations to delete"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -843,6 +1042,18 @@
       ],
       "x-ms-enum": {
         "name": "sslPreference",
+        "modelAsString": true
+      }
+    },
+    "JobConfigurationType": {
+      "description": "Gets or sets job configuration type.",
+      "type": "string",
+      "enum": [
+        "BuiltIn",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "jobConfigurationType",
         "modelAsString": true
       }
     },
@@ -1172,6 +1383,23 @@
       },
       "description": "The response from the List provider instances operation."
     },
+    "db2JobConfigurationsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/db2JobConfiguration"
+          },
+          "description": "The list of db2 Job Configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of db2 Job Configurations."
+        }
+      },
+      "description": "The response from the List db2 Job Configurations operation."
+    },
     "ProviderInstance": {
       "type": "object",
       "properties": {
@@ -1187,6 +1415,22 @@
         }
       ],
       "description": "A provider instance associated with SAP monitor."
+    },
+    "db2JobConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/db2JobConfigurationsProperties",
+          "description": "DB2 job configurations properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A DB2 job configurations associated with SAP monitor."
     },
     "HanaDbProviderInstanceProperties": {
       "description": "Gets or sets the provider properties.",
@@ -1519,6 +1763,105 @@
       },
       "description": "Describes the properties of a provider instance."
     },
+    "db2JobConfigurationsProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "WorkloadMonitorProvisioningState",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the DB2 job configurations."
+        },
+        "metricName": {
+          "description": "Gets or sets the name of the DB2 job configurations.",
+          "type": "string"
+        },
+        "metricDimensions": {
+          "description": "Gets or sets the list of dimensions for the DB2 job configurations.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customLogTable": {
+          "description": "Gets or sets the name of the custom log table used to store data in log Analytics.",
+          "type": "string"
+        },
+        "defaultFrequencyInSecs": {
+          "description": "Gets or sets the value of the default frequency of execution for the job.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 86400
+        },
+        "type": {
+          "description": "Gets or sets the type for the job configuration.",
+          "$ref": "#/definitions/JobConfigurationType"
+        },
+        "parameters": {
+          "description": "Gets or sets the list of Configuration parameters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/configurationParameter"
+          },
+          "maxLength": 50,
+          "x-ms-identifiers": []
+        },
+        "actions": {
+          "description": "Gets or sets the list of actions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/actionsParameter"
+          },
+          "maxLength": 50,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "actionsParameter": {
+      "description": "Gets or sets the list of action parameter",
+      "type": "object",
+      "properties": {
+        "functionName": {
+          "description": "Gets or sets the function Name",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Gets or sets the list of function Name.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/configurationParameter"
+          },
+          "maxLength": 50,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "configurationParameter": {
+      "description": "Gets or sets list of configuration Parameter",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets name of configuration",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets value of configuration parameter ",
+          "type": "string"
+        }
+      }
+    },
     "SapLandscapeMonitorMetricThresholds": {
       "description": "Gets or sets the Threshold Values for Top Metrics Health.",
       "type": "object",
@@ -1660,7 +2003,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-_]+$",
       "description": "Name of the SAP monitor resource.",
       "x-ms-parameter-location": "method"
     },
@@ -1669,8 +2011,15 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]+$",
       "description": "Name of the provider instance.",
+      "x-ms-parameter-location": "method"
+    },
+    "jobConfigurationNameParameter": {
+      "name": "jobConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the job configuration.",
       "x-ms-parameter-location": "method"
     },
     "MonitorParameter": {
@@ -1689,8 +2038,17 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/ProviderInstance"
+      }
+    },
+    "db2JobConfigurationParameter": {
+      "name": "db2JobConfigurationsParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/db2JobConfiguration"
       },
-      "description": "Request body representing a provider instance associated with a SAP monitor."
+      "description": "Request body representing a DB2 job configurations",
+      "x-ms-parameter-location": "method"
     },
     "SapLandscapeMonitorParameter": {
       "name": "sapLandscapeMonitorParameter",

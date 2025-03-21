@@ -97,6 +97,9 @@
         ],
         "operationId": "Instances_Create",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -136,12 +139,6 @@
           },
           "201": {
             "description": "InProgress. The resource will be created asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/DFPInstance"
-            }
-          },
-          "202": {
-            "description": "InProgress. Accepted. The resource will be updated asynchronously.",
             "schema": {
               "$ref": "#/definitions/DFPInstance"
             }
@@ -427,6 +424,62 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CheckInstanceNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Dynamics365FraudProtection/locations/{location}/operationstatuses/{operationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get details of a server": {
+            "$ref": "./examples/operationStatuses.json"
+          }
+        },
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "ListOperationStatuses",
+        "description": "List the status of operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name which the operation will lookup into."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The target operation Id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. The operation is ongoing.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {

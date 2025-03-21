@@ -121,14 +121,14 @@ model AwsElasticLoadBalancingV2TargetGroupProperties {
   protocolVersion?: string;
 
   @doc("The tags.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The ARN of the Target Group")
   targetGroupArn?: string;
 
   @doc("The attributes.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   targetGroupAttributes?: TargetGroupAttribute[];
 
   @doc("The full name of the target group.")

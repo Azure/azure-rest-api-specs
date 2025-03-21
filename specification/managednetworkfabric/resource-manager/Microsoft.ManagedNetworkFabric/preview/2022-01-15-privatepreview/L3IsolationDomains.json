@@ -1,0 +1,2745 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2022-01-15-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}": {
+      "put": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_Create",
+        "summary": "Create L3 Isolation Domain.",
+        "description": "Create isolation domain resources for layer 3 connectivity between compute nodes and for communication with external services .This configuration is applied on the devices only after the creation of networks is completed and isolation domain is enabled. ",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3 Isolation Domain"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_Create_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_Get",
+        "summary": "Gets a L3 Isolation Domain.",
+        "description": "Retrieves details of this L3 Isolation Domain.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3 Isolation Domain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_Get_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_Update",
+        "summary": "Updates a L3 Isolation Domain.",
+        "description": "API to update certain properties of the L3 Isolation Domain resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3 Isolation Domain"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "API to update certain properties of the L3 Isolation Domain resource.",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomainPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomain"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_Update_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_Delete",
+        "summary": "Deletes a L3 Isolation Domain.",
+        "description": "Deletes layer 3 connectivity between compute nodes by managed by named L3 Isolation name.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3 Isolation Domain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains": {
+      "get": {
+        "operationId": "L3IsolationDomains_ListByResourceGroup",
+        "summary": "List L3IsolationDomains by resource group.",
+        "description": "Displays L3IsolationDomains list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all L3IsolationDomains under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomainsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains": {
+      "get": {
+        "operationId": "L3IsolationDomains_ListBySubscription",
+        "summary": "List L3IsolationDomains by subscription.",
+        "description": "Displays L3IsolationDomains list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all L3IsolationDomains under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/L3IsolationDomainsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/updateAdminState": {
+      "post": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_updateAdminState",
+        "description": "Enables racks for this Isolation Domain.",
+        "summary": "executes enable operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_updateAdminState_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_updateAdminState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/updateOptionBAdminState": {
+      "post": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_updateOptionBAdminState",
+        "description": "Update administrative state of option B on CE devices",
+        "summary": "Update route targets on CE devices. List the CE network device ARM resource IDs in the request body payload.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_updateOptionBAdminState_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_updateOptionBAdminState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/clearArpTable": {
+      "post": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_clearArpTable",
+        "description": "Clears ARP tables for this Isolation Domain.",
+        "summary": "executes clear ARP operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/EnableDisableOnResources"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_clearArpTable_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_clearArpTable_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/clearNeighborTable": {
+      "post": {
+        "tags": [
+          "L3IsolationDomains"
+        ],
+        "operationId": "L3IsolationDomains_clearNeighborTable",
+        "description": "Clears IPv6 neighbor tables for this Isolation Domain.",
+        "summary": "executes ipv6 clear neighbor tables operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/EnableDisableOnResources"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "L3IsolationDomains_clearNeighborTable_MaximumSet_Gen": {
+            "$ref": "./examples/L3IsolationDomains_clearNeighborTable_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}": {
+      "put": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_Create",
+        "summary": "Creates InternalNetwork for Layer3 Isolation Domain for communication of compute within and across racks.",
+        "description": "Creates InternalNetwork PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the InternalNetwork"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/InternalNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternalNetwork"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/InternalNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_Create_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_Get",
+        "summary": "Retrieves details of InternalNetworks using GET method.",
+        "description": "Gets a InternalNetworks.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the InternalNetwork"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternalNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InternalNetworks_Get_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_Update",
+        "summary": "API to update certain properties of the InternalNetworks resources.",
+        "description": "Updates a InternalNetworks.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the InternalNetwork"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "InternalNetwork properties to update. Only annotations are supported.",
+            "schema": {
+              "$ref": "#/definitions/InternalNetworkPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InternalNetwork"
+            }
+          },
+          "202": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/InternalNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_Update_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_Delete",
+        "summary": "Deletes a InternalNetworks.",
+        "description": "Implements InternalNetworks DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the InternalNetwork"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks": {
+      "get": {
+        "operationId": "InternalNetworks_List",
+        "summary": "Executes list operation to display list of all internal networks",
+        "description": "Displays InternalNetworks list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkInterfaces under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/InternalNetworksList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_List_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/updateAdminState": {
+      "post": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_updateAdminState",
+        "description": "Update Administrative state of  InternalNetworks on resources referred by their resource ids.",
+        "summary": "Executes the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "description": "Name of the InternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_updateAdminState_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateAdminState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/updateBgpState": {
+      "post": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_updateBgpState",
+        "description": "Update BGP state for internalNetwork. Allowed only on edge devices.",
+        "summary": "Executes the operation to the underlying resources for updating BGP state on edge devices.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "description": "Name of the InternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_updateBgpState_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateBgpState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/updateBfdForBgpState": {
+      "post": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_updateBfdForBgpState",
+        "description": "Update BfdForBgp for internalNetwork.",
+        "summary": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "description": "Name of the InternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_updateBfdForBgpState_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateBfdForBgpState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/clearIpv6Neighbors": {
+      "post": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_clearIpv6Neighbors",
+        "description": "clearIpv6Neighbors for internalNetwork.",
+        "summary": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "description": "Name of the InternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/EnableDisableOnResources"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_clearIpv6Neighbors_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_clearIpv6Neighbors_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/clearArpEntries": {
+      "post": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_clearArpEntries",
+        "description": "clearArpEntries for internalNetwork.",
+        "summary": "Executes clearArpEntries operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "description": "Name of the InternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/EnableDisableOnResources"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_clearArpEntries_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_clearArpEntries_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/internalNetworks/{internalNetworkName}/updateBfdForStaticRoutesState": {
+      "post": {
+        "tags": [
+          "InternalNetworks"
+        ],
+        "operationId": "InternalNetworks_updateBfdForStaticRoutesState",
+        "description": "Update BfdForStaticRoutes for internalNetwork.",
+        "summary": "Executes update BfdForStaticRoutes operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "internalNetworkName",
+            "description": "Name of the InternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InternalNetworks_updateBfdForStaticRoutesState_MaximumSet_Gen": {
+            "$ref": "./examples/InternalNetworks_updateBfdForStaticRoutesState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}": {
+      "put": {
+        "tags": [
+          "ExternalNetworks"
+        ],
+        "operationId": "ExternalNetworks_Create",
+        "summary": "Creates ExternalNetwork for Layer3 Isolation Domain for communication of computes with external services",
+        "description": "Creates ExternalNetwork PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "externalNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the ExternalNetwork"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/ExternalNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExternalNetwork"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ExternalNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_Create_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ExternalNetworks"
+        ],
+        "operationId": "ExternalNetworks_Get",
+        "summary": "Retrieves details of ExternalNetwork.",
+        "description": "Implements ExternalNetworks GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "externalNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the ExternalNetwork"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExternalNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ExternalNetworks"
+        ],
+        "operationId": "ExternalNetworks_Update",
+        "summary": "Updates a ExternalNetworks.",
+        "description": "API to update certain properties of the ExternalNetworks resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "externalNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the ExternalNetwork"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "ExternalNetwork properties to update. Only annotations are supported.",
+            "schema": {
+              "$ref": "#/definitions/ExternalNetworkPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExternalNetwork"
+            }
+          },
+          "202": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ExternalNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ExternalNetworks"
+        ],
+        "operationId": "ExternalNetworks_Delete",
+        "summary": "Deletes a ExternalNetworks.",
+        "description": "Implements ExternalNetworks DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          },
+          {
+            "in": "path",
+            "name": "externalNetworkName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the ExternalNetwork"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks": {
+      "get": {
+        "operationId": "ExternalNetworks_List",
+        "summary": "Executes list operation to display External Networks within an isolation domain.",
+        "description": "Implements External Networks list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the L3IsolationDomain"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkInterfaces under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/ExternalNetworksList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_List_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/updateAdminState": {
+      "post": {
+        "tags": [
+          "ExternalNetworks"
+        ],
+        "operationId": "ExternalNetworks_updateAdminState",
+        "description": "Executes update operation to enable or disable administrative State for externalNetwork.",
+        "summary": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "externalNetworkName",
+            "description": "Name of the ExternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_updateAdminState_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_updateAdminState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/updateBgpState": {
+      "post": {
+        "tags": [
+          "ExternalNetworks"
+        ],
+        "operationId": "ExternalNetworks_updateBgpState",
+        "description": "Update BGP for externalNetwork.",
+        "summary": "Executes BGP state update operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "externalNetworkName",
+            "description": "Name of the ExternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_updateBgpState_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_updateBgpState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/updateBfdForBgpState": {
+      "post": {
+        "tags": [
+          "ExternalNetworks"
+        ],
+        "operationId": "ExternalNetworks_updateBfdForBgpState",
+        "description": "Update BfdForBgp for externalNetwork.",
+        "summary": "Execute BfdForBgp update operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "externalNetworkName",
+            "description": "Name of the ExternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_updateBfdForBgpState_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_updateBfdForBgpState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/clearIpv6Neighbors": {
+      "post": {
+        "tags": [
+          "ExternalNetworks"
+        ],
+        "operationId": "ExternalNetworks_clearIpv6Neighbors",
+        "description": "clearIpv6Neighbors for externalNetwork.",
+        "summary": "Executes clearIpv6Neighbors table operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "externalNetworkName",
+            "description": "Name of the ExternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/EnableDisableOnResources"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_clearIpv6Neighbors_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_clearIpv6Neighbors_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/{l3IsolationDomainName}/externalNetworks/{externalNetworkName}/clearArpEntries": {
+      "post": {
+        "tags": [
+          "ExternalNetworks"
+        ],
+        "operationId": "ExternalNetworks_clearArpEntries",
+        "description": "clearArpEntries for externalNetwork.",
+        "summary": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "l3IsolationDomainName",
+            "description": "Name of the L3IsolationDomain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "externalNetworkName",
+            "description": "Name of the ExternalNetwork.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/EnableDisableOnResources"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ExternalNetworks_clearArpEntries_MaximumSet_Gen": {
+            "$ref": "./examples/ExternalNetworks_clearArpEntries_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "L3IsolationDomainProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "networkFabricId": {
+          "type": "string",
+          "description": "Network Fabric ARM resource id."
+        },
+        "description": {
+          "type": "string",
+          "description": "L3 Isolation Domain description."
+        },
+        "internal": {
+          "type": "object",
+          "description": "Internal configuration.",
+          "properties": {
+            "importRoutePolicyIds": {
+              "type": "array",
+              "description": "List with importRoutePolicyIds.",
+              "items": {
+                "type": "string",
+                "description": "importRoutePolicyId value."
+              }
+            },
+            "exportRoutePolicyIds": {
+              "type": "array",
+              "description": "List with exportRoutePolicyIds.",
+              "items": {
+                "type": "string",
+                "description": "exportRoutePolicyId value."
+              }
+            },
+            "administrativeState": {
+              "type": "string",
+              "description": "administrativeState of the network interface. Example: up | down."
+            }
+          }
+        },
+        "external": {
+          "type": "object",
+          "description": "External configuration.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            }
+          ],
+          "properties": {
+            "importRoutePolicyIds": {
+              "type": "array",
+              "description": "List with importRoutePolicyIds.",
+              "items": {
+                "type": "string",
+                "description": "importRoutePolicyId value."
+              }
+            },
+            "exportRoutePolicyIds": {
+              "type": "array",
+              "description": "List with exportRoutePolicyIds.",
+              "items": {
+                "type": "string",
+                "description": "exportRoutePolicyId value."
+              }
+            },
+            "optionBConfiguration": {
+              "type": "object",
+              "description": "optionBConfiguration configuration.",
+              "properties": {
+                "importRouteTargets": {
+                  "type": "array",
+                  "description": "List with importRouteTargets.",
+                  "items": {
+                    "type": "string",
+                    "description": "importRouteTarget value."
+                  }
+                },
+                "exportRouteTargets": {
+                  "type": "array",
+                  "description": "List with exportRouteTargets.",
+                  "items": {
+                    "type": "string",
+                    "description": "exportRouteTarget value."
+                  }
+                },
+                "administrativeState": {
+                  "type": "string",
+                  "description": "administrativeState of the network interface. Example: up | down."
+                }
+              }
+            }
+          }
+        },
+        "disabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
+          "readOnly": true
+        },
+        "administrativeState": {
+          "description": "state. Example: Enabled | Disabled.",
+          "$ref": "./common.json#/definitions/EnabledDisabledState"
+        },
+        "optionBDisabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "description": "L3IsolationDomainProperties define the resource properties."
+    },
+    "L3IsolationDomainPatchProperties": {
+      "type": "object",
+      "properties": {},
+      "description": "L3IsolationDomainPatchProperties define the patch resource properties."
+    },
+    "L3IsolationDomain": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/L3IsolationDomainProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The L3IsolationDomain resource definition."
+    },
+    "L3IsolationDomainPatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/L3IsolationDomainPatchProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The L3IsolationDomain patch resource definition."
+    },
+    "L3IsolationDomainsListResult": {
+      "type": "object",
+      "description": "List of L3IsolationDomains.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of L3IsolationDomain resources.",
+          "items": {
+            "$ref": "#/definitions/L3IsolationDomain"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "InternalNetwork": {
+      "description": "Defines the InternalNetwork item.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/InternalNetworkProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ExternalNetwork": {
+      "description": "Defines the ExternalNetwork item.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/ExternalNetworkProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ExternalNetworksList": {
+      "type": "object",
+      "description": "List of ExternalNetworks.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of ExternalNetworks resources.",
+          "items": {
+            "$ref": "#/definitions/ExternalNetwork"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "InternalNetworksList": {
+      "type": "object",
+      "description": "List of InternalNetworks.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of InternalNetworks resources.",
+          "items": {
+            "$ref": "#/definitions/InternalNetwork"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "ExternalNetworkPatch": {
+      "type": "object",
+      "description": "The ExternalNetwork patch resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "External Network Patch properties.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            }
+          ]
+        }
+      }
+    },
+    "InternalNetworkPatch": {
+      "type": "object",
+      "description": "The InternalNetwork patch resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "InternalNetwork Patch properties.",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource"
+            }
+          ]
+        }
+      }
+    },
+    "ExternalNetworkProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        },
+        {
+          "$ref": "#/definitions/Layer3IpPrefixProperties"
+        }
+      ],
+      "properties": {
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum Transmission Unit (MTU) for the ExternalNetwork."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vlanId. Example: 1001."
+        },
+        "fabricASN": {
+          "type": "integer",
+          "format": "int32",
+          "description": "fabricASN. Example: 65048."
+        },
+        "peerASN": {
+          "type": "integer",
+          "format": "int32",
+          "description": "peerASN. Example: 65047."
+        },
+        "bfdConfiguration": {
+          "type": "object",
+          "description": "BFD configuration properties",
+          "properties": {
+            "administrativeState": {
+              "type": "string",
+              "description": "state. Example: Enabled | Disabled."
+            },
+            "interval": {
+              "type": "integer",
+              "format": "int32",
+              "description": "interval in milliseconds. Example: 300."
+            },
+            "multiplier": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Multiplier for the Bfd Configuration. Example: 3."
+            }
+          }
+        },
+        "disabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
+          "readOnly": true
+        },
+        "bgpDisabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
+          "readOnly": true
+        },
+        "bfdDisabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
+          "readOnly": true
+        },
+        "administrativeState": {
+          "type": "string",
+          "description": "administrativeState of the network interface. Example: up | down."
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "importRoutePolicyId": {
+          "type": "string",
+          "description": "ARM resource ID of importRoutePolicy."
+        },
+        "exportRoutePolicyId": {
+          "type": "string",
+          "description": "ARM resource ID of importRoutePolicy."
+        }
+      },
+      "description": "ExternalNetworkProperties define the resource properties."
+    },
+    "InternalNetworkProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vlanId. Example: 1001."
+        },
+        "mtu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum transmission unit. Default value is 1500."
+        },
+        "connectedIPv4Subnets": {
+          "type": "array",
+          "description": "List with object connectedIPv4Subnets.",
+          "x-ms-identifiers": [
+            "prefix"
+          ],
+          "items": {
+            "type": "object",
+            "description": "connectedIPv4Subnet model.",
+            "allOf": [
+              {
+                "$ref": "./common.json#/definitions/AnnotationResource",
+                "description": "Common properties for annotated type."
+              }
+            ],
+            "properties": {
+              "prefix": {
+                "type": "string",
+                "description": "ip prefix of the connectedIPv4Subnet."
+              },
+              "gateway": {
+                "type": "string",
+                "description": "gateway of the connectedIPv4Subnet."
+              }
+            }
+          }
+        },
+        "connectedIPv6Subnets": {
+          "type": "array",
+          "description": "List with object connectedIPv6Subnets.",
+          "x-ms-identifiers": [
+            "prefix"
+          ],
+          "items": {
+            "type": "object",
+            "description": "connectedIPv6Subnet model.",
+            "allOf": [
+              {
+                "$ref": "./common.json#/definitions/AnnotationResource",
+                "description": "Common properties for annotated type."
+              }
+            ],
+            "properties": {
+              "prefix": {
+                "type": "string",
+                "description": "ip prefix of the connectedIPv6Subnet."
+              },
+              "gateway": {
+                "type": "string",
+                "description": "gateway of the connectedIPv6Subnet."
+              }
+            }
+          }
+        },
+        "staticRouteConfiguration": {
+          "type": "object",
+          "description": "staticRouteConfiguration model.",
+          "properties": {
+            "bfdConfiguration": {
+              "type": "object",
+              "description": "BFD configuration properties",
+              "properties": {
+                "interval": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "interval in seconds. Example: 300."
+                },
+                "multiplier": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Multiplier for the BFD configuration."
+                }
+              }
+            },
+            "ipv4Routes": {
+              "type": "array",
+              "description": "List with object ipv4Routes.",
+              "x-ms-identifiers": [
+                "prefix"
+              ],
+              "items": {
+                "type": "object",
+                "description": "staticIpv4Route model.",
+                "properties": {
+                  "prefix": {
+                    "type": "string",
+                    "description": "ip prefix of the staticIpv4Route."
+                  },
+                  "nextHop": {
+                    "type": "array",
+                    "description": "List of next hop ipv4 addresses.",
+                    "items": {
+                      "type": "string",
+                      "description": "Next Hop IPv4 address."
+                    }
+                  }
+                }
+              }
+            },
+            "ipv6Routes": {
+              "type": "array",
+              "description": "List with object ipv6Routes.",
+              "x-ms-identifiers": [
+                "prefix"
+              ],
+              "items": {
+                "type": "object",
+                "description": "staticIpv6Route model.",
+                "properties": {
+                  "prefix": {
+                    "type": "string",
+                    "description": "ip prefix of the staticIpv6Route."
+                  },
+                  "nextHop": {
+                    "type": "array",
+                    "description": "List of next hop ipv6 addresses.",
+                    "items": {
+                      "type": "string",
+                      "description": "Next Hop IPv6 address."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "bgpConfiguration": {
+          "type": "object",
+          "description": "BGP configuration properties",
+          "allOf": [
+            {
+              "$ref": "./common.json#/definitions/AnnotationResource",
+              "description": "Common properties for annotated type."
+            }
+          ],
+          "properties": {
+            "bfdConfiguration": {
+              "type": "object",
+              "description": "BFD configuration properties",
+              "allOf": [
+                {
+                  "$ref": "./common.json#/definitions/AnnotationResource",
+                  "description": "Common properties for annotated type."
+                }
+              ],
+              "properties": {
+                "administrativeState": {
+                  "type": "string",
+                  "description": "state. Example: Enabled | Disabled. It indicates administrative state of the isolationDomain, whether it is enabled or disabled. If enabled, the configuration is applied on the devices. If disabled, the configuration is removed from the devices",
+                  "readOnly": true
+                },
+                "interval": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "interval in seconds. Example: 300."
+                },
+                "multiplier": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "multiplier. Example: 3."
+                }
+              }
+            },
+            "defaultRouteOriginate": {
+              "type": "boolean",
+              "description": "defaultRouteOriginate. Example: true | false."
+            },
+            "fabricASN": {
+              "type": "integer",
+              "format": "int32",
+              "description": "fabricASN. Example: 65048."
+            },
+            "peerASN": {
+              "type": "integer",
+              "format": "int32",
+              "description": "peerASN. Example: 65047."
+            },
+            "ipv4Prefix": {
+              "type": "string",
+              "description": "ipv4Prefix. Example: 10.1.0.0/28."
+            },
+            "ipv6Prefix": {
+              "type": "string",
+              "description": "ipv6Prefix. Example: 3FFE:FFFF:0:CD30::/126."
+            },
+            "ipv4NeighborAddress": {
+              "type": "array",
+              "description": "List with stringified ipv4NeighborAddresses.",
+              "x-ms-identifiers": [
+                "address"
+              ],
+              "items": {
+                "type": "object",
+                "description": "ipv4NeighborAddress model.",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "ip address of the ipv4NeighborAddress."
+                  },
+                  "operationalState": {
+                    "type": "string",
+                    "description": "operationalState of the ipv4NeighborAddress.",
+                    "readOnly": true
+                  }
+                }
+              }
+            },
+            "ipv6NeighborAddress": {
+              "type": "array",
+              "description": "List with stringified ipv6NeighborAddress.",
+              "x-ms-identifiers": [
+                "address"
+              ],
+              "items": {
+                "type": "object",
+                "description": "ipv6NeighborAddress model.",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "description": "ip address of the ipv6NeighborAddress."
+                  },
+                  "operationalState": {
+                    "type": "string",
+                    "description": "operationalState of the ipv6NeighborAddress.",
+                    "readOnly": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "disabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
+          "readOnly": true
+        },
+        "administrativeState": {
+          "description": "state. Example: Enabled | Disabled.",
+          "$ref": "./common.json#/definitions/EnabledDisabledState"
+        },
+        "bgpDisabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
+          "readOnly": true
+        },
+        "bfdDisabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
+          "readOnly": true
+        },
+        "bfdForStaticRoutesDisabledOnResources": {
+          "type": "array",
+          "description": "List of resources the L2 Isolation Domain is disabled on. Can be either entire NetworkFabric or NetworkRack.",
+          "items": {
+            "type": "string",
+            "description": "ARM resource Id of the resource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "importRoutePolicyId": {
+          "type": "string",
+          "description": "ARM resource ID of importRoutePolicy."
+        },
+        "exportRoutePolicyId": {
+          "type": "string",
+          "description": "ARM resource ID of importRoutePolicy."
+        }
+      },
+      "description": "InternalNetworkProperties define the resource properties."
+    },
+    "Layer3IpPrefixProperties": {
+      "type": "object",
+      "description": "Layer 3 primary and secondary ip address prefixes.",
+      "properties": {
+        "primaryIpv4Prefix": {
+          "type": "string",
+          "description": "IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.23.1.0/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+        },
+        "primaryIpv6Prefix": {
+          "type": "string",
+          "description": "IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a1/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+        },
+        "secondaryIpv4Prefix": {
+          "type": "string",
+          "description": "Secondary IPv4 Address Prefix of CE-PE interconnect links. Default value is 172.23.1.2/31. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+        },
+        "secondaryIpv6Prefix": {
+          "type": "string",
+          "description": "Secondary IPv6 Address Prefix of CE-PE interconnect links. Default value is 3FFE:FFFF:0:CD30::a1/126. The values can be specified at the time of creation or can be updated afterwards. Any update to the values post-provisioning may disrupt traffic. The 1st and 3rd IPs are to be configured on CE1 and CE2 for Option B interfaces. The 2nd and 4th IPs are to be configured on PE1 and PE2 for Option B interfaces."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -150,7 +150,7 @@ model AwsDatabaseMigrationServiceReplicationInstanceProperties {
   secondaryAvailabilityZone?: string;
 
   @doc("<p>The VPC security group for the instance.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   vpcSecurityGroups?: VpcSecurityGroupMembership[];
 }
 
@@ -192,7 +192,7 @@ model ReplicationSubnetGroup {
   subnetGroupStatus?: string;
 
   @doc("<p>The subnets that are in the subnet group.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   subnets?: Subnet[];
 
   @doc("<p>The IP addressing protocol supported by the subnet group. This is used by a replication instance with values such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.</p>")

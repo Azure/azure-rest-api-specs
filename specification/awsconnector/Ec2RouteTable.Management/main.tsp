@@ -73,7 +73,7 @@ model AwsEc2RouteTableProperties {
   routeTableId?: string;
 
   @doc("Any tags assigned to the route table.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The ID of the VPC.")

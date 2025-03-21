@@ -18,12 +18,17 @@ namespace Microsoft.KubernetesRuntime;
 @doc("Versions of KubernetesRuntime service")
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("2023-10-01-preview")
   v2023_10_01_preview: "2023-10-01-preview",
 
   @doc("2024-03-01, added bgpPeers field in LoadBalancer")
   v2024_03_01: "2024-03-01",
+
+  @doc("2024-05-01-preview, added AksArcDisk storage class type")
+  v2024_05_01_preview: "2024-05-01-preview",
+
+  @doc("2024-08-01, added BFD profile type; add more fields in BGP peer")
+  v2024_08_01: "2024-08-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

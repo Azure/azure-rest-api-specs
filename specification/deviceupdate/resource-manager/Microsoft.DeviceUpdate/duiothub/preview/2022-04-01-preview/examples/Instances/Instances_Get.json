@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "accountName": "contoso",
+    "instanceName": "blue",
+    "api-version": "2022-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "blue",
+        "location": "westus2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso/instances/blue",
+        "type": "Microsoft.DeviceUpdate/accounts/instances",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "accountName": "contoso",
+          "iotHubs": [
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Devices/IotHubs/blue-contoso-hub"
+            }
+          ],
+          "enableDiagnostics": false,
+          "diagnosticStorageProperties": {
+            "authenticationType": "KeyBased",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/adu-resource-group/providers/Microsoft.Storage/storageAccounts/testAccount"
+          }
+        }
+      }
+    }
+  }
+}

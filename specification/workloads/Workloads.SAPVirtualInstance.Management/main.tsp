@@ -29,8 +29,6 @@ using TypeSpec.Versioning;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Workloads;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 /**
  * The available API versions.
  */
@@ -41,4 +39,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_09_01: "2024-09-01",
+
+  /**
+   * The 2024-10-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_10_01_preview: "2024-10-01-preview",
 }

@@ -209,7 +209,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExtensionPatch"
+              "$ref": "#/definitions/Extension"
             },
             "description": "Details of the Machine Extension to be created."
           },
@@ -368,17 +368,6 @@
         }
       }
     },
-    "ExtensionPatch": {
-      "description": "Extension Details to update",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "Describes Machine Extension Properties that can be updated.",
-          "$ref": "#/definitions/ExtensionPatchProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "ExtensionProperties": {
       "description": "Status of Arc Extension for a particular node in HCI Cluster.",
       "type": "object",
@@ -465,39 +454,6 @@
             "modelAsString": true
           },
           "readOnly": true
-        }
-      }
-    },
-    "ExtensionPatchProperties": {
-      "description": "Describes Machine Extension Properties that can be updated.",
-      "type": "object",
-      "properties": {
-        "extensionParameters": {
-          "description": "Describes the properties of a Machine Extension that can be updated.",
-          "$ref": "#/definitions/ExtensionPatchParameters"
-        }
-      }
-    },
-    "ExtensionPatchParameters": {
-      "description": "Describes the properties of a Machine Extension that can be updated.",
-      "type": "object",
-      "properties": {
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler. Latest version would be used if not specified."
-        },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available."
-        },
-        "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension."
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "Protected settings (may contain secrets).",
-          "x-ms-secret": true
         }
       }
     },

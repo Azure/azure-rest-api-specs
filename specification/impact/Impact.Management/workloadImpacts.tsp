@@ -10,6 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 @doc("Workload Impact properties")
 @subscriptionResource
@@ -53,7 +54,7 @@ model WorkloadImpactProperties is ResourceProperties {
   armCorrelationIds?: string[];
 
   @doc("Details about performance issue. Applicable for performance impacts.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   performance?: Performance[];
 
   @doc("Details about connectivity issue. Applicable when root resource causing the issue is not identified. For example, when a VM is impacted due to a network issue, the impacted resource is identified as the VM, but the root cause is the network. In such cases, the connectivity field will have the details about the network issue")
@@ -77,6 +78,33 @@ model WorkloadImpactProperties is ResourceProperties {
 
   @doc("Client incident details ex: incidentId , incident source")
   clientIncidentDetails?: ClientIncidentDetails;
+
+  @added(Versions.v2025_01_01_preview)
+  @doc("This field represents if an impact is ongoing or not. This is a boolean field.")
+  ongoingImpact?: boolean;
+
+  @added(Versions.v2025_01_01_preview)
+  @doc("This field represents the severity of an impact. Severity can be from critical to low severity impact. Severity ranges from 1 to 5 with 1 being critical, 2 is high, 3 is medium and 4,5 represents low severity impact.")
+  severity?: Severity;
+
+  @added(Versions.v2025_01_01_preview)
+  @doc("Captures the longest interruption duration within the specified start and end times. For example, it can be used to indicate network connectivity loss lasting longer than a specified number of seconds within the given time range.")
+  @minValue(0)
+  durationInSec?: float64;
+
+  @added(Versions.v2025_01_01_preview)
+  @doc("This field represents the type of impact. Possible values are MetricsThreshold, MetricsAnomaly, BusinessAlert.")
+  detectionType?: DetectionType;
+
+  @added(Versions.v2025_01_01_preview)
+  @doc("This field represents the duration margin in seconds that can be provided while providing endDateTime.")
+  @minValue(0)
+  durationMarginInSec?: float64;
+
+  @added(Versions.v2025_01_01_preview)
+  @doc("This field represents the number of times a particular issue was observed over a given time range.")
+  @minValue(0)
+  hitCount?: int32;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

@@ -1,0 +1,124 @@
+{
+  "title": "BrokerAuthorization_Update",
+  "operationId": "BrokerAuthorization_Update",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "e4kName": "test",
+    "brokerName": "test",
+    "authorizationName": "test",
+    "properties": {
+      "properties": {
+        "authorizationPolicies": {
+          "rules": [
+            {
+              "principals": {
+                "clientids": [
+                  "client1"
+                ]
+              },
+              "resources": [
+                {
+                  "method": "Connect"
+                },
+                {
+                  "method": "Subscribe",
+                  "topics": [
+                    "topicA"
+                  ]
+                }
+              ]
+            },
+            {
+              "principals": {
+                "clientids": [
+                  "client2"
+                ]
+              },
+              "resources": [
+                {
+                  "method": "Connect"
+                },
+                {
+                  "method": "Publish",
+                  "topics": [
+                    "topicA"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "api-version": "2023-07-17-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ExtendedLocation/customLocations/test",
+          "type": "CustomLocation"
+        },
+        "location": "test",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AlicespringsDataplane/e4k/test/broker/test/authorization/test",
+        "type": "Microsoft.AlicespringsDataplane/e4k/broker/authorization",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2023-06-20T22:54:18.5423954Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-20T23:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "authorizationPolicies": {
+            "enableCache": true,
+            "rules": [
+              {
+                "principals": {
+                  "clientids": [
+                    "client1"
+                  ]
+                },
+                "resources": [
+                  {
+                    "method": "Connect"
+                  },
+                  {
+                    "method": "Subscribe",
+                    "topics": [
+                      "topicA"
+                    ]
+                  }
+                ]
+              },
+              {
+                "principals": {
+                  "clientids": [
+                    "client2"
+                  ]
+                },
+                "resources": [
+                  {
+                    "method": "Connect"
+                  },
+                  {
+                    "method": "Publish",
+                    "topics": [
+                      "topicA"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "listenerRef": [
+            "test"
+          ]
+        }
+      }
+    }
+  }
+}

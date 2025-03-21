@@ -30,10 +30,6 @@ openapi-subtype: rpaas
 tag: package-2024-06
 ```
 
-``` yaml
-modelerfour:
-  flatten-models: false
-```
 ### Tag: package-2024-06
 
 These settings apply only when `--tag=package-2024-06` is specified on the command line.
@@ -42,31 +38,21 @@ These settings apply only when `--tag=package-2024-06` is specified on the comma
 input-file:
   - Microsoft.ScVmm/stable/2024-06-01/scvmm.json
 ```
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - Microsoft.ScVmm/stable/2024-01-01/scvmm.json
+```
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-10'
+``` yaml $(tag) == 'package-2023-10'
 input-file:
   - Microsoft.ScVmm/stable/2023-10-07/scvmm.json
-```
-### Tag: package-preview-2023-04
-
-These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-04'
-input-file:
-  - Microsoft.ScVmm/preview/2023-04-01-preview/scvmm.json
-suppressions:
-  - code: ArmResourcePropertiesBag
-    reason: MachineExtensionProperties is not patched our RP, it is patched by the Hybrid Compute RP. This is on a depreciation path anyways. VirtualMachines/* RTs will be removed from the next API version, we would be using VirtualMachineInstances/* instead.
-    where:
-        - $.definition.MachineExtensionProperties
-
-  - code:  TopLevelResourcesListBySubscription
-    reason: VirtualMachineInstance resource is an ARM extension resource and does not support List by subscription API.  
-    where:
-      - $.definitions.VirtualMachineInstance
 ```
 
 ### Tag: package-2020-06-05-preview
@@ -87,9 +73,18 @@ input-file:
   - Microsoft.ScVmm/preview/2022-05-21-preview/scvmm.json
 ```
 
+### Tag: package-2023-04-01-preview
+
+These settings apply only when `--tag=package-2023-04-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04-01-preview'
+input-file:
+  - Microsoft.ScVmm/preview/2023-04-01-preview/scvmm.json
+```
+
 ---
 
-# Code Generation
+## Code Generation
 
 ## Swagger to SDK
 
@@ -98,15 +93,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_scvmm']
-  - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js scvmm/resource-manager
 ```
 
 ## Go
@@ -116,6 +109,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
 
 ## TypeScript
 

@@ -25,13 +25,8 @@ interface CodeSigningAccounts {
   @doc("Get a trusted Signing Account.")
   get is ArmResourceRead<CodeSigningAccount>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("Create a trusted Signing Account.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrReplaceAsync<
-    CodeSigningAccount,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<CodeSigningAccount>;
 
   @doc("Update a trusted signing account.")
   @patch(#{ implicitOptionality: false })

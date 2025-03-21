@@ -1,0 +1,103 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "radioAccessNetworkName": "testRAN",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "site": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+        },
+        "metricsIngestion": {
+          "enabled": "Enabled"
+        },
+        "accessPoints": [
+          {
+            "name": "ap1",
+            "location": {
+              "latitude": 51.5072,
+              "longitude": 0.12376
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testRAN",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/radioAccessNetworks/testRAN",
+        "type": "Microsoft.MobileNetwork/radioAccessNetworks",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "site": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+          },
+          "metricsIngestion": {
+            "enabled": "Enabled"
+          },
+          "accessPoints": [
+            {
+              "name": "ap1",
+              "location": {
+                "latitude": 51.5072,
+                "longitude": 0.12376
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.MobileNetwork/locations/testLocation/operationStatuses/testOperation?api-version=2023-10-01-preview"
+      },
+      "body": {
+        "name": "testRAN",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/radioAccessNetworks/testRAN",
+        "type": "Microsoft.MobileNetwork/radioAccessNetworks",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "site": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork/sites/testSite"
+          },
+          "metricsIngestion": {
+            "enabled": "Enabled"
+          },
+          "accessPoints": [
+            {
+              "name": "ap1",
+              "location": {
+                "latitude": 51.5072,
+                "longitude": 0.12376
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

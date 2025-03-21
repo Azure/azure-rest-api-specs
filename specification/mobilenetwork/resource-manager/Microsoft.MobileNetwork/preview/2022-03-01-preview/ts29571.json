@@ -68,7 +68,7 @@
       "description": "Bit rate or null."
     },
     "Ambr": {
-      "description": "Aggregate Maximum Bit Rate.",
+      "description": "Aggregate maximum bit rate.",
       "type": "object",
       "properties": {
         "uplink": {
@@ -88,7 +88,7 @@
     "AmbrRm": {
       "$ref": "#/definitions/Ambr",
       "x-nullable": true,
-      "description": "Aggregate Maximum Bit Rate or null."
+      "description": "Aggregate maximum bit rate or null."
     },
     "RfspIndex": {
       "type": "integer",
@@ -208,34 +208,34 @@
     "Mcc": {
       "type": "string",
       "pattern": "^\\d{3}$",
-      "description": "Mobile Country Code."
+      "description": "Mobile country code."
     },
     "MccRm": {
       "$ref": "#/definitions/Mcc",
       "x-nullable": true,
-      "description": "Mobile Country Code or null."
+      "description": "Mobile country code or null."
     },
     "Mnc": {
       "type": "string",
       "pattern": "^\\d{2,3}$",
-      "description": "Mobile Network Code."
+      "description": "Mobile network code."
     },
     "MncRm": {
       "$ref": "#/definitions/Mnc",
       "x-nullable": true,
-      "description": "Mobile Network Code or null."
+      "description": "Mobile network code or null."
     },
     "PlmnId": {
-      "description": "Public Land Mobile Network (PLMN) ID.",
+      "description": "Public land mobile network (PLMN) ID.",
       "type": "object",
       "properties": {
         "mcc": {
           "$ref": "#/definitions/Mcc",
-          "description": "Mobile Country Code (MCC)."
+          "description": "Mobile country code (MCC)."
         },
         "mnc": {
           "$ref": "#/definitions/Mnc",
-          "description": "Mobile Network Code (MNC)."
+          "description": "Mobile network code (MNC)."
         }
       },
       "required": [
@@ -246,7 +246,7 @@
     "PlmnIdRm": {
       "$ref": "#/definitions/PlmnId",
       "x-nullable": true,
-      "description": "Public Land Mobile Network ID or null."
+      "description": "Public land mobile network ID or null."
     },
     "Tac": {
       "type": "string",
@@ -260,7 +260,7 @@
     },
     "CoreNetworkType": {
       "type": "string",
-      "description": "Core network type.",
+      "description": "The core network technology generation (5G core or EPC / 4G core).",
       "enum": [
         "5GC",
         "EPC"
@@ -311,7 +311,7 @@
       "description": "PDU session type or null."
     },
     "Snssai": {
-      "description": "Single-Network Slice Selection Assistance Information (S-NSSAI).",
+      "description": "Single-network slice selection assistance information (S-NSSAI).",
       "type": "object",
       "properties": {
         "sst": {
@@ -319,12 +319,12 @@
           "format": "int32",
           "minimum": 0,
           "maximum": 255,
-          "description": "Slice/Service Type (SST)."
+          "description": "Slice/service type (SST)."
         },
         "sd": {
           "type": "string",
           "pattern": "^[A-Fa-f0-9]{6}$",
-          "description": "Slice Differentiator (SD)."
+          "description": "Slice differentiator (SD)."
         }
       },
       "required": [

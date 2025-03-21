@@ -13,6 +13,7 @@ namespace Microsoft.Edge;
 
 @doc("Site as ARM Resource")
 model Site is ProxyResource<SiteProperties> {
+  #suppress "@typespec/http/metadata-ignored" ""
   @doc("Name of Site resource")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
   @path
@@ -49,4 +50,100 @@ interface SitesBySubscription {
     Site,
     BaseParameters = SubscriptionParameters
   >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of Tenant"
+interface SitesByServiceGroup {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operation for tenant scope"
+  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites")
+  @doc("list Site at SG scope")
+  listByServiceGroup(
+    ...ApiVersionParameter,
+
+    @path
+    @doc("The name of the service group")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    servicegroupName: string,
+  ): ArmResponse<ResourceListResult<Site>> | ErrorResponse;
+
+  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
+  @doc("Get Site at SG scope")
+  get(
+    ...ApiVersionParameter,
+
+    @path
+    @doc("The name of the service group")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    servicegroupName: string,
+
+    @path
+    @doc("The name of the site")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    siteName: string,
+  ): ArmResponse<Site> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PUT call"
+  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
+  @put
+  @doc("create or update Site at SG scope")
+  createOrUpdate(
+    ...ApiVersionParameter,
+
+    @path
+    @doc("The name of the service group")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    servicegroupName: string,
+
+    @path
+    @doc("The name of the site")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    siteName: string,
+
+    @body
+    @doc("The properties of the site")
+    resource: Site,
+  ): ArmResourceUpdatedResponse<Site> | ArmResourceCreatedResponse<
+    Site,
+    ArmAsyncOperationHeader<Site> & Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PATCH call"
+  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
+  @patch
+  @doc("update Site at SG scope")
+  update(
+    ...ApiVersionParameter,
+
+    @path
+    @doc("The name of the service group")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    servicegroupName: string,
+
+    @path
+    @doc("The name of the site")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    siteName: string,
+
+    @body
+    @doc("The properties of the site")
+    properties: SiteUpdate,
+  ): ArmResponse<Site> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom DELETE call"
+  @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
+  @delete
+  @doc("delete Site at SG scope")
+  delete(
+    ...ApiVersionParameter,
+
+    @path
+    @doc("The name of the service group")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    servicegroupName: string,
+
+    @path
+    @doc("The name of the site")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
+    siteName: string,
+  ): ArmDeletedResponse | ArmDeletedNoContentResponse | ErrorResponse;
 }

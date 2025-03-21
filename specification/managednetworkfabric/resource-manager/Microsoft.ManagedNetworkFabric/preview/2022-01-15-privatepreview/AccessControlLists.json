@@ -1,0 +1,582 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2022-01-15-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/accessControlLists/{accessControlListName}": {
+      "put": {
+        "tags": [
+          "AccessControlLists"
+        ],
+        "operationId": "AccessControlLists_Create",
+        "summary": "Create Access Control List.",
+        "description": "Implements Access Control List PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "accessControlListName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Access Control List"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/AccessControlList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccessControlList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessControlLists_Create_MinimumSet_Gen": {
+            "$ref": "./examples/AccessControlLists_Create_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AccessControlLists"
+        ],
+        "operationId": "AccessControlLists_Get",
+        "summary": "Gets a Access Control List.",
+        "description": "Implements Access Control List GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "accessControlListName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Access Control List"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccessControlList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessControlLists_Get_MinimumSet_Gen": {
+            "$ref": "./examples/AccessControlLists_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AccessControlLists"
+        ],
+        "operationId": "AccessControlLists_Update",
+        "summary": "Updates a Access Control List.",
+        "description": "API to update certain properties of the Access Control List resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "accessControlListName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Access Control List"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Access Control List properties to update.",
+            "schema": {
+              "$ref": "#/definitions/AccessControlListPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccessControlList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessControlLists_Update_MinimumSet_Gen": {
+            "$ref": "./examples/AccessControlLists_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AccessControlLists"
+        ],
+        "operationId": "AccessControlLists_Delete",
+        "summary": "Deletes a Access Control List.",
+        "description": "Implements Access Control List DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "accessControlListName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Access Control List"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccessControlLists_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/AccessControlLists_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/accessControlLists": {
+      "get": {
+        "operationId": "AccessControlLists_ListByResourceGroup",
+        "summary": "List AccessControlLists by resource group.",
+        "description": "Implements AccessControlLists list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all AccessControlLists under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/AccessControlListsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AccessControlLists_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/AccessControlLists_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/accessControlLists": {
+      "get": {
+        "operationId": "AccessControlLists_ListBySubscription",
+        "summary": "List AccessControlLists by subscription.",
+        "description": "Implements AccessControlLists list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all AccessControlLists under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/AccessControlListsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AccessControlLists_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/AccessControlLists_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccessControlListProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "addressFamily": {
+          "type": "string",
+          "description": "IP address family. Example: ipv4 | ipv6.",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "addressFamily"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Access Control List conditions.",
+          "x-ms-identifiers": [
+            "sequenceNumber"
+          ],
+          "items": {
+            "description": "Access Control List condition model.",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "./common.json#/definitions/AnnotationResource",
+                "description": "Common properties for annotated type."
+              }
+            ],
+            "properties": {
+              "sequenceNumber": {
+                "type": "integer",
+                "format": "int32",
+                "description": "sequenceNumber of the Access Control List."
+              },
+              "action": {
+                "type": "string",
+                "description": "action. Example: allow | deny.",
+                "enum": [
+                  "allow",
+                  "deny"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": true,
+                  "name": "conditionActionType"
+                }
+              },
+              "destinationAddress": {
+                "type": "string",
+                "description": "destinationAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
+              },
+              "destinationPort": {
+                "type": "string",
+                "description": "destinationPort. Example: any | 1253"
+              },
+              "sourceAddress": {
+                "type": "string",
+                "description": "sourceAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
+              },
+              "sourcePort": {
+                "type": "string",
+                "description": "sourcePort. Example: any | 1253"
+              },
+              "protocol": {
+                "type": "integer",
+                "format": "int32",
+                "description": "TCP/IP protocol as defined in the list of IP protocol numbers. Example: 255 (any) | 0 | 1."
+              }
+            },
+            "required": [
+              "sequenceNumber",
+              "action",
+              "destinationAddress",
+              "destinationPort",
+              "sourceAddress",
+              "sourcePort",
+              "protocol"
+            ]
+          }
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "addressFamily",
+        "conditions"
+      ],
+      "description": "AccessControlListProperties define the resource properties."
+    },
+    "AccessControlList": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/AccessControlListProperties"
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ],
+      "description": "The AccessControlList resource definition."
+    },
+    "AccessControlListsListResult": {
+      "type": "object",
+      "description": "List of AccessControlLists.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of AccessControlList resources.",
+          "items": {
+            "$ref": "#/definitions/AccessControlList"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "AccessControlListPatchProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "addressFamily": {
+          "type": "string",
+          "description": "IP address family. Example: ipv4 | ipv6.",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "addressFamily"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Access Control List conditions.",
+          "x-ms-identifiers": [
+            "sequenceNumber"
+          ],
+          "items": {
+            "description": "Access Control List condition model.",
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "./common.json#/definitions/AnnotationResource",
+                "description": "Common properties for annotated type."
+              }
+            ],
+            "properties": {
+              "sequenceNumber": {
+                "type": "integer",
+                "format": "int32",
+                "description": "sequenceNumber of the Access Control List."
+              },
+              "action": {
+                "type": "string",
+                "description": "action. Example: allow | deny.",
+                "enum": [
+                  "allow",
+                  "deny"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": true,
+                  "name": "conditionActionType"
+                }
+              },
+              "destinationAddress": {
+                "type": "string",
+                "description": "destinationAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
+              },
+              "destinationPort": {
+                "type": "string",
+                "description": "destinationPort. Example: any | 1253"
+              },
+              "sourceAddress": {
+                "type": "string",
+                "description": "sourceAddress. Example: any | 1.1.1.0/24 | 1.1.10.10"
+              },
+              "sourcePort": {
+                "type": "string",
+                "description": "sourcePort. Example: any | 1253"
+              },
+              "protocol": {
+                "type": "integer",
+                "format": "int32",
+                "description": "TCP/IP protocol as defined in the list of IP protocol numbers. Example: 255 (any) | 0 | 1."
+              }
+            },
+            "required": [
+              "sequenceNumber",
+              "action",
+              "destinationAddress",
+              "destinationPort",
+              "sourceAddress",
+              "sourcePort",
+              "protocol"
+            ]
+          }
+        }
+      },
+      "description": "AccessControlListPatchProperties define the patchable resource properties."
+    },
+    "AccessControlListPatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/AccessControlListPatchProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The AccessControlList patch resource definition."
+    }
+  },
+  "parameters": {}
+}

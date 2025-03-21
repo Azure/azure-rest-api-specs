@@ -1,0 +1,993 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test Base",
+    "description": "Restful API for Test Configuration.",
+    "version": "2024-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testConfigurations": {
+      "get": {
+        "tags": [
+          "Test Configuration"
+        ],
+        "operationId": "TestConfiguration_List",
+        "description": "List test configurations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestConfigurationsList": {
+            "$ref": "./examples/TestConfigurationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testConfigurations/{testConfigurationName}": {
+      "put": {
+        "tags": [
+          "Test Configuration"
+        ],
+        "operationId": "TestConfiguration_Create",
+        "description": "Create a test configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestConfigurationName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "TestConfiguration",
+            "in": "body",
+            "required": true,
+            "description": "Parameters supplied to create the resource.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationResource"
+            }
+          },
+          "201": {
+            "description": "The 'create' or 'update' operation is accepted.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestConfigurationCreate": {
+            "$ref": "./examples/TestConfigurationPut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Test Configuration"
+        ],
+        "operationId": "TestConfiguration_Update",
+        "description": "Update a test configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestConfigurationName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "TestConfiguration",
+            "in": "body",
+            "required": true,
+            "description": "Parameters supplied to update the resource.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationResourceUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestConfigurationUpdate": {
+            "$ref": "./examples/TestConfigurationUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Test Configuration"
+        ],
+        "operationId": "TestConfiguration_Get",
+        "description": "Get a test configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestConfigurationName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestConfigurationGet": {
+            "$ref": "./examples/TestConfigurationGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Test Configuration"
+        ],
+        "operationId": "TestConfiguration_Delete",
+        "description": "Delete a test configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestConfigurationName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was completed successfully."
+          },
+          "204": {
+            "description": "The operation was completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestConfigurationDelete": {
+            "$ref": "./examples/TestConfigurationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/availableVMConfigurationTypes/{availableVMConfigurationTypeName}": {
+      "get": {
+        "tags": [
+          "Available VM Configuration Type"
+        ],
+        "operationId": "AvailableVMConfigurationType_Get",
+        "description": "Get an available VM configuration type",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AvailableVMConfigurationTypeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/AvailableVMConfigurationTypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AvailableVMConfigurationTypeGet": {
+            "$ref": "./examples/AvailableVMConfigurationTypeGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/availableVMConfigurationTypes": {
+      "get": {
+        "tags": [
+          "Available VM Configuration Type"
+        ],
+        "operationId": "AvailableVMConfigurationTypes_List",
+        "description": "List available VM configuration types",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/AvailableVMConfigurationTypeResources"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AvailableVMConfigurationTypeList": {
+            "$ref": "./examples/AvailableVMConfigurationTypeList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testConfigurations/{testConfigurationName}/runTest": {
+      "post": {
+        "tags": [
+          "Test Configuration"
+        ],
+        "operationId": "TestConfiguration_RunTest",
+        "summary": "Schedule On-Demand Run for all Packages",
+        "description": "This endpoint allows initiating an on-demand run for a specific test configuration identified by the testConfigurationId within the specified organizationId. It triggers the execution of multiple packages with the provided payload parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestConfigurationName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationRunTestParameters"
+            },
+            "description": "Parameters supplied to the run multiple on-demand operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The on-demand run request was successfully queued.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationRunTestResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestConfigurationsRunTest": {
+            "$ref": "./examples/TestConfigurationsRunTest.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/testConfigurations/{testConfigurationName}/testResults": {
+      "get": {
+        "tags": [
+          "Test Result"
+        ],
+        "operationId": "TestConfigurationTestResults_List",
+        "description": "Lists all the Test Results of packages associated with a test configuration. Can be filtered by testPassId (specific test configuration run).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TestConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/TestPassId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/TestConfigurationTestResultListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestResultsList": {
+            "$ref": "./examples/TestConfigurationTestResultsList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TestConfigurationResource": {
+      "description": "test configuration resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TestConfigurationProperties",
+          "description": "Properties of a test configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TestConfigurationResourceUpdateParameters": {
+      "description": "test configuration update parameters.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TestConfigurationUpdateProperties",
+          "description": "Update Properties of a test configuration."
+        }
+      }
+    },
+    "TestConfigurationProperties": {
+      "description": "test configuration properties.",
+      "type": "object",
+      "properties": {
+        "packageIds": {
+          "type": "array",
+          "description": "The package Ids have assigned with the test configuration.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Flag showing that whether the test configuration is enabled."
+        },
+        "nextScheduleTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The next schedule date.",
+          "readOnly": true
+        },
+        "lastExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last execution date.",
+          "readOnly": true
+        },
+        "triggerType": {
+          "$ref": "#/definitions/TriggerType"
+        },
+        "testMatrix": {
+          "$ref": "#/definitions/TestMatrix"
+        },
+        "customTriggerSpec": {
+          "$ref": "#/definitions/CustomTriggerSpec"
+        },
+        "testEnvironment": {
+          "$ref": "#/definitions/TestEnvironment"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "isEnabled",
+        "triggerType",
+        "testMatrix",
+        "testEnvironment"
+      ]
+    },
+    "TestConfigurationUpdateProperties": {
+      "description": "Properties are used to update the test configuration.",
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Flag showing that whether the test configuration is enabled."
+        },
+        "triggerType": {
+          "$ref": "#/definitions/TriggerType"
+        },
+        "testMatrix": {
+          "$ref": "#/definitions/TestMatrix"
+        },
+        "customTriggerSpec": {
+          "$ref": "#/definitions/CustomTriggerSpec"
+        },
+        "testEnvironment": {
+          "$ref": "#/definitions/TestEnvironment"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TriggerType": {
+      "description": "Specifies the option for trigger the test config.",
+      "type": "string",
+      "enum": [
+        "RunOnNewChurn",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "triggerType",
+        "modelAsString": true
+      }
+    },
+    "TestMatrix": {
+      "type": "object",
+      "description": "Test Matrix",
+      "properties": {
+        "updateType": {
+          "type": "string",
+          "enum": [
+            "SecurityUpdate",
+            "FeatureUpdate"
+          ],
+          "x-ms-enum": {
+            "name": "updateType",
+            "modelAsString": true
+          }
+        },
+        "securityUpdateSpec": {
+          "$ref": "#/definitions/SecurityUpdateSpec"
+        },
+        "featureUpdateSpec": {
+          "$ref": "#/definitions/FeatureUpdateSpec"
+        }
+      },
+      "required": [
+        "updateType"
+      ]
+    },
+    "SecurityUpdateSpec": {
+      "description": "Specifies the config for the security update.",
+      "type": "object",
+      "properties": {
+        "targetOSs": {
+          "description": "Specifies the target OSs to be tested.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "targetOSs"
+      ]
+    },
+    "FeatureUpdateSpec": {
+      "description": "Specifies the config for the feature update.",
+      "type": "object",
+      "properties": {
+        "insiderChannelIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "baselineOSs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the baseline OSs to be tested."
+        }
+      },
+      "required": [
+        "insiderChannelIds"
+      ]
+    },
+    "TestEnvironment": {
+      "description": "Specifies the config for the test environment",
+      "type": "object",
+      "properties": {
+        "vmConfigurationTypeName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "vmConfigurationTypeName"
+      ]
+    },
+    "CustomTriggerSpec": {
+      "description": "Specifies the config for the custom type trigger.",
+      "type": "object",
+      "properties": {
+        "executionScheduleTime": {
+          "type": "string",
+          "description": "The execution schedule time in UTC with format HH:mm:ss, for the recurrence"
+        },
+        "recurringType": {
+          "$ref": "#/definitions/RecurringType"
+        },
+        "weekRecurrenceTriggerSpec": {
+          "$ref": "#/definitions/WeekRecurrenceTriggerSpec"
+        },
+        "monthRecurrenceTriggerSpec": {
+          "$ref": "#/definitions/MonthRecurrenceTriggerSpec"
+        }
+      },
+      "required": [
+        "executionScheduleTime",
+        "recurringType"
+      ]
+    },
+    "RecurringType": {
+      "description": "The recurring type of the trigger.",
+      "type": "string",
+      "enum": [
+        "ByDay",
+        "ByWeek",
+        "ByMonth"
+      ],
+      "x-ms-enum": {
+        "name": "recurringType",
+        "modelAsString": true
+      }
+    },
+    "WeekRecurrenceTriggerSpec": {
+      "description": "Specifies the week recurrence config when recurring by week.",
+      "type": "object",
+      "properties": {
+        "daysOfWeek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DayOfWeek"
+          }
+        }
+      },
+      "required": [
+        "daysOfWeek"
+      ]
+    },
+    "MonthRecurrenceTriggerSpec": {
+      "description": "Specifies the month recurrence config when recurring by month.",
+      "type": "object",
+      "properties": {
+        "daysOfMonth": {
+          "type": "object",
+          "properties": {
+            "daysOfWeek": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DayOfWeek"
+              }
+            },
+            "weekOfMonth": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "required": [
+            "daysOfWeek",
+            "weekOfMonth"
+          ]
+        }
+      },
+      "required": [
+        "daysOfMonth"
+      ]
+    },
+    "DayOfWeek": {
+      "description": "The day of week.",
+      "type": "string",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "daysOfWeek",
+        "modelAsString": true
+      }
+    },
+    "TestConfigurations": {
+      "description": "A list of test configurations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestConfigurationResource"
+          },
+          "description": "The list of test configuration resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "AvailableVMConfigurationTypeResource": {
+      "description": "available VM Configuration Type Resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AvailableVMConfigurationTypeProperties",
+          "description": "Properties of an available VM Configuration Type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvailableVMConfigurationTypeProperties": {
+      "description": "The properties of AvailableVMConfigurationType resource.",
+      "type": "object",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "The category name of VM configuration type."
+        },
+        "vmSKU": {
+          "type": "string",
+          "description": "The VM SKU name of VM configuration type."
+        },
+        "numberOfCores": {
+          "format": "int64",
+          "type": "integer",
+          "description": "The number of CPU cores."
+        },
+        "architecture": {
+          "description": "The supported architecture.",
+          "$ref": "#/definitions/ArchitectureType"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ArchitectureType": {
+      "type": "string",
+      "description": "Specifies the Architecture Type supported by VM",
+      "enum": [
+        "x64",
+        "arm64"
+      ],
+      "x-ms-enum": {
+        "name": "ArchitectureType",
+        "modelAsString": true
+      }
+    },
+    "AvailableVMConfigurationTypeResources": {
+      "description": "A list of VM configuration type.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableVMConfigurationTypeResource"
+          },
+          "description": "The list of VM configuration type resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestConfigurationRunTestParameters": {
+      "description": "The request body of a multiple on-demand run request.",
+      "type": "object",
+      "properties": {
+        "testRunTitle": {
+          "type": "string",
+          "description": "A friendly name for the run."
+        },
+        "doNotInstallOSUpdates": {
+          "type": "boolean",
+          "description": "A flag indicating whether to skip installing operating system updates during the run."
+        }
+      },
+      "required": [
+        "testType",
+        "osUpdateType",
+        "osName"
+      ],
+      "allOf": [
+        {
+          "$ref": "./testbase.json#/definitions/TestRunParameters"
+        }
+      ]
+    },
+    "TestConfigurationRunTestResponse": {
+      "description": "The response body of a multiple on-demand run request.",
+      "type": "object",
+      "properties": {
+        "testPassId": {
+          "type": "string",
+          "description": "The unique identifier for the queued run."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the on-demand run.",
+          "default": "Queued",
+          "enum": [
+            "Queued",
+            "Rejected",
+            "NoPackagesFound"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "totalPackagesScheduled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of packages scheduled for execution."
+        }
+      }
+    },
+    "TestConfigurationTestResultListResult": {
+      "description": "A list of Test Results for test configuration.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestConfigurationTestResultResource"
+          },
+          "description": "The list of Test Results."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "TestConfigurationTestResultResource": {
+      "description": "The Test Configuration Test Result Resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestConfigurationTestResultProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a Test Result."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TestConfigurationTestResultProperties": {
+      "description": "Test configuration additional properties.",
+      "type": "object",
+      "properties": {
+        "testPassId": {
+          "type": "string",
+          "description": "Test pass ID for the run."
+        },
+        "testConfigurationName": {
+          "type": "string",
+          "description": "The test configuration name."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./testbase.json#/definitions/TestResultProperties"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "TestConfigurationName": {
+      "name": "testConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test configuration Name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
+    },
+    "AvailableVMConfigurationTypeName": {
+      "name": "availableVMConfigurationTypeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "available VM Configuration Type Name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
+    },
+    "TestPassId": {
+      "name": "testPassId",
+      "in": "query",
+      "type": "string",
+      "description": "the test pass id of a specific test configuration run.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

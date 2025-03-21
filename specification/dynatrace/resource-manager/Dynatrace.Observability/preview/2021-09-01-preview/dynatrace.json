@@ -1368,7 +1368,10 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a MonitorResource list operation."
+      "description": "The response of a MonitorResource list operation.",
+      "required": [
+        "value"
+      ]
     },
     "TagRule": {
       "type": "object",
@@ -1428,7 +1431,10 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a TagRule list operation."
+      "description": "The response of a TagRule list operation.",
+      "required": [
+        "value"
+      ]
     },
     "DynatraceSingleSignOnResource": {
       "type": "object",
@@ -1474,7 +1480,10 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a DynatraceSingleSignOnResource list operation."
+      "description": "The response of a DynatraceSingleSignOnResource list operation.",
+      "required": [
+        "value"
+      ]
     },
     "SecureString": {
       "type": "string",
@@ -1745,11 +1754,11 @@
       "type": "object",
       "properties": {
         "firstName": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "First Name of the user"
         },
         "lastName": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "Last Name of the user"
         },
         "emailAddress": {
@@ -1772,15 +1781,15 @@
       "type": "object",
       "properties": {
         "usageType": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "different usage type like PAYG/COMMITTED. this could be enum"
         },
         "billingCycle": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "different billing cycles like MONTHLY/WEEKLY. this could be enum"
         },
         "planDetails": {
-          "$ref": "#/definitions/MediumString",
+          "type": "string",
           "description": "plan id as published by Dynatrace"
         },
         "effectiveDate": {
@@ -2111,11 +2120,6 @@
         "name": "SSOStatus",
         "modelAsString": true
       }
-    },
-    "MediumString": {
-      "type": "string",
-      "maxLength": 50,
-      "description": "Shorthand for setting length limit."
     },
     "email": {
       "type": "string",

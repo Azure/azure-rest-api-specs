@@ -601,7 +601,6 @@
         "value": {
           "description": "Results of a list operation.",
           "type": "array",
-          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/ConfluentAgreementResource"
           }
@@ -659,7 +658,6 @@
         "value": {
           "description": "List of Confluent operations supported by the Microsoft.Confluent provider.",
           "type": "array",
-          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/OperationResult"
           }
@@ -693,7 +691,6 @@
         "details": {
           "description": "Error detail",
           "type": "array",
-          "x-ms-identifiers": [],
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
@@ -792,8 +789,7 @@
         },
         "status": {
           "description": "SaaS Offer Status",
-          "$ref": "#/definitions/SaaSOfferStatus",
-          "readOnly": true
+          "$ref": "#/definitions/SaaSOfferStatus"
         }
       }
     },
@@ -818,6 +814,23 @@
           "description": "Email address",
           "pattern": "^\\S+@\\S+\\.\\S+$",
           "type": "string"
+        }
+      }
+    },
+    "LinkOrganization": {
+      "description": "Link an existing Confluent organization",
+      "type": "object",
+      "required": [
+        "token"
+      ],
+      "properties": {
+        "token": {
+          "description": "User auth token",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -857,6 +870,10 @@
         "userDetail": {
           "description": "Subscriber detail",
           "$ref": "#/definitions/UserDetail"
+        },
+        "linkOrganization": {
+          "description": "Link an existing Confluent organization",
+          "$ref": "#/definitions/LinkOrganization"
         }
       }
     },
@@ -913,7 +930,6 @@
         "value": {
           "description": "Result of a list operation.",
           "type": "array",
-          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/OrganizationResource"
           }
@@ -944,7 +960,10 @@
       "in": "query",
       "description": "Client Api Version.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "2021-12-01"
+      ]
     },
     "SubscriptionIdParameter": {
       "in": "path",

@@ -6,12 +6,14 @@ import "./models/models.tsp";
 import "./resources/ReportResource.tsp";
 import "./resources/WebhookResource.tsp";
 import "./resources/SnapshotResource.tsp";
+import "./resources/ControlResource.tsp";
 import "./resources/ScopingConfigurationResource.tsp";
 import "./resources/EvidenceResource.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -34,4 +36,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_06_27: "2024-06-27",
+
+  /**
+   * The 2024-12-15-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_12_15_preview: "2024-12-15-preview",
 }

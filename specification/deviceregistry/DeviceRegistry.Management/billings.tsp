@@ -13,7 +13,7 @@ using OpenAPI;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("billingContainer Model as Azure resource whose sole purpose is to keep track of billables resources under a subscription.")
 @subscriptionResource
 model BillingContainer is ProxyResource<BillingContainerProperties> {
@@ -34,7 +34,7 @@ model BillingContainer is ProxyResource<BillingContainerProperties> {
   etag?: string;
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @doc("Defines the billingContainer properties.")
 model BillingContainerProperties {
   @doc("Provisioning state of the resource.")
@@ -42,7 +42,7 @@ model BillingContainerProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Versions.v2024_09_01_preview)
+@added(Versions.v2024_07_01_preview)
 @armResourceOperations
 interface BillingContainers {
   get is ArmResourceRead<BillingContainer>;

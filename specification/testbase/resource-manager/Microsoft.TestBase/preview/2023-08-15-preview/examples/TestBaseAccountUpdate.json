@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "api-version": "2023-08-15-preview",
+    "parameters": {
+      "properties": {
+        "sku": {
+          "name": "S0",
+          "tier": "Standard"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1",
+        "name": "contoso-testBaseAccount1",
+        "type": "Microsoft.TestBase/testBaseAccounts",
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "S0",
+            "tier": "Standard",
+            "capabilities": [
+              {
+                "name": "SLA",
+                "value": "99.9%"
+              },
+              {
+                "name": "maximumPackageCount",
+                "value": "5"
+              },
+              {
+                "name": "packageMaximumRunSeconds",
+                "value": "3600"
+              }
+            ]
+          },
+          "accessLevel": "EarlyAccess"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/operationResults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2023-08-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/operationResults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2023-08-15-preview"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/operationResults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2023-08-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/operationResults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2023-08-15-preview"
+      }
+    }
+  }
+}

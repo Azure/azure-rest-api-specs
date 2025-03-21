@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-02-03-preview",
+    "subscriptionId": "5a87dd7e-200a-4e94-8cd6-a9461de63755",
+    "resourceGroupName": "myResGroup",
+    "instanceName": "myInstance",
+    "linkedGrafanaInstanceName": "myLinkedGrafanaInstance",
+    "LinkedGrafanaInstance": {
+      "properties": {
+        "managedGrafanaResourceId": "/subscriptions/amgsubid/resourceGroups/amgrg/providers/Microsoft.Dashboard/grafana/amgname1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/5a87dd7e-200a-4e94-8cd6-a9461de63755/resourceGroups/myResGroup/providers/Microsoft.Scom/managedInstances/myInstance/linkedGrafanaInstances/myLinkedGrafanaInstance",
+        "name": "myLinkedGrafanaInstance",
+        "type": "Microsoft.Scom/managedInstances/LinkedGrafanaInstances",
+        "properties": {
+          "managedGrafanaResourceId": "/subscriptions/amgsubid/resourceGroups/amgrg/providers/Microsoft.Dashboard/grafana/amgname1",
+          "grafanaEndpoint": "https://amgname1-hrcqg5hyfufxbkfj.weu.grafana.azure.com",
+          "dataSourceName": "scommidsname",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/5a87dd7e-200a-4e94-8cd6-a9461de63755/resourceGroups/myResGroup/providers/Microsoft.Scom/managedInstances/myInstance/linkedGrafanaInstances/myLinkedGrafanaInstance",
+        "name": "myLinkedGrafanaInstance",
+        "type": "Microsoft.Scom/managedInstances/LinkedGrafanaInstances",
+        "properties": {
+          "managedGrafanaResourceId": "/subscriptions/amgsubid/resourceGroups/amgrg/providers/Microsoft.Dashboard/grafana/amgname1",
+          "grafanaEndpoint": "https://amgname1-hrcqg5hyfufxbkfj.weu.grafana.azure.com",
+          "dataSourceName": "scommidsname",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

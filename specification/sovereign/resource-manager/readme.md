@@ -28,17 +28,43 @@ These are the global settings for the sovereign.
 title: Microsoft.Sovereign
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-02-27-preview
+tag: package-2024-10-31-preview
 ```
 
-### Tag: package-2025-02-27-preview
+### Tag: package-2023-09-28-preview
 
-These settings apply only when `--tag=package-2025-02-27-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-09-28-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-02-27-preview'
+```yaml $(tag) == 'package-2023-09-28-preview'
 input-file:
-  - Microsoft.Sovereign/preview/2025-02-27-preview/sovereign.json
+  - Microsoft.Sovereign/preview/2023-09-28-preview/sovereign.json
 suppressions:
+  - code: TopLevelResourcesListBySubscription
+    reason: The resource types in the Microsoft.Sovereign resource provider are tenant level, so subscription list operation is not valid.
+```
+### Tag: package-2024-03-31-preview
+
+These settings apply only when `--tag=package-2024-03-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-31-preview'
+input-file:
+  - Microsoft.Sovereign/preview/2024-03-31-preview/sovereign.json
+suppressions:
+  - code: TopLevelResourcesListBySubscription
+    reason: The resource types in the Microsoft.Sovereign resource provider are tenant level, so subscription list operation is not valid.
+```
+### Tag: package-2024-10-31-preview
+
+These settings apply only when `--tag=package-2024-10-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-10-31-preview'
+input-file:
+  - Microsoft.Sovereign/preview/2024-10-31-preview/sovereign.json
+suppressions:
+  - code: TopLevelResourcesListBySubscription
+    reason: The transparency log resource type in the Microsoft.Sovereign resource provider is tenant level, so subscription list operation is not valid.
+  - code: TenantLevelAPIsNotAllowed
+    reason: The resource type /providers/Microsoft.Sovereign/transparencyLogs was added in previous version of this api where we got the approval for this resource type to be at tenant.
   - code: AvoidAnonymousTypes
     reason: This error is caused by typespec inbuilt managed identity model.
 ```

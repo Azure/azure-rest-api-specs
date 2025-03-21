@@ -4,15 +4,8 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/paloaltonetworksngfw/armpanngfw
+module-name: sdk/resourcemanager/paloaltonetworks/armpaloaltonetworks
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
-directive:
-  - where-operation: LocalRulestacks_listAppIds
-    transform: delete $['x-ms-pageable'];
-  - where-operation: LocalRulestacks_listCountries
-    transform: delete $['x-ms-pageable'];
-  - where-operation: LocalRulestacks_listPredefinedUrlCategories
-    transform: delete $['x-ms-pageable'];
 ```

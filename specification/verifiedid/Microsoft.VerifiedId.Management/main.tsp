@@ -12,20 +12,15 @@ using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.VerifiedId")
 @service(#{ title: "VerifiedIdMgmtClient" })
-@versioned(Microsoft.VerifiedId.Versions)
 @doc("VerifiedId Resource Provider management API.")
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@versioned(Versions)
 namespace Microsoft.VerifiedId;
 
-/**
- * Supported versions for Microsoft.VerifiedId.
- */
 enum Versions {
-  /**
-   * The 2024-01-26-preview version of the Microsoft.VerifiedId resource provider.
-   */
+  @doc("2024-01-26-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2024_01_26_preview: "2024-01-26-preview",
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_01_26: "2024-01-26-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -34,7 +29,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 model Authority is TrackedResource<AuthorityProperties> {
   @doc("The ID of the authority")
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  @key("authorityName")
+  @key("name")
   @segment("authorities")
   @path
   name: string;
@@ -69,13 +64,8 @@ model AuthorityProperties {
 @armResourceOperations(Authority)
 interface Authorities {
   get is ArmResourceRead<Authority>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    Authority,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
-  update is ArmCustomPatchSync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Authority>;
+  update is Azure.ResourceManager.ArmCustomPatchSync<
     Authority,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       Authority,

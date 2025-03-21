@@ -1,0 +1,634 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-01-privatepreview",
+    "title": "ApplicationAssessment",
+    "description": "Application assessments when migrating to Azure or upgrading to new OS versions"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/sites": {
+      "get": {
+        "tags": [
+          "migrateProjectSites",
+          "listByMigrateProject"
+        ],
+        "operationId": "sites_ListByMigrateProject",
+        "description": "List of sites in the project",
+        "x-ms-examples": {
+          "migrateProjectSite_listByProject": {
+            "$ref": "./examples/migrateProjectSite_listByProject.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sites in the project",
+            "schema": {
+              "$ref": "#/definitions/migrateProjectSitesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/sites/{siteName}": {
+      "put": {
+        "tags": [
+          "migrateProjectSites"
+        ],
+        "operationId": "migrationProjectSites_create",
+        "description": "Adds/Updates a site to the migrateProject. Must be a hyper-v or vmware site",
+        "x-ms-examples": {
+          "migrateProjectSite_create": {
+            "$ref": "./examples/migrateProjectSite_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the site"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "Request body. The properties of the project site",
+            "schema": {
+              "$ref": "#/definitions/migrateProjectSite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Site details were updated",
+            "schema": {
+              "$ref": "#/definitions/migrateProjectSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "migrateProjectSites"
+        ],
+        "operationId": "migrationProjectSite_get",
+        "description": "Get a site with name {siteName} in the migrate project {projectName}",
+        "x-ms-examples": {
+          "assessment_create": {
+            "$ref": "./examples/migrateProjectSite_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the site"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Site details were found",
+            "schema": {
+              "$ref": "#/definitions/migrateProjectSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "migrateProjectSites"
+        ],
+        "operationId": "migrationProjectSite_delete",
+        "description": "Deletes a site with name {siteName} in the migrate project {projectName}",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "migrationProjectSite_delete": {
+            "$ref": "./examples/migrateProjectSite_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the site"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation succeeded"
+          },
+          "202": {
+            "description": "Delete site accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/sites/{siteName}/machines": {
+      "get": {
+        "tags": [
+          "migrateProjectSites"
+        ],
+        "operationId": "migrationProjectSite_listMachines",
+        "description": "Gets machines in site with name {siteName} in the migrate project {projectName}",
+        "x-ms-examples": {
+          "migrateProjectSite_listMachines": {
+            "$ref": "./examples/migrateProjectSite_listMachines.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the site"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of machines",
+            "schema": {
+              "$ref": "#/definitions/migrateProjectSiteMachineList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/sites/{siteName}/applianceConfigurations/default": {
+      "get": {
+        "tags": [
+          "migrateProjectSites"
+        ],
+        "operationId": "migrationProjectSite_getApplianceConfiguration",
+        "description": "Gets configuration for site with name {siteName} in the migrate project {projectName}",
+        "x-ms-examples": {
+          "migrateProjectSite_getApplianceConfiguration": {
+            "$ref": "./examples/migrateProjectSite_getApplianceConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the site"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The appliance configuration",
+            "schema": {
+              "$ref": "#/definitions/applianceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "migrateProjectSite": {
+      "description": "Migrate project site resource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The properties of the project site",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "offAzureSiteId": {
+              "type": "string",
+              "description": "The ARM Id of the site something like: /subscriptions/a2bf324e-e6e8-4c95-b722-e2f75e11a2ab/resourceGroups/test/providers/Microsoft.OffAzure/HyperVSites/appliance2ce8site "
+            },
+            "applianceName": {
+              "type": "string",
+              "description": "The name of the appliance in the site"
+            },
+            "servicePrincipalIdentityDetails": {
+              "description": "Service principal associated with this site",
+              "$ref": "#/definitions/servicePrincipalDetails"
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
+            }
+          },
+          "required": [
+            "offAzureSiteId",
+            "applianceName",
+            "servicePrincipalIdentityDetails"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "definitions.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "servicePrincipalDetails": {
+      "type": "object",
+      "description": "The SP details associated with the site",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The client tenant id where the appliance is registered"
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "The application/client id associated with the appliance SP"
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The AAD object id of the SP"
+        },
+        "audience": {
+          "type": "string",
+          "description": "The application audience associated with the appliance app"
+        },
+        "aadAuthority": {
+          "type": "string",
+          "description": "The AAD authority that will be issuing tokens for the appliance e.g. https://login.windows.net/{tenantid}"
+        }
+      },
+      "required": [
+        "tenantId",
+        "applicationId",
+        "objectId",
+        "audience",
+        "aadAuthority"
+      ]
+    },
+    "migrateProjectSitesList": {
+      "type": "object",
+      "description": "List of migrate project sites",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of sites in the project",
+          "items": {
+            "$ref": "#/definitions/migrateProjectSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. If null we are at the end of the results"
+        }
+      }
+    },
+    "migrateProjectSitePatchDetails": {
+      "type": "object",
+      "description": "Patch object for migrate project site",
+      "allOf": [
+        {
+          "$ref": "definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {}
+    },
+    "migrateProjectSiteMachine": {
+      "type": "object",
+      "description": "Machine in a migrate project site",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ARM reference to the machine e.g. /subscriptions/6393a73f-8d55-47ef-b6dd-179b3e0c7910/resourceGroups/testRG/providers/Microsoft.AppAssessment/migrateProjects/test/sites/site-001/machines/2b5bba8f-4beb-4cee-a037-9d8d11f1843b",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the machine will correspond with the machine uuid",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The RP type of the machine will be Microsoft.AppAssessment/migrateProjects/sites/machine"
+        },
+        "systemData": {
+          "$ref": "definitions.json#/definitions/systemData",
+          "description": "Resource systemData i.e. create/update audit data"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties of the machine",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "uuid": {
+              "type": "string",
+              "description": "The uuid of the machine. Used by VCenter/Hyper-V to uniquely identify a virtual machine",
+              "readOnly": true
+            },
+            "virtualizationHost": {
+              "type": "string",
+              "description": "The host name of the virtualization vcenter/hyper-v host. Will be null if the machine isn't virtualized",
+              "readOnly": true
+            },
+            "machineName": {
+              "type": "string",
+              "description": "The name of the machine",
+              "readOnly": true
+            },
+            "hostName": {
+              "type": "string",
+              "description": "The host name of the machine",
+              "readOnly": true
+            },
+            "osDetails": {
+              "type": "object",
+              "description": "Operating system details",
+              "properties": {
+                "family": {
+                  "type": "string",
+                  "description": "Family of the OS will be Windows or Linux. Assessment of Linux machines not supported for now",
+                  "enum": [
+                    "Windows",
+                    "Linux"
+                  ],
+                  "x-ms-enum": {
+                    "name": "OsFamily",
+                    "modelAsString": false
+                  },
+                  "readOnly": true
+                },
+                "skuName": {
+                  "type": "string",
+                  "description": "The OS sku name of the machine",
+                  "readOnly": true
+                },
+                "version": {
+                  "type": "string",
+                  "description": "The version of the OS",
+                  "readOnly": true
+                },
+                "buildNumber": {
+                  "type": "string",
+                  "description": "The build number of the OS",
+                  "readOnly": true
+                }
+              }
+            },
+            "appraiser": {
+              "type": "object",
+              "description": "Information about appraiser on the machine",
+              "properties": {
+                "version": {
+                  "type": "string",
+                  "description": "The version of appraiser on the machine",
+                  "readOnly": true
+                },
+                "lastRunTimestamp": {
+                  "type": "string",
+                  "description": "The utc timestamp of the last time appraiser ran",
+                  "readOnly": true
+                },
+                "lastSuccessfulRunTimestamp": {
+                  "type": "string",
+                  "description": "The utc timestamp of the last time appraiser run successfully. Differs with lastRunTimestamp in that appraiser could have run and failed",
+                  "readOnly": true
+                }
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "description": "Meta data about the machine collected by the compat client running on the appliance",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
+            }
+          }
+        }
+      }
+    },
+    "migrateProjectSiteMachineList": {
+      "type": "object",
+      "description": "List of machines in project site",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of machines",
+          "items": {
+            "$ref": "#/definitions/migrateProjectSiteMachine"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results"
+        }
+      }
+    },
+    "applianceConfiguration": {
+      "type": "object",
+      "description": "Appliance configuration",
+      "allOf": [
+        {
+          "$ref": "definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "Properties of appliance configuration",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "dataApiUrl": {
+              "type": "string",
+              "description": "Url to the data plane API for uploading mara data",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

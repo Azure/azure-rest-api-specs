@@ -47,10 +47,10 @@
           "application/json"
         ],
         "tags": [
-          "Operations"
+          "operations"
         ],
         "summary": "Implements list of available operations",
-        "operationId": "Operations_List",
+        "operationId": "availableOperations_List",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -64,7 +64,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -90,10 +90,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudNodes"
+          "dedicatedCloudNode"
         ],
         "summary": "Implements list of dedicated cloud nodes within subscription method",
-        "operationId": "DedicatedCloudNodes_ListBySubscription",
+        "operationId": "dedicatedCloudNode_ListBySubscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -129,7 +129,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -155,10 +155,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudServices"
+          "dedicatedCloudService"
         ],
         "summary": "Implements list of dedicatedCloudService objects within subscription method",
-        "operationId": "DedicatedCloudServices_ListBySubscription",
+        "operationId": "dedicatedCloudService_ListBySubscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -194,7 +194,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -217,10 +217,10 @@
           "application/json"
         ],
         "tags": [
-          "AvailabilityUsages"
+          "availability-usage"
         ],
         "summary": "Implements SkuAvailability List method",
-        "operationId": "SkusAvailability_List",
+        "operationId": "skusAvailabilityWithinRegion_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -246,7 +246,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -266,16 +266,16 @@
       "get": {
         "description": "Return an async operation",
         "tags": [
-          "Operations"
+          "operation"
         ],
         "summary": "Implements get of async operation",
-        "operationId": "Operations_Get",
+        "operationId": "getOperationResultByRegion",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "$ref": "#/parameters/regionId"
@@ -313,7 +313,7 @@
             "description": "No Content"
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             },
@@ -345,10 +345,10 @@
           "application/json"
         ],
         "tags": [
-          "PrivateClouds"
+          "privateCloud"
         ],
         "summary": "Implements private cloud list GET method",
-        "operationId": "PrivateClouds_List",
+        "operationId": "PrivateCloudByRegion_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -368,7 +368,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -394,10 +394,10 @@
           "application/json"
         ],
         "tags": [
-          "PrivateClouds"
+          "privateCloud"
         ],
         "summary": "Implements private cloud GET method",
-        "operationId": "PrivateClouds_Get",
+        "operationId": "getPrivateCloud",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -420,7 +420,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -433,114 +433,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/customizationPolicies": {
-      "get": {
-        "description": "Returns list of customization policies in region for private cloud",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "customizationPolicies"
-        ],
-        "summary": "Implements get of customization policies list",
-        "operationId": "customizationPolicies_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/regionId"
-          },
-          {
-            "$ref": "#/parameters/pcName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "type": "string",
-            "description": "The filter to apply on the list operation. only type is allowed here as a filter e.g. $filter=type eq 'xxxx'",
-            "name": "$filter",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/CustomizationPoliciesListResponse"
-            }
-          },
-          "default": {
-            "description": "General Error",
-            "schema": {
-              "$ref": "#/definitions/CSRPError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListCustomizationPolicies": {
-            "$ref": "./examples/ListCustomizationPolicies.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/customizationPolicies/{customizationPolicyName}": {
-      "get": {
-        "description": "Returns customization policy by its name",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "customizationPolicies"
-        ],
-        "summary": "Implements get of customization policy",
-        "operationId": "customizationPolicies_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/regionId"
-          },
-          {
-            "$ref": "#/parameters/pcName"
-          },
-          {
-            "type": "string",
-            "description": "customization policy name",
-            "name": "customizationPolicyName",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/CustomizationPolicy"
-            }
-          },
-          "default": {
-            "description": "General Error",
-            "schema": {
-              "$ref": "#/definitions/CSRPError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetCustomizationPolicy": {
-            "$ref": "./examples/GetCustomizationPolicy.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools": {
       "get": {
         "description": "Returns list of resource pools in region for private cloud",
@@ -548,10 +440,10 @@
           "application/json"
         ],
         "tags": [
-          "ResourcePools"
+          "resourcePool"
         ],
         "summary": "Implements get of resource pools list",
-        "operationId": "ResourcePools_List",
+        "operationId": "resourcePoolsByPC_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -574,7 +466,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -597,16 +489,16 @@
           "application/json"
         ],
         "tags": [
-          "ResourcePools"
+          "resourcePool"
         ],
         "summary": "Implements get of resource pool",
-        "operationId": "ResourcePools_Get",
+        "operationId": "resourcePoolByPC_get",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/api-version"
+            "$ref": "#/parameters/subscriptionId"
           },
           {
             "$ref": "#/parameters/regionId"
@@ -630,7 +522,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -650,10 +542,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachineTemplates"
+          "virtualMachineTemplate"
         ],
         "summary": "Implements list of available VM templates",
-        "operationId": "VirtualMachineTemplates_List",
+        "operationId": "virtualMachineTemplatesByPC_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -683,7 +575,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -709,10 +601,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachineTemplates"
+          "virtualMachineTemplate"
         ],
         "summary": "Implements virtual machine template GET method",
-        "operationId": "VirtualMachineTemplates_Get",
+        "operationId": "virtualMachineTemplateByPC_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -742,7 +634,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -762,10 +654,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualNetworks"
+          "virtualNetwork"
         ],
         "summary": "Implements list available virtual networks within a subscription method",
-        "operationId": "VirtualNetworks_List",
+        "operationId": "virtualNetworksByPC_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -795,7 +687,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -821,10 +713,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualNetworks"
+          "virtualNetwork"
         ],
         "summary": "Implements virtual network GET method",
-        "operationId": "VirtualNetworks_Get",
+        "operationId": "virtualNetworkByPC_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -854,7 +746,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -874,10 +766,10 @@
           "application/json"
         ],
         "tags": [
-          "AvailabilityUsages"
+          "availability-usage"
         ],
         "summary": "Implements Usages List method",
-        "operationId": "Usages_List",
+        "operationId": "UsagesWithinRegion_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -903,7 +795,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -929,10 +821,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachines"
+          "virtualMachine"
         ],
         "summary": "Implements list virtual machine within subscription method",
-        "operationId": "VirtualMachines_ListBySubscription",
+        "operationId": "virtualMachine_ListBySubscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -968,7 +860,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -994,10 +886,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudNodes"
+          "dedicatedCloudNode"
         ],
         "summary": "Implements list of dedicated cloud nodes within RG method",
-        "operationId": "DedicatedCloudNodes_ListByResourceGroup",
+        "operationId": "dedicatedCloudNode_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1036,7 +928,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1062,10 +954,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudNodes"
+          "dedicatedCloudNode"
         ],
         "summary": "Implements dedicated cloud node GET method",
-        "operationId": "DedicatedCloudNodes_Get",
+        "operationId": "dedicatedCloudNode_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1074,15 +966,12 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "pattern": "^[-a-zA-Z0-9]+$",
             "type": "string",
             "description": "dedicated cloud node name",
             "name": "dedicatedCloudNodeName",
             "in": "path",
             "required": true
-          },
-          {
-            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -1093,7 +982,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1114,10 +1003,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudNodes"
+          "dedicatedCloudNode"
         ],
         "summary": "Implements dedicated cloud node PUT method",
-        "operationId": "DedicatedCloudNodes_CreateOrUpdate",
+        "operationId": "dedicatedCloudNode_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1129,7 +1018,7 @@
             "$ref": "#/parameters/referer"
           },
           {
-            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "pattern": "^[-a-zA-Z0-9]+$",
             "type": "string",
             "description": "dedicated cloud node name",
             "name": "dedicatedCloudNodeName",
@@ -1168,7 +1057,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1187,10 +1076,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudNodes"
+          "dedicatedCloudNode"
         ],
         "summary": "Implements dedicated cloud node DELETE method",
-        "operationId": "DedicatedCloudNodes_Delete",
+        "operationId": "dedicatedCloudNode_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1199,7 +1088,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "pattern": "^[-a-zA-Z0-9]+$",
             "type": "string",
             "description": "dedicated cloud node name",
             "name": "dedicatedCloudNodeName",
@@ -1215,7 +1104,7 @@
             "description": "no content. resource does not exist and the request is well formed"
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             },
@@ -1242,10 +1131,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudNodes"
+          "dedicatedCloudNode"
         ],
         "summary": "Implements dedicated cloud node PATCH method",
-        "operationId": "DedicatedCloudNodes_Update",
+        "operationId": "dedicatedCloudNode_Update",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1254,7 +1143,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "pattern": "^[-a-zA-Z0-9]+$",
             "type": "string",
             "description": "dedicated cloud node name",
             "name": "dedicatedCloudNodeName",
@@ -1282,7 +1171,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1297,7 +1186,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices": {
       "get": {
-        "description": "Returns list of dedicated cloud services within a resource group",
+        "description": "Returns list of dedicated cloud service within resource group",
         "consumes": [
           "application/json"
         ],
@@ -1305,10 +1194,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudServices"
+          "dedicatedCloudService"
         ],
         "summary": "Implements list of dedicatedCloudService objects within RG method",
-        "operationId": "DedicatedCloudServices_ListByResourceGroup",
+        "operationId": "dedicatedCloudService_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1347,7 +1236,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1373,10 +1262,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudServices"
+          "dedicatedCloudService"
         ],
         "summary": "Implements dedicatedCloudService GET method",
-        "operationId": "DedicatedCloudServices_Get",
+        "operationId": "dedicatedCloudService_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1403,7 +1292,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1424,10 +1313,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudServices"
+          "dedicatedCloudService"
         ],
         "summary": "Implements dedicated cloud service PUT method",
-        "operationId": "DedicatedCloudServices_CreateOrUpdate",
+        "operationId": "dedicatedCloudService_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1436,7 +1325,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "pattern": "^[-a-zA-Z0-9]+$",
             "type": "string",
             "description": "dedicated cloud Service name",
             "name": "dedicatedCloudServiceName",
@@ -1464,7 +1353,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1482,10 +1371,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudServices"
+          "dedicatedCloudService"
         ],
         "summary": "Implements dedicatedCloudService DELETE method",
-        "operationId": "DedicatedCloudServices_Delete",
+        "operationId": "dedicatedCloudService_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1509,7 +1398,7 @@
             "description": "no content. resource does not exist and the request is well formed"
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             },
@@ -1537,10 +1426,10 @@
           "application/json"
         ],
         "tags": [
-          "DedicatedCloudServices"
+          "dedicatedCloudService"
         ],
         "summary": "Implements dedicatedCloudService PATCH method",
-        "operationId": "DedicatedCloudServices_Update",
+        "operationId": "dedicatedCloudService_Update",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1576,7 +1465,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1599,10 +1488,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachines"
+          "virtualMachine"
         ],
         "summary": "Implements list virtual machine within RG method",
-        "operationId": "VirtualMachines_ListByResourceGroup",
+        "operationId": "virtualMachine_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1641,7 +1530,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1667,10 +1556,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachines"
+          "virtualMachine"
         ],
         "summary": "Implements virtual machine GET method",
-        "operationId": "VirtualMachines_Get",
+        "operationId": "virtualMachine_Get",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1697,7 +1586,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1718,10 +1607,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachines"
+          "virtualMachine"
         ],
         "summary": "Implements virtual machine PUT method",
-        "operationId": "VirtualMachines_CreateOrUpdate",
+        "operationId": "virtualMachine_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1733,7 +1622,7 @@
             "$ref": "#/parameters/referer"
           },
           {
-            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "pattern": "^[-a-zA-Z0-9]+$",
             "type": "string",
             "description": "virtual machine name",
             "name": "virtualMachineName",
@@ -1777,7 +1666,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1796,10 +1685,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachines"
+          "virtualMachine"
         ],
         "summary": "Implements virtual machine DELETE method",
-        "operationId": "VirtualMachines_Delete",
+        "operationId": "virtualMachine_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1840,7 +1729,7 @@
             "description": "no content. resource does not exist and the request is well formed"
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             },
@@ -1868,10 +1757,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachines"
+          "virtualMachine"
         ],
         "summary": "Implements virtual machine PATCH method",
-        "operationId": "VirtualMachines_Update",
+        "operationId": "virtualMachine_Update",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1907,7 +1796,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             }
@@ -1928,10 +1817,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachines"
+          "virtualMachine"
         ],
         "summary": "Implements a start method for a virtual machine",
-        "operationId": "VirtualMachines_Start",
+        "operationId": "virtualMachine_Start",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -1972,7 +1861,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             },
@@ -1999,10 +1888,10 @@
           "application/json"
         ],
         "tags": [
-          "VirtualMachines"
+          "virtualMachine"
         ],
         "summary": "Implements shutdown, poweroff, and suspend method for a virtual machine",
-        "operationId": "VirtualMachines_Stop",
+        "operationId": "virtualMachine_Stop",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -2067,7 +1956,7 @@
             }
           },
           "default": {
-            "description": "General Error",
+            "description": "BadRequest",
             "schema": {
               "$ref": "#/definitions/CSRPError"
             },
@@ -2212,11 +2101,7 @@
           "items": {
             "description": "The list of specification's metrics",
             "$ref": "#/definitions/AvailableOperationDisplayPropertyServiceSpecificationMetricsItem"
-          },
-          "x-ms-identifiers": [
-            "name",
-            "unit"
-          ]
+          }
         }
       }
     },
@@ -2232,10 +2117,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AvailableOperation"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -2262,7 +2144,6 @@
           "items": {
             "$ref": "#/definitions/CSRPErrorBody"
           },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "message": {
@@ -2273,210 +2154,6 @@
         "target": {
           "description": "Error's target",
           "type": "string"
-        }
-      }
-    },
-    "CustomizationHostName": {
-      "description": "Host name model",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Hostname",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of host name",
-          "type": "string",
-          "enum": [
-            "USER_DEFINED",
-            "PREFIX_BASED",
-            "FIXED",
-            "VIRTUAL_MACHINE_NAME",
-            "CUSTOM_NAME"
-          ]
-        }
-      }
-    },
-    "CustomizationIPAddress": {
-      "type": "object",
-      "properties": {
-        "argument": {
-          "description": "Argument when Custom ip type is selected",
-          "type": "string"
-        },
-        "ipAddress": {
-          "description": "Defined Ip Address when Fixed ip type is selected",
-          "type": "string"
-        },
-        "type": {
-          "description": "Customization Specification ip type",
-          "type": "string",
-          "enum": [
-            "CUSTOM",
-            "DHCP_IP",
-            "FIXED_IP",
-            "USER_DEFINED"
-          ]
-        }
-      }
-    },
-    "CustomizationIPSettings": {
-      "type": "object",
-      "properties": {
-        "gateway": {
-          "description": "The list of gateways",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ip": {
-          "description": "Ip address customization settings",
-          "$ref": "#/definitions/CustomizationIPAddress"
-        },
-        "subnetMask": {
-          "description": "Adapter subnet mask",
-          "type": "string"
-        }
-      }
-    },
-    "CustomizationIdentity": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "Windows Text Identity. Prepared data",
-          "type": "string"
-        },
-        "hostName": {
-          "description": "Virtual machine host name settings",
-          "$ref": "#/definitions/CustomizationHostName"
-        },
-        "type": {
-          "description": "Identity type",
-          "type": "string",
-          "enum": [
-            "WINDOWS_TEXT",
-            "WINDOWS",
-            "LINUX"
-          ]
-        },
-        "userData": {
-          "description": "Windows Identity. User data customization",
-          "type": "object",
-          "properties": {
-            "isPasswordPredefined": {
-              "description": "Is password predefined in customization policy",
-              "type": "boolean",
-              "default": false
-            }
-          }
-        }
-      }
-    },
-    "CustomizationNicSetting": {
-      "type": "object",
-      "properties": {
-        "adapter": {
-          "description": "The list of adapters' settings",
-          "$ref": "#/definitions/CustomizationIPSettings"
-        },
-        "macAddress": {
-          "description": "NIC mac address",
-          "type": "string"
-        }
-      }
-    },
-    "CustomizationPoliciesListResponse": {
-      "description": "List of customization polices response model",
-      "properties": {
-        "nextLink": {
-          "description": "Link for next list of the Customization policy",
-          "type": "string"
-        },
-        "value": {
-          "description": "List of the customization policies",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomizationPolicy"
-          }
-        }
-      }
-    },
-    "CustomizationPolicy": {
-      "description": "The virtual machine customization policy",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Customization policy azure id",
-          "type": "string"
-        },
-        "location": {
-          "description": "Azure region",
-          "type": "string"
-        },
-        "name": {
-          "description": "Customization policy name",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "description": "Customization Policy properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CustomizationPolicyProperties"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "CustomizationPolicyProperties": {
-      "description": "The properties of Customization policy",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Policy description",
-          "type": "string"
-        },
-        "privateCloudId": {
-          "description": "The Private cloud id",
-          "type": "string"
-        },
-        "specification": {
-          "description": "Detailed customization policy specification",
-          "$ref": "#/definitions/CustomizationSpecification"
-        },
-        "type": {
-          "description": "The type of customization (Linux or Windows)",
-          "type": "string",
-          "enum": [
-            "LINUX",
-            "WINDOWS"
-          ]
-        },
-        "version": {
-          "description": "Policy version",
-          "type": "string"
-        }
-      }
-    },
-    "CustomizationSpecification": {
-      "description": "The specification for Customization Policy",
-      "type": "object",
-      "properties": {
-        "identity": {
-          "description": "Customization Identity. It contains data about user and hostname",
-          "$ref": "#/definitions/CustomizationIdentity"
-        },
-        "nicSettings": {
-          "description": "Network interface settings",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomizationNicSetting"
-          },
-          "x-ms-identifiers": [
-            "macAddress"
-          ]
         }
       }
     },
@@ -2502,7 +2179,7 @@
         "name": {
           "description": "{dedicatedCloudNodeName}",
           "type": "string",
-          "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+          "pattern": "^[-a-zA-Z0-9]+$",
           "readOnly": true
         },
         "properties": {
@@ -2568,8 +2245,7 @@
         "created": {
           "description": "date time the resource was created",
           "format": "date-time",
-          "readOnly": true,
-          "type": "string"
+          "readOnly": true
         },
         "nodesCount": {
           "description": "count of nodes to create",
@@ -2651,7 +2327,7 @@
         "name": {
           "description": "{dedicatedCloudServiceName}",
           "type": "string",
-          "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+          "pattern": "^[-a-zA-Z0-9]+$",
           "readOnly": true
         },
         "properties": {
@@ -2714,90 +2390,13 @@
         },
         "nodes": {
           "description": "total nodes purchased",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "serviceURL": {
           "description": "link to a service management web portal",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "GuestOSCustomization": {
-      "description": "Guest OS Customization properties",
-      "properties": {
-        "dnsServers": {
-          "description": "List of dns servers to use",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IPV4Address"
-          }
-        },
-        "hostName": {
-          "description": "Virtual Machine hostname",
-          "type": "string"
-        },
-        "password": {
-          "description": "Password for login",
-          "type": "string"
-        },
-        "policyId": {
-          "description": "id of customization policy",
-          "type": "string"
-        },
-        "username": {
-          "description": "Username for login",
           "type": "string"
         }
       }
-    },
-    "GuestOSNICCustomization": {
-      "description": "Guest OS nic customization",
-      "properties": {
-        "allocation": {
-          "description": "IP address allocation method",
-          "type": "string",
-          "enum": [
-            "static",
-            "dynamic"
-          ]
-        },
-        "dnsServers": {
-          "description": "List of dns servers to use",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IPV4Address"
-          }
-        },
-        "gateway": {
-          "description": "Gateway addresses assigned to nic",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IPV4Address"
-          }
-        },
-        "ipAddress": {
-          "description": "Static ip address for nic",
-          "$ref": "#/definitions/IPV4Address"
-        },
-        "mask": {
-          "description": "Network mask for nic",
-          "$ref": "#/definitions/IPV4Address"
-        },
-        "primaryWinsServer": {
-          "description": "primary WINS server for Windows",
-          "$ref": "#/definitions/IPV4Address"
-        },
-        "secondaryWinsServer": {
-          "description": "secondary WINS server for Windows",
-          "$ref": "#/definitions/IPV4Address"
-        }
-      }
-    },
-    "IPV4Address": {
-      "type": "string",
-      "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])[.]){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
     },
     "OperationError": {
       "description": "Operation error model",
@@ -3016,7 +2615,7 @@
           }
         },
         "vrOpsEnabled": {
-          "description": "Is vRealize Operations Manager enabled/disabled",
+          "description": "Is Vrops enabled/disabled",
           "type": "boolean"
         }
       }
@@ -3033,8 +2632,7 @@
         },
         "location": {
           "description": "Azure region",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "{ResourcePoolName}",
@@ -3164,12 +2762,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuAvailability"
-          },
-          "x-ms-identifiers": [
-            "dedicatedAvailabilityZoneId",
-            "dedicatedPlacementGroupId",
-            "skuId"
-          ]
+          }
         }
       }
     },
@@ -3248,9 +2841,6 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
-          "x-ms-identifiers": [
-            "/name/value"
-          ],
           "readOnly": true
         }
       }
@@ -3355,7 +2945,7 @@
         "name": {
           "description": "{virtualMachineName}",
           "type": "string",
-          "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+          "pattern": "^[-a-zA-Z0-9]+$",
           "readOnly": true
         },
         "properties": {
@@ -3396,7 +2986,9 @@
       "required": [
         "numberOfCores",
         "amountOfRam",
-        "privateCloudId"
+        "privateCloudId",
+        "guestOS",
+        "guestOSType"
       ],
       "properties": {
         "amountOfRam": {
@@ -3411,19 +3003,12 @@
           },
           "readOnly": true
         },
-        "customization": {
-          "description": "Virtual machine properties",
-          "$ref": "#/definitions/GuestOSCustomization"
-        },
         "disks": {
           "description": "The list of Virtual Disks",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
-          },
-          "x-ms-identifiers": [
-            "virtualDiskId"
-          ]
+          }
         },
         "dnsname": {
           "description": "The DNS name of Virtual Machine in VCenter",
@@ -3441,8 +3026,7 @@
         },
         "guestOS": {
           "description": "The name of Guest OS",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "guestOSType": {
           "description": "The Guest OS type",
@@ -3455,25 +3039,21 @@
           "x-ms-enum": {
             "modelAsString": false,
             "name": "GuestOSType"
-          },
-          "readOnly": true
+          }
         },
         "nics": {
           "description": "The list of Virtual NICs",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualNic"
-          },
-          "x-ms-identifiers": [
-            "virtualNicId"
-          ]
+          }
         },
         "numberOfCores": {
           "description": "The number of CPU cores",
           "type": "integer"
         },
         "password": {
-          "description": "Password for login. Deprecated - use customization property",
+          "description": "Password for login",
           "type": "string"
         },
         "privateCloudId": {
@@ -3516,7 +3096,7 @@
           "type": "string"
         },
         "username": {
-          "description": "Username for login. Deprecated - use customization property",
+          "description": "Username for login",
           "type": "string"
         },
         "vSphereNetworks": {
@@ -3605,7 +3185,9 @@
     "VirtualMachineTemplateProperties": {
       "description": "Properties of virtual machine template",
       "required": [
-        "privateCloudId"
+        "privateCloudId",
+        "guestOS",
+        "guestOSType"
       ],
       "properties": {
         "amountOfRam": {
@@ -3628,10 +3210,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
-          },
-          "x-ms-identifiers": [
-            "virtualDiskId"
-          ]
+          }
         },
         "exposeToGuestVM": {
           "description": "Expose Guest OS or not",
@@ -3639,23 +3218,18 @@
         },
         "guestOS": {
           "description": "The Guest OS",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "guestOSType": {
           "description": "The Guest OS types",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "nics": {
           "description": "The list of Virtual NICs",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualNic"
-          },
-          "x-ms-identifiers": [
-            "virtualNicId"
-          ]
+          }
         },
         "numberOfCores": {
           "description": "The number of CPU cores",
@@ -3708,8 +3282,7 @@
         },
         "location": {
           "description": "Azure region",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "{VirtualNetworkName}",
@@ -3757,14 +3330,9 @@
     "VirtualNic": {
       "description": "Virtual NIC model",
       "required": [
-        "nicType",
-        "network"
+        "nicType"
       ],
       "properties": {
-        "customization": {
-          "description": "guest OS customization for nic",
-          "$ref": "#/definitions/GuestOSNICCustomization"
-        },
         "ipAddresses": {
           "description": "NIC ip address",
           "type": "array",
@@ -3777,7 +3345,7 @@
           "type": "string"
         },
         "network": {
-          "description": "Virtual Network",
+          "description": "The list of Virtual Networks",
           "$ref": "#/definitions/VirtualNetwork"
         },
         "nicType": {
@@ -3813,13 +3381,6 @@
     }
   },
   "parameters": {
-    "subscriptionId": {
-      "type": "string",
-      "description": "The subscription ID.",
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true
-    },
     "api-version": {
       "type": "string",
       "description": "Client API version.",
@@ -3837,7 +3398,7 @@
     },
     "referer": {
       "type": "string",
-      "x-ms-parameter-location": "method",
+      "x-ms-parameter-location": "client",
       "description": "referer url",
       "name": "Referer",
       "in": "header",
@@ -3845,7 +3406,7 @@
     },
     "regionId": {
       "type": "string",
-      "x-ms-parameter-location": "method",
+      "x-ms-parameter-location": "client",
       "description": "The region Id (westus, eastus)",
       "name": "regionId",
       "in": "path",
@@ -3858,48 +3419,51 @@
       "name": "resourceGroupName",
       "in": "path",
       "required": true
+    },
+    "subscriptionId": {
+      "type": "string",
+      "description": "The subscription ID.",
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true
     }
   },
   "tags": [
     {
       "description": "Subscription life cycle",
-      "name": "Subscription"
+      "name": "subscription"
     },
     {
       "description": "Virtual machine resource operations",
-      "name": "VirtualMachines"
+      "name": "virtualMachine"
     },
     {
       "description": "Virtual networks functions",
-      "name": "VirtualNetwork"
+      "name": "virtualNetwork"
     },
     {
       "description": "VM templates functions",
-      "name": "VirtualMachineTemplates"
+      "name": "virtualMachineTemplate"
     },
     {
       "description": "available operations function",
-      "name": "Operations"
+      "name": "operations"
     },
     {
       "description": "Resource pools operations",
-      "name": "ResourcePools"
+      "name": "resourcePool"
     },
     {
       "description": "dedicated cloud nodes operations",
-      "name": "DedicatedCloudNodes"
+      "name": "dedicatedCloudNode"
     },
     {
       "description": "Azure Service object operations",
-      "name": "AzureService"
+      "name": "azureService"
     },
     {
       "description": "operations related to availability and usage",
-      "name": "AvailabilityUsages"
-    },
-    {
-      "description": "Customization policies operations",
-      "name": "CustomizationPolicies"
+      "name": "availability-usage"
     }
   ]
 }

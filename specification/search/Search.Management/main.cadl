@@ -1,0 +1,125 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+// See here for more information: https://aka.ms/cadl/learn
+
+@armNamespace
+@serviceTitle("IndexManagementClient")
+@serviceVersion("2022-06-01-preview")
+@doc("Microsoft.Search resource management API.")
+namespace Microsoft.Search;
+
+using Autorest;
+using Azure.ResourceManager;
+using Cadl.Http;
+using Cadl.Rest;
+using OpenAPI;
+
+@doc("An index resource.")
+model Index is TrackedResource<IndexProperties> {
+  @path
+  @key("name")
+  @segment("searchIndexes")
+  @visibility("read")
+  @doc("The name of the index resource.")
+  name: string;
+}
+
+@doc("The retry-after envelope.")
+model RetryAfterHeader { 
+  @doc("The Retry-After header can indicate how long the client should wait before polling the operation status.") 
+  @header("Retry-After") retryAfter?: int32;
+}
+
+@doc(TMessage)
+model ArmAcceptedResponse<TMessage = "Resource operation accepted."> {
+  ...AcceptedResponse;
+  ...RetryAfterHeader;
+}
+
+@armResourceOperations
+interface IndexOperations extends ResourceOperations<Index, IndexProperties> {
+  @autoRoute
+  @doc("Patch a search index")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("azure-async-operation")
+  @armResourceUpdate(Index)
+  @patch
+  Update(
+    ...ResourceInstanceParameters<Index>,
+    @doc("The resource properties to be updated.")
+    @body
+    properties: ResourceUpdateModel<Index, IndexProperties>
+  ): ArmResponse<Index> | ArmAcceptedResponse<"Resource update request accepted."> | ErrorResponse;
+
+  @autoRoute
+  @doc("Delete a search index")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @armResourceDelete(Index)
+  @delete
+  Delete(
+    ...ResourceInstanceParameters<Index>,
+  ): ArmAcceptedResponse<"Resource delete request accepted."> | ErrorResponse;
+}
+
+@doc("The properties of the index.")
+model IndexProperties {
+  @visibility("read")
+  @doc("The current provisioning state of the index.")
+  provisioningState?: ProvisioningState;
+  
+  @visibility("read")
+  @doc("The endpoint at which the index can be accessed.")
+  endpoint?: string;
+
+  @doc("The capacity allocated to the index for querying.")
+  queryCapacity: Capacity;
+
+  @doc("The capacity allocated to the index for indexing documents.")
+  indexingCapacity: Capacity;
+}
+
+@doc("The current provisioning state of the index.")
+@knownValues(ProvisioningStateValues)
+model ProvisioningState is string {}
+enum ProvisioningStateValues {
+  Accepted,
+  Provisioning,
+  Succeeded,
+  Failed,
+  Canceled,
+  Deleting
+}
+
+@doc("The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index.")
+model Capacity {
+  @doc("The minimum number of vCores that the index will consume. Represented with discrete values: 0.2, 0.5. 1, 2, 3, … to 16.")
+  minVCores: float32;
+
+  @doc("The maximum number of vCores that the index can consume. Represented with discrete values: 0.2, 0.5. 1, 2, 3, … to 16.")
+  maxVCores: float32;
+
+  autoPause: Pause;
+}
+
+@discriminator("type")
+model Pause {}
+
+@doc("When the pause strategy is set to 'Delay', the index will enter a paused state after not being used for a fixed amount of time.")
+model DelayPause extends Pause {
+  @doc("Specifies the type of pausing strategy as 'Delay'.")
+  type: "Delay";
+
+  @doc("The interval after which an index is paused if not in use.")
+  duration: duration;
+}
+
+@doc("When the pause strategy is set to 'None', the index will remain always active.")
+model NonePause extends Pause {
+  @doc("Specifies the type of pausing strategy as 'None'.")
+  type: "None";
+}

@@ -89,7 +89,7 @@ model AwsNetworkFirewallRuleGroupProperties {
   ruleGroupName?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Property type")
@@ -175,7 +175,7 @@ model RulesSource {
   rulesString?: string;
 
   @doc("Property statefulRules")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   statefulRules?: StatefulRule[];
 
   @doc("Property statelessRulesAndCustomActions")
@@ -273,7 +273,7 @@ model StatefulRule {
   header?: Header;
 
   @doc("Property ruleOptions")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   ruleOptions?: RuleOption[];
 }
 
@@ -301,11 +301,11 @@ union StatefulRuleAction {
 @doc("Definition of StatelessRulesAndCustomActions")
 model StatelessRulesAndCustomActions {
   @doc("Property customActions")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   customActions?: CustomAction[];
 
   @doc("Property statelessRules")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   statelessRules?: StatelessRule[];
 }
 
@@ -476,7 +476,7 @@ model RuleDefinition {
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
   @doc("Property dimensions")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   dimensions?: Dimension[];
 }
 
@@ -487,26 +487,26 @@ model PublishMetricAction {
 @doc("Definition of MatchAttributes")
 model MatchAttributes {
   @doc("Property destinationPorts")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   destinationPorts?: PortRange[];
 
   @doc("Property destinations")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   destinations?: Address[];
 
   @doc("Property protocols")
   protocols?: int32[];
 
   @doc("Property sourcePorts")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   sourcePorts?: PortRange[];
 
   @doc("Property sources")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   sources?: Address[];
 
   @doc("Property tcpFlags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tcpFlags?: TCPFlagField[];
 }
 

@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "51766542-3ed7-4a72-a187-0c8ab644ddab",
+    "resourceGroupName": "mygroup",
+    "workspaceName": "contosoWorkspace",
+    "applicationRegistrationName": "sampleapplication",
+    "api-version": "2020-06-23-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "sampleapplication",
+        "properties": {
+          "displayName": "sample application name",
+          "applicationManifestId": "oscp.manifest1",
+          "parameters": {
+            "SampleInput1": "123",
+            "SampleInput2": "XYZ"
+          },
+          "resources": [
+            {
+              "type": "shares",
+              "properties": {
+                "accessAssignments": [
+                  {
+                    "actionIds": [
+                      "Microsoft.OpenLogisticsPlatform/workspaces/items/read"
+                    ],
+                    "attributeConditions": [
+                      {
+                        "attributeName": "Microsoft.OLP/workspaces/item/label",
+                        "values": [
+                          "some_value1",
+                          "some_value2",
+                          "some_value3"
+                        ],
+                        "attributeMatchingScheme": "ALLOFANY"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.OpenLogisticsPlatform/workspaces/applicationRegistrations",
+        "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.OpenLogisticsPlatform/workspaces/contosoWorkspace/applicationRegistrations/sampleapplication"
+      }
+    }
+  }
+}

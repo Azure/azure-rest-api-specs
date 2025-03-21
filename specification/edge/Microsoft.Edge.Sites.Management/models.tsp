@@ -19,16 +19,37 @@ model SiteProperties {
   @doc("Description of Site resource")
   description?: string;
 
-  @doc("AddressResource ArmId of Site resource")
-  addressResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.EdgeOrder/addresses";
-    }
-  ]>;
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
 
   @doc("Provisioning state of last operation")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Site address properties")
+model SiteAddressProperties {
+  @doc("First line of the street address")
+  streetAddress1?: string;
+
+  @doc("Second line of the street address")
+  streetAddress2?: string;
+
+  @doc("City of the address")
+  city?: string;
+
+  @doc("State or province of the address")
+  stateOrProvince?: string;
+
+  @doc("Country of the address")
+  country?: string;
+
+  @doc("Postal or ZIP code of the address")
+  postalCode?: string;
 }
 
 @doc("The updatable properties of the Site.")
@@ -39,18 +60,48 @@ model SiteUpdateProperties {
   @doc("Description of Site resource")
   description?: string;
 
-  @doc("AddressResource ArmId of Site resource")
-  addressResourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.EdgeOrder/addresses";
-    }
-  ]>;
+  @doc("Physical address of the site")
+  siteAddress?: SiteAddressProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @doc("Key-value pairs for labeling the site resource.")
+  labels?: Record<string>;
 }
 
 @doc("The type used for update operations of the Site.")
 model SiteUpdate {
   @doc("The updatable properties of the Site.")
   properties?: SiteUpdateProperties;
+}
+
+@doc("Properties of the SiteAwareResourceType resource type.")
+model SiteAwareResourceTypeProperties {
+  @doc("Details for each SiteAwareResourceType")
+  @Azure.ResourceManager.identifiers(#[])
+  supportedResourceTypes?: SiteAwareResourceTypeDetails[];
+
+  @doc("Provisioning state of last operation")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("The properties and availability status of each resource type on which aggregations will be performed over Site.")
+model SiteAwareResourceTypeDetails {
+  @doc("Name of the resource-type")
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  @doc("fully qualified name of the resource-type")
+  @visibility(Lifecycle.Read)
+  resourceType?: string;
+
+  @doc("Distinguishes whether RP is already Supported or ComingSoon")
+  @visibility(Lifecycle.Read)
+  availabilityStatus?: AvailabilityStatus;
+
+  @doc("Aggregation properties for the resource-type")
+  @visibility(Lifecycle.Read)
+  supportedCapabilities?: string[];
 }
 
 @doc("ResourceType availability status")

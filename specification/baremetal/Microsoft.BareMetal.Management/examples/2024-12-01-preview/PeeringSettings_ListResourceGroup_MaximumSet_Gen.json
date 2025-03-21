@@ -1,0 +1,50 @@
+{
+  "title": "PeeringSettings_ListResourceGroup",
+  "operationId": "PeeringSettings_ListResourceGroup",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "F99B5DF9-0AB6-4430-ABCC-1AA6374FBE57",
+    "resourceGroupName": "rgBootstrapRP"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "linkedResources": [
+                "linkedResource1"
+              ],
+              "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnetName",
+              "virtualNetworkGuid": "e2f6d3e2-4bba-4d49-bb1e-9e2d1e6c3c5f",
+              "remotePeeringLinks": [
+                {
+                  "remoteVirtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-1/providers/Microsoft.Network/virtualNetworks/vnetName2",
+                  "autoSyncProvisioningStatus": "Succeeded"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "eTag": "c5d1b5ef-1f65-4b2a-9c6e-5f3e49d5c3d7",
+            "tags": {
+              "key9892": "fz"
+            },
+            "location": "westcentralus",
+            "id": "/subscriptions/subscriptionId/resourceGroups/rg-1/providers/Microsoft.BareMetal/peeringSettings/vnetArmResourceId-f47ac10b-58cc-4372-a567-0e02b2c3d479",
+            "name": "vnetArmResourceId-f47ac10b-58cc-4372-a567-0e02b2c3d479",
+            "type": "Microsoft.BareMetal/peeringSettings",
+            "systemData": {
+              "createdBy": "identityA",
+              "createdByType": "Application",
+              "createdAt": "2024-10-05T22:36:22.772Z",
+              "lastModifiedBy": "identityB",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-10-05T22:36:22.772Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/cloud1/replicationProtectionContainers/cloud_6d224fc6-f326-5d35-96de-fbf51efb3179/replicationProtectableItems?api-version=2021-06-01&%24skipToken=ReplicationGroup%3aBegin"
+      }
+    }
+  }
+}

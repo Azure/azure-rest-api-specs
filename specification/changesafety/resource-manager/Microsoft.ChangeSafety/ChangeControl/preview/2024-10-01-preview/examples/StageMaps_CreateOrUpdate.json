@@ -1,0 +1,160 @@
+{
+  "title": "StageMaps_CreateOrUpdate_MaximumSet",
+  "operationId": "StageMaps_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "26c33ec0-21f5-4889-8776-62038bf7881b",
+    "resourceGroupName": "rgopenapi",
+    "stageMapName": "regionalMap",
+    "resource": {
+      "properties": {
+        "parameters": {
+          "location": {
+            "type": "string",
+            "defaultValue": "eastus",
+            "allowedValues": [
+              "eastuseuap",
+              "westus",
+              "eastus",
+              "centraluseuap"
+            ],
+            "metadata": {
+              "description": "Location for all resources."
+            }
+          }
+        },
+        "stages": [
+          {
+            "name": "ev2canary",
+            "sequence": 1,
+            "parameterValues": {
+              "location": "eastuseuap",
+              "stageParameter1": "stageParameterValue1"
+            },
+            "nestedStageMapResourceId": null
+          },
+          {
+            "name": "ev2prod",
+            "sequence": 2,
+            "parameterValues": {
+              "location": "eastus",
+              "stageParameter2": "stageParameterValue2",
+              "stageParameter3": "stageParameterValue3"
+            },
+            "nestedStageMapResourceId": "/subscriptions/26c33ec0-21f5-4889-8776-62038bf7881b/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/anotherStageMap"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "eastus",
+              "allowedValues": [
+                "eastuseuap",
+                "westus",
+                "eastus",
+                "centraluseuap"
+              ],
+              "metadata": {
+                "description": "Location for all resources."
+              }
+            }
+          },
+          "stages": [
+            {
+              "name": "ev2canary",
+              "sequence": 1,
+              "parameterValues": {
+                "location": "eastuseuap",
+                "stageParameter1": "stageParameterValue1"
+              },
+              "nestedStageMapResourceId": null
+            },
+            {
+              "name": "ev2prod",
+              "sequence": 2,
+              "parameterValues": {
+                "location": "eastus",
+                "stageParameter2": "stageParameterValue2",
+                "stageParameter3": "stageParameterValue3"
+              },
+              "nestedStageMapResourceId": "/subscriptions/26c33ec0-21f5-4889-8776-62038bf7881b/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/anotherStageMap"
+            }
+          ]
+        },
+        "id": "/subscriptions/26c33ec0-21f5-4889-8776-62038bf7881b/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/regionalMap",
+        "name": "regionalMap",
+        "type": "microsoft.changesafety/stagemaps",
+        "systemData": {
+          "createdBy": "odkqcsvpyyjlcmiv",
+          "createdByType": "User",
+          "createdAt": "2024-10-18T07:47:46.738Z",
+          "lastModifiedBy": "hsvketwarcbjm",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-10-18T07:47:46.738Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "parameters": {
+            "location": {
+              "type": "string",
+              "defaultValue": "eastus",
+              "allowedValues": [
+                "eastuseuap",
+                "westus",
+                "eastus",
+                "centraluseuap"
+              ],
+              "metadata": {
+                "description": "Location for all resources."
+              }
+            }
+          },
+          "stages": [
+            {
+              "name": "ev2canary",
+              "sequence": 1,
+              "parameterValues": {
+                "location": "eastuseuap",
+                "stageParameter1": "stageParameterValue1"
+              },
+              "nestedStageMapResourceId": null
+            },
+            {
+              "name": "ev2prod",
+              "sequence": 2,
+              "parameterValues": {
+                "location": "eastus",
+                "stageParameter2": "stageParameterValue2",
+                "stageParameter3": "stageParameterValue3"
+              },
+              "nestedStageMapResourceId": "/subscriptions/26c33ec0-21f5-4889-8776-62038bf7881b/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/anotherStageMap"
+            }
+          ]
+        },
+        "id": "/subscriptions/26c33ec0-21f5-4889-8776-62038bf7881b/resourceGroups/testresourcegroup/providers/Microsoft.ChangeSafety/stageMaps/regionalMap",
+        "name": "regionalMap",
+        "type": "microsoft.changesafety/stagemaps",
+        "systemData": {
+          "createdBy": "odkqcsvpyyjlcmiv",
+          "createdByType": "User",
+          "createdAt": "2024-10-18T07:47:46.738Z",
+          "lastModifiedBy": "hsvketwarcbjm",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-10-18T07:47:46.738Z"
+        }
+      }
+    }
+  }
+}

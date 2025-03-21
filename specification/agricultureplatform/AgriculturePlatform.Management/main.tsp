@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AgriculturePlatform")
@@ -276,7 +277,7 @@ op ArmResourceListActionSync<
 @doc("The list of available agri solutions.")
 model AvailableAgriSolutionListResult {
   @doc("Agri solutions list.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   solutions: DataManagerForAgricultureSolution[];
 }
 

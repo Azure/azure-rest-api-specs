@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2022-03-01-privatepreview",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "projectName": "{projectName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.Fidalgo/projects/{projectName}/environments/mydevenv",
+            "name": "mydevenv",
+            "type": "Microsoft.Fidalgo/projects/environments",
+            "properties": {
+              "description": "Personal Dev Environment 2",
+              "environmentType": "DevTest",
+              "catalogItemName": "helloworld",
+              "deploymentParameters": {},
+              "provisioningState": "Succeeded",
+              "resourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg028321",
+              "outputs": {
+                "endpoint": "mytestservice.azurewebsites.net"
+              }
+            },
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-11-18T18:00:36.993Z",
+              "lastModifiedBy": "user1",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+            },
+            "location": "centralus",
+            "tags": {
+              "Role": "Development",
+              "Tech": "NetCore",
+              "ProjectType": "WebApi"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

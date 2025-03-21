@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "communicationServiceName": "MyCommunicationResource",
+    "api-version": "2019-10-10-preview",
+    "parameters": {
+      "tags": {
+        "newTag": "newVal"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/CommunicationServices/MyCommunicationResource",
+        "name": "MyCommunicationResource",
+        "type": "Microsoft.Communication/CommunicationServices",
+        "location": "West US",
+        "tags": {
+          "newTag": "newVal"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "hostName": "mycommunicationresource.communications.azure.com",
+          "version": "0.2.0"
+        }
+      }
+    }
+  }
+}

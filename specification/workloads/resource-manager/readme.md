@@ -30,7 +30,6 @@ openapi-subtype: rpaas
 tag: package-2023-04
 ```
 
-
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
@@ -42,16 +41,33 @@ input-file:
   - Microsoft.Workloads/stable/2023-04-01/monitors.json
   - Microsoft.Workloads/stable/2023-04-01/operations.json
 ```
-### Tag: package-preview-2022-11
+### Tag: package-2022-11-01-preview
 
-These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2022-11'
+``` yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
   - Microsoft.Workloads/preview/2022-11-01-preview/SAPVirtualInstance.json
   - Microsoft.Workloads/preview/2022-11-01-preview/commonTypes.json
   - Microsoft.Workloads/preview/2022-11-01-preview/monitors.json
   - Microsoft.Workloads/preview/2022-11-01-preview/operations.json
+```
+
+### Tag: package-preview-2022-10-15-preview
+
+These settings apply only when `--tag=package-preview-2022-10-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-10-15-preview'
+input-file:
+  - Microsoft.Workloads/preview/2022-10-15-preview/SAPVirtualInstance.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/commonTypes.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/monitors.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/operations.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/phpWorkloads.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/skus.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/insights.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/connectors.json
+  - Microsoft.Workloads/preview/2022-10-15-preview/backupTypes.json
 ```
 
 ### Tag: package-2021-12-01-preview
@@ -78,7 +94,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

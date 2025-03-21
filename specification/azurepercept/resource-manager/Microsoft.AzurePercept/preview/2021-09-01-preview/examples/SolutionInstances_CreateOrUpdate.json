@@ -1,0 +1,159 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount",
+    "solutionInstanceName": "myNewSolutionInstanceName",
+    "solutionInstance": {
+      "properties": {
+        "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/targets/myTarget",
+        "solution": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/mySolution",
+        "description": "User provided SolutionInstance description",
+        "desiredStatus": {
+          "code": "Active"
+        },
+        "accounts": [
+          {
+            "kind": "ava",
+            "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.videoAnalyzers/my-ava-account"
+          },
+          {
+            "kind": "computervision",
+            "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.CognitiveServices/accounts/my-cv-account"
+          }
+        ],
+        "configurations": [
+          {
+            "operation": "add",
+            "componentName": "component1",
+            "value": {
+              "AVA.graphInstances": "{AVA graph instance}"
+            }
+          },
+          {
+            "operation": "override",
+            "componentName": "component2",
+            "value": {
+              "edgeAgent.properties.desired": {
+                "createOptions": "createOptions"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutionInstances/myNewSolutionInstanceName",
+        "name": "myNewSolutionInstanceName",
+        "type": "Microsoft.AzurePercept/accounts/solutioninstances",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/targets/myTarget",
+          "solution": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/mySolution",
+          "description": "User provided SolutionInstance description",
+          "reportedStatus": {
+            "code": "Active",
+            "message": "SolutionInstance is created and active."
+          },
+          "desiredStatus": {
+            "code": "Active"
+          },
+          "accounts": [
+            {
+              "kind": "ava",
+              "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.videoAnalyzers/my-ava-account"
+            },
+            {
+              "kind": "computervision",
+              "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.CognitiveServices/accounts/my-cv-account"
+            }
+          ],
+          "configurations": [
+            {
+              "operation": "add",
+              "componentName": "component1",
+              "value": {
+                "AVA.graphInstances": "{AVA graph instance}"
+              }
+            },
+            {
+              "operation": "override",
+              "componentName": "component2",
+              "value": {
+                "edgeAgent.properties.desired": {
+                  "createOptions": "createOptions"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutionInstances/myNewSolutionInstanceName",
+        "name": "myNewSolutionInstanceName",
+        "type": "Microsoft.AzurePercept/accounts/solutioninstances",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/targets/myTarget",
+          "solution": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/solutions/mySolution",
+          "description": "User provided SolutionInstance description",
+          "reportedStatus": {
+            "code": "Active",
+            "message": "SolutionInstance is created and active."
+          },
+          "desiredStatus": {
+            "code": "Active"
+          },
+          "accounts": [
+            {
+              "kind": "ava",
+              "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.videoAnalyzers/my-ava-account"
+            },
+            {
+              "kind": "computervision",
+              "accountResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.CognitiveServices/accounts/my-cv-account"
+            }
+          ],
+          "configurations": [
+            {
+              "operation": "add",
+              "componentName": "component1",
+              "value": {
+                "AVA.graphInstances": "{AVA graph instance}"
+              }
+            },
+            {
+              "operation": "override",
+              "componentName": "component2",
+              "value": {
+                "edgeAgent.properties.desired": {
+                  "createOptions": "createOptions"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

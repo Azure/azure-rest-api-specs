@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2024-07-15-preview",
+    "subscriptionId": "5a87dd7e-200a-4e94-8cd6-a9461de63755",
+    "resourceGroupName": "myResGroup",
+    "instanceName": "myInstance",
+    "linkedGrafanaInstanceName": "myLinkedGrafanaInstance"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/5a87dd7e-200a-4e94-8cd6-a9461de63755/resourceGroups/myResGroup/providers/Microsoft.Scom/managedInstances/myInstance/linkedGrafanaInstances/myLinkedGrafanaInstance",
+        "name": "myLinkedGrafanaInstance",
+        "type": "Microsoft.Scom/managedInstances/LinkedGrafanaInstances",
+        "properties": {
+          "managedGrafanaResourceId": "/subscriptions/amgsubid/resourceGroups/amgrg/providers/Microsoft.Dashboard/grafana/amgname1",
+          "grafanaEndpoint": "https://amgname1-hrcqg5hyfufxbkfj.weu.grafana.azure.com",
+          "dataSourceName": "scommidsname",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "foo@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2018-04-24T16:30:55+00:00",
+          "lastModifiedBy": "foo@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-04-24T16:30:55+00:00"
+        }
+      }
+    }
+  }
+}

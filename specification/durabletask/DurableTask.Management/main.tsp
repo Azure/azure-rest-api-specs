@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -18,6 +19,12 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("API Versions")
 enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2024-02-01-preview")
+  v2024_02_01_Preview: "2024-02-01-preview",
+
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -65,7 +72,7 @@ model SchedulerSku {
 
   @doc("Indicates whether the current SKU configuration is zone redundant")
   @visibility(Lifecycle.Read)
-  redundancyState?: RedundancyState;
+  redundancyState: RedundancyState;
 }
 
 @doc("A Task Hub resource belonging to the scheduler")
@@ -121,40 +128,7 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-@doc("The update request model for the Scheduler resource")
-model SchedulerUpdate
-  is UpdateableProperties<Azure.ResourceManager.TrackedResource<SchedulerPropertiesUpdate>>;
-
-@doc("The Scheduler resource properties to be updated")
-model SchedulerPropertiesUpdate {
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation")
-  provisioningState?: ProvisioningState;
-
-  @doc("URL of the durable task scheduler")
-  @visibility(Lifecycle.Read)
-  endpoint?: string;
-
-  @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
-  ipAllowlist?: string[];
-
-  @doc("SKU of the durable task scheduler")
-  sku?: SchedulerSkuUpdate;
-}
-
-@doc("The SKU (Stock Keeping Unit) properties to be updated")
-model SchedulerSkuUpdate {
-  @doc("The name of the SKU")
-  name?: string;
-
-  @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
-  capacity?: int32;
-
-  @doc("Indicates whether the current SKU configuration is zone redundant")
-  @visibility(Lifecycle.Read)
-  redundancyState?: RedundancyState;
-}
-
+@added(Versions.v2024_10_01_Preview)
 @armResourceOperations(Scheduler)
 interface Schedulers {
   @doc("Get a Scheduler")
@@ -165,7 +139,7 @@ interface Schedulers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   @doc("Update a Scheduler")
   @errorsDoc("Validation error: required parameters are missing")
-  update is ArmCustomPatchAsync<Scheduler, SchedulerUpdate>;
+  update is ArmResourcePatchAsync<Scheduler, SchedulerProperties>;
   @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
   @doc("List Schedulers by resource group")
@@ -174,6 +148,7 @@ interface Schedulers {
   listBySubscription is ArmListBySubscription<Scheduler>;
 }
 
+@added(Versions.v2024_10_01_Preview)
 @armResourceOperations(TaskHub)
 interface TaskHubs {
   @doc("Get a Task Hub")
@@ -186,4 +161,83 @@ interface TaskHubs {
   delete is ArmResourceDeleteWithoutOkAsync<TaskHub>;
   @doc("List Task Hubs")
   listByScheduler is ArmResourceListByParent<TaskHub>;
+}
+
+// resource specific to the previous version 2024-02-01-preview (Private Preview only to be deprecated and not made public)
+
+@doc("A Durable Task Scheduler namespace resource")
+@added(Versions.v2024_02_01_Preview)
+@removed(Versions.v2024_10_01_Preview)
+model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
+  ...ResourceNameParameter<
+    Scheduler,
+    "namespaceName",
+    "namespaces",
+    "^[a-zA-Z0-9-]{3,64}$"
+  >;
+}
+
+@doc("Details of the Namespace.")
+@added(Versions.v2024_02_01_Preview)
+@removed(Versions.v2024_10_01_Preview)
+model NamespaceProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+
+  @doc("URL of the durable task service")
+  @visibility(Lifecycle.Read)
+  url?: string;
+
+  @doc("URL of the durable task service dashboard")
+  @visibility(Lifecycle.Read)
+  dashboardUrl?: string;
+
+  @doc("IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR")
+  ipAllowlist?: string[];
+}
+
+@doc("A Task Hub resource belonging to the namespace")
+@removed(Versions.v2024_10_01_Preview)
+@renamedFrom(Versions.v2024_10_01_Preview, "TaskHub")
+@parentResource(Namespace)
+model TaskHubUnderNamespace
+  is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
+  ...ResourceNameParameter<
+    TaskHubUnderNamespace,
+    "taskHubName",
+    "taskHubs",
+    "^[a-zA-Z0-9-]{3,64}$"
+  >;
+}
+
+@removed(Versions.v2024_10_01_Preview)
+@armResourceOperations(Namespace)
+interface Namespaces {
+  @errorsDoc("Not found error: resource does not exist")
+  get is ArmResourceRead<Namespace>;
+  @errorsDoc("Validation error: required parameters are missing")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
+  @errorsDoc("Validation error: required parameters are missing")
+  update is ArmResourcePatchAsync<Namespace, NamespaceProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
+  listByResourceGroup is ArmResourceListByParent<Namespace>;
+  listBySubscription is ArmListBySubscription<Namespace>;
+}
+
+@removed(Versions.v2024_10_01_Preview)
+@renamedFrom(Versions.v2024_10_01_Preview, "TaskHubs")
+@armResourceOperations(TaskHubUnderNamespace)
+@tag("TaskHubs")
+interface TaskHubsUnderNamespace {
+  @doc("Get a Task Hub")
+  @errorsDoc("Not found error: resource does not exist")
+  get is ArmResourceRead<TaskHubUnderNamespace>;
+  @doc("Create or update a Task Hub")
+  @errorsDoc("Validation error: required parameters are missing")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHubUnderNamespace>;
+  @doc("Delete a Task Hub")
+  delete is ArmResourceDeleteSync<TaskHubUnderNamespace>;
+  @doc("List Task Hubs")
+  listByNamespace is ArmResourceListByParent<TaskHubUnderNamespace>;
 }

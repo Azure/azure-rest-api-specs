@@ -679,7 +679,7 @@ model ExtendedLocation {
 
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -690,7 +690,7 @@ model LogicalNetworkProperties {
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
   @doc("Subnet - list of subnets under the logical network")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   subnets?: Subnet[];
 
   @doc("Provisioning state of the logical network.")
@@ -735,7 +735,7 @@ model SubnetProperties {
   ipAllocationMethod?: IpAllocationMethodEnum;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   ipConfigurationReferences?: SubnetIpConfigurationReference[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
@@ -745,7 +745,7 @@ model SubnetProperties {
   routeTable?: RouteTable;
 
   @doc("network associated pool of IP Addresses")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   ipPools?: IPPool[];
 
   @doc("Vlan to use for the subnet")
@@ -766,7 +766,7 @@ model RouteTable {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  #suppress "deprecated" "LEGACY flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route table.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteTableProperties;
@@ -775,13 +775,13 @@ model RouteTable {
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
   @doc("Collection of routes contained within a route table.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   routes?: Route[];
 }
 
 @doc("Route - Route resource.")
 model Route {
-  #suppress "deprecated" "Legacy flattened property"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Properties of the route.")
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: RouteProperties;
@@ -914,7 +914,7 @@ model SecurityRuleProperties {
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   ipConfigurations?: IPConfiguration[];
 
   @doc("MacAddress - The MAC address of the network interface.")
@@ -940,6 +940,7 @@ model NetworkInterfaceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+#suppress "deprecated" "Legacy flattening"
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -980,6 +981,7 @@ model InterfaceDNSSettings {
   dnsServers?: string[];
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of network interfaces")
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
@@ -1001,6 +1003,7 @@ model NetworkInterfaceStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of logical networks")
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
@@ -1024,9 +1027,41 @@ model LogicalNetworkStatusProvisioningStatus {
 
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+
+  @added(Versions.v2024_10_01_preview)
+  @doc("Defines the resource properties for the update.")
+  properties?: LogicalNetworkUpdateProperties;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Properties under the logical network resource")
+model LogicalNetworkUpdateProperties {
+  @doc("Subnet - list of subnets under the logical network")
+  @Azure.ResourceManager.identifiers(#[])
+  subnets?: SubnetUpdate[];
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Subnet resource")
+model SubnetUpdate {
+  #suppress "deprecated" "Legacy flattening"
+  @doc("Properties of the subnet.")
+  @Azure.ClientGenerator.Core.flattenProperty
+  properties?: SubnetUpdateProperties;
+
+  @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
+  name?: string;
+}
+
+@added(Versions.v2024_10_01_preview)
+@doc("Properties of the subnet.")
+model SubnetUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 @doc("Properties under the marketplace gallery image resource")
@@ -1063,6 +1098,7 @@ model MarketplaceGalleryImageProperties {
   status?: MarketplaceGalleryImageStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of marketplace gallery images")
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
@@ -1099,14 +1135,14 @@ model MarketplaceGalleryImageStatusDownloadStatus {
 
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 
@@ -1127,7 +1163,7 @@ model NetworkInterfacesUpdateProperties {
 
 @doc("Tags object for patch operations.")
 model TagsObject {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
@@ -1146,6 +1182,7 @@ model StorageContainerProperties {
   status?: StorageContainerStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of storage containers")
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
@@ -1177,7 +1214,7 @@ model StorageContainerStatusProvisioningStatus {
 
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1232,6 +1269,7 @@ model VirtualHardDiskProperties {
   status?: VirtualHardDiskStatus;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual hard disks")
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
@@ -1274,8 +1312,6 @@ model VirtualHardDiskDownloadStatus {
 
   @added(Versions.v2024_10_01_preview)
   @doc("The progress of the operation in percentage")
-  @minValue(0)
-  @maxValue(100)
   progressPercentage?: int64;
 }
 
@@ -1291,8 +1327,6 @@ model VirtualHardDiskUploadStatus {
 
   @added(Versions.v2024_10_01_preview)
   @doc("The progress of the operation in percentage")
-  @minValue(0)
-  @maxValue(100)
   progressPercentage?: int64;
 
   @added(Versions.v2024_10_01_preview)
@@ -1306,7 +1340,7 @@ model VirtualHardDiskUploadStatus {
 
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 
@@ -1425,7 +1459,7 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
@@ -1515,7 +1549,7 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
   @doc("The list of SSH public keys used to authenticate with linux based VMs.")
-  @identifiers(#["path"])
+  @Azure.ResourceManager.identifiers(#["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -1642,7 +1676,7 @@ model VirtualMachineConfigAgentInstanceView {
   vmConfigAgentVersion?: string;
 
   @doc("The resource status information.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -1665,6 +1699,7 @@ model InstanceViewStatus {
   time?: utcDateTime;
 }
 
+#suppress "deprecated" "Legacy flattening"
 @doc("The observed state of virtual machine instances")
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")
@@ -1766,7 +1801,7 @@ model HardwareProfileUpdate {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "epicVirtualInstanceName": "X00",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "6d875e77-e412-4d7d-9af4-8895278b4443"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "wssServer",
+            "type": "Microsoft.Workloads/epicVirtualInstances/wssInstances",
+            "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/epicVirtualInstances/X00/wssInstances/wssServer",
+            "location": "westcentralus",
+            "properties": {
+              "errors": null,
+              "health": "Unknown",
+              "provisioningState": "Succeeded",
+              "status": "Running",
+              "vmDetails": [
+                {
+                  "role": "WBS",
+                  "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/cs-vm"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2021-08-19T15:10:46.196Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WssServerInstances_ListByEpicVirtualInstance",
+  "title": "WssInstances_List"
+}

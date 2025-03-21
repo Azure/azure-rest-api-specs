@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -102,7 +102,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CommunicationsGatewayListResult"
             }
@@ -193,7 +193,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CommunicationsGatewayListResult"
             }
@@ -243,7 +243,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CommunicationsGateway"
             }
@@ -368,7 +368,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CommunicationsGateway"
             }
@@ -418,19 +418,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -478,7 +478,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TestLineListResult"
             }
@@ -536,7 +536,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TestLine"
             }
@@ -677,7 +677,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/TestLine"
             }
@@ -735,19 +735,19 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -769,38 +769,34 @@
     }
   },
   "definitions": {
-    "ApiBridgeActivationState": {
-      "type": "string",
-      "description": "API Bridge activation state.",
-      "enum": [
-        "enabled",
-        "disabled"
-      ],
-      "x-ms-enum": {
-        "name": "ApiBridgeActivationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "enabled",
-            "value": "enabled",
-            "description": "API Bridge is enabled"
-          },
-          {
-            "name": "disabled",
-            "value": "disabled",
-            "description": "API Bridge is disabled"
-          }
-        ]
-      }
-    },
     "ApiBridgeProperties": {
       "type": "object",
       "description": "Configuration of the API Bridge.",
       "properties": {
         "configureApiBridge": {
-          "$ref": "#/definitions/ApiBridgeActivationState",
+          "type": "string",
           "description": "The activation state of the API Bridge for this Communications Gateway",
           "default": "disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApiBridgeActivationState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "enabled",
+                "value": "enabled",
+                "description": "API Bridge is enabled"
+              },
+              {
+                "name": "disabled",
+                "value": "disabled",
+                "description": "API Bridge is disabled"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "update",
@@ -829,42 +825,6 @@
         }
       }
     },
-    "AutoGeneratedDomainNameLabelScope": {
-      "type": "string",
-      "description": "Available auto-generated domain name scopes.",
-      "enum": [
-        "TenantReuse",
-        "SubscriptionReuse",
-        "ResourceGroupReuse",
-        "NoReuse"
-      ],
-      "x-ms-enum": {
-        "name": "AutoGeneratedDomainNameLabelScope",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "TenantReuse",
-            "value": "TenantReuse",
-            "description": "Generated domain name label depends on resource name and tenant ID."
-          },
-          {
-            "name": "SubscriptionReuse",
-            "value": "SubscriptionReuse",
-            "description": "Generated domain name label depends on resource name, tenant ID and subscription ID."
-          },
-          {
-            "name": "ResourceGroupReuse",
-            "value": "ResourceGroupReuse",
-            "description": "Generated domain name label depends on resource name, tenant ID, subscription ID and resource group name."
-          },
-          {
-            "name": "NoReuse",
-            "value": "NoReuse",
-            "description": "Generated domain name label is always unique."
-          }
-        ]
-      }
-    },
     "CheckNameAvailabilityReason": {
       "type": "string",
       "description": "Possible reasons for a name not being available.",
@@ -874,7 +834,19 @@
       ],
       "x-ms-enum": {
         "name": "CheckNameAvailabilityReason",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Name not available if the name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "Name not available if the name is already in use."
+          }
+        ]
       }
     },
     "CheckNameAvailabilityRequest": {
@@ -963,7 +935,7 @@
       "description": "Details of the CommunicationsGateway resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },
@@ -989,7 +961,7 @@
         },
         "connectivity": {
           "$ref": "#/definitions/Connectivity",
-          "description": "How to connect back to the operator network, e.g. MAPS",
+          "description": "How to connect back to the Operator Network, e.g. MAPS",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1039,9 +1011,41 @@
           ]
         },
         "autoGeneratedDomainNameLabelScope": {
-          "$ref": "#/definitions/AutoGeneratedDomainNameLabelScope",
+          "type": "string",
           "description": "The scope at which the auto-generated domain name can be re-used",
           "default": "TenantReuse",
+          "enum": [
+            "TenantReuse",
+            "SubscriptionReuse",
+            "ResourceGroupReuse",
+            "NoReuse"
+          ],
+          "x-ms-enum": {
+            "name": "AutoGeneratedDomainNameLabelScope",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TenantReuse",
+                "value": "TenantReuse",
+                "description": "Generated domain name label depends on resource name and tenant ID."
+              },
+              {
+                "name": "SubscriptionReuse",
+                "value": "SubscriptionReuse",
+                "description": "Generated domain name label depends on resource name, tenant ID and subscription ID."
+              },
+              {
+                "name": "ResourceGroupReuse",
+                "value": "ResourceGroupReuse",
+                "description": "Generated domain name label depends on resource name, tenant ID, subscription ID and resource group name."
+              },
+              {
+                "name": "NoReuse",
+                "value": "NoReuse",
+                "description": "Generated domain name label is always unique."
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -1193,7 +1197,7 @@
     },
     "Connectivity": {
       "type": "string",
-      "description": "How this deployment connects back to the operator network",
+      "description": "How this deployment connects back to the Operator Network",
       "enum": [
         "PublicAddress"
       ],
@@ -1204,7 +1208,7 @@
           {
             "name": "PublicAddress",
             "value": "PublicAddress",
-            "description": "This deployment connects to the operator network using a Public IP address, e.g. when using MAPS"
+            "description": "This deployment connects to the Operator Network using a Public IP address, e.g. when using MAPS"
           }
         ]
       }
@@ -1319,7 +1323,7 @@
       "properties": {
         "operatorAddresses": {
           "type": "array",
-          "description": "IP address to use to contact the operator network from this region",
+          "description": "IP address to use to contact the Operator Network from this region",
           "items": {
             "type": "string"
           },
@@ -1372,16 +1376,16 @@
         "operatorAddresses"
       ]
     },
-    "ProvisioningState": {
+    "ResourceProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource.",
+      "description": "The provisioning state of a resource type.",
       "enum": [
         "Succeeded",
         "Failed",
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ResourceProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -1547,7 +1551,7 @@
       "description": "Details of the TestLine resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },

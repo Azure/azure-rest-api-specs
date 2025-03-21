@@ -3,7 +3,7 @@
   "info": {
     "version": "2021-05-13-preview",
     "title": "ConfidentialLedger",
-    "description": "Microsoft Azure Confidential Compute Ledger Control Plane REST API version 2020-12-01-preview."
+    "description": "Microsoft Azure Confidential Compute Ledger Control Plane REST API version 2021-05-13-preview."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -412,7 +412,7 @@
     }
   },
   "definitions": {
-    "ResourceLocation": {
+    "Location": {
       "description": "Location of the ARM Resource",
       "type": "object",
       "properties": {
@@ -481,9 +481,6 @@
           "items": {
             "$ref": "#/definitions/ResourceProviderOperationDefinition"
           },
-          "x-ms-identifiers": [
-            "name"
-          ],
           "readOnly": true
         },
         "nextLink": {
@@ -581,7 +578,7 @@
       "description": "Cert based security principal with Ledger RoleName",
       "properties": {
         "cert": {
-          "description": "Public key of the user cert (.pem or .cer)",
+          "description": "Base64 encoded public key of the user cert (.pem or .cer)",
           "type": "string"
         },
         "ledgerRoleName": {
@@ -645,18 +642,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AADBasedSecurityPrincipal"
-          },
-          "x-ms-identifiers": [
-            "principalId"
-          ]
+          }
         },
         "certBasedSecurityPrincipals": {
           "description": "Array of all cert based Security Principals.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CertBasedSecurityPrincipal"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -668,7 +661,7 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "$ref": "#/definitions/ResourceLocation"
+          "$ref": "#/definitions/Location"
         },
         {
           "$ref": "#/definitions/Tags"

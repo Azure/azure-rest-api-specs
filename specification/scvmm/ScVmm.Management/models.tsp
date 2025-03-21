@@ -1,14 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/versioning";
-import "./main.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ScVmm;
@@ -35,7 +32,7 @@ model QueryForceDelete {
 }
 
 /** The provisioning state of the resource. */
-union ProvisioningState {
+union ResourceProvisioningState {
   string,
   Azure.ResourceManager.ResourceProvisioningState,
 
@@ -203,7 +200,7 @@ model VmmServerProperties {
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Credentials to connect to VmmServer. */
@@ -257,7 +254,7 @@ model CloudProperties {
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Cloud Capacity model */
@@ -312,7 +309,7 @@ model VirtualNetworkProperties {
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Defines the resource properties. */
@@ -380,17 +377,17 @@ model VirtualMachineTemplateProperties {
 
   /** Gets the network interfaces of the template. */
   @visibility(Lifecycle.Read)
-  @identifiers(#["name", "nicId"])
+  @Azure.ResourceManager.identifiers(#["name", "nicId"])
   networkInterfaces?: NetworkInterface[];
 
   /** Gets the disks of the template. */
   @visibility(Lifecycle.Read)
-  @identifiers(#["diskId", "name"])
+  @Azure.ResourceManager.identifiers(#["diskId", "name"])
   disks?: VirtualDisk[];
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Network Interface model */
@@ -513,7 +510,7 @@ model AvailabilitySetProperties {
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** The inventory type */
@@ -553,7 +550,7 @@ model InventoryItemProperties {
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Defines the resource properties. */
@@ -583,7 +580,7 @@ model VirtualMachineInstanceProperties {
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Virtual Machine Instance Properties Update model */
@@ -645,35 +642,26 @@ model OsProfileForVmInstance {
   osVersion?: string;
 
   /** Gets or sets the domain name. */
-  @added(Versions.v2024_06_01)
   domainName?: string;
 
   /** Gets or sets the domain username. */
-  @added(Versions.v2024_06_01)
   domainUsername?: string;
 
   /** Password of the domain the VM has to join. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
-  @added(Versions.v2024_06_01)
   domainPassword?: string;
 
   /** Gets or sets the workgroup. */
-  @added(Versions.v2024_06_01)
   workgroup?: string;
 
   /** Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx */
-  @visibility(Lifecycle.Create)
-  @secret
-  @added(Versions.v2024_06_01)
   productKey?: string;
 
   /** Gets or sets the index value of the timezone. */
-  @added(Versions.v2024_06_01)
   timezone?: int32;
 
   /** Get or sets the commands to be run once at the time of creation separated by semicolons. */
-  @added(Versions.v2024_06_01)
   runOnceCommands?: string;
 }
 
@@ -711,7 +699,7 @@ model HardwareProfileUpdate is UpdateableProperties<HardwareProfile>;
 /** Defines the resource properties. */
 model NetworkProfile {
   /** Gets or sets the list of network interfaces associated with the virtual machine. */
-  @identifiers(#["name", "nicId"])
+  @Azure.ResourceManager.identifiers(#["name", "nicId"])
   networkInterfaces?: NetworkInterface[];
 }
 
@@ -719,14 +707,14 @@ model NetworkProfile {
 model NetworkProfileUpdate
   is UpdateableProperties<OmitProperties<NetworkProfile, "networkInterfaces">> {
   /** Gets or sets the list of network interfaces associated with the virtual machine. */
-  @identifiers(#["name", "nicId"])
+  @Azure.ResourceManager.identifiers(#["name", "nicId"])
   networkInterfaces?: NetworkInterfaceUpdate[];
 }
 
 /** Defines the resource properties. */
 model StorageProfile {
   /** Gets or sets the list of virtual disks associated with the virtual machine. */
-  @identifiers(#["diskId", "name"])
+  @Azure.ResourceManager.identifiers(#["diskId", "name"])
   disks?: VirtualDisk[];
 }
 
@@ -734,7 +722,7 @@ model StorageProfile {
 model StorageProfileUpdate
   is UpdateableProperties<OmitProperties<StorageProfile, "disks">> {
   /** Gets or sets the list of virtual disks associated with the virtual machine. */
-  @identifiers(#["diskId", "name"])
+  @Azure.ResourceManager.identifiers(#["diskId", "name"])
   disks?: VirtualDiskUpdate[];
 }
 
@@ -781,7 +769,7 @@ model InfrastructureProfile {
   /** Checkpoints in the vm. */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Workaround for emitter problem"
   @visibility(Lifecycle.Read)
-  @identifiers(#["checkpointID"])
+  @Azure.ResourceManager.identifiers(#["checkpointID"])
   checkpoints?: Checkpoint[];
 
   /** Type of checkpoint supported for the vm. */
@@ -834,7 +822,7 @@ model VmInstanceHybridIdentityMetadataProperties {
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
 /** Defines the create checkpoint action properties. */
@@ -883,10 +871,9 @@ model GuestAgentProperties {
 
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 
   /** The resource id of the private link scope this machine is assigned to, if any. */
-  @added(Versions.v2024_06_01)
   privateLinkScopeResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.HybridCompute/privateLinkScopes";

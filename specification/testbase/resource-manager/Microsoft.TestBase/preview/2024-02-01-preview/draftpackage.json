@@ -1,0 +1,1390 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Test Base",
+    "description": "Use these REST APIs for performing operations on Test Base Draft Packages, which are used to facilitate the creation and update of Test Base Package.",
+    "version": "2024-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/draftPackages": {
+      "get": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_ListByTestBaseAccount",
+        "description": "Lists all the draft packages under a test base account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageNameQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageEditPackageParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed.",
+            "schema": {
+              "$ref": "#/definitions/DraftPackageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DraftPackagesList": {
+            "$ref": "./examples/DraftPackagesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/draftPackages/{draftPackageName}": {
+      "put": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_Create",
+        "description": "Creates or replaces a Test Base Draft Package.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DraftPackageResource"
+            },
+            "description": "Parameters supplied to create a Test Base Draft Package."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Draft Package was successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/DraftPackageResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageCreate": {
+            "$ref": "./examples/DraftPackageCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_Update",
+        "description": "Updates an existing Test Base Draft Package.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DraftPackageUpdateParameters"
+            },
+            "description": "Parameters supplied to update a Test Base Draft Package."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing Test Base Draft Package was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/DraftPackageResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageUpdate": {
+            "$ref": "./examples/DraftPackageUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_Delete",
+        "description": "Deletes a Test Base Draft Package.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Draft Package 'delete' operation was completed successfully."
+          },
+          "204": {
+            "description": "The Test Base Draft Package 'delete' operation was completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageDelete": {
+            "$ref": "./examples/DraftPackageDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_Get",
+        "description": "Gets a Test Base Draft Package.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Test Base Draft Package was successfully found.",
+            "schema": {
+              "$ref": "#/definitions/DraftPackageResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageGet": {
+            "$ref": "./examples/DraftPackageGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/draftPackages/{draftPackageName}/getPath": {
+      "post": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_GetPath",
+        "description": "Gets draft package path and temp working path with SAS.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The paths with access token is returned.",
+            "schema": {
+              "$ref": "#/definitions/DraftPackageGetPathResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageGetPath": {
+            "$ref": "./examples/DraftPackageGetPath.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/draftPackages/{draftPackageName}/copyFromPackage": {
+      "post": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_CopyFromPackage",
+        "description": "Copy package file and metadata from a package to this draft package",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyFromPackageOperationParameters"
+            },
+            "description": "Parameters supplied to the Test Base Draft Package CopyFromPackage operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The operation was accepted. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "The files and metadata are copied from the package successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageCopyFromPackage": {
+            "$ref": "./examples/DraftPackageCopyFromPackage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/draftPackages/{draftPackageName}/extractFile": {
+      "post": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_ExtractFile",
+        "description": "Performs extracting file operation for a Test Base Draft Package",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtractFileOperationParameters"
+            },
+            "description": "Parameters supplied to the Test Base Draft Package ExtractFile operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The 'ExtractFile' operation of Draft Package was accepted. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "The 'ExtractFile' operation of Draft Package is completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageExtractFile": {
+            "$ref": "./examples/DraftPackageExtractFile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/draftPackages/{draftPackageName}/generateFoldersAndScripts": {
+      "post": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_GenerateFoldersAndScripts",
+        "description": "Generates folders and scripts",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateOperationParameters"
+            },
+            "description": "Parameters supplied to the Test Base Draft Package Generate operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The 'Generate' operation of Draft Package was accepted. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "The folder and package files are generated successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageGenerate": {
+            "$ref": "./examples/DraftPackageGenerateFoldersAndScripts.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TestBase/testBaseAccounts/{testBaseAccountName}/draftPackages/{draftPackageName}/suggestPaths": {
+      "post": {
+        "tags": [
+          "Test Base Draft Package"
+        ],
+        "operationId": "DraftPackages_SuggestPaths",
+        "description": "Suggest paths for a draft package",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./testbase.json#/parameters/TestBaseAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DraftPackageNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SuggestPathsOperationParameters"
+            },
+            "description": "Parameters supplied to the Test Base Draft Package suggest paths operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The suggest path operation of Draft Package was accepted. Follow the Location header to poll for final outcome.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "The paths are suggested successfully.",
+            "schema": {
+              "$ref": "#/definitions/DraftPackageSuggestPathsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DraftPackageSuggestPaths": {
+            "$ref": "./examples/DraftPackageSuggestPaths.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DraftPackageListResult": {
+      "description": "A list of Test Base Draft Packages.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DraftPackageResource"
+          },
+          "description": "The list of Test Base Draft Packages."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of results."
+        }
+      }
+    },
+    "DraftPackageResource": {
+      "description": "The Test Base Draft Package resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DraftPackageProperties",
+          "x-ms-client-flatten": true,
+          "description": "Test Base Draft Package properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DraftPackageProperties": {
+      "description": "The properties of the Test Base Draft Package.",
+      "type": "object",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "Application name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Application version"
+        },
+        "draftPackagePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The relative path of the folder hosting package files."
+        },
+        "workingPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The relative path for a temporarily folder for package creation work."
+        },
+        "appFileName": {
+          "type": "string",
+          "description": "The name of the app file."
+        },
+        "sourceType": {
+          "$ref": "#/definitions/DraftPackageSourceType",
+          "description": "The source type.",
+          "default": "Native"
+        },
+        "useSample": {
+          "type": "boolean",
+          "description": "Specifies whether a sample package should be used instead of the one uploaded by the user."
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments added by user."
+        },
+        "intuneMetadata": {
+          "type": "object",
+          "$ref": "#/definitions/DraftPackageIntuneAppMetadata",
+          "description": "Metadata used to generate draft package folder and scripts."
+        },
+        "highlightedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HighlightedFile"
+          },
+          "x-ms-identifiers": [],
+          "description": "The highlight files in the package."
+        },
+        "packageTags": {
+          "description": "Tags of the package to be created.",
+          "$ref": "./testbase.json#/definitions/Tags"
+        },
+        "editPackage": {
+          "type": "boolean",
+          "description": "Specifies whether this draft package is used to edit a package.",
+          "default": false
+        },
+        "packageId": {
+          "type": "string",
+          "description": "Specifies the package id from which the draft package copied."
+        },
+        "useAutofill": {
+          "type": "boolean",
+          "description": "Indicates whether user choose to enable script auto-fill."
+        },
+        "executableLaunchCommand": {
+          "type": "string",
+          "description": "The executable launch command for script auto-fill. Will be used to run the application."
+        },
+        "processName": {
+          "type": "string",
+          "description": "The process name for script auto-fill. Will be used to identify the application process."
+        },
+        "tabState": {
+          "type": "object",
+          "$ref": "#/definitions/TabState",
+          "description": "Tab state."
+        },
+        "testTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "./testbase.json#/definitions/TestType"
+          },
+          "description": "OOB, functional or flow driven. Mapped to the data in 'tests' property."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "./testbase.json#/definitions/ProvisioningState"
+        },
+        "targetOSList": {
+          "type": "array",
+          "items": {
+            "$ref": "./testbase.json#/definitions/TargetOSInfo"
+          },
+          "x-ms-identifiers": [],
+          "description": "Specifies the target OSs of specific OS Update types."
+        },
+        "inplaceUpgradeOSPair": {
+          "$ref": "./testbase.json#/definitions/InplaceUpgradeOSInfo",
+          "description": "Specifies the baseline os and target os for inplace upgrade."
+        },
+        "lastModifiedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp when the package was last modified."
+        },
+        "flightingRing": {
+          "type": "string",
+          "description": "The flighting ring for feature update."
+        },
+        "firstPartyApps": {
+          "description": "The list of first party applications to test along with user application.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "./testbase.json#/definitions/FirstPartyAppDefinition"
+          }
+        },
+        "galleryApps": {
+          "description": "The list of gallery apps to test along with user application.",
+          "type": "array",
+          "x-ms-identifiers": [
+            "skuId"
+          ],
+          "items": {
+            "$ref": "./testbase.json#/definitions/GalleryAppDefinition"
+          }
+        },
+        "tests": {
+          "type": "array",
+          "items": {
+            "$ref": "./testbase.json#/definitions/Test"
+          },
+          "x-ms-identifiers": [],
+          "description": "The detailed test information."
+        },
+        "intuneEnrollmentMetadata": {
+          "description": "The metadata of Intune enrollment.",
+          "$ref": "./testbase.json#/definitions/IntuneEnrollmentMetadata"
+        },
+        "suggestedPaths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuggestedPathList"
+          },
+          "x-ms-identifiers": [
+            "pathType"
+          ],
+          "description": "The suggested paths of the draft package."
+        }
+      }
+    },
+    "DraftPackageUpdateParameters": {
+      "description": "Parameters supplied to update a Test Base Draft Package.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DraftPackageUpdateParameterProperties",
+          "x-ms-client-flatten": true,
+          "description": "Test Base Draft Package update parameters."
+        }
+      }
+    },
+    "DraftPackageUpdateParameterProperties": {
+      "description": "The properties of draft package update parameters.",
+      "type": "object",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "Application name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Application version"
+        },
+        "appFileName": {
+          "type": "string",
+          "description": "The name of the app file."
+        },
+        "sourceType": {
+          "$ref": "#/definitions/DraftPackageSourceType",
+          "description": "The source type.",
+          "default": "Native"
+        },
+        "useSample": {
+          "type": "boolean",
+          "description": "Specifies whether a sample package should be used instead of the one uploaded by the user."
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments added by user."
+        },
+        "intuneMetadata": {
+          "type": "object",
+          "$ref": "#/definitions/DraftPackageIntuneAppMetadata",
+          "description": "Metadata used to generate draft package folder and scripts."
+        },
+        "highlightedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HighlightedFile"
+          },
+          "x-ms-identifiers": [],
+          "description": "The highlight files in the package."
+        },
+        "packageTags": {
+          "description": "Tags of the package to be created.",
+          "$ref": "./testbase.json#/definitions/Tags"
+        },
+        "packageId": {
+          "type": "string",
+          "description": "Specifies the package id from which the draft package copied."
+        },
+        "useAutofill": {
+          "type": "boolean",
+          "description": "Indicates whether user choose to enable script auto-fill."
+        },
+        "executableLaunchCommand": {
+          "type": "string",
+          "description": "The executable launch command for script auto-fill. Will be used to run the application."
+        },
+        "processName": {
+          "type": "string",
+          "description": "The process name for script auto-fill. Will be used to identify the application process."
+        },
+        "tabState": {
+          "type": "object",
+          "$ref": "#/definitions/TabState",
+          "description": "Tab state."
+        },
+        "testTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "./testbase.json#/definitions/TestType"
+          },
+          "description": "OOB, functional or flow driven. Mapped to the data in 'tests' property."
+        },
+        "targetOSList": {
+          "type": "array",
+          "items": {
+            "$ref": "./testbase.json#/definitions/TargetOSInfo"
+          },
+          "x-ms-identifiers": [],
+          "description": "Specifies the target OSs of specific OS Update types."
+        },
+        "inplaceUpgradeOSPair": {
+          "$ref": "./testbase.json#/definitions/InplaceUpgradeOSInfo",
+          "description": "Specifies the baseline os and target os for in-place upgrade."
+        },
+        "flightingRing": {
+          "type": "string",
+          "description": "The flighting ring for feature update."
+        },
+        "firstPartyApps": {
+          "description": "Specifies the list of first party applications to test along with user application.",
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "./testbase.json#/definitions/FirstPartyAppDefinition"
+          }
+        },
+        "galleryApps": {
+          "description": "The list of gallery apps to test along with user application.",
+          "type": "array",
+          "items": {
+            "$ref": "./testbase.json#/definitions/GalleryAppDefinition"
+          },
+          "x-ms-identifiers": [
+            "skuId"
+          ]
+        },
+        "tests": {
+          "type": "array",
+          "items": {
+            "$ref": "./testbase.json#/definitions/Test"
+          },
+          "x-ms-identifiers": [],
+          "description": "The detailed test information."
+        },
+        "intuneEnrollmentMetadata": {
+          "description": "The metadata of Intune enrollment.",
+          "$ref": "./testbase.json#/definitions/IntuneEnrollmentMetadata"
+        },
+        "suggestedPaths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuggestedPathList"
+          },
+          "x-ms-identifiers": [
+            "pathType"
+          ],
+          "description": "The suggested paths of the draft package."
+        }
+      }
+    },
+    "PathSuggestionDraftPackageProperties": {
+      "description": "The properties of the draft package to direct path suggestion.",
+      "type": "object",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "Application name"
+        },
+        "version": {
+          "type": "string",
+          "description": "Application version"
+        },
+        "appFileName": {
+          "type": "string",
+          "description": "The name of the app file."
+        },
+        "sourceType": {
+          "$ref": "#/definitions/DraftPackageSourceType",
+          "description": "The source type.",
+          "default": "Native"
+        },
+        "useSample": {
+          "type": "boolean",
+          "description": "Specifies whether a sample package should be used instead of the one uploaded by the user."
+        },
+        "intuneMetadata": {
+          "type": "object",
+          "$ref": "#/definitions/DraftPackageIntuneAppMetadata",
+          "description": "Metadata used to generate draft package folder and scripts."
+        },
+        "galleryApps": {
+          "description": "The list of gallery apps to test along with user application.",
+          "type": "array",
+          "items": {
+            "$ref": "./testbase.json#/definitions/GalleryAppDefinition"
+          },
+          "x-ms-identifiers": [
+            "skuId"
+          ]
+        }
+      },
+      "required": [
+        "sourceType"
+      ]
+    },
+    "DraftPackageSourceType": {
+      "type": "string",
+      "description": "The source type.",
+      "enum": [
+        "Native",
+        "IntuneWin",
+        "TestBasePackage",
+        "GalleryApp",
+        "IntuneEnrollment"
+      ],
+      "x-ms-enum": {
+        "name": "draftPackageSourceType",
+        "modelAsString": true
+      }
+    },
+    "DraftPackageIntuneAppMetadata": {
+      "description": "The metadata of Intune app(s) used for generation.",
+      "type": "object",
+      "properties": {
+        "intuneApp": {
+          "description": "The Metadata of the Intune App through intunewin file uploading.",
+          "$ref": "#/definitions/DraftPackageIntuneAppMetadataItem"
+        },
+        "intuneAppDependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DraftPackageIntuneAppMetadataItem"
+          },
+          "x-ms-identifiers": [],
+          "description": "The Metadata of dependencies of the Intune App through intunewin file uploading."
+        }
+      }
+    },
+    "DraftPackageIntuneAppMetadataItem": {
+      "description": "The Metadata of a single Intune App.",
+      "type": "object",
+      "properties": {
+        "appName": {
+          "type": "string",
+          "description": "Intune app name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Intune app version."
+        },
+        "appId": {
+          "type": "string",
+          "description": "Intune app id."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Publisher of the app."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the app."
+        },
+        "owner": {
+          "type": "string",
+          "description": "Owner of the app."
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation date of the app."
+        },
+        "dependentAppCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of dependency apps."
+        },
+        "installCommand": {
+          "type": "string",
+          "description": "Install command."
+        },
+        "uninstallCommand": {
+          "type": "string",
+          "description": "Uninstall command."
+        },
+        "lastProcessed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "last processed time tickets."
+        },
+        "dependencyIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Ids of dependency apps."
+        },
+        "setupFile": {
+          "type": "string",
+          "description": "Setup file path."
+        },
+        "minimumSupportedOS": {
+          "type": "string",
+          "description": "Minimum supported OS. The OS version must be greater than this version to run this app."
+        },
+        "status": {
+          "enum": [
+            "Ready",
+            "Uploading",
+            "UploadFailed",
+            "ExtractFailed",
+            "NoDependencyApp"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "intuneExtractStatus",
+            "modelAsString": true
+          },
+          "description": "Extract status."
+        },
+        "expectedExitCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Expected exit codes returned from Intune App."
+        }
+      }
+    },
+    "HighlightedFile": {
+      "description": "The information of a highlighted file that user should pay attention to.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the highlighted file."
+        },
+        "visited": {
+          "type": "boolean",
+          "description": "A flag to save whether this file is viewed by user.",
+          "default": false
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The name of sections to highlight."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "Tabs": {
+      "description": "Specifies the tabs when creating / cloning / editing a package.",
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "BasicsTab",
+        "ConfigureTestTab",
+        "EditPackageTab",
+        "TestMatrixTab",
+        "TagsTab",
+        "ReviewAndCreateTab"
+      ],
+      "x-ms-enum": {
+        "name": "packageStudioTabs",
+        "modelAsString": true
+      }
+    },
+    "TabState": {
+      "description": "Specifies current state of tabs.",
+      "type": "object",
+      "properties": {
+        "currentTab": {
+          "description": "Current tab.",
+          "$ref": "#/definitions/Tabs"
+        },
+        "visitedTabs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tabs"
+          },
+          "description": "visited tabs."
+        }
+      }
+    },
+    "DraftPackageGetPathResponse": {
+      "description": "The response of getting a download URL.",
+      "type": "object",
+      "properties": {
+        "baseUrl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The base URL of the storage account."
+        },
+        "draftPackagePath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The relative path of the folder hosting package files."
+        },
+        "workingPath": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The relative path for a temporary folder for package creation work."
+        },
+        "sasToken": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true,
+          "description": "A SAS token for the storage account to access workspace."
+        },
+        "expirationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Expiry date of the SAS token."
+        }
+      }
+    },
+    "ExtractFileOperationParameters": {
+      "description": "Parameters body to pass to extract file operation of Draft Package.",
+      "type": "object",
+      "properties": {
+        "fileType": {
+          "$ref": "#/definitions/ExtractFileType",
+          "description": "The type of file to extract.",
+          "default": "IntuneWinPackage"
+        },
+        "sourceFile": {
+          "description": "Relative path of the file to be extracted, the path must under working path of this draft package.",
+          "type": "string"
+        },
+        "intuneAppId": {
+          "description": "Intune application id.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sourceFile"
+      ]
+    },
+    "ExtractFileType": {
+      "type": "string",
+      "description": "The type of file to extract.",
+      "enum": [
+        "TestBasePackage",
+        "IntuneWinPackage"
+      ],
+      "x-ms-enum": {
+        "name": "extractFileType",
+        "modelAsString": true
+      }
+    },
+    "GenerateOperationParameters": {
+      "description": "Parameters body to pass to generate operation of Draft Package.",
+      "type": "object",
+      "properties": {
+        "forceGenerate": {
+          "type": "boolean",
+          "description": "Force to generate package files even if no metadata changed.",
+          "default": false
+        }
+      }
+    },
+    "CopyFromPackageOperationParameters": {
+      "description": "Parameters body to pass to copy-from-package operation of Draft Package.",
+      "type": "object",
+      "properties": {
+        "packageId": {
+          "description": "The id of the package to copy from.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "packageId"
+      ]
+    },
+    "PathType": {
+      "type": "string",
+      "description": "The type of path to be used in a package.",
+      "enum": [
+        "Launch"
+      ],
+      "x-ms-enum": {
+        "name": "pathType",
+        "modelAsString": true
+      }
+    },
+    "SuggestPathsOperationParameters": {
+      "description": "Parameters body to pass to suggest paths operation of Draft Package.",
+      "type": "object",
+      "properties": {
+        "pathType": {
+          "$ref": "#/definitions/PathType"
+        },
+        "draftPackageProperties": {
+          "type": "object",
+          "$ref": "#/definitions/PathSuggestionDraftPackageProperties"
+        }
+      },
+      "required": [
+        "pathType"
+      ]
+    },
+    "DraftPackageSuggestPathsResponse": {
+      "description": "The response of suggest paths operation of Draft Package.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DraftPackageSuggestPathsResponseProperties",
+          "description": "The properties for the suggest path operation."
+        }
+      }
+    },
+    "DraftPackageSuggestPathsResponseProperties": {
+      "description": "The properties for the suggest path operation.",
+      "type": "object",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuggestedPath"
+          },
+          "x-ms-identifiers": [
+            "path"
+          ],
+          "description": "The suggested paths."
+        }
+      },
+      "required": [
+        "paths"
+      ]
+    },
+    "SuggestedPath": {
+      "description": "The suggested path.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The suggested path."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "Indicates whether the suggested path is a file path or a command.",
+          "enum": [
+            "FilePath",
+            "Command"
+          ],
+          "x-ms-enum": {
+            "name": "contentType",
+            "modelAsString": true
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the suggested path, normally the shortcut name."
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "URL to the icon of the suggested path."
+        }
+      },
+      "required": [
+        "path",
+        "contentType"
+      ]
+    },
+    "SuggestedPathList": {
+      "description": "The list of suggested paths for a specific path type.",
+      "type": "object",
+      "properties": {
+        "pathType": {
+          "$ref": "#/definitions/PathType",
+          "description": "The type of path."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DraftPackageSuggestPathsResponseProperties"
+        }
+      ],
+      "required": [
+        "pathType",
+        "paths"
+      ]
+    }
+  },
+  "parameters": {
+    "DraftPackageNameParameter": {
+      "name": "draftPackageName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The resource name of the Test Base Draft Package.",
+      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
+    },
+    "PackageNameQueryParameter": {
+      "name": "packageName",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Parameter used to filter draft packages by linked Test Base Package."
+    },
+    "DraftPackageEditPackageParameter": {
+      "name": "editPackage",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "description": "Parameter used to filter draft packages by editPackage property."
+    }
+  }
+}

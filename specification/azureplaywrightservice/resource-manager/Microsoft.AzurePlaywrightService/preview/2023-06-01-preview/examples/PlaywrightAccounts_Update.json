@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "playwrightAccountName": "myPlaywrightAccount",
+    "PlaywrightAccountResourcePatch": {
+      "tags": {
+        "Team": "Dev Exp",
+        "Division": "LT"
+      },
+      "properties": {
+        "description": "This is new playwright account resource"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus",
+        "properties": {
+          "description": "This is new playwright account resource",
+          "provisioningState": "Succeeded",
+          "regionalAffinity": "Enabled",
+          "dashboardURI": "https://myPlaywrightAccount.00000000-0000-0000-0000-000000000000.domain.com"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.AzurePlaywrightService/accounts/myPlaywrightAccount",
+        "name": "myPlaywrightAccount",
+        "type": "Microsoft.AzurePlaywrightService/accounts",
+        "tags": {
+          "Team": "Dev Exp",
+          "Division": "LT"
+        },
+        "systemData": {
+          "createdBy": "userId1001",
+          "createdByType": "User",
+          "createdAt": "2021-09-28T12:32:33Z",
+          "lastModifiedBy": "userId1001",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-09-28T12:32:33Z"
+        }
+      }
+    }
+  }
+}

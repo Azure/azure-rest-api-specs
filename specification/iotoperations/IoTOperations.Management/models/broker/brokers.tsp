@@ -145,6 +145,9 @@ model Traces {
   @doc("The toggle to enable/disable traces.")
   mode?: OperationalMode = OperationalMode.Enabled;
 
+  @doc("The open telemetry export configuration.")
+  opentelemetryExportConfig?: OpenTelemetryExportConfig;
+
   @doc("The cache size in megabytes.")
   @minValue(1)
   @maxValue(128)

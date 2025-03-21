@@ -92,7 +92,7 @@ model AwsNetworkFirewallFirewallPolicyProperties {
   firewallPolicyName?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 }
 
@@ -112,11 +112,11 @@ model FirewallPolicy {
   statefulEngineOptions?: StatefulEngineOptions;
 
   @doc("Property statefulRuleGroupReferences")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   statefulRuleGroupReferences?: StatefulRuleGroupReference[];
 
   @doc("Property statelessCustomActions")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   statelessCustomActions?: CustomAction[];
 
   @doc("Property statelessDefaultActions")
@@ -126,7 +126,7 @@ model FirewallPolicy {
   statelessFragmentDefaultActions?: string[];
 
   @doc("Property statelessRuleGroupReferences")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   statelessRuleGroupReferences?: StatelessRuleGroupReference[];
 
   @doc("A resource ARN.")
@@ -282,7 +282,7 @@ model ActionDefinition {
 @doc("Definition of PublishMetricAction")
 model PublishMetricAction {
   @doc("Property dimensions")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   dimensions?: Dimension[];
 }
 

@@ -1,0 +1,224 @@
+{
+  "title": "InstanceHealthDefinitions_Create",
+  "operationId": "InstanceHealthDefinitions_Create",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "BE81F0B2-B730-4978-96C8-296DA9532473",
+    "resourceGroupName": "rgobservability",
+    "instanceHealthDefinitionName": "prod-system-hd",
+    "resource": {
+      "properties": {
+        "workloadKind": "SAP",
+        "compatibleArchitectures": [
+          "Rise-NoDBSolutions"
+        ],
+        "componentHealthDefinitions": [
+          {
+            "type": "webdispatcher",
+            "role": "default",
+            "dependenciesSignalDefinition": {
+              "aggregationType": "Threshold",
+              "degradedThreshold": "40%",
+              "unhealthyThreshold": "90%"
+            },
+            "resourceSignalDefinitionMappings": [
+              {
+                "condition": {
+                  "resourceType": "Microsoft.Compute/virtualMachines"
+                },
+                "signalDefinitionIds": [
+                  "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "application",
+            "role": "default",
+            "dependenciesSignalDefinition": {
+              "aggregationType": "Threshold",
+              "degradedThreshold": "50%",
+              "unhealthyThreshold": "100%"
+            },
+            "resourceSignalDefinitionMappings": [
+              {
+                "condition": {
+                  "resourceType": "Microsoft.Compute/virtualMachines"
+                },
+                "signalDefinitionIds": [
+                  "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-1",
+                  "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "tags": {
+        "key5393": "fvyuusaodcglykxs"
+      },
+      "location": "East US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "version": "1.0",
+          "workloadKind": "SAP",
+          "compatibleArchitectures": [
+            "Rise-NoDBSolutions"
+          ],
+          "componentHealthDefinitions": [
+            {
+              "type": "webdispatcher",
+              "role": "default",
+              "dependenciesSignalDefinition": {
+                "aggregationType": "Threshold",
+                "degradedThreshold": "40%",
+                "unhealthyThreshold": "90%"
+              },
+              "resourceSignalDefinitionMappings": [
+                {
+                  "condition": {
+                    "resourceType": "Microsoft.Compute/virtualMachines"
+                  },
+                  "signalDefinitionIds": [
+                    "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-1"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "application",
+              "role": "default",
+              "dependenciesSignalDefinition": {
+                "aggregationType": "Threshold",
+                "degradedThreshold": "50%",
+                "unhealthyThreshold": "100%"
+              },
+              "resourceSignalDefinitionMappings": [
+                {
+                  "condition": {
+                    "resourceType": "Microsoft.Compute/virtualMachines"
+                  },
+                  "signalDefinitionIds": [
+                    "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-1",
+                    "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-2"
+                  ]
+                }
+              ]
+            }
+          ],
+          "commonSignalDefinitionMappings": [
+            {
+              "condition": {
+                "resourceType": "Microsoft.Compute/virtualMachines"
+              },
+              "signalDefinitionIds": [
+                "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-0"
+              ]
+            }
+          ]
+        },
+        "tags": {
+          "key5393": "fvyuusaodcglykxs"
+        },
+        "location": "East US",
+        "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd",
+        "name": "prod-system-hd",
+        "type": "Microsoft.Workloads/instanceHealthDefinitions",
+        "systemData": {
+          "createdBy": "nmpkfzbnpi",
+          "createdByType": "User",
+          "createdAt": "2024-11-25T12:50:45.659Z",
+          "lastModifiedBy": "sqbfzxgnpjgpphjkygoup",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-25T12:50:45.659Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "version": "1.0",
+          "workloadKind": "SAP",
+          "compatibleArchitectures": [
+            "Rise-NoDBSolutions"
+          ],
+          "componentHealthDefinitions": [
+            {
+              "type": "webdispatcher",
+              "role": "default",
+              "dependenciesSignalDefinition": {
+                "aggregationType": "Threshold",
+                "degradedThreshold": "40%",
+                "unhealthyThreshold": "90%"
+              },
+              "resourceSignalDefinitionMappings": [
+                {
+                  "condition": {
+                    "resourceType": "Microsoft.Compute/virtualMachines"
+                  },
+                  "signalDefinitionIds": [
+                    "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-1"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "application",
+              "role": "default",
+              "dependenciesSignalDefinition": {
+                "aggregationType": "Threshold",
+                "degradedThreshold": "50%",
+                "unhealthyThreshold": "100%"
+              },
+              "resourceSignalDefinitionMappings": [
+                {
+                  "condition": {
+                    "resourceType": "Microsoft.Compute/virtualMachines"
+                  },
+                  "signalDefinitionIds": [
+                    "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-1",
+                    "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-2"
+                  ]
+                }
+              ]
+            }
+          ],
+          "commonSignalDefinitionMappings": [
+            {
+              "condition": {
+                "resourceType": "Microsoft.Compute/virtualMachines"
+              },
+              "signalDefinitionIds": [
+                "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd/signalDefinitions/vm-sd-0"
+              ]
+            }
+          ]
+        },
+        "tags": {
+          "key5393": "fvyuusaodcglykxs"
+        },
+        "location": "East US",
+        "id": "/subscriptions/BE81F0B2-B730-4978-96C8-296DA9532473/resourceGroups/rgobservability/providers/Microsoft.Workloads/instanceHealthDefinitions/prod-system-hd",
+        "name": "prod-system-hd",
+        "type": "Microsoft.Workloads/instanceHealthDefinitions",
+        "systemData": {
+          "createdBy": "nmpkfzbnpi",
+          "createdByType": "User",
+          "createdAt": "2024-11-25T12:50:45.659Z",
+          "lastModifiedBy": "sqbfzxgnpjgpphjkygoup",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-11-25T12:50:45.659Z"
+        }
+      }
+    }
+  }
+}

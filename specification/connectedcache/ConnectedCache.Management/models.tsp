@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 namespace Microsoft.ConnectedCache;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -121,6 +123,7 @@ union CycleType {
   Fast: "Fast",
 }
 
+@removed(Versions.v2024_11_30_preview)
 @doc("Model representing Cache Node for ConnectedCache resource")
 model CacheNodeOldResponse {
   @doc("The provisioned state of the resource")
@@ -145,6 +148,7 @@ model CacheNodeOldResponse {
 }
 
 @doc("Mcc PATCH operation properties.")
+@Azure.ClientGenerator.Core.clientName("ConnectedCachePatchContent", "csharp")
 model ConnectedCachePatchResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
@@ -253,6 +257,7 @@ model CustomerEntity {
 model AdditionalCustomerProperties {
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2024_11_30_preview)
   peeringDbLastUpdateTime?: utcDateTime;
 
   @doc("Customer resource cache efficiency.")
@@ -313,6 +318,10 @@ model AdditionalCustomerProperties {
 
   @doc("Customer resource last PeeringDB update timestamp.")
   @visibility(Lifecycle.Read)
+  @Azure.ClientGenerator.Core.clientName(
+    "peeringDbLastUpdateDateValue",
+    "csharp"
+  )
   peeringDbLastUpdateDate?: utcDateTime;
 
   @doc("Customer resource owner organization name.")
@@ -576,12 +585,12 @@ model CacheNodeEntity {
   autoUpdateRingType?: autoUpdateRingType;
 
   @doc("Customer requested week of month for mcc install of auto update cycle")
-  @minValue(1)
+  @minValue(0)
   @maxValue(5)
   autoUpdateRequestedWeek?: int32;
 
   @doc("Customer requested day of week for mcc install of auto update cycle")
-  @minValue(1)
+  @minValue(0)
   @maxValue(7)
   autoUpdateRequestedDay?: int32;
 
@@ -638,6 +647,7 @@ model AdditionalCacheNodeProperties {
   proxyUrlConfiguration?: ProxyUrlConfiguration;
 
   @doc("Cache node resource Mcc proxy Url")
+  @removed(Versions.v2024_11_30_preview)
   proxyUrl?: string;
 
   @doc("Cache node resource requires a proxy")
@@ -685,6 +695,12 @@ model AdditionalCacheNodeProperties {
   @doc("Auto update last triggered date time of mcc install")
   @visibility(Lifecycle.Read)
   autoUpdateLastTriggeredDateTime?: utcDateTime;
+
+  @added(Versions.v2024_11_30_preview)
+  @doc("Resource creation method of mcc cache node resource, cli or portal")
+  @minValue(0)
+  @maxValue(5)
+  creationMethod?: int32;
 
   @doc("Optional property #1 of Mcc response object")
   optionalProperty1?: string;
@@ -776,4 +792,13 @@ model CacheNodeInstallProperties {
   @visibility(Lifecycle.Read)
   @secret
   registrationKey?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers"
+  @added(Versions.v2024_11_30_preview)
+  @doc("Cache node resource drive configurations.")
+  driveConfiguration?: CacheNodeDriveConfiguration[];
+
+  @added(Versions.v2024_11_30_preview)
+  @doc("proxyUrl configuration of the cache node")
+  proxyUrlConfiguration?: ProxyUrlConfiguration;
 }

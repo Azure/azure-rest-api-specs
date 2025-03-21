@@ -55,9 +55,6 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: splitio.json
     reason: This is a specific resource provider name requested by liftr partner.
-  - suppress: PatchBodyParametersSchema
+  - suppress: DeleteResponseCodes
     from: splitio.json
-    reason: Typespec generated update parameters include common types which contain required properties.
-  - suppress: AvoidAnonymousTypes
-    from: splitio.json
-    reason: Typespec generated definitions contain anonymous types.
+    reason: Typespec generated responses include 200, 202, and 204.

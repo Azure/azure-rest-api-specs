@@ -1,0 +1,57 @@
+namespace Microsoft.AzureLinuxTestingService;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.ResourceManager;
+using Autorest;
+using Azure.Core;
+using Azure.Core.Foundations;
+using OpenAPI;
+
+
+@doc("A LISA test case")
+model TestCase is ProxyResource<TestCaseResourceProperties> {
+    @doc("a LISA test case")
+    @key("testCaseName")
+    @segment("testCases")
+    @visibility("read")
+    @path()
+    name: string;
+}
+
+@doc("Test case properties")
+model TestCaseResourceProperties is ResourceProperties{
+    @doc("Test case area")
+    area: string;
+
+    @doc("Test case category")
+    category: string;
+
+    @doc("Applied test tags")
+    tags: string;
+
+    @doc("Priority level to run")
+    priority: integer;
+
+    @doc("Time to complete in minutes")
+    estimation: integer;
+
+    @doc("Test case description")
+    description: string;
+
+    @doc("LISA test suite name")
+    testSuiteName: string;
+
+    @doc("LISA test suite description")
+    testSuiteDescription: string;
+
+}
+
+@doc("TestCase Operations")
+@armResourceOperations(TestCase)
+interface TestCases {
+    get is ArmResourceRead<TestCase>;
+    listByResourceGroup is ArmResourceListByParent<TestCase>;
+    listBySubscription is ArmListBySubscription<TestCase>;
+}

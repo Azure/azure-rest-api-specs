@@ -26,7 +26,7 @@ model VirtualMachineInstance
 
   /** Gets or sets the extended location. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   extendedLocation: ExtendedLocation;
 }
 
@@ -37,7 +37,7 @@ model VirtualMachineInstanceUpdate
     "properties"
   >> {
   /** The update properties of the VirtualMachineInstance. */
-  #suppress "deprecated" "Legacy flatten"
+  #suppress "deprecated" "Legacy flattening"
   @Azure.ClientGenerator.Core.flattenProperty
   properties?: VirtualMachineInstanceUpdateProperties;
 }
@@ -59,15 +59,10 @@ interface VirtualMachineInstances {
   @summary("Gets a virtual machine.")
   get is ArmResourceRead<VirtualMachineInstance>;
   /** The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation. */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @summary("Implements virtual machine PUT method.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    VirtualMachineInstance,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineInstance>;
   /** The operation to update a virtual machine instance. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Updates a virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -78,7 +73,7 @@ interface VirtualMachineInstances {
     VirtualMachineInstanceUpdate
   >;
   /** The operation to delete a virtual machine instance. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO migrate to LRO"
   @summary("Deletes an virtual machine.")
   @extension(
     "x-ms-long-running-operation-options",
@@ -102,11 +97,7 @@ interface VirtualMachineInstances {
   @summary("Implements the operation to stop a virtual machine.")
   stop is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    {
-      /** The content of the action request */
-      @body
-      body?: StopVirtualMachineOptions;
-    }
+    StopVirtualMachineOptions
   >;
   /** The operation to start a virtual machine instance. */
   @summary("Implements the operation to start a virtual machine.")

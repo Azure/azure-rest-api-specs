@@ -6,7 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to the root directory of you
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-communication"
-  output-folder: "$(typescript-sdks-folder)/sdk/communication/arm-communication"
+  package-name: "@azure/communication"
+  output-folder: "$(typescript-sdks-folder)/packages/@azure/communication"
+  clear-output-folder: true
   generate-metadata: true
 ```

@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01-preview",
+    "conditionName": "condition0",
+    "measurementEndpointName": "endpoint1",
+    "parameters": {
+      "properties": {
+        "type": "RequestHeader",
+        "constant": "Edge-Prod-WST",
+        "operator": "MatchValueIgnoreCasing",
+        "variable": "X-FD-EdgeEnvironment"
+      }
+    },
+    "profileName": "fpProfile1",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "condition0",
+        "type": "Microsoft.FootprintMonitoring/profiles/measurementEndpoints/conditions",
+        "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1/measurementEndpoints/endpoint1/conditions/condition0",
+        "properties": {
+          "type": "RequestHeader",
+          "conditionId": "2c7eb7b01cff483bb605cba717dc0b7f",
+          "constant": "Edge-Prod-WST",
+          "operator": "MatchValueIgnoreCasing",
+          "variable": "X-FD-EdgeEnvironment"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "condition0",
+        "type": "Microsoft.FootprintMonitoring/profiles/measurementEndpoints/conditions",
+        "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/profiles/fpProfile1/measurementEndpoints/endpoint1/conditions/condition0",
+        "properties": {
+          "type": "RequestHeader",
+          "conditionId": "2c7eb7b01cff483bb605cba717dc0b7f",
+          "constant": "Edge-Prod-WST",
+          "operator": "MatchValueIgnoreCasing",
+          "variable": "X-FD-EdgeEnvironment"
+        }
+      }
+    }
+  },
+  "operationId": "measurementEndpointConditions_CreateOrUpdate",
+  "title": "Create or update a measurement endpoint condition."
+}

@@ -1,11 +1,9 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using OpenAPI;
@@ -31,23 +29,6 @@ union targetProvider {
 
   @doc("https://registry.terraform.io/providers/Azure/azapi/latest")
   azapi: "azapi",
-}
-
-@doc("The Azure Resource Graph Authorization Scope Filter parameter")
-union authorizationScopeFilter {
-  string,
-
-  @doc("Returns assignments for the given scope and all child scopes.")
-  AtScopeAndBelow: "AtScopeAndBelow",
-
-  @doc("Returns assignments for the given scope and all parent scopes, but not child scopes.")
-  AtScopeAndAbove: "AtScopeAndAbove",
-
-  @doc("Returns assignments for the given scope, all parent scopes, and all child scopes.")
-  AtScopeAboveAndBelow: "AtScopeAboveAndBelow",
-
-  @doc("Returns assignments only for the given scope; no parent or child scopes are included.")
-  AtScopeExact: "AtScopeExact",
 }
 
 @doc("The base export parameter")
@@ -79,18 +60,12 @@ model ExportQuery extends BaseExportModel {
 
   @doc("The parameter type")
   type: "ExportQuery";
-
-  @doc("The ARG table name")
-  table?: string = "Resources";
-
-  @doc("The ARG Scope Filter parameter")
-  authorizationScopeFilter?: authorizationScopeFilter;
 }
 
 @doc("Export parameter for individual resources.")
 model ExportResource extends BaseExportModel {
   @doc("The id of the resource to be exported")
-  resourceIds: armResourceIdentifier[];
+  resourceIds: string[];
 
   @doc("The Terraform resource name. Only works when `resourceIds` contains only one item.")
   resourceName?: string = "res-0";
@@ -118,20 +93,54 @@ model ExportResourceGroup extends BaseExportModel {
 }
 
 @doc("The status of the LRO operation.")
-model TerraformOperationStatus is ArmOperationStatus<ExportResult>;
+model OperationStatus {
+  @doc("The operation status resource id.")
+  id?: string;
+
+  @doc("The fully qualified resource id of the resource for which the operation was performed.")
+  @visibility(Lifecycle.Read)
+  resourceId?: string;
+
+  @doc("The operation name.")
+  name?: string;
+
+  @doc("The start time of the operation.")
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  @doc("The end time of the operation.")
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  @doc("The status of the operation.")
+  status?: string;
+
+  @doc("The progress percentage of the operation, ranges from 0 to 100")
+  percentComplete?: float64;
+
+  @doc("The Terraform export result")
+  properties?: ExportResult;
+
+  ...ErrorResponse;
+}
+
+model InProgressOperationStatus
+  is ArmAcceptedResponse<
+    "InProgress operation status",
+    ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+  > {
+  ...OperationStatus;
+}
 
 @doc("The Terraform export result")
 model ExportResult {
   @doc("The Terraform configuration content")
   configuration?: string;
 
-  @doc("The Terraform import blocks for the current export, which users can use to run \"terraform plan\" with to import the resources")
-  `import`?: string;
-
   @doc("A list of Azure resources which are not exported to Terraform due to there is no corresponding resources in Terraform")
-  skippedResources?: armResourceIdentifier[];
+  skippedResources?: string[];
 
   @doc("A list of errors derived during exporting each resource")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   errors?: ErrorDetail[];
 }

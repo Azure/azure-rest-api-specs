@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
 @doc("The virtual hard disk resource definition.")
 @extension("x-ms-azure-resource", true)
 model VirtualHardDisk is TrackedResource<VirtualHardDiskProperties> {
@@ -34,13 +34,8 @@ interface VirtualHardDisks {
   @doc("Gets a virtual hard disk")
   get is ArmResourceRead<VirtualHardDisk>;
 
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
   @doc("The operation to create or update a virtual hard disk. Please note some properties can be set only during virtual hard disk creation.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    VirtualHardDisk,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualHardDisk>;
 
   @doc("The operation to update a virtual hard disk.")
   @removed(Versions.v2025_02_01_preview)

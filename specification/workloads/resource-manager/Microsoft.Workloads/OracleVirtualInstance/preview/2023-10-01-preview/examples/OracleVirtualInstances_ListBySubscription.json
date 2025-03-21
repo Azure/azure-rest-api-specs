@@ -1,0 +1,366 @@
+{
+  "parameters": {
+    "subscriptionId": "6d875e77-e412-4d7d-9af4-8895278b4443",
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Workloads/oracleVirtualInstances/OracleInstance1",
+            "name": "OracleInstance1",
+            "type": "Microsoft.Workloads/oracleVirtualInstances",
+            "tags": {},
+            "location": "eastus2",
+            "properties": {
+              "environment": "Prod",
+              "oracleVersion": "21C",
+              "configuration": {
+                "configurationType": "Deployment",
+                "appLocation": "eastus2",
+                "infrastructureConfiguration": {
+                  "deploymentType": "SingleServer",
+                  "appResourceGroup": "OracleInstance1-RG",
+                  "subnetId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-vnet/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/appsubnet",
+                  "networkConfiguration": {
+                    "isSecondaryIpEnabled": true
+                  },
+                  "virtualMachineConfiguration": {
+                    "vmSize": "Standard_DS2_v2",
+                    "imageReference": {
+                      "publisher": "Oracle",
+                      "offer": "oracle-database-19-3",
+                      "sku": "oracle-database-19-0904",
+                      "version": "latest"
+                    },
+                    "osProfile": {
+                      "adminUsername": "{your-username}",
+                      "osConfiguration": {
+                        "osType": "Linux",
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                          "publicKeys": [
+                            {
+                              "keyData": "ssh-rsa public key"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "diskConfiguration": {
+                    "diskVolumeConfigurations": {
+                      "data": [
+                        {
+                          "count": 3,
+                          "sizeGB": 100,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ],
+                      "log": [
+                        {
+                          "count": 2,
+                          "sizeGB": 50,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ],
+                      "temp": [
+                        {
+                          "count": 1,
+                          "sizeGB": 20,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        },
+                        {
+                          "count": 1,
+                          "sizeGB": 20,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "status": "Unknown",
+              "health": "Unknown",
+              "state": "SoftwareInstallationPending",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Workloads/oracleVirtualInstances/OracleInstance2",
+            "name": "OracleInstance2",
+            "type": "Microsoft.Workloads/oracleVirtualInstances",
+            "tags": {},
+            "location": "eastus2",
+            "properties": {
+              "environment": "Prod",
+              "oracleVersion": "21C",
+              "configuration": {
+                "configurationType": "Deployment",
+                "appLocation": "eastus2",
+                "infrastructureConfiguration": {
+                  "deploymentType": "SingleServer",
+                  "appResourceGroup": "OracleInstance2-RG",
+                  "subnetId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-vnet/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/appsubnet",
+                  "networkConfiguration": {
+                    "isSecondaryIpEnabled": true
+                  },
+                  "virtualMachineConfiguration": {
+                    "vmSize": "Standard_DS2_v2",
+                    "imageReference": {
+                      "publisher": "Oracle",
+                      "offer": "oracle-database-19-3",
+                      "sku": "oracle-database-19-0904",
+                      "version": "latest"
+                    },
+                    "osProfile": {
+                      "adminUsername": "{your-username}",
+                      "osConfiguration": {
+                        "osType": "Linux",
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                          "publicKeys": [
+                            {
+                              "keyData": "ssh-rsa public key"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "diskConfiguration": {
+                    "diskVolumeConfigurations": {
+                      "data": [
+                        {
+                          "count": 3,
+                          "sizeGB": 100,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ],
+                      "log": [
+                        {
+                          "count": 2,
+                          "sizeGB": 50,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ],
+                      "temp": [
+                        {
+                          "count": 1,
+                          "sizeGB": 20,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        },
+                        {
+                          "count": 1,
+                          "sizeGB": 20,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "status": "Unknown",
+              "health": "Unknown",
+              "state": "SoftwareInstallationPending",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Workloads/oracleVirtualInstances/OracleInstance3",
+            "name": "OracleInstance3",
+            "type": "Microsoft.Workloads/oracleVirtualInstances",
+            "tags": {},
+            "location": "eastus2",
+            "properties": {
+              "environment": "Prod",
+              "oracleVersion": "21C",
+              "configuration": {
+                "configurationType": "Deployment",
+                "appLocation": "eastus2",
+                "infrastructureConfiguration": {
+                  "deploymentType": "SingleServer",
+                  "appResourceGroup": "OracleInstance3-RG",
+                  "subnetId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-vnet/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/appsubnet",
+                  "networkConfiguration": {
+                    "isSecondaryIpEnabled": true
+                  },
+                  "virtualMachineConfiguration": {
+                    "vmSize": "Standard_DS2_v2",
+                    "imageReference": {
+                      "publisher": "Oracle",
+                      "offer": "oracle-database-19-3",
+                      "sku": "oracle-database-19-0904",
+                      "version": "latest"
+                    },
+                    "osProfile": {
+                      "adminUsername": "{your-username}",
+                      "osConfiguration": {
+                        "osType": "Linux",
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                          "publicKeys": [
+                            {
+                              "keyData": "ssh-rsa public key"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "diskConfiguration": {
+                    "diskVolumeConfigurations": {
+                      "data": [
+                        {
+                          "count": 3,
+                          "sizeGB": 100,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ],
+                      "log": [
+                        {
+                          "count": 2,
+                          "sizeGB": 50,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ],
+                      "temp": [
+                        {
+                          "count": 1,
+                          "sizeGB": 20,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        },
+                        {
+                          "count": 1,
+                          "sizeGB": 20,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "status": "Unknown",
+              "health": "Unknown",
+              "state": "SoftwareInstallationPending",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Workloads/oracleVirtualInstances/OracleInstance4",
+            "name": "OracleInstance4",
+            "type": "Microsoft.Workloads/oracleVirtualInstances",
+            "tags": {},
+            "location": "eastus2",
+            "properties": {
+              "environment": "Prod",
+              "oracleVersion": "21C",
+              "configuration": {
+                "configurationType": "Deployment",
+                "appLocation": "eastus2",
+                "infrastructureConfiguration": {
+                  "deploymentType": "SingleServer",
+                  "appResourceGroup": "OracleInstance4-RG",
+                  "subnetId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-vnet/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/appsubnet",
+                  "networkConfiguration": {
+                    "isSecondaryIpEnabled": true
+                  },
+                  "virtualMachineConfiguration": {
+                    "vmSize": "Standard_DS2_v2",
+                    "imageReference": {
+                      "publisher": "Oracle",
+                      "offer": "oracle-database-19-3",
+                      "sku": "oracle-database-19-0904",
+                      "version": "latest"
+                    },
+                    "osProfile": {
+                      "adminUsername": "{your-username}",
+                      "osConfiguration": {
+                        "osType": "Linux",
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                          "publicKeys": [
+                            {
+                              "keyData": "ssh-rsa public key"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "diskConfiguration": {
+                    "diskVolumeConfigurations": {
+                      "data": [
+                        {
+                          "count": 3,
+                          "sizeGB": 100,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ],
+                      "log": [
+                        {
+                          "count": 2,
+                          "sizeGB": 50,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ],
+                      "temp": [
+                        {
+                          "count": 1,
+                          "sizeGB": 20,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        },
+                        {
+                          "count": 1,
+                          "sizeGB": 20,
+                          "sku": {
+                            "name": "Premium_LRS"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "status": "Unknown",
+              "health": "Unknown",
+              "state": "SoftwareInstallationPending",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

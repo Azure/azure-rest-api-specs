@@ -1,0 +1,54 @@
+{
+  "title": "SharedStorages_Update",
+  "operationId": "SharedStorages_Update",
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "workbenchName": "test-workbench",
+    "sharedStorageName": "test-storage",
+    "properties": {
+      "sku": {
+        "name": "Ultra_ANF_LRS"
+      },
+      "properties": {
+        "capacityAllocated": 8,
+        "chambers": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber3"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-storage",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/sharedStorages/test-storage",
+        "type": "Microsoft.ModSimWorkbench/workbenches/sharedStorages",
+        "location": "Central US",
+        "sku": {
+          "name": "Ultra_ANF_LRS",
+          "tier": "Ultra",
+          "family": "ANF"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "capacityAllocated": 8,
+          "capacityUsed": 2,
+          "chambers": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbench/workbenches/test-workbench/chambers/chamber3"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2021-10-01&operationResultResponseType=Location"
+      }
+    }
+  }
+}

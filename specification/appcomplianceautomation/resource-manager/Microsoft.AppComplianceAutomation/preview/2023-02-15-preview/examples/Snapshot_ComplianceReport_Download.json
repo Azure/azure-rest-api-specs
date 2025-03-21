@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2023-02-15-preview",
+    "reportName": "testReportName",
+    "snapshotName": "testSnapshotName",
+    "parameters": {
+      "downloadType": "ComplianceReport",
+      "reportCreatorTenantId": "00000000-0000-0000-0000-000000000000",
+      "offerGuid": "00000000-0000-0000-0000-000000000001"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "complianceReport": [
+          {
+            "categoryName": "Data Security & Privacy",
+            "controlFamilyName": "Incident Response",
+            "controlId": "Operational_Security_75",
+            "controlName": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+            "controlStatus": "Passed",
+            "responsibilityTitle": "Authorized IP ranges should be defined on Kubernetes Services",
+            "responsibilityDescription": "Restrict access to the Kubernetes Service Management API by granting API access only to IP addresses in specific ranges. It is recommended to limit access to authorized IP ranges to ensure that only applications from allowed networks can access the cluster.",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+            "resourceType": "Microsoft.SignalRService/SignalR",
+            "resourceOrigin": "Azure",
+            "resourceStatus": "Healthy",
+            "resourceStatusChangeDate": "2023-01-12T16:17:20.150Z"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationResults/{operationId}",
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/operationStatuses/{operationId}"
+      }
+    }
+  }
+}

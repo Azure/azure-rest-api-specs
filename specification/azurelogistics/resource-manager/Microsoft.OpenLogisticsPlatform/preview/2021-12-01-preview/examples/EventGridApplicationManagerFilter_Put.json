@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "51766542-3ed7-4a72-a187-0c8ab644ddab",
+    "resourceGroupName": "mygroup",
+    "applicationManagerName": "contosoApplicationManager",
+    "eventGridFilterName": "_default",
+    "api-version": "2021-12-01-preview",
+    "eventGridFilter": {
+      "properties": {
+        "filter": {
+          "subjectBeginsWith": "subjectBeginsWith",
+          "subjectEndsWith": "subjectEndsWith",
+          "includedEventTypes": [
+            "Microsoft.OpenLogisticsPlatform.EventName1",
+            "Microsoft.OpenLogisticsPlatform.EventName2"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.OpenLogisticsPlatform/applicationManagers/contosoApplicationManager/eventGridFilters/_default",
+        "name": "_default",
+        "type": "Microsoft.OpenLogisticsPlatform/applicationManagers/EventGridFilters",
+        "properties": {
+          "filter": {
+            "subjectBeginsWith": "/openlogisticsplatform/applicationManagers/c424c0eb-8818-4af3-81db-e8f8fdae7829/Item",
+            "subjectEndsWith": "10000000-0000-0000-0000-000000000001",
+            "includedEventTypes": [
+              "Microsoft.OpenLogisticsPlatform.EventName1",
+              "Microsoft.OpenLogisticsPlatform.EventName2"
+            ]
+          },
+          "subscriberIdentityInfo": {
+            "clientPrincipalId": "clientPrincipleId",
+            "clientObjectId": "clientObjectId",
+            "clientTenantId": "clientTenantId",
+            "clientApplicationId": "clientApplicationId",
+            "clientAuthorizationSource": "clientAuthorizationSource"
+          }
+        }
+      }
+    }
+  }
+}

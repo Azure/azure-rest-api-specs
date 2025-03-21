@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "6393a73f-8d55-47ef-b6dd-179b3e0c7910",
+    "resourceGroupName": "testRG",
+    "api-version": "2020-09-01-privatepreview",
+    "projectName": "test",
+    "assessmentName": "assess-001",
+    "machineId": "2b5bba8f-4beb-4cee-a037-9d8d11f1843b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6393a73f-8d55-47ef-b6dd-179b3e0c7910/resourceGroups/testRG/providers/Microsoft.AppAssessment/migrateProjects/test/assessments/assess-001/assessedMachines/2b5bba8f-4beb-4cee-a037-9d8d11f1843b",
+        "name": "vm001",
+        "type": "Microsoft.AppAssessment/migrateProjects/assessments/assessedMachines",
+        "systemData": {
+          "createdBy": "Application Assessment",
+          "createdByType": "Application",
+          "createdAt": "2020-09-01T20:11:00Z"
+        },
+        "properties": {
+          "machineId": "/subscriptions/6393a73f-8d55-47ef-b6dd-179b3e0c7910/resourceGroups/testRG/providers/Microsoft.AppAssessment/migrateProjects/test/sites/vmware-site-001/machines/2b5bba8f-4beb-4cee-a037-9d8d11f1843b",
+          "discoveredApplications": 5,
+          "applicationReadiness": {
+            "ready": 5,
+            "readyWithConditions": 0,
+            "notReady": 0,
+            "unknown": 0
+          },
+          "osDetails": {
+            "family": "Windows",
+            "skuName": "Microsoft Windows Server 2012 Data Center",
+            "version": "2012",
+            "buildNumber": "1233"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

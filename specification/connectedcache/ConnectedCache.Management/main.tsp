@@ -28,4 +28,9 @@ enum Versions {
   @doc("Microsoft Connected Cache Rest Api version 2023-05-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_05_01_preview: "2023-05-01-preview",
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Microsoft Connected Cache Rest Api version 2024-11-30-preview")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_11_30_preview: "2024-11-30-preview",
 }

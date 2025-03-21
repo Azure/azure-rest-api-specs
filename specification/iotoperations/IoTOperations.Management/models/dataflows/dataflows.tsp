@@ -14,8 +14,8 @@ namespace Microsoft.IoTOperations;
  * dataflow resource type model details.
  */
 @doc("Instance dataflowProfile dataflow resource")
-@parentResource(DataflowProfileResource)
-model DataflowResource is ProxyResource<DataflowProperties> {
+@parentResource(DataFlowProfileResource)
+model DataFlowResource is ProxyResource<DataFlowProperties> {
   @doc("Name of Instance dataflowProfile dataflow resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("dataflowName")
@@ -32,22 +32,25 @@ model DataflowResource is ProxyResource<DataflowProperties> {
   extendedLocation: ExtendedLocation;
 }
 
-@doc("Dataflow Resource properties")
-model DataflowProperties {
-  @doc("Mode for Dataflow. Optional; defaults to Enabled.")
+@doc("DataFlow Resource properties")
+model DataFlowProperties {
+  @doc("Reference to the DataflowProfile CR.")
+  profileRef: string;
+
+  @doc("Mode for DataFlow. Optional; defaults to Enabled.")
   mode?: OperationalMode = OperationalMode.Enabled;
 
   @doc("List of operations including source and destination references as well as transformation.")
   @OpenAPI.extension("x-ms-identifiers", #[])
-  operations: DataflowOperation[];
+  operations: DataFlowOperation[];
 
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
 
-@doc("Dataflow Operation properties. NOTE - One only method is allowed to be used for one entry.")
-model DataflowOperation {
+@doc("DataFlow Operation properties. NOTE - One only method is allowed to be used for one entry.")
+model DataFlowOperation {
   @doc("Type of operation.")
   operationType: OperationType;
 
@@ -55,32 +58,32 @@ model DataflowOperation {
   @maxLength(64)
   name?: string;
 
-  @doc("Source configuration.")
-  sourceSettings?: DataflowSourceOperationSettings;
-
-  @doc("Built In Transformation configuration.")
-  builtInTransformationSettings?: DataflowBuiltInTransformationSettings;
+  @doc("Transformation configuration.")
+  builtInTransformationSettings?: DataFlowBuiltInTransformation;
 
   @doc("Destination configuration.")
-  destinationSettings?: DataflowDestinationOperationSettings;
+  destinationSettings: DataFlowDestinationOperation;
+
+  @doc("Source configuration.")
+  sourceSettings: DataFlowSourceOperation;
 }
 
-@doc("Dataflow Operation Type properties")
+@doc("DataFlow Operation Type properties")
 union OperationType {
   string,
 
-  @doc("Dataflow Source Operation")
+  @doc("DataFlow Source Operation")
   Source: "Source",
 
-  @doc("Dataflow Destination Operation")
+  @doc("DataFlow Destination Operation")
   Destination: "Destination",
 
-  @doc("Dataflow BuiltIn Transformation Operation")
+  @doc("DataFlow BuiltIn Transformation Operation")
   BuiltInTransformation: "BuiltInTransformation",
 }
 
-@doc("Dataflow BuiltIn Transformation properties")
-model DataflowBuiltInTransformationSettings {
+@doc("DataFlow BuiltIn Transformation properties")
+model DataFlowBuiltInTransformation {
   @doc("Serialization format. Optional; defaults to JSON. Allowed value JSON Schema/draft-7, Parquet. Default: Json")
   serializationFormat?: TransformationSerializationFormat = TransformationSerializationFormat.Json;
 
@@ -90,19 +93,19 @@ model DataflowBuiltInTransformationSettings {
   @doc("Enrich data from Broker State Store. Dataset references a key in Broker State Store.")
   @maxItems(1)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  datasets?: DataflowBuiltInTransformationDataset[] = #[];
+  datasets?: DataFlowBuiltInTransformationDataset[] = #[];
 
   @doc("Filters input record or datapoints based on condition.")
   @OpenAPI.extension("x-ms-identifiers", #[])
-  filter?: DataflowBuiltInTransformationFilter[] = #[];
+  filter?: DataFlowBuiltInTransformationFilter[] = #[];
 
   @doc("Maps input to output message.")
   @OpenAPI.extension("x-ms-identifiers", #[])
-  map?: DataflowBuiltInTransformationMap[] = #[];
+  map?: DataFlowBuiltInTransformationMap[] = #[];
 }
 
-@doc("Dataflow BuiltIn Transformation dataset properties")
-model DataflowBuiltInTransformationDataset {
+@doc("DataFlow BuiltIn Transformation dataset properties")
+model DataFlowBuiltInTransformationDataset {
   @doc("The key of the dataset.")
   @maxLength(64)
   key: string;
@@ -121,8 +124,8 @@ model DataflowBuiltInTransformationDataset {
   expression?: string;
 }
 
-@doc("Dataflow BuiltIn Transformation filter properties")
-model DataflowBuiltInTransformationFilter {
+@doc("DataFlow BuiltIn Transformation filter properties")
+model DataFlowBuiltInTransformationFilter {
   @doc("The type of dataflow operation.")
   type?: FilterType = FilterType.Filter;
 
@@ -145,10 +148,10 @@ union FilterType {
   Filter: "Filter",
 }
 
-@doc("Dataflow BuiltIn Transformation map properties")
-model DataflowBuiltInTransformationMap {
+@doc("DataFlow BuiltIn Transformation map properties")
+model DataFlowBuiltInTransformationMap {
   @doc("Type of transformation.")
-  type?: DataflowMappingType;
+  type?: DataFlowMappingType;
 
   @doc("A user provided optional description of the mapping function.")
   @maxLength(256)
@@ -164,8 +167,8 @@ model DataflowBuiltInTransformationMap {
   output: string;
 }
 
-@doc("Dataflow type mapping properties")
-union DataflowMappingType {
+@doc("DataFlow type mapping properties")
+union DataFlowMappingType {
   string,
 
   @doc("New Properties type")
@@ -206,17 +209,17 @@ union TransformationSerializationFormat {
   Parquet: "Parquet",
 }
 
-@doc("Dataflow Destination Operation properties")
-model DataflowDestinationOperationSettings {
+@doc("DataFlow Destination Operation properties")
+model DataFlowDestinationOperation {
   @doc("Reference to the Endpoint CR. Can be of Broker, Kafka, Fabric, ADLS, ADX type.")
   endpointRef: string;
 
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
-  dataDestination: NonEmptyString;
+  dataDestination: string;
 }
 
-@doc("Dataflow Source Operation properties")
-model DataflowSourceOperationSettings {
+@doc("DataFlow Source Operation properties")
+model DataFlowSourceOperation {
   @doc("Reference to the Dataflow Endpoint resource. Can only be of Broker and Kafka type.")
   endpointRef: string;
 
@@ -230,5 +233,5 @@ model DataflowSourceOperationSettings {
   schemaRef?: string;
 
   @doc("List of source locations. Can be Broker or Kafka topics. Supports wildcards # and +.")
-  dataSources: NonEmptyString[];
+  dataSources: string[];
 }

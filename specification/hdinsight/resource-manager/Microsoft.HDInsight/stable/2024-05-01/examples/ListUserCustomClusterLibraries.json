@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "resourceGroupName": "hiloResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-05-01",
+    "clusterPoolName": "clusterPool",
+    "clusterName": "cluster",
+    "$category": "custom"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hiloResourceGroup/providers/Microsoft.HDInsight/clusterPools/clusterPool/clusters/cluster/libraries/<PYPI_LIBRARY_NAME>",
+            "properties": {
+              "type": "pypi",
+              "name": "requests",
+              "version": "2.31.0",
+              "remarks": "PyPi packages.",
+              "timestamp": "2020-01-01T00:00:00.000Z",
+              "status": "INSTALLED",
+              "message": ""
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hiloResourceGroup/providers/Microsoft.HDInsight/clusterPools/clusterPool/clusters/cluster/libraries/<ARTIFACT_ID>",
+            "properties": {
+              "type": "maven",
+              "groupId": "org.apache.flink",
+              "name": "flink-connector-kafka",
+              "version": "3.0.2-1.18",
+              "remarks": "Maven packages.",
+              "timestamp": "2020-01-01T00:00:00.000Z",
+              "status": "INSTALLING",
+              "message": ""
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hiloResourceGroup/providers/Microsoft.HDInsight/clusterPools/clusterPool/clusters/cluster/libraries/<STORAGE_LIBRARY_NAME>",
+            "properties": {
+              "type": "storage",
+              "name": "library",
+              "storagePathUrl": "abfs://container@storage.dfs.core.windows.net/libraries/library.jar",
+              "remarks": "User custom packages from custom storage.",
+              "timestamp": "2020-01-01T00:00:00.000Z",
+              "status": "INSTALL_FAILED",
+              "message": "File not found."
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -124,7 +124,7 @@ model AwsEc2SubnetProperties {
   subnetId?: string;
 
   @doc("Any tags assigned to the subnet.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The ID of the VPC the subnet is in. If you update this property, you must also update the ``CidrBlock`` property.")

@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
@@ -223,6 +224,10 @@ union CategoryStatus {
   @doc("The category is pending for approval.")
   PendingApproval: "PendingApproval",
 
+  @added(Versions.v2024_12_15_preview)
+  @doc("The category is collecting assessment.")
+  AssessmentCollecting: "AssessmentCollecting",
+
   string,
 }
 
@@ -242,6 +247,10 @@ union ControlFamilyStatus {
   @doc("The control family is pending for approval.")
   PendingApproval: "PendingApproval",
 
+  @added(Versions.v2024_12_15_preview)
+  @doc("The control family is collecting assessment.")
+  AssessmentCollecting: "AssessmentCollecting",
+
   string,
 }
 
@@ -260,6 +269,10 @@ union ControlStatus {
 
   @doc("The control is pending for approval.")
   PendingApproval: "PendingApproval",
+
+  @added(Versions.v2024_12_15_preview)
+  @doc("The control is collecting assessment.")
+  AssessmentCollecting: "AssessmentCollecting",
 
   string,
 }
@@ -311,6 +324,10 @@ union ResponsibilityStatus {
 
   @doc("The responsibility is pending for approval.")
   PendingApproval: "PendingApproval",
+
+  @added(Versions.v2024_12_15_preview)
+  @doc("The responsibility is collecting assessment.")
+  AssessmentCollecting: "AssessmentCollecting",
 
   string,
 }
@@ -420,6 +437,9 @@ union Rule {
   @doc("The question answer should be a PublicSOX.")
   PublicSOX: "PublicSOX",
 
+  @doc("The question answer should be a FismaFedramp.")
+  FismaFedramp: "FismaFedramp",
+
   @doc("The question answer should be a CreditCardPCI.")
   CreditCardPCI: "CreditCardPCI",
 
@@ -501,6 +521,20 @@ union InputType {
 
   @doc("The input content is a uploaded file.")
   Upload: "Upload",
+
+  string,
+}
+
+/**
+ * Specify the application environment of the report.
+ */
+@added(Versions.v2024_12_15_preview)
+union AppEnvironment {
+  @doc("The application environment of the report is Production.")
+  Production: "Production",
+
+  @doc("The application environment of the report is NonProduction.")
+  NonProduction: "NonProduction",
 
   string,
 }
@@ -734,7 +768,7 @@ model StorageInfo {
 /**
  * Report's properties.
  */
-alias ReportBaseProperties = {
+model ReportBaseProperties {
   /**
    * Report status.
    */
@@ -801,7 +835,7 @@ alias ReportBaseProperties = {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-};
+}
 
 /**
  * Create Report's properties.
@@ -818,6 +852,18 @@ model ReportProperties {
    * An example of valid timezone id is "Pacific Standard Time".
    */
   timeZone: string;
+
+  /**
+   * Optional property to specify the application environment of the report. e.g. "Production", "Non-production".
+   */
+  @added(Versions.v2024_12_15_preview)
+  appEnvironment?: AppEnvironment;
+
+  /**
+   * Optional property to specify the linked report for the current report.
+   */
+  @added(Versions.v2024_12_15_preview)
+  linkedReport?: string;
 
   /**
    * List of resource data.
@@ -979,6 +1025,10 @@ model ReportResourcePatch {
    * Report property.
    */
   properties?: ReportPatchProperties;
+
+  @added(Versions.v2024_12_15_preview)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 /**
@@ -1194,12 +1244,23 @@ model ControlFamily {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#["controlId"])
-  controls?: Control[];
+  @added(Versions.v2024_12_15_preview)
+  controls?: ControlEssentialInfo[];
+
+  /**
+   * List of controls.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["controlId"])
+  @renamedFrom(Versions.v2024_12_15_preview, "controls")
+  @removed(Versions.v2024_12_15_preview)
+  oldcontrols?: Control[];
 }
 
 /**
  * A class represent the control.
  */
+@removed(Versions.v2024_12_15_preview)
 model Control {
   /**
    * The Id of the control. e.g. "Operational_Security_10"
@@ -1243,6 +1304,103 @@ model Control {
   @visibility(Lifecycle.Read)
   @identifiers(#["responsibilityId"])
   responsibilities?: Responsibility[];
+}
+
+/**
+ * A class represent the control.
+ */
+@added(Versions.v2024_12_15_preview)
+model ControlProperties {
+  /**
+   * The Id of the control. e.g. "Operational_Security_10"
+   */
+  @visibility(Lifecycle.Read)
+  controlId?: string;
+
+  /**
+   * The name of the control. e.g. "Unsupported OS and Software."
+   */
+  @visibility(Lifecycle.Read)
+  controlName?: string;
+
+  /**
+   * The full name of the control. e.g. "Validate that unsupported operating systems and software components are not in use."
+   */
+  @visibility(Lifecycle.Read)
+  controlFullName?: string;
+
+  /**
+   * The control's description
+   */
+  @visibility(Lifecycle.Read)
+  controlDescription?: string;
+
+  /**
+   * The hyper link to the control's description'.
+   */
+  @visibility(Lifecycle.Read)
+  controlDescriptionHyperLink?: string;
+
+  /**
+   * Control status.
+   */
+  @visibility(Lifecycle.Read)
+  controlStatus?: ControlStatus;
+
+  /**
+   * List of customer responsibility.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["responsibilityId"])
+  responsibilities?: Responsibility[];
+
+  /**
+   * Azure lifecycle management
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * A class represent the control.
+ */
+@added(Versions.v2024_12_15_preview)
+model ControlEssentialInfo {
+  /**
+   * The Id of the control. e.g. "Operational_Security_10"
+   */
+  @visibility(Lifecycle.Read)
+  controlId?: string;
+
+  /**
+   * The name of the control. e.g. "Unsupported OS and Software."
+   */
+  @visibility(Lifecycle.Read)
+  controlName?: string;
+
+  /**
+   * The full name of the control. e.g. "Validate that unsupported operating systems and software components are not in use."
+   */
+  @visibility(Lifecycle.Read)
+  controlFullName?: string;
+
+  /**
+   * The control's description
+   */
+  @visibility(Lifecycle.Read)
+  controlDescription?: string;
+
+  /**
+   * The hyper link to the control's description'.
+   */
+  @visibility(Lifecycle.Read)
+  controlDescriptionHyperLink?: string;
+
+  /**
+   * Control status.
+   */
+  @visibility(Lifecycle.Read)
+  controlStatus?: ControlStatus;
 }
 
 /**

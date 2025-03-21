@@ -1,0 +1,279 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WANDisco Fusion",
+    "description": "WANDisco Fusion",
+    "version": "2023-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Wandisco.Fusion/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "Operations_list",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Wandisco.Fusion Operations": {
+            "$ref": "./examples/WandiscoFusionListOperations.json"
+          }
+        }
+      }
+    },
+    "/providers/Wandisco.Fusion/locations/{locationName}/operationStatuses/{operationStatusId}": {
+      "get": {
+        "tags": [
+          "operationStatus"
+        ],
+        "description": "Return the given operationStatus.",
+        "operationId": "OperationStatuses_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationStatusIdParameter"
+          },
+          {
+            "$ref": "./commonTypes.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "operationStatus details.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful get": {
+            "$ref": "./examples/Operations/OperationStatusGet.json"
+          },
+          "Successful get of failed operation": {
+            "$ref": "./examples/Operations/OperationStatusGetError.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "operationStatus"
+        ],
+        "description": "Patches a given operationStatus.",
+        "operationId": "OperationStatuses_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationStatusIdParameter"
+          },
+          {
+            "$ref": "./commonTypes.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationStatus",
+            "description": "operationStatus details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "operationStatus details.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful update": {
+            "$ref": "./examples/Operations/OperationStatusPatch.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane",
+          "type": "boolean"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.ResourceProvider",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The description of the operation",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "OperationStatusError": {
+      "description": "operation status error",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "An invariant error code used for error troubleshooting, aggregation, and analysis.",
+          "type": "string"
+        },
+        "message": {
+          "description": "An actionable error message indicating what error occurred.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "operation status object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Full Operation Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Just the name part",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Some details (unspecified)",
+          "type": "object"
+        },
+        "status": {
+          "description": "Operation Status",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ResourceId to which this operation applied",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "When operation started",
+          "type": "string"
+        },
+        "error": {
+          "description": "If present, details of the error.",
+          "type": "object",
+          "$ref": "#/definitions/OperationStatusError"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the location",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationStatusIdParameter": {
+      "name": "operationStatusId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of the operationStatus",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

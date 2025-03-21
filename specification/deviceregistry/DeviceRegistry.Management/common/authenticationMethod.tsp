@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.DeviceRegistry;
 
 @doc("The method to authenticate the user of the client at the server.")
-@renamedFrom(Versions.v2024_09_01_preview, "UserAuthenticationMode")
+@renamedFrom(Versions.v2024_07_01_preview, "UserAuthenticationMode")
 union AuthenticationMethod {
   @doc("The user authentication method is anonymous.")
   Anonymous: "Anonymous",

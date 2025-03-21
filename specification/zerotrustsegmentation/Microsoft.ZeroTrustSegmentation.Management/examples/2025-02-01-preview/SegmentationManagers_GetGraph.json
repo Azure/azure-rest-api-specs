@@ -1,0 +1,91 @@
+{
+  "operationId": "SegmentationManagers_GetGraph",
+  "title": "Get graph for a SegmentationManager",
+  "parameters": {
+    "body": {
+      "startTime": "2024-11-01T00:00:00Z",
+      "endTime": "2023-11-13T00:00:00Z"
+    },
+    "resourceGroupName": "sample-rg",
+    "api-version": "2025-02-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426614174000",
+    "segmentationManagerName": "sample-segmentationManager"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "graph": {
+          "vertices": [
+            {
+              "id": "Id1",
+              "ipAddress": "10.0.0.1",
+              "macAddress": "000D3A7D9F37",
+              "location": "EASTUS2",
+              "armId": "/subscriptions/44e3caee-c793-4ab4-9a54-86cc90fb911d/resourceGroups/CCG-AVNM-ZTS-CENTUS/providers/Microsoft.Compute/virtualMachineScaleSets/avnmztsce/virtualMachines/45",
+              "name": "AVNMZTSEAN01",
+              "labels": [
+                {
+                  "key": "Env",
+                  "value": "u"
+                },
+                {
+                  "key": "App",
+                  "value": "AzureSQL"
+                },
+                {
+                  "key": "Role",
+                  "value": "Sql.EASTUS2/GA/EASTUS2"
+                }
+              ]
+            },
+            {
+              "id": "Id2",
+              "ipAddress": "10.0.0.2",
+              "macAddress": "000D3A7D9F38",
+              "location": "EASTUS2",
+              "armId": "/subscriptions/44e3caee-c793-4ab4-9a54-86cc90fb911d/resourceGroups/CCG-AVNM-ZTS-CENTUS/providers/Microsoft.Compute/virtualMachineScaleSets/avnmztsce/virtualMachines/45",
+              "name": "AVNMZTSEAN02",
+              "labels": [
+                {
+                  "key": "Env",
+                  "value": "u"
+                },
+                {
+                  "key": "App",
+                  "value": "AzureSQL"
+                },
+                {
+                  "key": "Role",
+                  "value": "Sql.EASTUS2/GA/EASTUS2"
+                }
+              ]
+            }
+          ],
+          "edges": [
+            {
+              "source": "Id1",
+              "target": "Id2",
+              "hourT": 1727002800000,
+              "trafficWeights": {
+                "inPacketWeight": 1.3276361972,
+                "inByteWeight": 1.3118045082,
+                "inConnectionWeight": 0.0,
+                "outPacketWeight": 1.0197501008,
+                "outByteWeight": 0.3454039275,
+                "outConnectionWeight": 1.284328
+              }
+            }
+          ],
+          "totalTrafficWeights": {
+            "totalInPackets": 2347386298,
+            "totalInBytes": 2657208508,
+            "totalInConnections": 0.0,
+            "totalOutPackets": 10197501008,
+            "totalOutBytes": 3454039275,
+            "totalOutConnections": 1284328
+          }
+        }
+      }
+    }
+  }
+}

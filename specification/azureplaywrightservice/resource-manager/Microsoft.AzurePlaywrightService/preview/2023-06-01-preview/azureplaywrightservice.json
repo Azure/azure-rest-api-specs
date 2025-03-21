@@ -1,0 +1,497 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzurePlaywrightService Client",
+    "description": "AzurePlaywrightService client provides access to PlaywrightService Resource and it's status operations.",
+    "version": "2023-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzurePlaywrightService/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available API operations for PlaywrightService Resource.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzurePlaywrightService/accounts": {
+      "get": {
+        "tags": [
+          "PlaywrightAccounts"
+        ],
+        "description": "Lists playwright account resources in a subscription.",
+        "operationId": "PlaywrightAccounts_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightAccountResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PlaywrightAccounts_ListBySubscription": {
+            "$ref": "./examples/PlaywrightAccounts_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts": {
+      "get": {
+        "tags": [
+          "PlaywrightAccounts"
+        ],
+        "description": "Lists playwright account resources in a resource group.",
+        "operationId": "PlaywrightAccounts_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- list of playwright account resources retrieved",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightAccountResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PlaywrightAccounts_ListByResourceGroup": {
+            "$ref": "./examples/PlaywrightAccounts_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzurePlaywrightService/accounts/{playwrightAccountName}": {
+      "get": {
+        "tags": [
+          "PlaywrightAccounts"
+        ],
+        "description": "Get a playwright account resource.",
+        "operationId": "PlaywrightAccounts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PlaywrightAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- playwright account resource retrieved",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightAccountResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightAccounts_Get": {
+            "$ref": "./examples/PlaywrightAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PlaywrightAccounts"
+        ],
+        "description": "Create or update PlaywrightAccount resource.",
+        "operationId": "PlaywrightAccounts_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PlaywrightAccountNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "PlaywrightAccountResource",
+            "description": "PlaywrightAccount resource data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlaywrightAccountResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightAccountResource"
+            }
+          },
+          "201": {
+            "description": "Created -- PlaywrightAccount resource created",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightAccountResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightAccounts_CreateOrUpdate": {
+            "$ref": "./examples/PlaywrightAccounts_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PlaywrightAccounts"
+        ],
+        "description": "Update a playwright account resource.",
+        "operationId": "PlaywrightAccounts_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PlaywrightAccountNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "PlaywrightAccountResourcePatch",
+            "description": "PlaywrightAccount resource update data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PlaywrightAccountResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource updated",
+            "schema": {
+              "$ref": "#/definitions/PlaywrightAccountResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightAccounts_Update": {
+            "$ref": "./examples/PlaywrightAccounts_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PlaywrightAccounts"
+        ],
+        "description": "Delete a PlaywrightAccount resource.",
+        "operationId": "PlaywrightAccounts_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PlaywrightAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource deleted"
+          },
+          "202": {
+            "description": "Accepted -- PlaywrightAccount resource delete request accepted"
+          },
+          "204": {
+            "description": "No Content -- resource deleted"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PlaywrightAccounts_Delete": {
+            "$ref": "./examples/PlaywrightAccounts_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PlaywrightAccountResourcePageList": {
+      "description": "List of resources page result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of resources in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlaywrightAccountResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "PlaywrightAccountResource": {
+      "type": "object",
+      "description": "PlaywrightAccount details",
+      "properties": {
+        "properties": {
+          "description": "Playwright Account resource properties",
+          "$ref": "#/definitions/PlaywrightAccountProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PlaywrightAccountResourcePatch": {
+      "description": "PlaywrightAccount resource patch request body.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object"
+        },
+        "properties": {
+          "description": "Playwright Account resource properties",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "description": {
+              "description": "Description of the resource.",
+              "maxLength": 512,
+              "type": "string"
+            },
+            "regionalAffinity": {
+              "description": "Regional Affinity feature.",
+              "$ref": "#/definitions/RegionalAffinity"
+            }
+          }
+        }
+      }
+    },
+    "PlaywrightAccountProperties": {
+      "description": "PlaywrightAccount resource properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the resource.",
+          "maxLength": 512,
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Resource provisioning state.",
+          "$ref": "#/definitions/ResourceState",
+          "readOnly": true
+        },
+        "regionalAffinity": {
+          "description": "Regional Affinity feature.",
+          "$ref": "#/definitions/RegionalAffinity"
+        },
+        "dashboardURI": {
+          "description": "Playwright Dashboard URI.",
+          "maxLength": 2083,
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RegionalAffinity": {
+      "description": "Playwright account Regional Affinity feature.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RegionalAffinity",
+        "modelAsString": true
+      },
+      "default": "Enabled"
+    },
+    "ResourceState": {
+      "description": "Playwright account resources provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "PlaywrightAccountNameParameter": {
+      "in": "path",
+      "name": "playwrightAccountName",
+      "description": "Playwright Account name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  }
+}

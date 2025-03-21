@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "MyResourceGroup",
+    "api-version": "2020-12-14-preview",
+    "accountName": "MyAccount",
+    "profileName": "profileA",
+    "certificateProfile": {
+      "properties": {
+        "profileType": "PublicTrust",
+        "rotationPolicy": "30 Days",
+        "commonName": "Contoso Inc",
+        "organization": "Contoso Inc"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount/certificateProfiles/profileA",
+        "name": "profileA",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts/certificateProfiles",
+        "properties": {
+          "profileType": "PublicTrust",
+          "rotationPolicy": "30 Days",
+          "commonName": "Contoso Inc",
+          "organization": "Contoso Inc",
+          "streetAddress": "123 Bluebonnet",
+          "country": "US",
+          "state": "Texas",
+          "city": "Dallas",
+          "provisioningState": "Succeeded",
+          "certificates": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/MyAccount/certificateProfiles/profileA",
+        "name": "profileA",
+        "type": "Microsoft.CodeSigning/codeSigningAccounts/certificateProfiles",
+        "properties": {
+          "profileType": "PublicTrust",
+          "rotationPolicy": "30 Days",
+          "commonName": "Contoso Inc",
+          "organization": "Contoso Inc",
+          "streetAddress": "123 Bluebonnet",
+          "country": "US",
+          "state": "Texas",
+          "city": "Dallas",
+          "provisioningState": "Accepted",
+          "certificates": []
+        }
+      }
+    }
+  }
+}

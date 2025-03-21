@@ -1,0 +1,65 @@
+{
+  "operationId": "Forecasts_CreateOrUpdate",
+  "title": "Forecasts_CreateOrUpdate_MinimumSet",
+  "parameters": {
+    "api-version": "2022-08-01-preview",
+    "subscriptionId": "455",
+    "resourceGroupName": "rgsecretmanagementsample",
+    "weatherForecastResourceName": "wfr6",
+    "resource": {
+      "properties": {
+        "weatherForecastProperties": [
+          {
+            "city": "seattle",
+            "date": "2022-08-01",
+            "highTemperatureF": 90,
+            "lowTemperatureF": 80,
+            "summary": "Hot"
+          }
+        ]
+      },
+      "location": "seattle"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "weatherForecastProperties": [
+            {
+              "city": "seattle",
+              "date": "2022-08-01",
+              "highTemperatureF": 90,
+              "lowTemperatureF": 80,
+              "summary": "Hot"
+            }
+          ]
+        },
+        "location": "seattle",
+        "id": "5"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "weatherForecastProperties": [
+            {
+              "city": "seattle",
+              "date": "2022-08-01",
+              "highTemperatureF": 90,
+              "lowTemperatureF": 80,
+              "summary": "Hot"
+            }
+          ]
+        },
+        "location": "seattle",
+        "id": "5"
+      }
+    }
+  }
+}

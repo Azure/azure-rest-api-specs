@@ -76,7 +76,7 @@ model AwsIamVirtualMFADeviceProperties {
   serialNumber?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Property users")

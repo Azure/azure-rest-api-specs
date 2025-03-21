@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "CloudServiceResourceName": "targetResourceName",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.SaaSHub/cloudServices/targetResourceName",
+        "name": "targetResourceName",
+        "location": "westus",
+        "type": "Microsoft.SaaSHub/CloudServices",
+        "tags": {
+          "additionalProp1": "string"
+        },
+        "properties": {
+          "autoRenew": "Off",
+          "productType": "Microsoft 365 E5",
+          "provisioningState": "Succeeded",
+          "quantity": 25,
+          "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+          "licenseData": "000089d5-0000-0080-2654-64a36bcef7ba",
+          "skuDescription": "Microsoft 365 E5",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2022-05-06T07:54:48-07:00"
+          },
+          "term": {
+            "billingFrequency": "P1M",
+            "termUnit": "P1Y",
+            "startDate": "2022-04-28T17:00:00-07:00",
+            "endDate": "2023-05-27T17:00:00-07:00"
+          },
+          "status": "Canceled"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.SaaSHub/locations/westus/operationStatuses/{operationId}?api-version=2023-01-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  }
+}

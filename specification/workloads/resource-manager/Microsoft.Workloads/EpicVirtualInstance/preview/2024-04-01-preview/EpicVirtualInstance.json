@@ -1,0 +1,3160 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workloads Client",
+    "version": "2024-04-01-preview",
+    "description": "Epic client provides access to various epic operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EpicVirtualInstances"
+    },
+    {
+      "name": "WssServerInstances"
+    },
+    {
+      "name": "DatabaseServerInstances"
+    },
+    {
+      "name": "HyperspaceWebServerInstances"
+    },
+    {
+      "name": "PresentationServerInstances"
+    },
+    {
+      "name": "SharedServerInstances"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/epicVirtualInstances": {
+      "get": {
+        "operationId": "EpicVirtualInstances_ListBySubscription",
+        "tags": [
+          "EpicVirtualInstances"
+        ],
+        "description": "Gets all Virtual Instances for Epic solutions resources in a Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EpicVirtualInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EpicVirtualInstances_ListBySubscription": {
+            "$ref": "./examples/EpicVirtualInstances_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances": {
+      "get": {
+        "operationId": "EpicVirtualInstances_ListByResourceGroup",
+        "tags": [
+          "EpicVirtualInstances"
+        ],
+        "description": "Gets all Virtual Instances for Epic solution resources in a Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EpicVirtualInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EpicVirtualInstances_ListByResourceGroup": {
+            "$ref": "./examples/EpicVirtualInstances_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}": {
+      "get": {
+        "operationId": "EpicVirtualInstances_Get",
+        "tags": [
+          "EpicVirtualInstances"
+        ],
+        "description": "Gets a Virtual Instance for Epic solutions resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EpicVirtualInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EpicVirtualInstances_Get": {
+            "$ref": "./examples/EpicVirtualInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EpicVirtualInstances_Create",
+        "tags": [
+          "EpicVirtualInstances"
+        ],
+        "description": "Creates a Virtual Instance for Epic solutions (VIS) resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EpicVirtualInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EpicVirtualInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EpicVirtualInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'EpicVirtualInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EpicVirtualInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Register existing Epic system as Virtual Instance for Epic solutions.": {
+            "$ref": "./examples/EpicVirtualInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EpicVirtualInstances_Update",
+        "tags": [
+          "EpicVirtualInstances"
+        ],
+        "description": "Updates a Virtual Instance for Epic solutions resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EpicVirtualInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EpicVirtualInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EpicVirtualInstances_Update": {
+            "$ref": "./examples/EpicVirtualInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EpicVirtualInstances_Delete",
+        "tags": [
+          "EpicVirtualInstances"
+        ],
+        "description": "Deletes a Virtual Instance for Epic solutions resource and its child resources, that is the associated Wss Services Instance, HyperspaceWeb Server Instances and Database Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EpicVirtualInstances_Delete": {
+            "$ref": "./examples/EpicVirtualInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/databaseInstances": {
+      "get": {
+        "operationId": "DatabaseServerInstances_ListByEpicVirtualInstance",
+        "tags": [
+          "DatabaseServerInstances"
+        ],
+        "description": "Lists the Database resources associated with a Virtual Instance for Epic solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseInstances_List": {
+            "$ref": "./examples/DatabaseInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/databaseInstances/{databaseInstanceName}": {
+      "get": {
+        "operationId": "DatabaseServerInstances_Get",
+        "tags": [
+          "DatabaseServerInstances"
+        ],
+        "description": "Gets the Epic Database Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseInstances_Get": {
+            "$ref": "./examples/DatabaseInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseServerInstances_Create",
+        "tags": [
+          "DatabaseServerInstances"
+        ],
+        "description": "Creates the Database resource corresponding to the Virtual Instance for Epic solutions resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseServerInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DatabaseServerInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DatabaseServerInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'DatabaseServerInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DatabaseServerInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseInstances_Create": {
+            "$ref": "./examples/DatabaseInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DatabaseServerInstances_Update",
+        "tags": [
+          "DatabaseServerInstances"
+        ],
+        "description": "Updates the Database resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseServerInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseInstances_Update": {
+            "$ref": "./examples/DatabaseInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseServerInstances_Delete",
+        "tags": [
+          "DatabaseServerInstances"
+        ],
+        "description": "Deletes the Database resource corresponding to a Virtual Instance for Epic solutions resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "databaseInstanceName",
+            "in": "path",
+            "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatabaseInstances_Delete": {
+            "$ref": "./examples/DatabaseInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/hyperspaceWebInstances": {
+      "get": {
+        "operationId": "HyperspaceWebServerInstances_ListByEpicVirtualInstance",
+        "tags": [
+          "HyperspaceWebServerInstances"
+        ],
+        "description": "Lists the Epic HyperspaceWeb Server Instance resources for a given Virtual Instance for Epic solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HyperspaceWebServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HyperspaceWebInstances_List": {
+            "$ref": "./examples/HyperspaceWebInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/hyperspaceWebInstances/{hyperspaceWebInstanceName}": {
+      "get": {
+        "operationId": "HyperspaceWebServerInstances_Get",
+        "tags": [
+          "HyperspaceWebServerInstances"
+        ],
+        "description": "Gets the Epic HyperspaceWeb Server Instance corresponding to the Virtual Instance for Epic solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "hyperspaceWebInstanceName",
+            "in": "path",
+            "description": "The name of Epic HyperspaceWeb Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HyperspaceWebServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HyperspaceWebInstances_Get": {
+            "$ref": "./examples/HyperspaceWebInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HyperspaceWebServerInstances_Create",
+        "tags": [
+          "HyperspaceWebServerInstances"
+        ],
+        "description": "Puts the Epic HyperspaceWeb Server Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "hyperspaceWebInstanceName",
+            "in": "path",
+            "description": "The name of Epic HyperspaceWeb Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HyperspaceWebServerInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HyperspaceWebServerInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HyperspaceWebServerInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'HyperspaceWebServerInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HyperspaceWebServerInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HyperspaceWebInstances_Create": {
+            "$ref": "./examples/HyperspaceWebInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "HyperspaceWebServerInstances_Update",
+        "tags": [
+          "HyperspaceWebServerInstances"
+        ],
+        "description": "Puts the Epic HyperspaceWeb Server Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "hyperspaceWebInstanceName",
+            "in": "path",
+            "description": "The name of Epic HyperspaceWeb Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HyperspaceWebServerInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HyperspaceWebServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HyperspaceWebInstances_Update": {
+            "$ref": "./examples/HyperspaceWebInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "HyperspaceWebServerInstances_Delete",
+        "tags": [
+          "HyperspaceWebServerInstances"
+        ],
+        "description": "Deletes the Epic HyperspaceWeb Server Instance resource. &lt;br&gt;&lt;br&gt;This operation will be used by service only. Delete by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "hyperspaceWebInstanceName",
+            "in": "path",
+            "description": "The name of Epic HyperspaceWeb Server instance resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HyperspaceWebInstances_Delete": {
+            "$ref": "./examples/HyperspaceWebInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/presentationInstances": {
+      "get": {
+        "operationId": "PresentationServerInstances_ListByEpicVirtualInstance",
+        "tags": [
+          "PresentationServerInstances"
+        ],
+        "description": "Lists the Epic Presentation Services Instance resource for the given Virtual Instance for Epic solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PresentationServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PresentationInstances_List": {
+            "$ref": "./examples/PresentationInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/presentationInstances/{presentationInstanceName}": {
+      "get": {
+        "operationId": "PresentationServerInstances_Get",
+        "tags": [
+          "PresentationServerInstances"
+        ],
+        "description": "Gets the Epic Presentation Services Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "presentationInstanceName",
+            "in": "path",
+            "description": "Presentation Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PresentationServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PresentationInstances_Get": {
+            "$ref": "./examples/PresentationInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PresentationServerInstances_Create",
+        "tags": [
+          "PresentationServerInstances"
+        ],
+        "description": "Creates the Epic Presentation Services Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "presentationInstanceName",
+            "in": "path",
+            "description": "Presentation Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PresentationServerInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PresentationServerInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PresentationServerInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'PresentationServerInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PresentationServerInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PresentationInstances_Create": {
+            "$ref": "./examples/PresentationInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PresentationServerInstances_Update",
+        "tags": [
+          "PresentationServerInstances"
+        ],
+        "description": "Updates the Epic Presentation Services Instance resource. &lt;br&gt;&lt;br&gt;This can be used to update tags on the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "presentationInstanceName",
+            "in": "path",
+            "description": "Presentation Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PresentationServerInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PresentationServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PresentationInstances_Update": {
+            "$ref": "./examples/PresentationInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PresentationServerInstances_Delete",
+        "tags": [
+          "PresentationServerInstances"
+        ],
+        "description": "Deletes the Epic Presentation Services Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the Virtual Instance for Epic solutions resource, using the delete operation on it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "presentationInstanceName",
+            "in": "path",
+            "description": "Presentation Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PresentationInstances_Delete": {
+            "$ref": "./examples/PresentationInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/sharedInstances": {
+      "get": {
+        "operationId": "SharedServerInstances_ListByEpicVirtualInstance",
+        "tags": [
+          "SharedServerInstances"
+        ],
+        "description": "Lists the Epic Shared Services Instance resource for the given Virtual Instance for Epic solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedInstances_List": {
+            "$ref": "./examples/SharedInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/sharedInstances/{sharedInstanceName}": {
+      "get": {
+        "operationId": "SharedServerInstances_Get",
+        "tags": [
+          "SharedServerInstances"
+        ],
+        "description": "Gets the Epic Shared Services Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "sharedInstanceName",
+            "in": "path",
+            "description": "Shared Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedInstances_Get": {
+            "$ref": "./examples/SharedInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SharedServerInstances_Create",
+        "tags": [
+          "SharedServerInstances"
+        ],
+        "description": "Creates the Epic Shared Services Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "sharedInstanceName",
+            "in": "path",
+            "description": "Shared Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedServerInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SharedServerInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SharedServerInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'SharedServerInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SharedServerInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedInstances_Create": {
+            "$ref": "./examples/SharedInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SharedServerInstances_Update",
+        "tags": [
+          "SharedServerInstances"
+        ],
+        "description": "Updates the Epic Shared Services Instance resource. &lt;br&gt;&lt;br&gt;This can be used to update tags on the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "sharedInstanceName",
+            "in": "path",
+            "description": "Shared Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedServerInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedInstances_Update": {
+            "$ref": "./examples/SharedInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SharedServerInstances_Delete",
+        "tags": [
+          "SharedServerInstances"
+        ],
+        "description": "Deletes the Epic Shared Services Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the Virtual Instance for Epic solutions resource, using the delete operation on it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "sharedInstanceName",
+            "in": "path",
+            "description": "Shared Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SharedInstances_Delete": {
+            "$ref": "./examples/SharedInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/wssInstances": {
+      "get": {
+        "operationId": "WssServerInstances_ListByEpicVirtualInstance",
+        "tags": [
+          "WssServerInstances"
+        ],
+        "description": "Lists the Epic WSS server Instance resource for the given Virtual Instance for Epic solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WssServerInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WssInstances_List": {
+            "$ref": "./examples/WssInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/epicVirtualInstances/{epicVirtualInstanceName}/wssInstances/{wssInstanceName}": {
+      "get": {
+        "operationId": "WssServerInstances_Get",
+        "tags": [
+          "WssServerInstances"
+        ],
+        "description": "Gets the Epic WSS server Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "wssInstanceName",
+            "in": "path",
+            "description": "Wss Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WssServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WssInstances_Get": {
+            "$ref": "./examples/WssInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WssServerInstances_Create",
+        "tags": [
+          "WssServerInstances"
+        ],
+        "description": "Creates the Epic WSS server Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "wssInstanceName",
+            "in": "path",
+            "description": "Wss Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WssServerInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WssServerInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WssServerInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'WssServerInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WssServerInstance"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WssInstances_Create": {
+            "$ref": "./examples/WssInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "WssServerInstances_Update",
+        "tags": [
+          "WssServerInstances"
+        ],
+        "description": "Updates the Epic WSS server Instance resource. &lt;br&gt;&lt;br&gt;This can be used to update tags on the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "wssInstanceName",
+            "in": "path",
+            "description": "Wss Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WssServerInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WssServerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WssInstances_Update": {
+            "$ref": "./examples/WssInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WssServerInstances_Delete",
+        "tags": [
+          "WssServerInstances"
+        ],
+        "description": "Deletes the Epic WSS server Instance resource. &lt;br&gt;&lt;br&gt;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the Virtual Instance for Epic solutions resource, using the delete operation on it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "epicVirtualInstanceName",
+            "in": "path",
+            "description": "The name of the Virtual Instances for Epic solutions resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{2,23}"
+          },
+          {
+            "name": "wssInstanceName",
+            "in": "path",
+            "description": "Wss Services Instance resource name string modeled as parameter for auto generation to work correctly.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WssInstances_Delete": {
+            "$ref": "./examples/WssInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseServerDetails": {
+      "type": "object",
+      "description": "Describes the registration details of a Database Server VM, including its identifier and role.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the virtual machine, essential for identification and configuration in the registration process."
+        },
+        "role": {
+          "$ref": "#/definitions/DatabaseVmRole",
+          "description": "The role of the VM within the database server's registration framework, indicating its specific function."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "DatabaseServerInstance": {
+      "type": "object",
+      "description": "Define the Database resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DatabaseServerInstanceListResult": {
+      "type": "object",
+      "description": "The response of a DatabaseServerInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DatabaseServerInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/DatabaseServerInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DatabaseServerInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in DatabaseServerInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatabaseServerProperties": {
+      "type": "object",
+      "description": "Defines the Database properties.",
+      "properties": {
+        "vmDetails": {
+          "type": "array",
+          "description": "The list of virtual machines corresponding to the Database resource.",
+          "items": {
+            "$ref": "#/definitions/DatabaseServerVmDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "health": {
+          "$ref": "#/definitions/EpicHealthState",
+          "description": "Defines the health of Epic Instances.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/EpicVirtualInstanceStatus",
+          "description": "Defines the Epic Instance status.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EpicVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/EpicVirtualInstanceError",
+          "description": "Defines the errors related to Database resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseServerVmDetails": {
+      "type": "object",
+      "description": "Database VM details.",
+      "properties": {
+        "virtualMachineId": {
+          "type": "string",
+          "description": "The unique identifier of the virtual machine.",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/DatabaseVmRole",
+          "description": "The role of the database VM.",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseVmRole": {
+      "type": "string",
+      "description": "The role of the database VM.",
+      "enum": [
+        "ODB",
+        "ECP",
+        "EMFI",
+        "Reporting",
+        "Clarity",
+        "Caboodle"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseVmRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ODB",
+            "value": "ODB",
+            "description": "Role for ODB."
+          },
+          {
+            "name": "ECP",
+            "value": "ECP",
+            "description": "Role for ECP."
+          },
+          {
+            "name": "EMFI",
+            "value": "EMFI",
+            "description": "Role for EMFI."
+          },
+          {
+            "name": "Reporting",
+            "value": "Reporting",
+            "description": "Role for Reporting."
+          },
+          {
+            "name": "Clarity",
+            "value": "Clarity",
+            "description": "Role for Clarity."
+          },
+          {
+            "name": "Caboodle",
+            "value": "Caboodle",
+            "description": "Role for Caboodle."
+          }
+        ]
+      }
+    },
+    "EpicConfiguration": {
+      "type": "object",
+      "description": "The Epic Configuration.",
+      "properties": {
+        "configurationType": {
+          "$ref": "#/definitions/EpicConfigurationType",
+          "description": "The configuration type."
+        }
+      },
+      "discriminator": "configurationType",
+      "required": [
+        "configurationType"
+      ]
+    },
+    "EpicConfigurationType": {
+      "type": "string",
+      "description": "The configuration Type.",
+      "enum": [
+        "Registration"
+      ],
+      "x-ms-enum": {
+        "name": "EpicConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Registration",
+            "value": "Registration",
+            "description": "Configuration for registration."
+          }
+        ]
+      }
+    },
+    "EpicEnvironmentType": {
+      "type": "string",
+      "description": "Defines the environment type - Production/Non Production.",
+      "enum": [
+        "NonProduction",
+        "Production"
+      ],
+      "x-ms-enum": {
+        "name": "EpicEnvironmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NonProduction",
+            "value": "NonProduction",
+            "description": "Environment is designated for non-production use."
+          },
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Environment is designated for production use."
+          }
+        ]
+      }
+    },
+    "EpicHealthState": {
+      "type": "string",
+      "description": "Defines the health of Epic Instances.",
+      "enum": [
+        "Available",
+        "Unavailable",
+        "Unknown",
+        "Degraded"
+      ],
+      "x-ms-enum": {
+        "name": "EpicHealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Health state is available."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "Instance is unavailable."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Instance is unknown."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Instance health is degraded."
+          }
+        ]
+      }
+    },
+    "EpicVirtualInstance": {
+      "type": "object",
+      "description": "Define the Virtual Instance for Epic solutions resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EpicVirtualInstanceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EpicVirtualInstanceError": {
+      "type": "object",
+      "description": "An error response from the Virtual Instance for Epic Workload service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The Virtual Instance for Epic error body.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EpicVirtualInstanceListResult": {
+      "type": "object",
+      "description": "The response of a EpicVirtualInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EpicVirtualInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/EpicVirtualInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EpicVirtualInstanceProperties": {
+      "type": "object",
+      "description": "Defines the Virtual Instance for Epic solutions resource properties.",
+      "properties": {
+        "environment": {
+          "$ref": "#/definitions/EpicEnvironmentType",
+          "description": "Defines the environment type - Production/Non Production.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "configuration": {
+          "$ref": "#/definitions/EpicConfiguration",
+          "description": "Defines if the Epic system is being created using Azure Center for Epic solutions (ACSS) or if an existing Epic system is being registered with ACSS"
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedRgConfiguration",
+          "description": "Managed resource group configuration"
+        },
+        "status": {
+          "$ref": "#/definitions/EpicVirtualInstanceStatus",
+          "description": "Defines the Epic Instance status.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/EpicHealthState",
+          "description": "Defines the health of Epic Instances.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/EpicVirtualInstanceState",
+          "description": "Defines the Virtual Instance for Epic state.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EpicVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/EpicVirtualInstanceError",
+          "description": "Indicates any errors on the Virtual Instance for Epic solutions resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "environment",
+        "configuration"
+      ]
+    },
+    "EpicVirtualInstanceProvisioningState": {
+      "type": "string",
+      "description": "Defines the provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Creating",
+        "Failed",
+        "Deleting",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "EpicVirtualInstanceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Provisioning has succeeded."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Provisioning is updating."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Provisioning is creating resources."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning has failed."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Provisioning is deleting resources."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning has been canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "EpicVirtualInstanceState": {
+      "type": "string",
+      "description": "Defines the Virtual Instance for Epic state.",
+      "enum": [
+        "RegistrationInProgress",
+        "RegistrationFailed",
+        "RegistrationComplete"
+      ],
+      "x-ms-enum": {
+        "name": "EpicVirtualInstanceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RegistrationInProgress",
+            "value": "RegistrationInProgress",
+            "description": "Registration of the instance is in progress."
+          },
+          {
+            "name": "RegistrationFailed",
+            "value": "RegistrationFailed",
+            "description": "Registration of the instance has failed."
+          },
+          {
+            "name": "RegistrationComplete",
+            "value": "RegistrationComplete",
+            "description": "Registration of the instance is complete."
+          }
+        ]
+      }
+    },
+    "EpicVirtualInstanceStatus": {
+      "type": "string",
+      "description": "Defines the Epic Instance status.",
+      "enum": [
+        "Running",
+        "Offline",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "EpicVirtualInstanceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Instance is currently running."
+          },
+          {
+            "name": "Offline",
+            "value": "Offline",
+            "description": "Instance is offline."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "Instance is unavailable."
+          }
+        ]
+      }
+    },
+    "EpicVirtualInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in EpicVirtualInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Internal error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "HyperspaceWebRole": {
+      "type": "string",
+      "description": "The role of the Hyperspace Web VM.",
+      "enum": [
+        "HyperSpaceWeb"
+      ],
+      "x-ms-enum": {
+        "name": "HyperspaceWebRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HyperSpaceWeb",
+            "value": "HyperSpaceWeb",
+            "description": "Role for Hyperspace Web."
+          }
+        ]
+      }
+    },
+    "HyperspaceWebServerDetails": {
+      "type": "object",
+      "description": "Contains the registration details for HyperspaceWeb Server VMs, including IDs and roles.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the virtual machine, key for its identification and setup in the registration schema."
+        },
+        "role": {
+          "$ref": "#/definitions/HyperspaceWebRole",
+          "description": "The role of the VM in the HyperspaceWeb server's registration architecture, defining its responsibilities."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "HyperspaceWebServerInstance": {
+      "type": "object",
+      "description": "Define the Epic HyperspaceWeb Server Instance resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HyperspaceWebServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HyperspaceWebServerInstanceListResult": {
+      "type": "object",
+      "description": "The response of a HyperspaceWebServerInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HyperspaceWebServerInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/HyperspaceWebServerInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HyperspaceWebServerInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in HyperspaceWebServerInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HyperspaceWebServerProperties": {
+      "type": "object",
+      "description": "Defines the Epic HyperspaceWeb Server instance properties.",
+      "properties": {
+        "vmDetails": {
+          "type": "array",
+          "description": "The list of virtual machines.",
+          "items": {
+            "$ref": "#/definitions/HyperspaceWebServerVmDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/EpicVirtualInstanceStatus",
+          "description": "Defines the Epic Instance status.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/EpicHealthState",
+          "description": "Defines the health of Epic Instances.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EpicVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/EpicVirtualInstanceError",
+          "description": "Defines the HyperspaceWeb Instance errors.",
+          "readOnly": true
+        }
+      }
+    },
+    "HyperspaceWebServerVmDetails": {
+      "type": "object",
+      "description": "The HyperspaceWeb Server VM Details.",
+      "properties": {
+        "virtualMachineId": {
+          "type": "string",
+          "description": "The unique identifier of the virtual machine.",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/WssRole",
+          "description": "The role of the Wss VM.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedRgConfiguration": {
+      "type": "object",
+      "description": "Managed resource group configuration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
+    },
+    "PresentationRole": {
+      "type": "string",
+      "description": "The role of the Presentation VM.",
+      "enum": [
+        "Hyperspace VDI",
+        "Hyperdrive VDI",
+        "BCA Web"
+      ],
+      "x-ms-enum": {
+        "name": "PresentationRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hyperspace VDI",
+            "value": "Hyperspace VDI",
+            "description": "Role for Hyperspace VDI."
+          },
+          {
+            "name": "Hyperdrive VDI",
+            "value": "Hyperdrive VDI",
+            "description": "Role for Hyperdrive VDI."
+          },
+          {
+            "name": "BCA Web",
+            "value": "BCA Web",
+            "description": "Role for BCA Web."
+          }
+        ]
+      }
+    },
+    "PresentationServerDetails": {
+      "type": "object",
+      "description": "Defines the registration details for Presentation Server VMs, including their identifiers and roles.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the virtual machine, vital for its configuration and management in the registration context."
+        },
+        "role": {
+          "$ref": "#/definitions/PresentationRole",
+          "description": "The role of the VM within the presentation server registration process, clarifying its operational purpose."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "PresentationServerInstance": {
+      "type": "object",
+      "description": "Define the Epic Presentation Server Instance resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PresentationServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PresentationServerInstanceListResult": {
+      "type": "object",
+      "description": "The response of a PresentationServerInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PresentationServerInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/PresentationServerInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PresentationServerInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in PresentationServerInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PresentationServerProperties": {
+      "type": "object",
+      "description": "Defines the Epic Presentation Server instance properties.",
+      "properties": {
+        "vmDetails": {
+          "type": "array",
+          "description": "The list of virtual machines.",
+          "items": {
+            "$ref": "#/definitions/PresentationServerVmDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/EpicVirtualInstanceStatus",
+          "description": "Defines the Epic Instance status.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/EpicHealthState",
+          "description": "Defines the health of Epic Instances.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EpicVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/EpicVirtualInstanceError",
+          "description": "Defines the Presentation Instance errors.",
+          "readOnly": true
+        }
+      }
+    },
+    "PresentationServerVmDetails": {
+      "type": "object",
+      "description": "The Epic Presentation Services Instance VM details.",
+      "properties": {
+        "virtualMachineId": {
+          "type": "string",
+          "description": "The unique identifier of the virtual machine.",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/PresentationRole",
+          "description": "The role of the Presentation VM.",
+          "readOnly": true
+        }
+      }
+    },
+    "RegistrationConfiguration": {
+      "type": "object",
+      "description": "Defines the registration configuration details, extending from the base EpicConfiguration.",
+      "properties": {
+        "wssServerInstance": {
+          "type": "object",
+          "description": "Registration details for WSS servers, including VM identifiers and roles.",
+          "properties": {
+            "vmDetails": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WssServerDetails"
+              }
+            }
+          },
+          "required": [
+            "vmDetails"
+          ]
+        },
+        "databaseServerInstance": {
+          "type": "object",
+          "description": "Registration details for Database servers, including VM identifiers and roles.",
+          "properties": {
+            "vmDetails": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DatabaseServerDetails"
+              }
+            }
+          },
+          "required": [
+            "vmDetails"
+          ]
+        },
+        "hyperspaceWebServerInstance": {
+          "type": "object",
+          "description": "Registration details for HyperspaceWeb servers, including VM identifiers and roles.",
+          "properties": {
+            "vmDetails": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HyperspaceWebServerDetails"
+              }
+            }
+          },
+          "required": [
+            "vmDetails"
+          ]
+        },
+        "presentationServerInstance": {
+          "type": "object",
+          "description": "Registration details for Presentation servers, including VM identifiers and roles.",
+          "properties": {
+            "vmDetails": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PresentationServerDetails"
+              }
+            }
+          },
+          "required": [
+            "vmDetails"
+          ]
+        },
+        "sharedServerInstance": {
+          "type": "object",
+          "description": "Registration details for Shared servers, including VM identifiers and roles.",
+          "properties": {
+            "vmDetails": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SharedServerDetails"
+              }
+            }
+          },
+          "required": [
+            "vmDetails"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EpicConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Registration"
+    },
+    "SharedRole": {
+      "type": "string",
+      "description": "The role of the Shared VM.",
+      "enum": [
+        "Kuiper",
+        "System Pulse",
+        "MPSQL"
+      ],
+      "x-ms-enum": {
+        "name": "SharedRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Kuiper",
+            "value": "Kuiper",
+            "description": "Role for Kuiper."
+          },
+          {
+            "name": "System Pulse",
+            "value": "System Pulse",
+            "description": "Role for System Pulse."
+          },
+          {
+            "name": "MPSQL",
+            "value": "MPSQL",
+            "description": "Role for MPSQL."
+          }
+        ]
+      }
+    },
+    "SharedServerDetails": {
+      "type": "object",
+      "description": "Outlines the registration details for Shared Server VMs, detailing their IDs and roles.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the virtual machine, important for tracking and setup during registration."
+        },
+        "role": {
+          "$ref": "#/definitions/SharedRole",
+          "description": "The role of the VM in the shared server's registration setup, specifying its function and usage."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SharedServerInstance": {
+      "type": "object",
+      "description": "Define the Epic Shared Server Instance resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SharedServerInstanceListResult": {
+      "type": "object",
+      "description": "The response of a SharedServerInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SharedServerInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/SharedServerInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SharedServerInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SharedServerInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SharedServerProperties": {
+      "type": "object",
+      "description": "Defines the Epic Shared Server instance properties.",
+      "properties": {
+        "vmDetails": {
+          "type": "array",
+          "description": "The list of virtual machines.",
+          "items": {
+            "$ref": "#/definitions/SharedServerVmDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/EpicVirtualInstanceStatus",
+          "description": "Defines the Epic Instance status.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/EpicHealthState",
+          "description": "Defines the health of Epic Instances.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EpicVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/EpicVirtualInstanceError",
+          "description": "Defines the Shared Instance errors.",
+          "readOnly": true
+        }
+      }
+    },
+    "SharedServerVmDetails": {
+      "type": "object",
+      "description": "The Epic Shared Services Instance VM details.",
+      "properties": {
+        "virtualMachineId": {
+          "type": "string",
+          "description": "The unique identifier of the virtual machine.",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/SharedRole",
+          "description": "The role of the Shared VM.",
+          "readOnly": true
+        }
+      }
+    },
+    "WssRole": {
+      "type": "string",
+      "description": "The role of the Wss VM.",
+      "enum": [
+        "WSSInterConnect",
+        "WBS",
+        "EPS",
+        "MyChart",
+        "BCA"
+      ],
+      "x-ms-enum": {
+        "name": "WssRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WSSInterConnect",
+            "value": "WSSInterConnect",
+            "description": "Role for WSS InterConnect."
+          },
+          {
+            "name": "WBS",
+            "value": "WBS",
+            "description": "Role for WBS."
+          },
+          {
+            "name": "EPS",
+            "value": "EPS",
+            "description": "Role for EPS."
+          },
+          {
+            "name": "MyChart",
+            "value": "MyChart",
+            "description": "Role for MyChart."
+          },
+          {
+            "name": "BCA",
+            "value": "BCA",
+            "description": "Role for BCA."
+          }
+        ]
+      }
+    },
+    "WssServerDetails": {
+      "type": "object",
+      "description": "Represents the registration details of a VM designated for WSS operations.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the virtual machine, crucial for tracking and management within the registration framework."
+        },
+        "role": {
+          "$ref": "#/definitions/WssRole",
+          "description": "Specifies the role that this VM fulfills within the WSS registration setup, aiding in role-based configuration."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "WssServerInstance": {
+      "type": "object",
+      "description": "Define the Epic WSS server Instance resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WssServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WssServerInstanceListResult": {
+      "type": "object",
+      "description": "The response of a WssServerInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WssServerInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/WssServerInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WssServerInstanceTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in WssServerInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WssServerProperties": {
+      "type": "object",
+      "description": "Defines the Epic Wss Services Instance properties.",
+      "properties": {
+        "vmDetails": {
+          "type": "array",
+          "description": "The list of virtual machines corresponding to the Wss Services instance.",
+          "items": {
+            "$ref": "#/definitions/WssServerVmDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "$ref": "#/definitions/EpicVirtualInstanceStatus",
+          "description": "Defines the Epic Instance status.",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/EpicHealthState",
+          "description": "Defines the health of Epic Instances.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/EpicVirtualInstanceProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "#/definitions/EpicVirtualInstanceError",
+          "description": "Defines the errors related to Epic WSS server Instance resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "WssServerVmDetails": {
+      "type": "object",
+      "description": "The Epic Wss Services Instance VM details.",
+      "properties": {
+        "virtualMachineId": {
+          "type": "string",
+          "description": "The unique identifier of the virtual machine.",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/WssRole",
+          "description": "The role of the Wss VM.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

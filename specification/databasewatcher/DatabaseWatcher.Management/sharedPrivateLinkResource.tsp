@@ -12,12 +12,7 @@ using TypeSpec.Rest;
 @armResourceOperations
 interface SharedPrivateLinkResources {
   get is ArmResourceRead<SharedPrivateLinkResource>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrUpdateAsync<
-    SharedPrivateLinkResource,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  create is ArmResourceCreateOrUpdateAsync<SharedPrivateLinkResource>;
   delete is ArmResourceDeleteWithoutOkAsync<SharedPrivateLinkResource>;
   listByWatcher is ArmResourceListByParent<SharedPrivateLinkResource>;
 }
@@ -35,7 +30,7 @@ model SharedPrivateLinkResource
 
 @doc("The generic properties of a Shared Private Link resource.")
 model SharedPrivateLinkResourceProperties {
-  @doc("The resource ID of the resource the shared private link resource is for.")
+  @doc("The resource id of the resource the shared private link resource is for.")
   privateLinkResourceId: Azure.Core.armResourceIdentifier;
 
   @doc("The group id from the provider of resource the shared private link resource is for.")
@@ -44,7 +39,7 @@ model SharedPrivateLinkResourceProperties {
   @doc("The request message for requesting approval of the shared private link resource.")
   requestMessage: string;
 
-  @doc("The DNS zone segment to be included in the DNS name of the shared private link. Value is required for Azure Data Explorer clusters and SQL managed instances, and must be omitted for SQL logical servers and key vaults. The value is the second segment of the host FQDN name of the resource that the shared private link resource is for. For example: if the host name is 'adx-cluster-21187695.eastus.kusto.windows.net', then the value is 'eastus'; if the host name is 'sql-mi-23961134.767d5869f605.database.windows.net', then the value is '767d5869f605'.")
+  @doc("The DNS zone to be included in the DNS name of the shared private link. Value is service-specific.")
   dnsZone?: string;
 
   @visibility(Lifecycle.Read)

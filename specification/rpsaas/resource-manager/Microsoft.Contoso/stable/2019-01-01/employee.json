@@ -1,0 +1,1598 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContosoManagementClient",
+    "description": "Contoso provider",
+    "version": "2019-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Contoso/employees": {
+      "get": {
+        "description": "Returns list of employees.",
+        "operationId": "Employee_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee details.",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Employee_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Employee_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Employee_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Employee_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/employees": {
+      "get": {
+        "description": "Returns list of employees.",
+        "operationId": "Employee_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee details.",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Employee_List_MaximumSet_Gen": {
+            "$ref": "./examples/Employee_List_MaximumSet_Gen.json"
+          },
+          "Employee_List_MinimumSet_Gen": {
+            "$ref": "./examples/Employee_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/employees/{employeeName}": {
+      "get": {
+        "description": "Returns employee resource for a given name.",
+        "operationId": "Employee_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee details.",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Employee_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Employee_Get_MaximumSet_Gen.json"
+          },
+          "Employee_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Employee_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes employee resource for a given name.",
+        "operationId": "Employee_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation completed synchronously."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Employee_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Employee_Delete_MaximumSet_Gen.json"
+          },
+          "Employee_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Employee_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update employee resource.",
+        "operationId": "Employee_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "name": "EmployeeResource",
+            "description": "Employee details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmployeeResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Employee_CreateAndUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Employee_CreateAndUpdate_MaximumSet_Gen.json"
+          },
+          "Employee_CreateAndUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Employee_CreateAndUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update employee details.",
+        "operationId": "Employees_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "name": "EmployeePatchResource",
+            "description": "Employee patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmployeePatchResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Employees_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Employees_Update_MaximumSet_Gen.json"
+          },
+          "Employees_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Employees_Update_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/employees/{employeeName}/nestedResourceType/{nestedResourceName}": {
+      "get": {
+        "description": "Returns nested resources for a given employee name",
+        "operationId": "NestedResourceType_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nested Resource Types.",
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NestedResourceType_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NestedResourceType_Get_MaximumSet_Gen.json"
+          },
+          "NestedResourceType_Get_MinimumSet_Gen": {
+            "$ref": "./examples/NestedResourceType_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update nested resource type.",
+        "operationId": "NestedResourceType_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceNameParameter"
+          },
+          {
+            "name": "NestedResourceType",
+            "description": "Nested Resource Type details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NestedResourceType_CreateAndUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/NestedResourceType_CreateAndUpdate_MaximumSet_Gen.json"
+          },
+          "NestedResourceType_CreateAndUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/NestedResourceType_CreateAndUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update nested resource type details.",
+        "operationId": "NestedResourceType_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NestedResourceNameParameter"
+          },
+          {
+            "name": "NestedResourcePatchResource",
+            "description": "Nested resource patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/NestedResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NestedResourceType_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NestedResourceType_Update_MaximumSet_Gen.json"
+          },
+          "NestedResourceType_Update_MinimumSet_Gen": {
+            "$ref": "./examples/NestedResourceType_Update_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/employees/{employeeName}/nestedResourceType": {
+      "get": {
+        "description": "Returns nested resources for a given employee name",
+        "operationId": "NestedResourceType_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nested Resource Types.",
+            "schema": {
+              "$ref": "#/definitions/NestedResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NestedResourceType_List_MaximumSet_Gen": {
+            "$ref": "./examples/NestedResourceType_List_MaximumSet_Gen.json"
+          },
+          "NestedResourceType_List_MinimumSet_Gen": {
+            "$ref": "./examples/NestedResourceType_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Contoso/extensionResourceType": {
+      "get": {
+        "description": "Returns nextension resource for a given employee name",
+        "operationId": "ExtensionResourceType_ListByExtensions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nested Resource Types.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionResourceType_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionResourceType_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/extensionResourceType": {
+      "get": {
+        "description": "Returns nextension resource for a given employee name",
+        "operationId": "ExtensionResourceType_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nested Resource Types.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionResourceType_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionResourceType_Get_MaximumSet_Gen.json"
+          },
+          "ExtensionResourceType_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ExtensionResourceType_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/extensionResourceType/{extensionResourceName}": {
+      "get": {
+        "description": "Returns extension resources",
+        "operationId": "ExtensionResource_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Extension Resources.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionResource_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionResource_Get_MaximumSet_Gen.json"
+          },
+          "ExtensionResource_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ExtensionResource_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update extension resource.",
+        "operationId": "ExtensionResource_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionResourceNameParameter"
+          },
+          {
+            "name": "ExtensionResourceType",
+            "description": "ExtensionResource details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionResource_CreateAndUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionResource_CreateAndUpdate_MaximumSet_Gen.json"
+          },
+          "ExtensionResource_CreateAndUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/ExtensionResource_CreateAndUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update extension resource details.",
+        "operationId": "ExtensionResource_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionResourceNameParameter"
+          },
+          {
+            "name": "ExtensionResourcePatchResource",
+            "description": "Extension Resource patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionResource_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionResource_Update_MaximumSet_Gen.json"
+          },
+          "ExtensionResource_Update_MinimumSet_Gen": {
+            "$ref": "./examples/ExtensionResource_Update_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Contoso/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "Operation_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operation_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operation_List_MaximumSet_Gen.json"
+          },
+          "Operation_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operation_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/employees/{employeeName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnection_ListByEmployees",
+        "description": "Lists all private endpoint connections of the employee instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_ListByEmployees_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_ListByEmployees_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnection_ListByEmployees_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_ListByEmployees_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/employees/{employeeName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnection_GetByName",
+        "description": "Gets the details of the Private Endpoint Connection specified by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_GetByName_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_GetByName_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnection_GetByName_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_GetByName_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnection_CreateOrUpdate",
+        "description": "Creates a new Private Endpoint Connection or updates an existing one.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private Endpoint Connection Request was completed.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Created. The private endpoint connection update will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnection_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnection_Delete",
+        "description": "Deletes the specified Private Endpoint Connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation completed synchronously."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_Delete_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnection_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/employees/{employeeName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets the private link resources",
+        "operationId": "PrivateEndpointConnection_ListPrivateLinkResources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_ListPrivateLinkResources_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_ListPrivateLinkResources_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnection_ListPrivateLinkResources_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_ListPrivateLinkResources_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Contoso/employees/{employeeName}/privateLinkResources/{privateLinkSubResourceName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets the private link resources",
+        "operationId": "PrivateEndpointConnection_GetPrivateLinkResource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EmployeeNameParameter"
+          },
+          {
+            "name": "privateLinkSubResourceName",
+            "in": "path",
+            "description": "Name of the private link resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnection_GetPrivateLinkResource_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_GetPrivateLinkResource_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnection_GetPrivateLinkResource_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnection_GetPrivateLinkResource_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "type": "object",
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "readOnly": false
+        },
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "#/definitions/systemData"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "EmployeeResource": {
+      "type": "object",
+      "description": "Employee details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [
+            "firstName",
+            "lastName",
+            "group",
+            "likesTea"
+          ],
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "Employee full name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "middleName": {
+              "type": "string",
+              "description": "Employee middle name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Employee last name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "group": {
+              "type": "string",
+              "description": "group like Finance, HR etc...",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "identificationNumber": {
+              "type": "string",
+              "readOnly": true,
+              "description": "unique id assigned at the time of user creation"
+            },
+            "likesTea": {
+              "type": "string",
+              "description": "Gets or sets the deployment mode.",
+              "enum": [
+                "Yes"
+              ],
+              "x-ms-enum": {
+                "name": "likesTea",
+                "modelAsString": true
+              }
+            },
+            "publicNetworkAccess": {
+              "type": "string",
+              "description": "Gets or sets the public network access.",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "name": "publicNetworkAccess",
+                "modelAsString": true
+              }
+            },
+            "privateEndpointConnections": {
+              "type": "array",
+              "readOnly": true,
+              "description": "List of Private Endpoint Connections configured for the employees.",
+              "items": {
+                "$ref": "#/definitions/PrivateEndpointConnection"
+              }
+            }
+          }
+        }
+      }
+    },
+    "EmployeePatchResource": {
+      "type": "object",
+      "description": "Employee patch properties",
+      "properties": {
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "group": {
+              "type": "string",
+              "description": "group like Finance, HR etc..."
+            }
+          }
+        }
+      }
+    },
+    "EmployeeResourceList": {
+      "description": "The list of employees.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of employees list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmployeeResource"
+          }
+        }
+      }
+    },
+    "NestedResource": {
+      "type": "object",
+      "description": "Nested Resource details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "Nested Resource full name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "middleName": {
+              "type": "string",
+              "description": "Nested Resource name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Nested Resource name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "group": {
+              "type": "string",
+              "description": "group like Finance, HR etc...",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "identificationNumber": {
+              "type": "string",
+              "readOnly": true,
+              "description": "unique id assigned at the time of user creation"
+            },
+            "likesTea": {
+              "type": "string",
+              "description": "Gets or sets the deployment mode.",
+              "enum": [
+                "Yes"
+              ],
+              "x-ms-enum": {
+                "name": "likesTea",
+                "modelAsString": true
+              }
+            }
+          },
+          "required": [
+            "firstName",
+            "lastName",
+            "group",
+            "likesTea"
+          ],
+          "type": "object"
+        }
+      }
+    },
+    "NestedResourceList": {
+      "description": "The list of nested resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of nested resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NestedResource"
+          }
+        }
+      }
+    },
+    "ExtensionResource": {
+      "type": "object",
+      "description": "Extension Resource details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "Extension Resource full name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "middleName": {
+              "type": "string",
+              "description": "Extension Resource name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Extension Resource name.",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "group": {
+              "type": "string",
+              "description": "group like Finance, HR etc...",
+              "minLength": 1,
+              "maxLength": 10,
+              "pattern": "^[A-Za-z0-9-._]+$"
+            },
+            "identificationNumber": {
+              "type": "string",
+              "readOnly": true,
+              "description": "unique id assigned at the time of user creation"
+            },
+            "likesTea": {
+              "type": "string",
+              "description": "Gets or sets the deployment mode.",
+              "enum": [
+                "Yes"
+              ],
+              "x-ms-enum": {
+                "name": "likesTea",
+                "modelAsString": true
+              }
+            }
+          },
+          "required": [
+            "firstName",
+            "lastName",
+            "group",
+            "likesTea"
+          ],
+          "type": "object"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      }
+    },
+    "ExtensionResourceList": {
+      "description": "The list of extension resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of extension resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionResource"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequest": {
+      "description": "A request to approve or reject a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Private Endpoint Connection Resource Id.",
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "description": "The connection state of the private endpoint connection.",
+          "properties": {
+            "privateLinkServiceConnectionState": {
+              "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+              "description": "A collection of information about the state of the connection between service consumer and provider."
+            }
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of nested resources list.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "List of private endpoint connections associated with the specified resource."
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The private endpoint connection resource."
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "groupIds": {
+          "description": "The group ids for the private endpoint resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpoint",
+          "description": "The private endpoint resource."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "The provisioning state of the private endpoint connection resource."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the private endpoint connection."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "EmployeeNameParameter": {
+      "name": "employeeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name employee resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "NestedResourceNameParameter": {
+      "name": "nestedResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of nested resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ExtensionResourceNameParameter": {
+      "name": "extensionResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of extension resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

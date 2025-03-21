@@ -78,7 +78,7 @@ interface Gateways {
   /**
    * List Gateway resources by resource group.
    */
-  //#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  //#suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   //@operationId("Gateways_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<Gateway>;
 
