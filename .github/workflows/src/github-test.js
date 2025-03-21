@@ -35,6 +35,7 @@ export default async function importAllModules({ core }) {
     const fullPath = join(githubDir, file);
     const fileUrl = pathToFileURL(fullPath).href;
 
+    // if import fails, throws error which causes step to fail
     const module = await import(fileUrl);
 
     core.info(inspect(module));
