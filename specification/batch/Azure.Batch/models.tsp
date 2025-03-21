@@ -1054,10 +1054,12 @@ model BatchPoolResourceStatistics {
 
   @doc("The total number of disk read operations across all Compute Nodes in the Pool.")
   @encode(string)
+  @clientName("diskReadIops")
   diskReadIOps: int64;
 
   @doc("The total number of disk write operations across all Compute Nodes in the Pool.")
   @encode(string)
+  @clientName("diskWriteIops")
   diskWriteIOps: int64;
 
   @doc("The total amount of data in GiB of disk reads across all Compute Nodes in the Pool.")
@@ -1098,10 +1100,12 @@ model BatchJobStatistics {
 
   @doc("The total number of disk read operations made by all Tasks in the Job.")
   @encode(string)
+  @clientName("readIops")
   readIOps: int64;
 
   @doc("The total number of disk write operations made by all Tasks in the Job.")
   @encode(string)
+  @clientName("writeIops")
   writeIOps: int64;
 
   @doc("The total amount of data in GiB read from disk by all Tasks in the Job.")
@@ -1453,6 +1457,7 @@ model BatchJobNetworkConfiguration {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.")
+  @clientName("skipWithdrawFromVnet")
   skipWithdrawFromVNet: boolean;
 }
 
@@ -2130,6 +2135,7 @@ model NetworkConfiguration {
   subnetId?: string;
 
   @doc("The scope of dynamic vnet assignment.")
+  @clientName("dynamicVnetAssignmentScope")
   dynamicVNetAssignmentScope?: DynamicVNetAssignmentScope;
 
   @doc("The configuration for endpoints on Compute Nodes in the Batch Pool.")
@@ -2461,10 +2467,12 @@ model BatchJobScheduleStatistics {
 
   @doc("The total number of disk read operations made by all Tasks in all Jobs created under the schedule.")
   @encode(string)
+  @clientName("readIops")
   readIOps: int64;
 
   @doc("The total number of disk write operations made by all Tasks in all Jobs created under the schedule.")
   @encode(string)
+  @clientName("writeIops")
   writeIOps: int64;
 
   @doc("The total gibibytes read from disk by all Tasks in all Jobs created under the schedule.")
@@ -3694,10 +3702,12 @@ model BatchTaskStatistics {
 
   @doc("The total number of disk read operations made by the Task.")
   @encode(string)
+  @clientName("readIops")
   readIOps: int64;
 
   @doc("The total number of disk write operations made by the Task.")
   @encode(string)
+  @clientName("writeIops")
   writeIOps: int64;
 
   @doc("The total gibibytes read from disk by the Task.")
