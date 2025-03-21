@@ -9,7 +9,14 @@ import {
   resetGitRepo,
   objectToMap,
 } from "./utils.js";
-import { LogLevel, logMessage, setVsoVariable, vsoAddAttachment, vsoLogIssue } from "./log.js";
+import {
+  LogIssueType,
+  LogLevel,
+  logMessage,
+  setVsoVariable,
+  vsoAddAttachment,
+  vsoLogIssue,
+} from "./log.js";
 import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 
@@ -375,7 +382,7 @@ function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): vo
       const warningTitle = `Warnings occurred while generating SDK from ${specConfigDisplayText}`;
       logMessage(warningTitle, LogLevel.Group);
       const warningsWithTitle = [warningTitle, ...warnings];
-      vsoLogIssue(warningsWithTitle.join("%0D%0A"));
+      vsoLogIssue(warningsWithTitle.join("%0D%0A"), LogIssueType.Warning);
       logMessage("ending group logging", LogLevel.EndGroup);
     }
   }
