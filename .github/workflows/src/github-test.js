@@ -20,8 +20,7 @@ export default async function importAllModules({ core }) {
   const scriptFiles = (await readdir(githubDir, { recursive: true }))
     .filter(
       (f) =>
-        normalize(f).split(sep).includes("src") &&
-        basename(f).toLowerCase().endsWith(".js"),
+        normalize(f).split(sep).includes("src") && basename(f).endsWith(".js"),
     )
     .sort();
 
