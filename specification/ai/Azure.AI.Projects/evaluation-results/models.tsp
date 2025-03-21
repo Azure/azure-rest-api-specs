@@ -18,7 +18,7 @@ namespace Azure.AI.Projects;
 @discriminator("EvaluationResultType")
 model EvaluationResult {
   @doc("Type of Evaluation result")
-  EvaluationResultType: EvaluationResultType;
+  ResultType: ResultType;
 
   @doc("Model Name")
   ModelName: string;
@@ -36,7 +36,7 @@ model EvaluationResult {
   DatasetName: string;
 
   @doc("Metrics")
-  Metrics: Record<string, float64>;
+  Metrics: Record<float64>;
 
   @doc("Blob URI")
   @extension("x-ms-blob-reference", true)
@@ -59,15 +59,22 @@ model PagedEvaluationResult {
   nextLink?: ResourceLocation<EvaluationResult>;
 }
 
-union EvaluationResultType {
-  string,
+enum ResultType {
+  @doc("Benchmark result")
+  Benchmark: "Benchmark",
 
-  @doc("Cloud Evaluation Result")
-  CloudEvaluationResult: "CloudEvaluationResult",
+  @doc("Custom Evaluation Result")
+  CustomEvaluation: "CustomEvaluation",
+
+  @doc("Safety Evaluation Result")
+  SafetyEvaluation: "SafetyEvaluation",
 
   @doc("Red Team Result")
-  RedTeamResult: "RedTeamResult",
+  Redteam: "Redteam",
 
-  @doc("Benchmark result: legacy")
-  BenchmarkResult: "BenchmarkResult",
+  @doc("Simulation Result")
+  Simulation: "Simulation",
+
+  @doc("Azure OpenAI Result")
+  AOAI: "AOAI",
 }
