@@ -63,18 +63,12 @@ enum ResultType {
   @doc("Benchmark result")
   Benchmark: "Benchmark",
 
-  @doc("Custom Evaluation Result")
-  CustomEvaluation: "CustomEvaluation",
-
-  @doc("Safety Evaluation Result")
-  SafetyEvaluation: "SafetyEvaluation",
+  @doc("Evaluations Result")
+  Evaluations: "Evaluations",
 
   @doc("Red Team Result")
   Redteam: "Redteam",
 
   @doc("Simulation Result")
   Simulation: "Simulation",
-
-  @doc("Azure OpenAI Result")
-  AOAI: "AOAI",
 }
