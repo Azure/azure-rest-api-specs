@@ -1495,6 +1495,45 @@
       }
     }
   },
+  "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/nspServiceTags": {
+    "get": {
+      "operationId": "NspServiceTags_List",
+      "description": "Gets the list of service tags supported by NSP. These service tags can be used to create access rules in NSP.",
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      },
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/LocationParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Request successful. Returns the list of service tags supported by NSP.",
+          "schema": {
+            "$ref": "#/definitions/NspServiceTagsListResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "./network.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Check Dns Name Availability": {
+          "$ref": "./examples/NspServiceTagsList.json"
+        }
+      }
+    }
+  },
   "definitions": {
     "NetworkSecurityPerimeter": {
       "type": "object",
@@ -2406,6 +2445,36 @@
       "type": "boolean",
       "description": "Deletes the resource even if it contains any child associations.",
       "x-ms-parameter-location": "method"
+    },
+    "NspServiceTagsResource": {
+      "type": "object",
+      "properties": {
+        "serviceTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "NSP service tags."
+        }
+      },
+      "description": "Resource containing list of NSP service tags."
+    },
+    "NspServiceTagsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspServiceTagsResource"
+          },
+          "description": "Gets paged list of NSP service tags."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP service tags."
     }
   }
 }
