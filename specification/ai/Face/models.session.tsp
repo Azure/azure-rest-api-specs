@@ -72,7 +72,7 @@ model LivenessSessionData {
 model LivenessSessionItem {
   @doc("The unique ID to reference this session.")
   @key("sessionId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("DateTime when this session was created.")
