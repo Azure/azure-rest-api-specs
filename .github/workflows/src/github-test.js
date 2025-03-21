@@ -32,6 +32,7 @@ export default async function importAllModules({ core }) {
     core.info(`Importing ${file}`);
     const fullPath = join(githubDir, file);
     const fileUrl = pathToFileURL(fullPath).href;
-    await import(fileUrl);
+    const module = await import(fileUrl);
+    core.info(module);
   }
 }
