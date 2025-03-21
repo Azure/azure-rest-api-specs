@@ -9,7 +9,7 @@ import { PER_PAGE_MAX } from "./github.js";
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number }>}
+ * @returns {Promise<{owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }>}
  */
 export async function extractInputs(github, context, core) {
   core.info("extractInputs()");
@@ -23,7 +23,7 @@ export async function extractInputs(github, context, core) {
   // with debug enabled to replay the previous context.
   core.isDebug() && core.debug(`context: ${JSON.stringify(context)}`);
 
-  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number }} */
+  /** @type {{ owner: string, repo: string, head_sha: string, issue_number: number, run_id: number, ado_project_url?: string, ado_build_id?: string }} */
   let inputs;
 
   // Add support for more event types as needed
@@ -79,7 +79,6 @@ export async function extractInputs(github, context, core) {
       /** @type {import("@octokit/webhooks-types").WorkflowDispatchEvent} */ (
         context.payload
       );
-
     inputs = {
       owner: payload.repository.owner.login,
       repo: payload.repository.name,
@@ -151,7 +150,8 @@ export async function extractInputs(github, context, core) {
       }
     } else if (
       payload.workflow_run.event === "issue_comment" ||
-      payload.workflow_run.event == "workflow_run"
+      payload.workflow_run.event == "workflow_run" ||
+      payload.workflow_run.event == "check_run"
     ) {
       // Attempt to extract issue number from artifact.  This can be trusted, because it was uploaded from a workflow that is trusted,
       // because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
@@ -191,11 +191,11 @@ export async function extractInputs(github, context, core) {
           }
         }
       }
-
       if (!issue_number) {
-        throw new Error(
+        core.info(
           `Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`,
         );
+        issue_number = NaN;
       }
     } else {
       throw new Error(
@@ -209,6 +209,36 @@ export async function extractInputs(github, context, core) {
       head_sha: payload.workflow_run.head_sha,
       issue_number: issue_number,
       run_id: payload.workflow_run.id,
+    };
+  } else if (context.eventName === "check_run") {
+    let checkRun = context.payload.check_run;
+
+    // Extract the ADO build ID and project URL from the check run details URL
+    const buildUrlRegex = /^(.*?)(?=\/_build\/).*?[?&]buildId=(\d+)/;
+    const match = checkRun.details_url.match(buildUrlRegex);
+    if (!match) {
+      throw new Error(
+        `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
+      );
+    }
+    if (
+      !context.payload.repository ||
+      !context.payload.repository.owner ||
+      !context.payload.repository.owner.login ||
+      !context.payload.repository.name
+    ) {
+      throw new Error(
+        `Could not extract repository owner or name from context payload: ${JSON.stringify(context.payload.repository)}`,
+      );
+    }
+    inputs = {
+      owner: context.payload.repository.owner.login,
+      repo: context.payload.repository.name,
+      head_sha: checkRun.head_sha,
+      ado_build_id: match[2],
+      ado_project_url: match[1],
+      issue_number: NaN,
+      run_id: NaN,
     };
   } else {
     throw new Error(

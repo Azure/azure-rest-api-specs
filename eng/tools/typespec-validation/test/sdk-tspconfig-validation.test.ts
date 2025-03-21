@@ -3,10 +3,7 @@ import { describe, it } from "vitest";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigTsMgmtModularGenerateMetadataTrueSubRule,
-  TspConfigTsMgmtModularHierarchyClientFalseSubRule,
   TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
-  TspConfigTsMgmtModularEnableOperationGroupTrueSubRule,
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
@@ -175,66 +172,6 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
   [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
 );
 
-const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "generateMetadata",
-  true,
-  false,
-  [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-);
-
-const newTsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "generate-metadata",
-  true,
-  false,
-  [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-);
-
-const mixTsManagementGenerateMetadataTestCase = {
-  description: `Validate @azure-tools/typespec-ts's mix options: generate-metadata/generateMetadata with different values`,
-  folder: "aaa.Management",
-  tspconfigContent: createEmitterOptionExample(
-    "@azure-tools/typespec-ts",
-    { key: "generateMetadata", value: true },
-    { key: "generate-metadata", value: false },
-  ),
-  success: false,
-  subRules: [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-};
-
-const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "hierarchyClient",
-  false,
-  true,
-  [new TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
-);
-
-const newTsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "hierarchy-client",
-  false,
-  true,
-  [new TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
-);
-
-const mixTsManagementHierarchyClientTestCases = {
-  description: `Validate @azure-tools/typespec-ts's mix options: hierarchy-client/hierarchyClient with different values`,
-  folder: "aaa.Management",
-  tspconfigContent: createEmitterOptionExample(
-    "@azure-tools/typespec-ts",
-    { key: "hierarchyClient", value: false },
-    { key: "hierarchy-client", value: true },
-  ),
-  success: false,
-  subRules: [new TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
-};
-
 const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
@@ -263,36 +200,6 @@ const mixTsManagementExperimentalExtensibleEnumsTestCases = {
   ),
   success: false,
   subRules: [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
-};
-
-const tsManagementEnableOperationGroupTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "enableOperationGroup",
-  true,
-  false,
-  [new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule()],
-);
-
-const newTsManagementEnableOperationGroupTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "enable-operation-group",
-  true,
-  false,
-  [new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule()],
-);
-
-const mixTsManagementEnableOperationGroupTestCases = {
-  description: `Validate @azure-tools/typespec-ts's mix options: enable-operation-group/enableOperationGroup with different values`,
-  folder: "aaa.Management",
-  tspconfigContent: createEmitterOptionExample(
-    "@azure-tools/typespec-ts",
-    { key: "enableOperationGroup", value: true },
-    { key: "enable-operation-group", value: false },
-  ),
-  success: false,
-  subRules: [new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule()],
 };
 
 const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
@@ -600,21 +507,12 @@ describe("tspconfig", function () {
     // common
     ...commonAzureServiceDirTestCases,
     // ts
-    ...newTsManagementGenerateMetadataTestCases,
-    ...tsManagementGenerateMetadataTestCases,
-    ...newTsManagementHierarchyClientTestCases,
-    ...tsManagementHierarchyClientTestCases,
     ...newTsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementExperimentalExtensibleEnumsTestCases,
-    ...newTsManagementEnableOperationGroupTestCases,
-    ...tsManagementEnableOperationGroupTestCases,
     ...tsManagementPackageDirTestCases,
     ...newTsManagementPackageNameTestCases,
     ...tsManagementPackageNameTestCases,
-    mixTsManagementGenerateMetadataTestCase,
-    mixTsManagementHierarchyClientTestCases,
     mixTsManagementExperimentalExtensibleEnumsTestCases,
-    mixTsManagementEnableOperationGroupTestCases,
     mixTsManagementPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
