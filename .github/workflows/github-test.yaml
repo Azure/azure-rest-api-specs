@@ -48,8 +48,7 @@ jobs:
             import { join } from "path";
             import { pathToFileURL } from "url";
             const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.js");
-            const fileUrl = pathToFileURL(fullPath).href;
-            const { default: importAllModules } = await import(fileUrl);
+            const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
             await importAllModules({ core });
 
       - name: Install dev deps
