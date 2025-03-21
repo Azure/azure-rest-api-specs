@@ -1,14 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "../main.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 @doc("The current status of an async operation.")
 @resource("operationstatuses")
