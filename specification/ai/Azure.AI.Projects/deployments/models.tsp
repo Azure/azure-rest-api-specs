@@ -21,7 +21,7 @@ model Deployment {
   @doc("Name of the deployment")
   @visibility("read")
   @key("name")
-  name: string;
+  deploymentName: string;
 
   @doc("Publisher-specific name of the deployed model")
   @visibility("read")
@@ -31,9 +31,9 @@ model Deployment {
   @visibility("read")
   modelVersion: string;
 
-  @doc("Name of the deployed model's publisher")
+  @doc("The publisher of the deployed model")
   @visibility("read")
-  modelPublisher: string;
+  publisher: string;
 
   @doc("Capabilities of deployed model")
   @visibility("read")
