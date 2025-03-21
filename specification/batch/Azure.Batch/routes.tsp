@@ -135,12 +135,12 @@ interface Batch {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -181,12 +181,12 @@ interface Batch {
   getPool is ReadOperation<
     BatchPoolHeaders & {
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -413,12 +413,12 @@ interface Batch {
       jobId: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -577,12 +577,12 @@ interface Batch {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -608,12 +608,12 @@ interface Batch {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -649,7 +649,7 @@ interface Batch {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -718,12 +718,12 @@ interface Batch {
       jobScheduleId: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -843,12 +843,12 @@ interface Batch {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -899,12 +899,12 @@ interface Batch {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -989,12 +989,12 @@ interface Batch {
       taskId: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
 
       @doc("An OData $expand clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("expand")
       $expand?: string[];
     },
@@ -1040,7 +1040,7 @@ interface Batch {
       taskId: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -1282,7 +1282,7 @@ interface Batch {
       nodeId: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -1426,7 +1426,7 @@ interface Batch {
       $filter?: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -1454,7 +1454,7 @@ interface Batch {
       extensionName: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
     },
@@ -1476,7 +1476,7 @@ interface Batch {
       nodeId: string;
 
       @doc("An OData $select clause.")
-      @query(#{ format: "csv" })
+      @query
       @clientName("select")
       $select?: string[];
     },
