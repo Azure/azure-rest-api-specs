@@ -58,7 +58,9 @@ namespace Azure.AI.Projects.ServicePatterns {
       TEntityType
     )
     @Rest.actionSeparator("/")
-    versions is BuildingBlocks.RepeatableCoreOps.ResourceAction<
+    @Rest.action("versions")
+    @Http.post
+    create is BuildingBlocks.RepeatableCoreOps.ResourceAction<
       TEntityType,
       {
         @doc("The definition of the {name} to create", TEntityType)
