@@ -432,7 +432,7 @@ model ManagedClusterProperties {
   allocatedOutboundPorts?: int32;
 
   /**
-   * The VM image VMSS has been configured with. Generic names such as 'Windows' are allowed. The default value is 'Windows'.
+   * The VM image the node types are configured with. This property controls the Service Fabric component packages to be used for the cluster. Allowed values are: 'Windows'. The default value is 'Windows'.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well known acronym, consistency with other properties"
   @added(Versions.v2025_03_01_preview)
