@@ -60,7 +60,7 @@ export function getArgumentValue(args: string[], flag: string, defaultValue: str
  * Get the relative path from the specification folder
  */
 export function getRelativePathFromSpecification(absolutePath: string): string {
-  const specificationIndex = absolutePath.indexOf("specification/");
+  const specificationIndex = absolutePath.indexOf(path.normalize("specification/"));
   if (specificationIndex !== -1) {
     return absolutePath.slice(Math.max(0, specificationIndex));
   }

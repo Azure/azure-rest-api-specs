@@ -3669,7 +3669,7 @@
       }
     },
     "AzurePostgreSqlSource": {
-      "description": "A copy activity Azure PostgreSQL source.",
+      "description": "A copy activity Azure Database for PostgreSQL source.",
       "type": "object",
       "allOf": [
         {
@@ -3685,7 +3685,7 @@
       }
     },
     "AzurePostgreSqlSink": {
-      "description": "A copy activity Azure PostgreSQL sink.",
+      "description": "A copy activity Azure Database for PostgreSQL sink.",
       "type": "object",
       "allOf": [
         {
@@ -3697,6 +3697,30 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        },
+        "writeMethod": {
+          "description": "The write behavior for the operation. Default is Bulk Insert.",
+          "type": "string",
+          "enum": [
+            "BulkInsert",
+            "CopyCommand",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "AzurePostgreSqlWriteMethodEnum",
+            "modelAsString": true
+          }
+        },
+        "upsertSettings": {
+          "description": "Azure Database for PostgreSQL upsert option settings",
+          "type": "object",
+          "properties": {
+            "keys": {
+              "type": "object",
+              "x-ms-format": "dfe-list-string",
+              "description": "Key column names for unique row identification. Type: array of strings (or Expression with resultType array of strings)."
+            }
+          }
         }
       }
     },
@@ -5756,6 +5780,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5784,6 +5818,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5812,6 +5856,16 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        },
+        "bypassBusinessLogicExecution": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Controls the bypass of Dataverse custom business logic. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "bypassPowerAutomateFlows": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Controls the bypass of Power Automate flows. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [

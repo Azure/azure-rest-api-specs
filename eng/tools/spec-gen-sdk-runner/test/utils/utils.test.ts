@@ -14,16 +14,14 @@ const repoRoot = path.resolve(path.dirname(currentFilePath), "../../../../../");
 describe("Utils", () => {
   describe("findFilesRecursive", () => {
     test("finds all tspconfig.yaml files recursively", () => {
-      const results = findFilesRecursive(
-        `${repoRoot}/specification/contosowidgetmanager`,
-        "tspconfig.yaml",
-      );
+      const searchPath = path.normalize(`${repoRoot}/specification/contosowidgetmanager`);
+      const results = findFilesRecursive(searchPath, "tspconfig.yaml");
       expect(results).toHaveLength(2);
       expect(results).toContain(
-        "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+        path.normalize("specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml"),
       );
       expect(results).toContain(
-        "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+        path.normalize("specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml"),
       );
     });
 
@@ -46,10 +44,15 @@ describe("Utils", () => {
 
   describe("findReadmeFiles", () => {
     test("finds all readme.md files in directory", () => {
-      const results = findReadmeFiles(`${repoRoot}/specification/contosowidgetmanager`);
+      const searchPath = path.normalize(`${repoRoot}/specification/contosowidgetmanager`);
+      const results = findReadmeFiles(searchPath);
       expect(results).toHaveLength(2);
-      expect(results).toContain("specification/contosowidgetmanager/resource-manager/readme.md");
-      expect(results).toContain("specification/contosowidgetmanager/data-plane/readme.md");
+      expect(results).toContain(
+        path.normalize("specification/contosowidgetmanager/resource-manager/readme.md"),
+      );
+      expect(results).toContain(
+        path.normalize("specification/contosowidgetmanager/data-plane/readme.md"),
+      );
     });
 
     test("returns empty array for directory without readme files", () => {
@@ -63,9 +66,9 @@ describe("Utils", () => {
   describe("getRelativePathFromSpecification", () => {
     test("extracts path from specification folder", () => {
       const result = getRelativePathFromSpecification(
-        "/repo/root/specification/apicenter/resource-manager/readme.md",
+        path.normalize("/repo/root/specification/apicenter/resource-manager/readme.md"),
       );
-      expect(result).toBe("specification/apicenter/resource-manager/readme.md");
+      expect(result).toBe(path.normalize("specification/apicenter/resource-manager/readme.md"));
     });
 
     test("returns original path if specification is not found", () => {
@@ -76,9 +79,9 @@ describe("Utils", () => {
 
     test("handles paths with multiple specification occurrences", () => {
       const result = getRelativePathFromSpecification(
-        "/repo/root/specification/old/specification/apicenter/readme.md",
+        path.normalize("/repo/root/specification/old/specification/apicenter/readme.md"),
       );
-      expect(result).toBe("specification/old/specification/apicenter/readme.md");
+      expect(result).toBe(path.normalize("specification/old/specification/apicenter/readme.md"));
     });
 
     test("handles empty path", () => {

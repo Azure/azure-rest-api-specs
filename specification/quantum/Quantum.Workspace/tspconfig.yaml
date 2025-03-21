@@ -3,10 +3,6 @@ parameters:
     default: "sdk/quantum"
   "service-name":
     default: "Microsoft.Quantum"
-  "version-status":
-    default: "preview"
-  "version":
-    default: "2024-03-01-preview"
 emit: ["@azure-tools/typespec-autorest"]
 linter:
   extends:
@@ -18,3 +14,7 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/quantum.json"
     emitter-output-dir: "{project-root}/../"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-quantum"
+    package-name: "{package-dir}"
+    flavor: "azure"

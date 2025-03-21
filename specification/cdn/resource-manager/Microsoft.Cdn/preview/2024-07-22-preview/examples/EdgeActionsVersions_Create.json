@@ -1,0 +1,50 @@
+{
+  "operationId": "EdgeActionVersion_Create",
+  "title": "CreateEdgeActionVersion",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-07-22-preview",
+    "edgeActionName": "edgeAction1",
+    "version": "version2",
+    "resource": {
+      "location": "global",
+      "properties": {
+        "deploymentType": "zip",
+        "isDefaultVersion": "True"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/versions/version2",
+        "name": "version2",
+        "type": "Microsoft.Cdn/edgeActions/versions",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Accepted",
+          "deploymentType": "zip",
+          "validationStatus": "Succeeded",
+          "isDefaultVersion": "True",
+          "lastPackageUpdateTime": "2024-05-25T16:19:23Z"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/versions/version2",
+        "name": "vesrion2",
+        "type": "Microsoft.Cdn/edgAactions/versions",
+        "location": "global",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentType": "zip",
+          "validationStatus": "Succeeded",
+          "isDefaultVersion": "True",
+          "lastPackageUpdateTime": "2024-05-25T16:19:23Z"
+        }
+      }
+    }
+  }
+}

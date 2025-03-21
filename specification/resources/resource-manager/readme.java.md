@@ -52,3 +52,14 @@ input-file:
 - Microsoft.Authorization/stable/2022-06-01/policyAssignments.json
 - Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
 ```
+
+``` yaml $(tag) == 'package-policy-2023-04-java'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policyDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitions.json
+- Microsoft.Authorization/stable/2023-04-01/policySetDefinitionVersions.json
+- Microsoft.Authorization/stable/2023-04-01/policyAssignments.json
+- Microsoft.Authorization/preview/2022-07-01-preview/policyExemptions.json
+```

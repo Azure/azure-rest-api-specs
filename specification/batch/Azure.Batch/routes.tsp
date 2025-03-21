@@ -687,6 +687,128 @@ interface Jobs {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
+#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
+@tag("Certificates")
+interface Certificates {
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @summary("Creates a Certificate to the specified Account.")
+  @doc("Creates a Certificate to the specified Account.")
+  @route("/certificates")
+  @clientName("createCertificateInternal", "java")
+  createCertificate is CreateOperation<
+    {
+      @doc("The Certificate to be created.")
+      @body
+      certificate: BatchCertificate;
+    },
+    {}
+  >;
+
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @summary("Lists all of the Certificates that have been added to the specified Account.")
+  @doc("Lists all of the Certificates that have been added to the specified Account.")
+  @route("/certificates")
+  @clientName("listCertificatesInternal", "java")
+  listCertificates is ListOperation<
+    {
+      @doc("""
+        An OData $filter clause. For more information on constructing this filter, see
+        https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.
+        """)
+      @query
+      @clientName("filter")
+      $filter?: string;
+
+      @doc("An OData $select clause.")
+      @query
+      @clientName("select")
+      $select?: string[];
+    },
+    BatchCertificateListResult
+  >;
+
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @summary("Cancels a failed deletion of a Certificate from the specified Account.")
+  @doc("""
+    If you try to delete a Certificate that is being used by a Pool or Compute
+    Node, the status of the Certificate changes to deleteFailed. If you decide that
+    you want to continue using the Certificate, you can use this operation to set
+    the status of the Certificate back to active. If you intend to delete the
+    Certificate, you do not need to run this operation after the deletion failed.
+    You must make sure that the Certificate is not being used by any resources, and
+    then you can try again to delete the Certificate.
+    """)
+  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
+  @clientName("cancelCertificateDeletionInternal", "java")
+  cancelCertificateDeletion is PostOperation<
+    {
+      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
+      @path
+      thumbprintAlgorithm: string;
+
+      @doc("The thumbprint of the Certificate being deleted.")
+      @path
+      thumbprint: string;
+    },
+    NoContentSuccessResponseHeaders
+  >;
+
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @summary("Deletes a Certificate from the specified Account.")
+  @doc("""
+    You cannot delete a Certificate if a resource (Pool or Compute Node) is using
+    it. Before you can delete a Certificate, you must therefore make sure that the
+    Certificate is not associated with any existing Pools, the Certificate is not
+    installed on any Nodes (even if you remove a Certificate from a Pool, it is not
+    removed from existing Compute Nodes in that Pool until they restart), and no
+    running Tasks depend on the Certificate. If you try to delete a Certificate
+    that is in use, the deletion fails. The Certificate status changes to
+    deleteFailed. You can use Cancel Delete Certificate to set the status back to
+    active if you decide that you want to continue using the Certificate.
+    """)
+  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
+  @clientName("deleteCertificateInternal", "java")
+  deleteCertificate is DeleteOperation<
+    {
+      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
+      @path
+      thumbprintAlgorithm: string;
+
+      @doc("The thumbprint of the Certificate to be deleted.")
+      @path
+      thumbprint: string;
+    },
+    BatchResponseHeaders & {
+      @doc("A process exit code.")
+      @statusCode
+      code: "202";
+    }
+  >;
+
+  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
+  @doc("Gets information about the specified Certificate.")
+  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
+  @clientName("getCertificateInternal", "java")
+  getCertificate is ReadOperation<
+    {
+      @doc("The algorithm used to derive the thumbprint parameter. This must be sha1.")
+      @path
+      thumbprintAlgorithm: string;
+
+      @doc("The thumbprint of the Certificate to get.")
+      @path
+      thumbprint: string;
+
+      @doc("An OData $select clause.")
+      @query
+      @clientName("select")
+      $select?: string[];
+    },
+    BatchCertificate
+  >;
+}
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" ""

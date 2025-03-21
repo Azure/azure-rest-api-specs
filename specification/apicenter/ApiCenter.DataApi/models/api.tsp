@@ -13,10 +13,10 @@ model PagedApiAll {
 @parentResource(Workspace)
 @resource("apis")
 model Api {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "FIXME: misused @visibility to get around this warning"
   @doc("Api identifier.")
   @maxLength(50)
   @key("apiName")
-  @visibility
   name: string;
 
   @doc("The name of the API.")

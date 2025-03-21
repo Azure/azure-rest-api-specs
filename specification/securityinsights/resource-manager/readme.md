@@ -167,7 +167,6 @@ input-file:
   - Microsoft.SecurityInsights/stable/2024-09-01/OnboardingStates.json
   - Microsoft.SecurityInsights/stable/2024-09-01/operations.json
   - Microsoft.SecurityInsights/stable/2024-09-01/SecurityMLAnalyticsSettings.json
-  - Microsoft.SecurityInsights/stable/2024-09-01/SourceControls.json
   - Microsoft.SecurityInsights/stable/2024-09-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2024-09-01/Watchlists.json
 suppressions:
@@ -277,7 +276,6 @@ input-file:
   - Microsoft.SecurityInsights/stable/2024-03-01/Metadata.json
   - Microsoft.SecurityInsights/stable/2024-03-01/OnboardingStates.json
   - Microsoft.SecurityInsights/stable/2024-03-01/SecurityMLAnalyticsSettings.json
-  - Microsoft.SecurityInsights/stable/2024-03-01/SourceControls.json
   - Microsoft.SecurityInsights/stable/2024-03-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2024-03-01/Watchlists.json
   - Microsoft.SecurityInsights/stable/2024-03-01/operations.json
@@ -384,7 +382,6 @@ input-file:
   - Microsoft.SecurityInsights/stable/2023-11-01/Metadata.json
   - Microsoft.SecurityInsights/stable/2023-11-01/OnboardingStates.json
   - Microsoft.SecurityInsights/stable/2023-11-01/SecurityMLAnalyticsSettings.json
-  - Microsoft.SecurityInsights/stable/2023-11-01/SourceControls.json
   - Microsoft.SecurityInsights/stable/2023-11-01/ThreatIntelligence.json
   - Microsoft.SecurityInsights/stable/2023-11-01/Watchlists.json
   - Microsoft.SecurityInsights/stable/2023-11-01/operations.json

@@ -18,7 +18,7 @@ namespace Microsoft.Chaos;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required implementation to avoid breaking .NET SDK changes"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required implementation to avoid breaking .NET SDK changes"
 @Azure.ResourceManager.Private.armResourceInternal(ExperimentProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model Experiment extends Azure.ResourceManager.Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = Experiment,

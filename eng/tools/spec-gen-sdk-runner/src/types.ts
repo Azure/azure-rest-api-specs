@@ -16,3 +16,8 @@ export interface SpecGenSdkCmdInput {
   headRepoHttpsUrl?: string;
   headBranch?: string;
 }
+
+export type CommandLog = {
+  command: string;
+  logIssues: string[];
+};

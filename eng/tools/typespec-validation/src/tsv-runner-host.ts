@@ -1,16 +1,17 @@
-import { join } from "path";
 import { readFile } from "fs/promises";
-import { IGitOperation, TsvHost } from "./tsv-host.js";
 import { globby } from "globby";
+import { join } from "path";
 import { simpleGit } from "simple-git";
+import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
+import { RuleResult } from "./rule-result.js";
+import { IGitOperation, TsvHost } from "./tsv-host.js";
 import {
   checkFileExists,
+  gitDiffTopSpecFolder,
   isDirectory,
   normalizePath,
   runCmd,
-  gitDiffTopSpecFolder,
 } from "./utils.js";
-import { RuleResult } from "./rule-result.js";
 
 export class TsvRunnerHost implements TsvHost {
   checkFileExists(file: string): Promise<boolean> {
@@ -43,5 +44,9 @@ export class TsvRunnerHost implements TsvHost {
 
   globby(patterns: string[]): Promise<string[]> {
     return globby(patterns);
+  }
+
+  getSuppressions(path: string): Promise<Suppression[]> {
+    return getSuppressionsImpl("TypeSpecValidation", path);
   }
 }

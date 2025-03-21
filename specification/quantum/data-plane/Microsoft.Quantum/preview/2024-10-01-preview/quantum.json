@@ -1,0 +1,2330 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Quantum Workspace Services",
+    "version": "2024-10-01-preview",
+    "description": "Azure Quantum Workspace Services",
+    "contact": {
+      "email": "azqengg@microsoft.com"
+    },
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{region}.{serviceBaseUrl}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "region",
+        "in": "path",
+        "description": "The Azure region where the Azure Quantum Workspace is located.",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "serviceBaseUrl",
+        "in": "path",
+        "description": "The Azure Quantum service base url.",
+        "required": true,
+        "type": "string",
+        "default": "quantum.azure.com"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AzureEntraAuth": [
+        "https://quantum.microsoft.com/.default"
+      ]
+    },
+    {
+      "AzureApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "AzureApiKeyAuth": {
+      "type": "apiKey",
+      "description": "Azure Api-Key Authentication",
+      "name": "x-ms-quantum-api-key",
+      "in": "header"
+    },
+    "AzureEntraAuth": {
+      "type": "oauth2",
+      "description": "Azure Entra OAuth2 Authentication",
+      "flow": "application",
+      "scopes": {
+        "https://quantum.microsoft.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs": {
+      "get": {
+        "operationId": "Jobs_List",
+        "description": "List all jobs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedJobDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List jobs in a workspace.": {
+            "$ref": "./examples/Jobs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}": {
+      "get": {
+        "operationId": "Jobs_Get",
+        "description": "Get job by its id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a job by its id.": {
+            "$ref": "./examples/Jobs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Jobs_Create",
+        "description": "Create a new job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a job.": {
+            "$ref": "./examples/Jobs_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Jobs_Update",
+        "description": "Update job properties.",
+        "consumes": [
+          "application/json-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JsonPatchDocument"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobDetails"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patches a job.": {
+            "$ref": "./examples/Jobs_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Jobs_Cancel",
+        "description": "Request the cancellation of an existing job.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Id of the job.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancels a job.": {
+            "$ref": "./examples/Jobs_Cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/providerStatus": {
+      "get": {
+        "operationId": "Providers_List",
+        "description": "List all providers in the workspace with their respective status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedProviderStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get provider and target statuses.": {
+            "$ref": "./examples/Providers_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/quotas": {
+      "get": {
+        "operationId": "Quotas_List",
+        "description": "List quotas for the given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQuota"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get workspace quotas.": {
+            "$ref": "./examples/Quotas_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions": {
+      "get": {
+        "operationId": "Sessions_Listv2",
+        "description": "List all Sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedSessionDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List sessions in a workspace.": {
+            "$ref": "./examples/Sessions_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}": {
+      "get": {
+        "operationId": "Sessions_Get",
+        "description": "Get Session by its id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Id of the session.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a session by its id.": {
+            "$ref": "./examples/Sessions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Sessions_Open",
+        "description": "Open a new session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Id of the session.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Open a session.": {
+            "$ref": "./examples/Sessions_Open.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}:close": {
+      "post": {
+        "operationId": "Sessions_Close",
+        "description": "Close an existing session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Id of the session.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Closes a session by its id.": {
+            "$ref": "./examples/Sessions_Close.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}/jobs": {
+      "get": {
+        "operationId": "SessionsJobs_List",
+        "description": "List jobs in a session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "sessionId",
+            "in": "path",
+            "description": "Id of the session to list jobs from.",
+            "required": true,
+            "type": "string",
+            "maxLength": 36,
+            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedJobDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List jobs in a workspace.": {
+            "$ref": "./examples/SessionsJobs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/storage/sasUri": {
+      "post": {
+        "operationId": "Storage_GetSasUri",
+        "description": "Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CommonParams.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/CommonParams.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/CommonParams.workspaceName"
+          },
+          {
+            "name": "blobDetails",
+            "in": "body",
+            "description": "The details (name and container) of the blob.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlobDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a URL with SAS token for a container/blob.": {
+            "$ref": "./examples/Storage_GetSasUri.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/topLevelItems": {
+      "get": {
+        "operationId": "TopLevelItems_Listv2",
+        "description": "List top-level items.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the Azure resource group.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Name of the Azure Quantum workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+            "x-ms-parameter-location": "client"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomOrderByQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedItemDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List top level items in a workspace.": {
+            "$ref": "./examples/TopLevelItems_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "BlobDetails": {
+      "type": "object",
+      "description": "The details (name and container) of the blob to store or download data.",
+      "properties": {
+        "containerName": {
+          "type": "string",
+          "description": "The container name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "blobName": {
+          "type": "string",
+          "description": "The blob name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "containerName"
+      ]
+    },
+    "CostEstimate": {
+      "type": "object",
+      "description": "The job cost billed by the provider. The final cost on your bill might be slightly different due to added taxes and currency conversion rates.",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "The currency code."
+        },
+        "events": {
+          "type": "array",
+          "description": "List of usage events.",
+          "items": {
+            "$ref": "#/definitions/UsageEvent"
+          },
+          "x-ms-identifiers": []
+        },
+        "estimatedTotal": {
+          "type": "number",
+          "format": "float",
+          "description": "The estimated total."
+        }
+      },
+      "required": [
+        "currencyCode",
+        "estimatedTotal"
+      ]
+    },
+    "DimensionScope": {
+      "type": "string",
+      "description": "The scope at which the quota is applied to.",
+      "enum": [
+        "Workspace",
+        "Subscription"
+      ],
+      "x-ms-enum": {
+        "name": "DimensionScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Workspace",
+            "value": "Workspace",
+            "description": "The quota is applied to the Quantum Workspace."
+          },
+          {
+            "name": "Subscription",
+            "value": "Subscription",
+            "description": "The quota is applied to the Azure Subscription."
+          }
+        ]
+      }
+    },
+    "Errors.WorkspaceItemError": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ItemDetails": {
+      "type": "object",
+      "description": "A workspace item.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/WorkspaceItemId",
+          "description": "Id of the item.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "providerId": {
+          "type": "string",
+          "description": "The unique identifier for the provider.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "description": "The target identifier to run the job.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "itemType": {
+          "$ref": "#/definitions/ItemType",
+          "description": "Type of the Quantum Workspace item",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the item.",
+          "readOnly": true
+        },
+        "beginExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the item began execution.",
+          "readOnly": true
+        },
+        "endExecutionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the item finished execution.",
+          "readOnly": true
+        },
+        "costEstimate": {
+          "$ref": "#/definitions/CostEstimate",
+          "description": "Cost estimate.",
+          "readOnly": true
+        },
+        "errorData": {
+          "$ref": "#/definitions/Errors.WorkspaceItemError",
+          "description": "Error information.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "itemType",
+      "required": [
+        "id",
+        "name",
+        "providerId",
+        "target",
+        "itemType"
+      ]
+    },
+    "ItemType": {
+      "type": "string",
+      "description": "The type of the workspace item.",
+      "enum": [
+        "Job",
+        "Session"
+      ],
+      "x-ms-enum": {
+        "name": "ItemType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Job",
+            "value": "Job",
+            "description": "A program, problem, or application submitted for processing."
+          },
+          {
+            "name": "Session",
+            "value": "Session",
+            "description": "A logical grouping of jobs."
+          }
+        ]
+      }
+    },
+    "JobDetails": {
+      "type": "object",
+      "description": "A job to be run in the workspace.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/WorkspaceItemId",
+          "description": "Id of the job.",
+          "readOnly": true
+        },
+        "jobType": {
+          "$ref": "#/definitions/JobType",
+          "description": "The type of job.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "The ID of the session that the job is part of.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "containerUri": {
+          "type": "string",
+          "description": "The blob container SAS uri, the container is used to host job data.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "inputDataUri": {
+          "type": "string",
+          "description": "The input blob URI, if specified, it will override the default input blob in the container.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "inputDataFormat": {
+          "type": "string",
+          "description": "The format of the input data.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The status of the job.",
+          "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The job metadata. Metadata provides client the ability to store client-specific information",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "cancellationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when a job was successfully cancelled.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "quantumComputingData": {
+          "$ref": "#/definitions/QuantumComputingData",
+          "description": "Quantum computing data.",
+          "readOnly": true
+        },
+        "inputParams": {
+          "type": "object",
+          "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "outputDataUri": {
+          "type": "string",
+          "description": "The output blob uri. When a job finishes successfully, results will be uploaded to this blob.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "outputDataFormat": {
+          "type": "string",
+          "description": "The format of the output data.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "containerUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Job"
+    },
+    "JobStatus": {
+      "type": "string",
+      "description": "The status of the job.",
+      "enum": [
+        "Waiting",
+        "Executing",
+        "Succeeded",
+        "Failed",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The job is waiting in the queue to be executed."
+          },
+          {
+            "name": "Executing",
+            "value": "Executing",
+            "description": "The job is being executed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The job completed with success."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The job completed with failure."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The job was cancelled."
+          }
+        ]
+      }
+    },
+    "JobType": {
+      "type": "string",
+      "description": "The type of the job.",
+      "enum": [
+        "Unknown",
+        "QuantumComputing",
+        "Optimization"
+      ],
+      "x-ms-enum": {
+        "name": "JobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown job type."
+          },
+          {
+            "name": "QuantumComputing",
+            "value": "QuantumComputing",
+            "description": "Quantum Computing job type."
+          },
+          {
+            "name": "Optimization",
+            "value": "Optimization",
+            "description": "Optimization job type."
+          }
+        ]
+      }
+    },
+    "JsonPatchDocument": {
+      "type": "array",
+      "description": "A JSONPatch document as defined by RFC 6902.",
+      "items": {
+        "$ref": "#/definitions/JsonPatchObject"
+      },
+      "x-ms-identifiers": []
+    },
+    "JsonPatchObject": {
+      "type": "object",
+      "description": "A JSONPatch object as defined by RFC 6902.",
+      "properties": {
+        "op": {
+          "$ref": "#/definitions/JsonPatchOperation",
+          "description": "The operation to be performed.",
+          "x-ms-client-name": "operation",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "A JSON-Pointer.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "value": {
+          "type": "object",
+          "description": "A value to be used in the operation on the path.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "description": "Optional field used in copy and move operations.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "op",
+        "path"
+      ]
+    },
+    "JsonPatchOperation": {
+      "type": "string",
+      "description": "The operation to be performed.",
+      "enum": [
+        "add",
+        "remove",
+        "replace",
+        "move",
+        "copy",
+        "test"
+      ],
+      "x-ms-enum": {
+        "name": "JsonPatchOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "add",
+            "value": "add",
+            "description": "Add value operation."
+          },
+          {
+            "name": "remove",
+            "value": "remove",
+            "description": "Remove value operation."
+          },
+          {
+            "name": "replace",
+            "value": "replace",
+            "description": "Replace value operation."
+          },
+          {
+            "name": "move",
+            "value": "move",
+            "description": "Move value operation."
+          },
+          {
+            "name": "copy",
+            "value": "copy",
+            "description": "Copy value operation."
+          },
+          {
+            "name": "test",
+            "value": "test",
+            "description": "Test value operation."
+          }
+        ]
+      }
+    },
+    "MeterPeriod": {
+      "type": "string",
+      "description": "The time period in which the quota's underlying meter is accumulated. Based on calendar year. 'None' is used for concurrent quotas.",
+      "enum": [
+        "None",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "MeterPeriod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The meter period is instantaneous. Used for concurrent quotas."
+          },
+          {
+            "name": "Monthly",
+            "value": "Monthly",
+            "description": "The meter period is per month."
+          }
+        ]
+      }
+    },
+    "PagedItemDetails": {
+      "type": "object",
+      "description": "Paged collection of ItemDetails items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ItemDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/ItemDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedJobDetails": {
+      "type": "object",
+      "description": "Paged collection of JobDetails items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JobDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/JobDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedProviderStatus": {
+      "type": "object",
+      "description": "Paged collection of ProviderStatus items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProviderStatus items on this page",
+          "items": {
+            "$ref": "#/definitions/ProviderStatus"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedQuota": {
+      "type": "object",
+      "description": "Paged collection of Quota items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Quota items on this page",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedSessionDetails": {
+      "type": "object",
+      "description": "Paged collection of SessionDetails items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SessionDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/SessionDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProviderAvailability": {
+      "type": "string",
+      "description": "Provider availability.",
+      "enum": [
+        "Available",
+        "Degraded",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "ProviderAvailability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Provider is available."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Provider is available with degraded experience."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "Provider is unavailable."
+          }
+        ]
+      }
+    },
+    "ProviderStatus": {
+      "type": "object",
+      "description": "Provider status.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Provider id.",
+          "readOnly": true
+        },
+        "currentAvailability": {
+          "$ref": "#/definitions/ProviderAvailability",
+          "description": "Current provider availability.",
+          "readOnly": true
+        },
+        "targets": {
+          "type": "array",
+          "description": "Current target statuses.",
+          "items": {
+            "$ref": "#/definitions/TargetStatus"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "currentAvailability",
+        "targets"
+      ]
+    },
+    "QuantumComputingData": {
+      "type": "object",
+      "description": "Quantum computing data.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of quantum computing items in the job.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "count"
+      ]
+    },
+    "Quota": {
+      "type": "object",
+      "description": "Quota information.",
+      "properties": {
+        "dimension": {
+          "type": "string",
+          "description": "The name of the dimension associated with the quota.",
+          "readOnly": true
+        },
+        "scope": {
+          "$ref": "#/definitions/DimensionScope",
+          "description": "The scope at which the quota is applied.",
+          "readOnly": true
+        },
+        "providerId": {
+          "type": "string",
+          "description": "The unique identifier for the provider.",
+          "readOnly": true
+        },
+        "utilization": {
+          "type": "number",
+          "format": "float",
+          "description": "The amount of the usage that has been applied for the current period.",
+          "readOnly": true
+        },
+        "holds": {
+          "type": "number",
+          "format": "float",
+          "description": "The amount of the usage that has been reserved but not applied for the current period.",
+          "readOnly": true
+        },
+        "limit": {
+          "type": "number",
+          "format": "float",
+          "description": "The maximum amount of usage allowed for the current period.",
+          "readOnly": true
+        },
+        "period": {
+          "$ref": "#/definitions/MeterPeriod",
+          "description": "The time period in which the quota's underlying meter is accumulated. Based on calendar year. 'None' is used for concurrent quotas.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dimension",
+        "scope",
+        "providerId",
+        "utilization",
+        "holds",
+        "limit",
+        "period"
+      ]
+    },
+    "SasUriResponse": {
+      "type": "object",
+      "description": "SAS URI operation response.",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "description": "A URL with a SAS token to upload a blob for execution in the given workspace.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sasUri"
+      ]
+    },
+    "SessionDetails": {
+      "type": "object",
+      "description": "Session, a logical grouping of jobs.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/WorkspaceItemId",
+          "description": "Id of the session.",
+          "readOnly": true
+        },
+        "jobFailurePolicy": {
+          "$ref": "#/definitions/SessionJobFailurePolicy",
+          "description": "Policy controlling the behavior of the Session when a job in the session fails.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/SessionStatus",
+          "description": "The status of the session.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "jobFailurePolicy"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemDetails"
+        }
+      ],
+      "x-ms-discriminator-value": "Session"
+    },
+    "SessionJobFailurePolicy": {
+      "type": "string",
+      "description": "Policy controlling the behavior of the Session when a job in the session fails.",
+      "enum": [
+        "Abort",
+        "Continue"
+      ],
+      "x-ms-enum": {
+        "name": "SessionJobFailurePolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Abort",
+            "value": "Abort",
+            "description": "New jobs submitted after a job fails will be rejected."
+          },
+          {
+            "name": "Continue",
+            "value": "Continue",
+            "description": "New jobs submitted after a job fails will be accepted."
+          }
+        ]
+      }
+    },
+    "SessionStatus": {
+      "type": "string",
+      "description": "The status of the session.",
+      "enum": [
+        "Waiting",
+        "Executing",
+        "Succeeded",
+        "Failed",
+        "Failure(s)",
+        "TimedOut"
+      ],
+      "x-ms-enum": {
+        "name": "SessionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The session is waiting in the queue to be executed."
+          },
+          {
+            "name": "Executing",
+            "value": "Executing",
+            "description": "The session is being executed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The session completed with success."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The session completed with failure."
+          },
+          {
+            "name": "Failure(s)",
+            "value": "Failure(s)",
+            "description": "The session completed with some failures."
+          },
+          {
+            "name": "TimedOut",
+            "value": "TimedOut",
+            "description": "The session timed out."
+          }
+        ]
+      }
+    },
+    "TargetAvailability": {
+      "type": "string",
+      "description": "Target availability.",
+      "enum": [
+        "Available",
+        "Degraded",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "TargetAvailability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Target is available."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Target is available with degraded experience."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "Target is unavailable."
+          }
+        ]
+      }
+    },
+    "TargetStatus": {
+      "type": "object",
+      "description": "Target status.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Target id.",
+          "readOnly": true
+        },
+        "currentAvailability": {
+          "$ref": "#/definitions/TargetAvailability",
+          "description": "Current target availability.",
+          "readOnly": true
+        },
+        "averageQueueTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Average queue time in seconds.",
+          "readOnly": true
+        },
+        "statusPage": {
+          "type": "string",
+          "description": "A page with detailed status of the provider.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "currentAvailability",
+        "averageQueueTime"
+      ]
+    },
+    "UsageEvent": {
+      "type": "object",
+      "description": "Usage event details.",
+      "properties": {
+        "dimensionId": {
+          "type": "string",
+          "description": "The dimension id."
+        },
+        "dimensionName": {
+          "type": "string",
+          "description": "The dimension name."
+        },
+        "measureUnit": {
+          "type": "string",
+          "description": "The unit of measure."
+        },
+        "amountBilled": {
+          "type": "number",
+          "format": "float",
+          "description": "The amount billed."
+        },
+        "amountConsumed": {
+          "type": "number",
+          "format": "float",
+          "description": "The amount consumed."
+        },
+        "unitPrice": {
+          "type": "number",
+          "format": "float",
+          "description": "The unit price."
+        }
+      },
+      "required": [
+        "dimensionId",
+        "dimensionName",
+        "measureUnit",
+        "amountBilled",
+        "amountConsumed",
+        "unitPrice"
+      ]
+    },
+    "WorkspaceItemId": {
+      "type": "string",
+      "description": "Id of the workspace item.",
+      "maxLength": 36,
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "CommonParams.resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the Azure resource group.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_\\.]*$",
+      "x-ms-parameter-location": "client"
+    },
+    "CommonParams.subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
+      "x-ms-parameter-location": "client"
+    },
+    "CommonParams.workspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "Name of the Azure Quantum workspace.",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 50,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]*$",
+      "x-ms-parameter-location": "client"
+    },
+    "CustomFilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomOrderByQueryParameter": {
+      "name": "orderby",
+      "in": "query",
+      "description": "The order of returned items.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomSkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomTopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of jobs taken.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

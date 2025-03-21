@@ -63,6 +63,8 @@ using KeyVault;
 @@clientName(JsonWebKey.dq, "DQ", "go");
 @@clientName(JsonWebKey.qi, "QI", "go");
 
+@@clientName(KeyAttestation.certificatePemFile, "CertificatePEMFile", "go");
+
 // JS configuration
 @@clientName(JsonWebKeyCurveName.P256_K, "P256K", "javascript");
 @@clientName(JsonWebKeySignatureAlgorithm.RSNULL, "Rsnull", "javascript");
