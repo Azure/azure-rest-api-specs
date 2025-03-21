@@ -42,7 +42,6 @@ model WorkflowVersionProperties {
 
   @Azure.ResourceManager.identifiers(#[])
   @doc("A list of stage specs")
-  @visibility(Lifecycle.Read)
   stageSpec: StageSpec[];
 
   @doc("Review id of resolved config for this workflow version")

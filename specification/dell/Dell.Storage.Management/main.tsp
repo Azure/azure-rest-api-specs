@@ -31,11 +31,11 @@ namespace Dell.Storage;
  */
 enum Versions {
   /**
-   * The 2024-08-28-preview API version.
+   * The 2025-02-11-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2_preview: "2024-08-28-preview",
+  v2_preview: "2025-02-11-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

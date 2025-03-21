@@ -180,6 +180,12 @@ model VirtualSwitch {
   @doc("The physical adapter IDs associated with the virtual switch.")
   physicalAdapterIds?: string[];
 
+  @doc("The physical adapter names associated with the virtual switch.")
+  physicalAdapterNames?: string[];
+
+  @doc("The virtual adapter names  associated with the virtual switch.")
+  virtualAdapterNames?: string[];
+
   @doc("The intent ID associated with the virtual switch.")
   intentId?: string;
 }
@@ -258,6 +264,18 @@ model NetworkIntent {
 
   @doc("The network IDs associated with the intent.")
   networkIds?: string[];
+
+  @doc("The physical adapter IDs associated with the intent.")
+  physicalAdapterNames?: string[];
+
+  @doc("The virtual adapter IDs associated with the intent.")
+  virtualAdapterNames?: string[];
+
+  @doc("The virtual switch IDs associated with the intent.")
+  virtualSwitchNames?: string[];
+
+  @doc("The network IDs associated with the intent.")
+  networkNames?: string[];
 }
 
 @doc("Types of networks.")

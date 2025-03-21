@@ -14,7 +14,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("The Network To Network Interconnect resource definition.")
 @Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
 @parentResource(NetworkFabric)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkToNetworkInterconnect
   extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the Network to Network Interconnect.")

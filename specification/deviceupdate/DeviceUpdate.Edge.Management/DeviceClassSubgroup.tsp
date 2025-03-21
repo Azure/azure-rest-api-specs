@@ -29,6 +29,13 @@ model DeviceClassSubgroup
     SegmentName = "deviceClassSubgroups",
     NamePattern = "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
   >;
+
+  // Extended location is not included in TrackedResource yet
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Edge location of the DeviceClassSubgroup.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_05_01_preview)
+  extendedLocation?: ExtendedLocation;
 }
 
 @added(Versions.v2025_05_01_preview)

@@ -14,7 +14,6 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("An EdgePoolNodeResource")
-@includeInapplicableMetadataInPayload(false)
 model EdgeNodePoolResource is TrackedResource<EdgeNodePoolResourceProperties> {
   @doc("An edge node pool resource")
   @key("nodePoolName")
