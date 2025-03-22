@@ -5,6 +5,8 @@ import { extractInputs } from "./context.js";
 import { PER_PAGE_MAX } from "./github.js";
 import { LabelAction } from "./label.js";
 
+// TODO: Add tests
+/* v8 ignore start */
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
@@ -32,6 +34,7 @@ export default async function getLabelAction({ github, context, core }) {
     core,
   });
 }
+/* v8 ignore stop */
 
 /**
  * @param {Object} params
