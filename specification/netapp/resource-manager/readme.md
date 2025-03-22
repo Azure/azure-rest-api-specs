@@ -505,9 +505,11 @@ suppressions:
   
   - code: RequiredPropertiesMissingInResourceModel
     reason: https://eng.ms/docs/products/arm/api_contracts/usagesapicontract
-    where:         
+    where        
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages"].get
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get
      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages"].get.responses.200.schema
      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get.responses.200.schema
      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages"].get.responses.200.schema.properties
-     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get.responses.200.schema.properties
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get.responses.200.schema.properties 
 ```
