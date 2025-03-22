@@ -49,6 +49,12 @@ model ResourceSecurityGroup {
   securityGroup: string;
 }
 
+@doc("Provisioning Mode")
+model ProvisioningMode {
+  @doc("Type of the provisioning mode, either \"Create\" or \"Delete\".")
+  mode: string;
+}
+
 @doc("jitSecurityGroup Resource")
 model JitSecurityGroupResource
   is ProxyResource<JitSecurityGroupResourceProperties> { // this can be TrackedResource based on resourcetype
