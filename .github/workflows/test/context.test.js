@@ -402,7 +402,7 @@ describe("extractInputs", () => {
     });
   });
 
-  it("check_run:completed throw error when the build url is invalid", async () => {
+  it("check_run:completed throw error when the payload is invalid", async () => {
     const github = createMockGithub();
     const context = {
       eventName: "check_run",
@@ -423,6 +423,14 @@ describe("extractInputs", () => {
 
     await expect(
       extractInputs(github, context, createMockCore()),
-    ).rejects.toThrow();
+    ).rejects.toThrow("from check run details URL");
+
+    context.payload.check_run.details_url =
+      "https://dev.azure.com/abc/123-456/_build/results?buildId=56789";
+    delete context.payload.repository.name;
+
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).rejects.toThrow("from context payload");
   });
 });
