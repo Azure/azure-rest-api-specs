@@ -36,9 +36,7 @@ namespace Azure.AI {
     }
   ]>
 )
-@service({
-  title: "Azure AI",
-})
+@service(#{ title: "Azure AI" })
 @server(
   "{endpoint}/agents/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{projectName}",  // This URL is for the Agents API.
   "Azure AI",

@@ -1284,6 +1284,10 @@
       "get": {
         "operationId": "Agents_GetFileContent",
         "description": "Retrieves the raw content of a specific file.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1300,8 +1304,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           },
           "default": {
