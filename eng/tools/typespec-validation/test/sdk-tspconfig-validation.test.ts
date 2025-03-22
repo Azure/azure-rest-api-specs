@@ -3,10 +3,7 @@ import { describe, it } from "vitest";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigTsMgmtModularGenerateMetadataTrueSubRule,
-  TspConfigTsMgmtModularHierarchyClientFalseSubRule,
   TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
-  TspConfigTsMgmtModularEnableOperationGroupTrueSubRule,
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
@@ -175,45 +172,6 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
   [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
 );
 
-const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "generateMetadata",
-  true,
-  false,
-  [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-);
-
-const newTsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "generate-metadata",
-  true,
-  false,
-  [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-);
-
-const mixTsManagementGenerateMetadataTestCase = {
-  description: `Validate @azure-tools/typespec-ts's mix options: generate-metadata/generateMetadata with different values`,
-  folder: "aaa.Management",
-  tspconfigContent: createEmitterOptionExample(
-    "@azure-tools/typespec-ts",
-    { key: "generateMetadata", value: true },
-    { key: "generate-metadata", value: false },
-  ),
-  success: false,
-  subRules: [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-};
-
-const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "hierarchyClient",
-  false,
-  true,
-  [new TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
-);
-
 const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
@@ -223,14 +181,26 @@ const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTest
   [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
 );
 
-const tsManagementEnableOperationGroupTestCases = createEmitterOptionTestCases(
+const newTsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "enableOperationGroup",
+  "experimental-extensible-enums",
   true,
   false,
-  [new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule()],
+  [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
 );
+
+const mixTsManagementExperimentalExtensibleEnumsTestCases = {
+  description: `Validate @azure-tools/typespec-ts's mix options: experimental-extensible-enums/experimentalExtensibleEnums with different values`,
+  folder: "aaa.Management",
+  tspconfigContent: createEmitterOptionExample(
+    "@azure-tools/typespec-ts",
+    { key: "experimentalExtensibleEnums", value: true },
+    { key: "experimental-extensible-enums", value: false },
+  ),
+  success: false,
+  subRules: [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
+};
 
 const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
@@ -249,6 +219,27 @@ const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
   "@azure/aaa-bbb",
   [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
 );
+
+const newTsManagementPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  managementTspconfigFolder,
+  "package-details.name",
+  "@azure/arm-aaa-bbb",
+  "@azure/aaa-bbb",
+  [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
+);
+
+const mixTsManagementPackageNameTestCases = {
+  description: `Validate @azure-tools/typespec-ts's mix options: package-details/packageDetails with different values`,
+  folder: "aaa.Management",
+  tspconfigContent: createEmitterOptionExample(
+    "@azure-tools/typespec-ts",
+    { key: "packageDetails.name", value: "@azure/arm-aaa-bbb" },
+    { key: "package-details.name", value: "@azure/aaa-bbb" },
+  ),
+  success: false,
+  subRules: [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
+};
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
@@ -516,14 +507,13 @@ describe("tspconfig", function () {
     // common
     ...commonAzureServiceDirTestCases,
     // ts
-    ...newTsManagementGenerateMetadataTestCases,
-    ...tsManagementGenerateMetadataTestCases,
-    ...tsManagementHierarchyClientTestCases,
+    ...newTsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementExperimentalExtensibleEnumsTestCases,
-    ...tsManagementEnableOperationGroupTestCases,
     ...tsManagementPackageDirTestCases,
+    ...newTsManagementPackageNameTestCases,
     ...tsManagementPackageNameTestCases,
-    mixTsManagementGenerateMetadataTestCase,
+    mixTsManagementExperimentalExtensibleEnumsTestCases,
+    mixTsManagementPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
