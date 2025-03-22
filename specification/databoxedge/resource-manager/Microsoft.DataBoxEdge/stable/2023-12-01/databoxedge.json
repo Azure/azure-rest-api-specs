@@ -51,45 +51,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/availableSkus": {
-      "get": {
-        "tags": [
-          "AvailableSkus"
-        ],
-        "summary": "List all the available Skus and information related to them.",
-        "operationId": "AvailableSkus_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Lists the available Skus and information related to them.",
-            "schema": {
-              "$ref": "#/definitions/DataBoxEdgeSkuList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AvailableSkus": {
-            "$ref": "./examples/AvailableSkusList.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices": {
       "get": {
         "tags": [
