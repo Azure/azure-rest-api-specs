@@ -144,6 +144,8 @@ export async function getLabelActionImpl({
     }
   }
 
+  // TODO: If issue_number is empty, call issues:getIssueNumber() to find it (or move into context for m
+
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
     owner: owner,
