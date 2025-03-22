@@ -19,6 +19,12 @@ function createMockGithub({ incrementalTypeSpec }) {
     data: {
       workflow_runs: [
         {
+          name: "Unrelated Workflow",
+          id: 444,
+          status: "in_progress",
+          conclusion: null,
+        },
+        {
           name: "ARM Incremental TypeSpec (Preview)",
           id: 456,
           status: "completed",
@@ -44,6 +50,26 @@ describe("getLabelActionImpl", () => {
 
   it("removes label if not incremental typespec", async () => {
     const github = createMockGithub({ incrementalTypeSpec: false });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
+  });
+
+  it("removes label if no runs of incremental typespec", async () => {
+    const github = createMockGithubBase();
+    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+      data: {
+        workflow_runs: [],
+      },
+    });
 
     await expect(
       getLabelActionImpl({
