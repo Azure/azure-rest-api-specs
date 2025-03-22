@@ -7598,9 +7598,18 @@
           "type": "object",
           "description": "The scope of the application registered in Azure Active Directory for AADServicePrincipal authentication."
         },
+        "role": {
+          "type": "object",
+          "description": "The default access control role to use in the Snowflake session. Type: string (or Expression with resultType string)."
+        },
         "host": {
           "type": "object",
-          "description": "The host name of the Snowflake account."
+          "x-ms-format": "dfe-string",
+          "description": "The host name of the Snowflake account. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "privateKey": {
           "$ref": "../artifacts.json#/definitions/SecretBase",
