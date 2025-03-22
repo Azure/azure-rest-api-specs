@@ -1,10 +1,6 @@
 import "@azure-tools/typespec-azure-core";
-import "@typespec/rest";
-import "@typespec/http";
 
 using Azure.Core;
-using TypeSpec.Rest;
-using TypeSpec.Http;
 
 namespace KeyVault;
 
@@ -39,8 +35,8 @@ model SecurityDomainOperationStatus {
   /**
    * Details of the operation status.
    */
-  @encodedName("application/json", "status_details")
-  statusDetails?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  status_details?: string;
 }
 
 /**
@@ -79,8 +75,8 @@ model SecurityDomainJsonWebKey {
   /**
    * Supported key operations.
    */
-  @encodedName("application/json", "key_ops")
-  keyOps: string[];
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  key_ops: string[];
 
   /**
    * RSA modulus.
@@ -95,8 +91,7 @@ model SecurityDomainJsonWebKey {
   /**
    * X509 certificate chain parameter.
    */
-  @encodedName("application/json", "x5c")
-  x5C: string[];
+  x5c: string[];
 
   /**
    * Public Key Use Parameter. This is optional and if present must be enc.
@@ -106,14 +101,13 @@ model SecurityDomainJsonWebKey {
   /**
    * X509 certificate SHA1 thumbprint. This is optional.
    */
-  @encodedName("application/json", "x5t")
-  x5T?: string;
+  x5t?: string;
 
   /**
    * X509 certificate SHA256 thumbprint.
    */
-  @encodedName("application/json", "x5t#S256")
-  x5tS256: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  `x5t#S256`: string;
 
   /**
    * Algorithm intended for use with the key.
@@ -138,14 +132,14 @@ model TransferKey {
   /**
    * Specifies the format of the transfer key.
    */
-  @encodedName("application/json", "key_format")
-  keyFormat?: string = "jwk";
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  key_format?: string = "jwk";
 
   /**
    * Specifies the transfer key in JWK format.
    */
-  @encodedName("application/json", "transfer_key")
-  transferKeyJwk: SecurityDomainJsonWebKey;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
+  transfer_key: SecurityDomainJsonWebKey;
 }
 
 /**
