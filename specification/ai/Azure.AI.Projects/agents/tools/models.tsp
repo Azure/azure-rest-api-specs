@@ -52,8 +52,8 @@ model BingGroundingToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'bing_grounding'.")
   type: "bing_grounding";
 
-  @doc("The list of connections used by the bing grounding tool.")
-  bing_grounding: ToolConnectionList;
+  @doc("The list of configurations to be used by the bing grounding tool.")
+  bing_grounding: BingGroundingSearchConfiguration[];
 }
 
 @doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
@@ -420,6 +420,19 @@ model RunStepFunctionToolCall extends RunStepToolCall {
   function: RunStepFunctionToolCallDetails;
 }
 
+@doc("""
+  A record of a call to an OpenAPI tool, issued by the model in evaluation of a defined tool, that represents
+  executed OpenAPI operations.
+  """)
+model RunStepOpenAPIToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'openapi'.")
+  type: "openapi"
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "openapi")
+  openAPI: Record<string>;
+}
+
 // Call details: Code Interpreter
 
 @doc("The detailed information about a code interpreter invocation by the model.")
@@ -479,6 +492,29 @@ model RunStepFunctionToolCallDetails {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The output of the function, only populated for function calls that have already have had their outputs submitted.")
   output: string | null;
+}
+
+@doc("Search configuration for Bing Grounding")
+model BingGroundingSearchConfiguration {
+  @doc("Connection id for grounding with bing search")
+  @encodedName("application/json", "connection_id")
+  connectionId: string;
+
+  @doc("The market where the results come from.")
+  @encodedName("application/json", "market")
+  market?: string;
+
+  @doc("The language to use for user interface strings when calling Bing API.")
+  @encodedName("application/json", "set_lang")
+  setLang?: string;
+
+  @doc("The number of search results to return in the bing api response")
+  @encodedName("application/json", "count")
+  count?: int64;
+
+  @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
+  @encodedName("application/json", "freshness")
+  freshness?: string;
 }
 
 //
