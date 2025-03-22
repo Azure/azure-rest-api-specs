@@ -8339,10 +8339,20 @@
           "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The Azure key vault secret reference of private key password for KeyPair auth with encrypted private key."
         },
+        "role": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The default access control role to use in the Snowflake session. Type: string (or Expression with resultType string)."
+        },
         "host": {
           "type": "object",
           "x-ms-format": "dfe-string",
-          "description": "The host name of the Snowflake account."
+          "description": "The host name of the Snowflake account. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Schema name for connection. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "string",
