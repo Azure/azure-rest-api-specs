@@ -38,12 +38,47 @@ function createMockGithub({ incrementalTypeSpec }) {
 }
 
 describe("getLabelActionImpl", () => {
-  it("rejects if inputs null", async () => {
+  it("throws if inputs null", async () => {
     await expect(getLabelActionImpl({})).rejects.toThrow();
   });
 
   it("removes label if not incremental typespec", async () => {
     const github = createMockGithub({ incrementalTypeSpec: false });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
+  });
+
+  it("uses latest run of incremental typespec", async () => {
+    const github = createMockGithubBase();
+    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+      data: {
+        workflow_runs: [
+          {
+            name: "ARM Incremental TypeSpec (Preview)",
+            id: 456,
+            status: "completed",
+            conclusion: "success",
+            updated_at: "2020-01-22T19:33:08Z",
+          },
+          {
+            name: "ARM Incremental TypeSpec (Preview)",
+            id: 789,
+            status: "completed",
+            conclusion: "failure",
+            updated_at: "2020-01-23T19:33:08Z",
+          },
+        ],
+      },
+    });
 
     await expect(
       getLabelActionImpl({
