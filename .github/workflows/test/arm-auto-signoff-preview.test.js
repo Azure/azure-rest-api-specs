@@ -48,6 +48,24 @@ describe("getLabelActionImpl", () => {
     await expect(getLabelActionImpl({})).rejects.toThrow();
   });
 
+  it("throws if no artifact from incremental typespec", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: false });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [] },
+    });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).rejects.toThrow();
+  });
+
   it("removes label if not incremental typespec", async () => {
     const github = createMockGithub({ incrementalTypeSpec: false });
 
@@ -61,6 +79,33 @@ describe("getLabelActionImpl", () => {
         core: core,
       }),
     ).resolves.toEqual({ labelAction: LabelAction.Remove, issueNumber: 123 });
+  });
+
+  it("no-ops if incremental typespec in progress", async () => {
+    const github = createMockGithubBase();
+    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+      data: {
+        workflow_runs: [
+          {
+            name: "ARM Incremental TypeSpec (Preview)",
+            id: 456,
+            status: "in_progress",
+            conclusion: null,
+          },
+        ],
+      },
+    });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toEqual({ labelAction: LabelAction.None, issueNumber: 123 });
   });
 
   it("removes label if no runs of incremental typespec", async () => {
