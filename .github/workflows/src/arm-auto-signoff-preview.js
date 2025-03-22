@@ -83,16 +83,21 @@ export async function getLabelActionImpl({
   });
 
   const wfName = "ARM Incremental TypeSpec (Preview)";
-  const incrementalTspRuns = workflowRuns.filter((wf) => wf.name == wfName);
+  const incrementalTspRuns = workflowRuns
+    .filter((wf) => wf.name == wfName)
+    // Sort by "updated_at" descending
+    .sort(
+      (a, b) =>
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+    );
 
   if (incrementalTspRuns.length == 0) {
     core.info(
       `Found no runs for workflow '${wfName}'.  Assuming workflow trigger was skipped, which should be treated equal to "completed false".`,
     );
     return labelActions[LabelAction.Remove];
-  } else if (incrementalTspRuns.length > 1) {
-    throw `Unexpected number of runs for workflow '${wfName}': ${incrementalTspRuns.length}`;
   } else {
+    // Sorted by "updated_at" descending, so most recent run is at index 0
     const run = incrementalTspRuns[0];
 
     if (run.status == "completed") {
