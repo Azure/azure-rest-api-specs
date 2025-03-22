@@ -219,6 +219,41 @@ describe("getLabelActionImpl", () => {
     },
   );
 
+  it("thows if multiple runs for same check", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: true });
+
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMReview" }],
+    });
+
+    github.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          {
+            name: "Swagger LintDiff",
+            status: "in_progress",
+            conclusion: null,
+          },
+          {
+            name: "Swagger LintDiff",
+            status: "in_progress",
+            conclusion: null,
+          },
+        ],
+      },
+    });
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).rejects.toThrow();
+  });
+
   it("no-ops if check not found or not completed", async () => {
     const github = createMockGithub({ incrementalTypeSpec: true });
 
