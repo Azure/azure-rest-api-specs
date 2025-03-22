@@ -14,7 +14,7 @@ namespace Microsoft.AzureCis;
 
 @doc("JIT security group resources properties")
 model JitSecurityGroupResourceProperties {
-  @doc("Instance identificator. Required.")
+  @doc("Instance identifier. Required.")
   instanceId: string;
 
   @doc("Cloud identifier for the JIT security group. Possible options are PROD, blackforest, fairfax, mooncake, ex, rx. Required.")
