@@ -1,0 +1,35 @@
+{
+  "title": "ListBySubscription JitSecurityGroup",
+  "operationId": "JitSecurityGroup_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "api-version": "2023-08-22-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/jitSecurityGroupResources/myElevatedSGTest",
+            "name": "myElevatedSGTest",
+            "type": "Microsoft.AzureCis/jitSecurityGroupResources",
+            "properties": {
+              "instanceId": "4552822d-4b37-4559-8b70-c4fe83564e1a",
+              "cloud": "PROD",
+              "elevatedSecurityGroup": {
+                "scenario": "TestingAMEElevatedSGTemp",
+                "serviceName": "JITQE",
+                "securityGroup": "ame.gbl\\JIT-SvcABC"
+              },
+              "provisioningMode": {
+                "mode": "Create"
+              },
+              "azureLocation": "useast",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
