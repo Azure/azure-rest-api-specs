@@ -2,6 +2,27 @@
 
 import { PER_PAGE_MAX } from "./github.js";
 
+// TODO:
+// Refactor into one method per output, so API calls are pay-for-play
+// Ideally with an in-memory cache (shared by all APIs) to avoid redundant API calls
+// - getOwner()
+// - getRepo()
+// - getHeadSha()
+// - getIssueNumber()
+// - getRunId()
+//
+// OR
+//
+// A single API that returns an object with getter methods, that uses lazy-loading and caching
+// Some props can be extracted directly from context.payload.  Others will need to call (possibly expensive)
+// GH APIs.
+// class GithubContext {
+//   ctor(github, context, core)
+//   get owner()
+//   get repo()
+//   get head_sha()
+// }
+
 /**
  * Extracts inputs from context based on event name and properties.
  * run_id is only defined for "workflow_run:completed" events.
