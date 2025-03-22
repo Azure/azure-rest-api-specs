@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "version": "2025-03-03",
+    "galleryName": "myGalleryName",
+    "galleryScriptName": "myGalleryScriptName",
+    "galleryScript": {
+      "properties": {
+        "description": "This is the gallery script description.",
+        "eula": "This is the gallery script EULA.",
+        "privacyStatementUri": "{myPrivacyStatementUri}",
+        "releaseNoteUri": "{myReleaseNoteUri}",
+        "supportedOSType": "Windows"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "description": "This is the gallery script description.",
+          "eula": "This is the gallery script EULA.",
+          "privacyStatementUri": "myPrivacyStatementUri}",
+          "releaseNoteUri": "myReleaseNoteUri",
+          "supportedOSType": "Windows"
+        },
+        "location": "West US",
+        "name": "myGalleryScriptName",
+        "type": "Microsoft.Compute/galleries",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/scripts/myGalleryScriptName"
+      }
+    }
+  }
+}
