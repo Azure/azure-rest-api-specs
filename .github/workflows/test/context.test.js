@@ -236,8 +236,22 @@ describe("extractInputs", () => {
         },
       );
 
+      github.rest.search.issuesAndPullRequests.mockResolvedValue({
+        data: { total_count: 1, items: [{ number: 789 }] },
+      });
+
       const inputsPromise = extractInputs(github, context, createMockCore());
-      if (numPullRequests === 1) {
+      if (numPullRequests === 0) {
+        await expect(inputsPromise).resolves.toEqual({
+          owner: "TestRepoOwnerLogin",
+          repo: "TestRepoName",
+          head_sha: "abc123",
+          issue_number: 789,
+          run_id: 456,
+        });
+
+        expect(github.rest.search.issuesAndPullRequests).toHaveBeenCalled();
+      } else if (numPullRequests === 1) {
         await expect(inputsPromise).resolves.toEqual({
           owner: "TestRepoOwnerLogin",
           repo: "TestRepoName",
@@ -245,6 +259,9 @@ describe("extractInputs", () => {
           issue_number: 123,
           run_id: 456,
         });
+
+        // Search API should not be needed
+        expect(github.rest.search.issuesAndPullRequests).toBeCalledTimes(0);
       } else {
         await expect(inputsPromise).rejects.toThrow();
       }

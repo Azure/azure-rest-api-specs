@@ -1,27 +1,7 @@
 // @ts-check
 
 import { PER_PAGE_MAX } from "./github.js";
-
-// TODO:
-// Refactor into one method per output, so API calls are pay-for-play
-// Ideally with an in-memory cache (shared by all APIs) to avoid redundant API calls
-// - getOwner()
-// - getRepo()
-// - getHeadSha()
-// - getIssueNumber()
-// - getRunId()
-//
-// OR
-//
-// A single API that returns an object with getter methods, that uses lazy-loading and caching
-// Some props can be extracted directly from context.payload.  Others will need to call (possibly expensive)
-// GH APIs.
-// class GithubContext {
-//   ctor(github, context, core)
-//   get owner()
-//   get repo()
-//   get head_sha()
-// }
+import { getIssueNumber } from "./issues.js";
 
 /**
  * Extracts inputs from context based on event name and properties.
@@ -160,10 +140,13 @@ export async function extractInputs(github, context, core) {
           },
         );
 
-        if (pullRequests.length === 1) {
+        if (pullRequests.length === 0) {
+          // Fallback to search API
+          issue_number = (await getIssueNumber({ head_sha, github, core }))
+            .issueNumber;
+        } else if (pullRequests.length === 1) {
           issue_number = pullRequests[0].number;
         } else {
-          // TODO: Consider calling search API in target repo if we get an unexpected result from the head repo (#33005)
           throw new Error(
             `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual: '${pullRequests.length}'.`,
           );
