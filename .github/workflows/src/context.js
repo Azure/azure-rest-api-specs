@@ -96,7 +96,7 @@ export async function extractInputs(github, context, core) {
         context.payload
       );
 
-    let issue_number;
+    let issue_number = NaN;
 
     if (
       payload.workflow_run.event === "pull_request" ||
@@ -151,6 +151,11 @@ export async function extractInputs(github, context, core) {
             `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual: '${pullRequests.length}'.`,
           );
         }
+        if (!issue_number) {
+          core.info(
+            `Could not find PR for ${head_sha} in ${head_owner}:${head_repo} from either the "commits" or "search" REST APIs`,
+          );
+        }
       }
     } else if (
       payload.workflow_run.event === "issue_comment" ||
@@ -199,7 +204,6 @@ export async function extractInputs(github, context, core) {
         core.info(
           `Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`,
         );
-        issue_number = NaN;
       }
     } else {
       throw new Error(
