@@ -317,21 +317,22 @@
           "description": "Indicates the type of metric alert"
         },
         "properties": {
-          "oneOf": [
+          "allOf": [
             {
-              "$ref": "#/definitions/MetricAlertsMetricProperties"
+              "$ref": "#/definitions/MetricAlertsPropertiesBase"
             },
             {
-              "$ref": "#/definitions/MetricAlertsQueryProperties"
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": ["Metric", "Query"],
+                  "description": "Indicates the type of metric alert"
+                }
+              },
+              "required": ["kind"]
             }
-          ],
-          "discriminator": {
-            "propertyName": "kind",
-            "mapping": {
-              "Metric": "#/definitions/MetricAlertsMetricProperties",
-              "Query": "#/definitions/MetricAlertsQueryProperties"
-            }
-          }
+          ]
         }
       }
     },
@@ -529,7 +530,7 @@
       }
     },
     "MetricAlertResourceCollection": {
-      "type": "object", 
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -551,7 +552,7 @@
               "description": "Error code"
             },
             "message": {
-              "type": "string", 
+              "type": "string",
               "description": "Error message"
             }
           }
