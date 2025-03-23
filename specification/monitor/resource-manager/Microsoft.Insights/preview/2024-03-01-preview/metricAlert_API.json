@@ -6,9 +6,15 @@
     "version": "2024-03-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/metricAlerts/{ruleName}": {
       "get": {
@@ -326,11 +332,16 @@
               "properties": {
                 "kind": {
                   "type": "string",
-                  "enum": ["Metric", "Query"],
+                  "enum": [
+                    "Metric",
+                    "Query"
+                  ],
                   "description": "Indicates the type of metric alert"
                 }
               },
-              "required": ["kind"]
+              "required": [
+                "kind"
+              ]
             }
           ]
         }
