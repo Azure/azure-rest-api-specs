@@ -43,7 +43,7 @@ directive:
     from: Issues.json
   - code: MISSING_APIS_IN_DEFAULT_TAG
     from: AlertsManagement.json
-    where: $.paths["/subscriptions/{subscriptionId}/providers/microsoft.alertsmanagement/alerts","/subscriptions/{}/providers/microsoft.alertsmanagement/alerts/{alertId}"]
+    where: $.paths["/subscriptions/{subscriptionId}/providers/microsoft.alertsmanagement/alerts"]
     reason: These API paths were replaced by "{Scope}/providers/microsoft.alertsmanagement/..." which provides the same functionality.
 ```
 
