@@ -1,16 +1,17 @@
 {
-  "title": "EdgeMachineJobs_CreateOrUpdate_MaximumSet",
+  "title": "EdgeMachineJobs_CreateOrUpdate_MachineAssistant",
   "operationId": "EdgeMachineJobs_CreateOrUpdate",
   "parameters": {
     "api-version": "2024-11-01-preview",
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "ArcInstance-rg",
     "edgeMachineName": "machine1",
-    "jobsName": "triggerLogCollection",
+    "jobsName": "MachineAssistant",
     "resource": {
       "properties": {
-        "jobType": "EdgeMachineJobProperties",
-        "deploymentMode": "Validate"
+        "jobType": "MachineAssistant",
+        "deploymentMode": "Deploy",
+        "intent": "OS provision failure details"
       }
     }
   },
@@ -18,18 +19,17 @@
     "200": {
       "body": {
         "properties": {
-          "jobType": "CollectLog",
-          "fromDate": "2024-01-29T10:43:27.9471574Z",
-          "toDate": "2024-01-29T10:43:27.9471574Z",
-          "deploymentMode": "Validate",
+          "jobType": "MachineAssistant",
+          "deploymentMode": "Deploy",
+          "intent": "OS provision failure details",
           "provisioningState": "Succeeded",
           "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
           "startTimeUtc": "2024-12-03T11:31:42.387Z",
           "endTimeUtc": "2024-12-03T11:31:42.387Z",
           "status": "NotSpecified"
         },
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/jobs/collectLog",
-        "name": "collectLog",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/jobs/machineassistant",
+        "name": "machineAssistant",
         "type": "Microsoft.AzureStackHCI/edgeMachines/jobs",
         "systemData": {
           "createdBy": "user1",
@@ -47,17 +47,16 @@
       },
       "body": {
         "properties": {
-          "jobType": "CollectLog",
-          "fromDate": "2024-01-29T10:43:27.9471574Z",
-          "toDate": "2024-01-29T10:43:27.9471574Z",
-          "deploymentMode": "Validate",
+          "jobType": "MachineAssistant",
+          "deploymentMode": "Deploy",
           "provisioningState": "Succeeded",
+          "intent": "OS provision failure details",
           "jobId": "egmijofqvbbkscxzfghmybzwdhfwny",
           "startTimeUtc": "2024-12-03T11:31:42.387Z",
           "endTimeUtc": "2024-12-03T11:31:42.387Z",
           "status": "NotSpecified"
         },
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/jobs/collectLog",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/jobs/machineAssistant",
         "name": "collectLog",
         "type": "Microsoft.AzureStackHCI/edgeMachines/jobs",
         "systemData": {

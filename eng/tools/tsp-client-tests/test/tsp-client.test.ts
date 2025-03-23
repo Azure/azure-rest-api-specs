@@ -76,7 +76,6 @@ test.skip.concurrent("Convert contosowidgetmanager/data-plane", async ({ expect 
   await convert(expect, "specification/contosowidgetmanager/data-plane/readme.md");
 });
 
-// Disabled due to https://github.com/Azure/autorest/issues/5089
-test.skip.concurrent("Convert contosowidgetmanager/resource-manager", async ({ expect }) => {
+test.concurrent("Convert contosowidgetmanager/resource-manager", async ({ expect }) => {
   await convert(expect, "specification/contosowidgetmanager/resource-manager/readme.md");
 });

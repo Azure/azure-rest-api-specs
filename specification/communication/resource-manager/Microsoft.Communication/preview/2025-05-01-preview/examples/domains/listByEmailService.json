@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
+    "resourceGroupName": "MyResourceGroup",
+    "emailServiceName": "MyEmailServiceResource",
+    "api-version": "2025-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/EmailServices/MyEmailServiceResource/Domains/mydomain.com",
+            "name": "mydomain.com",
+            "type": "Microsoft.Communication/EmailServices/Domains",
+            "location": "Global",
+            "properties": {
+              "provisioningState": "Running",
+              "dataLocation": "United States",
+              "fromSenderDomain": "mydomain.com",
+              "mailFromSenderDomain": "mydomain.com",
+              "domainManagement": "CustomerManaged",
+              "verificationStates": {
+                "Domain": {
+                  "status": "Verified",
+                  "errorCode": ""
+                },
+                "SPF": {
+                  "status": "NotStarted",
+                  "errorCode": ""
+                }
+              },
+              "verificationRecords": {
+                "Domain": {
+                  "type": "TXT",
+                  "name": "recordName",
+                  "value": "recordValue",
+                  "ttl": 3600
+                },
+                "SPF": {
+                  "type": "TXT",
+                  "name": "recordName",
+                  "value": "recordValue",
+                  "ttl": 3600
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
