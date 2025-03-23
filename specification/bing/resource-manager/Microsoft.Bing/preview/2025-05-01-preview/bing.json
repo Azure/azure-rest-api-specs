@@ -1396,6 +1396,17 @@
     }
   },
   "parameters": {
+    "configurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Bing custom configuration.",
+      "x-ms-parameter-location": "method"
+    },
     "accountNameParameter": {
       "name": "accountName",
       "in": "path",
