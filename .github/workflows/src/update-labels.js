@@ -101,7 +101,6 @@ export async function updateLabelsImpl({
     (labelsToAdd.length > 0 || labelsToRemove.length > 0) &&
     Number.isNaN(issue_number)
   ) {
-    // TODO: Add call to search API
     throw new Error(
       `Invalid value for 'issue_number':${issue_number}. Expected an 'issue-number' artifact created by the workflow run.`,
     );
