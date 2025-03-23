@@ -2,6 +2,9 @@ name: Setup Node and install dependencies
 description: Uses specified Node version and installs dependencies (typically using "npm")
 
 inputs:
+  cache:
+    description: "Type of caching, pass empty string to disable"
+    default: "npm"
   node-version:
     description: "Node version to use"
     default: 22.x
@@ -19,7 +22,7 @@ runs:
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
-        cache: npm
+        cache: ${{ inputs.cache }}
 
     - run: |
         echo "::group::$INSTALL_COMMAND"
