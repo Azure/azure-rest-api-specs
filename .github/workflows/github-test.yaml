@@ -41,7 +41,7 @@ jobs:
 
       - run: Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 
-      - run: pnpm install --frozen-lockfile --prod
+      - run: C:\Users\runneradmin\AppData\Local\pnpm install --frozen-lockfile --prod
 
       - name: Verify all modules are importable
         uses: actions/github-script@v7
@@ -59,7 +59,7 @@ jobs:
           cache: pnpm
           cache-dependency-path: .github/pnpm-lock.yaml
 
-      - run: pnpm install --frozen-lockfile
+      - run: C:\Users\runneradmin\AppData\Local\pnpm install --frozen-lockfile
 
       # - run: npm run lint
 
