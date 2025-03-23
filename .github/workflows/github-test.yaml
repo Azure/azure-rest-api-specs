@@ -36,7 +36,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20.x
-          working-directory: .gihub
 
       - run: npm install -g pnpm
 
@@ -57,7 +56,6 @@ jobs:
           node-version: 20.x
           cache: pnpm
           cache-dependency-path: .github
-          working-directory: .gihub
 
       - run: pnpm install --frozen-lockfile
 
