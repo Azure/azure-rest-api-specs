@@ -41,6 +41,10 @@ directive:
   - suppress: GuidUsage
     reason: The IDs of investigation entities are GUIDs.
     from: Issues.json
+  - code: MISSING_APIS_IN_DEFAULT_TAG
+    from: AlertsManagement.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/microsoft.alertsmanagement/alerts","/subscriptions/{}/providers/microsoft.alertsmanagement/alerts/{alertId}"]
+    reason: These API paths were replaced by "{Scope}/providers/microsoft.alertsmanagement/..." which provides the same functionality.
 ```
 
 ``` yaml
