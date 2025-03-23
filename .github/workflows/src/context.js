@@ -141,7 +141,16 @@ export async function extractInputs(github, context, core) {
         );
 
         if (pullRequests.length === 0) {
-          // Fallback to search API
+          // There are three cases where the "commits" REST API called above can return
+          // empty, even if there is an open PR from the commit:
+          //
+          // 1. If the head branch of a fork PR is the default branch of the fork repo, the
+          //    API always returns empty. (#33315)
+          // 2. If a PR was just merged, the API may return empty for a brief window (#33416).
+          // 3. The API may fail occasionally for no known reason (#33417).
+          //
+          // In any case, the solution is to fall back to the (lower-rate-limit) search API.
+          // The search API is confirmed to work in case #1, but has not been tested in #2 or #3.
           issue_number = (await getIssueNumber({ head_sha, github, core }))
             .issueNumber;
         } else if (pullRequests.length === 1) {
