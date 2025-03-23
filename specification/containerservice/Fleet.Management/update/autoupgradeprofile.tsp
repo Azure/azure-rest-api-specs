@@ -30,7 +30,7 @@ model AutoUpgradeProfile
   @minLength(1)
   @maxLength(50)
   @path
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
   ...EntityTagProperty;
@@ -45,11 +45,11 @@ union AutoUpgradeProfileProvisioningState {
 @doc("The properties of the AutoUpgradeProfile.")
 @added(Versions.v2024_05_02_preview)
 model AutoUpgradeProfileProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the AutoUpgradeProfile resource.")
   provisioningState?: AutoUpgradeProfileProvisioningState;
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The resource id of the UpdateStrategy resource to reference. If not specified, the auto upgrade will run on all clusters which are members of the fleet.")
   updateStrategyId?: FleetUpdateStrategyResourceId;
 
@@ -88,7 +88,7 @@ union UpgradeChannel {
 @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
 @added(Versions.v2024_05_02_preview)
 model AutoUpgradeNodeImageSelection {
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The node image upgrade type.")
   type: AutoUpgradeNodeImageSelectionType;
 }

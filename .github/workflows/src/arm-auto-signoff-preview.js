@@ -1,8 +1,8 @@
 // @ts-check
 
-import { extractInputs } from "../../src/context.js";
-import { PER_PAGE_MAX } from "../../src/github.js";
-import { LabelAction } from "../../src/label.js";
+import { extractInputs } from "./context.js";
+import { PER_PAGE_MAX } from "./github.js";
+import { LabelAction } from "./label.js";
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments

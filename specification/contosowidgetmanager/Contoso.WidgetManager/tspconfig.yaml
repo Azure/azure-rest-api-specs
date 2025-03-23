@@ -37,3 +37,12 @@ options:
     package-dir: "azure-contoso-widgetmanager"
     namespace: com.azure.contoso.widgetmanager
     flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/contosowidget"
+    package-dir: "azmanager"
+    module-version: "0.0.1"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true

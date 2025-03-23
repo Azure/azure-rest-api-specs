@@ -28,7 +28,7 @@ model EvidenceResource extends Azure.ResourceManager.Foundations.ProxyResource {
    */
   @key("evidenceName")
   @segment("evidences")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-_.]+$")
   @path
   name: string;

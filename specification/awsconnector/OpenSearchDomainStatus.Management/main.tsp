@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -139,7 +137,7 @@ model AwsOpenSearchDomainStatusProperties {
   logPublishingOptions?: Record<LogPublishingOption>;
 
   @doc("<p>Information about the domain properties that are currently being modified.</p>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   modifyingProperties?: ModifyingProperties[];
 
   @doc("<p>Whether node-to-node encryption is enabled or disabled.</p>")
@@ -1071,15 +1069,12 @@ model SoftwareUpdateOptions {
 @doc("Definition of VPCDerivedInfo")
 model VPCDerivedInfo {
   @doc("<p>The list of Availability Zones associated with the VPC subnets.</p>")
-  @extension("x-ms-identifiers", [])
   availabilityZones?: string[];
 
   @doc("<p>The list of security group IDs associated with the VPC endpoints for the domain.</p>")
-  @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
   @doc("<p>A list of subnet IDs associated with the VPC endpoints for the domain.</p>")
-  @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 
   @doc("<p>The ID for your VPC. Amazon VPC generates this value when you create a VPC.</p>")

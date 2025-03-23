@@ -235,7 +235,7 @@ model AssetResource {
 
   @doc("The system generated unique id for the resource.")
   @key("assetId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The caller provided unique name for the resource.")
@@ -518,7 +518,7 @@ model DataConnection {
 
   @doc("The caller provided unique name for the resource.")
   @key("dataConnectionName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The name that can be used for display purposes.")
@@ -528,7 +528,7 @@ model DataConnection {
   content?: DataConnectionContent;
 
   @doc("The date the data connection was created.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDate?: utcDateTime;
 
   @doc("The rate at which the data connection will receive updates.")
@@ -538,18 +538,18 @@ model DataConnection {
   frequencyOffset?: int32;
 
   @doc("The date the data connection was last updated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updatedDate?: utcDateTime;
 
   @doc("The date the data connection was last updated by user.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   userUpdatedAt?: utcDateTime;
 
   @doc("An indicator of whether the data connection is active.")
   active?: boolean;
 
   @doc("A message that specifies details about data connection if inactive.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inactiveMessage?: string;
 }
 
@@ -624,16 +624,16 @@ model ActionParameters {
 @resource("policies")
 model Policy {
   @doc("This is typically the same as the name but might be different for different models.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("The caller provided unique name for the resource.")
   @key("policyName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The name that can be used for display purposes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   @doc("A human readable description of what the policy should do.")
@@ -646,19 +646,19 @@ model Policy {
   action: PolicyAction;
 
   @doc("Number of assets in inventory that have been updated by this policy.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updatedAssetsCount?: int64;
 
   @doc("The unique name of the user that created the policy user@gmail.com")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   user?: string;
 
   @doc("The date this policy was created, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDate?: utcDateTime;
 
   @doc("The date this policy was last updated, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updatedDate?: utcDateTime;
 
   @doc("Additional parameters needed to perform the policy action.")
@@ -673,7 +673,7 @@ model DiscoGroup {
 
   @doc("The caller provided unique name for the resource.")
   @key("groupName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The name that can be used for display purposes.")
@@ -766,7 +766,7 @@ model DiscoSource {
 model DiscoTemplate {
   @doc("The system generated unique id for the resource.")
   @key("templateId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The caller provided unique name for the resource.")
@@ -1323,7 +1323,7 @@ model SavedFilter {
 
   @doc("The caller provided unique name for the resource.")
   @key("filterName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The name that can be used for display purposes.")
@@ -1442,7 +1442,7 @@ model SubResourceIntegrityCheck {
 model Task {
   @doc("The unique identifier of the task.")
   @key("taskId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("The time the task started.")
@@ -2172,7 +2172,7 @@ model RequiredFilterParameter {
 @Versioning.added(Versions.v2024_03_01_preview)
 model CisaCveResult {
   @key("cveId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits.")
   cveId: string;
 
