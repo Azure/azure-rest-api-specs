@@ -44,7 +44,7 @@ directive:
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-preview-2025-03-01
+tag: package-preview-2025-03-01-preview
 ```
 
 ### Tag: package-preview-2025-03-01-preview
