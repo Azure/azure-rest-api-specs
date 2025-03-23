@@ -290,6 +290,9 @@
   "definitions": {
     "MetricAlertResource": {
       "type": "object",
+      "required": [
+        "kind"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -323,27 +326,12 @@
           "description": "Indicates the type of metric alert"
         },
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MetricAlertsPropertiesBase"
-            },
-            {
-              "type": "object",
-              "properties": {
-                "kind": {
-                  "type": "string",
-                  "enum": [
-                    "Metric",
-                    "Query"
-                  ],
-                  "description": "Indicates the type of metric alert"
-                }
-              },
-              "required": [
-                "kind"
-              ]
-            }
-          ]
+          "$ref": "#/definitions/MetricAlertsPropertiesBase",
+          "discriminator": "kind",
+          "x-ms-discriminator-mapping": {
+            "Metric": "#/definitions/MetricAlertsMetricProperties",
+            "Query": "#/definitions/MetricAlertsQueryProperties"
+          }
         }
       }
     },
@@ -426,6 +414,7 @@
           "$ref": "#/definitions/MetricAlertsPropertiesBase"
         }
       ],
+      "x-ms-discriminator-value": "Metric",
       "type": "object",
       "required": [
         "windowSize",
@@ -447,6 +436,7 @@
           "$ref": "#/definitions/MetricAlertsPropertiesBase"
         }
       ],
+      "x-ms-discriminator-value": "Query",
       "type": "object",
       "required": [
         "criteria"
