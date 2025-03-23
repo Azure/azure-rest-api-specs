@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "MyResourceGroup",
+    "accountName": "MyAccount",
+    "configurationName": "MyConfiguration"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/configurations/MyConfiguration",
+        "name": "MyConfiguration",
+        "type": "Microsoft.Bing/accounts/configurations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "allowedList": [
+            {
+              "domain": "www.example.com",
+              "includeSubPages": true,
+              "boostLevel": "Default"
+            }
+          ],
+          "blockedList": [
+            {
+              "domain": "www.blockedexample.com",
+              "includeSubPages": true
+            }
+          ],
+          "pinnedList": [
+            {
+              "domain": "www.pinnedexample.com",
+              "query": "example query",
+              "condition": "Contains"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
