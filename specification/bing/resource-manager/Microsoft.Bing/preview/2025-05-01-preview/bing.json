@@ -34,6 +34,263 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/configurations/{configurationName}": {
+      "put": {
+        "tags": [
+          "BingCustomConfigurations"
+        ],
+        "description": "Creates a Bing Custom Search configuration.",
+        "operationId": "Configurations_Create",
+        "x-ms-examples": {
+          "Create Configuration": {
+            "$ref": "./examples/CreateConfiguration.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/configurationNameParameter"
+          },
+          {
+            "name": "configuration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BingCustomConfiguration"
+            },
+            "description": "The parameters of the configuration to create."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource is successfully created or already existed.",
+            "schema": {
+              "$ref": "#/definitions/BingCustomConfiguration"
+            }
+          },
+          "201": {
+            "description": "The resource is created and the operation will complete asynchronously",
+            "schema": {
+              "$ref": "#/definitions/BingCustomConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BingCustomConfigurations"
+        ],
+        "description": "Updates a Bing Custom Search configuration.",
+        "operationId": "Configurations_Update",
+        "x-ms-examples": {
+          "Update Configuration": {
+            "$ref": "./examples/UpdateConfiguration.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/configurationNameParameter"
+          },
+          {
+            "name": "configuration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BingCustomConfiguration"
+            },
+            "description": "The parameters to update in the configuration."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The update completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BingCustomConfiguration"
+            }
+          },
+          "202": {
+            "description": "The update was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/BingCustomConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BingCustomConfigurations"
+        ],
+        "description": "Deletes a Bing Custom Search configuration from the Bing account.",
+        "operationId": "Configurations_Delete",
+        "x-ms-examples": {
+          "Delete Configuration": {
+            "$ref": "./examples/DeleteConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/configurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "204": {
+            "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BingCustomConfigurations"
+        ],
+        "description": "Returns a Bing Custom Search configuration specified by the parameters.",
+        "operationId": "Configurations_Get",
+        "x-ms-examples": {
+          "Get Configuration": {
+            "$ref": "./examples/GetConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/configurationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"",
+            "schema": {
+              "$ref": "#/definitions/BingCustomConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/configurations":{
+      "get": {
+        "tags": [
+          "BingCustomConfigurations"
+        ],
+        "description": "Returns all the Bing Custom Search configurations for the specified Bing account.",
+        "operationId": "Configurations_ListByAccount",
+        "x-ms-examples": {
+          "List Configurations by Account": {
+            "$ref": "./examples/ListConfigurationsByAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with \"value\" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "schema": {
+              "$ref": "#/definitions/BingCustomConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) will be returned.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}": {
       "put": {
         "tags": [
