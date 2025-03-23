@@ -44,7 +44,16 @@ directive:
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2023-03
+tag: package-preview-2025-03-01
+```
+
+### Tag: package-preview-2025-03-01-preview
+
+These settings apply only when `--tag=package-preview-2025-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03-01-preview'
+input-file:
+  - Microsoft.AlertsManagement/preview/2025-03-01-preview/AlertsManagement.json
 ```
 
 ### Tag: package-preview-2024-01
