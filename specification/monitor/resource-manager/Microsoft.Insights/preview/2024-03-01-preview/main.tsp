@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "MetricAlertClient",
-  version: "2024-03-01-preview"
+  version: "2024-03-01-preview",
 })
 namespace Microsoft.Insights;
 

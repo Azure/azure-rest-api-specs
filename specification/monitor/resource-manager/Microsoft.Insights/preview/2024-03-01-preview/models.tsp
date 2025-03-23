@@ -63,7 +63,13 @@ model MetricAlertRuleCriteria {
   threshold?: float64;
 
   @doc("The operator used to compare the metric value against the threshold")
-  operator?: "Equals" | "NotEquals" | "GreaterThan" | "GreaterThanOrEqual" | "LessThan" | "LessThanOrEqual";
+  operator?:
+    | "Equals"
+    | "NotEquals"
+    | "GreaterThan"
+    | "GreaterThanOrEqual"
+    | "LessThan"
+    | "LessThanOrEqual";
 }
 
 @doc("Query resolve configuration")
