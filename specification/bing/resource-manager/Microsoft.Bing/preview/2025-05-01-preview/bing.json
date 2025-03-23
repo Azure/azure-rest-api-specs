@@ -624,6 +624,180 @@
     }
   },
   "definitions": {
+    "BingCustomConfiguration":{
+      "description": "Bing Custom Configuration is an Azure resource representing Bing Custom Search configuration type, allowed domains, bloked domains and pinned domains.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the created configuration",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the created configuration",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/BingCustomConfigurationProperties",
+          "description": "Properties of Bing Custom Search configuration."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "required": [
+        "properties"
+      ]
+    },
+    "BingCustomConfigurationProperties": {
+      "properties": {
+        "allowedList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AllowedDomain"
+          },
+          "description": "List of allowed domains for Bing Custom Search configuration."
+        },
+        "blockedList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlockedDomain"
+          },
+          "description": "List of blocked domains for Bing Custom Search configuration."
+        },
+        "pinnedList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PinnedDomain"
+          },
+          "description": "List of pinned domains for Bing Custom Search configuration."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the Bing Custom Search configuration at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Moving",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Properties of Bing Custom Search Configuration.",
+      "required": [
+        "allowedList",
+        "blockedList",
+        "pinnedList"
+      ]
+    },
+    "AllowedDomain": {
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The domain to allow."
+        },
+        "includeSubPages": {
+          "type": "boolean",
+          "description": "A flag indicating whether to include subpages of the allowed domain."
+        },
+        "boostLevel": {
+          "type": "string",
+          "description": "The boost level for the allowed domain.",
+          "enum": [
+            "Demoted",
+            "Default",
+            "Boosted",
+            "SuperBoost"
+          ],
+          "x-ms-enum": {
+            "name": "BoostLevel",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "An allowed domain for Bing Custom Search configuration.",
+      "required": [
+        "domain",
+        "includeSubPages",
+        "boostLevel"
+      ]
+    },
+    "BlockedDomain": {
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The domain to block."
+        },
+        "includeSubPages": {
+          "type": "boolean",
+          "description": "A flag indicating whether to include subpages of the blocked domain."
+        }
+      },
+      "description": "A blocked domain for Bing Custom Search configuration.",
+      "required": [
+        "domain",
+        "includeSubPages"
+      ]
+    },
+    "PinnedDomain": {
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The domain to pin."
+        },
+        "query": {
+          "type": "string",
+          "description": "The query to match for the pinned domain."
+        },
+        "condition": {
+          "type": "string",
+          "description": "The condition for the pinned domain.",
+          "enum": [
+            "StartsWith",
+            "Contains",
+            "EndsWith",
+            "Exact"
+          ],
+          "x-ms-enum": {
+            "name": "PinnedDomainCondition",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "A pinned domain for Bing Custom Search configuration.",
+      "required": [
+        "domain",
+        "query",
+        "condition"
+      ]
+    },
+    "BingCustomConfigurationListResult": {
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of configurations.",
+          "type": "string"
+        },
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BingCustomConfiguration"
+          },
+          "description": "Gets the list of Bing Custom Search configurations and their properties."
+        }
+      },
+      "description": "The list of Bing Custom Search configurations operation response."
+    },
     "BingAccountKind": {
       "type": "string",
       "description": "Required. Indicates the type of Bing account."
