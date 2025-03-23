@@ -604,23 +604,36 @@
     "PreviewAlertRuleRequest": {
       "type": "object",
       "properties": {
-        "ruleType": {
+        "location": {
           "type": "string",
-          "description": "The query parameter that specifies rule type to be previewed."
+          "description": "The location of the rule resource."
         },
-        "lookbackPeriod": {
-          "type": "string",
-          "description": "The query parameter that specifies the lookback of the preview."
-        },
-        "alertRule": {
-          "$ref": "#/definitions/LogAlertRuleResource",
-          "description": "The alert rule to preview."
+        "properties": {
+          "type": "object",
+          "properties": {
+            "lookbackPeriod": {
+              "type": "string",
+              "description": "Specifies the lookback of the preview."
+            },
+            "alertRuleType": {
+              "type": "string",
+              "description": "The type of the alert rule to be previewed."
+            },
+            "alertRuleProperties": {
+              "$ref": "#/definitions/LogAlertRuleResource",
+              "description": "The properties of the alert rule to preview."
+            }
+          },
+          "required": [
+            "lookbackPeriod",
+            "alertRuleType",
+            "alertRuleProperties"
+          ]
         }
       },
       "required": [
-        "ruleType",
-        "lookbackPeriod",
-        "alertRule"
+        "location",
+        "properties"
       ]
     }
   }
