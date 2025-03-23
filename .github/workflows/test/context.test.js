@@ -236,9 +236,40 @@ describe("extractInputs", () => {
         },
       );
 
-      const inputsPromise = extractInputs(github, context, createMockCore());
-      if (numPullRequests === 1) {
-        await expect(inputsPromise).resolves.toEqual({
+      if (numPullRequests === 0) {
+        github.rest.search.issuesAndPullRequests.mockResolvedValue({
+          data: { total_count: 0, items: [] },
+        });
+
+        await expect(
+          extractInputs(github, context, createMockCore()),
+        ).resolves.toEqual({
+          owner: "TestRepoOwnerLogin",
+          repo: "TestRepoName",
+          head_sha: "abc123",
+          issue_number: NaN,
+          run_id: 456,
+        });
+
+        github.rest.search.issuesAndPullRequests.mockResolvedValue({
+          data: { total_count: 1, items: [{ number: 789 }] },
+        });
+
+        await expect(
+          extractInputs(github, context, createMockCore()),
+        ).resolves.toEqual({
+          owner: "TestRepoOwnerLogin",
+          repo: "TestRepoName",
+          head_sha: "abc123",
+          issue_number: 789,
+          run_id: 456,
+        });
+
+        expect(github.rest.search.issuesAndPullRequests).toHaveBeenCalled();
+      } else if (numPullRequests === 1) {
+        await expect(
+          extractInputs(github, context, createMockCore()),
+        ).resolves.toEqual({
           owner: "TestRepoOwnerLogin",
           repo: "TestRepoName",
           head_sha: "abc123",
@@ -246,7 +277,9 @@ describe("extractInputs", () => {
           run_id: 456,
         });
       } else {
-        await expect(inputsPromise).rejects.toThrow();
+        await expect(
+          extractInputs(github, context, createMockCore()),
+        ).rejects.toThrow("Unexpected number of pull requests");
       }
 
       expect(
