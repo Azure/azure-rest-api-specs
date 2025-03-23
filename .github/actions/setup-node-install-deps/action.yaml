@@ -3,14 +3,14 @@ description: Uses specified Node version and installs dependencies (typically us
 
 inputs:
   node-version:
-    description: 'Node version to use'
+    description: "Node version to use"
     default: 22.x
   install-command:
-    description: 'Command to install dependencies'
-    default: 'npm ci'
+    description: "Command to install dependencies"
+    default: "npm ci"
   working-directory:
-    description: 'Working directory'
-    default: '.'
+    description: "Working directory"
+    default: "."
 
 runs:
   using: "composite"
@@ -19,11 +19,7 @@ runs:
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
-
-    - if: runner.os == 'Windows'
-      run: |
-        Set-MpPreference -DisableRealtimeMonitoring $true
-      shell: pwsh
+        cache: npm
 
     - run: |
         echo "::group::$INSTALL_COMMAND"
@@ -33,11 +29,6 @@ runs:
       env:
         INSTALL_COMMAND: ${{ inputs.install-command }}
       working-directory: ${{ inputs.working-directory }}
-      
-    - if: runner.os == 'Windows'
-      run: |
-        Set-MpPreference -DisableRealtimeMonitoring $false
-      shell: pwsh
 
     - run: |
         echo "::group::npm ls -a"
