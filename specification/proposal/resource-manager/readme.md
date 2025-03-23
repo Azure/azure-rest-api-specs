@@ -27,7 +27,7 @@ These are the global settings for the proposal service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-01-01
+tag: package-2025-01-01-preview
 ```
 
 ### Tag: package-2025-01-01-preview
