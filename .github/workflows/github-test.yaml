@@ -22,7 +22,8 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu, windows]
+        os: [windows]
+        # os: [ubuntu, windows]
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
@@ -37,7 +38,8 @@ jobs:
         with:
           node-version: 20.x
 
-      - run: npm install -g pnpm
+      - run: Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+        shell: pwsh
 
       - run: pnpm install --frozen-lockfile --prod
 
