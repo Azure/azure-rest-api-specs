@@ -20,7 +20,14 @@ const __dirname = dirname(__filename);
  * @prop {string} path
  * @prop {string} content
  * @prop {Object} globalConfig
- * @prop {Map<string, Object>} tags
+ * @prop {Map<string, Swagger[]>} tags
+ */
+
+/**
+ * @typedef {Object} Swagger
+ * @prop {string} path
+ * @prop {string} content
+ * @prop {Set<string>} refs
  */
 
 /**
@@ -49,11 +56,14 @@ export async function getSpecModel(folder, options = {}) {
  * @returns {Readme}
  */
 function getReadme(path) {
-  const readmeText = readFileSync(join(__dirname, "..", "..", path), {
+  // TODO: Do not assume location is with respect to repo root, could be reading
+  // files from a different root location (e.g. "before" state of repo in 
+  // another folder).
+  const content = readFileSync(join(__dirname, "..", "..", path), {
     encoding: "utf8",
   });
 
-  const tokens = marked.lexer(readmeText);
+  const tokens = marked.lexer(content);
 
   /** @type import("marked").Tokens.Code[] */
   const yamlBlocks = tokens
@@ -71,15 +81,50 @@ function getReadme(path) {
     {},
   );
 
-  //     const tag =
-  //       block.lang?.match(/yaml \$\(tag\) == '([^']*)'/)?.[1] || "default";
+  const tags = new Map();
+  for (const block of yamlBlocks) {
+    const tagName = block.lang?.match(/yaml \$\(tag\) == '([^']*)'/)?.[1] || "default";
+
+    if (tagName === "default") { 
+      // Skip yaml blocks where this is no tag
+      continue; 
+    }
+    const obj = yaml.parse(block.text);
+
+    const swaggers = []; /** @type Swagger[] */
+    for(const swaggerPath of obj["input-file"]) { 
+      const swagger = getSwagger(join(dirname(path), swaggerPath));
+      swaggers.push(swagger);
+    }
+
+    tags.set(tagName, swaggers);
+  }
 
   const readme = {
     path,
-    content: readmeText,
+    content,
     globalConfig,
-    tags: new Map(),
+    tags,
   };
 
   return readme;
+}
+
+/**
+ * @param {string} path
+ * @returns {Swagger}
+ */
+function getSwagger(path) {
+  // TODO: Do not assume location is with respect to repo root, could be reading
+  // files from a different root location (e.g. "before" state of repo in 
+  // another folder).
+  const content = readFileSync(join(__dirname, "..", "..", path), {
+    encoding: "utf8",
+  });
+
+  return {
+    path,
+    content,
+    refs: new Set(),
+  }
 }
