@@ -384,7 +384,8 @@ model AcsRouterJobExceptionTriggeredEventData extends AcsRouterJobEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobQueuedEventData extends AcsRouterJobEventData {
   /** Router Job Priority */
-  priority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  priority: int32;
 
   /** Router Job Queued Attached Worker Selector */
   attachedWorkerSelectors: AcsRouterWorkerSelector[];
@@ -462,7 +463,8 @@ union AcsRouterJobStatus {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobSchedulingFailedEventData extends AcsRouterJobEventData {
   /** Router Job Priority */
-  priority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  priority: int32;
 
   /** Router Job Scheduling Failed Attached Worker Selector Expired */
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
@@ -493,7 +495,8 @@ model AcsRouterJobUnassignedEventData extends AcsRouterJobEventData {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsRouterJobWaitingForActivationEventData extends AcsRouterJobEventData {
   /** Router Job Waiting For Activation Priority */
-  priority?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  priority: int32;
 
   /** Router Job Waiting For Activation Worker Selector Expired */
   expiredAttachedWorkerSelectors: AcsRouterWorkerSelector[];
@@ -669,7 +672,8 @@ model AcsRouterWorkerEventData extends AcsRouterEventData {
 /** Schema of common properties of all Router events */
 model AcsRouterEventData {
   /** Router Event Job ID */
-  jobId?: string;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  jobId: string;
 
   /** Router Event Channel Reference */
   channelReference?: string;
