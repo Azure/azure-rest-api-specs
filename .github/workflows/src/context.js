@@ -1,6 +1,7 @@
 // @ts-check
 
 import { PER_PAGE_MAX } from "./github.js";
+import { getIssueNumber } from "./issues.js";
 
 /**
  * Extracts inputs from context based on event name and properties.
@@ -95,7 +96,7 @@ export async function extractInputs(github, context, core) {
         context.payload
       );
 
-    let issue_number;
+    let issue_number = NaN;
 
     if (
       payload.workflow_run.event === "pull_request" ||
@@ -139,12 +140,29 @@ export async function extractInputs(github, context, core) {
           },
         );
 
-        if (pullRequests.length === 1) {
+        if (pullRequests.length === 0) {
+          // There are three cases where the "commits" REST API called above can return
+          // empty, even if there is an open PR from the commit:
+          //
+          // 1. If the head branch of a fork PR is the default branch of the fork repo, the
+          //    API always returns empty. (#33315)
+          // 2. If a PR was just merged, the API may return empty for a brief window (#33416).
+          // 3. The API may fail occasionally for no known reason (#33417).
+          //
+          // In any case, the solution is to fall back to the (lower-rate-limit) search API.
+          // The search API is confirmed to work in case #1, but has not been tested in #2 or #3.
+          issue_number = (await getIssueNumber({ head_sha, github, core }))
+            .issueNumber;
+        } else if (pullRequests.length === 1) {
           issue_number = pullRequests[0].number;
         } else {
-          // TODO: Consider calling search API in target repo if we get an unexpected result from the head repo (#33005)
           throw new Error(
             `Unexpected number of pull requests associated with commit '${head_sha}'. Expected: '1'. Actual: '${pullRequests.length}'.`,
+          );
+        }
+        if (!issue_number) {
+          core.info(
+            `Could not find PR for ${head_sha} in ${head_owner}:${head_repo} from either the "commits" or "search" REST APIs`,
           );
         }
       }
@@ -195,7 +213,6 @@ export async function extractInputs(github, context, core) {
         core.info(
           `Could not find 'issue-number' artifact, which is required to associate the triggering workflow run with a PR`,
         );
-        issue_number = NaN;
       }
     } else {
       throw new Error(
