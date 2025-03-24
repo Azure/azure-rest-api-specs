@@ -7,45 +7,57 @@ import {
   runSpecGenSdkCommand,
   getAllTypeSpecPaths,
   resetGitRepo,
+  objectToMap,
 } from "./utils.js";
-import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
-import { CommandLog, SpecGenSdkCmdInput } from "./types.js";
+import {
+  LogIssueType,
+  LogLevel,
+  logMessage,
+  setVsoVariable,
+  vsoAddAttachment,
+  vsoLogIssue,
+} from "./log.js";
+import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 
 export async function generateSdkForSingleSpec(): Promise<number> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
-  const specConfigPath = `${commandInput.tspConfigPath} ${commandInput.readmePath}`;
+  const specConfigPathText = `${commandInput.tspConfigPath} ${commandInput.readmePath}`;
+
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
-  logMessage(`Generating SDK from ${specConfigPath}`, LogLevel.Group);
-  logMessage(`Command:${specGenSdkCommand.join(" ")}`);
+  logMessage(`Generating SDK from ${specConfigPathText}`, LogLevel.Group);
+  logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
   let statusCode = 0;
   try {
     await runSpecGenSdkCommand(specGenSdkCommand);
-    logMessage("Command executed successfully");
+    logMessage("Runner command executed successfully");
   } catch (error) {
-    logMessage(`Error executing command:${error}`, LogLevel.Error);
+    logMessage(`Runner: error executing command:${error}`, LogLevel.Error);
     statusCode = 1;
   }
+
   // Read the execution report to determine if the generation was successful
   const executionReportPath = path.join(
     commandInput.workingFolder,
     `${commandInput.sdkRepoName}_tmp/execution-report.json`,
   );
+  let executionReport;
   try {
-    const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
     const executionResult = executionReport.executionResult;
-    logMessage(`Execution Result:${executionResult}`);
+    logMessage(`Runner command execution result:${executionResult}`);
   } catch (error) {
-    logMessage(`Error reading execution report at ${executionReportPath}:${error}`, LogLevel.Error);
+    logMessage(
+      `Runner: error reading execution report at ${executionReportPath}:${error}`,
+      LogLevel.Error,
+    );
     statusCode = 1;
   }
   logMessage("ending group logging", LogLevel.EndGroup);
+  logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
 
-  logIssuesToPipeline(commandInput, specConfigPath);
-  
   return statusCode;
 }
 
@@ -60,9 +72,12 @@ export async function generateSdkForSpecPr(): Promise<number> {
 
   let statusCode = 0;
   let pushedSpecConfigCount;
+  let shouldLabelBreakingChange = false;
+  let breakingChangeLabel = "";
+  let executionReport;
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
-      logMessage("No spec config file found in the changed files", LogLevel.Warn);
+      logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
       continue;
     }
     pushedSpecConfigCount = 0;
@@ -74,16 +89,16 @@ export async function generateSdkForSpecPr(): Promise<number> {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
       pushedSpecConfigCount++;
     }
-    const changedSpecPath = `${changedSpec.typespecProject} ${changedSpec.readmeMd}`;
-    logMessage(`Generating SDK from ${changedSpecPath}`, LogLevel.Group);
-    logMessage(`Command:${specGenSdkCommand.join(" ")}`);
+    const changedSpecPathText = `${changedSpec.typespecProject} ${changedSpec.readmeMd}`;
+    logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
+    logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
 
     try {
       await resetGitRepo(commandInput.localSdkRepoPath);
       await runSpecGenSdkCommand(specGenSdkCommand);
-      logMessage("Command executed successfully");
+      logMessage("Runner command executed successfully");
     } catch (error) {
-      logMessage(`Error executing command:${error}`, LogLevel.Error);
+      logMessage(`Runner: error executing command:${error}`, LogLevel.Error);
       statusCode = 1;
     }
     // Pop the spec config path from specGenSdkCommand
@@ -95,22 +110,28 @@ export async function generateSdkForSpecPr(): Promise<number> {
       commandInput.workingFolder,
       `${commandInput.sdkRepoName}_tmp/execution-report.json`,
     );
+
     try {
-      const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
       const executionResult = executionReport.executionResult;
-      logMessage(`Execution Result:${executionResult}`);
+      [shouldLabelBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
+      logMessage(`Runner command execution result:${executionResult}`);
     } catch (error) {
       logMessage(
-        `Error reading execution report at ${executionReportPath}:${error}`,
+        `Runner: error reading execution report at ${executionReportPath}:${error}`,
         LogLevel.Error,
       );
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-
-    logIssuesToPipeline(commandInput, changedSpecPath);
+    logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
   }
+  // Process the breaking change label artifacts
+  statusCode = processBreakingChangeLabelArtifacts(
+    commandInput,
+    shouldLabelBreakingChange,
+    breakingChangeLabel,
+  );
   return statusCode;
 }
 
@@ -134,22 +155,24 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
   let failedCount = 0;
   let notEnabledCount = 0;
   let succeededCount = 0;
+  let executionReport;
 
   // Generate SDKs for each spec
   for (const specConfigPath of specConfigPaths) {
     logMessage(`Generating SDK from ${specConfigPath}`, LogLevel.Group);
+
     if (specConfigPath.endsWith("tspconfig.yaml")) {
       specGenSdkCommand.push("--tsp-config-relative-path", specConfigPath);
     } else {
       specGenSdkCommand.push("--readme-relative-path", specConfigPath);
     }
-    logMessage(`Command:${specGenSdkCommand.join(" ")}`);
+    logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
     try {
       await resetGitRepo(commandInput.localSdkRepoPath);
       await runSpecGenSdkCommand(specGenSdkCommand);
-      logMessage("Command executed successfully");
+      logMessage("Runner command executed successfully");
     } catch (error) {
-      logMessage(`Error executing command:${error}`, LogLevel.Error);
+      logMessage(`Runner: error executing command:${error}`, LogLevel.Error);
       statusCode = 1;
     }
 
@@ -162,10 +185,9 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       `${commandInput.sdkRepoName}_tmp/execution-report.json`,
     );
     try {
-      const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
       const executionResult = executionReport.executionResult;
-      logMessage(`Execution Result:${executionResult}`);
+      logMessage(`Runner: command execution result:${executionResult}`);
 
       if (executionResult === "succeeded" || executionResult === "warning") {
         succeededContent += `${specConfigPath},`;
@@ -179,14 +201,13 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       }
     } catch (error) {
       logMessage(
-        `Error reading execution report at ${executionReportPath}:${error}`,
+        `Runner: error reading execution report at ${executionReportPath}:${error}`,
         LogLevel.Error,
       );
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    
-    logIssuesToPipeline(commandInput, specConfigPath || '');
+    logIssuesToPipeline(executionReport.vsoLogPath, specConfigPath);
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -211,10 +232,10 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       fs.rmSync(markdownFilePath);
     }
     fs.writeFileSync(markdownFilePath, markdownContent);
-    logMessage(`Markdown file written to ${markdownFilePath}`);
+    logMessage(`Runner: markdown file written to ${markdownFilePath}`);
     vsoAddAttachment("Generation Summary", markdownFilePath);
   } catch (error) {
-    logMessage(`Error writing markdown file ${markdownFilePath}:${error}`, LogLevel.Error);
+    vsoLogIssue(`Runner: error writing markdown file ${markdownFilePath}:${error}`);
     statusCode = 1;
   }
   return statusCode;
@@ -334,55 +355,99 @@ function getSpecPaths(runMode: string, specRepoPath: string): string[] {
 }
 
 /**
- * Extract and format the prefix from tspConfigPath or readmePath.
- * This function is copied from 'spec-gen-sdk'.
- * Source code: [Azure SDK Tools - spec-gen-sdk](https://github.com/Azure/azure-sdk-tools/blob/main/tools/spec-gen-sdk/src/utils/utils.ts#L171)
- * @param {string | undefined} tspConfigPath The tspConfigPath to extract the prefix from.
- * @param {string | undefined} readmePath The readmePath to extract the prefix from.
- * @returns {string} The formatted prefix.
+ * Logs issues to Azure DevOps Pipeline *
+ * @param logPath - The vso log file path.
+ * @param specConfigDisplayText - The display text for the spec configuration.
  */
-function extractPathFromSpecConfig(tspConfigPath: string | undefined, readmePath: string | undefined): string {
-  let prefix = '';
-  if (tspConfigPath) {
-    const regex = /specification\/(.+)\/tspconfig\.yaml$/
-    const match = regex.exec(tspConfigPath);
-    if (match) {
-      const segments = match[1].split('/');
-      prefix = segments.join('-').toLowerCase().replaceAll('.', '-');
+function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): void {
+  let vsoLogs: VsoLogs;
+  try {
+    const logContent = JSON.parse(fs.readFileSync(logPath, "utf8"));
+    vsoLogs = objectToMap(logContent);
+  } catch (error) {
+    throw new Error(`Runner: error reading log at ${logPath}:${error}`);
+  }
+
+  if (vsoLogs) {
+    const errors = [...vsoLogs.values()].flatMap((entry) => entry.errors ?? []);
+    const warnings = [...vsoLogs.values()].flatMap((entry) => entry.warnings ?? []);
+    if (errors.length > 0) {
+      const errorTitle = `Errors occurred while generating SDK from ${specConfigDisplayText}`;
+      logMessage(errorTitle, LogLevel.Group);
+      const errorsWithTitle = [errorTitle, ...errors];
+      vsoLogIssue(errorsWithTitle.join("%0D%0A"));
+      logMessage("ending group logging", LogLevel.EndGroup);
     }
-  } else if (readmePath) {
-    const regex = /specification\/(.+?)\/readme\.md$/i
-    const match = regex.exec(readmePath);
-    if (match) {
-      const segments = match[1].split('/');
-      prefix = segments.join('-').toLowerCase().replaceAll('.', '-');
+    if (warnings.length > 0) {
+      const warningTitle = `Warnings occurred while generating SDK from ${specConfigDisplayText}`;
+      logMessage(warningTitle, LogLevel.Group);
+      const warningsWithTitle = [warningTitle, ...warnings];
+      vsoLogIssue(warningsWithTitle.join("%0D%0A"), LogIssueType.Warning);
+      logMessage("ending group logging", LogLevel.EndGroup);
     }
   }
-  return prefix;
 }
 
 /**
- * Logs SDK generation issues to Azure DevOps (ADO)
- * @param commandInput 
- * @param specConfigPath 
+ * Process the breaking change label artifacts.
+ *
+ * @param executionReport - The spec-gen-sdk execution report.
+ * @returns [flag of lable breaking change, breaking change label].
  */
-function logIssuesToPipeline(commandInput: SpecGenSdkCmdInput, specConfigPath: string): void {
-  const fileNamePrefix = extractPathFromSpecConfig(commandInput.tspConfigPath, commandInput.readmePath)
-  const logFolder = path.join(commandInput.workingFolder, 'out/logs');
-  const logPath = path.join(logFolder, `${fileNamePrefix}-filtered.log`);
-  let logIssues:CommandLog[] = []
-  try {
-    const log = JSON.parse(fs.readFileSync(logPath, "utf8"));
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    logIssues = log.logIssues;
-  } catch (error) {
-    logMessage(`Error reading log at ${logPath}:${error}`, LogLevel.Error);
+function getBreakingChangeInfo(executionReport: any): [boolean, string] {
+  let breakingChangeLabel = "";
+  for (const packageInfo of executionReport.packages) {
+    breakingChangeLabel = packageInfo.breakingChangeLabel;
+    if (packageInfo.shouldLabelBreakingChange) {
+      return [true, breakingChangeLabel];
+    }
   }
+  return [false, breakingChangeLabel];
+}
 
-  if(logIssues.length > 0) {
-    logMessage(`Error generating SDK from ${specConfigPath}`, LogLevel.Group);
-    const logIssuesList = logIssues.flatMap(entry => [`Get log issues from script ${entry.command} `, ...entry.logIssues]);;
-    vsoLogIssue(logIssuesList.join('%0D%0A'));
+/**
+ * Process the breaking change label artifacts.
+ * @param commandInput - The command input.
+ * @param shouldLabelBreakingChange - A flag indicating whether to label breaking changes.
+ * @returns the run status code.
+ */
+function processBreakingChangeLabelArtifacts(
+  commandInput: SpecGenSdkCmdInput,
+  shouldLabelBreakingChange: boolean,
+  breakingChangeLabel: string,
+): number {
+  const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact";
+  const breakingChangeLabelArtifactFileName = breakingChangeLabelArtifactName + ".json";
+  const breakingChangeLabelArtifactPath = "out/breaking-change-label-artifact";
+  const breakingChangeLabelArtifactAbsoluteFolder = path.join(
+    commandInput.workingFolder,
+    breakingChangeLabelArtifactPath,
+  );
+  try {
+    if (!fs.existsSync(breakingChangeLabelArtifactAbsoluteFolder)) {
+      fs.mkdirSync(breakingChangeLabelArtifactAbsoluteFolder, { recursive: true });
+    }
+    // Write breaking change label artifact
+    fs.writeFileSync(
+      path.join(
+        commandInput.workingFolder,
+        breakingChangeLabelArtifactPath,
+        breakingChangeLabelArtifactFileName,
+      ),
+      JSON.stringify({
+        language: commandInput.sdkRepoName,
+        labelAction: shouldLabelBreakingChange,
+      }),
+    );
+    setVsoVariable("BreakingChangeLabelArtifactName", breakingChangeLabelArtifactName);
+    setVsoVariable("BreakingChangeLabelArtifactPath", breakingChangeLabelArtifactPath);
+    setVsoVariable("BreakingChangeLabelAction", shouldLabelBreakingChange ? "add" : "remove");
+    setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
+  } catch (error) {
+    logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
+    vsoLogIssue(`Runner: errors writing breaking change label artifacts:${error}`);
     logMessage("ending group logging", LogLevel.EndGroup);
+    return 1;
   }
+  return 0;
 }

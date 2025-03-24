@@ -73,6 +73,8 @@ const config = tseslint.config(
       "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/no-inferrable-types": "off",
       "@typescript-eslint/no-dynamic-delete": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-explicit-any": "off",
 
       // We want more flexibility with file names.
       // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/filename-case.md
