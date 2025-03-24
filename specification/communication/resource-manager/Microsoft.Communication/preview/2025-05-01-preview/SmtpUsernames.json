@@ -1,0 +1,317 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Communication Services Management API",
+    "version": "2025-05-01-preview",
+    "description": "REST API for Azure Communication Services/SmtpUsernames"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}/smtpUsernames": {
+      "get": {
+        "description": "Get all SmtpUsernameResources for a Communication resource.",
+        "operationId": "SmtpUsernames_List",
+        "summary": "Get",
+        "tags": [
+          "SmtpUsername"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommunicationServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The collection of SmtpUsername resources.",
+            "schema": {
+              "$ref": "#/definitions/SmtpUsernameResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get all SmtpUsername resources for a CommunicationService resource.": {
+            "$ref": "./examples/smtpUsername/getAll.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServices/{communicationServiceName}/smtpUsernames/{smtpUsername}": {
+      "get": {
+        "description": "Get a SmtpUsernameResource.",
+        "operationId": "SmtpUsernames_Get",
+        "summary": "Get",
+        "tags": [
+          "SmtpUsername"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommunicationServiceName"
+          },
+          {
+            "$ref": "#/parameters/SmtpUsername"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The smtp username object.",
+            "schema": {
+              "$ref": "#/definitions/SmtpUsernameResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a SmtpUsername resource.": {
+            "$ref": "./examples/smtpUsername/get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update an SmtpUsernameResource.",
+        "operationId": "SmtpUsernames_CreateOrUpdate",
+        "summary": "Create Or Update",
+        "tags": [
+          "SmtpUsername"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommunicationServiceName"
+          },
+          {
+            "$ref": "#/parameters/SmtpUsername"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmtpUsernameResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmtpUsernameResource"
+            }
+          },
+          "201": {
+            "description": "The resource was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/SmtpUsernameResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "CreateOrUpdate SmtpUsername resource": {
+            "$ref": "./examples/smtpUsername/createOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Operation to delete a single SmtpUsername resource.",
+        "operationId": "SmtpUsernames_Delete",
+        "summary": "Delete",
+        "tags": [
+          "SmtpUsername"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CommunicationServiceName"
+          },
+          {
+            "$ref": "#/parameters/SmtpUsername"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource was deleted successfully."
+          },
+          "204": {
+            "description": "The resource did not exist to be deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SmtpUsername resource.": {
+            "$ref": "./examples/smtpUsername/delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SmtpUsernameResource": {
+      "description": "The object describing the smtp username resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SmtpUsernameProperties",
+          "description": "The properties of a SmtpUsername resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SmtpUsernameResourceCollection": {
+      "description": "Collection of SmtpUsername resources. Response will include a nextLink if response contains more pages.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of SmtpUsername resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmtpUsernameResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    },
+    "SmtpUsernameProperties": {
+      "description": "A class that describes the properties of a SmtpUsername resource.",
+      "type": "object",
+      "required": [
+        "username",
+        "entraApplicationId",
+        "tenantId"
+      ],
+      "properties": {
+        "username": {
+          "description": "The SMTP username. Could be free form or in the email address format.",
+          "type": "string"
+        },
+        "entraApplicationId": {
+          "description": "The application Id for the linked Entra Application.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant of the linked Entra Application.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SmtpUsername": {
+      "name": "smtpUsername",
+      "in": "path",
+      "description": "The name of the SmtpUsernameResource.",
+      "minLength": 1,
+      "maxLength": 253,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9-]+$"
+    },
+    "CommunicationServiceName": {
+      "name": "communicationServiceName",
+      "in": "path",
+      "description": "The name of the CommunicationService resource.",
+      "pattern": "^[-\\w]+$",
+      "minLength": 1,
+      "maxLength": 63,
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
