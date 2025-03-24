@@ -39,11 +39,11 @@ jobs:
         with:
           node-version: 20.x
 
-      - run: Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+      - run: |
+          Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+          Add-Content $env:GITHUB_PATH "C:\Users\runneradmin\AppData\local\pnpm"
 
-      - run: C:\Users\runneradmin\AppData\Local\pnpm\pnpm import
-
-      - run: C:\Users\runneradmin\AppData\Local\pnpm\pnpm install --frozen-lockfile --prod
+      - run: pnpm install --frozen-lockfile --prod
 
       - name: Verify all modules are importable
         uses: actions/github-script@v7
