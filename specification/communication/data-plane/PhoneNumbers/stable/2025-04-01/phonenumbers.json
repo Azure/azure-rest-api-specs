@@ -202,6 +202,7 @@
           {
             "in": "body",
             "name": "phoneNumbersBrowseRequest",
+            "description": "An object defining the criteria to browse for available phone numbers.",
             "schema": {
               "$ref": "#/definitions/PhoneNumbersBrowseRequest"
             },
@@ -406,12 +407,12 @@
         "tags": [
           "Browse, reserve and purchase available phone numbers"
         ],
-        "summary": "Get all reservations.",
+        "summary": "Lists all reservations.",
         "description": "Retrieves a paginated list of all phone number reservations. Note that the reservations will not be populated with the phone numbers associated with them.",
         "produces": [
           "application/json"
         ],
-        "operationId": "PhoneNumbers_GetReservations",
+        "operationId": "PhoneNumbers_ListReservations",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1865,6 +1866,7 @@
       }
     },
     "PhoneNumbersBrowseRequest": {
+      "description": "The parameters for the browse operation.",
       "required": [
         "phoneNumberType"
       ],
@@ -1949,6 +1951,7 @@
         "phoneNumbers"
       ],
       "type": "object",
+      "description": "The result of a phone number browse operation.",
       "properties": {
         "phoneNumbers": {
           "description": "The phone numbers that are available for purchase.",
@@ -2068,6 +2071,7 @@
         "reservations"
       ],
       "type": "object",
+      "description": "Represents a list of phone numbers reservations. Note that the phone numbers from each reservation are not included.",
       "properties": {
         "reservations": {
           "description": "Represents a list of phone numbers reservations. Note that the phone numbers from each reservation are not included.",
@@ -2181,6 +2185,7 @@
     "ReservationParameter": {
       "in": "body",
       "name": "reservation",
+      "description": "A representation of the desired state of the reservation.",
       "required": true,
       "schema": {
         "$ref": "#/definitions/PhoneNumbersReservation"
