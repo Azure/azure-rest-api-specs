@@ -79,5 +79,47 @@ model Evaluation {
   evaluators: Record<EvaluatorConfiguration>;
 
   @doc("Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureml://project/azureml/evaluationresults/myevaluationresult1', 'logId': 'azureml://project/azureml/datasets/joblogs' }")
+  @visibility("read")
+  outputs: Record<string>;
+}
+
+@doc("Evaluation Definition for Uploading.")
+@resource("runs")
+model EvaluationUpload {
+  @doc("Identifier of the evaluation.")
+  @key("name")
+  @visibility("read")
+  id: string;
+
+  // optional will break get here, could we have a local config or something we can fill this with?
+  // service makes these empty?
+  @doc("Data for evaluation.")
+  data?: InputData;
+
+  @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
+  displayName?: string;
+
+  @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
+  description?: string;
+
+  @doc("Metadata containing createdBy and modifiedBy information.")
+  @visibility("read")
+  systemData?: SystemData;
+
+  //TODO: either failed or completed since the "run" is in a finished state
+  @doc("Status of the evaluation. For upload TODO.")
+  status?: string;
+
+  @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")
+  tags?: Record<string>;
+
+  @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  properties?: Record<string>;
+
+  // optional will break get here, could we have a local config or something we can fill this with?
+  @doc("Evaluators to be used for the evaluation.")
+  evaluators?: Record<EvaluatorConfiguration>;
+
+  @doc("Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureml://project/azureml/evaluationresults/myevaluationresult1', 'logId': 'azureml://project/azureml/datasets/joblogs' }")
   outputs: Record<string>;
 }

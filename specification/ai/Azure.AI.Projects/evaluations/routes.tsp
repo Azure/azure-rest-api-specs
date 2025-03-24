@@ -51,7 +51,7 @@ interface Evaluations {
     {
       @doc("Evaluation to upload.")
       @body
-      evaluation: Evaluation;
+      evaluation: EvaluationUpload;
     },
     Evaluation
   >;
