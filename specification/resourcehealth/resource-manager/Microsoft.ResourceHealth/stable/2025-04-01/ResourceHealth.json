@@ -1178,7 +1178,7 @@
             },
             "summary": {
               "type": "string",
-              "description": "Summary text of event."
+              "description": "Summary text of event. Use fetchEventDetails endpoint to get summary of sensitive events."
             },
             "header": {
               "type": "string",
@@ -1314,7 +1314,7 @@
             },
             "description": {
               "type": "string",
-              "description": "Contains the communication message for the event, that could include summary, root cause and other details."
+              "description": "Contains the communication message for the event, that could include summary, root cause and other details. Use fetchEventDetails endpoint to get description of sensitive events."
             },
             "platformInitiated": {
               "type": "boolean",
@@ -1478,7 +1478,7 @@
         "updates": {
           "type": "array",
           "x-ms-identifiers": [],
-          "description": "List of updates for given service health event.",
+          "description": "List of updates for given service health event.  Use fetchEventDetails endpoint to get updates of sensitive events.",
           "items": {
             "$ref": "#/definitions/update"
           }
@@ -2271,7 +2271,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "Specifies from when to return events, based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020",
+      "description": "Specifies from when to return events (default is 3 days), based on the lastUpdateTime property. For example, queryStartTime = 7/24/2020 OR queryStartTime=7%2F24%2F2020",
       "x-ms-parameter-location": "method"
     },
     "IssueNameParameter": {
