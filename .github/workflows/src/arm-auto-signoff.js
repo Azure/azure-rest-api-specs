@@ -69,6 +69,23 @@ export async function getLabelActionImpl({
     },
   };
 
+  // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner: owner,
+    repo: repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+  const labelNames = labels.map((label) => label.name);
+
+  // Only remove labels "ARMSignedOff" and "ARMAutoSignedOff", if "ARMAutoSignedOff" is currently present.
+  // Necessary to prevent removing "ARMSignedOff" if added by a human reviewer.
+  const removeAction = labelNames.includes("ARMAutoSignedOff")
+    ? labelActions[LabelAction.Remove]
+    : labelActions[LabelAction.None];
+
+  core.info(`Labels: ${labelNames}`);
+
   const workflowRuns = await github.paginate(
     github.rest.actions.listWorkflowRunsForRepo,
     {
@@ -98,7 +115,7 @@ export async function getLabelActionImpl({
     core.info(
       `Found no runs for workflow '${wfName}'.  Assuming workflow trigger was skipped, which should be treated equal to "completed false".`,
     );
-    return labelActions[LabelAction.Remove];
+    return removeAction;
   } else {
     // Sorted by "updated_at" descending, so most recent run is at index 0
     const run = incrementalTspRuns[0];
@@ -108,7 +125,7 @@ export async function getLabelActionImpl({
         core.info(
           `Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`,
         );
-        return labelActions[LabelAction.Remove];
+        return removeAction;
       }
 
       const artifacts = await github.paginate(
@@ -128,7 +145,7 @@ export async function getLabelActionImpl({
         core.info(
           "Spec is not an incremental change to an existing TypeSpec RP",
         );
-        return labelActions[LabelAction.Remove];
+        return removeAction;
       } else if (artifactNames.includes("incremental-typespec=true")) {
         core.info("Spec is an incremental change to an existing TypeSpec RP");
         // Continue checking other requirements
@@ -144,17 +161,6 @@ export async function getLabelActionImpl({
     }
   }
 
-  // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
-  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner: owner,
-    repo: repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
-  const labelNames = labels.map((label) => label.name);
-
-  core.info(`Labels: ${labelNames}`);
-
   const allLabelsMatch =
     labelNames.includes("ARMReview") &&
     !labelNames.includes("NotReadyForARMReview") &&
@@ -163,7 +169,7 @@ export async function getLabelActionImpl({
 
   if (!allLabelsMatch) {
     core.info("Labels do not meet requirement for auto-signoff");
-    return labelActions[LabelAction.Remove];
+    return removeAction;
   }
 
   const checkRuns = await github.paginate(github.rest.checks.listForRef, {
@@ -201,7 +207,7 @@ export async function getLabelActionImpl({
       matchingRun.conclusion !== "success"
     ) {
       core.info(`Check '${checkName}' did not succeed`);
-      return labelActions[LabelAction.Remove];
+      return removeAction;
     }
 
     if (matchingRun) {
