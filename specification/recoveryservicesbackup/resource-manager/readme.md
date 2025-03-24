@@ -37,7 +37,7 @@ license-header: MICROSOFT_MIT
 ```
 
 ```yaml $(package-passivestamp)
-tag: package-2024-10
+tag: package-preview-2025-03-15
 ```
 
 ```yaml $(package-activestamp)
@@ -53,6 +53,15 @@ azure-validator: true
 model-validator: true
 semantic-validator: true
 message-format: json
+```
+
+### Tag: package-preview-2025-03-15-preview
+
+These settings apply only when `--tag=package-preview-2025-03-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03-15-preview'
+input-file:
+  - Microsoft.RecoveryServices/preview/2025-03-15-preview/bms.json
 ```
 
 ### Tag: package-2024-10
