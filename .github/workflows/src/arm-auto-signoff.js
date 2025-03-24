@@ -85,7 +85,7 @@ export async function getLabelActionImpl({
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  const wfName = "ARM Incremental TypeSpec (Preview)";
+  const wfName = "ARM Incremental TypeSpec";
   const incrementalTspRuns = workflowRuns
     .filter((wf) => wf.name == wfName)
     // Sort by "updated_at" descending
@@ -155,7 +155,6 @@ export async function getLabelActionImpl({
 
   core.info(`Labels: ${labelNames}`);
 
-  // TODO: Also require label "ARMBestPracticesAcknowledgement"
   const allLabelsMatch =
     labelNames.includes("ARMReview") &&
     !labelNames.includes("NotReadyForARMReview") &&
