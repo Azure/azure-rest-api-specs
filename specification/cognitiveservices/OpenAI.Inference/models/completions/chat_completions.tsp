@@ -535,7 +535,7 @@ model ChatCompletions {
   @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
-  usage: CompletionsUsage;
+  usage?: CompletionsUsage;
 }
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
