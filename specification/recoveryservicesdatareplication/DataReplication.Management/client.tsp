@@ -5,6 +5,9 @@ using Azure.ClientGenerator.Core;
 using Microsoft.DataReplication;
 
 // csharp
+@@scope(OperationResults.get, "!csharp");
+@@scope(LocationBasedOperationResults.get, "!csharp");
+
 @@clientName(FabricAgentModelProperties.lastHeartbeat,
   "LastHeartbeatOn",
   "csharp"
@@ -37,6 +40,14 @@ using Microsoft.DataReplication;
 @@clientName(EventModel, "DataReplicationEvent", "csharp");
 @@clientName(EventModelProperties, "DataReplicationEventProperties", "csharp");
 @@clientName(EventModelProperties.timeOfOccurrence, "OccurredOn", "csharp");
+@@clientName(EventModelCustomProperties,
+  "DataReplicationEventCustomProperties",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIEventModelCustomProperties,
+  "HyperVToAzStackHciEventCustomProperties",
+  "csharp"
+);
 @@clientName(HealthErrorModel, "DataReplicationHealthErrorInfo", "csharp");
 @@clientName(HealthStatus, "DataReplicationHealthStatus", "csharp");
 @@clientName(IdentityModel, "DataReplicationIdentity", "csharp");
@@ -86,13 +97,39 @@ using Microsoft.DataReplication;
   "DataReplicationFabricAgentProperties",
   "csharp"
 );
+@@clientName(FabricAgentModelCustomProperties,
+  "DataReplicationFabricAgentCustomProperties",
+  "csharp"
+);
 @@clientName(FabricModel, "DataReplicationFabric", "csharp");
 @@clientName(FabricModelProperties,
   "DataReplicationFabricProperties",
   "csharp"
 );
+@@clientName(FabricModelCustomProperties,
+  "DataReplicationFabricCustomProperties",
+  "csharp"
+);
+@@clientName(AzStackHCIFabricModelCustomProperties,
+  "AzStackHciFabricCustomProperties",
+  "csharp"
+);
+@@clientName(HyperVMigrateFabricModelCustomProperties,
+  "HyperVMigrateFabricCustomProperties",
+  "csharp"
+);
 @@clientName(JobModel, "DataReplicationJob", "csharp");
-@@clientName(JobModelProperties, "DataReplicationProperties", "csharp");
+@@clientName(JobModelProperties, "DataReplicationJobProperties", "csharp");
+@@clientName(JobModelCustomProperties,
+  "DataReplicationJobCustomProperties",
+  "csharp"
+);
+@@clientName(FailoverJobModelCustomProperties,
+  "FailoverJobCustomProperties",
+  "csharp"
+);
+@@clientName(JobObjectType, "DataReplicationJobObjectType", "csharp");
+@@clientName(JobState, "DataReplicationJobState", "csharp");
 @@clientName(PrivateEndpointConnectionProxy,
   "DataReplicationPrivateEndpointConnectionProxy",
   "csharp"
@@ -115,6 +152,50 @@ using Microsoft.DataReplication;
 );
 @@clientName(PrivateLinkResourceProperties,
   "DataReplicationPrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(ConnectionDetails,
+  "RemotePrivateEndpointConnectionDetails",
+  "csharp"
+);
+@@clientName(DiskControllerInputs,
+  "DataReplicationDiskControllerInputs",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties.lastRecoveryPointReceived,
+  "LastRecoveryPointReceivedOn",
+  "csharp"
+);
+@@clientName(VMwareToAzStackHCIProtectedItemModelCustomProperties.lastRecoveryPointReceived,
+  "LastRecoveryPointReceivedOn",
+  "csharp"
+);
+@@clientName(DeploymentPreflightModel,
+  "DataReplicationDeploymentPreflight",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIPlannedFailoverModelCustomProperties,
+  "HyperVToAzStackHciPlannedFailoverCustomProperties",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIPolicyModelCustomProperties,
+  "HyperVToAzStackHciPolicyCustomProperties",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIProtectedItemModelCustomProperties,
+  "HyperVToAzStackHciProtectedItemCustomProperties",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate,
+  "HyperVToAzStackHciProtectedItemCustomPropertiesUpdate",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIRecoveryPointModelCustomProperties,
+  "HyperVToAzStackHciRecoveryPointCustomProperties",
+  "csharp"
+);
+@@clientName(HyperVToAzStackHCIReplicationExtensionModelCustomProperties,
+  "HyperVToAzStackHciReplicationExtensionCustomProperties",
   "csharp"
 );
 @@alternateType(CheckNameAvailabilityModel.type,
