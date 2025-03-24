@@ -510,6 +510,6 @@ suppressions:
      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get
      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages"].get.responses.200.schema
      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get.responses.200.schema
-     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages"].get.responses.200.schema.properties
-     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get.responses.200.schema.properties 
+     - $.definitions.UsagesListResult
+     - $.definitions.UsagesResult
 ```
