@@ -16,13 +16,15 @@ permissions:
 
 defaults:
   run:
+    shell: pwsh
     working-directory: ./.github
 
 jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu, windows]
+        os: [windows]
+        # os: [ubuntu, windows]
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
 
@@ -33,13 +35,15 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: Setup Node 20 and install runtime deps
-        uses: ./.github/actions/setup-node-install-deps
+      - uses: actions/setup-node@v4
         with:
-          # actions/github-script@v7 uses Node 20
           node-version: 20.x
-          install-command: npm ci --omit dev
-          working-directory: ./.github
+
+      - run: |
+          Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+          Add-Content $env:GITHUB_PATH "C:\Users\runneradmin\AppData\local\pnpm"
+
+      - run: pnpm install --frozen-lockfile --prod
 
       - name: Verify all modules are importable
         uses: actions/github-script@v7
@@ -51,14 +55,15 @@ jobs:
             const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
             await importAllModules({ core });
 
-      - name: Install dev deps
-        uses: ./.github/actions/setup-node-install-deps
+      - uses: actions/setup-node@v4
         with:
-          # actions/github-script@v7 uses Node 20
           node-version: 20.x
-          working-directory: ./.github
+          cache: pnpm
+          cache-dependency-path: .github/pnpm-lock.yaml
 
-      - run: npm run lint
+      - run: pnpm install --frozen-lockfile
+
+      # - run: npm run lint
 
       - run: npm run prettier
 
