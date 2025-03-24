@@ -115,8 +115,7 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -128,6 +127,10 @@
             "schema": {
               "$ref": "#/definitions/ContainerApp"
             }
+          },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Common error response.",
@@ -247,6 +250,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Container App deleted successfully."
+          },
           "202": {
             "description": "Delete operation is in progress.",
             "headers": {
@@ -358,8 +364,7 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           },
           {
             "name": "customHostname",
@@ -414,8 +419,7 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -461,8 +465,7 @@
             "in": "path",
             "description": "Name of the Container App.",
             "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -471,6 +474,10 @@
             "schema": {
               "$ref": "#/definitions/ContainerAppAuthToken"
             }
+          },
+          "404": {
+            "description": "Not found.",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Common error response.",
