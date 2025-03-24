@@ -27,7 +27,7 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-12-01-preview
+tag: package-preview-2025-04
 ```
 
 ``` yaml
@@ -45,11 +45,32 @@ directive:
 ```
 
 
-### Tag: package-preview-2024-12-01-preview
+### Tag: package-preview-2025-04
 
-These settings apply only when `--tag=package-preview-2024-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-12-01-preview'
+```yaml $(tag) == 'package-preview-2025-04'
+input-file:
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/activeDirectoryConnectors.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/azurearcdata.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/common.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/dataControllers.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/failoverGroups.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/operations.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/postgresInstances.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/sqlManagedInstances.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/sqlServerAvailabilityGroups.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/sqlServerDatabases.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/sqlServerEsuLicenses.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/sqlServerInstances.json
+  - Microsoft.AzureArcData/preview/2025-04-01-preview/sqlServerLicenses.json
+```
+
+### Tag: package-preview-2024-12
+
+These settings apply only when `--tag=package-preview-2024-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-12'
 input-file:
   - Microsoft.AzureArcData/preview/2024-12-01-preview/activeDirectoryConnectors.json
   - Microsoft.AzureArcData/preview/2024-12-01-preview/azurearcdata.json
