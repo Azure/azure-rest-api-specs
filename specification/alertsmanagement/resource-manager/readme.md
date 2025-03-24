@@ -47,6 +47,20 @@ openapi-type: arm
 tag: package-2023-03
 ```
 
+### Tag: package-preview-2025-03
+
+These settings apply only when `--tag=package-preview-2025-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-03'
+input-file:
+  - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
+  - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json  
+  - Microsoft.AlertsManagement/preview/2025-03-01-preview/PreviewAlertRule.json
+  - Microsoft.AlertsManagement/preview/2023-04-01-preview/TenantActivityLogAlerts.json
+  - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
+  - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
+```
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
@@ -98,7 +112,6 @@ input-file:
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
-  - Microsoft.AlertsManagement/preview/2025-03-01-preview/PreviewAlertRule.json
 ```
 ### Tag: package-2021-08
 
