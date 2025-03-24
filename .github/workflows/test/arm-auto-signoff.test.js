@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getLabelActionImpl } from "../src/arm-auto-signoff-preview.js";
+import { getLabelActionImpl } from "../src/arm-auto-signoff.js";
 import { LabelAction } from "../src/label.js";
 import {
   createMockCore,
@@ -25,7 +25,7 @@ function createMockGithub({ incrementalTypeSpec }) {
           conclusion: null,
         },
         {
-          name: "ARM Incremental TypeSpec (Preview)",
+          name: "ARM Incremental TypeSpec",
           id: 456,
           status: "completed",
           conclusion: "success",
@@ -87,7 +87,7 @@ describe("getLabelActionImpl", () => {
       data: {
         workflow_runs: [
           {
-            name: "ARM Incremental TypeSpec (Preview)",
+            name: "ARM Incremental TypeSpec",
             id: 456,
             status: "in_progress",
             conclusion: null,
@@ -134,14 +134,14 @@ describe("getLabelActionImpl", () => {
       data: {
         workflow_runs: [
           {
-            name: "ARM Incremental TypeSpec (Preview)",
+            name: "ARM Incremental TypeSpec",
             id: 456,
             status: "completed",
             conclusion: "success",
             updated_at: "2020-01-22T19:33:08Z",
           },
           {
-            name: "ARM Incremental TypeSpec (Preview)",
+            name: "ARM Incremental TypeSpec",
             id: 789,
             status: "completed",
             conclusion: "failure",

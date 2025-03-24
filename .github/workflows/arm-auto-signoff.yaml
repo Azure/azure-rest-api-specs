@@ -1,4 +1,4 @@
-name: ARM Auto SignOff (Preview)
+name: ARM Auto SignOff
 
 on:
   issue_comment:
@@ -14,7 +14,7 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["ARM Incremental TypeSpec (Preview)"]
+    workflows: ["ARM Incremental TypeSpec"]
     types: [completed]
   # For manual testing
   workflow_dispatch:
@@ -44,8 +44,8 @@ permissions:
   pull-requests: read
 
 jobs:
-  arm-auto-signoff-preview:
-    name: ARM Auto SignOff (Preview)
+  arm-auto-signoff:
+    name: ARM Auto SignOff
 
     # pull_request_target:labeled - filter to only the input and output labels
     # issue_comment:edited - filter to only PR comments containing "next steps to merge",
@@ -56,11 +56,12 @@ jobs:
       (github.event_name == 'pull_request_target' &&
        (github.event.action == 'labeled' ||
         github.event.action == 'unlabeled') &&
-       (github.event.label.name == 'ARMReview' ||
+       (github.event.label.name == 'Approved-Suppression' ||
+        github.event.label.name == 'ARMAutoSignedOff' ||
+        github.event.label.name == 'ARMReview' ||
+        github.event.label.name == 'ARMSignedOff' ||
         github.event.label.name == 'NotReadyForARMReview' ||
-        github.event.label.name == 'SuppressionReviewRequired' ||
-        github.event.label.name == 'Approved-Suppression' ||
-        github.event.label.name == 'ARMAutoSignOffPreview')) ||
+        github.event.label.name == 'SuppressionReviewRequired')) ||
       (github.event_name == 'issue_comment' &&
        github.event.issue.pull_request &&
        contains(github.event.comment.body, 'next steps to merge'))
@@ -88,12 +89,12 @@ jobs:
       #   issueNumber: number
       # }
       - id: get-label-action
-        name: ARM Auto SignOff (Preview)
+        name: ARM Auto SignOff
         uses: actions/github-script@v7
         with:
           script: |
             const { default: getLabelAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff-preview.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff.js');
             return await getLabelAction({ github, context, core });
         env:
           OWNER: ${{ inputs.owner }}
@@ -107,7 +108,17 @@ jobs:
         name: Upload artifact with results
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "ARMAutoSignOffPreview"
+          name: "ARMAutoSignedOff"
+          # Convert "add/remove" to "true/false"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
+
+      - if: |
+          fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
+          fromJson(steps.get-label-action.outputs.result).labelAction == 'remove'
+        name: Upload artifact with results
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMSignedOff"
           # Convert "add/remove" to "true/false"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
 
@@ -115,7 +126,11 @@ jobs:
       # Output can be trusted, because it was uploaded from a workflow that is trusted,
       # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
       # Consumers should verify the "event_name" before attempting to extract from the artifact name.
-      - if: ${{ github.event_name == 'issue_comment' || github.event_name == 'workflow_run' }}
+      - if: |
+          (github.event_name == 'issue_comment' || 
+           github.event_name == 'workflow_run') &&
+          (fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
+           fromJson(steps.get-label-action.outputs.result).labelAction == 'remove')
         name: Upload artifact with issue number
         uses: ./.github/actions/add-empty-artifact
         with:
