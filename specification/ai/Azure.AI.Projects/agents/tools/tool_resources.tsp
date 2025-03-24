@@ -123,18 +123,6 @@ model IndexResource {
    */
   @encodedName("application/json", "index_asset_id")
   indexAssetId?: string;
-
-  /**
-   * Specifies whether query rewrites should be generated to augment the search query
-   */
-  @encodedName("application/json", "query_rewrites")
-  queryRewrites?: string;
-
-  /**
-   * A value that specifies the language of the search query.
-   */
-  @encodedName("application/json", "query_language")
-  queryLanguage?: string;
 }
 
 //

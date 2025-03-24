@@ -179,6 +179,14 @@ model OpenApiFunctionDefinition {
 
   @doc("Open API authentication details")
   auth: OpenApiAuthDetails;
+
+  @doc("List of OpenAPI spec parameters that will use user-provided defaults")
+  @encodedName("application/json", "default_params")
+  defaultParams?: string[];
+
+  @doc("List of functions returned in response")
+  @visibility("read")
+  functions?: FunctionDefinition[]
 }
 
 @doc("""
