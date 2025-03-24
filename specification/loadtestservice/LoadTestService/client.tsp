@@ -56,6 +56,7 @@ namespace Customizations;
 @@clientName(FileType, "LoadTestingFileType", "csharp,java");
 @@clientName(AppComponent, "LoadTestingAppComponent", "csharp,java");
 @@clientName(MetricRequestPayload, "MetricsFilters", "csharp,java");
+@@clientName(Aggregation, "AggregationType", "csharp,java");
 
 // Suggestion to fix casing for acronyms
 @@clientName(LoadTestConfiguration.splitAllCSVs,
