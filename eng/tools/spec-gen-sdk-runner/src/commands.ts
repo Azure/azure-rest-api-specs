@@ -56,11 +56,12 @@ export async function generateSdkForSingleSpec(): Promise<number> {
 
   if (statusCode === 0) {
     // Set the pipeline variables for the SDK pull request
-    const packageName =
+    let packageName =
       executionReport.packages[0]?.packageName ??
       commandInput.tspConfigPath ??
       commandInput.readmePath ??
       "missing-package-name";
+    packageName = packageName.replace("/", "-");
     const installationInstructions = executionReport.packages[0]?.installationInstructions;
     setPipelineVariables(packageName, installationInstructions);
   }
