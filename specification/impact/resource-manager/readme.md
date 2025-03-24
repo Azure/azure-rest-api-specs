@@ -28,6 +28,10 @@ suppressions:
     reason:
       Property additionalProperties in WorkloadImpactProperties is necessary to be dynamic since it contains metadata
       and will be different for different categories
+  - code: AvoidAnonymousTypes
+    from: impact.json
+    where: $.definitions.WorkloadImpactProperties.properties
+    reason: Typespec generated definitions contain anonymous types.
 ```
 
 ## Configuration
