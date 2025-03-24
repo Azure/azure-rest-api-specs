@@ -91,10 +91,10 @@ model OrganizationProperties is BaseResourceProperties {
 model OrganizationResource
   is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
   @key("organizationName")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
+  @pattern("^[a-zA-Z0-9 _\\-().,:@+&',]{1,64}$") // Updated regex
   @segment("organizations")
-  @minLength(1)
-  @maxLength(50)
+  @minLength(1) // Minimum length constraint
+  @maxLength(64) // Maximum length constraint
   @doc("Name of the Organization resource")
   @path
   name: string;
