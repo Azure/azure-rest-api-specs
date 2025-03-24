@@ -57,7 +57,7 @@ jobs:
        (github.event.action == 'labeled' ||
         github.event.action == 'unlabeled') &&
        (github.event.label.name == 'Approved-Suppression' ||
-        github.event.label.name == 'ARMAutoSignOff' ||
+        github.event.label.name == 'ARMAutoSignedOff' ||
         github.event.label.name == 'ARMReview' ||
         github.event.label.name == 'ARMSignedOff' ||
         github.event.label.name == 'NotReadyForARMReview' ||
@@ -108,7 +108,7 @@ jobs:
         name: Upload artifact with results
         uses: ./.github/actions/add-label-artifact
         with:
-          name: "ARMAutoSignOff"
+          name: "ARMAutoSignedOff"
           # Convert "add/remove" to "true/false"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
 
