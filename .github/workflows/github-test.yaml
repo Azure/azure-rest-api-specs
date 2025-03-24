@@ -41,6 +41,8 @@ jobs:
 
       - run: Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 
+      - run: C:\Users\runneradmin\AppData\Local\pnpm\pnpm import
+
       - run: C:\Users\runneradmin\AppData\Local\pnpm\pnpm install --frozen-lockfile --prod
 
       - name: Verify all modules are importable
