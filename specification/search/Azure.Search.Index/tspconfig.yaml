@@ -13,26 +13,26 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/searchindex.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-search-documents"
+    package-dir: "azure-search-documents-search"
     package-name: "{package-dir}"
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Search.Documents"
+    package-dir: "Azure.Search.Documents.Search"
     namespace: "{package-dir}"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "azure-search-documents-rest"
+    package-dir: "azure-search-documents-search-rest"
     generateMetadata: true
     generateTest: true
     flavor: azure
     packageDetails:
-      name: "@azure-rest/azure-search-documents-rest"
+      name: "@azure-rest/azure-search-documents-search-rest"
       description: "Azure.Search Service"
   "@azure-tools/typespec-java":
-    package-dir: "azure-search-documents"
-    namespace: com.azure.search.documents
+    package-dir: "azure-search-documents-search"
+    namespace: com.azure.search.documents.search
     flavor: azure
 linter:
   extends:
