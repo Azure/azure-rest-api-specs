@@ -106,7 +106,7 @@ model IndexResource {
  */
 model AISearchIndexResource {
   ...IndexResource;
-  
+
   /**
    *  Type of query in an AIIndexResource attached to this agent.
    */
