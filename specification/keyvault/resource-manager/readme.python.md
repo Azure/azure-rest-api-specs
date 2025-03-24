@@ -19,35 +19,27 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2023-07-01"
+default-api-version: "2024-11-01"
 clear-output-folder: true
 batch:
-  - tag: package-2019-09
-  - tag: package-2018-02
-  - tag: package-2016-10
-  - tag: package-preview-2020-04-full
-  - tag: package-preview-2021-04
-  - tag: package-preview-2021-06
-  - tag: package-2021-10
-  - tag: package-2022-07
+  - tag: package-2024-11-01
   - tag: package-2023-02
-  - tag: package-2023-07
+  - tag: package-2016-10
   - multiapiscript: true
 ```
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/
-clear-output-folder: false
 perform-load: false
 ```
 
-### Tag: package-2023-07 and python
+### Tag: package-2024-11-01 and python
 
-These settings apply only when `--tag=package-2023-07 --python` is specified on the command line.
+These settings apply only when `--tag=package-2024-11-01 --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-07'
-namespace: azure.mgmt.keyvault.v2023_07_01
-output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2023_07_01
+``` yaml $(tag) == 'package-2024-11-01'
+namespace: azure.mgmt.keyvault.v2024_11_01
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2024_11_01
 ```
 
 ### Tag: package-2023-02 and python
@@ -57,69 +49,6 @@ These settings apply only when `--tag=package-2023-02 --python` is specified on 
 ``` yaml $(tag) == 'package-2023-02'
 namespace: azure.mgmt.keyvault.v2023_02_01
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2023_02_01
-```
-
-### Tag: package-2022-07 and python
-
-These settings apply only when `--tag=package-2022-07 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-07'
-namespace: azure.mgmt.keyvault.v2022_07_01
-output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2022_07_01
-```
-
-### Tag: package-2021-10 and python
-
-These settings apply only when `--tag=package-2021-10 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-10'
-namespace: azure.mgmt.keyvault.v2021_10_01
-output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2021_10_01
-```
-
-### Tag: package-preview-2021-06 and python
-
-These settings apply only when `--tag=package-preview-2021-06 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-06'
-namespace: azure.mgmt.keyvault.v2021_06_01_preview
-output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2021_06_01_preview
-```
-
-### Tag: package-preview-2021-04 and python
-
-These settings apply only when `--tag=package-preview-2021-04 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-04'
-namespace: azure.mgmt.keyvault.v2021_04_01_preview
-output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2021_04_01_preview
-```
-
-### Tag: package-preview-2020-04-full and python
-
-These settings apply only when `--tag=package-preview-2020-04-full --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2020-04-full'
-namespace: azure.mgmt.keyvault.v2020_04_01_preview
-output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2020_04_01_preview
-```
-
-### Tag: package-2019-09 and python
-
-These settings apply only when `--tag=package-2019-09 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-09'
-namespace: azure.mgmt.keyvault.v2019_09_01
-output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2019_09_01
-```
-
-### Tag: package-2018-02 and python
-
-These settings apply only when `--tag=package-2018-02 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-02'
-namespace: azure.mgmt.keyvault.v2018_02_14
-output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2018_02_14
 ```
 
 ### Tag: package-2016-10 and python

@@ -28,7 +28,7 @@ model SharedCustomizationOptions {
   @minLength(1)
   @doc("""
     Format of the redacted output. Only valid when Operation is Redact. 
-    Please refer to https://learn.microsoft.com/en-us/azure/healthcare-apis/deidentification/redaction-format for more details.
+    Please refer to https://learn.microsoft.com/azure/healthcare-apis/deidentification/redaction-format for more details.
     """)
   redactionFormat?: string;
 

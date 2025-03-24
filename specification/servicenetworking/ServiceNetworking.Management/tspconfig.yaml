@@ -42,7 +42,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
@@ -50,3 +50,9 @@ options:
     package-dir: "azure-resourcemanager-servicenetworking"
     flavor: "azure"
     service-name: "Traffic Controller"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.ServiceNetworking"
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"

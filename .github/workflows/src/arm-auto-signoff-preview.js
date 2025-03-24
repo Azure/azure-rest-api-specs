@@ -1,9 +1,12 @@
 // @ts-check
 
-import { extractInputs } from "../../src/context.js";
-import { PER_PAGE_MAX } from "../../src/github.js";
-import { LabelAction } from "../../src/label.js";
+import { setEquals } from "../../src/equality.js";
+import { extractInputs } from "./context.js";
+import { PER_PAGE_MAX } from "./github.js";
+import { LabelAction } from "./label.js";
 
+// TODO: Add tests
+/* v8 ignore start */
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
@@ -31,6 +34,7 @@ export default async function getLabelAction({ github, context, core }) {
     core,
   });
 }
+/* v8 ignore stop */
 
 /**
  * @param {Object} params
@@ -71,7 +75,6 @@ export async function getLabelActionImpl({
       owner,
       repo,
       event: "pull_request",
-      status: "completed",
       head_sha,
       per_page: PER_PAGE_MAX,
     },
@@ -82,48 +85,62 @@ export async function getLabelActionImpl({
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  const wfName = "ARM Incremental Typespec (Preview)";
-  const incrementalTspRuns = workflowRuns.filter((wf) => wf.name == wfName);
+  const wfName = "ARM Incremental TypeSpec (Preview)";
+  const incrementalTspRuns = workflowRuns
+    .filter((wf) => wf.name == wfName)
+    // Sort by "updated_at" descending
+    .sort(
+      (a, b) =>
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+    );
 
   if (incrementalTspRuns.length == 0) {
     core.info(
-      `Found no completed runs for workflow '${wfName}'.  May still be in-progress.`,
+      `Found no runs for workflow '${wfName}'.  Assuming workflow trigger was skipped, which should be treated equal to "completed false".`,
     );
-    return labelActions[LabelAction.None];
-  } else if (incrementalTspRuns.length > 1) {
-    throw `Unexpected number of runs for workflow '${wfName}': ${incrementalTspRuns.length}`;
+    return labelActions[LabelAction.Remove];
   } else {
+    // Sorted by "updated_at" descending, so most recent run is at index 0
     const run = incrementalTspRuns[0];
 
-    if (run.conclusion != "success") {
-      core.info(
-        `Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`,
+    if (run.status == "completed") {
+      if (run.conclusion != "success") {
+        core.info(
+          `Run for workflow '${wfName}' did not succeed: '${run.conclusion}'`,
+        );
+        return labelActions[LabelAction.Remove];
+      }
+
+      const artifacts = await github.paginate(
+        github.rest.actions.listWorkflowRunArtifacts,
+        {
+          owner,
+          repo,
+          run_id: run.id,
+          per_page: PER_PAGE_MAX,
+        },
       );
-      return labelActions[LabelAction.Remove];
-    }
+      const artifactNames = artifacts.map((a) => a.name);
 
-    const artifacts = await github.paginate(
-      github.rest.actions.listWorkflowRunArtifacts,
-      {
-        owner,
-        repo,
-        run_id: run.id,
-        per_page: PER_PAGE_MAX,
-      },
-    );
-    const artifactNames = artifacts.map((a) => a.name);
+      core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
-    core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
-
-    if (artifactNames.includes("incremental-typespec=false")) {
-      core.info("Spec is not an incremental change to an existing TypeSpec RP");
-      return labelActions[LabelAction.Remove];
-    } else if (artifactNames.includes("incremental-typespec=true")) {
-      core.info("Spec is an incremental change to an existing TypeSpec RP");
-      // Continue checking other requirements
+      if (artifactNames.includes("incremental-typespec=false")) {
+        core.info(
+          "Spec is not an incremental change to an existing TypeSpec RP",
+        );
+        return labelActions[LabelAction.Remove];
+      } else if (artifactNames.includes("incremental-typespec=true")) {
+        core.info("Spec is an incremental change to an existing TypeSpec RP");
+        // Continue checking other requirements
+      } else {
+        // If workflow succeeded, it should have one workflow or the other
+        throw `Workflow artifacts did not contain 'incremental-typespec': ${JSON.stringify(artifactNames)}`;
+      }
     } else {
-      // If workflow succeeded, it should have one workflow or the other
-      throw `Workflow artifacts did not contain 'incremental-typespec': ${JSON.stringify(artifactNames)}`;
+      core.info(
+        `Workflow '${wfName}' is still in-progress: status='${run.status}'`,
+      );
+      return labelActions[LabelAction.None];
     }
   }
 
@@ -136,7 +153,7 @@ export async function getLabelActionImpl({
   });
   const labelNames = labels.map((label) => label.name);
 
-  core.info(`Labels: ${labels}`);
+  core.info(`Labels: ${labelNames}`);
 
   // TODO: Also require label "ARMBestPracticesAcknowledgement"
   const allLabelsMatch =
@@ -157,34 +174,56 @@ export async function getLabelActionImpl({
     per_page: PER_PAGE_MAX,
   });
 
-  const swaggerLintDiffs = checkRuns.filter(
-    (run) => run.name === "Swagger LintDiff",
-  );
+  const requiredCheckNames = ["Swagger LintDiff", "Swagger Avocado"];
 
-  if (swaggerLintDiffs.length > 1) {
-    throw new Error(
-      `Unexpected number of checks named 'Swagger LintDiff': ${swaggerLintDiffs.length}`,
+  /**
+   * @type {typeof checkRuns.check_runs}
+   */
+  let requiredCheckRuns = [];
+
+  for (const checkName of requiredCheckNames) {
+    const matchingRuns = checkRuns.filter((run) => run.name === checkName);
+
+    if (matchingRuns.length > 1) {
+      throw new Error(
+        `Unexpected number of checks named '${checkName}': ${matchingRuns.length}`,
+      );
+    }
+
+    const matchingRun = matchingRuns.length === 1 ? matchingRuns[0] : undefined;
+
+    core.info(
+      `${checkName}: Status='${matchingRun?.status}', Conclusion='${matchingRun?.conclusion}'`,
     );
-  }
 
-  const swaggerLintDiff =
-    swaggerLintDiffs.length === 1 ? swaggerLintDiffs[0] : undefined;
-
-  core.info(
-    `Swagger LintDiff: Status='${swaggerLintDiff?.status}', Conclusion='${swaggerLintDiff?.conclusion}'`,
-  );
-
-  if (swaggerLintDiff && swaggerLintDiff.status === "completed") {
-    if (swaggerLintDiff.conclusion === "success") {
-      core.info("All requirements met for auto-signoff");
-      return labelActions[LabelAction.Add];
-    } else {
-      core.info("Swagger LintDiff did not succeed");
+    if (
+      matchingRun &&
+      matchingRun.status === "completed" &&
+      matchingRun.conclusion !== "success"
+    ) {
+      core.info(`Check '${checkName}' did not succeed`);
       return labelActions[LabelAction.Remove];
     }
-  } else {
-    // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
-    core.info("Swagger LintDiff is in-progress");
-    return labelActions[LabelAction.None];
+
+    if (matchingRun) {
+      requiredCheckRuns.push(matchingRun);
+    }
   }
+
+  if (
+    setEquals(
+      new Set(requiredCheckRuns.map((run) => run.name)),
+      new Set(requiredCheckNames),
+    ) &&
+    requiredCheckRuns.every(
+      (run) => run.status === "completed" && run.conclusion === "success",
+    )
+  ) {
+    core.info("All requirements met for auto-signoff");
+    return labelActions[LabelAction.Add];
+  }
+
+  // If any checks are missing or not completed, no-op to prevent frequent remove/add label as checks re-run
+  core.info("One or more checks are still in-progress");
+  return labelActions[LabelAction.None];
 }

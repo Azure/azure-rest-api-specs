@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/informatica"
+    default: "sdk/informaticadatamanagement"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -17,17 +17,17 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
-  # "@azure-tools/typespec-java":
-  #   package-dir: "azure-resourcemanager-informaticadatamanagement"
-  #   flavor: "azure"
-  #   namespace: "com.azure.resourcemanager.informaticadatamanagement"
-  #   service-name: "Informatica DataManagement"
-  #   examples-directory: "examples"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-informaticadatamanagement"
+    flavor: "azure"
+    service-name: "Informatica DataManagement"
   "@azure-tools/typespec-csharp":
+    package-dir: Azure.ResourceManager.InformaticaDataManagement
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.InformaticaDataManagement"
   "@azure-tools/typespec-ts":
+    service-dir: "sdk/informatica"
     azureSdkForJs: true
     isModularLibrary: true
     generateMetadata: true
