@@ -1631,35 +1631,35 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: resources.json
     where: $.definitions.Provider
-    reason: "'name' and 'type' have historically not been returned for this model and reviewer said OK to suppress."
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: resources.json
     where: $.definitions.ProviderListResult
-    reason: "'name' and 'type' have historically not been returned for this model and reviewer said OK to suppress."
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: resources.json
     where: $.definitions.ProviderResourceTypeListResult
-    reason: "'name' and 'type' have historically not been returned for this model and reviewer said OK to suppress."
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: resources.json
     where: $.definitions.TagsListResult
-    reason: "'name' and 'type' have historically not been returned for this model and reviewer said OK to suppress."
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: resources.json
     where: $.definitions.DeploymentOperation
-    reason: "'name' and 'type' have historically not been returned for this model and reviewer said OK to suppress."
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: resources.json
-    where: $.definitions.DeploymentOperationListResult
-    reason: "'name' and 'type' have historically not been returned for this model and reviewer said OK to suppress."
+    where: $.definitions.DeploymentOperationsListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: resources.json
     where: $.definitions.OperationListResult
-    reason: "'name' and 'type' have historically not been returned for this model and reviewer said OK to suppress."
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
   - suppress: RequiredPropertiesMissingInResourceModel
     from: resources.json
     where: $.definitions.ProviderPermissionListResult
-    reason: "'name' and 'type' have historically not been returned for this model and reviewer said OK to suppress."
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
 ```
 
 ---
