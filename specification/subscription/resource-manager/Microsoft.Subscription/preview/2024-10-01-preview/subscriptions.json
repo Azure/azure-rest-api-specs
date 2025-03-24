@@ -559,7 +559,7 @@
     },
     "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "put": {
-        "description": "Transfer subscription billing ownership to destination email id.",
+        "description": "Transfer subscription billing ownership to destination email id. TransferID is for tracking purposes only and is different from the system-generated TransferId",
         "operationId": "Transfers_SendExport",
         "x-ms-examples": {
           "CreateTransfer": {
@@ -597,13 +597,13 @@
         }
       },
       "get": {
+        "description": "Retrieves transfer details using a system-generated TransferId. ",
         "operationId": "Transfers_GetById",
         "x-ms-examples": {
           "GetTransferById": {
             "$ref": "./examples/getTransfer.json"
           }
         },
-        "description": "Get transfer details by transfer id.",
         "parameters": [
           {
             "$ref": "#/parameters/transferIdParameter"
@@ -628,13 +628,13 @@
         }
       },
       "delete": {
+        "description": "Cancel the transfer by using its system generated TransferId.",
         "operationId": "Transfers_CancelById",
         "x-ms-examples": {
           "GetTransferById": {
             "$ref": "./examples/cancelTransfer.json"
           }
         },
-        "description": "Cancel transfer by transfer id.",
         "parameters": [
           {
             "$ref": "#/parameters/transferIdParameter"
