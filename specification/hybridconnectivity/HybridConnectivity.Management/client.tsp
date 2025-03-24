@@ -87,3 +87,63 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
 @@alternateType(AADProfileProperties.serverId, uuid, "csharp");
 @@alternateType(AADProfileProperties.tenantId, uuid, "csharp");
+@@clientName(InventoryResource, "PublicCloudInventory", "csharp");
+@@clientName(SolutionConfiguration,
+  "PublicCloudConnectorSolutionConfiguration",
+  "csharp"
+);
+@@clientName(SolutionTypeResource,
+  "PublicCloudConnectorSolutionType",
+  "csharp"
+);
+@@clientName(HostType, "PublicCloudHostType", "csharp");
+@@alternateType(GenerateAwsTemplateRequest.connectorId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(HostType.AWS, "Aws", "csharp");
+@@clientName(InventoryProperties, "PublicCloudInventoryProperties", "csharp");
+@@alternateType(InventoryProperties.azureResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(SolutionConfigurationProperties,
+  "PublicCloudConnectorSolutionConfigurationProperties",
+  "csharp"
+);
+@@clientName(SolutionConfigurationProperties.lastSyncTime,
+  "LastSyncedOn",
+  "csharp"
+);
+@@clientName(SolutionConfigurationStatus,
+  "PublicCloudConnectorSolutionConfigurationStatus",
+  "csharp"
+);
+@@clientName(SolutionSettings,
+  "PublicCloudConnectorSolutionSettings",
+  "csharp"
+);
+@@clientName(SolutionTypeSettings,
+  "PublicCloudConnectorSolutionTypeSettings",
+  "csharp"
+);
+@@clientName(SolutionTypeProperties,
+  "PublicCloudConnectorSolutionTypeProperties",
+  "csharp"
+);
+@@clientName(SolutionTypeSettingsProperties,
+  "PublicCloudConnectorSolutionTypeSettingsProperties",
+  "csharp"
+);
+@@clientName(HybridConnectivityOperationStatus,
+  "OperationStatusResult",
+  "!csharp"
+);
+@@alternateType(HybridConnectivityOperationStatus.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "PublicCloudResourceProvistioningState",
+  "csharp"
+);
