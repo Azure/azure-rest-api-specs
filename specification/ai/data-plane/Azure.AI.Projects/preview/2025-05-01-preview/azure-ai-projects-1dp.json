@@ -495,9 +495,31 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "top",
+            "in": "query",
+            "description": "Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "listViewType",
             "in": "query",
-            "description": "View type for including/excluding (for example) archived entities.",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All] View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
             "enum": [
@@ -655,14 +677,7 @@
             "type": "string"
           },
           {
-            "name": "$orderBy",
-            "in": "query",
-            "description": "Please choose OrderBy value from ['createdtime', 'modifiedtime']",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "description": "Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned",
             "required": false,
@@ -670,14 +685,14 @@
             "format": "int32"
           },
           {
-            "name": "$skip",
+            "name": "skip",
             "in": "query",
             "description": "Continuation token for pagination.",
             "required": false,
             "type": "string"
           },
           {
-            "name": "$tags",
+            "name": "tags",
             "in": "query",
             "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
             "required": false,
@@ -1603,9 +1618,31 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "top",
+            "in": "query",
+            "description": "Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "listViewType",
             "in": "query",
-            "description": "View type for including/excluding (for example) archived entities.",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All] View type for including/excluding (for example) archived entities.",
             "required": false,
             "type": "string",
             "enum": [
@@ -1677,42 +1714,59 @@
             "type": "string"
           },
           {
-            "name": "listViewType",
+            "name": "top",
             "in": "query",
-            "description": "View type for including/excluding (for example) archived entities.",
-            "required": true,
-            "type": "string",
-            "default": "ActiveOnly"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "description": "Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].",
+            "description": "Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "name": "orderby",
+            "name": "skip",
             "in": "query",
-            "description": "Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].",
+            "description": "Continuation token for pagination.",
             "required": false,
             "type": "string"
           },
           {
             "name": "tags",
             "in": "query",
-            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
             "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "name": "listViewType",
+            "in": "query",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All] View type for including/excluding (for example) archived entities.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ActiveOnly",
+                  "value": "ActiveOnly",
+                  "description": "List only active items."
+                },
+                {
+                  "name": "ArchivedOnly",
+                  "value": "ArchivedOnly",
+                  "description": "List only archived items."
+                },
+                {
+                  "name": "All",
+                  "value": "All",
+                  "description": "List all items."
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -9918,11 +9972,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System data of the resource",
-          "readOnly": true
         }
       },
       "discriminator": "type",
@@ -9937,53 +9986,38 @@
       "type": "object",
       "description": "Model Deployment Definition",
       "properties": {
+        "type": {
+          "$ref": "#/definitions/DeploymentType",
+          "description": "The type of the deployment"
+        },
         "name": {
           "type": "string",
           "description": "Name of the deployment",
           "readOnly": true
-        },
-        "modelName": {
-          "type": "string",
-          "description": "Publisher-specific name of the deployed model",
-          "readOnly": true
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "Publisher-specific version of the deployed model",
-          "readOnly": true
-        },
-        "modelPublisher": {
-          "type": "string",
-          "description": "Name of the deployed model's publisher",
-          "readOnly": true
-        },
-        "capabilities": {
-          "type": "object",
-          "description": "Capabilities of deployed model",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Sku of the model deployment",
-          "readOnly": true
-        },
-        "connectionName": {
-          "type": "string",
-          "description": "Name of the connection the deployment comes from",
-          "readOnly": true
         }
       },
+      "discriminator": "type",
       "required": [
-        "name",
-        "modelName",
-        "modelVersion",
-        "modelPublisher",
-        "capabilities",
-        "sku"
+        "type",
+        "name"
       ]
+    },
+    "DeploymentType": {
+      "type": "string",
+      "enum": [
+        "ModelDeployment"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ModelDeployment",
+            "value": "ModelDeployment",
+            "description": "Model deployment"
+          }
+        ]
+      }
     },
     "EmbeddingConfiguration": {
       "type": "object",
@@ -10023,11 +10057,6 @@
         "description": {
           "type": "string",
           "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
         },
         "status": {
           "type": "string",
@@ -10209,11 +10238,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System data of the resource",
-          "readOnly": true
         }
       },
       "discriminator": "type",
@@ -10381,6 +10405,58 @@
           }
         ]
       }
+    },
+    "ModelDeployment": {
+      "type": "object",
+      "description": "Model Deployment Definition",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "Publisher-specific name of the deployed model",
+          "readOnly": true
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "Publisher-specific version of the deployed model",
+          "readOnly": true
+        },
+        "modelPublisher": {
+          "type": "string",
+          "description": "Name of the deployed model's publisher",
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "object",
+          "description": "Capabilities of deployed model",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the model deployment",
+          "readOnly": true
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Name of the connection the deployment comes from",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "modelName",
+        "modelVersion",
+        "modelPublisher",
+        "capabilities",
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Deployment"
+        }
+      ],
+      "x-ms-discriminator-value": "ModelDeployment"
     },
     "OutputPathAssetReference": {
       "type": "object",
@@ -10694,34 +10770,6 @@
         "size",
         "tier"
       ]
-    },
-    "SystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "properties": {
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp the resource was created at.",
-          "readOnly": true
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource.",
-          "readOnly": true
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The identity type that created the resource.",
-          "readOnly": true
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {

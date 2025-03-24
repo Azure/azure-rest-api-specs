@@ -61,10 +61,6 @@ model Evaluation {
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
   description?: string;
 
-  @doc("Metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
-
   @doc("Status of the evaluation. It is set by service and is read-only.")
   @visibility("read")
   status?: string;

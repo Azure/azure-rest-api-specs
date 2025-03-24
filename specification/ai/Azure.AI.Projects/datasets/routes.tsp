@@ -17,30 +17,20 @@ using Azure.Core.Foundations;
 namespace Azure.AI.Projects;
 
 alias ListDatasetVersionsParameters = {
-  @doc("Please choose OrderBy value from ['createdtime', 'modifiedtime']")
-  @query("$orderBy")
-  $orderBy?: string;
-
   @doc("Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned")
-  @query("$top")
-  $top?: int32;
+  @query
+  top?: int32;
 
   @doc("Continuation token for pagination.")
-  @query("$skip")
-  $skip?: string;
+  @query
+  skip?: string;
 
   @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
-  @query("$tags")
-  $tags?: string;
+  @query
+  tags?: string;
 
   @doc("[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All] View type for including/excluding (for example) archived entities.")
-  @query("listViewType")
-  listViewType?: ListViewType;
-};
-
-alias ListLatestDataSetVersionParameters = {
-  @doc("View type for including/excluding (for example) archived entities.")
-  @query("listViewType")
+  @query
   listViewType?: ListViewType;
 };
 
@@ -48,7 +38,7 @@ alias ListLatestDataSetVersionParameters = {
 interface Datasets
   extends ServicePatterns.VersionedOperations<
       DatasetVersion,
-      ListLatestDataSetVersionParameters,
+      ListDatasetVersionsParameters,
       ListDatasetVersionsParameters
     > {
   @doc("Create or start a pending upload of a dataset for a specific version.")

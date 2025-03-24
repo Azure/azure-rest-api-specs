@@ -17,11 +17,21 @@ namespace Azure.AI.Projects;
 
 @doc("Model Deployment Definition")
 @resource("deployments")
+@discriminator("type")
 model Deployment {
+  @doc("The type of the deployment")
+  type: DeploymentType;
+
   @doc("Name of the deployment")
   @visibility("read")
   @key("name")
   name: string;
+}
+
+@doc("Model Deployment Definition")
+model ModelDeployment extends Deployment {
+  @doc("The type of the deployment")
+  type: DeploymentType.ModelDeployment;
 
   @doc("Publisher-specific name of the deployed model")
   @visibility("read")
@@ -48,7 +58,6 @@ model Deployment {
   connectionName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Sku information")
 model Sku {
   @doc("Sku capacity")
@@ -65,4 +74,11 @@ model Sku {
 
   @doc("Sku tier")
   tier: string;
+}
+
+union DeploymentType {
+  string,
+
+  @doc("Model deployment")
+  ModelDeployment: "ModelDeployment",
 }
