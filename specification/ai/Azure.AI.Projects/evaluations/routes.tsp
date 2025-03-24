@@ -39,4 +39,20 @@ interface Evaluations {
     },
     Evaluation
   >;
+<<<<<<< HEAD
+=======
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Upload the result to an evaluation run.")
+  @route("runs:upload")
+  @post
+  UploadRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Evaluation to upload.")
+      @body
+      evaluation: EvaluationUpload;
+    },
+    Evaluation
+  >;
+>>>>>>> 9dae5b7564 (switch to a separate input dto)
 }
