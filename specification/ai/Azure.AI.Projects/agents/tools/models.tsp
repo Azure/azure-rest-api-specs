@@ -186,7 +186,7 @@ model OpenApiFunctionDefinition {
 
   @doc("List of functions returned in response")
   @visibility("read")
-  functions?: FunctionDefinition[]
+  functions?: FunctionDefinition[];
 }
 
 @doc("""
