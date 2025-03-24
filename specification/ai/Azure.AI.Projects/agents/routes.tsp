@@ -4,13 +4,13 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/streams";
 
-import "./models.tsp";           // e.g. ChatMessage, Agent, Thread
+import "./models.tsp"; // e.g. ChatMessage, Agent, Thread
 import "./completions/completions.tsp"; // e.g. CompleteParams, AgentCompleteParams, etc.
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;             // For Operation<..., ...>, etc.
+using Azure.Core; // For Operation<..., ...>, etc.
 using Azure.Core.Foundations;
 using Azure.Core.Traits;
 
@@ -38,7 +38,6 @@ namespace Azure.AI.Projects.Agents {
      * The ChatMessage request body.
      */
     ChatMessage,
-
     /**
      * The newly created ChatMessage resource in the response.
      */
@@ -124,7 +123,6 @@ namespace Azure.AI.Projects.Agents {
   @get
   @route("/messages")
   op listMessages is Operation<NoRequest, ChatMessage[]>;
-
 
   //
   // -- Threads
@@ -220,7 +218,6 @@ namespace Azure.AI.Projects.Agents {
   @get
   @route("/threads")
   op listThreads is Operation<NoRequest, Thread[]>;
-
 
   //
   // -- Agents

@@ -7,7 +7,6 @@ import "../models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-
 namespace Azure.AI.Projects.Agents;
 
 /**
@@ -147,63 +146,67 @@ model BinaryContent<Properties extends Reflection.Model> extends AIContent {
  * A structured chat content item containing a file data item.
  */
 @doc("A structured chat content item containing a file data item.")
-model FileContent is BinaryContent<{
-  type: "file";
-}> {}
+model FileContent
+  is BinaryContent<{
+    type: "file";
+  }>;
 
 /**
  * A structured chat content item containing an image reference.
  */
 @doc("A structured chat content item containing an image reference.")
-model ImageContent is BinaryContent<{
-  type: "image";
+model ImageContent
+  is BinaryContent<{
+    type: "image";
 
-  /**
-   * Width of the image in pixels (optional).
-   */
-  width?: int16;
+    /**
+     * Width of the image in pixels (optional).
+     */
+    width?: int16;
 
-  /**
-   * Height of the image in pixels (optional).
-   */
-  height?: int16;
-}> {}
+    /**
+     * Height of the image in pixels (optional).
+     */
+    height?: int16;
+  }>;
 
 /**
  * A structured chat content item containing an audio reference.
  */
 @doc("A structured chat content item containing an audio reference.")
-model AudioContent is BinaryContent<{
-  type: "audio";
+model AudioContent
+  is BinaryContent<{
+    type: "audio";
 
-  /**
-   * Duration of audio in seconds (optional).
-   */
-  duration?: int16;
-}> {}
+    /**
+     * Duration of audio in seconds (optional).
+     */
+    duration?: int16;
+  }>;
 
 /**
  * A structured chat content item containing a video reference.
  */
 @doc("A structured chat content item containing a video reference.")
-model VideoContent is BinaryContent<{
-  type: "video";
+model VideoContent
+  is BinaryContent<{
+    type: "video";
 
-  /**
-   * Duration of video in seconds (optional).
-   */
-  duration?: int16;
+    /**
+     * Duration of video in seconds (optional).
+     */
+    duration?: int16;
 
-  /**
-   * Width of video in pixels (optional).
-   */
-  width?: int16;
+    /**
+     * Width of video in pixels (optional).
+     */
+    width?: int16;
 
-  /**
-   * Height of video in pixels (optional).
-   */
-  height?: int16;
-}> {}
+    /**
+     * Height of video in pixels (optional).
+     */
+    height?: int16;
+  }>;
 
 /**
  * A structured chat content item describing a tool call request.
@@ -256,7 +259,7 @@ union AuthorRole {
   system: "system",
   tool: "tool",
   developer: "developer",
-  string
+  string,
 }
 
 /**
@@ -345,7 +348,12 @@ model UserMessage extends ChatMessage {
    * This avoids the "union of arrays" issue in OpenAPI v2.
    */
   @doc("The contents of the user message.")
-  content: (TextContent | ImageContent | AudioContent | VideoContent | FileContent)[];
+  content: (
+    | TextContent
+    | ImageContent
+    | AudioContent
+    | VideoContent
+    | FileContent)[];
 }
 
 /**
@@ -384,8 +392,7 @@ model AgentMessage extends ChatMessage {
     | AudioContent
     | VideoContent
     | FileContent
-    | ToolCallContent
-  )[];
+    | ToolCallContent)[];
 }
 
 /**

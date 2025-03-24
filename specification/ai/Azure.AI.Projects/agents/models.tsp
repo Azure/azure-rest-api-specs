@@ -113,7 +113,7 @@ model Agent {
   agentId: string;
 
   /**
-   * A description of the agent; used for display purposes and 
+   * A description of the agent; used for display purposes and
    * sent to the LLM to describe the agent.
    */
   @doc("A description of the agent; used for display purposes and to describe the agent.")
