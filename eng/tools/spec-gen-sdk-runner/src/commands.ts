@@ -56,7 +56,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
 
   if (statusCode === 0) {
     // Set the pipeline variables for the SDK pull request
-    let packageName =
+    let packageName: string =
       executionReport.packages[0]?.packageName ??
       commandInput.tspConfigPath ??
       commandInput.readmePath ??
