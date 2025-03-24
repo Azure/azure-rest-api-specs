@@ -144,6 +144,6 @@ namespace Microsoft.HybridConnectivity;
   "csharp"
 );
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
-  "PublicCloudResourceProvistioningState",
+  "PublicCloudResourceProvisioningState",
   "csharp"
 );
