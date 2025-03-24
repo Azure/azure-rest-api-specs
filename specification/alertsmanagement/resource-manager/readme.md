@@ -44,7 +44,7 @@ directive:
   - code: MISSING_APIS_IN_DEFAULT_TAG
     from: AlertsManagement.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/microsoft.alertsmanagement/alerts"]
-    reason: These API paths were replaced by "{Scope}/providers/microsoft.alertsmanagement/..." which provides the same functionality.
+    reason: These APIs were replaced by "{Scope}/providers/microsoft.alertsmanagement/..." which provides the same functionality.
 ```
 
 ``` yaml
