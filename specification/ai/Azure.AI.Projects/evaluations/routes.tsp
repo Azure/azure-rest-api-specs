@@ -35,7 +35,7 @@ interface Evaluations {
     {
       @doc("Evaluation to be run")
       @body
-      evaluation: Evaluation;
+      evaluation: EvaluationRun;
     },
     Evaluation
   >;
