@@ -6,7 +6,7 @@ import {
   swaggerHandWritten,
   swaggerTypeSpecGenerated,
 } from "../../test/examples.js";
-import incrementalTypeSpec from "../src/arm-incremental-typespec-preview.js";
+import incrementalTypeSpec from "../src/arm-incremental-typespec.js";
 import { createMockCore } from "./mocks.js";
 
 const core = createMockCore();
