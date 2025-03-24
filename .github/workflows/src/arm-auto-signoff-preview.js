@@ -1,9 +1,12 @@
 // @ts-check
 
+import { setEquals } from "../../src/equality.js";
 import { extractInputs } from "./context.js";
 import { PER_PAGE_MAX } from "./github.js";
 import { LabelAction } from "./label.js";
 
+// TODO: Add tests
+/* v8 ignore start */
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<{labelAction: LabelAction, issueNumber: number}>}
@@ -31,6 +34,7 @@ export default async function getLabelAction({ github, context, core }) {
     core,
   });
 }
+/* v8 ignore stop */
 
 /**
  * @param {Object} params
@@ -82,16 +86,21 @@ export async function getLabelActionImpl({
   });
 
   const wfName = "ARM Incremental TypeSpec (Preview)";
-  const incrementalTspRuns = workflowRuns.filter((wf) => wf.name == wfName);
+  const incrementalTspRuns = workflowRuns
+    .filter((wf) => wf.name == wfName)
+    // Sort by "updated_at" descending
+    .sort(
+      (a, b) =>
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+    );
 
   if (incrementalTspRuns.length == 0) {
     core.info(
       `Found no runs for workflow '${wfName}'.  Assuming workflow trigger was skipped, which should be treated equal to "completed false".`,
     );
     return labelActions[LabelAction.Remove];
-  } else if (incrementalTspRuns.length > 1) {
-    throw `Unexpected number of runs for workflow '${wfName}': ${incrementalTspRuns.length}`;
   } else {
+    // Sorted by "updated_at" descending, so most recent run is at index 0
     const run = incrementalTspRuns[0];
 
     if (run.status == "completed") {
@@ -165,34 +174,56 @@ export async function getLabelActionImpl({
     per_page: PER_PAGE_MAX,
   });
 
-  const swaggerLintDiffs = checkRuns.filter(
-    (run) => run.name === "Swagger LintDiff",
-  );
+  const requiredCheckNames = ["Swagger LintDiff", "Swagger Avocado"];
 
-  if (swaggerLintDiffs.length > 1) {
-    throw new Error(
-      `Unexpected number of checks named 'Swagger LintDiff': ${swaggerLintDiffs.length}`,
+  /**
+   * @type {typeof checkRuns.check_runs}
+   */
+  let requiredCheckRuns = [];
+
+  for (const checkName of requiredCheckNames) {
+    const matchingRuns = checkRuns.filter((run) => run.name === checkName);
+
+    if (matchingRuns.length > 1) {
+      throw new Error(
+        `Unexpected number of checks named '${checkName}': ${matchingRuns.length}`,
+      );
+    }
+
+    const matchingRun = matchingRuns.length === 1 ? matchingRuns[0] : undefined;
+
+    core.info(
+      `${checkName}: Status='${matchingRun?.status}', Conclusion='${matchingRun?.conclusion}'`,
     );
-  }
 
-  const swaggerLintDiff =
-    swaggerLintDiffs.length === 1 ? swaggerLintDiffs[0] : undefined;
-
-  core.info(
-    `Swagger LintDiff: Status='${swaggerLintDiff?.status}', Conclusion='${swaggerLintDiff?.conclusion}'`,
-  );
-
-  if (swaggerLintDiff && swaggerLintDiff.status === "completed") {
-    if (swaggerLintDiff.conclusion === "success") {
-      core.info("All requirements met for auto-signoff");
-      return labelActions[LabelAction.Add];
-    } else {
-      core.info("Swagger LintDiff did not succeed");
+    if (
+      matchingRun &&
+      matchingRun.status === "completed" &&
+      matchingRun.conclusion !== "success"
+    ) {
+      core.info(`Check '${checkName}' did not succeed`);
       return labelActions[LabelAction.Remove];
     }
-  } else {
-    // No-op if check is missing or not completed, to prevent frequent remove/add label as checks re-run
-    core.info("Swagger LintDiff is in-progress");
-    return labelActions[LabelAction.None];
+
+    if (matchingRun) {
+      requiredCheckRuns.push(matchingRun);
+    }
   }
+
+  if (
+    setEquals(
+      new Set(requiredCheckRuns.map((run) => run.name)),
+      new Set(requiredCheckNames),
+    ) &&
+    requiredCheckRuns.every(
+      (run) => run.status === "completed" && run.conclusion === "success",
+    )
+  ) {
+    core.info("All requirements met for auto-signoff");
+    return labelActions[LabelAction.Add];
+  }
+
+  // If any checks are missing or not completed, no-op to prevent frequent remove/add label as checks re-run
+  core.info("One or more checks are still in-progress");
+  return labelActions[LabelAction.None];
 }
