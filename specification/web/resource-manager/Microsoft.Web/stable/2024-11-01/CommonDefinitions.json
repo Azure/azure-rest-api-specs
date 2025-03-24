@@ -3262,7 +3262,11 @@
             },
             "siteConfig": {
               "$ref": "#/definitions/SiteConfig",
-              "description": "Configuration of the app."
+              "description": "Configuration of an App Service app. This property is not returned in response to normal create and read requests since it may contain sensitive information.",
+              "x-ms-mutability": [
+                "create",
+                "update"
+              ]
             },
             "functionAppConfig": {
               "$ref": "#/definitions/FunctionAppConfig",
@@ -3591,13 +3595,17 @@
           "type": "string"
         },
         "appSettings": {
-          "description": "Application settings.",
+          "description": "Application settings. This property is not returned in response to normal create and read requests since it may contain sensitive information.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NameValuePair"
           },
           "x-ms-identifiers": [
             "name"
+          ],
+          "x-ms-mutability": [
+            "create",
+            "update"
           ]
         },
         "metadata": {
@@ -3615,13 +3623,17 @@
           ]
         },
         "connectionStrings": {
-          "description": "Connection strings.",
+          "description": "Connection strings. This property is not returned in response to normal create and read requests since it may contain sensitive information.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnStringInfo"
           },
           "x-ms-identifiers": [
             "name"
+          ],
+          "x-ms-mutability": [
+            "create",
+            "update"
           ]
         },
         "machineKey": {
