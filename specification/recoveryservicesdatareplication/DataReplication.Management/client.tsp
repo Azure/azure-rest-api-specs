@@ -170,10 +170,7 @@ using Microsoft.DataReplication;
   "LastRecoveryPointReceivedOn",
   "csharp"
 );
-@@clientName(DeploymentPreflightModel,
-  "DataReplicationDeploymentPreflight",
-  "csharp"
-);
+@@clientName(DeploymentPreflightModel, "DeploymentPreflight", "csharp");
 @@clientName(HyperVToAzStackHCIPlannedFailoverModelCustomProperties,
   "HyperVToAzStackHciPlannedFailoverCustomProperties",
   "csharp"
