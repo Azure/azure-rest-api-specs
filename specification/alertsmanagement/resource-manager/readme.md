@@ -42,8 +42,7 @@ directive:
     reason: The IDs of investigation entities are GUIDs.
     from: Issues.json
   - code: MISSING_APIS_IN_DEFAULT_TAG
-    from: AlertsManagement.json
-    where: $.paths["/subscriptions/{}/providers/microsoft.alertsmanagement/alerts"]
+    from: AlertsManagement.json    
     reason: These APIs were replaced by "{Scope}/providers/microsoft.alertsmanagement/..." which provides the same functionality.
 ```
 
