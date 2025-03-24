@@ -511,5 +511,5 @@ suppressions:
      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages"].get.responses.200.schema
      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}"].get.responses.200.schema
      - $.definitions.UsagesListResult
-     - $.definitions.UsagesResult
+     - $.definitions.UsageResult
 ```
