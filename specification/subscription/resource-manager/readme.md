@@ -44,6 +44,16 @@ directive:
   - suppress: DeleteOperationResponses
     from: subscriptions.json
     reason: The delete operation response for subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
+  - suppress: PutResponseCodes
+    from: subscriptions.json
+    where: $.paths["/providers/Microsoft.Subscription/transfers/{transferId}"].put
+    reason: Not supposed to return 201 as the response code for the below API since existing api with new version change, got exceptions from ARM reviewer.
+  - suppress: DeleteResponseBodyEmpty
+    from: subscriptions.json
+    reason: Suppression warning as delete would require response to be returned.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: subscriptions.json
+    reason: Keep compatibility with old API version
 ```
 
 
@@ -62,8 +72,8 @@ These settings apply only when `--tag=package-2024-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2024-08-preview'
 input-file:
 - Microsoft.Subscription/preview/2024-08-01-preview/subscriptions.json
-title: Initiate, Get and Accept Subscription Changed Directory
-description: Initiate, Get and Accept Subscription Changed Directory
+title: Initiate, Get and Accept Subscription Changed Directory. Initiate, Get and Cancel Export Transfer.
+description: Initiate, Get and Accept Subscription Changed Directory. Initiate, Get and Cancel Export Transfer.
 ```
 
 ### Tag: package-2021-10
