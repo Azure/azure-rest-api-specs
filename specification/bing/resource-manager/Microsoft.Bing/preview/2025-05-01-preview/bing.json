@@ -911,6 +911,7 @@
       ]
     },
     "BingCustomConfigurationProperties": {
+      "type": "object",
       "properties": {
         "allowedList": {
           "type": "array",
@@ -932,6 +933,11 @@
             "$ref": "#/definitions/PinnedDomain"
           },
           "description": "List of pinned domains for Bing Custom Search configuration."
+        },
+        "internalId": {
+          "type": "string",
+          "description": "An internal identifier.",
+          "readOnly": true
         },
         "creationDateUtc": {
           "readOnly": true,
@@ -963,6 +969,7 @@
       ]
     },
     "AllowedDomain": {
+      "type": "object",
       "properties": {
         "domain": {
           "type": "string",
@@ -996,6 +1003,7 @@
       ]
     },
     "BlockedDomain": {
+      "type": "object",
       "properties": {
         "domain": {
           "type": "string",
@@ -1014,6 +1022,7 @@
       ]
     },
     "PinnedDomain": {
+      "type": "object",
       "properties": {
         "domain": {
           "type": "string",
@@ -1047,6 +1056,7 @@
       ]
     },
     "BingCustomConfigurationListResult": {
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "The link used to get the next page of configurations.",
@@ -1068,6 +1078,7 @@
       "description": "Required. Indicates the type of Bing account."
     },
     "Sku": {
+      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
@@ -1148,6 +1159,7 @@
       "x-ms-azure-resource": true
     },
     "BingAccountListResult": {
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "The link used to get the next page of accounts.",
@@ -1165,6 +1177,7 @@
       "description": "The list of Bing accounts operation response."
     },
     "BingAccountProperties": {
+      "type": "object",
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -1200,6 +1213,7 @@
       "description": "Properties of Bing account."
     },
     "BingAccountKeys": {
+      "type": "object",
       "properties": {
         "key1": {
           "type": "string",
@@ -1213,6 +1227,7 @@
       "description": "The access keys for the Bing account."
     },
     "RegenerateKeyParameters": {
+      "type": "object",
       "properties": {
         "keyName": {
           "type": "string",
@@ -1233,6 +1248,7 @@
       "description": "Regenerate key parameters."
     },
     "BingAccountEnumerateSkusResult": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -1246,6 +1262,7 @@
       "description": "The list of Bing accounts operation response."
     },
     "BingResourceAndSku": {
+      "type": "object",
       "properties": {
         "resourceType": {
           "type": "string",
@@ -1259,6 +1276,7 @@
       "description": "Bing resource type and SKU."
     },
     "UsagesResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1272,6 +1290,7 @@
       "description": "The response to a list usage request."
     },
     "Usage": {
+      "type": "object",
       "properties": {
         "unit": {
           "description": "The unit of the metric.",
@@ -1322,6 +1341,7 @@
       "description": "The usage data for a usage request."
     },
     "MetricName": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -1551,6 +1571,7 @@
     },
     "Availability": {
       "description": "Availability of the metric.",
+      "type": "object",
       "properties": {
         "timeGrain": {
           "type": "string",
@@ -1568,6 +1589,7 @@
     },
     "CheckSkuAvailabilityParameter": {
       "description": "The SKUs to check for availability in the specified subscription and location",
+      "type": "object",
       "properties": {
         "skus": {
           "type": "array",
@@ -1593,6 +1615,7 @@
     },
     "CheckSkuAvailabilityResultList": {
       "description": "Check SKU availability result list.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1605,6 +1628,7 @@
     },
     "CheckSkuAvailabilityResult": {
       "description": "Check SKU availability result.",
+      "type": "object",
       "properties": {
         "kind": {
           "$ref": "#/definitions/BingAccountKind",
@@ -1633,6 +1657,7 @@
       }
     },
     "SkuCapability": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1646,6 +1671,7 @@
       "description": "SkuCapability indicates the capability of a certain feature."
     },
     "ResourceSkuRestrictions": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -1690,6 +1716,7 @@
       "description": "Describes restrictions of a SKU."
     },
     "ResourceSkuLocationInfo": {
+      "type": "object",
       "properties": {
         "location": {
           "readOnly": true,
@@ -1715,6 +1742,7 @@
       }
     },
     "ResourceSkuZoneDetails": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "array",
@@ -1736,6 +1764,7 @@
       "description": "Describes The zonal capabilities of a SKU."
     },
     "ResourceSku": {
+      "type": "object",
       "properties": {
         "resourceType": {
           "readOnly": true,
@@ -1785,6 +1814,7 @@
       "description": "Describes an available Bing SKU."
     },
     "ResourceSkuRestrictionInfo": {
+      "type": "object",
       "properties": {
         "locations": {
           "readOnly": true,
@@ -1806,6 +1836,7 @@
       "description": "Information about the restriction where the SKU cannot be used."
     },
     "ResourceSkusResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1826,6 +1857,7 @@
     },
     "Error": {
       "x-ms-external": true,
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
