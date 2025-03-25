@@ -42,7 +42,6 @@ model EvaluationResult {
   @extension("x-ms-blob-reference", true)
   BlobUri: string;
 
-  // todo where is this class defined?
   ...AssetBase;
 }
 

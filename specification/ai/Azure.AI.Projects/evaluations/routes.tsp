@@ -35,6 +35,7 @@ interface Evaluations {
     {
       @doc("Evaluation to be run")
       @body
+<<<<<<< HEAD
       evaluation: EvaluationRun;
     },
     Evaluation
@@ -51,6 +52,9 @@ interface Evaluations {
       @doc("Evaluation to upload.")
       @body
       evaluation: EvaluationUpload;
+=======
+      evaluation: Evaluation;
+>>>>>>> 65ed6f0f36 (remove upload)
     },
     Evaluation
   >;
