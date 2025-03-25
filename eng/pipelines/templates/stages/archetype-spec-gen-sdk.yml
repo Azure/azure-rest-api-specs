@@ -54,7 +54,6 @@ extends:
           outputs:
             - output: pipelineArtifact
               displayName: Publish logs to Pipeline Artifacts
-              condition: ne(variables['ValidationResult'], '')
               artifactName: "spec-gen-sdk-logs"
               targetPath: "$(System.DefaultWorkingDirectory)/out/logs"
 
