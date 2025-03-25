@@ -43,16 +43,16 @@ model AcsChatMessageReceivedEventData
   ...AcsChatMessageBaseEventData;
 }
 
-/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommand event. */
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommandReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsChatAzureBotCommandEventData
+model AcsChatAzureBotCommandReceivedInThreadEventData
   extends AcsChatMessageEventInThreadBaseProperties {
   ...AcsChatMessageBaseEventData;
 }
 
-/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorSent event. */
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsChatTypingIndicatorSentEventData
+model AcsChatTypingIndicatorReceivedInThreadEventData
   extends AcsChatEventInThreadBaseProperties {
   /** The communication identifier of the sender */
   senderCommunicationIdentifier: CommunicationIdentifierModel;
@@ -952,7 +952,6 @@ model AcsChatThreadEventInThreadBaseProperties
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   /** The chat message id */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   messageId: string;
 
   /** The communication identifier of the sender */
@@ -966,7 +965,6 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   composeTime: utcDateTime;
 
   /** The type of the message */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   type: string;
 
   /** The version of the message */
@@ -979,7 +977,6 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 model AcsChatMessageEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   /** The chat message id */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   messageId: string;
 
   /** The communication identifier of the sender */
@@ -1005,7 +1002,6 @@ model AcsChatEventInThreadBaseProperties {
   transactionId?: string;
 
   /** The chat thread id */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   threadId: string;
 }
 
@@ -1107,7 +1103,6 @@ model CommunicationIdentifierModel {
   kind?: CommunicationIdentifierModelKind;
 
   /** Raw Id of the identifier. Optional in requests, required in responses. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
   rawId: string;
 
   /** The communication user. */

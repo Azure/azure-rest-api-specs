@@ -274,7 +274,7 @@
         }
       ]
     },
-    "AcsChatAzureBotCommandEventData": {
+    "AcsChatAzureBotCommandReceivedInThreadEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommand event.",
       "properties": {
@@ -299,7 +299,7 @@
         }
       ]
     },
-    "AcsChatTypingIndicatorSentEventData": {
+    "AcsChatTypingIndicatorReceivedInThreadEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorSent event.",
       "properties": {
@@ -3401,7 +3401,8 @@
         }
       },
       "required": [
-        "communicationUser"
+        "communicationUser",
+        "rawId"
       ]
     },
     "CommunicationIdentifierModelKind": {
