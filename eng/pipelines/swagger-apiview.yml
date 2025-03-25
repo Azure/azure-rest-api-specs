@@ -20,12 +20,13 @@ pr:
 jobs:
 - job:
   pool:
-    name: azsdk-pool-x64
+    name: azsdk-pool
     demands: ImageOverride -equals ubuntu-22.04
 
   steps:
   - checkout: self
-    fetchDepth: 0
+    # Required to compare head commit with base commit
+    fetchDepth: 2
   
   - pwsh: |
       dotnet tool install Azure.Sdk.Tools.SwaggerApiParser `

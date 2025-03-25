@@ -18,7 +18,7 @@ model Catalog is TrackedResource<CatalogProperties> {
   @path
   @key("catalogName")
   @segment("catalogs")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -42,7 +42,7 @@ interface Catalogs {
   /**
    * Update a Catalog
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Catalog, CatalogUpdate>;
 
   /**
