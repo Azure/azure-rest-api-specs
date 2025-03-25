@@ -2137,7 +2137,17 @@
       }
     },
     "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+      "description": "The Communication Services error.",
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "description": "The Communication Services error.",
+          "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
+        }
+      }
     }
   },
   "parameters": {
