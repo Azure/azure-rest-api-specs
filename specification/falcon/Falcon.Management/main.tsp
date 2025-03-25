@@ -10,8 +10,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.Falcon Resource Provider management API. */
 @armProviderNamespace
-@service(#{ title: "Falcon Fleet Namespace Service" })
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@service(#{ title: "Microsoft.Falcon management Service" })
 @versioned(Versions)
 namespace Microsoft.Falcon;
 
