@@ -14,18 +14,17 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    working-directory: ./.github
+
 jobs:
   test:
     strategy:
       matrix:
-        folder: [.github, .github/shared]
         os: [ubuntu, windows]
 
     runs-on: ${{ fromJSON('{"ubuntu":"ubuntu-24.04", "windows":"windows-2022"}')[matrix.os] }}
-
-    defaults:
-      run:
-        working-directory: ./${{ matrix.folder }}
 
     steps:
       - name: Checkout
@@ -34,17 +33,15 @@ jobs:
           sparse-checkout: |
             .github
 
-      - if: ${{ matrix.folder == '.github' }}
-        name: Setup Node 20 and install runtime deps
+      - name: Setup Node 20 and install runtime deps
         uses: ./.github/actions/setup-node-install-deps
         with:
           # actions/github-script@v7 uses Node 20
           node-version: 20.x
           install-command: npm ci --omit dev
-          working-directory: ./${{ matrix.folder }}
+          working-directory: ./.github
 
-      - if: ${{ matrix.folder == '.github' }}
-        name: Verify all modules are importable
+      - name: Verify all modules are importable
         uses: actions/github-script@v7
         with:
           script: |
@@ -59,6 +56,7 @@ jobs:
         with:
           # actions/github-script@v7 uses Node 20
           node-version: 20.x
+          install-command: npm ci --omit dev
           working-directory: ./${{ matrix.folder }}
 
       - run: npm run lint
@@ -70,6 +68,6 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-report-${{ matrix.os }}-${{ fromJSON('{".github":"github", ".github/shared":"github-shared"}')[matrix.folder] }}
-          path: ./${{ matrix.folder }}/coverage
+          name: code-coverage-report-${{ matrix.os }}
+          path: ./.github/coverage
           if-no-files-found: ignore

@@ -1,25 +1,32 @@
-import { afterEach, beforeEach, vi, test, describe, expect } from "vitest";
+import { beforeEach, vi, test, describe } from "vitest";
 import { vol } from "memfs";
 
 import { getAffectedReadmes, readFileList } from "../src/processChanges.js";
+import { afterEach } from "node:test";
 import { isWindows } from "./test-util.js";
 
 // These tests are in a separate module because fs mocking is difficult to undo
 
-vi.mock("node:fs/promises", async () => {
-  const memfs = await vi.importActual("memfs") as typeof import("memfs");
+vi.mock("node:fs", () => {
+  const memfs = require("memfs");
+  return {
+    ...memfs.fs,
+  };
+});
+vi.mock("node:fs/promises", () => {
+  const memfs = require("memfs");
   return {
     ...memfs.fs.promises,
   };
 });
-
 
 describe("getAffectedReadmes", () => {
   beforeEach(() => {
     vol.reset();
   });
 
-  test.skipIf(isWindows())("includes expected changed file", async () => {
+  test.skipIf(isWindows)
+  .concurrent("includes expected changed file", async ({ expect }) => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/b/readme.md": "b",
@@ -31,7 +38,7 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).toEqual(["specification/a/readme.md"]);
   });
 
-  test("excludes non-changed file outside of scope", async () => {
+  test.concurrent("excludes non-changed file outside of scope", async ({ expect }) => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/b/readme.md": "b",
@@ -43,7 +50,8 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).not.toContain(["specification/b/readme.md"]);
   });
 
-  test.skipIf(isWindows())("includes files up the heirarchy", async () => {
+  test.skipIf(isWindows)
+  .concurrent("includes files up the heirarchy", async ({ expect }) => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/a/b/c/readme.md": "c",
@@ -55,21 +63,26 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).toEqual(["specification/a/b/c/readme.md", "specification/a/readme.md"]);
   });
 
-  test.skipIf(isWindows())("lists reademe files in folders with affected swagger files", async () => {
-    const files = {
-      "./specification/service1/readme.md": "a",
-      "./specification/service1/b/c/swagger.json": "{}",
-      "./specification/service2/readme.md": "b",
-      "./specification/service2/swagger.json": "{}",
-    };
-    vol.fromJSON(files, ".");
+  test.skipIf(isWindows)
+  .concurrent(
+    "lists reademe files in folders with affected swagger files",
+    async ({ expect }) => {
+      const files = {
+        "./specification/service1/readme.md": "a",
+        "./specification/service1/b/c/swagger.json": "{}",
+        "./specification/service2/readme.md": "b",
+        "./specification/service2/swagger.json": "{}",
+      };
+      vol.fromJSON(files, ".");
 
-    const changedFiles = ["specification/service1/b/c/swagger.json"];
-    const affectedReadmes = await getAffectedReadmes(changedFiles, ".");
-    expect(affectedReadmes).toEqual(["specification/service1/readme.md"]);
-  });
+      const changedFiles = ["specification/service1/b/c/swagger.json"];
+      const affectedReadmes = await getAffectedReadmes(changedFiles, ".");
+      expect(affectedReadmes).toEqual(["specification/service1/readme.md"]);
+    },
+  );
 
-  test.skipIf(isWindows())("excludes files outside of specification/", async () => {
+  test.skipIf(isWindows)
+  .concurrent("excludes files outside of specification/", async ({ expect }) => {
     const files = {
       "./repo-root/specification/a/readme.md": "a",
       "./repo-root/specification/b/readme.md": "b",
@@ -84,12 +97,12 @@ describe("getAffectedReadmes", () => {
   });
 });
 
-describe("readFileList", () => {
+describe("readFileList", async () => {
   afterEach(() => {
     vol.reset();
   });
 
-  test("returns a list of items", async () => {
+  test.concurrent("returns a list of items", async ({ expect }) => {
     // Using test1.txt because somehow another test affects the
     // value of test.txt in this context.
     const files = {
@@ -101,7 +114,7 @@ describe("readFileList", () => {
     expect(fileList).toEqual(["line1", "line2"]);
   });
 
-  test("returns an empty list if the file is empty", async () => {
+  test.concurrent("returns an empty list if the file is empty", async ({ expect }) => {
     const files = {
       "./test.txt": "",
     };

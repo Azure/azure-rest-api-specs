@@ -1,4 +1,4 @@
-import { beforeEach, test, describe, vi, Mock, expect } from "vitest";
+import { beforeEach, test, describe, vi, Mock } from "vitest";
 import { readFile } from "fs/promises";
 import { join } from "node:path";
 
@@ -25,7 +25,7 @@ describe("deduplicateTags", () => {
   // Original comment describing deduplicateTags
   // if one tag 'A' 's input files contains all the input files of Tag 'B' , then B tag will be de-duplicated
 
-  test("deduplicates tags", () => {
+  test.concurrent("deduplicates tags", async ({ expect }) => {
     const tags = [
       { tagName: "tag1", inputFiles: ["file1", "file2"] },
       { tagName: "tag2", inputFiles: ["file1"] }, // Covered in tag1
@@ -39,7 +39,7 @@ describe("deduplicateTags", () => {
 });
 
 describe("getInputFiles", () => {
-  test("returns input files for a readme content's tag", async () => {
+  test.concurrent("returns input files for a readme content's tag", async ({ expect }) => {
     const readmeContent = await readFile(join(__dirname, "fixtures/getInputFiles/readme.md"), {
       encoding: "utf-8",
     });
@@ -49,7 +49,7 @@ describe("getInputFiles", () => {
     expect(inputFiles).toEqual(["Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json"]);
   });
 
-  test("returns empty array when no input files are found", async () => {
+  test.concurrent("returns empty array when no input files are found", async ({ expect }) => {
     const readmeContent = await readFile(join(__dirname, "fixtures/getInputFiles/readme.md"), {
       encoding: "utf-8",
     });
@@ -60,8 +60,8 @@ describe("getInputFiles", () => {
   });
 });
 
-describe("getDocRawUrl", () => {
-  test("returns the expected doc url", () => {
+describe("getDocRawUrl", async () => {
+  test.concurrent("returns the expected doc url", async ({ expect }) => {
     const docUrl = getDocRawUrl("Post201Response");
 
     expect(docUrl).toEqual(
@@ -69,42 +69,48 @@ describe("getDocRawUrl", () => {
     );
   });
 
-  test("returns N/A on FATAL", () => {
+  test.concurrent("returns N/A on FATAL", async ({ expect }) => {
     const docUrl = getDocRawUrl("FATAL");
 
     expect(docUrl).toEqual("N/A");
   });
 });
 
-describe("getDefaultTag", () => {
-  test("returns default tag when there is a Basic Information header", async () => {
-    const readmeContent = await readFile(
-      join(__dirname, "fixtures/getDefaultTag/hasBasicInformation.md"),
-      {
-        encoding: "utf-8",
-      },
-    );
-    6;
+describe("getDefaultTag", async () => {
+  test.concurrent(
+    "returns default tag when there is a Basic Information header",
+    async ({ expect }) => {
+      const readmeContent = await readFile(
+        join(__dirname, "fixtures/getDefaultTag/hasBasicInformation.md"),
+        {
+          encoding: "utf-8",
+        },
+      );
+      6;
 
-    const defaultTag = getDefaultTag(readmeContent);
+      const defaultTag = getDefaultTag(readmeContent);
 
-    expect(defaultTag).toEqual("package-2022-12-01");
-  });
+      expect(defaultTag).toEqual("package-2022-12-01");
+    },
+  );
 
-  test("returns default tag when there is no Basic Information header", async () => {
-    const readmeContent = await readFile(
-      join(__dirname, "fixtures/getDefaultTag/noBasicInformation.md"),
-      {
-        encoding: "utf-8",
-      },
-    );
+  test.concurrent(
+    "returns default tag when there is no Basic Information header",
+    async ({ expect }) => {
+      const readmeContent = await readFile(
+        join(__dirname, "fixtures/getDefaultTag/noBasicInformation.md"),
+        {
+          encoding: "utf-8",
+        },
+      );
 
-    const defaultTag = getDefaultTag(readmeContent);
+      const defaultTag = getDefaultTag(readmeContent);
 
-    expect(defaultTag).toEqual("package-2023-07-preview");
-  });
+      expect(defaultTag).toEqual("package-2023-07-preview");
+    },
+  );
 
-  test("returns empty string when there is no default tag", async () => {
+  test.concurrent("returns empty string when there is no default tag", async ({ expect }) => {
     const readmeContent = await readFile(
       join(__dirname, "fixtures/getDefaultTag/noDefaultTag.md"),
       {
@@ -116,40 +122,10 @@ describe("getDefaultTag", () => {
 
     expect(defaultTag).toEqual("");
   });
-
-  test.each([
-    {
-      description: "without Basic Information header",
-      readmeContent: `# Some header
-This should be parsed as a string, not a Date object.
-\`\`\`yaml
-tag: 2025-01-01
-\`\`\`
-`,
-    },
-    {
-      description: "with Basic Information header",
-      readmeContent: `# Basic Information
-This should be parsed as a string, not a Date object.
-\`\`\`yaml
-tag: 2025-01-01
-\`\`\`
-`,
-    },
-  ])(
-    "returns a string for default tag even when the tag is formatted like a date ($description)",
-    ({ readmeContent }) => {
-      const defaultTag = getDefaultTag(readmeContent);
-
-      expect(defaultTag).not.toBeInstanceOf(Date);
-      expect(defaultTag).toBeTypeOf("string");
-      expect(defaultTag).toEqual("2025-01-01");
-    },
-  );
 });
 
-describe("getAllTags", () => {
-  test("returns all tags", async () => {
+describe("getAllTags", async () => {
+  test.concurrent("returns all tags", async ({ expect }) => {
     const readmeContent = await readFile(join(__dirname, "fixtures/getAllTags/readme.md"), {
       encoding: "utf-8",
     });
@@ -178,15 +154,16 @@ describe("getAllTags", () => {
   });
 });
 
-describe("getOpenapiType", () => {
-  test("openapi-type found and valid", async () => {
+describe("getOpenapiType", async () => {
+  test.concurrent("openapi-type found and valid", async ({ expect }) => {
     const markdownFile = join(__dirname, "fixtures/getOpenapiType/type-found-and-valid.md");
     const openapiType = await getOpenapiType(markdownFile);
 
     expect(openapiType).toEqual("data-plane");
   });
 
-  test.skipIf(isWindows())("openapi-type found but not valid", async () => {
+  test.skipIf(isWindows)
+  .concurrent("openapi-type found but not valid", async ({ expect }) => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/type-found-not-valid-readme.md",
@@ -196,7 +173,8 @@ describe("getOpenapiType", () => {
     expect(openapiType).toEqual("data-plane");
   });
 
-  test.skipIf(isWindows())("openapi-type not found, type arm", async () => {
+  test.skipIf(isWindows)
+  .concurrent("openapi-type not found, type arm", async ({ expect }) => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/resource-manager/inferred-resource-manager-readme.md",
@@ -204,7 +182,8 @@ describe("getOpenapiType", () => {
     const openApiType = await getOpenapiType(markdownFile);
     expect(openApiType).toEqual("arm");
   });
-  test.skipIf(isWindows())("openapi-type not found, type data-plane", async () => {
+  test.skipIf(isWindows)
+  .concurrent("openapi-type not found, type data-plane", async ({ expect }) => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/inferred-data-plane-readme.md",
@@ -213,15 +192,15 @@ describe("getOpenapiType", () => {
     expect(openApiType).toEqual("data-plane");
   });
 
-  test("openapi-type not found, type default", async () => {
+  test.concurrent("openapi-type not found, type default", async ({ expect }) => {
     const markdownFile = join(__dirname, "fixtures/getOpenapiType/default.md");
     const openApiType = await getOpenapiType(markdownFile);
     expect(openApiType).toEqual("default");
   });
 });
 
-describe("getTagsAndInputFiles", () => {
-  test("gets accurate input files for tag", async () => {
+describe("getTagsAndInputFiles", async () => {
+  test.concurrent("gets accurate input files for tag", async ({ expect }) => {
     const readmeContent = await readFile(
       join(__dirname, "fixtures/getTagsAndInputFiles/readme.md"),
       { encoding: "utf-8" },
@@ -238,7 +217,7 @@ describe("getTagsAndInputFiles", () => {
   });
 });
 
-describe("getRelatedArmRpcFromDoc", () => {
+describe("getRelatedArmRpcFromDoc", async () => {
   // Tests are run sequentially to avoid concurrency issues with axios mocking
   beforeEach(() => {
     (axios.get as Mock).mockReset();
@@ -254,13 +233,13 @@ describe("getRelatedArmRpcFromDoc", () => {
     });
   }
 
-  test("returns empty array on FATAL", async () => {
+  test.sequential("returns empty array on FATAL", async ({ expect }) => {
     const rule = await getRelatedArmRpcFromDoc("FATAL");
 
     expect(rule).toEqual([]);
   });
 
-  test("returns a rule from the cache", async () => {
+  test.sequential("returns a rule from the cache", async ({ expect }) => {
     await mockResponseFile("lro-patch202.md");
 
     await getRelatedArmRpcFromDoc("LroPatch202");
@@ -269,34 +248,34 @@ describe("getRelatedArmRpcFromDoc", () => {
     expect((axios.get as Mock).mock.calls.length).toBe(1);
   });
 
-  test("returns an empty array when no rules are found", async () => {
+  test.sequential("returns an empty array when no rules are found", async ({ expect }) => {
     await mockResponseFile("api-host.md");
     const rules = await getRelatedArmRpcFromDoc("ApiHost");
     expect(rules).toEqual([]);
   });
 
-  test("returns rules when a list is found", async () => {
+  test.sequential("returns rules when a list is found", async ({ expect }) => {
     await mockResponseFile("system-data-definitions-common-types.md");
     const rules = await getRelatedArmRpcFromDoc("SystemDataDefinitionsCommonTypes");
 
     expect(rules).toEqual(["RPC-SystemData-V1-01", "RPC-SystemData-V1-02"]);
   });
 
-  test("returns rules when a list with commas is found", async () => {
+  test.sequential("returns rules when a list with commas is found", async ({ expect }) => {
     await mockResponseFile("lro-patch202.md");
     const rules = await getRelatedArmRpcFromDoc("LroPatch202");
 
     expect(rules).toEqual(["RPC-Patch-V1-06", "RPC-Async-V1-08"]);
   });
 
-  test("returns an empty set when the docUrl is not found", async () => {
+  test.sequential("returns an empty set when the docUrl is not found", async ({ expect }) => {
     (axios.get as Mock).mockRejectedValue(new Error("404 Not Found"));
     const rules = await getRelatedArmRpcFromDoc("DoesNotExist");
 
     expect(rules).toEqual([]);
   });
 
-  test("does not throw on axios errors", () => {
+  test.sequential("does not throw on axios errors", async ({ expect }) => {
     (axios.get as Mock).mockRejectedValue(new Error("404 Not Found"));
 
     expect(async () => await getRelatedArmRpcFromDoc("DoesNotExist")).not.toThrow();

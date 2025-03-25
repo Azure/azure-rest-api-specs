@@ -7,9 +7,17 @@ import {
   runSpecGenSdkCommand,
   getAllTypeSpecPaths,
   resetGitRepo,
+  objectToMap,
 } from "./utils.js";
-import { LogLevel, logMessage, vsoAddAttachment } from "./log.js";
-import { SpecGenSdkCmdInput } from "./types.js";
+import {
+  LogIssueType,
+  LogLevel,
+  logMessage,
+  setVsoVariable,
+  vsoAddAttachment,
+  vsoLogIssue,
+} from "./log.js";
+import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 
 /**
@@ -35,14 +43,21 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     statusCode = 1;
   }
 
+  // Read the execution report to determine if the generation was successful
+  const executionReportPath = path.join(
+    commandInput.workingFolder,
+    `${commandInput.sdkRepoName}_tmp/execution-report.json`,
+  );
   let executionReport;
   try {
-    // Read the execution report to determine if the generation was successful
-    executionReport = getExecutionReport(commandInput);
+    executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
     const executionResult = executionReport.executionResult;
     logMessage(`Runner command execution result:${executionResult}`);
   } catch (error) {
-    logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
+    logMessage(
+      `Runner: error reading execution report at ${executionReportPath}:${error}`,
+      LogLevel.Error,
+    );
     statusCode = 1;
   }
 
@@ -59,7 +74,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   }
 
   logMessage("ending group logging", LogLevel.EndGroup);
-  logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPathText);
+  logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
 
   return statusCode;
 }
@@ -75,38 +90,24 @@ export async function generateSdkForSpecPr(): Promise<number> {
 
   let statusCode = 0;
   let pushedSpecConfigCount;
+  let shouldLabelBreakingChange = false;
   let breakingChangeLabel = "";
   let executionReport;
-  let changedSpecPathText = "";
-  let hasManagementPlaneSpecs = false;
-  let overallRunHasBreakingChange = false;
-  let currentRunHasBreakingChange = false;
-  let overallExecutionResult = "";
-  let currentExecutionResult = "";
-
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
       continue;
     }
     pushedSpecConfigCount = 0;
-    changedSpecPathText = "";
     if (changedSpec.typespecProject) {
       specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
-      changedSpecPathText = changedSpec.typespecProject;
       pushedSpecConfigCount++;
-      if (changedSpec.typespecProject.includes(".Management")) {
-        hasManagementPlaneSpecs = true;
-      }
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
-      changedSpecPathText = changedSpecPathText + " " + changedSpec.readmeMd;
       pushedSpecConfigCount++;
-      if (changedSpec.readmeMd.includes("resource-manager")) {
-        hasManagementPlaneSpecs = true;
-      }
     }
+    const changedSpecPathText = `${changedSpec.typespecProject} ${changedSpec.readmeMd}`;
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
 
@@ -122,97 +123,33 @@ export async function generateSdkForSpecPr(): Promise<number> {
     for (let index = 0; index < pushedSpecConfigCount * 2; index++) {
       specGenSdkCommand.pop();
     }
-
-    try {
-      // Read the execution report to aggreate the generation results
-      executionReport = getExecutionReport(commandInput);
-      currentExecutionResult = executionReport.executionResult;
-      if (overallExecutionResult !== "failed") {
-        overallExecutionResult = currentExecutionResult;
-      }
-      [currentRunHasBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
-      overallRunHasBreakingChange = overallRunHasBreakingChange || currentRunHasBreakingChange;
-      logMessage(`Runner command execution result:${currentExecutionResult}`);
-    } catch (error) {
-      logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
-      statusCode = 1;
-      overallExecutionResult = "failed";
-    }
-    logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(executionReport?.vsoLogPath, changedSpecPathText);
-  }
-  // Process the spec-gen-sdk artifacts
-  statusCode =
-    generateArtifact(
-      commandInput,
-      overallExecutionResult,
-      breakingChangeLabel,
-      overallRunHasBreakingChange,
-      hasManagementPlaneSpecs,
-    ) || statusCode;
-  return statusCode;
-}
-
-/* Generate SDKs for spec pull request */
-export async function generateSdkForSpecPr(): Promise<number> {
-  // Parse the arguments
-  const commandInput: SpecGenSdkCmdInput = parseArguments();
-  // Construct the spec-gen-sdk command
-  const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
-  // Get the spec paths from the changed files
-  const changedSpecs = detectChangedSpecConfigFiles(commandInput);
-
-  let statusCode = 0;
-  let pushedSpecConfigCount;
-  for (const changedSpec of changedSpecs) {
-    if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
-      logMessage("No spec config file found in the changed files", LogLevel.Warn);
-      continue;
-    }
-    pushedSpecConfigCount = 0;
-    if (changedSpec.typespecProject) {
-      specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
-      pushedSpecConfigCount++;
-    }
-    if (changedSpec.readmeMd) {
-      specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
-      pushedSpecConfigCount++;
-    }
-    const changedSpecPath = changedSpec.typespecProject ?? changedSpec.readmeMd;
-    logMessage(`Generating SDK from ${changedSpecPath}`, LogLevel.Group);
-    logMessage(`Command:${specGenSdkCommand.join(" ")}`);
-
-    try {
-      await resetGitRepo(commandInput.localSdkRepoPath);
-      await runSpecGenSdkCommand(specGenSdkCommand);
-      logMessage("Command executed successfully");
-    } catch (error) {
-      logMessage(`Error executing command:${error}`, LogLevel.Error);
-      statusCode = 1;
-    }
-    // Pop the spec config path from specGenSdkCommand
-    for (let index = 0; index < pushedSpecConfigCount * 2; index++) {
-      specGenSdkCommand.pop();
-    }
     // Read the execution report to determine if the generation was successful
     const executionReportPath = path.join(
       commandInput.workingFolder,
       `${commandInput.sdkRepoName}_tmp/execution-report.json`,
     );
+
     try {
-      const executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
       const executionResult = executionReport.executionResult;
-      logMessage(`Execution Result:${executionResult}`);
+      [shouldLabelBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
+      logMessage(`Runner command execution result:${executionResult}`);
     } catch (error) {
       logMessage(
-        `Error reading execution report at ${executionReportPath}:${error}`,
+        `Runner: error reading execution report at ${executionReportPath}:${error}`,
         LogLevel.Error,
       );
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
+    logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
   }
+  // Process the breaking change label artifacts
+  statusCode = processBreakingChangeLabelArtifacts(
+    commandInput,
+    shouldLabelBreakingChange,
+    breakingChangeLabel,
+  );
   return statusCode;
 }
 
@@ -260,6 +197,15 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
     // Pop the spec config path from the command
     specGenSdkCommand.pop();
     specGenSdkCommand.pop();
+    // Read the execution report to determine if the generation was successful
+    const executionReportPath = path.join(
+      commandInput.workingFolder,
+      `${commandInput.sdkRepoName}_tmp/execution-report.json`,
+    );
+    try {
+      executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
+      const executionResult = executionReport.executionResult;
+      logMessage(`Runner: command execution result:${executionResult}`);
 
       if (executionResult === "succeeded" || executionResult === "warning") {
         succeededContent += `${specConfigPath},`;
@@ -272,11 +218,14 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
         failedCount++;
       }
     } catch (error) {
-      logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
+      logMessage(
+        `Runner: error reading execution report at ${executionReportPath}:${error}`,
+        LogLevel.Error,
+      );
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPath);
+    logIssuesToPipeline(executionReport.vsoLogPath, specConfigPath);
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -421,4 +370,102 @@ function getSpecPaths(runMode: string, specRepoPath: string): string[] {
     }
   }
   return specConfigPaths;
+}
+
+/**
+ * Logs issues to Azure DevOps Pipeline *
+ * @param logPath - The vso log file path.
+ * @param specConfigDisplayText - The display text for the spec configuration.
+ */
+function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): void {
+  let vsoLogs: VsoLogs;
+  try {
+    const logContent = JSON.parse(fs.readFileSync(logPath, "utf8"));
+    vsoLogs = objectToMap(logContent);
+  } catch (error) {
+    throw new Error(`Runner: error reading log at ${logPath}:${error}`);
+  }
+
+  if (vsoLogs) {
+    const errors = [...vsoLogs.values()].flatMap((entry) => entry.errors ?? []);
+    const warnings = [...vsoLogs.values()].flatMap((entry) => entry.warnings ?? []);
+    if (errors.length > 0) {
+      const errorTitle = `Errors occurred while generating SDK from ${specConfigDisplayText}`;
+      logMessage(errorTitle, LogLevel.Group);
+      const errorsWithTitle = [errorTitle, ...errors];
+      vsoLogIssue(errorsWithTitle.join("%0D%0A"));
+      logMessage("ending group logging", LogLevel.EndGroup);
+    }
+    if (warnings.length > 0) {
+      const warningTitle = `Warnings occurred while generating SDK from ${specConfigDisplayText}`;
+      logMessage(warningTitle, LogLevel.Group);
+      const warningsWithTitle = [warningTitle, ...warnings];
+      vsoLogIssue(warningsWithTitle.join("%0D%0A"), LogIssueType.Warning);
+      logMessage("ending group logging", LogLevel.EndGroup);
+    }
+  }
+}
+
+/**
+ * Process the breaking change label artifacts.
+ *
+ * @param executionReport - The spec-gen-sdk execution report.
+ * @returns [flag of lable breaking change, breaking change label].
+ */
+function getBreakingChangeInfo(executionReport: any): [boolean, string] {
+  let breakingChangeLabel = "";
+  for (const packageInfo of executionReport.packages) {
+    breakingChangeLabel = packageInfo.breakingChangeLabel;
+    if (packageInfo.shouldLabelBreakingChange) {
+      return [true, breakingChangeLabel];
+    }
+  }
+  return [false, breakingChangeLabel];
+}
+
+/**
+ * Process the breaking change label artifacts.
+ * @param commandInput - The command input.
+ * @param shouldLabelBreakingChange - A flag indicating whether to label breaking changes.
+ * @returns the run status code.
+ */
+function processBreakingChangeLabelArtifacts(
+  commandInput: SpecGenSdkCmdInput,
+  shouldLabelBreakingChange: boolean,
+  breakingChangeLabel: string,
+): number {
+  const breakingChangeLabelArtifactName = "spec-gen-sdk-breaking-change-artifact";
+  const breakingChangeLabelArtifactFileName = breakingChangeLabelArtifactName + ".json";
+  const breakingChangeLabelArtifactPath = "out/breaking-change-label-artifact";
+  const breakingChangeLabelArtifactAbsoluteFolder = path.join(
+    commandInput.workingFolder,
+    breakingChangeLabelArtifactPath,
+  );
+  try {
+    if (!fs.existsSync(breakingChangeLabelArtifactAbsoluteFolder)) {
+      fs.mkdirSync(breakingChangeLabelArtifactAbsoluteFolder, { recursive: true });
+    }
+    // Write breaking change label artifact
+    fs.writeFileSync(
+      path.join(
+        commandInput.workingFolder,
+        breakingChangeLabelArtifactPath,
+        breakingChangeLabelArtifactFileName,
+      ),
+      JSON.stringify({
+        language: commandInput.sdkRepoName,
+        labelAction: shouldLabelBreakingChange,
+      }),
+    );
+    setVsoVariable("BreakingChangeLabelArtifactName", breakingChangeLabelArtifactName);
+    setVsoVariable("BreakingChangeLabelArtifactPath", breakingChangeLabelArtifactPath);
+    setVsoVariable("BreakingChangeLabelAction", shouldLabelBreakingChange ? "add" : "remove");
+    setVsoVariable("BreakingChangeLabel", breakingChangeLabel);
+  } catch (error) {
+    logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
+    vsoLogIssue(`Runner: errors writing breaking change label artifacts:${error}`);
+    logMessage("ending group logging", LogLevel.EndGroup);
+    return 1;
+  }
+  return 0;
 }

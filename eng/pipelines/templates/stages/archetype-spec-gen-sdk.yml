@@ -48,8 +48,6 @@ extends:
             value: '3.13'
           - name: PipelineArtifactsName
             value: 'packages'
-          - name: SpecRepoCommit
-            value: $(Build.SourceVersion)
 
         pool:
           name: $(LINUXPOOL)
@@ -59,16 +57,6 @@ extends:
         templateContext:
           outputParentDirectory: $(System.DefaultWorkingDirectory)/out
           outputs:
-            - output: pipelineArtifact
-              displayName: Publish SDK artifacts to Pipeline Artifacts
-              condition: and(ne(variables['ValidationResult'], ''), eq(variables['HasSDKArtifact'], 'true'))
-              artifactName: $(sdkArtifactName)
-              targetPath: "$(System.DefaultWorkingDirectory)/out/stagedArtifacts"
-            - output: pipelineArtifact
-              displayName: Publish API View artifacts to Pipeline Artifacts
-              condition: and(ne(variables['ValidationResult'], ''), eq(variables['HasApiViewArtifact'], 'true'))
-              artifactName: $(ArtifactName)
-              targetPath: "$(System.DefaultWorkingDirectory)/out/stagedArtifacts"
             - output: pipelineArtifact
               displayName: Publish logs to Pipeline Artifacts
               artifactName: "spec-gen-sdk-logs"
@@ -207,28 +195,16 @@ extends:
                 $optional_params || true # return true always to suppress exit error logging
             displayName: 'Generate SDK'
 
-          - task: Powershell@2
-            inputs:
-              filePath: $(SdkRepoDirectory)/eng/common/scripts/Save-Package-Properties.ps1
-              arguments: >
-                -ServiceDirectory $(GeneratedSDK.ServiceName)
-                -OutDirectory $(GeneratedSDK.StagedArtifactsFolder)/PackageInfo
-              pwsh: true
-              workingDirectory: $(SdkRepoDirectory)
-            displayName: Dump Package properties
-            condition: and(succeeded(), ne(variables['GeneratedSDK.ServiceName'], ''), ne(variables['GeneratedSDK.StagedArtifactsFolder'], ''))
-
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
-              ArtifactName: $(SpecGenSdkArtifactName)
-              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
-              CustomCondition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
+              ArtifactName: $(BreakingChangeLabelArtifactName)
+              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(BreakingChangeLabelArtifactPath)"
+              CustomCondition: and(succeeded(), ne(variables['BreakingChangeLabelArtifactName'], ''))
 
           - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
             parameters:
               ArtifactName: $(PipelineArtifactsName)
               ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
-              CustomCondition: and(succeeded(), ne(variables['GeneratedSDK.StagedArtifactsFolder'], ''))
 
           - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
             - task: PowerShell@2
@@ -259,7 +235,7 @@ extends:
                   -LabelName $(BreakingChangeLabel)
                   -AuthToken "$(azuresdk-github-pat)"
 
-            - ${{ if and(eq(parameters.SkipPullRequestCreation, false), ne(variables['Build.Reason'], 'PullRequest')) }}:
+            - ${{ if eq(parameters.SkipPullRequestCreation, false) }}:
               - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
                 parameters:
                   BaseRepoBranch: $(PrBranch)-$(Build.BuildId)
@@ -271,27 +247,21 @@ extends:
                   WorkingDirectory: $(SdkRepoDirectory)
                   ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
 
-              - task: PowerShell@2
-                displayName: Create pull request
-                condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
-                inputs:
-                  pwsh: true
-                  workingDirectory: $(SdkRepoDirectory)
-                  filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
-                  arguments: >
-                    -RepoOwner "$(SdkRepoOwner)"
-                    -RepoName "$(SdkRepoName)"
-                    -BaseBranch "main"
-                    -PROwner "azure-sdk"
-                    -PRBranch "$(PrBranch)-$(Build.BuildId)"
-                    -AuthToken "$(azuresdk-github-pat)"
-                    -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-                    -PRBody "$(GeneratedSDKInformation)"
-                    -OpenAsDraft $true
-
-            - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-              - template: /eng/common/pipelines/templates/steps/detect-api-changes.yml
-                parameters:
-                  ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
-                  ArtifactName: $(PipelineArtifactsName)
-                  RepoRoot: $(SdkRepoDirectory)
+              - ${{ if not(endsWith(variables['SdkRepoName'], '-pr')) }}:
+                - task: PowerShell@2
+                  displayName: Create pull request
+                  condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+                  inputs:
+                    pwsh: true
+                    workingDirectory: $(SdkRepoDirectory)
+                    filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
+                    arguments: >
+                      -RepoOwner "$(SdkRepoOwner)"
+                      -RepoName "$(SdkRepoName)"
+                      -BaseBranch "main"
+                      -PROwner "azure-sdk"
+                      -PRBranch "$(PrBranch)-$(Build.BuildId)"
+                      -AuthToken "$(azuresdk-github-pat)"
+                      -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
+                      -PRBody "$(GeneratedSDKInformation)"
+                      -OpenAsDraft $true

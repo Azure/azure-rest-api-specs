@@ -1,47 +1,257 @@
-import { beforeEach, test, describe, expect, vi } from "vitest";
+import { test, describe, expect } from "vitest";
+
+import { AutorestRunResult } from "../src/util.js";
 import {
-  compareLintDiffViolations,
-  generateAutoRestErrorReport,
-  generateLintDiffReport,
-  getDocUrl,
-  getFile,
-  getFileLink,
-  getLine,
-  getPathSegment,
-  iconFor,
-} from "../src/generateReport.js";
-import {
-  Source,
+  getLintDiffViolations,
+  arrayIsEqual,
+  isFailure,
+  isWarning,
   LintDiffViolation,
-  BeforeAfter,
-  AutorestRunResult,
-  AutoRestMessage,
-} from "../src/lintdiff-types.js";
+  getNewItems,
+  Source,
+  iconFor,
+  getLine,
+  getFile,
+  relativizePath,
+  getDocUrl,
+  getFileLink,
+  getPathSegment,
+  compareLintDiffViolations,
+} from "../src/generateReport.js";
 import { isWindows } from "./test-util.js";
 
-import { vol } from "memfs";
+describe("getLintDiffViolations", async () => {
+  function createRunResult(stdout: string, stderr: string = ""): AutorestRunResult {
+    return {
+      rootPath: "string",
+      readme: "string",
+      tag: "string",
+      error: null,
+      stdout: stdout,
+      stderr: stderr,
+    };
+  }
 
-vi.mock("node:fs/promises", async () => {
-  const memfs = (await vi.importActual("memfs")) as typeof import("memfs");
-  return {
-    ...memfs.fs.promises,
-  };
+  test.concurrent("returns an empty array on no interesting violations", ({ expect }) => {
+    const runResult =
+      createRunResult(`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"spectralPluginFunc: Validating OpenAPI spec. TypeSpec-generated: true. Path: 'file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json'"}
+{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"openapiValidatorPluginFunc: Return"}`);
+
+    const violations = getLintDiffViolations(runResult);
+    expect(violations).toEqual([]);
+  });
+
+  test.concurrent("returns an error on an interesting violation", ({ expect }) => {
+    const runResult =
+      createRunResult(`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"spectralPluginFunc: Validating OpenAPI spec. TypeSpec-generated: true. Path: 'file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json'"}
+{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"error","message":"Top level property names should not be repeated inside the properties bag for ARM resource 'CodeSigningAccount'. Properties [properties.sku] conflict with ARM top level properties. Please rename these.","code":"ArmResourcePropertiesBag","details":{"jsonpath":["definitions","CodeSigningAccount"],"validationCategory":"ARMViolation","providerNamespace":false,"resourceType":false,"range":{"start":{"line":1036,"column":27},"end":{"line":1051,"column":6}}},"source":[{"document":"file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json","position":{"line":1036,"column":5}}]}
+{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"openapiValidatorPluginFunc: Return"}`);
+
+    const violations = getLintDiffViolations(runResult);
+    expect(violations.length).toEqual(1);
+    expect(violations[0].level).toEqual("error");
+    expect(violations[0].code).toEqual("ArmResourcePropertiesBag");
+  });
+
+  test.concurrent(
+    "returns an empty array on violations that don't have extensionname @microsoft.azure/openapi-validator",
+    ({ expect }) => {
+      const runResult =
+        createRunResult(`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"spectralPluginFunc: Validating OpenAPI spec. TypeSpec-generated: true. Path: 'file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json'"}
+{"pluginName":"spectral","extensionName":"THIS IS FILTERED OUT","level":"error","message":"Top level property names should not be repeated inside the properties bag for ARM resource 'CodeSigningAccount'. Properties [properties.sku] conflict with ARM top level properties. Please rename these.","code":"ArmResourcePropertiesBag","details":{"jsonpath":["definitions","CodeSigningAccount"],"validationCategory":"ARMViolation","providerNamespace":false,"resourceType":false,"range":{"start":{"line":1036,"column":27},"end":{"line":1051,"column":6}}},"source":[{"document":"file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json","position":{"line":1036,"column":5}}]}
+{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"openapiValidatorPluginFunc: Return"}`);
+
+      const violations = getLintDiffViolations(runResult);
+      expect(violations).toEqual([]);
+    },
+  );
+
+  test.concurrent("returns a violation with code FATAL if the result.code is undefined", () => {
+    const runResult = createRunResult(
+      `{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","message": "test message with no code"}`,
+    );
+    const violations = getLintDiffViolations(runResult);
+    expect(violations[0].code).toEqual("FATAL");
+  });
 });
 
-import { readFile } from "fs/promises";
+describe("arrayIsEqual", () => {
+  test.concurrent("returns true for equal arrays", async ({ expect }) => {
+    const a = ["a", "b", "c"];
+    const b = ["a", "b", "c"];
 
-vi.mock("../src/util.js", async () => {
-  const original = await vi.importActual("../src/util.js");
-  return {
-    ...original,
-    getDependencyVersion: vi.fn().mockResolvedValue("1.0.0"),
-    getPathToDependency: vi.fn().mockResolvedValue("path/to/dependency"),
-  };
+    const result = arrayIsEqual(a, b);
+    expect(result).toEqual(true);
+  });
+
+  test.concurrent("returns false for different arrays", async ({ expect }) => {
+    const a = ["a", "b", "c"];
+    const b = ["a", "b", "d"];
+
+    const result = arrayIsEqual(a, b);
+    expect(result).toEqual(false);
+  });
+
+  test.concurrent("returns false for different lengths", async ({ expect }) => {
+    const a = ["a", "b", "c"];
+    const b = ["a", "b"];
+
+    const result = arrayIsEqual(a, b);
+    expect(result).toEqual(false);
+  });
+
+  test.concurrent("returns true for empty arrays", async ({ expect }) => {
+    const a: string[] = [];
+    const b: string[] = [];
+
+    const result = arrayIsEqual(a, b);
+    expect(result).toEqual(true);
+  });
+
+  test.concurrent("returns true for equal arrays with different types", async ({ expect }) => {
+    const a = ["a", 1, "c"];
+    const b = ["a", 1, "c"];
+
+    const result = arrayIsEqual(a, b);
+    expect(result).toEqual(true);
+  });
+});
+
+describe("isFailure", () => {
+  // Data driven test
+  test.each([
+    { level: "error", expected: true },
+    { level: "fatal", expected: true },
+    { level: "warning", expected: false },
+    { level: "information", expected: false },
+    { level: "info", expected: false },
+  ])(`isFailure($level) returns $expected`, ({ level, expected }) => {
+    expect(isFailure(level)).toEqual(expected);
+  });
+});
+
+describe("isWarning", () => {
+  test.each([
+    { level: "error", expected: false },
+    { level: "fatal", expected: false },
+    { level: "warning", expected: true },
+    { level: "information", expected: false },
+    { level: "info", expected: false },
+  ])(`isWarning($level) returns $expected`, ({ level, expected }) => {
+    expect(isWarning(level)).toEqual(expected);
+  });
+});
+
+describe("getNewItems", () => {
+  test.concurrent("returns empty array when no before or after", ({ expect }) => {
+    const before: LintDiffViolation[] = [];
+    const after: LintDiffViolation[] = [];
+
+    const result = getNewItems(before, after);
+    expect(result).toEqual([[], []]);
+  });
+
+  test.concurrent("a fatal error is always new", ({ expect }) => {
+    const before = [
+      {
+        level: "fatal",
+        code: "SomeCode1",
+        message: "Some Message",
+        source: [
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+        ],
+        details: {},
+      } as LintDiffViolation,
+    ];
+    const after = [
+      {
+        level: "fatal",
+        code: "SomeCode1",
+        message: "Some Message",
+        source: [
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+        ],
+        details: {},
+      } as LintDiffViolation,
+    ];
+
+    const result = getNewItems(before, after);
+    expect(result).toEqual([after, []]);
+  });
+
+  test.concurrent("returns all after items when no before", ({ expect }) => {
+    const before: LintDiffViolation[] = [];
+    const after = [
+      {
+        level: "error",
+        code: "SomeCode1",
+        message: "Some Message",
+        source: [
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+        ],
+        details: {},
+      } as LintDiffViolation,
+      {
+        level: "error",
+        code: "SomeCode2",
+        message: "Some Message",
+        source: [
+          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source,
+        ],
+        details: {},
+      } as LintDiffViolation,
+    ];
+
+    const result = getNewItems(before, after);
+    expect(result).toEqual([after, []]);
+  });
+
+  test.concurrent("returns only new errors", ({ expect }) => {
+    const before: LintDiffViolation[] = [
+      {
+        level: "error",
+        code: "SomeCode1",
+        message: "Some Message",
+        source: [
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+        ],
+        details: {
+          jsonpath: ["some", "path"],
+        },
+      } as LintDiffViolation,
+    ];
+    const after = [
+      {
+        level: "error",
+        code: "SomeCode1",
+        message: "Some Message",
+        source: [
+          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
+        ],
+        details: {
+          jsonpath: ["some", "path"],
+        },
+      } as LintDiffViolation,
+      {
+        level: "error",
+        code: "SomeCode2",
+        message: "Some Message",
+        source: [
+          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source,
+        ],
+        details: {
+          jsonpath: ["some", "path"],
+        },
+      } as LintDiffViolation,
+    ];
+
+    const result = getNewItems(before, after);
+    expect(result).toEqual([after.slice(1), before]);
+  });
 });
 
 describe("iconFor", () => {
   test.each([
-    { input: "fatal", expected: ":x:" },
     { input: "error", expected: ":x:" },
     { input: "warning", expected: ":warning:" },
     { input: "info", expected: ":warning:" },
@@ -51,7 +261,7 @@ describe("iconFor", () => {
 });
 
 describe("getLine", () => {
-  test("returns the line number", () => {
+  test.concurrent("returns the line number", ({ expect }) => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -64,7 +274,7 @@ describe("getLine", () => {
     expect(actual).toEqual(1);
   });
 
-  test("returns undefined when source is empty array", () => {
+  test.concurrent("returns undefined when source is empty array", ({ expect }) => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -77,7 +287,7 @@ describe("getLine", () => {
     expect(actual).toEqual(undefined);
   });
 
-  test("returns undefined when source position is empty", () => {
+  test.concurrent("returns undefined when source position is empty", ({ expect }) => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -90,7 +300,7 @@ describe("getLine", () => {
     expect(actual).toEqual(undefined);
   });
 
-  test("returns 0 when source position is 0", () => {
+  test.concurrent("returns 0 when source position is 0", ({ expect }) => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -105,7 +315,7 @@ describe("getLine", () => {
 });
 
 describe("getFile", () => {
-  test("returns the file name", () => {
+  test.concurrent("returns the file name", ({ expect }) => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -118,7 +328,7 @@ describe("getFile", () => {
     expect(actual).toEqual("path/to/document1.json");
   });
 
-  test("returns empty string when source is empty array", () => {
+  test.concurrent("returns empty string when source is empty array", ({ expect }) => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -132,28 +342,52 @@ describe("getFile", () => {
   });
 });
 
+describe("relativizePath", () => {
+  test.skipIf(isWindows)
+  .concurrent("relativizes path correctly", ({ expect }) => {
+    expect(relativizePath("/path/to/specification/service/file.json")).toEqual(
+      "/specification/service/file.json",
+    );
+  });
+
+  test.concurrent("returns the same path if it doesn't include from", ({ expect }) => {
+    expect(relativizePath("/path/to/other/file.json")).toEqual("/path/to/other/file.json");
+  });
+
+  test.concurrent("returns empty string when path is empty", ({ expect }) => {
+    expect(relativizePath("")).toEqual("");
+  });
+
+  test.skipIf(isWindows)
+  .concurrent("uses the last instance of from", ({ expect }) => {
+    expect(
+      relativizePath("/path/to/specification/another/specification/service/file.json"),
+    ).toEqual("/specification/service/file.json");
+  });
+});
+
 describe("getDocUrl", () => {
-  test("returns a pointer to a kebab-cased markdown file", () => {
+  test.concurrent("returns a pointer to a kebab-cased markdown file", ({ expect }) => {
     expect(getDocUrl("TestViolation")).toEqual(
       "https://github.com/Azure/azure-openapi-validator/blob/main/docs/test-violation.md",
     );
   });
 
-  test("returns N/A when code is FATAL", () => {
+  test.concurrent("returns N/A when code is FATAL", ({ expect }) => {
     expect(getDocUrl("FATAL")).toEqual("N/A");
   });
 });
 
 describe("getFileLink", () => {
-  test("does not include #L if line is null", () => {
+  test.concurrent("does not include #L if line is null", ({ expect }) => {
     expect(getFileLink("abc123", "file.json", null)).not.toContain("#L");
   });
 
-  test("includes #L if line is not null", () => {
+  test.concurrent("includes #L if line is not null", ({ expect }) => {
     expect(getFileLink("abc123", "file.json", 1)).toContain("#L1");
   });
 
-  test("returns the correct link with preceeding forward slash", () => {
+  test.concurrent("returns the correct link with preceeding forward slash", ({ expect }) => {
     expect(getFileLink("abc123", "/file.json", 1)).toEqual(
       "https://github.com/Azure/azure-rest-api-specs/blob/abc123/file.json#L1",
     );
@@ -161,7 +395,7 @@ describe("getFileLink", () => {
 });
 
 describe("getPathSegment", () => {
-  test("returns trailing segments of a path", () => {
+  test.concurrent("returns trailing segments of a path", ({ expect }) => {
     expect(
       getPathSegment(
         "/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2025-01-01/service.json",
@@ -171,7 +405,7 @@ describe("getPathSegment", () => {
 });
 
 describe("compareLintDiffViolations", () => {
-  test("returns 0 if equal", () => {
+  test.concurrent("returns 0 if equal", ({ expect }) => {
     const a: LintDiffViolation = {
       level: "error",
       code: "SomeCode1",
@@ -185,7 +419,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(0);
   });
 
-  test("returns 0 if a and b are equal and don't have lines", () => {
+  test.concurrent("returns 0 if a and b are equal and don't have lines", ({ expect }) => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -202,7 +436,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(0);
   });
 
-  test("returns -1 if a level is less than b's level", () => {
+  test.concurrent("returns -1 if a level is less than b's level", ({ expect }) => {
     const a: LintDiffViolation = {
       level: "error",
       code: "SomeCode1",
@@ -216,7 +450,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(-1);
   });
 
-  test("returns 1 if a level is greater than b's level", () => {
+  test.concurrent("returns 1 if a level is greater than b's level", ({ expect }) => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -230,7 +464,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(1);
   });
 
-  test("returns -1 if a's file is less than b's file", () => {
+  test.concurrent("returns -1 if a's file is less than b's file", ({ expect }) => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -247,7 +481,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(-1);
   });
 
-  test("returns 1 if a's file is greater than b's file", () => {
+  test.concurrent("returns 1 if a's file is greater than b's file", ({ expect }) => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -264,7 +498,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(1);
   });
 
-  test("returns -1 if a's line is less than b's line", () => {
+  test.concurrent("returns -1 if a's line is less than b's line", ({ expect }) => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -281,7 +515,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(-1);
   });
 
-  test("returns 1 if a's line is greater than b's line", () => {
+  test.concurrent("returns 1 if a's line is greater than b's line", ({ expect }) => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -296,303 +530,5 @@ describe("compareLintDiffViolations", () => {
 
     const actual = compareLintDiffViolations(a, b);
     expect(actual).toEqual(1);
-  });
-
-  test("returns -1 if a's level is fatal and b's level is not", () => {
-    const a: LintDiffViolation = {
-      level: "fatal",
-      code: "SomeCode1",
-      message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
-      details: {},
-    } as LintDiffViolation;
-    const b: LintDiffViolation = {
-      ...a,
-      level: "error",
-    };
-
-    const actual = compareLintDiffViolations(a, b);
-    expect(actual).toEqual(-1);
-  });
-
-  test("returns 1 if a's level is not fatal and b's level is", () => {
-    const a: LintDiffViolation = {
-      level: "error",
-      code: "SomeCode1",
-      message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
-      details: {},
-    } as LintDiffViolation;
-    const b: LintDiffViolation = {
-      ...a,
-      level: "fatal",
-    };
-
-    const actual = compareLintDiffViolations(a, b);
-    expect(actual).toEqual(1);
-  });
-});
-
-describe("generateLintDiffReport", () => {
-  beforeEach(() => {
-    vol.reset();
-
-    // Seed current filesystem so that "." exists.
-    vol.mkdirSync(".", { recursive: true });
-  });
-  test.skipIf(isWindows())("fails if new violations include an error", async ({ expect }) => {
-    const afterViolation = {
-      extensionName: "@microsoft.azure/openapi-validator",
-      level: "error",
-      code: "SomeCode",
-      message: "Some Message",
-      source: [
-        {
-          document:
-            "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
-          position: { line: 1, colomn: 1 },
-        } as Source,
-      ],
-      details: {},
-    };
-
-    const beforeResult = {
-      error: null,
-      stdout: "",
-      stderr: "",
-      rootPath: "",
-      readme: "file1.md",
-      tag: "",
-    } as AutorestRunResult;
-    const afterResult = {
-      error: null,
-      stdout: JSON.stringify(afterViolation),
-      stderr: "",
-      rootPath: "",
-      readme: "file1.md",
-      tag: "",
-    } as AutorestRunResult;
-
-    const runCorrelations = new Map<string, BeforeAfter>([
-      ["file1.md", { before: beforeResult, after: afterResult }],
-    ]);
-
-    const outFile = "test-output.md";
-    const actual = await generateLintDiffReport(
-      runCorrelations,
-      new Set<string>([
-        "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
-      ]),
-      outFile,
-      "baseBranch",
-      "compareSha",
-    );
-    expect(actual).toBe(false);
-    expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
-      "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
-      | --- | --- | --- |
-      | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
-
-
-      **[must fix]The following errors/warnings are intorduced by current PR:**
-
-      | Rule | Message | Related RPC [For API reviewers] |
-      | ---- | ------- | ------------------------------- |
-      | :x: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
-
-      "
-    `);
-  });
-
-  test.skipIf(isWindows())("fails if new violation includes a fatal error", async ({ expect }) => {
-    const afterViolation = {
-      extensionName: "@microsoft.azure/openapi-validator",
-      level: "fatal",
-      code: "FATAL",
-      message: "A fatal error occurred",
-      source: [],
-      details: {},
-    };
-
-    const beforeResult = {
-      error: null,
-      stdout: "",
-      stderr: "",
-      rootPath: "",
-      readme: "file1.md",
-      tag: "",
-    } as AutorestRunResult;
-    const afterResult = {
-      error: null,
-      stdout: JSON.stringify(afterViolation),
-      stderr: "",
-      rootPath: "",
-      readme: "file1.md",
-      tag: "",
-    } as AutorestRunResult;
-
-    const runCorrelations = new Map<string, BeforeAfter>([
-      ["file1.md", { before: beforeResult, after: afterResult }],
-    ]);
-
-    const outFile = "test-output-fatal.md";
-    const actual = await generateLintDiffReport(
-      runCorrelations,
-      new Set<string>([
-        "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
-      ]),
-      outFile,
-      "baseBranch",
-      "compareSha",
-    );
-    expect(actual).toBe(false);
-    expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
-      "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
-      | --- | --- | --- |
-      | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
-
-
-      **[must fix]The following errors/warnings are intorduced by current PR:**
-
-      | Rule | Message | Related RPC [For API reviewers] |
-      | ---- | ------- | ------------------------------- |
-      | :x: FATAL | A fatal error occurred |  |
-
-      "
-    `);
-  });
-
-  test.skipIf(isWindows())(
-    "passes if new violations do not include an error (warnings only)",
-    async ({ expect }) => {
-      const afterViolation = {
-        extensionName: "@microsoft.azure/openapi-validator",
-        level: "warning",
-        code: "SomeCode",
-        message: "Some Message",
-        source: [
-          {
-            document:
-              "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
-            position: { line: 1, colomn: 1 },
-          } as Source,
-        ],
-        details: {},
-      };
-
-      const beforeResult = {
-        error: null,
-        stdout: "",
-        stderr: "",
-        rootPath: "",
-        readme: "file1.md",
-        tag: "",
-      } as AutorestRunResult;
-      const afterResult = {
-        error: null,
-        stdout: JSON.stringify(afterViolation),
-        stderr: "",
-        rootPath: "",
-        readme: "file1.md",
-        tag: "",
-      } as AutorestRunResult;
-
-      const runCorrelations = new Map<string, BeforeAfter>([
-        ["file1.md", { before: beforeResult, after: afterResult }],
-      ]);
-
-      const outFile = "test-output.md";
-      const actual = await generateLintDiffReport(
-        runCorrelations,
-        new Set<string>([
-          "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
-        ]),
-        outFile,
-        "baseBranch",
-        "compareSha",
-      );
-      expect(actual).toBe(true);
-
-      expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
-        "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
-        | --- | --- | --- |
-        | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
-
-
-        **[must fix]The following errors/warnings are intorduced by current PR:**
-
-        | Rule | Message | Related RPC [For API reviewers] |
-        | ---- | ------- | ------------------------------- |
-        | :warning: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
-
-        "
-      `);
-    },
-  );
-});
-
-describe("generateAutoRestErrorReport", () => {
-  beforeEach(() => {
-    vol.reset();
-
-    // Seed current filesystem so that "." exists.
-    vol.mkdirSync(".", { recursive: true });
-  });
-
-  test("generates a report with errors", async () => {
-    const autoRestErrors = [
-      {
-        result: {
-          readme: "readme.md",
-          tag: "tag1",
-          rootPath: "dummy/rootPath",
-          error: null,
-          stdout: "dummy stdout",
-          stderr: "dummy stderr",
-        },
-        errors: [
-          { level: "error", message: "Error message 1" } as AutoRestMessage,
-          { level: "fatal", message: "Fatal error message" } as AutoRestMessage,
-        ],
-      },
-      {
-        result: {
-          readme: "readme2.md",
-          tag: "tag2",
-          rootPath: "dummy/rootPath",
-          error: null,
-          stdout: "dummy stdout",
-          stderr: "dummy stderr",
-        },
-        errors: [{ level: "error", message: "Error message 2" } as AutoRestMessage],
-      },
-    ];
-
-    const outFile = "autorest-error-report.md";
-    await generateAutoRestErrorReport(autoRestErrors, outFile);
-
-    const actual = await readFile(outFile, { encoding: "utf-8" });
-    expect(actual).toMatchInlineSnapshot(`
-      "**AutoRest errors:**
-
-      Readme: readme.md
-      Tag: tag1
-      Errors:
-      | Level | Message |
-      | ----- | ------- |
-      | :x: error | Error message 1 |
-      | :x: fatal | Fatal error message |
-
-
-      Readme: readme2.md
-      Tag: tag2
-      Errors:
-      | Level | Message |
-      | ----- | ------- |
-      | :x: error | Error message 2 |
-
-
-      "
-    `);
   });
 });

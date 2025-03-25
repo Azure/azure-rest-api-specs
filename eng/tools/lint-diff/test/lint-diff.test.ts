@@ -1,18 +1,10 @@
 import { execa } from "execa";
-import { test, describe, expect } from "vitest";
+import { test, describe } from "vitest";
 
 // TODO: Actual tests
 describe("e2e", () => {
-  test("Executes", async () => {
-    const output = await execa("npm", ["exec", "--no", "--", "lint-diff"], { reject: false });
-
-    try {
-      expect(output.exitCode).toBe(1);
-    } catch (error) {
-      console.log(`stdout: ${output.stdout}`);
-      console.log(`stderr: ${output.stderr}`);
-      console.error("Error:", error);
-      throw error;
-    }
+  test.concurrent("Executes", async ({ expect }) => {
+    const { exitCode } = await execa("npm", ["exec", "--no", "--", "lint-diff"], { reject: false });
+    expect(exitCode).toBe(1);
   });
 });

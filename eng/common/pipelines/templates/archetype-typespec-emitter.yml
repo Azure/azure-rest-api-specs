@@ -221,6 +221,32 @@ extends:
                 ServiceEndpointUrl: https://api.esrp.microsoft.com
                 MainPublisher: ESRPRELPACMANTEST
 
+          - task: PowerShell@2
+            displayName: Create emitter-package.json
+            inputs:
+              pwsh: true
+              filePath: ./eng/common/scripts/typespec/New-EmitterPackageJson.ps1
+              arguments: >
+                -PackageJsonPath '$(buildArtifactsPath)/lock-files/package.json'
+                -OverridesPath '$(buildArtifactsPath)/overrides.json'
+                -OutputDirectory '$(Build.ArtifactStagingDirectory)'
+              workingDirectory: $(Build.SourcesDirectory)
+
+          - task: PowerShell@2
+            displayName: Create emitter-package-lock.json
+            inputs:
+              pwsh: true
+              filePath: ./eng/common/scripts/typespec/New-EmitterPackageLock.ps1
+              arguments: >
+                -EmitterPackageJsonPath '$(Build.ArtifactStagingDirectory)/emitter-package.json'
+                -OutputDirectory '$(Build.ArtifactStagingDirectory)'
+              workingDirectory: $(Build.SourcesDirectory)
+
+          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
+            parameters:
+              artifactName: publish_artifacts
+              artifactPath: $(Build.ArtifactStagingDirectory)
+
     # Regenerate stage
     # Responsible for regenerating the SDK code using the emitter package and the generation matrix.
     - ${{ if and(parameters.ShouldPublish, parameters.ShouldRegenerate) }}:

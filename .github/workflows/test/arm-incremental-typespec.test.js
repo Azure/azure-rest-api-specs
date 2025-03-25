@@ -1,29 +1,17 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
-
-vi.mock("simple-git", () => ({
-  simpleGit: vi.fn().mockReturnValue({
-    raw: vi.fn().mockResolvedValue(""),
-    show: vi.fn().mockResolvedValue(""),
-  }),
-}));
-
-import * as simpleGit from "simple-git";
-import * as changedFiles from "../../shared/src/changed-files.js";
+import { describe, expect, it, vi } from "vitest";
+import * as changedFiles from "../../src/changed-files.js";
+import * as git from "../../src/git.js";
 import {
   contosoReadme,
   swaggerHandWritten,
   swaggerTypeSpecGenerated,
-} from "../../shared/test/examples.js";
+} from "../../test/examples.js";
 import incrementalTypeSpec from "../src/arm-incremental-typespec.js";
 import { createMockCore } from "./mocks.js";
 
 const core = createMockCore();
 
 describe("incrementalTypeSpec", () => {
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-
   it("rejects if inputs null", async () => {
     await expect(incrementalTypeSpec({})).rejects.toThrow();
   });
@@ -40,13 +28,11 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
-      .mockResolvedValue(swaggerHandWritten);
+    const showSpy = vi.spyOn(git, "show").mockResolvedValue(swaggerHandWritten);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
   });
 
   it("returns false if changed files add a new RP", async () => {
@@ -57,23 +43,23 @@ describe("incrementalTypeSpec", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
+      .spyOn(git, "show")
       .mockResolvedValue(swaggerTypeSpecGenerated);
 
     // "git ls-tree" returns "" if the spec folder doesn't exist in the base branch
-    const rawSpy = vi.mocked(simpleGit.simpleGit().raw).mockResolvedValue("");
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue("");
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
 
-    expect(rawSpy).toBeCalledWith([
-      "ls-tree",
-      "-r",
-      "--name-only",
+    expect(lsTreeSpy).toBeCalledWith(
       "HEAD^",
       specDir,
-    ]);
+      expect.objectContaining({
+        args: "-r --name-only",
+      }),
+    );
   });
 
   it("returns false if swagger deleted", async () => {
@@ -83,14 +69,14 @@ describe("incrementalTypeSpec", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
+      .spyOn(git, "show")
       .mockRejectedValue(
         new Error("path contoso.json does not exist in 'HEAD'"),
       );
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
   });
 
   it("returns false if readme deleted", async () => {
@@ -100,12 +86,12 @@ describe("incrementalTypeSpec", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
 
     const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
+      .spyOn(git, "show")
       .mockRejectedValue(new Error("path readme.md does not exist in 'HEAD'"));
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", readmePath, expect.anything());
   });
 
   it("returns false if readme contains no input-files", async () => {
@@ -114,11 +100,11 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
 
-    const showSpy = vi.mocked(simpleGit.simpleGit().show).mockResolvedValue("");
+    const showSpy = vi.spyOn(git, "show").mockResolvedValue("");
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", readmePath, expect.anything());
   });
 
   it("returns false if swagger cannot be parsed as JSON", async () => {
@@ -128,12 +114,12 @@ describe("incrementalTypeSpec", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
+      .spyOn(git, "show")
       .mockResolvedValue("not } valid { json");
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
   });
 
   it("returns false if tsp conversion", async () => {
@@ -144,29 +130,23 @@ describe("incrementalTypeSpec", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
-      .mockImplementation(async ([treePath]) =>
-        treePath.split(":")[0] == "HEAD"
-          ? swaggerTypeSpecGenerated
-          : swaggerHandWritten,
+      .spyOn(git, "show")
+      .mockImplementation((treeIsh) =>
+        treeIsh == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
       );
 
-    const lsTreeSpy = vi
-      .mocked(simpleGit.simpleGit().raw)
-      .mockResolvedValue(swaggerPath);
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toHaveBeenCalledWith([`HEAD:${swaggerPath}`]);
-    expect(showSpy).toHaveBeenCalledWith([`HEAD^:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
+    expect(showSpy).toBeCalledWith("HEAD^", swaggerPath, expect.anything());
 
-    expect(lsTreeSpy).toBeCalledWith([
-      "ls-tree",
-      "-r",
-      "--name-only",
+    expect(lsTreeSpy).toBeCalledWith(
       "HEAD^",
       specDir,
-    ]);
+      expect.objectContaining({ args: "-r --name-only" }),
+    );
   });
 
   it("throws if git show for swagger returns unknown error", async () => {
@@ -175,13 +155,11 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
-      .mockRejectedValue("string error");
+    const showSpy = vi.spyOn(git, "show").mockRejectedValue("string error");
 
     await expect(incrementalTypeSpec({ core })).rejects.toThrowError();
 
-    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
   });
 
   it("throws if git show for readme returns unknown error", async () => {
@@ -190,13 +168,11 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
 
-    const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
-      .mockRejectedValue("string error");
+    const showSpy = vi.spyOn(git, "show").mockRejectedValue("string error");
 
     await expect(incrementalTypeSpec({ core })).rejects.toThrowError();
 
-    expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", readmePath, expect.anything());
   });
 
   it("returns true if changed files are incremental changes to an existing TypeSpec RP swagger", async () => {
@@ -207,25 +183,23 @@ describe("incrementalTypeSpec", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
     const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
+      .spyOn(git, "show")
       .mockResolvedValue(swaggerTypeSpecGenerated);
 
-    const lsTreeSpy = vi
-      .mocked(simpleGit.simpleGit().raw)
-      .mockResolvedValue(swaggerPath);
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
 
-    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
-    expect(showSpy).toBeCalledWith([`HEAD^:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", swaggerPath, expect.anything());
+    expect(showSpy).toBeCalledWith("HEAD^", swaggerPath, expect.anything());
 
-    expect(lsTreeSpy).toBeCalledWith([
-      "ls-tree",
-      "-r",
-      "--name-only",
+    expect(lsTreeSpy).toBeCalledWith(
       "HEAD^",
       specDir,
-    ]);
+      expect.objectContaining({
+        args: "-r --name-only",
+      }),
+    );
   });
 
   it("returns true if changed files are incremental changes to an existing TypeSpec RP readme", async () => {
@@ -240,9 +214,8 @@ describe("incrementalTypeSpec", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
 
     const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
-      .mockImplementation(async ([treePath]) => {
-        const path = treePath.split(":")[1];
+      .spyOn(git, "show")
+      .mockImplementation(async (_treeIsh, path) => {
         if (path === swaggerPath) {
           return swaggerTypeSpecGenerated;
         } else if (path === readmePath) {
@@ -252,22 +225,18 @@ describe("incrementalTypeSpec", () => {
         }
       });
 
-    const lsTreeSpy = vi
-      .mocked(simpleGit.simpleGit().raw)
-      .mockResolvedValue(swaggerPath);
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
 
-    expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
-    expect(showSpy).toBeCalledWith([`HEAD^:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith("HEAD", readmePath, expect.anything());
+    expect(showSpy).toBeCalledWith("HEAD^", swaggerPath, expect.anything());
 
-    expect(lsTreeSpy).toHaveBeenCalledWith([
-      "ls-tree",
-      "-r",
-      "--name-only",
+    expect(lsTreeSpy).toHaveBeenCalledWith(
       "HEAD^",
       specDir,
-    ]);
+      expect.objectContaining({ args: "-r --name-only" }),
+    );
   });
 
   it("returns true if changed files are incremental changes to an existing TypeSpec RP example", async () => {
@@ -280,23 +249,19 @@ describe("incrementalTypeSpec", () => {
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([examplesPath]);
 
     const showSpy = vi
-      .mocked(simpleGit.simpleGit().show)
+      .spyOn(git, "show")
       .mockResolvedValue(swaggerTypeSpecGenerated);
 
-    const lsTreeSpy = vi
-      .mocked(simpleGit.simpleGit().raw)
-      .mockResolvedValue(swaggerPath);
+    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
 
-    expect(showSpy).toBeCalledWith([`HEAD^:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith("HEAD^", swaggerPath, expect.anything());
 
-    expect(lsTreeSpy).toHaveBeenCalledWith([
-      "ls-tree",
-      "-r",
-      "--name-only",
+    expect(lsTreeSpy).toHaveBeenCalledWith(
       "HEAD^",
       specDir,
-    ]);
+      expect.objectContaining({ args: "-r --name-only" }),
+    );
   });
 });

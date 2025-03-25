@@ -1,5 +1,4 @@
 import { ParseArgsConfig, parseArgs } from "node:util";
-import { stat } from "node:fs/promises";
 import { Suppression } from "suppressions";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
@@ -33,7 +32,7 @@ export async function main() {
   }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
-  const suppressions: Suppression[] = await getSuppressions(absolutePath);
+  const suppressions: Suppression[] = await host.getSuppressions(absolutePath);
 
   // Suppressions for the whole tool must have no rules or sub-rules
   const toolSuppressions = suppressions.filter((s) => !s.rules?.length && !s.subRules?.length);

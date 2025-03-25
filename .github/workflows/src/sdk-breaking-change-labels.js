@@ -1,9 +1,8 @@
 // @ts-check
-import { sdkLabels } from "../../shared/src/sdk-types.js";
+import { sdkLabels } from "../../src/sdk-types.js";
+import { LabelAction } from "./label.js";
 import { extractInputs } from "./context.js";
 import { getIssueNumber } from "./issues.js";
-import { LabelAction } from "./label.js";
-import { fetchWithRetry } from "./retries.js";
 
 /**
  * @typedef {Object} ArtifactResource
@@ -43,9 +42,8 @@ export async function getLabelAndAction({ github, context, core }) {
  * @param {string} params.ado_build_id
  * @param {string} params.ado_project_url
  * @param {string} params.head_sha
- * @param {typeof import("@actions/core")} params.core
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api)} params.github
- * @param {import('./retries.js').RetryOptions} [params.retryOptions]
+ * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<{labelName: string, labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelAndActionImpl({
@@ -54,30 +52,22 @@ export async function getLabelAndActionImpl({
   head_sha,
   core,
   github,
-  retryOptions = {},
 }) {
-  // Override default logger from console.log to core.info
-  retryOptions = { logger: core.info, ...retryOptions };
-
   let issue_number = NaN;
   let labelAction;
   let labelName = "";
-  const artifactName = "spec-gen-sdk-artifact";
+  const artifactName = "spec-gen-sdk-breaking-change-artifact";
   const artifactFileName = artifactName + ".json";
   const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
 
-  // Use Node.js fetch with retry to call the API
-  const response = await fetchWithRetry(
-    apiUrl,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+  // Use Node.js fetch to call the API
+  const response = await fetch(apiUrl, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
     },
-    retryOptions,
-  );
+  });
 
   if (response.status === 404) {
     core.info(
@@ -103,12 +93,8 @@ export async function getLabelAndActionImpl({
     downloadUrl += `?format=file&subPath=/${artifactFileName}`;
     core.info(`Downloading artifact from: ${downloadUrl}`);
 
-    // Step 2: Fetch Artifact Content (as a Buffer) with retry
-    const artifactResponse = await fetchWithRetry(
-      downloadUrl,
-      {},
-      { logger: core.info },
-    );
+    // Step 2: Fetch Artifact Content (as a Buffer)
+    const artifactResponse = await fetch(downloadUrl);
     if (!artifactResponse.ok) {
       throw new Error(
         `Failed to fetch artifact: ${artifactResponse.statusText}`,
