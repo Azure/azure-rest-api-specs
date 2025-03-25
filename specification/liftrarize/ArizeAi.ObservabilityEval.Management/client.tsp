@@ -7,3 +7,8 @@ using Azure.ClientGenerator.Core;
   "ArizeAIObservabilityEvalMgmt",
   "python"
 );
+
+@@clientName(ArizeAi.ObservabilityEval,
+  "ArizeAIObservabilityEvalMgmtClient",
+  "java"
+);

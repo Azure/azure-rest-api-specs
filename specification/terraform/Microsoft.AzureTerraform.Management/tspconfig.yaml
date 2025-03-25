@@ -22,7 +22,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
@@ -38,13 +38,14 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    experimentalExtensibleEnums: true
+    is-modular-library: true
+    generate-metadata: true
+    hierarchy-client: false
+    experimental-extensible-enums: true
+    enable-operation-group: true
     package-dir: "arm-terraform"
     flavor: "azure"
-    packageDetails:
+    package-details:
       name: "@azure/arm-terraform"
 linter:
   extends:

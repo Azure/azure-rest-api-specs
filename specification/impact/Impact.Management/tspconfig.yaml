@@ -35,15 +35,17 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-ts":
     flavor: "azure"
-    isModularLibrary: true
-    experimentalExtensibleEnums: true
-    generateSample: true
+    is-modular-library: true
+    hierarchy-client: false
+    experimental-extensible-enums: true
+    enable-operation-group: true
+    generate-sample: true
     package-dir: "arm-impactreporting"
-    packageDetails:
+    package-details:
       name: "@azure/arm-impactreporting"
