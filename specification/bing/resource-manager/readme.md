@@ -50,7 +50,7 @@ These settings apply only when `--tag=package-2020-06-10` is specified on the co
 input-file:
 - Microsoft.Bing/stable/2020-06-10/bing.json
 suppressions:
-  - code:  LRO_RESPONSE_HEADER
+  - code: LRO_RESPONSE_HEADER
 ```
 
 ### Tag: package-2020-06-10-preview
