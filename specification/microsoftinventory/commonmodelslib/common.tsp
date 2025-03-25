@@ -63,3 +63,12 @@ union IpVersion {
   @doc("IPv6 version")
   IPv6: "IPv6",
 }
+
+@doc("Describes an ARM resource")
+model ArmResourceReference {
+  @doc("The id of the object")
+  id: string;
+
+  @doc("The ARM resource ID of the object")
+  resourceId: string;
+}

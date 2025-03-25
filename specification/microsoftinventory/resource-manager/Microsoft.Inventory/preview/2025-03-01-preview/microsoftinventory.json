@@ -82,6 +82,9 @@
     },
     {
       "name": "CompositeIpAddresses"
+    },
+    {
+      "name": "CompositeWebEndpoints"
     }
   ],
   "paths": {
@@ -245,6 +248,89 @@
           },
           "CompositeIpAddresses_GetIpv6Individual": {
             "$ref": "./examples/CompositeIpAddresses_GetIpv6Individual.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Inventory/locations/{location}/compositeWebEndpoints": {
+      "get": {
+        "operationId": "CompositeWebEndpoints_List",
+        "tags": [
+          "CompositeWebEndpoints"
+        ],
+        "description": "List CompositeWebEndpointsResource resources by TenantLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CompositeWebEndpointsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CompositeWebEndpoints_List": {
+            "$ref": "./examples/CompositeWebEndpoints_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Inventory/locations/{location}/compositeWebEndpoints/{webEndpointKey}": {
+      "get": {
+        "operationId": "CompositeWebEndpoints_Get",
+        "tags": [
+          "CompositeWebEndpoints"
+        ],
+        "description": "Get a CompositeWebEndpointsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "webEndpointKey",
+            "in": "path",
+            "description": "Web Endpoint",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9]+-[a-zA-Z0-9.:]+-[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CompositeWebEndpointsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CompositeWebEndpoints_GetWebEndpoint": {
+            "$ref": "./examples/CompositeWebEndpoints_GetWebEndpoint.json"
           }
         }
       }
@@ -1905,6 +1991,113 @@
         "value"
       ]
     },
+    "CompositeWebEndpointsProperties": {
+      "type": "object",
+      "description": "compositeWebEndpoints Properties",
+      "properties": {
+        "fqdn": {
+          "type": "string",
+          "description": "Fqdn of Web Endpoint"
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Protocol of Web Endpoint"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path of Web Endpoint"
+        },
+        "aliases": {
+          "type": "array",
+          "description": "Aliases of Web Endpoint",
+          "items": {
+            "type": "string"
+          }
+        },
+        "portNumbers": {
+          "type": "array",
+          "description": "PortNumbers of Web Endpoint",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "ownershipAttributes": {
+          "$ref": "#/definitions/WebEndpointsOwnershipAttributesObject",
+          "description": "Ownership attribution of the Web Endpoint"
+        },
+        "resourceAttributes": {
+          "$ref": "#/definitions/WebEndpointsResourceAttributesObject",
+          "description": "Resource attribution which is hosting the Web Endpoint"
+        },
+        "status": {
+          "$ref": "#/definitions/WebEndpointsStatusObject",
+          "description": "Status of Web Endpoint"
+        },
+        "beneficiaryProperties": {
+          "$ref": "#/definitions/WebEndpointsBeneficiaryPropertiesObject",
+          "description": "BeneficiaryProperties of Web Endpoint"
+        },
+        "complianceProperties": {
+          "$ref": "#/definitions/WebEndpointsCompliancePropertiesObject",
+          "description": "ComplianceProperties of Web Endpoint"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud location of the IP Address"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fqdn",
+        "ownershipAttributes",
+        "resourceAttributes",
+        "status",
+        "beneficiaryProperties",
+        "complianceProperties",
+        "cloud"
+      ]
+    },
+    "CompositeWebEndpointsResource": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CompositeWebEndpointsProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CompositeWebEndpointsResourceListResult": {
+      "type": "object",
+      "description": "The response of a CompositeWebEndpointsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CompositeWebEndpointsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/CompositeWebEndpointsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "CostCategory": {
       "type": "string",
       "description": "CostCategory for internal subscription",
@@ -3313,6 +3506,119 @@
           }
         ]
       }
+    },
+    "WebEndpointsBeneficiaryPropertiesObject": {
+      "type": "object",
+      "description": "Model that describes the BeneficiaryProperties object for CompositeWebEndpoints",
+      "properties": {
+        "isHobo": {
+          "type": "boolean",
+          "description": "Is HoBo"
+        }
+      }
+    },
+    "WebEndpointsCompliancePropertiesObject": {
+      "type": "object",
+      "description": "Model that describes the ComplianceProperties object for CompositeWebEndpoints",
+      "properties": {
+        "fedRamp": {
+          "type": "string",
+          "description": "FedRamp compliance flag"
+        }
+      }
+    },
+    "WebEndpointsOwnershipAttributesObject": {
+      "type": "object",
+      "description": "Model that describes the OwnershipAttributes object for CompositeWebEndpoints",
+      "properties": {
+        "ownerSubscriptionId": {
+          "type": "string",
+          "description": "Owner subscription id of Web Endpoint"
+        },
+        "ownerSubscriptionName": {
+          "type": "string",
+          "description": "Owner subscription name of Web Endpoint"
+        },
+        "ownerServiceTreeId": {
+          "type": "string",
+          "description": "Owner service tree id of Web Endpoint"
+        },
+        "ownerServiceTreeName": {
+          "type": "string",
+          "description": "Owner service tree name of Web Endpoint"
+        },
+        "ownerType": {
+          "type": "string",
+          "description": "Owner type of Web Endpoint"
+        },
+        "ownerRole": {
+          "type": "string",
+          "description": "Owner role of Web Endpoint"
+        },
+        "customerSubscriptionId": {
+          "type": "string",
+          "description": "Customer subscription id of Web Endpoint"
+        },
+        "customerSubscriptionName": {
+          "type": "string",
+          "description": "Customer subscription name of Web Endpoint"
+        },
+        "customerServiceTreeId": {
+          "type": "string",
+          "description": "Customer subscription id of Web Endpoint"
+        },
+        "customerServiceTreeName": {
+          "type": "string",
+          "description": "Customer service tree name of Web Endpoint"
+        },
+        "customerType": {
+          "type": "string",
+          "description": "Customer type of Web Endpoint"
+        }
+      },
+      "required": [
+        "ownerType",
+        "ownerRole",
+        "customerSubscriptionId",
+        "customerSubscriptionName",
+        "customerType"
+      ]
+    },
+    "WebEndpointsResourceAttributesObject": {
+      "type": "object",
+      "description": "Model that describes the ResourceAttributes (ARM Resource Ids, ARM Resource Types) object for CompositeWebEndpoints",
+      "properties": {
+        "providerResourceId": {
+          "type": "string",
+          "description": "Provider resource ID"
+        },
+        "providerResourceType": {
+          "type": "string",
+          "description": "Provider resource type"
+        }
+      },
+      "required": [
+        "providerResourceId",
+        "providerResourceType"
+      ]
+    },
+    "WebEndpointsStatusObject": {
+      "type": "object",
+      "description": "Model that describes the Status object for CompositeWebEndpoints",
+      "properties": {
+        "eventTimestamp": {
+          "type": "string",
+          "description": "Timestamp of Web Endpoint resource event"
+        },
+        "endpointState": {
+          "type": "string",
+          "description": "State of Web Endpoint resource"
+        }
+      },
+      "required": [
+        "eventTimestamp",
+        "endpointState"
+      ]
     },
     "WorkloadType": {
       "type": "string",
