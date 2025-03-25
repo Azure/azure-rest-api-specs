@@ -1035,46 +1035,6 @@
         }
       }
     },
-    "/evaluations/runs:upload": {
-      "post": {
-        "operationId": "Evaluations_UploadRun",
-        "description": "Upload the result to an evaluation run.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "evaluation",
-            "in": "body",
-            "description": "Evaluation to upload.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/files": {
       "get": {
         "operationId": "Agents_ListFiles",
@@ -9726,17 +9686,17 @@
         },
         "outputs": {
           "type": "object",
-          "description": "Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureml://project/azureml/evaluationresults/myevaluationresult1', 'logId': 'azureml://project/azureml/datasets/joblogs' }",
+          "description": "Read-only result outputs. Example: { 'redTeamResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{myproject}/datasets/{dataset-name}/{dataset-version}' }",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
         "id",
         "data",
-        "evaluators",
-        "outputs"
+        "evaluators"
       ]
     },
     "EvaluatorConfiguration": {

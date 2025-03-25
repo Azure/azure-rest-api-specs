@@ -38,20 +38,7 @@ interface Evaluations {
     {
       @doc("Evaluation to be run")
       @body
-      evaluation: EvaluationRun;
-    },
-    Evaluation
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Upload the result to an evaluation run.")
-  @route("runs:upload")
-  @post
-  UploadRun is Azure.Core.Foundations.Operation<
-    {
-      @doc("Evaluation to upload.")
-      @body
-      evaluation: EvaluationUpload;
+      evaluation: Evaluation;
     },
     Evaluation
   >;
