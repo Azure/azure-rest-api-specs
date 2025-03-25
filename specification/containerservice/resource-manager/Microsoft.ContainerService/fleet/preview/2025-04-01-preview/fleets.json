@@ -59,6 +59,9 @@
     },
     {
       "name": "AutoUpgradeProfiles"
+    },
+    {
+      "name": "AutoUpgradeProfileOperations"
     }
   ],
   "paths": {
@@ -798,6 +801,81 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles/{autoUpgradeProfileName}/generateUpdateRun": {
+      "post": {
+        "operationId": "AutoUpgradeProfileOperations_GenerateUpdateRun",
+        "tags": [
+          "AutoUpgradeProfileOperations"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "autoUpgradeProfileName",
+            "in": "path",
+            "description": "The name of the AutoUpgradeProfile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenerateResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "If-Match": {
+                "type": "string",
+                "description": "The request should only proceed if an entity matches this string."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -2402,6 +2480,31 @@
         }
       }
     },
+    "AutoUpgradeLastTriggerStatus": {
+      "type": "string",
+      "description": "AutoUpgradeLastTriggerStatus is the status of the last AutoUpgrade trigger (attempt to automatically create and start UpdateRun when there are new released versions) of an auto upgrade profile.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AutoUpgradeLastTriggerStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The last AutoUpgrade trigger was succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The last AutoUpgrade trigger failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "AutoUpgradeNodeImageSelection": {
       "type": "object",
       "description": "The node image upgrade to be applied to the target clusters in auto upgrade.",
@@ -2525,6 +2628,10 @@
         "disabled": {
           "type": "boolean",
           "description": "If set to False: the auto upgrade has effect - target managed clusters will be upgraded on schedule.\nIf set to True: the auto upgrade has no effect - no upgrade will be run on the target managed clusters.\nThis is a boolean and not an enum because enabled/disabled are all available states of the auto upgrade profile.\nBy default, this is set to False."
+        },
+        "autoUpgradeProfileStatus": {
+          "$ref": "#/definitions/AutoUpgradeProfileStatus",
+          "description": "The status of the auto upgrade profile."
         }
       },
       "required": [
@@ -2561,6 +2668,36 @@
         ]
       },
       "readOnly": true
+    },
+    "AutoUpgradeProfileStatus": {
+      "type": "object",
+      "description": "AutoUpgradeProfileStatus is the status of an auto upgrade profile.",
+      "properties": {
+        "lastTriggeredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time of the last attempt to automatically create and start an UpdateRun as triggered by the release of new versions.",
+          "readOnly": true
+        },
+        "lastTriggerStatus": {
+          "$ref": "#/definitions/AutoUpgradeLastTriggerStatus",
+          "description": "The status of the last AutoUpgrade trigger.",
+          "readOnly": true
+        },
+        "lastTriggerError": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
+          "description": "The error details of the last trigger.",
+          "readOnly": true
+        },
+        "lastTriggerUpgradeVersions": {
+          "type": "array",
+          "description": "The target Kubernetes version or node image versions of the last trigger.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
     },
     "ClusterResourceId": {
       "type": "string",
@@ -3385,6 +3522,20 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "GenerateResponse": {
+      "type": "object",
+      "description": "GenerateResponse is the response of a generate request.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM resource id of the generated UpdateRun. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "KubernetesVersion": {
