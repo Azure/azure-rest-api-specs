@@ -2140,7 +2140,8 @@
           "description": "Clustering policy - default is OSSCluster. This property must be chosen at create time, and cannot be changed without deleting the database.",
           "enum": [
             "EnterpriseCluster",
-            "OSSCluster"
+            "OSSCluster",
+            "NoCluster"
           ],
           "x-ms-mutability": [
             "read",
@@ -2159,6 +2160,11 @@
                 "value": "OSSCluster",
                 "name": "OSSCluster",
                 "description": "OSS clustering policy follows the redis cluster specification, and requires all clients to support redis clustering."
+              },
+              {
+                "value": "NoCluster",
+                "name": "NoCluster",
+                "description": "NoCluster clustering policy is for non-clustered instances."
               }
             ]
           }
