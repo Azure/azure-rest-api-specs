@@ -16,7 +16,6 @@ namespace Microsoft.Edge;
 @doc("Displays all the resource types which support Sites.")
 @singleton("default")
 @tenantResource
-@includeInapplicableMetadataInPayload(false)
 model SiteAwareResourceType is ProxyResource<SiteAwareResourceTypeProperties> {
   @doc("Name of the resource")
   @path

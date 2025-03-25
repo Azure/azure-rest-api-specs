@@ -104,5 +104,3 @@ interface ExposureWorkflows
   >;
   update is ArmCustomPatchSync<ExposureWorkflow, ExposureWorkflowUpdate>;
 }
-
-@@visibility(Azure.Core.Page.nextLink);

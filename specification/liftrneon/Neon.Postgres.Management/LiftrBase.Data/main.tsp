@@ -21,7 +21,7 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
-  v2_preview: "2025-02-01-preview",
+  v2_preview: "2025-03-01-preview",
 }
 
 @doc("Properties specific to Neon Organization resource")

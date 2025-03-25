@@ -5,6 +5,7 @@ import "./Neon.Postgres.Models/compute.tsp";
 import "./Neon.Postgres.Models/databases.tsp";
 import "./Neon.Postgres.Models/connection.tsp";
 import "./Neon.Postgres.Models/roles.tsp";
+import "./Neon.Postgres.Models/endpoints.tsp";
 import "./LiftrBase.Data/main.tsp";
 
 import "@azure-tools/typespec-autorest";
@@ -35,8 +36,8 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
-  @useDependency(LiftrBase.Data.Versions.v1_preview)
-  v2_preview: "2025-02-01-preview",
+  @useDependency(LiftrBase.Data.Versions.v2_preview)
+  v2_preview: "2025-03-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -61,6 +62,19 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
+
+  @doc("Action to retrieve the PostgreSQL versions.")
+  @added(Neon.Postgres.Versions.v2_preview)
+  @autoRoute
+  @armResourceAction(OrganizationResource)
+  @post
+  getPostgresVersions(
+    ...ResourceInstanceParameters<Models.PgVersion>,
+
+    @doc("Post Action to retrieve the PostgreSQL versions.")
+    @body
+    parameters?: Models.PgVersion,
+  ): ArmResponse<Models.PgVersionsResponse> | ErrorResponse;
 }
 
 @armResourceOperations
@@ -71,6 +85,18 @@ interface Projects {
   update is ArmResourcePatchAsync<Project, Models.ProjectProperties>;
   delete is ArmResourceDeleteSync<Project>;
   list is ArmResourceListByParent<Project>;
+
+  @doc("Action to retrieve the connection URI for the Neon Database.")
+  @autoRoute
+  @armResourceAction(Models.ConnectionUriProperties)
+  @post
+  getConnectionUri(
+    ...ResourceInstanceParameters<Project>,
+
+    @doc("Additional parameters for retrieving the database connection URI.")
+    @body
+    connectionUriParameters: Models.ConnectionUriProperties,
+  ): ArmResponse<Models.ConnectionUriProperties> | ErrorResponse;
 }
 
 @doc("The Project resource type.")
@@ -122,18 +148,6 @@ interface NeonDatabases {
   update is ArmResourcePatchAsync<NeonDatabase, Models.NeonDatabaseProperties>;
   delete is ArmResourceDeleteSync<NeonDatabase>;
   list is ArmResourceListByParent<NeonDatabase>;
-
-  @doc("Action to retrieve the connection URI for the Neon Database.")
-  @autoRoute
-  @armResourceAction(Models.ConnectionUriProperties)
-  @post
-  getConnectionUri(
-    ...ResourceInstanceParameters<NeonDatabase>,
-
-    @doc("Additional parameters for retrieving the database connection URI.")
-    @body
-    connectionUriParameters: Models.ConnectionUriProperties,
-  ): ArmResponse<Models.ConnectionUriProperties> | ErrorResponse;
 }
 
 @doc("The Neon Database resource type.")
@@ -158,4 +172,21 @@ interface NeonRoles {
 @parentResource(Branch)
 model NeonRole is ProxyResource<Models.NeonRoleProperties> {
   ...ResourceNameParameter<NeonRole>;
+}
+
+@armResourceOperations
+@added(Neon.Postgres.Versions.v2_preview)
+interface Endpoints {
+  get is ArmResourceRead<Endpoint>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Endpoint>;
+  update is ArmResourcePatchAsync<Endpoint, Models.EndpointProperties>;
+  delete is ArmResourceDeleteSync<Endpoint>;
+  list is ArmResourceListByParent<Endpoint>;
+}
+
+@doc("The Neon compute endpoint resource type.")
+@added(Neon.Postgres.Versions.v2_preview)
+@parentResource(Branch)
+model Endpoint is ProxyResource<Models.EndpointProperties> {
+  ...ResourceNameParameter<Endpoint>;
 }

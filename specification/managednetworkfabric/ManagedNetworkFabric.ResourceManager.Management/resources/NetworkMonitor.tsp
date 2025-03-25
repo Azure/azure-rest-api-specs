@@ -12,7 +12,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("The NetworkMonitor resource definition.")
 @added(Versions.v2024_06_15_preview)
 @Azure.ResourceManager.Private.armResourceInternal(NetworkMonitorProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkMonitor extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Monitor.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")

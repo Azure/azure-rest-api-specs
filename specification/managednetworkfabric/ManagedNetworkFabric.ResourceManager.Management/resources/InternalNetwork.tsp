@@ -12,7 +12,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the Internal Network resource.")
 @parentResource(L3IsolationDomain)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(InternalNetworkProperties)
 model InternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the Internal Network.")

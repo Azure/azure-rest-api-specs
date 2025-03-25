@@ -29,4 +29,5 @@ interface Insights {
   update is ArmTagsPatchAsync<Insight>;
   delete is ArmResourceDeleteSync<Insight>;
   listByResourceGroup is ArmResourceListByParent<Insight>;
+  listBySubscription is ArmListBySubscription<Insight>;
 }

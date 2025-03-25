@@ -27,7 +27,7 @@ model TargetTemplateProperties {
   targetSpec: Record<unknown>;
 
   @doc("Orchestrator Type")
-  orchestratorType: OrchestratorType;
+  orchestratorType?: OrchestratorType;
 
   @doc("Provisioning state of resource")
   @visibility(Lifecycle.Read)

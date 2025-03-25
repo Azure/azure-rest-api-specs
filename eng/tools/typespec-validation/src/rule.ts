@@ -8,5 +8,5 @@ export interface Rule {
   readonly action?: string;
   // TODO: required when all rules apply it
   readonly link?: string;
-  execute(host?: TsvHost, folder?: string): Promise<RuleResult>;
+  execute(host: TsvHost, folder: string): Promise<RuleResult>;
 }

@@ -39,7 +39,7 @@ model Capacity is TrackedResource<CapacityProperties> {
 @doc("Capacity properties")
 model CapacityProperties {
   @doc("No of Units")
-  @minValue(1)
+  @minValue(0)
   @maxValue(100)
   numberOfUnits: int64;
 
@@ -59,7 +59,7 @@ model CapacityProperties {
   overageState?: OverageState;
 
   @doc("Overage limit if overageState is Limited.")
-  @minValue(1)
+  @minValue(0)
   @maxValue(999)
   @added(Versions.`2024-11-01-preview`)
   overageAmount?: int64;

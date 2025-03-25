@@ -1380,7 +1380,7 @@ model LinuxProfile {
   /**
    * Profile for Linux VMs in the container service cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "Initial suppression to prevent breaking change"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Initial suppression to prevent breaking change"
   linuxProfile?: LinuxProfileProperties;
 }
 
