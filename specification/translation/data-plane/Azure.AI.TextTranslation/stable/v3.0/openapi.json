@@ -405,6 +405,9 @@
             "$ref": "#/parameters/TranslateParameters.allowFallback"
           },
           {
+            "$ref": "#/parameters/TranslateParameters.translateQuery"
+          },
+          {
             "name": "api-version",
             "in": "query",
             "description": "Mandatory API version parameter",
@@ -1520,6 +1523,15 @@
           }
         ]
       },
+      "x-ms-parameter-location": "method"
+    },
+    "TranslateParameters.translateQuery": {
+      "name": "translateQuery",
+      "in": "query",
+      "description": "Specifies whether the input body parameter is intended as a GPT translate query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     },
     "TranslateParameters.suggestedFrom": {

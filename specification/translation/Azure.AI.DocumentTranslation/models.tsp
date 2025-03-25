@@ -511,6 +511,12 @@ model DocumentTranslateBody {
   @query("allowFallback")
   allowFallback?: boolean;
 
+  @doc("""
+    Specifies the input string is designed to be submitted to a GPT model for translation
+    """)
+  @query("translateQuery")
+  translateQuery?: boolean;
+
   @doc("Content Type as multipart/form-data")
   @header
   contentType: "multipart/form-data";
