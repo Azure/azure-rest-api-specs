@@ -9,6 +9,7 @@ import "./ConfigurationType.tsp";
 import "./ProvisioningState.tsp";
 import "./SchemaVersion.tsp";
 import "./VersionParameter.tsp";
+import "./RemoveVersionResponse.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -22,6 +23,7 @@ namespace Microsoft.Edge;
 @doc("Schema Properties")
 model SchemaProperties {
   @doc("Current Version of schema")
+  @visibility(Lifecycle.Read)
   currentVersion?: string;
 
   @doc("Provisioning state of resource")
@@ -71,9 +73,10 @@ interface Schemas {
   >;
 
   @doc("Remove Schema Version Resource")
-  removeVersion is ArmResourceActionNoResponseContentAsync<
+  removeVersion is ArmResourceActionSync<
     Schema,
-    VersionParameter
+    VersionParameter,
+    RemoveVersionResponse
   >;
 
   @doc("List by specified resource group")
