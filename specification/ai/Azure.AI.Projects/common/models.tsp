@@ -133,25 +133,6 @@ union ApiResponseFormat {
   jsonObject: "json_object",
 }
 
-@doc("Metadata pertaining to creation and last modification of the resource.")
-model SystemData {
-  @visibility(Lifecycle.Read)
-  @doc("The timestamp the resource was created at.")
-  createdAt?: utcDateTime;
-
-  @visibility(Lifecycle.Read)
-  @doc("The identity that created the resource.")
-  createdBy?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The identity type that created the resource.")
-  createdByType?: string;
-
-  @visibility(Lifecycle.Read)
-  @doc("The timestamp of resource last modification (UTC)")
-  lastModifiedAt?: utcDateTime;
-}
-
 @doc("List View Type Definition")
 union ListViewType {
   string,
@@ -245,10 +226,6 @@ alias AssetBase = {
 
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
   tags?: Record<string>;
-
-  @doc("System data of the resource")
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 };
 
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create responses correctly"

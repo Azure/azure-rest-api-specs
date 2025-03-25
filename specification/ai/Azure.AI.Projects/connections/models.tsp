@@ -31,8 +31,8 @@ model Connection {
   @visibility(Lifecycle.Read)
   target: string;
 
-  @doc("A collection of properties of the connection")
-  properties: Record<string>;
+  @doc("Metadata of the connection")
+  metadata: Record<string>;
 }
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType

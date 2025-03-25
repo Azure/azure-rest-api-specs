@@ -47,7 +47,7 @@ namespace Azure.AI {
   "Azure AI",
   {
     @doc("""
-      Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/projects/<project-name>
+      Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/api/projects/<project-name>
       """)
     endpoint: url,
   }
