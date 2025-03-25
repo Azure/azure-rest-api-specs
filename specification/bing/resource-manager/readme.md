@@ -30,7 +30,16 @@ These are the global settings for the Bing RP.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-06-10
+tag: package-preview-2025-05-01
+```
+
+### Tag: package-2025-05-01-preview
+
+These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05-01-preview'
+input-file:
+- Microsoft.Bing/preview/2025-05-01-preview/bing.json
 ```
 
 ### Tag: package-2020-06-10
@@ -117,6 +126,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Bing/preview/2025-05-01-preview/bing.json
   - $(this-folder)/Microsoft.Bing/stable/2020-06-10/bing.json
   - $(this-folder)/Microsoft.Bing/preview/2020-06-10-preview/bing.json
 
