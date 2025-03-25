@@ -4,10 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace KeyVault;
@@ -28,6 +25,7 @@ op getCertificates is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
 
     /**
@@ -110,6 +108,7 @@ op getCertificateIssuers is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   CertificateIssuerListResult
@@ -287,6 +286,7 @@ op getCertificateVersions is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   CertificateListResult
@@ -542,6 +542,7 @@ op getDeletedCertificates is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
 
     /**

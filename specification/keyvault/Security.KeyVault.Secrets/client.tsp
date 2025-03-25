@@ -1,91 +1,19 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-client-generator-core";
-import "@typespec/rest";
-import "./models.tsp";
-import "../Security.KeyVault.Common/common.tsp";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.Http;
-
-@TypeSpec.Versioning.useDependency(KeyVault.Versions.`v7.6_preview.2`)
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace ClientCustomizations;
 
 @@clientName(KeyVault, "Secret", "java");
 @@clientName(KeyVault, "Secret", "rust");
+@@clientName(KeyVault, "Client", "go");
 
 using KeyVault;
 
-/**
- * The key vault client performs cryptographic key operations and vault operations against the Key Vault service.
- */
-@client(
-  {
-    name: "Client",
-    service: KeyVault,
-  },
-  "go"
-)
-interface Client {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-  setSecret is setSecret;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  deleteSecret is deleteSecret;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  updateSecretProperties is updateSecret;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getSecret is getSecret;
-  /**
-   * The full secret identifier and attributes are provided in the response. No values are returned for the secrets. This operations requires the secrets/list permission.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-  @summary("List all versions of the specified secret.")
-  @route("/secrets/{secret-name}/versions")
-  @get
-  listSecretPropertiesVersions is KeyVaultOperation<
-    {
-      /**
-       * The name of the secret.
-       */
-      @path("secret-name")
-      @clientName("name", "go")
-      secretName: string;
-    },
-    SecretListResult
-  >;
-  /**
-   * The Get Secrets operation is applicable to the entire vault. However, only the base secret identifier and its attributes are provided in the response. Individual secret versions are not listed in the response. This operation requires the secrets/list permission.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-  @summary("List secrets in a specified key vault.")
-  @route("/secrets")
-  @get
-  listSecretProperties is KeyVaultOperation<{}, SecretListResult>;
-  /**
-   * The Get Deleted Secrets operation returns the secrets that have been deleted for a vault enabled for soft-delete. This operation requires the secrets/list permission.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-  @summary("Lists deleted secrets for the specified vault.")
-  @route("/deletedsecrets")
-  @get
-  listDeletedSecretProperties is KeyVaultOperation<{}, DeletedSecretListResult>;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getDeletedSecret is getDeletedSecret;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-  purgeDeletedSecret is purgeDeletedSecret;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  recoverDeletedSecret is recoverDeletedSecret;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  backupSecret is backupSecret;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  restoreSecret is restoreSecret;
-}
+// go renames
+@@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
+@@clientName(getSecrets, "ListSecretProperties", "go");
+@@clientName(getSecretVersions, "ListSecretPropertiesVersions", "go");
+@@clientName(updateSecret, "UpdateSecretProperties", "go");
 
 // renaming SecretItem to SecretProperties.
 // renaming existing SecretProperties to something else

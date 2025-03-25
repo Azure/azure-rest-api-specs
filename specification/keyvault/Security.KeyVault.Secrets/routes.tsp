@@ -4,9 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
-using Azure.Core;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace KeyVault;
@@ -135,6 +133,7 @@ op getSecrets is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   SecretListResult
@@ -163,6 +162,7 @@ op getSecretVersions is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   SecretListResult
@@ -184,6 +184,7 @@ op getDeletedSecrets is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   DeletedSecretListResult
