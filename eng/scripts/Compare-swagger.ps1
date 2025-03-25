@@ -1,5 +1,5 @@
 # Get latest commit id from main branch
-$latestCommitId = git rev-parse origin/main
+$latestCommitId = git ls-remote origin main | Select-String -Pattern "refs/heads/main" | ForEach-Object { $_.ToString().Split("`t")[0] }
 Write-Host "Latest commit id from main branch: $latestCommitId"
 
 # I hardcode the project to KeyVault as it is a prototype
