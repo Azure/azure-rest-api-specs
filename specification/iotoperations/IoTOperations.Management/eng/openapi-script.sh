@@ -13,7 +13,6 @@ pushd "$script_dir/../.." || {
 
 # echo "Deleting the examples in the resource-manager directory and the management directory..."
 # rm -r resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/examples
-# rm -r IoTOperations.Management/examples/2024-08-15-preview
 
 echo "Generating the specs and the examples!"
 
