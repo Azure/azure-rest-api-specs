@@ -40,6 +40,8 @@ finally {
 # Run tsp-compare
 $lfs = Join-Path $cloneDir "specification/$serviceName/resource-manager/" "readme.md"
 $rhs = Join-Path "specification/$serviceName/resource-manager/" "readme.md"
+Write-Host "LFS: $lfs"
+Write-Host "RHS: $rhs"
 
 # It's easy for cutomers not to change anything in readme.md and not to delete any previous swagger
 # So we need to check if the readme.md is changed
@@ -49,4 +51,7 @@ if (!$readmeChanged) {
     throw "You need to change the readme.md file to have the generated swagger files"
 }
 
+Push-Location $directory
+npm install
 npx tsp-client compare -lfs $lfs -rhs $rhs 
+Pop-Location
