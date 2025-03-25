@@ -20,9 +20,6 @@ model PrivateIpAddressPropertiesBase {
   @doc("Managed, Allocated, Active, Retired")
   state: IpAddressState;
 
-  @doc("Cloud where the asset exists")
-  cloud: Cloud;
-
   @doc("Region where the IP address exists")
   region: string;
 
