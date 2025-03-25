@@ -399,6 +399,7 @@ model KeyAttributes {
    * The key or key version attestation information.
    */
   @added(KeyVault.Versions.`v7.6_preview.2`)
+  @visibility(Lifecycle.Read)
   attestation?: KeyAttestation;
 }
 
