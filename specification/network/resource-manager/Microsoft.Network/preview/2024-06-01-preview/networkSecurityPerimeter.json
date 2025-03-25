@@ -123,6 +123,11 @@
           "NetworkSecurityPerimeters"
         ],
         "operationId": "NetworkSecurityPerimeters_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ForceDeleteParameter"
+          }
+        ],
         "description": "Deletes a network security perimeter.",
         "responses": {
           "200": {
@@ -2383,6 +2388,14 @@
       "required": true,
       "type": "string",
       "description": "The operation id of the async operation.",
+      "x-ms-parameter-location": "method"
+    },
+    "ForceDeleteParameter": {
+      "name": "forceDeletion",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Deletes the resource even if it contains any child associations.",
       "x-ms-parameter-location": "method"
     }
   }
