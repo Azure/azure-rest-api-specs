@@ -19,16 +19,16 @@ namespace Azure.AI.Projects;
 @resource("connections")
 model Connection {
   @doc("The name of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key("connectionName")
   name: string;
 
   @doc("Category of the connection")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type: ConnectionType;
 
   @doc("The connection URL to be used for this service")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target: string;
 
   @doc("A collection of properties of the connection")

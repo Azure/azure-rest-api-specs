@@ -19,32 +19,32 @@ namespace Azure.AI.Projects;
 @resource("deployments")
 model Deployment {
   @doc("Name of the deployment")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key("name")
   name: string;
 
   @doc("Publisher-specific name of the deployed model")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modelName: string;
 
   @doc("Publisher-specific version of the deployed model")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modelVersion: string;
 
   @doc("Name of the deployed model's publisher")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modelPublisher: string;
 
   @doc("Capabilities of deployed model")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capabilities: Record<string>;
 
   @doc("Sku of the model deployment")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sku: Sku;
 
   @doc("Name of the connection the deployment comes from")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionName?: string;
 }
 
