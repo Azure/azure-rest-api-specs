@@ -72,7 +72,6 @@ model UpdateGroup {
 @added(Versions.v2025_04_01_preview)
 model GateConfiguration {
   @doc("The human-readable display name of the Gate.")
-  @pattern("^[A-Za-z0-9].*$")
   @minLength(1)
   @maxLength(100)
   displayName?: string;

@@ -62,7 +62,6 @@ model GateProperties {
 
   @doc("The human-readable display name of the Gate.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @pattern("^[A-Za-z0-9].*$")
   @minLength(1)
   @maxLength(100)
   displayName?: string;
