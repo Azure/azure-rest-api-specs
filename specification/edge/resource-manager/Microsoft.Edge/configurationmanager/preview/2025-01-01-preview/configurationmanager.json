@@ -1118,18 +1118,10 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RemoveVersionResponse"
             }
           },
           "default": {
@@ -1143,11 +1135,7 @@
           "ConfigTemplates_RemoveVersion_MaximumSet": {
             "$ref": "./examples/ConfigTemplates_RemoveVersion_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configTemplates/{configTemplateName}/versions": {
@@ -1643,18 +1631,10 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RemoveVersionResponse"
             }
           },
           "default": {
@@ -1668,11 +1648,7 @@
           "ConfigurationTemplates_RemoveVersion_MaximumSet": {
             "$ref": "./examples/ConfigurationTemplates_RemoveVersion_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/configurationTemplates/{configurationTemplateName}/versions": {
@@ -5314,18 +5290,10 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RemoveVersionResponse"
             }
           },
           "default": {
@@ -5339,11 +5307,7 @@
           "Schemas_RemoveVersion_MaximumSet": {
             "$ref": "./examples/Schemas_RemoveVersion_MaximumSet_Gen.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/schemas/{schemaName}/versions": {
@@ -10576,6 +10540,19 @@
         "solutionVersion"
       ]
     },
+    "RemoveVersionResponse": {
+      "type": "object",
+      "description": "Remove Version response",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status for remove version response"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
     "ResolvedConfiguration": {
       "type": "object",
       "description": "Resolved Configuration",
@@ -10660,7 +10637,8 @@
       "properties": {
         "currentVersion": {
           "type": "string",
-          "description": "Current Version of schema"
+          "description": "Current Version of schema",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
