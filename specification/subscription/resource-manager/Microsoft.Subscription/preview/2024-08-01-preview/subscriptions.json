@@ -1513,49 +1513,49 @@
       }
     },
     "TransferCreationRequest": {
-      "description": "Transfer creation request",
+      "description": "Details for creating a transfer.",
       "type": "object",
       "properties": {
         "subscriptionId": {
-          "description": "Subscription Id.",
+          "description": "The subscription identifier associated with the transfer.",
           "type": "string"
         },
         "destinationEmailId": {
-          "description": "Destination email id.",
+          "description": "The email identifier of the transfer destination.",
           "type": "string"
         },
         "transferServiceOwnership": {
-          "description": "Transfer Service Ownership.",
+          "description": "Indicates whether transfer service ownership is enabled.",
           "type": "boolean"
         },
         "locale": {
-          "description": "Locale information.",
+          "description": "Locale information for the transfer request for notifications.",
           "type": "string"
         }
       }
     },
     "Products": {
-      "description": "Product Details.",
+      "description": "Details about the product involved in the transfer.",
       "type": "object",
       "properties": {
         "productType": {
-          "description": "product type",
+          "description": "The type or category of the product.",
           "type": "string"
         },
         "productId": {
-          "description": "product Id",
+          "description": "The unique identifier of the product.",
           "type": "string"
         },
         "name": {
-          "description": "product name",
+          "description": "The name of the product.",
           "type": "string"
         },
         "skuDescription": {
-          "description": "product sku description",
+          "description": "A description of the product's SKU.",
           "type": "string"
         },
         "status": {
-          "description": "product transfer status",
+          "description": "The current transfer status of the product.",
           "enum": [
             "NotStarted",
             "InProgress",
@@ -1589,54 +1589,58 @@
       },
       "x-ms-azure-resource": true
     },
-    "TransferUserMetaData": {
-      "description": "Transfer User Metadata.",
+    "TransferUserMetadata": {
+      "description": "Metadata related to the transfer user.",
       "type": "object",
       "properties": {
         "lastUpdatedTime": {
-          "description": "Last updated time.",
+          "description": "The timestamp when the metadata was last updated (in UTC).",
           "type": "string",
           "format": "date-time"
         },
         "tenantId": {
-          "description": "tenantId id.",
+          "description": "The unique identifier of the tenant.",
           "type": "string"
         },
         "upn": {
-          "description": "User principal name (upn).",
+          "description": "The User Principal Name (UPN) of the transfer user.",
           "type": "string"
         }
       }
     },
     "TransferResponse": {
-      "description": "Transfer Response Details.",
+      "description": "Details of the transfer response.",
       "type": "object",
       "properties": {
         "transferId": {
-          "description": "Transfer id.",
+          "description": "The unique identifier for the transfer.",
           "type": "string"
         },
         "source": {
-          "$ref": "#/definitions/TransferUserMetaData"
+          "$ref": "#/definitions/TransferUserMetadata",
+          "description": "Details of the source transfer user."
+
         },
         "destination": {
-          "$ref": "#/definitions/TransferUserMetaData"
+          "$ref": "#/definitions/TransferUserMetadata",
+          "description": "Details of the destination transfer user."
         },
         "canceledBy": {
-          "$ref": "#/definitions/TransferUserMetaData"
+          "$ref": "#/definitions/TransferUserMetadata",
+          "description": "Details of the transfer user who canceled the transfer."
         },
         "lastUpdatedTime": {
-          "description": "Last updated time.",
+          "description": "The timestamp when the transfer was last updated (in UTC).",
           "type": "string",
           "format": "date-time"
         },
         "expirationTime": {
-          "description": "Expiration time.",
+          "description": "The expiration timestamp of the transfer (in UTC).",
           "type": "string",
           "format": "date-time"
         },
         "status": {
-          "description": "Transfer status",
+          "description": "The current status of the transfer.",
           "type": "string",
           "enum": [
             "Pending",
@@ -1654,19 +1658,20 @@
           }
         },
         "products": {
+          "description": "The list of products associated with the transfer.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Products"
           }
         },
         "transferServiceOwnership": {
-          "description": "Transfer service ownership.",
+          "description": "Indicates whether the transfer service ownership is enabled.",
           "type": "boolean"
         }
       }
     },
     "TransferDetails": {
-      "description": "Transfer details.",
+      "description": "Details of the transfer resource.",
       "type": "object",
       "allOf": [
         {
@@ -1675,6 +1680,7 @@
       ],
       "properties": {
         "properties": {
+          "description": "The response details for the transfer.",
           "$ref": "#/definitions/TransferResponse"
         }
       }
