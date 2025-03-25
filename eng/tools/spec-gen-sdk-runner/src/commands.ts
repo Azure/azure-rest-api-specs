@@ -295,6 +295,8 @@ function parseArguments(): SpecGenSdkCmdInput {
     tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
     readmePath: getArgumentValue(args, "--readme-relative-path", ""),
     prNumber: getArgumentValue(args, "--pr-number", ""),
+    apiVersion: getArgumentValue(args, "--api-version", ""),
+    sdkReleaseType: getArgumentValue(args, "--sdk-release-type", ""),
     specCommitSha: getArgumentValue(args, "--commit", "HEAD"),
     specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
     headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),
@@ -341,6 +343,12 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
   }
   if (commandInput.headBranch) {
     specGenSdkCommand.push("--head-branch", commandInput.headBranch);
+  }
+  if (commandInput.apiVersion) {
+    specGenSdkCommand.push("--api-version", commandInput.apiVersion);
+  }
+  if (commandInput.sdkReleaseType) {
+    specGenSdkCommand.push("--sdk-release-type", commandInput.sdkReleaseType);
   }
   return specGenSdkCommand;
 }
