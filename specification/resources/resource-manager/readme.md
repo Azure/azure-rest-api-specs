@@ -50,18 +50,6 @@ tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2024-03
-```
-
-``` yaml $(package-resources)
-tag: package-resources-2024-07
-```
-
-``` yaml $(package-resources)
-tag: package-resources-2024-11
-```
-
-``` yaml $(package-resources)
 tag: package-resources-2025-03
 ```
 
