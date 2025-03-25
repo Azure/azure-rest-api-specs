@@ -933,6 +933,11 @@
           },
           "description": "List of pinned domains for Bing Custom Search configuration."
         },
+        "creationDateUtc": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the creation date of the Bing Custom Search configuration."
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -961,7 +966,8 @@
       "properties": {
         "domain": {
           "type": "string",
-          "description": "The domain to allow."
+          "description": "The domain to allow.",
+          "pattern": "^(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,11})+$"
         },
         "includeSubPages": {
           "type": "boolean",
@@ -993,7 +999,8 @@
       "properties": {
         "domain": {
           "type": "string",
-          "description": "The domain to block."
+          "description": "The domain to block.",
+          "pattern": "^(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,11})+$"
         },
         "includeSubPages": {
           "type": "boolean",
@@ -1010,7 +1017,8 @@
       "properties": {
         "domain": {
           "type": "string",
-          "description": "The domain to pin."
+          "description": "The domain to pin.",
+          "pattern": "^(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,11})+$"
         },
         "query": {
           "type": "string",
