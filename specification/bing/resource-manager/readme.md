@@ -40,6 +40,8 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 ``` yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
 - Microsoft.Bing/preview/2025-05-01-preview/bing.json
+suppressions:
+  - code: LRO_RESPONSE_HEADER
 ```
 
 ### Tag: package-2020-06-10
@@ -49,8 +51,6 @@ These settings apply only when `--tag=package-2020-06-10` is specified on the co
 ``` yaml $(tag) == 'package-2020-06-10'
 input-file:
 - Microsoft.Bing/stable/2020-06-10/bing.json
-suppressions:
-  - code: LRO_RESPONSE_HEADER
 ```
 
 ### Tag: package-2020-06-10-preview
