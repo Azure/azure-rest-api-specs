@@ -756,7 +756,7 @@
     },
     "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "put": {
-        "description": "Transfer subscription billing ownership to destination email id. TransferId is for tracking purposes only and is different from the system-generated TransferId",
+        "description": "Transfers subscription billing ownership to the destination email. The TransferId provided in the PUT request is client-generated for tracking purposes and is different from the system-generated TransferId returned in subsequent responses.",
         "operationId": "Transfers_SendExport",
         "x-ms-examples": {
           "CreateTransfer": {
@@ -783,7 +783,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Transfer Details.",
+            "description": "Initiated Transfer details.",
             "schema": {
               "$ref": "#/definitions/TransferDetails"
             }
@@ -828,7 +828,7 @@
         }
       },
       "delete": {
-        "description": "Cancel the transfer by using its system generated TransferId.",
+        "description": "Cancels the transfer using the system-generated TransferId.",
         "operationId": "Transfers_CancelById",
         "x-ms-examples": {
           "GetTransferById": {
@@ -844,11 +844,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Transfer details.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetails"
-            }
+          "204": {
+            "description": "The request has succeeded with no response body."
           },
           "default": {
             "description": "Describes the error if the operation is not successful.",

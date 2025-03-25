@@ -48,9 +48,6 @@ directive:
     from: subscriptions.json
     where: $.paths["/providers/Microsoft.Subscription/transfers/{transferId}"].put
     reason: Not supposed to return 201 as the response code for the below API since existing api with new version change, got exceptions from ARM reviewer.
-  - suppress: DeleteResponseBodyEmpty
-    from: subscriptions.json
-    reason: Suppression warning as delete would require response to be returned.
   - suppress: ProvisioningStateSpecifiedForLROPut
     from: subscriptions.json
     reason: Keep compatibility with old API version
