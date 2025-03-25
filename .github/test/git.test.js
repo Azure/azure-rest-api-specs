@@ -1,48 +1,73 @@
+// @ts-check
+
 import { describe, expect, it, vi } from "vitest";
 import * as exec from "../src/exec.js";
 import { diff, lsTree, show } from "../src/git.js";
 
 describe("git", () => {
-  it("diff", async () => {
-    const execRootSpy = vi
-      .spyOn(exec, "execRoot")
-      .mockResolvedValue("test diff");
+  describe("e2e", () => {
+    it("diff", async () => {
+      await expect(diff("HEAD", "HEAD")).resolves.toBe("");
+    });
 
-    await expect(diff("HEAD^", "HEAD")).resolves.toBe("test diff");
+    it("lsTree", async () => {
+      // lsTree always uses "\n" in output, even on windows
+      const expected = ".github\n";
 
-    expect(execRootSpy).toBeCalledWith(
-      "git -c core.quotepath=off diff HEAD^ HEAD",
-      expect.anything(),
-    );
+      await expect(
+        lsTree("HEAD", ".github", { args: "--full-tree --name-only" }),
+      ).resolves.toBe(expected);
+    });
+
+    it("show", async () => {
+      await expect(show("HEAD", ".github/package.json")).resolves.toContain(
+        "scripts",
+      );
+    });
   });
 
-  it("lstree", async () => {
-    const execRootSpy = vi
-      .spyOn(exec, "execRoot")
-      .mockResolvedValue("test lstree");
+  describe("mocked", () => {
+    it("diff", async () => {
+      const execRootSpy = vi
+        .spyOn(exec, "execRoot")
+        .mockResolvedValue("test diff");
 
-    await expect(
-      lsTree("HEAD", "specification/contosowidgetmanager"),
-    ).resolves.toBe("test lstree");
+      await expect(diff("HEAD^", "HEAD")).resolves.toBe("test diff");
 
-    expect(execRootSpy).toBeCalledWith(
-      "git -c core.quotepath=off ls-tree HEAD specification/contosowidgetmanager",
-      expect.anything(),
-    );
-  });
+      expect(execRootSpy).toBeCalledWith(
+        "git -c core.quotepath=off diff HEAD^ HEAD",
+        expect.anything(),
+      );
+    });
 
-  it("show", async () => {
-    const execRootSpy = vi
-      .spyOn(exec, "execRoot")
-      .mockResolvedValue("test show");
+    it("lsTree", async () => {
+      const execRootSpy = vi
+        .spyOn(exec, "execRoot")
+        .mockResolvedValue("test lstree");
 
-    await expect(
-      show("HEAD", "specification/contosowidgetmanager/cspell.yaml"),
-    ).resolves.toBe("test show");
+      await expect(
+        lsTree("HEAD", "specification/contosowidgetmanager"),
+      ).resolves.toBe("test lstree");
 
-    expect(execRootSpy).toBeCalledWith(
-      "git -c core.quotepath=off show HEAD:specification/contosowidgetmanager/cspell.yaml",
-      expect.anything(),
-    );
+      expect(execRootSpy).toBeCalledWith(
+        "git -c core.quotepath=off ls-tree HEAD specification/contosowidgetmanager",
+        expect.anything(),
+      );
+    });
+
+    it("show", async () => {
+      const execRootSpy = vi
+        .spyOn(exec, "execRoot")
+        .mockResolvedValue("test show");
+
+      await expect(
+        show("HEAD", "specification/contosowidgetmanager/cspell.yaml"),
+      ).resolves.toBe("test show");
+
+      expect(execRootSpy).toBeCalledWith(
+        "git -c core.quotepath=off show HEAD:specification/contosowidgetmanager/cspell.yaml",
+        expect.anything(),
+      );
+    });
   });
 });
