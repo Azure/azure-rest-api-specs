@@ -3308,17 +3308,17 @@
             "create"
           ]
         },
-        "target": {
-          "$ref": "#/definitions/GateTarget",
-          "description": "The target that the Gate is controlling, e.g. an Update Run.",
+        "gateType": {
+          "$ref": "#/definitions/GateType",
+          "description": "The type of the Gate determines how it is completed.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "gateType": {
-          "$ref": "#/definitions/GateType",
-          "description": "The type of the Gate determines how it is completed.",
+        "target": {
+          "$ref": "#/definitions/GateTarget",
+          "description": "The target that the Gate is controlling, e.g. an Update Run.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3335,8 +3335,8 @@
         }
       },
       "required": [
-        "target",
         "gateType",
+        "target",
         "state"
       ]
     },
@@ -3813,9 +3813,7 @@
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterGates": {
           "type": "array",
@@ -3823,9 +3821,7 @@
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3864,9 +3860,7 @@
             "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterGates": {
           "type": "array",
@@ -3875,9 +3869,7 @@
             "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4145,9 +4137,7 @@
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterGates": {
           "type": "array",
@@ -4155,9 +4145,7 @@
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -4196,9 +4184,7 @@
             "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterGates": {
           "type": "array",
@@ -4207,9 +4193,7 @@
             "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterStageWaitStatus": {
           "$ref": "#/definitions/WaitStatus",

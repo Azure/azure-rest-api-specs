@@ -66,13 +66,13 @@ model GateProperties {
   @maxLength(100)
   displayName?: string;
 
-  @doc("The target that the Gate is controlling, e.g. an Update Run.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  target: GateTarget;
-
   @doc("The type of the Gate determines how it is completed.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   gateType: GateType;
+
+  @doc("The target that the Gate is controlling, e.g. an Update Run.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  target: GateTarget;
 
   @doc("The state of the Gate.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
