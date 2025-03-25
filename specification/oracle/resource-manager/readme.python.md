@@ -15,5 +15,5 @@ clear-output-folder: true
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/oracledatabase/azure-mgmt-oracledatabase/azure/mgmt/oracledatabase
+output-folder: $(python-sdks-folder)/Oracle/azure-mgmt-oracledatabase/azure/mgmt/oracledatabase
 ```
