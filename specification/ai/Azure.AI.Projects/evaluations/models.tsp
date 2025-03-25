@@ -47,6 +47,7 @@ model InputDataset extends InputData {
 @doc("Evaluation Definition")
 @resource("runs")
 model Evaluation {
+
   @doc("Identifier of the evaluation.")
   @key("name")
   @visibility(Lifecycle.Read)
@@ -77,4 +78,9 @@ model Evaluation {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Read-only result outputs. Example: { 'redTeamResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{myproject}/datasets/{dataset-name}/{dataset-version}' }")
+  @visibility("read")
+  outputs?: Record<string>;
 }
+
