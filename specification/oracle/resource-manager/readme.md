@@ -48,6 +48,15 @@ input-file:
   - Oracle.Database/preview/2024-06-01-preview/openapi.json
 ```
 
+### Tag: package-2024-06-01
+
+These settings apply only when `--tag=package-2024-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-01'
+input-file:
+  - Oracle.Database/stable/2024-06-01/openapi.json
+```
+
 
 ### Tag: package-2024-10-01-preview
 
