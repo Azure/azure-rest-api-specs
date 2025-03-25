@@ -59,17 +59,23 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "An array of Agent items.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Agents.Agent"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/PagedAgent"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -84,6 +90,9 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -94,8 +103,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agents.Agent"
@@ -103,10 +116,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The newly created Agent.",
-            "schema": {
-              "$ref": "#/definitions/Agents.Agent"
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Agent"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -135,16 +157,26 @@
           {
             "name": "agentId",
             "in": "path",
-            "description": "The ID of the Agent to retrieve.",
+            "description": "A unique identifier for the agent.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "The requested Agent.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Agents.Agent"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -171,14 +203,17 @@
           {
             "name": "agentId",
             "in": "path",
-            "description": "The ID of the Agent to update.",
+            "description": "A unique identifier for the agent.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "The updated Agent data.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agents.Agent"
@@ -187,9 +222,29 @@
         ],
         "responses": {
           "200": {
-            "description": "The new or updated Agent.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Agents.Agent"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Agents.Agent"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -216,14 +271,24 @@
           {
             "name": "agentId",
             "in": "path",
-            "description": "The ID of the Agent to delete.",
+            "description": "A unique identifier for the agent.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -240,7 +305,7 @@
         }
       }
     },
-    "/agents/{agentId}/complete": {
+    "/agents/{agentId}:complete": {
       "post": {
         "operationId": "Agents_CompleteByAgent",
         "description": "Requests a completion for a specific Agent, returning an AgentCompletion.",
@@ -251,14 +316,16 @@
           {
             "name": "agentId",
             "in": "path",
-            "description": "The ID of the Agent for which to request a completion.",
+            "description": "A unique identifier for the agent.",
             "required": true,
             "type": "string"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "body",
             "in": "body",
-            "description": "The parameters used to generate a completion for this agent.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agents.AgentCompleteParams"
@@ -270,6 +337,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Agents.AgentCompletion"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -287,7 +361,7 @@
         }
       }
     },
-    "/agents/{agentId}/stream": {
+    "/agents/{agentId}:stream": {
       "post": {
         "operationId": "Agents_StreamByAgent",
         "description": "Requests a streaming completion for a specific Agent, returning a stream of updates.",
@@ -298,14 +372,16 @@
           {
             "name": "agentId",
             "in": "path",
-            "description": "The ID of the Agent for which to request a streaming completion.",
+            "description": "A unique identifier for the agent.",
             "required": true,
             "type": "string"
           },
           {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
             "name": "body",
             "in": "body",
-            "description": "Parameters controlling how the agent's streaming completion is generated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agents.AgentCompleteParams"
@@ -314,7 +390,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -331,13 +414,16 @@
         }
       }
     },
-    "/agents/complete": {
+    "/agents:complete": {
       "post": {
         "operationId": "Agents_Complete",
-        "description": "Requests a completion for the entire “Agents” collection,\nusing CompleteParams as input and returning an AgentCompletion.",
+        "description": "Requests a completion for the entire “Agents” collection,\\nusing CompleteParams as input and returning an AgentCompletion.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "body",
@@ -353,6 +439,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Agents.AgentCompletion"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -370,13 +463,16 @@
         }
       }
     },
-    "/agents/stream": {
+    "/agents:stream": {
       "post": {
         "operationId": "Agents_Stream",
-        "description": "Requests a streaming completion for the entire “Agents” collection,\nreturning a stream of StreamingAgentCompletionUpdate items.",
+        "description": "Requests a streaming completion for the entire “Agents” collection,\\nreturning a stream of StreamingAgentCompletionUpdate items.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "body",
@@ -389,7 +485,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1657,212 +1760,30 @@
         }
       }
     },
-    "/messages": {
-      "get": {
-        "operationId": "Agents_ListMessages",
-        "description": "Lists chat messages, returning a collection of ChatMessage objects.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of ChatMessage items.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Agents.ChatMessage"
-              },
-              "x-ms-identifiers": []
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "Agents_SendMessage",
-        "description": "Creates (sends) a new chat message, returning the created ChatMessage.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The newly created ChatMessage.",
-            "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/messages/{messageId}": {
-      "get": {
-        "operationId": "Agents_GetMessage",
-        "description": "Retrieves (reads) an existing chat message.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "The identifier of the ChatMessage to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The requested ChatMessage.",
-            "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Agents_UpdateMessage",
-        "description": "Updates an existing chat message (or creates if not found) and returns the updated message.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "The identifier of the message to update.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The new or modified ChatMessage object.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The updated ChatMessage.",
-            "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Agents_DeleteMessage",
-        "description": "Deletes a chat message. Returns 204 on success.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "The ID of the message to delete.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/threads": {
       "get": {
-        "operationId": "Agents_ListThreads",
+        "operationId": "Threads_ListThreads",
         "description": "Lists all threads, returning an array of Thread items.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "An array of Thread objects.",
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Agents.Thread"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/PagedThread"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -1877,18 +1798,25 @@
               }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
-        "operationId": "Agents_CreateThread",
+        "operationId": "Threads_CreateThread",
         "description": "Creates a new Thread and returns it.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agents.Thread"
@@ -1896,10 +1824,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The newly created Thread.",
-            "schema": {
-              "$ref": "#/definitions/Agents.Thread"
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Thread"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -1919,7 +1856,7 @@
     },
     "/threads/{threadId}": {
       "get": {
-        "operationId": "Agents_GetThread",
+        "operationId": "Threads_GetThread",
         "description": "Retrieves an existing thread by its ID.",
         "parameters": [
           {
@@ -1928,16 +1865,26 @@
           {
             "name": "threadId",
             "in": "path",
-            "description": "The identifier of the Thread.",
+            "description": "A unique identifier for this thread.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "The requested Thread.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Agents.Thread"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -1955,7 +1902,7 @@
         }
       },
       "put": {
-        "operationId": "Agents_UpdateThread",
+        "operationId": "Threads_UpdateThread",
         "description": "Updates or replaces a thread by its ID, returning the updated Thread.",
         "parameters": [
           {
@@ -1964,14 +1911,17 @@
           {
             "name": "threadId",
             "in": "path",
-            "description": "The identifier of the Thread to update.",
+            "description": "A unique identifier for this thread.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
             "in": "body",
-            "description": "The updated Thread resource data.",
+            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agents.Thread"
@@ -1980,9 +1930,29 @@
         ],
         "responses": {
           "200": {
-            "description": "The updated Thread.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Agents.Thread"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Agents.Thread"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -2000,7 +1970,7 @@
         }
       },
       "delete": {
-        "operationId": "Agents_DeleteThread",
+        "operationId": "Threads_DeleteThread",
         "description": "Deletes a thread, returning 204 on success.",
         "parameters": [
           {
@@ -2009,14 +1979,312 @@
           {
             "name": "threadId",
             "in": "path",
-            "description": "The ID of the thread to delete.",
+            "description": "A unique identifier for this thread.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/message": {
+      "get": {
+        "operationId": "Messages_ListMessages",
+        "description": "Lists chat messages, returning a collection of ChatMessage objects.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "A unique identifier for this thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "Messages_SendMessage",
+        "description": "Creates (sends) a new chat message, returning the created ChatMessage.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "A unique identifier for this thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agents.ChatMessage"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of ChatMessage"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/threads/{threadId}/message/{messageId}": {
+      "get": {
+        "operationId": "Messages_GetMessage",
+        "description": "Retrieves (reads) an existing chat message.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "A unique identifier for this thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "A unique identifier for this message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Agents.ChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Messages_UpdateMessage",
+        "description": "Updates an existing chat message (or creates if not found) and returns the updated message.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "A unique identifier for this thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "A unique identifier for this message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agents.ChatMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Agents.ChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/Agents.ChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Messages_DeleteMessage",
+        "description": "Deletes a chat message. Returns 204 on success.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "A unique identifier for this thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "A unique identifier for this message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4434,6 +4702,50 @@
       ],
       "x-ms-discriminator-value": "OutputPath"
     },
+    "PagedAgent": {
+      "type": "object",
+      "description": "Paged collection of Agent items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Agent items on this page",
+          "items": {
+            "$ref": "#/definitions/Agents.Agent"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedChatMessage": {
+      "type": "object",
+      "description": "Paged collection of ChatMessage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChatMessage items on this page",
+          "items": {
+            "$ref": "#/definitions/Agents.ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedConnection": {
       "type": "object",
       "description": "Paged collection of Connection items",
@@ -4530,6 +4842,28 @@
           "items": {
             "$ref": "#/definitions/Index"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedThread": {
+      "type": "object",
+      "description": "Paged collection of Thread items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Thread items on this page",
+          "items": {
+            "$ref": "#/definitions/Agents.Thread"
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
