@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/versioning";
 import "@typespec/http";
@@ -6,6 +7,7 @@ import "@typespec/openapi";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.Ai.Speech.Transcription;
 
@@ -20,6 +22,7 @@ op transcribe is Azure.Core.RpcOperation<
     @doc("The body of the multipart request.")
     @multipartBody
     body: {
+      @clientName("options")
       @doc("Metadata for a transcription request. This field contains a JSON-serialized object of type `TranscribeDefinition`.")
       definition?: HttpPart<TranscriptionOptions>;
 
