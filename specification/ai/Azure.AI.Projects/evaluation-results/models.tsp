@@ -18,25 +18,25 @@ namespace Azure.AI.Projects;
 @discriminator("EvaluationResultType")
 model EvaluationResult {
   @doc("Type of Evaluation result")
-  ResultType: ResultType;
+  ResultType?: ResultType;
 
   @doc("Model Name")
-  ModelName: string;
+  ModelName?: string;
 
   @doc("Model Version")
-  ModelVersion: string;
+  ModelVersion?: string;
 
   @doc("Model Asset ID")
-  ModelAssetId: string;
+  ModelAssetId?: string;
 
   @doc("Dataset Family")
-  DatasetFamily: string;
+  DatasetFamily?: string;
 
   @doc("Dataset Name")
-  DatasetName: string;
+  DatasetName?: string;
 
   @doc("Metrics")
-  Metrics: Record<float64>;
+  Metrics?: Record<float64>;
 
   @doc("Blob URI")
   @extension("x-ms-blob-reference", true)
