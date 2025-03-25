@@ -45,7 +45,6 @@ These settings apply only when `--tag=package-2021-03-07` is specified on the co
 ```yaml $(tag) == 'package-2021-03-07'
 input-file:
   - stable/2021-03-07/common.json
-  - stable/2021-03-07/error.json
 ```
 
 ### Tag: package-2022-07-13
