@@ -2315,6 +2315,23 @@
         }
       },
       "description": "Result of the request to list NSP logging configuration. Contains a list of NSP logging configurations and a URL link to get the next set of results."
+    },
+    "NspServiceTagsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NspServiceTagsResource"
+          },
+          "description": "Gets paged list of NSP service tags."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list NSP service tags."
     }
   },
   "parameters": {
@@ -2461,23 +2478,6 @@
         }
       },
       "description": "Resource containing list of NSP service tags."
-    },
-    "NspServiceTagsListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NspServiceTagsResource"
-          },
-          "description": "Gets paged list of NSP service tags."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets the URL to get the next page of results."
-        }
-      },
-      "description": "Result of the request to list NSP service tags."
     }
   }
 }
