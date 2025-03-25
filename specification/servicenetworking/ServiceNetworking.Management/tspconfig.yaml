@@ -19,16 +19,16 @@ options:
     omit-unreachable-types: true
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    generateSample: true
+    azure-sdk-for-js: true
+    is-modular-library: true
+    generate-metadata: true
+    hierarchy-client: false
+    experimental-extensible-enums: true
+    enable-operation-group: true
+    generate-sample: true
     package-dir: "arm-servicenetworking"
     flavor: "azure"
-    packageDetails:
+    package-details:
       name: "@azure/arm-servicenetworking"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-servicenetworking"
@@ -42,7 +42,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
@@ -50,3 +50,9 @@ options:
     package-dir: "azure-resourcemanager-servicenetworking"
     flavor: "azure"
     service-name: "Traffic Controller"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.ServiceNetworking"
+    clear-output-folder: true
+    use-write-core: true
+    namespace: "{package-dir}"

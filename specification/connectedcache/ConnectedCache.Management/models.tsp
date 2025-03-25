@@ -124,7 +124,7 @@ union CycleType {
 @doc("Model representing Cache Node for ConnectedCache resource")
 model CacheNodeOldResponse {
   @doc("The provisioned state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("statusCode used to get code details of Mcc response object")
@@ -137,7 +137,7 @@ model CacheNodeOldResponse {
   statusDetails?: string;
 
   @doc("status of the HTTP error code")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("The error details")
@@ -148,14 +148,14 @@ model CacheNodeOldResponse {
 model ConnectedCachePatchResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   tags?: Record<string>;
 }
 
 @doc("Model representing customer for connectedCache resource")
 model CustomerProperty {
   @doc("The provisioned state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Mcc customer resource (customer entity).")
@@ -165,23 +165,23 @@ model CustomerProperty {
   additionalCustomerProperties?: AdditionalCustomerProperties;
 
   @doc("Mcc response status code.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusCode?: string;
 
   @doc("Mcc response status text as string for retrieving status details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusText?: string;
 
   @doc("Mcc response status details for retrieving response inner details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusDetails?: string;
 
   @doc("HTTP error status code.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("Mcc response error details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
@@ -191,7 +191,7 @@ model CustomerEntity {
   fullyQualifiedResourceId?: string;
 
   @doc("Customer resource Guid Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerId?: string;
 
   @doc("Customer resource name.")
@@ -213,22 +213,22 @@ model CustomerEntity {
   releaseVersion?: int32;
 
   @doc("Customer resource create async operation Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createAsyncOperationId?: string;
 
   @doc("Customer resource deletion async operation Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deleteAsyncOperationId?: string;
 
   @doc("Customer resource client tenant Id of subscription.")
   clientTenantId?: string;
 
   @doc("Customer resource sync attempts.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   synchWithAzureAttemptsCount?: int32;
 
   @doc("Customer resource last Azure sync timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSyncWithAzureTimestamp?: utcDateTime;
 
   @doc("Customer resource flag for enterprise management as boolean.")
@@ -244,7 +244,7 @@ model CustomerEntity {
   verifySignupCode?: boolean;
 
   @doc("Customer resource phrase for verifying signup.")
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   verifySignupPhrase?: string;
 }
@@ -252,71 +252,71 @@ model CustomerEntity {
 @doc("Model representing customer for connected cache resource")
 model AdditionalCustomerProperties {
   @doc("Customer resource last PeeringDB update timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   peeringDbLastUpdateTime?: utcDateTime;
 
   @doc("Customer resource cache efficiency.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerPropertiesOverviewCacheEfficiency?: float32;
 
   @doc("Customer resource average egress in Mbps.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerPropertiesOverviewAverageEgressMbps?: float32;
 
   @doc("Customer resource average cache miss throughput in Mbps.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerPropertiesOverviewAverageMissMbps?: float32;
 
   @doc("Customer resource maximum egress in Mbps.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerPropertiesOverviewEgressMbpsMax?: float32;
 
   @doc("Customer resource peak egress timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerPropertiesOverviewEgressMbpsMaxDateTime?: utcDateTime;
 
   @doc("Customer resource maximum cache miss throughput in Mbps.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerPropertiesOverviewMissMbpsMax?: float32;
 
   @doc("Customer resource peak cache miss throughput timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerPropertiesOverviewMissMbpsMaxDateTime?: utcDateTime;
 
   @doc("Customer resource total healthy cache nodes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerPropertiesOverviewCacheNodesHealthyCount?: int32;
 
   @doc("Customer resource total unhealthy cache nodes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerPropertiesOverviewCacheNodesUnhealthyCount?: int32;
 
   @doc("Customer resource signup status as boolean.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   signupStatus?: boolean;
 
   @doc("Customer resource signup status as integer code.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   signupStatusCode?: int32;
 
   @doc("Customer resource signup status as string text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   signupStatusText?: string;
 
   @doc("Customer resource signup phase status code as integer.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   signupPhaseStatusCode?: int32;
 
   @doc("Customer resource signup phase status as string text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   signupPhaseStatusText?: string;
 
   @doc("Customer resource last PeeringDB update timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   peeringDbLastUpdateDate?: utcDateTime;
 
   @doc("Customer resource owner organization name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerOrgName?: string;
 
   @doc("Customer resource contact email.")
@@ -332,7 +332,7 @@ model AdditionalCustomerProperties {
   customerAsn?: string;
 
   @doc("Customer resource estimated Asn peering peak in Gbps.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerAsnEstimatedEgressPeekGbps?: float32;
 
   @doc("Customer resource entitlement Sku Id.")
@@ -366,7 +366,7 @@ model AdditionalCustomerProperties {
 @doc("Model representing an Mcc cache node connectedCache resource")
 model CacheNodeProperty {
   @doc("The provisioned state of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Mcc cache node resource (cache node entity).")
@@ -385,7 +385,7 @@ model CacheNodeProperty {
   statusDetails?: string;
 
   @doc("HTTP error status code.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("Mcc response error details.")
@@ -398,7 +398,7 @@ model CacheNodeEntity {
   fullyQualifiedResourceId?: string;
 
   @doc("Cache node resource customer resource GUID Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customerId?: string;
 
   @doc("Cache node resource customer resource name.")
@@ -426,147 +426,147 @@ model CacheNodeEntity {
   maxAllowableEgressInMbps?: int32;
 
   @doc("Cache node resource maximum allowed probability of egress.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxAllowableProbability?: float32;
 
   @doc("Cache node resource Azure XCid.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   xCid?: string;
 
   @doc("Cache node resource flag for determining if managed by enterprise as boolean.")
   isEnterpriseManaged?: boolean;
 
   @doc("Cache node resource create async operation Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createAsyncOperationId?: string;
 
   @doc("Cache node resource deletion async operation Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deleteAsyncOperationId?: string;
 
   @doc("Cache node resource customer resource client tenant Id of subscription.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clientTenantId?: string;
 
   @doc("Cache node resource category.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   category?: string;
 
   @doc("Cache node resource release version.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   releaseVersion?: int32;
 
   @doc("Cache node resource last sync timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSyncWithAzureTimestamp?: utcDateTime;
 
   @doc("Cache node resource last backend updated timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdatedTimestamp?: utcDateTime;
 
   @doc("Cache node resource attempts to sync with Azure.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   synchWithAzureAttemptsCount?: int32;
 
   @doc("Cache node resource container configuration details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   containerConfigurations?: string;
 
   @doc("Cache node resource comma separated values of Cidrs.")
   cidrCsv?: string[];
 
   @doc("Cache node resource last Cidr Csv update timestamp")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cidrCsvLastUpdateTime?: utcDateTime;
 
   @doc("Cache node resource last Bgp Cidr Csv update timestamp")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpCidrCsvLastUpdateTime?: utcDateTime;
 
   @doc("Cache node resource last Bgp report timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpLastReportedTime?: utcDateTime;
 
   @doc("Cache node resource Bgp review state string text in detail.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpReviewStateText?: string;
 
   @doc("Cache node resource Bgp review state string text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpReviewState?: BgpReviewStateEnum;
 
   @doc("Cache node resource Bgp review feedback text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpReviewFeedback?: string;
 
   @doc("Cache node resource Bgp update count.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpNumberOfTimesUpdated?: int32;
 
   @doc("Cache node resource Bgp record count.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpNumberOfRecords?: int32;
 
   @doc("Cache node resource Bgp block count.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpCidrBlocksCount?: int32;
 
   @doc("Cache node resource total addressable space defined by Bgp and Cidr Csv blocks.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpAddressSpace?: int32;
 
   @doc("Cache node resource flag for determining if customer will be migrated.")
   shouldMigrate?: boolean;
 
   @doc("Cache node resource bytes truncated from Bgp output file.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpFileBytesTruncated?: int32;
 
   @doc("Cache node resource current Cidr range precedence selection type.")
   cidrSelectionType?: int32;
 
   @doc("Cache node resource flag for indicating the cache node resource is frozen (not selectable, not editable in UI).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isFrozen?: boolean;
 
   @doc("Cache node resource review process state as integer")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reviewState?: int32;
 
   @doc("Cache node resource review state text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reviewStateText?: string;
 
   @doc("Cache node resource review feedback text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reviewFeedback?: string;
 
   @doc("Cache node resource configuration state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Cache node resource configuration state text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationStateText?: string;
 
   @doc("Cache node resource total addressable space defined by the Cidr Csv block.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   addressSpace?: int32;
 
   @doc("Cache node resource Mcc container deployment worker connection count.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workerConnections?: int32;
 
   @doc("Cache node resource last updated Mcc container deployment worker connection count timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   workerConnectionsLastUpdatedDateTime?: utcDateTime;
 
   @doc("Cache node resource Mcc container configuration details re-sync trigger.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   containerResyncTrigger?: int32;
 
   @doc("Cache node resource Mcc Container Id Uri.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   imageUri?: string;
 
   @doc("FQDN(fully qualified domain name) value of the mcc cache node")
@@ -596,35 +596,35 @@ model AdditionalCacheNodeProperties {
   cacheNodePropertiesDetailsIssuesList?: string[];
 
   @doc("Cache node resource aggregated status details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   aggregatedStatusDetails?: string;
 
   @doc("Cache node resource aggregated status text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   aggregatedStatusText?: string;
 
   @doc("Cache node resource aggregated status code.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   aggregatedStatusCode?: int32;
 
   @doc("Cache node resource Mcc product version.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   productVersion?: string;
 
   @doc("Cache node resource flag indicating if cache node has been physically installed or provisioned on their physical lab.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isProvisioned?: boolean;
 
   @doc("Cache node resource detailed state text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cacheNodeStateDetailedText?: string;
 
   @doc("Cache node resource short state text.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cacheNodeStateShortText?: string;
 
   @doc("Cache node resource state as integer.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cacheNodeState?: int32;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
@@ -659,31 +659,31 @@ model AdditionalCacheNodeProperties {
   updateRequestedDateTime?: utcDateTime;
 
   @doc("Auto update version that is the Next available version to update on mcc cache node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoUpdateNextAvailableVersion?: string;
 
   @doc("Auto update last applied date time of mcc install")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoUpdateNextAvailableDateTime?: utcDateTime;
 
   @doc("Auto update version that is the applied to update on mcc cache node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoUpdateAppliedVersion?: string;
 
   @doc("Auto Update status details from the backend after applying the new version details")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoUpdateLastAppliedDetails?: string;
 
   @doc("Last applied auto update state for mcc install of auto update cycle")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoUpdateLastAppliedState?: string;
 
   @doc("Auto update last applied date time of mcc install")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoUpdateLastAppliedDateTime?: utcDateTime;
 
   @doc("Auto update last triggered date time of mcc install")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   autoUpdateLastTriggeredDateTime?: utcDateTime;
 
   @doc("Optional property #1 of Mcc response object")
@@ -742,7 +742,7 @@ model MccCacheNodeBgpCidrDetails
 @doc("Mcc cache node Bgp Cidr details.")
 model BgpCidrsConfiguration {
   @doc("Mcc cache node Bgp Cidr details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpCidrs?: string[];
 }
 
@@ -763,17 +763,17 @@ model CacheNodeInstallProperties {
   cacheNodeId?: string;
 
   @doc("Mcc primary account key. Internal to Mcc.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @secret
   primaryAccountKey?: string;
 
   @doc("Mcc secondary account key. Internal to Mcc.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @secret
   secondaryAccountKey?: string;
 
   @doc("Mcc Iot Central temporary device registration key, used once.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @secret
   registrationKey?: string;
 }
