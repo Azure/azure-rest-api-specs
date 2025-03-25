@@ -17,7 +17,7 @@ namespace Microsoft.AzureCis;
 @doc("Defines the array of allowlists for a secret")
 model Allowlists {
   @doc("Allowlist elements")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   elements: Allowlist[];
 }
 
@@ -132,22 +132,22 @@ model DsmsCertificateProperties {
   azureLocation?: azureLocation;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: CertificateProvisioningState;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Self-signed Certificate DSMS name; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   selfSignedCertificateDsmsName?: string;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Chained Certificate DSMS name; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   chainedCertificateDsmsName?: string;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Automatically injected if the environment is a child trusted island; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   edgeSiteChildTrustIsland?: string;
 }
 
@@ -158,7 +158,7 @@ model DsmsCertificateResource
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("dsmsCertificates") // Start with lower case. Should be plural
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.IntegrationSpaces")
 @doc("The azure integration spaces resource provider.")
-@service({
-  title: "Microsoft.IntegrationSpaces",
-})
+@service(#{ title: "Microsoft.IntegrationSpaces" })
 @versioned(Versions)
 namespace Microsoft.IntegrationSpaces;
 

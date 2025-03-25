@@ -21,7 +21,7 @@ union MetricsIngestionEnabled {
 @doc("Radio access network properties.")
 model RadioAccessNetworkProperties {
   @doc("The provisioning state of the radio access network resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Site in which this radio access network is deployed.")
@@ -31,7 +31,7 @@ model RadioAccessNetworkProperties {
   metricsIngestion?: MetricsIngestion;
 
   @doc("A list of Access Points for this radio access network.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   accessPoints?: AccessPoint[];
 }
 

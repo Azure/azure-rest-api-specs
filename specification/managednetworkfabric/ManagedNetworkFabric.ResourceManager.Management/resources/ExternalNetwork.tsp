@@ -11,7 +11,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the External Network resource.")
 @parentResource(L3IsolationDomain)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ExternalNetworkProperties)
 model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the External Network.")
@@ -19,7 +19,7 @@ model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @path
   @key("externalNetworkName")
   @segment("externalNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** External Network Properties */
@@ -36,7 +36,7 @@ interface ExternalNetworks {
   create is ArmResourceCreateOrReplaceAsync<ExternalNetwork>;
 
   @doc("API to update certain properties of the ExternalNetworks resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<ExternalNetwork, ExternalNetworkPatch>;
 
   @doc("Implements ExternalNetworks DELETE method.")

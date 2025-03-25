@@ -14,7 +14,7 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("The Network To Network Interconnect resource definition.")
 @Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
 @parentResource(NetworkFabric)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkToNetworkInterconnect
   extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the Network to Network Interconnect.")
@@ -22,7 +22,7 @@ model NetworkToNetworkInterconnect
   @path
   @key("networkToNetworkInterconnectName")
   @segment("networkToNetworkInterconnects")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
@@ -39,7 +39,7 @@ interface NetworkToNetworkInterconnects {
   create is ArmResourceCreateOrReplaceAsync<NetworkToNetworkInterconnect>;
 
   @doc("Update certain properties of the Network To NetworkInterconnects resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     NetworkToNetworkInterconnect,
     NetworkToNetworkInterconnectPatch

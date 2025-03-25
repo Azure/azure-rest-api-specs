@@ -17,13 +17,13 @@ model InternalNetworkProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("List of Connected IPv4 Subnets.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   connectedIPv4Subnets?: ConnectedSubnet[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("List of connected IPv6 Subnets.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   connectedIPv6Subnets?: ConnectedSubnet[];
 
@@ -121,20 +121,20 @@ model InternalNetworkProperties {
   nativeIpv6PrefixLimit?: NativeIpv6PrefixLimitProperties;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -160,7 +160,7 @@ model BgpConfiguration {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of Network Fabric. Example: 65048.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricASN?: int64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
@@ -176,11 +176,11 @@ model BgpConfiguration {
   ipv6ListenRangePrefixes?: string[];
 
   @doc("List with stringified IPv4 Neighbor Addresses.")
-  @OpenAPI.extension("x-ms-identifiers", ["address"])
+  @Azure.ResourceManager.identifiers(#["address"])
   ipv4NeighborAddress?: NeighborAddress[];
 
   @doc("List with stringified IPv6 Neighbor Address.")
-  @OpenAPI.extension("x-ms-identifiers", ["address"])
+  @Azure.ResourceManager.identifiers(#["address"])
   ipv6NeighborAddress?: NeighborAddress[];
 
   @doc("InternalNetwork BMP Configuration")
@@ -218,7 +218,7 @@ model BgpPatchConfiguration {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("ASN of Network Fabric. Example: 65048.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricASN?: int64;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
@@ -234,11 +234,11 @@ model BgpPatchConfiguration {
   ipv6ListenRangePrefixes?: string[];
 
   @doc("List with stringified IPv4 Neighbor Addresses.")
-  @OpenAPI.extension("x-ms-identifiers", ["address"])
+  @Azure.ResourceManager.identifiers(#["address"])
   ipv4NeighborAddress?: NeighborAddressPatch[];
 
   @doc("List with stringified IPv6 Neighbor Address.")
-  @OpenAPI.extension("x-ms-identifiers", ["address"])
+  @Azure.ResourceManager.identifiers(#["address"])
   ipv6NeighborAddress?: NeighborAddressPatch[];
 
   @doc("InternalNetwork BMP Configuration")
@@ -262,16 +262,16 @@ model NeighborAddress {
 
   @doc("BFD Administrative State for each Neighbor Address. Example: Enabled | Disabled.")
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bfdAdministrativeState?: BfdAdministrativeState;
 
   @doc("BGP Administrative State for each Neighbor Address. Example: Enabled | Disabled.")
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bgpAdministrativeState?: BgpAdministrativeState;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 }
 
@@ -307,13 +307,13 @@ model InternalNetworkPatchProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("List of Connected IPv4 Subnets.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   connectedIPv4Subnets?: ConnectedSubnetPatch[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
   @doc("List of connected IPv6 Subnets.")
-  @OpenAPI.extension("x-ms-identifiers", ["prefix"])
+  @Azure.ResourceManager.identifiers(#["prefix"])
   @minItems(1)
   connectedIPv6Subnets?: ConnectedSubnetPatch[];
 
@@ -452,7 +452,7 @@ model InternalNetworkBgpAdministrativeStateResponse {
   // The response contains an array of objects. Each object contains the neighbor address and the state.
   // The response is an array of objects because the request can contain multiple neighbor addresses.
   @doc("NeighborAddress administrative status")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   neighborAddressAdministrativeStatus?: NeighborAddressBgpAdministrativeStatus[];
 
@@ -478,7 +478,7 @@ model InternalNetworkBfdAdministrativeStateResponse {
   // The response contains an array of objects. Each object contains the neighbor address and the state.
   // The response is an array of objects because the request can contain multiple neighbor addresses.
   @doc("NeighborAddress administrative status")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   neighborAddressAdministrativeStatus?: NeighborAddressBfdAdministrativeStatus[];
 

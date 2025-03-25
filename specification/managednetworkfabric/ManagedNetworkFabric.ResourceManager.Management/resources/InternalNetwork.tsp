@@ -12,7 +12,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the Internal Network resource.")
 @parentResource(L3IsolationDomain)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(InternalNetworkProperties)
 model InternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the Internal Network.")
@@ -20,7 +20,7 @@ model InternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @path
   @key("internalNetworkName")
   @segment("internalNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The Internal Network Properties */
@@ -37,7 +37,7 @@ interface InternalNetworks {
   create is ArmResourceCreateOrReplaceAsync<InternalNetwork>;
 
   @doc("Updates a InternalNetworks.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<InternalNetwork, InternalNetworkPatch>;
 
   @doc("Implements InternalNetworks DELETE method.")

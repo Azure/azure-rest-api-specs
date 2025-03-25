@@ -12,14 +12,14 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("The NetworkMonitor resource definition.")
 @added(Versions.v2024_06_15_preview)
 @Azure.ResourceManager.Private.armResourceInternal(NetworkMonitorProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkMonitor extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Monitor.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkMonitorName")
   @segment("networkMonitors")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkFabric Properties */
@@ -37,7 +37,7 @@ interface NetworkMonitors {
   create is ArmResourceCreateOrReplaceAsync<NetworkMonitor>;
 
   @doc("API to update certain properties of the NetworkMonitor resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkMonitor, NetworkMonitorPatch>;
 
   @doc("Deletes layer 2 connectivity between compute nodes by managed by named NetworkMonitor name.")

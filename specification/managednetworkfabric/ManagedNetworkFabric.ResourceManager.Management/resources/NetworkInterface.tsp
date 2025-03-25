@@ -12,14 +12,14 @@ namespace Microsoft.ManagedNetworkFabric;
 @doc("Defines the NetworkInterface resource.")
 @parentResource(NetworkDevice)
 @Azure.ResourceManager.Private.armResourceInternal(NetworkInterfaceProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkInterface extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the Network Interface.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkInterfaceName")
   @segment("networkInterfaces")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkInterface properties */
@@ -36,7 +36,7 @@ interface NetworkInterfaces {
   create is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
   @doc("Update certain properties of the Network Interface resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkInterface, NetworkInterfacePatch>;
 
   @doc("Delete the Network Interface resource.")

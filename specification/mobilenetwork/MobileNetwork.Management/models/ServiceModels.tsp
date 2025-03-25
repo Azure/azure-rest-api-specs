@@ -34,7 +34,7 @@ union SdfDirection {
 @doc("Service properties.")
 model ServicePropertiesFormat {
   @doc("The provisioning state of the service resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("A precedence value that is used to decide between services when identifying the QoS values to use for a particular SIM. A lower value means a higher priority. This value should be unique among all services configured in the mobile network.")
@@ -47,7 +47,7 @@ model ServicePropertiesFormat {
 
   @doc("The set of data flow policy rules that make up this service.")
   @minItems(1)
-  @extension("x-ms-identifiers", ["ruleName"])
+  @extension("x-ms-identifiers", #["ruleName"])
   pccRules: PccRuleConfiguration[];
 }
 
@@ -91,7 +91,7 @@ model PccRuleConfiguration {
   @doc("The set of data flow templates to use for this data flow policy rule.")
   @minItems(1)
   @maxItems(15)
-  @extension("x-ms-identifiers", ["templateName"])
+  @extension("x-ms-identifiers", #["templateName"])
   serviceDataFlowTemplates: ServiceDataFlowTemplate[];
 }
 

@@ -21,9 +21,7 @@ using Azure.ResourceManager;
 @doc("Mobile Packet Core Management API")
 @armProviderNamespace("Microsoft.MobilePacketCore")
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@service({
-  title: "Microsoft.MobilePacketCore Mobile Packet Core Service",
-})
+@service(#{ title: "Microsoft.MobilePacketCore Mobile Packet Core Service" })
 @versioned(Versions)
 namespace Microsoft.MobilePacketCore;
 

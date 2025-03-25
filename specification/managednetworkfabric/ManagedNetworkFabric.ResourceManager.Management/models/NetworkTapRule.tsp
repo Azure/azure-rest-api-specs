@@ -15,24 +15,24 @@ model NetworkTapRuleProperties {
   tapRulesUrl?: url;
 
   @doc("List of match configurations.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   matchConfigurations?: NetworkTapRuleMatchConfiguration[];
 
   @doc("List of dynamic match configurations.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   dynamicMatchConfigurations?: CommonDynamicMatchConfiguration[];
 
   @doc("The ARM resource Id of the NetworkTap.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkTapId?: string;
 
   @doc("Polling interval in seconds.")
   pollingIntervalInSeconds?: PollingIntervalInSeconds = PollingIntervalInSeconds.Thirty;
 
   @doc("The last sync timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSyncedTime?: utcDateTime;
 
   @doc("Global network tap rule actions")
@@ -40,20 +40,20 @@ model NetworkTapRuleProperties {
   globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionProperties;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -72,11 +72,11 @@ model NetworkTapRuleMatchConfiguration {
   ipAddressType?: IPAddressType;
 
   @doc("List of the match conditions.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   matchConditions?: NetworkTapRuleMatchCondition[];
 
   @doc("List of actions that need to be performed for the matched conditions.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   actions?: NetworkTapRuleAction[];
 }
 
@@ -95,11 +95,11 @@ model NetworkTapRuleMatchConfigurationPatch {
   ipAddressType?: IPAddressType;
 
   @doc("List of the match conditions.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   matchConditions?: NetworkTapRuleMatchConditionPatch[];
 
   @doc("List of actions that need to be performed for the matched conditions.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   actions?: NetworkTapRuleActionPatch[];
 }
 
@@ -187,12 +187,12 @@ model NetworkTapRulePatchProperties {
   globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionPatchProperties;
 
   @doc("List of match configurations.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   matchConfigurations?: NetworkTapRuleMatchConfigurationPatch[];
 
   @doc("List of dynamic match configurations.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @minItems(1)
   dynamicMatchConfigurations?: CommonDynamicMatchConfigurationPatch[];
 }

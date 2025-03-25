@@ -48,34 +48,34 @@ interface EdgeMachineJobs {
 @discriminator("jobType")
 model EdgeMachineJobProperties {
   @doc("Job Type to support polymorphic resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: EdgeMachineJobType;
 
   @doc("Deployment mode to trigger job.")
   deploymentMode?: DeploymentMode;
 
   @doc("Job provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Unique, immutable job id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobId?: string;
 
   @doc("The UTC date and time at which the job started.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTimeUtc?: utcDateTime;
 
   @doc("The UTC date and time at which the job completed.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTimeUtc?: utcDateTime;
 
   @doc("Status of Edge device job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: JobStatus;
 
   @doc("error details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
@@ -91,6 +91,9 @@ union EdgeMachineJobType {
 
   @doc("Job to provision operating system in the device.")
   ProvisionOs: "ProvisionOs",
+
+  @doc("Job to debug machine issues using AI.")
+  MachineAssistant: "MachineAssistant",
 }
 
 @doc("Represents the various statuses a job can have throughout its lifecycle.")
@@ -149,8 +152,21 @@ model RemoteSupportJobProperties extends EdgeMachineJobProperties {
   type: RemoteSupportType;
 
   @doc("log collection job reported properties.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: RemoteSupportReportedProperties;
+}
+
+@doc("Properties for running Machine Assistant Job Properties.")
+model MachineAssistantJobProperties extends EdgeMachineJobProperties {
+  @doc("Job Type to support polymorphic resource.")
+  jobType: EdgeMachineJobType.MachineAssistant;
+
+  @doc("The user intent to be checked on the device.")
+  intent: string;
+
+  @doc("Machine Assistant job reported properties.")
+  @visibility(Lifecycle.Read)
+  reportedProperties?: MachineAssistantReportedProperties;
 }
 
 @doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
@@ -173,33 +189,24 @@ model ProvisionOsReportedProperties {
 @doc("Represents a provisioning request.")
 model ProvisioningRequest {
   @doc("Target operating system to support polymorphic resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   target: ProvisioningOsType;
 
   @doc("Operating system profile.")
   osProfile: OsProvisionProfile;
 
   @doc("User configuration.")
-  @extension("x-ms-identifiers", ["userName"])
-  userDetails: UserDetails[];
+  @Azure.ResourceManager.identifiers(#["userName"])
+  userDetails?: UserDetails[];
 
   @doc("Onboarding configuration.")
-  onboardingConfiguration: OnboardingConfiguration;
+  onboardingConfiguration?: OnboardingConfiguration;
 
   @doc("Device configuration.")
   deviceConfiguration: DeviceConfiguration;
 
-  @doc("User and Network data provided by CAPI for machine configuration.")
-  cloudInit?: CloudInit;
-}
-
-@doc("User and Network data provided by CAPI for machine configuration.")
-model CloudInit {
-  @doc("Base64 encoded string for CAPI use – needs to accept/store what is provided by CAPI for machine configuration.")
-  userData?: string;
-
-  @doc("Base64 encoded string for CAPI use – needs to accept/store what is provided by CAPI for machine configuration.")
-  networkData?: string;
+  @doc("Base64 encoded custom configuration for CAPI to use")
+  customConfiguration?: string;
 }
 
 @doc("Represents the provisioning operating system type.")
@@ -218,58 +225,67 @@ model RemoteSupportReportedProperties {
   ...JobReportedProperties;
 
   @doc("Optional settings for configuring the node for remote support.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nodeSettings?: RemoteSupportNodeSettings;
 
   @doc("Details of the remote support session.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["sessionId"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
+}
+
+@doc("Represents the reported properties of machine assistant job.")
+model MachineAssistantReportedProperties {
+  ...JobReportedProperties;
+
+  @doc("The result obtained after checking the intent on the machine.")
+  @visibility(Lifecycle.Read)
+  summary?: string;
 }
 
 @doc("Represents the settings of a remote support node.")
 model RemoteSupportNodeSettings {
   @doc("The state of the remote support node.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: string;
 
   @doc("The timestamp when the node settings were created, in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
 
   @doc("The timestamp when the node settings were last updated, in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   updatedAt?: utcDateTime;
 
   @doc("The current connection status of the remote support session.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionStatus?: string;
 
   @doc("The error message, if any, from the last connection attempt.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionErrorMessage?: string;
 }
 
 @doc("Represents a remote support session.")
 model RemoteSupportSession {
   @doc("Unique session Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionId?: string;
 
   @doc("The start time of the remote support session, in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionStartTime?: utcDateTime;
 
   @doc("The end time of the remote support session, in UTC.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sessionEndTime?: utcDateTime;
 
   @doc("The level of access granted during the remote support session.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessLevel?: RemoteSupportAccessLevel;
 
   @doc("The location where the session transcript is stored.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   transcriptLocation?: string;
 }
 
@@ -312,11 +328,11 @@ model CollectLogJobProperties extends EdgeMachineJobProperties {
   toDate: utcDateTime;
 
   @doc("To date for log collection.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastLogGenerated?: utcDateTime;
 
   @doc("log collection job reported properties.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: LogCollectionReportedProperties;
 }
 
@@ -325,50 +341,50 @@ model LogCollectionReportedProperties {
   ...JobReportedProperties;
 
   @doc("Details of the log collection session.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["correlationId"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["correlationId"])
   logCollectionSessionDetails?: LogCollectionSession[];
 }
 
 @doc("Represents a session for collecting logs from an edge device.")
 model LogCollectionSession {
   @doc("The timestamp when log collection started, in ISO 8601 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTime?: string;
 
   @doc("The timestamp when log collection ended, in ISO 8601 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTime?: string;
 
   @doc("The total time logs were collected for, in ISO 8601 duration format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   timeCollected?: string;
 
   @doc("The size of the collected logs in bytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logSize?: int32;
 
   @doc("The status of the log collection session.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DeviceLogCollectionStatus;
 
   @doc("A unique identifier for correlating this log collection session with other operations or sessions.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   correlationId?: string;
 }
 
 @doc("Reported Properties for job triggered from cloud.")
 model JobReportedProperties {
   @doc("The percentage of the job that is complete.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   percentComplete?: int32;
 
   @doc("Validation status of job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   validationStatus?: EceActionStatus;
 
   @doc("Deployment status of job.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deploymentStatus?: EceActionStatus;
 }
 
@@ -396,12 +412,12 @@ union DeviceLogCollectionStatus {
 @doc("Validation / deployment status details for Job.")
 model EceActionStatus {
   @doc("Job status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("List of steps of Edge device job.")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #["name"])
   steps?: Step[];
 }
 
@@ -419,36 +435,36 @@ union DeploymentMode {
 @doc("Step details during job execution.")
 model Step {
   @doc("Name of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Description of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("FullStepIndex of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fullStepIndex?: string;
 
   @doc("Start time in utc of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTimeUtc?: string;
 
   @doc("End time in utc of step.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTimeUtc?: string;
 
   @doc("Status of step. Allowed values are 'Error', 'Success', 'InProgress'")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("List of nested steps during job execution..")
-  @visibility("read")
-  @extension("x-ms-identifiers", ["name"])
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #["name"])
   steps?: Step[];
 
   @doc("List of exceptions in job execution.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exception?: string[];
 }
 
@@ -490,20 +506,20 @@ union OnboardingResourceType {
 @doc("Onboarding configuration.")
 model OnboardingConfiguration {
   @doc("Type of the onboarding resource to support polymorphic resource.")
-  @visibility("create", "read")
-  type: OnboardingResourceType;
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  type?: OnboardingResourceType;
 
   @doc("Resource ID.")
-  resourceId: string;
+  resourceId?: Azure.Core.armResourceIdentifier;
 
   @doc("Location of the resource.")
-  location: string;
+  location?: string;
 
   @doc("Tenant ID of the resource.")
   tenantId?: string;
 
   @doc("Azure Arc virtual machine ID.")
-  arcVirtualMachineId: string;
+  arcVirtualMachineId?: string;
 }
 
 @doc("Device configuration.")
@@ -523,9 +539,9 @@ model DeviceConfiguration {
 
 @doc("Network configuration.")
 model NetworkConfiguration {
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("List of network adapters.")
-  networkAdapters: NetworkAdapter[];
+  networkAdapters?: NetworkAdapter[];
 }
 
 @doc("Network adapter configuration.")

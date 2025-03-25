@@ -19,7 +19,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
 @parentResource(SnapshotResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ControlProperties)
 @added(Versions.v2024_12_15_preview)
 model ControlResource extends Azure.ResourceManager.Foundations.ProxyResource {
@@ -29,7 +29,7 @@ model ControlResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @path
   @key("controlId")
   @segment("controls")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-_]{1,64}$")
   name: string;
 

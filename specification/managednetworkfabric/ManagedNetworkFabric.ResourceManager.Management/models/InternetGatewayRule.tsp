@@ -11,16 +11,16 @@ model InternetGatewayRuleProperties {
   ruleProperties: RuleProperties;
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("List of Internet Gateway resource Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   internetGatewayIds?: string[];
 }
 
@@ -47,7 +47,7 @@ model RuleProperties {
 
   @doc("List of header Name and source addresses associated with the header.")
   @added(Versions.v2024_06_15_preview)
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   headerAddressList?: HeaderAddressProperties[];
 }
 

@@ -40,7 +40,7 @@ model ProvisioningConfiguration
 @doc("ProvisioningConfigurationProperties Properties")
 model ProvisioningConfigurationProperties {
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Policy resource Id of onboarding service")

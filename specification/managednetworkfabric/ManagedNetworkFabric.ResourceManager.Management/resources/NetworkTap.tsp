@@ -9,14 +9,14 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Tap resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkTap extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Tap.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkTapName")
   @segment("networkTaps")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkTap Properties */
@@ -32,7 +32,7 @@ interface NetworkTaps {
   create is ArmResourceCreateOrReplaceAsync<NetworkTap>;
 
   @doc("API to update certain properties of the Network Tap resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkTap, NetworkTapPatch>;
 
   @doc("Deletes Network Tap.")

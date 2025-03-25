@@ -17,7 +17,7 @@ model Validation is ProxyResource<ValidationPropertiesExtended> {
   @key("validationName")
   @path
   @segment("validations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The name of the validation.")
   name: string;
 }

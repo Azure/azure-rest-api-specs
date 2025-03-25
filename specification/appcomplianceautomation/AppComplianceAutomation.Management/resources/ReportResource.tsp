@@ -21,7 +21,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
 @tenantResource
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
 model ReportResource extends Foundations.ProxyResource {
   /**
@@ -31,7 +31,7 @@ model ReportResource extends Foundations.ProxyResource {
   @path
   @key("reportName")
   @segment("reports")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**

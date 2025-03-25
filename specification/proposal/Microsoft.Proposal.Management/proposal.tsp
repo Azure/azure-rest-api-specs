@@ -23,7 +23,7 @@ model ProposalResource is TrackedResource<ProposalResourceProperties> {
 
 @doc("Details of the Proposal Item.")
 model ProposalResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 

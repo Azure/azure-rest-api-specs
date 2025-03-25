@@ -10,7 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The L2 Isolation Domain resource definition.")
 @Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model L2IsolationDomain
   extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the L2 Isolation Domain.")
@@ -18,7 +18,7 @@ model L2IsolationDomain
   @path
   @key("l2IsolationDomainName")
   @segment("l2IsolationDomains")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
@@ -35,7 +35,7 @@ interface L2IsolationDomains {
   create is ArmResourceCreateOrReplaceAsync<L2IsolationDomain>;
 
   @doc("API to update certain properties of the L2 Isolation Domain resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<L2IsolationDomain, L2IsolationDomainPatch>;
 
   @doc("Deletes layer 2 connectivity between compute nodes by managed by named L2 Isolation name.")

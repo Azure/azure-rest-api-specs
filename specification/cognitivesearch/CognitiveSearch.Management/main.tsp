@@ -23,7 +23,7 @@ model Indexer is TrackedResource<IndexerProperties> {
   @path
   @key("indexerName")
   @segment("indexers")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The name of the indexer resource.")
   name: string;
 }
@@ -49,7 +49,7 @@ model IndexerProperties {
   @doc("The description of the indexer resource.")
   description?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The current provisioning state of the indexer.")
   provisioningState?: ProvisioningState;
 

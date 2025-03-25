@@ -10,9 +10,6 @@ namespace: azure.mgmt.quantum
 package-name: azure-mgmt-quantum
 package-version: 1.0.0b1
 clear-output-folder: true
-```
-
-``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/quantum/azure-mgmt-quantum/azure/mgmt/quantum
 ```

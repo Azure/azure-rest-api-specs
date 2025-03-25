@@ -19,16 +19,20 @@ namespace Microsoft.Edge;
 
 @doc("Solution Version Properties")
 model SolutionVersionProperties {
+  @doc("Solution Template Version Id")
+  @visibility(Lifecycle.Read)
+  solutionTemplateVersionId?: string;
+
   @doc("Revision number of resolved config for this solution version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   revision?: int32;
 
   @doc("Name of applicable target's display name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetDisplayName?: string;
 
   @doc("Resolved configuration values")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configuration?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
@@ -37,15 +41,26 @@ model SolutionVersionProperties {
   specification: Record<unknown>;
 
   @doc("Review id of resolved config for this solution version")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reviewId?: string;
 
   @doc("State of solution instance")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: State;
 
+  @doc("Solution instance name")
+  @visibility(Lifecycle.Read)
+  @maxLength(24)
+  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  solutionInstanceName?: string;
+
+  @doc("Solution Dependency Context")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependency[];
+
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -57,7 +72,7 @@ model SolutionVersion
   // Name will be set to solutionTemplateVersion-revision
   @doc("Name of the solution version")
   @maxLength(61)
-  @minLength(3)
+  @minLength(7)
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   @path
   @key("solutionVersionName")
@@ -66,6 +81,27 @@ model SolutionVersion
 
   ...ExtendedLocationProperty;
   ...EntityTagProperty;
+}
+
+@doc("Solution Dependency Context")
+model SolutionDependency {
+  @doc("Solution Version Id")
+  solutionVersionId: string;
+
+  @doc("Solution Instance Name")
+  @maxLength(24)
+  @pattern("^(?!v-)(?!.*-v-)[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
+  solutionInstanceName?: string;
+
+  @doc("Solution Template Version Id")
+  solutionTemplateVersionId: string;
+
+  @doc("Target Id")
+  targetId: string;
+
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  dependencies?: SolutionDependency[];
 }
 
 @armResourceOperations

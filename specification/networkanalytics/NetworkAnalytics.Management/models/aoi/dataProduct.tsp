@@ -30,7 +30,7 @@ model DataProductNetworkAcls {
   @added(Versions.v2023_11_15)
   @madeOptional(Versions.v2024_04_01_preview)
   @doc("IP rule with specific IP or IP range in CIDR format.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   ipRules?: IPRules[];
 
   @added(Versions.v2023_11_15)
@@ -61,44 +61,44 @@ model DataProduct is TrackedResource<DataProductProperties> {
 @added(Versions.v2023_11_15)
 model DataProductProperties {
   @doc("The resource GUID property of the data product resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGuid?: string;
 
   @doc("Latest provisioning state  of data product.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @added(Versions.v2023_11_15)
   @doc("Data product publisher name.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   publisher: string;
 
   @added(Versions.v2023_11_15)
   @doc("Product name of data product.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   product: string;
 
   @doc("Major version of data product.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   majorVersion: string;
 
   @doc("List of name or email associated with data product resource deployment.")
-  @visibility("create", "read", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   owners?: string[];
 
   @doc("Flag to enable or disable redundancy for data product.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   redundancy?: ControlState;
 
   @doc("Purview account url for data product to connect to.")
-  @visibility("create", "update", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   @added(Versions.v2023_11_15)
   @removed(Versions.v2024_04_01_preview)
   @renamedFrom(Versions.v2024_04_01_preview, "purviewAccount")
   oldPurviewAccount?: string;
 
   @doc("Purview collection url for data product to connect to.")
-  @visibility("create", "update", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   @added(Versions.v2023_11_15)
   @removed(Versions.v2024_04_01_preview)
   @renamedFrom(Versions.v2024_04_01_preview, "purviewCollection")
@@ -106,118 +106,118 @@ model DataProductProperties {
 
   @added(Versions.v2024_04_01_preview)
   @doc("Purview account url for data product to connect to.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   purviewAccount?: string;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Purview collection url for data product to connect to.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   purviewCollection?: string;
 
   @added(Versions.v2023_11_15)
   @removed(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable private link for data product resource.")
-  @visibility("create", "update", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   privateLinksEnabled?: ControlState;
 
   @added(Versions.v2023_11_15)
   @removed(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable public access of data product resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   publicNetworkAccess?: ControlState;
 
   @doc("Flag to enable customer managed key encryption for data product.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   customerManagedKeyEncryptionEnabled?: ControlState;
 
   @doc("Customer managed encryption key details for data product.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   customerEncryptionKey?: EncryptionKeyDetails;
 
   @added(Versions.v2023_11_15)
   @removed(Versions.v2024_04_01_preview)
   @doc("Network rule set for data product.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   networkacls?: DataProductNetworkAcls;
 
   @doc("Managed resource group configuration.")
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable public access to the ingestion endpoint of data product resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   ingestionPublicNetworkAccess?: ControlState = ControlState.Enabled;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Network rule set for ingestion endpoint of data product.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   ingestionNetworkAcls?: DataProductNetworkAcls;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable public access to the insights or the file access endpoint of data product resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   insightsStoragePublicNetworkAccess?: ControlState = ControlState.Enabled;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Network rule set for insights or the file access endpoint of data product.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   insightsStorageNetworkAcls?: DataProductNetworkAcls;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable public access to the query endpoint of data product resource.")
-  @visibility("create", "update", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   insightsQueryNetworkAccess?: ControlState;
 
   @added(Versions.v2024_04_01_preview)
   @doc("The list of query IPAddress in the format of Public IPv4 IPAddress or CIDR allowed to connect to query/visualization endpoint.")
-  @visibility("create", "update", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   insightsQueryAllowedQueryIpRangeList?: string[];
 
   @added(Versions.v2024_04_01_preview)
   @doc("This field indicates the status of the query IPAddress update operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   insightQueryUpdateStateReason?: string;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Flag to enable or disable copilot access for a data product resource.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   copilotAccess?: ControlState = ControlState.Disabled;
 
   @added(Versions.v2024_04_01_preview)
   @doc("Option to select between dev or prod SKU for query cluster.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   workload: WorkloadType = WorkloadType.Production;
 
   @added(Versions.v2023_11_15)
   @doc("List of available minor versions of the data product resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @removed(Versions.v2024_04_01_preview)
   availableMinorVersions?: string[];
 
   @added(Versions.v2023_11_15)
   @doc("Current configured minor version of the data product resource.")
-  @visibility("read", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   @removed(Versions.v2024_04_01_preview)
   currentMinorVersion?: string;
 
   @added(Versions.v2023_11_15)
   @doc("Documentation link for the data product based on definition file.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @removed(Versions.v2024_04_01_preview)
   documentation?: string;
 
   @doc("Resource links which exposed to the customer to query the data.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   consumptionEndpoints?: ConsumptionEndpointsProperties;
 
   @doc("Key vault url.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keyVaultUrl?: string;
 
   @added(Versions.v2024_04_01_preview)
   @doc("This field provides specific data product version.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentVersion?: string;
 }
 
@@ -236,22 +236,22 @@ enum WorkloadType {
 model ConsumptionEndpointsProperties {
   @added(Versions.v2023_11_15)
   @doc("Ingestion url to upload the data.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @removed(Versions.v2024_04_01_preview)
   ingestionUrl?: string;
 
   @doc("Blob URL of Ingestion endpoint upload the data.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_04_01_preview)
   ingestionBlobUrl?: string;
 
   @doc("Datalake URL of Ingestion endpoint to upload the data.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_04_01_preview)
   ingestionDataLakeUrl?: string;
 
   @doc("Resource Id of ingestion endpoint.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ingestionResourceId?: ResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
@@ -259,11 +259,11 @@ model ConsumptionEndpointsProperties {
   ]>;
 
   @doc("Url to consume file type.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fileAccessUrl?: string;
 
   @doc("Resource Id of file access endpoint.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fileAccessResourceId?: ResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
@@ -271,11 +271,11 @@ model ConsumptionEndpointsProperties {
   ]>;
 
   @doc("Url to consume the processed data.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   queryUrl?: string;
 
   @doc("Resource Id of query endpoint.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   queryResourceId?: ResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
@@ -283,7 +283,7 @@ model ConsumptionEndpointsProperties {
   ]>;
 
   @doc("Copilot web interface URL.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_04_01_preview)
   copilotWebInterfaceUrl?: string;
 }
@@ -344,7 +344,7 @@ model ListRoleAssignments {
   count: int32;
 
   @doc("list of role assignments")
-  @extension("x-ms-identifiers", ["roleAssignmentId"])
+  @extension("x-ms-identifiers", #["roleAssignmentId"])
   roleAssignmentResponse: RoleAssignmentDetail[];
 }
 
@@ -355,9 +355,9 @@ enum DataProductUserRole {
   Reader,
 
   @doc("""
-Field to specify user of type SensitiveReader.
-This user has privileged access to read sensitive data of a data product.
-""")
+    Field to specify user of type SensitiveReader.
+    This user has privileged access to read sensitive data of a data product.
+    """)
   SensitiveReader,
 }
 
@@ -452,9 +452,7 @@ interface DataProducts {
   @armResourceCollectionAction
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "location",
-    }
+    #{ `final-state-via`: "location" }
   )
   getRegionalCapacity(
     ...ApiVersionParameter,

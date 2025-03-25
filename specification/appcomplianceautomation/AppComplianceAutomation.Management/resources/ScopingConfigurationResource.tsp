@@ -21,14 +21,14 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
 @singleton("default")
 @parentResource(ReportResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   ScopingConfigurationProperties
 )
 model ScopingConfigurationResource extends Foundations.ProxyResource {
   @key("scopingConfiguration")
   @segment("scopingConfigurations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @doc("The scoping configuration of the specific report.")
   @pattern("^[a-zA-Z0-9_]*$")

@@ -20,48 +20,48 @@ model DataLakeHouseResources is TrackedResource<StorageProperties> {
 @removed(Versions.v2023_11_15)
 model StorageProperties {
   @doc("Storage properties")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Managed Resource Group configuration.")
   managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @removed(Versions.v2023_03_31_preview)
   @doc("unique Identifier Name")
   uniqueIdentifierName: string;
 
   @doc("Common Storage Account properties.")
   @madeOptional(Versions.v2023_03_31_preview)
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   commonStorageAccountProperties?: CommonStorageAccountProperties;
 
   @doc("Bronze Storage Account properties.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   bronzeStorageAccountProperties?: BronzeStorageAccountProperties;
 
   @doc("Azure DataExplorer Cluster properties.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   azureDataExplorerProperties: AzureDataExplorerProperties;
 }
 
 @doc("Common Storage Account Properties.")
 @removed(Versions.v2023_11_15)
 model CommonStorageAccountProperties {
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The SKU of the storage account.")
   @removed(Versions.v2023_11_15)
   @added(Versions.v2023_03_31_preview)
   sku: Sku;
 
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @doc("Allow or disallow public network access to Storage Account.")
   publicNetworkAccess?: string;
 
   @doc("Network rule set")
   networkacls?: NetworkAcls;
 
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @doc("Blob Services")
   blobServices?: BlobServices;
 
@@ -104,21 +104,21 @@ model BronzeStorageAccountProperties {
 @doc("ADx Properties")
 @removed(Versions.v2023_11_15)
 model AzureDataExplorerProperties {
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @doc("Virtual Network Configuration")
   virtualNetworkConfiguration?: VirtualNetworkConfiguration;
 
   @doc("Kusto Cluster Principal Assignments")
   kustoClusterPrincipalAssignments: KustoClusterPrincipalAssignments;
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The ADX SKU details")
   @added(Versions.v2023_03_31_preview)
   @removed(Versions.v2023_11_15)
   adxSku: AdxSku;
 
   @doc("An array represents the availability zones of the cluster.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @added(Versions.v2023_03_31_preview)
   @removed(Versions.v2023_11_15)
   zones?: string[];
@@ -175,7 +175,7 @@ enum PrincipalType {
 @doc("ADx Role assignments")
 @removed(Versions.v2023_11_15)
 model KustoClusterPrincipalAssignments {
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @doc("system Identity Name")
   systemIdentityName?: string;
 
@@ -249,11 +249,11 @@ model NetworkAcls {
   virtualNetworkRule: VirtualNetworkRule[];
 
   @doc("IP rule with specific IP or IP range in CIDR format.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   ipRules: IPRules[];
 
   @doc("Resource Access Rules.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   resourceAccessRules: ResourceAccessRules[];
 
   @doc("Default Action")

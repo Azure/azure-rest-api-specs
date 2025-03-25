@@ -30,7 +30,7 @@ Requirements for defining an ARM Service:
   - armProviderNamespace
 */
 @armProviderNamespace
-@service({
+@service(#{
   title: "Azure Image Testing For Linux Service",
   version: "2023-08-01-preview",
 })
@@ -42,7 +42,7 @@ namespace Microsoft.AzureImageTestingForLinux;
 @doc("General resource properties.")
 model ResourceProperties {
   @doc("Resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @lroStatus
   provisioningState?: ProvisioningState;
 }

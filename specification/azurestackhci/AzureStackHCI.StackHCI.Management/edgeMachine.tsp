@@ -59,7 +59,7 @@ interface EdgeMachines {
   listBySubscription is ArmListBySubscription<EdgeMachine>;
 
   @doc("Update an edgeMachine")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<EdgeMachine, EdgeMachinePatch>;
 
   /**
@@ -79,12 +79,16 @@ interface EdgeMachines {
 @doc("Properties for edge machine.")
 model EdgeMachineProperties {
   @doc("Edge Machine type.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   kind?: EdgeMachineKind;
 
   @doc("The provisioning state of a resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @doc("Unique, immutable resource id.")
+  @visibility(Lifecycle.Read)
+  cloudId?: string;
 
   @doc("Resource group where the onboarding arc machine instance created.")
   onboardingMachineResourceGroupId?: Azure.Core.armResourceIdentifier;
@@ -102,67 +106,67 @@ model EdgeMachineProperties {
   siteDetails?: SiteDetails;
 
   @doc("A machine can only be assigned to single device pool")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   devicePoolResourceId?: string;
 
   @doc("OS configuration status details ")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   machineState?: EdgeMachineState;
 
   @doc("machine connectivity status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectivityStatus?: EdgeMachineConnectivityStatus;
 
   @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
-  @OpenAPI.extension("x-ms-identifiers", ["labelName"])
+  @Azure.ResourceManager.identifiers(#["labelName"])
   labels?: Labels[];
 
   @doc("Tracks the ID of the consuming resource, marking the machine as in-use.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   claimedBy?: string;
 
   @doc("Reported properties for edge machine.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: ReportedProperties;
 
   @doc("operation status details for edge machine.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   operationDetails?: OperationDetail[];
 
   @doc("Last time data updated to service.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 }
 
 @doc("operation detail.")
 model OperationDetail {
   @doc("operation name.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("operation id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("operation type.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   @doc("operation resource id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceId?: armResourceIdentifier;
 
   @doc("operation description.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @doc("operation status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("error details.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
@@ -188,7 +192,7 @@ model EdgeMachineValidateResponse {
   /**
    * edge device validation status
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 }
 
@@ -212,7 +216,7 @@ model SiteDetails {
   siteResourceId: Azure.Core.armResourceIdentifier;
 
   @doc("Edge Device configuration received from site common configuration.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   deviceConfiguration?: DeviceConfiguration;
 }
 
@@ -231,7 +235,7 @@ model EdgeMachinePatchProperties {
   siteDetails?: SiteDetails;
 
   @doc("selection labels that can be used by CMP to decide which all machines can be part of this device pool")
-  @OpenAPI.extension("x-ms-identifiers", ["labelName"])
+  @Azure.ResourceManager.identifiers(#["labelName"])
   labels?: Labels[];
 }
 
@@ -271,15 +275,18 @@ union EdgeMachineState {
 
   @doc("EdgeMachine failed state and only option to recover is to re-provisioning machine")
   Failed: "Failed",
+
+  @doc("Preparing EdgeMachine")
+  Preparing: "Preparing",
 }
 
 @doc("Order Item Details")
 model OrderDetails {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Details for voucher ownership")
   deviceIdentity?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("TPM endorsement key")
   tpmEndorsementKey?: string;
 }
@@ -319,44 +326,44 @@ union ProvisioningState {
 @doc("Reported properties for edge machine.")
 model ReportedProperties {
   @doc("Last time data reported.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdated?: utcDateTime;
 
   @doc("Network details for edge machine.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkProfile?: NetworkProfile;
 
   @doc("OS Properties for edge machine.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osProfile?: OsProfile;
 
   @doc("Hardware related information for edge machine.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hardwareProfile?: HardwareProfile;
 
   @doc("Storage related information for edge machine.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageProfile?: StorageProfile;
 
   @doc("Solution builder extension (SBE) deployment package information.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sbeDeploymentPackageInfo?: SbeDeploymentPackageInfo;
 
   @doc("Extension details for edge machine.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionProfile?: ExtensionProfile;
 }
 
 @doc("NetworkProfile of edge machine.")
 model NetworkProfile {
   @doc("List of NIC Details of edge machine.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["adapterName"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["adapterName"])
   nicDetails?: NicDetail[];
 
   @doc("List of switch Details of edge machine.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["switchName"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["switchName"])
   switchDetails?: SwitchDetail[];
 }
 
@@ -365,98 +372,97 @@ model NicDetail {
   /**
    * Adapter Name of NIC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   adapterName?: string;
 
   /**
    * Interface Description of NIC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   interfaceDescription?: string;
 
   /**
    * Component Id of NIC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   componentId?: string;
 
   /**
    * Driver Version of NIC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   driverVersion?: string;
 
   /**
    * Subnet Mask of NIC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ip4Address?: string;
 
   /**
    * Subnet Mask of NIC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnetMask?: string;
 
   /**
    * Default Gateway of NIC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   defaultGateway?: string;
 
   /**
    * DNS Servers for NIC
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
   dnsServers?: string[];
 
   /**
    * Default Isolation of Management NIC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   defaultIsolationId?: string;
 
   /**
    * MAC address information of NIC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   macAddress?: string;
 
   /**
    * The slot attached to the NIC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   slot?: string;
 
   /**
    * The switch attached to the NIC, if any.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   switchName?: string;
 
   /**
    * The type of NIC, physical, virtual, management.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nicType?: string;
 
   /**
    * The VLAN ID of the physical NIC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vlanId?: string;
 
   /**
    * The status of NIC, up, disconnected.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nicStatus?: string;
 
   /**
    * Describes the RDMA capability of the network adapter.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rdmaCapability?: RdmaCapability = RdmaCapability.Disabled;
 }
 
@@ -465,20 +471,20 @@ model SwitchDetail {
   /**
    * The name of the switch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   switchName?: string;
 
   /**
    * The type of the switch. e.g. external, internal.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   switchType?: string;
 
   /**
    * This represents extensions installed on virtualSwitch.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["extensionName"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["extensionName"])
   extensions?: SwitchExtension[];
 }
 
@@ -489,19 +495,19 @@ model SwitchExtension {
   /**
    * Unique identifier for virtualSwitch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   switchId?: string;
 
   /**
    * This will show extension name for virtualSwitch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionName?: string;
 
   /**
    * This represents whether extension is enabled on virtualSwitch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionEnabled?: boolean;
 }
 
@@ -512,31 +518,31 @@ model OsProfile {
   /**
    * The boot type of the device. e.g. UEFI, Legacy etc
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   bootType?: string;
 
   /**
    * Version of assembly present on device
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   assemblyVersion?: string;
 
   /**
    * OS type (“windows", “linux”)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: string;
 
   /**
    * OS SKU (e.g., “ Microsoft Azure Linux ROE“, “Azure Stack HCI", "Microsoft Azure Linux 3.0")
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osSku?: string;
 
   /**
    * OS Version
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osVersion?: string;
 }
 
@@ -564,50 +570,50 @@ model HardwareProfile {
   /**
    * Number of cpu cores in the machine
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cpuCores?: int64;
 
   /**
    * Number of cpu sockets in the machine
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cpuSockets?: int64;
 
   /**
    * Memory capacity of the machine
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memoryCapacityInGb?: int64;
 
   /**
    * Model info of the machine
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `model`?: string;
 
   /**
    * manufacturer info of the machine
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   manufacturer?: string;
 
   /**
    * Serial number of the machine
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serialNumber?: string;
 
   /**
    * Process type of the machine
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   processorType?: string;
 }
 
 @doc("StorageProfile of edge machine.")
 model StorageProfile {
   @doc("Number of storage disks in the device with $CanPool as true.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
 }
 
@@ -618,19 +624,19 @@ model SbeDeploymentPackageInfo {
   /**
    * SBE deployment validation code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * A detailed message that explains the SBE package validation result.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * This represents discovered update results for matching updates and store it as SBE manifest.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sbeManifest?: string;
 }
 
@@ -641,8 +647,8 @@ model ExtensionProfile {
   /**
    * List of Arc extensions installed on edge device.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["extensionName"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["extensionName"])
   extensions?: Extension[];
 }
 
@@ -653,44 +659,44 @@ model Extension {
   /**
    * Arc extension name installed on edge device.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionName?: string;
 
   /**
    * Arc extension state from arc machine extension.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: ArcExtensionState;
 
   /**
    * Error details while installing Arc extension.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   errorDetails?: ErrorDetailModel[];
 
   /**
    * Exception details while installing Arc extension.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exception?: string;
 
   /**
    * Arc Extension Azure resource id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   extensionResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Extension version installed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   typeHandlerVersion?: string;
 
   /**
    * Extension managed by user or Azure.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedBy?: ExtensionManagedBy;
 }
 
@@ -758,7 +764,7 @@ model ErrorDetailModel {
   /**
    * Exception details while installing extension.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   exception?: string;
 }
 

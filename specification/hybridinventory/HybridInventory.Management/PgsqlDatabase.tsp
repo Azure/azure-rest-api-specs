@@ -14,7 +14,7 @@ namespace Microsoft.HybridInventory;
 /**
  * The PGSQLDatabase resource definition.
  */
-@parentResource(PgsqlInstance)
+@parentResource(PgsqlSite)
 model PgsqlDatabase
   is Azure.ResourceManager.ProxyResource<PgsqlDatabaseProperties, false> {
   ...ResourceNameParameter<
@@ -40,12 +40,12 @@ interface PgsqlDatabases {
   /**
    * Patch the PGSQLDatabases resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     PgsqlDatabase,
     PgsqlDatabaseResourcePatchProperties
   >;
-  // @parameterVisibility
+  // @patch(#{ implicitOptionality: false })
   // update is ArmCustomPatchAsync<
   //   PgsqlDatabase,
   //   PatchModel = PgsqlDatabaseResourcePatch

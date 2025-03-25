@@ -9,14 +9,14 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Rack resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkRack extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Rack.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkRackName")
   @segment("networkRacks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkRack properties */
@@ -32,7 +32,7 @@ interface NetworkRacks {
   create is ArmResourceCreateOrReplaceAsync<NetworkRack>;
 
   @doc("Update certain properties of the Network Rack resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkRack, NetworkRackPatch>;
 
   @doc("Delete Network Rack resource.")

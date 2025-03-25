@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
+@service(#{
   title: "Microsoft.ManagedStorageClass",
   version: "2023-02-01-preview",
 })
@@ -107,41 +107,41 @@ enum VolumeExpansion {
 @doc("The status of the ManagedStorageClass")
 model ManagedStorageClassStatus {
   @doc("The status of the ManagedStorageClass")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scProvisioningState?: SCProvisioningState;
 }
 
 @doc("The properties of ManagedStorageClass")
 model ManagedStorageClassProperties {
   @doc("[Native] Volume can be expanded or not")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allowVolumeExpansion?: VolumeExpansion;
 
   @doc("[Native] Additional mount options")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   mountOptions?: string[];
 
   @doc("[Native] Provisioner name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioner?: string;
 
   @doc("[Native] Binding mode of volumes: Immediate, WaitForFirstConsumer")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   volumeBindingMode?: string;
 
   @doc("The access mode: [ReadWriteOnce, ReadWriteMany] or [ReadWriteOnce]")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessMode?: string[];
 
   @doc("Allow single data node failure")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dataResilience?: DataResilienceTier;
 
   @doc("Failover speed: NA, Slow, Fast")
   failoverSpeed?: FailoverTier;
 
   @doc("Limitations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   limitations?: string[];
 
   @doc("Performance tier")
@@ -152,15 +152,15 @@ model ManagedStorageClassProperties {
 
   @doc("Properties of the ManagedStorageClass")
   // prevent generation of buggy StorageClassPropertiesUpdate model
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   storageClassProperties: StorageClassProperties;
 
   @doc("Actual Status of the ManagedStorageClass")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: ManagedStorageClassStatus;
 
   @doc("Resource provision state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -234,7 +234,7 @@ model ManagedStorageClassResource
   @key("managedstorageclassName")
   @segment("managedstorageclass")
   @path
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(64)
   name: string;
 

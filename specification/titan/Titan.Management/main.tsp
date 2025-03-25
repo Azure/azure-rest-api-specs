@@ -13,9 +13,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.Titan Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.Titan management service",
-})
+@service(#{ title: "Microsoft.Titan management service" })
 @versioned(Microsoft.Titan.Versions)
 namespace Microsoft.Titan;
 

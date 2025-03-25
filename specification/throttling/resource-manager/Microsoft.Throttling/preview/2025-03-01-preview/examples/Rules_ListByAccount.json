@@ -1,0 +1,43 @@
+{
+  "operationId": "Rules_ListByAccount",
+  "title": "Rules_ListByAccount",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgthrottling",
+    "throttlingAccountName": "contoso"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgthrottling/providers/Microsoft.Throttling/throttlingAccounts/contoso/rules/rule1",
+            "type": "Microsoft.Throttling/throttlingAccounts/rules",
+            "name": "rule1",
+            "location": "westus3",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "windowDuration": "PT5M",
+              "minEnforcementDuration": "PT1M",
+              "threshold": 1000,
+              "depthMultiplier": -1
+            },
+            "tags": {
+              "key1": "value1"
+            },
+            "systemData": {
+              "createdBy": "example@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2022-05-05T19:48:34.573Z",
+              "lastModifiedBy": "example@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-05-05T19:48:34.573Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgthrottling/providers/Microsoft.Throttling/throttlingAccounts/contoso/rules/"
+      }
+    }
+  }
+}

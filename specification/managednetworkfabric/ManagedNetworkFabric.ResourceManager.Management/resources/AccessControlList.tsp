@@ -9,7 +9,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Access Control List resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model AccessControlList
   extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Access Control List.")
@@ -17,7 +17,7 @@ model AccessControlList
   @path
   @key("accessControlListName")
   @segment("accessControlLists")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The Access ControlList properties */
@@ -33,7 +33,7 @@ interface AccessControlLists {
   create is ArmResourceCreateOrReplaceAsync<AccessControlList>;
 
   @doc("API to update certain properties of the Access Control List resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<AccessControlList, AccessControlListPatch>;
 
   @doc("Implements Access Control List DELETE method.")

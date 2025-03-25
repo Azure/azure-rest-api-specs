@@ -27,7 +27,7 @@ interface BareMetalConnections {
   /**
    * Patch the BareMetalConnection. Only the tags may be updated.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<BareMetalConnection, BareMetalConnectionUpdate>;
 
   /**

@@ -15,9 +15,7 @@ using Azure.ResourceManager;
 
 @doc("Microsoft.MessagingConnectors Resource Provider management API.")
 @armProviderNamespace
-@service({
-  title: "Microsoft.MessagingConnectors management service",
-})
+@service(#{ title: "Microsoft.MessagingConnectors management service" })
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 

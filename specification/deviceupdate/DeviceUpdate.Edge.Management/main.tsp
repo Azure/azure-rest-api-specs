@@ -15,6 +15,8 @@ import "./Agent.tsp";
 import "./Deployment.tsp";
 import "./DeviceClass.tsp";
 import "./Update.tsp";
+import "./Group.tsp";
+import "./DeviceClassSubgroup.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -27,9 +29,7 @@ using Azure.ResourceManager;
  * Microsoft Device Update resource provider.
  */
 @armProviderNamespace
-@service({
-  title: "DeviceUpdate",
-})
+@service(#{ title: "DeviceUpdate" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DeviceUpdate;
@@ -58,4 +58,12 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_04_01_preview: "2025-04-01-preview",
+
+  /**
+   * The 2025-05-01-preview API version.
+   */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2025_05_01_preview: "2025-05-01-preview",
 }

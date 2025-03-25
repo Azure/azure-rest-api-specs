@@ -19,7 +19,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @singleton
 model Assistant
   is ExtensionResource<{
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     provisioningState?: ResourceProvisioningState;
   }> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "There is no defined pattern. The only value can be 'assistant'."

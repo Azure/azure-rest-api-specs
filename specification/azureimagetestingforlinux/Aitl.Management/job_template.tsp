@@ -16,7 +16,7 @@ model JobTemplate is TrackedResource<JobTemplateResourceProperties> {
   @pattern("^[a-zA-Z0-9-_]{3,60}$")
   @key("jobTemplateName")
   @segment("jobTemplates")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

@@ -23,7 +23,7 @@ model PacketCapture is ProxyResource<PacketCapturePropertiesFormat> {
   @path
   @key("packetCaptureName")
   @segment("packetCaptures")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 

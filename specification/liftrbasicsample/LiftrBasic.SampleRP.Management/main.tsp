@@ -14,9 +14,7 @@ using LiftrBase;
 
 /* Liftrbasic.Samplerp Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Liftrbasic.Samplerp management service",
-})
+@service(#{ title: "Liftrbasic.Samplerp management service" })
 @versioned(Liftrbasic.Samplerp.Versions)
 namespace Liftrbasic.Samplerp;
 

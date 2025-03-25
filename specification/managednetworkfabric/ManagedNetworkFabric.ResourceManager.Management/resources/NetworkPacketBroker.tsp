@@ -9,7 +9,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkPacketBroker resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkPacketBroker
   extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Packet Broker.")
@@ -17,7 +17,7 @@ model NetworkPacketBroker
   @path
   @key("networkPacketBrokerName")
   @segment("networkPacketBrokers")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkPacketBroker properties */
@@ -33,7 +33,7 @@ interface NetworkPacketBrokers {
   create is ArmResourceCreateOrReplaceAsync<NetworkPacketBroker>;
 
   @doc("API to update certain properties of the Network Packet Broker resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkPacketBroker, NetworkPacketBrokerPatch>;
 
   @doc("Deletes Network Packet Broker.")

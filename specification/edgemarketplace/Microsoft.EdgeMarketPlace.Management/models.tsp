@@ -75,7 +75,7 @@ union OfferLaunchType {
 @doc("Publisher properties")
 model PublisherProperties {
   @doc("The resource provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -91,11 +91,11 @@ model OfferProperties {
   offerContent: OfferContent;
 
   @doc("The resource provisioning state")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("The marketplace skus")
-  @extension("x-ms-identifiers", ["marketplaceSkuId"])
+  @Azure.ResourceManager.identifiers(#["marketplaceSkuId"])
   marketplaceSkus?: MarketplaceSku[];
 }
 
@@ -215,7 +215,7 @@ model MarketplaceSku {
   @doc("The operating system supported")
   operatingSystem?: SkuOperatingSystem;
 
-  @extension("x-ms-identifiers", ["name"])
+  @extension("x-ms-identifiers", #["name"])
   @doc("The marketplace sku version")
   marketplaceSkuVersions?: MarketplaceSkuVersion[];
 }

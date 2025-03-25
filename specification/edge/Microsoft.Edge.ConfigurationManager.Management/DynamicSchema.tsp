@@ -21,15 +21,15 @@ namespace Microsoft.Edge;
 @doc("DynamicSchema Properties")
 model DynamicSchemaProperties {
   @doc("Type of configuration")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationType?: ConfigurationType;
 
   @doc("Type of configuration model")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationModel?: ConfigurationModel;
 
   @doc("Provisioning state of resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

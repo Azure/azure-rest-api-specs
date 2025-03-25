@@ -19,7 +19,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2_preview: "2024-08-28-preview",
+  v2_preview: "2025-02-11-preview",
 }
 
 /**
@@ -39,7 +39,7 @@ model FileSystemResourceProperties {
   /**
    * Provisioning State of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -68,6 +68,21 @@ model FileSystemResourceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is the correct name"
   privateIPs?: string[];
+
+  /**
+   * Smart Connect FQDN of the resource
+   */
+  smartConnectFqdn?: string;
+
+  /**
+   * DellReferenceNumber of the resource
+   */
+  dellReferenceNumber: string;
+
+  /**
+   * EncryptionProperties of the resource
+   */
+  encryption: LiftrBase.EncryptionProperties;
 }
 
 /**
@@ -77,25 +92,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -149,6 +164,11 @@ model FileSystemResourceUpdateProperties {
    * Initial capacity for Dell Filesystem in bytes
    */
   initialCapacity?: int64;
+
+  /**
+   * Encryption Details of the resource
+   */
+  encryption?: LiftrBase.EncryptionUpdateProperties;
 }
 
 /**

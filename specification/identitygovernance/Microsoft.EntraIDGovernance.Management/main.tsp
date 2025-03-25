@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.EntraidGovernance Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.EntraidGovernance management service",
-})
+@service(#{ title: "Microsoft.EntraidGovernance management service" })
 @versioned(Microsoft.EntraidGovernance.Versions)
 namespace Microsoft.EntraidGovernance;
 

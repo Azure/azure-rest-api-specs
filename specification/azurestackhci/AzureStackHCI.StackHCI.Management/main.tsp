@@ -16,9 +16,7 @@ using TypeSpec.Versioning;
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
 @doc("Azure Stack HCI service")
 @armProviderNamespace
-@service({
-  title: "Microsoft.AzureStackHCI",
-})
+@service(#{ title: "Microsoft.AzureStackHCI" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AzureStackHCI;

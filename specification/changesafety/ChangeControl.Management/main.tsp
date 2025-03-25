@@ -15,9 +15,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.ChangeSafety Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "Microsoft.ChangeSafety management service",
-})
+@service(#{ title: "Microsoft.ChangeSafety management service" })
 @versioned(Microsoft.ChangeSafety.Versions)
 namespace Microsoft.ChangeSafety;
 

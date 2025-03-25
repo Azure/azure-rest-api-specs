@@ -12,7 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
+@service(#{
   title: "Hardware Resource Provider",
   version: "2023-07-12-preview",
 })
@@ -36,15 +36,15 @@ model OrderProperties {
   customerOrder?: CustomerOrder;
 
   @doc("Type of action Pre-Fulfill/Fulfill")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   action?: string;
 
   @doc("Order status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: OrderStatus;
 
   @doc("Order line details")
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   orderLines: OrderLine[];
 
   @doc("Currency for the order")
@@ -59,7 +59,7 @@ model OrderProperties {
   @doc("Reservation for order if applicable")
   reservationId?: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -79,11 +79,11 @@ model OrderLine {
   id: int64;
 
   @doc("Order line status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: OrderLineStatus;
 
   @doc("Order line date")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdDateTime?: utcDateTime;
 
   @doc("Order line quantity")
@@ -111,11 +111,11 @@ model OrderLine {
   cancelledBy?: string;
 
   @doc("Estimated Deliver Date")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   estimatedDeliveryDate?: plainDate;
 
   @doc("Estimated Shipped Date")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   estimatedShippedDate?: plainDate;
 }
 
@@ -125,15 +125,15 @@ model OrderLineQuantity {
   ordered: int64;
 
   @doc("Order lineId Confirmed Quantity")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   confirmed?: int64;
 
   @doc("Order lineId Shipped Quantity")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   shipped?: int64;
 
   @doc("Order lineId Returned Quantity")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   returned?: int64;
 }
 
@@ -158,7 +158,7 @@ model Price {
   taxes?: Tax[];
 
   @doc("Fees for this line")
-  @OpenAPI.extension("x-ms-identifiers", ["type"])
+  @OpenAPI.extension("x-ms-identifiers", #["type"])
   fees?: Fee[];
 }
 

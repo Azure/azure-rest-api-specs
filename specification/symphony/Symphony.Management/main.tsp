@@ -24,9 +24,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft ToolchainOrchestrator",
-})
+@service(#{ title: "Microsoft ToolchainOrchestrator" })
 @versioned(Versions)
 @doc("Microsoft ToolchainOrchestrator Resource Provider.")
 @Azure.ResourceManager.armCommonTypesVersion("v5")

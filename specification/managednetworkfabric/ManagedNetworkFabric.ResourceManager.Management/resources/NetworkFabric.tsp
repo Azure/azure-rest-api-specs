@@ -11,14 +11,14 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Fabric resource definition.")
 @Azure.ResourceManager.Private.armResourceInternal(NetworkFabricProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkFabric extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Fabric.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkFabricName")
   @segment("networkFabrics")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkFabric Properties */
@@ -40,7 +40,7 @@ interface NetworkFabrics {
   create is ArmResourceCreateOrReplaceAsync<NetworkFabric>;
 
   @doc("Update certain properties of the Network Fabric resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkFabric, NetworkFabricPatch>;
 
   @doc("Delete Network Fabric resource.")

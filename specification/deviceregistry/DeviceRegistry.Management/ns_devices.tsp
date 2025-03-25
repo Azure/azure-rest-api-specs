@@ -32,7 +32,7 @@ model NamespaceDevice is TrackedResource<NamespaceDeviceProperties> {
   // etag not included in TrackedResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Resource Tag.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   etag?: string;
 }
 

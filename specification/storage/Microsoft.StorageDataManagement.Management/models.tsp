@@ -16,14 +16,14 @@ namespace Microsoft.Storage;
 // Connector Properties
 @doc("Details of the Storage Connector.")
 model ConnectorProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("System-generated identifier for the Storage Connector. Not a valid input parameter when creating.")
   uniqueId?: string;
 
-  @doc("State - Enabled or Disabled. Whether or not the Storage Connector should start as enabled (default: Enabled) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)")
-  state?: State = State.Enabled;
+  @doc("State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active) (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.)")
+  state?: State = State.Active;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("System-generated creation time for the Storage Connector. Not a valid input parameter when creating.")
   creationTime?: string;
 
@@ -31,18 +31,18 @@ model ConnectorProperties {
   @maxLength(250)
   description?: string;
 
-  @visibility("create")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("Test connection to backing data source before creating the storage connector.")
   testConnection?: boolean = false;
 
-  @visibility("create")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The source of the backing data source.")
   dataSourceType: DataSourceType;
 
   @doc("Information about how to communicate with and authenticate to the backing data store.")
   source: Source;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -57,16 +57,18 @@ model Source {
 
 @doc("The properties of the backing data store.")
 model BucketSource extends Source {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type: SourceType.Bucket;
 
   @doc("Details for how to connect to the backing data store.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   connection: Connection;
 
   @doc("Details for how to authenticate to the backing data store.")
   authProperties: AuthProperties;
 
   @doc("The host to use when computing the signature for requests to the backing data store. If not provided, defaults to what is provided in the endpoint for the connection.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   hostOverride?: string;
 }
 
@@ -74,13 +76,13 @@ model BucketSource extends Source {
 @discriminator("type")
 @doc("Details related to the type of bucket connection")
 model Connection {
-  @doc("Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object.")
+  @doc("Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created.")
   type: ConnectionType;
 }
 
 @doc("Details related to endpoint based bucket connection")
 model EndpointConnection extends Connection {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type: ConnectionType.Endpoint;
 
   @doc("Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname .")
@@ -95,12 +97,13 @@ model EndpointConnection extends Connection {
 @discriminator("type")
 @doc("The auth properties for bucket connection.")
 model AuthProperties {
+  @doc("The auth type for bucket connection.")
   type: AuthType;
 }
 
 @doc("The access key properties for bucket connection.")
 model AccessKeyProperties extends AuthProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type: AuthType.AccessKey;
 
   @doc("Access key ID for the backing data store.")

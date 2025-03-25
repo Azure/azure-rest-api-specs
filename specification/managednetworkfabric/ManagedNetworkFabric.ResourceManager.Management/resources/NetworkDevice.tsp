@@ -10,14 +10,14 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Device resource definition.")
 @Azure.ResourceManager.Private.armResourceInternal(NetworkDeviceProperties)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkDevice extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Device.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("networkDeviceName")
   @segment("networkDevices")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The NetworkDevice properties */
@@ -34,7 +34,7 @@ interface NetworkDevices {
   create is ArmResourceCreateOrReplaceAsync<NetworkDevice>;
 
   @doc("Update certain properties of the Network Device resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<NetworkDevice, NetworkDevicePatchParameters>;
 
   @doc("Delete the Network Device resource.")

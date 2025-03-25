@@ -34,18 +34,18 @@ interface Agents {
   /**
    * Puts the Agents resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Agent>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Agent>;
 
   /**
    * Patch the Agents resource.
    */
-  @parameterVisibility
-  update is ArmCustomPatchAsync<Agent, PatchModel = AgentResourcePatch>;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<Agent, PatchModel = AgentResourcePatch>;
 
   /**
    * Deletes the Agents resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Agent>;
+  delete is ArmResourceDeleteSync<Agent>;
 
   /**
    * Lists the Agents resource in PGSQLSites.

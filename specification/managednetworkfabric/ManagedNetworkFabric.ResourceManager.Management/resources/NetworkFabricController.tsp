@@ -10,7 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Fabric Controller resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkFabricController
   extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Fabric Controller.")
@@ -18,7 +18,7 @@ model NetworkFabricController
   @path
   @key("networkFabricControllerName")
   @segment("networkFabricControllers")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The NetworkFabricController Properties")
@@ -34,7 +34,7 @@ interface NetworkFabricControllers {
   create is ArmResourceCreateOrReplaceAsync<NetworkFabricController>;
 
   @doc("Updates are currently not supported for the Network Fabric Controller resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     NetworkFabricController,
     NetworkFabricControllerPatch

@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./UpdateAccount.tsp";
 
@@ -11,6 +12,7 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.DeviceUpdate;
 
@@ -22,6 +24,13 @@ model Update is Azure.ResourceManager.TrackedResource<UpdateProperties> {
     SegmentName = "updates",
     NamePattern = "^[a-zA-Z0-9-._]+$"
   >;
+
+  // Extended location is not included in TrackedResource yet
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Edge location of the Update.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_04_01_preview)
+  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations
@@ -39,7 +48,7 @@ interface Updates {
   /**
    * Update update tags.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   modify is ArmCustomPatchSync<Update, TagUpdate>;
 
   /**

@@ -9,7 +9,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The IP Extended Community resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model IpExtendedCommunity
   extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the IP Extended Community.")
@@ -17,7 +17,7 @@ model IpExtendedCommunity
   @path
   @key("ipExtendedCommunityName")
   @segment("ipExtendedCommunities")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The IpExtendedCommunity properties */
@@ -33,7 +33,7 @@ interface IpExtendedCommunities {
   create is ArmResourceCreateOrReplaceAsync<IpExtendedCommunity>;
 
   @doc("API to update certain properties of the IP Extended Community resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<IpExtendedCommunity, IpExtendedCommunityPatch>;
 
   @doc("Implements IP Extended Community DELETE method.")

@@ -27,7 +27,7 @@ interface PeeringSettings {
   /**
    * Patch the PeeringSetting.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<PeeringSetting, PeeringSettingUpdate>;
 
   /**

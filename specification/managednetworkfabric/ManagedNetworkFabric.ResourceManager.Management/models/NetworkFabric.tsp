@@ -9,7 +9,7 @@ model NetworkFabricProperties {
   ...AnnotationResource;
 
   @doc("Supported Network Fabric SKU.Example: Compute / Aggregate racks. Once the user chooses a particular SKU, only supported racks can be added to the Network Fabric. The SKU determines whether it is a single / multi rack Network Fabric.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   networkFabricSku: string;
 
@@ -18,7 +18,7 @@ model NetworkFabricProperties {
   fabricVersion?: string;
 
   @doc("Array of router IDs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   routerIds?: string[];
 
   @doc("Bring your own storage account configurations for Network Fabric.")
@@ -26,14 +26,14 @@ model NetworkFabricProperties {
   storageAccountConfiguration?: StorageAccountConfiguration;
 
   @doc("Network Fabric Lock details")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minItems(1)
   fabricLocks?: FabricLockProperties[];
 
   @doc("Azure resource ID for the NetworkFabricController the NetworkFabric belongs.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   networkFabricControllerId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabricControllers";
@@ -71,15 +71,15 @@ model NetworkFabricProperties {
   managementNetworkConfiguration: ManagementNetworkConfigurationProperties;
 
   @doc("List of NetworkRack resource IDs under the Network Fabric. The number of racks allowed depends on the Network Fabric SKU.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   racks?: string[];
 
   @doc("List of L2 Isolation Domain resource IDs under the Network Fabric.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   l2IsolationDomains?: string[];
 
   @doc("List of L3 Isolation Domain resource IDs under the Network Fabric.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   l3IsolationDomains?: string[];
 
   @doc("Hardware alert threshold percentage. Possible values are from 20 to 100.")
@@ -97,9 +97,9 @@ model NetworkFabricProperties {
   ]>[];
 
   @doc("Feature flag status information")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @minItems(1)
   featureFlags?: FeatureFlagProperties[];
 
@@ -123,24 +123,24 @@ model NetworkFabricProperties {
 
   @doc("Active commit batch identifiers")
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activeCommitBatches?: string[];
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of NFC provisioning.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -178,7 +178,7 @@ model TerminalServerConfiguration {
   secondaryIpv6Prefix?: string;
 
   @doc("ARM Resource ID used for the NetworkDevice.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkDeviceId?: string;
 }
 
@@ -192,7 +192,7 @@ model VpnConfigurationProperties {
   ]>;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 
   @doc("Peering option list.")
@@ -587,7 +587,7 @@ model UniqueRouteDistinguisherProperties {
 
   @doc("List of Unique Route Distinguisher addresses.")
   @added(Versions.v2024_06_15_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueRds?: string[];
 
   @doc("NNI derived unique Route Distinguisher state. Default is Disabled.")

@@ -10,7 +10,7 @@ model IpPrefixProperties {
 
   @added(Versions.v2024_06_15_preview)
   @doc("ARM Resource ID of the Network Fabric.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkFabricId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkFabrics";
@@ -18,24 +18,24 @@ model IpPrefixProperties {
   ]>;
 
   @doc("The list of IP Prefix Rules.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   ipPrefixRules: IpPrefixRule[];
 
   @doc("Details of the last operation performed on the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
   @doc("Configuration state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Administrative state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 }
 
@@ -56,7 +56,6 @@ model IpPrefixRule {
   condition?: Condition;
 
   @doc("SubnetMaskLength gives the minimum NetworkPrefix length to be matched. Possible values for IPv4 are 1 - 32 . Possible values of IPv6 are 1 - 128.")
-  @OpenAPI.extension("x-ms-identifiers", [])
   subnetMaskLength?: string;
 }
 
@@ -73,7 +72,7 @@ model IpPrefixPatchProperties {
   ...AnnotationResource;
 
   @doc("The list of IP Prefix Rules.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   ipPrefixRules?: IpPrefixRule[];
 }
 

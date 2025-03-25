@@ -26,7 +26,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<{}> {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge Solution type to support polymorphic resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: EdgeSolutionType;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -41,7 +41,7 @@ interface Clusters {
   create is ArmResourceCreateOrReplaceSync<Cluster>;
 
   @doc("Update an HCI cluster.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Cluster, ClusterPatch>;
 
   @doc("Delete an HCI cluster.")
@@ -373,7 +373,7 @@ model RawCertificateData {
 @doc("Cluster Identity details.")
 model ClusterIdentityResponse {
   @doc("Cluster identity properties.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   properties?: ClusterIdentityResponseProperties;
 }
 
@@ -419,15 +419,15 @@ model AzureLinuxCluster extends Cluster {
 @doc("Cluster properties.")
 model ClusterProperties {
   @doc("Provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("Status of the cluster agent.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: Status;
 
   @doc("Overall connectivity status for the cluster resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectivityStatus?: ConnectivityStatus;
 
   @doc("Id of cluster identity service principal.")
@@ -437,26 +437,26 @@ model ClusterProperties {
   aadTenantId?: string;
 
   @doc("Unique, immutable resource id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cloudId?: string;
 
   @doc("Endpoint configured for management from the Azure portal.")
   cloudManagementEndpoint?: string;
 
   @doc("First cluster sync timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   registrationTimestamp?: utcDateTime;
 
   @doc("Most recent cluster sync timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 
   @doc("Object id of RP Service Principal")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceProviderObjectId?: string;
 
   @doc("Region specific DataPath Endpoint of the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceEndpoint?: string;
 }
 
@@ -483,38 +483,38 @@ model WindowsClusterProperties {
   desiredProperties?: ClusterDesiredProperties;
 
   @doc("Properties reported by cluster agent.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: WindowsClusterReportedProperties;
 
   @doc("Attestation configurations for isolated VM (e.g. TVM, CVM) of the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isolatedVmAttestationConfiguration?: IsolatedVmAttestationConfiguration;
 
   @doc("Number of days remaining in the trial period.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   trialDaysRemaining?: float32;
 
   @doc("Type of billing applied to the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   billingModel?: string;
 
   @doc("Most recent billing meter timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastBillingTimestamp?: utcDateTime;
 
   @doc("List of secret locations.")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   secretsLocations?: SecretsLocationDetails[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Supported Storage Type for HCI Cluster")
   clusterPattern?: ClusterPattern;
 
-  @extension("x-ms-identifiers", ["localAvailabilityZoneName"])
+  @Azure.ResourceManager.identifiers(#["localAvailabilityZoneName"])
   @doc("Local Availability Zone information for HCI cluster")
   localAvailabilityZones?: LocalAvailabilityZones[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Identity Provider for the cluster")
   identityProvider?: IdentityProvider = IdentityProvider.ActiveDirectory;
 }
@@ -524,21 +524,21 @@ model AzureLinuxClusterProperties {
   ...ClusterProperties;
 
   @doc("Properties reported by cluster agent.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   reportedProperties?: AzureLinuxClusterReportedProperties;
 }
 
 @doc("Software Assurance properties of the cluster.")
 model SoftwareAssuranceProperties {
   @doc("Status of the Software Assurance for the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   softwareAssuranceStatus?: SoftwareAssuranceStatus;
 
   @doc("Customer Intent for Software Assurance Benefit.")
   softwareAssuranceIntent?: SoftwareAssuranceIntent;
 
   @doc("TimeStamp denoting the latest SA benefit applicability is validated.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated?: utcDateTime;
 }
@@ -546,100 +546,100 @@ model SoftwareAssuranceProperties {
 @doc("Log Collection properties of the cluster.")
 model LogCollectionProperties {
   @doc("From DateTimeStamp from when logs need to be connected")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fromDate?: utcDateTime;
 
   @doc("To DateTimeStamp till when logs need to be connected")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   toDate?: utcDateTime;
 
   @doc("Recent DateTimeStamp where logs are successfully generated")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastLogGenerated?: utcDateTime;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Log collection session details.")
-  @OpenAPI.extension("x-ms-identifiers", ["logStartTime"])
+  @Azure.ResourceManager.identifiers(#["logStartTime"])
   logCollectionSessionDetails?: ClusterLogCollectionSession[];
 }
 
 @doc("Log Collection Session details of the cluster.")
 model ClusterLogCollectionSession {
   @doc("Start Time of the logs when it was collected")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   logStartTime?: utcDateTime;
 
   @doc("End Time of the logs when it was collected")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   logEndTime?: utcDateTime;
 
   @doc("Duration of logs collected")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeCollected?: utcDateTime;
 
   @doc("Size of the logs collected")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logSize?: int64;
 
   @doc("LogCollection status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logCollectionStatus?: LogCollectionStatus;
 
   @doc("LogCollection job type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logCollectionJobType?: LogCollectionJobType;
 
   @doc("CorrelationId of the log collection")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   correlationId?: string;
 
   @doc("End Time of the logs when it was collected")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTimeCollected?: utcDateTime;
 
   @doc("Log Collection Error details of the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logCollectionError?: LogCollectionError;
 }
 
 @doc("Log Collection Error details of the cluster.")
 model LogCollectionError {
   @doc("Error Code of the log collection")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorCode?: string;
 
   @doc("Error Message of the log collection")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorMessage?: string;
 }
 
 @doc("Remote Support properties of the cluster.")
 model ClusterRemoteSupportProperties {
   @doc("Remote Support Access Level")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessLevel?: RemoteSupportAccessLevel;
 
   @doc("Expiration DateTimeStamp when Remote Support Access will be expired")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTimeStamp?: utcDateTime;
 
   @doc("Remote Support Type for cluster")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   remoteSupportType?: RemoteSupportType;
 
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   @doc("Remote Support node settings of the cluster.")
   remoteSupportNodeSettings?: ClusterRemoteSupportNodeSettings[];
 
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   @doc("Remote Support session details of the cluster.")
   remoteSupportSessionDetails?: PerNodeRemoteSupportSession[];
 }
@@ -647,58 +647,58 @@ model ClusterRemoteSupportProperties {
 @doc("Remote Support Node Settings of the cluster.")
 model ClusterRemoteSupportNodeSettings {
   @doc("Arc ResourceId of the Node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   arcResourceId?: string;
 
   @doc("Remote Support Access Connection State on the Node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: string;
 
   @doc("Remote Support Enablement Request Created TimeStamp on the Node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdAt?: utcDateTime;
 
   @doc("Remote Support Enablement Request Updated TimeStamp on the Node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   updatedAt?: utcDateTime;
 
   @doc("Remote Support Access Connection Status on the Node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionStatus?: string;
 
   @doc("Remote Support Access Connection Error Message on the Node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionErrorMessage?: string;
 
   @doc("Remote Support Transcript location on the node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   transcriptLocation?: string;
 }
 
 @doc("Remote Support Node Session Details on the Node.")
 model PerNodeRemoteSupportSession {
   @doc("Remote Support Session StartTime on the Node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   sessionStartTime?: utcDateTime;
 
   @doc("Remote Support Session EndTime on the Node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   sessionEndTime?: utcDateTime;
 
   @doc("Name of the node")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nodeName?: string;
 
   @doc("Duration of Remote Support Enablement")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   duration?: int64;
 
   @doc("Remote Support Access Level")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessLevel?: RemoteSupportAccessLevel;
 }
 
@@ -714,19 +714,19 @@ model ClusterDesiredProperties {
 @doc("Properties reported by cluster agent.")
 model ClusterReportedProperties {
   @doc("Last time the cluster reported the data.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastUpdated?: utcDateTime;
 
   @doc("Capabilities supported by the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   supportedCapabilities?: string[];
 
   @doc("Name of the on-prem cluster connected to this resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customLocationId?: string;
 
   @doc("The hardware class of the cluster")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hardwareClass?: HardwareClass = HardwareClass.Medium;
 }
 
@@ -735,39 +735,39 @@ model WindowsClusterReportedProperties {
   ...ClusterReportedProperties;
 
   @doc("Name of the on-prem cluster connected to this resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterName?: string;
 
   @doc("Unique id generated by the on-prem cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterId?: string;
 
   @doc("Version of the cluster software.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterVersion?: string;
 
   @doc("IMDS attestation status of the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   imdsAttestation?: ImdsAttestation;
 
   @doc("Level of diagnostic data emitted by the cluster.")
   diagnosticLevel?: DiagnosticLevel;
 
   @doc("The node type of all the nodes of the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   clusterType?: ClusterNodeType;
 
   @doc("The manufacturer of all the nodes of the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   manufacturer?: string;
 
   @doc("OEM activation status of the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   oemActivation?: OemActivation;
 
   @doc("List of nodes reported by the cluster.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["id"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   nodes?: WindowsClusterNode[];
 }
 
@@ -776,51 +776,51 @@ model AzureLinuxClusterReportedProperties {
   ...ClusterReportedProperties;
 
   @doc("List of nodes reported by the cluster.")
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["edgeDeviceResourceId"])
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["edgeDeviceResourceId"])
   nodes?: AzureLinuxClusterNode[];
 }
 
 @doc("Cluster node details.")
 model ClusterNode {
   @doc("Name of the cluster node.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Edge device resource Id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   edgeDeviceResourceId?: string;
 
   @doc("Manufacturer of the cluster node hardware.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   manufacturer?: string;
 
   @doc("Model name of the cluster node hardware.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   `model`?: string;
 
   @doc("Operating system running on the cluster node.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osName?: string;
 
   @doc("Version of the operating system running on the cluster node.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osVersion?: string;
 
   @doc("Display version of the operating system running on the cluster node.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osDisplayVersion?: string;
 
   @doc("Immutable id of the cluster node.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serialNumber?: string;
 
   @doc("Number of physical cores on the cluster node.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   coreCount?: float32;
 
   @doc("Total available memory on the cluster node (in GiB).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memoryInGiB?: float32;
 }
 
@@ -829,27 +829,27 @@ model WindowsClusterNode {
   ...ClusterNode;
 
   @doc("Id of the node in the cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: float32;
 
   @doc("State of Windows Server Subscription.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   windowsServerSubscription?: WindowsServerSubscription;
 
   @doc("Type of the cluster node hardware.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nodeType?: ClusterNodeType;
 
   @doc("Edge Hardware Center Resource Id")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ehcResourceId?: string;
 
   @doc("Most recent licensing timestamp.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastLicensingTimestamp?: utcDateTime;
 
   @doc("OEM activation status of the node.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   oemActivation?: OemActivation;
 }
 
@@ -861,7 +861,7 @@ model AzureLinuxClusterNode {
 @doc("Attestation configurations for isolated VM (e.g. TVM, CVM) of the cluster.")
 model IsolatedVmAttestationConfiguration {
   @doc("Fully qualified Azure resource id of the Microsoft Azure attestation resource associated with this cluster.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attestationResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Attestation/attestationProviders";
@@ -870,15 +870,15 @@ model IsolatedVmAttestationConfiguration {
   ]>;
 
   @doc("Region specific endpoint for relying party service.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   relyingPartyServiceEndpoint?: string;
 
   @doc("Region specific endpoint for Microsoft Azure Attestation service for the cluster")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   attestationServiceEndpoint?: string;
 
   @doc("Region specific endpoint for AzCS service.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azureCertificateServiceEndpoint?: url;
 }
 
@@ -945,7 +945,7 @@ model RemoteSupportRequest {
 @doc("Properties for Remote Support Request")
 model RemoteSupportRequestProperties {
   @doc("Remote Support Access Level")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   accessLevel?: RemoteSupportAccessLevel;
 
   @doc("Expiration DateTimeStamp when Remote Support Access will expire")
@@ -971,7 +971,7 @@ model SecretsLocationsChangeRequest {
   /**
    * List of secret locations
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   properties?: SecretsLocationDetails[];
 }
 

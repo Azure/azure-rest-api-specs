@@ -15,7 +15,7 @@ namespace Microsoft.ToolchainOrchestrator;
 @doc("The properties of the CatalogVersion.")
 model CatalogVersionProperties {
   @doc("The provisioning state of the CatalogVersion.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
@@ -35,7 +35,7 @@ model CatalogVersionProperties {
   catalogType?: string;
 
   @doc("The status of the CatalogVersion.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: CatalogStatusProperties;
 }
 
@@ -55,7 +55,7 @@ model CatalogVersion is TrackedResource<CatalogVersionProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the CatalogVersion.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @madeOptional(Versions.v2024_08_01_preview)
   extendedLocation?: ExtendedLocation;
 }
@@ -64,15 +64,15 @@ model CatalogVersion is TrackedResource<CatalogVersionProperties> {
 @added(Versions.v2024_08_01_preview)
 model EvalExpressionResponse {
   @doc("Operation Id")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("Operation Name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("Provisioning state of the expression evaluation resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: ResourceProvisioningState;
 
   @doc("Error listing the expression evaluation response.")

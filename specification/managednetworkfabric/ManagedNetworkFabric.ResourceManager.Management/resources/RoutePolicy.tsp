@@ -10,14 +10,14 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The RoutePolicy resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model RoutePolicy extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Route Policy.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("routePolicyName")
   @segment("routePolicies")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The RoutePolicy properties */
@@ -33,7 +33,7 @@ interface RoutePolicies {
   create is ArmResourceCreateOrReplaceAsync<RoutePolicy>;
 
   @doc("API to update certain properties of the Route Policy resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<RoutePolicy, RoutePolicyPatch>;
 
   @doc("Implements Route Policy DELETE method.")

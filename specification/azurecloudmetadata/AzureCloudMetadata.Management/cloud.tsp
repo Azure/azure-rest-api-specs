@@ -18,7 +18,7 @@ model Cloud is ProxyResource<CloudProperties> {
   @doc("The cloud name")
   @segment("clouds")
   @key("cloudName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z-]{3,24}$")
   @path
   name: string;
@@ -35,7 +35,7 @@ model CloudProperties {
   state: CloudState;
 
   /** The provisioning state of resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

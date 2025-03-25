@@ -23,7 +23,7 @@ model WssServerInstance is TrackedResource<WssServerProperties> {
   @path
   @key("wssInstanceName")
   @segment("wssInstances")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -42,7 +42,7 @@ interface WssServerInstances {
   /**
    * Updates the Epic WSS server Instance resource. &lt;br&gt;&lt;br&gt;This can be used to update tags on the resource.
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmTagsPatchSync<WssServerInstance>;
 
   /**

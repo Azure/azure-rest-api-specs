@@ -26,12 +26,12 @@ model DsmsRootFolderResourceProperties {
   azureLocation?: azureLocation;
 
   @doc("Provisioning status of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: DscmProvisioningState;
 
   @added(Versions.v2024_06_24_preview)
   @doc("Request ID; a part of provisioning ResultData output.")
-  @visibility("read") // A part of provisioning ResultData output, gets PATCHed back from FRP.
+  @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   requestId?: string;
 }
 
@@ -42,7 +42,7 @@ model DsmsRootFolderResource
   @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("dsmsRootFolders") // Start with lower case. Should be plural
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -61,4 +61,7 @@ interface DsmsRootFolder {
   get is ArmResourceRead<DsmsRootFolderResource>;
 }
 
-@@visibility(DsmsRootFolderResource.properties, "read", "create");
+@@visibility(DsmsRootFolderResource.properties,
+  Lifecycle.Read,
+  Lifecycle.Create
+);

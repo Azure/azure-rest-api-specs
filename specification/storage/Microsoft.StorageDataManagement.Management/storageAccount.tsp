@@ -17,7 +17,7 @@ namespace Microsoft.Storage;
 @armVirtualResource
 model StorageAccount {
   @doc("The name of the storage account.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   @key("storageAccountName")

@@ -57,11 +57,11 @@ model IdentitySetResourceProperties {
   notificationUrl: url;
 
   @doc("The application Id of Identity Set resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   appId?: string;
 
   @doc("The application name of Identity Set resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   appName?: string;
 
   @doc("The storage account to which data related to role assignments will be stored for notifications")
@@ -71,7 +71,7 @@ model IdentitySetResourceProperties {
   keyVaultId?: string;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

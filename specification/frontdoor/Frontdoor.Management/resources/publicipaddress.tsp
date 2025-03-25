@@ -12,9 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.Frontdoor management service",
-})
+@service(#{ title: "Microsoft.Frontdoor management service" })
 namespace Microsoft.Frontdoor;
 
 @parentResource(TenantLocationResource)
@@ -24,7 +22,7 @@ model PublicIpAddress
   @pattern("[a-zA-Z0-9-]{3,32}")
   @segment("publicIpAddresses")
   @key("publicIpAddress")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }

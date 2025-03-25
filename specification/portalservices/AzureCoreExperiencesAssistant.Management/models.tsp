@@ -37,7 +37,7 @@ model AssistantRequest {
   @doc("Past conversation history between the user and the assistant")
   @OpenAPI.extension(
     "x-ms-identifiers",
-    ["index", "userInput", "assistantResult"]
+    #["index", "userInput", "assistantResult"]
   )
   conversationHistory?: ConversationHistoryContext[];
 }

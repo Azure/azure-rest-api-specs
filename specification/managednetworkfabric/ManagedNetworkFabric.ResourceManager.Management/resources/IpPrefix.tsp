@@ -9,14 +9,14 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The IP Prefix resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model IpPrefix extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the IP Prefix.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
   @key("ipPrefixName")
   @segment("ipPrefixes")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The IP Prefix properties */
@@ -32,7 +32,7 @@ interface IpPrefixes {
   create is ArmResourceCreateOrReplaceAsync<IpPrefix>;
 
   @doc("API to update certain properties of the IP Prefix resource.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<IpPrefix, IpPrefixPatch>;
 
   @doc("Implements IP Prefix DELETE method.")

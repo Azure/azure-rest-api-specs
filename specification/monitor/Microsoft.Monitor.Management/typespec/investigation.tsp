@@ -25,7 +25,7 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
   @path
   @key("investigationId")
   @segment("investigations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // Should be 255-2 charachters long, without any of these invalid chars- :@/#%&+*<>?\\
   @pattern("^[^:@/#&+*<>\\?]{2,253}$")
   name: string;
@@ -222,7 +222,6 @@ union ScopeSourceType {
 @removed(Microsoft.Monitor.Versions.v2024_10_01)
 model InvestigationProperties {
   @doc("The target ARM resources which the investigation will use.")
-  @extension("x-ms-identifiers", [])
   targets: string[];
 
   @doc("The display name of this investigation.")
@@ -238,11 +237,11 @@ model InvestigationProperties {
   runConfiguration?: InvestigationRunConfiguration;
 
   @doc("Denotes the state of the investigation operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: InvestigationProvisioningState;
 
   @doc("The investigation that ran on the given scope.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   investigation?: Investigation;
 }
 
@@ -253,11 +252,11 @@ model InvestigationProperties {
 @removed(Microsoft.Monitor.Versions.v2024_10_01)
 model InvestigationRunConfiguration {
   @doc("Hints used for the investigation run")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   hints?: Filter[];
 
   @doc("A list of filters to decide on the scope")
-  @extension("x-ms-identifiers", [])
+  @Azure.ResourceManager.identifiers(#[])
   tagScopeFilters?: Filter[];
 
   @doc("The time window to look back from impactTime. The format should be of a TimeSpan.")
@@ -270,7 +269,6 @@ model InvestigationRunConfiguration {
   sensitivity?: Sensitivity;
 
   @doc("List of ARM resources to investigate.")
-  @extension("x-ms-identifiers", [])
   investigationScope?: string[];
 }
 
@@ -287,7 +285,6 @@ model Filter {
   operator?: FilterOperator;
 
   @doc("The values to filter based on.")
-  @extension("x-ms-identifiers", [])
   values?: string[];
 }
 
@@ -311,11 +308,11 @@ model Investigation {
   execution?: Execution;
 
   @doc("The investigation result.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   result?: InvestigationResult;
 
   @doc("Child investigations.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   healthChecks?: Investigation[];
 }
 
@@ -329,7 +326,7 @@ model Execution {
   completedOn?: utcDateTime;
 
   @doc("Denotes the state of the investigation operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: InvestigationProvisioningState;
 }
 
@@ -379,25 +376,25 @@ model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: Foundations.SystemData;
 }
 

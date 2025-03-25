@@ -23,7 +23,7 @@ model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
   @path
   @key("virtualNetworkName")
   @segment("virtualNetworks")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**
@@ -48,7 +48,7 @@ interface VirtualNetworks {
   /**
    * Patches the virtual network resource
    */
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<VirtualNetwork, VirtualNetworksPatch>;
 
   /**

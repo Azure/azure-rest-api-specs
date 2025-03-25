@@ -10,7 +10,7 @@ namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Internet Gateway resource definition.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model InternetGateway
   extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Internet Gateway.")
@@ -18,7 +18,7 @@ model InternetGateway
   @path
   @key("internetGatewayName")
   @segment("internetGateways")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /** The Internet Gateway Properties */
@@ -34,7 +34,7 @@ interface InternetGateways {
   create is ArmResourceCreateOrReplaceAsync<InternetGateway>;
 
   @doc("Execute patch on Network Fabric Service Internet Gateway.")
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<InternetGateway, InternetGatewayPatch>;
 
   @doc("Execute a delete on Network Fabric Service Internet Gateway.")

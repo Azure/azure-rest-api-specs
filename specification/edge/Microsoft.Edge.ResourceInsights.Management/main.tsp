@@ -13,9 +13,7 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
 @armProviderNamespace
-@service({
-  title: "Microsoft.Edge",
-})
+@service(#{ title: "Microsoft.Edge" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Edge;
@@ -26,5 +24,3 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_10_01_preview: "2024-10-01-preview",
 }
-
-@@visibility(Azure.Core.Page.nextLink);

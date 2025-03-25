@@ -13,7 +13,7 @@ namespace Microsoft.ToolchainOrchestrator;
 @doc("Defining the Activation.")
 model ActivationProperties {
   @doc("Provisioning state of the activation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "field is loosely defined and dependent on customer scenarios"
@@ -27,7 +27,7 @@ model ActivationProperties {
   campaign: string;
 
   @doc("The status of the Activation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: ActivationStatusProperties;
 }
 
@@ -45,7 +45,7 @@ model Activation is TrackedResource<ActivationProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 

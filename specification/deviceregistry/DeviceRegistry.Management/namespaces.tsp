@@ -40,7 +40,7 @@ model Messaging {
 @doc("The namespace properties model.")
 model NamespaceProperties {
   @doc("Globally unique, immutable, non-reusable id.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
@@ -48,7 +48,7 @@ model NamespaceProperties {
   messaging?: Messaging;
 
   @doc("Provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

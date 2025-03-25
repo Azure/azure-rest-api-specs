@@ -19,7 +19,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Azure specs should not be using decorator"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Referencing elements inside Private namespace"
 @parentResource(ReportResource)
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(EvidenceProperties)
 model EvidenceResource extends Foundations.ProxyResource {
   /**
@@ -28,7 +28,7 @@ model EvidenceResource extends Foundations.ProxyResource {
   @path
   @key("evidenceName")
   @segment("evidences")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-zA-Z0-9-_.]+$")
   name: string;
 

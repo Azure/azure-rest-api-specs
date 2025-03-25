@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 @versioned(ApiVersion)
-@service({
-  title: "StorageInsightsClient",
-})
+@service(#{ title: "StorageInsightsClient" })
 @armProviderNamespace
 @doc("Storage Insights resource provider API.")
 namespace Microsoft.StorageInsights;
@@ -57,7 +55,7 @@ model StorageCollectionRuleProperties {
   @doc("The configuration of the storage collection rule.")
   configuration: StorageCollectionRuleConfiguration;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ResourceProvisioningState;
 }

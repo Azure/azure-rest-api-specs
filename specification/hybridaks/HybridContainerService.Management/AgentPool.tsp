@@ -25,7 +25,7 @@ model AgentPool is ProxyResource<AgentPoolProperties> {
   @path
   @key("agentPoolName")
   @segment("agentPools")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**
