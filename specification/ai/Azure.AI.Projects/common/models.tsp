@@ -205,20 +205,20 @@ model OutputPathAssetReference extends AssetReferenceBase {
 
 alias AssetBase = {
   @doc("Asset stage")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stage?: string;
 
   @doc("A unique identifier for the asset, assetId probably?")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("The name of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key
   name: string;
 
   @doc("The version of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version: string;
 
   @doc("The asset description text.")

@@ -3,16 +3,16 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./agents/routes.tsp";
-import "./agents/threads/routes.tsp";
-import "./agents/messages/routes.tsp";
-import "./agents/runs/routes.tsp";
-import "./agents/run_steps/routes.tsp";
-import "./agents/files/routes.tsp";
-import "./agents/streaming/events.tsp";
-import "./agents/vector_stores/routes.tsp";
-import "./agents/vector_stores/files/routes.tsp";
-import "./agents/vector_stores/file_batches/routes.tsp";
+import "./assistants/routes.tsp";
+import "./assistants/threads/routes.tsp";
+import "./assistants/messages/routes.tsp";
+import "./assistants/runs/routes.tsp";
+import "./assistants/run_steps/routes.tsp";
+import "./assistants/files/routes.tsp";
+import "./assistants/streaming/events.tsp";
+import "./assistants/vector_stores/routes.tsp";
+import "./assistants/vector_stores/files/routes.tsp";
+import "./assistants/vector_stores/file_batches/routes.tsp";
 import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
 import "./datasets/routes.tsp";
@@ -41,15 +41,13 @@ namespace Azure.AI {
     }
   ]>
 )
-@service({
-  title: "Azure AI",
-})
+@service(#{ title: "Azure AI" })
 @server(
   "{endpoint}",
   "Azure AI",
   {
     @doc("""
-      Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/projects/<project-name>
+      Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/api/projects/<project-name>
       """)
     endpoint: url,
   }

@@ -49,7 +49,7 @@ model InputDataset extends InputData {
 model Evaluation {
   @doc("Identifier of the evaluation.")
   @key("name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Data for evaluation.")
@@ -62,7 +62,7 @@ model Evaluation {
   description?: string;
 
   @doc("Status of the evaluation. It is set by service and is read-only.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")

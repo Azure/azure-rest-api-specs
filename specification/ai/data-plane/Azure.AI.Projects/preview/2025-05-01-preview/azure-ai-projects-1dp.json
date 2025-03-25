@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/projects/<project-name>",
+        "description": "Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/api/projects/<project-name>",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -54,7 +54,7 @@
   "paths": {
     "/assistants": {
       "get": {
-        "operationId": "Agents_ListAgents",
+        "operationId": "Assistants_ListAgents",
         "description": "Gets a list of agents that were previously created.",
         "parameters": [
           {
@@ -133,7 +133,7 @@
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
-                    "$ref": "#/definitions/Agents.Agent"
+                    "$ref": "#/definitions/Assistants.Agent"
                   }
                 },
                 "first_id": {
@@ -176,7 +176,7 @@
         }
       },
       "post": {
-        "operationId": "Agents_CreateAgent",
+        "operationId": "Assistants_CreateAgent",
         "description": "Creates a new agent.",
         "parameters": [
           {
@@ -187,7 +187,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.CreateAgentOptions"
+              "$ref": "#/definitions/Assistants.CreateAgentOptions"
             }
           }
         ],
@@ -195,7 +195,7 @@
           "200": {
             "description": "The new agent instance.",
             "schema": {
-              "$ref": "#/definitions/Agents.Agent"
+              "$ref": "#/definitions/Assistants.Agent"
             }
           },
           "default": {
@@ -215,7 +215,7 @@
     },
     "/assistants/{assistantId}": {
       "get": {
-        "operationId": "Agents_GetAgent",
+        "operationId": "Assistants_GetAgent",
         "description": "Retrieves an existing agent.",
         "parameters": [
           {
@@ -233,7 +233,7 @@
           "200": {
             "description": "The requested agent instance.",
             "schema": {
-              "$ref": "#/definitions/Agents.Agent"
+              "$ref": "#/definitions/Assistants.Agent"
             }
           },
           "default": {
@@ -251,21 +251,21 @@
         }
       },
       "post": {
-        "operationId": "Agents_UpdateAgent",
+        "operationId": "Assistants_UpdateAgent",
         "description": "Modifies an existing agent.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Agents.UpdateAgentOptions.assistantId"
+            "$ref": "#/parameters/Assistants.UpdateAgentOptions.assistantId"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.UpdateAgentOptions"
+              "$ref": "#/definitions/Assistants.UpdateAgentOptions"
             }
           }
         ],
@@ -273,7 +273,7 @@
           "200": {
             "description": "The updated agent instance.",
             "schema": {
-              "$ref": "#/definitions/Agents.Agent"
+              "$ref": "#/definitions/Assistants.Agent"
             }
           },
           "default": {
@@ -291,7 +291,7 @@
         }
       },
       "delete": {
-        "operationId": "Agents_DeleteAgent",
+        "operationId": "Assistants_DeleteAgent",
         "description": "Deletes an agent.",
         "parameters": [
           {
@@ -309,7 +309,7 @@
           "200": {
             "description": "Status information about the requested deletion operation.",
             "schema": {
-              "$ref": "#/definitions/Agents.AgentDeletionStatus"
+              "$ref": "#/definitions/Assistants.AgentDeletionStatus"
             }
           },
           "default": {
@@ -1307,7 +1307,7 @@
     },
     "/files": {
       "get": {
-        "operationId": "Agents_ListFiles",
+        "operationId": "Assistants_ListFiles",
         "description": "Gets a list of previously uploaded files.",
         "parameters": [
           {
@@ -1375,7 +1375,7 @@
           "200": {
             "description": "The requested list of files.",
             "schema": {
-              "$ref": "#/definitions/Agents.FileListResponse"
+              "$ref": "#/definitions/Assistants.FileListResponse"
             }
           },
           "default": {
@@ -1393,7 +1393,7 @@
         }
       },
       "post": {
-        "operationId": "Agents_UploadFile",
+        "operationId": "Assistants_UploadFile",
         "description": "Uploads a file for use by other operations.",
         "consumes": [
           "multipart/form-data"
@@ -1405,14 +1405,13 @@
           {
             "name": "file",
             "in": "formData",
-            "description": "The file data, in bytes.",
             "required": true,
             "type": "file"
           },
           {
             "name": "purpose",
             "in": "formData",
-            "description": "The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.",
+            "description": "The possible values denoting the intended usage of a file.",
             "required": true,
             "type": "string",
             "enum": [
@@ -1469,7 +1468,6 @@
           {
             "name": "filename",
             "in": "formData",
-            "description": "The name of the file.",
             "required": false,
             "type": "string"
           }
@@ -1478,7 +1476,7 @@
           "200": {
             "description": "A representation of the uploaded file.",
             "schema": {
-              "$ref": "#/definitions/Agents.OpenAIFile"
+              "$ref": "#/definitions/Assistants.OpenAIFile"
             }
           },
           "default": {
@@ -1498,7 +1496,7 @@
     },
     "/files/{fileId}": {
       "get": {
-        "operationId": "Agents_GetFile",
+        "operationId": "Assistants_GetFile",
         "description": "Returns information about a specific file. Does not retrieve file content.",
         "parameters": [
           {
@@ -1516,7 +1514,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.OpenAIFile"
+              "$ref": "#/definitions/Assistants.OpenAIFile"
             }
           },
           "default": {
@@ -1534,7 +1532,7 @@
         }
       },
       "delete": {
-        "operationId": "Agents_DeleteFile",
+        "operationId": "Assistants_DeleteFile",
         "description": "Delete a previously uploaded file.",
         "parameters": [
           {
@@ -1552,7 +1550,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.FileDeletionStatus"
+              "$ref": "#/definitions/Assistants.FileDeletionStatus"
             }
           },
           "default": {
@@ -1572,8 +1570,12 @@
     },
     "/files/{fileId}/content": {
       "get": {
-        "operationId": "Agents_GetFileContent",
+        "operationId": "Assistants_GetFileContent",
         "description": "Retrieves the raw content of a specific file.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1590,8 +1592,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string",
-              "format": "byte"
+              "type": "file"
             }
           },
           "default": {
@@ -2024,7 +2025,7 @@
     },
     "/threads": {
       "post": {
-        "operationId": "Agents_CreateThread",
+        "operationId": "Assistants_CreateThread",
         "description": "Creates a new thread. Threads contain messages and can be run by agents.",
         "parameters": [
           {
@@ -2035,7 +2036,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.AgentThreadCreationOptions"
+              "$ref": "#/definitions/Assistants.AgentThreadCreationOptions"
             }
           }
         ],
@@ -2043,7 +2044,7 @@
           "200": {
             "description": "Information about the newly created thread.",
             "schema": {
-              "$ref": "#/definitions/Agents.AgentThread"
+              "$ref": "#/definitions/Assistants.AgentThread"
             }
           },
           "default": {
@@ -2063,7 +2064,7 @@
     },
     "/threads/{threadId}": {
       "get": {
-        "operationId": "Agents_GetThread",
+        "operationId": "Assistants_GetThread",
         "description": "Gets information about an existing thread.",
         "parameters": [
           {
@@ -2081,7 +2082,7 @@
           "200": {
             "description": "Information about the requested thread.",
             "schema": {
-              "$ref": "#/definitions/Agents.AgentThread"
+              "$ref": "#/definitions/Assistants.AgentThread"
             }
           },
           "default": {
@@ -2099,21 +2100,21 @@
         }
       },
       "post": {
-        "operationId": "Agents_UpdateThread",
+        "operationId": "Assistants_UpdateThread",
         "description": "Modifies an existing thread.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Agents.UpdateAgentThreadOptions.threadId"
+            "$ref": "#/parameters/Assistants.UpdateAgentThreadOptions.threadId"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.UpdateAgentThreadOptions"
+              "$ref": "#/definitions/Assistants.UpdateAgentThreadOptions"
             }
           }
         ],
@@ -2121,7 +2122,7 @@
           "200": {
             "description": "Information about the modified thread.",
             "schema": {
-              "$ref": "#/definitions/Agents.AgentThread"
+              "$ref": "#/definitions/Assistants.AgentThread"
             }
           },
           "default": {
@@ -2139,7 +2140,7 @@
         }
       },
       "delete": {
-        "operationId": "Agents_DeleteThread",
+        "operationId": "Assistants_DeleteThread",
         "description": "Deletes an existing thread.",
         "parameters": [
           {
@@ -2157,7 +2158,7 @@
           "200": {
             "description": "Status information about the requested thread deletion operation.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadDeletionStatus"
+              "$ref": "#/definitions/Assistants.ThreadDeletionStatus"
             }
           },
           "default": {
@@ -2177,7 +2178,7 @@
     },
     "/threads/{threadId}/messages": {
       "get": {
-        "operationId": "Agents_ListMessages",
+        "operationId": "Assistants_ListMessages",
         "description": "Gets a list of messages that exist on a thread.",
         "parameters": [
           {
@@ -2270,7 +2271,7 @@
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
-                    "$ref": "#/definitions/Agents.ThreadMessage"
+                    "$ref": "#/definitions/Assistants.ThreadMessage"
                   }
                 },
                 "first_id": {
@@ -2313,7 +2314,7 @@
         }
       },
       "post": {
-        "operationId": "Agents_CreateMessage",
+        "operationId": "Assistants_CreateMessage",
         "description": "Creates a new message on a specified thread.",
         "parameters": [
           {
@@ -2331,7 +2332,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadMessageOptions"
+              "$ref": "#/definitions/Assistants.ThreadMessageOptions"
             }
           }
         ],
@@ -2339,7 +2340,7 @@
           "200": {
             "description": "A representation of the new message.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadMessage"
+              "$ref": "#/definitions/Assistants.ThreadMessage"
             }
           },
           "default": {
@@ -2359,7 +2360,7 @@
     },
     "/threads/{threadId}/messages/{messageId}": {
       "get": {
-        "operationId": "Agents_GetMessage",
+        "operationId": "Assistants_GetMessage",
         "description": "Gets an existing message from an existing thread.",
         "parameters": [
           {
@@ -2384,7 +2385,7 @@
           "200": {
             "description": "A representation of the requested message.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadMessage"
+              "$ref": "#/definitions/Assistants.ThreadMessage"
             }
           },
           "default": {
@@ -2402,7 +2403,7 @@
         }
       },
       "post": {
-        "operationId": "Agents_UpdateMessage",
+        "operationId": "Assistants_UpdateMessage",
         "description": "Modifies an existing message on an existing thread.",
         "parameters": [
           {
@@ -2445,7 +2446,7 @@
           "200": {
             "description": "A representation of the modified message.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadMessage"
+              "$ref": "#/definitions/Assistants.ThreadMessage"
             }
           },
           "default": {
@@ -2465,7 +2466,7 @@
     },
     "/threads/{threadId}/runs": {
       "get": {
-        "operationId": "Agents_ListRuns",
+        "operationId": "Assistants_ListRuns",
         "description": "Gets a list of runs for a specified thread.",
         "parameters": [
           {
@@ -2551,7 +2552,7 @@
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
-                    "$ref": "#/definitions/Agents.ThreadRun"
+                    "$ref": "#/definitions/Assistants.ThreadRun"
                   }
                 },
                 "first_id": {
@@ -2594,7 +2595,7 @@
         }
       },
       "post": {
-        "operationId": "Agents_CreateRun",
+        "operationId": "Assistants_CreateRun",
         "description": "Creates a new run for an agent thread.",
         "parameters": [
           {
@@ -2638,7 +2639,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.CreateRunOptions"
+              "$ref": "#/definitions/Assistants.CreateRunOptions"
             }
           }
         ],
@@ -2646,7 +2647,7 @@
           "200": {
             "description": "Information about the new thread run.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadRun"
+              "$ref": "#/definitions/Assistants.ThreadRun"
             }
           },
           "default": {
@@ -2666,7 +2667,7 @@
     },
     "/threads/{threadId}/runs/{runId}": {
       "get": {
-        "operationId": "Agents_GetRun",
+        "operationId": "Assistants_GetRun",
         "description": "Gets an existing run from an existing thread.",
         "parameters": [
           {
@@ -2691,7 +2692,7 @@
           "200": {
             "description": "The requested information about the specified thread run.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadRun"
+              "$ref": "#/definitions/Assistants.ThreadRun"
             }
           },
           "default": {
@@ -2709,7 +2710,7 @@
         }
       },
       "post": {
-        "operationId": "Agents_UpdateRun",
+        "operationId": "Assistants_UpdateRun",
         "description": "Modifies an existing thread run.",
         "parameters": [
           {
@@ -2752,7 +2753,7 @@
           "200": {
             "description": "Information about the modified run.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadRun"
+              "$ref": "#/definitions/Assistants.ThreadRun"
             }
           },
           "default": {
@@ -2772,7 +2773,7 @@
     },
     "/threads/{threadId}/runs/{runId}/cancel": {
       "post": {
-        "operationId": "Agents_CancelRun",
+        "operationId": "Assistants_CancelRun",
         "description": "Cancels a run of an in progress thread.",
         "parameters": [
           {
@@ -2797,7 +2798,7 @@
           "200": {
             "description": "Updated information about the cancelled run.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadRun"
+              "$ref": "#/definitions/Assistants.ThreadRun"
             }
           },
           "default": {
@@ -2817,7 +2818,7 @@
     },
     "/threads/{threadId}/runs/{runId}/steps": {
       "get": {
-        "operationId": "Agents_ListRunSteps",
+        "operationId": "Assistants_ListRunSteps",
         "description": "Gets a list of run steps from a thread run.",
         "parameters": [
           {
@@ -2936,7 +2937,7 @@
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
-                    "$ref": "#/definitions/Agents.RunStep"
+                    "$ref": "#/definitions/Assistants.RunStep"
                   }
                 },
                 "first_id": {
@@ -2981,7 +2982,7 @@
     },
     "/threads/{threadId}/runs/{runId}/steps/{stepId}": {
       "get": {
-        "operationId": "Agents_GetRunStep",
+        "operationId": "Assistants_GetRunStep",
         "description": "Gets a single run step from a thread run.",
         "parameters": [
           {
@@ -3039,7 +3040,7 @@
           "200": {
             "description": "Information about the requested run step.",
             "schema": {
-              "$ref": "#/definitions/Agents.RunStep"
+              "$ref": "#/definitions/Assistants.RunStep"
             }
           },
           "default": {
@@ -3059,7 +3060,7 @@
     },
     "/threads/{threadId}/runs/{runId}/submit_tool_outputs": {
       "post": {
-        "operationId": "Agents_SubmitToolOutputsToRun",
+        "operationId": "Assistants_SubmitToolOutputsToRun",
         "description": "Submits outputs from tools as requested by tool calls in a run. Runs that need submitted tool outputs will have a status of 'requires_action' with a required_action.type of 'submit_tool_outputs'.",
         "parameters": [
           {
@@ -3090,7 +3091,7 @@
                   "type": "array",
                   "description": "A list of tools for which the outputs are being submitted",
                   "items": {
-                    "$ref": "#/definitions/Agents.ToolOutput"
+                    "$ref": "#/definitions/Assistants.ToolOutput"
                   },
                   "x-ms-client-name": "toolOutputs",
                   "x-ms-identifiers": []
@@ -3111,7 +3112,7 @@
           "200": {
             "description": "Updated information about the run.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadRun"
+              "$ref": "#/definitions/Assistants.ThreadRun"
             }
           },
           "default": {
@@ -3131,7 +3132,7 @@
     },
     "/threads/runs": {
       "post": {
-        "operationId": "Agents_CreateThreadAndRun",
+        "operationId": "Assistants_CreateThreadAndRun",
         "description": "Creates a new agent thread and immediately starts a run using that new thread.",
         "parameters": [
           {
@@ -3142,7 +3143,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.CreateAndRunThreadOptions"
+              "$ref": "#/definitions/Assistants.CreateAndRunThreadOptions"
             }
           }
         ],
@@ -3150,7 +3151,7 @@
           "200": {
             "description": "Information about the newly created thread.",
             "schema": {
-              "$ref": "#/definitions/Agents.ThreadRun"
+              "$ref": "#/definitions/Assistants.ThreadRun"
             }
           },
           "default": {
@@ -3170,7 +3171,7 @@
     },
     "/vector_stores": {
       "get": {
-        "operationId": "Agents_ListVectorStores",
+        "operationId": "Assistants_ListVectorStores",
         "description": "Returns a list of vector stores.",
         "parameters": [
           {
@@ -3249,7 +3250,7 @@
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
-                    "$ref": "#/definitions/Agents.VectorStore"
+                    "$ref": "#/definitions/Assistants.VectorStore"
                   }
                 },
                 "first_id": {
@@ -3292,7 +3293,7 @@
         }
       },
       "post": {
-        "operationId": "Agents_CreateVectorStore",
+        "operationId": "Assistants_CreateVectorStore",
         "description": "Creates a vector store.",
         "parameters": [
           {
@@ -3303,7 +3304,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStoreOptions"
+              "$ref": "#/definitions/Assistants.VectorStoreOptions"
             }
           }
         ],
@@ -3311,7 +3312,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStore"
+              "$ref": "#/definitions/Assistants.VectorStore"
             }
           },
           "default": {
@@ -3331,7 +3332,7 @@
     },
     "/vector_stores/{vectorStoreId}": {
       "get": {
-        "operationId": "Agents_GetVectorStore",
+        "operationId": "Assistants_GetVectorStore",
         "description": "Returns the vector store object matching the specified ID.",
         "parameters": [
           {
@@ -3349,7 +3350,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStore"
+              "$ref": "#/definitions/Assistants.VectorStore"
             }
           },
           "default": {
@@ -3367,7 +3368,7 @@
         }
       },
       "post": {
-        "operationId": "Agents_ModifyVectorStore",
+        "operationId": "Assistants_ModifyVectorStore",
         "description": "The ID of the vector store to modify.",
         "parameters": [
           {
@@ -3385,7 +3386,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStoreUpdateOptions"
+              "$ref": "#/definitions/Assistants.VectorStoreUpdateOptions"
             }
           }
         ],
@@ -3393,7 +3394,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStore"
+              "$ref": "#/definitions/Assistants.VectorStore"
             }
           },
           "default": {
@@ -3411,7 +3412,7 @@
         }
       },
       "delete": {
-        "operationId": "Agents_DeleteVectorStore",
+        "operationId": "Assistants_DeleteVectorStore",
         "description": "Deletes the vector store object matching the specified ID.",
         "parameters": [
           {
@@ -3429,7 +3430,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStoreDeletionStatus"
+              "$ref": "#/definitions/Assistants.VectorStoreDeletionStatus"
             }
           },
           "default": {
@@ -3449,7 +3450,7 @@
     },
     "/vector_stores/{vectorStoreId}/file_batches": {
       "post": {
-        "operationId": "Agents_CreateVectorStoreFileBatch",
+        "operationId": "Assistants_CreateVectorStoreFileBatch",
         "description": "Create a vector store file batch.",
         "parameters": [
           {
@@ -3485,13 +3486,13 @@
                   "minItems": 1,
                   "maxItems": 500,
                   "items": {
-                    "$ref": "#/definitions/Agents.VectorStoreDataSource"
+                    "$ref": "#/definitions/Assistants.VectorStoreDataSource"
                   },
                   "x-ms-client-name": "dataSources",
                   "x-ms-identifiers": []
                 },
                 "chunking_strategy": {
-                  "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest",
+                  "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyRequest",
                   "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.",
                   "x-ms-client-name": "chunkingStrategy"
                 }
@@ -3503,7 +3504,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStoreFileBatch"
+              "$ref": "#/definitions/Assistants.VectorStoreFileBatch"
             }
           },
           "default": {
@@ -3523,7 +3524,7 @@
     },
     "/vector_stores/{vectorStoreId}/file_batches/{batchId}": {
       "get": {
-        "operationId": "Agents_GetVectorStoreFileBatch",
+        "operationId": "Assistants_GetVectorStoreFileBatch",
         "description": "Retrieve a vector store file batch.",
         "parameters": [
           {
@@ -3548,7 +3549,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStoreFileBatch"
+              "$ref": "#/definitions/Assistants.VectorStoreFileBatch"
             }
           },
           "default": {
@@ -3568,7 +3569,7 @@
     },
     "/vector_stores/{vectorStoreId}/file_batches/{batchId}/cancel": {
       "post": {
-        "operationId": "Agents_CancelVectorStoreFileBatch",
+        "operationId": "Assistants_CancelVectorStoreFileBatch",
         "description": "Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.",
         "parameters": [
           {
@@ -3593,7 +3594,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStoreFileBatch"
+              "$ref": "#/definitions/Assistants.VectorStoreFileBatch"
             }
           },
           "default": {
@@ -3613,7 +3614,7 @@
     },
     "/vector_stores/{vectorStoreId}/file_batches/{batchId}/files": {
       "get": {
-        "operationId": "Agents_ListVectorStoreFileBatchFiles",
+        "operationId": "Assistants_ListVectorStoreFileBatchFiles",
         "description": "Returns a list of vector store files in a batch.",
         "parameters": [
           {
@@ -3745,7 +3746,7 @@
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
-                    "$ref": "#/definitions/Agents.VectorStoreFile"
+                    "$ref": "#/definitions/Assistants.VectorStoreFile"
                   }
                 },
                 "first_id": {
@@ -3790,7 +3791,7 @@
     },
     "/vector_stores/{vectorStoreId}/files": {
       "get": {
-        "operationId": "Agents_ListVectorStoreFiles",
+        "operationId": "Assistants_ListVectorStoreFiles",
         "description": "Returns a list of vector store files.",
         "parameters": [
           {
@@ -3915,7 +3916,7 @@
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
-                    "$ref": "#/definitions/Agents.VectorStoreFile"
+                    "$ref": "#/definitions/Assistants.VectorStoreFile"
                   }
                 },
                 "first_id": {
@@ -3958,7 +3959,7 @@
         }
       },
       "post": {
-        "operationId": "Agents_CreateVectorStoreFile",
+        "operationId": "Assistants_CreateVectorStoreFile",
         "description": "Create a vector store file by attaching a file to a vector store.",
         "parameters": [
           {
@@ -3984,12 +3985,12 @@
                   "x-ms-client-name": "fileId"
                 },
                 "data_source": {
-                  "$ref": "#/definitions/Agents.VectorStoreDataSource",
+                  "$ref": "#/definitions/Assistants.VectorStoreDataSource",
                   "description": "Azure asset ID.",
                   "x-ms-client-name": "dataSource"
                 },
                 "chunking_strategy": {
-                  "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest",
+                  "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyRequest",
                   "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy.",
                   "x-ms-client-name": "chunkingStrategy"
                 }
@@ -4001,7 +4002,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStoreFile"
+              "$ref": "#/definitions/Assistants.VectorStoreFile"
             }
           },
           "default": {
@@ -4021,7 +4022,7 @@
     },
     "/vector_stores/{vectorStoreId}/files/{fileId}": {
       "get": {
-        "operationId": "Agents_GetVectorStoreFile",
+        "operationId": "Assistants_GetVectorStoreFile",
         "description": "Retrieves a vector store file.",
         "parameters": [
           {
@@ -4046,7 +4047,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStoreFile"
+              "$ref": "#/definitions/Assistants.VectorStoreFile"
             }
           },
           "default": {
@@ -4064,7 +4065,7 @@
         }
       },
       "delete": {
-        "operationId": "Agents_DeleteVectorStoreFile",
+        "operationId": "Assistants_DeleteVectorStoreFile",
         "description": "Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted.\nTo delete the file, use the delete file endpoint.",
         "parameters": [
           {
@@ -4089,7 +4090,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.VectorStoreFileDeletionStatus"
+              "$ref": "#/definitions/Assistants.VectorStoreFileDeletionStatus"
             }
           },
           "default": {
@@ -4119,7 +4120,65 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
-    "Agents.Agent": {
+    "ApiKeyCredential": {
+      "type": "object",
+      "description": "ApiKey Credential definition",
+      "properties": {
+        "apiKey": {
+          "type": "string",
+          "description": "API Key",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "apiKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCredential"
+        }
+      ],
+      "x-ms-discriminator-value": "ApiKey"
+    },
+    "ApiResponseFormat": {
+      "type": "string",
+      "description": "Possible API response formats.",
+      "enum": [
+        "text",
+        "json_object"
+      ],
+      "x-ms-enum": {
+        "name": "ApiResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "`text` format should be used for requests involving any sort of ToolCall."
+          },
+          {
+            "name": "jsonObject",
+            "value": "json_object",
+            "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
+          }
+        ]
+      }
+    },
+    "AssetReferenceBase": {
+      "type": "object",
+      "description": "Base definition for asset references.",
+      "properties": {
+        "referenceType": {
+          "$ref": "#/definitions/ReferenceType",
+          "description": "Asset reference type."
+        }
+      },
+      "discriminator": "referenceType",
+      "required": [
+        "referenceType"
+      ]
+    },
+    "Assistants.Agent": {
       "type": "object",
       "description": "Represents an agent that can call the model and use tools.",
       "properties": {
@@ -4167,7 +4226,7 @@
           "description": "The collection of tools enabled for the agent.",
           "default": [],
           "items": {
-            "$ref": "#/definitions/Agents.ToolDefinition"
+            "$ref": "#/definitions/Assistants.ToolDefinition"
           },
           "x-ms-identifiers": []
         },
@@ -4177,7 +4236,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.ToolResources"
+              "$ref": "#/definitions/Assistants.ToolResources"
             }
           ],
           "x-ms-client-name": "toolResources"
@@ -4198,7 +4257,7 @@
           "x-ms-client-name": "topP"
         },
         "response_format": {
-          "$ref": "#/definitions/Agents.AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/Assistants.AgentsApiResponseFormatOption",
           "description": "The response format of the tool calls used by this agent.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -4227,7 +4286,7 @@
         "metadata"
       ]
     },
-    "Agents.AgentDeletionStatus": {
+    "Assistants.AgentDeletionStatus": {
       "type": "object",
       "description": "The status of an agent deletion operation.",
       "properties": {
@@ -4256,7 +4315,7 @@
         "object"
       ]
     },
-    "Agents.AgentStreamEvent": {
+    "Assistants.AgentStreamEvent": {
       "type": "string",
       "description": "Each event in a server-sent events stream has an `event` and `data` property:\n\n```\nevent: thread.created\ndata: {\"id\": \"thread_123\", \"object\": \"thread\", ...}\n```\n\nWe emit events whenever a new object is created, transitions to a new state, or is being\nstreamed in parts (deltas). For example, we emit `thread.run.created` when a new run\nis created, `thread.run.completed` when a run completes, and so on. When an Agent chooses\nto create a message during a run, we emit a `thread.message.created event`, a\n`thread.message.in_progress` event, many `thread.message.delta` events, and finally a\n`thread.message.completed` event.\n\nWe may add additional events over time, so we recommend handling unknown events gracefully\nin your code.",
       "enum": [
@@ -4418,7 +4477,7 @@
         ]
       }
     },
-    "Agents.AgentThread": {
+    "Assistants.AgentThread": {
       "type": "object",
       "description": "Information about a single thread associated with an agent.",
       "properties": {
@@ -4448,7 +4507,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.ToolResources"
+              "$ref": "#/definitions/Assistants.ToolResources"
             }
           ],
           "x-ms-client-name": "toolResources"
@@ -4470,7 +4529,7 @@
         "metadata"
       ]
     },
-    "Agents.AgentThreadCreationOptions": {
+    "Assistants.AgentThreadCreationOptions": {
       "type": "object",
       "description": "The details used to create a new agent thread.",
       "properties": {
@@ -4478,7 +4537,7 @@
           "type": "array",
           "description": "The initial messages to associate with the new thread.",
           "items": {
-            "$ref": "#/definitions/Agents.ThreadMessageOptions"
+            "$ref": "#/definitions/Assistants.ThreadMessageOptions"
           },
           "x-ms-identifiers": []
         },
@@ -4488,7 +4547,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.ToolResources"
+              "$ref": "#/definitions/Assistants.ToolResources"
             }
           ],
           "x-ms-client-name": "toolResources"
@@ -4503,7 +4562,7 @@
         }
       }
     },
-    "Agents.AgentsApiResponseFormat": {
+    "Assistants.AgentsApiResponseFormat": {
       "type": "object",
       "description": "An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.\nIf `text` the model can return text or any value needed.",
       "properties": {
@@ -4534,7 +4593,7 @@
         }
       }
     },
-    "Agents.AgentsApiResponseFormatMode": {
+    "Assistants.AgentsApiResponseFormatMode": {
       "type": "string",
       "description": "Represents the mode in which the model will handle the return format of a tool call.",
       "enum": [
@@ -4558,9 +4617,9 @@
         ]
       }
     },
-    "Agents.AgentsApiResponseFormatOption": {},
-    "Agents.AgentsApiToolChoiceOption": {},
-    "Agents.AgentsApiToolChoiceOptionMode": {
+    "Assistants.AgentsApiResponseFormatOption": {},
+    "Assistants.AgentsApiToolChoiceOption": {},
+    "Assistants.AgentsApiToolChoiceOptionMode": {
       "type": "string",
       "description": "Specifies how the tool choice will be used",
       "enum": [
@@ -4584,16 +4643,16 @@
         ]
       }
     },
-    "Agents.AgentsNamedToolChoice": {
+    "Assistants.AgentsNamedToolChoice": {
       "type": "object",
       "description": "Specifies a tool the model should use. Use to force the model to call a specific tool.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Agents.AgentsNamedToolChoiceType",
+          "$ref": "#/definitions/Assistants.AgentsNamedToolChoiceType",
           "description": "the type of tool. If type is `function`, the function name must be set."
         },
         "function": {
-          "$ref": "#/definitions/Agents.FunctionName",
+          "$ref": "#/definitions/Assistants.FunctionName",
           "description": "The name of the function to call"
         }
       },
@@ -4601,7 +4660,7 @@
         "type"
       ]
     },
-    "Agents.AgentsNamedToolChoiceType": {
+    "Assistants.AgentsNamedToolChoiceType": {
       "type": "string",
       "description": "Available tool types for agents named tools.",
       "enum": [
@@ -4655,7 +4714,7 @@
         ]
       }
     },
-    "Agents.AzureAISearchResource": {
+    "Assistants.AzureAISearchResource": {
       "type": "object",
       "description": "A set of index resources used by the `azure_ai_search` tool.",
       "properties": {
@@ -4664,24 +4723,24 @@
           "description": "The indices attached to this agent. There can be a maximum of 1 index\nresource attached to the agent.",
           "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/Agents.IndexResource"
+            "$ref": "#/definitions/Assistants.IndexResource"
           },
           "x-ms-client-name": "indexList",
           "x-ms-identifiers": []
         }
       }
     },
-    "Agents.AzureAISearchToolDefinition": {
+    "Assistants.AzureAISearchToolDefinition": {
       "type": "object",
       "description": "The input definition information for an Azure AI search tool as used to configure an agent.",
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ToolDefinition"
+          "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
-    "Agents.AzureFunctionBinding": {
+    "Assistants.AzureFunctionBinding": {
       "type": "object",
       "description": "The structure for keeping storage queue name and URI.",
       "properties": {
@@ -4696,7 +4755,7 @@
           }
         },
         "storage_queue": {
-          "$ref": "#/definitions/Agents.AzureFunctionStorageQueue",
+          "$ref": "#/definitions/Assistants.AzureFunctionStorageQueue",
           "description": "Storage queue.",
           "x-ms-client-name": "storageQueue"
         }
@@ -4706,21 +4765,21 @@
         "storage_queue"
       ]
     },
-    "Agents.AzureFunctionDefinition": {
+    "Assistants.AzureFunctionDefinition": {
       "type": "object",
       "description": "The definition of Azure function.",
       "properties": {
         "function": {
-          "$ref": "#/definitions/Agents.FunctionDefinition",
+          "$ref": "#/definitions/Assistants.FunctionDefinition",
           "description": "The definition of azure function and its parameters."
         },
         "input_binding": {
-          "$ref": "#/definitions/Agents.AzureFunctionBinding",
+          "$ref": "#/definitions/Assistants.AzureFunctionBinding",
           "description": "Input storage queue. The queue storage trigger runs a function as messages are added to it.",
           "x-ms-client-name": "inputBinding"
         },
         "output_binding": {
-          "$ref": "#/definitions/Agents.AzureFunctionBinding",
+          "$ref": "#/definitions/Assistants.AzureFunctionBinding",
           "description": "Output storage queue. The function writes output to this queue when the input items are processed.",
           "x-ms-client-name": "outputBinding"
         }
@@ -4731,7 +4790,7 @@
         "output_binding"
       ]
     },
-    "Agents.AzureFunctionStorageQueue": {
+    "Assistants.AzureFunctionStorageQueue": {
       "type": "object",
       "description": "The structure for keeping storage queue name and URI.",
       "properties": {
@@ -4751,12 +4810,12 @@
         "queue_name"
       ]
     },
-    "Agents.AzureFunctionToolDefinition": {
+    "Assistants.AzureFunctionToolDefinition": {
       "type": "object",
       "description": "The input definition information for a azure function tool as used to configure an agent.",
       "properties": {
         "azure_function": {
-          "$ref": "#/definitions/Agents.AzureFunctionDefinition",
+          "$ref": "#/definitions/Assistants.AzureFunctionDefinition",
           "description": "The definition of the concrete function that the function tool should call.",
           "x-ms-client-name": "azureFunction"
         }
@@ -4766,17 +4825,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ToolDefinition"
+          "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "azure_function"
     },
-    "Agents.BingGroundingToolDefinition": {
+    "Assistants.BingGroundingToolDefinition": {
       "type": "object",
       "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
       "properties": {
         "bing_grounding": {
-          "$ref": "#/definitions/Agents.ToolConnectionList",
+          "$ref": "#/definitions/Assistants.ToolConnectionList",
           "description": "The list of connections used by the bing grounding tool."
         }
       },
@@ -4785,22 +4844,22 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ToolDefinition"
+          "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "bing_grounding"
     },
-    "Agents.CodeInterpreterToolDefinition": {
+    "Assistants.CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "The input definition information for a code interpreter tool as used to configure an agent.",
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ToolDefinition"
+          "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
     },
-    "Agents.CodeInterpreterToolResource": {
+    "Assistants.CodeInterpreterToolResource": {
       "type": "object",
       "description": "A set of resources that are used by the `code_interpreter` tool.",
       "properties": {
@@ -4819,14 +4878,14 @@
           "description": "The data sources to be used. This option is mutually exclusive with the `fileIds` property.",
           "maxItems": 20,
           "items": {
-            "$ref": "#/definitions/Agents.VectorStoreDataSource"
+            "$ref": "#/definitions/Assistants.VectorStoreDataSource"
           },
           "x-ms-client-name": "dataSources",
           "x-ms-identifiers": []
         }
       }
     },
-    "Agents.CreateAgentOptions": {
+    "Assistants.CreateAgentOptions": {
       "type": "object",
       "description": "The request details to use when creating a new agent.",
       "properties": {
@@ -4854,7 +4913,7 @@
           "description": "The collection of tools to enable for the new agent.",
           "default": [],
           "items": {
-            "$ref": "#/definitions/Agents.ToolDefinition"
+            "$ref": "#/definitions/Assistants.ToolDefinition"
           },
           "x-ms-identifiers": []
         },
@@ -4864,7 +4923,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.ToolResources"
+              "$ref": "#/definitions/Assistants.ToolResources"
             }
           ],
           "x-ms-client-name": "toolResources"
@@ -4885,7 +4944,7 @@
           "x-ms-client-name": "topP"
         },
         "response_format": {
-          "$ref": "#/definitions/Agents.AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/Assistants.AgentsApiResponseFormatOption",
           "description": "The response format of the tool calls used by this agent.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -4903,7 +4962,7 @@
         "model"
       ]
     },
-    "Agents.CreateAndRunThreadOptions": {
+    "Assistants.CreateAndRunThreadOptions": {
       "type": "object",
       "description": "The details used when creating and immediately running a new agent thread.",
       "properties": {
@@ -4913,7 +4972,7 @@
           "x-ms-client-name": "assistantId"
         },
         "thread": {
-          "$ref": "#/definitions/Agents.AgentThreadCreationOptions",
+          "$ref": "#/definitions/Assistants.AgentThreadCreationOptions",
           "description": "The details used to create the new thread. If no thread is provided, an empty one will be created."
         },
         "model": {
@@ -4931,7 +4990,7 @@
           "description": "The overridden list of enabled tools the agent should use to run the thread.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Agents.ToolDefinition"
+            "$ref": "#/definitions/Assistants.ToolDefinition"
           },
           "x-ms-identifiers": []
         },
@@ -4941,7 +5000,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.UpdateToolResourcesOptions"
+              "$ref": "#/definitions/Assistants.UpdateToolResourcesOptions"
             }
           ],
           "x-ms-client-name": "toolResources"
@@ -4985,19 +5044,19 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.TruncationObject"
+              "$ref": "#/definitions/Assistants.TruncationObject"
             }
           ],
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
-          "$ref": "#/definitions/Agents.AgentsApiToolChoiceOption",
+          "$ref": "#/definitions/Assistants.AgentsApiToolChoiceOption",
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
         },
         "response_format": {
-          "$ref": "#/definitions/Agents.AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/Assistants.AgentsApiResponseFormatOption",
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -5020,7 +5079,7 @@
         "assistant_id"
       ]
     },
-    "Agents.CreateCodeInterpreterToolResourceOptions": {
+    "Assistants.CreateCodeInterpreterToolResourceOptions": {
       "type": "object",
       "description": "A set of resources that will be used by the `code_interpreter` tool. Request object.",
       "properties": {
@@ -5036,8 +5095,8 @@
         }
       }
     },
-    "Agents.CreateFileSearchToolResourceOptions": {},
-    "Agents.CreateFileSearchToolResourceVectorStoreOptions": {
+    "Assistants.CreateFileSearchToolResourceOptions": {},
+    "Assistants.CreateFileSearchToolResourceVectorStoreOptions": {
       "type": "object",
       "description": "File IDs associated to the vector store to be passed to the helper.",
       "properties": {
@@ -5051,7 +5110,7 @@
           "x-ms-client-name": "fileIds"
         },
         "chunking_strategy": {
-          "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest",
+          "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyRequest",
           "description": "The chunking strategy used to chunk the file(s). If not set, will use the `auto` strategy.",
           "x-ms-client-name": "chunkingStrategy"
         },
@@ -5069,7 +5128,7 @@
         "chunking_strategy"
       ]
     },
-    "Agents.CreateRunOptions": {
+    "Assistants.CreateRunOptions": {
       "type": "object",
       "description": "The details used when creating a new run of an agent thread.",
       "properties": {
@@ -5099,7 +5158,7 @@
           "description": "Adds additional messages to the thread before creating the run.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Agents.ThreadMessageOptions"
+            "$ref": "#/definitions/Assistants.ThreadMessageOptions"
           },
           "x-ms-client-name": "additionalMessages",
           "x-ms-identifiers": []
@@ -5109,7 +5168,7 @@
           "description": "The overridden list of enabled tools that the agent should use to run the thread.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Agents.ToolDefinition"
+            "$ref": "#/definitions/Assistants.ToolDefinition"
           },
           "x-ms-identifiers": []
         },
@@ -5152,19 +5211,19 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.TruncationObject"
+              "$ref": "#/definitions/Assistants.TruncationObject"
             }
           ],
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
-          "$ref": "#/definitions/Agents.AgentsApiToolChoiceOption",
+          "$ref": "#/definitions/Assistants.AgentsApiToolChoiceOption",
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
         },
         "response_format": {
-          "$ref": "#/definitions/Agents.AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/Assistants.AgentsApiResponseFormatOption",
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -5187,28 +5246,28 @@
         "assistant_id"
       ]
     },
-    "Agents.CreateToolResourcesOptions": {
+    "Assistants.CreateToolResourcesOptions": {
       "type": "object",
       "description": "Request object. A set of resources that are used by the agent's tools. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
       "properties": {
         "code_interpreter": {
-          "$ref": "#/definitions/Agents.CreateCodeInterpreterToolResourceOptions",
+          "$ref": "#/definitions/Assistants.CreateCodeInterpreterToolResourceOptions",
           "description": "A list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
           "x-ms-client-name": "codeInterpreter"
         },
         "file_search": {
-          "$ref": "#/definitions/Agents.CreateFileSearchToolResourceOptions",
+          "$ref": "#/definitions/Assistants.CreateFileSearchToolResourceOptions",
           "description": "A list of vector stores or their IDs made available to the `file_search` tool.",
           "x-ms-client-name": "fileSearch"
         },
         "azure_ai_search": {
-          "$ref": "#/definitions/Agents.AzureAISearchResource",
+          "$ref": "#/definitions/Assistants.AzureAISearchResource",
           "description": "Resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
           "x-ms-client-name": "azureAISearch"
         }
       }
     },
-    "Agents.DoneEvent": {
+    "Assistants.DoneEvent": {
       "type": "string",
       "description": "Terminal event indicating the successful end of a stream.",
       "enum": [
@@ -5226,7 +5285,7 @@
         ]
       }
     },
-    "Agents.ErrorEvent": {
+    "Assistants.ErrorEvent": {
       "type": "string",
       "description": "Terminal event indicating a server side error while streaming.",
       "enum": [
@@ -5244,7 +5303,7 @@
         ]
       }
     },
-    "Agents.FileDeletionStatus": {
+    "Assistants.FileDeletionStatus": {
       "type": "object",
       "description": "A status response from a file deletion operation.",
       "properties": {
@@ -5273,7 +5332,7 @@
         "object"
       ]
     },
-    "Agents.FileListResponse": {
+    "Assistants.FileListResponse": {
       "type": "object",
       "description": "The response data from a file list operation.",
       "properties": {
@@ -5291,7 +5350,7 @@
           "type": "array",
           "description": "The files returned for the request.",
           "items": {
-            "$ref": "#/definitions/Agents.OpenAIFile"
+            "$ref": "#/definitions/Assistants.OpenAIFile"
           }
         }
       },
@@ -5300,7 +5359,7 @@
         "data"
       ]
     },
-    "Agents.FilePurpose": {
+    "Assistants.FilePurpose": {
       "type": "string",
       "description": "The possible values denoting the intended usage of a file.",
       "enum": [
@@ -5354,7 +5413,7 @@
         ]
       }
     },
-    "Agents.FileSearchRankingOptions": {
+    "Assistants.FileSearchRankingOptions": {
       "type": "object",
       "description": "Ranking options for file search.",
       "properties": {
@@ -5374,7 +5433,7 @@
         "score_threshold"
       ]
     },
-    "Agents.FileSearchToolCallContent": {
+    "Assistants.FileSearchToolCallContent": {
       "type": "object",
       "description": "The file search result content object.",
       "properties": {
@@ -5398,24 +5457,24 @@
         "text"
       ]
     },
-    "Agents.FileSearchToolDefinition": {
+    "Assistants.FileSearchToolDefinition": {
       "type": "object",
       "description": "The input definition information for a file search tool as used to configure an agent.",
       "properties": {
         "file_search": {
-          "$ref": "#/definitions/Agents.FileSearchToolDefinitionDetails",
+          "$ref": "#/definitions/Assistants.FileSearchToolDefinitionDetails",
           "description": "Options overrides for the file search tool.",
           "x-ms-client-name": "fileSearch"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ToolDefinition"
+          "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "file_search"
     },
-    "Agents.FileSearchToolDefinitionDetails": {
+    "Assistants.FileSearchToolDefinitionDetails": {
       "type": "object",
       "description": "Options overrides for the file search tool.",
       "properties": {
@@ -5428,13 +5487,13 @@
           "x-ms-client-name": "maxNumResults"
         },
         "ranking_options": {
-          "$ref": "#/definitions/Agents.FileSearchRankingOptions",
+          "$ref": "#/definitions/Assistants.FileSearchRankingOptions",
           "description": "Ranking options for file search.",
           "x-ms-client-name": "rankingOptions"
         }
       }
     },
-    "Agents.FileSearchToolResource": {
+    "Assistants.FileSearchToolResource": {
       "type": "object",
       "description": "A set of resources that are used by the `file_search` tool.",
       "properties": {
@@ -5452,14 +5511,14 @@
           "description": "The list of vector store configuration objects from Azure.\nThis list is limited to one element.\nThe only element of this list contains the list of azure asset IDs used by the search tool.",
           "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/Agents.VectorStoreConfigurations"
+            "$ref": "#/definitions/Assistants.VectorStoreConfigurations"
           },
           "x-ms-client-name": "vectorStores",
           "x-ms-identifiers": []
         }
       }
     },
-    "Agents.FileState": {
+    "Assistants.FileState": {
       "type": "string",
       "description": "The state of the file.",
       "enum": [
@@ -5513,7 +5572,7 @@
         ]
       }
     },
-    "Agents.FunctionDefinition": {
+    "Assistants.FunctionDefinition": {
       "type": "object",
       "description": "The input definition information for a function.",
       "properties": {
@@ -5534,7 +5593,7 @@
         "parameters"
       ]
     },
-    "Agents.FunctionName": {
+    "Assistants.FunctionName": {
       "type": "object",
       "description": "The function name that will be used, if using the `function` tool",
       "properties": {
@@ -5547,12 +5606,12 @@
         "name"
       ]
     },
-    "Agents.FunctionToolDefinition": {
+    "Assistants.FunctionToolDefinition": {
       "type": "object",
       "description": "The input definition information for a function tool as used to configure an agent.",
       "properties": {
         "function": {
-          "$ref": "#/definitions/Agents.FunctionDefinition",
+          "$ref": "#/definitions/Assistants.FunctionDefinition",
           "description": "The definition of the concrete function that the function tool should call."
         }
       },
@@ -5561,12 +5620,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ToolDefinition"
+          "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "function"
     },
-    "Agents.IncompleteDetailsReason": {
+    "Assistants.IncompleteDetailsReason": {
       "type": "string",
       "description": "The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.",
       "enum": [
@@ -5590,12 +5649,12 @@
         ]
       }
     },
-    "Agents.IncompleteRunDetails": {
+    "Assistants.IncompleteRunDetails": {
       "type": "object",
       "description": "Details on why the run is incomplete. Will be `null` if the run is not incomplete.",
       "properties": {
         "reason": {
-          "$ref": "#/definitions/Agents.IncompleteDetailsReason",
+          "$ref": "#/definitions/Assistants.IncompleteDetailsReason",
           "description": "The reason why the run is incomplete. This indicates which specific token limit was reached during the run."
         }
       },
@@ -5603,7 +5662,7 @@
         "reason"
       ]
     },
-    "Agents.IndexResource": {
+    "Assistants.IndexResource": {
       "type": "object",
       "description": "A Index resource.",
       "properties": {
@@ -5623,7 +5682,7 @@
         "index_name"
       ]
     },
-    "Agents.ListSortOrder": {
+    "Assistants.ListSortOrder": {
       "type": "string",
       "description": "The available sorting options when requesting a list of response objects.",
       "enum": [
@@ -5647,7 +5706,7 @@
         ]
       }
     },
-    "Agents.MessageAttachment": {
+    "Assistants.MessageAttachment": {
       "type": "object",
       "description": "This describes to which tools a file has been attached.",
       "properties": {
@@ -5657,7 +5716,7 @@
           "x-ms-client-name": "fileId"
         },
         "data_source": {
-          "$ref": "#/definitions/Agents.VectorStoreDataSource",
+          "$ref": "#/definitions/Assistants.VectorStoreDataSource",
           "description": "Azure asset ID.",
           "x-ms-client-name": "dataSource"
         },
@@ -5665,7 +5724,7 @@
           "type": "array",
           "description": "The tools to add to this file.",
           "items": {
-            "$ref": "#/definitions/Agents.MessageAttachmentToolDefinition"
+            "$ref": "#/definitions/Assistants.MessageAttachmentToolDefinition"
           }
         }
       },
@@ -5673,10 +5732,10 @@
         "tools"
       ]
     },
-    "Agents.MessageAttachmentToolDefinition": {
+    "Assistants.MessageAttachmentToolDefinition": {
       "x-nullable": false
     },
-    "Agents.MessageContent": {
+    "Assistants.MessageContent": {
       "type": "object",
       "description": "An abstract representation of a single item of thread message content.",
       "properties": {
@@ -5690,19 +5749,19 @@
         "type"
       ]
     },
-    "Agents.MessageDelta": {
+    "Assistants.MessageDelta": {
       "type": "object",
       "description": "Represents the typed 'delta' payload within a streaming message delta chunk.",
       "properties": {
         "role": {
-          "$ref": "#/definitions/Agents.MessageRole",
+          "$ref": "#/definitions/Assistants.MessageRole",
           "description": "The entity that produced the message."
         },
         "content": {
           "type": "array",
           "description": "The content of the message as an array of text and/or images.",
           "items": {
-            "$ref": "#/definitions/Agents.MessageDeltaContent"
+            "$ref": "#/definitions/Assistants.MessageDeltaContent"
           },
           "x-ms-identifiers": []
         }
@@ -5712,7 +5771,7 @@
         "content"
       ]
     },
-    "Agents.MessageDeltaChunk": {
+    "Assistants.MessageDeltaChunk": {
       "type": "object",
       "description": "Represents a message delta i.e. any changed fields on a message during streaming.",
       "properties": {
@@ -5731,7 +5790,7 @@
           }
         },
         "delta": {
-          "$ref": "#/definitions/Agents.MessageDelta",
+          "$ref": "#/definitions/Assistants.MessageDelta",
           "description": "The delta containing the fields that have changed on the Message."
         }
       },
@@ -5741,7 +5800,7 @@
         "delta"
       ]
     },
-    "Agents.MessageDeltaContent": {
+    "Assistants.MessageDeltaContent": {
       "type": "object",
       "description": "The abstract base representation of a partial streamed message content payload.",
       "properties": {
@@ -5761,24 +5820,24 @@
         "type"
       ]
     },
-    "Agents.MessageDeltaImageFileContent": {
+    "Assistants.MessageDeltaImageFileContent": {
       "type": "object",
       "description": "Represents a streamed image file content part within a streaming message delta chunk.",
       "properties": {
         "image_file": {
-          "$ref": "#/definitions/Agents.MessageDeltaImageFileContentObject",
+          "$ref": "#/definitions/Assistants.MessageDeltaImageFileContentObject",
           "description": "The image_file data.",
           "x-ms-client-name": "imageFile"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.MessageDeltaContent"
+          "$ref": "#/definitions/Assistants.MessageDeltaContent"
         }
       ],
       "x-ms-discriminator-value": "image_file"
     },
-    "Agents.MessageDeltaImageFileContentObject": {
+    "Assistants.MessageDeltaImageFileContentObject": {
       "type": "object",
       "description": "Represents the 'image_file' payload within streaming image file content.",
       "properties": {
@@ -5789,7 +5848,7 @@
         }
       }
     },
-    "Agents.MessageDeltaTextAnnotation": {
+    "Assistants.MessageDeltaTextAnnotation": {
       "type": "object",
       "description": "The abstract base representation of a streamed text content part's text annotation.",
       "properties": {
@@ -5809,23 +5868,23 @@
         "type"
       ]
     },
-    "Agents.MessageDeltaTextContent": {
+    "Assistants.MessageDeltaTextContent": {
       "type": "object",
       "description": "Represents a streamed text content part within a streaming message delta chunk.",
       "properties": {
         "text": {
-          "$ref": "#/definitions/Agents.MessageDeltaTextContentObject",
+          "$ref": "#/definitions/Assistants.MessageDeltaTextContentObject",
           "description": "The text content details."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.MessageDeltaContent"
+          "$ref": "#/definitions/Assistants.MessageDeltaContent"
         }
       ],
       "x-ms-discriminator-value": "text"
     },
-    "Agents.MessageDeltaTextContentObject": {
+    "Assistants.MessageDeltaTextContentObject": {
       "type": "object",
       "description": "Represents the data of a streamed text content part within a streaming message delta chunk.",
       "properties": {
@@ -5837,18 +5896,18 @@
           "type": "array",
           "description": "Annotations for the text.",
           "items": {
-            "$ref": "#/definitions/Agents.MessageDeltaTextAnnotation"
+            "$ref": "#/definitions/Assistants.MessageDeltaTextAnnotation"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "Agents.MessageDeltaTextFileCitationAnnotation": {
+    "Assistants.MessageDeltaTextFileCitationAnnotation": {
       "type": "object",
       "description": "Represents a streamed file citation applied to a streaming text content part.",
       "properties": {
         "file_citation": {
-          "$ref": "#/definitions/Agents.MessageDeltaTextFileCitationAnnotationObject",
+          "$ref": "#/definitions/Assistants.MessageDeltaTextFileCitationAnnotationObject",
           "description": "The file citation information.",
           "x-ms-client-name": "fileCitation"
         },
@@ -5871,12 +5930,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.MessageDeltaTextAnnotation"
+          "$ref": "#/definitions/Assistants.MessageDeltaTextAnnotation"
         }
       ],
       "x-ms-discriminator-value": "file_citation"
     },
-    "Agents.MessageDeltaTextFileCitationAnnotationObject": {
+    "Assistants.MessageDeltaTextFileCitationAnnotationObject": {
       "type": "object",
       "description": "Represents the data of a streamed file citation as applied to a streaming text content part.",
       "properties": {
@@ -5891,12 +5950,12 @@
         }
       }
     },
-    "Agents.MessageDeltaTextFilePathAnnotation": {
+    "Assistants.MessageDeltaTextFilePathAnnotation": {
       "type": "object",
       "description": "Represents a streamed file path annotation applied to a streaming text content part.",
       "properties": {
         "file_path": {
-          "$ref": "#/definitions/Agents.MessageDeltaTextFilePathAnnotationObject",
+          "$ref": "#/definitions/Assistants.MessageDeltaTextFilePathAnnotationObject",
           "description": "The file path information.",
           "x-ms-client-name": "filePath"
         },
@@ -5919,12 +5978,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.MessageDeltaTextAnnotation"
+          "$ref": "#/definitions/Assistants.MessageDeltaTextAnnotation"
         }
       ],
       "x-ms-discriminator-value": "file_path"
     },
-    "Agents.MessageDeltaTextFilePathAnnotationObject": {
+    "Assistants.MessageDeltaTextFilePathAnnotationObject": {
       "type": "object",
       "description": "Represents the data of a streamed file path annotation as applied to a streaming text content part.",
       "properties": {
@@ -5935,7 +5994,7 @@
         }
       }
     },
-    "Agents.MessageDeltaTextUrlCitationDetails": {
+    "Assistants.MessageDeltaTextUrlCitationDetails": {
       "type": "object",
       "description": "A representation of the URL used for the text citation.",
       "properties": {
@@ -5949,12 +6008,12 @@
         }
       }
     },
-    "Agents.MessageImageFileContent": {
+    "Assistants.MessageImageFileContent": {
       "type": "object",
       "description": "A representation of image file content in a thread message.",
       "properties": {
         "image_file": {
-          "$ref": "#/definitions/Agents.MessageImageFileDetails",
+          "$ref": "#/definitions/Assistants.MessageImageFileDetails",
           "description": "The image file for this thread message content item.",
           "x-ms-client-name": "imageFile"
         }
@@ -5964,12 +6023,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.MessageContent"
+          "$ref": "#/definitions/Assistants.MessageContent"
         }
       ],
       "x-ms-discriminator-value": "image_file"
     },
-    "Agents.MessageImageFileDetails": {
+    "Assistants.MessageImageFileDetails": {
       "type": "object",
       "description": "An image reference, as represented in thread message content.",
       "properties": {
@@ -5983,12 +6042,12 @@
         "file_id"
       ]
     },
-    "Agents.MessageIncompleteDetails": {
+    "Assistants.MessageIncompleteDetails": {
       "type": "object",
       "description": "Information providing additional detail about a message entering an incomplete status.",
       "properties": {
         "reason": {
-          "$ref": "#/definitions/Agents.MessageIncompleteDetailsReason",
+          "$ref": "#/definitions/Assistants.MessageIncompleteDetailsReason",
           "description": "The provided reason describing why the message was marked as incomplete."
         }
       },
@@ -5996,7 +6055,7 @@
         "reason"
       ]
     },
-    "Agents.MessageIncompleteDetailsReason": {
+    "Assistants.MessageIncompleteDetailsReason": {
       "type": "string",
       "description": "A set of reasons describing why a message is marked as incomplete.",
       "enum": [
@@ -6038,7 +6097,7 @@
         ]
       }
     },
-    "Agents.MessageRole": {
+    "Assistants.MessageRole": {
       "type": "string",
       "description": "The possible values for roles attributed to messages in a thread.",
       "enum": [
@@ -6062,7 +6121,7 @@
         ]
       }
     },
-    "Agents.MessageStatus": {
+    "Assistants.MessageStatus": {
       "type": "string",
       "description": "The possible execution status values for a thread message.",
       "enum": [
@@ -6092,7 +6151,7 @@
         ]
       }
     },
-    "Agents.MessageStreamEvent": {
+    "Assistants.MessageStreamEvent": {
       "type": "string",
       "description": "Message operation related streaming events",
       "enum": [
@@ -6134,7 +6193,7 @@
         ]
       }
     },
-    "Agents.MessageTextAnnotation": {
+    "Assistants.MessageTextAnnotation": {
       "type": "object",
       "description": "An abstract representation of an annotation to text thread message content.",
       "properties": {
@@ -6153,12 +6212,12 @@
         "text"
       ]
     },
-    "Agents.MessageTextContent": {
+    "Assistants.MessageTextContent": {
       "type": "object",
       "description": "A representation of a textual item of thread message content.",
       "properties": {
         "text": {
-          "$ref": "#/definitions/Agents.MessageTextDetails",
+          "$ref": "#/definitions/Assistants.MessageTextDetails",
           "description": "The text and associated annotations for this thread message content item."
         }
       },
@@ -6167,12 +6226,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.MessageContent"
+          "$ref": "#/definitions/Assistants.MessageContent"
         }
       ],
       "x-ms-discriminator-value": "text"
     },
-    "Agents.MessageTextDetails": {
+    "Assistants.MessageTextDetails": {
       "type": "object",
       "description": "The text and associated annotations for a single item of agent thread message content.",
       "properties": {
@@ -6184,7 +6243,7 @@
           "type": "array",
           "description": "A list of annotations associated with this text.",
           "items": {
-            "$ref": "#/definitions/Agents.MessageTextAnnotation"
+            "$ref": "#/definitions/Assistants.MessageTextAnnotation"
           },
           "x-ms-identifiers": []
         }
@@ -6194,12 +6253,12 @@
         "annotations"
       ]
     },
-    "Agents.MessageTextFileCitationAnnotation": {
+    "Assistants.MessageTextFileCitationAnnotation": {
       "type": "object",
       "description": "A citation within the message that points to a specific quote from a specific File associated with the agent or the message. Generated when the agent uses the 'file_search' tool to search files.",
       "properties": {
         "file_citation": {
-          "$ref": "#/definitions/Agents.MessageTextFileCitationDetails",
+          "$ref": "#/definitions/Assistants.MessageTextFileCitationDetails",
           "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the agent uses the \"file_search\" tool to search files.",
           "x-ms-client-name": "fileCitation"
         },
@@ -6221,12 +6280,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.MessageTextAnnotation"
+          "$ref": "#/definitions/Assistants.MessageTextAnnotation"
         }
       ],
       "x-ms-discriminator-value": "file_citation"
     },
-    "Agents.MessageTextFileCitationDetails": {
+    "Assistants.MessageTextFileCitationDetails": {
       "type": "object",
       "description": "A representation of a file-based text citation, as used in a file-based annotation of text thread message content.",
       "properties": {
@@ -6245,12 +6304,12 @@
         "quote"
       ]
     },
-    "Agents.MessageTextFilePathAnnotation": {
+    "Assistants.MessageTextFilePathAnnotation": {
       "type": "object",
       "description": "A citation within the message that points to a file located at a specific path.",
       "properties": {
         "file_path": {
-          "$ref": "#/definitions/Agents.MessageTextFilePathDetails",
+          "$ref": "#/definitions/Assistants.MessageTextFilePathDetails",
           "description": "A URL for the file that's generated when the agent used the code_interpreter tool to generate a file.",
           "x-ms-client-name": "filePath"
         },
@@ -6272,12 +6331,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.MessageTextAnnotation"
+          "$ref": "#/definitions/Assistants.MessageTextAnnotation"
         }
       ],
       "x-ms-discriminator-value": "file_path"
     },
-    "Agents.MessageTextFilePathDetails": {
+    "Assistants.MessageTextFilePathDetails": {
       "type": "object",
       "description": "An encapsulation of an image file ID, as used by message image content.",
       "properties": {
@@ -6291,12 +6350,12 @@
         "file_id"
       ]
     },
-    "Agents.MicrosoftFabricToolDefinition": {
+    "Assistants.MicrosoftFabricToolDefinition": {
       "type": "object",
       "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
       "properties": {
         "fabric_aiskill": {
-          "$ref": "#/definitions/Agents.ToolConnectionList",
+          "$ref": "#/definitions/Assistants.ToolConnectionList",
           "description": "The list of connections used by the Microsoft Fabric tool."
         }
       },
@@ -6305,12 +6364,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ToolDefinition"
+          "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "fabric_aiskill"
     },
-    "Agents.OpenAIFile": {
+    "Assistants.OpenAIFile": {
       "type": "object",
       "description": "Represents an agent that can call the model and use tools.",
       "properties": {
@@ -6344,11 +6403,11 @@
           "x-ms-client-name": "createdAt"
         },
         "purpose": {
-          "$ref": "#/definitions/Agents.FilePurpose",
+          "$ref": "#/definitions/Assistants.FilePurpose",
           "description": "The intended purpose of a file."
         },
         "status": {
-          "$ref": "#/definitions/Agents.FileState",
+          "$ref": "#/definitions/Assistants.FileState",
           "description": "The state of the file. This field is available in Azure OpenAI only."
         },
         "status_details": {
@@ -6366,22 +6425,22 @@
         "purpose"
       ]
     },
-    "Agents.OpenApiAnonymousAuthDetails": {
+    "Assistants.OpenApiAnonymousAuthDetails": {
       "type": "object",
       "description": "Security details for OpenApi anonymous authentication",
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.OpenApiAuthDetails"
+          "$ref": "#/definitions/Assistants.OpenApiAuthDetails"
         }
       ],
       "x-ms-discriminator-value": "anonymous"
     },
-    "Agents.OpenApiAuthDetails": {
+    "Assistants.OpenApiAuthDetails": {
       "type": "object",
       "description": "authentication details for OpenApiFunctionDefinition",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Agents.OpenApiAuthType",
+          "$ref": "#/definitions/Assistants.OpenApiAuthType",
           "description": "The type of authentication, must be anonymous/connection/managed_identity"
         }
       },
@@ -6390,7 +6449,7 @@
         "type"
       ]
     },
-    "Agents.OpenApiAuthType": {
+    "Assistants.OpenApiAuthType": {
       "type": "string",
       "description": "  Authentication type for OpenApi endpoint. Allowed types are:\n  - Anonymous (no authentication required)\n  - Connection (requires connection_id to endpoint, as setup in AI Foundry)\n  - Managed_Identity (requires audience for identity based auth)",
       "enum": [
@@ -6417,12 +6476,12 @@
         ]
       }
     },
-    "Agents.OpenApiConnectionAuthDetails": {
+    "Assistants.OpenApiConnectionAuthDetails": {
       "type": "object",
       "description": "Security details for OpenApi connection authentication",
       "properties": {
         "security_scheme": {
-          "$ref": "#/definitions/Agents.OpenApiConnectionSecurityScheme",
+          "$ref": "#/definitions/Assistants.OpenApiConnectionSecurityScheme",
           "description": "Connection auth security details"
         }
       },
@@ -6431,12 +6490,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.OpenApiAuthDetails"
+          "$ref": "#/definitions/Assistants.OpenApiAuthDetails"
         }
       ],
       "x-ms-discriminator-value": "connection"
     },
-    "Agents.OpenApiConnectionSecurityScheme": {
+    "Assistants.OpenApiConnectionSecurityScheme": {
       "type": "object",
       "description": "Security scheme for OpenApi managed_identity authentication",
       "properties": {
@@ -6449,7 +6508,7 @@
         "connection_id"
       ]
     },
-    "Agents.OpenApiFunctionDefinition": {
+    "Assistants.OpenApiFunctionDefinition": {
       "type": "object",
       "description": "The input definition information for an openapi function.",
       "properties": {
@@ -6465,7 +6524,7 @@
           "description": "The openapi function shape, described as a JSON Schema object."
         },
         "auth": {
-          "$ref": "#/definitions/Agents.OpenApiAuthDetails",
+          "$ref": "#/definitions/Assistants.OpenApiAuthDetails",
           "description": "Open API authentication details"
         }
       },
@@ -6475,12 +6534,12 @@
         "auth"
       ]
     },
-    "Agents.OpenApiManagedAuthDetails": {
+    "Assistants.OpenApiManagedAuthDetails": {
       "type": "object",
       "description": "Security details for OpenApi managed_identity authentication",
       "properties": {
         "security_scheme": {
-          "$ref": "#/definitions/Agents.OpenApiManagedSecurityScheme",
+          "$ref": "#/definitions/Assistants.OpenApiManagedSecurityScheme",
           "description": "Connection auth security details"
         }
       },
@@ -6489,12 +6548,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.OpenApiAuthDetails"
+          "$ref": "#/definitions/Assistants.OpenApiAuthDetails"
         }
       ],
       "x-ms-discriminator-value": "managed_identity"
     },
-    "Agents.OpenApiManagedSecurityScheme": {
+    "Assistants.OpenApiManagedSecurityScheme": {
       "type": "object",
       "description": "Security scheme for OpenApi managed_identity authentication",
       "properties": {
@@ -6507,12 +6566,12 @@
         "audience"
       ]
     },
-    "Agents.OpenApiToolDefinition": {
+    "Assistants.OpenApiToolDefinition": {
       "type": "object",
       "description": "The input definition information for an OpenAPI tool as used to configure an agent.",
       "properties": {
         "openapi": {
-          "$ref": "#/definitions/Agents.OpenApiFunctionDefinition",
+          "$ref": "#/definitions/Assistants.OpenApiFunctionDefinition",
           "description": "The openapi function definition."
         }
       },
@@ -6521,12 +6580,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ToolDefinition"
+          "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "openapi"
     },
-    "Agents.RequiredAction": {
+    "Assistants.RequiredAction": {
       "type": "object",
       "description": "An abstract representation of a required action for an agent thread run to continue.",
       "properties": {
@@ -6540,12 +6599,12 @@
         "type"
       ]
     },
-    "Agents.RequiredFunctionToolCall": {
+    "Assistants.RequiredFunctionToolCall": {
       "type": "object",
       "description": "A representation of a requested call to a function tool, needed by the model to continue evaluation of a run.",
       "properties": {
         "function": {
-          "$ref": "#/definitions/Agents.RequiredFunctionToolCallDetails",
+          "$ref": "#/definitions/Assistants.RequiredFunctionToolCallDetails",
           "description": "Detailed information about the function to be executed by the tool that includes name and arguments."
         }
       },
@@ -6554,12 +6613,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RequiredToolCall"
+          "$ref": "#/definitions/Assistants.RequiredToolCall"
         }
       ],
       "x-ms-discriminator-value": "function"
     },
-    "Agents.RequiredFunctionToolCallDetails": {
+    "Assistants.RequiredFunctionToolCallDetails": {
       "type": "object",
       "description": "The detailed information for a function invocation, as provided by a required action invoking a function tool, that includes the name of and arguments to the function.",
       "properties": {
@@ -6577,7 +6636,7 @@
         "arguments"
       ]
     },
-    "Agents.RequiredToolCall": {
+    "Assistants.RequiredToolCall": {
       "type": "object",
       "description": "An abstract representation of a tool invocation needed by the model to continue a run.",
       "properties": {
@@ -6596,7 +6655,7 @@
         "id"
       ]
     },
-    "Agents.ResponseFormat": {
+    "Assistants.ResponseFormat": {
       "type": "string",
       "description": "Possible API response formats.",
       "enum": [
@@ -6620,7 +6679,7 @@
         ]
       }
     },
-    "Agents.ResponseFormatJsonSchema": {
+    "Assistants.ResponseFormatJsonSchema": {
       "type": "object",
       "description": "A description of what the response format is for, used by the model to determine how to respond in the format.",
       "properties": {
@@ -6641,7 +6700,7 @@
         "schema"
       ]
     },
-    "Agents.ResponseFormatJsonSchemaType": {
+    "Assistants.ResponseFormatJsonSchemaType": {
       "type": "object",
       "description": "The type of response format being defined: `json_schema`",
       "properties": {
@@ -6656,7 +6715,7 @@
           }
         },
         "json_schema": {
-          "$ref": "#/definitions/Agents.ResponseFormatJsonSchema",
+          "$ref": "#/definitions/Assistants.ResponseFormatJsonSchema",
           "description": "The JSON schema, describing response format.",
           "x-ms-client-name": "jsonSchema"
         }
@@ -6666,7 +6725,7 @@
         "json_schema"
       ]
     },
-    "Agents.RunAdditionalFieldList": {
+    "Assistants.RunAdditionalFieldList": {
       "type": "string",
       "description": "A list of additional fields to include in the response.",
       "enum": [
@@ -6684,7 +6743,7 @@
         ]
       }
     },
-    "Agents.RunCompletionUsage": {
+    "Assistants.RunCompletionUsage": {
       "type": "object",
       "description": "Usage statistics related to the run. This value will be `null` if the run is not in a terminal state (i.e. `in_progress`, `queued`, etc.).",
       "properties": {
@@ -6713,7 +6772,7 @@
         "total_tokens"
       ]
     },
-    "Agents.RunError": {
+    "Assistants.RunError": {
       "type": "object",
       "description": "The details of an error as encountered by an agent thread run.",
       "properties": {
@@ -6731,7 +6790,7 @@
         "message"
       ]
     },
-    "Agents.RunStatus": {
+    "Assistants.RunStatus": {
       "type": "string",
       "description": "Possible values for the status of an agent thread run.",
       "enum": [
@@ -6791,7 +6850,7 @@
         ]
       }
     },
-    "Agents.RunStep": {
+    "Assistants.RunStep": {
       "type": "object",
       "description": "Detailed information about a single step of an agent thread run.",
       "properties": {
@@ -6810,7 +6869,7 @@
           }
         },
         "type": {
-          "$ref": "#/definitions/Agents.RunStepType",
+          "$ref": "#/definitions/Assistants.RunStepType",
           "description": "The type of run step, which can be either message_creation or tool_calls."
         },
         "assistant_id": {
@@ -6829,11 +6888,11 @@
           "x-ms-client-name": "runId"
         },
         "status": {
-          "$ref": "#/definitions/Agents.RunStepStatus",
+          "$ref": "#/definitions/Assistants.RunStepStatus",
           "description": "The status of this run step."
         },
         "step_details": {
-          "$ref": "#/definitions/Agents.RunStepDetails",
+          "$ref": "#/definitions/Assistants.RunStepDetails",
           "description": "The details for this run step.",
           "x-ms-client-name": "stepDetails"
         },
@@ -6843,7 +6902,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.RunStepError"
+              "$ref": "#/definitions/Assistants.RunStepError"
             }
           ],
           "x-ms-client-name": "lastError"
@@ -6888,7 +6947,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.RunStepCompletionUsage"
+              "$ref": "#/definitions/Assistants.RunStepCompletionUsage"
             }
           ]
         },
@@ -6919,7 +6978,7 @@
         "metadata"
       ]
     },
-    "Agents.RunStepAzureAISearchToolCall": {
+    "Assistants.RunStepAzureAISearchToolCall": {
       "type": "object",
       "description": "A record of a call to an Azure AI Search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Azure AI search.",
       "properties": {
@@ -6937,12 +6996,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepToolCall"
+          "$ref": "#/definitions/Assistants.RunStepToolCall"
         }
       ],
       "x-ms-discriminator-value": "azure_ai_search"
     },
-    "Agents.RunStepBingGroundingToolCall": {
+    "Assistants.RunStepBingGroundingToolCall": {
       "type": "object",
       "description": "A record of a call to a bing grounding tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing grounding.",
       "properties": {
@@ -6960,17 +7019,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepToolCall"
+          "$ref": "#/definitions/Assistants.RunStepToolCall"
         }
       ],
       "x-ms-discriminator-value": "bing_grounding"
     },
-    "Agents.RunStepCodeInterpreterImageOutput": {
+    "Assistants.RunStepCodeInterpreterImageOutput": {
       "type": "object",
       "description": "A representation of an image output emitted by a code interpreter tool in response to a tool call by the model.",
       "properties": {
         "image": {
-          "$ref": "#/definitions/Agents.RunStepCodeInterpreterImageReference",
+          "$ref": "#/definitions/Assistants.RunStepCodeInterpreterImageReference",
           "description": "Referential information for the image associated with this output."
         }
       },
@@ -6979,12 +7038,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepCodeInterpreterToolCallOutput"
+          "$ref": "#/definitions/Assistants.RunStepCodeInterpreterToolCallOutput"
         }
       ],
       "x-ms-discriminator-value": "image"
     },
-    "Agents.RunStepCodeInterpreterImageReference": {
+    "Assistants.RunStepCodeInterpreterImageReference": {
       "type": "object",
       "description": "An image reference emitted by a code interpreter tool in response to a tool call by the model.",
       "properties": {
@@ -6998,7 +7057,7 @@
         "file_id"
       ]
     },
-    "Agents.RunStepCodeInterpreterLogOutput": {
+    "Assistants.RunStepCodeInterpreterLogOutput": {
       "type": "object",
       "description": "A representation of a log output emitted by a code interpreter tool in response to a tool call by the model.",
       "properties": {
@@ -7012,17 +7071,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepCodeInterpreterToolCallOutput"
+          "$ref": "#/definitions/Assistants.RunStepCodeInterpreterToolCallOutput"
         }
       ],
       "x-ms-discriminator-value": "logs"
     },
-    "Agents.RunStepCodeInterpreterToolCall": {
+    "Assistants.RunStepCodeInterpreterToolCall": {
       "type": "object",
       "description": "A record of a call to a code interpreter tool, issued by the model in evaluation of a defined tool, that\nrepresents inputs and outputs consumed and emitted by the code interpreter.",
       "properties": {
         "code_interpreter": {
-          "$ref": "#/definitions/Agents.RunStepCodeInterpreterToolCallDetails",
+          "$ref": "#/definitions/Assistants.RunStepCodeInterpreterToolCallDetails",
           "description": "The details of the tool call to the code interpreter tool.",
           "x-ms-client-name": "codeInterpreter"
         }
@@ -7032,12 +7091,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepToolCall"
+          "$ref": "#/definitions/Assistants.RunStepToolCall"
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
     },
-    "Agents.RunStepCodeInterpreterToolCallDetails": {
+    "Assistants.RunStepCodeInterpreterToolCallDetails": {
       "type": "object",
       "description": "The detailed information about a code interpreter invocation by the model.",
       "properties": {
@@ -7049,7 +7108,7 @@
           "type": "array",
           "description": "The outputs produced by the code interpreter tool back to the model in response to the tool call.",
           "items": {
-            "$ref": "#/definitions/Agents.RunStepCodeInterpreterToolCallOutput"
+            "$ref": "#/definitions/Assistants.RunStepCodeInterpreterToolCallOutput"
           },
           "x-ms-identifiers": []
         }
@@ -7059,7 +7118,7 @@
         "outputs"
       ]
     },
-    "Agents.RunStepCodeInterpreterToolCallOutput": {
+    "Assistants.RunStepCodeInterpreterToolCallOutput": {
       "type": "object",
       "description": "An abstract representation of an emitted output from a code interpreter tool.",
       "properties": {
@@ -7073,7 +7132,7 @@
         "type"
       ]
     },
-    "Agents.RunStepCompletionUsage": {
+    "Assistants.RunStepCompletionUsage": {
       "type": "object",
       "description": "Usage statistics related to the run step.",
       "properties": {
@@ -7102,18 +7161,18 @@
         "total_tokens"
       ]
     },
-    "Agents.RunStepDelta": {
+    "Assistants.RunStepDelta": {
       "type": "object",
       "description": "Represents the delta payload in a streaming run step delta chunk.",
       "properties": {
         "step_details": {
-          "$ref": "#/definitions/Agents.RunStepDeltaDetail",
+          "$ref": "#/definitions/Assistants.RunStepDeltaDetail",
           "description": "The details of the run step.",
           "x-ms-client-name": "stepDetails"
         }
       }
     },
-    "Agents.RunStepDeltaChunk": {
+    "Assistants.RunStepDeltaChunk": {
       "type": "object",
       "description": "Represents a run step delta i.e. any changed fields on a run step during streaming.",
       "properties": {
@@ -7132,7 +7191,7 @@
           }
         },
         "delta": {
-          "$ref": "#/definitions/Agents.RunStepDelta",
+          "$ref": "#/definitions/Assistants.RunStepDelta",
           "description": "The delta containing the fields that have changed on the run step."
         }
       },
@@ -7142,7 +7201,7 @@
         "delta"
       ]
     },
-    "Agents.RunStepDeltaCodeInterpreterDetailItemObject": {
+    "Assistants.RunStepDeltaCodeInterpreterDetailItemObject": {
       "type": "object",
       "description": "Represents the Code Interpreter tool call data in a streaming run step's tool calls.",
       "properties": {
@@ -7154,29 +7213,29 @@
           "type": "array",
           "description": "The outputs from the Code Interpreter tool call. Code Interpreter can output one or more\nitems, including text (`logs`) or images (`image`). Each of these are represented by a\ndifferent object type.",
           "items": {
-            "$ref": "#/definitions/Agents.RunStepDeltaCodeInterpreterOutput"
+            "$ref": "#/definitions/Assistants.RunStepDeltaCodeInterpreterOutput"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "Agents.RunStepDeltaCodeInterpreterImageOutput": {
+    "Assistants.RunStepDeltaCodeInterpreterImageOutput": {
       "type": "object",
       "description": "Represents an image output as produced the Code interpreter tool and as represented in a streaming run step's delta tool calls collection.",
       "properties": {
         "image": {
-          "$ref": "#/definitions/Agents.RunStepDeltaCodeInterpreterImageOutputObject",
+          "$ref": "#/definitions/Assistants.RunStepDeltaCodeInterpreterImageOutputObject",
           "description": "The image data for the Code Interpreter tool call output."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepDeltaCodeInterpreterOutput"
+          "$ref": "#/definitions/Assistants.RunStepDeltaCodeInterpreterOutput"
         }
       ],
       "x-ms-discriminator-value": "image"
     },
-    "Agents.RunStepDeltaCodeInterpreterImageOutputObject": {
+    "Assistants.RunStepDeltaCodeInterpreterImageOutputObject": {
       "type": "object",
       "description": "Represents the data for a streaming run step's Code Interpreter tool call image output.",
       "properties": {
@@ -7187,7 +7246,7 @@
         }
       }
     },
-    "Agents.RunStepDeltaCodeInterpreterLogOutput": {
+    "Assistants.RunStepDeltaCodeInterpreterLogOutput": {
       "type": "object",
       "description": "Represents a log output as produced by the Code Interpreter tool and as represented in a streaming run step's delta tool calls collection.",
       "properties": {
@@ -7198,12 +7257,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepDeltaCodeInterpreterOutput"
+          "$ref": "#/definitions/Assistants.RunStepDeltaCodeInterpreterOutput"
         }
       ],
       "x-ms-discriminator-value": "logs"
     },
-    "Agents.RunStepDeltaCodeInterpreterOutput": {
+    "Assistants.RunStepDeltaCodeInterpreterOutput": {
       "type": "object",
       "description": "The abstract base representation of a streaming run step tool call's Code Interpreter tool output.",
       "properties": {
@@ -7223,24 +7282,24 @@
         "type"
       ]
     },
-    "Agents.RunStepDeltaCodeInterpreterToolCall": {
+    "Assistants.RunStepDeltaCodeInterpreterToolCall": {
       "type": "object",
       "description": "Represents a Code Interpreter tool call within a streaming run step's tool call details.",
       "properties": {
         "code_interpreter": {
-          "$ref": "#/definitions/Agents.RunStepDeltaCodeInterpreterDetailItemObject",
+          "$ref": "#/definitions/Assistants.RunStepDeltaCodeInterpreterDetailItemObject",
           "description": "The Code Interpreter data for the tool call.",
           "x-ms-client-name": "codeInterpreter"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepDeltaToolCall"
+          "$ref": "#/definitions/Assistants.RunStepDeltaToolCall"
         }
       ],
       "x-ms-discriminator-value": "code_interpreter"
     },
-    "Agents.RunStepDeltaDetail": {
+    "Assistants.RunStepDeltaDetail": {
       "type": "object",
       "description": "Represents a single run step detail item in a streaming run step's delta payload.",
       "properties": {
@@ -7254,7 +7313,7 @@
         "type"
       ]
     },
-    "Agents.RunStepDeltaFileSearchToolCall": {
+    "Assistants.RunStepDeltaFileSearchToolCall": {
       "type": "object",
       "description": "Represents a file search tool call within a streaming run step's tool call details.",
       "properties": {
@@ -7269,12 +7328,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepDeltaToolCall"
+          "$ref": "#/definitions/Assistants.RunStepDeltaToolCall"
         }
       ],
       "x-ms-discriminator-value": "file_search"
     },
-    "Agents.RunStepDeltaFunction": {
+    "Assistants.RunStepDeltaFunction": {
       "type": "object",
       "description": "Represents the function data in a streaming run step delta's function tool call.",
       "properties": {
@@ -7293,40 +7352,40 @@
         }
       }
     },
-    "Agents.RunStepDeltaFunctionToolCall": {
+    "Assistants.RunStepDeltaFunctionToolCall": {
       "type": "object",
       "description": "Represents a function tool call within a streaming run step's tool call details.",
       "properties": {
         "function": {
-          "$ref": "#/definitions/Agents.RunStepDeltaFunction",
+          "$ref": "#/definitions/Assistants.RunStepDeltaFunction",
           "description": "The function data for the tool call."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepDeltaToolCall"
+          "$ref": "#/definitions/Assistants.RunStepDeltaToolCall"
         }
       ],
       "x-ms-discriminator-value": "function"
     },
-    "Agents.RunStepDeltaMessageCreation": {
+    "Assistants.RunStepDeltaMessageCreation": {
       "type": "object",
       "description": "Represents a message creation within a streaming run step delta.",
       "properties": {
         "message_creation": {
-          "$ref": "#/definitions/Agents.RunStepDeltaMessageCreationObject",
+          "$ref": "#/definitions/Assistants.RunStepDeltaMessageCreationObject",
           "description": "The message creation data.",
           "x-ms-client-name": "messageCreation"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepDeltaDetail"
+          "$ref": "#/definitions/Assistants.RunStepDeltaDetail"
         }
       ],
       "x-ms-discriminator-value": "message_creation"
     },
-    "Agents.RunStepDeltaMessageCreationObject": {
+    "Assistants.RunStepDeltaMessageCreationObject": {
       "type": "object",
       "description": "Represents the data within a streaming run step message creation response object.",
       "properties": {
@@ -7337,7 +7396,7 @@
         }
       }
     },
-    "Agents.RunStepDeltaToolCall": {
+    "Assistants.RunStepDeltaToolCall": {
       "type": "object",
       "description": "The abstract base representation of a single tool call within a streaming run step's delta tool call details.",
       "properties": {
@@ -7362,7 +7421,7 @@
         "type"
       ]
     },
-    "Agents.RunStepDeltaToolCallObject": {
+    "Assistants.RunStepDeltaToolCallObject": {
       "type": "object",
       "description": "Represents an invocation of tool calls as part of a streaming run step.",
       "properties": {
@@ -7370,24 +7429,24 @@
           "type": "array",
           "description": "The collection of tool calls for the tool call detail item.",
           "items": {
-            "$ref": "#/definitions/Agents.RunStepDeltaToolCall"
+            "$ref": "#/definitions/Assistants.RunStepDeltaToolCall"
           },
           "x-ms-client-name": "toolCalls"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepDeltaDetail"
+          "$ref": "#/definitions/Assistants.RunStepDeltaDetail"
         }
       ],
       "x-ms-discriminator-value": "tool_calls"
     },
-    "Agents.RunStepDetails": {
+    "Assistants.RunStepDetails": {
       "type": "object",
       "description": "An abstract representation of the details for a run step.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Agents.RunStepType",
+          "$ref": "#/definitions/Assistants.RunStepType",
           "description": "The object type."
         }
       },
@@ -7396,12 +7455,12 @@
         "type"
       ]
     },
-    "Agents.RunStepError": {
+    "Assistants.RunStepError": {
       "type": "object",
       "description": "The error information associated with a failed run step.",
       "properties": {
         "code": {
-          "$ref": "#/definitions/Agents.RunStepErrorCode",
+          "$ref": "#/definitions/Assistants.RunStepErrorCode",
           "description": "The error code for this error."
         },
         "message": {
@@ -7414,7 +7473,7 @@
         "message"
       ]
     },
-    "Agents.RunStepErrorCode": {
+    "Assistants.RunStepErrorCode": {
       "type": "string",
       "description": "Possible error code values attributable to a failed run step.",
       "enum": [
@@ -7438,7 +7497,7 @@
         ]
       }
     },
-    "Agents.RunStepFileSearchToolCall": {
+    "Assistants.RunStepFileSearchToolCall": {
       "type": "object",
       "description": "A record of a call to a file search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted file search.",
       "properties": {
@@ -7447,7 +7506,7 @@
           "description": "The ID of the tool call. This ID must be referenced when you submit tool outputs."
         },
         "file_search": {
-          "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResults",
+          "$ref": "#/definitions/Assistants.RunStepFileSearchToolCallResults",
           "description": "For now, this is always going to be an empty object.",
           "x-ms-client-name": "fileSearch"
         }
@@ -7458,12 +7517,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepToolCall"
+          "$ref": "#/definitions/Assistants.RunStepToolCall"
         }
       ],
       "x-ms-discriminator-value": "file_search"
     },
-    "Agents.RunStepFileSearchToolCallResult": {
+    "Assistants.RunStepFileSearchToolCallResult": {
       "type": "object",
       "description": "  File search tool call result.",
       "properties": {
@@ -7488,7 +7547,7 @@
           "type": "array",
           "description": "The content of the result that was found. The content is only included if requested via the include query parameter.",
           "items": {
-            "$ref": "#/definitions/Agents.FileSearchToolCallContent"
+            "$ref": "#/definitions/Assistants.FileSearchToolCallContent"
           },
           "x-ms-identifiers": []
         }
@@ -7499,12 +7558,12 @@
         "score"
       ]
     },
-    "Agents.RunStepFileSearchToolCallResults": {
+    "Assistants.RunStepFileSearchToolCallResults": {
       "type": "object",
       "description": "The results of the file search.",
       "properties": {
         "ranking_options": {
-          "$ref": "#/definitions/Agents.FileSearchRankingOptions",
+          "$ref": "#/definitions/Assistants.FileSearchRankingOptions",
           "description": "Ranking options for file search.",
           "x-ms-client-name": "rankingOptions"
         },
@@ -7512,7 +7571,7 @@
           "type": "array",
           "description": "The array of a file search results",
           "items": {
-            "$ref": "#/definitions/Agents.RunStepFileSearchToolCallResult"
+            "$ref": "#/definitions/Assistants.RunStepFileSearchToolCallResult"
           },
           "x-ms-identifiers": []
         }
@@ -7521,12 +7580,12 @@
         "results"
       ]
     },
-    "Agents.RunStepFunctionToolCall": {
+    "Assistants.RunStepFunctionToolCall": {
       "type": "object",
       "description": "A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs\nand output consumed and emitted by the specified function.",
       "properties": {
         "function": {
-          "$ref": "#/definitions/Agents.RunStepFunctionToolCallDetails",
+          "$ref": "#/definitions/Assistants.RunStepFunctionToolCallDetails",
           "description": "The detailed information about the function called by the model."
         }
       },
@@ -7535,12 +7594,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepToolCall"
+          "$ref": "#/definitions/Assistants.RunStepToolCall"
         }
       ],
       "x-ms-discriminator-value": "function"
     },
-    "Agents.RunStepFunctionToolCallDetails": {
+    "Assistants.RunStepFunctionToolCallDetails": {
       "type": "object",
       "description": "The detailed information about the function called by the model.",
       "properties": {
@@ -7564,12 +7623,12 @@
         "output"
       ]
     },
-    "Agents.RunStepMessageCreationDetails": {
+    "Assistants.RunStepMessageCreationDetails": {
       "type": "object",
       "description": "The detailed information associated with a message creation run step.",
       "properties": {
         "message_creation": {
-          "$ref": "#/definitions/Agents.RunStepMessageCreationReference",
+          "$ref": "#/definitions/Assistants.RunStepMessageCreationReference",
           "description": "Information about the message creation associated with this run step.",
           "x-ms-client-name": "messageCreation"
         }
@@ -7579,12 +7638,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepDetails"
+          "$ref": "#/definitions/Assistants.RunStepDetails"
         }
       ],
       "x-ms-discriminator-value": "message_creation"
     },
-    "Agents.RunStepMessageCreationReference": {
+    "Assistants.RunStepMessageCreationReference": {
       "type": "object",
       "description": "The details of a message created as a part of a run step.",
       "properties": {
@@ -7598,7 +7657,7 @@
         "message_id"
       ]
     },
-    "Agents.RunStepMicrosoftFabricToolCall": {
+    "Assistants.RunStepMicrosoftFabricToolCall": {
       "type": "object",
       "description": "A record of a call to a Microsoft Fabric tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Microsoft Fabric operations.",
       "properties": {
@@ -7616,12 +7675,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepToolCall"
+          "$ref": "#/definitions/Assistants.RunStepToolCall"
         }
       ],
       "x-ms-discriminator-value": "fabric_aiskill"
     },
-    "Agents.RunStepSharepointToolCall": {
+    "Assistants.RunStepSharepointToolCall": {
       "type": "object",
       "description": "A record of a call to a SharePoint tool, issued by the model in evaluation of a defined tool, that represents\nexecuted SharePoint actions.",
       "properties": {
@@ -7639,12 +7698,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepToolCall"
+          "$ref": "#/definitions/Assistants.RunStepToolCall"
         }
       ],
       "x-ms-discriminator-value": "sharepoint_grounding"
     },
-    "Agents.RunStepStatus": {
+    "Assistants.RunStepStatus": {
       "type": "string",
       "description": "Possible values for the status of a run step.",
       "enum": [
@@ -7686,7 +7745,7 @@
         ]
       }
     },
-    "Agents.RunStepStreamEvent": {
+    "Assistants.RunStepStreamEvent": {
       "type": "string",
       "description": "Run step operation related streaming events",
       "enum": [
@@ -7740,7 +7799,7 @@
         ]
       }
     },
-    "Agents.RunStepToolCall": {
+    "Assistants.RunStepToolCall": {
       "type": "object",
       "description": "An abstract representation of a detailed tool call as recorded within a run step for an existing run.",
       "properties": {
@@ -7759,7 +7818,7 @@
         "id"
       ]
     },
-    "Agents.RunStepToolCallDetails": {
+    "Assistants.RunStepToolCallDetails": {
       "type": "object",
       "description": "The detailed information associated with a run step calling tools.",
       "properties": {
@@ -7767,7 +7826,7 @@
           "type": "array",
           "description": "A list of tool call details for this run step.",
           "items": {
-            "$ref": "#/definitions/Agents.RunStepToolCall"
+            "$ref": "#/definitions/Assistants.RunStepToolCall"
           },
           "x-ms-client-name": "toolCalls"
         }
@@ -7777,12 +7836,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RunStepDetails"
+          "$ref": "#/definitions/Assistants.RunStepDetails"
         }
       ],
       "x-ms-discriminator-value": "tool_calls"
     },
-    "Agents.RunStepType": {
+    "Assistants.RunStepType": {
       "type": "string",
       "description": "The possible types of run steps.",
       "enum": [
@@ -7806,7 +7865,7 @@
         ]
       }
     },
-    "Agents.RunStreamEvent": {
+    "Assistants.RunStreamEvent": {
       "type": "string",
       "description": "Run operation related streaming events",
       "enum": [
@@ -7878,12 +7937,12 @@
         ]
       }
     },
-    "Agents.SharepointToolDefinition": {
+    "Assistants.SharepointToolDefinition": {
       "type": "object",
       "description": "The input definition information for a sharepoint tool as used to configure an agent.",
       "properties": {
         "sharepoint_grounding": {
-          "$ref": "#/definitions/Agents.ToolConnectionList",
+          "$ref": "#/definitions/Assistants.ToolConnectionList",
           "description": "The list of connections used by the SharePoint tool."
         }
       },
@@ -7892,17 +7951,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ToolDefinition"
+          "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "sharepoint_grounding"
     },
-    "Agents.SubmitToolOutputsAction": {
+    "Assistants.SubmitToolOutputsAction": {
       "type": "object",
       "description": "The details for required tool calls that must be submitted for an agent thread run to continue.",
       "properties": {
         "submit_tool_outputs": {
-          "$ref": "#/definitions/Agents.SubmitToolOutputsDetails",
+          "$ref": "#/definitions/Assistants.SubmitToolOutputsDetails",
           "description": "The details describing tools that should be called to submit tool outputs.",
           "x-ms-client-name": "submitToolOutputs"
         }
@@ -7912,12 +7971,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.RequiredAction"
+          "$ref": "#/definitions/Assistants.RequiredAction"
         }
       ],
       "x-ms-discriminator-value": "submit_tool_outputs"
     },
-    "Agents.SubmitToolOutputsDetails": {
+    "Assistants.SubmitToolOutputsDetails": {
       "type": "object",
       "description": "The details describing tools that should be called to submit tool outputs.",
       "properties": {
@@ -7925,7 +7984,7 @@
           "type": "array",
           "description": "The list of tool calls that must be resolved for the agent thread run to continue.",
           "items": {
-            "$ref": "#/definitions/Agents.RequiredToolCall"
+            "$ref": "#/definitions/Assistants.RequiredToolCall"
           },
           "x-ms-client-name": "toolCalls"
         }
@@ -7934,7 +7993,7 @@
         "tool_calls"
       ]
     },
-    "Agents.ThreadDeletionStatus": {
+    "Assistants.ThreadDeletionStatus": {
       "type": "object",
       "description": "The status of a thread deletion operation.",
       "properties": {
@@ -7963,7 +8022,7 @@
         "object"
       ]
     },
-    "Agents.ThreadMessage": {
+    "Assistants.ThreadMessage": {
       "type": "object",
       "description": "A single, existing message within an agent thread.",
       "properties": {
@@ -7993,7 +8052,7 @@
           "x-ms-client-name": "threadId"
         },
         "status": {
-          "$ref": "#/definitions/Agents.MessageStatus",
+          "$ref": "#/definitions/Assistants.MessageStatus",
           "description": "The status of the message."
         },
         "incomplete_details": {
@@ -8002,7 +8061,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.MessageIncompleteDetails"
+              "$ref": "#/definitions/Assistants.MessageIncompleteDetails"
             }
           ],
           "x-ms-client-name": "incompleteDetails"
@@ -8022,14 +8081,14 @@
           "x-ms-client-name": "incompleteAt"
         },
         "role": {
-          "$ref": "#/definitions/Agents.MessageRole",
+          "$ref": "#/definitions/Assistants.MessageRole",
           "description": "The role associated with the agent thread message."
         },
         "content": {
           "type": "array",
           "description": "The list of content items associated with the agent thread message.",
           "items": {
-            "$ref": "#/definitions/Agents.MessageContent"
+            "$ref": "#/definitions/Assistants.MessageContent"
           },
           "x-ms-identifiers": []
         },
@@ -8050,7 +8109,7 @@
           "description": "A list of files attached to the message, and the tools they were added to.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Agents.MessageAttachment"
+            "$ref": "#/definitions/Assistants.MessageAttachment"
           },
           "x-ms-identifiers": []
         },
@@ -8080,12 +8139,12 @@
         "metadata"
       ]
     },
-    "Agents.ThreadMessageOptions": {
+    "Assistants.ThreadMessageOptions": {
       "type": "object",
       "description": "A single message within an agent thread, as provided during that thread's creation for its initial state.",
       "properties": {
         "role": {
-          "$ref": "#/definitions/Agents.MessageRole",
+          "$ref": "#/definitions/Assistants.MessageRole",
           "description": "The role of the entity that is creating the message. Allowed values include:\n- `user`: Indicates the message is sent by an actual user and should be used in most\ncases to represent user-generated messages.\n- `assistant`: Indicates the message is generated by the agent. Use this value to insert\nmessages from the agent into the\nconversation."
         },
         "content": {
@@ -8097,7 +8156,7 @@
           "description": "A list of files attached to the message, and the tools they should be added to.",
           "x-nullable": true,
           "items": {
-            "$ref": "#/definitions/Agents.MessageAttachment"
+            "$ref": "#/definitions/Assistants.MessageAttachment"
           },
           "x-ms-identifiers": []
         },
@@ -8115,7 +8174,7 @@
         "content"
       ]
     },
-    "Agents.ThreadRun": {
+    "Assistants.ThreadRun": {
       "type": "object",
       "description": "Data representing a single evaluation run of an agent thread.",
       "properties": {
@@ -8144,7 +8203,7 @@
           "x-ms-client-name": "assistantId"
         },
         "status": {
-          "$ref": "#/definitions/Agents.RunStatus",
+          "$ref": "#/definitions/Assistants.RunStatus",
           "description": "The status of the agent thread run."
         },
         "required_action": {
@@ -8153,7 +8212,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.RequiredAction"
+              "$ref": "#/definitions/Assistants.RequiredAction"
             }
           ],
           "x-ms-client-name": "requiredAction"
@@ -8164,7 +8223,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.RunError"
+              "$ref": "#/definitions/Assistants.RunError"
             }
           ],
           "x-ms-client-name": "lastError"
@@ -8182,7 +8241,7 @@
           "description": "The overridden enabled tools used for this agent thread run.",
           "default": [],
           "items": {
-            "$ref": "#/definitions/Agents.ToolDefinition"
+            "$ref": "#/definitions/Assistants.ToolDefinition"
           },
           "x-ms-identifiers": []
         },
@@ -8233,7 +8292,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.IncompleteRunDetails"
+              "$ref": "#/definitions/Assistants.IncompleteRunDetails"
             }
           ],
           "x-ms-client-name": "incompleteDetails"
@@ -8244,7 +8303,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.RunCompletionUsage"
+              "$ref": "#/definitions/Assistants.RunCompletionUsage"
             }
           ]
         },
@@ -8281,19 +8340,19 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.TruncationObject"
+              "$ref": "#/definitions/Assistants.TruncationObject"
             }
           ],
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
-          "$ref": "#/definitions/Agents.AgentsApiToolChoiceOption",
+          "$ref": "#/definitions/Assistants.AgentsApiToolChoiceOption",
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
         },
         "response_format": {
-          "$ref": "#/definitions/Agents.AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/Assistants.AgentsApiResponseFormatOption",
           "description": "The response format of the tool calls used in this run.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -8312,7 +8371,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.UpdateToolResourcesOptions"
+              "$ref": "#/definitions/Assistants.UpdateToolResourcesOptions"
             }
           ],
           "x-ms-client-name": "toolResources"
@@ -8350,7 +8409,7 @@
         "parallel_tool_calls"
       ]
     },
-    "Agents.ThreadStreamEvent": {
+    "Assistants.ThreadStreamEvent": {
       "type": "string",
       "description": "Thread operation related streaming events",
       "enum": [
@@ -8368,7 +8427,7 @@
         ]
       }
     },
-    "Agents.ToolConnection": {
+    "Assistants.ToolConnection": {
       "type": "object",
       "description": "A connection resource.",
       "properties": {
@@ -8382,7 +8441,7 @@
         "connection_id"
       ]
     },
-    "Agents.ToolConnectionList": {
+    "Assistants.ToolConnectionList": {
       "type": "object",
       "description": "A set of connection resources currently used by either the `bing_grounding`, `fabric_aiskill`, or `sharepoint_grounding` tools.",
       "properties": {
@@ -8391,14 +8450,14 @@
           "description": "The connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
           "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/Agents.ToolConnection"
+            "$ref": "#/definitions/Assistants.ToolConnection"
           },
           "x-ms-client-name": "connectionList",
           "x-ms-identifiers": []
         }
       }
     },
-    "Agents.ToolDefinition": {
+    "Assistants.ToolDefinition": {
       "type": "object",
       "description": "An abstract representation of an input tool definition that an agent can use.",
       "properties": {
@@ -8412,7 +8471,7 @@
         "type"
       ]
     },
-    "Agents.ToolOutput": {
+    "Assistants.ToolOutput": {
       "type": "object",
       "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
       "properties": {
@@ -8427,28 +8486,28 @@
         }
       }
     },
-    "Agents.ToolResources": {
+    "Assistants.ToolResources": {
       "type": "object",
       "description": "A set of resources that are used by the agent's tools. The resources are specific to the type of\ntool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
       "properties": {
         "code_interpreter": {
-          "$ref": "#/definitions/Agents.CodeInterpreterToolResource",
+          "$ref": "#/definitions/Assistants.CodeInterpreterToolResource",
           "description": "Resources to be used by the `code_interpreter` tool consisting of file IDs.",
           "x-ms-client-name": "codeInterpreter"
         },
         "file_search": {
-          "$ref": "#/definitions/Agents.FileSearchToolResource",
+          "$ref": "#/definitions/Assistants.FileSearchToolResource",
           "description": "Resources to be used by the `file_search` tool consisting of vector store IDs.",
           "x-ms-client-name": "fileSearch"
         },
         "azure_ai_search": {
-          "$ref": "#/definitions/Agents.AzureAISearchResource",
+          "$ref": "#/definitions/Assistants.AzureAISearchResource",
           "description": "Resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
           "x-ms-client-name": "azureAISearch"
         }
       }
     },
-    "Agents.TruncationObject": {
+    "Assistants.TruncationObject": {
       "type": "object",
       "description": "Controls for how a thread will be truncated prior to the run. Use this to control the initial\ncontext window of the run.",
       "properties": {
@@ -8489,7 +8548,7 @@
         "type"
       ]
     },
-    "Agents.TruncationStrategy": {
+    "Assistants.TruncationStrategy": {
       "type": "string",
       "description": "Possible truncation strategies for the thread.",
       "enum": [
@@ -8513,7 +8572,7 @@
         ]
       }
     },
-    "Agents.UpdateAgentOptions": {
+    "Assistants.UpdateAgentOptions": {
       "type": "object",
       "description": "The request details to use when modifying an existing agent.",
       "properties": {
@@ -8541,12 +8600,12 @@
           "description": "The modified collection of tools to enable for the agent.",
           "default": [],
           "items": {
-            "$ref": "#/definitions/Agents.ToolDefinition"
+            "$ref": "#/definitions/Assistants.ToolDefinition"
           },
           "x-ms-identifiers": []
         },
         "tool_resources": {
-          "$ref": "#/definitions/Agents.ToolResources",
+          "$ref": "#/definitions/Assistants.ToolResources",
           "description": "A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example,\nthe `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-ms-client-name": "toolResources"
         },
@@ -8566,7 +8625,7 @@
           "x-ms-client-name": "topP"
         },
         "response_format": {
-          "$ref": "#/definitions/Agents.AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/Assistants.AgentsApiResponseFormatOption",
           "description": "The response format of the tool calls used by this agent.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -8581,7 +8640,7 @@
         }
       }
     },
-    "Agents.UpdateAgentThreadOptions": {
+    "Assistants.UpdateAgentThreadOptions": {
       "type": "object",
       "description": "The details used to update an existing agent thread",
       "properties": {
@@ -8591,7 +8650,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.ToolResources"
+              "$ref": "#/definitions/Assistants.ToolResources"
             }
           ],
           "x-ms-client-name": "toolResources"
@@ -8606,7 +8665,7 @@
         }
       }
     },
-    "Agents.UpdateCodeInterpreterToolResourceOptions": {
+    "Assistants.UpdateCodeInterpreterToolResourceOptions": {
       "type": "object",
       "description": "Request object to update `code_interpreted` tool resources.",
       "properties": {
@@ -8621,7 +8680,7 @@
         }
       }
     },
-    "Agents.UpdateFileSearchToolResourceOptions": {
+    "Assistants.UpdateFileSearchToolResourceOptions": {
       "type": "object",
       "description": "Request object to update `file_search` tool resources.",
       "properties": {
@@ -8636,28 +8695,28 @@
         }
       }
     },
-    "Agents.UpdateToolResourcesOptions": {
+    "Assistants.UpdateToolResourcesOptions": {
       "type": "object",
       "description": "Request object. A set of resources that are used by the agent's tools. The resources are specific to the type of tool.\nFor example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of\nvector store IDs.",
       "properties": {
         "code_interpreter": {
-          "$ref": "#/definitions/Agents.UpdateCodeInterpreterToolResourceOptions",
+          "$ref": "#/definitions/Assistants.UpdateCodeInterpreterToolResourceOptions",
           "description": "Overrides the list of file IDs made available to the `code_interpreter` tool. There can be a maximum of 20 files\nassociated with the tool.",
           "x-ms-client-name": "codeInterpreter"
         },
         "file_search": {
-          "$ref": "#/definitions/Agents.UpdateFileSearchToolResourceOptions",
+          "$ref": "#/definitions/Assistants.UpdateFileSearchToolResourceOptions",
           "description": "Overrides the vector store attached to this agent. There can be a maximum of 1 vector store attached to the agent.",
           "x-ms-client-name": "fileSearch"
         },
         "azure_ai_search": {
-          "$ref": "#/definitions/Agents.AzureAISearchResource",
+          "$ref": "#/definitions/Assistants.AzureAISearchResource",
           "description": "Overrides the resources to be used by the `azure_ai_search` tool consisting of index IDs and names.",
           "x-ms-client-name": "azureAISearch"
         }
       }
     },
-    "Agents.VectorStore": {
+    "Assistants.VectorStore": {
       "type": "object",
       "description": "A vector store is a collection of processed files can be used by the `file_search` tool.",
       "properties": {
@@ -8692,16 +8751,16 @@
           "x-ms-client-name": "usageBytes"
         },
         "file_counts": {
-          "$ref": "#/definitions/Agents.VectorStoreFileCount",
+          "$ref": "#/definitions/Assistants.VectorStoreFileCount",
           "description": "Files count grouped by status processed or being processed by this vector store.",
           "x-ms-client-name": "fileCounts"
         },
         "status": {
-          "$ref": "#/definitions/Agents.VectorStoreStatus",
+          "$ref": "#/definitions/Assistants.VectorStoreStatus",
           "description": "The status of the vector store, which can be either `expired`, `in_progress`, or `completed`. A status of `completed` indicates that the vector store is ready for use."
         },
         "expires_after": {
-          "$ref": "#/definitions/Agents.VectorStoreExpirationPolicy",
+          "$ref": "#/definitions/Assistants.VectorStoreExpirationPolicy",
           "description": "Details on when this vector store expires",
           "x-ms-client-name": "expiresAfter"
         },
@@ -8740,32 +8799,32 @@
         "metadata"
       ]
     },
-    "Agents.VectorStoreAutoChunkingStrategyRequest": {
+    "Assistants.VectorStoreAutoChunkingStrategyRequest": {
       "type": "object",
       "description": "The default strategy. This strategy currently uses a max_chunk_size_tokens of 800 and chunk_overlap_tokens of 400.",
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest"
+          "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyRequest"
         }
       ],
       "x-ms-discriminator-value": "auto"
     },
-    "Agents.VectorStoreAutoChunkingStrategyResponse": {
+    "Assistants.VectorStoreAutoChunkingStrategyResponse": {
       "type": "object",
       "description": "This is returned when the chunking strategy is unknown. Typically, this is because the file was indexed before the chunking_strategy concept was introduced in the API.",
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyResponse"
+          "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyResponse"
         }
       ],
       "x-ms-discriminator-value": "other"
     },
-    "Agents.VectorStoreChunkingStrategyRequest": {
+    "Assistants.VectorStoreChunkingStrategyRequest": {
       "type": "object",
       "description": "An abstract representation of a vector store chunking strategy configuration.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequestType",
+          "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyRequestType",
           "description": "The object type."
         }
       },
@@ -8774,7 +8833,7 @@
         "type"
       ]
     },
-    "Agents.VectorStoreChunkingStrategyRequestType": {
+    "Assistants.VectorStoreChunkingStrategyRequestType": {
       "type": "string",
       "description": "Type of chunking strategy",
       "enum": [
@@ -8796,12 +8855,12 @@
         ]
       }
     },
-    "Agents.VectorStoreChunkingStrategyResponse": {
+    "Assistants.VectorStoreChunkingStrategyResponse": {
       "type": "object",
       "description": "An abstract representation of a vector store chunking strategy configuration.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyResponseType",
+          "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyResponseType",
           "description": "The object type."
         }
       },
@@ -8810,7 +8869,7 @@
         "type"
       ]
     },
-    "Agents.VectorStoreChunkingStrategyResponseType": {
+    "Assistants.VectorStoreChunkingStrategyResponseType": {
       "type": "string",
       "description": "Type of chunking strategy",
       "enum": [
@@ -8832,7 +8891,7 @@
         ]
       }
     },
-    "Agents.VectorStoreConfiguration": {
+    "Assistants.VectorStoreConfiguration": {
       "type": "object",
       "description": "Vector storage configuration is the list of data sources, used when multiple\nfiles can be used for the enterprise file search.",
       "properties": {
@@ -8840,7 +8899,7 @@
           "type": "array",
           "description": "Data sources",
           "items": {
-            "$ref": "#/definitions/Agents.VectorStoreDataSource"
+            "$ref": "#/definitions/Assistants.VectorStoreDataSource"
           },
           "x-ms-client-name": "dataSources",
           "x-ms-identifiers": []
@@ -8850,7 +8909,7 @@
         "data_sources"
       ]
     },
-    "Agents.VectorStoreConfigurations": {
+    "Assistants.VectorStoreConfigurations": {
       "type": "object",
       "description": "The structure, containing the list of vector storage configurations i.e. the list of azure asset IDs.",
       "properties": {
@@ -8860,7 +8919,7 @@
           "x-ms-client-name": "storeName"
         },
         "configuration": {
-          "$ref": "#/definitions/Agents.VectorStoreConfiguration",
+          "$ref": "#/definitions/Assistants.VectorStoreConfiguration",
           "description": "Configurations",
           "x-ms-client-name": "storeConfiguration"
         }
@@ -8870,7 +8929,7 @@
         "configuration"
       ]
     },
-    "Agents.VectorStoreDataSource": {
+    "Assistants.VectorStoreDataSource": {
       "type": "object",
       "description": "The structure, containing Azure asset URI path and the asset type of the file used as a data source\nfor the enterprise file search.",
       "properties": {
@@ -8880,7 +8939,7 @@
           "x-ms-client-name": "assetIdentifier"
         },
         "type": {
-          "$ref": "#/definitions/Agents.VectorStoreDataSourceAssetType",
+          "$ref": "#/definitions/Assistants.VectorStoreDataSourceAssetType",
           "description": "The asset type",
           "x-ms-client-name": "assetType"
         }
@@ -8890,7 +8949,7 @@
         "type"
       ]
     },
-    "Agents.VectorStoreDataSourceAssetType": {
+    "Assistants.VectorStoreDataSourceAssetType": {
       "type": "string",
       "description": "Type of vector storage asset. Asset type may be a uri_asset, in this case it should contain asset URI ID,\nin the case of id_asset it should contain the data ID.",
       "enum": [
@@ -8914,7 +8973,7 @@
         ]
       }
     },
-    "Agents.VectorStoreDeletionStatus": {
+    "Assistants.VectorStoreDeletionStatus": {
       "type": "object",
       "description": "Response object for deleting a vector store.",
       "properties": {
@@ -8943,12 +9002,12 @@
         "object"
       ]
     },
-    "Agents.VectorStoreExpirationPolicy": {
+    "Assistants.VectorStoreExpirationPolicy": {
       "type": "object",
       "description": "The expiration policy for a vector store.",
       "properties": {
         "anchor": {
-          "$ref": "#/definitions/Agents.VectorStoreExpirationPolicyAnchor",
+          "$ref": "#/definitions/Assistants.VectorStoreExpirationPolicyAnchor",
           "description": "Anchor timestamp after which the expiration policy applies. Supported anchors: `last_active_at`."
         },
         "days": {
@@ -8964,7 +9023,7 @@
         "days"
       ]
     },
-    "Agents.VectorStoreExpirationPolicyAnchor": {
+    "Assistants.VectorStoreExpirationPolicyAnchor": {
       "type": "string",
       "description": "Describes the relationship between the days and the expiration of this vector store",
       "enum": [
@@ -8982,7 +9041,7 @@
         ]
       }
     },
-    "Agents.VectorStoreFile": {
+    "Assistants.VectorStoreFile": {
       "type": "object",
       "description": "Description of a file attached to a vector store.",
       "properties": {
@@ -9018,7 +9077,7 @@
           "x-ms-client-name": "vectorStoreId"
         },
         "status": {
-          "$ref": "#/definitions/Agents.VectorStoreFileStatus",
+          "$ref": "#/definitions/Assistants.VectorStoreFileStatus",
           "description": "The status of the vector store file, which can be either `in_progress`, `completed`, `cancelled`, or `failed`. The status `completed` indicates that the vector store file is ready for use."
         },
         "last_error": {
@@ -9027,13 +9086,13 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.VectorStoreFileError"
+              "$ref": "#/definitions/Assistants.VectorStoreFileError"
             }
           ],
           "x-ms-client-name": "lastError"
         },
         "chunking_strategy": {
-          "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyResponse",
+          "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyResponse",
           "description": "The strategy used to chunk the file.",
           "x-ms-client-name": "chunkingStrategy"
         }
@@ -9049,7 +9108,7 @@
         "chunking_strategy"
       ]
     },
-    "Agents.VectorStoreFileBatch": {
+    "Assistants.VectorStoreFileBatch": {
       "type": "object",
       "description": "A batch of files attached to a vector store.",
       "properties": {
@@ -9079,11 +9138,11 @@
           "x-ms-client-name": "vectorStoreId"
         },
         "status": {
-          "$ref": "#/definitions/Agents.VectorStoreFileBatchStatus",
+          "$ref": "#/definitions/Assistants.VectorStoreFileBatchStatus",
           "description": "The status of the vector store files batch, which can be either `in_progress`, `completed`, `cancelled` or `failed`."
         },
         "file_counts": {
-          "$ref": "#/definitions/Agents.VectorStoreFileCount",
+          "$ref": "#/definitions/Assistants.VectorStoreFileCount",
           "description": "Files count grouped by status processed or being processed by this vector store.",
           "x-ms-client-name": "fileCounts"
         }
@@ -9097,7 +9156,7 @@
         "file_counts"
       ]
     },
-    "Agents.VectorStoreFileBatchStatus": {
+    "Assistants.VectorStoreFileBatchStatus": {
       "type": "string",
       "description": "The status of the vector store file batch.",
       "enum": [
@@ -9133,7 +9192,7 @@
         ]
       }
     },
-    "Agents.VectorStoreFileCount": {
+    "Assistants.VectorStoreFileCount": {
       "type": "object",
       "description": "Counts of files processed or being processed by this vector store grouped by status.",
       "properties": {
@@ -9172,7 +9231,7 @@
         "total"
       ]
     },
-    "Agents.VectorStoreFileDeletionStatus": {
+    "Assistants.VectorStoreFileDeletionStatus": {
       "type": "object",
       "description": "Response object for deleting a vector store file relationship.",
       "properties": {
@@ -9201,12 +9260,12 @@
         "object"
       ]
     },
-    "Agents.VectorStoreFileError": {
+    "Assistants.VectorStoreFileError": {
       "type": "object",
       "description": "Details on the error that may have occurred while processing a file for this vector store",
       "properties": {
         "code": {
-          "$ref": "#/definitions/Agents.VectorStoreFileErrorCode",
+          "$ref": "#/definitions/Assistants.VectorStoreFileErrorCode",
           "description": "One of `server_error` or `rate_limit_exceeded`."
         },
         "message": {
@@ -9219,7 +9278,7 @@
         "message"
       ]
     },
-    "Agents.VectorStoreFileErrorCode": {
+    "Assistants.VectorStoreFileErrorCode": {
       "type": "string",
       "description": "Error code variants for vector store file processing",
       "enum": [
@@ -9249,7 +9308,7 @@
         ]
       }
     },
-    "Agents.VectorStoreFileStatus": {
+    "Assistants.VectorStoreFileStatus": {
       "type": "string",
       "description": "Vector store file status",
       "enum": [
@@ -9285,7 +9344,7 @@
         ]
       }
     },
-    "Agents.VectorStoreFileStatusFilter": {
+    "Assistants.VectorStoreFileStatusFilter": {
       "type": "string",
       "description": "Query parameter filter for vector store file retrieval endpoint",
       "enum": [
@@ -9321,7 +9380,7 @@
         ]
       }
     },
-    "Agents.VectorStoreOptions": {
+    "Assistants.VectorStoreOptions": {
       "type": "object",
       "description": "Request object for creating a vector store.",
       "properties": {
@@ -9339,17 +9398,17 @@
           "description": "The name of the vector store."
         },
         "configuration": {
-          "$ref": "#/definitions/Agents.VectorStoreConfiguration",
+          "$ref": "#/definitions/Assistants.VectorStoreConfiguration",
           "description": "The vector store configuration, used when vector store is created from Azure asset URIs.",
           "x-ms-client-name": "storeConfiguration"
         },
         "expires_after": {
-          "$ref": "#/definitions/Agents.VectorStoreExpirationPolicy",
+          "$ref": "#/definitions/Assistants.VectorStoreExpirationPolicy",
           "description": "Details on when this vector store expires",
           "x-ms-client-name": "expiresAfter"
         },
         "chunking_strategy": {
-          "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest",
+          "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyRequest",
           "description": "The chunking strategy used to chunk the file(s). If not set, will use the auto strategy. Only applicable if file_ids is non-empty.",
           "x-ms-client-name": "chunkingStrategy"
         },
@@ -9363,7 +9422,7 @@
         }
       }
     },
-    "Agents.VectorStoreStaticChunkingStrategyOptions": {
+    "Assistants.VectorStoreStaticChunkingStrategyOptions": {
       "type": "object",
       "description": "Options to configure a vector store static chunking strategy.",
       "properties": {
@@ -9387,12 +9446,12 @@
         "chunk_overlap_tokens"
       ]
     },
-    "Agents.VectorStoreStaticChunkingStrategyRequest": {
+    "Assistants.VectorStoreStaticChunkingStrategyRequest": {
       "type": "object",
       "description": "A statically configured chunking strategy.",
       "properties": {
         "static": {
-          "$ref": "#/definitions/Agents.VectorStoreStaticChunkingStrategyOptions",
+          "$ref": "#/definitions/Assistants.VectorStoreStaticChunkingStrategyOptions",
           "description": "The options for the static chunking strategy."
         }
       },
@@ -9401,17 +9460,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyRequest"
+          "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyRequest"
         }
       ],
       "x-ms-discriminator-value": "static"
     },
-    "Agents.VectorStoreStaticChunkingStrategyResponse": {
+    "Assistants.VectorStoreStaticChunkingStrategyResponse": {
       "type": "object",
       "description": "A statically configured chunking strategy.",
       "properties": {
         "static": {
-          "$ref": "#/definitions/Agents.VectorStoreStaticChunkingStrategyOptions",
+          "$ref": "#/definitions/Assistants.VectorStoreStaticChunkingStrategyOptions",
           "description": "The options for the static chunking strategy."
         }
       },
@@ -9420,12 +9479,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.VectorStoreChunkingStrategyResponse"
+          "$ref": "#/definitions/Assistants.VectorStoreChunkingStrategyResponse"
         }
       ],
       "x-ms-discriminator-value": "static"
     },
-    "Agents.VectorStoreStatus": {
+    "Assistants.VectorStoreStatus": {
       "type": "string",
       "description": "Vector store possible status",
       "enum": [
@@ -9455,7 +9514,7 @@
         ]
       }
     },
-    "Agents.VectorStoreUpdateOptions": {
+    "Assistants.VectorStoreUpdateOptions": {
       "type": "object",
       "description": "Request object for updating a vector store.",
       "properties": {
@@ -9470,7 +9529,7 @@
           "x-nullable": true,
           "allOf": [
             {
-              "$ref": "#/definitions/Agents.VectorStoreExpirationPolicy"
+              "$ref": "#/definitions/Assistants.VectorStoreExpirationPolicy"
             }
           ],
           "x-ms-client-name": "expiresAfter"
@@ -9484,64 +9543,6 @@
           }
         }
       }
-    },
-    "ApiKeyCredential": {
-      "type": "object",
-      "description": "ApiKey Credential definition",
-      "properties": {
-        "apiKey": {
-          "type": "string",
-          "description": "API Key",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "apiKey"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseCredential"
-        }
-      ],
-      "x-ms-discriminator-value": "ApiKey"
-    },
-    "ApiResponseFormat": {
-      "type": "string",
-      "description": "Possible API response formats.",
-      "enum": [
-        "text",
-        "json_object"
-      ],
-      "x-ms-enum": {
-        "name": "ApiResponseFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "text",
-            "value": "text",
-            "description": "`text` format should be used for requests involving any sort of ToolCall."
-          },
-          {
-            "name": "jsonObject",
-            "value": "json_object",
-            "description": "Using `json_object` format will limit the usage of ToolCall to only functions."
-          }
-        ]
-      }
-    },
-    "AssetReferenceBase": {
-      "type": "object",
-      "description": "Base definition for asset references.",
-      "properties": {
-        "referenceType": {
-          "$ref": "#/definitions/ReferenceType",
-          "description": "Asset reference type."
-        }
-      },
-      "discriminator": "referenceType",
-      "required": [
-        "referenceType"
-      ]
     },
     "AssistantsApiResponseFormat": {
       "type": "object",
@@ -10773,7 +10774,7 @@
     }
   },
   "parameters": {
-    "Agents.UpdateAgentOptions.assistantId": {
+    "Assistants.UpdateAgentOptions.assistantId": {
       "name": "assistantId",
       "in": "path",
       "description": "The ID of the agent to modify.",
@@ -10781,7 +10782,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "Agents.UpdateAgentThreadOptions.threadId": {
+    "Assistants.UpdateAgentThreadOptions.threadId": {
       "name": "threadId",
       "in": "path",
       "description": "The ID of the thread to modify.",

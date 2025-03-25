@@ -33,7 +33,7 @@ union DatasetType {
 @discriminator("type")
 model DatasetVersion {
   @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @minLength(1)
   @pattern("[a-zA-Z0-9_]")
   datasetUri: string;
@@ -42,7 +42,7 @@ model DatasetVersion {
   type: DatasetType;
 
   @doc("Indicates if dataset is reference only or managed by dataset service. If true, the underlying data will be deleted when the dataset version is deleted")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isReference?: boolean;
 
   ...AssetBase;
