@@ -2332,6 +2332,19 @@
         }
       },
       "description": "Result of the request to list NSP service tags."
+    },
+    "NspServiceTagsResource": {
+      "type": "object",
+      "properties": {
+        "serviceTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "NSP service tags."
+        }
+      },
+      "description": "Resource containing list of NSP service tags."
     }
   },
   "parameters": {
@@ -2465,19 +2478,6 @@
       "type": "boolean",
       "description": "Deletes the resource even if it contains any child associations.",
       "x-ms-parameter-location": "method"
-    },
-    "NspServiceTagsResource": {
-      "type": "object",
-      "properties": {
-        "serviceTags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "NSP service tags."
-        }
-      },
-      "description": "Resource containing list of NSP service tags."
     }
   }
 }
