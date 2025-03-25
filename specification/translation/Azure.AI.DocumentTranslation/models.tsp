@@ -274,7 +274,7 @@ model TranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""
@@ -308,7 +308,7 @@ model InnerTranslationError {
     For example it would be \"documents\" or
     \"document id\" in case of invalid document.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("""
@@ -515,6 +515,7 @@ model DocumentTranslateBody {
   @header
   contentType: "multipart/form-data";
 
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Document Translate Request Content")
   @body
   body: DocumentTranslateContent;
