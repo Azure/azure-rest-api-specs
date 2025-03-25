@@ -89,25 +89,9 @@ union GateTargetType {
   UpdateRun: "UpdateRun",
 }
 
-@doc("The type of staged rollout that the Gate is targeting.")
-@added(Versions.v2025_04_01_preview)
-union GateTargetProperties {
-  @doc("The Gate is controlling the staged rollout of an Update Run.")
-  updateRunProperties: UpdateRunGateTargetProperties,
-}
-
-// A wrapper is needed because the union does not create one itself. Without it, properties of
-// all different types would end up in a single `properties` model.
-@doc("Wrapper object around the Update Run Gate Target Properties.")
+@doc("The properties of the Update Run that the Gate is targeting.")
 @added(Versions.v2025_04_01_preview)
 model UpdateRunGateTargetProperties {
-  @doc("Properties specific to the Update Run.")
-  updateRun: UpdateRunGateTarget;
-}
-
-@doc("The Gate is targeting an Update Run staged rollout.")
-@added(Versions.v2025_04_01_preview)
-model UpdateRunGateTarget {
   @doc("The name of the Update Run.")
   @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
@@ -160,20 +144,16 @@ union GateTargetId {
   updateRun: UpdateRunResourceId,
 }
 
-@doc("The target that the Gate is controlling, e.g. an Update Run.")
+@doc("The target that the Gate is controlling, e.g. an Update Run. Exactly one of the properties objects will be set.")
 @added(Versions.v2025_04_01_preview)
 model GateTarget {
   @doc("The resource id that the Gate is controlling the rollout of.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   id: GateTargetId;
 
-  @doc("The type of the resource being targeted by this Gate.")
+  @doc("The properties of the Update Run that the Gate is targeting.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  type: GateTargetType;
-
-  @doc("Properties specific to the target of this Gate.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  properties: GateTargetProperties;
+  updateRunProperties?: UpdateRunGateTargetProperties;
 }
 
 @doc("The provisioning state of the Gate resource.")

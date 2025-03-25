@@ -3426,7 +3426,7 @@
     },
     "GateTarget": {
       "type": "object",
-      "description": "The target that the Gate is controlling, e.g. an Update Run.",
+      "description": "The target that the Gate is controlling, e.g. an Update Run. Exactly one of the properties objects will be set.",
       "properties": {
         "id": {
           "$ref": "#/definitions/GateTargetId",
@@ -3436,17 +3436,9 @@
             "create"
           ]
         },
-        "type": {
-          "$ref": "#/definitions/GateTargetType",
-          "description": "The type of the resource being targeted by this Gate.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/GateTargetProperties",
-          "description": "Properties specific to the target of this Gate.",
+        "updateRunProperties": {
+          "$ref": "#/definitions/UpdateRunGateTargetProperties",
+          "description": "The properties of the Update Run that the Gate is targeting.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3454,41 +3446,12 @@
         }
       },
       "required": [
-        "id",
-        "type",
-        "properties"
+        "id"
       ]
     },
     "GateTargetId": {
       "$ref": "#/definitions/UpdateRunResourceId",
       "x-nullable": false
-    },
-    "GateTargetProperties": {
-      "type": "object",
-      "x-nullable": false,
-      "allOf": [
-        {
-          "$ref": "#/definitions/UpdateRunGateTargetProperties"
-        }
-      ]
-    },
-    "GateTargetType": {
-      "type": "string",
-      "description": "The type of the Gate target.",
-      "enum": [
-        "UpdateRun"
-      ],
-      "x-ms-enum": {
-        "name": "GateTargetType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UpdateRun",
-            "value": "UpdateRun",
-            "description": "The Gate targets an Update Run."
-          }
-        ]
-      }
     },
     "GateType": {
       "type": "string",
@@ -3965,9 +3928,9 @@
         }
       }
     },
-    "UpdateRunGateTarget": {
+    "UpdateRunGateTargetProperties": {
       "type": "object",
-      "description": "The Gate is targeting an Update Run staged rollout.",
+      "description": "The properties of the Update Run that the Gate is targeting.",
       "properties": {
         "name": {
           "type": "string",
@@ -4005,19 +3968,6 @@
       "required": [
         "name",
         "timing"
-      ]
-    },
-    "UpdateRunGateTargetProperties": {
-      "type": "object",
-      "description": "Wrapper object around the Update Run Gate Target Properties.",
-      "properties": {
-        "updateRun": {
-          "$ref": "#/definitions/UpdateRunGateTarget",
-          "description": "Properties specific to the Update Run."
-        }
-      },
-      "required": [
-        "updateRun"
       ]
     },
     "UpdateRunListResult": {

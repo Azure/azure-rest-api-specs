@@ -37,12 +37,12 @@ model UpdateStage {
 
   @doc("A list of Gates that will be created before this Stage is executed.")
   @added(Versions.v2025_04_01_preview)
-  @extension("x-ms-identifiers", ["displayName"])
+  @extension("x-ms-identifiers", #["displayName"])
   beforeGates?: GateConfiguration[];
 
   @doc("A list of Gates that will be created after this Stage is executed.")
   @added(Versions.v2025_04_01_preview)
-  @extension("x-ms-identifiers", ["displayName"])
+  @extension("x-ms-identifiers", #["displayName"])
   afterGates?: GateConfiguration[];
 }
 
@@ -59,12 +59,12 @@ model UpdateGroup {
 
   @doc("A list of Gates that will be created before this Group is executed.")
   @added(Versions.v2025_04_01_preview)
-  @extension("x-ms-identifiers", ["displayName"])
+  @extension("x-ms-identifiers", #["displayName"])
   beforeGates?: GateConfiguration[];
 
   @doc("A list of Gates that will be created after this Group is executed.")
   @added(Versions.v2025_04_01_preview)
-  @extension("x-ms-identifiers", ["displayName"])
+  @extension("x-ms-identifiers", #["displayName"])
   afterGates?: GateConfiguration[];
 }
 
