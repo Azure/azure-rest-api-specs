@@ -1,20 +1,18 @@
-import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./namespace.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 /** Microsoft.Falcon Resource Provider management API. */
-@armProviderNamespace("Microsoft.Falcon")
-@service(#{ title: "Microsoft.Falcon management service" })
-@versioned(Microsoft.Falcon.Versions)
+@armProviderNamespace
+@service(#{ title: "Falcon Fleet Namespace Service" })
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@versioned(Versions)
 namespace Microsoft.Falcon;
 
 /** The available API versions. */
