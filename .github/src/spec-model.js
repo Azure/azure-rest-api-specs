@@ -1,8 +1,9 @@
 // @ts-check
+import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { readFile, readdir } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
-import { dirname, join } from "path";
+import { dirname, join, resolve } from "path";
 import { fileURLToPath } from "url";
 import { readme } from "../src/changed-files.js";
 import { mapAsync } from "./array.js";
@@ -83,6 +84,7 @@ async function getReadme(path) {
     {},
   );
 
+  /** @prop {Map<string, Swagger[]>} */
   const tags = new Map();
   for (const block of yamlBlocks) {
     const tagName =
@@ -122,13 +124,29 @@ async function getSwagger(path) {
   // TODO: Do not assume location is with respect to repo root, could be reading
   // files from a different root location (e.g. "before" state of repo in
   // another folder).
-  const content = await readFile(join(__dirname, "..", "..", path), {
-    encoding: "utf8",
-  });
+
+  const fullPath = join(__dirname, "..", "..", path);
+
+  const content = await readFile(fullPath, { encoding: "utf8" });
 
   return {
     path,
     content,
-    refs: new Set(),
+    refs: await getExternalFileRefs(fullPath),
   };
+}
+
+/**
+ * @param {string} path
+ * @returns {Promise<Set<string>>}
+ */
+async function getExternalFileRefs(path) {
+  const schema = await $RefParser.resolve(path);
+
+  const refs = schema
+    .paths()
+    .filter((p) => p !== path && !p.startsWith("#"))
+    .map((p) => resolve(path, p));
+
+  return new Set(refs);
 }
