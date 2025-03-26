@@ -28,15 +28,15 @@ interface Deployments {
     Deployment,
     ListQueryParametersTrait<{
       @doc("Model publisher to filter models by")
-      @query("$modelPublisher")
+      @query("modelPublisher")
       modelPublisher?: string;
 
       @doc("Model name (the publisher specific name) to filter models by")
-      @query("$modelName")
+      @query("modelName")
       modelName?: string;
 
       @doc("Flag to include models from connections in response.")
-      @query("$includeConnectedModels")
+      @query("includeConnectedModels")
       includeConnectionModels?: boolean;
 
       ...StandardListQueryParameters;

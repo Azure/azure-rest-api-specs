@@ -28,7 +28,7 @@ interface Connections {
     Connection,
     ListQueryParametersTrait<{
       @doc("Specific type of connection to return in list")
-      @query("$connectionType")
+      @query("connectionType")
       connectionType?: ConnectionType;
 
       ...StandardListQueryParameters;
