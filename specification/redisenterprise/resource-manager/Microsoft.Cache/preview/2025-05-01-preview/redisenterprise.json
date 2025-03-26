@@ -2137,7 +2137,7 @@
         },
         "clusteringPolicy": {
           "type": "string",
-          "description": "Clustering policy - default is OSSCluster. This property must be chosen at create time, and cannot be changed without deleting the database.",
+          "description": "Clustering policy - default is OSSCluster. This property can be updated only if the current value is NoCluster. If the value is OSSCluster or EnterpriseCluster, it cannot be updated without deleting the database.",
           "enum": [
             "EnterpriseCluster",
             "OSSCluster",
@@ -2145,7 +2145,8 @@
           ],
           "x-ms-mutability": [
             "read",
-            "create"
+            "create",
+            "update"
           ],
           "x-ms-enum": {
             "name": "ClusteringPolicy",
@@ -2164,7 +2165,7 @@
               {
                 "value": "NoCluster",
                 "name": "NoCluster",
-                "description": "NoCluster clustering policy is for non-clustered instances."
+                "description": "The NoCluster policy is used for non-clustered Redis instances that do not require clustering features."
               }
             ]
           }
