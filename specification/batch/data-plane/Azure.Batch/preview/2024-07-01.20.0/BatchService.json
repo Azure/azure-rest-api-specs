@@ -1668,7 +1668,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BatchTaskAddCollectionResult"
+              "$ref": "#/definitions/BatchCreateTaskCollectionResult"
             },
             "headers": {
               "ETag": {
@@ -10277,6 +10277,20 @@
         ]
       }
     },
+    "BatchCreateTaskCollectionResult": {
+      "type": "object",
+      "description": "The result of creating a collection of Tasks to a Job.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The results of the add Task collection operation.",
+          "items": {
+            "$ref": "#/definitions/BatchTaskAddResult"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "BatchError": {
       "type": "object",
       "description": "An error response received from the Azure Batch service.",
@@ -14599,20 +14613,6 @@
         }
       }
     },
-    "BatchTaskAddCollectionResult": {
-      "type": "object",
-      "description": "The result of adding a collection of Tasks to a Job.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The results of the add Task collection operation.",
-          "items": {
-            "$ref": "#/definitions/BatchTaskAddResult"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "BatchTaskAddResult": {
       "type": "object",
       "description": "Result for a single Task added as part of an add Task collection operation.",
@@ -15972,23 +15972,6 @@
         "contentLength"
       ]
     },
-    "HttpHeader": {
-      "type": "object",
-      "description": "An HTTP header name-value pair",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The case-insensitive name of the header to be used while uploading output files."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the header to be used while uploading output files."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
     "ImageReference": {
       "type": "object",
       "description": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.\nTo get the list of all Azure Marketplace Image references verified by Azure Batch, see the\n' List Supported Images ' operation.",
@@ -16633,7 +16616,7 @@
           "type": "array",
           "description": "A list of name-value pairs for headers to be used in uploading output files. These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://learn.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types.",
           "items": {
-            "$ref": "#/definitions/HttpHeader"
+            "$ref": "#/definitions/OutputFileUploadHeader"
           },
           "x-ms-identifiers": []
         }
@@ -16693,6 +16676,23 @@
       },
       "required": [
         "uploadCondition"
+      ]
+    },
+    "OutputFileUploadHeader": {
+      "type": "object",
+      "description": "An HTTP header name-value pair",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The case-insensitive name of the header to be used while uploading output files."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to be used while uploading output files."
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "PublicIpAddressConfiguration": {

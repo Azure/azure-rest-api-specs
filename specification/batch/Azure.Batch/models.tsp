@@ -1659,11 +1659,11 @@ model OutputFileBlobContainerDestination {
   identityReference?: BatchNodeIdentityReference;
 
   @doc("A list of name-value pairs for headers to be used in uploading output files. These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://learn.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types.")
-  uploadHeaders?: HttpHeader[];
+  uploadHeaders?: OutputFileUploadHeader[];
 }
 
 @doc("An HTTP header name-value pair")
-model HttpHeader {
+model OutputFileUploadHeader {
   @doc("The case-insensitive name of the header to be used while uploading output files.")
   name: string;
 
@@ -3764,8 +3764,8 @@ model BatchTaskGroup {
   value: BatchTaskCreateContent[];
 }
 
-@doc("The result of adding a collection of Tasks to a Job.")
-model BatchTaskAddCollectionResult {
+@doc("The result of creating a collection of Tasks to a Job.")
+model BatchCreateTaskCollectionResult {
   @doc("The results of the add Task collection operation.")
   value?: BatchTaskAddResult[];
 }
