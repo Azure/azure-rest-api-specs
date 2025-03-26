@@ -154,7 +154,7 @@ interface AdministrationOperations {
   listTests is LoadTestAdministration.listTests;
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
   @clientName("BeginUploadTestFile", "python")
-  @access(Access.internal, "python")
+  @access(Access.internal, "python,csharp,java") // NOTE: These are overriden to LRO methods so original methods are made internal
   uploadTestFile is LoadTestAdministration.uploadTestFile;
   deleteTestFile is LoadTestAdministration.deleteTestFile;
   deleteTest is LoadTestAdministration.deleteTest;
@@ -175,7 +175,7 @@ interface TestRunOperations {
   // NOTE(mitsha): Access for begin_test_run and begin_test_profile_run is made internal in Python
   // so that the non LRO overloads can be hidden in the generated SDK
   @clientName("begin_test_run", "python")
-  @access(Access.internal, "python")
+  @access(Access.internal, "python,csharp,java") // NOTE: These are overriden to LRO methods so original methods are made internal
   createOrUpdateTestRun is LoadTestRun.createOrUpdateTestRun;
   createOrUpdateAppComponents is LoadTestRun.createOrUpdateAppComponents;
   createOrUpdateServerMetricsConfig is LoadTestRun.createOrUpdateServerMetricsConfig;
@@ -197,7 +197,7 @@ interface TestRunOperations {
   stop is LoadTestRun.stop;
 
   @clientName("begin_test_profile_run", "python")
-  @access(Access.internal, "python")
+  @access(Access.internal, "python,csharp,java") // NOTE: These are overriden to LRO methods so original methods are made internal
   createOrUpdateTestProfileRun is TestProfileRunAdministration.createOrUpdateTestProfileRun;
   deleteTestProfileRun is TestProfileRunAdministration.deleteTestProfileRun;
   getTestProfileRun is TestProfileRunAdministration.getTestProfileRun;
