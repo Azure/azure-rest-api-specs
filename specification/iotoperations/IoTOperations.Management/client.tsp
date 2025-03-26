@@ -85,8 +85,4 @@ using Microsoft.IoTOperations;
 @@clientName(TlsCertMethod, "ListenerPortTlsCertMethod", "csharp");
 @@clientName(TlsProperties, "IotOperationsTlsProperties", "csharp");
 @@clientName(Traces, "BrokerDiagnosticTraces", "csharp");
-@@clientName(Versions.`2024-11-01`,
-  "$DO_NOT_NORMALIZE$V2024-11-01",
-  "javascript"
-);
 @@clientName(Versions.`2025-04-01`, "V20250401", "javascript");
