@@ -475,13 +475,83 @@
         }
       }
     },
-    "ApiManagementGatewayTokenExpiredRemovedEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIRemoved event.",
+    "ApiManagementCircuitBreakerOpenedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Opened event.",
       "type": "object",
       "properties": {
-        "resourceUri": {
-          "description": "The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`",
+        "backendName": {
+          "description": "Name of the backend for which the circuit has opened.",
           "type": "string"
+        },
+        "circuitBreaker": {
+          "description": "Information related to the circuit breaker configuration",
+          "type": "object"
+        }
+      },
+      "x-ms-examples": {
+        "gatewayTokenExpiredCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/circuitBreakerOpened.json"
+        },
+        "gatewayTokenExpiredEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/circuitBreakerOpened.json"
+        }
+      }
+    },
+    "ApiManagementCircuitBreakerClosedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Closed event.",
+      "type": "object",
+      "properties": {
+        "backendName": {
+          "description": "Name of the backend for which the circuit has closed.",
+          "type": "string"
+        },
+        "circuitBreaker": {
+          "description": "Information related to the circuit breaker configuration",
+          "type": "object"
+        }
+      },
+      "x-ms-examples": {
+        "gatewayTokenExpiredCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/circuitBreakerClosed.json"
+        },
+        "gatewayTokenExpiredEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/circuitBreakerClosed.json"
+        }
+      }
+    },
+    "ApiManagementGatewayTokenNearExpiryEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenNearExpiry event.",
+      "type": "object",
+      "properties": {
+        "gatewayInfo": {
+          "description": "Information related to the gateway deployment for which the token is near expiry.",
+          "type": "object"
+        },
+        "tokenInfo": {
+          "description": "Information related to the token that is near expiry",
+          "type": "object"
+        }
+      },
+      "x-ms-examples": {
+        "gatewayTokenExpiredCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/gatewayTokenNearExpiry.json"
+        },
+        "gatewayTokenExpiredEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/gatewayTokenNearExpiry.json"
+        }
+      }
+    },
+    "ApiManagementGatewayTokenExpiredEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenExpired event.",
+      "type": "object",
+      "properties": {
+        "gatewayInfo": {
+          "description": "Information related to the gateway deployment for which the token has expired.",
+          "type": "object"
+        },
+        "tokenInfo": {
+          "description": "Information related to the token that expired",
+          "type": "object"
         }
       },
       "x-ms-examples": {
