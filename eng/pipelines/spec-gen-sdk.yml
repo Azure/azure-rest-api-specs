@@ -1,10 +1,8 @@
 parameters:
-  - name: SpecRepoCommit
-    type: string
-    default: '$(Build.SourceBranch)'
   - name: SdkRepoCommit
     type: string
     default: 'main'
+    displayName: 'SDK repository commit'
   - name: ConfigType
     type: string
     values:
@@ -30,6 +28,7 @@ parameters:
   - name: SkipPullRequestCreation
     type: boolean
     default: false
+    displayName: 'Skip SDK pull request creation'
     
 trigger: none
 pr:
@@ -42,7 +41,6 @@ extends:
   parameters:
     SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
     SdkRepoUrl: $(SdkRepoUrl)
-    SpecRepoCommit: ${{ parameters.SpecRepoCommit }}
     SdkRepoCommit: ${{ parameters.SdkRepoCommit }}
     ConfigType: ${{ parameters.ConfigType }}
     ConfigPath: ${{ parameters.ConfigPath }}

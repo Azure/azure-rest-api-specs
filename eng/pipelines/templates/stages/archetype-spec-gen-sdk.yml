@@ -3,9 +3,6 @@ parameters:
     type: string
   - name: SdkRepoUrl
     type: string
-  - name: SpecRepoCommit
-    type: string
-    default: '$(Build.SourceBranch)'
   - name: SdkRepoCommit
     type: string
     default: 'HEAD'
@@ -38,7 +35,7 @@ extends:
     Use1ESOfficial: false
     stages:
     - stage: Build
-      displayName: 'SDK Generation'
+      displayName: 'SDK Generation Preview'
       jobs:
       - job:
         timeoutInMinutes: 2400
@@ -51,6 +48,8 @@ extends:
             value: '3.13'
           - name: PipelineArtifactsName
             value: 'packages'
+          - name: SpecRepoCommit
+            value: $(Build.SourceBranch)
 
         pool:
           name: $(LINUXPOOL)
@@ -67,6 +66,19 @@ extends:
 
         steps:
           - checkout: none
+
+          - pwsh: |
+              git fetch origin $(Build.SourceBranch)
+              if (git rev-parse --verify $(Build.SourceVersion)) {
+                Write-Host "Commit $(Build.SourceVersion) found in $(Build.SourceBranch)."
+              }
+              else {
+                Write-Host "##vso[task.logissue type=error]Commit $(Build.SourceVersion) not found in $(Build.SourceBranch) branch."
+                Exit 1
+              }
+              Write-Host "##vso[task.setvariable variable=SpecRepoCommit]$(Build.SourceVersion)"
+            displayName: 'Verify commit exists in the branch'
+            condition: ne(variables['Build.SourceVersion'], '')
 
           - pwsh: |
               $tspConfigPathPattern = '^specification\/([^\/]+\/)+tspconfig\.yaml$'
@@ -139,24 +151,12 @@ extends:
               - '!sdk/**/session-records/*'
               Repositories:
               - Name: $(SpecRepoOwner)/$(SpecRepoName)
-                Commitish: ${{ parameters.SpecRepoCommit }}
+                Commitish: $(SpecRepoCommit)
                 WorkingDirectory: $(SpecRepoDirectory)
               - Name: $(SdkRepoOwner)/$(SdkRepoName)
                 Commitish: ${{ parameters.SdkRepoCommit }}
                 WorkingDirectory: $(SdkRepoDirectory)
               SkipCheckoutNone: true
-
-          - script: |
-              if [ "${{ parameters.SpecRepoCommit }}" = "$(Build.SourceBranch)" ]; then
-                cd $(SpecRepoDirectory)
-                default_commit=$(git rev-parse HEAD)
-                echo "##vso[task.setvariable variable=SpecRepoCommit]$default_commit"
-                echo "SpecRepoCommit variable set to default commit: $default_commit"
-              else
-                echo "##vso[task.setvariable variable=SpecRepoCommit]${{ parameters.SpecRepoCommit }}"
-                echo "SpecRepoCommit variable set to: ${{ parameters.SpecRepoCommit }}"
-              fi
-            displayName: 'Set SpecRepoCommit variable'
 
           - task: NodeTool@0
             inputs:
