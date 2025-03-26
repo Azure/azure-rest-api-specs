@@ -174,6 +174,18 @@ function skipForNonModularOrDataPlaneInTsEmitter(config: any, folder: string): S
   return result;
 }
 
+function skipForNonModularOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
+  // isModularLibrary is true by default
+  const isModularClient = config?.options?.["@azure-tools/typespec-ts"]?.isModularLibrary !== false;
+  const shouldSkip = isManagementSdk(folder) && isModularClient;
+  const result: SkipResult = {
+    shouldSkip: shouldSkip,
+  };
+  if (result.shouldSkip)
+    result.reason = "This rule is only applicable for management SDKs with modular client.";
+  return result;
+}
+
 // ----- common sub rules -----
 export class TspConfigCommonAzServiceDirMatchPatternSubRule extends TspconfigParameterSubRuleBase {
   constructor() {
@@ -249,6 +261,29 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspCon
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+// ----- TS data plane sub rules -----
+export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+)*-rest$/));
+  }
+  protected skip(config: any,  folder: string) {
+    return skipForNonModularOrManagementPlaneInTsEmitter(config,folder);
+  }
+}
+
+export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+  constructor() {
+    super(
+      "packageDetails.name",
+      "package-details.name",
+      new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/)
+    );    
+  }
+  protected skip(config: any,  folder: string) {
+    return skipForNonModularOrManagementPlaneInTsEmitter(config,folder);
   }
 }
 
@@ -427,12 +462,23 @@ export class TspConfigCsharpMgmtPackageDirectorySubRule extends TspconfigEmitter
   }
 }
 
+export class TspConfigCsharpMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-csharp", "service-dir", new RegExp(/^sdk\/.*$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
+  new TspConfigTsDpPackageDirectorySubRule(),
+  new TspConfigTsDpPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
@@ -453,6 +499,7 @@ export const defaultRules = [
   new TspConfigCsharpAzNamespaceEqualStringSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
   new TspConfigCsharpMgmtPackageDirectorySubRule(),
+  new TspConfigCsharpMgmtServiceDirMatchPatternSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
