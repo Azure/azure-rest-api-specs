@@ -279,8 +279,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RelatedAlerts"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -324,8 +327,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Action completed successfully."
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RelatedResources"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -610,6 +616,36 @@
         "investigationId"
       ]
     },
+    "InvestigationEntityType": {
+      "type": "string",
+      "description": "The type of the investigation entity",
+      "enum": [
+        "Investigation",
+        "Finding",
+        "Evidence"
+      ],
+      "x-ms-enum": {
+        "name": "InvestigationEntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Investigation",
+            "value": "Investigation",
+            "description": "Investigation entity"
+          },
+          {
+            "name": "Finding",
+            "value": "Finding",
+            "description": "Finding entity"
+          },
+          {
+            "name": "Evidence",
+            "value": "Evidence",
+            "description": "Evidence entity"
+          }
+        ]
+      }
+    },
     "InvestigationExecution": {
       "type": "object",
       "description": "Details about the execution of the investigation",
@@ -621,7 +657,7 @@
         "completedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the investigation execution completed"
+          "description": "The time at which the investigation execution completed (in UTC)"
         }
       },
       "required": [
@@ -688,7 +724,7 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation time of the investigation"
+          "description": "The creation time of the investigation (in UTC)"
         },
         "runParameters": {
           "$ref": "#/definitions/RunParameters",
@@ -710,6 +746,10 @@
           "type": "string",
           "description": "The identifier of the investigation"
         },
+        "entityType": {
+          "$ref": "#/definitions/InvestigationEntityType",
+          "description": "The type of the investigation"
+        },
         "origin": {
           "$ref": "#/definitions/Origin",
           "description": "The origin of the investigation"
@@ -717,12 +757,12 @@
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The creation time of the investigation"
+          "description": "The creation time of the investigation (in UTC)"
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The last update time of the investigation"
+          "description": "The last update time of the investigation (in UTC)"
         },
         "execution": {
           "$ref": "#/definitions/InvestigationExecution",
@@ -743,6 +783,7 @@
       },
       "required": [
         "id",
+        "entityType",
         "origin",
         "createdAt",
         "lastModifiedAt",
@@ -801,7 +842,7 @@
         "impactTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The issue impact time"
+          "description": "The issue impact time (in UTC)"
         },
         "alertsCount": {
           "type": "integer",
@@ -857,7 +898,7 @@
         "impactTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The issue impact time"
+          "description": "The issue impact time (in UTC)"
         }
       }
     },
@@ -1003,13 +1044,13 @@
         "addedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The time this relation was added to the issue",
+          "description": "The time this relation was added to the issue (in UTC)",
           "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The last update time of this relation",
+          "description": "The last update time of this relation (in UTC)",
           "readOnly": true
         }
       },
@@ -1058,13 +1099,13 @@
         "addedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The time this relation was added to the issue",
+          "description": "The time this relation was added to the issue (in UTC)",
           "readOnly": true
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The last update time of this relation",
+          "description": "The last update time of this relation (in UTC)",
           "readOnly": true
         }
       },
@@ -1123,7 +1164,7 @@
         "impactTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The impact time to investigate"
+          "description": "The impact time to investigate (in UTC)"
         },
         "alerts": {
           "type": "array",
@@ -1153,7 +1194,7 @@
         "impactTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The impact time to use for this investigation - by default, the impact time from the issue is used"
+          "description": "The impact time to use for this investigation - by default, the impact time from the issue is used (in UTC)"
         },
         "investigationScopes": {
           "type": "array",
