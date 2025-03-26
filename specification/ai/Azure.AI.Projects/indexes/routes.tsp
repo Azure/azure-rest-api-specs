@@ -7,11 +7,6 @@ import "../servicepatterns.tsp";
 import "../common/models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
-using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 

@@ -7,13 +7,6 @@ import "../main.tsp";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
-
 namespace Azure.AI.Projects;
 
 @doc("Enum to determine the type of data.")
