@@ -49,6 +49,10 @@ directive:
     from: service.json
     reason: Getting flagged in new API versions while inheriting old models, these fields exist in ASR from before and are required.
 
+  - from: service.json
+	suppress: PutResponseCodes
+    reason: suppressing as ASR is old service and for all APIs, the 202-async PUT convention is followed.
+
 suppressions:
   - from: service.json
     code: AvoidAdditionalProperties
