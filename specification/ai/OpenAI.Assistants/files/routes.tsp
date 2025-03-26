@@ -39,6 +39,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
+#suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/files")
