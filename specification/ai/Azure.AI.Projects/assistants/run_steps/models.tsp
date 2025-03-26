@@ -265,7 +265,7 @@ model RunStepDeltaFileSearchToolCall extends RunStepDeltaToolCall {
 
   /** Reserved for future use. */
   @encodedName("application/json", "file_search")
-  fileSearch?: Record<string>;
+  fileSearch?: RunStepFileSearchToolCallResults;
 }
 
 /** Represents a Code Interpreter tool call within a streaming run step's tool call details. */

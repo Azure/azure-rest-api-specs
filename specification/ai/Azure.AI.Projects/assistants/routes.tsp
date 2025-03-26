@@ -62,9 +62,10 @@ op listAgents is Azure.Core.Foundations.Operation<
 @route("/assistants/{assistantId}")
 op getAgent is Azure.Core.Foundations.Operation<
   {
-    @doc("Identifier of the agent.")
-    @path
-    assistantId: string;
+    /**
+     * The request details to use when retrieving an agent.
+     */
+    ...GetAgentOptions;
   },
   Agent
 >;
@@ -103,9 +104,10 @@ op updateAgent is Azure.Core.Foundations.Operation<
 @route("/assistants/{assistantId}")
 op deleteAgent is Azure.Core.Foundations.Operation<
   {
-    @doc("Identifier of the agent.")
-    @path
-    assistantId: string;
+    /**
+     * The request details to use when deleting an agent.
+     */
+    ...DeleteAgentOptions;
   },
   AgentDeletionStatus
 >;

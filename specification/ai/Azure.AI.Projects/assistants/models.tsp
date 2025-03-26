@@ -202,3 +202,17 @@ model AgentDeletionStatus {
   @doc("The object type, which is always 'assistant.deleted'.")
   object: "assistant.deleted";
 }
+
+@doc("The request details to use when retrieving an agent.")
+model GetAgentOptions {
+  @doc("Identifier of the agent.")
+  @path
+  assistantId: string;
+}
+
+@doc("The request details to use when deleting an agent.")
+model DeleteAgentOptions {
+  @doc("Identifier of the agent.")
+  @path
+  assistantId: string;
+}
