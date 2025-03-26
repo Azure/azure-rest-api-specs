@@ -196,10 +196,11 @@ extends:
               ArtifactPath: "$(System.DefaultWorkingDirectory)/$(BreakingChangeLabelArtifactPath)"
               CustomCondition: and(succeeded(), ne(variables['BreakingChangeLabelArtifactName'], ''))
 
-          - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
-            parameters:
-              ArtifactName: $(PipelineArtifactsName)
-              ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
+          - ${{ if variables['GeneratedSDK.StagedArtifactsFolder'] }}:
+            - template: /eng/common/pipelines/templates/steps/publish-1es-artifact.yml
+              parameters:
+                ArtifactName: $(PipelineArtifactsName)
+                ArtifactPath: $(GeneratedSDK.StagedArtifactsFolder)
 
           - ${{ if eq(variables['System.TeamProject'], 'internal') }}:
             - task: PowerShell@2
