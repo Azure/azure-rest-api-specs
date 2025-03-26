@@ -222,11 +222,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "assistantId",
-            "in": "path",
-            "description": "Identifier of the agent.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Assistants.GetAgentOptions"
           }
         ],
         "responses": {
@@ -298,11 +294,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "assistantId",
-            "in": "path",
-            "description": "Identifier of the agent.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Assistants.DeleteAgentOptions"
           }
         ],
         "responses": {
@@ -4178,6 +4170,41 @@
         "referenceType"
       ]
     },
+    "Assistants.AISearchIndexResource": {
+      "type": "object",
+      "description": "A AI Search Index resource.",
+      "properties": {
+        "index_connection_id": {
+          "type": "string",
+          "description": "An index connection id in an IndexResource attached to this agent.",
+          "x-ms-client-name": "indexConnectionId"
+        },
+        "index_name": {
+          "type": "string",
+          "description": "The name of an index in an IndexResource attached to this agent.",
+          "x-ms-client-name": "indexName"
+        },
+        "query_type": {
+          "$ref": "#/definitions/Assistants.AzureAISearchQueryType",
+          "description": "Type of query in an AIIndexResource attached to this agent.",
+          "x-ms-client-name": "queryType"
+        },
+        "top_k": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents to retrieve from search and present to the model.",
+          "x-ms-client-name": "topK"
+        },
+        "filter": {
+          "type": "string",
+          "description": "Odata filter string for search resource."
+        }
+      },
+      "required": [
+        "index_connection_id",
+        "index_name"
+      ]
+    },
     "Assistants.Agent": {
       "type": "object",
       "description": "Represents an agent that can call the model and use tools.",
@@ -4668,7 +4695,7 @@
         "code_interpreter",
         "file_search",
         "bing_grounding",
-        "fabric_aiskill",
+        "fabric_dataagent",
         "sharepoint_grounding",
         "azure_ai_search"
       ],
@@ -4698,8 +4725,8 @@
           },
           {
             "name": "microsoftFabric",
-            "value": "fabric_aiskill",
-            "description": "Tool type `fabric_aiskill`"
+            "value": "fabric_dataagent",
+            "description": "Tool type `fabric_dataagent`"
           },
           {
             "name": "sharepoint",
@@ -4714,6 +4741,48 @@
         ]
       }
     },
+    "Assistants.AzureAISearchQueryType": {
+      "type": "string",
+      "description": "Available query types for Azure AI Search tool.",
+      "enum": [
+        "simple",
+        "semantic",
+        "vector",
+        "vector_simple_hybrid",
+        "vector_semantic_hybrid"
+      ],
+      "x-ms-enum": {
+        "name": "AzureAISearchQueryType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "simple",
+            "value": "simple",
+            "description": "Query type `simple`"
+          },
+          {
+            "name": "semantic",
+            "value": "semantic",
+            "description": "Query type `semantic`"
+          },
+          {
+            "name": "vector",
+            "value": "vector",
+            "description": "Query type `vector`"
+          },
+          {
+            "name": "vector_simple_hybrid",
+            "value": "vector_simple_hybrid",
+            "description": "Query type `vector_simple_hybrid`"
+          },
+          {
+            "name": "vector_semantic_hybrid",
+            "value": "vector_semantic_hybrid",
+            "description": "Query type `vector_semantic_hybrid`"
+          }
+        ]
+      }
+    },
     "Assistants.AzureAISearchResource": {
       "type": "object",
       "description": "A set of index resources used by the `azure_ai_search` tool.",
@@ -4723,7 +4792,7 @@
           "description": "The indices attached to this agent. There can be a maximum of 1 index\nresource attached to the agent.",
           "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/Assistants.IndexResource"
+            "$ref": "#/definitions/Assistants.AISearchIndexResource"
           },
           "x-ms-client-name": "indexList",
           "x-ms-identifiers": []
@@ -5994,19 +6063,54 @@
         }
       }
     },
+    "Assistants.MessageDeltaTextUrlCitationAnnotation": {
+      "type": "object",
+      "description": "A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.",
+      "properties": {
+        "url_citation": {
+          "$ref": "#/definitions/Assistants.MessageDeltaTextUrlCitationDetails",
+          "description": "The details of the URL citation.",
+          "x-ms-client-name": "urlCitation"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
+        }
+      },
+      "required": [
+        "url_citation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Assistants.MessageDeltaTextAnnotation"
+        }
+      ],
+      "x-ms-discriminator-value": "url_citation"
+    },
     "Assistants.MessageDeltaTextUrlCitationDetails": {
       "type": "object",
-      "description": "A representation of the URL used for the text citation.",
+      "description": "A representation of a URL citation, as used in text thread message content.",
       "properties": {
         "url": {
           "type": "string",
-          "description": "The URL where the citation is from."
+          "description": "The URL associated with this citation."
         },
         "title": {
           "type": "string",
           "description": "The title of the URL."
         }
-      }
+      },
+      "required": [
+        "url"
+      ]
     },
     "Assistants.MessageImageFileContent": {
       "type": "object",
@@ -6350,24 +6454,73 @@
         "file_id"
       ]
     },
+    "Assistants.MessageTextUrlCitationAnnotation": {
+      "type": "object",
+      "description": "A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.",
+      "properties": {
+        "url_citation": {
+          "$ref": "#/definitions/Assistants.MessageTextUrlCitationDetails",
+          "description": "The details of the URL citation.",
+          "x-ms-client-name": "urlCitation"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
+        }
+      },
+      "required": [
+        "url_citation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Assistants.MessageTextAnnotation"
+        }
+      ],
+      "x-ms-discriminator-value": "url_citation"
+    },
+    "Assistants.MessageTextUrlCitationDetails": {
+      "type": "object",
+      "description": "A representation of a URL citation, as used in text thread message content.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL associated with this citation."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the URL."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
     "Assistants.MicrosoftFabricToolDefinition": {
       "type": "object",
       "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
       "properties": {
-        "fabric_aiskill": {
+        "fabric_dataagent": {
           "$ref": "#/definitions/Assistants.ToolConnectionList",
           "description": "The list of connections used by the Microsoft Fabric tool."
         }
       },
       "required": [
-        "fabric_aiskill"
+        "fabric_dataagent"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Assistants.ToolDefinition"
         }
       ],
-      "x-ms-discriminator-value": "fabric_aiskill"
+      "x-ms-discriminator-value": "fabric_dataagent"
     },
     "Assistants.OpenAIFile": {
       "type": "object",
@@ -7318,11 +7471,8 @@
       "description": "Represents a file search tool call within a streaming run step's tool call details.",
       "properties": {
         "file_search": {
-          "type": "object",
+          "$ref": "#/definitions/Assistants.RunStepFileSearchToolCallResults",
           "description": "Reserved for future use.",
-          "additionalProperties": {
-            "type": "string"
-          },
           "x-ms-client-name": "fileSearch"
         }
       },
@@ -7661,7 +7811,7 @@
       "type": "object",
       "description": "A record of a call to a Microsoft Fabric tool, issued by the model in evaluation of a defined tool, that represents\nexecuted Microsoft Fabric operations.",
       "properties": {
-        "fabric_aiskill": {
+        "fabric_dataagent": {
           "type": "object",
           "description": "Reserved for future use.",
           "additionalProperties": {
@@ -7671,14 +7821,14 @@
         }
       },
       "required": [
-        "fabric_aiskill"
+        "fabric_dataagent"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/Assistants.RunStepToolCall"
         }
       ],
-      "x-ms-discriminator-value": "fabric_aiskill"
+      "x-ms-discriminator-value": "fabric_dataagent"
     },
     "Assistants.RunStepSharepointToolCall": {
       "type": "object",
@@ -8443,7 +8593,7 @@
     },
     "Assistants.ToolConnectionList": {
       "type": "object",
-      "description": "A set of connection resources currently used by either the `bing_grounding`, `fabric_aiskill`, or `sharepoint_grounding` tools.",
+      "description": "A set of connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools.",
       "properties": {
         "connections": {
           "type": "array",
@@ -10774,6 +10924,22 @@
     }
   },
   "parameters": {
+    "Assistants.DeleteAgentOptions": {
+      "name": "assistantId",
+      "in": "path",
+      "description": "Identifier of the agent.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Assistants.GetAgentOptions": {
+      "name": "assistantId",
+      "in": "path",
+      "description": "Identifier of the agent.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "Assistants.UpdateAgentOptions.assistantId": {
       "name": "assistantId",
       "in": "path",

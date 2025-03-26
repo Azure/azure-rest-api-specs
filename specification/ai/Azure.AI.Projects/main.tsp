@@ -20,20 +20,16 @@ import "./indexes/routes.tsp";
 import "./deployments/routes.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 namespace Azure.AI {
 
 }
 
+#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
-  OAuth2Auth<[
+  BearerAuth | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
