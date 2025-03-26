@@ -484,8 +484,7 @@
           "type": "string"
         },
         "circuitBreaker": {
-          "description": "Information related to the circuit breaker configuration",
-          "type": "object"
+          "$ref": "#/definitions/ApiManagementCircuitBreakerInfo"
         }
       },
       "x-ms-examples": {
@@ -506,8 +505,7 @@
           "type": "string"
         },
         "circuitBreaker": {
-          "description": "Information related to the circuit breaker configuration",
-          "type": "object"
+          "$ref": "#/definitions/ApiManagementCircuitBreakerInfo"
         }
       },
       "x-ms-examples": {
@@ -524,12 +522,10 @@
       "type": "object",
       "properties": {
         "gatewayInfo": {
-          "description": "Information related to the gateway deployment for which the token is near expiry.",
-          "type": "object"
+          "$ref": "#/definitions/ApiManagementGatewayInfo"
         },
         "tokenInfo": {
-          "description": "Information related to the token that is near expiry",
-          "type": "object"
+          "$ref": "#/definitions/ApiManagementGatewayTokenNearExpiryInfo"
         }
       },
       "x-ms-examples": {
@@ -546,12 +542,10 @@
       "type": "object",
       "properties": {
         "gatewayInfo": {
-          "description": "Information related to the gateway deployment for which the token has expired.",
-          "type": "object"
+          "$ref": "#/definitions/ApiManagementGatewayInfo"
         },
         "tokenInfo": {
-          "description": "Information related to the token that expired",
-          "type": "object"
+          "$ref": "#/definitions/ApiManagementExpiredGatewayTokenInfo"
         }
       },
       "x-ms-examples": {
@@ -560,6 +554,52 @@
         },
         "gatewayTokenExpiredEventGridSchema": {
           "$ref": "./examples/event-grid-schema/gatewayTokenExpired.json"
+        }
+      }
+    },
+    "ApiManagementCircuitBreakerInfo": {
+      "description": "Information related to the circuit breaker configured on the backend.",
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "object",
+          "description": "Overview of all configured rules and respective details."
+        }
+      }
+    },
+    "ApiManagementGatewayInfo": {
+      "description": "Information related to a given self-hosted gateway deployment.",
+      "type": "object",
+      "properties": {
+        "gatewayId": {
+          "type": "string",
+          "description": "Id of Gateway that is used to deploy the gateway to get the configuration for. This is the ARM resource ID referenced in the Azure API Management instance."
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "Unique instance ID of the deployed gateway"
+        }
+      }
+    },
+    "ApiManagementExpiredGatewayTokenInfo": {
+      "description": "Information related to a an expired gateway token for a self-hosted gateway deployment.",
+      "type": "object",
+      "properties": {
+        "expiredAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the gateway token has expired."
+        }
+      }
+    },
+    "ApiManagementGatewayTokenNearExpiryInfo": {
+      "description": "Information related to a gateway token that is near expiry for a self-hosted gateway deployment.",
+      "type": "object",
+      "properties": {
+        "expiresAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the gateway token will expire."
         }
       }
     }
