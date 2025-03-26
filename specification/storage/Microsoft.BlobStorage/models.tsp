@@ -1331,8 +1331,7 @@ alias BlockIdParameter = {
   /** A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block. */
   @query
   @clientName("blockId")
-  @encode("base64url")
-  blockid: bytes;
+  blockid: base64Bytes;
 };
 
 /** The account kind response header. */
