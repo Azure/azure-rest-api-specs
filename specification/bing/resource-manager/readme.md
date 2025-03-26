@@ -42,7 +42,7 @@ input-file:
 - Microsoft.Bing/preview/2025-05-01-preview/bing.json
 suppressions:
   - code: LRO_RESPONSE_HEADER
-  - reason: Keeping accounts endpoint compatible with the latest stable version
+    reason: Keeping accounts endpoint compatible with the latest stable version
 ```
 
 ### Tag: package-2020-06-10
