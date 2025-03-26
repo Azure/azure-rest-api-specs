@@ -1189,27 +1189,15 @@
         },
         "commandId": {
           "type": "string",
-          "description": "Specifies a commandId of predefined built-in script. commandIds available for Linux listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands"
+          "description": "Specifies a commandId of predefined built-in script."
         },
         "scriptUriManagedIdentity": {
           "$ref": "#/definitions/RunCommandManagedIdentity",
           "description": "User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged."
-        },
-        "scriptShell": {
-          "type": "string",
-          "description": "Optional. Specify which shell to use for running the script. These values must match those expected by the extension. Currently supported only for Windows VMs, script uses Powershell 7 when specified. Powershell 7 must be already installed on the machine to use Powershell7 parameter value.",
-          "enum": [
-            "Default",
-            "Powershell7"
-          ]
-        },
-        "galleryScriptReferenceId": {
-          "type": "string",
-          "description": "The resource Id of a Gallery Script version that needs to be executed. Example Id looks like /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{scriptName}/versions/{version}."
         }
       },
       "type": "object",
-      "description": "Describes the script sources for run command. Use only one these script sources: script, scriptUri, commandId, galleryScriptReferenceId."
+      "description": "Describes the script sources for run command. Use only one of script, scriptUri, commandId."
     },
     "VirtualMachineRunCommandProperties": {
       "properties": {
