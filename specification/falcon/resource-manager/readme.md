@@ -27,7 +27,7 @@ These are the global settings for the falcon.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-03-26
+tag: package-preview-2025-03-26-preview
 ```
 
 ### Tag: package-preview-2025-03-26-preview
