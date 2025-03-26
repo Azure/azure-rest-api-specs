@@ -1,11 +1,11 @@
 // @ts-check
-import { readFileSync } from "fs";
-import { readdir } from "fs/promises";
+import { readFile, readdir } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { readme } from "../src/changed-files.js";
+import { mapAsync } from "./array.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -46,20 +46,22 @@ export async function getSpecModel(folder, options = {}) {
 
   return {
     readmes: new Map(
-      readmes.map((r) => [join(folder, r), getReadme(join(folder, r))]),
+      await mapAsync(readmes, async (r) => {
+        return [join(folder, r), await getReadme(join(folder, r))];
+      }),
     ),
   };
 }
 
 /**
  * @param {string} path
- * @returns {Readme}
+ * @returns {Promise<Readme>}
  */
-function getReadme(path) {
+async function getReadme(path) {
   // TODO: Do not assume location is with respect to repo root, could be reading
   // files from a different root location (e.g. "before" state of repo in
   // another folder).
-  const content = readFileSync(join(__dirname, "..", "..", path), {
+  const content = await readFile(join(__dirname, "..", "..", path), {
     encoding: "utf8",
   });
 
@@ -95,7 +97,7 @@ function getReadme(path) {
     /** @type Swagger[] */
     const swaggers = [];
     for (const swaggerPath of obj["input-file"]) {
-      const swagger = getSwagger(join(dirname(path), swaggerPath));
+      const swagger = await getSwagger(join(dirname(path), swaggerPath));
       swaggers.push(swagger);
     }
 
@@ -114,13 +116,13 @@ function getReadme(path) {
 
 /**
  * @param {string} path
- * @returns {Swagger}
+ * @returns {Promise<Swagger>}
  */
-function getSwagger(path) {
+async function getSwagger(path) {
   // TODO: Do not assume location is with respect to repo root, could be reading
   // files from a different root location (e.g. "before" state of repo in
   // another folder).
-  const content = readFileSync(join(__dirname, "..", "..", path), {
+  const content = await readFile(join(__dirname, "..", "..", path), {
     encoding: "utf8",
   });
 
