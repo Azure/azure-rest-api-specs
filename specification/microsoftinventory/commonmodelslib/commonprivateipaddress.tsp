@@ -24,10 +24,10 @@ model PrivateIpAddressPropertiesBase {
   region: string;
 
   @doc("Determines whether the private IP address is used across regions")
-  isReuse: boolean;
+  isReuse?: boolean;
 
   @doc("Indicates the ownership of the private IP address")
-  ownership: Ownership;
+  ownership?: Ownership;
 
   @doc("Metadata that describes the resource to which this private IP address is assigned")
   assignedResource: AssignedResource;
@@ -35,19 +35,4 @@ model PrivateIpAddressPropertiesBase {
   @doc("The provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
-}
-
-@doc("Metadata that describes the ownership of the resource")
-model Ownership {
-  @doc("The owning service tree ID")
-  serviceTreeId: string;
-}
-
-@doc("Metadata that describes the asset to which the resource is assigned")
-model AssignedResource {
-  @doc("The type of the resource")
-  resourceType: AssetType;
-
-  @doc("Unique identifier for the asset")
-  resourceId: string;
 }
