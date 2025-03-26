@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "agentPool": {
+      "properties": {
+        "count": 1,
+        "nodeLabels": {
+          "env": "dev",
+          "goal": "test"
+        },
+        "nodeTaints": [
+          "env=prod:NoSchedule",
+          "sku=gpu:NoSchedule"
+        ],
+        "osType": "Linux",
+        "vmSize": "Standard_A4_v2"
+      }
+    },
+    "agentPoolName": "testnodepool",
+    "api-version": "2024-01-01",
+    "connectedClusterResourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testnodepool",
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances/agentpools",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/testnodepool",
+        "properties": {
+          "count": 1,
+          "nodeLabels": {
+            "env": "dev",
+            "goal": "test"
+          },
+          "nodeTaints": [
+            "env=prod:NoSchedule",
+            "sku=gpu:NoSchedule"
+          ],
+          "osType": "Linux",
+          "provisioningState": "Accepted",
+          "vmSize": "Standard_A4_v2"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testnodepool",
+        "type": "Microsoft.HybridContainerService/provisionedClusterInstances/agentpools",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/testnodepool",
+        "properties": {
+          "count": 1,
+          "nodeLabels": {
+            "env": "dev",
+            "goal": "test"
+          },
+          "nodeTaints": [
+            "env=prod:NoSchedule",
+            "sku=gpu:NoSchedule"
+          ],
+          "osType": "Linux",
+          "provisioningState": "Accepted",
+          "vmSize": "Standard_A4_v2"
+        }
+      }
+    }
+  },
+  "operationId": "agentPool_CreateOrUpdate",
+  "title": "PutAgentPool"
+}
