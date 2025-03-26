@@ -64,6 +64,15 @@ input-file:
   - Microsoft.RecoveryServices/stable/2025-01-01/bms.json
 ```
 
+### Tag: package-preview-2024-11
+
+These settings apply only when `--tag=package-preview-2024-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-11'
+input-file:
+  - Microsoft.RecoveryServices/preview/2024-11-01-preview/bms.json
+```
+
 ### Tag: package-2024-10
 
 These settings apply only when `--tag=package-2024-10` is specified on the command line.
