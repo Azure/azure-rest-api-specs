@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -24,18 +23,19 @@ model ExtendedLocation {
 
 @lroStatus
 @doc("The provisioning status of the resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("The resource is being created.")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("The resource is being updated.")
-  Updating,
+  Updating: "Updating",
 
   @doc("The resource is being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The resource was accepted by the server.")
-  Accepted,
+  Accepted: "Accepted",
 }

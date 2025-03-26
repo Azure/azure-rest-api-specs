@@ -1,0 +1,34 @@
+{
+  "operationId": "DocumentClassifiers_GetClassifier",
+  "title": "Get Document Classifier",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-02-29-preview",
+    "classifierId": "myClassifier"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "classifierId": "myClassifier",
+        "description": "Classifier description",
+        "createdDateTime": "2022-07-30T00:00:00Z",
+        "expirationDateTime": "2023-01-01T00:00:00Z",
+        "apiVersion": "2024-02-29-preview",
+        "docTypes": {
+          "formA": {
+            "azureBlobSource": {
+              "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+              "prefix": "formADocs/"
+            }
+          },
+          "formB": {
+            "azureBlobFileListSource": {
+              "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+              "fileList": "formB.jsonl"
+            }
+          }
+        }
+      }
+    }
+  }
+}

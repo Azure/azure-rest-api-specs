@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-08-01",
+    "id": "talking-avatar-batch-synthesis-job-1",
+    "Operation-Id": "06c7f835-e07b-4ac8-b33c-5b6df4a4eeef",
+    "definition": {
+      "inputKind": "PlainText",
+      "synthesisConfig": {
+        "voice": "zh-CN-XiaoxiaoNeural"
+      },
+      "inputs": [
+        {
+          "content": "Hello, I am avatar from Microsoft."
+        }
+      ],
+      "avatarConfig": {
+        "talkingAvatarCharacter": "lisa",
+        "talkingAvatarStyle": "casual-sitting",
+        "videoFormat": "webm",
+        "videoCodec": "vp9",
+        "subtitleType": "soft_embedded",
+        "backgroundColor": "transparent",
+        "videoCrop": {
+          "topLeft": {
+            "x": 100,
+            "y": 100
+          },
+          "bottomRight": {
+            "x": 1820,
+            "y": 1080
+          }
+        }
+      }
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/avatar/operations/06c7f835-e07b-4ac8-b33c-5b6df4a4eeef?api-version=2024-08-01",
+        "Operation-Id": "06c7f835-e07b-4ac8-b33c-5b6df4a4eeef"
+      },
+      "body": {
+        "id": "talking-avatar-batch-synthesis-job-1",
+        "status": "NotStarted",
+        "createdDateTime": "2024-03-15T10:28:23.7702311Z",
+        "lastActionDateTime": "2024-03-15T10:28:23.7702313Z",
+        "inputKind": "PlainText",
+        "customVoices": {},
+        "properties": {
+          "timeToLiveInHours": 744
+        },
+        "synthesisConfig": {
+          "voice": "zh-CN-XiaoxiaoNeural"
+        },
+        "avatarConfig": {
+          "talkingAvatarCharacter": "lisa",
+          "talkingAvatarStyle": "casual-sitting",
+          "videoFormat": "Webm",
+          "videoCodec": "vp9",
+          "subtitleType": "soft_embedded",
+          "backgroundColor": "transparent",
+          "videoCrop": {
+            "topLeft": {
+              "x": 100,
+              "y": 100
+            },
+            "bottomRight": {
+              "x": 1820,
+              "y": 1080
+            }
+          },
+          "bitrateKbps": 2000,
+          "customized": false
+        }
+      }
+    }
+  }
+}

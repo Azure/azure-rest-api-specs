@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
@@ -28,7 +27,7 @@ model Dataset is TrackedResource<DatasetProperties> {
   // Extended location is not included in TrackedResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
@@ -46,11 +45,12 @@ model DatasetProperties {
   @doc("Time to live for individual records.")
   ttl?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("List of keys that can be used for joining on enrich.")
   keys?: Record<DatasetPropertyKey>;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -66,7 +66,12 @@ model DatasetPropertyKey {
 @armResourceOperations
 interface Datasets {
   get is ArmResourceRead<Dataset>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Dataset>;
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    Dataset,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
+  >;
   update is ArmCustomPatchSync<Dataset>;
   delete is ArmResourceDeleteWithoutOkAsync<Dataset>;
   listByInstance is ArmResourceListByParent<Dataset>;

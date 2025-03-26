@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "group1",
+    "serverName": "server1",
+    "jobAgentName": "agent1",
+    "jobName": "job1",
+    "stepName": "step1",
+    "api-version": "2024-05-01-preview",
+    "parameters": {
+      "properties": {
+        "targetGroup": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/targetGroups/targetGroup0",
+        "action": {
+          "value": "select 1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "stepId": 1,
+          "targetGroup": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/targetGroups/targetGroup0",
+          "action": {
+            "type": "TSql",
+            "source": "Inline",
+            "value": "select 1"
+          },
+          "executionOptions": {
+            "timeoutSeconds": 43200,
+            "retryAttempts": 10,
+            "initialRetryIntervalSeconds": 1,
+            "maximumRetryIntervalSeconds": 120,
+            "retryIntervalBackoffMultiplier": 2.0
+          }
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job1/steps/step1",
+        "name": "step1",
+        "type": "Microsoft.Sql/servers/jobAgents/jobs/steps"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "stepId": 1,
+          "targetGroup": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/targetGroups/targetGroup0",
+          "credential": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/credentials/cred0",
+          "action": {
+            "type": "TSql",
+            "source": "Inline",
+            "value": "select 1"
+          },
+          "executionOptions": {
+            "timeoutSeconds": 43200,
+            "retryAttempts": 10,
+            "initialRetryIntervalSeconds": 1,
+            "maximumRetryIntervalSeconds": 120,
+            "retryIntervalBackoffMultiplier": 2.0
+          }
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job1/steps/step1",
+        "name": "step1",
+        "type": "Microsoft.Sql/servers/jobAgents/jobs/steps"
+      }
+    }
+  }
+}

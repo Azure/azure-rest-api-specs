@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "databaseName": "default",
+    "clusterName": "cache1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f",
+    "parameters": {
+      "properties": {
+        "clientProtocol": "Encrypted",
+        "clusteringPolicy": "EnterpriseCluster",
+        "evictionPolicy": "AllKeysLRU",
+        "persistence": {
+          "aofEnabled": true,
+          "aofFrequency": "1s"
+        },
+        "port": 10000,
+        "modules": [
+          {
+            "name": "RedisBloom",
+            "args": "ERROR_RATE 0.00 INITIAL_SIZE 400"
+          },
+          {
+            "name": "RedisTimeSeries",
+            "args": "RETENTION_POLICY 20"
+          },
+          {
+            "name": "RediSearch"
+          }
+        ],
+        "deferUpgrade": "NotDeferred",
+        "accessKeysAuthentication": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+        "name": "cache1/default",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "properties": {
+          "provisioningState": "Updating",
+          "resourceState": "Updating",
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "EnterpriseCluster",
+          "evictionPolicy": "AllKeysLRU",
+          "persistence": {
+            "aofEnabled": true,
+            "aofFrequency": "1s"
+          },
+          "port": 10000,
+          "modules": [
+            {
+              "name": "RedisBloom",
+              "args": "ERROR_RATE 0.00 INITIAL_SIZE 400",
+              "version": "1.0.0"
+            },
+            {
+              "name": "RedisTimeSeries",
+              "args": "RETENTION_POLICY 20",
+              "version": "1.0.0"
+            },
+            {
+              "name": "RediSearch",
+              "args": "",
+              "version": "1.0.0"
+            }
+          ],
+          "deferUpgrade": "NotDeferred",
+          "accessKeysAuthentication": "Enabled",
+          "redisVersion": "6.0"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/db1",
+        "name": "cache1/db1",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "properties": {
+          "provisioningState": "Creating",
+          "resourceState": "Creating",
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "EnterpriseCluster",
+          "evictionPolicy": "AllKeysLRU",
+          "persistence": {
+            "aofEnabled": true,
+            "aofFrequency": "1s"
+          },
+          "port": 10000,
+          "modules": [
+            {
+              "name": "RedisBloom",
+              "args": "ERROR_RATE 0.00 INITIAL_SIZE 400",
+              "version": "1.0.0"
+            },
+            {
+              "name": "RedisTimeSeries",
+              "args": "RETENTION_POLICY 20",
+              "version": "1.0.0"
+            },
+            {
+              "name": "RediSearch",
+              "args": "",
+              "version": "1.0.0"
+            }
+          ],
+          "accessKeysAuthentication": "Enabled"
+        }
+      }
+    }
+  }
+}

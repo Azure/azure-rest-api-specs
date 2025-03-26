@@ -1,0 +1,824 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this API specification will be used to return UE details for a packet core resource.",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/ues/{ueId}/extendedInformation/default": {
+      "get": {
+        "tags": [
+          "ExtendedUeInformation"
+        ],
+        "operationId": "ExtendedUeInformation_Get",
+        "description": "Gets extended information about the specified UE from the packet core.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "name": "ueId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "IMSI of a UE."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the complete information of a UE in a packet core.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedUeInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get UE Information 4G": {
+            "$ref": "./examples/ExtendedUeInfo4GGet.json"
+          },
+          "Get UE Information 5G": {
+            "$ref": "./examples/ExtendedUeInfo5GGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/ues": {
+      "get": {
+        "tags": [
+          "UeInformation_List"
+        ],
+        "operationId": "UeInformation_List",
+        "description": "List all UEs and their state in a packet core.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request Successful. This operation return list of UEs and their state in a packet core.",
+            "schema": {
+              "$ref": "#/definitions/UeInfoList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get UE Information": {
+            "$ref": "./examples/UeInfoList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UeInfoList": {
+      "description": "Response for packet core list UEs API call.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UeInfo"
+          },
+          "description": "A list of UEs in a packet core and their basic information."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "UeInfo": {
+      "description": "Basic UE Information.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeInfoPropertiesFormat",
+          "description": "Basic UE Information Properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "UeInfoPropertiesFormat": {
+      "description": "Basic UE Information Properties.",
+      "type": "object",
+      "properties": {
+        "ratType": {
+          "$ref": "#/definitions/RatType"
+        },
+        "ueState": {
+          "$ref": "#/definitions/UeState"
+        },
+        "ueIpAddresses": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/DnnIpPair"
+          }
+        },
+        "lastReadAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of last list UEs call to the packet core (UTC)."
+        }
+      },
+      "required": [
+        "ratType",
+        "ueState"
+      ]
+    },
+    "ExtendedUeInfo": {
+      "description": "Extended User Equipment (UE) information.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtendedUeInfoProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "ExtendedUeInfoProperties": {
+      "description": "Extended UE Information Properties.",
+      "type": "object",
+      "properties": {
+        "ratType": {
+          "$ref": "#/definitions/RatType"
+        },
+        "lastReadAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of last UE info read from the packet core (UTC)."
+        }
+      },
+      "required": [
+        "ratType"
+      ],
+      "discriminator": "ratType"
+    },
+    "UeInfo5G": {
+      "description": "UE Information for 5G.",
+      "type": "object",
+      "required": [
+        "info"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExtendedUeInfoProperties"
+        }
+      ],
+      "properties": {
+        "info": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeInfo5GProperties"
+        }
+      },
+      "x-ms-discriminator-value": "5G"
+    },
+    "UeInfo5GProperties": {
+      "description": "UE Information properties for 5G.",
+      "type": "object",
+      "required": [
+        "supi",
+        "fivegGuti"
+      ],
+      "properties": {
+        "supi": {
+          "$ref": "./ts29571.json#/definitions/Supi"
+        },
+        "pei": {
+          "$ref": "./ts29571.json#/definitions/Pei"
+        },
+        "fivegGuti": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Guti5G"
+        },
+        "connectionInfo": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeConnectionInfo5G"
+        },
+        "sessionInfo": {
+          "type": "array",
+          "maxItems": 15,
+          "items": {
+            "$ref": "#/definitions/UeSessionInfo5G"
+          }
+        }
+      }
+    },
+    "Guti5G": {
+      "description": "5G GUTI",
+      "type": "object",
+      "properties": {
+        "plmn": {
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/PlmnId"
+        },
+        "amfId": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmfId"
+        },
+        "fivegTmsi": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "5G Temporary Mobile Subscriber Identity"
+        }
+      },
+      "required": [
+        "plmn",
+        "amfId",
+        "fivegTmsi"
+      ]
+    },
+    "AmfId": {
+      "description": "AMF identifier",
+      "type": "object",
+      "properties": {
+        "regionId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 255,
+          "description": "AMF region identifier"
+        },
+        "setId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 1023,
+          "description": "AMF set identifier"
+        },
+        "pointer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 63,
+          "description": "AMF pointer"
+        }
+      },
+      "required": [
+        "regionId",
+        "setId",
+        "pointer"
+      ]
+    },
+    "UeConnectionInfo5G": {
+      "description": "UE Connection Info for 5G.",
+      "type": "object",
+      "required": [
+        "globalRanNodeId",
+        "amfUeNgapId",
+        "ranUeNgapId",
+        "ueState",
+        "rrcEstablishmentCause"
+      ],
+      "properties": {
+        "locationInfo": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeLocationInfo"
+        },
+        "globalRanNodeId": {
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/GlobalRanNodeId"
+        },
+        "perUeTnla": {
+          "type": "string",
+          "description": "Per-UE transport network layer association"
+        },
+        "amfUeNgapId": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "The AMF UE NGAP ID"
+        },
+        "ranUeNgapId": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "The RAN UE NGAP ID"
+        },
+        "lastVisitedTai": {
+          "type": "string",
+          "description": "Last Visited TAI"
+        },
+        "allowedNssai": {
+          "type": "array",
+          "description": "Allowed Network Slice Selection Assistance Information",
+          "maxItems": 8,
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "./ts29571.json#/definitions/Snssai"
+          }
+        },
+        "ueState": {
+          "$ref": "#/definitions/UeState"
+        },
+        "rrcEstablishmentCause": {
+          "$ref": "#/definitions/RrcEstablishmentCause"
+        },
+        "ueUsageSetting": {
+          "$ref": "#/definitions/UeUsageSetting"
+        },
+        "lastActivityTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of last activity of UE (UTC)."
+        }
+      }
+    },
+    "UeSessionInfo5G": {
+      "description": "UE Session Info for 5G.",
+      "type": "object",
+      "required": [
+        "pduSessionId",
+        "dnn",
+        "snssai",
+        "ueIpAddress",
+        "pdnType",
+        "qosFlow",
+        "ambr"
+      ],
+      "properties": {
+        "pduSessionId": {
+          "$ref": "./ts29571.json#/definitions/PduSessionId"
+        },
+        "dnn": {
+          "$ref": "./ts29571.json#/definitions/Dnn"
+        },
+        "snssai": {
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/Snssai"
+        },
+        "ueIpAddress": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeIpAddress"
+        },
+        "pdnType": {
+          "$ref": "#/definitions/PdnType"
+        },
+        "ambr": {
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/Ambr"
+        },
+        "qosFlow": {
+          "type": "array",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/UeQOSFlow"
+          }
+        }
+      }
+    },
+    "UeInfo4G": {
+      "description": "UE Information for 4G.",
+      "type": "object",
+      "required": [
+        "info"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExtendedUeInfoProperties"
+        }
+      ],
+      "properties": {
+        "info": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeInfo4GProperties"
+        }
+      },
+      "x-ms-discriminator-value": "4G"
+    },
+    "UeInfo4GProperties": {
+      "description": "UE Information properties for 4G.",
+      "type": "object",
+      "required": [
+        "imsi",
+        "guti"
+      ],
+      "properties": {
+        "imsi": {
+          "type": "string",
+          "pattern": "^[0-9]{5,15}$",
+          "description": "International mobile subscriber identifier"
+        },
+        "imei": {
+          "type": "string",
+          "pattern": "^[0-9]{15}$",
+          "description": "International mobile equipment identity"
+        },
+        "imeisv": {
+          "type": "string",
+          "pattern": "^[0-9]{16}$",
+          "description": "International mobile equipment identity – software version"
+        },
+        "guti": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Guti4G"
+        },
+        "connectionInfo": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeConnectionInfo4G"
+        },
+        "sessionInfo": {
+          "type": "array",
+          "maxItems": 11,
+          "items": {
+            "$ref": "#/definitions/UeSessionInfo4G"
+          }
+        }
+      }
+    },
+    "Guti4G": {
+      "description": "Globally Unique Temporary Identifier (4G)",
+      "type": "object",
+      "properties": {
+        "plmn": {
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/PlmnId"
+        },
+        "mmeId": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MmeId"
+        },
+        "mTmsi": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "MME Temporary Mobile Subscriber Identity"
+        }
+      },
+      "required": [
+        "plmn",
+        "mmeId",
+        "mTmsi"
+      ]
+    },
+    "MmeId": {
+      "description": "MME identifier",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "MME group identifier"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 255,
+          "description": "MME code"
+        }
+      },
+      "required": [
+        "groupId",
+        "code"
+      ]
+    },
+    "UeConnectionInfo4G": {
+      "description": "UE Connection Info for 4G",
+      "type": "object",
+      "required": [
+        "globalRanNodeId",
+        "mmeS1apId",
+        "enbS1apId",
+        "ueState",
+        "rrcEstablishmentCause"
+      ],
+      "properties": {
+        "locationInfo": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeLocationInfo"
+        },
+        "globalRanNodeId": {
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/GlobalRanNodeId"
+        },
+        "perUeTnla": {
+          "type": "string",
+          "description": "Per-UE transport network layer association"
+        },
+        "mmeS1apId": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "MME S1AP identifier"
+        },
+        "enbS1apId": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16777215,
+          "description": "eNodeB S1AP identifier"
+        },
+        "lastVisitedTai": {
+          "type": "string",
+          "description": "Last Visited TAI"
+        },
+        "ueState": {
+          "$ref": "#/definitions/UeState"
+        },
+        "rrcEstablishmentCause": {
+          "$ref": "#/definitions/RrcEstablishmentCause"
+        },
+        "ueUsageSetting": {
+          "$ref": "#/definitions/UeUsageSetting"
+        },
+        "lastActivityTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of last activity of UE (UTC)."
+        }
+      }
+    },
+    "UeSessionInfo4G": {
+      "description": "UE Session Info for 4G",
+      "type": "object",
+      "required": [
+        "ebi",
+        "apn",
+        "ueIpAddress",
+        "pdnType"
+      ],
+      "properties": {
+        "ebi": {
+          "type": "integer",
+          "maximum": 15,
+          "minimum": 5,
+          "description": "EPS bearer identifier"
+        },
+        "apn": {
+          "type": "string",
+          "description": "Access point name"
+        },
+        "ueIpAddress": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeIpAddress"
+        },
+        "pdnType": {
+          "$ref": "#/definitions/PdnType"
+        }
+      }
+    },
+    "UeLocationInfo": {
+      "description": "UE Location Info properties",
+      "type": "object",
+      "properties": {
+        "locationType": {
+          "type": "string",
+          "description": "Location Type"
+        },
+        "tac": {
+          "description": "Type Allocation Code of UE",
+          "$ref": "./ts29571.json#/definitions/Tac"
+        },
+        "plmn": {
+          "x-ms-client-flatten": true,
+          "description": "PLMN Identifier",
+          "$ref": "./ts29571.json#/definitions/PlmnId"
+        }
+      },
+      "required": [
+        "locationType",
+        "tac",
+        "plmn"
+      ]
+    },
+    "RrcEstablishmentCause": {
+      "description": "Radio connection establishment cause",
+      "type": "string",
+      "enum": [
+        "Emergency",
+        "MobileOriginatedSignaling",
+        "MobileTerminatedSignaling",
+        "MobileOriginatedData",
+        "MobileTerminatedData",
+        "SMS"
+      ],
+      "x-ms-enum": {
+        "name": "RrcEstablishmentCause",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Emergency"
+          },
+          {
+            "value": "MobileOriginatedSignaling"
+          },
+          {
+            "value": "MobileTerminatedSignaling"
+          },
+          {
+            "value": "MobileOriginatedData"
+          },
+          {
+            "value": "MobileTerminatedData"
+          },
+          {
+            "value": "SMS"
+          }
+        ]
+      }
+    },
+    "UeUsageSetting": {
+      "description": "The UE's usage setting",
+      "type": "string",
+      "enum": [
+        "VoiceCentric",
+        "DataCentric"
+      ],
+      "x-ms-enum": {
+        "name": "UeUsageSetting",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "VoiceCentric"
+          },
+          {
+            "value": "DataCentric"
+          }
+        ]
+      }
+    },
+    "UeQOSFlow": {
+      "type": "object",
+      "description": "QoS Flow",
+      "required": [
+        "qfi",
+        "fiveqi"
+      ],
+      "properties": {
+        "qfi": {
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/Qfi"
+        },
+        "fiveqi": {
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/5Qi"
+        },
+        "mbr": {
+          "description": "Maximum Bit Rate",
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/Ambr"
+        },
+        "gbr": {
+          "description": "Guaranteed Bit Rate",
+          "x-ms-client-flatten": true,
+          "$ref": "./ts29571.json#/definitions/Ambr"
+        }
+      }
+    },
+    "RatType": {
+      "description": "RAT Type",
+      "type": "string",
+      "enum": [
+        "4G",
+        "5G"
+      ],
+      "x-ms-enum": {
+        "name": "RatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "4G"
+          },
+          {
+            "value": "5G"
+          }
+        ]
+      }
+    },
+    "UeState": {
+      "description": "State of the UE.",
+      "type": "string",
+      "enum": [
+        "Connected",
+        "Idle",
+        "Detached",
+        "Deregistered",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "UeState",
+        "modelAsString": true
+      }
+    },
+    "PdnType": {
+      "description": "Packet Data Network Type",
+      "type": "string",
+      "enum": [
+        "IPV4"
+      ],
+      "x-ms-enum": {
+        "name": "PdnType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "IPV4"
+          }
+        ]
+      }
+    },
+    "UeIpAddress": {
+      "description": "UE IP address",
+      "type": "object",
+      "properties": {
+        "ipV4Addr": {
+          "$ref": "./ts29571.json#/definitions/Ipv4Addr"
+        }
+      }
+    },
+    "DnnIpPair": {
+      "description": "DNN and UE IP address",
+      "type": "object",
+      "properties": {
+        "dnn": {
+          "$ref": "./ts29571.json#/definitions/Dnn"
+        },
+        "ueIpAddress": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UeIpAddress"
+        }
+      }
+    }
+  }
+}

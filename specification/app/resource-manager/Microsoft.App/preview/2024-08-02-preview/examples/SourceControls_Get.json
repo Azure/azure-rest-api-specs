@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744",
+    "resourceGroupName": "workerapps-rg-xj",
+    "containerAppName": "testcanadacentral",
+    "sourceControlName": "current",
+    "api-version": "2024-08-02-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/testcanadacentral/sourcecontrols/current",
+        "name": "current",
+        "type": "Microsoft.App/containerapps/sourcecontrols",
+        "properties": {
+          "repoUrl": "https://github.com/xwang971/ghatest",
+          "branch": "master",
+          "githubActionConfiguration": {
+            "registryInfo": {
+              "registryUrl": "xwang971reg.azurecr.io",
+              "registryUserName": "xwang971reg"
+            },
+            "contextPath": "./",
+            "dockerfilePath": "./Dockerfile",
+            "image": "image/tag",
+            "buildEnvironmentVariables": [
+              {
+                "name": "foo1",
+                "value": "bar1"
+              },
+              {
+                "name": "foo2",
+                "value": "bar2"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

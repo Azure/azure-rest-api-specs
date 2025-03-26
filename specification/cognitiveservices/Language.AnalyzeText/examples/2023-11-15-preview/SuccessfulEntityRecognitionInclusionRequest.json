@@ -1,0 +1,133 @@
+{
+  "operationId": "AnalyzeText",
+  "title": "SuccessfulEntityRecognitionInclusionRequest",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-11-15-preview",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "EntityRecognition",
+      "parameters": {
+        "modelVersion": "latest",
+        "inclusionList": [
+          "Location"
+        ]
+      },
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "2",
+            "language": "en",
+            "text": "When I was 5 years old I had $90.00 dollars to my name."
+          },
+          {
+            "id": "3",
+            "language": "en",
+            "text": "When we flew from LAX it seemed like we were moving at 10 meters per second. I was lucky to see Amsterdam, Effile Tower, and the Nile."
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "EntityRecognitionResults",
+        "results": {
+          "documents": [
+            {
+              "entities": [],
+              "id": "2",
+              "warnings": []
+            },
+            {
+              "entities": [
+                {
+                  "text": "LAX",
+                  "category": "Location",
+                  "type": "Structural",
+                  "offset": 18,
+                  "length": 3,
+                  "confidenceScore": 0.72,
+                  "tags": [
+                    {
+                      "name": "Location",
+                      "confidenceScore": 0.9
+                    },
+                    {
+                      "name": "Structural",
+                      "confidenceScore": 0.72
+                    }
+                  ]
+                },
+                {
+                  "text": "Amsterdam",
+                  "category": "Location",
+                  "type": "City",
+                  "offset": 96,
+                  "length": 9,
+                  "confidenceScore": 0.8,
+                  "tags": [
+                    {
+                      "name": "Location",
+                      "confidenceScore": 0.84
+                    },
+                    {
+                      "name": "GPE",
+                      "confidenceScore": 0.84
+                    },
+                    {
+                      "name": "City",
+                      "confidenceScore": 0.8
+                    }
+                  ]
+                },
+                {
+                  "text": "Eiffel Tower",
+                  "category": "Location",
+                  "type": "Structural",
+                  "offset": 107,
+                  "length": 12,
+                  "confidenceScore": 0.9,
+                  "tags": [
+                    {
+                      "name": "Location",
+                      "confidenceScore": 0.9
+                    },
+                    {
+                      "name": "Structural",
+                      "confidenceScore": 0.9
+                    }
+                  ]
+                },
+                {
+                  "text": "Nile",
+                  "category": "Location",
+                  "type": "Geological",
+                  "offset": 129,
+                  "length": 4,
+                  "confidenceScore": 0.63,
+                  "tags": [
+                    {
+                      "name": "Location",
+                      "confidenceScore": 0.9
+                    },
+                    {
+                      "name": "Geological",
+                      "confidenceScore": 0.63
+                    }
+                  ]
+                }
+              ],
+              "id": "3",
+              "warnings": []
+            }
+          ],
+          "errors": [],
+          "modelVersion": "2021-06-01"
+        }
+      }
+    }
+  }
+}

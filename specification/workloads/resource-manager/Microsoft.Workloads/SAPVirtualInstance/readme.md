@@ -27,20 +27,38 @@ These are the global settings for the workloads.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10
+tag: package-2024-09
+```
+
+
+### Tag: package-2024-09
+
+These settings apply only when `--tag=package-2024-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-09'
+input-file:
+  - stable/2024-09-01/SAPVirtualInstance.json
+
+suppressions:
+  - code: BodyTopLevelProperties
+    from: SAPVirtualInstance.json
+    reason: This is an incorrect failure due to a bug in the tool
+  - code: AvoidAnonymousTypes
+    from: SAPVirtualInstance.json
+    where: $.definitions.SAPVirtualInstanceIdentity.properties.userAssignedIdentities.additionalProperties
+    reason: This is an incorrect failure due to a bug in the tool(https://github.com/Azure/typespec-azure/issues/1163)
 ```
 
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - preview/2023-10-01-preview/SAPVirtualInstance.json
   - ../common-types/v1/commonTypes.json
   - ../operations/preview/2023-10-01-preview/operations.json
 ```
-
 ---
 
 # Code Generation
@@ -57,7 +75,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
 ```

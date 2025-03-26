@@ -1,34 +1,36 @@
 {
   "operationId": "GroupQuotaLimits_Get",
   "parameters": {
-    "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
-    "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
+    "resourceProviderName": "Microsoft.Compute",
     "resourceName": "cores",
-    "api-version": "2023-06-01-preview"
+    "api-version": "2023-06-01-preview",
+    "$filter": "location eq westus"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Compute/locations/westus/providers/Microsoft.Quota/groupQuotas/groupquota1/groupQuotaLimits/cores",
-        "type": "Microsoft.Quota/groupQuotaLimits",
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/providers/Microsoft.Compute/locations/westus/groupQuotaLimits/cores",
+        "type": "Microsoft.Quota/groupQuotas/groupQuotaLimits",
         "name": "cores",
         "properties": {
           "limit": 100,
-          "comment": "Contoso requires more quota.",
+          "region": "westus",
           "name": {
             "value": "cores",
-            "localizedValue": "Total Regional vCPUs"
+            "localizedValue": "Total vCPUs Regional Cores"
           },
-          "unit": "vCPUs",
+          "unit": "count",
           "availableLimit": 80,
-          "assignedToSubscriptions": [
-            {
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "quotaAllocated": 20
-            }
-          ],
-          "provisioningState": "Accepted"
+          "allocatedToSubscriptions": {
+            "value": [
+              {
+                "subscriptionId": "00000000-0000-0000-0000-000000000000",
+                "quotaAllocated": 20
+              }
+            ]
+          }
         }
       }
     }

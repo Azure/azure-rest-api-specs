@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./base.tsp";
@@ -32,7 +31,7 @@ model MqResource is TrackedResource<MqProperties> {
 
 @doc("MQ Resource properties")
 model MqProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

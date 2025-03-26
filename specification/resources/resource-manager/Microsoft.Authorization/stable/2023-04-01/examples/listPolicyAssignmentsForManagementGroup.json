@@ -2,7 +2,8 @@
   "parameters": {
     "managementGroupId": "TestManagementGroup",
     "api-version": "2023-04-01",
-    "$filter": "atScope()"
+    "$filter": "atScope()",
+    "$expand": "LatestDefinitionVersion, EffectiveDefinitionVersion"
   },
   "responses": {
     "200": {
@@ -26,6 +27,9 @@
                 "category": "Cost Management"
               },
               "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/TestManagementGroup/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+              "definitionVersion": "1.*.*",
+              "latestDefinitionVersion": "1.0.0",
+              "effectiveDefinitionVersion": "1.0.0",
               "parameters": {
                 "allowedSkus": {
                   "value": "Standard_A1"
@@ -43,6 +47,9 @@
               "displayName": "Enforces a tag key and value",
               "description": "Ensure a given tag key and value are present on all resources",
               "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/TestManagementGroup/providers/Microsoft.Authorization/policyDefinitions/TagKeyValue",
+              "definitionVersion": "1.*.*",
+              "latestDefinitionVersion": "1.0.0",
+              "effectiveDefinitionVersion": "1.0.0",
               "scope": "/providers/Microsoft.Management/managementGroups/TestManagementGroup",
               "notScopes": []
             }

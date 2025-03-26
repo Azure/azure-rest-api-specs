@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-07-01-preview",
+    "x-ms-client-request-id": "1377af77-47e8-4fb3-8e84-5a848305daea",
+    "operation-id": "8540c0de-899f-5cce-acb5-3ec493af3800",
+    "authorization": "HMAC-SHA256 SignedHeaders=x-ms-date;host;x-ms-content-sha256&Signature=aaaa",
+    "emailMessage": {
+      "headers": {
+        "ClientCorrelationId": "123",
+        "ClientCustomHeaderName": "ClientCustomHeaderValue"
+      },
+      "senderAddress": "abc@domain.com",
+      "content": {
+        "subject": "An exciting offer especially for you!",
+        "plainText": "This exciting offer was created especially for you, our most loyal customer.",
+        "html": "<html><head><title>Exciting offer!</title></head><body><img src=\"cid:my-inline-image\" alt=\"Company Logo\"/><h1>This exciting offer was created especially for you, our most loyal customer.</h1></body></html>"
+      },
+      "recipients": {
+        "to": [
+          {
+            "address": "john.doe@domain.com",
+            "displayName": "John Doe"
+          },
+          {
+            "address": "jane.doe@domain2.com",
+            "displayName": "Jane Doe"
+          }
+        ],
+        "cc": [
+          {
+            "address": "wendy@someotherdomain.com",
+            "displayName": "Wendy"
+          },
+          {
+            "address": "jimmy@anotherdomain.com",
+            "displayName": "Jimmy Johns"
+          }
+        ],
+        "bcc": [
+          {
+            "address": "bob@anotherdomain.com",
+            "displayName": "Bob"
+          },
+          {
+            "address": "mail@yetanotherdomain.com",
+            "displayName": "Another DisplayName"
+          }
+        ]
+      },
+      "attachments": [
+        {
+          "name": "MyAttachment.pdf",
+          "contentType": "application/pdf",
+          "contentInBase64": "TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQ="
+        },
+        {
+          "name": "MyAttachment2.docx",
+          "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "contentInBase64": "TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQ="
+        },
+        {
+          "name": "MyInlineImage.jpg",
+          "contentType": "image/jpeg",
+          "contentInBase64": "TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQ=",
+          "contentId": "my-inline-image"
+        }
+      ],
+      "replyTo": [
+        {
+          "address": "contoso-support@contoso.com",
+          "displayName": "Contoso Support"
+        }
+      ],
+      "userEngagementTrackingDisabled": true
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://contoso.westus.communications.azure.com//emails/operations/8540c0de-899f-5cce-acb5-3ec493af3800?api-version=2023-03-31",
+        "retry-after": "20"
+      },
+      "body": {
+        "id": "8540c0de-899f-5cce-acb5-3ec493af3800",
+        "status": "Running"
+      }
+    }
+  }
+}

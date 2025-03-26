@@ -9,4 +9,10 @@ typescript:
   package-name: "@azure/arm-containerservice"
   output-folder: "$(typescript-sdks-folder)/sdk/containerservice/arm-containerservice"
   generate-metadata: true
+
+directive:
+  - from: managedClusters.json
+    where: $.definitions.MachineIpAddress
+    transform: >
+      $.properties.family["x-ms-enum"].name = "IpFamily"
 ```

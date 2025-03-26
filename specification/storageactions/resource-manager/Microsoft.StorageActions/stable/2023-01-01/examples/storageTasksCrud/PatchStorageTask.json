@@ -6,6 +6,12 @@
     "api-version": "2023-01-01",
     "monitor": "true",
     "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myUserAssignedIdentity": {}
+        }
+      },
       "properties": {
         "enabled": true,
         "description": "My Storage task",
@@ -46,6 +52,15 @@
         "name": "mytask1",
         "type": "Microsoft.StorageActions/storageTasks",
         "location": "westus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myUserAssignedIdentity": {
+              "principalId": "aaaaaaaa-0000-0000-0000-000000000000",
+              "clientId": "bbbbbbbb-0000-0000-0000-000000000000"
+            }
+          }
+        },
         "properties": {
           "enabled": true,
           "description": "Storage task",

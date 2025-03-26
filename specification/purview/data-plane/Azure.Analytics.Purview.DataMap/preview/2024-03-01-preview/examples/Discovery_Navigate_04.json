@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "NavigationRequest": {
+      "navigationMode": "assetType",
+      "itemPath": {
+        "path": "/azure_sql_server/testsqlserver01/databases",
+        "extendedProperties": {
+          "resourceGroup": "test-rg",
+          "serverEndpoint": "testsqlserver01.database.windows.net",
+          "subscriptionId": "12345678-1234-5678-1234-86b7251e0353"
+        }
+      },
+      "properties": {}
+    },
+    "api-version": "2024-03-01-preview",
+    "maxpagesize": 100,
+    "continuationToken": "<token>"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "items": [
+          {
+            "name": "exampleDatabase01",
+            "type": "azure_sql_db",
+            "isLeafNode": false,
+            "isEntity": true,
+            "itemPath": {
+              "path": "exampleDatabase01",
+              "extendedProperties": {
+                "resourceGroup": "test-rg",
+                "serverEndpoint": "testsqlserver01.database.windows.net",
+                "subscriptionId": "12345678-1234-5678-1234-86b7251e0353"
+              }
+            },
+            "properties": {
+              "resourceId": "/subscriptions/12345678-1234-5678-1234-86b7251e0353/resourceGroups/test-rg/providers/Microsoft.Sql/servers/testsqlserver01/databases/exampleDatabase01"
+            }
+          },
+          {
+            "name": "exampleDatabase02",
+            "type": "azure_sql_db",
+            "isLeafNode": false,
+            "isEntity": true,
+            "itemPath": {
+              "path": "exampleDatabase02",
+              "extendedProperties": {
+                "resourceGroup": "test-rg",
+                "serverEndpoint": "testsqlserver01.database.windows.net",
+                "subscriptionId": "12345678-1234-5678-1234-86b7251e0353"
+              }
+            },
+            "properties": {
+              "resourceId": "/subscriptions/12345678-1234-5678-1234-86b7251e0353/resourceGroups/test-rg/providers/Microsoft.Sql/servers/testsqlserver01/databases/exampleDatabase02"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

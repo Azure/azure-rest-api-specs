@@ -21,10 +21,10 @@ azure-arm: true
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag  package-2023-02-01
-  - tag: package-2021-03-15-preview
-  - tag: package-2021-03-15
+  - tag: package-2023-02-01
   - tag: package-2023-06-01-preview
+  - tag: package-2024-10-15-preview
+  - tag: package-2025-03-15-preview
 ```
 
 ### Tag: package-2023-02-01 and go
@@ -36,16 +36,6 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2023-02-01/$(namespace)
 ```
 
-### Tag: package-2021-03-15-preview and go
-
-These settings apply only when `--tag=package-2021-03-15-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2021-03-15-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-03-15-preview/$(namespace)
-```
-
-
 ### Tag: package-2023-06-01-preview and go
 
 These settings apply only when `--tag=package-2023-06-01-preview --go` is specified on the command line.
@@ -53,4 +43,31 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='package-2023-06-01-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2023-06-01-preview/$(namespace)
+```
+
+### Tag: package-2024-10-15-preview and go
+
+These settings apply only when `--tag=package-2024-10-15-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2024-10-15-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2024-10-15-preview/$(namespace)
+```
+
+### Tag: package-2025-03-15-preview and go
+
+These settings apply only when `--tag=package-2025-03-15-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2025-03-15-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2025-03-15-preview/$(namespace)
+```
+
+### Tag: package-2021-03-15-preview and go
+
+These settings apply only when `--tag=package-2021-03-15-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag)=='package-2021-03-15-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2021-03-15-preview/$(namespace)
 ```

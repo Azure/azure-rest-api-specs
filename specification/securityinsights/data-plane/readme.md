@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for SecurityInsights.
+This is the AutoRest configuration file for SecurityInsights Data Plane API.
 
 ---
 
@@ -27,6 +27,14 @@ These settings apply only when `--tag=package-2022-12` is specified on the comma
 ```yaml $(tag) == 'package-2022-12'
 input-file:
   - Microsoft.SecurityInsights/preview/2022-12-01-preview/ThreatIntelligence.json
+```
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.SecurityInsights/preview/2024-02-01-preview/ThreatIntelligence.json
 ```
 
 ### Supressions

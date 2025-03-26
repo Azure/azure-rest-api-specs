@@ -1,0 +1,324 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs to manage Azure API Management gateway config connections deployments.",
+    "version": "2024-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateways/{gatewayName}/configConnections": {
+      "get": {
+        "tags": [
+          "ApiGatewayConfigConnection"
+        ],
+        "operationId": "ApiGatewayConfigConnection_ListByGateway",
+        "description": "List all API Management gateway config connections within a gateway.",
+        "x-ms-examples": {
+          "ApiManagementListGatewayConfigConnection": {
+            "$ref": "./examples/ApiManagementListGatewayConfigConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The API Management gateway config connection list.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayConfigConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/gateways/{gatewayName}/configConnections/{configConnectionName}": {
+      "get": {
+        "tags": [
+          "ApiGatewayConfigConnection"
+        ],
+        "operationId": "ApiGatewayConfigConnection_Get",
+        "description": "Gets an API Management gateway config connection resource description.",
+        "x-ms-examples": {
+          "ApiManagementGetGatewayConfigConnection": {
+            "$ref": "./examples/ApiManagementGetGatewayConfigConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ConfigConnectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the API Management gateway config connection resource.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayConfigConnectionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApiGatewayConfigConnection"
+        ],
+        "operationId": "ApiGatewayConfigConnection_CreateOrUpdate",
+        "description": "Creates or updates an API Management gateway config connection. This is long running operation and could take several minutes to complete.",
+        "x-ms-examples": {
+          "ApiManagementCreateGatewayConfigConnection": {
+            "$ref": "./examples/ApiManagementCreateGatewayConfigConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ConfigConnectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayConfigConnectionResource"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate API Management gateway config connection operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The gateway config connection was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayConfigConnectionResource"
+            }
+          },
+          "201": {
+            "description": "The gateway config connection was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementGatewayConfigConnectionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApiGatewayConfigConnection"
+        ],
+        "operationId": "ApiGatewayConfigConnection_Delete",
+        "description": "Deletes an existing API Management gateway config connection.",
+        "x-ms-examples": {
+          "ApiManagementGatewayDeleteGateway": {
+            "$ref": "./examples/ApiManagementDeleteGatewayConfigConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ConfigConnectionNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The gateway config connection delete request was accepted.",
+            "headers": {
+              "location": {
+                "description": "Location header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The gateway config connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "GatewayConfigConnectionBaseProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The current provisioning state of the API Management gateway config connection "
+        },
+        "sourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service/workspaces"
+              }
+            ]
+          },
+          "description": "The link to the API Management service workspace."
+        },
+        "defaultHostname": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The default hostname of the data-plane gateway."
+        },
+        "hostnames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The hostnames of the data-plane gateway to which requests can be sent."
+        }
+      }
+    },
+    "ApiManagementGatewayConfigConnectionResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayConfigConnectionBaseProperties",
+          "description": "Properties of the API Management gateway config connection."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "A single API Management gateway resource in List or Get response."
+    },
+    "ApiManagementGatewayConfigConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiManagementGatewayConfigConnectionResource"
+          },
+          "description": "Result of the List API Management gateway config connection operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of API Management services."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The response of the List API Management gateway operation."
+    }
+  },
+  "parameters": {}
+}

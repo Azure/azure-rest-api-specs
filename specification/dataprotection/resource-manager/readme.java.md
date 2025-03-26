@@ -10,8 +10,56 @@ namespace: com.microsoft.azure.management.dataprotection
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-dataprotection
+directive:
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}"].put.parameters
+    transform: >
+      $.splice(5, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}"].patch.parameters
+    transform: >
+      $.splice(5, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}"].put.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}"].delete.parameters
+    transform: >
+      $.splice(5, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/restore"].post.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/stopProtection"].post.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/suspendBackups"].post.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header
+  - from: dataprotection.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}/unlockDelete"].post.parameters
+    transform: >
+      $.splice(6, 1);
+      return $;
+    reason: hide x-ms-authorization-auxiliary header  
 ```
-
 
 ### Java multi-api
 
@@ -26,6 +74,20 @@ batch:
   - tag: package-2022-03
   - tag: package-2023-01
   - tag: package-2023-05
+  - tag: package-2025-01
+```
+
+### Tag: package-2025-01 and java
+
+These settings apply only when `--tag=package-2025-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2025-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.dataprotection.v2025_01_01
+  output-folder: $(azure-libraries-for-java-folder)/dataprotection/resource-manager/v2025_01_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2023-05 and java

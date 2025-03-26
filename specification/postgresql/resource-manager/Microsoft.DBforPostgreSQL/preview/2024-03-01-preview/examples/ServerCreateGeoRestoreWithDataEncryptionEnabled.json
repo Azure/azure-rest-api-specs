@@ -1,0 +1,179 @@
+{
+  "parameters": {
+    "serverName": "pgtestsvc5geo",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-03-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "eastus",
+      "identity": {
+        "userAssignedIdentities": {
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {},
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity": {}
+        },
+        "type": "UserAssigned"
+      },
+      "properties": {
+        "createMode": "GeoRestore",
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/sourcepgservername",
+        "pointInTimeUTC": "2021-06-27T00:04:59.4078005+00:00",
+        "dataEncryption": {
+          "type": "AzureKeyVault",
+          "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+          "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/66f57315bab34b0189daa113fbc78787",
+          "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "identity": {
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {
+              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
+              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            },
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity": {
+              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
+              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            }
+          },
+          "type": "UserAssigned"
+        },
+        "properties": {
+          "fullyQualifiedDomainName": "pgtestsvc5geo.postgres.database.azure.com",
+          "version": "12",
+          "minorVersion": "6",
+          "administratorLogin": "cloudsa",
+          "state": "Ready",
+          "availabilityZone": "2",
+          "storage": {
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled",
+            "tier": "P20",
+            "iops": 2300
+          },
+          "dataEncryption": {
+            "type": "AzureKeyVault",
+            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+            "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/66f57315bab34b0189daa113fbc78787",
+            "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity",
+            "primaryEncryptionKeyStatus": "Valid",
+            "geoBackupEncryptionKeyStatus": "Valid"
+          },
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Enabled",
+            "earliestRestoreDate": "2021-05-27T00:28:17.7279547+00:00"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          }
+        },
+        "location": "eastus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc5geo",
+        "name": "pgtestsvc5geo",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "identity": {
+          "userAssignedIdentities": {
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {
+              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
+              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            },
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity": {
+              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
+              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            }
+          },
+          "type": "UserAssigned"
+        },
+        "properties": {
+          "fullyQualifiedDomainName": "pgtestsvc5geo.postgres.database.azure.com",
+          "version": "12",
+          "minorVersion": "6",
+          "administratorLogin": "cloudsa",
+          "state": "Ready",
+          "availabilityZone": "2",
+          "storage": {
+            "storageSizeGB": 512,
+            "autoGrow": "Disabled",
+            "tier": "P20",
+            "iops": 2300
+          },
+          "dataEncryption": {
+            "type": "AzureKeyVault",
+            "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+            "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/66f57315bab34b0189daa113fbc78787",
+            "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity",
+            "primaryEncryptionKeyStatus": "Valid",
+            "geoBackupEncryptionKeyStatus": "Valid"
+          },
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "backup": {
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Enabled",
+            "earliestRestoreDate": "2021-05-27T00:28:17.7279547+00:00"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          }
+        },
+        "location": "eastus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc5geo",
+        "name": "pgtestsvc5geo",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}

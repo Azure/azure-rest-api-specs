@@ -1,0 +1,38 @@
+parameters:
+  - name: SpecRepoCommit
+    type: string
+    default: '$(Build.SourceBranch)'
+  - name: SdkRepoCommit
+    type: string
+    default: 'main'
+  - name: ConfigType
+    type: string
+    values:
+      - 'TypeSpec'
+      - 'OpenAPI'
+    default: 'TypeSpec'
+    displayName: 'API specification type'
+  - name: ConfigPath
+    type: string
+    default: 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'
+    displayName: 'Path to API specification file (TypeSpec/OpenAPI)'
+  - name: SkipPullRequestCreation
+    type: boolean
+    default: false
+    
+trigger: none
+pr:
+  branches:
+    include:
+      - user/spec-gen-pipeline-testing
+
+extends:
+  template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
+  parameters:
+    SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
+    SdkRepoUrl: $(SdkRepoUrl)
+    SpecRepoCommit: ${{ parameters.SpecRepoCommit }}
+    SdkRepoCommit: ${{ parameters.SdkRepoCommit }}
+    ConfigType: ${{ parameters.ConfigType }}
+    ConfigPath: ${{ parameters.ConfigPath }}
+    SkipPullRequestCreation: ${{ parameters.SkipPullRequestCreation }}

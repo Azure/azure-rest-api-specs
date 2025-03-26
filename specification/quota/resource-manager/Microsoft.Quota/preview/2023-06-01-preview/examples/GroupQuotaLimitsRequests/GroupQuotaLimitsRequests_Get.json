@@ -1,21 +1,33 @@
 {
-  "operationId": "GroupQuotaLimitsRequests_List",
+  "operationId": "GroupQuotaLimitsRequests_Get",
   "parameters": {
-    "mgId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
-    "resourceProviderScope": "providers/Microsoft.Compute/locations/westus",
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
     "groupQuotaName": "groupquota1",
-    "requestId": "someId",
+    "requestId": "requestId",
     "api-version": "2023-06-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "requestedResource": {
-          "resourceName": "cores",
-          "limits": 110,
-          "unit": "vCPUs"
-        },
-        "status": "Accepted"
+        "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimitsRequests/requestId",
+        "type": "Microsoft.Quota/groupQuotas/groupQuotaLimitsRequests",
+        "name": "requestId",
+        "properties": {
+          "requestedResource": {
+            "properties": {
+              "limit": 100,
+              "name": {
+                "value": "standardddv4family",
+                "localizedValue": "standard DDv4 Family vCPUs"
+              },
+              "region": "westus",
+              "comments": ""
+            }
+          },
+          "requestSubmitTime": "2024-03-20T05:29:34.144Z",
+          "provisioningState": "Failed",
+          "faultCode": "ResourceNotAvailableForOffer"
+        }
       }
     }
   }

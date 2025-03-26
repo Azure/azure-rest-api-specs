@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "subscriptionId": "YourSubscriptionId",
+    "location": "westus",
+    "api-version": "2024-02-01-preview",
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "351"
+    ],
+    "validateAddress": {
+      "validationType": "ValidateAddress",
+      "shippingAddress": {
+        "streetAddress1": "XXXX XXXX",
+        "streetAddress2": "XXXX XXXX",
+        "city": "XXXX XXXX",
+        "stateOrProvince": "XX",
+        "country": "XX",
+        "postalCode": "00000",
+        "companyName": "XXXX XXXX",
+        "addressType": "Commercial"
+      },
+      "deviceType": "DataBox"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "validationStatus": "Valid",
+          "alternateAddresses": [
+            {
+              "streetAddress1": "XXXX XXXX",
+              "streetAddress2": "XXXX XXXX",
+              "streetAddress3": "",
+              "city": "XXXX XXXX",
+              "stateOrProvince": "XX",
+              "country": "XX",
+              "postalCode": "00000",
+              "addressType": "None"
+            }
+          ],
+          "validationType": "ValidateAddress"
+        }
+      }
+    }
+  }
+}

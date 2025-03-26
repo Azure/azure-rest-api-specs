@@ -1,0 +1,181 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-10",
+    "title": "IoT Firmware Defense",
+    "description": "Firmware & IoT Security REST API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTFirmwareDefense/workspaces/{workspaceName}/firmwares/{firmwareId}/cryptoKeys": {
+      "get": {
+        "tags": [
+          "CryptoKeys"
+        ],
+        "operationId": "CryptoKeys_ListByFirmware",
+        "description": "Lists cryptographic key analysis results found in a firmware.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/FirmwareIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CryptoKeyListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CryptoKeys_ListByFirmware_MaximumSet_Gen": {
+            "$ref": "./examples/CryptoKeys_ListByFirmware_MaximumSet_Gen.json"
+          },
+          "CryptoKeys_ListByFirmware_MinimumSet_Gen": {
+            "$ref": "./examples/CryptoKeys_ListByFirmware_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CryptoKey": {
+      "type": "object",
+      "properties": {
+        "cryptoKeyId": {
+          "description": "ID for the key result.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "keyType": {
+          "description": "Type of the key (public or private).",
+          "type": "string",
+          "x-nullable": true
+        },
+        "keySize": {
+          "description": "Size of the key in bits.",
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "keyAlgorithm": {
+          "description": "Key algorithm name.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "usage": {
+          "description": "Functions the key can fulfill.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "filePaths": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of files where this key was found.",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "pairedKey": {
+          "description": "A matching paired key or certificate.",
+          "$ref": "./common.json#/definitions/PairedKey",
+          "x-nullable": true
+        },
+        "isShortKeySize": {
+          "description": "Indicates the key size is considered too small to be secure for the algorithm.",
+          "type": "boolean",
+          "x-nullable": true
+        }
+      },
+      "description": "Crypto key properties"
+    },
+    "CryptoKeyResource": {
+      "type": "object",
+      "description": "Crypto key resource",
+      "properties": {
+        "properties": {
+          "title": "Crypto key properties",
+          "description": "The properties of a crypto key found within a firmware image",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CryptoKey"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CryptoKeyListResult": {
+      "type": "object",
+      "description": "List of crypto keys.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CryptoKeyResource"
+          },
+          "description": "The list of crypto key results."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of resources."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

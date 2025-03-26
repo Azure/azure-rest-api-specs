@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./base.tsp";
@@ -59,7 +58,7 @@ model MqttBridgeConnectorProperties {
   @doc("The protocol to use for connecting with Brokers.")
   protocol: MqttProtocol;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -83,12 +82,14 @@ model MqttBridgeRemoteBrokerConnectionSpec {
 }
 
 @doc("Protocol for remote connection.")
-enum MqttBridgeRemoteBrokerProtocol {
+union MqttBridgeRemoteBrokerProtocol {
+  string,
+
   @doc("MQTT protocol.")
-  mqtt,
+  mqtt: "mqtt",
 
   @doc("MQTT over WebSocket protocol.")
-  webSocket,
+  webSocket: "webSocket",
 }
 
 // GENERATION FIX TEMP - add "minProperties": 1 and "maxProperties": 1 to this property after creation.
@@ -147,10 +148,10 @@ model MqttBridgeTopicMapProperties {
   mqttBridgeConnectorRef: string;
 
   @doc("The route details for MqttBridge connector.")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @identifiers(#[])
   routes?: MqttBridgeRoutes[];
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -179,7 +180,9 @@ model MqttBridgeRoutes {
 }
 
 @doc("MqttBridgeRoute direction properties")
-enum MqttBridgeRouteDirection {
+union MqttBridgeRouteDirection {
+  string,
+
   @doc("Remote to Local Broker.")
   RemoteToLocal: "remote-to-local",
 

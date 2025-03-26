@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlServerInstanceName": "testsqlServerInstance",
+    "api-version": "2024-01-01",
+    "sqlServerInstance": {
+      "location": "northeurope",
+      "tags": {
+        "mytag": "myval"
+      },
+      "properties": {
+        "version": "SQL Server 2012",
+        "edition": "Developer",
+        "cores": "4",
+        "instanceName": "name of instance",
+        "hostType": "Physical Server",
+        "backupPolicy": {
+          "retentionPeriodDays": 1,
+          "fullBackupDays": 1,
+          "differentialBackupHours": 12,
+          "transactionLogBackupMinutes": 30
+        },
+        "monitoring": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "version": "SQL Server 2012",
+          "edition": "Developer",
+          "containerResourceId": "Resource id of hosting Arc Machine",
+          "createTime": "01/01/2020 01:01:01",
+          "patchLevel": "patchlevel",
+          "collation": "collation",
+          "currentVersion": "2012",
+          "instanceName": "name of instance",
+          "tcpDynamicPorts": "1433",
+          "tcpStaticPorts": "1433",
+          "productId": "sql id",
+          "vCore": "4",
+          "cores": "4",
+          "licenseType": "Free",
+          "azureDefenderStatusLastUpdated": "2020-01-02T17:18:19.1234567Z",
+          "status": "Registered",
+          "azureDefenderStatus": "Protected",
+          "hostType": "Physical Server",
+          "lastInventoryUploadTime": "2023-03-29T14:13:12Z",
+          "lastUsageUploadTime": "2023-03-29T14:13:12Z",
+          "alwaysOnRole": "FailoverClusterInstance",
+          "failoverCluster": {
+            "id": "f836af7e-85ed-4ea4-91fb-67709b34e323",
+            "networkName": "networkNameOfSQLFCI",
+            "sqlInstanceIds": [
+              "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer1",
+              "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer2"
+            ],
+            "hostNames": [
+              "DEV-HOSTNAME1",
+              "DEV-HOSTNAME2"
+            ]
+          },
+          "backupPolicy": {
+            "retentionPeriodDays": 1,
+            "fullBackupDays": 1,
+            "differentialBackupHours": 12,
+            "transactionLogBackupMinutes": 30
+          },
+          "upgradeLockedUntil": "2022-05-05T16:26:33.883Z",
+          "monitoring": {
+            "enabled": false
+          }
+        },
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/testsqlServerInstance",
+        "name": "testsqlServerInstance",
+        "type": "Microsoft.AzureArcData/SqlServerInstances"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "version": "SQL Server 2017",
+          "edition": "Developer",
+          "containerResourceId": "Arc Machine Name",
+          "createTime": "01/01/2020 01:01:01",
+          "patchLevel": "patchlevel",
+          "collation": "collation",
+          "currentVersion": "2008 R2",
+          "instanceName": "name of instance",
+          "tcpDynamicPorts": "1433",
+          "tcpStaticPorts": "1433",
+          "productId": "sql id",
+          "vCore": "4",
+          "cores": "4",
+          "licenseType": "Free",
+          "azureDefenderStatusLastUpdated": "2020-01-02T17:18:19.1234567Z",
+          "status": "Connected",
+          "azureDefenderStatus": "Protected",
+          "monitoring": {
+            "enabled": false
+          }
+        },
+        "location": "northeurope",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/testsqlServerInstance",
+        "name": "testsqlServerInstance",
+        "type": "Microsoft.AzureArcData/SqlServerInstances"
+      }
+    }
+  }
+}

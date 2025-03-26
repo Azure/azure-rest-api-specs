@@ -75,12 +75,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompletionsOptions"
-            }
+            "$ref": "#/parameters/GetCompletionsBody"
           }
         ],
         "responses": {
@@ -126,12 +121,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EmbeddingsOptions"
-            }
+            "$ref": "#/parameters/GetEmbeddingsBody"
           }
         ],
         "responses": {
@@ -290,8 +280,7 @@
       "required": [
         "id",
         "created",
-        "choices",
-        "usage"
+        "choices"
       ]
     },
     "CompletionsFinishReason": {
@@ -426,6 +415,10 @@
           "type": "integer",
           "format": "int32",
           "description": "A value that controls the emission of log probabilities for the provided number of most likely\ntokens within a completions response."
+        },
+        "suffix": {
+          "type": "string",
+          "description": "The suffix that comes after a completion of inserted text"
         },
         "echo": {
           "type": "boolean",
@@ -600,6 +593,26 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GetCompletionsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for a completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CompletionsOptions"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "GetEmbeddingsBody": {
+      "name": "body",
+      "in": "body",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EmbeddingsOptions"
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }

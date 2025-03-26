@@ -1,0 +1,156 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000",
+    "resourceGroupName": "resourceGroupName",
+    "clusterName": "clusterName",
+    "bmcKeySetName": "bmcKeySetName",
+    "bmcKeySetUpdateParameters": {
+      "tags": {
+        "key1": "myvalue1",
+        "key2": "myvalue2"
+      },
+      "properties": {
+        "expiration": "2022-12-31T23:59:59.008Z",
+        "userList": [
+          {
+            "azureUserName": "userABC",
+            "sshPublicKey": {
+              "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+            },
+            "userPrincipalName": "userABC@contoso.com",
+            "description": "Needs access for troubleshooting as a part of the support team"
+          },
+          {
+            "azureUserName": "userXYZ",
+            "sshPublicKey": {
+              "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+            },
+            "userPrincipalName": "userABC@contoso.com",
+            "description": "Needs access for troubleshooting as a part of the support team"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName/bmcKeySets/bmcKeySetName",
+        "name": "bmcKeySetName",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/clusters/bmcKeySets",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "privilegeLevel": "Administrator",
+          "expiration": "2022-12-31T23:59:59.008Z",
+          "azureGroupId": "f110271b-XXXX-4163-9b99-214d91660f0e",
+          "userList": [
+            {
+              "azureUserName": "userABC",
+              "sshPublicKey": {
+                "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+              },
+              "userPrincipalName": "userABC@contoso.com",
+              "description": "Needs access for troubleshooting as a part of the support team"
+            },
+            {
+              "azureUserName": "userXYZ",
+              "sshPublicKey": {
+                "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+              },
+              "userPrincipalName": "userXYZ@contoso.com",
+              "description": "Needs access for troubleshooting as a part of the support team"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "userListStatus": [
+            {
+              "azureUserName": "userABC",
+              "status": "Active",
+              "statusMessage": "User has been provisioned"
+            },
+            {
+              "azureUserName": "userXYZ",
+              "status": "Invalid",
+              "statusMessage": "User is not a valid Azure user"
+            }
+          ],
+          "lastValidation": "2022-12-12T12:00:00.008Z",
+          "detailedStatus": "SomeInvalid",
+          "detailedStatusMessage": "Invalid Azure user(s) were provided: userXYZ"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName/bmcKeySets/bmcKeySetName",
+        "name": "bmcKeySetName",
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "type": "Microsoft.NetworkCloud/clusters/bmcKeySets",
+        "location": "location",
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
+        },
+        "properties": {
+          "privilegeLevel": "Administrator",
+          "expiration": "2022-12-31T23:59:59.008Z",
+          "azureGroupId": "f110271b-XXXX-4163-9b99-214d91660f0e",
+          "userList": [
+            {
+              "azureUserName": "userABC",
+              "sshPublicKey": {
+                "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+              },
+              "userPrincipalName": "userABC@contoso.com",
+              "description": "Needs access for troubleshooting as a part of the support team"
+            },
+            {
+              "azureUserName": "userXYZ",
+              "sshPublicKey": {
+                "keyData": "ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+jfaaOLHTIIB4fJvo6dQUZxE20w2iDHV3tEkmnTo84eba97VMueQD6OzJPEyWZMRpz8UYWOd0IXeRqiFu1lawNblZhwNT/ojNZfpB3af/YDzwQCZgTcTRyNNhL4o/blKUmug0daSsSXISTRnIDpcf5qytjs1Xo+yYyJMvzLL59mhAyb3p/cD+Y3/s3WhAx+l0XOKpzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm"
+              },
+              "userPrincipalName": "userXYZ@contoso.com",
+              "description": "Needs access for troubleshooting as a part of the support team"
+            }
+          ],
+          "provisioningState": "Accepted",
+          "lastValidation": "2022-12-12T12:00:00.008Z",
+          "detailedStatus": "SomeInvalid",
+          "detailedStatusMessage": "Invalid Azure user(s) were provided: userXYZ"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview",
+        "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2024-06-01-preview"
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "monitorName": "mySapMonitor",
+    "providerInstanceName": "myProviderInstance",
+    "resource": {
+      "properties": {
+        "providerSettings": {
+          "dbPassword": "****",
+          "dbPasswordUri": "",
+          "dbPort": "5912",
+          "dbUsername": "user",
+          "hostname": "hostname",
+          "providerType": "MsSqlServer",
+          "sapSid": "sid",
+          "sslPreference": "RootCertificate"
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myProviderInstance",
+        "type": "Microsoft.Workloads/monitors/providerInstances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance",
+        "properties": {
+          "health": {
+            "healthState": "Healthy",
+            "impactingReasons": "None"
+          },
+          "providerSettings": {
+            "dbPort": "5912",
+            "dbUsername": "user",
+            "hostname": "hostname",
+            "providerType": "MsSqlServer",
+            "sapSid": "sid",
+            "sslPreference": "RootCertificate"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myProviderInstance",
+        "type": "Microsoft.Workloads/monitors/providerInstances",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySapMonitor/providerInstances/myProviderInstance",
+        "properties": {
+          "health": {
+            "healthState": "Healthy",
+            "impactingReasons": "None"
+          },
+          "providerSettings": {
+            "dbPort": "5912",
+            "dbUsername": "user",
+            "hostname": "hostname",
+            "providerType": "MsSqlServer",
+            "sapSid": "sid",
+            "sslPreference": "RootCertificate"
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  },
+  "operationId": "ProviderInstances_Create",
+  "title": "Create a MsSqlServer provider with Root Certificate"
+}

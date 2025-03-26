@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-02-13",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "body": {
+      "searchFilters": {
+        "pageSize": "10",
+        "pageToken": "asc4fts4ft"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "EnvironmentList",
+        "metadata": {
+          "first": "https://api.confluent.cloud/org/v2/environments",
+          "last": "https://api.confluent.cloud/org/v2/environments?page_token=bcAOehAY8F16YD84Z1wT",
+          "prev": "https://api.confluent.cloud/org/v2/environments?page_token=YIXRY97wWYmwzrax4dld",
+          "next": "https://api.confluent.cloud/org/v2/environments?page_token=UvmDWOB1iwfAIBPj6EYb",
+          "total_size": 123
+        },
+        "data": [
+          {
+            "kind": "Environment",
+            "id": "dlz-f3a90de",
+            "metadata": {
+              "self": "https://api.confluent.cloud/org/v2/environments/e-12345",
+              "resource_name": "crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=e-12345",
+              "created_at": "2006-01-02T15:04:05-07:00",
+              "updated_at": "2006-01-02T15:04:05-07:00",
+              "deleted_at": "2006-01-02T15:04:05-07:00"
+            },
+            "display_name": "prod-finance01"
+          }
+        ]
+      }
+    }
+  }
+}
