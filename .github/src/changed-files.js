@@ -7,7 +7,7 @@ import { diff } from "./git.js";
  * @param {string} [options.baseCommitish] Defaults to "HEAD^"
  * @param {string} [options.headCommitish] Defaults to "HEAD"
  * @param {import('./types.js').ILogger} [options.logger]
- * @returns {Promise<string[]>} List of changed files, relative to the repo root.  Example: ["specification/foo/Microsoft.Foo/main.tsp"]
+ * @returns {Promise<string[]>} List of changed files, using platform-specific absolute paths. Example: ["/home/user/specs/specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
   const { baseCommitish = "HEAD^", headCommitish = "HEAD", logger } = options;
