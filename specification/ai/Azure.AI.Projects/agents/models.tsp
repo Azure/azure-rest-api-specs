@@ -1,204 +1,220 @@
 import "@typespec/versioning";
-import "./common/models.tsp";
-import "./tools/models.tsp";
-import "./tools/tool_resources.tsp";
+import "./messages/messages.tsp";
+import "./tools/tools.tsp";
+import "./model-options/openai.tsp";
+import "./model-options/azure.tsp";
 import "../main.tsp";
 
+using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Projects;
 
-@doc("Represents an agent that can call the model and use tools.")
+/**
+ * A JSON-compatible type that can be a primitive, object, or array.
+ * By using optional fields, this model can represent many forms of JSON data
+ * without creating a strict, self-referential union.
+ */
+@doc("A JSON-compatible type that can be a primitive, object, or array.")
+model JSONAny {
+  /**
+   * A string value, if present.
+   */
+  @doc("A string value, if present.")
+  stringValue?: string;
+
+  /**
+   * A 64-bit integer value, if present.
+   */
+  @doc("A 64-bit integer value, if present.")
+  intValue?: int64;
+
+  /**
+   * A floating-point (double precision) value, if present.
+   */
+  @doc("A floating-point (double precision) value, if present.")
+  floatValue?: float64;
+
+  /**
+   * A boolean value, if present.
+   */
+  @doc("A boolean value, if present.")
+  boolValue?: boolean;
+
+  /**
+   * Indicates this represents a JSON null if set to true.
+   */
+  @doc("Indicates this represents a JSON null if set to true.")
+  nullValue?: boolean;
+
+  /**
+   * A JSON array, if present, expressed as an array of JSONAny elements.
+   */
+  @doc("A JSON array, if present, expressed as an array of JSONAny elements.")
+  arrayValue?: JSONAny[];
+
+  /**
+   * A JSON object, if present, expressed as a dictionary from string to JSONAny.
+   */
+  @doc("A JSON object, if present, expressed as a dictionary from string to JSONAny.")
+  objectValue?: Record<JSONAny>;
+}
+
+/**
+ * Properties shared by "Agent" and "AgentOptions".
+ */
+alias AgentCompletionProperties = {
+  /**
+   * The name of the agent; used for display purposes and sent to the LLM to identify the agent.
+   */
+  @doc("The name of the agent; used for display purposes and sent to the LLM to identify the agent.")
+  name?: string;
+
+  /**
+   * The model definition for this agent.
+   */
+  @doc("The model definition for this agent.")
+  agentModel: AgentModel;
+
+  /**
+   * Instructions (e.g., system messages) that are provided to guide how this agent operates.
+   */
+  @doc("Instructions provided to guide how this agent operates.")
+  instructions?: ChatMessage[];
+
+  // TODO: Add when supported
+  //closingInstructions?: ChatMessage[];
+
+  /**
+   * A list of tool definitions available to the agent.
+   */
+  @doc("A list of tool definitions available to the agent.")
+  tools?: AgentToolDefinition[];
+
+  /**
+   * How the agent should choose among provided tools.
+   */
+  @doc("How the agent should choose among provided tools.")
+  toolChoice?: ToolChoiceBehavior;
+};
+
+/**
+ * An agent resource containing properties for AI project agents.
+ */
+@Rest.resource("agents")
+@doc("Represents an AI agent with configuration, instructions, and tool access.")
 model Agent {
-  @doc("The identifier, which can be referenced in API endpoints.")
+  /**
+   * A unique identifier for the agent.
+   */
+  @key
+  @visibility(Lifecycle.Read)
+  agentId: string;
+
+  /**
+   * A description of the agent; used for display purposes and
+   * sent to the LLM to describe the agent.
+   */
+  @doc("A description of the agent; used for display purposes and to describe the agent.")
+  description?: string;
+
+  /**
+   * Arbitrary metadata associated with this agent.
+   */
+  @doc("Arbitrary metadata associated with this agent.")
+  metadata?: Record<string>;
+
+  ...AgentCompletionProperties;
+}
+
+/**
+ * Options used when creating or updating an Agent.
+ */
+@doc("Options used when creating or updating an Agent.")
+model AgentOptions {
+  ...AgentCompletionProperties;
+}
+
+/**
+ * Represents the model or provider-specific data used by the agent.
+ */
+@discriminator("provider")
+@doc("Represents the model or provider-specific data used by the agent.")
+model AgentModel {
+  /**
+   * A unique model or deployment ID for this agent model.
+   */
+  @doc("A unique model or deployment ID for this agent model.")
   id: string;
 
-  @doc("The object type, which is always assistant.")
-  object: "assistant";
-
-  @encodedName("application/json", "created_at")
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
-  @doc("The Unix timestamp, in seconds, representing when this object was created.")
-  createdAt: utcDateTime;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The name of the agent.")
-  name: string | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The description of the agent.")
-  description: string | null;
-
-  @doc("The ID of the model to use.")
-  `model`: string;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The system instructions for the agent to use.")
-  instructions: string | null;
-
-  @doc("The collection of tools enabled for the agent.")
-  tools: ToolDefinition[] = #[];
+  /**
+   * The name of the provider for this model (e.g., 'openai').
+   */
+  @doc("The name of the provider for this model (e.g., 'openai').")
+  provider?: string;
 
   /**
-   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
-   * tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+   * An endpoint where the provider can be reached, if applicable.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "tool_resources")
-  toolResources: ToolResources | null;
+  @doc("An endpoint where the provider can be reached, if applicable.")
+  endpoint?: string;
 
   /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
-   * while lower values like 0.2 will make it more focused and deterministic.
+   * Provider-specific configuration and options (JSON-like structure).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @minValue(0)
-  @maxValue(2)
-  temperature: float32 | null = 1;
-
-  /**
-   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
-   * So 0.1 means only the tokens comprising the top 10% probability mass are considered.
-   *
-   * We generally recommend altering this or temperature but not both.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @minValue(0)
-  @maxValue(1)
-  @encodedName("application/json", "top_p")
-  topP: float32 | null = 1;
-
-  /** The response format of the tool calls used by this agent. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
-
-  ...RequiredNullableMetadata;
+  @doc("Provider-specific configuration and options (JSON-like structure).")
+  options?: JSONAny;
 }
 
-@doc("The request details to use when creating a new agent.")
-model CreateAgentOptions {
-  @doc("The ID of the model to use.")
-  `model`: string;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The name of the new agent.")
-  name?: string | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The description of the new agent.")
-  description?: string | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The system instructions for the new agent to use.")
-  instructions?: string | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The collection of tools to enable for the new agent.")
-  tools?: ToolDefinition[] = #[];
-
+/**
+ * The base behavior for how an agent chooses among available tools.
+ */
+@discriminator("type")
+@doc("The base behavior for how an agent chooses among available tools.")
+model ToolChoiceBehavior {
   /**
-   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
-   * tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+   * The kind of tool-choice strategy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "tool_resources")
-  toolResources?: ToolResources | null;
-
-  /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
-   * while lower values like 0.2 will make it more focused and deterministic.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32 | null = 1;
-
-  /**
-   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
-   * So 0.1 means only the tokens comprising the top 10% probability mass are considered.
-   *
-   * We generally recommend altering this or temperature but not both.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @minValue(0)
-  @maxValue(1)
-  @encodedName("application/json", "top_p")
-  topP?: float32 | null = 1;
-
-  /** The response format of the tool calls used by this agent. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
-
-  ...OptionalNullableMetadata;
+  @doc("The kind of tool-choice strategy.")
+  type: string;
 }
 
-@doc("The request details to use when modifying an existing agent.")
-model UpdateAgentOptions {
-  @path
-  @doc("The ID of the agent to modify.")
-  assistantId: string;
-
-  @doc("The ID of the model to use.")
-  `model`?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The modified name for the agent to use.")
-  name?: string | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The modified description for the agent to use.")
-  description?: string | null;
-
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The modified system instructions for the new agent to use.")
-  instructions?: string | null;
-
-  @doc("The modified collection of tools to enable for the agent.")
-  tools?: ToolDefinition[] = #[];
+/**
+ * Behavior specifying an automatic choice among the given tools.
+ */
+@doc("Behavior specifying an automatic choice among the given tools.")
+model AutoToolChoiceBehavior extends ToolChoiceBehavior {
+  @doc("Indicates this behavior is 'auto'.")
+  type: "auto";
 
   /**
-   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example,
-   * the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
+   * The tool names from which the agent can automatically choose.
    */
-  @encodedName("application/json", "tool_resources")
-  toolResources?: ToolResources;
-
-  /**
-   * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,
-   * while lower values like 0.2 will make it more focused and deterministic.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32 | null = 1;
-
-  /**
-   * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
-   * So 0.1 means only the tokens comprising the top 10% probability mass are considered.
-   *
-   * We generally recommend altering this or temperature but not both.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @minValue(0)
-  @maxValue(1)
-  @encodedName("application/json", "top_p")
-  topP?: float32 | null = 1;
-
-  /** The response format of the tool calls used by this agent. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
-
-  ...OptionalNullableMetadata;
+  @doc("The tool names from which the agent can automatically choose.")
+  toolNames: string[];
 }
 
-@doc("The status of an agent deletion operation.")
-model AgentDeletionStatus {
-  ...DeletionStatus;
+/**
+ * Behavior specifying that the agent must always use the listed tools.
+ */
+@doc("Behavior specifying that the agent must always use the listed tools.")
+model RequiredToolChoiceBehavior extends ToolChoiceBehavior {
+  @doc("Indicates this behavior is 'required'.")
+  type: "required";
 
-  @doc("The object type, which is always 'assistant.deleted'.")
-  object: "assistant.deleted";
+  /**
+   * The tool names that the agent must use.
+   */
+  @doc("The tool names that the agent must use.")
+  toolNames: string[];
+}
+
+/**
+ * Behavior specifying that no tools may be chosen.
+ */
+@doc("Behavior specifying that no tools may be chosen.")
+model NoneToolChoiceBehavior extends ToolChoiceBehavior {
+  @doc("Indicates this behavior is 'none'.")
+  type: "none";
 }

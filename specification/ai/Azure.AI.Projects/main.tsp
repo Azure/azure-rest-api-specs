@@ -4,15 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./agents/routes.tsp";
-import "./agents/threads/routes.tsp";
-import "./agents/messages/routes.tsp";
-import "./agents/runs/routes.tsp";
-import "./agents/run_steps/routes.tsp";
-import "./agents/files/routes.tsp";
-import "./agents/streaming/events.tsp";
-import "./agents/vector_stores/routes.tsp";
-import "./agents/vector_stores/files/routes.tsp";
-import "./agents/vector_stores/file_batches/routes.tsp";
 import "./connections/routes.tsp";
 import "./evaluations/routes.tsp";
 import "./datasets/routes.tsp";
@@ -56,6 +47,10 @@ namespace Azure.AI {
 )
 @versioned(Versions)
 namespace Azure.AI.Projects {
+  alias ServiceTraits = SupportsClientRequestId &
+    NoRepeatableRequests &
+    NoConditionalRequests;
+
   @doc("Azure AI API versions")
   enum Versions {
     @doc("Azure AI API version 2025-05-01-preview.")
