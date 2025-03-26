@@ -66,3 +66,11 @@ using Microsoft.StandbyPool;
   "com.azure.resourcemanager.standbypool",
   "java"
 );
+@@clientName(ContainerGroupInstanceCountSummary.instanceCountsByState,
+  "instanceCountsByStateUpdated",
+  "csharp"
+);
+@@clientName(VirtualMachineInstanceCountSummary.instanceCountsByState,
+  "instanceCountsByStateUpdated",
+  "csharp"
+);
