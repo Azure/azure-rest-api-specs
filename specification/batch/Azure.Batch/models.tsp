@@ -3766,12 +3766,12 @@ model BatchTaskGroup {
 
 @doc("The result of creating a collection of Tasks to a Job.")
 model BatchCreateTaskCollectionResult {
-  @doc("The results of the add Task collection operation.")
-  value?: BatchTaskAddResult[];
+  @doc("The results of the create Task collection operation.")
+  value?: BatchTaskCreateResult[];
 }
 
-@doc("Result for a single Task added as part of an add Task collection operation.")
-model BatchTaskAddResult {
+@doc("Result for a single Task created as part of an add Task collection operation.")
+model BatchTaskCreateResult {
   @doc("The status of the add Task request.")
   status: BatchTaskAddStatus;
 

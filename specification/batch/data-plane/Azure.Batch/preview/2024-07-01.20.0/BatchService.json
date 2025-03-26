@@ -10283,9 +10283,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The results of the add Task collection operation.",
+          "description": "The results of the create Task collection operation.",
           "items": {
-            "$ref": "#/definitions/BatchTaskAddResult"
+            "$ref": "#/definitions/BatchTaskCreateResult"
           },
           "x-ms-identifiers": []
         }
@@ -14613,41 +14613,6 @@
         }
       }
     },
-    "BatchTaskAddResult": {
-      "type": "object",
-      "description": "Result for a single Task added as part of an add Task collection operation.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/BatchTaskAddStatus",
-          "description": "The status of the add Task request."
-        },
-        "taskId": {
-          "type": "string",
-          "description": "The ID of the Task for which this is the result."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "The ETag of the Task, if the Task was successfully added. You can use this to detect whether the Task has changed between requests. In particular, you can be pass the ETag with an Update Task request to specify that your changes should take effect only if nobody else has modified the Job in the meantime."
-        },
-        "lastModified": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last modified time of the Task."
-        },
-        "location": {
-          "type": "string",
-          "description": "The URL of the Task, if the Task was successfully added."
-        },
-        "error": {
-          "$ref": "#/definitions/BatchError",
-          "description": "The error encountered while attempting to add the Task."
-        }
-      },
-      "required": [
-        "status",
-        "taskId"
-      ]
-    },
     "BatchTaskAddStatus": {
       "type": "string",
       "description": "BatchTaskAddStatus enums",
@@ -14925,6 +14890,41 @@
       "required": [
         "id",
         "commandLine"
+      ]
+    },
+    "BatchTaskCreateResult": {
+      "type": "object",
+      "description": "Result for a single Task created as part of an add Task collection operation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/BatchTaskAddStatus",
+          "description": "The status of the add Task request."
+        },
+        "taskId": {
+          "type": "string",
+          "description": "The ID of the Task for which this is the result."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag of the Task, if the Task was successfully added. You can use this to detect whether the Task has changed between requests. In particular, you can be pass the ETag with an Update Task request to specify that your changes should take effect only if nobody else has modified the Job in the meantime."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified time of the Task."
+        },
+        "location": {
+          "type": "string",
+          "description": "The URL of the Task, if the Task was successfully added."
+        },
+        "error": {
+          "$ref": "#/definitions/BatchError",
+          "description": "The error encountered while attempting to add the Task."
+        }
+      },
+      "required": [
+        "status",
+        "taskId"
       ]
     },
     "BatchTaskDependencies": {
