@@ -1642,6 +1642,9 @@ directive:
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: resources.json
     reason: "The deployments resource type is ProxyOnly."
+  - suppress: PutResponseCodes
+    from: SubscriptionFeatureRegistration.json
+    reason: "No change in latest API version"
 ```
 
 ---
