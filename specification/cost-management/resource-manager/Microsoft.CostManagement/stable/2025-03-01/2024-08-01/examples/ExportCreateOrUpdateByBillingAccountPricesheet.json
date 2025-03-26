@@ -1,8 +1,8 @@
 {
     "parameters": {
       "api-version": "2025-03-01",
-      "managementGroupId": "TestMG",
-      "scope": "providers/Microsoft.Management/managementGroups/TestMG",
+      "billingAccountId": "123456",
+      "scope": "providers/Microsoft.Billing/billingAccounts/123456",
       "exportName": "TestExport",
       "parameters": {
         "identity": {
@@ -14,8 +14,8 @@
             "status": "Active",
             "recurrence": "Daily",
             "recurrencePeriod": {
-              "from": "2020-06-01T00:00:00Z",
-              "to": "2020-06-30T00:00:00Z"
+              "from": "2023-06-01T00:00:00Z",
+              "to": "2023-06-30T00:00:00Z"
             }
           },
           "format": "Csv",
@@ -28,8 +28,8 @@
             }
           },
           "definition": {
-            "type": "ActualCost",
-            "timeframe": "MonthToDate",
+            "type": "PriceSheet",
+            "timeframe": "TheCurrentMonth",
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
@@ -47,7 +47,7 @@
     "responses": {
       "201": {
         "body": {
-          "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport",
+          "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
           "name": "TestExport",
           "type": "Microsoft.CostManagement/exports",
           "eTag": "\"00000000-0000-0000-0000-000000000000\"",
@@ -62,11 +62,11 @@
               "status": "Active",
               "recurrence": "Daily",
               "recurrencePeriod": {
-                "from": "2020-06-01T00:00:00Z",
-                "to": "2020-06-30T00:00:00Z"
+                "from": "2023-06-01T00:00:00Z",
+                "to": "2023-06-30T00:00:00Z"
               }
             },
-            "nextRunTimeEstimate": "2020-06-01T23:00:00Z",
+            "nextRunTimeEstimate": "2023-06-01T23:00:00Z",
             "format": "Csv",
             "deliveryInfo": {
               "destination": {
@@ -76,8 +76,8 @@
               }
             },
             "definition": {
-              "type": "ActualCost",
-              "timeframe": "MonthToDate",
+              "type": "PriceSheet",
+              "timeframe": "TheCurrentMonth",
               "dataSet": {
                 "granularity": "Daily",
                 "configuration": {
@@ -94,7 +94,7 @@
       },
       "200": {
         "body": {
-          "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport",
+          "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
           "name": "TestExport",
           "type": "Microsoft.CostManagement/exports",
           "eTag": "\"00000000-0000-0000-0000-000000000000\"",
@@ -109,11 +109,11 @@
               "status": "Active",
               "recurrence": "Daily",
               "recurrencePeriod": {
-                "from": "2020-06-01T00:00:00Z",
-                "to": "2020-06-30T00:00:00Z"
+                "from": "2023-06-01T00:00:00Z",
+                "to": "2023-06-30T00:00:00Z"
               }
             },
-            "nextRunTimeEstimate": "2020-06-01T23:00:00Z",
+            "nextRunTimeEstimate": "2023-06-01T23:00:00Z",
             "format": "Csv",
             "deliveryInfo": {
               "destination": {
@@ -123,8 +123,8 @@
               }
             },
             "definition": {
-              "type": "ActualCost",
-              "timeframe": "MonthToDate",
+              "type": "PriceSheet",
+              "timeframe": "TheCurrentMonth",
               "dataSet": {
                 "granularity": "Daily",
                 "configuration": {

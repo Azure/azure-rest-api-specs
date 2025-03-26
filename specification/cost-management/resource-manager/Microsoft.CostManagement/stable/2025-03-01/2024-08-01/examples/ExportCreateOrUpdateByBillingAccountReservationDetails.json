@@ -1,8 +1,8 @@
 {
     "parameters": {
       "api-version": "2025-03-01",
-      "managementGroupId": "TestMG",
-      "scope": "providers/Microsoft.Management/managementGroups/TestMG",
+      "billingAccountId": "123456",
+      "scope": "providers/Microsoft.Billing/billingAccounts/123456",
       "exportName": "TestExport",
       "parameters": {
         "identity": {
@@ -14,8 +14,8 @@
             "status": "Active",
             "recurrence": "Daily",
             "recurrencePeriod": {
-              "from": "2020-06-01T00:00:00Z",
-              "to": "2020-06-30T00:00:00Z"
+              "from": "2023-06-01T00:00:00Z",
+              "to": "2023-06-30T00:00:00Z"
             }
           },
           "format": "Csv",
@@ -28,14 +28,14 @@
             }
           },
           "definition": {
-            "type": "ActualCost",
-            "timeframe": "MonthToDate",
             "dataSet": {
-              "granularity": "Daily",
               "configuration": {
-                "dataVersion": "2023-05-01"
-              }
-            }
+                "dataVersion": "2023-03-01"
+              },
+              "granularity": "Daily"
+            },
+            "timeframe": "MonthToDate",
+            "type": "ReservationDetails"
           },
           "partitionData": true,
           "dataOverwriteBehavior": "OverwritePreviousReport",
@@ -47,7 +47,7 @@
     "responses": {
       "201": {
         "body": {
-          "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport",
+          "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
           "name": "TestExport",
           "type": "Microsoft.CostManagement/exports",
           "eTag": "\"00000000-0000-0000-0000-000000000000\"",
@@ -62,11 +62,11 @@
               "status": "Active",
               "recurrence": "Daily",
               "recurrencePeriod": {
-                "from": "2020-06-01T00:00:00Z",
-                "to": "2020-06-30T00:00:00Z"
+                "from": "2023-06-01T00:00:00Z",
+                "to": "2023-06-30T00:00:00Z"
               }
             },
-            "nextRunTimeEstimate": "2020-06-01T23:00:00Z",
+            "nextRunTimeEstimate": "2023-06-01T23:00:00Z",
             "format": "Csv",
             "deliveryInfo": {
               "destination": {
@@ -76,13 +76,15 @@
               }
             },
             "definition": {
-              "type": "ActualCost",
+              "type": "ReservationDetails",
               "timeframe": "MonthToDate",
               "dataSet": {
-                "granularity": "Daily",
                 "configuration": {
-                  "dataVersion": "2023-05-01"
-                }
+                  "columns": [],
+                  "dataVersion": "2023-03-01",
+                  "filters": []
+                },
+                "granularity": "Daily"
               }
             },
             "partitionData": true,
@@ -94,7 +96,7 @@
       },
       "200": {
         "body": {
-          "id": "providers/Microsoft.Management/managementGroups/TestMG/providers/Microsoft.CostManagement/exports/TestExport",
+          "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
           "name": "TestExport",
           "type": "Microsoft.CostManagement/exports",
           "eTag": "\"00000000-0000-0000-0000-000000000000\"",
@@ -109,11 +111,11 @@
               "status": "Active",
               "recurrence": "Daily",
               "recurrencePeriod": {
-                "from": "2020-06-01T00:00:00Z",
-                "to": "2020-06-30T00:00:00Z"
+                "from": "2023-06-01T00:00:00Z",
+                "to": "2023-06-30T00:00:00Z"
               }
             },
-            "nextRunTimeEstimate": "2020-06-01T23:00:00Z",
+            "nextRunTimeEstimate": "2023-06-01T23:00:00Z",
             "format": "Csv",
             "deliveryInfo": {
               "destination": {
@@ -123,13 +125,15 @@
               }
             },
             "definition": {
-              "type": "ActualCost",
+              "type": "ReservationDetails",
               "timeframe": "MonthToDate",
               "dataSet": {
-                "granularity": "Daily",
                 "configuration": {
-                  "dataVersion": "2023-05-01"
-                }
+                  "columns": [],
+                  "dataVersion": "2023-03-01",
+                  "filters": []
+                },
+                "granularity": "Daily"
               }
             },
             "partitionData": true,
