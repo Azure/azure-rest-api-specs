@@ -1151,7 +1151,7 @@ op createTaskCollectionCustomization is Azure.Batch.PostOperation<
     @doc("Optional parameters for Create Task Collection operation.")
     options?: CreateBatchTaskCollectionOptions;
   },
-  Azure.Batch.BatchTaskAddCollectionResult
+  Azure.Batch.BatchCreateTaskCollectionResult
 >;
 
 @@override(Azure.Batch.Tasks.createTaskCollection,
