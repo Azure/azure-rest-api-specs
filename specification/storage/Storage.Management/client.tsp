@@ -585,3 +585,19 @@ using Azure.Core;
 @@clientName(Endpoints.file, "FileUri", "csharp");
 @@clientName(Endpoints.web, "WebUri", "csharp");
 @@clientName(Endpoints.dfs, "DfsUri", "csharp");
+
+@@doc(LocalUsers.nextLink,
+  "Request URL that can be used to query next page of local users. Returned when total number of requested local users exceeds the maximum page size."
+);
+@@doc(LocalUsers.value,
+  "The list of local users associated with the storage account."
+);
+@@alternateType(ResourceAccessRule.tenantId, uuid, "csharp");
+@@alternateType(ActiveDirectoryProperties.domainGuid, uuid, "csharp");
+@@alternateType(ResourceAccessRule.resourceId, armResourceIdentifier, "csharp");
+@@alternateType(VirtualNetworkRule.virtualNetworkResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@doc(ListKeyExpand, "The StorageListKeyExpand.");

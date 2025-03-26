@@ -10048,7 +10048,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "The LocalUser items on this page",
+          "description": "The list of local users associated with the storage account.",
           "items": {
             "$ref": "#/definitions/LocalUser"
           }
@@ -10056,7 +10056,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Request URL that can be used to query next page of local users. Returned when total number of requested local users exceeds the maximum page size."
         }
       },
       "required": [
@@ -11471,16 +11471,6 @@
         ]
       }
     },
-    "ResourceType": {
-      "type": "string",
-      "enum": [
-        "Microsoft.Storage/storageAccounts"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceType",
-        "modelAsString": false
-      }
-    },
     "RestorePolicyProperties": {
       "type": "object",
       "description": "The blob service properties for blob restore policy",
@@ -12299,8 +12289,16 @@
           "description": "The storage account name."
         },
         "type": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The type of resource, Microsoft.Storage/storageAccounts"
+          "type": "string",
+          "description": "The type of resource, Microsoft.Storage/storageAccounts",
+          "default": "Microsoft.Storage/storageAccounts",
+          "enum": [
+            "Microsoft.Storage/storageAccounts"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceType",
+            "modelAsString": false
+          }
         }
       },
       "required": [
