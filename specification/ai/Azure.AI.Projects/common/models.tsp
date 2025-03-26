@@ -5,9 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../credentials/models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Azure.AI.Projects;
 

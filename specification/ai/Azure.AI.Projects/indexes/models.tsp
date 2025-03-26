@@ -5,13 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
 import "../main.tsp";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
-
 namespace Azure.AI.Projects;
 
 @doc("Index resource Definition")
