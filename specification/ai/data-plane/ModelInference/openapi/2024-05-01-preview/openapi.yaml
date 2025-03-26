@@ -1411,9 +1411,12 @@ components:
           scopes:
             https://ml.azure.com/.default: ''
 servers:
-  - url: '{resource_endpoint}/api/models'
+  - url: https://example.services.ai.azure.com/api/models
+    description: AI Model Inference
+    variables: {}
+  - url: https://{resource}.services.ai.azure.com/api/models
     description: AI Model Inference
     variables:
-      resource_endpoint:
+      resource:
         default: ''
-        description: The Azure AI Services resource endpoint, for example https://my-resource.services.ai.azure.com
+        description: The Azure AI Services resource name, for example 'my-resource'

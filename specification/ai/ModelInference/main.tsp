@@ -4,9 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
@@ -20,12 +18,16 @@ using Azure.Core;
 )
 @service(#{ title: "AI Model Inference" })
 @server(
-  "{resource_endpoint}/api/models",
+  "https://{resource}.services.ai.azure.com/api/models",
   "AI Model Inference",
   {
-    @doc("The Azure AI Services resource endpoint, for example https://my-resource.services.ai.azure.com")
-    resource_endpoint: url,
+    @doc("The Azure AI Services resource name, for example 'my-resource'")
+    resource: string,
   }
+)
+@server(
+  "https://example.services.ai.azure.com/api/models",
+  "AI Model Inference"
 )
 @versioned(ModelInference.Versions)
 namespace ModelInference;
