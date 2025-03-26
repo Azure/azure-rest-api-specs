@@ -28,43 +28,37 @@ describe("git", () => {
 
   describe("mocked", () => {
     it("diff", async () => {
-      const execRootSpy = vi
-        .spyOn(exec, "execRoot")
-        .mockResolvedValue("test diff");
+      const execSpy = vi.spyOn(exec, "exec").mockResolvedValue("test diff");
 
       await expect(diff("HEAD^", "HEAD")).resolves.toBe("test diff");
 
-      expect(execRootSpy).toBeCalledWith(
+      expect(execSpy).toBeCalledWith(
         "git -c core.quotepath=off diff HEAD^ HEAD",
         expect.anything(),
       );
     });
 
     it("lsTree", async () => {
-      const execRootSpy = vi
-        .spyOn(exec, "execRoot")
-        .mockResolvedValue("test lstree");
+      const execSpy = vi.spyOn(exec, "exec").mockResolvedValue("test lstree");
 
       await expect(
         lsTree("HEAD", "specification/contosowidgetmanager"),
       ).resolves.toBe("test lstree");
 
-      expect(execRootSpy).toBeCalledWith(
+      expect(execSpy).toBeCalledWith(
         "git -c core.quotepath=off ls-tree HEAD specification/contosowidgetmanager",
         expect.anything(),
       );
     });
 
     it("show", async () => {
-      const execRootSpy = vi
-        .spyOn(exec, "execRoot")
-        .mockResolvedValue("test show");
+      const execSpy = vi.spyOn(exec, "exec").mockResolvedValue("test show");
 
       await expect(
         show("HEAD", "specification/contosowidgetmanager/cspell.yaml"),
       ).resolves.toBe("test show");
 
-      expect(execRootSpy).toBeCalledWith(
+      expect(execSpy).toBeCalledWith(
         "git -c core.quotepath=off show HEAD:specification/contosowidgetmanager/cspell.yaml",
         expect.anything(),
       );
