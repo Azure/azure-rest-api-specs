@@ -5929,6 +5929,18 @@
           "description": "The password corresponding to the user name when using UsernameAndPassword.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "thriftTransportProtocol": {
+          "description": "The transport protocol to use in the Thrift layer",
+          "type": "string",
+          "enum": [
+            "Binary",
+            "HTTP"
+          ],
+          "x-ms-enum": {
+            "name": "ImpalaThriftTransportProtocol",
+            "modelAsString": true
+          }
+        },
         "enableSsl": {
           "description": "Specifies whether the connections to the server are encrypted using SSL. The default value is false.",
           "type": "object",
