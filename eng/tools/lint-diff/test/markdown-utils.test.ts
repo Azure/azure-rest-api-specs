@@ -218,6 +218,7 @@ describe("getTagsAndInputFiles", async () => {
 });
 
 describe("getRelatedArmRpcFromDoc", async () => {
+  // Tests are run sequentially to avoid concurrency issues with axios mocking
   beforeEach(() => {
     (axios.get as Mock).mockReset();
   });
@@ -232,13 +233,13 @@ describe("getRelatedArmRpcFromDoc", async () => {
     });
   }
 
-  test.concurrent("returns empty array on FATAL", async ({ expect }) => {
+  test.sequential("returns empty array on FATAL", async ({ expect }) => {
     const rule = await getRelatedArmRpcFromDoc("FATAL");
 
     expect(rule).toEqual([]);
   });
 
-  test.concurrent("returns a rule from the cache", async ({ expect }) => {
+  test.sequential("returns a rule from the cache", async ({ expect }) => {
     await mockResponseFile("lro-patch202.md");
 
     await getRelatedArmRpcFromDoc("LroPatch202");
@@ -247,34 +248,34 @@ describe("getRelatedArmRpcFromDoc", async () => {
     expect((axios.get as Mock).mock.calls.length).toBe(1);
   });
 
-  test.concurrent("returns an empty array when no rules are found", async ({ expect }) => {
+  test.sequential("returns an empty array when no rules are found", async ({ expect }) => {
     await mockResponseFile("api-host.md");
     const rules = await getRelatedArmRpcFromDoc("ApiHost");
     expect(rules).toEqual([]);
   });
 
-  test.concurrent("returns rules when a list is found", async ({ expect }) => {
+  test.sequential("returns rules when a list is found", async ({ expect }) => {
     await mockResponseFile("system-data-definitions-common-types.md");
     const rules = await getRelatedArmRpcFromDoc("SystemDataDefinitionsCommonTypes");
 
     expect(rules).toEqual(["RPC-SystemData-V1-01", "RPC-SystemData-V1-02"]);
   });
 
-  test.concurrent("returns rules when a list with commas is found", async ({ expect }) => {
+  test.sequential("returns rules when a list with commas is found", async ({ expect }) => {
     await mockResponseFile("lro-patch202.md");
     const rules = await getRelatedArmRpcFromDoc("LroPatch202");
 
     expect(rules).toEqual(["RPC-Patch-V1-06", "RPC-Async-V1-08"]);
   });
 
-  test.concurrent("returns an empty set when the docUrl is not found", async ({ expect }) => {
+  test.sequential("returns an empty set when the docUrl is not found", async ({ expect }) => {
     (axios.get as Mock).mockRejectedValue(new Error("404 Not Found"));
     const rules = await getRelatedArmRpcFromDoc("DoesNotExist");
 
     expect(rules).toEqual([]);
   });
 
-  test.concurrent("does not throw on axios errors", async ({ expect }) => {
+  test.sequential("does not throw on axios errors", async ({ expect }) => {
     (axios.get as Mock).mockRejectedValue(new Error("404 Not Found"));
 
     expect(async () => await getRelatedArmRpcFromDoc("DoesNotExist")).not.toThrow();
