@@ -24,10 +24,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 suppressions:
   - code: AvoidAdditionalProperties
     from: impact.json
+    where: $.definitions.WorkloadImpactProperties.properties
     reason:
       Property additionalProperties in WorkloadImpactProperties is necessary to be dynamic since it contains metadata
       and will be different for different categories
   - code: AvoidAnonymousTypes
+  - where: $.definitions.WorkloadImpactProperties.properties.additionalProperties 
     from: impact.json
     reason: Typespec generated definitions contain anonymous types.
 ```
