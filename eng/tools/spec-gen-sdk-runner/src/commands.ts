@@ -131,11 +131,12 @@ export async function generateSdkForSpecPr(): Promise<number> {
     logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
   }
   // Process the breaking change label artifacts
-  statusCode = processBreakingChangeLabelArtifacts(
-    commandInput,
-    shouldLabelBreakingChange,
-    breakingChangeLabel,
-  );
+  statusCode =
+    processBreakingChangeLabelArtifacts(
+      commandInput,
+      shouldLabelBreakingChange,
+      breakingChangeLabel,
+    ) || statusCode;
   return statusCode;
 }
 
