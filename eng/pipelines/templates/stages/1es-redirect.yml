@@ -19,7 +19,10 @@ parameters:
 extends:
   ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
     template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
-    parameters:
+  ${{ else }}:
+    template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
+  parameters:
+    ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
       settings:
         skipBuildTagsForGitHubPullRequests: true
       sdl:
@@ -37,9 +40,7 @@ extends:
           break: true
         policy: M365
       stages: ${{ parameters.stages }}
-  ${{ else }}:
-    template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
-    parameters:
+    ${{ else }}:
       settings:
         enableAllTools: false
       stages: ${{ parameters.stages }}
