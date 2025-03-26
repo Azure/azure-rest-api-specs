@@ -5140,6 +5140,9 @@
         "x-ms-examples": {
           "ScalingPlanPooledSchedules_Create": {
             "$ref": "./examples/ScalingPlanPooledSchedules_Create.json"
+          },
+          "ScalingPlanPooledSchedules_CreateUsingCreateDelete": {
+            "$ref": "./examples/ScalingPlanPooledSchedules_CreateUsingCreateDelete.json"
           }
         }
       },
@@ -6802,6 +6805,43 @@
           }
         ]
       }
+    },
+    "CreateDeleteProperties": {
+      "type": "object",
+      "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+      "properties": {
+        "rampUpMaximumHostPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
+          "minimum": 0,
+          "x-nullable": true
+        },
+        "rampUpMinimumHostPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
+          "minimum": 0,
+          "maximum": 59,
+          "x-nullable": true
+        },
+        "rampDownMaximumHostPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
+          "minimum": 0,
+          "x-nullable": true
+        },
+        "rampDownMinimumHostPoolSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
+          "minimum": 0,
+          "maximum": 59,
+          "x-nullable": true
+        }
+      },
+      "x-nullable": true
     },
     "CustomInfoPatchProperties": {
       "type": "object",
@@ -8999,6 +9039,30 @@
         }
       }
     },
+    "ScalingMethodType": {
+      "type": "string",
+      "description": "The desired scaling method to be used to scale the hosts in the assigned host pool.",
+      "enum": [
+        "PowerManage",
+        "CreateDeletePowerManage"
+      ],
+      "x-ms-enum": {
+        "name": "ScalingMethodType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PowerManage",
+            "value": "PowerManage",
+            "description": "Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size."
+          },
+          {
+            "name": "CreateDeletePowerManage",
+            "value": "CreateDeletePowerManage",
+            "description": "Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property."
+          }
+        ]
+      }
+    },
     "ScalingPlan": {
       "type": "object",
       "description": "Represents a scaling plan definition.",
@@ -9681,6 +9745,14 @@
             "$ref": "#/definitions/DayOfWeek"
           }
         },
+        "scalingMethod": {
+          "$ref": "#/definitions/ScalingMethodType",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool."
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+        },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
           "description": "Starting time for ramp up period."
@@ -9774,6 +9846,35 @@
           "items": {
             "$ref": "#/definitions/DayOfWeek"
           }
+        },
+        "scalingMethod": {
+          "type": "string",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool.",
+          "default": "PowerManage",
+          "enum": [
+            "PowerManage",
+            "CreateDeletePowerManage"
+          ],
+          "x-ms-enum": {
+            "name": "ScalingMethodType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PowerManage",
+                "value": "PowerManage",
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size."
+              },
+              {
+                "name": "CreateDeletePowerManage",
+                "value": "CreateDeletePowerManage",
+                "description": "Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property."
+              }
+            ]
+          }
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -9952,6 +10053,35 @@
           "items": {
             "$ref": "#/definitions/DayOfWeek"
           }
+        },
+        "scalingMethod": {
+          "type": "string",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool.",
+          "default": "PowerManage",
+          "enum": [
+            "PowerManage",
+            "CreateDeletePowerManage"
+          ],
+          "x-ms-enum": {
+            "name": "ScalingMethodType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PowerManage",
+                "value": "PowerManage",
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size."
+              },
+              {
+                "name": "CreateDeletePowerManage",
+                "value": "CreateDeletePowerManage",
+                "description": "Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property."
+              }
+            ]
+          }
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
         },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
@@ -10799,6 +10929,21 @@
       "type": "object",
       "description": "Schema for SessionHost properties.",
       "properties": {
+        "activeSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of active sessions on SessionHost."
+        },
+        "disconnectedSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of disconnected sessions on SessionHost."
+        },
+        "pendingSessions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of pending sessions on SessionHost."
+        },
         "objectId": {
           "type": "string",
           "description": "ObjectId of SessionHost. (internal use)",

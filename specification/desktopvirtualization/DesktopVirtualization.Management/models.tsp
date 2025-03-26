@@ -1074,6 +1074,40 @@ union SessionHandlingOperation {
 }
 
 /**
+ * The desired scaling method to be used to scale the hosts in the assigned host pool.
+ */
+union ScalingMethodType {
+  string,
+
+  /**
+   * Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size.
+   */
+  PowerManage: "PowerManage",
+
+  /**
+   * Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property.
+   */
+  CreateDeletePowerManage: "CreateDeletePowerManage",
+}
+
+/**
+ * The desired scaling method to be used to scale the hosts in the assigned host pool.
+ */
+union ScalingMethodPatchType {
+  string,
+
+  /**
+   * Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size.
+   */
+  PowerManage: "PowerManage",
+
+  /**
+   * Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property.
+   */
+  CreateDeletePowerManage: "CreateDeletePowerManage",
+}
+
+/**
  * Day of the week. Modeled as string
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
@@ -2483,6 +2517,18 @@ model ScalingSchedule {
   daysOfWeek?: DayOfWeek[];
 
   /**
+   * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   */
+  @added(Versions.v2025_04_01_preview)
+  scalingMethod?: ScalingMethodType = ScalingMethodType.PowerManage;
+
+  /**
+   * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   */
+  @added(Versions.v2025_04_01_preview)
+  createDelete?: CreateDeleteProperties;
+
+  /**
    * Starting time for ramp up period.
    */
   rampUpStartTime?: Time;
@@ -2569,6 +2615,44 @@ model ScalingSchedule {
    * Load balancing algorithm for off-peak period.
    */
   offPeakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+}
+
+/**
+ * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-openapi"
+@added(Versions.v2025_04_01_preview)
+@OpenAPI.extension("x-nullable", true)
+model CreateDeleteProperties {
+  /**
+   * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
+   */
+  @minValue(0)
+  @OpenAPI.extension("x-nullable", true)
+  rampUpMaximumHostPoolSize?: int32;
+
+  /**
+   * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
+   */
+  @minValue(0)
+  @maxValue(59)
+  @OpenAPI.extension("x-nullable", true)
+  rampUpMinimumHostPoolSize?: int32;
+
+  /**
+   * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
+   */
+  @minValue(0)
+  @OpenAPI.extension("x-nullable", true)
+  rampDownMaximumHostPoolSize?: int32;
+
+  /**
+   * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
+   */
+  @minValue(0)
+  @maxValue(59)
+  @OpenAPI.extension("x-nullable", true)
+  rampDownMinimumHostPoolSize?: int32;
 }
 
 /**
@@ -3488,6 +3572,24 @@ model SessionHostList is Azure.Core.Page<SessionHost>;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
 model SessionHostProperties {
   /**
+   * Number of active sessions on SessionHost.
+   */
+  @added(Versions.v2025_04_01_preview)
+  activeSessions?: int32;
+
+  /**
+   * Number of disconnected sessions on SessionHost.
+   */
+  @added(Versions.v2025_04_01_preview)
+  disconnectedSessions?: int32;
+
+  /**
+   * Number of pending sessions on SessionHost.
+   */
+  @added(Versions.v2025_04_01_preview)
+  pendingSessions?: int32;
+
+  /**
    * ObjectId of SessionHost. (internal use)
    */
   @visibility(Lifecycle.Read)
@@ -4117,6 +4219,18 @@ model ScalingPlanPooledScheduleProperties {
   daysOfWeek: DayOfWeek[];
 
   /**
+   * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   */
+  @added(Versions.v2025_04_01_preview)
+  scalingMethod?: ScalingMethodType = ScalingMethodType.PowerManage;
+
+  /**
+   * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   */
+  @added(Versions.v2025_04_01_preview)
+  createDelete?: CreateDeleteProperties;
+
+  /**
    * Starting time for ramp up period.
    */
   rampUpStartTime: Time;
@@ -4219,6 +4333,18 @@ model ScalingPlanPooledSchedulePatchProperties {
    * Set of days of the week on which this schedule is active.
    */
   daysOfWeek?: DayOfWeek[];
+
+  /**
+   * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   */
+  @added(Versions.v2025_04_01_preview)
+  scalingMethod?: ScalingMethodType;
+
+  /**
+   * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   */
+  @added(Versions.v2025_04_01_preview)
+  createDelete?: CreateDeleteProperties;
 
   /**
    * Starting time for ramp up period.
