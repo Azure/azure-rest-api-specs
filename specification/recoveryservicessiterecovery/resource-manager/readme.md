@@ -45,13 +45,14 @@ directive:
       - R4011
     reason: service implements 204 for delete and DeleteOperationResponses error was falsely raised.
 
+  - from: service.json
+	suppress:
+	  - PutResponseCodes
+    reason: suppressing as ASR is old service and for all APIs, the 202-async PUT convention is followed.
+
   - code: AvoidAdditionalProperties
     from: service.json
     reason: Getting flagged in new API versions while inheriting old models, these fields exist in ASR from before and are required.
-
-  - from: service.json
-	suppress: PutResponseCodes
-    reason: suppressing as ASR is old service and for all APIs, the 202-async PUT convention is followed.
 
 suppressions:
   - from: service.json
