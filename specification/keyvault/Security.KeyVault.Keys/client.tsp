@@ -17,6 +17,15 @@ using KeyVault;
 @@clientName(JsonWebKeyType, "KeyType", "java");
 
 // Go configuration
+@@clientName(getDeletedKeys, "ListDeletedKeyProperties", "go");
+@@clientName(getKeys, "ListKeyProperties", "go");
+@@clientName(getKeyVersions, "ListKeyPropertiesVersions", "go");
+// renaming Keytem to KeyProperties.
+// renaming existing KeyProperties to something else
+// to avoid a naming conflict as it's not part of the public surface area
+@@clientName(KeyProperties, "ShouldNotGenerate", "go");
+@@clientName(KeyItem, "KeyProperties", "go");
+
 @@clientName(KeyCreateParameters, "CreateKeyParameters", "go");
 @@clientName(KeyExportParameters, "ExportKeyParameters", "go");
 @@clientName(KeyImportParameters, "ImportKeyParameters", "go");
@@ -26,12 +35,8 @@ using KeyVault;
 @@clientName(KeyUpdateParameters, "UpdateKeyParameters", "go");
 @@clientName(KeyVerifyParameters, "VerifyParameters", "go");
 @@clientName(GetRandomBytesRequest, "GetRandomBytesParameters", "go");
-@@clientName(getDeletedKeys, "ListDeletedKeyProperties", "go");
-@@clientName(getKeys, "ListKeyProperties", "go");
-@@clientName(getKeyVersions, "ListKeyPropertiesVersions", "go");
+
 @@clientName(DeletedKeyBundle, "DeletedKey", "go");
-@@clientName(KeyProperties, "KeyP", "go");
-@@clientName(KeyItem, "KeyProperties", "go");
 @@clientName(DeletedKeyItem, "DeletedKeyProperties", "go");
 @@clientName(DeletedKeyListResult, "DeletedKeyPropertiesListResult", "go");
 @@clientName(KeyListResult, "KeyPropertiesListResult", "go");

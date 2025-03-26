@@ -193,6 +193,7 @@ op getKeyVersions is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   KeyListResult
@@ -214,6 +215,7 @@ op getKeys is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   KeyListResult
@@ -524,6 +526,7 @@ op getDeletedKeys is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   DeletedKeyListResult

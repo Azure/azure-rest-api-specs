@@ -23,8 +23,18 @@ using KeyVault;
 @@clientName(KeyUsageType, "CertificateKeyUsage", "java");
 @@clientName(SubjectAlternativeNames.upns, "userPrincipalNames", "java");
 
-// rename Go operations
+// Go configuration
 @@clientName(setCertificateContacts, "SetContacts", "go");
+@@clientName(getCertificates, "ListCertificateProperties", "go");
+@@clientName(getCertificateIssuers, "ListIssuerProperties", "go");
+@@clientName(getCertificateVersions, "ListCertificatePropertiesVersions", "go");
+@@clientName(getDeletedCertificates, "ListDeletedCertificateProperties", "go");
+@@clientName(getCertificateContacts, "GetContacts", "go");
+@@clientName(deleteCertificateContacts, "DeleteContacts", "go");
+@@clientName(setCertificateIssuer, "SetIssuer", "go");
+@@clientName(updateCertificateIssuer, "UpdateIssuer", "go");
+@@clientName(getCertificateIssuer, "GetIssuer", "go");
+@@clientName(deleteCertificateIssuer, "DeleteIssuer", "go");
 
 @@clientName(CertificateCreateParameters, "CreateCertificateParameters", "go");
 @@clientName(CertificateImportParameters, "ImportCertificateParameters", "go");
@@ -40,23 +50,11 @@ using KeyVault;
   "go"
 );
 @@clientName(CertificateUpdateParameters, "UpdateCertificateParameters", "go");
-
-@@clientName(getCertificates, "ListCertificateProperties", "go");
-@@clientName(getCertificateIssuers, "ListIssuerProperties", "go");
-@@clientName(getCertificateVersions, "ListCertificatePropertiesVersions", "go");
-@@clientName(getDeletedCertificates, "ListDeletedCertificateProperties", "go");
 @@clientName(CertificateListResult, "CertificatePropertiesListResult", "go");
 @@clientName(DeletedCertificateListResult,
   "DeletedCertificatePropertiesListResult",
   "go"
 );
-
-@@clientName(getCertificateContacts, "GetContacts", "go");
-@@clientName(deleteCertificateContacts, "DeleteContacts", "go");
-@@clientName(setCertificateIssuer, "SetIssuer", "go");
-@@clientName(updateCertificateIssuer, "UpdateIssuer", "go");
-@@clientName(getCertificateIssuer, "GetIssuer", "go");
-@@clientName(deleteCertificateIssuer, "DeleteIssuer", "go");
 @@clientName(CertificateIssuerListResult, "IssuerPropertiesListResult", "go");
 
 @@clientName(Action, "LifetimeActionType", "go");

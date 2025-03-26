@@ -4,10 +4,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
-using Azure.Core;
-using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace KeyVault;
@@ -28,6 +25,7 @@ op getCertificates is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
 
     /**
@@ -110,6 +108,7 @@ op getCertificateIssuers is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   CertificateIssuerListResult
@@ -129,6 +128,7 @@ op setCertificateIssuer is KeyVaultOperation<
      * The name of the issuer. The value you provide may be copied globally for the purpose of running the service. The value provided should not include personally identifiable or sensitive information.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
 
     /**
@@ -155,6 +155,7 @@ op updateCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
 
     /**
@@ -181,6 +182,7 @@ op getCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
   },
   IssuerBundle
@@ -199,6 +201,7 @@ op deleteCertificateIssuer is KeyVaultOperation<
      * The name of the issuer.
      */
     @path("issuer-name")
+    @clientName("name", "go")
     issuerName: string;
   },
   IssuerBundle
@@ -283,6 +286,7 @@ op getCertificateVersions is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
   },
   CertificateListResult
@@ -538,6 +542,7 @@ op getDeletedCertificates is KeyVaultOperation<
     @maxValue(25)
     @minValue(1)
     @query("maxresults")
+    @clientName("MaxResults", "go")
     maxresults?: int32;
 
     /**

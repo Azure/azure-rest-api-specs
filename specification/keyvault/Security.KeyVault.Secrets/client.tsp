@@ -3,11 +3,17 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(KeyVault, "Client", "go");
 @@clientName(KeyVault, "Secret", "java");
 @@clientName(KeyVault, "Secret", "rust");
+@@clientName(KeyVault, "Client", "go");
 
 using KeyVault;
+
+// go renames
+@@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
+@@clientName(getSecrets, "ListSecretProperties", "go");
+@@clientName(getSecretVersions, "ListSecretPropertiesVersions", "go");
+@@clientName(updateSecret, "UpdateSecretProperties", "go");
 
 // renaming SecretItem to SecretProperties.
 // renaming existing SecretProperties to something else
@@ -26,11 +32,5 @@ using KeyVault;
   "go"
 );
 @@clientName(SecretListResult, "SecretPropertiesListResult", "go");
-
-@@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
-@@clientName(getSecrets, "ListSecretProperties", "go");
-@@clientName(getSecretVersions, "ListSecretPropertiesVersions", "go");
-@@clientName(updateSecret, "UpdateSecretProperties", "go");
-
 @@clientName(SecretRestoreParameters.secretBundleBackup, "SecretBackup", "go");
 @@clientName(SecretBundle.kid, "KID", "go");
