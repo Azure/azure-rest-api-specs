@@ -40,10 +40,10 @@
           "BingCustomConfigurations"
         ],
         "description": "Creates a Bing Custom Search configuration.",
-        "operationId": "Configurations_Create",
+        "operationId": "Configurations_CreateOrUpdate",
         "x-ms-examples": {
           "Create Configuration": {
-            "$ref": "./examples/CreateConfiguration.json"
+            "$ref": "./examples/CreateOrUpdateConfiguration.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -91,68 +91,6 @@
           },
           "default": {
             "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "BingCustomConfigurations"
-        ],
-        "description": "Updates a Bing Custom Search configuration.",
-        "operationId": "Configurations_Update",
-        "x-ms-examples": {
-          "Update Configuration": {
-            "$ref": "./examples/UpdateConfiguration.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/configurationNameParameter"
-          },
-          {
-            "name": "configuration",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BingCustomConfiguration"
-            },
-            "description": "The parameters to update in the configuration."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The update completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BingCustomConfiguration"
-            }
-          },
-          "202": {
-            "description": "The update was successfully started and will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/BingCustomConfiguration"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
