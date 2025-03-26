@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2025-01-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-01-01-preview'
 input-file:
   - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
-  - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
+  - Microsoft.Insights/preview/2024-03-01-preview/tsp-output/openapi.json
   - Microsoft.Insights/preview/2025-01-01-preview/scheduledQueryRule_API.json
 ```
 
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
+  - Microsoft.Insights/preview/2024-03-01-preview/tsp-output/openapi.json
 ```
 
 ### Tag: package-preview-2024-10
