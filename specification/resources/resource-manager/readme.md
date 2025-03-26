@@ -1645,6 +1645,15 @@ directive:
   - suppress: PutResponseCodes
     from: SubscriptionFeatureRegistration.json
     reason: "No change in latest API version"
+  - suppress: RepeatedPathInfo
+    from: SubscriptionFeatureRegistration.json
+    reason: "No change in latest API version"
+  - suppress: AvoidAdditionalProperties
+    from: SubscriptionFeatureRegistration.json
+    reason: "No change in latest API version"
+  - suppress: XmsParameterLocation
+    from: SubscriptionFeatureRegistration.json
+    reason: "No change in latest API version"
 ```
 
 ---
