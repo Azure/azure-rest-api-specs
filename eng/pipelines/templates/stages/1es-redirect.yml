@@ -41,11 +41,6 @@ extends:
         policy: M365
       stages: ${{ parameters.stages }}
     ${{ else }}:
-      settings:
-        enableAllTools: false
       sdl:
-        sourceAnalysisPool:
-          name: azsdk-pool
-          image: windows-2022
-          os: windows
+        enableAllTools: false
       stages: ${{ parameters.stages }}
