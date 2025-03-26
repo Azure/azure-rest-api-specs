@@ -39,7 +39,7 @@
         "tags": [
           "BingCustomConfigurations"
         ],
-        "description": "Creates a Bing Custom Search configuration.",
+        "description": "Creates or Updates a Bing Custom Search configuration.",
         "operationId": "Configurations_CreateOrUpdate",
         "x-ms-examples": {
           "Create Configuration": {
@@ -67,7 +67,7 @@
             "schema": {
               "$ref": "#/definitions/BingCustomConfiguration"
             },
-            "description": "The parameters of the configuration to create."
+            "description": "The parameters of the configuration to create or update."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -78,13 +78,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource is successfully created or already existed.",
+            "description": "The resource is successfully created or updated.",
             "schema": {
               "$ref": "#/definitions/BingCustomConfiguration"
             }
           },
           "201": {
-            "description": "The resource is created and the operation will complete asynchronously",
+            "description": "The resource is created or updated and the operation will complete asynchronously",
             "schema": {
               "$ref": "#/definitions/BingCustomConfiguration"
             }
