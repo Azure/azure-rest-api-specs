@@ -16,9 +16,7 @@ options:
   "@azure-tools/typespec-ts":
     is-modular-library: true
     generate-metadata: true
-    hierarchy-client: false
     experimental-extensible-enums: true
-    enable-operation-group: true
     clear-output-folder: true
     package-dir: "arm-chaos"
     flavor: "azure"
@@ -26,7 +24,7 @@ options:
       name: "@azure/arm-chaos"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-chaos"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.chaos"
     flavor: "azure"
     generate-test: true
     generate-sample: true
