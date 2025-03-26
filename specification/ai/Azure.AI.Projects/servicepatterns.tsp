@@ -114,6 +114,21 @@ namespace Azure.AI.Projects.ServicePatterns {
     TResponse
   >;
 
+  @Rest.action
+  op UnversionedResourceAction<
+    TEntityType extends Reflection.Model,
+    TParams,
+    TResponse
+  > is Azure.Core.Foundations.ResourceOperation<
+    TEntityType,
+    {
+      @doc("Parameters for the action")
+      @Http.bodyRoot
+      body: TParams;
+    },
+    TResponse
+  >;
+
   namespace BuildingBlocks {
     alias CoreOps = Azure.Core.StandardResourceOperations;
     alias RepeatableCoreOps = Azure.Core.ResourceOperations<Azure.Core.Traits.SupportsRepeatableRequests &
