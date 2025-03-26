@@ -58,10 +58,10 @@ op uploadFile is Azure.Core.Foundations.Operation<
       @doc("The file data, in bytes.")
       @clientName("Data", "csharp")
       file: HttpPart<File>;
-
+  
       @doc("The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.")
       purpose: HttpPart<FilePurpose>;
-
+  
       /*
        * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
        *            in the multipart Content-Disposition header for the data section and can be provided independently of
