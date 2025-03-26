@@ -7,7 +7,7 @@ import "../models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Projects;
 
 /**
  * An abstract representation of a structured content item within a chat message.

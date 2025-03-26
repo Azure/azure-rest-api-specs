@@ -13,10 +13,6 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
-alias ServiceTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests;
-
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("evaluations")

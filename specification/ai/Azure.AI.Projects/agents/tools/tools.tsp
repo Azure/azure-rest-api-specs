@@ -1,4 +1,4 @@
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Projects;
 
 /**
  * Represents a JSON schema describing object properties and required fields.

@@ -1,7 +1,7 @@
 import "../messages/messages.tsp";
 import "../models.tsp";
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Projects;
 
 /**
  * Represents advanced options for controlling agent completions.

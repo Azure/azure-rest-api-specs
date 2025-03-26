@@ -12,21 +12,13 @@ using Azure.Core.Traits;
 using Azure.Core.Foundations;
 using Streams;
 
-namespace Azure.AI.Projects.Agents;
-
-/**
- * Bundle standard Azure behaviors into a single alias (client request IDs,
- * no conditional requests, no repeatable requests, etc.).
- */
-alias ServiceTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests;
+namespace Azure.AI.Projects;
 
 /**
  * An alias for standard Azure resource operations with our chosen traits.
  * This grants us ResourceRead, ResourceList, ResourceCreateOrReplace, etc.
  */
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias AgentOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 /**
  * MESSAGES
@@ -42,27 +34,27 @@ interface Messages {
    * Creates (sends) a new chat message, returning the created ChatMessage.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  sendMessage is Operations.ResourceCreateWithServiceProvidedName<ChatMessage>;
+  sendMessage is AgentOperations.ResourceCreateWithServiceProvidedName<ChatMessage>;
 
   /**
    * Retrieves (reads) an existing chat message.
    */
-  getMessage is Operations.ResourceRead<ChatMessage>;
+  getMessage is AgentOperations.ResourceRead<ChatMessage>;
 
   /**
    * Updates an existing chat message (or creates if not found) and returns the updated message.
    */
-  updateMessage is Operations.ResourceCreateOrReplace<ChatMessage>;
+  updateMessage is AgentOperations.ResourceCreateOrReplace<ChatMessage>;
 
   /**
    * Deletes a chat message. Returns 204 on success.
    */
-  deleteMessage is Operations.ResourceDelete<ChatMessage>;
+  deleteMessage is AgentOperations.ResourceDelete<ChatMessage>;
 
   /**
    * Lists chat messages, returning a collection of ChatMessage objects.
    */
-  listMessages is Operations.ResourceList<ChatMessage>;
+  listMessages is AgentOperations.ResourceList<ChatMessage>;
 }
 
 /**
@@ -75,27 +67,27 @@ interface Threads {
    * Creates a new Thread and returns it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createThread is Operations.ResourceCreateWithServiceProvidedName<Thread>;
+  createThread is AgentOperations.ResourceCreateWithServiceProvidedName<Thread>;
 
   /**
    * Retrieves an existing thread by its ID.
    */
-  getThread is Operations.ResourceRead<Thread>;
+  getThread is AgentOperations.ResourceRead<Thread>;
 
   /**
    * Updates or replaces a thread by its ID, returning the updated Thread.
    */
-  updateThread is Operations.ResourceCreateOrReplace<Thread>;
+  updateThread is AgentOperations.ResourceCreateOrReplace<Thread>;
 
   /**
    * Deletes a thread, returning 204 on success.
    */
-  deleteThread is Operations.ResourceDelete<Thread>;
+  deleteThread is AgentOperations.ResourceDelete<Thread>;
 
   /**
    * Lists all threads, returning an array of Thread items.
    */
-  listThreads is Operations.ResourceList<Thread>;
+  listThreads is AgentOperations.ResourceList<Thread>;
 }
 
 /**
@@ -110,32 +102,32 @@ interface Agents {
    * Creates a new Agent resource and returns it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createAgent is Operations.ResourceCreateWithServiceProvidedName<Agent>;
+  createAgent is AgentOperations.ResourceCreateWithServiceProvidedName<Agent>;
 
   /**
    * Retrieves an existing Agent by its ID.
    */
-  getAgent is Operations.ResourceRead<Agent>;
+  getAgent is AgentOperations.ResourceRead<Agent>;
 
   /**
    * Updates or replaces an agent and returns the updated resource.
    */
-  updateAgent is Operations.ResourceCreateOrReplace<Agent>;
+  updateAgent is AgentOperations.ResourceCreateOrReplace<Agent>;
 
   /**
    * Deletes an Agent by its ID, returning 204 on success.
    */
-  deleteAgent is Operations.ResourceDelete<Agent>;
+  deleteAgent is AgentOperations.ResourceDelete<Agent>;
 
   /**
    * Lists all Agents, returning an array of Agent objects.
    */
-  listAgents is Operations.ResourceList<Agent>;
+  listAgents is AgentOperations.ResourceList<Agent>;
 
   /**
    * Requests a completion for the entire “Agents” collection,\nusing CompleteParams as input and returning an AgentCompletion.
    */
-  complete is Operations.ResourceCollectionAction<
+  complete is AgentOperations.ResourceCollectionAction<
     Agent,
     CompleteParams,
     AgentCompletion
@@ -145,7 +137,7 @@ interface Agents {
    * Requests a streaming completion for the entire “Agents” collection,\nreturning a stream of StreamingAgentCompletionUpdate items.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  stream is Operations.ResourceCollectionAction<
+  stream is AgentOperations.ResourceCollectionAction<
     Agent,
     {
       ...CompleteParams;
@@ -157,7 +149,7 @@ interface Agents {
    * Requests a completion for a specific Agent, returning an AgentCompletion.
    */
   @action("complete")
-  completeByAgent is Operations.ResourceAction<
+  completeByAgent is AgentOperations.ResourceAction<
     Agent,
     {
       ...AgentCompleteParams;
@@ -170,7 +162,7 @@ interface Agents {
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
   @action("stream")
-  streamByAgent is Operations.ResourceAction<
+  streamByAgent is AgentOperations.ResourceAction<
     Agent,
     {
       ...AgentCompleteParams;

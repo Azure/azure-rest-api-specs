@@ -47,6 +47,10 @@ namespace Azure.AI {
 )
 @versioned(Versions)
 namespace Azure.AI.Projects {
+  alias ServiceTraits = SupportsClientRequestId &
+    NoRepeatableRequests &
+    NoConditionalRequests;
+
   @doc("Azure AI API versions")
   enum Versions {
     @doc("Azure AI API version 2025-05-01-preview.")

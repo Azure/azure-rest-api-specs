@@ -111,7 +111,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.Agent"
+              "$ref": "#/definitions/Agent"
             }
           }
         ],
@@ -169,7 +169,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.Agent"
+              "$ref": "#/definitions/Agent"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -216,7 +216,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.Agent"
+              "$ref": "#/definitions/Agent"
             }
           }
         ],
@@ -224,7 +224,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.Agent"
+              "$ref": "#/definitions/Agent"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -237,7 +237,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Agents.Agent"
+              "$ref": "#/definitions/Agent"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -328,7 +328,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.AgentCompleteParams"
+              "$ref": "#/definitions/AgentCompleteParams"
             }
           }
         ],
@@ -336,7 +336,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.AgentCompletion"
+              "$ref": "#/definitions/AgentCompletion"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -384,7 +384,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.AgentCompleteParams"
+              "$ref": "#/definitions/AgentCompleteParams"
             }
           }
         ],
@@ -430,7 +430,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.CompleteParams"
+              "$ref": "#/definitions/CompleteParams"
             }
           }
         ],
@@ -438,7 +438,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.AgentCompletion"
+              "$ref": "#/definitions/AgentCompletion"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -479,7 +479,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.CompleteParams"
+              "$ref": "#/definitions/CompleteParams"
             }
           }
         ],
@@ -1819,7 +1819,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.Thread"
+              "$ref": "#/definitions/Thread"
             }
           }
         ],
@@ -1877,7 +1877,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.Thread"
+              "$ref": "#/definitions/Thread"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -1924,7 +1924,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.Thread"
+              "$ref": "#/definitions/Thread"
             }
           }
         ],
@@ -1932,7 +1932,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.Thread"
+              "$ref": "#/definitions/Thread"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -1945,7 +1945,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Agents.Thread"
+              "$ref": "#/definitions/Thread"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -2086,7 +2086,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
+              "$ref": "#/definitions/ChatMessage"
             }
           }
         ],
@@ -2151,7 +2151,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
+              "$ref": "#/definitions/ChatMessage"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -2205,7 +2205,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
+              "$ref": "#/definitions/ChatMessage"
             }
           }
         ],
@@ -2213,7 +2213,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
+              "$ref": "#/definitions/ChatMessage"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -2226,7 +2226,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Agents.ChatMessage"
+              "$ref": "#/definitions/ChatMessage"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -2303,17 +2303,7 @@
     }
   },
   "definitions": {
-    "AadCredential": {
-      "type": "object",
-      "description": "AAD Credential definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseCredential"
-        }
-      ],
-      "x-ms-discriminator-value": "AAD"
-    },
-    "Agents.AIContent": {
+    "AIContent": {
       "type": "object",
       "description": "An abstract representation of a structured content item within a chat message.",
       "properties": {
@@ -2326,7 +2316,17 @@
         "type"
       ]
     },
-    "Agents.Agent": {
+    "AadCredential": {
+      "type": "object",
+      "description": "AAD Credential definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCredential"
+        }
+      ],
+      "x-ms-discriminator-value": "AAD"
+    },
+    "Agent": {
       "type": "object",
       "description": "Represents an AI agent with configuration, instructions, and tool access.",
       "properties": {
@@ -2351,14 +2351,14 @@
           "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
         },
         "agentModel": {
-          "$ref": "#/definitions/Agents.AgentModel",
+          "$ref": "#/definitions/AgentModel",
           "description": "The model definition for this agent."
         },
         "instructions": {
           "type": "array",
           "description": "Instructions provided to guide how this agent operates.",
           "items": {
-            "$ref": "#/definitions/Agents.ChatMessage"
+            "$ref": "#/definitions/ChatMessage"
           },
           "x-ms-identifiers": []
         },
@@ -2366,12 +2366,12 @@
           "type": "array",
           "description": "A list of tool definitions available to the agent.",
           "items": {
-            "$ref": "#/definitions/Agents.AgentToolDefinition"
+            "$ref": "#/definitions/AgentToolDefinition"
           },
           "x-ms-identifiers": []
         },
         "toolChoice": {
-          "$ref": "#/definitions/Agents.ToolChoiceBehavior",
+          "$ref": "#/definitions/ToolChoiceBehavior",
           "description": "How the agent should choose among provided tools."
         }
       },
@@ -2380,19 +2380,19 @@
         "agentModel"
       ]
     },
-    "Agents.AgentCompleteParams": {
+    "AgentCompleteParams": {
       "type": "object",
       "description": "Parameters for creating a new completion with agent overrides.",
       "properties": {
         "overrides": {
-          "$ref": "#/definitions/Agents.AgentOptions",
+          "$ref": "#/definitions/AgentOptions",
           "description": "The overrides for the agent responsible for generating the completion."
         },
         "input": {
           "type": "array",
           "description": "The list of input messages for the completion.",
           "items": {
-            "$ref": "#/definitions/Agents.ChatMessage"
+            "$ref": "#/definitions/ChatMessage"
           },
           "x-ms-identifiers": []
         },
@@ -2408,7 +2408,7 @@
           }
         },
         "options": {
-          "$ref": "#/definitions/Agents.CompletionsOptions",
+          "$ref": "#/definitions/CompletionsOptions",
           "description": "Optional configuration for completion generation."
         },
         "userId": {
@@ -2425,7 +2425,7 @@
         "input"
       ]
     },
-    "Agents.AgentCompletion": {
+    "AgentCompletion": {
       "type": "object",
       "description": "An agent-generated completion record, including messages and status.",
       "properties": {
@@ -2465,7 +2465,7 @@
           "type": "array",
           "description": "List of output messages generated by the agent.",
           "items": {
-            "$ref": "#/definitions/Agents.ChatMessage"
+            "$ref": "#/definitions/ChatMessage"
           },
           "x-ms-identifiers": []
         },
@@ -2474,7 +2474,7 @@
           "description": "Identifier for the thread associated with the completion."
         },
         "usage": {
-          "$ref": "#/definitions/Agents.CompletionUsage",
+          "$ref": "#/definitions/CompletionUsage",
           "description": "Token usage details for this completion."
         },
         "incompleteDetails": {
@@ -2503,7 +2503,7 @@
         "incompleteDetails"
       ]
     },
-    "Agents.AgentMessage": {
+    "AgentMessage": {
       "type": "object",
       "description": "An agent message within a chat, always with the 'agent' role.",
       "properties": {
@@ -2518,12 +2518,12 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Agents.ChatMessage"
+          "$ref": "#/definitions/ChatMessage"
         }
       ],
       "x-ms-discriminator-value": "agent"
     },
-    "Agents.AgentModel": {
+    "AgentModel": {
       "type": "object",
       "description": "Represents the model or provider-specific data used by the agent.",
       "properties": {
@@ -2540,7 +2540,7 @@
           "description": "An endpoint where the provider can be reached, if applicable."
         },
         "options": {
-          "$ref": "#/definitions/Agents.JSONAny",
+          "$ref": "#/definitions/JSONAny",
           "description": "Provider-specific configuration and options (JSON-like structure)."
         }
       },
@@ -2550,7 +2550,7 @@
         "provider"
       ]
     },
-    "Agents.AgentOptions": {
+    "AgentOptions": {
       "type": "object",
       "description": "Options used when creating or updating an Agent.",
       "properties": {
@@ -2559,14 +2559,14 @@
           "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
         },
         "agentModel": {
-          "$ref": "#/definitions/Agents.AgentModel",
+          "$ref": "#/definitions/AgentModel",
           "description": "The model definition for this agent."
         },
         "instructions": {
           "type": "array",
           "description": "Instructions provided to guide how this agent operates.",
           "items": {
-            "$ref": "#/definitions/Agents.ChatMessage"
+            "$ref": "#/definitions/ChatMessage"
           },
           "x-ms-identifiers": []
         },
@@ -2574,12 +2574,12 @@
           "type": "array",
           "description": "A list of tool definitions available to the agent.",
           "items": {
-            "$ref": "#/definitions/Agents.AgentToolDefinition"
+            "$ref": "#/definitions/AgentToolDefinition"
           },
           "x-ms-identifiers": []
         },
         "toolChoice": {
-          "$ref": "#/definitions/Agents.ToolChoiceBehavior",
+          "$ref": "#/definitions/ToolChoiceBehavior",
           "description": "How the agent should choose among provided tools."
         }
       },
@@ -2587,7 +2587,7 @@
         "agentModel"
       ]
     },
-    "Agents.AgentToolDefinition": {
+    "AgentToolDefinition": {
       "type": "object",
       "description": "Represents a definition of a tool that an agent may use, used in a polymorphic manner.",
       "properties": {
@@ -2596,7 +2596,7 @@
           "description": "Discriminates the various child 'tool definition' types."
         },
         "options": {
-          "$ref": "#/definitions/Agents.AgentToolOptions",
+          "$ref": "#/definitions/AgentToolOptions",
           "description": "Additional options that specify the behavior of this tool (also polymorphic)."
         },
         "override": {
@@ -2612,7 +2612,7 @@
               "description": "An alternate description for the tool."
             },
             "parameters": {
-              "$ref": "#/definitions/Agents.JSONSchema",
+              "$ref": "#/definitions/JSONSchema",
               "description": "An alternate JSON schema for the tool's parameters."
             }
           }
@@ -2623,7 +2623,7 @@
         "type"
       ]
     },
-    "Agents.AgentToolOptions": {
+    "AgentToolOptions": {
       "type": "object",
       "description": "Base type for any agent tool-specific options, used in a polymorphic manner.",
       "properties": {
@@ -2637,7 +2637,7 @@
         "type"
       ]
     },
-    "Agents.Annotations": {
+    "Annotations": {
       "type": "object",
       "description": "Annotations applied to parts of the message or content.",
       "properties": {
@@ -2671,1061 +2671,6 @@
       "required": [
         "type"
       ]
-    },
-    "Agents.AudioContent": {
-      "type": "object",
-      "description": "A structured chat content item containing an audio reference.",
-      "properties": {
-        "duration": {
-          "type": "integer",
-          "format": "int16",
-          "description": "Duration of audio in seconds (optional)."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "The file name for this binary content."
-        },
-        "mimeType": {
-          "type": "string",
-          "description": "The MIME type for this binary content."
-        },
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "URI where the binary content can be retrieved."
-        },
-        "dataUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "Data URI containing the binary content inlined."
-        },
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "description": "Raw bytes for the binary content."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AIContent"
-        }
-      ],
-      "x-ms-discriminator-value": "audio"
-    },
-    "Agents.AuthorRole": {
-      "type": "string",
-      "description": "Possible roles of the message author.",
-      "enum": [
-        "user",
-        "agent",
-        "system",
-        "tool",
-        "developer"
-      ],
-      "x-ms-enum": {
-        "name": "AuthorRole",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "user",
-            "value": "user"
-          },
-          {
-            "name": "agent",
-            "value": "agent"
-          },
-          {
-            "name": "system",
-            "value": "system"
-          },
-          {
-            "name": "tool",
-            "value": "tool"
-          },
-          {
-            "name": "developer",
-            "value": "developer"
-          }
-        ]
-      }
-    },
-    "Agents.AutoToolChoiceBehavior": {
-      "type": "object",
-      "description": "Behavior specifying an automatic choice among the given tools.",
-      "properties": {
-        "toolNames": {
-          "type": "array",
-          "description": "The tool names from which the agent can automatically choose.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "toolNames"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.ToolChoiceBehavior"
-        }
-      ],
-      "x-ms-discriminator-value": "auto"
-    },
-    "Agents.AzureAgentModel": {
-      "type": "object",
-      "description": "A specialized AgentModel for Azure-based providers.",
-      "properties": {
-        "options": {
-          "$ref": "#/definitions/Agents.AzureModelOptions",
-          "description": "The provider-specific options for this Azure-based model."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AgentModel"
-        }
-      ],
-      "x-ms-discriminator-value": "azure"
-    },
-    "Agents.AzureModelOptions": {
-      "type": "object",
-      "description": "A set of provider-specific configuration and behavior options for Azure-based models.",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Identifies this model options object as an Azure-based provider.",
-          "enum": [
-            "azure"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and topP for the same completions request as the\ninteraction of these two settings is difficult to predict."
-        },
-        "topP": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and topP for the same completions request as the\ninteraction of these two settings is difficult to predict."
-        }
-      },
-      "required": [
-        "provider"
-      ]
-    },
-    "Agents.BingGroundingToolDefinition": {
-      "type": "object",
-      "description": "A tool definition for Microsoft Bing grounding.",
-      "properties": {
-        "connectionName": {
-          "type": "string",
-          "description": "The name of the Bing grounding connection."
-        }
-      },
-      "required": [
-        "connectionName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AgentToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "Microsoft.BingGrounding"
-    },
-    "Agents.ChatMessage": {
-      "type": "object",
-      "description": "A base model for representing a chat message.",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "The ID of the user who created the message (if applicable)."
-        },
-        "agentId": {
-          "type": "string",
-          "description": "The ID of the agent who created the message (if applicable)."
-        },
-        "messageId": {
-          "type": "string",
-          "description": "A unique identifier for this message.",
-          "readOnly": true
-        },
-        "completionId": {
-          "type": "string",
-          "description": "A unique completion ID, if this message was generated by a completion process."
-        },
-        "threadId": {
-          "type": "string",
-          "description": "The thread to which this message belongs.",
-          "readOnly": true
-        },
-        "role": {
-          "$ref": "#/definitions/Agents.AuthorRole",
-          "description": "The role of this message's author."
-        },
-        "content": {
-          "type": "array",
-          "description": "The contents of the message.",
-          "items": {
-            "$ref": "#/definitions/Agents.AIContent"
-          },
-          "x-ms-identifiers": []
-        },
-        "authorName": {
-          "type": "string",
-          "description": "An optional display name for the author."
-        },
-        "createdAt": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The timestamp (in Unix time) when this message was created."
-        },
-        "completedAt": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The timestamp (in Unix time) when this message was completed, if applicable."
-        }
-      },
-      "discriminator": "role",
-      "required": [
-        "messageId",
-        "threadId",
-        "role",
-        "content"
-      ]
-    },
-    "Agents.CodeInterpreterToolDefinition": {
-      "type": "object",
-      "description": "A tool definition for the OpenAI Code Interpreter.",
-      "properties": {
-        "fileIds": {
-          "type": "array",
-          "description": "A list of file IDs this code interpreter requires.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "fileIds"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AgentToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "OpenAI.CodeInterpreter"
-    },
-    "Agents.CompleteParams": {
-      "type": "object",
-      "description": "Parameters for creating a new completion request.",
-      "properties": {
-        "agent": {
-          "$ref": "#/definitions/Agents.AgentOptions",
-          "description": "The agent responsible for generating the completion."
-        },
-        "input": {
-          "type": "array",
-          "description": "The list of input messages for the completion.",
-          "items": {
-            "$ref": "#/definitions/Agents.ChatMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Optional identifier for an existing conversation thread."
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Optional metadata associated with the completion request.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "options": {
-          "$ref": "#/definitions/Agents.CompletionsOptions",
-          "description": "Optional configuration for completion generation."
-        },
-        "userId": {
-          "type": "string",
-          "description": "Identifier for the user making the request."
-        },
-        "store": {
-          "type": "boolean",
-          "description": "Flag indicating whether to store the completion and associated messages."
-        }
-      },
-      "required": [
-        "agent",
-        "input"
-      ]
-    },
-    "Agents.CompletionUsage": {
-      "type": "object",
-      "description": "Detailed token usage data for a completion request.",
-      "properties": {
-        "outputTokens": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of completion tokens used over the course of the run step."
-        },
-        "inputTokens": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of prompt tokens used over the course of the run step."
-        },
-        "totalTokens": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total number of tokens used (prompt + completion)."
-        },
-        "inputTokenDetails": {
-          "type": "object",
-          "description": "Details of the prompt tokens.",
-          "properties": {
-            "cachedTokens": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The number of cached prompt tokens."
-            }
-          }
-        },
-        "outputTokenDetails": {
-          "type": "object",
-          "description": "Breakdown of tokens used in a completion.",
-          "properties": {
-            "reasoningTokens": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Tokens generated by the model for reasoning."
-            }
-          }
-        }
-      },
-      "required": [
-        "outputTokens",
-        "inputTokens",
-        "totalTokens"
-      ]
-    },
-    "Agents.CompletionsOptions": {
-      "type": "object",
-      "description": "Represents advanced options for controlling agent completions.",
-      "properties": {
-        "truncationStrategy": {
-          "$ref": "#/definitions/Agents.TruncationStrategy",
-          "description": "Strategy for truncating messages when input exceeds model limits."
-        }
-      }
-    },
-    "Agents.ContentFilterContent": {
-      "type": "object",
-      "description": "A structured chat content item containing a content filter.",
-      "properties": {
-        "contentFilter": {
-          "type": "string",
-          "description": "Content filter data."
-        },
-        "detected": {
-          "type": "boolean",
-          "description": "Whether content was flagged/detected."
-        }
-      },
-      "required": [
-        "contentFilter",
-        "detected"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AIContent"
-        }
-      ],
-      "x-ms-discriminator-value": "contentFilter"
-    },
-    "Agents.DeveloperMessage": {
-      "type": "object",
-      "description": "A developer message within a chat, always with the 'developer' role.",
-      "properties": {
-        "content": {
-          "type": "array",
-          "description": "The contents of the developer message.",
-          "items": {
-            "$ref": "#/definitions/Agents.TextContent"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.ChatMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "developer"
-    },
-    "Agents.FileContent": {
-      "type": "object",
-      "description": "A structured chat content item containing a file data item.",
-      "properties": {
-        "fileName": {
-          "type": "string",
-          "description": "The file name for this binary content."
-        },
-        "mimeType": {
-          "type": "string",
-          "description": "The MIME type for this binary content."
-        },
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "URI where the binary content can be retrieved."
-        },
-        "dataUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "Data URI containing the binary content inlined."
-        },
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "description": "Raw bytes for the binary content."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AIContent"
-        }
-      ],
-      "x-ms-discriminator-value": "file"
-    },
-    "Agents.FileSearchToolDefinition": {
-      "type": "object",
-      "description": "A tool definition for the OpenAI File Search feature.",
-      "properties": {
-        "maxNumResults": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of search results to return (optional)."
-        },
-        "rankingOptions": {
-          "type": "object",
-          "description": "Extra ranking options, including a threshold and a ranker.",
-          "properties": {
-            "scoreThreshold": {
-              "type": "number",
-              "format": "float",
-              "description": "The minimum score to include (optional)."
-            },
-            "ranker": {
-              "type": "string",
-              "description": "The name of the ranker algorithm."
-            }
-          },
-          "required": [
-            "ranker"
-          ]
-        },
-        "fileIds": {
-          "type": "array",
-          "description": "A list of file IDs to be searched.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "fileIds"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AgentToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "OpenAI.FileSearch"
-    },
-    "Agents.FunctionToolOptions": {
-      "type": "object",
-      "description": "Options for a function-based tool behavior.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The function/tool name."
-        },
-        "description": {
-          "type": "string",
-          "description": "An optional description for the function-based tool."
-        },
-        "parameters": {
-          "$ref": "#/definitions/Agents.JSONSchema",
-          "description": "A JSON schema describing the function's parameters."
-        },
-        "strict": {
-          "type": "boolean",
-          "description": "Indicates whether strict validation is required."
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AgentToolOptions"
-        }
-      ],
-      "x-ms-discriminator-value": "Function"
-    },
-    "Agents.ImageContent": {
-      "type": "object",
-      "description": "A structured chat content item containing an image reference.",
-      "properties": {
-        "width": {
-          "type": "integer",
-          "format": "int16",
-          "description": "Width of the image in pixels (optional)."
-        },
-        "height": {
-          "type": "integer",
-          "format": "int16",
-          "description": "Height of the image in pixels (optional)."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "The file name for this binary content."
-        },
-        "mimeType": {
-          "type": "string",
-          "description": "The MIME type for this binary content."
-        },
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "URI where the binary content can be retrieved."
-        },
-        "dataUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "Data URI containing the binary content inlined."
-        },
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "description": "Raw bytes for the binary content."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AIContent"
-        }
-      ],
-      "x-ms-discriminator-value": "image"
-    },
-    "Agents.JSONAny": {
-      "type": "object",
-      "description": "A JSON-compatible type that can be a primitive, object, or array.",
-      "properties": {
-        "stringValue": {
-          "type": "string",
-          "description": "A string value, if present."
-        },
-        "intValue": {
-          "type": "integer",
-          "format": "int64",
-          "description": "A 64-bit integer value, if present."
-        },
-        "floatValue": {
-          "type": "number",
-          "format": "double",
-          "description": "A floating-point (double precision) value, if present."
-        },
-        "boolValue": {
-          "type": "boolean",
-          "description": "A boolean value, if present."
-        },
-        "nullValue": {
-          "type": "boolean",
-          "description": "Indicates this represents a JSON null if set to true."
-        },
-        "arrayValue": {
-          "type": "array",
-          "description": "A JSON array, if present, expressed as an array of JSONAny elements.",
-          "items": {
-            "$ref": "#/definitions/Agents.JSONAny"
-          },
-          "x-ms-identifiers": []
-        },
-        "objectValue": {
-          "type": "object",
-          "description": "A JSON object, if present, expressed as a dictionary from string to JSONAny.",
-          "additionalProperties": {
-            "$ref": "#/definitions/Agents.JSONAny"
-          }
-        }
-      }
-    },
-    "Agents.JSONSchema": {
-      "type": "object",
-      "description": "Represents a JSON schema describing object properties and required fields.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The JSON schema type (e.g., 'object', 'string', 'number')."
-        },
-        "properties": {
-          "type": "object",
-          "description": "The properties defined in this JSON schema.",
-          "additionalProperties": {
-            "$ref": "#/definitions/Agents.JSONSchema"
-          }
-        },
-        "required": {
-          "type": "array",
-          "description": "A list of required property names in this schema.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "type",
-        "properties"
-      ]
-    },
-    "Agents.NoneToolChoiceBehavior": {
-      "type": "object",
-      "description": "Behavior specifying that no tools may be chosen.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.ToolChoiceBehavior"
-        }
-      ],
-      "x-ms-discriminator-value": "none"
-    },
-    "Agents.OpenAIAgentModel": {
-      "type": "object",
-      "description": "A specialized AgentModel for OpenAI-based providers.",
-      "properties": {
-        "options": {
-          "$ref": "#/definitions/Agents.OpenAIModelOptions",
-          "description": "Provider-specific options for this OpenAI-based model."
-        }
-      },
-      "required": [
-        "options"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AgentModel"
-        }
-      ],
-      "x-ms-discriminator-value": "openai"
-    },
-    "Agents.OpenAIModelOptions": {
-      "type": "object",
-      "description": "A set of provider-specific configuration and behavior options for OpenAI.",
-      "properties": {
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and topP for the same completions request as the\ninteraction of these two settings is difficult to predict."
-        },
-        "topP": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and topP for the same completions request as the\ninteraction of these two settings is difficult to predict."
-        }
-      }
-    },
-    "Agents.OpenApiToolDefinition": {
-      "type": "object",
-      "description": "A tool definition for an OpenAI-based API described by an OpenAPI specification.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the OpenAPI-based tool."
-        },
-        "description": {
-          "type": "string",
-          "description": "A description for the tool."
-        },
-        "openApiSpec": {
-          "type": "string",
-          "description": "A string containing the raw OpenAPI specification data."
-        }
-      },
-      "required": [
-        "name",
-        "openApiSpec"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AgentToolDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "OpenAI.OpenApi"
-    },
-    "Agents.RefusalContent": {
-      "type": "object",
-      "description": "A structured chat content item containing model refusal information for a structured outputs request.",
-      "properties": {
-        "refusal": {
-          "type": "string",
-          "description": "Reason for refusal."
-        }
-      },
-      "required": [
-        "refusal"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AIContent"
-        }
-      ],
-      "x-ms-discriminator-value": "refusal"
-    },
-    "Agents.RequiredToolChoiceBehavior": {
-      "type": "object",
-      "description": "Behavior specifying that the agent must always use the listed tools.",
-      "properties": {
-        "toolNames": {
-          "type": "array",
-          "description": "The tool names that the agent must use.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "toolNames"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.ToolChoiceBehavior"
-        }
-      ],
-      "x-ms-discriminator-value": "required"
-    },
-    "Agents.StreamingAgentCompletionUpdate": {
-      "type": "object",
-      "description": "A streaming update indicating incremental changes to an agent-generated completion.",
-      "properties": {
-        "messageId": {
-          "type": "string",
-          "description": "Identifier of the message being updated."
-        },
-        "authorName": {
-          "type": "string",
-          "description": "Optional name of the message author."
-        },
-        "authorRole": {
-          "$ref": "#/definitions/Agents.AuthorRole",
-          "description": "Role of the author for the updated message."
-        },
-        "update": {
-          "$ref": "#/definitions/Agents.StreamingOperation",
-          "description": "Optional content updates from the AI."
-        },
-        "usage": {
-          "$ref": "#/definitions/Agents.CompletionUsage",
-          "description": "Token usage information associated with this streaming update."
-        }
-      },
-      "required": [
-        "messageId",
-        "usage"
-      ]
-    },
-    "Agents.StreamingOperation": {
-      "type": "object",
-      "description": "A streaming operation describing how to modify a partial response in real-time.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of operation being performed.",
-          "enum": [
-            "append",
-            "remove",
-            "replace",
-            "set"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        },
-        "jsonPath": {
-          "type": "string",
-          "description": "The JSON path to the operation."
-        },
-        "value": {
-          "$ref": "#/definitions/Agents.JSONAny",
-          "description": "The value to apply to the operation, expressed as a JSON-compatible type."
-        }
-      },
-      "required": [
-        "type",
-        "jsonPath"
-      ]
-    },
-    "Agents.SystemMessage": {
-      "type": "object",
-      "description": "A system message within a chat, always with the 'system' role.",
-      "properties": {
-        "content": {
-          "type": "array",
-          "description": "The contents of the system message.",
-          "items": {
-            "$ref": "#/definitions/Agents.TextContent"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.ChatMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "system"
-    },
-    "Agents.TextContent": {
-      "type": "object",
-      "description": "A structured chat content item containing plain text.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The text content."
-        },
-        "annotations": {
-          "type": "array",
-          "description": "A list of annotations in the text content.",
-          "items": {
-            "$ref": "#/definitions/Agents.Annotations"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "text",
-        "annotations"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AIContent"
-        }
-      ],
-      "x-ms-discriminator-value": "text"
-    },
-    "Agents.Thread": {
-      "type": "object",
-      "description": "Represents a chat thread, which can contain multiple messages.",
-      "properties": {
-        "threadId": {
-          "type": "string",
-          "description": "A unique identifier for this thread.",
-          "readOnly": true
-        },
-        "messages": {
-          "type": "array",
-          "description": "A list of messages in this thread.",
-          "items": {
-            "$ref": "#/definitions/Agents.ChatMessage"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "threadId",
-        "messages"
-      ]
-    },
-    "Agents.ToolCallContent": {
-      "type": "object",
-      "description": "A structured chat content item describing a tool call request.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the tool to call."
-        },
-        "toolCallId": {
-          "type": "string",
-          "description": "The unique ID of the tool call."
-        },
-        "arguments": {
-          "$ref": "#/definitions/Agents.JSONAny",
-          "description": "Arguments passed to this tool call, expressed as JSON-like data rather than `unknown`."
-        }
-      },
-      "required": [
-        "name",
-        "toolCallId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AIContent"
-        }
-      ],
-      "x-ms-discriminator-value": "toolCall"
-    },
-    "Agents.ToolChoiceBehavior": {
-      "type": "object",
-      "description": "The base behavior for how an agent chooses among available tools.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The kind of tool-choice strategy."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "Agents.ToolMessage": {
-      "type": "object",
-      "description": "A tool message within a chat, always with the 'tool' role.",
-      "properties": {
-        "content": {
-          "type": "array",
-          "description": "The contents of the tool message.",
-          "items": {
-            "$ref": "#/definitions/Agents.ToolResultContent"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.ChatMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "tool"
-    },
-    "Agents.ToolResultContent": {
-      "type": "object",
-      "description": "A structured chat content item describing a tool result.",
-      "properties": {
-        "toolCallId": {
-          "type": "string",
-          "description": "The ID of the tool call to which this result pertains."
-        },
-        "results": {
-          "$ref": "#/definitions/Agents.JSONAny",
-          "description": "The results returned from the tool, using JSONAny instead of `unknown`."
-        }
-      },
-      "required": [
-        "toolCallId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AIContent"
-        }
-      ],
-      "x-ms-discriminator-value": "toolResult"
-    },
-    "Agents.TruncationStrategy": {
-      "type": "object",
-      "description": "Describes how to truncate messages if they exceed model or provider limits.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of truncation strategy to apply.",
-          "enum": [
-            "auto",
-            "lastMessages"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        },
-        "lastMessages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of most recent messages to retain when using 'lastMessages' strategy."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "Agents.UserMessage": {
-      "type": "object",
-      "description": "A user message within a chat, always with the 'user' role.",
-      "properties": {
-        "content": {
-          "type": "array",
-          "description": "The contents of the user message.",
-          "items": {}
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.ChatMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "user"
-    },
-    "Agents.VideoContent": {
-      "type": "object",
-      "description": "A structured chat content item containing a video reference.",
-      "properties": {
-        "duration": {
-          "type": "integer",
-          "format": "int16",
-          "description": "Duration of video in seconds (optional)."
-        },
-        "width": {
-          "type": "integer",
-          "format": "int16",
-          "description": "Width of video in pixels (optional)."
-        },
-        "height": {
-          "type": "integer",
-          "format": "int16",
-          "description": "Height of video in pixels (optional)."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "The file name for this binary content."
-        },
-        "mimeType": {
-          "type": "string",
-          "description": "The MIME type for this binary content."
-        },
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "URI where the binary content can be retrieved."
-        },
-        "dataUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "Data URI containing the binary content inlined."
-        },
-        "data": {
-          "type": "string",
-          "format": "byte",
-          "description": "Raw bytes for the binary content."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Agents.AIContent"
-        }
-      ],
-      "x-ms-discriminator-value": "video"
     },
     "ApiKeyCredential": {
       "type": "object",
@@ -3841,6 +2786,105 @@
       }
     },
     "AssistantsApiResponseFormatOption": {},
+    "AudioContent": {
+      "type": "object",
+      "description": "A structured chat content item containing an audio reference.",
+      "properties": {
+        "duration": {
+          "type": "integer",
+          "format": "int16",
+          "description": "Duration of audio in seconds (optional)."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name for this binary content."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "The MIME type for this binary content."
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI where the binary content can be retrieved."
+        },
+        "dataUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Data URI containing the binary content inlined."
+        },
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Raw bytes for the binary content."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "audio"
+    },
+    "AuthorRole": {
+      "type": "string",
+      "description": "Possible roles of the message author.",
+      "enum": [
+        "user",
+        "agent",
+        "system",
+        "tool",
+        "developer"
+      ],
+      "x-ms-enum": {
+        "name": "AuthorRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "user",
+            "value": "user"
+          },
+          {
+            "name": "agent",
+            "value": "agent"
+          },
+          {
+            "name": "system",
+            "value": "system"
+          },
+          {
+            "name": "tool",
+            "value": "tool"
+          },
+          {
+            "name": "developer",
+            "value": "developer"
+          }
+        ]
+      }
+    },
+    "AutoToolChoiceBehavior": {
+      "type": "object",
+      "description": "Behavior specifying an automatic choice among the given tools.",
+      "properties": {
+        "toolNames": {
+          "type": "array",
+          "description": "The tool names from which the agent can automatically choose.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "toolNames"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolChoiceBehavior"
+        }
+      ],
+      "x-ms-discriminator-value": "auto"
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -3926,6 +2970,51 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
+    "AzureAgentModel": {
+      "type": "object",
+      "description": "A specialized AgentModel for Azure-based providers.",
+      "properties": {
+        "options": {
+          "$ref": "#/definitions/AzureModelOptions",
+          "description": "The provider-specific options for this Azure-based model."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentModel"
+        }
+      ],
+      "x-ms-discriminator-value": "azure"
+    },
+    "AzureModelOptions": {
+      "type": "object",
+      "description": "A set of provider-specific configuration and behavior options for Azure-based models.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Identifies this model options object as an Azure-based provider.",
+          "enum": [
+            "azure"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and topP for the same completions request as the\ninteraction of these two settings is difficult to predict."
+        },
+        "topP": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and topP for the same completions request as the\ninteraction of these two settings is difficult to predict."
+        }
+      },
+      "required": [
+        "provider"
+      ]
+    },
     "BaseCredential": {
       "type": "object",
       "description": "Base Credential definition",
@@ -3940,6 +3029,25 @@
       "required": [
         "type"
       ]
+    },
+    "BingGroundingToolDefinition": {
+      "type": "object",
+      "description": "A tool definition for Microsoft Bing grounding.",
+      "properties": {
+        "connectionName": {
+          "type": "string",
+          "description": "The name of the Bing grounding connection."
+        }
+      },
+      "required": [
+        "connectionName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.BingGrounding"
     },
     "BlobReferenceForConsumption": {
       "type": "object",
@@ -3963,6 +3071,192 @@
         "storageAccountArmId",
         "credential"
       ]
+    },
+    "ChatMessage": {
+      "type": "object",
+      "description": "A base model for representing a chat message.",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who created the message (if applicable)."
+        },
+        "agentId": {
+          "type": "string",
+          "description": "The ID of the agent who created the message (if applicable)."
+        },
+        "messageId": {
+          "type": "string",
+          "description": "A unique identifier for this message.",
+          "readOnly": true
+        },
+        "completionId": {
+          "type": "string",
+          "description": "A unique completion ID, if this message was generated by a completion process."
+        },
+        "threadId": {
+          "type": "string",
+          "description": "The thread to which this message belongs.",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/AuthorRole",
+          "description": "The role of this message's author."
+        },
+        "content": {
+          "type": "array",
+          "description": "The contents of the message.",
+          "items": {
+            "$ref": "#/definitions/AIContent"
+          },
+          "x-ms-identifiers": []
+        },
+        "authorName": {
+          "type": "string",
+          "description": "An optional display name for the author."
+        },
+        "createdAt": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The timestamp (in Unix time) when this message was created."
+        },
+        "completedAt": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The timestamp (in Unix time) when this message was completed, if applicable."
+        }
+      },
+      "discriminator": "role",
+      "required": [
+        "messageId",
+        "threadId",
+        "role",
+        "content"
+      ]
+    },
+    "CodeInterpreterToolDefinition": {
+      "type": "object",
+      "description": "A tool definition for the OpenAI Code Interpreter.",
+      "properties": {
+        "fileIds": {
+          "type": "array",
+          "description": "A list of file IDs this code interpreter requires.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fileIds"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "OpenAI.CodeInterpreter"
+    },
+    "CompleteParams": {
+      "type": "object",
+      "description": "Parameters for creating a new completion request.",
+      "properties": {
+        "agent": {
+          "$ref": "#/definitions/AgentOptions",
+          "description": "The agent responsible for generating the completion."
+        },
+        "input": {
+          "type": "array",
+          "description": "The list of input messages for the completion.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "threadId": {
+          "type": "string",
+          "description": "Optional identifier for an existing conversation thread."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Optional metadata associated with the completion request.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "options": {
+          "$ref": "#/definitions/CompletionsOptions",
+          "description": "Optional configuration for completion generation."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Identifier for the user making the request."
+        },
+        "store": {
+          "type": "boolean",
+          "description": "Flag indicating whether to store the completion and associated messages."
+        }
+      },
+      "required": [
+        "agent",
+        "input"
+      ]
+    },
+    "CompletionUsage": {
+      "type": "object",
+      "description": "Detailed token usage data for a completion request.",
+      "properties": {
+        "outputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of completion tokens used over the course of the run step."
+        },
+        "inputTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of prompt tokens used over the course of the run step."
+        },
+        "totalTokens": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of tokens used (prompt + completion)."
+        },
+        "inputTokenDetails": {
+          "type": "object",
+          "description": "Details of the prompt tokens.",
+          "properties": {
+            "cachedTokens": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The number of cached prompt tokens."
+            }
+          }
+        },
+        "outputTokenDetails": {
+          "type": "object",
+          "description": "Breakdown of tokens used in a completion.",
+          "properties": {
+            "reasoningTokens": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Tokens generated by the model for reasoning."
+            }
+          }
+        }
+      },
+      "required": [
+        "outputTokens",
+        "inputTokens",
+        "totalTokens"
+      ]
+    },
+    "CompletionsOptions": {
+      "type": "object",
+      "description": "Represents advanced options for controlling agent completions.",
+      "properties": {
+        "truncationStrategy": {
+          "$ref": "#/definitions/TruncationStrategy",
+          "description": "Strategy for truncating messages when input exceeds model limits."
+        }
+      }
     },
     "Connection": {
       "type": "object",
@@ -4051,6 +3345,30 @@
           }
         ]
       }
+    },
+    "ContentFilterContent": {
+      "type": "object",
+      "description": "A structured chat content item containing a content filter.",
+      "properties": {
+        "contentFilter": {
+          "type": "string",
+          "description": "Content filter data."
+        },
+        "detected": {
+          "type": "boolean",
+          "description": "Whether content was flagged/detected."
+        }
+      },
+      "required": [
+        "contentFilter",
+        "detected"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "contentFilter"
     },
     "CosmosDBIndex": {
       "type": "object",
@@ -4281,6 +3599,29 @@
         "sku"
       ]
     },
+    "DeveloperMessage": {
+      "type": "object",
+      "description": "A developer message within a chat, always with the 'developer' role.",
+      "properties": {
+        "content": {
+          "type": "array",
+          "description": "The contents of the developer message.",
+          "items": {
+            "$ref": "#/definitions/TextContent"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "developer"
+    },
     "EmbeddingConfiguration": {
       "type": "object",
       "description": "Embedding configuration class",
@@ -4417,6 +3758,41 @@
         ]
       }
     },
+    "FileContent": {
+      "type": "object",
+      "description": "A structured chat content item containing a file data item.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The file name for this binary content."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "The MIME type for this binary content."
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI where the binary content can be retrieved."
+        },
+        "dataUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Data URI containing the binary content inlined."
+        },
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Raw bytes for the binary content."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "file"
+    },
     "FileDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
@@ -4436,6 +3812,51 @@
       ],
       "x-ms-discriminator-value": "uri_file"
     },
+    "FileSearchToolDefinition": {
+      "type": "object",
+      "description": "A tool definition for the OpenAI File Search feature.",
+      "properties": {
+        "maxNumResults": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of search results to return (optional)."
+        },
+        "rankingOptions": {
+          "type": "object",
+          "description": "Extra ranking options, including a threshold and a ranker.",
+          "properties": {
+            "scoreThreshold": {
+              "type": "number",
+              "format": "float",
+              "description": "The minimum score to include (optional)."
+            },
+            "ranker": {
+              "type": "string",
+              "description": "The name of the ranker algorithm."
+            }
+          },
+          "required": [
+            "ranker"
+          ]
+        },
+        "fileIds": {
+          "type": "array",
+          "description": "A list of file IDs to be searched.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fileIds"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "OpenAI.FileSearch"
+    },
     "FolderDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
@@ -4445,6 +3866,37 @@
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
+    },
+    "FunctionToolOptions": {
+      "type": "object",
+      "description": "Options for a function-based tool behavior.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The function/tool name."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description for the function-based tool."
+        },
+        "parameters": {
+          "$ref": "#/definitions/JSONSchema",
+          "description": "A JSON schema describing the function's parameters."
+        },
+        "strict": {
+          "type": "boolean",
+          "description": "Indicates whether strict validation is required."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentToolOptions"
+        }
+      ],
+      "x-ms-discriminator-value": "Function"
     },
     "IdAssetReference": {
       "type": "object",
@@ -4466,6 +3918,51 @@
         }
       ],
       "x-ms-discriminator-value": "Id"
+    },
+    "ImageContent": {
+      "type": "object",
+      "description": "A structured chat content item containing an image reference.",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "format": "int16",
+          "description": "Width of the image in pixels (optional)."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int16",
+          "description": "Height of the image in pixels (optional)."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name for this binary content."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "The MIME type for this binary content."
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI where the binary content can be retrieved."
+        },
+        "dataUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Data URI containing the binary content inlined."
+        },
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Raw bytes for the binary content."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "image"
     },
     "Index": {
       "type": "object",
@@ -4585,6 +4082,77 @@
       ],
       "x-ms-discriminator-value": "dataset"
     },
+    "JSONAny": {
+      "type": "object",
+      "description": "A JSON-compatible type that can be a primitive, object, or array.",
+      "properties": {
+        "stringValue": {
+          "type": "string",
+          "description": "A string value, if present."
+        },
+        "intValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A 64-bit integer value, if present."
+        },
+        "floatValue": {
+          "type": "number",
+          "format": "double",
+          "description": "A floating-point (double precision) value, if present."
+        },
+        "boolValue": {
+          "type": "boolean",
+          "description": "A boolean value, if present."
+        },
+        "nullValue": {
+          "type": "boolean",
+          "description": "Indicates this represents a JSON null if set to true."
+        },
+        "arrayValue": {
+          "type": "array",
+          "description": "A JSON array, if present, expressed as an array of JSONAny elements.",
+          "items": {
+            "$ref": "#/definitions/JSONAny"
+          },
+          "x-ms-identifiers": []
+        },
+        "objectValue": {
+          "type": "object",
+          "description": "A JSON object, if present, expressed as a dictionary from string to JSONAny.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JSONAny"
+          }
+        }
+      }
+    },
+    "JSONSchema": {
+      "type": "object",
+      "description": "Represents a JSON schema describing object properties and required fields.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The JSON schema type (e.g., 'object', 'string', 'number')."
+        },
+        "properties": {
+          "type": "object",
+          "description": "The properties defined in this JSON schema.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JSONSchema"
+          }
+        },
+        "required": {
+          "type": "array",
+          "description": "A list of required property names in this schema.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "properties"
+      ]
+    },
     "ListSortOrder": {
       "type": "string",
       "description": "The available sorting options when requesting a list of response objects.",
@@ -4682,6 +4250,79 @@
         ]
       }
     },
+    "NoneToolChoiceBehavior": {
+      "type": "object",
+      "description": "Behavior specifying that no tools may be chosen.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolChoiceBehavior"
+        }
+      ],
+      "x-ms-discriminator-value": "none"
+    },
+    "OpenAIAgentModel": {
+      "type": "object",
+      "description": "A specialized AgentModel for OpenAI-based providers.",
+      "properties": {
+        "options": {
+          "$ref": "#/definitions/OpenAIModelOptions",
+          "description": "Provider-specific options for this OpenAI-based model."
+        }
+      },
+      "required": [
+        "options"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentModel"
+        }
+      ],
+      "x-ms-discriminator-value": "openai"
+    },
+    "OpenAIModelOptions": {
+      "type": "object",
+      "description": "A set of provider-specific configuration and behavior options for OpenAI.",
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and topP for the same completions request as the\ninteraction of these two settings is difficult to predict."
+        },
+        "topP": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and topP for the same completions request as the\ninteraction of these two settings is difficult to predict."
+        }
+      }
+    },
+    "OpenApiToolDefinition": {
+      "type": "object",
+      "description": "A tool definition for an OpenAI-based API described by an OpenAPI specification.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the OpenAPI-based tool."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description for the tool."
+        },
+        "openApiSpec": {
+          "type": "string",
+          "description": "A string containing the raw OpenAPI specification data."
+        }
+      },
+      "required": [
+        "name",
+        "openApiSpec"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "OpenAI.OpenApi"
+    },
     "OutputPathAssetReference": {
       "type": "object",
       "description": "Reference to an asset via its path in a job output.",
@@ -4710,7 +4351,7 @@
           "type": "array",
           "description": "The Agent items on this page",
           "items": {
-            "$ref": "#/definitions/Agents.Agent"
+            "$ref": "#/definitions/Agent"
           },
           "x-ms-identifiers": []
         },
@@ -4732,7 +4373,7 @@
           "type": "array",
           "description": "The ChatMessage items on this page",
           "items": {
-            "$ref": "#/definitions/Agents.ChatMessage"
+            "$ref": "#/definitions/ChatMessage"
           },
           "x-ms-identifiers": []
         },
@@ -4861,7 +4502,7 @@
           "type": "array",
           "description": "The Thread items on this page",
           "items": {
-            "$ref": "#/definitions/Agents.Thread"
+            "$ref": "#/definitions/Thread"
           },
           "x-ms-identifiers": []
         },
@@ -5007,6 +4648,47 @@
         ]
       }
     },
+    "RefusalContent": {
+      "type": "object",
+      "description": "A structured chat content item containing model refusal information for a structured outputs request.",
+      "properties": {
+        "refusal": {
+          "type": "string",
+          "description": "Reason for refusal."
+        }
+      },
+      "required": [
+        "refusal"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "refusal"
+    },
+    "RequiredToolChoiceBehavior": {
+      "type": "object",
+      "description": "Behavior specifying that the agent must always use the listed tools.",
+      "properties": {
+        "toolNames": {
+          "type": "array",
+          "description": "The tool names that the agent must use.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "toolNames"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolChoiceBehavior"
+        }
+      ],
+      "x-ms-discriminator-value": "required"
+    },
     "SasCredential": {
       "type": "object",
       "description": "SAS Credential definition",
@@ -5061,6 +4743,67 @@
         "tier"
       ]
     },
+    "StreamingAgentCompletionUpdate": {
+      "type": "object",
+      "description": "A streaming update indicating incremental changes to an agent-generated completion.",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "Identifier of the message being updated."
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Optional name of the message author."
+        },
+        "authorRole": {
+          "$ref": "#/definitions/AuthorRole",
+          "description": "Role of the author for the updated message."
+        },
+        "update": {
+          "$ref": "#/definitions/StreamingOperation",
+          "description": "Optional content updates from the AI."
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionUsage",
+          "description": "Token usage information associated with this streaming update."
+        }
+      },
+      "required": [
+        "messageId",
+        "usage"
+      ]
+    },
+    "StreamingOperation": {
+      "type": "object",
+      "description": "A streaming operation describing how to modify a partial response in real-time.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of operation being performed.",
+          "enum": [
+            "append",
+            "remove",
+            "replace",
+            "set"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "jsonPath": {
+          "type": "string",
+          "description": "The JSON path to the operation."
+        },
+        "value": {
+          "$ref": "#/definitions/JSONAny",
+          "description": "The value to apply to the operation, expressed as a JSON-compatible type."
+        }
+      },
+      "required": [
+        "type",
+        "jsonPath"
+      ]
+    },
     "SystemData": {
       "type": "object",
       "description": "Metadata pertaining to creation and last modification of the resource.",
@@ -5088,6 +4831,263 @@
           "readOnly": true
         }
       }
+    },
+    "SystemMessage": {
+      "type": "object",
+      "description": "A system message within a chat, always with the 'system' role.",
+      "properties": {
+        "content": {
+          "type": "array",
+          "description": "The contents of the system message.",
+          "items": {
+            "$ref": "#/definitions/TextContent"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "TextContent": {
+      "type": "object",
+      "description": "A structured chat content item containing plain text.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text content."
+        },
+        "annotations": {
+          "type": "array",
+          "description": "A list of annotations in the text content.",
+          "items": {
+            "$ref": "#/definitions/Annotations"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text",
+        "annotations"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
+    },
+    "Thread": {
+      "type": "object",
+      "description": "Represents a chat thread, which can contain multiple messages.",
+      "properties": {
+        "threadId": {
+          "type": "string",
+          "description": "A unique identifier for this thread.",
+          "readOnly": true
+        },
+        "messages": {
+          "type": "array",
+          "description": "A list of messages in this thread.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "threadId",
+        "messages"
+      ]
+    },
+    "ToolCallContent": {
+      "type": "object",
+      "description": "A structured chat content item describing a tool call request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the tool to call."
+        },
+        "toolCallId": {
+          "type": "string",
+          "description": "The unique ID of the tool call."
+        },
+        "arguments": {
+          "$ref": "#/definitions/JSONAny",
+          "description": "Arguments passed to this tool call, expressed as JSON-like data rather than `unknown`."
+        }
+      },
+      "required": [
+        "name",
+        "toolCallId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "toolCall"
+    },
+    "ToolChoiceBehavior": {
+      "type": "object",
+      "description": "The base behavior for how an agent chooses among available tools.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The kind of tool-choice strategy."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ToolMessage": {
+      "type": "object",
+      "description": "A tool message within a chat, always with the 'tool' role.",
+      "properties": {
+        "content": {
+          "type": "array",
+          "description": "The contents of the tool message.",
+          "items": {
+            "$ref": "#/definitions/ToolResultContent"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
+    },
+    "ToolResultContent": {
+      "type": "object",
+      "description": "A structured chat content item describing a tool result.",
+      "properties": {
+        "toolCallId": {
+          "type": "string",
+          "description": "The ID of the tool call to which this result pertains."
+        },
+        "results": {
+          "$ref": "#/definitions/JSONAny",
+          "description": "The results returned from the tool, using JSONAny instead of `unknown`."
+        }
+      },
+      "required": [
+        "toolCallId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "toolResult"
+    },
+    "TruncationStrategy": {
+      "type": "object",
+      "description": "Describes how to truncate messages if they exceed model or provider limits.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of truncation strategy to apply.",
+          "enum": [
+            "auto",
+            "lastMessages"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "lastMessages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of most recent messages to retain when using 'lastMessages' strategy."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "UserMessage": {
+      "type": "object",
+      "description": "A user message within a chat, always with the 'user' role.",
+      "properties": {
+        "content": {
+          "type": "array",
+          "description": "The contents of the user message.",
+          "items": {}
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
+    },
+    "VideoContent": {
+      "type": "object",
+      "description": "A structured chat content item containing a video reference.",
+      "properties": {
+        "duration": {
+          "type": "integer",
+          "format": "int16",
+          "description": "Duration of video in seconds (optional)."
+        },
+        "width": {
+          "type": "integer",
+          "format": "int16",
+          "description": "Width of video in pixels (optional)."
+        },
+        "height": {
+          "type": "integer",
+          "format": "int16",
+          "description": "Height of video in pixels (optional)."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name for this binary content."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "The MIME type for this binary content."
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI where the binary content can be retrieved."
+        },
+        "dataUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Data URI containing the binary content inlined."
+        },
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Raw bytes for the binary content."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AIContent"
+        }
+      ],
+      "x-ms-discriminator-value": "video"
     }
   },
   "parameters": {

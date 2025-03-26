@@ -9,7 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Projects;
 
 /**
  * A JSON-compatible type that can be a primitive, object, or array.

@@ -1,4 +1,4 @@
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Projects;
 
 /**
  * A specialized AgentModel for Azure-based providers.
