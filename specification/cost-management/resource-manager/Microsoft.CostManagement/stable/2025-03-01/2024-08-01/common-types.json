@@ -1,0 +1,231 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-08-01",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.CostManagement/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available cost management REST API operations.",
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetailsWithNestedDetails": {
+      "description": "The details of the error.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      ],
+      "properties": {
+        "details": {
+          "type": "array",
+          "readOnly": true,
+          "description": "The additional details of the error.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetailsWithNestedDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ErrorResponseWithNestedDetails": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetailsWithNestedDetails"
+        }
+      }
+    },
+    "CostManagementOperation": {
+      "description": "A Cost management REST API operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Operation id: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Operation"
+        }
+      ]
+    },
+    "OperationListResult": {
+      "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of cost management operations supported by the Microsoft.CostManagement resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CostManagementOperation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CostManagementProxyResource": {
+      "description": "The Resource model definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DownloadURL": {
+      "description": "The URL to download the generated report.",
+      "type": "object",
+      "properties": {
+        "expiryTime": {
+          "description": "The time at which report URL becomes invalid/expires in UTC e.g. 2020-12-08T05:55:59.4394737Z.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "validTill": {
+          "description": "The time at which report URL becomes invalid/expires in UTC e.g. 2020-12-08T05:55:59.4394737Z.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "downloadUrl": {
+          "description": "The URL to download the generated report.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "billingAccountIdParameter": {
+      "description": "Billing account ID",
+      "in": "path",
+      "name": "billingAccountId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "description": "Billing profile ID.",
+      "in": "path",
+      "name": "billingProfileId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
