@@ -46,8 +46,8 @@ directive:
     reason: service implements 204 for delete and DeleteOperationResponses error was falsely raised.
 
   - from: service.json
-	suppress:
-	  - PutResponseCodes
+    suppress:
+      - PutResponseCodes
     reason: suppressing as ASR is old service and for all APIs, the 202-async PUT convention is followed.
 
   - code: AvoidAdditionalProperties
