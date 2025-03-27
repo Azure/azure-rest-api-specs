@@ -74,8 +74,10 @@ model AudioTranscriptionOptions {
   @doc("""
     The requested format of the transcription response data, which will influence the content and detail of the result.
     """)
-  @encodedName("application/json", "response_format")
-  responseFormat?: HttpPart<AudioTranscriptionFormat>;
+  responseFormat?: HttpPart<
+    AudioTranscriptionFormat,
+    #{ name: "response_format" }
+  >;
 
   @doc("""
     The primary spoken language of the audio data to be transcribed, supplied as a two-letter ISO-639-1 language code
