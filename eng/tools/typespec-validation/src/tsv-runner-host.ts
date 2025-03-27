@@ -1,5 +1,4 @@
-import { Stats } from "fs";
-import { readFile, stat as statImpl } from "fs/promises";
+import { readFile } from "fs/promises";
 import { globby, Options as GlobbyOptions } from "globby";
 import { join } from "path";
 import { simpleGit } from "simple-git";
@@ -21,10 +20,6 @@ export class TsvRunnerHost implements TsvHost {
 
   isDirectory(path: string) {
     return isDirectory(path);
-  }
-
-  stat(path: string): Promise<Stats> {
-    return statImpl(path);
   }
 
   gitOperation(folder: string): IGitOperation {

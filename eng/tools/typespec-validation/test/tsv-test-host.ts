@@ -1,4 +1,3 @@
-import { Stats } from "fs";
 import { Options as GlobbyOptions } from "globby";
 import defaultPath, { PlatformPath } from "path";
 import { Suppression } from "suppressions";
@@ -51,10 +50,6 @@ export class TsvTestHost implements TsvHost {
 
   async isDirectory(_path: string): Promise<boolean> {
     return true;
-  }
-
-  async stat(_path: string): Promise<Stats> {
-    return new Stats();
   }
 
   normalizePath(folder: string): string {
