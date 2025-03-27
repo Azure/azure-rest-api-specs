@@ -3089,11 +3089,27 @@
             "modelAsString": true
           }
         }
+	"smbOAuthSettings": {
+          "$ref": "#/definitions/SmbOAuthSettings",
+          "description": "Required for Managed Identities access using OAuth over SMB"
+        }
       },
       "required": [
         "directoryServiceOptions"
       ],
       "description": "Settings for Azure Files identity based authentication."
+    },
+    "SmbOAuthSettings": {
+      "properties": {
+        "isSmbOAuthEnabled": {
+          "type": "boolean",
+          "description": "Specifies if managed identities can access SMB shares using OAuth"
+        }
+      },
+      "required": [
+        "isSmbOAuthEnabled"
+      ],
+      "description": "Setting property for MI access over SMB using OAuth"
     },
     "ActiveDirectoryProperties": {
       "properties": {
