@@ -24,7 +24,7 @@ model OperatorApiPlan
   @path
   @key("operatorApiPlanName")
   @segment("operatorApiPlans")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -100,7 +100,7 @@ model OperatorApiPlanProperties {
   /**
    * The status of the last operation on the Gateway resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
