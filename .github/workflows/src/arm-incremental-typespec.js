@@ -18,9 +18,10 @@ import { CoreLogger } from "./core-logger.js";
  * @returns {Promise<boolean>}
  */
 export default async function incrementalTypeSpec({ core }) {
-  const options = { logger: new CoreLogger(core) };
-
-  const changedFiles = await getChangedFiles(options);
+  const changedFiles = await getChangedFiles({
+    cwd: process.env.GITHUB_WORKSPACE,
+    logger: new CoreLogger(core),
+  });
 
   // Includes swaggers, readmes, and examples
   const changedRmFiles = changedFiles.filter(resourceManager);
