@@ -39,6 +39,8 @@ export class CompileRule implements Rule {
         // Handle windows and linux line endings
         const lines = stdout.split(/\r?\n/);
 
+        console.log(stdout);
+
         // TODO: Use helpers in /.github once they support platform-specific paths
         const outputSwaggers = lines
           // Remove leading and trailing whitespace
