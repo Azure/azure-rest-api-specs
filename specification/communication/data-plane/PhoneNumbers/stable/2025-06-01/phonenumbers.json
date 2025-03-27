@@ -2843,18 +2843,9 @@
       }
     },
     "VettingDetails": {
-      "description": "Holds the details of the vetting process for a 10DLC brand.",
+      "description": "Holds the details of the vetting process for a US 10DLC brand.",
       "type": "object",
       "properties": {
-        "evpId": {
-          "description": "Gets or sets the External Verification Provider (EVP) ID.",
-          "enum": [
-            "AEGIS",
-            "CV",
-            "WMC"
-          ],
-          "type": "string"
-        },
         "id": {
           "description": "Gets or sets the ID of the vetting process.",
           "type": "string"
@@ -2864,14 +2855,18 @@
           "description": "Gets or sets the vetting score.",
           "type": "integer"
         },
-        "class": {
+        "classification": {
           "description": "Gets or sets the vetting class.",
           "enum": [
             "standard",
             "political",
             "enhanced"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "VettingClassification",
+            "modelAsString": true
+          }
         },
         "status": {
           "description": "Gets or sets the vetting status.",
@@ -2882,11 +2877,11 @@
             "failed",
             "expired"
           ],
-          "type": "string"
-        },
-        "acquisitionOrderId": {
-          "description": "Gets or sets the acquisition order ID.",
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "VettingStatus",
+            "modelAsString": true
+          }
         },
         "errorReasons": {
           "description": "Gets or sets the reasons for any errors that occurred during the vetting process.",
