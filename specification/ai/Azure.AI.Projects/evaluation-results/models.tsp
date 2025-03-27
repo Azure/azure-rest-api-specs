@@ -63,7 +63,7 @@ enum ResultType {
   Benchmark: "Benchmark",
 
   @doc("Evaluations Result")
-  Evaluations: "Evaluations",
+  Evaluation: "Evaluation",
 
   @doc("Red Team Result")
   Redteam: "Redteam",
