@@ -799,6 +799,9 @@
           },
           "Create or Update Database Migration resource with Maximum parameters.": {
             "$ref": "./examples/SqlMiCreateOrUpdateDatabaseMigrationMAX.json"
+          },
+          "Create or Update Database Migration resource from Azure Blob using Managed Identity.": {
+            "$ref": "./examples/SqlMiCreateOrUpdateDatabaseMigrationBlobManagedIdentity.json"
           }
         }
       }
@@ -2842,7 +2845,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/Identity",
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Identity details for authentication using a Managed Identity."
         },
         "storageAccountResourceId": {
@@ -2859,28 +2862,6 @@
           "type": "string"
         }
       }
-    },
-    "Identity": {
-      "description": "Identity details for authentication using a Managed Identity.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of identity used for authentication.",
-          "type": "string"
-        },
-        "userAssignedIdentities": {
-          "description": "Details of user-assigned identities.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentityProperties"
-          }
-        }
-      }
-    },
-    "UserAssignedIdentityProperties": {
-      "description": "User Assigned Identity Properties",
-      "type": "object",
-      "properties": {}
     },
     "DatabaseMigrationBase": {
       "description": "Database Migration Resource.",
