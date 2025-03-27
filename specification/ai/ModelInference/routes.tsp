@@ -11,7 +11,6 @@ import "./models/image_embeddings.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
 
 @versioned(ModelInference.Versions)
 namespace ModelInference;
@@ -73,28 +72,17 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
   Returns information about the AI model.
   The method makes a REST API call to the `/info` route on the given endpoint.
   This method will only work when using Serverless API or Managed Compute endpoint.
-  It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
+  It will not work for Azure OpenAI endpoints.
   """)
 @get
-@removed(ModelInference.Versions.v2025_04_01)
 @actionSeparator("/")
 @route("/info")
-op getModelInfo is Azure.Core.RpcOperation<{}, ModelInfo>;
-
-@doc("""
-  Returns information about the AI model.
-  The method makes a REST API call to the `/info` route on the given endpoint.
-  This method will only work when using Serverless API or Managed Compute endpoint.
-  It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
-  """)
-@get
-@added(ModelInference.Versions.v2025_04_01)
-@actionSeparator("/")
-@route("/deployments/{model_deployment}/info")
-op getModelDeploymentInfo is Azure.Core.RpcOperation<
+op getModelInfo is Azure.Core.RpcOperation<
   {
-    @doc("The deployment ID of the model.")
-    model_deployment: string;
+    @doc("The model deployment name you want information from.")
+    @query
+    @added(ModelInference.Versions.v2025_04_01)
+    `model`: string;
   },
   ModelInfo
 >;
