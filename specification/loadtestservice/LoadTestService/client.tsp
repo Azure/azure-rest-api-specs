@@ -44,12 +44,19 @@ namespace Customizations;
 );
 
 // Suggestion to rename certain models to not have very generic names
+@@clientName(Test, "LoadTest", "csharp,java");
+@@clientName(TestRun, "LoadTestRun", "csharp,java");
+@@clientName(TestKind, "LoadTestKind", "csharp,java");
 @@clientName(Secret, "TestSecret", "csharp,java");
+@@clientName(CertificateMetadata, "TestCertificate", "csharp,java");
 @@clientName(ManagedIdentityType,
   "LoadTestingManagedIdentityType",
   "csharp,java"
 );
+@@clientName(FileType, "LoadTestingFileType", "csharp,java");
 @@clientName(AppComponent, "LoadTestingAppComponent", "csharp,java");
+@@clientName(MetricRequestPayload, "MetricsFilters", "csharp,java");
+@@clientName(Aggregation, "AggregationType", "csharp,java");
 
 // Suggestion to fix casing for acronyms
 @@clientName(LoadTestConfiguration.splitAllCSVs,
@@ -58,6 +65,7 @@ namespace Customizations;
 ); // NOTE: Python is needed since the emitter bugs out for "CSVs" to cs_vs
 @@clientName(Test.publicIPDisabled, "publicIpDisabled", "csharp,java");
 @@clientName(TestRun.publicIPDisabled, "publicIpDisabled", "csharp,java");
+@@clientName(PFMetrics, "PfMetrics", "csharp,java");
 
 // Suggestion to rename properties in TestRunStatistics for better explanation
 @@clientName(TestRunStatistics.errorPct, "errorPercentage", "csharp,java");
