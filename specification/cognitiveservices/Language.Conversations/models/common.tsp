@@ -909,6 +909,9 @@ model AnalyzeConversationJobsInput {
 
   /** Set of tasks to execute on the input conversation. */
   tasks: Array<AnalyzeConversationLROTask>;
+  
+  /** Optional duration in seconds after which the job will be canceled if not completed. */
+  cancelAfter?: float32;
 }
 
 /** Base class for a long-running conversation input task. */
