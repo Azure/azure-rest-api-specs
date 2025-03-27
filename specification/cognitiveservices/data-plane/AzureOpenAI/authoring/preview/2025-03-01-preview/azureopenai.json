@@ -212,6 +212,73 @@
         }
       }
     },
+    "/chat/completions": {
+      "get": {
+        "tags": [
+          "StoredCompletion:"
+        ],
+        "summary": "Gets list of stored completions.",
+        "operationId": "StoredCompletion_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "metadata",
+            "description": "Filter by the (key, value) pair in stored completion.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "model",
+            "description": "Filter by model name.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "after",
+            "description": "Identifier for the last stored completion from the previous pagination request.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of stored completions to retrieve. Defaults to 20.",
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "Order of the results by created time (ascending or descending). Default to desc."
+          },
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StoredCompletionList"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets list of stored completions.": {
+            "$ref": "./examples/get_stored_completion_list.json"
+          }
+        }
+      }
+    },
     "/chat/completions/{stored-completion-id}": {
       "get": {
         "tags": [
@@ -384,8 +451,7 @@
           {
             "in": "query",
             "name": "order",
-            "description": "Order of the results by message index (ascending or descending). Default to asc.",
-            "type": "string"
+            "description": "Order of the results by message index (ascending or descending). Default to asc."
           },
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
@@ -408,74 +474,6 @@
         "x-ms-examples": {
           "Gets stored completion messages by the given stored completion id.": {
             "$ref": "./examples/get_stored_completion_messages.json"
-          }
-        }
-      }
-    },
-    "/chat/completions": {
-      "get": {
-        "tags": [
-          "StoredCompletion:"
-        ],
-        "summary": "Gets list of stored completions.",
-        "operationId": "StoredCompletion_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "metadata",
-            "description": "Filter by the (key, value) pair in stored completion.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "model",
-            "description": "Filter by model name.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "after",
-            "description": "Identifier for the last stored completion from the previous pagination request.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "description": "Number of stored completions to retrieve. Defaults to 20.",
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "description": "Order of the results by created time (ascending or descending). Default to desc.",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/StoredCompletionList"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets list of stored completions.": {
-            "$ref": "./examples/get_stored_completion_list.json"
           }
         }
       }
@@ -536,6 +534,24 @@
             }
           },
           {
+            "in": "query",
+            "name": "limit",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 10,000, and the default is 10,000.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "after",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order."
+          },
+          {
             "$ref": "#/parameters/apiVersionQueryParameter"
           }
         ],
@@ -586,7 +602,8 @@
               "fine-tune-results",
               "assistants",
               "assistants_output",
-              "batch"
+              "batch",
+              "batch_output"
             ],
             "x-ms-enum": {
               "name": "Purpose",
@@ -611,6 +628,10 @@
                 {
                   "value": "batch",
                   "description": "This file contains the input data for a batch."
+                },
+                {
+                  "value": "batch_output",
+                  "description": "This file contains the results of a batch."
                 }
               ]
             }
@@ -1961,7 +1982,7 @@
       "type": "object",
       "properties": {
         "object": {
-          "description": "The type of the errors object. This is always 'list'.",
+          "description": "The type of the errors object. This is always "list".",
           "type": "string"
         },
         "data": {
@@ -2379,38 +2400,39 @@
     },
     "DpoHyperparamsRequest": {
       "title": "DpoHyperparamsRequest",
+      "description": "Hyperparameters for DPO method of finetuning",
       "type": "object",
       "properties": {
         "n_epochs": {
-          "type": "integer",
+          "format": "int32",
           "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.",
-          "format": "int32"
+          "type": "integer"
         },
         "batch_size": {
-          "type": "integer",
+          "format": "int32",
           "description": "The batch size to use for training. The batch size is the number of training examples used to train a single forward and backward pass.\r\nIn general, we've found that larger batch sizes tend to work better for larger datasets.\r\nThe default value as well as the maximum value for this property are specific to a base model.",
-          "format": "int32"
+          "type": "integer"
         },
         "learning_rate_multiplier": {
-          "type": "number",
+          "format": "double",
           "description": "The learning rate multiplier to use for training. The fine-tuning learning rate is the original learning rate used for pre-training multiplied by this value.\r\nLarger learning rates tend to perform better with larger batch sizes.\r\nWe recommend experimenting with values in the range 0.02 to 0.2 to see what produces the best results.",
-          "format": "double"
+          "type": "number"
         },
         "beta": {
-          "type": "number",
+          "format": "double",
           "description": "Dpo beta value.",
-          "format": "double"
+          "type": "number"
         },
         "l2_multiplier": {
-          "type": "number",
+          "format": "double",
           "description": "L2 regularization multiplier",
-          "format": "double"
+          "type": "number"
         }
-      },
-      "description": "Hyperparameters for DPO method of finetuning"
+      }
     },
     "DpoMethod": {
       "title": "DpoMethod",
+      "description": "Request for DPO method finetuning",
       "required": [
         "dpo",
         "type"
@@ -2428,21 +2450,21 @@
         "dpo": {
           "$ref": "#/definitions/DpoMethodConfigRequest"
         }
-      },
-      "description": "Request for DPO method finetuning"
+      }
     },
     "DpoMethodConfigRequest": {
       "title": "DpoMethodConfigRequest",
+      "description": "Configuration for dpo finetuning method. Includes DPO specific hyperparameters",
       "type": "object",
       "properties": {
         "hyperparameters": {
           "$ref": "#/definitions/DpoHyperparamsRequest"
         }
-      },
-      "description": "Configuration for dpo finetuning method. Includes DPO specific hyperparameters"
+      }
     },
     "DpoMethodRequest": {
       "title": "DpoMethodRequest",
+      "description": "Request for DPO method finetuning",
       "required": [
         "dpo",
         "type"
@@ -2460,8 +2482,7 @@
         "dpo": {
           "$ref": "#/definitions/DpoMethodConfigRequest"
         }
-      },
-      "description": "Request for DPO method finetuning"
+      }
     },
     "EndpointKeyConnection": {
       "description": "Endpoint key connection.",
@@ -2617,7 +2638,7 @@
           },
           {
             "value": "tooManyRequests",
-            "description": "Too many requests. Please retry later."
+            "description": "Too many requests. Please retry later"
           },
           {
             "value": "unauthorized",
@@ -2713,7 +2734,7 @@
           "readOnly": true
         },
         "status_details": {
-          "description": "The error message with details in case processing of this file failed.",
+          "description": "The error message with details in case processing of this file failed.\r\nDeprecated.",
           "type": "string",
           "readOnly": true
         }
@@ -2735,6 +2756,32 @@
         "content_url": {
           "format": "url",
           "description": "The url to download the document from (can be SAS url of a blob or any other external url accessible with a GET request).",
+          "type": "string"
+        }
+      }
+    },
+    "FileDelete": {
+      "title": "FileDelete",
+      "description": "Defines the response for File Delete.",
+      "required": [
+        "deleted",
+        "id",
+        "object"
+      ],
+      "type": "object",
+      "properties": {
+        "object": {
+          "description": "If the file was deleted.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "deleted": {
+          "description": "A value indicating whether gets if the file was deleted.",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "The file-id that was deleted.",
+          "minLength": 1,
           "type": "string"
         }
       }
@@ -2778,32 +2825,6 @@
           "$ref": "#/definitions/Purpose"
         }
       }
-    },
-    "FileDelete": {
-      "title": "FileDelete",
-      "required": [
-        "deleted",
-        "id",
-        "object"
-      ],
-      "type": "object",
-      "properties": {
-        "object": {
-          "minLength": 1,
-          "type": "string",
-          "description": "The file object."
-        },
-        "deleted": {
-          "type": "boolean",
-          "description": "A value indicating whether the file was deleted."
-        },
-        "id": {
-          "minLength": 1,
-          "type": "string",
-          "description": "The file-id that was deleted."
-        }
-      },
-      "description": "Defines the response for File Delete."
     },
     "FileExpiresAfter": {
       "title": "FileExpiresAfter",
@@ -2937,28 +2958,28 @@
     "FineTuneMethod": {
       "title": "FineTuneMethod",
       "required": [
-        "kind"
+        "type"
       ],
       "type": "object",
       "properties": {
-        "kind": {
+        "type": {
           "$ref": "#/definitions/FineTuningMethodType"
         }
       },
-      "discriminator": "kind"
+      "discriminator": "type"
     },
     "FineTuneMethodRequest": {
       "title": "FineTuneMethodRequest",
       "required": [
-        "kind"
+        "type"
       ],
       "type": "object",
       "properties": {
-        "kind": {
+        "type": {
           "$ref": "#/definitions/FineTuningMethodType"
         }
       },
-      "discriminator": "kind"
+      "discriminator": "type"
     },
     "FineTuningHyperParameters": {
       "title": "FineTuningHyperParameters",
@@ -3069,23 +3090,20 @@
           "type": "integer"
         },
         "integrations": {
+          "description": "A list configurations for integrations supporting the fine-tuning job.\r\nThere are many integrations planned, so make sure to check and act on the integration type.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WandBIntegrationRequestWrapper",
-            "description": "A list configurations for integrations supporting the fine-tuning job.\r\nThere are many integrations planned, so make sure to check and act on the integration type."
+            "$ref": "#/definitions/WandBIntegrationRequestWrapper"
           }
         },
         "method": {
           "title": "FineTuneMethod",
-          "enum": [
+          "description": "A configuration for finetuning method for the finetuning job. Currently "dpo" and "supervised" methods are supported.",
+          "allOf": [
             {
               "$ref": "#/definitions/SupervisedMethod"
-            },
-            {
-              "$ref": "#/definitions/DpoMethod"
             }
-          ],
-          "description": "A configuration for finetuning method for the finetuning job. Currently 'dpo' and 'supervised' methods are supported."
+          ]
         }
       }
     },
@@ -3104,38 +3122,38 @@
           "$ref": "#/definitions/TypeDiscriminator"
         },
         "id": {
-          "type": "string",
           "description": "The identity of this checkpoint.",
+          "type": "string",
           "readOnly": true
         },
         "created_at": {
-          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp (in seconds) for when the checkpoint was created.",
-          "format": "unixtime"
+          "type": "integer"
         },
         "fine_tuned_model_checkpoint": {
+          "description": "The name of the fine-tuned checkpoint model that is created.",
           "minLength": 1,
-          "type": "string",
-          "description": "The name of the fine-tuned checkpoint model that is created."
+          "type": "string"
         },
         "step_number": {
-          "type": "integer",
+          "format": "int32",
           "description": "The step number that the checkpoint was created at.",
-          "format": "int32"
+          "type": "integer"
         },
         "metrics": {
           "title": "Dictionary`2",
+          "description": "The metrics at the step number during the fine-tuning job.",
           "type": "object",
           "additionalProperties": {
-            "type": "number",
-            "format": "double"
-          },
-          "description": "The metrics at the step number during the fine-tuning job."
+            "format": "double",
+            "type": "number"
+          }
         },
         "fine_tuning_job_id": {
+          "description": "The name of the fine-tuning job that this checkpoint was created from..",
           "minLength": 1,
-          "type": "string",
-          "description": "The name of the fine-tuning job that this checkpoint was created from.."
+          "type": "string"
         }
       }
     },
@@ -3196,23 +3214,20 @@
           "type": "integer"
         },
         "integrations": {
+          "description": "A list configurations for integrations supporting the fine-tuning job.\r\nThere are many integrations planned, so make sure to check and act on the integration type.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WandBIntegrationRequestWrapper",
-            "description": "A list configurations for integrations supporting the fine-tuning job.\r\nThere are many integrations planned, so make sure to check and act on the integration type."
+            "$ref": "#/definitions/WandBIntegrationRequestWrapper"
           }
         },
         "method": {
           "title": "FineTuneMethodRequest",
-          "enum": [
+          "description": "A configuration for finetuning method for the finetuning job. Currently "dpo" and "supervised" methods are supported.",
+          "allOf": [
             {
               "$ref": "#/definitions/SupervisedMethodRequest"
-            },
-            {
-              "$ref": "#/definitions/DpoMethodRequest"
             }
-          ],
-          "description": "A configuration for finetuning method for the finetuning job. Currently 'dpo' and 'supervised' methods are supported."
+          ]
         }
       }
     },
@@ -3316,6 +3331,28 @@
         }
       }
     },
+    "FineTuningMethodType": {
+      "title": "FineTuningMethodType",
+      "enum": [
+        "dpo",
+        "supervised"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FineTuningMethodType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "dpo",
+            "description": "Finetunes using Dpo algorithm"
+          },
+          {
+            "value": "supervised",
+            "description": "Finetunes using Supervised algorithm"
+          }
+        ]
+      }
+    },
     "FineTuningState": {
       "title": "FineTuningState",
       "description": "The state of a finetunes object or fine tuning job.",
@@ -3356,28 +3393,6 @@
           {
             "value": "failed",
             "description": "The operation has completed processing with a failure and cannot be further consumed. It can be categorized as a terminal state."
-          }
-        ]
-      }
-    },
-    "FineTuningMethodType": {
-      "title": "FineTuningMethodType",
-      "enum": [
-        "dpo",
-        "supervised"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "FineTuningMethodType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "dpo",
-            "description": "Finetunes using Dpo algorithm"
-          },
-          {
-            "value": "supervised",
-            "description": "Finetunes using Supervised algorithm"
           }
         ]
       }
@@ -3705,11 +3720,11 @@
     },
     "IntegrationTypes": {
       "title": "IntegrationTypes",
+      "description": "List of Fine Tune integrations available.",
       "enum": [
         "wandb"
       ],
-      "type": "string",
-      "description": "List of Fine Tune integrations available."
+      "type": "string"
     },
     "JobCompute": {
       "title": "JobCompute",
@@ -3730,7 +3745,9 @@
       "description": "The life cycle status of a model.\r\nNote: A model can be promoted from \"preview\" to \"generally-available\", but never from \"generally-available\" to \"preview\".",
       "enum": [
         "preview",
-        "generally-available"
+        "generally-available",
+        "deprecating",
+        "deprecated"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3744,6 +3761,14 @@
           {
             "value": "generally-available",
             "description": "Model is generally available."
+          },
+          {
+            "value": "deprecating",
+            "description": "Model is in the process of deprecation and will not be supported long term."
+          },
+          {
+            "value": "deprecated",
+            "description": "Model is in a deprecated state and is no longer supported."
           }
         ]
       }
@@ -3887,6 +3912,23 @@
           }
         ]
       }
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Defines the purpose of a file.",
+      "enum": [
+        "desc",
+        "asc"
+      ],
+      "type": "string"
+    },
+    "OrderByOrder": {
+      "title": "OrderByOrder",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "type": "string"
     },
     "PineconeIndex": {
       "description": "Pinecone Index.",
@@ -4248,6 +4290,42 @@
         }
       }
     },
+    "SupervisedMethod": {
+      "title": "SupervisedMethod",
+      "description": "Method used for supervised finetuning",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuneMethod"
+        }
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FineTuningMethodType"
+        }
+      }
+    },
+    "SupervisedMethodRequest": {
+      "title": "SupervisedMethodRequest",
+      "description": "Method used for supervised finetuning",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FineTuneMethodRequest"
+        }
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FineTuningMethodType"
+        }
+      }
+    },
     "SystemComputeDatasource": {
       "title": "SystemComputeDatasource",
       "type": "object",
@@ -4367,42 +4445,6 @@
         }
       ]
     },
-    "SupervisedMethod": {
-      "title": "SupervisedMethod",
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuneMethod"
-        }
-      ],
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/FineTuningMethodType"
-        }
-      },
-      "description": "Method used for supervised finetuning"
-    },
-    "SupervisedMethodRequest": {
-      "title": "SupervisedMethodRequest",
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuneMethodRequest"
-        }
-      ],
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/FineTuningMethodType"
-        }
-      },
-      "description": "Method used for supervised finetuning"
-    },
     "TargetIndex": {
       "title": "TargetIndex",
       "description": "Information about the index to be created.",
@@ -4489,7 +4531,8 @@
         "model",
         "upload",
         "upload.part",
-        "batch"
+        "batch",
+        "wandb"
       ],
       "type": "string",
       "readOnly": true,
@@ -4532,6 +4575,10 @@
           {
             "value": "batch",
             "description": "This object represents a batch."
+          },
+          {
+            "value": "wandb",
+            "description": "This object represents the Weights and Biases Integration configuration."
           }
         ]
       }
