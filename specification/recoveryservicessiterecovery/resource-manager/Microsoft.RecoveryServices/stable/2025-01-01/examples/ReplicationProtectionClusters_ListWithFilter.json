@@ -1,0 +1,165 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "$filter": "SourceFabricName eq 'asr-a2a-default-westus' and SourceFabricLocation eq 'West US' and InstanceType eq 'A2A'",
+    "resourceName": "vijamishareddisktest",
+    "resourceGroupName": "vijami-alertrg",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/vijami-alertrg/providers/Microsoft.RecoveryServices/vaults/vijamishareddisktest/replicationFabrics/asr-a2a-default-westus/replicationProtectionContainers/asr-a2a-default-westus-container/replicationProtectionClusters/shareddiskcluster",
+            "name": "shareddiskcluster",
+            "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionClusters",
+            "properties": {
+              "protectionClusterType": "WindowsServerFailoverCluster",
+              "primaryFabricFriendlyName": "West US",
+              "primaryFabricProvider": "AzureFabric",
+              "recoveryFabricFriendlyName": "East US 2",
+              "recoveryFabricId": "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/vijami-alertrg/providers/Microsoft.RecoveryServices/vaults/vijamishareddisktest/replicationFabrics/asr-a2a-default-eastus2",
+              "primaryProtectionContainerFriendlyName": "West US",
+              "recoveryProtectionContainerFriendlyName": "asr-a2a-default-westus-container",
+              "protectionState": "InitialReplicationInProgress",
+              "protectionStateDescription": "Initial replication is in progress",
+              "activeLocation": "Primary",
+              "testFailoverState": "None",
+              "testFailoverStateDescription": "None",
+              "allowedOperations": [
+                "PurgeProtectionCluster"
+              ],
+              "replicationHealth": "Critical",
+              "healthErrors": [
+                {
+                  "innerHealthErrors": [],
+                  "errorSource": "ProtectionClusterProviderErrorOnReplica",
+                  "errorType": "2005",
+                  "errorLevel": "Error",
+                  "errorCategory": "Replication",
+                  "errorCode": "153075",
+                  "summaryMessage": "Recent crash consistent recovery point not available",
+                  "errorMessage": "No crash consistent recovery point available for the cluster in the last 60 minutes.",
+                  "possibleCauses": "\n      1. Replication is delayed due to network connectivity issues or low bandwidth availability.\n      2. The data change rate (write bytes/sec) for one or more disks of the cluster has exceeded ASR supported limits. Refer https://aka.ms/asr-a2a-target-limits.\n    ",
+                  "recommendedAction": "\n      Ensure that:\n      1. Network connectivity exists (with sufficient network bandwidth) between the source machine and Azure storage account in source region.\n      2. Ensure that the target storage type (Standard or Premium) is provisioned as per the churn rate requirement at source.\n      3. Look for any associated events in the ASR events table and also any errors on the Site Recovery vault overview blade, and resolve them if any.\n      4. If the issue persists contact support.\n    ",
+                  "creationTimeUtc": "2025-03-24T13:11:49.2414048Z",
+                  "recoveryProviderErrorMessage": null,
+                  "entityId": "af130a25-c1aa-5e13-99a2-d421d1895dc5",
+                  "errorId": "11:2005",
+                  "customerResolvability": "NotAllowed"
+                },
+                {
+                  "innerHealthErrors": [],
+                  "errorSource": "ProtectionClusterProviderErrorOnReplica",
+                  "errorType": "8057",
+                  "errorLevel": "Error",
+                  "errorCategory": "Replication",
+                  "errorCode": "153077",
+                  "summaryMessage": "Mobility Service heartbeat is down for all Nodes in Cluster.",
+                  "errorMessage": "Recovery Points are not being generated as the Mobility Agent cannot be reached.",
+                  "possibleCauses": "\n      1. The virtual machines that are part of the cluster might be shut down.\n      2. The Mobility Agent has connectivity issues to reach the Site recovery service endpoints.\n    ",
+                  "recommendedAction": "\n      1. Check that the source virtual machines are up and running. You can RDP into the machine to ensure it is running fine.\n      2. Verify your NSG rules or firewall proxy rules allows the virtual machines to access the required Azure service URLs or the required Azure datacenter IP ranges. Refer to the rules mentioned here - https://aka.ms/asr-required-urls\n    ",
+                  "creationTimeUtc": "2025-03-26T05:24:55.7777148Z",
+                  "recoveryProviderErrorMessage": null,
+                  "entityId": "af130a25-c1aa-5e13-99a2-d421d1895dc5",
+                  "errorId": "11:8057",
+                  "customerResolvability": "NotAllowed"
+                }
+              ],
+              "lastSuccessfulFailoverTime": null,
+              "lastSuccessfulTestFailoverTime": null,
+              "policyFriendlyName": "24-hour-retention-policy",
+              "currentScenario": {
+                "scenarioName": "None",
+                "jobId": "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/vijami-alertrg/providers/Microsoft.RecoveryServices/vaults/vijamishareddisktest/replicationJobs/None",
+                "startTime": "1753-01-01T01:01:01Z"
+              },
+              "recoveryContainerId": "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/vijami-alertrg/providers/Microsoft.RecoveryServices/vaults/vijamishareddisktest/replicationFabrics/asr-a2a-default-eastus2/replicationProtectionContainers/asr-a2a-default-eastus2-container",
+              "agentClusterId": "c1095a9a-9dba-4670-9cec-492354ac09c7",
+              "clusterFqdn": "sdgqlc",
+              "clusterNodeFqdns": [
+                "sdgql0",
+                "sdgql1"
+              ],
+              "clusterProtectedItemIds": [
+                "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/vijami-alertrg/providers/Microsoft.RecoveryServices/vaults/vijamishareddisktest/replicationFabrics/asr-a2a-default-westus/replicationProtectionContainers/asr-a2a-default-westus-container/replicationProtectedItems/4yPfo9w-tk0y3SrvCNn-dDDOk7JkGdIj2WPNViZEHME",
+                "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/vijami-alertrg/providers/Microsoft.RecoveryServices/vaults/vijamishareddisktest/replicationFabrics/asr-a2a-default-westus/replicationProtectionContainers/asr-a2a-default-westus-container/replicationProtectedItems/Dp9wnLV6ozbRyFCwLKGOjDpoZWEd0xSvXn7gJW9YC0o"
+              ],
+              "provisioningState": "Created",
+              "areAllClusterNodesRegistered": true,
+              "clusterRegisteredNodes": [
+                {
+                  "clusterNodeFqdn": "sdgql1",
+                  "machineId": "586597af-5703-44bd-a49f-230ec0359089",
+                  "biosId": "BC3AECB9-0534-4056-8471-967938D3897E",
+                  "isSharedDiskVirtualNode": false
+                },
+                {
+                  "clusterNodeFqdn": "sdgql0",
+                  "machineId": "5abd29fb-588f-47ff-9a6b-d70270a2f905",
+                  "biosId": "9DAB0752-55E3-4CA7-B405-304EC1DB6EB4",
+                  "isSharedDiskVirtualNode": false
+                },
+                {
+                  "clusterNodeFqdn": "c1095a9a-9dba-4670-9cec-492354ac09c7",
+                  "machineId": "c1095a9a-9dba-4670-9cec-492354ac09c7",
+                  "biosId": "c1095a9a-9dba-4670-9cec-492354ac09c7",
+                  "isSharedDiskVirtualNode": true
+                }
+              ],
+              "providerSpecificDetails": {
+                "instanceType": "A2A",
+                "multiVmGroupId": "db294f88-1daf-51a4-83cf-235566d29f0c",
+                "multiVmGroupName": "shareddiskcluster",
+                "multiVmGroupCreateOption": "UserSpecified",
+                "primaryFabricLocation": "westus",
+                "recoveryFabricLocation": "eastus2",
+                "failoverRecoveryPointId": null,
+                "clusterManagementId": "9fb81f7d-59e5-4f4f-8ef1-a1abc2690d68",
+                "rpoInSeconds": null,
+                "lastRpoCalculatedTime": null,
+                "initialPrimaryZone": "",
+                "initialPrimaryFabricLocation": "eastus2",
+                "initialRecoveryZone": "",
+                "initialRecoveryFabricLocation": "westus",
+                "initialPrimaryExtendedLocation": null,
+                "initialRecoveryExtendedLocation": null,
+                "primaryAvailabilityZone": null,
+                "recoveryAvailabilityZone": null,
+                "primaryExtendedLocation": null,
+                "recoveryExtendedLocation": null,
+                "lifecycleId": "bc050b91-832a-4acf-bb84-c0f688e80f56"
+              },
+              "sharedDiskProperties": {
+                "protectionState": "InitialReplicationRecoveryCompletionPending",
+                "testFailoverState": "None",
+                "activeLocation": null,
+                "allowedOperations": [],
+                "replicationHealth": "Normal",
+                "healthErrors": [],
+                "currentScenario": null,
+                "sharedDiskProviderSpecificDetails": {
+                  "instanceType": "A2A",
+                  "managementId": "9fb81f7d-59e5-4f4f-8ef1-a1abc2690d68",
+                  "unprotectedDisks": null,
+                  "protectedManagedDisks": null,
+                  "primaryFabricLocation": "westus",
+                  "recoveryFabricLocation": "eastus2",
+                  "failoverRecoveryPointId": null,
+                  "monitoringPercentageCompletion": 0,
+                  "monitoringJobType": "InitialReplication",
+                  "rpoInSeconds": 157,
+                  "lastRpoCalculatedTime": "2025-03-26T05:21:02.0965326Z",
+                  "sharedDiskIRErrors": null
+                }
+              },
+              "policyId": "/Subscriptions/7c943c1b-5122-4097-90c8-861411bdd574/resourceGroups/vijami-alertrg/providers/Microsoft.RecoveryServices/vaults/vijamishareddisktest/replicationPolicies/24-hour-retention-policy"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
