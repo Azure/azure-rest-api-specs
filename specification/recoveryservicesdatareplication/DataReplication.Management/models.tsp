@@ -728,7 +728,7 @@ model EmailConfigurationModelProperties {
   /**
    * Gets or sets the provisioning state of the email configuration.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -739,57 +739,57 @@ model EventModelProperties {
   /**
    * Gets or sets the resource type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceType?: string;
 
   /**
    * Gets or sets the resource name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceName?: string;
 
   /**
    * Gets or sets the event type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eventType?: string;
 
   /**
    * Gets or sets the event name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eventName?: string;
 
   /**
    * Gets or sets the time at which the event occurred at source.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   timeOfOccurrence?: utcDateTime;
 
   /**
    * Gets or sets the event severity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   severity?: string;
 
   /**
    * Gets or sets the event description.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   /**
    * Gets or sets the event correlation Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   correlationId?: string;
 
   /**
    * Gets or sets the errors associated with this event.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -800,7 +800,7 @@ model EventModelProperties {
   /**
    * Gets or sets the provisioning state of the event.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -821,74 +821,74 @@ model HealthErrorModel {
   /**
    * Gets or sets a list of child health errors associated with this error.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   childErrors?: InnerHealthErrorModel[];
 
   /**
    * Gets or sets the error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Gets or sets the health category.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthCategory?: string;
 
   /**
    * Gets or sets the error category.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   category?: string;
 
   /**
    * Gets or sets the error severity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   severity?: string;
 
   /**
    * Gets or sets the error source.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   source?: string;
 
   /**
    * Gets or sets the error creation time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * Gets or sets a value indicating whether the error is customer resolvable.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isCustomerResolvable?: boolean;
 
   /**
    * Gets or sets the error summary.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   summary?: string;
 
   /**
    * Gets or sets the error message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * Gets or sets possible causes of the error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   causes?: string;
 
   /**
    * Gets or sets recommended action to resolve the error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recommendation?: string;
 }
 
@@ -899,68 +899,68 @@ model InnerHealthErrorModel {
   /**
    * Gets or sets the error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Gets or sets the health category.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   healthCategory?: string;
 
   /**
    * Gets or sets the error category.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   category?: string;
 
   /**
    * Gets or sets the error severity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   severity?: string;
 
   /**
    * Gets or sets the error source.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   source?: string;
 
   /**
    * Gets or sets the error creation time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * Gets or sets a value indicating whether the error is customer resolvable.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isCustomerResolvable?: boolean;
 
   /**
    * Gets or sets the error summary.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   summary?: string;
 
   /**
    * Gets or sets the error message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * Gets or sets possible causes of the error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   causes?: string;
 
   /**
    * Gets or sets recommended action to resolve the error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recommendation?: string;
 }
 
@@ -979,32 +979,32 @@ model FabricModelProperties {
   /**
    * Gets or sets the provisioning state of the fabric.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Gets or sets the service endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceEndpoint?: string;
 
   /**
    * Gets or sets the service resource Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceResourceId?: string;
 
   /**
    * Gets or sets the fabric health.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   health?: HealthStatus;
 
   /**
    * Gets or sets the list of health errors.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -1039,25 +1039,25 @@ model FabricModelUpdate {
   /**
    * Gets or sets the Id of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Gets or sets the name of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Gets or sets the type of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -1068,7 +1068,7 @@ model FabricAgentModelProperties {
   /**
    * Gets or sets the fabric agent correlation Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   correlationId?: string;
 
   /**
@@ -1096,33 +1096,33 @@ model FabricAgentModelProperties {
   /**
    * Gets or sets a value indicating whether the fabric agent is responsive.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isResponsive?: boolean;
 
   /**
    * Gets or sets the time when last heartbeat was sent by the fabric agent.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastHeartbeat?: utcDateTime;
 
   /**
    * Gets or sets the fabric agent version.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   versionNumber?: string;
 
   /**
    * Gets or sets the provisioning state of the fabric agent.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Gets or sets the list of health errors.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -1181,101 +1181,101 @@ model JobModelProperties {
   /**
    * Gets or sets the friendly display name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   /**
    * Gets or sets the job state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: JobState;
 
   /**
    * Gets or sets the start time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * Gets or sets the end time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
    * Gets or sets the affected object Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
    * Gets or sets the affected object name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectName?: string;
 
   /**
    * Gets or sets the affected object internal Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectInternalId?: string;
 
   /**
    * Gets or sets the affected object internal name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectInternalName?: string;
 
   /**
    * Gets or sets the object type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   objectType?: JobObjectType;
 
   /**
    * Gets or sets the replication provider.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationProviderId?: string;
 
   /**
    * Gets or sets the source fabric provider.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceFabricProviderId?: string;
 
   /**
    * Gets or sets the target fabric provider.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetFabricProviderId?: string;
 
   /**
    * Gets or sets the list of allowed actions on the job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allowedActions?: string[];
 
   /**
    * Gets or sets the job activity id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activityId?: string;
 
   /**
    * Gets or sets the list of tasks.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   tasks?: TaskModel[];
 
   /**
    * Gets or sets the list of errors.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   errors?: ErrorModel[];
 
   /**
@@ -1286,7 +1286,7 @@ model JobModelProperties {
   /**
    * Gets or sets the provisioning state of the job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -1297,26 +1297,26 @@ model TaskModel {
   /**
    * Gets or sets the task name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   taskName?: string;
 
   /**
    * Gets or sets the task state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: TaskState;
 
   /**
    * Gets or sets the start time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * Gets or sets the end time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
@@ -1328,7 +1328,7 @@ model TaskModel {
   /**
    * Gets or sets the list of children job models.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   childrenJobs?: JobModel[];
 }
 
@@ -1350,44 +1350,44 @@ model ErrorModel {
   /**
    * Gets or sets the error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * Gets or sets the error type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Gets or sets the error severity.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   severity?: string;
 
   /**
    * Gets or sets the creation time of error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   creationTime?: utcDateTime;
 
   /**
    * Gets or sets the error message.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   /**
    * Gets or sets the possible causes of error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   causes?: string;
 
   /**
    * Gets or sets the recommended action to resolve error.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recommendation?: string;
 }
 
@@ -1401,7 +1401,7 @@ model JobModelCustomProperties {
    * Gets or sets any custom properties of the affected object.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   affectedObjectDetails?: {
     description?: string;
     type?: "object";
@@ -1415,7 +1415,7 @@ model PolicyModelProperties {
   /**
    * Gets or sets the provisioning state of the policy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -1439,7 +1439,7 @@ model PrivateEndpointConnectionResponseProperties {
   /**
    * Gets or sets provisioning state of the private endpoint connection.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -1490,7 +1490,7 @@ model PrivateEndpointConnectionProxyProperties {
   /**
    * Gets or sets the provisioning state of the private endpoint connection proxy.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -1512,25 +1512,25 @@ model RemotePrivateEndpoint {
   /**
    * Gets or sets the list of Private Link Service Connections and gets populated for Auto approval flow.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   privateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   /**
    * Gets or sets the list of Manual Private Link Service Connections and gets populated for Manual approval flow.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   manualPrivateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   /**
    * Gets or sets the list of private link service proxies.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   privateLinkServiceProxies?: PrivateLinkServiceProxy[];
 
   /**
    * Gets or sets the list of Connection Details. This is the connection details for private endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   connectionDetails?: ConnectionDetails[];
 }
 
@@ -1576,7 +1576,7 @@ model PrivateLinkServiceProxy {
   /**
    * Gets or sets group connectivity information.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   groupConnectivityInformation?: GroupConnectivityInformation[];
 }
 
@@ -1677,7 +1677,7 @@ model PrivateLinkResourceProperties {
   /**
    * Gets or sets the provisioning state of the private link resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -1700,161 +1700,161 @@ model ProtectedItemModelProperties {
   /**
    * Gets or sets the protected item correlation Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   correlationId?: string;
 
   /**
    * Gets or sets the provisioning state of the fabric agent.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Gets or sets the protection state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   protectionState?: ProtectionState;
 
   /**
    * Gets or sets the protection state description.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   protectionStateDescription?: string;
 
   /**
    * Gets or sets the test failover state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testFailoverState?: TestFailoverState;
 
   /**
    * Gets or sets the Test failover state description.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testFailoverStateDescription?: string;
 
   /**
    * Gets or sets the resynchronization state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resynchronizationState?: ResynchronizationState;
 
   /**
    * Gets or sets the fabric object Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricObjectId?: string;
 
   /**
    * Gets or sets the fabric object name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricObjectName?: string;
 
   /**
    * Gets or sets the source fabric provider Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceFabricProviderId?: string;
 
   /**
    * Gets or sets the target fabric provider Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetFabricProviderId?: string;
 
   /**
    * Gets or sets the fabric Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricId?: string;
 
   /**
    * Gets or sets the target fabric Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetFabricId?: string;
 
   /**
    * Gets or sets the fabric agent Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricAgentId?: string;
 
   /**
    * Gets or sets the target fabric agent Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetFabricAgentId?: string;
 
   /**
    * Gets or sets a value indicating whether resynchronization is required or not.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resyncRequired?: boolean;
 
   /**
    * Gets or sets the Last successful planned failover time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSuccessfulPlannedFailoverTime?: utcDateTime;
 
   /**
    * Gets or sets the Last successful unplanned failover time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSuccessfulUnplannedFailoverTime?: utcDateTime;
 
   /**
    * Gets or sets the Last successful test failover time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastSuccessfulTestFailoverTime?: utcDateTime;
 
   /**
    * Gets or sets the current scenario.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   currentJob?: ProtectedItemJobProperties;
 
   /**
    * Gets or sets the allowed scenarios on the protected item.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allowedJobs?: string[];
 
   /**
    * Gets or sets the last failed enabled protection job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastFailedEnableProtectionJob?: ProtectedItemJobProperties;
 
   /**
    * Gets or sets the last failed planned failover job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastFailedPlannedFailoverJob?: ProtectedItemJobProperties;
 
   /**
    * Gets or sets the last test failover job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastTestFailoverJob?: ProtectedItemJobProperties;
 
   /**
    * Gets or sets protected item replication health.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   replicationHealth?: HealthStatus;
 
   /**
    * Gets or sets the list of health errors.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   healthErrors?: HealthErrorModel[];
 
   /**
@@ -1870,44 +1870,44 @@ model ProtectedItemJobProperties {
   /**
    * Gets or sets protection scenario name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   scenarioName?: string;
 
   /**
    * Gets or sets job Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Gets or sets job name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Gets or sets the job friendly display name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   /**
    * Gets or sets job state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: string;
 
   /**
    * Gets or sets start time of the job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * Gets or sets end time of the job.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
@@ -1932,25 +1932,25 @@ model ProtectedItemModelUpdate {
   /**
    * Gets or sets the Id of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Gets or sets the name of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Gets or sets the type of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -2023,7 +2023,7 @@ model RecoveryPointModelProperties {
   /**
    * Gets or sets the provisioning state of the recovery point item.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -2042,7 +2042,7 @@ model ReplicationExtensionModelProperties {
   /**
    * Gets or sets the provisioning state of the replication extension.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
@@ -2101,7 +2101,7 @@ model DeploymentPreflightModel {
   /**
    * Gets or sets the list of resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   resources?: DeploymentPreflightResource[];
 }
 
@@ -2122,7 +2122,7 @@ model DeploymentPreflightResource {
   /**
    * Gets or sets the location of the resource.
    */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
   /**
@@ -2174,13 +2174,13 @@ model VaultModelProperties {
   /**
    * Gets or sets the provisioning state of the vault.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * Gets or sets the service resource Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serviceResourceId?: string;
 
   /**
@@ -2201,13 +2201,13 @@ model VaultIdentityModel {
   /**
    * Gets or sets the object ID of the service principal object for the managed identity that is used to grant role-based access to an Azure resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   principalId?: string;
 
   /**
    * Gets or sets a Globally Unique Identifier (GUID) that represents the Azure AD tenant where the resource is now a member.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   tenantId?: string;
 }
 
@@ -2234,25 +2234,25 @@ model VaultModelUpdate {
   /**
    * Gets or sets the Id of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * Gets or sets the name of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * Gets or sets the type of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 }
 
@@ -2282,7 +2282,7 @@ model AzStackHCIClusterProperties {
   /**
    * Gets or sets the list of AzStackHCICluster Storage Container.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   storageContainers: StorageContainerProperties[];
 }
 
@@ -2318,7 +2318,7 @@ model AzStackHCIFabricModelCustomProperties
   /**
    * Gets or sets the Appliance name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   applianceName?: string[];
 
   /**
@@ -2329,13 +2329,13 @@ model AzStackHCIFabricModelCustomProperties
   /**
    * Gets or sets the fabric resource Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricResourceId?: string;
 
   /**
    * Gets or sets the fabric container Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricContainerId?: string;
 
   /**
@@ -2347,7 +2347,7 @@ model AzStackHCIFabricModelCustomProperties
   /**
    * Gets or sets the migration hub Uri.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   migrationHubUri?: string;
 
   /**
@@ -2384,8 +2384,8 @@ model FailoverJobModelCustomProperties extends JobModelCustomProperties {
   /**
    * Gets or sets the failed over protected item details.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   protectedItemDetails?: FailoverProtectedItemProperties[];
 
   /**
@@ -2401,44 +2401,44 @@ model FailoverProtectedItemProperties {
   /**
    * Gets or sets the protected item name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   protectedItemName?: string;
 
   /**
    * Gets or sets the VM name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmName?: string;
 
   /**
    * Gets or sets the test VM name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testVmName?: string;
 
   /**
    * Gets or sets the recovery point Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryPointId?: string;
 
   /**
    * Gets or sets the recovery point time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   recoveryPointTime?: utcDateTime;
 
   /**
    * Gets or sets the network name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkName?: string;
 
   /**
    * Gets or sets the network subnet.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subnet?: string;
 }
 
@@ -2458,13 +2458,13 @@ model HyperVMigrateFabricModelCustomProperties
   /**
    * Gets or sets the fabric resource Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricResourceId?: string;
 
   /**
    * Gets or sets the fabric container Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   fabricContainerId?: string;
 
   /**
@@ -2476,7 +2476,7 @@ model HyperVMigrateFabricModelCustomProperties
   /**
    * Gets or sets the migration hub Uri.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   migrationHubUri?: string;
 
   /**
@@ -2557,31 +2557,31 @@ model HyperVToAzStackHCIEventModelCustomProperties
   /**
    * Gets or sets the friendly name of the source which has raised this health event.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eventSourceFriendlyName?: string;
 
   /**
    * Gets or sets the protected item friendly name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   protectedItemFriendlyName?: string;
 
   /**
    * Gets or sets the source appliance name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceApplianceName?: string;
 
   /**
    * Gets or sets the source target name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetApplianceName?: string;
 
   /**
    * Gets or sets the server type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serverType?: string;
 
   /**
@@ -2604,7 +2604,7 @@ model HyperVToAzStackHCINicInput {
   /**
    * Gets or sets the network name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkName?: string;
 
   /**
@@ -2685,85 +2685,85 @@ model HyperVToAzStackHCIProtectedDiskProperties {
   /**
    * Gets or sets the ARM Id of the storage container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageContainerId?: string;
 
   /**
    * Gets or sets the local path of the storage container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageContainerLocalPath?: string;
 
   /**
    * Gets or sets the source disk Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceDiskId?: string;
 
   /**
    * Gets or sets the source disk Name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceDiskName?: string;
 
   /**
    * Gets or sets the seed disk name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   seedDiskName?: string;
 
   /**
    * Gets or sets the test failover clone disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testMigrateDiskName?: string;
 
   /**
    * Gets or sets the failover clone disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   migrateDiskName?: string;
 
   /**
    * Gets or sets a value indicating whether the disk is the OS disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isOsDisk?: boolean;
 
   /**
    * Gets or sets the disk capacity in bytes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capacityInBytes?: int64;
 
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isDynamic?: boolean;
 
   /**
    * Gets or sets the disk type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskType?: string;
 
   /**
    * Gets or sets a value of disk block size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskBlockSize?: int64;
 
   /**
    * Gets or sets a value of disk logical sector size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskLogicalSectorSize?: int64;
 
   /**
    * Gets or sets a value of disk physical sector size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskPhysicalSectorSize?: int64;
 }
 
@@ -2776,7 +2776,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the location of the protected item.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activeLocation?: ProtectedItemActiveLocation;
 
   /**
@@ -2794,7 +2794,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the Target AzStackHCI cluster name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetAzStackHciClusterName?: string;
 
   /**
@@ -2806,31 +2806,31 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the list of disks to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   disksToInclude: HyperVToAzStackHCIDiskInput[];
 
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   nicsToInclude: HyperVToAzStackHCINicInput[];
 
   /**
    * Gets or sets the source VM display name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceVmName?: string;
 
   /**
    * Gets or sets the source VM CPU cores.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceCpuCores?: int32;
 
   /**
    * Gets or sets the source VM ram memory size in megabytes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceMemoryInMegaBytes?: float64;
 
   /**
@@ -2907,37 +2907,37 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the source appliance name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceApplianceName?: string;
 
   /**
    * Gets or sets the target appliance name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetApplianceName?: string;
 
   /**
    * Gets or sets the type of the OS.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: string;
 
   /**
    * Gets or sets the name of the OS.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osName?: string;
 
   /**
    * Gets or sets the firmware type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   firmwareType?: string;
 
   /**
    * Gets or sets the target location.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetLocation?: string;
 
   /**
@@ -2949,58 +2949,58 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the recovery point Id to which the VM was failed over.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failoverRecoveryPointId?: string;
 
   /**
    * Gets or sets the last recovery point received time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRecoveryPointReceived?: utcDateTime;
 
   /**
    * Gets or sets the last recovery point Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastRecoveryPointId?: string;
 
   /**
    * Gets or sets the initial replication progress percentage. This is calculated based on total bytes processed for all disks in the source VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   initialReplicationProgressPercentage?: int32;
 
   /**
    * Gets or sets the resync progress percentage. This is calculated based on total bytes processed for all disks in the source VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resyncProgressPercentage?: int32;
 
   /**
    * Gets or sets the list of protected disks.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   protectedDisks?: HyperVToAzStackHCIProtectedDiskProperties[];
 
   /**
    * Gets or sets the VM NIC details.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   protectedNics?: HyperVToAzStackHCIProtectedNicProperties[];
 
   /**
    * Gets or sets the BIOS Id of the target AzStackHCI VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetVmBiosId?: string;
 
   /**
    * Gets or sets the latest timestamp that replication status is updated.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastReplicationUpdateTime?: utcDateTime;
 
@@ -3038,37 +3038,37 @@ model HyperVToAzStackHCIProtectedNicProperties {
   /**
    * Gets or sets the NIC Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nicId?: string;
 
   /**
    * Gets or sets the NIC mac address.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   macAddress?: string;
 
   /**
    * Gets or sets the network name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkName?: string;
 
   /**
    * Gets or sets the target network Id within AzStackHCI Cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetNetworkId?: string;
 
   /**
    * Gets or sets the target test network Id within AzStackHCI Cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testNetworkId?: string;
 
   /**
    * Gets or sets the selection type of the NIC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   selectionTypeForFailover?: VMNicSelection;
 }
 
@@ -3081,7 +3081,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   nicsToInclude?: HyperVToAzStackHCINicInput[];
 
   /**
@@ -3124,7 +3124,7 @@ model HyperVToAzStackHCIRecoveryPointModelCustomProperties
   /**
    * Gets or sets the list of the disk Ids.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskIds?: string[];
 
   /**
@@ -3148,7 +3148,7 @@ model HyperVToAzStackHCIReplicationExtensionModelCustomProperties
   /**
    * Gets or sets the ARM Id of the HyperV site.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hyperVSiteId?: string;
 
   /**
@@ -3160,7 +3160,7 @@ model HyperVToAzStackHCIReplicationExtensionModelCustomProperties
   /**
    * Gets or sets the ARM Id of the AzStackHCI site.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azStackHciSiteId?: string;
 
   /**
@@ -3176,61 +3176,61 @@ model HyperVToAzStackHCIReplicationExtensionModelCustomProperties
   /**
    * Gets or sets the Uri of ASR.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   asrServiceUri?: string;
 
   /**
    * Gets or sets the Uri of Rcm.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rcmServiceUri?: string;
 
   /**
    * Gets or sets the Uri of Gateway.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   gatewayServiceUri?: string;
 
   /**
    * Gets or sets the gateway service Id of source.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceGatewayServiceId?: string;
 
   /**
    * Gets or sets the gateway service Id of target.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetGatewayServiceId?: string;
 
   /**
    * Gets or sets the source storage container name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceStorageContainerName?: string;
 
   /**
    * Gets or sets the target storage container name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetStorageContainerName?: string;
 
   /**
    * Gets or sets the resource location.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceLocation?: string;
 
   /**
    * Gets or sets the subscription.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subscriptionId?: string;
 
   /**
    * Gets or sets the resource group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGroup?: string;
 
   /**
@@ -3296,7 +3296,7 @@ model OperationModelCollection {
   /**
    * Gets or sets the list of operations.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   value?: OperationModel[];
 
   /**
@@ -3350,7 +3350,7 @@ model TestFailoverCleanupJobModelCustomProperties
   /**
    * Gets or sets the test failover cleanup comments.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   comments?: string;
 
   /**
@@ -3366,8 +3366,8 @@ model TestFailoverJobModelCustomProperties extends JobModelCustomProperties {
   /**
    * Gets or sets the test VM details.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   protectedItemDetails?: FailoverProtectedItemProperties[];
 
   /**
@@ -3495,31 +3495,31 @@ model VMwareToAzStackHCIEventModelCustomProperties
   /**
    * Gets or sets the friendly name of the source which has raised this health event.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   eventSourceFriendlyName?: string;
 
   /**
    * Gets or sets the protected item friendly name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   protectedItemFriendlyName?: string;
 
   /**
    * Gets or sets the source appliance name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceApplianceName?: string;
 
   /**
    * Gets or sets the source target name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetApplianceName?: string;
 
   /**
    * Gets or sets the server type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   serverType?: string;
 
   /**
@@ -3548,7 +3548,7 @@ model VMwareToAzStackHCINicInput {
   /**
    * Gets or sets the network name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkName?: string;
 
   /**
@@ -3629,85 +3629,85 @@ model VMwareToAzStackHCIProtectedDiskProperties {
   /**
    * Gets or sets the ARM Id of the storage container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageContainerId?: string;
 
   /**
    * Gets or sets the local path of the storage container.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageContainerLocalPath?: string;
 
   /**
    * Gets or sets the source disk Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceDiskId?: string;
 
   /**
    * Gets or sets the source disk Name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceDiskName?: string;
 
   /**
    * Gets or sets the seed disk name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   seedDiskName?: string;
 
   /**
    * Gets or sets the test failover clone disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testMigrateDiskName?: string;
 
   /**
    * Gets or sets the failover clone disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   migrateDiskName?: string;
 
   /**
    * Gets or sets a value indicating whether the disk is the OS disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isOsDisk?: boolean;
 
   /**
    * Gets or sets the disk capacity in bytes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capacityInBytes?: int64;
 
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isDynamic?: boolean;
 
   /**
    * Gets or sets the disk type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskType?: string;
 
   /**
    * Gets or sets a value of disk block size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskBlockSize?: int64;
 
   /**
    * Gets or sets a value of disk logical sector size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskLogicalSectorSize?: int64;
 
   /**
    * Gets or sets a value of disk physical sector size.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskPhysicalSectorSize?: int64;
 }
 
@@ -3720,7 +3720,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the location of the protected item.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   activeLocation?: ProtectedItemActiveLocation;
 
   /**
@@ -3738,7 +3738,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the Target AzStackHCI cluster name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetAzStackHciClusterName?: string;
 
   /**
@@ -3756,7 +3756,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the target location.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetLocation?: string;
 
   /**
@@ -3768,33 +3768,33 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the list of disks to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   disksToInclude: VMwareToAzStackHCIDiskInput[];
 
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   nicsToInclude: VMwareToAzStackHCINicInput[];
 
   /**
    * Gets or sets the list of protected disks.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   protectedDisks?: VMwareToAzStackHCIProtectedDiskProperties[];
 
   /**
    * Gets or sets the VM NIC details.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   protectedNics?: VMwareToAzStackHCIProtectedNicProperties[];
 
   /**
    * Gets or sets the BIOS Id of the target AzStackHCI VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetVmBiosId?: string;
 
   /**
@@ -3842,19 +3842,19 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the type of the OS.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: string;
 
   /**
    * Gets or sets the name of the OS.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osName?: string;
 
   /**
    * Gets or sets the firmware type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   firmwareType?: string;
 
   /**
@@ -3866,19 +3866,19 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the source VM display name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceVmName?: string;
 
   /**
    * Gets or sets the source VM CPU cores.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceCpuCores?: int32;
 
   /**
    * Gets or sets the source VM ram memory size in megabytes.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceMemoryInMegaBytes?: float64;
 
   /**
@@ -3902,74 +3902,74 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the source appliance name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceApplianceName?: string;
 
   /**
    * Gets or sets the target appliance name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetApplianceName?: string;
 
   /**
    * Gets or sets the recovery point Id to which the VM was failed over.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failoverRecoveryPointId?: string;
 
   /**
    * Gets or sets the last recovery point received time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRecoveryPointReceived?: utcDateTime;
 
   /**
    * Gets or sets the last recovery point Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastRecoveryPointId?: string;
 
   /**
    * Gets or sets the initial replication progress percentage. This is calculated based on total bytes processed for all disks in the source VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   initialReplicationProgressPercentage?: int32;
 
   /**
    * Gets or sets the migration progress percentage.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   migrationProgressPercentage?: int32;
 
   /**
    * Gets or sets the resume progress percentage.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resumeProgressPercentage?: int32;
 
   /**
    * Gets or sets the resync progress percentage. This is calculated based on total bytes processed for all disks in the source VM.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resyncProgressPercentage?: int32;
 
   /**
    * Gets or sets the resync retry count.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resyncRetryCount?: int64;
 
   /**
    * Gets or sets a value indicating whether resync is required.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resyncRequired?: boolean;
 
   /**
    * Gets or sets the resync state.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resyncState?: VMwareToAzureMigrateResyncState;
 
   /**
@@ -3980,13 +3980,13 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
   /**
    * Gets or sets the resume retry count.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resumeRetryCount?: int64;
 
   /**
    * Gets or sets the latest timestamp that replication status is updated.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastReplicationUpdateTime?: utcDateTime;
 
@@ -4004,19 +4004,19 @@ model VMwareToAzStackHCIProtectedNicProperties {
   /**
    * Gets or sets the NIC Id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nicId?: string;
 
   /**
    * Gets or sets the NIC mac address.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   macAddress?: string;
 
   /**
    * Gets or sets the NIC label.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   label?: string;
 
   /**
@@ -4027,25 +4027,25 @@ model VMwareToAzStackHCIProtectedNicProperties {
   /**
    * Gets or sets the network name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkName?: string;
 
   /**
    * Gets or sets the target network Id within AzStackHCI Cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetNetworkId?: string;
 
   /**
    * Gets or sets the target test network Id within AzStackHCI Cluster.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testNetworkId?: string;
 
   /**
    * Gets or sets the selection type of the NIC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   selectionTypeForFailover?: VMNicSelection;
 }
 
@@ -4058,7 +4058,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomPropertiesUpdate
   /**
    * Gets or sets the list of VM NIC to replicate.
    */
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   nicsToInclude?: VMwareToAzStackHCINicInput[];
 
   /**
@@ -4101,7 +4101,7 @@ model VMwareToAzStackHCIRecoveryPointModelCustomProperties
   /**
    * Gets or sets the list of the disk Ids.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskIds?: string[];
 
   /**
@@ -4125,7 +4125,7 @@ model VMwareToAzStackHCIReplicationExtensionModelCustomProperties
   /**
    * Gets or sets the ARM Id of the VMware site.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vmwareSiteId?: string;
 
   /**
@@ -4137,7 +4137,7 @@ model VMwareToAzStackHCIReplicationExtensionModelCustomProperties
   /**
    * Gets or sets the ARM Id of the AzStackHCI site.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   azStackHciSiteId?: string;
 
   /**
@@ -4153,61 +4153,61 @@ model VMwareToAzStackHCIReplicationExtensionModelCustomProperties
   /**
    * Gets or sets the Uri of ASR.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   asrServiceUri?: string;
 
   /**
    * Gets or sets the Uri of Rcm.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rcmServiceUri?: string;
 
   /**
    * Gets or sets the Uri of Gateway.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   gatewayServiceUri?: string;
 
   /**
    * Gets or sets the gateway service Id of source.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceGatewayServiceId?: string;
 
   /**
    * Gets or sets the gateway service Id of target.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetGatewayServiceId?: string;
 
   /**
    * Gets or sets the source storage container name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sourceStorageContainerName?: string;
 
   /**
    * Gets or sets the target storage container name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetStorageContainerName?: string;
 
   /**
    * Gets or sets the resource location.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceLocation?: string;
 
   /**
    * Gets or sets the subscription.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subscriptionId?: string;
 
   /**
    * Gets or sets the resource group.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resourceGroup?: string;
 
   /**

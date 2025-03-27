@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -96,7 +94,7 @@ model AwsApiGatewayStageProperties {
   documentationVersion?: string;
 
   @doc("A map that defines the method settings for a Stage resource. Keys (designated as ``/{method_setting_key`` below) are method paths defined as ``{resource_path}/{http_method}`` for an individual method override, or ``/\\*/\\*`` for overriding all methods in the stage.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   methodSettings?: MethodSetting[];
 
   @doc("The string identifier of the associated RestApi.")
@@ -106,7 +104,7 @@ model AwsApiGatewayStageProperties {
   stageName?: string;
 
   @doc("The collection of tags. Each tag element is associated with a given resource.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("Specifies whether active tracing with X-ray is enabled for the Stage.")

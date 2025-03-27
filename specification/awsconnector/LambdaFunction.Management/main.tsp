@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -72,7 +70,6 @@ model LambdaFunctionProperties {
 @doc("Definition of awsLambdaFunction")
 model AwsLambdaFunctionProperties {
   @doc("The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is ``x86_64``.")
-  @extension("x-ms-identifiers", [])
   architectures?: Architectures[];
 
   @doc("Property arn")
@@ -97,7 +94,7 @@ model AwsLambdaFunctionProperties {
   ephemeralStorage?: EphemeralStorage;
 
   @doc("Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an [AWS::EFS::MountTarget](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-mounttarget.html) resource, you must also specify a ``DependsOn`` attribute to ensure that the mount target is created or updated before the function. For more information about using the ``DependsOn`` attribute, see [DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html).")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   fileSystemConfigs?: FileSystemConfig[];
 
   @doc("The name of the Lambda function, up to 64 characters in length. If you don't specify a name, CFN generates one. If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.")
@@ -113,7 +110,6 @@ model AwsLambdaFunctionProperties {
   kmsKeyArn?: string;
 
   @doc("A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment. Specify each layer by its ARN, including the version.")
-  @extension("x-ms-identifiers", [])
   layers?: string[];
 
   @doc("The function's Amazon CloudWatch Logs configuration settings. The function's Amazon CloudWatch Logs configuration settings.")
@@ -144,7 +140,7 @@ model AwsLambdaFunctionProperties {
   snapStartResponse?: SnapStartResponse;
 
   @doc("A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the function.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For more information, see [Lambda execution environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).")
@@ -251,11 +247,9 @@ model FileSystemConfig {
 @doc("Definition of ImageConfig")
 model ImageConfig {
   @doc("Specifies parameters that you want to pass in with ENTRYPOINT. You can specify a maximum of 1,500 parameters in the list.")
-  @extension("x-ms-identifiers", [])
   command?: string[];
 
   @doc("Specifies the entry point to their application, which is typically the location of the runtime executable. You can specify a maximum of 1,500 string entries in the list.")
-  @extension("x-ms-identifiers", [])
   entryPoint?: string[];
 
   @doc("Specifies the working directory. The length of the directory string cannot exceed 1,000 characters.")
@@ -456,11 +450,9 @@ model VpcConfig {
   ipv6AllowedForDualStack?: boolean;
 
   @doc("A list of VPC security group IDs.")
-  @extension("x-ms-identifiers", [])
   securityGroupIds?: string[];
 
   @doc("A list of VPC subnet IDs.")
-  @extension("x-ms-identifiers", [])
   subnetIds?: string[];
 }
 

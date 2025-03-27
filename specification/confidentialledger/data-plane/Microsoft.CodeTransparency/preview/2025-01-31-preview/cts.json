@@ -1,0 +1,865 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Code Transparency Service",
+    "version": "2025-01-31-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/.well-known/transparency-configuration": {
+      "get": {
+        "operationId": "GetTransparencyConfigCbor",
+        "description": "Get the transparency service configuration, mandatory in IETF SCITT draft",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCborHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transparency configuration, see IETF SCITT draft.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTransparencyConfigCbor": {
+            "$ref": "./examples/GetTransparencyConfigCbor.json"
+          }
+        }
+      }
+    },
+    "/entries": {
+      "post": {
+        "operationId": "CreateEntry",
+        "description": "Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft",
+        "produces": [
+          "application/cose",
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
+        "consumes": [
+          "application/cose"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCoseOrCborHeader"
+          },
+          {
+            "$ref": "#/parameters/SignedStatement.body"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the receipt"
+              }
+            }
+          },
+          "202": {
+            "description": "Response of entry submission containing the operation id, mandatory in IETF SCITT draft",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the operation"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateEntry": {
+            "$ref": "./examples/CreateEntry.json"
+          }
+        }
+      }
+    },
+    "/entries/{entryId}": {
+      "get": {
+        "operationId": "GetEntry",
+        "description": "Get receipt",
+        "produces": [
+          "application/cose",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EntryIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCoseHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A ledger receipt, see IETF SCITT draft",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the receipt"
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntry": {
+            "$ref": "./examples/GetEntry.json"
+          }
+        }
+      }
+    },
+    "/entries/{entryId}/statement": {
+      "get": {
+        "operationId": "GetEntryStatement",
+        "description": "Get the transparent statement consisting of the signed statement and the receipt embedded in the header",
+        "produces": [
+          "application/cose",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EntryIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCoseHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transparent statement",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntryStatement": {
+            "$ref": "./examples/GetEntryStatement.json"
+          }
+        }
+      }
+    },
+    "/jwks": {
+      "get": {
+        "operationId": "GetPublicKeys",
+        "description": "Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation",
+        "produces": [
+          "application/json",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JwksDocument"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPublicKeys": {
+            "$ref": "./examples/GetPublicKeys.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}": {
+      "get": {
+        "operationId": "GetOperation",
+        "description": "Get status of the long running registration operation, mandatory in IETF SCITT draft",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCborHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides status details for long running operation, mandatory in IETF SCITT draft",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the entry"
+              }
+            }
+          },
+          "202": {
+            "description": "Pending response if the operation was not complete, mandatory in IETF SCITT draft",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the operation"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOperation": {
+            "$ref": "./examples/GetOperation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateEntryCreated": {
+      "type": "object",
+      "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "Receipt body in COSE format"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "CreateEntryPending": {
+      "type": "object",
+      "description": "Response of entry submission containing the operation id, mandatory in IETF SCITT draft",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "Operation status response"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "JsonWebKey": {
+      "type": "object",
+      "description": "rfc7517 JSON Web Key representation adapted from a shared swagger definition in the common types",
+      "properties": {
+        "alg": {
+          "type": "string",
+          "description": "The \"alg\" (algorithm) parameter identifies the algorithm intended for\nuse with the key.  The values used should either be registered in the\nIANA \"JSON Web Signature and Encryption Algorithms\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name."
+        },
+        "crv": {
+          "type": "string",
+          "description": "The \"crv\" (curve) parameter identifies the curve type"
+        },
+        "d": {
+          "type": "string",
+          "description": "RSA private exponent or ECC private key"
+        },
+        "dp": {
+          "type": "string",
+          "description": "RSA Private Key Parameter"
+        },
+        "dq": {
+          "type": "string",
+          "description": "RSA Private Key Parameter"
+        },
+        "e": {
+          "type": "string",
+          "description": "RSA public exponent, in Base64"
+        },
+        "k": {
+          "type": "string",
+          "description": "Symmetric key"
+        },
+        "kid": {
+          "type": "string",
+          "description": "The \"kid\" (key ID) parameter is used to match a specific key.  This\nis used, for instance, to choose among a set of keys within a JWK Set\nduring key rollover.  The structure of the \"kid\" value is\nunspecified.  When \"kid\" values are used within a JWK Set, different\nkeys within the JWK Set SHOULD use distinct \"kid\" values.  (One\nexample in which different keys might use the same \"kid\" value is if\nthey have different \"kty\" (key type) values but are considered to be\nequivalent alternatives by the application using them.)  The \"kid\"\nvalue is a case-sensitive string."
+        },
+        "kty": {
+          "type": "string",
+          "description": "The \"kty\" (key type) parameter identifies the cryptographic algorithm\nfamily used with the key, such as \"RSA\" or \"EC\". \"kty\" values should\neither be registered in the IANA \"JSON Web Key Types\" registry\nestablished by [JWA] or be a value that contains a Collision-\nResistant Name.  The \"kty\" value is a case-sensitive string."
+        },
+        "n": {
+          "type": "string",
+          "description": "RSA modulus, in Base64"
+        },
+        "p": {
+          "type": "string",
+          "description": "RSA secret prime"
+        },
+        "q": {
+          "type": "string",
+          "description": "RSA secret prime, with p < q"
+        },
+        "qi": {
+          "type": "string",
+          "description": "RSA Private Key Parameter"
+        },
+        "use": {
+          "type": "string",
+          "description": "Use (\"public key use\") identifies the intended use of\nthe public key. The \"use\" parameter is employed to indicate whether\na public key is used for encrypting data or verifying the signature\non data. Values are commonly \"sig\" (signature) or \"enc\" (encryption)."
+        },
+        "x": {
+          "type": "string",
+          "description": "X coordinate for the Elliptic Curve point"
+        },
+        "x5c": {
+          "type": "array",
+          "description": "The \"x5c\" (X.509 certificate chain) parameter contains a chain of one\nor more PKIX certificates [RFC5280].  The certificate chain is\nrepresented as a JSON array of certificate value strings.  Each\nstring in the array is a base64-encoded (Section 4 of [RFC4648] --\nnot base64url-encoded) DER [ITU.X690.1994] PKIX certificate value.\nThe PKIX certificate containing the key value MUST be the first\ncertificate.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "y": {
+          "type": "string",
+          "description": "Y coordinate for the Elliptic Curve point"
+        }
+      },
+      "required": [
+        "kty"
+      ]
+    },
+    "JwksDocument": {
+      "type": "object",
+      "description": "A JWKS like document",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "List of public keys used for receipt verification.",
+          "items": {
+            "$ref": "#/definitions/JsonWebKey"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "keys"
+      ]
+    },
+    "OperationStatusComplete": {
+      "type": "object",
+      "description": "Provides status details for long running operation, mandatory in IETF SCITT draft",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "Operation status response"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "OperationStatusPending": {
+      "type": "object",
+      "description": "Pending response if the operation was not complete, mandatory in IETF SCITT draft"
+    },
+    "ReceiptEntry": {
+      "type": "object",
+      "description": "A ledger receipt, see IETF SCITT draft",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "A receipt structure in COSE format"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "Response400Cbor": {
+      "type": "object",
+      "description": "Validation error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Response404Cbor": {
+      "type": "object",
+      "description": "Not found error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Response429Cbor": {
+      "type": "object",
+      "description": "Not found error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Response500Cbor": {
+      "type": "object",
+      "description": "Server error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Response503Cbor": {
+      "type": "object",
+      "description": "Service unavailable error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "TransparencyConfigurationCbor": {
+      "type": "object",
+      "description": "Transparency configuration, see IETF SCITT draft.",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the configuration object"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "TransparentStatement": {
+      "type": "object",
+      "description": "Transparent statement",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "CoseSign1 signature envelope with the receipt embedded in the unprotected header"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    }
+  },
+  "parameters": {
+    "AcceptCborHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/cbor"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AcceptCoseHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/cose"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AcceptCoseOrCborHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/cose; application/cbor"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "EntryIdParameter": {
+      "name": "entryId",
+      "in": "path",
+      "description": "ID of the entry to retrieve.",
+      "required": true,
+      "type": "string",
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "ID of the operation to retrieve.",
+      "required": true,
+      "type": "string",
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "SignedStatement.body": {
+      "name": "body",
+      "in": "body",
+      "description": "CoseSign1 signature envelope",
+      "required": true,
+      "schema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

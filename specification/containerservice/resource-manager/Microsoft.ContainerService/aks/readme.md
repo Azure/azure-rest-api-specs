@@ -34,7 +34,20 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
+<<<<<<< HEAD
 tag: package-preview-2025-01
+=======
+tag: package-2025-01
+```
+
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01'
+input-file:
+  - stable/2025-01-01/managedClusters.json
+>>>>>>> 2f8ffdd30b80c7302311143c789383ff080bec55
 ```
 
 ### Tag: package-preview-2025-01
@@ -1256,4 +1269,12 @@ directive:
     from: managedClusters.json
     where: $.definitions.ManagedClusterOIDCIssuerProfile.properties.issuerURL
     reason: For managedCluster.properties.oidcIssuerProfile.issuerURL, already used in preview API
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResultList
+    reason: The model referenced in the common type does not conform to the definition of the rule, more details see https://github.com/Azure/azure-openapi-validator/issues/773
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.NodeImageVersionsListResult
+    reason: The tool compared the stable API version and mistakenly scanned out that this model was not newly added, more details see https://github.com/Azure/azure-openapi-validator/issues/773
 ```

@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -75,7 +73,6 @@ model AwsCloudWatchAlarmProperties {
   actionsEnabled?: boolean = true;
 
   @doc("The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN). For more information about creating alarms and the actions that you can specify, see [PutMetricAlarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) in the *API Reference*.")
-  @extension("x-ms-identifiers", [])
   alarmActions?: string[];
 
   @doc("The description of the alarm.")
@@ -94,7 +91,7 @@ model AwsCloudWatchAlarmProperties {
   datapointsToAlarm?: int32;
 
   @doc("The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify ``Dimensions``. Instead, you use ``Metrics``.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dimensions?: Dimension[];
 
   @doc("Used only for alarms based on percentiles. If ``ignore``, the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available.")
@@ -107,21 +104,19 @@ model AwsCloudWatchAlarmProperties {
   extendedStatistic?: string;
 
   @doc("The actions to execute when this alarm transitions to the ``INSUFFICIENT_DATA`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).")
-  @extension("x-ms-identifiers", [])
   insufficientDataActions?: string[];
 
   @doc("The name of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you use ``Metrics`` instead and you can't specify ``MetricName``.")
   metricName?: string;
 
   @doc("An array that enables you to create an alarm based on the result of a metric math expression. Each item in the array either retrieves a metric or performs a math expression. If you specify the ``Metrics`` parameter, you cannot specify ``MetricName``, ``Dimensions``, ``Period``, ``Namespace``, ``Statistic``, ``ExtendedStatistic``, or ``Unit``.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   metrics?: MetricDataQuery[];
 
   @doc("The namespace of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you can't specify ``Namespace`` and you use ``Metrics`` instead. For a list of namespaces for metrics from AWS services, see [Services That Publish Metrics.](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)")
   `namespace`?: string;
 
   @doc("The actions to execute when this alarm transitions to the ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).")
-  @extension("x-ms-identifiers", [])
   okActions?: string[];
 
   @doc("The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. Valid values are 10, 30, 60, and any multiple of 60. For an alarm based on a math expression, you can't specify ``Period``, and instead you use the ``Metrics`` parameter. *Minimum:* 10")
@@ -131,7 +126,7 @@ model AwsCloudWatchAlarmProperties {
   statistic?: string;
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The value to compare with the specified statistic.")
@@ -227,7 +222,7 @@ model MetricStat {
 @doc("Definition of Metric")
 model Metric {
   @doc("The metric dimensions that you want to be used for the metric that the alarm will watch.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dimensions?: Dimension[];
 
   @doc("The name of the metric that you want the alarm to watch. This is a required field.")

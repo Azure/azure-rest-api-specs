@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -91,7 +89,7 @@ model AwsElasticBeanstalkEnvironmentProperties {
   operationsRole?: string;
 
   @doc("Key-value pairs defining configuration options for this environment, such as the instance type.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   optionSettings?: OptionSetting[];
 
   @doc("The Amazon Resource Name (ARN) of the custom platform to use with the environment.")
@@ -101,7 +99,7 @@ model AwsElasticBeanstalkEnvironmentProperties {
   solutionStackName?: string;
 
   @doc("Specifies the tags applied to resources in the environment.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The name of the Elastic Beanstalk configuration template to use with the environment.")

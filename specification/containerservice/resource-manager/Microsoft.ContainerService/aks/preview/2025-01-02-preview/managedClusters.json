@@ -3957,7 +3957,6 @@
             "name": "parameters",
             "in": "body",
             "required": true,
-            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/LoadBalancer"
             },
@@ -4766,6 +4765,11 @@
           "type": "string",
           "title": "The maximum number or percentage of nodes that can be simultaneously unavailable during upgrade.",
           "description": "This can either be set to an integer (e.g. '1') or a percentage (e.g. '5%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 0. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
+        },
+        "maxBlockedNodes": {
+          "type": "string",
+          "title": "The maximum number or percentage of extra nodes that are allowed to be blocked in the agent pool during an upgrade when undrainable node behavior is Cordon.",
+          "description": "This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is maxSurge. This must always be greater than or equal to maxSurge. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster"
         },
         "drainTimeoutInMinutes": {
           "type": "integer",
@@ -5705,6 +5709,7 @@
         },
         "effectiveOutboundIPs": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ResourceReference"
           },
@@ -5788,6 +5793,7 @@
         },
         "effectiveOutboundIPs": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ResourceReference"
           },
@@ -10095,15 +10101,11 @@
       "required": [
         "name"
       ],
-      "description": "The configurations regarding multiple standard load balancers. If not supplied, single load balancer mode will be used. Multiple standard load balancers mode will be used if at lease one configuration is supplied. There has to be a configuration named `kubernetes`."
+      "description": "The configurations regarding multiple standard load balancers. If not supplied, single load balancer mode will be used. Multiple standard load balancers mode will be used if at lease one configuration is supplied. There has to be a configuration named `kubernetes`. The name field will be the name of the corresponding public load balancer. There will be an internal load balancer created if needed, and the name will be `<name>-internal`. The internal lb shares the same configurations as the external one. The internal lbs are not needed to be included in LoadBalancer list."
     },
     "LoadBalancerProperties": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the public load balancer. There will be an internal load balancer created if needed, and the name will be `<name>-internal`. The internal lb shares the same configurations as the external one. The internal lbs are not needed to be included in LoadBalancer list. There must be a name of kubernetes in the list."
-        },
         "primaryAgentPoolName": {
           "type": "string",
           "description": "Required field. A string value that must specify the ID of an existing agent pool. All nodes in the given pool will always be added to this load balancer. This agent pool must have at least one node and minCount>=1 for autoscaling operations. An agent pool can only be the primary pool for a single load balancer."
@@ -10131,7 +10133,6 @@
         }
       },
       "required": [
-        "name",
         "primaryAgentPoolName"
       ]
     },

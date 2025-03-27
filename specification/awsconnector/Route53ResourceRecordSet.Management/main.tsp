@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -100,7 +98,7 @@ model AwsRoute53ResourceRecordSetProperties {
   region?: ResourceRecordSetRegionEnumValue;
 
   @doc("<p>Information about the resource records to act upon.</p> <note> <p>If you're creating an alias resource record set, omit <code>ResourceRecords</code>.</p> </note>")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   resourceRecords?: ResourceRecord[];
 
   @doc("<p> <i>Resource record sets that have a routing policy other than simple:</i> An identifier that differentiates among multiple resource record sets that have the same combination of name and type, such as multiple weighted resource record sets named acme.example.com that have a type of A. In a group of resource record sets that have the same name and type, the value of <code>SetIdentifier</code> must be unique for each resource record set. </p> <p>For information about routing policies, see <a href='https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html'>Choosing a Routing Policy</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>")
