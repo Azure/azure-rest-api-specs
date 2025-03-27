@@ -56,8 +56,10 @@ model AudioTranslationOptions {
   @doc("""
     The requested format of the translation response data, which will influence the content and detail of the result.
     """)
-  @encodedName("application/json", "response_format")
-  responseFormat?: HttpPart<AudioTranslationFormat>;
+  responseFormat?: HttpPart<
+    AudioTranslationFormat,
+    #{ name: "response_format" }
+  >;
 
   @doc("""
     An optional hint to guide the model's style or continue from a prior audio segment. The written language of the
