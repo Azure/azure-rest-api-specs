@@ -21,9 +21,7 @@ using TypeSpec.Versioning;
  * Dell Storage service
  */
 @armProviderNamespace
-@service({
-  title: "Dell.Storage",
-})
+@service(#{ title: "Dell.Storage" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Dell.Storage;
@@ -57,7 +55,7 @@ interface FileSystems {
   /**
    * Update a FileSystemResource
    */
-  @patch
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     LiftrBase.Storage.FileSystemResource,
     LiftrBase.Storage.FileSystemResourceUpdate
