@@ -192,17 +192,20 @@ paths:
                 file:
                   type: string
                   format: binary
+                  description: The file data (not filename) to upload.
                 purpose:
                   $ref: '#/components/schemas/FilePurpose'
+                  description: The intended purpose of the file.
                 filename:
                   type: string
+                  description: The filename to associate with the uploaded data.
               required:
                 - file
                 - purpose
             encoding:
               purpose:
                 contentType: text/plain
-        description: The file data (not filename) to upload.
+        description: The file data to upload and its purpose.
   /files/{fileId}:
     delete:
       operationId: deleteFile

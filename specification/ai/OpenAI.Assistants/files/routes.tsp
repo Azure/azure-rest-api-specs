@@ -30,9 +30,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
  * Uploads a file for use by other operations.
  *
  * @param contentType The 'content-type' header value, always 'multipart/format-data' for this operation.
- * @param file The file data (not filename) to upload.
- * @param purpose The intended purpose of the file.
- * @param filename A filename to associate with the uploaded data.
+ * @param file The file data to upload and its purpose.
  * @returns A representation of the uploaded file.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -45,7 +43,10 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 op uploadFile(
   @header contentType: "multipart/form-data",
   @multipartBody file: {
+    /** The file data (not filename) to upload. */
     @clientName("Data", "csharp") file: HttpPart<bytes>;
+
+    /** The intended purpose of the file. */
     purpose: HttpPart<FilePurpose>;
 
     /*
@@ -55,6 +56,7 @@ op uploadFile(
      *            file input, like curl does) but should remain configurable when using a stream or other data source
      *            lacking an a priori name.
      */
+    @doc("The filename to associate with the uploaded data.")
     filename?: HttpPart<string>;
   },
 ): OpenAIFile;
