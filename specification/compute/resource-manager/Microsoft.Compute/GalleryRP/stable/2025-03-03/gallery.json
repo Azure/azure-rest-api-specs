@@ -1419,6 +1419,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery in which the Script Definition is to be created."
           },
           {
@@ -1426,6 +1427,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery Script Definition to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
           },
           {
@@ -1486,6 +1488,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery in which the Script Definition is to be updated."
           },
           {
@@ -1493,6 +1496,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery Script Definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
           },
           {
@@ -1547,6 +1551,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery from which the Script Definitions are to be retrieved."
           },
           {
@@ -1554,6 +1559,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery Script Definition to be retrieved."
           },
           {
@@ -1598,6 +1604,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery in which the Script Definition is to be deleted."
           },
           {
@@ -1605,6 +1612,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery Script Definition to be deleted."
           },
           {
@@ -1612,11 +1620,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -1655,6 +1668,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery in which the Script Definition resides."
           },
           {
@@ -1662,6 +1676,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery Script Definition in which the Script Version is to be created."
           },
           {
@@ -1669,6 +1684,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
             "description": "The name of the gallery Script Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
           },
           {
@@ -1729,6 +1745,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery in which the Script Definition resides."
           },
           {
@@ -1736,6 +1753,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery Script Definition in which the Script Version is to be updated."
           },
           {
@@ -1743,6 +1761,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
             "description": "The name of the gallery Script Version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
           },
           {
@@ -1797,6 +1816,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery in which the Script Definition resides."
           },
           {
@@ -1804,6 +1824,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery Script Definition in which the Script Version resides."
           },
           {
@@ -1811,22 +1832,8 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
             "description": "The name of the gallery Script Version to be retrieved."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation.",
-            "enum": [
-              "ReplicationStatus",
-              "UefiSettings"
-            ],
-            "x-ms-enum": {
-              "name": "ReplicationStatusTypes",
-              "modelAsString": true
-            }
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -1873,6 +1880,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery in which the Script Definition resides."
           },
           {
@@ -1880,6 +1888,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the gallery Script Definition in which the Script Version resides."
           },
           {
@@ -1887,6 +1896,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
             "description": "The name of the gallery Script Version to be deleted."
           },
           {
@@ -1894,11 +1904,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -2209,6 +2224,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts": {
+      "get": {
+        "tags": [
+          "GalleryScripts"
+        ],
+        "operationId": "GalleryScripts_ListByGallery",
+        "description": "List gallery Script Definitions in a gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Gallery from which Script Definitions are to be listed."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryScriptList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery Scripts in a gallery.": {
+            "$ref": "./examples/galleryExamples/GalleryScript_ListByGallery.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{galleryScriptName}/versions": {
       "get": {
         "tags": [
@@ -2228,6 +2292,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery in which the Script Definition resides."
           },
           {
@@ -2235,6 +2300,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
             "description": "The name of the Gallery Script Definition from which the Script Versions are to be listed."
           },
           {
@@ -3541,6 +3607,7 @@
       "description": "The definition of a parameter that can be passed to a custom action of a Gallery Application Version."
     },
     "GalleryScript": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3555,6 +3622,7 @@
       "description": "Specifies information about the gallery Script Definition that you want to create or update."
     },
     "GalleryScriptUpdate": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3569,6 +3637,7 @@
       "description": "Specifies information about the gallery Script Definition that you want to update."
     },
     "GalleryScriptProperties": {
+      "type": "object",
       "properties": {
         "description": {
           "type": "string",
@@ -3602,6 +3671,10 @@
             "name": "OperatingSystemTypes",
             "modelAsString": false
           }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/GalleryProvisioningState"
         }
       },
       "required": [
@@ -3610,6 +3683,7 @@
       "description": "Describes the properties of a gallery Script Definition."
     },
     "GalleryScriptVersion": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3624,6 +3698,7 @@
       "description": "Specifies information about the gallery Script Version that you want to create or update."
     },
     "GalleryScriptVersionUpdate": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3638,6 +3713,7 @@
       "description": "Specifies information about the gallery Script Version that you want to update."
     },
     "GalleryScriptVersionProperties": {
+      "type": "object",
       "properties": {
         "publishingProfile": {
           "$ref": "#/definitions/GalleryScriptVersionPublishingProfile"
@@ -3660,6 +3736,7 @@
       "description": "Describes the properties of a gallery script version."
     },
     "GalleryScriptVersionPublishingProfile": {
+      "type": "object",
       "properties": {
         "source": {
           "$ref": "#/definitions/ScriptSource"
@@ -3686,6 +3763,7 @@
       "description": "The safety profile of the Gallery Script Version."
     },
     "ScriptSource": {
+      "type": "object",
       "properties": {
         "scriptLink": {
           "type": "string",
@@ -4740,7 +4818,27 @@
       ],
       "description": "The List Gallery Application version operation response."
     },
+    "GalleryScriptList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryScript"
+          },
+          "description": "A list of Gallery Scripts."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of Script Definitions in the Gallery. Call ListNext() with this to fetch the next page of gallery Script Definitions."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Gallery Scripts operation response."
+    },
     "GalleryScriptVersionList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
