@@ -484,14 +484,12 @@
           {
             "name": "document",
             "in": "formData",
-            "description": "Document to be translated in the form",
             "required": true,
             "type": "file"
           },
           {
             "name": "glossary",
             "in": "formData",
-            "description": "Glossary-translation memory will be used during translation in the form. ",
             "required": false,
             "type": "array",
             "items": {
@@ -767,17 +765,12 @@
       "description": "Document Translate Request Content",
       "properties": {
         "document": {
-          "type": "string",
-          "format": "byte",
+          "type": "object",
           "description": "Document to be translated in the form"
         },
         "glossary": {
-          "type": "array",
-          "description": "Glossary-translation memory will be used during translation in the form. ",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
+          "type": "object",
+          "description": "Glossary-translation memory will be used during translation in the form. "
         }
       },
       "required": [

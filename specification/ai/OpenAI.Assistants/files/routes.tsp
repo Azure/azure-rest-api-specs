@@ -39,23 +39,24 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
-#suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
 @post
 @added(ServiceApiVersions.v2024_02_15_preview)
 @route("/files")
 op uploadFile(
   @header contentType: "multipart/form-data",
-  @clientName("Data", "csharp") file: bytes,
-  purpose: FilePurpose,
+  @multipartBody file: {
+    @clientName("Data", "csharp") file: HttpPart<bytes>;
+    purpose: HttpPart<FilePurpose>;
 
-  /*
-   * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
-   *            in the multipart Content-Disposition header for the data section and can be provided independently of
-   *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
-   *            file input, like curl does) but should remain configurable when using a stream or other data source
-   *            lacking an a priori name.
-   */
-  filename?: string,
+    /*
+     * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
+     *            in the multipart Content-Disposition header for the data section and can be provided independently of
+     *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
+     *            file input, like curl does) but should remain configurable when using a stream or other data source
+     *            lacking an a priori name.
+     */
+    filename?: HttpPart<string>;
+  },
 ): OpenAIFile;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"

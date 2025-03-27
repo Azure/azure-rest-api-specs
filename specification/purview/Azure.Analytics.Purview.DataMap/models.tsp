@@ -583,7 +583,7 @@ model BulkImportResult {
 @doc("Business metadata to send to the service")
 model BusinessMetadataOptions {
   @doc("InputStream of file")
-  file: bytes;
+  file: HttpPart<bytes>;
 }
 
 @doc("ImportInfo")

@@ -11,10 +11,10 @@ namespace DocumentTranslation;
 @doc("Document Translate Request Content")
 model DocumentTranslateContent {
   @doc("Document to be translated in the form")
-  document: bytes;
+  document: HttpPart<bytes>;
 
   @doc("Glossary-translation memory will be used during translation in the form. ")
-  glossary?: bytes[];
+  glossary?: HttpPart<bytes[]>;
 }
 
 @doc("Document Translate Result / Response.")
@@ -517,7 +517,7 @@ model DocumentTranslateBody {
 
   #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Document Translate Request Content")
-  @body
+  @multipartBody
   body: DocumentTranslateContent;
 
   @doc("Optional boolean parameter to translate text within an image in the document")
