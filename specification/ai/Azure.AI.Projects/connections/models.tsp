@@ -15,7 +15,7 @@ namespace Azure.AI.Projects;
 model Connection {
   @doc("The name of the resource")
   @visibility(Lifecycle.Read)
-  @key("connectionName")
+  @key("name")
   name: string;
 
   @doc("Category of the connection")
