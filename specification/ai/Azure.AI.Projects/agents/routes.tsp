@@ -3,7 +3,8 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/streams";
 import "./models.tsp"; // e.g. ChatMessage, Agent, Thread
-import "./completions/completions.tsp"; // e.g. CompleteParams, AgentCompleteParams, etc.
+import "./runs/runs.tsp"; // e.g. RunInputs etc.
+import "./streaming/streaming.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -124,49 +125,60 @@ interface Agents {
    */
   listAgents is AgentOperations.ResourceList<Agent>;
 
-  /**
-   * Requests a completion for the entire “Agents” collection,\nusing CompleteParams as input and returning an AgentCompletion.
-   */
-  complete is AgentOperations.ResourceCollectionAction<
+  @Rest.action("run")
+  runByAgent is AgentOperations.ResourceAction<
     Agent,
-    CompleteParams,
-    AgentCompletion
+    { ... RunInputs },
+    Run
   >;
 
-  /**
-   * Requests a streaming completion for the entire “Agents” collection,\nreturning a stream of StreamingAgentCompletionUpdate items.
-   */
+  @Rest.action("stream")
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  stream is AgentOperations.ResourceCollectionAction<
-    Agent,
-    {
-      ...CompleteParams;
-    },
-    Streams.Stream<StreamingAgentCompletionUpdate>
-  >;
-
-  /**
-   * Requests a completion for a specific Agent, returning an AgentCompletion.
-   */
-  @action("complete")
-  completeByAgent is AgentOperations.ResourceAction<
-    Agent,
-    {
-      ...AgentCompleteParams;
-    },
-    AgentCompletion
-  >;
-
-  /**
-   * Requests a streaming completion for a specific Agent, returning a stream of updates.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @action("stream")
   streamByAgent is AgentOperations.ResourceAction<
     Agent,
-    {
-      ...AgentCompleteParams;
-    },
-    Streams.Stream<StreamingAgentCompletionUpdate>
+    { ... RunInputs },
+    Streams.Stream<StreamingUpdate>
   >;
+}
+
+/**
+ * RUNS
+ *
+ * Interface is rooted at /runs.
+ * Includes standard resource operations + custom collection-level
+ * and instance-level actions (complete, stream).
+ */
+interface Runs {
+  /**
+   * Creates a run.
+  @route("/run")
+     */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  createRun is AgentOperations.ResourceCreateWithServiceProvidedName<Run>;
+
+  /**
+   * Retrieves an existing run by its ID.
+   * @route("/run/{run_id}")
+   */
+  @get
+  getRun is AgentOperations.ResourceRead<Run>;
+
+  /**
+   * Create and stream run.
+   * @route("/run/stream")
+   */
+  @post
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  createAndStreamRun is AgentOperations.ResourceCollectionAction<
+    Run,
+    Run,
+    Streams.Stream<StreamingUpdate>
+  >;
+
+  /**
+   * Lists run inputs.
+   * @route("/run/{run_id}")
+   */
+  @get
+  listRunInputs is AgentOperations.ResourceList<RunInputs>;
 }

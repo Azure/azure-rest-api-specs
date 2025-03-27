@@ -305,10 +305,10 @@
         }
       }
     },
-    "/agents/{agentId}:complete": {
+    "/agents/{agentId}:run": {
       "post": {
-        "operationId": "Agents_CompleteByAgent",
-        "description": "Requests a completion for a specific Agent, returning an AgentCompletion.",
+        "operationId": "Agents_RunByAgent",
+        "description": "Resource action operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -328,7 +328,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentCompleteParams"
+              "$ref": "#/definitions/RunInputs"
             }
           }
         ],
@@ -336,7 +336,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AgentCompletion"
+              "$ref": "#/definitions/Run"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -364,7 +364,7 @@
     "/agents/{agentId}:stream": {
       "post": {
         "operationId": "Agents_StreamByAgent",
-        "description": "Requests a streaming completion for a specific Agent, returning a stream of updates.",
+        "description": "Resource action operation template.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -384,102 +384,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentCompleteParams"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/agents:complete": {
-      "post": {
-        "operationId": "Agents_Complete",
-        "description": "Requests a completion for the entire “Agents” collection,\\nusing CompleteParams as input and returning an AgentCompletion.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompleteParams"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AgentCompletion"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/agents:stream": {
-      "post": {
-        "operationId": "Agents_Stream",
-        "description": "Requests a streaming completion for the entire “Agents” collection,\\nreturning a stream of StreamingAgentCompletionUpdate items.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CompleteParams"
+              "$ref": "#/definitions/RunInputs"
             }
           }
         ],
@@ -1897,6 +1802,196 @@
         }
       }
     },
+    "/runinputs": {
+      "get": {
+        "operationId": "Runs_ListRunInputs",
+        "description": "Lists run inputs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedRunInputs"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/runs": {
+      "post": {
+        "operationId": "Runs_CreateRun",
+        "description": "Creates a run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of Run"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs/{runId}": {
+      "get": {
+        "operationId": "Runs_GetRun",
+        "description": "Retrieves an existing run by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "Unique identifier for this run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs:createAndStreamRun": {
+      "post": {
+        "operationId": "Runs_CreateAndStreamRun",
+        "description": "Create and stream run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/threads": {
       "get": {
         "operationId": "Threads_ListThreads",
@@ -2453,6 +2548,35 @@
         "type"
       ]
     },
+    "AIContentUpdate": {
+      "type": "object",
+      "description": "Streaming update for AI content in a message.",
+      "properties": {
+        "mId": {
+          "type": "string",
+          "description": "The message ID."
+        },
+        "i": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index in the content list."
+        },
+        "d": {
+          "$ref": "#/definitions/StreamingOperation",
+          "description": "The delta operation applied to the AI content."
+        }
+      },
+      "required": [
+        "mId",
+        "i"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "ai_content"
+    },
     "AadCredential": {
       "type": "object",
       "description": "AAD Credential definition",
@@ -2515,129 +2639,6 @@
       "required": [
         "agentId",
         "agentModel"
-      ]
-    },
-    "AgentCompleteParams": {
-      "type": "object",
-      "description": "Parameters for creating a new completion with agent overrides.",
-      "properties": {
-        "overrides": {
-          "$ref": "#/definitions/AgentOptions",
-          "description": "The overrides for the agent responsible for generating the completion."
-        },
-        "input": {
-          "type": "array",
-          "description": "The list of input messages for the completion.",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Optional identifier for an existing conversation thread."
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Optional metadata associated with the completion request.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "options": {
-          "$ref": "#/definitions/CompletionsOptions",
-          "description": "Optional configuration for completion generation."
-        },
-        "userId": {
-          "type": "string",
-          "description": "Identifier for the user making the request."
-        },
-        "store": {
-          "type": "boolean",
-          "description": "Flag indicating whether to store the completion and associated messages."
-        }
-      },
-      "required": [
-        "overrides",
-        "input"
-      ]
-    },
-    "AgentCompletion": {
-      "type": "object",
-      "description": "An agent-generated completion record, including messages and status.",
-      "properties": {
-        "agentId": {
-          "type": "string",
-          "description": "Unique identifier for the agent responsible for the completion."
-        },
-        "completionId": {
-          "type": "string",
-          "description": "Unique identifier for this completion."
-        },
-        "createdAt": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Timestamp when the completion was initiated (Unix time)."
-        },
-        "completedAt": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Timestamp when the completion finished processing (Unix time)."
-        },
-        "status": {
-          "type": "string",
-          "description": "Final status of the completion request.",
-          "enum": [
-            "inProgress",
-            "incomplete",
-            "cancelled",
-            "failed",
-            "completed"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        },
-        "output": {
-          "type": "array",
-          "description": "List of output messages generated by the agent.",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Identifier for the thread associated with the completion."
-        },
-        "usage": {
-          "$ref": "#/definitions/CompletionUsage",
-          "description": "Token usage details for this completion."
-        },
-        "incompleteDetails": {
-          "type": "object",
-          "description": "Details about why the response is incomplete, if applicable.",
-          "properties": {
-            "reason": {
-              "type": "string",
-              "description": "Reason describing why the response is incomplete."
-            }
-          },
-          "required": [
-            "reason"
-          ]
-        }
-      },
-      "required": [
-        "agentId",
-        "completionId",
-        "createdAt",
-        "completedAt",
-        "status",
-        "output",
-        "threadId",
-        "usage",
-        "incompleteDetails"
       ]
     },
     "AgentMessage": {
@@ -2852,6 +2853,22 @@
           }
         ]
       }
+    },
+    "AppendStreamingOperation": {
+      "type": "object",
+      "description": "Appends a value to a list at a JSON path.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/JSONAny",
+          "description": "The value to apply to the operation, expressed as a JSON-compatible type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "append"
     },
     "AssetReferenceBase": {
       "type": "object",
@@ -3226,9 +3243,9 @@
           "description": "A unique identifier for this message.",
           "readOnly": true
         },
-        "completionId": {
+        "agentRunId": {
           "type": "string",
-          "description": "A unique completion ID, if this message was generated by a completion process."
+          "description": "A unique run ID, if this message was generated by a run process."
         },
         "threadId": {
           "type": "string",
@@ -3270,6 +3287,38 @@
         "content"
       ]
     },
+    "ChatMessageUpdate": {
+      "type": "object",
+      "description": "Streaming update for a chat message.",
+      "properties": {
+        "mId": {
+          "type": "string",
+          "description": "The message ID."
+        },
+        "tId": {
+          "type": "string",
+          "description": "The thread ID."
+        },
+        "d": {
+          "$ref": "#/definitions/StreamingOperation",
+          "description": "The delta operation applied to the message."
+        },
+        "u": {
+          "$ref": "#/definitions/CompletionUsage",
+          "description": "Usage metrics update."
+        }
+      },
+      "required": [
+        "mId",
+        "tId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "chat_message"
+    },
     "CodeInterpreterToolDefinition": {
       "type": "object",
       "description": "A tool definition for the OpenAI Code Interpreter.",
@@ -3292,54 +3341,9 @@
       ],
       "x-ms-discriminator-value": "OpenAI.CodeInterpreter"
     },
-    "CompleteParams": {
-      "type": "object",
-      "description": "Parameters for creating a new completion request.",
-      "properties": {
-        "agent": {
-          "$ref": "#/definitions/AgentOptions",
-          "description": "The agent responsible for generating the completion."
-        },
-        "input": {
-          "type": "array",
-          "description": "The list of input messages for the completion.",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Optional identifier for an existing conversation thread."
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Optional metadata associated with the completion request.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "options": {
-          "$ref": "#/definitions/CompletionsOptions",
-          "description": "Optional configuration for completion generation."
-        },
-        "userId": {
-          "type": "string",
-          "description": "Identifier for the user making the request."
-        },
-        "store": {
-          "type": "boolean",
-          "description": "Flag indicating whether to store the completion and associated messages."
-        }
-      },
-      "required": [
-        "agent",
-        "input"
-      ]
-    },
     "CompletionUsage": {
       "type": "object",
-      "description": "Detailed token usage data for a completion request.",
+      "description": "Detailed token usage data for a run request.",
       "properties": {
         "outputTokens": {
           "type": "integer",
@@ -3354,7 +3358,7 @@
         "totalTokens": {
           "type": "integer",
           "format": "int64",
-          "description": "Total number of tokens used (prompt + completion)."
+          "description": "Total number of tokens used (prompt + run)."
         },
         "inputTokenDetails": {
           "type": "object",
@@ -3369,7 +3373,7 @@
         },
         "outputTokenDetails": {
           "type": "object",
-          "description": "Breakdown of tokens used in a completion.",
+          "description": "Breakdown of tokens used in a run.",
           "properties": {
             "reasoningTokens": {
               "type": "integer",
@@ -3384,16 +3388,6 @@
         "inputTokens",
         "totalTokens"
       ]
-    },
-    "CompletionsOptions": {
-      "type": "object",
-      "description": "Represents advanced options for controlling agent completions.",
-      "properties": {
-        "truncationStrategy": {
-          "$ref": "#/definitions/TruncationStrategy",
-          "description": "Strategy for truncating messages when input exceeds model limits."
-        }
-      }
     },
     "Connection": {
       "type": "object",
@@ -4649,6 +4643,28 @@
         "value"
       ]
     },
+    "PagedRunInputs": {
+      "type": "object",
+      "description": "Paged collection of RunInputs items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RunInputs items on this page",
+          "items": {
+            "$ref": "#/definitions/RunInputs"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedThread": {
       "type": "object",
       "description": "Paged collection of Thread items",
@@ -4822,6 +4838,63 @@
       ],
       "x-ms-discriminator-value": "refusal"
     },
+    "RemoveStreamingOperation": {
+      "type": "object",
+      "description": "Removes part of a value at a JSON path.",
+      "properties": {
+        "s": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start index of the removal."
+        },
+        "e": {
+          "type": "integer",
+          "format": "int32",
+          "description": "End index of the removal."
+        }
+      },
+      "required": [
+        "s",
+        "e"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "remove"
+    },
+    "ReplaceStreamingOperation": {
+      "type": "object",
+      "description": "Replaces part of a string value at a JSON path.",
+      "properties": {
+        "v": {
+          "type": "string",
+          "description": "The new string value."
+        },
+        "s": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start index of the replacement."
+        },
+        "e": {
+          "type": "integer",
+          "format": "int32",
+          "description": "End index of the replacement."
+        }
+      },
+      "required": [
+        "v",
+        "s",
+        "e"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "replace"
+    },
     "RequiredToolChoiceBehavior": {
       "type": "object",
       "description": "Behavior specifying that the agent must always use the listed tools.",
@@ -4844,6 +4917,207 @@
       ],
       "x-ms-discriminator-value": "required"
     },
+    "Run": {
+      "type": "object",
+      "description": "An agent-generated run record, including messages and status.",
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "description": "Unique identifier for the agent responsible for the run."
+        },
+        "runId": {
+          "type": "string",
+          "description": "Unique identifier for this run.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timestamp when the run was initiated (Unix time)."
+        },
+        "completedAt": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timestamp when the run finished processing (Unix time)."
+        },
+        "status": {
+          "type": "string",
+          "description": "Final status of the run request.",
+          "enum": [
+            "inProgress",
+            "incomplete",
+            "cancelled",
+            "failed",
+            "completed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "output": {
+          "type": "array",
+          "description": "List of output messages generated by the agent.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "threadId": {
+          "type": "string",
+          "description": "Identifier for the thread associated with the run."
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionUsage",
+          "description": "Token usage details for this run."
+        },
+        "incompleteDetails": {
+          "type": "object",
+          "description": "Details about why the response is incomplete, if applicable.",
+          "properties": {
+            "reason": {
+              "type": "string",
+              "description": "Reason describing why the response is incomplete."
+            }
+          },
+          "required": [
+            "reason"
+          ]
+        },
+        "agent": {
+          "$ref": "#/definitions/AgentOptions",
+          "description": "The agent responsible for generating the run."
+        },
+        "input": {
+          "type": "array",
+          "description": "The list of input messages for the run.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Optional metadata associated with the run request.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "options": {
+          "$ref": "#/definitions/RunOptions",
+          "description": "Optional configuration for run generation."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Identifier for the user making the request."
+        },
+        "store": {
+          "type": "boolean",
+          "description": "Flag indicating whether to store the run and associated messages."
+        }
+      },
+      "required": [
+        "agentId",
+        "runId",
+        "createdAt",
+        "completedAt",
+        "status",
+        "output",
+        "threadId",
+        "usage",
+        "incompleteDetails",
+        "agent",
+        "input"
+      ]
+    },
+    "RunInputs": {
+      "type": "object",
+      "description": "Parameters for creating a new run request.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "Unique identifier for the run.",
+          "readOnly": true
+        },
+        "agent": {
+          "$ref": "#/definitions/Agent",
+          "description": "The agent responsible for generating the run."
+        },
+        "input": {
+          "type": "array",
+          "description": "The list of input messages for the run.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "threadId": {
+          "type": "string",
+          "description": "Optional identifier for an existing conversation thread."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Optional metadata associated with the run request.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "options": {
+          "$ref": "#/definitions/RunOptions",
+          "description": "Optional configuration for run generation."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Identifier for the user making the request."
+        }
+      },
+      "required": [
+        "runId",
+        "agent",
+        "input"
+      ]
+    },
+    "RunOptions": {
+      "type": "object",
+      "description": "Represents advanced options for controlling agent runs.",
+      "properties": {
+        "truncationStrategy": {
+          "$ref": "#/definitions/TruncationStrategy",
+          "description": "Strategy for truncating messages when input exceeds model limits."
+        }
+      }
+    },
+    "RunUpdate": {
+      "type": "object",
+      "description": "Streaming update for a run.",
+      "properties": {
+        "rId": {
+          "type": "string",
+          "description": "The run ID."
+        },
+        "tId": {
+          "type": "string",
+          "description": "The thread ID."
+        },
+        "d": {
+          "$ref": "#/definitions/StreamingOperation",
+          "description": "The delta operation applied to the run."
+        },
+        "u": {
+          "$ref": "#/definitions/CompletionUsage",
+          "description": "Usage metrics update."
+        }
+      },
+      "required": [
+        "rId",
+        "tId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "run"
+    },
     "SasCredential": {
       "type": "object",
       "description": "SAS Credential definition",
@@ -4863,6 +5137,22 @@
         }
       ],
       "x-ms-discriminator-value": "SAS"
+    },
+    "SetStreamingOperation": {
+      "type": "object",
+      "description": "Sets (overwrites) the value at a JSON path.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/JSONAny",
+          "description": "The value to apply to the operation, expressed as a JSON-compatible type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingOperation"
+        }
+      ],
+      "x-ms-discriminator-value": "set"
     },
     "Sku": {
       "type": "object",
@@ -4930,8 +5220,16 @@
     },
     "StreamingOperation": {
       "type": "object",
-      "description": "A streaming operation describing how to modify a partial response in real-time.",
+      "description": "Represents an operation to update a specific JSON path with streamed data.",
       "properties": {
+        "op": {
+          "type": "string",
+          "description": "Discriminator property for StreamingOperation."
+        },
+        "jsonPath": {
+          "type": "string",
+          "description": "The JSON path to the operation."
+        },
         "type": {
           "type": "string",
           "description": "The type of operation being performed.",
@@ -4944,19 +5242,40 @@
           "x-ms-enum": {
             "modelAsString": true
           }
-        },
-        "jsonPath": {
-          "type": "string",
-          "description": "The JSON path to the operation."
-        },
-        "value": {
-          "$ref": "#/definitions/JSONAny",
-          "description": "The value to apply to the operation, expressed as a JSON-compatible type."
         }
       },
+      "discriminator": "op",
       "required": [
-        "type",
-        "jsonPath"
+        "op",
+        "jsonPath",
+        "type"
+      ]
+    },
+    "StreamingUpdate": {
+      "type": "object",
+      "description": "The delta operation applied to the resource.",
+      "properties": {
+        "d": {
+          "$ref": "#/definitions/StreamingOperation",
+          "description": "The delta operation applied to the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the streaming update.",
+          "enum": [
+            "run",
+            "thread",
+            "chat_message",
+            "ai_content"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     },
     "SystemMessage": {
@@ -5032,6 +5351,33 @@
         "threadId",
         "messages"
       ]
+    },
+    "ThreadUpdate": {
+      "type": "object",
+      "description": "Streaming update for a thread.",
+      "properties": {
+        "tId": {
+          "type": "string",
+          "description": "The thread ID."
+        },
+        "d": {
+          "$ref": "#/definitions/StreamingOperation",
+          "description": "The delta operation applied to the thread."
+        },
+        "u": {
+          "$ref": "#/definitions/CompletionUsage",
+          "description": "Usage metrics update."
+        }
+      },
+      "required": [
+        "tId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "thread"
     },
     "ToolCallContent": {
       "type": "object",
