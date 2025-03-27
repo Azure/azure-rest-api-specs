@@ -40,9 +40,6 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 ``` yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
 - Microsoft.Bing/preview/2025-05-01-preview/bing.json
-suppressions:
-  - code: LRO_RESPONSE_HEADER
-    reason: Keeping accounts endpoint compatible with the latest stable version 2020--06-10
 ```
 
 ### Tag: package-2020-06-10

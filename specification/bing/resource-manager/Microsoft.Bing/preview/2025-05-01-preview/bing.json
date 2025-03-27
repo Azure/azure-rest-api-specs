@@ -87,6 +87,17 @@
             "description": "The resource is created or updated and the operation will complete asynchronously",
             "schema": {
               "$ref": "#/definitions/BingCustomConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to poll for the status of the long-running operation."
+              },
+              "Retry-After":{
+                "type": "integer",
+                "format": "int32",
+                "description": "The number of seconds to wait before polling the long-running operation again."
+              }
             }
           },
           "default": {
@@ -338,6 +349,17 @@
             "description": "The update was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/BingAccount"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to poll for the status of the long-running operation."
+              },
+              "Retry-After":{
+                "type": "integer",
+                "format": "int32",
+                "description": "The number of seconds to wait before polling the long-running operation again."
+              }
             }
           },
           "default": {
@@ -890,6 +912,7 @@
             "Creating",
             "Moving",
             "Deleting",
+            "Updating",
             "Succeeded",
             "Failed",
             "Canceled"
@@ -1124,6 +1147,7 @@
           "description": "Gets the status of the Bing account at the time the operation was called.",
           "enum": [
             "Creating",
+            "Updating",
             "Moving",
             "Deleting",
             "Succeeded",
