@@ -4,13 +4,19 @@ import { diff } from "./git.js";
 
 /**
  * @param {Object} [options]
- * @param {string} [options.baseCommitish] Defaults to "HEAD^"
- * @param {string} [options.headCommitish] Defaults to "HEAD"
+ * @param {string} [options.baseCommitish] Default: "HEAD^".
+ * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
+ * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./types.js').ILogger} [options.logger]
- * @returns {Promise<string[]>} List of changed files, relative to the repo root.  Example: ["specification/foo/Microsoft.Foo/main.tsp"]
+ * @returns {Promise<string[]>} List of changed files, using posix paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
-  const { baseCommitish = "HEAD^", headCommitish = "HEAD", logger } = options;
+  const {
+    baseCommitish = "HEAD^",
+    cwd,
+    headCommitish = "HEAD",
+    logger,
+  } = options;
 
   // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
   // consider using "--name-status" instead of "--name-only", and return an array of objects like
@@ -19,6 +25,7 @@ export async function getChangedFiles(options = {}) {
   // filter based on status with a single call to `git diff`.
   const result = await diff(baseCommitish, headCommitish, {
     args: "--name-only",
+    cwd,
     logger: logger,
   });
 
