@@ -22,21 +22,29 @@ extends:
   ${{ else }}:
     template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
   parameters:
-    settings:
-      skipBuildTagsForGitHubPullRequests: true
-    sdl:
-      ${{ if and(parameters.GenerateBaselines, eq(variables['Build.SourceBranchName'], 'main'), eq(variables['System.TeamProject'], 'internal')) }}:
-        autobaseline:
-          isMainPipeline: true
-          disableAutoBaselineOnNonDefaultBranches: true
-          enableForGitHub: true
-      sourceAnalysisPool:
-        name: azsdk-pool
-        image: windows-2022
-        os: windows
-      psscriptanalyzer:
-        compiled: true
-        break: true
-      policy: M365
-
-    stages: ${{ parameters.stages }}
+    ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
+      settings:
+        skipBuildTagsForGitHubPullRequests: true
+      sdl:
+        ${{ if and(parameters.GenerateBaselines, eq(variables['Build.SourceBranchName'], 'main'), eq(variables['System.TeamProject'], 'internal')) }}:
+          autobaseline:
+            isMainPipeline: true
+            disableAutoBaselineOnNonDefaultBranches: true
+            enableForGitHub: true
+        sourceAnalysisPool:
+          name: azsdk-pool
+          image: windows-2022
+          os: windows
+        psscriptanalyzer:
+          compiled: true
+          break: true
+        policy: M365
+      stages: ${{ parameters.stages }}
+    ${{ else }}:
+      sdl:
+        enableAllTools: false
+        sourceAnalysisPool:
+          name: OneESHostedPool
+          image: HostedPoolWindowsImage
+          os: windows
+      stages: ${{ parameters.stages }}
