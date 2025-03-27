@@ -34,7 +34,12 @@ trigger: none
 pr:
   branches:
     include:
-      - user/spec-gen-pipeline-testing
+      - main
+      - RPSaaSMaster
+      - release*
+  paths: 
+    include:
+      - specification/**
 
 extends:
   template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
