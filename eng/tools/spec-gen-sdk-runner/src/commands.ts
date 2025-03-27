@@ -9,10 +9,22 @@ import {
   resetGitRepo,
   objectToMap,
 } from "./utils.js";
-import { LogLevel, logMessage, setVsoVariable, vsoAddAttachment, vsoLogIssue } from "./log.js";
+import {
+  LogIssueType,
+  LogLevel,
+  logMessage,
+  setVsoVariable,
+  vsoAddAttachment,
+  vsoLogIssue,
+} from "./log.js";
 import { SpecGenSdkCmdInput, VsoLogs } from "./types.js";
 import { detectChangedSpecConfigFiles } from "./change-files.js";
 
+/**
+ * Generate SDK for a single spec.
+ * This is for the SDK release scenario.
+ * @returns the run status code.
+ */
 export async function generateSdkForSingleSpec(): Promise<number> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
@@ -31,23 +43,29 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     statusCode = 1;
   }
 
-  // Read the execution report to determine if the generation was successful
-  const executionReportPath = path.join(
-    commandInput.workingFolder,
-    `${commandInput.sdkRepoName}_tmp/execution-report.json`,
-  );
   let executionReport;
   try {
-    executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
+    // Read the execution report to determine if the generation was successful
+    executionReport = getExecutionReport(commandInput);
     const executionResult = executionReport.executionResult;
     logMessage(`Runner command execution result:${executionResult}`);
   } catch (error) {
-    logMessage(
-      `Runner: error reading execution report at ${executionReportPath}:${error}`,
-      LogLevel.Error,
-    );
+    logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
     statusCode = 1;
   }
+
+  if (statusCode === 0) {
+    // Set the pipeline variables for the SDK pull request
+    let packageName: string =
+      executionReport.packages[0]?.packageName ??
+      commandInput.tspConfigPath ??
+      commandInput.readmePath ??
+      "missing-package-name";
+    packageName = packageName.replace("/", "-");
+    const installationInstructions = executionReport.packages[0]?.installationInstructions;
+    setPipelineVariables(packageName, installationInstructions);
+  }
+
   logMessage("ending group logging", LogLevel.EndGroup);
   logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
 
@@ -98,22 +116,15 @@ export async function generateSdkForSpecPr(): Promise<number> {
     for (let index = 0; index < pushedSpecConfigCount * 2; index++) {
       specGenSdkCommand.pop();
     }
-    // Read the execution report to determine if the generation was successful
-    const executionReportPath = path.join(
-      commandInput.workingFolder,
-      `${commandInput.sdkRepoName}_tmp/execution-report.json`,
-    );
 
     try {
-      executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
+      // Read the execution report to determine if the generation was successful
+      executionReport = getExecutionReport(commandInput);
       const executionResult = executionReport.executionResult;
       [shouldLabelBreakingChange, breakingChangeLabel] = getBreakingChangeInfo(executionReport);
       logMessage(`Runner command execution result:${executionResult}`);
     } catch (error) {
-      logMessage(
-        `Runner: error reading execution report at ${executionReportPath}:${error}`,
-        LogLevel.Error,
-      );
+      logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
@@ -172,13 +183,10 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
     // Pop the spec config path from the command
     specGenSdkCommand.pop();
     specGenSdkCommand.pop();
-    // Read the execution report to determine if the generation was successful
-    const executionReportPath = path.join(
-      commandInput.workingFolder,
-      `${commandInput.sdkRepoName}_tmp/execution-report.json`,
-    );
+
     try {
-      executionReport = JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
+      // Read the execution report to determine if the generation was successful
+      executionReport = getExecutionReport(commandInput);
       const executionResult = executionReport.executionResult;
       logMessage(`Runner: command execution result:${executionResult}`);
 
@@ -193,10 +201,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
         failedCount++;
       }
     } catch (error) {
-      logMessage(
-        `Runner: error reading execution report at ${executionReportPath}:${error}`,
-        LogLevel.Error,
-      );
+      logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
@@ -234,6 +239,33 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
   return statusCode;
 }
 
+/**
+ * Load execution-report.json.
+ * @param commandInput - The command input.
+ * @returns the execution report JSON
+ */
+function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
+  // Read the execution report to determine if the generation was successful
+  const executionReportPath = path.join(
+    commandInput.workingFolder,
+    `${commandInput.sdkRepoName}_tmp/execution-report.json`,
+  );
+  return JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
+}
+
+/**
+ * Set the pipeline variables for the SDK pull request.
+ * @param packageName - The package name.
+ * @param installationInstructions - The installation instructions.
+ */
+function setPipelineVariables(packageName: string, installationInstructions: string = ""): void {
+  const branchName = `sdkauto/${packageName?.replace("/", "_")}`;
+  const prTitle = `[AutoPR ${packageName}]`;
+  const prBody = installationInstructions;
+  setVsoVariable("PrBranch", branchName);
+  setVsoVariable("PrTitle", prTitle);
+  setVsoVariable("PrBody", prBody);
+}
 /**
  * Parse the arguments.
  * @returns The spec-gen-sdk command input.
@@ -375,7 +407,7 @@ function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): vo
       const warningTitle = `Warnings occurred while generating SDK from ${specConfigDisplayText}`;
       logMessage(warningTitle, LogLevel.Group);
       const warningsWithTitle = [warningTitle, ...warnings];
-      vsoLogIssue(warningsWithTitle.join("%0D%0A"));
+      vsoLogIssue(warningsWithTitle.join("%0D%0A"), LogIssueType.Warning);
       logMessage("ending group logging", LogLevel.EndGroup);
     }
   }
