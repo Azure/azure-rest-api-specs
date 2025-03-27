@@ -1,8 +1,8 @@
 // @ts-check
-import { sdkLabels } from "../../src/sdk-types.js";
-import { LabelAction } from "./label.js";
+import { sdkLabels } from "../../shared/src/sdk-types.js";
 import { extractInputs } from "./context.js";
 import { getIssueNumber } from "./issues.js";
+import { LabelAction } from "./label.js";
 
 /**
  * @typedef {Object} ArtifactResource

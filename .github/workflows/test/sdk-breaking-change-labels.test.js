@@ -1,4 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
+import { sdkLabels } from "../../shared/src/sdk-types.js";
 import { LabelAction } from "../src/label.js";
 import {
   createMockCore,
@@ -9,7 +10,6 @@ import {
   getLabelAndAction,
   getLabelAndActionImpl,
 } from "../src/sdk-breaking-change-labels.js";
-import { sdkLabels } from "../../src/sdk-types.js";
 
 // Mock dependencies
 vi.mock("../src/context.js", () => ({
