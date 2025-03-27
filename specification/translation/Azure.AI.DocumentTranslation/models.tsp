@@ -515,7 +515,6 @@ model DocumentTranslateBody {
   @header
   contentType: "multipart/form-data";
 
-  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Document Translate Request Content")
   @multipartBody
   body: DocumentTranslateContent;
