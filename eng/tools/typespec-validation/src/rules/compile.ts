@@ -1,4 +1,5 @@
 import path, { basename, dirname, normalize } from "path";
+import stripAnsi from "strip-ansi";
 import { setEquals } from "../equality.js";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
@@ -36,8 +37,8 @@ export class CompileRule implements Rule {
         //
         // Compilation completed successfully.
 
-        // Handle windows and linux line endings
-        const lines = stdout.split(/\r?\n/);
+        // Remove ANSI color codes, handle windows and linux line endings
+        const lines = stripAnsi(stdout).split(/\r?\n/);
 
         console.log(JSON.stringify(lines));
 
