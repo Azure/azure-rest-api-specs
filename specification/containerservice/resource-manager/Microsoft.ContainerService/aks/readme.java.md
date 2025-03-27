@@ -110,8 +110,6 @@ batch:
   - tag: package-preview-2024-10
   - tag: package-2024-10
   - tag: package-preview-2025-01
-<<<<<<< HEAD
-=======
   - tag: package-2025-01
 ```
 
@@ -126,7 +124,6 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2025_01_01
 regenerate-manager: true
 generate-interface: true
->>>>>>> 2f8ffdd30b80c7302311143c789383ff080bec55
 ```
 
 ### Tag: package-preview-2025-01 and java
