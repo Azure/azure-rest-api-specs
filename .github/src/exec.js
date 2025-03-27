@@ -7,7 +7,7 @@ const execImpl = promisify(child_process.exec);
 /**
  * @param {string} command
  * @param {Object} [options]
- * @param {string} [options.cwd] Current working directory.  Default is process.cwd().
+ * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {import('./types.js').ILogger} [options.logger]
  * @param {number} [options.maxBuffer]
  */

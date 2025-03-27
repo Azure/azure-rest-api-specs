@@ -4,9 +4,9 @@ import { diff } from "./git.js";
 
 /**
  * @param {Object} [options]
- * @param {string} [options.baseCommitish] Defaults to "HEAD^"
- * @param {string} [options.cwd]
- * @param {string} [options.headCommitish] Defaults to "HEAD"
+ * @param {string} [options.baseCommitish] Default: "HEAD^".
+ * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
+ * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./types.js').ILogger} [options.logger]
  * @returns {Promise<string[]>} List of changed files, using platform-specific paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
