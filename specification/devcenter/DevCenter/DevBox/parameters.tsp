@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 @doc("The snapshot id query parameter.")
 model SnapshotIdQueryParameter {

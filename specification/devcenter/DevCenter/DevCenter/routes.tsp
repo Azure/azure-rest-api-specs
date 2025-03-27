@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace DevCenterService;
+namespace Microsoft.DevCenter;
 
 interface DevCenter {
   @doc("Lists all projects.")
