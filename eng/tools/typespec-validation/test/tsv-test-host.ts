@@ -1,3 +1,5 @@
+import { Stats } from "fs";
+import { Options as GlobbyOptions } from "globby";
 import defaultPath, { PlatformPath } from "path";
 import { Suppression } from "suppressions";
 import { RuleResult } from "../src/rule-result.js";
@@ -51,6 +53,10 @@ export class TsvTestHost implements TsvHost {
     return true;
   }
 
+  async stat(_path: string): Promise<Stats> {
+    return new Stats();
+  }
+
   normalizePath(folder: string): string {
     return normalizePath(folder, this.path);
   }
@@ -84,8 +90,8 @@ options:
 `;
   }
 
-  async globby(patterns: string[]): Promise<string[]> {
-    return Promise.resolve(patterns);
+  async globby(patterns: string | string[], _options?: GlobbyOptions): Promise<string[]> {
+    return Promise.resolve(Array.isArray(patterns) ? patterns : [patterns]);
   }
 
   async getSuppressions(_path: string): Promise<Suppression[]> {
