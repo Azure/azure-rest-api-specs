@@ -135,6 +135,11 @@ model MarketplaceDetails {
    */
   @visibility(Lifecycle.Read)
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
+
+  /**
+   * End Date of the subscription
+   */
+  endDate?: string;
 }
 
 /**

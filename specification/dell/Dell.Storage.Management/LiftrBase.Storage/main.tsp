@@ -27,9 +27,9 @@ enum Versions {
  */
 model FileSystemResourceProperties {
   /**
-   * Initial capacity for Dell Filesystem in bytes
+   * Capacity for Dell Filesystem, Will be received as part of Job Status
    */
-  initialCapacity: int64;
+  capacity?: Capacity;
 
   /**
    * Marketplace details
@@ -61,13 +61,7 @@ model FileSystemResourceProperties {
   /**
    * File system Id of the resource
    */
-  clusterLoginUrl?: string;
-
-  /**
-   * Private IPs of the resource
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is the correct name"
-  privateIPs?: string[];
+  fileSystemId?: string;
 
   /**
    * Smart Connect FQDN of the resource
@@ -83,6 +77,30 @@ model FileSystemResourceProperties {
    * EncryptionProperties of the resource
    */
   encryption: LiftrBase.EncryptionProperties;
+}
+/**
+ * Capacity for a Resource
+ */
+model Capacity {
+  /**
+   * Minimum Capacity
+   */
+  min?: string;
+
+  /**
+   * Maximum Capacity
+   */
+  max?: string;
+
+  /**
+   * Units to be increased
+   */
+  incremental?: string;
+
+  /**
+   * Current Capacity of the resource
+   */
+  current?: string;
 }
 
 /**
@@ -161,9 +179,9 @@ model FileSystemResourceUpdateProperties {
   delegatedSubnetId?: string;
 
   /**
-   * Initial capacity for Dell Filesystem in bytes
+   * Capacity for Dell Filesystem
    */
-  initialCapacity?: int64;
+  capacity?: Capacity;
 
   /**
    * Encryption Details of the resource

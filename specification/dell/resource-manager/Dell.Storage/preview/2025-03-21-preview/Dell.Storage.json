@@ -567,6 +567,10 @@
           "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
           "description": "Marketplace subscription status",
           "readOnly": true
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End Date of the subscription"
         }
       },
       "required": [
@@ -702,6 +706,28 @@
         ]
       }
     },
+    "LiftrBase.Storage.Capacity": {
+      "type": "object",
+      "description": "Capacity for a Resource",
+      "properties": {
+        "min": {
+          "type": "string",
+          "description": "Minimum Capacity"
+        },
+        "max": {
+          "type": "string",
+          "description": "Maximum Capacity"
+        },
+        "incremental": {
+          "type": "string",
+          "description": "Units to be increased"
+        },
+        "current": {
+          "type": "string",
+          "description": "Current Capacity of the resource"
+        }
+      }
+    },
     "LiftrBase.Storage.FileSystemResource": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -725,10 +751,9 @@
       "type": "object",
       "description": "Properties specific to the Dell File System resource",
       "properties": {
-        "initialCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Initial capacity for Dell Filesystem in bytes"
+        "capacity": {
+          "$ref": "#/definitions/LiftrBase.Storage.Capacity",
+          "description": "Capacity for Dell Filesystem, Will be received as part of Job Status"
         },
         "marketplace": {
           "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
@@ -752,16 +777,9 @@
           "$ref": "#/definitions/LiftrBase.UserDetails",
           "description": "User Details"
         },
-        "clusterLoginUrl": {
+        "fileSystemId": {
           "type": "string",
           "description": "File system Id of the resource"
-        },
-        "privateIPs": {
-          "type": "array",
-          "description": "Private IPs of the resource",
-          "items": {
-            "type": "string"
-          }
         },
         "smartConnectFqdn": {
           "type": "string",
@@ -777,7 +795,6 @@
         }
       },
       "required": [
-        "initialCapacity",
         "marketplace",
         "delegatedSubnetId",
         "delegatedSubnetCidr",
@@ -815,10 +832,9 @@
           "type": "string",
           "description": "Delegated subnet id for Vnet injection"
         },
-        "initialCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Initial capacity for Dell Filesystem in bytes"
+        "capacity": {
+          "$ref": "#/definitions/LiftrBase.Storage.Capacity",
+          "description": "Capacity for Dell Filesystem"
         },
         "encryption": {
           "$ref": "#/definitions/LiftrBase.EncryptionUpdateProperties",
