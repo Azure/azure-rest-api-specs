@@ -25,9 +25,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-@service({
-  title: "Azure AI Search",
-})
+@service(#{ title: "Azure AI Search" })
 @versioned(Versions)
 namespace Search;
 

@@ -23,9 +23,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-@service({
-  title: "Search Index Client",
-})
+@service(#{ title: "Search Index Client" })
 @versioned(Versions)
 namespace Search;
 
