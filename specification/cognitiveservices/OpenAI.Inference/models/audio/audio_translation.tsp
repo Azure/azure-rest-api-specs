@@ -167,7 +167,6 @@ model GetAudioTranslationBody {
   /**
    * The configuration information for an audio translation request.
    */
-  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @multipartBody
   body: AudioTranslationOptions;
 }
