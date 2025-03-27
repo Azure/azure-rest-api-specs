@@ -1,5 +1,5 @@
 import path, { basename, dirname, normalize } from "path";
-import { setEquals } from "../../../../../.github/src/equality.js";
+import { setEquals } from "../equality.js";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
