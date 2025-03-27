@@ -46,7 +46,7 @@ directive:
     reason: service implements 204 for delete and DeleteOperationResponses error was falsely raised.
 
   - from: service.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}"].put.responses["202"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}"].put
     suppress:
       - PutResponseCodes
     reason: suppressing as ASR is old service and for all APIs, the 202-async PUT convention is followed.
