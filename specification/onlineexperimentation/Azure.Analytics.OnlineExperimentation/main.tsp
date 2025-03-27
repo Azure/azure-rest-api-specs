@@ -6,6 +6,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.Core.Traits;
 
 @useAuth(AadOauth2Auth<["https://exp.azure.net/.default"]>)
 @service(#{ title: "Azure.Analytics.OnlineExperimentation service" })
@@ -329,7 +330,5 @@ op deleteMetric is Operations.ResourceDelete<ExperimentMetric>;
 @doc("Lists experiment metrics.")
 op listMetrics is Operations.ResourceList<
   ExperimentMetric,
-  {
-    parameters: StandardListQueryParameters;
-  }
+  ListQueryParametersTrait<StandardListQueryParameters>
 >;
