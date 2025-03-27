@@ -410,7 +410,7 @@ model ConversationalAITask extends AnalyzeConversationTask {
   analysisInput: ConversationalAIAnalysisOptions;
 
   /** Input parameters necessary for a Conversation language understanding task. */
-  parameters: BaseConversationalAITaskParameters;
+  parameters: ConversationalAITaskParameters;
 }
 
 /** The input ConversationItem and its optional parameters */
@@ -1116,7 +1116,7 @@ model ConversationItemLevelTiming is AudioTiming;
 /** Input parameters base for a Conversation task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2025_05_15)
-model BaseConversationalAITaskParameters {
+model ConversationalAITaskParameters {
   /** The name of the project to use. */
   projectName: string;
 
