@@ -178,7 +178,7 @@ export function findParentWithFile(
     try {
       const absolutePath = path.resolve(specRepoFolder, currentPath);
       const files = fs.readdirSync(absolutePath);
-      if (files.some((file) => searchFile.test(file.toLowerCase()))) {
+      if (files.some((file) => searchFile.test(file))) {
         return currentPath;
       }
     } catch (error) {
@@ -421,4 +421,26 @@ export function createCombinedSpecs(
     readmeMd: path.join(readmePath, "readme.md"),
     typespecProject: path.join(tsPath, "tspconfig.yaml"),
   }));
+}
+
+/**
+ * Converts a Map<string, T> to a plain object for JSON serialization.
+ */
+export function mapToObject<T>(map: Map<string, T>): Record<string, T> {
+  const obj: Record<string, T> = {};
+  for (const [key, value] of map.entries()) {
+    obj[key] = value;
+  }
+  return obj;
+}
+
+/**
+ * Converts a plain object (the result of JSON.parse) back into a Map<string, T>.
+ */
+export function objectToMap<T>(obj: Record<string, T>): Map<string, T> {
+  const map = new Map<string, T>();
+  for (const [key, value] of Object.entries(obj)) {
+    map.set(key, value);
+  }
+  return map;
 }
