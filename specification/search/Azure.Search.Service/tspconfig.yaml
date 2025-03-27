@@ -34,6 +34,16 @@ options:
     package-dir: "azure-search-documents-indexes"
     namespace: com.azure.search.documents.indexes
     flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/search/azsearchdocumentsindexes"
+    package-dir: "azsearchdocuments"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
