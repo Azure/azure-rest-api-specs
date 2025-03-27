@@ -13,16 +13,15 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{url}",
+    "hostTemplate": "https://{resource}.services.ai.azure.com/api/models",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "url",
+        "name": "resource",
         "in": "path",
-        "description": "Url",
-        "type": "string",
-        "format": "uri",
-        "x-ms-skip-url-encoding": true
+        "description": "The Azure AI Services resource name, for example 'my-resource'",
+        "required": true,
+        "type": "string"
       }
     ]
   },

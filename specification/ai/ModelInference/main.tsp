@@ -25,10 +25,6 @@ using TypeSpec.Versioning;
     resource: string,
   }
 )
-@server(
-  "https://example.services.ai.azure.com/api/models",
-  "AI Model Inference"
-)
 @versioned(ModelInference.Versions)
 namespace ModelInference;
 
