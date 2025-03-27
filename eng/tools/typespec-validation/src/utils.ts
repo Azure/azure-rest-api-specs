@@ -1,5 +1,5 @@
-import { exec } from "child_process";
 import { access, stat } from "fs/promises";
+import { exec } from "child_process";
 import defaultPath, { PlatformPath } from "path";
 import { TsvHost } from "./tsv-host.js";
 
@@ -8,7 +8,7 @@ export async function runCmd(cmd: string, cwd?: string) {
   const { err, stdout, stderr } = (await new Promise((res) =>
     exec(
       cmd,
-      { encoding: "utf8", maxBuffer: 1024 * 1024 * 64, cwd: cwd, env },
+      { encoding: "utf8", maxBuffer: 1024 * 1024 * 64, cwd: cwd },
       (err: unknown, stdout: unknown, stderr: unknown) =>
         res({ err: err, stdout: stdout, stderr: stderr }),
     ),
