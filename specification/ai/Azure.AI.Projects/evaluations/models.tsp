@@ -7,12 +7,7 @@ import "../common/models.tsp";
 import "../main.tsp";
 import "@typespec/openapi";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
@@ -49,7 +44,7 @@ model InputDataset extends InputData {
 model Evaluation {
   @doc("Identifier of the evaluation.")
   @key("name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Data for evaluation.")
@@ -61,12 +56,8 @@ model Evaluation {
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
   description?: string;
 
-  @doc("Metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
-
   @doc("Status of the evaluation. It is set by service and is read-only.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")

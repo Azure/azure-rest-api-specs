@@ -6,49 +6,53 @@ import "../main.tsp";
 import "../common/models.tsp";
 import "@typespec/openapi";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
 @doc("Model Deployment Definition")
 @resource("deployments")
+@discriminator("type")
 model Deployment {
+  @doc("The type of the deployment")
+  type: DeploymentType;
+
   @doc("Name of the deployment")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key("name")
   name: string;
+}
+
+@doc("Model Deployment Definition")
+model ModelDeployment extends Deployment {
+  @doc("The type of the deployment")
+  type: DeploymentType.ModelDeployment;
 
   @doc("Publisher-specific name of the deployed model")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modelName: string;
 
   @doc("Publisher-specific version of the deployed model")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modelVersion: string;
 
   @doc("Name of the deployed model's publisher")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   modelPublisher: string;
 
   @doc("Capabilities of deployed model")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   capabilities: Record<string>;
 
   @doc("Sku of the model deployment")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sku: Sku;
 
   @doc("Name of the connection the deployment comes from")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Sku information")
 model Sku {
   @doc("Sku capacity")
@@ -65,4 +69,11 @@ model Sku {
 
   @doc("Sku tier")
   tier: string;
+}
+
+union DeploymentType {
+  string,
+
+  @doc("Model deployment")
+  ModelDeployment: "ModelDeployment",
 }

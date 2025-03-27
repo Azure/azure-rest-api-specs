@@ -5,9 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "../credentials/models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Versioning;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Azure.AI.Projects;
 
@@ -133,25 +130,6 @@ union ApiResponseFormat {
   jsonObject: "json_object",
 }
 
-@doc("Metadata pertaining to creation and last modification of the resource.")
-model SystemData {
-  @visibility("read")
-  @doc("The timestamp the resource was created at.")
-  createdAt?: utcDateTime;
-
-  @visibility("read")
-  @doc("The identity that created the resource.")
-  createdBy?: string;
-
-  @visibility("read")
-  @doc("The identity type that created the resource.")
-  createdByType?: string;
-
-  @visibility("read")
-  @doc("The timestamp of resource last modification (UTC)")
-  lastModifiedAt?: utcDateTime;
-}
-
 @doc("List View Type Definition")
 union ListViewType {
   string,
@@ -224,20 +202,20 @@ model OutputPathAssetReference extends AssetReferenceBase {
 
 alias AssetBase = {
   @doc("Asset stage")
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stage?: string;
 
   @doc("A unique identifier for the asset, assetId probably?")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("The name of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key
   name: string;
 
   @doc("The version of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version: string;
 
   @doc("The asset description text.")
@@ -245,10 +223,6 @@ alias AssetBase = {
 
   @doc("Tag dictionary. Tags can be added, removed, and updated.")
   tags?: Record<string>;
-
-  @doc("System data of the resource")
-  @visibility("read")
-  systemData?: SystemData;
 };
 
 #suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create responses correctly"
