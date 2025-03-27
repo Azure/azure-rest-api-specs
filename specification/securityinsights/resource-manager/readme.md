@@ -73,7 +73,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2025-04-01-preview/WorkspaceManagerConfigurations.json
   - Microsoft.SecurityInsights/preview/2025-04-01-preview/WorkspaceManagerGroups.json
   - Microsoft.SecurityInsights/preview/2025-04-01-preview/WorkspaceManagerMembers.json
-  suppressions:
+suppressions:
   - code: AvoidAdditionalProperties
     from: dataConnectors.json
     reason: These properties are unknown and need to be specified by the customer (each request can have different values)
