@@ -39,7 +39,7 @@ export class CompileRule implements Rule {
         // Handle windows and linux line endings
         const lines = stdout.split(/\r?\n/);
 
-        console.log(stdout);
+        console.log(JSON.stringify(lines));
 
         // TODO: Use helpers in /.github once they support platform-specific paths
         const outputSwaggers = lines
