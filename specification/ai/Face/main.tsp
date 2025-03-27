@@ -14,7 +14,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 @useAuth(KeyAuth | AADToken)
-@service(#{ title: "Azure AI Face API" })
+@service(#{ title: "Azure AI Face API testing" })
 @versioned(Versions)
 @server(
   "{endpoint}/face/{apiVersion}",

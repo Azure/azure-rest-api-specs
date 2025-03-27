@@ -16,7 +16,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @useAuth(AadOauth2Auth<["https://azure-apicenter.net/user_impersonation"]>)
-@service(#{ title: "Azure API Center Data API" })
+@service(#{ title: "Azure API Center Data API testing" })
 @server(
   "https://{serviceName}.data.{region}.azure-apicenter.ms",
   "Data API service endpoint",
