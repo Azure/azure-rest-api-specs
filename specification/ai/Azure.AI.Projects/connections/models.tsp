@@ -6,12 +6,7 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 import "../credentials/models.tsp";
 
-using TypeSpec.OpenAPI;
-using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
@@ -19,20 +14,20 @@ namespace Azure.AI.Projects;
 @resource("connections")
 model Connection {
   @doc("The name of the resource")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key("connectionName")
   name: string;
 
   @doc("Category of the connection")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type: ConnectionType;
 
   @doc("The connection URL to be used for this service")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target: string;
 
-  @doc("A collection of properties of the connection")
-  properties: Record<string>;
+  @doc("Metadata of the connection")
+  metadata: Record<string>;
 }
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType

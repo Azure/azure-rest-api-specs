@@ -4,39 +4,27 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "../servicepatterns.tsp";
+import "../common/models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
-using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
 alias ListIndexVersionParameters = {
-  @doc("View type for including/excluding (for example) archived entities.")
+  @doc("Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned")
   @query
-  listViewType: string = "ActiveOnly";
+  top?: int32;
 
-  @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
+  @doc("Continuation token for pagination.")
   @query
-  orderBy?: string;
+  skip?: string;
 
-  @doc("Ordering of list: Please choose orderby value from ['createdAt', 'lastModifiedAt'].")
-  @query
-  orderby?: string;
-
-  @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.")
+  @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
   @query
   tags?: string;
 
-  ...StandardListQueryParameters;
-};
-
-alias ListLatestIndexParameters = {
-  @doc("View type for including/excluding (for example) archived entities.")
-  @query("listViewType")
+  @doc("[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All] View type for including/excluding (for example) archived entities.")
+  @query
   listViewType?: ListViewType;
 };
 
@@ -44,6 +32,6 @@ alias ListLatestIndexParameters = {
 interface Indexes
   extends ServicePatterns.VersionedOperations<
       Index,
-      ListLatestIndexParameters,
+      ListIndexVersionParameters,
       ListIndexVersionParameters
     > {}

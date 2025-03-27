@@ -375,6 +375,10 @@ union DevBoxOperationKind {
   @added(APIVersions.v2024_10_01_preview)
   CaptureSnapshot: "CaptureSnapshot",
 
+  @doc("The operation represents a Dev Box align to the current network connection.")
+  @added(APIVersions.v2025_03_01_preview)
+  Align: "Align",
+
   string,
 }
 
@@ -417,7 +421,7 @@ model Pool {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Pool name.")
   name: string;
 
@@ -461,22 +465,26 @@ model Pool {
   @doc("Display name of the pool.")
   @added(APIVersions.v2024_02_01)
   displayName?: string;
+
+  @doc("The default active hours configuration for Dev Boxes created in this pool.")
+  @added(APIVersions.v2025_03_01_preview)
+  activeHoursConfiguration?: PoolActiveHoursConfiguration;
 }
 
 @doc("Hardware specifications for the Dev Box.")
 model HardwareProfile {
   @doc("The name of the SKU.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   skuName?: SkuName;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The number of vCPUs available for the Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vCPUs?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The amount of memory available for the Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memoryGB?: int32;
 }
 
@@ -490,30 +498,30 @@ model StorageProfile {
 model OsDisk {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   @doc("The size of the OS Disk in gigabytes.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   diskSizeGB?: int32;
 }
 
 @doc("Specifies information about the image used.")
 model ImageReference {
   @doc("The name of the image used.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   @doc("The version of the image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   @doc("The operating system of the image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   operatingSystem?: string;
 
   @doc("The operating system build number of the image.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osBuildNumber?: string;
 
   @doc("The datetime that the backing image version was published, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   publishedDate?: utcDateTime;
 }
 
@@ -544,6 +552,74 @@ model StopOnNoConnectConfiguration {
   gracePeriodMinutes?: int32;
 }
 
+@doc("The default active hours configuration settings.")
+@added(APIVersions.v2025_03_01_preview)
+model PoolActiveHoursConfiguration {
+  @doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
+  keepAwakeEnableStatus: KeepAwakeEnableStatus;
+
+  @doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
+  autoStartEnableStatus: AutoStartEnableStatus;
+
+  @doc("The default IANA timezone id of the active hours.")
+  defaultTimeZone?: string;
+
+  @doc("The default start time of the active hours.")
+  defaultStartTimeHour?: int32;
+
+  @doc("The default end time of the active hours.")
+  defaultEndTimeHour?: int32;
+}
+
+@doc("The active hours configuration for a Dev Box.")
+@added(APIVersions.v2025_03_01_preview)
+model ActiveHoursConfiguration {
+  @doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
+  keepAwakeEnableStatus: KeepAwakeEnableStatus;
+
+  @doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
+  autoStartEnableStatus: AutoStartEnableStatus;
+
+  ...UserActiveHoursConfiguration;
+}
+
+@doc("Enables or disables whether the Dev Box should be kept awake during active hours.")
+@added(APIVersions.v2025_03_01_preview)
+union KeepAwakeEnableStatus {
+  @doc("Keep awake is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Keep awake is disabled.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("Enables or disables whether the Dev Box should be automatically started at commencement of active hours.")
+@added(APIVersions.v2025_03_01_preview)
+union AutoStartEnableStatus {
+  @doc("Auto start is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Auto start is disabled.")
+  Disabled: "Disabled",
+
+  string,
+}
+
+@doc("Manual user set active hours configuration.")
+@added(APIVersions.v2025_03_01_preview)
+model UserActiveHoursConfiguration {
+  @doc("The timezone of the active hours.")
+  timeZone?: string;
+
+  @doc("The start time of the active hours.")
+  startTimeHour?: int32;
+
+  @doc("The end time of the active hours.")
+  endTimeHour?: int32;
+}
+
 alias ScheduleListResult = Azure.Core.Page<Schedule>;
 
 @doc("A Schedule to execute action.")
@@ -558,7 +634,7 @@ model Schedule {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Display name for the Schedule.")
   name: string;
 
@@ -591,7 +667,7 @@ alias DevBoxListResult = Azure.Core.Page<DevBox>;
 @parentResource(User)
 model DevBox {
   @doc("The unique URI of the dev box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_02_01)
   uri: url;
 
@@ -600,89 +676,94 @@ model DevBox {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Name of the project this Dev Box belongs to.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   projectName?: string;
 
   @doc("The name of the Dev Box pool this machine belongs to.")
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   poolName: string;
 
   @doc("Indicates whether hibernate is enabled/disabled or unknown.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hibernateSupport?: HibernateSupport;
 
   @doc("The current provisioning state of the Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: DevBoxProvisioningState;
 
   @doc("""
     The current action state of the Dev Box. This is state is based on previous
     action performed by user.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actionState?: string;
 
   @doc("The current power state of the Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   powerState?: PowerState;
 
   @doc("""
     A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
     00000000-0000-0000-0000-000000000000).
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uniqueId?: Azure.Core.uuid;
 
   @doc("Provisioning or action error details. Populated only for error states.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Azure.Core.Foundations.Error;
 
   @doc("""
     Azure region where this Dev Box is located. This will be the same region as the
     Virtual Network it is attached to.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location?: Azure.Core.azureLocation;
 
   @doc("The operating system type of this Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OsType;
 
   @doc("The AAD object id of the user this Dev Box is assigned to.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   user?: Azure.Core.uuid;
 
   @doc("Information about the Dev Box's hardware resources.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hardwareProfile?: HardwareProfile;
 
   @doc("Storage settings for this Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageProfile?: StorageProfile;
 
   @doc("Information about the image used for this Dev Box.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   imageReference?: ImageReference;
 
   @doc("Creation time of this Dev Box, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdTime?: utcDateTime;
 
   @doc("Last time a user connected to this Dev Box, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_10_01_preview)
   lastConnectedTime?: utcDateTime;
 
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   localAdministrator?: LocalAdminStatus;
+
+  @doc("The active hours configuration for this Dev Box, if enabled.")
+  @added(APIVersions.v2025_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activeHoursConfiguration?: ActiveHoursConfiguration;
 }
 
 @doc("Provides remote connection information for a Dev Box.")
@@ -711,7 +792,7 @@ model DevBoxAction {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The action that will be taken.")
@@ -775,7 +856,7 @@ model DevBoxOperation {
   @minLength(36)
   @maxLength(36)
   @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @key("operationId")
   operationId: Azure.Core.uuid;
 
@@ -803,6 +884,13 @@ model DevBoxOperation {
 model DevBoxStartOperation extends DevBoxOperation {
   @doc("The kind of operation that occurred.")
   kind: DevBoxOperationKind.Start;
+}
+
+@doc("Information about an align operation on a Dev Box.")
+@added(APIVersions.v2025_03_01_preview)
+model DevBoxAlignOperation extends DevBoxOperation {
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind.Align;
 }
 
 @doc("Information about a stop operation on a Dev Box.")
@@ -870,15 +958,15 @@ model PagedCustomizationTaskDefinition
 model CustomizationTaskDefinition {
   @doc("Full name of the task: {catalogName}/{taskName}.")
   @key("taskName")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Name of the catalog that the task belongs to.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   catalogName: string;
 
   @doc("The unique URI of the customization task.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uri?: url;
 
   @doc("Description of the task.")
@@ -898,7 +986,7 @@ model CustomizationTaskDefinitionParameter {
   type: CustomizationTaskDefinitionParameterType;
 
   @doc("Whether or not the parameter is required.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   required?: boolean;
 
   @doc("Default value for the parameter.")
@@ -922,7 +1010,7 @@ model CustomizationTaskList {
 model CustomizationTask {
   @doc("Name of the task.")
   @key("taskName")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   name: string;
 
   @doc("Parameters for the task.")
@@ -938,23 +1026,23 @@ model CustomizationTask {
   runAs?: CustomizationTaskExecutionAccount;
 
   @doc("ID of the task instance.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   @doc("The unique URI for retrieving the task logs.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   logUri?: string;
 
   @doc("Status of the task.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: CustomizationTaskStatus;
 
   @doc("Start time of the task, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
   @doc("End time of the task, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 }
 
@@ -1000,7 +1088,7 @@ model CustomizationGroup {
   tasks?: CustomizationTask[];
 
   @doc("The unique URI of the customization group.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uri?: string;
 
   @doc("Name of the customization group.")
@@ -1008,19 +1096,19 @@ model CustomizationGroup {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("Status of the customization group.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: CustomizationGroupStatus;
 
   @doc("Start time of the customization group, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
   @doc("End time of the customization group, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 }
 
@@ -1031,20 +1119,20 @@ model CustomizationGroup {
 model DevBoxSnapshot {
   @key("snapshotId")
   @doc("The id of the snapshot. Should be treated as opaque string.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   snapshotId: string;
 
   @doc("The datetime that the snapshot was created, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdTime: utcDateTime;
 
   @doc("The datetime when the snapshot expires, will only be shown for a manual snapshot, in RFC3339 format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_10_01_preview)
   expirationTime?: utcDateTime;
 
   @doc("The type of the snapshot indicates whether it is manual or automatic.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_10_01_preview)
   snapshotType: SnapshotType;
 }
