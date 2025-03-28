@@ -76,7 +76,7 @@ model Evaluation {
 }
 
 //Todo need to integrate some job metrics like: runtime, createdTime, status changing?
-@doc("Evaluation Definition for Uploading.")
+@doc("Evaluation Definition for Uploading and any subset of this API can be used for updates on the upload.")
 @resource("runs")
 model EvaluationUpload {
   @doc("Identifier of the evaluation.")
@@ -84,8 +84,6 @@ model EvaluationUpload {
   @visibility("read")
   id: string;
 
-  // optional will break get here, could we have a local config or something we can fill this with?
-  // service makes these empty?
   @doc("Data for evaluation.")
   data?: InputData;
 
@@ -113,5 +111,5 @@ model EvaluationUpload {
   evaluators?: Record<EvaluatorConfiguration>;
 
   @doc("Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureml://project/azureml/evaluationresults/myevaluationresult1'}")
-  outputs: Record<string>;
+  outputs?: Record<string>;
 }

@@ -55,4 +55,17 @@ interface Evaluations {
     },
     Evaluation
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Update the uploaded the result to an evaluation run.")
+  @route("runs:upload")
+  @patch
+  UploadUpdateRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Evaluation upload to update.")
+      @body
+      evaluation: EvaluationUpload;
+    },
+    Evaluation
+  >;
 }
