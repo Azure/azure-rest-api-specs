@@ -19,11 +19,11 @@ using Azure.Core;
 @service(#{ title: "Azure Trusted Signing" })
 @versioned(Azure.Developer.TrustedSigning.Versions)
 @server(
-  "https://{region}.codesigning.azure.net/",
+  "{endpoint}",
   "Sign and retrieve relevant information pertaining signing process.",
   {
-    @doc("The Azure region wherein requests for signing will be sent.")
-    region: string,
+    @doc("The Azure Trusted signing service endpoint.")
+    endpoint: string,
   }
 )
 @doc("Azure Trusted Signing is a service that provides managed artifact signing for all.")
