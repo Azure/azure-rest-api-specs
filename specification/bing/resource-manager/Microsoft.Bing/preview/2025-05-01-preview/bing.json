@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/customSearchConfigurations/{customSearchConfigurationName}": {
       "put": {
         "tags": [
-          "BingCustomConfigurations"
+          "BingCustomSearchConfigurations"
         ],
         "description": "Creates or Updates a Bing Custom Search configuration.",
-        "operationId": "Configurations_CreateOrUpdate",
+        "operationId": "CustomSearchConfigurations_CreateOrUpdate",
         "x-ms-examples": {
-          "Create Configuration": {
-            "$ref": "./examples/CreateOrUpdateConfiguration.json"
+          "Create or Update Custom Search Configuration": {
+            "$ref": "./examples/CreateOrUpdateCustomSearchConfiguration.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -52,41 +52,41 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/configurationNameParameter"
+            "$ref": "#/parameters/customSearchConfigurationNameParameter"
           },
           {
-            "name": "configuration",
+            "name": "customSearchConfiguration",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BingCustomConfiguration"
+              "$ref": "#/definitions/BingCustomSearchConfiguration"
             },
             "description": "The parameters of the configuration to create or update."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The resource is successfully created or updated.",
             "schema": {
-              "$ref": "#/definitions/BingCustomConfiguration"
+              "$ref": "#/definitions/BingCustomSearchConfiguration"
             }
           },
           "201": {
             "description": "The resource is created or updated and the operation will complete asynchronously",
             "schema": {
-              "$ref": "#/definitions/BingCustomConfiguration"
+              "$ref": "#/definitions/BingCustomSearchConfiguration"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -103,135 +103,135 @@
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
         "tags": [
-          "BingCustomConfigurations"
+          "BingCustomSearchConfigurations"
         ],
         "description": "Deletes a Bing Custom Search configuration from the Bing account.",
-        "operationId": "Configurations_Delete",
+        "operationId": "CustomSearchConfiguration_Delete",
         "x-ms-examples": {
-          "Delete Configuration": {
-            "$ref": "./examples/DeleteConfiguration.json"
+          "Delete Custom Search Configuration": {
+            "$ref": "./examples/DeleteCustomSearchConfiguration.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/configurationNameParameter"
+            "$ref": "#/parameters/customSearchConfigurationNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+            "description": "Indicates that the request was successful, the specified object was found, and it has been deleted as requested."
           },
-          "204": {
-            "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
+            "204": {
+            "description": "The operation completed successfully, but there is no content to return. This typically means the resource does not exist, and no further action is required."
           },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "get": {
         "tags": [
-          "BingCustomConfigurations"
+          "BingCustomSearchConfigurations"
         ],
         "description": "Returns a Bing Custom Search configuration specified by the parameters.",
-        "operationId": "Configurations_Get",
+        "operationId": "CustomSearchConfiguration_Get",
         "x-ms-examples": {
-          "Get Configuration": {
-            "$ref": "./examples/GetConfiguration.json"
+          "Get Custom Search Configuration": {
+            "$ref": "./examples/GetCustomSearchConfiguration.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/configurationNameParameter"
+            "$ref": "#/parameters/customSearchConfigurationNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"",
+            "description": "The operation was successful, and the requested Bing Custom Search configuration details are returned in the response. This includes information such as the configuration's name, type, and unique identifier.",
             "schema": {
-              "$ref": "#/definitions/BingCustomConfiguration"
+              "$ref": "#/definitions/BingCustomSearchConfiguration"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.",
+            "description": "The operation failed due to an error. If the resource does not exist, a 404 (NotFound) status code will be returned, indicating that the requested resource could not be found. Please verify the resource details and try again.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Bing/accounts/{accountName}/customSearchConfigurations": {
       "get": {
         "tags": [
-          "BingCustomConfigurations"
+          "BingCustomSearchConfigurations"
         ],
         "description": "Returns all the Bing Custom Search configurations for the specified Bing account.",
-        "operationId": "Configurations_ListByAccount",
+        "operationId": "CustomSearchConfigurations_ListByAccount",
         "x-ms-examples": {
-          "List Configurations by Account": {
-            "$ref": "./examples/ListConfigurationsByAccount.json"
+          "List Custom Search Configurations by Account": {
+            "$ref": "./examples/ListCustomSearchConfigurationsByAccount.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nThe nextLink field is expected to point to the URL the client should use to fetch the next page (per server side paging). This matches the OData guidelines for paged responses here. If a resource provider does not support paging, it should return the same body (JSON object with \"value\" property) but omit nextLink entirely (or set to null, *not* empty string) for future compatibility.\nThe nextLink should be implemented using following query parameters:\n· skipToken: opaque token that allows the resource provider to skip resources already enumerated. This value is defined and returned by the RP after first request via nextLink.\n· top: the optional client query parameter which defines the maximum number of records to be returned by the server.\nImplementation details:\n· NextLink may include all the query parameters (specifically OData $filter) used by the client in the first query. \n· Server may return less records than requested with nextLink. Returning zero records with NextLink is an acceptable response. \nClients must fetch records until the nextLink is not returned back / null. Clients should never rely on number of returned records to determinate if pagination is completed.",
+            "description": "The operation was successful, and the requested list of Bing Custom Search configurations is returned in the response. If there are additional pages of results, the nextLink field will contain a URL to fetch the next page. If no additional pages exist, nextLink will be null. This allows users to retrieve all configurations in a paginated manner.",
             "schema": {
-              "$ref": "#/definitions/BingCustomConfigurationListResult"
+              "$ref": "#/definitions/BingCustomSearchConfigurationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) will be returned.",
+            "description": "This error response provides details about why the operation failed. A 404 (NotFound) status code indicates that the requested resource group or resource could not be found. This typically means the resource does not exist or the specified identifier is incorrect.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -842,34 +842,21 @@
     }
   },
   "definitions": {
-    "BingCustomConfiguration": {
-      "description": "Bing Custom Configuration is an Azure resource representing Bing Custom Search configuration type, allowed domains, blocked domains and pinned domains.",
+    "BingCustomSearchConfiguration": {
+      "description": "Bing Custom Search Configuration is an Azure resource representing Bing Custom Search configuration type, allowed domains, blocked domains and pinned domains.",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The id of the created configuration",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the created configuration",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type",
-          "readOnly": true
-        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          }
+        ],
         "properties": {
           "$ref": "#/definitions/BingCustomConfigurationProperties",
           "description": "Properties of Bing Custom Search configuration."
         }
       },
-      "x-ms-azure-resource": true,
-      "required": [
-        "properties"
-      ]
+      "x-ms-azure-resource": true
     },
     "BingCustomConfigurationProperties": {
       "type": "object",
@@ -895,16 +882,6 @@
           },
           "description": "List of pinned domains for Bing Custom Search configuration."
         },
-        "internalId": {
-          "type": "string",
-          "description": "An internal identifier.",
-          "readOnly": true
-        },
-        "creationDateUtc": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the creation date of the Bing Custom Search configuration."
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -924,20 +901,19 @@
           }
         }
       },
-      "description": "Properties of Bing Custom Search Configuration.",
-      "required": [
-        "allowedList",
-        "blockedList",
-        "pinnedList"
-      ]
+      "description": "Properties of Bing Custom Search Configuration."
+    },
+    "Domain": {
+      "type": "string",
+      "description": "A domain string that can be used to specify allowed, blocked, or pinned domains in Bing Custom Search configuration.",
+      "pattern": "^(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,11})+$"
     },
     "AllowedDomain": {
       "type": "object",
       "properties": {
         "domain": {
-          "type": "string",
-          "description": "The domain to allow.",
-          "pattern": "^(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,11})+$"
+          "$ref": "#/definitions/Domain",
+          "description": "The domain to allow."
         },
         "includeSubPages": {
           "type": "boolean",
@@ -969,9 +945,8 @@
       "type": "object",
       "properties": {
         "domain": {
-          "type": "string",
-          "description": "The domain to block.",
-          "pattern": "^(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,11})+$"
+          "$ref": "#/definitions/Domain",
+          "description": "The domain to block."
         },
         "includeSubPages": {
           "type": "boolean",
@@ -988,9 +963,8 @@
       "type": "object",
       "properties": {
         "domain": {
-          "type": "string",
-          "description": "The domain to pin.",
-          "pattern": "^(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9-]+(\\.[a-zA-Z]{2,11})+$"
+          "$ref": "#/definitions/Domain",
+          "description": "The domain to pin."
         },
         "query": {
           "type": "string",
@@ -1018,7 +992,7 @@
         "condition"
       ]
     },
-    "BingCustomConfigurationListResult": {
+    "BingCustomSearchConfigurationListResult": {
       "type": "object",
       "properties": {
         "nextLink": {
@@ -1029,7 +1003,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BingCustomConfiguration"
+            "$ref": "#/definitions/BingCustomSearchConfiguration"
           },
           "description": "Gets the list of Bing Custom Search configurations and their properties."
         }
@@ -1832,15 +1806,15 @@
     }
   },
   "parameters": {
-    "configurationNameParameter": {
-      "name": "configurationName",
+    "customSearchConfigurationNameParameter": {
+      "name": "customSearchConfigurationName",
       "in": "path",
       "required": true,
       "type": "string",
       "maxLength": 50,
       "minLength": 2,
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-      "description": "The name of the Bing custom configuration.",
+      "description": "The name of the Bing custom search configuration.",
       "x-ms-parameter-location": "method"
     },
     "accountNameParameter": {

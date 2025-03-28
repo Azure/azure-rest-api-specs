@@ -4,8 +4,8 @@
     "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     "resourceGroupName": "MyResourceGroup",
     "accountName": "MyAccount",
-    "configurationName": "MyConfiguration",
-    "configuration": {
+    "customSearchConfigurationName": "MyCustomSearchConfiguration",
+    "customSearchConfiguration": {
       "properties": {
         "allowedList": [
           {
@@ -33,13 +33,11 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/configurations/MyConfiguration",
-        "name": "MyConfiguration",
-        "type": "Microsoft.Bing/accounts/configurations",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/customSearchConfigurations/MyCustomSearchConfiguration",
+        "name": "MyCustomSearchConfiguration",
+        "type": "Microsoft.Bing/accounts/customSearchConfigurations",
         "properties": {
           "provisioningState": "Succeeded",
-          "creationDateUtc": "2021-06-01T00:00:00Z",
-          "internalId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
           "allowedList": [
             {
               "domain": "www.example.com",
@@ -61,6 +59,14 @@
             }
           ]
         }
+      },
+      "systemData": {
+        "createdBy": "user@domain.com",
+        "createdByType": "User",
+        "createdAt": "2023-05-05T13:54:37.8072169Z",
+        "lastModifiedBy": "user@domain.com",
+        "lastModifiedByType": "User",
+        "lastModifiedAt": "2023-05-05T13:54:37.8072169Z"
       }
     },
     "201": {
@@ -69,13 +75,11 @@
         "Retry-After": 10
       },
       "body": {
-        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/configurations/MyConfiguration",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/customSearchConfigurations/MyConfiguration",
         "name": "MyConfiguration",
-        "type": "Microsoft.Bing/accounts/configurations",
+        "type": "Microsoft.Bing/accounts/customSearchConfigurations",
         "properties": {
           "provisioningState": "Creating",
-          "creationDateUtc": "2021-06-01T00:00:00Z",
-          "internalId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
           "allowedList": [
             {
               "domain": "www.example.com",
@@ -96,6 +100,14 @@
               "condition": "Contains"
             }
           ]
+        },
+        "systemData": {
+          "createdBy": "user@domain.com",
+          "createdByType": "User",
+          "createdAt": "2023-05-05T13:54:37.8072169Z",
+          "lastModifiedBy": "user@domain.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-05T13:54:37.8072169Z"
         }
       }
     }
