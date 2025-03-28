@@ -58,7 +58,7 @@ namespace Customizations;
 @@clientName(MetricRequestPayload, "MetricsFilters", "csharp,java");
 @@clientName(Aggregation, "AggregationType", "csharp,java");
 @@clientName(MetricNamespaceCollection, "MetricNamespaceList", "csharp,java");
-@@clientName(MetricDefinitionCollection, "MetricDefinitionList", "csharp,java")
+@@clientName(MetricDefinitionCollection, "MetricDefinitionList", "csharp,java");
 
 // Suggestion to fix casing for acronyms
 @@clientName(LoadTestConfiguration.splitAllCSVs,
