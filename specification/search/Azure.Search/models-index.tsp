@@ -880,7 +880,7 @@ model SearchDocumentsResult {
    * Debug information that applies to the search results as a whole.
    */
   @added(Versions.v2025_03_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.debug")
   debugInfo?: DebugInfo;
 
@@ -923,7 +923,7 @@ model SearchDocumentsResult {
    * Type of query rewrite that was used to retrieve documents.
    */
   @added(Versions.v2025_03_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.semanticQueryRewritesResultType")
   semanticQueryRewritesResultType?: SemanticQueryRewritesResultType;
 }
@@ -947,7 +947,7 @@ model FacetResult is Record<unknown> {
    * any nested facets.
    */
   @added(Versions.v2025_03_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.facets")
   facets?: Record<FacetResult[]>;
 
@@ -955,7 +955,7 @@ model FacetResult is Record<unknown> {
    * The resulting total sum for the facet when a sum metric is requested.
    */
   @added(Versions.v2025_03_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   sum?: int64;
 }
 
@@ -998,7 +998,7 @@ model DebugInfo {
   /**
    * Contains debugging information specific to query rewrites.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
 }
 
@@ -1010,13 +1010,13 @@ model QueryRewritesDebugInfo {
   /**
    * List of query rewrites generated for the text query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   text?: QueryRewritesValuesDebugInfo;
 
   /**
    * List of query rewrites generated for the vectorizable text queries.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vectors?: QueryRewritesValuesDebugInfo[];
 }
 
@@ -1029,13 +1029,13 @@ model QueryRewritesValuesDebugInfo {
    * The input text to the generative query rewriting model. There may be cases
    * where the user query and the input to the generative model are not identical.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inputQuery?: string;
 
   /**
    * List of query rewrites.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rewrites?: string[];
 }
 
@@ -1412,7 +1412,7 @@ model SearchResult {
    * results.
    */
   @added(Versions.v2025_03_01_preview)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.documentDebugInfo")
   documentDebugInfo?: DocumentDebugInfo[];
 }
@@ -1448,13 +1448,13 @@ model DocumentDebugInfo {
   /**
    * Contains debugging information specific to semantic ranking requests.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   semantic?: SemanticDebugInfo;
 
   /**
    * Contains debugging information specific to vector and hybrid search.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vectors?: VectorsDebugInfo;
 }
 
@@ -1467,27 +1467,27 @@ model SemanticDebugInfo {
    * The title field that was sent to the semantic enrichment process, as well as
    * how it was used
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   titleField?: QueryResultDocumentSemanticField;
 
   /**
    * The content fields that were sent to the semantic enrichment process, as well
    * as how they were used
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   contentFields?: QueryResultDocumentSemanticField[];
 
   /**
    * The keyword fields that were sent to the semantic enrichment process, as well
    * as how they were used
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keywordFields?: QueryResultDocumentSemanticField[];
 
   /**
    * The raw concatenated strings that were sent to the semantic enrichment process.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   rerankerInput?: QueryResultDocumentRerankerInput;
 }
 
@@ -1500,14 +1500,14 @@ model QueryResultDocumentSemanticField {
   /**
    * The name of the field that was sent to the semantic enrichment process
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The way the field was used for the semantic enrichment process (fully used,
    * partially used, or unused)
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: SemanticFieldState;
 }
 
@@ -1519,21 +1519,21 @@ model QueryResultDocumentRerankerInput {
   /**
    * The raw string for the title field that was used for semantic enrichment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   title?: string;
 
   /**
    * The raw concatenated strings for the content fields that were used for semantic
    * enrichment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   content?: string;
 
   /**
    * The raw concatenated strings for the keyword fields that were used for semantic
    * enrichment.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   keywords?: string;
 }
 
@@ -1546,7 +1546,7 @@ model VectorsDebugInfo {
    * The breakdown of subscores of the document prior to the chosen result set
    * fusion/combination method such as RRF.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   subscores?: QueryResultDocumentSubscores;
 }
 
@@ -1560,19 +1560,19 @@ model QueryResultDocumentSubscores {
   /**
    * The BM25 or Classic score for the text portion of the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   text?: TextResult;
 
   /**
    * The vector similarity and \@search.score values for each vector query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vectors?: Record<SingleVectorFieldResult>[];
 
   /**
    * The BM25 or Classic score for the text portion of the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   documentBoost?: float64;
 }
 
@@ -1584,7 +1584,7 @@ model TextResult {
   /**
    * The BM25 or Classic score for the text portion of the query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   searchScore?: float64;
 }
 
@@ -1598,7 +1598,7 @@ model SingleVectorFieldResult {
    * The \@search.score value that is calculated from the vector similarity score.
    * This is the score that's visible in a pure single-field single-vector query.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   searchScore?: float64;
 
   /**
@@ -1606,7 +1606,7 @@ model SingleVectorFieldResult {
    * definition of similarity metric, not the 'distance' version. For example,
    * cosine similarity instead of cosine distance.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vectorSimilarity?: float64;
 }
 

@@ -5637,14 +5637,14 @@ model IndexerExecutionResult {
   /**
    * The outcome of this indexer execution.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2025_03_01_preview)
   statusDetail?: IndexerExecutionStatusDetail;
 
   /**
    * All of the state that defines and dictates the indexer's current execution.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(Versions.v2025_03_01_preview)
   currentState?: IndexerCurrentState;
 
@@ -5705,35 +5705,35 @@ model IndexerCurrentState {
   /**
    * The mode the indexer is running in.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   mode?: IndexingMode;
 
   /**
    * Change tracking state used when indexing starts on all documents in the
    * datasource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allDocsInitialChangeTrackingState?: string;
 
   /**
    * Change tracking state value when indexing finishes on all documents in the
    * datasource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   allDocsFinalChangeTrackingState?: string;
 
   /**
    * Change tracking state used when indexing starts on select, reset documents in
    * the datasource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resetDocsInitialChangeTrackingState?: string;
 
   /**
    * Change tracking state value when indexing finishes on select, reset documents
    * in the datasource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resetDocsFinalChangeTrackingState?: string;
 
   /**
@@ -5741,7 +5741,7 @@ model IndexerCurrentState {
    * document's unique identifier for the data in the search index. The indexer will
    * prioritize selectively re-ingesting these keys.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resetDocumentKeys?: string[];
 
   /**
@@ -5749,7 +5749,7 @@ model IndexerCurrentState {
    * document id is the unique identifier for the data in the datasource. The
    * indexer will prioritize selectively re-ingesting these ids.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   resetDatasourceDocumentIds?: string[];
 }
 
@@ -7147,7 +7147,7 @@ model ListAliasesResult {
   /**
    * The aliases in the Search service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @items
   value: SearchAlias[];
 }
@@ -10023,25 +10023,25 @@ model IndexStatisticsSummary {
    * The name of the index.
    */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   /**
    * The number of documents in the index.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   documentCount: int64;
 
   /**
    * The amount of storage in bytes consumed by the index.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   storageSize: int64;
 
   /**
    * The amount of memory in bytes consumed by vectors in the index.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vectorIndexSize?: int64;
 }
 
@@ -10054,7 +10054,7 @@ model ListIndexStatsSummary {
   /**
    * The Statistics summary of all indexes in the Search service.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @items
   value: IndexStatisticsSummary[];
 }
