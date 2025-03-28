@@ -19,7 +19,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2_preview: "2025-02-11-preview",
+  v2_preview: "2025-03-21-preview",
 }
 
 /**
@@ -27,14 +27,14 @@ enum Versions {
  */
 model FileSystemResourceProperties {
   /**
-   * Initial capacity for Dell Filesystem in bytes
+   * Capacity for Dell Filesystem, Will be received as part of Job Status
    */
-  initialCapacity: int64;
+  capacity?: Capacity;
 
   /**
    * Marketplace details
    */
-  marketplaceDetails: LiftrBase.MarketplaceDetails;
+  marketplace: LiftrBase.MarketplaceDetails;
 
   /**
    * Provisioning State of the resource
@@ -56,18 +56,12 @@ model FileSystemResourceProperties {
   /**
    * User Details
    */
-  userDetails: LiftrBase.UserDetails;
+  user: LiftrBase.UserDetails;
 
   /**
    * File system Id of the resource
    */
-  clusterLoginUrl?: string;
-
-  /**
-   * Private IPs of the resource
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is the correct name"
-  privateIPs?: string[];
+  fileSystemId?: string;
 
   /**
    * Smart Connect FQDN of the resource
@@ -83,6 +77,30 @@ model FileSystemResourceProperties {
    * EncryptionProperties of the resource
    */
   encryption: LiftrBase.EncryptionProperties;
+}
+/**
+ * Capacity for a Resource
+ */
+model Capacity {
+  /**
+   * Minimum Capacity
+   */
+  min?: string;
+
+  /**
+   * Maximum Capacity
+   */
+  max?: string;
+
+  /**
+   * Units to be increased
+   */
+  incremental?: string;
+
+  /**
+   * Current Capacity of the resource
+   */
+  current?: string;
 }
 
 /**
@@ -161,9 +179,9 @@ model FileSystemResourceUpdateProperties {
   delegatedSubnetId?: string;
 
   /**
-   * Initial capacity for Dell Filesystem in bytes
+   * Capacity for Dell Filesystem
    */
-  initialCapacity?: int64;
+  capacity?: Capacity;
 
   /**
    * Encryption Details of the resource
