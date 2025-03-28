@@ -57,7 +57,7 @@ op uploadFile(
      *            file input, like curl does) but should remain configurable when using a stream or other data source
      *            lacking an a priori name.
      */
-    @doc("The filename to associate with the uploaded data.")
+    @doc("A filename to associate with the uploaded data.")
     filename?: HttpPart<string>;
   },
 ): OpenAIFile;
