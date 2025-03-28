@@ -1109,9 +1109,11 @@ model BatchJobStatistics {
   writeIOps: int64;
 
   @doc("The total amount of data in GiB read from disk by all Tasks in the Job.")
+  @clientName("readIoGiB")
   readIOGiB: float32;
 
   @doc("The total amount of data in GiB written to disk by all Tasks in the Job.")
+  @clientName("writeIoGiB")
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0.")
@@ -2477,9 +2479,11 @@ model BatchJobScheduleStatistics {
   writeIOps: int64;
 
   @doc("The total gibibytes read from disk by all Tasks in all Jobs created under the schedule.")
+  @clientName("readIoGiB")
   readIOGiB: float32;
 
   @doc("The total gibibytes written to disk by all Tasks in all Jobs created under the schedule.")
+  @clientName("writeIoGiB")
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0.")
