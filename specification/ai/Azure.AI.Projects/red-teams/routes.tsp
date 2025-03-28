@@ -32,7 +32,7 @@ interface RedTeams {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates a redteam run.")
-  @route("scan")
+  @route("runs:run")
   @post
   createRun is Azure.Core.Foundations.Operation<
     {

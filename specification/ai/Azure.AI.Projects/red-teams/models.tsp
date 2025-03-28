@@ -98,7 +98,7 @@ union RiskCategory {
 model RedTeam {
     @doc("Identifier of the red team.")
     @key("name")
-    @visibility("read")
+    @visibility("Lifecycle.Read")
     id: string;
 
     @doc("Name of the red-team scan.")
@@ -114,7 +114,7 @@ model RedTeam {
     simulationOnly: boolean;
 
     @doc("Read-only result outputs. Example: { 'redTeamResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{myproject}/datasets/{dataset-name}/{dataset-version}' }")
-    @visibility("read")
+    @visibility("Lifecycle.Read")
     outputs: Record<string>;
 
     @doc("List of risk categories to generate attack objectives for.")
@@ -130,10 +130,10 @@ model RedTeam {
     properties?: Record<string>;
 
     @doc("Metadata containing createdBy and modifiedBy information.")
-    @visibility("read")
+    @visibility("Lifecycle.Read")
     systemData?: SystemData;
 
     @doc("Status of the red team. It is set by service and is read-only.")
-    @visibility("read")
+    @visibility("Lifecycle.Read")
     status: Status;
 }
