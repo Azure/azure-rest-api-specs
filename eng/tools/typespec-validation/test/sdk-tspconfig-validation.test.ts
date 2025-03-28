@@ -6,6 +6,8 @@ import {
   TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
+  TspConfigTsDpPackageDirectorySubRule,
+  TspConfigTsDpPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -26,6 +28,7 @@ import {
   TspConfigCsharpAzNamespaceEqualStringSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
   TspConfigCsharpMgmtPackageDirectorySubRule,
+  TspConfigCsharpMgmtServiceDirMatchPatternSubRule,
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
@@ -239,6 +242,36 @@ const mixTsManagementPackageNameTestCases = {
   ),
   success: false,
   subRules: [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
+};
+
+const tsDpPackageDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "package-dir",
+  "arm-rest",
+  "aaa-",
+  [new TspConfigTsDpPackageDirectorySubRule()],
+);
+
+const tsDpPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "packageDetails.name",
+  "@azure-rest/aaa-bbb",
+  "@azure/aaa-bbb",
+  [new TspConfigTsDpPackageNameMatchPatternSubRule()],
+);
+
+const mixTsDpPackageNameTestCases = {
+  description: `Validate @azure-tools/typespec-ts's mix options: package-details/packageDetails with different values`,
+  folder: "",
+  tspconfigContent: createEmitterOptionExample(
+    "",
+    { key: "packageDetails.name", value: "@azure/azure-rest-aaa-bbb" },
+    { key: "package-details.name", value: "@azure/aaa-bbb" },
+  ),
+  success: false,
+  subRules: [new TspConfigTsDpPackageNameMatchPatternSubRule()],
 };
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
@@ -476,6 +509,15 @@ const csharpMgmtPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtPackageDirectorySubRule()],
 );
 
+const csharpMgmtServiceDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-csharp",
+  managementTspconfigFolder,
+  "service-dir",
+  "sdk/2/3",
+  "sd/k",
+  [new TspConfigCsharpMgmtServiceDirMatchPatternSubRule()],
+);
+
 const suppressSubRuleTestCases: Case[] = [
   {
     description: "Suppress parameter",
@@ -514,6 +556,9 @@ describe("tspconfig", function () {
     ...tsManagementPackageNameTestCases,
     mixTsManagementExperimentalExtensibleEnumsTestCases,
     mixTsManagementPackageNameTestCases,
+    ...tsDpPackageDirTestCases,
+    ...tsDpPackageNameTestCases,
+    mixTsDpPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
@@ -544,6 +589,7 @@ describe("tspconfig", function () {
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtPackageDirTestCases,
+    ...csharpMgmtServiceDirTestCases,
     // suppression
     ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
