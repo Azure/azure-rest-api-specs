@@ -244,6 +244,7 @@ namespace Storage.Blob {
       },
       {
         @statusCode statusCode: 202;
+        ...DateResponseHeader;
       }
     >;
 
@@ -834,7 +835,6 @@ namespace Storage.Blob {
         },
         {
           @statusCode statusCode: 202;
-          ...DateResponseHeader;
         }
       >;
 
