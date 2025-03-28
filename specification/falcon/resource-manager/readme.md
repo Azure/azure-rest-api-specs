@@ -35,7 +35,8 @@ tag: package-2025-03-26-preview
 These settings apply only when `--tag=package-2025-03-26-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-03-26-preview'
-input-file: Microsoft.Falcon/preview/2025-03-26-preview/falcon.json
+input-file:
+  - Microsoft.Falcon/preview/2025-03-26-preview/falcon.json
 ```
 
 ### Tag: package-2024-10-14-preview
@@ -43,7 +44,8 @@ input-file: Microsoft.Falcon/preview/2025-03-26-preview/falcon.json
 These settings apply only when `--tag=package-2024-10-14-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-10-14-preview'
-input-file: Microsoft.Falcon/preview/2024-10-14-preview/falcon.json
+input-file:
+  - Microsoft.Falcon/preview/2024-10-14-preview/falcon.json
 ```
 
 ### Tag: package-2020-09-02-preview
@@ -51,7 +53,8 @@ input-file: Microsoft.Falcon/preview/2024-10-14-preview/falcon.json
 These settings apply only when `--tag=package-2020-09-02-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2020-09-02-preview'
-input-file: Microsoft.Falcon/preview/2020-09-02-preview/falcon.json
+input-file:
+  - Microsoft.Falcon/preview/2020-09-02-preview/falcon.json
 ```
 
 ### Tag: package-2020-01-20-preview
@@ -59,7 +62,8 @@ input-file: Microsoft.Falcon/preview/2020-09-02-preview/falcon.json
 These settings apply only when `--tag=package-2020-01-20-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2020-01-20-preview'
-input-file: Microsoft.Falcon/preview/2020-01-20-preview/falcon.json
+input-file:
+  - Microsoft.Falcon/preview/2020-01-20-preview/falcon.json
 ```
 
 ---
