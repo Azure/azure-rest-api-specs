@@ -57,6 +57,8 @@ test.concurrent("Hand-written, exists in main", async ({ expect }) => {
 
   expect(stdout).toContain("was not generated from TypeSpec");
   expect(stdout).toContain("'main' contains path");
+  expect(stdout.toLowerCase()).toContain("notice");
+  expect(stdout).toContain("will soon be required to convert");
   expect(exitCode).toBe(0);
 });
 

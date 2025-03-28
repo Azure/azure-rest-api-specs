@@ -11,7 +11,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ConnectedCache.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-connectedcache"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.connectedcache"
     flavor: "azure"
     generate-test: true
     generate-sample: true
@@ -21,11 +21,10 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    remove-unreferenced-types: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-connectedcache"
     flavor: "azure"
