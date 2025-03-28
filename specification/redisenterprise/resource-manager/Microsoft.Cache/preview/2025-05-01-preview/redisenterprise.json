@@ -1252,6 +1252,9 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2690,7 +2693,7 @@
     },
     "SkuDetails": {
       "title": "SKU details",
-      "description": "The SKU details of every Redis Enterprise cluster.",
+      "description": "Details of a Redis Enterprise cluster SKU.",
       "type": "object",
       "properties": {
         "name": {
@@ -2701,7 +2704,7 @@
         "customerFacingSizeInGb": {
           "readOnly": true,
           "type": "number",
-          "description": "The size in GB of the cache."
+          "description": "The cache size in GB."
         }
       }
     },
