@@ -112,10 +112,10 @@ union PolicyType {
 
 @doc("Provisioning Type")
 union ProvisioningType {
-  @doc("Create")
+  @doc("Create Provisioning Type")
   Create: "Create",
 
-  @doc("Delete")
+  @doc("Delete Provisioning Type")
   Delete: "Delete",
 
   string,
