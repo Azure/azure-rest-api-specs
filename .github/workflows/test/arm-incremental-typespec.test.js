@@ -1,11 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
-import * as changedFiles from "../../src/changed-files.js";
-import * as git from "../../src/git.js";
+import * as changedFiles from "../../shared/src/changed-files.js";
+import * as git from "../../shared/src/git.js";
 import {
   contosoReadme,
   swaggerHandWritten,
   swaggerTypeSpecGenerated,
-} from "../../test/examples.js";
+} from "../../shared/test/examples.js";
 import incrementalTypeSpec from "../src/arm-incremental-typespec.js";
 import { createMockCore } from "./mocks.js";
 
