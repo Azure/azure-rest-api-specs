@@ -41,8 +41,8 @@ extends:
         policy: M365
       stages: ${{ parameters.stages }}
     ${{ else }}:
-      sdl:
-        enableAllTools: false
+      sdl: # SDLSources stage still runs even all tools are disabled. 1es team uses it for other purposes and they have the following work item to remove the stage.
+        enableAllTools: false # https://dev.azure.com/mseng/1ES/_workitems/edit/2253084
         sourceAnalysisPool:
           name: azsdk-pool
           image: windows-2022
