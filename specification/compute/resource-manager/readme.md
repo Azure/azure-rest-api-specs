@@ -290,7 +290,7 @@ suppressions:
     reason: Updating the doc with default value for existing api version only.
     from: diagnostic.json
   - code: AddedXmsEnum
-    reason: Adding Enums to list out all possible vslues supported for request property.
+    reason: Adding Enums to list out all possible values supported for request property.
     from: diagnostic.json
   - code: PatchResponseCodes
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
