@@ -42,8 +42,6 @@ namespace Storage.Blob {
     @header("Content-Type")
     contentType: ResponseMediaType;
 
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
   }) | TError;
 
   /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
@@ -246,7 +244,6 @@ namespace Storage.Blob {
       },
       {
         @statusCode statusCode: 202;
-        ...DateResponseHeader;
       }
     >;
 
