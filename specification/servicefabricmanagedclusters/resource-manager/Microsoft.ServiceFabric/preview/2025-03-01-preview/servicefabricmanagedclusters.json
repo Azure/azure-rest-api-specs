@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ServiceFabricManagedClustersManagementClient",
-    "version": "2024-11-01-preview",
+    "version": "2025-03-01-preview",
     "description": "Service Fabric Managed Clusters Management Client",
     "x-typespec-generated": [
       {
@@ -5615,6 +5615,11 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of outbound ports allocated for SNAT for each node in the backend pool of the default load balancer. The default value is 0 which provides dynamic port allocation based on pool size."
+        },
+        "VMImage": {
+          "type": "string",
+          "description": "The VM image the node types are configured with. This property controls the Service Fabric component packages to be used for the cluster. Allowed values are: 'Windows'. The default value is 'Windows'.",
+          "default": "Windows"
         }
       },
       "required": [
@@ -6550,6 +6555,10 @@
             "$ref": "#/definitions/VmApplication"
           },
           "x-ms-identifiers": []
+        },
+        "zoneBalance": {
+          "type": "boolean",
+          "description": "Setting this to true allows stateless node types to scale out without equal distribution across zones."
         }
       },
       "required": [
