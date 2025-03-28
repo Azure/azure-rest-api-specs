@@ -2796,27 +2796,7 @@
         "origin": {
           "type": "string",
           "readOnly": true,
-          "description": "Describes which originating entities are allowed to invoke this operation.",
-          "enum": [
-            "user,system",
-            "system"
-          ],
-          "x-ms-enum": {
-            "name": "OperationOrigin",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "user,system",
-                "name": "User,System",
-                "description": "Both users and the system are allowed to invoke this operation."
-              },
-              {
-                "value": "system",
-                "name": "System",
-                "description": "Only the system is allowed to invoke this operation."
-              }
-            ]
-          }
+          "description": "Describes which originating entities are allowed to invoke this operation."
         },
         "properties": {
           "$ref": "#/definitions/OperationProperties",
@@ -2881,52 +2861,12 @@
         "unit": {
           "type": "string",
           "readOnly": true,
-          "description": "The unit for the metric specification.",
-          "enum": [
-            "Seconds",
-            "CountPerSecond",
-            "Percent"
-          ],
-          "x-ms-enum": {
-            "name": "OperationMetricsUnit",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Seconds",
-                "name": "Seconds",
-                "description": "Operation metric value is measured in time unit of seconds."
-              },
-              {
-                "value": "CountPerSecond",
-                "name": "CountPerSecond",
-                "description": "Operation metric value is express as the number of events or counts happening in one second."
-              },
-              {
-                "value": "Percent",
-                "name": "Percent",
-                "description": "Operation metric value is measured in percentage."
-              }
-            ]
-          }
+          "description": "The unit for the metric specification."
         },
         "aggregationType": {
           "type": "string",
           "readOnly": true,
-          "description": "The type of aggregation for the metric specification.",
-          "enum": [
-            "Average"
-          ],
-          "x-ms-enum": {
-            "name": "OperationMetricsAggregationType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Average",
-                "name": "Average",
-                "description": "Operation metric value is aggregated as an average value."
-              }
-            ]
-          }
+          "description": "The type of aggregation for the metric specification."
         },
         "dimensions": {
           "type": "array",
@@ -2976,7 +2916,7 @@
         "blobDuration": {
           "type": "string",
           "readOnly": true,
-          "description": "The blob duration for the dimension expressed in ISO 8601 standard format, for example, PT1H ."
+          "description": "The blob duration for the dimension."
         }
       }
     },
@@ -2998,7 +2938,7 @@
         "blobDuration": {
           "type": "string",
           "readOnly": true,
-          "description": "The blob duration for the log specification expressed in ISO 8601 standard format, for example, PT1H ."
+          "description": "The blob duration for the log specification."
         }
       }
     },
