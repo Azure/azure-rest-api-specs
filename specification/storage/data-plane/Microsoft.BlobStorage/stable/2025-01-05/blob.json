@@ -60,196 +60,6 @@
   },
   "tags": [],
   "paths": {
-    "": {
-      "get": {
-        "operationId": "Service_GetProperties",
-        "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/StorageServiceProperties"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Service_SetProperties",
-        "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
-        "consumes": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageServiceProperties"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "Service_GetUserDelegationKey",
-        "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "consumes": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UserDelegationKey"
-            },
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      }
-    },
     "/{containerName}": {
       "get": {
         "operationId": "Container_GetProperties",
@@ -297,7 +107,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -306,7 +116,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-public-access": {
@@ -538,7 +348,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -547,7 +357,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -692,7 +502,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifModifiedSince"
           },
           {
@@ -701,7 +511,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
@@ -714,7 +524,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -738,7 +548,7 @@
         }
       }
     },
-    "/{containerName}/{blob}": {
+    "/{containerName}/{blobName}": {
       "get": {
         "operationId": "Blob_Download",
         "description": "The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot.",
@@ -766,7 +576,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -940,7 +750,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -949,7 +759,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-committed-block-count": {
@@ -1008,7 +818,7 @@
               },
               "x-ms-copy-completion-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List."
               },
               "x-ms-copy-id": {
@@ -1065,7 +875,7 @@
               },
               "x-ms-creation-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "Returns the date and time the blob was created."
               },
               "x-ms-encryption-key-sha256": {
@@ -1108,7 +918,7 @@
               },
               "x-ms-immutability-policy-until-date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire."
               },
               "x-ms-is-current-version": {
@@ -1117,7 +927,7 @@
               },
               "x-ms-last-access-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob was last read or written to"
               },
               "x-ms-lease-duration": {
@@ -1277,7 +1087,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -1286,7 +1096,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-committed-block-count": {
@@ -1349,7 +1159,7 @@
               },
               "x-ms-copy-completion-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List."
               },
               "x-ms-copy-id": {
@@ -1406,7 +1216,7 @@
               },
               "x-ms-creation-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "Returns the date and time the blob was created."
               },
               "x-ms-encryption-key-sha256": {
@@ -1449,7 +1259,7 @@
               },
               "x-ms-immutability-policy-until-date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire."
               },
               "x-ms-is-current-version": {
@@ -1458,7 +1268,7 @@
               },
               "x-ms-last-access-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob was last read or written to"
               },
               "x-ms-lease-duration": {
@@ -1605,7 +1415,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -1633,7 +1443,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -1657,10 +1467,10 @@
         }
       },
       "post": {
-        "operationId": "Blob_Query",
+        "operationId": "BlockBlob_Query",
         "description": "The Query operation enables users to select/project on blob data by providing simple query expressions.",
         "produces": [
-          "application/xml",
+          "application/octet-stream",
           "application/json"
         ],
         "consumes": [
@@ -1683,7 +1493,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -1829,7 +1639,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -1838,7 +1648,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-committed-block-count": {
@@ -1897,7 +1707,7 @@
               },
               "x-ms-copy-completion-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List."
               },
               "x-ms-copy-id": {
@@ -2087,7 +1897,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -2096,7 +1906,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-committed-block-count": {
@@ -2155,7 +1965,7 @@
               },
               "x-ms-copy-completion-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List."
               },
               "x-ms-copy-id": {
@@ -2332,7 +2142,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -2453,7 +2263,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -2496,7 +2306,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -2634,7 +2444,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -2643,7 +2453,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-access-tier": {
@@ -2756,7 +2566,7 @@
               },
               "x-ms-access-tier-change-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set."
               },
               "x-ms-access-tier-inferred": {
@@ -2844,7 +2654,7 @@
               },
               "x-ms-copy-completion-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List."
               },
               "x-ms-copy-destination-snapshot": {
@@ -2905,7 +2715,7 @@
               },
               "x-ms-creation-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "Returns the date and time the blob was created."
               },
               "x-ms-encryption-key-sha256": {
@@ -2918,7 +2728,7 @@
               },
               "x-ms-expiry-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The time this blob will expire."
               },
               "x-ms-immutability-policy-mode": {
@@ -2953,7 +2763,7 @@
               },
               "x-ms-immutability-policy-until-date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire."
               },
               "x-ms-incremental-copy": {
@@ -2966,7 +2776,7 @@
               },
               "x-ms-last-access-time": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob was last read or written to"
               },
               "x-ms-lease-duration": {
@@ -3111,6 +2921,198 @@
     }
   },
   "x-ms-paths": {
+    "/?restype=service&comp=properties": {
+      "get": {
+        "operationId": "GetProperties",
+        "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SetProperties",
+        "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
+        "consumes": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      }
+    },
+    "/?restype=service&comp=userdelegationkey": {
+      "post": {
+        "operationId": "GetUserDelegationKey",
+        "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDelegationKey"
+            },
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      }
+    },
     "/{containerName}?restype=container&comp=metadata": {
       "put": {
         "operationId": "Container_SetMetadata",
@@ -3162,7 +3164,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifModifiedSince"
           },
           {
@@ -3175,7 +3177,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -3184,7 +3186,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -3262,7 +3264,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -3271,7 +3273,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-public-access": {
@@ -3393,7 +3395,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifModifiedSince"
           },
           {
@@ -3402,7 +3404,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
@@ -3424,7 +3426,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -3433,7 +3435,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -3512,7 +3514,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -3591,7 +3593,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -3715,7 +3717,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -3791,7 +3793,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifModifiedSince"
           },
           {
@@ -3800,7 +3802,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
@@ -3813,7 +3815,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -3822,7 +3824,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -3893,7 +3895,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifModifiedSince"
           },
           {
@@ -3902,7 +3904,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
@@ -3915,7 +3917,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -3924,7 +3926,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -3991,7 +3993,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifModifiedSince"
           },
           {
@@ -4000,7 +4002,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
@@ -4013,7 +4015,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -4022,7 +4024,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -4085,7 +4087,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifModifiedSince"
           },
           {
@@ -4094,7 +4096,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
@@ -4116,7 +4118,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -4125,7 +4127,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -4209,7 +4211,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifModifiedSince"
           },
           {
@@ -4218,7 +4220,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
@@ -4231,7 +4233,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -4240,7 +4242,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -4416,7 +4418,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -4595,7 +4597,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -4658,7 +4660,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-account-kind": {
@@ -4770,7 +4772,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=expiry": {
+    "/{containerName}/{blobName}?comp=expiry": {
       "put": {
         "operationId": "Blob_SetExpiry",
         "description": "Set the expiration time of a blob",
@@ -4791,7 +4793,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -4855,7 +4857,7 @@
             "description": "The time this blob will expire.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ExpiresOn"
           },
           {
@@ -4868,7 +4870,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -4877,7 +4879,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -4901,7 +4903,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=properties&SetHTTPHeaders": {
+    "/{containerName}/{blobName}?comp=properties&SetHTTPHeaders": {
       "put": {
         "operationId": "Blob_SetHttpHeaders",
         "description": "The Set HTTP Headers operation sets system properties on the blob.",
@@ -4922,7 +4924,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -5027,7 +5029,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -5036,7 +5038,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-sequence-number": {
@@ -5065,7 +5067,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=immutabilityPolicies": {
+    "/{containerName}/{blobName}?comp=immutabilityPolicies": {
       "put": {
         "operationId": "Blob_SetImmutabilityPolicy",
         "description": "Set the immutability policy of a blob",
@@ -5086,7 +5088,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -5110,7 +5112,7 @@
             "description": "A date-time value. A request is made under the condition that the resource has not been modified since the specified date-time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
@@ -5119,7 +5121,7 @@
             "description": "Specifies the date time when the blobs immutability policy is set to expire.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
@@ -5181,7 +5183,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -5221,8 +5223,8 @@
               },
               "x-ms-immutability-policy-until-date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "Indicates the time the immutability policy will expire."
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -5240,7 +5242,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=immutabilityPolicies&_overload=deleteImmutabilityPolicy": {
+    "/{containerName}/{blobName}?comp=immutabilityPolicies&_overload=deleteImmutabilityPolicy": {
       "delete": {
         "operationId": "Blob_DeleteImmutabilityPolicy",
         "description": "The Delete Immutability Policy operation deletes the immutability policy on the blob.",
@@ -5261,7 +5263,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -5304,7 +5306,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -5328,7 +5330,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=legalhold": {
+    "/{containerName}/{blobName}?comp=legalhold": {
       "put": {
         "operationId": "Blob_SetLegalHold",
         "description": "The Set Legal Hold operation sets a legal hold on the blob.",
@@ -5349,7 +5351,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -5400,7 +5402,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -5428,7 +5430,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=metadata": {
+    "/{containerName}/{blobName}?comp=metadata": {
       "put": {
         "operationId": "Blob_SetMetadata",
         "description": "The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs.",
@@ -5449,7 +5451,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -5559,7 +5561,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -5568,7 +5570,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -5608,7 +5610,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=lease&acquire": {
+    "/{containerName}/{blobName}?comp=lease&acquire": {
       "put": {
         "operationId": "Blob_AcquireLease",
         "description": "The Acquire Lease operation requests a new lease on a blob. The lease lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -5629,7 +5631,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -5694,7 +5696,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -5703,7 +5705,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -5731,7 +5733,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=lease&release": {
+    "/{containerName}/{blobName}?comp=lease&release": {
       "put": {
         "operationId": "Blob_ReleaseLease",
         "description": "The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the blob.",
@@ -5752,7 +5754,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -5808,7 +5810,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -5817,7 +5819,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -5841,7 +5843,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=lease&renew": {
+    "/{containerName}/{blobName}?comp=lease&renew": {
       "put": {
         "operationId": "Blob_RenewLease",
         "description": "The Renew Lease operation renews an existing lease.",
@@ -5862,7 +5864,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -5918,7 +5920,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -5927,7 +5929,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -5955,7 +5957,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=lease&change": {
+    "/{containerName}/{blobName}?comp=lease&change": {
       "put": {
         "operationId": "Blob_ChangeLease",
         "description": "The Change Lease operation is used to change the ID of an existing lease.",
@@ -5976,7 +5978,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -6040,7 +6042,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -6049,7 +6051,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -6077,7 +6079,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=lease&break": {
+    "/{containerName}/{blobName}?comp=lease&break": {
       "put": {
         "operationId": "Blob_BreakLease",
         "description": "The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired.",
@@ -6098,7 +6100,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -6155,7 +6157,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -6164,7 +6166,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -6193,7 +6195,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=snapshot": {
+    "/{containerName}/{blobName}?comp=snapshot": {
       "put": {
         "operationId": "Blob_CreateSnapshot",
         "description": "The Create Snapshot operation creates a read-only snapshot of a blob",
@@ -6214,7 +6216,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -6324,7 +6326,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -6333,7 +6335,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -6369,7 +6371,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=copy": {
+    "/{containerName}/{blobName}?comp=copy": {
       "put": {
         "operationId": "Blob_StartCopyFromUrl",
         "description": "The Start Copy From URL operation copies a blob or an internet resource to a new blob.",
@@ -6390,7 +6392,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -6562,7 +6564,7 @@
             "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfModifiedSince"
           },
           {
@@ -6571,7 +6573,7 @@
             "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfUnmodifiedSince"
           },
           {
@@ -6656,7 +6658,7 @@
             "description": "Specifies the date time when the blobs immutability policy is set to expire.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
@@ -6711,7 +6713,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -6720,7 +6722,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -6788,7 +6790,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=copy&sync": {
+    "/{containerName}/{blobName}?comp=copy&sync": {
       "put": {
         "operationId": "Blob_CopyFromUrl",
         "description": "The Copy From URL operation copies a blob or an internet resource to a new blob. It will not return a response until the copy is complete.",
@@ -6809,7 +6811,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -6953,7 +6955,7 @@
             "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfModifiedSince"
           },
           {
@@ -6962,7 +6964,7 @@
             "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfUnmodifiedSince"
           },
           {
@@ -7039,7 +7041,7 @@
             "description": "Specifies the date time when the blobs immutability policy is set to expire.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
@@ -7122,7 +7124,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -7131,7 +7133,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -7207,7 +7209,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=copy&copyid": {
+    "/{containerName}/{blobName}?comp=copy&copyid": {
       "put": {
         "operationId": "Blob_AbortCopyFromUrl",
         "description": "The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata.",
@@ -7228,7 +7230,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -7272,7 +7274,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -7296,7 +7298,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=tier": {
+    "/{containerName}/{blobName}?comp=tier": {
       "put": {
         "operationId": "Blob_SetTier",
         "description": "The Set Tier operation sets the tier on a block blob. The operation is allowed on a page blob or block blob, but not on an append blob. A block blob's tier determines Hot/Cool/Archive storage type. This operation does not update the blob's ETag.",
@@ -7317,7 +7319,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -7550,7 +7552,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?restype=account&comp=properties&blob": {
+    "/{containerName}/{blobName}?restype=account&comp=properties&blob": {
       "get": {
         "operationId": "Blob_GetAccountInfo",
         "description": "Returns the sku name and account kind",
@@ -7571,7 +7573,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -7599,7 +7601,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-account-kind": {
@@ -7711,7 +7713,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=tags": {
+    "/{containerName}/{blobName}?comp=tags": {
       "get": {
         "operationId": "Blob_GetTags",
         "description": "The Get Blob Tags operation enables users to get tags on a blob.",
@@ -7736,7 +7738,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -7798,7 +7800,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -7822,7 +7824,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=tags&_overload=setTags": {
+    "/{containerName}/{blobName}?comp=tags&_overload=setTags": {
       "put": {
         "operationId": "Blob_SetTags",
         "description": "The Set Tags operation enables users to set tags on a blob.",
@@ -7846,7 +7848,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -7923,7 +7925,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -7947,7 +7949,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?PageBlob": {
+    "/{containerName}/{blobName}?PageBlob": {
       "put": {
         "operationId": "PageBlob_Create",
         "description": "The Create operation creates a new page blob.",
@@ -7976,7 +7978,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -8240,7 +8242,7 @@
             "description": "Specifies the date time when the blobs immutability policy is set to expire.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
@@ -8288,6 +8290,7 @@
           {
             "name": "x-ms-blob-type",
             "in": "header",
+            "description": "The type of the blob.",
             "required": true,
             "type": "string",
             "enum": [
@@ -8312,7 +8315,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -8321,7 +8324,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -8361,7 +8364,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=page&update": {
+    "/{containerName}/{blobName}?comp=page&update": {
       "put": {
         "operationId": "PageBlob_UploadPages",
         "description": "The Upload Pages operation writes a range of pages to a page blob",
@@ -8385,7 +8388,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -8578,7 +8581,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -8587,7 +8590,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-sequence-number": {
@@ -8636,7 +8639,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=page&clear": {
+    "/{containerName}/{blobName}?comp=page&clear": {
       "put": {
         "operationId": "PageBlob_ClearPages",
         "description": "The Clear Pages operation clears a range of pages from a page blob",
@@ -8657,7 +8660,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -8807,7 +8810,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -8816,7 +8819,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-sequence-number": {
@@ -8849,7 +8852,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=page&update&fromUrl": {
+    "/{containerName}/{blobName}?comp=page&update&fromUrl": {
       "put": {
         "operationId": "PageBlob_UploadPagesFromUrl",
         "description": "The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL.",
@@ -8870,7 +8873,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -9045,7 +9048,7 @@
             "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfModifiedSince"
           },
           {
@@ -9054,7 +9057,7 @@
             "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfUnmodifiedSince"
           },
           {
@@ -9095,7 +9098,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -9104,7 +9107,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-sequence-number": {
@@ -9149,7 +9152,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=pagelist": {
+    "/{containerName}/{blobName}?comp=pagelist": {
       "get": {
         "operationId": "PageBlob_GetPageRanges",
         "description": "The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob.",
@@ -9174,7 +9177,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -9264,7 +9267,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -9273,7 +9276,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-content-length": {
@@ -9302,7 +9305,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=pagelist&diff": {
+    "/{containerName}/{blobName}?comp=pagelist&diff": {
       "get": {
         "operationId": "PageBlob_GetPageRangesDiff",
         "description": "The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob.",
@@ -9327,7 +9330,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -9432,7 +9435,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -9441,7 +9444,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-content-length": {
@@ -9470,7 +9473,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=properties&Resize": {
+    "/{containerName}/{blobName}?comp=properties&Resize": {
       "put": {
         "operationId": "PageBlob_Resize",
         "description": "The Resize operation increases the size of the page blob to the specified size.",
@@ -9491,7 +9494,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -9602,7 +9605,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -9611,7 +9614,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-sequence-number": {
@@ -9640,7 +9643,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=properties&UpdateSequenceNumber": {
+    "/{containerName}/{blobName}?comp=properties&UpdateSequenceNumber": {
       "put": {
         "operationId": "PageBlob_UpdateSequenceNumber",
         "description": "The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob.",
@@ -9661,7 +9664,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -9761,7 +9764,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -9770,7 +9773,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-sequence-number": {
@@ -9799,7 +9802,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=incrementalcopy": {
+    "/{containerName}/{blobName}?comp=incrementalcopy": {
       "put": {
         "operationId": "PageBlob_CopyIncremental",
         "description": "The Copy Incremental operation copies a snapshot of the source page blob to a destination page blob. The snapshot is copied such that only the differential changes between the previously copied snapshot are transferred to the destination. The copied snapshots are complete copies of the original snapshot and can be read or copied from as usual. This API is supported since REST version 2016-05-31.",
@@ -9820,7 +9823,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -9876,7 +9879,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -9885,7 +9888,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -9949,7 +9952,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?AppendBlob": {
+    "/{containerName}/{blobName}?AppendBlob": {
       "put": {
         "operationId": "AppendBlob_Create",
         "description": "The Create operation creates a new append blob.",
@@ -9978,7 +9981,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -10142,7 +10145,7 @@
             "description": "Specifies the date time when the blobs immutability policy is set to expire.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
@@ -10190,6 +10193,7 @@
           {
             "name": "x-ms-blob-type",
             "in": "header",
+            "description": "The type of the blob.",
             "required": true,
             "type": "string",
             "enum": [
@@ -10214,7 +10218,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -10223,7 +10227,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -10263,12 +10267,12 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=appendblock": {
+    "/{containerName}/{blobName}?comp=appendblock": {
       "put": {
         "operationId": "AppendBlob_AppendBlock",
         "description": "The Append Block operation commits a new block of data to the end of an append blob.",
         "consumes": [
-          "application/xml"
+          "application/octet-stream"
         ],
         "parameters": [
           {
@@ -10287,7 +10291,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -10463,7 +10467,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -10472,7 +10476,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-append-offset": {
@@ -10525,7 +10529,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=appendblock&fromUrl": {
+    "/{containerName}/{blobName}?comp=appendblock&fromUrl": {
       "put": {
         "operationId": "AppendBlob_AppendBlockFromUrl",
         "description": "The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL.",
@@ -10546,7 +10550,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -10712,7 +10716,7 @@
             "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfModifiedSince"
           },
           {
@@ -10721,7 +10725,7 @@
             "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfUnmodifiedSince"
           },
           {
@@ -10762,7 +10766,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -10771,7 +10775,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-append-offset": {
@@ -10820,7 +10824,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=seal": {
+    "/{containerName}/{blobName}?comp=seal": {
       "put": {
         "operationId": "AppendBlob_Seal",
         "description": "The Seal operation seals the Append Blob to make it read-only. Seal is supported only on version 2019-12-12 version or later.",
@@ -10841,7 +10845,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -10898,7 +10902,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -10907,7 +10911,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-sealed": {
@@ -10935,7 +10939,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?BlockBlob": {
+    "/{containerName}/{blobName}?BlockBlob": {
       "put": {
         "operationId": "BlockBlob_Upload",
         "description": "The Upload Block Blob operation updates the content of an existing block blob. Updating an existing block blob overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob; the content of the existing blob is overwritten with the content of the new blob. To perform a partial update of the content of a block blob, use the Put Block List operation.",
@@ -10967,7 +10971,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -11251,7 +11255,7 @@
             "description": "Specifies the date time when the blobs immutability policy is set to expire.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
@@ -11324,6 +11328,7 @@
           {
             "name": "x-ms-blob-type",
             "in": "header",
+            "description": "The type of the blob.",
             "required": true,
             "type": "string",
             "enum": [
@@ -11358,7 +11363,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -11367,7 +11372,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -11411,7 +11416,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?BlockBlob&fromUrl": {
+    "/{containerName}/{blobName}?BlockBlob&fromUrl": {
       "put": {
         "operationId": "BlockBlob_PutBlobFromUrl",
         "description": "The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List.",
@@ -11440,7 +11445,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -11716,7 +11721,7 @@
             "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfModifiedSince"
           },
           {
@@ -11725,7 +11730,7 @@
             "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfUnmodifiedSince"
           },
           {
@@ -11803,6 +11808,7 @@
           {
             "name": "x-ms-blob-type",
             "in": "header",
+            "description": "The type of the blob.",
             "required": true,
             "type": "string",
             "enum": [
@@ -11827,7 +11833,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -11836,7 +11842,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -11876,7 +11882,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=block": {
+    "/{containerName}/{blobName}?comp=block": {
       "put": {
         "operationId": "BlockBlob_StageBlock",
         "description": "The Stage Block operation creates a new block to be committed as part of a blob",
@@ -11900,7 +11906,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -11915,6 +11921,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
+            "format": "base64url",
             "x-ms-client-name": "blockId"
           },
           {
@@ -12046,7 +12053,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -12090,7 +12097,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=block&fromURL": {
+    "/{containerName}/{blobName}?comp=block&fromURL": {
       "put": {
         "operationId": "BlockBlob_StageBlockFromUrl",
         "description": "The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL.",
@@ -12111,7 +12118,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -12126,6 +12133,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
+            "format": "base64url",
             "x-ms-client-name": "blockId"
           },
           {
@@ -12239,7 +12247,7 @@
             "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfModifiedSince"
           },
           {
@@ -12248,7 +12256,7 @@
             "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "sourceIfUnmodifiedSince"
           },
           {
@@ -12289,7 +12297,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -12329,7 +12337,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=blocklist": {
+    "/{containerName}/{blobName}?comp=blocklist": {
       "put": {
         "operationId": "BlockBlob_CommitBlockList",
         "description": "The Commit Block List operation writes a blob by specifying the list of block IDs that make up the blob. In order to be written as part of a blob, a block must have been successfully written to the server in a prior Put Block operation. You can call Put Block List to update a blob by uploading only those blocks that have changed, then committing the new and existing blocks together. You can do this by specifying whether to commit a block from the committed block list or from the uncommitted block list, or to commit the most recently uploaded version of the block, whichever list it may belong to.",
@@ -12353,7 +12361,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -12644,7 +12652,7 @@
             "description": "Specifies the date time when the blobs immutability policy is set to expire.",
             "required": false,
             "type": "string",
-            "format": "date-time-rfc1123",
+            "format": "date-time-rfc7231",
             "x-ms-client-name": "immutabilityPolicyExpiry"
           },
           {
@@ -12712,7 +12720,7 @@
               },
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -12721,7 +12729,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-client-request-id": {
@@ -12765,7 +12773,7 @@
         }
       }
     },
-    "/{containerName}/{blob}?comp=blocklist&_overload=getBlockList": {
+    "/{containerName}/{blobName}?comp=blocklist&_overload=getBlockList": {
       "get": {
         "operationId": "BlockBlob_GetBlockList",
         "description": "The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob.",
@@ -12790,7 +12798,7 @@
             "type": "string"
           },
           {
-            "name": "blob",
+            "name": "blobName",
             "in": "path",
             "description": "The name of the blob.",
             "required": true,
@@ -12873,12 +12881,12 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BlockLookupList"
+              "$ref": "#/definitions/BlockList"
             },
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
@@ -12887,7 +12895,7 @@
               },
               "Last-Modified": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
               "x-ms-blob-content-length": {
@@ -12918,7 +12926,7 @@
     },
     "/?comp=batch": {
       "post": {
-        "operationId": "Service_SubmitBatch",
+        "operationId": "SubmitBatch",
         "description": "The Batch operation allows multiple API calls to be embedded into a single HTTP request.",
         "produces": [
           "multipart/mixed",
@@ -12998,7 +13006,7 @@
     },
     "/?comp=blobs": {
       "get": {
-        "operationId": "Service_FilterBlobs",
+        "operationId": "FilterBlobs",
         "description": "The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression.",
         "produces": [
           "application/xml",
@@ -13089,7 +13097,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -13115,7 +13123,7 @@
     },
     "/?comp=list": {
       "get": {
-        "operationId": "Service_ListContainersSegment",
+        "operationId": "ListContainersSegment",
         "description": "The List Containers Segment operation returns a list of the containers under the specified account",
         "produces": [
           "application/xml",
@@ -13233,7 +13241,7 @@
     },
     "/?restype=account&comp=properties": {
       "get": {
-        "operationId": "Service_GetAccountInfo",
+        "operationId": "GetAccountInfo",
         "description": "Returns the sku name and account kind.",
         "parameters": [
           {
@@ -13263,7 +13271,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-account-kind": {
@@ -13377,7 +13385,7 @@
     },
     "/?restype=service&comp=stats": {
       "get": {
-        "operationId": "Service_GetStatistics",
+        "operationId": "GetStatistics",
         "description": "Retrieves statistics related to replication for the Blob service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.",
         "produces": [
           "application/xml",
@@ -13414,7 +13422,7 @@
             "headers": {
               "Date": {
                 "type": "string",
-                "format": "date-time-rfc1123",
+                "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "x-ms-client-request-id": {
@@ -13946,12 +13954,12 @@
       "properties": {
         "creationTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The date-time the blob was created in RFC1123 format."
         },
         "lastModified": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The date-time the blob was last modified in RFC1123 format."
         },
         "eTag": {
@@ -14027,7 +14035,7 @@
         },
         "copyCompletionTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The copy completion time of the blob."
         },
         "copyStatusDescription": {
@@ -14048,7 +14056,7 @@
         },
         "deletedTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The time the blob was deleted."
         },
         "remainingRetentionDays": {
@@ -14078,7 +14086,7 @@
         },
         "accessTierChangeTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The access tier change time of the blob."
         },
         "tagCount": {
@@ -14088,7 +14096,7 @@
         },
         "expiryTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The expire time of the blob."
         },
         "sealed": {
@@ -14101,12 +14109,12 @@
         },
         "lastAccessTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The last access time of the blob."
         },
         "immutabilityPolicyUntilDate": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The immutability policy until time of the blob."
         },
         "immutabilityPolicyMode": {
@@ -14188,6 +14196,47 @@
         ]
       }
     },
+    "Block": {
+      "type": "object",
+      "description": "Represents a single block in a block blob. It describes the block's ID and size.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/base64Bytes",
+          "description": "The base64 encoded block ID."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The block size in bytes."
+        }
+      },
+      "required": [
+        "name",
+        "size"
+      ]
+    },
+    "BlockList": {
+      "type": "object",
+      "description": "Contains the committed and uncommitted blocks in a block blob.",
+      "properties": {
+        "committedBlocks": {
+          "type": "array",
+          "description": "The list of committed blocks.",
+          "items": {
+            "$ref": "#/definitions/Block"
+          },
+          "x-ms-identifiers": []
+        },
+        "uncommittedBlocks": {
+          "type": "array",
+          "description": "The list of uncommitted blocks.",
+          "items": {
+            "$ref": "#/definitions/Block"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "BlockListType": {
       "type": "string",
       "description": "The block list types.",
@@ -14226,21 +14275,21 @@
           "type": "array",
           "description": "The committed blocks",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/base64Bytes"
           }
         },
         "uncommitted": {
           "type": "array",
           "description": "The uncommitted blocks",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/base64Bytes"
           }
         },
         "latest": {
           "type": "array",
           "description": "The latest blocks",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/base64Bytes"
           }
         }
       }
@@ -14304,7 +14353,7 @@
       "properties": {
         "lastModified": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The date-time the container was last modified in RFC1123 format."
         },
         "eTag": {
@@ -14345,7 +14394,7 @@
         },
         "deletedTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "The deleted time of the container."
         },
         "remainingRetentionDays": {
@@ -14433,6 +14482,10 @@
         "exposedHeaders",
         "maxAgeInSeconds"
       ]
+    },
+    "DateResponseHeader": {
+      "type": "object",
+      "description": "The Date response header"
     },
     "DeleteSnapshotsOptionType": {
       "type": "string",
@@ -14597,7 +14650,7 @@
         },
         "lastSyncTime": {
           "type": "string",
-          "format": "date-time-rfc1123",
+          "format": "date-time-rfc7231",
           "description": "A GMT date/time value, to the second. All primary writes preceding this value are guaranteed to be available for read operations at the secondary. Primary writes after this point in time may or may not be available for reads."
         }
       },
@@ -15575,7 +15628,7 @@
           "description": "The service version that created the key."
         },
         "value": {
-          "type": "string",
+          "$ref": "#/definitions/base64Bytes",
           "description": "The key as a base64 string."
         }
       },
@@ -15588,6 +15641,10 @@
         "signedVersion",
         "value"
       ]
+    },
+    "base64Bytes": {
+      "type": "string",
+      "format": "base64"
     }
   },
   "parameters": {

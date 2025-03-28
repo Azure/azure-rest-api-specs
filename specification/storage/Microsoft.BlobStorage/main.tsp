@@ -17,7 +17,7 @@ using Azure.Core;
     }
   ]>
 )
-@service({
+@service(#{
   title: "Azure Storage Blob service",
 })
 @server(
