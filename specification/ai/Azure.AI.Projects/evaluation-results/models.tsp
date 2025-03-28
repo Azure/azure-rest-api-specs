@@ -15,8 +15,7 @@ using Azure.Core.Traits;
 namespace Azure.AI.Projects;
 
 @doc("Evaluation Result resource Definition")
-@discriminator("ResultType")
-@Rest.resource("evaluationresult")
+@Rest.resource("evaluationResult")
 model EvaluationResult {
   @doc("Type of Evaluation result")
   ResultType?: ResultType;
@@ -46,29 +45,19 @@ model EvaluationResult {
   ...AssetBase;
 }
 
-@doc("Paged collection of Evaluation Result items.")
-@pagedResult
-model PagedEvaluationResult {
-  @doc("The list of Evaluation Results.")
-  @extension("x-ms-identifiers", [])
-  @items
-  value: EvaluationResult[];
+@doc("Type of Evaluation result")
+union ResultType {
+  string,
 
-  @doc("The link to the next page of items")
-  @nextLink
-  nextLink?: ResourceLocation<EvaluationResult>;
-}
-
-enum ResultType {
   @doc("Benchmark result")
-  Benchmark: "Benchmark",
+  Benchmark: "Benchmark";
 
   @doc("Evaluations Result")
-  Evaluation: "Evaluation",
+  Evaluation: "Evaluation";
 
   @doc("Red Team Result")
-  Redteam: "Redteam",
+  Redteam: "Redteam";
 
   @doc("Simulation Result")
-  Simulation: "Simulation",
+  Simulation: "Simulation";
 }
