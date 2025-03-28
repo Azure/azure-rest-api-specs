@@ -50,6 +50,12 @@ suppressions:
     - code: PatchBodyParametersSchema
       from: dynatrace.json
       reason: Empty object can still be passed, properties are not mandatory for the update schema.
+    - code: RequiredPropertiesMissingInResourceModel
+      from: dynatrace.json
+      reason: It is similar to any other model. We believe this is a false positive.
+    - code: OperationIdNounVerb
+      from: dynatrace.json
+      reason: False positive.
 ```
 
 ### Tag: package-2023-04-27
@@ -125,6 +131,14 @@ directive:
     from:
       - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
     reason: Empty object can still be passed, properties are not mandatory for the update schema.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: It is similar to any other model. We believe this is a false positive.
+  - suppress: OperationIdNounVerb
+    from:
+      - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+    reason: False positive.
 ```
 
 ## Go
