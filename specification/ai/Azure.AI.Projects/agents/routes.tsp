@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/streams";
 import "./models.tsp"; // e.g. ChatMessage, Agent, Thread
 import "./runs/runs.tsp"; // e.g. RunInputs etc.
 import "./streaming/streaming.tsp";
