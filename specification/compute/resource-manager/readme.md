@@ -286,6 +286,12 @@ suppressions:
   - code: BodyTopLevelProperties
     reason: The is the additional property bag to introduce new nonbreaking properties.
     from: diagnostic.json
+  - code: DefaultValueChanged
+    reason: Updating the doc with default value for existing api version only.
+    from: diagnostic.json
+  - code: AddedXmsEnum
+    reason: Adding Enums to list out all possible vslues supported for request property.
+    from: diagnostic.json
   - code: PatchResponseCodes
     reason: PATCH and PUT follow the same behavior and response codes in Compute. Keeping it for legacy reasons.
     from: gallery.json
