@@ -103,17 +103,17 @@ model RemoveStreamingOperation extends StreamingOperation {
 @discriminator("type")
 model StreamingUpdate {
   /**
-  * The delta operation applied to the resource.
-  */
+   * The delta operation applied to the resource.
+   */
   @doc("The delta operation applied to the resource.")
   d?: StreamingOperation;
 
   /**
-  * The type of the streaming update.
-  */
+   * The type of the streaming update.
+   */
   @doc("The type of the streaming update.")
   type: "run" | "thread" | "chat_message" | "ai_content" | string;
-}  
+}
 
 /**
  * Streaming update for a run.
@@ -121,32 +121,32 @@ model StreamingUpdate {
 @doc("Streaming update for a run.")
 model RunUpdate extends StreamingUpdate {
   /**
-  * The delta operation applied to the resource.
-  */
+   * The delta operation applied to the resource.
+   */
   @doc("The update type for the streaming payload.")
   type: "run";
 
   /**
-  * The run ID.
-  */
+   * The run ID.
+   */
   @doc("The run ID.")
   rId: string;
 
   /**
-  * The thread ID.
-  */
+   * The thread ID.
+   */
   @doc("The thread ID.")
   tId: string;
 
   /**
-  * The delta operation applied to the run.
-  */
+   * The delta operation applied to the run.
+   */
   @doc("The delta operation applied to the run.")
   d?: StreamingOperation;
 
   /**
-  * Usage metrics update.
-  */
+   * Usage metrics update.
+   */
   @doc("Usage metrics update.")
   u?: CompletionUsage;
 }
@@ -157,26 +157,26 @@ model RunUpdate extends StreamingUpdate {
 @doc("Streaming update for a thread.")
 model ThreadUpdate extends StreamingUpdate {
   /**
-  * The update type for the streaming payload.
-  */
+   * The update type for the streaming payload.
+   */
   @doc("The update type for the streaming payload.")
   type: "thread";
 
   /**
-  * The thread ID.
-  */
+   * The thread ID.
+   */
   @doc("The thread ID.")
   tId: string;
 
   /**
-  * The delta operation applied to the thread.
-  */
+   * The delta operation applied to the thread.
+   */
   @doc("The delta operation applied to the thread.")
   d?: StreamingOperation;
 
   /**
-  * Usage metrics update.
-  */
+   * Usage metrics update.
+   */
   @doc("Usage metrics update.")
   u?: CompletionUsage;
 }
@@ -187,32 +187,32 @@ model ThreadUpdate extends StreamingUpdate {
 @doc("Streaming update for a chat message.")
 model ChatMessageUpdate extends StreamingUpdate {
   /**
-  * The update type for the streaming payload.
-  */
+   * The update type for the streaming payload.
+   */
   @doc("The update type for the streaming payload.")
   type: "chat_message";
 
   /**
-  * The message ID.
-  */
+   * The message ID.
+   */
   @doc("The message ID.")
   mId: string;
 
   /**
-  * The thread ID.
-  */
+   * The thread ID.
+   */
   @doc("The thread ID.")
   tId: string;
 
   /**
-  * The delta operation applied to the message.
-  */
+   * The delta operation applied to the message.
+   */
   @doc("The delta operation applied to the message.")
   d?: StreamingOperation;
 
   /**
-  * Usage metrics update.
-  */
+   * Usage metrics update.
+   */
   @doc("Usage metrics update.")
   u?: CompletionUsage;
 }
@@ -223,26 +223,26 @@ model ChatMessageUpdate extends StreamingUpdate {
 @doc("Streaming update for AI content in a message.")
 model AIContentUpdate extends StreamingUpdate {
   /**
-  * The update type for the streaming payload.
-  */
+   * The update type for the streaming payload.
+   */
   @doc("The update type for the streaming payload.")
   type: "ai_content";
 
   /**
-  * The message ID.
-  */
+   * The message ID.
+   */
   @doc("The message ID.")
   mId: string;
 
   /**
-  * The index in the content list.
-  */
+   * The index in the content list.
+   */
   @doc("The index in the content list.")
   i: int32;
 
   /**
-  * The delta operation applied to the AI content.
-  */
+   * The delta operation applied to the AI content.
+   */
   @doc("The delta operation applied to the AI content.")
   d?: StreamingOperation;
 }

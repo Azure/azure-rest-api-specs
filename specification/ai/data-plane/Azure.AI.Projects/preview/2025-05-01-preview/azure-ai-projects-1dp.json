@@ -59,23 +59,17 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "An array of Agent items.",
             "schema": {
-              "$ref": "#/definitions/PagedAgent"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Agent"
+              },
+              "x-ms-identifiers": []
             }
           },
           "default": {
@@ -90,9 +84,6 @@
               }
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -103,32 +94,19 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/AgentOptions"
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of Agent"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
+          "200": {
+            "description": "The newly created Agent.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
             }
           },
           "default": {
@@ -157,26 +135,16 @@
           {
             "name": "agentId",
             "in": "path",
-            "description": "A unique identifier for the agent.",
+            "description": "The ID of the Agent to retrieve.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "The requested Agent.",
             "schema": {
               "$ref": "#/definitions/Agent"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -203,17 +171,14 @@
           {
             "name": "agentId",
             "in": "path",
-            "description": "A unique identifier for the agent.",
+            "description": "The ID of the Agent to update.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
+            "description": "The updated Agent data.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agent"
@@ -222,29 +187,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "The new or updated Agent.",
             "schema": {
               "$ref": "#/definitions/Agent"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Agent"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -271,80 +216,14 @@
           {
             "name": "agentId",
             "in": "path",
-            "description": "A unique identifier for the agent.",
+            "description": "The ID of the Agent to delete.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/agents/{agentId}:run": {
-      "post": {
-        "operationId": "Agents_RunByAgent",
-        "description": "Resource action operation template.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "agentId",
-            "in": "path",
-            "description": "A unique identifier for the agent.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunInputs"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Run"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1844,9 +1723,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/runs": {
+      },
       "post": {
         "operationId": "Runs_CreateRun",
         "description": "Creates a run.",
@@ -1863,7 +1740,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Run"
+              "$ref": "#/definitions/RunInputs"
             }
           }
         ],
@@ -1874,7 +1751,7 @@
               "Location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The location of an instance of Run"
+                "description": "The location of an instance of "
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -4399,6 +4276,10 @@
       ],
       "x-ms-discriminator-value": "ModelDeployment"
     },
+    "NoRequest": {
+      "type": "object",
+      "description": "A \"no-op\" model to represent an empty request, because Operation<TRequest, TResponse>\nrequires a Model (or union) for the first parameter."
+    },
     "NoneToolChoiceBehavior": {
       "type": "object",
       "description": "Behavior specifying that no tools may be chosen.",
@@ -4491,28 +4372,6 @@
         }
       ],
       "x-ms-discriminator-value": "OutputPath"
-    },
-    "PagedAgent": {
-      "type": "object",
-      "description": "Paged collection of Agent items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Agent items on this page",
-          "items": {
-            "$ref": "#/definitions/Agent"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "PagedChatMessage": {
       "type": "object",

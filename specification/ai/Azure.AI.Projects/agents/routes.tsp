@@ -16,6 +16,12 @@ using Streams;
 namespace Azure.AI.Projects;
 
 /**
+ * A "no-op" model to represent an empty request, because Operation<TRequest, TResponse>
+ * requires a Model (or union) for the first parameter.
+ */
+model NoRequest {}
+
+/**
  * An alias for standard Azure resource operations with our chosen traits.
  * This grants us ResourceRead, ResourceList, ResourceCreateOrReplace, etc.
  */
@@ -101,42 +107,107 @@ interface Threads {
 interface Agents {
   /**
    * Creates a new Agent resource and returns it.
+   *
+   * @param body The Agent data to create.
+   * @returns The newly created Agent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createAgent is AgentOperations.ResourceCreateWithServiceProvidedName<Agent>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @post
+  @route("/agents")
+  createAgent is Operation<
+    {
+      ...AgentOptions;
+    },
+    Agent
+  >;
 
   /**
    * Retrieves an existing Agent by its ID.
+   *
+   * @param agentId The ID of the Agent to retrieve.
+   * @returns The requested Agent.
    */
-  getAgent is AgentOperations.ResourceRead<Agent>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @get
+  @route("/agents/{agentId}")
+  getAgent is Operation<
+    {
+      /**
+       * The ID of the Agent to retrieve.
+       */
+      @doc("The ID of the Agent to retrieve.")
+      @path
+      agentId: string;
+    },
+    Agent
+  >;
 
   /**
    * Updates or replaces an agent and returns the updated resource.
+   *
+   * @param agentId The ID of the Agent to update.
+   * @param body The updated Agent details.
+   * @returns The new or updated Agent.
    */
-  updateAgent is AgentOperations.ResourceCreateOrReplace<Agent>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @put
+  @route("/agents/{agentId}")
+  updateAgent is Operation<
+    {
+      /**
+       * The ID of the Agent to update.
+       */
+      @doc("The ID of the Agent to update.")
+      @path
+      agentId: string;
+
+      /**
+       * The new or updated Agent data.
+       */
+      @doc("The updated Agent data.")
+      @body
+      body: Agent;
+    },
+    Agent
+  >;
 
   /**
    * Deletes an Agent by its ID, returning 204 on success.
+   *
+   * @param agentId The ID of the Agent to delete.
    */
-  deleteAgent is AgentOperations.ResourceDelete<Agent>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @delete
+  @route("/agents/{agentId}")
+  deleteAgent is Operation<
+    {
+      /**
+       * The ID of the Agent to delete.
+       */
+      @doc("The ID of the Agent to delete.")
+      @path
+      agentId: string;
+    },
+    void
+  >;
 
   /**
    * Lists all Agents, returning an array of Agent objects.
+   *
+   * @returns An array of Agent items.
    */
-  listAgents is AgentOperations.ResourceList<Agent>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @get
+  @route("/agents")
+  listAgents is Operation<NoRequest, Agent[]>;
 
-  @Rest.action("run")
-  runByAgent is AgentOperations.ResourceAction<
-    Agent,
-    { ... RunInputs },
-    Run
-  >;
-
-  @Rest.action("stream")
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  @Rest.action("stream")
   streamByAgent is AgentOperations.ResourceAction<
     Agent,
-    { ... RunInputs },
+    {
+      ...RunInputs;
+    },
     Streams.Stream<StreamingUpdate>
   >;
 }
@@ -151,10 +222,12 @@ interface Agents {
 interface Runs {
   /**
    * Creates a run.
-  @route("/run")
-     */
+   * @route("/run")
+   */
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createRun is AgentOperations.ResourceCreateWithServiceProvidedName<Run>;
+  createRun is AgentOperations.ResourceCreateWithServiceProvidedName<{
+    ...RunInputs;
+  }>;
 
   /**
    * Retrieves an existing run by its ID.
@@ -167,8 +240,8 @@ interface Runs {
    * Create and stream run.
    * @route("/run/stream")
    */
-  @post
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  @post
   createAndStreamRun is AgentOperations.ResourceCollectionAction<
     Run,
     Run,
