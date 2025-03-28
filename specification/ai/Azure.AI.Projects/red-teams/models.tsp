@@ -15,26 +15,6 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-@doc("Status of the red-team scan.")
-union Status {
-    string,
-
-    @doc("Scanning has not started.")
-    NotStarted: "NotStarted",
-
-    @doc("Scanning is starting.")
-    Starting: "Starting",
-
-    @doc("Scanning is running.")
-    Running: "Running",
-
-    @doc("Scanning is completed.")
-    Completed: "Completed",
-
-    @doc("Scanning has failed.")
-    Failed: "Failed"
-}
-
 @doc("Strategies for attacks.")
 union AttackStrategy {
     string,
@@ -129,11 +109,7 @@ model RedTeam {
     @doc("Red team's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
     properties?: Record<string>;
 
-    @doc("Metadata containing createdBy and modifiedBy information.")
-    @visibility("Lifecycle.Read")
-    systemData?: SystemData;
-
-    @doc("Status of the red team. It is set by service and is read-only.")
-    @visibility("Lifecycle.Read")
-    status: Status;
+    @doc("Status of the red-team. It is set by service and is read-only.")
+    @visibility(Lifecycle.Read)
+    status?: string;
 }
