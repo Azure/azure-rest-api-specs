@@ -9708,6 +9708,48 @@
       }
     },
     "AssistantsApiResponseFormatOption": {},
+    "AuthenticationType": {
+      "type": "string",
+      "description": "The authentication type used by the connection",
+      "enum": [
+        "ApiKey",
+        "AAD",
+        "SAS",
+        "CustomKeys",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "apiKey",
+            "value": "ApiKey",
+            "description": "API Key authentication"
+          },
+          {
+            "name": "entraId",
+            "value": "AAD",
+            "description": "Entra ID authentication (formerly known as AAD)"
+          },
+          {
+            "name": "SAS",
+            "value": "SAS",
+            "description": "Shared Access Signature (SAS) authentication"
+          },
+          {
+            "name": "custom",
+            "value": "CustomKeys",
+            "description": "Custom authentication"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No authentication"
+          }
+        ]
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -9850,6 +9892,10 @@
           "description": "The connection URL to be used for this service",
           "readOnly": true
         },
+        "authType": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "The authentication type used by the connection"
+        },
         "metadata": {
           "type": "object",
           "description": "Metadata of the connection",
@@ -9862,6 +9908,7 @@
         "name",
         "type",
         "target",
+        "authType",
         "metadata"
       ]
     },
