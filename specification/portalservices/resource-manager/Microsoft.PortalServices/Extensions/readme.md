@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
-  - extensions/preview/2024-04-01-preview/extensions.json
+  - preview/2024-04-01-preview/extensions.json
 ```
 
 ### Tag: package-2023-01-01-preview
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
-  - extensions/preview/2023-01-01-preview/extensions.json
+  - preview/2023-01-01-preview/extensions.json
 ```
 
 ---
