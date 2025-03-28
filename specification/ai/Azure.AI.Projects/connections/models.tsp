@@ -26,6 +26,9 @@ model Connection {
   @visibility(Lifecycle.Read)
   target: string;
 
+  @doc("The authentication type used by the connection")
+  authType: AuthenticationType;
+
   @doc("Metadata of the connection")
   metadata: Record<string>;
 }
@@ -55,4 +58,24 @@ union ConnectionType {
 
   @doc("Custom Keys")
   Custom: "CustomKeys",
+}
+
+@doc("The authentication type used by the connection")
+union AuthenticationType {
+  string,
+
+  @doc("API Key authentication")
+  apiKey: "ApiKey",
+
+  @doc("Entra ID authentication (formerly known as AAD)")
+  entraId: "AAD",
+
+  @doc("Shared Access Signature (SAS) authentication")
+  SAS: "SAS",
+
+  @doc("Custom authentication")
+  custom: "CustomKeys",
+
+  @doc("No authentication")
+  None: "None",
 }

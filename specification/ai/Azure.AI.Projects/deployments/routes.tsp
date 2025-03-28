@@ -32,10 +32,6 @@ interface Deployments {
       @query("modelName")
       modelName?: string;
 
-      @doc("Flag to include models from connections in response.")
-      @query("includeConnectedModels")
-      includeConnectionModels?: boolean;
-
       ...StandardListQueryParameters;
     }>
   >;
