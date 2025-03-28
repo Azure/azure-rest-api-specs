@@ -18,6 +18,7 @@ import "./evaluations/routes.tsp";
 import "./datasets/routes.tsp";
 import "./indexes/routes.tsp";
 import "./deployments/routes.tsp";
+import "./evaluation-results/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
