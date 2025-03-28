@@ -49,46 +49,7 @@ model InputDataset extends InputData {
 model Evaluation {
   @doc("Identifier of the evaluation.")
   @key("name")
-  @visibility("read")
-  id: string;
-
-  @doc("Data for evaluation.")
-  data?: InputData;
-
-  @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
-  displayName?: string;
-
-  @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
-  description?: string;
-
-  @doc("Metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
-
-  @doc("Status of the evaluation. It is set by service and is read-only.")
-  @visibility("read")
-  status?: string;
-
-  @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")
-  tags?: Record<string>;
-
-  @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
-  properties?: Record<string>;
-
-  @doc("Evaluators to be used for the evaluation.")
-  evaluators?: Record<EvaluatorConfiguration>;
-
-  @doc("Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureml://project/azureml/evaluationresults/myevaluationresult1', 'logId': 'azureml://project/azureml/datasets/joblogs' }")
-  @visibility("read")
-  outputs?: Record<string>;
-}
-
-@doc("Evaluation Definition")
-@resource("runs")
-model EvaluationRun {
-  @doc("Identifier of the evaluation.")
-  @key("name")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Data for evaluation.")
@@ -100,12 +61,8 @@ model EvaluationRun {
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
   description?: string;
 
-  @doc("Metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
-
   @doc("Status of the evaluation. It is set by service and is read-only.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")
@@ -116,10 +73,6 @@ model EvaluationRun {
 
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
-
-  @doc("Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureml://project/azureml/evaluationresults/myevaluationresult1', 'logId': 'azureml://project/azureml/datasets/joblogs' }")
-  @visibility("read")
-  outputs?: Record<string>;
 }
 
 //Todo need to integrate some job metrics like: runtime, createdTime, status changing?
