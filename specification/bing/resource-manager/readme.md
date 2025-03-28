@@ -30,7 +30,7 @@ These are the global settings for the Bing RP.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-05-01
+tag: package-2025-05-01-preview
 ```
 
 ### Tag: package-2025-05-01-preview
