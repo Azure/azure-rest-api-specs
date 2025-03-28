@@ -47,7 +47,7 @@ interface Datasets
   @Rest.actionSeparator("/")
   @Rest.action("startPendingUpload")
   @Http.post
-  startPendingUploadAutoIncrement is ServicePatterns.BuildingBlocks.RepeatableCoreOps.ResourceAction<
+  startPendingUploadAutoIncrement is ServicePatterns.UnversionedResourceAction<
     DatasetVersion,
     PendingUploadRequest,
     PendingUploadResponse
