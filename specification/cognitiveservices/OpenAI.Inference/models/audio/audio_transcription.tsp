@@ -106,8 +106,10 @@ model AudioTranscriptionOptions {
     Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.
     """)
   @added(ServiceApiVersions.v2024_04_01_Preview)
-  @encodedName("application/json", "timestamp_granularities")
-  timestampGranularities?: HttpPart<AudioTranscriptionTimestampGranularity[]>;
+  timestampGranularities?: HttpPart<
+    AudioTranscriptionTimestampGranularity[],
+    #{ name: "timestamp_granularities" }
+  >;
 
   // Gap in 1.0-rc
   // = #[
