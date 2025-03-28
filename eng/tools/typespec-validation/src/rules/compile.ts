@@ -24,7 +24,7 @@ export class CompileRule implements Rule {
 
       stdOutput += stdout;
 
-      // Rule output is easier to read if "tsp compile" errors are written to stdOutput instead
+      // Rule output is easier to read if "tsp compile" stderr is redirected to stdOutput
       stdOutput += stderr;
 
       if (
