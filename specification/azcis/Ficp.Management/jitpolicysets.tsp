@@ -40,7 +40,7 @@ model JitPolicy {
   executionSequence: int64;
 
   @doc("The type of approval for the policy. Available values are \"AutoApproval\", \"ManualApproval\" and \"ExplicitlyDeny\".")
-  policyType: string;
+  policyType: PolicyType;
 
   @doc("Jit Resource that was created and available for your service.")
   resourceType: string;
@@ -94,6 +94,20 @@ model PolicyAction {
 model ProvisioningMode {
   @doc("Type of the provisioning mode, either \"Create\" or \"Delete\".")
   mode: string;
+}
+
+@doc("Policy Type")
+union PolicyType {
+  @doc("Auto Approval")
+  AutoApproval: "AutoApproval",
+
+  @doc("Manual Approval")
+  ManualApproval: "ManualApproval",
+
+  @doc("Explicitly Deny")
+  ExplicitlyDeny: "ExplicitlyDeny",
+
+  string,
 }
 
 @doc("FicpJitPolicySet Resource")

@@ -367,7 +367,7 @@
           "description": "Define the execution sequence in belonging policy set."
         },
         "policyType": {
-          "type": "string",
+          "$ref": "#/definitions/PolicyType",
           "description": "The type of approval for the policy. Available values are \"AutoApproval\", \"ManualApproval\" and \"ExplicitlyDeny\"."
         },
         "resourceType": {
@@ -512,6 +512,36 @@
         "property",
         "value"
       ]
+    },
+    "PolicyType": {
+      "type": "string",
+      "description": "Policy Type",
+      "enum": [
+        "AutoApproval",
+        "ManualApproval",
+        "ExplicitlyDeny"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AutoApproval",
+            "value": "AutoApproval",
+            "description": "Auto Approval"
+          },
+          {
+            "name": "ManualApproval",
+            "value": "ManualApproval",
+            "description": "Manual Approval"
+          },
+          {
+            "name": "ExplicitlyDeny",
+            "value": "ExplicitlyDeny",
+            "description": "Explicitly Deny"
+          }
+        ]
+      }
     },
     "ProvisioningMode": {
       "type": "object",
