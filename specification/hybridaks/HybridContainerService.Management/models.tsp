@@ -293,7 +293,6 @@ model ProvisionedClusterProperties {
       "minCount",
       "enableAutoScaling",
       "maxPods",
-      "availabilityZones",
       "count",
       "vmSize",
       "kubernetesVersion",
@@ -525,11 +524,6 @@ model AgentPoolProfile {
    * The maximum number of pods that can run on a node.
    */
   maxPods?: int32;
-
-  /**
-   * The list of Availability zones to use for nodes.
-   */
-  availabilityZones?: string[];
 }
 
 /**
