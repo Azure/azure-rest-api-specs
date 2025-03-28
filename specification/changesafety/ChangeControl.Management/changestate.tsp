@@ -5,11 +5,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./commonmodels.tsp";
 import "./stageprogression.tsp";
 import "./stagemap.tsp";
+import "@typespec/versioning";
 
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ChangeSafety;
 
@@ -74,6 +76,12 @@ model ChangeStateProperties {
   @doc("Schema of parameters that will be provided for each stageProgression.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   stageParameters: Record<Parameter>;
+
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
+  @added(Versions.v2025_03_01_preview)
+  @doc("Referenced stagemap snapshot.")
+  @visibility(Lifecycle.Read)
+  stageMapSnapshot?: Array<string | StageMap>;
 }
 
 @doc("RetrieveNextStage POST Action response.")
@@ -264,6 +272,57 @@ model TemplateSpecArtifactContent {
   resourceId: armResourceIdentifier;
 }
 
+@added(Versions.v2025_03_01_preview)
+@doc("VerifyChangeValidity POST Action request.")
+model VerifyChangeValidityRequest {
+  @doc("The resource operation.")
+  operation: ResourceOperation;
+
+  @doc("The stage progression Id.")
+  stageProgressionId?: armResourceIdentifier;
+}
+
+@added(Versions.v2025_03_01_preview)
+@doc("Resource operation model.")
+model ResourceOperation {
+  @doc("The uri of the operation.")
+  uri: url;
+
+  @doc("The http method of the operation.")
+  httpMethod: ArmOperation;
+
+  @doc("The resource operation content.")
+  content?: ResourceContent;
+}
+
+@added(Versions.v2025_03_01_preview)
+@doc("Resource operation content model.")
+model ResourceContent {
+  @doc("The name of the resource.")
+  name?: string;
+
+  @doc("The location of the resource.")
+  location?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @doc("The properties of the resource.")
+  properties: {};
+}
+
+@added(Versions.v2025_03_01_preview)
+@doc("VerifyChangeValidity POST Action response.")
+@added(Versions.v2025_03_01_preview)
+model VerifyChangeValidityResponse {
+  @doc("The outcome of the verification.")
+  outcome: string;
+
+  @doc("The explanation message of the verification.")
+  message: string;
+
+  @doc("The experation time of the change.")
+  validUntil?: utcDateTime;
+}
+
 /* Different ChangeArtifact types */
 @doc("Defines the type of change artifact.")
 union ArtifactType {
@@ -297,6 +356,15 @@ union ArmOperation {
 
   @doc("DELETE ARM Operation.")
   DELETE: "DELETE",
+
+  @doc("PUT ARM Operation.")
+  PUT: "PUT",
+
+  @doc("POST ARM Operation.")
+  POST: "POST",
+
+  @doc("PATCH ARM Operation.")
+  PATCH: "PATCH",
 }
 
 @doc("Azure resource Id of a ChangeState.")
@@ -369,4 +437,26 @@ interface ChangeStates {
 
   list is ArmResourceListAtScope<ChangeState>;
   listBySubscription is ArmListBySubscription<ChangeState>;
+
+  @doc("Verify the change validity.")
+  @action("verifyChangeValidity")
+  @added(Versions.v2025_03_01_preview)
+  verifyChangeValidity is ArmResourceActionSync<
+    ChangeState,
+    VerifyChangeValidityRequest,
+    VerifyChangeValidityResponse
+  >;
+
+  @doc("Verify the change validity at subscription level.")
+  @action("verifyChangeValidity")
+  @added(Versions.v2025_03_01_preview)
+  verifyChangeValidityAtSubscriptionLevel is ArmResourceActionSync<
+    ChangeState,
+    VerifyChangeValidityRequest,
+    VerifyChangeValidityResponse,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
 }
