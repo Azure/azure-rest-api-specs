@@ -15309,12 +15309,14 @@
         "readIOGiB": {
           "type": "number",
           "format": "float",
-          "description": "The total gibibytes read from disk by the Task."
+          "description": "The total gibibytes read from disk by the Task.",
+          "x-ms-client-name": "readIoGiB"
         },
         "writeIOGiB": {
           "type": "number",
           "format": "float",
-          "description": "The total gibibytes written to disk by the Task."
+          "description": "The total gibibytes written to disk by the Task.",
+          "x-ms-client-name": "writeIoGiB"
         },
         "waitTime": {
           "type": "string",
@@ -16256,7 +16258,7 @@
           "description": "The storage account type for managed disk."
         },
         "securityProfile": {
-          "$ref": "#/definitions/VMDiskSecurityProfile",
+          "$ref": "#/definitions/VmDiskSecurityProfile",
           "description": "Specifies the security profile settings for the managed disk."
         }
       }
@@ -17218,16 +17220,6 @@
         }
       }
     },
-    "VMDiskSecurityProfile": {
-      "type": "object",
-      "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.",
-      "properties": {
-        "securityEncryptionType": {
-          "$ref": "#/definitions/SecurityEncryptionTypes",
-          "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs."
-        }
-      }
-    },
     "VMExtension": {
       "type": "object",
       "description": "The configuration for virtual machine extensions.",
@@ -17361,7 +17353,8 @@
         },
         "osDisk": {
           "$ref": "#/definitions/OSDisk",
-          "description": "Settings for the operating system disk of the Virtual Machine."
+          "description": "Settings for the operating system disk of the Virtual Machine.",
+          "x-ms-client-name": "OsDisk"
         },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
@@ -17428,7 +17421,8 @@
         },
         "osDisk": {
           "$ref": "#/definitions/OSDisk",
-          "description": "Settings for the operating system disk of the Virtual Machine."
+          "description": "Settings for the operating system disk of the Virtual Machine.",
+          "x-ms-client-name": "OsDisk"
         },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfileUpdate",
@@ -17451,6 +17445,16 @@
         "scaleSetVmResourceId": {
           "type": "string",
           "description": "The resource ID of the Compute Node's current Virtual Machine Scale Set VM. Only defined if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'."
+        }
+      }
+    },
+    "VmDiskSecurityProfile": {
+      "type": "object",
+      "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.",
+      "properties": {
+        "securityEncryptionType": {
+          "$ref": "#/definitions/SecurityEncryptionTypes",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs."
         }
       }
     },
