@@ -548,13 +548,37 @@
       "description": "Provisioning Mode",
       "properties": {
         "mode": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningType",
           "description": "Type of the provisioning mode, either \"Create\" or \"Delete\"."
         }
       },
       "required": [
         "mode"
       ]
+    },
+    "ProvisioningType": {
+      "type": "string",
+      "description": "Provisioning Type",
+      "enum": [
+        "Create",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Create",
+            "value": "Create",
+            "description": "Create"
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
