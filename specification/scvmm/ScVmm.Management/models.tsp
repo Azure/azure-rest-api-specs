@@ -186,23 +186,23 @@ model VmmServerProperties {
   port?: int32;
 
   /** Gets the connection status to the vmmServer. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectionStatus?: string;
 
   /** Gets any error message if connection to vmmServer is having any issue. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorMessage?: string;
 
   /** Unique ID of vmmServer. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   /** Version is the version of the vmmSever. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   version?: string;
 
   /** Provisioning state of the resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -212,7 +212,7 @@ model VmmCredential {
   username?: string;
 
   /** Password to use to connect to VmmServer. */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   password?: string;
 }
@@ -243,34 +243,34 @@ model CloudProperties {
   vmmServerId?: VmmServerId;
 
   /** Name of the cloud in VmmServer. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cloudName?: string;
 
   /** Capacity of the cloud. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cloudCapacity?: CloudCapacity;
 
   /** List of QoS policies available for the cloud. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "storageQoSPolicies")
   storageQosPolicies?: StorageQosPolicy[];
 
   /** Provisioning state of the resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
 /** Cloud Capacity model */
 model CloudCapacity {
   /** CPUCount specifies the maximum number of CPUs that can be allocated in the cloud. */
-  @visibility("read") cpuCount?: int64;
+  @visibility(Lifecycle.Read) cpuCount?: int64;
 
   /** MemoryMB specifies a memory usage limit in megabytes. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  @visibility("read") memoryMB?: int64;
+  @visibility(Lifecycle.Read) memoryMB?: int64;
 
   /** VMCount gives the max number of VMs that can be deployed in the cloud. */
-  @visibility("read") vmCount?: int64;
+  @visibility(Lifecycle.Read) vmCount?: int64;
 }
 
 /** The StorageQoSPolicy definition. */
@@ -307,11 +307,11 @@ model VirtualNetworkProperties {
   vmmServerId?: VmmServerId;
 
   /** Name of the virtual network in vmmServer. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkName?: string;
 
   /** Provisioning state of the resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -328,68 +328,68 @@ model VirtualMachineTemplateProperties {
   vmmServerId?: VmmServerId;
 
   /** Gets the type of the os. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /** Gets os name. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osName?: string;
 
   /** Gets computer name. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   computerName?: string;
 
   /** MemoryMB is the desired size of a virtual machine's memory, in MB. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memoryMB?: int32;
 
   /** Gets the desired number of vCPUs for the vm. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cpuCount?: int32;
 
   /** Gets a value indicating whether to enable processor compatibility mode for live migration of VMs. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   limitCpuForMigration?: LimitCpuForMigration;
 
   /** Gets a value indicating whether to enable dynamic memory or not. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dynamicMemoryEnabled?: DynamicMemoryEnabled;
 
   /** Gets a value indicating whether the vm template is customizable or not. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isCustomizable?: IsCustomizable;
 
   /** Gets the max dynamic memory for the vm. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dynamicMemoryMaxMB?: int32;
 
   /** Gets the min dynamic memory for the vm. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dynamicMemoryMinMB?: int32;
 
   /** Gets highly available property. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isHighlyAvailable?: IsHighlyAvailable;
 
   /** Gets the generation for the vm. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   generation?: int32;
 
   /** Gets the network interfaces of the template. */
-  @visibility("read")
-  @extension("x-ms-identifiers", ["name", "nicId"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name", "nicId"])
   networkInterfaces?: NetworkInterface[];
 
   /** Gets the disks of the template. */
-  @visibility("read")
-  @extension("x-ms-identifiers", ["diskId", "name"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["diskId", "name"])
   disks?: VirtualDisk[];
 
   /** Provisioning state of the resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -399,15 +399,15 @@ model NetworkInterface {
   name?: string;
 
   /** Gets the display name of the network interface as shown in the vmmServer. This is the fallback label for a NIC when the name is not set. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   /** Gets the nic ipv4 addresses. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipv4Addresses?: string[];
 
   /** Gets the nic ipv6 addresses. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   ipv6Addresses?: string[];
 
   /** Gets or sets the nic MAC address. */
@@ -417,7 +417,7 @@ model NetworkInterface {
   virtualNetworkId?: VirtualNetworkId;
 
   /** Gets the name of the virtual network in vmmServer that the nic is connected to. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   networkName?: string;
 
   /** Gets or sets the ipv4 address type. */
@@ -442,7 +442,7 @@ model VirtualDisk {
   name?: string;
 
   /** Gets the display name of the virtual disk as shown in the vmmServer. This is the fallback label for a disk when the name is not set. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   displayName?: string;
 
   /** Gets or sets the disk id. */
@@ -454,7 +454,7 @@ model VirtualDisk {
 
   /** Gets the max disk size. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is distinct from Gb"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   maxDiskSizeGB?: int32;
 
   /** Gets or sets the disk bus. */
@@ -470,15 +470,15 @@ model VirtualDisk {
   vhdType?: string;
 
   /** Gets the disk volume type. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   volumeType?: string;
 
   /** Gets the disk vhd format type. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   vhdFormatType?: string;
 
   /** Gets or sets the disk id in the template. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   templateDiskId?: string;
 
   /** The QoS policy for the disk. */
@@ -486,7 +486,7 @@ model VirtualDisk {
   storageQosPolicy?: StorageQosPolicyDetails;
 
   /** Gets or sets a value indicating diff disk. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   createDiffDisk?: CreateDiffDisk;
 }
 
@@ -512,7 +512,7 @@ model AvailabilitySetProperties {
   vmmServerId?: VmmServerId;
 
   /** Provisioning state of the resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -540,19 +540,19 @@ model InventoryItemProperties {
   inventoryType: InventoryType;
 
   /** Gets the tracked resource id corresponding to the inventory resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedResourceId?: string;
 
   /** Gets the UUID (which is assigned by Vmm) for the inventory item. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   /** Gets the Managed Object name in Vmm for the inventory item. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   inventoryItemName?: string;
 
   /** Provisioning state of the resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -562,7 +562,7 @@ model VirtualMachineInstanceProperties {
   availabilitySets?: AvailabilitySetListItem[];
 
   /** OS properties. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   osProfile?: OsProfileForVmInstance;
 
   /** Hardware properties. */
@@ -578,11 +578,11 @@ model VirtualMachineInstanceProperties {
   infrastructureProfile?: InfrastructureProfile;
 
   /** Gets the power state of the virtual machine. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   powerState?: string;
 
   /** Provisioning state of the resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -625,7 +625,7 @@ model AvailabilitySetListItem {
 /** Defines the resource properties. */
 model OsProfileForVmInstance {
   /** Admin password of the virtual machine. */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   adminPassword?: string;
 
@@ -633,15 +633,15 @@ model OsProfileForVmInstance {
   computerName?: string;
 
   /** Gets the type of the os. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /** Gets os sku. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osSku?: string;
 
   /** Gets os version. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osVersion?: string;
 
   /** Gets or sets the domain name. */
@@ -653,7 +653,7 @@ model OsProfileForVmInstance {
   domainUsername?: string;
 
   /** Password of the domain the VM has to join. */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   @added(Versions.v2024_06_01)
   domainPassword?: string;
@@ -663,7 +663,7 @@ model OsProfileForVmInstance {
   workgroup?: string;
 
   /** Gets or sets the product key.Input format xxxxx-xxxxx-xxxxx-xxxxx-xxxxx */
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @secret
   @added(Versions.v2024_06_01)
   productKey?: string;
@@ -701,7 +701,7 @@ model HardwareProfile {
   dynamicMemoryMinMB?: int32;
 
   /** Gets highly available property. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   isHighlyAvailable?: IsHighlyAvailable;
 }
 
@@ -711,7 +711,7 @@ model HardwareProfileUpdate is UpdateableProperties<HardwareProfile>;
 /** Defines the resource properties. */
 model NetworkProfile {
   /** Gets or sets the list of network interfaces associated with the virtual machine. */
-  @extension("x-ms-identifiers", ["name", "nicId"])
+  @identifiers(#["name", "nicId"])
   networkInterfaces?: NetworkInterface[];
 }
 
@@ -719,14 +719,14 @@ model NetworkProfile {
 model NetworkProfileUpdate
   is UpdateableProperties<OmitProperties<NetworkProfile, "networkInterfaces">> {
   /** Gets or sets the list of network interfaces associated with the virtual machine. */
-  @extension("x-ms-identifiers", ["name", "nicId"])
+  @identifiers(#["name", "nicId"])
   networkInterfaces?: NetworkInterfaceUpdate[];
 }
 
 /** Defines the resource properties. */
 model StorageProfile {
   /** Gets or sets the list of virtual disks associated with the virtual machine. */
-  @extension("x-ms-identifiers", ["diskId", "name"])
+  @identifiers(#["diskId", "name"])
   disks?: VirtualDisk[];
 }
 
@@ -734,22 +734,22 @@ model StorageProfile {
 model StorageProfileUpdate
   is UpdateableProperties<OmitProperties<StorageProfile, "disks">> {
   /** Gets or sets the list of virtual disks associated with the virtual machine. */
-  @extension("x-ms-identifiers", ["diskId", "name"])
+  @identifiers(#["diskId", "name"])
   disks?: VirtualDiskUpdate[];
 }
 
 /** Specifies the vmmServer infrastructure specific settings for the virtual machine instance. */
 model InfrastructureProfile {
   /** Gets or sets the inventory Item ID for the resource. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   inventoryItemId?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   vmmServerId?: VmmServerId;
 
   /** ARM Id of the cloud resource to use for deploying the vm. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   cloudId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ScVmm/clouds";
@@ -757,7 +757,7 @@ model InfrastructureProfile {
   ]>;
 
   /** ARM Id of the template resource to use for deploying the vm. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   templateId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ScVmm/virtualMachineTemplates";
@@ -766,34 +766,34 @@ model InfrastructureProfile {
 
   /** VMName is the name of VM on the SCVmm server. */
   @minLength(1)
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   vmName?: string;
 
   /** Unique ID of the virtual machine. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   uuid?: string;
 
   /** Last restored checkpoint in the vm. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "lastRestoredVMCheckpoint")
   lastRestoredVmCheckpoint?: Checkpoint;
 
   /** Checkpoints in the vm. */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Workaround for emitter problem"
-  @visibility("read")
-  @extension("x-ms-identifiers", ["checkpointID"])
+  @visibility(Lifecycle.Read)
+  @identifiers(#["checkpointID"])
   checkpoints?: Checkpoint[];
 
   /** Type of checkpoint supported for the vm. */
-  @visibility("read", "create", "update")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   checkpointType?: string;
 
   /** Gets or sets the generation for the vm. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   generation?: int32;
 
   /** Gets or sets the bios guid for the vm. */
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   biosGuid?: string;
 }
 
@@ -833,7 +833,7 @@ model VmInstanceHybridIdentityMetadataProperties {
   publicKey?: string;
 
   /** Provisioning state of the resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -861,7 +861,7 @@ model VirtualMachineRestoreCheckpoint {
 /** Defines the resource properties. */
 model GuestAgentProperties {
   /** Gets a unique identifier for this resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   uuid?: string;
 
   /** Username / Password Credentials to provision guest agent. */
@@ -874,15 +874,15 @@ model GuestAgentProperties {
   provisioningAction?: ProvisioningAction;
 
   /** Gets the guest agent status. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /** Gets the name of the corresponding resource in Kubernetes. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   customResourceName?: string;
 
   /** Provisioning state of the resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /** The resource id of the private link scope this machine is assigned to, if any. */
@@ -900,7 +900,7 @@ model GuestCredential {
   username: string;
 
   /** Gets or sets the password to connect with the guest. */
-  @visibility("create", "update")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   password: string;
 }
@@ -935,20 +935,20 @@ model VirtualNetworkInventoryItem extends InventoryItemProperties {
 /** The Virtual machine template inventory item. */
 model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
   /** Gets the desired number of vCPUs for the vm. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   cpuCount?: int32;
 
   /** MemoryMB is the desired size of a virtual machine's memory, in MB. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is distinct from Mb"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   memoryMB?: int32;
 
   /** Gets the type of the os. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /** Gets os name. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osName?: string;
 
   /** They inventory type. */
@@ -958,19 +958,19 @@ model VirtualMachineTemplateInventoryItem extends InventoryItemProperties {
 /** The Virtual machine inventory item. */
 model VirtualMachineInventoryItem extends InventoryItemProperties {
   /** Gets the type of the os. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osType?: OsType;
 
   /** Gets os name. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osName?: string;
 
   /** Gets os version. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   osVersion?: string;
 
   /** Gets the power state of the virtual machine. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   powerState?: string;
 
   /** Gets or sets the nic ip addresses. */
@@ -980,11 +980,11 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
   cloud?: InventoryItemDetails;
 
   /** Gets the bios guid. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   biosGuid?: string;
 
   /** Gets the tracked resource id corresponding to the inventory resource. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managedMachineResourceId?: Azure.Core.armResourceIdentifier<[]>;
 
   /** They inventory type. */

@@ -72,11 +72,11 @@ union CloudLinkProvisioningState {
 @doc("The properties of a cloud link.")
 model CloudLinkProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: CloudLinkProvisioningState;
 
   @doc("The state of the cloud link.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: CloudLinkStatus;
 
   @doc("Identifier of the other private cloud participating in the link.")
