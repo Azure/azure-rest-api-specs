@@ -72,29 +72,94 @@ interface Messages {
 interface Threads {
   /**
    * Creates a new Thread and returns it.
+   *
+   * @param body The Thread data to create.
+   * @returns The newly created Thread.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createThread is AgentOperations.ResourceCreateWithServiceProvidedName<Thread>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @post
+  @route("/threads")
+  createThread is Operation<Thread, Thread>;
 
   /**
    * Retrieves an existing thread by its ID.
+   *
+   * @param threadId The identifier of the Thread to retrieve.
+   * @returns The requested Thread.
    */
-  getThread is AgentOperations.ResourceRead<Thread>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @get
+  @route("/threads/{threadId}")
+  getThread is Operation<
+    {
+      /**
+       * The identifier of the Thread.
+       */
+      @doc("The identifier of the Thread.")
+      @path
+      threadId: string;
+    },
+    Thread
+  >;
 
   /**
    * Updates or replaces a thread by its ID, returning the updated Thread.
+   *
+   * @param threadId The identifier of the Thread to update.
+   * @param body The new or revised Thread data.
+   * @returns The updated Thread.
    */
-  updateThread is AgentOperations.ResourceCreateOrReplace<Thread>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @put
+  @route("/threads/{threadId}")
+  updateThread is Operation<
+    {
+      /**
+       * The identifier of the Thread to update.
+       */
+      @doc("The identifier of the Thread to update.")
+      @path
+      threadId: string;
+
+      /**
+       * The new or updated Thread object.
+       */
+      @doc("The updated Thread resource data.")
+      @body
+      body: Thread;
+    },
+    Thread
+  >;
 
   /**
    * Deletes a thread, returning 204 on success.
+   *
+   * @param threadId The thread to delete.
    */
-  deleteThread is AgentOperations.ResourceDelete<Thread>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @delete
+  @route("/threads/{threadId}")
+  deleteThread is Operation<
+    {
+      /**
+       * The ID of the thread to delete.
+       */
+      @doc("The ID of the thread to delete.")
+      @path
+      threadId: string;
+    },
+    void
+  >;
 
   /**
    * Lists all threads, returning an array of Thread items.
+   *
+   * @returns An array of Thread objects.
    */
-  listThreads is AgentOperations.ResourceList<Thread>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @get
+  @route("/threads")
+  listThreads is Operation<NoRequest, Thread[]>;
 }
 
 /**
