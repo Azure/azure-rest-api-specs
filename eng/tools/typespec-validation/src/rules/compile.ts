@@ -39,7 +39,7 @@ export class CompileRule implements Rule {
         // Check for *extra* typespec-generated swagger files under the output folder, which
         // indicates a mismatch between TypeSpec and swaggers.
 
-        // Example:
+        // Example 'stdout':
         //
         // TypeSpec compiler v0.67.2
         //
