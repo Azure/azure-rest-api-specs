@@ -194,7 +194,8 @@ paths:
                   format: binary
                   description: The file data (not filename) to upload.
                 purpose:
-                  $ref: '#/components/schemas/FilePurpose'
+                  allOf:
+                    - $ref: '#/components/schemas/FilePurpose'
                   description: The intended purpose of the file.
                 filename:
                   type: string
