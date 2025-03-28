@@ -140,7 +140,7 @@
           "200": {
             "description": "Indicates that the request was successful, the specified object was found, and it has been deleted as requested."
           },
-            "204": {
+          "204": {
             "description": "The operation completed successfully, but there is no content to return. This typically means the resource does not exist, and no further action is required."
           },
           "default": {
@@ -846,16 +846,16 @@
       "description": "Bing Custom Search Configuration is an Azure resource representing Bing Custom Search configuration type, allowed domains, blocked domains and pinned domains.",
       "type": "object",
       "properties": {
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-          }
-        ],
         "properties": {
           "$ref": "#/definitions/BingCustomConfigurationProperties",
           "description": "Properties of Bing Custom Search configuration."
         }
       },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
       "x-ms-azure-resource": true
     },
     "BingCustomConfigurationProperties": {
