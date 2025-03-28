@@ -15,7 +15,8 @@ using Azure.Core.Traits;
 namespace Azure.AI.Projects;
 
 @doc("Evaluation Result resource Definition")
-@discriminator("EvaluationResultType")
+@discriminator("ResultType")
+@Rest.resource("evaluationresult")
 model EvaluationResult {
   @doc("Type of Evaluation result")
   ResultType?: ResultType;
