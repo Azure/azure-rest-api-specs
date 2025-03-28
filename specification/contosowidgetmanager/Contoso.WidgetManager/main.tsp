@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @useAuth(AadOauth2Auth<["https://contoso.azure.com/.default"]>)
-@service(#{ title: "Contoso Widget Manager" })
+@service(#{ title: "Contoso Widget Manager along with a change to docs" })
 @versioned(Contoso.WidgetManager.Versions)
 namespace Azure.Contoso.WidgetManager;
 
@@ -29,7 +29,7 @@ enum Versions {
 @resource("widgets")
 model WidgetSuite {
   @key("widgetName")
-  @doc("The widget name.")
+  @doc("The widget name. And a change in docs.")
   @visibility(Lifecycle.Read)
   name: string;
 
