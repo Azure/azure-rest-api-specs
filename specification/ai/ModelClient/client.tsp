@@ -113,6 +113,11 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.ChatMessageAudioDataContentItem, Access.internal);
 @@access(AI.Model.ChatMessageAudioUrlContentItem, Access.internal);
 
+@@clientName(AI.Model.ChatCompletionsResponseFormatJsonObject,
+  "ChatCompletionsResponseFormatJSON",
+  "javascript"
+);
+
 // We use shorter names in the Python client library
 @@clientName(AI.Model.ChatMessageContentItem, "ContentItem", "python");
 @@clientName(AI.Model.ChatMessageTextContentItem, "TextContentItem", "python");
