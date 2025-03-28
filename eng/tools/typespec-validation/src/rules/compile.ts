@@ -93,7 +93,7 @@ export class CompileRule implements Rule {
           success = false;
           errorOutput += pc.red(
             `\nOutput folder '${outputFolder}' appears to contain TypeSpec-generated ` +
-              `swagger files, not generated from the current TypeSpec sources.` +
+              `swagger files, not generated from the current TypeSpec sources. ` +
               `Perhaps you deleted a version from your TypeSpec, but didn't delete ` +
               `the associated swaggers?\n\n`,
           );
