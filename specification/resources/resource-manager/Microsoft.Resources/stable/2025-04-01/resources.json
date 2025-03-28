@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2025-03-01",
+    "version": "2025-04-01",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -4654,6 +4654,28 @@
           },
           "description": "Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file. Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string."
         },
+        "externalInputs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExternalInput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "External input values, used by external tooling for parameter evaluation."
+        },
+        "externalInputDefinitions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DeploymentExternalInputDefinition"
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "External input definitions, used by external tooling to define expected external input values."
+        },
         "parametersLink": {
           "$ref": "#/definitions/ParametersLink",
           "description": "The URI of parameters file. You use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
@@ -4708,9 +4730,45 @@
         "reference": {
           "$ref": "#/definitions/KeyVaultParameterReference",
           "description": "Azure Key Vault parameter reference."
+        },
+        "expression": {
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "Input expression to the parameter."
         }
       },
       "description": "Deployment parameter for the template."
+    },
+    "DeploymentExternalInput": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "External input value."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Deployment external input for parameterization."
+    },
+    "DeploymentExternalInputDefinition": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of external input."
+        },
+        "config": {
+          "description": "Configuration for the external input."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "description": "Deployment external input definition for parameterization."
     },
     "KeyVaultParameterReference": {
       "type": "object",
