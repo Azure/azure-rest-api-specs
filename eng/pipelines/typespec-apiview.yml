@@ -21,7 +21,8 @@ jobs:
 
   steps:
   - checkout: self
-    fetchDepth: 0
+    # Required to compare head commit with base commit
+    fetchDepth: 2
 
   - template: /eng/pipelines/templates/steps/use-node-version.yml
 
