@@ -36,6 +36,9 @@ export class CompileRule implements Rule {
       }
 
       if (!err) {
+        // Check for *extra* typespec-generated swagger files under the output folder, which
+        // indicates a mismatch between TypeSpec and swaggers.
+
         // Example:
         //
         // TypeSpec compiler v0.67.2
@@ -90,7 +93,9 @@ export class CompileRule implements Rule {
           success = false;
           errorOutput += pc.red(
             `\nOutput folder '${outputFolder}' appears to contain TypeSpec-generated ` +
-              `swagger files, not generated from the current TypeSpec sources.\n\n`,
+              `swagger files, not generated from the current TypeSpec sources.` +
+              `Perhaps you deleted a version from your TypeSpec, but didn't delete ` +
+              `the associated swaggers?\n\n`,
           );
         }
       } else {
