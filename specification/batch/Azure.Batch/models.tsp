@@ -1054,10 +1054,12 @@ model BatchPoolResourceStatistics {
 
   @doc("The total number of disk read operations across all Compute Nodes in the Pool.")
   @encode(string)
+  @clientName("diskReadIops")
   diskReadIOps: int64;
 
   @doc("The total number of disk write operations across all Compute Nodes in the Pool.")
   @encode(string)
+  @clientName("diskWriteIops")
   diskWriteIOps: int64;
 
   @doc("The total amount of data in GiB of disk reads across all Compute Nodes in the Pool.")
@@ -1098,16 +1100,20 @@ model BatchJobStatistics {
 
   @doc("The total number of disk read operations made by all Tasks in the Job.")
   @encode(string)
+  @clientName("readIops")
   readIOps: int64;
 
   @doc("The total number of disk write operations made by all Tasks in the Job.")
   @encode(string)
+  @clientName("writeIops")
   writeIOps: int64;
 
   @doc("The total amount of data in GiB read from disk by all Tasks in the Job.")
+  @clientName("readIoGiB")
   readIOGiB: float32;
 
   @doc("The total amount of data in GiB written to disk by all Tasks in the Job.")
+  @clientName("writeIoGiB")
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0.")
@@ -1453,6 +1459,7 @@ model BatchJobNetworkConfiguration {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.")
+  @clientName("skipWithdrawFromVnet")
   skipWithdrawFromVNet: boolean;
 }
 
@@ -1654,11 +1661,11 @@ model OutputFileBlobContainerDestination {
   identityReference?: BatchNodeIdentityReference;
 
   @doc("A list of name-value pairs for headers to be used in uploading output files. These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://learn.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types.")
-  uploadHeaders?: HttpHeader[];
+  uploadHeaders?: OutputFileUploadHeader[];
 }
 
 @doc("An HTTP header name-value pair")
-model HttpHeader {
+model OutputFileUploadHeader {
   @doc("The case-insensitive name of the header to be used while uploading output files.")
   name: string;
 
@@ -1989,6 +1996,7 @@ model VirtualMachineConfiguration {
   extensions?: VMExtension[];
 
   @doc("Settings for the operating system disk of the Virtual Machine.")
+  @clientName("OsDisk")
   osDisk?: OSDisk;
 
   @doc("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
@@ -2130,6 +2138,7 @@ model NetworkConfiguration {
   subnetId?: string;
 
   @doc("The scope of dynamic vnet assignment.")
+  @clientName("dynamicVnetAssignmentScope")
   dynamicVNetAssignmentScope?: DynamicVNetAssignmentScope;
 
   @doc("The configuration for endpoints on Compute Nodes in the Batch Pool.")
@@ -2461,16 +2470,20 @@ model BatchJobScheduleStatistics {
 
   @doc("The total number of disk read operations made by all Tasks in all Jobs created under the schedule.")
   @encode(string)
+  @clientName("readIops")
   readIOps: int64;
 
   @doc("The total number of disk write operations made by all Tasks in all Jobs created under the schedule.")
   @encode(string)
+  @clientName("writeIops")
   writeIOps: int64;
 
   @doc("The total gibibytes read from disk by all Tasks in all Jobs created under the schedule.")
+  @clientName("readIoGiB")
   readIOGiB: float32;
 
   @doc("The total gibibytes written to disk by all Tasks in all Jobs created under the schedule.")
+  @clientName("writeIoGiB")
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0.")
@@ -3569,6 +3582,7 @@ model ExitOptions {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.")
+@clientName("VmDiskSecurityProfile")
 model VMDiskSecurityProfile {
   @doc("Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs.")
   securityEncryptionType?: SecurityEncryptionTypes;
@@ -3694,16 +3708,20 @@ model BatchTaskStatistics {
 
   @doc("The total number of disk read operations made by the Task.")
   @encode(string)
+  @clientName("readIops")
   readIOps: int64;
 
   @doc("The total number of disk write operations made by the Task.")
   @encode(string)
+  @clientName("writeIops")
   writeIOps: int64;
 
   @doc("The total gibibytes read from disk by the Task.")
+  @clientName("readIoGiB")
   readIOGiB: float32;
 
   @doc("The total gibibytes written to disk by the Task.")
+  @clientName("writeIoGiB")
   writeIOGiB: float32;
 
   @doc("The total wait time of the Task. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.).")
@@ -3754,14 +3772,14 @@ model BatchTaskGroup {
   value: BatchTaskCreateContent[];
 }
 
-@doc("The result of adding a collection of Tasks to a Job.")
-model BatchTaskAddCollectionResult {
-  @doc("The results of the add Task collection operation.")
-  value?: BatchTaskAddResult[];
+@doc("The result of creating a collection of Tasks to a Job.")
+model BatchCreateTaskCollectionResult {
+  @doc("The results of the create Task collection operation.")
+  value?: BatchTaskCreateResult[];
 }
 
-@doc("Result for a single Task added as part of an add Task collection operation.")
-model BatchTaskAddResult {
+@doc("Result for a single Task created as part of an add Task collection operation.")
+model BatchTaskCreateResult {
   @doc("The status of the add Task request.")
   status: BatchTaskAddStatus;
 

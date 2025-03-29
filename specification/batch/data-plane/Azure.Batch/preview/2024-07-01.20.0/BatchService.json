@@ -1668,7 +1668,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BatchTaskAddCollectionResult"
+              "$ref": "#/definitions/BatchCreateTaskCollectionResult"
             },
             "headers": {
               "ETag": {
@@ -10277,6 +10277,20 @@
         ]
       }
     },
+    "BatchCreateTaskCollectionResult": {
+      "type": "object",
+      "description": "The result of creating a collection of Tasks to a Job.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The results of the create Task collection operation.",
+          "items": {
+            "$ref": "#/definitions/BatchTaskCreateResult"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "BatchError": {
       "type": "object",
       "description": "An error response received from the Azure Batch service.",
@@ -10850,7 +10864,8 @@
         },
         "skipWithdrawFromVNet": {
           "type": "boolean",
-          "description": "Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false."
+          "description": "Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.",
+          "x-ms-client-name": "skipWithdrawFromVnet"
         }
       },
       "required": [
@@ -10868,7 +10883,8 @@
         },
         "skipWithdrawFromVNet": {
           "type": "boolean",
-          "description": "Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false."
+          "description": "Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.",
+          "x-ms-client-name": "skipWithdrawFromVnet"
         }
       }
     },
@@ -11542,22 +11558,26 @@
         "readIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk read operations made by all Tasks in all Jobs created under the schedule."
+          "description": "The total number of disk read operations made by all Tasks in all Jobs created under the schedule.",
+          "x-ms-client-name": "readIops"
         },
         "writeIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk write operations made by all Tasks in all Jobs created under the schedule."
+          "description": "The total number of disk write operations made by all Tasks in all Jobs created under the schedule.",
+          "x-ms-client-name": "writeIops"
         },
         "readIOGiB": {
           "type": "number",
           "format": "float",
-          "description": "The total gibibytes read from disk by all Tasks in all Jobs created under the schedule."
+          "description": "The total gibibytes read from disk by all Tasks in all Jobs created under the schedule.",
+          "x-ms-client-name": "readIoGiB"
         },
         "writeIOGiB": {
           "type": "number",
           "format": "float",
-          "description": "The total gibibytes written to disk by all Tasks in all Jobs created under the schedule."
+          "description": "The total gibibytes written to disk by all Tasks in all Jobs created under the schedule.",
+          "x-ms-client-name": "writeIoGiB"
         },
         "numSucceededTasks": {
           "type": "string",
@@ -11895,22 +11915,26 @@
         "readIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk read operations made by all Tasks in the Job."
+          "description": "The total number of disk read operations made by all Tasks in the Job.",
+          "x-ms-client-name": "readIops"
         },
         "writeIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk write operations made by all Tasks in the Job."
+          "description": "The total number of disk write operations made by all Tasks in the Job.",
+          "x-ms-client-name": "writeIops"
         },
         "readIOGiB": {
           "type": "number",
           "format": "float",
-          "description": "The total amount of data in GiB read from disk by all Tasks in the Job."
+          "description": "The total amount of data in GiB read from disk by all Tasks in the Job.",
+          "x-ms-client-name": "readIoGiB"
         },
         "writeIOGiB": {
           "type": "number",
           "format": "float",
-          "description": "The total amount of data in GiB written to disk by all Tasks in the Job."
+          "description": "The total amount of data in GiB written to disk by all Tasks in the Job.",
+          "x-ms-client-name": "writeIoGiB"
         },
         "numSucceededTasks": {
           "type": "string",
@@ -13636,12 +13660,14 @@
         "diskReadIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk read operations across all Compute Nodes in the Pool."
+          "description": "The total number of disk read operations across all Compute Nodes in the Pool.",
+          "x-ms-client-name": "diskReadIops"
         },
         "diskWriteIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk write operations across all Compute Nodes in the Pool."
+          "description": "The total number of disk write operations across all Compute Nodes in the Pool.",
+          "x-ms-client-name": "diskWriteIops"
         },
         "diskReadGiB": {
           "type": "number",
@@ -14591,55 +14617,6 @@
         }
       }
     },
-    "BatchTaskAddCollectionResult": {
-      "type": "object",
-      "description": "The result of adding a collection of Tasks to a Job.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The results of the add Task collection operation.",
-          "items": {
-            "$ref": "#/definitions/BatchTaskAddResult"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "BatchTaskAddResult": {
-      "type": "object",
-      "description": "Result for a single Task added as part of an add Task collection operation.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/BatchTaskAddStatus",
-          "description": "The status of the add Task request."
-        },
-        "taskId": {
-          "type": "string",
-          "description": "The ID of the Task for which this is the result."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "The ETag of the Task, if the Task was successfully added. You can use this to detect whether the Task has changed between requests. In particular, you can be pass the ETag with an Update Task request to specify that your changes should take effect only if nobody else has modified the Job in the meantime."
-        },
-        "lastModified": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last modified time of the Task."
-        },
-        "location": {
-          "type": "string",
-          "description": "The URL of the Task, if the Task was successfully added."
-        },
-        "error": {
-          "$ref": "#/definitions/BatchError",
-          "description": "The error encountered while attempting to add the Task."
-        }
-      },
-      "required": [
-        "status",
-        "taskId"
-      ]
-    },
     "BatchTaskAddStatus": {
       "type": "string",
       "description": "BatchTaskAddStatus enums",
@@ -14917,6 +14894,41 @@
       "required": [
         "id",
         "commandLine"
+      ]
+    },
+    "BatchTaskCreateResult": {
+      "type": "object",
+      "description": "Result for a single Task created as part of an add Task collection operation.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/BatchTaskAddStatus",
+          "description": "The status of the add Task request."
+        },
+        "taskId": {
+          "type": "string",
+          "description": "The ID of the Task for which this is the result."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "The ETag of the Task, if the Task was successfully added. You can use this to detect whether the Task has changed between requests. In particular, you can be pass the ETag with an Update Task request to specify that your changes should take effect only if nobody else has modified the Job in the meantime."
+        },
+        "lastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last modified time of the Task."
+        },
+        "location": {
+          "type": "string",
+          "description": "The URL of the Task, if the Task was successfully added."
+        },
+        "error": {
+          "$ref": "#/definitions/BatchError",
+          "description": "The error encountered while attempting to add the Task."
+        }
+      },
+      "required": [
+        "status",
+        "taskId"
       ]
     },
     "BatchTaskDependencies": {
@@ -15289,22 +15301,26 @@
         "readIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk read operations made by the Task."
+          "description": "The total number of disk read operations made by the Task.",
+          "x-ms-client-name": "readIops"
         },
         "writeIOps": {
           "type": "string",
           "format": "int64",
-          "description": "The total number of disk write operations made by the Task."
+          "description": "The total number of disk write operations made by the Task.",
+          "x-ms-client-name": "writeIops"
         },
         "readIOGiB": {
           "type": "number",
           "format": "float",
-          "description": "The total gibibytes read from disk by the Task."
+          "description": "The total gibibytes read from disk by the Task.",
+          "x-ms-client-name": "readIoGiB"
         },
         "writeIOGiB": {
           "type": "number",
           "format": "float",
-          "description": "The total gibibytes written to disk by the Task."
+          "description": "The total gibibytes written to disk by the Task.",
+          "x-ms-client-name": "writeIoGiB"
         },
         "waitTime": {
           "type": "string",
@@ -15962,23 +15978,6 @@
         "contentLength"
       ]
     },
-    "HttpHeader": {
-      "type": "object",
-      "description": "An HTTP header name-value pair",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The case-insensitive name of the header to be used while uploading output files."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the header to be used while uploading output files."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
     "ImageReference": {
       "type": "object",
       "description": "A reference to an Azure Virtual Machines Marketplace Image or a Azure Compute Gallery Image.\nTo get the list of all Azure Marketplace Image references verified by Azure Batch, see the\n' List Supported Images ' operation.",
@@ -16263,7 +16262,7 @@
           "description": "The storage account type for managed disk."
         },
         "securityProfile": {
-          "$ref": "#/definitions/VMDiskSecurityProfile",
+          "$ref": "#/definitions/VmDiskSecurityProfile",
           "description": "Specifies the security profile settings for the managed disk."
         }
       }
@@ -16358,7 +16357,8 @@
         },
         "dynamicVNetAssignmentScope": {
           "$ref": "#/definitions/DynamicVNetAssignmentScope",
-          "description": "The scope of dynamic vnet assignment."
+          "description": "The scope of dynamic vnet assignment.",
+          "x-ms-client-name": "dynamicVnetAssignmentScope"
         },
         "endpointConfiguration": {
           "$ref": "#/definitions/BatchPoolEndpointConfiguration",
@@ -16385,7 +16385,8 @@
         },
         "dynamicVNetAssignmentScope": {
           "$ref": "#/definitions/DynamicVNetAssignmentScope",
-          "description": "The scope of dynamic vnet assignment."
+          "description": "The scope of dynamic vnet assignment.",
+          "x-ms-client-name": "dynamicVnetAssignmentScope"
         },
         "endpointConfiguration": {
           "$ref": "#/definitions/BatchPoolEndpointConfigurationUpdate",
@@ -16621,7 +16622,7 @@
           "type": "array",
           "description": "A list of name-value pairs for headers to be used in uploading output files. These headers will be specified when uploading files to Azure Storage. Official document on allowed headers when uploading blobs: https://learn.microsoft.com/rest/api/storageservices/put-blob#request-headers-all-blob-types.",
           "items": {
-            "$ref": "#/definitions/HttpHeader"
+            "$ref": "#/definitions/OutputFileUploadHeader"
           },
           "x-ms-identifiers": []
         }
@@ -16681,6 +16682,23 @@
       },
       "required": [
         "uploadCondition"
+      ]
+    },
+    "OutputFileUploadHeader": {
+      "type": "object",
+      "description": "An HTTP header name-value pair",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The case-insensitive name of the header to be used while uploading output files."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to be used while uploading output files."
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "PublicIpAddressConfiguration": {
@@ -17206,16 +17224,6 @@
         }
       }
     },
-    "VMDiskSecurityProfile": {
-      "type": "object",
-      "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.",
-      "properties": {
-        "securityEncryptionType": {
-          "$ref": "#/definitions/SecurityEncryptionTypes",
-          "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs."
-        }
-      }
-    },
     "VMExtension": {
       "type": "object",
       "description": "The configuration for virtual machine extensions.",
@@ -17349,7 +17357,8 @@
         },
         "osDisk": {
           "$ref": "#/definitions/OSDisk",
-          "description": "Settings for the operating system disk of the Virtual Machine."
+          "description": "Settings for the operating system disk of the Virtual Machine.",
+          "x-ms-client-name": "OsDisk"
         },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
@@ -17416,7 +17425,8 @@
         },
         "osDisk": {
           "$ref": "#/definitions/OSDisk",
-          "description": "Settings for the operating system disk of the Virtual Machine."
+          "description": "Settings for the operating system disk of the Virtual Machine.",
+          "x-ms-client-name": "OsDisk"
         },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfileUpdate",
@@ -17439,6 +17449,16 @@
         "scaleSetVmResourceId": {
           "type": "string",
           "description": "The resource ID of the Compute Node's current Virtual Machine Scale Set VM. Only defined if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'."
+        }
+      }
+    },
+    "VmDiskSecurityProfile": {
+      "type": "object",
+      "description": "Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and required when using Confidential VMs.",
+      "properties": {
+        "securityEncryptionType": {
+          "$ref": "#/definitions/SecurityEncryptionTypes",
+          "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and is required when using Confidential VMs."
         }
       }
     },
