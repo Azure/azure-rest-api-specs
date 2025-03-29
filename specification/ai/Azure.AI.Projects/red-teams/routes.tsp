@@ -13,11 +13,11 @@ using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
-alias ServiceTraits = SupportsClientRequestId &
+alias RedTeamServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
   NoConditionalRequests; // NoRetryRequests supresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
 
-alias RedTeamOperations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias RedTeamOperations = Azure.Core.ResourceOperations<RedTeamServiceTraits>;
 
 @route("red-teams")
 interface RedTeams {
