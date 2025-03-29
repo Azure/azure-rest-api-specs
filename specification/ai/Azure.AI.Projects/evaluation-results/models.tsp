@@ -39,8 +39,7 @@ model EvaluationResult {
   Metrics?: Record<float64>;
 
   @doc("Blob URI")
-  @extension("x-ms-blob-reference", true)
-  BlobUri: string;
+  BlobUri?: string;
 
   ...AssetBase;
 }
