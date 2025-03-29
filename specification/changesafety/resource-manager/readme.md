@@ -31,12 +31,6 @@ tag: package-2025-03-01-preview
 openapi-subtype: providerHub
 ```
 
-```yaml
-openapi-type: arm
-tag: package-2025-01-15-preview
-openapi-subtype: providerHub
-```
-
 ### Tag: package-2024-10-01-preview
 
 These settings apply only when `--tag=package-2024-10-01-preview` is specified on the command line.
@@ -63,6 +57,7 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
   - Microsoft.ChangeSafety/ChangeControl/preview/2025-03-01-preview/ChangeControl.json
+  - Microsoft.ChangeSafety/validation/preview/2025-01-15-preview/validation.json
 ```
 
 ---
