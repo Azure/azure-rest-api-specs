@@ -357,12 +357,15 @@ union ArmOperation {
   @doc("DELETE ARM Operation.")
   DELETE: "DELETE",
 
+  @added(Versions.v2025_03_01_preview)
   @doc("PUT ARM Operation.")
   PUT: "PUT",
 
+  @added(Versions.v2025_03_01_preview)
   @doc("POST ARM Operation.")
   POST: "POST",
 
+  @added(Versions.v2025_03_01_preview)
   @doc("PATCH ARM Operation.")
   PATCH: "PATCH",
 }
