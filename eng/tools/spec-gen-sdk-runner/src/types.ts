@@ -11,6 +11,7 @@ export interface SpecGenSdkCmdInput {
   sdkRepoName: string;
   apiVersion?: string;
   prNumber?: string;
+  sdkReleaseType?: string;
   specCommitSha: string;
   specRepoHttpsUrl: string;
   headRepoHttpsUrl?: string;
