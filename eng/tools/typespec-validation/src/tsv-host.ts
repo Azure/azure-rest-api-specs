@@ -1,3 +1,4 @@
+import { Options as GlobbyOptions } from "globby";
 import { Suppression } from "suppressions";
 import { RuleResult } from "./rule-result.js";
 
@@ -9,7 +10,7 @@ export interface TsvHost {
   runCmd(cmd: string, cwd?: string): Promise<[Error | null, string, string]>;
   normalizePath(folder: string): string;
   gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult>;
-  globby(patterns: string[]): Promise<string[]>;
+  globby(patterns: string | string[], options?: GlobbyOptions): Promise<string[]>;
   getSuppressions(path: string): Promise<Suppression[]>;
 }
 
