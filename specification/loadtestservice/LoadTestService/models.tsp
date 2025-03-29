@@ -332,8 +332,20 @@ union TestKind {
 @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
 union CreatedByType {
   string,
-  @doc("Entity was created by a user.") "User",
-  @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
+  
+  @doc("Entity was created by a user.")
+  "User",
+
+  @doc("Entity was created by a scheduled trigger.")
+  "ScheduledTrigger",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by Azure DevOps pipelines.")
+  "AzurePipelines",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by GitHub Workflows.")
+  "GitHubWorkflows"
 }
 
 @doc("Test file info.")
@@ -579,7 +591,16 @@ model RegionalConfiguration {
   @doc("""
       The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
     """)
-  engineInstances: int32;
+  @madeOptional(APIVersions.v2025_03_01_preview)
+  engineInstances?: int32;
+
+  @doc("""
+      The percentage of load to be distributed in specified region. Supported values are in range of 1-99.
+    """)
+  @added(APIVersions.v2025_03_01_preview)
+  @minValue(1)
+  @maxValue(99)
+  loadPercentage?: int32;
 
   @doc("""
     Azure region name.
@@ -893,6 +914,11 @@ model TestRun {
   @added(APIVersions.v2024_07_01_preview)
   @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
   createdByType?: CreatedByType;
+
+  @visibility("read")
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("The URI pointing to the entity that created the test run.")
+  createdByUri?: url;
 
   ...SystemMetaData;
 }
