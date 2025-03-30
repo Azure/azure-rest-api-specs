@@ -304,6 +304,20 @@ interface Runs {
   getRun is AgentOperations.ResourceRead<Run>;
 
   /**
+   * Creates and fully executes the run in one go, returning the final Run once it's done.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @post
+  @route("/runs/execute")
+  @doc("Creates and waits for a run to finish, returning the completed Run (including its outputs).")
+  createAndExecuteRun is Azure.Core.Foundations.Operation<
+    {
+      ...RunInputs;
+    },
+    Run
+  >;
+
+  /**
    * Create and stream run.
    * @route("/run/stream")
    */
@@ -316,9 +330,10 @@ interface Runs {
   >;
 
   /**
-   * Lists run inputs.
-   * @route("/run/{run_id}")
+   * Lists all runs (including their inputs and outputs).
+   * @route("/runs")
    */
   @get
-  listRunInputs is AgentOperations.ResourceList<RunInputs>;
+  @doc("Lists all run records, each containing runInputs and runOutputs.")
+  listRuns is AgentOperations.ResourceList<Run>;
 }
