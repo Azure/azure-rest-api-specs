@@ -3567,6 +3567,7 @@
     },
     "DeploymentType": {
       "type": "string",
+      "description": "Represents the type of the deployment. Known literal is 'ModelDeployment'",
       "enum": [
         "ModelDeployment"
       ],
@@ -3991,6 +3992,7 @@
     },
     "IndexType": {
       "type": "string",
+      "description": "Enumerates known index types, but also allows any custom string fallback.",
       "enum": [
         "AzureSearch",
         "CosmosDBNoSqlVectorStore",
@@ -4858,18 +4860,8 @@
       "description": "Fields describing the final run outcome, including status, output messages, and usage.",
       "properties": {
         "status": {
-          "type": "string",
-          "description": "Final status of the run request.",
-          "enum": [
-            "inProgress",
-            "incomplete",
-            "cancelled",
-            "failed",
-            "completed"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RunOutputsStatus",
+          "description": "Final status of the run request. Known values: 'inProgress', 'incomplete', 'cancelled', 'failed', 'completed' — or custom string."
         },
         "messages": {
           "type": "array",
@@ -4901,6 +4893,48 @@
         "messages",
         "usage"
       ]
+    },
+    "RunOutputsStatus": {
+      "type": "string",
+      "description": "Known status values for a run, plus a fallback string for unrecognized statuses.",
+      "enum": [
+        "inProgress",
+        "incomplete",
+        "cancelled",
+        "failed",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "RunOutputsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inProgress",
+            "value": "inProgress",
+            "description": "The run is ongoing."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "The run did not produce a complete output."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "The run was canceled."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The run failed."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "The run completed successfully."
+          }
+        ]
+      }
     },
     "RunUpdate": {
       "type": "object",
@@ -5287,8 +5321,8 @@
       "description": "Describes how to truncate messages if they exceed model or provider limits.",
       "properties": {
         "type": {
-          "type": "string",
-          "description": "The type of truncation strategy to apply. Can be 'auto', or 'lastMessages'"
+          "$ref": "#/definitions/TruncationStrategyType",
+          "description": "The type of truncation strategy to apply. Known values: 'auto', 'lastMessages', or a custom string."
         },
         "lastMessages": {
           "type": "integer",
@@ -5299,6 +5333,30 @@
       "required": [
         "type"
       ]
+    },
+    "TruncationStrategyType": {
+      "type": "string",
+      "description": "Enumerates known truncation strategy types, but also allows any custom fallback string.",
+      "enum": [
+        "auto",
+        "lastMessages"
+      ],
+      "x-ms-enum": {
+        "name": "TruncationStrategyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Automatically truncate messages to fit limits."
+          },
+          {
+            "name": "lastMessages",
+            "value": "lastMessages",
+            "description": "Truncate older messages, keeping only the last few."
+          }
+        ]
+      }
     },
     "UserMessage": {
       "type": "object",
