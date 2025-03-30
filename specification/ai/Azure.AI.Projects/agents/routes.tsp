@@ -33,7 +33,7 @@ alias AgentOperations = Azure.Core.ResourceOperations<ServiceTraits>;
  * The interface is rooted at /messages.
  * Each standard resource operation will produce REST endpoints
  * like GET /messages/{name}, POST /messages, etc.
- * The "name" or "id" parameter is inferred from Azure Core’s naming patterns
+ * The "name" or "id" parameter is inferred from Azure Core's naming patterns
  * for resource operations.
  */
 interface Messages {
