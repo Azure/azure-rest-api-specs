@@ -3403,6 +3403,7 @@
       "description": "The state of the Gate.",
       "enum": [
         "Pending",
+        "Skipped",
         "Completed"
       ],
       "x-ms-enum": {
@@ -3413,6 +3414,11 @@
             "name": "Pending",
             "value": "Pending",
             "description": "A Pending Gate will continue to block the staged rollout process it is controlling."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "A Skipped Gate means that the staged rollout process it is controlling was skipped."
           },
           {
             "name": "Completed",

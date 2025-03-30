@@ -45,6 +45,9 @@ union GateState {
   @doc("A Pending Gate will continue to block the staged rollout process it is controlling.")
   Pending: "Pending",
 
+  @doc("A Skipped Gate means that the staged rollout process it is controlling was skipped.")
+  Skipped: "Skipped",
+
   @doc("An Completed Gate allows the staged rollout process to continue.")
   Completed: "Completed",
 }
