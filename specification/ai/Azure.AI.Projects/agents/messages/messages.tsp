@@ -69,7 +69,7 @@ model TextContent extends AIContent {
   /**
    * A list of annotations in the text content.
    */
-  annotations: Annotations[];
+  annotations?: Annotations[];
 }
 
 /**
@@ -307,7 +307,7 @@ model ChatMessage {
    * The role of this message's author.
    */
   @doc("The role of this message's author.")
-  role: AuthorRole;
+  role?: AuthorRole = "user";
 
   /**
    * The contents of the message.

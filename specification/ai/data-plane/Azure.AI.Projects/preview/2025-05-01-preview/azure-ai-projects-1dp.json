@@ -3054,8 +3054,42 @@
           "readOnly": true
         },
         "role": {
-          "$ref": "#/definitions/AuthorRole",
-          "description": "The role of this message's author."
+          "type": "string",
+          "description": "The role of this message's author.",
+          "default": "user",
+          "enum": [
+            "user",
+            "agent",
+            "system",
+            "tool",
+            "developer"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorRole",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "user",
+                "value": "user"
+              },
+              {
+                "name": "agent",
+                "value": "agent"
+              },
+              {
+                "name": "system",
+                "value": "system"
+              },
+              {
+                "name": "tool",
+                "value": "tool"
+              },
+              {
+                "name": "developer",
+                "value": "developer"
+              }
+            ]
+          }
         },
         "content": {
           "type": "array",
@@ -5080,8 +5114,7 @@
         }
       },
       "required": [
-        "text",
-        "annotations"
+        "text"
       ],
       "allOf": [
         {
