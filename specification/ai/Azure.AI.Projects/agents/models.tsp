@@ -81,10 +81,10 @@ alias AgentCompletionProperties = {
    * Instructions (e.g., system messages) that are provided to guide how this agent operates.
    */
   @doc("Instructions provided to guide how this agent operates.")
-  instructions?: ChatMessage[];
+  instructions?: DeveloperMessage[];
 
   // TODO: Add when supported
-  //closingInstructions?: ChatMessage[];
+  //closingInstructions?: DeveloperMessage[];
 
   /**
    * A list of tool definitions available to the agent.
