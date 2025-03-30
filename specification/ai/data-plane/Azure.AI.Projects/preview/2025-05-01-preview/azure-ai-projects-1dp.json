@@ -2424,16 +2424,12 @@
           "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
         },
         "agentModel": {
-          "$ref": "#/definitions/AgentModel",
+          "$ref": "#/definitions/AgentModelInput",
           "description": "The model definition for this agent."
         },
         "instructions": {
-          "type": "array",
-          "description": "Instructions provided to guide how this agent operates.",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
+          "$ref": "#/definitions/ChatMessageInput",
+          "description": "Instructions provided to guide how this agent operates."
         },
         "tools": {
           "type": "array",
@@ -2500,6 +2496,7 @@
         "provider"
       ]
     },
+    "AgentModelInput": {},
     "AgentOptions": {
       "type": "object",
       "description": "Options used when creating or updating an Agent.",
@@ -2509,16 +2506,12 @@
           "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
         },
         "agentModel": {
-          "$ref": "#/definitions/AgentModel",
+          "$ref": "#/definitions/AgentModelInput",
           "description": "The model definition for this agent."
         },
         "instructions": {
-          "type": "array",
-          "description": "Instructions provided to guide how this agent operates.",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
+          "$ref": "#/definitions/ChatMessageInput",
+          "description": "Instructions provided to guide how this agent operates."
         },
         "tools": {
           "type": "array",
@@ -3099,6 +3092,7 @@
         "content"
       ]
     },
+    "ChatMessageInput": {},
     "ChatMessageUpdate": {
       "type": "object",
       "description": "Streaming update for a chat message.",

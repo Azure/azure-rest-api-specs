@@ -75,16 +75,16 @@ alias AgentCompletionProperties = {
    * The model definition for this agent.
    */
   @doc("The model definition for this agent.")
-  agentModel: AgentModel;
+  agentModel: AgentModelInput;
 
   /**
    * Instructions (e.g., system messages) that are provided to guide how this agent operates.
    */
   @doc("Instructions provided to guide how this agent operates.")
-  instructions?: ChatMessage[];
+  instructions?: ChatMessageInput;
 
   // TODO: Add when supported
-  //closingInstructions?: ChatMessage[];
+  //closingInstructions?: ChatMessageInput;
 
   /**
    * A list of tool definitions available to the agent.
@@ -165,6 +165,24 @@ model AgentModel {
    */
   @doc("Provider-specific configuration and options (JSON-like structure).")
   options?: JSONAny;
+}
+
+/**
+ * Union that allows specifying the agent model as either a simple string (ID)
+ * or the full AgentModel structure.
+ */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "We intentionally use a union for OAS 3."
+@doc("Allows you to specify the agent model as either a string or a full AgentModel object.")
+union AgentModelInput {
+  /**
+   * Provide just a string representing your model or deployment ID.
+   */
+  simpleId: string,
+
+  /**
+   * Provide a full AgentModel object with provider, endpoint, etc.
+   */
+  fullModel: AgentModel,
 }
 
 /**
