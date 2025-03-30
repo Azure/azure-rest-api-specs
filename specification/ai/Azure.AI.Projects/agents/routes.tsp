@@ -285,14 +285,16 @@ interface Agents {
  * and instance-level actions (complete, stream).
  */
 interface Runs {
-  /**
-   * Creates a run.
-   * @route("/run")
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  createRun is AgentOperations.ResourceCreateWithServiceProvidedName<{
-    ...RunInputs;
-  }>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @post
+  @route("/runs")
+  @doc("Creates a new run.")
+  createRun is Azure.Core.Foundations.Operation<
+    {
+      ...RunInputs;
+    },
+    Run
+  >;
 
   /**
    * Retrieves an existing run by its ID.

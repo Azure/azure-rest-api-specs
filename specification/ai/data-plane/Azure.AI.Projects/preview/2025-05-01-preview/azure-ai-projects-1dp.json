@@ -1723,21 +1723,19 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
+      }
+    },
+    "/runs": {
       "post": {
         "operationId": "Runs_CreateRun",
-        "description": "Creates a run.",
+        "description": "Creates a new run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RunInputs"
@@ -1745,19 +1743,10 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of "
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
             }
           },
           "default": {
