@@ -22,8 +22,8 @@ model TruncationStrategy {
   /**
    * The type of truncation strategy to apply.
    */
-  @doc("The type of truncation strategy to apply.")
-  type: "auto" | "lastMessages" | string;
+  @doc("The type of truncation strategy to apply. Can be 'auto', or 'lastMessages'")
+  type: string;
 
   /**
    * The number of most recent messages to retain when using 'lastMessages' strategy.
