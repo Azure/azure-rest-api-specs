@@ -345,7 +345,7 @@ model UserMessage extends ChatMessage {
 
   /**
    * The contents of a user message, expressed as a single array of possible content types.
-   * This avoids the \"union of arrays\" issue in OpenAPI v2.
+   * This avoids the "union of arrays" issue in OpenAPI v2.
    */
   @doc("The contents of the user message.")
   content: (
@@ -444,22 +444,4 @@ model Thread {
    */
   @doc("A list of messages in this thread.")
   messages: ChatMessage[];
-}
-
-/**
- * Union that allows specifying chat instructions as either a single text string
- * or a list of ChatMessage objects.
- */
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "We intentionally use a union for OAS 3."
-@doc("Allows you to provide instructions as either a single text string or a list of ChatMessage objects.")
-union ChatMessageInput {
-  /**
-   * A simple text instruction or message content.
-   */
-  text: string,
-
-  /**
-   * A list of ChatMessage-based objects, each describing a message with a role and contents.
-   */
-  messages: ChatMessage[],
 }
