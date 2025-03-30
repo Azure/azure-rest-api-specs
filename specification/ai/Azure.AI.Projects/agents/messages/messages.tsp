@@ -304,7 +304,7 @@ model ChatMessage {
   threadId: string;
 
   /**
-   * The role of this message's author.
+   * The role of this message's author, defaults to `user`.
    */
   @doc("The role of this message's author.")
   role?: AuthorRole = "user";
