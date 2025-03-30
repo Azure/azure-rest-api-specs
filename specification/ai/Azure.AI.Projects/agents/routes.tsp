@@ -16,7 +16,7 @@ using Streams;
 namespace Azure.AI.Projects;
 
 /**
- * A "no-op" model to represent an empty request, because Operation<TRequest, TResponse>
+ * A "no-op" model to represent an empty request, because Operation&lt;TRequest, TResponse&gt;
  * requires a Model (or union) for the first parameter.
  */
 model NoRequest {}
