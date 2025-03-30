@@ -230,9 +230,9 @@ union RunOutputsStatus {
 model RunOutputs {
   /**
    * Final status of the run request.
-   * Known values: 'inProgress', 'incomplete', 'cancelled', 'failed', 'completed' — or any custom string.
+   * Known values: 'inProgress', 'incomplete', 'cancelled', 'failed', 'completed' - or any custom string.
    */
-  @doc("Final status of the run request. Known values: 'inProgress', 'incomplete', 'cancelled', 'failed', 'completed' — or custom string.")
+  @doc("Final status of the run request. Known values: 'inProgress', 'incomplete', 'cancelled', 'failed', 'completed' - or custom string.")
   status: RunOutputsStatus;
 
   /**
