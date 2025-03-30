@@ -48,12 +48,10 @@ model MetricAlertsPropertiesBase {
   @doc("The actions to take when the alert fires")
   actions?: MetricAlertRuleAction[];
 
-  @doc("Custom properties for the alert")
-  @minProperties(1)
+  @doc("Custom properties for the alert. When provided, must contain at least one property.")
   customProperties?: Record<string>;
 
-  @doc("Properties to customize alert actions")
-  @minProperties(1)
+  @doc("Properties to customize alert actions. When provided, must contain at least one property.")
   actionProperties?: Record<string>;
 }
 
@@ -126,7 +124,11 @@ model QueryProperties extends MetricAlertProperties {
 
 @doc("Metric alert resource")
 @resource("metricAlerts")
-model MetricAlertResource extends ARM.Resource {
+model MetricAlertResource extends Azure.ResourceManager.Foundations.Resource {
+  @key
+  @segment("metricAlerts")
+  name: string;
+  
   @doc("The properties of the metric alert")
   properties: MetricProperties | QueryProperties;
 }
