@@ -40,6 +40,16 @@ options:
     package-dir: "azure-resourcemanager-containerorchestratorruntime"
     service-name: "Container Orchestrator Runtime"
     flavor: "azure"
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/containerorchestratorruntime"
+    package-dir: "armcontainerorchestratorruntime"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 
 linter:
   extends:
