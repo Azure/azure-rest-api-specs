@@ -613,8 +613,6 @@ namespace Storage.Blob {
         @header("Content-Type")
         contentType: "application/octet-stream";
 
-        ...RequestIdResponseHeader;
-        ...ClientRequestIdHeader;
         ...MetadataHeaders;
         ...ObjectReplicationHeaders;
         ...LastModifiedResponseHeader;
@@ -660,8 +658,6 @@ namespace Storage.Blob {
         @header("Content-Type")
         contentType: "application/octet-stream";
 
-        ...RequestIdResponseHeader;
-        ...ClientRequestIdHeader;
         ...MetadataHeaders;
         ...ObjectReplicationHeaders;
         ...LastModifiedResponseHeader;
@@ -690,7 +686,6 @@ namespace Storage.Blob {
         ...VersionIdResponseHeader;
         ...IsCurrentVersionResponseHeader;
         ...AcceptRangesResponseHeader;
-        ...DateResponseHeader;
         ...BlobCommittedBlockCountResponseHeader;
         ...IsServerEncryptedResponseHeader;
         ...EncryptionKeySha256ResponseHeader;
