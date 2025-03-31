@@ -102,7 +102,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -164,7 +164,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -175,6 +175,58 @@
         "x-ms-examples": {
           "Get countries": {
             "$ref": "./examples/GetCountries.json"
+          }
+        }
+      }
+    },
+    "/availablePhoneNumbers/countries/{countryCode}/:browse": {
+      "post": {
+        "tags": [
+          "Browse, reserve and purchase available phone numbers"
+        ],
+        "summary": "Browses for available phone numbers to purchase.",
+        "description": "Browses for available phone numbers to purchase. The response will be a randomized list of phone numbers available to purchase matching the browsing criteria. This operation is not paginated. Since the results are randomized, repeating the same request will not guarantee the same results.",
+        "operationId": "PhoneNumbers_BrowseAvailableNumbers",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CountryCodeParameter"
+          },
+          {
+            "in": "body",
+            "name": "phoneNumbersBrowseRequest",
+            "description": "An object defining the criteria to browse for available phone numbers.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersBrowseRequest"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A randomized list of phone numbers available to purchase matching the browsing criteria.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersBrowseResult"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Browse available phone numbers": {
+            "$ref": "./examples/BrowseAvailablePhoneNumbers.json"
           }
         }
       }
@@ -254,7 +306,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -352,7 +404,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -363,6 +415,241 @@
         "x-ms-examples": {
           "Get PhoneNumber Search Result": {
             "$ref": "./examples/GetOfferings.json"
+          }
+        }
+      }
+    },
+    "/availablePhoneNumbers/reservations": {
+      "get": {
+        "tags": [
+          "Browse, reserve and purchase available phone numbers"
+        ],
+        "summary": "Lists all reservations.",
+        "description": "Retrieves a paginated list of all phone number reservations. Note that the reservations will not be populated with the phone numbers associated with them.",
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "PhoneNumbers_ListReservations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxPageSizeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of Phone Number Reservations, and an optional link to the next page of results.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersReservations"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "reservations"
+        },
+        "x-ms-examples": {
+          "Get reservations": {
+            "$ref": "./examples/GetReservations.json"
+          }
+        }
+      }
+    },
+    "/availablePhoneNumbers/reservations/{reservationId}": {
+      "patch": {
+        "tags": [
+          "Browse, reserve and purchase available phone numbers"
+        ],
+        "summary": "Creates or updates a reservation by its ID.",
+        "description": "Adds and removes phone numbers from the reservation with the given ID. The response will be the updated state of the reservation. Phone numbers can be reserved by including them in the payload. If a number is already in the reservation, it will be ignored. To remove a phone number, set it explicitly to null in the request payload. This operation is idempotent. If a reservation with the same ID already exists, it will be updated, otherwise a new one is created. Only reservations with 'active' status can be updated. Updating a reservation will extend the expiration time of the reservation to 15 minutes after the last change, up to a maximum of 2 hours from creation time. Partial success is possible, in which case the response will have a 207 status code.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "PhoneNumbers_CreateOrUpdateReservation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Reservation successfully created.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersReservation"
+            }
+          },
+          "200": {
+            "description": "Reservation successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersReservation"
+            }
+          },
+          "207": {
+            "description": "Reservation operation partially succeeded. This can happen when the operation (create or update) is processed successfully, but it failed for at least one of the phone numbers in the request.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersReservation"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update reservation": {
+            "$ref": "./examples/CreateOrUpdateReservation.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Browse, reserve and purchase available phone numbers"
+        ],
+        "summary": "Gets a reservation by its ID.",
+        "description": "Retrieves the reservation with the given ID, including all of the phone numbers associated with it.",
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "PhoneNumbers_GetReservation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the reservation.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersReservation"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get reservation": {
+            "$ref": "./examples/GetReservation.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Browse, reserve and purchase available phone numbers"
+        ],
+        "summary": "Deletes a reservation by its ID.",
+        "description": "Deletes the reservation with the given ID. Any phone number in the reservation will be released and made available for others to purchase. Only reservations with 'active' status can be deleted.",
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "PhoneNumbers_DeleteReservation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Reservation successfully deleted."
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete reservation": {
+            "$ref": "./examples/DeleteReservation.json"
+          }
+        }
+      }
+    },
+    "/availablePhoneNumbers/reservations/{reservationId}/:purchase": {
+      "post": {
+        "tags": [
+          "Browse, reserve and purchase available phone numbers"
+        ],
+        "summary": "Starts the purchase of all phone numbers in the reservation.",
+        "description": "Starts a long running operation to purchase all of the phone numbers in the reservation. Purchase can only be started for active reservations that at least one phone number. If any of the phone numbers in the reservation is from a country where reselling is not permitted, do not resell agreement is required. The response will include an 'Operation-Location' header that can be used to query the status of the operation.",
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "PhoneNumbers_PurchaseReservation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "in": "body",
+            "name": "reservationPurchaseRequest",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PhoneNumbersReservationPurchaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in 'Operation-Location' header.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "reservation-purchase-id": {
+                "description": "The reservation purchase operation id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Start reservation purchase": {
+            "$ref": "./examples/PurchaseReservation.json"
           }
         }
       }
@@ -429,7 +716,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -476,7 +763,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -532,7 +819,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -585,7 +872,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -620,7 +907,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -695,7 +982,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -742,7 +1029,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -791,7 +1078,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -847,7 +1134,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -899,7 +1186,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -1305,7 +1592,8 @@
             "purchase",
             "releasePhoneNumber",
             "search",
-            "updatePhoneNumberCapabilities"
+            "updatePhoneNumberCapabilities",
+            "reservationPurchase"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1358,6 +1646,10 @@
         "searchId": {
           "description": "The search id.",
           "type": "string"
+        },
+        "agreeToNotResell": {
+          "description": "The agreement to not resell the phone numbers. Defaults to false if not provided.",
+          "type": "boolean"
         }
       }
     },
@@ -1371,7 +1663,7 @@
       "type": "object",
       "properties": {
         "phoneNumberType": {
-          "description": "The type of phone numbers to search for, e.g. geographic, tollFree, or mobile.",
+          "description": "The type of phone numbers to search for, e.g. geographic, or tollFree, mobile.",
           "enum": [
             "geographic",
             "tollFree",
@@ -1471,6 +1763,10 @@
           "format": "date-time",
           "description": "The date that this search result expires and phone numbers are no longer on hold. A search result expires in less than 15min, e.g. 2020-11-19T16:31:49.048Z.",
           "type": "string"
+        },
+        "isAgreementToNotResellRequired": {
+          "description": "Indicates if do not resell agreement is required. If true, the phone numbers cannot be acquired unless the customer provides explicit agreement to not resell them.",
+          "type": "boolean"
         },
         "errorCode": {
           "format": "int32",
@@ -1589,6 +1885,291 @@
           "type": "string"
         }
       }
+    },
+    "PhoneNumbersBrowseRequest": {
+      "description": "The parameters for the browse operation.",
+      "required": [
+        "phoneNumberType"
+      ],
+      "type": "object",
+      "properties": {
+        "phoneNumberType": {
+          "description": "Represents the number type of the offering.",
+          "enum": [
+            "geographic",
+            "tollFree"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberType",
+            "modelAsString": true
+          }
+        },
+        "capabilities": {
+          "$ref": "#/definitions/PhoneNumberBrowseCapabilitiesRequest"
+        },
+        "assignmentType": {
+          "description": "Represents the assignment type of the offering. Also known as the use case.",
+          "enum": [
+            "person",
+            "application"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberAssignmentType",
+            "modelAsString": true
+          }
+        },
+        "phoneNumberPrefixes": {
+          "description": "The phone number prefix to match. If specified, the search will be limited to phone numbers that start with the any of the given prefixes.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "1425",
+            "1626"
+          ]
+        }
+      }
+    },
+    "PhoneNumberBrowseCapabilitiesRequest": {
+      "description": "The minimum desired capabilities for the browse operation request.",
+      "type": "object",
+      "properties": {
+        "calling": {
+          "description": "Capability value for calling.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        },
+        "sms": {
+          "description": "Capability value for SMS.",
+          "enum": [
+            "none",
+            "inbound",
+            "outbound",
+            "inbound+outbound"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberCapabilityType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PhoneNumbersBrowseResult": {
+      "required": [
+        "phoneNumbers"
+      ],
+      "type": "object",
+      "description": "The result of a phone number browse operation.",
+      "properties": {
+        "phoneNumbers": {
+          "description": "The phone numbers that are available for purchase.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailablePhoneNumber"
+          }
+        }
+      }
+    },
+    "AvailablePhoneNumber": {
+      "required": [
+        "countryCode",
+        "capabilities",
+        "phoneNumberType",
+        "assignmentType"
+      ],
+      "type": "object",
+      "description": "Represents a phone number available in inventory",
+      "properties": {
+        "id": {
+          "description": "The id of the phone number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCode": {
+          "description": "The ISO 3166-2 country code, e.g. US.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "The phone number in E.164 format, e.g. +11234567890.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capabilities": {
+          "$ref": "#/definitions/PhoneNumberCapabilities"
+        },
+        "phoneNumberType": {
+          "description": "Represents the number type of the offering.",
+          "enum": [
+            "geographic",
+            "tollFree"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberType",
+            "modelAsString": true
+          }
+        },
+        "assignmentType": {
+          "description": "Represents the assignment type of the offering. Also known as the use case.",
+          "enum": [
+            "person",
+            "application"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberAssignmentType",
+            "modelAsString": true
+          }
+        },
+        "cost": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The incurred cost for this phone number.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PhoneNumberCost"
+            }
+          ]
+        },
+        "status": {
+          "readOnly": true,
+          "description": "Represents the status of the phone number. Possible values include: 'available', 'reserved', 'expired', 'error', 'purchased'.",
+          "type": "string",
+          "enum": [
+            "available",
+            "reserved",
+            "expired",
+            "error",
+            "purchased"
+          ],
+          "x-ms-enum": {
+            "name": "AvailablePhoneNumberStatus",
+            "modelAsString": true
+          }
+        },
+        "isAgreementToNotResellRequired": {
+          "description": "Indicates if do not resell agreement is required. If true, the phone number cannot be acquired unless the customer provides explicit agreement to not resell it.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/AvailablePhoneNumberError"
+        }
+      }
+    },
+    "AvailablePhoneNumberError": {
+      "readOnly": true,
+      "type": "object",
+      "description": "Contains error details in case of failure when reserving, releasing or purchasing the phone number. Note that this is ignored by the service when present in requests.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code indicating the reason why the operation performed on the phone number failed."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message describing the failure that occurred."
+        }
+      }
+    },
+    "PhoneNumbersReservations": {
+      "required": [
+        "reservations"
+      ],
+      "type": "object",
+      "description": "Represents a list of phone numbers reservations. Note that the phone numbers from each reservation are not included.",
+      "properties": {
+        "reservations": {
+          "description": "Represents a list of phone numbers reservations. Note that the phone numbers from each reservation are not included.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhoneNumbersReservation"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page of phone number results.",
+          "type": "string"
+        }
+      }
+    },
+    "PhoneNumbersReservation": {
+      "type": "object",
+      "description": "Represents a reservation for phone numbers. A reservation is a temporary hold on phone numbers that can later be purchased. The reservation has a limited lifetime after which the phone numbers are released if not purchased. Reservations older than 1 month are automatically deleted.",
+      "properties": {
+        "id": {
+          "description": "The id of the reservation.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "description": "The time at which the reservation will expire. If a reservation is not purchased before this time, all of the reserved phone numbers will be released and made available for others to purchase.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "phoneNumbers": {
+          "type": "object",
+          "description": "A dictionary containing the reservation phone numbers. The key is the ID of the phone number (digits only) and values are AvailablePhoneNumber objects. Not populated when retrieving PhoneNumbersReservation collections.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AvailablePhoneNumber",
+            "x-nullable": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Represents the status of the reservation. Possible values include: 'active', 'submitted', 'completed', 'expired'.",
+          "readOnly": true,
+          "enum": [
+            "active",
+            "submitted",
+            "completed",
+            "expired"
+          ],
+          "x-ms-enum": {
+            "name": "ReservationStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PhoneNumbersReservationPurchaseRequest": {
+      "description": "The phone number search purchase request.",
+      "type": "object",
+      "properties": {
+        "agreeToNotResell": {
+          "description": "The agreement to not resell the phone numbers. Defaults to false if not provided.",
+          "type": "boolean"
+        }
+      }
+    },
+    "CommunicationErrorResponse": {
+      "description": "The Communication Services error.",
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "description": "The Communication Services error.",
+          "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
+        }
+      }
     }
   },
   "parameters": {
@@ -1609,6 +2190,42 @@
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client",
       "format": "url"
+    },
+    "CountryCodeParameter": {
+      "in": "path",
+      "name": "countryCode",
+      "description": "The ISO 3166-2 country code, e.g. US.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MaxPageSizeParameter": {
+      "in": "query",
+      "name": "maxPageSize",
+      "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
+      "type": "integer",
+      "format": "int32",
+      "default": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "ReservationIdParameter": {
+      "in": "path",
+      "name": "reservationId",
+      "description": "The id of the reservation.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "ReservationParameter": {
+      "in": "body",
+      "name": "reservation",
+      "description": "A representation of the desired state of the reservation.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PhoneNumbersReservation"
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
