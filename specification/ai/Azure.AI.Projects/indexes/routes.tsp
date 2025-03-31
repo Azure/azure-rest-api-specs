@@ -11,7 +11,7 @@ using TypeSpec.Http;
 namespace Azure.AI.Projects;
 
 alias ListIndexVersionParameters = {
-  @doc("Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned")
+  @doc("Top count of results, top count cannot be greater than the page size. If topCount is larger than page size, results with be default page size count will be returned")
   @query
   top?: int32;
 

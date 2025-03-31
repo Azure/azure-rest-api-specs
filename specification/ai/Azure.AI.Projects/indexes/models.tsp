@@ -65,6 +65,7 @@ model EmbeddingConfiguration {
   embeddingField: string;
 }
 
+@doc("Enumerates known index types, but also allows any custom string fallback.")
 union IndexType {
   string,
 

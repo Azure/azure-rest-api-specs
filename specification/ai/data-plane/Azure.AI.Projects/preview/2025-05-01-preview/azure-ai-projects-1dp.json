@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/api/projects/<project-name>",
+        "description": "Project endpoint in the form of: https://&lt;aiservices-id&gt;.services.ai.azure.com/api/projects/&lt;project-name&gt;",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "An array of Agent items.",
+            "description": "The request has succeeded.",
             "schema": {
               "type": "array",
               "items": {
@@ -104,7 +104,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The newly created Agent.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -142,7 +142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested Agent.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -187,7 +187,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The new or updated Agent.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Agent"
             }
@@ -462,7 +462,7 @@
           {
             "name": "top",
             "in": "query",
-            "description": "Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned",
+            "description": "Top count of results, top count cannot be greater than the page size. If topCount is larger than page size, results with be default page size count will be returned",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -644,7 +644,7 @@
           {
             "name": "top",
             "in": "query",
-            "description": "Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned",
+            "description": "Top count of results, top count cannot be greater than the page size. If topCount is larger than page size, results with be default page size count will be returned",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -1279,7 +1279,7 @@
           {
             "name": "top",
             "in": "query",
-            "description": "Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned",
+            "description": "Top count of results, top count cannot be greater than the page size. If topCount is larger than page size, results with be default page size count will be returned",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -1375,7 +1375,7 @@
           {
             "name": "top",
             "in": "query",
-            "description": "Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned",
+            "description": "Top count of results, top count cannot be greater than the page size. If topCount is larger than page size, results with be default page size count will be returned",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -1681,10 +1681,10 @@
         }
       }
     },
-    "/runinputs": {
+    "/runs": {
       "get": {
-        "operationId": "Runs_ListRunInputs",
-        "description": "Lists run inputs.",
+        "operationId": "Runs_ListRuns",
+        "description": "Lists all run records, each containing runInputs and runOutputs.\n@route(\"/runs\")",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1697,7 +1697,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedRunInputs"
+              "$ref": "#/definitions/PagedRun"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -1726,18 +1726,14 @@
       },
       "post": {
         "operationId": "Runs_CreateRun",
-        "description": "Creates a run.",
+        "description": "Creates a new run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RunInputs"
@@ -1745,19 +1741,10 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of "
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
             }
           },
           "default": {
@@ -1778,7 +1765,7 @@
     "/runs/{runId}": {
       "get": {
         "operationId": "Runs_GetRun",
-        "description": "Retrieves an existing run by its ID.",
+        "description": "Retrieves an existing run by its ID.\n@route(\"/run/{run_id}\")",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1823,10 +1810,49 @@
         }
       }
     },
+    "/runs/execute": {
+      "post": {
+        "operationId": "Runs_CreateAndExecuteRun",
+        "description": "Creates and waits for a run to finish, returning the completed Run (including its outputs).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunInputs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/runs:createAndStreamRun": {
       "post": {
         "operationId": "Runs_CreateAndStreamRun",
-        "description": "Create and stream run.",
+        "description": "Create and stream run.\n@route(\"/run/stream\")",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1880,7 +1906,7 @@
         ],
         "responses": {
           "200": {
-            "description": "An array of Thread objects.",
+            "description": "The request has succeeded.",
             "schema": {
               "type": "array",
               "items": {
@@ -1921,7 +1947,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The newly created Thread.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Thread"
             }
@@ -1959,7 +1985,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested Thread.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Thread"
             }
@@ -2004,7 +2030,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The updated Thread.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Thread"
             }
@@ -2431,7 +2457,7 @@
           "type": "array",
           "description": "Instructions provided to guide how this agent operates.",
           "items": {
-            "$ref": "#/definitions/ChatMessage"
+            "$ref": "#/definitions/DeveloperMessage"
           },
           "x-ms-identifiers": []
         },
@@ -2516,7 +2542,7 @@
           "type": "array",
           "description": "Instructions provided to guide how this agent operates.",
           "items": {
-            "$ref": "#/definitions/ChatMessage"
+            "$ref": "#/definitions/DeveloperMessage"
           },
           "x-ms-identifiers": []
         },
@@ -3065,8 +3091,42 @@
           "readOnly": true
         },
         "role": {
-          "$ref": "#/definitions/AuthorRole",
-          "description": "The role of this message's author."
+          "type": "string",
+          "description": "The role of this message's author.",
+          "default": "user",
+          "enum": [
+            "user",
+            "agent",
+            "system",
+            "tool",
+            "developer"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorRole",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "user",
+                "value": "user"
+              },
+              {
+                "name": "agent",
+                "value": "agent"
+              },
+              {
+                "name": "system",
+                "value": "system"
+              },
+              {
+                "name": "tool",
+                "value": "tool"
+              },
+              {
+                "name": "developer",
+                "value": "developer"
+              }
+            ]
+          }
         },
         "content": {
           "type": "array",
@@ -3160,7 +3220,7 @@
         "outputTokens": {
           "type": "integer",
           "format": "int64",
-          "description": "Number of completion tokens used over the course of the run step."
+          "description": "Number of run (completion) tokens used over the course of the run."
         },
         "inputTokens": {
           "type": "integer",
@@ -3507,6 +3567,7 @@
     },
     "DeploymentType": {
       "type": "string",
+      "description": "Represents the type of the deployment. Known literal is 'ModelDeployment'",
       "enum": [
         "ModelDeployment"
       ],
@@ -3931,6 +3992,7 @@
     },
     "IndexType": {
       "type": "string",
+      "description": "Enumerates known index types, but also allows any custom string fallback.",
       "enum": [
         "AzureSearch",
         "CosmosDBNoSqlVectorStore",
@@ -4213,7 +4275,7 @@
     },
     "NoRequest": {
       "type": "object",
-      "description": "A \"no-op\" model to represent an empty request, because Operation<TRequest, TResponse>\nrequires a Model (or union) for the first parameter."
+      "description": "A no-op model to represent an empty request."
     },
     "NoneToolChoiceBehavior": {
       "type": "object",
@@ -4231,7 +4293,7 @@
       "properties": {
         "options": {
           "$ref": "#/definitions/OpenAIModelOptions",
-          "description": "Provider-specific options for this OpenAI-based model."
+          "description": "The provider-specific options for this OpenAI-based model."
         }
       },
       "required": [
@@ -4437,15 +4499,15 @@
         "value"
       ]
     },
-    "PagedRunInputs": {
+    "PagedRun": {
       "type": "object",
-      "description": "Paged collection of RunInputs items",
+      "description": "Paged collection of Run items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The RunInputs items on this page",
+          "description": "The Run items on this page",
           "items": {
-            "$ref": "#/definitions/RunInputs"
+            "$ref": "#/definitions/Run"
           },
           "x-ms-identifiers": []
         },
@@ -4691,7 +4753,7 @@
     },
     "Run": {
       "type": "object",
-      "description": "An agent-generated run record, including messages and status.",
+      "description": "An agent-generated run record, including both the requested inputs and the final outputs.",
       "properties": {
         "agentId": {
           "type": "string",
@@ -4712,67 +4774,13 @@
           "format": "int64",
           "description": "Timestamp when the run finished processing (Unix time)."
         },
-        "status": {
-          "type": "string",
-          "description": "Final status of the run request.",
-          "enum": [
-            "inProgress",
-            "incomplete",
-            "cancelled",
-            "failed",
-            "completed"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+        "runInputs": {
+          "$ref": "#/definitions/RunInputs",
+          "description": "The inputs that were used to start this run."
         },
-        "output": {
-          "type": "array",
-          "description": "List of output messages generated by the agent.",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Identifier for the thread associated with the run."
-        },
-        "usage": {
-          "$ref": "#/definitions/CompletionUsage",
-          "description": "Token usage details for this run."
-        },
-        "incompleteDetails": {
-          "type": "object",
-          "description": "Details about why the response is incomplete, if applicable.",
-          "properties": {
-            "reason": {
-              "type": "string",
-              "description": "Reason describing why the response is incomplete."
-            }
-          },
-          "required": [
-            "reason"
-          ]
-        },
-        "agent": {
-          "$ref": "#/definitions/AgentOptions",
-          "description": "The agent responsible for generating the run."
-        },
-        "input": {
-          "type": "array",
-          "description": "The list of input messages for the run.",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "metadata": {
-          "type": "object",
-          "description": "Optional metadata associated with the run request.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "runOutputs": {
+          "$ref": "#/definitions/RunOutputs",
+          "description": "The final outcome of this run, including status, output messages, token usage."
         },
         "options": {
           "$ref": "#/definitions/RunOptions",
@@ -4792,24 +4800,14 @@
         "runId",
         "createdAt",
         "completedAt",
-        "status",
-        "output",
-        "threadId",
-        "usage",
-        "incompleteDetails",
-        "agent",
-        "input"
+        "runInputs",
+        "runOutputs"
       ]
     },
     "RunInputs": {
       "type": "object",
       "description": "Parameters for creating a new run request.",
       "properties": {
-        "runId": {
-          "type": "string",
-          "description": "Unique identifier for the run.",
-          "readOnly": true
-        },
         "agent": {
           "$ref": "#/definitions/Agent",
           "description": "The agent responsible for generating the run."
@@ -4843,7 +4841,6 @@
         }
       },
       "required": [
-        "runId",
         "agent",
         "input"
       ]
@@ -4856,6 +4853,87 @@
           "$ref": "#/definitions/TruncationStrategy",
           "description": "Strategy for truncating messages when input exceeds model limits."
         }
+      }
+    },
+    "RunOutputs": {
+      "type": "object",
+      "description": "Fields describing the final run outcome, including status, output messages, and usage.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/RunOutputsStatus",
+          "description": "Final status of the run request. Known values: 'inProgress', 'incomplete', 'cancelled', 'failed', 'completed' - or custom string."
+        },
+        "messages": {
+          "type": "array",
+          "description": "List of output messages generated by the agent.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionUsage",
+          "description": "Token usage details for this run."
+        },
+        "incompleteDetails": {
+          "type": "object",
+          "description": "Details about why the response is incomplete, if applicable.",
+          "properties": {
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "reason"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "messages",
+        "usage"
+      ]
+    },
+    "RunOutputsStatus": {
+      "type": "string",
+      "description": "Known status values for a run, plus a fallback string for unrecognized statuses.",
+      "enum": [
+        "inProgress",
+        "incomplete",
+        "cancelled",
+        "failed",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "RunOutputsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inProgress",
+            "value": "inProgress",
+            "description": "The run is ongoing."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "The run did not produce a complete output."
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled",
+            "description": "The run was canceled."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The run failed."
+          },
+          {
+            "name": "completed",
+            "value": "completed",
+            "description": "The run completed successfully."
+          }
+        ]
       }
     },
     "RunUpdate": {
@@ -5091,8 +5169,7 @@
         }
       },
       "required": [
-        "text",
-        "annotations"
+        "text"
       ],
       "allOf": [
         {
@@ -5244,15 +5321,8 @@
       "description": "Describes how to truncate messages if they exceed model or provider limits.",
       "properties": {
         "type": {
-          "type": "string",
-          "description": "The type of truncation strategy to apply.",
-          "enum": [
-            "auto",
-            "lastMessages"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/TruncationStrategyType",
+          "description": "The type of truncation strategy to apply. Known values: 'auto', 'lastMessages', or a custom string."
         },
         "lastMessages": {
           "type": "integer",
@@ -5263,6 +5333,30 @@
       "required": [
         "type"
       ]
+    },
+    "TruncationStrategyType": {
+      "type": "string",
+      "description": "Enumerates known truncation strategy types, but also allows any custom fallback string.",
+      "enum": [
+        "auto",
+        "lastMessages"
+      ],
+      "x-ms-enum": {
+        "name": "TruncationStrategyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Automatically truncate messages to fit limits."
+          },
+          {
+            "name": "lastMessages",
+            "value": "lastMessages",
+            "description": "Truncate older messages, keeping only the last few."
+          }
+        ]
+      }
     },
     "UserMessage": {
       "type": "object",

@@ -71,6 +71,7 @@ model Sku {
   tier: string;
 }
 
+@doc("Represents the type of the deployment. Known literal is 'ModelDeployment'")
 union DeploymentType {
   string,
 
