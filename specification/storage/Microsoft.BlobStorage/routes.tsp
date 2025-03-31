@@ -182,9 +182,6 @@ namespace Storage.Blob {
       },
       {
         @statusCode statusCode: 201;
-        ...EtagResponseHeader;
-        ...LastModifiedResponseHeader;
-        ...DateResponseHeader;
       }
     >;
 
@@ -203,7 +200,6 @@ namespace Storage.Blob {
         ...MetadataHeaders;
         ...EtagResponseHeader;
         ...LastModifiedResponseHeader;
-        ...DateResponseHeader;
         ...LeaseDurationHeader;
         ...LeaseStateResponseHeader;
         ...LeaseStatusResponseHeader;
@@ -244,7 +240,6 @@ namespace Storage.Blob {
       },
       {
         @statusCode statusCode: 202;
-        ...DateResponseHeader;
       }
     >;
 
