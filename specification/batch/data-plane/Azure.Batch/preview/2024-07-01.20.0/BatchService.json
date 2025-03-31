@@ -996,7 +996,7 @@
             "description": "The Job to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobCreateContent"
+              "$ref": "#/definitions/BatchJobCreateOptions"
             }
           }
         ],
@@ -1430,7 +1430,7 @@
             "description": "The options to use for updating the Job.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobUpdateContent"
+              "$ref": "#/definitions/BatchJobUpdateOptions"
             }
           }
         ],
@@ -1804,7 +1804,7 @@
             "description": "The options to use for disabling the Job.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobDisableContent"
+              "$ref": "#/definitions/BatchJobDisableOptions"
             }
           }
         ],
@@ -2400,7 +2400,7 @@
             "description": "The Task to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchTaskCreateContent"
+              "$ref": "#/definitions/BatchTaskCreateOptions"
             }
           }
         ],
@@ -3918,7 +3918,7 @@
             "description": "The options to use for terminating the Job.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/BatchJobTerminateContent"
+              "$ref": "#/definitions/BatchJobTerminateOptions"
             }
           }
         ],
@@ -4148,7 +4148,7 @@
             "description": "The Job Schedule to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobScheduleCreateContent"
+              "$ref": "#/definitions/BatchJobScheduleCreateOptions"
             }
           }
         ],
@@ -4581,7 +4581,7 @@
             "description": "The options to use for updating the Job Schedule.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchJobScheduleUpdateContent"
+              "$ref": "#/definitions/BatchJobScheduleUpdateOptions"
             }
           }
         ],
@@ -5703,7 +5703,7 @@
             "description": "The Pool to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolCreateContent"
+              "$ref": "#/definitions/BatchPoolCreateOptions"
             }
           }
         ],
@@ -6032,7 +6032,7 @@
             "description": "The pool properties to update.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolUpdateContent"
+              "$ref": "#/definitions/BatchPoolUpdateOptions"
             }
           }
         ],
@@ -6511,7 +6511,7 @@
             "description": "The options to use for enabling automatic scaling.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolEnableAutoScaleContent"
+              "$ref": "#/definitions/BatchPoolEnableAutoScaleOptions"
             }
           }
         ],
@@ -6619,7 +6619,7 @@
             "description": "The options to use for evaluating the automatic scaling formula.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolEvaluateAutoScaleContent"
+              "$ref": "#/definitions/BatchPoolEvaluateAutoScaleOptions"
             }
           }
         ],
@@ -6977,7 +6977,7 @@
             "description": "The options to use for deallocating the Compute Node.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/BatchNodeDeallocateContent"
+              "$ref": "#/definitions/BatchNodeDeallocateOptions"
             }
           }
         ],
@@ -7092,7 +7092,7 @@
             "description": "The options to use for disabling scheduling on the Compute Node.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/BatchNodeDisableSchedulingContent"
+              "$ref": "#/definitions/BatchNodeDisableSchedulingOptions"
             }
           }
         ],
@@ -8091,7 +8091,7 @@
             "description": "The options to use for rebooting the Compute Node.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/BatchNodeRebootContent"
+              "$ref": "#/definitions/BatchNodeRebootOptions"
             }
           }
         ],
@@ -8206,7 +8206,7 @@
             "description": "The options to use for reimaging the Compute Node.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/BatchNodeReimageContent"
+              "$ref": "#/definitions/BatchNodeReimageOptions"
             }
           }
         ],
@@ -8526,7 +8526,7 @@
             "description": "The Azure Batch service log files upload options.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UploadBatchServiceLogsContent"
+              "$ref": "#/definitions/UploadBatchServiceLogsOptions"
             }
           }
         ],
@@ -8640,7 +8640,7 @@
             "description": "The options to use for creating the user.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchNodeUserCreateContent"
+              "$ref": "#/definitions/BatchNodeUserCreateOptions"
             }
           }
         ],
@@ -8762,7 +8762,7 @@
             "description": "The options to use for updating the user.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchNodeUserUpdateContent"
+              "$ref": "#/definitions/BatchNodeUserUpdateOptions"
             }
           }
         ],
@@ -8999,7 +8999,7 @@
             "description": "The options to use for removing the node.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchNodeRemoveContent"
+              "$ref": "#/definitions/BatchNodeRemoveOptions"
             }
           }
         ],
@@ -9141,7 +9141,7 @@
             "description": "The options to use for resizing the pool.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolResizeContent"
+              "$ref": "#/definitions/BatchPoolResizeOptions"
             }
           }
         ],
@@ -9379,7 +9379,7 @@
             "description": "The options to use for replacing properties on the pool.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BatchPoolReplaceContent"
+              "$ref": "#/definitions/BatchPoolReplaceOptions"
             }
           }
         ],
@@ -10537,7 +10537,7 @@
         }
       }
     },
-    "BatchJobCreateContent": {
+    "BatchJobCreateOptions": {
       "type": "object",
       "description": "Parameters for creating an Azure Batch Job.",
       "properties": {
@@ -10622,7 +10622,7 @@
         "poolInfo"
       ]
     },
-    "BatchJobDisableContent": {
+    "BatchJobDisableOptions": {
       "type": "object",
       "description": "Parameters for disabling an Azure Batch Job.",
       "properties": {
@@ -11406,7 +11406,7 @@
         }
       }
     },
-    "BatchJobScheduleCreateContent": {
+    "BatchJobScheduleCreateOptions": {
       "type": "object",
       "description": "Parameters for creating an Azure Batch Job Schedule",
       "properties": {
@@ -11617,7 +11617,7 @@
         "waitTime"
       ]
     },
-    "BatchJobScheduleUpdateContent": {
+    "BatchJobScheduleUpdateOptions": {
       "type": "object",
       "description": "Parameters for updating an Azure Batch Job Schedule.",
       "properties": {
@@ -11974,7 +11974,7 @@
         "waitTime"
       ]
     },
-    "BatchJobTerminateContent": {
+    "BatchJobTerminateOptions": {
       "type": "object",
       "description": "Parameters for terminating an Azure Batch Job.",
       "properties": {
@@ -11985,7 +11985,7 @@
         }
       }
     },
-    "BatchJobUpdateContent": {
+    "BatchJobUpdateOptions": {
       "type": "object",
       "description": "Parameters for updating an Azure Batch Job.",
       "properties": {
@@ -12306,16 +12306,6 @@
         "upgradingOS"
       ]
     },
-    "BatchNodeDeallocateContent": {
-      "type": "object",
-      "description": "Options for deallocating a Compute Node.",
-      "properties": {
-        "nodeDeallocateOption": {
-          "$ref": "#/definitions/BatchNodeDeallocateOption",
-          "description": "When to deallocate the Compute Node and what to do with currently running Tasks. The default value is requeue."
-        }
-      }
-    },
     "BatchNodeDeallocateOption": {
       "type": "string",
       "description": "BatchNodeDeallocateOption enums",
@@ -12350,6 +12340,16 @@
             "description": "Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Deallocate the Compute Node when all Task retention periods have expired."
           }
         ]
+      }
+    },
+    "BatchNodeDeallocateOptions": {
+      "type": "object",
+      "description": "Options for deallocating a Compute Node.",
+      "properties": {
+        "nodeDeallocateOption": {
+          "$ref": "#/definitions/BatchNodeDeallocateOption",
+          "description": "When to deallocate the Compute Node and what to do with currently running Tasks. The default value is requeue."
+        }
       }
     },
     "BatchNodeDeallocationOption": {
@@ -12388,16 +12388,6 @@
         ]
       }
     },
-    "BatchNodeDisableSchedulingContent": {
-      "type": "object",
-      "description": "Parameters for disabling scheduling on an Azure Batch Compute Node.",
-      "properties": {
-        "nodeDisableSchedulingOption": {
-          "$ref": "#/definitions/BatchNodeDisableSchedulingOption",
-          "description": "What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue."
-        }
-      }
-    },
     "BatchNodeDisableSchedulingOption": {
       "type": "string",
       "description": "BatchNodeDisableSchedulingOption enums",
@@ -12426,6 +12416,16 @@
             "description": "Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Enter offline state when all Tasks have completed."
           }
         ]
+      }
+    },
+    "BatchNodeDisableSchedulingOptions": {
+      "type": "object",
+      "description": "Parameters for disabling scheduling on an Azure Batch Compute Node.",
+      "properties": {
+        "nodeDisableSchedulingOption": {
+          "$ref": "#/definitions/BatchNodeDisableSchedulingOption",
+          "description": "What to do with currently running Tasks when disabling Task scheduling on the Compute Node. The default value is requeue."
+        }
       }
     },
     "BatchNodeEndpointConfiguration": {
@@ -12622,16 +12622,6 @@
         ]
       }
     },
-    "BatchNodeRebootContent": {
-      "type": "object",
-      "description": "Parameters for rebooting an Azure Batch Compute Node.",
-      "properties": {
-        "nodeRebootOption": {
-          "$ref": "#/definitions/BatchNodeRebootOption",
-          "description": "When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue."
-        }
-      }
-    },
     "BatchNodeRebootOption": {
       "type": "string",
       "description": "BatchNodeRebootOption enums",
@@ -12668,13 +12658,13 @@
         ]
       }
     },
-    "BatchNodeReimageContent": {
+    "BatchNodeRebootOptions": {
       "type": "object",
-      "description": "Parameters for reimaging an Azure Batch Compute Node.",
+      "description": "Parameters for rebooting an Azure Batch Compute Node.",
       "properties": {
-        "nodeReimageOption": {
-          "$ref": "#/definitions/BatchNodeReimageOption",
-          "description": "When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue."
+        "nodeRebootOption": {
+          "$ref": "#/definitions/BatchNodeRebootOption",
+          "description": "When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue."
         }
       }
     },
@@ -12714,6 +12704,16 @@
         ]
       }
     },
+    "BatchNodeReimageOptions": {
+      "type": "object",
+      "description": "Parameters for reimaging an Azure Batch Compute Node.",
+      "properties": {
+        "nodeReimageOption": {
+          "$ref": "#/definitions/BatchNodeReimageOption",
+          "description": "When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue."
+        }
+      }
+    },
     "BatchNodeRemoteLoginSettings": {
       "type": "object",
       "description": "The remote login settings for a Compute Node.",
@@ -12734,7 +12734,7 @@
         "remoteLoginPort"
       ]
     },
-    "BatchNodeRemoveContent": {
+    "BatchNodeRemoveOptions": {
       "type": "object",
       "description": "Parameters for removing nodes from an Azure Batch Pool.",
       "properties": {
@@ -12867,7 +12867,7 @@
         ]
       }
     },
-    "BatchNodeUserCreateContent": {
+    "BatchNodeUserCreateOptions": {
       "type": "object",
       "description": "Parameters for creating a user account for RDP or SSH access on an Azure Batch Compute Node.",
       "properties": {
@@ -12899,7 +12899,7 @@
         "name"
       ]
     },
-    "BatchNodeUserUpdateContent": {
+    "BatchNodeUserUpdateOptions": {
       "type": "object",
       "description": "Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.",
       "properties": {
@@ -13187,7 +13187,7 @@
         }
       }
     },
-    "BatchPoolCreateContent": {
+    "BatchPoolCreateOptions": {
       "type": "object",
       "description": "Parameters for creating an Azure Batch Pool.",
       "properties": {
@@ -13317,7 +13317,7 @@
         "vmSize"
       ]
     },
-    "BatchPoolEnableAutoScaleContent": {
+    "BatchPoolEnableAutoScaleOptions": {
       "type": "object",
       "description": "Parameters for enabling automatic scaling on an Azure Batch Pool.",
       "properties": {
@@ -13365,7 +13365,7 @@
         }
       }
     },
-    "BatchPoolEvaluateAutoScaleContent": {
+    "BatchPoolEvaluateAutoScaleOptions": {
       "type": "object",
       "description": "Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.",
       "properties": {
@@ -13549,7 +13549,7 @@
         }
       }
     },
-    "BatchPoolReplaceContent": {
+    "BatchPoolReplaceOptions": {
       "type": "object",
       "description": "Parameters for replacing properties on an Azure Batch Pool.",
       "properties": {
@@ -13592,7 +13592,7 @@
         "metadata"
       ]
     },
-    "BatchPoolResizeContent": {
+    "BatchPoolResizeOptions": {
       "type": "object",
       "description": "Parameters for changing the size of an Azure Batch Pool.",
       "properties": {
@@ -14004,7 +14004,7 @@
         "lastUpdateTime"
       ]
     },
-    "BatchPoolUpdateContent": {
+    "BatchPoolUpdateOptions": {
       "type": "object",
       "description": "Parameters for updating an Azure Batch Pool.",
       "properties": {
@@ -14805,7 +14805,7 @@
         "taskSlotCounts"
       ]
     },
-    "BatchTaskCreateContent": {
+    "BatchTaskCreateOptions": {
       "type": "object",
       "description": "Parameters for creating an Azure Batch Task.",
       "properties": {
@@ -15070,7 +15070,7 @@
           "type": "array",
           "description": "The collection of Tasks to add. The maximum count of Tasks is 100. The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each Task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer Tasks.",
           "items": {
-            "$ref": "#/definitions/BatchTaskCreateContent"
+            "$ref": "#/definitions/BatchTaskCreateOptions"
           }
         }
       },
@@ -17108,7 +17108,7 @@
         }
       }
     },
-    "UploadBatchServiceLogsContent": {
+    "UploadBatchServiceLogsOptions": {
       "type": "object",
       "description": "The Azure Batch service log files upload parameters for a Compute Node.",
       "properties": {
