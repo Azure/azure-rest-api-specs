@@ -3,19 +3,13 @@ name: SDK Breaking Change Labels (Preview)
 on:
   check_run:
     types: [completed]
-  workflow_dispatch:
-    inputs:
-      check_run_id:
-        description: 'Check run ID to process'
-        required: false
-        type: string
 
 permissions:
   contents: read
 
 jobs:
   sdk-breaking-change-labels:
-    if: ${{ contains(github.event.check_run.name, '(SDK Generation Job)') && github.event.check_run.check_suite.app.name == 'Azure Pipelines'}}
+    if: ${{ contains(github.event.check_run.name, 'SDK Generation') && github.event.check_run.check_suite.app.name == 'Azure Pipelines'}}
     name: SDK Breaking Change Labels (Preview)
     runs-on: ubuntu-24.04
     steps:
@@ -32,8 +26,6 @@ jobs:
             const { getLabelAndAction } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-labels.js');
             return await getLabelAndAction({ github, context, core });
-        env:
-          CHECK_RUN_ID: ${{ inputs.check_run_id }}
 
       - if: |
           (fromJson(steps.get-label-and-action.outputs.result).labelAction == 'add' ||
