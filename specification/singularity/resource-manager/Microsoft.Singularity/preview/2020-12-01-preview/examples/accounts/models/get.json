@@ -1,0 +1,143 @@
+{
+  "operationId": "Model_Get",
+  "description": "This example shows how to create or update an account resource.",
+  "parameters": {
+    "api-version": "2020-12-01-preview",
+    "subscriptionId": "mysubscriptionId",
+    "resourceGroupName": "myresourceGroupName",
+    "accountName": "myaccountName",
+    "modelName": "mymodelName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Singularity/accounts/models",
+        "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts/myaccountName/models/mymodelName",
+        "name": "myModelResourceDescription",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "groupPolicyName": "Group policy name associated with the model.",
+          "inferenceMode": "Online",
+          "slaTier": "Premium",
+          "packageLocation": {
+            "source": {
+              "kind": {
+                "storageContainerName": "myStorageAccount"
+              }
+            },
+            "storageCacheContainerName": "Name of the managed storage resource to mount.",
+            "mount": {
+              "path": "The target mountpoint path."
+            }
+          },
+          "networkResourceRef": {
+            "name": "Name of the network resource to reference."
+          },
+          "scalePolicy": {
+            "min": 1,
+            "max": 1,
+            "scaleSet": [
+              1
+            ]
+          },
+          "partitioningSetting": {
+            "pipelinePartitionCount": 1,
+            "tensorPartitionCount": 1,
+            "partitions": [
+              {
+                "pipelinePartitionIndex": 1,
+                "tensorPartitionIndex": 1,
+                "packagePath": "Path in modelPackageLocation where package for this model partition is located.",
+                "partitionPlacement": {
+                  "instanceTypeSettingNameRef": "Model partitions can target placement on the same or different instances of the InstanceType by referencing the same or different InstanceTypeSetting name",
+                  "deviceId": 1
+                }
+              }
+            ]
+          },
+          "instanceTypeSettings": [
+            {
+              "name": "Specifies the name of this instance type setting. This name can be used to identify the instance of an instanceType. Resources referencing the same name are collocated on the same instance of the instance type.",
+              "instanceType": "The instance type name.",
+              "containerSetting": {
+                "image": {
+                  "kind": "Platform"
+                },
+                "environmentVariables": { },
+                "setupEntryPoint": {
+                  "program": "The entry point program.",
+                  "programArgs": "Command line arguments to be passed to the program."
+                },
+                "mainEntryPoint": {
+                  "program": "The entry point program.",
+                  "programArgs": "Command line arguments to be passed to the program."
+                },
+                "cleanupEntryPoint": {
+                  "program": "The entry point program.",
+                  "programArgs": "Command line arguments to be passed to the program."
+                },
+                "livenessProbeSetting": {
+                  "kind": "Exec",
+                  "initialDelayInSeconds": 1,
+                  "successThreshold": 1,
+                  "failureThreshold": 1,
+                  "frequencyInSeconds": 1,
+                  "timeoutInSeconds": 1
+                }
+              }
+            }
+          ],
+          "locations": [
+            {
+              "location": "Name of the geographic location.",
+              "status": "Creating",
+              "statusDetails": "Gives additional information about the current status of the model in this location.",
+              "errorCode": "Error code of the model in this location.",
+              "scalePolicy": {
+                "min": 1,
+                "max": 1,
+                "scaleSet": [
+                  1
+                ]
+              },
+              "endpoints": [
+                {
+                  "name": "The name of the endpoint.",
+                  "address": "The address of the endpoint."
+                }
+              ],
+              "currentInstanceCount": 1
+            }
+          ],
+          "endpoints": [
+            {
+              "name": "The name of the endpoint.",
+              "address": "The address of the endpoint."
+            }
+          ],
+          "compilationPolicy": {
+            "kind": "JIT"
+          },
+          "modelProbeSetting": {
+            "livenessProbeSetting": {
+              "kind": "Exec",
+              "initialDelayInSeconds": 1,
+              "successThreshold": 1,
+              "failureThreshold": 1,
+              "frequencyInSeconds": 1,
+              "timeoutInSeconds": 1
+            },
+            "readinessProbeSetting": {
+              "kind": "Exec",
+              "initialDelayInSeconds": 1,
+              "successThreshold": 1,
+              "failureThreshold": 1,
+              "frequencyInSeconds": 1,
+              "timeoutInSeconds": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}
