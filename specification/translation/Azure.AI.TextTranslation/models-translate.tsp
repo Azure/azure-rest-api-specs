@@ -16,11 +16,11 @@ model TranslateBodyParameters {
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing Spec"
   @query(#{ explode: true })
   @doc("""
-  Specifies the language of the output text. The target language must be one of the supported languages included 
-  in the translation scope. For example, use to=de to translate to German.
-  It's possible to translate to multiple languages simultaneously by repeating the parameter in the query string. 
-  For example, use to=de&to=it to translate to German and Italian.
-  """)
+    Specifies the language of the output text. The target language must be one of the supported languages included 
+    in the translation scope. For example, use to=de to translate to German.
+    It's possible to translate to multiple languages simultaneously by repeating the parameter in the query string. 
+    For example, use to=de&to=it to translate to German and Italian.
+    """)
   targetsLanguage: string[];
 
   @query
@@ -60,9 +60,8 @@ model TranslateBodyParameters {
   @doc("""
     Model that should be used for translation.
     """)
-    targetsdeploymentNameModel?: string;
+  targetsdeploymentNameModel?: string;
 
-  
   @query
   @doc("""
     In the case where a custom system is being used, specifies that the service is allowed to fall back to a
