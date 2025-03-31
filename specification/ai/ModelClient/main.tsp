@@ -18,7 +18,7 @@ using Azure.Core;
     }
   ]>
 )
-@service({
+@service(#{
   title: "AI Model Inference",
 })
 @versioned(AI.Model.Versions)
