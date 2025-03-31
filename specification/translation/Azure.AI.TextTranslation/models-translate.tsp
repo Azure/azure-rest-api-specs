@@ -9,6 +9,101 @@ using Azure.Core;
 
 namespace TextTranslation;
 
+@doc("Request body parameters for the translate API.")
+model TranslateBodyParameters {
+  ...CommonParameters;
+
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing Spec"
+  @query(#{ explode: true })
+  @doc("""
+  Specifies the language of the output text. The target language must be one of the supported languages included 
+  in the translation scope. For example, use to=de to translate to German.
+  It's possible to translate to multiple languages simultaneously by repeating the parameter in the query string. 
+  For example, use to=de&to=it to translate to German and Italian.
+  """)
+  targetsLanguage: string[];
+
+  @query
+  @doc("""
+    Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
+    complete element. Possible values are: plain (default) or html.
+    """)
+  targetsTextType?: TextType = "Plain";
+
+  @query
+  @doc("""
+    Specifies how profanities should be treated in translations.
+    Possible values are: NoAction (default), Marked or Deleted.
+    """)
+  targetsProfanityAction?: ProfanityAction = ProfanityAction.NoAction;
+
+  @query
+  @doc("""
+    Specifies how profanities should be marked in translations.
+    Possible values are: Asterisk (default) or Tag. 
+    """)
+  targetsProfanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
+
+  @query
+  @doc("""
+    Specifies the script of the input text.
+    """)
+  script?: string;
+
+  @query
+  @doc("""
+    Specifies the script of the translated text.
+    """)
+  targetsScript?: string;
+
+  @query
+  @doc("""
+    Model that should be used for translation.
+    """)
+    targetsdeploymentNameModel?: string;
+
+  
+  @query
+  @doc("""
+    In the case where a custom system is being used, specifies that the service is allowed to fall back to a
+    general system when a custom system doesn't exist. 
+    In the case where a Large Language Model is being used, specifies that the service is allowed to fall
+    back to a Small Language Model if an error occurs.
+    Possible values are: true (default) or false.
+    
+    allowFallback=false specifies that the translation should only use systems trained for the category specified 
+    by the request. If a translation for language X to language Y requires chaining through a pivot language E, 
+    then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. 
+    If no system is found with the specific category, the request will return a 400 status code. allowFallback=true 
+    specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
+    """)
+  targetsAllowFallback?: boolean = true;
+
+  @query
+  @doc("""
+    Defines complexity of LLM prompts to provide high accuracy translation.
+    """)
+  targetsGrade?: string;
+
+  @query
+  @doc("""
+    Desired tone of target translation.
+    """)
+  targetsTone?: string;
+
+  @query
+  @doc("""
+    Desired gender of target translation.
+    """)
+  targetsGender?: string;
+
+  @query
+  @doc("""
+    Reference dataset ID having sentence pair to generate adaptive customized translation
+    """)
+  targetsAdaptiveDatasetIds?: string[];
+}
+
 @doc("Request parameters for the translate API.")
 model TranslateParameters {
   ...CommonParameters;
@@ -99,7 +194,10 @@ model TranslateParameters {
 
   @query
   @doc("""
-    Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
+    In the case where a custom system is being used, specifies that the service is allowed to fall back to a
+    general system when a custom system doesn't exist. 
+    In the case where a Large Language Model is being used, specifies that the service is allowed to fall
+    back to a Small Language Model if an error occurs.
     Possible values are: true (default) or false.
     
     allowFallback=false specifies that the translation should only use systems trained for the category specified 
@@ -220,44 +318,6 @@ model TranslationText {
     An object giving the translated text in the script specified by the toScript parameter.
     """)
   transliteration?: TransliteratedText;
-
-  @doc("""
-    Alignment information.
-    """)
-  alignment?: TranslatedTextAlignment;
-
-  @doc("""
-    Sentence boundaries in the input and output texts.
-    """)
-  sentLen?: SentenceBoundaries;
-}
-
-@doc("Alignment information object.")
-model TranslatedTextAlignment {
-  @doc("""
-    Maps input text to translated text. The alignment information is only provided when the request 
-    parameter includeAlignment is true. Alignment is returned as a string value of the following 
-    format: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]]. 
-    The colon separates start and end index, the dash separates the languages, and space separates the words. 
-    One word may align with zero, one, or multiple words in the other language, and the aligned words may 
-    be non-contiguous. When no alignment information is available, the alignment element will be empty.
-    """)
-  proj: string;
-}
-
-@doc("An object returning sentence boundaries in the input and output texts.")
-model SentenceBoundaries {
-  @doc("""
-    An integer array representing the lengths of the sentences in the input text. 
-    The length of the array is the number of sentences, and the values are the length of each sentence.
-    """)
-  srcSentLen: int32[];
-
-  @doc("""
-    An integer array representing the lengths of the sentences in the translated text. 
-    The length of the array is the number of sentences, and the values are the length of each sentence.
-    """)
-  transSentLen: int32[];
 }
 
 @doc("Input text in the default script of the source language. ")

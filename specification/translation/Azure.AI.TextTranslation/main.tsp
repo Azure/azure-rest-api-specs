@@ -35,10 +35,6 @@ using TypeSpec.Versioning;
   Transliterate. Converts characters or letters of a source language to the corresponding characters or letters of a target language.
   
   Detect. Returns the source code language code and a boolean variable denoting whether the detected language is supported for text translation and transliteration.
-  
-  Dictionary lookup. Returns equivalent words for the source term in the target language.
-  
-  Dictionary example Returns grammatical structure and context examples for the source term and target term pair.
   """)
 @versioned(APIVersion)
 namespace TextTranslation;
@@ -47,4 +43,7 @@ namespace TextTranslation;
 enum APIVersion {
   @doc("Version 3.0")
   v3_0: "3.0",
+
+  @doc("Version 2025-05-01")
+  v2025_05_01_preview: "2025-05-01-preview"
 }
