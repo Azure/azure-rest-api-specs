@@ -2221,6 +2221,24 @@
           }
         }
       }
+    },
+    "ResourceTags": {
+      "type": "object",
+      "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
     }
   },
   "parameters": {
