@@ -3,13 +3,16 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./connections/routes.tsp";
-import "./evaluations/routes.tsp";
-import "./datasets/routes.tsp";
-import "./indexes/routes.tsp";
-import "./deployments/routes.tsp";
-import "./evaluation-results/routes.tsp";
-import "./red-teams/routes.tsp";
+import "./routes.tsp";
+import "./threads/routes.tsp";
+import "./messages/routes.tsp";
+import "./runs/routes.tsp";
+import "./run_steps/routes.tsp";
+import "./files/routes.tsp";
+import "./streaming/events.tsp";
+import "./vector_stores/routes.tsp";
+import "./vector_stores/files/routes.tsp";
+import "./vector_stores/file_batches/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -41,11 +44,11 @@ namespace Azure.AI {
   }
 )
 @versioned(Versions)
-namespace Azure.AI.Projects {
-  @doc("Azure AI Projects API versions")
+namespace Azure.AI.Assistants {
+  @doc("Azure AI Assistants API versions")
   enum Versions {
-    @doc("Azure AI API version 2025-05-15-preview.")
+    @doc("Azure AI API version 2025-05-01-preview.")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    `2025-05-15-preview`,
+    `latest`,
   }
 }
