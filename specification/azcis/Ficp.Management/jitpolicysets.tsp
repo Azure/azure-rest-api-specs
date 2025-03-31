@@ -18,7 +18,7 @@ namespace Microsoft.AzureCis;
 model JitPolicySetProperties {
   @doc("Cloud identifier")
   cloudId: string;
-  
+
   @doc("List of Jit policies")
   @extension("x-ms-identifiers", #[])
   policies: Array<JitPolicy>;
