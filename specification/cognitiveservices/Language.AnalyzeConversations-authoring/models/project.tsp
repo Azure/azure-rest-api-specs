@@ -10,8 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
-using Language.Conversations.Authoring;
 
 namespace Language.Conversations.Authoring;
 
@@ -1419,6 +1417,12 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
   category: string;
 
   /**
+   * The entity description.
+   */
+  @added(Versions.v2025_05_15_preview)
+  description?: string;
+
+  /**
    * The behavior to follow when the entity's components overlap with each other.
    */
   @clientName("compositionMode", "csharp")
@@ -1538,6 +1542,30 @@ model AnalyzeConversationAuthoringExportedEntityRegexExpression {
 model AnalyzeConversationAuthoringConversationExportedIntent {
   /**
    * The intent category.
+   */
+  category: string;
+
+  /**
+   * The intent description.
+   */
+  @added(Versions.v2025_05_15_preview)
+  description?: string;
+
+  /**
+   * The list of associated entities.
+   */
+  @added(Versions.v2025_05_15_preview)
+  associatedEntities?: AnalyzeConversationExportedAssociatedEntityLabel[];
+}
+
+/**
+ * Represents an associated entity label for an intent.
+ */
+@clientName("ConversationExportedAssociatedEntityLabel", "csharp")
+@added(Versions.v2025_05_15_preview)
+model AnalyzeConversationExportedAssociatedEntityLabel {
+  /**
+   * The category of the entity label.
    */
   category: string;
 }
@@ -1793,6 +1821,12 @@ model AnalyzeConversationAuthoringOrchestrationExportedIntent {
    * The intent category.
    */
   category: string;
+
+  /**
+   * The intent description.
+   */
+  @added(Versions.v2025_05_15_preview)
+  description?: string;
 }
 
 /**
