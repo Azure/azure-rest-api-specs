@@ -19,12 +19,9 @@ parameters:
 extends:
   ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
     template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
-  ${{ else }}:
-    template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
-  parameters:
-    ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
+    parameters:
       settings:
-        skipBuildTagsForGitHubPullRequests: true
+          skipBuildTagsForGitHubPullRequests: true
       sdl:
         ${{ if and(parameters.GenerateBaselines, eq(variables['Build.SourceBranchName'], 'main'), eq(variables['System.TeamProject'], 'internal')) }}:
           autobaseline:
@@ -40,7 +37,9 @@ extends:
           break: true
         policy: M365
       stages: ${{ parameters.stages }}
-    ${{ else }}:
+  ${{ else }}:
+    template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
+    parameters:
       sdl: # SDLSources stage still runs even all tools are disabled. 1es team uses it for other purposes and they have the following work item to remove the stage.
         enableAllTools: false # https://dev.azure.com/mseng/1ES/_workitems/edit/2253084
         sourceAnalysisPool:
