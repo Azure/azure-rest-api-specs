@@ -31,11 +31,11 @@ tag: package-composite-v5
 
 The following packages may be composed from multiple api-versions.
 
-### Tag: package-composite-v5-take-2021-stable
+### Tag: package-composite-v5-take-2023-08-01-stable
 
-These settings apply only when `--tag=package-composite-v5-take-2021-stable` is specified on the command line.
+These settings apply only when `--tag=package-composite-v5-take-2023-08-01-stable` is specified on the command line.
 
-``` yaml $(tag) == 'package-composite-v5-take-2021-stable'
+``` yaml $(tag) == 'package-composite-v5-take-2023-08-01-stable'
 input-file:
   - Microsoft.Sql/stable/2014-04-01/dataMasking.json
   - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
