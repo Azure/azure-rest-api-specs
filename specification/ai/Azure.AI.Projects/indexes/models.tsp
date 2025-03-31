@@ -65,31 +65,16 @@ model EmbeddingConfiguration {
   embeddingField: string;
 }
 
-/**
- * Enumerates known index types, but also allows any custom string fallback.
- */
 @doc("Enumerates known index types, but also allows any custom string fallback.")
 union IndexType {
-  /**
-   * Fallback for any unrecognized string values.
-   */
   string,
 
-  /**
-   * Azure search
-   */
   @doc("Azure search")
   azureSearch: "AzureSearch",
 
-  /**
-   * CosmosDB
-   */
   @doc("CosmosDB")
   cosmosDB: "CosmosDBNoSqlVectorStore",
 
-  /**
-   * Managed Azure Search
-   */
   @doc("Managed Azure Search")
   managedAzureSearch: "ManagedAzureSearch",
 }

@@ -71,20 +71,10 @@ model Sku {
   tier: string;
 }
 
-/**
- * Represents the type of the deployment.  This allows a known literal "ModelDeployment"
- * or any other arbitrary string.
- */
 @doc("Represents the type of the deployment. Known literal is 'ModelDeployment'")
 union DeploymentType {
-  /**
-   * Fallback to any other string value not covered by ModelDeployment.
-   */
   string,
 
-  /**
-   * Model deployment
-   */
   @doc("Model deployment")
   ModelDeployment: "ModelDeployment",
 }
