@@ -9660,37 +9660,6 @@
     }
   },
   "definitions": {
-    "AccessScope": {
-      "type": "string",
-      "description": "AccessScope enums",
-      "enum": [
-        "job"
-      ],
-      "x-ms-enum": {
-        "name": "AccessScope",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Job",
-            "value": "job",
-            "description": "Grants access to perform all operations on the Job containing the Task."
-          }
-        ]
-      }
-    },
-    "AffinityInfo": {
-      "type": "object",
-      "description": "A locality hint that can be used by the Batch service to select a Compute Node\non which to start a Task.",
-      "properties": {
-        "affinityId": {
-          "type": "string",
-          "description": "An opaque string representing the location of a Compute Node or a Task that has run previously. You can pass the affinityId of a Node to indicate that this Task needs to run on that Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere."
-        }
-      },
-      "required": [
-        "affinityId"
-      ]
-    },
     "AllocationState": {
       "type": "string",
       "description": "AllocationState enums",
@@ -9729,7 +9698,7 @@
           "type": "array",
           "description": "The Batch resources to which the token grants access. The authentication token grants access to a limited set of Batch service operations. Currently the only supported value for the access property is 'job', which grants access to all operations related to the Job which contains the Task.",
           "items": {
-            "$ref": "#/definitions/AccessScope"
+            "$ref": "#/definitions/BatchAccessScope"
           }
         }
       }
@@ -9839,6 +9808,10 @@
         }
       }
     },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "AzureBlobFileSystemConfiguration": {
       "type": "object",
       "description": "Information used to connect to an Azure Storage Container using Blobfuse.",
@@ -9890,15 +9863,16 @@
           "type": "string",
           "description": "The Azure Storage account name."
         },
-        "azureFileUrl": {
-          "type": "string",
-          "description": "The Azure Files URL. This is of the form 'https://{account}.file.core.windows.net/'."
-        },
         "accountKey": {
           "type": "string",
           "format": "password",
           "description": "The Azure Storage account key.",
           "x-ms-secret": true
+        },
+        "azureFileUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Azure Files URL. This is of the form 'https://{account}.file.core.windows.net/'."
         },
         "relativeMountPath": {
           "type": "string",
@@ -9911,10 +9885,28 @@
       },
       "required": [
         "accountName",
-        "azureFileUrl",
         "accountKey",
+        "azureFileUrl",
         "relativeMountPath"
       ]
+    },
+    "BatchAccessScope": {
+      "type": "string",
+      "description": "BatchAccessScope enums",
+      "enum": [
+        "job"
+      ],
+      "x-ms-enum": {
+        "name": "BatchAccessScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Job",
+            "value": "job",
+            "description": "Grants access to perform all operations on the Job containing the Task."
+          }
+        ]
+      }
     },
     "BatchAccountListSupportedImagesResult": {
       "type": "object",
@@ -9933,6 +9925,19 @@
           "description": "The URL to get the next set of results."
         }
       }
+    },
+    "BatchAffinityInfo": {
+      "type": "object",
+      "description": "A locality hint that can be used by the Batch service to select a Compute Node\non which to start a Task.",
+      "properties": {
+        "affinityId": {
+          "type": "string",
+          "description": "An opaque string representing the location of a Compute Node or a Task that has run previously. You can pass the affinityId of a Node to indicate that this Task needs to run on that Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere."
+        }
+      },
+      "required": [
+        "affinityId"
+      ]
     },
     "BatchApplication": {
       "type": "object",
@@ -10055,6 +10060,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Certificate.",
           "readOnly": true
         },
@@ -10092,6 +10098,7 @@
         },
         "data": {
           "type": "string",
+          "format": "byte",
           "description": "The base64-encoded contents of the Certificate. The maximum size is 10KB.",
           "x-ms-mutability": [
             "create"
@@ -10365,11 +10372,12 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Job.",
           "readOnly": true
         },
         "eTag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The ETag of the Job. This is an opaque string. You can use it to detect whether the Job has changed between requests. In particular, you can be pass the ETag when updating a Job to specify that your changes should take effect only if nobody else has modified the Job in the meantime.",
           "readOnly": true
         },
@@ -10902,6 +10910,7 @@
         },
         "nodeUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Compute Node to which this entry refers."
         },
         "jobPreparationTaskExecutionInfo": {
@@ -11009,6 +11018,7 @@
         },
         "taskRootDirectoryUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to the root directory of the Job Preparation Task on the Compute Node."
         },
         "exitCode": {
@@ -11194,6 +11204,7 @@
         },
         "taskRootDirectoryUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to the root directory of the Job Release Task on the Compute Node."
         },
         "exitCode": {
@@ -11307,11 +11318,12 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Job Schedule.",
           "readOnly": true
         },
         "eTag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The ETag of the Job Schedule. This is an opaque string. You can use it to detect whether the Job Schedule has changed between requests. In particular, you can be pass the ETag with an Update Job Schedule request to specify that your changes should take effect only if nobody else has modified the schedule in the meantime.",
           "readOnly": true
         },
@@ -11526,6 +11538,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the statistics."
         },
         "startTime": {
@@ -11883,6 +11896,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the statistics."
         },
         "startTime": {
@@ -12039,6 +12053,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Compute Node."
         },
         "state": {
@@ -12477,6 +12492,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the file."
         },
         "isDirectory": {
@@ -12551,6 +12567,7 @@
         },
         "nodeUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Compute Node on which the Task ran."
         },
         "poolId": {
@@ -12567,6 +12584,7 @@
         },
         "taskRootDirectoryUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to the root directory of the Task on the Compute Node."
         }
       }
@@ -12972,11 +12990,12 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Pool.",
           "readOnly": true
         },
         "eTag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The ETag of the Pool. This is an opaque string. You can use it to detect whether the Pool has changed between requests. In particular, you can be pass the ETag when updating a Pool to specify that your changes should take effect only if nobody else has modified the Pool in the meantime.",
           "readOnly": true
         },
@@ -13977,6 +13996,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL for the statistics."
         },
         "startTime": {
@@ -14472,11 +14492,12 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Task.",
           "readOnly": true
         },
         "eTag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The ETag of the Task. This is an opaque string. You can use it to detect whether the Task has changed between requests. In particular, you can be pass the ETag when updating a Task to specify that your changes should take effect only if nobody else has modified the Task in the meantime.",
           "readOnly": true
         },
@@ -14557,7 +14578,7 @@
           "x-ms-identifiers": []
         },
         "affinityInfo": {
-          "$ref": "#/definitions/AffinityInfo",
+          "$ref": "#/definitions/BatchAffinityInfo",
           "description": "A locality hint that can be used by the Batch service to select a Compute Node on which to start the new Task.",
           "readOnly": true
         },
@@ -14854,7 +14875,7 @@
           "x-ms-identifiers": []
         },
         "affinityInfo": {
-          "$ref": "#/definitions/AffinityInfo",
+          "$ref": "#/definitions/BatchAffinityInfo",
           "description": "A locality hint that can be used by the Batch service to select a Compute Node on which to start the new Task."
         },
         "constraints": {
@@ -14909,7 +14930,7 @@
           "description": "The ID of the Task for which this is the result."
         },
         "eTag": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.eTag",
           "description": "The ETag of the Task, if the Task was successfully added. You can use this to detect whether the Task has changed between requests. In particular, you can be pass the ETag with an Update Task request to specify that your changes should take effect only if nobody else has modified the Job in the meantime."
         },
         "lastModified": {
@@ -15104,6 +15125,7 @@
       "properties": {
         "taskUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Task."
         },
         "jobId": {
@@ -15269,6 +15291,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the statistics."
         },
         "startTime": {
@@ -16612,6 +16635,7 @@
         },
         "containerUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the container within Azure Blob Storage to which to upload the file(s). If not using a managed identity, the URL must include a Shared Access Signature (SAS) granting write permissions to the container."
         },
         "identityReference": {
@@ -16729,6 +16753,7 @@
         },
         "url": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the Job."
         }
       }
@@ -16765,10 +16790,12 @@
         },
         "storageContainerUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the blob container within Azure Blob Storage. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. This URL must be readable and listable from compute nodes. There are three ways to get such a URL for a container in Azure storage: include a Shared Access Signature (SAS) granting read and list permissions on the container, use a managed identity with read and list permissions, or set the ACL for the container to allow public access."
         },
         "httpUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the file to download. The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified. If the URL points to Azure Blob Storage, it must be readable from compute nodes. There are three ways to get such a URL for a blob in Azure storage: include a Shared Access Signature (SAS) granting read permissions on the blob, use a managed identity with read permission, or set the ACL for the blob or its container to allow public access."
         },
         "blobPrefix": {
@@ -17114,6 +17141,7 @@
       "properties": {
         "containerUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The URL of the container within Azure Blob Storage to which to upload the Batch Service log file(s). If a user assigned managed identity is not being used, the URL must include a Shared Access Signature (SAS) granting write permissions to the container. The SAS duration must allow enough time for the upload to finish. The start time for SAS is optional and recommended to not be specified."
         },
         "startTime": {
