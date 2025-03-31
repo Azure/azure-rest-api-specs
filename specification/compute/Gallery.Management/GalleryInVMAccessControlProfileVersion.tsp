@@ -21,7 +21,7 @@ model GalleryInVMAccessControlProfileVersion
     Resource = GalleryInVMAccessControlProfileVersion,
     KeyName = "inVMAccessControlProfileVersionName",
     SegmentName = "versions",
-    NamePattern = ""
+    NamePattern = "^[0-9]+\\.[0-9]+\\.[0-9]+$"
   >;
 }
 
@@ -67,7 +67,7 @@ interface GalleryInVMAccessControlProfileVersions {
   delete is ComputeResourceDeleteAsync<
     GalleryInVMAccessControlProfileVersion,
     Response = ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+      ArmAsyncOperationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**

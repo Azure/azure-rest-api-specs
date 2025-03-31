@@ -21,9 +21,10 @@ model GalleryInVMAccessControlProfile
     Resource = GalleryInVMAccessControlProfile,
     KeyName = "inVMAccessControlProfileName",
     SegmentName = "inVMAccessControlProfiles",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9]+([-._]?[a-zA-Z0-9]+)*$"
   >;
 }
+@@maxLength(GalleryInVMAccessControlProfile.name, 80);
 
 @armResourceOperations
 interface GalleryInVMAccessControlProfiles {
@@ -66,8 +67,8 @@ interface GalleryInVMAccessControlProfiles {
   @operationId("GalleryInVMAccessControlProfiles_Delete")
   delete is ComputeResourceDeleteAsync<
     GalleryInVMAccessControlProfile,
-    Response = ArmDeleteAcceptedLroResponse<ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<ArmLroLocationHeader & 
+      ArmAsyncOperationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
