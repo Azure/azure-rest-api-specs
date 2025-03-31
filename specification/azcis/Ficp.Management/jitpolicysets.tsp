@@ -93,7 +93,7 @@ model PolicyAction {
 @doc("Provisioning Mode")
 model ProvisioningMode {
   @doc("Type of the provisioning mode, either \"Create\" or \"Delete\".")
-  mode: ProvisioningType;
+  mode: "Create" | "Delete" | string;
 }
 
 @doc("Policy Type")
@@ -106,17 +106,6 @@ union PolicyType {
 
   @doc("Explicitly Deny")
   ExplicitlyDeny: "ExplicitlyDeny",
-
-  string,
-}
-
-@doc("Provisioning Type")
-union ProvisioningType {
-  @doc("Create Provisioning Type")
-  Create: "Create",
-
-  @doc("Delete Provisioning Type")
-  Delete: "Delete",
 
   string,
 }
