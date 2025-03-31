@@ -4433,32 +4433,6 @@
       },
       "description": "Tags object for patch operations."
     },
-    "LabelsObject": {
-      "type": "object",
-      "properties": {
-        "labels": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource labels."
-        }
-      },
-      "description": "Label object for operations."
-    },
-    "AnnotationsObject": {
-      "type": "object",
-      "properties": {
-        "annotations": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource annotations."
-        }
-      },
-      "description": "Annotations object for operations."
-    },
     "ContainerServiceOSDisk": {
       "type": "integer",
       "format": "int32",
@@ -5226,12 +5200,18 @@
           }
         },
         "labels": {
-          "description": "The labels of the namespace",
-          "$ref": "#/definitions/LabelsObject"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The labels of managed namespace."
         },
         "annotations": {
-          "description": "The annotations of the namespace",
-          "$ref": "#/definitions/AnnotationsObject"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The annotations of managed namespace."
         },
         "defaultResourceQuota": {
           "description": "The default resource quota enforced upon the namespace. Customers can have other Kubernetes resource quota objects under the namespace. All the resource quotas will be enforced.",
