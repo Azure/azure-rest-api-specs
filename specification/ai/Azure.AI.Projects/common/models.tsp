@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../credentials/models.tsp";
 
 using TypeSpec.Http;
 
@@ -306,6 +305,17 @@ model PendingUploadResponse {
 
   @doc("TemporaryBlobReference is the only supported type")
   pendingUploadType: PendingUploadType.temporaryBlobReference;
+}
+
+@doc("SAS Credential definition")
+model SasCredential {
+  @doc("SAS uri")
+  @visibility(Lifecycle.Read)
+  sasUri: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Type of credential")
+  type: "SAS";
 }
 
 @doc("Represents a reference to a blob for consumption")

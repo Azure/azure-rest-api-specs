@@ -4,7 +4,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "../credentials/models.tsp";
 
 using TypeSpec.Rest;
 
@@ -27,9 +26,11 @@ model Connection {
   target: string;
 
   @doc("The authentication type used by the connection")
+  @visibility(Lifecycle.Read)
   authType: AuthenticationType;
 
   @doc("Metadata of the connection")
+  @visibility(Lifecycle.Read)
   metadata: Record<string>;
 }
 
