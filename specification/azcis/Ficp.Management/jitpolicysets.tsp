@@ -16,12 +16,12 @@ namespace Microsoft.AzureCis;
 
 @doc("Ficp JIT Policy Set properties")
 model JitPolicySetProperties {
+  @doc("Cloud identifier")
+  cloudId: string;
+  
   @doc("List of Jit policies")
   @extension("x-ms-identifiers", #[])
   policies: Array<JitPolicy>;
-
-  @doc("Cloud identifier")
-  cloudId: string;
 
   @doc("The Azure location.")
   azureLocation?: azureLocation;

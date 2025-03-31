@@ -414,6 +414,10 @@
       "type": "object",
       "description": "Ficp JIT Policy Set properties",
       "properties": {
+        "cloudId": {
+          "type": "string",
+          "description": "Cloud identifier"
+        },
         "policies": {
           "type": "array",
           "description": "List of Jit policies",
@@ -421,10 +425,6 @@
             "$ref": "#/definitions/JitPolicy"
           },
           "x-ms-identifiers": []
-        },
-        "cloudId": {
-          "type": "string",
-          "description": "Cloud identifier"
         },
         "azureLocation": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
@@ -437,8 +437,8 @@
         }
       },
       "required": [
-        "policies",
-        "cloudId"
+        "cloudId",
+        "policies"
       ]
     },
     "JitPolicySetResource": {
