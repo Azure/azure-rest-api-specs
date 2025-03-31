@@ -839,7 +839,7 @@
         }
       }
     },
-    "/evaluationResult": {
+    "/evaluationResults": {
       "get": {
         "operationId": "EvaluationResults_ListLatest",
         "description": "List the latest version of each EvaluationResult",
@@ -928,7 +928,7 @@
         }
       }
     },
-    "/evaluationResult/{name}/versions": {
+    "/evaluationResults/{name}/versions": {
       "get": {
         "operationId": "EvaluationResults_ListVersions",
         "description": "List all versions of the given EvaluationResult",
@@ -1109,7 +1109,7 @@
         }
       }
     },
-    "/evaluationResult/{name}/versions/{version}": {
+    "/evaluationResults/{name}/versions/{version}": {
       "get": {
         "operationId": "EvaluationResults_GetVersion",
         "description": "Get the specific version of the EvaluationResult",
@@ -1252,7 +1252,7 @@
         }
       }
     },
-    "/evaluationResult/{name}/versions/{version}/startPendingUpload": {
+    "/evaluationResults/{name}/versions/{version}/startPendingUpload": {
       "post": {
         "operationId": "EvaluationResults_StartPendingUpload",
         "description": "Create or start a pending upload of a evaluation results for a specific version.",
@@ -1860,7 +1860,7 @@
         }
       }
     },
-    "/red-teams/runs": {
+    "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_List",
         "description": "List a redteam by name.",
@@ -1913,7 +1913,7 @@
         }
       }
     },
-    "/red-teams/runs/{name}": {
+    "/redTeams/runs/{name}": {
       "get": {
         "operationId": "RedTeams_Get",
         "description": "Get a redteam by name.",
@@ -1961,7 +1961,7 @@
         }
       }
     },
-    "/red-teams/runs:run": {
+    "/redTeams/runs:run": {
       "post": {
         "operationId": "RedTeams_CreateRun",
         "description": "Creates a redteam run.",
@@ -2003,36 +2003,6 @@
     }
   },
   "definitions": {
-    "AadCredential": {
-      "type": "object",
-      "description": "AAD Credential definition",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseCredential"
-        }
-      ],
-      "x-ms-discriminator-value": "AAD"
-    },
-    "ApiKeyCredential": {
-      "type": "object",
-      "description": "ApiKey Credential definition",
-      "properties": {
-        "apiKey": {
-          "type": "string",
-          "description": "API Key",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "apiKey"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseCredential"
-        }
-      ],
-      "x-ms-discriminator-value": "ApiKey"
-    },
     "ApiResponseFormat": {
       "type": "string",
       "description": "Possible API response formats.",
@@ -2320,21 +2290,6 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
-    "BaseCredential": {
-      "type": "object",
-      "description": "Base Credential definition",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/CredentialType",
-          "description": "Type of credential. Possible values are: AAD, SAS, ApiKey",
-          "readOnly": true
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
     "BlobReferenceForConsumption": {
       "type": "object",
       "description": "Represents a reference to a blob for consumption",
@@ -2379,14 +2334,16 @@
         },
         "authType": {
           "$ref": "#/definitions/AuthenticationType",
-          "description": "The authentication type used by the connection"
+          "description": "The authentication type used by the connection",
+          "readOnly": true
         },
         "metadata": {
           "type": "object",
           "description": "Metadata of the connection",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -2484,33 +2441,6 @@
         }
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
-    },
-    "CredentialType": {
-      "type": "string",
-      "description": "The different Credential types",
-      "enum": [
-        "ApiKey",
-        "AAD",
-        "SAS"
-      ],
-      "x-ms-enum": {
-        "name": "CredentialType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ApiKey",
-            "value": "ApiKey"
-          },
-          {
-            "name": "AAD",
-            "value": "AAD"
-          },
-          {
-            "name": "SAS",
-            "value": "SAS"
-          }
-        ]
-      }
     },
     "DataPathAssetReference": {
       "type": "object",
@@ -3662,21 +3592,27 @@
       "type": "object",
       "description": "SAS Credential definition",
       "properties": {
-        "sasToken": {
+        "sasUri": {
           "type": "string",
-          "description": "SAS Token",
+          "description": "SAS uri",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of credential",
+          "enum": [
+            "SAS"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
           "readOnly": true
         }
       },
       "required": [
-        "sasToken"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseCredential"
-        }
-      ],
-      "x-ms-discriminator-value": "SAS"
+        "sasUri",
+        "type"
+      ]
     },
     "Sku": {
       "type": "object",
