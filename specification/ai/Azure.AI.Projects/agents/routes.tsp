@@ -54,23 +54,13 @@ interface Messages {
   """)
 interface Threads {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Creates a new Thread and returns it.
-    
-    @param body The Thread data to create.
-    @returns The newly created Thread.
-    """)
+  @doc("Creates a new Thread and returns it.")
   @post
   @route("/threads")
   createThread is Operation<Thread, Thread>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Retrieves an existing thread by its ID.
-    
-    @param threadId The identifier of the Thread to retrieve.
-    @returns The requested Thread.
-    """)
+  @doc("Retrieves an existing thread by its ID.")
   @get
   @route("/threads/{threadId}")
   getThread is Operation<
@@ -83,13 +73,7 @@ interface Threads {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Updates or replaces a thread by its ID, returning the updated Thread.
-    
-    @param threadId The identifier of the Thread to update.
-    @param body The new or revised Thread data.
-    @returns The updated Thread.
-    """)
+  @doc("Updates or replaces a thread by its ID, returning the updated Thread.")
   @put
   @route("/threads/{threadId}")
   updateThread is Operation<
@@ -106,11 +90,7 @@ interface Threads {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Deletes a thread, returning 204 on success.
-    
-    @param threadId The thread to delete.
-    """)
+  @doc("Deletes a thread, returning 204 on success.")
   @delete
   @route("/threads/{threadId}")
   deleteThread is Operation<
@@ -123,11 +103,7 @@ interface Threads {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Lists all threads, returning an array of Thread items.
-    
-    @returns An array of Thread objects.
-    """)
+  @doc("Lists all threads, returning an array of Thread items.")
   @get
   @route("/threads")
   listThreads is Operation<NoRequest, Thread[]>;
@@ -142,12 +118,7 @@ interface Threads {
   """)
 interface Agents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Creates a new Agent resource and returns it.
-    
-    @param body The Agent data to create.
-    @returns The newly created Agent.
-    """)
+  @doc("Creates a new Agent resource and returns it.")
   @post
   @route("/agents")
   createAgent is Operation<
@@ -158,12 +129,7 @@ interface Agents {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Retrieves an existing Agent by its ID.
-    
-    @param agentId The ID of the Agent to retrieve.
-    @returns The requested Agent.
-    """)
+  @doc("Retrieves an existing Agent by its ID.")
   @get
   @route("/agents/{agentId}")
   getAgent is Operation<
@@ -176,13 +142,7 @@ interface Agents {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Updates or replaces an agent and returns the updated resource.
-    
-    @param agentId The ID of the Agent to update.
-    @param body The updated Agent details.
-    @returns The new or updated Agent.
-    """)
+  @doc("Updates or replaces an agent and returns the updated resource.")
   @put
   @route("/agents/{agentId}")
   updateAgent is Operation<
@@ -199,11 +159,7 @@ interface Agents {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Deletes an Agent by its ID, returning 204 on success.
-    
-    @param agentId The ID of the Agent to delete.
-    """)
+  @doc("Deletes an Agent by its ID, returning 204 on success.")
   @delete
   @route("/agents/{agentId}")
   deleteAgent is Operation<
@@ -216,11 +172,7 @@ interface Agents {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("""
-    Lists all Agents, returning an array of Agent objects.
-    
-    @returns An array of Agent items.
-    """)
+  @doc("Lists all Agents, returning an array of Agent objects.")
   @get
   @route("/agents")
   listAgents is Operation<NoRequest, Agent[]>;
