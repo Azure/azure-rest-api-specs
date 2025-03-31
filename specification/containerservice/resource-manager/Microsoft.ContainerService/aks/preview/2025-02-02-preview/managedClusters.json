@@ -1017,13 +1017,13 @@
         "summary": "Gets a list of managed namespaces in the specified managed cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -1062,13 +1062,13 @@
         "summary": "Gets the specified namespace of a managed cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -1105,13 +1105,13 @@
         "summary": "Creates or updates a namespace in the specified managed cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -1139,7 +1139,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           },
           "201": {
@@ -1164,13 +1164,13 @@
         "summary": "Deletes a namespace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -1183,10 +1183,13 @@
           "200": {
             "description": "OK"
           },
+          "204": {
+            "description": "NoContent"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1205,13 +1208,13 @@
         "summary": "Updates tags on a namespace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -1259,22 +1262,19 @@
         "summary": "Lists the credentials of a namespace.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
             "$ref": "#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerFqdnParameter"
           },
           {
             "$ref": "#/parameters/CredentialFormatParameter"
@@ -4433,6 +4433,32 @@
       },
       "description": "Tags object for patch operations."
     },
+    "LabelsObject": {
+      "type": "object",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource labels."
+        }
+      },
+      "description": "Label object for operations."
+    },
+    "AnnotationsObject": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource annotations."
+        }
+      },
+      "description": "Annotations object for operations."
+    },
     "ContainerServiceOSDisk": {
       "type": "integer",
       "format": "int32",
@@ -5147,7 +5173,7 @@
       ],
       "properties": {
         "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "readOnly": true,
           "description": "The system metadata relating to this resource."
         },
@@ -5165,7 +5191,11 @@
         },
         "location": {
           "type": "string",
-          "description": "The location of the namespace."
+          "description": "The location of the namespace.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "description": "Properties of a namespace.",
@@ -5184,8 +5214,11 @@
           "description": "The current provisioning state of the namespace.",
           "enum": [
             "Updating",
+            "Deleting",
+            "Creating",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "NamespaceProvisioningState",
@@ -5193,18 +5226,12 @@
           }
         },
         "labels": {
-          "type": "object",
           "description": "The labels of the namespace",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/LabelsObject"
         },
         "annotations": {
-          "type": "object",
           "description": "The annotations of the namespace",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/AnnotationsObject"
         },
         "defaultResourceQuota": {
           "description": "The default resource quota enforced upon the namespace. Customers can have other Kubernetes resource quota objects under the namespace. All the resource quotas will be enforced.",
