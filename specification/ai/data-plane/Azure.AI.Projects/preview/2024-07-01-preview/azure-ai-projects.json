@@ -5945,6 +5945,22 @@
         "auth": {
           "$ref": "#/definitions/Agents.OpenApiAuthDetails",
           "description": "Open API authentication details"
+        },
+        "default_params": {
+          "type": "array",
+          "description": "List of OpenAPI spec parameters that will use user-provided defaults",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "defaultParams"
+        },
+        "functions": {
+          "type": "array",
+          "description": "List of functions returned in response",
+          "items": {
+            "$ref": "#/definitions/Agents.FunctionDefinition"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -7095,6 +7111,29 @@
         }
       ],
       "x-ms-discriminator-value": "fabric_dataagent"
+    },
+    "Agents.RunStepOpenAPIToolCall": {
+      "type": "object",
+      "description": "A record of a call to an OpenAPI tool, issued by the model in evaluation of a defined tool, that represents\nexecuted OpenAPI operations.",
+      "properties": {
+        "openapi": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "openAPI"
+        }
+      },
+      "required": [
+        "openapi"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
     },
     "Agents.RunStepSharepointToolCall": {
       "type": "object",

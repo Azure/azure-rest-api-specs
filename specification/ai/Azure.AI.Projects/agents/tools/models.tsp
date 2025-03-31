@@ -185,7 +185,6 @@ model OpenApiFunctionDefinition {
   defaultParams?: string[];
 
   @doc("List of functions returned in response")
-  @visibility("read")
   functions?: FunctionDefinition[];
 }
 
@@ -434,7 +433,7 @@ model RunStepFunctionToolCall extends RunStepToolCall {
   """)
 model RunStepOpenAPIToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'openapi'.")
-  type: "openapi"
+  type: "openapi";
 
   @doc("Reserved for future use.")
   @encodedName("application/json", "openapi")
