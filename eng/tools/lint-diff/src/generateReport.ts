@@ -76,7 +76,7 @@ export async function generateReport(
     const afterPath = getPath(after);
     const beforePath = before ? getPath(before) : "";
 
-    outputMarkdown += `| ${afterName} | link: [${afterName}](${getFileLink(compareSha, afterPath)}) | link: [${beforeName}](${getFileLink(baseBranch, beforePath)}) |\n`;
+    outputMarkdown += `| ${afterName} | [${afterName}](${getFileLink(compareSha, afterPath)}) | [${beforeName}](${getFileLink(baseBranch, beforePath)}) |\n`;
   }
 
   outputMarkdown += `\n\n`;
