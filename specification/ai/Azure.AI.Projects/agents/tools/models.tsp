@@ -179,6 +179,14 @@ model OpenApiFunctionDefinition {
 
   @doc("Open API authentication details")
   auth: OpenApiAuthDetails;
+
+  @doc("List of OpenAPI spec parameters that will use user-provided defaults")
+  @encodedName("application/json", "default_params")
+  defaultParams?: string[];
+
+  @doc("List of functions returned in response")
+  @visibility("read")
+  functions?: FunctionDefinition[];
 }
 
 @doc("""
@@ -418,6 +426,19 @@ model RunStepFunctionToolCall extends RunStepToolCall {
 
   @doc("The detailed information about the function called by the model.")
   function: RunStepFunctionToolCallDetails;
+}
+
+@doc("""
+  A record of a call to an OpenAPI tool, issued by the model in evaluation of a defined tool, that represents
+  executed OpenAPI operations.
+  """)
+model RunStepOpenAPIToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'openapi'.")
+  type: "openapi"
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "openapi")
+  openAPI: Record<string>;
 }
 
 // Call details: Code Interpreter
