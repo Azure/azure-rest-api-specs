@@ -68,7 +68,7 @@ model ExtendedFlags {
   @doc("Flag indicating if it is Global Policy or not")
   globalPolicy: boolean;
 
-  @doc("No Display?")
+  @doc("Flag indicating if the policy should be displayed or not")
   noDisplay: boolean;
 }
 
