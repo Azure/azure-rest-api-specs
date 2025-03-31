@@ -56,6 +56,16 @@ Describe "Copy-ApiVersion regex tests" {
                 inputReadme   = '..\..\..\..\specification\keyvault\data-plane\readme.md'
                 apiVersion    = "7.6-preview.1"
                 versionStatus = "preview"
+            },
+            @{
+                inputReadme   = '..\..\..\..\specification\securityinsights\resource-manager\readme.md'
+                apiVersion    = "2025-04-01"
+                versionStatus = "preview"
+            },
+            @{
+                inputReadme   = '..\..\..\..\specification\securityinsights\resource-manager\readme.md'
+                apiVersion    = "2025-05-01-preview"
+                versionStatus = "preview"
             }
         ) {
             param($inputReadme, $apiVersion, $versionStatus)
