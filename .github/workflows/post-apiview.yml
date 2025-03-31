@@ -12,11 +12,7 @@ jobs:
   post-apiview:
     name: After APIView
     runs-on: ubuntu-24.04
-    if: |
-      ${{ github.event.check_run.check_suite.app.name == 'Azure Pipelines' && 
-      ( contains(github.event.check_run.name, 'APIView') ||
-      contains(github.event.check_run.name, '(SDK Generation') ||
-      contains(github.event.check_run.name, 'Azure.azure-rest-api-specs-pipeline') ) }}
+    if: ${{ github.event.check_run.check_suite.app.name == 'Azure Pipelines' && ( contains(github.event.check_run.name, 'APIView') || contains(github.event.check_run.name, 'SDK Generation') || contains(github.event.check_run.name, 'Azure.azure-rest-api-specs-pipeline') ) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,8 +21,6 @@ jobs:
     
       - name: Create APIView Comment on PR
         run: |
-          . "${{ github.workspace }}/eng/common/scripts/Helpers/ApiView-Helpers.ps1"
-          Set-ApiViewCommentForRelatedIssues -HeadCommitish ${{ github.event.check_run.head_sha }} -AuthToken $env:AUTH_TOKEN
+          . "eng/common/scripts/Helpers/ApiView-Helpers.ps1"
+          Set-ApiViewCommentForRelatedIssues -HeadCommitish ${{ github.event.check_run.head_sha }} -AuthToken ${{ secrets.GITHUB_TOKEN }}
         shell: pwsh
-        env:
-          AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
