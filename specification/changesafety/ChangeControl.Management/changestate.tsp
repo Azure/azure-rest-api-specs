@@ -314,7 +314,7 @@ model ResourceContent {
 @added(Versions.v2025_03_01_preview)
 model VerifyChangeValidityResponse {
   @doc("The outcome of the verification.")
-  outcome: string;
+  outcome: ValidationOutcome;
 
   @doc("The explanation message of the verification.")
   message: string;
@@ -368,6 +368,24 @@ union ArmOperation {
   @added(Versions.v2025_03_01_preview)
   @doc("PATCH ARM Operation.")
   PATCH: "PATCH",
+}
+
+/* Supported validation outcome Enum string. */
+@doc("Supported validation outcomes.")
+union ValidationOutcome {
+  string,
+
+  @doc("Represents a Succeeded outcome.")
+  Succeeded: "Succeeded",
+
+  @doc("Represents a Failed outcome.")
+  Failed: "Failed",
+
+  @doc("Represents a Pending outcome.")
+  Pending: "Pending",
+
+  @doc("Represents a Deferred outcome.")
+  Deferred: "Deferred",
 }
 
 @doc("Azure resource Id of a ChangeState.")

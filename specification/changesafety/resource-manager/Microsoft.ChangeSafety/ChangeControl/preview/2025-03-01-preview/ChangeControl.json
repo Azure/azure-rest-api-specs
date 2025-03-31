@@ -3276,6 +3276,43 @@
       ],
       "x-ms-discriminator-value": "TemplateSpec"
     },
+    "ValidationOutcome": {
+      "type": "string",
+      "description": "Supported validation outcomes.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Pending",
+        "Deferred"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Represents a Succeeded outcome."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Represents a Failed outcome."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Represents a Pending outcome."
+          },
+          {
+            "name": "Deferred",
+            "value": "Deferred",
+            "description": "Represents a Deferred outcome."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "VerifyChangeValidityRequest": {
       "type": "object",
       "description": "VerifyChangeValidity POST Action request.",
@@ -3299,7 +3336,7 @@
       "description": "VerifyChangeValidity POST Action response.",
       "properties": {
         "outcome": {
-          "type": "string",
+          "$ref": "#/definitions/ValidationOutcome",
           "description": "The outcome of the verification."
         },
         "message": {
