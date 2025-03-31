@@ -14,9 +14,7 @@ using LiftrBase;
 
 /* ArizeAi.ObservabilityEval Resource Provider management API. */
 @armProviderNamespace
-@service({
-  title: "ArizeAi.ObservabilityEval management service",
-})
+@service(#{ title: "ArizeAi.ObservabilityEval management service" })
 @versioned(ArizeAi.ObservabilityEval.Versions)
 namespace ArizeAi.ObservabilityEval;
 

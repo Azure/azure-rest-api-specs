@@ -25,15 +25,17 @@ options:
     skip-special-headers:
       - "ocp-date"
     flavor: azure
+    generate-tests: false
+    generate-samples: false
   "@azure-tools/typespec-python":
     package-dir: "azure-batch"
-    package-name: "{package-dir}"
+    namespace: "azure.batch"
     flavor: azure
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
   "@azure-tools/typespec-ts":
     package-dir: "batch-rest"
-    packageDetails:
+    package-details:
       name: "@azure-rest/batch"
       description: "Batch Service Rest Level Client"
       version: "1.0.0-beta.1"

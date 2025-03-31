@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -57,7 +55,7 @@ model CloudFormationStackSet
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CloudFormationStackSet")
 model CloudFormationStackSetProperties {
   @doc("AWS Properties")
@@ -69,7 +67,7 @@ model CloudFormationStackSetProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsCloudFormationStackSet")
 model AwsCloudFormationStackSetProperties {
   @doc("The Amazon Resource Number (ARN) of the IAM role to use to create this stack set. Specify an IAM role only if you are using customized administrator roles to control which users or groups can manage specific stack sets within the same administrator account.")
@@ -82,7 +80,6 @@ model AwsCloudFormationStackSetProperties {
   callAs?: CallAs;
 
   @doc("In some cases, you must explicitly acknowledge that your stack set template contains certain capabilities in order for AWS CloudFormation to create the stack set and related stack instances.")
-  @extension("x-ms-identifiers", [])
   capabilities?: string[];
 
   @doc("A description of the stack set. You can use the description to identify the stack set's purpose or other important information.")
@@ -98,14 +95,14 @@ model AwsCloudFormationStackSetProperties {
   operationPreferences?: OperationPreferences;
 
   @doc("The input parameters for the stack set template.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   parameters?: Parameter[];
 
   @doc("Describes how the IAM roles required for stack set operations are created. By default, SELF-MANAGED is specified.")
   permissionModel?: PermissionModel;
 
   @doc("A group of stack instances with parameters in some specific accounts and regions.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   stackInstancesGroup?: StackInstances[];
 
   @doc("The ID of the stack set that you're creating.")
@@ -115,7 +112,7 @@ model AwsCloudFormationStackSetProperties {
   stackSetName?: string;
 
   @doc("The key-value pairs to associate with this stack set and the stacks created from it. AWS CloudFormation also propagates these tags to supported resources that are created in the stacks. A maximum number of 50 tags can be specified.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200 bytes.")
@@ -139,7 +136,7 @@ union CallAs {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AutoDeployment")
 model AutoDeployment {
   @doc("If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.")
@@ -163,7 +160,7 @@ union PermissionModel {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Active")
 model ActiveModel {
   @doc("When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.")
@@ -174,7 +171,7 @@ model ActiveModel {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OperationPreferences")
 model OperationPreferences {
   @doc("Property failureToleranceCount")
@@ -193,7 +190,6 @@ model OperationPreferences {
   regionConcurrencyType?: OperationPreferencesRegionConcurrencyType;
 
   @doc("Property regionOrder")
-  @extension("x-ms-identifiers", [])
   regionOrder?: string[];
 }
 
@@ -211,7 +207,7 @@ union OperationPreferencesRegionConcurrencyType {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Parameter")
 model Parameter {
   @doc("The key associated with the parameter. If you don't specify a key and value for a particular parameter, AWS CloudFormation uses the default value that is specified in your template.")
@@ -224,25 +220,24 @@ model Parameter {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StackInstances")
 model StackInstances {
   @doc("The AWS OrganizationalUnitIds or Accounts for which to create stack instances in the specified Regions.")
   deploymentTargets?: DeploymentTargets;
 
   @doc("A list of stack set parameters whose values you want to override in the selected stack instances.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   parameterOverrides?: Parameter[];
 
   @doc("The names of one or more Regions where you want to create stack instances using the specified AWS account(s).")
-  @extension("x-ms-identifiers", [])
   regions?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
   @doc("A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.")
@@ -255,21 +250,19 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DeploymentTargets")
 model DeploymentTargets {
   @doc("The filter type you want to apply on organizational units and accounts.")
   accountFilterType?: DeploymentTargetsAccountFilterType;
 
   @doc("AWS accounts that you want to create stack instances in the specified Region(s) for.")
-  @extension("x-ms-identifiers", [])
   accounts?: string[];
 
   @doc("Returns the value of the AccountsUrl property.")
   accountsUrl?: string;
 
   @doc("The organization root ID or organizational unit (OU) IDs to which StackSets deploys.")
-  @extension("x-ms-identifiers", [])
   organizationalUnitIds?: string[];
 }
 

@@ -1,0 +1,1422 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ManufacturingPlatform",
+    "version": "2025-03-01",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ManufacturingDataServices"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ManufacturingPlatform/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices": {
+      "get": {
+        "operationId": "ManufacturingDataServices_ListBySubscription",
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "description": "List MdsResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MdsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/ManufacturingDataServices_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices": {
+      "get": {
+        "operationId": "ManufacturingDataServices_ListByResourceGroup",
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "description": "List MdsResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MdsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/ManufacturingDataServices_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices/{mdsResourceName}": {
+      "get": {
+        "operationId": "ManufacturingDataServices_Get",
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "description": "Get a MdsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "description": "Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_Get_MaximumSet": {
+            "$ref": "./examples/ManufacturingDataServices_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManufacturingDataServices_CreateOrUpdate",
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "description": "Create a MdsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "description": "Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MdsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'MdsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/ManufacturingDataServices_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManufacturingDataServices_Update",
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "description": "Update a MdsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "description": "Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MdsResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MdsResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_Update_MaximumSet": {
+            "$ref": "./examples/ManufacturingDataServices_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManufacturingDataServices_Delete",
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "description": "Delete a MdsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "description": "Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_Delete_MaximumSet": {
+            "$ref": "./examples/ManufacturingDataServices_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManufacturingPlatform/manufacturingDataServices/{mdsResourceName}/listAvailableVersions": {
+      "post": {
+        "operationId": "ManufacturingDataServices_ListAvailableVersions",
+        "tags": [
+          "ManufacturingDataServices"
+        ],
+        "description": "Returns the list of available versions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "mdsResourceName",
+            "in": "path",
+            "description": "Name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManufacturingDataServices_ListAvailableVersions_MaximumSet": {
+            "$ref": "./examples/ManufacturingDataServices_ListAvailableVersions_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdxProfile": {
+      "type": "object",
+      "description": "The properties related to Azure Data Explorer (Adx) Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Adx Resource",
+          "readOnly": true
+        },
+        "uri": {
+          "type": "string",
+          "description": "Uri of Adx Resource",
+          "readOnly": true
+        },
+        "dataIngestionUri": {
+          "type": "string",
+          "description": "Data Ingestion Uri of Adx Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "AksProfile": {
+      "type": "object",
+      "description": "The properties related to Aks Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of AKS Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationVersion": {
+      "type": "object",
+      "description": "Information about application versions",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Application Version"
+        },
+        "isLatest": {
+          "type": "boolean",
+          "description": "Is Latest"
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Is Preview"
+        },
+        "isDeprecated": {
+          "type": "boolean",
+          "description": "Is Deprecated"
+        }
+      },
+      "required": [
+        "version",
+        "isLatest",
+        "isPreview",
+        "isDeprecated"
+      ]
+    },
+    "AvailableVersionListResult": {
+      "type": "object",
+      "description": "The list of available versions",
+      "properties": {
+        "versions": {
+          "type": "array",
+          "description": "The list of versions",
+          "items": {
+            "$ref": "#/definitions/ApplicationVersion"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "versions"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.SkuUpdate": {
+      "type": "object",
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/SkuTier",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      }
+    },
+    "CmkProfile": {
+      "type": "object",
+      "description": "The properties related to CMK",
+      "properties": {
+        "keyUri": {
+          "type": "string",
+          "description": "URI of Key in AKV",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "keyUri"
+      ]
+    },
+    "DatabaseProfile": {
+      "type": "object",
+      "description": "The properties related to Database Resource",
+      "properties": {
+        "cosmosId": {
+          "type": "string",
+          "description": "Resource Id of Cosmos Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "DenyAssignmentExclusion": {
+      "type": "object",
+      "description": "The properties related to Deny Assignment Exclusions",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Object Id of Identity",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of Identity",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "EventHubProfile": {
+      "type": "object",
+      "description": "The properties related to EventHub Resource",
+      "properties": {
+        "adxInstanceId": {
+          "type": "string",
+          "description": "Resource Id of Adx Instance",
+          "readOnly": true
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Host Name",
+          "readOnly": true
+        }
+      }
+    },
+    "FabricProfile": {
+      "type": "object",
+      "description": "The properties related to Fabric",
+      "properties": {
+        "keyUri": {
+          "type": "string",
+          "description": "Azure Key Vault Uri",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "oneLakeUri": {
+          "type": "string",
+          "description": "URI of One Lake",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "oneLakePath": {
+          "type": "string",
+          "description": "One Lake Path",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "keyUri",
+        "oneLakeUri",
+        "oneLakePath"
+      ]
+    },
+    "FabricProfileUpdate": {
+      "type": "object",
+      "description": "The properties related to Fabric",
+      "properties": {
+        "keyUri": {
+          "type": "string",
+          "description": "Azure Key Vault Uri",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "oneLakeUri": {
+          "type": "string",
+          "description": "URI of One Lake",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "oneLakePath": {
+          "type": "string",
+          "description": "One Lake Path",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "FunctionAppProfile": {
+      "type": "object",
+      "description": "The properties related to Azure Function App Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Azure Function App Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedOnBehalfOfConfiguration": {
+      "type": "object",
+      "description": "Configuration of the managed on behalf of resource.",
+      "properties": {
+        "moboBrokerResources": {
+          "type": "array",
+          "description": "Associated MoboBrokerResources.",
+          "items": {
+            "$ref": "#/definitions/MoboBrokerResource"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "moboBrokerResources"
+      ]
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "description": "Configuration of the managed resource group associated with the resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource group name."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource group location."
+        }
+      },
+      "required": [
+        "name",
+        "location"
+      ]
+    },
+    "MdsResource": {
+      "type": "object",
+      "description": "A ManufacturingPlatformProviderHub resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MdsResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MdsResourceListResult": {
+      "type": "object",
+      "description": "The response of a MdsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MdsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/MdsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MdsResourceProperties": {
+      "type": "object",
+      "description": "Details of the ManufacturingPlatform MdsResource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Mds Resource Version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enableCopilot": {
+          "type": "boolean",
+          "description": "Enable Copilot.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enableDiagnosticSettings": {
+          "type": "boolean",
+          "description": "Enable Diagnostic Settings.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "aadApplicationId": {
+          "type": "string",
+          "description": "AAD Application Id.",
+          "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "aksAdminGroupId": {
+          "type": "string",
+          "description": "AKS Admin Group Id.",
+          "default": "00000000-0000-0000-0000-000000000000",
+          "pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$|^$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serviceUrl": {
+          "type": "string",
+          "description": "Service Url",
+          "readOnly": true
+        },
+        "aksProfile": {
+          "$ref": "#/definitions/AksProfile",
+          "description": "Profile of AKS Created.",
+          "readOnly": true
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "Profile of Storage Created.",
+          "readOnly": true
+        },
+        "databaseProfile": {
+          "$ref": "#/definitions/DatabaseProfile",
+          "description": "Profile of Database Created.",
+          "readOnly": true
+        },
+        "adxProfile": {
+          "$ref": "#/definitions/AdxProfile",
+          "description": "Profile of Adx Created.",
+          "readOnly": true
+        },
+        "redisProfile": {
+          "$ref": "#/definitions/RedisProfile",
+          "description": "Profile of Azure Redis Created.",
+          "readOnly": true
+        },
+        "monitoringProfile": {
+          "$ref": "#/definitions/MonitoringProfile",
+          "description": "Profile of Monitoring Resource Created.",
+          "readOnly": true
+        },
+        "eventHubProfile": {
+          "$ref": "#/definitions/EventHubProfile",
+          "description": "Profile of EventHub Resource.",
+          "readOnly": true
+        },
+        "functionAppProfile": {
+          "$ref": "#/definitions/FunctionAppProfile",
+          "description": "Profile of Function App Resource.",
+          "readOnly": true
+        },
+        "openAIProfile": {
+          "$ref": "#/definitions/OpenAIProfile",
+          "description": "Profile of OpenAI Resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Configuration of the managed resource group associated with the resource.",
+          "readOnly": true
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of Configuration.",
+          "readOnly": true
+        },
+        "cmkProfile": {
+          "$ref": "#/definitions/CmkProfile",
+          "description": "Profile of CMK Settings.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fabricProfile": {
+          "$ref": "#/definitions/FabricProfile",
+          "description": "Profile of Fabric resources.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "userManagedOpenAIProfile": {
+          "$ref": "#/definitions/UserManagedOpenAIProfile",
+          "description": "Profile of User Managed OpenAI Resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "denyAssignmentExclusions": {
+          "type": "array",
+          "description": "Deny Assignments exclusion list.",
+          "items": {
+            "$ref": "#/definitions/DenyAssignmentExclusion"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "resourceState": {
+          "$ref": "#/definitions/ResourceState",
+          "description": "State of the resource",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "redundancyState": {
+          "$ref": "#/definitions/RedundancyState",
+          "description": "Zone redundancy state for resources",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "aadApplicationId"
+      ]
+    },
+    "MdsResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the MdsResource.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SkuUpdate",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/MdsResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "MdsResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the MdsResource.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Mds Resource Version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enableCopilot": {
+          "type": "boolean",
+          "description": "Enable Copilot.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "enableDiagnosticSettings": {
+          "type": "boolean",
+          "description": "Enable Diagnostic Settings.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "openAIProfile": {
+          "$ref": "#/definitions/OpenAIProfile",
+          "description": "Profile of OpenAI Resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "fabricProfile": {
+          "$ref": "#/definitions/FabricProfileUpdate",
+          "description": "Profile of Fabric resources.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "userManagedOpenAIProfile": {
+          "$ref": "#/definitions/UserManagedOpenAIProfileUpdate",
+          "description": "Profile of User Managed OpenAI Resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "denyAssignmentExclusions": {
+          "type": "array",
+          "description": "Deny Assignments exclusion list.",
+          "items": {
+            "$ref": "#/definitions/DenyAssignmentExclusion"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "resourceState": {
+          "$ref": "#/definitions/ResourceState",
+          "description": "State of the resource",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "MoboBrokerResource": {
+      "type": "object",
+      "description": "MoboBroker resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of MoboBrokerResource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "MonitoringProfile": {
+      "type": "object",
+      "description": "The properties related to Monitoring Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Application Insights Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "OpenAIProfile": {
+      "type": "object",
+      "description": "The properties related to OpenAI Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of OpenAI Resource",
+          "readOnly": true
+        },
+        "gptModelName": {
+          "type": "string",
+          "description": "GPT Model Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelVersion": {
+          "type": "string",
+          "description": "GPT Model Version",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "GPT Model Capacity",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelSkuName": {
+          "type": "string",
+          "description": "GPT Model SKU Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelName": {
+          "type": "string",
+          "description": "Embedding Model Name",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "embeddingModelVersion": {
+          "type": "string",
+          "description": "Embedding Model Version",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "embeddingModelSkuName": {
+          "type": "string",
+          "description": "Embedding Model SKU Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Embedding Model Capacity",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RedisProfile": {
+      "type": "object",
+      "description": "The properties related to Azure Redis Cache Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Azure Redis Cache Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "RedundancyState": {
+      "type": "string",
+      "description": "The redundancy state of the resource",
+      "enum": [
+        "Zonal",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "RedundancyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zonal",
+            "value": "Zonal",
+            "description": "Resource is zone redundant"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Resource is not redundant"
+          }
+        ]
+      }
+    },
+    "ResourceState": {
+      "type": "string",
+      "description": "The current state of the resource",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Resource is in active state"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Resource is in inactive state"
+          }
+        ]
+      }
+    },
+    "StorageProfile": {
+      "type": "object",
+      "description": "The properties related to Storage Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of Storage Resource",
+          "readOnly": true
+        }
+      }
+    },
+    "UserManagedOpenAIProfile": {
+      "type": "object",
+      "description": "The properties related to User Managed OpenAI Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of OpenAI Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelDeploymentName": {
+          "type": "string",
+          "description": "GPT Model Deployment Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelDeploymentName": {
+          "type": "string",
+          "description": "Embedding Model Deployment Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelType": {
+          "type": "string",
+          "description": "Embedding Model Type",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "gptModelDeploymentName",
+        "embeddingModelDeploymentName"
+      ]
+    },
+    "UserManagedOpenAIProfileUpdate": {
+      "type": "object",
+      "description": "The properties related to User Managed OpenAI Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id of OpenAI Resource",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "gptModelDeploymentName": {
+          "type": "string",
+          "description": "GPT Model Deployment Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "embeddingModelDeploymentName": {
+          "type": "string",
+          "description": "Embedding Model Deployment Name",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

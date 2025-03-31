@@ -20,9 +20,7 @@ using TypeSpec.Http;
     }
   ]>
 )
-@service({
-  title: "Document Intelligence (formerly Form Recognizer)",
-})
+@service(#{ title: "Document Intelligence (formerly Form Recognizer)" })
 @server(
   "{endpoint}/documentintelligence",
   "Extracts content, layout, and structured data from documents.",

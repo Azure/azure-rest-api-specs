@@ -646,7 +646,7 @@ model WhatsAppMessageTemplateItem extends MessageTemplateItem {
 @doc("A notification.")
 model Notifications {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The notification ID.")
   id: string;
 }
@@ -655,7 +655,7 @@ model Notifications {
 @doc("A communication channel.")
 model CommunicationChannel {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The registration ID of the channel.")
   channelId: uuid;
 }
@@ -664,7 +664,8 @@ model CommunicationChannel {
 @doc("A data stream.")
 model MessageDataStream {
   @key
-  @visibility("none") // this model is only used as a parameter
+  @path
+  @invisible(Lifecycle) // The stream ID is only used as a parameter.
   @doc("The stream ID.")
   @clientName("mediaId", "java")
   id: string;
@@ -684,7 +685,7 @@ model MessageDataStream {
 @doc("The message template as returned from the service.")
 model MessageTemplateItem {
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The template's name.")
   name: string;
 

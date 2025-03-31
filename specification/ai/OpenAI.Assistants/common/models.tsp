@@ -42,7 +42,7 @@ alias OpenAIListRequestOptions = {
   @query
   after?: string;
 
-  @doc("A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.")
+  @doc("A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.")
   @query
   before?: string;
 };
@@ -94,9 +94,12 @@ alias OptionalNullableMetadata = {
 };
 
 /**
- * Specifies the format that the model must output. Compatible with GPT-4 Turbo and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
+ * Specifies the format that the model must output. Compatible with GPT-4o, GPT-4 Turbo, and all GPT-3.5 Turbo models since `gpt-3.5-turbo-1106`.
  *
- * Setting to `{ "type": "json_object" }` enables JSON mode, which guarantees the message the model generates is valid JSON.
+ * Setting to `{ "type": "json_schema", "json_schema": {...} }` enables Structured Outputs which ensures the model will match your supplied JSON
+ * schema. Learn more in the Structured Outputs guide.
+ *
+ * Setting to `{ "type": "json_object" }` enables JSON mode, which ensures the message the model generates is valid JSON.
  *
  * **Important:** when using JSON mode, you **must** also instruct the model to produce JSON yourself via a system or user message.
  * Without this, the model may generate an unending stream of whitespace until the generation reaches the token limit,
@@ -124,6 +127,7 @@ union AssistantsApiResponseFormatMode {
   "auto",
 
   /** Setting the value to `none`, will result in a 400 Bad request. */
+  @removed(ServiceApiVersions.v2025_01_01_preview)
   "none",
 }
 
@@ -132,9 +136,58 @@ union AssistantsApiResponseFormatMode {
  * If `text` the model can return text or any value needed.
  */
 @added(ServiceApiVersions.v2024_05_01_preview)
+@discriminator("type")
 model AssistantsApiResponseFormat {
-  /** Must be one of `text` or `json_object`. */
+  /** Must be one of `text`, `json_object` or `json_schema` . */
   type?: ApiResponseFormat = ApiResponseFormat.text;
+}
+
+/**
+ * An object describing expected output of the model as text.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model AssistantsApiResponseFormatText extends AssistantsApiResponseFormat {
+  /** The type of response format being defined: `text` */
+  type: ApiResponseFormat.text;
+}
+
+/**
+ * An object describing expected output of the model as a JSON object.
+ */
+@added(ServiceApiVersions.v2024_05_01_preview)
+model AssistantsApiResponseFormatJsonObject
+  extends AssistantsApiResponseFormat {
+  /** The type of response format being defined: `json_object` */
+  type: ApiResponseFormat.jsonObject;
+}
+
+/**
+ * An object describing expected output of the model to match a JSON schema.
+ */
+@added(ServiceApiVersions.v2025_01_01_preview)
+model AssistantsApiResponseFormatJsonSchema
+  extends AssistantsApiResponseFormat {
+  /** The type of response format being defined: `json_schema` */
+  type: ApiResponseFormat.jsonSchema;
+
+  /** The JSON schema that the model must output. */
+  @encodedName("application/json", "json_schema")
+  jsonSchema: {
+    /** A description of what the response format is for, used by the model to determine how to respond in the format. */
+    description?: string;
+
+    /** The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64. */
+    name: string;
+
+    /** The schema for the response format, described as a JSON Schema object. */
+    #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
+    schema: unknown;
+
+    /**
+     * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. Only a subset of JSON Schema is supported when `strict` is `true`. To learn more, read the Structured Outputs guide.
+     */
+    strict?: boolean;
+  };
 }
 
 /** Possible API response formats. */
@@ -147,4 +200,7 @@ union ApiResponseFormat {
 
   /** Using `json_object` format will limit the usage of ToolCall to only functions. */
   jsonObject: "json_object",
+
+  /** Using `json_schema` format will ensure the model matches the supplied JSON schema. */
+  jsonSchema: "json_schema",
 }

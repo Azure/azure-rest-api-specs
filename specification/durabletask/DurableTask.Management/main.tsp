@@ -10,9 +10,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.DurableTask",
-})
+@service(#{ title: "Microsoft.DurableTask" })
 @versioned(Versions)
 namespace Microsoft.DurableTask;
 
@@ -41,12 +39,12 @@ model Scheduler is Azure.ResourceManager.TrackedResource<SchedulerProperties> {
 @doc("Details of the Scheduler")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task scheduler")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endpoint?: string;
 
   @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
@@ -66,7 +64,7 @@ model SchedulerSku {
   capacity?: int32;
 
   @doc("Indicates whether the current SKU configuration is zone redundant")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   redundancyState?: RedundancyState;
 }
 
@@ -95,12 +93,12 @@ union RedundancyState {
 
 @doc("The properties of Task Hub")
 model TaskHubProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation")
   provisioningState?: ProvisioningState;
 
   @doc("URL of the durable task scheduler dashboard")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dashboardUrl?: url;
 }
 
@@ -123,6 +121,40 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
+@doc("The update request model for the Scheduler resource")
+model SchedulerUpdate
+  is UpdateableProperties<Azure.ResourceManager.TrackedResource<SchedulerPropertiesUpdate>>;
+
+@doc("The Scheduler resource properties to be updated")
+model SchedulerPropertiesUpdate {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation")
+  provisioningState?: ProvisioningState;
+
+  @doc("URL of the durable task scheduler")
+  @visibility(Lifecycle.Read)
+  endpoint?: string;
+
+  @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
+  ipAllowlist?: string[];
+
+  @doc("SKU of the durable task scheduler")
+  sku?: SchedulerSkuUpdate;
+}
+
+@doc("The SKU (Stock Keeping Unit) properties to be updated")
+model SchedulerSkuUpdate {
+  @doc("The name of the SKU")
+  name?: string;
+
+  @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
+  capacity?: int32;
+
+  @doc("Indicates whether the current SKU configuration is zone redundant")
+  @visibility(Lifecycle.Read)
+  redundancyState?: RedundancyState;
+}
+
 @armResourceOperations(Scheduler)
 interface Schedulers {
   @doc("Get a Scheduler")
@@ -133,7 +165,7 @@ interface Schedulers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   @doc("Update a Scheduler")
   @errorsDoc("Validation error: required parameters are missing")
-  update is ArmResourcePatchAsync<Scheduler, SchedulerProperties>;
+  update is ArmCustomPatchAsync<Scheduler, SchedulerUpdate>;
   @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
   @doc("List Schedulers by resource group")

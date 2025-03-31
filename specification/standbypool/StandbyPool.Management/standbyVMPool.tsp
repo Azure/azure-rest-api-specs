@@ -25,7 +25,7 @@ model StandbyVirtualMachinePoolResource
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("standbyVirtualMachinePoolName")
   @segment("standbyVirtualMachinePools")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Name of the standby virtual machine pool")
   @path
   name: string;
@@ -38,7 +38,7 @@ model StandbyVirtualMachinePoolResourceProperties {
   elasticityProfile?: StandbyVirtualMachinePoolElasticityProfile;
 
   @doc("Specifies the desired state of virtual machines in the pool.")
-  @extension("x-ms-identifiers", ["vmState"])
+  @extension("x-ms-identifiers", #["vmState"])
   virtualMachineState: VirtualMachineState;
 
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
@@ -50,7 +50,7 @@ model StandbyVirtualMachinePoolResourceProperties {
   ]>;
 
   @doc("The status of the last operation.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -63,6 +63,10 @@ union VirtualMachineState {
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
   Deallocated: "Deallocated",
+
+  @added(Microsoft.StandbyPool.Versions.`2025-03-01`)
+  @doc("The virtual machine has released the lease on the underlying hardware and is powered off. Memory contents of the VM are stored in the OS disk.  When started again, applications and processes that were previously running in your VM resume from the state prior to hibernation.")
+  Hibernated: "Hibernated",
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
@@ -90,7 +94,7 @@ interface StandbyVirtualMachinePools {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyVirtualMachinePoolResource>;
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     StandbyVirtualMachinePoolResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -2777,6 +2777,16 @@ configuration:
       - if:
         - includesModifiedFiles:
             files:
+            - specification/containerservice/Fleet.Management
+            - specification/containerservice/fleet
+            excludedFiles:
+            - ''
+        then:
+        - addLabel:
+            label: Container Service Fleet
+      - if:
+        - includesModifiedFiles:
+            files:
             - specification/cosmos-db/
             excludedFiles:
             - ''

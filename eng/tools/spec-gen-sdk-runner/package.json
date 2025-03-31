@@ -10,13 +10,17 @@
   "scripts": {
     "build": "tsc --build",
     "lint": "eslint . -c eslint.config.js --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . -c eslint.config.js --fix"
+    "lint:fix": "eslint . -c eslint.config.js --fix",
+    "test": "vitest run",
+    "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "engines": {
-    "node": ">= 18.0.0"
+    "node": ">=20.0.0"
   },
   "devDependencies": {
-    "@types/node": "^18.19.31",
-    "typescript": "~5.6.2"
+    "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "^3.0.7",
+    "typescript": "~5.8.2",
+    "vitest": "^3.0.7"
   }
 }

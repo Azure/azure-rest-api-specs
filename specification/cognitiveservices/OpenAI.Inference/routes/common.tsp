@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
 model Deployment {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Specifies either the model deployment name (when using Azure OpenAI) or model name (when using non-Azure OpenAI) to use for this request.")
   @clientName("deploymentOrModelName", "java")
   @key

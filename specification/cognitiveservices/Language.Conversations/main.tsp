@@ -29,7 +29,7 @@ using Azure.Core.Traits;
     }
   ]>
 )
-@service({
+@service(#{
   title: "Microsoft Cognitive Language Service - Analyze Conversations",
 })
 @server(

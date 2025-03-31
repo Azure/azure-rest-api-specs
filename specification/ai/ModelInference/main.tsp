@@ -18,9 +18,7 @@ using Azure.Core;
     }
   ]>
 )
-@service({
-  title: "AI Model Inference",
-})
+@service(#{ title: "AI Model Inference" })
 @versioned(ModelInference.Versions)
 namespace ModelInference;
 

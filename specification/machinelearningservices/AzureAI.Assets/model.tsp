@@ -18,7 +18,7 @@ namespace Microsoft.MachineLearningServices;
 @doc("AssetVersion Definition")
 model AssetVersion {
   @doc("Fully qualified resource Id: azureml://workspace/{workspaceName}/indexes/{name}/versions/{version} of the index.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @doc("Update stage to 'Archive' to archive the asset. Default is Development, which means the asset is under development.")
@@ -28,7 +28,7 @@ model AssetVersion {
   description?: string;
 
   @doc("Metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   systemData?: SystemData;
 
   @doc("Asset's tags. Unlike properties, tags are fully mutable.")
@@ -48,7 +48,7 @@ model Index is AssetVersion {
 @pagedResult
 model PagedIndex {
   @doc("The list of Indexes.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @items
   value: Index[];
 
@@ -72,7 +72,7 @@ model Prompt is AssetVersion {
 @added(Versions.`2024-05-01-preview`)
 model PagedPrompt {
   @doc("The list of Prompts.")
-  @extension("x-ms-identifiers", [])
+  @extension("x-ms-identifiers", #[])
   @items
   value: Prompt[];
 

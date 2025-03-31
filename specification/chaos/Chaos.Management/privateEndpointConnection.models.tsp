@@ -33,7 +33,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The group ids for the private endpoint resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupIds?: string[];
 
   /**
@@ -49,7 +49,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection resource.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -60,7 +60,7 @@ model PrivateEndpoint {
   /**
    * The ARM identifier for private endpoint.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 }
 
@@ -135,13 +135,13 @@ model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   groupId?: string;
 
   /**
    * The private link resource required member names.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
@@ -152,7 +152,7 @@ model PrivateLinkResourceProperties {
   /**
    * Resource provisioning state. Not currently in use.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 

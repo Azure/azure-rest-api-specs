@@ -29,7 +29,29 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2024-09
+tag: package-2025-04
+```
+
+### Tag: package-2025-04
+These settings apply only when `--tag=package-2025-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04'
+input-file:
+  - Microsoft.Cdn/stable/2025-04-15/afdx.json
+  - Microsoft.Cdn/stable/2025-04-15/cdn.json
+  - Microsoft.Cdn/stable/2025-04-15/cdnwebapplicationfirewall.json
+```
+
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.Cdn/preview/2024-07-22-preview/edgeaction.json
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: Operation APIs for Microsoft.Cdn are to be defined in cdn swagger
 ```
 
 ### Tag: package-2024-09

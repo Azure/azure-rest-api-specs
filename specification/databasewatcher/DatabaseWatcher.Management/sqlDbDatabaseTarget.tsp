@@ -11,12 +11,12 @@ using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
-@doc("The properties specific to single database in Azure SQL Database.")
+@doc("The properties specific to a database in Azure SQL Database.")
 model SqlDbSingleDatabaseTargetProperties extends TargetProperties {
   @doc("The Azure SQL DB single database target.")
   targetType: "SqlDb";
 
-  @doc("The Azure resource ID of an Azure SQL DB single database target.")
+  @doc("The Azure resource ID of an Azure SQL DB database target.")
   sqlDbResourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/databases";

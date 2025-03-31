@@ -104,7 +104,7 @@ model Datastore is ProxyResource<DatastoreProperties> {
 @doc("The properties of a datastore")
 model DatastoreProperties {
   @doc("The state of the datastore provisioning")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: DatastoreProvisioningState;
 
   @doc("An Azure NetApp Files volume")
@@ -117,7 +117,7 @@ model DatastoreProperties {
   elasticSanVolume?: ElasticSanVolume;
 
   @doc("The operational status of the datastore")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: DatastoreStatus;
 }
 
@@ -142,7 +142,7 @@ model DiskPoolVolume {
   mountOption?: MountOptionEnum = MountOptionEnum.MOUNT;
 
   @doc("Device path")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   path?: string;
 }
 

@@ -19,9 +19,7 @@ using Azure.Portal;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
-@service({
-  title: "Microsoft.AwsConnector",
-})
+@service(#{ title: "Microsoft.AwsConnector" })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -56,7 +54,7 @@ model CloudTrailTrail is TrackedResource<CloudTrailTrailProperties> {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CloudTrailTrail")
 model CloudTrailTrailProperties {
   @doc("AWS Properties")
@@ -68,11 +66,11 @@ model CloudTrailTrailProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsCloudTrailTrail")
 model AwsCloudTrailTrailProperties {
   @doc("The advanced event selectors that were used to select events for the data store.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   advancedEventSelectors?: AdvancedEventSelector[];
 
   @doc("Property arn")
@@ -88,14 +86,14 @@ model AwsCloudTrailTrailProperties {
   enableLogFileValidation?: boolean;
 
   @doc("Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selector for all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. You can configure up to five event selectors for a trail.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   eventSelectors?: EventSelector[];
 
   @doc("Specifies whether the trail is publishing events from global services such as IAM to the log files.")
   includeGlobalServiceEvents?: boolean;
 
   @doc("Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   insightSelectors?: InsightSelector[];
 
   @doc("Whether the CloudTrail is currently logging AWS API calls.")
@@ -123,7 +121,7 @@ model AwsCloudTrailTrailProperties {
   snsTopicName?: string;
 
   @doc("Property tags")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   tags?: Tag[];
 
   @doc("Property trailName")
@@ -133,11 +131,11 @@ model AwsCloudTrailTrailProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AdvancedEventSelector")
 model AdvancedEventSelector {
   @doc("Contains all selector statements in an advanced event selector.")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   fieldSelectors?: AdvancedFieldSelector[];
 
   @doc("An optional, descriptive name for an advanced event selector, such as 'Log data events for only two S3 buckets'.")
@@ -147,15 +145,14 @@ model AdvancedEventSelector {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EventSelector")
 model EventSelector {
   @doc("Property dataResources")
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   dataResources?: DataResource[];
 
   @doc("An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing 'kms.amazonaws.com'. By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail.")
-  @extension("x-ms-identifiers", [])
   excludeManagementEventSources?: string[];
 
   @doc("Specify if you want your event selector to include management events for your trail.")
@@ -182,7 +179,7 @@ union EventSelectorReadWriteType {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InsightSelector")
 model InsightSelector {
   @doc("The type of insight to log on a trail.")
@@ -192,7 +189,7 @@ model InsightSelector {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
   @doc("The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.")
@@ -205,48 +202,41 @@ model Tag {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AdvancedFieldSelector")
 model AdvancedFieldSelector {
   @doc("An operator that includes events that match the last few characters of the event record field specified as the value of Field.")
-  @extension("x-ms-identifiers", [])
   endsWith?: string[];
 
   @doc("An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.")
-  @extension("x-ms-identifiers", [])
   equals?: string[];
 
   @doc("A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.")
   field?: string;
 
   @doc("An operator that excludes events that match the last few characters of the event record field specified as the value of Field.")
-  @extension("x-ms-identifiers", [])
   notEndsWith?: string[];
 
   @doc("An operator that excludes events that match the exact value of the event record field specified as the value of Field.")
-  @extension("x-ms-identifiers", [])
   notEquals?: string[];
 
   @doc("An operator that excludes events that match the first few characters of the event record field specified as the value of Field.")
-  @extension("x-ms-identifiers", [])
   notStartsWith?: string[];
 
   @doc("An operator that includes events that match the first few characters of the event record field specified as the value of Field.")
-  @extension("x-ms-identifiers", [])
   startsWith?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DataResource")
 model DataResource {
   @doc("The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.")
   type?: string;
 
   @doc("An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.")
-  @extension("x-ms-identifiers", [])
   values?: string[];
 }
 

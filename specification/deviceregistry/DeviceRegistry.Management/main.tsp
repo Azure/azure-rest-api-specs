@@ -17,9 +17,7 @@ using Azure.ResourceManager.Private;
 using Azure.ResourceManager.Foundations;
 
 @armProviderNamespace
-@service({
-  title: "Microsoft.DeviceRegistry management service",
-})
+@service(#{ title: "Microsoft.DeviceRegistry management service" })
 @doc("Microsoft.DeviceRegistry Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.DeviceRegistry;

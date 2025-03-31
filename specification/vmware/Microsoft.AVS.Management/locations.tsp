@@ -55,11 +55,11 @@ union QuotaEnabled {
 @doc("Subscription trial availability")
 model Trial {
   @doc("Trial status")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: TrialStatus;
 
   @doc("Number of trial hosts available")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   availableHosts?: int32;
 }
 
@@ -67,11 +67,11 @@ model Trial {
 model Quota {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Remaining hosts quota by sku type")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hostsRemaining?: Record<int32>;
 
   @doc("Host quota is active for current subscription")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   quotaEnabled?: QuotaEnabled;
 }
 
@@ -100,6 +100,6 @@ union LocationProvisioningState {
 @doc("The properties of a location resource")
 model LocationProperties {
   @doc("The provisioning state of the resource.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: LocationProvisioningState;
 }

@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -17,7 +18,7 @@ model TestProfileIdPathParameter {
   @maxLength(50)
   @minLength(2)
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @pattern("^[a-z0-9_-]*$")
   testProfileId: string;
 }
@@ -26,7 +27,7 @@ model TestProfileIdPathParameter {
 @added(APIVersions.v2024_05_01_preview)
 model TestProfileRunIdPathParameter {
   @doc("Unique identifier for the test profile run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @maxLength(50)
   @minLength(2)
   @key
@@ -48,25 +49,25 @@ union TestProfileRunStatus {
   string,
 
   @doc("Test profile run request is accepted.")
-  ACCEPTED: "ACCEPTED",
+  Accepted: "ACCEPTED",
 
   @doc("Test profile run is not yet started.")
-  NOTSTARTED: "NOTSTARTED",
+  NotStarted: "NOTSTARTED",
 
   @doc("Test profile run has started executing.")
-  EXECUTING: "EXECUTING",
+  Executing: "EXECUTING",
 
   @doc("Test profile run has completed successfully.")
-  DONE: "DONE",
+  Done: "DONE",
 
   @doc("Test profile run is being cancelled.")
-  CANCELLING: "CANCELLING",
+  Cancelling: "CANCELLING",
 
   @doc("Test profile run is cancelled.")
-  CANCELLED: "CANCELLED",
+  Cancelled: "CANCELLED",
 
   @doc("Test profile run has failed.")
-  FAILED: "FAILED",
+  Failed: "FAILED",
 }
 
 @doc("Category of Recommendation.")
@@ -89,14 +90,14 @@ model FunctionFlexConsumptionResourceConfiguration {
   instanceMemoryMB: int64;
 
   @doc("HTTP Concurrency for the function app.")
-  httpConcurrency: int64;
+  httpConcurrency?: int64;
 }
 
 @doc("Details of a particular test run for a test profile run.")
 @added(APIVersions.v2024_05_01_preview)
 model TestRunDetail {
   @doc("Status of the test run.")
-  status: Status;
+  status: TestRunStatus;
 
   @doc("ID of the configuration on which the test ran.")
   configurationId: string;
@@ -120,7 +121,7 @@ model TestProfileRunRecommendation {
 @discriminator("kind")
 model TargetResourceConfigurations {
   @doc("Kind of the resource for which the configurations apply.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   kind: ResourceKind;
 }
 
@@ -155,12 +156,12 @@ model TestProfile {
   description?: string;
 
   @doc("Associated test ID for the test profile. This property is required for creating a Test Profile and it's not allowed to be updated.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   testId?: string;
 
   @doc("Target resource ID on which the test profile is created. This property is required for creating a Test Profile and it's not allowed to be updated.")
-  @visibility("create", "read")
-  targetResourceId?: string;
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  targetResourceId?: armResourceIdentifier;
 
   @doc("Configurations of the target resource on which testing would be done.")
   targetResourceConfigurations?: TargetResourceConfigurations;
@@ -186,52 +187,52 @@ model TestProfileRun {
   description?: string;
 
   @doc("Associated test profile ID for the test profile run. This is required to create a test profile run and can't be updated.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   testProfileId?: string;
 
   // End section: Properties provided by user
 
   // Begin section: Properties populated from Test Profile
   @doc("Target resource ID on which the test profile run is created")
-  @visibility("read")
-  targetResourceId?: string;
+  @visibility(Lifecycle.Read)
+  targetResourceId?: armResourceIdentifier;
 
   @doc("Configurations of the target resource on which the test profile ran.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetResourceConfigurations?: TargetResourceConfigurations;
 
   // End section: Properties populated from Test Profile
 
   // Begin section: Test profile Run specific information
   @doc("The test profile run status.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: TestProfileRunStatus;
 
   @doc("Error details if there is any failure in test profile run. These errors are specific to the Test Profile Run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   errorDetails?: ErrorDetails[];
 
   @doc("The test profile run start DateTime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startDateTime?: utcDateTime;
 
   @doc("The test profile run end DateTime(RFC 3339 literal format).")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endDateTime?: utcDateTime;
 
   @doc("Test profile run duration in seconds.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   durationInSeconds?: int64;
 
   @doc("""
     Details of the test runs ran as part of the test profile run.
     Key is the testRunId of the corresponding testRun.
     """)
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   testRunDetails?: Record<TestRunDetail>;
 
   @doc("Recommendations provided based on a successful test profile run.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recommendations?: TestProfileRunRecommendation[];
 
   // End section: Test profile run specific information
