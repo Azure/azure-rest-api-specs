@@ -609,7 +609,8 @@
                   "description": "The identity type.",
                   "enum": [
                     "SystemAssigned",
-                    "UserAssigned"
+                    "UserAssigned",
+                    "Workload"
                   ],
                   "x-ms-enum": {
                     "name": "AKSIdentityType",
@@ -624,16 +625,12 @@
               "type": "boolean",
               "default": false
             },
-            "workloadIdentityEnabled":{
-              "readOnly": true,
-              "description": "Whether the provided identity is a workload identity. If an identity is provided by user, this will be set to true. Otherwise will be false.",
-              "type": "boolean",
-              "default": false
-            },
             "managementDetails":{
+              "readOnly": true,
               "$ref": "#/definitions/ManagementDetails"
             },
             "additionalDetails":{
+              "readOnly": true,
               "$ref": "#/definitions/AdditionalDetails"
             }
           }
@@ -655,8 +652,7 @@
           "type": "string",
           "x-ms-mutability": [
             "read",
-            "create",
-            "update"
+            "create"
           ],
           "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
         }
@@ -755,7 +751,8 @@
           "type": "string",
           "description": "The type of identity used for the resource. Only user assigned identities are supported.",
           "enum": [
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
