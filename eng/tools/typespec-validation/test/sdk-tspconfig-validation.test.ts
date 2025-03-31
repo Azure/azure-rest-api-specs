@@ -3,10 +3,7 @@ import { describe, it } from "vitest";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigTsMgmtModularGenerateMetadataTrueSubRule,
-  TspConfigTsMgmtModularHierarchyClientFalseSubRule,
   TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
-  TspConfigTsMgmtModularEnableOperationGroupTrueSubRule,
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
@@ -14,19 +11,23 @@ import {
   TspConfigGoMgmtModuleEqualStringSubRule,
   TspConfigGoMgmtFixConstStutteringTrueSubRule,
   TspConfigGoMgmtGenerateExamplesTrueSubRule,
-  TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
-  TspConfigGoMgmtInjectSpansTrueSubRule,
+  TspConfigGoAzGenerateFakesTrueSubRule,
+  TspConfigGoAzInjectSpansTrueSubRule,
+  TspConfigGoDpModuleMatchPatternSubRule,
+  TspConfigGoDpPackageDirectoryMatchPatternSubRule,
+  TspConfigGoDpServiceDirMatchPatternSubRule,
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigPythonMgmtPackageDirectorySubRule,
-  TspConfigPythonMgmtPackageNameEqualStringSubRule,
-  TspConfigPythonMgmtGenerateTestTrueSubRule,
-  TspConfigPythonMgmtGenerateSampleTrueSubRule,
+  TspConfigPythonAzPackageNameEqualStringSubRule,
+  TspConfigPythonAzGenerateTestTrueSubRule,
+  TspConfigPythonAzGenerateSampleTrueSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
   TspConfigCsharpAzNamespaceEqualStringSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
   TspConfigCsharpMgmtPackageDirectorySubRule,
   TspconfigSubRuleBase,
+  TspConfigPythonDpPackageDirectorySubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { join } from "path";
@@ -105,33 +106,41 @@ function createEmitterOptionTestCases(
   validValue: boolean | string,
   invalidValue: boolean | string,
   subRules: TspconfigSubRuleBase[],
+  allowUndefined: boolean = false,
 ): Case[] {
-  const cases: Case[] = [
-    {
-      description: `Validate ${emitterName}'s option:${key} with valid value ${validValue}`,
-      folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
-      success: true,
-      subRules,
-    },
-    {
-      description: `Validate ${emitterName}'s option:${key} with invalid value ${invalidValue}`,
-      folder,
-      tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: invalidValue }),
-      success: false,
-      subRules,
-    },
-    {
-      description: `Validate ${emitterName}'s option:${key} with undefined value`,
-      folder,
-      tspconfigContent: createEmitterOptionExample(emitterName),
-      success: false,
-      subRules,
-    },
-  ];
-  if (key.includes(".")) {
+  const cases: Case[] = [];
+
+  const language = emitterName.split("-").pop();
+  cases.push({
+    description: `Validate ${language}'s option:${key} with valid value ${validValue}`,
+    folder,
+    tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: validValue }),
+    success: true,
+    subRules,
+  });
+
+  cases.push({
+    description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
+    folder,
+    tspconfigContent: createEmitterOptionExample(emitterName, {
+      key: key,
+      value: invalidValue,
+    }),
+    success: false,
+    subRules,
+  });
+
+  cases.push({
+    description: `Validate ${language}'s option:${key} with undefined value`,
+    folder,
+    tspconfigContent: createEmitterOptionExample(emitterName),
+    success: allowUndefined ? true : false,
+    subRules,
+  });
+
+  if (!allowUndefined && key.includes(".")) {
     cases.push({
-      description: `Validate ${emitterName}'s option:${key} with incomplete key`,
+      description: `Validate ${language}'s option:${key} with incomplete key`,
       folder,
       tspconfigContent: createEmitterOptionExample(emitterName, {
         key: key.split(".").slice(0, -1).join("."),
@@ -150,6 +159,7 @@ interface Case {
   subRules: TspconfigSubRuleBase[];
   tspconfigContent: string;
   success: boolean;
+  ignoredKeyPaths?: string[];
 }
 
 const managementTspconfigFolder = "contosowidgetmanager/Contoso.Management/";
@@ -162,24 +172,6 @@ const commonAzureServiceDirTestCases = createParameterTestCases(
   [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
 );
 
-const tsManagementGenerateMetadataTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "generateMetadata",
-  true,
-  false,
-  [new TspConfigTsMgmtModularGenerateMetadataTrueSubRule()],
-);
-
-const tsManagementHierarchyClientTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-ts",
-  managementTspconfigFolder,
-  "hierarchyClient",
-  false,
-  true,
-  [new TspConfigTsMgmtModularHierarchyClientFalseSubRule()],
-);
-
 const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
@@ -189,14 +181,26 @@ const tsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTest
   [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
 );
 
-const tsManagementEnableOperationGroupTestCases = createEmitterOptionTestCases(
+const newTsManagementExperimentalExtensibleEnumsTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   managementTspconfigFolder,
-  "enableOperationGroup",
+  "experimental-extensible-enums",
   true,
   false,
-  [new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule()],
+  [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
 );
+
+const mixTsManagementExperimentalExtensibleEnumsTestCases = {
+  description: `Validate @azure-tools/typespec-ts's mix options: experimental-extensible-enums/experimentalExtensibleEnums with different values`,
+  folder: "aaa.Management",
+  tspconfigContent: createEmitterOptionExample(
+    "@azure-tools/typespec-ts",
+    { key: "experimentalExtensibleEnums", value: true },
+    { key: "experimental-extensible-enums", value: false },
+  ),
+  success: false,
+  subRules: [new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule()],
+};
 
 const tsManagementPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
@@ -215,6 +219,27 @@ const tsManagementPackageNameTestCases = createEmitterOptionTestCases(
   "@azure/aaa-bbb",
   [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
 );
+
+const newTsManagementPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  managementTspconfigFolder,
+  "package-details.name",
+  "@azure/arm-aaa-bbb",
+  "@azure/aaa-bbb",
+  [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
+);
+
+const mixTsManagementPackageNameTestCases = {
+  description: `Validate @azure-tools/typespec-ts's mix options: package-details/packageDetails with different values`,
+  folder: "aaa.Management",
+  tspconfigContent: createEmitterOptionExample(
+    "@azure-tools/typespec-ts",
+    { key: "packageDetails.name", value: "@azure/arm-aaa-bbb" },
+    { key: "package-details.name", value: "@azure/aaa-bbb" },
+  ),
+  success: false,
+  subRules: [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
+};
 
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
@@ -267,7 +292,16 @@ const goManagementGenerateFakesTestCases = createEmitterOptionTestCases(
   "generate-fakes",
   true,
   false,
-  [new TspConfigGoMgmtGenerateFakesTrueSubRule()],
+  [new TspConfigGoAzGenerateFakesTrueSubRule()],
+);
+
+const goDpGenerateFakesTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "generate-fakes",
+  true,
+  false,
+  [new TspConfigGoAzGenerateFakesTrueSubRule()],
 );
 
 const goManagementHeadAsBooleanTestCases = createEmitterOptionTestCases(
@@ -285,7 +319,44 @@ const goManagementInjectSpansTestCases = createEmitterOptionTestCases(
   "inject-spans",
   true,
   false,
-  [new TspConfigGoMgmtInjectSpansTrueSubRule()],
+  [new TspConfigGoAzInjectSpansTrueSubRule()],
+);
+
+const goDpInjectSpansTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "inject-spans",
+  true,
+  false,
+  [new TspConfigGoAzInjectSpansTrueSubRule()],
+);
+
+const goDpModuleTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "module",
+  "github.com/Azure/azure-sdk-for-go/aaa",
+  "github.com/Azure/azure-sdk-for-cpp/bbb",
+  [new TspConfigGoDpModuleMatchPatternSubRule()],
+  true,
+);
+
+const goDpPackageDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "package-dir",
+  "az1/2/3",
+  "bzasd",
+  [new TspConfigGoDpPackageDirectoryMatchPatternSubRule()],
+);
+
+const goDpServiceDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-go",
+  "",
+  "service-dir",
+  "sdk/2/3",
+  "sd/k",
+  [new TspConfigGoDpServiceDirMatchPatternSubRule()],
 );
 
 const javaManagementPackageDirTestCases = createEmitterOptionTestCases(
@@ -312,7 +383,7 @@ const pythonManagementPackageNameTestCases = createEmitterOptionTestCases(
   "package-name",
   "{package-dir}",
   "aaa",
-  [new TspConfigPythonMgmtPackageNameEqualStringSubRule()],
+  [new TspConfigPythonAzPackageNameEqualStringSubRule()],
 );
 
 const pythonManagementGenerateTestTestCases = createEmitterOptionTestCases(
@@ -321,7 +392,7 @@ const pythonManagementGenerateTestTestCases = createEmitterOptionTestCases(
   "generate-test",
   true,
   false,
-  [new TspConfigPythonMgmtGenerateTestTrueSubRule()],
+  [new TspConfigPythonAzGenerateTestTrueSubRule()],
 );
 
 const pythonManagementGenerateSampleTestCases = createEmitterOptionTestCases(
@@ -330,7 +401,43 @@ const pythonManagementGenerateSampleTestCases = createEmitterOptionTestCases(
   "generate-sample",
   true,
   false,
-  [new TspConfigPythonMgmtGenerateSampleTrueSubRule()],
+  [new TspConfigPythonAzGenerateSampleTrueSubRule()],
+);
+
+const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-python",
+  "",
+  "package-dir",
+  "azure-aaa-bbb-ccc",
+  "azure-aa-b-c-d",
+  [new TspConfigPythonDpPackageDirectorySubRule()],
+);
+
+const pythonAzPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-python",
+  "",
+  "package-name",
+  "{package-dir}",
+  "aaa",
+  [new TspConfigPythonAzPackageNameEqualStringSubRule()],
+);
+
+const pythonAzGenerateTestTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-python",
+  "",
+  "generate-test",
+  true,
+  false,
+  [new TspConfigPythonAzGenerateTestTrueSubRule()],
+);
+
+const pythonAzGenerateSampleTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-python",
+  "",
+  "generate-sample",
+  true,
+  false,
+  [new TspConfigPythonAzGenerateSampleTrueSubRule()],
 );
 
 const csharpAzPackageDirTestCases = createEmitterOptionTestCases(
@@ -369,17 +476,44 @@ const csharpMgmtPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpMgmtPackageDirectorySubRule()],
 );
 
+const suppressSubRuleTestCases: Case[] = [
+  {
+    description: "Suppress parameter",
+    folder: "",
+    subRules: [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
+    tspconfigContent: `
+parameters:
+  service-dir-x: ""
+`,
+    success: true,
+    ignoredKeyPaths: ["parameters.service-dir.default"],
+  },
+  {
+    description: "Suppress option",
+    folder: managementTspconfigFolder,
+    subRules: [new TspConfigTsMgmtModularPackageDirectorySubRule()],
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    package-dir: "*@#$%(@)*$#@!()#*&"
+`,
+    success: true,
+    ignoredKeyPaths: ["options.@azure-tools/typespec-ts.package-dir"],
+  },
+];
+
 describe("tspconfig", function () {
   it.each([
     // common
     ...commonAzureServiceDirTestCases,
     // ts
-    ...tsManagementGenerateMetadataTestCases,
-    ...tsManagementHierarchyClientTestCases,
+    ...newTsManagementExperimentalExtensibleEnumsTestCases,
     ...tsManagementExperimentalExtensibleEnumsTestCases,
-    ...tsManagementEnableOperationGroupTestCases,
     ...tsManagementPackageDirTestCases,
+    ...newTsManagementPackageNameTestCases,
     ...tsManagementPackageNameTestCases,
+    mixTsManagementExperimentalExtensibleEnumsTestCases,
+    mixTsManagementPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
@@ -389,6 +523,11 @@ describe("tspconfig", function () {
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
+    ...goDpGenerateFakesTestCases,
+    ...goDpInjectSpansTestCases,
+    ...goDpModuleTestCases,
+    ...goDpPackageDirTestCases,
+    ...goDpServiceDirTestCases,
     // java
     ...javaManagementPackageDirTestCases,
     // python
@@ -396,17 +535,32 @@ describe("tspconfig", function () {
     ...pythonManagementPackageNameTestCases,
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
+    ...pythonDpPackageDirTestCases,
+    ...pythonAzPackageNameTestCases,
+    ...pythonAzGenerateTestTestCases,
+    ...pythonAzGenerateSampleTestCases,
     // csharp
     ...csharpAzPackageDirTestCases,
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtPackageDirTestCases,
+    // suppression
+    ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
     let host = new TsvTestHost();
     host.checkFileExists = async (file: string) => {
       return file === join(c.folder, "tspconfig.yaml");
     };
     host.readTspConfig = async (_folder: string) => c.tspconfigContent;
+    host.getSuppressions = async (_path: string) => [
+      {
+        tool: "TypeSpecValidation",
+        paths: ["tspconfig.yaml"],
+        reason: "Test reason",
+        rules: ["SdkTspConfigValidation"],
+        subRules: c.ignoredKeyPaths,
+      },
+    ];
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(host, c.folder);
     strictEqual(result.success, true);

@@ -26,12 +26,50 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-08
+tag: package-2025-03
 azure-validator: false
 ```
 
 ---
 
+
+### Tag: package-2025-03
+
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03'
+input-file:
+  - Microsoft.CostManagement/stable/2025-03-01/common-types.json
+  - Microsoft.CostManagement/stable/2025-03-01/costallocation.json
+  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.budgets.json
+  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2025-03-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2025-03-01/settings.json
+```
+
+### Tag: package-preview-2024-10-01-preview
+
+These settings apply only when `--tag=package-preview-2024-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-10'
+input-file:
+  - Microsoft.CostManagement/preview/2024-10-01-preview/common-types.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costallocation.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.benefits.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.budgets.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.exports.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/scheduledActions.json
+  - Microsoft.CostManagement/preview/2024-10-01-preview/settings.json
+```
 
 ### Tag: package-2024-08
 
