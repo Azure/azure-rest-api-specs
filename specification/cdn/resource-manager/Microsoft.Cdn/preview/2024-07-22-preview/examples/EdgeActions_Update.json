@@ -1,0 +1,38 @@
+{
+  "operationId": "EdgeActions_Update",
+  "title": "UpdateEdgeAction",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-07-22-preview",
+    "edgeActionName": "edgeAction1",
+    "properties": {
+      "sku": {
+        "name": "Basic",
+        "tier": "Standard"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1",
+        "name": "edgeAction1",
+        "type": "Microsoft.Cdn/edgeActions",
+        "location": "global",
+        "sku": {
+          "name": "Basic",
+          "tier": "Standard"
+        },
+        "properties": {
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2024-03-06-preview"
+      }
+    }
+  }
+}
