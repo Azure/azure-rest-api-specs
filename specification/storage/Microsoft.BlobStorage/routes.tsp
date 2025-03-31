@@ -608,10 +608,6 @@ namespace Storage.Blob {
         @header("x-ms-range-get-content-crc64")
         rangeGetContentCrc64?: boolean,
 
-        /** Specifies the response content should be returned as a structured message and specifies the message schema version and properties. */
-        @header("x-ms-structured-body")
-        structuredBodyType?: string,
-
         ...EncryptionKeyParameter,
         ...EncryptionKeySha256Parameter,
         ...EncryptionAlgorithmParameter,
@@ -650,8 +646,6 @@ namespace Storage.Blob {
         ...LeaseStatusResponseHeader;
         ...VersionIdResponseHeader;
         ...IsCurrentVersionResponseHeader;
-        ...AcceptRangesResponseHeader;
-        ...DateResponseHeader;
         ...BlobCommittedBlockCountResponseHeader;
         ...IsServerEncryptedResponseHeader;
         ...EncryptionKeySha256ResponseHeader;
@@ -663,8 +657,6 @@ namespace Storage.Blob {
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
         ...LegalHoldResponseHeader;
-        ...StructuredBodyTypeResponseHeader;
-        ...StructuredContentLengthResponseHeader;
       }) | (BodyParameter & {
         #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Following standard pattern"
         @statusCode statusCode: 206;
@@ -715,8 +707,6 @@ namespace Storage.Blob {
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
         ...LegalHoldResponseHeader;
-        ...StructuredBodyTypeResponseHeader;
-        ...StructuredContentLengthResponseHeader;
       }) | StorageError;
 
       /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
@@ -771,8 +761,6 @@ namespace Storage.Blob {
           ...ContentLanguageResponseHeader;
           ...CacheControlResponseHeader;
           ...BlobSequenceNumberResponseHeader;
-          ...DateResponseHeader;
-          ...AcceptRangesResponseHeader;
           ...BlobCommittedBlockCountResponseHeader;
           ...IsServerEncryptedResponseHeader;
           ...EncryptionKeySha256ResponseHeader;
@@ -1887,8 +1875,6 @@ namespace Storage.Blob {
             ...ImmutabilityPolicyModeParameter;
             ...LegalHoldOptionalParameter;
             ...ContentCrc64Parameter;
-            ...StructuredBodyPut;
-            ...StructuredContentLengthParameter;
 
             /** The type of the blob. */
             @header("x-ms-blob-type")
@@ -1900,11 +1886,9 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...ContentMd5ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...StructuredBodyTypeResponseHeader;
           },
           "application/octet-stream"
         >;
@@ -1989,18 +1973,14 @@ namespace Storage.Blob {
             ...EncryptionKeySha256Parameter;
             ...EncryptionAlgorithmParameter;
             ...EncryptionScopeParameter;
-            ...StructuredBodyPut;
-            ...StructuredContentLengthParameter;
           },
           {
             @statusCode statusCode: 201;
-            ...DateResponseHeader;
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
-            ...StructuredBodyTypeResponseHeader;
           },
           "application/octet-stream"
         >;
@@ -2088,7 +2068,6 @@ namespace Storage.Blob {
             ...ContentMd5ResponseHeader;
             ...ContentCrc64ResponseHeader;
             ...VersionIdResponseHeader;
-            ...DateResponseHeader;
             ...IsServerEncryptedResponseHeader;
             ...EncryptionKeySha256ResponseHeader;
             ...EncryptionScopeResponseHeader;
@@ -2118,7 +2097,6 @@ namespace Storage.Blob {
             ...LastModifiedResponseHeader;
             ...EtagResponseHeader;
             ...BlobContentLengthRequired;
-            ...DateResponseHeader;
           }
         >;
 
