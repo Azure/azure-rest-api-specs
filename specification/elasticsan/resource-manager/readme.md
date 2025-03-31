@@ -26,7 +26,16 @@ These are the global settings for the storagepool.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-06
+tag: package-2025-03
+```
+
+### Tag: package-2025-03
+
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03'
+input-file:
+  - Microsoft.ElasticSan/stable/2025-03-01/elasticsan.json
 ```
 
 ### Tag: package-preview-2024-06
