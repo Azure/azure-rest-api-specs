@@ -2,7 +2,6 @@ import { readFile } from "fs/promises";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
-import { setEquals } from "../equality.js";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
@@ -97,7 +96,29 @@ export class CompileRule implements Rule {
         stdOutput += `\nSwaggers matching output folder and filename:\n`;
         stdOutput += tspGeneratedSwaggers.join("\n") + "\n";
 
-        if (!setEquals(new Set(outputSwaggers), new Set(tspGeneratedSwaggers))) {
+        const suppressedSwaggers = await filterAsync(
+          tspGeneratedSwaggers,
+          async (swaggerPath: string) => {
+            const suppressions = await host.getSuppressions(swaggerPath);
+            return suppressions.some(
+              (s) => s.rules?.includes(this.name) && s.subRules?.includes("ExtraSwagger"),
+            );
+          },
+        );
+
+        stdOutput += `\nSwaggers excluded via suppressions.yaml:\n`;
+        stdOutput += suppressedSwaggers.join("\n") + "\n";
+
+        const remainingSwaggers = tspGeneratedSwaggers.filter(
+          (s) => !suppressedSwaggers.includes(s),
+        );
+
+        stdOutput += `\nRemaining swaggers:\n`;
+        stdOutput += remainingSwaggers.join("\n") + "\n";
+
+        const extraSwaggers = remainingSwaggers.filter((s) => !outputSwaggers.includes(s));
+
+        if (extraSwaggers.length > 0) {
           success = false;
           errorOutput += pc.red(
             `\nOutput folder '${outputFolder}' appears to contain TypeSpec-generated ` +
@@ -105,6 +126,7 @@ export class CompileRule implements Rule {
               `Perhaps you deleted a version from your TypeSpec, but didn't delete ` +
               `the associated swaggers?\n\n`,
           );
+          errorOutput += pc.red(extraSwaggers.join("\n") + "\n");
         }
       } else {
         success = false;
