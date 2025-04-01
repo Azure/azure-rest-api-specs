@@ -416,6 +416,29 @@ input-file:
   - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
 ```
 
+### Tag: package-2024-11-01-only
+
+These settings apply only when `--tag=package-2024-11-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-11-01-only'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/virtualMachineScaleSet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/virtualMachine.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/virtualMachineImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/virtualMachineExtensionImage.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/availabilitySet.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/proximityPlacementGroup.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/dedicatedHost.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/sshPublicKey.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/image.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/restorePoint.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/capacityReservation.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/logAnalytic.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/runCommand.json 
+```
+
 ### Tag: package-2024-10-01
 
 These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
