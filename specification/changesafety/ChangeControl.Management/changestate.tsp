@@ -311,7 +311,6 @@ model ResourceContent {
 
 @added(Versions.v2025_03_01_preview)
 @doc("VerifyChangeValidity POST Action response.")
-@added(Versions.v2025_03_01_preview)
 model VerifyChangeValidityResponse {
   @doc("The outcome of the verification.")
   outcome: ValidationOutcome;
