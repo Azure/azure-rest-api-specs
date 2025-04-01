@@ -3238,7 +3238,8 @@
         "bing_grounding",
         "fabric_dataagent",
         "sharepoint_grounding",
-        "azure_ai_search"
+        "azure_ai_search",
+        "bing_custom_search"
       ],
       "x-ms-enum": {
         "name": "AgentsNamedToolChoiceType",
@@ -3278,6 +3279,11 @@
             "name": "azureAISearch",
             "value": "azure_ai_search",
             "description": "Tool type `azure_ai_search`"
+          },
+          {
+            "name": "bingCustomSearch",
+            "value": "bing_custom_search",
+            "description": "Tool type `bing_custom_search`"
           }
         ]
       }
@@ -3500,6 +3506,26 @@
         }
       ],
       "x-ms-discriminator-value": "azure_function"
+    },
+    "BingCustomSearchToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a Bing custom search tool as used to configure an agent.",
+      "properties": {
+        "bing_custom_search": {
+          "$ref": "#/definitions/SearchConfigurationList",
+          "description": "The list of search configurations used by the bing custom search tool.",
+          "x-ms-client-name": "bingCustomSearch"
+        }
+      },
+      "required": [
+        "bing_custom_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search"
     },
     "BingGroundingToolDefinition": {
       "type": "object",
@@ -5916,6 +5942,29 @@
         "total_tokens"
       ]
     },
+    "RunStepCustomSearchToolCall": {
+      "type": "object",
+      "description": "A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents\nexecuted search with bing custom search.",
+      "properties": {
+        "bing_custom_search": {
+          "type": "object",
+          "description": "Reserved for future use.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-name": "bingCustomSearch"
+        }
+      },
+      "required": [
+        "bing_custom_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RunStepToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search"
+    },
     "RunStepDelta": {
       "type": "object",
       "description": "Represents the delta payload in a streaming run step delta chunk.",
@@ -6688,6 +6737,45 @@
           }
         ]
       }
+    },
+    "SearchConfiguration": {
+      "type": "object",
+      "description": "A custom search configuration.",
+      "properties": {
+        "connection_id": {
+          "type": "string",
+          "description": "A connection in a ToolConnectionList attached to this tool.",
+          "x-ms-client-name": "connectionId"
+        },
+        "instance_name": {
+          "type": "string",
+          "description": "Name of the custom configuration instance given to config.",
+          "x-ms-client-name": "instanceName"
+        }
+      },
+      "required": [
+        "connection_id",
+        "instance_name"
+      ]
+    },
+    "SearchConfigurationList": {
+      "type": "object",
+      "description": "A list of search configurations currently used by the `bing_custom_search` tool.",
+      "properties": {
+        "search_configurations": {
+          "type": "array",
+          "description": "The connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/SearchConfiguration"
+          },
+          "x-ms-client-name": "searchConfigurations",
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "search_configurations"
+      ]
     },
     "SharepointToolDefinition": {
       "type": "object",
