@@ -1120,14 +1120,17 @@ model BatchJobStatistics {
 
   @doc("The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0.")
   @encode(string)
+  @clientName("succeededTasksCount")
   numSucceededTasks: int64;
 
   @doc("The total number of Tasks in the Job that failed during the given time range. A Task fails if it exhausts its maximum retry count without returning exit code 0.")
   @encode(string)
+  @clientName("failedTasksCount")
   numFailedTasks: int64;
 
   @doc("The total number of retries on all the Tasks in the Job during the given time range.")
   @encode(string)
+  @clientName("taskRetriesCount")
   numTaskRetries: int64;
 
   @doc("The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
@@ -2501,14 +2504,17 @@ model BatchJobScheduleStatistics {
 
   @doc("The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0.")
   @encode(string)
+  @clientName("succeededTasksCount")
   numSucceededTasks: int64;
 
   @doc("The total number of Tasks that failed during the given time range in Jobs created under the schedule. A Task fails if it exhausts its maximum retry count without returning exit code 0.")
   @encode(string)
+  @clientName("failedTasksCount")
   numFailedTasks: int64;
 
   @doc("The total number of retries during the given time range on all Tasks in all Jobs created under the schedule.")
   @encode(string)
+  @clientName("taskRetriesCount")
   numTaskRetries: int64;
 
   @doc("The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
