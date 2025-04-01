@@ -1,5 +1,4 @@
-import { strict as assert } from "node:assert";
-import { describe, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { RuleResult } from "../src/rule-result.js";
 import { CompileRule } from "../src/rules/compile.js";
 import { TsvHost } from "../src/tsv-host.js";
@@ -17,9 +16,9 @@ describe("compile", function () {
 
     host.globby = async () => [swaggerPath];
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
-
-    assert(result.success);
+    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+      success: true,
+    });
   });
 
   it("should fail if no emitter was configured", async function () {
@@ -32,9 +31,9 @@ describe("compile", function () {
       }
     };
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
-
-    assert(!result.success);
+    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+      success: false,
+    });
   });
 
   it("should fail if no output was generated", async function () {
@@ -47,9 +46,24 @@ describe("compile", function () {
       }
     };
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
+    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+      success: false,
+    });
+  });
 
-    assert(!result.success);
+  it("should throw if output has no generated swaggers", async function () {
+    let host = new TsvTestHost();
+    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => [
+      null,
+      "not-swagger",
+      "",
+    ];
+
+    await expect(
+      new CompileRule().execute(host, TsvTestHost.folder),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: No generated swaggers found in output of 'tsp compile']`,
+    );
   });
 
   it("should fail if extra swaggers", async function () {
@@ -64,10 +78,10 @@ describe("compile", function () {
     // Simulate extra swagger
     host.globby = async () => [swaggerPath, swaggerPath.replace("2022", "2023")];
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
-
-    assert(!result.success);
-    assert(result.errorOutput?.includes("not generated from the current"));
+    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current"),
+    });
   });
 
   // TODO: Add tests for all other branches of extra swaggers
@@ -95,9 +109,10 @@ describe("compile", function () {
       };
     };
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
-    assert(result.stdOutput);
-    assert(!result.stdOutput.includes("Running git diff"));
+    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+      success: false,
+      stdOutput: expect.not.stringContaining("Running git diff"),
+    });
   });
 
   it("should fail if git diff fails", async function () {
@@ -121,10 +136,10 @@ describe("compile", function () {
       };
     };
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
-    assert(result.stdOutput);
-    assert(result.stdOutput.includes("Running git diff"));
-    assert(!result.success);
+    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+      success: false,
+      stdOutput: expect.stringContaining("Running git diff"),
+    });
   });
 
   it("should succeed if git diff succeeds", async function () {
@@ -147,9 +162,9 @@ describe("compile", function () {
       };
     };
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
-    assert(result.stdOutput);
-    assert(result.stdOutput.includes("Running git diff"));
-    assert(result.success);
+    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("Running git diff"),
+    });
   });
 });
