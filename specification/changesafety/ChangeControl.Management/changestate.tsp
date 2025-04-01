@@ -371,6 +371,7 @@ union ArmOperation {
 }
 
 /* Supported validation outcome Enum string. */
+@added(Versions.v2025_03_01_preview)
 @doc("Supported validation outcomes.")
 union ValidationOutcome {
   string,
