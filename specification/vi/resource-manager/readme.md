@@ -52,7 +52,16 @@ These are the global settings for the adp.
 title: ViManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-01-01
+tag: package-2025-04-01
+```
+
+### Tag: package-2025-04-01
+These settings apply only when `--tag=2025-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04-01'
+version-with-underscores: 2025_04_01
+input-file:
+  - Microsoft.VideoIndexer/stable/2025-04-01/vi.json
 ```
 
 ### Tag: package-2024-09-23-preview
@@ -85,7 +94,7 @@ input-file:
   - Microsoft.VideoIndexer/preview/2024-04-01-preview/vi.json
 ```
 
-### Tag: package-2024-01
+### Tag: package-2025-01-01
 These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-2025-01-01'
@@ -161,15 +170,6 @@ version: 2021-10-18-preview
 version-with-underscores: 2021_10_18_preview
 input-file:
   - Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json
-```
-
-### Tag: package-2025-04-01
-These settings apply only when `--tag=2025-04-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-04-01'
-version-with-underscores: 2025_04_01
-input-file:
-  - Microsoft.VideoIndexer/stable/2025-04-01/vi.json
 ```
 
 ---
