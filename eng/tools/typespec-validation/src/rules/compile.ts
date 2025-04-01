@@ -86,6 +86,7 @@ export class CompileRule implements Rule {
             outputFilename,
           );
           const allSwaggers = (await host.globby(pattern, { ignore: ["**/examples/**"] })).map(
+            // Globby always returns posix paths
             (p) => normalize(p),
           );
 
@@ -109,9 +110,31 @@ export class CompileRule implements Rule {
             tspGeneratedSwaggers,
             async (swaggerPath: string) => {
               const suppressions = await host.getSuppressions(swaggerPath);
-              return suppressions.some(
+
+              const extraSwaggerSuppressions = suppressions.filter(
                 (s) => s.rules?.includes(this.name) && s.subRules?.includes("ExtraSwagger"),
               );
+
+              // Each path must specify a single version (without wildcards) under "preview|stable"
+              //
+              // Allowed:    data-plane/Azure.Contoso.WidgetManager/preview/2022-11-01-preview/**/*.json
+              // Disallowed: data-plane/Azure.Contoso.WidgetManager/preview/**/*.json
+              // Disallowed: data-plane/**/*.json
+              //
+              // Include "." since a few specs use versions like "X.Y" instead of "YYYY-MM-DD"
+              const singleVersionPattern = "/(preview|stable)/[A-Za-z0-9._-]+/";
+
+              for (const suppression of extraSwaggerSuppressions) {
+                for (const p of suppression.paths) {
+                  if (!p.match(singleVersionPattern)) {
+                    throw new Error(
+                      `Invalid path '${p}'.  Path must only include one version per suppression.`,
+                    );
+                  }
+                }
+              }
+
+              return extraSwaggerSuppressions.length > 0;
             },
           );
 
