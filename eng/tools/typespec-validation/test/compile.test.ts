@@ -132,4 +132,6 @@ describe("compile", function () {
     assert(result.stdOutput.includes("Running git diff"));
     assert(result.success);
   });
+
+  // TODO: Add tests to get 100% code coverage, include new "extra swaggers" code
 });
