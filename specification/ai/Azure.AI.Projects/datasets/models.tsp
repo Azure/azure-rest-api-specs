@@ -7,6 +7,8 @@ import "../main.tsp";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
+using TypeSpec.Versioning;
+
 namespace Azure.AI.Projects;
 
 @doc("Enum to determine the type of data.")
@@ -24,6 +26,7 @@ union DatasetType {
 @doc("DatasetVersion Definition")
 @Rest.resource("datasets")
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model DatasetVersion {
   @doc("[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330")
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -42,6 +45,7 @@ model DatasetVersion {
 }
 
 @doc("FileDatasetVersion Definition")
+@added(Versions.v2025_05_01)
 model FileDatasetVersion extends DatasetVersion {
   @doc("Dataset type")
   type: DatasetType.uri_file;
@@ -51,6 +55,7 @@ model FileDatasetVersion extends DatasetVersion {
 }
 
 @doc("FileDatasetVersion Definition")
+@added(Versions.v2025_05_01)
 model FolderDatasetVersion extends DatasetVersion {
   @doc("Dataset type")
   type: DatasetType.uri_folder;

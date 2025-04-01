@@ -7,12 +7,14 @@ import "../common/models.tsp";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
 @doc("Model Deployment Definition")
 @resource("deployments")
 @discriminator("type")
+@added(Versions.v2025_05_01)
 model Deployment {
   @doc("The type of the deployment")
   type: DeploymentType;
@@ -24,6 +26,7 @@ model Deployment {
 }
 
 @doc("Model Deployment Definition")
+@added(Versions.v2025_05_01)
 model ModelDeployment extends Deployment {
   @doc("The type of the deployment")
   type: DeploymentType.ModelDeployment;
@@ -54,6 +57,7 @@ model ModelDeployment extends Deployment {
 }
 
 @doc("Sku information")
+@added(Versions.v2025_05_01)
 model Sku {
   @doc("Sku capacity")
   capacity: int64;
@@ -71,6 +75,7 @@ model Sku {
   tier: string;
 }
 
+@added(Versions.v2025_05_01)
 union DeploymentType {
   string,
 

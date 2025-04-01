@@ -16,6 +16,8 @@ namespace Azure.AI.Projects;
 
 @doc("Evaluation Result resource Definition")
 @Rest.resource("evaluationResults")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 model EvaluationResult {
   @doc("Type of Evaluation result")
   ResultType?: ResultType;
@@ -45,6 +47,8 @@ model EvaluationResult {
 }
 
 @doc("Type of Evaluation result")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 union ResultType {
   string,
 

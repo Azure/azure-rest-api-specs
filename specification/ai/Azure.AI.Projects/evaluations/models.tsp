@@ -8,10 +8,13 @@ import "../main.tsp";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
 @doc("Evaluator Configuration")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 model EvaluatorConfiguration {
   @doc("Identifier of the evaluator.")
   id: string;
@@ -26,12 +29,16 @@ model EvaluatorConfiguration {
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator"
 @doc("Abstract data class.")
 @discriminator("type")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 model InputData {
   @doc("Type of the data")
   type: string;
 }
 
 @doc("Dataset as source for evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 model InputDataset extends InputData {
   type: "dataset";
 
@@ -41,6 +48,8 @@ model InputDataset extends InputData {
 
 @doc("Evaluation Definition")
 @resource("runs")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 model Evaluation {
   @doc("Identifier of the evaluation.")
   @key("name")

@@ -7,6 +7,7 @@ import "./models.tsp";
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -16,6 +17,7 @@ alias ConnectionServiceTraits = SupportsClientRequestId &
 
 alias ConnectionOperations = Azure.Core.ResourceOperations<ConnectionServiceTraits>;
 
+@added(Versions.v2025_05_01)
 interface Connections {
   @doc("Get a connection by name.")
   get is ConnectionOperations.ResourceRead<Connection>;

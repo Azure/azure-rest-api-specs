@@ -6,11 +6,13 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
 @doc("Response from the listSecrets operation")
 @resource("connections")
+@added(Versions.v2025_05_01)
 model Connection {
   @doc("The name of the resource")
   @visibility(Lifecycle.Read)

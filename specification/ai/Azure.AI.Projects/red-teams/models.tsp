@@ -16,6 +16,8 @@ using Azure.Core.Traits;
 namespace Azure.AI.Projects;
 
 @doc("Strategies for attacks.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 union AttackStrategy {
   string,
 
@@ -48,6 +50,8 @@ union AttackStrategy {
 }
 
 @doc("Risk category for the attack objective.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 union RiskCategory {
   string,
 
@@ -75,6 +79,8 @@ union RiskCategory {
 
 @doc("Red team details.")
 @resource("runs")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 model RedTeam {
   @doc("Identifier of the red team.")
   @key("name")
