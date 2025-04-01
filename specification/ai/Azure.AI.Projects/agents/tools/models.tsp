@@ -89,13 +89,14 @@ model OpenApiToolDefinition extends ToolDefinition {
   openapi: OpenApiFunctionDefinition;
 }
 
-@doc("The input definition information for a bing custom search tool as used to configure an agent.")
+@doc("The input definition information for a Bing custom search tool as used to configure an agent.")
 model BingCustomSearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'bing_custom_search'.")
   type: "bing_custom_search";
 
   @doc("The list of search configurations used by the bing custom search tool.")
-  bing_custom_search: SearchConfigurationList;
+  @encodedName("application/json", "bing_custom_search")
+  bingCustomSearch: SearchConfigurationList;
 }
 
 // Definition details: File Search
