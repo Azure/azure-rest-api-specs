@@ -1072,6 +1072,306 @@
         "operationId": "importJobs_ListByAmlFilesystem"
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoImportJobs/{autoImportJobName}": {
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoImportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started the auto import job's transition to Deleted state. Poll the auto import job to monitor.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Auto import job deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_Delete": {
+            "$ref": "./examples/autoImportJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Schedules an auto import job for deletion.",
+        "operationId": "autoImportJobs_Delete"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoImportJobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the auto import job object corresponding to amlFilesystemName.",
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_Get": {
+            "$ref": "./examples/autoImportJobs_Get.json"
+          }
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Returns an auto import job.",
+        "operationId": "autoImportJobs_Get"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoImportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the auto import job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "autoImportJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The auto import job has been created or updated.",
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          },
+          "201": {
+            "description": "Auto import job creation has been initiated. Poll the auto import job's provisioningState property to monitor creation progress.",
+            "headers": {
+              "azure-async-operation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_CreateOrUpdate": {
+            "$ref": "./examples/autoImportJobs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Create or update an auto import job.",
+        "operationId": "autoImportJobs_CreateOrUpdate"
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AutoImportJobNameParameter"
+          },
+          {
+            "description": "Object containing the user-selectable properties of the auto import job. If read-only properties are included, they must match the existing values of those properties.",
+            "in": "body",
+            "name": "autoImportJob",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoImportJobUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the auto import job.",
+            "schema": {
+              "$ref": "#/definitions/AutoImportJob"
+            }
+          },
+          "202": {
+            "description": "Auto import job update has been initiated. Poll the auto import job's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_Update": {
+            "$ref": "./examples/autoImportJobs_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Update an auto import job instance.",
+        "operationId": "autoImportJobs_Update"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/autoImportJobs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AmlFilesystemNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of auto import jobs. History is maintained for 10 most recent jobs, although more than 10 jobs can be returned in the list if they were run recently. If there are more than 10 job records, the inactive auto import jobs will be automatically deleted from the list 72 hours after completion. Note that entity references might replace complete AmlFilesystem objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "schema": {
+              "$ref": "#/definitions/AutoImportJobsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "storagecache.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "autoImportJobs_ListByAmlFilesystem": {
+            "$ref": "./examples/autoImportJobs_ListByAmlFilesystem.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "autoImportJobs"
+        ],
+        "description": "Returns all the auto import jobs the user has access to under an AML File System.",
+        "operationId": "autoImportJobs_ListByAmlFilesystem"
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/checkAmlFSSubnets": {
       "post": {
         "produces": [
@@ -2262,6 +2562,336 @@
         }
       },
       "type": "object"
+    },
+    "AutoImportJob": {
+      "description": "An auto import job instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "description": "Properties of the auto import job.",
+          "properties": {
+            "provisioningState": {
+              "description": "ARM provisioning state.",
+              "enum": [
+                "Canceled"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true
+              },
+              "type": "string",
+              "readOnly": true
+            },
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the auto import job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto import job. By default it is set to 'Enable'.",
+              "default": "Enable",
+              "enum": [
+                "Enable",
+                "Disable"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "create",
+                "update"
+              ]
+            },
+            "autoImportPrefixes": {
+              "type": "array",
+              "description": "An array of blob paths/prefixes that get auto imported to the cluster namespace. It has '/' as the default value.",
+              "items": {
+                "type": "string"
+              },
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "conflictResolutionMode": {
+              "description": "How the auto import job will handle conflicts. For example, if the auto import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the auto import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the auto import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or is currently released. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
+              "type": "string",
+              "default": "Skip",
+              "enum": [
+                "Fail",
+                "Skip",
+                "OverwriteIfDirty",
+                "OverwriteAlways"
+              ],
+              "x-ms-enum": {
+                "name": "ConflictResolutionMode",
+                "modelAsString": true
+              },
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "enableDeletions": {
+              "type": "boolean",
+              "description": "Whether or not to enable deletions during auto import. This only affects overwrite-dirty.",
+              "default": false,
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "maximumErrors": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Total non-conflict-oriented errors (e.g., OS errors) Import will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately on any error.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "status": {
+              "x-ms-client-flatten": true,
+              "description": "The status of the auto import job.",
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "state": {
+                  "readOnly": true,
+                  "description": "The state of the auto import operation.",
+                  "type": "string",
+                  "enum": [
+                    "InProgress",
+                    "Failed",
+                    "Disabling",
+                    "Disabled"
+                  ],
+                  "x-ms-enum": {
+                    "name": "AutoImportJobState",
+                    "modelAsString": true
+                  }
+                },
+                "scanStartTime": {
+                  "readOnly": true,
+                  "description": "Date and time of when the currently running full scan began.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "scanEndTime": {
+                  "readOnly": true,
+                  "description": "Date and time of when the full scan ended.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "totalBlobsWalked": {
+                  "readOnly": true,
+                  "description": "Total number of blobs walked during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "rateOfBlobWalk": {
+                  "readOnly": true,
+                  "description": "Rate of blobs walked during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "totalBlobsImported": {
+                  "readOnly": true,
+                  "description": "Total number of blobs imported during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "rateOfBlobImport": {
+                  "readOnly": true,
+                  "description": "Rate of blob import during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "importedFiles": {
+                  "readOnly": true,
+                  "description": "Number of files imported during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "importedDirectories": {
+                  "readOnly": true,
+                  "description": "Number of directories imported during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "importedSymlinks": {
+                  "readOnly": true,
+                  "description": "Number of symlinks imported during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "preexistingFiles": {
+                  "readOnly": true,
+                  "description": "Number of preexisting files during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "preexistingDirectories": {
+                  "readOnly": true,
+                  "description": "Number of preexisting directories during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "preexistingSymlinks": {
+                  "readOnly": true,
+                  "description": "Number of preexisting symlinks during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "totalErrors": {
+                  "readOnly": true,
+                  "description": "Total errors encountered during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "totalConflicts": {
+                  "readOnly": true,
+                  "description": "Total conflicts encountered during full scan.",
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "blobSyncEvents": {
+                  "x-ms-client-flatten": true,
+                  "description": "The storage account blob change feed status of the auto import job.",
+                  "type": "object",
+                  "readOnly": true,
+                  "properties": {
+                      "importedFiles": {
+                      "readOnly": true,
+                      "description": "Number of files imported during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "importedDirectories": {
+                      "readOnly": true,
+                      "description": "Number of directories imported during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "importedSymlinks": {
+                      "readOnly": true,
+                      "description": "Number of symlinks imported during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "preexistingFiles": {
+                      "readOnly": true,
+                      "description": "Number of preexisting files during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "preexistingDirectories": {
+                      "readOnly": true,
+                      "description": "Number of preexisting directories during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "preexistingSymlinks": {
+                      "readOnly": true,
+                      "description": "Number of preexisting symlinks during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "totalBlobsImported": {
+                      "readOnly": true,
+                      "description": "Total number of blobs imported during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "rateOfBlobImport": {
+                      "readOnly": true,
+                      "description": "Rate of blob import during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "totalErrors": {
+                      "readOnly": true,
+                      "description": "Total errors encountered during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "totalConflicts": {
+                      "readOnly": true,
+                      "description": "Total conflicts encountered during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "deletions": {
+                      "readOnly": true,
+                      "description": "Number of deletions during auto import.",
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "lastChangeFeedEventConsumedTime": {
+                      "readOnly": true,
+                      "description": "Date and time of the last Change Feed event consumed.",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "lastTimeFullySynchronized": {
+                      "readOnly": true,
+                      "description": "Date and time when last fully synchronized.",
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AutoImportJobUpdate": {
+      "description": "An auto import job update instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "adminStatus": {
+              "type": "string",
+              "description": "The administrative status of the auto import job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto import job. By default it is set to 'Enable'.",
+              "enum": [
+                "Enable",
+                "Disable"
+              ],
+              "x-ms-enum": {
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "AutoImportJobsListResult": {
+      "description": "Result of the request to list auto import jobs. It contains a list of auto import jobs and a URL link to get the next set of results.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to get the next set of auto import job list results, if there are any.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of auto import jobs.",
+          "items": {
+            "$ref": "#/definitions/AutoImportJob"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
     }
   },
   "parameters": {
@@ -2291,6 +2921,17 @@
       "description": "Name for the auto export job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
       "in": "path",
       "name": "autoExportJobName",
+      "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
+      "required": true,
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "AutoImportJobNameParameter": {
+      "description": "Name for the auto import job. Allows alphanumerics, underscores, and hyphens. Start and end with alphanumeric.",
+      "in": "path",
+      "name": "autoImportJobName",
       "pattern": "^[0-9a-zA-Z][-0-9a-zA-Z_]{0,78}[0-9a-zA-Z]$",
       "required": true,
       "type": "string",
