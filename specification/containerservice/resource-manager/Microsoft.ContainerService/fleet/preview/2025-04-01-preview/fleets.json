@@ -3257,8 +3257,7 @@
           "type": "string",
           "description": "The human-readable display name of the Gate.",
           "minLength": 1,
-          "maxLength": 100,
-          "pattern": "^[A-Za-z0-9].*$"
+          "maxLength": 100
         },
         "type": {
           "$ref": "#/definitions/GateType",
@@ -3304,15 +3303,6 @@
           "description": "The human-readable display name of the Gate.",
           "minLength": 1,
           "maxLength": 100,
-          "pattern": "^[A-Za-z0-9].*$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "target": {
-          "$ref": "#/definitions/GateTarget",
-          "description": "The target that the Gate is controlling, e.g. an Update Run.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3321,6 +3311,14 @@
         "gateType": {
           "$ref": "#/definitions/GateType",
           "description": "The type of the Gate determines how it is completed.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "target": {
+          "$ref": "#/definitions/GateTarget",
+          "description": "The target that the Gate is controlling, e.g. an Update Run.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3337,8 +3335,8 @@
         }
       },
       "required": [
-        "target",
         "gateType",
+        "target",
         "state"
       ]
     },
@@ -3405,6 +3403,7 @@
       "description": "The state of the Gate.",
       "enum": [
         "Pending",
+        "Skipped",
         "Completed"
       ],
       "x-ms-enum": {
@@ -3417,6 +3416,11 @@
             "description": "A Pending Gate will continue to block the staged rollout process it is controlling."
           },
           {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "A Skipped Gate means that the staged rollout process it is controlling was skipped."
+          },
+          {
             "name": "Completed",
             "value": "Completed",
             "description": "An Completed Gate allows the staged rollout process to continue."
@@ -3426,7 +3430,7 @@
     },
     "GateTarget": {
       "type": "object",
-      "description": "The target that the Gate is controlling, e.g. an Update Run.",
+      "description": "The target that the Gate is controlling, e.g. an Update Run. Exactly one of the properties objects will be set.",
       "properties": {
         "id": {
           "$ref": "#/definitions/GateTargetId",
@@ -3436,17 +3440,9 @@
             "create"
           ]
         },
-        "type": {
-          "$ref": "#/definitions/GateTargetType",
-          "description": "The type of the resource being targeted by this Gate.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "properties": {
-          "$ref": "#/definitions/GateTargetProperties",
-          "description": "Properties specific to the target of this Gate.",
+        "updateRunProperties": {
+          "$ref": "#/definitions/UpdateRunGateTargetProperties",
+          "description": "The properties of the Update Run that the Gate is targeting.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3454,41 +3450,12 @@
         }
       },
       "required": [
-        "id",
-        "type",
-        "properties"
+        "id"
       ]
     },
     "GateTargetId": {
       "$ref": "#/definitions/UpdateRunResourceId",
       "x-nullable": false
-    },
-    "GateTargetProperties": {
-      "type": "object",
-      "x-nullable": false,
-      "allOf": [
-        {
-          "$ref": "#/definitions/UpdateRunGateTargetProperties"
-        }
-      ]
-    },
-    "GateTargetType": {
-      "type": "string",
-      "description": "The type of the Gate target.",
-      "enum": [
-        "UpdateRun"
-      ],
-      "x-ms-enum": {
-        "name": "GateTargetType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UpdateRun",
-            "value": "UpdateRun",
-            "description": "The Gate targets an Update Run."
-          }
-        ]
-      }
     },
     "GateType": {
       "type": "string",
@@ -3852,9 +3819,7 @@
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterGates": {
           "type": "array",
@@ -3862,9 +3827,7 @@
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3903,9 +3866,7 @@
             "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterGates": {
           "type": "array",
@@ -3914,9 +3875,7 @@
             "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3950,7 +3909,6 @@
           "description": "The human-readable display name of the Gate.",
           "minLength": 1,
           "maxLength": 100,
-          "pattern": "^[A-Za-z0-9].*$",
           "readOnly": true
         },
         "gateId": {
@@ -3965,9 +3923,9 @@
         }
       }
     },
-    "UpdateRunGateTarget": {
+    "UpdateRunGateTargetProperties": {
       "type": "object",
-      "description": "The Gate is targeting an Update Run staged rollout.",
+      "description": "The properties of the Update Run that the Gate is targeting.",
       "properties": {
         "name": {
           "type": "string",
@@ -4005,19 +3963,6 @@
       "required": [
         "name",
         "timing"
-      ]
-    },
-    "UpdateRunGateTargetProperties": {
-      "type": "object",
-      "description": "Wrapper object around the Update Run Gate Target Properties.",
-      "properties": {
-        "updateRun": {
-          "$ref": "#/definitions/UpdateRunGateTarget",
-          "description": "Properties specific to the Update Run."
-        }
-      },
-      "required": [
-        "updateRun"
       ]
     },
     "UpdateRunListResult": {
@@ -4198,9 +4143,7 @@
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterGates": {
           "type": "array",
@@ -4208,9 +4151,7 @@
           "items": {
             "$ref": "#/definitions/GateConfiguration"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -4249,9 +4190,7 @@
             "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterGates": {
           "type": "array",
@@ -4260,9 +4199,7 @@
             "$ref": "#/definitions/UpdateRunGateStatus"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": []
         },
         "afterStageWaitStatus": {
           "$ref": "#/definitions/WaitStatus",
