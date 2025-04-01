@@ -4,6 +4,7 @@
 // --------------------------------------------------------------------------------------------
 
 import "./operations.tsp";
+import "../common/models-sessions.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -11,66 +12,13 @@ using TypeSpec.Versioning;
 
 using OpenAPI;
 
-/** Policy controlling the behavior of the Session when a job in the session fails. */
-union SessionJobFailurePolicy {
-  string,
+using Quantum.Workspace;
 
-  /** New jobs submitted after a job fails will be rejected. */
-  Abort: "Abort",
+/** A Paged List of SessionDetails. */ // Used by workspace/sesssions
+alias PagedSessionDetails = Azure.Core.Page<SessionDetails>;
 
-  /** New jobs submitted after a job fails will be accepted. */
-  Continue: "Continue",
-}
-
-/** The status of the session. */
-union SessionStatus {
-  string,
-
-  /** The session is waiting in the queue to be executed. */
-  Waiting: "Waiting",
-
-  /** The session is being executed. */
-  Executing: "Executing",
-
-  /** The session completed with success. */
-  Succeeded: "Succeeded",
-
-  /** The session completed with failure. */
-  Failed: "Failed",
-
-  /** The session completed with some failures. */
-  `Failure(s)`: "Failure(s)",
-
-  /** The session timed out. */
-  TimedOut: "TimedOut",
-}
-
-/** Session, a logical grouping of jobs. */
-@resource("sessions")
-@parentResource(QuantumWorkspace)
-model SessionDetails extends ItemDetails {
-  /** Id of the session. */
-  @key("sessionId")
-  @visibility("read")
-  id: WorkspaceItemId;
-
-  /** Type of the Quantum Workspace item is Session. */
-  @visibility("read", "create")
-  itemType: ItemType.Session;
-
-  /** Policy controlling the behavior of the Session when a job in the session fails. */
-  @visibility("read", "create")
-  jobFailurePolicy: SessionJobFailurePolicy;
-
-  /** The status of the session. */
-  @visibility("read")
-  status?: SessionStatus;
-}
-
-@useDependency(DefaultAzureCoreVersion)
-namespace Quantum.Workspace.Operations {
-  using Quantum.Workspace.BaseOperations;
-  interface SessionOperations {
+namespace Quantum.Workspace.Services {
+  interface Sessions {
     /** Open a new session. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
     open is CreateOperation<SessionDetails>;
@@ -82,16 +30,36 @@ namespace Quantum.Workspace.Operations {
     get is GetOperation<SessionDetails>;
 
     /** List all Sessions. */
+    @sharedRoute
+    @added(QuantumWorkspaceAPIVersion.v2024_03_01_preview)
+    @removed(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
     list is ListOperation<SessionDetails>;
 
-    /** List jobs in a session. */
-    #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
+    /** List all Sessions. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
       We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
       See https://github.com/Azure/typespec-azure/issues/494
       """
+    @sharedRoute
+    @added(QuantumWorkspaceAPIVersion.v2024_10_01_preview)
+    listv2 is CustomListOperation<
+      Resource = SessionDetails,
+      Response = PagedSessionDetails,
+      Parameters = {
+        ...CustomFilterQueryParameter;
+        ...CustomSkipQueryParameter;
+        ...CustomTopQueryParameter;
+        ...CustomOrderByQueryParameter;
+      }
+    >;
+
+    /** List jobs in a session. */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+      We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+      See https://github.com/Azure/typespec-azure/issues/494
+      """
     @operationId("SessionsJobs_List")
     jobsList is CustomListOperation<
       Resource = JobDetails,
@@ -101,6 +69,11 @@ namespace Quantum.Workspace.Operations {
         @path
         @segment("sessions")
         sessionId: WorkspaceItemId;
+
+        ...CustomFilterQueryParameter;
+        ...CustomSkipQueryParameter;
+        ...CustomTopQueryParameter;
+        ...CustomOrderByQueryParameter;
       }
     >;
   }

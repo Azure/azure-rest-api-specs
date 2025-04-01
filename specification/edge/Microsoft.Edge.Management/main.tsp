@@ -11,9 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 @armProviderNamespace
-@service({
-  title: "Microsoft.Edge",
-})
+@service(#{ title: "Microsoft.Edge" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Edge;
