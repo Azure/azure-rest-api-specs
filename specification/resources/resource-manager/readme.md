@@ -34,7 +34,7 @@ tag: package-privatelinks-2020-05
 ```
 
 ``` yaml $(package-features)
-tag: package-features-2021-07
+tag: package-features-2025-03
 ```
 
 ``` yaml $(package-locks)
@@ -546,6 +546,15 @@ These settings apply only when `--tag=package-deploymentscripts-2019-10-preview`
 ``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview'
 input-file:
 - Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
+```
+
+### Tag: package-features-2025-03
+
+These settings apply only when `--tag=package-features-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-features-2025-03'
+input-file:
+- Microsoft.Features/stable/2025-03-01/SubscriptionFeatureRegistration.json
 ```
 
 ### Tag: package-features-2021-07
@@ -1663,6 +1672,18 @@ directive:
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: resources.json
     reason: "The deployments resource type is ProxyOnly."
+  - suppress: PutResponseCodes
+    from: SubscriptionFeatureRegistration.json
+    reason: "No change in latest API version"
+  - suppress: RepeatedPathInfo
+    from: SubscriptionFeatureRegistration.json
+    reason: "No change in latest API version"
+  - suppress: AvoidAdditionalProperties
+    from: SubscriptionFeatureRegistration.json
+    reason: "No change in latest API version"
+  - suppress: XmsParameterLocation
+    from: SubscriptionFeatureRegistration.json
+    reason: "No change in latest API version"
 ```
 
 ---
