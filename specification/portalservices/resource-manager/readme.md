@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the Copilot Settings for Azure tenants.
+These are the global settings for the portal.
 
 ```yaml
 openapi-type: arm
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-04-01'
 input-file:
-  - stable/2024-04-01/copilotSettings.json
+  - Microsoft.PortalServices/copilotSettings/stable/2024-04-01/copilotSettings.json
 suppressions:
   - code: TenantLevelAPIsNotAllowed
     reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @tenantResource, and has received exception sign-off approval by PAS team and ARM team.
@@ -52,7 +52,8 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
-  - preview/2024-04-01-preview/copilotSettings.json
+  - Microsoft.PortalServices/copilotSettings/preview/2024-04-01-preview/copilotSettings.json
+  - Microsoft.PortalServices/extensions/preview/2024-04-01-preview/extensions.json
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     reason: The resource type CopilotSettings in the Microsoft.PortalServices resource provider is @singleton (OpenAPI path ends with /default). This is a false positive. Related issue:https://github.com/Azure/azure-openapi-validator/issues/646
@@ -74,6 +75,15 @@ suppressions:
       - copilotSettings.json
     where:
       - $.paths["/providers/Microsoft.PortalServices/copilotSettings/default"]
+```
+
+### Tag: package-2023-01-01-preview
+
+These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01-01-preview'
+input-file:
+  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
 ```
 
 ---
