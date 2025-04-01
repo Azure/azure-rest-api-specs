@@ -2,14 +2,14 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go) && !$(track2)
+```yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: bing
   clear-output-folder: true
 ```
 
-``` yaml $(go) && $(track2)
+```yaml $(go) && $(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   module-name: sdk/resourcemanager/bing/arm$(namespace)
@@ -21,7 +21,7 @@ go:
 
 ### Go multi-api
 
-``` yaml $(go) && $(multiapi)
+```yaml $(go) && $(multiapi)
 batch:
   - tag: package-2025-05-01-preview
   - tag: package-2020-06-10
@@ -33,7 +33,7 @@ batch:
 These settings apply only when `--tag=package-2025-05-01-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2025-05-01-preview' && $(go)
+```yaml $(tag) == 'package-2025-05-01-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2025-05-01-preview/$(namespace)
 ```
 
@@ -42,7 +42,7 @@ output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2025-05-01-pr
 These settings apply only when `--tag=package-2020-06-10 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2020-06-10' && $(go)
+```yaml $(tag) == 'package-2020-06-10' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-06-10/$(namespace)
 ```
 
@@ -51,6 +51,6 @@ output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-06-10/$(namespac
 These settings apply only when `--tag=package-2020-06-10-preview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2020-06-10-preview' && $(go)
+```yaml $(tag) == 'package-2020-06-10-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-06-10-preview/$(namespace)
 ```
