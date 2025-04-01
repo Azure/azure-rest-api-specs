@@ -11,6 +11,7 @@ go:
   output-folder: $(go-sdk-folder)/$(module-name)
   azure-arm: true
   clear-output-folder: true
+  module-version: 0.1.0
 ```
 
 ### Go multi-api
