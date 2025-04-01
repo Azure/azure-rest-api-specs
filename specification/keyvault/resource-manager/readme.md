@@ -57,8 +57,6 @@ input-file:
   - Microsoft.KeyVault/stable/2024-11-01/managedHsm.json
   - Microsoft.KeyVault/stable/2024-11-01/providers.json
   - Microsoft.KeyVault/stable/2024-11-01/secrets.json
-<<<<<<< HEAD
-=======
 ```
 
 ### Tag: package-preview-2024-12
@@ -74,7 +72,6 @@ input-file:
   - Microsoft.KeyVault/preview/2024-12-01-preview/managedHsm.json
   - Microsoft.KeyVault/preview/2024-12-01-preview/providers.json
   - Microsoft.KeyVault/preview/2024-12-01-preview/secrets.json
->>>>>>> 4b03f0beabaf5a2d42fedb8cbb37bce41cc09344
 ```
 
 ### Tag: package-preview-2024-04
