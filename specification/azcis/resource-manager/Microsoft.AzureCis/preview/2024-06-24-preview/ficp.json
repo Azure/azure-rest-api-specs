@@ -44,6 +44,9 @@
     },
     {
       "name": "JitPolicySet"
+    },
+    {
+      "name": "JitSecurityGroup"
     }
   ],
   "paths": {
@@ -76,6 +79,9 @@
         "x-ms-examples": {
           "List Operations JitPolicySet": {
             "$ref": "./examples/JitPolicySet_Operations.json"
+          },
+          "List Operations JitSecurityGroup": {
+            "$ref": "./examples/JitSecurityGroup_Operations.json"
           }
         },
         "x-ms-pageable": {
@@ -115,6 +121,45 @@
         "x-ms-examples": {
           "ListBySubscription JitPolicySet": {
             "$ref": "./examples/JitPolicySet_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/jitSecurityGroupResources": {
+      "get": {
+        "operationId": "JitSecurityGroup_ListBySubscription",
+        "tags": [
+          "JitSecurityGroup"
+        ],
+        "description": "List JitSecurityGroupResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JitSecurityGroupResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription JitSecurityGroup": {
+            "$ref": "./examples/JitSecurityGroup_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -278,6 +323,170 @@
         "x-ms-examples": {
           "Create JitPolicySet": {
             "$ref": "./examples/JitPolicySet_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/jitSecurityGroupResources": {
+      "get": {
+        "operationId": "JitSecurityGroup_ListByResourceGroup",
+        "tags": [
+          "JitSecurityGroup"
+        ],
+        "description": "List JitSecurityGroupResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JitSecurityGroupResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup JitSecurityGroup": {
+            "$ref": "./examples/JitSecurityGroup_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/jitSecurityGroupResources/{resourceName}": {
+      "get": {
+        "operationId": "JitSecurityGroup_Get",
+        "tags": [
+          "JitSecurityGroup"
+        ],
+        "description": "Get a JitSecurityGroupResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JitSecurityGroupResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get JitSecurityGroup": {
+            "$ref": "./examples/JitSecurityGroup_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "JitSecurityGroup_CreateOrUpdate",
+        "tags": [
+          "JitSecurityGroup"
+        ],
+        "description": "Create a JitSecurityGroupResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JitSecurityGroupResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'JitSecurityGroupResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/JitSecurityGroupResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'JitSecurityGroupResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/JitSecurityGroupResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create JitSecurityGroup": {
+            "$ref": "./examples/JitSecurityGroup_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -477,6 +686,81 @@
         "value"
       ]
     },
+    "JitSecurityGroupResource": {
+      "type": "object",
+      "description": "jitSecurityGroup Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JitSecurityGroupResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JitSecurityGroupResourceListResult": {
+      "type": "object",
+      "description": "The response of a JitSecurityGroupResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JitSecurityGroupResource items on this page",
+          "items": {
+            "$ref": "#/definitions/JitSecurityGroupResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JitSecurityGroupResourceProperties": {
+      "type": "object",
+      "description": "JIT security group resources properties",
+      "properties": {
+        "instanceId": {
+          "type": "string",
+          "description": "Instance identifier. Required."
+        },
+        "cloud": {
+          "type": "string",
+          "description": "Cloud identifier for the JIT security group. Possible options are PROD, blackforest, fairfax, mooncake, ex, rx. Required."
+        },
+        "elevatedSecurityGroup": {
+          "$ref": "#/definitions/ResourceSecurityGroup",
+          "description": "Elevated security group."
+        },
+        "corpSecurityGroup": {
+          "$ref": "#/definitions/ResourceSecurityGroup",
+          "description": "Corp security group."
+        },
+        "provisioningMode": {
+          "$ref": "#/definitions/ProvisioningMode",
+          "description": "Provisioning mode type."
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/FicpProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "instanceId",
+        "cloud"
+      ]
+    },
     "PolicyAction": {
       "type": "object",
       "description": "FICP Policy Action",
@@ -561,6 +845,29 @@
       },
       "required": [
         "mode"
+      ]
+    },
+    "ResourceSecurityGroup": {
+      "type": "object",
+      "description": "Resource security group type",
+      "properties": {
+        "scenario": {
+          "type": "string",
+          "description": "JIT Scenario."
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "JIT Service name."
+        },
+        "securityGroup": {
+          "type": "string",
+          "description": "JIT Security group."
+        }
+      },
+      "required": [
+        "scenario",
+        "serviceName",
+        "securityGroup"
       ]
     }
   },
