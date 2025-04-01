@@ -28,6 +28,8 @@ To see additional help and options, run:
 These are the global settings for the Bing RP.
 
 ``` yaml
+title: BingConfigurationClient
+description: Bing Configuration Client
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-05-01-preview
