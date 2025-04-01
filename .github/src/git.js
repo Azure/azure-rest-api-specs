@@ -11,7 +11,7 @@ import { buildCmd, exec } from "./exec.js";
  * @param {string} headCommitish
  * @param {Object} [options]
  * @param {string} [options.args]
- * @param {string} [options.cwd] Current working directory.  Default is process.env.GITHUB_WORKSPACE or process.cwd().
+ * @param {string} [options.cwd] Current working directory. Default: process.cwd().
  * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
@@ -28,7 +28,7 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
  * @param {string} path
  * @param {Object} [options]
  * @param {string} [options.args]
- * @param {string} [options.cwd] Current working directory.  Default is process.env.GITHUB_WORKSPACE or process.cwd().
+ * @param {string} [options.cwd] Current working directory.  Default process.cwd().
  * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
@@ -45,7 +45,7 @@ export async function lsTree(treeIsh, path, options = {}) {
  * @param {string} path
  * @param {Object} [options]
  * @param {string} [options.args]
- * @param {string} [options.cwd] Current working directory.  Default is process.env.GITHUB_WORKSPACE or process.cwd().
+ * @param {string} [options.cwd] Current working directory. Default: process.cwd().
  * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
@@ -60,7 +60,7 @@ export async function show(treeIsh, path, options = {}) {
 /**
  * @param {string} args
  * @param {Object} [options]
- * @param {string} [options.cwd] Current working directory.  Default is process.env.GITHUB_WORKSPACE or process.cwd().
+ * @param {string} [options.cwd] Current working directory. Default: process.cwd().
  * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
