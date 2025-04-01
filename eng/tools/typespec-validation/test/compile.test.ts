@@ -82,6 +82,13 @@ describe("compile", function () {
 
   it("should fail if git diff fails", async function () {
     let host = new TsvTestHost();
+
+    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
+      return [null, "version\n" + swaggerPath + "\nsuccess", ""];
+    };
+
+    host.globby = async () => [swaggerPath];
+
     host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
       let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runCmd(
         "",
@@ -102,6 +109,13 @@ describe("compile", function () {
 
   it("should succeed if git diff succeeds", async function () {
     let host = new TsvTestHost();
+
+    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
+      return [null, "version\n" + swaggerPath + "\nsuccess", ""];
+    };
+
+    host.globby = async () => [swaggerPath];
+
     host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
       let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runCmd(
         "",
