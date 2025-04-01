@@ -65,5 +65,5 @@ These settings apply only when `--tag=package-changes-2025-03` is specified on t
 
 ``` yaml $(tag) == 'package-changes-2025-03'
 input-file:
-- Microsoft.Resources/stable/2025-03-01/changes.json
+- stable/2025-03-01/changes.json
 ```
