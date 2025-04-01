@@ -21,7 +21,7 @@ extends:
     template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
     parameters:
       settings:
-          skipBuildTagsForGitHubPullRequests: true
+        skipBuildTagsForGitHubPullRequests: true
       sdl:
         ${{ if and(parameters.GenerateBaselines, eq(variables['Build.SourceBranchName'], 'main'), eq(variables['System.TeamProject'], 'internal')) }}:
           autobaseline:
@@ -40,6 +40,8 @@ extends:
   ${{ else }}:
     template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
     parameters:
+      settings:
+        skipBuildTagsForGitHubPullRequests: true
       sdl: # SDLSources stage still runs even all tools are disabled. 1es team uses it for other purposes and they have the following work item to remove the stage.
         enableAllTools: false # https://dev.azure.com/mseng/1ES/_workitems/edit/2253084
         sourceAnalysisPool:
