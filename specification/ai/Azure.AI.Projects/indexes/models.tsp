@@ -5,11 +5,14 @@ import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
 import "../main.tsp";
 
+using TypeSpec.Versioning;
+
 namespace Azure.AI.Projects;
 
 @doc("Index resource Definition")
 @discriminator("type")
 @Rest.resource("indexes")
+@added(Versions.v2025_05_01)
 model Index {
   @doc("Type of index")
   type: IndexType;
@@ -18,6 +21,7 @@ model Index {
 }
 
 @doc("Azure AI Search Index Definition")
+@added(Versions.v2025_05_01)
 model AzureAISearchIndex extends Index {
   @doc("Type of index")
   type: IndexType.azureSearch;
@@ -30,6 +34,7 @@ model AzureAISearchIndex extends Index {
 }
 
 @doc("Managed Azure AI Search Index Definition")
+@added(Versions.v2025_05_01)
 model ManagedAzureAISearchIndex extends Index {
   @doc("Type of index")
   type: IndexType.managedAzureSearch;
@@ -39,6 +44,7 @@ model ManagedAzureAISearchIndex extends Index {
 }
 
 @doc("CosmosDB Vector Store Index Definition")
+@added(Versions.v2025_05_01)
 model CosmosDBIndex extends Index {
   @doc("Type of index")
   type: IndexType.cosmosDB;
@@ -57,6 +63,7 @@ model CosmosDBIndex extends Index {
 }
 
 @doc("Embedding configuration class")
+@added(Versions.v2025_05_01)
 model EmbeddingConfiguration {
   @doc("Deployment name of embedding model. It can point to a model deployment either in the parent AIServices or a connection.")
   modelDeploymentName: string;
@@ -65,6 +72,7 @@ model EmbeddingConfiguration {
   embeddingField: string;
 }
 
+@added(Versions.v2025_05_01)
 union IndexType {
   string,
 

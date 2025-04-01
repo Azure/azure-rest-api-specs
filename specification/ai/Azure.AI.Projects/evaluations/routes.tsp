@@ -7,6 +7,7 @@ import "./models.tsp";
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -17,6 +18,8 @@ alias ServiceTraits = SupportsClientRequestId &
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("evaluations")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 interface Evaluations {
   @doc("Get an evaluation run by name.")
   get is EvaluationsOperations.ResourceRead<Evaluation>;

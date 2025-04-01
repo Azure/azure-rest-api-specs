@@ -7,6 +7,7 @@ import "./models.tsp";
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -16,6 +17,7 @@ alias DeploymentServiceTraits = SupportsClientRequestId &
 
 alias DeploymentOperations = Azure.Core.ResourceOperations<DeploymentServiceTraits>;
 
+@added(Versions.v2025_05_01)
 interface Deployments {
   @doc("Get a deployed model.")
   get is DeploymentOperations.ResourceRead<Deployment>;

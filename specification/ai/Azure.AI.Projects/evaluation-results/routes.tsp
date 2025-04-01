@@ -8,6 +8,7 @@ import "./models.tsp";
 import "../servicepatterns.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -30,6 +31,8 @@ alias ListEvaluationResultsParameters = {
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 interface EvaluationResults
   extends ServicePatterns.VersionedOperations<
       EvaluationResult,
