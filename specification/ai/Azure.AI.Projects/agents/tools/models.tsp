@@ -89,6 +89,16 @@ model OpenApiToolDefinition extends ToolDefinition {
   openapi: OpenApiFunctionDefinition;
 }
 
+@doc("The input definition information for a Bing custom search tool as used to configure an agent.")
+model BingCustomSearchToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'bing_custom_search'.")
+  type: "bing_custom_search";
+
+  @doc("The list of search configurations used by the bing custom search tool.")
+  @encodedName("application/json", "bing_custom_search")
+  bingCustomSearch: SearchConfigurationList;
+}
+
 // Definition details: File Search
 
 /**
@@ -409,6 +419,19 @@ model RunStepMicrosoftFabricToolCall extends RunStepToolCall {
 }
 
 @doc("""
+  A record of a call to a bing custom search tool, issued by the model in evaluation of a defined tool, that represents
+  executed search with bing custom search.
+  """)
+model RunStepCustomSearchToolCall extends RunStepToolCall {
+  @doc("The object type, which is always 'bing_custom_search'.")
+  type: "bing_custom_search";
+
+  @doc("Reserved for future use.")
+  @encodedName("application/json", "bing_custom_search")
+  bingCustomSearch: Record<string>;
+}
+
+@doc("""
   A record of a call to a function tool, issued by the model in evaluation of a defined tool, that represents the inputs
   and output consumed and emitted by the specified function.
   """)
@@ -556,6 +579,9 @@ union AgentsNamedToolChoiceType {
 
   /** Tool type `azure_ai_search` */
   azureAISearch: "azure_ai_search",
+
+  /** Tool type `bing_custom_search` */
+  bingCustomSearch: "bing_custom_search",
 }
 
 /** The function name that will be used, if using the `function` tool */
@@ -578,6 +604,19 @@ model ToolConnectionList {
 }
 
 /**
+ * A list of search configurations currently used by the `bing_custom_search` tool.
+ */
+model SearchConfigurationList {
+  /**
+   * The connections attached to this tool. There can be a maximum of 1 connection
+   * resource attached to the tool.
+   */
+  @maxItems(1)
+  @encodedName("application/json", "search_configurations")
+  searchConfigurations: SearchConfiguration[];
+}
+
+/**
  * A connection resource.
  */
 model ToolConnection {
@@ -586,6 +625,19 @@ model ToolConnection {
    */
   @encodedName("application/json", "connection_id")
   connectionId: string;
+}
+
+/**
+ * A custom search configuration.
+ */
+model SearchConfiguration {
+  ...ToolConnection;
+
+  /**
+   * Name of the custom configuration instance given to config.
+   */
+  @encodedName("application/json", "instance_name")
+  instanceName: string;
 }
 
 @doc("The structure for keeping storage queue name and URI.")
