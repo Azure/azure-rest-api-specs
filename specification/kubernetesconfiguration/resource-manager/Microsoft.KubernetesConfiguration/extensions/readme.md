@@ -28,7 +28,43 @@ These are the global settings for the KubernetesConfiguration.
 title: ExtensionsClient
 description: KubernetesConfiguration Extensions Client
 openapi-type: arm
-tag: package-2024-11
+tag: package-2025-03
+```
+
+---
+
+### Tag: package-2025-03
+
+These settings apply only when `--tag=package-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03'
+input-file:
+  - stable/2024-11-01/extensions.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: extensions.json
+    reason: Operations API is implemented as a separate service.
+  - code: ResourceNameRestriction
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: PatchIdentityProperty
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible, service does not use/allow identity.
+  - code: AvoidAdditionalProperties
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
+  - code: PatchBodyParametersSchema
+    from: extensions.json
+    reason: Existing service contract needs to be backward compatible.  
 ```
 
 ---
