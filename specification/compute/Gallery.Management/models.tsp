@@ -2551,8 +2551,9 @@ model LatestGalleryImageVersion {
  * @template Properties A model containing the provider-specific properties for this resource
  * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.customAzureResource
 model ProxyResourceCommunity<
   Properties extends {},
@@ -2577,8 +2578,9 @@ model ProxyResourceCommunity<
  * @template Properties A model containing the provider-specific properties for this resource
  * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage"
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.customAzureResource
 model ProxyResourceShared<
   Properties extends {},

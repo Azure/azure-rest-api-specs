@@ -18,7 +18,7 @@ namespace Microsoft.Compute;
 @Azure.ResourceManager.Private.armResourceInternal(
   VirtualMachineScaleSetProperties
 )
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model VirtualMachineScaleSet extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = VirtualMachineScaleSet,
