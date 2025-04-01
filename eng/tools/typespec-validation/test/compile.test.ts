@@ -52,6 +52,22 @@ describe("compile", function () {
     assert(!result.success);
   });
 
+  it("should fail if extra swaggers", async function () {
+    const host = new TsvTestHost();
+
+    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
+      return [null, "version\n" + swaggerPath + "\nsuccess", ""];
+    };
+
+    // Simulate extra swagger
+    host.globby = async () => [swaggerPath, swaggerPath.replace("2022", "2023")];
+
+    const result = await new CompileRule().execute(host, TsvTestHost.folder);
+
+    assert(!result.success);
+    assert(result.errorOutput?.includes("not generated from the current"));
+  });
+
   it("should skip git diff check if compile fails", async function () {
     let host = new TsvTestHost();
     host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
@@ -132,6 +148,4 @@ describe("compile", function () {
     assert(result.stdOutput.includes("Running git diff"));
     assert(result.success);
   });
-
-  // TODO: Add tests to get 100% code coverage, include new "extra swaggers" code
 });
