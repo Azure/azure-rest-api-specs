@@ -12,7 +12,10 @@ jobs:
   post-apiview:
     name: After APIView
     runs-on: ubuntu-24.04
-    if: ${{ github.event.check_run.check_suite.app.name == 'Azure Pipelines' && ( contains(github.event.check_run.name, 'APIView') || contains(github.event.check_run.name, 'SDK Generation') || contains(github.event.check_run.name, 'Azure.azure-rest-api-specs-pipeline') ) }}
+    if: |
+      github.event.check_run.check_suite.app.name == 'Azure Pipelines' && (
+      contains(github.event.check_run.name, 'APIView') ||
+      contains(github.event.check_run.name, 'SDK Generation') )
     steps:
       - name: Checkout
         uses: actions/checkout@v4
