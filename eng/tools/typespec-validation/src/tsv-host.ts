@@ -7,6 +7,7 @@ export interface TsvHost {
   isDirectory(path: string): Promise<boolean>;
   gitOperation(folder: string): IGitOperation;
   readTspConfig(folder: string): Promise<string>;
+  readFile(path: string): Promise<string>;
   runCmd(cmd: string, cwd?: string): Promise<[Error | null, string, string]>;
   normalizePath(folder: string): string;
   gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult>;

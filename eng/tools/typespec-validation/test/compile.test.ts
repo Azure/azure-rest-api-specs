@@ -1,12 +1,23 @@
-import { describe, it } from "vitest";
-import { CompileRule } from "../src/rules/compile.js";
-import { TsvTestHost } from "./tsv-test-host.js";
-import { TsvHost } from "../src/tsv-host.js";
-import { RuleResult } from "../src/rule-result.js";
 import { strict as assert } from "node:assert";
+import { describe, it } from "vitest";
+import { RuleResult } from "../src/rule-result.js";
+import { CompileRule } from "../src/rules/compile.js";
+import { TsvHost } from "../src/tsv-host.js";
+import { TsvTestHost } from "./tsv-test-host.js";
+
+const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+
 describe("compile", function () {
   it("should succeed if project can compile", async function () {
-    const result = await new CompileRule().execute(new TsvTestHost(), TsvTestHost.folder);
+    const host = new TsvTestHost();
+
+    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
+      return [null, "version\n" + swaggerPath + "\nsuccess", ""];
+    };
+
+    host.globby = async () => [swaggerPath];
+
+    const result = await new CompileRule().execute(host, TsvTestHost.folder);
 
     assert(result.success);
   });

@@ -85,6 +85,10 @@ options:
 `;
   }
 
+  async readFile(_path: string): Promise<string> {
+    return '{"info": {"x-typespec-generated": true}}';
+  }
+
   async globby(patterns: string | string[], _options?: GlobbyOptions): Promise<string[]> {
     return Promise.resolve(Array.isArray(patterns) ? patterns : [patterns]);
   }
