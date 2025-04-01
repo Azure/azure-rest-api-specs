@@ -174,14 +174,14 @@ extends:
 
               if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
                 optional_params="$optional_params --rm ${{ parameters.SpecBatchTypes }}"
-                sdk_gen_info="$sdk_gen_info, SpecBatchTypes: ${{ parameters.SpecBatchTypes }}"
+                sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
               fi
 
               if [ "${{ parameters.ApiVersion }}" != "" ]; then
                 optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
-                sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }}"
+                sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
               fi
-              sdk_gen_info="$sdk_gen_info and CommitSHA: '$(SpecRepoCommit)', in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
+              sdk_gen_info="$sdk_gen_info and CommitSHA: '$(SpecRepoCommit)' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
               echo "##vso[task.setvariable variable=GeneratedSDKInformation]$sdk_gen_info"
               echo "$sdk_gen_info"
 
