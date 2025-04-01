@@ -15,7 +15,7 @@ namespace Azure.AI.Projects;
 
 alias RedTeamServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
-  NoConditionalRequests; // NoRetryRequests supresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
+  NoConditionalRequests; // NoRetryRequests suppresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
 
 alias RedTeamOperations = Azure.Core.ResourceOperations<RedTeamServiceTraits>;
 
