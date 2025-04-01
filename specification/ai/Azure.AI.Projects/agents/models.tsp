@@ -70,7 +70,7 @@ model Agent {
 }
 
 @doc("Options used when creating or updating an Agent.")
-model AgentOptions {
+model AgentConfigurationOptions {
   ...AgentCompletionProperties;
 }
 

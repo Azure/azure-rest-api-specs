@@ -98,7 +98,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentOptions"
+              "$ref": "#/definitions/AgentConfigurationOptions"
             }
           }
         ],
@@ -240,42 +240,67 @@
         }
       }
     },
-    "/agents/{agentId}:stream": {
+    "/agents/runs/run": {
       "post": {
-        "operationId": "Agents_StreamByAgent",
-        "description": "Resource action operation template.",
+        "operationId": "Agents_Run",
+        "description": "Creates and waits for a run to finish, returning the completed Run (including its outputs).",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "agentId",
-            "in": "path",
-            "description": "A unique identifier for the agent.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RunInputs"
+              "$ref": "#/definitions/AgentConfigurationOptions"
             }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RunInputs"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
             "headers": {
-              "x-ms-client-request-id": {
+              "x-ms-error-code": {
                 "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+                "description": "String error code indicating what went wrong."
               }
+            }
+          }
+        }
+      }
+    },
+    "/agents/runs/stream": {
+      "post": {
+        "operationId": "Agents_Stream",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentConfigurationOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RunInputs"
             }
           },
           "default": {
@@ -1683,8 +1708,8 @@
     },
     "/runs": {
       "get": {
-        "operationId": "Runs_ListRuns",
-        "description": "Lists all run records, each containing runInputs and runOutputs.\n@route(\"/runs\")",
+        "operationId": "Agents_ListRuns",
+        "description": "Lists all run records, each containing runInputs and runOutputs.\n@route(\"/agents/runs\")",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1723,49 +1748,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "post": {
-        "operationId": "Runs_CreateRun",
-        "description": "Creates a new run.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunInputs"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Run"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
       }
     },
     "/runs/{runId}": {
       "get": {
-        "operationId": "Runs_GetRun",
-        "description": "Retrieves an existing run by its ID.\n@route(\"/run/{run_id}\")",
+        "operationId": "Agents_GetRun",
+        "description": "Retrieves an existing run by its ID.\n@route(\"/agents/runs/{run_id}\")",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1787,91 +1775,6 @@
             "schema": {
               "$ref": "#/definitions/Run"
             },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/runs/execute": {
-      "post": {
-        "operationId": "Runs_CreateAndExecuteRun",
-        "description": "Creates and waits for a run to finish, returning the completed Run (including its outputs).",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunInputs"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Run"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/runs:createAndStreamRun": {
-      "post": {
-        "operationId": "Runs_CreateAndStreamRun",
-        "description": "Create and stream run.\n@route(\"/run/stream\")",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Run"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
             "headers": {
               "x-ms-client-request-id": {
                 "type": "string",
@@ -2479,6 +2382,43 @@
         "agentModel"
       ]
     },
+    "AgentConfigurationOptions": {
+      "type": "object",
+      "description": "Options used when creating or updating an Agent.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
+        },
+        "agentModel": {
+          "$ref": "#/definitions/AgentModel",
+          "description": "The model definition for this agent."
+        },
+        "instructions": {
+          "type": "array",
+          "description": "Instructions provided to guide how this agent operates.",
+          "items": {
+            "$ref": "#/definitions/DeveloperMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "tools": {
+          "type": "array",
+          "description": "A list of tool definitions available to the agent.",
+          "items": {
+            "$ref": "#/definitions/AgentToolDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "toolChoice": {
+          "$ref": "#/definitions/ToolChoiceBehavior",
+          "description": "How the agent should choose among provided tools."
+        }
+      },
+      "required": [
+        "agentModel"
+      ]
+    },
     "AgentMessage": {
       "type": "object",
       "description": "An agent message within a chat, always with the 'agent' role.",
@@ -2524,43 +2464,6 @@
       "required": [
         "id",
         "provider"
-      ]
-    },
-    "AgentOptions": {
-      "type": "object",
-      "description": "Options used when creating or updating an Agent.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
-        },
-        "agentModel": {
-          "$ref": "#/definitions/AgentModel",
-          "description": "The model definition for this agent."
-        },
-        "instructions": {
-          "type": "array",
-          "description": "Instructions provided to guide how this agent operates.",
-          "items": {
-            "$ref": "#/definitions/DeveloperMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "tools": {
-          "type": "array",
-          "description": "A list of tool definitions available to the agent.",
-          "items": {
-            "$ref": "#/definitions/AgentToolDefinition"
-          },
-          "x-ms-identifiers": []
-        },
-        "toolChoice": {
-          "$ref": "#/definitions/ToolChoiceBehavior",
-          "description": "How the agent should choose among provided tools."
-        }
-      },
-      "required": [
-        "agentModel"
       ]
     },
     "AgentToolDefinition": {
@@ -4755,10 +4658,6 @@
       "type": "object",
       "description": "An agent-generated run record, including both the requested inputs and the final outputs.",
       "properties": {
-        "agentId": {
-          "type": "string",
-          "description": "Unique identifier for the agent responsible for the run."
-        },
         "runId": {
           "type": "string",
           "description": "Unique identifier for this run.",
@@ -4796,7 +4695,6 @@
         }
       },
       "required": [
-        "agentId",
         "runId",
         "createdAt",
         "completedAt",
@@ -4808,9 +4706,9 @@
       "type": "object",
       "description": "Parameters for creating a new run request.",
       "properties": {
-        "agent": {
-          "$ref": "#/definitions/Agent",
-          "description": "The agent responsible for generating the run."
+        "agentId": {
+          "type": "string",
+          "description": "Unique identifier for the agent responsible for the run."
         },
         "input": {
           "type": "array",
@@ -4841,7 +4739,7 @@
         }
       },
       "required": [
-        "agent",
+        "agentId",
         "input"
       ]
     },

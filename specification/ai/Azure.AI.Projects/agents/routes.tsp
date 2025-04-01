@@ -123,7 +123,7 @@ interface Agents {
   @route("/agents")
   createAgent is Operation<
     {
-      ...AgentOptions;
+      ...AgentConfigurationOptions;
     },
     Agent
   >;
@@ -177,69 +177,45 @@ interface Agents {
   @route("/agents")
   listAgents is Operation<NoRequest, Agent[]>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @Rest.action("stream")
-  streamByAgent is AgentOperations.ResourceAction<
-    Agent,
-    {
-      ...RunInputs;
-    },
-    Streams.Stream<StreamingUpdate>
-  >;
-}
-
-@doc("""
-  RUNS
-  
-  Interface is rooted at /runs.
-  Includes standard resource operations + custom collection-level
-  and instance-level actions (complete, stream).
-  """)
-interface Runs {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates and waits for a run to finish, returning the completed Run (including its outputs).")
   @post
-  @route("/runs")
-  @doc("Creates a new run.")
-  createRun is Azure.Core.Foundations.Operation<
+  @route("/agents/runs/run")
+  run is Azure.Core.Foundations.Operation<
+    {
+      ...AgentConfigurationOptions;
+    },
     {
       ...RunInputs;
     },
     Run
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  @Rest.action("stream")
+  @post
+  @route("/agents/runs/stream")
+  stream is Azure.Core.Foundations.Operation<
+    {
+      ...AgentConfigurationOptions;
+    },
+    {
+      ...RunInputs;
+    },
+    Streams.Stream<StreamingUpdate>
   >;
 
   @doc("""
     Retrieves an existing run by its ID.
-    @route("/run/{run_id}")
+    @route("/agents/runs/{run_id}")
     """)
   @get
   getRun is AgentOperations.ResourceRead<Run>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates and waits for a run to finish, returning the completed Run (including its outputs).")
-  @post
-  @route("/runs/execute")
-  createAndExecuteRun is Azure.Core.Foundations.Operation<
-    {
-      ...RunInputs;
-    },
-    Run
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @doc("""
-    Create and stream run.
-    @route("/run/stream")
-    """)
-  @post
-  createAndStreamRun is AgentOperations.ResourceCollectionAction<
-    Run,
-    Run,
-    Streams.Stream<StreamingUpdate>
-  >;
-
   @doc("""
     Lists all run records, each containing runInputs and runOutputs.
-    @route("/runs")
+    @route("/agents/runs")
     """)
   @get
   listRuns is AgentOperations.ResourceList<Run>;
