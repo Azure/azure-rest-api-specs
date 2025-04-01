@@ -2581,6 +2581,11 @@
             "provisioningState": {
               "description": "ARM provisioning state.",
               "enum": [
+                "Succeeded",
+                "Failed",
+                "Creating",
+                "Deleting",
+                "Updating",
                 "Canceled"
               ],
               "x-ms-enum": {
@@ -2607,11 +2612,12 @@
             },
             "autoImportPrefixes": {
               "type": "array",
-              "description": "An array of blob paths/prefixes that get auto imported to the cluster namespace. It has '/' as the default value.",
+              "description": "An array of blob paths/prefixes that get auto imported to the cluster namespace. It has '/' as the default value. Number of maximum allowed paths is 100.",
               "items": {
                 "type": "string"
               },
               "x-ms-mutability": [
+                "read",
                 "create"
               ]
             },
@@ -2630,6 +2636,7 @@
                 "modelAsString": true
               },
               "x-ms-mutability": [
+                "read",
                 "create"
               ]
             },
@@ -2638,6 +2645,7 @@
               "description": "Whether or not to enable deletions during auto import. This only affects overwrite-dirty.",
               "default": false,
               "x-ms-mutability": [
+                "read",
                 "create"
               ]
             },
@@ -2646,6 +2654,7 @@
               "format": "int32",
               "description": "Total non-conflict-oriented errors (e.g., OS errors) Import will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately on any error.",
               "x-ms-mutability": [
+                "read",
                 "create"
               ]
             },
@@ -2760,7 +2769,7 @@
                   "type": "object",
                   "readOnly": true,
                   "properties": {
-                      "importedFiles": {
+                    "importedFiles": {
                       "readOnly": true,
                       "description": "Number of files imported during auto import.",
                       "type": "integer",
@@ -2941,4 +2950,3 @@
     }
   }
 }
-
