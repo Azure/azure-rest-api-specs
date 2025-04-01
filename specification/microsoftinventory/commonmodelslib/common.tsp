@@ -63,3 +63,55 @@ union IpVersion {
   @doc("IPv6 version")
   IPv6: "IPv6",
 }
+
+@doc("Enum for State")
+union IpAddressState {
+  string,
+
+  @doc("Managed State")
+  Managed: "Managed",
+
+  @doc("Allocated State")
+  Allocated: "Allocated",
+
+  @doc("Active State")
+  Active: "Active",
+
+  @doc("Retired State")
+  Retired: "Retired",
+}
+
+@doc("Enum for AssetType")
+union AssetType {
+  string,
+
+  @doc("Physical AssetType")
+  Physical: "Physical",
+
+  @doc("Logical AssetType")
+  Logical: "Logical",
+}
+
+@doc("Metadata that describes the ownership of the resource")
+model Ownership {
+  @doc("The owning service tree ID")
+  serviceTreeId: string;
+}
+
+@doc("Metadata that describes the asset to which the resource is assigned")
+model AssignedResource {
+  @doc("The type of the resource")
+  resourceType: AssetType;
+
+  @doc("Unique identifier for the asset")
+  resourceId: string;
+}
+
+@doc("Describes an ARM resource")
+model ArmResourceReference {
+  @doc("The id of the object")
+  id: string;
+
+  @doc("The ARM resource ID of the object")
+  resourceId: string;
+}
