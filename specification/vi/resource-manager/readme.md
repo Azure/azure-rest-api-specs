@@ -33,6 +33,7 @@ directive:
       - Microsoft.VideoIndexer/preview/2024-06-01-preview/vi.json
       - Microsoft.VideoIndexer/preview/2024-09-23-preview/vi.json
       - Microsoft.VideoIndexer/stable/2022-08-01/vi.json
+      - Microsoft.VideoIndexer/stable/2025-04-01/vi.json
 
     where:
       - $.definitions.AccessToken.properties.accessToken
@@ -160,6 +161,15 @@ version: 2021-10-18-preview
 version-with-underscores: 2021_10_18_preview
 input-file:
   - Microsoft.VideoIndexer/preview/2021-10-18-preview/vi.json
+```
+
+### Tag: package-2025-04-01
+These settings apply only when `--tag=2025-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04-01'
+version-with-underscores: 2025_04_01
+input-file:
+  - Microsoft.VideoIndexer/stable/2025-04-01/vi.json
 ```
 
 ---
