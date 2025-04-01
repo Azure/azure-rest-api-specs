@@ -22,6 +22,12 @@
           "targetAvailabilitySetId": "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.Compute/availabilitySets/avset1",
           "userManagedIdentities": [
             "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/umi1"
+          ],
+          "targetDiskDetails": [
+            {
+              "sourceId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/EASTUS/providers/Microsoft.Compute/disks/eastusvm1_OsDisk_1_a88a2f0e8cf44fb3af24aa0f27101f83",
+              "targetDiskName": "eastusvm1_OsDisk_1_a88a2f0e8cf44fb3af24aa0f27101f83"
+            }
           ]
         }
       }
@@ -52,11 +58,18 @@
             "resourceType": "Microsoft.Compute/virtualMachines",
             "targetResourceName": "westusvm1",
             "targetResourceGroupName": "rg1",
+            "targetSubscriptionId": null,
             "targetAvailabilityZone": "2",
             "targetVmSize": null,
             "targetAvailabilitySetId": "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.Compute/availabilitySets/avset1",
             "userManagedIdentities": [
               "/subscriptions/subid/resourceGroups/eastusRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/umi1"
+            ],
+            "targetDiskDetails": [
+              {
+                "sourceId": "/subscriptions/c4488a3f-a7f7-4ad4-aa72-0e1f4d9c0756/resourceGroups/EASTUS/providers/Microsoft.Compute/disks/eastusvm1_OsDisk_1_a88a2f0e8cf44fb3af24aa0f27101f83",
+                "targetDiskName": "eastusvm1_OsDisk_1_a88a2f0e8cf44fb3af24aa0f27101f83"
+              }
             ]
           },
           "provisioningState": "Succeeded"
