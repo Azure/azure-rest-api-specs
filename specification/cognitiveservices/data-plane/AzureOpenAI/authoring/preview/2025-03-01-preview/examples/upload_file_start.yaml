@@ -1,6 +1,6 @@
 parameters:
   endpoint: https://aoairesource.openai.azure.com
-  api-key: "{api key}"
+  api-key: '{api key}'
   api-version: 2025-03-01-preview
   body:
     purpose: fine-tune
@@ -8,7 +8,7 @@ parameters:
     bytes: 2097152
     mimeType: application/json
 responses:
-  201:
+  200:
     headers:
       Location: https://aoairesource.openai.azure.com/openai/uploads/runs/fine-tune-72a2792ef7d24ba7b82c7fe4a37e379f
     body:
@@ -18,7 +18,9 @@ responses:
       status: pending
       expires_at: 1646133327
       file:
-        metadata:
+        status_details: 
+        metadata: 
+        status: pending
         bytes: 140
         purpose: fine-tune
         filename: puppy.jsonl
