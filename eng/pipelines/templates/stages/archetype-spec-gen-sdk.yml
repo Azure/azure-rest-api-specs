@@ -131,19 +131,21 @@ extends:
           - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
             parameters:
               Paths:
-              - '/*'
-              - '!sdk/**/test-recordings/*'
-              - '!sdk/**/recordings/*'
-              - '!sdk/**/SessionRecords/*'
-              - '!sdk/**/session-records/*'
+                - '/*'
+                - '!sdk/**/test-recordings/*'
+                - '!sdk/**/recordings/*'
+                - '!sdk/**/SessionRecords/*'
+                - '!sdk/**/session-records/*'
               Repositories:
-              - Name: $(SpecRepoOwner)/$(SpecRepoName)
-                Commitish: $(SpecRepoCommit)
-                WorkingDirectory: $(SpecRepoDirectory)
-              - Name: $(SdkRepoOwner)/$(SdkRepoName)
-                Commitish: ${{ parameters.SdkRepoCommit }}
-                WorkingDirectory: $(SdkRepoDirectory)
+                - Name: $(SpecRepoOwner)/$(SpecRepoName)
+                  Commitish: $(SpecRepoCommit)
+                  WorkingDirectory: $(SpecRepoDirectory)
+                - Name: $(SdkRepoOwner)/$(SdkRepoName)
+                  Commitish: ${{ parameters.SdkRepoCommit }}
+                  WorkingDirectory: $(SdkRepoDirectory)
               SkipCheckoutNone: true
+              ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
+                TokenToUseForAuth: $(azuresdk-github-pat)
 
           - task: NodeTool@0
             inputs:
