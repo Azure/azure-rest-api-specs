@@ -178,7 +178,7 @@ export function findParentWithFile(
     try {
       const absolutePath = path.resolve(specRepoFolder, currentPath);
       const files = fs.readdirSync(absolutePath);
-      if (files.some((file) => searchFile.test(file.toLowerCase()))) {
+      if (files.some((file) => searchFile.test(file))) {
         return currentPath;
       }
     } catch (error) {
