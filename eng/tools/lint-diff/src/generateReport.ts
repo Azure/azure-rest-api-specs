@@ -87,11 +87,7 @@ export async function generateReport(
   for (const [runKey, { before, after }] of runCorrelations.entries()) {
     const beforeViolations = before
       ? getLintDiffViolations(before).filter(
-          (v) =>
-            (isFailure(v.level) || isWarning(v.level)) &&
-            v.source?.length > 0 &&
-            // TODO: Calculate relativized path outside of loop
-            affectedSwaggers.has(relativizePath(v.source[0].document).slice(1)),
+          (v) => (isFailure(v.level) || isWarning(v.level)) && v.source?.length > 0,
         )
       : [];
     const afterViolations = getLintDiffViolations(after).filter(
