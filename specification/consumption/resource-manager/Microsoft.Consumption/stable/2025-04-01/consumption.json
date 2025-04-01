@@ -40,7 +40,7 @@
           "UsageDetails"
         ],
         "operationId": "UsageDetails_List",
-        "description": "Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or later.",
+        "description": "Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or later.\n\n**Note:Microsoft will be retiring the Consumption Usage Details API at some point in the future. We do not recommend that you take a new dependency on this API. Please use the Cost Details API instead. We will notify customers once a date for retirement has been determined.For Learn more,see [Generate Cost Details Report - Create Operation](https://learn.microsoft.com/en-us/rest/api/cost-management/generate-cost-details-report/create-operation?tabs=HTTP)**",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -152,6 +152,9 @@
               "$ref": "#/definitions/UsageDetailsListResult"
             }
           },
+          "204": {
+            "description": "No Content. The request has succeeded but returned no results."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -245,6 +248,9 @@
             "schema": {
               "$ref": "#/definitions/MarketplacesListResult"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -620,7 +626,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/balances": {
       "get": {
         "tags": [
           "Balances"
@@ -668,7 +674,7 @@
           "ReservationSummaries"
         ],
         "operationId": "ReservationsSummaries_ListByReservationOrder",
-        "description": "Lists the reservations summaries for daily or monthly grain.",
+        "description": "Lists the reservations summaries for daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -723,7 +729,7 @@
           "ReservationSummaries"
         ],
         "operationId": "ReservationsSummaries_ListByReservationOrderAndReservation",
-        "description": "Lists the reservations summaries for daily or monthly grain.",
+        "description": "Lists the reservations summaries for daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -781,7 +787,7 @@
           "ReservationSummaries"
         ],
         "operationId": "ReservationsSummaries_List",
-        "description": "Lists the reservations summaries for the defined scope daily or monthly grain.",
+        "description": "Lists the reservations summaries for the defined scope daily or monthly grain. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -877,7 +883,7 @@
           "ReservationDetails"
         ],
         "operationId": "ReservationsDetails_ListByReservationOrder",
-        "description": "Lists the reservations details for provided date range.",
+        "description": "Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -926,7 +932,7 @@
           "ReservationDetails"
         ],
         "operationId": "ReservationsDetails_ListByReservationOrderAndReservation",
-        "description": "Lists the reservations details for provided date range.",
+        "description": "Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -978,7 +984,7 @@
           "ReservationDetails"
         ],
         "operationId": "ReservationsDetails_List",
-        "description": "Lists the reservations details for the defined scope and provided date range.",
+        "description": "Lists the reservations details for provided date range. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. If the data size is too large, customers may also get 504 as the API timed out preparing the data. In such cases, API call should be made with smaller date ranges or a call to Generate Reservation Details Report API should be made as it is asynchronous and will not run into response size time outs.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1082,6 +1088,9 @@
           "ReservationRecommendationsByBillingAccount-Legacy": {
             "$ref": "./examples/ReservationRecommendationsByBillingAccount.json"
           },
+          "ReservationRecommendationsByBillingAccountFilterForScope": {
+            "$ref": "./examples/ReservationRecommendationsByBillingAccountFilterByScope.json"
+          },
           "ReservationRecommendationsByBillingProfile-Modern": {
             "$ref": "./examples/ReservationRecommendationsByBillingProfile.json"
           }
@@ -1164,6 +1173,9 @@
           },
           {
             "$ref": "#/parameters/productParameter"
+          },
+          {
+            "$ref": "#/parameters/recommendationDetailsFilterParameter"
           }
         ],
         "responses": {
@@ -1191,7 +1203,7 @@
           "ReservationTransactions"
         ],
         "operationId": "ReservationTransactions_List",
-        "description": "List of transactions for reserved instances on billing account scope",
+        "description": "List of transactions for reserved instances on billing account scope. Note: The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1203,13 +1215,19 @@
         "parameters": [
           {
             "name": "$filter",
-            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for the entire December 2020 month (i.e. will contain records for dates December 30 and 31)",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/useMarkupIfPartnerParameter"
+          },
+          {
+            "$ref": "#/parameters/previewMarkupPercentage"
           },
           {
             "$ref": "#/parameters/billingAccountIdParameter"
@@ -1240,7 +1258,7 @@
           "ReservationTransactions"
         ],
         "operationId": "ReservationTransactions_ListByBillingProfile",
-        "description": "List of transactions for reserved instances on billing account scope",
+        "description": "List of transactions for reserved instances on billing profile scope. The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1252,7 +1270,7 @@
         "parameters": [
           {
             "name": "$filter",
-            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for entire December 2020 month (i.e. will contain records for dates December 30 and 31)",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1415,62 +1433,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/forecasts": {
-      "get": {
-        "tags": [
-          "Forecasts"
-        ],
-        "x-ms-odata": "#/definitions/Forecast",
-        "operationId": "Forecasts_List",
-        "description": "Lists the forecast charges for scope defined. Please note that this API is no longer actively under development. We recommend using our new Forecast API moving forward: https://docs.microsoft.com/en-us/rest/api/cost-management/forecast/usage.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "ForecastsList": {
-            "$ref": "./examples/ForecastsList.json"
-          },
-          "ForecastsListFilterByGrain": {
-            "$ref": "./examples/ForecastsListFilterByGrain.json"
-          },
-          "ForecastsListFilterByDates": {
-            "$ref": "./examples/ForecastsListFilterByDates.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "$filter",
-            "description": "May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ForecastsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -1663,8 +1625,20 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
+          "EventsGetByBillingAccount-Primary": {
+            "$ref": "./examples/EventsGetByBillingAccount-Primary.json"
+          },
+          "EventsGetByBillingAccount-Contributor": {
+            "$ref": "./examples/EventsGetByBillingAccount-Contributor.json"
+          },
           "EventsGetByBillingAccount": {
             "$ref": "./examples/EventsGetByBillingAccount.json"
+          },
+          "EventsGetByBillingAccountWithFilters-Primary": {
+            "$ref": "./examples/EventsGetByBillingAccountWithFilters-Primary.json"
+          },
+          "EventsGetByBillingAccountWithFilters-Contributor.json": {
+            "$ref": "./examples/EventsGetByBillingAccountWithFilters-Contributor.json"
           },
           "EventsGetByBillingAccountWithFilters": {
             "$ref": "./examples/EventsGetByBillingAccountWithFilters.json"
@@ -1710,7 +1684,7 @@
           "Lots"
         ],
         "operationId": "Lots_ListByBillingProfile",
-        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile. Microsoft Azure consumption commitments are only supported for the billing account scope.",
+        "description": "Lists all Azure credits for a billing account or a billing profile. The API is only supported for Microsoft Customer Agreements (MCA) billing accounts.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1755,13 +1729,25 @@
           "Lots"
         ],
         "operationId": "Lots_ListByBillingAccount",
-        "description": "Lists all Azure credits and Microsoft Azure consumption commitments for a billing account or a billing profile. Microsoft Azure consumption commitments are only supported for the billing account scope.",
+        "description": "Lists all Microsoft Azure consumption commitments for a billing account. The API is only supported for Microsoft Customer Agreements (MCA) and Direct Enterprise Agreement (EA)  billing accounts.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
+          "LotsListByBillingAccount-Primary": {
+            "$ref": "./examples/LotsListByBillingAccount-Primary.json"
+          },
+          "LotsListByBillingAccount-Contributor": {
+            "$ref": "./examples/LotsListByBillingAccount-Contributor.json"
+          },
           "LotsListByBillingAccount": {
             "$ref": "./examples/LotsListByBillingAccount.json"
+          },
+          "LotsListByBillingAccountWithStatusFilter-Primary": {
+            "$ref": "./examples/LotsListByBillingAccountWithFilters-Primary.json"
+          },
+          "LotsListByBillingAccountWithStatusFilter-Contributor": {
+            "$ref": "./examples/LotsListByBillingAccountWithFilters-Contributor.json"
           },
           "LotsListByBillingAccountWithStatusFilter": {
             "$ref": "./examples/LotsListByBillingAccountWithFilters.json"
@@ -1777,6 +1763,61 @@
           {
             "name": "$filter",
             "description": "May be used to filter the lots by Status, Source etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Lots"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}/providers/Microsoft.Consumption/lots": {
+      "get": {
+        "tags": [
+          "Lots"
+        ],
+        "operationId": "Lots_ListByCustomer",
+        "description": "Lists all Azure credits for a customer. The API is only supported for Microsoft Partner  Agreements (MPA) billing accounts.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "LotsListByCustomer": {
+            "$ref": "./examples/LotsListByCustomer.json"
+          },
+          "LotsListByCustomerWithFilter": {
+            "$ref": "./examples/LotsListByCustomerWithFilters.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/customerIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter the lots by Status, Source etc. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1896,6 +1937,29 @@
         "serviceTier": {
           "description": "The service tier.",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SavingsPlan": {
+      "type": "object",
+      "description": "The properties of the SavingsPlan.",
+      "properties": {
+        "term": {
+          "description": "SavingsPlan term",
+          "type": "string",
+          "readOnly": true
+        },
+        "marketPrice": {
+          "description": "SavingsPlan Market Price",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "effectivePrice": {
+          "description": "SavingsPlan Effective Price",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         }
       }
@@ -2185,6 +2249,36 @@
           "description": "Indicates how frequently this charge will occur. OneTime for purchases which only happen once, Monthly for fees which recur every month, and UsageBased for charges based on how much a service is used.",
           "type": "string",
           "readOnly": true
+        },
+        "payGPrice": {
+          "description": "Retail price for the resource.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "benefitId": {
+          "description": "Unique identifier for the applicable benefit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitName": {
+          "description": "Name of the applicable benefit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pricingModel": {
+          "description": "Identifier that indicates how the meter is priced.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "On Demand",
+            "Reservation",
+            "Spot"
+          ],
+          "x-ms-enum": {
+            "name": "pricingModelType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2215,6 +2309,26 @@
           "description": "Billing Account identifier.",
           "type": "string",
           "readOnly": true
+        },
+        "effectivePrice": {
+          "description": "Effective Price that's charged for the usage.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "pricingModel": {
+          "description": "Identifier that indicates how the meter is priced",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "On Demand",
+            "Reservation",
+            "Spot"
+          ],
+          "x-ms-enum": {
+            "name": "pricingModelType",
+            "modelAsString": true
+          }
         },
         "billingAccountName": {
           "description": "Name of the Billing Account.",
@@ -2558,6 +2672,26 @@
           "type": "number",
           "format": "decimal",
           "readOnly": true
+        },
+        "benefitId": {
+          "description": "Unique identifier for the applicable benefit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "benefitName": {
+          "description": "Name of the applicable benefit.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provider": {
+          "description": "Identifier for Product Category or Line Of Business, Ex - Azure, Microsoft 365, AWS e.t.c",
+          "type": "string",
+          "readOnly": true
+        },
+        "costAllocationRuleName": {
+          "description": "Name for Cost Allocation Rule.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2842,6 +2976,12 @@
           "type": "boolean",
           "readOnly": true
         },
+        "overageRefund": {
+          "description": "Overage Refunds",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
         "newPurchasesDetails": {
           "description": "List of new purchases.",
           "type": "array",
@@ -2861,6 +3001,9 @@
               }
             }
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "adjustmentDetails": {
@@ -2882,6 +3025,9 @@
               }
             }
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         }
       }
@@ -3126,10 +3272,6 @@
           "type": "string",
           "description": "Resource sku"
         },
-        "etag": {
-          "type": "string",
-          "description": "Resource etag."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3173,15 +3315,15 @@
       }
     },
     "ReservationRecommendationDetailsCalculatedSavingsProperties": {
-      "description": "Details of estimated savings.",
+      "description": "Details of estimated savings. The costs and savings are estimated for the term.",
       "properties": {
         "onDemandCost": {
-          "description": "The cost without reservation.",
+          "description": "The cost without reservation. Includes hardware and software cost.",
           "type": "number",
           "readOnly": true
         },
         "overageCost": {
-          "description": "The difference between total reservation cost and reservation cost.",
+          "description": "Hardware and software cost of the resources not covered by the reservation.",
           "type": "number",
           "readOnly": true
         },
@@ -3191,12 +3333,12 @@
           "readOnly": true
         },
         "reservationCost": {
-          "description": "The exact cost of the estimated usage using reservation.",
+          "description": "Hardware cost of the resources covered by the reservation.",
           "type": "number",
           "readOnly": true
         },
         "totalReservationCost": {
-          "description": "The cost of the suggested quantity.",
+          "description": "Reservation cost + software cost of the resources covered by the reservation + overage cost.",
           "type": "number",
           "readOnly": true
         },
@@ -3205,7 +3347,7 @@
           "type": "number"
         },
         "savings": {
-          "description": "The amount saved by purchasing the recommended quantity of reservation.",
+          "description": "The amount saved by purchasing the recommended quantity of reservation. This is equal to onDemandCost - totalReservationCost.",
           "type": "number",
           "readOnly": true
         }
@@ -3223,7 +3365,7 @@
           "readOnly": true
         },
         "onDemandRate": {
-          "description": "On demand rate of the resource.",
+          "description": "Hourly on-demand rate of the resource. Includes only hardware rate i.e, software rate is not included.",
           "type": "number",
           "readOnly": true
         },
@@ -3238,7 +3380,7 @@
           "readOnly": true
         },
         "reservationRate": {
-          "description": "Reservation rate of the resource.",
+          "description": "Hourly reservation rate of the resource. Varies based on the term.",
           "type": "number",
           "readOnly": true
         },
@@ -3257,7 +3399,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReservationRecommendationDetailsCalculatedSavingsProperties"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "lookBackPeriod": {
           "description": "Number of days of usage to look back used for computing the recommendation.",
@@ -3271,7 +3414,7 @@
           "readOnly": true
         },
         "reservationOrderTerm": {
-          "description": "Term period of the reservation, ex: P1Y or P3Y.",
+          "description": "Term period of the reservation. ex: P1M, P1Y or P3Y.",
           "type": "string",
           "readOnly": true
         },
@@ -3395,6 +3538,8 @@
     },
     "LegacyReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
+      "discriminator": "scope",
       "properties": {
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
@@ -3433,7 +3578,7 @@
           "readOnly": true
         },
         "term": {
-          "description": "RI recommendations in one or three year terms.",
+          "description": "Term period of the reservation. ex: P1M, P1Y or P3Y.",
           "type": "string",
           "readOnly": true
         },
@@ -3469,8 +3614,7 @@
         },
         "scope": {
           "description": "Shared or single recommendation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuProperties": {
           "description": "List of sku properties",
@@ -3478,9 +3622,55 @@
           "items": {
             "$ref": "#/definitions/SkuProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "lastUsageDate": {
+          "description": "The last usage date used for looking back for computing the recommendation.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "totalHours": {
+          "description": "The total hours for which the cost is covered.",
+          "type": "integer",
+          "format": "int32",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "LegacySingleScopeReservationRecommendationProperties": {
+      "description": "The properties of the legacy reservation recommendation for single scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Single",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription id associated with single scoped recommendation.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/LegacyReservationRecommendationProperties"
+        }
+      ]
+    },
+    "LegacySharedScopeReservationRecommendationProperties": {
+      "description": "The properties of the legacy reservation recommendation for shared scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Shared",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LegacyReservationRecommendationProperties"
+        }
+      ]
     },
     "SkuProperty": {
       "description": "The Sku property",
@@ -3519,6 +3709,8 @@
     },
     "ModernReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
+      "discriminator": "scope",
       "properties": {
         "location": {
           "type": "string",
@@ -3558,7 +3750,7 @@
           "readOnly": true
         },
         "term": {
-          "description": "RI recommendations in one or three year terms.",
+          "description": "Term period of the reservation. ex: P1M, P1Y or P3Y.",
           "type": "string",
           "readOnly": true
         },
@@ -3596,8 +3788,7 @@
         },
         "scope": {
           "description": "Shared or single recommendation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuProperties": {
           "description": "List of sku properties",
@@ -3605,6 +3796,9 @@
           "items": {
             "$ref": "#/definitions/SkuProperty"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "skuName": {
@@ -3612,13 +3806,50 @@
           "type": "string",
           "readOnly": true
         },
+        "lastUsageDate": {
+          "description": "The last usage date used for looking back for computing the recommendation.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "totalHours": {
+          "description": "The total hours for which the cost is covered.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "ModernSingleScopeReservationRecommendationProperties": {
+      "description": "The properties of the modern reservation recommendation for single scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Single",
+      "properties": {
         "subscriptionId": {
-          "description": "Subscription ID",
+          "description": "Subscription ID associated with single scoped recommendation.",
           "type": "string",
           "format": "uuid",
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModernReservationRecommendationProperties"
+        }
+      ]
+    },
+    "ModernSharedScopeReservationRecommendationProperties": {
+      "description": "The properties of the modern reservation recommendation for shared scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Shared",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModernReservationRecommendationProperties"
+        }
+      ]
     },
     "ModernReservationTransactionProperties": {
       "description": "The properties of a modern reservation transaction.",
@@ -3666,7 +3897,7 @@
           "readOnly": true
         },
         "eventType": {
-          "description": "The type of the transaction (Purchase, Cancel, etc.)",
+          "description": "The type of the transaction (Purchase, Cancel or Refund).",
           "type": "string",
           "readOnly": true
         },
@@ -3787,7 +4018,7 @@
           "readOnly": true
         },
         "eventType": {
-          "description": "The type of the transaction (Purchase, Cancel, etc.)",
+          "description": "The type of the transaction (Purchase, Cancel or Refund).",
           "type": "string",
           "readOnly": true
         },
@@ -3873,6 +4104,24 @@
           "description": "The billing frequency, which can be either one-time or recurring.",
           "type": "string",
           "readOnly": true
+        },
+        "billingMonth": {
+          "description": "The billing month(yyyyMMdd), on which the event initiated.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "monetaryCommitment": {
+          "description": "The monetary commitment amount at the enrollment scope.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "overage": {
+          "description": "The overage amount at the enrollment scope.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
         }
       }
     },
@@ -3952,7 +4201,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Tag"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
@@ -4114,11 +4366,8 @@
           "items": {
             "$ref": "#/definitions/BudgetFilterProperties"
           },
+          "x-ms-identifiers": [],
           "minItems": 0
-        },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/BudgetFilterProperties"
         },
         "dimensions": {
           "description": "Has comparison expression for a dimension",
@@ -4225,7 +4474,24 @@
           ],
           "x-ms-enum": {
             "name": "OperatorType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EqualTo",
+                "description": "Alert will be triggered if the evaluated cost is the same as threshold value. Note: It’s not recommended to use this OperatorType as there’s low chance of cost being exactly the same as threshold value, leading to missing of your alert. This OperatorType will be deprecated in future. ",
+                "name": "EqualTo"
+              },
+              {
+                "value": "GreaterThan",
+                "description": "Alert will be triggered if the evaluated cost is greater than the threshold value. Note: This is the recommended OperatorType while configuring Budget Alert.",
+                "name": "GreaterThan"
+              },
+              {
+                "value": "GreaterThanOrEqualTo",
+                "description": "Alert will be triggered if the evaluated cost is greater than or equal to the threshold value.",
+                "name": "GreaterThanOrEqualTo"
+              }
+            ]
           }
         },
         "threshold": {
@@ -4262,13 +4528,57 @@
           "description": "The type of threshold",
           "type": "string",
           "enum": [
-            "Actual"
+            "Actual",
+            "Forecasted"
           ],
           "x-ms-enum": {
             "name": "ThresholdType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Actual",
+                "description": "Actual costs budget alerts notify when the actual accrued cost exceeds the allocated budget .",
+                "name": "Actual"
+              },
+              {
+                "value": "Forecasted",
+                "description": "Forecasted costs budget alerts provide advanced notification that your spending trends are likely to exceed your allocated budget, as it relies on forecasted cost predictions.",
+                "name": "Forecasted"
+              }
+            ]
           },
           "default": "Actual"
+        },
+        "locale": {
+          "description": "Language in which the recipient will receive the notification",
+          "type": "string",
+          "enum": [
+            "en-us",
+            "ja-jp",
+            "zh-cn",
+            "de-de",
+            "es-es",
+            "fr-fr",
+            "it-it",
+            "ko-kr",
+            "pt-br",
+            "ru-ru",
+            "zh-tw",
+            "cs-cz",
+            "pl-pl",
+            "tr-tr",
+            "da-dk",
+            "en-gb",
+            "hu-hu",
+            "nb-no",
+            "nl-nl",
+            "pt-pt",
+            "sv-se"
+          ],
+          "x-ms-enum": {
+            "name": "CultureCode",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -4303,7 +4613,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/PriceSheetProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "meterId"
+          ]
         },
         "nextLink": {
           "description": "The link (url) to the next page of results.",
@@ -4382,116 +4695,10 @@
           "description": "Offer Id",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "Forecast": {
-      "description": "A forecast resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ForecastProperties",
-          "title": "Forecast properties"
-        }
-      }
-    },
-    "ForecastsListResult": {
-      "description": "Result of listing forecasts. It contains a list of available forecasts.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of forecasts.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Forecast"
-          }
-        }
-      }
-    },
-    "ForecastProperties": {
-      "description": "The properties of the forecast charge.",
-      "type": "object",
-      "properties": {
-        "usageDate": {
-          "description": "The usage date of the forecast.",
-          "type": "string",
-          "readOnly": true
         },
-        "grain": {
-          "description": "The granularity of forecast. Please note that Yearly is not currently supported in this API. The API will provide responses in the Monthly grain if Yearly is selected. To get yearly grain data, please use our newer Forecast API.",
-          "type": "string",
-          "enum": [
-            "Daily",
-            "Monthly",
-            "Yearly"
-          ],
-          "x-ms-enum": {
-            "name": "Grain",
-            "modelAsString": true
-          }
-        },
-        "charge": {
-          "description": "The amount of charge",
-          "type": "number",
-          "format": "decimal",
-          "readOnly": true
-        },
-        "currency": {
-          "description": "The ISO currency in which the meter is charged, for example, USD.",
-          "type": "string",
-          "readOnly": true
-        },
-        "chargeType": {
-          "description": "The type of the charge. Could be actual or forecast",
-          "type": "string",
-          "enum": [
-            "Actual",
-            "Forecast"
-          ],
-          "x-ms-enum": {
-            "name": "ChargeType",
-            "modelAsString": true
-          }
-        },
-        "confidenceLevels": {
-          "description": "The details about the forecast confidence levels. This is populated only when chargeType is Forecast.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "percentage": {
-                "description": "The percentage level of the confidence",
-                "type": "number",
-                "format": "decimal",
-                "readOnly": true
-              },
-              "bound": {
-                "description": "The boundary of the percentage, values could be 'Upper' or 'Lower'",
-                "type": "string",
-                "enum": [
-                  "Upper",
-                  "Lower"
-                ],
-                "x-ms-enum": {
-                  "name": "Bound",
-                  "modelAsString": true
-                }
-              },
-              "value": {
-                "description": "The amount of forecast within the percentage level",
-                "type": "number",
-                "format": "decimal",
-                "readOnly": true
-              }
-            }
-          },
+        "savingsPlan": {
+          "description": "SavingsPlan Details",
+          "$ref": "#/definitions/SavingsPlan",
           "readOnly": true
         }
       }
@@ -4598,7 +4805,7 @@
       "discriminator": "kind",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -4670,7 +4877,7 @@
           "format": "decimal",
           "readOnly": true
         },
-        "marketplaceCharges": {
+        "azureMarketplaceCharges": {
           "description": "Marketplace Charges.",
           "type": "number",
           "format": "decimal",
@@ -4761,6 +4968,11 @@
           "description": "Is charge Invoiced",
           "type": "boolean",
           "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription guid.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4835,7 +5047,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header. \n\n * 504 Gateway Timeout - Service timed out while processing the request. Reduce the date range in the request, if possible.",
       "type": "object",
       "properties": {
         "error": {
@@ -4972,9 +5184,19 @@
           "$ref": "#/definitions/amount"
         },
         "closedBalance": {
-          "description": "The balance after the event. ",
+          "description": "The balance after the event, Note: This will not be returned for Contributor Organization Type in Multi-Entity consumption commitment",
           "readOnly": true,
           "$ref": "#/definitions/amount"
+        },
+        "billingAccountId": {
+          "description": "Identifier of the billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountDisplayName": {
+          "description": "Name of the billing account.",
+          "type": "string",
+          "readOnly": true
         },
         "eventType": {
           "description": "Identifies the type of the event.",
@@ -4986,7 +5208,8 @@
             "PendingNewCredit",
             "PendingExpiredCredit",
             "UnKnown",
-            "NewCredit"
+            "NewCredit",
+            "CreditExpired"
           ],
           "x-ms-enum": {
             "name": "EventType",
@@ -5059,9 +5282,19 @@
           "$ref": "#/definitions/AmountWithExchangeRate"
         },
         "closedBalanceInBillingCurrency": {
-          "description": "The balance in billing currency after the event.",
+          "description": "The balance in billing currency after the event, Note: This will not be returned for Contributor Organization Type in Multi-Entity consumption commitment",
           "readOnly": true,
           "$ref": "#/definitions/AmountWithExchangeRate"
+        },
+        "isEstimatedBalance": {
+          "description": "If true, the listed details are based on an estimation and it will be subjected to change.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The eTag for the resource."
         }
       }
     },
@@ -5103,7 +5336,7 @@
       "description": "The lot properties.",
       "properties": {
         "originalAmount": {
-          "description": "The original amount of a lot.",
+          "description": "The original amount of a lot, Note: This will not be returned for Contributor Organization Type in Multi-Entity consumption commitment",
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
@@ -5177,7 +5410,7 @@
           "readOnly": true
         },
         "originalAmountInBillingCurrency": {
-          "description": "The original amount of a lot in billing currency.",
+          "description": "The original amount of a lot in billing currency,  Note: This will not be returned for Contributor Organization Type in Multi-Entity consumption commitment",
           "readOnly": true,
           "$ref": "#/definitions/AmountWithExchangeRate"
         },
@@ -5190,6 +5423,46 @@
           "description": "The reseller of the lot.",
           "readOnly": true,
           "$ref": "#/definitions/Reseller"
+        },
+        "isEstimatedBalance": {
+          "description": "If true, the listed details are based on an estimation and it will be subjected to change.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The eTag for the resource."
+        },
+        "OrganizationType": {
+          "description": "The organization type of the lot.",
+          "type": "string",
+          "enum": [
+            "Primary",
+            "Contributor"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OrganizationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Primary",
+                "description": "Primary organization type for Multi-Entity consumption commitment.",
+                "name": "PrimaryOrganizationType"
+              },
+              {
+                "value": "Contributor",
+                "description": "Contributor organization type for Multi-Entity consumption commitment.",
+                "name": "ContributorOrganizationType"
+              }
+            ]
+          }
+        },
+        "usedAmount": {
+          "description": "Amount consumed from the commitment.",
+          "readOnly": true,
+          "$ref": "#/definitions/amount"
         }
       }
     },
@@ -5247,6 +5520,16 @@
           "description": "Credit's reseller.",
           "readOnly": true,
           "$ref": "#/definitions/Reseller"
+        },
+        "isEstimatedBalance": {
+          "description": "If true, the listed details are based on an estimation and it will be subjected to change.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The eTag for the resource."
         }
       }
     },
@@ -5434,7 +5717,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with charges operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope. For department and enrollment accounts, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. Also, Modern Commerce Account scopes are '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "description": "The scope associated with charges operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope. For department and enrollment accounts, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. Also, Modern Commerce Account scopes are '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -5443,7 +5726,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with usage details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope. For subscription, billing account, department, enrollment account and management group, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. Also, Modern Commerce Account scopes are '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "description": "The scope associated with usage details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope. For subscription, billing account, department, enrollment account and management group, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. Also, Modern Commerce Account scopes are '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -5461,7 +5744,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with budget operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope.",
+      "description": "The scope associated with budget operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -5524,12 +5807,20 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2025-04-01."
+      "description": "Version of the API to be used with the client request. The current version is 2023-03-01."
     },
     "billingAccountIdParameter": {
       "name": "billingAccountId",
       "in": "path",
       "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "customerIdParameter": {
+      "name": "customerId",
+      "in": "path",
+      "description": "Customer ID",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -5707,6 +5998,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "recommendationDetailsFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Used to filter reservation recommendation details by: properties/subscriptionId can be specified for billing account and billing profile paths.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "termParameter": {
       "description": "Specify length of reservation recommendation term.",
       "type": "string",
@@ -5715,6 +6014,7 @@
       "name": "term",
       "x-ms-parameter-location": "method",
       "enum": [
+        "P1M",
         "P1Y",
         "P3Y"
       ],
@@ -5722,6 +6022,11 @@
         "name": "term",
         "modelAsString": true,
         "values": [
+          {
+            "value": "P1M",
+            "description": "1 month reservation term",
+            "name": "P1M"
+          },
           {
             "value": "P1Y",
             "description": "1 year reservation term",
@@ -5800,7 +6105,23 @@
         "name": "scope",
         "modelAsString": true
       }
+    },
+    "useMarkupIfPartnerParameter": {
+      "name": "useMarkupIfPartner",
+      "in": "query",
+      "description": "Applies mark up to the transactions if the caller is a partner.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "previewMarkupPercentage": {
+      "name": "previewMarkupPercentage",
+      "in": "query",
+      "description": "Preview markup percentage to be applied.",
+      "required": false,
+      "type": "number",
+      "format": "decimal",
+      "x-ms-parameter-location": "method"
     }
   }
 }
-

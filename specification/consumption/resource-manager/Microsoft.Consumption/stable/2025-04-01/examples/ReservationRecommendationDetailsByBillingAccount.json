@@ -1,12 +1,13 @@
 {
   "parameters": {
     "api-version": "2025-04-01",
-    "resourceScope": "providers/Microsoft.Billing/billingAccounts/000000",
+    "resourceScope": "providers/Microsoft.Billing/billingAccounts/00000000",
     "lookBackPeriod": "Last60Days",
     "product": "Standard_DS14_v2",
     "region": "eastus",
     "scope": "Shared",
-    "term": "P1Y"
+    "term": "P1Y",
+    "$filter": "properties/subscriptionId eq 00000000-0000-0000-0000-00000000"
   },
   "responses": {
     "200": {
@@ -102,4 +103,3 @@
     "204": {}
   }
 }
-
