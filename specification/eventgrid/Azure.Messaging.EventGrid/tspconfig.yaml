@@ -19,8 +19,7 @@ options:
     package-pprint-name: '"Azure Event Grid"'
     package-version: 4.20.0
     package-dir: "azure-eventgrid"
-    package-name: "{package-dir}"
-    emitter-output-dir: "{project-root}/{service-dir}/{package-name}"
+    namespace: "azure.eventgrid"
     flavor: azure
     generate-test: true
     generate-sample: true
@@ -53,7 +52,10 @@ options:
       name: "@azure/eventgrid"
     flavor: azure
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/sdk/messaging/eventgrid/aznamespaces"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/messaging/eventgrid"
+    package-dir: "aznamespaces"
     module-version: "0.0.1"
     emitter-output-dir: "{project-root}"
     slice-elements-byval: true
+    flavor: "azure"
