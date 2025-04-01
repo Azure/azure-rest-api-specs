@@ -68,6 +68,8 @@ describe("compile", function () {
     assert(result.errorOutput?.includes("not generated from the current"));
   });
 
+  // TODO: Add tests for all other branches of extra swaggers
+
   it("should skip git diff check if compile fails", async function () {
     let host = new TsvTestHost();
     host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
