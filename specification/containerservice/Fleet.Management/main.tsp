@@ -73,3 +73,4 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2025_04_01_preview: "2025-04-01-preview",
 }
+
