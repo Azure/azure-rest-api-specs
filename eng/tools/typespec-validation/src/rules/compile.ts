@@ -51,13 +51,10 @@ export class CompileRule implements Rule {
           const lines = stripAnsi(stdout).split(/\r?\n/);
 
           // TODO: Use helpers in /.github once they support platform-specific paths
+          // Header, footer, and empty lines should be excluded by JSON filter
           const outputSwaggers = lines
             // Remove leading and trailing whitespace
             .map((l) => l.trim())
-            // Skip blank lines
-            .filter((l) => l !== "")
-            // Skip first and last lines (version and success messages)
-            .slice(1, -1)
             // Normalize to platform-specific path
             .map((l) => normalize(l))
             // Filter to JSON files
@@ -94,7 +91,10 @@ export class CompileRule implements Rule {
             async (swaggerPath: string) => {
               const swaggerText = await host.readFile(swaggerPath);
               const swaggerObj = JSON.parse(swaggerText);
-              return swaggerObj["info"]?.["x-typespec-generated"] || swaggerObj["info"]?.["x-cadl-generated"];
+              return (
+                swaggerObj["info"]?.["x-typespec-generated"] ||
+                swaggerObj["info"]?.["x-cadl-generated"]
+              );
             },
           );
 
