@@ -11,12 +11,12 @@ go:
 
 ```yaml $(go) && $(track2)
 go:
+  azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: bing
   module-name: sdk/resourcemanager/bing/arm$(namespace)
   module: github.com/Azure/azure-sdk-for-go/$(module-name)
   output-folder: $(go-sdk-folder)/$(module-name)
-  azure-arm: true
-  module-version: 0.1.0
 ```
 
 ### Go multi-api
