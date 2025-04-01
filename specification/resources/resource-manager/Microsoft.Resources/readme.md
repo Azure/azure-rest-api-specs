@@ -35,6 +35,12 @@ openapi-subtype: providerHub
 tag: package-deletedresources-2024-10
 ```
 
+``` yaml
+openapi-type: arm
+openapi-subtype: providerHub
+tag: package-changes-2025-03
+```
+
 ### Tag: package-deleteoptions-2024-10
 
 These settings apply only when `--tag=package-deleteoptions-2024-10` is specified on the command line.
@@ -51,4 +57,13 @@ These settings apply only when `--tag=package-deletedresources-2024-10` is speci
 ``` yaml $(tag) == 'package-deletedresources-2024-10'
 input-file:
   - preview/2024-10-01-preview/deletedResources.json
+```
+
+### Tag: package-changes-2025-03
+
+These settings apply only when `--tag=package-changes-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2025-03'
+input-file:
+- Microsoft.Resources/stable/2025-03-01/changes.json
 ```
