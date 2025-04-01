@@ -27,7 +27,7 @@ These are the global settings for the Dell.Storage.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-02-11-preview
+tag: package-2025-03-21-preview
 ```
 
 ### Tag: package-2022-06-09-preview
@@ -55,6 +55,15 @@ These settings apply only when `--tag=package-2025-02-11-preview` is specified o
 ```yaml $(tag) == 'package-2025-02-11-preview'
 input-file:
   - Dell.Storage/preview/2025-02-11-preview/Dell.Storage.json
+```
+
+### Tag: package-2025-03-21-preview
+
+These settings apply only when `--tag=package-2025-03-21-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-21-preview'
+input-file:
+  - Dell.Storage/preview/2025-03-21-preview/Dell.Storage.json
 ```
 
 ---
