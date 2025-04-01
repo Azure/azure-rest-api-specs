@@ -43,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "JitSecurityGroup"
+      "name": "JitPolicySet"
     }
   ],
   "paths": {
@@ -74,8 +74,8 @@
           }
         },
         "x-ms-examples": {
-          "List Operations JitSecurityGroup": {
-            "$ref": "./examples/JitSecurityGroup_Operations.json"
+          "List Operations JitPolicySet": {
+            "$ref": "./examples/JitPolicySet_Operations.json"
           }
         },
         "x-ms-pageable": {
@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/jitSecurityGroupResources": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/jitPolicySets": {
       "get": {
-        "operationId": "JitSecurityGroup_ListBySubscription",
+        "operationId": "JitPolicySet_ListBySubscription",
         "tags": [
-          "JitSecurityGroup"
+          "JitPolicySet"
         ],
-        "description": "List JitSecurityGroupResource resources by subscription ID",
+        "description": "List JitPolicySetResource resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -102,7 +102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/JitSecurityGroupResourceListResult"
+              "$ref": "#/definitions/JitPolicySetResourceListResult"
             }
           },
           "default": {
@@ -113,8 +113,8 @@
           }
         },
         "x-ms-examples": {
-          "ListBySubscription JitSecurityGroup": {
-            "$ref": "./examples/JitSecurityGroup_ListBySubscription.json"
+          "ListBySubscription JitPolicySet": {
+            "$ref": "./examples/JitPolicySet_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -122,13 +122,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/jitSecurityGroupResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/jitPolicySets": {
       "get": {
-        "operationId": "JitSecurityGroup_ListByResourceGroup",
+        "operationId": "JitPolicySet_ListByResourceGroup",
         "tags": [
-          "JitSecurityGroup"
+          "JitPolicySet"
         ],
-        "description": "List JitSecurityGroupResource resources by resource group",
+        "description": "List JitPolicySetResource resources by resource group",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -144,7 +144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/JitSecurityGroupResourceListResult"
+              "$ref": "#/definitions/JitPolicySetResourceListResult"
             }
           },
           "default": {
@@ -155,8 +155,8 @@
           }
         },
         "x-ms-examples": {
-          "ListByResourceGroup JitSecurityGroup": {
-            "$ref": "./examples/JitSecurityGroup_ListByResourceGroup.json"
+          "ListByResourceGroup JitPolicySet": {
+            "$ref": "./examples/JitPolicySet_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -164,13 +164,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/jitSecurityGroupResources/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/jitPolicySets/{resourceName}": {
       "get": {
-        "operationId": "JitSecurityGroup_Get",
+        "operationId": "JitPolicySet_Get",
         "tags": [
-          "JitSecurityGroup"
+          "JitPolicySet"
         ],
-        "description": "Get a JitSecurityGroupResource",
+        "description": "Get a JitPolicySetResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -194,7 +194,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/JitSecurityGroupResource"
+              "$ref": "#/definitions/JitPolicySetResource"
             }
           },
           "default": {
@@ -205,17 +205,17 @@
           }
         },
         "x-ms-examples": {
-          "Get JitSecurityGroup": {
-            "$ref": "./examples/JitSecurityGroup_Get.json"
+          "Get JitPolicySet": {
+            "$ref": "./examples/JitPolicySet_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "JitSecurityGroup_CreateOrUpdate",
+        "operationId": "JitPolicySet_CreateOrUpdate",
         "tags": [
-          "JitSecurityGroup"
+          "JitPolicySet"
         ],
-        "description": "Create a JitSecurityGroupResource",
+        "description": "Create a JitPolicySetResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -240,21 +240,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JitSecurityGroupResource"
+              "$ref": "#/definitions/JitPolicySetResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'JitSecurityGroupResource' update operation succeeded",
+            "description": "Resource 'JitPolicySetResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/JitSecurityGroupResource"
+              "$ref": "#/definitions/JitPolicySetResource"
             }
           },
           "201": {
-            "description": "Resource 'JitSecurityGroupResource' create operation succeeded",
+            "description": "Resource 'JitPolicySetResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/JitSecurityGroupResource"
+              "$ref": "#/definitions/JitPolicySetResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -276,8 +276,8 @@
           }
         },
         "x-ms-examples": {
-          "Create JitSecurityGroup": {
-            "$ref": "./examples/JitSecurityGroup_CreateOrUpdate.json"
+          "Create JitPolicySet": {
+            "$ref": "./examples/JitPolicySet_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -291,6 +291,29 @@
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "ExtendedFlags": {
+      "type": "object",
+      "description": "JIT Extended policy flags",
+      "properties": {
+        "msEmployeeDirectAccessPolicy": {
+          "type": "boolean",
+          "description": "Flag indicating if it is MS Employee Direct Access Policy or not"
+        },
+        "globalPolicy": {
+          "type": "boolean",
+          "description": "Flag indicating if it is Global Policy or not"
+        },
+        "noDisplay": {
+          "type": "boolean",
+          "description": "Flag indicating if the policy should be displayed or not"
+        }
+      },
+      "required": [
+        "msEmployeeDirectAccessPolicy",
+        "globalPolicy",
+        "noDisplay"
+      ]
     },
     "FicpProvisioningState": {
       "type": "string",
@@ -329,65 +352,79 @@
       },
       "readOnly": true
     },
-    "JitSecurityGroupResource": {
+    "JitPolicy": {
       "type": "object",
-      "description": "jitSecurityGroup Resource",
+      "description": "Ficp Jit policy",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/JitSecurityGroupResourceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "JitSecurityGroupResourceListResult": {
-      "type": "object",
-      "description": "The response of a JitSecurityGroupResource list operation.",
-      "properties": {
-        "value": {
+        "policyInvariableId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unique policy Identifier for a service tree id."
+        },
+        "executionSequence": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Define the execution sequence in belonging policy set."
+        },
+        "policyType": {
+          "$ref": "#/definitions/PolicyType",
+          "description": "The type of approval for the policy. Available values are \"AutoApproval\", \"ManualApproval\" and \"ExplicitlyDeny\"."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Jit Resource that was created and available for your service."
+        },
+        "extendedFlags": {
+          "$ref": "#/definitions/ExtendedFlags",
+          "description": "JIT Available policy flags. "
+        },
+        "policyConditions": {
           "type": "array",
-          "description": "The JitSecurityGroupResource items on this page",
+          "description": "Policy condition is a Property-Value set. The evaluation is based on the policy condition.",
           "items": {
-            "$ref": "#/definitions/JitSecurityGroupResource"
-          }
+            "$ref": "#/definitions/PolicyCondition"
+          },
+          "x-ms-identifiers": []
         },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "JitSecurityGroupResourceProperties": {
-      "type": "object",
-      "description": "JIT security group resources properties",
-      "properties": {
-        "instanceId": {
-          "type": "string",
-          "description": "Instance identifier. Required."
-        },
-        "cloud": {
-          "type": "string",
-          "description": "Cloud identifier for the JIT security group. Possible options are PROD, blackforest, fairfax, mooncake, ex, rx. Required."
-        },
-        "elevatedSecurityGroup": {
-          "$ref": "#/definitions/ResourceSecurityGroup",
-          "description": "Elevated security group."
-        },
-        "corpSecurityGroup": {
-          "$ref": "#/definitions/ResourceSecurityGroup",
-          "description": "Corp security group."
+        "policyActions": {
+          "type": "array",
+          "description": "After policy condition match is evaluated and matched, an equivalent action need to be performed.",
+          "items": {
+            "$ref": "#/definitions/PolicyAction"
+          },
+          "x-ms-identifiers": []
         },
         "provisioningMode": {
           "$ref": "#/definitions/ProvisioningMode",
           "description": "Provisioning mode type."
+        }
+      },
+      "required": [
+        "policyInvariableId",
+        "executionSequence",
+        "policyType",
+        "resourceType",
+        "extendedFlags",
+        "policyConditions",
+        "policyActions",
+        "provisioningMode"
+      ]
+    },
+    "JitPolicySetProperties": {
+      "type": "object",
+      "description": "Ficp JIT Policy Set properties",
+      "properties": {
+        "cloudId": {
+          "type": "string",
+          "description": "Cloud identifier"
+        },
+        "policies": {
+          "type": "array",
+          "description": "List of Jit policies",
+          "items": {
+            "$ref": "#/definitions/JitPolicy"
+          },
+          "x-ms-identifiers": []
         },
         "azureLocation": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
@@ -400,9 +437,111 @@
         }
       },
       "required": [
-        "instanceId",
-        "cloud"
+        "cloudId",
+        "policies"
       ]
+    },
+    "JitPolicySetResource": {
+      "type": "object",
+      "description": "FicpJitPolicySet Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JitPolicySetProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "JitPolicySetResourceListResult": {
+      "type": "object",
+      "description": "The response of a JitPolicySetResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JitPolicySetResource items on this page",
+          "items": {
+            "$ref": "#/definitions/JitPolicySetResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicyAction": {
+      "type": "object",
+      "description": "FICP Policy Action",
+      "properties": {
+        "property": {
+          "type": "string",
+          "description": "Property of the policy action"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the policy action"
+        }
+      },
+      "required": [
+        "property",
+        "value"
+      ]
+    },
+    "PolicyCondition": {
+      "type": "object",
+      "description": "FICP Policy Condition",
+      "properties": {
+        "property": {
+          "type": "string",
+          "description": "Property of the policy condition"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the policy condition"
+        }
+      },
+      "required": [
+        "property",
+        "value"
+      ]
+    },
+    "PolicyType": {
+      "type": "string",
+      "description": "Policy Type",
+      "enum": [
+        "AutoApproval",
+        "ManualApproval",
+        "ExplicitlyDeny"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AutoApproval",
+            "value": "AutoApproval",
+            "description": "Auto Approval"
+          },
+          {
+            "name": "ManualApproval",
+            "value": "ManualApproval",
+            "description": "Manual Approval"
+          },
+          {
+            "name": "ExplicitlyDeny",
+            "value": "ExplicitlyDeny",
+            "description": "Explicitly Deny"
+          }
+        ]
+      }
     },
     "ProvisioningMode": {
       "type": "object",
@@ -410,34 +549,18 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Type of the provisioning mode, either \"Create\" or \"Delete\"."
+          "description": "Type of the provisioning mode, either \"Create\" or \"Delete\".",
+          "enum": [
+            "Create",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "mode"
-      ]
-    },
-    "ResourceSecurityGroup": {
-      "type": "object",
-      "description": "Resource security group type",
-      "properties": {
-        "scenario": {
-          "type": "string",
-          "description": "JIT Scenario."
-        },
-        "serviceName": {
-          "type": "string",
-          "description": "JIT Service name."
-        },
-        "securityGroup": {
-          "type": "string",
-          "description": "JIT Security group."
-        }
-      },
-      "required": [
-        "scenario",
-        "serviceName",
-        "securityGroup"
       ]
     }
   },
