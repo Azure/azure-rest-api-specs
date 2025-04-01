@@ -65,6 +65,10 @@ export class CompileRule implements Rule {
           stdOutput += "\nGenerated Swaggers:\n";
           stdOutput += outputSwaggers.join("\n") + "\n";
 
+          if (outputSwaggers.length === 0) {
+            throw new Error("No generated swaggers found in output of 'tsp compile'");
+          }
+
           // ../resource-manager/Microsoft.Contoso
           const outputFolder = dirname(dirname(dirname(outputSwaggers[0])));
           const outputFilename = basename(outputSwaggers[0]);
