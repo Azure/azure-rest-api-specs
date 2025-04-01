@@ -55,8 +55,10 @@ describe("compile", function () {
   it("should fail if extra swaggers", async function () {
     const host = new TsvTestHost();
 
+    const tspCompileOutput = swaggerPath;
+
     host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      return [null, "version\n" + swaggerPath + "\nsuccess", ""];
+      return [null, tspCompileOutput, ""];
     };
 
     // Simulate extra swagger
