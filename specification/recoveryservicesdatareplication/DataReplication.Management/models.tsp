@@ -992,7 +992,7 @@ model FabricModelProperties {
    * Gets or sets the service resource Id.
    */
   @visibility(Lifecycle.Read)
-  serviceResourceId?: string;
+  serviceResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the fabric health.
@@ -2181,7 +2181,7 @@ model VaultModelProperties {
    * Gets or sets the service resource Id.
    */
   @visibility(Lifecycle.Read)
-  serviceResourceId?: string;
+  serviceResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the type of vault.
@@ -2313,7 +2313,7 @@ model AzStackHCIFabricModelCustomProperties
    * Gets or sets the ARM Id of the AzStackHCI site.
    */
   @minLength(1)
-  azStackHciSiteId: string;
+  azStackHciSiteId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Appliance name.
@@ -2342,13 +2342,13 @@ model AzStackHCIFabricModelCustomProperties
    * Gets or sets the Migration solution ARM Id.
    */
   @minLength(1)
-  migrationSolutionId: string;
+  migrationSolutionId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the migration hub Uri.
    */
   @visibility(Lifecycle.Read)
-  migrationHubUri?: string;
+  migrationHubUri?: url;
 
   /**
    * Gets or sets the instance type.
@@ -2453,13 +2453,13 @@ model HyperVMigrateFabricModelCustomProperties
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @minLength(1)
-  hyperVSiteId: string;
+  hyperVSiteId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the fabric resource Id.
    */
   @visibility(Lifecycle.Read)
-  fabricResourceId?: string;
+  fabricResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the fabric container Id.
@@ -2471,13 +2471,13 @@ model HyperVMigrateFabricModelCustomProperties
    * Gets or sets the migration solution ARM Id.
    */
   @minLength(1)
-  migrationSolutionId: string;
+  migrationSolutionId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the migration hub Uri.
    */
   @visibility(Lifecycle.Read)
-  migrationHubUri?: string;
+  migrationHubUri?: url;
 
   /**
    * Gets or sets the instance type.
@@ -2499,7 +2499,7 @@ model HyperVToAzStackHCIDiskInput {
   /**
    * Gets or sets the target storage account ARM Id.
    */
-  storageContainerId?: string;
+  storageContainerId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
@@ -2686,7 +2686,7 @@ model HyperVToAzStackHCIProtectedDiskProperties {
    * Gets or sets the ARM Id of the storage container.
    */
   @visibility(Lifecycle.Read)
-  storageContainerId?: string;
+  storageContainerId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the local path of the storage container.
@@ -2783,13 +2783,13 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the Target HCI Cluster ARM Id.
    */
   @minLength(1)
-  targetHciClusterId: string;
+  targetHciClusterId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Target Arc Cluster Custom Location ARM Id.
    */
   @minLength(1)
-  targetArcClusterCustomLocationId: string;
+  targetArcClusterCustomLocationId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Target AzStackHCI cluster name.
@@ -2801,7 +2801,7 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the ARM Id of the discovered machine.
    */
   @minLength(1)
-  fabricDiscoveryMachineId: string;
+  fabricDiscoveryMachineId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the list of disks to replicate.
@@ -2842,13 +2842,13 @@ model HyperVToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the target resource group ARM Id.
    */
   @minLength(1)
-  targetResourceGroupId: string;
+  targetResourceGroupId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the target storage container ARM Id.
    */
   @minLength(1)
-  storageContainerId: string;
+  storageContainerId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the hypervisor generation of the virtual machine.
@@ -3143,25 +3143,25 @@ model HyperVToAzStackHCIReplicationExtensionModelCustomProperties
    * Gets or sets the ARM Id of the source HyperV fabric.
    */
   @minLength(1)
-  hyperVFabricArmId: string;
+  hyperVFabricArmId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the HyperV site.
    */
   @visibility(Lifecycle.Read)
-  hyperVSiteId?: string;
+  hyperVSiteId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the target AzStackHCI fabric.
    */
   @minLength(1)
-  azStackHciFabricArmId: string;
+  azStackHciFabricArmId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the AzStackHCI site.
    */
   @visibility(Lifecycle.Read)
-  azStackHciSiteId?: string;
+  azStackHciSiteId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the storage account Id.
@@ -3177,19 +3177,19 @@ model HyperVToAzStackHCIReplicationExtensionModelCustomProperties
    * Gets or sets the Uri of ASR.
    */
   @visibility(Lifecycle.Read)
-  asrServiceUri?: string;
+  asrServiceUri?: url;
 
   /**
    * Gets or sets the Uri of Rcm.
    */
   @visibility(Lifecycle.Read)
-  rcmServiceUri?: string;
+  rcmServiceUri?: url;
 
   /**
    * Gets or sets the Uri of Gateway.
    */
   @visibility(Lifecycle.Read)
-  gatewayServiceUri?: string;
+  gatewayServiceUri?: url;
 
   /**
    * Gets or sets the gateway service Id of source.
@@ -3409,13 +3409,13 @@ model VMwareMigrateFabricModelCustomProperties
    * Gets or sets the ARM Id of the VMware site.
    */
   @minLength(1)
-  vmwareSiteId: string;
+  vmwareSiteId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the migration solution.
    */
   @minLength(1)
-  migrationSolutionId: string;
+  migrationSolutionId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the instance type.
@@ -3437,7 +3437,7 @@ model VMwareToAzStackHCIDiskInput {
   /**
    * Gets or sets the target storage account ARM Id.
    */
-  storageContainerId?: string;
+  storageContainerId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets a value indicating whether dynamic sizing is enabled on the virtual hard disk.
@@ -3630,7 +3630,7 @@ model VMwareToAzStackHCIProtectedDiskProperties {
    * Gets or sets the ARM Id of the storage container.
    */
   @visibility(Lifecycle.Read)
-  storageContainerId?: string;
+  storageContainerId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the local path of the storage container.
@@ -3727,13 +3727,13 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the Target HCI Cluster ARM Id.
    */
   @minLength(1)
-  targetHciClusterId: string;
+  targetHciClusterId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Target Arc Cluster Custom Location ARM Id.
    */
   @minLength(1)
-  targetArcClusterCustomLocationId: string;
+  targetArcClusterCustomLocationId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the Target AzStackHCI cluster name.
@@ -3745,13 +3745,13 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the target storage container ARM Id.
    */
   @minLength(1)
-  storageContainerId: string;
+  storageContainerId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the target resource group ARM Id.
    */
   @minLength(1)
-  targetResourceGroupId: string;
+  targetResourceGroupId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the target location.
@@ -3861,7 +3861,7 @@ model VMwareToAzStackHCIProtectedItemModelCustomProperties
    * Gets or sets the ARM Id of the discovered machine.
    */
   @minLength(1)
-  fabricDiscoveryMachineId: string;
+  fabricDiscoveryMachineId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the source VM display name.
@@ -4120,25 +4120,25 @@ model VMwareToAzStackHCIReplicationExtensionModelCustomProperties
    * Gets or sets the ARM Id of the source VMware fabric.
    */
   @minLength(1)
-  vmwareFabricArmId: string;
+  vmwareFabricArmId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the VMware site.
    */
   @visibility(Lifecycle.Read)
-  vmwareSiteId?: string;
+  vmwareSiteId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the target AzStackHCI fabric.
    */
   @minLength(1)
-  azStackHciFabricArmId: string;
+  azStackHciFabricArmId: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the ARM Id of the AzStackHCI site.
    */
   @visibility(Lifecycle.Read)
-  azStackHciSiteId?: string;
+  azStackHciSiteId?: Azure.Core.armResourceIdentifier;
 
   /**
    * Gets or sets the storage account Id.
@@ -4154,19 +4154,19 @@ model VMwareToAzStackHCIReplicationExtensionModelCustomProperties
    * Gets or sets the Uri of ASR.
    */
   @visibility(Lifecycle.Read)
-  asrServiceUri?: string;
+  asrServiceUri?: url;
 
   /**
    * Gets or sets the Uri of Rcm.
    */
   @visibility(Lifecycle.Read)
-  rcmServiceUri?: string;
+  rcmServiceUri?: url;
 
   /**
    * Gets or sets the Uri of Gateway.
    */
   @visibility(Lifecycle.Read)
-  gatewayServiceUri?: string;
+  gatewayServiceUri?: url;
 
   /**
    * Gets or sets the gateway service Id of source.

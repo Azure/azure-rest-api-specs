@@ -1213,6 +1213,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/listSkusForScaling": {
+      "post": {
+        "tags": [
+          "RedisEnterprise"
+        ],
+        "operationId": "RedisEnterprise_ListSkusForScaling",
+        "description": "Lists the available SKUs for scaling the Redis Enterprise cluster.",
+        "x-ms-examples": {
+          "RedisEnterpriseListSkusForScaling": {
+            "$ref": "./examples/RedisEnterpriseListSkusForScaling.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the available SKUs for scaling up or scaling down.",
+            "schema": {
+              "$ref": "#/definitions/SkuDetailsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/privateEndpointConnections": {
       "get": {
         "tags": [
@@ -1630,7 +1675,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/FlushParameters"
             },
@@ -2645,6 +2690,41 @@
         }
       },
       "description": "Parameters for a Redis Enterprise active geo-replication flush operation"
+    },
+    "SkuDetails": {
+      "title": "SKU details",
+      "description": "Details of a Redis Enterprise cluster SKU.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the SKU."
+        },
+        "customerFacingSizeInGb": {
+          "readOnly": true,
+          "type": "number",
+          "description": "The cache size in GB."
+        }
+      }
+    },
+    "SkuDetailsList": {
+      "type": "object",
+      "properties": {
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDetails"
+          },
+          "description": "List of SKUS available to scale up or scale down."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URI to fetch the next page of results."
+        }
+      },
+      "description": "The response of a listSkusForScaling operation."
     }
   },
   "parameters": {
@@ -2677,4 +2757,3 @@
     }
   }
 }
-
