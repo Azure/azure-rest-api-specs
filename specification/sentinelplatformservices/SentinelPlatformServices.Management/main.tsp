@@ -12,9 +12,7 @@ using Azure.ResourceManager;
 
 /** Microsoft.SentinelPlatformServices Resource Provider management API. */
 @armProviderNamespace
-@service(#{
-  title: "Microsoft.SentinelPlatformServices management service",
-})
+@service(#{ title: "Microsoft.SentinelPlatformServices management service" })
 @versioned(Versions)
 namespace Microsoft.SentinelPlatformServices;
 
@@ -28,7 +26,8 @@ enum Versions {
 }
 
 @doc("A SentinelPlatformServices resource")
-model SentinelPlatformService is TrackedResource<SentinelPlatformServicesProperties> {
+model SentinelPlatformService
+  is TrackedResource<SentinelPlatformServicesProperties> {
   @doc("Name of SentinelPlatformServices resource")
   @pattern("^[a-zA-Z0-9-]{3,63}$")
   @key("name")
