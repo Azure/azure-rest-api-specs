@@ -9,8 +9,11 @@ using Azure.ClientGenerator.Core;
 
 namespace AI.Model;
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
-@doc("The ChatCompletionsOptions model")
+@doc("""
+  The configuration information for a chat completions request.
+  Completions support a wide variety of tasks and generate text that continues from or "completes"
+  provided prompt data.
+  """)
 model ChatCompletionsOptions {
   @doc("""
     The collection of context messages associated with this chat completions request.
@@ -121,9 +124,8 @@ model ChatCompletionsOptions {
     """)
   `model`?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   ...Record<unknown>;
-};
+}
 
 alias ChatCompletionsCommon = {
   @doc("A unique identifier associated with this chat completions response.")
@@ -141,11 +143,6 @@ alias ChatCompletionsCommon = {
 
   @doc("The model used for the chat completion.")
   `model`: string;
-
-  @doc("""
-    Usage information for tokens processed and generated as part of this completions operation.
-    """)
-  usage: CompletionsUsage;
 };
 
 @doc("""
@@ -163,6 +160,11 @@ model ChatCompletions {
     """)
   @minItems(1)
   choices: ChatChoice[];
+
+  @doc("""
+    Usage information for tokens processed and generated as part of this completions operation.
+    """)
+  usage: CompletionsUsage;
 }
 
 @doc("""
@@ -181,6 +183,11 @@ model StreamingChatCompletionsUpdate {
     """)
   @minItems(1)
   choices: StreamingChatChoiceUpdate[];
+
+  @doc("""
+    Usage information for tokens processed and generated as part of this completions operation.
+    """)
+  usage?: CompletionsUsage;
 }
 
 @doc("""
@@ -272,8 +279,8 @@ model ChatCompletionsResponseFormatJsonObject
 }
 
 @doc("""
-  Defines the response format for chat completions as JSON with a given schema. The AI model
-  will need to adhere to this schema when generating completions.
+  Defines the response format for chat completions as JSON with a given schema.
+  The AI model will need to adhere to this schema when generating completions.
   """)
 model ChatCompletionsResponseFormatJsonSchemaDefinition {
   @doc("""
@@ -283,8 +290,8 @@ model ChatCompletionsResponseFormatJsonSchemaDefinition {
 
   @doc("""
     The definition of the JSON schema. See https://json-schema.org/overview/what-is-jsonschema.
-    Note that AI models usually only support a subset of the keywords defined by JSON schema. Consult your AI model documentation
-    to determine what is supported.
+    Note that AI models usually only support a subset of the keywords defined by JSON schema.
+    Consult your AI model documentation to determine what is supported.
     """)
   schema: Record<unknown>;
 
@@ -296,8 +303,8 @@ model ChatCompletionsResponseFormatJsonSchemaDefinition {
   @doc("""
     If set to true, the service will error out if the provided JSON schema contains keywords
     not supported by the AI model. An example of such keyword may be `maxLength` for JSON type `string`.
-    If false, and the provided JSON schema contains keywords not supported
-    by the AI model, the AI model will not error out. Instead it will ignore the unsupported keywords.
+    If false, and the provided JSON schema contains keywords not supported by the AI model,
+    the AI model will not error out. Instead it will ignore the unsupported keywords.
     """)
   strict?: boolean = false;
 }
@@ -378,7 +385,7 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
 model ChatRequestDeveloperMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'developer' for developer messages.")
   role: ChatRole.developer;
-  
+
   @doc("The contents of the developer message.")
   content: string;
 }
@@ -622,4 +629,50 @@ union ChatMessageImageDetailLevel {
     images but may also be slower and consume more tokens.
     """)
   high: "high",
+}
+
+@doc("A structured chat content item for audio content passed as a url.")
+model ChatMessageAudioUrlContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'audio_url' for this type.")
+  type: "audio_url";
+
+  @doc("The details of the audio url.")
+  @encodedName("application/json", "audio_url")
+  audioUrl: ChatMessageInputAudioUrl;
+}
+
+@doc("A structured chat content item for audio content passed as base64 encoded data.")
+model ChatMessageAudioDataContentItem extends ChatMessageContentItem {
+  @doc("The discriminated object type: always 'input_audio' for this type.")
+  type: "input_audio";
+
+  @doc("The details of the input audio data.")
+  @encodedName("application/json", "input_audio")
+  inputAudio: ChatMessageInputAudio;
+}
+
+@doc("The details of the audio url.")
+model ChatMessageInputAudioUrl {
+  @doc("The URL of the audio content.")
+  url: string;
+}
+
+@doc("The details of the input audio data.")
+model ChatMessageInputAudio {
+  @doc("Base64 encoded audio data")
+  data: string;
+
+  @doc("The audio format of the audio content.")
+  format: AudioContentFormat;
+}
+
+@doc("A representation of the possible audio formats for audio.")
+union AudioContentFormat {
+  string,
+
+  @doc("Specifies audio in WAV format.")
+  wav: "wav",
+
+  @doc("Specifies audio in MP3 format.")
+  mp3: "mp3",
 }

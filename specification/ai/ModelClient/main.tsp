@@ -10,7 +10,7 @@ using Azure.Core;
 
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
-  BearerAuth | ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+  BearerAuth | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
@@ -18,9 +18,7 @@ using Azure.Core;
     }
   ]>
 )
-@service(#{
-  title: "AI Model Inference",
-})
+@service(#{ title: "AI Model Inference" })
 @versioned(AI.Model.Versions)
 namespace AI.Model;
 
