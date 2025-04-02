@@ -49,7 +49,7 @@ model DnsPrivateZoneProperties {
   timeCreated: utcDateTime;
 
   @doc("Azure resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 

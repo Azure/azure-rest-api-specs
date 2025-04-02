@@ -1,0 +1,123 @@
+// @ts-check
+
+import { diff } from "./git.js";
+
+/**
+ * @param {Object} [options]
+ * @param {string} [options.baseCommitish] Default: "HEAD^".
+ * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
+ * @param {string} [options.headCommitish] Default: "HEAD".
+ * @param {import('./types.js').ILogger} [options.logger]
+ * @returns {Promise<string[]>} List of changed files, using posix paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
+ */
+export async function getChangedFiles(options = {}) {
+  const {
+    baseCommitish = "HEAD^",
+    cwd,
+    headCommitish = "HEAD",
+    logger,
+  } = options;
+
+  // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
+  // consider using "--name-status" instead of "--name-only", and return an array of objects like
+  // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
+  // Then add filter functions to filter based on status.  This is more flexible and lets consumers
+  // filter based on status with a single call to `git diff`.
+  const result = await diff(baseCommitish, headCommitish, {
+    args: "--name-only",
+    cwd,
+    logger: logger,
+  });
+
+  const files = result.trim().split("\n");
+
+  logger?.info("Changed Files:");
+  for (const file of files) {
+    logger?.info(`  ${file}`);
+  }
+  logger?.info("");
+
+  return files;
+}
+
+// Functions suitable for passing to string[].filter(), ordered roughly in order of increasing specificity
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function json(file) {
+  // Extension "json" with any case is a valid JSON file
+  return typeof file === "string" && file.toLowerCase().endsWith(".json");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function readme(file) {
+  // Filename "readme.md" with any case is a valid README file
+  return typeof file === "string" && file.toLowerCase().endsWith("readme.md");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function specification(file) {
+  // Folder name "specification" should match case, since it already exists in repo
+  return typeof file === "string" && file.startsWith("specification/");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function dataPlane(file) {
+  // Folder name "data-plane" should match case for consistency across specs
+  return (
+    typeof file === "string" &&
+    specification(file) &&
+    file.includes("/data-plane/")
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function resourceManager(file) {
+  // Folder name "resource-manager" should match case for consistency across specs
+  return (
+    typeof file === "string" &&
+    specification(file) &&
+    file.includes("/resource-manager/")
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function example(file) {
+  // Folder name "examples" should match case for consistency across specs
+  return (
+    typeof file === "string" &&
+    json(file) &&
+    specification(file) &&
+    file.includes("/examples/")
+  );
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function swagger(file) {
+  return (
+    typeof file === "string" &&
+    json(file) &&
+    (dataPlane(file) || resourceManager(file)) &&
+    !example(file)
+  );
+}

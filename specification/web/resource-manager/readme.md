@@ -106,8 +106,6 @@ input-file:
   - Microsoft.Web/stable/2024-04-01/AppServicePlans.json
   - Microsoft.Web/stable/2024-04-01/Certificates.json
   - Microsoft.Web/stable/2024-04-01/CommonDefinitions.json
-  - Microsoft.Web/stable/2024-04-01/ContainerApps.json
-  - Microsoft.Web/stable/2024-04-01/ContainerAppsRevisions.json
   - Microsoft.Web/stable/2024-04-01/DeletedWebApps.json
   - Microsoft.Web/stable/2024-04-01/Diagnostics.json
   - Microsoft.Web/stable/2024-04-01/Global.json
@@ -2643,7 +2641,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

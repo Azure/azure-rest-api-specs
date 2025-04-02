@@ -28,7 +28,7 @@ model BgpPeerProperties {
   @doc("Peer Address")
   peerAddress: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Resource provision state")
   provisioningState?: ProvisioningState;
 }

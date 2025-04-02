@@ -24,18 +24,18 @@ model Connector is ProxyResource<ConnectorProperties> {
 
 @doc("Details of the Connector.")
 model ConnectorProperties is ResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("unique id of the connector.")
   connectorId: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("tenant id of this connector")
   tenantId: string;
 
   @doc("connector type")
   connectorType: Platform;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("last run time stamp of this connector in UTC time zone")
   lastRunTimeStamp: utcDateTime;
 }
@@ -48,11 +48,27 @@ union Platform {
   AzureMonitor: "AzureMonitor",
 }
 
+@doc("The type used for update operations of the Connector.")
+model ConnectorUpdate
+  is OptionalProperties<UpdateableProperties<OmitProperties<
+    Connector,
+    "Name" | "name" | "properties"
+  >>> {
+  /** The resource-specific properties for this resource. */
+  properties?: ConnectorUpdateProperties;
+}
+
+model ConnectorUpdateProperties
+  is Azure.ResourceManager.Foundations.ResourceUpdateModelProperties<
+    Connector,
+    ConnectorProperties
+  >;
+
 @armResourceOperations(Connector)
 interface Connectors {
   get is ArmResourceRead<Connector>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Connector>;
-  update is ArmResourcePatchSync<Connector, ConnectorProperties>;
+  update is ArmCustomPatchSync<Connector, ConnectorUpdate>;
   delete is ArmResourceDeleteSync<Connector>;
   listBySubscription is ArmListBySubscription<Connector>;
 }

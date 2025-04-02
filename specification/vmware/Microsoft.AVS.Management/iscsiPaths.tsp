@@ -40,11 +40,11 @@ model IscsiPath is ProxyResource<IscsiPathProperties> {
 @doc("The properties of an iSCSI path resource")
 model IscsiPathProperties {
   @doc("The state of the iSCSI path provisioning")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: IscsiPathProvisioningState;
 
   @doc("CIDR Block for iSCSI path.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   networkBlock: string;
 }
 

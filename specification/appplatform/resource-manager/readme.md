@@ -253,7 +253,7 @@ swagger-to-sdk:
   - repo: azure-powershell
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go

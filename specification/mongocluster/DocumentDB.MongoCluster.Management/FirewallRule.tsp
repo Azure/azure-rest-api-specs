@@ -13,7 +13,7 @@ model FirewallRule is ProxyResource<FirewallRuleProperties> {
   @pattern("^[a-zA-Z0-9][-_.a-zA-Z0-9]*")
   @key("firewallRuleName")
   @segment("firewallRules")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -21,7 +21,7 @@ model FirewallRule is ProxyResource<FirewallRuleProperties> {
 /** The properties of a mongo cluster firewall rule. */
 model FirewallRuleProperties {
   /** The provisioning state of the firewall rule. */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /** The start IP address of the mongo cluster firewall rule. Must be IPv4 format. */

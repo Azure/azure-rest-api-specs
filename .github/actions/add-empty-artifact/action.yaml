@@ -1,0 +1,27 @@
+name: Add Empty Artifact
+description: Uploads an empty artifact named `${name}=${value}`, to be consumed by a later workflow
+
+inputs:
+  name:
+    description: Name
+    required: true
+  value:
+    description: Value
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Create empty file to upload artifact
+      run: "> $RUNNER_TEMP/empty.txt"
+      shell: bash
+
+    # The maximum length is reported to be 260 characters. A full list of invalid artifact name characters is documented here:
+    # https://github.com/actions/toolkit/blob/main/packages/artifact/src/internal/upload/path-and-artifact-name-validation.ts
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.name }}=${{ inputs.value }}
+        path: ${{ runner.temp }}/empty.txt
+        if-no-files-found: error
+        overwrite: true

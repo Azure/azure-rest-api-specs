@@ -44,6 +44,16 @@ input-file:
   - Microsoft.Quota/stable/2025-03-01/quota.json
 ```
 
+### Tag: package-2025-03-15-preview
+
+These settings apply only when `--tag=package-2025-03-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-15-preview'
+input-file:
+  - Microsoft.Quota/preview/2025-03-15-preview/groupquota.json
+  - Microsoft.Quota/preview/2025-03-15-preview/quota.json
+```
+
 ### Tag: package-2024-12-18-preview
 
 These settings apply only when `--tag=package-2024-12-18-preview` is specified on the command line.
@@ -137,7 +147,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

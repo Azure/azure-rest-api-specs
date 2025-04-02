@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2024-11-15-preview",
+    "domains": {
+      "xyz.biz": {
+        "type": "Custom"
+      }
+    },
+    "body": {
+      "domains": {
+        "xyz.biz": {
+          "enabled": true
+        },
+        "abc.biz": {
+          "enabled": true
+        }
+      },
+      "trunks": {
+        "vendor.xyz.biz": {
+          "sipSignalingPort": 5061,
+          "enabled": true,
+          "directTransfer": false,
+          "privacyHeader": "none",
+          "ipAddressVersion": "ipv4"
+        }
+      },
+      "routes": [
+        {
+          "name": "VendorXYZ",
+          "description": "External route XYZ",
+          "numberPattern": "^\\+?\\d+$",
+          "trunks": [
+            "vendor.xyz.biz"
+          ],
+          "callerIdOverride": "+1234567890"
+        }
+      ]
+    },
+    "endpoint": "https://resourcename.communication.azure.com"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "domains": {
+          "xyz.biz": {
+            "enabled": true
+          },
+          "abc.biz": {
+            "enabled": true
+          }
+        },
+        "trunks": {
+          "vendor.xyz.biz": {
+            "sipSignalingPort": 5061,
+            "enabled": true,
+            "directTransfer": false,
+            "privacyHeader": "none",
+            "ipAddressVersion": "ipv4"
+          }
+        },
+        "routes": [
+          {
+            "name": "VendorXYZ",
+            "description": "External route XYZ",
+            "numberPattern": "^\\+?\\d+$",
+            "trunks": [
+              "vendor.xyz.biz"
+            ],
+            "callerIdOverride": "+1234567890"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -15,9 +15,7 @@ using TypeSpec.Versioning;
 
 @Azure.ResourceManager.armCommonTypesVersion("v5")
 @armProviderNamespace
-@service({
-  title: "Azure Large Instance",
-})
+@service(#{ title: "Azure Large Instance" })
 @doc("The AzureLargeInstance Management client")
 @versioned(Versions)
 namespace Microsoft.AzureLargeInstance;

@@ -17,6 +17,9 @@ on:
       - eng/tools/suppressions/**
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   suppressions:
     uses: ./.github/workflows/_reusable-eng-tools-test.yaml

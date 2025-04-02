@@ -247,6 +247,13 @@ suppressions:
       - containerInstance.json
     where:
       - $.definitions.SecretReferenceVolume
+  - code: GetCollectionResponseSchema
+    reason: We do not return the instanceView property in our List operation, we just return this 
+            property for our Get operations. This change has been part of our stable api versions for a couple of years
+    from:
+      - containerInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/containerGroups"]
 ```
 
 ---
@@ -260,7 +267,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

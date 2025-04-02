@@ -12,7 +12,7 @@ namespace Microsoft.ManagedCcf.Recovery;
 @TypeSpec.Rest.resource("encrypted-shares")
 model EncryptedRecoveryShare {
   @doc("ID of CCF member who this recovery share belongs to.")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   @key
   memberId: memberId;
 
@@ -42,7 +42,7 @@ model RecoveryResponse {
 @TypeSpec.Rest.resource("members")
 model Member {
   @doc("Identifier for member this recovery state applies to.")
-  @visibility("query")
+  @visibility(Lifecycle.Query)
   @key
   memberId: memberId;
 }

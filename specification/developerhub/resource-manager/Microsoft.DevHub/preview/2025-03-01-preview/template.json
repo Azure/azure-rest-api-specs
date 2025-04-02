@@ -1,0 +1,721 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-03-01-preview",
+    "title": "DeveloperHubServiceClient",
+    "description": "The AKS Developer Hub Service Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates": {
+      "get": {
+        "tags": [
+          "Template"
+        ],
+        "operationId": "Template_List",
+        "summary": "Gets a list of supported templates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TemplateListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Templates": {
+            "$ref": "./examples/Template_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates/{templateName}": {
+      "get": {
+        "tags": [
+          "Template"
+        ],
+        "operationId": "Template_Get",
+        "summary": "Gets a list of supported templates.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Templates": {
+            "$ref": "./examples/Template_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates/{templateName}/versions": {
+      "get": {
+        "tags": [
+          "VersionedTemplate"
+        ],
+        "operationId": "VersionedTemplate_List",
+        "summary": "Gets a list of VersionedTemplate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VersionedTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List VersionedTemplate": {
+            "$ref": "./examples/VersionedTemplate_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates/{templateName}/versions/{templateVersion}": {
+      "get": {
+        "tags": [
+          "VersionedTemplate"
+        ],
+        "operationId": "VersionedTemplate_Get",
+        "summary": "Gets a VersionedTemplate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VersionedTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VersionedTemplate": {
+            "$ref": "./examples/VersionedTemplate_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/templates/{templateName}/versions/{templateVersion}/generate": {
+      "post": {
+        "tags": [
+          "VersionedTemplate"
+        ],
+        "operationId": "VersionedTemplate_Generate",
+        "summary": "Generates a VersionedTemplate.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GenerateVersionedTemplateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GenerateVersionedTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate VersionedTemplate": {
+            "$ref": "./examples/VersionedTemplate_Generate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Template": {
+      "title": "Template",
+      "description": "Resource representation of a Template",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of a Template.",
+          "$ref": "#/definitions/TemplateProperties"
+        }
+      }
+    },
+    "TemplateProperties": {
+      "type": "object",
+      "description": "Template properties",
+      "properties": {
+        "templateName": {
+          "type": "string",
+          "title": "Template Name",
+          "description": "The name of the template."
+        },
+        "defaultVersion": {
+          "type": "string",
+          "title": "Template Default Version",
+          "description": "The default version of the template."
+        },
+        "versions": {
+          "type": "array",
+          "title": "Template Versions",
+          "description": "The valid versions of the template.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the template",
+          "title": "Template Description"
+        },
+        "templateType": {
+          "$ref": "#/definitions/TemplateType"
+        }
+      }
+    },
+    "TemplateType": {
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "deployment",
+        "manifest",
+        "workflow",
+        "dockerfile"
+      ],
+      "x-ms-enum": {
+        "name": "TemplateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "deployment",
+            "description": "Deployment template type."
+          },
+          {
+            "value": "manifest",
+            "description": "Manifest template type."
+          },
+          {
+            "value": "workflow",
+            "description": "Workflow template type."
+          },
+          {
+            "value": "dockerfile",
+            "description": "Dockerfile template type."
+          }
+        ]
+      },
+      "description": "The type of the template."
+    },
+    "VersionedTemplate": {
+      "title": "VersionedTemplate",
+      "description": "Resource representation of a VersionedTemplate",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of a VersionedTemplate.",
+          "$ref": "#/definitions/VersionedTemplateProperties"
+        }
+      }
+    },
+    "VersionedTemplateProperties": {
+      "type": "object",
+      "description": "VersionedTemplate properties",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "Template Version",
+          "description": "The version of the template."
+        },
+        "templateType": {
+          "$ref": "#/definitions/TemplateType"
+        },
+        "parameters": {
+          "type": "array",
+          "title": "Template Parameters",
+          "description": "The template parameters.",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        }
+      }
+    },
+    "Parameter": {
+      "type": "object",
+      "description": "Parameter for the template.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Parameter name",
+          "description": "The paramater name."
+        },
+        "description": {
+          "type": "string",
+          "title": "Parameter description",
+          "description": "Description of what the paramater is used for."
+        },
+        "parameterType": {
+          "$ref": "#/definitions/ParameterType"
+        },
+        "parameterKind": {
+          "$ref": "#/definitions/ParameterKind"
+        },
+        "required": {
+          "type": "boolean",
+          "title": "Parameter required",
+          "description": "Whether the parameter is required."
+        },
+        "default": {
+          "$ref": "#/definitions/ParameterDefault"
+        }
+      }
+    },
+    "ParameterDefault": {
+      "type": "object",
+      "description": "A reference to a default parameter value or a reference parameter to take the value from.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "title": "ParameterDefault value",
+          "description": "The default value for this parameter."
+        },
+        "referenceParameter": {
+          "type": "string",
+          "title": "ParameterDefault Reference Parameter",
+          "description": "The Parameter to reference a value from."
+        }
+      }
+    },
+    "ParameterType": {
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "string",
+        "bool",
+        "int",
+        "float",
+        "object"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "string",
+            "description": "string parameter type."
+          },
+          {
+            "value": "bool",
+            "description": "boolean parameter type."
+          },
+          {
+            "value": "int",
+            "description": "int parameter type."
+          },
+          {
+            "value": "float",
+            "description": "float parameter type."
+          },
+          {
+            "value": "object",
+            "description": "object parameter type."
+          }
+        ]
+      },
+      "description": "The type of the template parameter."
+    },
+    "ParameterKind": {
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "azureContainerRegistry",
+        "azureKeyvaultUri",
+        "azureManagedCluster",
+        "azureResourceGroup",
+        "azureServiceConnection",
+        "containerImageName",
+        "containerImageVersion",
+        "clusterResourceType",
+        "dirPath",
+        "dockerFileName",
+        "envVarMap",
+        "filePath",
+        "flag",
+        "helmChartOverrides",
+        "imagePullPolicy",
+        "ingressHostName",
+        "kubernetesNamespace",
+        "kubernetesProbeHttpPath",
+        "kubernetesProbePeriod",
+        "kubernetesProbeTimeout",
+        "kubernetesProbeThreshold",
+        "kubernetesProbeType",
+        "kubernetesProbeDelay",
+        "kubernetesResourceLimit",
+        "kubernetesResourceName",
+        "kubernetesResourceRequest",
+        "label",
+        "port",
+        "repositoryBranch",
+        "workflowName",
+        "replicaCount",
+        "scalingResourceType",
+        "scalingResourceUtilization",
+        "resourceLimit",
+        "workflowAuthType"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "azureContainerRegistry",
+            "description": "azure container registry name"
+          },
+          {
+            "value": "azureKeyvaultUri",
+            "description": "azure keyvault uri"
+          },
+          {
+            "value": "azureManagedCluster",
+            "description": "azure managed cluster name"
+          },
+          {
+            "value": "azureResourceGroup",
+            "description": "azure resource group"
+          },
+          {
+            "value": "azureServiceConnection",
+            "description": "azure service connection"
+          },
+          {
+            "value": "containerImageName",
+            "description": "container image name"
+          },
+          {
+            "value": "containerImageVersion",
+            "description": "container image version"
+          },
+          {
+            "value": "clusterResourceType",
+            "description": "cluster resource type"
+          },
+          {
+            "value": "dirPath",
+            "description": "directory path"
+          },
+          {
+            "value": "dockerFileName",
+            "description": "dockerfile name"
+          },
+          {
+            "value": "envVarMap",
+            "description": "environment variables in the form of a json object"
+          },
+          {
+            "value": "filePath",
+            "description": "file path"
+          },
+          {
+            "value": "flag",
+            "description": "boolean flag"
+          },
+          {
+            "value": "helmChartOverrides",
+            "description": "helm overrides in the form of a string key1=value1,key2=value2"
+          },
+          {
+            "value": "imagePullPolicy",
+            "description": "kubernetes deployment image pull policy"
+          },
+          {
+            "value": "ingressHostName",
+            "description": "kubernetes ingress host name"
+          },
+          {
+            "value": "kubernetesNamespace",
+            "description": "kubernetes namespace"
+          },
+          {
+            "value": "kubernetesProbeHttpPath",
+            "description": "kubernetes probe http path"
+          },
+          {
+            "value": "kubernetesProbePeriod",
+            "description": "kubernetes probe period"
+          },
+          {
+            "value": "kubernetesProbeTimeout",
+            "description": "kubernetes probe timeout"
+          },
+          {
+            "value": "kubernetesProbeThreshold",
+            "description": "kubernetes probe threshold"
+          },
+          {
+            "value": "kubernetesProbeType",
+            "description": "kubernetes probe type"
+          },
+          {
+            "value": "kubernetesProbeDelay",
+            "description": "kubernetes probe delay"
+          },
+          {
+            "value": "kubernetesResourceLimit",
+            "description": "kubernetes resource limit"
+          },
+          {
+            "value": "kubernetesResourceName",
+            "description": "kubernetes resource name"
+          },
+          {
+            "value": "kubernetesResourceRequest",
+            "description": "kubernetes resource request"
+          },
+          {
+            "value": "label",
+            "description": "kubernetes label value"
+          },
+          {
+            "value": "port",
+            "description": "service port"
+          },
+          {
+            "value": "repositoryBranch",
+            "description": "repository branch name"
+          },
+          {
+            "value": "workflowName",
+            "description": "workflow name"
+          },
+          {
+            "value": "replicaCount",
+            "description": "kubernetes replica count"
+          },
+          {
+            "value": "scalingResourceType",
+            "description": "kubernetes scaling resource type"
+          },
+          {
+            "value": "scalingResourceUtilization",
+            "description": "kubernetes resource utilization type"
+          },
+          {
+            "value": "resourceLimit",
+            "description": "kubernetes resource limit"
+          },
+          {
+            "value": "workflowAuthType",
+            "description": "workflow authentication type"
+          }
+        ]
+      },
+      "description": "The type of the template parameter."
+    },
+    "TemplateListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Template"
+          },
+          "description": "The list of Template."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to the next set of Template results.",
+          "readOnly": true
+        }
+      }
+    },
+    "VersionedTemplateListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VersionedTemplate"
+          },
+          "description": "The list of VersionedTemplates."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to the next set of VersionedTemplate results.",
+          "readOnly": true
+        }
+      }
+    },
+    "GenerateVersionedTemplateResponse": {
+      "type": "object",
+      "description": "Generated template files returned as a map<path string,content string>",
+      "properties": {
+        "generatedFiles": {
+          "type": "object",
+          "description": "files returned as a map<path string,content string>",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GenerateVersionedTemplateRequest": {
+      "type": "object",
+      "description": "Generated template parameter input as a map<string,string>",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "parameters": {
+    "TemplateNameParameter": {
+      "name": "templateName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Template.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "x-ms-parameter-location": "method"
+    },
+    "TemplateVersionParameter": {
+      "name": "templateVersion",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The template version.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

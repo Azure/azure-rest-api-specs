@@ -184,6 +184,17 @@ model RunCompletionUsage {
   totalTokens: int64;
 }
 
+/**
+ * Values to for the includes parameter in the create run operation.
+ */
+@added(ServiceApiVersions.v2025_01_01_preview)
+union RunIncludes {
+  string,
+
+  /** Fetch the file search result content. */
+  fileSearchContent: "step_details.tool_calls[*].file_search.results[*].content",
+}
+
 @doc("The details used when creating a new run of an assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model CreateRunOptions {

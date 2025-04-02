@@ -61,7 +61,7 @@ The TypeSpec and generated API specification for the Azure Communication Message
    oav generate-examples <path to communicationservicesmessages.json>
    ```
 
-## Testing and Viewing API as an Interface
+## Testing and Viewing API as an Interface.
 
 1. Visit the official [Swagger Editor](https://editor.swagger.io/).
 

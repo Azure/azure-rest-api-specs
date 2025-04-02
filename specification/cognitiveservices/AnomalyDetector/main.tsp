@@ -9,9 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 @versioned(APIVersion)
-@service({
-  title: "Anomaly Detector",
-})
+@service(#{ title: "Anomaly Detector" })
 @useAuth(AnomalyDetectorApiKeyAuth)
 @server(
   "{Endpoint}/anomalydetector/{ApiVersion}",

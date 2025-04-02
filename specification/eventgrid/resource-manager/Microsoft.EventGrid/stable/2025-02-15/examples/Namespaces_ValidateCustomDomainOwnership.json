@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "resourceGroupName": "examplerg",
+    "namespaceName": "exampleNamespaceName1",
+    "api-version": "2025-02-15"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "customDomainsForTopicsConfiguration": [
+          {
+            "fullyQualifiedDomainName": "custom-domain-name-1",
+            "validationState": "Pending",
+            "identity": {
+              "type": "SystemAssigned"
+            },
+            "certificateUrl": "string",
+            "expectedTxtRecordName": "txt-record-name-1",
+            "expectedTxtRecordValue": "txt-record-value-1"
+          }
+        ],
+        "customDomainsForTopicSpacesConfiguration": [
+          {
+            "fullyQualifiedDomainName": "custom-domain-name-2",
+            "validationState": "Pending",
+            "identity": {
+              "type": "SystemAssigned"
+            },
+            "certificateUrl": "string",
+            "expectedTxtRecordName": "txt-record-name-2",
+            "expectedTxtRecordValue": "txt-record-value-2"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/examplerg/providers/Microsoft.EventGrid/locations/eastus/operationStatus/default/operationId/00000000-0000-0000-0000-000000000000?api-version=2025-02-15",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/examplerg/providers/Microsoft.EventGrid/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/Spring/default?api-version=2025-02-15"
+      }
+    }
+  }
+}

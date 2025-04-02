@@ -25,7 +25,7 @@ interface DeviceLocation {
 model DeviceLocationEndpoint {
   @key
   @doc("Static endpoint")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   location: "location";
 }
 

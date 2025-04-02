@@ -28,6 +28,14 @@ suppressions:
     reason:
       Property additionalProperties in WorkloadImpactProperties is necessary to be dynamic since it contains metadata
       and will be different for different categories
+  - code: AvoidAdditionalProperties
+    from: impact.json
+    where: $.definitions.WorkloadImpactProperties.properties.additionalProperties
+    reason: Typespec generated definition
+  - code: AvoidAnonymousTypes
+    where: $.definitions.WorkloadImpactProperties.properties.additionalProperties 
+    from: impact.json
+    reason: Typespec generated definitions contain anonymous types.
 ```
 
 ## Configuration
@@ -66,7 +74,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell

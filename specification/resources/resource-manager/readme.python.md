@@ -50,6 +50,8 @@ batch:
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
   - multiapiscript-policy: true
+  - tag: package-resources-2025-03
+  - tag: package-resources-2024-11
   - tag: package-resources-2024-07
   - tag: package-resources-2022-09
   - tag: package-resources-2021-04
@@ -459,6 +461,28 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-policy-2015-10'
 namespace: azure.mgmt.resource.policy.v2015_10_01_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
+```
+
+### Tag: package-resources-2025-03 and python
+
+These settings apply only when `--tag=package-resources-2025-03 --python` is specified on the command line. Please also
+specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2025-03'
+default-api-version: "2025-03-01"
+namespace: azure.mgmt.resource.resources.v2025_03_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2025_03_01
+```
+
+### Tag: package-resources-2024-11 and python
+
+These settings apply only when `--tag=package-resources-2024-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2024-11'
+default-api-version: "2024-11-01"
+namespace: azure.mgmt.resource.resources.v2024_11_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2024_11_01
 ```
 
 ### Tag: package-resources-2024-07 and python

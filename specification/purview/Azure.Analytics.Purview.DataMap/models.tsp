@@ -312,7 +312,7 @@ model AtlasEntity {
   homeId?: string;
 
   @doc("The collection ID of the entity.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   collectionId?: string;
 
   @doc("Whether it is a shell entity")
@@ -1122,7 +1122,7 @@ model SearchResultValue {
   description?: string;
 
   @doc("The endorsement of the asset.")
-  endorsement?: string;
+  endorsement?: string[];
 
   @doc("The owner of the record.")
   owner?: string;
@@ -1282,7 +1282,7 @@ model SuggestResultValue {
   description?: string;
 
   @doc("The endorsement of the asset.")
-  endorsement?: string;
+  endorsement?: string[];
 
   @doc("The owner of the record.")
   owner?: string;
@@ -1990,6 +1990,7 @@ alias BodyParameter<
   TDoc extends valueof string = "Body parameter."
 > = {
   #suppress "@azure-tools/typespec-azure-core/friendly-name" "Legacy"
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc(TDoc)
   @friendlyName(TName)
   @bodyRoot

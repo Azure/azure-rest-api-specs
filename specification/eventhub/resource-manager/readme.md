@@ -313,6 +313,9 @@ directive:
   - suppress: LroPostReturn
     from: namespaces-preview.json
     reason: Not a mandatory check
+  - suppress: LroErrorContent
+    from: namespaces.json
+    reason: Suppress it for now to avoid breaking change because it is referenced by many files. 
 
   - suppress: LroLocationHeader
     from: Clusters-preview.json
@@ -482,7 +485,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

@@ -21,19 +21,19 @@ union Error {
     /**
      * The error code.
      */
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     code?: string,
 
     /**
      * The error message.
      */
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     message?: string,
 
     /**
      * The key vault server error.
      */
-    @visibility("read")
+    @visibility(Lifecycle.Read)
     @encodedName("application/json", "innererror")
     innerError?: Error,
   },
@@ -48,6 +48,6 @@ model KeyVaultError {
    * The key vault server error.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: Error;
 }

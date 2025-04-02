@@ -13,9 +13,7 @@ using TypeSpec.Versioning;
 using LiftrBase.Data;
 
 @armProviderNamespace
-@service({
-  title: "Astronomer.Astro",
-})
+@service(#{ title: "Astronomer.Astro" })
 @versioned(Astronomer.Astro.Versions)
 namespace Astronomer.Astro;
 

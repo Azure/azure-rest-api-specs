@@ -9,11 +9,15 @@ using Azure.ClientGenerator.Core;
 
 using KeyVault;
 
-@@clientName(SecretProperties, "SecretP", "go");
+// renaming SecretItem to SecretProperties.
+// renaming existing SecretProperties to something else
+// to avoid a naming conflict as it's not part of the public surface area
+@@clientName(SecretProperties, "ShouldNotGenerate", "go");
+@@clientName(SecretItem, "SecretProperties", "go");
+
 @@clientName(DeletedSecretBundle, "DeletedSecret", "go");
 @@clientName(DeletedSecretItem, "DeletedSecretProperties", "go");
 @@clientName(SecretBundle, "Secret", "go");
-@@clientName(SecretItem, "SecretProperties", "go");
 @@clientName(SecretRestoreParameters, "RestoreSecretParameters", "go");
 @@clientName(SecretSetParameters, "SetSecretParameters", "go");
 @@clientName(SecretUpdateParameters, "UpdateSecretPropertiesParameters", "go");

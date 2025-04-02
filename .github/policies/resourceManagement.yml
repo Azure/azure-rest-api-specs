@@ -1182,9 +1182,10 @@ configuration:
         then:
         - mentionUsers:
             mentionees:
-            - RandalliLama
-            - schaabs
-            - jlichwa
+            - cheathamb36
+            - chen-karen
+            - lgonsoulin
+            - vickm
             replyTemplate: Thanks for the feedback! We are routing this to the appropriate team for follow-up. cc ${mentionees}.
             assignMentionees: False
       - if:
@@ -2773,6 +2774,16 @@ configuration:
         then:
         - addLabel:
             label: Container Service
+      - if:
+        - includesModifiedFiles:
+            files:
+            - specification/containerservice/Fleet.Management
+            - specification/containerservice/fleet
+            excludedFiles:
+            - ''
+        then:
+        - addLabel:
+            label: Container Service Fleet
       - if:
         - includesModifiedFiles:
             files:
