@@ -8,6 +8,7 @@ import {
   isFailure,
   isWarning,
   getNewItems,
+  isSameSources,
 } from "../src/correlateResults.js";
 import { relativizePath } from "../src/util.js";
 import { isWindows } from "./test-util.js";
@@ -17,6 +18,10 @@ describe("getViolations", () => {
     const newError = `{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"error","message":"Collection object returned by list operation 'RedisEnterprise_ListSkusForScaling' with 'x-ms-pageable' extension, has no property named 'value'.","code":"CollectionObjectPropertiesNaming","details":{"jsonpath":["paths","/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/listSkusForScaling","post","responses","200","schema"],"validationCategory":"","providerNamespace":false,"resourceType":false,"rpcGuidelineCode":"","range":{"start":{"line":1245,"column":21},"end":{"line":1246,"column":52}}},"source":[{"document":"file:///mnt/vss/_work/1/azure-rest-api-specs/specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2025-05-01-preview/redisenterprise.json","position":{"line":1245,"column":13}}]}`;
     const existingErrorInBefore = `{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"error","message":"Properties of a PATCH request body must not be required, property:name.","code":"PatchBodyParametersSchema","details":{"jsonpath":["paths","/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}","patch","parameters","2","schema","properties","sku"],"validationCategory":"","providerNamespace":false,"resourceType":false,"rpcGuidelineCode":"RPC-Patch-V1-10","range":{"start":{"line":1,"column":0},"end":{"line":1,"column":0}}},"source":[{"document":"file:///mnt/vss/_work/1/lint-c93b354fd9c14905bb574a8834c4d69b/specification/redisenterprise/resource-manager/Microsoft.Cache/stable/2025-04-01/redisenterprise.json","position":{"line":201,"column":13}}]}`;
     const correlatedErrorInAfter = ` {"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"error","message":"Properties of a PATCH request body must not be required, property:name.","code":"PatchBodyParametersSchema","details":{"jsonpath":["paths","/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}","patch","parameters","2","schema","properties","sku"],"validationCategory":"","providerNamespace":false,"resourceType":false,"rpcGuidelineCode":"RPC-Patch-V1-10","range":{"start":{"line":1,"column":0},"end":{"line":1,"column":0}}},"source":[{"document":"file:///mnt/vss/_work/1/azure-rest-api-specs/specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2025-05-01-preview/redisenterprise.json","position":{"line":201,"column":13}}]}`;
+
+    const affectedSwaggers = new Set([
+      "specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2025-05-01-preview/redisenterprise.json",
+    ]);
 
     const runCorrelations = new Map<string, BeforeAfter>([
       [
@@ -40,14 +45,7 @@ describe("getViolations", () => {
       ],
     ]);
 
-    expect(
-      getViolations(
-        runCorrelations,
-        new Set([
-          "specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2025-05-01-preview/redisenterprise.json",
-        ]),
-      ),
-    ).toEqual([
+    expect(getViolations(runCorrelations, affectedSwaggers)).toEqual([
       [
         expect.objectContaining({
           level: "error",
@@ -61,6 +59,96 @@ describe("getViolations", () => {
         }),
       ],
     ]);
+  });
+
+  test.sequential("correlates warnings with same basename", () => {
+    const beforeViolation = `{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"warning","message":"Use the latest version v6 of types.json.","code":"LatestVersionOfCommonTypesMustBeUsed","details":{"jsonpath":["paths","/providers/Microsoft.Cache/operations","get","parameters","0","$ref"],"validationCategory":"","providerNamespace":false,"resourceType":false,"rpcGuidelineCode":"","range":{"start":{"line":51,"column":20},"end":{"line":51,"column":115}}},"source":[{"document":"file:///mnt/vss/_work/1/lint-c93b354fd9c14905bb574a8834c4d69b/specification/redisenterprise/resource-manager/Microsoft.Cache/stable/2025-04-01/redisenterprise.json","position":{"line":51,"column":13}}]}`;
+    const afterViolation = `{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"warning","message":"Use the latest version v6 of types.json.","code":"LatestVersionOfCommonTypesMustBeUsed","details":{"jsonpath":["paths","/providers/Microsoft.Cache/operations","get","parameters","0","$ref"],"validationCategory":"","providerNamespace":false,"resourceType":false,"rpcGuidelineCode":"","range":{"start":{"line":51,"column":20},"end":{"line":51,"column":115}}},"source":[{"document":"file:///mnt/vss/_work/1/azure-rest-api-specs/specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2025-05-01-preview/redisenterprise.json","position":{"line":51,"column":13}}]}`;
+    const runCorrelations = new Map<string, BeforeAfter>([
+      [
+        "specification/service1/resource-manager/readme.md#tag1",
+        {
+          before: {
+            rootPath: "before",
+            readme: "specification/service1/resource-manager/readme.md",
+            tag: "tag1",
+            stdout: beforeViolation,
+            stderr: "",
+          },
+          after: {
+            rootPath: "after",
+            readme: "specification/service1/resource-manager/readme.md",
+            tag: "tag1",
+            stdout: afterViolation,
+            stderr: "",
+          },
+        } as BeforeAfter,
+      ],
+    ]);
+
+    const affectedSwaggers = new Set([
+      "specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2025-05-01-preview/redisenterprise.json",
+    ]);
+
+    expect(getViolations(runCorrelations, affectedSwaggers)).toEqual([
+      [],
+      [
+        expect.objectContaining({
+          level: "warning",
+          code: "LatestVersionOfCommonTypesMustBeUsed",
+        }),
+      ],
+    ]);
+  });
+
+  test.sequential("handles empty beforeViolations", () => {
+    const afterViolation = `{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"warning","message":"Use the latest version v6 of types.json.","code":"LatestVersionOfCommonTypesMustBeUsed","details":{"jsonpath":["paths","/providers/Microsoft.Cache/operations","get","parameters","0","$ref"],"validationCategory":"","providerNamespace":false,"resourceType":false,"rpcGuidelineCode":"","range":{"start":{"line":51,"column":20},"end":{"line":51,"column":115}}},"source":[{"document":"file:///mnt/vss/_work/1/azure-rest-api-specs/specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2025-05-01-preview/redisenterprise.json","position":{"line":51,"column":13}}]}`;
+
+    const runCorrelations = new Map<string, BeforeAfter>([
+      [
+        "specification/service1/resource-manager/readme.md#tag1",
+        {
+          before: null,
+          after: {
+            rootPath: "after",
+            readme: "specification/service1/resource-manager/readme.md",
+            tag: "tag1",
+            stdout: afterViolation,
+            stderr: "",
+          },
+        } as BeforeAfter,
+      ],
+    ]);
+
+    const affectedSwaggers = new Set([
+      "specification/redisenterprise/resource-manager/Microsoft.Cache/preview/2025-05-01-preview/redisenterprise.json",
+    ]);
+
+    expect(getViolations(runCorrelations, affectedSwaggers)).toEqual([
+      [
+        expect.objectContaining({
+          level: "warning",
+          code: "LatestVersionOfCommonTypesMustBeUsed",
+        }),
+      ],
+      [],
+    ]);
+  });
+});
+
+describe("isSameSources", () => {
+  test.sequential("returns true when sources are the same", () => {
+    const a: Source[] = [{ document: "path/to/document1.json" } as Source];
+    const b: Source[] = [{ document: "a/different/path/to/document1.json" } as Source];
+
+    expect(isSameSources(a, b)).toEqual(true);
+  });
+
+  test.sequential("returns true when one source is empty", () => {
+    const a: Source[] = [{ document: "path/to/document1.json" } as Source];
+    const b: Source[] = [];
+
+    expect(isSameSources(a, b)).toEqual(true);
   });
 });
 
