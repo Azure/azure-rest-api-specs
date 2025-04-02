@@ -14,6 +14,24 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsUserDisconnectedEventData,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantAddedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantAddedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantBaseEventData,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantBaseEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,
   Usage.output
 );

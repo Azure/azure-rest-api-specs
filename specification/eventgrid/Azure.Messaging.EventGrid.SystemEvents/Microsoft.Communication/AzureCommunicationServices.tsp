@@ -56,6 +56,20 @@ model AcsCallEndedEventData
   callDurationInSeconds?: float64;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallParticipantAddedEventData
+  extends AcsCallParticipantBaseEventData {
+}
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallParticipantRemovedEventData
+  extends AcsCallParticipantBaseEventData {
+  /** The reason for the participant removed. */
+  reason?: AcsCallingEventReasonProperties;
+}
+
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageReceivedEventData
@@ -971,6 +985,22 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
   /** The version of the message */
   version?: int64;
+}
+
+/** Schema of common properties of all participant events */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallParticipantBaseEventData extends AcsCallingEventBaseProperties {
+  /** The communication identifier of the participant */
+  user?: CommunicationIdentifierModel;
+
+  /** The display name of the participant. */
+  displayName?: string;
+
+  /** The Id of the participant. */
+  participantId?: boolean;
+
+  /** The user agent of the participant. */
+  userAgent?: string;
 }
 
 /** Schema of common properties of all calling events */
