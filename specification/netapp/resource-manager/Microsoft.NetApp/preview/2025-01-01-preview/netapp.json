@@ -51,7 +51,7 @@
           }
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
@@ -220,6 +220,92 @@
         "x-ms-examples": {
           "CheckQuotaAvailability": {
             "$ref": "examples/CheckQuotaAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Get usages",
+        "description": "Get current subscription usages",
+        "operationId": "NetAppResourceUsages_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsagesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Usages_List": {
+            "$ref": "examples/Usages_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}": {
+      "get": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Get specific type of usage",
+        "description": "Get current subscription usage of the specific type",
+        "operationId": "NetAppResourceUsages_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/UsageType"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UsageResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Usages_Get": {
+            "$ref": "examples/Usages_Get.json"
           }
         }
       }
@@ -949,7 +1035,7 @@
         "tags": [
           "NetApp Accounts"
         ],
-        "operationId": "Accounts_GetKeyVaultStatus",
+        "operationId": "Accounts_GetChangeKeyVaultInformation",
         "summary": "Get information about how volumes under NetApp account are encrypted.",
         "description": "Contains data from encryption.keyVaultProperties as well as information about which private endpoint is used by each encryption sibling set. Response from this endpoint can be modified and used as request body for POST request.",
         "parameters": [
@@ -5618,6 +5704,12 @@
             "name"
           ],
           "description": "List of Storage operations supported by the Storage resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
         }
       }
     },
@@ -6091,6 +6183,81 @@
         }
       }
     },
+    "UsagesListResult": {
+      "description": "Usages result",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of usages",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "UsageResult": {
+      "description": "Usages entity model",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id of the usage.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the usage.",
+          "$ref": "#/definitions/usageName"
+        },
+        "properties": {
+          "description": "Usage properties",
+          "$ref": "#/definitions/usageProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "usageProperties": {
+      "description": "Usage properties",
+      "type": "object",
+      "properties": {
+        "currentValue": {
+          "description": "The current usage value for the subscription.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "description": "The limit of the usage.",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "unit": {
+          "description": "The unit of the usage.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "usageName": {
+      "description": "The name of the usage.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "description": "The name of the usage.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "The localized name of the usage.",
+          "type": "string"
+        }
+      }
+    },
     "netAppAccountList": {
       "description": "List of NetApp account resources",
       "type": "object",
@@ -6212,11 +6379,8 @@
           "x-nullable": true,
           "example": "defaultv4IDDomain.com"
         },
-        "isMultiAdEnabled": {
-          "type": "boolean",
-          "readOnly": true,
-          "x-nullable": true,
-          "description": "This will have true value only if account is Multiple AD enabled."
+        "multiAdStatus": {
+          "$ref": "#/definitions/multiAdStatus"
         }
       }
     },
@@ -6907,7 +7071,11 @@
           "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$",
           "minLength": 1,
           "maxLength": 80,
-          "example": "some-amazing-filepath"
+          "example": "some-amazing-filepath",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "serviceLevel": {
           "title": "serviceLevel",
@@ -6917,7 +7085,7 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 1PiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
           "minimum": 53687091200,
           "maximum": 2638827906662400,
           "default": 107374182400,
@@ -7012,7 +7180,11 @@
         "networkFeatures": {
           "$ref": "#/definitions/networkFeatures",
           "description": "The original value of the network features type available to the volume at the time it was created.",
-          "example": "Basic"
+          "example": "Basic",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "effectiveNetworkFeatures": {
           "$ref": "#/definitions/networkFeatures",
@@ -7080,7 +7252,11 @@
         "volumeType": {
           "type": "string",
           "description": "What type of volume is this. For destination volumes in Cross Region Replication, set type to DataProtection. For creating clone volume, set type to ShortTermClone",
-          "example": "DataProtection"
+          "example": "DataProtection",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "dataProtection": {
           "title": "DataProtection",
@@ -7141,7 +7317,8 @@
         },
         "isRestoring": {
           "type": "boolean",
-          "description": "Restoring"
+          "description": "Restoring",
+          "readOnly": true
         },
         "snapshotDirectoryVisible": {
           "type": "boolean",
@@ -7169,7 +7346,11 @@
           "x-ms-enum": {
             "name": "SecurityStyle",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "smbEncryption": {
           "type": "boolean",
@@ -7232,7 +7413,11 @@
           "type": "boolean",
           "description": "Specifies whether LDAP is enabled or not for a given NFS volume.",
           "example": false,
-          "default": false
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "coolAccess": {
           "type": "boolean",
@@ -7318,7 +7503,11 @@
             ]
           },
           "example": "Enabled",
-          "default": "Disabled"
+          "default": "Disabled",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "dataStoreResourceId": {
           "title": "dataStoreResourceId",
@@ -7368,7 +7557,7 @@
         "proximityPlacementGroup": {
           "type": "string",
           "description": "Proximity placement group associated with the volume",
-          "example": "/subscriptions/aaaaaaaa-1234-1234-1224-234567891011/resourceGroups/testGroup/providers/Microsoft.Compute/proximityPlacementGroups/testppg"
+          "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup/providers/Microsoft.Compute/proximityPlacementGroups/testppg"
         },
         "t2Network": {
           "type": "string",
@@ -7434,13 +7623,17 @@
           "type": "boolean",
           "description": "Specifies whether volume is a Large Volume or Regular Volume.",
           "example": false,
-          "default": false
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "originatingResourceId": {
           "title": "Originating Resource Id",
           "type": "string",
           "description": "Id of the snapshot or backup that the volume is restored from.",
-          "example": "/subscriptions/aaaaaaaa-1234-1234-1224-234567891011/resourceGroups/testGroup/providers/Microsoft.NetApp/netAppAccounts/accountOriginatingResourceId/capacityPools/originatingResourceIdPool/volumes/theOriginalVolume/snapshots/theSnapshot",
+          "example": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup/providers/Microsoft.NetApp/netAppAccounts/accountOriginatingResourceId/capacityPools/originatingResourceIdPool/volumes/theOriginalVolume/snapshots/theSnapshot",
           "readOnly": true,
           "x-nullable": true
         },
@@ -7867,7 +8060,7 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 1PiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
           "minimum": 53687091200,
           "maximum": 2638827906662400,
           "default": 107374182400,
@@ -9287,12 +9480,42 @@
           "example": "100006"
         },
         "quotaType": {
+          "title": "quotaType",
+          "type": "string",
           "description": "Type of quota",
-          "$ref": "#/definitions/quotaType",
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "enum": [
+            "DefaultUserQuota",
+            "DefaultGroupQuota",
+            "IndividualUserQuota",
+            "IndividualGroupQuota"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "DefaultUserQuota",
+                "description": "Default user quota"
+              },
+              {
+                "value": "DefaultGroupQuota",
+                "description": "Default group quota"
+              },
+              {
+                "value": "IndividualUserQuota",
+                "description": "Individual user quota"
+              },
+              {
+                "value": "IndividualGroupQuota",
+                "description": "Individual group quota"
+              }
+            ]
+          },
+          "example": "DefaultUserQuota"
         },
         "quotaTarget": {
           "type": "string",
@@ -9303,40 +9526,6 @@
           ]
         }
       }
-    },
-    "quotaType": {
-      "title": "quotaType",
-      "type": "string",
-      "description": "Type of quota rule",
-      "enum": [
-        "DefaultUserQuota",
-        "DefaultGroupQuota",
-        "IndividualUserQuota",
-        "IndividualGroupQuota"
-      ],
-      "x-ms-enum": {
-        "name": "type",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "DefaultUserQuota",
-            "description": "Default user quota"
-          },
-          {
-            "value": "DefaultGroupQuota",
-            "description": "Default group quota"
-          },
-          {
-            "value": "IndividualUserQuota",
-            "description": "Individual user quota"
-          },
-          {
-            "value": "IndividualGroupQuota",
-            "description": "Individual group quota"
-          }
-        ]
-      },
-      "example": "IndividualUserQuota"
     },
     "volumeGroupList": {
       "description": "List of volume group resources",
@@ -9760,7 +9949,11 @@
             "type": "Microsoft.Network/virtualNetworks/subnets"
           }
         ]
-      }
+      },
+      "x-ms-mutability": [
+        "read",
+        "create"
+      ]
     },
     "snapshotRestoreFiles": {
       "description": "Restore payload for Single File Snapshot Restore",
@@ -10162,6 +10355,31 @@
       },
       "example": "Enabled"
     },
+    "multiAdStatus": {
+      "title": "multiAdStatus",
+      "type": "string",
+      "readOnly": true,
+      "description": "MultiAD Status for the account",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "multiAdStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "Account is MultiAD disabled, Means its a SharedAD or SingleAD account."
+          },
+          {
+            "value": "Enabled",
+            "description": "Account is MultiAD enabled"
+          }
+        ]
+      },
+      "example": "Enabled"
+    },
     "backupRestoreFiles": {
       "description": "Restore payload for Single File Backup Restore",
       "type": "object",
@@ -10303,6 +10521,24 @@
           "readOnly": true,
           "description": "The creation date of the backup",
           "example": "2017-08-15 13:23:33"
+        },
+        "snapshotCreationDate": {
+          "title": "snapshotCreationDate",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The snapshot creation date of the backup",
+          "example": "2018-11-29T20:32:50.459Z",
+          "x-nullable": true
+        },
+        "completionDate": {
+          "title": "completionDate",
+          "type": "string",
+          "format": "date-time",
+          "description": "The completion date of the backup",
+          "example": "2018-11-29T20:32:50.459Z",
+          "readOnly": true,
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -10635,8 +10871,8 @@
       "properties": {
         "keyVaultUri": {
           "title": "keyVaultUri",
-          "format": "uri",
           "description": "The URI of the key vault/managed HSM that should be used for encryption.",
+          "format": "uri",
           "type": "string",
           "example": "https://my-key-vault.managedhsm.azure.net"
         },
@@ -10779,6 +11015,14 @@
       "in": "path",
       "required": true,
       "description": "The name of the Quota Limit",
+      "x-ms-parameter-location": "method"
+    },
+    "UsageType": {
+      "name": "usageType",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The type of usage",
       "x-ms-parameter-location": "method"
     },
     "VolumeGroupName": {
