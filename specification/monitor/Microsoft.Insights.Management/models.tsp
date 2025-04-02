@@ -128,7 +128,7 @@ model MetricAlertResource extends Azure.ResourceManager.Foundations.Resource {
   @key
   @segment("metricAlerts")
   name: string;
-  
+
   @doc("The properties of the metric alert")
   properties: MetricProperties | QueryProperties;
 }

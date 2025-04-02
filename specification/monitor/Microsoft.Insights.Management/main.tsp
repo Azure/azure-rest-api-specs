@@ -12,10 +12,7 @@ using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 @armProviderNamespace
-@service(#{
-  title: "MetricAlertClient",
-  version: "2024-03-01-preview",
-})
+@service(#{ title: "MetricAlertClient", version: "2024-03-01-preview" })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Insights;
 
