@@ -283,11 +283,17 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentExtended"
+              "$ref": "#/definitions/DeploymentValidateResult"
             }
           },
           "202": {
             "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "400": {
+            "description": "The template deployment validation detected failures.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -587,11 +593,17 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentExtended"
+              "$ref": "#/definitions/DeploymentValidateResult"
             }
           },
           "202": {
             "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "400": {
+            "description": "The template deployment validation detected failures.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -965,11 +977,17 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentExtended"
+              "$ref": "#/definitions/DeploymentValidateResult"
             }
           },
           "202": {
             "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "400": {
+            "description": "The template deployment validation detected failures.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1352,11 +1370,17 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentExtended"
+              "$ref": "#/definitions/DeploymentValidateResult"
             }
           },
           "202": {
             "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "400": {
+            "description": "The template deployment validation detected failures.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1808,11 +1832,17 @@
           "200": {
             "description": "The template deployment validation succeeded. Please inspect 'warnings' property since some resources might have been skipped from validation.",
             "schema": {
-              "$ref": "#/definitions/DeploymentExtended"
+              "$ref": "#/definitions/DeploymentValidateResult"
             }
           },
           "202": {
             "description": "Accepted - The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "400": {
+            "description": "The template deployment validation detected failures.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -5499,6 +5529,35 @@
       },
       "description": "Deployment on error behavior with additional details."
     },
+    "DeploymentValidateResult": {
+      "properties": {
+        "error": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The deployment validation error."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the deployment."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the deployment."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the deployment."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentPropertiesExtended",
+          "description": "The template deployment properties."
+        }
+      },
+      "description": "Information from validate template deployment response."
+    },
     "DeploymentExtended": {
       "properties": {
         "id": {
@@ -6409,7 +6468,6 @@
     "WhatIfChange": {
       "description": "Information about a single resource change predicted by What-If operation.",
       "required": [
-        "resourceId",
         "changeType"
       ],
       "properties": {
@@ -6508,10 +6566,6 @@
           "items": {
             "$ref": "#/definitions/WhatIfChange"
           },
-          "x-ms-identifiers": [
-            "resourceId",
-            "changeType"
-          ],
           "description": "List of resource changes predicted by What-If operation."
         },
         "potentialChanges": {
@@ -6519,10 +6573,6 @@
           "items": {
             "$ref": "#/definitions/WhatIfChange"
           },
-          "x-ms-identifiers": [
-            "resourceId",
-            "changeType"
-          ],
           "description": "List of resource changes predicted by What-If operation."
         },
         "diagnostics": {
