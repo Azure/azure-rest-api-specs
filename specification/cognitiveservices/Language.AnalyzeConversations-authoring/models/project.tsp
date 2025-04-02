@@ -1956,3 +1956,51 @@ model ExportedModelOptions {
    */
   trainedModelLabel: string;
 }
+
+/**
+ * Represents the connection kind for Azure OpenAI deployment.
+ */
+@added(Versions.v2025_05_15_preview)
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
+union AnalyzeConversationAuthoringDataGenerationConnectionKind {
+  string,
+  AzureOpenAI: "AzureOpenAI"
+}
+
+/**
+ * Represents the connection info for the Azure resource to use during data generation.
+ */
+@added(Versions.v2025_05_15_preview)
+model AnalyzeConversationAuthoringDataGenerationConnectionInfo {
+  /**
+   * Connection type for data generation settings. Currently only supports Azure OpenAI.
+   */
+  kind: AnalyzeConversationAuthoringDataGenerationConnectionKind;
+
+  /**
+   * Deployment name of model to be used for synthetic data generation.
+   */
+  deploymentName: string;
+
+  /**
+   * Resource ID for the data generation resource. Looks something like
+   * "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}".
+   */
+  resourceId?: string;
+}
+
+/**
+ * Settings to enable data generation for training augmentation.
+ */
+@added(Versions.v2025_05_15_preview)
+model AnalyzeConversationAuthoringDataGenerationSettings {
+  /**
+   * Must be explicitly set to True to enable data generation to augment training data.
+   */
+  enableDataGeneration: boolean;
+
+  /**
+   * Must be filled out to enable data generation to augment training data.
+   */
+  dataGenerationConnectionInfo: AnalyzeConversationAuthoringDataGenerationConnectionInfo;
+}
