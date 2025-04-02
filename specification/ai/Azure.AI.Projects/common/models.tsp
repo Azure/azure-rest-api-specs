@@ -3,8 +3,6 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Http;
-
 namespace Azure.AI.Projects;
 
 @doc("The available sorting options when requesting a list of response objects.")

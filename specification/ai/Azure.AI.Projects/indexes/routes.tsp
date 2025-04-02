@@ -9,7 +9,7 @@ import "../common/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Projects.Indexes;
 
 alias ListIndexVersionParameters = {
   @doc("Top count of results, top count cannot be greater than the page size. If topCount > page size, results with be default page size count will be returned")

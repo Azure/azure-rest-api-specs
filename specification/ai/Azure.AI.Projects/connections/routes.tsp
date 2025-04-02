@@ -9,7 +9,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Projects.Connections;
 
 alias ConnectionServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &

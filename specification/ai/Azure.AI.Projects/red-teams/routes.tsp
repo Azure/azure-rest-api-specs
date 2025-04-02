@@ -5,13 +5,11 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.Core.Foundations;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Projects.RedTeams;
 
 alias RedTeamServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &
