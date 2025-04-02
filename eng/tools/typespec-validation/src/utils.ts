@@ -1,7 +1,15 @@
-import { access, stat } from "fs/promises";
 import { exec } from "child_process";
+import { access, stat } from "fs/promises";
 import defaultPath, { PlatformPath } from "path";
 import { TsvHost } from "./tsv-host.js";
+
+export async function filterAsync<T>(
+  array: T[],
+  asyncPredicate: (item: T, index: number, array: T[]) => Promise<boolean>,
+): Promise<T[]> {
+  const filterResults = await Promise.all(array.map(asyncPredicate));
+  return array.filter((_, index) => filterResults[index]);
+}
 
 export async function runCmd(cmd: string, cwd?: string) {
   console.log(`run command:${cmd}`);
