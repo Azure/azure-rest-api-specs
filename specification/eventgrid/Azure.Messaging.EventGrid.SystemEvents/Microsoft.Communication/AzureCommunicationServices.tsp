@@ -36,6 +36,26 @@ model AcsUserDisconnectedEventData {
   userCommunicationIdentifier: CommunicationIdentifierModel;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallStartedEventData
+  extends AcsCallingEventBaseProperties {
+}
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallEndedEventData
+  extends AcsCallingEventBaseProperties {
+  /** The communication identifier of the user who was disconnected */
+  endedBy?: AcsCallingEventEndedByProperties;
+
+  /** The reason for the call ended event. */
+  reason?: AcsCallingEventReasonProperties;
+
+  /** Duration of the call in seconds. */
+  callDurationInSeconds?: float64;
+}
+
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageReceivedEventData
@@ -951,6 +971,61 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
   /** The version of the message */
   version?: int64;
+}
+
+/** Schema of common properties of all calling events */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallingEventBaseProperties {
+  /** The communication identifier of the call startedBy */
+  startedBy?: CommunicationIdentifierModel;
+
+  /** The callId of the server */
+  serverCallId?: string;
+
+  /** The group metadata */
+  group?: AcsCallingEventGroupProperties;
+
+  /** The isTwoParty metadata */
+  isTwoParty?: boolean;
+
+  /** The correlationId of calling event */
+  correlationId?: string;
+
+  /** The isRoomsCall metadata */
+  isRoomsCall?: boolean;
+}
+
+/** Schema of calling event group properties */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallingEventGroupProperties {
+  /** Calling Group ID. Format is Guid as string. */
+  id?: string;
+}
+
+/** Schema of calling event endedby properties */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallingEventEndedByProperties {
+  /** The communication identifier of the call ended by */
+  endedBy: CommunicationIdentifierModel;
+
+  /** Participant or Internal or Carrier or any future types */
+  type: string;
+
+  /** MicrosoftInternal or the name of the carrier only 1 of the mri and the name field will be filled based on the type. */
+  name: string;
+}
+
+/** Schema of calling event reason properties */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallingEventReasonProperties {
+  /** Reason code for call ended event. */
+  code?: int;
+
+  /** Null for 1:1 calls and ACS group calls with group Id. */
+  subCode?: int;
+
+  /** Reason for the call ended event. */
+  phrase?: string;
 }
 
 /** Schema of common properties of all thread-level chat message events */
