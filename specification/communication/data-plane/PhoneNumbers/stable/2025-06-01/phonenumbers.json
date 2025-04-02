@@ -36,7 +36,7 @@
             "name": "body",
             "description": "",
             "schema": {
-              "$ref": "#/definitions/USBrand"
+              "$ref": "#/definitions/TenDlcUSBrand"
             }
           }
         ],
@@ -44,13 +44,13 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/USBrand"
+              "$ref": "#/definitions/TenDlcUSBrand"
             }
           },
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USBrand"
+              "$ref": "#/definitions/TenDlcUSBrand"
             }
           },
           "default": {
@@ -131,7 +131,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USBrand"
+              "$ref": "#/definitions/TenDlcUSBrand"
             }
           },
           "default": {
@@ -175,7 +175,7 @@
             "name": "body",
             "description": "",
             "schema": {
-              "$ref": "#/definitions/USBrand"
+              "$ref": "#/definitions/TenDlcUSBrand"
             }
           }
         ],
@@ -183,7 +183,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USBrand"
+              "$ref": "#/definitions/TenDlcUSBrand"
             }
           },
           "default": {
@@ -241,7 +241,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USBrands"
+              "$ref": "#/definitions/TenDlcUSBrands"
             }
           },
           "default": {
@@ -289,7 +289,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USBrand"
+              "$ref": "#/definitions/TenDlcUSBrand"
             }
           },
           "default": {
@@ -333,7 +333,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USBrand"
+              "$ref": "#/definitions/TenDlcUSBrand"
             }
           },
           "default": {
@@ -380,7 +380,7 @@
             "name": "body",
             "description": "",
             "schema": {
-              "$ref": "#/definitions/USCampaign"
+              "$ref": "#/definitions/TenDlcUSCampaign"
             }
           }
         ],
@@ -388,13 +388,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USCampaign"
+              "$ref": "#/definitions/TenDlcUSCampaign"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/USCampaign"
+              "$ref": "#/definitions/TenDlcUSCampaign"
             }
           },
           "default": {
@@ -475,7 +475,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USCampaign"
+              "$ref": "#/definitions/TenDlcUSCampaign"
             }
           },
           "default": {
@@ -519,7 +519,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USCampaign"
+              "$ref": "#/definitions/TenDlcUSCampaign"
             }
           },
           "default": {
@@ -577,7 +577,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USCampaigns"
+              "$ref": "#/definitions/TenDlcUSCampaigns"
             }
           },
           "default": {
@@ -625,7 +625,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/USCampaign"
+              "$ref": "#/definitions/TenDlcUSCampaign"
             }
           },
           "default": {
@@ -638,6 +638,235 @@
         "x-ms-examples": {
           "Cancel 10DLC campaign": {
             "$ref": "./examples/CancelTenDlcUSCampaign.json"
+          }
+        }
+      }
+    },
+    "/tendlc/countriesUS/campaigns/{campaignId}/attachments/{attachmentId}/attachments/{attachmentId}": {
+      "put": {
+        "tags": [
+          "10DLC - Campaigns - Attachments"
+        ],
+        "summary": "Creates or replace an attachment on a US 10DLC Campaign.",
+        "operationId": "TenDlc_CreateOrReplaceUSTenDlcCampaignAttachment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaignId",
+            "description": "10DLC US Campaign Id. Must be a valid GUID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "attachmentId",
+            "description": "Attachment Id. Must be a valid GUID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data to create or replace a 10DLC US Campaign File Attachment",
+            "schema": {
+              "$ref": "#/definitions/TenDlcUSCampaignAttachment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TenDlcUSCampaignAttachment"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TenDlcUSCampaignAttachment"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or Replaces an attachment on a US 10DLC Campaign": {
+            "$ref": "./examples/CreateOrReplaceTenDlcUSCampaignAttachment.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "10DLC - Campaigns - Attachments"
+        ],
+        "summary": "Gets a specific an attachment from a US 10DLC Campaign.",
+        "operationId": "TenDlc_GetUSTenDlcCampaignAttachment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaignId",
+            "description": "10DLC US Campaign Id. Must be a valid GUID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "attachmentId",
+            "description": "Attachment Id. Must be a valid GUID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TenDlcUSCampaignAttachment"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or Replaces a US 10DLC Campaign File Attachment": {
+            "$ref": "./examples/GetTenDlcUSCampaignAttachment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "10DLC - Campaigns - Attachments"
+        ],
+        "summary": "Deletes a specific attachment from a US 10DLC Campaign.",
+        "operationId": "TenDlc_DeleteUSTenDlcCampaignAttachment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaignId",
+            "description": "10DLC US Campaign Id. Must be a valid GUID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "attachmentId",
+            "description": "Attachment Id. Must be a valid GUID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a US 10DLC Campaign File Attachment": {
+            "$ref": "./examples/DeleteTenDlcUSCampaignAttachment.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/tendlc/countriesUS/campaigns/{campaignId}/attachments": {
+      "get": {
+        "tags": [
+          "10DLC - Campaigns - Attachments"
+        ],
+        "summary": "Gets the list of attachments from a US 10DLC Campaign.",
+        "operationId": "TenDlc_GetUSTenDlcCampaignAttachments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaignId",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "An optional parameter for how many entries to skip, for pagination purposes.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "An optional parameter for how many entries to return, for pagination purposes.",
+            "type": "integer",
+            "format": "int32",
+            "default": 100
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TenDlcUSCampaignAttachments"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "attachments"
+        },
+        "x-ms-examples": {
+          "List US 10DLC Campaign File Attachments": {
+            "$ref": "./examples/GetTenDlcUSCampaignAttachments.json"
           }
         }
       }
@@ -720,12 +949,13 @@
           {
             "in": "query",
             "name": "phoneNumberType",
-            "description": "Filter by numberType, e.g. Geographic, TollFree.",
+            "description": "Filter by numberType, e.g. Geographic, TollFree, Mobile.",
             "required": true,
             "type": "string",
             "enum": [
               "geographic",
-              "tollFree"
+              "tollFree",
+              "mobile"
             ],
             "x-ms-enum": {
               "name": "PhoneNumberType",
@@ -971,6 +1201,21 @@
             "name": "accept-language",
             "description": "The locale to display in the localized fields in the response. e.g. 'en-US'",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "phoneNumberType",
+            "description": "Filter by numberType, e.g. Geographic, TollFree, Mobile.",
+            "type": "string",
+            "enum": [
+              "geographic",
+              "tollFree",
+              "mobile"
+            ],
+            "x-ms-enum": {
+              "name": "PhoneNumberType",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
@@ -1035,11 +1280,12 @@
           {
             "in": "query",
             "name": "phoneNumberType",
-            "description": "Filter by numberType, e.g. Geographic, TollFree.",
+            "description": "Filter by numberType, e.g. Geographic, TollFree, Mobile.",
             "type": "string",
             "enum": [
               "geographic",
-              "tollFree"
+              "tollFree",
+              "mobile"
             ],
             "x-ms-enum": {
               "name": "PhoneNumberType",
@@ -1986,7 +2232,7 @@
       "type": "object",
       "properties": {
         "values": {
-          "description": "Results of a search.\r\nThis array will have one entry per requested phone number which will contain the relevant operator information.",
+          "description": "Results of a search. This array will have one entry per requested phone number which will contain the relevant operator information.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperatorInformation"
@@ -2078,7 +2324,7 @@
             "modelAsString": true
           }
         },
-        "tenDLCCampaignId": {
+        "tenDlcCampaignId": {
           "description": "Approved 10DLC Campaign Id to attach to a number",
           "type": "string"
         }
@@ -2116,7 +2362,7 @@
             "modelAsString": true
           }
         },
-        "tenDLCCampaignId": {
+        "tenDlcCampaignId": {
           "description": "Approved 10DLC Campaign Id to attach to a number. This is required for adding SMS to Geographic numbers",
           "type": "string"
         }
@@ -2232,7 +2478,8 @@
           "description": "Represents the number type of the offering.",
           "enum": [
             "geographic",
-            "tollFree"
+            "tollFree",
+            "mobile"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2346,10 +2593,11 @@
       "type": "object",
       "properties": {
         "phoneNumberType": {
-          "description": "The type of phone numbers to search for, e.g. geographic, or tollFree.",
+          "description": "The type of phone numbers to search for, e.g. geographic, tollFree, mobile.",
           "enum": [
             "geographic",
-            "tollFree"
+            "tollFree",
+            "mobile"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2411,10 +2659,11 @@
           }
         },
         "phoneNumberType": {
-          "description": "The phone number's type, e.g. geographic, or tollFree.",
+          "description": "The phone number's type, e.g. geographic, tollFree, mobile.",
           "enum": [
             "geographic",
-            "tollFree"
+            "tollFree",
+            "mobile"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2510,10 +2759,11 @@
           "type": "string"
         },
         "phoneNumberType": {
-          "description": "The phone number's type, e.g. geographic, tollFree.",
+          "description": "The phone number's type, e.g. geographic, tollFree, mobile.",
           "enum": [
             "geographic",
-            "tollFree"
+            "tollFree",
+            "mobile"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2577,7 +2827,8 @@
           "description": "Represents the number type of the offering.",
           "enum": [
             "geographic",
-            "tollFree"
+            "tollFree",
+            "mobile"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2694,7 +2945,8 @@
           "description": "Represents the number type of the offering.",
           "enum": [
             "geographic",
-            "tollFree"
+            "tollFree",
+            "mobile"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2838,7 +3090,7 @@
         }
       }
     },
-    "Address": {
+    "TenDlcAddress": {
       "description": "Represents postal address.",
       "type": "object",
       "properties": {
@@ -2871,7 +3123,7 @@
         }
       }
     },
-    "BrandDetails": {
+    "TenDlcBrandDetails": {
       "description": "General information for a 10DLC brand.",
       "type": "object",
       "properties": {
@@ -2919,10 +3171,10 @@
           }
         },
         "contactInformation": {
-          "$ref": "#/definitions/ContactInformation"
+          "$ref": "#/definitions/TenDlcContactInformation"
         },
         "address": {
-          "$ref": "#/definitions/Address"
+          "$ref": "#/definitions/TenDlcAddress"
         },
         "entityType": {
           "description": "Legal structure or form a company takes",
@@ -3014,7 +3266,7 @@
         }
       }
     },
-    "CampaignDetails": {
+    "TenDlcCampaignDetails": {
       "description": "Information about the campaign.",
       "type": "object",
       "properties": {
@@ -3045,7 +3297,7 @@
         }
       }
     },
-    "ContactInformation": {
+    "TenDlcContactInformation": {
       "description": "Represent contact information for the brand.",
       "type": "object",
       "properties": {
@@ -3061,19 +3313,19 @@
         }
       }
     },
-    "MessageDetails": {
+    "TenDlcMessageDetails": {
       "description": "Compiles details describing how the messaging campaign will work, for example whether opt-in and opt-out will be required and how will the messages for those actions look like.",
       "type": "object",
       "properties": {
         "useCase": {
-          "$ref": "#/definitions/UseCase"
+          "$ref": "#/definitions/TenDlcUseCase"
         },
         "helpAnswerToUserRequired": {
           "description": "Boolean to determine if HelpAnswerToUser is required",
           "type": "boolean"
         },
         "helpAnswerToUser": {
-          "description": "Message text for mobile terminated message associated with HELP keyword\r\ne.g 'This is the HELP message test.'.",
+          "description": "Message text for mobile terminated message associated with HELP keyword e.g 'This is the HELP message test.'.",
           "type": "string"
         },
         "optOutAnswerToUserRequired": {
@@ -3081,7 +3333,7 @@
           "type": "boolean"
         },
         "optOutAnswerToUser": {
-          "description": "\"Message text for mobile terminated message associated with STOP keyword\r\ne.g. 'This is the STOP message test.'.",
+          "description": "\"Message text for mobile terminated message associated with STOP keyword e.g. 'This is the STOP message test.'.",
           "type": "string"
         },
         "optInMessageToUserRequired": {
@@ -3113,8 +3365,8 @@
         }
       }
     },
-    "ReviewNote": {
-      "description": "Holds a note about a Program Brief that has gone thru stages of review process.",
+    "TenDlcReviewNote": {
+      "description": "Holds a note about a 10DLC US Campaign that has gone thru stages of review process.",
       "type": "object",
       "properties": {
         "message": {
@@ -3165,7 +3417,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "BillingFrequency",
+            "name": "TenDlcBillingFrequency",
             "modelAsString": true
           }
         }
@@ -3188,7 +3440,111 @@
         }
       }
     },
-    "USBrand": {
+    "TenDlcUSCampaignAttachment": {
+      "description": "A File Attachment for a 10DLC US Campaign",
+      "required": [
+        "fileName",
+        "fileType",
+        "id",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "10DLC US Campaign Attachment Id.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Attachment type describing the purpose of the attachment",
+          "enum": [
+            "privacyPolicyUrl",
+            "termsAndConditionsUrl",
+            "other"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AttachmentType",
+            "modelAsString": true
+          }
+        },
+        "fileName": {
+          "description": "The name of the file being attached. e.g. 'myFile01'",
+          "minLength": 1,
+          "type": "string"
+        },
+        "fileSizeInBytes": {
+          "format": "int32",
+          "description": "File size in bytes.",
+          "type": "integer"
+        },
+        "fileType": {
+          "description": "The type of file being attached e.g. 'pdf', 'jpg', 'png'",
+          "enum": [
+            "png",
+            "jpg",
+            "jpeg",
+            "pdf"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FileType",
+            "modelAsString": true
+          }
+        },
+        "fileContentBase64": {
+          "description": "File content as base 64 encoded string",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "TenDlcUSCampaignAttachmentSummary": {
+      "description": "A summary of 10DLC US Campaign File Attachment data",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": " 10DLC US Campaign Attachment Id.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Attachment type describing the purpose of the attachment e.g. 'callToAction', 'termsOfService'",
+          "enum": [
+            "privacyPolicyUrl",
+            "termsAndConditionsUrl",
+            "other"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AttachmentType",
+            "modelAsString": true
+          }
+        },
+        "fileName": {
+          "description": "The name of the attached file e.g. 'myFile01'",
+          "type": "string"
+        }
+      }
+    },
+    "TenDlcUSCampaignAttachments": {
+      "description": "A wrapper for a list of 10DLC CampaignAttachment entities.",
+      "type": "object",
+      "properties": {
+        "attachments": {
+          "description": "List of 10DLC US Campaign attachments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenDlcUSCampaignAttachment"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "TenDlcUSBrand": {
       "description": "Represents a US 10DLC brand with details and status information.",
       "required": [
         "id"
@@ -3236,21 +3592,21 @@
           "type": "string"
         },
         "reviewNotes": {
-          "description": "Notes added to the 10DLC Brand after being reviewed to help customer understand\r\nreview results and necessary follow up actions.",
+          "description": "Notes added to the 10DLC Brand after being reviewed to help customer understand review results and necessary follow up actions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ReviewNote"
+            "$ref": "#/definitions/TenDlcReviewNote"
           }
         },
         "brandDetails": {
-          "$ref": "#/definitions/BrandDetails"
+          "$ref": "#/definitions/TenDlcBrandDetails"
         },
         "vettingDetails": {
-          "$ref": "#/definitions/VettingDetails"
+          "$ref": "#/definitions/TenDlcVettingDetails"
         }
       }
     },
-    "USCampaign": {
+    "TenDlcUSCampaign": {
       "description": "Represents a US 10DLC campaign.",
       "required": [
         "id"
@@ -3302,10 +3658,10 @@
           "type": "string"
         },
         "reviewNotes": {
-          "description": "Notes added to the 10DLC Campaign after being reviewed to help customer understand\r\nreview results and necessary follow up actions.",
+          "description": "Notes added to the 10DLC Campaign after being reviewed to help customer understand review results and necessary follow up actions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ReviewNote"
+            "$ref": "#/definitions/TenDlcReviewNote"
           }
         },
         "phoneNumberCount": {
@@ -3314,14 +3670,14 @@
           "type": "integer"
         },
         "campaignDetails": {
-          "$ref": "#/definitions/CampaignDetails"
+          "$ref": "#/definitions/TenDlcCampaignDetails"
         },
         "messageDetails": {
-          "$ref": "#/definitions/MessageDetails"
+          "$ref": "#/definitions/TenDlcMessageDetails"
         }
       }
     },
-    "UseCase": {
+    "TenDlcUseCase": {
       "description": "Compiles information describing the user case for a 10DLC messaging campaign.",
       "type": "object",
       "properties": {
@@ -3386,7 +3742,7 @@
         }
       }
     },
-    "VettingDetails": {
+    "TenDlcVettingDetails": {
       "description": "Holds the details of the vetting process for a US 10DLC brand.",
       "type": "object",
       "properties": {
@@ -3436,15 +3792,15 @@
         }
       }
     },
-    "USBrands": {
-      "description": "A wrapper for a list of USBrands.",
+    "TenDlcUSBrands": {
+      "description": "A wrapper for a list of 10DLC US Brands.",
       "type": "object",
       "properties": {
         "brands": {
-          "description": "List of USBrands",
+          "description": "List of 10DLC USBrands",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/USBrand"
+            "$ref": "#/definitions/TenDlcUSBrand"
           }
         },
         "nextLink": {
@@ -3453,15 +3809,15 @@
         }
       }
     },
-    "USCampaigns": {
-      "description": "A wrapper for a list of USCampaigns",
+    "TenDlcUSCampaigns": {
+      "description": "A wrapper for a list of 10DLC US Campaigns",
       "type": "object",
       "properties": {
         "campaigns": {
-          "description": "List of USCampaigns",
+          "description": "List of 10DLC USCampaigns",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/USCampaign"
+            "$ref": "#/definitions/TenDlcUSCampaign"
           }
         },
         "nextLink": {
