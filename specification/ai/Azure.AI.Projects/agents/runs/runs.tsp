@@ -28,6 +28,15 @@ model TruncationStrategy {
   lastMessages?: int32;
 }
 
+@doc("Parameters for evaluator information.")
+model EvaluatorInfo {
+  @doc("The ID of the evaluator, e.g. aiservices://groundedness, seccopilot://groundedness")
+  id: string;
+
+  @doc("Evaluation parameters for the evaluator, e.g. threshold, rouge_type.")
+  params?: Record<string>;
+}
+
 @doc("Parameters for creating a new run request.")
 model RunInputs {
   @doc("The agent responsible for generating the run.")
@@ -47,6 +56,9 @@ model RunInputs {
 
   @doc("Identifier for the user making the request.")
   userId?: string;
+
+  @doc("List of evaluator information for continuous evaluation.")
+  evaluators?: EvaluatorInfo[];
 }
 
 @doc("Detailed token usage data for a run request.")
