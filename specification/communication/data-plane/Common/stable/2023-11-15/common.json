@@ -113,7 +113,12 @@
           "$ref": "#/definitions/MicrosoftTeamsAppIdentifierModel",
           "description": "The Microsoft Teams application."
         }
-      }
+      },
+      "required": [
+        "kind",
+        "rawId",
+        "communicationUser"
+      ]
     },
     "CommunicationUserIdentifierModel": {
       "description": "A user that got created with an Azure Communication Services resource.",
@@ -145,7 +150,8 @@
       "description": "A Microsoft Teams user.",
       "type": "object",
       "required": [
-        "userId"
+        "userId",
+        "cloud"
       ],
       "properties": {
         "userId": {
@@ -166,7 +172,8 @@
       "description": "A Microsoft Teams application.",
       "type": "object",
       "required": [
-        "appId"
+        "appId",
+        "cloud"
       ],
       "properties": {
         "appId": {

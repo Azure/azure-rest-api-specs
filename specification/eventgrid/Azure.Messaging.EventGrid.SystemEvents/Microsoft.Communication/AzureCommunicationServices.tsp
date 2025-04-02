@@ -43,6 +43,24 @@ model AcsChatMessageReceivedEventData
   ...AcsChatMessageBaseEventData;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommandReceivedInThread event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsChatAzureBotCommandReceivedInThreadEventData
+  extends AcsChatMessageEventInThreadBaseProperties {
+  ...AcsChatMessageBaseEventData;
+}
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorReceivedInThread event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsChatTypingIndicatorReceivedInThreadEventData
+  extends AcsChatEventInThreadBaseProperties {
+  /** The communication identifier of the sender */
+  senderCommunicationIdentifier: CommunicationIdentifierModel;
+
+  /** The display name of the sender */
+  senderDisplayName?: string;
+}
+
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageReceivedInThreadEventData
@@ -128,7 +146,7 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   editTime: utcDateTime;
 
   /** The thread metadata */
-  metadata: Record<string>;
+  metadata?: Record<string>;
 
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
@@ -747,10 +765,10 @@ model AcsRouterWorkerSelector {
 
 alias AcsChatMessageBaseEventData = {
   /** The body of the chat message */
-  messageBody?: string;
+  messageBody: string;
 
   /** The chat message metadata */
-  metadata: Record<string>;
+  metadata?: Record<string>;
 };
 
 alias AcsChatThreadBaseEventData = {
@@ -762,7 +780,7 @@ alias AcsChatThreadBaseEventData = {
   properties: Record<unknown>;
 
   /** The thread metadata */
-  metadata: Record<string>;
+  metadata?: Record<string>;
 
   /** The list of properties of participants who are part of the thread */
   participants: AcsChatThreadParticipantProperties[];
@@ -934,7 +952,7 @@ model AcsChatThreadEventInThreadBaseProperties
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   /** The chat message id */
-  messageId?: string;
+  messageId: string;
 
   /** The communication identifier of the sender */
   senderCommunicationIdentifier: CommunicationIdentifierModel;
@@ -947,10 +965,11 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
   composeTime: utcDateTime;
 
   /** The type of the message */
-  type?: string;
+  type: string;
 
   /** The version of the message */
-  version?: int64;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  version: int64;
 }
 
 /** Schema of common properties of all thread-level chat message events */
@@ -958,7 +977,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 model AcsChatMessageEventInThreadBaseProperties
   extends AcsChatEventInThreadBaseProperties {
   /** The chat message id */
-  messageId?: string;
+  messageId: string;
 
   /** The communication identifier of the sender */
   senderCommunicationIdentifier: CommunicationIdentifierModel;
@@ -971,10 +990,10 @@ model AcsChatMessageEventInThreadBaseProperties
   composeTime: utcDateTime;
 
   /** The type of the message */
-  type?: string;
+  type: string;
 
   /** The version of the message */
-  version?: int64;
+  version: int64;
 }
 
 /** Schema of common properties of all thread-level chat events */
@@ -983,7 +1002,7 @@ model AcsChatEventInThreadBaseProperties {
   transactionId?: string;
 
   /** The chat thread id */
-  threadId?: string;
+  threadId: string;
 }
 
 /** Schema of common properties of all chat events */
@@ -1003,7 +1022,7 @@ model AcsChatThreadParticipantProperties {
   participantCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The metadata of the user */
-  metadata: Record<string>;
+  metadata?: Record<string>;
 }
 
 /** Schema of common properties of all SMS events */
@@ -1080,24 +1099,23 @@ union AcsUserEngagement {
 
 /** Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set. */
 model CommunicationIdentifierModel {
-  /** The identifier kind. Only required in responses. */
-  @madeRequired(ServiceApiVersions.v2024_01_01)
-  kind: CommunicationIdentifierModelKind;
+  /** The identifier kind. Only required in responses. */  
+  kind?: CommunicationIdentifierModelKind;
 
   /** Raw Id of the identifier. Optional in requests, required in responses. */
-  rawId?: string;
+  rawId: string;
 
   /** The communication user. */
   communicationUser: CommunicationUserIdentifierModel;
 
   /** The phone number. */
-  phoneNumber: PhoneNumberIdentifierModel;
+  phoneNumber?: PhoneNumberIdentifierModel;
 
   /** The Microsoft Teams user. */
-  microsoftTeamsUser: MicrosoftTeamsUserIdentifierModel;
+  microsoftTeamsUser?: MicrosoftTeamsUserIdentifierModel;
 
   /** The Microsoft Teams application. */
-  microsoftTeamsApp: MicrosoftTeamsAppIdentifierModel;
+  microsoftTeamsApp?: MicrosoftTeamsAppIdentifierModel;
 }
 
 /** Communication model identifier kind */
