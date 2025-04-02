@@ -9046,11 +9046,39 @@
     },
     "AdvancedNetworkingSecurity": {
       "type": "object",
-      "description": "Security profile to enable security features on cilium based cluster.",
+      "description": "Security profile to enable security features on cilium-based cluster.",
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "This feature allows user to configure network policy based on DNS (FQDN) names. It can be enabled only on cilium based clusters. If not specified, the default is false."
+          "description": "Configure Advanced Networking Security features on Cilium clusters. When the flag is set to true, FQDN policies will be enabled by default unless advancedNetworkPolicies is explicitly set to a different value. If not specified, the default is false."
+        },
+        "advancedNetworkPolicies": {
+          "type": "string",
+          "enum": [
+            "L7",
+            "FQDN",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "advancedNetworkPolicies",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "L7",
+                "description": "Enable Layer7 network policies (FQDN, HTTP/S, Kafka). This option is a superset of the FQDN option."
+              },
+              {
+                "value": "FQDN",
+                "description": "Enable FQDN based network policies"
+              },
+              {
+                "value": "None",
+                "description": "Disable Layer 7 network policies (FQDN, HTTP/S, Kafka)"
+              }
+            ]
+          },
+          "title": "Enable advanced network policies",
+          "description": "This allows users to configure Layer 7 network policies (FQDN, HTTP, Kafka). Policies themselves must be configured via the Cilium Network Policy resources, see https://docs.cilium.io/en/latest/security/policy/index.html. This can be enabled only on cilium-based clusters. If not specified, the default value is L7 if enabled is set to true otherwise it defaults to None"
         }
       }
     },
