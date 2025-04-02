@@ -78,11 +78,11 @@ directive:
 
 ```
 
-### Tag: package-preview-2025-02-19-preview
+### Tag: package-preview-2025-02-19
 
-These settings apply only when `--tag=package-preview-2025-02-19-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2025-02-19` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-02-19-preview'
+```yaml $(tag) == 'package-preview-2025-02-19'
 input-file:
   - Microsoft.HybridCompute/preview/2025-02-19-preview/HybridCompute.json
   - Microsoft.HybridCompute/preview/2025-02-19-preview/privateLinkScopes.json
