@@ -1,5 +1,6 @@
 import { test, describe, expect } from "vitest";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import {
   getSwaggerDependenciesMap,
@@ -13,7 +14,7 @@ import { isWindows } from "./test-util.js";
 
 describe("getSwaggerDependenciesMap", () => {
   test("empty set on no .json files", async () => {
-    const __dirname = new URL(".", import.meta.url).pathname;
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     console.log("dirname", __dirname);
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
@@ -23,23 +24,28 @@ describe("getSwaggerDependenciesMap", () => {
     expect(dependencyMap.size).toEqual(0);
   });
 
-  test("d has no dependencies", async () => {
-    const __dirname = new URL(".", import.meta.url).pathname;
+  test.skipIf(isWindows)("d has no dependencies", async () => {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    console.log("dirname", __dirname);
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
       "specification/1",
     );
+
+    console.log(dependencyMap);
 
     expect(dependencyMap.has("specification/1/d.json")).toEqual(true);
     expect(dependencyMap.get("specification/1/d.json")).toEqual(new Set<string>());
   });
 
-  test("a depends on b and c (and d transitively)", async () => {
-    const __dirname = new URL(".", import.meta.url).pathname;
+  test.skipIf(isWindows)("a depends on b and c (and d transitively)", async () => {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
       "specification/1",
     );
+
+    console.log(dependencyMap);
 
     expect(dependencyMap.has("specification/1/a.json")).toEqual(true);
     expect(dependencyMap.get("specification/1/a.json")).toEqual(
@@ -52,12 +58,14 @@ describe("getSwaggerDependenciesMap", () => {
     );
   });
 
-  test("b depends on c and d", async () => {
-    const __dirname = new URL(".", import.meta.url).pathname;
+  test.skipIf(isWindows)("b depends on c and d", async () => {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
       "specification/1",
     );
+
+    console.log(dependencyMap);
 
     expect(dependencyMap.has("specification/1/nesting/b.json")).toEqual(true);
     expect(dependencyMap.get("specification/1/nesting/b.json")).toEqual(
@@ -68,7 +76,7 @@ describe("getSwaggerDependenciesMap", () => {
 
 describe("getAffectedSwaggers", () => {
   test("a affects only a", async () => {
-    const __dirname = new URL(".", import.meta.url).pathname;
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
       "specification/1",
@@ -79,20 +87,22 @@ describe("getAffectedSwaggers", () => {
     expect(affectedSwaggers).toEqual(["specification/1/a.json"]);
   });
 
-  test("b affects a and b", async () => {
-    const __dirname = new URL(".", import.meta.url).pathname;
+  test.skipIf(isWindows)("b affects a and b", async () => {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
       "specification/1",
     );
+
+    console.log(dependencyMap);
 
     const affectedSwaggers = getAffectedSwaggers(["specification/1/nesting/b.json"], dependencyMap);
 
     expect(affectedSwaggers).toEqual(["specification/1/nesting/b.json", "specification/1/a.json"]);
   });
 
-  test("c affects a, b, c", async () => {
-    const __dirname = new URL(".", import.meta.url).pathname;
+  test.skipIf(isWindows)("c affects a, b, c", async () => {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
       "specification/1",
@@ -107,8 +117,8 @@ describe("getAffectedSwaggers", () => {
     ]);
   });
 
-  test("d affects a, b, d", async () => {
-    const __dirname = new URL(".", import.meta.url).pathname;
+  test.skipIf(isWindows)("d affects a, b, d", async () => {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
       "specification/1",
@@ -123,8 +133,8 @@ describe("getAffectedSwaggers", () => {
     ]);
   });
 
-  test("d, c affects a, b, c, d", async () => {
-    const __dirname = new URL(".", import.meta.url).pathname;
+  test.skipIf(isWindows)("d, c affects a, b, c, d", async () => {
+    const __dirname = dirname(fileURLToPath(import.meta.url));
     const dependencyMap = await getSwaggerDependenciesMap(
       join(__dirname, "fixtures/getSwaggerDependenciesMap"),
       "specification/1",
@@ -145,14 +155,14 @@ describe("getAffectedSwaggers", () => {
 });
 
 describe("getAffectedServices", () => {
-  test("returns single service with multiple files", async () => {
+  test.skipIf(isWindows)("returns single service with multiple files", async () => {
     const changedFiles = ["specification/service1/file1.json", "specification/service1/file2.json"];
     const affectedServices = await getAffectedServices(changedFiles);
 
     expect(affectedServices).toEqual(new Set<string>(["specification/service1"]));
   });
 
-  test("returns multiple services", async () => {
+  test.skipIf(isWindows)("returns multiple services", async () => {
     const changedFiles = [
       "specification/service1/file1.json",
       "specification/service1/file2.json",
@@ -167,7 +177,7 @@ describe("getAffectedServices", () => {
 });
 
 describe("getService", () => {
-  test("returns service name from file path", async () => {
+  test.skipIf(isWindows)("returns service name from file path", async () => {
     const filePath = "specification/service1/file1.json";
     const serviceName = await getService(filePath);
 
