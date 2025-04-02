@@ -8,8 +8,6 @@ async function checkAllUnder(path: string, responseCache?: string) {
 
   let command = `${script} -CheckAllUnder ${join(__dirname, path)}`;
 
-  console.log(`command: '${command}'`);
-
   if (responseCache) {
     command += ` -_ResponseCache ${responseCache}`;
   }
@@ -19,6 +17,7 @@ async function checkAllUnder(path: string, responseCache?: string) {
     reject: false,
   });
 
+  console.log(`command: '${command}'`);
   console.log(`result: ${JSON.stringify(result)}`);
 
   return result;
