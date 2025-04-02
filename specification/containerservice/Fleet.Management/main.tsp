@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./fleet.tsp";
 import "./fleetmember.tsp";
 import "./gate.tsp";
+import "./fleetnamespace.tsp";
 import "./update/common.tsp";
 import "./update/run.tsp";
 import "./update/strategy.tsp";
