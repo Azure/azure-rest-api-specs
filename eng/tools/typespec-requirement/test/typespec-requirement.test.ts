@@ -7,11 +7,21 @@ async function checkAllUnder(path: string, responseCache?: string) {
   const script = join("eng", "scripts", "TypeSpec-Requirement.ps1");
 
   let command = `${script} -CheckAllUnder ${join(__dirname, path)}`;
+
+  console.log(`command: '${command}'`);
+
   if (responseCache) {
     command += ` -_ResponseCache ${responseCache}`;
   }
 
-  return await execa("pwsh", ["-Command", command], { cwd: repoRoot, reject: false });
+  const result = await execa("pwsh", ["-Command", command], {
+    cwd: repoRoot,
+    reject: false,
+  });
+
+  console.log(`result: JSON.stringify(result)`);
+
+  return result;
 }
 
 test.concurrent("No files to check", async ({ expect }) => {
