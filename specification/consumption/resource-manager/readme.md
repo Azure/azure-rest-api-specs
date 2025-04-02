@@ -35,6 +35,7 @@ These settings apply only when `--tag=package-2025-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-04-01'
 input-file:
+  - Microsoft.Consumption/stable/2025-04-01/consumption_pricesheet.json
   - Microsoft.Consumption/stable/2025-04-01/consumption.json
 ```
 
