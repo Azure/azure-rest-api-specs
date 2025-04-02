@@ -43,12 +43,27 @@ union FleetNamespaceProvisioningState {
   Deleting: "Deleting",
 }
 
+@doc("The profile of the fleet namespace.")
+model FleetNamespaceProfile {
+    @doc("Action if Kubernetes namespace with the same name already exists.")
+    adoptionPolicy?: "Never" | "IfIdentical" | "Always";
+
+    @doc("Delete options of a namespace.")
+    deletePolicy?: "Keep" | "Delete";
+  
+ }
+
 @doc("A fleet namespace.")
 model FleetNamespaceProperties {
 
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: FleetNamespaceProvisioningState;
+  
+  @visibility("read")
+  @doc("The profile of the fleet namespace.")
+  fleetNamespaceProfile?: FleetNamespaceProfile;
+
 
 }
 
