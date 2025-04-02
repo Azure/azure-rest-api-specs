@@ -3,16 +3,56 @@ using TypeSpec.Versioning;
 /** Describes the schema of the Azure Maps events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
 namespace Microsoft.EventGrid.SystemEvents;
 
+const MicrosoftMapsGeofenceEnteredExample: MapsGeofenceEnteredEventData = #{
+  geometries: #[
+    #{
+      deviceId: "device_1",
+      udId: "1a13b444-4acf-32ab-ce4e-9ca4af20b169",
+      geometryId: "2",
+      distance: -999.0,
+      nearestLat: 47.618786,
+      nearestLon: -122.132151,
+    }
+  ],
+  isEventPublished: true,
+  expiredGeofenceGeometryId: #[],
+  invalidPeriodGeofenceGeometryId: #[],
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceEntered event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftMapsGeofenceEnteredExample)
 model MapsGeofenceEnteredEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceExited event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model MapsGeofenceExitedEventData extends MapsGeofenceEventProperties {}
 
+const MicrosoftMapsGeofenceResultExample: MapsGeofenceResultEventData = #{
+  geometries: #[
+    #{
+      deviceId: "device_1",
+      udId: "1a13b444-4acf-32ab-ce4e-9ca4af20b169",
+      geometryId: "1",
+      distance: 999.0,
+      nearestLat: 47.609833,
+      nearestLon: -122.148274,
+    },
+    #{
+      deviceId: "device_1",
+      udId: "1a13b444-4acf-32ab-ce4e-9ca4af20b169",
+      geometryId: "2",
+      distance: 999.0,
+      nearestLat: 47.621954,
+      nearestLon: -122.131841,
+    }
+  ],
+  isEventPublished: true,
+  expiredGeofenceGeometryId: #[],
+  invalidPeriodGeofenceGeometryId: #[],
+};
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Maps.GeofenceResult event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+@example(MicrosoftMapsGeofenceResultExample)
 model MapsGeofenceResultEventData extends MapsGeofenceEventProperties {}
 
 /** Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult). */
