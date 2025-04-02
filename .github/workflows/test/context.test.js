@@ -246,7 +246,7 @@ describe("extractInputs", () => {
                 },
                 number: 1,
               },
-              // Second PR to triggering repo still causes an error (TODO: #33418)
+              // Multiple PRs to triggering repo still causes an error (TODO: #33418)
               {
                 base: {
                   repo: { id: 1234 },
@@ -300,6 +300,7 @@ describe("extractInputs", () => {
           run_id: 456,
         });
       } else {
+        // Multiple PRs to triggering repo still causes an error (TODO: #33418)
         await expect(
           extractInputs(github, context, createMockCore()),
         ).rejects.toThrow("Unexpected number of pull requests");
