@@ -1,13 +1,12 @@
 // @ts-check
 
+import yaml from "js-yaml";
 import { marked } from "marked";
-import yaml from "yaml";
-import { ILogger } from "./logger.js";
 
 /**
  * @param {string} markdown
  * @param {Object} [options]
- * @param {ILogger} [options.logger]
+ * @param {import('./types.js').ILogger} [options.logger]
  * @returns {Promise<Set<string>>} All input files for all tags
  */
 export async function getInputFiles(markdown, options = {}) {
@@ -25,7 +24,7 @@ export async function getInputFiles(markdown, options = {}) {
     const tag =
       block.lang?.match(/yaml \$\(tag\) == '([^']*)'/)?.[1] || "default";
 
-    const obj = yaml.parse(block.text);
+    const obj = /** @type {any} */ (yaml.load(block.text));
     const blockFiles = /** @type string[] */ (obj["input-file"] || []);
 
     logger?.info(`Input files for tag '${tag}': ${JSON.stringify(blockFiles)}`);

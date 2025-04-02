@@ -15,7 +15,7 @@ import { createMockLogger } from "./mocks.js";
 describe("changedFiles", () => {
   it.each([{}, { logger: createMockLogger() }])(
     `getChangedFiles(%o)`,
-    async ({ logger }) => {
+    async (options) => {
       const files = [
         ".github/src/git.js",
         "specification/contosowidgetmanager/Contoso.Management/main.tsp",
@@ -25,8 +25,7 @@ describe("changedFiles", () => {
 
       vi.spyOn(git, "diff").mockResolvedValue(files.join("\n"));
 
-      // test with and without logger
-      await expect(getChangedFiles({ logger })).resolves.toEqual(files);
+      await expect(getChangedFiles(options)).resolves.toEqual(files);
     },
   );
 
