@@ -967,6 +967,53 @@
         }
       }
     },
+    "AcsChatAzureBotCommandReceivedInThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "messageBody"
+      ]
+    },
+    "AcsChatTypingIndicatorSentEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorSent event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "senderCommunicationIdentifier": {
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the sender"
+        },
+        "senderDisplayName": {
+          "type": "string",
+          "description": "The display name of the sender"
+        }
+      },
+      "required": [
+        "senderCommunicationIdentifier"
+      ]
+    },
     "AcsChatMessageReceivedInThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event.",
       "allOf": [
@@ -987,7 +1034,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "messageBody"
+      ]
     },
     "AcsChatMessageEditedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEdited event.",
@@ -1014,7 +1064,11 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "requried": [
+        "editTime",
+        "messageBody"
+      ]
     },
     "AcsChatMessageEditedInThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageEditedInThread event.",
@@ -1041,7 +1095,11 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "requried": [
+        "editTime",
+        "messageBody"
+      ]
     },
     "AcsChatMessageDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeleted event.",
@@ -1057,7 +1115,10 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "requried": [
+        "deleteTime"
+      ]
     },
     "AcsChatMessageDeletedInThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageDeletedInThread event.",
@@ -1073,7 +1134,10 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "requried": [
+        "deleteTime"
+      ]
     },
     "AcsChatThreadCreatedWithUserEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreatedWithUser event.",
@@ -1109,7 +1173,12 @@
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
         }
-      }
+      },
+      "required": [
+        "createdByCommunicationIdentifier",
+        "properties",
+        "participants"
+      ]
     },
     "AcsChatThreadCreatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
@@ -1145,7 +1214,12 @@
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
         }
-      }
+      },
+      "required": [
+        "createdByCommunicationIdentifier",
+        "properties",
+        "participants"
+      ]
     },
     "AcsChatThreadWithUserDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadWithUserDeleted event.",
@@ -1165,7 +1239,11 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "deletedByCommunicationIdentifier",
+        "deleteTime"
+      ]
     },
     "AcsChatThreadDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadDeleted event.",
@@ -1185,7 +1263,11 @@
           "format": "date-time",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "deletedByCommunicationIdentifier",
+        "deleteTime"
+      ]
     },
     "AcsChatThreadPropertiesUpdatedPerUserEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
@@ -1219,7 +1301,12 @@
             "type": "object"
           }
         }
-      }
+      },
+      "required": [
+        "editedByCommunicationIdentifier",
+        "editTime",
+        "properties"
+      ]
     },
     "AcsChatThreadPropertiesUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadPropertiesUpdated event.",
@@ -1330,7 +1417,12 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "time",
+        "addedByCommunicationIdentifier",
+        "participantAdded"
+      ]
     },
     "AcsChatParticipantRemovedFromThreadEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadParticipantRemoved event.",
@@ -1359,7 +1451,12 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "time",
+        "removedByCommunicationIdentifier",
+        "participantRemoved"
+      ]
     },
     "AcsSmsDeliveryReportReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.SMSDeliveryReportReceived event.",
@@ -1812,7 +1909,10 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "createTime"
+      ]
     },
     "AcsChatThreadEventInThreadBaseProperties": {
       "description": "Schema of common properties of all chat thread events",
@@ -1833,7 +1933,10 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "createTime"
+      ]
     },
     "AcsCallParticipantBaseEventData": {
       "description": "Schema of common properties of participant events",
@@ -2005,7 +2108,14 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "type",
+        "version",
+        "senderCommunicationIdentifier",
+        "composeTime"
+      ]
     },
     "AcsChatEventInThreadBaseProperties": {
       "description": "Schema of common properties of all thread-level chat events",
@@ -2019,7 +2129,11 @@
           "description": "The chat thread id",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "transactionId",
+        "threadId"
+      ]
     },
     "AcsRouterJobEventData": {
       "description": "Schema of common properties of all Router Job events",
@@ -2120,7 +2234,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "required": [
+        "participantCommunicationIdentifier"
+      ]
     },
     "AcsSmsEventBaseProperties": {
       "description": "Schema of common properties of all SMS events",

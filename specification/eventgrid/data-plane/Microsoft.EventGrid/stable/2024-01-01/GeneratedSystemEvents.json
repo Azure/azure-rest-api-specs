@@ -40,7 +40,8 @@
         }
       },
       "required": [
-        "recipientCommunicationIdentifier"
+        "recipientCommunicationIdentifier",
+        "threadId"
       ]
     },
     "AcsChatEventInThreadBaseProperties": {
@@ -55,7 +56,10 @@
           "type": "string",
           "description": "The chat thread id"
         }
-      }
+      },
+      "required": [
+        "threadId"
+      ]
     },
     "AcsChatMessageDeletedEventData": {
       "type": "object",
@@ -117,7 +121,7 @@
         }
       },
       "required": [
-        "metadata",
+        "messageBody",
         "editTime"
       ],
       "allOf": [
@@ -148,7 +152,7 @@
         }
       },
       "required": [
-        "metadata",
+        "messageBody",
         "editTime"
       ],
       "allOf": [
@@ -288,7 +292,10 @@
       },
       "required": [
         "senderCommunicationIdentifier",
-        "composeTime"
+        "composeTime",
+        "messageId",
+        "type",
+        "version"
       ],
       "allOf": [
         {
@@ -329,7 +336,10 @@
       },
       "required": [
         "senderCommunicationIdentifier",
-        "composeTime"
+        "composeTime",
+        "messageId",
+        "type",
+        "version"
       ],
       "allOf": [
         {
@@ -410,11 +420,58 @@
         }
       },
       "required": [
-        "metadata"
+        "messageBody"
       ],
       "allOf": [
         {
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
+        }
+      ]
+    },
+    "AcsChatAzureBotCommandReceivedInThreadEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommand event.",
+      "properties": {
+        "messageBody": {
+          "type": "string",
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The chat message metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "messageBody"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ]
+    },
+    "AcsChatTypingIndicatorReceivedInThreadEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorSent event.",
+      "properties": {
+        "senderCommunicationIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the sender"
+        },
+        "senderDisplayName": {
+          "type": "string",
+          "description": "The display name of the sender"
+        }
+      },
+      "required": [
+        "senderCommunicationIdentifier"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
         }
       ]
     },
@@ -435,7 +492,7 @@
         }
       },
       "required": [
-        "metadata"
+        "messageBody"
       ],
       "allOf": [
         {
@@ -601,7 +658,6 @@
       "required": [
         "createdByCommunicationIdentifier",
         "properties",
-        "metadata",
         "participants"
       ],
       "allOf": [
@@ -642,7 +698,6 @@
       "required": [
         "createdByCommunicationIdentifier",
         "properties",
-        "metadata",
         "participants"
       ],
       "allOf": [
@@ -744,8 +799,7 @@
         }
       },
       "required": [
-        "participantCommunicationIdentifier",
-        "metadata"
+        "participantCommunicationIdentifier"
       ]
     },
     "AcsChatThreadPropertiesUpdatedEventData": {
@@ -815,7 +869,6 @@
       "required": [
         "editedByCommunicationIdentifier",
         "editTime",
-        "metadata",
         "properties"
       ],
       "allOf": [
@@ -3563,11 +3616,8 @@
         }
       },
       "required": [
-        "kind",
         "communicationUser",
-        "phoneNumber",
-        "microsoftTeamsUser",
-        "microsoftTeamsApp"
+        "rawId"
       ]
     },
     "CommunicationIdentifierModelKind": {
