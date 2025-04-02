@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7",
+    "resourceGroupName": "gigtest",
+    "api-version": "2024-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.insights/metricAlerts/highcpu",
+            "type": "Microsoft.Insights/metricAlerts",
+            "name": "highcpu",
+            "location": "global",
+            "kind": "Metric",
+            "properties": {
+              "description": "This is the description of the metric alert",
+              "severity": 3,
+              "enabled": true,
+              "scopes": [
+                "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
+              ],
+              "evaluationFrequency": "PT1M",
+              "windowSize": "PT15M",
+              "criteria": {
+                "threshold": 80.50,
+                "operator": "GreaterThan"
+              },
+              "actions": [
+                {
+                  "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/microsoft.insights/metricAlerts/dynamiccpu",
+            "type": "Microsoft.Insights/metricAlerts",
+            "name": "dynamiccpu",
+            "location": "global",
+            "kind": "Query",
+            "properties": {
+              "description": "This is a dynamic metric alert",
+              "severity": 3,
+              "enabled": true,
+              "scopes": [
+                "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.Compute/virtualMachines/gigwadme"
+              ],
+              "evaluationFrequency": "PT1M",
+              "resolveConfiguration": {
+                "autoResolved": true,
+                "timeToResolve": "PT15M"
+              },
+              "criteria": {
+                "query": "Perf | where ObjectName == \"Processor\" and CounterName == \"% Processor Time\" | summarize AggregatedValue = avg(CounterValue) by bin(TimeGenerated, 5m)"
+              },
+              "actions": [
+                {
+                  "actionGroupId": "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
