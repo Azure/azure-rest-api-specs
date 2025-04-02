@@ -8,7 +8,7 @@ Users can convert a specification from swagger to typespec by using `tsp-client`
 
 1. Install the dependencies specified in the package.json at the root of this repository. Command:
 ```
-npm install
+npm ci
 ```
 2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `npx tsp-client convert --swagger-readme <path to your readme>`
 3. Now that you have a newly converted typespec project, you should go through all files to verify the accuracy of the converted spec. Likewise, you should update the implementation according to the information provided under the [Data-plane: Initial migration checklist](#data-plane-initial-migration-checklist) section.
