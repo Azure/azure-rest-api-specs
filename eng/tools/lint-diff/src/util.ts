@@ -1,7 +1,6 @@
 import { access, constants, readFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-import { ExecException } from "node:child_process";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 
 /**
  * Enumerate files in a directory that match the given string ending
@@ -25,27 +24,6 @@ export async function pathExists(path: string): Promise<boolean> {
   } catch {
     return false;
   }
-}
-
-// TODO: Reduce to minimal set of properties
-export type AutorestRunResult = {
-  rootPath: string;
-
-  readme: string;
-  tag: string;
-
-  error: ExecException | null;
-  stdout: string;
-  stderr: string;
-};
-
-export interface AutoRestMessage {
-  level: "information" | "warning" | "error" | "debug" | "verbose" | "fatal";
-  code?: any;
-  message: string;
-  readme?: string;
-  tag?: string;
-  groupName?: string;
 }
 
 // Ignorting test coverage for these utility functions that are specific to
@@ -87,3 +65,18 @@ export async function getPathToDependency(dependency: string): Promise<string> {
   }
 }
 /* v8 ignore stop */
+
+/**
+ * Normalize a path to be relative to a given directory.
+ * @param path File path with / separators (typically given in swagger $refs)
+ * @param from A directory name to treat as the root (e.g. /specification/)
+ */
+export function relativizePath(path: string, from: string = `/specification/`): string {
+  console.log(`Relativizing path: ${path}`);
+  const indexOfBy = path.lastIndexOf(from);
+  if (indexOfBy === -1) {
+    return path;
+  }
+
+  return path.substring(indexOfBy);
+}
