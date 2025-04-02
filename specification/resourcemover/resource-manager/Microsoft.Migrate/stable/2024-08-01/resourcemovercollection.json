@@ -1949,7 +1949,10 @@
         },
         "targetDiskDetails": {
           "description": "Gets or sets the disk details.",
-          "type": "array"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskDetails"
+          }
         }
       },
       "x-ms-discriminator-value": "Microsoft.Compute/virtualMachines"
@@ -2002,7 +2005,10 @@
         },
         "addressPrefixes": {
           "description": "Gets or sets address prefixes for the subnet.",
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "networkSecurityGroup": {
           "$ref": "#/definitions/NsgReference"
@@ -2679,6 +2685,20 @@
           "items": {
             "$ref": "#/definitions/AffectedMoveResource"
           }
+        }
+      }
+    },
+    "DiskDetails": {
+      "description": "Defines the virtual machine disk details.",
+      "type": "object",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "descrption": "Gets or sets the source disk Id."
+        },
+        "targetDiskName": {
+          "type": "string",
+          "description": "Gets or sets the target disk name."
         }
       }
     }
