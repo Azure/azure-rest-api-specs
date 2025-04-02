@@ -1,5 +1,5 @@
 import { access, constants, readFile } from "node:fs/promises";
-import { dirname, join, sep } from "path";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 /**
@@ -68,11 +68,11 @@ export async function getPathToDependency(dependency: string): Promise<string> {
 
 /**
  * Normalize a path to be relative to a given directory.
- * @param path File path with separators from the current system
+ * @param path File path with / separators (typically given in swagger $refs)
  * @param from A directory name to treat as the root (e.g. /specification/)
  */
-// TODO: Review use of sep
-export function relativizePath(path: string, from: string = `${sep}specification${sep}`): string {
+export function relativizePath(path: string, from: string = `/specification/`): string {
+  console.log(`Relativizing path: ${path}`);
   const indexOfBy = path.lastIndexOf(from);
   if (indexOfBy === -1) {
     return path;
