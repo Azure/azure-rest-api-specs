@@ -128,7 +128,7 @@ export class CompileRule implements Rule {
                 for (const p of suppression.paths) {
                   if (!p.match(singleVersionPattern)) {
                     throw new Error(
-                      `Invalid path '${p}'.  Path must only include one version per suppression.`,
+                      `Invalid path '${p}'. Path must only include one version per suppression.`,
                     );
                   }
                 }
