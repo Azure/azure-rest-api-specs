@@ -164,7 +164,7 @@ describe("getLintDiffViolations", async () => {
     };
   }
 
-  test.concurrent("returns an empty array on no interesting violations", ({ expect }) => {
+  test.sequential("returns an empty array on no interesting violations", () => {
     const runResult =
       createRunResult(`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"spectralPluginFunc: Validating OpenAPI spec. TypeSpec-generated: true. Path: 'file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json'"}
 {"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"openapiValidatorPluginFunc: Return"}`);
@@ -173,7 +173,7 @@ describe("getLintDiffViolations", async () => {
     expect(violations).toEqual([]);
   });
 
-  test.concurrent("returns an error on an interesting violation", ({ expect }) => {
+  test.sequential("returns an error on an interesting violation", () => {
     const runResult =
       createRunResult(`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"spectralPluginFunc: Validating OpenAPI spec. TypeSpec-generated: true. Path: 'file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json'"}
 {"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"error","message":"Top level property names should not be repeated inside the properties bag for ARM resource 'CodeSigningAccount'. Properties [properties.sku] conflict with ARM top level properties. Please rename these.","code":"ArmResourcePropertiesBag","details":{"jsonpath":["definitions","CodeSigningAccount"],"validationCategory":"ARMViolation","providerNamespace":false,"resourceType":false,"range":{"start":{"line":1036,"column":27},"end":{"line":1051,"column":6}}},"source":[{"document":"file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json","position":{"line":1036,"column":5}}]}
@@ -185,9 +185,9 @@ describe("getLintDiffViolations", async () => {
     expect(violations[0].code).toEqual("ArmResourcePropertiesBag");
   });
 
-  test.concurrent(
+  test.sequential(
     "returns an empty array on violations that don't have extensionname @microsoft.azure/openapi-validator",
-    ({ expect }) => {
+    () => {
       const runResult =
         createRunResult(`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"spectralPluginFunc: Validating OpenAPI spec. TypeSpec-generated: true. Path: 'file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json'"}
 {"pluginName":"spectral","extensionName":"THIS IS FILTERED OUT","level":"error","message":"Top level property names should not be repeated inside the properties bag for ARM resource 'CodeSigningAccount'. Properties [properties.sku] conflict with ARM top level properties. Please rename these.","code":"ArmResourcePropertiesBag","details":{"jsonpath":["definitions","CodeSigningAccount"],"validationCategory":"ARMViolation","providerNamespace":false,"resourceType":false,"range":{"start":{"line":1036,"column":27},"end":{"line":1051,"column":6}}},"source":[{"document":"file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json","position":{"line":1036,"column":5}}]}
@@ -198,7 +198,7 @@ describe("getLintDiffViolations", async () => {
     },
   );
 
-  test.concurrent("returns a violation with code FATAL if the result.code is undefined", () => {
+  test.sequential("returns a violation with code FATAL if the result.code is undefined", () => {
     const runResult = createRunResult(
       `{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","message": "test message with no code"}`,
     );
@@ -208,7 +208,7 @@ describe("getLintDiffViolations", async () => {
 });
 
 describe("arrayIsEqual", () => {
-  test.concurrent("returns true for equal arrays", async ({ expect }) => {
+  test.sequential("returns true for equal arrays", async () => {
     const a = ["a", "b", "c"];
     const b = ["a", "b", "c"];
 
@@ -216,7 +216,7 @@ describe("arrayIsEqual", () => {
     expect(result).toEqual(true);
   });
 
-  test.concurrent("returns false for different arrays", async ({ expect }) => {
+  test.sequential("returns false for different arrays", async () => {
     const a = ["a", "b", "c"];
     const b = ["a", "b", "d"];
 
@@ -224,7 +224,7 @@ describe("arrayIsEqual", () => {
     expect(result).toEqual(false);
   });
 
-  test.concurrent("returns false for different lengths", async ({ expect }) => {
+  test.sequential("returns false for different lengths", async () => {
     const a = ["a", "b", "c"];
     const b = ["a", "b"];
 
@@ -232,7 +232,7 @@ describe("arrayIsEqual", () => {
     expect(result).toEqual(false);
   });
 
-  test.concurrent("returns true for empty arrays", async ({ expect }) => {
+  test.sequential("returns true for empty arrays", async () => {
     const a: string[] = [];
     const b: string[] = [];
 
@@ -240,7 +240,7 @@ describe("arrayIsEqual", () => {
     expect(result).toEqual(true);
   });
 
-  test.concurrent("returns true for equal arrays with different types", async ({ expect }) => {
+  test.sequential("returns true for equal arrays with different types", async () => {
     const a = ["a", 1, "c"];
     const b = ["a", 1, "c"];
 
@@ -275,7 +275,7 @@ describe("isWarning", () => {
 });
 
 describe("getNewItems", () => {
-  test.concurrent("returns empty array when no before or after", ({ expect }) => {
+  test.sequential("returns empty array when no before or after", () => {
     const before: LintDiffViolation[] = [];
     const after: LintDiffViolation[] = [];
 
@@ -283,7 +283,7 @@ describe("getNewItems", () => {
     expect(result).toEqual([[], []]);
   });
 
-  test.concurrent("a fatal error is always new", ({ expect }) => {
+  test.sequential("a fatal error is always new", () => {
     const before = [
       {
         level: "fatal",
@@ -311,7 +311,7 @@ describe("getNewItems", () => {
     expect(result).toEqual([after, []]);
   });
 
-  test.concurrent("returns all after items when no before", ({ expect }) => {
+  test.sequential("returns all after items when no before", () => {
     const before: LintDiffViolation[] = [];
     const after = [
       {
@@ -338,7 +338,7 @@ describe("getNewItems", () => {
     expect(result).toEqual([after, []]);
   });
 
-  test.concurrent("returns only new errors", ({ expect }) => {
+  test.sequential("returns only new errors", () => {
     const before: LintDiffViolation[] = [
       {
         level: "error",
@@ -383,21 +383,21 @@ describe("getNewItems", () => {
 });
 
 describe("relativizePath", () => {
-  test.skipIf(isWindows).concurrent("relativizes path correctly", ({ expect }) => {
+  test.skipIf(isWindows).sequential("relativizes path correctly", () => {
     expect(relativizePath("/path/to/specification/service/file.json")).toEqual(
       "/specification/service/file.json",
     );
   });
 
-  test.concurrent("returns the same path if it doesn't include from", ({ expect }) => {
+  test.sequential("returns the same path if it doesn't include from", () => {
     expect(relativizePath("/path/to/other/file.json")).toEqual("/path/to/other/file.json");
   });
 
-  test.concurrent("returns empty string when path is empty", ({ expect }) => {
+  test.sequential("returns empty string when path is empty", () => {
     expect(relativizePath("")).toEqual("");
   });
 
-  test.skipIf(isWindows).concurrent("uses the last instance of from", ({ expect }) => {
+  test.skipIf(isWindows).sequential("uses the last instance of from", () => {
     expect(
       relativizePath("/path/to/specification/another/specification/service/file.json"),
     ).toEqual("/specification/service/file.json");
