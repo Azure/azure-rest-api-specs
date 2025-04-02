@@ -205,7 +205,7 @@ describe("compile", function () {
     let host = new TsvTestHost();
 
     host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      return [null, "version\n" + swaggerPath + "\nsuccess", ""];
+      return [null, swaggerPath, ""];
     };
 
     host.globby = async () => [swaggerPath];
@@ -232,7 +232,7 @@ describe("compile", function () {
     let host = new TsvTestHost();
 
     host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      return [null, "version\n" + swaggerPath + "\nsuccess", ""];
+      return [null, swaggerPath, ""];
     };
 
     host.globby = async () => [swaggerPath];
