@@ -1167,7 +1167,7 @@ model DevBoxAddOn {
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   name: string;
 
   @doc("The type of the Dev Box addon.")
