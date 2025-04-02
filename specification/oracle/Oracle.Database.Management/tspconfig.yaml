@@ -29,6 +29,33 @@ options:
     package-details:
       name: "@azure/arm-oracledatabase"
     flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "arm-oracledatabase"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/oracledatabase"  
+    package-dir: "arm-oracledatabase"
+    module-name: sdk/resourcemanager/oracledatabase/armoracledatabase  
+    module: "github.com/Azure/azure-sdk-for-go"  
+    fix-const-stuttering: true
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    azure-arm: true
+    license-header: MICROSOFT_MIT_NO_VERSION
+    package-dir: "arm-oracledatabase"  
+    package-name: "azure-mgmt-oracledatabase"
+    namespace: azure.mgmt.oracledatabase  
+    generate-test: true
+    generate-sample: true
+    no-namespace-folders: true
+    output-folder: github.com/Azure/azure-sdk-for-python/sdk/oracledatabase/azure-mgmt-oracledatabase/azure/mgmt/oracledatabase
+  "@azure-tools/typespec-csharp":
+    package-dir: "arm-oracledatabase" 
+    namespace: "Azure.ResourceManager.OracleDatabase"  
+    clear-output-folder: true
+
 
 linter:
   extends:
