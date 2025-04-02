@@ -22,7 +22,10 @@ interface DevCenter {
   @summary("Gets a list of Dev Box creations that are pending approval.")
   @doc("Gets a list of Dev Box creations that are pending approval.")
   @added(APIVersions.v2025_04_01_preview)
-  listApprovals is StandardResourceOperations.ResourceList<Approval, ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>>;
+  listApprovals is StandardResourceOperations.ResourceList<
+    Approval, 
+    ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "no @key for ProjectAbility model"
   //There is no @key for ProjectAbility model

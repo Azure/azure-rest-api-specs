@@ -229,6 +229,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists all pending approvals in a project.": {
+            "$ref": "./examples/DevCenter_ListApprovals.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2777,7 +2782,9 @@
             "$ref": "./examples/DevBoxes_GetDevBoxAddon.json"
           }
         }
-      },
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{addOnName}": {
       "put": {
         "operationId": "DevBoxes_CreateOrReplaceDevBoxAddOn",
         "description": "Creates a Dev Box addon.",
@@ -8392,7 +8399,7 @@
       "x-ms-client-name": "delayUntil"
     },
     "DevBoxAddOnNameParameter": {
-      "name": "devBoxAddOnName",
+      "name": "addOnName",
       "in": "path",
       "description": "The name of the Dev Box addon.",
       "required": true,

@@ -48,7 +48,7 @@ model DevBoxAddOnNameParameter {
   @minLength(3)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   @path
-  devBoxAddOnName: string;
+  addOnName: string;
 }
 
 @doc("The Dev Box addon type query parameter.")

@@ -519,7 +519,7 @@ interface DevBoxes {
   @added(APIVersions.v2025_04_01_preview)
   @finalOperation(DevBoxes.getDevBoxAddon)
   @pollingOperation(OperationStatuses.get)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{devBoxAddOnName}")
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{addOnName}")
   @put
   createOrReplaceDevBoxAddOn is Azure.Core.Foundations.Operation<
     {
@@ -553,7 +553,7 @@ interface DevBoxes {
   @doc("Deletes a Dev Box addon.")
   @added(APIVersions.v2025_04_01_preview)
   @pollingOperation(OperationStatuses.get)
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{devBoxAddOnName}")
+  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/addons/{addOnName}")
   @delete
   deleteDevBoxAddOn is Azure.Core.Foundations.Operation<
     {
