@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-preview-2025-05-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-05-01-preview'
 input-file:
   - Microsoft.DocumentDB/preview/2025-05-01-preview/chaosFault.json
+  - Microsoft.DocumentDB/preview/2025-05-01-preview/copyJobs.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/dataTransferService.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/managedCassandra.json
