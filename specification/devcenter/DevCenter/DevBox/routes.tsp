@@ -31,10 +31,7 @@ interface DevBoxes {
   @added(APIVersions.v2025_04_01_preview)
   alignPool is DevCenterOps.LongRunningResourceAction<
     Pool,
-    {
-      @doc("Pool properties to align.")
-      targets: Array<PoolAlignTarget>;
-    },
+    PoolAlignTargets,
     OperationStatus
   >;
 

@@ -1119,19 +1119,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "targets": {
-                  "type": "array",
-                  "description": "Pool properties to align.",
-                  "items": {
-                    "$ref": "#/definitions/PoolAlignTarget"
-                  }
-                }
-              },
-              "required": [
-                "targets"
-              ]
+              "$ref": "#/definitions/PoolAlignTargets"
             }
           }
         ],
@@ -7574,7 +7562,7 @@
     },
     "PoolAlignTarget": {
       "type": "string",
-      "description": "Indicates which pool properties to align on.",
+      "description": "Possible values for the pool align target.",
       "enum": [
         "NetworkProperties"
       ],
@@ -7589,6 +7577,22 @@
           }
         ]
       }
+    },
+    "PoolAlignTargets": {
+      "type": "object",
+      "description": "Indicates which pool properties to align on.",
+      "properties": {
+        "targets": {
+          "type": "array",
+          "description": "The targets to align on.",
+          "items": {
+            "$ref": "#/definitions/PoolAlignTarget"
+          }
+        }
+      },
+      "required": [
+        "targets"
+      ]
     },
     "PoolHealthStatus": {
       "type": "string",

@@ -177,13 +177,20 @@ union PoolHealthStatus {
   string,
 }
 
-@doc("Indicates which pool properties to align on.")
+@doc("Possible values for the pool align target.")
 @added(APIVersions.v2025_04_01_preview)
 union PoolAlignTarget {
   @doc("Network properties.")
   NetworkProperties: "NetworkProperties",
 
   string,
+}
+
+@doc("Indicates which pool properties to align on.")
+@added(APIVersions.v2025_04_01_preview)
+model PoolAlignTargets {
+  @doc("The targets to align on.")
+  targets: Array<PoolAlignTarget>,
 }
 
 @doc("The type of the resource that this schedule belongs to.")
