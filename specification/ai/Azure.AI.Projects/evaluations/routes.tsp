@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -18,8 +17,6 @@ alias ServiceTraits = SupportsClientRequestId &
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @route("evaluations")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
 interface Evaluations {
   @doc("Get an evaluation run by name.")
   get is EvaluationsOperations.ResourceRead<Evaluation>;
@@ -41,5 +38,34 @@ interface Evaluations {
       evaluation: Evaluation;
     },
     Evaluation
+  >;
+}
+
+@route("evaluations/{evaluationId}/results")
+interface Results {
+  @doc("Get a result by name.")
+  get is EvaluationsOperations.ResourceRead<EvaluationResult>;
+
+  @doc("Create a result.")
+  @post
+  create is Azure.Core.Foundations.Operation<
+    {
+      @doc("Result to be created")
+      @body
+      result: EvaluationResult;
+    },
+    EvaluationResult
+  >;
+
+  @doc("Start pending upload of a result file.")
+  @route("startPendingUpload")
+  @post
+  upload is Azure.Core.Foundations.Operation<
+    {
+      @doc("Result to be uploaded.")
+      @body
+      result: EvaluationResult;
+    },
+    EvaluationResult
   >;
 }

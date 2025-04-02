@@ -82,3 +82,44 @@ model Evaluation {
   @visibility(Lifecycle.Read)
   outputs: Record<string>;
 }
+
+// Any other requirements?
+@doc("Evaluation Result resource Definition")
+@resource("results")
+@parentResource(Evaluation)
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model EvaluationResult {
+  @doc("Identifier of the evaluation result.")
+  @key("name")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("Type of Evaluation result")
+  ResultType?: ResultType;
+
+  @doc("Metrics")
+  Metrics?: Record<float64>;
+
+  @doc("Blob URI")
+  BlobUri?: string;
+}
+
+@doc("Type of Evaluation result")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+union ResultType {
+  string,
+
+  @doc("Benchmark result")
+  Benchmark: "Benchmark",
+
+  @doc("Evaluations Result")
+  Evaluation: "Evaluation",
+
+  @doc("Red Team Result")
+  Redteam: "Redteam",
+
+  @doc("Simulation Result")
+  Simulation: "Simulation",
+}
