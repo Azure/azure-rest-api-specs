@@ -1,7 +1,7 @@
 # Use ~ to sort the workflow to the bottom of the list
 name: ~Watch - LintDiff
 
-on: check_run
+on: [check_run, check_suite]
 
 jobs:
   check-lintdiff:
@@ -9,8 +9,7 @@ jobs:
       checks: read
     runs-on: ubuntu-latest
     steps:
-      # Output the JSON of the triggering event using github script
-      - name: Output check_run event
+      - name: Say hello
         uses: actions/github-script@v7
         with:
           script: |
