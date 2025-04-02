@@ -4,11 +4,12 @@ name: ~Watch - LintDiff
 on:
   check_run:
 
-permissions:
-  checks: read
+
 
 jobs:
   check-lintdiff:
+    permissions:
+      checks: read
     runs-on: ubuntu-latest
     steps:
       # Output the JSON of the triggering event using github script
