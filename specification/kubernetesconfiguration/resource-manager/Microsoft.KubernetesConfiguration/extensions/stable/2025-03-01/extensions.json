@@ -757,9 +757,19 @@
     "ManagedServiceIdentity": {
       "type": "object",
       "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the resource. Only user assigned identities are supported.",
+          "description": "The type of identity used for the resource. Only user assigned identities are supported for 'Bring your own Identity' model.",
           "enum": [
             "UserAssigned",
             "SystemAssigned"
