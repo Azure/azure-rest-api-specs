@@ -2,7 +2,7 @@ import { execa } from "execa";
 import { test, describe } from "vitest";
 
 // TODO: Actual tests
-describe("e2e", () => {
+describe("e2e", async () => {
   test.sequential("Executes", async ({ expect }) => {
     const output = await execa("npm", ["exec", "--no", "--", "lint-diff"], { reject: false });
 
