@@ -1081,6 +1081,23 @@ model ArtifactsContainerInfo {
   expireDateTime?: utcDateTime;
 }
 
+@doc("Request to clone an existing test into a new test.")
+@added(APIVersions.v2025_03_01_preview)
+model CloneTestRequest {
+  @doc("Unique identifier for the new test that will be created.")
+  @pattern("^[a-z0-9_-]*$")
+  newTestId: string;
+
+  @doc("Display Name override for the newly created test.")
+  @maxLength(50)
+  @minLength(2)
+  displayName?: string;
+
+  @doc("Description override for the newly created test.")
+  @maxLength(100)
+  description?: string;
+}
+
 @doc("Represents collection of metric namespaces.")
 model MetricNamespaceCollection {
   @doc("The values for the metric namespaces.")
@@ -1406,6 +1423,29 @@ union RequestDataLevel {
 
   @doc("Request data will be collected in case of failed requests")
   ERRORS: "ERRORS",
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("Operation Id Path Parameter.")
+model OperationIdPathParameter {
+  @doc("The unique ID of the operation.")
+  @key
+  @visibility(Lifecycle.Read)
+  operationId: string;
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("Status of a long running operation.")
+@resource("operations")
+model OperationStatus {
+
+  @doc("The state of the operation.")
+  status: Foundations.OperationState;
+
+  @doc("Error object that describes the error when status is \"Failed\".")
+  error?: Foundations.Error;
+
+  ...OperationIdPathParameter
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
