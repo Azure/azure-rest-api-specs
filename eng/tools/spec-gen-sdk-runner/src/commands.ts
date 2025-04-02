@@ -86,21 +86,24 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let shouldLabelBreakingChange = false;
   let breakingChangeLabel = "";
   let executionReport;
+  let changedSpecPathText = "";
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
       continue;
     }
     pushedSpecConfigCount = 0;
+    changedSpecPathText = "";
     if (changedSpec.typespecProject) {
       specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
+      changedSpecPathText = changedSpec.typespecProject;
       pushedSpecConfigCount++;
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
+      changedSpecPathText = changedSpecPathText + " " + changedSpec.readmeMd;
       pushedSpecConfigCount++;
     }
-    const changedSpecPathText = `${changedSpec.typespecProject} ${changedSpec.readmeMd}`;
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
 
