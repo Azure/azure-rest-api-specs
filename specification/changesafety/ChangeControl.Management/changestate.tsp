@@ -381,9 +381,6 @@ union ValidationOutcome {
   @doc("Represents a Failed outcome.")
   Failed: "Failed",
 
-  @doc("Represents a Pending outcome.")
-  Pending: "Pending",
-
   @doc("Represents a Deferred outcome.")
   Deferred: "Deferred",
 }
