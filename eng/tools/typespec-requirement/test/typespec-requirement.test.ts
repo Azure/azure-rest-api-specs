@@ -19,7 +19,7 @@ async function checkAllUnder(path: string, responseCache?: string) {
     reject: false,
   });
 
-  console.log(`result: JSON.stringify(result)`);
+  console.log(`result: ${JSON.stringify(result)}`);
 
   return result;
 }
