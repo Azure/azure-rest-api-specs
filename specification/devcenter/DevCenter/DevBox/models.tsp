@@ -1155,7 +1155,7 @@ model DevBoxSnapshot {
 @discriminator("type")
 @added(APIVersions.v2025_04_01_preview)
 model DevBoxAddOn {
-  @key("devBoxAddOnName")
+  @key("addOnName")
   @doc("Name of the dev box addon.")
   @minLength(3)
   @maxLength(63)
