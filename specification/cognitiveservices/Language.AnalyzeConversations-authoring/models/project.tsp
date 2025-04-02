@@ -310,6 +310,12 @@ model AnalyzeConversationAuthoringTrainingJobOptions {
    * Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20.
    */
   evaluationOptions?: AnalyzeConversationAuthoringEvaluationOptions;
+
+  /**
+   * For customers to populate if they wish to use data generation for their model training job.
+   */
+  @added(Versions.v2025_05_15_preview)
+  dataGenerationSettings?: AnalyzeConversationAuthoringDataGenerationSettings;
 }
 
 /**

@@ -2955,6 +2955,63 @@
         "language"
       ]
     },
+    "AnalyzeConversationAuthoringDataGenerationConnectionInfo": {
+      "type": "object",
+      "description": "Represents the connection info for the Azure resource to use during data generation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionKind",
+          "description": "Connection type for data generation settings. Currently only supports Azure OpenAI."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "Deployment name of model to be used for synthetic data generation."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID for the data generation resource. Looks something like\n\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}\"."
+        }
+      },
+      "required": [
+        "kind",
+        "deploymentName"
+      ]
+    },
+    "AnalyzeConversationAuthoringDataGenerationConnectionKind": {
+      "type": "string",
+      "description": "Represents the connection kind for Azure OpenAI deployment.",
+      "enum": [
+        "AzureOpenAI"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeConversationAuthoringDataGenerationConnectionKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureOpenAI",
+            "value": "AzureOpenAI"
+          }
+        ]
+      }
+    },
+    "AnalyzeConversationAuthoringDataGenerationSettings": {
+      "type": "object",
+      "description": "Settings to enable data generation for training augmentation.",
+      "properties": {
+        "enableDataGeneration": {
+          "type": "boolean",
+          "description": "Must be explicitly set to True to enable data generation to augment training data."
+        },
+        "dataGenerationConnectionInfo": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionInfo",
+          "description": "Must be filled out to enable data generation to augment training data."
+        }
+      },
+      "required": [
+        "enableDataGeneration",
+        "dataGenerationConnectionInfo"
+      ]
+    },
     "AnalyzeConversationAuthoringDeleteDeploymentOptions": {
       "type": "object",
       "description": "Represents the options for deleting a project deployment.",
@@ -4558,6 +4615,10 @@
         "evaluationOptions": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationOptions",
           "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20."
+        },
+        "dataGenerationSettings": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationSettings",
+          "description": "For customers to populate if they wish to use data generation for their model training job."
         }
       },
       "required": [
