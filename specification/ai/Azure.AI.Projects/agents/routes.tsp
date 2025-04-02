@@ -184,9 +184,7 @@ interface Agents {
   run is Azure.Core.Foundations.Operation<
     {
       ...AgentConfigurationOptions;
-    },
-    {
-      ...RunInputs;
+      ...RunInputs;      
     },
     Run
   >;
@@ -199,8 +197,6 @@ interface Agents {
   stream is Azure.Core.Foundations.Operation<
     {
       ...AgentConfigurationOptions;
-    },
-    {
       ...RunInputs;
     },
     Streams.Stream<StreamingUpdate>

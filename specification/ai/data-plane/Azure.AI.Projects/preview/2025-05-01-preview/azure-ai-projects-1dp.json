@@ -253,7 +253,73 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentConfigurationOptions"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
+                },
+                "agentModel": {
+                  "$ref": "#/definitions/AgentModel",
+                  "description": "The model definition for this agent."
+                },
+                "instructions": {
+                  "type": "array",
+                  "description": "Instructions provided to guide how this agent operates.",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperMessage"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "tools": {
+                  "type": "array",
+                  "description": "A list of tool definitions available to the agent.",
+                  "items": {
+                    "$ref": "#/definitions/AgentToolDefinition"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "toolChoice": {
+                  "$ref": "#/definitions/ToolChoiceBehavior",
+                  "description": "How the agent should choose among provided tools."
+                },
+                "agentId": {
+                  "type": "string",
+                  "description": "Unique identifier for the agent responsible for the run."
+                },
+                "input": {
+                  "type": "array",
+                  "description": "The list of input messages for the run.",
+                  "items": {
+                    "$ref": "#/definitions/ChatMessage"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "threadId": {
+                  "type": "string",
+                  "description": "Optional identifier for an existing conversation thread."
+                },
+                "metadata": {
+                  "type": "object",
+                  "description": "Optional metadata associated with the run request.",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "options": {
+                  "$ref": "#/definitions/RunOptions",
+                  "description": "Optional configuration for run generation."
+                },
+                "userId": {
+                  "type": "string",
+                  "description": "Identifier for the user making the request."
+                }
+              },
+              "required": [
+                "agentModel",
+                "agentId",
+                "input"
+              ]
             }
           }
         ],
@@ -261,7 +327,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RunInputs"
+              "$ref": "#/definitions/Run"
             }
           },
           "default": {
@@ -292,16 +358,79 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentConfigurationOptions"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
+                },
+                "agentModel": {
+                  "$ref": "#/definitions/AgentModel",
+                  "description": "The model definition for this agent."
+                },
+                "instructions": {
+                  "type": "array",
+                  "description": "Instructions provided to guide how this agent operates.",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperMessage"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "tools": {
+                  "type": "array",
+                  "description": "A list of tool definitions available to the agent.",
+                  "items": {
+                    "$ref": "#/definitions/AgentToolDefinition"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "toolChoice": {
+                  "$ref": "#/definitions/ToolChoiceBehavior",
+                  "description": "How the agent should choose among provided tools."
+                },
+                "agentId": {
+                  "type": "string",
+                  "description": "Unique identifier for the agent responsible for the run."
+                },
+                "input": {
+                  "type": "array",
+                  "description": "The list of input messages for the run.",
+                  "items": {
+                    "$ref": "#/definitions/ChatMessage"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "threadId": {
+                  "type": "string",
+                  "description": "Optional identifier for an existing conversation thread."
+                },
+                "metadata": {
+                  "type": "object",
+                  "description": "Optional metadata associated with the run request.",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "options": {
+                  "$ref": "#/definitions/RunOptions",
+                  "description": "Optional configuration for run generation."
+                },
+                "userId": {
+                  "type": "string",
+                  "description": "Identifier for the user making the request."
+                }
+              },
+              "required": [
+                "agentModel",
+                "agentId",
+                "input"
+              ]
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/RunInputs"
-            }
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
