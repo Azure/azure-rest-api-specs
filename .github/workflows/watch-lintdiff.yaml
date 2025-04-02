@@ -1,12 +1,16 @@
 # Use ~ to sort the workflow to the bottom of the list
 name: ~Watch - LintDiff
 
-on: [check_run, check_suite]
+on: 
+  check_run:
+    types: completed
+  check_suite:
+
+permissions:
+  checks: write
 
 jobs:
   check-lintdiff:
-    permissions:
-      checks: read
     runs-on: ubuntu-latest
     steps:
       - name: Say hello
