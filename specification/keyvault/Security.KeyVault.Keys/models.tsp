@@ -146,7 +146,7 @@ union JsonWebKeyEncryptionAlgorithm {
   string,
 
   /**
-   * RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1.
+   * [Not recommended] RSAES using Optimal Asymmetric Encryption Padding (OAEP), as described in https://tools.ietf.org/html/rfc3447, with the default parameters specified by RFC 3447 in Section A.2.1. Those default parameters are using a hash function of SHA-1 and a mask generation function of MGF1 with SHA-1. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_OAEP, which is included solely for backwards compatibility. RSA_OAEP utilizes SHA1, which has known collision problems.
    */
   RSA_OAEP: "RSA-OAEP",
 
@@ -155,7 +155,7 @@ union JsonWebKeyEncryptionAlgorithm {
    */
   RSA_OAEP256: "RSA-OAEP-256",
 
-  /** RSAES-PKCS1-V1_5 key encryption, as described in https://tools.ietf.org/html/rfc3447. */
+  /** [Not recommended] RSAES-PKCS1-V1_5 key encryption, as described in https://tools.ietf.org/html/rfc3447. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_1_5, which is included solely for backwards compatibility. Cryptographic standards no longer consider RSA with the PKCS#1 v1.5 padding scheme secure for encryption. */
   RSA1_5: "RSA1_5",
 
   /** 128-bit AES-GCM. */
@@ -195,11 +195,11 @@ union JsonWebKeyEncryptionAlgorithm {
   A256_CBCPAD: "A256CBCPAD",
 
   /** CKM AES key wrap. */
-  @added(KeyVault.Versions.`v7.6_preview.1`)
+  @added(KeyVault.Versions.`v7.6_preview.2`)
   CKM_AES_KEY_WRAP: "CKM_AES_KEY_WRAP",
 
   /** CKM AES key wrap with padding. */
-  @added(KeyVault.Versions.`v7.6_preview.1`)
+  @added(KeyVault.Versions.`v7.6_preview.2`)
   CKM_AES_KEY_WRAP_PAD: "CKM_AES_KEY_WRAP_PAD",
 }
 
@@ -238,6 +238,24 @@ union JsonWebKeySignatureAlgorithm {
    * RSASSA-PKCS1-v1_5 using SHA-512, as described in https://tools.ietf.org/html/rfc7518
    */
   RS512: "RS512",
+
+  /**
+   * HMAC using SHA-256, as described in  https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS256: "HS256",
+
+  /**
+   * HMAC using SHA-384, as described in https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS384: "HS384",
+
+  /**
+   * HMAC using SHA-512, as described in https://tools.ietf.org/html/rfc7518
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  HS512: "HS512",
 
   /**
    * Reserved
@@ -357,13 +375,13 @@ model KeyAttributes {
   /**
    * softDelete data retention days. Value should be >=7 and <=90 when softDelete enabled, otherwise 0.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoverableDays?: int32;
 
   /**
    * Reflects the deletion recovery level currently in effect for keys in the current vault. If it contains 'Purgeable' the key can be permanently deleted by a privileged user; otherwise, only the system can purge the key, at the end of the retention interval.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   recoveryLevel?: DeletionRecoveryLevel;
 
   /**
@@ -374,8 +392,43 @@ model KeyAttributes {
   /**
    * The underlying HSM Platform.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   hsmPlatform?: string;
+
+  /**
+   * The key or key version attestation information.
+   */
+  @added(KeyVault.Versions.`v7.6_preview.2`)
+  attestation?: KeyAttestation;
+}
+
+/**
+ * The key attestation information.
+ */
+@added(KeyVault.Versions.`v7.6_preview.2`)
+model KeyAttestation {
+  /**
+   * A base64url-encoded string containing certificates in PEM format, used for attestation validation.
+   */
+  @encode("base64url")
+  certificatePemFile?: bytes;
+
+  /**
+   * The attestation blob bytes encoded as base64url string corresponding to a private key.
+   */
+  @encode("base64url")
+  privateKeyAttestation?: bytes;
+
+  /**
+   * The attestation blob bytes encoded as base64url string corresponding to a public key in case of asymmetric key.
+   */
+  @encode("base64url")
+  publicKeyAttestation?: bytes;
+
+  /**
+   * The version of the attestation.
+   */
+  version?: string;
 }
 
 /**
@@ -404,14 +457,14 @@ model Attributes {
   /**
    * Creation time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   created?: utcDateTime;
 
   /**
    * Last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   updated?: utcDateTime;
 }
@@ -460,7 +513,7 @@ model KeyBundle {
   /**
    * True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managed?: boolean;
 
   /**
@@ -616,14 +669,14 @@ model DeletedKeyBundle {
   /**
    * The time when the key is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the key was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   deletedDate?: utcDateTime;
 }
@@ -665,14 +718,14 @@ model KeyListResult {
    * A response message containing a list of keys in the key vault along with a link to the next page of keys.
    */
   @items
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: KeyItem[];
 
   /**
    * The URL to get the next set of keys.
    */
   @nextLink
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -698,7 +751,7 @@ model KeyItem {
   /**
    * True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   managed?: boolean;
 }
 
@@ -709,7 +762,7 @@ model BackupKeyResult {
   /**
    * The backup blob containing the backed up key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("base64url")
   value?: bytes;
 }
@@ -768,13 +821,13 @@ model KeyOperationResult {
   /**
    * Key identifier
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   kid?: string;
 
   /**
    * The result of the operation.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "value")
   @encode("base64url")
   result?: bytes;
@@ -782,14 +835,14 @@ model KeyOperationResult {
   /**
    * Cryptographically random, non-repeating initialization vector for symmetric algorithms.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("base64url")
   iv?: bytes;
 
   /**
    * The tag to authenticate when performing decryption with an authenticated algorithm.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "tag")
   @encode("base64url")
   authenticationTag?: bytes;
@@ -797,7 +850,7 @@ model KeyOperationResult {
   /**
    * Additional data to authenticate but not encrypt/decrypt when using authenticated crypto algorithms.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encodedName("application/json", "aad")
   @encode("base64url")
   additionalAuthenticatedData?: bytes;
@@ -851,7 +904,7 @@ model KeyVerifyResult {
   /**
    * True if the signature is verified, otherwise false.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: boolean;
 }
 
@@ -884,7 +937,7 @@ model KeyReleaseResult {
   /**
    * A signed object containing the released key.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: string;
 }
 
@@ -897,14 +950,14 @@ model DeletedKeyListResult {
    * A response message containing a list of deleted keys in the key vault along with a link to the next page of deleted keys.
    */
   @items
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   value?: DeletedKeyItem[];
 
   /**
    * The URL to get the next set of deleted keys.
    */
   @nextLink
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
@@ -922,14 +975,14 @@ model DeletedKeyItem {
   /**
    * The time when the key is scheduled to be purged, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   scheduledPurgeDate?: utcDateTime;
 
   /**
    * The time when the key was deleted, in UTC
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   deletedDate?: utcDateTime;
 }
@@ -941,7 +994,7 @@ model KeyRotationPolicy {
   /**
    * The key policy id.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -1007,14 +1060,14 @@ model KeyRotationPolicyAttributes {
   /**
    * The key rotation policy created time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   created?: utcDateTime;
 
   /**
    * The key rotation policy's last updated time in UTC.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @encode("unixTimestamp", int32)
   updated?: utcDateTime;
 }
