@@ -52,6 +52,9 @@ union DevBoxProvisioningState {
   @doc("Dev Box is stopping.") Stopping: "Stopping",
   @doc("Dev Box is provisioning.") Provisioning: "Provisioning",
 
+  @added(APIVersions.v2025_04_01_preview)
+  @doc("Dev Box is pending approval.") PendingApproval: "PendingApproval",
+
   @doc("Dev Box was provisioned with warning.")
   ProvisionedWithWarning: "ProvisionedWithWarning",
 
@@ -170,6 +173,15 @@ union PoolHealthStatus {
 
   @doc("The pool health status is not healthy.")
   Unhealthy: "Unhealthy",
+
+  string,
+}
+
+@doc("Indicates which pool properties to align on.")
+@added(APIVersions.v2025_04_01_preview)
+union PoolAlignTarget {
+  @doc("Network properties.")
+  NetworkProperties: "NetworkProperties",
 
   string,
 }
@@ -1135,4 +1147,91 @@ model DevBoxSnapshot {
   @visibility(Lifecycle.Read)
   @added(APIVersions.v2024_10_01_preview)
   snapshotType: SnapshotType;
+}
+
+@doc("A Dev Box addon.")
+@resource("addons")
+@parentResource(DevBox)
+@discriminator("type")
+@added(APIVersions.v2025_04_01_preview)
+model DevBoxAddOn {
+  @key("devBoxAddOnName")
+  @doc("Name of the dev box addon.")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  name: string;
+
+  @doc("The type of the Dev Box addon.")
+  @visibility(Lifecycle.Read)
+  type: DevBoxAddOnType;
+
+  @doc("Whether the Dev Box addon is enabled or not.")
+  @visibility(Lifecycle.Read)
+  enabled: boolean;
+
+  @doc("""
+    The current action state of the Dev Box addon. This state is based on previous
+    action performed by user.
+    """)
+  @visibility(Lifecycle.Read)
+  actionState?: string;
+
+  @doc("Creation, deletion or action error details. Populated only for error states.")
+  @visibility(Lifecycle.Read)
+  error?: Azure.Core.Foundations.Error;
+}
+
+@doc("The types of Dev Box addon.")
+@added(APIVersions.v2025_04_01_preview)
+union DevBoxAddOnType {
+  @doc("The Dev Box Tunnel addon.")
+  DevBoxTunnel: "DevBoxTunnel",
+
+  @doc("The Dev Box HyperV addon.")
+  DevBoxHyperV: "DevBoxHyperV",
+
+  string,
+}
+
+@doc("The Dev Box Tunnel addon.")
+@added(APIVersions.v2025_04_01_preview)
+model DevBoxTunnel extends DevBoxAddOn {
+  @doc("The type of the Dev Box addon.")
+  type: DevBoxAddOnType.DevBoxTunnel;
+
+  @doc("The tunnel status.")
+  @visibility(Lifecycle.Read)
+  status: DevBoxTunnelStatus;
+
+  @doc("The code tunnel name.")
+  @visibility(Lifecycle.Read)
+  codeTunnelName: string;
+
+  @doc("The code tunnel's url.")
+  @visibility(Lifecycle.Read)
+  codeTunnelUrl: string;
+
+  @doc("""
+    The hosting resource name, either a DevBox or HyperV. 
+    Leaving it empty or `Default` if it's for DevBox.
+    """)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  hostingResourceName?: string;
+}
+
+@doc("The detailed status of Dev Box Tunnel addon.")
+@added(APIVersions.v2025_04_01_preview)
+union DevBoxTunnelStatus {
+  @doc("The tunnel is active and can be connected.")
+  Enabled: "Enabled",
+
+  @doc("The tunnel is inactive and can't be connected.")
+  Disabled: "Disabled",
+
+  @doc("The tunnel is suspended due to hibernation or other reasons.")
+  Suspended: "Suspended",
+
+  string,
 }
