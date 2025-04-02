@@ -52,6 +52,19 @@ model StorageAccount
 @armResourceOperations
 interface StorageAccounts {
   /**
+   * Checks that the storage account name is valid and is not already in use.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  // @operationId("StorageAccounts_CheckNameAvailability")
+  @autoRoute
+  checkNameAvailability is ArmProviderActionSync<
+    Request = StorageAccountCheckNameAvailabilityParameters,
+    Response = CheckNameAvailabilityResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
+
+  /**
    * Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
    */
   getProperties is ArmResourceRead<
@@ -294,4 +307,7 @@ interface StorageAccounts {
 );
 @@doc(StorageAccounts.restoreBlobRanges::parameters.body,
   "The parameters to provide for restore blob ranges."
+);
+@@doc(StorageAccounts.checkNameAvailability::parameters.body,
+  "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only."
 );

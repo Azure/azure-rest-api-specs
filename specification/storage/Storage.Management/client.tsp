@@ -142,9 +142,14 @@ using Azure.Core;
   "parameters"
 );
 
-@@clientName(StorageAccountsResourceGroup.checkNameAvailability::parameters.body,
+@@clientName(StorageAccounts.checkNameAvailability::parameters.body,
   "accountName"
 );
+
+@@clientName(StorageAccounts.checkNameAvailability,
+  "CheckStorageAccountNameAvailability"
+);
+
 @@clientName(CorsRules, "StorageCorsRules", "csharp");
 @@clientName(BlobContainers.objectLevelWorm,
   "EnableVersionLevelImmutability",
@@ -601,3 +606,7 @@ using Azure.Core;
 );
 
 @@doc(ListKeyExpand, "The StorageListKeyExpand.");
+@@alternateType(Usages.listByLocation::parameters.location,
+  azureLocation,
+  "csharp"
+);

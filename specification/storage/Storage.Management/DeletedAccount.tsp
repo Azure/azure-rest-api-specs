@@ -34,6 +34,20 @@ interface DeletedAccounts {
     DeletedAccount,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
+
+  /**
+   * Lists deleted accounts under the subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @autoRoute
+  @get
+  @action("deletedAccounts")
+  @tag("DeletedAccounts")
+  list is ArmProviderActionSync<
+    Response = DeletedAccountListResult,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
 }
 
 @@maxLength(DeletedAccount.name, 24);
