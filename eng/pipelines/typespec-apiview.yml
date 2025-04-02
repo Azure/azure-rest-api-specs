@@ -53,6 +53,6 @@ jobs:
         -RepoName $(Build.Repository.Name) `
         -PullRequestNumber $(System.PullRequest.PullRequestNumber)`
         -Language 'TypeSpec' `
-        -CommitSha $(Build.SourceVersion)
+        -CommitSha $(System.PullRequest.SourceCommitId)
     displayName: Create TypeSpec APIView
     condition: and(succeeded(), ne(variables['Agent.JobStatus'], 'SucceededWithIssues'))
