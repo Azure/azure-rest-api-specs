@@ -39,8 +39,8 @@ alias AgentCompletionProperties = {
   @doc("The name of the agent; used for display purposes and sent to the LLM to identify the agent.")
   name?: string;
 
-  @doc("The model definition for this agent.")
-  agentModel: AgentModel;
+  @doc("The model definition for this agent. This is optional (not needed) when doing a run using persistent agent.")
+  agentModel?: AgentModel;
 
   @doc("Instructions provided to guide how this agent operates.")
   instructions?: DeveloperMessage[];

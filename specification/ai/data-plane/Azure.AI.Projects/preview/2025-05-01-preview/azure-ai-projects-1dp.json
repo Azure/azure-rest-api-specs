@@ -261,7 +261,7 @@
                 },
                 "agentModel": {
                   "$ref": "#/definitions/AgentModel",
-                  "description": "The model definition for this agent."
+                  "description": "The model definition for this agent. This is optional (not needed) when doing a run using persistent agent."
                 },
                 "instructions": {
                   "type": "array",
@@ -285,7 +285,7 @@
                 },
                 "agentId": {
                   "type": "string",
-                  "description": "Unique identifier for the agent responsible for the run."
+                  "description": "Unique identifier for the agent responsible for the run. This is optional (not needeed) when doing a run using ephemeral agent."
                 },
                 "input": {
                   "type": "array",
@@ -316,8 +316,6 @@
                 }
               },
               "required": [
-                "agentModel",
-                "agentId",
                 "input"
               ]
             }
@@ -366,7 +364,7 @@
                 },
                 "agentModel": {
                   "$ref": "#/definitions/AgentModel",
-                  "description": "The model definition for this agent."
+                  "description": "The model definition for this agent. This is optional (not needed) when doing a run using persistent agent."
                 },
                 "instructions": {
                   "type": "array",
@@ -390,7 +388,7 @@
                 },
                 "agentId": {
                   "type": "string",
-                  "description": "Unique identifier for the agent responsible for the run."
+                  "description": "Unique identifier for the agent responsible for the run. This is optional (not needeed) when doing a run using ephemeral agent."
                 },
                 "input": {
                   "type": "array",
@@ -421,8 +419,6 @@
                 }
               },
               "required": [
-                "agentModel",
-                "agentId",
                 "input"
               ]
             }
@@ -2483,7 +2479,7 @@
         },
         "agentModel": {
           "$ref": "#/definitions/AgentModel",
-          "description": "The model definition for this agent."
+          "description": "The model definition for this agent. This is optional (not needed) when doing a run using persistent agent."
         },
         "instructions": {
           "type": "array",
@@ -2507,8 +2503,7 @@
         }
       },
       "required": [
-        "agentId",
-        "agentModel"
+        "agentId"
       ]
     },
     "AgentConfigurationOptions": {
@@ -2521,7 +2516,7 @@
         },
         "agentModel": {
           "$ref": "#/definitions/AgentModel",
-          "description": "The model definition for this agent."
+          "description": "The model definition for this agent. This is optional (not needed) when doing a run using persistent agent."
         },
         "instructions": {
           "type": "array",
@@ -2543,10 +2538,7 @@
           "$ref": "#/definitions/ToolChoiceBehavior",
           "description": "How the agent should choose among provided tools."
         }
-      },
-      "required": [
-        "agentModel"
-      ]
+      }
     },
     "AgentMessage": {
       "type": "object",
@@ -4837,7 +4829,7 @@
       "properties": {
         "agentId": {
           "type": "string",
-          "description": "Unique identifier for the agent responsible for the run."
+          "description": "Unique identifier for the agent responsible for the run. This is optional (not needeed) when doing a run using ephemeral agent."
         },
         "input": {
           "type": "array",
@@ -4868,7 +4860,6 @@
         }
       },
       "required": [
-        "agentId",
         "input"
       ]
     },

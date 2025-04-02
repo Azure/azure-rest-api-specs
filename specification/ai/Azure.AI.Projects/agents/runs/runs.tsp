@@ -30,8 +30,8 @@ model TruncationStrategy {
 
 @doc("Parameters for creating a new run request.")
 model RunInputs {
-  @doc("Unique identifier for the agent responsible for the run.")
-  agentId: string;
+  @doc("Unique identifier for the agent responsible for the run. This is optional (not needeed) when doing a run using ephemeral agent.")
+  agentId?: string;
 
   @doc("The list of input messages for the run.")
   input: ChatMessage[];
