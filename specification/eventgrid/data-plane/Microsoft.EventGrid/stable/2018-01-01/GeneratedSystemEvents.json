@@ -149,6 +149,104 @@
         }
       ]
     },
+    "AcsCallParticipantBaseEventData": {
+      "description": "Schema of common properties of participant events",
+      "type": "object",
+      "properties": {
+        "user": {
+          "description": "The communication identifier of the participant",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "displayName": {
+          "description": "The display name of the participant.",
+          "type": "string"
+        },
+        "participantId": {
+          "description": "The Id of the participant.",
+          "type": "string"
+        },
+        "userAgent": {
+          "description": "The user agent of the participant. ",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallingEventBaseProperties": {
+      "description": "Schema of common properties of all calling events",
+      "type": "object",
+      "properties": {
+        "startedBy": {
+          "description": "The communication identifier of the call started by",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "serverCallId": {
+          "description": "The callId of the server",
+          "type": "string"
+        },
+        "group": {
+          "description": "The group metadata",
+          "$ref": "#/definitions/AcsCallingEventGroupProperties"
+        },
+        "isTwoParty": {
+          "description": "The isTwoParty metadata",
+          "type": "boolean"
+        },
+        "correlationId": {
+          "description": "The correlation ID of the calling event",
+          "type": "string"
+        },
+        "isRoomsCall": {
+          "description": "The isRoomsCall metadata",
+          "type": "boolean"
+        }
+      }
+    },
+    "AcsCallingEventGroupProperties": {
+      "description": "Schema of calling event group properties",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Calling Group ID. Format is Guid as string.",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallingEventEndedByProperties": {
+      "description": "Schema of calling event endedby properties",
+      "type": "object",
+      "properties": {
+        "endedBy": {
+          "description": "The communication identifier of the call ended by",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "type": {
+          "description": "Participant or Internal or Carrier or any future types.",
+          "type": "string"
+        },
+        "name": {
+          "description": "MicrosoftInternal or the name of the carrier only 1 of the mri and the name field will be filled based on the type.",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallingEventReasonProperties": {
+      "description": "Schema of calling event reason properties",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Reason code for call ended event.",
+          "type": "integer"
+        },
+        "subCode": {
+          "description": "Null for 1:1 calls and ACS group calls with group Id.",
+          "type": "integer"
+        },
+        "phrase": {
+          "description": "Reason for the call ended event.",
+          "type": "string"
+        }
+      }
+    },
     "AcsChatMessageEventBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all chat message events",
@@ -228,6 +326,62 @@
           "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
         }
       ]
+    },
+    "AcsCallParticipantAddedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantBaseEventData"
+        }
+      ],
+      "type": "object"
+    },
+    "AcsCallParticipantRemovedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantBaseEventData"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "reason": {
+          "description": "The reason for the participant removed.",
+          "$ref": "#/definitions/AcsCallingEventReasonProperties"
+        }
+      }
+    },
+    "AcsCallStartedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventBaseProperties"
+        }
+      ],
+      "type": "object"
+    },
+    "AcsCallEndedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "endedBy": {
+          "description": "The communication identifier of the user who was disconnected",
+          "$ref": "#/definitions/AcsCallingEventEndedByProperties"
+        },
+        "reason": {
+          "description": "The reason for the call ended event.",
+          "$ref": "#/definitions/AcsCallingEventReasonProperties"
+        },
+        "callDurationInSeconds": {
+          "description": "Duration of the call in seconds.",
+          "type": "number"
+        }
+      }
     },
     "AcsChatMessageReceivedEventData": {
       "type": "object",
