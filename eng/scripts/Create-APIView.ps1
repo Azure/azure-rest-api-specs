@@ -550,7 +550,7 @@ function New-RestSpecsAPIViewReviews {
     $query.Add('pullRequestNumber', $PullRequestNumber)
     $query.Add('packageName', $_.BaseName)
     $query.Add('language', $Language)
-    $query.Add('commentOnPR', $true)
+    $query.Add('commentOnPR', $false)
 
     $uri = [System.UriBuilder]$APIViewUri
     $uri.Query = $query.ToString()
