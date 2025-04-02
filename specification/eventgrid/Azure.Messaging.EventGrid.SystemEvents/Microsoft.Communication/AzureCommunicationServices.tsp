@@ -230,10 +230,10 @@ model AcsChatParticipantRemovedFromThreadEventData
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
   /** Status of Delivery */
-  deliveryStatus?: string;
+  deliveryStatus: string;
 
   /** Details about Delivery Status */
-  deliveryStatusDetails?: string;
+  deliveryStatusDetails: string;
 
   /** List of details of delivery attempts made */
   deliveryAttempts: AcsSmsDeliveryAttemptProperties[];
@@ -250,7 +250,7 @@ model AcsSmsDeliveryReportReceivedEventData extends AcsSmsEventBaseProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsSmsReceivedEventData extends AcsSmsEventBaseProperties {
   /** The SMS content */
-  message?: string;
+  message: string;
 
   /** The time at which the SMS was received */
   @madeRequired(ServiceApiVersions.v2024_01_01)
@@ -1114,13 +1114,13 @@ model AcsChatThreadParticipantProperties {
 /** Schema of common properties of all SMS events */
 model AcsSmsEventBaseProperties {
   /** The identity of the SMS message */
-  messageId?: string;
+  messageId: string;
 
   /** The identity of SMS message sender */
-  from?: string;
+  from: string;
 
   /** The identity of SMS message receiver */
-  to?: string;
+  to: string;
 }
 
 /** Schema for details of a delivery attempt */
@@ -1130,10 +1130,12 @@ model AcsSmsDeliveryAttemptProperties {
   timestamp: utcDateTime;
 
   /** Number of segments that were successfully delivered */
-  segmentsSucceeded?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  segmentsSucceeded: int32;
 
   /** Number of segments whose delivery failed */
-  segmentsFailed?: int32;
+  @madeRequired(ServiceApiVersions.v2024_01_01)
+  segmentsFailed: int32;
 }
 
 /** Schema for all properties of Recording Storage Information. */
