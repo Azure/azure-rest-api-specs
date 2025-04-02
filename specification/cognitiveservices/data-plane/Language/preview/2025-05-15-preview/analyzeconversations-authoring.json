@@ -3144,12 +3144,13 @@
           "type": "string",
           "description": "Represents the trained model label."
         },
-        "assignedResourceIds": {
+        "assignedResources": {
           "type": "array",
-          "description": "Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
+          "description": "Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
-            "type": "string"
-          }
+            "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentResource"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -3380,11 +3381,16 @@
         "region": {
           "type": "string",
           "description": "Represents the resource region."
+        },
+        "assignedAoaiResource": {
+          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionInfo",
+          "description": "Represents the AOAI resource assigned for data generation."
         }
       },
       "required": [
         "resourceId",
-        "region"
+        "region",
+        "assignedAoaiResource"
       ]
     },
     "AnalyzeConversationAuthoringDeploymentResourcesJobState": {
