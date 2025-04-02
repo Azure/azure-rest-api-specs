@@ -1957,28 +1957,23 @@
       "type": "object",
       "description": "Artifact content model for Inline ArmOperations.",
       "properties": {
-        "resourceId": {
+        "uri": {
           "type": "string",
-          "description": "Target resource Id that needs to be changed.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "format": "uri",
+          "description": "The uri of the operation."
         },
-        "operation": {
+        "httpMethod": {
           "$ref": "#/definitions/ArmOperation",
-          "description": "ARM operation. eg: DELETE",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "The http method of the operation."
+        },
+        "content": {
+          "$ref": "#/definitions/ResourceContent",
+          "description": "The resource operation content."
         }
       },
       "required": [
-        "resourceId",
-        "operation"
+        "uri",
+        "httpMethod"
       ]
     },
     "ArtifactType": {
@@ -2712,29 +2707,6 @@
         "properties"
       ]
     },
-    "ResourceOperation": {
-      "type": "object",
-      "description": "Resource operation model.",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The uri of the operation."
-        },
-        "httpMethod": {
-          "$ref": "#/definitions/ArmOperation",
-          "description": "The http method of the operation."
-        },
-        "content": {
-          "$ref": "#/definitions/ResourceContent",
-          "description": "The resource operation content."
-        }
-      },
-      "required": [
-        "uri",
-        "httpMethod"
-      ]
-    },
     "RetrieveNextStagesResponse": {
       "type": "object",
       "description": "RetrieveNextStage POST Action response.",
@@ -3312,7 +3284,7 @@
       "description": "VerifyChangeValidity POST Action request.",
       "properties": {
         "operation": {
-          "$ref": "#/definitions/ResourceOperation",
+          "$ref": "#/definitions/ArmOperationResource",
           "description": "The resource operation."
         },
         "stageProgressionId": {

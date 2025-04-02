@@ -249,13 +249,27 @@ model ArmOperationArtifactContent {
 
 @doc("Artifact content model for Inline ArmOperations.")
 model ArmOperationResource {
+  @removed(Versions.v2025_03_01_preview)
   @doc("Target resource Id that needs to be changed.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId: string;
 
+  @removed(Versions.v2025_03_01_preview)
   @doc("ARM operation. eg: DELETE")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   operation: ArmOperation;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("The uri of the operation.")
+  uri: url;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("The http method of the operation.")
+  httpMethod: ArmOperation;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("The resource operation content.")
+  content?: ResourceContent;
 }
 
 @doc("Artifact content model for External ArmTemplates or Bicep files.")
@@ -276,23 +290,10 @@ model TemplateSpecArtifactContent {
 @doc("VerifyChangeValidity POST Action request.")
 model VerifyChangeValidityRequest {
   @doc("The resource operation.")
-  operation: ResourceOperation;
+  operation: ArmOperationResource;
 
   @doc("The stage progression Id.")
   stageProgressionId?: armResourceIdentifier;
-}
-
-@added(Versions.v2025_03_01_preview)
-@doc("Resource operation model.")
-model ResourceOperation {
-  @doc("The uri of the operation.")
-  uri: url;
-
-  @doc("The http method of the operation.")
-  httpMethod: ArmOperation;
-
-  @doc("The resource operation content.")
-  content?: ResourceContent;
 }
 
 @added(Versions.v2025_03_01_preview)
