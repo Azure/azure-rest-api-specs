@@ -246,6 +246,7 @@ describe("extractInputs", () => {
                 },
                 number: 1,
               },
+              // Second PR to triggering repo still causes an error (TODO: #33418)
               {
                 base: {
                   repo: { id: 1234 },
