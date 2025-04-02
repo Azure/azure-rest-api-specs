@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/sentinelplatformservices"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -7,17 +10,17 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/sentinelplatformservices.json"
   "@azure-tools/typespec-csharp":
+    flavor: azure
     package-dir: "Azure.ResourceManager.SentinelplatformServices"
     clear-output-folder: true
-    model-namespace: false
+    model-namespace: true
     namespace: "{package-dir}"
-    flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-sentinelplatformservices"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.sentinelplatformservices"
     generate-test: true
     generate-sample: true
-    flavor: azure
+    flavor: "azure"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-sentinelplatformservices"
     namespace: "com.azure.resourcemanager.sentinelplatformservices"
@@ -25,15 +28,23 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "arm-sentinelplatformservices"
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    packageDetails:
-      name: "@azure/{package-dir}"
-    flavor: azure
+    azure-sdk-for-js: true
+    is-modular-library: true
+    generate-metadata: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-sentinelplatformservices"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/sentinelplatformservices"
+    package-dir: "armsentinelplatformservices"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

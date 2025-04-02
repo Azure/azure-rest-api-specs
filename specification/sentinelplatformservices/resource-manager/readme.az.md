@@ -1,14 +1,28 @@
-## TypeScript
+## AZ
 
-These settings apply only when `--typescript` is specified on the command line.
-Please also specify `--typescript-sdks-folder=<path to root folder of your azure-sdk-for-js clone>`.
+These settings apply only when `--az` is specified on the command line.
 
-``` yaml $(typescript)
-typescript:
-  azure-arm: true
-  package-name: "@azure/arm-sentinelplatformservices"
-  output-folder: "$(typescript-sdks-folder)/sdk/sentinelplatformservices/arm-sentinelplatformservices"
-  payload-flattening-threshold: 1
-  clear-output-folder: true
-  generate-metadata: true
+For new Resource Provider. It is highly recommended to onboard Azure CLI extensions. There's no differences in terms of customer usage.
+
+``` yaml $(az) && $(target-mode) != 'core'
+az:
+    extensions: sentinelplatformservices
+    namespace: azure.mgmt.sentinelplatformservices
+    package-name: azure-mgmt-sentinelplatformservices
+az-output-folder: $(azure-cli-extension-folder)/src/sentinelplatformservices
+python-sdk-output-folder: "$(az-output-folder)/azext_sentinelplatformservices/vendored_sdks/sentinelplatformservices"
+# add additional configuration here specific for Azure CLI
+# refer to the faq.md for more details
+```
+
+
+
+This is for command modules that already in azure cli main repo.
+``` yaml $(az) && $(target-mode) == 'core'
+az:
+  extensions: sentinelplatformservices
+  namespace: azure.mgmt.sentinelplatformservices
+  package-name: azure-mgmt-sentinelplatformservices
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/sentinelplatformservices
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/sentinelplatformservices"
 ```
