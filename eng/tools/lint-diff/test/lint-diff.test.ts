@@ -1,9 +1,9 @@
 import { execa } from "execa";
-import { test, describe } from "vitest";
+import { test, describe, expect } from "vitest";
 
 // TODO: Actual tests
-describe("e2e", async () => {
-  test.sequential("Executes", async ({ expect }) => {
+describe("e2e", () => {
+  test("Executes", async () => {
     const output = await execa("npm", ["exec", "--no", "--", "lint-diff"], { reject: false });
 
     try {
