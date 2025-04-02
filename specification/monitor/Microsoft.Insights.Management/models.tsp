@@ -130,7 +130,7 @@ model MetricAlertResource extends Azure.ResourceManager.Foundations.Resource {
   name: string;
 
   @doc("The properties of the metric alert")
-  properties: MetricProperties | QueryProperties;
+  properties: MetricAlertProperties;
 }
 
 @doc("Model for patch operations")
