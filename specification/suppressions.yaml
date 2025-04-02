@@ -1,5 +1,62 @@
+# Managed centrally by the Azure SDK Team
+# Remove suppressions as specs are fixed
+
+- tool: TypeSpecValidation
+  rules: [Compile]
+  sub-rules: [ExtraSwagger]
+  reason: Extra swaggers left behind when versions were removed from *.tsp files
+  paths:
+    - awsconnector/resource-manager/Microsoft.AwsConnector/preview/2023-12-01-preview/*.json
+    - awsconnector/resource-manager/Microsoft.AwsConnector/preview/2024-08-01-preview/*.json
+    - azureintegrationspaces/resource-manager/Microsoft.IntegrationSpaces/preview/2023-11-14-preview/openapi.json
+    - azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCI/preview/2024-07-01-preview/hci.json
+    - azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCI/preview/2024-11-01-preview/hci.json
+    - azurestackhci/resource-manager/Microsoft.AzureStackHCI/operations/preview/2024-11-01-preview/operations.json
+    - azurestackhci/resource-manager/Microsoft.AzureStackHCI/operations/preview/2024-12-01-preview/operations.json
+    - baremetal/resource-manager/Microsoft.BareMetal/preview/2024-06-01-preview/BootstrapRP.json
+    - baremetal/resource-manager/Microsoft.BareMetal/preview/2024-12-01-preview/BootstrapRP.json
+    - computeschedule/resource-manager/Microsoft.ComputeSchedule/preview/2023-10-01-preview/computeschedule.json
+    - computeschedule/resource-manager/Microsoft.ComputeSchedule/preview/2023-12-01-preview/computeschedule.json
+    - contoso/resource-manager/Microsoft.Contoso/canonical/openapi.json
+    - dell/resource-manager/Dell.Storage/preview/2024-08-28-preview/Dell.Storage.json
+    - dell/resource-manager/Dell.Storage/preview/2025-02-11-preview/Dell.Storage.json
+    - edge/resource-manager/Microsoft.Edge/configurationmanager/preview/2024-06-01-preview/configurationmanager.json
+    - edge/resource-manager/Microsoft.Edge/configurationmanager/preview/2024-08-01-preview/configurationmanager.json
+    - edge/resource-manager/Microsoft.Edge/configurations/preview/2024-06-01-preview/configurations.json
+    - edge/resource-manager/Microsoft.Edge/sites/preview/2024-02-01-preview/sites.json
+    - edge/resource-manager/Microsoft.Edge/sites/preview/2024-12-01-preview/sites.json
+    - edge/resource-manager/Microsoft.Edge/sites/preview/2025-02-01-preview/sites.json
+    - edge/resource-manager/Microsoft.Edge/winfields/preview/2024-02-01-preview/winfields.json
+    - edgecopilot/resource-manager/Microsoft.EdgeManagement/preview/2025-02-01-preview/chat.json
+    - edgemarketplace/resource-manager/Microsoft.EdgeMarketplace/stable/2024-01-01/edgemarketplace.json
+    - footprintmonitoring/resource-manager/Microsoft.FootprintMonitoring/preview/2024-08-21-preview/footprintProfiles.json
+    - hybridaks/resource-manager/Microsoft.HybridContainerService/preview/2024-09-01-preview/openapi.json
+    - informatica/resource-manager/Informatica.DataManagement/preview/2023-08-20-preview/openapi.json
+    - liftrneon/resource-manager/Neon.Postgres/preview/2024-08-01-preview/neon.json
+    - liftrneon/resource-manager/Neon.Postgres/preview/2025-02-01-preview/neon.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-01-20-preview/messagingconnectors.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-03-10-preview/messagingconnectors.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-05-01-preview/messagingconnectors.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-08-01-preview/messagingconnectors.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-09-01-preview/messagingconnectors.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-10-01-preview/messagingconnectors.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-11-01-preview/messagingconnectors.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-12-01-preview/messagingconnectors.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-12-17-preview/messagingconnectors.json
+    - messagingconnectors/resource-manager/Microsoft.MessagingConnectors/preview/2024-12-24-preview/messagingconnectors.json
+    - mission/resource-manager/Microsoft.Mission/preview/2022-10-31-preview/openapi.json
+    - mission/resource-manager/Microsoft.Mission/preview/2022-08-02-preview/openapi.json
+    - mission/resource-manager/Microsoft.Mission/preview/2022-12-07-preview/openapi.json
+    - playwrighttesting/resource-manager/Microsoft.AzurePlaywrightService/preview/2023-10-01-preview/playwrighttesting.json
+    - playwrighttesting/resource-manager/Microsoft.AzurePlaywrightService/preview/2024-01-01-preview/playwrighttesting.json
+    - playwrighttesting/resource-manager/Microsoft.AzurePlaywrightService/preview/2024-08-01-preview/playwrighttesting.json
+    - scvmm/resource-manager/Microsoft.ScVmm/stable/2023-10-07/scvmm.json
+    - scvmm/resource-manager/Microsoft.ScVmm/stable/2024-06-01/scvmm.json
+    - solarwinds/resource-manager/SolarWinds.Observability/preview/2023-07-21-preview/openapi.json
+    - splitio/resource-manager/SplitIO.Experimentation/preview/2024-03-01-preview/splitio.json
+
 - tool: TypeSpecValidationAll
-  reason: Specs currently failing validation in RPSaaSMaster.  Remove specs from this list as they are fixed.
+  reason: Specs currently failing validation in RPSaaSMaster
   paths:
     # Added 2/22/2025
     - frontdoor/Frontdoor.Management
