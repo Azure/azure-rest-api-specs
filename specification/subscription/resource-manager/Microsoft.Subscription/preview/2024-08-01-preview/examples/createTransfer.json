@@ -1,11 +1,10 @@
 {
   "parameters": {
     "api-version": "2024-08-01-preview",
-    "transferId": "973034ff-acb7-409c-b731-e789672c7b31",
+    "subscriptionId": "377fa54c-0f61-422f-acfa-ace1595e1ad7",
     "body": {
-      "subscriptionId": "377fa54c-0f61-422f-acfa-ace1595e1ad7",
-      "destinationEmailId": "xyz@microsoft.com",
-      "transferServiceOwnership": false,
+      "recipientEmailAddress": "xyz@microsoft.com",
+      "transferServiceOwnership": "Enabled",
       "locale": "en-us"
     }
   },
@@ -36,10 +35,43 @@
               "productId": "377fa54c-0f61-422f-acfa-ace1595e1ad7",
               "name": "OpenAI Staging",
               "skuDescription": "MS-AZR-0003P",
-              "status": "Completed"
+              "status": "InProgress"
             }
           ],
-          "transferServiceOwnership": true
+          "transferServiceOwnership": "Enabled"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Subscription/transfers/973034ff-acb7-409c-b731-e789672c7b31",
+        "name": "973034ff-acb7-409c-b731-e789672c7b31",
+        "type": "Microsoft.Subscription/transfers",
+        "properties": {
+          "transferId": "286e5598-f246-4580-91ce-3563fd086d15",
+          "source": {
+            "lastUpdatedTime": "2024-10-03T23:18:02.1099222Z",
+            "tenantId": "5654c507-06d8-49db-9722-ba410a88e59b",
+            "upn": "abc@microsoft.com"
+          },
+          "destination": {
+            "lastUpdatedTime": "2024-10-03T23:18:02.1099222Z",
+            "tenantId": "5654c507-06d8-49db-9722-ba410a88e59b",
+            "upn": "xyz@microsoft.com"
+          },
+          "lastUpdatedTime": "2024-10-03T23:18:02.4693326Z",
+          "expirationTime": "2024-10-19T00:00:00Z",
+          "status": "Pending",
+          "products": [
+            {
+              "productType": "AzureSubscription",
+              "productId": "377fa54c-0f61-422f-acfa-ace1595e1ad7",
+              "name": "OpenAI Staging",
+              "skuDescription": "MS-AZR-0003P",
+              "status": "InProgress"
+            }
+          ],
+          "transferServiceOwnership": "Enabled"
         }
       }
     }
