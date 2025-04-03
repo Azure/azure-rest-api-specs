@@ -23,13 +23,13 @@ directive:
     reason: ISO should be upper case.
 ```
 
-### Release 2025-05-15
+### Release 2025-05-15-preview
 
-These settings apply only when `--tag=release_2025_05_15` is specified on the command line.
+These settings apply only when `--tag=release_2025_05_15_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2025-05-15'
+``` yaml $(tag) == 'release_2025-05-15-preview'
 input-file:
-  - stable/2025-05-15/analyzeconversations.json
+  - preview/2025-05-15/analyzeconversations.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:

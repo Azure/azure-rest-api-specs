@@ -21,7 +21,7 @@ union AnalyzeConversationTaskKind {
   Conversation: "Conversation",
 
   /** Conversation task kind */
-  @added(Versions.v2025_05_15)
+  @added(Versions.v2025_05_15_preview)
   ConversationalAI: "ConversationalAI",
 }
 
@@ -33,7 +33,7 @@ union AnalyzeConversationTaskResultsKind {
   ConversationResult: "ConversationResult",
 
   /** Conversation result task kind */
-  @added(Versions.v2025_05_15)
+  @added(Versions.v2025_05_15_preview)
   ConversationalAIResult: "ConversationalAIResult",
 }
 
@@ -246,7 +246,7 @@ union projectKind {
   Orchestration: "Orchestration",
 
   /** Conversation type */
-  @added(Versions.v2025_05_15)
+  @added(Versions.v2025_05_15_preview)
   ConversationalAI: "ConversationalAI",
 }
 
