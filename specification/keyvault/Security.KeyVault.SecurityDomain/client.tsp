@@ -12,16 +12,18 @@ using KeyVault;
 namespace ClientCustomizations;
 
 @@access(CertificateInfoObject, Access.public, "python");
+@@clientName(CertificateInfoObject, "CertificateInfo", "python");
 @@access(SecurityDomainObject, Access.public, "python");
+@@clientName(SecurityDomainObject, "SecurityDomain", "python");
 
 @client(
   {
-    name: "KeyVaultClient",
+    name: "SecurityDomainClient",
     service: KeyVault,
   },
   "python"
 )
-interface KeyVaultClient {
+interface SecurityDomainClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation necessary for Key Vault"
   getDownloadStatus is HsmSecurityDomain.downloadPending;
 
