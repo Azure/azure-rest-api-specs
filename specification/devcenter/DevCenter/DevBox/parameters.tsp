@@ -56,5 +56,5 @@ model DevBoxAddOnNameParameter {
 model DevBoxAddOnTypeParameter {
   @doc("The type of the Dev Box addon.")
   @query
-  type: DevBoxAddOnType;
+  kind: DevBoxAddOnType;
 }
