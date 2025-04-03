@@ -7,18 +7,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Versioning;
 using Azure.Core;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
-@doc("Basic info for EventHub")
-model EventHubConfig {
-  @doc("namespace of the EventHub.")
-  namespaceHostName: string;
-
-  @doc("name of the EventHub.")
-  eventHubName: string;
-
-  @doc("Auth of Eventhub")
-  authentication: Authentication;
+@doc("Properties of network")
+model SubnetProperties {
+  @doc("Vnet resource id")
+  subnetResourceId: string;
 }

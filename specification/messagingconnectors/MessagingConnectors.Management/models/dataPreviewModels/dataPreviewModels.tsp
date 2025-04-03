@@ -58,11 +58,34 @@ model DataPreviewProperties {
   cloudEventsConfig?: CloudEventsConfig;
 }
 
+@doc("Header item")
+model DataHeader {
+  @doc("Header key")
+  key: string;
+
+  @doc("Header value")
+  value: string;
+}
+
+@doc("Preview result")
+model JsonConvertedRecord {
+  @Azure.ResourceManager.identifiers(#[])
+  @doc("Header of DataPreview result")
+  headers: DataHeader[];
+
+  @doc("Key of DataPreview result")
+  key: string;
+
+  @doc("ValueSchema of DataPreview result")
+  valueSchema: string;
+
+  @doc("Value of DataPreview result")
+  value: string;
+}
+
 @doc("Properties of DataPreview results")
 model DataPreviewResults {
-  @doc("Count of DataPreview results")
-  count: int32;
-
-  @doc("Content of DataPreview results")
-  results: string[];
+  @Azure.ResourceManager.identifiers(#[])
+  @doc("Content of DataPreview results in Json format.")
+  results: JsonConvertedRecord[];
 }

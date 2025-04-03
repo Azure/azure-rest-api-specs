@@ -11,14 +11,11 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
-@doc("Basic info for EventHub")
-model EventHubConfig {
-  @doc("namespace of the EventHub.")
-  namespaceHostName: string;
+@doc("Properties for Static scaling.")
+model StaticScalingProperties extends ScalingProperties {
+  @doc("Type of the Scale type.")
+  scalingType: ScalingType.StaticScaling;
 
-  @doc("name of the EventHub.")
-  eventHubName: string;
-
-  @doc("Auth of Eventhub")
-  authentication: Authentication;
+  @doc("Parallelism count.")
+  parallelism: int32;
 }
