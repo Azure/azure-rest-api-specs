@@ -1160,7 +1160,7 @@ model DevBoxSnapshot {
 @doc("A Dev Box addon.")
 @resource("addons")
 @parentResource(DevBox)
-@discriminator("type")
+@discriminator("kind")
 @added(APIVersions.v2025_04_01_preview)
 model DevBoxAddOn {
   @key("addOnName")
@@ -1173,7 +1173,7 @@ model DevBoxAddOn {
 
   @doc("The type of the Dev Box addon.")
   @visibility(Lifecycle.Read)
-  type: DevBoxAddOnType;
+  kind: DevBoxAddOnType;
 
   @doc("Whether the Dev Box addon is enabled or not.")
   @visibility(Lifecycle.Read)
@@ -1207,7 +1207,7 @@ union DevBoxAddOnType {
 @added(APIVersions.v2025_04_01_preview)
 model DevBoxTunnel extends DevBoxAddOn {
   @doc("The type of the Dev Box addon.")
-  type: DevBoxAddOnType.DevBoxTunnel;
+  kind: DevBoxAddOnType.DevBoxTunnel;
 
   @doc("The tunnel status.")
   @visibility(Lifecycle.Read)

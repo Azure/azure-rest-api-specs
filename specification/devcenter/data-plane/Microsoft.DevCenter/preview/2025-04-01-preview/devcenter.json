@@ -5583,7 +5583,7 @@
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
           "readOnly": true
         },
-        "type": {
+        "kind": {
           "$ref": "#/definitions/DevBoxAddOnType",
           "description": "The type of the Dev Box addon.",
           "readOnly": true
@@ -5604,10 +5604,10 @@
           "readOnly": true
         }
       },
-      "discriminator": "type",
+      "discriminator": "kind",
       "required": [
         "name",
-        "type",
+        "kind",
         "enabled"
       ]
     },
