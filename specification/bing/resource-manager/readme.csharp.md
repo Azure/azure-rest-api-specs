@@ -7,7 +7,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Bing
-  output-folder: $(csharp-sdks-folder)/bing/management/Microsoft.Bing/src/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.Bing
+  payload-flattening-threshold: 1
+  output-folder: $(csharp-sdks-folder)/bing/Microsoft.Azure.Management.Bing/Generated
   clear-output-folder: true
 ```
