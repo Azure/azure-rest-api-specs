@@ -40,6 +40,6 @@ jobs:
             const { default: verifyRunStatus } = await import('${{ github.workspace }}/.github/workflows/src/verify-run-status.js');
             return await verifyRunStatus(
               { github, context, core }, 
-               checkRunName: "Swagger LintDiff", 
-               workflowRunName: "[TEST-IGNORE] Swagger LintDiff"
+               "Swagger LintDiff", 
+               "[TEST-IGNORE] Swagger LintDiff"
             );
