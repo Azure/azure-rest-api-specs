@@ -94,7 +94,7 @@ model AOAIModelConfig extends TargetModelConfig {
   @visibility(Lifecycle.Read)
   type: "AOAI";
 
-  @doc("Endpoint URL for AOAI model.")
+  @doc("Endpoint targetURI for AOAI model.")
   azureEndpoint: string;
 
   @doc("API Key for AOAI model.")
@@ -109,7 +109,7 @@ model MAASModelConfig extends TargetModelConfig {
   @visibility(Lifecycle.Read)
   type: "MAAS";
 
-  @doc("Endpoint URL for MAAS model.")
+  @doc("Endpoint targetURI for MAAS model.")
   azureEndpoint: string;
 
   @doc("API Key for MAAS model.")
