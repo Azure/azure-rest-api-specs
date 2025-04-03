@@ -519,7 +519,7 @@
           }
         },
         "compressionMode": {
-          "description": "Allow customers to select compress data for exports. This setting will enable destination file compression scheme at runtime. By default set to None.",
+          "description": "Allow customers to select compress data for exports. This setting will enable destination file compression scheme at runtime. By default set to None. Gzip is for csv and snappy for parquet.",
           "type": "string",
           "enum": [
             "gzip",
@@ -764,7 +764,7 @@
       }
     },
     "ExportTimePeriod": {
-      "description": "The date range for data in the export. This should only be specified with timeFrame set to 'Custom'. The maximum date range is 1 month.",
+      "description": "The date range for data in the export. This should only be specified with timeFrame set to 'Custom'. The maximum date range is 1 calendar month.",
       "type": "object",
       "properties": {
         "from": {
