@@ -28,6 +28,13 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
   v2024_10_03_preview: "2024-10-03-preview",
+
+  /** 2025-04-03-preview version (new) */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2025_04_03_preview: "2025-04-03-preview",
 }
 
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
@@ -70,4 +77,35 @@ interface Organizations {
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;
+}
+
+@doc("Liftr-Pilot tracked resource")
+@parentResource(OrganizationResource)
+model PilotProxyResource is ProxyResource<PilotProxyResourceProperties> {
+  @key("pilotProxyResourceName")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
+  @segment("pilotProxyResource")
+  @minLength(1)
+  @maxLength(50)
+  @doc("Name of the PilotProxyResource")
+  @path
+  name: string;
+}
+
+@doc("The properties of PilotProxyResource")
+model PilotProxyResourceProperties {
+  @doc("Description of the proxy resource")
+  description: string;
+
+  @doc("Provisioning state of the resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+}
+
+@armResourceOperations
+interface PilotProxyResources {
+  get is ArmResourceRead<PilotProxyResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<PilotProxyResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<PilotProxyResource>;
+  listByCloudAccount is ArmResourceListByParent<PilotProxyResource>;
 }
