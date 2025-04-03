@@ -124,21 +124,22 @@ namespace Storage.Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @post
   @route("?comp=batch")
+  @scope("!rust")
   op submitBatch(
     /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
     @header("Content-Type")
-    multipartContentType: "application/octet-stream",
+    multipartContentType: "multipart/mixed",
 
     ...ApiVersionHeader,
     ...TimeoutParameter,
     ...ClientRequestIdHeader,
     ...ContentLengthParameter,
-    ...BodyParameter,
-  ): (BodyParameter & {
+    ...MultipartBodyParameter,
+  ): (MultipartBodyParameter & {
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
-    contentType: "application/octet-stream";
+    contentType: "multipart/mixed";
 
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
@@ -365,15 +366,16 @@ namespace Storage.Blob {
     #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
     @post
     @route("{containerName}?restype=container&comp=batch")
+    @scope("!rust")
     op submitBatch(
       ...ContainerNamePathParameter,
 
       /** The batch request content */
-      ...BodyParameter,
+      ...MultipartBodyParameter,
 
       /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
       @header("Content-Type")
-      multipartContentType: "application/octet-stream",
+      multipartContentType: "multipart/mixed",
 
       ...ContentLengthParameter,
       ...TimeoutParameter,
@@ -384,10 +386,10 @@ namespace Storage.Blob {
 
       /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
       @header("Content-Type")
-      multipartContentType: "application/octet-stream";
+      multipartContentType: "multipart/mixed";
 
       ...RequestIdResponseHeader;
-    } & BodyParameter) | StorageError;
+    } & MultipartBodyParameter) | StorageError;
 
     /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"

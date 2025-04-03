@@ -2126,6 +2126,15 @@ alias BodyParameter = {
   body: bytes;
 };
 
+/** The multipart body parameter. */
+alias MultipartBodyParameter = {
+  /** The body of the request. */
+  @multipartBody body: {
+    name: HttpPart<string>;
+    body: HttpPart<bytes>;
+  }
+};
+
 alias IsHierarchicalNamespaceEnabled = {
   /** Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled. */
   @header("x-ms-is-hns-enabled")
