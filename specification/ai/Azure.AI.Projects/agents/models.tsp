@@ -35,10 +35,8 @@ model JSONAny {
   objectValue?: Record<JSONAny>;
 }
 
-alias AgentCompletionProperties = {
-  @doc("The name of the agent; used for display purposes and sent to the LLM to identify the agent.")
-  name?: string;
-
+@doc("Options used when completing a run.")
+model AgentCompletionProperties {
   @doc("The model definition for this agent. This is optional (not needed) when doing a run using persistent agent.")
   agentModel?: AgentModel;
 
@@ -50,6 +48,14 @@ alias AgentCompletionProperties = {
 
   @doc("How the agent should choose among provided tools.")
   toolChoice?: ToolChoiceBehavior;
+};
+
+@doc("Options used when creating or updating an agent.")
+model AgentConfigurationOptions {
+  @doc("The name of the agent; used for display purposes and sent to the LLM to identify the agent.")
+  name: string;
+
+  ...AgentCompletionProperties;
 };
 
 @Rest.resource("agents")
@@ -66,12 +72,7 @@ model Agent {
   @doc("Arbitrary metadata associated with this agent.")
   metadata?: Record<string>;
 
-  ...AgentCompletionProperties;
-}
-
-@doc("Options used when creating or updating an Agent.")
-model AgentConfigurationOptions {
-  ...AgentCompletionProperties;
+  ...AgentConfigurationOptions;
 }
 
 @discriminator("provider")
