@@ -1,4 +1,5 @@
-import { parseArgs, ParseArgsConfig } from "node:util";
+import { ParseArgsConfig, parseArgs } from "node:util";
+import { Suppression } from "suppressions";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
 import { FlavorAzureRule } from "./rules/flavor-azure.js";
@@ -6,8 +7,8 @@ import { FolderStructureRule } from "./rules/folder-structure.js";
 import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
+import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
-import { getSuppressions, Suppression } from "suppressions";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -32,8 +33,12 @@ export async function main() {
   }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
-  const suppressions: Suppression[] = await getSuppressions("TypeSpecValidation", absolutePath);
-  if (suppressions && suppressions[0]) {
+  const suppressions: Suppression[] = await host.getSuppressions(absolutePath);
+
+  // Suppressions for the whole tool must have no rules or sub-rules
+  const toolSuppressions = suppressions.filter((s) => !s.rules?.length && !s.subRules?.length);
+
+  if (toolSuppressions && toolSuppressions[0]) {
     // Use reason from first matching suppression and ignore rest
     console.log(`  Suppressed: ${suppressions[0].reason}`);
     return;
@@ -47,6 +52,7 @@ export async function main() {
     new LinterRulesetRule(),
     new CompileRule(),
     new FormatRule(),
+    new SdkTspConfigValidationRule(),
   ];
   let success = true;
   for (let i = 0; i < rules.length; i++) {

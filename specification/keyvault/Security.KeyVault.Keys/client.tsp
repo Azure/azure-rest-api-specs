@@ -63,6 +63,8 @@ using KeyVault;
 @@clientName(JsonWebKey.dq, "DQ", "go");
 @@clientName(JsonWebKey.qi, "QI", "go");
 
+@@clientName(KeyAttestation.certificatePemFile, "CertificatePEMFile", "go");
+
 // JS configuration
 @@clientName(JsonWebKeyCurveName.P256_K, "P256K", "javascript");
 @@clientName(JsonWebKeySignatureAlgorithm.RSNULL, "Rsnull", "javascript");
@@ -92,5 +94,29 @@ using KeyVault;
 );
 @@clientName(JsonWebKeyEncryptionAlgorithm.A256_CBCPAD,
   "A256Cbcpad",
+  "javascript"
+);
+@@clientName(JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP,
+  "CkmAesKeyWrap",
+  "javascript"
+);
+@@clientName(JsonWebKeyEncryptionAlgorithm.CKM_AES_KEY_WRAP_PAD,
+  "CkmAesKeyWrapPad",
+  "javascript"
+);
+@@clientName(JsonWebKeyType.EC_HSM, "ECHSM", "javascript");
+@@clientName(JsonWebKeyType.RSA_HSM, "RSAHSM", "javascript");
+@@clientName(JsonWebKeyType.oct_HSM, "OctHSM", "javascript");
+@@clientName(JsonWebKeyType.oct, "Oct", "javascript");
+@@clientName(KeyEncryptionAlgorithm.CKM_RSA_AES_KEY_WRAP,
+  "CkmRsaAesKeyWrap",
+  "javascript"
+);
+@@clientName(KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_256,
+  "RsaAesKeyWrap256",
+  "javascript"
+);
+@@clientName(KeyEncryptionAlgorithm.RSA_AES_KEY_WRAP_384,
+  "RsaAesKeyWrap384",
   "javascript"
 );
