@@ -1,28 +1,28 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "resourceGroupName": "rgcompute",
+    "vmScaleSetName": "aaaaaaaaaaaaaaaaaa",
     "instanceId": "aaaaaaaaaaaaaaaaaaaa",
     "parameters": {
       "location": "westus"
     },
-    "resourceGroupName": "rgcompute",
-    "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "aaaaaaaaaaaaaaaaaa"
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0",
-        "location": "westus"
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0"
       }
     },
     "202": {
-      "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0",
-        "location": "westus"
-      },
       "headers": {
         "location": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/0"
       }
     }
   },

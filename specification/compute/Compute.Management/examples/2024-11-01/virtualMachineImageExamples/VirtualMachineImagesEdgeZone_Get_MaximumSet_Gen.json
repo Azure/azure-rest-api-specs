@@ -1,33 +1,35 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
-    "edgeZone": "aaaaaaaa",
     "location": "aaaaaaaaaaaaaaaaaaaaaaaa",
-    "offer": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "edgeZone": "aaaaaaaa",
     "publisherName": "aaaaaaaaaaaaaaaaaaaaaaa",
+    "offer": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "skus": "aaaaaaaaaa",
-    "subscriptionId": "{subscription-id}",
-    "version": "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    "version": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "aaaaaaaaa",
-        "extendedLocation": {
-          "name": "aaaaaaaaaaaaaaaaaaaaa",
-          "type": "EdgeZone"
-        },
-        "id": "aaaaaaaaaaa",
-        "location": "aaaaa",
         "properties": {
-          "automaticOSUpgradeProperties": {
-            "automaticOSUpgradeSupported": true
+          "plan": {
+            "publisher": "aaaaaaaaaaaaaaaaaaa",
+            "name": "aaaaaaaaa",
+            "product": "aaaaaaaaaaaaaa"
+          },
+          "osDiskImage": {
+            "operatingSystem": "Windows"
           },
           "dataDiskImages": [
             {
               "lun": 17
             }
           ],
+          "automaticOSUpgradeProperties": {
+            "automaticOSUpgradeSupported": true
+          },
+          "hyperVGeneration": "V1",
           "disallowed": {
             "vmDiskType": "None"
           },
@@ -36,20 +38,18 @@
               "name": "aaaaaaaaaaaaaaaaaaaaa",
               "value": "aaaaaaaaaaaaaaaaaaaa"
             }
-          ],
-          "hyperVGeneration": "V1",
-          "osDiskImage": {
-            "operatingSystem": "Windows"
-          },
-          "plan": {
-            "name": "aaaaaaaaa",
-            "product": "aaaaaaaaaaaaaa",
-            "publisher": "aaaaaaaaaaaaaaaaaaa"
-          }
+          ]
         },
+        "name": "aaaaaaaaa",
+        "location": "aaaaa",
         "tags": {
           "key6817": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        }
+        },
+        "extendedLocation": {
+          "name": "aaaaaaaaaaaaaaaaaaaaa",
+          "type": "EdgeZone"
+        },
+        "id": "aaaaaaaaaaa"
       }
     }
   },

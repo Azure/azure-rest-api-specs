@@ -1,22 +1,22 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-11-01",
+    "sshPublicKeyName": "mySshPublicKeyName",
     "parameters": {
       "location": "westus",
       "properties": {
         "publicKey": "{ssh-rsa public key}"
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "sshPublicKeyName": "mySshPublicKeyName",
-    "subscriptionId": "{subscription-id}"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "mySshPublicKeyName",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/sshPublicKeys/mySshPublicKeyName",
         "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/sshPublicKeys/mySshPublicKeyName",
         "properties": {
           "publicKey": "{ssh-rsa public key}"
         }
@@ -25,8 +25,8 @@
     "201": {
       "body": {
         "name": "mySshPublicKeyName",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/sshPublicKeys/mySshPublicKeyName",
         "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/sshPublicKeys/mySshPublicKeyName",
         "properties": {
           "publicKey": "{ssh-rsa public key}"
         }

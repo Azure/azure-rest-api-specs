@@ -1,28 +1,13 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
     "resourceGroupName": "rgcompute",
-    "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "aaaaaaaaaaaaaaa"
+    "vmScaleSetName": "aaaaaaaaaaaaaaa",
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "orchestrationServices": [
-          {
-            "serviceName": "AutomaticRepairs",
-            "serviceState": "NotRunning"
-          }
-        ],
-        "statuses": [
-          {
-            "code": "ProvisioningState/succeeded",
-            "displayStatus": "Provisioning succeeded",
-            "level": "Info",
-            "message": "aaaaaaaaaaaaaaaaaaaaaaa",
-            "time": "2021-11-30T12:58:26.526Z"
-          }
-        ],
         "virtualMachine": {
           "statusesSummary": [
             {
@@ -40,6 +25,21 @@
                 "count": 21
               }
             ]
+          }
+        ],
+        "statuses": [
+          {
+            "code": "ProvisioningState/succeeded",
+            "level": "Info",
+            "displayStatus": "Provisioning succeeded",
+            "message": "aaaaaaaaaaaaaaaaaaaaaaa",
+            "time": "2021-11-30T12:58:26.526Z"
+          }
+        ],
+        "orchestrationServices": [
+          {
+            "serviceName": "AutomaticRepairs",
+            "serviceState": "NotRunning"
           }
         ]
       }

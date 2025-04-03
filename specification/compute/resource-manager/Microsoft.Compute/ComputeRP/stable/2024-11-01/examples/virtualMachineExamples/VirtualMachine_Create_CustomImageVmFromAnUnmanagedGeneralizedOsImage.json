@@ -1,11 +1,33 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "{vm-name}",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "westus",
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_D1_v2"
+        },
+        "storageProfile": {
+          "osDisk": {
+            "name": "myVMosdisk",
+            "image": {
+              "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/{existing-generalized-os-image-blob-name}.vhd"
+            },
+            "osType": "Windows",
+            "createOption": "FromImage",
+            "caching": "ReadWrite",
+            "vhd": {
+              "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk.vhd"
+            }
+          }
+        },
+        "osProfile": {
+          "adminUsername": "{your-username}",
+          "computerName": "myVM",
+          "adminPassword": "{your-password}"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -16,42 +38,24 @@
               }
             }
           ]
-        },
-        "osProfile": {
-          "adminPassword": "{your-password}",
-          "adminUsername": "{your-username}",
-          "computerName": "myVM"
-        },
-        "storageProfile": {
-          "osDisk": {
-            "name": "myVMosdisk",
-            "caching": "ReadWrite",
-            "createOption": "FromImage",
-            "image": {
-              "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/{existing-generalized-os-image-blob-name}.vhd"
-            },
-            "osType": "Windows",
-            "vhd": {
-              "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk.vhd"
-            }
-          }
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "{vm-name}"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D1_v2"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -63,44 +67,44 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "osDisk": {
               "name": "myVMosdisk",
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
               "image": {
                 "uri": "https://{existing-storage-account-name}.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/{existing-generalized-os-image-blob-name}.vhd"
               },
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
               "osType": "Windows",
               "vhd": {
                 "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk.vhd"
               }
-            }
+            },
+            "dataDisks": []
           },
-          "vmId": "926cd555-a07c-4ff5-b214-4aa4dd09d79b"
-        }
+          "vmId": "926cd555-a07c-4ff5-b214-4aa4dd09d79b",
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          },
+          "provisioningState": "Creating"
+        },
+        "name": "myVM",
+        "location": "westus"
       }
     },
     "201": {
       "body": {
-        "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D1_v2"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -112,33 +116,29 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "osDisk": {
               "name": "myVMosdisk",
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
               "image": {
                 "uri": "https://{existing-storage-account-name}.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/{existing-generalized-os-image-blob-name}.vhd"
               },
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
               "osType": "Windows",
               "vhd": {
                 "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk.vhd"
               }
-            }
+            },
+            "dataDisks": []
           },
-          "vmId": "926cd555-a07c-4ff5-b214-4aa4dd09d79b"
-        }
+          "vmId": "926cd555-a07c-4ff5-b214-4aa4dd09d79b",
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          },
+          "provisioningState": "Creating"
+        },
+        "name": "myVM",
+        "location": "westus"
       }
     }
   },

@@ -1,17 +1,46 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
     "api-version": "2024-11-01",
     "parameters": {
+      "location": "westus",
       "identity": {
         "type": "UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
         }
       },
-      "location": "westus",
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_D2s_v3"
+        },
+        "securityProfile": {
+          "encryptionIdentity": {
+            "userAssignedIdentityResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
+          }
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "2019-Datacenter",
+            "version": "latest"
+          },
+          "osDisk": {
+            "caching": "ReadOnly",
+            "managedDisk": {
+              "storageAccountType": "StandardSSD_LRS"
+            },
+            "createOption": "FromImage",
+            "name": "myVMosdisk"
+          }
+        },
+        "osProfile": {
+          "adminUsername": "{your-username}",
+          "computerName": "myVM",
+          "adminPassword": "{your-password}"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -22,55 +51,29 @@
               }
             }
           ]
-        },
-        "osProfile": {
-          "adminPassword": "{your-password}",
-          "adminUsername": "{your-username}",
-          "computerName": "myVM"
-        },
-        "securityProfile": {
-          "encryptionIdentity": {
-            "userAssignedIdentityResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
-          }
-        },
-        "storageProfile": {
-          "imageReference": {
-            "offer": "WindowsServer",
-            "publisher": "MicrosoftWindowsServer",
-            "sku": "2019-Datacenter",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "myVMosdisk",
-            "caching": "ReadOnly",
-            "createOption": "FromImage",
-            "managedDisk": {
-              "storageAccountType": "StandardSSD_LRS"
-            }
-          }
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "myVM"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
             "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
           }
         },
-        "location": "westus",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D2s_v3"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -82,58 +85,58 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2019-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "osType": "Windows",
+              "caching": "ReadOnly",
+              "managedDisk": {
+                "storageAccountType": "StandardSSD_LRS"
+              },
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
           },
-          "provisioningState": "Creating",
           "securityProfile": {
             "encryptionIdentity": {
               "userAssignedIdentityResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
             }
           },
-          "storageProfile": {
-            "dataDisks": [],
-            "imageReference": {
-              "offer": "WindowsServer",
-              "publisher": "MicrosoftWindowsServer",
-              "sku": "2019-Datacenter",
-              "version": "latest"
-            },
-            "osDisk": {
-              "name": "myVMosdisk",
-              "caching": "ReadOnly",
-              "createOption": "FromImage",
-              "managedDisk": {
-                "storageAccountType": "StandardSSD_LRS"
-              },
-              "osType": "Windows"
-            }
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v3"
           },
-          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85"
-        }
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus"
       }
     },
     "201": {
       "body": {
         "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
             "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
           }
         },
-        "location": "westus",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D2s_v3"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -145,41 +148,38 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "2019-Datacenter",
+              "version": "latest"
+            },
+            "osDisk": {
+              "osType": "Windows",
+              "caching": "ReadOnly",
+              "managedDisk": {
+                "storageAccountType": "StandardSSD_LRS"
+              },
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
           },
-          "provisioningState": "Creating",
           "securityProfile": {
             "encryptionIdentity": {
               "userAssignedIdentityResourceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
             }
           },
-          "storageProfile": {
-            "dataDisks": [],
-            "imageReference": {
-              "offer": "WindowsServer",
-              "publisher": "MicrosoftWindowsServer",
-              "sku": "2019-Datacenter",
-              "version": "latest"
-            },
-            "osDisk": {
-              "name": "myVMosdisk",
-              "caching": "ReadOnly",
-              "createOption": "FromImage",
-              "managedDisk": {
-                "storageAccountType": "StandardSSD_LRS"
-              },
-              "osType": "Windows"
-            }
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v3"
           },
-          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85"
-        }
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus"
       }
     }
   },

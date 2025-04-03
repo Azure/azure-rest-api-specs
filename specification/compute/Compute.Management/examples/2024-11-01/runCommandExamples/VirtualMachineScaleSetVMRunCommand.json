@@ -1,16 +1,16 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVirtualMachineScaleSet",
     "instanceId": "0",
+    "api-version": "2024-11-01",
     "parameters": {
       "commandId": "RunPowerShellScript",
       "script": [
         "Write-Host Hello World!"
       ]
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "myVirtualMachineScaleSet"
+    }
   },
   "responses": {
     "200": {
@@ -18,14 +18,14 @@
         "value": [
           {
             "code": "ComponentStatus/StdOut/succeeded",
-            "displayStatus": "Provisioning succeeded",
             "level": "Info",
+            "displayStatus": "Provisioning succeeded",
             "message": "Hello World!"
           },
           {
             "code": "ComponentStatus/StdErr/succeeded",
-            "displayStatus": "Provisioning succeeded",
             "level": "Info",
+            "displayStatus": "Provisioning succeeded",
             "message": ""
           }
         ]

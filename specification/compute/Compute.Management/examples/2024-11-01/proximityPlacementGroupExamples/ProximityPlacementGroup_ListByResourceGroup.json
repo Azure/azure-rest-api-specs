@@ -1,49 +1,49 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
-    "parameters": {},
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    "api-version": "2024-11-01",
+    "parameters": {}
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "string",
         "value": [
           {
             "name": "myProximityPlacementGroup",
-            "type": "Microsoft.Compute/proximityPlacementGroups",
-            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup",
-            "location": "westus",
             "properties": {
-              "availabilitySets": [
-                {
-                  "id": "string"
-                }
-              ],
+              "proximityPlacementGroupType": "Standard",
               "intent": {
                 "vmSizes": [
                   "Basic_A0",
                   "Basic_A2"
                 ]
               },
-              "proximityPlacementGroupType": "Standard",
+              "virtualMachines": [
+                {
+                  "id": "string"
+                }
+              ],
               "virtualMachineScaleSets": [
                 {
                   "id": "string"
                 }
               ],
-              "virtualMachines": [
+              "availabilitySets": [
                 {
                   "id": "string"
                 }
               ]
             },
+            "location": "westus",
             "zones": [
               "1"
-            ]
+            ],
+            "type": "Microsoft.Compute/proximityPlacementGroups",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myProximityPlacementGroup"
           }
-        ]
+        ],
+        "nextLink": "foo://example.com/test"
       }
     }
   },

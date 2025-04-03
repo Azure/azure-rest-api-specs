@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
-    "instanceId": "0",
-    "resourceGroupName": "myResourceGroup",
     "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "myvmScaleSet"
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myvmScaleSet",
+    "instanceId": "0",
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
@@ -12,13 +12,13 @@
         "value": [
           {
             "name": "myRunCommand",
+            "location": "westus",
             "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
-            "location": "westus",
             "properties": {
-              "asyncExecution": false,
-              "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
-              "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+              "source": {
+                "script": "Write-Host Hello World! ; Remove-Item C:\test\testFile.txt"
+              },
               "parameters": [
                 {
                   "name": "param1",
@@ -29,13 +29,13 @@
                   "value": "value2"
                 }
               ],
-              "provisioningState": "Succeeded",
+              "asyncExecution": false,
+              "treatFailureAsDeploymentFailure": false,
               "runAsUser": "user1",
-              "source": {
-                "script": "Write-Host Hello World! ; Remove-Item C:\test\testFile.txt"
-              },
               "timeoutInSeconds": 0,
-              "treatFailureAsDeploymentFailure": false
+              "provisioningState": "Succeeded",
+              "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+              "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
             }
           }
         ]

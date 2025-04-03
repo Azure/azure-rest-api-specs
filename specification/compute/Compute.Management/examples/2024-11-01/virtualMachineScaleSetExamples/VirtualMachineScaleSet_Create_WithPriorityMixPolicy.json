@@ -1,7 +1,15 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
     "api-version": "2024-11-01",
     "parameters": {
+      "sku": {
+        "tier": "Standard",
+        "capacity": 2,
+        "name": "Standard_A8m_v2"
+      },
       "location": "westus",
       "properties": {
         "orchestrationMode": "Flexible",
@@ -11,77 +19,71 @@
           "regularPriorityPercentageAboveBase": 50
         },
         "virtualMachineProfile": {
+          "priority": "Spot",
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "Canonical",
+              "offer": "0001-com-ubuntu-server-focal",
+              "sku": "20_04-lts-gen2",
+              "version": "latest"
+            },
+            "osDisk": {
+              "createOption": "FromImage",
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            }
+          },
+          "osProfile": {
+            "computerNamePrefix": "{vmss-name}",
+            "adminUsername": "{your-username}"
+          },
           "networkProfile": {
-            "networkApiVersion": "2020-11-01",
             "networkInterfaceConfigurations": [
               {
                 "name": "{vmss-name}",
                 "properties": {
-                  "enableAcceleratedNetworking": false,
+                  "primary": true,
                   "enableIPForwarding": true,
+                  "enableAcceleratedNetworking": false,
                   "ipConfigurations": [
                     {
                       "name": "{vmss-name}",
                       "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        },
+                        "primary": true,
                         "applicationGatewayBackendAddressPools": [],
                         "loadBalancerBackendAddressPools": [],
-                        "primary": true,
                         "publicIPAddressConfiguration": {
                           "name": "{vmss-name}",
                           "properties": {
                             "idleTimeoutInMinutes": 15
                           }
-                        },
-                        "subnet": {
-                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
                         }
                       }
                     }
-                  ],
-                  "primary": true
+                  ]
                 }
               }
-            ]
-          },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerNamePrefix": "{vmss-name}"
-          },
-          "priority": "Spot",
-          "storageProfile": {
-            "imageReference": {
-              "offer": "0001-com-ubuntu-server-focal",
-              "publisher": "Canonical",
-              "sku": "20_04-lts-gen2",
-              "version": "latest"
-            },
-            "osDisk": {
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
-              "managedDisk": {
-                "storageAccountType": "Standard_LRS"
-              }
-            }
+            ],
+            "networkApiVersion": "2020-11-01"
           }
         }
-      },
-      "sku": {
-        "name": "Standard_A8m_v2",
-        "capacity": 2,
-        "tier": "Standard"
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "{vmss-name}"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 2,
+          "name": "Standard_A8m_v2"
+        },
         "name": "{vmss-name}",
-        "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
-        "location": "westus",
         "properties": {
           "orchestrationMode": "Flexible",
           "platformFaultDomainCount": 1,
@@ -90,73 +92,73 @@
             "regularPriorityPercentageAboveBase": 50
           },
           "virtualMachineProfile": {
+            "priority": "Spot",
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-focal",
+                "sku": "20_04-lts-gen2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}"
+            },
             "networkProfile": {
-              "networkApiVersion": "2020-11-01",
               "networkInterfaceConfigurations": [
                 {
                   "name": "{vmss-name}",
                   "properties": {
-                    "enableAcceleratedNetworking": false,
+                    "primary": true,
                     "enableIPForwarding": true,
+                    "enableAcceleratedNetworking": false,
                     "ipConfigurations": [
                       {
                         "name": "{vmss-name}",
                         "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          },
+                          "primary": true,
                           "applicationGatewayBackendAddressPools": [],
                           "loadBalancerBackendAddressPools": [],
-                          "primary": true,
                           "publicIPAddressConfiguration": {
                             "name": "{vmss-name}",
                             "properties": {
                               "idleTimeoutInMinutes": 15
                             }
-                          },
-                          "subnet": {
-                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
                           }
                         }
                       }
-                    ],
-                    "primary": true
+                    ]
                   }
                 }
-              ]
-            },
-            "osProfile": {
-              "adminUsername": "{your-username}",
-              "computerNamePrefix": "{vmss-name}"
-            },
-            "priority": "Spot",
-            "storageProfile": {
-              "imageReference": {
-                "offer": "0001-com-ubuntu-server-focal",
-                "publisher": "Canonical",
-                "sku": "20_04-lts-gen2",
-                "version": "latest"
-              },
-              "osDisk": {
-                "caching": "ReadWrite",
-                "createOption": "FromImage",
-                "managedDisk": {
-                  "storageAccountType": "Standard_LRS"
-                }
-              }
+              ],
+              "networkApiVersion": "2020-11-01"
             }
           }
         },
-        "sku": {
-          "name": "Standard_A8m_v2",
-          "capacity": 2,
-          "tier": "Standard"
-        }
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     },
     "201": {
       "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 2,
+          "name": "Standard_A8m_v2"
+        },
         "name": "{vmss-name}",
-        "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
-        "location": "westus",
         "properties": {
           "orchestrationMode": "Flexible",
           "platformFaultDomainCount": 1,
@@ -165,65 +167,63 @@
             "regularPriorityPercentageAboveBase": 50
           },
           "virtualMachineProfile": {
+            "priority": "Spot",
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-focal",
+                "sku": "20_04-lts-gen2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}"
+            },
             "networkProfile": {
-              "networkApiVersion": "2020-11-01",
               "networkInterfaceConfigurations": [
                 {
                   "name": "{vmss-name}",
                   "properties": {
-                    "enableAcceleratedNetworking": false,
+                    "primary": true,
                     "enableIPForwarding": true,
+                    "enableAcceleratedNetworking": false,
                     "ipConfigurations": [
                       {
                         "name": "{vmss-name}",
                         "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          },
+                          "primary": true,
                           "applicationGatewayBackendAddressPools": [],
                           "loadBalancerBackendAddressPools": [],
-                          "primary": true,
                           "publicIPAddressConfiguration": {
                             "name": "{vmss-name}",
                             "properties": {
                               "idleTimeoutInMinutes": 15
                             }
-                          },
-                          "subnet": {
-                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
                           }
                         }
                       }
-                    ],
-                    "primary": true
+                    ]
                   }
                 }
-              ]
-            },
-            "osProfile": {
-              "adminUsername": "{your-username}",
-              "computerNamePrefix": "{vmss-name}"
-            },
-            "priority": "Spot",
-            "storageProfile": {
-              "imageReference": {
-                "offer": "0001-com-ubuntu-server-focal",
-                "publisher": "Canonical",
-                "sku": "20_04-lts-gen2",
-                "version": "latest"
-              },
-              "osDisk": {
-                "caching": "ReadWrite",
-                "createOption": "FromImage",
-                "managedDisk": {
-                  "storageAccountType": "Standard_LRS"
-                }
-              }
+              ],
+              "networkApiVersion": "2020-11-01"
             }
           }
         },
-        "sku": {
-          "name": "Standard_A8m_v2",
-          "capacity": 2,
-          "tier": "Standard"
-        }
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     }
   },

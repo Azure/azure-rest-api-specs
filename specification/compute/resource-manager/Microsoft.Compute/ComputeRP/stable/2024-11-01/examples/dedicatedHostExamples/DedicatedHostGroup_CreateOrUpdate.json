@@ -1,37 +1,37 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-11-01",
     "hostGroupName": "myDedicatedHostGroup",
     "parameters": {
       "location": "westus",
-      "properties": {
-        "platformFaultDomainCount": 3,
-        "supportAutomaticPlacement": true
-      },
       "tags": {
         "department": "finance"
       },
       "zones": [
         "1"
-      ]
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+      ],
+      "properties": {
+        "platformFaultDomainCount": 3,
+        "supportAutomaticPlacement": true
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myDedicatedHostGroup",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
-        "location": "westus",
         "properties": {
           "platformFaultDomainCount": 3,
           "supportAutomaticPlacement": true
         },
+        "location": "westus",
         "tags": {
           "department": "finance",
           "owner": "myCompany"
         },
+        "name": "myDedicatedHostGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
         "zones": [
           "1"
         ]
@@ -40,18 +40,18 @@
     "201": {
       "body": {
         "name": "myDedicatedHostGroup",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
         "location": "westus",
-        "properties": {
-          "platformFaultDomainCount": 3,
-          "supportAutomaticPlacement": true
-        },
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
         "tags": {
           "department": "finance"
         },
         "zones": [
           "1"
-        ]
+        ],
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "supportAutomaticPlacement": true
+        }
       }
     }
   },

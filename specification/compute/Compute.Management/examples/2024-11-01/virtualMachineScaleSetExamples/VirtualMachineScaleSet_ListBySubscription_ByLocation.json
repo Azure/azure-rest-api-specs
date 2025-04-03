@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}",
     "location": "eastus",
-    "subscriptionId": "{subscription-id}"
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
@@ -10,27 +10,56 @@
         "value": [
           {
             "name": "{virtualMachineScaleSetName}",
-            "type": "Microsoft.Compute/virtualMachineScaleSets",
             "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
             "location": "eastus",
+            "tags": {
+              "myTag1": "tagValue1"
+            },
+            "sku": {
+              "name": "Standard_D2s_v3",
+              "tier": "Standard",
+              "capacity": 4
+            },
             "properties": {
-              "doNotRunExtensionsOnOverprovisionedVMs": false,
-              "overprovision": false,
-              "platformFaultDomainCount": 1,
-              "provisioningState": "succeeded",
               "singlePlacementGroup": false,
               "upgradePolicy": {
+                "mode": "Automatic",
                 "automaticOSUpgradePolicy": {
                   "enableAutomaticOSUpgrade": false
-                },
-                "mode": "Automatic"
+                }
               },
               "virtualMachineProfile": {
+                "storageProfile": {
+                  "osDisk": {
+                    "createOption": "FromImage",
+                    "caching": "ReadWrite",
+                    "managedDisk": {
+                      "storageAccountType": "Premium_LRS"
+                    },
+                    "diskSizeGB": 30
+                  },
+                  "imageReference": {
+                    "publisher": "azuredatabricks",
+                    "offer": "databricks",
+                    "sku": "databricksworker",
+                    "version": "3.15.2"
+                  },
+                  "dataDisks": []
+                },
+                "osProfile": {
+                  "computerNamePrefix": "{virtualMachineScaleSetName}",
+                  "adminUsername": "admin",
+                  "linuxConfiguration": {
+                    "disablePasswordAuthentication": false
+                  }
+                },
                 "networkProfile": {
                   "networkInterfaceConfigurations": [
                     {
                       "name": "myNic",
                       "properties": {
+                        "primary": true,
                         "ipConfigurations": [
                           {
                             "name": "myIPConfig",
@@ -44,70 +73,70 @@
                         ],
                         "networkSecurityGroup": {
                           "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup"
-                        },
-                        "primary": true
+                        }
                       }
                     }
                   ]
-                },
-                "osProfile": {
-                  "adminUsername": "admin",
-                  "computerNamePrefix": "{virtualMachineScaleSetName}",
-                  "linuxConfiguration": {
-                    "disablePasswordAuthentication": false
-                  }
-                },
-                "storageProfile": {
-                  "dataDisks": [],
-                  "imageReference": {
-                    "offer": "databricks",
-                    "publisher": "azuredatabricks",
-                    "sku": "databricksworker",
-                    "version": "3.15.2"
-                  },
-                  "osDisk": {
-                    "caching": "ReadWrite",
-                    "createOption": "FromImage",
-                    "diskSizeGB": 30,
-                    "managedDisk": {
-                      "storageAccountType": "Premium_LRS"
-                    }
-                  }
                 }
-              }
-            },
-            "sku": {
-              "name": "Standard_D2s_v3",
-              "capacity": 4,
-              "tier": "Standard"
-            },
-            "tags": {
-              "myTag1": "tagValue1"
+              },
+              "provisioningState": "succeeded",
+              "overprovision": false,
+              "doNotRunExtensionsOnOverprovisionedVMs": false,
+              "platformFaultDomainCount": 1
             }
           },
           {
             "name": "{virtualMachineScaleSetName}",
-            "type": "Microsoft.Compute/virtualMachineScaleSets",
             "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}1",
+            "type": "Microsoft.Compute/virtualMachineScaleSets",
             "location": "eastus",
+            "tags": {
+              "myTag1": "tagValue2"
+            },
+            "sku": {
+              "name": "Standard_D2s_v3",
+              "tier": "Standard",
+              "capacity": 4
+            },
             "properties": {
-              "doNotRunExtensionsOnOverprovisionedVMs": false,
-              "overprovision": false,
-              "platformFaultDomainCount": 1,
-              "provisioningState": "succeeded",
               "singlePlacementGroup": false,
               "upgradePolicy": {
+                "mode": "Automatic",
                 "automaticOSUpgradePolicy": {
                   "enableAutomaticOSUpgrade": false
-                },
-                "mode": "Automatic"
+                }
               },
               "virtualMachineProfile": {
+                "storageProfile": {
+                  "osDisk": {
+                    "createOption": "FromImage",
+                    "caching": "ReadWrite",
+                    "managedDisk": {
+                      "storageAccountType": "Premium_LRS"
+                    },
+                    "diskSizeGB": 30
+                  },
+                  "imageReference": {
+                    "publisher": "azuredatabricks",
+                    "offer": "databricks",
+                    "sku": "databricksworker",
+                    "version": "3.15.2"
+                  },
+                  "dataDisks": []
+                },
+                "osProfile": {
+                  "computerNamePrefix": "{virtualMachineScaleSetName}",
+                  "adminUsername": "admin",
+                  "linuxConfiguration": {
+                    "disablePasswordAuthentication": false
+                  }
+                },
                 "networkProfile": {
                   "networkInterfaceConfigurations": [
                     {
                       "name": "myNic1",
                       "properties": {
+                        "primary": true,
                         "ipConfigurations": [
                           {
                             "name": "myIPConfig",
@@ -121,45 +150,16 @@
                         ],
                         "networkSecurityGroup": {
                           "id": "/subscriptions/{subscription-id}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/myNetworkSecurityGroup"
-                        },
-                        "primary": true
+                        }
                       }
                     }
                   ]
-                },
-                "osProfile": {
-                  "adminUsername": "admin",
-                  "computerNamePrefix": "{virtualMachineScaleSetName}",
-                  "linuxConfiguration": {
-                    "disablePasswordAuthentication": false
-                  }
-                },
-                "storageProfile": {
-                  "dataDisks": [],
-                  "imageReference": {
-                    "offer": "databricks",
-                    "publisher": "azuredatabricks",
-                    "sku": "databricksworker",
-                    "version": "3.15.2"
-                  },
-                  "osDisk": {
-                    "caching": "ReadWrite",
-                    "createOption": "FromImage",
-                    "diskSizeGB": 30,
-                    "managedDisk": {
-                      "storageAccountType": "Premium_LRS"
-                    }
-                  }
                 }
-              }
-            },
-            "sku": {
-              "name": "Standard_D2s_v3",
-              "capacity": 4,
-              "tier": "Standard"
-            },
-            "tags": {
-              "myTag1": "tagValue2"
+              },
+              "provisioningState": "succeeded",
+              "overprovision": false,
+              "doNotRunExtensionsOnOverprovisionedVMs": false,
+              "platformFaultDomainCount": 1
             }
           }
         ]

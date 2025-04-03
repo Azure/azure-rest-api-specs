@@ -1,27 +1,45 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
     "api-version": "2024-11-01",
     "parameters": {
+      "sku": {
+        "tier": "Standard",
+        "capacity": 2,
+        "name": "Standard_A8m_v2"
+      },
       "location": "westus",
       "properties": {
         "overprovision": true,
-        "spotRestorePolicy": {
-          "enabled": true,
-          "restoreTimeout": "PT1H"
-        },
-        "upgradePolicy": {
-          "mode": "Manual"
-        },
         "virtualMachineProfile": {
-          "billingProfile": {
-            "maxPrice": -1
+          "storageProfile": {
+            "imageReference": {
+              "sku": "2016-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
+              "offer": "WindowsServer"
+            },
+            "osDisk": {
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "createOption": "FromImage"
+            }
           },
-          "evictionPolicy": "Deallocate",
+          "osProfile": {
+            "computerNamePrefix": "{vmss-name}",
+            "adminUsername": "{your-username}",
+            "adminPassword": "{your-password}"
+          },
           "networkProfile": {
             "networkInterfaceConfigurations": [
               {
                 "name": "{vmss-name}",
                 "properties": {
+                  "primary": true,
                   "enableIPForwarding": true,
                   "ipConfigurations": [
                     {
@@ -32,69 +50,65 @@
                         }
                       }
                     }
-                  ],
-                  "primary": true
+                  ]
                 }
               }
             ]
           },
-          "osProfile": {
-            "adminPassword": "{your-password}",
-            "adminUsername": "{your-username}",
-            "computerNamePrefix": "{vmss-name}"
-          },
           "priority": "Spot",
-          "storageProfile": {
-            "imageReference": {
-              "offer": "WindowsServer",
-              "publisher": "MicrosoftWindowsServer",
-              "sku": "2016-Datacenter",
-              "version": "latest"
-            },
-            "osDisk": {
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
-              "managedDisk": {
-                "storageAccountType": "Standard_LRS"
-              }
-            }
+          "evictionPolicy": "Deallocate",
+          "billingProfile": {
+            "maxPrice": -1
           }
+        },
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
+        "spotRestorePolicy": {
+          "enabled": true,
+          "restoreTimeout": "PT1H"
         }
-      },
-      "sku": {
-        "name": "Standard_A8m_v2",
-        "capacity": 2,
-        "tier": "Standard"
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "{vmss-name}"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 2,
+          "name": "Standard_A8m_v2"
+        },
         "name": "{vmss-name}",
-        "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
-        "location": "westus",
         "properties": {
-          "overprovision": true,
-          "provisioningState": "Creating",
           "singlePlacementGroup": true,
-          "spotRestorePolicy": {
-            "enabled": true,
-            "restoreTimeout": "PT1H"
-          },
+          "overprovision": true,
           "uniqueId": "d053ec5a-8da6-495f-ab13-38216503c6d7",
-          "upgradePolicy": {
-            "mode": "Manual"
-          },
           "virtualMachineProfile": {
-            "billingProfile": {
-              "maxPrice": -1
+            "storageProfile": {
+              "imageReference": {
+                "sku": "2016-Datacenter",
+                "publisher": "MicrosoftWindowsServer",
+                "version": "latest",
+                "offer": "WindowsServer"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "createOption": "FromImage"
+              }
             },
-            "evictionPolicy": "Deallocate",
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              }
+            },
             "networkProfile": {
               "networkInterfaceConfigurations": [
                 {
@@ -103,81 +117,81 @@
                     "dnsSettings": {
                       "dnsServers": []
                     },
-                    "enableAcceleratedNetworking": false,
+                    "primary": true,
                     "enableIPForwarding": true,
                     "ipConfigurations": [
                       {
                         "name": "{vmss-name}",
                         "properties": {
-                          "privateIPAddressVersion": "IPv4",
                           "subnet": {
                             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
-                          }
+                          },
+                          "privateIPAddressVersion": "IPv4"
                         }
                       }
                     ],
-                    "primary": true
+                    "enableAcceleratedNetworking": false
                   }
                 }
               ]
             },
-            "osProfile": {
-              "adminUsername": "{your-username}",
-              "computerNamePrefix": "{vmss-name}",
-              "secrets": [],
-              "windowsConfiguration": {
-                "enableAutomaticUpdates": true,
-                "provisionVMAgent": true
-              }
-            },
             "priority": "Spot",
-            "storageProfile": {
-              "imageReference": {
-                "offer": "WindowsServer",
-                "publisher": "MicrosoftWindowsServer",
-                "sku": "2016-Datacenter",
-                "version": "latest"
-              },
-              "osDisk": {
-                "caching": "ReadWrite",
-                "createOption": "FromImage",
-                "managedDisk": {
-                  "storageAccountType": "Standard_LRS"
-                }
-              }
+            "evictionPolicy": "Deallocate",
+            "billingProfile": {
+              "maxPrice": -1
             }
-          }
+          },
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "spotRestorePolicy": {
+            "enabled": true,
+            "restoreTimeout": "PT1H"
+          },
+          "provisioningState": "Creating"
         },
-        "sku": {
-          "name": "Standard_A8m_v2",
-          "capacity": 2,
-          "tier": "Standard"
-        }
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     },
     "201": {
       "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 2,
+          "name": "Standard_A8m_v2"
+        },
         "name": "{vmss-name}",
-        "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
-        "location": "westus",
         "properties": {
-          "overprovision": true,
-          "provisioningState": "Creating",
           "singlePlacementGroup": true,
-          "spotRestorePolicy": {
-            "enabled": true,
-            "restoreTimeout": "PT1H"
-          },
+          "overprovision": true,
           "uniqueId": "d053ec5a-8da6-495f-ab13-38216503c6d7",
-          "upgradePolicy": {
-            "mode": "Manual"
-          },
           "virtualMachineProfile": {
-            "billingProfile": {
-              "maxPrice": -1
+            "storageProfile": {
+              "imageReference": {
+                "sku": "2016-Datacenter",
+                "publisher": "MicrosoftWindowsServer",
+                "version": "latest",
+                "offer": "WindowsServer"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "createOption": "FromImage"
+              }
             },
-            "evictionPolicy": "Deallocate",
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              }
+            },
             "networkProfile": {
               "networkInterfaceConfigurations": [
                 {
@@ -186,56 +200,42 @@
                     "dnsSettings": {
                       "dnsServers": []
                     },
-                    "enableAcceleratedNetworking": false,
+                    "primary": true,
                     "enableIPForwarding": true,
                     "ipConfigurations": [
                       {
                         "name": "{vmss-name}",
                         "properties": {
-                          "privateIPAddressVersion": "IPv4",
                           "subnet": {
                             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
-                          }
+                          },
+                          "privateIPAddressVersion": "IPv4"
                         }
                       }
                     ],
-                    "primary": true
+                    "enableAcceleratedNetworking": false
                   }
                 }
               ]
             },
-            "osProfile": {
-              "adminUsername": "{your-username}",
-              "computerNamePrefix": "{vmss-name}",
-              "secrets": [],
-              "windowsConfiguration": {
-                "enableAutomaticUpdates": true,
-                "provisionVMAgent": true
-              }
-            },
             "priority": "Spot",
-            "storageProfile": {
-              "imageReference": {
-                "offer": "WindowsServer",
-                "publisher": "MicrosoftWindowsServer",
-                "sku": "2016-Datacenter",
-                "version": "latest"
-              },
-              "osDisk": {
-                "caching": "ReadWrite",
-                "createOption": "FromImage",
-                "managedDisk": {
-                  "storageAccountType": "Standard_LRS"
-                }
-              }
+            "evictionPolicy": "Deallocate",
+            "billingProfile": {
+              "maxPrice": -1
             }
-          }
+          },
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "spotRestorePolicy": {
+            "enabled": true,
+            "restoreTimeout": "PT1H"
+          },
+          "provisioningState": "Creating"
         },
-        "sku": {
-          "name": "Standard_A8m_v2",
-          "capacity": 2,
-          "tier": "Standard"
-        }
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     }
   },

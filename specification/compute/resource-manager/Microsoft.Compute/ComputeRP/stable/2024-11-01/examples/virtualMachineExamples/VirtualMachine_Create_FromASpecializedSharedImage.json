@@ -1,11 +1,27 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "westus",
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_D1_v2"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/mySharedGallery/images/mySharedImage"
+          },
+          "osDisk": {
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Standard_LRS"
+            },
+            "name": "myVMosdisk",
+            "createOption": "FromImage"
+          }
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -16,37 +32,16 @@
               }
             }
           ]
-        },
-        "storageProfile": {
-          "imageReference": {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/mySharedGallery/images/mySharedImage"
-          },
-          "osDisk": {
-            "name": "myVMosdisk",
-            "caching": "ReadWrite",
-            "createOption": "FromImage",
-            "managedDisk": {
-              "storageAccountType": "Standard_LRS"
-            }
-          }
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "myVM"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D1_v2"
-          },
           "networkProfile": {
             "networkInterfaces": [
               {
@@ -57,37 +52,37 @@
               }
             ]
           },
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "imageReference": {
               "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/mySharedGallery/images/mySharedImage"
             },
             "osDisk": {
               "name": "myVMosdisk",
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
               "diskSizeGB": 30,
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
               },
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
               "osType": "Linux"
-            }
+            },
+            "dataDisks": []
           },
-          "vmId": "71aa3d5a-d73d-4970-9182-8580433b2865"
-        }
+          "vmId": "71aa3d5a-d73d-4970-9182-8580433b2865",
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          },
+          "provisioningState": "Creating"
+        },
+        "name": "myVM",
+        "location": "westus"
       }
     },
     "201": {
       "body": {
-        "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D1_v2"
-          },
           "networkProfile": {
             "networkInterfaces": [
               {
@@ -98,25 +93,30 @@
               }
             ]
           },
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "imageReference": {
               "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/mySharedGallery/images/mySharedImage"
             },
             "osDisk": {
               "name": "myVMosdisk",
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
               "diskSizeGB": 30,
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
               },
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
               "osType": "Linux"
-            }
+            },
+            "dataDisks": []
           },
-          "vmId": "71aa3d5a-d73d-4970-9182-8580433b2865"
-        }
+          "vmId": "71aa3d5a-d73d-4970-9182-8580433b2865",
+          "hardwareProfile": {
+            "vmSize": "Standard_D1_v2"
+          },
+          "provisioningState": "Creating"
+        },
+        "name": "myVM",
+        "location": "westus"
       }
     }
   },

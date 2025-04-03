@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "resourceGroupName": "rgcompute",
     "capacityReservationGroupName": "aaaaaaaaaaaaaaaaaaaaaa",
     "parameters": {
       "properties": {
@@ -10,18 +10,25 @@
         "key5355": "aaa"
       }
     },
-    "resourceGroupName": "rgcompute",
+    "api-version": "2024-11-01",
     "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myCapacityReservationGroup",
-        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
         "location": "westus",
+        "tags": {},
+        "zones": [
+          "1",
+          "2"
+        ],
         "properties": {
           "capacityReservations": [
+            {
+              "id": "aaaa"
+            }
+          ],
+          "virtualMachinesAssociated": [
             {
               "id": "aaaa"
             }
@@ -30,36 +37,29 @@
             "capacityReservations": [
               {
                 "name": "aaaaaaaaaaaaaaaa",
-                "statuses": [
-                  {
-                    "code": "aaaaaaaaaaaaaaaaaaaaaaa",
-                    "displayStatus": "aaaaaa",
-                    "level": "Info",
-                    "message": "a",
-                    "time": "2021-11-30T12:58:26.522Z"
-                  }
-                ],
                 "utilizationInfo": {
                   "virtualMachinesAllocated": [
                     {
                       "id": "aaaa"
                     }
                   ]
-                }
+                },
+                "statuses": [
+                  {
+                    "code": "aaaaaaaaaaaaaaaaaaaaaaa",
+                    "level": "Info",
+                    "displayStatus": "aaaaaa",
+                    "message": "a",
+                    "time": "2021-11-30T12:58:26.522Z"
+                  }
+                ]
               }
             ]
-          },
-          "virtualMachinesAssociated": [
-            {
-              "id": "aaaa"
-            }
-          ]
+          }
         },
-        "tags": {},
-        "zones": [
-          "1",
-          "2"
-        ]
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/myCapacityReservationGroup",
+        "name": "myCapacityReservationGroup",
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       }
     }
   },

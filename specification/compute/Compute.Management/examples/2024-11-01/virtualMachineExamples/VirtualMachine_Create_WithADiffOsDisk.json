@@ -1,16 +1,43 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "westus",
       "plan": {
-        "name": "windows2016",
+        "publisher": "microsoft-ads",
         "product": "windows-data-science-vm",
-        "publisher": "microsoft-ads"
+        "name": "windows2016"
       },
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_DS1_v2"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "sku": "windows2016",
+            "publisher": "microsoft-ads",
+            "version": "latest",
+            "offer": "windows-data-science-vm"
+          },
+          "osDisk": {
+            "caching": "ReadOnly",
+            "diffDiskSettings": {
+              "option": "Local"
+            },
+            "managedDisk": {
+              "storageAccountType": "Standard_LRS"
+            },
+            "createOption": "FromImage",
+            "name": "myVMosdisk"
+          }
+        },
+        "osProfile": {
+          "adminUsername": "{your-username}",
+          "computerName": "myVM",
+          "adminPassword": "{your-password}"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -21,52 +48,23 @@
               }
             }
           ]
-        },
-        "osProfile": {
-          "adminPassword": "{your-password}",
-          "adminUsername": "{your-username}",
-          "computerName": "myVM"
-        },
-        "storageProfile": {
-          "imageReference": {
-            "offer": "windows-data-science-vm",
-            "publisher": "microsoft-ads",
-            "sku": "windows2016",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "myVMosdisk",
-            "caching": "ReadOnly",
-            "createOption": "FromImage",
-            "diffDiskSettings": {
-              "option": "Local"
-            },
-            "managedDisk": {
-              "storageAccountType": "Standard_LRS"
-            }
-          }
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "myVM"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
-        "plan": {
-          "name": "standard-data-science-vm",
-          "product": "standard-data-science-vm",
-          "publisher": "microsoft-ads"
-        },
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_DS1_v2"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -78,55 +76,55 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "imageReference": {
-              "offer": "standard-data-science-vm",
-              "publisher": "microsoft-ads",
               "sku": "standard-data-science-vm",
-              "version": "latest"
+              "publisher": "microsoft-ads",
+              "version": "latest",
+              "offer": "standard-data-science-vm"
             },
             "osDisk": {
-              "name": "myVMosdisk",
+              "osType": "Windows",
               "caching": "ReadOnly",
-              "createOption": "FromImage",
               "diffDiskSettings": {
                 "option": "Local"
               },
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
               },
-              "osType": "Windows"
-            }
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
           },
-          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85"
-        }
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_DS1_v2"
+          },
+          "provisioningState": "Creating"
+        },
+        "plan": {
+          "publisher": "microsoft-ads",
+          "product": "standard-data-science-vm",
+          "name": "standard-data-science-vm"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus"
       }
     },
     "201": {
       "body": {
         "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
-        "plan": {
-          "name": "standard-data-science-vm",
-          "product": "standard-data-science-vm",
-          "publisher": "microsoft-ads"
-        },
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_DS1_v2"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -138,39 +136,41 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "imageReference": {
-              "offer": "standard-data-science-vm",
-              "publisher": "microsoft-ads",
               "sku": "standard-data-science-vm",
-              "version": "latest"
+              "publisher": "microsoft-ads",
+              "version": "latest",
+              "offer": "standard-data-science-vm"
             },
             "osDisk": {
-              "name": "myVMosdisk",
+              "osType": "Windows",
               "caching": "ReadOnly",
-              "createOption": "FromImage",
               "diffDiskSettings": {
                 "option": "Local"
               },
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
               },
-              "osType": "Windows"
-            }
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
           },
-          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85"
-        }
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_DS1_v2"
+          },
+          "provisioningState": "Creating"
+        },
+        "plan": {
+          "publisher": "microsoft-ads",
+          "product": "standard-data-science-vm",
+          "name": "standard-data-science-vm"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus"
       }
     }
   },

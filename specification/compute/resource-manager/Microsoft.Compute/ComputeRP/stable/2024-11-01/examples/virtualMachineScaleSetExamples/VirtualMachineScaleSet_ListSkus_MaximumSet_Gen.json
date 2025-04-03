@@ -1,30 +1,30 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
     "resourceGroupName": "rgcompute",
-    "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "aaaaaa"
+    "vmScaleSetName": "aaaaaa",
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "aaaaaaaaaaaaaa",
         "value": [
           {
-            "capacity": {
-              "defaultCapacity": 20,
-              "maximum": 27,
-              "minimum": 22,
-              "scaleType": "Automatic"
-            },
             "resourceType": "aaaaaaaaaaaaaaaaa",
             "sku": {
               "name": "DSv3-Type1",
-              "capacity": 7,
-              "tier": "aaa"
+              "tier": "aaa",
+              "capacity": 7
+            },
+            "capacity": {
+              "minimum": 22,
+              "maximum": 27,
+              "defaultCapacity": 20,
+              "scaleType": "Automatic"
             }
           }
-        ]
+        ],
+        "nextLink": "a://example.com/aaaaaaaaaaaaaa"
       }
     }
   },

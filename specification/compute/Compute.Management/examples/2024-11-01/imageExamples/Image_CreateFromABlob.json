@@ -1,5 +1,7 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-11-01",
     "imageName": "myImage",
     "parameters": {
@@ -7,58 +9,56 @@
       "properties": {
         "storageProfile": {
           "osDisk": {
+            "osType": "Linux",
             "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
-            "osState": "Generalized",
-            "osType": "Linux"
+            "osState": "Generalized"
           },
           "zoneResilient": true
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myImage",
-        "type": "Microsoft.Compute/images",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
-        "location": "westus",
         "properties": {
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "osDisk": {
-              "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
-              "caching": "ReadWrite",
+              "osType": "Linux",
               "osState": "Generalized",
-              "osType": "Linux"
+              "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+              "caching": "ReadWrite"
             },
+            "dataDisks": [],
             "zoneResilient": true
-          }
-        }
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
       }
     },
     "201": {
       "body": {
-        "name": "myImage",
-        "type": "Microsoft.Compute/images",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
-        "location": "westus",
         "properties": {
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "osDisk": {
-              "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
-              "caching": "ReadWrite",
+              "osType": "Linux",
               "osState": "Generalized",
-              "osType": "Linux"
+              "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+              "caching": "ReadWrite"
             },
+            "dataDisks": [],
             "zoneResilient": true
-          }
-        }
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
       }
     }
   },

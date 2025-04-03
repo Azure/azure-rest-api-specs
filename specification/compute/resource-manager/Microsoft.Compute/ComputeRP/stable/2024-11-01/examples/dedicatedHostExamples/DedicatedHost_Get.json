@@ -1,60 +1,60 @@
 {
   "parameters": {
-    "$expand": "instanceView",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-11-01",
     "hostGroupName": "myDedicatedHostGroup",
     "hostName": "myHost",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscriptionId}"
+    "$expand": "instanceView"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myHost",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myHost",
-        "location": "westus",
         "properties": {
+          "platformFaultDomain": 1,
           "autoReplaceOnFailure": true,
           "hostId": "{GUID}",
+          "provisioningTime": "2019-06-27T01:02:38.3138469+00:00",
+          "virtualMachines": [
+            {
+              "id": "/subscriptions/subId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1"
+            }
+          ],
+          "provisioningState": "Succeeded",
           "instanceView": {
             "assetId": "eb3f58b8-b4e8-4882-b69f-301a01812407",
             "availableCapacity": {
               "allocatableVMs": [
                 {
-                  "count": 10,
-                  "vmSize": "Standard_A1"
+                  "vmSize": "Standard_A1",
+                  "count": 10
                 }
               ]
             },
             "statuses": [
               {
                 "code": "ProvisioningState/succeeded",
-                "displayStatus": "Provisioning succeeded",
-                "level": "Info"
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded"
               },
               {
                 "code": "HealthState/available",
-                "displayStatus": "Host available",
-                "level": "Info"
+                "level": "Info",
+                "displayStatus": "Host available"
               }
             ]
           },
-          "platformFaultDomain": 1,
-          "provisioningState": "Succeeded",
-          "provisioningTime": "2019-06-27T01:02:38.3138469+00:00",
-          "timeCreated": "2019-06-27T01:02:38.3138469+00:00",
-          "virtualMachines": [
-            {
-              "id": "/subscriptions/subId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1"
-            }
-          ]
+          "timeCreated": "2019-06-27T01:02:38.3138469+00:00"
+        },
+        "location": "westus",
+        "tags": {
+          "department": "HR"
         },
         "sku": {
           "name": "DSv3-Type1"
         },
-        "tags": {
-          "department": "HR"
-        }
+        "name": "myHost"
       }
     }
   },

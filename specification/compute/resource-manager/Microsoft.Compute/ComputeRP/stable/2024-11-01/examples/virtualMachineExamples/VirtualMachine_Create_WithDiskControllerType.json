@@ -1,17 +1,44 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "westus",
       "properties": {
-        "diagnosticsProfile": {
-          "bootDiagnostics": {
-            "enabled": true,
-            "storageUri": "http://{existing-storage-account-name}.blob.core.windows.net"
-          }
-        },
         "hardwareProfile": {
           "vmSize": "Standard_D4_v3"
+        },
+        "scheduledEventsPolicy": {
+          "scheduledEventsAdditionalPublishingTargets": {
+            "eventGridAndResourceGraph": {
+              "enable": true
+            }
+          },
+          "userInitiatedRedeploy": {
+            "automaticallyApprove": true
+          },
+          "userInitiatedReboot": {
+            "automaticallyApprove": true
+          }
+        },
+        "storageProfile": {
+          "imageReference": {
+            "sku": "2016-Datacenter",
+            "publisher": "MicrosoftWindowsServer",
+            "version": "latest",
+            "offer": "WindowsServer"
+          },
+          "osDisk": {
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Standard_LRS"
+            },
+            "name": "myVMosdisk",
+            "createOption": "FromImage"
+          },
+          "diskControllerType": "NVMe"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -24,63 +51,34 @@
           ]
         },
         "osProfile": {
-          "adminPassword": "{your-password}",
           "adminUsername": "{your-username}",
-          "computerName": "myVM"
+          "computerName": "myVM",
+          "adminPassword": "{your-password}"
         },
-        "scheduledEventsPolicy": {
-          "scheduledEventsAdditionalPublishingTargets": {
-            "eventGridAndResourceGraph": {
-              "enable": true
-            }
-          },
-          "userInitiatedReboot": {
-            "automaticallyApprove": true
-          },
-          "userInitiatedRedeploy": {
-            "automaticallyApprove": true
-          }
-        },
-        "storageProfile": {
-          "diskControllerType": "NVMe",
-          "imageReference": {
-            "offer": "WindowsServer",
-            "publisher": "MicrosoftWindowsServer",
-            "sku": "2016-Datacenter",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "myVMosdisk",
-            "caching": "ReadWrite",
-            "createOption": "FromImage",
-            "managedDisk": {
-              "storageAccountType": "Standard_LRS"
-            }
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "storageUri": "http://{existing-storage-account-name}.blob.core.windows.net",
+            "enabled": true
           }
         },
         "userData": "U29tZSBDdXN0b20gRGF0YQ=="
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "myVM"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "diagnosticsProfile": {
-            "bootDiagnostics": {
-              "enabled": true,
-              "storageUri": "http://nsgdiagnostic.blob.core.windows.net"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
             }
-          },
-          "hardwareProfile": {
-            "vmSize": "Standard_D4_v3"
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -92,67 +90,67 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
+          "storageProfile": {
+            "imageReference": {
+              "sku": "2016-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
+              "offer": "WindowsServer"
+            },
+            "osDisk": {
+              "osType": "Windows",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "name": "myVMosdisk",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            },
+            "dataDisks": [],
+            "diskControllerType": "NVMe"
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "storageUri": "http://nsgdiagnostic.blob.core.windows.net",
+              "enabled": true
             }
           },
-          "provisioningState": "Updating",
+          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa",
+          "hardwareProfile": {
+            "vmSize": "Standard_D4_v3"
+          },
           "scheduledEventsPolicy": {
             "scheduledEventsAdditionalPublishingTargets": {
               "eventGridAndResourceGraph": {
                 "enable": true
               }
             },
-            "userInitiatedReboot": {
-              "automaticallyApprove": true
-            },
             "userInitiatedRedeploy": {
               "automaticallyApprove": true
-            }
-          },
-          "storageProfile": {
-            "dataDisks": [],
-            "diskControllerType": "NVMe",
-            "imageReference": {
-              "offer": "WindowsServer",
-              "publisher": "MicrosoftWindowsServer",
-              "sku": "2016-Datacenter",
-              "version": "latest"
             },
-            "osDisk": {
-              "name": "myVMosdisk",
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
-              "managedDisk": {
-                "storageAccountType": "Standard_LRS"
-              },
-              "osType": "Windows"
+            "userInitiatedReboot": {
+              "automaticallyApprove": true
             }
           },
-          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa"
-        }
+          "provisioningState": "Updating"
+        },
+        "name": "myVM",
+        "location": "westus"
       }
     },
     "201": {
       "body": {
-        "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "diagnosticsProfile": {
-            "bootDiagnostics": {
-              "enabled": true,
-              "storageUri": "http://nsgdiagnostic.blob.core.windows.net"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
             }
-          },
-          "hardwareProfile": {
-            "vmSize": "Standard_D4_v3"
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -164,50 +162,52 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
+          "storageProfile": {
+            "imageReference": {
+              "sku": "2016-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
+              "offer": "WindowsServer"
+            },
+            "osDisk": {
+              "osType": "Windows",
+              "caching": "ReadWrite",
+              "createOption": "FromImage",
+              "name": "myVMosdisk",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            },
+            "dataDisks": [],
+            "diskControllerType": "NVMe"
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "storageUri": "http://nsgdiagnostic.blob.core.windows.net",
+              "enabled": true
             }
           },
-          "provisioningState": "Creating",
+          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa",
+          "hardwareProfile": {
+            "vmSize": "Standard_D4_v3"
+          },
           "scheduledEventsPolicy": {
             "scheduledEventsAdditionalPublishingTargets": {
               "eventGridAndResourceGraph": {
                 "enable": true
               }
             },
-            "userInitiatedReboot": {
-              "automaticallyApprove": true
-            },
             "userInitiatedRedeploy": {
               "automaticallyApprove": true
-            }
-          },
-          "storageProfile": {
-            "dataDisks": [],
-            "diskControllerType": "NVMe",
-            "imageReference": {
-              "offer": "WindowsServer",
-              "publisher": "MicrosoftWindowsServer",
-              "sku": "2016-Datacenter",
-              "version": "latest"
             },
-            "osDisk": {
-              "name": "myVMosdisk",
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
-              "managedDisk": {
-                "storageAccountType": "Standard_LRS"
-              },
-              "osType": "Windows"
+            "userInitiatedReboot": {
+              "automaticallyApprove": true
             }
           },
-          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa"
-        }
+          "provisioningState": "Creating"
+        },
+        "name": "myVM",
+        "location": "westus"
       }
     }
   },

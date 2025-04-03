@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "$expand": "virtualMachines/$ref",
+    "subscriptionId": "{subscription-id}",
     "api-version": "2024-11-01",
-    "subscriptionId": "{subscription-id}"
+    "$expand": "virtualMachines/$ref"
   },
   "responses": {
     "200": {
@@ -10,8 +10,8 @@
         "value": [
           {
             "name": "{capacityReservationGroupName}",
-            "type": "Microsoft.Compute/CapacityReservationGroups",
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
+            "type": "Microsoft.Compute/CapacityReservationGroups",
             "location": "West US",
             "properties": {
               "capacityReservations": [
@@ -34,8 +34,8 @@
           },
           {
             "name": "{capacityReservationGroupName}",
-            "type": "Microsoft.Compute/CapacityReservationGroups",
             "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup2/providers/Microsoft.Compute/capacityReservationGroups/{capacityReservationGroupName}",
+            "type": "Microsoft.Compute/CapacityReservationGroups",
             "location": "West US",
             "properties": {
               "capacityReservations": [

@@ -1,8 +1,11 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
-    "instanceId": "0",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myvmScaleSet",
+    "instanceId": "0",
+    "runCommandName": "myRunCommand",
+    "api-version": "2024-11-01",
     "runCommand": {
       "properties": {
         "source": {
@@ -12,10 +15,7 @@
           }
         }
       }
-    },
-    "runCommandName": "myRunCommand",
-    "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "myvmScaleSet"
+    }
   },
   "responses": {
     "200": {
@@ -24,10 +24,14 @@
         "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
         "location": "westus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
         "properties": {
-          "asyncExecution": false,
-          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
-          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "source": {
+            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
+          },
           "parameters": [
             {
               "name": "param1",
@@ -38,17 +42,13 @@
               "value": "value2"
             }
           ],
-          "provisioningState": "Updating",
+          "asyncExecution": false,
+          "treatFailureAsDeploymentFailure": false,
           "runAsUser": "user1",
-          "source": {
-            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
-          },
           "timeoutInSeconds": 3600,
-          "treatFailureAsDeploymentFailure": false
-        },
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
+          "provisioningState": "Updating",
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
         }
       }
     }

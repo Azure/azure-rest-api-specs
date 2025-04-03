@@ -1,40 +1,40 @@
 {
+  "title": "VirtualMachineImages_ListWithProperties_MaximumSet",
   "operationId": "VirtualMachineImages_ListWithProperties",
   "parameters": {
-    "$expand": "Properties",
-    "$orderby": "aa",
-    "$top": 4,
-    "api-version": "2024-11-01",
     "location": "eastus",
-    "offer": "WindowsServer",
     "publisherName": "MicrosoftWindowsServer",
+    "offer": "WindowsServer",
     "skus": "2022-datacenter-azure-edition",
+    "$expand": "Properties",
+    "$top": 4,
+    "$orderby": "aa",
+    "api-version": "2024-11-01",
     "subscriptionId": "{subscription-id}"
   },
-  "title": "VirtualMachineImages_ListWithProperties_MaximumSet",
   "responses": {
     "200": {
       "body": {
-        "nextLink": "aaaa",
         "value": [
           {
-            "name": "aaaaaaaaa",
-            "extendedLocation": {
-              "name": "aaaaaaaaaaaaaaaaaaaaa",
-              "type": "EdgeZone"
-            },
-            "id": "aaaaaaaaaaa",
-            "location": "aaaaa",
             "properties": {
-              "architecture": "x64",
-              "automaticOSUpgradeProperties": {
-                "automaticOSUpgradeSupported": true
+              "plan": {
+                "publisher": "MicrosoftWindowsServer",
+                "name": "aaaaaaaaa",
+                "product": "aaaaaaaaaaaaaa"
+              },
+              "osDiskImage": {
+                "operatingSystem": "Windows"
               },
               "dataDiskImages": [
                 {
                   "lun": 17
                 }
               ],
+              "automaticOSUpgradeProperties": {
+                "automaticOSUpgradeSupported": true
+              },
+              "hyperVGeneration": "V1",
               "disallowed": {
                 "vmDiskType": "None"
               },
@@ -44,27 +44,27 @@
                   "value": "aaaaaaaaaaaaaaaaaaaa"
                 }
               ],
-              "hyperVGeneration": "V1",
               "imageDeprecationStatus": {
+                "imageState": "ScheduledForDeprecation",
+                "scheduledDeprecationTime": "2023-01-13T00:00:00+00:00",
                 "alternativeOption": {
                   "type": "Offer",
                   "value": "aaaaaaa"
-                },
-                "imageState": "ScheduledForDeprecation",
-                "scheduledDeprecationTime": "2023-01-13T00:00:00+00:00"
+                }
               },
-              "osDiskImage": {
-                "operatingSystem": "Windows"
-              },
-              "plan": {
-                "name": "aaaaaaaaa",
-                "product": "aaaaaaaaaaaaaa",
-                "publisher": "MicrosoftWindowsServer"
-              }
+              "architecture": "x64"
             },
-            "tags": {}
+            "name": "aaaaaaaaa",
+            "location": "aaaaa",
+            "tags": {},
+            "extendedLocation": {
+              "name": "aaaaaaaaaaaaaaaaaaaaa",
+              "type": "EdgeZone"
+            },
+            "id": "aaaaaaaaaaa"
           }
-        ]
+        ],
+        "nextLink": "a://example.com/aaaa"
       }
     }
   }

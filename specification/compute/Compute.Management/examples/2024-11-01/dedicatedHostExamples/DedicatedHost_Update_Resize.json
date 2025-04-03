@@ -1,42 +1,42 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "resourceGroupName": "rgcompute",
     "hostGroupName": "aaaaaaaaa",
     "hostName": "aaaaaaaaaaaaaaaaaaaaa",
+    "api-version": "2024-11-01",
     "parameters": {
       "sku": {
         "name": "DSv3-Type1"
       }
     },
-    "resourceGroupName": "rgcompute",
     "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myDedicatedHost",
-        "type": "aaaaaaaaaaaaaaaaaaa",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost",
         "location": "westus",
+        "tags": {},
         "properties": {
+          "platformFaultDomain": 1,
           "autoReplaceOnFailure": true,
           "hostId": "{GUID}",
-          "licenseType": "Windows_Server_Hybrid",
-          "platformFaultDomain": 1,
-          "provisioningState": "aaaaaaaaaaaaaaaaaaaaaaaaa",
-          "provisioningTime": "2021-11-30T12:58:26.526Z",
           "virtualMachines": [
             {
               "id": "aaaa"
             }
-          ]
+          ],
+          "licenseType": "Windows_Server_Hybrid",
+          "provisioningTime": "2021-11-30T12:58:26.526Z",
+          "provisioningState": "aaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         "sku": {
           "name": "DSv3-Type1",
-          "capacity": 7,
-          "tier": "aaa"
+          "tier": "aaa",
+          "capacity": 7
         },
-        "tags": {}
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost",
+        "name": "myDedicatedHost",
+        "type": "aaaaaaaaaaaaaaaaaaa"
       }
     }
   },

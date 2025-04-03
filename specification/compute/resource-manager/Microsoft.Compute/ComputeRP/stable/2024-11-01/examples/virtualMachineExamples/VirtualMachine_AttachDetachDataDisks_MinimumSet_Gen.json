@@ -1,6 +1,9 @@
 {
   "parameters": {
+    "resourceGroupName": "rgcompute",
+    "vmName": "azure-vm",
     "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}",
     "parameters": {
       "dataDisksToAttach": [
         {
@@ -12,44 +15,41 @@
           "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_1_disk1_1a4e784bdafa49baa780eb2d128ff65x"
         }
       ]
-    },
-    "resourceGroupName": "rgcompute",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "azure-vm"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "dataDisks": [
-          {
-            "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
-            "caching": "ReadWrite",
-            "createOption": "Attach",
-            "diskSizeGB": 30,
-            "lun": 0,
-            "managedDisk": {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
-              "storageAccountType": "Premium_LRS"
-            }
-          }
-        ],
         "imageReference": {
-          "offer": "WindowsServer",
           "publisher": "MicrosoftWindowsServer",
+          "offer": "WindowsServer",
           "sku": "2016-Datacenter",
           "version": "latest"
         },
         "osDisk": {
+          "osType": "Windows",
           "name": "myOsDisk",
-          "caching": "ReadWrite",
           "createOption": "FromImage",
-          "diskSizeGB": 30,
+          "caching": "ReadWrite",
           "managedDisk": {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk",
-            "storageAccountType": "Premium_LRS"
+            "storageAccountType": "Premium_LRS",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk"
           },
-          "osType": "Windows"
-        }
+          "diskSizeGB": 30
+        },
+        "dataDisks": [
+          {
+            "lun": 0,
+            "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+            "createOption": "Attach",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d"
+            },
+            "diskSizeGB": 30
+          }
+        ]
       },
       "headers": {
         "location": "https://foo.com/operationstatus"

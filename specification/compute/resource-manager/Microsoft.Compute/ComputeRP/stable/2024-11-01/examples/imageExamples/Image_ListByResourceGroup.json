@@ -1,51 +1,51 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/UserVMImages/myImageName",
         "value": [
           {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/myImage",
             "name": "myImage",
             "type": "Microsoft.Compute/images",
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/myImage",
             "location": "West US",
             "properties": {
-              "provisioningState": "created",
               "storageProfile": {
-                "dataDisks": [
-                  {
-                    "blobUri": "https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd",
-                    "lun": 1,
-                    "managedDisk": {
-                      "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2"
-                    },
-                    "snapshot": {
-                      "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
-                    },
-                    "storageAccountType": "Standard_LRS"
-                  }
-                ],
                 "osDisk": {
+                  "osType": "Windows",
                   "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+                  "snapshot": {
+                    "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+                  },
                   "managedDisk": {
                     "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk1"
                   },
                   "osState": "Generalized",
-                  "osType": "Windows",
-                  "snapshot": {
-                    "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
-                  },
                   "storageAccountType": "Standard_LRS"
-                }
-              }
+                },
+                "dataDisks": [
+                  {
+                    "lun": 1,
+                    "blobUri": "https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd",
+                    "snapshot": {
+                      "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot2"
+                    },
+                    "managedDisk": {
+                      "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk2"
+                    },
+                    "storageAccountType": "Standard_LRS"
+                  }
+                ]
+              },
+              "provisioningState": "created"
             }
           }
-        ]
+        ],
+        "nextLink": "http://svchost:99/subscriptions/subscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images?$skiptoken=token/Subscriptions/subscriptionId/ResourceGroups/myResourceGroup/UserVMImages/myImageName"
       }
     }
   },

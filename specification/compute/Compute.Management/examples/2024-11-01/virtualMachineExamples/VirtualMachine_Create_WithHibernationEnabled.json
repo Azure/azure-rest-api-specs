@@ -1,20 +1,33 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "{vm-name}",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "eastus2euap",
       "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_D2s_v3"
+        },
         "additionalCapabilities": {
           "hibernationEnabled": true
         },
-        "diagnosticsProfile": {
-          "bootDiagnostics": {
-            "enabled": true,
-            "storageUri": "http://{existing-storage-account-name}.blob.core.windows.net"
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "2019-Datacenter",
+            "version": "latest"
+          },
+          "osDisk": {
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Standard_LRS"
+            },
+            "name": "vmOSdisk",
+            "createOption": "FromImage"
           }
-        },
-        "hardwareProfile": {
-          "vmSize": "Standard_D2s_v3"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -27,51 +40,33 @@
           ]
         },
         "osProfile": {
-          "adminPassword": "{your-password}",
           "adminUsername": "{your-username}",
-          "computerName": "{vm-name}"
+          "computerName": "{vm-name}",
+          "adminPassword": "{your-password}"
         },
-        "storageProfile": {
-          "imageReference": {
-            "offer": "WindowsServer",
-            "publisher": "MicrosoftWindowsServer",
-            "sku": "2019-Datacenter",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "vmOSdisk",
-            "caching": "ReadWrite",
-            "createOption": "FromImage",
-            "managedDisk": {
-              "storageAccountType": "Standard_LRS"
-            }
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+            "storageUri": "http://{existing-storage-account-name}.blob.core.windows.net",
+            "enabled": true
           }
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "{vm-name}"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "{vm-name}",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vm-name}",
-        "location": "eastus2euap",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "additionalCapabilities": {
-            "hibernationEnabled": true
-          },
-          "diagnosticsProfile": {
-            "bootDiagnostics": {
-              "enabled": true,
-              "storageUri": "http://nsgdiagnostic.blob.core.windows.net"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "{vm-name}",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
             }
-          },
-          "hardwareProfile": {
-            "vmSize": "Standard_D2s_v3"
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -83,56 +78,56 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "{vm-name}",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Updating",
           "storageProfile": {
-            "dataDisks": [],
             "imageReference": {
-              "offer": "WindowsServer",
               "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
               "sku": "2019-Datacenter",
               "version": "latest"
             },
             "osDisk": {
-              "name": "vmOSdisk",
+              "osType": "Windows",
               "caching": "ReadWrite",
               "createOption": "FromImage",
+              "name": "vmOSdisk",
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
-              },
-              "osType": "Windows"
+              }
+            },
+            "dataDisks": []
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "storageUri": "http://nsgdiagnostic.blob.core.windows.net",
+              "enabled": true
             }
           },
-          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa"
-        }
+          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v3"
+          },
+          "additionalCapabilities": {
+            "hibernationEnabled": true
+          },
+          "provisioningState": "Updating"
+        },
+        "name": "{vm-name}",
+        "location": "eastus2euap"
       }
     },
     "201": {
       "body": {
-        "name": "{vm-name}",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vm-name}",
-        "location": "eastus2euap",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "additionalCapabilities": {
-            "hibernationEnabled": true
-          },
-          "diagnosticsProfile": {
-            "bootDiagnostics": {
-              "enabled": true,
-              "storageUri": "http://nsgdiagnostic.blob.core.windows.net"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "{vm-name}",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
             }
-          },
-          "hardwareProfile": {
-            "vmSize": "Standard_D2s_v3"
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -144,36 +139,41 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "{vm-name}",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "imageReference": {
-              "offer": "WindowsServer",
               "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
               "sku": "2019-Datacenter",
               "version": "latest"
             },
             "osDisk": {
-              "name": "vmOSdisk",
+              "osType": "Windows",
               "caching": "ReadWrite",
               "createOption": "FromImage",
+              "name": "vmOSdisk",
               "managedDisk": {
                 "storageAccountType": "Standard_LRS"
-              },
-              "osType": "Windows"
+              }
+            },
+            "dataDisks": []
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "storageUri": "http://nsgdiagnostic.blob.core.windows.net",
+              "enabled": true
             }
           },
-          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa"
-        }
+          "vmId": "676420ba-7a24-4bfe-80bd-9c841ee184fa",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v3"
+          },
+          "additionalCapabilities": {
+            "hibernationEnabled": true
+          },
+          "provisioningState": "Creating"
+        },
+        "name": "{vm-name}",
+        "location": "eastus2euap"
       }
     }
   },

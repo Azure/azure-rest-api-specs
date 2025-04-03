@@ -1,11 +1,11 @@
 {
   "parameters": {
+    "resourceGroupName": "rgcompute",
+    "vmName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "vmExtensionName": "aaaaaaa",
     "$expand": "aaaaaa",
     "api-version": "2024-11-01",
-    "resourceGroupName": "rgcompute",
-    "subscriptionId": "{subscription-id}",
-    "vmExtensionName": "aaaaaaa",
-    "vmName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
@@ -15,39 +15,39 @@
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension",
         "location": "westus",
         "properties": {
-          "type": "extType",
           "autoUpgradeMinorVersion": true,
-          "enableAutomaticUpgrade": true,
+          "provisioningState": "Creating",
+          "publisher": "extPublisher",
+          "type": "extType",
+          "typeHandlerVersion": "1.2",
+          "suppressFailures": true,
+          "settings": {},
           "forceUpdateTag": "a",
+          "enableAutomaticUpgrade": true,
+          "protectedSettings": {},
           "instanceView": {
             "name": "aaaaaaaaaaaaaaaaa",
             "type": "aaaaaaaaa",
-            "statuses": [
-              {
-                "code": "aaaaaaaaaaaaaaaaaaaaaaa",
-                "displayStatus": "aaaaaa",
-                "level": "Info",
-                "message": "a",
-                "time": "2021-11-30T12:58:26.522Z"
-              }
-            ],
+            "typeHandlerVersion": "aaaaaaaaaaaaaaaaaaaaaaaaaa",
             "substatuses": [
               {
                 "code": "aaaaaaaaaaaaaaaaaaaaaaa",
-                "displayStatus": "aaaaaa",
                 "level": "Info",
+                "displayStatus": "aaaaaa",
                 "message": "a",
                 "time": "2021-11-30T12:58:26.522Z"
               }
             ],
-            "typeHandlerVersion": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
-          },
-          "protectedSettings": {},
-          "provisioningState": "Creating",
-          "publisher": "extPublisher",
-          "settings": {},
-          "suppressFailures": true,
-          "typeHandlerVersion": "1.2"
+            "statuses": [
+              {
+                "code": "aaaaaaaaaaaaaaaaaaaaaaa",
+                "level": "Info",
+                "displayStatus": "aaaaaa",
+                "message": "a",
+                "time": "2021-11-30T12:58:26.522Z"
+              }
+            ]
+          }
         },
         "tags": {
           "key9183": "aa"

@@ -1,11 +1,53 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "{vm-name}",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "westus",
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_D2_v2"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "sku": "2016-Datacenter",
+            "publisher": "MicrosoftWindowsServer",
+            "version": "latest",
+            "offer": "WindowsServer"
+          },
+          "osDisk": {
+            "caching": "ReadWrite",
+            "vhd": {
+              "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk.vhd"
+            },
+            "createOption": "FromImage",
+            "name": "myVMosdisk"
+          },
+          "dataDisks": [
+            {
+              "diskSizeGB": 1023,
+              "createOption": "Empty",
+              "lun": 0,
+              "vhd": {
+                "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk0.vhd"
+              }
+            },
+            {
+              "diskSizeGB": 1023,
+              "createOption": "Empty",
+              "lun": 1,
+              "vhd": {
+                "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk1.vhd"
+              }
+            }
+          ]
+        },
+        "osProfile": {
+          "adminUsername": "{your-username}",
+          "computerName": "myVM",
+          "adminPassword": "{your-password}"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -16,62 +58,24 @@
               }
             }
           ]
-        },
-        "osProfile": {
-          "adminPassword": "{your-password}",
-          "adminUsername": "{your-username}",
-          "computerName": "myVM"
-        },
-        "storageProfile": {
-          "dataDisks": [
-            {
-              "createOption": "Empty",
-              "diskSizeGB": 1023,
-              "lun": 0,
-              "vhd": {
-                "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk0.vhd"
-              }
-            },
-            {
-              "createOption": "Empty",
-              "diskSizeGB": 1023,
-              "lun": 1,
-              "vhd": {
-                "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk1.vhd"
-              }
-            }
-          ],
-          "imageReference": {
-            "offer": "WindowsServer",
-            "publisher": "MicrosoftWindowsServer",
-            "sku": "2016-Datacenter",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "myVMosdisk",
-            "caching": "ReadWrite",
-            "createOption": "FromImage",
-            "vhd": {
-              "uri": "http://{existing-storage-account-name}.blob.core.windows.net/{existing-container-name}/myDisk.vhd"
-            }
-          }
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "{vm-name}"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D2_v2"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -83,68 +87,68 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [
-              {
-                "name": "dataDisk0",
-                "caching": "None",
-                "createOption": "Empty",
-                "diskSizeGB": 1023,
-                "lun": 0,
-                "vhd": {
-                  "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk0.vhd"
-                }
-              },
-              {
-                "name": "dataDisk1",
-                "caching": "None",
-                "createOption": "Empty",
-                "diskSizeGB": 1023,
-                "lun": 1,
-                "vhd": {
-                  "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk1.vhd"
-                }
-              }
-            ],
             "imageReference": {
-              "offer": "WindowsServer",
-              "publisher": "MicrosoftWindowsServer",
               "sku": "2016-Datacenter",
-              "version": "latest"
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
+              "offer": "WindowsServer"
             },
             "osDisk": {
-              "name": "myVMosdisk",
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
               "osType": "Windows",
               "vhd": {
                 "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk.vhd"
+              },
+              "createOption": "FromImage",
+              "name": "myVMosdisk",
+              "caching": "ReadWrite"
+            },
+            "dataDisks": [
+              {
+                "name": "dataDisk0",
+                "diskSizeGB": 1023,
+                "createOption": "Empty",
+                "caching": "None",
+                "vhd": {
+                  "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk0.vhd"
+                },
+                "lun": 0
+              },
+              {
+                "name": "dataDisk1",
+                "diskSizeGB": 1023,
+                "createOption": "Empty",
+                "caching": "None",
+                "vhd": {
+                  "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk1.vhd"
+                },
+                "lun": 1
               }
-            }
+            ]
           },
-          "vmId": "5230a749-2f68-4830-900b-702182d32e63"
-        }
+          "vmId": "5230a749-2f68-4830-900b-702182d32e63",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2_v2"
+          },
+          "provisioningState": "Creating"
+        },
+        "name": "myVM",
+        "location": "westus"
       }
     },
     "201": {
       "body": {
-        "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachines",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D2_v2"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -156,57 +160,53 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [
-              {
-                "name": "dataDisk0",
-                "caching": "None",
-                "createOption": "Empty",
-                "diskSizeGB": 1023,
-                "lun": 0,
-                "vhd": {
-                  "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk0.vhd"
-                }
-              },
-              {
-                "name": "dataDisk1",
-                "caching": "None",
-                "createOption": "Empty",
-                "diskSizeGB": 1023,
-                "lun": 1,
-                "vhd": {
-                  "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk1.vhd"
-                }
-              }
-            ],
             "imageReference": {
-              "offer": "WindowsServer",
-              "publisher": "MicrosoftWindowsServer",
               "sku": "2016-Datacenter",
-              "version": "latest"
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
+              "offer": "WindowsServer"
             },
             "osDisk": {
-              "name": "myVMosdisk",
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
               "osType": "Windows",
               "vhd": {
                 "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk.vhd"
+              },
+              "createOption": "FromImage",
+              "name": "myVMosdisk",
+              "caching": "ReadWrite"
+            },
+            "dataDisks": [
+              {
+                "name": "dataDisk0",
+                "diskSizeGB": 1023,
+                "createOption": "Empty",
+                "caching": "None",
+                "vhd": {
+                  "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk0.vhd"
+                },
+                "lun": 0
+              },
+              {
+                "name": "dataDisk1",
+                "diskSizeGB": 1023,
+                "createOption": "Empty",
+                "caching": "None",
+                "vhd": {
+                  "uri": "http://{existing-storage-account-name}.blob.core.windows.net/vhds/myDisk1.vhd"
+                },
+                "lun": 1
               }
-            }
+            ]
           },
-          "vmId": "5230a749-2f68-4830-900b-702182d32e63"
-        }
+          "vmId": "5230a749-2f68-4830-900b-702182d32e63",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2_v2"
+          },
+          "provisioningState": "Creating"
+        },
+        "name": "myVM",
+        "location": "westus"
       }
     }
   },

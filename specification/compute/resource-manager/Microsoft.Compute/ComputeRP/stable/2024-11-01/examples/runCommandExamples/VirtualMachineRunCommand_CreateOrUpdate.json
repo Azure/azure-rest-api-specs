@@ -1,16 +1,16 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "runCommandName": "myRunCommand",
+    "api-version": "2024-11-01",
     "runCommand": {
       "location": "West US",
       "properties": {
-        "asyncExecution": false,
-        "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/scriptURI",
-        "outputBlobManagedIdentity": {
-          "clientId": "22d35efb-0c99-4041-8c5b-6d24db33a69a"
+        "source": {
+          "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/scriptURI"
         },
-        "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
         "parameters": [
           {
             "name": "param1",
@@ -21,30 +21,34 @@
             "value": "value2"
           }
         ],
-        "runAsPassword": "<runAsPassword>",
+        "asyncExecution": false,
+        "treatFailureAsDeploymentFailure": false,
         "runAsUser": "user1",
-        "source": {
-          "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/scriptURI"
-        },
+        "runAsPassword": "<runAsPassword>",
         "timeoutInSeconds": 3600,
-        "treatFailureAsDeploymentFailure": false
+        "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+        "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/scriptURI",
+        "outputBlobManagedIdentity": {
+          "clientId": "22d35efb-0c99-4041-8c5b-6d24db33a69a"
+        }
       }
-    },
-    "runCommandName": "myRunCommand",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "myVM"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "myRunCommand",
-        "type": "Microsoft.Compute/virtualMachines/runCommands",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRunCommand",
+        "type": "Microsoft.Compute/virtualMachines/runCommands",
         "location": "westus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
         "properties": {
-          "asyncExecution": false,
-          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
-          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "source": {
+            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
+          },
           "parameters": [
             {
               "name": "param1",
@@ -55,30 +59,30 @@
               "value": "value2"
             }
           ],
-          "provisioningState": "Succeeded",
+          "asyncExecution": false,
+          "treatFailureAsDeploymentFailure": false,
           "runAsUser": "user1",
-          "source": {
-            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
-          },
           "timeoutInSeconds": 3600,
-          "treatFailureAsDeploymentFailure": false
-        },
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
+          "provisioningState": "Succeeded",
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
         }
       }
     },
     "201": {
       "body": {
         "name": "myRunCommand",
-        "type": "Microsoft.Compute/virtualMachines/runCommands",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRunCommand",
+        "type": "Microsoft.Compute/virtualMachines/runCommands",
         "location": "westus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
         "properties": {
-          "asyncExecution": false,
-          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt",
-          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "source": {
+            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
+          },
           "parameters": [
             {
               "name": "param1",
@@ -89,17 +93,13 @@
               "value": "value2"
             }
           ],
-          "provisioningState": "Creating",
+          "asyncExecution": false,
+          "treatFailureAsDeploymentFailure": false,
           "runAsUser": "user1",
-          "source": {
-            "scriptUri": "https://mystorageaccount.blob.core.windows.net/scriptcontainer/MyScript.ps1"
-          },
           "timeoutInSeconds": 3600,
-          "treatFailureAsDeploymentFailure": false
-        },
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
+          "provisioningState": "Creating",
+          "outputBlobUri": "https://mystorageaccount.blob.core.windows.net/myscriptoutputcontainer/MyScriptoutput.txt",
+          "errorBlobUri": "https://mystorageaccount.blob.core.windows.net/mycontainer/MyScriptError.txt"
         }
       }
     }

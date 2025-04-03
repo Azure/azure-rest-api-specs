@@ -1,5 +1,7 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-11-01",
     "imageName": "myImage",
     "parameters": {
@@ -7,70 +9,68 @@
       "properties": {
         "storageProfile": {
           "osDisk": {
-            "diskEncryptionSet": {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
-            },
+            "osType": "Linux",
             "managedDisk": {
               "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk"
             },
-            "osState": "Generalized",
-            "osType": "Linux"
+            "diskEncryptionSet": {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+            },
+            "osState": "Generalized"
           }
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myImage",
-        "type": "Microsoft.Compute/images",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
-        "location": "westus",
         "properties": {
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "osDisk": {
-              "caching": "ReadWrite",
-              "diskEncryptionSet": {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
-              },
+              "osType": "Linux",
               "managedDisk": {
                 "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk"
               },
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              },
               "osState": "Generalized",
-              "osType": "Linux"
-            }
-          }
-        }
+              "caching": "ReadWrite"
+            },
+            "dataDisks": []
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
       }
     },
     "201": {
       "body": {
-        "name": "myImage",
-        "type": "Microsoft.Compute/images",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
-        "location": "westus",
         "properties": {
-          "provisioningState": "Creating",
           "storageProfile": {
-            "dataDisks": [],
             "osDisk": {
-              "caching": "ReadWrite",
-              "diskEncryptionSet": {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
-              },
+              "osType": "Linux",
               "managedDisk": {
                 "id": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk"
               },
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              },
               "osState": "Generalized",
-              "osType": "Linux"
-            }
-          }
-        }
+              "caching": "ReadWrite"
+            },
+            "dataDisks": []
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
       }
     }
   },

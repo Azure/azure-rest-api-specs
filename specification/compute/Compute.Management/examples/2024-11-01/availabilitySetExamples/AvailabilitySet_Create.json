@@ -1,5 +1,7 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-11-01",
     "availabilitySetName": "myAvailabilitySet",
     "parameters": {
@@ -8,35 +10,33 @@
         "platformFaultDomainCount": 2,
         "platformUpdateDomainCount": 20
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "sku": {
+          "name": "Classic"
+        },
         "name": "myAvailabilitySet",
-        "type": "Microsoft.Compute/availabilitySets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/myAvailabilitySet",
-        "location": "westus",
         "properties": {
           "platformFaultDomainCount": 2,
           "platformUpdateDomainCount": 20,
           "virtualMachineScaleSetMigrationInfo": {
             "defaultVirtualMachineScaleSetInfo": {
-              "constrainedMaximumCapacity": false,
               "defaultVirtualMachineScaleSet": {
                 "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
-              }
+              },
+              "constrainedMaximumCapacity": false
             },
             "migrateToVirtualMachineScaleSet": {
               "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
             }
           }
         },
-        "sku": {
-          "name": "Classic"
-        }
+        "location": "westus",
+        "type": "Microsoft.Compute/availabilitySets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/myAvailabilitySet"
       }
     }
   },

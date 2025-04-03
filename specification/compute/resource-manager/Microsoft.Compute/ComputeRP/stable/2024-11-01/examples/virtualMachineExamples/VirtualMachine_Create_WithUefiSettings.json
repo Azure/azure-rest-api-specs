@@ -1,11 +1,42 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "westus",
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_D2s_v3"
+        },
+        "securityProfile": {
+          "uefiSettings": {
+            "secureBootEnabled": true,
+            "vTpmEnabled": true
+          },
+          "securityType": "TrustedLaunch"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "sku": "windows10-tvm",
+            "publisher": "MicrosoftWindowsServer",
+            "version": "18363.592.2001092016",
+            "offer": "windowsserver-gen2preview-preview"
+          },
+          "osDisk": {
+            "caching": "ReadOnly",
+            "managedDisk": {
+              "storageAccountType": "StandardSSD_LRS"
+            },
+            "createOption": "FromImage",
+            "name": "myVMosdisk"
+          }
+        },
+        "osProfile": {
+          "adminUsername": "{your-username}",
+          "computerName": "myVM",
+          "adminPassword": "{your-password}"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -16,51 +47,23 @@
               }
             }
           ]
-        },
-        "osProfile": {
-          "adminPassword": "{your-password}",
-          "adminUsername": "{your-username}",
-          "computerName": "myVM"
-        },
-        "securityProfile": {
-          "securityType": "TrustedLaunch",
-          "uefiSettings": {
-            "secureBootEnabled": true,
-            "vTpmEnabled": true
-          }
-        },
-        "storageProfile": {
-          "imageReference": {
-            "offer": "windowsserver-gen2preview-preview",
-            "publisher": "MicrosoftWindowsServer",
-            "sku": "windows10-tvm",
-            "version": "18363.592.2001092016"
-          },
-          "osDisk": {
-            "name": "myVMosdisk",
-            "caching": "ReadOnly",
-            "createOption": "FromImage",
-            "managedDisk": {
-              "storageAccountType": "StandardSSD_LRS"
-            }
-          }
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "myVM"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D2s_v3"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -72,54 +75,54 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Creating",
-          "securityProfile": {
-            "securityType": "TrustedLaunch",
-            "uefiSettings": {
-              "secureBootEnabled": true,
-              "vTpmEnabled": true
-            }
-          },
           "storageProfile": {
-            "dataDisks": [],
             "imageReference": {
-              "offer": "windowsserver-gen2preview-preview",
-              "publisher": "MicrosoftWindowsServer",
               "sku": "windows10-tvm",
-              "version": "18363.592.2001092016"
+              "publisher": "MicrosoftWindowsServer",
+              "version": "18363.592.2001092016",
+              "offer": "windowsserver-gen2preview-preview"
             },
             "osDisk": {
-              "name": "myVMosdisk",
+              "osType": "Windows",
               "caching": "ReadOnly",
-              "createOption": "FromImage",
               "managedDisk": {
                 "storageAccountType": "StandardSSD_LRS"
               },
-              "osType": "Windows"
-            }
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
           },
-          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85"
-        }
+          "securityProfile": {
+            "uefiSettings": {
+              "secureBootEnabled": true,
+              "vTpmEnabled": true
+            },
+            "securityType": "TrustedLaunch"
+          },
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v3"
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus"
       }
     },
     "201": {
       "body": {
         "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_D2s_v3"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -131,43 +134,40 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
-          },
-          "provisioningState": "Creating",
-          "securityProfile": {
-            "securityType": "TrustedLaunch",
-            "uefiSettings": {
-              "secureBootEnabled": true,
-              "vTpmEnabled": true
-            }
-          },
           "storageProfile": {
-            "dataDisks": [],
             "imageReference": {
-              "offer": "windowsserver-gen2preview-preview",
-              "publisher": "MicrosoftWindowsServer",
               "sku": "windows10-tvm",
-              "version": "18363.592.2001092016"
+              "publisher": "MicrosoftWindowsServer",
+              "version": "18363.592.2001092016",
+              "offer": "windowsserver-gen2preview-preview"
             },
             "osDisk": {
-              "name": "myVMosdisk",
+              "osType": "Windows",
               "caching": "ReadOnly",
-              "createOption": "FromImage",
               "managedDisk": {
                 "storageAccountType": "StandardSSD_LRS"
               },
-              "osType": "Windows"
-            }
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
           },
-          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85"
-        }
+          "securityProfile": {
+            "uefiSettings": {
+              "secureBootEnabled": true,
+              "vTpmEnabled": true
+            },
+            "securityType": "TrustedLaunch"
+          },
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_D2s_v3"
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus"
       }
     }
   },

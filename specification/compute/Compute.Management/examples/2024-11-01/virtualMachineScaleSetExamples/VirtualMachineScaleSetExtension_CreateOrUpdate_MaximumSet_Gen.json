@@ -1,74 +1,74 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "resourceGroupName": "rgcompute",
+    "vmScaleSetName": "aaaaaaa",
+    "vmssExtensionName": "aaaaaaaaaaaaaaaaaaaaa",
     "extensionParameters": {
       "name": "{extension-name}",
       "properties": {
-        "type": "{extension-Type}",
         "autoUpgradeMinorVersion": true,
-        "enableAutomaticUpgrade": true,
+        "publisher": "{extension-Publisher}",
+        "type": "{extension-Type}",
+        "typeHandlerVersion": "{handler-version}",
+        "settings": {},
         "forceUpdateTag": "aaaaaaaaa",
+        "enableAutomaticUpgrade": true,
         "protectedSettings": {},
         "provisionAfterExtensions": [
           "aa"
         ],
-        "publisher": "{extension-Publisher}",
-        "settings": {},
-        "suppressFailures": true,
-        "typeHandlerVersion": "{handler-version}"
+        "suppressFailures": true
       }
     },
-    "resourceGroupName": "rgcompute",
-    "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "aaaaaaa",
-    "vmssExtensionName": "aaaaaaaaaaaaaaaaaaaaa"
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
         "name": "{extension-name}",
-        "type": "aaaaaaaaaaaaaaaaaaaaaaaa",
-        "id": "aaaaaaaa",
         "properties": {
-          "type": "{extension-Type}",
           "autoUpgradeMinorVersion": true,
-          "enableAutomaticUpgrade": true,
+          "publisher": "{extension-Publisher}",
+          "type": "{extension-Type}",
+          "typeHandlerVersion": "{handler-version}",
+          "settings": {},
           "forceUpdateTag": "aaaaaaaaa",
+          "enableAutomaticUpgrade": true,
           "protectedSettings": {},
+          "provisioningState": "aaa",
           "provisionAfterExtensions": [
             "aa"
           ],
-          "provisioningState": "aaa",
-          "publisher": "{extension-Publisher}",
-          "settings": {},
-          "suppressFailures": true,
-          "typeHandlerVersion": "{handler-version}"
-        }
+          "suppressFailures": true
+        },
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaa"
       }
     },
     "201": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      },
       "body": {
         "name": "{extension-name}",
-        "type": "aaaaaaaaaaaaaaaaaaaaaaaa",
-        "id": "aaaaaaaa",
         "properties": {
-          "type": "{extension-Type}",
           "autoUpgradeMinorVersion": true,
-          "enableAutomaticUpgrade": true,
+          "publisher": "{extension-Publisher}",
+          "type": "{extension-Type}",
+          "typeHandlerVersion": "{handler-version}",
+          "settings": {},
           "forceUpdateTag": "aaaaaaaaa",
+          "enableAutomaticUpgrade": true,
           "protectedSettings": {},
+          "provisioningState": "aaa",
           "provisionAfterExtensions": [
             "aa"
           ],
-          "provisioningState": "aaa",
-          "publisher": "{extension-Publisher}",
-          "settings": {},
-          "suppressFailures": true,
-          "typeHandlerVersion": "{handler-version}"
-        }
-      },
-      "headers": {
-        "location": "https://foo.com/operationstatus"
+          "suppressFailures": true
+        },
+        "type": "aaaaaaaaaaaaaaaaaaaaaaaa",
+        "id": "aaaaaaaa"
       }
     }
   },

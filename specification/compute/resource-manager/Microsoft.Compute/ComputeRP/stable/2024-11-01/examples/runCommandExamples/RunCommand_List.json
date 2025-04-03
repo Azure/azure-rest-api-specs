@@ -1,82 +1,82 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "subscriptionId": "subid",
     "location": "SoutheastAsia",
-    "subscriptionId": "subid"
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "description": "Configure the machine to enable remote PowerShell.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "EnableRemotePS",
+            "osType": "Windows",
             "label": "Enable remote PowerShell",
-            "osType": "Windows"
+            "description": "Configure the machine to enable remote PowerShell."
           },
           {
-            "description": "Shows detailed information for the IP address, subnet mask and default gateway for each adapter bound to TCP/IP.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "IPConfig",
+            "osType": "Windows",
             "label": "List IP configuration",
-            "osType": "Windows"
+            "description": "Shows detailed information for the IP address, subnet mask and default gateway for each adapter bound to TCP/IP."
           },
           {
-            "description": "Custom multiline PowerShell script should be defined in script property. Optional parameters can be set in parameters property.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "RunPowerShellScript",
+            "osType": "Windows",
             "label": "Executes a PowerShell script",
-            "osType": "Windows"
+            "description": "Custom multiline PowerShell script should be defined in script property. Optional parameters can be set in parameters property."
           },
           {
-            "description": "Custom multiline shell script should be defined in script property. Optional parameters can be set in parameters property.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "RunShellScript",
+            "osType": "Linux",
             "label": "Executes a Linux shell script",
-            "osType": "Linux"
+            "description": "Custom multiline shell script should be defined in script property. Optional parameters can be set in parameters property."
           },
           {
-            "description": "Get the configuration of all network interfaces.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "ifconfig",
+            "osType": "Linux",
             "label": "List network configuration",
-            "osType": "Linux"
+            "description": "Get the configuration of all network interfaces."
           },
           {
-            "description": "Checks if the local Administrator account is disabled, and if so enables it.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "EnableAdminAccount",
+            "osType": "Windows",
             "label": "Enable administrator account",
-            "osType": "Windows"
+            "description": "Checks if the local Administrator account is disabled, and if so enables it."
           },
           {
-            "description": "Reset built-in Administrator account password.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "ResetAccountPassword",
+            "osType": "Windows",
             "label": "Reset built-in Administrator account password",
-            "osType": "Windows"
+            "description": "Reset built-in Administrator account password."
           },
           {
-            "description": "Checks registry settings and domain policy settings. Suggests policy actions if machine is part of a domain or modifies the settings to default values.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "RDPSettings",
+            "osType": "Windows",
             "label": "Verify RDP Listener Settings",
-            "osType": "Windows"
+            "description": "Checks registry settings and domain policy settings. Suggests policy actions if machine is part of a domain or modifies the settings to default values."
           },
           {
-            "description": "Sets the default or user specified port number for Remote Desktop connections. Enables firewall rule for inbound access to the port.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "SetRDPPort",
+            "osType": "Windows",
             "label": "Set Remote Desktop port",
-            "osType": "Windows"
+            "description": "Sets the default or user specified port number for Remote Desktop connections. Enables firewall rule for inbound access to the port."
           },
           {
-            "description": "Removes the SSL certificate tied to the RDP listener and restores the RDP listerner security to default. Use this script if you see any issues with the certificate.",
             "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
             "id": "ResetRDPCert",
+            "osType": "Windows",
             "label": "Restore RDP Authentication mode to defaults",
-            "osType": "Windows"
+            "description": "Removes the SSL certificate tied to the RDP listener and restores the RDP listerner security to default. Use this script if you see any issues with the certificate."
           }
         ]
       }

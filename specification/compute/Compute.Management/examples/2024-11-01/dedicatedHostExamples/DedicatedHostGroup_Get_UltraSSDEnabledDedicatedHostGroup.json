@@ -1,26 +1,26 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
-    "expand": "instanceView",
-    "hostGroupName": "myDedicatedHostGroup",
+    "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscriptionId}"
+    "api-version": "2024-11-01",
+    "hostGroupName": "myDedicatedHostGroup",
+    "expand": "instanceView"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myDedicatedHostGroup",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
-        "location": "westus",
         "properties": {
-          "additionalCapabilities": {
-            "ultraSSDEnabled": true
-          },
+          "platformFaultDomainCount": 3,
           "hosts": [
             {
               "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/myDedicatedHostGroup/myHostGroup/Hosts/myHost"
             }
           ],
+          "supportAutomaticPlacement": true,
+          "additionalCapabilities": {
+            "ultraSSDEnabled": true
+          },
           "instanceView": {
             "hosts": [
               {
@@ -29,32 +29,32 @@
                 "availableCapacity": {
                   "allocatableVMs": [
                     {
-                      "count": 10,
-                      "vmSize": "Standard_A1"
+                      "vmSize": "Standard_A1",
+                      "count": 10
                     }
                   ]
                 },
                 "statuses": [
                   {
                     "code": "ProvisioningState/succeeded",
-                    "displayStatus": "Provisioning succeeded",
-                    "level": "Info"
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
                   },
                   {
                     "code": "HealthState/available",
-                    "displayStatus": "Host available",
-                    "level": "Info"
+                    "level": "Info",
+                    "displayStatus": "Host available"
                   }
                 ]
               }
             ]
-          },
-          "platformFaultDomainCount": 3,
-          "supportAutomaticPlacement": true
+          }
         },
+        "location": "westus",
         "tags": {
           "{tagName}": "{tagValue}"
         },
+        "name": "myDedicatedHostGroup",
         "zones": [
           "3"
         ]

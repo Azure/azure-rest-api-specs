@@ -1,11 +1,45 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
     "api-version": "2024-11-01",
     "parameters": {
       "location": "westus",
       "properties": {
         "hardwareProfile": {
           "vmSize": "Standard_DC2as_v5"
+        },
+        "securityProfile": {
+          "uefiSettings": {
+            "secureBootEnabled": true,
+            "vTpmEnabled": true
+          },
+          "securityType": "ConfidentialVM"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "sku": "windows-cvm",
+            "publisher": "MicrosoftWindowsServer",
+            "version": "17763.2183.2109130127",
+            "offer": "2019-datacenter-cvm"
+          },
+          "osDisk": {
+            "caching": "ReadOnly",
+            "managedDisk": {
+              "storageAccountType": "StandardSSD_LRS",
+              "securityProfile": {
+                "securityEncryptionType": "DiskWithVMGuestState"
+              }
+            },
+            "createOption": "FromImage",
+            "name": "myVMosdisk"
+          }
+        },
+        "osProfile": {
+          "adminUsername": "{your-username}",
+          "computerName": "myVM",
+          "adminPassword": "{your-password}"
         },
         "networkProfile": {
           "networkInterfaces": [
@@ -16,54 +50,23 @@
               }
             }
           ]
-        },
-        "osProfile": {
-          "adminPassword": "{your-password}",
-          "adminUsername": "{your-username}",
-          "computerName": "myVM"
-        },
-        "securityProfile": {
-          "securityType": "ConfidentialVM",
-          "uefiSettings": {
-            "secureBootEnabled": true,
-            "vTpmEnabled": true
-          }
-        },
-        "storageProfile": {
-          "imageReference": {
-            "offer": "2019-datacenter-cvm",
-            "publisher": "MicrosoftWindowsServer",
-            "sku": "windows-cvm",
-            "version": "17763.2183.2109130127"
-          },
-          "osDisk": {
-            "name": "myVMosdisk",
-            "caching": "ReadOnly",
-            "createOption": "FromImage",
-            "managedDisk": {
-              "securityProfile": {
-                "securityEncryptionType": "DiskWithVMGuestState"
-              },
-              "storageAccountType": "StandardSSD_LRS"
-            }
-          }
         }
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "myVM"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_DC2as_v5"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -75,56 +78,56 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
+          "storageProfile": {
+            "imageReference": {
+              "sku": "windows-cvm",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "17763.2183.2109130127",
+              "offer": "2019-datacenter-cvm"
+            },
+            "osDisk": {
+              "caching": "ReadOnly",
+              "managedDisk": {
+                "storageAccountType": "StandardSSD_LRS",
+                "securityProfile": {
+                  "securityEncryptionType": "DiskWithVMGuestState"
+                }
+              },
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
           },
-          "provisioningState": "Creating",
           "securityProfile": {
-            "securityType": "ConfidentialVM",
             "uefiSettings": {
               "secureBootEnabled": true,
               "vTpmEnabled": true
-            }
-          },
-          "storageProfile": {
-            "dataDisks": [],
-            "imageReference": {
-              "offer": "2019-datacenter-cvm",
-              "publisher": "MicrosoftWindowsServer",
-              "sku": "windows-cvm",
-              "version": "17763.2183.2109130127"
             },
-            "osDisk": {
-              "name": "myVMosdisk",
-              "caching": "ReadOnly",
-              "createOption": "FromImage",
-              "managedDisk": {
-                "securityProfile": {
-                  "securityEncryptionType": "DiskWithVMGuestState"
-                },
-                "storageAccountType": "StandardSSD_LRS"
-              }
-            }
+            "securityType": "ConfidentialVM"
           },
-          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85"
-        }
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_DC2as_v5"
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus"
       }
     },
     "201": {
       "body": {
         "name": "myVM",
-        "type": "Microsoft.Compute/virtualMachines",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "location": "westus",
         "properties": {
-          "hardwareProfile": {
-            "vmSize": "Standard_DC2as_v5"
+          "osProfile": {
+            "adminUsername": "{your-username}",
+            "secrets": [],
+            "computerName": "myVM",
+            "windowsConfiguration": {
+              "provisionVMAgent": true,
+              "enableAutomaticUpdates": true
+            }
           },
           "networkProfile": {
             "networkInterfaces": [
@@ -136,45 +139,42 @@
               }
             ]
           },
-          "osProfile": {
-            "adminUsername": "{your-username}",
-            "computerName": "myVM",
-            "secrets": [],
-            "windowsConfiguration": {
-              "enableAutomaticUpdates": true,
-              "provisionVMAgent": true
-            }
+          "storageProfile": {
+            "imageReference": {
+              "sku": "windows-cvm",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "17763.2183.2109130127",
+              "offer": "2019-datacenter-cvm"
+            },
+            "osDisk": {
+              "caching": "ReadOnly",
+              "managedDisk": {
+                "storageAccountType": "StandardSSD_LRS",
+                "securityProfile": {
+                  "securityEncryptionType": "DiskWithVMGuestState"
+                }
+              },
+              "createOption": "FromImage",
+              "name": "myVMosdisk"
+            },
+            "dataDisks": []
           },
-          "provisioningState": "Creating",
           "securityProfile": {
-            "securityType": "ConfidentialVM",
             "uefiSettings": {
               "secureBootEnabled": true,
               "vTpmEnabled": true
-            }
-          },
-          "storageProfile": {
-            "dataDisks": [],
-            "imageReference": {
-              "offer": "2019-datacenter-cvm",
-              "publisher": "MicrosoftWindowsServer",
-              "sku": "windows-cvm",
-              "version": "17763.2183.2109130127"
             },
-            "osDisk": {
-              "name": "myVMosdisk",
-              "caching": "ReadOnly",
-              "createOption": "FromImage",
-              "managedDisk": {
-                "securityProfile": {
-                  "securityEncryptionType": "DiskWithVMGuestState"
-                },
-                "storageAccountType": "StandardSSD_LRS"
-              }
-            }
+            "securityType": "ConfidentialVM"
           },
-          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85"
-        }
+          "vmId": "5c0d55a7-c407-4ed6-bf7d-ddb810267c85",
+          "hardwareProfile": {
+            "vmSize": "Standard_DC2as_v5"
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/virtualMachines",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+        "location": "westus"
       }
     }
   },

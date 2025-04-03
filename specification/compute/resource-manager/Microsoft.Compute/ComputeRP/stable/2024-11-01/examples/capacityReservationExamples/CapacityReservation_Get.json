@@ -1,44 +1,20 @@
 {
   "parameters": {
-    "$expand": "instanceView",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-11-01",
     "capacityReservationGroupName": "myCapacityReservationGroup",
     "capacityReservationName": "myCapacityReservation",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscriptionId}"
+    "$expand": "instanceView"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myCapacityReservation",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/myCapacityReservationGroup/capacityReservations/myCapacityReservation",
-        "location": "westus",
         "properties": {
-          "instanceView": {
-            "statuses": [
-              {
-                "code": "ProvisioningState/succeeded",
-                "displayStatus": "Provisioning succeeded",
-                "level": "Info"
-              }
-            ],
-            "utilizationInfo": {
-              "currentCapacity": 5,
-              "virtualMachinesAllocated": [
-                {
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
-                },
-                {
-                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
-                }
-              ]
-            }
-          },
           "platformFaultDomainCount": 3,
-          "provisioningState": "Succeeded",
-          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
           "reservationId": "{GUID}",
-          "timeCreated": "2021-06-27T01:02:38.3138469+00:00",
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
           "virtualMachinesAssociated": [
             {
               "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
@@ -49,18 +25,42 @@
             {
               "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
             }
-          ]
+          ],
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "utilizationInfo": {
+              "currentCapacity": 5,
+              "virtualMachinesAllocated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                }
+              ]
+            },
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded"
+              }
+            ]
+          },
+          "timeCreated": "2021-06-27T01:02:38.3138469+00:00"
+        },
+        "location": "westus",
+        "tags": {
+          "department": "HR"
         },
         "sku": {
           "name": "Standard_DS1_v2",
           "capacity": 4
         },
-        "tags": {
-          "department": "HR"
-        },
         "zones": [
           "1"
-        ]
+        ],
+        "name": "myCapacityReservation"
       }
     }
   },

@@ -1,32 +1,34 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
     "location": "aaaaaa",
-    "offer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "publisherName": "aaa",
+    "offer": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "skus": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "subscriptionId": "{subscription-id}",
-    "version": "aaaaaaaaaaaaaaaaaaa"
+    "version": "aaaaaaaaaaaaaaaaaaa",
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "aaaaaaaaa",
-        "extendedLocation": {
-          "name": "aaaaaaaaaaaaaaaaaaaaa",
-          "type": "EdgeZone"
-        },
-        "id": "aaaaaaaaaaa",
-        "location": "aaaaa",
         "properties": {
-          "automaticOSUpgradeProperties": {
-            "automaticOSUpgradeSupported": true
+          "plan": {
+            "publisher": "aaaaaaaaaaaaaaaaaaa",
+            "name": "aaaaaaaaa",
+            "product": "aaaaaaaaaaaaaa"
+          },
+          "osDiskImage": {
+            "operatingSystem": "Windows"
           },
           "dataDiskImages": [
             {
               "lun": 17
             }
           ],
+          "automaticOSUpgradeProperties": {
+            "automaticOSUpgradeSupported": true
+          },
+          "hyperVGeneration": "V1",
           "disallowed": {
             "vmDiskType": "None"
           },
@@ -36,27 +38,25 @@
               "value": "aaaaaaaaaaaaaaaaaaaa"
             }
           ],
-          "hyperVGeneration": "V1",
           "imageDeprecationStatus": {
+            "imageState": "ScheduledForDeprecation",
+            "scheduledDeprecationTime": "2023-01-13T00:00:00+00:00",
             "alternativeOption": {
               "type": "Offer",
               "value": "aaaaaaa"
-            },
-            "imageState": "ScheduledForDeprecation",
-            "scheduledDeprecationTime": "2023-01-13T00:00:00+00:00"
-          },
-          "osDiskImage": {
-            "operatingSystem": "Windows"
-          },
-          "plan": {
-            "name": "aaaaaaaaa",
-            "product": "aaaaaaaaaaaaaa",
-            "publisher": "aaaaaaaaaaaaaaaaaaa"
+            }
           }
         },
+        "name": "aaaaaaaaa",
+        "location": "aaaaa",
         "tags": {
           "key6817": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        }
+        },
+        "extendedLocation": {
+          "name": "aaaaaaaaaaaaaaaaaaaaa",
+          "type": "EdgeZone"
+        },
+        "id": "aaaaaaaaaaa"
       }
     }
   },

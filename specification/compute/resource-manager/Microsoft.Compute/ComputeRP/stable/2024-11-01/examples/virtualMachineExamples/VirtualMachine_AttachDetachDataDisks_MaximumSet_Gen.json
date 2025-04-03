@@ -1,98 +1,98 @@
 {
   "parameters": {
+    "resourceGroupName": "rgcompute",
+    "vmName": "aaaaaaaaaaaaaaaaaaaa",
     "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}",
     "parameters": {
       "dataDisksToAttach": [
         {
-          "caching": "ReadOnly",
-          "deleteOption": "Delete",
+          "lun": 1,
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
           "diskEncryptionSet": {
             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
           },
-          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
-          "lun": 1,
+          "caching": "ReadOnly",
+          "deleteOption": "Delete",
           "writeAcceleratorEnabled": true
         },
         {
-          "caching": "ReadWrite",
-          "deleteOption": "Detach",
+          "lun": 2,
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
           "diskEncryptionSet": {
             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
           },
-          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
-          "lun": 2,
+          "caching": "ReadWrite",
+          "deleteOption": "Detach",
           "writeAcceleratorEnabled": false
         }
       ],
       "dataDisksToDetach": [
         {
-          "detachOption": "ForceDetach",
-          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_1_disk1_1a4e784bdafa49baa780eb2d128ff65x"
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_1_disk1_1a4e784bdafa49baa780eb2d128ff65x",
+          "detachOption": "ForceDetach"
         },
         {
-          "detachOption": "ForceDetach",
-          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_4_disk4_4d4e784bdafa49baa780eb2d256ff41z"
+          "diskId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_4_disk4_4d4e784bdafa49baa780eb2d256ff41z",
+          "detachOption": "ForceDetach"
         }
       ]
-    },
-    "resourceGroupName": "rgcompute",
-    "subscriptionId": "{subscription-id}",
-    "vmName": "aaaaaaaaaaaaaaaaaaaa"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "dataDisks": [
-          {
-            "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
-            "caching": "ReadOnly",
-            "createOption": "Attach",
-            "deleteOption": "Delete",
-            "diskSizeGB": 30,
-            "lun": 1,
-            "managedDisk": {
-              "diskEncryptionSet": {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
-              },
-              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
-              "storageAccountType": "Premium_LRS"
-            },
-            "writeAcceleratorEnabled": true
-          },
-          {
-            "name": "vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
-            "caching": "ReadWrite",
-            "createOption": "Attach",
-            "deleteOption": "Detach",
-            "diskSizeGB": 100,
-            "lun": 2,
-            "managedDisk": {
-              "diskEncryptionSet": {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
-              },
-              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
-              "storageAccountType": "Premium_LRS"
-            },
-            "writeAcceleratorEnabled": false
-          }
-        ],
         "imageReference": {
-          "offer": "WindowsServer",
           "publisher": "MicrosoftWindowsServer",
+          "offer": "WindowsServer",
           "sku": "2016-Datacenter",
           "version": "latest"
         },
         "osDisk": {
+          "osType": "Windows",
           "name": "myOsDisk",
-          "caching": "ReadWrite",
           "createOption": "FromImage",
-          "diskSizeGB": 30,
+          "caching": "ReadWrite",
           "managedDisk": {
-            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk",
-            "storageAccountType": "Premium_LRS"
+            "storageAccountType": "Premium_LRS",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk"
           },
-          "osType": "Windows"
-        }
+          "diskSizeGB": 30
+        },
+        "dataDisks": [
+          {
+            "lun": 1,
+            "name": "vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+            "createOption": "Attach",
+            "caching": "ReadOnly",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_0_disk2_6c4f554bdafa49baa780eb2d128ff39d",
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              }
+            },
+            "deleteOption": "Delete",
+            "diskSizeGB": 30,
+            "writeAcceleratorEnabled": true
+          },
+          {
+            "lun": 2,
+            "name": "vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+            "createOption": "Attach",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vmss3176_vmss3176_2_disk3_7d5e664bdafa49baa780eb2d128ff38e",
+              "diskEncryptionSet": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+              }
+            },
+            "deleteOption": "Detach",
+            "diskSizeGB": 100,
+            "writeAcceleratorEnabled": false
+          }
+        ]
       },
       "headers": {
         "location": "https://foo.com/operationstatus"

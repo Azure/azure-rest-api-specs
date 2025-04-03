@@ -1,19 +1,42 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
     "api-version": "2024-11-01",
     "parameters": {
+      "sku": {
+        "tier": "Standard",
+        "capacity": 3,
+        "name": "Standard_D1_v2"
+      },
       "location": "westus",
       "properties": {
         "overprovision": true,
-        "upgradePolicy": {
-          "mode": "Manual"
-        },
         "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/{existing-custom-image-name}"
+            },
+            "osDisk": {
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "createOption": "FromImage"
+            }
+          },
+          "osProfile": {
+            "computerNamePrefix": "{vmss-name}",
+            "adminUsername": "{your-username}",
+            "adminPassword": "{your-password}"
+          },
           "networkProfile": {
             "networkInterfaceConfigurations": [
               {
                 "name": "{vmss-name}",
                 "properties": {
+                  "primary": true,
                   "enableIPForwarding": true,
                   "ipConfigurations": [
                     {
@@ -24,78 +47,73 @@
                         }
                       }
                     }
-                  ],
-                  "primary": true
+                  ]
                 }
               },
               {
                 "name": "{fpgaNic-Name}",
                 "properties": {
+                  "primary": false,
                   "enableAcceleratedNetworking": false,
-                  "enableFpga": true,
                   "enableIPForwarding": false,
+                  "enableFpga": true,
                   "ipConfigurations": [
                     {
                       "name": "{fpgaNic-Name}",
                       "properties": {
                         "primary": true,
-                        "privateIPAddressVersion": "IPv4",
                         "subnet": {
                           "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-fpga-subnet-name}"
-                        }
+                        },
+                        "privateIPAddressVersion": "IPv4"
                       }
                     }
-                  ],
-                  "primary": false
+                  ]
                 }
               }
             ]
-          },
-          "osProfile": {
-            "adminPassword": "{your-password}",
-            "adminUsername": "{your-username}",
-            "computerNamePrefix": "{vmss-name}"
-          },
-          "storageProfile": {
-            "imageReference": {
-              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/{existing-custom-image-name}"
-            },
-            "osDisk": {
-              "caching": "ReadWrite",
-              "createOption": "FromImage",
-              "managedDisk": {
-                "storageAccountType": "Standard_LRS"
-              }
-            }
           }
+        },
+        "upgradePolicy": {
+          "mode": "Manual"
         }
-      },
-      "sku": {
-        "name": "Standard_D1_v2",
-        "capacity": 3,
-        "tier": "Standard"
       }
-    },
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}",
-    "vmScaleSetName": "{vmss-name}"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 3,
+          "name": "Standard_D1_v2"
+        },
         "name": "{vmss-name}",
-        "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
-        "location": "westus",
         "properties": {
-          "overprovision": true,
-          "provisioningState": "Creating",
           "singlePlacementGroup": true,
+          "overprovision": true,
           "uniqueId": "afa2afa8-9e49-48fb-9d18-c86323b5d064",
-          "upgradePolicy": {
-            "mode": "Manual"
-          },
           "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/nsgcustom"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "createOption": "FromImage"
+              }
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": false
+              }
+            },
             "networkProfile": {
               "networkInterfaceConfigurations": [
                 {
@@ -104,20 +122,20 @@
                     "dnsSettings": {
                       "dnsServers": []
                     },
-                    "enableAcceleratedNetworking": false,
+                    "primary": true,
                     "enableIPForwarding": true,
                     "ipConfigurations": [
                       {
                         "name": "{vmss-name}",
                         "properties": {
-                          "privateIPAddressVersion": "IPv4",
                           "subnet": {
                             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
-                          }
+                          },
+                          "privateIPAddressVersion": "IPv4"
                         }
                       }
                     ],
-                    "primary": true
+                    "enableAcceleratedNetworking": false
                   }
                 },
                 {
@@ -126,69 +144,69 @@
                     "dnsSettings": {
                       "dnsServers": []
                     },
-                    "enableAcceleratedNetworking": false,
+                    "primary": false,
                     "enableFpga": true,
                     "ipConfigurations": [
                       {
                         "name": "{fpgaNic-Name}",
                         "properties": {
                           "primary": true,
-                          "privateIPAddressVersion": "IPv4",
                           "subnet": {
                             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-fpga-subnet-name}"
-                          }
+                          },
+                          "privateIPAddressVersion": "IPv4"
                         }
                       }
                     ],
-                    "primary": false
+                    "enableAcceleratedNetworking": false
                   }
                 }
               ]
-            },
-            "osProfile": {
-              "adminUsername": "{your-username}",
-              "computerNamePrefix": "{vmss-name}",
-              "linuxConfiguration": {
-                "disablePasswordAuthentication": false
-              },
-              "secrets": []
-            },
-            "storageProfile": {
-              "imageReference": {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/nsgcustom"
-              },
-              "osDisk": {
-                "caching": "ReadWrite",
-                "createOption": "FromImage",
-                "managedDisk": {
-                  "storageAccountType": "Standard_LRS"
-                }
-              }
             }
-          }
+          },
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "provisioningState": "Creating"
         },
-        "sku": {
-          "name": "Standard_D1_v2",
-          "capacity": 3,
-          "tier": "Standard"
-        }
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     },
     "201": {
       "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 3,
+          "name": "Standard_D1_v2"
+        },
         "name": "{vmss-name}",
-        "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}",
-        "location": "westus",
         "properties": {
-          "overprovision": true,
-          "provisioningState": "Creating",
           "singlePlacementGroup": true,
+          "overprovision": true,
           "uniqueId": "afa2afa8-9e49-48fb-9d18-c86323b5d064",
-          "upgradePolicy": {
-            "mode": "Manual"
-          },
           "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/nsgcustom"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "createOption": "FromImage"
+              }
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": false
+              }
+            },
             "networkProfile": {
               "networkInterfaceConfigurations": [
                 {
@@ -197,20 +215,20 @@
                     "dnsSettings": {
                       "dnsServers": []
                     },
-                    "enableAcceleratedNetworking": false,
+                    "primary": true,
                     "enableIPForwarding": true,
                     "ipConfigurations": [
                       {
                         "name": "{vmss-name}",
                         "properties": {
-                          "privateIPAddressVersion": "IPv4",
                           "subnet": {
                             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
-                          }
+                          },
+                          "privateIPAddressVersion": "IPv4"
                         }
                       }
                     ],
-                    "primary": true
+                    "enableAcceleratedNetworking": false
                   }
                 },
                 {
@@ -219,52 +237,34 @@
                     "dnsSettings": {
                       "dnsServers": []
                     },
-                    "enableAcceleratedNetworking": false,
+                    "primary": false,
                     "enableFpga": true,
                     "ipConfigurations": [
                       {
                         "name": "{fpgaNic-Name}",
                         "properties": {
                           "primary": true,
-                          "privateIPAddressVersion": "IPv4",
                           "subnet": {
                             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-fpga-subnet-name}"
-                          }
+                          },
+                          "privateIPAddressVersion": "IPv4"
                         }
                       }
                     ],
-                    "primary": false
+                    "enableAcceleratedNetworking": false
                   }
                 }
               ]
-            },
-            "osProfile": {
-              "adminUsername": "{your-username}",
-              "computerNamePrefix": "{vmss-name}",
-              "linuxConfiguration": {
-                "disablePasswordAuthentication": false
-              },
-              "secrets": []
-            },
-            "storageProfile": {
-              "imageReference": {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/images/nsgcustom"
-              },
-              "osDisk": {
-                "caching": "ReadWrite",
-                "createOption": "FromImage",
-                "managedDisk": {
-                  "storageAccountType": "Standard_LRS"
-                }
-              }
             }
-          }
+          },
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "provisioningState": "Creating"
         },
-        "sku": {
-          "name": "Standard_D1_v2",
-          "capacity": 3,
-          "tier": "Standard"
-        }
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     }
   },

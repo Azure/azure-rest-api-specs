@@ -1,28 +1,28 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
+    "resourceGroupName": "rgcompute",
+    "vmName": "myVM",
+    "vmExtensionName": "myVMExtension",
     "extensionParameters": {
       "location": "westus"
     },
-    "resourceGroupName": "rgcompute",
-    "subscriptionId": "{subscription-id}",
-    "vmExtensionName": "myVMExtension",
-    "vmName": "myVM"
+    "api-version": "2024-11-01",
+    "subscriptionId": "{subscription-id}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension",
-        "location": "westus"
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension"
       }
     },
     "201": {
-      "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension",
-        "location": "westus"
-      },
       "headers": {
         "location": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension"
       }
     }
   },
