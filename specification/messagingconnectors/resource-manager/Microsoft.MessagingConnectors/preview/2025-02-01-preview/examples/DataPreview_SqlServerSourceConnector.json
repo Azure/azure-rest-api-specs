@@ -1,0 +1,52 @@
+{
+  "title": "DataPreview SqlServerSourceConnector",
+  "operationId": "DataPreviewOperations_Preview",
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "location": "Central US EUAP",
+    "body": {
+      "dataSourceProperties": {
+        "connectorType": "SqlServerSource",
+        "hostName": "hostName.SqlServerSource1.com",
+        "port": 8080,
+        "databaseName": "databaseName1",
+        "username": "username1",
+        "tableNames": "tableNames1",
+        "password": ""
+      },
+      "dataRange": {
+        "limit": 100,
+        "type": "Limit"
+      },
+      "converterConfig": {
+        "type": "ByteArrayConverter"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "key": "key1",
+            "valueSchema": "valueSchema1",
+            "value": "value1",
+            "headers": [
+              {
+                "key": "headerKey1",
+                "value": "headerValue1"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.MessagingConnectors/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "retry-after": "15"
+      }
+    }
+  }
+}
