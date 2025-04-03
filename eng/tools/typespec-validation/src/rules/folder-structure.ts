@@ -111,10 +111,13 @@ export class FolderStructureRule implements Rule {
     const allTsps = await host.globby("**/*.tsp", { cwd: teamFolder });
     console.log(`allTsps: ${JSON.stringify(allTsps)}`);
 
-    // for (const tsp of allTsps) {
-    //   const text = await host.readFile(path.join(teamFolder, tsp));
-    //   const imports =
-    // }
+    for (const tsp of allTsps) {
+      const pattern = /^\s*import\s+['"]([^'"]+)['"]\s+;/g;
+      const text = await host.readFile(path.join(teamFolder, tsp));
+      const imports = [...text.matchAll(pattern)].map((m) => m[1]);
+      console.log(tsp);
+      console.log(`imports: ${JSON.stringify(imports)}`);
+    }
 
     return {
       success: success,
