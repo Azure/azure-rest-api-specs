@@ -22,7 +22,7 @@ describe("iconFor", () => {
 });
 
 describe("getLine", () => {
-  test.concurrent("returns the line number", ({ expect }) => {
+  test("returns the line number", () => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -35,7 +35,7 @@ describe("getLine", () => {
     expect(actual).toEqual(1);
   });
 
-  test.concurrent("returns undefined when source is empty array", ({ expect }) => {
+  test("returns undefined when source is empty array", () => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -48,7 +48,7 @@ describe("getLine", () => {
     expect(actual).toEqual(undefined);
   });
 
-  test.concurrent("returns undefined when source position is empty", ({ expect }) => {
+  test("returns undefined when source position is empty", () => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -61,7 +61,7 @@ describe("getLine", () => {
     expect(actual).toEqual(undefined);
   });
 
-  test.concurrent("returns 0 when source position is 0", ({ expect }) => {
+  test("returns 0 when source position is 0", () => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -76,7 +76,7 @@ describe("getLine", () => {
 });
 
 describe("getFile", () => {
-  test.concurrent("returns the file name", ({ expect }) => {
+  test("returns the file name", () => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -89,7 +89,7 @@ describe("getFile", () => {
     expect(actual).toEqual("path/to/document1.json");
   });
 
-  test.concurrent("returns empty string when source is empty array", ({ expect }) => {
+  test("returns empty string when source is empty array", () => {
     const violation = {
       level: "fatal",
       code: "SomeCode1",
@@ -104,27 +104,27 @@ describe("getFile", () => {
 });
 
 describe("getDocUrl", () => {
-  test.concurrent("returns a pointer to a kebab-cased markdown file", ({ expect }) => {
+  test("returns a pointer to a kebab-cased markdown file", () => {
     expect(getDocUrl("TestViolation")).toEqual(
       "https://github.com/Azure/azure-openapi-validator/blob/main/docs/test-violation.md",
     );
   });
 
-  test.concurrent("returns N/A when code is FATAL", ({ expect }) => {
+  test("returns N/A when code is FATAL", () => {
     expect(getDocUrl("FATAL")).toEqual("N/A");
   });
 });
 
 describe("getFileLink", () => {
-  test.concurrent("does not include #L if line is null", ({ expect }) => {
+  test("does not include #L if line is null", () => {
     expect(getFileLink("abc123", "file.json", null)).not.toContain("#L");
   });
 
-  test.concurrent("includes #L if line is not null", ({ expect }) => {
+  test("includes #L if line is not null", () => {
     expect(getFileLink("abc123", "file.json", 1)).toContain("#L1");
   });
 
-  test.concurrent("returns the correct link with preceeding forward slash", ({ expect }) => {
+  test("returns the correct link with preceeding forward slash", () => {
     expect(getFileLink("abc123", "/file.json", 1)).toEqual(
       "https://github.com/Azure/azure-rest-api-specs/blob/abc123/file.json#L1",
     );
@@ -132,7 +132,7 @@ describe("getFileLink", () => {
 });
 
 describe("getPathSegment", () => {
-  test.concurrent("returns trailing segments of a path", ({ expect }) => {
+  test("returns trailing segments of a path", () => {
     expect(
       getPathSegment(
         "/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2025-01-01/service.json",
@@ -142,7 +142,7 @@ describe("getPathSegment", () => {
 });
 
 describe("compareLintDiffViolations", () => {
-  test.concurrent("returns 0 if equal", ({ expect }) => {
+  test("returns 0 if equal", () => {
     const a: LintDiffViolation = {
       level: "error",
       code: "SomeCode1",
@@ -156,7 +156,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(0);
   });
 
-  test.concurrent("returns 0 if a and b are equal and don't have lines", ({ expect }) => {
+  test("returns 0 if a and b are equal and don't have lines", () => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -173,7 +173,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(0);
   });
 
-  test.concurrent("returns -1 if a level is less than b's level", ({ expect }) => {
+  test("returns -1 if a level is less than b's level", () => {
     const a: LintDiffViolation = {
       level: "error",
       code: "SomeCode1",
@@ -187,7 +187,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(-1);
   });
 
-  test.concurrent("returns 1 if a level is greater than b's level", ({ expect }) => {
+  test("returns 1 if a level is greater than b's level", () => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -201,7 +201,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(1);
   });
 
-  test.concurrent("returns -1 if a's file is less than b's file", ({ expect }) => {
+  test("returns -1 if a's file is less than b's file", () => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -218,7 +218,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(-1);
   });
 
-  test.concurrent("returns 1 if a's file is greater than b's file", ({ expect }) => {
+  test("returns 1 if a's file is greater than b's file", () => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -235,7 +235,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(1);
   });
 
-  test.concurrent("returns -1 if a's line is less than b's line", ({ expect }) => {
+  test("returns -1 if a's line is less than b's line", () => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
@@ -252,7 +252,7 @@ describe("compareLintDiffViolations", () => {
     expect(actual).toEqual(-1);
   });
 
-  test.concurrent("returns 1 if a's line is greater than b's line", ({ expect }) => {
+  test("returns 1 if a's line is greater than b's line", () => {
     const a: LintDiffViolation = {
       level: "warning",
       code: "SomeCode1",
