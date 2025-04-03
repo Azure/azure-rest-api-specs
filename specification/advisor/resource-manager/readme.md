@@ -37,6 +37,15 @@ input-file:
   - Microsoft.Advisor/preview/2024-11-18-preview/advisor.json
   - Microsoft.Advisor/preview/2024-11-18-preview/assessments.json
   - Microsoft.Advisor/preview/2024-11-18-preview/resiliencyReviews.json
+suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - assessments.json
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Suppressing for now to avoid breaking change.
+    from:
+      - assessments.json
 ```
 
 ### Tag: package-2025-01
