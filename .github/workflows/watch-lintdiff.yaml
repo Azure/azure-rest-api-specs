@@ -36,50 +36,13 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: Verify Workflow Status
-        if: github.event_name == 'workflow_run'
+      - name: Verify matching status
         uses: actions/github-script@v7
         with:
           script: |
-            console.log("Checking workflow status");
-            console.log(JSON.stringify(context.payload));
-            console.log(`State: ${context.payload.workflow_run.conclusion}`);
-
-            // Get status of check run named "Swagger LintDiff"
-            const checkRunName = "Swagger LintDiff";
-            // TODO: Paginate
-            const checkRuns = await github.rest.checks.listForRef({
-              ...context.repo,
-              ref: context.payload.workflow_run.head_sha,
-              check_name: checkRunName,
-              status: "completed",
-            });
-
-            console.log("Check runs:");
-            console.log(JSON.stringify(checkRuns.data.check_runs, null, 2));
-
-      - name: Output Check Run Name
-        if: github.event_name == 'check_run'
-        run: |
-          echo "|${{ github.event.check_run.name}}|"
-
-      - name: Verify Check Run Status
-        if: github.event_name == 'check_run'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            console.log("Checking check status")
-            console.log(JSON.stringify(context.payload));
-            console.log(`State: ${context.payload.check_run.conclusion}`);
-
-            // Get status of the workflow run named "[TEST-IGNORE] Swagger LintDiff"
-            const workflowRunName = "[TEST-IGNORE] Swagger LintDiff";
-            // TODO: Paginate
-            const workflowRuns = await github.rest.actions.listWorkflowRunsForRepo({
-              ...context.repo,
-              head_sha: context.payload.check_run.head_sha,
-              status: "completed",
-            });
-
-            console.log("Workflow runs:");
-            console.log(JSON.stringify(workflowRuns.data.workflow_runs, null, 2));
+            const { default: verifyRunStatus } = await import('${{ github.workspace }}/.github/workflows/src/verify-run-status.js');
+            return await verifyRunStatus(
+              { github, context, core }, 
+               checkRunName: "Swagger LintDiff", 
+               workflowRunName: "[TEST-IGNORE] Swagger LintDiff"
+            );
