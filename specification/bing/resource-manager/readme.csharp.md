@@ -8,7 +8,6 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Bing
-  payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Bing/Microsoft.Azure.Management.Bing/Generated
   clear-output-folder: true
 ```
