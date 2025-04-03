@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./authModel.tsp";
 
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -11,14 +12,12 @@ using TypeSpec.OpenAPI;
 @versioned(Versions)
 namespace Microsoft.MessagingConnectors;
 
-@doc("Basic info for EventHub")
-model EventHubConfig {
-  @doc("namespace of the EventHub.")
-  namespaceHostName: string;
+@doc("ConnectionString Model.")
+model ConnectionStringAuthentication extends Authentication {
+  @doc("Type of the Auth Model.")
+  authenticationMode: AuthenticationMode.ConnectionString;
 
-  @doc("name of the EventHub.")
-  eventHubName: string;
-
-  @doc("Auth of Eventhub")
-  authentication: Authentication;
+  @doc("ConnectionString secret.")
+  @secret
+  connectionString: string;
 }
