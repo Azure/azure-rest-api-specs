@@ -10,10 +10,10 @@ import { extractInputs } from "./context.js";
 export default async function({github, context, core}, checkRunName, workflowName) {
   const inputs = await extractInputs(github, context, core);
 
-  const checkRun = await getCheckRunStatus({github, context, core}, checkRunName, inputs.head_sha);
+  const checkRun = await getCheckRunStatus(github, context, core, checkRunName, inputs.head_sha);
   const workflow = context.eventName == "workflow_run" 
     ? context.payload.workflow_run 
-    : await getWorkflowRun({github, context, core}, workflowName, inputs.head_sha);
+    : await getWorkflowRun(github, context, core, workflowName, inputs.head_sha);
 
   core.info(`Check run: ${JSON.stringify(checkRun)}`);
   core.info(`Workflow run: ${JSON.stringify(workflow)}`);
@@ -35,15 +35,23 @@ export default async function({github, context, core}, checkRunName, workflowNam
     core.setFailed(`Check run conclusion (${checkRun.conclusion}) does not match workflow run conclusion (${workflow.conclusion})`);
     return false;
   }
-
 }
 
-export async function getCheckRunStatus({github, context, core}, checkRunName, headSha) { 
+/**
+ * 
+ * @param {import('github-script').AsyncFunctionArguments['github']} github
+ * @param {import('github-script').AsyncFunctionArguments['context']} context
+ * @param {import('github-script').AsyncFunctionArguments['core']} core
+ * @param {string} checkRunName 
+ * @param {string} head_sha 
+ * @returns 
+ */
+export async function getCheckRunStatus(github, context, core, checkRunName, head_sha) {
   const checkRuns = await github.paginate(
     github.rest.checks.listForRef, 
     {
       ...context.repo,
-      ref: headSha,
+      ref: head_sha,
       check_name: checkRunName,
       status: "completed",
       per_page: PER_PAGE_MAX,
@@ -65,13 +73,24 @@ export async function getCheckRunStatus({github, context, core}, checkRunName, h
   return checkRuns[0];
 }
 
-export async function getWorkflowRun({github, context, core}, workflowName, head_sha) {
-  const workflowRuns = await github.rest.actions.listWorkflowRunsForRepo({
-    ...context.repo,
-    head_sha,
-    status: "completed",
-    per_page: PER_PAGE_MAX,
-  });
+/**
+ * @param {import('github-script').AsyncFunctionArguments['github']} github
+ * @param {import('github-script').AsyncFunctionArguments['context']} context
+ * @param {import('github-script').AsyncFunctionArguments['core']} core
+ * @param {string} workflowName 
+ * @param {string} head_sha 
+ * @returns 
+ */
+export async function getWorkflowRun(github, context, core, workflowName, head_sha) {
+
+  const workflowRuns = await github.paginate(
+    github.rest.actions.listWorkflowRunsForRepo, 
+    {
+      ...context.repo,
+      head_sha,
+      status: "completed",
+      per_page: PER_PAGE_MAX,
+    });
   core.info(`Workflow runs: ${JSON.stringify(workflowRuns)}`);
 
   if (workflowRuns.length === 0) { 
