@@ -357,14 +357,14 @@ interface GenerateAwsTemplate {
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
     @body
     generateAwsTemplateRequest: GenerateAwsTemplateRequest,
-  ): Azure.ResourceManager.ArmResponse<GenerateAwsTemplateReponse> | ErrorResponse;
+  ): Azure.ResourceManager.ArmResponse<GenerateAwsTemplateResponse> | ErrorResponse;
 }
 
 /**
  * The HybridConnectivity post operation response
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
-model GenerateAwsTemplateReponse {}
+model GenerateAwsTemplateResponse {}
 
 @armResourceOperations
 interface PublicCloudConnectors {
