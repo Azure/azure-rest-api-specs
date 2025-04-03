@@ -571,6 +571,12 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.CallEndedTypeProperty,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.CallEndedTypeProperty,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
   Usage.output
 );

@@ -1020,7 +1020,7 @@ model AcsCallParticipantBaseEventData extends AcsCallingEventBaseProperties {
   displayName?: string;
 
   /** The Id of the participant. */
-  participantId?: boolean;
+  participantId?: string;
 
   /** The user agent of the participant. */
   userAgent?: string;
@@ -1062,7 +1062,7 @@ model AcsCallingEventEndedByProperties {
   endedBy: CommunicationIdentifierModel;
 
   /** Participant or Internal or Carrier or any future types */
-  type: string;
+  type: CallEndedTypeProperty;
 
   /** MicrosoftInternal or the name of the carrier only 1 of the mri and the name field will be filled based on the type. */
   name: string;
@@ -1521,6 +1521,11 @@ union AcsRouterUpdatedWorkerProperty {
   /** ChannelConfigurations */
   "ChannelConfigurations",
 
+  string,
+}
+
+/** CallEnded event Type properties that can be updated */
+union CallEndedTypeProperty {
   string,
 }
 
