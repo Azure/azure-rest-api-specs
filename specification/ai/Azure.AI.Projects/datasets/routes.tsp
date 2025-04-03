@@ -39,6 +39,7 @@ interface Datasets
       ListDatasetVersionsParameters
     > {
   @doc("Create or start a pending upload of a dataset for a specific version.")
+  @Rest.action("startPendingUpload")
   startPendingUploadVersion is ServicePatterns.VersionedResourceAction<
     DatasetVersion,
     PendingUploadRequest,
