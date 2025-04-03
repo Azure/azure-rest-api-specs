@@ -16,10 +16,40 @@ jobs:
   check-lintdiff:
     runs-on: ubuntu-24.04
     steps:
-      - name: Say hello
+      # *** IMPORTANT ***
+      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
+      # context of the base of the pull request.  You should make sure that you do not check out,
+      # build, or run untrusted code from the head of the pull request.
+      - uses: actions/checkout@v4
+        with:
+          # Only needs .github folder for automation, not the files in the PR (analyzed in a
+          # separate workflow).
+          #
+          # Uses the .github folder from the PR base branch (pull_request_target trigger),
+          # or the repo default branch (other triggers).
+          sparse-checkout: |
+            .github
+
+      - name: Verify Workflow Status
+        if: github.event_name == 'workflow_run'
         uses: actions/github-script@v7
         with:
           script: |
-            console.log(context.payload);
-          result-encoding: string
+            console.log("Checking workflow status");
+            console.log(JSON.stringify(context.payload));
+            console.log(`State: ${context.payload.workflow.state}`);
+
+            // TODO: Get status of the check run status and compare
+
+      - name: Verify Check Run Status
+        if: github.event_name == 'check_run'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            console.log("Checking check status")
+            console.log(JSON.stringify(context.payload));
+            console.log(`State: ${context.payload.check_run.conclusion}`);
+
+            // TODO: Get the status of the workflow run and compare
+
  
