@@ -15,8 +15,8 @@ export default async function({github, context, core}, checkRunName, workflowNam
     ? context.payload.workflow_run 
     : await getWorkflowRun(github, context, core, workflowName, inputs.head_sha);
 
-  core.info(`Check run: ${JSON.stringify(checkRun)}`);
-  core.info(`Workflow run: ${JSON.stringify(workflow)}`);
+  core.debug(`Check run: ${JSON.stringify(checkRun)}`);
+  core.debug(`Workflow run: ${JSON.stringify(workflow)}`);
 
   if (!checkRun || checkRun.status !== "completed") { 
     core.info(`No completed check run with name: ${checkRunName}`);
@@ -57,7 +57,7 @@ export async function getCheckRunStatus(github, context, core, checkRunName, hea
       per_page: PER_PAGE_MAX,
     }
   );
-  core.info(`Check runs: ${JSON.stringify(checkRuns)}`);
+  core.debug(`Check runs: ${JSON.stringify(checkRuns)}`);
 
   if (checkRuns.length === 0) {
     core.info(`No completed check run with name: ${checkRunName}`);
@@ -66,7 +66,7 @@ export async function getCheckRunStatus(github, context, core, checkRunName, hea
 
   if (checkRuns.length > 1) {
     core.setFailed(`Multiple completed check runs with name: ${checkRunName}`);
-    core.info(`Check runs: ${JSON.stringify(checkRuns)}`);
+    core.debug(`Check runs: ${JSON.stringify(checkRuns)}`);
     throw new Error(`Multiple completed check runs with name: ${checkRunName}`);
   }
 
@@ -91,7 +91,7 @@ export async function getWorkflowRun(github, context, core, workflowName, head_s
       status: "completed",
       per_page: PER_PAGE_MAX,
     });
-  core.info(`Workflow runs: ${JSON.stringify(workflowRuns)}`);
+  core.debug(`Workflow runs: ${JSON.stringify(workflowRuns)}`);
 
   if (workflowRuns.length === 0) { 
     core.info(`No completed workflow runs`);
