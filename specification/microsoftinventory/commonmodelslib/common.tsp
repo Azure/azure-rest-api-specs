@@ -95,7 +95,10 @@ union AssetType {
 @doc("Metadata that describes the ownership of the resource")
 model Ownership {
   @doc("The owning service tree ID")
-  serviceTreeId: string;
+  serviceTreeId?: string;
+
+  @doc("The owning subscription ID")
+  subscriptionId?: string;
 }
 
 @doc("Metadata that describes the asset to which the resource is assigned")
