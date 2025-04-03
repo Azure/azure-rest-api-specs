@@ -98,7 +98,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentConfigurationOptions"
+              "$ref": "#/definitions/AgentCreationOptions"
             }
           }
         ],
@@ -302,9 +302,9 @@
                     "type": "string"
                   }
                 },
-                "options": {
-                  "$ref": "#/definitions/RunOptions",
-                  "description": "Optional configuration for run generation."
+                "truncationStrategy": {
+                  "$ref": "#/definitions/TruncationStrategy",
+                  "description": "Strategy for truncating messages when input exceeds model limits."
                 },
                 "userId": {
                   "type": "string",
@@ -401,9 +401,9 @@
                     "type": "string"
                   }
                 },
-                "options": {
-                  "$ref": "#/definitions/RunOptions",
-                  "description": "Optional configuration for run generation."
+                "truncationStrategy": {
+                  "$ref": "#/definitions/TruncationStrategy",
+                  "description": "Strategy for truncating messages when input exceeds model limits."
                 },
                 "userId": {
                   "type": "string",
@@ -2499,7 +2499,7 @@
         "name"
       ]
     },
-    "AgentCompletionProperties": {
+    "AgentConfigurationOptions": {
       "type": "object",
       "description": "Options used when completing a run.",
       "properties": {
@@ -2529,7 +2529,7 @@
         }
       }
     },
-    "AgentConfigurationOptions": {
+    "AgentCreationOptions": {
       "type": "object",
       "description": "Options used when creating or updating an agent.",
       "properties": {
@@ -4828,10 +4828,6 @@
           "$ref": "#/definitions/RunOutputs",
           "description": "The final outcome of this run, including status, output messages, token usage."
         },
-        "options": {
-          "$ref": "#/definitions/RunOptions",
-          "description": "Optional configuration for run generation."
-        },
         "userId": {
           "type": "string",
           "description": "Identifier for the user making the request."
@@ -4876,9 +4872,9 @@
             "type": "string"
           }
         },
-        "options": {
-          "$ref": "#/definitions/RunOptions",
-          "description": "Optional configuration for run generation."
+        "truncationStrategy": {
+          "$ref": "#/definitions/TruncationStrategy",
+          "description": "Strategy for truncating messages when input exceeds model limits."
         },
         "userId": {
           "type": "string",
@@ -4888,16 +4884,6 @@
       "required": [
         "input"
       ]
-    },
-    "RunOptions": {
-      "type": "object",
-      "description": "Represents advanced options for controlling agent runs.",
-      "properties": {
-        "truncationStrategy": {
-          "$ref": "#/definitions/TruncationStrategy",
-          "description": "Strategy for truncating messages when input exceeds model limits."
-        }
-      }
     },
     "RunOutputs": {
       "type": "object",

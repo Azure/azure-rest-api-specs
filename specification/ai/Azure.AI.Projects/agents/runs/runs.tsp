@@ -2,12 +2,6 @@ import "../messages/messages.tsp";
 
 namespace Azure.AI.Projects;
 
-@doc("Represents advanced options for controlling agent runs.")
-model RunOptions {
-  @doc("Strategy for truncating messages when input exceeds model limits.")
-  truncationStrategy?: TruncationStrategy;
-}
-
 @doc("Enumerates known truncation strategy types, but also allows any custom fallback string.")
 union TruncationStrategyType {
   string,
@@ -42,8 +36,8 @@ model RunInputs {
   @doc("Optional metadata associated with the run request.")
   metadata?: Record<string>;
 
-  @doc("Optional configuration for run generation.")
-  options?: RunOptions;
+  @doc("Strategy for truncating messages when input exceeds model limits.")
+  truncationStrategy?: TruncationStrategy;
 
   @doc("Identifier for the user making the request.")
   userId?: string;
@@ -148,9 +142,6 @@ model Run {
 
   @doc("The final outcome of this run, including status, output messages, token usage.")
   runOutputs: RunOutputs;
-
-  @doc("Optional configuration for run generation.")
-  options?: RunOptions;
 
   @doc("Identifier for the user making the request.")
   userId?: string;

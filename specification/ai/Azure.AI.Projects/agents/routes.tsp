@@ -123,7 +123,7 @@ interface Agents {
   @route("/agents")
   createAgent is Operation<
     {
-      ...AgentConfigurationOptions;
+      ...AgentCreationOptions;
     },
     Agent
   >;
@@ -183,8 +183,8 @@ interface Agents {
   @route("/agents/runs/run")
   run is Azure.Core.Foundations.Operation<
     {
-      ...AgentCompletionProperties;
-      ...RunInputs;      
+      ...AgentConfigurationOptions;
+      ...RunInputs;
     },
     Run
   >;
@@ -196,7 +196,7 @@ interface Agents {
   @route("/agents/runs/stream")
   stream is Azure.Core.Foundations.Operation<
     {
-      ...AgentCompletionProperties;
+      ...AgentConfigurationOptions;
       ...RunInputs;
     },
     Streams.Stream<StreamingUpdate>
