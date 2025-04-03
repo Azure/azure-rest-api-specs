@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./autoactionmodels.tsp";
+import "./scheduledactionmodels.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -56,6 +57,7 @@ model OccurrenceProperties {
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @parentResource(AutoAction)
+@parentResource(ScheduledAction)
 model Occurrence is ProxyResource<OccurrenceProperties> {
   ...ResourceNameParameter<
     Occurrence,
@@ -65,7 +67,7 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-model OccurrenceResource is AutoActionResource {
+model OccurrenceResource is ScheduledActionResource {
   @doc("The time the occurrence is scheduled for the resource.")
   @visibility(Lifecycle.Read)
   scheduledTime: utcDateTime;

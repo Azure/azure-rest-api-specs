@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.ComputeSchedule",
-    "version": "2024-08-01-preview",
+    "version": "2025-04-01-preview",
     "description": "Microsoft.ComputeSchedule Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -41,6 +41,9 @@
   "tags": [
     {
       "name": "Operations"
+    },
+    {
+      "name": "ScheduledActionExtension"
     },
     {
       "name": "Occurrences"
@@ -82,16 +85,52 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "AutoActionsExtension_ListByVms_MaximumSet": {
+          "AutoActionsExtension_ListByVms_MaximumSet_Gen": {
             "$ref": "./examples/AutoActionsExtension_ListByVms_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.ComputeSchedule/scheduledActionResources": {
+      "get": {
+        "operationId": "ScheduledActionExtension_ListByVms",
+        "tags": [
+          "ScheduledActionExtension"
+        ],
+        "description": "List ScheduledActionResources resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
-          "AutoActionsExtension_ListByVms_MinimumSet": {
-            "$ref": "./examples/AutoActionsExtension_ListByVms_MinimumSet_Gen.json"
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledActionResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ScheduledActionExtension_ListByVms_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActionExtension_ListByVms_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -121,16 +160,16 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -163,16 +202,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AutoActions_ListBySubscription_MaximumSet": {
-            "$ref": "./examples/AutoActions_ListBySubscription_MaximumSet_Gen.json"
-          },
-          "AutoActions_ListBySubscription_MinimumSet": {
-            "$ref": "./examples/AutoActions_ListBySubscription_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AutoActions_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/AutoActions_ListBySubscription_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -220,10 +256,10 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesCancelOperations_MaximumSet": {
+          "ScheduledActions_VirtualMachinesCancelOperations_MaximumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesCancelOperations_MaximumSet_Gen.json"
           },
-          "ScheduledActions_VirtualMachinesCancelOperations_MinimumSet": {
+          "ScheduledActions_VirtualMachinesCancelOperations_MinimumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesCancelOperations_MinimumSet_Gen.json"
           }
         }
@@ -273,10 +309,10 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteDeallocate_MaximumSet": {
+          "ScheduledActions_VirtualMachinesExecuteDeallocate_MaximumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDeallocate_MaximumSet_Gen.json"
           },
-          "ScheduledActions_VirtualMachinesExecuteDeallocate_MinimumSet": {
+          "ScheduledActions_VirtualMachinesExecuteDeallocate_MinimumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDeallocate_MinimumSet_Gen.json"
           }
         }
@@ -326,10 +362,10 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteHibernate_MaximumSet": {
+          "ScheduledActions_VirtualMachinesExecuteHibernate_MaximumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteHibernate_MaximumSet_Gen.json"
           },
-          "ScheduledActions_VirtualMachinesExecuteHibernate_MinimumSet": {
+          "ScheduledActions_VirtualMachinesExecuteHibernate_MinimumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteHibernate_MinimumSet_Gen.json"
           }
         }
@@ -379,10 +415,10 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteStart_MaximumSet": {
+          "ScheduledActions_VirtualMachinesExecuteStart_MaximumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart_MaximumSet_Gen.json"
           },
-          "ScheduledActions_VirtualMachinesExecuteStart_MinimumSet": {
+          "ScheduledActions_VirtualMachinesExecuteStart_MinimumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart_MinimumSet_Gen.json"
           }
         }
@@ -432,10 +468,10 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesGetOperationStatus_MaximumSet": {
+          "ScheduledActions_VirtualMachinesGetOperationStatus_MaximumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationStatus_MaximumSet_Gen.json"
           },
-          "ScheduledActions_VirtualMachinesGetOperationStatus_MinimumSet": {
+          "ScheduledActions_VirtualMachinesGetOperationStatus_MinimumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationStatus_MinimumSet_Gen.json"
           }
         }
@@ -485,10 +521,10 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesSubmitDeallocate_MaximumSet": {
+          "ScheduledActions_VirtualMachinesSubmitDeallocate_MaximumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitDeallocate_MaximumSet_Gen.json"
           },
-          "ScheduledActions_VirtualMachinesSubmitDeallocate_MinimumSet": {
+          "ScheduledActions_VirtualMachinesSubmitDeallocate_MinimumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitDeallocate_MinimumSet_Gen.json"
           }
         }
@@ -538,10 +574,10 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesSubmitHibernate_MaximumSet": {
+          "ScheduledActions_VirtualMachinesSubmitHibernate_MaximumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitHibernate_MaximumSet_Gen.json"
           },
-          "ScheduledActions_VirtualMachinesSubmitHibernate_MinimumSet": {
+          "ScheduledActions_VirtualMachinesSubmitHibernate_MinimumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitHibernate_MinimumSet_Gen.json"
           }
         }
@@ -591,11 +627,47 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesSubmitStart_MaximumSet": {
+          "ScheduledActions_VirtualMachinesSubmitStart_MaximumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitStart_MaximumSet_Gen.json"
           },
-          "ScheduledActions_VirtualMachinesSubmitStart_MinimumSet": {
+          "ScheduledActions_VirtualMachinesSubmitStart_MinimumSet_Gen": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitStart_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/scheduledActions": {
+      "get": {
+        "operationId": "ScheduledActions_ListBySubscription",
+        "description": "List ScheduledAction resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledActionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ScheduledActions_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_ListBySubscription_MaximumSet_Gen.json"
           }
         }
       }
@@ -632,16 +704,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AutoActions_ListByResourceGroup_MaximumSet": {
-            "$ref": "./examples/AutoActions_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "AutoActions_ListByResourceGroup_MinimumSet": {
-            "$ref": "./examples/AutoActions_ListByResourceGroup_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AutoActions_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/AutoActions_ListByResourceGroup_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -686,11 +755,8 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_Get_MaximumSet": {
+          "AutoActions_Get_MaximumSet_Gen": {
             "$ref": "./examples/AutoActions_Get_MaximumSet_Gen.json"
-          },
-          "AutoActions_Get_MinimumSet": {
-            "$ref": "./examples/AutoActions_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -759,18 +825,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AutoActions_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/AutoActions_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "AutoActions_CreateOrUpdate_MinimumSet": {
-            "$ref": "./examples/AutoActions_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AutoActions_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/AutoActions_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "operationId": "AutoActions_Update",
@@ -821,11 +884,8 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_Update_MaximumSet": {
+          "AutoActions_Update_MaximumSet_Gen": {
             "$ref": "./examples/AutoActions_Update_MaximumSet_Gen.json"
-          },
-          "AutoActions_Update_MinimumSet": {
-            "$ref": "./examples/AutoActions_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -879,18 +939,15 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AutoActions_Delete_MaximumSet": {
-            "$ref": "./examples/AutoActions_Delete_MaximumSet_Gen.json"
-          },
-          "AutoActions_Delete_MinimumSet": {
-            "$ref": "./examples/AutoActions_Delete_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AutoActions_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/AutoActions_Delete_MaximumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/attachResources": {
@@ -943,11 +1000,8 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_AttachResources_MaximumSet": {
+          "AutoActions_AttachResources_MaximumSet_Gen": {
             "$ref": "./examples/AutoActions_AttachResources_MaximumSet_Gen.json"
-          },
-          "AutoActions_AttachResources_MinimumSet": {
-            "$ref": "./examples/AutoActions_AttachResources_MinimumSet_Gen.json"
           }
         }
       }
@@ -1002,11 +1056,8 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_CancelNextOccurrence_MaximumSet": {
+          "AutoActions_CancelNextOccurrence_MaximumSet_Gen": {
             "$ref": "./examples/AutoActions_CancelNextOccurrence_MaximumSet_Gen.json"
-          },
-          "AutoActions_CancelNextOccurrence_MinimumSet": {
-            "$ref": "./examples/AutoActions_CancelNextOccurrence_MinimumSet_Gen.json"
           }
         }
       }
@@ -1061,11 +1112,8 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_DetachResources_MaximumSet": {
+          "AutoActions_DetachResources_MaximumSet_Gen": {
             "$ref": "./examples/AutoActions_DetachResources_MaximumSet_Gen.json"
-          },
-          "AutoActions_DetachResources_MinimumSet": {
-            "$ref": "./examples/AutoActions_DetachResources_MinimumSet_Gen.json"
           }
         }
       }
@@ -1108,11 +1156,8 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_Disable_MaximumSet": {
+          "AutoActions_Disable_MaximumSet_Gen": {
             "$ref": "./examples/AutoActions_Disable_MaximumSet_Gen.json"
-          },
-          "AutoActions_Disable_MinimumSet": {
-            "$ref": "./examples/AutoActions_Disable_MinimumSet_Gen.json"
           }
         }
       }
@@ -1155,11 +1200,8 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_Enable_MaximumSet": {
+          "AutoActions_Enable_MaximumSet_Gen": {
             "$ref": "./examples/AutoActions_Enable_MaximumSet_Gen.json"
-          },
-          "AutoActions_Enable_MinimumSet": {
-            "$ref": "./examples/AutoActions_Enable_MinimumSet_Gen.json"
           }
         }
       }
@@ -1204,16 +1246,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "AutoActions_ListResources_MaximumSet": {
-            "$ref": "./examples/AutoActions_ListResources_MaximumSet_Gen.json"
-          },
-          "AutoActions_ListResources_MinimumSet": {
-            "$ref": "./examples/AutoActions_ListResources_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AutoActions_ListResources_MaximumSet_Gen": {
+            "$ref": "./examples/AutoActions_ListResources_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1257,16 +1296,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Occurrences_ListByAutoAction_MaximumSet": {
-            "$ref": "./examples/Occurrences_ListByAutoAction_MaximumSet_Gen.json"
-          },
-          "Occurrences_ListByAutoAction_MinimumSet": {
-            "$ref": "./examples/Occurrences_ListByAutoAction_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Occurrences_ListByAutoAction_MaximumSet_Gen": {
+            "$ref": "./examples/Occurrences_ListByAutoAction_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1319,11 +1355,8 @@
           }
         },
         "x-ms-examples": {
-          "Occurrences_Get_MaximumSet": {
+          "Occurrences_Get_MaximumSet_Gen": {
             "$ref": "./examples/Occurrences_Get_MaximumSet_Gen.json"
-          },
-          "Occurrences_Get_MinimumSet": {
-            "$ref": "./examples/Occurrences_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -1386,11 +1419,8 @@
           }
         },
         "x-ms-examples": {
-          "Occurrences_Cancel_MaximumSet": {
+          "Occurrences_Cancel_MaximumSet_Gen": {
             "$ref": "./examples/Occurrences_Cancel_MaximumSet_Gen.json"
-          },
-          "Occurrences_Cancel_MinimumSet": {
-            "$ref": "./examples/Occurrences_Cancel_MinimumSet_Gen.json"
           }
         }
       }
@@ -1453,11 +1483,8 @@
           }
         },
         "x-ms-examples": {
-          "Occurrences_Delay_MaximumSet": {
+          "Occurrences_Delay_MaximumSet_Gen": {
             "$ref": "./examples/Occurrences_Delay_MaximumSet_Gen.json"
-          },
-          "Occurrences_Delay_MinimumSet": {
-            "$ref": "./examples/Occurrences_Delay_MinimumSet_Gen.json"
           }
         }
       }
@@ -1510,16 +1537,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Occurrences_ListResources_MaximumSet": {
-            "$ref": "./examples/Occurrences_ListResources_MaximumSet_Gen.json"
-          },
-          "Occurrences_ListResources_MinimumSet": {
-            "$ref": "./examples/Occurrences_ListResources_MinimumSet_Gen.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Occurrences_ListResources_MaximumSet_Gen": {
+            "$ref": "./examples/Occurrences_ListResources_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -1573,11 +1597,8 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_PatchResources_MaximumSet": {
+          "AutoActions_PatchResources_MaximumSet_Gen": {
             "$ref": "./examples/AutoActions_PatchResources_MaximumSet_Gen.json"
-          },
-          "AutoActions_PatchResources_MinimumSet": {
-            "$ref": "./examples/AutoActions_PatchResources_MinimumSet_Gen.json"
           }
         }
       }
@@ -1623,11 +1644,656 @@
           }
         },
         "x-ms-examples": {
-          "AutoActions_TriggerManualOccurrence_MaximumSet": {
+          "AutoActions_TriggerManualOccurrence_MaximumSet_Gen": {
             "$ref": "./examples/AutoActions_TriggerManualOccurrence_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions": {
+      "get": {
+        "operationId": "ScheduledActions_ListByResourceGroup",
+        "description": "List ScheduledAction resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
-          "AutoActions_TriggerManualOccurrence_MinimumSet": {
-            "$ref": "./examples/AutoActions_TriggerManualOccurrence_MinimumSet_Gen.json"
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledActionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ScheduledActions_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}": {
+      "get": {
+        "operationId": "ScheduledActions_Get",
+        "description": "Get a ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ScheduledActions_CreateOrUpdate",
+        "description": "Create a ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ScheduledAction' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          },
+          "201": {
+            "description": "Resource 'ScheduledAction' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ScheduledActions_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ScheduledActions_Update",
+        "description": "Update a ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduledActionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledAction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ScheduledActions_Delete",
+        "description": "Delete a ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ScheduledActions_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/attachResources": {
+      "post": {
+        "operationId": "ScheduledActions_AttachResources",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceAttachRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_AttachResources_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_AttachResources_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/cancelNextOccurrence": {
+      "post": {
+        "operationId": "ScheduledActions_CancelNextOccurrence",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelOccurrenceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Occurrence"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_CancelNextOccurrence_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/detachResources": {
+      "post": {
+        "operationId": "ScheduledActions_DetachResources",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceDetachRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_DetachResources_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_DetachResources_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/disable": {
+      "post": {
+        "operationId": "ScheduledActions_Disable",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_Disable_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_Disable_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/enable": {
+      "post": {
+        "operationId": "ScheduledActions_Enable",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_Enable_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_Enable_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/listResources": {
+      "post": {
+        "operationId": "ScheduledActions_ListResources",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ScheduledActions_ListResources_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_ListResources_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/patchResources": {
+      "post": {
+        "operationId": "ScheduledActions_PatchResources",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcePatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_PatchResources_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_PatchResources_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/triggerManualOccurrence": {
+      "post": {
+        "operationId": "ScheduledActions_TriggerManualOccurrence",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Occurrence"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_TriggerManualOccurrence_MaximumSet_Gen": {
+            "$ref": "./examples/ScheduledActions_TriggerManualOccurrence_MaximumSet_Gen.json"
           }
         }
       }
@@ -2971,6 +3637,63 @@
       },
       "readOnly": true
     },
+    "ResourceAttachRequest": {
+      "type": "object",
+      "description": "Request model to attach a list of scheduled action resources.",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "List of resources to be attached/patched",
+          "items": {
+            "$ref": "#/definitions/ScheduledActionResource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "resources"
+      ]
+    },
+    "ResourceDetachRequest": {
+      "type": "object",
+      "description": "Request model to detach a list of scheduled action resources.",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "List of resources to be detached",
+          "items": {
+            "$ref": "#/definitions/ValidScheduledActionResourceId"
+          }
+        }
+      },
+      "required": [
+        "resources"
+      ]
+    },
+    "ResourceListResponse": {
+      "type": "object",
+      "description": "Paged collection of ScheduledActionResource items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScheduledActionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ScheduledActionResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ResourceOperation": {
       "type": "object",
       "description": "High level response from an operation on a resource",
@@ -3196,6 +3919,31 @@
         "errorDetails"
       ]
     },
+    "ResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from scheduled action resource requests, which contains the status of each resource",
+      "properties": {
+        "totalResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of resources operated on"
+        },
+        "resourcesStatuses": {
+          "type": "array",
+          "description": "The resource status of for each resource",
+          "items": {
+            "$ref": "#/definitions/ResourceStatus"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "totalResources",
+        "resourcesStatuses"
+      ]
+    },
     "ResourceOperationStatus": {
       "type": "string",
       "description": "The state the resource is on after the resource operation is applied",
@@ -3256,6 +4004,25 @@
           }
         ]
       }
+    },
+    "ResourcePatchRequest": {
+      "type": "object",
+      "description": "Request model perform a resource operation in a list of resources",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "The list of resources we watch to patch",
+          "items": {
+            "$ref": "#/definitions/ScheduledActionResource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "resources"
+      ]
     },
     "ResourceResultSummary": {
       "type": "object",
@@ -3408,6 +4175,336 @@
         "timeZone",
         "deadlineType"
       ]
+    },
+    "ScheduledAction": {
+      "type": "object",
+      "description": "The scheduled action resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduledActionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ScheduledActionListResult": {
+      "type": "object",
+      "description": "The response of a ScheduledAction list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScheduledAction items on this page",
+          "items": {
+            "$ref": "#/definitions/ScheduledAction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScheduledActionProperties": {
+      "type": "object",
+      "description": "Scheduled action properties",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the scheduled action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the scheduled action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the scheduled action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the scheduled action is supposed to stop scheduling"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduledActionsSchedule",
+          "description": "The schedule the scheduled action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tell if the scheduled action is disabled or not",
+          "default": false
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceType",
+        "actionType",
+        "startTime",
+        "schedule",
+        "notificationSettings"
+      ]
+    },
+    "ScheduledActionPropertiesUpdate": {
+      "type": "object",
+      "description": "Scheduled action properties",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource the scheduled action is targeting"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ActionType",
+          "description": "The action the scheduled action should perform in the resources"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time which the scheduled action is supposed to start running"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the scheduled action is supposed to stop scheduling"
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduledActionsScheduleUpdate",
+          "description": "The schedule the scheduled action is supposed to follow"
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The notification settings for the scheduled action",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Tell if the scheduled action is disabled or not",
+          "default": false
+        }
+      }
+    },
+    "ScheduledActionResource": {
+      "type": "object",
+      "description": "Represents an scheduled action resource metadata.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The ARM Id of the resource."
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The desired notification settings for the specified resource.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
+    "ScheduledActionResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from scheduled action resource requests, which contains the status of each resource",
+      "properties": {
+        "totalResources": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of resources operated on"
+        },
+        "resourcesStatuses": {
+          "type": "array",
+          "description": "The resource status of for each resource",
+          "items": {
+            "$ref": "#/definitions/ResourceStatus"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "totalResources",
+        "resourcesStatuses"
+      ]
+    },
+    "ScheduledActionResources": {
+      "type": "object",
+      "description": "The scheduled action extension",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduledActionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ScheduledActionResourcesListResult": {
+      "type": "object",
+      "description": "The response of a ScheduledActionResources list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScheduledActionResources items on this page",
+          "items": {
+            "$ref": "#/definitions/ScheduledActionResources"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScheduledActionUpdate": {
+      "type": "object",
+      "description": "The scheduled action resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduledActionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ScheduledActionsSchedule": {
+      "type": "object",
+      "description": "Specify the schedule in which the scheduled action is supposed to follow",
+      "properties": {
+        "scheduledTime": {
+          "type": "string",
+          "format": "time",
+          "description": "The time the scheduled action is supposed to run on"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone the scheduled time is specified on"
+        },
+        "requestedWeekDays": {
+          "type": "array",
+          "description": "The week days the scheduled action is supposed to run on",
+          "items": {
+            "$ref": "#/definitions/WeekDay"
+          }
+        },
+        "requestedMonths": {
+          "type": "array",
+          "description": "The months the scheduled action is supposed to run on",
+          "items": {
+            "$ref": "#/definitions/Month"
+          }
+        },
+        "requestedDaysOfTheMonth": {
+          "type": "array",
+          "description": "The days of the month the scheduled action is supposed to run on. If empty, it means it will run on every day of the month.",
+          "items": {
+            "$ref": "#/definitions/DayOfTheMonth"
+          }
+        },
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters the scheduled action is supposed to follow"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "The type of deadline the scheduled action is supposed to follow for the schedule"
+        }
+      },
+      "required": [
+        "scheduledTime",
+        "timeZone",
+        "requestedWeekDays",
+        "requestedMonths",
+        "requestedDaysOfTheMonth",
+        "executionParameters",
+        "deadlineType"
+      ]
+    },
+    "ScheduledActionsScheduleUpdate": {
+      "type": "object",
+      "description": "Specify the schedule in which the scheduled action is supposed to follow",
+      "properties": {
+        "scheduledTime": {
+          "type": "string",
+          "format": "time",
+          "description": "The time the scheduled action is supposed to run on"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The timezone the scheduled time is specified on"
+        },
+        "requestedWeekDays": {
+          "type": "array",
+          "description": "The week days the scheduled action is supposed to run on",
+          "items": {
+            "$ref": "#/definitions/WeekDay"
+          }
+        },
+        "requestedMonths": {
+          "type": "array",
+          "description": "The months the scheduled action is supposed to run on",
+          "items": {
+            "$ref": "#/definitions/Month"
+          }
+        },
+        "requestedDaysOfTheMonth": {
+          "type": "array",
+          "description": "The days of the month the scheduled action is supposed to run on. If empty, it means it will run on every day of the month.",
+          "items": {
+            "$ref": "#/definitions/DayOfTheMonth"
+          }
+        },
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters the scheduled action is supposed to follow"
+        },
+        "deadlineType": {
+          "$ref": "#/definitions/DeadlineType",
+          "description": "The type of deadline the scheduled action is supposed to follow for the schedule"
+        }
+      }
     },
     "StartResourceOperationResponse": {
       "type": "object",
