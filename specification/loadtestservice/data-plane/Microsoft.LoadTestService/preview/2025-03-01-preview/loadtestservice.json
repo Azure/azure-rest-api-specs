@@ -328,6 +328,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the status of a long running operation.": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
         }
       }
     },
@@ -1892,7 +1897,7 @@
     },
     "/tests/{testId}:clone": {
       "post": {
-        "operationId": "LoadTestAdministration_Clone",
+        "operationId": "LoadTestAdministration_CloneTest",
         "tags": [
           "Test"
         ],
@@ -1965,6 +1970,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Clone a given load test with optional overrides.": {
+            "$ref": "./examples/CloneTest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3996,6 +4006,24 @@
         ]
       }
     },
+    "OperationKind": {
+      "type": "string",
+      "description": "Kind of the long running operation.",
+      "enum": [
+        "CloneTest"
+      ],
+      "x-ms-enum": {
+        "name": "OperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CloneTest",
+            "value": "CloneTest",
+            "description": "Operation represents a clone test operation"
+          }
+        ]
+      }
+    },
     "OperationStatus": {
       "type": "object",
       "description": "Status of a long running operation.",
@@ -4003,6 +4031,10 @@
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "The state of the operation."
+        },
+        "kind": {
+          "$ref": "#/definitions/OperationKind",
+          "description": "The kind of the operation."
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
@@ -4016,6 +4048,7 @@
       },
       "required": [
         "status",
+        "kind",
         "operationId"
       ]
     },

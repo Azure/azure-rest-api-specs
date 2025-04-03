@@ -1448,6 +1448,7 @@ union RequestDataLevel {
   ERRORS: "ERRORS",
 }
 
+// TODO(mitsha): Fix the structure of initial clone test return
 @added(APIVersions.v2025_03_01_preview)
 @doc("Operation Id Path Parameter.")
 model OperationIdPathParameter {
@@ -1458,11 +1459,23 @@ model OperationIdPathParameter {
 }
 
 @added(APIVersions.v2025_03_01_preview)
+@doc("Kind of the long running operation.")
+union OperationKind {
+  string,
+
+  @doc("Operation represents a clone test operation")
+  CloneTest: "CloneTest",
+}
+
+@added(APIVersions.v2025_03_01_preview)
 @doc("Status of a long running operation.")
 @resource("operations")
 model OperationStatus {
   @doc("The state of the operation.")
   status: Foundations.OperationState;
+
+  @doc("The kind of the operation.")
+  kind: OperationKind;
 
   @doc("Error object that describes the error when status is \"Failed\".")
   error?: Foundations.Error;

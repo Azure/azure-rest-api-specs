@@ -59,7 +59,8 @@ interface LoadTestAdministration {
   @pollingOperation(Operations.getOperationStatus)
   @finalOperation(LoadTestAdministration.getTest)
   @added(APIVersions.v2025_03_01_preview)
-  clone is StandardResourceOperations.LongRunningResourceAction<Test, CloneTestRequest, never>;
+  @action("clone")
+  cloneTest is StandardResourceOperations.LongRunningResourceAction<Test, CloneTestRequest, never>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
