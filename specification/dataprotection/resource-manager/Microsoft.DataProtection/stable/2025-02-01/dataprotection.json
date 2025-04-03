@@ -1357,7 +1357,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Contains additional information like job Id",
+            "description": "Contains additional information like job Id and Operation Job Extended Info of the asynchronous operation to track the status.",
             "schema": {
               "$ref": "#/definitions/OperationJobExtendedInfo"
             }
@@ -1435,6 +1435,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Contains additional information like job Id and Operation Job Extended Info of the asynchronous operation to track the status.",
+            "schema": {
+              "$ref": "#/definitions/OperationJobExtendedInfo"
+            }
+          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
