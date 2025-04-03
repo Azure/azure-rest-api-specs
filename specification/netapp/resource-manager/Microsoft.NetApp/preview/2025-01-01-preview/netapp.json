@@ -336,7 +336,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaItemList"
+              "$ref": "#/definitions/QuotaItemList"
             }
           },
           "default": {
@@ -379,7 +379,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaItem"
+              "$ref": "#/definitions/QuotaItem"
             }
           },
           "default": {
@@ -4931,6 +4931,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/quotaLimits": {
+      "get": {
+        "tags": [
+          "Quota Limit"
+        ],
+        "summary": "Gets a list of quota limits for all quotas that are under account.",
+        "description": "Gets a list of quota limits for all quotas that are under account. Currently PoolsPerAccount is the only one.",
+        "operationId": "NetAppResourceQuotaLimitsAccount_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaItemList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Volumes_RestoreStatus": {
+            "$ref": "examples/QuotaLimitsAccount_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/quotaLimits/{quotaLimitName}": {
+      "get": {
+        "tags": [
+          "Quota Limit"
+        ],
+        "description": "Get the default, current and usages account quota limit",
+        "summary": "Gets the quota limits for the specific quota that is provided under the account.",
+        "operationId": "NetAppResourceQuotaLimitsAccount_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/QuotaLimitName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_RestoreStatus": {
+            "$ref": "examples/QuotaLimitsAccount_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups": {
       "get": {
         "tags": [
@@ -5689,6 +5781,390 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets": {
+      "get": {
+        "tags": [
+          "Buckets"
+        ],
+        "summary": "Describes all buckets belonging to a volume",
+        "description": "Describes all buckets belonging to a volume. Buckets allow additional services, such as AI services, connect to the volume data contained in those buckets.",
+        "operationId": "Buckets_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK - List of volume buckets retrieved",
+            "schema": {
+              "$ref": "#/definitions/bucketList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Buckets_List": {
+            "$ref": "examples/Buckets_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}": {
+      "get": {
+        "tags": [
+          "Buckets"
+        ],
+        "summary": "Describe a volume's bucket",
+        "description": "Get the details of the specified volume's bucket. A bucket allows additional services, such as AI services, connect to the volume data contained in those buckets.",
+        "operationId": "Buckets_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/BucketName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - bucket retrieved",
+            "schema": {
+              "$ref": "#/definitions/bucket"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Buckets_Get": {
+            "$ref": "examples/Buckets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Buckets"
+        ],
+        "summary": "Creates or updates a bucket for a volume",
+        "description": "Creates or updates a bucket for a volume. A bucket allows additional services, such as AI services, connect to the volume data contained in those buckets.",
+        "operationId": "Buckets_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "The bucket details including user details, and the volume path that should be mounted inside the bucket.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bucket"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/BucketName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Bucket updated",
+            "schema": {
+              "$ref": "#/definitions/bucket"
+            }
+          },
+          "201": {
+            "description": "Ok - Bucket created",
+            "headers": {
+              "Location": {
+                "description": "URL that can be used to check the status of the asynchronous operation",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL that can be used to check the status of the asynchronous operation",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/bucket"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Buckets_CreateOrUpdate": {
+            "$ref": "examples/Buckets_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Buckets"
+        ],
+        "summary": "Updates a bucket for a volume",
+        "description": "Updates the details of a volume bucket.",
+        "operationId": "Buckets_Update",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "The bucket details including user details, and the volume path that should be mounted inside the bucket.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/bucketPatch"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/BucketName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/bucket"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update operation will continue asynchronously",
+            "headers": {
+              "Location": {
+                "description": "URI to poll the status of the operation",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL that can be used to check the status of the asynchronous operation",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Buckets_Update": {
+            "$ref": "examples/Buckets_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Buckets"
+        ],
+        "summary": "Delete a volume's bucket",
+        "description": "Delete a volume's bucket.",
+        "operationId": "Buckets_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/BucketName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted -- Delete operation will continue asynchronously",
+            "headers": {
+              "Location": {
+                "description": "URI to poll the status of the operation",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL that can be used to check the status of the asynchronous operation",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Buckets_Delete": {
+            "$ref": "examples/Buckets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}/generateCredentials": {
+      "post": {
+        "tags": [
+          "Buckets"
+        ],
+        "summary": "Generate bucket access credentials",
+        "description": "Generate the access key and secret key used for accessing the specified volume bucket. Also return expiry date and time of key pair (in UTC).",
+        "operationId": "Buckets_GenerateCredentials",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "The bucket's Access and Secret key pair expiry time expressed as the number of days from now.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/bucketCredentialsExpiry"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/BucketName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - bucket credentials (Access and Secret key pair) generated successfully",
+            "schema": {
+              "$ref": "#/definitions/bucketGenerateCredentials"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Buckets_GenerateCredentials": {
+            "$ref": "examples/Buckets_GenerateCredentials.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6136,37 +6612,41 @@
         }
       }
     },
-    "SubscriptionQuotaItemList": {
-      "description": "List of Subscription Quota Items",
+    "QuotaItemList": {
+      "description": "List of Quota Items",
       "type": "object",
       "properties": {
         "value": {
-          "description": "A list of SubscriptionQuotaItems",
+          "description": "A list of QuotaItems",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubscriptionQuotaItem"
+            "$ref": "#/definitions/QuotaItem"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
         }
       }
     },
-    "SubscriptionQuotaItem": {
-      "description": "Information regarding Subscription Quota Item.",
+    "QuotaItem": {
+      "description": "Information regarding Quota Item.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
-          "description": "SubscriptionQuotaItem properties",
-          "$ref": "#/definitions/SubscriptionQuotaItemProperties",
+          "description": "QuotaItem properties",
+          "$ref": "#/definitions/QuotaItemProperties",
           "x-ms-client-flatten": true
         }
       }
     },
-    "SubscriptionQuotaItemProperties": {
-      "description": "SubscriptionQuotaItem Properties",
+    "QuotaItemProperties": {
+      "description": "QuotaItem Properties",
       "type": "object",
       "properties": {
         "current": {
@@ -6179,6 +6659,13 @@
           "description": "The default quota value.",
           "readOnly": true,
           "type": "integer",
+          "format": "int32"
+        },
+        "usage": {
+          "description": "The usage quota value.",
+          "readOnly": true,
+          "type": "integer",
+          "x-nullable": true,
           "format": "int32"
         }
       }
@@ -6381,6 +6868,10 @@
         },
         "multiAdStatus": {
           "$ref": "#/definitions/multiAdStatus"
+        },
+        "ldapConfiguration": {
+          "description": "LDAP Configuration for the account.",
+          "$ref": "#/definitions/ldapConfiguration"
         }
       }
     },
@@ -6583,6 +7074,51 @@
           "description": "This specifies the custom LDAP search filter to be used when looking up group membership from LDAP server.",
           "maxLength": 255,
           "example": "cn=*99"
+        }
+      }
+    },
+    "ldapConfiguration": {
+      "type": "object",
+      "description": "LDAP configuration",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "Name of the LDAP configuration domain",
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$",
+          "example": "domain.com"
+        },
+        "ldapServers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          },
+          "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
+          "example": [
+            "101.102.103.104",
+            "101.102.103.105"
+          ]
+        },
+        "ldapOverTLS": {
+          "type": "boolean",
+          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
+        },
+        "serverCACertificate": {
+          "type": "string",
+          "maxLength": 10240,
+          "minLength": 1,
+          "description": "When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.",
+          "x-ms-secret": true,
+          "example": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURuVENDQW9XZ0F3SUJBZ0lRR3FXdnRxeHBvSTFJV3Z4VGdJbElWREFOQmdrcWhraUc5dzBCQVFzRkFEQlYKTVJNd0VRWUtDWkltaVpQeUxHUUJHUllEWTI5dE1SY3dGUVlLQ1pJbWlaUHlMR1FCR1JZSGFHRnlhV3R5WWpFbApNQ01HQTFVRUF4TWNhR0Z5YVd0eVlpMVhTVTR0TWtKUFZrRkZTMEkwTkVJdFEwRXRNakFlRncweU1EQTFNRFV3Ck56TTVORGxhRncweU1EQTFNRFl3TnpRNU5EaGFNRlV4RXpBUkJnb0praWFKay9Jc1pBRVpGZ05qYjIweEZ6QVYKQmdvSmtpYUprL0lzWkFFWkZnZG9ZWEpwYTNKaU1TVXdJd1lEVlFRREV4eG9ZWEpwYTNKaUxWZEpUaTB5UWs5VwpRVVZMUWpRMFFpMURRUzB5TUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFqMHByCnhaaXpNaDBqYnRwN1ZOc0JrRVJ2MVpZT0MzMEtqaGRWdEExRm1MeFM2cXlycmpMZUdXOXRSd2ZnUkR0eVBodTIKZVJTcVpTUjF6Z1hZR0s0Nys3Y3F0YnB2UElOektCb0dOWERIVTNxVWlleXJWSjFDVzRKNjJodUdrbUV1VVVkMApKMXBxNTVxbjk1SmRUbWh1dmZlTUxxeHB5c01nbGVnY281ZFhoN0hsQkhwaTNKMFN4ZnhVWmxKMVZiOFJZVEZhCkJiMGFlTVZaRzRKeVREaktiMlR1TmFXOG1aUE5vOFBMRDRocjdndFNZUEQvQ1dVVGV5QlpoZC9LTzNPczlWVEIKYmpLUGtWd0J2WEs2SlFMSGprNFBHS3VYZDhaWVFyajBtOWNIZDNmcWNYTXlQUnQ2TlJ4ak0yMTUxckFzSkVhNgpWZC9ta056akpXalBrT2VZUVFJREFRQUJvMmt3WnpBVEJna3JCZ0VFQVlJM0ZBSUVCaDRFQUVNQVFUQU9CZ05WCkhROEJBZjhFQkFNQ0FZWXdEd1lEVlIwVEFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVVDVEc2ODJSay9kMysKWGtHa0VMakRFMjI4ZjNnd0VBWUpLd1lCQkFHQ054VUJCQU1DQVFBd0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQgpBR1RjTTNnWExIU05wS014RHEvUFpZbWZCMmNlN3VhMmxxbXpzZSt4QmthSTE0WXdzZE5ZQjZBVTNFWDM3QWpZCjd3bm9xQzY1N0U2RVhTODVDckoyNXJNTHo4OEtONGI3cUg5RUowSS9XVHg5YTdUT0ZENENWQThuL0xwNGh1Ym4KNlBFalY5NFlZWXBXTG1hTkkvbGFReWsxSHVJbDFSTCttVDFnSWQ4ZWZXZ1UvNmlVVEw3eGMrdjkyNHBuTHhISwpOSnNTV3c0NFk5a0R5SU9KOXFjWUlBN1lhTkxPZTRjSysvQlRvdDh0dVVKT1hHLzdBRmtxR2EyQVA4MmFZOStKCnkwSmU2OG5nTHJ1dVU4VHpneVpqdkFHcTRrVEVOdWFoaFdHVC9KWkEzOXhSNUV4MmNMUUplcE5NdnlZbUZ3Z1UKME8zYlA0OWNBVFVCMXoyQ3Y5aTRQbVk9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+        },
+        "certificateCNHost": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
+          "x-nullable": true,
+          "example": "ldap.krypton.com"
         }
       }
     },
@@ -6961,6 +7497,349 @@
           "example": 128
         }
       }
+    },
+    "bucketServerProperties": {
+      "description": "Properties of the server managing the lifecycle of volume buckets",
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "$ref": "#/definitions/serverFqdn"
+        },
+        "certificateCommonName": {
+          "$ref": "#/definitions/certificateCommonName"
+        },
+        "certificateExpiryDate": {
+          "$ref": "#/definitions/certificateExpiryDate"
+        },
+        "ipAddress": {
+          "$ref": "#/definitions/bucketServerIpAddress"
+        },
+        "certificateObject": {
+          "$ref": "#/definitions/bucketServerCertificateObject"
+        }
+      }
+    },
+    "bucketServerPatchProperties": {
+      "description": "Properties of the server managing the lifecycle of volume buckets",
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "$ref": "#/definitions/serverFqdn"
+        },
+        "certificateObject": {
+          "$ref": "#/definitions/bucketServerCertificateObject"
+        }
+      }
+    },
+    "bucketServerIpAddress": {
+      "title": "ipAddress",
+      "description": "The bucket server's IPv4 address",
+      "type": "string",
+      "readOnly": true,
+      "example": "1.2.3.4"
+    },
+    "bucketCredentialsExpiry": {
+      "description": "The bucket's Access and Secret key pair Expiry Time expressed as the number of days from now.",
+      "type": "object",
+      "properties": {
+        "keyPairExpiryDays": {
+          "title": "keyPairExpiryDays",
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days from now until the newly generated Access and Secret key pair will expire.",
+          "minimum": 1,
+          "example": 3
+        }
+      }
+    },
+    "bucketGenerateCredentials": {
+      "description": "Bucket Access Key, Secret Key, and Expiry date and time of the key pair",
+      "type": "object",
+      "properties": {
+        "accessKey": {
+          "title": "Bucket Access Key",
+          "description": "The Access Key that is required along with the Secret Key to access the bucket.",
+          "type": "string",
+          "readOnly": true,
+          "example": "Kz7J4C8W85atD3"
+        },
+        "secretKey": {
+          "title": "Bucket Secret Key",
+          "description": "The Secret Key that is required along with the Access Key to access the bucket.",
+          "type": "string",
+          "readOnly": true,
+          "example": "ys546PFtiWWDsmBUoi"
+        },
+        "keyPairExpiry": {
+          "$ref": "#/definitions/bucketKeyPairExpiry",
+          "readOnly": true
+        }
+      }
+    },
+    "bucket": {
+      "description": "Bucket resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Bucket properties",
+          "$ref": "#/definitions/bucketProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "bucketPatch": {
+      "description": "Bucket resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Bucket properties",
+          "$ref": "#/definitions/bucketPatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "bucketProperties": {
+      "description": "Bucket resource properties",
+      "type": "object",
+      "properties": {
+        "path": {
+          "title": "Bucket Path",
+          "description": "The volume path mounted inside the bucket. The default is the root path '/' if no value is provided when the bucket is created.",
+          "type": "string",
+          "default": "/",
+          "example": "/path"
+        },
+        "fileSystemUser": {
+          "$ref": "#/definitions/fileSystemUser"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/provisioningState"
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The bucket credentials status. There states:\n\n\"NoCredentialsSet\": Access and Secret key pair have not been generated.\n\"CredentialsExpired\": Access and Secret key pair have expired.\n\"Active\": The certificate has been installed and credentials are unexpired.",
+          "enum": [
+            "NoCredentialsSet",
+            "CredentialsExpired",
+            "Active"
+          ],
+          "x-ms-enum": {
+            "name": "credentialsStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NoCredentialsSet",
+                "description": "Access and Secret key pair have not been generated."
+              },
+              {
+                "value": "CredentialsExpired",
+                "description": "Access and Secret key pair have expired."
+              },
+              {
+                "value": "Active",
+                "description": "The certificate has been installed on the bucket server and the bucket credentials are unexpired."
+              }
+            ]
+          },
+          "example": "Active"
+        },
+        "server": {
+          "$ref": "#/definitions/bucketServerProperties"
+        }
+      }
+    },
+    "bucketPatchProperties": {
+      "description": "Bucket resource properties for a Patch operation",
+      "type": "object",
+      "properties": {
+        "path": {
+          "title": "Bucket Path",
+          "description": "The volume path mounted inside the bucket.",
+          "type": "string",
+          "example": "/path"
+        },
+        "fileSystemUser": {
+          "$ref": "#/definitions/fileSystemUser"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/provisioningState"
+        },
+        "server": {
+          "$ref": "#/definitions/bucketServerPatchProperties"
+        }
+      }
+    },
+    "bucketList": {
+      "description": "List of volume bucket resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of volume buckets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/bucket"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "certificateExpiryDate": {
+      "description": "The bucket server's certificate expiry date.",
+      "title": "Bucket server certificate expiry date.",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2027-08-15T13:23:32Z"
+    },
+    "bucketKeyPairExpiry": {
+      "description": "The bucket's Access and Secret key pair expiry date and time (in UTC).",
+      "title": "Bucket Key Pair Expiry",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2027-08-15T13:23:32Z"
+    },
+    "nfsUser": {
+      "title": "NFS user details",
+      "description": "The effective NFS User ID and Group ID when accessing the volume data.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "title": "userId",
+          "type": "integer",
+          "format": "int64",
+          "description": "The NFS user's UID",
+          "example": 1001
+        },
+        "groupId": {
+          "title": "groupId",
+          "type": "integer",
+          "format": "int64",
+          "description": "The NFS user's GID",
+          "example": 1000
+        }
+      }
+    },
+    "cifsUser": {
+      "title": "CIFS username",
+      "description": "The effective CIFS username when accessing the volume data.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "title": "username",
+          "type": "string",
+          "description": "The CIFS user's username",
+          "example": "robin.white"
+        }
+      }
+    },
+    "fileSystemUser": {
+      "title": "File System User",
+      "description": "File System user having access to volume data. For Unix, this is the user's uid and gid. For Windows, this is the user's username. Note that the Unix and Windows user details are mutually exclusive, meaning one or other must be supplied, but not both.",
+      "type": "object",
+      "properties": {
+        "nfsUser": {
+          "$ref": "#/definitions/nfsUser"
+        },
+        "cifsUser": {
+          "$ref": "#/definitions/cifsUser"
+        }
+      }
+    },
+    "provisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource",
+      "readOnly": true,
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "netappProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is getting provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is getting deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted"
+          }
+        ]
+      }
+    },
+    "serverFqdn": {
+      "title": "Server FQDN",
+      "description": "The host part of the bucket URL, resolving to the bucket IP address and allowed by the server certificate.",
+      "type": "string",
+      "example": "fullyqualified.domainname.com"
+    },
+    "bucketServerCertificateObject": {
+      "type": "string",
+      "maxLength": 10240,
+      "minLength": 1,
+"description": "A base64-encoded PEM file, which includes both the bucket server's certificate and private key. It is used to authenticate the user and allows access to volume data in a read-only manner.",
+      "x-ms-secret": true,
+      "x-ms-mutability": [
+        "create",
+        "update"
+      ],
+      "example": "QSBiYXNlNjQtZW5jb2RlZCBQRU0gZmlsZSwgd2hpY2ggaW5jbHVkZXMgYm90aCB0aGUgYnVja2V0IHNlcnZlcidzIGNlcnRpZmljYXRlIGFuZCBwcml2YXRlIGtleS4gSXQgaXMgdXNlZCB0byBhdXRoZW50aWNhdGUgdGhlIHVzZXIgYW5kIGFsbG93cyBhY2Nlc3MgdG8gdm9sdW1lIGRhdGEgaW4gYSByZWFkLW9ubHkgbWFubmVyLgoKQmVsb3cgaXMgdGhlIG91dGxpbmUgb2YgdGhlIFBFTSBmaWxlIGNvbnRhaW5pbmcgdGhlIHByaXZhdGUga2V5IGFuZCBjZXJ0aWZpY2F0ZToKCi0tLS0tQkVHSU4gUFJJVkFURSBLRVktLS0tLQo8YmFzZTY0IGVuY29kZWQgUEtDUyM4IHByaXZhdGUga2V5IGRhdGE+Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0KLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCjxiYXNlNjQgZW5jb2RlZCBjZXJ0aWZpY2F0ZSBkYXRhPgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCgpPciB3aXRoIHByaXZhdGUga2V5IGluIFBLQ1MjMSBmb3JtYXQ6CgotLS0tLUJFR0lOIFJTQSBQUklWQVRFIEtFWS0tLS0tCjxiYXNlNjQgZW5jb2RlZCBQS0NTIzEgUlNBIHByaXZhdGUga2V5IGRhdGE+Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCi0tLS0tQkVHSU4gQ0VSVElGSUNBVEUtLS0tLQo8YmFzZTY0IGVuY29kZWQgY2VydGlmaWNhdGUgZGF0YT4KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+    },
+    "certificateCommonName": {
+      "type": "string",
+      "readOnly": true,
+      "maxLength": 64,
+      "minLength": 1,
+      "description": "Certificate Common Name taken from the certificate installed on the bucket server",
+      "example": "www.example.com"
     },
     "volumeList": {
       "description": "List of volume resources",
@@ -7419,6 +8298,16 @@
             "create"
           ]
         },
+        "ldapServerType": {
+          "type": "string",
+          "description": "Specifies the type of LDAP server for a given NFS volume.",
+          "$ref": "#/definitions/ldapServerType",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "coolAccess": {
           "type": "boolean",
           "description": "Specifies whether Cool Access(tiering) is enabled for the volume.",
@@ -7806,6 +8695,17 @@
           "x-ms-identifiers": [
             "resourceId"
           ]
+        },
+        "externalReplicationSetupStatus": {
+          "type": "string",
+          "description": "Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.",
+          "readOnly": true,
+          "$ref": "#/definitions/externalReplicationSetupStatus"
+        },
+        "externalReplicationSetupInfo": {
+          "type": "string",
+          "description": "Contains human-readable instructions on what the next step is to finish the external replication setup.",
+          "readOnly": true
         }
       }
     },
@@ -7949,6 +8849,43 @@
           "type": "string",
           "description": "Displays error message if the replication is in an error state"
         }
+      }
+    },
+    "externalReplicationSetupStatus": {
+      "type": "string",
+      "description": "Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.",
+      "enum": [
+        "ClusterPeerRequired",
+        "ClusterPeerPending",
+        "VServerPeerRequired",
+        "ReplicationCreateRequired",
+        "NoActionRequired"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalReplicationSetupStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ClusterPeerRequired",
+            "description": "Your cluster needs to be peered by using the 'peerExternalCluster' action"
+          },
+          {
+            "value": "ClusterPeerPending",
+            "description": "The peering needs to be accepted on your cluster before the setup can proceed"
+          },
+          {
+            "value": "VServerPeerRequired",
+            "description": "Need to call 'authorizeExternalReplication' and accept the returned 'vserver peer accept' command on your cluster to finish setting up the external replication"
+          },
+          {
+            "value": "ReplicationCreateRequired",
+            "description": "Need to call 'authorizeExternalReplication' to finish setting up the external replication"
+          },
+          {
+            "value": "NoActionRequired",
+            "description": "External Replication setup is complete, you can now monitor the 'mirrorState' in the replication status for the health of the replication"
+          }
+        ]
       }
     },
     "listReplications": {
@@ -9024,6 +9961,29 @@
       },
       "description": "An error response from the service."
     },
+    "ldapServerType": {
+      "title": "ldapServerType",
+      "type": "string",
+      "description": "The type of the LDAP server",
+      "enum": [
+        "ActiveDirectory",
+        "OpenLDAP"
+      ],
+      "x-ms-enum": {
+        "name": "LdapServerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ActiveDirectory",
+            "description": "The volume should use Active Directory for LDAP connections."
+          },
+          {
+            "value": "OpenLDAP",
+            "description": "The volume should use OpenLDAP for LDAP connections."
+          }
+        ]
+      }
+    },
     "serviceLevel": {
       "title": "serviceLevel",
       "type": "string",
@@ -9480,42 +10440,12 @@
           "example": "100006"
         },
         "quotaType": {
-          "title": "quotaType",
-          "type": "string",
           "description": "Type of quota",
+          "$ref": "#/definitions/quotaType",
           "x-ms-mutability": [
             "read",
             "create"
-          ],
-          "enum": [
-            "DefaultUserQuota",
-            "DefaultGroupQuota",
-            "IndividualUserQuota",
-            "IndividualGroupQuota"
-          ],
-          "x-ms-enum": {
-            "name": "type",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "DefaultUserQuota",
-                "description": "Default user quota"
-              },
-              {
-                "value": "DefaultGroupQuota",
-                "description": "Default group quota"
-              },
-              {
-                "value": "IndividualUserQuota",
-                "description": "Individual user quota"
-              },
-              {
-                "value": "IndividualGroupQuota",
-                "description": "Individual group quota"
-              }
-            ]
-          },
-          "example": "DefaultUserQuota"
+          ]
         },
         "quotaTarget": {
           "type": "string",
@@ -9526,6 +10456,40 @@
           ]
         }
       }
+    },
+    "quotaType": {
+      "title": "quotaType",
+      "type": "string",
+      "description": "Type of quota rule",
+      "enum": [
+        "DefaultUserQuota",
+        "DefaultGroupQuota",
+        "IndividualUserQuota",
+        "IndividualGroupQuota"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DefaultUserQuota",
+            "description": "Default user quota"
+          },
+          {
+            "value": "DefaultGroupQuota",
+            "description": "Default group quota"
+          },
+          {
+            "value": "IndividualUserQuota",
+            "description": "Individual user quota"
+          },
+          {
+            "value": "IndividualGroupQuota",
+            "description": "Individual group quota"
+          }
+        ]
+      },
+      "example": "IndividualUserQuota"
     },
     "volumeGroupList": {
       "description": "List of volume group resources",
@@ -10975,6 +11939,17 @@
       "minLength": 1,
       "maxLength": 64,
       "description": "The name of the volume",
+      "x-ms-parameter-location": "method"
+    },
+    "BucketName": {
+      "name": "bucketName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}$",
+      "minLength": 1,
+      "maxLength": 63,
+      "description": "The name of the bucket",
       "x-ms-parameter-location": "method"
     },
     "MountTargetName": {
