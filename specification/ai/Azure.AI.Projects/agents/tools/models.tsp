@@ -193,9 +193,6 @@ model OpenApiFunctionDefinition {
   @doc("List of OpenAPI spec parameters that will use user-provided defaults")
   @encodedName("application/json", "default_params")
   defaultParams?: string[];
-
-  @doc("List of functions returned in response")
-  functions?: FunctionDefinition[];
 }
 
 @doc("""
