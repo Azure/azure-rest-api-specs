@@ -23,7 +23,7 @@ interface DevCenter {
   @doc("Gets a list of Dev Box creations that are pending approval.")
   @added(APIVersions.v2025_04_01_preview)
   listApprovals is StandardResourceOperations.ResourceList<
-    Approval, 
+    Approval,
     ListQueryParametersTrait<StandardListQueryParameters & SelectQueryParameter>
   >;
 

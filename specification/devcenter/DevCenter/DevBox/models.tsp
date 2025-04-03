@@ -53,7 +53,8 @@ union DevBoxProvisioningState {
   @doc("Dev Box is provisioning.") Provisioning: "Provisioning",
 
   @added(APIVersions.v2025_04_01_preview)
-  @doc("Dev Box is pending approval.") PendingApproval: "PendingApproval",
+  @doc("Dev Box is pending approval.")
+  PendingApproval: "PendingApproval",
 
   @doc("Dev Box was provisioned with warning.")
   ProvisionedWithWarning: "ProvisionedWithWarning",
@@ -190,7 +191,7 @@ union PoolAlignTarget {
 @added(APIVersions.v2025_04_01_preview)
 model PoolAlignTargets {
   @doc("The targets to align on.")
-  targets: Array<PoolAlignTarget>,
+  targets: Array<PoolAlignTarget>;
 }
 
 @doc("The type of the resource that this schedule belongs to.")
