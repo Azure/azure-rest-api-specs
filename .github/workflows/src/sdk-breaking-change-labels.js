@@ -5,6 +5,51 @@ import { extractInputs } from "./context.js";
 import { getIssueNumber } from "./issues.js";
 
 /**
+ * Retry a function with exponential backoff
+ * @param {Function} fn - Function to retry
+ * @param {Object} options - Retry options
+ * @param {number} [options.maxRetries=3] - Maximum number of retries
+ * @param {number} [options.initialDelayMs=1000] - Initial delay in milliseconds
+ * @param {number} [options.maxDelayMs=10000] - Maximum delay in milliseconds
+ * @param {Function} [options.logger] - Logger function
+ * @returns {Promise<any>} - Result of the function
+ */
+async function retry(fn, { maxRetries = 3, initialDelayMs = 1000, maxDelayMs = 10000, logger = console.log } = {}) {
+  let lastError;
+
+  for (let attempt = 0; attempt < maxRetries + 1; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+
+      if (attempt < maxRetries) {
+        const delayMs = Math.min(initialDelayMs * Math.pow(2, attempt), maxDelayMs);
+        logger(`Request failed, retrying in ${delayMs}ms... (${attempt + 1}/${maxRetries})`);
+        logger(`Error: ${error.message}`);
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+      }
+    }
+  }
+
+  throw lastError;
+}
+
+/**
+ * Fetch with retry functionality
+ * @param {string} url - URL to fetch
+ * @param {Object} [options] - Fetch options
+ * @param {Object} [retryOptions] - Retry options
+ * @returns {Promise<Response>} - Fetch response
+ */
+async function fetchWithRetry(url, options = {}, retryOptions = {}) {
+  return retry(
+    () => fetch(url, options),
+    retryOptions
+  );
+}
+
+/**
  * @typedef {Object} ArtifactResource
  * @property {string} [downloadUrl]
  */
@@ -61,13 +106,17 @@ export async function getLabelAndActionImpl({
   const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
 
-  // Use Node.js fetch to call the API
-  const response = await fetch(apiUrl, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
+  // Use Node.js fetch with retry to call the API
+  const response = await fetchWithRetry(
+    apiUrl,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-  });
+    { logger: core.info }
+  );
 
   if (response.status === 404) {
     core.info(
@@ -93,8 +142,8 @@ export async function getLabelAndActionImpl({
     downloadUrl += `?format=file&subPath=/${artifactFileName}`;
     core.info(`Downloading artifact from: ${downloadUrl}`);
 
-    // Step 2: Fetch Artifact Content (as a Buffer)
-    const artifactResponse = await fetch(downloadUrl);
+    // Step 2: Fetch Artifact Content (as a Buffer) with retry
+    const artifactResponse = await fetchWithRetry(downloadUrl, {}, { logger: core.info });
     if (!artifactResponse.ok) {
       throw new Error(
         `Failed to fetch artifact: ${artifactResponse.statusText}`,
