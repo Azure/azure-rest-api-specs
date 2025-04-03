@@ -1,12 +1,13 @@
 # Use ~ to sort the workflow to the bottom of the list
-name: ~Watch - LintDiff
+name: "~Watch - LintDiff"
 
 on:
   check_run:
     types: completed
 
   workflow_run:
-    workflows: ["[TEST-IGNORE] Swagger LintDiff"]
+    workflows: 
+      - "[TEST-IGNORE] Swagger LintDiff"
 
 permissions:
   checks: write
