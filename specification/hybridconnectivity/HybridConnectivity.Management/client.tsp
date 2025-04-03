@@ -147,3 +147,4 @@ namespace Microsoft.HybridConnectivity;
   "PublicCloudResourceProvisioningState",
   "csharp"
 );
+@@clientName(GenerateAwsTemplateReponse, "GenerateAwsTemplateResult", "csharp");
