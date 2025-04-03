@@ -14,12 +14,12 @@ permissions:
 
 jobs:
   check-lintdiff:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Say hello
         uses: actions/github-script@v7
         with:
           script: |
-            console.log(github.event.workflow_run);
+            console.log(context.payload);
           result-encoding: string
  
