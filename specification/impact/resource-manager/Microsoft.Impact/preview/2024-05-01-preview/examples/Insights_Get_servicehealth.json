@@ -1,0 +1,35 @@
+{
+  "operationId": "Insights_Get",
+  "title": "Get Insight sample for service health category",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2024-05-01-preview",
+    "workloadImpactName": "impactid",
+    "insightName": "insightname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.Impact/workloadImpacts/impactname/insights/insightname",
+        "name": "insightname",
+        "type": "Microsoft.Impact/insights",
+        "properties": {
+          "category": "ServiceHealth",
+          "eventId": "ABC-123",
+          "eventTime": "2023-06-15T04:00:00.009223Z",
+          "impact": {
+            "impactId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Impact/workloadimpacts/impactid",
+            "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.compute/virtualmachines/vm1",
+            "startTime": "2018-11-08T00:00:00Z",
+            "endTime": "2018-11-08T00:00:00Z"
+          },
+          "insightUniqueId": "a3d91a07-698b-4044-a230-e918252c4c59",
+          "content": {
+            "title": "Impact Has been correlated to an outage",
+            "description": "On November 8, 2018, at 00:00 UTC, there may have been disruptions to your services linked to the resource <a href='...'>VM1<a>. We have pinpointed a service outage impacting these resources. For details on this outage, please refer to the service health information available at <a href='...'>service health</a>."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApplicationInsightsManagementClient",
+    "description": "Azure deleted workbook resource type.",
+    "version": "2024-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/deletedWorkbooks": {
+      "get": {
+        "description": "Get all recently deleted Workbooks in a specified subscription.",
+        "operationId": "DeletedWorkbooks_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more workbook definitions.",
+            "schema": {
+              "$ref": "#/definitions/DeletedWorkbooksListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DeletedWorkbookError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WorkbooksListSub": {
+            "$ref": "./examples/DeletedWorkbooksList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeletedWorkbookResource": {
+      "type": "object",
+      "description": "An azure resource object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of workbook. Only valid value is shared.",
+          "enum": [
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "WorkbookSharedTypeKind",
+            "modelAsString": true
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag"
+        }
+      }
+    },
+    "DeletedWorkbooksListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/DeletedWorkbook"
+          },
+          "description": "An array of workbooks."
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "description": "Workbook list result."
+    },
+    "DeletedWorkbook": {
+      "description": "A workbook definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeletedWorkbookResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Metadata describing a workbook for an Azure resource.",
+          "$ref": "#/definitions/DeletedWorkbookProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "DeletedWorkbookProperties": {
+      "description": "Properties that contain a workbook.",
+      "type": "object",
+      "required": [
+        "displayName",
+        "category",
+        "serializedData"
+      ],
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The user-defined name (display name) of the workbook."
+        },
+        "serializedData": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
+        },
+        "version": {
+          "type": "string",
+          "description": "Workbook schema version format, like 'Notebook/1.0', which should match the workbook in serializedData"
+        },
+        "timeModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC of the last modification that was made to this workbook definition.",
+          "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "description": "Workbook category, as defined by the user at creation time."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Being deprecated, please use the other tags field"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique user id of the specific user that owns this workbook.",
+          "readOnly": true
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "ResourceId for a source resource."
+        },
+        "storageUri": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The resourceId to the storage account when bring your own storage is used"
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The description of the workbook."
+        },
+        "revision": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The unique revision id for this workbook definition",
+          "readOnly": true
+        }
+      }
+    },
+    "DeletedWorkbookError": {
+      "description": "Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DeletedWorkbookErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "DeletedWorkbookErrorDefinition": {
+      "description": "Error definition.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innererror": {
+          "description": "Internal error details.",
+          "$ref": "#/definitions/DeletedWorkbookInnerErrorTrace",
+          "readOnly": true
+        }
+      }
+    },
+    "DeletedWorkbookInnerErrorTrace": {
+      "description": "Error details",
+      "type": "object",
+      "properties": {
+        "trace": {
+          "description": "detailed error trace",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CategoryParameter": {
+      "name": "category",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "workbook",
+        "TSG",
+        "performance",
+        "retention"
+      ],
+      "x-ms-enum": {
+        "name": "CategoryType",
+        "modelAsString": true
+      },
+      "description": "Category of workbook to return.",
+      "x-ms-parameter-location": "method"
+    },
+    "TagsParameter": {
+      "name": "tags",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "description": "Tags presents on each workbook returned.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -24,19 +24,22 @@ using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @armProviderNamespace
-@service({
-  title: "Microsoft.IoTOperations management service.",
-})
+@service(#{ title: "Microsoft.IoTOperations management service." })
 @doc("Microsoft.IoTOperations Resource Provider management API.")
 @versioned(Versions)
 namespace Microsoft.IoTOperations;
 
 /** Api versions */
 enum Versions {
-  /** 2024-07-01-preview version */
+  /** 2024-11-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-07-01-preview`,
+  `2024-11-01`,
+
+  /** 2025-04-01 version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2025-04-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -46,7 +49,8 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Instance {
   get is ArmResourceRead<InstanceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<InstanceResource>;
-  update is ArmTagsPatchSync<InstanceResource>;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<InstanceResource, InstancePatchModel>;
   delete is ArmResourceDeleteWithoutOkAsync<InstanceResource>;
   listByResourceGroup is ArmResourceListByParent<InstanceResource>;
   listBySubscription is ArmListBySubscription<InstanceResource>;
@@ -89,29 +93,29 @@ interface BrokerAuthorization {
 }
 // /instances/dataflowProfiles resource Operations
 @armResourceOperations
-interface DataFlowProfile {
-  get is ArmResourceRead<DataFlowProfileResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowProfileResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<DataFlowProfileResource>;
-  listByResourceGroup is ArmResourceListByParent<DataFlowProfileResource>;
+interface DataflowProfile {
+  get is ArmResourceRead<DataflowProfileResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowProfileResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataflowProfileResource>;
+  listByResourceGroup is ArmResourceListByParent<DataflowProfileResource>;
 }
 
 // /instance/dataflowProfiles/dataflows resource Operations
 @armResourceOperations
-interface DataFlow {
-  get is ArmResourceRead<DataFlowResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<DataFlowResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("DataFlow_ListByProfileResource")
-  listByResourceGroup is ArmResourceListByParent<DataFlowResource>;
+interface Dataflow {
+  get is ArmResourceRead<DataflowResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataflowResource>;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
+  @operationId("Dataflow_ListByProfileResource")
+  listByResourceGroup is ArmResourceListByParent<DataflowResource>;
 }
 
 // /instance/dataflowEndpoints resource Operations
 @armResourceOperations
-interface DataFlowEndpoint {
-  get is ArmResourceRead<DataFlowEndpointResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataFlowEndpointResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<DataFlowEndpointResource>;
-  listByResourceGroup is ArmResourceListByParent<DataFlowEndpointResource>;
+interface DataflowEndpoint {
+  get is ArmResourceRead<DataflowEndpointResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowEndpointResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DataflowEndpointResource>;
+  listByResourceGroup is ArmResourceListByParent<DataflowEndpointResource>;
 }

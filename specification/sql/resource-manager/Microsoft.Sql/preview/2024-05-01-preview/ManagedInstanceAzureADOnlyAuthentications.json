@@ -1,0 +1,323 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/azureADOnlyAuthentications": {
+      "get": {
+        "tags": [
+          "ManagedInstanceAzureADOnlyAuthentications"
+        ],
+        "description": "Gets a list of server Azure Active Directory only authentications.",
+        "operationId": "ManagedInstanceAzureADOnlyAuthentications_ListByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Azure Active Directory only authentication objects.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAzureADOnlyAuthListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubnetMissingRequiredDelegation - Selected subnet is not delegated for SQL Managed Instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of Azure Active Directory only authentication object.": {
+            "$ref": "./examples/ManagedInstanceAzureADOnlyAuthListByInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/azureADOnlyAuthentications/{authenticationName}": {
+      "get": {
+        "tags": [
+          "ManagedInstanceAzureADOnlyAuthentications"
+        ],
+        "description": "Gets a specific Azure Active Directory only authentication property.",
+        "operationId": "ManagedInstanceAzureADOnlyAuthentications_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "authenticationName",
+            "in": "path",
+            "description": "The name of server azure active directory only authentication.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AuthenticationName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified Azure Active Directory only authentication properties.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAzureADOnlyAuthentication"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidManagedServerAADOnlyAuthTypePropertyName - Managed Server Azure Active Directory only authentication type should be Default\n\n * 400 InvalidManagedServerAADOnlyAuthNoAADAdminPropertyName - AAD Admin is not configured, AAD Admin must be set before enabling/disabling AAD Only Authentication.\n\n * 400 SubnetMissingRequiredDelegation - Selected subnet is not delegated for SQL Managed Instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Azure Active Directory only authentication property.": {
+            "$ref": "./examples/ManagedInstanceAzureADOnlyAuthGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedInstanceAzureADOnlyAuthentications"
+        ],
+        "description": "Sets Server Active Directory only authentication property or updates an existing server Active Directory only authentication property.",
+        "operationId": "ManagedInstanceAzureADOnlyAuthentications_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "authenticationName",
+            "in": "path",
+            "description": "The name of server azure active directory only authentication.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AuthenticationName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The required parameters for creating or updating an Active Directory only authentication property.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAzureADOnlyAuthentication"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated a Azure Active Directory only authentication property.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAzureADOnlyAuthentication"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidManagedServerAADOnlyAuthTypePropertyName - Managed Server Azure Active Directory only authentication type should be Default\n\n * 400 InvalidManagedServerAADOnlyAuthNoAADAdminPropertyName - AAD Admin is not configured, AAD Admin must be set before enabling/disabling AAD Only Authentication.\n\n * 400 SubnetMissingRequiredDelegation - Selected subnet is not delegated for SQL Managed Instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully updated Azure Active Directory only authentication property.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAzureADOnlyAuthentication"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or updates Azure Active Directory only authentication object.": {
+            "$ref": "./examples/ManagedInstanceAzureADOnlyAuthCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedInstanceAzureADOnlyAuthentications"
+        ],
+        "description": "Deletes an existing server Active Directory only authentication property.",
+        "operationId": "ManagedInstanceAzureADOnlyAuthentications_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "authenticationName",
+            "in": "path",
+            "description": "The name of server azure active directory only authentication.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AuthenticationName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the Azure Active Directory only property."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidManagedServerAADOnlyAuthTypePropertyName - Managed Server Azure Active Directory only authentication type should be Default\n\n * 400 InvalidManagedServerAADOnlyAuthNoAADAdminPropertyName - AAD Admin is not configured, AAD Admin must be set before enabling/disabling AAD Only Authentication.\n\n * 400 SubnetMissingRequiredDelegation - Selected subnet is not delegated for SQL Managed Instance.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionNotFound - The requested subscription was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 CannotCancelOperation - The management operation is in a state that cannot be cancelled.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified Azure Active Directory only property does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes Azure Active Directory only authentication object.": {
+            "$ref": "./examples/ManagedInstanceAzureADOnlyAuthDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceAzureADOnlyAuthentication": {
+      "description": "Azure Active Directory only authentication.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceAzureADOnlyAuthProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedInstanceAzureADOnlyAuthListResult": {
+      "description": "A list of active directory only authentications.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceAzureADOnlyAuthentication"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceAzureADOnlyAuthProperties": {
+      "description": "Properties of a active directory only authentication for Managed Instance.",
+      "required": [
+        "azureADOnlyAuthentication"
+      ],
+      "type": "object",
+      "properties": {
+        "azureADOnlyAuthentication": {
+          "description": "Azure Active Directory only Authentication enabled.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

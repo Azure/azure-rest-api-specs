@@ -20,7 +20,7 @@ model PortalTenantCompileFile
   @path
   @key("compilefile")
   @segment("compilefile")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 }
 
@@ -40,6 +40,7 @@ interface PortalTenant {
 @@clientName(PortalTenant.compilefile::parameters.body,
   "portalTenantCompileFile"
 );
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
 @@encodedName(PortalTenant.compilefile::parameters.body,
   "application/json",
   "portalTenantCompileFile"

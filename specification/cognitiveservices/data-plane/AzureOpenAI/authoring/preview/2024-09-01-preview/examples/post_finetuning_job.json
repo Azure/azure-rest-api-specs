@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2024-09-01-preview",
+    "fineTuningJob": {
+      "integrations": [
+        {
+          "type": "wandb",
+          "wandb": {
+            "project": "custom-wandb-project",
+            "tags": [
+              "project:tag",
+              "lineage"
+            ]
+          }
+        }
+      ],
+      "model": "curie",
+      "training_file": "file-181a1cbdcdcf4677ada87f63a0928099"
+    },
+    "content-Type": "application/json"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://aoairesource.openai.azure.com/openai/fine_tuning/jobs/ft-72a2792ef7d24ba7b82c7fe4a37e379f"
+      },
+      "body": {
+        "hyperparameters": {
+          "n_epochs": -1
+        },
+        "integrations": [
+          {
+            "type": "wandb",
+            "wandb": {
+              "project": "custom-wandb-project",
+              "tags": [
+                "project:tag",
+                "lineage"
+              ]
+            }
+          }
+        ],
+        "status": "pending",
+        "model": "curie",
+        "training_file": "file-181a1cbdcdcf4677ada87f63a0928099",
+        "id": "ft-72a2792ef7d24ba7b82c7fe4a37e379f",
+        "created_at": 1646126127,
+        "object": "fine_tuning.job"
+      }
+    }
+  }
+}

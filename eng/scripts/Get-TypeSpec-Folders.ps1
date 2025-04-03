@@ -1,26 +1,31 @@
 [CmdletBinding()]
 param (
+  [switch]$IgnoreCoreFiles = $false,
   [switch]$CheckAll = $false,
   [string]$BaseCommitish = "HEAD^",
-  [string]$TargetCommitish = "HEAD"
+  [string]$HeadCommitish = "HEAD"
 )
 Set-StrictMode -Version 3
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
+
 $checkAllPath = ((Get-ChildItem "specification" -Directory).Name -replace '^', 'specification/') -replace '$', '/'
+$checkedAll = $false
 
 if ($CheckAll) {
   $changedFiles = $checkAllPath
+  $checkedAll = $true
 }
 else {
-  $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -targetCommitish $TargetCommitish -diffFilter "")
+  $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -headCommitish $HeadCommitish -diffFilter "")
   $coreChangedFiles = Get-ChangedCoreFiles $changedFiles
 
-  if ($Env:BUILD_REPOSITORY_NAME -eq 'azure/azure-rest-api-specs' -and $coreChangedFiles) {
+  if ($coreChangedFiles -and !$IgnoreCoreFiles) {
     Write-Verbose "Found changes to core eng or root files so checking all specs."
     $changedFiles = $checkAllPath
+    $checkedAll = $true
   }
   else {
     $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
@@ -47,6 +52,8 @@ foreach ($skippedTypespecFolder in $skippedTypespecFolders | Select-Object -Uniq
   Write-Host "Cannot find directory $skippedTypespecFolder"
 }
 
-$typespecFolders = $typespecFolders | ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_) -replace '\\', '/' } | Sort-Object -Unique
+if ($typespecFolders.Length) {
+  $typespecFolders = $typespecFolders | ForEach-Object { [IO.Path]::GetRelativePath($repoPath, $_) -replace '\\', '/' } | Sort-Object -Unique
+}
 
-return $typespecFolders
+return @($typespecFolders, $checkedAll)

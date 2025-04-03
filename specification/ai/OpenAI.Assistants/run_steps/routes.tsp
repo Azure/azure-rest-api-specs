@@ -18,7 +18,7 @@ namespace Azure.AI.OpenAI.Assistants;
  * @returns Information about the requested run step.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
@@ -28,6 +28,11 @@ op getRunStep(
   @path threadId: string,
   @path runId: string,
   @path stepId: string,
+
+  /** A list of additional fields to include in the response. */
+  @added(ServiceApiVersions.v2025_01_01_preview)
+  @query("include[]")
+  runInclude?: RunIncludes[],
 ): RunStep;
 
 /**
@@ -39,7 +44,7 @@ op getRunStep(
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/threads/{threadId}/runs/{runId}/steps")
@@ -47,5 +52,11 @@ op getRunStep(
 op listRunSteps(
   @path threadId: string,
   @path runId: string,
+
+  /** A list of additional fields to include in the response. */
+  @added(ServiceApiVersions.v2025_01_01_preview)
+  @query("include[]")
+  runInclude?: RunIncludes[],
+
   ...OpenAIListRequestOptions,
 ): OpenAIPageableListOf<RunStep>;

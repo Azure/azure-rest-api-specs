@@ -185,6 +185,7 @@ model Month {
 
 @doc("Header to distinguish between resource creation or update")
 model MsRpaasNewResourceHeader {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-default-description is not standard"
   @header("x-ms-rpaas-new-resource")
   @doc("Boolean parameter to distinguish between resource creation or update")
   @extension("x-default-description", true)

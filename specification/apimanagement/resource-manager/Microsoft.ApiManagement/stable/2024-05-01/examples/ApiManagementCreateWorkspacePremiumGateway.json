@@ -1,0 +1,103 @@
+{
+  "parameters": {
+    "gatewayName": "apimGateway1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "properties": {
+        "backend": {
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/sn1"
+          }
+        },
+        "virtualNetworkType": "External"
+      },
+      "sku": {
+        "name": "WorkspaceGatewayPremium",
+        "capacity": 1
+      },
+      "location": "South Central US",
+      "tags": {
+        "Name": "Contoso",
+        "Test": "User"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2024-05-01&asyncResponse",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2024-05-01&asyncResponse"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1",
+        "name": "apimGateway1",
+        "type": "Microsoft.ApiManagement/gateway",
+        "tags": {
+          "api-version": "2024-05-01"
+        },
+        "location": "East US",
+        "etag": "AAAAAAAmRAM=",
+        "properties": {
+          "provisioningState": "Created",
+          "targetProvisioningState": "Activating",
+          "createdAtUtc": "2022-07-11T18:41:01.2506031Z",
+          "backend": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/sn1"
+            }
+          },
+          "virtualNetworkType": "External"
+        },
+        "sku": {
+          "name": "WorkspaceGatewayPremium",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2022-07-11T18:41:00.9390609Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-07-11T18:41:00.9390609Z"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/gateways/apimGateway1",
+        "name": "apimGateway1",
+        "type": "Microsoft.ApiManagement/gateways",
+        "tags": {
+          "api-version": "2024-05-01"
+        },
+        "location": "East US",
+        "etag": "AAAAAAAmREI=",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
+          "createdAtUtc": "2022-07-11T18:41:01.2506031Z",
+          "backend": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vn1/subnets/sn1"
+            }
+          },
+          "virtualNetworkType": "External"
+        },
+        "sku": {
+          "name": "WorkspaceGatewayPremium",
+          "capacity": 1
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2022-07-11T18:41:00.9390609Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-07-11T18:41:00.9390609Z"
+        }
+      }
+    }
+  }
+}

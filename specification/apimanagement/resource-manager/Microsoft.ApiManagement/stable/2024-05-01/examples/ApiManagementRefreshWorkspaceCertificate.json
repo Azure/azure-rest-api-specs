@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1",
+    "certificateId": "templateCertkv"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/certificates/templateCertkv",
+        "type": "Microsoft.ApiManagement/service/workspaces/certificates",
+        "name": "templateCertkv",
+        "properties": {
+          "subject": "CN=*.msitesting.net",
+          "thumbprint": "EA**********************9AD690",
+          "expirationDate": "2037-01-01T07:00:00Z",
+          "keyVault": {
+            "secretIdentifier": "https://rpbvtkeyvaultintegration.vault-int.azure-int.net/secrets/msitestingCert",
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-22T00:24:53.3191468Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}

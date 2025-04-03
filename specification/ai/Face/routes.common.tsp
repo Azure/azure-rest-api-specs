@@ -1,13 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 import "./models.common.tsp";
 import "./models.detect.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Traits;
 using Foundations;
@@ -37,7 +35,7 @@ op FaceResourceCreateWithServiceProvidedName<
 @createsOrReplacesResource(TResource)
 op FaceCollectionResourceCreateOperation<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   TResource,
-  CreateCollectionOptions,
+  CreateCollectionRequest,
   TypeSpec.Http.OkResponse,
   ServiceTraits,
   FaceErrorResponse
@@ -49,15 +47,7 @@ alias AddFaceSuccess = "A successful call returns a new persistedFaceId.";
 @createsResource(TFace)
 op AddFace<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
   TFace,
-  AddFaceOptions & {
-    @doc("The format of the HTTP payload.")
-    @header
-    contentType: "application/octet-stream";
-
-    @doc("The image to be analyzed")
-    @body
-    imageContent: bytes;
-  },
+  AddFaceRequest,
   AddFaceResult,
   ServiceTraits,
   FaceErrorResponse
@@ -67,11 +57,7 @@ op AddFace<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
 @createsResource(TFace)
 op AddFaceFromUrl<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
   TFace,
-  AddFaceOptions & {
-    @clientName("uri", "csharp")
-    @doc("URL of input image.")
-    url: url;
-  },
+  AddFaceFromUrlRequest,
   AddFaceResult,
   ServiceTraits,
   FaceErrorResponse

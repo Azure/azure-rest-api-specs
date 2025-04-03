@@ -35,9 +35,7 @@ namespace Azure.AI.OpenAI {
     }
   ]>
 )
-@service({
-  title: "Azure OpenAI",
-})
+@service(#{ title: "Azure OpenAI" })
 @server(
   "{endpoint}",
   "Azure OpenAI APIs for Assistants.",
@@ -58,5 +56,21 @@ namespace Azure.AI.OpenAI.Assistants {
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     @doc("The May 2024 preview release for Azure OpenAI, including the first availability of assistants V2.")
     v2024_05_01_preview: "2024-05-01-preview",
+
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    @doc("The July 2024 preview release for Azure OpenAI.")
+    v2024_07_01_preview: "2024-07-01-preview",
+
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    @doc("The September 2024 preview release for Azure OpenAI.")
+    v2024_09_01_preview: "2024-09-01-preview",
+
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    @doc("The October 2024 preview release for Azure OpenAI.")
+    v2024_10_01_Preview: "2024-10-01-preview",
+
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+    @doc("The December 2024 preview release for Azure OpenAI.")
+    v2025_01_01_preview: "2025-01-01-preview",
   }
 }

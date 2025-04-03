@@ -14,13 +14,20 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{serviceName}.data.azure-apicenter.net",
+    "hostTemplate": "https://{serviceName}.data.{region}.azure-apicenter.ms",
     "useSchemePrefix": false,
     "parameters": [
       {
         "name": "serviceName",
         "in": "path",
         "description": "Region-unique API Center service name",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "region",
+        "in": "path",
+        "description": "Region name",
         "required": true,
         "type": "string"
       }

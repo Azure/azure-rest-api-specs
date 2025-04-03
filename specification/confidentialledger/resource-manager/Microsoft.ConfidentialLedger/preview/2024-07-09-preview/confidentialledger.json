@@ -785,6 +785,17 @@
           "readOnly": false,
           "description": "Number of CCF nodes in the ACC Ledger.",
           "$ref": "#/definitions/NodeCount"
+        },
+        "writeLBAddressPrefix": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Prefix for the write load balancer. Example: write"
+        },
+        "workerThreads": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": false,
+          "description": "Number of additional threads processing incoming client requests in the enclave (modify with care!)"
         }
       }
     },

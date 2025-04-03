@@ -23,6 +23,7 @@ interface PurviewPolicies {
       ...SkipTokenParameter;
 
       /** Supported filters : $filter=policyType eq SelfService, $filter=policyType eq SqlDevops. Returns only the policies of the specified type. If not specified, all policies are returned. */
+      #suppress "@azure-tools/typespec-azure-core/no-openapi" "LEGACY - THIS shouldn't even be needed"
       @extension("x-ms-skip-url-encoding", true)
       @query("$filter")
       filter?: string;
@@ -33,7 +34,6 @@ interface PurviewPolicies {
 /** The skipToken parameter definition. */
 model SkipTokenParameter {
   /** Paging key to paginate to next page. */
-  @extension("x-ms-parameter-location", "method")
   @query
   skipToken?: string;
 }
@@ -87,7 +87,7 @@ model Policy extends Azure.ResourceManager.Foundations.ProxyResource {
   members: PolicyMembers;
 
   /** Array of decision rules for the policy */
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   decisionRules: PolicyDecisionRule[];
 
   /** The timestamp of the expiry time of the policy (UTC). */
@@ -101,11 +101,11 @@ model Policy extends Azure.ResourceManager.Foundations.ProxyResource {
 /** Policy member */
 model PolicyMembers {
   /** Array of azure active directory members */
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   fabricItemMembers?: FabricItemMember[];
 
   /** Array of azure active directory members */
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   aadMembers?: AadMember[];
 }
 
@@ -136,7 +136,7 @@ model PolicyDecisionRule {
   effect: Decision;
 
   /** Array of attribute predicates */
-  @extension("x-ms-identifiers", [])
+  @identifiers(#[])
   permission?: AttributePredicate[];
 }
 

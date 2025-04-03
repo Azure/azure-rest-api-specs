@@ -1,0 +1,26 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/deviceregistry/armdeviceregistry
+      breaking-changes:
+        - Enum `DataPointsObservabilityMode` has been removed
+        - Enum `EventsObservabilityMode` has been removed
+        - Enum `UserAuthenticationMode` has been removed
+        - Field `AssetEndpointProfileURI`, `AssetType`, `DataPoints`, `DefaultDataPointsConfiguration` of struct `AssetProperties` has been removed
+        - Field `AssetType`, `DataPoints`, `DefaultDataPointsConfiguration` of struct `AssetUpdateProperties` has been removed
+        - Field `CapabilityID` of struct `DataPoint` has been removed
+        - Field `CapabilityID` of struct `Event` has been removed
+        - Field `CertificateReference` of struct `X509CredentialsUpdate` has been removed
+        - Field `CertificateReference` of struct `X509Credentials` has been removed
+        - Field `PasswordReference`, `UsernameReference` of struct `UsernamePasswordCredentialsUpdate` has been removed
+        - Field `PasswordReference`, `UsernameReference` of struct `UsernamePasswordCredentials` has been removed
+        - Field `TransportAuthentication`, `UserAuthentication` of struct `AssetEndpointProfileProperties` has been removed
+        - Field `TransportAuthentication`, `UserAuthentication` of struct `AssetEndpointProfileUpdateProperties` has been removed
+        - Struct `OwnCertificate` has been removed
+        - Struct `TransportAuthenticationUpdate` has been removed
+        - Struct `TransportAuthentication` has been removed
+        - Struct `UserAuthenticationUpdate` has been removed
+        - Struct `UserAuthentication` has been removed
+        - Type of `AssetProperties.Version` has been changed from `*int32` to `*int64`
+        - Type of `AssetStatus.Version` has been changed from `*int32` to `*int64`
+        - Type of `DataPoint.ObservabilityMode` has been changed from `*DataPointsObservabilityMode` to `*DataPointObservabilityMode`
+        - Type of `Event.ObservabilityMode` has been changed from `*EventsObservabilityMode` to `*EventObservabilityMode`

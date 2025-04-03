@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0",
+    "location": "centralus",
+    "api-version": "2024-09-01",
+    "body": {
+      "appLocation": "eastus",
+      "environment": "NonProd",
+      "sapProduct": "S4HANA",
+      "deploymentType": "SingleServer",
+      "saps": 60000,
+      "dbMemory": 2000,
+      "databaseType": "HANA",
+      "dbScaleMethod": "ScaleUp"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "vmSku": "Standard_M128s",
+        "deploymentType": "SingleServer"
+      }
+    }
+  },
+  "operationId": "SapVirtualInstances_InvokeSizingRecommendations",
+  "title": "SAP sizing recommendations for single server."
+}

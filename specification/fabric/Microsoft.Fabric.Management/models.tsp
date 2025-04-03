@@ -15,11 +15,11 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("The Microsoft Fabric capacity properties.")
 model FabricCapacityProperties {
   @doc("The current deployment state of Microsoft Fabric resource. The provisioningState is to indicate states for resource provisioning.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   @doc("The current state of Microsoft Fabric resource. The state is to indicate more states outside of resource provisioning.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state?: ResourceState;
 
   @doc("The capacity administration")
@@ -111,10 +111,11 @@ union ResourceState {
 model RpSkuEnumerationForNewResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The collection of available SKUs for new resources")
+  @items
   value: Array<RpSkuDetailsForNewResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
-  @nextLink
+  @TypeSpec.nextLink
   nextLink?: string;
 }
 
@@ -140,10 +141,11 @@ model RpSkuProperties {
 model RpSkuEnumerationForExistingResourceResult {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("The SKU details")
+  @items
   value: Array<RpSkuDetailsForExistingResource>;
 
   @doc("Url for the next page.  Null if no more pages available")
-  @nextLink
+  @TypeSpec.nextLink
   nextLink?: string;
 }
 
@@ -165,4 +167,29 @@ model CapacityNameParameter {
   @TypeSpec.Rest.segment("capacities")
   @path
   capacityName: string;
+}
+
+@doc("Describes Resource Quota")
+model Quota {
+  @doc("The name of the quota.")
+  @visibility(Lifecycle.Read)
+  name?: QuotaName;
+
+  @doc("The unit of usage measurement.")
+  unit: string;
+
+  @doc("The current usage of the resource.")
+  currentValue: int64;
+
+  @doc("The maximum permitted usage of the resource.")
+  limit: int64;
+}
+
+@doc("The Quota Names")
+model QuotaName {
+  @doc("The name of the resource.")
+  value?: string;
+
+  @doc("The localized name of the resource.")
+  localizedValue?: string;
 }

@@ -1,0 +1,314 @@
+{
+  "operationId": "Documents_SearchPost",
+  "title": "SearchIndexSearchDocumentsPost",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "indexName": "preview-test",
+    "api-version": "2025-03-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "searchRequest": {
+      "count": true,
+      "facets": [
+        "ownerId",
+        "price,metric:sum,default:10"
+      ],
+      "filter": "category eq 'purple' or category eq 'pink'",
+      "highlight": "category",
+      "highlightPostTag": "</em>",
+      "highlightPreTag": "</em>",
+      "minimumCoverage": 100,
+      "queryType": "semantic",
+      "scoringStatistics": "global",
+      "sessionId": "mysessionid",
+      "scoringParameters": [
+        "categoryTag:desiredCategoryValue"
+      ],
+      "scoringProfile": "stringFieldBoost",
+      "search": "purple",
+      "searchFields": "id,name,description,category,ownerId",
+      "searchMode": "any",
+      "queryLanguage": "en-us",
+      "speller": "lexicon",
+      "select": "id,name,description,category,ownerId",
+      "skip": 0,
+      "top": 10,
+      "semanticConfiguration": "testconfig",
+      "semanticErrorHandling": "partial",
+      "semanticMaxWaitInMilliseconds": 5000,
+      "semanticQuery": "find all purple",
+      "answers": "extractive",
+      "captions": "extractive",
+      "queryRewrites": "generative",
+      "vectorQueries": [
+        {
+          "vector": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "kind": "vector",
+          "k": 50,
+          "fields": "vector22, vector1b",
+          "oversampling": 20,
+          "weight": 1,
+          "threshold": {
+            "value": 0.984,
+            "kind": "vectorSimilarity"
+          },
+          "filterOverride": "ownerId eq 'sam'"
+        }
+      ],
+      "vectorFilterMode": "preFilter",
+      "hybridSearch": {
+        "maxTextRecallSize": 100,
+        "countAndFacetMode": "countAllResults"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.count": 27,
+        "@search.coverage": 100.0,
+        "@search.facets": {
+          "ownerId": [
+            {
+              "count": 16,
+              "value": "sam"
+            },
+            {
+              "count": 8,
+              "value": "ryan"
+            },
+            {
+              "count": 3,
+              "value": "benny"
+            }
+          ],
+          "price": [
+            {
+              "sum": 320.0
+            }
+          ]
+        },
+        "@search.answers": [
+          {
+            "key": "empty-vectors",
+            "text": "no vector.",
+            "highlights": "</em>no vector.</em>",
+            "score": 0.8240000009536743
+          }
+        ],
+        "value": [
+          {
+            "@search.score": 0.012820512987673283,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.788736343383789,
+            "@search.captions": [
+              {
+                "text": "no vector.",
+                "highlights": "</em>no vector.</em>"
+              }
+            ],
+            "id": "empty-vectors",
+            "name": "test",
+            "description": "no vector",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.011627906933426857,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.788736343383789,
+            "@search.captions": [
+              {
+                "text": "no vector.",
+                "highlights": "</em>no vector.</em>"
+              }
+            ],
+            "id": "no-vectors",
+            "name": "test",
+            "description": "no vector",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.012345679104328156,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.7298945188522339,
+            "@search.captions": [
+              {
+                "text": "test2 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "2",
+            "name": "test",
+            "description": "test2 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.011904762126505375,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.7274131774902344,
+            "@search.captions": [
+              {
+                "text": "test4 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "4",
+            "name": "test",
+            "description": "test4 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.01666666753590107,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.724223017692566,
+            "@search.captions": [
+              {
+                "text": "test7 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "7",
+            "name": "test",
+            "description": "test7 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.0117647061124444,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.721387267112732,
+            "@search.captions": [
+              {
+                "text": "test5 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "5",
+            "name": "test",
+            "description": "test5 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.013888888992369175,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.695865511894226,
+            "@search.captions": [
+              {
+                "text": "test8 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "8",
+            "name": "test",
+            "description": "test8 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.012658228166401386,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6887761354446411,
+            "@search.captions": [
+              {
+                "text": "test11 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "11",
+            "name": "test",
+            "description": "test11 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.014084506779909134,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6848769187927246,
+            "@search.captions": [
+              {
+                "text": "test16 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "16",
+            "name": "test",
+            "description": "test16 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          },
+          {
+            "@search.score": 0.013333333656191826,
+            "@search.highlights": {
+              "category": [
+                "</em>purple</em>"
+              ]
+            },
+            "@search.rerankerScore": 1.6834590435028076,
+            "@search.captions": [
+              {
+                "text": "test23 hello.",
+                "highlights": ""
+              }
+            ],
+            "id": "23",
+            "name": "test",
+            "description": "test23 hello",
+            "category": "purple",
+            "ownerId": "sam"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf",
+            "name": "testNf",
+            "type": "Microsoft.HybridNetwork/networkFunctions",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "publisherName": "testVendor",
+              "publisherScope": "Public",
+              "networkFunctionDefinitionGroupName": "testnetworkFunctionDefinitionGroupName",
+              "networkFunctionDefinitionVersion": "1.0.1",
+              "networkFunctionDefinitionOfferingLocation": "eastus",
+              "networkFunctionDefinitionVersionResourceReference": {
+                "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/publishers/testVendor/networkFunctionDefinitionGroups/testnetworkFunctionDefinitionGroupName/networkFunctionDefinitionVersions/1.0.1",
+                "idType": "Open"
+              },
+              "nfviType": "AzureArcKubernetes",
+              "nfviId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testResourceGroup/providers/Microsoft.ExtendedLocation/customLocations/testCustomLocation",
+              "allowSoftwareUpdate": false,
+              "configurationType": "Open",
+              "deploymentValues": "{\"releaseName\":\"testReleaseName\",\"namespace\":\"testNamespace\"}",
+              "roleOverrideValues": [
+                "{\"name\":\"testRoleOne\",\"deployParametersMappingRuleProfile\":{\"helmMappingRuleProfile\":{\"helmPackageVersion\":\"2.1.3\",\"values\":\"{\\\"roleOneParam\\\":\\\"roleOneOverrideValue\\\"}\"}}}",
+                "{\"name\":\"testRoleTwo\",\"deployParametersMappingRuleProfile\":{\"helmMappingRuleProfile\":{\"releaseName\":\"overrideReleaseName\",\"releaseNamespace\":\"overrideNamespace\",\"values\":\"{\\\"roleTwoParam\\\":\\\"roleTwoOverrideValue\\\"}\"}}}"
+              ]
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}

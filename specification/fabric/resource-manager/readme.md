@@ -41,6 +41,24 @@ These settings apply only when `--tag=package-2023-11-01` is specified on the co
 ```yaml $(tag) == 'package-2023-11-01'
 input-file:
   - Microsoft.Fabric/stable/2023-11-01/fabric.json
+suppressions:
+  - code: PostResponseCodes
+    reason: 2 POST Methods Resume and Suspend are LRO and the result returns 200 OK with no schema. It would take a while to fix the backend to return 204. Once fixed, will publish a new version. Specifying only 202 causes failues in the Az CLI Tools generation.
+    from: fabric.json
+```
+---
+
+### Tag: package-2025-01-15-preview
+
+These settings apply only when `--tag=package-2025-01-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-15-preview'
+input-file:
+  - Microsoft.Fabric/preview/2025-01-15-preview/fabric.json
+suppressions:
+  - code: PostResponseCodes
+    reason: 2 POST Methods Resume and Suspend are LRO and the result returns 200 OK with no schema. It would take a while to fix the backend to return 204. Once fixed, will publish a new version. Specifying only 202 causes failues in the Az CLI Tools generation.
+    from: fabric.json
 ```
 ---
 

@@ -12,10 +12,12 @@ interface DnsPrivateZones extends OracleLocationBasedResource<DnsPrivateZone> {}
   "List DnsPrivateZone resources by Location"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(DnsPrivateZones.listByLocation,
   "./examples/dnsPrivateZones_listByLocation.json",
   "List DnsPrivateZones by location"
 );
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
 @@Autorest.example(DnsPrivateZones.get,
   "./examples/dnsPrivateZones_get.json",
   "Get a DnsPrivateZone by name"

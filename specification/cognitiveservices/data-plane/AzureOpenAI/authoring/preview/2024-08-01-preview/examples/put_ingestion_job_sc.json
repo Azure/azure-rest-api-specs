@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "job-id": "ingestion-job",
+    "ingestionJob": {
+      "kind": "SystemCompute",
+      "searchServiceConnection": {
+        "kind": "EndpointWithManagedIdentity",
+        "endpoint": "https://aykame-dev-search.search.windows.net"
+      },
+      "datasource": {
+        "kind": "Storage",
+        "connection": {
+          "kind": "EndpointWithManagedIdentity",
+          "endpoint": "https://mystorage.blob.core.windows.net/",
+          "resourceId": "/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
+        },
+        "containerName": "container",
+        "chunking": {
+          "maxChunkSizeInTokens": 2048
+        },
+        "embeddings": [
+          {
+            "connection": {
+              "kind": "RelativeConnection"
+            },
+            "deploymentName": "Ada"
+          }
+        ]
+      },
+      "dataRefreshIntervalInHours": 24,
+      "completionAction": "keepAllAssets"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "operation-location": "https://aoairesource.openai.azure.com/openai/ingestion/jobs/ingestion-job/runs/72a2792ef7d24ba7b82c7fe4a37e379f?api-version=2024-08-01-preview"
+      },
+      "body": {
+        "kind": "SystemCompute",
+        "jobId": "ingestion-job",
+        "searchServiceConnection": {
+          "kind": "EndpointWithManagedIdentity",
+          "endpoint": "https://aykame-dev-search.search.windows.net"
+        },
+        "datasource": {
+          "kind": "Storage",
+          "connection": {
+            "kind": "EndpointWithManagedIdentity",
+            "endpoint": "https://mystorage.blob.core.windows.net/",
+            "resourceId": "/subscriptions/1234567-abcd-1234-5678-1234abcd/resourceGroups/my-resource/providers/Microsoft.Storage/storageAccounts/mystorage"
+          },
+          "containerName": "container",
+          "chunking": {
+            "maxChunkSizeInTokens": 2048
+          },
+          "embeddings": [
+            {
+              "connection": {
+                "kind": "RelativeConnection"
+              },
+              "deploymentName": "Ada"
+            }
+          ]
+        },
+        "dataRefreshIntervalInHours": 24,
+        "completionAction": "keepAllAssets"
+      }
+    }
+  }
+}
