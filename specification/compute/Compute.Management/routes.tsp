@@ -505,7 +505,8 @@ interface VirtualMachineImagesOperationGroup {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
       @query("$orderby")
       $orderby?: string;
-    }
+    },
+    Error = CloudError,
   >;
   /**
    * Gets a virtual machine image.

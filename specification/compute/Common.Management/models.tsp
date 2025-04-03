@@ -1,8 +1,10 @@
 import "@typespec/http";
 import "@typespec/openapi";
+import "@typespec/rest";
 
 using Http;
 using OpenAPI;
+using TypeSpec.Rest;
 
 namespace Microsoft.Compute;
 
@@ -138,7 +140,26 @@ model SubResourceReadOnly {
    * Resource Id
    */
   @visibility(Lifecycle.Read)
-  id?: string;
+  @encodedName("application/json", "id")
+  identifier?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+@doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.customAzureResource
+model ProxySubResourceReadOnly<Properties extends {}>
+  extends SubResourceReadOnly {
+  @doc("The resource-specific properties for this resource.")
+  properties?: Properties;
+
+  /**
+   * The name of the parent resource.
+   */
+  @path
+  @visibility(Lifecycle.Read)
+  @segment("parents")
+  parentName: string;
 }
 
 /**

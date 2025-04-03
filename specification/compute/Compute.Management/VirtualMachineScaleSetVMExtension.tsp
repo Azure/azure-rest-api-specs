@@ -14,10 +14,11 @@ namespace Microsoft.Compute;
 /**
  * Describes a VMSS VM Extension.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(VirtualMachineScaleSetVM)
 model VirtualMachineScaleSetVMExtension
-  is Azure.ResourceManager.ProxyResource<VirtualMachineExtensionProperties> {
-  ...ResourceNameParameter<
+  is ProxySubResourceReadOnly<VirtualMachineExtensionProperties> {
+  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
     Resource = VirtualMachineScaleSetVMExtension,
     KeyName = "vmExtensionName",
     SegmentName = "extensions",

@@ -97,7 +97,11 @@ interface DedicatedHosts {
   /**
    * Redeploy the dedicated host. The operation will complete successfully once the dedicated host has migrated to a new node and is running. To determine the health of VMs deployed on the dedicated host after the redeploy check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.
    */
-  redeploy is ComputeResourceActionNoResponseContentAsync<DedicatedHost, void>;
+  redeploy is ComputeResourceActionNoResponseContentAsync<
+    DedicatedHost,
+    void,
+    Error = CloudError
+  >;
 
   /**
    * Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.

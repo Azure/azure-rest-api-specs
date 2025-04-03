@@ -167,7 +167,8 @@ interface VirtualMachineScaleSets {
        * A list of virtual machine instance IDs from the VM scale set.
        */
       @bodyRoot vmInstanceIDs?: VirtualMachineScaleSetVMInstanceIDs;
-    }
+    },
+    Error = CloudError
   >;
 
   /**

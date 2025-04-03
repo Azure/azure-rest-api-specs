@@ -389,7 +389,8 @@ interface VirtualMachines {
       parameters?: MigrateVMToVirtualMachineScaleSetInput;
     },
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>,
+    Error = CloudError
   >;
 }
 

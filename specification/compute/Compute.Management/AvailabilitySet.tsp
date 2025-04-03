@@ -97,7 +97,8 @@ interface AvailabilitySets {
   startMigrationToVirtualMachineScaleSet is ArmResourceActionSync<
     AvailabilitySet,
     MigrateToVirtualMachineScaleSetInput,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -106,7 +107,8 @@ interface AvailabilitySets {
   cancelMigrationToVirtualMachineScaleSet is ArmResourceActionSync<
     AvailabilitySet,
     void,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -115,7 +117,8 @@ interface AvailabilitySets {
   validateMigrationToVirtualMachineScaleSet is ArmResourceActionSync<
     AvailabilitySet,
     MigrateToVirtualMachineScaleSetInput,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -131,7 +134,8 @@ interface AvailabilitySets {
       parameters?: ConvertToVirtualMachineScaleSetInput;
     },
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AvailabilitySet>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AvailabilitySet>,
+    Error = CloudError
   >;
 }
 

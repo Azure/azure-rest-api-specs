@@ -193,7 +193,8 @@ interface VirtualMachineScaleSetVMS {
   @operationId("VirtualMachineScaleSetVMs_ApproveRollingUpgrade")
   approveRollingUpgrade is ComputeResourceActionNoResponseContentAsync<
     VirtualMachineScaleSetVM,
-    void
+    void,
+    Error = CloudError
   >;
 
   /**

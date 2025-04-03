@@ -2350,7 +2350,7 @@ model VirtualMachineScaleSetStorageProfile {
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  diskControllerType?: string;
+  diskControllerType?: DiskControllerTypes[];
 }
 
 /**
@@ -3679,7 +3679,7 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  diskControllerType?: string;
+  diskControllerType?: DiskControllerTypes[];
 }
 
 /**
@@ -4169,6 +4169,10 @@ model OrchestrationServiceSummary {
   serviceState?: OrchestrationServiceState;
 }
 
+@@identifiers(VirtualMachineScaleSetListOSUpgradeHistory.value,
+  #["location", "type"]
+);
+
 /**
  * List of Virtual Machine Scale Set OS Upgrade History operation response.
  */
@@ -4453,6 +4457,9 @@ model OrchestrationServiceStateInput {
   action: OrchestrationServiceStateAction;
 }
 
+@@identifiers(VirtualMachineScaleSetListSkusResult.value,
+  #["resourceType", "sku/name"]
+);
 /**
  * The Virtual Machine Scale Set List Skus operation response.
  */
@@ -7135,7 +7142,9 @@ model DedicatedHostGroupProperties {
   /**
    * A list of references to all dedicated hosts in the dedicated host group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   hosts?: SubResourceReadOnly[];
 
   /**
@@ -7285,7 +7294,9 @@ model DedicatedHostProperties {
   /**
    * A list of references to all virtual machines in the Dedicated Host.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   virtualMachines?: SubResourceReadOnly[];
 
   /**
@@ -7951,13 +7962,17 @@ model CapacityReservationGroupProperties {
   /**
    * A list of all capacity reservation resource ids that belong to capacity reservation group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   capacityReservations?: SubResourceReadOnly[];
 
   /**
    * A list of references to all virtual machines associated to the capacity reservation group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   virtualMachinesAssociated?: SubResourceReadOnly[];
 
   /**
@@ -7984,8 +7999,9 @@ model CapacityReservationGroupInstanceView {
   /**
    * List of the subscriptions that the capacity reservation group is shared with. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   sharedSubscriptionIds?: SubResourceReadOnly[];
 }
 
@@ -8031,7 +8047,9 @@ model CapacityReservationUtilization {
   /**
    * A list of all virtual machines resource ids allocated against the capacity reservation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   virtualMachinesAllocated?: SubResourceReadOnly[];
 }
 
@@ -8087,7 +8105,9 @@ model CapacityReservationProperties {
   /**
    * A list of all virtual machine resource ids that are associated with the capacity reservation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
   virtualMachinesAssociated?: SubResourceReadOnly[];
 
   /**
