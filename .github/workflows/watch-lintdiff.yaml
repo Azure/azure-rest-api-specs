@@ -17,9 +17,7 @@ jobs:
   check-lintdiff:
     if: >-
       github.event_name == 'workflow_run' || (
-        github.event_name == 'check_run' && 
-          github.event.check_run.name == 'Swagger LintDiff'
-      )
+        github.event_name == 'check_run' )
     runs-on: ubuntu-24.04
     # TODO: Only run if check_run or workflow_run is initiated by pull_request
 
@@ -60,6 +58,11 @@ jobs:
             console.log("Check runs:");
             console.log(JSON.stringify(checkRuns.data.check_runs, null, 2));
 
+      - name: Output Check Run Name
+        if: github.event_name == 'check_run'
+        run: |
+          echo "|${{ github.event.check_run.name}}|"
+
       - name: Verify Check Run Status
         if: github.event_name == 'check_run'
         uses: actions/github-script@v7
@@ -80,5 +83,3 @@ jobs:
 
             console.log("Workflow runs:");
             console.log(JSON.stringify(workflowRuns.data.workflow_runs, null, 2));
-
- 
