@@ -382,12 +382,9 @@ interface PublicCloudConnectors {
   testPermissions is ArmResourceActionAsync<
     PublicCloudConnector,
     void,
-    HybridConnectivityOperationStatus
+    Azure.ResourceManager.Foundations.OperationStatusResult
   >;
 }
-
-model HybridConnectivityOperationStatus
-  is Azure.ResourceManager.Foundations.OperationStatusResult;
 
 @armResourceOperations
 interface SolutionConfigurations {

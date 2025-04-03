@@ -135,11 +135,11 @@ namespace Microsoft.HybridConnectivity;
   "PublicCloudConnectorSolutionTypeSettingsProperties",
   "csharp"
 );
-@@clientName(HybridConnectivityOperationStatus,
-  "OperationStatusResult",
-  "!csharp"
+@@clientName(Azure.ResourceManager.Foundations.OperationStatusResult,
+  "HybridConnectivityOperationStatus",
+  "csharp"
 );
-@@alternateType(HybridConnectivityOperationStatus.resourceId,
+@@alternateType(Azure.ResourceManager.Foundations.OperationStatusResult.resourceId,
   armResourceIdentifier,
   "csharp"
 );
