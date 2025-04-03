@@ -22,6 +22,9 @@ union SourceDataFormatType {
   @doc("ConfluentAvro format")
   ConfluentAvro: "ConfluentAvro",
 
+  @doc("Avro format")
+  Avro: "Avro",
+
   string,
 }
 
@@ -41,50 +44,21 @@ model JsonSourceDataFormat extends SourceDataFormat {
   textCharset: string;
 }
 
-@doc("Delimiter for csv")
-union CsvDelimiter {
-  @doc("Pipe delimiter")
-  Pipe: "Pipe",
-
-  @doc("Comma delimiter")
-  Comma: "Comma",
-
-  @doc("SemiColon delimiter")
-  SemiColon: "SemiColon",
-
-  @doc("Space delimiter")
-  Space: "Space",
-
-  @doc("Tab delimiter")
-  Tab: "Tab",
-
-  string,
-}
-
-@doc("CsvHeader types")
-union CsvHeaderType {
-  @doc("include CSV header")
-  IncludeHeader: "IncludeHeader",
-
-  @doc("exclude CSV header")
-  ExcludeHeader: "ExcludeHeader",
-
-  string,
-}
-
 @doc("CSV Source data format model")
 model CsvSourceDataFormat extends SourceDataFormat {
   @doc("Type of data format")
   type: SourceDataFormatType.Csv;
 
-  @doc("CSV header type")
-  header: CsvHeaderType;
+  @doc("Whether the CSV data has a header row.")
+  dataWithHeader?: boolean;
 
-  @doc("CSV Delimiter")
-  delimiter: CsvDelimiter;
+  @doc("JSON text charset. Default is UTF-8. Supported Encodings: https://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html")
+  textCharset?: string;
 
-  @doc("Charset supported by Java language")
-  textCharset: string;
+  @doc("The character used to separate columns in the CSV data.")
+  @minLength(1)
+  @maxLength(1)
+  columnSeparator?: string;
 }
 
 @doc("ConfluentAvro Source data format model")
@@ -102,6 +76,15 @@ model ConfluentAvroSourceDataFormat extends SourceDataFormat {
   @secret
   secret: string;
 
-  @doc("Source Topic name.")
-  sourceTopic: string;
+  @doc("subject name.")
+  subjectName?: string;
+
+  @doc("schema context.")
+  schemaContext?: string;
+}
+
+@doc("Avro Source data format model")
+model AvroSourceDataFormat extends SourceDataFormat {
+  @doc("Type of data format")
+  type: SourceDataFormatType.Avro;
 }

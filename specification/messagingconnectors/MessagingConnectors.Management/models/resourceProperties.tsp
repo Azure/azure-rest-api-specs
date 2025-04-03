@@ -21,6 +21,12 @@ model ConnectorProperties {
   @doc("Max Tasks count of the Connector.")
   maxTasks: int32;
 
+  @doc("networkProperties config.")
+  networkProperties?: NetworkProperties;
+
+  @doc("Scale config.")
+  scalingProperties: ScalingProperties;
+
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
 
@@ -72,6 +78,9 @@ model SourceConnectorProperties extends ConnectorProperties {
 model DataSourceProperties {
   @doc("Type of the Connector.")
   connectorType: ConnectorType;
+
+  @doc("Subtype of the Connector.")
+  connectorSubType?: ConnectorSubType;
 }
 
 @doc("Connector job execution status")
@@ -160,6 +169,17 @@ union ConnectorType {
 
   @doc("ManagedAzureMapsWeatherSource source connector.")
   ManagedAzureMapsWeatherSource: "ManagedAzureMapsWeatherSource",
+
+  string,
+}
+
+@doc("Enum of the type of Connector")
+union ConnectorSubType {
+  @doc("EventHub Source.")
+  EventHubSource: "EventHubSource",
+
+  @doc("IoTHub Source.")
+  IoTHubSource: "IoTHubSource",
 
   string,
 }
