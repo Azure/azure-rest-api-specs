@@ -36,6 +36,12 @@ These settings apply only when `--tag=package-preview-2025-04-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-04-01-preview'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2025-04-01-preview/desktopvirtualization.json
+suppressions:
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: Even Common type for operation result don't have the related properties. The rule seems conflict with the contract. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270 and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683
+    where:
+        - $.definitions.ResourceProviderOperationListResult
 ```
 
 ### Tag: package-preview-2024-11-01-preview
