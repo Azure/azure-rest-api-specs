@@ -18,19 +18,18 @@ alias ConnectionServiceTraits = SupportsClientRequestId &
 alias ConnectionOperations = Azure.Core.ResourceOperations<ConnectionServiceTraits>;
 
 @added(Versions.v2025_05_01)
-interface Connections {
-  @doc("Get a connection by name.")
-  get is ConnectionOperations.ResourceRead<Connection>;
+@doc("Get a connection by name.")
+op get is ConnectionOperations.ResourceRead<Connection>;
 
-  @doc("List all connections in the project")
-  list is ConnectionOperations.ResourceList<
-    Connection,
-    ListQueryParametersTrait<{
-      @doc("Specific type of connection to return in list")
-      @query("connectionType")
-      connectionType?: ConnectionType;
+@doc("List all connections in the project")
+@added(Versions.v2025_05_01)
+op list is ConnectionOperations.ResourceList<
+  Connection,
+  ListQueryParametersTrait<{
+    @doc("Specific type of connection to return in list")
+    @query("connectionType")
+    connectionType?: ConnectionType;
 
-      ...StandardListQueryParameters;
-    }>
-  >;
-}
+    ...StandardListQueryParameters;
+  }>
+>;
