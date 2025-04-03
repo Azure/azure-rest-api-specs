@@ -58,7 +58,7 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update the uploaded the result to an evaluation run.")
-  @route("runs:upload")
+  @route("runs:updateUpload/{name}")
   @patch
   UploadUpdateRun is Azure.Core.Foundations.Operation<
     {
