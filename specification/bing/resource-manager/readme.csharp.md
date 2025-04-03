@@ -8,6 +8,6 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Bing
-  output-folder: $(csharp-sdks-folder)/Bing/Microsoft.Azure.Management.Bing/Generated
+  output-folder: $(csharp-sdks-folder)/Bing/Microsoft.Azure.Management.Bing/src/Generated
   clear-output-folder: true
 ```
