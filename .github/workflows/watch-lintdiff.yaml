@@ -45,7 +45,7 @@ jobs:
             // Get status of check run named "Swagger LintDiff"
             const checkRunName = "Swagger LintDiff";
             // TODO: Paginate
-            const checkRuns = await github.checks.listForRef({
+            const checkRuns = await github.rest.checks.listForRef({
               ...context.repo,
               ref: context.payload.workflow_run.head_sha,
               check_name: checkRunName,
@@ -67,7 +67,7 @@ jobs:
             // Get status of the workflow run named "[TEST-IGNORE] Swagger LintDiff"
             const workflowRunName = "[TEST-IGNORE] Swagger LintDiff";
             // TODO: Paginate
-            const workflowRuns = await github.actions.listWorkflowRunsForRepo({
+            const workflowRuns = await github.rest.actions.listWorkflowRunsForRepo({
               ...context.repo,
               head_sha: context.payload.check_run.head_sha,
               status: "completed",
