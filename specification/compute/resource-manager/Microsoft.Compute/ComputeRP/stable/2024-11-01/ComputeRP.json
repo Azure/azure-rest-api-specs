@@ -1418,7 +1418,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -2210,7 +2210,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -2273,7 +2273,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -2329,7 +2329,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -2381,7 +2381,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -3831,7 +3831,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -5890,7 +5890,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -8043,7 +8043,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -11172,7 +11172,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
           }
         },
@@ -12825,7 +12825,10 @@
           "items": {
             "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "virtualMachinesAssociated": {
           "type": "array",
@@ -12833,7 +12836,10 @@
           "items": {
             "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "instanceView": {
           "$ref": "#/definitions/CapacityReservationGroupInstanceView",
@@ -12964,7 +12970,10 @@
           "items": {
             "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "provisioningTime": {
           "type": "string",
@@ -13026,7 +13035,10 @@
           "items": {
             "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },
@@ -13391,7 +13403,10 @@
           "items": {
             "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "instanceView": {
           "$ref": "#/definitions/DedicatedHostGroupInstanceView",
@@ -13541,7 +13556,10 @@
           "items": {
             "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "licenseType": {
           "$ref": "#/definitions/DedicatedHostLicenseTypes",
@@ -19826,7 +19844,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
         }
       ]
     },
@@ -19839,7 +19857,8 @@
           "description": "The list of VM scale set extensions.",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetExtension"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -19849,6 +19868,9 @@
       },
       "required": [
         "value"
+      ],
+      "x-ms-identifiers": [
+        "id"
       ]
     },
     "VirtualMachineScaleSetExtensionProfile": {
@@ -19860,7 +19882,10 @@
           "description": "The virtual machine scale set child extension resources.",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetExtension"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "extensionsTimeBudget": {
           "type": "string",
@@ -20135,7 +20160,10 @@
           "items": {
             "$ref": "#/definitions/UpgradeOperationHistoricalStatusInfo"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "location",
+            "type"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -20178,7 +20206,10 @@
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetSku"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "resourceType",
+            "sku/name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -20771,7 +20802,10 @@
           ]
         },
         "diskControllerType": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskControllerTypes"
+          }
         }
       }
     },
@@ -21164,7 +21198,10 @@
           ]
         },
         "diskControllerType": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskControllerTypes"
+          }
         }
       }
     },
@@ -21297,7 +21334,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceReadOnly"
         }
       ]
     },
@@ -21336,7 +21373,10 @@
           "description": "The list of VMSS VM extensions",
           "items": {
             "$ref": "#/definitions/VirtualMachineScaleSetVMExtension"
-          }
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       }
     },

@@ -2994,6 +2994,7 @@ model VirtualMachineScaleSetExtensionProfile {
   /**
    * The virtual machine scale set child extension resources.
    */
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   extensions?: VirtualMachineScaleSetExtension[];
 
   /**
@@ -3992,6 +3993,7 @@ model VirtualMachineScaleSetVMInstanceRequiredIDs {
 /**
  * The List VM scale set extension operation response.
  */
+@OpenAPI.extension("x-ms-identifiers", #["id"])
 model VirtualMachineScaleSetExtensionListResult
   is Azure.Core.Page<VirtualMachineScaleSetExtension>;
 
@@ -5631,6 +5633,7 @@ model VirtualMachineScaleSetVMExtensionsListResult {
   /**
    * The list of VMSS VM extensions
    */
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   value?: VirtualMachineScaleSetVMExtension[];
 }
 
@@ -7144,7 +7147,7 @@ model DedicatedHostGroupProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @identifiers(#["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   hosts?: SubResourceReadOnly[];
 
   /**
@@ -7296,7 +7299,7 @@ model DedicatedHostProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @identifiers(#["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   virtualMachines?: SubResourceReadOnly[];
 
   /**
@@ -7964,7 +7967,7 @@ model CapacityReservationGroupProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @identifiers(#["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   capacityReservations?: SubResourceReadOnly[];
 
   /**
@@ -7972,7 +7975,7 @@ model CapacityReservationGroupProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @identifiers(#["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   virtualMachinesAssociated?: SubResourceReadOnly[];
 
   /**
@@ -8001,7 +8004,7 @@ model CapacityReservationGroupInstanceView {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @identifiers(#["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   sharedSubscriptionIds?: SubResourceReadOnly[];
 }
 
@@ -8049,7 +8052,7 @@ model CapacityReservationUtilization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @identifiers(#["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   virtualMachinesAllocated?: SubResourceReadOnly[];
 }
 
@@ -8107,7 +8110,7 @@ model CapacityReservationProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @identifiers(#["id"])
+  @OpenAPI.extension("x-ms-identifiers", #["id"])
   virtualMachinesAssociated?: SubResourceReadOnly[];
 
   /**
