@@ -1,0 +1,407 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.RegionalNetworkManager management service",
+    "version": "2025-04-02-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PublicIpAddresses"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.RegionalNetworkManager/locations/{location}/publicIpAddresses": {
+      "get": {
+        "operationId": "PublicIpAddresses_List",
+        "tags": [
+          "PublicIpAddresses"
+        ],
+        "description": "List PublicIpAddress resources by TenantLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIpAddressListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicIpAddresses_List": {
+            "$ref": "./examples/PublicIpAddresses_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.RegionalNetworkManager/locations/{location}/publicIpAddresses/{publicIpAddress}": {
+      "get": {
+        "operationId": "PublicIpAddresses_Get",
+        "tags": [
+          "PublicIpAddresses"
+        ],
+        "description": "Get a PublicIpAddress",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "publicIpAddress",
+            "in": "path",
+            "description": "The public ip address",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIpAddress"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicIpAddresses_Get": {
+            "$ref": "./examples/PublicIpAddresses_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.RegionalNetworkManager/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Microsoft.Inventory.CommonTypes.AssetType": {
+      "type": "string",
+      "description": "Enum for AssetType",
+      "enum": [
+        "Physical",
+        "Logical"
+      ],
+      "x-ms-enum": {
+        "name": "AssetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Physical",
+            "value": "Physical",
+            "description": "Physical AssetType"
+          },
+          {
+            "name": "Logical",
+            "value": "Logical",
+            "description": "Logical AssetType"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.AssignedResource": {
+      "type": "object",
+      "description": "Metadata that describes the asset to which the resource is assigned",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.AssetType",
+          "description": "The type of the resource"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Unique identifier for the asset"
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceId"
+      ]
+    },
+    "Microsoft.Inventory.CommonTypes.IpAddressState": {
+      "type": "string",
+      "description": "Enum for State",
+      "enum": [
+        "Managed",
+        "Allocated",
+        "Active",
+        "Retired"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Managed State"
+          },
+          {
+            "name": "Allocated",
+            "value": "Allocated",
+            "description": "Allocated State"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active State"
+          },
+          {
+            "name": "Retired",
+            "value": "Retired",
+            "description": "Retired State"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.IpVersion": {
+      "type": "string",
+      "description": "Enum for the IP Version",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IpVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4 version"
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6 version"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.Ownership": {
+      "type": "object",
+      "description": "Metadata that describes the ownership of the resource",
+      "properties": {
+        "serviceTreeId": {
+          "type": "string",
+          "description": "The owning service tree ID"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The owning subscription ID"
+        }
+      }
+    },
+    "PublicIpAddress": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicIpAddressProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PublicIpAddressListResult": {
+      "type": "object",
+      "description": "The response of a PublicIpAddress list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PublicIpAddress items on this page",
+          "items": {
+            "$ref": "#/definitions/PublicIpAddress"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PublicIpAddressProperties": {
+      "type": "object",
+      "description": "Extended properties for rnm public ip address",
+      "properties": {
+        "ipVersion": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.IpVersion",
+          "description": "Specifies the IP Version"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP Address (IPv4/IPv6). This can also be represented as a block address range in CIDR notation."
+        },
+        "state": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.IpAddressState",
+          "description": "Managed, Allocated, Active, Retired"
+        },
+        "region": {
+          "type": "string",
+          "description": "Region where the IP address exists"
+        },
+        "ownership": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.Ownership",
+          "description": "Indicates the ownership of the private IP address"
+        },
+        "assignedResource": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.AssignedResource",
+          "description": "Metadata that describes the resource to which this private IP address is assigned"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state",
+          "readOnly": true
+        },
+        "firstpartyusagetag": {
+          "type": "string",
+          "description": "Public IP Address FirstPartyUsageTag"
+        },
+        "vnetguid": {
+          "type": "string",
+          "description": "VirtualNetworkGuid",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        }
+      },
+      "required": [
+        "ipVersion",
+        "ipAddress",
+        "state",
+        "region",
+        "assignedResource",
+        "vnetguid"
+      ]
+    }
+  },
+  "parameters": {}
+}
