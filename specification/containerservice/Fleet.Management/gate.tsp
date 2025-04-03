@@ -165,6 +165,26 @@ union GateProvisioningState {
   ResourceProvisioningState,
 }
 
+@doc("Patch a Gate resource.")
+@added(Versions.v2025_04_01_preview)
+model GatePatch {
+  // adding a response header in the model currently impacts the model used in the List result model.
+  // omitting it for now as response headers do not impact SDK generation.
+  // ...EtagResponseEnvelope;
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @doc("Properties of a Gate that can be patched.")
+  properties: GatePatchProperties;
+}
+
+@doc("Properties of a Gate that can be patched.")
+@added(Versions.v2025_04_01_preview)
+model GatePatchProperties {
+  @doc("The state of the Gate.")
+  state: GateState;
+}
+
 @armResourceOperations
 @added(Versions.v2025_04_01_preview)
 interface Gates {
@@ -174,9 +194,9 @@ interface Gates {
   // its processing. As such, we only expose the update API here.
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "must change at next release"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     Gate,
-    GateProperties,
+    GatePatch,
     Azure.ResourceManager.Foundations.BaseParameters<Gate> &
       IfMatchParameters<Gate> &
       IfNoneMatchParameters<Gate>

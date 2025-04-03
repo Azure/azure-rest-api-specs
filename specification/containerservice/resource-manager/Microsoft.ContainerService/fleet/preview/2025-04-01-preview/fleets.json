@@ -1053,7 +1053,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GateUpdate"
+              "$ref": "#/definitions/GatePatch"
             }
           }
         ],
@@ -3294,6 +3294,33 @@
         "value"
       ]
     },
+    "GatePatch": {
+      "type": "object",
+      "description": "Patch a Gate resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/GatePatchProperties",
+          "description": "Properties of a Gate that can be patched."
+        }
+      }
+    },
+    "GatePatchProperties": {
+      "type": "object",
+      "description": "Properties of a Gate that can be patched.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/GateState",
+          "description": "The state of the Gate."
+        }
+      }
+    },
     "GateProperties": {
       "type": "object",
       "description": "A Gate controls the progression during a staged rollout, e.g. in an Update Run.",
@@ -3344,21 +3371,6 @@
         "target",
         "state"
       ]
-    },
-    "GatePropertiesUpdate": {
-      "type": "object",
-      "description": "A Gate controls the progression during a staged rollout, e.g. in an Update Run.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/GateState",
-          "description": "The state of the Gate.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      }
     },
     "GateProvisioningState": {
       "type": "string",
@@ -3479,22 +3491,6 @@
           }
         ]
       }
-    },
-    "GateUpdate": {
-      "type": "object",
-      "description": "A Gate controls the progression during a staged rollout, e.g. in an Update Run.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/GatePropertiesUpdate",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
     },
     "GenerateResponse": {
       "type": "object",
