@@ -755,47 +755,6 @@
       }
     },
     "/providers/Microsoft.Subscription/transfers/{transferId}": {
-      "put": {
-        "description": "Transfers subscription billing ownership to the destination email. The TransferId provided in the PUT request is client-generated for tracking purposes and is different from the system-generated TransferId returned in subsequent responses.",
-        "operationId": "Transfers_SendExport",
-        "x-ms-examples": {
-          "CreateTransfer": {
-            "$ref": "./examples/createTransfer.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/transferIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Transfer creation request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TransferCreationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Initiated Transfer details.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "get": {
         "description": "Retrieves transfer details using a system-generated TransferId. ",
         "operationId": "Transfers_GetById",
@@ -844,6 +803,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
           "204": {
             "description": "The request has succeeded with no response body."
           },
@@ -857,6 +819,56 @@
       }
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/transfers/default": {
+      "put": {
+        "description": "Transfers subscription billing ownership to the destination email.",
+        "operationId": "Transfers_SendExport",
+        "x-ms-examples": {
+          "CreateTransfer": {
+            "$ref": "./examples/createTransfer.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Transfer creation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferCreationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "201": {
+            "description": "Transfer creation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "get": {
         "operationId": "Transfers_GetLatestBySubscriptionId",
         "x-ms-examples": {
