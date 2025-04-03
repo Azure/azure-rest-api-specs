@@ -1,7 +1,7 @@
 import path from "path";
 import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
 
 export class FolderStructureRule implements Rule {
@@ -102,6 +102,19 @@ export class FolderStructureRule implements Rule {
         success = false;
       }
     }
+
+    // Verify that *.tsp files only import files from same top-level specification folder
+    const teamFolder = path.join(gitRoot, ...folderStruct.slice(0, 2));
+    console.log(`teamFolder: ${teamFolder}`);
+
+    // Globby only accepts patterns like posix paths.
+    const allTsps = await host.globby("**/*.tsp", { cwd: teamFolder });
+    console.log(`allTsps: ${JSON.stringify(allTsps)}`);
+
+    // for (const tsp of allTsps) {
+    //   const text = await host.readFile(path.join(teamFolder, tsp));
+    //   const imports =
+    // }
 
     return {
       success: success,
