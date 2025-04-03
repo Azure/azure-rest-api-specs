@@ -16,8 +16,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/falcon/azure-mgmt-falcon/azure/mgmt/falcon
 ```
-
-``` yaml $(python)
-modelerfour:
-  flatten-models: false
-```
