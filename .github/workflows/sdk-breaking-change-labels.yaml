@@ -27,12 +27,6 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            console.log('GitHub Event Payload (context.payload):');
-            console.log(JSON.stringify(context.payload, null, 2));
-
-            console.log('GitHub Event Payload (github.event):');
-            console.log(JSON.stringify(github.event, null, 2));
-
             const { getLabelAndAction } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-labels.js');
             return await getLabelAndAction({ github, context, core });
