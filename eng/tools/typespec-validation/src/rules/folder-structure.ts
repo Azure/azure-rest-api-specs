@@ -103,7 +103,7 @@ export class FolderStructureRule implements Rule {
       }
     }
 
-    // Verify that *.tsp files only import files from same top-level specification folder
+    // Ensure specs only import files from same folder under "specification"
     stdOutput += "imports:\n";
 
     const teamFolder = path.join(...folderStruct.slice(0, 2));
@@ -116,19 +116,20 @@ export class FolderStructureRule implements Rule {
     for (const tsp of tsps) {
       const tspResolved = path.resolve(teamFolderResolved, tsp);
 
-      const pattern = /^\s*import\s+['"]([^'"]+)['"]\s*;/gm;
+      const pattern = /^\s*import\s+['"]([^'"]+)['"]\s*;\s*$/gm;
       const text = await host.readFile(tspResolved);
       const imports = [...text.matchAll(pattern)].map((m) => m[1]);
 
       // The path specified in the import must either start with "./" or "../", or be an absolute path.
       // The path should either point to a directory, or have an extension of either ".tsp" or ".js".
       // https://typespec.io/docs/language-basics/imports/
+      //
+      // We don't bother checking if the path has an extension of ".tsp" or ".js", because a directory
+      // is also valid, and a directory could be named anything.  We only care if the path is under
+      // $teamFolder, so we just treat anything that looks like a relative or absolute path,
+      // as a path.
       const fileImports = imports.filter(
-        (i) =>
-          (i.startsWith("./") || i.startsWith("../") || path.isAbsolute(i)) &&
-          (path.extname(i) === "" ||
-            path.extname(i).toLowerCase() === ".tsp" ||
-            path.extname(i).toLowerCase() === ".js"),
+        (i) => i.startsWith("./") || i.startsWith("../") || path.isAbsolute(i),
       );
 
       stdOutput += `    ${tsp}: ${JSON.stringify(fileImports)}\n`;
