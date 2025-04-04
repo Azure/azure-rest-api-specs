@@ -1723,6 +1723,14 @@
             "minLength": 3,
             "maxLength": 63,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PoolAlignTargets"
+            }
           }
         ],
         "responses": {
@@ -6689,6 +6697,40 @@
       "required": [
         "keepAwakeEnableStatus",
         "autoStartEnableStatus"
+      ]
+    },
+    "PoolAlignTarget": {
+      "type": "string",
+      "description": "Possible values for the pool align target.",
+      "enum": [
+        "NetworkProperties"
+      ],
+      "x-ms-enum": {
+        "name": "PoolAlignTarget",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NetworkProperties",
+            "value": "NetworkProperties",
+            "description": "Network properties."
+          }
+        ]
+      }
+    },
+    "PoolAlignTargets": {
+      "type": "object",
+      "description": "Indicates which pool properties to align on.",
+      "properties": {
+        "targets": {
+          "type": "array",
+          "description": "The targets to align on.",
+          "items": {
+            "$ref": "#/definitions/PoolAlignTarget"
+          }
+        }
+      },
+      "required": [
+        "targets"
       ]
     },
     "PoolHealthStatus": {

@@ -223,7 +223,7 @@ interface DevBoxes {
   @added(APIVersions.v2025_03_01_preview)
   alignDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
-    {},
+    PoolAlignTargets,
     OperationStatus
   >;
 
