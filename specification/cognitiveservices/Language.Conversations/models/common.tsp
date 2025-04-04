@@ -909,7 +909,7 @@ model AnalyzeConversationJobsInput {
 
   /** Set of tasks to execute on the input conversation. */
   tasks: Array<AnalyzeConversationLROTask>;
-  
+
   /** Optional duration in seconds after which the job will be canceled if not completed. */
   @added(Versions.v2025_05_15_preview)
   cancelAfter?: float32;
