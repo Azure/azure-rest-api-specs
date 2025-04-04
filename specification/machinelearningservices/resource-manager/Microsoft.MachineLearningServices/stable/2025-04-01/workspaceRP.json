@@ -2086,7 +2086,7 @@
       },
       "put": {
         "tags": [
-          "WorkspaceManagedNetwork"
+          "ManagedNetwork"
         ],
         "summary": "PUT API for managed network settings of a machine learning workspace.",
         "operationId": "ManagedNetworkSettings_Put",
@@ -3346,6 +3346,23 @@
         },
         "type": {
           "$ref": "#/definitions/RuleType"
+        },
+        "errorInformation": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "parentRuleNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "discriminator": "type"
@@ -3517,7 +3534,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/OutboundRule"
+          "$ref": "#/definitions/OutboundRuleDto"
         }
       ],
       "properties": {
@@ -3551,7 +3568,7 @@
       "description": "Service Tag Outbound Rule for the managed network of a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "#/definitions/OutboundRule"
+          "$ref": "#/definitions/OutboundRuleDto"
         }
       ],
       "properties": {
@@ -3604,7 +3621,7 @@
       "description": "FQDN Outbound Rule for the managed network of a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "#/definitions/OutboundRule"
+          "$ref": "#/definitions/OutboundRuleDto"
         }
       ],
       "properties": {
