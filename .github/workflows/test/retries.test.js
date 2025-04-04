@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { retry, fetchWithRetry } from '../src/retries.js';
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { retry, fetchWithRetry } from "../src/retries.js";
 
 // Mock console.log to avoid cluttering test output
 const originalConsoleLog = console.log;
@@ -12,19 +12,20 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe('retry function', () => {
-  it('should resolve immediately when function succeeds on first attempt', async () => {
-    const mockFn = vi.fn().mockResolvedValue('success');
+describe("retry function", () => {
+  it("should resolve immediately when function succeeds on first attempt", async () => {
+    const mockFn = vi.fn().mockResolvedValue("success");
     const result = await retry(mockFn);
-    
-    expect(result).toBe('success');
+
+    expect(result).toBe("success");
     expect(mockFn).toHaveBeenCalledTimes(1);
   });
 
-  it('should retry when function fails and then succeed', async () => {
-    const mockFn = vi.fn()
-      .mockRejectedValueOnce(new Error('failure'))
-      .mockResolvedValue('success');
+  it("should retry when function fails and then succeed", async () => {
+    const mockFn = vi
+      .fn()
+      .mockRejectedValueOnce(new Error("failure"))
+      .mockResolvedValue("success");
 
     // Use fake timers
     vi.useFakeTimers();
@@ -38,37 +39,40 @@ describe('retry function', () => {
 
     // Get the result (third attempt should succeed)
     const result = await promise;
-    expect(result).toBe('success');
+    expect(result).toBe("success");
   });
 
-  it('should throw error after maximum retries', async () => {
-    const mockError = new Error('persistent failure');
+  it("should throw error after maximum retries", async () => {
+    const mockError = new Error("persistent failure");
     const mockFn = vi.fn().mockRejectedValue(mockError);
     const mockLogger = vi.fn();
-  
+
     await expect(
       retry(mockFn, {
         maxRetries: 1,
         logger: mockLogger,
         initialDelayMs: 10, // keep it fast
-      })
-    ).rejects.toThrow('persistent failure');
+      }),
+    ).rejects.toThrow("persistent failure");
   });
 });
 
-describe('fetchWithRetry function', () => {
+describe("fetchWithRetry function", () => {
   beforeEach(() => {
     // Mock global fetch
     global.fetch = vi.fn();
   });
 
-  it('should call fetch with provided url and options', async () => {
-    const mockResponse = { ok: true, json: () => Promise.resolve({ data: 'test' }) };
+  it("should call fetch with provided url and options", async () => {
+    const mockResponse = {
+      ok: true,
+      json: () => Promise.resolve({ data: "test" }),
+    };
     global.fetch.mockResolvedValue(mockResponse);
-    
-    const url = 'https://example.com/api';
-    const options = { method: 'POST', body: JSON.stringify({ key: 'value' }) };    
-    const response = await fetchWithRetry(url, options);    
+
+    const url = "https://example.com/api";
+    const options = { method: "POST", body: JSON.stringify({ key: "value" }) };
+    const response = await fetchWithRetry(url, options);
     expect(response).toBe(mockResponse);
   });
 });

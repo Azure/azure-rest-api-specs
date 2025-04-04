@@ -71,7 +71,7 @@ export async function getLabelAndActionImpl({
         "Content-Type": "application/json",
       },
     },
-    { logger: core.info }
+    { logger: core.info },
   );
 
   if (response.status === 404) {
@@ -99,7 +99,11 @@ export async function getLabelAndActionImpl({
     core.info(`Downloading artifact from: ${downloadUrl}`);
 
     // Step 2: Fetch Artifact Content (as a Buffer) with retry
-    const artifactResponse = await fetchWithRetry(downloadUrl, {}, { logger: core.info });
+    const artifactResponse = await fetchWithRetry(
+      downloadUrl,
+      {},
+      { logger: core.info },
+    );
     if (!artifactResponse.ok) {
       throw new Error(
         `Failed to fetch artifact: ${artifactResponse.statusText}`,
