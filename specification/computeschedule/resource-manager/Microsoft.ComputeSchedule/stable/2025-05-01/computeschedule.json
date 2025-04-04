@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.ComputeSchedule",
-    "version": "2024-10-01",
+    "version": "2025-05-01",
     "description": "Microsoft.ComputeSchedule Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -72,7 +72,7 @@
         },
         "x-ms-examples": {
           "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -125,7 +125,57 @@
         },
         "x-ms-examples": {
           "ScheduledActions_VirtualMachinesCancelOperations": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesCancelOperations.json"
+            "$ref": "./examples/ScheduledActions_VirtualMachinesCancelOperations_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteCreate": {
+      "post": {
+        "operationId": "ScheduledActions_VirtualMachinesExecuteCreate",
+        "description": "VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_VirtualMachinesExecuteCreate": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteCreate_MaximumSet_Gen.json"
           }
         }
       }
@@ -175,7 +225,57 @@
         },
         "x-ms-examples": {
           "ScheduledActions_VirtualMachinesExecuteDeallocate": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDeallocate.json"
+            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDeallocate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDelete": {
+      "post": {
+        "operationId": "ScheduledActions_VirtualMachinesExecuteDelete",
+        "description": "VirtualMachinesExecuteCreate: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationparameter",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResourceOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScheduledActions_VirtualMachinesExecuteDelete": {
+            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDelete_MaximumSet_Gen.json"
           }
         }
       }
@@ -225,7 +325,7 @@
         },
         "x-ms-examples": {
           "ScheduledActions_VirtualMachinesExecuteHibernate": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteHibernate.json"
+            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteHibernate_MaximumSet_Gen.json"
           }
         }
       }
@@ -275,7 +375,7 @@
         },
         "x-ms-examples": {
           "ScheduledActions_VirtualMachinesExecuteStart": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart.json"
+            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart_MaximumSet_Gen.json"
           }
         }
       }
@@ -325,7 +425,7 @@
         },
         "x-ms-examples": {
           "ScheduledActions_VirtualMachinesGetOperationErrors": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationErrors.json"
+            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationErrors_MinimumSet_Gen.json"
           }
         }
       }
@@ -375,7 +475,7 @@
         },
         "x-ms-examples": {
           "ScheduledActions_VirtualMachinesGetOperationStatus": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationStatus.json"
+            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationStatus_MaximumSet_Gen.json"
           }
         }
       }
@@ -425,7 +525,7 @@
         },
         "x-ms-examples": {
           "ScheduledActions_VirtualMachinesSubmitDeallocate": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitDeallocate.json"
+            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitDeallocate_MaximumSet_Gen.json"
           }
         }
       }
@@ -475,7 +575,7 @@
         },
         "x-ms-examples": {
           "ScheduledActions_VirtualMachinesSubmitHibernate": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitHibernate.json"
+            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitHibernate_MaximumSet_Gen.json"
           }
         }
       }
@@ -525,7 +625,7 @@
         },
         "x-ms-examples": {
           "ScheduledActions_VirtualMachinesSubmitStart": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitStart.json"
+            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitStart_MaximumSet_Gen.json"
           }
         }
       }
@@ -574,6 +674,43 @@
       },
       "required": [
         "results"
+      ]
+    },
+    "CreateResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from a create request",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation response"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resources used in the create request eg virtual machines"
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The location of the start request eg westus",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "results": {
+          "type": "array",
+          "description": "The results from the start request if no errors exist",
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "description",
+        "type",
+        "location"
       ]
     },
     "DeadlineType": {
@@ -643,6 +780,64 @@
         "location"
       ]
     },
+    "DeleteResourceOperationResponse": {
+      "type": "object",
+      "description": "The response from a delete request",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the operation response"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of resources used in the delete request eg virtual machines"
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The location of the start request eg westus",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "results": {
+          "type": "array",
+          "description": "The results from the start request if no errors exist",
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        }
+      },
+      "required": [
+        "description",
+        "type",
+        "location"
+      ]
+    },
+    "ExecuteCreateRequest": {
+      "type": "object",
+      "description": "The ExecuteCreateRequest request for create operations",
+      "properties": {
+        "resourceConfigParameters": {
+          "$ref": "#/definitions/ResourceProvisionPayload",
+          "description": "resource creation payload"
+        },
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
+        },
+        "correlationid": {
+          "type": "string",
+          "description": "CorrelationId item"
+        }
+      },
+      "required": [
+        "resourceConfigParameters"
+      ]
+    },
     "ExecuteDeallocateRequest": {
       "type": "object",
       "description": "The ExecuteDeallocateRequest request for executeDeallocate operations",
@@ -664,6 +859,28 @@
         "executionParameters",
         "resources",
         "correlationid"
+      ]
+    },
+    "ExecuteDeleteRequest": {
+      "type": "object",
+      "description": "The ExecuteDeleteRequest request for delete operations",
+      "properties": {
+        "executionParameters": {
+          "$ref": "#/definitions/ExecutionParameters",
+          "description": "The execution parameters for the request"
+        },
+        "resources": {
+          "$ref": "#/definitions/Resources",
+          "description": "The resources for the request"
+        },
+        "correlationid": {
+          "type": "string",
+          "description": "CorrelationId item"
+        }
+      },
+      "required": [
+        "executionParameters",
+        "resources"
       ]
     },
     "ExecuteHibernateRequest": {
