@@ -28,6 +28,8 @@ namespace Azure.AI {
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      // 1DP uses Entra ID with cognitiveservices.azure.com scope, however, we are currently calling the old service.
+      // scopes: ["https://cognitiveservices.azure.com/.default"],
       scopes: ["https://management.azure.com/.default"],
     }
   ]>
