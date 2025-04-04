@@ -1380,9 +1380,6 @@
         ],
         "operationId": "ManagedNetworkSettingsRule_Delete",
         "summary": "Deletes an outbound rule from the managed network of a machine learning workspace.",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1401,20 +1398,25 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
           "202": {
             "description": "Accepted",
             "headers": {
               "Location": {
                 "description": "URI to poll for asynchronous operation result.",
                 "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "204": {
             "description": "No Content"
-          },
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
           },
           "default": {
             "description": "Error",
@@ -1422,13 +1424,16 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },        
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete ManagedNetworkSettingsRule": {
             "$ref": "./examples/ManagedNetwork/deleteRule.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "get": {
         "tags": [
