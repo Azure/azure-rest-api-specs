@@ -115,3 +115,74 @@ model RedTeam {
   @visibility(Lifecycle.Read)
   status?: string;
 }
+
+// Simulation Private Dto
+@doc("Simulation type.")
+union SimulationType {
+  string,
+  @doc("Default simulation type.")
+  Default: "Default";
+
+  @doc("Custom persona simulation type.")
+  CustomPersona: "CustomPersona";
+
+  @doc("Harm turn generator simulation type.")
+  HarmTurnGenerator: "HarmTurnGenerator";
+}
+
+@doc("Customization Parameters")
+model CustomizationParameters {
+    @doc("Application scenario.")
+    ApplicationScenario?: string;
+
+    @doc("List of harm categories.")
+    HarmCategories: Array<string>;
+}
+
+@doc("Customization Parameters")
+model SimulationDTO {
+    @doc("Additional headers.")
+    Headers?: Record<string>;
+
+    @doc("Parameters.")
+    Params?: Record<string>;
+
+    @doc("Template parameters.")
+    TemplateParameters?: Record<string>;
+
+    @doc("Customization parameters.")
+    CustomizationParameters?: CustomizationParameters;
+
+    @doc("Json.")
+    Json?: string;
+
+    @doc("Url.")
+    Url?: string;
+
+    @doc("Template key.")
+    TemplateKey?: string;
+
+    @doc("Type of Simulation.")
+    SimulationType?: SimulationType;
+
+    @doc("'True' if Microsoft internal tenant and 'False' otherwise.")
+    IsMicrosoftTenant?: boolean;
+
+    @doc("Azure subscription id.")
+    SubscriptionId?: string;
+
+    @doc("Resource group name.")
+    ResourceGroupName?: string;
+
+    @doc("Workspace name.")
+    WorkspaceName?: string;
+}
+
+@doc("Simulation object.")
+model SimulationResultDTO {
+    @doc("Status Code.")
+    StatusCode: int32;
+
+    @doc("Content.")
+    Content: string;
+}

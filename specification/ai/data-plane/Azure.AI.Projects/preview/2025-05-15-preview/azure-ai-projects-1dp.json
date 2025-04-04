@@ -1533,6 +1533,140 @@
           }
         }
       }
+    },
+    "/redTeams/simulation/chat/completions/submit": {
+      "post": {
+        "operationId": "RedTeams_ChatCompletionsSubmit",
+        "description": "Simulation chat completion.",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "API version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "simulationDTO",
+            "in": "body",
+            "description": "Simulation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimulationDTO"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/jailbreak": {
+      "get": {
+        "operationId": "RedTeams_Jailbreak",
+        "description": "Simulation jailbreak.",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Type of parameter.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "API version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/template/parameters/": {
+      "get": {
+        "operationId": "RedTeams_TemplateParameters",
+        "description": "Simulation template parameters.",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Type of parameter.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "API version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/template/parameters/image": {
+      "get": {
+        "operationId": "RedTeams_TemplateParametersImage",
+        "description": "Simulation template parameters for image.",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Path for image.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "API version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1880,6 +2014,26 @@
         }
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
+    },
+    "CustomizationParameters": {
+      "type": "object",
+      "description": "Customization Parameters",
+      "properties": {
+        "ApplicationScenario": {
+          "type": "string",
+          "description": "Application scenario."
+        },
+        "HarmCategories": {
+          "type": "array",
+          "description": "List of harm categories.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "HarmCategories"
+      ]
     },
     "DatasetType": {
       "type": "string",
@@ -2751,6 +2905,118 @@
         "sasUri",
         "type"
       ]
+    },
+    "SimulationDTO": {
+      "type": "object",
+      "description": "Customization Parameters",
+      "properties": {
+        "Headers": {
+          "type": "object",
+          "description": "Additional headers.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "Params": {
+          "type": "object",
+          "description": "Parameters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "TemplateParameters": {
+          "type": "object",
+          "description": "Template parameters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "CustomizationParameters": {
+          "$ref": "#/definitions/CustomizationParameters",
+          "description": "Customization parameters."
+        },
+        "Json": {
+          "type": "string",
+          "description": "Json."
+        },
+        "Url": {
+          "type": "string",
+          "description": "Url."
+        },
+        "TemplateKey": {
+          "type": "string",
+          "description": "Template key."
+        },
+        "SimulationType": {
+          "$ref": "#/definitions/SimulationType",
+          "description": "Type of Simulation."
+        },
+        "IsMicrosoftTenant": {
+          "type": "boolean",
+          "description": "'True' if Microsoft internal tenant and 'False' otherwise."
+        },
+        "SubscriptionId": {
+          "type": "string",
+          "description": "Azure subscription id."
+        },
+        "ResourceGroupName": {
+          "type": "string",
+          "description": "Resource group name."
+        },
+        "WorkspaceName": {
+          "type": "string",
+          "description": "Workspace name."
+        }
+      }
+    },
+    "SimulationResultDTO": {
+      "type": "object",
+      "description": "Simulation object.",
+      "properties": {
+        "StatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Status Code."
+        },
+        "Content": {
+          "type": "string",
+          "description": "Content."
+        }
+      },
+      "required": [
+        "StatusCode",
+        "Content"
+      ]
+    },
+    "SimulationType": {
+      "type": "string",
+      "description": "Simulation type.",
+      "enum": [
+        "Default",
+        "CustomPersona",
+        "HarmTurnGenerator"
+      ],
+      "x-ms-enum": {
+        "name": "SimulationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default simulation type."
+          },
+          {
+            "name": "CustomPersona",
+            "value": "CustomPersona",
+            "description": "Custom persona simulation type."
+          },
+          {
+            "name": "HarmTurnGenerator",
+            "value": "HarmTurnGenerator",
+            "description": "Harm turn generator simulation type."
+          }
+        ]
+      }
     },
     "Sku": {
       "type": "object",
