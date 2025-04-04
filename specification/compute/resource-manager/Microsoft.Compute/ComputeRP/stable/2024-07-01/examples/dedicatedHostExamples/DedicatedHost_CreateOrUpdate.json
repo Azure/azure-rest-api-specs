@@ -19,24 +19,6 @@
     "hostName": "myDedicatedHost"
   },
   "responses": {
-    "201": {
-      "body": {
-        "name": "myDedicatedHost",
-        "location": "westus",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost",
-        "tags": {
-          "department": "HR"
-        },
-        "sku": {
-          "name": "DSv3-Type1"
-        },
-        "properties": {
-          "platformFaultDomain": 1,
-          "autoReplaceOnFailure": true,
-          "hostId": "{GUID}"
-        }
-      }
-    },
     "200": {
       "body": {
         "properties": {
@@ -55,6 +37,26 @@
           "name": "DSv3-Type1"
         }
       }
+    },
+    "201": {
+      "body": {
+        "name": "myDedicatedHost",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "DSv3-Type1"
+        },
+        "properties": {
+          "platformFaultDomain": 1,
+          "autoReplaceOnFailure": true,
+          "hostId": "{GUID}"
+        }
+      }
     }
-  }
+  },
+  "operationId": "DedicatedHosts_CreateOrUpdate",
+  "title": "create or update a dedicated host ."
 }
