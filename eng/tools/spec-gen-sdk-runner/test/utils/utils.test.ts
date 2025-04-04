@@ -9,7 +9,7 @@ import path from "node:path";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
-const repoRoot = path.resolve(path.dirname(currentFilePath), "../../../../../");
+const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 
 describe("Utils", () => {
   describe("findFilesRecursive", () => {
