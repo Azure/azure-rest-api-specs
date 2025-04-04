@@ -111,9 +111,9 @@ export class FolderStructureRule implements Rule {
 
     const teamFolderResolved = path.resolve(gitRoot, teamFolder);
 
-    const allTsps = await host.globby("**/*.tsp", { cwd: teamFolderResolved });
+    const tsps = await host.globby("**/*.tsp", { cwd: teamFolderResolved });
 
-    for (const tsp of allTsps) {
+    for (const tsp of tsps) {
       const tspResolved = path.resolve(teamFolderResolved, tsp);
 
       const pattern = /^\s*import\s+['"]([^'"]+)['"]\s*;/gm;
