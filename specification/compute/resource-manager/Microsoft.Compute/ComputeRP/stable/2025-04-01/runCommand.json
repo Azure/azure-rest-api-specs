@@ -1189,7 +1189,7 @@
         },
         "commandId": {
           "type": "string",
-          "description": "Specifies a commandId of predefined built-in script. commandIds available for Linux listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands"
+          "description": "Specifies a commandId of predefined built-in script. Command Ids available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands"
         },
         "scriptUriManagedIdentity": {
           "$ref": "#/definitions/RunCommandManagedIdentity",
@@ -1201,7 +1201,11 @@
           "enum": [
             "Default",
             "Powershell7"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ScriptShellTypes",
+            "modelAsString": true
+          }
         },
         "galleryScriptReferenceId": {
           "type": "string",
@@ -1209,7 +1213,7 @@
         }
       },
       "type": "object",
-      "description": "Describes the script sources for run command. Use only one these script sources: script, scriptUri, commandId, galleryScriptReferenceId."
+      "description": "Describes the script sources for run command. Use only one of these script sources: script, scriptUri, commandId, galleryScriptReferenceId."
     },
     "VirtualMachineRunCommandProperties": {
       "properties": {
