@@ -13,9 +13,9 @@ import {
 import { logMessage } from "./log.js";
 import { SpecGenSdkCmdInput } from "./types.js";
 
-const readmeMdRegex = /^readme.md$/i;
-const typespecProjectRegex = /^tspconfig.yaml$/i;
-const typespecProjectSharedLibraryRegex = /[^/]+\.Shared/;
+export const readmeMdRegex = /^readme.md$/;
+export const typespecProjectRegex = /^tspconfig.yaml$/;
+export const typespecProjectSharedLibraryRegex = /[^/]+\.Shared/;
 
 export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): ChangedSpecs[] {
   const prChangedFiles: string[] = getChangedFiles(commandInput.localSpecRepoPath) ?? [];
