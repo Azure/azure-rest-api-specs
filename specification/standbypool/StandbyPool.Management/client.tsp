@@ -67,10 +67,15 @@ using Microsoft.StandbyPool;
   "java"
 );
 @@clientName(ContainerGroupInstanceCountSummary.instanceCountsByState,
-  "instanceCountsByStateUpdated",
+  "StandbyContainerGroupInstanceCountsByState",
   "csharp"
 );
 @@clientName(VirtualMachineInstanceCountSummary.instanceCountsByState,
-  "instanceCountsByStateUpdated",
+  "StandbyVirtualMachineInstanceCountsByState",
+  "csharp"
+);
+@@clientName(PoolStatus, "StandbyPoolStatus", "csharp");
+@@clientName(PoolStatus.HealthStateCode,
+  "StandbyPoolHealthStateCode",
   "csharp"
 );
