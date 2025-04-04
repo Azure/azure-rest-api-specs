@@ -4721,7 +4721,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ImageDefinition"
+              "$ref": "#/definitions/DevCenterCatalogImageDefinition"
             }
           },
           "default": {
@@ -7597,22 +7597,33 @@
         "properties": {
           "description": "Image Definition properties",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ImageDefinitionProperties"
+          "$ref": "#/definitions/CatalogImageDefinitionMetadataProperties"
         }
       }
     },
-    "ImageDefinitionProperties": {
+    "DevCenterCatalogImageDefinition": {
+      "description": "Represents a definition for an Image.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Image Definition properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CatalogImageDefinitionProperties"
+        }
+      }
+    },
+    "ImageDefinitionMetadataProperties": {
       "description": "Properties of an Image Definition.",
       "type": "object",
       "properties": {
         "imageReference": {
           "$ref": "vdi.json#/definitions/ImageReference",
           "description": "Image reference information."
-        },
-        "fileUrl": {
-          "description": "The URL to the repository file containing the image definition.",
-          "type": "string",
-          "readOnly": true
         },
         "latestBuild": {
           "$ref": "#/definitions/LatestImageBuild",
@@ -7642,6 +7653,122 @@
           "description": "Indicates if automatic image builds will be triggered for image definition updates",
           "$ref": "#/definitions/AutoImageBuildStatus",
           "readOnly": true
+        }
+      }
+    },
+    "CatalogImageDefinitionMetadataProperties": {
+      "type": "object",
+      "description": "Properties of an Image Definition that is sourced from a Catalog.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageDefinitionMetadataProperties"
+        }
+      ],
+      "properties": {
+        "fileUrl": {
+          "description": "The URL to the repository file containing the image definition.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImageDefinitionUserContentProperties": {
+      "type": "object",
+      "description": "Properties of an Image Definition.",
+      "properties": {
+        "tasks": {
+          "description": "Tasks to run at Dev Box provisioning time.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskInstance"
+          }
+        },
+        "userTasks": {
+          "description": "Tasks to run when a user first logs into a Dev Box.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskInstance"
+          }
+        },
+        "extends": {
+          "description": "Another Image Definition that this one extends.",
+          "$ref": "#/definitions/ImageDefinitionReference"
+        }
+      }
+    },
+    "ImageDefinitionProperties": {
+      "type": "object",
+      "description": "Properties of an Image Definition.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageDefinitionMetadataProperties"
+        },
+        {
+          "$ref": "#/definitions/ImageDefinitionUserContentProperties"
+        }
+      ]
+    },
+    "CatalogImageDefinitionProperties": {
+      "type": "object",
+      "description": "Properties of an Image Definition that is sourced from a Catalog.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CatalogImageDefinitionMetadataProperties"
+        },
+        {
+          "$ref": "#/definitions/ImageDefinitionUserContentProperties"
+        }
+      ]
+    },
+    "ImageDefinitionReference": {
+      "type": "object",
+      "description": "A reference to an Image Definition.",
+      "required": [
+        "imageDefinition"
+      ],
+      "properties": {
+        "imageDefinition": {
+          "type": "string",
+          "description": "Name of the referenced Image Definition."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters for the referenced Image Definition.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomizationTaskInstance": {
+      "type": "object",
+      "description": "A customization task to run.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the task."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters for the task.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name to help differentiate multiple instances of the same task."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "description": "Timeout, in seconds. Overrides any timeout provided on the task definition."
+        },
+        "condition": {
+          "type": "string",
+          "description": "The condition that needs to be met to run the task."
         }
       }
     },
