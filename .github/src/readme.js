@@ -1,7 +1,7 @@
 // @ts-check
 
+import yaml from "js-yaml";
 import { marked } from "marked";
-import yaml from "yaml";
 
 /**
  * @param {string} markdown
@@ -24,7 +24,7 @@ export async function getInputFiles(markdown, options = {}) {
     const tag =
       block.lang?.match(/yaml \$\(tag\) == '([^']*)'/)?.[1] || "default";
 
-    const obj = yaml.parse(block.text);
+    const obj = /** @type {any} */ (yaml.load(block.text));
     const blockFiles = /** @type string[] */ (obj["input-file"] || []);
 
     logger?.info(`Input files for tag '${tag}': ${JSON.stringify(blockFiles)}`);

@@ -53,8 +53,33 @@ Describe "Copy-ApiVersion regex tests" {
                 versionStatus = "stable"
             },
             @{
+                inputReadme   = '..\..\..\..\specification\compute\resource-manager\readme.md'
+                apiVersion    = "2025-02"
+                versionStatus = "preview"
+            },
+            @{
+                inputReadme   = '..\..\..\..\specification\compute\resource-manager\readme.md'
+                apiVersion    = "2025-03-01"
+                versionStatus = "preview"
+            },
+            @{
+                inputReadme   = '..\..\..\..\specification\securityinsights\resource-manager\readme.md'
+                apiVersion    = "7.6"
+                versionStatus = "preview"
+            },
+            @{
+                inputReadme   = '..\..\..\..\specification\keyvault\data-plane\readme.md'
+                apiVersion    = "7.6-preview"
+                versionStatus = "preview"
+            },
+            @{
                 inputReadme   = '..\..\..\..\specification\keyvault\data-plane\readme.md'
                 apiVersion    = "7.6-preview.1"
+                versionStatus = "preview"
+            },
+            @{
+                inputReadme   = '..\..\..\..\specification\securityinsights\resource-manager\readme.md'
+                apiVersion    = "2025-05-01-preview"
                 versionStatus = "preview"
             }
         ) {

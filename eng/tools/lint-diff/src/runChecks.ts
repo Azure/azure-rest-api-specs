@@ -2,7 +2,8 @@ import { join } from "path";
 import { exec, ExecException } from "node:child_process";
 
 import { getOpenapiType } from "./markdown-utils.js";
-import { getPathToDependency, AutorestRunResult } from "./util.js";
+import { getPathToDependency } from "./util.js";
+import { AutorestRunResult } from "./types.js";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 

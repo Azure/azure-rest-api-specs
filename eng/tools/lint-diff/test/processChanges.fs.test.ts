@@ -1,4 +1,4 @@
-import { beforeEach, vi, test, describe } from "vitest";
+import { beforeEach, vi, test, describe, expect } from "vitest";
 import { vol } from "memfs";
 
 import { getAffectedReadmes, readFileList } from "../src/processChanges.js";
@@ -25,8 +25,7 @@ describe("getAffectedReadmes", () => {
     vol.reset();
   });
 
-  test.skipIf(isWindows)
-  .concurrent("includes expected changed file", async ({ expect }) => {
+  test.skipIf(isWindows)("includes expected changed file", async () => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/b/readme.md": "b",
@@ -38,7 +37,7 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).toEqual(["specification/a/readme.md"]);
   });
 
-  test.concurrent("excludes non-changed file outside of scope", async ({ expect }) => {
+  test("excludes non-changed file outside of scope", async () => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/b/readme.md": "b",
@@ -50,8 +49,7 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).not.toContain(["specification/b/readme.md"]);
   });
 
-  test.skipIf(isWindows)
-  .concurrent("includes files up the heirarchy", async ({ expect }) => {
+  test.skipIf(isWindows)("includes files up the heirarchy", async () => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/a/b/c/readme.md": "c",
@@ -63,26 +61,21 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).toEqual(["specification/a/b/c/readme.md", "specification/a/readme.md"]);
   });
 
-  test.skipIf(isWindows)
-  .concurrent(
-    "lists reademe files in folders with affected swagger files",
-    async ({ expect }) => {
-      const files = {
-        "./specification/service1/readme.md": "a",
-        "./specification/service1/b/c/swagger.json": "{}",
-        "./specification/service2/readme.md": "b",
-        "./specification/service2/swagger.json": "{}",
-      };
-      vol.fromJSON(files, ".");
+  test.skipIf(isWindows)("lists reademe files in folders with affected swagger files", async () => {
+    const files = {
+      "./specification/service1/readme.md": "a",
+      "./specification/service1/b/c/swagger.json": "{}",
+      "./specification/service2/readme.md": "b",
+      "./specification/service2/swagger.json": "{}",
+    };
+    vol.fromJSON(files, ".");
 
-      const changedFiles = ["specification/service1/b/c/swagger.json"];
-      const affectedReadmes = await getAffectedReadmes(changedFiles, ".");
-      expect(affectedReadmes).toEqual(["specification/service1/readme.md"]);
-    },
-  );
+    const changedFiles = ["specification/service1/b/c/swagger.json"];
+    const affectedReadmes = await getAffectedReadmes(changedFiles, ".");
+    expect(affectedReadmes).toEqual(["specification/service1/readme.md"]);
+  });
 
-  test.skipIf(isWindows)
-  .concurrent("excludes files outside of specification/", async ({ expect }) => {
+  test.skipIf(isWindows)("excludes files outside of specification/", async () => {
     const files = {
       "./repo-root/specification/a/readme.md": "a",
       "./repo-root/specification/b/readme.md": "b",
@@ -97,12 +90,12 @@ describe("getAffectedReadmes", () => {
   });
 });
 
-describe("readFileList", async () => {
+describe("readFileList", () => {
   afterEach(() => {
     vol.reset();
   });
 
-  test.concurrent("returns a list of items", async ({ expect }) => {
+  test("returns a list of items", async () => {
     // Using test1.txt because somehow another test affects the
     // value of test.txt in this context.
     const files = {
@@ -114,7 +107,7 @@ describe("readFileList", async () => {
     expect(fileList).toEqual(["line1", "line2"]);
   });
 
-  test.concurrent("returns an empty list if the file is empty", async ({ expect }) => {
+  test("returns an empty list if the file is empty", async () => {
     const files = {
       "./test.txt": "",
     };

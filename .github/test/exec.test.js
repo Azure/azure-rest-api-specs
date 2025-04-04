@@ -1,6 +1,6 @@
 import { EOL } from "os";
 import { describe, expect, it } from "vitest";
-import { buildCmd, execRoot } from "../src/exec.js";
+import { buildCmd, exec } from "../src/exec.js";
 import { createMockLogger } from "./mocks.js";
 
 describe("exec", () => {
@@ -9,21 +9,21 @@ describe("exec", () => {
   const expected = `${str}${EOL}`;
 
   it.each([{}, { logger: createMockLogger() }])(
-    "execRoot succeeds with default buffer (options: %o)",
+    "exec succeeds with default buffer (options: %o)",
     async (options) => {
-      await expect(execRoot(cmd, options)).resolves.toEqual(expected);
+      await expect(exec(cmd, options)).resolves.toEqual(expected);
     },
   );
 
-  it("execRoot succeeds with exact-sized buffer", async () => {
-    await expect(
-      execRoot(cmd, { maxBuffer: expected.length }),
-    ).resolves.toEqual(expected);
+  it("exec succeeds with exact-sized buffer", async () => {
+    await expect(exec(cmd, { maxBuffer: expected.length })).resolves.toEqual(
+      expected,
+    );
   });
 
-  it("execRoot fails with too-small buffer", async () => {
+  it("exec fails with too-small buffer", async () => {
     await expect(
-      execRoot(cmd, { maxBuffer: expected.length - 1 }),
+      exec(cmd, { maxBuffer: expected.length - 1 }),
     ).rejects.toThrowError(
       expect.objectContaining({ code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER" }),
     );

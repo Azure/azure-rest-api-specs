@@ -2,6 +2,7 @@ import { parseArgs, ParseArgsConfig } from "node:util";
 import { pathExists } from "./util.js";
 import { getRunList } from "./processChanges.js";
 import { runChecks } from "./runChecks.js";
+import { correlateRuns } from "./correlateResults.js";
 import { generateReport } from "./generateReport.js";
 
 function usage() {
@@ -115,17 +116,17 @@ async function runLintDiff(
   const beforeChecks = await runChecks(beforePath, beforeList);
   const afterChecks = await runChecks(afterPath, afterList);
 
+  const runCorrelations = await correlateRuns(beforePath, beforeChecks, afterChecks);
+
   const pass = await generateReport(
-    beforePath,
-    beforeChecks,
-    afterChecks,
+    runCorrelations,
     affectedSwaggers,
     outFile,
     baseBranch,
     compareSha,
   );
 
-  if (!pass) { 
+  if (!pass) {
     process.exitCode = 1;
     console.error(`Lint-diff failed. See workflow summary report in ${outFile} for details.`);
   }
