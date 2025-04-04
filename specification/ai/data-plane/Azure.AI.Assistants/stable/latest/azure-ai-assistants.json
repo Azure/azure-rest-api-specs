@@ -13,17 +13,36 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
+    "hostTemplate": "{endpoint}/agents/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{projectName}",
     "useSchemePrefix": false,
     "parameters": [
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/api/projects/<project-name>",
+        "description": "The Azure AI Foundry project endpoint, in the form `https://<azure-region>.api.azureml.ms` or `https://<private-link-guid>.<azure-region>.api.azureml.ms`, where <azure-region> is the Azure region where the project is deployed (e.g. westus) and <private-link-guid> is the GUID of the Enterprise private link.",
         "required": true,
-        "type": "string",
-        "format": "uri",
-        "x-ms-skip-url-encoding": true
+        "type": "string"
+      },
+      {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "The Azure subscription ID.",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "resourceGroupName",
+        "in": "path",
+        "description": "The name of the Azure Resource Group.",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "projectName",
+        "in": "path",
+        "description": "The Azure AI Foundry project name.",
+        "required": true,
+        "type": "string"
       }
     ]
   },
@@ -36,7 +55,7 @@
   "security": [
     {
       "OAuth2Auth": [
-        "https://cognitiveservices.azure.com/.default"
+        "https://management.azure.com/.default"
       ]
     }
   ],
@@ -46,7 +65,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
-        "https://cognitiveservices.azure.com/.default": ""
+        "https://management.azure.com/.default": ""
       }
     }
   },
@@ -5315,14 +5334,6 @@
             "type": "string"
           },
           "x-ms-client-name": "defaultParams"
-        },
-        "functions": {
-          "type": "array",
-          "description": "List of functions returned in response",
-          "items": {
-            "$ref": "#/definitions/FunctionDefinition"
-          },
-          "x-ms-identifiers": []
         }
       },
       "required": [
