@@ -82,6 +82,10 @@ suppressions:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].put.responses.202
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.responses.202
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].delete.responses.202
+- code: AvoidAdditionalProperties
+  reason: Same as existing account resource, trying to have the same behavior
+  where:
+    - $.definitions.ProjectProperties.properties.endpoints
 ```
 
 ### Tag: package-2024-10
