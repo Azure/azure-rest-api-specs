@@ -206,7 +206,8 @@ model ClusterProperties {
   /**
    * Name of the cluster
    */
-  clusterName: string;
+  @visibility(Lifecycle.Read)
+  clusterName?: string;
 
   /**
    * Number of Virtual Routing and Forwarding currently on the cluster
@@ -255,6 +256,30 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   sdnApplianceEnabled?: boolean;
+
+  /**
+   * AvailabilityZone of the cluster in string format
+   */
+  @visibility(Lifecycle.Read)
+  availabilityZone?: string;
+
+  /**
+   * Physical index of current availability zone
+   */
+  @visibility(Lifecycle.Read)
+  physicalZoneIndex?: int32;
+
+  /**
+   * Route limits for cache enabled clusters
+   */
+  @visibility(Lifecycle.Read)
+  allocatedRoutesLimit?: int32;
+
+  /**
+   * Timestamp when the current values were retrieved from the cluster
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdated?: string;
 }
 
 /**
