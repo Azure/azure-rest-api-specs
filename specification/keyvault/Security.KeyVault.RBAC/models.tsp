@@ -156,6 +156,7 @@ union DataAction {
   /**
    * Release an HSM key using Secure Key Release.
    */
+  @added(KeyVault.Versions.`v7.3`)
   ReleaseKey: "Microsoft.KeyVault/managedHsm/keys/release/action",
 
   /**
@@ -176,6 +177,7 @@ union DataAction {
   /**
    * Check status of HSM security domain download.
    */
+  @added(KeyVault.Versions.`v7.3`)
   DownloadHsmSecurityDomainStatus: "Microsoft.KeyVault/managedHsm/securitydomain/download/read",
 
   /**
@@ -216,6 +218,7 @@ union DataAction {
   /**
    * Generate random numbers.
    */
+  @added(KeyVault.Versions.`v7.3`)
   RandomNumbersGenerate: "Microsoft.KeyVault/managedHsm/rng/action",
 }
 
