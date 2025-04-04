@@ -1757,6 +1757,7 @@
         "tags": [
           "ManagedNetwork"
         ],
+        "operationId": "OutboundRule_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -1802,7 +1803,9 @@
               "Retry-After": {
                 "description": "Duration the client should wait between requests, in seconds.",
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
               }
             }
           },
