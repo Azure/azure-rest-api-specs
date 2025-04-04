@@ -1,3 +1,4 @@
+import { RequestError } from "@octokit/request-error";
 import { vi } from "vitest";
 
 // Partial mock of `github` parameter passed into github-script actions
@@ -35,6 +36,9 @@ export function createMockGithub() {
           data: [],
         }),
       },
+      search: {
+        issuesAndPullRequests: vi.fn(),
+      },
     },
   };
 }
@@ -44,9 +48,29 @@ export function createMockCore() {
   return {
     debug: vi.fn(console.debug),
     info: vi.fn(console.log),
+    error: vi.fn(console.error),
+    warning: vi.fn(console.warn),
     isDebug: vi.fn().mockReturnValue(true),
     setOutput: vi.fn((name, value) =>
       console.log(`setOutput('${name}', '${value}')`),
     ),
+  };
+}
+
+export function createMockRequestError(status) {
+  return new RequestError(`mock RequestError with status '${status}'`, status, {
+    // request properties "url" and "headers" must be defined to prevent errors
+    request: { url: "test url", headers: {} },
+  });
+}
+
+// Partial mock of `context` parameter passed into github-script actions
+export function createMockContext() {
+  return {
+    payload: {},
+    repo: {
+      owner: "owner",
+      repo: "repo",
+    },
   };
 }

@@ -225,36 +225,9 @@ class TspConfigTsOptionMigrationSubRuleBase extends TspconfigEmitterOptionsSubRu
   }
 }
 
-export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
-    super("generateMetadata", "generate-metadata", true);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-ts", "hierarchyClient", false);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-ts", "experimentalExtensibleEnums", true);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-ts", "enableOperationGroup", true);
+    super("experimentalExtensibleEnums", "experimental-extensible-enums", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -270,13 +243,9 @@ export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmit
   }
 }
 
-export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
-    super(
-      "@azure-tools/typespec-ts",
-      "packageDetails.name",
-      new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
-    );
+    super("packageDetails.name", "package-details.name", new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/));
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -461,10 +430,7 @@ export class TspConfigCsharpMgmtPackageDirectorySubRule extends TspconfigEmitter
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
-  new TspConfigTsMgmtModularGenerateMetadataTrueSubRule(),
-  new TspConfigTsMgmtModularHierarchyClientFalseSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
-  new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
