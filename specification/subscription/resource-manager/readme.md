@@ -27,6 +27,10 @@ directive:
     from: subscriptions.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest/default"].put
     reason: Not supposed to return 201 as the response code for the below API since existing api with new version change, got exceptions from ARM reviewer.
+  - suppress: PutResponseCodes
+    from: subscriptions.json
+    where: $.paths["/providers/Microsoft.Subscription/transfers/{transferId}"].put
+    reason: Not supposed to return 201 as the response code for the below API since existing api with new version change, got exceptions from ARM reviewer.
   - suppress: PutRequestResponseSchemeArm
     from: subscriptions.json
     reason: The models designed in new version of this existing api in which put request, need not be same in response, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29042001", to take this item in future ref for next set of changes.
@@ -41,9 +45,25 @@ directive:
   - suppress: DeleteResponseCodes
     from: subscriptions.json
     reason: The delete subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: subscriptions.json
+    reason: Already working without the properties section.
+  - suppress: AvoidAdditionalProperties
+    from: subscriptions.json
+    reason: Breaking change.
   - suppress: DeleteOperationResponses
     from: subscriptions.json
     reason: The delete operation response for subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
+  - suppress: PutResponseCodes
+    from: subscriptions.json
+    where: $.paths["/providers/Microsoft.Subscription/transfers/{transferId}"].put
+    reason: Not supposed to return 201 as the response code for the below API since existing api with new version change, got exceptions from ARM reviewer.
+  - suppress: DeleteResponseBodyEmpty
+    from: subscriptions.json
+    reason: Suppression warning as delete would require response to be returned.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: subscriptions.json
+    reason: Keep compatibility with old API version
 ```
 
 
@@ -53,6 +73,17 @@ These are the global settings for the Subscription API.
 ``` yaml
 openapi-type: arm
 tag: package-2021-10
+```
+
+### Tag: package-2024-10-preview
+
+These settings apply only when `--tag=package-2024-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-10-preview'
+input-file:
+- Microsoft.Subscription/preview/2024-10-01-preview/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
 ```
 
 ### Tag: package-2024-08-preview
