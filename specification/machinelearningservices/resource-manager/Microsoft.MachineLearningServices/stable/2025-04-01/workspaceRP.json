@@ -1380,6 +1380,9 @@
         ],
         "operationId": "ManagedNetworkSettingsRule_Delete",
         "summary": "Deletes an outbound rule from the managed network of a machine learning workspace.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1398,25 +1401,20 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
-          },
           "202": {
             "description": "Accepted",
             "headers": {
               "Location": {
                 "description": "URI to poll for asynchronous operation result.",
                 "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32"
               }
             }
           },
           "204": {
             "description": "No Content"
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
           },
           "default": {
             "description": "Error",
@@ -1425,15 +1423,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Delete ManagedNetworkSettingsRule": {
             "$ref": "./examples/ManagedNetwork/deleteRule.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -1465,7 +1460,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleDtoBasicResource"
+              "$ref": "#/definitions/OutboundRuleBasicResource"
             }
           },
           "default": {
@@ -1479,84 +1474,6 @@
           "Get ManagedNetworkSettingsRule": {
             "$ref": "./examples/ManagedNetwork/getRule.json"
           }
-        }
-      },
-      "put": {
-        "tags": [
-          "ManagedNetwork"
-        ],
-        "operationId": "ManagedNetworkSettingsRule_CreateOrUpdate",
-        "summary": "Creates or updates an outbound rule in the managed network of a machine learning workspace.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RuleName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "description": "Outbound Rule to be created or updated in the managed network of a machine learning workspace.",
-            "schema": {
-              "$ref": "#/definitions/OutboundRuleDtoBasicResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/OutboundRuleDtoBasicResource"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
-              }
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CreateOrUpdate ManagedNetworkSettingsRule": {
-            "$ref": "./examples/ManagedNetwork/createOrUpdateRule.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -1737,7 +1654,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleDtoBasicResource"
+              "$ref": "#/definitions/OutboundRuleBasicResource"
             }
           },
           "default": {
@@ -1788,7 +1705,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/OutboundRuleDtoBasicResource"
+              "$ref": "#/definitions/OutboundRuleBasicResource"
             }
           }
         ],
@@ -1812,7 +1729,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/OutboundRuleDtoBasicResource"
+              "$ref": "#/definitions/OutboundRuleBasicResource"
             }
           },
           "default": {
@@ -3216,7 +3133,7 @@
           "description": "The list of machine learning workspaces. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning workspaces.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OutboundRuleDtoBasicResource"
+            "$ref": "#/definitions/OutboundRuleBasicResource"
           }
         }
       }
@@ -3409,72 +3326,6 @@
       },
       "discriminator": "type"
     },
-    "OutboundRuleDtoBasicResource": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Public facing contract for the outbound rules of a machine learning workspace.",
-          "$ref": "#/definitions/OutboundRuleDto"
-        }
-      }
-    },
-    "OutboundRuleDtoBasicResourcePaginatedResult": {
-      "type": "object",
-      "properties": {
-        "continuationToken": {
-          "type": "string"
-        },
-        "nextLink": {
-          "type": "string"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutboundRuleDtoBasicResource"
-          }
-        }
-      }
-    },
-    "OutboundRuleDtoResource": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
-        },
-        "kind": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string"
-        },
-        "properties": {
-          "description": "Public facing contract for the outbound rules of a machine learning workspace.",
-          "$ref": "#/definitions/OutboundRuleDto"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ManagedNetworkSettingsDto": {
       "description": "Managed Network settings for a machine learning workspace.",
       "type": "object",
@@ -3505,7 +3356,7 @@
           "type": "object",
           "additionalProperties": {
             "description": "Public facing contract for the outbound rules of a machine learning workspace.",
-            "$ref": "#/definitions/OutboundRuleDto"
+            "$ref": "#/definitions/OutboundRule"
           },
           "x-nullable": true
         },
@@ -3537,7 +3388,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/OutboundRuleDto"
+          "$ref": "#/definitions/OutboundRule"
         }
       ],
       "properties": {
@@ -3571,7 +3422,7 @@
       "description": "Service Tag Outbound Rule for the managed network of a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "#/definitions/OutboundRuleDto"
+          "$ref": "#/definitions/OutboundRule"
         }
       ],
       "properties": {
@@ -3624,7 +3475,7 @@
       "description": "FQDN Outbound Rule for the managed network of a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "#/definitions/OutboundRuleDto"
+          "$ref": "#/definitions/OutboundRule"
         }
       ],
       "properties": {
