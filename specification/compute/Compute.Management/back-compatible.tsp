@@ -177,6 +177,13 @@ using Microsoft.Compute;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(AvailabilitySet.properties);
 
+@@clientName(AvailabilitySets.validateMigrationToVirtualMachineScaleSet::parameters.body,
+  "parameters"
+);
+@@clientName(AvailabilitySets.startMigrationToVirtualMachineScaleSet::parameters.body,
+  "parameters"
+);
+
 @@clientName(ProximityPlacementGroups.update::parameters.properties,
   "parameters"
 );
