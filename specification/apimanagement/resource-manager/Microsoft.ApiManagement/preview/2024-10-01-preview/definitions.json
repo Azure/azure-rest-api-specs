@@ -2452,6 +2452,10 @@
         "failureResponse": {
           "$ref": "#/definitions/BackendFailureResponse",
           "description": "The response to be returned when all the backends in the pool are inactive."
+        },
+        "sessionAffinity": {
+          "$ref": "#/definitions/BackendSessionAffinity",
+          "description": "The session stickiness properties of the backend pool."
         }
       }
     },
@@ -2492,6 +2496,46 @@
         "id"
       ]
     },
+    "BackendSessionAffinity": {
+      "type": "object",
+      "description": "The session stickiness properties of the backend pool.",
+      "properties": {
+        "sessionId": {
+          "$ref": "#/definitions/BackendSessionId",
+          "description": "The id that identifies the requests belonging to the same session."
+        }
+      }
+    },
+    "BackendSessionId": {
+      "type": "object",
+      "description": "The properties of the id that identifies the requests belonging to the same session.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/BackendSessionIdSource",
+          "description": "Source from where the session id is extracted."
+        }
+      },
+      "name": {
+        "type": "string",
+        "description": "Name of the variable that refers to the session id."
+      }
+    },
+    "BackendSessionIdSource": {
+      "type": "string",
+      "enum": [
+        "cookie"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "backend-sessionId-source",
+        "values": [
+          {
+            "value": "cookie",
+            "description": "The session id is set by APIM gateway in a cookie and is extracted from the cookies in client requests."
+          }
+        ]
+      }
+    },    
     "BearerTokenSendingMethodsContract": {
       "type": "string",
       "description": "Form of an authorization grant, which the client uses to request the access token.",
