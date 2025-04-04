@@ -462,52 +462,48 @@ interface VirtualMachineImagesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineImages_ListWithProperties")
-  @autoRoute
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions?$expand=Properties")
   @get
-  @action("versions")
-  listWithProperties is ArmProviderActionSync<
-    Response = VirtualMachineImagesWithPropertiesListResult,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      ...LocationParameter;
+  listWithProperties(
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<SubscriptionActionScope>,
+    ...LocationParameter,
 
-      /**
-       * A valid image publisher.
-       */
-      @path
-      @segment("publishers")
-      publisherName: string;
+    /**
+     * A valid image publisher.
+     */
+    @path
+    @segment("publishers")
+    publisherName: string,
 
-      /**
-       * A valid image publisher offer.
-       */
-      @path
-      @segment("offers")
-      offer: string;
+    /**
+     * A valid image publisher offer.
+     */
+    @path
+    @segment("offers")
+    offer: string,
 
-      /**
-       * A valid image SKU.
-       */
-      @path
-      @segment("skus")
-      skus: string;
+    /**
+     * A valid image SKU.
+     */
+    @path
+    @segment("skus")
+    skus: string,
 
-      /**
-       * The expand expression to apply on the operation.
-       */
-      @query("$expand")
-      $expand: Expand;
+    /**
+     * The expand expression to apply on the operation.
+     */
+    @query("$expand")
+    $expand: Expand,
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      @query("$top")
-      $top?: int32;
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    @query("$top")
+    $top?: int32,
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      @query("$orderby")
-      $orderby?: string;
-    },
-    Error = CloudError
-  >;
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    @query("$orderby")
+    $orderby?: string,
+  ): VirtualMachineImagesWithPropertiesListResult | CloudError;
+
   /**
    * Gets a virtual machine image.
    */
