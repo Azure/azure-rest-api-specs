@@ -571,10 +571,10 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.CallEndedTypeProperty,
+@@usage(Microsoft.EventGrid.SystemEvents.CallEndedParticipantTypeProperty,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.CallEndedTypeProperty,
+@@access(Microsoft.EventGrid.SystemEvents.CallEndedParticipantTypeProperty,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,

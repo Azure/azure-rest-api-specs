@@ -161,9 +161,14 @@
         }
       ]
     },
-    "AcsCallParticipantBaseEventData": {
+    "AcsCallParticipantEventData": {
       "description": "Schema of common properties of participant events",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ],
       "properties": {
         "user": {
           "description": "The communication identifier of the participant",
@@ -183,7 +188,7 @@
         }
       }
     },
-    "AcsCallingEventBaseProperties": {
+    "AcsCallingEventProperties": {
       "description": "Schema of common properties of all calling events",
       "type": "object",
       "properties": {
@@ -200,7 +205,7 @@
           "$ref": "#/definitions/AcsCallingEventGroupProperties"
         },
         "isTwoParty": {
-          "description": "The isTwoParty metadata",
+          "description": "Is two party in calling event.",
           "type": "boolean"
         },
         "correlationId": {
@@ -208,10 +213,13 @@
           "type": "string"
         },
         "isRoomsCall": {
-          "description": "The isRoomsCall metadata",
+          "description": "Is calling event a room call.",
           "type": "boolean"
         }
-      }
+      },
+      "requried": [
+        "startedBy"
+      ]
     },
     "AcsCallingEventGroupProperties": {
       "description": "Schema of calling event group properties",
@@ -232,12 +240,12 @@
           "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "type": {
-          "description": "Participant or Internal or Carrier or any future types.",
-          "ref": "$/definitions/CallEndedTypeProperty",
+          "description": "The type of the call ended by.",
+          "ref": "$/definitions/CallEndedParticipantTypeProperty",
           "type": "object"
         },
         "name": {
-          "description": "MicrosoftInternal or the name of the carrier only 1 of the mri and the name field will be filled based on the type.",
+          "description": "The name of the call ended by.",
           "type": "string"
         }
       }
@@ -251,7 +259,7 @@
           "type": "integer"
         },
         "subCode": {
-          "description": "Null for 1:1 calls and ACS group calls with group Id.",
+          "description": "Reason for subcode for call ended event.",
           "type": "integer"
         },
         "phrase": {
@@ -260,17 +268,17 @@
         }
       }
     },
-    "CallEndedTypeProperty": {
-      "description": "Call Ended Type Content",
+    "CallEndedParticipantTypeProperty": {
+      "description": "Call Ended Participant Type Content",
       "type": "object",
       "properties": {
         "type": {
-          "x-ms-client-name": "typeKind",
+          "x-ms-client-name": "participantTypeKind",
           "description": "The call ended type content",
           "type": "string",
           "enum": [],
           "x-ms-enum": {
-            "name": "CallEndedTypeKind",
+            "name": "CallEndedParticipantTypeKind",
             "modelAsString": true,
             "values": []
           }
@@ -369,7 +377,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event.",
       "allOf": [
         {
-          "$ref": "#/definitions/AcsCallParticipantBaseEventData"
+          "$ref": "#/definitions/AcsCallParticipantEventData"
         }
       ],
       "type": "object"
@@ -378,22 +386,18 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
       "allOf": [
         {
-          "$ref": "#/definitions/AcsCallParticipantBaseEventData"
+          "$ref": "#/definitions/AcsCallParticipantEventData"
         }
       ],
       "type": "object",
       "properties": {
-        "reason": {
-          "description": "The reason for the participant removed.",
-          "$ref": "#/definitions/AcsCallingEventReasonProperties"
-        }
       }
     },
     "AcsCallStartedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event.",
       "allOf": [
         {
-          "$ref": "#/definitions/AcsCallingEventBaseProperties"
+          "$ref": "#/definitions/AcsCallingEventProperties"
         }
       ],
       "type": "object"
@@ -402,7 +406,7 @@
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event.",
       "allOf": [
         {
-          "$ref": "#/definitions/AcsCallingEventBaseProperties"
+          "$ref": "#/definitions/AcsCallingEventProperties"
         }
       ],
       "type": "object",

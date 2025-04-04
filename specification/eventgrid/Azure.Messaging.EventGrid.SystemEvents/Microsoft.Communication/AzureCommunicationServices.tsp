@@ -39,13 +39,13 @@ model AcsUserDisconnectedEventData {
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallStartedEventData
-  extends AcsCallingEventBaseProperties {
+  extends AcsCallingEventProperties {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallEndedEventData
-  extends AcsCallingEventBaseProperties {
+  extends AcsCallingEventProperties {
   /** The communication identifier of the user who was disconnected */
   endedBy?: AcsCallingEventEndedByProperties;
 
@@ -59,15 +59,13 @@ model AcsCallEndedEventData
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallParticipantAddedEventData
-  extends AcsCallParticipantBaseEventData {
+  extends AcsCallParticipantEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallParticipantRemovedEventData
-  extends AcsCallParticipantBaseEventData {
-  /** The reason for the participant removed. */
-  reason?: AcsCallingEventReasonProperties;
+  extends AcsCallParticipantEventData {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
@@ -1012,7 +1010,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
 /** Schema of common properties of all participant events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallParticipantBaseEventData extends AcsCallingEventBaseProperties {
+model AcsCallParticipantEventData extends AcsCallingEventProperties {
   /** The communication identifier of the participant */
   user?: CommunicationIdentifierModel;
 
@@ -1028,9 +1026,9 @@ model AcsCallParticipantBaseEventData extends AcsCallingEventBaseProperties {
 
 /** Schema of common properties of all calling events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallingEventBaseProperties {
+model AcsCallingEventProperties {
   /** The communication identifier of the call startedBy */
-  startedBy?: CommunicationIdentifierModel;
+  startedBy: CommunicationIdentifierModel;
 
   /** The callId of the server */
   serverCallId?: string;
@@ -1038,13 +1036,13 @@ model AcsCallingEventBaseProperties {
   /** The group metadata */
   group?: AcsCallingEventGroupProperties;
 
-  /** The isTwoParty metadata */
+  /** Is two party in calling event. */
   isTwoParty?: boolean;
 
   /** The correlationId of calling event */
   correlationId?: string;
 
-  /** The isRoomsCall metadata */
+  /** Is the calling event a room call. */
   isRoomsCall?: boolean;
 }
 
@@ -1061,10 +1059,10 @@ model AcsCallingEventEndedByProperties {
   /** The communication identifier of the call ended by */
   endedBy: CommunicationIdentifierModel;
 
-  /** Participant or Internal or Carrier or any future types */
-  type: CallEndedTypeProperty;
+  /** The type of call ended by. */
+  type: CallEndedParticipantTypeProperty;
 
-  /** MicrosoftInternal or the name of the carrier only 1 of the mri and the name field will be filled based on the type. */
+  /** The name field will be filled based on the type. */
   name: string;
 }
 
@@ -1074,7 +1072,7 @@ model AcsCallingEventReasonProperties {
   /** Reason code for call ended event. */
   code?: int;
 
-  /** Null for 1:1 calls and ACS group calls with group Id. */
+  /** Reason for subcode for call ended event. */
   subCode?: int;
 
   /** Reason for the call ended event. */
