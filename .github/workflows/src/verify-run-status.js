@@ -10,7 +10,9 @@ import { extractInputs } from "./context.js";
 export default async function({github, context, core}, checkRunName, workflowName) {
   const inputs = await extractInputs(github, context, core);
 
-  const checkRun = await getCheckRunStatus(github, context, core, checkRunName, inputs.head_sha);
+  const checkRun = context.eventName == "check_run"
+    ? context.payload.check_run
+    : await getCheckRunStatus(github, context, core, checkRunName, inputs.head_sha);
   const workflow = context.eventName == "workflow_run" 
     ? context.payload.workflow_run 
     : await getWorkflowRun(github, context, core, workflowName, inputs.head_sha);
@@ -60,7 +62,6 @@ export async function getCheckRunStatus(github, context, core, checkRunName, hea
   core.debug(`Check runs: ${JSON.stringify(checkRuns)}`);
 
   if (checkRuns.length === 0) {
-    core.info(`No completed check run with name: ${checkRunName}`);
     return null;
   }
 
@@ -101,7 +102,6 @@ export async function getWorkflowRun(github, context, core, workflowName, head_s
   const matchingWorkflowRuns = workflowRuns.filter((run) => run.name === workflowName);
 
   if (matchingWorkflowRuns.length === 0) {
-    core.info(`No completed workflow run with name: ${workflowName}`);
     return null;
   }
 

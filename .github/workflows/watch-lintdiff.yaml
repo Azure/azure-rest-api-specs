@@ -2,7 +2,7 @@
 name: "~Watch - LintDiff"
 
 on:
-  check_suite:
+  check_run:
     types: completed
 
   workflow_run:
@@ -11,7 +11,7 @@ on:
       - "\\[TEST-IGNORE\\] Swagger LintDiff"
 
 permissions:
-  checks: write
+  checks: read
 
 jobs:
   check-lintdiff:
