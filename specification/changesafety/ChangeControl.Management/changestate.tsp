@@ -89,8 +89,13 @@ model RetrieveNextStagesResponse {
   @doc("ChangeState resource Id.")
   changeStateResourceId: ChangeStateResourceId;
 
+  @removed(Versions.v2025_03_01_preview)
   @doc("Last stage sequence in the StageProgression.")
   lastStageSequence: int32;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("Last StageProgression sequence in the StageProgression.")
+  lastStageProgressionSequence: int32;
 
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
   @Azure.ResourceManager.identifiers(#["stageReference"])
