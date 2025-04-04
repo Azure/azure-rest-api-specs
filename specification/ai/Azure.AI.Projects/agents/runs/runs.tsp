@@ -2,12 +2,6 @@ import "../messages/messages.tsp";
 
 namespace Azure.AI.Projects;
 
-@doc("Represents advanced options for controlling agent runs.")
-model RunOptions {
-  @doc("Strategy for truncating messages when input exceeds model limits.")
-  truncationStrategy?: TruncationStrategy;
-}
-
 @doc("Enumerates known truncation strategy types, but also allows any custom fallback string.")
 union TruncationStrategyType {
   string,
@@ -30,8 +24,8 @@ model TruncationStrategy {
 
 @doc("Parameters for creating a new run request.")
 model RunInputs {
-  @doc("The agent responsible for generating the run.")
-  agent: Agent;
+  @doc("Unique identifier for the agent responsible for the run. This is optional (not needeed) when doing a run using ephemeral agent.")
+  agentId?: string;
 
   @doc("The list of input messages for the run.")
   input: ChatMessage[];
@@ -42,8 +36,8 @@ model RunInputs {
   @doc("Optional metadata associated with the run request.")
   metadata?: Record<string>;
 
-  @doc("Optional configuration for run generation.")
-  options?: RunOptions;
+  @doc("Strategy for truncating messages when input exceeds model limits.")
+  truncationStrategy?: TruncationStrategy;
 
   @doc("Identifier for the user making the request.")
   userId?: string;
@@ -131,9 +125,6 @@ model RunOutputs {
 @doc("An agent-generated run record, including both the requested inputs and the final outputs.")
 @Rest.resource("runs")
 model Run {
-  @doc("Unique identifier for the agent responsible for the run.")
-  agentId: string;
-
   @key
   @visibility(Lifecycle.Read)
   @doc("Unique identifier for this run.")
@@ -151,9 +142,6 @@ model Run {
 
   @doc("The final outcome of this run, including status, output messages, token usage.")
   runOutputs: RunOutputs;
-
-  @doc("Optional configuration for run generation.")
-  options?: RunOptions;
 
   @doc("Identifier for the user making the request.")
   userId?: string;

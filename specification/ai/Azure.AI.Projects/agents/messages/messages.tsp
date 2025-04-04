@@ -187,7 +187,7 @@ model ChatMessage {
   threadId: string;
 
   @doc("The role of this message's author.")
-  role?: AuthorRole = "user";
+  role: AuthorRole = AuthorRole.user;
 
   @doc("The contents of the message.")
   content: AIContent[];
