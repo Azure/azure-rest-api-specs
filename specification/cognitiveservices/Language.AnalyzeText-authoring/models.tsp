@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Language.Text.Authoring;
 
@@ -225,6 +224,12 @@ model TextAnalysisAuthoringProjectMetadata {
    * The project kind.
    */
   projectKind: ProjectKind;
+
+  /**
+   * The project storage account resource ID.
+   */
+  @added(Versions.v2025_05_15_preview)
+  storageAccountResourceId: string;
 
   /**
    * The storage container name.
