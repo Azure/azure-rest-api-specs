@@ -332,8 +332,20 @@ union TestKind {
 @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
 union CreatedByType {
   string,
-  @doc("Entity was created by a user.") "User",
-  @doc("Entity was created by a scheduled trigger.") "ScheduledTrigger",
+
+  @doc("Entity was created by a user.")
+  "User",
+
+  @doc("Entity was created by a scheduled trigger.")
+  "ScheduledTrigger",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by Azure DevOps pipelines.")
+  "AzurePipelines",
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("Entity was created by GitHub Workflows.")
+  "GitHubWorkflows",
 }
 
 @doc("Test file info.")
@@ -579,7 +591,16 @@ model RegionalConfiguration {
   @doc("""
       The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
     """)
-  engineInstances: int32;
+  @madeOptional(APIVersions.v2025_03_01_preview)
+  engineInstances?: int32;
+
+  @doc("""
+      The percentage of load to be distributed in specified region. Supported values are in range of 1-99.
+    """)
+  @added(APIVersions.v2025_03_01_preview)
+  @minValue(1)
+  @maxValue(99)
+  loadPercentage?: int32;
 
   @doc("""
     Azure region name.
@@ -894,6 +915,16 @@ model TestRun {
   @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
   createdByType?: CreatedByType;
 
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("The URI pointing to the entity that created the test run.")
+  @visibility(Lifecycle.Read)
+  createdByUri?: url;
+
+  @added(APIVersions.v2025_03_01_preview)
+  @doc("The insights from the test run.")
+  @visibility(Lifecycle.Read)
+  insights?: TestRunInsights;
+
   ...SystemMetaData;
 }
 
@@ -995,6 +1026,24 @@ model TestRunStatistics {
   sentKBytesPerSec?: float64;
 }
 
+@doc("Represents insights derived from the test run.")
+model TestRunInsights {
+  @doc("The columns of the insights.")
+  columns: Record<TestRunInsightColumn>;
+
+  @doc("The rows of the insights.")
+  rows?: Record<string>[];
+}
+
+@doc("Represents a column of the test run insight")
+model TestRunInsightColumn {
+  @doc("Name of the column.")
+  name: string;
+
+  @doc("The data type of the column.")
+  dataType: string;
+}
+
 @doc("Collection of test run artifacts")
 model TestRunArtifacts {
   @doc("The input artifacts for the test run.")
@@ -1053,6 +1102,23 @@ model ArtifactsContainerInfo {
 
   @doc("Expiry time of the container (RFC 3339 literal format)")
   expireDateTime?: utcDateTime;
+}
+
+@doc("Request to clone an existing test into a new test.")
+@added(APIVersions.v2025_03_01_preview)
+model CloneTestRequest {
+  @doc("Unique identifier for the new test that will be created.")
+  @pattern("^[a-z0-9_-]*$")
+  newTestId: string;
+
+  @doc("Display Name override for the newly created test.")
+  @maxLength(50)
+  @minLength(2)
+  displayName?: string;
+
+  @doc("Description override for the newly created test.")
+  @maxLength(100)
+  description?: string;
 }
 
 @doc("Represents collection of metric namespaces.")
@@ -1380,6 +1446,41 @@ union RequestDataLevel {
 
   @doc("Request data will be collected in case of failed requests")
   ERRORS: "ERRORS",
+}
+
+// TODO(mitsha): Fix the structure of initial clone test return
+@added(APIVersions.v2025_03_01_preview)
+@doc("Operation Id Path Parameter.")
+model OperationIdPathParameter {
+  @doc("The unique ID of the operation.")
+  @key
+  @visibility(Lifecycle.Read)
+  operationId: string;
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("Kind of the long running operation.")
+union OperationKind {
+  string,
+
+  @doc("Operation represents a clone test operation")
+  CloneTest: "CloneTest",
+}
+
+@added(APIVersions.v2025_03_01_preview)
+@doc("Status of a long running operation.")
+@resource("operations")
+model OperationStatus {
+  @doc("The state of the operation.")
+  status: Foundations.OperationState;
+
+  @doc("The kind of the operation.")
+  kind: OperationKind;
+
+  @doc("Error object that describes the error when status is \"Failed\".")
+  error?: Foundations.Error;
+
+  ...OperationIdPathParameter;
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
