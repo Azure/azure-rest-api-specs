@@ -78,6 +78,17 @@ These settings apply only when `--tag=package-changes-2025-03` is specified on t
 ``` yaml $(tag) == 'package-changes-2025-03'
 input-file:
 - stable/2025-03-01/changes.json
+
+suppressions:
+- code: OperationsAPIImplementation
+  from: changes.json
+  reason: Duplicate Operations API causes generation issues
+- code: ResourceNameRestriction
+  from: changes.json
+  reason: Change resources cannot be created or named by end users
+- code: AvoidAdditionalProperties
+  from: changes.json
+  reason: Change properties including the dictionary of individual property changes are dynamic types. Where clause is not working on all parent fields using this property bag, hence we're suppressing the entire file for now.
 ```
 
 ### Tag: package-deleteoptions-2025-03
