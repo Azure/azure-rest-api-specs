@@ -28,6 +28,7 @@ namespace Azure.AI {
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+
       // 1DP uses Entra ID with cognitiveservices.azure.com scope, however, we are currently calling the old service.
       // scopes: ["https://cognitiveservices.azure.com/.default"],
       scopes: ["https://management.azure.com/.default"],
@@ -58,6 +59,6 @@ namespace Azure.AI.Assistants {
   enum Versions {
     @doc("Azure AI API version 2025-05-01-preview.")
     @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-    `latest`,
+    latest,
   }
 }

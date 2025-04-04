@@ -6,7 +6,7 @@ namespace Azure.AI.Assistants;
 
 using TypeSpec.Versioning;
 
-@doc("Detailed information about a single step of an agent thread run.")
+@doc("Detailed information about a single step of an assistant thread run.")
 model RunStep {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -18,7 +18,7 @@ model RunStep {
   type: RunStepType;
 
   @encodedName("application/json", "assistant_id")
-  @doc("The ID of the agent associated with the run step.")
+  @doc("The ID of the assistant associated with the run step.")
   assistantId: string;
 
   @encodedName("application/json", "thread_id")

@@ -14,7 +14,7 @@ namespace Azure.AI.Assistants;
   
   We emit events whenever a new object is created, transitions to a new state, or is being
   streamed in parts (deltas). For example, we emit `thread.run.created` when a new run
-  is created, `thread.run.completed` when a run completes, and so on. When an Agent chooses
+  is created, `thread.run.completed` when a run completes, and so on. When an Assistant chooses
   to create a message during a run, we emit a `thread.message.created event`, a
   `thread.message.in_progress` event, many `thread.message.delta` events, and finally a
   `thread.message.completed` event.
@@ -22,7 +22,7 @@ namespace Azure.AI.Assistants;
   We may add additional events over time, so we recommend handling unknown events gracefully
   in your code.
   """)
-union AgentStreamEvent {
+union AssistantStreamEvent {
   string,
 
     | ThreadStreamEvent
@@ -37,7 +37,7 @@ union AgentStreamEvent {
 union ThreadStreamEvent {
   string,
 
-  /** Event sent when a new thread is created. The data of this event is of type AgentThread */
+  /** Event sent when a new thread is created. The data of this event is of type AssistantThread */
   ThreadCreated: "thread.created",
 }
 

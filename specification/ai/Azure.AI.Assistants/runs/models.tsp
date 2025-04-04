@@ -9,7 +9,7 @@ namespace Azure.AI.Assistants;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
-@doc("Data representing a single evaluation run of an agent thread.")
+@doc("Data representing a single evaluation run of an assistant thread.")
 model ThreadRun {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
@@ -22,10 +22,10 @@ model ThreadRun {
   threadId: string;
 
   @encodedName("application/json", "assistant_id")
-  @doc("The ID of the agent associated with the thread this run was performed against.")
+  @doc("The ID of the assistant associated with the thread this run was performed against.")
   assistantId: string;
 
-  @doc("The status of the agent thread run.")
+  @doc("The status of the assistant thread run.")
   status: RunStatus;
 
   // Internal note: API reference describes this as nullable and the spec explicitly defines it as required and
@@ -35,21 +35,21 @@ model ThreadRun {
   //                https://github.com/openai/openai-openapi/blob/master/openapi.yaml#L8245
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "required_action")
-  @doc("The details of the action required for the agent thread run to continue.")
+  @doc("The details of the action required for the assistant thread run to continue.")
   requiredAction?: RequiredAction | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "last_error")
-  @doc("The last error, if any, encountered by this agent thread run.")
+  @doc("The last error, if any, encountered by this assistant thread run.")
   lastError: RunError | null;
 
   @doc("The ID of the model to use.")
   `model`: string;
 
-  @doc("The overridden system instructions used for this agent thread run.")
+  @doc("The overridden system instructions used for this assistant thread run.")
   instructions: string;
 
-  @doc("The overridden enabled tools used for this agent thread run.")
+  @doc("The overridden enabled tools used for this assistant thread run.")
   tools: ToolDefinition[] = #[];
 
   @encodedName("application/json", "created_at")
@@ -128,17 +128,17 @@ model ThreadRun {
   /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_choice")
-  toolChoice: AgentsApiToolChoiceOption | null;
+  toolChoice: AssistantsApiToolChoiceOption | null;
 
   /** The response format of the tool calls used in this run. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat: AgentsApiResponseFormatOption | null;
+  responseFormat: AssistantsApiResponseFormatOption | null;
 
   ...RequiredNullableMetadata;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis")
+  @doc("Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis")
   @encodedName("application/json", "tool_resources")
   toolResources?: UpdateToolResourcesOptions | null;
 
@@ -183,18 +183,18 @@ model RunCompletionUsage {
   totalTokens: int64;
 }
 
-@doc("The details used when creating a new run of an agent thread.")
+@doc("The details used when creating a new run of an assistant thread.")
 model CreateRunOptions {
-  @doc("The ID of the agent that should run the thread.")
+  @doc("The ID of the assistant that should run the thread.")
   @encodedName("application/json", "assistant_id")
   assistantId: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The overridden model name that the agent should use to run the thread.")
+  @doc("The overridden model name that the assistant should use to run the thread.")
   `model`?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The overridden system instructions that the agent should use to run the thread.")
+  @doc("The overridden system instructions that the assistant should use to run the thread.")
   instructions?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
@@ -211,7 +211,7 @@ model CreateRunOptions {
   additionalMessages?: ThreadMessageOptions[] | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The overridden list of enabled tools that the agent should use to run the thread.")
+  @doc("The overridden list of enabled tools that the assistant should use to run the thread.")
   tools?: ToolDefinition[] | null;
 
   /**
@@ -270,12 +270,12 @@ model CreateRunOptions {
   /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_choice")
-  toolChoice?: AgentsApiToolChoiceOption | null;
+  toolChoice?: AssistantsApiToolChoiceOption | null;
 
   /** Specifies the format that the model must output. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AssistantsApiResponseFormatOption | null;
 
   /** If `true` functions will run in parallel during tool use. */
   @encodedName("application/json", "parallel_tool_calls")
@@ -284,7 +284,7 @@ model CreateRunOptions {
   ...OptionalNullableMetadata;
 }
 
-@doc("The details of an error as encountered by an agent thread run.")
+@doc("The details of an error as encountered by an assistant thread run.")
 model RunError {
   @doc("The status for the error.")
   code: string;
@@ -293,7 +293,7 @@ model RunError {
   message: string;
 }
 
-@doc("Possible values for the status of an agent thread run.")
+@doc("Possible values for the status of an assistant thread run.")
 union RunStatus {
   string,
 
@@ -323,14 +323,14 @@ union RunStatus {
 }
 
 @discriminator("type")
-@doc("An abstract representation of a required action for an agent thread run to continue.")
+@doc("An abstract representation of a required action for an assistant thread run to continue.")
 model RequiredAction {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   @doc("The object type.")
   type: string;
 }
 
-@doc("The details for required tool calls that must be submitted for an agent thread run to continue.")
+@doc("The details for required tool calls that must be submitted for an assistant thread run to continue.")
 model SubmitToolOutputsAction extends RequiredAction {
   @doc("The object type, which is always 'submit_tool_outputs'.")
   type: "submit_tool_outputs";
@@ -343,37 +343,37 @@ model SubmitToolOutputsAction extends RequiredAction {
 @doc("The details describing tools that should be called to submit tool outputs.")
 model SubmitToolOutputsDetails {
   @encodedName("application/json", "tool_calls")
-  @doc("The list of tool calls that must be resolved for the agent thread run to continue.")
+  @doc("The list of tool calls that must be resolved for the assistant thread run to continue.")
   toolCalls: RequiredToolCall[];
 }
 
-@doc("The details used when creating and immediately running a new agent thread.")
+@doc("The details used when creating and immediately running a new assistant thread.")
 model CreateAndRunThreadOptions {
   @encodedName("application/json", "assistant_id")
-  @doc("The ID of the agent for which the thread should be created.")
+  @doc("The ID of the assistant for which the thread should be created.")
   assistantId: string;
 
   @doc("The details used to create the new thread. If no thread is provided, an empty one will be created.")
-  thread?: AgentThreadCreationOptions;
+  thread?: AssistantThreadCreationOptions;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The overridden model that the agent should use to run the thread.")
+  @doc("The overridden model that the assistant should use to run the thread.")
   @clientName("overrideModelName", "csharp")
   `model`?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The overridden system instructions the agent should use to run the thread.")
+  @doc("The overridden system instructions the assistant should use to run the thread.")
   @clientName("overrideInstructions", "csharp")
   instructions?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The overridden list of enabled tools the agent should use to run the thread.")
+  @doc("The overridden list of enabled tools the assistant should use to run the thread.")
   @clientName("overrideTools", "csharp")
   tools?: ToolDefinition[] | null;
 
-  /** Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis. */
+  /** Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis")
+  @doc("Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis")
   @encodedName("application/json", "tool_resources")
   toolResources?: UpdateToolResourcesOptions | null;
 
@@ -433,12 +433,12 @@ model CreateAndRunThreadOptions {
   /** Controls whether or not and which tool is called by the model. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "tool_choice")
-  toolChoice?: AgentsApiToolChoiceOption | null;
+  toolChoice?: AssistantsApiToolChoiceOption | null;
 
   /** Specifies the format that the model must output. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AssistantsApiResponseFormatOption | null;
 
   /** If `true` functions will run in parallel during tool use. */
   @encodedName("application/json", "parallel_tool_calls")

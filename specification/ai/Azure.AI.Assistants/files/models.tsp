@@ -5,7 +5,7 @@ namespace Azure.AI.Assistants;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
-@doc("Represents an agent that can call the model and use tools.")
+@doc("Represents an assistant that can call the model and use tools.")
 model OpenAIFile {
   @doc("The object type, which is always 'file'.")
   object: "file";
@@ -86,11 +86,11 @@ union FilePurpose {
   /** Indicates a file is used for fine tuning results. */
   fineTuneResults: "fine-tune-results",
 
-  /** Indicates a file is used as input to agents. */
-  agents: "assistants",
+  /** Indicates a file is used as input to assistants. */
+  assistants: "assistants",
 
-  /** Indicates a file is used as output by agents. */
-  agentsOutput: "assistants_output",
+  /** Indicates a file is used as output by assistants. */
+  assistantsOutput: "assistants_output",
 
   /** Indicates a file is used as input to . */
   batch: "batch",

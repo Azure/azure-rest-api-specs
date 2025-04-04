@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Assistants;
 
 /**
- * Creates and starts a new run of the specified thread using the specified agent.
+ * Creates and starts a new run of the specified thread using the specified assistant.
  *
  * @param threadId The ID of the thread to run.
  * @param createRunOptions The details for the run to create.
@@ -25,7 +25,7 @@ namespace Azure.AI.Assistants;
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/{threadId}/runs")
-@doc("Creates a new run for an agent thread.")
+@doc("Creates a new run for an assistant thread.")
 op createRun is Azure.Core.Foundations.Operation<
   {
     @doc("Identifier of the thread.")
@@ -40,7 +40,7 @@ op createRun is Azure.Core.Foundations.Operation<
     include?: RunAdditionalFieldList[];
 
     /**
-     * The details used when creating a new run of an agent thread.
+     * The details used when creating a new run of an assistant thread.
      */
     ...CreateRunOptions;
   },
@@ -193,11 +193,11 @@ op cancelRun is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/threads/runs")
-@doc("Creates a new agent thread and immediately starts a run using that new thread.")
+@doc("Creates a new assistant thread and immediately starts a run using that new thread.")
 op createThreadAndRun is Azure.Core.Foundations.Operation<
   {
     /**
-     * The details used when creating and immediately running a new agent thread.
+     * The details used when creating and immediately running a new assistant thread.
      */
     ...CreateAndRunThreadOptions;
   },

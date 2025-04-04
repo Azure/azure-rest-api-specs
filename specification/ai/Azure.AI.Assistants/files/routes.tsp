@@ -59,7 +59,7 @@ op uploadFile is Azure.Core.Foundations.Operation<
       @clientName("Data", "csharp")
       file: HttpPart<File>;
 
-      @doc("The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.")
+      @doc("The intended purpose of the uploaded file. Use `assistants` for Assistants and Message files, `vision` for Assistants image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.")
       purpose: HttpPart<FilePurpose>;
 
       /*

@@ -9,8 +9,8 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Assistants;
 
-@doc("Represents an agent that can call the model and use tools.")
-model Agent {
+@doc("Represents an assistant that can call the model and use tools.")
+model Assistant {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
 
@@ -23,25 +23,25 @@ model Agent {
   createdAt: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The name of the agent.")
+  @doc("The name of the assistant.")
   name: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The description of the agent.")
+  @doc("The description of the assistant.")
   description: string | null;
 
   @doc("The ID of the model to use.")
   `model`: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The system instructions for the agent to use.")
+  @doc("The system instructions for the assistant to use.")
   instructions: string | null;
 
-  @doc("The collection of tools enabled for the agent.")
+  @doc("The collection of tools enabled for the assistant.")
   tools: ToolDefinition[] = #[];
 
   /**
-   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
+   * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
    * tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
@@ -69,37 +69,37 @@ model Agent {
   @encodedName("application/json", "top_p")
   topP: float32 | null = 1;
 
-  /** The response format of the tool calls used by this agent. */
+  /** The response format of the tool calls used by this assistant. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...RequiredNullableMetadata;
 }
 
-@doc("The request details to use when creating a new agent.")
-model CreateAgentOptions {
+@doc("The request details to use when creating a new assistant.")
+model CreateAssistantOptions {
   @doc("The ID of the model to use.")
   `model`: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The name of the new agent.")
+  @doc("The name of the new assistant.")
   name?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The description of the new agent.")
+  @doc("The description of the new assistant.")
   description?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The system instructions for the new agent to use.")
+  @doc("The system instructions for the new assistant to use.")
   instructions?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The collection of tools to enable for the new agent.")
+  @doc("The collection of tools to enable for the new assistant.")
   tools?: ToolDefinition[] = #[];
 
   /**
-   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
+   * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`
    * tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
@@ -127,40 +127,40 @@ model CreateAgentOptions {
   @encodedName("application/json", "top_p")
   topP?: float32 | null = 1;
 
-  /** The response format of the tool calls used by this agent. */
+  /** The response format of the tool calls used by this assistant. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
 }
 
-@doc("The request details to use when modifying an existing agent.")
-model UpdateAgentOptions {
+@doc("The request details to use when modifying an existing assistant.")
+model UpdateAssistantOptions {
   @path
-  @doc("The ID of the agent to modify.")
+  @doc("The ID of the assistant to modify.")
   assistantId: string;
 
   @doc("The ID of the model to use.")
   `model`?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The modified name for the agent to use.")
+  @doc("The modified name for the assistant to use.")
   name?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The modified description for the agent to use.")
+  @doc("The modified description for the assistant to use.")
   description?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @doc("The modified system instructions for the new agent to use.")
+  @doc("The modified system instructions for the new assistant to use.")
   instructions?: string | null;
 
-  @doc("The modified collection of tools to enable for the agent.")
+  @doc("The modified collection of tools to enable for the assistant.")
   tools?: ToolDefinition[] = #[];
 
   /**
-   * A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example,
+   * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example,
    * the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.
    */
   @encodedName("application/json", "tool_resources")
@@ -187,32 +187,32 @@ model UpdateAgentOptions {
   @encodedName("application/json", "top_p")
   topP?: float32 | null = 1;
 
-  /** The response format of the tool calls used by this agent. */
+  /** The response format of the tool calls used by this assistant. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @encodedName("application/json", "response_format")
-  responseFormat?: AgentsApiResponseFormatOption | null;
+  responseFormat?: AssistantsApiResponseFormatOption | null;
 
   ...OptionalNullableMetadata;
 }
 
-@doc("The status of an agent deletion operation.")
-model AgentDeletionStatus {
+@doc("The status of an assistant deletion operation.")
+model AssistantDeletionStatus {
   ...DeletionStatus;
 
   @doc("The object type, which is always 'assistant.deleted'.")
   object: "assistant.deleted";
 }
 
-@doc("The request details to use when retrieving an agent.")
-model GetAgentOptions {
-  @doc("Identifier of the agent.")
+@doc("The request details to use when retrieving an assistant.")
+model GetAssistantOptions {
+  @doc("Identifier of the assistant.")
   @path
   assistantId: string;
 }
 
-@doc("The request details to use when deleting an agent.")
-model DeleteAgentOptions {
-  @doc("Identifier of the agent.")
+@doc("The request details to use when deleting an assistant.")
+model DeleteAssistantOptions {
+  @doc("Identifier of the assistant.")
   @path
   assistantId: string;
 }

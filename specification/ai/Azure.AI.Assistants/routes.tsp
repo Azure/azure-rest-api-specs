@@ -14,26 +14,26 @@ using Azure.Core.Foundations;
 namespace Azure.AI.Assistants;
 
 /**
- * Creates a new agent.
+ * Creates a new assistant.
  *
- * @returns The new agent instance.
+ * @returns The new assistant instance.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/assistants")
-op createAgent is Azure.Core.Foundations.Operation<
+op createAssistant is Azure.Core.Foundations.Operation<
   {
-    ...CreateAgentOptions;
+    ...CreateAssistantOptions;
   },
-  Agent
+  Assistant
 >;
 
 /**
- * Gets a list of agents that were previously created.
+ * Gets a list of assistants that were previously created.
  *
- * @returns The requested list of agents.
+ * @returns The requested list of assistants.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API responds with a container"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -41,18 +41,18 @@ op createAgent is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @get
 @route("/assistants")
-op listAgents is Azure.Core.Foundations.Operation<
+op listAssistants is Azure.Core.Foundations.Operation<
   {
     ...OpenAIListRequestOptions;
   },
-  OpenAIPageableListOf<Agent>
+  OpenAIPageableListOf<Assistant>
 >;
 
 /**
- * Retrieves an existing agent.
+ * Retrieves an existing assistant.
  *
- * @param assistantId The ID of the agent to retrieve.
- * @returns The requested agent instance.
+ * @param assistantId The ID of the assistant to retrieve.
+ * @returns The requested assistant instance.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
@@ -60,41 +60,41 @@ op listAgents is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "mirrored API name parity"
 @get
 @route("/assistants/{assistantId}")
-op getAgent is Azure.Core.Foundations.Operation<
+op getAssistant is Azure.Core.Foundations.Operation<
   {
     /**
-     * The request details to use when retrieving an agent.
+     * The request details to use when retrieving an assistant.
      */
-    ...GetAgentOptions;
+    ...GetAssistantOptions;
   },
-  Agent
+  Assistant
 >;
 
 /**
- * Modifies an existing agent.
+ * Modifies an existing assistant.
  *
- * @param updateAgentOptions The details of the modification to perform on a specified agent.
- * @returns The updated agent instance.
+ * @param updateAssistantOptions The details of the modification to perform on a specified assistant.
+ * @returns The updated assistant instance.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @post
 @route("/assistants/{assistantId}")
-op updateAgent is Azure.Core.Foundations.Operation<
+op updateAssistant is Azure.Core.Foundations.Operation<
   {
     /**
-     * The request details to use when modifying an existing agent.
+     * The request details to use when modifying an existing assistant.
      */
-    ...UpdateAgentOptions;
+    ...UpdateAssistantOptions;
   },
-  Agent
+  Assistant
 >;
 
 /**
- * Deletes an agent.
+ * Deletes an assistant.
  *
- * @param assistantId The ID of the agent to delete.
+ * @param assistantId The ID of the assistant to delete.
  * @returns Status information about the requested deletion operation.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -102,12 +102,12 @@ op updateAgent is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 @delete
 @route("/assistants/{assistantId}")
-op deleteAgent is Azure.Core.Foundations.Operation<
+op deleteAssistant is Azure.Core.Foundations.Operation<
   {
     /**
-     * The request details to use when deleting an agent.
+     * The request details to use when deleting an assistant.
      */
-    ...DeleteAgentOptions;
+    ...DeleteAssistantOptions;
   },
-  AgentDeletionStatus
+  AssistantDeletionStatus
 >;

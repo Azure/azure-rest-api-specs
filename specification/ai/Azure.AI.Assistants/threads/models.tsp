@@ -9,8 +9,8 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Assistants;
 
-@doc("Information about a single thread associated with an agent.")
-model AgentThread {
+@doc("Information about a single thread associated with an assistant.")
+model AssistantThread {
   @doc("The identifier, which can be referenced in API endpoints.")
   id: string;
 
@@ -23,7 +23,7 @@ model AgentThread {
   createdAt: utcDateTime;
 
   /**
-   * A set of resources that are made available to the agent's tools in this thread. The resources are specific to the type
+   * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type
    * of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list
    * of vector store IDs.
    */
@@ -34,13 +34,13 @@ model AgentThread {
   ...RequiredNullableMetadata;
 }
 
-/** The details used to create a new agent thread. */
-model AgentThreadCreationOptions {
+/** The details used to create a new assistant thread. */
+model AssistantThreadCreationOptions {
   /** The initial messages to associate with the new thread. */
   messages?: ThreadMessageOptions[];
 
   /**
-   * A set of resources that are made available to the agent's tools in this thread. The resources are specific to the
+   * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
    * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
    * a list of vector store IDs.
    */
@@ -51,13 +51,13 @@ model AgentThreadCreationOptions {
   ...OptionalNullableMetadata;
 }
 
-/** The details used to update an existing agent thread */
-model UpdateAgentThreadOptions {
+/** The details used to update an existing assistant thread */
+model UpdateAssistantThreadOptions {
   /** The ID of the thread to modify. */
   @path threadId: string;
 
   /**
-   * A set of resources that are made available to the agent's tools in this thread. The resources are specific to the
+   * A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the
    * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
    * a list of vector store IDs
    */
