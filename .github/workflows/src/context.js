@@ -130,14 +130,22 @@ export async function extractInputs(github, context, core) {
         core.info(
           `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
         );
-        const pullRequests = await github.paginate(
-          github.rest.repos.listPullRequestsAssociatedWithCommit,
-          {
-            owner: head_owner,
-            repo: head_repo,
-            commit_sha: head_sha,
-            per_page: PER_PAGE_MAX,
-          },
+        const pullRequests = (
+          await github.paginate(
+            github.rest.repos.listPullRequestsAssociatedWithCommit,
+            {
+              owner: head_owner,
+              repo: head_repo,
+              commit_sha: head_sha,
+              per_page: PER_PAGE_MAX,
+            },
+          )
+        ).filter(
+          // Only include PRs to the same repo as the triggering workflow.
+          //
+          // Other unique keys like "full_name" should also work, but "id" is the safest since it's
+          // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
+          (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
         );
 
         if (pullRequests.length === 0) {
