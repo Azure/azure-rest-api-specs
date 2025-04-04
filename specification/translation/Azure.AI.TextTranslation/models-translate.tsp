@@ -13,56 +13,61 @@ namespace TextTranslation;
 model TranslateBodyParameters {
   ...CommonParameters;
 
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing Spec"
-  @query(#{ explode: true })
+  @doc("""
+  Details of the translate request
+  """)
+  @body
+  body: TranslateBodyDetails;
+}
+
+@doc("Request body parameters for the translate API.")
+model TranslateBodyDetails {
+
+  @doc("""
+    Specifies the text string to be translated in the translate API.
+    """)
+  text: InputTextItem;
+
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
-    in the translation scope. For example, use to=de to translate to German.
-    It's possible to translate to multiple languages simultaneously by repeating the parameter in the query string. 
-    For example, use to=de&to=it to translate to German and Italian.
+    in the translation scope. It's possible to translate to multiple languages simultaneously by including 
+    multiple string values in the targetsLanguage array.
     """)
   targetsLanguage: string[];
 
-  @query
   @doc("""
     Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
     complete element. Possible values are: plain (default) or html.
     """)
   targetsTextType?: TextType = "Plain";
 
-  @query
   @doc("""
     Specifies how profanities should be treated in translations.
     Possible values are: NoAction (default), Marked or Deleted.
     """)
   targetsProfanityAction?: ProfanityAction = ProfanityAction.NoAction;
 
-  @query
   @doc("""
     Specifies how profanities should be marked in translations.
     Possible values are: Asterisk (default) or Tag. 
     """)
   targetsProfanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
-  @query
   @doc("""
     Specifies the script of the input text.
     """)
   script?: string;
 
-  @query
   @doc("""
     Specifies the script of the translated text.
     """)
   targetsScript?: string;
 
-  @query
   @doc("""
     Model that should be used for translation.
     """)
   targetsdeploymentNameModel?: string;
 
-  @query
   @doc("""
     In the case where a custom system is being used, specifies that the service is allowed to fall back to a
     general system when a custom system doesn't exist. 
@@ -78,25 +83,21 @@ model TranslateBodyParameters {
     """)
   targetsAllowFallback?: boolean = true;
 
-  @query
   @doc("""
     Defines complexity of LLM prompts to provide high accuracy translation.
     """)
   targetsGrade?: string;
 
-  @query
   @doc("""
     Desired tone of target translation.
     """)
   targetsTone?: string;
 
-  @query
   @doc("""
     Desired gender of target translation.
     """)
   targetsGender?: string;
 
-  @query
   @doc("""
     Reference dataset ID having sentence pair to generate adaptive customized translation
     """)

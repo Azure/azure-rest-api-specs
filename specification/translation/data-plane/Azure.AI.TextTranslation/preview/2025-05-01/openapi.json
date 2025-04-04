@@ -159,168 +159,6 @@
             "x-ms-client-name": "clientTraceId"
           },
           {
-            "name": "targetsLanguage",
-            "in": "query",
-            "description": "Specifies the language of the output text. The target language must be one of the supported languages included \nin the translation scope. For example, use to=de to translate to German.\nIt's possible to translate to multiple languages simultaneously by repeating the parameter in the query string. \nFor example, use to=de&to=it to translate to German and Italian.",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "targetsTextType",
-            "in": "query",
-            "description": "Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, \ncomplete element. Possible values are: plain (default) or html.",
-            "required": false,
-            "type": "string",
-            "default": "Plain",
-            "enum": [
-              "Plain",
-              "Html"
-            ],
-            "x-ms-enum": {
-              "name": "TextType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Plain",
-                  "value": "Plain",
-                  "description": "Plain text."
-                },
-                {
-                  "name": "Html",
-                  "value": "Html",
-                  "description": "HTML-encoded text."
-                }
-              ]
-            }
-          },
-          {
-            "name": "targetsProfanityAction",
-            "in": "query",
-            "description": "Specifies how profanities should be treated in translations.\nPossible values are: NoAction (default), Marked or Deleted.",
-            "required": false,
-            "type": "string",
-            "default": "NoAction",
-            "enum": [
-              "NoAction",
-              "Marked",
-              "Deleted"
-            ],
-            "x-ms-enum": {
-              "name": "ProfanityAction",
-              "modelAsString": false,
-              "values": [
-                {
-                  "name": "NoAction",
-                  "value": "NoAction",
-                  "description": "No Action is taken on profanity"
-                },
-                {
-                  "name": "Marked",
-                  "value": "Marked",
-                  "description": "Profanity is marked."
-                },
-                {
-                  "name": "Deleted",
-                  "value": "Deleted",
-                  "description": "Profanity is deleted from the translated text."
-                }
-              ]
-            }
-          },
-          {
-            "name": "targetsProfanityMarker",
-            "in": "query",
-            "description": "Specifies how profanities should be marked in translations.\nPossible values are: Asterisk (default) or Tag. ",
-            "required": false,
-            "type": "string",
-            "default": "Asterisk",
-            "enum": [
-              "Asterisk",
-              "Tag"
-            ],
-            "x-ms-enum": {
-              "name": "ProfanityMarker",
-              "modelAsString": false,
-              "values": [
-                {
-                  "name": "Asterisk",
-                  "value": "Asterisk",
-                  "description": "Profanity is marked with asterisk."
-                },
-                {
-                  "name": "Tag",
-                  "value": "Tag",
-                  "description": "Profanity is marked with the tags."
-                }
-              ]
-            }
-          },
-          {
-            "name": "script",
-            "in": "query",
-            "description": "Specifies the script of the input text.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "targetsScript",
-            "in": "query",
-            "description": "Specifies the script of the translated text.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "targetsdeploymentNameModel",
-            "in": "query",
-            "description": "Model that should be used for translation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "targetsAllowFallback",
-            "in": "query",
-            "description": "In the case where a custom system is being used, specifies that the service is allowed to fall back to a\ngeneral system when a custom system doesn't exist. \nIn the case where a Large Language Model is being used, specifies that the service is allowed to fall\nback to a Small Language Model if an error occurs.\nPossible values are: true (default) or false.\n\nallowFallback=false specifies that the translation should only use systems trained for the category specified \nby the request. If a translation for language X to language Y requires chaining through a pivot language E, \nthen all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. \nIf no system is found with the specific category, the request will return a 400 status code. allowFallback=true \nspecifies that the service is allowed to fall back to a general system when a custom system doesn't exist.",
-            "required": false,
-            "type": "boolean",
-            "default": true
-          },
-          {
-            "name": "targetsGrade",
-            "in": "query",
-            "description": "Defines complexity of LLM prompts to provide high accuracy translation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "targetsTone",
-            "in": "query",
-            "description": "Desired tone of target translation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "targetsGender",
-            "in": "query",
-            "description": "Desired gender of target translation.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "targetsAdaptiveDatasetIds",
-            "in": "query",
-            "description": "Reference dataset ID having sentence pair to generate adaptive customized translation",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv"
-          },
-          {
             "name": "api-version",
             "in": "query",
             "description": "Mandatory API version parameter",
@@ -331,10 +169,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Defines the content of the request",
+            "description": "Details of the translate request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TranslateBodyParameters"
+              "$ref": "#/definitions/TranslateBodyDetails"
             }
           }
         ],
@@ -752,9 +590,156 @@
         ]
       }
     },
+    "TranslateBodyDetails": {
+      "type": "object",
+      "description": "Request body parameters for the translate API.",
+      "properties": {
+        "text": {
+          "$ref": "#/definitions/InputTextItem",
+          "description": "Specifies the text string to be translated in the translate API."
+        },
+        "targetsLanguage": {
+          "type": "array",
+          "description": "Specifies the language of the output text. The target language must be one of the supported languages included \nin the translation scope. It's possible to translate to multiple languages simultaneously by including \nmultiple string values in the targetsLanguage array.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targetsTextType": {
+          "type": "string",
+          "description": "Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, \ncomplete element. Possible values are: plain (default) or html.",
+          "default": "Plain",
+          "enum": [
+            "Plain",
+            "Html"
+          ],
+          "x-ms-enum": {
+            "name": "TextType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Plain",
+                "value": "Plain",
+                "description": "Plain text."
+              },
+              {
+                "name": "Html",
+                "value": "Html",
+                "description": "HTML-encoded text."
+              }
+            ]
+          }
+        },
+        "targetsProfanityAction": {
+          "type": "string",
+          "description": "Specifies how profanities should be treated in translations.\nPossible values are: NoAction (default), Marked or Deleted.",
+          "default": "NoAction",
+          "enum": [
+            "NoAction",
+            "Marked",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "ProfanityAction",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "NoAction",
+                "value": "NoAction",
+                "description": "No Action is taken on profanity"
+              },
+              {
+                "name": "Marked",
+                "value": "Marked",
+                "description": "Profanity is marked."
+              },
+              {
+                "name": "Deleted",
+                "value": "Deleted",
+                "description": "Profanity is deleted from the translated text."
+              }
+            ]
+          }
+        },
+        "targetsProfanityMarker": {
+          "type": "string",
+          "description": "Specifies how profanities should be marked in translations.\nPossible values are: Asterisk (default) or Tag. ",
+          "default": "Asterisk",
+          "enum": [
+            "Asterisk",
+            "Tag"
+          ],
+          "x-ms-enum": {
+            "name": "ProfanityMarker",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Asterisk",
+                "value": "Asterisk",
+                "description": "Profanity is marked with asterisk."
+              },
+              {
+                "name": "Tag",
+                "value": "Tag",
+                "description": "Profanity is marked with the tags."
+              }
+            ]
+          }
+        },
+        "script": {
+          "type": "string",
+          "description": "Specifies the script of the input text."
+        },
+        "targetsScript": {
+          "type": "string",
+          "description": "Specifies the script of the translated text."
+        },
+        "targetsdeploymentNameModel": {
+          "type": "string",
+          "description": "Model that should be used for translation."
+        },
+        "targetsAllowFallback": {
+          "type": "boolean",
+          "description": "In the case where a custom system is being used, specifies that the service is allowed to fall back to a\ngeneral system when a custom system doesn't exist. \nIn the case where a Large Language Model is being used, specifies that the service is allowed to fall\nback to a Small Language Model if an error occurs.\nPossible values are: true (default) or false.\n\nallowFallback=false specifies that the translation should only use systems trained for the category specified \nby the request. If a translation for language X to language Y requires chaining through a pivot language E, \nthen all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. \nIf no system is found with the specific category, the request will return a 400 status code. allowFallback=true \nspecifies that the service is allowed to fall back to a general system when a custom system doesn't exist.",
+          "default": true
+        },
+        "targetsGrade": {
+          "type": "string",
+          "description": "Defines complexity of LLM prompts to provide high accuracy translation."
+        },
+        "targetsTone": {
+          "type": "string",
+          "description": "Desired tone of target translation."
+        },
+        "targetsGender": {
+          "type": "string",
+          "description": "Desired gender of target translation."
+        },
+        "targetsAdaptiveDatasetIds": {
+          "type": "array",
+          "description": "Reference dataset ID having sentence pair to generate adaptive customized translation",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "targetsLanguage"
+      ]
+    },
     "TranslateBodyParameters": {
       "type": "object",
-      "description": "Request body parameters for the translate API."
+      "description": "Request body parameters for the translate API.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/TranslateBodyDetails",
+          "description": "Details of the translate request"
+        }
+      },
+      "required": [
+        "body"
+      ]
     },
     "TranslatedTextItem": {
       "type": "object",
