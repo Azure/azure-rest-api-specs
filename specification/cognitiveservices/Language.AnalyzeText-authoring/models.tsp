@@ -723,7 +723,7 @@ model TextAnalysisAuthoringDeploymentResource {
    * Represents the AOAI resource assigned for data generation.
    */
   @added(Versions.v2025_05_15_preview)
-  assignedAoaiResource: TextAnalysisAuthoringDataGenerationConnectionInfo;
+  assignedAoaiResource?: TextAnalysisAuthoringDataGenerationConnectionInfo;
 }
 
 /**
