@@ -15,4 +15,4 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(LiftrBase.UserDetails, "QumuloUserDetails", "csharp");
-@@clientName(LiftrBase.ProvisioningState, "QumuloFileSystemResource", "csharp");
+@@clientName(LiftrBase.ProvisioningState, "QumuloProvisioningState", "csharp");
