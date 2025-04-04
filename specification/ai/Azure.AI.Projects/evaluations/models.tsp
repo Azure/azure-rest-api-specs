@@ -78,7 +78,4 @@ model Evaluation {
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
 
-  @doc("Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{projectName}/evaluationresults/{name}/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{projectName}/datasets/{dataset-name}/{dataset-version}' }")
-  @visibility(Lifecycle.Read)
-  outputs: Record<string>;
 }
