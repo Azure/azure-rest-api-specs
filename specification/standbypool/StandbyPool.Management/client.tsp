@@ -74,11 +74,5 @@ using Microsoft.StandbyPool;
   "StandbyVirtualMachineInstanceCountsByState",
   "csharp"
 );
-@@clientName(PoolStatus,
-  "StandbyPoolStatus",
-  "csharp"
-);
-@@clientName(HealthStateCode,
-  "StandbyPoolHealthStateCode",
-  "csharp"
-);
+@@clientName(PoolStatus, "StandbyPoolStatus", "csharp");
+@@clientName(HealthStateCode, "StandbyPoolHealthStateCode", "csharp");
