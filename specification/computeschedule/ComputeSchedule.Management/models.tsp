@@ -138,28 +138,35 @@ model Resources {
 model VirtualMachineExtensionData {
   @doc("name of VM extension")
   name: string;
+
   @doc("location of VM extension")
   location?: string;
-  @doc("properties for VM extension e.g. publisher, version etc, value can dynamic int32,string, bool etc.")
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "this is created as record because we don't want copy VMextensionProperties type here and update this everytime there a new property added in underlying type in compute"
+  @doc("properties for VM extension e.g. publisher, version etc, value can dynamic int32,string, bool etc.")
   properties: Record<unknown>; //map with key as string and value type can be dynamic (string, int32)
-  @doc("Resource tags for creates/updates")
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags are simple key/value pair where key and value is of type string"
+  @doc("Resource tags for creates/updates")
   tags?: Record<string>;
 }
 
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
-    @doc("baseProfile, Resource properties that common across all resources ")
-    baseProfile?: string;
-    @doc("resourceOverrides, properties per resource that needs to be overwritted from baseProfile")
-    resourceOverrides?: Array<string>;
-    @doc("vmExtensions, array of Virtual machine extensions to be added to all the VMs created in this request")
-    vmExtensions?: Array<VirtualMachineExtensionData>;
-    @doc("Number of resources to be created")
-    resourceCount: int32;
-    @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
-    resourcePrefix?: string;
+  @doc("baseProfile, Resource properties that common across all resources ")
+  baseProfile?: string;
+
+  @doc("resourceOverrides, properties per resource that needs to be overwritted from baseProfile")
+  resourceOverrides?: Array<string>;
+
+  @doc("vmExtensions, array of Virtual machine extensions to be added to all the VMs created in this request")
+  vmExtensions?: Array<VirtualMachineExtensionData>;
+
+  @doc("Number of resources to be created")
+  resourceCount: int32;
+
+  @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
+  resourcePrefix?: string;
 }
 
 @doc("The retry policy for the user request")
@@ -435,19 +442,18 @@ model ExecuteStartRequest {
   correlationid: string;
 }
 
-
 @doc("The ExecuteCreateRequest request for create operations")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model ExecuteCreateRequest {
-    @doc("resource creation payload")
-    resourceConfigParameters: ResourceProvisionPayload;
-    
-    @doc("The execution parameters for the request")
-    executionParameters?: ExecutionParameters;
+  @doc("resource creation payload")
+  resourceConfigParameters: ResourceProvisionPayload;
 
-    @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-    @doc("CorrelationId item")
-    correlationid?: string;
+  @doc("The execution parameters for the request")
+  executionParameters?: ExecutionParameters;
+
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @doc("CorrelationId item")
+  correlationid?: string;
 }
 
 @doc("The response from a create request")
@@ -489,15 +495,15 @@ model DeleteResourceOperationResponse {
 @doc("The ExecuteDeleteRequest request for delete operations")
 @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 model ExecuteDeleteRequest {
-    @doc("The execution parameters for the request")
-    executionParameters: ExecutionParameters;
-  
-    @doc("The resources for the request")
-    resources: Resources;     
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
 
-    @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-    @doc("CorrelationId item")
-    correlationid?: string;
+  @doc("The resources for the request")
+  resources: Resources;
+
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @doc("CorrelationId item")
+  correlationid?: string;
 }
 
 // ----------- GetOperationStatus ---------

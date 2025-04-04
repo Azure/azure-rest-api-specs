@@ -72,25 +72,25 @@ interface ScheduledActions {
     @body @doc("The request body") requestBody: ExecuteStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | ErrorResponse;
 
-    /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-    @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-    @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteCreate")
-    @post
-    virtualMachinesExecuteCreate(
-      ...Params,
-      @body @doc("The request body") requestBody: ExecuteCreateRequest,
-    ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
+  /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteCreate")
+  @post
+  virtualMachinesExecuteCreate(
+    ...Params,
+    @body @doc("The request body") requestBody: ExecuteCreateRequest,
+  ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
 
-    /** VirtualMachinesExecuteCreate: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-    @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-    @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDelete")
-    @post
-    virtualMachinesExecuteDelete(
-      ...Params,
-      @body @doc("The request body") requestBody: ExecuteDeleteRequest,
-    ): ArmResponse<DeleteResourceOperationResponse> | ErrorResponse;
+  /** VirtualMachinesExecuteCreate: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDelete")
+  @post
+  virtualMachinesExecuteDelete(
+    ...Params,
+    @body @doc("The request body") requestBody: ExecuteDeleteRequest,
+  ): ArmResponse<DeleteResourceOperationResponse> | ErrorResponse;
 
   /** VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
