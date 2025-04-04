@@ -107,5 +107,5 @@ interface PilotProxyResources {
   get is ArmResourceRead<PilotProxyResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PilotProxyResource>;
   delete is ArmResourceDeleteWithoutOkAsync<PilotProxyResource>;
-  listByCloudAccount is ArmResourceListByParent<PilotProxyResource>;
+  listByOrganization is ArmResourceListByParent<PilotProxyResource>;
 }
