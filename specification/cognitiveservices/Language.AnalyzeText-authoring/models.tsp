@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Language.Text.Authoring;
 
@@ -225,6 +224,12 @@ model TextAnalysisAuthoringProjectMetadata {
    * The project kind.
    */
   projectKind: ProjectKind;
+
+  /**
+   * The project storage account resource ID.
+   */
+  @added(Versions.v2025_05_15_preview)
+  storageAccountResourceId: string;
 
   /**
    * The storage container name.
@@ -713,6 +718,12 @@ model TextAnalysisAuthoringDeploymentResource {
    * Represents the resource region.
    */
   region: string;
+
+  /**
+   * Represents the AOAI resource assigned for data generation.
+   */
+  @added(Versions.v2025_05_15_preview)
+  assignedAoaiResource?: TextAnalysisAuthoringDataGenerationConnectionInfo;
 }
 
 /**
@@ -729,7 +740,14 @@ model TextAnalysisAuthoringCreateDeploymentOptions {
    * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
   @added(Versions.v2023_04_15_preview)
+  @removed(Versions.v2025_05_15_preview)
   assignedResourceIds?: string[];
+  
+  /**
+   * Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
+   */
+  @added(Versions.v2025_05_15_preview)
+  assignedResources?: TextAnalysisAuthoringDeploymentResource[];
 }
 
 /**
