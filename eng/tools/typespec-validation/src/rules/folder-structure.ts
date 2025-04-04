@@ -111,7 +111,6 @@ export class FolderStructureRule implements Rule {
 
     const teamFolderResolved = path.resolve(gitRoot, teamFolder);
 
-    // Globby only accepts patterns like posix paths.
     const allTsps = await host.globby("**/*.tsp", { cwd: teamFolderResolved });
 
     for (const tsp of allTsps) {
