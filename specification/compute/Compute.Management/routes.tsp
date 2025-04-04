@@ -506,7 +506,7 @@ interface VirtualMachineImagesOperationGroup {
       @query("$orderby")
       $orderby?: string;
     },
-    Error = CloudError,
+    Error = CloudError
   >;
   /**
    * Gets a virtual machine image.

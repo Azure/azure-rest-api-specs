@@ -2350,7 +2350,7 @@ model VirtualMachineScaleSetStorageProfile {
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  diskControllerType?: DiskControllerTypes[];
+  diskControllerType?: DiskControllerTypes;
 }
 
 /**
@@ -3680,7 +3680,7 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  diskControllerType?: DiskControllerTypes[];
+  diskControllerType?: DiskControllerTypes;
 }
 
 /**
@@ -6884,8 +6884,20 @@ model VmImagesInEdgeZoneListResult {
 /**
  * The List Virtual Machine Images operation response.
  */
-model VirtualMachineImagesWithPropertiesListResult
-  is Azure.Core.Page<VirtualMachineImage>;
+@pagedResult
+model VirtualMachineImagesWithPropertiesListResult {
+  /**
+   * The VirtualMachineImage items on this page
+   */
+  @items
+  value?: VirtualMachineImage[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  nextLink?: ResourceLocation<VirtualMachineImage>;
+}
 
 /**
  * Describes the properties of a Virtual Machine Extension Image.

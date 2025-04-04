@@ -2552,6 +2552,7 @@ model LatestGalleryImageVersion {
  * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.customAzureResource
@@ -2579,6 +2580,7 @@ model ProxyResourceCommunity<
  * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Legacy.customAzureResource

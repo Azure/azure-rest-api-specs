@@ -31,7 +31,7 @@ model VirtualMachineScaleSetVMExtension
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
- 
+
   /**
    * Resource type
    */

@@ -25,7 +25,6 @@ model VirtualMachineScaleSetExtension
     NamePattern = ""
   >;
 
-  
   /**
    * Resource type
    */
