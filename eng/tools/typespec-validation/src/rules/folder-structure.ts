@@ -112,7 +112,7 @@ export class FolderStructureRule implements Rule {
     console.log(`allTsps: ${JSON.stringify(allTsps)}`);
 
     for (const tsp of allTsps) {
-      const pattern = /^\s*import\s+['"]([^'"]+)['"]\s+;/g;
+      const pattern = /^\s*import\s+['"]([^'"]+)['"]\s*;/g;
       const text = await host.readFile(path.join(teamFolder, tsp));
       const imports = [...text.matchAll(pattern)].map((m) => m[1]);
       console.log(tsp);
