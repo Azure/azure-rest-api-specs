@@ -99,10 +99,6 @@ model RedTeam {
   @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
   simulationOnly: boolean;
 
-  @doc("Read-only result outputs. Example: { 'redTeamResultId': 'azureai://accounts/{AccountName}/projects/{projectName}/evaluationresults/{name}/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{projectName}/datasets/{dataset-name}/{dataset-version}' }")
-  @visibility(Lifecycle.Read)
-  outputs: Record<string>;
-
   @doc("List of risk categories to generate attack objectives for.")
   riskCategories: RiskCategory[];
 
