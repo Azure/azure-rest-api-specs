@@ -24,6 +24,20 @@ model VirtualMachineScaleSetExtension
     SegmentName = "extensions",
     NamePattern = ""
   >;
+
+  
+  /**
+   * Resource type
+   */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "type")
+  vmType?: string;
+
+  /**
+   * Resource name
+   */
+  @encodedName("application/json", "name")
+  vmName?: string;
 }
 
 @armResourceOperations
