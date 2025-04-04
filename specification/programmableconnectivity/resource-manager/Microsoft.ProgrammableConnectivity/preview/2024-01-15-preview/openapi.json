@@ -340,7 +340,7 @@
           {
             "name": "gatewayName",
             "in": "path",
-            "description": "Azure Programmable Connectivity Gateway Name",
+            "description": "Azure Programmable Connectivity Gateway Name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
@@ -385,7 +385,7 @@
           {
             "name": "gatewayName",
             "in": "path",
-            "description": "Azure Programmable Connectivity Gateway Name",
+            "description": "Azure Programmable Connectivity Gateway Name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
@@ -460,7 +460,7 @@
           {
             "name": "gatewayName",
             "in": "path",
-            "description": "Azure Programmable Connectivity Gateway Name",
+            "description": "Azure Programmable Connectivity Gateway Name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
@@ -514,7 +514,7 @@
           {
             "name": "gatewayName",
             "in": "path",
-            "description": "Azure Programmable Connectivity Gateway Name",
+            "description": "Azure Programmable Connectivity Gateway Name.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
@@ -884,7 +884,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the application. Example: Contoso App."
+          "description": "Name of the application."
         },
         "applicationDescription": {
           "type": "string",
@@ -914,12 +914,11 @@
     },
     "Gateway": {
       "type": "object",
-      "description": "A Programmable Connectivity Gateway resource",
+      "description": "A Programmable Connectivity Gateway resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GatewayProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -951,11 +950,11 @@
     },
     "GatewayProperties": {
       "type": "object",
-      "description": "Gateway resource properties",
+      "description": "Gateway resource properties.",
       "properties": {
         "operatorApiConnections": {
           "type": "array",
-          "description": "List of Operator API Connections selected by the user",
+          "description": "List of Operator API Connections selected by the user.",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -972,7 +971,7 @@
         },
         "gatewayBaseUrl": {
           "type": "string",
-          "description": "Base URL of the Gateway resource. This is the URL that the users would use to make Open API Gateway requests to the Operators via Azure.",
+          "description": "Base URL of the Gateway resource. This is the URL that the users would use to make Network API requests to the Operators via Azure.",
           "readOnly": true
         },
         "provisioningState": {
@@ -1027,8 +1026,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OperatorApiConnectionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -1180,8 +1178,7 @@
         },
         "properties": {
           "$ref": "#/definitions/OperatorApiConnectionUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -1251,8 +1248,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OperatorApiPlanProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
