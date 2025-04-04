@@ -1,4 +1,5 @@
 - tool: Swagger Avocado
   paths:
-    - Microsoft.DevCenter/preview/2023-10-01-preview/*.json
+    - Microsoft.DevCenter/preview/2023-10-01-preview/**/*.json
+    - Microsoft.DevCenter/preview/2024-10-01-preview/**/*.json
   reason: Older Preview APIs that are still in use by some customers but preview resources have been deprecated. Swagger Avocado has been failing recently with MISSING_APIS_IN_DEFAULT_TAG for these and we want to permanently suppress them.
