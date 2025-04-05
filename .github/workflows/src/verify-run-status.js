@@ -68,9 +68,10 @@ export async function getCheckRunStatus(github, context, core, checkRunName, hea
   }
 
   if (checkRuns.length > 1) {
-    core.setFailed(`Multiple completed check runs with name: ${checkRunName}`);
+    const message = `Multiple completed check runs with name: ${checkRunName}`;
+    core.setFailed(message);
     core.debug(`Check runs: ${JSON.stringify(checkRuns)}`);
-    throw new Error(`Multiple completed check runs with name: ${checkRunName}`);
+    throw new Error(message);
   }
 
   return checkRuns[0];
@@ -108,8 +109,10 @@ export async function getWorkflowRun(github, context, core, workflowName, head_s
   }
 
   if (matchingWorkflowRuns.length > 1) {
-    core.setFailed(`Multiple completed workflow runs with name: ${workflowName}`);
-    throw new Error(`Multiple completed workflow runs with name: ${workflowName}`);
+    const message = `Multiple completed workflow runs with name: ${workflowName}`;
+    core.debug(`Workflow runs: ${JSON.stringify(matchingWorkflowRuns)}`);
+    core.setFailed(message);
+    throw new Error(message);
   }
 
   return matchingWorkflowRuns[0];
