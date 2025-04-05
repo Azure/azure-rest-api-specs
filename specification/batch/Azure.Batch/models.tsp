@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
+using Azure.Core.Foundations;
 
 namespace Azure.Batch;
 
@@ -74,7 +75,7 @@ union BatchJobScheduleState {
 }
 
 @doc("The action the Batch service should take when all Tasks in the Job are in the completed state.")
-union OnAllBatchTasksComplete {
+union BatchAllTasksCompleteMode {
   string,
 
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
@@ -84,8 +85,8 @@ union OnAllBatchTasksComplete {
   TerminateJob: "terminatejob",
 }
 
-@doc("OnTaskFailure enums")
-union OnBatchTaskFailure {
+@doc("TaskFailure enums")
+union BatchTaskFailureMode {
   string,
 
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
@@ -387,8 +388,8 @@ union BatchJobState {
   Deleting: "deleting",
 }
 
-@doc("ErrorCategory enums")
-union ErrorCategory {
+@doc("BatchErrorSourceCategory enums")
+union BatchErrorSourceCategory {
   string,
 
   @doc("The error is due to a user issue, such as misconfiguration.")
@@ -516,7 +517,7 @@ union BatchNodeDeallocateOption {
 }
 
 @doc("BatchJobAction enums")
-union BatchJobAction {
+union BatchJobActionKind {
   string,
 
   @doc("Take no action.")
@@ -674,8 +675,8 @@ union BatchStartTaskState {
   Completed: "completed",
 }
 
-@doc("BatchNodeRebootOption enums")
-union BatchNodeRebootOption {
+@doc("BatchNodeRebootKind enums")
+union BatchNodeRebootKind {
   string,
 
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Restart the Compute Node as soon as Tasks have been terminated.")
@@ -869,7 +870,7 @@ model BatchSupportedImage {
   nodeAgentSKUId: string;
 
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
-  imageReference: ImageReference;
+  imageReference: BatchImageReference;
 
   @doc("The type of operating system (e.g. Windows or Linux) of the Image.")
   osType: OSType;
@@ -889,7 +890,7 @@ model BatchSupportedImage {
   To get the list of all Azure Marketplace Image references verified by Azure Batch, see the
   ' List Supported Images ' operation.
   """)
-model ImageReference {
+model BatchImageReference {
   @doc("The publisher of the Azure Virtual Machines Marketplace Image. For example, Canonical or MicrosoftWindowsServer.")
   publisher?: string;
 
@@ -903,7 +904,7 @@ model ImageReference {
   version?: string;
 
   @doc("The ARM resource identifier of the Azure Compute Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{VersionId} or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName} for always defaulting to the latest image version. This property is mutually exclusive with other ImageReference properties. The Azure Compute Gallery Image must have replicas in the same region and must be in the same subscription as the Azure Batch account. If the image version is not specified in the imageId, the latest version will be used. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://learn.microsoft.com/azure/batch/nodes-and-pools#virtual-network-vnet-and-firewall-configuration.")
-  virtualMachineImageId?: string;
+  virtualMachineImageId?: Azure.Core.armResourceIdentifier;
 
   @doc("The specific version of the platform image or marketplace image used to create the node. This read-only field differs from 'version' only if the value specified for 'version' when the pool was created was 'latest'.")
   @visibility(Lifecycle.Read)
@@ -1010,9 +1011,11 @@ model BatchPoolStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("Statistics related to Pool usage, such as the amount of core-time used.")
+  @clientName("usageStatistics")
   usageStats?: BatchPoolUsageStatistics;
 
   @doc("Statistics related to resource consumption by Compute Nodes in the Pool.")
+  @clientName("resourceStatistics")
   resourceStats?: BatchPoolResourceStatistics;
 }
 
@@ -1332,10 +1335,11 @@ model BatchJobSchedule {
   executionInfo?: BatchJobScheduleExecutionInfo;
 
   @doc("A list of name-value pairs associated with the schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 
   @doc("The lifetime resource usage statistics for the Job Schedule. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.")
   @visibility(Lifecycle.Read)
+  @clientName("jobScheduleStatistics")
   stats?: BatchJobScheduleStatistics;
 }
 
@@ -1351,7 +1355,7 @@ model BatchJobScheduleUpdateOptions {
   jobSpecification?: BatchJobSpecification;
 
   @doc("A list of name-value pairs associated with the Job Schedule as metadata. If you do not specify this element, existing metadata is left unchanged.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 }
 
 @doc("""
@@ -1372,7 +1376,7 @@ model BatchJobScheduleCreateOptions {
   jobSpecification: BatchJobSpecification;
 
   @doc("A list of name-value pairs associated with the schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 }
 
 @doc("""
@@ -1432,10 +1436,12 @@ model BatchJobSpecification {
   usesTaskDependencies?: boolean;
 
   @doc("The action the Batch service should take when all Tasks in a Job created under this schedule are in the completed state. Note that if a Job contains no Tasks, then all Tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic Job termination without a Job Manager, you should initially set onAllTasksComplete to noaction and update the Job properties to set onAllTasksComplete to terminatejob once you have finished adding Tasks. The default is noaction.")
-  onAllTasksComplete?: OnAllBatchTasksComplete;
+  @clientName("allTasksCompleteMode")
+  onAllTasksComplete?: BatchAllTasksCompleteMode;
 
   @doc("The action the Batch service should take when any Task fails in a Job created under this schedule. A Task is considered to have failed if it have failed if has a failureInfo. A failureInfo is set if the Task completes with a non-zero exit code after exhausting its retry count, or if there was an error starting the Task, for example due to a resource file download error. The default is noaction.")
-  onTaskFailure?: OnBatchTaskFailure;
+  @clientName("taskFailureMode")
+  onTaskFailure?: BatchTaskFailureMode;
 
   @doc("The network configuration for the Job.")
   networkConfiguration?: BatchJobNetworkConfiguration;
@@ -1459,7 +1465,7 @@ model BatchJobSpecification {
   poolInfo: BatchPoolInfo;
 
   @doc("A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 }
 
 @doc("The network configuration for the Job.")
@@ -1600,7 +1606,8 @@ model ContainerRegistryReference {
   password?: string;
 
   @doc("The registry URL. If omitted, the default is \"docker.io\".")
-  registryServer?: string;
+  @clientName("registryServerUri", "csharp")
+  registryServer?: url;
 
   @doc("The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.")
   identityReference?: BatchNodeIdentityReference;
@@ -1612,7 +1619,7 @@ model ContainerRegistryReference {
   """)
 model BatchNodeIdentityReference {
   @doc("The ARM resource id of the user assigned identity.")
-  resourceId?: string;
+  resourceId?: Azure.Core.armResourceIdentifier;
 }
 
 @doc("A single file or multiple files to be downloaded to a Compute Node.")
@@ -1952,7 +1959,7 @@ model BatchPoolSpecification {
   userAccounts?: UserAccount[];
 
   @doc("A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 
   @doc("A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
   mountConfiguration?: MountConfiguration[];
@@ -1971,7 +1978,7 @@ model BatchPoolSpecification {
   """)
 model VirtualMachineConfiguration {
   @doc("A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use.")
-  imageReference: ImageReference;
+  imageReference: BatchImageReference;
 
   @doc("The SKU of the Batch Compute Node agent to be provisioned on Compute Nodes in the Pool. The Batch Compute Node agent is a program that runs on each Compute Node in the Pool, and provides the command-and-control interface between the Compute Node and the Batch service. There are different implementations of the Compute Node agent, known as SKUs, for different operating systems. You must specify a Compute Node agent SKU which matches the selected Image reference. To get the list of supported Compute Node agent SKUs along with their list of verified Image references, see the 'List supported Compute Node agent SKUs' operation.")
   @clientName("nodeAgentSkuId")
@@ -1997,7 +2004,7 @@ model VirtualMachineConfiguration {
   licenseType?: string;
 
   @doc("The container configuration for the Pool. If specified, setup is performed on each Compute Node in the Pool to allow Tasks to run in containers. All regular Tasks and Job manager Tasks run on this Pool must specify the containerSettings property, and all other Tasks may specify it.")
-  containerConfiguration?: ContainerConfiguration;
+  containerConfiguration?: BatchContainerConfiguration;
 
   @doc("The disk encryption configuration for the pool. If specified, encryption is performed on each node in the pool during node provisioning.")
   diskEncryptionConfiguration?: DiskEncryptionConfiguration;
@@ -2048,7 +2055,7 @@ model DataDisk {
 }
 
 @doc("The configuration for container-enabled Pools.")
-model ContainerConfiguration {
+model BatchContainerConfiguration {
   @doc("The container technology to be used.")
   type: ContainerType;
 
@@ -2221,7 +2228,7 @@ model PublicIpAddressConfiguration {
   provision?: IpAddressProvisioningType;
 
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
-  ipAddressIds?: string[];
+  ipAddressIds?: ipV4Address[];
 }
 
 @doc("""
@@ -2334,7 +2341,7 @@ model ManagedDisk {
   The Batch service does not assign any meaning to this metadata; it is solely
   for the use of user code.
   """)
-model MetadataItem {
+model BatchMetadataItem {
   @doc("The name of the metadata item.")
   name: string;
 
@@ -2613,18 +2620,20 @@ model BatchJob {
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. The default is noaction.")
-  onAllTasksComplete?: OnAllBatchTasksComplete;
+  @clientName("allTasksCompleteMode")
+  onAllTasksComplete?: BatchAllTasksCompleteMode;
 
   @doc("The action the Batch service should take when any Task in the Job fails. A Task is considered to have failed if has a failureInfo. A failureInfo is set if the Task completes with a non-zero exit code after exhausting its retry count, or if there was an error starting the Task, for example due to a resource file download error. The default is noaction.")
   @visibility(Lifecycle.Read)
-  onTaskFailure?: OnBatchTaskFailure;
+  @clientName("taskFailureMode")
+  onTaskFailure?: BatchTaskFailureMode;
 
   @doc("The network configuration for the Job.")
   @visibility(Lifecycle.Read)
   networkConfiguration?: BatchJobNetworkConfiguration;
 
   @doc("A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 
   @doc("The execution information for the Job.")
   @visibility(Lifecycle.Read)
@@ -2632,6 +2641,7 @@ model BatchJob {
 
   @doc("Resource usage statistics for the entire lifetime of the Job. This property is populated only if the BatchJob was retrieved with an expand clause including the 'stats' attribute; otherwise it is null. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.")
   @visibility(Lifecycle.Read)
+  @clientName("jobStatistics")
   stats?: BatchJobStatistics;
 }
 
@@ -2675,16 +2685,18 @@ model BatchJobCreateOptions {
   poolInfo: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. Note that if a Job contains no Tasks, then all Tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic Job termination without a Job Manager, you should initially set onAllTasksComplete to noaction and update the Job properties to set onAllTasksComplete to terminatejob once you have finished adding Tasks. The default is noaction.")
-  onAllTasksComplete?: OnAllBatchTasksComplete;
+  @clientName("allTasksCompleteMode")
+  onAllTasksComplete?: BatchAllTasksCompleteMode;
 
   @doc("The action the Batch service should take when any Task in the Job fails. A Task is considered to have failed if has a failureInfo. A failureInfo is set if the Task completes with a non-zero exit code after exhausting its retry count, or if there was an error starting the Task, for example due to a resource file download error. The default is noaction.")
-  onTaskFailure?: OnBatchTaskFailure;
+  @clientName("taskFailureMode")
+  onTaskFailure?: BatchTaskFailureMode;
 
   @doc("The network configuration for the Job.")
   networkConfiguration?: BatchJobNetworkConfiguration;
 
   @doc("A list of name-value pairs associated with the Job as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 }
 
 @doc("Parameters for updating an Azure Batch Job.")
@@ -2706,10 +2718,11 @@ model BatchJobUpdateOptions {
   poolInfo?: BatchPoolInfo;
 
   @doc("The action the Batch service should take when all Tasks in the Job are in the completed state. If omitted, the completion behavior is left unchanged. You may not change the value from terminatejob to noaction - that is, once you have engaged automatic Job termination, you cannot turn it off again. If you try to do this, the request fails with an 'invalid property value' error response; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
-  onAllTasksComplete?: OnAllBatchTasksComplete;
+  @clientName("allTasksCompleteMode")
+  onAllTasksComplete?: BatchAllTasksCompleteMode;
 
   @doc("A list of name-value pairs associated with the Job as metadata. If omitted, the existing Job metadata is left unchanged.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 
   @doc("The network configuration for the Job.")
   networkConfiguration?: BatchJobNetworkConfiguration;
@@ -2737,7 +2750,7 @@ model BatchJobExecutionInfo {
 @doc("An error encountered by the Batch service when scheduling a Job.")
 model BatchJobSchedulingError {
   @doc("The category of the Job scheduling error.")
-  category: ErrorCategory;
+  category: BatchErrorSourceCategory;
 
   @doc("An identifier for the Job scheduling error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
@@ -2867,7 +2880,7 @@ model BatchTaskContainerExecutionInfo {
 @doc("Information about a Task failure.")
 model BatchTaskFailureInfo {
   @doc("The category of the Task error.")
-  category: ErrorCategory;
+  category: BatchErrorSourceCategory;
 
   @doc("An identifier for the Task error. Codes are invariant and are intended to be consumed programmatically.")
   code?: string;
@@ -3091,10 +3104,11 @@ model BatchPool {
 
   @doc("A list of name-value pairs associated with the Pool as metadata.")
   @visibility(Lifecycle.Read)
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 
   @doc("Utilization and resource usage statistics for the entire lifetime of the Pool. This property is populated only if the BatchPool was retrieved with an expand clause including the 'stats' attribute; otherwise it is null. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes.")
   @visibility(Lifecycle.Read)
+  @clientName("poolStatistics")
   stats?: BatchPoolStatistics;
 
   @doc("A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.")
@@ -3182,7 +3196,7 @@ model BatchPoolCreateOptions {
   userAccounts?: UserAccount[];
 
   @doc("A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 
   @doc("Mount storage using specified file system for the entire lifetime of the pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based file system.")
   mountConfiguration?: MountConfiguration[];
@@ -3214,7 +3228,7 @@ model BatchPoolReplaceOptions {
   applicationPackageReferences: BatchApplicationPackageReference[];
 
   @doc("A list of name-value pairs associated with the Pool as metadata. This list replaces any existing metadata configured on the Pool. If omitted, or if you specify an empty collection, any existing metadata is removed from the Pool.")
-  metadata: MetadataItem[];
+  metadata: BatchMetadataItem[];
 
   @doc("The desired node communication mode for the pool. This setting replaces any existing targetNodeCommunication setting on the Pool. If omitted, the existing setting is default.")
   targetNodeCommunicationMode?: BatchNodeCommunicationMode;
@@ -3249,7 +3263,7 @@ model BatchPoolUpdateOptions {
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
   @doc("A list of name-value pairs associated with the Pool as metadata. If this element is present, it replaces any existing metadata configured on the Pool. If you specify an empty collection, any metadata is removed from the Pool. If omitted, any existing metadata is left unchanged.")
-  metadata?: MetadataItem[];
+  metadata?: BatchMetadataItem[];
 
   @doc("The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
@@ -3321,13 +3335,13 @@ model BatchPoolIdentity {
   type: BatchPoolIdentityType;
 
   @doc("The list of user identities associated with the Batch account. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.")
-  userAssignedIdentities?: UserAssignedIdentity[];
+  userAssignedIdentities?: BatchUserAssignedIdentity[];
 }
 
 @doc("The user assigned Identity")
-model UserAssignedIdentity {
+model BatchUserAssignedIdentity {
   @doc("The ARM resource id of the user assigned identity.")
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier;
 
   @doc("The client id of the user assigned identity.")
   @visibility(Lifecycle.Read)
@@ -3388,6 +3402,7 @@ model BatchPoolResizeOptions {
 @clientName("BatchNodeRemoveContent", "java")
 model BatchNodeRemoveOptions {
   @doc("A list containing the IDs of the Compute Nodes to be removed from the specified Pool. A maximum of 100 nodes may be removed per request.")
+  @clientName("nodeIds")
   nodeList: string[];
 
   @doc("The timeout for removal of Compute Nodes to the Pool. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
@@ -3510,6 +3525,7 @@ model BatchTask {
 
   @doc("Resource usage statistics for the Task.")
   @visibility(Lifecycle.Read)
+  @clientName("taskStatistics")
   stats?: BatchTaskStatistics;
 
   @doc("The Tasks that this Task depends on. This Task will not be scheduled until all Tasks that it depends on have completed successfully. If any of those Tasks fail and exhaust their retry counts, this Task will never be scheduled.")
@@ -3612,7 +3628,7 @@ model ExitCodeMapping {
 @doc("Specifies how the Batch service responds to a particular exit condition.")
 model ExitOptions {
   @doc("An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'. The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
-  jobAction?: BatchJobAction;
+  jobAction?: BatchJobActionKind;
 
   @doc("An action that the Batch service performs on Tasks that depend on this Task. Possible values are 'satisfy' (allowing dependent tasks to progress) and 'block' (dependent tasks continue to wait). Batch does not yet support cancellation of dependent tasks.")
   dependencyAction?: DependencyAction;
@@ -3810,12 +3826,14 @@ model BatchTaskListResult {
 @doc("A collection of Azure Batch Tasks to add.")
 model BatchTaskGroup {
   @doc("The collection of Tasks to add. The maximum count of Tasks is 100. The total serialized size of this collection must be less than 1MB. If it is greater than 1MB (for example if each Task has 100's of resource files or environment variables), the request will fail with code 'RequestBodyTooLarge' and should be retried again with fewer Tasks.")
+  @clientName("values")
   value: BatchTaskCreateOptions[];
 }
 
 @doc("The result of creating a collection of Tasks to a Job.")
 model BatchCreateTaskCollectionResult {
   @doc("The results of the create Task collection operation.")
+  @clientName("values")
   value?: BatchTaskCreateResult[];
 }
 
@@ -4006,7 +4024,7 @@ model BatchNode {
   allocationTime?: utcDateTime;
 
   @doc("The IP address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes.")
-  ipAddress?: string;
+  ipAddress?: ipV4Address;
 
   @doc("An identifier which can be passed when adding a Task to request that the Task be scheduled on this Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   affinityId?: string;
@@ -4140,7 +4158,7 @@ model InboundEndpoint {
 
   @doc("The public IP address of the Compute Node.")
   @clientName("publicIpAddress")
-  publicIPAddress: string;
+  publicIPAddress: ipV4Address;
 
   @doc("The public fully qualified domain name for the Compute Node.")
   publicFQDN: string;
@@ -4167,7 +4185,7 @@ model BatchNodeAgentInfo {
 @doc("Info about the current state of the virtual machine.")
 model VirtualMachineInfo {
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
-  imageReference?: ImageReference;
+  imageReference?: BatchImageReference;
 
   @doc("The resource ID of the Compute Node's current Virtual Machine Scale Set VM. Only defined if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.")
   scaleSetVmResourceId?: string;
@@ -4175,9 +4193,10 @@ model VirtualMachineInfo {
 
 @doc("Parameters for rebooting an Azure Batch Compute Node.")
 @clientName("BatchNodeRebootContent", "java")
-model BatchNodeRebootOptions {
+model BatchNodeRebootKinds {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
-  nodeRebootOption?: BatchNodeRebootOption;
+  @clientName("nodeRebootKind")
+  nodeRebootOption?: BatchNodeRebootKind;
 }
 
 @doc("Parameters for reimaging an Azure Batch Compute Node.")
@@ -4199,7 +4218,7 @@ model BatchNodeDisableSchedulingOptions {
 model BatchNodeRemoteLoginSettings {
   @doc("The IP address used for remote login to the Compute Node.")
   @clientName("remoteLoginIpAddress")
-  remoteLoginIPAddress: string;
+  remoteLoginIPAddress: ipV4Address;
 
   @doc("The port used for remote login to the Compute Node.")
   remoteLoginPort: int32;
