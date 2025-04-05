@@ -7,36 +7,38 @@ import { extractInputs } from "./context.js";
  * @param {string} checkRunName 
  * @param {string} workflowName
  */
-export default async function({github, context, core}, checkRunName, workflowName) {
-  const inputs = await extractInputs(github, context, core);
+export async function verifyRunStatus({github, context, core}, checkRunName, workflowName) {
+  const { head_sha } = await extractInputs(github, context, core);
 
   const checkRun = context.eventName == "check_run"
     ? context.payload.check_run
-    : await getCheckRunStatus(github, context, core, checkRunName, inputs.head_sha);
-  const workflow = context.eventName == "workflow_run" 
+    : await getCheckRunStatus(github, context, core, checkRunName, head_sha);
+  const workflowRun = context.eventName == "workflow_run" 
     ? context.payload.workflow_run 
-    : await getWorkflowRun(github, context, core, workflowName, inputs.head_sha);
+    : await getWorkflowRun(github, context, core, workflowName, head_sha);
 
   core.debug(`Check run: ${JSON.stringify(checkRun)}`);
-  core.debug(`Workflow run: ${JSON.stringify(workflow)}`);
+  core.debug(`Workflow run: ${JSON.stringify(workflowRun)}`);
 
-  if (!checkRun || checkRun.status !== "completed") { 
+  if (!checkRun) { 
     core.info(`No completed check run with name: ${checkRunName}`);
     return;
   }
 
-  if (!checkRun || workflow.status !== "completed") { 
+  if (!workflowRun) { 
     core.info(`No completed workflow run with name: ${workflowName}`);
     return;
   }
 
   core.info(`Check run conclusion: ${checkRun.conclusion}`);
-  core.info(`Workflow run conclusion: ${workflow.conclusion}`);
+  core.info(`Workflow run conclusion: ${workflowRun.conclusion}`);
 
-  if (checkRun.conclusion !== workflow.conclusion) {
-    core.setFailed(`Check run conclusion (${checkRun.conclusion}) does not match workflow run conclusion (${workflow.conclusion})`);
-    return false;
+  if (checkRun.conclusion !== workflowRun.conclusion) {
+    core.setFailed(`Check run conclusion (${checkRun.conclusion}) does not match workflow run conclusion (${workflowRun.conclusion})`);
+    return;
   }
+
+  core.info("Checks match");
 }
 
 /**
