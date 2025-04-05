@@ -14,31 +14,33 @@ alias KeyVaultOperation<
 /**
  * The key vault server error.
  */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
-#suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
-union Error {
+model Error {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The key vault server error.
+   */
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "innererror")
+  innerError?: Error;
+}
+
+/**
+ * A named union to make Error nullable while preserving the original name.
+ */
+union NullableError {
   null,
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
-  {
-    /**
-     * The error code.
-     */
-    @visibility(Lifecycle.Read)
-    code?: string,
-
-    /**
-     * The error message.
-     */
-    @visibility(Lifecycle.Read)
-    message?: string,
-
-    /**
-     * The key vault server error.
-     */
-    @visibility(Lifecycle.Read)
-    @encodedName("application/json", "innererror")
-    innerError?: Error,
-  },
+  Error,
 }
 
 /**
@@ -51,5 +53,5 @@ model KeyVaultError {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
   @visibility(Lifecycle.Read)
-  error?: Error;
+  error?: NullableError;
 }
