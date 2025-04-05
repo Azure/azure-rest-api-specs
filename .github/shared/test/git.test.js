@@ -20,9 +20,9 @@ describe("git", () => {
     });
 
     it("show", async () => {
-      await expect(show("HEAD", ".github/package.json")).resolves.toContain(
-        "scripts",
-      );
+      await expect(
+        show("HEAD", ".github/shared/package.json"),
+      ).resolves.toContain("scripts");
     });
   });
 
