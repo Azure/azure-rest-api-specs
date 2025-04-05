@@ -394,7 +394,8 @@ alias CommonParameters = {
   @clientName("timeOutInSeconds", "csharp")
   @clientName("timeOutInSeconds", "javascript")
   @clientName("timeout", "python")
-  timeOut?: int32 = 30;
+  @encode("seconds", int32)
+  timeOut?: duration;
 
   @doc("""
     The caller-generated request identity, in the form of a GUID with no decoration
@@ -414,6 +415,7 @@ alias CommonParameters = {
     """)
   @header("ocp-date")
   @encode(DateTimeKnownEncoding.rfc7231)
+  @clientName("ocpDate", "csharp")
   ocpdate?: utcDateTime;
 };
 
@@ -1229,7 +1231,7 @@ alias RebootNodeRequiredParameters = {
 alias RebootNodeOptionalParameters = {
   @doc("The options to use for rebooting the Compute Node.")
   @bodyRoot
-  parameters?: BatchNodeRebootOptions;
+  parameters?: BatchNodeRebootKinds;
 };
 
 alias DeallocateNodeRequiredParameters = {
