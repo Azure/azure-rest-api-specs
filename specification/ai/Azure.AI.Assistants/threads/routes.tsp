@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Assistants;
 
 /**
- * Creates a new thread. Threads contain messages and can be run by agents.
+ * Creates a new thread. Threads contain messages and can be run by assistants.
  *
  * @returns Information about the newly created thread.
  */
@@ -22,11 +22,11 @@ namespace Azure.AI.Assistants;
 op createThread is Azure.Core.Foundations.Operation<
   {
     /**
-     * The details used to create a new agent thread.
+     * The details used to create a new assistant thread.
      */
-    ...AgentThreadCreationOptions;
+    ...AssistantThreadCreationOptions;
   },
-  AgentThread
+  AssistantThread
 >;
 
 // list threads?
@@ -49,14 +49,14 @@ op getThread is Azure.Core.Foundations.Operation<
     @path
     threadId: string;
   },
-  AgentThread
+  AssistantThread
 >;
 
 /**
  * Modifies an existing thread.
  *
  * @param threadId The ID of the thread to modify.
- * @param updateAgentThreadOptions The details of the modification to perform on a specified thread.
+ * @param updateAssistantThreadOptions The details of the modification to perform on a specified thread.
  * @returns Information about the modified thread.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -67,11 +67,11 @@ op getThread is Azure.Core.Foundations.Operation<
 op updateThread is Azure.Core.Foundations.Operation<
   {
     /**
-     * The details used to update an existing agent thread.
+     * The details used to update an existing assistant thread.
      */
-    ...UpdateAgentThreadOptions;
+    ...UpdateAssistantThreadOptions;
   },
-  AgentThread
+  AssistantThread
 >;
 
 /**

@@ -3,18 +3,21 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Azure.AI.Assistants, "AIAssistantClient");
+@@clientName(Azure.AI.Assistants, "AssistantsClient");
 
 namespace Azure.AI.Assistants {
   // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
   // operation that exposes the underlying data directly.
-  @@clientName(AgentDeletionStatus, "InternalAgentDeletionStatus", "csharp");
-  @@access(deleteAgent, Access.internal, "csharp");
-  @@clientName(deleteAgent, "InternalDeleteAgent", "csharp");
+  @@clientName(AssistantDeletionStatus,
+    "InternalAssistantDeletionStatus",
+    "csharp"
+  );
+  @@access(deleteAssistant, Access.internal, "csharp");
+  @@clientName(deleteAssistant, "InternalDeleteAssistant", "csharp");
   @@access(deleteThread, Access.internal, "csharp");
   @@clientName(deleteThread, "InternalDeleteThread", "csharp");
-  @@access(listAgents, Access.internal, "csharp");
-  @@clientName(listAgents, "InternalGetAgents", "csharp");
+  @@access(listAssistants, Access.internal, "csharp");
+  @@clientName(listAssistants, "InternalGetAssistants", "csharp");
   @@access(listRunSteps, Access.internal, "csharp");
   @@clientName(listRunSteps, "InternalGetRunSteps", "csharp");
   @@access(listMessages, Access.internal, "csharp");
@@ -196,8 +199,8 @@ namespace Azure.AI.Assistants {
 
   // Stream events : made public to expose documentation and make class casting for strongly typed languages easier
 
-  @@usage(AgentStreamEvent, Usage.output);
-  @@access(AgentStreamEvent, Access.public);
+  @@usage(AssistantStreamEvent, Usage.output);
+  @@access(AssistantStreamEvent, Access.public);
 
   @@usage(ThreadStreamEvent, Usage.output);
   @@access(ThreadStreamEvent, Access.public);
@@ -258,24 +261,15 @@ namespace Azure.AI.Assistants {
   );
   @@clientName(CreateAndRunThreadOptions.tools, "OverrideTools", "csharp");
 
-  // Override until final decision made on assistants vs agents naming
-  @@clientName(ThreadMessage.assistantId, "agentId", "python");
-  @@clientName(GetAgentOptions.assistantId, "agentId", "python");
-  @@clientName(UpdateAgentOptions.assistantId, "agentId", "python");
-  @@clientName(DeleteAgentOptions.assistantId, "agentId", "python");
-  @@clientName(RunStep.assistantId, "agentId", "python");
-  @@clientName(ThreadRun.assistantId, "agentId", "python");
-  @@clientName(CreateRunOptions.assistantId, "agentId", "python");
-  @@clientName(CreateAndRunThreadOptions.assistantId, "agentId", "python");
   // From https://platform.openai.com/docs/agents/how-it-works
-  // "Note that deleting an AgentFile doesn’t delete the original File object, it simply deletes the association
-  // between that File and the Agent."
+  // "Note that deleting an AssistantFile doesn’t delete the original File object, it simply deletes the association
+  // between that File and the Assistant."
 
-  //@override(Azure.AI.Agents.createAgent, "java")
-  //op createAgentCustomization(createAgentOptions: CreateAgentOptions): Agent;
+  //@override(Azure.AI.Assistants.createAssistant, "java")
+  //op createAssistantCustomization(createAssistantOptions: CreateAssistantOptions): Assistant;
 
-  //@@clientName(updateAgent::parameters.body,
-  //  "updateAgentOptions",
+  //@@clientName(updateAssistant::parameters.body,
+  //  "updateAssistantOptions",
   //  "java"
   //);
   //@@clientName(createThreadAndRun::parameters.body,
@@ -283,11 +277,11 @@ namespace Azure.AI.Assistants {
   //  "java"
   //);
   //@@clientName(createThread::parameters.body,
-  //  "agentThreadCreationOptions",
+  //  "assistantThreadCreationOptions",
   //  "java"
   //);
   ///@@clientName(updateThread::parameters.body,
-  //  "updateAgentThreadOptions",
+  //  "updateAssistantThreadOptions",
   //  "java"
   //);
   //@@clientName(createVectorStore::parameters.body,

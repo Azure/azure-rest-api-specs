@@ -73,8 +73,8 @@
   "paths": {
     "/assistants": {
       "get": {
-        "operationId": "ListAgents",
-        "description": "Gets a list of agents that were previously created.",
+        "operationId": "ListAssistants",
+        "description": "Gets a list of assistants that were previously created.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -133,7 +133,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested list of agents.",
+            "description": "The requested list of assistants.",
             "schema": {
               "type": "object",
               "description": "The response data for a requested list of items.",
@@ -152,7 +152,7 @@
                   "type": "array",
                   "description": "The requested list of items.",
                   "items": {
-                    "$ref": "#/definitions/Agent"
+                    "$ref": "#/definitions/Assistant"
                   }
                 },
                 "first_id": {
@@ -195,8 +195,8 @@
         }
       },
       "post": {
-        "operationId": "CreateAgent",
-        "description": "Creates a new agent.",
+        "operationId": "CreateAssistant",
+        "description": "Creates a new assistant.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -206,15 +206,15 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateAgentOptions"
+              "$ref": "#/definitions/CreateAssistantOptions"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The new agent instance.",
+            "description": "The new assistant instance.",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/Assistant"
             }
           },
           "default": {
@@ -234,21 +234,21 @@
     },
     "/assistants/{assistantId}": {
       "get": {
-        "operationId": "GetAgent",
-        "description": "Retrieves an existing agent.",
+        "operationId": "GetAssistant",
+        "description": "Retrieves an existing assistant.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/GetAgentOptions"
+            "$ref": "#/parameters/GetAssistantOptions"
           }
         ],
         "responses": {
           "200": {
-            "description": "The requested agent instance.",
+            "description": "The requested assistant instance.",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/Assistant"
             }
           },
           "default": {
@@ -266,29 +266,29 @@
         }
       },
       "post": {
-        "operationId": "UpdateAgent",
-        "description": "Modifies an existing agent.",
+        "operationId": "UpdateAssistant",
+        "description": "Modifies an existing assistant.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/UpdateAgentOptions.assistantId"
+            "$ref": "#/parameters/UpdateAssistantOptions.assistantId"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateAgentOptions"
+              "$ref": "#/definitions/UpdateAssistantOptions"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The updated agent instance.",
+            "description": "The updated assistant instance.",
             "schema": {
-              "$ref": "#/definitions/Agent"
+              "$ref": "#/definitions/Assistant"
             }
           },
           "default": {
@@ -306,21 +306,21 @@
         }
       },
       "delete": {
-        "operationId": "DeleteAgent",
-        "description": "Deletes an agent.",
+        "operationId": "DeleteAssistant",
+        "description": "Deletes an assistant.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DeleteAgentOptions"
+            "$ref": "#/parameters/DeleteAssistantOptions"
           }
         ],
         "responses": {
           "200": {
             "description": "Status information about the requested deletion operation.",
             "schema": {
-              "$ref": "#/definitions/AgentDeletionStatus"
+              "$ref": "#/definitions/AssistantDeletionStatus"
             }
           },
           "default": {
@@ -376,14 +376,14 @@
                   "description": "Indicates a file is used for fine tuning results."
                 },
                 {
-                  "name": "agents",
+                  "name": "assistants",
                   "value": "assistants",
-                  "description": "Indicates a file is used as input to agents."
+                  "description": "Indicates a file is used as input to assistants."
                 },
                 {
-                  "name": "agentsOutput",
+                  "name": "assistantsOutput",
                   "value": "assistants_output",
-                  "description": "Indicates a file is used as output by agents."
+                  "description": "Indicates a file is used as output by assistants."
                 },
                 {
                   "name": "batch",
@@ -471,14 +471,14 @@
                   "description": "Indicates a file is used for fine tuning results."
                 },
                 {
-                  "name": "agents",
+                  "name": "assistants",
                   "value": "assistants",
-                  "description": "Indicates a file is used as input to agents."
+                  "description": "Indicates a file is used as input to assistants."
                 },
                 {
-                  "name": "agentsOutput",
+                  "name": "assistantsOutput",
                   "value": "assistants_output",
-                  "description": "Indicates a file is used as output by agents."
+                  "description": "Indicates a file is used as output by assistants."
                 },
                 {
                   "name": "batch",
@@ -646,7 +646,7 @@
     "/threads": {
       "post": {
         "operationId": "CreateThread",
-        "description": "Creates a new thread. Threads contain messages and can be run by agents.",
+        "description": "Creates a new thread. Threads contain messages and can be run by assistants.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -656,7 +656,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentThreadCreationOptions"
+              "$ref": "#/definitions/AssistantThreadCreationOptions"
             }
           }
         ],
@@ -664,7 +664,7 @@
           "200": {
             "description": "Information about the newly created thread.",
             "schema": {
-              "$ref": "#/definitions/AgentThread"
+              "$ref": "#/definitions/AssistantThread"
             }
           },
           "default": {
@@ -702,7 +702,7 @@
           "200": {
             "description": "Information about the requested thread.",
             "schema": {
-              "$ref": "#/definitions/AgentThread"
+              "$ref": "#/definitions/AssistantThread"
             }
           },
           "default": {
@@ -727,14 +727,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/UpdateAgentThreadOptions.threadId"
+            "$ref": "#/parameters/UpdateAssistantThreadOptions.threadId"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateAgentThreadOptions"
+              "$ref": "#/definitions/UpdateAssistantThreadOptions"
             }
           }
         ],
@@ -742,7 +742,7 @@
           "200": {
             "description": "Information about the modified thread.",
             "schema": {
-              "$ref": "#/definitions/AgentThread"
+              "$ref": "#/definitions/AssistantThread"
             }
           },
           "default": {
@@ -1216,7 +1216,7 @@
       },
       "post": {
         "operationId": "CreateRun",
-        "description": "Creates a new run for an agent thread.",
+        "description": "Creates a new run for an assistant thread.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1753,7 +1753,7 @@
     "/threads/runs": {
       "post": {
         "operationId": "CreateThreadAndRun",
-        "description": "Creates a new agent thread and immediately starts a run using that new thread.",
+        "description": "Creates a new assistant thread and immediately starts a run using that new thread.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2736,17 +2736,17 @@
       "properties": {
         "index_connection_id": {
           "type": "string",
-          "description": "An index connection id in an IndexResource attached to this agent.",
+          "description": "An index connection id in an IndexResource attached to this assistant.",
           "x-ms-client-name": "indexConnectionId"
         },
         "index_name": {
           "type": "string",
-          "description": "The name of an index in an IndexResource attached to this agent.",
+          "description": "The name of an index in an IndexResource attached to this assistant.",
           "x-ms-client-name": "indexName"
         },
         "query_type": {
           "$ref": "#/definitions/AzureAISearchQueryType",
-          "description": "Type of query in an AIIndexResource attached to this agent.",
+          "description": "Type of query in an AIIndexResource attached to this assistant.",
           "x-ms-client-name": "queryType"
         },
         "top_k": {
@@ -2765,9 +2765,9 @@
         "index_name"
       ]
     },
-    "Agent": {
+    "Assistant": {
       "type": "object",
-      "description": "Represents an agent that can call the model and use tools.",
+      "description": "Represents an assistant that can call the model and use tools.",
       "properties": {
         "id": {
           "type": "string",
@@ -2791,12 +2791,12 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the agent.",
+          "description": "The name of the assistant.",
           "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "The description of the agent.",
+          "description": "The description of the assistant.",
           "x-nullable": true
         },
         "model": {
@@ -2805,12 +2805,12 @@
         },
         "instructions": {
           "type": "string",
-          "description": "The system instructions for the agent to use.",
+          "description": "The system instructions for the assistant to use.",
           "x-nullable": true
         },
         "tools": {
           "type": "array",
-          "description": "The collection of tools enabled for the agent.",
+          "description": "The collection of tools enabled for the assistant.",
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
@@ -2819,7 +2819,7 @@
         },
         "tool_resources": {
           "type": "object",
-          "description": "A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
+          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-nullable": true,
           "allOf": [
             {
@@ -2844,8 +2844,8 @@
           "x-ms-client-name": "topP"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
-          "description": "The response format of the tool calls used by this agent.",
+          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
+          "description": "The response format of the tool calls used by this assistant.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
         },
@@ -2873,9 +2873,9 @@
         "metadata"
       ]
     },
-    "AgentDeletionStatus": {
+    "AssistantDeletionStatus": {
       "type": "object",
-      "description": "The status of an agent deletion operation.",
+      "description": "The status of an assistant deletion operation.",
       "properties": {
         "id": {
           "type": "string",
@@ -2902,9 +2902,9 @@
         "object"
       ]
     },
-    "AgentStreamEvent": {
+    "AssistantStreamEvent": {
       "type": "string",
-      "description": "Each event in a server-sent events stream has an `event` and `data` property:\n\n```\nevent: thread.created\ndata: {\"id\": \"thread_123\", \"object\": \"thread\", ...}\n```\n\nWe emit events whenever a new object is created, transitions to a new state, or is being\nstreamed in parts (deltas). For example, we emit `thread.run.created` when a new run\nis created, `thread.run.completed` when a run completes, and so on. When an Agent chooses\nto create a message during a run, we emit a `thread.message.created event`, a\n`thread.message.in_progress` event, many `thread.message.delta` events, and finally a\n`thread.message.completed` event.\n\nWe may add additional events over time, so we recommend handling unknown events gracefully\nin your code.",
+      "description": "Each event in a server-sent events stream has an `event` and `data` property:\n\n```\nevent: thread.created\ndata: {\"id\": \"thread_123\", \"object\": \"thread\", ...}\n```\n\nWe emit events whenever a new object is created, transitions to a new state, or is being\nstreamed in parts (deltas). For example, we emit `thread.run.created` when a new run\nis created, `thread.run.completed` when a run completes, and so on. When an Assistant chooses\nto create a message during a run, we emit a `thread.message.created event`, a\n`thread.message.in_progress` event, many `thread.message.delta` events, and finally a\n`thread.message.completed` event.\n\nWe may add additional events over time, so we recommend handling unknown events gracefully\nin your code.",
       "enum": [
         "thread.created",
         "thread.run.created",
@@ -2933,13 +2933,13 @@
         "done"
       ],
       "x-ms-enum": {
-        "name": "AgentStreamEvent",
+        "name": "AssistantStreamEvent",
         "modelAsString": true,
         "values": [
           {
             "name": "ThreadCreated",
             "value": "thread.created",
-            "description": "Event sent when a new thread is created. The data of this event is of type AgentThread"
+            "description": "Event sent when a new thread is created. The data of this event is of type AssistantThread"
           },
           {
             "name": "ThreadRunCreated",
@@ -3064,9 +3064,9 @@
         ]
       }
     },
-    "AgentThread": {
+    "AssistantThread": {
       "type": "object",
-      "description": "Information about a single thread associated with an agent.",
+      "description": "Information about a single thread associated with an assistant.",
       "properties": {
         "id": {
           "type": "string",
@@ -3090,7 +3090,7 @@
         },
         "tool_resources": {
           "type": "object",
-          "description": "A set of resources that are made available to the agent's tools in this thread. The resources are specific to the type\nof tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list\nof vector store IDs.",
+          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the type\nof tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list\nof vector store IDs.",
           "x-nullable": true,
           "allOf": [
             {
@@ -3116,9 +3116,9 @@
         "metadata"
       ]
     },
-    "AgentThreadCreationOptions": {
+    "AssistantThreadCreationOptions": {
       "type": "object",
-      "description": "The details used to create a new agent thread.",
+      "description": "The details used to create a new assistant thread.",
       "properties": {
         "messages": {
           "type": "array",
@@ -3130,7 +3130,7 @@
         },
         "tool_resources": {
           "type": "object",
-          "description": "A set of resources that are made available to the agent's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs.",
+          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs.",
           "x-nullable": true,
           "allOf": [
             {
@@ -3149,7 +3149,7 @@
         }
       }
     },
-    "AgentsApiResponseFormat": {
+    "AssistantsApiResponseFormat": {
       "type": "object",
       "description": "An object describing the expected output of the model. If `json_object` only `function` type `tools` are allowed to be passed to the Run.\nIf `text` the model can return text or any value needed.",
       "properties": {
@@ -3180,7 +3180,7 @@
         }
       }
     },
-    "AgentsApiResponseFormatMode": {
+    "AssistantsApiResponseFormatMode": {
       "type": "string",
       "description": "Represents the mode in which the model will handle the return format of a tool call.",
       "enum": [
@@ -3188,7 +3188,7 @@
         "none"
       ],
       "x-ms-enum": {
-        "name": "AgentsApiResponseFormatMode",
+        "name": "AssistantsApiResponseFormatMode",
         "modelAsString": true,
         "values": [
           {
@@ -3204,9 +3204,9 @@
         ]
       }
     },
-    "AgentsApiResponseFormatOption": {},
-    "AgentsApiToolChoiceOption": {},
-    "AgentsApiToolChoiceOptionMode": {
+    "AssistantsApiResponseFormatOption": {},
+    "AssistantsApiToolChoiceOption": {},
+    "AssistantsApiToolChoiceOptionMode": {
       "type": "string",
       "description": "Specifies how the tool choice will be used",
       "enum": [
@@ -3214,7 +3214,7 @@
         "auto"
       ],
       "x-ms-enum": {
-        "name": "AgentsApiToolChoiceOptionMode",
+        "name": "AssistantsApiToolChoiceOptionMode",
         "modelAsString": true,
         "values": [
           {
@@ -3230,12 +3230,12 @@
         ]
       }
     },
-    "AgentsNamedToolChoice": {
+    "AssistantsNamedToolChoice": {
       "type": "object",
       "description": "Specifies a tool the model should use. Use to force the model to call a specific tool.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/AgentsNamedToolChoiceType",
+          "$ref": "#/definitions/AssistantsNamedToolChoiceType",
           "description": "the type of tool. If type is `function`, the function name must be set."
         },
         "function": {
@@ -3247,9 +3247,9 @@
         "type"
       ]
     },
-    "AgentsNamedToolChoiceType": {
+    "AssistantsNamedToolChoiceType": {
       "type": "string",
-      "description": "Available tool types for agents named tools.",
+      "description": "Available tool types for assistants named tools.",
       "enum": [
         "function",
         "code_interpreter",
@@ -3261,7 +3261,7 @@
         "bing_custom_search"
       ],
       "x-ms-enum": {
-        "name": "AgentsNamedToolChoiceType",
+        "name": "AssistantsNamedToolChoiceType",
         "modelAsString": true,
         "values": [
           {
@@ -3416,7 +3416,7 @@
       "properties": {
         "indexes": {
           "type": "array",
-          "description": "The indices attached to this agent. There can be a maximum of 1 index\nresource attached to the agent.",
+          "description": "The indices attached to this assistant. There can be a maximum of 1 index\nresource attached to the assistant.",
           "maxItems": 1,
           "items": {
             "$ref": "#/definitions/AISearchIndexResource"
@@ -3428,7 +3428,7 @@
     },
     "AzureAISearchToolDefinition": {
       "type": "object",
-      "description": "The input definition information for an Azure AI search tool as used to configure an agent.",
+      "description": "The input definition information for an Azure AI search tool as used to configure an assistant.",
       "allOf": [
         {
           "$ref": "#/definitions/ToolDefinition"
@@ -3508,7 +3508,7 @@
     },
     "AzureFunctionToolDefinition": {
       "type": "object",
-      "description": "The input definition information for a azure function tool as used to configure an agent.",
+      "description": "The input definition information for a azure function tool as used to configure an assistant.",
       "properties": {
         "azure_function": {
           "$ref": "#/definitions/AzureFunctionDefinition",
@@ -3528,7 +3528,7 @@
     },
     "BingCustomSearchToolDefinition": {
       "type": "object",
-      "description": "The input definition information for a Bing custom search tool as used to configure an agent.",
+      "description": "The input definition information for a Bing custom search tool as used to configure an assistant.",
       "properties": {
         "bing_custom_search": {
           "$ref": "#/definitions/SearchConfigurationList",
@@ -3548,7 +3548,7 @@
     },
     "BingGroundingToolDefinition": {
       "type": "object",
-      "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
+      "description": "The input definition information for a bing grounding search tool as used to configure an assistant.",
       "properties": {
         "bing_grounding": {
           "$ref": "#/definitions/ToolConnectionList",
@@ -3567,7 +3567,7 @@
     },
     "CodeInterpreterToolDefinition": {
       "type": "object",
-      "description": "The input definition information for a code interpreter tool as used to configure an agent.",
+      "description": "The input definition information for a code interpreter tool as used to configure an assistant.",
       "allOf": [
         {
           "$ref": "#/definitions/ToolDefinition"
@@ -3601,109 +3601,32 @@
         }
       }
     },
-    "CreateAgentOptions": {
-      "type": "object",
-      "description": "The request details to use when creating a new agent.",
-      "properties": {
-        "model": {
-          "type": "string",
-          "description": "The ID of the model to use."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the new agent.",
-          "x-nullable": true
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the new agent.",
-          "x-nullable": true
-        },
-        "instructions": {
-          "type": "string",
-          "description": "The system instructions for the new agent to use.",
-          "x-nullable": true
-        },
-        "tools": {
-          "type": "array",
-          "description": "The collection of tools to enable for the new agent.",
-          "default": [],
-          "items": {
-            "$ref": "#/definitions/ToolDefinition"
-          },
-          "x-ms-identifiers": []
-        },
-        "tool_resources": {
-          "type": "object",
-          "description": "A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
-          "x-nullable": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ToolResources"
-            }
-          ],
-          "x-ms-client-name": "toolResources"
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
-          "default": 1,
-          "x-nullable": true
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
-          "default": 1,
-          "x-nullable": true,
-          "x-ms-client-name": "topP"
-        },
-        "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
-          "description": "The response format of the tool calls used by this agent.",
-          "x-nullable": true,
-          "x-ms-client-name": "responseFormat"
-        },
-        "metadata": {
-          "type": "object",
-          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "model"
-      ]
-    },
     "CreateAndRunThreadOptions": {
       "type": "object",
-      "description": "The details used when creating and immediately running a new agent thread.",
+      "description": "The details used when creating and immediately running a new assistant thread.",
       "properties": {
         "assistant_id": {
           "type": "string",
-          "description": "The ID of the agent for which the thread should be created.",
+          "description": "The ID of the assistant for which the thread should be created.",
           "x-ms-client-name": "assistantId"
         },
         "thread": {
-          "$ref": "#/definitions/AgentThreadCreationOptions",
+          "$ref": "#/definitions/AssistantThreadCreationOptions",
           "description": "The details used to create the new thread. If no thread is provided, an empty one will be created."
         },
         "model": {
           "type": "string",
-          "description": "The overridden model that the agent should use to run the thread.",
+          "description": "The overridden model that the assistant should use to run the thread.",
           "x-nullable": true
         },
         "instructions": {
           "type": "string",
-          "description": "The overridden system instructions the agent should use to run the thread.",
+          "description": "The overridden system instructions the assistant should use to run the thread.",
           "x-nullable": true
         },
         "tools": {
           "type": "array",
-          "description": "The overridden list of enabled tools the agent should use to run the thread.",
+          "description": "The overridden list of enabled tools the assistant should use to run the thread.",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
@@ -3712,7 +3635,7 @@
         },
         "tool_resources": {
           "type": "object",
-          "description": "Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis",
+          "description": "Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis",
           "x-nullable": true,
           "allOf": [
             {
@@ -3766,13 +3689,13 @@
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
-          "$ref": "#/definitions/AgentsApiToolChoiceOption",
+          "$ref": "#/definitions/AssistantsApiToolChoiceOption",
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -3793,6 +3716,83 @@
       },
       "required": [
         "assistant_id"
+      ]
+    },
+    "CreateAssistantOptions": {
+      "type": "object",
+      "description": "The request details to use when creating a new assistant.",
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "The ID of the model to use."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the new assistant.",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the new assistant.",
+          "x-nullable": true
+        },
+        "instructions": {
+          "type": "string",
+          "description": "The system instructions for the new assistant to use.",
+          "x-nullable": true
+        },
+        "tools": {
+          "type": "array",
+          "description": "The collection of tools to enable for the new assistant.",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/ToolDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "tool_resources": {
+          "type": "object",
+          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example, the `code_interpreter`\ntool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ToolResources"
+            }
+          ],
+          "x-ms-client-name": "toolResources"
+        },
+        "temperature": {
+          "type": "number",
+          "format": "float",
+          "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random,\nwhile lower values like 0.2 will make it more focused and deterministic.",
+          "default": 1,
+          "x-nullable": true
+        },
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.\nSo 0.1 means only the tokens comprising the top 10% probability mass are considered.\n\nWe generally recommend altering this or temperature but not both.",
+          "default": 1,
+          "x-nullable": true,
+          "x-ms-client-name": "topP"
+        },
+        "response_format": {
+          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
+          "description": "The response format of the tool calls used by this assistant.",
+          "x-nullable": true,
+          "x-ms-client-name": "responseFormat"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "model"
       ]
     },
     "CreateCodeInterpreterToolResourceOptions": {
@@ -3846,21 +3846,21 @@
     },
     "CreateRunOptions": {
       "type": "object",
-      "description": "The details used when creating a new run of an agent thread.",
+      "description": "The details used when creating a new run of an assistant thread.",
       "properties": {
         "assistant_id": {
           "type": "string",
-          "description": "The ID of the agent that should run the thread.",
+          "description": "The ID of the assistant that should run the thread.",
           "x-ms-client-name": "assistantId"
         },
         "model": {
           "type": "string",
-          "description": "The overridden model name that the agent should use to run the thread.",
+          "description": "The overridden model name that the assistant should use to run the thread.",
           "x-nullable": true
         },
         "instructions": {
           "type": "string",
-          "description": "The overridden system instructions that the agent should use to run the thread.",
+          "description": "The overridden system instructions that the assistant should use to run the thread.",
           "x-nullable": true
         },
         "additional_instructions": {
@@ -3881,7 +3881,7 @@
         },
         "tools": {
           "type": "array",
-          "description": "The overridden list of enabled tools that the agent should use to run the thread.",
+          "description": "The overridden list of enabled tools that the assistant should use to run the thread.",
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ToolDefinition"
@@ -3933,13 +3933,13 @@
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
-          "$ref": "#/definitions/AgentsApiToolChoiceOption",
+          "$ref": "#/definitions/AssistantsApiToolChoiceOption",
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
           "description": "Specifies the format that the model must output.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -3964,7 +3964,7 @@
     },
     "CreateToolResourcesOptions": {
       "type": "object",
-      "description": "Request object. A set of resources that are used by the agent's tools. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
+      "description": "Request object. A set of resources that are used by the assistant's tools. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
       "properties": {
         "code_interpreter": {
           "$ref": "#/definitions/CreateCodeInterpreterToolResourceOptions",
@@ -4102,14 +4102,14 @@
             "description": "Indicates a file is used for fine tuning results."
           },
           {
-            "name": "agents",
+            "name": "assistants",
             "value": "assistants",
-            "description": "Indicates a file is used as input to agents."
+            "description": "Indicates a file is used as input to assistants."
           },
           {
-            "name": "agentsOutput",
+            "name": "assistantsOutput",
             "value": "assistants_output",
-            "description": "Indicates a file is used as output by agents."
+            "description": "Indicates a file is used as output by assistants."
           },
           {
             "name": "batch",
@@ -4175,7 +4175,7 @@
     },
     "FileSearchToolDefinition": {
       "type": "object",
-      "description": "The input definition information for a file search tool as used to configure an agent.",
+      "description": "The input definition information for a file search tool as used to configure an assistant.",
       "properties": {
         "file_search": {
           "$ref": "#/definitions/FileSearchToolDefinitionDetails",
@@ -4215,7 +4215,7 @@
       "properties": {
         "vector_store_ids": {
           "type": "array",
-          "description": "The ID of the vector store attached to this agent. There can be a maximum of 1 vector\nstore attached to the agent.",
+          "description": "The ID of the vector store attached to this assistant. There can be a maximum of 1 vector\nstore attached to the assistant.",
           "maxItems": 1,
           "items": {
             "type": "string"
@@ -4324,7 +4324,7 @@
     },
     "FunctionToolDefinition": {
       "type": "object",
-      "description": "The input definition information for a function tool as used to configure an agent.",
+      "description": "The input definition information for a function tool as used to configure an assistant.",
       "properties": {
         "function": {
           "$ref": "#/definitions/FunctionDefinition",
@@ -4384,12 +4384,12 @@
       "properties": {
         "index_connection_id": {
           "type": "string",
-          "description": "An index connection id in an IndexResource attached to this agent.",
+          "description": "An index connection id in an IndexResource attached to this assistant.",
           "x-ms-client-name": "indexConnectionId"
         },
         "index_name": {
           "type": "string",
-          "description": "The name of an index in an IndexResource attached to this agent.",
+          "description": "The name of an index in an IndexResource attached to this assistant.",
           "x-ms-client-name": "indexName"
         }
       },
@@ -4712,7 +4712,7 @@
     },
     "MessageDeltaTextUrlCitationAnnotation": {
       "type": "object",
-      "description": "A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.",
+      "description": "A citation within the message that points to a specific URL associated with the message. Generated when the assistant uses tools such as 'bing_grounding' to search the Internet.",
       "properties": {
         "url_citation": {
           "$ref": "#/definitions/MessageDeltaTextUrlCitationDetails",
@@ -4865,9 +4865,9 @@
             "description": "The role representing the end-user."
           },
           {
-            "name": "agent",
+            "name": "assistant",
             "value": "assistant",
-            "description": "The role representing the agent."
+            "description": "The role representing the assistant."
           }
         ]
       }
@@ -4984,7 +4984,7 @@
     },
     "MessageTextDetails": {
       "type": "object",
-      "description": "The text and associated annotations for a single item of agent thread message content.",
+      "description": "The text and associated annotations for a single item of assistant thread message content.",
       "properties": {
         "value": {
           "type": "string",
@@ -5006,11 +5006,11 @@
     },
     "MessageTextFileCitationAnnotation": {
       "type": "object",
-      "description": "A citation within the message that points to a specific quote from a specific File associated with the agent or the message. Generated when the agent uses the 'file_search' tool to search files.",
+      "description": "A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'file_search' tool to search files.",
       "properties": {
         "file_citation": {
           "$ref": "#/definitions/MessageTextFileCitationDetails",
-          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the agent uses the \"file_search\" tool to search files.",
+          "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"file_search\" tool to search files.",
           "x-ms-client-name": "fileCitation"
         },
         "start_index": {
@@ -5061,7 +5061,7 @@
       "properties": {
         "file_path": {
           "$ref": "#/definitions/MessageTextFilePathDetails",
-          "description": "A URL for the file that's generated when the agent used the code_interpreter tool to generate a file.",
+          "description": "A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.",
           "x-ms-client-name": "filePath"
         },
         "start_index": {
@@ -5103,7 +5103,7 @@
     },
     "MessageTextUrlCitationAnnotation": {
       "type": "object",
-      "description": "A citation within the message that points to a specific URL associated with the message. Generated when the agent uses tools such as 'bing_grounding' to search the Internet.",
+      "description": "A citation within the message that points to a specific URL associated with the message. Generated when the assistant uses tools such as 'bing_grounding' to search the Internet.",
       "properties": {
         "url_citation": {
           "$ref": "#/definitions/MessageTextUrlCitationDetails",
@@ -5152,7 +5152,7 @@
     },
     "MicrosoftFabricToolDefinition": {
       "type": "object",
-      "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
+      "description": "The input definition information for a Microsoft Fabric tool as used to configure an assistant.",
       "properties": {
         "fabric_dataagent": {
           "$ref": "#/definitions/ToolConnectionList",
@@ -5171,7 +5171,7 @@
     },
     "OpenAIFile": {
       "type": "object",
-      "description": "Represents an agent that can call the model and use tools.",
+      "description": "Represents an assistant that can call the model and use tools.",
       "properties": {
         "object": {
           "type": "string",
@@ -5376,7 +5376,7 @@
     },
     "OpenApiToolDefinition": {
       "type": "object",
-      "description": "The input definition information for an OpenAPI tool as used to configure an agent.",
+      "description": "The input definition information for an OpenAPI tool as used to configure an assistant.",
       "properties": {
         "openapi": {
           "$ref": "#/definitions/OpenApiFunctionDefinition",
@@ -5395,7 +5395,7 @@
     },
     "RequiredAction": {
       "type": "object",
-      "description": "An abstract representation of a required action for an agent thread run to continue.",
+      "description": "An abstract representation of a required action for an assistant thread run to continue.",
       "properties": {
         "type": {
           "type": "string",
@@ -5582,7 +5582,7 @@
     },
     "RunError": {
       "type": "object",
-      "description": "The details of an error as encountered by an agent thread run.",
+      "description": "The details of an error as encountered by an assistant thread run.",
       "properties": {
         "code": {
           "type": "string",
@@ -5600,7 +5600,7 @@
     },
     "RunStatus": {
       "type": "string",
-      "description": "Possible values for the status of an agent thread run.",
+      "description": "Possible values for the status of an assistant thread run.",
       "enum": [
         "queued",
         "in_progress",
@@ -5660,7 +5660,7 @@
     },
     "RunStep": {
       "type": "object",
-      "description": "Detailed information about a single step of an agent thread run.",
+      "description": "Detailed information about a single step of an assistant thread run.",
       "properties": {
         "id": {
           "type": "string",
@@ -5682,7 +5682,7 @@
         },
         "assistant_id": {
           "type": "string",
-          "description": "The ID of the agent associated with the run step.",
+          "description": "The ID of the assistant associated with the run step.",
           "x-ms-client-name": "assistantId"
         },
         "thread_id": {
@@ -6829,7 +6829,7 @@
     },
     "SharepointToolDefinition": {
       "type": "object",
-      "description": "The input definition information for a sharepoint tool as used to configure an agent.",
+      "description": "The input definition information for a sharepoint tool as used to configure an assistant.",
       "properties": {
         "sharepoint_grounding": {
           "$ref": "#/definitions/ToolConnectionList",
@@ -6848,7 +6848,7 @@
     },
     "SubmitToolOutputsAction": {
       "type": "object",
-      "description": "The details for required tool calls that must be submitted for an agent thread run to continue.",
+      "description": "The details for required tool calls that must be submitted for an assistant thread run to continue.",
       "properties": {
         "submit_tool_outputs": {
           "$ref": "#/definitions/SubmitToolOutputsDetails",
@@ -6872,7 +6872,7 @@
       "properties": {
         "tool_calls": {
           "type": "array",
-          "description": "The list of tool calls that must be resolved for the agent thread run to continue.",
+          "description": "The list of tool calls that must be resolved for the assistant thread run to continue.",
           "items": {
             "$ref": "#/definitions/RequiredToolCall"
           },
@@ -6914,7 +6914,7 @@
     },
     "ThreadMessage": {
       "type": "object",
-      "description": "A single, existing message within an agent thread.",
+      "description": "A single, existing message within an assistant thread.",
       "properties": {
         "id": {
           "type": "string",
@@ -6972,11 +6972,11 @@
         },
         "role": {
           "$ref": "#/definitions/MessageRole",
-          "description": "The role associated with the agent thread message."
+          "description": "The role associated with the assistant thread message."
         },
         "content": {
           "type": "array",
-          "description": "The list of content items associated with the agent thread message.",
+          "description": "The list of content items associated with the assistant thread message.",
           "items": {
             "$ref": "#/definitions/MessageContent"
           },
@@ -6984,7 +6984,7 @@
         },
         "assistant_id": {
           "type": "string",
-          "description": "If applicable, the ID of the agent that authored this message.",
+          "description": "If applicable, the ID of the assistant that authored this message.",
           "x-nullable": true,
           "x-ms-client-name": "assistantId"
         },
@@ -7031,11 +7031,11 @@
     },
     "ThreadMessageOptions": {
       "type": "object",
-      "description": "A single message within an agent thread, as provided during that thread's creation for its initial state.",
+      "description": "A single message within an assistant thread, as provided during that thread's creation for its initial state.",
       "properties": {
         "role": {
           "$ref": "#/definitions/MessageRole",
-          "description": "The role of the entity that is creating the message. Allowed values include:\n- `user`: Indicates the message is sent by an actual user and should be used in most\ncases to represent user-generated messages.\n- `assistant`: Indicates the message is generated by the agent. Use this value to insert\nmessages from the agent into the\nconversation."
+          "description": "The role of the entity that is creating the message. Allowed values include:\n- `user`: Indicates the message is sent by an actual user and should be used in most\ncases to represent user-generated messages.\n- `assistant`: Indicates the message is generated by the assistant. Use this value to insert\nmessages from the assistant into the\nconversation."
         },
         "content": {
           "type": "string",
@@ -7066,7 +7066,7 @@
     },
     "ThreadRun": {
       "type": "object",
-      "description": "Data representing a single evaluation run of an agent thread.",
+      "description": "Data representing a single evaluation run of an assistant thread.",
       "properties": {
         "id": {
           "type": "string",
@@ -7089,16 +7089,16 @@
         },
         "assistant_id": {
           "type": "string",
-          "description": "The ID of the agent associated with the thread this run was performed against.",
+          "description": "The ID of the assistant associated with the thread this run was performed against.",
           "x-ms-client-name": "assistantId"
         },
         "status": {
           "$ref": "#/definitions/RunStatus",
-          "description": "The status of the agent thread run."
+          "description": "The status of the assistant thread run."
         },
         "required_action": {
           "type": "object",
-          "description": "The details of the action required for the agent thread run to continue.",
+          "description": "The details of the action required for the assistant thread run to continue.",
           "x-nullable": true,
           "allOf": [
             {
@@ -7109,7 +7109,7 @@
         },
         "last_error": {
           "type": "object",
-          "description": "The last error, if any, encountered by this agent thread run.",
+          "description": "The last error, if any, encountered by this assistant thread run.",
           "x-nullable": true,
           "allOf": [
             {
@@ -7124,11 +7124,11 @@
         },
         "instructions": {
           "type": "string",
-          "description": "The overridden system instructions used for this agent thread run."
+          "description": "The overridden system instructions used for this assistant thread run."
         },
         "tools": {
           "type": "array",
-          "description": "The overridden enabled tools used for this agent thread run.",
+          "description": "The overridden enabled tools used for this assistant thread run.",
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
@@ -7236,13 +7236,13 @@
           "x-ms-client-name": "truncationStrategy"
         },
         "tool_choice": {
-          "$ref": "#/definitions/AgentsApiToolChoiceOption",
+          "$ref": "#/definitions/AssistantsApiToolChoiceOption",
           "description": "Controls whether or not and which tool is called by the model.",
           "x-nullable": true,
           "x-ms-client-name": "toolChoice"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
+          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
           "description": "The response format of the tool calls used in this run.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
@@ -7257,7 +7257,7 @@
         },
         "tool_resources": {
           "type": "object",
-          "description": "Override the tools the agent can use for this run. This is useful for modifying the behavior on a per-run basis",
+          "description": "Override the tools the assistant can use for this run. This is useful for modifying the behavior on a per-run basis",
           "x-nullable": true,
           "allOf": [
             {
@@ -7312,7 +7312,7 @@
           {
             "name": "ThreadCreated",
             "value": "thread.created",
-            "description": "Event sent when a new thread is created. The data of this event is of type AgentThread"
+            "description": "Event sent when a new thread is created. The data of this event is of type AssistantThread"
           }
         ]
       }
@@ -7349,7 +7349,7 @@
     },
     "ToolDefinition": {
       "type": "object",
-      "description": "An abstract representation of an input tool definition that an agent can use.",
+      "description": "An abstract representation of an input tool definition that an assistant can use.",
       "properties": {
         "type": {
           "type": "string",
@@ -7378,7 +7378,7 @@
     },
     "ToolResources": {
       "type": "object",
-      "description": "A set of resources that are used by the agent's tools. The resources are specific to the type of\ntool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
+      "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of\ntool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`\ntool requires a list of vector store IDs.",
       "properties": {
         "code_interpreter": {
           "$ref": "#/definitions/CodeInterpreterToolResource",
@@ -7462,9 +7462,9 @@
         ]
       }
     },
-    "UpdateAgentOptions": {
+    "UpdateAssistantOptions": {
       "type": "object",
-      "description": "The request details to use when modifying an existing agent.",
+      "description": "The request details to use when modifying an existing assistant.",
       "properties": {
         "model": {
           "type": "string",
@@ -7472,22 +7472,22 @@
         },
         "name": {
           "type": "string",
-          "description": "The modified name for the agent to use.",
+          "description": "The modified name for the assistant to use.",
           "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "The modified description for the agent to use.",
+          "description": "The modified description for the assistant to use.",
           "x-nullable": true
         },
         "instructions": {
           "type": "string",
-          "description": "The modified system instructions for the new agent to use.",
+          "description": "The modified system instructions for the new assistant to use.",
           "x-nullable": true
         },
         "tools": {
           "type": "array",
-          "description": "The modified collection of tools to enable for the agent.",
+          "description": "The modified collection of tools to enable for the assistant.",
           "default": [],
           "items": {
             "$ref": "#/definitions/ToolDefinition"
@@ -7496,7 +7496,7 @@
         },
         "tool_resources": {
           "$ref": "#/definitions/ToolResources",
-          "description": "A set of resources that are used by the agent's tools. The resources are specific to the type of tool. For example,\nthe `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
+          "description": "A set of resources that are used by the assistant's tools. The resources are specific to the type of tool. For example,\nthe `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of vector store IDs.",
           "x-ms-client-name": "toolResources"
         },
         "temperature": {
@@ -7515,8 +7515,8 @@
           "x-ms-client-name": "topP"
         },
         "response_format": {
-          "$ref": "#/definitions/AgentsApiResponseFormatOption",
-          "description": "The response format of the tool calls used by this agent.",
+          "$ref": "#/definitions/AssistantsApiResponseFormatOption",
+          "description": "The response format of the tool calls used by this assistant.",
           "x-nullable": true,
           "x-ms-client-name": "responseFormat"
         },
@@ -7530,13 +7530,13 @@
         }
       }
     },
-    "UpdateAgentThreadOptions": {
+    "UpdateAssistantThreadOptions": {
       "type": "object",
-      "description": "The details used to update an existing agent thread",
+      "description": "The details used to update an existing assistant thread",
       "properties": {
         "tool_resources": {
           "type": "object",
-          "description": "A set of resources that are made available to the agent's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs",
+          "description": "A set of resources that are made available to the assistant's tools in this thread. The resources are specific to the\ntype of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires\na list of vector store IDs",
           "x-nullable": true,
           "allOf": [
             {
@@ -7561,7 +7561,7 @@
       "properties": {
         "file_ids": {
           "type": "array",
-          "description": "A list of file IDs to override the current list of the agent.",
+          "description": "A list of file IDs to override the current list of the assistant.",
           "maxItems": 20,
           "items": {
             "type": "string"
@@ -7576,7 +7576,7 @@
       "properties": {
         "vector_store_ids": {
           "type": "array",
-          "description": "A list of vector store IDs to override the current list of the agent.",
+          "description": "A list of vector store IDs to override the current list of the assistant.",
           "maxItems": 1,
           "items": {
             "type": "string"
@@ -7587,7 +7587,7 @@
     },
     "UpdateToolResourcesOptions": {
       "type": "object",
-      "description": "Request object. A set of resources that are used by the agent's tools. The resources are specific to the type of tool.\nFor example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of\nvector store IDs.",
+      "description": "Request object. A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.\nFor example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of\nvector store IDs.",
       "properties": {
         "code_interpreter": {
           "$ref": "#/definitions/UpdateCodeInterpreterToolResourceOptions",
@@ -7596,7 +7596,7 @@
         },
         "file_search": {
           "$ref": "#/definitions/UpdateFileSearchToolResourceOptions",
-          "description": "Overrides the vector store attached to this agent. There can be a maximum of 1 vector store attached to the agent.",
+          "description": "Overrides the vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant.",
           "x-ms-client-name": "fileSearch"
         },
         "azure_ai_search": {
@@ -8446,31 +8446,31 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "DeleteAgentOptions": {
+    "DeleteAssistantOptions": {
       "name": "assistantId",
       "in": "path",
-      "description": "Identifier of the agent.",
+      "description": "Identifier of the assistant.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "GetAgentOptions": {
+    "GetAssistantOptions": {
       "name": "assistantId",
       "in": "path",
-      "description": "Identifier of the agent.",
+      "description": "Identifier of the assistant.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "UpdateAgentOptions.assistantId": {
+    "UpdateAssistantOptions.assistantId": {
       "name": "assistantId",
       "in": "path",
-      "description": "The ID of the agent to modify.",
+      "description": "The ID of the assistant to modify.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "UpdateAgentThreadOptions.threadId": {
+    "UpdateAssistantThreadOptions.threadId": {
       "name": "threadId",
       "in": "path",
       "description": "The ID of the thread to modify.",

@@ -32,7 +32,7 @@ op createMessage is Azure.Core.Foundations.Operation<
     @path
     threadId: string;
 
-    /** A single message within an agent thread, as provided during that thread's creation for its initial state. */
+    /** A single message within an assistant thread, as provided during that thread's creation for its initial state. */
     ...ThreadMessageOptions;
   },
   ThreadMessage

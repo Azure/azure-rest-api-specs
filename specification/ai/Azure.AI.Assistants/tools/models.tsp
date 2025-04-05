@@ -7,10 +7,10 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Assistants;
 
 //
-// Tool inputs -- definitions used before model evaluation to configure agents, threads, and messages
+// Tool inputs -- definitions used before model evaluation to configure assistants, threads, and messages
 //
 
-@doc("An abstract representation of an input tool definition that an agent can use.")
+@doc("An abstract representation of an input tool definition that an assistant can use.")
 @discriminator("type")
 model ToolDefinition {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -18,13 +18,13 @@ model ToolDefinition {
   type: string;
 }
 
-@doc("The input definition information for a code interpreter tool as used to configure an agent.")
+@doc("The input definition information for a code interpreter tool as used to configure an assistant.")
 model CodeInterpreterToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'code_interpreter'.")
   type: "code_interpreter";
 }
 
-@doc("The input definition information for a file search tool as used to configure an agent.")
+@doc("The input definition information for a file search tool as used to configure an assistant.")
 model FileSearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'file_search'.")
   type: "file_search";
@@ -36,7 +36,7 @@ model FileSearchToolDefinition extends ToolDefinition {
   fileSearch?: FileSearchToolDefinitionDetails;
 }
 
-@doc("The input definition information for a function tool as used to configure an agent.")
+@doc("The input definition information for a function tool as used to configure an assistant.")
 model FunctionToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'function'.")
   type: "function";
@@ -47,7 +47,7 @@ model FunctionToolDefinition extends ToolDefinition {
 
 // Azure Custom Tools
 
-@doc("The input definition information for a bing grounding search tool as used to configure an agent.")
+@doc("The input definition information for a bing grounding search tool as used to configure an assistant.")
 model BingGroundingToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'bing_grounding'.")
   type: "bing_grounding";
@@ -56,7 +56,7 @@ model BingGroundingToolDefinition extends ToolDefinition {
   bing_grounding: ToolConnectionList;
 }
 
-@doc("The input definition information for a Microsoft Fabric tool as used to configure an agent.")
+@doc("The input definition information for a Microsoft Fabric tool as used to configure an assistant.")
 model MicrosoftFabricToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'fabric_dataagent'.")
   type: "fabric_dataagent";
@@ -65,7 +65,7 @@ model MicrosoftFabricToolDefinition extends ToolDefinition {
   fabric_dataagent: ToolConnectionList;
 }
 
-@doc("The input definition information for a sharepoint tool as used to configure an agent.")
+@doc("The input definition information for a sharepoint tool as used to configure an assistant.")
 model SharepointToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'sharepoint_grounding'.")
   type: "sharepoint_grounding";
@@ -74,13 +74,13 @@ model SharepointToolDefinition extends ToolDefinition {
   sharepoint_grounding: ToolConnectionList;
 }
 
-@doc("The input definition information for an Azure AI search tool as used to configure an agent.")
+@doc("The input definition information for an Azure AI search tool as used to configure an assistant.")
 model AzureAISearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'azure_ai_search'.")
   type: "azure_ai_search";
 }
 
-@doc("The input definition information for an OpenAPI tool as used to configure an agent.")
+@doc("The input definition information for an OpenAPI tool as used to configure an assistant.")
 model OpenApiToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'openapi'.")
   type: "openapi";
@@ -89,7 +89,7 @@ model OpenApiToolDefinition extends ToolDefinition {
   openapi: OpenApiFunctionDefinition;
 }
 
-@doc("The input definition information for a Bing custom search tool as used to configure an agent.")
+@doc("The input definition information for a Bing custom search tool as used to configure an assistant.")
 model BingCustomSearchToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'bing_custom_search'.")
   type: "bing_custom_search";
@@ -122,7 +122,7 @@ model FileSearchToolDefinitionDetails {
   rankingOptions?: FileSearchRankingOptions;
 }
 
-@doc("The input definition information for a azure function tool as used to configure an agent.")
+@doc("The input definition information for a azure function tool as used to configure an assistant.")
 model AzureFunctionToolDefinition extends ToolDefinition {
   @doc("The object type, which is always 'azure_function'.")
   type: "azure_function";
@@ -543,18 +543,18 @@ model ToolOutput {
  * forces the model to call that tool.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
-union AgentsApiToolChoiceOption {
+union AssistantsApiToolChoiceOption {
   string,
 
   /** Specifies how the tool choice will be used */
-  AgentsApiToolChoiceOptionMode,
+  AssistantsApiToolChoiceOptionMode,
 
   /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
-  AgentsNamedToolChoice,
+  AssistantsNamedToolChoice,
 }
 
 /** Specifies how the tool choice will be used */
-union AgentsApiToolChoiceOptionMode {
+union AssistantsApiToolChoiceOptionMode {
   string,
 
   /** The model will not call a function and instead generates a message. */
@@ -564,16 +564,16 @@ union AgentsApiToolChoiceOptionMode {
   auto: "auto",
 }
 /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
-model AgentsNamedToolChoice {
+model AssistantsNamedToolChoice {
   /** the type of tool. If type is `function`, the function name must be set. */
-  type: AgentsNamedToolChoiceType;
+  type: AssistantsNamedToolChoiceType;
 
   /** The name of the function to call */
   function?: FunctionName;
 }
 
-/** Available tool types for agents named tools. */
-union AgentsNamedToolChoiceType {
+/** Available tool types for assistants named tools. */
+union AssistantsNamedToolChoiceType {
   string,
 
   /** Tool type `function` */

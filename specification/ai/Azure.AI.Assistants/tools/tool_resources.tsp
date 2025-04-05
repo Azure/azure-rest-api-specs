@@ -13,7 +13,7 @@ namespace Azure.AI.Assistants;
 //
 
 /**
- * A set of resources that are used by the agent's tools. The resources are specific to the type of
+ * A set of resources that are used by the assistant's tools. The resources are specific to the type of
  * tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
  * tool requires a list of vector store IDs.
  */
@@ -54,8 +54,8 @@ model CodeInterpreterToolResource {
  */
 model FileSearchToolResource {
   /**
-   * The ID of the vector store attached to this agent. There can be a maximum of 1 vector
-   * store attached to the agent.
+   * The ID of the vector store attached to this assistant. There can be a maximum of 1 vector
+   * store attached to the assistant.
    */
   @maxItems(1)
   @encodedName("application/json", "vector_store_ids")
@@ -76,8 +76,8 @@ model FileSearchToolResource {
  */
 model AzureAISearchResource {
   /**
-   * The indices attached to this agent. There can be a maximum of 1 index
-   * resource attached to the agent.
+   * The indices attached to this assistant. There can be a maximum of 1 index
+   * resource attached to the assistant.
    */
   @maxItems(1)
   @encodedName("application/json", "indexes")
@@ -89,13 +89,13 @@ model AzureAISearchResource {
  */
 model IndexResource {
   /**
-   * An index connection id in an IndexResource attached to this agent.
+   * An index connection id in an IndexResource attached to this assistant.
    */
   @encodedName("application/json", "index_connection_id")
   indexConnectionId: string;
 
   /**
-   * The name of an index in an IndexResource attached to this agent.
+   * The name of an index in an IndexResource attached to this assistant.
    */
   @encodedName("application/json", "index_name")
   indexName: string;
@@ -108,7 +108,7 @@ model AISearchIndexResource {
   ...IndexResource;
 
   /**
-   *  Type of query in an AIIndexResource attached to this agent.
+   *  Type of query in an AIIndexResource attached to this assistant.
    */
   @encodedName("application/json", "query_type")
   queryType?: AzureAISearchQueryType;
@@ -130,7 +130,7 @@ model AISearchIndexResource {
 //
 
 /**
- * Request object. A set of resources that are used by the agent's tools. The resources are specific to the
+ * Request object. A set of resources that are used by the assistant's tools. The resources are specific to the
  * type of tool. For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search`
  * tool requires a list of vector store IDs.
  */
@@ -164,19 +164,19 @@ model CreateCodeInterpreterToolResourceOptions {
 }
 
 /**
- * A set of resources that are used by the agent's tools. The resources are specific to the type of tool.
+ * A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.
  * For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires
  * a list of vector store IDs.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
 union CreateFileSearchToolResourceOptions {
-  /** The vector store attached to this agent. There can be a maximum of 1 vector store attached to the agent. */
+  /** The vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant. */
   @encodedName("application/json", "vector_store_ids")
   // @maxItems(1) // this can't be applied to string[]
   vectorStoreIds: string[],
 
-  /** A helper to create a vector store with file_ids and attach it to this agent. There can be a maximum of 1 vector
-   * store attached to the agent. */
+  /** A helper to create a vector store with file_ids and attach it to this assistant. There can be a maximum of 1 vector
+   * store attached to the assistant. */
   @encodedName("application/json", "vector_stores")
   // @maxItems(1) // this can't be applied to string[]
   vectorStores: CreateFileSearchToolResourceVectorStoreOptions[],
@@ -206,7 +206,7 @@ model CreateFileSearchToolResourceVectorStoreOptions {
 //
 
 /**
- * Request object. A set of resources that are used by the agent's tools. The resources are specific to the type of tool.
+ * Request object. A set of resources that are used by the assistant's tools. The resources are specific to the type of tool.
  * For example, the `code_interpreter` tool requires a list of file IDs, while the `file_search` tool requires a list of
  * vector store IDs.
  */
@@ -218,7 +218,7 @@ model UpdateToolResourcesOptions {
   @encodedName("application/json", "code_interpreter")
   codeInterpreter?: UpdateCodeInterpreterToolResourceOptions;
 
-  /** Overrides the vector store attached to this agent. There can be a maximum of 1 vector store attached to the agent. */
+  /** Overrides the vector store attached to this assistant. There can be a maximum of 1 vector store attached to the assistant. */
   @encodedName("application/json", "file_search")
   fileSearch?: UpdateFileSearchToolResourceOptions;
 
@@ -229,7 +229,7 @@ model UpdateToolResourcesOptions {
 
 /** Request object to update `code_interpreted` tool resources. */
 model UpdateCodeInterpreterToolResourceOptions {
-  /** A list of file IDs to override the current list of the agent. */
+  /** A list of file IDs to override the current list of the assistant. */
   @encodedName("application/json", "file_ids")
   @maxItems(20)
   fileIds?: string[];
@@ -237,7 +237,7 @@ model UpdateCodeInterpreterToolResourceOptions {
 
 /** Request object to update `file_search` tool resources. */
 model UpdateFileSearchToolResourceOptions {
-  /** A list of vector store IDs to override the current list of the agent. */
+  /** A list of vector store IDs to override the current list of the assistant. */
   @maxItems(1)
   @encodedName("application/json", "vector_store_ids")
   vectorStoreIds?: string[];
