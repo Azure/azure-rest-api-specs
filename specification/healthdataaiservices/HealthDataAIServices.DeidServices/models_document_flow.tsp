@@ -22,6 +22,7 @@ model DeidentificationJob {
   name: string;
 
   @doc("Operation to perform on the input documents.")
+  @clientName("operationType", "java")
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("Storage location to perform the operation on.")
