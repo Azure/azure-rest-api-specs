@@ -839,6 +839,32 @@
         }
       }
     },
+    "/evaluations/checkannotation": {
+      "get": {
+        "operationId": "Evaluations_CheckAnnotation",
+        "description": "Check annotation supported by the service.",
+        "parameters": [
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "Api Version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
@@ -975,6 +1001,41 @@
                 "type": "string",
                 "description": "String error code indicating what went wrong."
               }
+            }
+          }
+        }
+      }
+    },
+    "/evaluations/submitannotation": {
+      "post": {
+        "operationId": "Evaluations_SubmitAnnotation",
+        "description": "Submit the annotation.",
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "Api Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "annotationDTO",
+            "in": "body",
+            "description": "Annotation data inputList of supported annotation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnnotationDTO"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "string"
             }
           }
         }
@@ -1670,6 +1731,94 @@
     }
   },
   "definitions": {
+    "AnnotationDTO": {
+      "type": "object",
+      "description": "Represents the data transfer object for an annotation.",
+      "properties": {
+        "AnnotationTask": {
+          "type": "string",
+          "description": "The task associated with the annotation."
+        },
+        "ContentType": {
+          "type": "string",
+          "description": "The type of content being annotated."
+        },
+        "UserTextList": {
+          "type": "array",
+          "description": "A list of user-provided text inputs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Contents": {
+          "type": "array",
+          "description": "A collection of content objects related to the annotation.",
+          "items": {
+            "$ref": "#/definitions/Content"
+          },
+          "x-ms-identifiers": []
+        },
+        "MetricList": {
+          "type": "array",
+          "description": "A list of metrics associated with the annotation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PromptVersion": {
+          "type": "string",
+          "description": "The version of the prompt used for the annotation."
+        },
+        "UserAgent": {
+          "type": "string",
+          "description": "The user agent information."
+        },
+        "PartnerId": {
+          "type": "string",
+          "description": "The partner identifier."
+        },
+        "ModelId": {
+          "type": "string",
+          "description": "The model identifier."
+        },
+        "InferenceType": {
+          "type": "string",
+          "description": "The type of inference performed."
+        },
+        "SubscriptionId": {
+          "type": "string",
+          "description": "The subscription identifier."
+        },
+        "ResourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group."
+        },
+        "WorkspaceName": {
+          "type": "string",
+          "description": "The name of the workspace."
+        },
+        "ClientRequestId": {
+          "type": "string",
+          "description": "The client request identifier."
+        }
+      },
+      "required": [
+        "AnnotationTask",
+        "ContentType",
+        "UserTextList",
+        "Contents",
+        "MetricList",
+        "PromptVersion",
+        "UserAgent",
+        "PartnerId",
+        "ModelId",
+        "InferenceType",
+        "SubscriptionId",
+        "ResourceGroupName",
+        "WorkspaceName",
+        "ClientRequestId"
+      ]
+    },
     "AttackStrategy": {
       "type": "string",
       "description": "Strategies for attacks.",
@@ -1980,6 +2129,20 @@
           }
         ]
       }
+    },
+    "Content": {
+      "type": "object",
+      "description": "Message content.",
+      "properties": {
+        "Messages": {
+          "type": "array",
+          "description": "The type of content.",
+          "items": {}
+        }
+      },
+      "required": [
+        "Messages"
+      ]
     },
     "CosmosDBIndex": {
       "type": "object",

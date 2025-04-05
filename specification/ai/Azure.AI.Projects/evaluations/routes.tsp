@@ -42,4 +42,39 @@ interface Evaluations {
     },
     Evaluation
   >;
+
+  // Evaluation Private APIs
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Check annotation supported by the service.")
+  @route("/checkannotation")
+  @get
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v_latest)
+  op checkAnnotation(
+    @doc("Api Version.")
+    @query apiVersion: string
+  ): {
+      @statusCode statusCode: 200;
+      @doc("List of supported annotation.")
+      @body supportedAnnotationList: string[];
+  };
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Submit the annotation.")
+  @route("/submitannotation")
+  @post
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v_latest)
+  op submitAnnotation(
+    @doc("Api Version.")
+    @query apiVersion: string,
+    @doc("Annotation data inputList of supported annotation.")
+    @body annotationDTO: AnnotationDTO
+  ): {
+    @statusCode statusCode: 202;
+    @doc("The data for annotation.")
+    @body fileContentResult: string;
+  };
 }

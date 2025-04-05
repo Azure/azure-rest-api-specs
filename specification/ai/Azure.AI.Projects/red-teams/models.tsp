@@ -118,6 +118,8 @@ model RedTeam {
 
 // Simulation Private Dto
 @doc("Simulation type.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 union SimulationType {
   string,
   @doc("Default simulation type.")
@@ -131,6 +133,8 @@ union SimulationType {
 }
 
 @doc("Customization Parameters")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 model CustomizationParameters {
     @doc("Application scenario.")
     ApplicationScenario?: string;
@@ -140,6 +144,8 @@ model CustomizationParameters {
 }
 
 @doc("Customization Parameters")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 model SimulationDTO {
     @doc("Additional headers.")
     Headers?: Record<string>;
@@ -179,6 +185,8 @@ model SimulationDTO {
 }
 
 @doc("Simulation object.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
 model SimulationResultDTO {
     @doc("Status Code.")
     StatusCode: int32;
