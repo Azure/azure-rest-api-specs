@@ -1254,6 +1254,155 @@
     }
   },
   "definitions": {
+    "AOAIModelConfig": {
+      "type": "object",
+      "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "azureEndpoint": {
+          "type": "string",
+          "description": "Endpoint targetURI for AOAI model."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API Key for AOAI model."
+        },
+        "azureDeployment": {
+          "type": "string",
+          "description": "Deployment name for AOAI model."
+        }
+      },
+      "required": [
+        "azureEndpoint",
+        "apiKey",
+        "azureDeployment"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetModelConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "AOAI"
+    },
+    "AnnotationDTO": {
+      "type": "object",
+      "description": "Represents the data transfer object for an annotation.",
+      "properties": {
+        "AnnotationTask": {
+          "type": "string",
+          "description": "The task associated with the annotation."
+        },
+        "ContentType": {
+          "type": "string",
+          "description": "The type of content being annotated."
+        },
+        "UserTextList": {
+          "type": "array",
+          "description": "A list of user-provided text inputs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Contents": {
+          "type": "array",
+          "description": "A collection of content objects related to the annotation.",
+          "items": {
+            "$ref": "#/definitions/Content"
+          },
+          "x-ms-identifiers": []
+        },
+        "MetricList": {
+          "type": "array",
+          "description": "A list of metrics associated with the annotation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PromptVersion": {
+          "type": "string",
+          "description": "The version of the prompt used for the annotation."
+        },
+        "UserAgent": {
+          "type": "string",
+          "description": "The user agent information."
+        },
+        "PartnerId": {
+          "type": "string",
+          "description": "The partner identifier."
+        },
+        "ModelId": {
+          "type": "string",
+          "description": "The model identifier."
+        },
+        "InferenceType": {
+          "type": "string",
+          "description": "The type of inference performed."
+        },
+        "SubscriptionId": {
+          "type": "string",
+          "description": "The subscription identifier."
+        },
+        "ResourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group."
+        },
+        "WorkspaceName": {
+          "type": "string",
+          "description": "The name of the workspace."
+        },
+        "ClientRequestId": {
+          "type": "string",
+          "description": "The client request identifier."
+        }
+      },
+      "required": [
+        "AnnotationTask",
+        "ContentType",
+        "UserTextList",
+        "Contents",
+        "MetricList",
+        "PromptVersion",
+        "UserAgent",
+        "PartnerId",
+        "ModelId",
+        "InferenceType",
+        "SubscriptionId",
+        "ResourceGroupName",
+        "WorkspaceName",
+        "ClientRequestId"
+      ]
+    },
+    "ApplicationInsightsConfiguration": {
+      "type": "object",
+      "description": "Data Source for Application Insights.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "LogAnalytic Workspace resourceID associated with ApplicationInsights"
+        },
+        "query": {
+          "type": "string",
+          "description": "Query to fetch the data."
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "Service name."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Connection String to connect to ApplicationInsights."
+        }
+      },
+      "required": [
+        "resourceId",
+        "query"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "app_insights"
+    },
     "AuthenticationType": {
       "type": "string",
       "description": "The authentication type used by the connection",
@@ -1499,6 +1648,20 @@
         ]
       }
     },
+    "Content": {
+      "type": "object",
+      "description": "Message content.",
+      "properties": {
+        "Messages": {
+          "type": "array",
+          "description": "The type of content.",
+          "items": {}
+        }
+      },
+      "required": [
+        "Messages"
+      ]
+    },
     "CosmosDBIndex": {
       "type": "object",
       "description": "CosmosDB Vector Store Index Definition",
@@ -1533,6 +1696,38 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
+    "CreatedEvaluationResponse": {
+      "type": "object",
+      "description": "Response model for create evaluation",
+      "properties": {
+        "evaluation": {
+          "$ref": "#/definitions/Evaluation",
+          "description": "Evaluation created"
+        }
+      },
+      "required": [
+        "evaluation"
+      ]
+    },
+    "CronTrigger": {
+      "type": "object",
+      "description": "Cron Trigger Definition",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Cron expression for the trigger."
+        }
+      },
+      "required": [
+        "expression"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "x-ms-discriminator-value": "Cron"
+    },
     "CustomizationParameters": {
       "type": "object",
       "description": "Customization Parameters",
@@ -1552,6 +1747,25 @@
       "required": [
         "HarmCategories"
       ]
+    },
+    "Dataset": {
+      "type": "object",
+      "description": "Dataset as source for evaluation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Evaluation input data"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "dataset"
     },
     "DatasetType": {
       "type": "string",
@@ -1699,6 +1913,214 @@
         "embeddingField"
       ]
     },
+    "Evaluation": {
+      "type": "object",
+      "description": "Evaluation Definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluation.",
+          "maxLength": 254,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
+          "readOnly": true
+        },
+        "data": {
+          "$ref": "#/definitions/InputData",
+          "description": "Data for evaluation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "target": {
+          "$ref": "#/definitions/EvaluationTarget",
+          "description": "Evaluation target specifying the model config and parameters",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the evaluation. It is set by service and is read-only.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "data",
+        "evaluators"
+      ]
+    },
+    "EvaluationSchedule": {
+      "type": "object",
+      "description": "Evaluation Schedule Definition",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the schedule, which also serves as the unique identifier for the evaluation",
+          "maxLength": 254,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$",
+          "readOnly": true
+        },
+        "data": {
+          "$ref": "#/definitions/ApplicationInsightsConfiguration",
+          "description": "Data for evaluation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning State of the evaluation. It is set by service and is read-only.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isEnabled": {
+          "type": "string",
+          "description": "Enabled status of the evaluation. It is set by service and is read-only.",
+          "readOnly": true
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "trigger": {
+          "$ref": "#/definitions/Trigger",
+          "description": "Trigger for the evaluation."
+        }
+      },
+      "required": [
+        "name",
+        "data",
+        "evaluators",
+        "trigger"
+      ]
+    },
+    "EvaluationTarget": {
+      "type": "object",
+      "description": "Target for the evaluation process.",
+      "properties": {
+        "systemMessage": {
+          "type": "string",
+          "description": "System message related to the evaluation target."
+        },
+        "modelConfig": {
+          "$ref": "#/definitions/TargetModelConfig",
+          "description": "Model configuration for the evaluation."
+        },
+        "modelParams": {
+          "type": "object",
+          "description": "A dictionary of parameters for the model.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "systemMessage",
+        "modelConfig"
+      ]
+    },
+    "EvaluatorConfiguration": {
+      "type": "object",
+      "description": "Evaluator Configuration",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluator."
+        },
+        "initParams": {
+          "type": "object",
+          "description": "Initialization parameters of the evaluator.",
+          "additionalProperties": {}
+        },
+        "dataMapping": {
+          "type": "object",
+          "description": "Data parameters of the evaluator.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "FileDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
@@ -1727,6 +2149,43 @@
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
+    },
+    "Frequency": {
+      "type": "string",
+      "description": "Frequency of the schedule - day, week, month, hour, minute",
+      "enum": [
+        "Month",
+        "Week",
+        "Day",
+        "Hour",
+        "Minute"
+      ],
+      "x-ms-enum": {
+        "name": "Frequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Month",
+            "value": "Month"
+          },
+          {
+            "name": "Week",
+            "value": "Week"
+          },
+          {
+            "name": "Day",
+            "value": "Day"
+          },
+          {
+            "name": "Hour",
+            "value": "Hour"
+          },
+          {
+            "name": "Minute",
+            "value": "Minute"
+          }
+        ]
+      }
     },
     "Index": {
       "type": "object",
@@ -1808,6 +2267,20 @@
         ]
       }
     },
+    "InputData": {
+      "type": "object",
+      "description": "Abstract data class for input data configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the data."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "ListSortOrder": {
       "type": "string",
       "description": "The available sorting options when requesting a list of response objects.",
@@ -1861,6 +2334,30 @@
           }
         ]
       }
+    },
+    "MAASModelConfig": {
+      "type": "object",
+      "description": "MaaS model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "azureEndpoint": {
+          "type": "string",
+          "description": "Endpoint targetURI for MAAS model."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API Key for MAAS model."
+        }
+      },
+      "required": [
+        "azureEndpoint",
+        "apiKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetModelConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "MAAS"
     },
     "ManagedAzureAISearchIndex": {
       "type": "object",
@@ -2121,6 +2618,76 @@
         ]
       }
     },
+    "RecurrenceSchedule": {
+      "type": "object",
+      "description": "RecurrenceSchedule Definition",
+      "properties": {
+        "hours": {
+          "type": "array",
+          "description": "List of hours for the schedule.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "minutes": {
+          "type": "array",
+          "description": "List of minutes for the schedule.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "weekDays": {
+          "type": "array",
+          "description": "List of days for the schedule.",
+          "items": {
+            "$ref": "#/definitions/WeekDays"
+          }
+        },
+        "monthDays": {
+          "type": "array",
+          "description": "List of month days for the schedule",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "hours",
+        "minutes"
+      ]
+    },
+    "RecurrenceTrigger": {
+      "type": "object",
+      "description": "Recurrence Trigger Definition",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/Frequency",
+          "description": "The frequency to trigger schedule."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies schedule interval in conjunction with frequency"
+        },
+        "schedule": {
+          "$ref": "#/definitions/RecurrenceSchedule",
+          "description": "The recurrence schedule."
+        }
+      },
+      "required": [
+        "frequency",
+        "interval"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "x-ms-discriminator-value": "Recurrence"
+    },
     "SasCredential": {
       "type": "object",
       "description": "SAS Credential definition",
@@ -2292,6 +2859,109 @@
         "size",
         "tier"
       ]
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp the resource was created at.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The identity type that created the resource.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "readOnly": true
+        }
+      }
+    },
+    "TargetModelConfig": {
+      "type": "object",
+      "description": "Abstract class for model configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the model configuration."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "Trigger": {
+      "type": "object",
+      "description": "Abstract data class for input data configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the trigger."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "WeekDays": {
+      "type": "string",
+      "description": "WeekDay of the schedule - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "x-ms-enum": {
+        "name": "WeekDays",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Monday",
+            "value": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday"
+          },
+          {
+            "name": "Sunday",
+            "value": "Sunday"
+          }
+        ]
+      }
     }
   },
   "parameters": {
