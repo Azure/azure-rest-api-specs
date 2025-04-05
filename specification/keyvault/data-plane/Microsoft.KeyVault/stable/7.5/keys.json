@@ -1389,6 +1389,7 @@
     },
     "Error": {
       "type": "object",
+      "description": "The key vault server error.",
       "properties": {
         "code": {
           "type": "string",
@@ -1406,8 +1407,7 @@
           "readOnly": true,
           "x-ms-client-name": "innerError"
         }
-      },
-      "x-nullable": true
+      }
     },
     "GetRandomBytesRequest": {
       "type": "object",
@@ -2404,8 +2404,14 @@
       "description": "The key vault error exception.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error",
+          "type": "object",
           "description": "The key vault server error.",
+          "x-nullable": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/Error"
+            }
+          ],
           "readOnly": true
         }
       }
