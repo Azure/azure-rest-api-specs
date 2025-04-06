@@ -109,10 +109,16 @@ export async function getWorkflowRun(github, context, core, workflowName, head_s
   }
 
   if (matchingWorkflowRuns.length > 1) {
-    const message = `Multiple completed workflow runs with name: ${workflowName}`;
-    core.debug(`Workflow runs: ${JSON.stringify(matchingWorkflowRuns)}`);
-    core.setFailed(message);
-    throw new Error(message);
+    // TODO: workflowRuns have event: "pull_request" but the "pull_requests"
+    // field is an empty array. Consider matching on "repository" in the case of
+    // "pull_request" events.
+    core.warning(`Multiple matching workflow runs: ${JSON.stringify(matchingWorkflowRuns)}`);
+
+    matchingWorkflowRuns.sort((a, b) =>
+      new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+    );
+
+    core.debug(`Multiple matching workflow runs: ${JSON.stringify(matchingWorkflowRuns)}`);
   }
 
   return matchingWorkflowRuns[0];
