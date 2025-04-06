@@ -65,7 +65,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BingCustomSearchConfiguration"
+              "$ref": "#/definitions/CustomSearchConfiguration"
             },
             "description": "The parameters of the configuration to create or update."
           },
@@ -80,13 +80,13 @@
           "200": {
             "description": "The resource is successfully created or updated.",
             "schema": {
-              "$ref": "#/definitions/BingCustomSearchConfiguration"
+              "$ref": "#/definitions/CustomSearchConfiguration"
             }
           },
           "201": {
             "description": "The resource is created or updated and the operation will complete asynchronously",
             "schema": {
-              "$ref": "#/definitions/BingCustomSearchConfiguration"
+              "$ref": "#/definitions/CustomSearchConfiguration"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -183,7 +183,7 @@
           "200": {
             "description": "The operation was successful, and the requested Bing Custom Search configuration details are returned in the response. This includes information such as the configuration's name, type, and unique identifier.",
             "schema": {
-              "$ref": "#/definitions/BingCustomSearchConfiguration"
+              "$ref": "#/definitions/CustomSearchConfiguration"
             }
           },
           "default": {
@@ -225,7 +225,7 @@
           "200": {
             "description": "The operation was successful, and the requested list of Bing Custom Search configurations is returned in the response. If there are additional pages of results, the nextLink field will contain a URL to fetch the next page. If no additional pages exist, nextLink will be null. This allows users to retrieve all configurations in a paginated manner.",
             "schema": {
-              "$ref": "#/definitions/BingCustomSearchConfigurationListResult"
+              "$ref": "#/definitions/CustomSearchConfigurationListResult"
             }
           },
           "default": {
@@ -842,12 +842,12 @@
     }
   },
   "definitions": {
-    "BingCustomSearchConfiguration": {
+    "CustomSearchConfiguration": {
       "description": "Bing Custom Search Configuration is an Azure resource representing Bing Custom Search configuration type, allowed domains, blocked domains and pinned domains.",
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BingCustomConfigurationProperties",
+          "$ref": "#/definitions/CustomConfigurationProperties",
           "description": "Properties of Bing Custom Search configuration."
         }
       },
@@ -858,7 +858,7 @@
       ],
       "x-ms-azure-resource": true
     },
-    "BingCustomConfigurationProperties": {
+    "CustomConfigurationProperties": {
       "type": "object",
       "properties": {
         "allowedList": {
@@ -992,7 +992,7 @@
         "condition"
       ]
     },
-    "BingCustomSearchConfigurationListResult": {
+    "CustomSearchConfigurationListResult": {
       "type": "object",
       "properties": {
         "nextLink": {
@@ -1003,7 +1003,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BingCustomSearchConfiguration"
+            "$ref": "#/definitions/CustomSearchConfiguration"
           },
           "description": "Gets the list of Bing Custom Search configurations and their properties."
         }
