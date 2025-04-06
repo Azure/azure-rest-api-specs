@@ -1875,7 +1875,6 @@
       "enum": [
         "DELETE",
         "PUT",
-        "POST",
         "PATCH"
       ],
       "x-ms-enum": {
@@ -1893,11 +1892,6 @@
             "description": "PUT ARM Operation."
           },
           {
-            "name": "POST",
-            "value": "POST",
-            "description": "POST ARM Operation."
-          },
-          {
             "name": "PATCH",
             "value": "PATCH",
             "description": "PATCH ARM Operation."
@@ -1913,7 +1907,7 @@
           "type": "array",
           "description": "Arm Operation array.",
           "items": {
-            "$ref": "#/definitions/ArmOperationResource"
+            "$ref": "#/definitions/ArmResourceOperation"
           },
           "x-ms-identifiers": [
             "resourceId"
@@ -1953,22 +1947,37 @@
       ],
       "x-ms-discriminator-value": "ArmOperation"
     },
-    "ArmOperationResource": {
+    "ArmResourceOperation": {
       "type": "object",
       "description": "Artifact content model for Inline ArmOperations.",
       "properties": {
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "The uri of the operation."
+          "description": "The uri of the operation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "httpMethod": {
           "$ref": "#/definitions/ArmOperation",
-          "description": "The http method of the operation."
+          "description": "The http method of the operation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "content": {
-          "$ref": "#/definitions/ResourceContent",
-          "description": "The resource operation content."
+          "$ref": "#/definitions/OperationContent",
+          "description": "The resource operation content.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2545,6 +2554,42 @@
       ],
       "x-ms-discriminator-value": "number"
     },
+    "OperationContent": {
+      "type": "object",
+      "description": "Resource operation content model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "description": "The properties of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "Parameter": {
       "type": "object",
       "description": "Base class for the Parameters.",
@@ -2685,27 +2730,6 @@
         ]
       },
       "readOnly": true
-    },
-    "ResourceContent": {
-      "type": "object",
-      "description": "Resource operation content model.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource."
-        },
-        "properties": {
-          "type": "object",
-          "description": "The properties of the resource."
-        }
-      },
-      "required": [
-        "properties"
-      ]
     },
     "RetrieveNextStagesResponse": {
       "type": "object",
@@ -3284,13 +3308,23 @@
       "description": "VerifyChangeValidity POST Action request.",
       "properties": {
         "operation": {
-          "$ref": "#/definitions/ArmOperationResource",
-          "description": "The resource operation."
+          "$ref": "#/definitions/ArmResourceOperation",
+          "description": "The resource operation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "stageProgressionId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The stage progression Id."
+          "description": "The stage progression Id.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -3312,7 +3346,7 @@
         "validUntil": {
           "type": "string",
           "format": "date-time",
-          "description": "The experation time of the change."
+          "description": "The time when the validation result expires."
         }
       },
       "required": [

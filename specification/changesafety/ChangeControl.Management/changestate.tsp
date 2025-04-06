@@ -249,11 +249,11 @@ model ArmOperationArtifactContent {
   @doc("Arm Operation array.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @Azure.ResourceManager.identifiers(#["resourceId"])
-  operations: ArmOperationResource[];
+  operations: ArmResourceOperation[];
 }
 
 @doc("Artifact content model for Inline ArmOperations.")
-model ArmOperationResource {
+model ArmResourceOperation {
   @removed(Versions.v2025_03_01_preview)
   @doc("Target resource Id that needs to be changed.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -265,16 +265,19 @@ model ArmOperationResource {
   operation: ArmOperation;
 
   @added(Versions.v2025_03_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The uri of the operation.")
   uri: url;
 
   @added(Versions.v2025_03_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The http method of the operation.")
   httpMethod: ArmOperation;
 
   @added(Versions.v2025_03_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The resource operation content.")
-  content?: ResourceContent;
+  content?: OperationContent;
 }
 
 @doc("Artifact content model for External ArmTemplates or Bicep files.")
@@ -295,22 +298,27 @@ model TemplateSpecArtifactContent {
 @doc("VerifyChangeValidity POST Action request.")
 model VerifyChangeValidityRequest {
   @doc("The resource operation.")
-  operation: ArmOperationResource;
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  operation: ArmResourceOperation;
 
   @doc("The stage progression Id.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   stageProgressionId?: armResourceIdentifier;
 }
 
 @added(Versions.v2025_03_01_preview)
 @doc("Resource operation content model.")
-model ResourceContent {
+model OperationContent {
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The name of the resource.")
   name?: string;
 
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The location of the resource.")
   location?: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The properties of the resource.")
   properties: {};
 }
@@ -324,7 +332,7 @@ model VerifyChangeValidityResponse {
   @doc("The explanation message of the verification.")
   message: string;
 
-  @doc("The experation time of the change.")
+  @doc("The time when the validation result expires.")
   validUntil?: utcDateTime;
 }
 
@@ -365,10 +373,6 @@ union ArmOperation {
   @added(Versions.v2025_03_01_preview)
   @doc("PUT ARM Operation.")
   PUT: "PUT",
-
-  @added(Versions.v2025_03_01_preview)
-  @doc("POST ARM Operation.")
-  POST: "POST",
 
   @added(Versions.v2025_03_01_preview)
   @doc("PATCH ARM Operation.")
@@ -439,6 +443,9 @@ interface ChangeStates {
     }
   >;
 
+  list is ArmResourceListAtScope<ChangeState>;
+  listBySubscription is ArmListBySubscription<ChangeState>;
+
   @doc("Gets list of next stages that are eligible to put in 'InProgress' state in a changestate resource.")
   @action("retrieveNextStages")
   retrieveNextStages is ArmResourceActionSync<
@@ -458,9 +465,6 @@ interface ChangeStates {
       ...SubscriptionIdParameter;
     }
   >;
-
-  list is ArmResourceListAtScope<ChangeState>;
-  listBySubscription is ArmListBySubscription<ChangeState>;
 
   @doc("Verify the change validity.")
   @action("verifyChangeValidity")
