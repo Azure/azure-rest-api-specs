@@ -917,10 +917,12 @@
         },
         "includeSubPages": {
           "type": "boolean",
-          "description": "A flag indicating whether to include subpages of the allowed domain."
+          "default": true,
+          "description": "A flag to indicate whether subpages of the allowed domain should be included in the search result. If set to true (default), all subpages and nested paths under the specified domain will be included in the search result. If set to false, only the main domain will be included in the search result, excluding any subpages."
         },
         "boostLevel": {
           "type": "string",
+          "default": "Default",
           "description": "The boost level for the allowed domain.",
           "enum": [
             "Demoted",
@@ -936,9 +938,7 @@
       },
       "description": "An allowed domain for Bing Custom Search configuration.",
       "required": [
-        "domain",
-        "includeSubPages",
-        "boostLevel"
+        "domain"
       ]
     },
     "BlockedDomain": {
@@ -950,13 +950,13 @@
         },
         "includeSubPages": {
           "type": "boolean",
-          "description": "A flag indicating whether to include subpages of the blocked domain."
+          "default": true,
+          "description": "A flag to indicate whether subpages of the blocked domain should be excluded from search results. If set to true (default), all subpages and nested paths under the specified domain will be excluded from search results. If set to false, only the main domain will be excluded from search results."
         }
       },
       "description": "A blocked domain for Bing Custom Search configuration.",
       "required": [
-        "domain",
-        "includeSubPages"
+        "domain"
       ]
     },
     "PinnedDomain": {
@@ -1803,7 +1803,7 @@
       "type": "string",
       "maxLength": 50,
       "minLength": 2,
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]+$",
       "description": "The name of the Bing custom search configuration.",
       "x-ms-parameter-location": "method"
     },
