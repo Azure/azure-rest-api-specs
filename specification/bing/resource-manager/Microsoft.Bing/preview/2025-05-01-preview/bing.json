@@ -964,20 +964,21 @@
       "properties": {
         "domain": {
           "$ref": "#/definitions/Domain",
-          "description": "The domain to pin."
+          "description": "The domain or URL that you want to pin. This can be a full domain, or a specific subpage. When a domain is pinned, content from this domain will be prioritized in the search results if the user's search query meets the condition specified."
         },
         "query": {
           "type": "string",
-          "description": "The query to match for the pinned domain."
+          "description": "The search terms or keywords that trigger the pinned domain to appear at the top of the search results if the user's search query meets the condition specified."
         },
         "condition": {
           "type": "string",
-          "description": "The condition for the pinned domain.",
+          "description": "Defines how the query terms should match the search terms entered by the user. If set to Exact (default), the pinned domain appears only if the user's search query exactly matches the specified query. If set to StartsWith, the pinned domain appears if the user's search query starts with the specified query. If set to Contains, the pinned domain appears if the user's search query contains the specified query. If set to EndsWith, the pinned domain appears if the user's search query ends with the specified query.",
+          "default": "Exact",
           "enum": [
+            "Exact",
             "StartsWith",
             "Contains",
-            "EndsWith",
-            "Exact"
+            "EndsWith"
           ],
           "x-ms-enum": {
             "name": "PinnedDomainCondition",
@@ -988,8 +989,7 @@
       "description": "A pinned domain for Bing Custom Search configuration.",
       "required": [
         "domain",
-        "query",
-        "condition"
+        "query"
       ]
     },
     "CustomSearchConfigurationListResult": {
