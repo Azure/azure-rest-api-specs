@@ -2,6 +2,8 @@
 name: "~Watch - LintDiff"
 
 on:
+  # check_suite is preferred over check_run to avoid triggering on all check
+  # runs. In some cases, check_run must be used in testing environments.
   check_run:
     types: completed
 
@@ -14,37 +16,9 @@ permissions:
   checks: read
 
 jobs:
-  check-lintdiff:
-    runs-on: ubuntu-24.04
-
-    # TODO: Parameterize github.event.check_run.name
-    if: >- 
-      github.event_name == 'workflow_run' ||
-      (github.event_name == 'check_run' && github.event.check_run.name == 'Swagger LintDiff') ||
-      (github.event_name == 'check_suite')
-
-    steps:
-      # *** IMPORTANT ***
-      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
-      # context of the base of the pull request.  You should make sure that you do not check out,
-      # build, or run untrusted code from the head of the pull request.
-      - uses: actions/checkout@v4
-        with:
-          # Only needs .github folder for automation, not the files in the PR (analyzed in a
-          # separate workflow).
-          #
-          # Uses the .github folder from the PR base branch (pull_request_target trigger),
-          # or the repo default branch (other triggers).
-          sparse-checkout: |
-            .github
-
-      - name: Verify matching status
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const { verifyRunStatus } = await import('${{ github.workspace }}/.github/workflows/src/verify-run-status.js');
-            return await verifyRunStatus(
-              { github, context, core }, 
-               "Swagger LintDiff", 
-               "[TEST-IGNORE] Swagger LintDiff"
-            );
+  LintDiff:
+    name: Lint Diff
+    uses: ./.github/workflows/_reusable-verify-run-status.yaml
+    with:
+      check_run_name: "Lint Diff"
+      workflow_name: "\\[TEST-IGNORE\\] Swagger LintDiff"
