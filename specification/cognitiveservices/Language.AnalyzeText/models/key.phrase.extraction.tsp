@@ -44,7 +44,7 @@ model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
 model KeyPhraseResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
-    Versions.v2025_05_15_preview,
+    Versions.v2024_11_15_preview,
     Array<KeyPhrasesDocumentResult>
   )
   documents: Array<KeyPhrasesDocumentResultWithDetectedLanguage>;

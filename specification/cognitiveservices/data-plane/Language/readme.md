@@ -27,7 +27,7 @@ directive:
 
 These settings apply only when `--tag=release_2025_05_15_preview` is specified on the command line.
 
-``` yaml $(tag) == 'release_2024-11-15-preview'
+``` yaml $(tag) == 'release_2025-05-15-preview'
 input-file:
   - preview/2025-05-15-preview/analyzetext.json
 title:

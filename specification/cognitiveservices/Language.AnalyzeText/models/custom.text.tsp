@@ -29,12 +29,12 @@ model CustomEntitiesLROTask extends AnalyzeTextLROTask {
 /** Contains the list of detected custom entities result for the documents. */
 model CustomEntitiesResult is CustomResult {
   /** Enumeration of the document results. */
-  @typeChangedFrom(Versions.v2025_05_15_preview, Array<EntitiesDocumentResult>)
+  @typeChangedFrom(Versions.v2024_11_15_preview, Array<EntitiesDocumentResult>)
   documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
 }
 
 /** Contains the entity recognition task result for the document with detected language. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 model EntitiesDocumentResultWithDetectedLanguage {
   ...EntitiesDocumentResult;
   ...DocumentDetectedLanguage;
@@ -57,7 +57,7 @@ model CustomSingleLabelClassificationLROTask extends AnalyzeTextLROTask {
 model CustomLabelClassificationResult is CustomResult {
   /** Response by document */
   @typeChangedFrom(
-    Versions.v2025_05_15_preview,
+    Versions.v2024_11_15_preview,
     Array<ClassificationDocumentResult>
   )
   documents: Array<ClassificationDocumentResultWithDetectedLanguage>;
@@ -128,7 +128,7 @@ model CustomMultiLabelClassificationLROResult extends AnalyzeTextLROResult {
 }
 
 /** This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 @discriminator("entityComponentKind")
 model EntityComponentInformation {
   /** Kind of entity component. */
@@ -136,7 +136,7 @@ model EntityComponentInformation {
 }
 
 /** Kind of entity components supported. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 union entityComponentKind {
   string,
 
@@ -151,7 +151,7 @@ union entityComponentKind {
 }
 
 /** This object contains information of the prebuilt component of the detected entity. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 model PrebuiltComponent extends EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind.PrebuiltComponent;
@@ -161,7 +161,7 @@ model PrebuiltComponent extends EntityComponentInformation {
 }
 
 /** This object contains information of the learned component of the detected entity. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 model LearnedComponent extends EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind.LearnedComponent;
@@ -171,7 +171,7 @@ model LearnedComponent extends EntityComponentInformation {
 }
 
 /** This object contains information of the list component of the detected entity. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 model ListComponent extends EntityComponentInformation {
   /** Kind of entity component. */
   entityComponentKind: entityComponentKind.ListComponent;
@@ -181,7 +181,7 @@ model ListComponent extends EntityComponentInformation {
 }
 
 /** Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2024_11_15_preview)
 union ClassificationType {
   string,
 
