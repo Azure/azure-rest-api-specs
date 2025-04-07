@@ -210,11 +210,11 @@ describe("verifyRunStatus", () => {
     delete process.env.WORKFLOW_NAME;
   });
 
-  afterAll(() => {
+  afterAll(() => { 
     delete process.env.CHECK_RUN_NAME;
     delete process.env.WORKFLOW_NAME;
-  });
-
+  })
+  
   it("verifies status when check_run event fires", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
@@ -275,6 +275,7 @@ describe("verifyRunStatus", () => {
 
     const core = createMockCore();
 
+    
     process.env.CHECK_RUN_NAME = "checkRunName";
     process.env.WORKFLOW_NAME = "workflowName";
     await verifyRunStatus({ github, context, core });
@@ -393,9 +394,7 @@ describe("verifyRunStatus", () => {
     const context = createMockContext();
     const core = createMockCore();
     process.env.WORKFLOW_NAME = "workflowName";
-    await expect(
-      async () => await verifyRunStatus({ github, context, core }),
-    ).rejects.toThrow();
+    await expect(async () => await verifyRunStatus({ github, context, core }) ).rejects.toThrow();
   });
 
   it("throws if WORKFLOW_NAME is not set", async () => {
@@ -403,8 +402,6 @@ describe("verifyRunStatus", () => {
     const context = createMockContext();
     const core = createMockCore();
     process.env.CHECK_RUN_NAME = "checkRunName";
-    await expect(
-      async () => await verifyRunStatus({ github, context, core }),
-    ).rejects.toThrow();
+    await expect(async () => await verifyRunStatus({ github, context, core }) ).rejects.toThrow();
   });
 });
