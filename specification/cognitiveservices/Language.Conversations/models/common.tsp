@@ -407,16 +407,16 @@ model ConversationalAITask extends AnalyzeConversationTask {
   kind: AnalyzeConversationTaskKind.ConversationalAI;
 
   /** The input ConversationItem and its optional parameters */
-  analysisInput: ConversationalAIAnalysisOptions;
+  analysisInput: ConversationalAIAnalysisInput;
 
   /** Input parameters necessary for a Conversation language understanding task. */
-  parameters: ConversationalAITaskParameters;
+  parameters: ConversationalAIInputParameters;
 }
 
 /** The input ConversationItem and its optional parameters */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2025_05_15_preview)
-model ConversationalAIAnalysisOptions {
+model ConversationalAIAnalysisInput {
   /** List of multiple conversations */
   conversations: AIConversation[];
 }
@@ -1121,7 +1121,7 @@ model ConversationItemLevelTiming is AudioTiming;
 /** Input parameters base for a Conversation task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2025_05_15_preview)
-model ConversationalAITaskParameters {
+model ConversationalAIInputParameters {
   /** The name of the project to use. */
   projectName: string;
 
