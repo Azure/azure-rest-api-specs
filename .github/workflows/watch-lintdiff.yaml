@@ -16,7 +16,12 @@ permissions:
 jobs:
   check-lintdiff:
     runs-on: ubuntu-24.04
-    # TODO: Only run if check_run or workflow_run is initiated by pull_request
+
+    # TODO: Parameterize github.event.check_run.name
+    if: >- 
+      github.event_name == 'workflow_run' ||
+      (github.event_name == 'check_run' && github.event.check_run.name == 'Swagger LintDiff') ||
+      (github.event_name == 'check_suite')
 
     steps:
       # *** IMPORTANT ***
