@@ -19,6 +19,7 @@ model DeidentificationJob {
   @maxLength(36)
   @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+  @clientName("jobName", "java")
   name: string;
 
   @doc("Operation to perform on the input documents.")
