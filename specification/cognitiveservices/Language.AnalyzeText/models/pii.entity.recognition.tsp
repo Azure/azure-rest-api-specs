@@ -38,6 +38,20 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   /** RedactionPolicy to be used on the input. */
   @added(Versions.v2024_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
+
+  /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+  @added(Versions.v2025_05_15_preview)
+  valueExclusionPolicy?: ValueExclusionPolicy;
+}
+
+/** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+@added(Versions.v2025_05_15_preview)
+model ValueExclusionPolicy {
+  /** Option to make the values excluded values case sensitive */
+  caseSensitive: boolean = false;
+
+  /** List of words and terms that should be excluded from detection by the PII detection service */
+  excludedValues: Array<string>;
 }
 
 /** The abstract base class for RedactionPolicy. */
