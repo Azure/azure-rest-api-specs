@@ -2809,7 +2809,7 @@
             "$ref": "#/parameters/DevBoxAddOnNameParameter"
           },
           {
-            "$ref": "#/parameters/DevBoxAddOnTypeParameter"
+            "$ref": "#/parameters/DevBoxAddOnKindParameter"
           },
           {
             "name": "body",
@@ -5592,7 +5592,7 @@
           "readOnly": true
         },
         "kind": {
-          "$ref": "#/definitions/DevBoxAddOnType",
+          "$ref": "#/definitions/DevBoxAddOnKind",
           "description": "The type of the Dev Box addon.",
           "readOnly": true
         },
@@ -5618,26 +5618,20 @@
         "kind"
       ]
     },
-    "DevBoxAddOnType": {
+    "DevBoxAddOnKind": {
       "type": "string",
-      "description": "The types of Dev Box addon.",
+      "description": "The kind of Dev Box addon.",
       "enum": [
-        "DevBoxTunnel",
-        "DevBoxHyperV"
+        "DevBoxTunnel"
       ],
       "x-ms-enum": {
-        "name": "DevBoxAddOnType",
+        "name": "DevBoxAddOnKind",
         "modelAsString": true,
         "values": [
           {
             "name": "DevBoxTunnel",
             "value": "DevBoxTunnel",
             "description": "The Dev Box Tunnel addon."
-          },
-          {
-            "name": "DevBoxHyperV",
-            "value": "DevBoxHyperV",
-            "description": "The Dev Box HyperV addon."
           }
         ]
       }
@@ -6034,6 +6028,7 @@
         },
         "codeTunnelUrl": {
           "type": "string",
+          "format": "uri",
           "description": "The code tunnel's url.",
           "readOnly": true
         },
@@ -8462,6 +8457,28 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "delayUntil"
     },
+    "DevBoxAddOnKindParameter": {
+      "name": "kind",
+      "in": "query",
+      "description": "The kind of the Dev Box addon.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "DevBoxTunnel"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxAddOnKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DevBoxTunnel",
+            "value": "DevBoxTunnel",
+            "description": "The Dev Box Tunnel addon."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
     "DevBoxAddOnNameParameter": {
       "name": "addOnName",
       "in": "path",
@@ -8471,34 +8488,6 @@
       "minLength": 3,
       "maxLength": 63,
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
-      "x-ms-parameter-location": "method"
-    },
-    "DevBoxAddOnTypeParameter": {
-      "name": "kind",
-      "in": "query",
-      "description": "The type of the Dev Box addon.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "DevBoxTunnel",
-        "DevBoxHyperV"
-      ],
-      "x-ms-enum": {
-        "name": "DevBoxAddOnType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DevBoxTunnel",
-            "value": "DevBoxTunnel",
-            "description": "The Dev Box Tunnel addon."
-          },
-          {
-            "name": "DevBoxHyperV",
-            "value": "DevBoxHyperV",
-            "description": "The Dev Box HyperV addon."
-          }
-        ]
-      },
       "x-ms-parameter-location": "method"
     },
     "DevBoxNameParameter": {

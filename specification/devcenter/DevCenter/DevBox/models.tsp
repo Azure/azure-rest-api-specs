@@ -1188,7 +1188,7 @@ model DevBoxAddOn {
 
   @doc("The type of the Dev Box addon.")
   @visibility(Lifecycle.Read)
-  kind: DevBoxAddOnType;
+  kind: DevBoxAddOnKind;
 
   @doc("""
     The current action state of the Dev Box addon. This state is based on previous
@@ -1206,14 +1206,11 @@ model DevBoxAddOn {
   error?: Azure.Core.Foundations.Error;
 }
 
-@doc("The types of Dev Box addon.")
+@doc("The kind of Dev Box addon.")
 @added(APIVersions.v2025_04_01_preview)
-union DevBoxAddOnType {
+union DevBoxAddOnKind {
   @doc("The Dev Box Tunnel addon.")
   DevBoxTunnel: "DevBoxTunnel",
-
-  @doc("The Dev Box HyperV addon.")
-  DevBoxHyperV: "DevBoxHyperV",
 
   string,
 }
@@ -1221,8 +1218,8 @@ union DevBoxAddOnType {
 @doc("The Dev Box Tunnel addon.")
 @added(APIVersions.v2025_04_01_preview)
 model DevBoxTunnel extends DevBoxAddOn {
-  @doc("The type of the Dev Box addon.")
-  kind: DevBoxAddOnType.DevBoxTunnel;
+  @doc("The kind of Dev Box addon.")
+  kind: DevBoxAddOnKind.DevBoxTunnel;
 
   @doc("The tunnel status.")
   @visibility(Lifecycle.Read)
@@ -1234,7 +1231,7 @@ model DevBoxTunnel extends DevBoxAddOn {
 
   @doc("The code tunnel's url.")
   @visibility(Lifecycle.Read)
-  codeTunnelUrl: string;
+  codeTunnelUrl: url;
 
   @doc("""
     The hosting resource name, either a DevBox or HyperV. 
