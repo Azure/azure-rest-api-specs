@@ -14,12 +14,12 @@ import { PER_PAGE_MAX } from "./github.js";
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export async function verifyRunStatus({ github, context, core }) {
-  const checkRunName = process.env.CHECK_RUN_NAME || "";
+  const checkRunName = process.env.CHECK_RUN_NAME;
   if (!checkRunName) {
     throw new Error("CHECK_RUN_NAME is not set");
   }
 
-  const workflowName = process.env.WORKFLOW_NAME || "";
+  const workflowName = process.env.WORKFLOW_NAME;
   if (!workflowName) {
     throw new Error("WORKFLOW_NAME is not set");
   }
