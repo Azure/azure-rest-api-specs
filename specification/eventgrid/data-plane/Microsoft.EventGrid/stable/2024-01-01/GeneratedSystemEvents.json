@@ -171,8 +171,8 @@
       ],
       "properties": {
         "user": {
-          "description": "The communication identifier of the participant",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+          "description": "The communication identifier of the participant.",
+          "$ref": "#/definitions/AcsCallParticipantUserProperties"
         },
         "displayName": {
           "description": "The display name of the participant.",
@@ -184,6 +184,20 @@
         },
         "userAgent": {
           "description": "The user agent of the participant. ",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallParticipantUserProperties": {
+      "description": "Schema of calling event participant user",
+      "type": "object",
+      "properties": {
+        "communicationIdentifier": {
+          "description": "The communication identifier of the call ended by",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "role": {
+          "description": "The role of participant user.",
           "type": "string"
         }
       }
@@ -203,6 +217,10 @@
         "group": {
           "description": "The group metadata",
           "$ref": "#/definitions/AcsCallingEventGroupProperties"
+        },
+        "room": {
+          "description": "The room metadata",
+          "$ref": "#/definitions/AcsCallingEventRoomProperties"
         },
         "isTwoParty": {
           "description": "Is two party in calling event.",
@@ -231,6 +249,16 @@
         }
       }
     },
+    "AcsCallingEventRoomProperties": {
+      "description": "Schema of calling event room properties",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Calling Room ID. Format is Guid as string.",
+          "type": "string"
+        }
+      }
+    },
     "AcsCallingEventEndedByProperties": {
       "description": "Schema of calling event endedby properties",
       "type": "object",
@@ -241,8 +269,12 @@
         },
         "type": {
           "description": "The type of the call ended by.",
-          "ref": "$/definitions/CallEndedParticipantTypeProperty",
-          "type": "object"
+          "type": "string",
+          "enum": [],
+          "x-ms-enum": {
+            "name": "AcsCallEndedParticipantKind",
+            "modelAsString": true
+          }
         },
         "name": {
           "description": "The name of the call ended by.",
@@ -265,23 +297,6 @@
         "phrase": {
           "description": "Reason for the call ended event.",
           "type": "string"
-        }
-      }
-    },
-    "CallEndedParticipantTypeProperty": {
-      "description": "Call Ended Participant Type Content",
-      "type": "object",
-      "properties": {
-        "type": {
-          "x-ms-client-name": "participantTypeKind",
-          "description": "The call ended type content",
-          "type": "string",
-          "enum": [],
-          "x-ms-enum": {
-            "name": "CallEndedParticipantTypeKind",
-            "modelAsString": true,
-            "values": []
-          }
         }
       }
     },

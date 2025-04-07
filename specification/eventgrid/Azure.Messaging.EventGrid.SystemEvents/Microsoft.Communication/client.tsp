@@ -26,10 +26,10 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantRemovedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantBaseEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantBaseEventData,
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantEventProperties,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,
@@ -44,16 +44,22 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallingEventBaseProperties,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallingEventProperties,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallingEventBaseProperties,
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallingEventProperties,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallingEventGroupProperties,
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallingEventGroupProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallingEventRoomProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallingEventRoomProperties,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsCallingEventEndedByProperties,
@@ -66,6 +72,12 @@ using Azure.ClientGenerator.Core;
   Usage.output
 );
 @@access(Microsoft.EventGrid.SystemEvents.AcsCallingEventReasonProperties,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallParticipantUserProperties,
+  Usage.output
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallParticipantUserProperties,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.AcsChatMessageReceivedEventData,
@@ -571,10 +583,10 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.CallEndedParticipantTypeProperty,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedParticipantKind,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.CallEndedParticipantTypeProperty,
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedParticipantKind,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,

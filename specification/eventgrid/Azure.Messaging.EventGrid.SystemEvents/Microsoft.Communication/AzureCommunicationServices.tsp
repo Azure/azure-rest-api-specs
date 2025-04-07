@@ -59,13 +59,13 @@ model AcsCallEndedEventData
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallParticipantAddedEventData
-  extends AcsCallParticipantEventData {
+  extends AcsCallParticipantEventProperties {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallParticipantRemovedEventData
-  extends AcsCallParticipantEventData {
+  extends AcsCallParticipantEventProperties {
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event. */
@@ -1002,7 +1002,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
   /** The type of the message */
   type: string;
-
+  AcsCallParticipantAddedEventData
   /** The version of the message */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   version: int64;
@@ -1010,31 +1010,44 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
 /** Schema of common properties of all participant events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallParticipantEventData extends AcsCallingEventProperties {
+model AcsCallParticipantEventProperties extends AcsCallingEventProperties {
   /** The communication identifier of the participant */
-  user?: CommunicationIdentifierModel;
+  user?: AcsCallParticipantUserProperties;
 
   /** The display name of the participant. */
   displayName?: string;
 
-  /** The Id of the participant. */
+  /** The id of the participant. */
   participantId?: string;
 
   /** The user agent of the participant. */
   userAgent?: string;
 }
 
+/** Schema of common properties of all participant event user */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallParticipantUserProperties {
+  /** The communication identifier of the participant user */
+  communicationIdentifier?: CommunicationIdentifierModel;
+
+  /** The role of the participant */
+  role?: string;
+}
+
 /** Schema of common properties of all calling events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallingEventProperties {
-  /** The communication identifier of the call startedBy */
+  /** The communication identifier of the call started user. */
   startedBy: CommunicationIdentifierModel;
 
-  /** The callId of the server */
+  /** The call id of the server */
   serverCallId?: string;
 
   /** The group metadata */
   group?: AcsCallingEventGroupProperties;
+
+  /** The room metadata */
+  room?: AcsCallingEventRoomProperties;
 
   /** Is two party in calling event. */
   isTwoParty?: boolean;
@@ -1053,6 +1066,13 @@ model AcsCallingEventGroupProperties {
   id?: string;
 }
 
+/** Schema of calling event room properties */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
+model AcsCallingEventRoomProperties {
+  /** Calling Room ID. Format is Guid as string. */
+  id?: string;
+}
+
 /** Schema of calling event endedby properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallingEventEndedByProperties {
@@ -1060,7 +1080,7 @@ model AcsCallingEventEndedByProperties {
   endedBy: CommunicationIdentifierModel;
 
   /** The type of call ended by. */
-  type: CallEndedParticipantTypeProperty;
+  type: AcsCallEndedParticipantKind;
 
   /** The name field will be filled based on the type. */
   name: string;
@@ -1522,8 +1542,8 @@ union AcsRouterUpdatedWorkerProperty {
   string,
 }
 
-/** CallEnded event Type properties that can be updated */
-union CallEndedTypeProperty {
+/** CallEnded event participant type properties that can be updated */
+union AcsCallEndedParticipantKind {
   string,
 }
 
