@@ -10,28 +10,39 @@ import { extractInputs } from "./context.js";
 export async function verifyRunStatus({github, context, core}, checkRunName, workflowName) {
   const { head_sha } = await extractInputs(github, context, core);
 
+  // Exit early when context is a check_run event and the check run does not 
+  // match the checkRunName.
+  if (context.eventName == "check_run") {
+    const contextRunName = context.payload.check_run.name;
+    if (contextRunName !== checkRunName) {
+      core.info(`Check run name (${contextRunName}) does not match input: ${checkRunName}`);
+      return;
+    }
+  }
+
   const checkRun = context.eventName == "check_run"
     ? context.payload.check_run
     : await getCheckRunStatus(github, context, core, checkRunName, head_sha);
-  const workflowRun = context.eventName == "workflow_run" 
-    ? context.payload.workflow_run 
-    : await getWorkflowRun(github, context, core, workflowName, head_sha);
-
-  core.debug(`Check run: ${JSON.stringify(checkRun)}`);
-  core.debug(`Workflow run: ${JSON.stringify(workflowRun)}`);
 
   if (!checkRun) { 
     core.info(`No completed check run with name: ${checkRunName}`);
     return;
   }
 
+  core.info(`Check run name: ${checkRun.name} conclusion: ${checkRun.conclusion}`);
+  core.debug(`Check run: ${JSON.stringify(checkRun)}`);
+
+  const workflowRun = context.eventName == "workflow_run" 
+    ? context.payload.workflow_run
+    : await getWorkflowRun(github, context, core, workflowName, head_sha);
+
   if (!workflowRun) { 
     core.info(`No completed workflow run with name: ${workflowName}`);
     return;
   }
 
-  core.info(`Check run conclusion: ${checkRun.conclusion}`);
-  core.info(`Workflow run conclusion: ${workflowRun.conclusion}`);
+  core.info(`Workflow run name: ${workflowRun.name} conclusion: ${workflowRun.conclusion}`);
+  core.debug(`Workflow run: ${JSON.stringify(workflowRun)}`);
 
   if (checkRun.conclusion !== workflowRun.conclusion) {
     core.setFailed(`Check run conclusion (${checkRun.conclusion}) does not match workflow run conclusion (${workflowRun.conclusion})`);
