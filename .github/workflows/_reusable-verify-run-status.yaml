@@ -15,23 +15,15 @@ on:
 
 permissions:
   checks: read
+  contents: read
 
 jobs:
   check-run-status:
     runs-on: ubuntu-24.04
 
     steps:
-      # *** IMPORTANT ***
-      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
-      # context of the base of the pull request.  You should make sure that you do not check out,
-      # build, or run untrusted code from the head of the pull request.
       - uses: actions/checkout@v4
         with:
-          # Only needs .github folder for automation, not the files in the PR (analyzed in a
-          # separate workflow).
-          #
-          # Uses the .github folder from the PR base branch (pull_request_target trigger),
-          # or the repo default branch (other triggers).
           sparse-checkout: |
             .github
 
@@ -40,8 +32,7 @@ jobs:
         with:
           script: |
             const { verifyRunStatus } = await import('${{ github.workspace }}/.github/workflows/src/verify-run-status.js');
-            return await verifyRunStatus(
-              { github, context, core }, 
-               "${{ inputs.check_run_name }}", 
-               "${{ inputs.workflow_name }}"
-            );
+            return await verifyRunStatus({ github, context, core });
+        env:
+          CHECK_RUN_NAME: ${{ inputs.check_run_name }}
+          WORKFLOW_NAME: ${{ inputs.workflow_name }}

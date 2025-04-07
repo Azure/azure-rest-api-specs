@@ -14,10 +14,12 @@ on:
 
 permissions:
   checks: read
+  contents: read
 
 jobs:
   LintDiff:
-    name: Lint Diff
+    name: Watch LintDiff
+    # if: ${{ github.event.check_suite.app.name == 'openapi-pipeline-app' }}
     uses: ./.github/workflows/_reusable-verify-run-status.yaml
     with:
       check_run_name: "Swagger LintDiff"
