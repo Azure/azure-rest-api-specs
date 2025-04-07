@@ -85,7 +85,7 @@ model ChangeStateProperties {
   stageMapSnapshot?: Record<StageMap>;
 }
 
-@doc("RetrieveNextStage POST Action response.")
+@doc("RetrieveNextStages POST Action response.")
 model RetrieveNextStagesResponse {
   @doc("ChangeState resource Id.")
   changeStateResourceId: ChangeStateResourceId;
@@ -95,7 +95,7 @@ model RetrieveNextStagesResponse {
   lastStageSequence: int32;
 
   @added(Versions.v2025_03_01_preview)
-  @doc("Last StageProgression sequence in the StageProgression.")
+  @doc("Sequence of last StageProgression completed within the ChangeState.")
   lastStageProgressionSequence: int32;
 
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
