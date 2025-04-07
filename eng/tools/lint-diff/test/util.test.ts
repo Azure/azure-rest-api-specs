@@ -1,4 +1,4 @@
-import { test, describe, vi } from "vitest";
+import { test, describe, vi, expect } from "vitest";
 import { vol } from "memfs";
 import { pathExists } from "../src/util.js";
 import { beforeEach } from "node:test";
@@ -15,7 +15,7 @@ describe("pathExists", () => {
     vol.reset();
   });
 
-  test.concurrent("returns true for existing path", async ({ expect }) => {
+  test("returns true for existing path", async () => {
     const files = {
       "./file-exists": "a",
     };
@@ -26,7 +26,7 @@ describe("pathExists", () => {
     expect(exists).toEqual(true);
   });
 
-  test.concurrent("returns false for non-existing path", async ({ expect }) => {
+  test("returns false for non-existing path", async () => {
     const files = {
       "./file-exists": "a",
     };
