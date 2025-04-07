@@ -7642,6 +7642,77 @@
           "description": "Indicates if automatic image builds will be triggered for image definition updates",
           "$ref": "#/definitions/AutoImageBuildStatus",
           "readOnly": true
+        },
+        "tasks": {
+          "description": "Tasks to run at Dev Box provisioning time.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskInstance"
+          }
+        },
+        "userTasks": {
+          "description": "Tasks to run when a user first logs into a Dev Box.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskInstance"
+          }
+        },
+        "extends": {
+          "description": "Another Image Definition that this one extends.",
+          "$ref": "#/definitions/ImageDefinitionReference"
+        }
+      }
+    },
+    "ImageDefinitionReference": {
+      "type": "object",
+      "description": "A reference to an Image Definition.",
+      "required": [
+        "imageDefinition"
+      ],
+      "properties": {
+        "imageDefinition": {
+          "type": "string",
+          "description": "Name of the referenced Image Definition."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters for the referenced Image Definition.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CustomizationTaskInstance": {
+      "type": "object",
+      "description": "A customization task to run.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the task."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters for the task.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name to help differentiate multiple instances of the same task."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout, in seconds. Overrides any timeout provided on the task definition."
+        },
+        "condition": {
+          "type": "string",
+          "description": "The condition that needs to be met to run the task."
         }
       }
     },
