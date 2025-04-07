@@ -114,7 +114,6 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "csharp"
 );
-@@clientName(ComputeBatchModelFactory, "BatchModelFactory", "csharp");
 
 /* PYTHON OVERRIDES */
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "python");
