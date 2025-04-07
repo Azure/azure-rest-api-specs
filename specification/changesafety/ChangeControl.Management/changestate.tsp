@@ -252,10 +252,11 @@ model InlineArtifactContent {
 
 @doc("Artifact model when artifactType is ArmOperation.")
 model ArmOperationArtifactContent {
+  #suppress "deprecated" "back compat"
   @removed(Versions.v2025_03_01_preview)
   @doc("Arm Operation array.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @renamedFrom(Versions.v2024_10_01_preview, "operations")
+  @renamedFrom(Versions.v2025_03_01_preview, "operations")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   operationsOld: ArmOperationResource[];
 
