@@ -17,6 +17,18 @@ alias ServiceTraits = SupportsClientRequestId &
 
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
+alias ListEvaluationParameters = {
+  @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2")
+  @query
+  tags?: string;
+
+  @doc("Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2")
+  @query
+  properties?: string;
+
+  ...StandardListQueryParameters
+};
+
 @route("evaluations")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
@@ -27,7 +39,7 @@ interface Evaluations {
   @doc("List evaluation runs")
   list is EvaluationsOperations.ResourceList<
     Evaluation,
-    ListQueryParametersTrait<StandardListQueryParameters>
+    ListQueryParametersTrait<ListEvaluationParameters>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
