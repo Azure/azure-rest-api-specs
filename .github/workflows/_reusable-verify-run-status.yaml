@@ -19,6 +19,7 @@ permissions:
 
 jobs:
   check-run-status:
+    if: ${{ (github.event_name == 'workflow_run') || (github.event_name == 'check_suite' && github.event.check_suite.app.name == 'openapi-pipeline-app') || (github.event_name == 'check_run' && github.event.check_run.name == 'Swagger LintDiff') }}
     runs-on: ubuntu-24.04
 
     steps:
