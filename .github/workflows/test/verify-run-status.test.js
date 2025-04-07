@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   createMockGithub,
   createMockContext,
@@ -205,6 +205,16 @@ describe("getWorkflowRun", () => {
 });
 
 describe("verifyRunStatus", () => {
+  beforeEach(() => {
+    delete process.env.CHECK_RUN_NAME;
+    delete process.env.WORKFLOW_NAME;
+  });
+
+  afterAll(() => { 
+    delete process.env.CHECK_RUN_NAME;
+    delete process.env.WORKFLOW_NAME;
+  })
+  
   it("verifies status when check_run event fires", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
@@ -231,11 +241,9 @@ describe("verifyRunStatus", () => {
 
     const core = createMockCore();
 
-    await verifyRunStatus(
-      { github, context, core },
-      "checkRunName",
-      "workflowName",
-    );
+    process.env.CHECK_RUN_NAME = "checkRunName";
+    process.env.WORKFLOW_NAME = "workflowName";
+    await verifyRunStatus({ github, context, core });
 
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.info).toHaveBeenCalledWith("Checks match");
@@ -267,15 +275,13 @@ describe("verifyRunStatus", () => {
 
     const core = createMockCore();
 
-    await verifyRunStatus(
-      { github, context, core },
-      "checkRunName",
-      "workflowName",
-    );
+    
+    process.env.CHECK_RUN_NAME = "checkRunName";
+    process.env.WORKFLOW_NAME = "workflowName";
+    await verifyRunStatus({ github, context, core });
 
     expect(core.setFailed).not.toHaveBeenCalled();
   });
-
   it("returns early during workflow_run event when no matching check_run is found", async () => {
     const github = createMockGithub();
     github.rest.checks.listForRef = vi.fn().mockResolvedValue({
@@ -294,11 +300,9 @@ describe("verifyRunStatus", () => {
       },
     };
     const core = createMockCore();
-    await verifyRunStatus(
-      { github, context, core },
-      "checkRunName",
-      "workflowName",
-    );
+    process.env.CHECK_RUN_NAME = "checkRunName";
+    process.env.WORKFLOW_NAME = "workflowName";
+    await verifyRunStatus({ github, context, core });
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.info).toHaveBeenCalledWith(
       "No completed check run with name: checkRunName",
@@ -323,11 +327,9 @@ describe("verifyRunStatus", () => {
       },
     };
     const core = createMockCore();
-    await verifyRunStatus(
-      { github, context, core },
-      "checkRunName",
-      "workflowName",
-    );
+    process.env.CHECK_RUN_NAME = "checkRunName";
+    process.env.WORKFLOW_NAME = "workflowName";
+    await verifyRunStatus({ github, context, core });
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.info).toHaveBeenCalledWith(
       "No completed workflow run with name: workflowName",
@@ -346,11 +348,9 @@ describe("verifyRunStatus", () => {
       },
     };
     const core = createMockCore();
-    await verifyRunStatus(
-      { github, context, core },
-      "otherCheckRunName",
-      "workflowName",
-    );
+    process.env.CHECK_RUN_NAME = "otherCheckRunName";
+    process.env.WORKFLOW_NAME = "workflowName";
+    await verifyRunStatus({ github, context, core });
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.info).toHaveBeenCalledWith(
       "Check run name (checkRunName) does not match input: otherCheckRunName",
@@ -381,13 +381,27 @@ describe("verifyRunStatus", () => {
       },
     };
     const core = createMockCore();
-    await verifyRunStatus(
-      { github, context, core },
-      "checkRunName",
-      "workflowName",
-    );
+    process.env.CHECK_RUN_NAME = "checkRunName";
+    process.env.WORKFLOW_NAME = "workflowName";
+    await verifyRunStatus({ github, context, core });
     expect(core.setFailed).toHaveBeenCalledWith(
       "Check run conclusion (success) does not match workflow run conclusion (failure)",
     );
+  });
+
+  it("throws if CHECK_RUN_NAME is not set", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    process.env.WORKFLOW_NAME = "workflowName";
+    await expect(async () => await verifyRunStatus({ github, context, core }) ).rejects.toThrow();
+  });
+
+  it("throws if WORKFLOW_NAME is not set", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    process.env.CHECK_RUN_NAME = "checkRunName";
+    await expect(async () => await verifyRunStatus({ github, context, core }) ).rejects.toThrow();
   });
 });
