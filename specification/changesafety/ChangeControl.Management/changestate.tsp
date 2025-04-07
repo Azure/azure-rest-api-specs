@@ -335,7 +335,7 @@ model OperationContent {
   @doc("The location of the resource.")
   location?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: This properties are varying based on different reosurces. We need list of parameters in key:value format."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: This properties are varying based on different resources. We need list of parameters in key:value format."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to provide the paramters of the properties to be string and int."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The properties of the resource.")
