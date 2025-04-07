@@ -163,7 +163,7 @@ describe("getWorkflowRun", () => {
   it("returns latest when multiple workflows match", async () => {
     const githubMock = createMockGithub();
     const earlyDate = "2025-04-01T00:00:00Z";
-    const laterDate = "2025-04-02T00:00:00Z"
+    const laterDate = "2025-04-02T00:00:00Z";
     githubMock.rest.actions.listWorkflowRunsForRepo = vi
       .fn()
       .mockResolvedValue({
@@ -173,13 +173,13 @@ describe("getWorkflowRun", () => {
               name: "workflowName",
               status: "completed",
               conclusion: "success",
-              updated_at: earlyDate
+              updated_at: earlyDate,
             },
             {
               name: "workflowName",
               status: "completed",
               conclusion: "success",
-              updated_at: laterDate
+              updated_at: laterDate,
             },
           ],
         },
@@ -191,14 +191,14 @@ describe("getWorkflowRun", () => {
       createMockCore(),
       "workflowName",
       "head_sha",
-    )
+    );
 
     expect(actual).toEqual(
       expect.objectContaining({
         name: "workflowName",
         status: "completed",
         conclusion: "success",
-        updated_at: laterDate
+        updated_at: laterDate,
       }),
     );
   });
@@ -334,7 +334,7 @@ describe("verifyRunStatus", () => {
     );
   });
 
-  it ("returns early if event is check_run but does not match input name", async () => {
+  it("returns early if event is check_run but does not match input name", async () => {
     const github = createMockGithub();
     const context = {
       eventName: "check_run",

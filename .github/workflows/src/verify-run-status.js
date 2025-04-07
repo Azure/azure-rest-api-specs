@@ -138,9 +138,7 @@ export async function getWorkflowRun(
     return null;
   }
 
-  const matches = workflowRuns.filter(
-    (run) => run.name === workflowName,
-  );
+  const matches = workflowRuns.filter((run) => run.name === workflowName);
 
   if (matches.length === 0) {
     return null;
@@ -150,7 +148,9 @@ export async function getWorkflowRun(
     core.warning(
       `Multiple matching workflow runs, selecting the most recent run`,
     );
-    matches.forEach((wf) => core.info(`- ${wf.name}: ${wf.conclusion} ${wf.html_url}`));
+    matches.forEach((wf) =>
+      core.info(`- ${wf.name}: ${wf.conclusion} ${wf.html_url}`),
+    );
 
     // Sort by "updated_at" descending, so most recent run is at index 0
     matches.sort(
