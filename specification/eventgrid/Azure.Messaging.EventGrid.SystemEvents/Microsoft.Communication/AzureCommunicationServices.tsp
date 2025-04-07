@@ -1038,7 +1038,7 @@ model AcsCallParticipantUserProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallingEventProperties {
   /** The communication identifier of the call started user. */
-  startedBy: CommunicationIdentifierModel;
+  startedBy: AcsCallParticipantUserProperties;
 
   /** The call id of the server */
   serverCallId?: string;
