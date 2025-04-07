@@ -27,7 +27,7 @@ These are the global settings for the pilot service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-10-03-preview
+tag: package-2025-04-03-preview
 ```
 
 ### Tag: package-2024-10-03-preview
