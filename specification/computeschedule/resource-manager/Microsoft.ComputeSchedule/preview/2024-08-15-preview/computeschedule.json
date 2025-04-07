@@ -1258,43 +1258,6 @@
         ]
       }
     },
-    "ResourceProvisionPayload": {
-      "type": "object",
-      "description": "Resource creation data model",
-      "properties": {
-        "baseProfile": {
-          "type": "string",
-          "description": "baseProfile, Resource properties that common across all resources "
-        },
-        "resourceOverrides": {
-          "type": "array",
-          "description": "resourceOverrides, properties per resource that needs to be overwritted from baseProfile",
-          "items": {
-            "type": "string"
-          }
-        },
-        "vmExtensions": {
-          "type": "array",
-          "description": "vmExtensions, array of Virtual machine extensions to be added to all the VMs created in this request",
-          "items": {
-            "$ref": "#/definitions/VirtualMachineExtensionData"
-          },
-          "x-ms-identifiers": []
-        },
-        "resourceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of resources to be created"
-        },
-        "resourcePrefix": {
-          "type": "string",
-          "description": "if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1.."
-        }
-      },
-      "required": [
-        "resourceCount"
-      ]
-    },
     "Resources": {
       "type": "object",
       "description": "The resources needed for the user request",
@@ -1497,36 +1460,6 @@
         "executionParameters",
         "resources",
         "correlationid"
-      ]
-    },
-    "VirtualMachineExtensionData": {
-      "type": "object",
-      "description": "struct for VMExtension data",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "name of VM extension"
-        },
-        "location": {
-          "type": "string",
-          "description": "location of VM extension"
-        },
-        "properties": {
-          "type": "object",
-          "description": "properties for VM extension e.g. publisher, version etc, value can dynamic int32,string, bool etc.",
-          "additionalProperties": {}
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags for creates/updates",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "name",
-        "properties"
       ]
     }
   },

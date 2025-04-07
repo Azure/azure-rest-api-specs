@@ -134,6 +134,7 @@ model Resources {
   ids: Array<armResourceIdentifier>;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("struct for VMExtension data")
 model VirtualMachineExtensionData {
   @doc("name of VM extension")
@@ -151,6 +152,7 @@ model VirtualMachineExtensionData {
   tags?: Record<string>;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
   @doc("baseProfile, Resource properties that common across all resources ")
