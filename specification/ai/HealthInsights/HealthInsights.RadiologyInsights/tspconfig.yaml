@@ -4,9 +4,6 @@ parameters:
   "service-name":
     default: "HealthInsights"
   "dependencies":
-    # "additionalDirectories":
-    #   - "specification/ai/HealthInsights/HealthInsights.Common/"
-    #   - "specification/ai/HealthInsights/HealthInsights.OpenAPI/"
     default: ""
   "python-sdk-folder":
     default: "{project-root}/azure-sdk-for-python/"
@@ -60,3 +57,7 @@ options:
     packageDetails:
       name: "@azure-rest/health-insights-radiologyinsights"
     flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/ai/HealthInsights/HealthInsights.Common/"
+      - "specification/ai/HealthInsights/HealthInsights.OpenAPI/"
