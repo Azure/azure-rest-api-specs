@@ -1,20 +1,25 @@
 import { extractInputs } from "./context.js";
-import { listChecksForRef } from "./checks.js";
-import { listWorkflowRunsForRepo } from "./workflows.js";
+import { PER_PAGE_MAX } from "./github.js";
 
 /**
- *
+ * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
+ * @typedef {RestEndpointMethodTypes["checks"]["listForRef"]["response"]["data"]["check_runs"][number]} CheckRun
+ * @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["response"]["data"]["workflow_runs"][number]} WorkflowRun
+ */
+
+/**
+ * Given the name of a completed check run name and a completed workflow, verify 
+ * that both have the same conclusion. If conclusions are different, fail the 
+ * action.
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
-export async function verifyRunStatus(
-  { github, context, core }
-) {
-  const checkRunName = process.env.CHECK_RUN_NAME || "";
-  if (!checkRunName) { 
+export async function verifyRunStatus({ github, context, core }) {
+  const checkRunName = process.env.CHECK_RUN_NAME;
+  if (!checkRunName) {
     throw new Error("CHECK_RUN_NAME is not set");
   }
-  
-  const workflowName = process.env.WORKFLOW_NAME || "";
+
+  const workflowName = process.env.WORKFLOW_NAME;
   if (!workflowName) {
     throw new Error("WORKFLOW_NAME is not set");
   }
@@ -24,9 +29,7 @@ export async function verifyRunStatus(
   if (context.eventName == "check_run") {
     const contextRunName = context.payload.check_run.name;
     if (contextRunName !== checkRunName) {
-      const message = `Check run name (${contextRunName}) does not match input: ${checkRunName}`;
-      core.info(message);
-      core.notice(message);
+      core.notice(`Check run name (${contextRunName}) does not match input: ${checkRunName}`);
       return;
     }
   }
@@ -36,12 +39,10 @@ export async function verifyRunStatus(
   const checkRun =
     context.eventName == "check_run"
       ? context.payload.check_run
-      : await getCheckRunStatus(github, context, core, checkRunName, head_sha);
+      : await getCheckRun(github, context, core, checkRunName, head_sha);
 
   if (!checkRun) {
-    const message = `No completed check run with name: ${checkRunName}`;
-    core.info(message);
-    core.notice(message);
+    core.notice(`No completed check run with name: ${checkRunName}`);
     return;
   }
 
@@ -56,9 +57,7 @@ export async function verifyRunStatus(
       : await getWorkflowRun(github, context, core, workflowName, head_sha);
 
   if (!workflowRun) {
-    const message = `No completed workflow run with name: ${workflowName}`;
-    core.info(message);
-    core.notice(message);
+    core.notice(`No completed workflow run with name: ${workflowName}`);
     return;
   }
 
@@ -74,25 +73,32 @@ export async function verifyRunStatus(
     return;
   }
 
-  core.info("Checks match");
+  core.notice(`Conclusions match for check run ${checkRunName} and workflow run ${workflowName}`);
 }
 
 /**
- *
+ * Returns the check with the given checkRunName for the given ref.
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} checkRunName
- * @param {string} head_sha
+ * @param {string} ref
+ * @returns {Promise<CheckRun | null>}
  */
-export async function getCheckRunStatus(
+export async function getCheckRun(
   github,
   context,
   core,
   checkRunName,
-  head_sha,
+  ref,
 ) {
-  const checkRuns = await listChecksForRef(github, { ...context.repo, ref: head_sha, name: checkRunName, status: "completed" });
+  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
+    ...context.repo,
+    ref: ref,
+    check_name: checkRunName,
+    status: "completed",
+    per_page: PER_PAGE_MAX,
+  });
 
   if (checkRuns.length === 0) {
     return null;
@@ -113,24 +119,28 @@ export async function getCheckRunStatus(
 }
 
 /**
+ * Returns the workflow run with the given workflowName for the given ref.
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} workflowName
- * @param {string} head_sha
+ * @param {string} ref
+ * @returns {Promise<WorkflowRun | null>}
  */
 export async function getWorkflowRun(
   github,
   context,
   core,
   workflowName,
-  head_sha,
+  ref,
 ) {
-  const workflowRuns = await listWorkflowRunsForRepo(github,
+  const workflowRuns = await github.paginate(
+    github.rest.actions.listWorkflowRunsForRepo,
     {
       ...context.repo,
-      head_sha,
+      head_sha: ref,
       status: "completed",
+      per_page: PER_PAGE_MAX,
     },
   );
 
