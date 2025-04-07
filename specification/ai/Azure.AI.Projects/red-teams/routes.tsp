@@ -45,6 +45,44 @@ interface RedTeams {
     RedTeam
   >;
 
+  // Private Upload API
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Upload the result to a redteam run.")
+  @route("runs:upload")
+  @post
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v_latest)
+  UploadRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Redteam to upload.")
+      @body
+      redteam: RedTeamUpload;
+    },
+    RedTeam
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Update the uploaded the result to an redteam run.")
+  @route("runs:updateUpload/{name}")
+  @patch
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v_latest)
+  UploadUpdateRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the redteam run to update.")
+      @path
+      name: string;
+
+      @doc("Redteam upload to update.")
+      @body
+      redteam: RedTeamUpload;
+    },
+    RedTeam
+  >;
+
+
   // Simulation Private APIs
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Simulation jailbreak.")
