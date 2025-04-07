@@ -180,52 +180,7 @@
               "operation": "Read search service metric definitions",
               "description": "Gets the available metrics for the search service."
             },
-            "origin": "system",
-            "properties": {
-              "serviceSpecification": {
-                "metricSpecifications": [
-                  {
-                    "name": "SearchLatency",
-                    "displayName": "Search Latency",
-                    "displayDescription": "Average search latency for the search service",
-                    "unit": "Seconds",
-                    "aggregationType": "Average",
-                    "availabilities": [
-                      {
-                        "timeGrain": "PT1M",
-                        "blobDuration": "PT1H"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "SearchQueriesPerSecond",
-                    "displayName": "Search queries per second",
-                    "displayDescription": "Search queries per second for the search service.",
-                    "unit": "CountPerSecond",
-                    "aggregationType": "Average",
-                    "availabilities": [
-                      {
-                        "timeGrain": "PT1M",
-                        "blobDuration": "PT1H"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "ThrottledSearchQueriesPercentage",
-                    "displayName": "Throttled search queries percentage",
-                    "displayDescription": "Percentage of search queries that were throttled for the search service.",
-                    "unit": "Percent",
-                    "aggregationType": "Average",
-                    "availabilities": [
-                      {
-                        "timeGrain": "PT1M",
-                        "blobDuration": "PT1H"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
+            "origin": "system"
           },
           {
             "name": "Microsoft.Search/searchServices/logDefinitions/read",
@@ -236,18 +191,7 @@
               "operation": "Read search service log definitions",
               "description": "Gets the available logs for the search service."
             },
-            "origin": "system",
-            "properties": {
-              "serviceSpecification": {
-                "logSpecifications": [
-                  {
-                    "name": "OperationLogs",
-                    "displayName": "Operation Logs",
-                    "blobDuration": "PT1H"
-                  }
-                ]
-              }
-            }
+            "origin": "system"
           },
           {
             "name": "Microsoft.Search/searchServices/privateEndpointConnectionProxies/validate/action",
