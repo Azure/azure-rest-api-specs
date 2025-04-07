@@ -311,7 +311,7 @@ model CreateLivenessWithVerifySessionRequest {
   contentType: "multipart/form-data";
 
   @doc("Request content of liveness with verify session creation.")
-  @body
+  @multipartBody
   body: CreateLivenessWithVerifySessionMultipartContent;
 }
 
