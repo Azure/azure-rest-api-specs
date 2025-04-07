@@ -1,18 +1,21 @@
-import { PER_PAGE_MAX } from "./github.js";
 import { extractInputs } from "./context.js";
+import { PER_PAGE_MAX } from "./github.js";
+
+/**
+ * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
+ * @typedef {RestEndpointMethodTypes["checks"]["listForRef"]["response"]["data"]["check_runs"][number]} CheckRun
+ */
 
 /**
  *
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
-export async function verifyRunStatus(
-  { github, context, core }
-) {
+export async function verifyRunStatus({ github, context, core }) {
   const checkRunName = process.env.CHECK_RUN_NAME || "";
-  if (!checkRunName) { 
+  if (!checkRunName) {
     throw new Error("CHECK_RUN_NAME is not set");
   }
-  
+
   const workflowName = process.env.WORKFLOW_NAME || "";
   if (!workflowName) {
     throw new Error("WORKFLOW_NAME is not set");
@@ -79,6 +82,7 @@ export async function verifyRunStatus(
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} checkRunName
  * @param {string} head_sha
+ * @returns {Promise<CheckRun | null>}
  */
 export async function getCheckRunStatus(
   github,
