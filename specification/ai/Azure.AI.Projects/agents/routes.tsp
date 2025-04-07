@@ -13,7 +13,7 @@ using Azure.Core.Traits;
 using Azure.Core.Foundations;
 using Streams;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Projects.Agents;
 
 @doc("A no-op model to represent an empty request.")
 model NoRequest {}
