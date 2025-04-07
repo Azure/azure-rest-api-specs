@@ -96,6 +96,7 @@ Write-Host "Current commit id: $currentCommitId"
 # 1. TypeSpec exists before and this PR is just to change the existing TypeSpec
 # 2. Customers don't delete any existing swagger files for wrong
 # 3. The generated swagger file has the same name as before
+# I also considered "if previous swagger doesn't have auto-generated x-typespec-generated and current swagger has it", but if user doesn't change the readme file, how do we know which one is the current swagger?
 $addedConfigurationFiles = Get-AddedConfigurationFiles $latestCommitId $currentCommitId
 if ($addedConfigurationFiles.Count -gt 0) {
     Write-Host "This is a migration PR. Check api by comparison tool"
@@ -110,32 +111,33 @@ if ($addedConfigurationFiles.Count -gt 0) {
     }
     
     Write-Host "Service name: $serviceName"
+
+    $swaggerInMain = Download-Swagger-InMain $serviceName $latestCommitId
+    $readmeInMain = Join-Path $swaggerInMain "readme.md"
+    $swaggerFilesInMain = Get-Swagger $readmeInMain
+    $swaggerPathInMain = @()
+    for ($index = 1; $index -lt $swaggerFilesInMain.Count; $index++) {
+        $swaggerFile = $swaggerFilesInMain[$index]
+        $swaggerFile = $swaggerFile.Substring($swaggerFile.IndexOf("Microsoft"))
+        $swaggerPath = Join-Path $swaggerInMain $swaggerFile
+
+        $swaggerPathInMain += $swaggerPath
+    }
+    $swaggerPathInMain = $swaggerPathInMain -join " "
+    Write-Host "Swagger files in main: $swaggerPathInMain"
+
+    # [Problem] It's possible that customers don't change anything in readme.md. Here parsing the readme file in HEAD might be a problem.
+    # We make sure they change the readme file in the PR by TypeSpec validation ?? Seems not.
+    # Or is it allowed to delete the reamdme file in the migration PR?
+    # We add a check that the swagger in the readme should be the same as the one in the tspconfig?
+    $readmeInHead = Resolve-Path -Path (Join-Path $PSScriptRoot ".." ".." "specification" $serviceName "resource-manager" "readme.md")
+    $swaggerFileInHead = Get-Swagger $readmeInHead
+    $swaggerPathInHead = Join-Path (Split-Path -Path $readmeInHead) $swaggerFileInHead[1].Substring($swaggerFileInHead[1].IndexOf("Microsoft"))
+    Write-Host "Swagger file in head: $swaggerPathInHead"
+
+    $repoRoot = Resolve-Path (Join-Path $PSScriptRoot ".." "..")
+    Push-Location $repoRoot
+    npm install
+    npx tsp-client compare -lfs $swaggerPathInMain -rhs $swaggerPathInHead
+    Pop-Location
 }
-
-$swaggerInMain = Download-Swagger-InMain $serviceName $latestCommitId
-$readmeInMain = Join-Path $swaggerInMain "readme.md"
-$swaggerFilesInMain = Get-Swagger $readmeInMain
-$swaggerPathInMain = @()
-for ($index = 1; $index -lt $swaggerFilesInMain.Count; $index++) {
-    $swaggerFile = $swaggerFilesInMain[$index]
-    $swaggerFile = $swaggerFile.Substring($swaggerFile.IndexOf("Microsoft"))
-    $swaggerPath = Join-Path $swaggerInMain $swaggerFile
-
-    $swaggerPathInMain += $swaggerPath
-}
-$swaggerPathInMain = $swaggerPathInMain -join " "
-Write-Host "Swagger files in main: $swaggerPathInMain"
-
-# [Problem] It's possible that customers don't change anything in readme.md. Here parsing the readme file in HEAD might be a problem.
-# We make sure they change the readme file in the PR by TypeSpec validation ?? Seems not.
-# Or is it allowed to delete the reamdme file in the migration PR?
-$readmeInHead = Resolve-Path -Path (Join-Path $PSScriptRoot ".." ".." "specification" $serviceName "resource-manager" "readme.md")
-$swaggerFileInHead = Get-Swagger $readmeInHead
-$swaggerPathInHead = Join-Path (Split-Path -Path $readmeInHead) $swaggerFileInHead[1].Substring($swaggerFileInHead[1].IndexOf("Microsoft"))
-Write-Host "Swagger file in head: $swaggerPathInHead"
-
-$repoRoot = Resolve-Path (Join-Path $PSScriptRoot ".." "..")
-Push-Location $repoRoot
-npm install
-npx tsp-client compare -lfs $swaggerPathInMain -rhs $swaggerPathInHead
-Pop-Location
