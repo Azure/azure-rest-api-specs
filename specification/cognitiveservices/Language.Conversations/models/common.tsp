@@ -418,12 +418,13 @@ model ConversationalAITask extends AnalyzeConversationTask {
 @added(Versions.v2025_05_15_preview)
 model ConversationalAIAnalysisOptions {
   /** List of multiple conversations */
-  conversations: Conversation[];
+  conversations: AIConversation[];
 }
 
 /** The Conversations for ai conversation analysis */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2025_05_15_preview)
-model Conversations {
+model AIConversation {
   /** The ID of the conversation. */
   id: string;
 

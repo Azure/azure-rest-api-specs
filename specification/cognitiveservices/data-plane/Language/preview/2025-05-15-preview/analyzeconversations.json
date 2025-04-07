@@ -316,6 +316,37 @@
     }
   },
   "definitions": {
+    "AIConversation": {
+      "type": "object",
+      "description": "The Conversations for ai conversation analysis",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the conversation."
+        },
+        "modality": {
+          "$ref": "#/definitions/InputModality",
+          "description": "Default modality for all conversation items."
+        },
+        "language": {
+          "type": "string",
+          "description": "Default language for all conversation items in BCP 47 language representation."
+        },
+        "conversationItems": {
+          "type": "array",
+          "description": "List of conversation items.",
+          "items": {
+            "$ref": "#/definitions/ConversationalAIItem"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "modality",
+        "language",
+        "conversationItems"
+      ]
+    },
     "AgeResolution": {
       "type": "object",
       "description": "Represents the Age entity resolution model.",
@@ -2095,7 +2126,7 @@
           "type": "array",
           "description": "List of multiple conversations",
           "items": {
-            "$ref": "#/definitions/Conversation"
+            "$ref": "#/definitions/AIConversation"
           }
         }
       },
@@ -2199,6 +2230,33 @@
         "type",
         "conversationItemRanges",
         "entities"
+      ]
+    },
+    "ConversationalAIItem": {
+      "type": "object",
+      "description": "List of conversation items.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of a conversation item."
+        },
+        "participantId": {
+          "type": "string",
+          "description": "The participant ID of a conversation item."
+        },
+        "role": {
+          "$ref": "#/definitions/role",
+          "description": "Role of the participant."
+        },
+        "text": {
+          "type": "string",
+          "description": "The text input"
+        }
+      },
+      "required": [
+        "id",
+        "participantId",
+        "text"
       ]
     },
     "ConversationalAIPrediction": {
