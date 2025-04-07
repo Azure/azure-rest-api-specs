@@ -3,7 +3,12 @@ import { PER_PAGE_MAX } from "./github.js";
 
 /**
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
+ * 
+ * @typedef {RestEndpointMethodTypes["checks"]["listForRef"]["parameters"]} ListCheckRunsForRefParameters
  * @typedef {RestEndpointMethodTypes["checks"]["listForRef"]["response"]["data"]["check_runs"][number]} CheckRun
+
+ * @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["parameters"]} ListWorkflowRunsForRepoParameters
+ * @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["response"]["data"]["workflow_runs"][number]} WorkflowRun
  */
 
 /**
@@ -38,7 +43,7 @@ export async function verifyRunStatus({ github, context, core }) {
   const checkRun =
     context.eventName == "check_run"
       ? context.payload.check_run
-      : await getCheckRunStatus(github, context, core, checkRunName, head_sha);
+      : await getCheckRun(github, context, core, checkRunName, head_sha);
 
   if (!checkRun) {
     const message = `No completed check run with name: ${checkRunName}`;
@@ -88,7 +93,7 @@ export async function verifyRunStatus({ github, context, core }) {
  * @param {string} head_sha
  * @returns {Promise<CheckRun | null>}
  */
-export async function getCheckRunStatus(
+export async function getCheckRun(
   github,
   context,
   core,
@@ -127,6 +132,7 @@ export async function getCheckRunStatus(
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} workflowName
  * @param {string} head_sha
+ * @returns {Promise<WorkflowRun | null>}
  */
 export async function getWorkflowRun(
   github,

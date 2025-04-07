@@ -48,6 +48,7 @@ export function createMockCore() {
   return {
     debug: vi.fn(console.debug),
     info: vi.fn(console.log),
+    notice: vi.fn(console.log),
     error: vi.fn(console.error),
     warning: vi.fn(console.warn),
     isDebug: vi.fn().mockReturnValue(true),
