@@ -160,8 +160,10 @@ describe("getWorkflowRun", () => {
     expect(actual).toBeNull();
   });
 
-  it("throws when multiple workflows match", async () => {
+  it("returns latest when multiple workflows match", async () => {
     const githubMock = createMockGithub();
+    const earlyDate = "2025-04-01T00:00:00Z";
+    const laterDate = "2025-04-02T00:00:00Z"
     githubMock.rest.actions.listWorkflowRunsForRepo = vi
       .fn()
       .mockResolvedValue({
@@ -171,26 +173,34 @@ describe("getWorkflowRun", () => {
               name: "workflowName",
               status: "completed",
               conclusion: "success",
+              updated_at: earlyDate
             },
             {
               name: "workflowName",
               status: "completed",
               conclusion: "success",
+              updated_at: laterDate
             },
           ],
         },
       });
 
-    await expect(
-      async () =>
-        await getWorkflowRun(
-          githubMock,
-          createMockContext(),
-          createMockCore(),
-          "workflowName",
-          "head_sha",
-        ),
-    ).rejects.toThrow(/Multiple completed workflow runs with name/);
+    const actual = await getWorkflowRun(
+      githubMock,
+      createMockContext(),
+      createMockCore(),
+      "workflowName",
+      "head_sha",
+    )
+
+    expect(actual).toEqual(
+      expect.objectContaining({
+        name: "workflowName",
+        status: "completed",
+        conclusion: "success",
+        updated_at: laterDate
+      }),
+    );
   });
 });
 
@@ -321,6 +331,29 @@ describe("verifyRunStatus", () => {
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.info).toHaveBeenCalledWith(
       "No completed workflow run with name: workflowName",
+    );
+  });
+
+  it ("returns early if event is check_run but does not match input name", async () => {
+    const github = createMockGithub();
+    const context = {
+      eventName: "check_run",
+      payload: {
+        check_run: {
+          name: "checkRunName",
+          conclusion: "success",
+        },
+      },
+    };
+    const core = createMockCore();
+    await verifyRunStatus(
+      { github, context, core },
+      "otherCheckRunName",
+      "workflowName",
+    );
+    expect(core.setFailed).not.toHaveBeenCalled();
+    expect(core.info).toHaveBeenCalledWith(
+      "Check run name (checkRunName) does not match input: otherCheckRunName",
     );
   });
 

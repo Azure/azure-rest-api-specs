@@ -89,7 +89,6 @@ export async function getCheckRunStatus(
     status: "completed",
     per_page: PER_PAGE_MAX,
   });
-  core.debug(`Check runs: ${JSON.stringify(checkRuns)}`);
 
   if (checkRuns.length === 0) {
     return null;
@@ -133,35 +132,32 @@ export async function getWorkflowRun(
       per_page: PER_PAGE_MAX,
     },
   );
-  core.debug(`Workflow runs: ${JSON.stringify(workflowRuns)}`);
 
   if (workflowRuns.length === 0) {
     core.info(`No completed workflow runs`);
     return null;
   }
 
-  const matchingWorkflowRuns = workflowRuns.filter(
+  const matches = workflowRuns.filter(
     (run) => run.name === workflowName,
   );
 
-  if (matchingWorkflowRuns.length === 0) {
+  if (matches.length === 0) {
     return null;
   }
 
-  if (matchingWorkflowRuns.length > 1) {
+  if (matches.length > 1) {
     core.warning(
       `Multiple matching workflow runs, selecting the most recent run`,
     );
-    matchingWorkflowRuns.forEach((wf) => {
-      core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
-    });
+    matches.forEach((wf) => core.info(`- ${wf.name}: ${wf.conclusion}`));
 
     // Sort by "updated_at" descending, so most recent run is at index 0
-    matchingWorkflowRuns.sort(
+    matches.sort(
       (a, b) =>
         new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
     );
   }
 
-  return matchingWorkflowRuns[0];
+  return matches[0];
 }
