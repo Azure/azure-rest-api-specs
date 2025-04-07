@@ -3,6 +3,7 @@ import { sdkLabels } from "../../src/sdk-types.js";
 import { LabelAction } from "./label.js";
 import { extractInputs } from "./context.js";
 import { getIssueNumber } from "./issues.js";
+import { fetchWithRetry } from "./retries.js";
 
 /**
  * @typedef {Object} ArtifactResource
@@ -61,13 +62,17 @@ export async function getLabelAndActionImpl({
   const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
 
-  // Use Node.js fetch to call the API
-  const response = await fetch(apiUrl, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
+  // Use Node.js fetch with retry to call the API
+  const response = await fetchWithRetry(
+    apiUrl,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-  });
+    { logger: core.info },
+  );
 
   if (response.status === 404) {
     core.info(
@@ -93,8 +98,12 @@ export async function getLabelAndActionImpl({
     downloadUrl += `?format=file&subPath=/${artifactFileName}`;
     core.info(`Downloading artifact from: ${downloadUrl}`);
 
-    // Step 2: Fetch Artifact Content (as a Buffer)
-    const artifactResponse = await fetch(downloadUrl);
+    // Step 2: Fetch Artifact Content (as a Buffer) with retry
+    const artifactResponse = await fetchWithRetry(
+      downloadUrl,
+      {},
+      { logger: core.info },
+    );
     if (!artifactResponse.ok) {
       throw new Error(
         `Failed to fetch artifact: ${artifactResponse.statusText}`,
