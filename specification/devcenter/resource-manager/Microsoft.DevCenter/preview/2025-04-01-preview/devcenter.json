@@ -7673,6 +7673,10 @@
         "imageDefinition": {
           "type": "string",
           "description": "Name of the referenced Image Definition."
+        },
+        "parameters": {
+          "description": "Parameters for the referenced Image Definition.",
+          "$ref": "#/definitions/DefinitionParameters"
         }
       }
     },
@@ -7687,6 +7691,11 @@
           "type": "string",
           "description": "Name of the task."
         },
+        
+        "parameters": {
+          "description": "Parameters for the task.",
+          "$ref": "#/definitions/DefinitionParameters"
+        },
         "displayName": {
           "type": "string",
           "description": "Display name to help differentiate multiple instances of the same task."
@@ -7700,6 +7709,25 @@
           "type": "string",
           "description": "The condition that needs to be met to run the task."
         }
+      }
+    },
+    "DefinitionParameters": {
+      "description": "Parameters for the definition task.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
       }
     },
     "LatestImageBuild": {
