@@ -4,6 +4,8 @@ import { setEquals } from "../../src/equality.js";
 import { extractInputs } from "./context.js";
 import { PER_PAGE_MAX } from "./github.js";
 import { LabelAction } from "./label.js";
+import { listChecksForRef } from "./checks.js";
+import { listWorkflowRunsForRepo } from "./workflows.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -86,16 +88,12 @@ export async function getLabelActionImpl({
 
   core.info(`Labels: ${labelNames}`);
 
-  const workflowRuns = await github.paginate(
-    github.rest.actions.listWorkflowRunsForRepo,
-    {
-      owner,
-      repo,
-      event: "pull_request",
-      head_sha,
-      per_page: PER_PAGE_MAX,
-    },
-  );
+  const workflowRuns = await listWorkflowRunsForRepo(github, { 
+    owner, 
+    repo,
+    event: "pull_request",
+    head_sha,
+  });
 
   core.info("Workflow Runs:");
   workflowRuns.forEach((wf) => {
@@ -172,17 +170,16 @@ export async function getLabelActionImpl({
     return removeAction;
   }
 
-  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
+  const checkRuns = await listChecksForRef(github, {
     owner: owner,
     repo: repo,
     ref: head_sha,
-    per_page: PER_PAGE_MAX,
   });
 
   const requiredCheckNames = ["Swagger LintDiff", "Swagger Avocado"];
 
   /**
-   * @type {typeof checkRuns.check_runs}
+   * @type {typeof checkRuns}
    */
   let requiredCheckRuns = [];
 

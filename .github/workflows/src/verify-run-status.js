@@ -5,6 +5,8 @@ import { PER_PAGE_MAX } from "./github.js";
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
  * @typedef {RestEndpointMethodTypes["checks"]["listForRef"]["response"]["data"]["check_runs"][number]} CheckRun
  */
+import { listChecksForRef } from "./checks.js";
+import { listWorkflowRunsForRepo } from "./workflows.js";
 
 /**
  *
@@ -95,13 +97,7 @@ export async function getCheckRunStatus(
   checkRunName,
   head_sha,
 ) {
-  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
-    ...context.repo,
-    ref: head_sha,
-    check_name: checkRunName,
-    status: "completed",
-    per_page: PER_PAGE_MAX,
-  });
+  const checkRuns = await listChecksForRef(github, { ...context.repo, ref: head_sha, name: checkRunName, status: "completed" });
 
   if (checkRuns.length === 0) {
     return null;
@@ -135,13 +131,11 @@ export async function getWorkflowRun(
   workflowName,
   head_sha,
 ) {
-  const workflowRuns = await github.paginate(
-    github.rest.actions.listWorkflowRunsForRepo,
+  const workflowRuns = await listWorkflowRunsForRepo(github,
     {
       ...context.repo,
       head_sha,
       status: "completed",
-      per_page: PER_PAGE_MAX,
     },
   );
 
