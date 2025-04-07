@@ -79,9 +79,13 @@ export async function getCheckRunStatus(github, context, core, checkRunName, hea
   }
 
   if (checkRuns.length > 1) {
+    core.info(`Multiple check runs:`);
+    checkRuns.forEach((cr) => {
+      core.info(`- ${cr.name}: ${cr.conclusion}`);
+    });
+    
     const message = `Multiple completed check runs with name: ${checkRunName}`;
-    core.setFailed(message);
-    core.debug(`Check runs: ${JSON.stringify(checkRuns)}`);
+    core.setFailed(message);    
     throw new Error(message);
   }
 
@@ -120,13 +124,15 @@ export async function getWorkflowRun(github, context, core, workflowName, head_s
   }
 
   if (matchingWorkflowRuns.length > 1) {
-    core.warning(`Multiple matching workflow runs: ${JSON.stringify(matchingWorkflowRuns)}`);
+    core.warning(`Multiple matching workflow runs, selecting the most recent run`);
+    matchingWorkflowRuns.forEach((wf) => {
+      core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
+    });
 
+    // Sort by "updated_at" descending, so most recent run is at index 0
     matchingWorkflowRuns.sort((a, b) =>
       new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
     );
-
-    core.debug(`Multiple matching workflow runs: ${JSON.stringify(matchingWorkflowRuns)}`);
   }
 
   return matchingWorkflowRuns[0];
