@@ -1453,9 +1453,9 @@ union RequestDataLevel {
 @doc("Operation Id Path Parameter.")
 model OperationIdPathParameter {
   @doc("The unique ID of the operation.")
-  @key
+  @key("operationId")
   @visibility(Lifecycle.Read)
-  operationId: string;
+  id: string;
 }
 
 @added(APIVersions.v2025_03_01_preview)
