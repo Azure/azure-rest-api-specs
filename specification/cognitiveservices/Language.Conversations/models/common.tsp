@@ -448,9 +448,6 @@ model ConversationalAIItem {
   /** The participant ID of a conversation item. */
   participantId: string;
 
-  /** Role of the participant. */
-  role?: role;
-
   /** The text input */
   text: string;
 }
