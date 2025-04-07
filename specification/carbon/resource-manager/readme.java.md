@@ -20,4 +20,5 @@ description: "Carbon Optimization Client"
 batch:
   - tag: package-2023-04-01-preview
   - tag: package-2024-02-01-preview
+  - tag: package-2025-04-01
 ```
