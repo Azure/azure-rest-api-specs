@@ -46,6 +46,63 @@ model InputDataset extends InputData {
   id: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
+@doc("Abstract class for model configuration.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+@discriminator("type")
+model TargetModelConfig {
+  @doc("Type of the model configuration.")
+  type: string;
+}
+
+@doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AOAIModelConfig extends TargetModelConfig {
+  @visibility(Lifecycle.Read)
+  type: "AOAI";
+
+  @doc("Endpoint targetURI for AOAI model.")
+  azureEndpoint: string;
+
+  @doc("API Key for AOAI model.")
+  apiKey: string;
+
+  @doc("Deployment name for AOAI model.")
+  azureDeployment: string;
+}
+
+@doc("MaaS model configuration. The API version would be selected by the service for querying the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model MAASModelConfig extends TargetModelConfig {
+  @visibility(Lifecycle.Read)
+  type: "MAAS";
+
+  @doc("Endpoint targetURI for MAAS model.")
+  azureEndpoint: string;
+
+  @doc("API Key for MAAS model.")
+  apiKey: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Needed since suggestion is not supported to generate swagger in OpenAPIv2"
+@doc("Target for the evaluation process.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model EvaluationTarget {
+  @doc("System message related to the evaluation target.")
+  systemMessage: string;
+
+  @doc("Model configuration for the evaluation.")
+  modelConfig: TargetModelConfig;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Needed since value type is not fixed"
+  @doc("A dictionary of parameters for the model.")
+  modelParams?: Record<unknown>;
+}
+
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -58,6 +115,10 @@ model Evaluation {
 
   @doc("Data for evaluation.")
   data: InputData;
+
+  @doc("Evaluation target specifying the model config and parameters")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  target?: EvaluationTarget;
 
   @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
   displayName?: string;

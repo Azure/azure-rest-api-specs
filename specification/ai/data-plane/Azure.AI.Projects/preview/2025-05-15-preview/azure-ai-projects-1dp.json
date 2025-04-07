@@ -2198,6 +2198,35 @@
     }
   },
   "definitions": {
+    "AOAIModelConfig": {
+      "type": "object",
+      "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "azureEndpoint": {
+          "type": "string",
+          "description": "Endpoint targetURI for AOAI model."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API Key for AOAI model."
+        },
+        "azureDeployment": {
+          "type": "string",
+          "description": "Deployment name for AOAI model."
+        }
+      },
+      "required": [
+        "azureEndpoint",
+        "apiKey",
+        "azureDeployment"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetModelConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "AOAI"
+    },
     "AnnotationDTO": {
       "type": "object",
       "description": "Represents the data transfer object for an annotation.",
@@ -2824,6 +2853,14 @@
           "$ref": "#/definitions/InputData",
           "description": "Data for evaluation."
         },
+        "target": {
+          "$ref": "#/definitions/EvaluationTarget",
+          "description": "Evaluation target specifying the model config and parameters",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "displayName": {
           "type": "string",
           "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
@@ -2882,34 +2919,6 @@
           "$ref": "#/definitions/ResultType",
           "description": "Type of Evaluation result"
         },
-        "ModelName": {
-          "type": "string",
-          "description": "Model Name"
-        },
-        "ModelVersion": {
-          "type": "string",
-          "description": "Model Version"
-        },
-        "ModelAssetId": {
-          "type": "string",
-          "description": "Model Asset ID"
-        },
-        "DatasetFamily": {
-          "type": "string",
-          "description": "Dataset Family"
-        },
-        "DatasetName": {
-          "type": "string",
-          "description": "Dataset Name"
-        },
-        "Metrics": {
-          "type": "object",
-          "description": "Metrics",
-          "additionalProperties": {
-            "format": "double",
-            "type": "number"
-          }
-        },
         "BlobUri": {
           "type": "string",
           "description": "Blob URI"
@@ -2953,6 +2962,29 @@
       "required": [
         "name",
         "version"
+      ]
+    },
+    "EvaluationTarget": {
+      "type": "object",
+      "description": "Target for the evaluation process.",
+      "properties": {
+        "systemMessage": {
+          "type": "string",
+          "description": "System message related to the evaluation target."
+        },
+        "modelConfig": {
+          "$ref": "#/definitions/TargetModelConfig",
+          "description": "Model configuration for the evaluation."
+        },
+        "modelParams": {
+          "type": "object",
+          "description": "A dictionary of parameters for the model.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "systemMessage",
+        "modelConfig"
       ]
     },
     "EvaluatorConfiguration": {
@@ -3175,6 +3207,30 @@
           }
         ]
       }
+    },
+    "MAASModelConfig": {
+      "type": "object",
+      "description": "MaaS model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "azureEndpoint": {
+          "type": "string",
+          "description": "Endpoint targetURI for MAAS model."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API Key for MAAS model."
+        }
+      },
+      "required": [
+        "azureEndpoint",
+        "apiKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetModelConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "MAAS"
     },
     "ManagedAzureAISearchIndex": {
       "type": "object",
@@ -3827,6 +3883,20 @@
         "name",
         "size",
         "tier"
+      ]
+    },
+    "TargetModelConfig": {
+      "type": "object",
+      "description": "Abstract class for model configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the model configuration."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     }
   },
