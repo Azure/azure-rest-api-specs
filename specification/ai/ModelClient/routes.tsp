@@ -18,16 +18,17 @@ namespace AI.Model;
 @doc("""
   Gets chat completions for the provided chat messages.
   Completions support a wide variety of tasks and generate text that continues from or "completes"
-  provided prompt data. The method makes a REST API call to the `/chat/completions` route 
+  provided prompt data. The method makes a REST API call to the `/chat/completions` route
   on the given endpoint.
   """)
 @actionSeparator("/")
 @route("chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
-    #suppress "@azure-tools/typespec-azure-core/bad-record-type"
-    @doc("request options to pass to the endpoint using complete path")
-    @body
+    /**
+     * The options for chat completions.
+     */
+    @bodyRoot
     body: ChatCompletionsOptions;
 
     ...AdditionalRequestHeaders;
@@ -43,9 +44,10 @@ op getChatCompletions is Azure.Core.RpcOperation<
 @route("embeddings")
 op getEmbeddings is Azure.Core.RpcOperation<
   {
-    #suppress "@azure-tools/typespec-azure-core/bad-record-type"
-    @doc("request options to pass to the endpoint using embeddings path")
-    @body
+    /**
+     * The body of the request containing the options for generating embeddings.
+     */
+    @bodyRoot
     body: EmbeddingsOptions;
 
     ...AdditionalRequestHeaders;
@@ -61,9 +63,10 @@ op getEmbeddings is Azure.Core.RpcOperation<
 @route("images/embeddings")
 op getImageEmbeddings is Azure.Core.RpcOperation<
   {
-    #suppress "@azure-tools/typespec-azure-core/bad-record-type"
-    @doc("request options to pass to the endpoint using images embeddings path")
-    @body
+    /**
+     * The body of the request containing options for image embeddings.
+     */
+    @bodyRoot
     body: ImageEmbeddingsOptions;
 
     ...AdditionalRequestHeaders;
@@ -74,6 +77,8 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
 @doc("""
   Returns information about the AI model.
   The method makes a REST API call to the `/info` route on the given endpoint.
+  This method will only work when using Serverless API or Managed Compute endpoint.
+  It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
   """)
 @actionSeparator("/")
 @route("info")
