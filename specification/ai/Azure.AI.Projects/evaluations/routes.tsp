@@ -77,4 +77,41 @@ interface Evaluations {
     @doc("The data for annotation.")
     @body fileContentResult: string;
   };
+
+  // Upload API set
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Upload the result to an evaluation run.")
+  @route("runs:upload")
+  @post
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v_latest)
+  UploadRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Evaluation to upload.")
+      @body
+      evaluation: EvaluationUpload;
+    },
+    Evaluation
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Update the uploaded the result to an evaluation run.")
+  @route("runs:updateUpload/{name}")
+  @patch
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v_latest)
+  UploadUpdateRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the evaluation run to update.")
+      @path
+      name: string;
+
+      @doc("Evaluation upload to update.")
+      @body
+      evaluation: EvaluationUpload;
+    },
+    Evaluation
+  >;
 }

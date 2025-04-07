@@ -12,6 +12,27 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+@doc("Metadata pertaining to creation and last modification of the resource.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model SystemData {
+  @visibility(Lifecycle.Read)
+  @doc("The timestamp the resource was created at.")
+  createdAt?: utcDateTime;
+
+  @visibility(Lifecycle.Read)
+  @doc("The identity that created the resource.")
+  createdBy?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The identity type that created the resource.")
+  createdByType?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The timestamp of resource last modification (UTC)")
+  lastModifiedAt?: utcDateTime;
+}
+
 @doc("Evaluator Configuration")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
@@ -126,6 +147,10 @@ model Evaluation {
   @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
   description?: string;
 
+  @doc("Metadata containing createdBy and modifiedBy information.")
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+
   @doc("Status of the evaluation. It is set by service and is read-only.")
   @visibility(Lifecycle.Read)
   status?: string;
@@ -197,4 +222,47 @@ model AnnotationDTO {
 
   @doc("The client request identifier.")
   ClientRequestId: string;
+}
+
+@doc("Upload a local SDK evaluation run. Currently update supports status, outputs, properties, and tags updates.")
+@resource("runs")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model EvaluationUpload {
+  @doc("Identifier of the evaluation.")
+  @key("name")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("Data for evaluation.")
+  data?: InputData;
+
+  @doc("Evaluation target specifying the model config and parameters")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  target?: EvaluationTarget;
+
+  @doc("Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique.")
+  displayName?: string;
+
+  @doc("Description of the evaluation. It can be used to store additional information about the evaluation and is mutable.")
+  description?: string;
+
+  @doc("Metadata containing createdBy and modifiedBy information.")
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+
+  @doc("Status of the evaluation. For upload: Failed or Completed.")
+  status?: string;
+
+  @doc("Evaluation's tags. Unlike properties, tags are fully mutable.")
+  tags?: Record<string>;
+
+  @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  properties?: Record<string>;
+
+  @doc("Evaluators to be used for the evaluation.")
+  evaluators?: Record<EvaluatorConfiguration>;
+
+  @doc("Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/{version}'}")
+  outputs?: Record<string>;
 }

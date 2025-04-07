@@ -1473,6 +1473,93 @@
         }
       }
     },
+    "/evaluations/runs:updateUpload/{name}": {
+      "patch": {
+        "operationId": "Evaluations_UploadUpdateRun",
+        "description": "Update the uploaded the result to an evaluation run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the evaluation run to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "Evaluation upload to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationUploadUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluations/runs:upload": {
+      "post": {
+        "operationId": "Evaluations_UploadRun",
+        "description": "Upload the result to an evaluation run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "evaluation",
+            "in": "body",
+            "description": "Evaluation to upload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationUpload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Evaluation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/evaluations/submitannotation": {
       "post": {
         "operationId": "Evaluations_SubmitAnnotation",
@@ -2869,6 +2956,11 @@
           "type": "string",
           "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
         },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
         "status": {
           "type": "string",
           "description": "Status of the evaluation. It is set by service and is read-only.",
@@ -2987,6 +3079,127 @@
         "modelConfig"
       ]
     },
+    "EvaluationUpload": {
+      "type": "object",
+      "description": "Upload a local SDK evaluation run. Currently update supports status, outputs, properties, and tags updates.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluation.",
+          "readOnly": true
+        },
+        "data": {
+          "$ref": "#/definitions/InputData",
+          "description": "Data for evaluation."
+        },
+        "target": {
+          "$ref": "#/definitions/EvaluationTarget",
+          "description": "Evaluation target specifying the model config and parameters",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the evaluation. For upload: Failed or Completed."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/{version}'}",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "EvaluationUploadUpdate": {
+      "type": "object",
+      "description": "Upload a local SDK evaluation run. Currently update supports status, outputs, properties, and tags updates.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/InputDataUpdate",
+          "description": "Data for evaluation."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the evaluation. For upload: Failed or Completed."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorConfigurationUpdate"
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/{version}'}",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "EvaluatorConfiguration": {
       "type": "object",
       "description": "Evaluator Configuration",
@@ -3011,6 +3224,28 @@
       "required": [
         "id"
       ]
+    },
+    "EvaluatorConfigurationUpdate": {
+      "type": "object",
+      "description": "Evaluator Configuration",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluator."
+        },
+        "initParams": {
+          "type": "object",
+          "description": "Initialization parameters of the evaluator.",
+          "additionalProperties": {}
+        },
+        "dataMapping": {
+          "type": "object",
+          "description": "Data parameters of the evaluator.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "FileDatasetVersion": {
       "type": "object",
@@ -3135,6 +3370,20 @@
         "type"
       ]
     },
+    "InputDataUpdate": {
+      "type": "object",
+      "description": "Abstract data class.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the data"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "InputDataset": {
       "type": "object",
       "description": "Dataset as source for evaluation.",
@@ -3150,6 +3399,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/InputData"
+        }
+      ],
+      "x-ms-discriminator-value": "dataset"
+    },
+    "InputDatasetUpdate": {
+      "type": "object",
+      "description": "Dataset as source for evaluation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Evaluation input data"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputDataUpdate"
         }
       ],
       "x-ms-discriminator-value": "dataset"
@@ -3884,6 +4149,34 @@
         "size",
         "tier"
       ]
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp the resource was created at.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The identity type that created the resource.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "readOnly": true
+        }
+      }
     },
     "TargetModelConfig": {
       "type": "object",
