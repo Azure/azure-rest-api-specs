@@ -75,7 +75,4 @@ using Microsoft.StandbyPool;
   "csharp"
 );
 @@clientName(PoolStatus, "StandbyPoolStatus", "csharp");
-@@clientName(PoolStatus.HealthStateCode,
-  "StandbyPoolHealthStateCode",
-  "csharp"
-);
+@@clientName(HealthStateCode, "StandbyPoolHealthStateCode", "csharp");
