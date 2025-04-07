@@ -6,9 +6,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-payload-flattening-threshold: 2
-namespace: azure.mgmt.powerplatform
 package-name: azure-mgmt-powerplatform
+namespace: azure.mgmt.powerplatform
 package-version: 1.0.0b1
 clear-output-folder: true
 title: PowerPlatformMgmtClient
@@ -17,4 +16,9 @@ title: PowerPlatformMgmtClient
 ``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/powerplatform/azure-mgmt-powerplatform/azure/mgmt/powerplatform
+```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
 ```
