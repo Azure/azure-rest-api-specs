@@ -49,38 +49,17 @@ model SignalSource {
   metricName: string;
 
   @doc("Filters applied to modify signal values.")
-  @OpenAPI.extension("x-ms-identifiers", #["logic", "conditions"])
-  filters: Filter[];
+  @OpenAPI.extension(
+    "x-ms-identifiers",
+    #["dimensionName", "scalarFunction", "samplingType", "value", "operator"]
+  )
+  filters: Condition[];
 
   @doc("Defines how measurements are aggregated across multiple time series.")
   spatialAggregation: SpatialAggregation;
 
   @doc("Defines how measurements are aggregated over a specific time window within the same time series.")
   temporalAggregation?: TemporalAggregation;
-}
-
-@doc("Defines a filter model for signals.")
-model Filter {
-  @doc("Logical operator for filtering.")
-  logic: Logic;
-
-  @doc("Conditions applied to the filter.")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["dimensionName", "value", "operator"]
-  )
-  conditions: Condition[];
-}
-
-@doc("Defines logical operators used in filtering.")
-union Logic {
-  @doc("Logical AND operation.")
-  "AND",
-
-  @doc("Logical OR operation.")
-  "OR",
-
-  string,
 }
 
 @doc("Represents a filtering condition.")
@@ -138,22 +117,22 @@ union SamplingType {
 @doc("Defines operators used in filter conditions.")
 union ConditionOperator {
   @doc("Equal to.")
-  "eq",
+  `==`: "eq",
 
   @doc("Not equal to.")
-  "ne",
+  `!=`: "ne",
 
   @doc("Less than.")
-  "lt",
+  `<`: "lt",
 
   @doc("Less than or equal to.")
-  "lte",
+  `<=`: "lte",
 
   @doc("Greater than.")
-  "gt",
+  `>`: "gt",
 
   @doc("Greater than or equal to.")
-  "gte",
+  `>=`: "gte",
 
   @doc("In operator.")
   in: "@in",
@@ -218,16 +197,16 @@ model WindowUptimeCriteria {
 @doc("Defines comparison operators for window uptime criteria.")
 union WindowUptimeCriteriaComparator {
   @doc("Less than the target value.")
-  "lt",
+  `<`: "lt",
 
   @doc("Greater than the target value.")
-  "gt",
+  `>`: "gt",
 
   @doc("Less than or equal to the target value.")
-  "lte",
+  `<=`: "lte",
 
   @doc("Greater than or equal to the target value.")
-  "gte",
+  `>=`: "gte",
 
   string,
 }

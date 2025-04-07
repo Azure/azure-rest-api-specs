@@ -145,4 +145,18 @@ interface Slis {
   @doc("Lists all SLI resources under a parent resource.")
   @route(ServiceGroupRoute)
   listByParent is ArmResourceListByParent<Sli, ServiceGroupParameters>;
+
+  /**
+  POST Actions
+  */
+  @route(ServiceGroupRoute)
+  @armResourceAction(Sli)
+  @post
+  @doc("Returns preview data for the signal.")
+  signalPreview is ArmResourceActionSync<
+    Sli,
+    Signal,
+    void,
+    ServiceGroupParameters
+  >;
 }
