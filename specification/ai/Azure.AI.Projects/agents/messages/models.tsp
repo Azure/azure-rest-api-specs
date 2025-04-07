@@ -1,10 +1,103 @@
 import "../tools/models.tsp";
-
 import "@typespec/versioning";
 
 namespace Azure.AI.Projects.Agents;
 
 using TypeSpec.Versioning;
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "We intentionally want a union of string | array."
+@doc("Because OpenAPI 2 doesn’t fully support oneOf for 'string or array,' we suppress the rule.")
+union CreateMessageContent {
+  @doc("If callers only have a quick text message, they can pass a plain string here.")
+  text: string,
+
+  @doc("For 'rich' content, callers can pass an array of typed content blocks (e.g. text, image_file, image_url).")
+  blocks: MessageContentBlockInput[],
+}
+
+@doc("For the block's 'type' property, we define an open union with a fallback string to satisfy the no-string-discriminator rule.")
+union MessageBlockType {
+  @doc("A text content block.")
+  text: "text",
+
+  @doc("An internally uploaded image file.")
+  image_file: "image_file",
+
+  @doc("An externally hosted image URL.")
+  image_url: "image_url",
+
+  @doc("Fallback for unrecognized types the service might return in the future.")
+  string,
+}
+
+@doc("An abstract base for creation-time 'blocks' that can be text or images. We use @discriminator('type') but make 'type' an open union.")
+@discriminator("type")
+model MessageContentBlockInput {
+  @doc("Must be one of 'text', 'image_file', or 'image_url' (or a fallback string).")
+  type: MessageBlockType;
+}
+
+@doc("Creation-time text block.")
+model MessageTextBlockInput extends MessageContentBlockInput {
+  @doc("Always 'text'.")
+  type: "text";
+
+  @doc("The text content.")
+  text: string;
+}
+
+@doc("Creation-time image-file block.")
+model MessageImageFileBlockInput extends MessageContentBlockInput {
+  @doc("Always 'image_file'.")
+  type: "image_file";
+
+  @doc("References an uploaded image by file ID.")
+  @encodedName("application/json", "image_file")
+  imageFile: MessageImageFileParam;
+}
+
+@doc("Creation-time image-URL block.")
+model MessageImageUrlBlockInput extends MessageContentBlockInput {
+  @doc("Always 'image_url'.")
+  type: "image_url";
+
+  @doc("References an external image by URL.")
+  @encodedName("application/json", "image_url")
+  imageUrl: MessageImageUrlParam;
+}
+
+@doc("Represents an open union for the image detail level: 'auto', 'low', 'high', or an unknown string.")
+union ImageDetailLevel {
+  @doc("Automatic or default level of detail.")
+  auto: "auto",
+
+  @doc("Low detail: uses fewer tokens.")
+  low: "low",
+
+  @doc("High detail: uses more tokens (including potentially more cost).")
+  high: "high",
+
+  @doc("Fallback for unrecognized values the service might return in the future.")
+  string,
+}
+
+@doc("Parameter for an image file (by ID) at creation time.")
+model MessageImageFileParam {
+  @doc("File ID for the uploaded image.")
+  fileId: string;
+
+  @doc("Specifies the requested detail level for the image.")
+  detail?: ImageDetailLevel;
+}
+
+@doc("Parameter for an external image URL at creation time.")
+model MessageImageUrlParam {
+  @doc("The externally accessible image URL.")
+  url: string;
+
+  @doc("Specifies the requested detail level for the image. Default is 'auto'.")
+  detail?: ImageDetailLevel;
+}
 
 /** A single message within an agent thread, as provided during that thread's creation for its initial state. */
 model ThreadMessageOptions {
@@ -18,10 +111,12 @@ model ThreadMessageOptions {
    */
   role: MessageRole;
 
-  /** The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via
-   * a separate call to the create message API.
+  /**
+   * The content of the initial message. This may be:
+   *  - A basic string, if you only need text, or
+   *  - An array of typed content blocks (text, image_file, image_url, etc.)
    */
-  content: string;
+  content: CreateMessageContent;
 
   /** A list of files attached to the message, and the tools they should be added to. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
