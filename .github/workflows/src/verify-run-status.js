@@ -4,14 +4,20 @@ import { extractInputs } from "./context.js";
 /**
  *
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @param {string} checkRunName
- * @param {string} workflowName
  */
 export async function verifyRunStatus(
-  { github, context, core },
-  checkRunName,
-  workflowName,
+  { github, context, core }
 ) {
+  const checkRunName = process.env.CHECK_RUN_NAME || "";
+  if (!checkRunName) { 
+    throw new Error("CHECK_RUN_NAME is not set");
+  }
+  
+  const workflowName = process.env.WORKFLOW_NAME || "";
+  if (!workflowName) {
+    throw new Error("WORKFLOW_NAME is not set");
+  }
+
   // Exit early when context is a check_run event and the check run does not
   // match the checkRunName.
   if (context.eventName == "check_run") {

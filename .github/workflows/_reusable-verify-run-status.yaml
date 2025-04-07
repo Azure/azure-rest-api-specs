@@ -32,8 +32,7 @@ jobs:
         with:
           script: |
             const { verifyRunStatus } = await import('${{ github.workspace }}/.github/workflows/src/verify-run-status.js');
-            return await verifyRunStatus(
-              { github, context, core }, 
-               "${{ inputs.check_run_name }}", 
-               "${{ inputs.workflow_name }}"
-            );
+            return await verifyRunStatus({ github, context, core });
+        env:
+          CHECK_RUN_NAME: ${{ inputs.check_run_name }}
+          WORKFLOW_NAME: ${{ inputs.workflow_name }}
