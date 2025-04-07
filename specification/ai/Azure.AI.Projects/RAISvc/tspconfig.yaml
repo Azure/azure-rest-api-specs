@@ -1,0 +1,35 @@
+parameters:  
+  "service-dir":
+    default: "sdk/azure-eval-svc-typespec_1"
+  "dependencies":
+    "additionalDirectories": []
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":    
+    package-dir: " microsoft-machinelearningservices"
+    package-name: "{package-dir}"  
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    package-dir: " Microsoft.MachineLearningServices"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: " microsoft-machinelearningservices-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/ microsoft-machinelearningservices-rest"
+      description: " Microsoft.MachineLearningServices Service"
+  "@azure-tools/typespec-java":
+    package-dir: " microsoft-machinelearningservices"
+    namespace: com. microsoft.machinelearningservices
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
