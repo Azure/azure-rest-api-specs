@@ -110,7 +110,7 @@ op getTokenCredential(
 @body getTokenCredentialRequest : GetTokenCredentialRequest ,
 ): AccessToken;
 
-@get
+@post
 @route("/skillContext/getInputAsync")
 @doc("Gets the skill input")
 op getInput(
