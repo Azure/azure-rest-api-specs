@@ -21,9 +21,9 @@ jobs:
     runs-on: ubuntu-24.04
 
     if: >- 
-      github.event_name == 'workflow_run' ||
-      (github.event_name == 'check_run' && github.event.check_run.name == '${{ github.event.inputs.check_run_name }}') ||
-      (github.event_name == 'check_suite')
+      ${{ github.event_name == 'workflow_run' || 
+      (github.event_name == 'check_run' && github.event.check_run.name == github.event.inputs.check_run_name) || 
+      (github.event_name == 'check_suite') }}
 
     steps:
       # *** IMPORTANT ***
