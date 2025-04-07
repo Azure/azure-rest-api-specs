@@ -22,24 +22,6 @@ model EvaluationResult {
   @doc("Type of Evaluation result")
   ResultType?: ResultType;
 
-  @doc("Model Name")
-  ModelName?: string;
-
-  @doc("Model Version")
-  ModelVersion?: string;
-
-  @doc("Model Asset ID")
-  ModelAssetId?: string;
-
-  @doc("Dataset Family")
-  DatasetFamily?: string;
-
-  @doc("Dataset Name")
-  DatasetName?: string;
-
-  @doc("Metrics")
-  Metrics?: Record<float64>;
-
   @doc("Blob URI")
   BlobUri?: string;
 
