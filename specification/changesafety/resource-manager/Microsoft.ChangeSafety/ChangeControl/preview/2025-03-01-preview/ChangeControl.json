@@ -2201,9 +2201,11 @@
           ]
         },
         "stageMapSnapshot": {
-          "type": "array",
+          "type": "object",
           "description": "Referenced stagemap snapshot.",
-          "items": {},
+          "additionalProperties": {
+            "$ref": "#/definitions/StageMap"
+          },
           "readOnly": true
         }
       },
@@ -2404,7 +2406,7 @@
       "type": "object",
       "description": "Artifact content model for External ArmTemplates or Bicep files.",
       "properties": {
-        "uri": {
+        "externalArtifactUri": {
           "type": "string",
           "format": "uri",
           "description": "URI for the external ARM template or Bicep file.",
@@ -2416,7 +2418,7 @@
         }
       },
       "required": [
-        "uri"
+        "externalArtifactUri"
       ]
     },
     "ExternalBicepTemplateChangeArtifact": {
@@ -2470,7 +2472,7 @@
       "type": "object",
       "description": "Artifact content model for Inline template or bicep content.",
       "properties": {
-        "script": {
+        "inlineScript": {
           "type": "string",
           "description": "Inline ArmTemplate string or Bicep content.",
           "x-ms-mutability": [
@@ -2481,7 +2483,7 @@
         }
       },
       "required": [
-        "script"
+        "inlineScript"
       ]
     },
     "InlineBicepTemplateChangeArtifact": {
@@ -2579,6 +2581,7 @@
         "properties": {
           "type": "object",
           "description": "The properties of the resource.",
+          "additionalProperties": {},
           "x-ms-mutability": [
             "read",
             "update",
@@ -3233,10 +3236,10 @@
       "type": "object",
       "description": "Artifact content model for TemplateSpec resource.",
       "properties": {
-        "resourceId": {
+        "artifactResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "TemplateSpec resource Id in ARM.",
+          "description": "TemplateSpec artifact resource Id in ARM.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3245,7 +3248,7 @@
         }
       },
       "required": [
-        "resourceId"
+        "artifactResourceId"
       ]
     },
     "TemplateSpecChangeArtifact": {

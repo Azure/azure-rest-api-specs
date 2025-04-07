@@ -77,11 +77,12 @@ model ChangeStateProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   stageParameters: Record<Parameter>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of StageMaps in key:value format."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
   @added(Versions.v2025_03_01_preview)
   @doc("Referenced stagemap snapshot.")
   @visibility(Lifecycle.Read)
-  stageMapSnapshot?: Array<string | StageMap>;
+  stageMapSnapshot?: Record<StageMap>;
 }
 
 @doc("RetrieveNextStage POST Action response.")
@@ -99,7 +100,7 @@ model RetrieveNextStagesResponse {
 
   @doc("StageProgression resources that are ready to put in 'InProgress' state.")
   @Azure.ResourceManager.identifiers(#["stageReference"])
-  nextStages: RetrieveNextStagesResponseItem[];
+  nextStages: Array<RetrieveNextStagesResponseItem>;
 }
 
 @doc("StageProgression data comes from RetrieveNextStages API.")
@@ -239,9 +240,15 @@ model TemplateSpecChangeArtifact extends ChangeArtifact {
 /* Various content type definitions, based on the artifactType. */
 @doc("Artifact content model for Inline template or bicep content.")
 model InlineArtifactContent {
+  @removed(Versions.v2025_03_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Inline ArmTemplate string or Bicep content.")
   script: string;
+
+  @added(Versions.v2025_03_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Inline ArmTemplate string or Bicep content.")
+  inlineScript: string;
 }
 
 @doc("Artifact model when artifactType is ArmOperation.")
@@ -282,16 +289,28 @@ model ArmResourceOperation {
 
 @doc("Artifact content model for External ArmTemplates or Bicep files.")
 model ExternalArtifactContent {
+  @removed(Versions.v2025_03_01_preview)
   @doc("URI for the external ARM template or Bicep file.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   uri: url;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("URI for the external ARM template or Bicep file.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  externalArtifactUri: url;
 }
 
 @doc("Artifact content model for TemplateSpec resource.")
 model TemplateSpecArtifactContent {
+  @removed(Versions.v2025_03_01_preview)
   @doc("TemplateSpec resource Id in ARM.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId: armResourceIdentifier;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("TemplateSpec artifact resource Id in ARM.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  artifactResourceId: armResourceIdentifier;
 }
 
 @added(Versions.v2025_03_01_preview)
@@ -317,10 +336,11 @@ model OperationContent {
   @doc("The location of the resource.")
   location?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: This properties are varying based on different reosurces. We need list of parameters in key:value format."
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to provide the paramters of the properties to be string and int."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The properties of the resource.")
-  properties: {};
+  properties: Record<string | int32>;
 }
 
 @added(Versions.v2025_03_01_preview)
