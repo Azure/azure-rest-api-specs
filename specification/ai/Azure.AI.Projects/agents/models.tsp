@@ -41,7 +41,7 @@ model AgentConfigurationOptions {
   agentModel?: AgentModel;
 
   @doc("Instructions provided to guide how this agent operates.")
-  instructions?: DeveloperMessage[];
+  instructions?: string;
 
   @doc("A list of tool definitions available to the agent.")
   tools?: AgentToolDefinition[];
