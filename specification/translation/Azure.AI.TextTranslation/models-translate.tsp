@@ -14,8 +14,8 @@ model TranslateBodyParameters {
   ...CommonParameters;
 
   @doc("""
-  Details of the translate request
-  """)
+    Details of the translate request
+    """)
   @body
   body: TranslateBodyDetails;
 }
@@ -124,7 +124,6 @@ model TranslateParameters {
 
 @doc("Request body parameters for the translate API.")
 model TranslateBodyDetails {
-
   @doc("""
     Specifies the text string to be translated in the translate API.
     """)
@@ -206,14 +205,13 @@ model TranslateBodyDetails {
   targetsAdaptiveDatasetIds?: string[];
 
   @doc("""
-    Reference sentence pairs to generate adaptive results.
-  """)
-  targetsReferenceTextPairs?: ReferenceSentencePair[]
+      Reference sentence pairs to generate adaptive results.
+    """)
+  targetsReferenceTextPairs?: ReferenceSentencePair[];
 }
 
 @doc("Reference sentence pair.")
 model ReferenceSentencePair {
-
   @doc("Source reference sentence.")
   targetsReferenceTextPairsSource: string;
 
