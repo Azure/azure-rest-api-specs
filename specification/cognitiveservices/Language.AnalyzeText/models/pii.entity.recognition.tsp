@@ -32,16 +32,30 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
   /** RedactionPolicy to be used on the input. */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
+
+  /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+  @added(Versions.v2025_05_15_preview)
+  valueExclusionPolicy?: ValueExclusionPolicy;
+}
+
+/** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+@added(Versions.v2025_05_15_preview)
+model ValueExclusionPolicy {
+  /** Option to make the values excluded values case sensitive */
+  caseSensitive: boolean = false;
+
+  /** List of words and terms that should be excluded from detection by the PII detection service */
+  excludedValues: Array<string>;
 }
 
 /** The abstract base class for RedactionPolicy. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
@@ -49,7 +63,7 @@ model BaseRedactionPolicy {
 }
 
 /** Represents the policy of redacting with a redaction character */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
@@ -59,21 +73,21 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
 }
 
 /** Represents the policy of not redacting found PII. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntityMaskPolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
 }
 
 /** Kinds of redaction policies supported. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 union RedactionPolicyKind {
   string,
 
@@ -112,7 +126,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 model PiiResult is PreBuiltResult {
   /** Response by document */
   @typeChangedFrom(
-    Versions.v2024_11_15_preview,
+    Versions.v2025_05_15_preview,
     Array<PiiEntitiesDocumentResult>
   )
   documents: Array<PiiResultWithDetectedLanguage>;
@@ -130,7 +144,7 @@ union PiiDomain {
 }
 
 /** Entity object with tags. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model PiiEntityWithTags is Entity {
   /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
   type?: string;
@@ -155,7 +169,7 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, Array<Entity>)
+  @typeChangedFrom(Versions.v2025_05_15_preview, Array<Entity>)
   entities: Array<PiiEntityWithTags>;
 }
 
