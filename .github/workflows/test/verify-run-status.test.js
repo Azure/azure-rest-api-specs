@@ -4,7 +4,11 @@ import {
   createMockContext,
   createMockCore,
 } from "./mocks.js";
-import { getCheckRunStatus, getWorkflowRun, verifyRunStatus } from "../src/verify-run-status.js";
+import {
+  getCheckRunStatus,
+  getWorkflowRun,
+  verifyRunStatus,
+} from "../src/verify-run-status.js";
 
 vi.mock("../src/context.js", () => {
   return {
@@ -15,7 +19,7 @@ vi.mock("../src/context.js", () => {
 });
 
 describe("getCheckRunStatus", () => {
-  it("returns matching check_run", async ()=> { 
+  it("returns matching check_run", async () => {
     const githubMock = createMockGithub();
     githubMock.rest.checks.listForRef = vi.fn().mockResolvedValue({
       data: {
@@ -31,20 +35,22 @@ describe("getCheckRunStatus", () => {
 
     const actual = await getCheckRunStatus(
       githubMock,
-      createMockContext(), 
+      createMockContext(),
       createMockCore(),
       "checkRunName",
-      "head_sha"
+      "head_sha",
     );
 
-    expect(actual).toEqual(expect.objectContaining({
-      name: "checkRunName",
-      status: "completed",
-      conclusion: "success",
-    }));
+    expect(actual).toEqual(
+      expect.objectContaining({
+        name: "checkRunName",
+        status: "completed",
+        conclusion: "success",
+      }),
+    );
   });
 
-  it("returns null when no check matches", async ()=> {
+  it("returns null when no check matches", async () => {
     const githubMock = createMockGithub();
     githubMock.rest.checks.listForRef = vi.fn().mockResolvedValue({
       data: {
@@ -54,16 +60,16 @@ describe("getCheckRunStatus", () => {
 
     const actual = await getCheckRunStatus(
       githubMock,
-      createMockContext(), 
+      createMockContext(),
       createMockCore(),
       "checkRunName",
-      "head_sha"
+      "head_sha",
     );
 
     expect(actual).toBeNull();
   });
 
-  it("throws when multiple checks match", async ()=> {
+  it("throws when multiple checks match", async () => {
     const githubMock = createMockGithub();
     githubMock.rest.checks.listForRef = vi.fn().mockResolvedValue({
       data: {
@@ -82,95 +88,109 @@ describe("getCheckRunStatus", () => {
       },
     });
 
-    await expect(async () => await getCheckRunStatus(
-      githubMock,
-      createMockContext(), 
-      createMockCore(),
-      "checkRunName",
-      "head_sha"
-    )).rejects.toThrow(/Multiple completed check runs with name/);
+    await expect(
+      async () =>
+        await getCheckRunStatus(
+          githubMock,
+          createMockContext(),
+          createMockCore(),
+          "checkRunName",
+          "head_sha",
+        ),
+    ).rejects.toThrow(/Multiple completed check runs with name/);
   });
 });
 
 describe("getWorkflowRun", () => {
-  it("returns matching workflow_run", async ()=> {
+  it("returns matching workflow_run", async () => {
     const githubMock = createMockGithub();
-    githubMock.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
-      data: {
-        workflow_runs: [
-          {
-            name: "workflowName",
-            status: "completed",
-            conclusion: "success",
-          },
-        ],
-      },
-    });
+    githubMock.rest.actions.listWorkflowRunsForRepo = vi
+      .fn()
+      .mockResolvedValue({
+        data: {
+          workflow_runs: [
+            {
+              name: "workflowName",
+              status: "completed",
+              conclusion: "success",
+            },
+          ],
+        },
+      });
 
     const actual = await getWorkflowRun(
       githubMock,
-      createMockContext(), 
+      createMockContext(),
       createMockCore(),
       "workflowName",
-      "head_sha"
+      "head_sha",
     );
 
-    expect(actual).toEqual(expect.objectContaining({
-      name: "workflowName",
-      status: "completed",
-      conclusion: "success",
-    }));
+    expect(actual).toEqual(
+      expect.objectContaining({
+        name: "workflowName",
+        status: "completed",
+        conclusion: "success",
+      }),
+    );
   });
 
-  it("returns null when no workflow matches", async ()=> {
+  it("returns null when no workflow matches", async () => {
     const githubMock = createMockGithub();
-    githubMock.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
-      data: {
-        workflow_runs: [
-          {
-            name: "otherWorkflowName"
-          }
-        ],
-      },
-    });
+    githubMock.rest.actions.listWorkflowRunsForRepo = vi
+      .fn()
+      .mockResolvedValue({
+        data: {
+          workflow_runs: [
+            {
+              name: "otherWorkflowName",
+            },
+          ],
+        },
+      });
 
     const actual = await getWorkflowRun(
       githubMock,
-      createMockContext(), 
+      createMockContext(),
       createMockCore(),
       "workflowName",
-      "head_sha"
+      "head_sha",
     );
 
     expect(actual).toBeNull();
   });
 
-  it("throws when multiple workflows match", async ()=> {
+  it("throws when multiple workflows match", async () => {
     const githubMock = createMockGithub();
-    githubMock.rest.actions.listWorkflowRunsForRepo = vi.fn().mockResolvedValue({
-      data: {
-        workflow_runs: [
-          {
-            name: "workflowName",
-            status: "completed",
-            conclusion: "success",
-          },
-          {
-            name: "workflowName",
-            status: "completed",
-            conclusion: "success",
-          },
-        ],
-      },
-    });
+    githubMock.rest.actions.listWorkflowRunsForRepo = vi
+      .fn()
+      .mockResolvedValue({
+        data: {
+          workflow_runs: [
+            {
+              name: "workflowName",
+              status: "completed",
+              conclusion: "success",
+            },
+            {
+              name: "workflowName",
+              status: "completed",
+              conclusion: "success",
+            },
+          ],
+        },
+      });
 
-    await expect(async () => await getWorkflowRun(
-      githubMock,
-      createMockContext(), 
-      createMockCore(),
-      "workflowName",
-      "head_sha"
-    )).rejects.toThrow(/Multiple completed workflow runs with name/);
+    await expect(
+      async () =>
+        await getWorkflowRun(
+          githubMock,
+          createMockContext(),
+          createMockCore(),
+          "workflowName",
+          "head_sha",
+        ),
+    ).rejects.toThrow(/Multiple completed workflow runs with name/);
   });
 });
 
@@ -196,7 +216,7 @@ describe("verifyRunStatus", () => {
           name: "checkRunName",
           conclusion: "success",
         },
-      }
+      },
     };
 
     const core = createMockCore();
@@ -204,7 +224,7 @@ describe("verifyRunStatus", () => {
     await verifyRunStatus(
       { github, context, core },
       "checkRunName",
-      "workflowName"
+      "workflowName",
     );
 
     expect(core.setFailed).not.toHaveBeenCalled();
@@ -231,7 +251,7 @@ describe("verifyRunStatus", () => {
         workflow_run: {
           name: "workflowName",
           conclusion: "success",
-        }
+        },
       },
     };
 
@@ -240,7 +260,7 @@ describe("verifyRunStatus", () => {
     await verifyRunStatus(
       { github, context, core },
       "checkRunName",
-      "workflowName"
+      "workflowName",
     );
 
     expect(core.setFailed).not.toHaveBeenCalled();
@@ -260,17 +280,19 @@ describe("verifyRunStatus", () => {
         workflow_run: {
           name: "workflowName",
           conclusion: "success",
-        }
+        },
       },
     };
     const core = createMockCore();
     await verifyRunStatus(
       { github, context, core },
       "checkRunName",
-      "workflowName"
+      "workflowName",
     );
     expect(core.setFailed).not.toHaveBeenCalled();
-    expect(core.info).toHaveBeenCalledWith("No completed check run with name: checkRunName");
+    expect(core.info).toHaveBeenCalledWith(
+      "No completed check run with name: checkRunName",
+    );
   });
 
   it("returns early during check_run event when no matching workflow_run is found", async () => {
@@ -288,16 +310,18 @@ describe("verifyRunStatus", () => {
           name: "checkRunName",
           conclusion: "success",
         },
-      }
+      },
     };
     const core = createMockCore();
     await verifyRunStatus(
       { github, context, core },
       "checkRunName",
-      "workflowName"
+      "workflowName",
     );
     expect(core.setFailed).not.toHaveBeenCalled();
-    expect(core.info).toHaveBeenCalledWith("No completed workflow run with name: workflowName");
+    expect(core.info).toHaveBeenCalledWith(
+      "No completed workflow run with name: workflowName",
+    );
   });
 
   it("throws if check_run conclusion does not match workflow_run conclusion", async () => {
@@ -321,17 +345,16 @@ describe("verifyRunStatus", () => {
           name: "checkRunName",
           conclusion: "success",
         },
-      }
+      },
     };
     const core = createMockCore();
     await verifyRunStatus(
       { github, context, core },
       "checkRunName",
-      "workflowName"
+      "workflowName",
     );
     expect(core.setFailed).toHaveBeenCalledWith(
-      "Check run conclusion (success) does not match workflow run conclusion (failure)"
+      "Check run conclusion (success) does not match workflow run conclusion (failure)",
     );
   });
-
 });

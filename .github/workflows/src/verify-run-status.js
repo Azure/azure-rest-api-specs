@@ -1,51 +1,65 @@
-import { PER_PAGE_MAX } from "./github.js"
+import { PER_PAGE_MAX } from "./github.js";
 import { extractInputs } from "./context.js";
 
 /**
- * 
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments 
- * @param {string} checkRunName 
+ *
+ * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {string} checkRunName
  * @param {string} workflowName
  */
-export async function verifyRunStatus({github, context, core}, checkRunName, workflowName) {
+export async function verifyRunStatus(
+  { github, context, core },
+  checkRunName,
+  workflowName,
+) {
   const { head_sha } = await extractInputs(github, context, core);
 
-  // Exit early when context is a check_run event and the check run does not 
+  // Exit early when context is a check_run event and the check run does not
   // match the checkRunName.
   if (context.eventName == "check_run") {
     const contextRunName = context.payload.check_run.name;
     if (contextRunName !== checkRunName) {
-      core.info(`Check run name (${contextRunName}) does not match input: ${checkRunName}`);
+      core.info(
+        `Check run name (${contextRunName}) does not match input: ${checkRunName}`,
+      );
       return;
     }
   }
 
-  const checkRun = context.eventName == "check_run"
-    ? context.payload.check_run
-    : await getCheckRunStatus(github, context, core, checkRunName, head_sha);
+  const checkRun =
+    context.eventName == "check_run"
+      ? context.payload.check_run
+      : await getCheckRunStatus(github, context, core, checkRunName, head_sha);
 
-  if (!checkRun) { 
+  if (!checkRun) {
     core.info(`No completed check run with name: ${checkRunName}`);
     return;
   }
 
-  core.info(`Check run name: ${checkRun.name} conclusion: ${checkRun.conclusion}`);
+  core.info(
+    `Check run name: ${checkRun.name} conclusion: ${checkRun.conclusion}`,
+  );
   core.debug(`Check run: ${JSON.stringify(checkRun)}`);
 
-  const workflowRun = context.eventName == "workflow_run" 
-    ? context.payload.workflow_run
-    : await getWorkflowRun(github, context, core, workflowName, head_sha);
+  const workflowRun =
+    context.eventName == "workflow_run"
+      ? context.payload.workflow_run
+      : await getWorkflowRun(github, context, core, workflowName, head_sha);
 
-  if (!workflowRun) { 
+  if (!workflowRun) {
     core.info(`No completed workflow run with name: ${workflowName}`);
     return;
   }
 
-  core.info(`Workflow run name: ${workflowRun.name} conclusion: ${workflowRun.conclusion}`);
+  core.info(
+    `Workflow run name: ${workflowRun.name} conclusion: ${workflowRun.conclusion}`,
+  );
   core.debug(`Workflow run: ${JSON.stringify(workflowRun)}`);
 
   if (checkRun.conclusion !== workflowRun.conclusion) {
-    core.setFailed(`Check run conclusion (${checkRun.conclusion}) does not match workflow run conclusion (${workflowRun.conclusion})`);
+    core.setFailed(
+      `Check run conclusion (${checkRun.conclusion}) does not match workflow run conclusion (${workflowRun.conclusion})`,
+    );
     return;
   }
 
@@ -53,25 +67,28 @@ export async function verifyRunStatus({github, context, core}, checkRunName, wor
 }
 
 /**
- * 
+ *
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @param {string} checkRunName 
- * @param {string} head_sha 
- * @returns 
+ * @param {string} checkRunName
+ * @param {string} head_sha
+ * @returns
  */
-export async function getCheckRunStatus(github, context, core, checkRunName, head_sha) {
-  const checkRuns = await github.paginate(
-    github.rest.checks.listForRef, 
-    {
-      ...context.repo,
-      ref: head_sha,
-      check_name: checkRunName,
-      status: "completed",
-      per_page: PER_PAGE_MAX,
-    }
-  );
+export async function getCheckRunStatus(
+  github,
+  context,
+  core,
+  checkRunName,
+  head_sha,
+) {
+  const checkRuns = await github.paginate(github.rest.checks.listForRef, {
+    ...context.repo,
+    ref: head_sha,
+    check_name: checkRunName,
+    status: "completed",
+    per_page: PER_PAGE_MAX,
+  });
   core.debug(`Check runs: ${JSON.stringify(checkRuns)}`);
 
   if (checkRuns.length === 0) {
@@ -83,9 +100,9 @@ export async function getCheckRunStatus(github, context, core, checkRunName, hea
     checkRuns.forEach((cr) => {
       core.info(`- ${cr.name}: ${cr.conclusion}`);
     });
-    
+
     const message = `Multiple completed check runs with name: ${checkRunName}`;
-    core.setFailed(message);    
+    core.setFailed(message);
     throw new Error(message);
   }
 
@@ -96,42 +113,53 @@ export async function getCheckRunStatus(github, context, core, checkRunName, hea
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
- * @param {string} workflowName 
- * @param {string} head_sha 
- * @returns 
+ * @param {string} workflowName
+ * @param {string} head_sha
+ * @returns
  */
-export async function getWorkflowRun(github, context, core, workflowName, head_sha) {
-
+export async function getWorkflowRun(
+  github,
+  context,
+  core,
+  workflowName,
+  head_sha,
+) {
   const workflowRuns = await github.paginate(
-    github.rest.actions.listWorkflowRunsForRepo, 
+    github.rest.actions.listWorkflowRunsForRepo,
     {
       ...context.repo,
       head_sha,
       status: "completed",
       per_page: PER_PAGE_MAX,
-    });
+    },
+  );
   core.debug(`Workflow runs: ${JSON.stringify(workflowRuns)}`);
 
-  if (workflowRuns.length === 0) { 
+  if (workflowRuns.length === 0) {
     core.info(`No completed workflow runs`);
     return null;
   }
 
-  const matchingWorkflowRuns = workflowRuns.filter((run) => run.name === workflowName);
+  const matchingWorkflowRuns = workflowRuns.filter(
+    (run) => run.name === workflowName,
+  );
 
   if (matchingWorkflowRuns.length === 0) {
     return null;
   }
 
   if (matchingWorkflowRuns.length > 1) {
-    core.warning(`Multiple matching workflow runs, selecting the most recent run`);
+    core.warning(
+      `Multiple matching workflow runs, selecting the most recent run`,
+    );
     matchingWorkflowRuns.forEach((wf) => {
       core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
     });
 
     // Sort by "updated_at" descending, so most recent run is at index 0
-    matchingWorkflowRuns.sort((a, b) =>
-      new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+    matchingWorkflowRuns.sort(
+      (a, b) =>
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
     );
   }
 
