@@ -297,11 +297,11 @@ model LivenessSessionAuditEntry {
 model CreateLivenessWithVerifySessionMultipartContent {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: CreateLivenessWithVerifySessionJsonContent;
+  Parameters: HttpPart<CreateLivenessWithVerifySessionJsonContent>;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
-  VerifyImage: bytes;
+  VerifyImage: HttpPart<bytes>;
 }
 
 @doc("Request wrapper of liveness with verify session creation.")
