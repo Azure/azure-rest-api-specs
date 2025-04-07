@@ -1775,11 +1775,11 @@
       "type": "object",
       "description": "Artifact model when artifactType is ArmOperation.",
       "properties": {
-        "operations": {
+        "operationsOld": {
           "type": "array",
           "description": "Arm Operation array.",
           "items": {
-            "$ref": "#/definitions/ArmResourceOperation"
+            "$ref": "#/definitions/ArmOperationResource"
           },
           "x-ms-identifiers": [
             "resourceId"
@@ -1792,7 +1792,7 @@
         }
       },
       "required": [
-        "operations"
+        "operationsOld"
       ]
     },
     "ArmOperationChangeArtifact": {
@@ -1819,7 +1819,7 @@
       ],
       "x-ms-discriminator-value": "ArmOperation"
     },
-    "ArmResourceOperation": {
+    "ArmOperationResource": {
       "type": "object",
       "description": "Artifact content model for Inline ArmOperations.",
       "properties": {

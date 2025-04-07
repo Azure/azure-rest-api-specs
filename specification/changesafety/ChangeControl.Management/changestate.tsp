@@ -252,38 +252,46 @@ model InlineArtifactContent {
 
 @doc("Artifact model when artifactType is ArmOperation.")
 model ArmOperationArtifactContent {
+  @removed(Versions.v2025_03_01_preview)
   @doc("Arm Operation array.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @renamedFrom(Versions.v2024_10_01_preview, "operations")
   @Azure.ResourceManager.identifiers(#["resourceId"])
+  operationsOld: ArmOperationResource[];
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("Arm Operation array.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @Azure.ResourceManager.identifiers(#["uri"])
   operations: ArmResourceOperation[];
 }
 
+@added(Versions.v2025_03_01_preview)
 @doc("Artifact content model for Inline ArmOperations.")
 model ArmResourceOperation {
-  @removed(Versions.v2025_03_01_preview)
-  @doc("Target resource Id that needs to be changed.")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  resourceId: string;
-
-  @removed(Versions.v2025_03_01_preview)
-  @doc("ARM operation. eg: DELETE")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  operation: ArmOperation;
-
-  @added(Versions.v2025_03_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The uri of the operation.")
   uri: url;
 
-  @added(Versions.v2025_03_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The http method of the operation.")
   httpMethod: ArmOperation;
 
-  @added(Versions.v2025_03_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The resource operation content.")
   content?: OperationContent;
+}
+
+@removed(Versions.v2025_03_01_preview)
+@doc("Artifact content model for Inline ArmOperations.")
+model ArmOperationResource {
+  @doc("Target resource Id that needs to be changed.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  resourceId: string;
+
+  @doc("ARM operation. eg: DELETE")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  operation: ArmOperation;
 }
 
 @doc("Artifact content model for External ArmTemplates or Bicep files.")
