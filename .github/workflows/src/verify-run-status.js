@@ -6,14 +6,13 @@ import { extractInputs } from "./context.js";
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @param {string} checkRunName
  * @param {string} workflowName
+ * @returns {Promise<void>}
  */
 export async function verifyRunStatus(
   { github, context, core },
   checkRunName,
   workflowName,
 ) {
-  const { head_sha } = await extractInputs(github, context, core);
-
   // Exit early when context is a check_run event and the check run does not
   // match the checkRunName.
   if (context.eventName == "check_run") {
@@ -25,6 +24,8 @@ export async function verifyRunStatus(
       return;
     }
   }
+
+  const { head_sha } = await extractInputs(github, context, core);
 
   const checkRun =
     context.eventName == "check_run"
@@ -114,7 +115,7 @@ export async function getCheckRunStatus(
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} workflowName
  * @param {string} head_sha
- * @returns
+ * @returns {Promise<null | import('github-script').AsyncFunctionArguments>}
  */
 export async function getWorkflowRun(
   github,
