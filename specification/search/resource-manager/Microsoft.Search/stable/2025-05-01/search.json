@@ -285,7 +285,7 @@
         ],
         "responses": {
           "200": {
-            "description": "All query keys for the given search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure AI Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
+            "description": "All query keys for the given search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure AI Search Service REST API or SDK to perform read-only operations on your search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
             }
@@ -408,7 +408,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure AI Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
+            "description": "The name of the Azure AI Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
           },
           {
             "name": "service",
@@ -431,13 +431,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property of a Get Service request.",
+            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property returned in the response for a Get Service request.",
             "schema": {
               "$ref": "#/definitions/SearchService"
             }
           },
           "201": {
-            "description": "If you requested creation of a free search service, the service is now provisioned and ready to use, subject to DNS propagation delay. For other SKU types, provisioning happens asynchronously. You can check the status of a scale operation through the provisioningState property of a Get Service request.",
+            "description": "If you requested creation of a free search service, the service is now provisioned and ready to use, subject to DNS propagation delay. For other SKU types, provisioning happens asynchronously. You can check the status of a scale operation through the provisioningState property returned in the response for a Get Service request.",
             "schema": {
               "$ref": "#/definitions/SearchService"
             }
@@ -527,7 +527,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property of a Get Service request.",
+            "description": "The existing service definition was successfully updated. If you changed the number of replicas or partitions, the scale operation will happen asynchronously. You can check the status of a scale operation through the provisioningState property returned in the response for a Get Service request.",
             "schema": {
               "$ref": "#/definitions/SearchService"
             }
@@ -1552,7 +1552,7 @@
             }
           },
           "202": {
-            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioningState property of a Get Service request.",
+            "description": "The long running operation for upgrading the service to the latest version was queued successfully. You can check the status of the operation through the provisioingState property returned in the response for a Get Service request.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -2752,203 +2752,13 @@
       },
       "x-ms-external": true
     },
-    "Operation": {
-      "description": "Describes a REST API operation.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the operation. This name is of the form {provider}/{resource}/{operation}.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that describes the operation.",
-          "readOnly": true,
-          "properties": {
-            "provider": {
-              "description": "The friendly name of the resource provider.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "operation": {
-              "description": "The operation type: read, write, delete, listKeys/action, etc.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "resource": {
-              "description": "The resource type on which the operation is performed.",
-              "readOnly": true,
-              "type": "string"
-            },
-            "description": {
-              "description": "The friendly name of the operation.",
-              "readOnly": true,
-              "type": "string"
-            }
-          }
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "x-nullable": true,
-          "readOnly": true,
-          "description": "Describes if the specified operation is a data plane API operation. Operations where this value is not true are supported directly by the resource provider."
-        },
-        "origin": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Describes which originating entities are allowed to invoke this operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Describes additional properties for this operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationProperties": {
-      "type": "object",
-      "description": "Describes additional properties for this operation.",
-      "properties": {
-        "serviceSpecification": {
-          "$ref": "#/definitions/OperationServiceSpecification",
-          "description": "Specifications of the service for this operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationServiceSpecification": {
-      "type": "object",
-      "description": "Specifications of the service for this operation.",
-      "properties": {
-        "metricSpecifications": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationMetricsSpecification"
-          },
-          "description": "Specifications of metrics for this operation."
-        },
-        "logSpecifications": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationLogsSpecification"
-          },
-          "description": "Specifications of logs for this operation."
-        }
-      }
-    },
-    "OperationMetricsSpecification": {
-      "type": "object",
-      "description": "Specifications of one type of metric for this operation.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the metric specification."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the metric specification."
-        },
-        "displayDescription": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display description of the metric specification."
-        },
-        "unit": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The unit for the metric specification."
-        },
-        "aggregationType": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The type of aggregation for the metric specification."
-        },
-        "dimensions": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationMetricDimension"
-          },
-          "description": "Dimensions for the metric specification."
-        },
-        "availabilities": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/OperationAvailability"
-          },
-          "description": "Availabilities for the metric specification."
-        }
-      }
-    },
-    "OperationMetricDimension": {
-      "type": "object",
-      "description": "Describes a particular dimension for the metric specification.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the dimension."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the dimension."
-        }
-      }
-    },
-    "OperationAvailability": {
-      "type": "object",
-      "description": "Describes a particular availability for the metric specification.",
-      "readOnly": true,
-      "properties": {
-        "timeGrain": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The time grain for the dimension."
-        },
-        "blobDuration": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The blob duration for the dimension."
-        }
-      }
-    },
-    "OperationLogsSpecification": {
-      "type": "object",
-      "description": "Specifications of one type of log for this operation.",
-      "readOnly": true,
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the log specification."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the log specification."
-        },
-        "blobDuration": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The blob duration for the log specification."
-        }
-      }
-    },
     "OperationListResult": {
       "description": "The result of the request to list REST API operations. It contains a list of operations and a URL to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Operation"
           },
           "readOnly": true,
           "description": "The list of operations by Azure AI Search, some supported by the resource provider and others by data plane APIs."
