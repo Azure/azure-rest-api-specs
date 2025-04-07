@@ -584,20 +584,6 @@ model ConversationPrediction extends BasePrediction {
   entities: Array<ConversationEntity>;
 }
 
-/** Represents the prediction section of a Conversation project. */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
-model ConversationalAIPrediction extends BasePrediction {
-  /** Represents the prediction section of a Conversation project. */
-  projectKind: projectKind.ConversationalAI;
-
-  /** The intent classification results. */
-  intents: Array<ConversationIntent>;
-
-  /** The entity extraction results. */
-  entities: Array<ConversationEntity>;
-}
-
 /** The intent classification result of a Conversation project. */
 model ConversationIntent {
   /** A predicted class. */

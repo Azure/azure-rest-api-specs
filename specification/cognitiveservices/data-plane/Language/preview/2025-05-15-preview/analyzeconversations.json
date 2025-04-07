@@ -2304,38 +2304,6 @@
         "text"
       ]
     },
-    "ConversationalAIPrediction": {
-      "type": "object",
-      "description": "Represents the prediction section of a Conversation project.",
-      "properties": {
-        "intents": {
-          "type": "array",
-          "description": "The intent classification results.",
-          "items": {
-            "$ref": "#/definitions/ConversationIntent"
-          },
-          "x-ms-identifiers": []
-        },
-        "entities": {
-          "type": "array",
-          "description": "The entity extraction results.",
-          "items": {
-            "$ref": "#/definitions/ConversationEntity"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "intents",
-        "entities"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BasePrediction"
-        }
-      ],
-      "x-ms-discriminator-value": "ConversationalAI"
-    },
     "ConversationalAIResult": {
       "type": "object",
       "description": "Represents the conversational analysis response.",
