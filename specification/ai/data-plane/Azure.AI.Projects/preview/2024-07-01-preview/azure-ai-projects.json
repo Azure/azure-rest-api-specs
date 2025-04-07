@@ -1115,13 +1115,14 @@
           {
             "name": "file",
             "in": "formData",
+            "description": "The file data, in bytes.",
             "required": true,
             "type": "file"
           },
           {
             "name": "purpose",
             "in": "formData",
-            "description": "The possible values denoting the intended usage of a file.",
+            "description": "The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.",
             "required": true,
             "type": "string",
             "enum": [
@@ -1178,6 +1179,7 @@
           {
             "name": "filename",
             "in": "formData",
+            "description": "The name of the file.",
             "required": false,
             "type": "string"
           }
@@ -4489,6 +4491,7 @@
         "chunking_strategy"
       ]
     },
+    "Agents.CreateMessageContent": {},
     "Agents.CreateRunOptions": {
       "type": "object",
       "description": "The details used when creating a new run of an agent thread.",
@@ -4986,6 +4989,36 @@
       ],
       "x-ms-discriminator-value": "function"
     },
+    "Agents.ImageDetailLevel": {
+      "type": "string",
+      "description": "Represents an open union for the image detail level: 'auto', 'low', 'high', or an unknown string.",
+      "enum": [
+        "auto",
+        "low",
+        "high"
+      ],
+      "x-ms-enum": {
+        "name": "ImageDetailLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Automatic or default level of detail."
+          },
+          {
+            "name": "low",
+            "value": "low",
+            "description": "Low detail: uses fewer tokens."
+          },
+          {
+            "name": "high",
+            "value": "high",
+            "description": "High detail: uses more tokens (including potentially more cost)."
+          }
+        ]
+      }
+    },
     "Agents.IncompleteDetailsReason": {
       "type": "string",
       "description": "The reason why the run is incomplete. This will point to which specific token limit was reached over the course of the run.",
@@ -5096,6 +5129,36 @@
     "Agents.MessageAttachmentToolDefinition": {
       "x-nullable": false
     },
+    "Agents.MessageBlockType": {
+      "type": "string",
+      "description": "For the block's 'type' property, we define an open union with a fallback string to satisfy the no-string-discriminator rule.",
+      "enum": [
+        "text",
+        "image_file",
+        "image_url"
+      ],
+      "x-ms-enum": {
+        "name": "MessageBlockType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "A text content block."
+          },
+          {
+            "name": "image_file",
+            "value": "image_file",
+            "description": "An internally uploaded image file."
+          },
+          {
+            "name": "image_url",
+            "value": "image_url",
+            "description": "An externally hosted image URL."
+          }
+        ]
+      }
+    },
     "Agents.MessageContent": {
       "type": "object",
       "description": "An abstract representation of a single item of thread message content.",
@@ -5103,6 +5166,20 @@
         "type": {
           "type": "string",
           "description": "The object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "Agents.MessageContentBlockInput": {
+      "type": "object",
+      "description": "An abstract base for creation-time 'blocks' that can be text or images. We use @discriminator('type') but make 'type' an open union.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Agents.MessageBlockType",
+          "description": "Must be one of 'text', 'image_file', or 'image_url' (or a fallback string)."
         }
       },
       "discriminator": "type",
@@ -5404,6 +5481,26 @@
         "url"
       ]
     },
+    "Agents.MessageImageFileBlockInput": {
+      "type": "object",
+      "description": "Creation-time image-file block.",
+      "properties": {
+        "image_file": {
+          "$ref": "#/definitions/Agents.MessageImageFileParam",
+          "description": "References an uploaded image by file ID.",
+          "x-ms-client-name": "imageFile"
+        }
+      },
+      "required": [
+        "image_file"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.MessageContentBlockInput"
+        }
+      ],
+      "x-ms-discriminator-value": "image_file"
+    },
     "Agents.MessageImageFileContent": {
       "type": "object",
       "description": "A representation of image file content in a thread message.",
@@ -5436,6 +5533,60 @@
       },
       "required": [
         "file_id"
+      ]
+    },
+    "Agents.MessageImageFileParam": {
+      "type": "object",
+      "description": "Parameter for an image file (by ID) at creation time.",
+      "properties": {
+        "fileId": {
+          "type": "string",
+          "description": "File ID for the uploaded image."
+        },
+        "detail": {
+          "$ref": "#/definitions/Agents.ImageDetailLevel",
+          "description": "Specifies the requested detail level for the image."
+        }
+      },
+      "required": [
+        "fileId"
+      ]
+    },
+    "Agents.MessageImageUrlBlockInput": {
+      "type": "object",
+      "description": "Creation-time image-URL block.",
+      "properties": {
+        "image_url": {
+          "$ref": "#/definitions/Agents.MessageImageUrlParam",
+          "description": "References an external image by URL.",
+          "x-ms-client-name": "imageUrl"
+        }
+      },
+      "required": [
+        "image_url"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.MessageContentBlockInput"
+        }
+      ],
+      "x-ms-discriminator-value": "image_url"
+    },
+    "Agents.MessageImageUrlParam": {
+      "type": "object",
+      "description": "Parameter for an external image URL at creation time.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The externally accessible image URL."
+        },
+        "detail": {
+          "$ref": "#/definitions/Agents.ImageDetailLevel",
+          "description": "Specifies the requested detail level for the image. Default is 'auto'."
+        }
+      },
+      "required": [
+        "url"
       ]
     },
     "Agents.MessageIncompleteDetails": {
@@ -5607,6 +5758,25 @@
         "type",
         "text"
       ]
+    },
+    "Agents.MessageTextBlockInput": {
+      "type": "object",
+      "description": "Creation-time text block.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text content."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Agents.MessageContentBlockInput"
+        }
+      ],
+      "x-ms-discriminator-value": "text"
     },
     "Agents.MessageTextContent": {
       "type": "object",
@@ -7683,8 +7853,8 @@
           "description": "The role of the entity that is creating the message. Allowed values include:\n- `user`: Indicates the message is sent by an actual user and should be used in most\ncases to represent user-generated messages.\n- `assistant`: Indicates the message is generated by the agent. Use this value to insert\nmessages from the agent into the\nconversation."
         },
         "content": {
-          "type": "string",
-          "description": "The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via\na separate call to the create message API."
+          "$ref": "#/definitions/Agents.CreateMessageContent",
+          "description": "The content of the initial message. This may be:\n- A basic string, if you only need text, or\n- An array of typed content blocks (text, image_file, image_url, etc.)"
         },
         "attachments": {
           "type": "array",

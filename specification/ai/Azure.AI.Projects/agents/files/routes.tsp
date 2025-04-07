@@ -53,25 +53,22 @@ op uploadFile is Azure.Core.Foundations.Operation<
     @header
     contentType: "multipart/form-data";
 
-    /** Multipart body */
-    @multipartBody body: {
-      @doc("The file data, in bytes.")
-      @clientName("Data", "csharp")
-      file: HttpPart<File>;
+    @doc("The file data, in bytes.")
+    @clientName("Data", "csharp")
+    file: bytes;
 
-      @doc("The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.")
-      purpose: HttpPart<FilePurpose>;
+    @doc("The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.")
+    purpose: FilePurpose;
 
-      /*
-       * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
-       *            in the multipart Content-Disposition header for the data section and can be provided independently of
-       *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
-       *            file input, like curl does) but should remain configurable when using a stream or other data source
-       *            lacking an a priori name.
-       */
-      @doc("The name of the file.")
-      filename?: HttpPart<string>;
-    };
+    /*
+     * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
+     *            in the multipart Content-Disposition header for the data section and can be provided independently of
+     *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
+     *            file input, like curl does) but should remain configurable when using a stream or other data source
+     *            lacking an a priori name.
+     */
+    @doc("The name of the file.")
+    filename?: string;
   },
   OpenAIFile
 >;
