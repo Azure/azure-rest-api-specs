@@ -11,6 +11,8 @@ export interface Suppression {
   tool: string;
   // Output only exposes "paths".  For input, if "path" is defined, it is inserted at the start of "paths".
   paths: string[];
+  rules?: string[];
+  subRules?: string[];
   reason: string;
 }
 
@@ -21,6 +23,8 @@ const suppressionSchema = z.array(
       // For now, input allows "path" alongside "paths".  Lather, may deprecate "path".
       path: z.string().optional(),
       paths: z.array(z.string()).optional(),
+      rules: z.array(z.string()).optional(),
+      "sub-rules": z.array(z.string()).optional(),
       reason: z.string(),
     })
     .refine((data) => data.path || data.paths?.[0], {
@@ -36,6 +40,8 @@ const suppressionSchema = z.array(
       return {
         tool: s.tool,
         paths: paths,
+        rules: s.rules,
+        subRules: s["sub-rules"],
         reason: s.reason,
       } as Suppression;
     }),
