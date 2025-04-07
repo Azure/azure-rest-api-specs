@@ -27,20 +27,12 @@ These are the global settings for the scvmm.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-03
+tag: package-2024-06
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
-```
-### Tag: package-2025-03
-
-These settings apply only when `--tag=package-2025-03` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-03'
-input-file:
-  - Microsoft.ScVmm/stable/2025-03-13/scvmm.json
 ```
 ### Tag: package-2024-06
 

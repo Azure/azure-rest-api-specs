@@ -20,14 +20,16 @@ options:
   "@azure-tools/typespec-ts":
     is-modular-library: true
     generate-metadata: true
+    hierarchy-client: false
     experimental-extensible-enums: true
+    enable-operation-group: true
     package-dir: "arm-astro"
     flavor: "azure"
     package-details:
       name: "@azure/arm-astro"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-astro"
-    namespace: "azure.mgmt.astro"
+    package-name: "{package-dir}"
     flavor: "azure"
     generate-test: true
     generate-sample: true

@@ -262,8 +262,3 @@ namespace Azure.AI.OpenAI.Assistants {
   @@clientName(createRun::parameters.body, "createRunOptions", "java");
   @@clientName(createMessage::parameters.body, "threadMessageOptions", "java");
 }
-
-@@clientName(Azure.AI.OpenAI.Assistants.uploadFile::parameters.file,
-  "uploadFileRequest",
-  "java"
-);

@@ -2,6 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/face"
   "dependencies":
+    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -14,7 +15,7 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Face.json"
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-vision-face"
-    namespace: "azure.ai.vision.face"
+    package-name: "{package-dir}"
     package-version: 1.0.0b2
     package-mode: dataplane
     flavor: azure

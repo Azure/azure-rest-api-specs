@@ -28,7 +28,9 @@ options:
   "@azure-tools/typespec-ts":
     is-modular-library: true
     generate-metadata: true
+    hierarchy-client: false
     experimental-extensible-enums: true
+    enable-operation-group: true
     generate-sample: true
     package-dir: "arm-playwrighttesting"
     flavor: "azure"
@@ -36,7 +38,7 @@ options:
       name: "@azure/arm-playwrighttesting"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-playwrighttesting"
-    namespace: "azure.mgmt.playwrighttesting"
+    package-name: "{package-dir}"
     flavor: "azure"
     generate-test: true
     generate-sample: true

@@ -57,8 +57,9 @@ op addUploadPart(
   @path
   upload_id: string,
 
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("The request body data payload for the operation.")
-  @multipartBody
+  @body
   requestBody: AddUploadPartRequest,
 ): UploadPart;
 

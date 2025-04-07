@@ -27,7 +27,9 @@ options:
   "@azure-tools/typespec-ts":
     is-modular-library: true
     generateMetadata: true
+    hierarchy-client: false
     experimental-extensible-enums: true
+    enable-operation-group: true
     generate-sample: true
     package-dir: "arm-deviceregistry"
     flavor: "azure"
@@ -35,7 +37,7 @@ options:
       name: "@azure/arm-deviceregistry"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-deviceregistry"
-    namespace: "azure.mgmt.deviceregistry"
+    package-name: "{package-dir}"
     flavor: "azure"
     generate-test: true
     generate-sample: true

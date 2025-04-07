@@ -313,12 +313,13 @@ model LivenessSessionAuditEntry {
 model CreateLivenessWithVerifySessionMultipartContent {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The parameters for creating session.")
-  Parameters: HttpPart<CreateLivenessWithVerifySessionJsonContent>;
+  Parameters: CreateLivenessWithVerifySessionJsonContent;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
-  VerifyImage: HttpPart<bytes>;
+  VerifyImage: bytes;
 }
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Workaround for update model in new version."
 @removed(Versions.v1_2)
 @renamedFrom(Versions.v1_2, "CreateLivenessWithVerifySessionRequest")
@@ -328,8 +329,9 @@ model CreateLivenessWithVerifySessionRequestBeforeV1_2 {
   @header("content-type")
   contentType: "multipart/form-data";
 
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Request content of liveness with verify session creation.")
-  @multipartBody
+  @body
   body: CreateLivenessWithVerifySessionMultipartContent;
 }
 
@@ -503,47 +505,24 @@ model CreateLivenessWithVerifySessionRequest {
   @header("content-type")
   contentType: "multipart/form-data";
 
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
   @doc("Request content of liveness with verify session creation.")
-  @multipartBody
+  @body
   body: CreateLivenessWithVerifySessionContent;
 }
 
 @added(Versions.v1_2)
 @doc("Request of liveness with verify session creation.")
-model CreateLivenessWithVerifySessionContent {
-  @doc("Type of liveness mode the client should follow.")
-  livenessOperationMode: HttpPart<LivenessOperationMode>;
-
-  @doc("Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body.")
-  deviceCorrelationIdSetInClient?: HttpPart<boolean>;
-
-  @doc("Whether or not store the session image.")
-  enableSessionImage?: HttpPart<boolean>;
-
-  @doc("The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen")
-  livenessModelVersion?: HttpPart<LivenessModel>;
-
+model CreateLivenessWithVerifySessionContent is CreateLivenessSessionContent {
   @doc("Whether or not return the verify image hash.")
-  returnVerifyImageHash?: HttpPart<boolean>;
+  returnVerifyImageHash?: boolean;
 
   @doc("Threshold for confidence of the face verification. Please refer to the documentation for more details. https://learn.microsoft.com/legal/cognitive-services/face/characteristics-and-limitations?context=%2Fazure%2Fai-services%2Fcomputer-vision%2Fcontext%2Fcontext#recognition-confidence-score")
-  verifyConfidenceThreshold?: HttpPart<confidenceScore>;
+  @minValue(0)
+  @maxValue(1)
+  verifyConfidenceThreshold?: float32;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @doc("The image stream for verify. Content-Disposition header field for this part must have filename.")
-  verifyImage: HttpPart<bytes>;
-
-  @doc("Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null.")
-  deviceCorrelationId?: HttpPart<string>;
-
-  @doc("Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.")
-  authTokenTimeToLiveInSeconds?: HttpPart<authTokenLifetimeInSeconds>; // = 600;
+  verifyImage: bytes;
 }
-
-@minValue(60)
-@maxValue(86400)
-scalar authTokenLifetimeInSeconds extends int32;
-
-@minValue(0)
-@maxValue(1)
-scalar confidenceScore extends float32;

@@ -767,12 +767,17 @@
       "description": "Document Translate Request Content",
       "properties": {
         "document": {
-          "type": "object",
+          "type": "string",
+          "format": "byte",
           "description": "Document to be translated in the form"
         },
         "glossary": {
-          "type": "object",
-          "description": "Glossary-translation memory will be used during translation in the form. "
+          "type": "array",
+          "description": "Glossary-translation memory will be used during translation in the form. ",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
         }
       },
       "required": [

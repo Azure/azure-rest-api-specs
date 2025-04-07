@@ -20,14 +20,16 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-fabric"
     flavor: "azure"
-    namespace: "azure.mgmt.fabric"
+    package-name: "{package-dir}"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     azure-sdk-for-js: true
     is-modular-library: true
     generate-metadata: true
+    hierarchy-client: false
     experimental-extensible-enums: true
+    enable-operation-group: true
     package-dir: "arm-fabric"
     flavor: "azure"
     package-details:

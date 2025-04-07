@@ -20,19 +20,19 @@ To see additional help and options, run:
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - from: service.json
-    suppress: OAV131
+    suppress: OAV131 
     reason: Testing purpose.
 
-  - from: service.json
+  - from: service.json 
     suppress: R4010
     reason: Testing purpose
 
   - from: service.json
     suppress:
-      - R4009
+    - R4009
     reason: suppressing system data for 2021-02-10
 
   - from: service.json
@@ -44,18 +44,6 @@ directive:
     suppress:
       - R4011
     reason: service implements 204 for delete and DeleteOperationResponses error was falsely raised.
-
-  - from: service.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}"].put
-    suppress:
-      - PutResponseCodes
-    reason: suppressing as ASR is old service and for all APIs, the 202-async PUT convention is followed.
-
-  - from: service.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}"].put
-    suppress:
-      - ProvisioningStateSpecifiedForLROPut
-    reason: suppressing as ASR is old service and for all PUT APIs, same convention is followed.
 
   - code: AvoidAdditionalProperties
     from: service.json
@@ -73,9 +61,9 @@ suppressions:
 
 These are the global settings for the RecoveryServicesSiteRecovery API.
 
-```yaml
+``` yaml
 openapi-type: arm
-tag: package-2025-01-01
+tag: package-2024-10
 directive:
   - where:
       - $.paths
@@ -83,14 +71,6 @@ directive:
       - UniqueResourcePaths
 ```
 
-### Tag: package-2025-01-01
-
-These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-01-01'
-input-file:
-  - Microsoft.RecoveryServices/stable/2025-01-01/service.json
-```
 
 ### Tag: package-2024-10
 
@@ -118,12 +98,11 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 input-file:
   - Microsoft.RecoveryServices/stable/2024-02-01/service.json
 ```
-
 ### Tag: package-2024-01
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.RecoveryServices/stable/2024-01-01/service.json
 ```
@@ -132,7 +111,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08'
+``` yaml $(tag) == 'package-2023-08'
 input-file:
   - Microsoft.RecoveryServices/stable/2023-08-01/service.json
 ```
@@ -141,7 +120,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.RecoveryServices/stable/2023-06-01/service.json
 ```
@@ -150,7 +129,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04'
+``` yaml $(tag) == 'package-2023-04'
 input-file:
   - Microsoft.RecoveryServices/stable/2023-04-01/service.json
 ```
@@ -159,7 +138,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02'
+``` yaml $(tag) == 'package-2023-02'
 input-file:
   - Microsoft.RecoveryServices/stable/2023-02-01/service.json
 ```
@@ -168,7 +147,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-01'
+``` yaml $(tag) == 'package-2023-01'
 input-file:
   - Microsoft.RecoveryServices/stable/2023-01-01/service.json
 ```
@@ -177,7 +156,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10'
+``` yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-10-01/service.json
 ```
@@ -186,7 +165,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09'
+``` yaml $(tag) == 'package-2022-09'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-09-10/service.json
 ```
@@ -195,7 +174,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-08'
+``` yaml $(tag) == 'package-2022-08'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-08-01/service.json
 ```
@@ -204,7 +183,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05'
+``` yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-05-01/service.json
 ```
@@ -213,7 +192,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-04'
+``` yaml $(tag) == 'package-2022-04'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-04-01/service.json
 ```
@@ -222,7 +201,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-03-01/service.json
 ```
@@ -231,7 +210,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02'
+``` yaml $(tag) == 'package-2022-02'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-02-01/service.json
 ```
@@ -240,7 +219,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-01'
+``` yaml $(tag) == 'package-2022-01'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-01-01/service.json
 ```
@@ -249,7 +228,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-12'
+``` yaml $(tag) == 'package-2021-12'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-12-01/service.json
 ```
@@ -258,7 +237,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11'
+``` yaml $(tag) == 'package-2021-11'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-11-01/service.json
 ```
@@ -267,7 +246,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10'
+``` yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-10-01/service.json
 ```
@@ -276,7 +255,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08'
+``` yaml $(tag) == 'package-2021-08'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-08-01/service.json
 ```
@@ -285,7 +264,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-07'
+``` yaml $(tag) == 'package-2021-07'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-07-01/service.json
 ```
@@ -294,7 +273,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-06'
+``` yaml $(tag) == 'package-2021-06'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-06-01/service.json
 ```
@@ -303,7 +282,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-04'
+``` yaml $(tag) == 'package-2021-04'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-04-01/service.json
 ```
@@ -312,7 +291,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03'
+``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-03-01/service.json
 ```
@@ -321,7 +300,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02'
+``` yaml $(tag) == 'package-2021-02'
 input-file:
   - Microsoft.RecoveryServices/stable/2021-02-10/service.json
 ```
@@ -330,7 +309,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-07'
+``` yaml $(tag) == 'package-2018-07'
 input-file:
   - Microsoft.RecoveryServices/stable/2018-07-10/service.json
 ```
@@ -339,7 +318,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-01'
+``` yaml $(tag) == 'package-2018-01'
 input-file:
   - Microsoft.RecoveryServices/stable/2018-01-10/service.json
 ```
@@ -348,9 +327,9 @@ input-file:
 
 These settings apply only when `--tag=package-2016-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-08'
+``` yaml $(tag) == 'package-2016-08'
 input-file:
-  - Microsoft.RecoveryServices/stable/2016-08-10/service.json
+- Microsoft.RecoveryServices/stable/2016-08-10/service.json
 ```
 
 ---
@@ -362,7 +341,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python

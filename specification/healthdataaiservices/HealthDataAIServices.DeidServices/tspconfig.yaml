@@ -2,6 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/healthdataaiservices"
   "dependencies":
+    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -13,7 +14,7 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-health-deidentification"
-    namespace: "azure.health.deidentification"
+    package-name: "{package-dir}"
     package-mode: dataplane
     flavor: azure
     generate-test: true

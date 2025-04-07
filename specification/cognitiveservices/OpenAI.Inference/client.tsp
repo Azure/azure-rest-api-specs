@@ -126,8 +126,3 @@ interface OpenAIClient {
   "imageGenerationOptions",
   "java"
 );
-
-@@clientName(Azure.OpenAI.uploadFile::parameters.file,
-  "uploadFileRequest",
-  "java"
-);

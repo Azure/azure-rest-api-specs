@@ -28,17 +28,23 @@ options:
     service-name: "Hybrid Connectivity"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-hybridconnectivity"
-    namespace: "azure.mgmt.hybridconnectivity"
-    flavor: "azure"
+    package-name: "{package-dir}"
     generate-test: true
     generate-sample: true
-  "@azure-tools/typespec-ts":
     flavor: "azure"
+  "@azure-tools/typespec-ts":
+    azure-sdk-for-js: true
+    is-modular-library: true
+    generate-metadata: true
+    hierarchy-client: false
     experimental-extensible-enums: true
+    enable-operation-group: true
+    examples-directory: "{project-root}/examples"
     typespec-title-map:
       HybridConnectivityManagementAPIClient: HybridConnectivityManagementAPI
     generate-sample: true
     package-dir: "arm-hybridconnectivity"
+    flavor: "azure"
     package-details:
       name: "@azure/arm-hybridconnectivity"
   "@azure-tools/typespec-go":

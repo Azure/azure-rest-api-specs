@@ -23,7 +23,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-commonedgesitemanageroperations"
-    namespace: "azure.mgmt.commonedgesitemanageroperations"
+    package-name: "{package-dir}"
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     generate-test: true
     generate-sample: true
     flavor: azure
@@ -31,7 +32,9 @@ options:
     azure-sdk-for-js: true
     is-modular-library: true
     generate-metadata: true
+    hierarchy-client: false
     experimental-extensible-enums: true
+    enable-operation-group: true
     flavor: azure
     package-dir: "arm-commonedgesitemanageroperations"
     package-details:

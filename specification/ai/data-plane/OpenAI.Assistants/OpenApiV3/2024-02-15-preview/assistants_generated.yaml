@@ -192,7 +192,6 @@ paths:
                 file:
                   type: string
                   format: binary
-                  description: The file data (not filename) to upload.
                 purpose:
                   allOf:
                     - $ref: '#/components/schemas/FilePurpose'
@@ -203,10 +202,6 @@ paths:
               required:
                 - file
                 - purpose
-            encoding:
-              purpose:
-                contentType: text/plain
-        description: The file data to upload and its purpose.
   /files/{fileId}:
     delete:
       operationId: deleteFile

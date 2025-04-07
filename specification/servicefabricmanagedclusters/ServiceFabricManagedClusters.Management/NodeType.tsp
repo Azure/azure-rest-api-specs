@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 import "./ManagedCluster.tsp";
 
@@ -10,7 +9,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -526,12 +524,6 @@ model NodeTypeProperties {
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
   vmApplications?: VmApplication[];
-
-  /**
-   * 	Setting this to true allows stateless node types to scale out without equal distribution across zones.
-   */
-  @added(Versions.v2025_03_01_preview)
-  zoneBalance?: boolean;
 }
 
 /**

@@ -2,6 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/purview"
   "dependencies":
+    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -14,7 +15,7 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-purview-datamap"
-    namespace: "azure.purview.datamap"
+    package-name: "{package-dir}"
     package-mode: dataplane
     flavor: azure
     generate-test: true

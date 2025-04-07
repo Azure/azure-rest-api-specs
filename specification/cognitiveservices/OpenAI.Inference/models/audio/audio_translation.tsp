@@ -44,35 +44,33 @@ model AudioTranslationOptions {
      flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
     """)
   @clientName("AudioData", "csharp")
-  file: HttpPart<bytes>;
+  file: bytes;
 
   @doc("""
     The optional filename or descriptive identifier to associate with with the audio data.
     """)
   // Note: although this isn't explicitly part of the request schema per documentation, it is present via the encoded
   // content-disposition header for the binary section of the multipart/form-data content.
-  filename?: HttpPart<string>;
+  filename?: string;
 
   @doc("""
     The requested format of the translation response data, which will influence the content and detail of the result.
     """)
-  responseFormat?: HttpPart<
-    AudioTranslationFormat,
-    #{ name: "response_format" }
-  >;
+  @encodedName("application/json", "response_format")
+  responseFormat?: AudioTranslationFormat;
 
   @doc("""
     An optional hint to guide the model's style or continue from a prior audio segment. The written language of the
     prompt should match the primary spoken language of the audio data.
     """)
-  prompt?: HttpPart<string>;
+  prompt?: string;
 
   @doc("""
     The sampling temperature, between 0 and 1.
     Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
     If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.
     """)
-  temperature?: HttpPart<float32>;
+  temperature?: float32;
 
   @doc("""
     The model to use for this translation request.
@@ -81,7 +79,7 @@ model AudioTranslationOptions {
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
   @clientName("DeploymentName", "csharp")
-  `model`?: HttpPart<string>;
+  `model`?: string;
 }
 
 @doc("""
@@ -169,6 +167,7 @@ model GetAudioTranslationBody {
   /**
    * The configuration information for an audio translation request.
    */
-  @multipartBody
+  #suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
+  @body
   body: AudioTranslationOptions;
 }

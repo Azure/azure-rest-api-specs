@@ -2,6 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/confidentialledger"
   "dependencies":
+    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -14,7 +15,7 @@ options:
   "@azure-tools/typespec-python":
     flavor: azure
     package-dir: "azure-codetransparency"
-    namespace: "azure.codetransparency"
+    package-name: "{package-dir}"
     package-mode: "dataplane"
     package-pprint-name: "Code Transparency Service"
     models-mode: none

@@ -765,10 +765,7 @@ interface Entity {
   @route("/atlas/v2/entity/businessmetadata/import")
   @post
   importBusinessMetadata is AtlasImportOperation<
-    {
-      /** Multipart body */
-      @multipartBody body: BusinessMetadataOptions;
-    },
+    BodyParameter<BusinessMetadataOptions>,
     BulkImportResult,
     MultipartFormDataRequestHeadersTraits
   >;

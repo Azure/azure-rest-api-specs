@@ -21,17 +21,20 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
-    is-modular-library: true
-    generate-metadata: true
-    experimental-extensible-enums: true
-    generate-sample: true
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    generateSample: true
     package-dir: "arm-workloadssapvirtualinstance"
     flavor: "azure"
-    package-details:
+    packageDetails:
       name: "@azure/arm-workloadssapvirtualinstance"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-workloadssapvirtualinstance"
-    namespace: "azure.mgmt.workloadssapvirtualinstance"
+    package-name: "{package-dir}"
     flavor: "azure"
     generate-test: true
     generate-sample: true

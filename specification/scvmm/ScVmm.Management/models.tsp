@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
+import "./main.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
@@ -270,12 +271,6 @@ model CloudCapacity {
 
   /** VMCount gives the max number of VMs that can be deployed in the cloud. */
   @visibility(Lifecycle.Read) vmCount?: int64;
-
-  /** StorageGB gives the storage in GB present in the cloud. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is distinct from Gb"
-  @added(Versions.v2025_03_13)
-  @visibility(Lifecycle.Read)
-  storageGB?: int64;
 }
 
 /** The StorageQoSPolicy definition. */
@@ -629,10 +624,6 @@ model AvailabilitySetListItem {
 
 /** Defines the resource properties. */
 model OsProfileForVmInstance {
-  /** Gets or sets the admin username. */
-  @added(Versions.v2025_03_13)
-  adminUsername?: string;
-
   /** Admin password of the virtual machine. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
@@ -981,11 +972,6 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
   /** Gets the power state of the virtual machine. */
   @visibility(Lifecycle.Read)
   powerState?: string;
-
-  /** Gets vm generation. */
-  @visibility(Lifecycle.Read)
-  @added(Versions.v2025_03_13)
-  generation?: int64;
 
   /** Gets or sets the nic ip addresses. */
   ipAddresses?: string[];
