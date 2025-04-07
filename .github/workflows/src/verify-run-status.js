@@ -3,16 +3,14 @@ import { PER_PAGE_MAX } from "./github.js";
 
 /**
  * @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes
- * 
- * @typedef {RestEndpointMethodTypes["checks"]["listForRef"]["parameters"]} ListCheckRunsForRefParameters
  * @typedef {RestEndpointMethodTypes["checks"]["listForRef"]["response"]["data"]["check_runs"][number]} CheckRun
-
- * @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["parameters"]} ListWorkflowRunsForRepoParameters
  * @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["response"]["data"]["workflow_runs"][number]} WorkflowRun
  */
 
 /**
- *
+ * Given the name of a completed check run name and a completed workflow, verify 
+ * that both have the same conclusion. If conclusions are different, fail the 
+ * action.
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
 export async function verifyRunStatus({ github, context, core }) {
@@ -85,12 +83,12 @@ export async function verifyRunStatus({ github, context, core }) {
 }
 
 /**
- *
+ * Returns the check with the given checkRunName for the given ref.
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} checkRunName
- * @param {string} head_sha
+ * @param {string} ref
  * @returns {Promise<CheckRun | null>}
  */
 export async function getCheckRun(
@@ -98,11 +96,11 @@ export async function getCheckRun(
   context,
   core,
   checkRunName,
-  head_sha,
+  ref,
 ) {
   const checkRuns = await github.paginate(github.rest.checks.listForRef, {
     ...context.repo,
-    ref: head_sha,
+    ref: ref,
     check_name: checkRunName,
     status: "completed",
     per_page: PER_PAGE_MAX,
@@ -127,11 +125,12 @@ export async function getCheckRun(
 }
 
 /**
+ * Returns the workflow run with the given workflowName for the given ref.
  * @param {import('github-script').AsyncFunctionArguments['github']} github
  * @param {import('github-script').AsyncFunctionArguments['context']} context
  * @param {import('github-script').AsyncFunctionArguments['core']} core
  * @param {string} workflowName
- * @param {string} head_sha
+ * @param {string} ref
  * @returns {Promise<WorkflowRun | null>}
  */
 export async function getWorkflowRun(
@@ -139,13 +138,13 @@ export async function getWorkflowRun(
   context,
   core,
   workflowName,
-  head_sha,
+  ref,
 ) {
   const workflowRuns = await github.paginate(
     github.rest.actions.listWorkflowRunsForRepo,
     {
       ...context.repo,
-      head_sha,
+      head_sha: ref,
       status: "completed",
       per_page: PER_PAGE_MAX,
     },
