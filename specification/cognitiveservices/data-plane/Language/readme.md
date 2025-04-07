@@ -4,11 +4,13 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 > see https://aka.ms/autorest
 
-## Releases
+## Configuration
 
 The current preview release of Language is 2025-05-15-preview.
 
 The current stable release of Language is 2024-11-01.
+
+### Basic Information
 
 ```yaml
 tag: release_2025-05-15-preview
