@@ -1679,9 +1679,6 @@
           "204": {
             "description": "No Content"
           },
-          "200": {
-            "description": "Success"
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -1792,6 +1789,10 @@
             "description": "Accepted",
             "headers": {
               "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "description": "URI to poll for asynchronous operation result.",
                 "type": "string"
               },
@@ -2037,7 +2038,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "parameters",
             "description": "The Managed Network Settings object of the workspace.",
             "required": true,
             "schema": {
@@ -2125,6 +2126,10 @@
             "description": "Accepted",
             "headers": {
               "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "description": "URI to poll for asynchronous operation result.",
                 "type": "string"
               },
