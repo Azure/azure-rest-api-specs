@@ -8,10 +8,13 @@ using Azure.ClientGenerator.Core;
 
 // @TypeSpec.Versioning.versioned(HealthDataAIServices.DeidServices.Versions)
 namespace HealthDataAIServices.DeidServices {
-  @@clientName(listJobDocuments, "listJobDocumentsInternal", "csharp,python");
-  @@clientName(listJobs, "listJobsInternal", "csharp,python");
+  @@clientName(listJobDocuments,
+    "listJobDocumentsInternal",
+    "csharp,java,python"
+  );
+  @@clientName(listJobs, "listJobsInternal", "csharp,java,python");
   @@clientName(HealthDataAIServices.DeidServices, "DeidentificationClient");
-  @@access(listJobDocuments, Access.internal, "csharp,python");
-  @@access(listJobs, Access.internal, "csharp,python");
+  @@access(listJobDocuments, Access.internal, "csharp,java,python");
+  @@access(listJobs, Access.internal, "csharp,java,python");
   @@clientName(DeidentifyTextRequest.body, "content", "csharp");
 }

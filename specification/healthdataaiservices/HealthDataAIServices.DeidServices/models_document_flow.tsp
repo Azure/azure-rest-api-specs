@@ -112,7 +112,7 @@ model DeidentificationDocumentDetails {
   output?: DeidentificationDocumentLocation;
 
   @doc("Status of the document.")
-  status: Azure.Core.Foundations.OperationState;
+  status: OperationState;
 
   @doc("Error when document fails.")
   error?: Azure.Core.Foundations.Error;
