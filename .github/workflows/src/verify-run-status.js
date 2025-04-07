@@ -26,9 +26,9 @@ export async function verifyRunStatus({ github, context, core }) {
   if (context.eventName == "check_run") {
     const contextRunName = context.payload.check_run.name;
     if (contextRunName !== checkRunName) {
-      core.info(
-        `Check run name (${contextRunName}) does not match input: ${checkRunName}`,
-      );
+      const message = `Check run name (${contextRunName}) does not match input: ${checkRunName}`;
+      core.info(message);
+      core.notice(message);
       return;
     }
   }
@@ -41,7 +41,9 @@ export async function verifyRunStatus({ github, context, core }) {
       : await getCheckRunStatus(github, context, core, checkRunName, head_sha);
 
   if (!checkRun) {
-    core.info(`No completed check run with name: ${checkRunName}`);
+    const message = `No completed check run with name: ${checkRunName}`;
+    core.info(message);
+    core.notice(message);
     return;
   }
 
@@ -56,7 +58,9 @@ export async function verifyRunStatus({ github, context, core }) {
       : await getWorkflowRun(github, context, core, workflowName, head_sha);
 
   if (!workflowRun) {
-    core.info(`No completed workflow run with name: ${workflowName}`);
+    const message = `No completed workflow run with name: ${workflowName}`;
+    core.info(message);
+    core.notice(message);
     return;
   }
 
