@@ -5596,14 +5596,14 @@
           "description": "The type of the Dev Box addon.",
           "readOnly": true
         },
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether the Dev Box addon is enabled or not.",
-          "readOnly": true
-        },
         "actionState": {
           "type": "string",
           "description": "The current action state of the Dev Box addon. This state is based on previous\naction performed by user.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of this addon.",
           "readOnly": true
         },
         "error": {
@@ -5615,8 +5615,7 @@
       "discriminator": "kind",
       "required": [
         "name",
-        "kind",
-        "enabled"
+        "kind"
       ]
     },
     "DevBoxAddOnType": {
@@ -7938,6 +7937,54 @@
             "name": "WriteEnvironments",
             "value": "WriteEnvironments",
             "description": "User can create new environments or replace and update existing ones."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Indicates the general provisioning state.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "ProvisionedWithWarning"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Resource is creating."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource was successfully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource failed to provision."
+          },
+          {
+            "name": "ProvisionedWithWarning",
+            "value": "ProvisionedWithWarning",
+            "description": "Resource was provisioned with warning."
           }
         ]
       }

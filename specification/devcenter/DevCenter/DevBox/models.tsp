@@ -64,6 +64,21 @@ union DevBoxProvisioningState {
   string,
 }
 
+@doc("Indicates the general provisioning state.")
+@added(APIVersions.v2025_04_01_preview)
+union ProvisioningState {
+  @doc("Resource is creating.") Creating: "Creating",
+  @doc("Resource is being updated.") Updating: "Updating",
+  @doc("Resource is being deleted.") Deleting: "Deleting",
+  @doc("Resource was successfully provisioned.") Succeeded: "Succeeded",
+  @doc("Resource failed to provision.") Failed: "Failed",
+
+  @doc("Resource was provisioned with warning.")
+  ProvisionedWithWarning: "ProvisionedWithWarning",
+
+  string,
+}
+
 @doc("Indicates the Dev Box compute.")
 union SkuName {
   @doc("Intel, 8 vCPU, 32 GB RAM, 256 GB Storage.")
@@ -1175,16 +1190,16 @@ model DevBoxAddOn {
   @visibility(Lifecycle.Read)
   kind: DevBoxAddOnType;
 
-  @doc("Whether the Dev Box addon is enabled or not.")
-  @visibility(Lifecycle.Read)
-  enabled: boolean;
-
   @doc("""
     The current action state of the Dev Box addon. This state is based on previous
     action performed by user.
     """)
   @visibility(Lifecycle.Read)
   actionState?: string;
+
+  @doc("Provisioning state of this addon.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 
   @doc("Creation, deletion or action error details. Populated only for error states.")
   @visibility(Lifecycle.Read)
