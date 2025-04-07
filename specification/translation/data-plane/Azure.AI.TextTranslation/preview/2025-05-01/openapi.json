@@ -151,14 +151,6 @@
             "$ref": "#/parameters/TranslateParameters.allowFallback"
           },
           {
-            "name": "X-ClientTraceId",
-            "in": "header",
-            "description": "A client-generated GUID to uniquely identify the request.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientTraceId"
-          },
-          {
             "name": "api-version",
             "in": "query",
             "description": "Mandatory API version parameter",
@@ -169,10 +161,14 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Details of the translate request",
+            "description": "Defines the content of the request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TranslateBodyDetails"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TranslateBodyParameters"
+              },
+              "x-ms-identifiers": []
             }
           }
         ],
@@ -493,6 +489,24 @@
         ]
       }
     },
+    "ReferenceSentencePair": {
+      "type": "object",
+      "description": "Reference sentence pair.",
+      "properties": {
+        "targetsReferenceTextPairsSource": {
+          "type": "string",
+          "description": "Source reference sentence."
+        },
+        "targetsReferenceTextPairsTarget": {
+          "type": "string",
+          "description": "Target reference sentence."
+        }
+      },
+      "required": [
+        "targetsReferenceTextPairsSource",
+        "targetsReferenceTextPairsTarget"
+      ]
+    },
     "SourceDictionaryLanguage": {
       "type": "object",
       "description": "Properties ot the source dictionary language",
@@ -595,8 +609,12 @@
       "description": "Request body parameters for the translate API.",
       "properties": {
         "text": {
-          "$ref": "#/definitions/InputTextItem",
-          "description": "Specifies the text string to be translated in the translate API."
+          "type": "array",
+          "description": "Specifies the text string to be translated in the translate API.",
+          "items": {
+            "$ref": "#/definitions/InputTextItem"
+          },
+          "x-ms-identifiers": []
         },
         "targetsLanguage": {
           "type": "array",
@@ -717,10 +735,18 @@
         },
         "targetsAdaptiveDatasetIds": {
           "type": "array",
-          "description": "Reference dataset ID having sentence pair to generate adaptive customized translation",
+          "description": "Reference dataset ID having sentence pair to generate adaptive customized translation.",
           "items": {
             "type": "string"
           }
+        },
+        "targetsReferenceTextPairs": {
+          "type": "array",
+          "description": "  Reference sentence pairs to generate adaptive results.",
+          "items": {
+            "$ref": "#/definitions/ReferenceSentencePair"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -732,6 +758,10 @@
       "type": "object",
       "description": "Request body parameters for the translate API.",
       "properties": {
+        "clientTraceId": {
+          "type": "string",
+          "description": "A client-generated GUID to uniquely identify the request."
+        },
         "body": {
           "$ref": "#/definitions/TranslateBodyDetails",
           "description": "Details of the translate request"
@@ -944,7 +974,7 @@
     "TranslateParameters.allowFallback": {
       "name": "allowFallback",
       "in": "query",
-      "description": "In the case where a custom system is being used, specifies that the service is allowed to fall back to a\ngeneral system when a custom system doesn't exist. \nIn the case where a Large Language Model is being used, specifies that the service is allowed to fall\nback to a Small Language Model if an error occurs.\nPossible values are: true (default) or false.\n\nallowFallback=false specifies that the translation should only use systems trained for the category specified \nby the request. If a translation for language X to language Y requires chaining through a pivot language E, \nthen all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. \nIf no system is found with the specific category, the request will return a 400 status code. allowFallback=true \nspecifies that the service is allowed to fall back to a general system when a custom system doesn't exist.",
+      "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \nPossible values are: true (default) or false.\n\nallowFallback=false specifies that the translation should only use systems trained for the category specified \nby the request. If a translation for language X to language Y requires chaining through a pivot language E, \nthen all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. \nIf no system is found with the specific category, the request will return a 400 status code. allowFallback=true \nspecifies that the service is allowed to fall back to a general system when a custom system doesn't exist.",
       "required": false,
       "type": "boolean",
       "default": true,

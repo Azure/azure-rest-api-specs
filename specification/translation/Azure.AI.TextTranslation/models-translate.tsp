@@ -20,90 +20,6 @@ model TranslateBodyParameters {
   body: TranslateBodyDetails;
 }
 
-@doc("Request body parameters for the translate API.")
-model TranslateBodyDetails {
-
-  @doc("""
-    Specifies the text string to be translated in the translate API.
-    """)
-  text: InputTextItem;
-
-  @doc("""
-    Specifies the language of the output text. The target language must be one of the supported languages included 
-    in the translation scope. It's possible to translate to multiple languages simultaneously by including 
-    multiple string values in the targetsLanguage array.
-    """)
-  targetsLanguage: string[];
-
-  @doc("""
-    Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
-    complete element. Possible values are: plain (default) or html.
-    """)
-  targetsTextType?: TextType = "Plain";
-
-  @doc("""
-    Specifies how profanities should be treated in translations.
-    Possible values are: NoAction (default), Marked or Deleted.
-    """)
-  targetsProfanityAction?: ProfanityAction = ProfanityAction.NoAction;
-
-  @doc("""
-    Specifies how profanities should be marked in translations.
-    Possible values are: Asterisk (default) or Tag. 
-    """)
-  targetsProfanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
-
-  @doc("""
-    Specifies the script of the input text.
-    """)
-  script?: string;
-
-  @doc("""
-    Specifies the script of the translated text.
-    """)
-  targetsScript?: string;
-
-  @doc("""
-    Model that should be used for translation.
-    """)
-  targetsdeploymentNameModel?: string;
-
-  @doc("""
-    In the case where a custom system is being used, specifies that the service is allowed to fall back to a
-    general system when a custom system doesn't exist. 
-    In the case where a Large Language Model is being used, specifies that the service is allowed to fall
-    back to a Small Language Model if an error occurs.
-    Possible values are: true (default) or false.
-    
-    allowFallback=false specifies that the translation should only use systems trained for the category specified 
-    by the request. If a translation for language X to language Y requires chaining through a pivot language E, 
-    then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. 
-    If no system is found with the specific category, the request will return a 400 status code. allowFallback=true 
-    specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
-    """)
-  targetsAllowFallback?: boolean = true;
-
-  @doc("""
-    Defines complexity of LLM prompts to provide high accuracy translation.
-    """)
-  targetsGrade?: string;
-
-  @doc("""
-    Desired tone of target translation.
-    """)
-  targetsTone?: string;
-
-  @doc("""
-    Desired gender of target translation.
-    """)
-  targetsGender?: string;
-
-  @doc("""
-    Reference dataset ID having sentence pair to generate adaptive customized translation
-    """)
-  targetsAdaptiveDatasetIds?: string[];
-}
-
 @doc("Request parameters for the translate API.")
 model TranslateParameters {
   ...CommonParameters;
@@ -194,6 +110,67 @@ model TranslateParameters {
 
   @query
   @doc("""
+    Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
+    Possible values are: true (default) or false.
+    
+    allowFallback=false specifies that the translation should only use systems trained for the category specified 
+    by the request. If a translation for language X to language Y requires chaining through a pivot language E, 
+    then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. 
+    If no system is found with the specific category, the request will return a 400 status code. allowFallback=true 
+    specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
+    """)
+  allowFallback?: boolean = true;
+}
+
+@doc("Request body parameters for the translate API.")
+model TranslateBodyDetails {
+
+  @doc("""
+    Specifies the text string to be translated in the translate API.
+    """)
+  text: InputTextItem[];
+
+  @doc("""
+    Specifies the language of the output text. The target language must be one of the supported languages included 
+    in the translation scope. It's possible to translate to multiple languages simultaneously by including 
+    multiple string values in the targetsLanguage array.
+    """)
+  targetsLanguage: string[];
+
+  @doc("""
+    Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
+    complete element. Possible values are: plain (default) or html.
+    """)
+  targetsTextType?: TextType = "Plain";
+
+  @doc("""
+    Specifies how profanities should be treated in translations.
+    Possible values are: NoAction (default), Marked or Deleted.
+    """)
+  targetsProfanityAction?: ProfanityAction = ProfanityAction.NoAction;
+
+  @doc("""
+    Specifies how profanities should be marked in translations.
+    Possible values are: Asterisk (default) or Tag. 
+    """)
+  targetsProfanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
+
+  @doc("""
+    Specifies the script of the input text.
+    """)
+  script?: string;
+
+  @doc("""
+    Specifies the script of the translated text.
+    """)
+  targetsScript?: string;
+
+  @doc("""
+    Model that should be used for translation.
+    """)
+  targetsdeploymentNameModel?: string;
+
+  @doc("""
     In the case where a custom system is being used, specifies that the service is allowed to fall back to a
     general system when a custom system doesn't exist. 
     In the case where a Large Language Model is being used, specifies that the service is allowed to fall
@@ -206,7 +183,42 @@ model TranslateParameters {
     If no system is found with the specific category, the request will return a 400 status code. allowFallback=true 
     specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
     """)
-  allowFallback?: boolean = true;
+  targetsAllowFallback?: boolean = true;
+
+  @doc("""
+    Defines complexity of LLM prompts to provide high accuracy translation.
+    """)
+  targetsGrade?: string;
+
+  @doc("""
+    Desired tone of target translation.
+    """)
+  targetsTone?: string;
+
+  @doc("""
+    Desired gender of target translation.
+    """)
+  targetsGender?: string;
+
+  @doc("""
+    Reference dataset ID having sentence pair to generate adaptive customized translation.
+    """)
+  targetsAdaptiveDatasetIds?: string[];
+
+  @doc("""
+    Reference sentence pairs to generate adaptive results.
+  """)
+  targetsReferenceTextPairs?: ReferenceSentencePair[]
+}
+
+@doc("Reference sentence pair.")
+model ReferenceSentencePair {
+
+  @doc("Source reference sentence.")
+  targetsReferenceTextPairsSource: string;
+
+  @doc("Target reference sentence.")
+  targetsReferenceTextPairsTarget: string;
 }
 
 @doc("Response for the translation API.")
