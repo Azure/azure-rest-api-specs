@@ -1549,8 +1549,9 @@
         }
       ],
       "properties": {
-          "$ref": "#/definitions/TransferProperties",
-          "description": "Details of the transfer resource."
+        "properties": {
+            "$ref": "#/definitions/TransferProperties"
+        }
       }
     },
     "TransferProperties": {
@@ -1669,7 +1670,7 @@
             "Canceled"
           ],
           "x-ms-enum": {
-            "name": "TransferProvisioningState",
+            "name": "provisioningState",
             "modelAsString": true
           },
           "readOnly": true
