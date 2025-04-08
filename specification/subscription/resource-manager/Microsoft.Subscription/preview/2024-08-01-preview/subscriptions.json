@@ -844,7 +844,7 @@
             "description": "Transfer creation request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransferDetails"
+              "$ref": "#/definitions/TransferProperties"
             }
           }
         ],
@@ -852,7 +852,7 @@
           "200": {
             "description": "Transfer details for a successful query.",
             "schema": {
-              "$ref": "#/definitions/TransferProperties"
+              "$ref": "#/definitions/TransferDetails"
             }
           },
           "201": {
@@ -1549,9 +1549,8 @@
         }
       ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/TransferProperties"
-        }
+          "$ref": "#/definitions/TransferProperties",
+          "description": "Details of the transfer resource."
       }
     },
     "TransferProperties": {
