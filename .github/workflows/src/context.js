@@ -270,8 +270,10 @@ const repositoryInfo = getRepositoryInfo(payload.repository);
         context.payload
       );
 
+    const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
-      ...getRepositoryInfo(payload.repository),
+      owner: repositoryInfo.owner,
+      repo: repositoryInfo.repo,
       head_sha: payload.check_suite.head_sha,
 
       // These are NaN today because the only consumer of this event needs only
