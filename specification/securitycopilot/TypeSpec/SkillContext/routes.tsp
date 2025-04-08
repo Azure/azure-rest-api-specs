@@ -102,7 +102,7 @@ op getSkillsetAuthInfo(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
 ): AuthDetails;
 
-@get
+@post
 @route("/skillContext/getTokenCredentialAsync")
 @doc("Gets the token credentials")
 op getTokenCredential(
