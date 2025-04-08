@@ -52,6 +52,14 @@ model MultiFactorAuthenticationSettings {
 
   @doc("The date and time when the enforcement setting in portalEnforcement should be applied.")
   portalEnforcementDate?: utcDateTime;
+
+  @added(Versions.v2025_04_01_preview)
+  @doc("The setting for enforcing Multi-Factor Authentication when making requests to Azure Resource Manager.")
+  armEnforcement?: MfaEnforcement;
+
+  @added(Versions.v2025_04_01_preview)
+  @doc("The UTC date and time in ISO8601 format when the enforcement setting in armEnforcement should be applied.")
+  armEnforcementDate?: utcDateTime;
 }
 
 @doc("Settings related to feedback control policies.")
