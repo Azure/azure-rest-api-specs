@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      # Default checkout of head branch with depth=1 should be sufficient,
-      # since avocado has internal code to clone and diff the base branch
-      # (passed via env var SYSTEM_PULLREQUEST_TARGETBRANCH).
       - uses: actions/checkout@v4
+        with:
+          # Must include all branches, for git branch logic in Avocado to work correctly
+          fetch-depth: 0
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
