@@ -55,7 +55,8 @@ model AgentCreationOptions {
   @doc("The name of the agent; used for display purposes and sent to the LLM to identify the agent.")
   name: string;
 
-  ...AgentConfigurationOptions;
+  @doc("Configuation options for the agent.")
+  configurationOptions: AgentConfigurationOptions;
 }
 
 @Rest.resource("agents")
@@ -72,7 +73,8 @@ model Agent {
   @doc("Arbitrary metadata associated with this agent.")
   metadata?: Record<string>;
 
-  ...AgentCreationOptions;
+  @doc("Options that were used to create this agent.")
+  creationOptions: AgentCreationOptions;
 }
 
 @discriminator("provider")
