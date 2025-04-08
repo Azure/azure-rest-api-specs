@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/streams";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp"; // e.g. ChatMessage, Agent, Thread
 import "./runs/runs.tsp"; // e.g. RunInputs etc.
 import "./streaming/streaming.tsp";
@@ -11,9 +12,10 @@ using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
+using Azure.ClientGenerator.Core;
 using Streams;
 
-namespace Azure.AI.Projects.Agents;
+namespace Azure.AI.Projects;
 
 @doc("A no-op model to represent an empty request.")
 model NoRequest {}
@@ -116,6 +118,7 @@ interface Threads {
   Includes standard resource operations + custom collection-level
   and instance-level actions (complete, stream).
   """)
+@clientName("AgentsClient", "csharp")  
 interface Agents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Creates a new Agent resource and returns it.")
