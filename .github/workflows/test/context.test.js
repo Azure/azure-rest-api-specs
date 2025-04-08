@@ -496,26 +496,26 @@ it("check_run:completed", async () => {
   const context = {
     eventName: "check_suite",
     payload: {
-        check_suite: {
-          head_sha: "head_sha",
+      action: "completed",
+      check_suite: {
+        head_sha: "head_sha",
+      },
+      repository: {
+        name: "TestRepoName",
+        owner: {
+          login: "TestRepoOwnerLogin",
         },
-        repository: { 
-          name: "TestRepoName",
-          owner: {
-            login: "TestRepoOwnerLogin",
-          },
-        }
-      }
-    };
+      },
+    },
+  };
 
-  await expect(extractInputs(createMockGithub(), context, createMockCore())
-  ).resolves.toEqual({ 
+  await expect(
+    extractInputs(createMockGithub(), context, createMockCore()),
+  ).resolves.toEqual({
     owner: "TestRepoOwnerLogin",
     repo: "TestRepoName",
     head_sha: "head_sha",
     issue_number: NaN,
     run_id: NaN,
-  })
-
-
+  });
 });

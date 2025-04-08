@@ -247,26 +247,33 @@ export async function extractInputs(github, context, core) {
       );
     }
 
+    const payload =
+      /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
+        context.payload
+      );
+
     inputs = {
-      ...getRepositoryInfo(context.payload),
+      ...getRepositoryInfo(payload.repository),
       head_sha: checkRun.head_sha,
       ado_build_id: match[2],
       ado_project_url: match[1],
       issue_number: NaN,
       run_id: NaN,
     };
-    // TODO: only on completed
-  } else if(context.eventName === "check_suite") {
-    const payload = ( 
-      /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */
-      context.payload 
-    );
+  } else if (
+    context.eventName === "check_suite" &&
+    context.payload.action === "completed"
+  ) {
+    const payload =
+      /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */ (
+        context.payload
+      );
 
     inputs = {
-      ...getRepositoryInfo(context.payload),
+      ...getRepositoryInfo(payload.repository),
       head_sha: payload.check_suite.head_sha,
 
-      // These are NaN today because the only consumer of this event needs only 
+      // These are NaN today because the only consumer of this event needs only
       // the head_sha
       issue_number: NaN,
       run_id: NaN,
@@ -285,23 +292,23 @@ export async function extractInputs(github, context, core) {
 }
 
 /**
- * @param {any} payload
+ * @param {import("@octokit/webhooks-types").Repository | undefined} repository
  * @returns {{ owner: string, repo: string }}
  */
-function getRepositoryInfo(payload) { 
+function getRepositoryInfo(repository) {
   if (
-    !payload.repository ||
-    !payload.repository.owner ||
-    !payload.repository.owner.login ||
-    !payload.repository.name
+    !repository ||
+    !repository.owner ||
+    !repository.owner.login ||
+    !repository.name
   ) {
     throw new Error(
-      `Could not extract repository owner or name from context payload: ${JSON.stringify(payload.repository)}`,
+      `Could not extract repository owner or name from context payload: ${JSON.stringify(repository)}`,
     );
   }
 
-  return { 
-    owner: payload.repository.owner.login,
-    repo: payload.repository.name 
+  return {
+    owner: repository.owner.login,
+    repo: repository.name,
   };
 }
