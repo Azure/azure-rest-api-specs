@@ -98,7 +98,16 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentCreationOptions"
+              "type": "object",
+              "properties": {
+                "options": {
+                  "$ref": "#/definitions/AgentCreationOptions",
+                  "description": "The options for agent creation."
+                }
+              },
+              "required": [
+                "options"
+              ]
             }
           }
         ],
@@ -255,60 +264,18 @@
             "schema": {
               "type": "object",
               "properties": {
-                "agentModel": {
-                  "$ref": "#/definitions/AgentModel",
-                  "description": "The model definition for this agent. This is optional (not needed) when doing a run using persistent agent."
+                "options": {
+                  "$ref": "#/definitions/AgentConfigurationOptions",
+                  "description": "The options for the agent completing the run."
                 },
-                "instructions": {
-                  "type": "string",
-                  "description": "Instructions provided to guide how this agent operates."
-                },
-                "tools": {
-                  "type": "array",
-                  "description": "A list of tool definitions available to the agent.",
-                  "items": {
-                    "$ref": "#/definitions/AgentToolDefinition"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "toolChoice": {
-                  "$ref": "#/definitions/ToolChoiceBehavior",
-                  "description": "How the agent should choose among provided tools."
-                },
-                "agentId": {
-                  "type": "string",
-                  "description": "Unique identifier for the agent responsible for the run. This is optional (not needeed) when doing a run using ephemeral agent."
-                },
-                "input": {
-                  "type": "array",
-                  "description": "The list of input messages for the run.",
-                  "items": {
-                    "$ref": "#/definitions/ChatMessage"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "threadId": {
-                  "type": "string",
-                  "description": "Optional identifier for an existing conversation thread."
-                },
-                "metadata": {
-                  "type": "object",
-                  "description": "Optional metadata associated with the run request.",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
-                "truncationStrategy": {
-                  "$ref": "#/definitions/TruncationStrategy",
-                  "description": "Strategy for truncating messages when input exceeds model limits."
-                },
-                "userId": {
-                  "type": "string",
-                  "description": "Identifier for the user making the request."
+                "inputs": {
+                  "$ref": "#/definitions/RunInputs",
+                  "description": "The inputs for the run."
                 }
               },
               "required": [
-                "input"
+                "options",
+                "inputs"
               ]
             }
           }
@@ -350,60 +317,18 @@
             "schema": {
               "type": "object",
               "properties": {
-                "agentModel": {
-                  "$ref": "#/definitions/AgentModel",
-                  "description": "The model definition for this agent. This is optional (not needed) when doing a run using persistent agent."
+                "options": {
+                  "$ref": "#/definitions/AgentConfigurationOptions",
+                  "description": "The options for the agent completing the run."
                 },
-                "instructions": {
-                  "type": "string",
-                  "description": "Instructions provided to guide how this agent operates."
-                },
-                "tools": {
-                  "type": "array",
-                  "description": "A list of tool definitions available to the agent.",
-                  "items": {
-                    "$ref": "#/definitions/AgentToolDefinition"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "toolChoice": {
-                  "$ref": "#/definitions/ToolChoiceBehavior",
-                  "description": "How the agent should choose among provided tools."
-                },
-                "agentId": {
-                  "type": "string",
-                  "description": "Unique identifier for the agent responsible for the run. This is optional (not needeed) when doing a run using ephemeral agent."
-                },
-                "input": {
-                  "type": "array",
-                  "description": "The list of input messages for the run.",
-                  "items": {
-                    "$ref": "#/definitions/ChatMessage"
-                  },
-                  "x-ms-identifiers": []
-                },
-                "threadId": {
-                  "type": "string",
-                  "description": "Optional identifier for an existing conversation thread."
-                },
-                "metadata": {
-                  "type": "object",
-                  "description": "Optional metadata associated with the run request.",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
-                "truncationStrategy": {
-                  "$ref": "#/definitions/TruncationStrategy",
-                  "description": "Strategy for truncating messages when input exceeds model limits."
-                },
-                "userId": {
-                  "type": "string",
-                  "description": "Identifier for the user making the request."
+                "inputs": {
+                  "$ref": "#/definitions/RunInputs",
+                  "description": "The inputs for the run."
                 }
               },
               "required": [
-                "input"
+                "options",
+                "inputs"
               ]
             }
           }
@@ -4852,9 +4777,9 @@
             "type": "string"
           }
         },
-        "truncationStrategy": {
-          "$ref": "#/definitions/TruncationStrategy",
-          "description": "Strategy for truncating messages when input exceeds model limits."
+        "options": {
+          "$ref": "#/definitions/RunOptions",
+          "description": "Optional configuration for run generation."
         },
         "userId": {
           "type": "string",
@@ -4864,6 +4789,16 @@
       "required": [
         "input"
       ]
+    },
+    "RunOptions": {
+      "type": "object",
+      "description": "Represents advanced options for controlling agent runs.",
+      "properties": {
+        "truncationStrategy": {
+          "$ref": "#/definitions/TruncationStrategy",
+          "description": "Strategy for truncating messages when input exceeds model limits."
+        }
+      }
     },
     "RunOutputs": {
       "type": "object",
