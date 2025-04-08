@@ -1181,11 +1181,41 @@
           "type": "integer",
           "format": "int32",
           "description": "The total number of tokens processed for the completions request and response."
+        },
+        "completion_tokens_details": {
+          "$ref": "#/definitions/CompletionsUsageDetails",
+          "description": "Breakdown of tokens used in a completion."
+        },
+        "prompt_tokens_details": {
+          "$ref": "#/definitions/PromptUsageDetails",
+          "description": "Breakdown of tokens used in the prompt/chat history."
         }
       },
       "required": [
         "completion_tokens",
         "prompt_tokens",
+        "total_tokens"
+      ]
+    },
+    "CompletionsUsageDetails": {
+      "type": "object",
+      "description": "A breakdown of tokens used in a completion.",
+      "properties": {
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to audio input.",
+          "readOnly": true
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed for the completions request and response.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "audio_tokens",
         "total_tokens"
       ]
     },
@@ -1563,6 +1593,28 @@
           }
         ]
       }
+    },
+    "PromptUsageDetails": {
+      "type": "object",
+      "description": "A breakdown of tokens used in the prompt/chat history.",
+      "properties": {
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to audio input.",
+          "readOnly": true
+        },
+        "cached_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens cached.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "audio_tokens",
+        "cached_tokens"
+      ]
     },
     "StreamingChatChoiceUpdate": {
       "type": "object",

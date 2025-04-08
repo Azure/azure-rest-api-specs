@@ -203,6 +203,39 @@ model CompletionsUsage {
 
   @doc("The total number of tokens processed for the completions request and response.")
   total_tokens: int32;
+
+  @doc("Breakdown of tokens used in a completion.")
+  completion_tokens_details?: CompletionsUsageDetails;
+
+  @doc("Breakdown of tokens used in the prompt/chat history.")
+  prompt_tokens_details?: PromptUsageDetails;
+}
+
+@doc("A breakdown of tokens used in a completion.")
+model CompletionsUsageDetails {
+  @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
+  audio_tokens: int32;
+
+  @doc("The number of tokens corresponding to reasoning.")
+  @added(AI.Model.Versions.v2025_04_01)
+  @visibility(Lifecycle.Read)
+  reasoning_tokens: int32;
+
+  @doc("The total number of tokens processed for the completions request and response.")
+  @visibility(Lifecycle.Read)
+  total_tokens: int32;
+}
+
+@doc("A breakdown of tokens used in the prompt/chat history.")
+model PromptUsageDetails {
+  @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
+  audio_tokens: int32;
+
+  @doc("The total number of tokens cached.")
+  @visibility(Lifecycle.Read)
+  cached_tokens: int32;
 }
 
 @doc("""
