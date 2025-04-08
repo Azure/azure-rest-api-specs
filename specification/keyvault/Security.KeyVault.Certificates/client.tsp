@@ -92,10 +92,19 @@ using KeyVault;
 // Rust configuration
 @@clientName(setCertificateContacts, "SetContacts", "rust");
 
-@@clientName(CertificateCreateParameters, "CreateCertificateParameters", "rust");
-@@clientName(CertificateImportParameters, "ImportCertificateParameters", "rust");
+@@clientName(CertificateCreateParameters,
+  "CreateCertificateParameters",
+  "rust"
+);
+@@clientName(CertificateImportParameters,
+  "ImportCertificateParameters",
+  "rust"
+);
 @@clientName(CertificateIssuerSetParameters, "SetIssuerParameters", "rust");
-@@clientName(CertificateIssuerUpdateParameters, "UpdateIssuerParameters", "rust");
+@@clientName(CertificateIssuerUpdateParameters,
+  "UpdateIssuerParameters",
+  "rust"
+);
 @@clientName(CertificateMergeParameters, "MergeCertificateParameters", "rust");
 @@clientName(CertificateOperationUpdateParameter,
   "UpdateCertificateOperationParameter",
@@ -105,7 +114,10 @@ using KeyVault;
   "RestoreCertificateParameters",
   "rust"
 );
-@@clientName(CertificateUpdateParameters, "UpdateCertificatePropertiesParameters", "rust");
+@@clientName(CertificateUpdateParameters,
+  "UpdateCertificatePropertiesParameters",
+  "rust"
+);
 @@clientName(DeletedCertificateListResult,
   "ListDeletedCertificatePropertiesResult",
   "rust"
@@ -115,8 +127,14 @@ using KeyVault;
 
 @@clientName(getCertificates, "ListCertificateProperties", "rust");
 @@clientName(getCertificateIssuers, "ListIssuerProperties", "rust");
-@@clientName(getCertificateVersions, "ListCertificatePropertiesVersions", "rust");
-@@clientName(getDeletedCertificates, "ListDeletedCertificateProperties", "rust");
+@@clientName(getCertificateVersions,
+  "ListCertificatePropertiesVersions",
+  "rust"
+);
+@@clientName(getDeletedCertificates,
+  "ListDeletedCertificateProperties",
+  "rust"
+);
 @@clientName(updateCertificate, "UpdateCertificateProperties", "rust");
 
 @@clientName(getCertificateContacts, "GetContacts", "rust");

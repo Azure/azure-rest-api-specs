@@ -153,7 +153,10 @@ using KeyVault;
 @@clientName(updateKey, "UpdateKeyProperties", "rust");
 
 @@clientName(KeyReleaseParameters.enc, "algorithm", "rust");
-@@clientName(KeyOperationsParameters.aad, "AdditionalAuthenticatedData", "rust");
+@@clientName(KeyOperationsParameters.aad,
+  "AdditionalAuthenticatedData",
+  "rust"
+);
 @@clientName(KeyOperationsParameters.tag, "AuthenticationTag", "rust");
 
 @@clientName(JsonWebKeyType, "KeyType", "rust");

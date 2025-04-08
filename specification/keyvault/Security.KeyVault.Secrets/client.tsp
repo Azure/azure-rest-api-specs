@@ -44,7 +44,10 @@ using KeyVault;
 @@clientName(SecretBundle, "Secret", "rust");
 @@clientName(SecretRestoreParameters, "RestoreSecretParameters", "rust");
 @@clientName(SecretSetParameters, "SetSecretParameters", "rust");
-@@clientName(SecretUpdateParameters, "UpdateSecretPropertiesParameters", "rust");
+@@clientName(SecretUpdateParameters,
+  "UpdateSecretPropertiesParameters",
+  "rust"
+);
 @@clientName(DeletedSecretListResult,
   "ListDeletedSecretPropertiesResult",
   "rust"
@@ -56,4 +59,7 @@ using KeyVault;
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "rust");
 @@clientName(updateSecret, "UpdateSecretProperties", "rust");
 
-@@clientName(SecretRestoreParameters.secretBundleBackup, "SecretBackup", "rust");
+@@clientName(SecretRestoreParameters.secretBundleBackup,
+  "SecretBackup",
+  "rust"
+);
