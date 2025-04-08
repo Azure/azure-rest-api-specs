@@ -310,7 +310,7 @@
     "/info": {
       "get": {
         "operationId": "GetModelInfo",
-        "description": "Returns information about the AI model.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API or Managed Compute endpoint.\nIt will not work for Azure OpenAI endpoints.",
+        "description": "Returns information about the AI model deployed.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API, Managed Compute, or Model .\ninference endpoint. Azure OpenAI endpoints don't support i.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -319,7 +319,7 @@
             "name": "model",
             "in": "query",
             "description": "The model deployment name you want information from.",
-            "required": true,
+            "required": false,
             "type": "string"
           }
         ],

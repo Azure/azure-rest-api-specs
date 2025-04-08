@@ -69,10 +69,10 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
 >;
 
 @doc("""
-  Returns information about the AI model.
+  Returns information about the AI model deployed.
   The method makes a REST API call to the `/info` route on the given endpoint.
-  This method will only work when using Serverless API or Managed Compute endpoint.
-  It will not work for Azure OpenAI endpoints.
+  This method will only work when using Serverless API, Managed Compute, or Model .
+  inference endpoint. Azure OpenAI endpoints don't support i.
   """)
 @get
 @route("/info")
@@ -81,7 +81,7 @@ op getModelInfo is Azure.Core.RpcOperation<
     @doc("The model deployment name you want information from.")
     @query
     @added(ModelInference.Versions.v2025_04_01)
-    `model`: string;
+    `model`?: string;
   },
   ModelInfo
 >;
