@@ -5,8 +5,8 @@ namespace Azure.AI.Projects.Agents;
 
 using TypeSpec.Versioning;
 
-@doc("Represents the message content for creating a new message. It can be either a simple text string or a list of typed content blocks (text, image_file, image_url).")
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | array is intentional (OpenAPI 3 can handle oneOf)."
+@doc("Represents the message content for creating a new message. It can be either a simple text string or a list of typed content blocks (text, image_file, image_url).")
 union MessageInputContent {
   @doc("A plain text message if rich content is not needed.")
   text: string,
@@ -84,6 +84,7 @@ union ImageDetailLevel {
 @doc("Defines how an internally uploaded image file is referenced when creating an image-file block.")
 model MessageImageFileParam {
   @doc("The ID of the previously uploaded image file.")
+  @encodedName("application/json", "file_id")
   fileId: string;
 
   @doc("Optional detail level for the image (auto, low, or high).")

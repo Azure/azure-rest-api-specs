@@ -5504,9 +5504,10 @@
       "type": "object",
       "description": "Defines how an internally uploaded image file is referenced when creating an image-file block.",
       "properties": {
-        "fileId": {
+        "file_id": {
           "type": "string",
-          "description": "The ID of the previously uploaded image file."
+          "description": "The ID of the previously uploaded image file.",
+          "x-ms-client-name": "fileId"
         },
         "detail": {
           "$ref": "#/definitions/Agents.ImageDetailLevel",
@@ -5514,7 +5515,7 @@
         }
       },
       "required": [
-        "fileId"
+        "file_id"
       ]
     },
     "Agents.MessageImageUrlParam": {
