@@ -8,8 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-namespace Search;
-
+namespace Azure.Search.Documents.Indexes {
 /**
  * Defines the type of a datasource.
  */
@@ -10057,4 +10056,5 @@ model ListIndexStatsSummary {
   @visibility(Lifecycle.Read)
   @items
   value: IndexStatisticsSummary[];
+}
 }

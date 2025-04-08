@@ -6,8 +6,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace Search;
-
 alias matchingHeader = {
   /**
    * Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.

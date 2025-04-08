@@ -6,8 +6,8 @@ import "./models-shared.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-namespace Search;
 
+namespace Azure.Search.Documents {
 /**
  * Allows the user to choose whether a semantic call should fail completely, or to
  * return partial results.
@@ -2022,4 +2022,5 @@ model SearchScoreThreshold extends VectorThreshold {
    * The kind of threshold used to filter vector queries
    */
   kind: "searchScore";
+}
 }

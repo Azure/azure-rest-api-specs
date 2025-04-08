@@ -7,8 +7,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using TypeSpec.Versioning;
 
-namespace Search;
-
+namespace Azure.Search.Documents {
 @route("/indexes('{indexName}')")
 interface Documents {
   /**
@@ -569,4 +568,5 @@ interface Documents {
     },
     AutocompleteResult
   >;
+}
 }

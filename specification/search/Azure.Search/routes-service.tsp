@@ -6,8 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Search;
-
+namespace Azure.Search.Documents.Indexes {
 interface DataSources {
   /**
    * Creates a new datasource or updates a datasource if it already exists.
@@ -48,6 +47,8 @@ interface DataSources {
    * Deletes a datasource.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Pre-existing API contract"
   @route("/datasources('{dataSourceName}')")
   @delete
   delete is SearchDataSourceOperation<
@@ -161,6 +162,7 @@ interface Indexers {
    * Runs an indexer on-demand.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Pre-existing API contract"
   @route("/indexers('{indexerName}')/search.run")
   @post
   run is SearchIndexerOperation<
@@ -220,6 +222,8 @@ interface Indexers {
    * Deletes an indexer.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Pre-existing API contract"
   @route("/indexers('{indexerName}')")
   @delete
   delete is SearchIndexerOperation<
@@ -337,6 +341,8 @@ interface Skillsets {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Pre-existing API contract"
   @route("/skillsets('{skillsetName}')")
   @delete
   delete is SearchSkillsetOperation<
@@ -446,6 +452,8 @@ interface SynonymMaps {
    * Deletes a synonym map.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Pre-existing API contract"
   @route("/synonymmaps('{synonymMapName}')")
   @delete
   delete is SearchSynonymMapOperation<
@@ -583,6 +591,8 @@ interface Indexes {
    * in case you need to re-build the index.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Pre-existing API contract"
   @route("/indexes('{indexName}')")
   @delete
   delete is SearchIndexOperation<
@@ -700,6 +710,8 @@ interface Aliases {
    * operation.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Pre-existing API contract"
   @route("/aliases('{aliasName}')")
   @delete
   delete is SearchAliasOperation<
@@ -742,3 +754,4 @@ op getServiceStatistics is SearchOperation<{}, SearchServiceStatistics>;
 @route("/indexstats")
 @get
 op getIndexStatsSummary is SearchOperation<{}, ListIndexStatsSummary>;
+}
