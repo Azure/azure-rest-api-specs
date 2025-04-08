@@ -543,12 +543,12 @@ model TextAnalysisAuthoringDataGenerationSettings {
  * Represents the connection info for the Azure resource to use during data generation as part of training a custom model.
  */
 @added(Versions.v2024_11_15_preview)
-@clientName("DataGenerationConnectionInfo")
+@clientName("DataGenerationConnectionInfo", "csharp")
 model TextAnalysisAuthoringDataGenerationConnectionInfo {
   /**
    * Connection type for data generation settings. Currently only supports Azure Open AI.
    */
-  kind: "azureOpenAI";
+  kind: "AzureOpenAI";
 
   /**
    * Resource ID for the data generation resource. Looks something like "/subscriptions/<SUBSCRIPTION-ID-GUID>/resourceGroups/<RG-NAME>/providers/Microsoft.CognitiveServices/accounts/<AOAI-ACCOUNT-NAME>".
