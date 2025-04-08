@@ -20,7 +20,7 @@ namespace Microsoft.AppComplianceAutomation;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy DO NOT EVER COPY THIS"
 @tenantResource
-@includeInapplicableMetadataInPayload(false)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(ReportProperties)
 model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
@@ -29,7 +29,7 @@ model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   @pattern("^[-a-zA-Z0-9_]{1,50}$")
   @key("reportName")
   @segment("reports")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 
@@ -68,7 +68,7 @@ interface Report {
    * Update an exiting AppComplianceAutomation report.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @parameterVisibility
+  @patch(#{ implicitOptionality: false })
   @operationId("Report_Update")
   update is ArmCustomPatchAsync<
     ReportResource,

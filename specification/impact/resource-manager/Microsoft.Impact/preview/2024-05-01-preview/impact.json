@@ -1838,8 +1838,7 @@
           "description": "The ARM correlation ids, this is important field for control plane related impacts",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "performance": {
           "type": "array",
@@ -1855,7 +1854,8 @@
         },
         "additionalProperties": {
           "type": "object",
-          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API"
+          "description": "Additional fields related to impact, applicable fields per resource type are list under /impactCategories API",
+          "additionalProperties": {}
         },
         "errorDetails": {
           "$ref": "#/definitions/ErrorDetailProperties",
