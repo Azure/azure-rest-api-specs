@@ -2494,8 +2494,34 @@
           }
         },
         "publicNetworkAccess": {
-          "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/PublicNetworkAccess",
-          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method."
+          "type": "string",
+          "default": "enabled",
+          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "enabled",
+                "name": "Enabled",
+                "description": "The search service is accessible from traffic originating from the public internet."
+              },
+              {
+                "value": "disabled",
+                "name": "Disabled",
+                "description": "The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections."
+              },
+              {
+                "value": "securedByPerimeter",
+                "name": "SecuredByPerimeter",
+                "description": "The network security perimeter configuration rules allow or disallow public network access to the resource. Requires an associated network security perimeter."
+              }
+            ]
+          }
         },
         "status": {
           "readOnly": true,
