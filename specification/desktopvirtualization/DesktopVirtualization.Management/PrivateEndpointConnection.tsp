@@ -10,7 +10,6 @@ import "./LegacyOperations.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -29,6 +28,7 @@ alias PrivateEndpointParameter = {
   privateEndpointConnectionName: string;
 };
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @armResourceOperations
 interface HostPoolOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -36,6 +36,7 @@ interface HostPoolOps
       ResourceTypeParameter = PrivateEndpointParameter
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @armResourceOperations
 interface WorkspaceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
