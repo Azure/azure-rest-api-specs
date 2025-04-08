@@ -11,8 +11,8 @@ const SUPPORTED_EVENTS = ["workflow_run", "check_run", "check_suite"];
 
 /* v8 ignore start */
 /**
- * Given the name of a completed check run name and a completed workflow, verify 
- * that both have the same conclusion. If conclusions are different, fail the 
+ * Given the name of a completed check run name and a completed workflow, verify
+ * that both have the same conclusion. If conclusions are different, fail the
  * action.
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  */
@@ -33,12 +33,23 @@ export async function verifyRunStatus({ github, context, core }) {
     );
   }
 
-  if (context.eventName === "check_suite" && context.payload.check_suite.status !== "completed") { 
-    core.setFailed(`Check suite ${context.payload.check_suite.app.name} is not completed. Cannot evaluate incomplete check suite.`);
+  if (
+    context.eventName === "check_suite" &&
+    context.payload.check_suite.status !== "completed"
+  ) {
+    core.setFailed(
+      `Check suite ${context.payload.check_suite.app.name} is not completed. Cannot evaluate incomplete check suite.`,
+    );
     return;
   }
 
-  return await verifyRunStatusImpl({ github, context, core , checkRunName, workflowName});
+  return await verifyRunStatusImpl({
+    github,
+    context,
+    core,
+    checkRunName,
+    workflowName,
+  });
 }
 /* v8 ignore stop */
 
@@ -50,11 +61,19 @@ export async function verifyRunStatus({ github, context, core }) {
  * @param {string} params.checkRunName
  * @param {string} params.workflowName
  */
-export async function verifyRunStatusImpl({github, context, core, checkRunName, workflowName}) {
+export async function verifyRunStatusImpl({
+  github,
+  context,
+  core,
+  checkRunName,
+  workflowName,
+}) {
   if (context.eventName == "check_run") {
     const contextRunName = context.payload.check_run.name;
     if (contextRunName !== checkRunName) {
-      core.setFailed(`Check run name (${contextRunName}) does not match input: ${checkRunName}. Ensure job is filtering by github.event.check_run.name.`);
+      core.setFailed(
+        `Check run name (${contextRunName}) does not match input: ${checkRunName}. Ensure job is filtering by github.event.check_run.name.`,
+      );
       return;
     }
   }
@@ -65,15 +84,22 @@ export async function verifyRunStatusImpl({github, context, core, checkRunName, 
   if (context.eventName == "check_run") {
     checkRun = context.payload.check_run;
   } else {
-    const checkRuns = await getCheckRuns(github, context, checkRunName, head_sha);
+    const checkRuns = await getCheckRuns(
+      github,
+      context,
+      checkRunName,
+      head_sha,
+    );
     if (checkRuns.length === 0) {
-      if (context.eventName === "check_suite") { 
+      if (context.eventName === "check_suite") {
         const message = `Could not locate check run ${checkRunName} in check suite ${context.payload.check_suite.app.name}. Ensure job is filtering by github.event.check_suite.app.name.`;
         core.setFailed(message);
         return;
       }
 
-      core.notice(`No completed check run with name: ${checkRunName}. Not enough information to judge success or failure. Ending with success status.`);
+      core.notice(
+        `No completed check run with name: ${checkRunName}. Not enough information to judge success or failure. Ending with success status.`,
+      );
       return;
     }
 
@@ -87,12 +113,19 @@ export async function verifyRunStatusImpl({github, context, core, checkRunName, 
   core.debug(`Check run: ${JSON.stringify(checkRun)}`);
 
   let workflowRun;
-  if (context.eventName == "workflow_run") { 
+  if (context.eventName == "workflow_run") {
     workflowRun = context.payload.workflow_run;
   } else {
-    const workflowRuns = await getWorkflowRuns(github, context, workflowName, head_sha);
+    const workflowRuns = await getWorkflowRuns(
+      github,
+      context,
+      workflowName,
+      head_sha,
+    );
     if (workflowRuns.length === 0) {
-      core.notice(`No completed workflow run with name: ${workflowName}. Not enough information to judge success or failure. Ending with success status.`);
+      core.notice(
+        `No completed workflow run with name: ${workflowName}. Not enough information to judge success or failure. Ending with success status.`,
+      );
       return;
     }
 
@@ -112,7 +145,9 @@ export async function verifyRunStatusImpl({github, context, core, checkRunName, 
     return;
   }
 
-  core.notice(`Conclusions match for check run ${checkRunName} and workflow run ${workflowName}`);
+  core.notice(
+    `Conclusions match for check run ${checkRunName} and workflow run ${workflowName}`,
+  );
 }
 
 /**
@@ -123,12 +158,7 @@ export async function verifyRunStatusImpl({github, context, core, checkRunName, 
  * @param {string} ref
  * @returns {Promise<CheckRuns>}
  */
-export async function getCheckRuns(
-  github,
-  context,
-  checkRunName,
-  ref,
-) {
+export async function getCheckRuns(github, context, checkRunName, ref) {
   const result = await github.paginate(github.rest.checks.listForRef, {
     ...context.repo,
     ref: ref,
@@ -139,7 +169,9 @@ export async function getCheckRuns(
 
   // a and b will never be null because status is "completed"
   /* v8 ignore next */
-  return result.sort((a, b) => compareDatesDescending(a.completed_at || '', b.completed_at || ''));
+  return result.sort((a, b) =>
+    compareDatesDescending(a.completed_at || "", b.completed_at || ""),
+  );
 }
 
 /**
@@ -150,12 +182,7 @@ export async function getCheckRuns(
  * @param {string} ref
  * @returns {Promise<WorkflowRuns>}
  */
-export async function getWorkflowRuns(
-  github,
-  context,
-  workflowName,
-  ref,
-) {
+export async function getWorkflowRuns(github, context, workflowName, ref) {
   const result = await github.paginate(
     github.rest.actions.listWorkflowRunsForRepo,
     {
@@ -166,14 +193,16 @@ export async function getWorkflowRuns(
     },
   );
 
-  return result.filter((run) => run.name === workflowName).sort((a, b) => compareDatesDescending(a.updated_at, b.updated_at));
+  return result
+    .filter((run) => run.name === workflowName)
+    .sort((a, b) => compareDatesDescending(a.updated_at, b.updated_at));
 }
 
 /**
  * Compares two date strings in descending order.
  * @param {string} a date string of the form "YYYY-MM-DDTHH:mm:ssZ"
  * @param {string} b date string of the form "YYYY-MM-DDTHH:mm:ssZ"
- * @returns 
+ * @returns
  */
 export function compareDatesDescending(a, b) {
   return new Date(b).getTime() - new Date(a).getTime();
