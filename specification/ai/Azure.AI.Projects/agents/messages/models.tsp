@@ -7,12 +7,12 @@ using TypeSpec.Versioning;
 
 @doc("Represents the message content for creating a new message. It can be either a simple text string or a list of typed content blocks (text, image_file, image_url).")
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | array is intentional (OpenAPI 3 can handle oneOf)."
-union CreateMessageContent {
+union MessageInputContent {
   @doc("A plain text message if rich content is not needed.")
   text: string,
 
   @doc("A list of typed content blocks for richer messages, such as text blocks, image-file references, or external image-URL references.")
-  blocks: MessageContentBlockInput[],
+  blocks: MessageInputContentBlock[],
 }
 
 @doc("Specifies the kind of content block within a message. Could be text, an image file, an external image URL, or an unknown future type.")
@@ -32,13 +32,13 @@ union MessageBlockType {
 
 @doc("Defines a single content block when creating a message. The 'type' field determines whether it is text, an image file, or an external image URL, etc.")
 @discriminator("type")
-model MessageContentBlockInput {
+model MessageInputContentBlock {
   @doc("Specifies which kind of content block this is (text, image_file, image_url, etc.).")
   type: MessageBlockType;
 }
 
 @doc("A text block in a new message, containing plain text content.")
-model MessageTextBlockInput extends MessageContentBlockInput {
+model MessageInputTextBlock extends MessageInputContentBlock {
   @doc("Must be 'text' for a text block.")
   type: "text";
 
@@ -47,7 +47,7 @@ model MessageTextBlockInput extends MessageContentBlockInput {
 }
 
 @doc("An image-file block in a new message, referencing an internally uploaded image by file ID.")
-model MessageImageFileBlockInput extends MessageContentBlockInput {
+model MessageInputImageFileBlock extends MessageInputContentBlock {
   @doc("Must be 'image_file' for an internally uploaded image block.")
   type: "image_file";
 
@@ -57,7 +57,7 @@ model MessageImageFileBlockInput extends MessageContentBlockInput {
 }
 
 @doc("An image-URL block in a new message, referencing an external image by URL.")
-model MessageImageUrlBlockInput extends MessageContentBlockInput {
+model MessageInputImageUrlBlock extends MessageInputContentBlock {
   @doc("Must be 'image_url' for an externally hosted image block.")
   type: "image_url";
 
@@ -116,7 +116,7 @@ model ThreadMessageOptions {
    *  - A basic string, if you only need text, or
    *  - An array of typed content blocks (text, image_file, image_url, etc.)
    */
-  content: CreateMessageContent;
+  content: MessageInputContent;
 
   /** A list of files attached to the message, and the tools they should be added to. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
