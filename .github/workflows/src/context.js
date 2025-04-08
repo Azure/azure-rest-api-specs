@@ -251,9 +251,10 @@ export async function extractInputs(github, context, core) {
       /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
         context.payload
       );
-
+const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
-      ...getRepositoryInfo(payload.repository),
+      owner: repositoryInfo.owner,
+      repo: repositoryInfo.repo,
       head_sha: checkRun.head_sha,
       ado_build_id: match[2],
       ado_project_url: match[1],
