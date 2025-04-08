@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.DurableTask",
-    "version": "2024-10-01-preview",
+    "version": "2025-04-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -46,6 +46,9 @@
     },
     {
       "name": "TaskHubs"
+    },
+    {
+      "name": "RetentionPolicies"
     }
   ],
   "paths": {
@@ -420,6 +423,310 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/retentionPolicies": {
+      "get": {
+        "operationId": "RetentionPolicies_ListByScheduler",
+        "tags": [
+          "RetentionPolicies"
+        ],
+        "description": "List Retention Policies",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RetentionPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RetentionPolicies_ListByScheduler_MaximumSet": {
+            "$ref": "./examples/RetentionPolicies_ListByScheduler_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/retentionPolicies/default": {
+      "get": {
+        "operationId": "RetentionPolicies_Get",
+        "tags": [
+          "RetentionPolicies"
+        ],
+        "description": "Get a Retention Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RetentionPolicy"
+            }
+          },
+          "default": {
+            "description": "Not found error: resource does not exist",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RetentionPolicies_Get_MaximumSet": {
+            "$ref": "./examples/RetentionPolicies_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RetentionPolicies_CreateOrReplace",
+        "tags": [
+          "RetentionPolicies"
+        ],
+        "description": "Create or Update a Retention Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RetentionPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RetentionPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RetentionPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'RetentionPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RetentionPolicy"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "Validation error: required parameters are missing",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RetentionPolicies_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/RetentionPolicies_CreateOrReplace_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "RetentionPolicies_Update",
+        "tags": [
+          "RetentionPolicies"
+        ],
+        "description": "Update a Retention Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RetentionPolicyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RetentionPolicy"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "Validation error: required parameters are missing",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RetentionPolicies_Update_MaximumSet": {
+            "$ref": "./examples/RetentionPolicies_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RetentionPolicies_Delete",
+        "tags": [
+          "RetentionPolicies"
+        ],
+        "description": "Delete a Retention Policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RetentionPolicies_Delete_MaximumSet": {
+            "$ref": "./examples/RetentionPolicies_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/taskHubs": {
       "get": {
         "operationId": "TaskHubs_ListByScheduler",
@@ -678,24 +985,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation",
@@ -751,6 +1040,42 @@
       },
       "readOnly": true
     },
+    "PurgeableOrchestrationState": {
+      "type": "string",
+      "description": "Purgeable orchestration state to be used in retention policies",
+      "enum": [
+        "Completed",
+        "Failed",
+        "Terminated",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "PurgeableOrchestrationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The orchestration is completed"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The orchestration is failed"
+          },
+          {
+            "name": "Terminated",
+            "value": "Terminated",
+            "description": "The orchestration is terminated"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The orchestration is terminated"
+          }
+        ]
+      }
+    },
     "RedundancyState": {
       "type": "string",
       "description": "The state of the resource redundancy",
@@ -774,6 +1099,97 @@
           }
         ]
       }
+    },
+    "RetentionPolicy": {
+      "type": "object",
+      "description": "A retention policy resource belonging to the scheduler",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RetentionPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RetentionPolicyDetails": {
+      "type": "object",
+      "description": "The properties of a retention policy",
+      "properties": {
+        "retentionPeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The retention period in days after which the orchestration will be purged automatically"
+        },
+        "orchestrationState": {
+          "$ref": "#/definitions/PurgeableOrchestrationState",
+          "description": "The orchestration state to which this policy applies. If omitted, the policy applies to all purgeable orchestration states."
+        }
+      },
+      "required": [
+        "retentionPeriodInDays"
+      ]
+    },
+    "RetentionPolicyListResult": {
+      "type": "object",
+      "description": "The response of a RetentionPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RetentionPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/RetentionPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RetentionPolicyProperties": {
+      "type": "object",
+      "description": "The retention policy settings for the resource",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation",
+          "readOnly": true
+        },
+        "retentionPolicies": {
+          "type": "array",
+          "description": "The orchestration retention policies",
+          "items": {
+            "$ref": "#/definitions/RetentionPolicyDetails"
+          },
+          "x-ms-identifiers": [
+            "retentionPeriodInDays",
+            "orchestrationState"
+          ]
+        }
+      }
+    },
+    "RetentionPolicyUpdate": {
+      "type": "object",
+      "description": "A retention policy resource belonging to the scheduler",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RetentionPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "Scheduler": {
       "type": "object",
@@ -844,8 +1260,18 @@
     },
     "SchedulerPropertiesUpdate": {
       "type": "object",
-      "description": "Details of the Scheduler",
+      "description": "The Scheduler resource properties to be updated",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "URL of the durable task scheduler",
+          "readOnly": true
+        },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
@@ -885,7 +1311,7 @@
     },
     "SchedulerSkuUpdate": {
       "type": "object",
-      "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
+      "description": "The SKU (Stock Keeping Unit) properties to be updated",
       "properties": {
         "name": {
           "type": "string",
@@ -895,23 +1321,30 @@
           "type": "integer",
           "format": "int32",
           "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
+        },
+        "redundancyState": {
+          "$ref": "#/definitions/RedundancyState",
+          "description": "Indicates whether the current SKU configuration is zone redundant",
+          "readOnly": true
         }
       }
     },
     "SchedulerUpdate": {
       "type": "object",
-      "description": "A Durable Task Scheduler resource",
+      "description": "The update request model for the Scheduler resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchedulerPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "TaskHub": {
       "type": "object",
