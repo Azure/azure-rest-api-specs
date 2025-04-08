@@ -136,7 +136,7 @@ model ApiManagementCircuitBreakerOpenedEventData {
   backendName: string;
 
   /** Information related to the circuit breaker configured on the backend. */
-  circuitBreaker: ApiManagementCircuitBreakerInfo;
+  circuitBreaker: ApiManagementCircuitBreakerProperties;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Closed event. */
@@ -145,48 +145,48 @@ model ApiManagementCircuitBreakerClosedEventData {
   backendName: string;
 
   /** Information related to the circuit breaker configured on the backend. */
-  circuitBreaker: ApiManagementCircuitBreakerInfo;
+  circuitBreaker: ApiManagementCircuitBreakerProperties;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenNearExpiry event. */
 model ApiManagementGatewayTokenNearExpiryEventData {
   /** Information related to a given self-hosted gateway deployment. */
-  gatewayInfo: ApiManagementGatewayInfo;
+  gatewayInfo: ApiManagementGatewayProperties;
 
   /** Information related to a an expired gateway token for a self-hosted gateway deployment. */
-  tokenInfo: ApiManagementNearExpiryGatewayTokenInfo;
+  tokenInfo: ApiManagementNearExpiryGatewayTokenProperties;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenExpired event. */
 model ApiManagementGatewayTokenExpiredEventData {
   /** Information related to a given self-hosted gateway deployment. */
-  gatewayInfo: ApiManagementGatewayInfo;
+  gatewayInfo: ApiManagementGatewayProperties;
 
   /** Information related to a an expired gateway token for a self-hosted gateway deployment. */
-  tokenInfo: ApiManagementExpiredGatewayTokenInfo;
+  tokenInfo: ApiManagementExpiredGatewayTokenProperties;
 }
 
 /** Information related to the circuit breaker configured on the backend. */
-model ApiManagementCircuitBreakerInfo {
+model ApiManagementCircuitBreakerProperties {
   /** Overview of all configured rules and respective details. */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Type is Object in swagger, we cannot define full schema given customer owns the rule names"
   rules: Record<unknown>;
 }
 
 /** Information related to a gateway token that has expired for a self-hosted gateway deployment. */
-model ApiManagementExpiredGatewayTokenInfo {
+model ApiManagementExpiredGatewayTokenProperties {
   /** Timestamp when the gateway token has expired. */
   expiredAtUtc: utcDateTime;
 }
 
 /** Information related to a gateway token that is near expiry for a self-hosted gateway deployment. */
-model ApiManagementNearExpiryGatewayTokenInfo {
+model ApiManagementNearExpiryGatewayTokenProperties {
   /** Timestamp when the gateway token will expire. */
   expiredAtUtc: utcDateTime;
 }
 
 /** Information related to a given self-hosted gateway deployment. */
-model ApiManagementGatewayInfo {
+model ApiManagementGatewayProperties {
   /** Id of Gateway that is used to deploy the gateway to get the configuration for. This is the ARM resource ID referenced in the Azure API Management instance. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateway/<GatewayName>` */
   gatewayId: string;
 
