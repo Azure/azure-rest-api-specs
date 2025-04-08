@@ -2422,11 +2422,6 @@
       "description": "The parameters used to update an Azure AI Search service."
     },
     "SearchServiceProperties": {
-      "etag": {
-        "readOnly": true,
-        "type": "string",
-        "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
-      },
       "properties": {
         "replicaCount": {
           "type": "integer",
@@ -2637,6 +2632,11 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources managed by the Azure AI Search service."
+        },
+        "eTag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
         },
         "upgradeAvailable": {
           "type": "string",
