@@ -125,6 +125,42 @@ model RedTeam {
 }
 
 // private red-team upload
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Metadata")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model Metadata {
+  @doc("List of target harms.")
+  TargetHarms: Array<TargetHarm>;
+
+  @doc("The language")
+  Language: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Message")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model Message {
+  @doc("The role.")
+  Role?: string;
+
+  @doc("The content.")
+  Content?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Target Harm")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model TargetHarm {
+  @doc("The risk type.")
+  RiskType?: string;
+
+  @doc("The risk sub type.")
+  RiskSubType?: string;
+}
+
 @doc("Red team details.")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -173,6 +209,28 @@ model RedTeamUpload {
 }
 
 // Simulation Private Dto
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Attack Objective")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AttackObjective {
+  @doc("The unique identifier.")
+  Id: string;
+
+  @doc("The metadata.")
+  Metadata?: Metadata;
+
+  @doc("List of sources.")
+  Source: Array<string>;
+
+  @doc("The modality.")
+  Modality: string;
+
+  @doc("The messages.")
+  Messages: Array<Message>;
+}
+
+
 @doc("Simulation type.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
@@ -199,54 +257,72 @@ model CustomizationParameters {
     HarmCategories: Array<string>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Customization Parameters")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model SimulationDTO {
-    @doc("Additional headers.")
-    Headers?: Record<string>;
+  @doc("Additional headers.")
+  Headers?: Record<string>;
 
-    @doc("Parameters.")
-    Params?: Record<string>;
+  @doc("Parameters.")
+  Params?: Record<string>;
 
-    @doc("Template parameters.")
-    TemplateParameters?: Record<string>;
+  @doc("Template parameters.")
+  TemplateParameters?: Record<string>;
 
-    @doc("Customization parameters.")
-    CustomizationParameters?: CustomizationParameters;
+  @doc("Customization parameters.")
+  CustomizationParameters?: CustomizationParameters;
 
-    @doc("Json.")
-    Json?: string;
+  @doc("Json.")
+  Json?: string;
 
-    @doc("Url.")
-    Url?: string;
+  @doc("Url.")
+  Url?: string;
 
-    @doc("Template key.")
-    TemplateKey?: string;
+  @doc("Template key.")
+  TemplateKey?: string;
 
-    @doc("Type of Simulation.")
-    SimulationType?: SimulationType;
+  @doc("Type of Simulation.")
+  SimulationType?: SimulationType;
 
-    @doc("'True' if Microsoft internal tenant and 'False' otherwise.")
-    IsMicrosoftTenant?: boolean;
+  @doc("'True' if Microsoft internal tenant and 'False' otherwise.")
+  IsMicrosoftTenant?: boolean;
 
-    @doc("Azure subscription id.")
-    SubscriptionId?: string;
+  @doc("Azure subscription id.")
+  SubscriptionId?: string;
 
-    @doc("Resource group name.")
-    ResourceGroupName?: string;
+  @doc("Resource group name.")
+  ResourceGroupName?: string;
 
-    @doc("Workspace name.")
-    WorkspaceName?: string;
+  @doc("Workspace name.")
+  WorkspaceName?: string;
 }
 
-@doc("Simulation object.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+@doc("Simulation Result")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model SimulationResultDTO {
-    @doc("Status Code.")
-    StatusCode: int32;
+  @doc("Status Code.")
+  StatusCode: int32;
 
-    @doc("Content.")
-    Content: string;
+  @doc("Content.")
+  Content: string;
 }
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+#suppress "@azure-tools/typespec-azure-core/no-unknown"
+@doc("Long Running Response")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model LongRunningResponse {
+  @doc("The location.")
+  Location: string;
+  @doc("The OperationResult.")
+  OperationResult: unknown;
+}
+
+#suppress "@azure-tools/typespec-providerhub/no-inline-model" "Need to create reponses correctly"
+alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<202> &
+  T;

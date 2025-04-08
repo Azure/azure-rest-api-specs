@@ -2250,25 +2250,78 @@
         }
       }
     },
-    "/redTeams/simulation/chat/completions/submit": {
-      "post": {
-        "operationId": "RedTeams_ChatCompletionsSubmit",
-        "description": "Simulation chat completion.",
-        "produces": [
-          "text/plain"
-        ],
+    "/redTeams/simulation/attackobjectives": {
+      "get": {
+        "operationId": "RedTeams_GetAttackObjectives",
+        "description": "Get the attack objectives.",
         "parameters": [
           {
-            "name": "apiVersion",
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "riskTypes",
             "in": "query",
-            "description": "API version.",
-            "required": true,
+            "description": "Risk types for the attack objectives dataset",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "The language for the attack objectives dataset, defaults to 'en'",
+            "required": false,
             "type": "string"
           },
           {
-            "name": "simulationDTO",
+            "name": "strategy",
+            "in": "query",
+            "description": "The strategy",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AttackObjective"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/chat/completions/submit": {
+      "post": {
+        "operationId": "RedTeams_SubmitSimulation",
+        "description": "Submit a request for simulation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
             "in": "body",
-            "description": "Simulation request.",
+            "description": "Properties of a Prompt Version.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SimulationDTO"
@@ -2279,31 +2332,115 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/LongRunningResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         }
       }
     },
-    "/redTeams/simulation/jailbreak": {
+    "/redTeams/simulation/jailbreak/{type}": {
       "get": {
-        "operationId": "RedTeams_Jailbreak",
-        "description": "Simulation jailbreak.",
+        "operationId": "RedTeams_GetJailBreakDatasetWithType",
+        "description": "Get the jailbreak dataset with type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "Type of jailbreak dataset",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/jailbreak/": {
+      "get": {
+        "operationId": "RedTeams_GetJailBreakDataset",
+        "description": "Get the jailbreak dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/template/parameters/{type}": {
+      "get": {
+        "operationId": "RedTeams_GetTemplateParametersWithType",
+        "description": "Get template parameters with type.",
         "produces": [
-          "text/plain"
+          "text/plain",
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "type",
-            "in": "query",
-            "description": "Type of parameter.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiVersion",
-            "in": "query",
-            "description": "API version.",
+            "name": "type",
+            "in": "path",
+            "description": "Type for the template parameters",
             "required": true,
             "type": "string"
           }
@@ -2313,6 +2450,18 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         }
@@ -2320,23 +2469,55 @@
     },
     "/redTeams/simulation/template/parameters/": {
       "get": {
-        "operationId": "RedTeams_TemplateParameters",
-        "description": "Simulation template parameters.",
+        "operationId": "RedTeams_GetTemplateParameters",
+        "description": "Get template parameters.",
         "produces": [
-          "text/plain"
+          "text/plain",
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "type",
-            "in": "query",
-            "description": "Type of parameter.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/template/parameters/image": {
+      "get": {
+        "operationId": "RedTeams_GetTemplateParametersImage",
+        "description": "Get the template parameters image.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "apiVersion",
+            "name": "path",
             "in": "query",
-            "description": "API version.",
+            "description": "Image path.",
             "required": true,
             "type": "string"
           }
@@ -2347,38 +2528,17 @@
             "schema": {
               "type": "string"
             }
-          }
-        }
-      }
-    },
-    "/redTeams/simulation/template/parameters/image": {
-      "get": {
-        "operationId": "RedTeams_TemplateParametersImage",
-        "description": "Simulation template parameters for image.",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "query",
-            "description": "Path for image.",
-            "required": true,
-            "type": "string"
           },
-          {
-            "name": "apiVersion",
-            "in": "query",
-            "description": "API version.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         }
@@ -2501,6 +2661,45 @@
         "ResourceGroupName",
         "WorkspaceName",
         "ClientRequestId"
+      ]
+    },
+    "AttackObjective": {
+      "type": "object",
+      "description": "Attack Objective",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "The unique identifier."
+        },
+        "Metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "The metadata."
+        },
+        "Source": {
+          "type": "array",
+          "description": "List of sources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Modality": {
+          "type": "string",
+          "description": "The modality."
+        },
+        "Messages": {
+          "type": "array",
+          "description": "The messages.",
+          "items": {
+            "$ref": "#/definitions/Message"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "Id",
+        "Source",
+        "Modality",
+        "Messages"
       ]
     },
     "AttackStrategy": {
@@ -3574,6 +3773,23 @@
         ]
       }
     },
+    "LongRunningResponse": {
+      "type": "object",
+      "description": "Long Running Response",
+      "properties": {
+        "Location": {
+          "type": "string",
+          "description": "The location."
+        },
+        "OperationResult": {
+          "description": "The OperationResult."
+        }
+      },
+      "required": [
+        "Location",
+        "OperationResult"
+      ]
+    },
     "MAASModelConfig": {
       "type": "object",
       "description": "MaaS model configuration. The API version would be selected by the service for querying the model.",
@@ -3616,6 +3832,42 @@
         }
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
+    },
+    "Message": {
+      "type": "object",
+      "description": "Message",
+      "properties": {
+        "Role": {
+          "type": "string",
+          "description": "The role."
+        },
+        "Content": {
+          "type": "string",
+          "description": "The content."
+        }
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "Metadata",
+      "properties": {
+        "TargetHarms": {
+          "type": "array",
+          "description": "List of target harms.",
+          "items": {
+            "$ref": "#/definitions/TargetHarm"
+          },
+          "x-ms-identifiers": []
+        },
+        "Language": {
+          "type": "string",
+          "description": "The language"
+        }
+      },
+      "required": [
+        "TargetHarms",
+        "Language"
+      ]
     },
     "ModelDeployment": {
       "type": "object",
@@ -4312,7 +4564,7 @@
     },
     "SimulationResultDTO": {
       "type": "object",
-      "description": "Simulation object.",
+      "description": "Simulation Result",
       "properties": {
         "StatusCode": {
           "type": "integer",
@@ -4418,6 +4670,20 @@
           "format": "date-time",
           "description": "The timestamp of resource last modification (UTC)",
           "readOnly": true
+        }
+      }
+    },
+    "TargetHarm": {
+      "type": "object",
+      "description": "Target Harm",
+      "properties": {
+        "RiskType": {
+          "type": "string",
+          "description": "The risk type."
+        },
+        "RiskSubType": {
+          "type": "string",
+          "description": "The risk sub type."
         }
       }
     },

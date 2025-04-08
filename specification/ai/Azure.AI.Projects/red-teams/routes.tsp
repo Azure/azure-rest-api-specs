@@ -84,58 +84,89 @@ interface RedTeams {
 
 
   // Simulation Private APIs
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Simulation jailbreak.")
-  @route("/simulation/jailbreak")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the jailbreak dataset with type.")
+  @route("/simulation/jailbreak/{type}")
   @get
-  @useAuth(BearerAuth)
-  op jailbreak(
-    @doc("Type of parameter.") @query type?: string,
-    @doc("API version.") @query apiVersion: string
-  ): {
-      @statusCode statusCode: 200;
-      @body jailbreakDataset: string;
-  };
+  getJailBreakDatasetWithType is Azure.Core.Foundations.Operation<
+    {
+      @doc("Type of jailbreak dataset")
+      @path
+      type: string;
+    },
+    Array<string>
+  >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Simulation template parameters.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" 
+  @doc("Get the attack objectives.")
+  @route("/simulation/attackobjectives")
+  @get
+  getAttackObjectives is Azure.Core.Foundations.Operation<
+    {
+      @doc("Risk types for the attack objectives dataset")
+      @query(#{ explode: true })
+      riskTypes?: string[];
+
+      @doc("The language for the attack objectives dataset, defaults to 'en'")
+      @query
+      lang?: string;
+
+      @doc("The strategy")
+      @query
+      strategy?: string;
+    },
+    Array<AttackObjective>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the jailbreak dataset.")
+  @route("/simulation/jailbreak/")
+  @get
+  getJailBreakDataset is Azure.Core.Foundations.Operation<{}, Array<string>>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get template parameters with type.")
+  @route("/simulation/template/parameters/{type}")
+  @get
+  getTemplateParametersWithType is Azure.Core.Foundations.Operation<
+    {
+      @doc("Type for the template parameters")
+      @path
+      type: string;
+    },
+    string
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get template parameters.")
   @route("/simulation/template/parameters/")
-    @get
-    @useAuth(BearerAuth)
-    op templateParameters(
-      @doc("Type of parameter.") @query type?: string,
-      @doc("API version.") @query apiVersion: string
-    ): {
-      @statusCode statusCode: 200;
-      @doc("Template parameter dataset.")
-      @body templateParametersDataset: string;
-  };
+  @get
+  getTemplateParameters is Azure.Core.Foundations.Operation<{}, string>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Simulation template parameters for image.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the template parameters image.")
   @route("/simulation/template/parameters/image")
-    @get
-    @useAuth(BearerAuth)
-    op templateParametersImage(
-      @doc("Path for image.") @query path: string,
-      @doc("API version.") @query apiVersion: string
-    ): {
-      @statusCode statusCode: 200;
-      @doc("File content result.")
-      @body fileContentResult: string;
-  };
+  @get
+  getTemplateParametersImage is Azure.Core.Foundations.Operation<
+    {
+      @doc("Image path.")
+      @query
+      path: string;
+    },
+    string
+  >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Simulation chat completion.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Submit a request for simulation.")
   @route("/simulation/chat/completions/submit")
-    @post
-    @useAuth(BearerAuth)
-    op chatCompletionsSubmit(
-      @doc("Simulation request.") @body simulationDTO: SimulationDTO,
-      @doc("API version.") @query apiVersion: string
-    ): {
-      @statusCode statusCode: 202;
-      @doc("File content result.")
-      @body fileContentResult: string;
-  };
+  @post
+  submitSimulation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Properties of a Prompt Version.")
+      @body
+      body: SimulationDTO;
+    },
+    ResourceCreatedOrOkResponse<LongRunningResponse>
+  >;
 }
