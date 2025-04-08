@@ -15,20 +15,6 @@
     }
   },
   "responses": {
-    "200": {
-      "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
-        "properties": {
-          "creationData": {
-            "createOption": "Copy",
-            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk1"
-          },
-          "provisioningState": "Updating"
-        },
-        "location": "West US",
-        "name": "myDisk2"
-      }
-    },
     "202": {
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
@@ -42,8 +28,20 @@
         "location": "West US",
         "name": "myDisk2"
       }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk1"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myDisk2"
+      }
     }
-  },
-  "operationId": "Disks_CreateOrUpdate",
-  "title": "create a managed disk from an existing managed disk in the same or different subscription."
+  }
 }
