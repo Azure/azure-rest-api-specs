@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-@service({
+@service(#{
   title: "Azure AI Search",
 })
 @versioned(Versions)
