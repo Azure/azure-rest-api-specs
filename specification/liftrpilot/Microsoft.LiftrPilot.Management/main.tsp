@@ -79,6 +79,7 @@ interface Organizations {
   listBySubscription is ArmListBySubscription<OrganizationResource>;
 }
 
+@added(Versions.v2025_04_03_preview)
 @doc("Liftr-Pilot tracked resource")
 @parentResource(OrganizationResource)
 model PilotProxyResource is ProxyResource<PilotProxyResourceProperties> {
@@ -92,6 +93,7 @@ model PilotProxyResource is ProxyResource<PilotProxyResourceProperties> {
   name: string;
 }
 
+@added(Versions.v2025_04_03_preview)
 @doc("The properties of PilotProxyResource")
 model PilotProxyResourceProperties {
   @doc("Description of the proxy resource")
@@ -102,6 +104,7 @@ model PilotProxyResourceProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
+@added(Versions.v2025_04_03_preview)
 @armResourceOperations
 interface PilotProxyResources {
   get is ArmResourceRead<PilotProxyResource>;
