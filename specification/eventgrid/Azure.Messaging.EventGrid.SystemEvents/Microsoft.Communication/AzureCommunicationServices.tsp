@@ -1082,20 +1082,20 @@ model AcsCallingEventEndedByProperties {
   /** The type of call ended by. */
   type: AcsCallEndedParticipantKind;
 
-  /** The name field will be filled based on the type. */
+  /** The name of the call ended by. */
   name: string;
 }
 
 /** Schema of calling event reason properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallingEventReasonProperties {
-  /** Reason code for call ended event. */
+  /** Reason code for ending the call. */
   code?: int;
 
-  /** Reason for subcode for call ended event. */
+  /** Reason subcode for ending the call. */
   subCode?: int;
 
-  /** Reason for the call ended event. */
+  /** Reason for the ending the call. */
   phrase?: string;
 }
 
