@@ -484,7 +484,7 @@
           "type": "string"
         },
         "circuitBreaker": {
-          "$ref": "#/definitions/ApiManagementCircuitBreakerInfo"
+          "$ref": "#/definitions/ApiManagementCircuitBreakerProperties"
         }
       },
       "x-ms-examples": {
@@ -505,7 +505,7 @@
           "type": "string"
         },
         "circuitBreaker": {
-          "$ref": "#/definitions/ApiManagementCircuitBreakerInfo"
+          "$ref": "#/definitions/ApiManagementCircuitBreakerProperties"
         }
       },
       "x-ms-examples": {
@@ -522,10 +522,10 @@
       "type": "object",
       "properties": {
         "gatewayInfo": {
-          "$ref": "#/definitions/ApiManagementGatewayInfo"
+          "$ref": "#/definitions/ApiManagementGatewayProperties"
         },
         "tokenInfo": {
-          "$ref": "#/definitions/ApiManagementGatewayTokenNearExpiryInfo"
+          "$ref": "#/definitions/ApiManagementGatewayTokenNearExpiryProperties"
         }
       },
       "x-ms-examples": {
@@ -542,10 +542,10 @@
       "type": "object",
       "properties": {
         "gatewayInfo": {
-          "$ref": "#/definitions/ApiManagementGatewayInfo"
+          "$ref": "#/definitions/ApiManagementGatewayProperties"
         },
         "tokenInfo": {
-          "$ref": "#/definitions/ApiManagementExpiredGatewayTokenInfo"
+          "$ref": "#/definitions/ApiManagementExpiredGatewayTokenProperties"
         }
       },
       "x-ms-examples": {
@@ -557,7 +557,7 @@
         }
       }
     },
-    "ApiManagementCircuitBreakerInfo": {
+    "ApiManagementCircuitBreakerProperties": {
       "description": "Information related to the circuit breaker configured on the backend.",
       "type": "object",
       "properties": {
@@ -567,7 +567,7 @@
         }
       }
     },
-    "ApiManagementGatewayInfo": {
+    "ApiManagementGatewayProperties": {
       "description": "Information related to a given self-hosted gateway deployment.",
       "type": "object",
       "properties": {
@@ -581,25 +581,27 @@
         }
       }
     },
-    "ApiManagementExpiredGatewayTokenInfo": {
+    "ApiManagementExpiredGatewayTokenProperties": {
       "description": "Information related to a an expired gateway token for a self-hosted gateway deployment.",
       "type": "object",
       "properties": {
         "expiredAtUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the gateway token has expired."
+          "description": "Timestamp when the gateway token has expired.",
+          "x-ms-client-name": "expiresOn"
         }
       }
     },
-    "ApiManagementGatewayTokenNearExpiryInfo": {
+    "ApiManagementGatewayTokenNearExpiryProperties": {
       "description": "Information related to a gateway token that is near expiry for a self-hosted gateway deployment.",
       "type": "object",
       "properties": {
         "expiresAtUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the gateway token will expire."
+          "description": "Timestamp when the gateway token will expire.",
+          "x-ms-client-name": "expiresOn"
         }
       }
     }
