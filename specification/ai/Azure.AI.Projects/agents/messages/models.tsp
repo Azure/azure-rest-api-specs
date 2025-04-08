@@ -5,97 +5,97 @@ namespace Azure.AI.Projects.Agents;
 
 using TypeSpec.Versioning;
 
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "We intentionally want a union of string | array."
-@doc("Because OpenAPI 2 doesn’t fully support oneOf for 'string or array,' we suppress the rule.")
+@doc("Represents the message content for creating a new message. It can be either a simple text string or a list of typed content blocks (text, image_file, image_url).")
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | array is intentional (OpenAPI 3 can handle oneOf)."
 union CreateMessageContent {
-  @doc("If callers only have a quick text message, they can pass a plain string here.")
+  @doc("A plain text message if rich content is not needed.")
   text: string,
 
-  @doc("For 'rich' content, callers can pass an array of typed content blocks (e.g. text, image_file, image_url).")
+  @doc("A list of typed content blocks for richer messages, such as text blocks, image-file references, or external image-URL references.")
   blocks: MessageContentBlockInput[],
 }
 
-@doc("For the block's 'type' property, we define an open union with a fallback string to satisfy the no-string-discriminator rule.")
+@doc("Specifies the kind of content block within a message. Could be text, an image file, an external image URL, or an unknown future type.")
 union MessageBlockType {
-  @doc("A text content block.")
+  @doc("Indicates a block containing text content.")
   text: "text",
 
-  @doc("An internally uploaded image file.")
+  @doc("Indicates a block referencing an internally uploaded image file.")
   image_file: "image_file",
 
-  @doc("An externally hosted image URL.")
+  @doc("Indicates a block referencing an external image URL.")
   image_url: "image_url",
 
-  @doc("Fallback for unrecognized types the service might return in the future.")
+  @doc("A future or unrecognized block type (fallback).")
   string,
 }
 
-@doc("An abstract base for creation-time 'blocks' that can be text or images. We use @discriminator('type') but make 'type' an open union.")
+@doc("Defines a single content block when creating a message. The 'type' field determines whether it is text, an image file, or an external image URL, etc.")
 @discriminator("type")
 model MessageContentBlockInput {
-  @doc("Must be one of 'text', 'image_file', or 'image_url' (or a fallback string).")
+  @doc("Specifies which kind of content block this is (text, image_file, image_url, etc.).")
   type: MessageBlockType;
 }
 
-@doc("Creation-time text block.")
+@doc("A text block in a new message, containing plain text content.")
 model MessageTextBlockInput extends MessageContentBlockInput {
-  @doc("Always 'text'.")
+  @doc("Must be 'text' for a text block.")
   type: "text";
 
-  @doc("The text content.")
+  @doc("The plain text content for this block.")
   text: string;
 }
 
-@doc("Creation-time image-file block.")
+@doc("An image-file block in a new message, referencing an internally uploaded image by file ID.")
 model MessageImageFileBlockInput extends MessageContentBlockInput {
-  @doc("Always 'image_file'.")
+  @doc("Must be 'image_file' for an internally uploaded image block.")
   type: "image_file";
 
-  @doc("References an uploaded image by file ID.")
+  @doc("Information about the referenced image file, including file ID and optional detail level.")
   @encodedName("application/json", "image_file")
   imageFile: MessageImageFileParam;
 }
 
-@doc("Creation-time image-URL block.")
+@doc("An image-URL block in a new message, referencing an external image by URL.")
 model MessageImageUrlBlockInput extends MessageContentBlockInput {
-  @doc("Always 'image_url'.")
+  @doc("Must be 'image_url' for an externally hosted image block.")
   type: "image_url";
 
-  @doc("References an external image by URL.")
+  @doc("Information about the external image URL, including the URL and optional detail level.")
   @encodedName("application/json", "image_url")
   imageUrl: MessageImageUrlParam;
 }
 
-@doc("Represents an open union for the image detail level: 'auto', 'low', 'high', or an unknown string.")
+@doc("Specifies an image's detail level. Can be 'auto', 'low', 'high', or an unknown future value.")
 union ImageDetailLevel {
-  @doc("Automatic or default level of detail.")
+  @doc("Automatically select an appropriate detail level.")
   auto: "auto",
 
-  @doc("Low detail: uses fewer tokens.")
+  @doc("Use a lower detail level to reduce bandwidth or cost.")
   low: "low",
 
-  @doc("High detail: uses more tokens (including potentially more cost).")
+  @doc("Use a higher detail level—potentially more resource-intensive.")
   high: "high",
 
-  @doc("Fallback for unrecognized values the service might return in the future.")
+  @doc("A future or unrecognized detail level (fallback).")
   string,
 }
 
-@doc("Parameter for an image file (by ID) at creation time.")
+@doc("Defines how an internally uploaded image file is referenced when creating an image-file block.")
 model MessageImageFileParam {
-  @doc("File ID for the uploaded image.")
+  @doc("The ID of the previously uploaded image file.")
   fileId: string;
 
-  @doc("Specifies the requested detail level for the image.")
+  @doc("Optional detail level for the image (auto, low, or high).")
   detail?: ImageDetailLevel;
 }
 
-@doc("Parameter for an external image URL at creation time.")
+@doc("Defines how an external image URL is referenced when creating an image-URL block.")
 model MessageImageUrlParam {
-  @doc("The externally accessible image URL.")
+  @doc("The publicly accessible URL of the external image.")
   url: string;
 
-  @doc("Specifies the requested detail level for the image. Default is 'auto'.")
+  @doc("Optional detail level for the image (auto, low, or high). Defaults to 'auto' if not specified.")
   detail?: ImageDetailLevel;
 }
 
