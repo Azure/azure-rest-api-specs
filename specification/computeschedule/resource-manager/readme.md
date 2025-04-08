@@ -39,9 +39,9 @@ input-file:
   - Microsoft.ComputeSchedule/stable/2025-05-01/computeschedule.json
 suppressions:  
   - code: AvoidAdditionalProperties
+    reason: Record unknown because we don't want copy VMextensionProperties type here and update when dependency changes
     from: computeschedule.json
-    where:$.definitions.VirtualMachineExtensionData.properties.properties  
-    reason: Record-unknown because we don't want copy VMextensionProperties type here and update when dependency changes
+    where: $.definitions.VirtualMachineExtensionData.properties.properties
 ```
 
 ### Tag: package-2024-10-01
