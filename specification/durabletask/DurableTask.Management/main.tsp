@@ -277,7 +277,6 @@ interface RetentionPolicies {
   listByScheduler is ArmResourceListByParent<RetentionPolicy>;
 }
 
-
 // resource specific to the previous version 2024-02-01-preview (Private Preview only to be deprecated and not made public)
 
 @doc("A Durable Task Scheduler namespace resource")
