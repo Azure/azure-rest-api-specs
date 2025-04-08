@@ -54,12 +54,11 @@ model MultiFactorAuthenticationSettings {
   portalEnforcementDate?: utcDateTime;
 
   @added(Versions.v2025_04_01_preview)
-  @doc("The setting for enforcing Multi-Factor Authentication when making requests to Azure Resource Manager.")
-  armEnforcement?: MfaEnforcement;
-
-  @added(Versions.v2025_04_01_preview)
-  @doc("The UTC date and time in ISO8601 format when the enforcement setting in armEnforcement should be applied.")
+  @doc("The UTC date and time in ISO8601 format when multi-factor authentication will be required to use ARM APIs in the tenant.")
   armEnforcementDate?: utcDateTime;
+
+  @doc("Optional justification for the date and time set in armEnforcementDate. Maximum length is 500 characters.")
+  armJustification?: string;
 }
 
 @doc("Settings related to feedback control policies.")

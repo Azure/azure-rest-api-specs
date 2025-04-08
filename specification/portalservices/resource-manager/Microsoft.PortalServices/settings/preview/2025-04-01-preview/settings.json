@@ -385,14 +385,14 @@
           "format": "date-time",
           "description": "The date and time when the enforcement setting in portalEnforcement should be applied."
         },
-        "armEnforcement": {
-          "$ref": "#/definitions/MfaEnforcement",
-          "description": "The setting for enforcing Multi-Factor Authentication when making requests to Azure Resource Manager."
-        },
         "armEnforcementDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC date and time in ISO8601 format when the enforcement setting in armEnforcement should be applied."
+          "description": "The UTC date and time in ISO8601 format when multi-factor authentication will be required to use ARM APIs in the tenant."
+        },
+        "armJustification": {
+          "type": "string",
+          "description": "Optional justification for the date and time set in armEnforcementDate. Maximum length is 500 characters."
         }
       }
     },
