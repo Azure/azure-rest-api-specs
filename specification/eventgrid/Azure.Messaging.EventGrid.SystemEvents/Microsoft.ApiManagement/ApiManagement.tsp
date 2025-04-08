@@ -130,6 +130,26 @@ model ApiManagementGatewayApiRemovedEventData {
   ...ApiGatewayApiBase;
 }
 
+/** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Opened event. */
+model ApiManagementCircuitBreakerOpenedEventData {
+  ...ApiGatewayApiBase;
+}
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.CircuitBreaker.Closed event. */
+model ApiManagementCircuitBreakerClosedEventData {
+  ...ApiGatewayApiBase;
+}
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenNearExpiry event. */
+model ApiManagementGatewayTokenNearExpiryEventData {
+  ...ApiGatewayApiBase;
+}
+
+/** Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayTokenExpired event. */
+model ApiManagementGatewayTokenExpired {
+  ...ApiGatewayApiBase;
+}
+
 alias ApiManagementBase = {
   /** The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>` */
   resourceUri?: string;

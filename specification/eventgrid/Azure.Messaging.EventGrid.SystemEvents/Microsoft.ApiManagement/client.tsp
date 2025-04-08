@@ -155,7 +155,16 @@ using Azure.ClientGenerator.Core;
 @@usage(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiRemovedEventData,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayApiRemovedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerOpenedEventData,
+  Access.public
+);
+@@access(Microsoft.EventGrid.SystemEvents.ApiManagementCircuitBreakerClosedEventData,
+  Access.public
+);
+@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
+  Access.public
+);
+@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpired,
   Access.public
 );
 //Enums
