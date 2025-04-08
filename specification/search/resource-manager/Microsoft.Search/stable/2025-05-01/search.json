@@ -2660,11 +2660,30 @@
           "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
         },
         "upgradeAvailable": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Indicates whether or not the search service has an upgrade available."
+          "type": "string",
+          "description": "Indicates if the search service has an upgrade available.",
+          "enum": [
+            "notAvailable",
+            "available"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeAvailable",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "notAvailable",
+                "name": "NotAvailable",
+                "description": "An upgrade is currently not available for the service."
+              },
+              {
+                "value": "available",
+                "name": "Available",
+                "description": "There is an upgrade available for the service."
+              }
+            ]
+          }
         },
-        "serviceUpgradeDate": {
+        "serviceUpgradedAt": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
