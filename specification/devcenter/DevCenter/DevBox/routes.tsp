@@ -524,7 +524,6 @@ interface DevBoxes {
       ...UserIdParameter;
       ...DevBoxNameParameter;
       ...DevBoxAddOnNameParameter;
-      ...DevBoxAddOnKindParameter;
 
       @doc("Represents the body request of a Dev Box addon creation.")
       @bodyRoot

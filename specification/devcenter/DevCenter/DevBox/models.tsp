@@ -1187,7 +1187,7 @@ model DevBoxAddOn {
   name: string;
 
   @doc("The type of the Dev Box addon.")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   kind: DevBoxAddOnKind;
 
   @doc("""

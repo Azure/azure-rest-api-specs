@@ -50,11 +50,3 @@ model DevBoxAddOnNameParameter {
   @path
   addOnName: string;
 }
-
-@doc("The Dev Box addon kind query parameter.")
-@added(APIVersions.v2025_04_01_preview)
-model DevBoxAddOnKindParameter {
-  @doc("The kind of the Dev Box addon.")
-  @query
-  kind: DevBoxAddOnKind;
-}

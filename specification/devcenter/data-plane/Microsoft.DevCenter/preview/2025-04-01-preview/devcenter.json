@@ -2809,9 +2809,6 @@
             "$ref": "#/parameters/DevBoxAddOnNameParameter"
           },
           {
-            "$ref": "#/parameters/DevBoxAddOnKindParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "Represents the body request of a Dev Box addon creation.",
@@ -5594,7 +5591,10 @@
         "kind": {
           "$ref": "#/definitions/DevBoxAddOnKind",
           "description": "The type of the Dev Box addon.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "actionState": {
           "type": "string",
@@ -8456,28 +8456,6 @@
       "format": "date-time",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "delayUntil"
-    },
-    "DevBoxAddOnKindParameter": {
-      "name": "kind",
-      "in": "query",
-      "description": "The kind of the Dev Box addon.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "DevBoxTunnel"
-      ],
-      "x-ms-enum": {
-        "name": "DevBoxAddOnKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DevBoxTunnel",
-            "value": "DevBoxTunnel",
-            "description": "The Dev Box Tunnel addon."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
     },
     "DevBoxAddOnNameParameter": {
       "name": "addOnName",
