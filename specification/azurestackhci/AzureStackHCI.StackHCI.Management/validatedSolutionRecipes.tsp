@@ -4,7 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./hciCommon.tsp";
+//import "./hciCommon.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -39,6 +39,9 @@ interface ValidatedSolutionRecipes {
 model ValidatedSolutionRecipeProperties {
   @doc("Represents contents of a validated solution recipe.")
   recipeContent: ValidatedSolutionRecipeContent;
+
+  @doc("Represents the signature of the recipe, to be used for ensuring its integrity.")
+  signature?: string;
 }
 
 @doc("Represents contents of a validated solution recipe resource.")
@@ -107,16 +110,16 @@ model ValidatedSolutionRecipeComponent {
 
 @doc("Represents payloads associated with a component available in a validated solution recipe.")
 model ValidatedSolutionRecipeComponentPayload {
-  @doc("Represents the payload's identifier.")
+  @doc("Represents the unique identifier of the payload used to query the URL.")
   identifier: string;
 
-  @doc("Represents the payload's hash.")
+  @doc("Represents the cryptographic hash of the payload, ensuring data integrity.")
   hash: string;
 
-  @doc("Represents the payload's fileName.")
+  @doc("Represents the name of the file associated with the payload.")
   fileName: string;
 
-  @doc("Represents the payload's url.")
+  @doc("Represents the URL from which the payload can be downloaded.")
   url: string;
 }
 
@@ -128,30 +131,30 @@ model ValidatedSolutionRecipeComponentMetadata {
   @doc("Represents the publisher of the extension.")
   publisher?: string;
 
-  @doc("Represents the behavior of the automatic upgrades of the extension.")
+  @doc("Indicates whether automatic upgrades of the extension are enabled.")
   enableAutomaticUpgrade?: boolean;
 
-  @doc("Represents the behavior of the lcm update of the extension.")
+  @doc("Indicates whether the LCM (Lifecycle Management) update of the extension is enabled.")
   lcmUpdate?: boolean;
 
-  @doc("Represents the catalog.")
+  @doc("Specifies the catalog to which the extension belongs.")
   catalog?: string;
 
-  @doc("Represents the ring.")
+  @doc("Specifies the ring to which the extension belongs, internally used by component.")
   ring?: string;
 
-  @doc("Represents the release train.")
+  @doc("Specifies the release train to which given component belongs.")
   releaseTrain?: string;
 
-  @doc("Represents the link.")
+  @doc("Specifies the link associated with the extension.")
   link?: string;
 
-  @doc("Represents the name.")
+  @doc("Specifies the name of the extension.")
   name?: string;
 
-  @doc("Represents the expected hash.")
+  @doc("Specifies the expected hash of the extension.")
   expectedHash?: string;
 
-  @doc("Represents the preview source.")
+  @doc("Specifies the preview source of the extension.")
   previewSource?: string;
 }

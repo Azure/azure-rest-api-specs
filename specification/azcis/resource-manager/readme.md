@@ -47,6 +47,7 @@ input-file:
   - Microsoft.AzureCis/preview/2024-06-24-preview/dns.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/dscm.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/environment.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/ficp.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/genevaActions.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/plannedQuota.json
 ```

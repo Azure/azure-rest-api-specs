@@ -1,0 +1,75 @@
+{
+  "title": "ListByResourceGroup JitPolicySet",
+  "operationId": "JitPolicySet_ListByResourceGroup",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-06-24-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/jitPolicySets/subscriptionresourcejitpolicy",
+            "name": "subscriptionresourcejitpolicy",
+            "type": "Microsoft.AzureCis/jitPolicySets",
+            "properties": {
+              "cloudId": "Public",
+              "policies": [
+                {
+                  "policyInvariableId": 16778900,
+                  "executionSequence": 29,
+                  "policyType": "ManualApproval",
+                  "resourceType": "Subscription",
+                  "extendedFlags": {
+                    "msEmployeeDirectAccessPolicy": true,
+                    "globalPolicy": false,
+                    "noDisplay": true
+                  },
+                  "policyConditions": [
+                    {
+                      "property": "Requester.GroupList.StringContainsAny",
+                      "value": "[\"CME\\AP-dSCM\"]"
+                    },
+                    {
+                      "property": "Subscription.SubscriptionId.GuidContainedIn",
+                      "value": "[\"d3b07384-d9a7-4f2b-8c2c-5e1e5f3a2b9d\"]"
+                    },
+                    {
+                      "property": "Request.DirectAccessRequested.BoolEquals",
+                      "value": "true"
+                    }
+                  ],
+                  "policyActions": [
+                    {
+                      "property": "Access.ApproverClaims",
+                      "value": "AME\\AP-dSCM"
+                    },
+                    {
+                      "property": "Access.ApprovalPeriod",
+                      "value": "08:00:00"
+                    },
+                    {
+                      "property": "Access.ApproverMessage",
+                      "value": "User requesting PORTAL access to DSCM (SERVICETREEID:cee5e11c-a0d3-4aff-b0cd-d6c1236d02d3) , Pending Manual approval."
+                    },
+                    {
+                      "property": "System.Exit",
+                      "value": "true"
+                    }
+                  ],
+                  "provisioningMode": {
+                    "mode": "Create"
+                  }
+                }
+              ],
+              "azureLocation": "useast",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

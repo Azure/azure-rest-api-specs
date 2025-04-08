@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.Proposal")
 @service(#{ title: "Microsoft.Proposal" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 @server("https://localhost", "Server endpoint")
 namespace Microsoft.Proposal;
 

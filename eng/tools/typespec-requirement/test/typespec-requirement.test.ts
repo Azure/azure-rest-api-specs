@@ -11,7 +11,12 @@ async function checkAllUnder(path: string, responseCache?: string) {
     command += ` -_ResponseCache ${responseCache}`;
   }
 
-  return await execa("pwsh", ["-Command", command], { cwd: repoRoot, reject: false });
+  const result = await execa("pwsh", ["-Command", command], { cwd: repoRoot, reject: false });
+  return {
+    // Merge stdout and stderr, since script writes to stdout in CI but stderr on dev machine
+    stdout: result.stdout + result.stderr,
+    exitCode: result.exitCode,
+  };
 }
 
 test.concurrent("No files to check", async ({ expect }) => {
@@ -36,9 +41,9 @@ test.concurrent("Parse error", async ({ expect }) => {
 });
 
 test.concurrent("No tspconfig.yaml", async ({ expect }) => {
-  const { stderr, exitCode } = await checkAllUnder("specification/no-tspconfig");
+  const { stdout, exitCode } = await checkAllUnder("specification/no-tspconfig");
 
-  expect(stderr).toContain("no files named 'tspconfig.yaml'");
+  expect(stdout).toContain("no files named 'tspconfig.yaml'");
   expect(exitCode).toBe(1);
 });
 
@@ -74,12 +79,12 @@ test.concurrent("Hand-written, does not exist in main", async ({ expect }) => {
 });
 
 test.concurrent("Hand-written, unexpected response checking main", async ({ expect }) => {
-  const { stdout, stderr, exitCode } = await checkAllUnder(
+  const { stdout, exitCode } = await checkAllUnder(
     "specification/hand-written",
     '@{"https://github.com/Azure/azure-rest-api-specs/tree/main/specification/hand-written/resource-manager/Microsoft.HandWritten/stable"=519}',
   );
 
   expect(stdout).toContain("was not generated from TypeSpec");
-  expect(stderr).toContain("Unexpected response");
+  expect(stdout).toContain("Unexpected response");
   expect(exitCode).toBe(1);
 });

@@ -22,6 +22,7 @@ model IdentityController is TrackedResource<IdentityControllerProperties> {
 
 /** IdentityController properties */
 model IdentityControllerProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @doc("List of onboarded apps for Nexus Identity")
   onboardedApps: Array<OnboardedApp>;
 
@@ -50,17 +51,27 @@ model OnboardedApp {
 
 /** The resource provisioning state. */
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+@doc("The current provisioning state.")
+union ProvisioningState {
+  @doc("Accepted Provisioning State")
+  Accepted: "Accepted",
 
-  /** The resource is being updated. */
-  Updating,
+  @doc("Succeeded Provisioning State")
+  Succeeded: "Succeeded",
 
-  /** The resource is being deleted. */
-  Deleting,
+  @doc("Updating Provisioning State")
+  Updating: "Updating",
 
-  /** The resource provisioning request has been accepted. */
-  Accepted,
+  @doc("Deleting Provisioning State")
+  Deleting: "Deleting",
+
+  @doc("Failed Provisioning State")
+  Failed: "Failed",
+
+  @doc("Canceled Provisioning State")
+  Canceled: "Canceled",
+
+  string,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

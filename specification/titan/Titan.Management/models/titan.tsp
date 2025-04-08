@@ -1,7 +1,9 @@
 import "./common.tsp";
+import "../../../microsoftinventory/commonmodelslib/common.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -74,9 +76,20 @@ model ComputeDeviceProperties {
   @visibility(Lifecycle.Read)
   serialNumber: string;
 
+  @removed(Versions.v2025_03_01_preview)
   @doc("If the machine type is a server, the environment in which workloads are run. One of: Baremetal, VM, Container.")
   @visibility(Lifecycle.Read)
   workloadType: WorkloadType;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("The machine type.")
+  @visibility(Lifecycle.Read)
+  machineType: string;
+
+  @added(Versions.v2025_03_01_preview)
+  @doc("Management Type only reported for Device Manager devices.")
+  @visibility(Lifecycle.Read)
+  deviceManagerManagementType?: string;
 
   @doc("The status of the last operation")
   @visibility(Lifecycle.Read)
@@ -87,4 +100,49 @@ model ComputeDeviceProperties {
 interface ComputeDevices {
   get is ArmResourceRead<ComputeDeviceResource>;
   list is ArmResourceListByParent<ComputeDeviceResource>;
+}
+
+@parentResource(TenantLocationResource)
+@doc("Private IPAddressProperties.")
+@added(Versions.v2025_03_01_preview)
+model PrivateIpAddressProperties
+  is Microsoft.Inventory.CommonTypes.PrivateIpAddressPropertiesBase;
+
+@parentResource(TenantLocationResource)
+@added(Versions.v2025_03_01_preview)
+model PrivateIpAddress is ProxyResource<PrivateIpAddressProperties> {
+  ...ResourceNameParameter<
+    PrivateIpAddress,
+    KeyName = "privateIpAddress",
+    NamePattern = "^[a-zA-Z0-9-.]{3,32}$"
+  >;
+}
+
+@armResourceOperations
+@added(Versions.v2025_03_01_preview)
+interface PrivateIpAddresses {
+  get is ArmResourceRead<PrivateIpAddress>;
+  list is ArmResourceListByParent<PrivateIpAddress>;
+}
+
+@added(Versions.v2025_03_01_preview)
+@doc("Public IPAddressProperties.")
+model PublicIpAddressProperties
+  is Microsoft.Inventory.CommonTypes.PublicIpAddressPropertiesBase;
+
+@parentResource(TenantLocationResource)
+@added(Versions.v2025_03_01_preview)
+model PublicIpAddress is ProxyResource<PublicIpAddressProperties> {
+  ...ResourceNameParameter<
+    PublicIpAddress,
+    KeyName = "publicIpAddress",
+    NamePattern = "^[a-zA-Z0-9-.]{3,32}$"
+  >;
+}
+
+@armResourceOperations
+@added(Versions.v2025_03_01_preview)
+interface PublicIpAddresses {
+  get is ArmResourceRead<PublicIpAddress>;
+  list is ArmResourceListByParent<PublicIpAddress>;
 }

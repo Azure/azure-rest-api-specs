@@ -11,3 +11,4 @@ import "./resources/clusters.tsp";
 import "./resources/service.tsp";
 import "./resources/operations.tsp";
 import "./resources/compositeIpAddresses.tsp";
+import "./resources/compositeWebEndpoints.tsp";

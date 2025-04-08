@@ -8,6 +8,7 @@ import "./ProvisioningState.tsp";
 import "./UpdateType.tsp";
 import "./ConfigurationTemplateVersion.tsp";
 import "./VersionParameter.tsp";
+import "./RemoveVersionResponse.tsp";
 
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
@@ -75,9 +76,10 @@ interface ConfigurationTemplates {
   >;
 
   @doc("Remove Configuration Template Version Resource")
-  removeVersion is ArmResourceActionNoResponseContentAsync<
+  removeVersion is ArmResourceActionSync<
     ConfigurationTemplate,
-    VersionParameter
+    VersionParameter,
+    RemoveVersionResponse
   >;
 
   @doc("Delete a Configuration Template Resource")

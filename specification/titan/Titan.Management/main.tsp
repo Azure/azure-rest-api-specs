@@ -23,5 +23,14 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  `2024-06-24-preview`,
+  @doc("2024-06-24-preview")
+  v2024_06_24_preview: "2024-06-24-preview",
+
+  /** 2025-03-01-preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Microsoft.Inventory.CommonTypes.Versions.v2024_01_01)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("2025-03-01-preview")
+  v2025_03_01_preview: "2025-03-01-preview",
 }

@@ -12,9 +12,9 @@ namespace LiftrBase;
  */
 enum Versions {
   /**
-   * The 2025-02-11-preview API version.
+   * The 2025-03-21-preview API version.
    */
-  v2_preview: "2025-02-11-preview",
+  v2_preview: "2025-03-21-preview",
 }
 
 /**
@@ -135,6 +135,11 @@ model MarketplaceDetails {
    */
   @visibility(Lifecycle.Read)
   marketplaceSubscriptionStatus?: MarketplaceSubscriptionStatus;
+
+  /**
+   * End Date of the subscription
+   */
+  endDate?: string;
 }
 
 /**
@@ -178,7 +183,7 @@ model EncryptionIdentityProperties {
   /**
    * Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now
    */
-  identityType: EncryptionIdentityType;
+  identityType?: EncryptionIdentityType;
 
   /**
    * User-assigned identity resource id - Only when user opts for UserAssigned identity and hence optional

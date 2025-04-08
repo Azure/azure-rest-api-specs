@@ -59,12 +59,8 @@ model ConfluentSourceConnectorProperties extends DataSourceProperties {
   @doc("AutoOffsetReset policy of the Confluent consume.")
   autoOffsetReset: string;
 
-  @doc("User of the Confluent.")
-  user: string;
-
-  @doc("Password of the Confluent.")
-  @secret
-  password: string;
+  @doc("Auth of Eventhub")
+  authentication: Authentication;
 
   @doc("Sasl mechanism of the confluent.")
   saslMechanism: SaslMechanismForConfluent;

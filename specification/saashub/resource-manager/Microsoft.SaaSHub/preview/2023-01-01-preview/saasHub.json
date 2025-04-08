@@ -22,7 +22,7 @@
           "CloudServices"
         ],
         "operationId": "CloudServices_ListBySubscription",
-        "description": "Lists the SaaSHub cloud service under the subscription.",
+        "description": "Lists the SaaSHub cloud service under the cloud subscription. Cloud subscription must be created under Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/SaaSHub/"
         },
@@ -162,6 +162,9 @@
           },
           "Create CloudService With Coterminous": {
             "$ref": "./examples/CloudService_Put_Coterminous.json"
+          },
+          "Create CloudService With Future Start Date": {
+            "$ref": "./examples/CloudService_Put_FutureStartDate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -805,6 +808,18 @@
               "format": "date-time",
               "description": "The end date in UTC time by when the self-serve cancellation ends.",
               "readOnly": true
+            },
+            "systemId": {
+              "type": "string",
+              "x-nullable": true,
+              "readOnly": true,
+              "description": "Represents an dependency-generated ID unique per instance of this resource."
+            },
+            "systemVersion": {
+              "type": "string",
+              "x-nullable": true,
+              "readOnly": true,
+              "description": "Represents a system entity version for the resource, used for concurrency control."
             }
           }
         },
@@ -918,8 +933,7 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Start date of the term in UTC time.",
-          "readOnly": true
+          "description": "Start date of the term in UTC time. When there is a value passed in for PUT scenario, it is to support future start date scenario. The time part passed in will be ignored"
         },
         "endDate": {
           "type": "string",

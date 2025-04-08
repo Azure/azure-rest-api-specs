@@ -19,7 +19,6 @@ model EventHubConfig {
   @doc("name of the EventHub.")
   eventHubName: string;
 
-  @doc("connectionString of the EventHub.")
-  @secret
-  connectionString: string;
+  @doc("Auth of Eventhub")
+  authentication: Authentication;
 }
