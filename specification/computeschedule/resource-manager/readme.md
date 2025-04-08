@@ -37,6 +37,11 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
   - Microsoft.ComputeSchedule/stable/2025-05-01/computeschedule.json
+suppressions:  
+  - code: AvoidAdditionalProperties
+    from: computeschedule.json
+    where:$.definitions.VirtualMachineExtensionData.properties.properties  
+    reason: using Record<unknown>,because we don't want copy VMextensionProperties type here and update this everytime there a new property added in underlying type in compute
 ```
 
 ### Tag: package-2024-10-01
