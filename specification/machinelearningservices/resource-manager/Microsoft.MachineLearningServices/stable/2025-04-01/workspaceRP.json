@@ -1792,10 +1792,6 @@
                 "description": "URI to poll for asynchronous operation result.",
                 "type": "string"
               },
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
               "Retry-After": {
                 "description": "Duration the client should wait between requests, in seconds.",
                 "type": "integer",
@@ -1915,7 +1911,7 @@
             "description": "The Managed Network Settings object of the workspace.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsDtoBasicResource"
+              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
             }
           }
         ],
@@ -1992,7 +1988,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsDtoBasicResource"
+              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
             }
           },
           "default": {
@@ -2041,7 +2037,7 @@
             "name": "body",
             "description": "The Managed Network Settings object of the workspace.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsDtoBasicResource"
+              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
             }
           }
         ],
@@ -2049,7 +2045,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsDtoBasicResource"
+              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
             }
           },
           "202": {
@@ -2116,7 +2112,7 @@
             "description": "The Managed Network Settings object of the workspace.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsDtoBasicResource"
+              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
             }
           }
         ],
@@ -2125,10 +2121,6 @@
             "description": "Accepted",
             "headers": {
               "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
                 "description": "URI to poll for asynchronous operation result.",
                 "type": "string"
               },
@@ -2142,7 +2134,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsDtoBasicResource"
+              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
             }
           },
           "default": {
@@ -3408,47 +3400,7 @@
       },
       "discriminator": "type"
     },
-    "ManagedNetworkSettingsDto": {
-      "description": "Managed Network settings for a machine learning workspace.",
-      "type": "object",
-      "properties": {
-        "enableNetworkMonitor": {
-          "type": "boolean"
-        },
-        "firewallPublicIpAddress": {
-          "description": "Public IP address assigned to the Azure Firewall.",
-          "type": "string"
-        },
-        "firewallSku": {
-          "$ref": "#/definitions/FirewallSku"
-        },
-        "isolationMode": {
-          "description": "Isolation mode for the managed network of a machine learning workspace.",
-          "$ref": "#/definitions/IsolationMode"
-        },
-        "managedNetworkKind": {
-          "description": "Kind of the managed network",
-          "$ref": "#/definitions/ManagedNetworkKind"
-        },
-        "networkId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "outboundRules": {
-          "type": "object",
-          "additionalProperties": {
-            "description": "Public facing contract for the outbound rules of a machine learning workspace.",
-            "$ref": "#/definitions/OutboundRule"
-          },
-          "x-nullable": true
-        },
-        "status": {
-          "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
-          "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-        }
-      }
-    },
-    "ManagedNetworkSettingsDtoBasicResource": {
+    "ManagedNetworkSettingsBasicResource": {
       "required": [
         "properties"
       ],
@@ -3461,7 +3413,7 @@
       "properties": {
         "properties": {
           "description": "Managed Network settings for a machine learning workspace.",
-          "$ref": "#/definitions/ManagedNetworkSettingsDto"
+          "$ref": "#/definitions/ManagedNetworkSettings"
         }
       }
     },
