@@ -33,4 +33,6 @@ jobs:
             "data-plane" \
             "resource-manager"
         env:
+          # Tells Avocado to analyze the files changed between the PR head (default checkout)
+          # and the PR base branch.
           SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
