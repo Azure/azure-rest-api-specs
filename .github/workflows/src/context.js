@@ -251,7 +251,7 @@ export async function extractInputs(github, context, core) {
       /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
         context.payload
       );
-const repositoryInfo = getRepositoryInfo(payload.repository);
+    const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
       owner: repositoryInfo.owner,
       repo: repositoryInfo.repo,
