@@ -852,7 +852,7 @@
           "200": {
             "description": "Transfer details for a successful query.",
             "schema": {
-              "$ref": "#/definitions/TransferDetails"
+              "$ref": "#/definitions/TransferProperties"
             }
           },
           "201": {
@@ -1541,7 +1541,7 @@
       "x-ms-azure-resource": true
     },
     "TransferDetails": {
-      "description": "Details of the transfer resource.",
+      "description": "The response details for the transfer",
       "type": "object",
       "allOf": [
         {
@@ -1550,127 +1550,130 @@
       ],
       "properties": {
         "properties": {
-          "description": "The response details for the transfer.",
-          "type": "object",
-          "properties": {
-            "transferId": {
-              "description": "The unique identifier for the transfer.",
-              "type": "string",
-              "readOnly": true
-            },
-            "lastModifiedTime": {
-              "description": "The timestamp when the transfer was last updated (in UTC).",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "expirationTime": {
-              "description": "The expiration timestamp of the transfer (in UTC).",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "transferStatus": {
-              "description": "The current status of the transfer.",
-              "type": "string",
-              "enum": [
-                "Pending",
-                "InProgress",
-                "Completed",
-                "CompletedWithError",
-                "Failed",
-                "Canceled",
-                "Declined",
-                "Expired"
-              ],
-              "x-ms-enum": {
-                "name": "transferStatus",
-                "modelAsString": true
-              },
-              "readOnly": true
-            },
-            "recipientEmailId": {
-              "description": "The email ID of the user to whom the transfer request was sent.",
-              "type": "string"
-            },
-            "initiatorEmailId": {
-              "description": "The email ID of the user who sent the transfer request.",
-              "type": "string",
-              "readOnly": true
-            },
-            "transferServiceOwnership": {
-              "description": "Indicates whether the transfer service ownership is enabled.",
-              "type": "string",
-              "enum": [
-                "Enabled",
-                "Disabled"
-              ],
-              "x-ms-enum": {
-                "name": "transferServiceOwnership",
-                "modelAsString": true
-              }
-            },
-            "detailedTransferStatus": {
-              "description": "Detailed transfer status.",
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "productType": {
-                    "description": "Type of product that is transferred.",
-                    "type": "string",
-                    "readOnly": true
-                  },
-                  "productId": {
-                    "description": "The ID of the product that is transferred.",
-                    "type": "string",
-                    "readOnly": true
-                  },
-                  "productName": {
-                    "description": "The name of the product that is transferred.",
-                    "type": "string",
-                    "readOnly": true
-                  },
-                  "skuDescription": {
-                    "description": "The SKU of the product that is transferred.",
-                    "type": "string",
-                    "readOnly": true
-                  },
-                  "transferStatus": {
-                    "description": "Transfer status.",
-                    "type": "string",
-                    "enum": [
-                      "NotStarted",
-                      "InProgress",
-                      "Completed",
-                      "Failed"
-                    ],
-                    "x-ms-enum": {
-                      "name": "transferStatus",
-                      "modelAsString": true
-                    },
-                    "readOnly": true
-                  }
-                }
-              },
-              "readOnly": true
-            },
-            "provisioningState": {
-              "description": "The provisioning state of the transfer.",
-              "type": "string",
-              "enum": [
-                "InProgress",
-                "Succeeded",
-                "Failed",
-                "Canceled"
-              ],
-              "x-ms-enum": {
-                "name": "provisioningState",
-                "modelAsString": true
-              },
-              "readOnly": true
-            }
+            "$ref": "#/definitions/Transfer"
+        }
+      }
+    },
+    "TransferProperties": {
+      "description": "Details of the transfer resource.",
+      "type": "object",
+      "properties": {
+        "transferId": {
+          "description": "The unique identifier for the transfer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "description": "The timestamp when the transfer was last updated (in UTC).",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "description": "The expiration timestamp of the transfer (in UTC).",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "transferStatus": {
+          "description": "The current status of the transfer.",
+          "type": "string",
+          "enum": [
+            "Pending",
+            "InProgress",
+            "Completed",
+            "CompletedWithError",
+            "Failed",
+            "Canceled",
+            "Declined",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "transferStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "recipientEmailId": {
+          "description": "The email ID of the user to whom the transfer request was sent.",
+          "type": "string"
+        },
+        "initiatorEmailId": {
+          "description": "The email ID of the user who sent the transfer request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "transferServiceOwnership": {
+          "description": "Indicates whether the transfer service ownership is enabled.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "transferServiceOwnership",
+            "modelAsString": true
           }
+        },
+        "detailedTransferStatus": {
+          "description": "Detailed transfer status.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "productType": {
+                "description": "Type of product that is transferred.",
+                "type": "string",
+                "readOnly": true
+              },
+              "productId": {
+                "description": "The ID of the product that is transferred.",
+                "type": "string",
+                "readOnly": true
+              },
+              "productName": {
+                "description": "The name of the product that is transferred.",
+                "type": "string",
+                "readOnly": true
+              },
+              "skuDescription": {
+                "description": "The SKU of the product that is transferred.",
+                "type": "string",
+                "readOnly": true
+              },
+              "transferStatus": {
+                "description": "Transfer status.",
+                "type": "string",
+                "enum": [
+                  "NotStarted",
+                  "InProgress",
+                  "Completed",
+                  "Failed"
+                ],
+                "x-ms-enum": {
+                  "name": "productTransferStatus",
+                  "modelAsString": true
+                },
+                "readOnly": true
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the transfer.",
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "TransferProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       }
     }
