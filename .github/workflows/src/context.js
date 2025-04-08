@@ -282,9 +282,6 @@ const repositoryInfo = getRepositoryInfo(payload.repository);
       run_id: NaN,
     };
   } else {
-    core.debug("context.payload");
-    core.debug(JSON.stringify(context.payload));
-
     throw new Error(
       `Context '${context.eventName}:${context.payload.action}' is not yet supported.`,
     );
