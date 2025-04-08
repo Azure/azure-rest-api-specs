@@ -1804,18 +1804,18 @@
       },
       "description": "Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication."
     },
-    "DisabledDataExfiltrationOption": {
+    "DataExfiltrationProtection": {
       "type": "string",
       "enum": [
-        "All"
+        "BlockAll"
       ],
       "x-ms-enum": {
-        "name": "SearchDisabledDataExfiltrationOption",
+        "name": "SearchDataExfiltrationProtection",
         "modelAsString": true,
         "values": [
           {
-            "value": "All",
-            "name": "All",
+            "value": "BlockAll",
+            "name": "BlockAll",
             "description": "Indicates that all data exfiltration scenarios are disabled."
           }
         ]
@@ -2422,6 +2422,11 @@
       "description": "The parameters used to update an Azure AI Search service."
     },
     "SearchServiceProperties": {
+      "eTag": {
+        "readOnly": true,
+        "type": "string",
+        "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
+      },
       "properties": {
         "replicaCount": {
           "type": "integer",
@@ -2494,29 +2499,8 @@
           }
         },
         "publicNetworkAccess": {
-          "type": "string",
-          "default": "enabled",
-          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "enabled",
-                "name": "Enabled",
-                "description": "The search service is accessible from traffic originating from the public internet."
-              },
-              {
-                "value": "disabled",
-                "name": "Disabled",
-                "description": "The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections."
-              }
-            ]
-          }
+          "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/PublicNetworkAccess",
+          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method."
         },
         "status": {
           "readOnly": true,
@@ -2613,10 +2597,10 @@
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "Network specific rules that determine how the Azure AI Search service may be reached."
         },
-        "disabledDataExfiltrationOptions": {
+        "dataExfiltrationProtections": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DisabledDataExfiltrationOption"
+            "$ref": "#/definitions/DataExfiltrationProtection"
           },
           "description": "A list of data exfiltration scenarios that are explicitly disallowed for the search service. Currently, the only supported value is 'All' to disable all possible data export scenarios with more fine grained controls planned for the future."
         },
@@ -2653,11 +2637,6 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources managed by the Azure AI Search service."
-        },
-        "eTag": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A system generated property representing the service's etag that can be for optimistic concurrency control during updates."
         },
         "upgradeAvailable": {
           "readOnly": true,
