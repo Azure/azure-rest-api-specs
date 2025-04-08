@@ -354,7 +354,7 @@ model SubmitStartRequest {
   resources: Resources;
 
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string; //making it optional in API version, we want to leverage ARM correlationID for tracking
 }
 
 @doc("The response from a start request")
@@ -387,7 +387,7 @@ model SubmitHibernateRequest {
   resources: Resources;
 
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("The response from a Hibernate request")
@@ -417,7 +417,7 @@ model ExecuteDeallocateRequest {
   resources: Resources;
 
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
@@ -429,7 +429,7 @@ model ExecuteHibernateRequest {
   resources: Resources;
 
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("The ExecuteStartRequest request for executeStart operations")
@@ -441,7 +441,7 @@ model ExecuteStartRequest {
   resources: Resources;
 
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("The ExecuteCreateRequest request for create operations")
@@ -515,7 +515,7 @@ model GetOperationStatusRequest {
   operationIds: Array<string>;
 
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("This is the response from a get operations status request")
@@ -532,7 +532,7 @@ model CancelOperationsRequest {
   operationIds: Array<string>;
 
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("This is the response from a cancel operations request")
