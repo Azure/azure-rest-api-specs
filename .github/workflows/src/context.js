@@ -246,26 +246,35 @@ export async function extractInputs(github, context, core) {
         `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
       );
     }
-    if (
-      !context.payload.repository ||
-      !context.payload.repository.owner ||
-      !context.payload.repository.owner.login ||
-      !context.payload.repository.name
-    ) {
-      throw new Error(
-        `Could not extract repository owner or name from context payload: ${JSON.stringify(context.payload.repository)}`,
-      );
-    }
+
     inputs = {
-      owner: context.payload.repository.owner.login,
-      repo: context.payload.repository.name,
+      ...getRepositoryInfo(context.payload),
       head_sha: checkRun.head_sha,
       ado_build_id: match[2],
       ado_project_url: match[1],
       issue_number: NaN,
       run_id: NaN,
     };
+    // TODO: only on completed
+  } else if(context.eventName === "check_suite") {
+    const payload = ( 
+      /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */
+      context.payload 
+    );
+
+    inputs = {
+      ...getRepositoryInfo(context.payload),
+      head_sha: payload.check_suite.head_sha,
+
+      // These are NaN today because the only consumer of this event needs only 
+      // the head_sha
+      issue_number: NaN,
+      run_id: NaN,
+    };
   } else {
+    core.debug("context.payload");
+    core.debug(JSON.stringify(context.payload));
+
     throw new Error(
       `Context '${context.eventName}:${context.payload.action}' is not yet supported.`,
     );
@@ -273,4 +282,26 @@ export async function extractInputs(github, context, core) {
 
   core.info(`inputs: ${JSON.stringify(inputs)}`);
   return inputs;
+}
+
+/**
+ * @param {any} payload
+ * @returns {{ owner: string, repo: string }}
+ */
+function getRepositoryInfo(payload) { 
+  if (
+    !payload.repository ||
+    !payload.repository.owner ||
+    !payload.repository.owner.login ||
+    !payload.repository.name
+  ) {
+    throw new Error(
+      `Could not extract repository owner or name from context payload: ${JSON.stringify(payload.repository)}`,
+    );
+  }
+
+  return { 
+    owner: payload.repository.owner.login,
+    repo: payload.repository.name 
+  };
 }
