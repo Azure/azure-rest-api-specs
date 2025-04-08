@@ -64,7 +64,7 @@ union ProvisioningState {
   Accepted: "Accepted",
 
   @doc("The resource creation has succeeded")
-  Accepted: "Succeeded",
+  Succeeded: "Succeeded",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
