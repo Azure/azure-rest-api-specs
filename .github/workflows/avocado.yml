@@ -1,0 +1,36 @@
+name: "[TEST-IGNORE] Swagger Avocado"
+
+on: pull_request
+
+permissions:
+  contents: read
+
+jobs:
+  avocado:
+    name: "[TEST-IGNORE] Swagger Avocado"
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      # Default checkout of head branch with depth=1 should be sufficient,
+      # since avocado has internal code to clone and diff the base branch
+      # (passed via env var SYSTEM_PULLREQUEST_TARGETBRANCH).
+      - uses: actions/checkout@v4
+
+      - name: Setup Node and install deps
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Run Avocado
+        run: |
+          npm exec --no avocado \
+          --excludePaths \
+            "/common-types/" \
+            "/scenarios/" \
+            "/package.json" \
+            "/package-lock.json" \
+            "/cadl/examples/" \
+          --includePaths \
+            "data-plane" \
+            "resource-manager"
+        env:
+          SYSTEM_PULLREQUEST_TARGETBRANCH: ${{ github.event.pull_request.base.ref }}
