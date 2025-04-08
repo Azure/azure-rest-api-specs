@@ -57,6 +57,7 @@ model MultiFactorAuthenticationSettings {
   @doc("The UTC date and time in ISO8601 format when multi-factor authentication will be required to use ARM APIs in the tenant.")
   armEnforcementDate?: utcDateTime;
 
+  @added(Versions.v2025_04_01_preview)
   @doc("Optional justification for the date and time set in armEnforcementDate. Maximum length is 500 characters.")
   armJustification?: string;
 }
