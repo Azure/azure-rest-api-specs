@@ -1011,7 +1011,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 /** Schema of common properties of all participant events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallParticipantEventProperties extends AcsCallingEventProperties {
-  /** The communication identifier of the participant */
+  /** The user of the call participant */
   user?: AcsCallParticipantUserProperties;
 
   /** The display name of the participant. */
@@ -1037,7 +1037,7 @@ model AcsCallParticipantUserProperties {
 /** Schema of common properties of all calling events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallingEventProperties {
-  /** The communication identifier of the call started user. */
+  /** The call participant who initialted the call. */
   startedBy: AcsCallParticipantUserProperties;
 
   /** The call id of the server */
@@ -1049,7 +1049,7 @@ model AcsCallingEventProperties {
   /** The room metadata */
   room?: AcsCallingEventRoomProperties;
 
-  /** Is two party in calling event. */
+  /** Is two-party in calling event. */
   isTwoParty?: boolean;
 
   /** The correlationId of calling event */
@@ -1062,14 +1062,14 @@ model AcsCallingEventProperties {
 /** Schema of calling event group properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallingEventGroupProperties {
-  /** Calling Group ID. Format is Guid as string. */
+  /** Group Id.*/
   id?: string;
 }
 
 /** Schema of calling event room properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallingEventRoomProperties {
-  /** Calling Room ID. Format is Guid as string. */
+  /** Room Id.*/
   id?: string;
 }
 
