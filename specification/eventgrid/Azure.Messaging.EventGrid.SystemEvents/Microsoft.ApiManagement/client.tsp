@@ -164,7 +164,7 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenNearExpiryEventData,
   Access.public
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpired,
+@@access(Microsoft.EventGrid.SystemEvents.ApiManagementGatewayTokenExpiredEventData,
   Access.public
 );
 //Enums
