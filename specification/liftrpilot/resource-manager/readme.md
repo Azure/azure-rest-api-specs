@@ -43,6 +43,10 @@ suppressions:
     reason: User Assigned Managed Identity Type inline definition is automtaically added to json.
 ```
 
+### Tag: package-2025-04-03-preview
+
+These settings apply only when `--tag=package-2025-04-03-preview` is specified on the command line.
+
 ```yaml $(tag) == 'package-2025-04-03-preview'
 input-file:
   - Microsoft.LiftrPilot/preview/2025-04-03-preview/pilot.json
