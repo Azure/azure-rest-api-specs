@@ -2,8 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 using Azure.ClientGenerator.Core;
 
@@ -446,6 +445,11 @@ model StreamingChatResponseMessageUpdate {
     completions request to resolve as configured.
     """)
   toolCalls?: StreamingChatResponseToolCallUpdate[];
+
+  @doc("The reasoning content the model used for generating the response")
+  @added(AI.Model.Versions.v2025_04_01)
+  @visibility(Lifecycle.Read)
+  reasoning_content?: string;
 }
 
 @doc("A representation of a chat message as received in a response.")
@@ -463,6 +467,12 @@ model ChatResponseMessage {
     completions request to resolve as configured.
     """)
   toolCalls?: ChatCompletionsToolCall[];
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The reasoning content the model used for generating the response")
+  @added(AI.Model.Versions.v2025_04_01)
+  @visibility(Lifecycle.Read)
+  reasoning_content?: string;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."

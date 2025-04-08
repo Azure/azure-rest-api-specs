@@ -11,7 +11,6 @@ import "./models/image_embeddings.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
 
 namespace AI.Model;
 
@@ -83,4 +82,12 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
 @actionSeparator("/")
 @route("info")
 @get
-op getModelInfo is Azure.Core.RpcOperation<{}, ModelInfo>;
+op getModelInfo is Azure.Core.RpcOperation<
+  {
+    @doc("The model deployment name you want information from.")
+    @query
+    @added(AI.Model.Versions.v2025_04_01)
+    `model`: string;
+  },
+  ModelInfo
+>;
