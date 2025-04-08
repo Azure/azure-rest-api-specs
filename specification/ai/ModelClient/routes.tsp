@@ -77,7 +77,7 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
   Returns information about the AI model.
   The method makes a REST API call to the `/info` route on the given endpoint.
   This method will only work when using Serverless API or Managed Compute endpoint.
-  It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
+  It will not work for Azure OpenAI endpoints.
   """)
 @actionSeparator("/")
 @route("info")
@@ -87,7 +87,7 @@ op getModelInfo is Azure.Core.RpcOperation<
     @doc("The model deployment name you want information from.")
     @query
     @added(AI.Model.Versions.v2025_04_01)
-    `model`: string;
+    `model`?: string;
   },
   ModelInfo
 >;
