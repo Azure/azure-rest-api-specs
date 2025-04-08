@@ -115,7 +115,7 @@ model RedTeam {
   @visibility(Lifecycle.Read)
   status?: string;
 
-  @doc("Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{myproject}/datasets/{dataset-name}/{dataset-version}' }")
+  @doc("Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{myproject}/datasets/{dataset-name}/versions/{dataset-version}' }")
   @visibility(Lifecycle.Read)
   outputs: Record<string>;
 
@@ -199,7 +199,7 @@ model RedTeamUpload {
   @visibility(Lifecycle.Read)
   status?: string;
 
-  @doc("Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/{version}' }")
+  @doc("Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}' }")
   @visibility(Lifecycle.Read)
   outputs?: Record<string>;
 
