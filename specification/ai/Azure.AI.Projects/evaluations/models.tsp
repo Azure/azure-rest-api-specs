@@ -190,15 +190,6 @@ model AnnotationDTO {
   @doc("The type of inference performed.")
   InferenceType: string;
 
-  @doc("The subscription identifier.")
-  SubscriptionId: string;
-
-  @doc("The name of the resource group.")
-  ResourceGroupName: string;
-
-  @doc("The name of the workspace.")
-  WorkspaceName: string;
-
   @doc("The client request identifier.")
   ClientRequestId: string;
 }
