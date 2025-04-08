@@ -8,7 +8,7 @@ model AcsIncomingCallEventData {
   /** The communication identifier of the target user. */
   to: CommunicationIdentifierModel;
 
-  /** The communication identifier of the user who initiated the call. */
+  /** The communication identifier of the user who initialized the call. */
   from: CommunicationIdentifierModel;
 
   /** The Id of the server call */
