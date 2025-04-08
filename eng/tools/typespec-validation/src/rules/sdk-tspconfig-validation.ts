@@ -174,18 +174,6 @@ function skipForNonModularOrDataPlaneInTsEmitter(config: any, folder: string): S
   return result;
 }
 
-function skipForNonModularOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
-  // isModularLibrary is true by default
-  const isModularClient = config?.options?.["@azure-tools/typespec-ts"]?.isModularLibrary !== false;
-  const shouldSkip = isManagementSdk(folder) && isModularClient;
-  const result: SkipResult = {
-    shouldSkip: shouldSkip,
-  };
-  if (result.shouldSkip)
-    result.reason = "This rule is only applicable for management SDKs with modular client.";
-  return result;
-}
-
 // ----- common sub rules -----
 export class TspConfigCommonAzServiceDirMatchPatternSubRule extends TspconfigParameterSubRuleBase {
   constructor() {
@@ -269,8 +257,8 @@ export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOption
   constructor() {
     super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*rest$/));
   }
-  protected skip(config: any,  folder: string) {
-    return skipForNonModularOrManagementPlaneInTsEmitter(config,folder);
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
   }
 }
 
@@ -282,8 +270,8 @@ export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspConfigTsOpti
       new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/)
     );    
   }
-  protected skip(config: any,  folder: string) {
-    return skipForNonModularOrManagementPlaneInTsEmitter(config,folder);
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
   }
 }
 
