@@ -42,10 +42,17 @@ suppressions:
     reason: Suppressing for now to avoid breaking change.
     from:
       - assessments.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/assessments"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/assessments/{assessmentName}"]
   - code: RequiredPropertiesMissingInResourceModel
     reason: Suppressing for now to avoid breaking change.
     from:
       - assessments.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/assessmentTypes"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/workloads"]
+      
 ```
 
 ### Tag: package-2025-01
