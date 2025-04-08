@@ -285,8 +285,8 @@ directive:
     from: availabilitySet.json
     reason: there is no availability set naming requirement. It only follows ARM resource naming requirement.
   - from: ComputeRP.json
-    where-operation: VirtualMachineImages_ListWithProperties
-    transform: $.parameters[3]["x-ms-enum"].name = "ExpandQuery"
+    where: $.definitions.Expand
+    transform: $["x-ms-enum"] = "ExpandType"
 
 suppressions:
   - code: OperationsAPIImplementation
@@ -1212,33 +1212,33 @@ These settings apply only when `--tag=package-2022-08-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-08-01'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/runCommand.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
-  - Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
-  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/galleryRPCommon.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
-  - Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
-  - Microsoft.Compute/CloudserviceRP/stable/2022-04-04/cloudService.json
+- Microsoft.Compute/common-types/v1/common.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachine.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineImage.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineExtensionImage.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/availabilitySet.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/proximityPlacementGroup.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/dedicatedHost.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/sshPublicKey.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/image.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/restorePoint.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/capacityReservation.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/logAnalytic.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/runCommand.json
+- Microsoft.Compute/DiskRP/stable/2022-07-02/diskRPCommon.json
+- Microsoft.Compute/DiskRP/stable/2022-07-02/disk.json
+- Microsoft.Compute/DiskRP/stable/2022-07-02/diskAccess.json
+- Microsoft.Compute/DiskRP/stable/2022-07-02/diskEncryptionSet.json
+- Microsoft.Compute/DiskRP/stable/2022-07-02/diskRestorePoint.json
+- Microsoft.Compute/DiskRP/stable/2022-07-02/snapshot.json
+- Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+- Microsoft.Compute/GalleryRP/stable/2022-01-03/galleryRPCommon.json
+- Microsoft.Compute/GalleryRP/stable/2022-01-03/gallery.json
+- Microsoft.Compute/GalleryRP/stable/2022-01-03/sharedGallery.json
+- Microsoft.Compute/GalleryRP/stable/2022-01-03/communityGallery.json
+- Microsoft.Compute/CloudserviceRP/stable/2022-04-04/cloudService.json
 ```
 
 ### Tag: package-2022-08-01-only
@@ -1247,21 +1247,21 @@ These settings apply only when `--tag=package-2022-08-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2022-08-01-only'
 input-file:
-  - Microsoft.Compute/common-types/v1/common.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachine.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineExtensionImage.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/availabilitySet.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/proximityPlacementGroup.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/dedicatedHost.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/sshPublicKey.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/image.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/restorePoint.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/capacityReservation.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/logAnalytic.json
-  - Microsoft.Compute/ComputeRP/stable/2022-08-01/runCommand.json
+- Microsoft.Compute/common-types/v1/common.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/computeRPCommon.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineScaleSet.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachine.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineImage.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/virtualMachineExtensionImage.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/availabilitySet.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/proximityPlacementGroup.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/dedicatedHost.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/sshPublicKey.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/image.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/restorePoint.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/capacityReservation.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/logAnalytic.json
+- Microsoft.Compute/ComputeRP/stable/2022-08-01/runCommand.json
 ```
 
 ### Tag: package-2022-07-02
