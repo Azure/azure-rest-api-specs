@@ -4832,6 +4832,10 @@
           "description": "Deployment tags"
         }
       },
+      "identity": {
+        "$ref": "#/definitions/DeploymentIdentity",
+        "description": "The Managed Identity configuration for a deployment."
+      },
       "required": [
         "properties"
       ],
@@ -5393,6 +5397,35 @@
           "description": "The error additional info."
         }
       }
+    },
+    "DeploymentIdentity": {
+      "description": "The Managed Identity configuration for a deployment.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The identity type.",
+          "enum": [
+            "None",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeploymentIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The set of user assigned identities associated with the resource.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentities",
+            "x-nullable": true
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
     },
     "DeploymentPropertiesExtended": {
       "properties": {
