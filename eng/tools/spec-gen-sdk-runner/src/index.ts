@@ -21,5 +21,8 @@ export async function main() {
   } else {
     statusCode = await generateSdkForSingleSpec();
   }
+  if (statusCode !== 0) {
+    console.log("##vso[task.complete result=Failed;]");
+  }
   exit(statusCode);
 }

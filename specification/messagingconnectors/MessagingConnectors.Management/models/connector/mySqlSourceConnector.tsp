@@ -52,6 +52,28 @@ model MySqlSourceConnectorProperties extends DataSourceProperties {
   @doc("Tables used as source.")
   tableNames: string;
 
+  @doc("Tables to be included, regex supported.")
+  tableIncludeList?: string;
+
+  @doc("Tables to be excluded, regex supported.")
+  tableExcludeList?: string;
+
   @doc("Snapshot Locking Mode.")
   snapshotLockingMode?: SnapshotLockingModeForMysql;
+
+  @doc("Columns to be included, regex supported.")
+  columnIncludeList?: string;
+
+  @doc("Columns to be excluded, regex supported.")
+  columnExcludeList?: string;
+
+  @doc("Handling mode for DECIMAL and NUMERIC.")
+  decimalHandlingMode?: DecimalHandlingModes;
+
+  @Azure.ResourceManager.identifiers(#[])
+  @doc("Select table rows to include in the snapshot.")
+  snapshotSelectStatementOverrides?: SnapshotSelectStatementOverrideItem[];
+
+  @doc("Operation types to be skipped.")
+  skippedOperations?: SkippedOperationsModes[];
 }

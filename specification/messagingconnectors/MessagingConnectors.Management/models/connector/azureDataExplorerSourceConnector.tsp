@@ -25,7 +25,6 @@ model AzureDataExplorerSourceConnectorProperties extends DataSourceProperties {
   @doc("AzureDataExplorer table names use commas to separate multiple tables.")
   tableNames: string;
 
-  @doc("A secret token used for OAuth.")
-  @secret
-  accessToken: string;
+  @doc("Auth of AzureDataExplorer")
+  authentication: Authentication;
 }

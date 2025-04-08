@@ -47,6 +47,16 @@ These settings apply only when `--tag=package-2024-02-01-preview` is specified o
 input-file:
 - Microsoft.Carbon/preview/2024-02-01-preview/main.json
 ```
+
+### Tag: package-2025-04-01
+
+These settings apply only when `--tag=package-2025-04-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-04-01'
+input-file:
+- Microsoft.Carbon/stable/2025-04-01/main.json
+```
+
 # Code Generation
 
 ## Swagger to SDK

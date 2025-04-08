@@ -50,7 +50,6 @@ model CatalogCloudEventsConfig extends CloudEventsConfig {
   @Azure.ResourceManager.identifiers(#[])
   catalogSchemaIds: CatalogSchemaId[];
 
-  @doc("access token.")
-  @secret
-  accessToken: string;
+  @doc("Auth of Catalog")
+  authentication: Authentication;
 }
