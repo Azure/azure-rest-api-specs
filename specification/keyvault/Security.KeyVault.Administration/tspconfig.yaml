@@ -2,11 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/keyvault"
   "dependencies":
-    # "additionalDirectories":
-    #   - "specification/keyvault/Security.KeyVault.BackupRestore/"
-    #   - "specification/keyvault/Security.KeyVault.Common/"
-    #   - "specification/keyvault/Security.KeyVault.RBAC/"
-    #   - "specification/keyvault/Security.KeyVault.Settings/"
     default: ""
 
 emit:
@@ -59,3 +54,9 @@ options:
       name: "@azure/keyvault-admin"
       description: "Azure Key Vault Administration"
     flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/keyvault/Security.KeyVault.BackupRestore/"
+      - "specification/keyvault/Security.KeyVault.Common/"
+      - "specification/keyvault/Security.KeyVault.RBAC/"
+      - "specification/keyvault/Security.KeyVault.Settings/"
