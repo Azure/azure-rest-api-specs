@@ -97,7 +97,7 @@ describe("getCheckRuns", () => {
       "checkRunName",
       "head_sha",
     );
-    
+
     expect(actual).toEqual([
       expect.objectContaining({
         name: "checkRunName",
@@ -244,10 +244,18 @@ describe("verifyRunStatusImpl", () => {
 
     vi.stubEnv("CHECK_RUN_NAME", "checkRunName");
     vi.stubEnv("WORKFLOW_NAME", "workflowName");
-    await verifyRunStatusImpl({ github, context, core, checkRunName: "checkRunName", workflowName: "workflowName" });
+    await verifyRunStatusImpl({
+      github,
+      context,
+      core,
+      checkRunName: "checkRunName",
+      workflowName: "workflowName",
+    });
 
     expect(core.setFailed).not.toHaveBeenCalled();
-    expect(core.notice).toHaveBeenCalledWith("Conclusions match for check run checkRunName and workflow run workflowName");
+    expect(core.notice).toHaveBeenCalledWith(
+      "Conclusions match for check run checkRunName and workflow run workflowName",
+    );
   });
 
   it("verifies status when workflow_run event fires", async () => {
@@ -278,7 +286,13 @@ describe("verifyRunStatusImpl", () => {
 
     vi.stubEnv("CHECK_RUN_NAME", "checkRunName");
     vi.stubEnv("WORKFLOW_NAME", "workflowName");
-    await verifyRunStatusImpl({ github, context, core, checkRunName: "checkRunName", workflowName: "workflowName" });
+    await verifyRunStatusImpl({
+      github,
+      context,
+      core,
+      checkRunName: "checkRunName",
+      workflowName: "workflowName",
+    });
 
     expect(core.setFailed).not.toHaveBeenCalled();
   });
@@ -301,7 +315,13 @@ describe("verifyRunStatusImpl", () => {
       },
     };
     const core = createMockCore();
-    await verifyRunStatusImpl({ github, context, core, checkRunName: "checkRunName", workflowName: "workflowName" });
+    await verifyRunStatusImpl({
+      github,
+      context,
+      core,
+      checkRunName: "checkRunName",
+      workflowName: "workflowName",
+    });
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.notice).toHaveBeenCalledWith(
       "No completed check run with name: checkRunName. Not enough information to judge success or failure. Ending with success status.",
@@ -326,7 +346,13 @@ describe("verifyRunStatusImpl", () => {
       },
     };
     const core = createMockCore();
-    await verifyRunStatusImpl({ github, context, core, checkRunName: "checkRunName", workflowName: "workflowName" });
+    await verifyRunStatusImpl({
+      github,
+      context,
+      core,
+      checkRunName: "checkRunName",
+      workflowName: "workflowName",
+    });
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.notice).toHaveBeenCalledWith(
       "No completed workflow run with name: workflowName. Not enough information to judge success or failure. Ending with success status.",
@@ -345,7 +371,13 @@ describe("verifyRunStatusImpl", () => {
       },
     };
     const core = createMockCore();
-    await verifyRunStatusImpl({ github, context, core, checkRunName: "otherCheckRunName", workflowName: "workflowName" });
+    await verifyRunStatusImpl({
+      github,
+      context,
+      core,
+      checkRunName: "otherCheckRunName",
+      workflowName: "workflowName",
+    });
     expect(core.setFailed).toHaveBeenCalledWith(
       "Check run name (checkRunName) does not match input: otherCheckRunName. Ensure job is filtering by github.event.check_run.name.",
     );
@@ -375,13 +407,19 @@ describe("verifyRunStatusImpl", () => {
       },
     };
     const core = createMockCore();
-    await verifyRunStatusImpl({ github, context, core, checkRunName: "checkRunName", workflowName: "workflowName" });
+    await verifyRunStatusImpl({
+      github,
+      context,
+      core,
+      checkRunName: "checkRunName",
+      workflowName: "workflowName",
+    });
     expect(core.setFailed).toHaveBeenCalledWith(
       "Check run conclusion (success) does not match workflow run conclusion (failure)",
     );
   });
 
-  it ("throws when in check_suite event but no check_run with name is found", async () => {
+  it("throws when in check_suite event but no check_run with name is found", async () => {
     const github = createMockGithub();
     github.rest.checks.listForRef = vi.fn().mockResolvedValue({
       data: {
@@ -400,7 +438,13 @@ describe("verifyRunStatusImpl", () => {
       },
     };
     const core = createMockCore();
-    await verifyRunStatusImpl({ github, context, core, checkRunName: "checkRunName", workflowName: "workflowName" });
+    await verifyRunStatusImpl({
+      github,
+      context,
+      core,
+      checkRunName: "checkRunName",
+      workflowName: "workflowName",
+    });
     expect(core.setFailed).toHaveBeenCalledWith(
       "Could not locate check run checkRunName in check suite checkRunName. Ensure job is filtering by github.event.check_suite.app.name.",
     );
