@@ -74,9 +74,9 @@ model PartnerProperties {
   redirectUrl?: string;
 
   @doc("Organization name in partner's system")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
-  @minLength(1)
-  @maxLength(50)
+  @pattern("^[a-zA-Z0-9 _\\-().,:@+&',]{1,64}$")
+  @minLength(1) // Minimum length constraint
+  @maxLength(64) // Maximum length constraint
   organizationName: string;
 }
 
@@ -91,10 +91,10 @@ model OrganizationProperties is BaseResourceProperties {
 model OrganizationResource
   is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
   @key("organizationName")
-  @pattern("^[a-zA-Z0-9 _\\-().,:@+&',]{1,64}$") // Updated regex
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
   @segment("organizations")
-  @minLength(1) // Minimum length constraint
-  @maxLength(64) // Maximum length constraint
+  @minLength(1)
+  @maxLength(50)
   @doc("Name of the Organization resource")
   @path
   name: string;
