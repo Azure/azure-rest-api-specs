@@ -75,7 +75,6 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
   It will not work for Azure OpenAI endpoints.
   """)
 @get
-@actionSeparator("/")
 @route("/info")
 op getModelInfo is Azure.Core.RpcOperation<
   {
