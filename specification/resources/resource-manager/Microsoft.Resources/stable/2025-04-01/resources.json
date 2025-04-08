@@ -5556,7 +5556,7 @@
         "extension": {
           "readOnly": true,
           "$ref": "#/definitions/DeploymentExtensionDefinition",
-          "description": "The key of the extension the resource was deployed with."
+          "description": "The extension the resource was deployed with."
         },
         "resourceType": {
           "readOnly": true,
@@ -6595,6 +6595,10 @@
         "identifiers": {
           "type": "object",
           "description": "A subset of properties that uniquely identify a Bicep extensible resource because it lacks a resource id like an Azure resource has."
+        },
+        "extension": {
+          "$ref": "#/definitions/DeploymentExtensionDefinition",
+          "description": "The extension the resource was deployed with."
         },
         "changeType": {
           "type": "string",
