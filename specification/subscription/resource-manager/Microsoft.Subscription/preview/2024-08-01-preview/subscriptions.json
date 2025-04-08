@@ -647,7 +647,7 @@
             "description": "Deleted the Target Directory"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Describes the error if the operation is not successful.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -756,7 +756,7 @@
     },
     "/providers/Microsoft.Subscription/transfers/{transferId}": {
       "get": {
-        "description": "Retrieves transfer details using a system-generated TransferId. ",
+        "description": "Retrieves transfer details using a system-generated TransferId.",
         "operationId": "Transfers_GetById",
         "x-ms-examples": {
           "GetTransferById": {
@@ -811,6 +811,52 @@
           },
           "default": {
             "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates a transfer request.",
+        "operationId": "Transfers_CreateOrUpdate",
+        "x-ms-examples": {
+          "CreateTransfer": {
+            "$ref": "./examples/createTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            },
+            "description": "The transfer details for the request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "201": {
+            "description": "Transfer creation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -1693,7 +1739,103 @@
       "properties": {
         "properties": {
           "description": "The response details for the transfer.",
-          "$ref": "#/definitions/TransferResponse"
+          "type": "object",
+          "properties": {
+            "transferId": {
+              "description": "The unique identifier for the transfer.",
+              "type": "string",
+              "readOnly": true
+            },
+            "lastModifiedTime": {
+              "description": "The timestamp when the transfer was last updated (in UTC).",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "expirationTime": {
+              "description": "The expiration timestamp of the transfer (in UTC).",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "transferStatus": {
+              "description": "The current status of the transfer.",
+              "type": "string",
+              "enum": [
+                "Pending",
+                "InProgress",
+                "Completed",
+                "CompletedWithError",
+                "Failed",
+                "Canceled",
+                "Declined",
+                "Expired"
+              ],
+              "x-ms-enum": {
+                "name": "TransferStatus",
+                "modelAsString": true
+              },
+              "readOnly": true
+            },
+            "recipientEmailId": {
+              "description": "The email ID of the user to whom the transfer request was sent.",
+              "type": "string"
+            },
+            "initiatorEmailId": {
+              "description": "The email ID of the user who sent the transfer request.",
+              "type": "string",
+              "readOnly": true
+            },
+            "transferServiceOwnership": {
+              "description": "Indicates whether the transfer service ownership is enabled.",
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ]
+            },
+            "detailedTransferStatus": {
+              "description": "Detailed transfer status.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "productType": {
+                    "description": "Type of product that is transferred.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "productId": {
+                    "description": "The ID of the product that is transferred.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "productName": {
+                    "description": "The name of the product that is transferred.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "skuDescription": {
+                    "description": "The SKU of the product that is transferred.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "transferStatus": {
+                    "description": "Transfer status.",
+                    "type": "string",
+                    "enum": [
+                      "NotStarted",
+                      "InProgress",
+                      "Completed",
+                      "Failed"
+                    ],
+                    "readOnly": true
+                  }
+                }
+              },
+              "readOnly": true
+            }
+          }
         }
       }
     }
