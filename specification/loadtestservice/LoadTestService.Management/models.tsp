@@ -242,7 +242,7 @@ model LoadTestProperties {
   @doc("Resource provisioning state.")
   provisioningState?: ResourceState;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "URI is an abbervation and should be upper case"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "URI is an abbreviation and should be upper case"
   @visibility(Lifecycle.Read)
   @maxLength(2083)
   @doc("Resource data plane URI.")

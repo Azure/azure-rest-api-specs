@@ -400,7 +400,7 @@ model Test {
   @doc("Kind of test.")
   kind?: TestKind;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation and should be all caps"
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
   publicIPDisabled?: boolean;
@@ -551,7 +551,7 @@ model LoadTestConfiguration {
     """)
   engineInstances?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "CSV is an abbervation and should be all caps"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "CSV is an abbreviation and should be all caps"
   @doc("""
     If false, Azure Load Testing copies and processes your input files unmodified
     across all test engine instances. If true, Azure Load Testing splits the CSV
@@ -884,7 +884,7 @@ model TestRun {
   @doc("Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise")
   debugLogsEnabled?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbreviation and should be all caps"
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
   @visibility(Lifecycle.Read)

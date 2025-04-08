@@ -8,9 +8,9 @@ linter:
     "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
 parameters:
   "service-dir":
-    default: "sdk/playwrighttesting"
+    default: "sdk/azuretesting"
   "service-directory-name":
-    default: "playwrighttesting"
+    default: "loadtestservice"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
@@ -18,7 +18,7 @@ options:
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
     emitter-output-dir: "{project-root}/.."
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azuretesting.json"
     omit-unreachable-types: true
     use-read-only-status-schema: true
   #  "@azure-tools/typespec-providerhub-controller":
@@ -30,22 +30,23 @@ options:
     generate-metadata: true
     experimental-extensible-enums: true
     generate-sample: true
-    package-dir: "arm-playwrighttesting"
+    package-dir: "arm-testing"
     flavor: "azure"
     package-details:
-      name: "@azure/arm-playwrighttesting"
+      name: "@azure/arm-testing"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-playwrighttesting"
-    namespace: "azure.mgmt.playwrighttesting"
+    package-dir: "azure-mgmt-testing"
+    namespace: "azure.mgmt.testing"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.PlaywrightTesting"
+    package-dir: "Azure.ResourceManager.Testing"
     flavor: azure
     clear-output-folder: true
+    use-write-core: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-playwrighttesting"
+    package-dir: "azure-resourcemanager-testing"
     flavor: azure
-    service-name: Playwright Testing
+    service-name: Azure Testing
