@@ -105,17 +105,19 @@ using KeyVault;
   "RestoreCertificateParameters",
   "rust"
 );
-@@clientName(CertificateUpdateParameters, "UpdateCertificateParameters", "rust");
+@@clientName(CertificateUpdateParameters, "UpdateCertificatePropertiesParameters", "rust");
+@@clientName(DeletedCertificateListResult,
+  "ListDeletedCertificatePropertiesResult",
+  "rust"
+);
+@@clientName(CertificateListResult, "ListCertificatePropertiesResult", "rust");
+@@clientName(CertificateIssuerListResult, "ListIssuerPropertiesResult", "rust");
 
 @@clientName(getCertificates, "ListCertificateProperties", "rust");
 @@clientName(getCertificateIssuers, "ListIssuerProperties", "rust");
 @@clientName(getCertificateVersions, "ListCertificatePropertiesVersions", "rust");
 @@clientName(getDeletedCertificates, "ListDeletedCertificateProperties", "rust");
-@@clientName(CertificateListResult, "ListCertificatePropertiesResult", "rust");
-@@clientName(DeletedCertificateListResult,
-  "ListDeletedCertificatePropertiesResult",
-  "rust"
-);
+@@clientName(updateCertificate, "UpdateCertificateProperties", "rust");
 
 @@clientName(getCertificateContacts, "GetContacts", "rust");
 @@clientName(deleteCertificateContacts, "DeleteContacts", "rust");
@@ -123,7 +125,6 @@ using KeyVault;
 @@clientName(updateCertificateIssuer, "UpdateIssuer", "rust");
 @@clientName(getCertificateIssuer, "GetIssuer", "rust");
 @@clientName(deleteCertificateIssuer, "DeleteIssuer", "rust");
-@@clientName(CertificateIssuerListResult, "ListIssuerPropertiesResult", "rust");
 
 @@clientName(Action, "LifetimeActionType", "rust");
 @@clientName(Trigger, "LifetimeActionTrigger", "rust");

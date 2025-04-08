@@ -46,7 +46,7 @@ using KeyVault;
 @@clientName(SecretSetParameters, "SetSecretParameters", "rust");
 @@clientName(SecretUpdateParameters, "UpdateSecretPropertiesParameters", "rust");
 @@clientName(DeletedSecretListResult,
-  "DeletedSecretPropertiesListResult",
+  "ListDeletedSecretPropertiesResult",
   "rust"
 );
 @@clientName(SecretListResult, "ListSecretPropertiesResult", "rust");
