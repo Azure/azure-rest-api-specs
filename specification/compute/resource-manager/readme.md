@@ -284,6 +284,9 @@ directive:
   - suppress: ResourceNameRestriction
     from: availabilitySet.json
     reason: there is no availability set naming requirement. It only follows ARM resource naming requirement.
+  - from: ComputeRP.json
+    where-operation: VirtualMachineImages_ListWithProperties
+    transform: $.parameters[3]["x-ms-enum"].name = "ExpandQuery"
 
 suppressions:
   - code: OperationsAPIImplementation
