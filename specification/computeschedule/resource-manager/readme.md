@@ -41,7 +41,7 @@ input-file:
 
 ---
 
-``` yaml
+``` yaml $(tag) == 'package-2025-05-01'
 suppressions:  
   - code: AvoidAdditionalProperties
     reason: using Record<unknown>,because we don't want copy VMextensionProperties type here and update this everytime there a new property added in underlying type in compute
