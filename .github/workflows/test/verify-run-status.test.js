@@ -304,7 +304,7 @@ describe("verifyRunStatusImpl", () => {
     await verifyRunStatusImpl({ github, context, core, checkRunName: "checkRunName", workflowName: "workflowName" });
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.notice).toHaveBeenCalledWith(
-      "No completed check run with name: checkRunName. Ending with success status.",
+      "No completed check run with name: checkRunName. Not enough information to judge success or failure. Ending with success status.",
     );
   });
 
@@ -329,7 +329,7 @@ describe("verifyRunStatusImpl", () => {
     await verifyRunStatusImpl({ github, context, core, checkRunName: "checkRunName", workflowName: "workflowName" });
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(core.notice).toHaveBeenCalledWith(
-      "No completed workflow run with name: workflowName. Ending with success status.",
+      "No completed workflow run with name: workflowName. Not enough information to judge success or failure. Ending with success status.",
     );
   });
 

@@ -73,7 +73,7 @@ export async function verifyRunStatusImpl({github, context, core, checkRunName, 
         return;
       }
 
-      core.notice(`No completed check run with name: ${checkRunName}. Ending with success status.`);
+      core.notice(`No completed check run with name: ${checkRunName}. Not enough information to judge success or failure. Ending with success status.`);
       return;
     }
 
@@ -92,7 +92,7 @@ export async function verifyRunStatusImpl({github, context, core, checkRunName, 
   } else {
     const workflowRuns = await getWorkflowRuns(github, context, workflowName, head_sha);
     if (workflowRuns.length === 0) {
-      core.notice(`No completed workflow run with name: ${workflowName}. Ending with success status.`);
+      core.notice(`No completed workflow run with name: ${workflowName}. Not enough information to judge success or failure. Ending with success status.`);
       return;
     }
 
