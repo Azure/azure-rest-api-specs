@@ -286,7 +286,7 @@ directive:
     reason: there is no availability set naming requirement. It only follows ARM resource naming requirement.
   - from: ComputeRP.json
     where: $.definitions.Expand
-    transform: $["x-ms-enum"] = "ExpandType"
+    transform: $["x-ms-enum"].name = "ExpandType"
 
 suppressions:
   - code: OperationsAPIImplementation
