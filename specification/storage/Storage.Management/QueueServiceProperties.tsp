@@ -67,7 +67,7 @@ interface QueueServices {
        * Optional, a maximum number of queues that should be included in a list queue response
        */
       @query("$maxpagesize")
-      $maxpagesize?: string;
+      $maxpagesize?: int32;
 
       /**
        * Optional, When specified, only the queues with a name starting with the given filter will be listed.
