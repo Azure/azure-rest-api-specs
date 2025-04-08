@@ -2,11 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/keyvault"
   "dependencies":
-    "additionalDirectories":
-      - "specification/keyvault/Security.KeyVault.BackupRestore/"
-      - "specification/keyvault/Security.KeyVault.Common/"
-      - "specification/keyvault/Security.KeyVault.RBAC/"
-      - "specification/keyvault/Security.KeyVault.Settings/"
     default: ""
 
 emit:
@@ -27,7 +22,7 @@ options:
     "basic-setup-py": true
     "package-version": "4.5.0b1"
     "package-dir": "azure-keyvault-administration"
-    "package-name": "azure-keyvault-administration"
+    "namespace": "azure.keyvault.administration"
     "output-path": "./azure/keyvault/administration/_generated"
   "@azure-tools/typespec-java":
     flavor: azure
@@ -59,3 +54,9 @@ options:
       name: "@azure/keyvault-admin"
       description: "Azure Key Vault Administration"
     flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/keyvault/Security.KeyVault.BackupRestore/"
+      - "specification/keyvault/Security.KeyVault.Common/"
+      - "specification/keyvault/Security.KeyVault.RBAC/"
+      - "specification/keyvault/Security.KeyVault.Settings/"
