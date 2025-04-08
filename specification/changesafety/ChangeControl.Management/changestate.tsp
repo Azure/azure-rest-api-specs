@@ -254,14 +254,14 @@ model InlineArtifactContent {
 model ArmOperationArtifactContent {
   #suppress "deprecated" "back compat"
   @removed(Versions.v2025_03_01_preview)
-  @doc("Arm Operation array.")
+  @doc("Arm Operation Array.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @renamedFrom(Versions.v2025_03_01_preview, "operations")
   @Azure.ResourceManager.identifiers(#["resourceId"])
   operationsOld: ArmOperationResource[];
 
   @added(Versions.v2025_03_01_preview)
-  @doc("Arm Operation array.")
+  @doc("Arm Operation Array.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @Azure.ResourceManager.identifiers(#["uri"])
   operations: ArmResourceOperation[];
