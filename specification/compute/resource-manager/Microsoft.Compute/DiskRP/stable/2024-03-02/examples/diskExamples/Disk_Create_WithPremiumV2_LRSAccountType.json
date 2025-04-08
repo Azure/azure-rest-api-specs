@@ -20,24 +20,6 @@
     }
   },
   "responses": {
-    "202": {
-      "body": {
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
-        "properties": {
-          "creationData": {
-            "createOption": "Empty"
-          },
-          "diskSizeGB": 200,
-          "provisioningState": "Updating"
-        },
-        "location": "West US",
-        "name": "myPremiumV2Disk",
-        "sku": {
-          "name": "PremiumV2_LRS",
-          "tier": "Premium"
-        }
-      }
-    },
     "200": {
       "body": {
         "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
@@ -55,6 +37,26 @@
           "tier": "Premium"
         }
       }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDisk",
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myPremiumV2Disk",
+        "sku": {
+          "name": "PremiumV2_LRS",
+          "tier": "Premium"
+        }
+      }
     }
-  }
+  },
+  "operationId": "Disks_CreateOrUpdate",
+  "title": "create a managed disk with premium v2 account type."
 }
