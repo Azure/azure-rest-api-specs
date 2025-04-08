@@ -17,6 +17,14 @@ import "@azure-tools/typespec-client-generator-core";
 using Microsoft.EventGrid.SystemEvents;
 using Azure.ClientGenerator.Core;
 
+@@clientName(ApiManagementNearExpiryGatewayTokenProperties.expiredAtUtc,
+  "expiresOn",
+  "autorest"
+);
+@@clientName(ApiManagementExpiredGatewayTokenProperties.expiredAtUtc,
+  "expiresOn",
+  "autorest"
+);
 @@clientName(AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",
   "autorest"
