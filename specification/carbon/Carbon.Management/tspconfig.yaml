@@ -5,6 +5,41 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/main.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-carbonoptimization"
+    package-name: "azure-mgmt-carbonoptimization"
+    namespace: "azure.mgmt.carbonoptimization"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.CarbonOptimization"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    is-modular-library: true
+    generate-metadata: true
+    experimental-extensible-enums: true
+    package-dir: "arm-carbonoptimization"
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-carbonoptimization"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-mgmt-carbonoptimization"
+    namespace: "com.microsoft.azure.management.carbonoptimization"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/carbonoptimization"
+    package-dir: "armcarbonoptimization"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
