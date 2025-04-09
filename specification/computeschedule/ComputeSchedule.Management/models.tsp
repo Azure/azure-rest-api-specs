@@ -451,7 +451,7 @@ model ExecuteCreateRequest {
   resourceConfigParameters: ResourceProvisionPayload;
 
   @doc("The execution parameters for the request")
-  executionParameters?: ExecutionParameters;  
+  executionParameters?: ExecutionParameters;
   @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string;
@@ -501,7 +501,6 @@ model ExecuteDeleteRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
   @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string;
