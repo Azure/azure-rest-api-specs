@@ -43,9 +43,14 @@ input-file:
   - Microsoft.MachineLearningServices/preview/2025-04-01-preview/workspaceRP.json
 suppressions:
   - code: PutResponseCodes
-    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer.
+    reason: Service already using 202 response code for all the previous existing managed network APIs.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Service already using response pattern without provisioning state for all previous existing outbound rules APIs.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
 ```
 
