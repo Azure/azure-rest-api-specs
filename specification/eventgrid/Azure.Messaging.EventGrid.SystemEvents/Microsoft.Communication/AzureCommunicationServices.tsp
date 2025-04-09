@@ -8,7 +8,7 @@ model AcsIncomingCallEventData {
   /** The communication identifier of the target user. */
   to: CommunicationIdentifierModel;
 
-  /** The communication identifier of the user who initialized the call. */
+  /** The communication identifier of the user who initiated the call. */
   from: CommunicationIdentifierModel;
 
   /** The Id of the server call */
@@ -1116,6 +1116,7 @@ model AcsChatMessageEventInThreadBaseProperties
   type: string;
 
   /** The version of the message */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   version: int64;
 }
 
