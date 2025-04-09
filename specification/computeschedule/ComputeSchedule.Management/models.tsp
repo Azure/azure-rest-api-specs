@@ -319,9 +319,9 @@ model SubmitDeallocateRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("The response from a deallocate request")
@@ -352,7 +352,7 @@ model SubmitStartRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string; //making it optional in API version, we want to leverage ARM correlationID for tracking
 }
@@ -385,7 +385,7 @@ model SubmitHibernateRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string;
 }
@@ -415,7 +415,7 @@ model ExecuteDeallocateRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string;
 }
@@ -427,7 +427,7 @@ model ExecuteHibernateRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string;
 }
@@ -439,7 +439,7 @@ model ExecuteStartRequest {
 
   @doc("The resources for the request")
   resources: Resources;
-
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string;
 }
@@ -451,8 +451,7 @@ model ExecuteCreateRequest {
   resourceConfigParameters: ResourceProvisionPayload;
 
   @doc("The execution parameters for the request")
-  executionParameters?: ExecutionParameters;
-
+  executionParameters?: ExecutionParameters;  
   @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string;
@@ -513,7 +512,7 @@ model ExecuteDeleteRequest {
 model GetOperationStatusRequest {
   @doc("The list of operation ids to get the status of")
   operationIds: Array<string>;
-
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string;
 }
@@ -530,7 +529,7 @@ model GetOperationStatusResponse {
 model CancelOperationsRequest {
   @doc("The list of operation ids to cancel operations on")
   operationIds: Array<string>;
-
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
   correlationid?: string;
 }
