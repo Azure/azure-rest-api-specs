@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-10-27",
+    "version": "2025-03-01-preview",
     "title": "appliances",
     "description": "The appliances Rest API spec."
   },
@@ -288,8 +288,11 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create/Update Appliance": {
-            "$ref": "./examples/AppliancesCreate_Update.json"
+          "Create Appliance": {
+            "$ref": "./examples/AppliancesCreate.json"
+          },
+          "Update Appliance": {
+            "$ref": "./examples/AppliancesUpdate.json"
           }
         }
       },
@@ -569,6 +572,26 @@
         "modelAsString": true
       }
     },
+    "DnsConfiguration": {
+      "description": "Contains DNS information about the Appliance",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the DNS configuration.",
+          "type": "string"
+        }
+      }
+    },
+    "GatewayConfiguration": {
+      "description": "Contains Arc Gateway information about the Appliance",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the Arc Gateway configuration.",
+          "type": "string"
+        }
+      }
+    },
     "HybridConnectionConfig": {
       "description": "Contains the REP (rendezvous endpoint) and “Listener” access token from notification service (NS).",
       "type": "object",
@@ -621,6 +644,31 @@
             "name": "ResourceIdentityType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "NetworkProfile": {
+      "description": "Contains network information about the Appliance",
+      "type": "object",
+      "properties": {
+        "dnsConfiguration": {
+          "$ref": "#/definitions/DnsConfiguration"
+        },
+        "gatewayConfiguration": {
+          "$ref": "#/definitions/GatewayConfiguration"
+        },
+        "proxyConfiguration": {
+          "$ref": "#/definitions/ProxyConfiguration"
+        }
+      }
+    },
+    "ProxyConfiguration": {
+      "description": "Contains proxy information about the Appliance",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the proxy configuration.",
+          "type": "string"
         }
       }
     },
@@ -1021,6 +1069,9 @@
               }
             }
           }
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile"
         },
         "provisioningState": {
           "description": "The current deployment or provisioning state, which only appears in the response.",

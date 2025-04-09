@@ -3,19 +3,31 @@
     "api-version": "2025-03-01-preview",
     "subscriptionId": "11111111-2222-3333-4444-555555555555",
     "resourceGroupName": "testresourcegroup",
-    "resourceName": "appliance01"
+    "resourceName": "appliance01",
+    "identity": {
+      "type": "SystemAssigned"
+    },
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "distro": "AKSEdge",
+        "infrastructureConfig": {
+          "provider": "VMWare"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ResourceConnector/appliances/appliance01",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/providers/Microsoft.ResourceConnector/appliances/appliance01",
         "name": "appliance01",
         "type": "Microsoft.ResourceConnector/appliances",
         "location": "West US",
         "properties": {
           "distro": "AKSEdge",
           "version": "1.0.1",
-          "provisioningState": "Succeeded",
+          "provisioningState": "Updating",
           "status": "Running",
           "publicKey": "xxxxxxxx",
           "infrastructureConfig": {
