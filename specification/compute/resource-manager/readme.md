@@ -377,7 +377,7 @@ These settings apply only when `--tag=package-2024-11-04` is specified on the co
 
 ```yaml $(tag) == 'package-2024-11-04'
 input-file:
- - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
+  - Microsoft.Compute/ComputeRP/stable/2024-07-01/computeRPCommon.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineScaleSet.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachine.json
   - Microsoft.Compute/ComputeRP/stable/2024-07-01/virtualMachineImage.json
