@@ -1101,6 +1101,53 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:interruptAudioAndAnnounce": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Plays audio to participants in the call.",
+        "description": "Plays audio to participants in the call.",
+        "operationId": "CallMedia_InterruptAudioAndAnnounce",
+        "parameters": [
+          {
+            "name": "callConnectionId",
+            "in": "path",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "interruptRequest",
+            "in": "body",
+            "description": "play request payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InterruptAudioAndAnnounceRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "The service has accepted the interrupt audio request and will begin processing it. You will receive either PlayCompleted or PlayFailed event at your specified callback URI to update you on the status of the request."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_InterruptAudioAndAnnounce": {
+            "$ref": "./examples/CallMedia_InterruptAudioAndAnnounce.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}/participants": {
       "get": {
         "tags": [
@@ -1705,17 +1752,43 @@
         }
       }
     },
-    "AudioFormat": {
-      "description": "Gets or sets the audio format used for encoding, including sample rate and channel type. The default is Pcm16KMono.",
-      "enum": [
-        "pcm16KMono",
-        "pcm24KMono"
+    "WebSocketMediaStreamingOptions": {
+      "description": "Represents the options for WebSocket transport.",
+      "required": [
+        "transportType",
+        "audioChannelType"
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "AudioFormat",
-        "modelAsString": true
-      }
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaStreamingOptions"
+        }
+      ],
+      "properties": {
+        "transportUrl": {
+          "description": "The transport URL for media streaming.",
+          "type": "string"
+        },
+        "contentType": {
+          "$ref": "#/definitions/MediaStreamingContentType"
+        },
+        "startMediaStreaming": {
+          "description": "A value indicating whether the media streaming should start immediately after the call is answered.",
+          "type": "boolean"
+        },
+        "enableBidirectional": {
+          "description": "A value indicating whether bidirectional streaming is enabled.",
+          "type": "boolean"
+        },
+        "audioFormat": {
+          "$ref": "#/definitions/AudioFormat"
+        },
+        "enableDtmfTones": {
+          "description": "A value that indicates whether to stream the DTMF tones.",
+          "type": "boolean"
+        }
+      },
+      "x-ms-discriminator-value": "websocket"
     },
     "CommunicationIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
@@ -1737,7 +1810,7 @@
       }
     },
     "StreamingTransportType": {
-      "description": "The kind of streaming transport.",
+      "description": "The type of streaming transport.",
       "enum": [
         "websocket"
       ],
@@ -1748,7 +1821,7 @@
       }
     },
     "MediaStreamingAudioChannelType": {
-      "description": "Gets or sets the audio channel type to stream, e.g., unmixed audio, mixed audio.",
+      "description": "The audio channel type to stream, e.g., unmixed audio, mixed audio.",
       "enum": [
         "mixed",
         "unmixed"
@@ -1760,7 +1833,7 @@
       }
     },
     "MediaStreamingOptions": {
-      "description": "Configuration options for media streaming.",
+      "description": "Options for media streaming.",
       "required": [
         "transportType",
         "audioChannelType"
@@ -1777,7 +1850,7 @@
       "discriminator": "transporttype"
     },
     "TranscriptionOptions": {
-      "description": "Configuration options for live transcription.",
+      "description": "Options for live transcription.",
       "required": [
         "transportType",
         "locale"
@@ -1794,42 +1867,56 @@
       },
       "discriminator": "transporttype"
     },
-    "WebSocketMediaStreamingOptions": {
+    "WebSocketTranscriptionOptions": {
       "description": "Represents the options for WebSocket transport.",
       "required": [
         "transportType",
-        "audioChannelType"
+        "locale"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/MediaStreamingOptions"
+          "$ref": "#/definitions/TranscriptionOptions"
         }
       ],
       "properties": {
         "transportUrl": {
-          "description": "Gets or sets the transport URL for media streaming.",
+          "description": "The URL used for live transcription transport.",
           "type": "string"
         },
-        "contentType": {
-          "$ref": "#/definitions/MediaStreamingContentType"
+        "speechRecognitionModelEndpointId": {
+          "description": "The endpoint ID where the custom speech recognition model is deployed.",
+          "type": "string"
         },
-        "startMediaStreaming": {
-          "description": "Gets or sets a value indicating whether the media streaming should start immediately after the call is answered.",
+        "speechModelEndpointId": {
+          "description": "Endpoint where the custom model was deployed.",
+          "type": "string"
+        },
+        "startTranscription": {
+          "description": "Indicates whether the transcription should start immediately after the call is answered.",
           "type": "boolean"
         },
-        "enableBidirectional": {
-          "description": "Gets or sets a value indicating whether bidirectional streaming is enabled.",
+        "enableIntermediateResults": {
+          "description": "Enables intermediate results for the transcribed speech.",
           "type": "boolean"
-        },
-        "audioFormat": {
-          "$ref": "#/definitions/AudioFormat"
         }
       },
       "x-ms-discriminator-value": "websocket"
     },
     "MicrosoftTeamsUserIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsUserIdentifierModel"
+    },
+    "AudioFormat": {
+      "description": "The audio format used for encoding, including sample rate and channel type. The default is Pcm16KMono.",
+      "enum": [
+        "pcm16KMono",
+        "pcm24KMono"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AudioFormat",
+        "modelAsString": true
+      }
     },
     "MicrosoftTeamsAppIdentifierModel": {
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/MicrosoftTeamsAppIdentifierModel"
@@ -2001,6 +2088,10 @@
           "items": {
             "$ref": "#/definitions/TranscriptionResultType"
           }
+        },
+        "locale": {
+          "description": "Gets or Sets locale of the transcription.",
+          "type": "string"
         }
       }
     },
@@ -2307,6 +2398,10 @@
         "loop": {
           "description": "The option to play the provided audio source in loop when set to true",
           "type": "boolean"
+        },
+        "interruptHoldAudio": {
+          "description": "If set, hold audio will be interrupted, then this request will be played, and then the hold audio will be resumed.",
+          "type": "boolean"
         }
       }
     },
@@ -2384,12 +2479,16 @@
           "description": "Defines Locale for the transcription e,g en-US",
           "type": "string"
         },
-        "speechRecognitionModelEndpointId": {
+        "speechModelEndpointId": {
           "description": "Endpoint where the custom model was deployed.",
           "type": "string"
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
+          "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -2400,20 +2499,21 @@
         "operationContext": {
           "description": "The value to identify context of the operation.",
           "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
         }
       }
     },
     "UpdateTranscriptionRequest": {
-      "required": [
-        "locale"
-      ],
       "type": "object",
       "properties": {
         "locale": {
           "description": "Sets new locale for transcription.",
           "type": "string"
         },
-        "speechRecognitionModelEndpointId": {
+        "speechModelEndpointId": {
           "description": "Sets Endpoint id where the custom model was deployed.",
           "type": "string"
         },
@@ -2702,6 +2802,10 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        },
+        "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
+          "type": "string"
         }
       }
     },
@@ -2724,6 +2828,30 @@
         "operationCallbackUri": {
           "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
+        },
+        "operationContext": {
+          "description": "The value to identify context of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "InterruptAudioAndAnnounceRequest": {
+      "required": [
+        "playSources",
+        "playTo"
+      ],
+      "type": "object",
+      "properties": {
+        "playSources": {
+          "description": "The source of the audio to be played.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlaySource"
+          }
+        },
+        "playTo": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The list of call participants play provided audio to.\r\nPlays to everyone in the call when not provided."
         },
         "operationContext": {
           "description": "The value to identify context of the operation.",
@@ -4307,38 +4435,6 @@
           "description": "Contains the resulting SIP code, sub-code and message."
         }
       }
-    },
-    "WebSocketTranscriptionOptions": {
-      "description": "Represents the options for WebSocket transport.",
-      "required": [
-        "transportType",
-        "locale"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TranscriptionOptions"
-        }
-      ],
-      "properties": {
-        "transportUrl": {
-          "description": "The URL used for live transcription transport.",
-          "type": "string"
-        },
-        "speechRecognitionModelEndpointId": {
-          "description": "The endpoint ID where the custom speech recognition model is deployed.",
-          "type": "string"
-        },
-        "startTranscription": {
-          "description": "Indicates whether the transcription should start immediately after the call is answered.",
-          "type": "boolean"
-        },
-        "enableIntermediateResults": {
-          "description": "Enables intermediate results for the transcribed speech.",
-          "type": "boolean"
-        }
-      },
-      "x-ms-discriminator-value": "websocket"
     }
   },
   "parameters": {
