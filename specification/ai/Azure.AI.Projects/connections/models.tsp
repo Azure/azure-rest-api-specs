@@ -49,9 +49,9 @@ model ConnectionWithApiKeyAuth extends Connection {
   @visibility(Lifecycle.Read)
   authType: AuthenticationType.apiKey;
 
-  @doc("The credentials for api-key authentication")
+  @doc("The credentials for API-key authentication")
   @visibility(Lifecycle.Read)
-  credentials: CredentialsApiKeyAuth;
+  credentials?: CredentialsApiKeyAuth;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -82,7 +82,7 @@ model ConnectionWithSASAuth extends Connection {
 
   @doc("The credentials for SAS authentication")
   @visibility(Lifecycle.Read)
-  credentials: CredentialsSASAuth;
+  credentials?: CredentialsSASAuth;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
