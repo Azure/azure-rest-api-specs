@@ -2349,6 +2349,9 @@ model VirtualMachineScaleSetStorageProfile {
   @identifiers(#["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
+  /**
+   * Specifies the disk controller type configured for the virtual machines in the scale set. Minimum api-version: 2022-08-01
+   */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: DiskControllerTypes;
 }
@@ -3679,6 +3682,9 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   @identifiers(#["name", "lun"])
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
+  /**
+   * Specifies the disk controller type configured for the virtual machines in the scale set. **Note:** You need to deallocate the virtual machines in the scale set before updating its disk controller type based on the upgrade mode configured for the scale set. Minimum api-version: 2022-08-01
+   */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: DiskControllerTypes;
 }
