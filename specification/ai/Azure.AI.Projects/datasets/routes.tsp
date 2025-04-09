@@ -57,4 +57,20 @@ interface Datasets
     PendingUploadResponse
   >;
   */
+
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get download sas for dataset version.")
+  @post
+  @route("/datasets/{name}/versions/{version}/credentials")
+  fetchCredentials(
+    @doc("Container name.")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
+    @path
+    name: string,
+
+    @doc("Version identifier.")
+    @path
+    version: string
+  ): AssetCredentialResponse;
 }
