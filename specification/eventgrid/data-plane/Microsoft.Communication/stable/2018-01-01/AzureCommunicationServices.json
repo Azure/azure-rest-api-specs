@@ -2017,7 +2017,7 @@
             "MicrosoftInternal"
           ],
           "x-ms-enum": {
-            "name": "AcsCallEndedParticipantKind",
+            "name": "AcsCallEndedByKind",
             "modelAsString": true,
             "values": [
               {
@@ -2104,7 +2104,13 @@
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "type",
+        "version",
+        "senderCommunicationIdentifer"
+      ]
     },
     "AcsChatMessageEventInThreadBaseProperties": {
       "description": "Schema of common properties of all thread-level chat message events",

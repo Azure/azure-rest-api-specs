@@ -583,10 +583,10 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.AcsRouterUpdatedWorkerProperty,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedParticipantKind,
+@@usage(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind,
   Usage.output
 );
-@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedParticipantKind,
+@@access(Microsoft.EventGrid.SystemEvents.AcsCallEndedByKind,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
