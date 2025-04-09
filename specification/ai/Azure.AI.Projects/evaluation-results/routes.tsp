@@ -46,4 +46,25 @@ interface EvaluationResults
     PendingUploadRequest,
     PendingUploadResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Enable downloading json.")
+  @route("evaluationResult/{name}/versions/{version}/credentials")
+  @post
+  FetchAssetCredentials is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the resource")
+      @path
+      name: string;
+
+      @doc("Version of the resource")
+      @path
+      version: string;
+
+      @doc("Input asset to fetch credentials for")
+      @body
+      AssetCredentialRequest: AssetCredentialRequest;
+    },
+    AssetCredentialResponse
+  >;
 }
