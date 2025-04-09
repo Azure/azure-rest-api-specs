@@ -80,7 +80,7 @@ model BrokerProperties {
 @added(Versions.`2025-07-01-preview`)
 model Persistence {
   @doc("Dynamic settings of the persistence.")
-  dynamicSettings?: DynamicSettings;
+  dynamicSettings?: DynamicPersistenceSettings;
 
   @doc("The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template If a PVC template isn't specified Then local-path provisioner is requested with this size limit Required.")
   maxSize: string;
@@ -95,10 +95,14 @@ model Persistence {
   };
 
   @doc("Controls which topic's retained messages should be persisted to disk.")
-  retain?: RetainmentPolicy;
+  retain?: TopicRetainmentPolicy;
+
+  @doc("Controls which keys should be persisted to disk for the state store")
+  stateStore?: StateStoreRetainmentPolicy;
 }
 
-enum RetainmentMode {
+@added(Versions.`2025-07-01-preview`)
+union RetainmentMode {
   string,
 
   @doc("Persist all 'retain' messages.")
@@ -112,21 +116,88 @@ enum RetainmentMode {
 }
 
 @doc("Retainment policy properties")
-@discriminator("mode")
 @added(Versions.`2025-07-01-preview`)
-model RetainmentPolicy {
+@discriminator("mode")
+model TopicRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentMode;
+}
+
+@doc("Custom Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+model CustomTopicRetainmentPolicy extends TopicRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentMode.Custom;
+
+  @doc("Settings for the retainment policy.")
+  retainSettings?: TopicRetainmentSettings;
+}
+
+@doc("Retainment settings properties")
+@added(Versions.`2025-07-01-preview`)
+model TopicRetainmentSettings {
+  @doc("List of topics under which retained messages would be persisted to disk Wildcards # and + supported")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  topics?: string[];
+
+  @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)")
+  dynamic?: DynamicRetainmentSettings;
+}
+
+@doc("Dynamic settings of the persistence.")
+@added(Versions.`2025-07-01-preview`)
+model DynamicRetainmentSettings {
+  @doc("The mode of the retainment policy.")
+  mode?: OperationalMode;
+}
+
+@doc("State Store Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+@discriminator("mode")
+model StateStoreRetainmentPolicy {
   @doc("The mode of the retainment policy.")
   mode: RetainmentMode;
 
   @doc("Settings for the retainment policy.")
-  retainSettings?: RetainmentSettings;
+  stateStoreSettings?: StateStoreRetainmentSettings;
+}
+
+@doc("Custom State Store Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+model CustomStateStoreRetainmentPolicy extends StateStoreRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentMode.Custom;
+
+  @doc("Settings for the retainment policy.")
+  stateStoreSettings?: StateStoreRetainmentSettings;
+}
+
+@doc("State Store Retainment settings properties")
+@added(Versions.`2025-07-01-preview`)
+model StateStoreRetainmentSettings {
+  @doc("List of key and key type to persist to disk")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  stateStoreResources?: StateStoreRetainmentResources[];
+
+  @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)")
+  dynamic?: DynamicRetainmentSettings;
+}
+
+@doc("State Store Retainment resources properties")
+@added(Versions.`2025-07-01-preview`)
+model StateStoreRetainmentResources {
+  @doc("The key to persist to disk")
+  keyType: string;
+
+  @doc("List of keys to persist to disk, required")
+  keys: string[];
 }
 @doc("""
   Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH 
   Optional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property "aio-persistence"
   """)
 @added(Versions.`2025-07-01-preview`)
-model DynamicSettings {
+model DynamicPersistenceSettings {
   @doc("The user property key to enable persistence.")
   userPropertyKey?: string;
 
