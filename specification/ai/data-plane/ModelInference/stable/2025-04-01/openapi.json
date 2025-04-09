@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AI Model Inference",
-    "version": "2024-05-01-preview",
+    "version": "2025-04-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -314,6 +314,13 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "description": "The model deployment name you want information from.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1181,6 +1188,11 @@
           "x-nullable": true,
           "readOnly": true
         },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response",
+          "readOnly": true
+        },
         "tool_calls": {
           "type": "array",
           "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
@@ -1328,6 +1340,12 @@
           "description": "The number of tokens corresponding to audio input.",
           "readOnly": true
         },
+        "reasoning_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to reasoning.",
+          "readOnly": true
+        },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
@@ -1337,6 +1355,7 @@
       },
       "required": [
         "audio_tokens",
+        "reasoning_tokens",
         "total_tokens"
       ]
     },
@@ -1845,6 +1864,11 @@
         "content": {
           "type": "string",
           "description": "The content of the message.",
+          "readOnly": true
+        },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response",
           "readOnly": true
         },
         "tool_calls": {
