@@ -27,7 +27,7 @@ interface LocationsUtilization {
   list(
     ...ApiVersionParameter,
     ...LocationResourceParameter,
-  ): ArmResponse<ClusterList> | ErrorResponse;
+  ): ArmResponse<ClusterList> | UtilizationErrorResponse;
 }
 
 @armResourceOperations
