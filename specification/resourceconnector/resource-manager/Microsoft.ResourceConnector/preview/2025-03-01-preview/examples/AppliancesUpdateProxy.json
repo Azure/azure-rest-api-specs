@@ -11,15 +11,21 @@
       "location": "West US",
       "properties": {
         "distro": "AKSEdge",
+        "publicKey": "xxxxxxxx",
         "infrastructureConfig": {
           "provider": "VMWare"
+        },
+        "networkProfile": {
+          "proxyConfiguration": {
+            "version": "latest"
+          }
         }
       }
     }
   },
-  "description": "HTTP 201 is returned for a successful create operation. HTTP 200 is returned for a successful update operation.",
+  "description": "HTTP 200 is returned when the proxy update request is accepted. Check the async operation link for the operation status. HTTP 201 is not returned because this operation requires the resource to already exist.",
   "responses": {
-    "201": {
+    "200": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ResourceConnector/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/default?api-version=2025-03-01-preview"
       },
@@ -30,14 +36,16 @@
         "location": "West US",
         "properties": {
           "distro": "AKSEdge",
-          "provisioningState": "Creating",
-          "status": "WaitingForHeartbeat",
+          "version": "1.0.1",
+          "provisioningState": "Updating",
+          "status": "NetworkProxyUpdatePreparing",
+          "publicKey": "xxxxxxxx",
           "infrastructureConfig": {
             "provider": "VMWare"
           },
           "networkProfile": {
             "proxyConfiguration": {
-              "version": "1744221145"
+              "version": "1750464301"
             },
             "dnsConfiguration": {
               "version": "1744221145"
@@ -58,11 +66,12 @@
           "createdAt": "2025-04-09T17:52:25.0928001Z",
           "lastModifiedBy": "string",
           "lastModifiedByType": "Application",
-          "lastModifiedAt": "2025-04-09T17:52:25.0928001Z"
+          "lastModifiedAt": "2025-06-21T00:05:15.0000000Z"
         }
       }
     },
-    "200": {
+    "201": {
+      "description": "HTTP 201 will not be returned for this operation as it is an update operation. This example is provided only to avoid the RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE lint. An error will be returned because the resource does not exist and the public key is set (must set public key to empty for create operation).",
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ResourceConnector/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/default?api-version=2025-03-01-preview"
       },
@@ -73,10 +82,8 @@
         "location": "West US",
         "properties": {
           "distro": "AKSEdge",
-          "version": "1.0.1",
-          "provisioningState": "Updating",
-          "status": "Running",
-          "publicKey": "xxxxxxxx",
+          "provisioningState": "Creating",
+          "status": "WaitingForHeartbeat",
           "infrastructureConfig": {
             "provider": "VMWare"
           },
