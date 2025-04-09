@@ -4,9 +4,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 namespace Microsoft.IoTOperations;
 
 /**
@@ -56,9 +55,83 @@ model BrokerProperties {
   @doc("Memory profile of Broker.")
   memoryProfile?: BrokerMemoryProfile = BrokerMemoryProfile.Medium;
 
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @doc("The persistence settings of the Broker.")
+  @added(Versions.`2025-07-01-preview`)
+  persistence?: Persistence;
+
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+@doc("""
+  Disk persistence configuration.
+  
+  When persistence is enabled, certain items (non-performance-critical data) selected for persistence will reside only on disk. Below are the affected items: 
+  
+  - Retained messages will be stored on disk only. 
+  - WILL messages will be stored on disk only. 
+  - DSS key/value pairs will be stored on disk only, except for performance-critical items like timed locks, which remain in both disk and memory for improved performance.
+  
+  Optional. Everything is in-memory if not set. 
+  Note: if configured, all MQTT session states are written to disk.
+  """)
+@added(Versions.`2025-07-01-preview`)
+model Persistence {
+  @doc("Dynamic settings of the persistence.")
+  dynamicSettings?: DynamicSettings;
+
+  @doc("The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template If a PVC template isn't specified Then local-path provisioner is requested with this size limit Required.")
+  maxSize: string;
+
+  @doc("""
+    Use the specified persistent volume claim template to mount a persistent volume Same object as in diskBackedMessageBuffer, but with a limitation that access modes field must be set to `ReadWriteOncePod`.
+    
+    If unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class.
+    """)
+  persistentVolumeClaimSpec?: VolumeClaimSpec = #{
+    accessModes: #["ReadWriteOncePod"],
+  };
+
+  @doc("Controls which topic's retained messages should be persisted to disk.")
+  retain?: RetainmentPolicy;
+}
+
+enum RetainmentMode {
+  string,
+
+  @doc("Persist all 'retain' messages.")
+  All: "All",
+
+  @doc("Persist no messages.")
+  None: "None",
+
+  @doc("Persist only the specified topics.")
+  Custom: "Custom",
+}
+
+@doc("Retainment policy properties")
+@discriminator("mode")
+@added(Versions.`2025-07-01-preview`)
+model RetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentMode;
+
+  @doc("Settings for the retainment policy.")
+  retainSettings?: RetainmentSettings;
+}
+@doc("""
+  Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH 
+  Optional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property "aio-persistence"
+  """)
+@added(Versions.`2025-07-01-preview`)
+model DynamicSettings {
+  @doc("The user property key to enable persistence.")
+  userPropertyKey?: string;
+
+  @doc("The user property value to enable persistence.")
+  userPropertyValue?: string;
 }
 
 @doc("Broker Advanced Settings")
@@ -209,6 +282,27 @@ model VolumeClaimResourceRequirements {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")
   requests?: Record<string>;
+
+  @doc("""
+    Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
+    
+    This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
+    
+    This field is immutable. It can only be set for containers.
+    """)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @added(Versions.`2025-07-01-preview`)
+  claims?: VolumeClaimResourceRequirementsClaims[];
+}
+
+@doc("VolumeClaimResourceRequirementsClaims properties")
+@added(Versions.`2025-07-01-preview`)
+model VolumeClaimResourceRequirementsClaims {
+  @doc("Name of the resource. This must match the name of a resource in spec.resourceClaims.")
+  name: string;
+
+  @doc("The amount of compute resources required.")
+  resources?: VolumeClaimResourceRequirements;
 }
 
 @doc("VolumeClaimSpecSelector properties")

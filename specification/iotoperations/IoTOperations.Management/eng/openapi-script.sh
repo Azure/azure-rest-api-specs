@@ -87,8 +87,8 @@ npx tsp compile IoTOperations.Management/.
 npx tsv IoTOperations.Management/.
 
 # Prettier
-echo "Running prettier..."
-npx prettier --write **/*.json
+# echo "Running prettier..."
+# npx prettier --write **/*.json
 
 echo "Completed generating the specs and the examples!"
 echo "Done!"
