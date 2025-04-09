@@ -5,10 +5,28 @@ import "./models.tsp";
 import "../Security.KeyVault.Common/common.tsp";
 
 using Azure.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace KeyVault;
+
+alias LroResponseStatusAndHeaders = {
+  /**
+   * Restore of the Security Domain started.
+   */
+  @statusCode _: 202;
+
+  /**
+   * The URI to poll for completion status.
+   */
+  @pollingLocation
+  @header("Azure-AsyncOperation")
+  azureAsyncOperation?: string;
+
+  /**
+   * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
+   */
+  @header("Retry-After") retryAfter?: int32;
+};
 
 interface HsmSecurityDomain {
   /**
@@ -37,24 +55,11 @@ interface HsmSecurityDomain {
       /**
        * The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing a public key in JWK format.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
       @body
-      CertificateInfoObject: CertificateInfoObject;
+      certificateInfoObject: CertificateInfoObject;
     },
     {
-      @statusCode _: 202;
-
-      /**
-       * The URI to poll for completion status.
-       */
-      @pollingLocation
-      @header("Azure-AsyncOperation")
-      azureAsyncOperation?: string;
-
-      /**
-       * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
-       */
-      @header("Retry-After") retryAfter?: int32;
+      ...LroResponseStatusAndHeaders;
 
       /**
        * The response contains the Security Domain that is being confirmed.
@@ -90,27 +95,11 @@ interface HsmSecurityDomain {
       /**
        * The Security Domain to be restored.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original casing"
       @body
-      security_domain: SecurityDomainObject;
+      securityDomain: SecurityDomainObject;
     },
     {
-      /**
-       * Restore of the Security Domain started.
-       */
-      @statusCode _: 202;
-
-      /**
-       * The URI to poll for completion status.
-       */
-      @pollingLocation
-      @header("Azure-AsyncOperation")
-      azureAsyncOperation?: string;
-
-      /**
-       * The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.
-       */
-      @header("Retry-After") retryAfter?: int32;
+      ...LroResponseStatusAndHeaders;
 
       /**
        * The status of the Security Domain restore operation.
