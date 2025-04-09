@@ -1421,6 +1421,47 @@
         }
       }
     },
+    "/providers/NewRelic.Observability/saas/getSaaSInfo": {
+      "get": {
+        "tags": [
+          "GetSaaSInfo"
+        ],
+        "summary": "Get the saas id from the marketplace token.",
+        "operationId": "GetSaaSInfo",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "publisherId",
+            "in": "path",
+            "required": true,
+            "pattern": "^.*$",
+            "description": "PublisherId for the offer",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SaaSInfo"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetSaaSInfo": {
+            "$ref": "./examples/GetSaaSInfo.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
       "get": {
         "tags": [
@@ -3057,6 +3098,16 @@
         "nextLink": {
           "type": "string",
           "description": "The link to the next page of items"
+        }
+      }
+    },
+    "SaaSInfo": {
+      "description": "The SaaS Id for Marketplace SaaS resource",
+      "type": "object",
+      "properties": {
+        "SaaSId": {
+          "description": "The SaaS Id for Marketplace SaaS resource.",
+          "type": "string"
         }
       }
     },
