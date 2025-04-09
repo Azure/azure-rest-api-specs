@@ -267,8 +267,8 @@ export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspConfigTsOpti
     super(
       "packageDetails.name",
       "package-details.name",
-      new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/)
-    );    
+      new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/),
+    );
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
@@ -429,9 +429,47 @@ export class TspConfigCsharpAzPackageDirectorySubRule extends TspconfigEmitterOp
   }
 }
 
-export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigSubRuleBase {
+  protected emitterName: string;
   constructor() {
-    super("@azure-tools/typespec-csharp", "namespace", "{package-dir}");
+    super("namespace", "{package-dir}");
+    this.emitterName = "@azure-tools/typespec-csharp";
+  }
+  protected validate(config: any): RuleResult {
+    let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
+    for (const segment of this.keyToValidate.split(".")) {
+      if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
+        option = option![segment];
+      else
+        return this.createFailedResult(
+          `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+          `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+        );
+    }
+
+    if (option === undefined)
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+      );
+
+    const packageDir = config?.options?.[this.emitterName]?.["package-dir"];
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (packageDir !== undefined) {
+      this.expectedValue = packageDir;
+    }
+    if (!this.validateValue(actualValue, this.expectedValue)) {
+      return this.createFailedResult(
+        `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
+        `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
+      );
+    }
+
+    return { success: true };
+  }
+
+  public getPathOfKeyToValidate() {
+    return `options.${this.emitterName}.${this.keyToValidate}`;
   }
 }
 
@@ -444,15 +482,6 @@ export class TspConfigCsharpAzClearOutputFolderTrueSubRule extends TspconfigEmit
 export class TspConfigCsharpMgmtPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-csharp", "package-dir", new RegExp(/^Azure\.ResourceManager\./));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
-  }
-}
-
-export class TspConfigCsharpMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "service-dir", new RegExp(/^sdk\/.*$/));
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
@@ -487,7 +516,6 @@ export const defaultRules = [
   new TspConfigCsharpAzNamespaceEqualStringSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
   new TspConfigCsharpMgmtPackageDirectorySubRule(),
-  new TspConfigCsharpMgmtServiceDirMatchPatternSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {

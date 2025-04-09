@@ -28,7 +28,6 @@ import {
   TspConfigCsharpAzNamespaceEqualStringSubRule,
   TspConfigCsharpAzClearOutputFolderTrueSubRule,
   TspConfigCsharpMgmtPackageDirectorySubRule,
-  TspConfigCsharpMgmtServiceDirMatchPatternSubRule,
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
@@ -491,6 +490,31 @@ const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
 );
 
+const csharpAzNamespaceWithPackageDirTestCases: Case[] = [
+  {
+    description: `Validate @azure-tools/typespec-csharp's option: namespace with package-dir`,
+    folder: "",
+    tspconfigContent: createEmitterOptionExample(
+      "@azure-tools/typespec-csharp",
+      { key: "namespace", value: "Azure.AAA" },
+      { key: "package-dir", value: "Azure.AAA" },
+    ),
+    success: true,
+    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
+  },
+  {
+    description: `Validate @azure-tools/typespec-csharp's option: namespace is not equal package-dir`,
+    folder: "",
+    tspconfigContent: createEmitterOptionExample(
+      "@azure-tools/typespec-csharp",
+      { key: "namespace", value: "namespace" },
+      { key: "package-dir", value: "Azure.AAA" },
+    ),
+    success: false,
+    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
+  },
+];
+
 const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   "",
@@ -507,15 +531,6 @@ const csharpMgmtPackageDirTestCases = createEmitterOptionTestCases(
   "Azure.ResourceManager.AAA",
   "Azure.Management.AAA",
   [new TspConfigCsharpMgmtPackageDirectorySubRule()],
-);
-
-const csharpMgmtServiceDirTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  managementTspconfigFolder,
-  "service-dir",
-  "sdk/2/3",
-  "sd/k",
-  [new TspConfigCsharpMgmtServiceDirMatchPatternSubRule()],
 );
 
 const suppressSubRuleTestCases: Case[] = [
@@ -589,7 +604,7 @@ describe("tspconfig", function () {
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtPackageDirTestCases,
-    ...csharpMgmtServiceDirTestCases,
+    ...csharpAzNamespaceWithPackageDirTestCases,
     // suppression
     ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
