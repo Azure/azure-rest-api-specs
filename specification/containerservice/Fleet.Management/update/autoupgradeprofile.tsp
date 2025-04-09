@@ -166,6 +166,7 @@ union AutoUpgradeLastTriggerStatus {
 interface AutoUpgradeProfileOperations {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
   @useFinalStateVia("azure-async-operation")
+  @doc("Generates an update run for a given auto upgrade profile.")
   generateUpdateRun is Azure.ResourceManager.ArmResourceActionAsync<
     AutoUpgradeProfile,
     void,
