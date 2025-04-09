@@ -52,7 +52,7 @@ suppressions:
 
 ```yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
-  - preview/2025-01-01-preview/connectors.json
+  - preview/2025-05-01-preview/connectors.json
 suppressions:
   - code: PatchBodyParametersSchema
     from:
