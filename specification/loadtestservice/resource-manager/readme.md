@@ -36,7 +36,7 @@ These settings apply only when `--tag=2025-06-01-preview` is specified on the co
 ```yaml $(tag) == 'package-2025-06-01-preview'
 input-file:
   - Azure.Testing.Management/preview/2025-06-01-preview/azuretesting.json
-
+```
 
 ### Tag: package-2024-12-01-preview
 
