@@ -69,6 +69,7 @@ model DeidentificationJob {
   summary?: DeidentificationJobSummary;
 }
 
+@doc("Operation states for a de-identification job.")
 @clientName("OperationStatus", "java")
 union OperationState {
   Azure.Core.Foundations.OperationState,
