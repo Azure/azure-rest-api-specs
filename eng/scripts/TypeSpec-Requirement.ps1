@@ -3,7 +3,7 @@ param (
   [Parameter(Position = 0)]
   [string] $BaseCommitish = "HEAD^",
   [Parameter(Position = 1)]
-  [string] $TargetCommitish = "HEAD",
+  [string] $HeadCommitish = "HEAD",
   [Parameter(Position = 2)]
   [string] $SpecType = "data-plane|resource-manager",
   [string] $CheckAllUnder,
@@ -54,7 +54,7 @@ $pathsWithErrors = @()
 
 $filesToCheck = $CheckAllUnder ?
   (Get-ChildItem -Path $CheckAllUnder -Recurse -File | Resolve-Path -Relative -RelativeBasePath $repoPath | ForEach-Object { $_ -replace '\\', '/' }) :
-  (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish))
+  (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $HeadCommitish))
 
 $filesToCheck = $filesToCheck.Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
@@ -168,6 +168,14 @@ else {
 
     if ($responseStatus -eq 200) {
       LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
+
+      $notice = "Brownfield services will soon be required to convert from OpenAPI to TypeSpec. See https://aka.ms/azsdk/typespec."
+      LogNoticeForFile $file $notice
+
+      if ($env:GITHUB_OUTPUT) {
+        # Set output to be used later in /.github/workflows/TypeSpec-Requirement.yaml
+        Add-Content -Path $env:GITHUB_OUTPUT -Value "brownfield=true"
+      }
     }
     elseif ($responseStatus -eq 404) {
       LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"

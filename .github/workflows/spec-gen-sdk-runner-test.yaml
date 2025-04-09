@@ -1,0 +1,32 @@
+name: spec-gen-sdk-runner - Test
+
+on:
+  push:
+    branches:
+      - main
+      - typespec-next
+  pull_request:
+    paths:
+      - package-lock.json
+      - package.json
+      - tsconfig.json
+      - .github/workflows/_reusable-eng-tools-test.yaml
+      - .github/workflows/spec-gen-sdk-runner-test.yaml
+      - eng/tools/package.json
+      - eng/tools/tsconfig.json
+      - eng/tools/spec-gen-sdk-runner/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  specGenSdkRunner:
+    name: spec-gen-sdk-runner
+    uses: ./.github/workflows/_reusable-eng-tools-test.yaml
+    with:
+      package: spec-gen-sdk-runner
+      lint: true
+      sparse-checkout-paths: |
+        specification/common-types
+        specification/contosowidgetmanager

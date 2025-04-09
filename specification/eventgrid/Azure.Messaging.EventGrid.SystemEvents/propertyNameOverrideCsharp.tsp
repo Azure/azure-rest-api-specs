@@ -7,7 +7,6 @@ import "./Microsoft.ResourceNotifications/Resources.tsp";
 import "./Microsoft.Storage/Storage.tsp";
 import "./Microsoft.DataBox/DataBox.tsp";
 import "./Microsoft.EventGrid/EventGrid.tsp";
-import "./Microsoft.Media/MediaServices.tsp";
 import "./Microsoft.AVS/AVS.tsp";
 
 import "@azure-tools/typespec-client-generator-core";

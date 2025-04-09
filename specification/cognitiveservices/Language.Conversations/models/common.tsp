@@ -105,7 +105,7 @@ model JobState {
 
   /** job ID */
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jobId: uuid;
 
   /** last updated date and time */
@@ -388,7 +388,7 @@ model CustomResult {
 model AnalyzeConversationTask {
   /** The base class of a conversation input task. */
   @key
-  @visibility("read", "create", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
   kind: AnalyzeConversationTaskKind;
 }
 
@@ -604,7 +604,7 @@ model RegexKey extends BaseExtraInformation {
   /** The key of the regex pattern used in extracting the entity. */
   key?: string;
 
-  /** The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions. */
+  /** The .NET regex pattern used in extracting the entity. Please visit https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions. */
   regexPattern?: string;
 }
 
@@ -835,7 +835,7 @@ model AnalyzeConversationJobsInput {
 
   /** Analysis Input */
   @key
-  @visibility("read", "create", "query")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Query)
   analysisInput: MultiLanguageConversationAnalysisInput;
 
   /** Set of tasks to execute on the input conversation. */
