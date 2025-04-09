@@ -1,0 +1,57 @@
+{
+  "title": "RegisterSearch_Register",
+  "operationId": "RegisterSearch_Register",
+  "parameters": {
+    "api-version": "2024-01-31-preview",
+    "resource": {
+      "filter-lang": "cql2-json",
+      "filter": {
+        "op": "and",
+        "args": [
+          {
+            "op": "=",
+            "args": [
+              {
+                "property": "collection"
+              },
+              "maxar"
+            ]
+          }
+        ]
+      },
+      "sortby": [
+        {
+          "field": "datetime",
+          "direction": "desc"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "searchid": "e32e0b12176246816953d75e3356d613",
+        "links": [
+          {
+            "href": "https://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/api/mosaic/e32e0b12176246816953d75e3356d613/info",
+            "rel": "metadata",
+            "type": "application/json",
+            "title": "Mosaic metadata"
+          },
+          {
+            "href": "https://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/api/mosaic/e32e0b12176246816953d75e3356d613/tilejson.json",
+            "rel": "tilejson",
+            "type": "application/json",
+            "title": "Link for TileJSON"
+          },
+          {
+            "href": "https://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/api/mosaic/e32e0b12176246816953d75e3356d613/WMTSCapabilities.xml",
+            "rel": "wmts",
+            "type": "application/json",
+            "title": "Link for WMTS"
+          }
+        ]
+      }
+    }
+  }
+}
