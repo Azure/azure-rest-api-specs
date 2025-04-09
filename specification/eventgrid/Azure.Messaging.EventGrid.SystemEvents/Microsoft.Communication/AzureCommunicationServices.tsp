@@ -8,7 +8,7 @@ model AcsIncomingCallEventData {
   /** The communication identifier of the target user. */
   to: CommunicationIdentifierModel;
 
-  /** The communication identifier of the user who initialized the call. */
+  /** The communication identifier of the user who initiated the call. */
   from: CommunicationIdentifierModel;
 
   /** The Id of the server call */
@@ -998,7 +998,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
   /** The type of the message */
   type: string;
-  AcsCallParticipantAddedEventData
+
   /** The version of the message */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   version: int64;
@@ -1076,7 +1076,7 @@ model AcsCallEndedByProperties {
   communicationIdentifier: CommunicationIdentifierModel;
 
   /** The type of call ended by. */
-  type: string;
+  type: AcsCallEndedParticipantKind;
 
   /** The name of the call ended by. */
   name: string;
@@ -1116,6 +1116,7 @@ model AcsChatMessageEventInThreadBaseProperties
   type: string;
 
   /** The version of the message */
+  @madeRequired(ServiceApiVersions.v2024_01_01)
   version: int64;
 }
 
@@ -1534,6 +1535,17 @@ union AcsRouterUpdatedWorkerProperty {
 
   /** ChannelConfigurations */
   "ChannelConfigurations",
+
+  string,
+}
+
+/** Call ended participant kind. */
+union AcsCallEndedParticipantKind {
+  /** Participant */
+  "Participant",
+
+  /** MicrosoftInternal */
+  "MicrosoftInternal",
 
   string,
 }

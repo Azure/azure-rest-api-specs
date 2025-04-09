@@ -269,7 +269,25 @@
         },
         "type": {
           "description": "The type of the call ended by.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Participant",
+            "MicrosoftInternal"
+          ],
+          "x-ms-enum": {
+            "name": "AcsCallEndedParticipantKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Participant",
+                "description": "Call end initiator is a participant"
+              },
+              {
+                "value": "MicrosoftInternal",
+                "description": "Call end initiator is the local participant"
+              }
+            ]
+          }
         },
         "name": {
           "description": "The name of the call ended by.",
