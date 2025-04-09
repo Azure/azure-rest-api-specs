@@ -26,6 +26,12 @@ openapi-subtype: rpaas
 tag: package-2025-01-01-preview
 ```
 
+```yaml
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2025-05-01-preview
+```
+
 ### Tag: package-2025-01-01-preview
 
 These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
@@ -42,9 +48,20 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}/connectors/{connectorName}"].patch.parameters[5].schema.properties.properties
 ```
 
----
+```yaml $(tag) == 'package-2025-05-01-preview'
+input-file:
+  - preview/2025-01-01-preview/connectors.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from:
+      - connectors.json
+    reason: We have used kind property as discriminator to support polymorphic resource and during patch also need to pass discriminator to allow patch on certain polymorphic resource type property.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}/connectors/{connectorName}"].patch.parameters[5].schema.properties.properties
+```
 
-# Code Generation
+
+## Code Generation
 
 ## Swagger to SDK
 
