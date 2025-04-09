@@ -1701,6 +1701,9 @@
           },
           "Create a deployment that will deploy a template with a uri and queryString": {
             "$ref": "./examples/PutDeploymentResourceGroup.json"
+          },
+          "Create deployment using external inputs": {
+            "$ref": "./examples/PutDeploymentWithExternalInputs.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -4830,11 +4833,11 @@
             "type": "string"
           },
           "description": "Deployment tags"
+        },
+        "identity": {
+          "$ref": "#/definitions/DeploymentIdentity",
+          "description": "The Managed Identity configuration for a deployment."
         }
-      },
-      "identity": {
-        "$ref": "#/definitions/DeploymentIdentity",
-        "description": "The Managed Identity configuration for a deployment."
       },
       "required": [
         "properties"
@@ -5418,7 +5421,7 @@
           "type": "object",
           "description": "The set of user assigned identities associated with the resource.",
           "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentities",
+            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
             "x-nullable": true
           }
         }
