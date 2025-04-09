@@ -283,24 +283,6 @@ model ClusterProperties {
 }
 
 /**
- * Error response describing why the operation failed.
- * Included only for backward compatibility for Utilization API
- * versions prior to 2025.
- */
-@error
-model UtilizationErrorResponse {
-  /**
-   * Error code
-   */
-  code: string;
-
-  /**
-   * Detailed error message
-   */
-  message: string;
-}
-
-/**
  * Update Routes on VirtualNetwork Object.
  */
 model UpdateRoutesOnVirtualNetwork {
