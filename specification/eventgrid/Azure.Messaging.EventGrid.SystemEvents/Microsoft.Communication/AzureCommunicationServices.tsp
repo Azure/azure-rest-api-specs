@@ -1076,7 +1076,7 @@ model AcsCallEndedByProperties {
   communicationIdentifier: CommunicationIdentifierModel;
 
   /** The type of call ended by. */
-  type: AcsCallEndedParticipantKind;
+  type: string;
 
   /** The name of the call ended by. */
   name: string;
@@ -1535,11 +1535,6 @@ union AcsRouterUpdatedWorkerProperty {
   /** ChannelConfigurations */
   "ChannelConfigurations",
 
-  string,
-}
-
-/** CallEnded event participant type properties that can be updated */
-union AcsCallEndedParticipantKind {
   string,
 }
 
