@@ -27,7 +27,7 @@ These are the global settings for the appliance.
 ```yaml
 name: appliances
 openapi-type: arm
-tag: package-2022-10-27
+tag: package-2025-03-01-preview
 ```
 
 ### Tag: package-2021-10-31-preview
