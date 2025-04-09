@@ -3653,6 +3653,22 @@
       ],
       "x-ms-discriminator-value": "Custom"
     },
+    "CustomSubscriberQueueRetainmentPolicy": {
+      "type": "object",
+      "description": "Custom Subscriber Queue Retainment Policy",
+      "properties": {
+        "subscriberQueueSettings": {
+          "$ref": "#/definitions/SubscriberQueueRetainmentSettings",
+          "description": "Settings for the retainment policy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubscriberQueueRetainmentPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
     "CustomTopicRetainmentPolicy": {
       "type": "object",
       "description": "Custom Retainment Policy",
@@ -5855,6 +5871,10 @@
         "stateStore": {
           "$ref": "#/definitions/StateStoreRetainmentPolicy",
           "description": "Controls which keys should be persisted to disk for the state store"
+        },
+        "subscriberQueue": {
+          "$ref": "#/definitions/SubscriberQueueRetainmentPolicy",
+          "description": "Custom policy, required if mode is Custom Subscriber queues from all groups are persisted to disk (logical OR)"
         }
       },
       "required": [
@@ -6042,7 +6062,7 @@
       },
       "readOnly": true
     },
-    "RetainmentMode": {
+    "RetainmentPolicyMode": {
       "type": "string",
       "enum": [
         "All",
@@ -6050,7 +6070,7 @@
         "Custom"
       ],
       "x-ms-enum": {
-        "name": "RetainmentMode",
+        "name": "RetainmentPolicyMode",
         "modelAsString": true,
         "values": [
           {
@@ -6383,7 +6403,7 @@
       "description": "State Store Retainment Policy",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/RetainmentMode",
+          "$ref": "#/definitions/RetainmentPolicyMode",
           "description": "The mode of the retainment policy."
         },
         "stateStoreSettings": {
@@ -6496,6 +6516,48 @@
         }
       }
     },
+    "SubscriberQueueRetainmentPolicy": {
+      "type": "object",
+      "description": "Subscriber Queue Retainment Policy",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/RetainmentPolicyMode",
+          "description": "The mode of the retainment policy."
+        },
+        "subscriberQueueSettings": {
+          "$ref": "#/definitions/SubscriberQueueRetainmentSettings",
+          "description": "Settings for the retainment policy."
+        }
+      },
+      "discriminator": "mode",
+      "required": [
+        "mode"
+      ]
+    },
+    "SubscriberQueueRetainmentSettings": {
+      "type": "object",
+      "description": "Subscriber Queue Retainment settings properties",
+      "properties": {
+        "subscriberClientIds": {
+          "type": "array",
+          "description": "List of client IDs of the subscribers, wildcard * supported",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dynamic": {
+          "$ref": "#/definitions/DynamicRetainmentSettings",
+          "description": "Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)"
+        },
+        "topics": {
+          "type": "array",
+          "description": "List of topics under which messages would be persisted to disk for each subscriber Wildcards # and + supported",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "TlsCertMethod": {
       "type": "object",
       "description": "Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported",
@@ -6581,7 +6643,7 @@
       "description": "Retainment policy properties",
       "properties": {
         "mode": {
-          "$ref": "#/definitions/RetainmentMode",
+          "$ref": "#/definitions/RetainmentPolicyMode",
           "description": "The mode of the retainment policy."
         }
       },
