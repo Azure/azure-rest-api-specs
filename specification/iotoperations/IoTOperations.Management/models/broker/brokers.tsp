@@ -99,10 +99,13 @@ model Persistence {
 
   @doc("Controls which keys should be persisted to disk for the state store")
   stateStore?: StateStoreRetainmentPolicy;
+
+  @doc("Custom policy, required if mode is Custom Subscriber queues from all groups are persisted to disk (logical OR)")
+  subscriberQueue?: SubscriberQueueRetainmentPolicy;
 }
 
 @added(Versions.`2025-07-01-preview`)
-union RetainmentMode {
+union RetainmentPolicyMode {
   string,
 
   @doc("Persist all 'retain' messages.")
@@ -120,14 +123,14 @@ union RetainmentMode {
 @discriminator("mode")
 model TopicRetainmentPolicy {
   @doc("The mode of the retainment policy.")
-  mode: RetainmentMode;
+  mode: RetainmentPolicyMode;
 }
 
 @doc("Custom Retainment Policy")
 @added(Versions.`2025-07-01-preview`)
 model CustomTopicRetainmentPolicy extends TopicRetainmentPolicy {
   @doc("The mode of the retainment policy.")
-  mode: RetainmentMode.Custom;
+  mode: RetainmentPolicyMode.Custom;
 
   @doc("Settings for the retainment policy.")
   retainSettings?: TopicRetainmentSettings;
@@ -156,7 +159,7 @@ model DynamicRetainmentSettings {
 @discriminator("mode")
 model StateStoreRetainmentPolicy {
   @doc("The mode of the retainment policy.")
-  mode: RetainmentMode;
+  mode: RetainmentPolicyMode;
 
   @doc("Settings for the retainment policy.")
   stateStoreSettings?: StateStoreRetainmentSettings;
@@ -166,7 +169,7 @@ model StateStoreRetainmentPolicy {
 @added(Versions.`2025-07-01-preview`)
 model CustomStateStoreRetainmentPolicy extends StateStoreRetainmentPolicy {
   @doc("The mode of the retainment policy.")
-  mode: RetainmentMode.Custom;
+  mode: RetainmentPolicyMode.Custom;
 
   @doc("Settings for the retainment policy.")
   stateStoreSettings?: StateStoreRetainmentSettings;
@@ -203,6 +206,39 @@ model DynamicPersistenceSettings {
 
   @doc("The user property value to enable persistence.")
   userPropertyValue?: string;
+}
+@doc("Subscriber Queue Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+@discriminator("mode")
+model SubscriberQueueRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentPolicyMode;
+
+  @doc("Settings for the retainment policy.")
+  subscriberQueueSettings?: SubscriberQueueRetainmentSettings;
+}
+
+@doc("Custom Subscriber Queue Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+model CustomSubscriberQueueRetainmentPolicy extends SubscriberQueueRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentPolicyMode.Custom;
+
+  @doc("Settings for the retainment policy.")
+  subscriberQueueSettings?: SubscriberQueueRetainmentSettings;
+}
+
+@doc("Subscriber Queue Retainment settings properties")
+@added(Versions.`2025-07-01-preview`)
+model SubscriberQueueRetainmentSettings {
+  @doc("List of client IDs of the subscribers, wildcard * supported")
+  subscriberClientIds?: string[];
+
+  @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)")
+  dynamic?: DynamicRetainmentSettings;
+
+  @doc("List of topics under which messages would be persisted to disk for each subscriber Wildcards # and + supported")
+  topics?: string[];
 }
 
 @doc("Broker Advanced Settings")
