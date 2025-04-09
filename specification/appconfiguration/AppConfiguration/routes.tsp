@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 
@@ -76,7 +78,6 @@ alias KeyValuesRequestParams = {
     """>;
   ...IfMatchHeader;
   ...IfNoneMatchHeader;
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
   ...TagsQueryParam<"""
     A filter used to query by tags. Syntax reference:
     https://aka.ms/azconfig/docs/keyvaluefiltering
@@ -121,6 +122,12 @@ op getKeyValue is Foundations.ResourceOperation<
     ...IfMatchHeader;
     ...IfNoneMatchHeader;
     ...ClientRequestIdHeader;
+
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract."
+    @added(Versions.v2024_09_01)
+    @doc("A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering")
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
   },
   Body<KeyValue> &
     RequestIdResponseHeader &
@@ -200,6 +207,12 @@ op checkKeyValue is AppConfigOperation<
     ...IfMatchHeader;
     ...IfNoneMatchHeader;
     ...SelectQueryParam<KeyValueFields>;
+
+    #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract."
+    @added(Versions.v2024_09_01)
+    @doc("A filter used to query by tags. Syntax reference:\nhttps://aka.ms/azconfig/docs/keyvaluefiltering")
+    @query(#{ name: "tags", explode: true })
+    tags?: string[];
   },
   OkResponse & AppConfigResponseHeaders
 >;
@@ -407,7 +420,6 @@ alias RevisionsRequestParams = {
   ...AfterHeader;
   ...AcceptDatetimeHeader;
   ...SelectQueryParam<KeyValueFields>;
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Pre-existing API contract"
   ...TagsQueryParam<"""
     A filter used to query by tags. Syntax reference:
     https://aka.ms/azconfig/docs/restapirevisions

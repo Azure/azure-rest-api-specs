@@ -16,9 +16,11 @@ updates:
       - dependency-name: "typescript"
       # Updated manually by the Liftr team
       - dependency-name: "@azure-tools/typespec-liftr-base"
-      # minimatch@9 is the last version to support Node 18
-      - dependency-name: "minimatch"
-        versions: [">= 10.0.0"]
+      # Updated manually by owner of eng/tools/lint-diff
+      - dependency-name: "@apidevtools/json-schema-ref-parser"
+      - dependency-name: "@types/js-yaml"
+      - dependency-name: "autorest"
+      - dependency-name: "js-yaml"
     groups:
       # Ships separately from other typespec packages
       typespec-client-generator-cli:
@@ -48,7 +50,12 @@ updates:
       - dependency-name: "@vitest/coverage-v8"
       - dependency-name: "prettier"
       - dependency-name: "vitest"
+      - dependency-name: "typescript"
       # Points to "github:actions/github-script" since package isn't published to npmjs
       - dependency-name: "@types/github-script"
+    groups:
+      eslint:
+        patterns:
+          - "*eslint*"
     # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
     versioning-strategy: increase-if-necessary

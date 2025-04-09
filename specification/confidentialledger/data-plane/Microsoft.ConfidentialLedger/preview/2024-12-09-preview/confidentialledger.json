@@ -187,6 +187,9 @@
           },
           {
             "$ref": "#/parameters/TransactionIdToParameter"
+          },
+          {
+            "$ref": "#/parameters/TagIdParameter"
           }
         ],
         "responses": {
@@ -228,6 +231,9 @@
             "schema": {
               "$ref": "#/definitions/LedgerEntry"
             }
+          },
+          {
+            "$ref": "#/parameters/TagsIdParameter"
           }
         ],
         "responses": {
@@ -717,7 +723,7 @@
         }
       }
     },
-    "/app/userDefinedEndpoints/runTimeOptions": {
+    "/app/userDefinedEndpoints/runtimeOptions": {
       "get": {
         "operationId": "GetRuntimeOptions",
         "x-ms-examples": {
@@ -2094,6 +2100,22 @@
       "description": "The collection id.",
       "type": "string"
     },
+    "TagIdParameter": {
+      "name": "tag",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Single tag.",
+      "type": "string"
+    },
+    "TagsIdParameter": {
+      "name": "tags",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "description": "Comma separated tags.",
+      "type": "string"
+    },
     "TransactionIdParameter": {
       "name": "transactionId",
       "in": "path",
@@ -2186,7 +2208,7 @@
       }
     },
     "ModuleNameParameter": {
-      "name": "module",
+      "name": "module_name",
       "required": true,
       "description": "module name of the user defined endpoint",
       "in": "query",

@@ -1,16 +1,17 @@
+import { readFile as readFileImpl } from "fs/promises";
+import { globby, Options as GlobbyOptions } from "globby";
 import { join } from "path";
-import { readFile } from "fs/promises";
-import { IGitOperation, TsvHost } from "./tsv-host.js";
-import { globby } from "globby";
 import { simpleGit } from "simple-git";
+import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
+import { RuleResult } from "./rule-result.js";
+import { IGitOperation, TsvHost } from "./tsv-host.js";
 import {
   checkFileExists,
+  gitDiffTopSpecFolder,
   isDirectory,
   normalizePath,
   runCmd,
-  gitDiffTopSpecFolder,
 } from "./utils.js";
-import { RuleResult } from "./rule-result.js";
 
 export class TsvRunnerHost implements TsvHost {
   checkFileExists(file: string): Promise<boolean> {
@@ -26,7 +27,11 @@ export class TsvRunnerHost implements TsvHost {
   }
 
   readTspConfig(folder: string): Promise<string> {
-    return readFile(join(folder, "tspconfig.yaml"), "utf-8");
+    return readFileImpl(join(folder, "tspconfig.yaml"), "utf-8");
+  }
+
+  readFile(path: string): Promise<string> {
+    return readFileImpl(path, "utf-8");
   }
 
   runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]> {
@@ -41,7 +46,11 @@ export class TsvRunnerHost implements TsvHost {
     return gitDiffTopSpecFolder(host, folder);
   }
 
-  globby(patterns: string[]): Promise<string[]> {
-    return globby(patterns);
+  globby(patterns: string | string[], options?: GlobbyOptions): Promise<string[]> {
+    return globby(patterns, options);
+  }
+
+  getSuppressions(path: string): Promise<Suppression[]> {
+    return getSuppressionsImpl("TypeSpecValidation", path);
   }
 }

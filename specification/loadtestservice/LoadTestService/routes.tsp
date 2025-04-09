@@ -181,9 +181,9 @@ interface LoadTestAdministration {
 
       @doc("Server metric configuration model.")
       @bodyRoot
-      body: TestServerMetricConfig;
+      body: TestServerMetricsConfiguration;
     },
-    ResourceCreatedOrOkResponse<TestServerMetricConfig>
+    ResourceCreatedOrOkResponse<TestServerMetricsConfiguration>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -203,7 +203,7 @@ interface LoadTestAdministration {
       @pattern("^[a-z0-9_-]*$")
       testId: string;
     },
-    TestServerMetricConfig
+    TestServerMetricsConfiguration
   >;
 }
 
@@ -421,9 +421,9 @@ interface LoadTestRun {
 
       @doc("Server metric configuration model.")
       @bodyRoot
-      body: TestRunServerMetricConfig;
+      body: TestRunServerMetricsConfiguration;
     },
-    ResourceCreatedOrOkResponse<TestRunServerMetricConfig>
+    ResourceCreatedOrOkResponse<TestRunServerMetricsConfiguration>
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -443,7 +443,7 @@ interface LoadTestRun {
       @pattern("^[a-z0-9_-]*$")
       testRunId: string;
     },
-    TestRunServerMetricConfig
+    TestRunServerMetricsConfiguration
   >;
 }
 

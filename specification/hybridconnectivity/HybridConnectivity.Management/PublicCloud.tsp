@@ -95,21 +95,50 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("Public Cloud Connector")
+model PublicCloudConnectorUpdate extends TrackedResourceUpdate {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: PublicCloudConnectorPropertiesUpdate;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'")
+model TrackedResourceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+@doc("Properties of public cloud connectors.")
+model PublicCloudConnectorPropertiesUpdate {
+  @doc("Cloud profile for AWS.")
+  awsCloudProfile?: AwsCloudProfileUpdate;
+}
+
+@doc("cloud profile for AWS.")
+model AwsCloudProfileUpdate {
+  @doc("List of AWS accounts which need to be excluded.")
+  excludedAccounts?: string[];
+}
+
 @doc("Properties of public cloud connectors.")
 model PublicCloudConnectorProperties {
   @doc("Cloud profile for AWS.")
   awsCloudProfile: AwsCloudProfile;
 
   @doc("Host cloud the public cloud connector.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   hostType: HostType;
 
   @doc("The resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("Connector primary identifier.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   connectorPrimaryIdentifier?: string;
 }
 
@@ -124,14 +153,14 @@ union HostType {
 @doc("cloud profile for AWS.")
 model AwsCloudProfile {
   @doc("Account id for the AWS account.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   accountId: string;
 
   @doc("List of AWS accounts which need to be excluded.")
   excludedAccounts?: string[];
 
   @doc("Boolean value that indicates whether the account is organizational or not. True represents organization account, whereas false represents a single account.")
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   isOrganizationalAccount?: boolean = false;
 }
 
@@ -152,7 +181,7 @@ model SolutionConfiguration
 @doc("Solution configuration resource.")
 model SolutionConfigurationProperties {
   @doc("The resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 
   @doc("The type of the solution")
@@ -162,16 +191,35 @@ model SolutionConfigurationProperties {
   solutionSettings?: SolutionSettings;
 
   @doc("The status of solution configurations")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: SolutionConfigurationStatus;
 
   @doc("The detailed message of status details")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   statusDetails?: string;
 
   @doc("The last time resources were inventoried")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastSyncTime?: utcDateTime;
+}
+
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@doc("Solution Configuration")
+model SolutionConfigurationUpdate
+  extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+  @doc("The resource-specific properties for this resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SolutionConfigurationPropertiesUpdate;
+}
+
+@doc("Solution configuration resource.")
+model SolutionConfigurationPropertiesUpdate {
+  @doc("The type of the solution")
+  solutionType?: string;
+
+  @doc("Solution settings")
+  solutionSettings?: SolutionSettings;
 }
 
 @doc("Solution Configuration Status.")
@@ -248,7 +296,7 @@ model InventoryResource is ProxyResource<InventoryProperties> {
   @doc("Inventory resource")
   @segment("inventory")
   @key("inventoryId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   name: string;
 }
@@ -271,7 +319,7 @@ model InventoryProperties {
   statusDetails?: string;
 
   @doc("The resource provisioning state.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
 }
 
@@ -309,16 +357,23 @@ interface GenerateAwsTemplate {
     @doc("ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.")
     @body
     generateAwsTemplateRequest: GenerateAwsTemplateRequest,
-  ): Azure.ResourceManager.ArmResponse<{}> | ErrorResponse;
+  ): Azure.ResourceManager.ArmResponse<GenerateAwsTemplateResponse> | ErrorResponse;
 }
+
+/**
+ * The HybridConnectivity post operation response
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model"
+model GenerateAwsTemplateResponse {}
 
 @armResourceOperations
 interface PublicCloudConnectors {
   get is ArmResourceRead<PublicCloudConnector>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<PublicCloudConnector>;
-  update is ArmResourcePatchSync<
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
     PublicCloudConnector,
-    PublicCloudConnectorProperties
+    PublicCloudConnectorUpdate
   >;
   delete is ArmResourceDeleteSync<PublicCloudConnector>;
   listByResourceGroup is ArmResourceListByParent<PublicCloudConnector>;
@@ -335,9 +390,10 @@ interface PublicCloudConnectors {
 interface SolutionConfigurations {
   get is ArmResourceRead<SolutionConfiguration>;
   createOrUpdate is ArmResourceCreateOrReplaceSync<SolutionConfiguration>;
-  update is ArmResourcePatchSync<
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
     SolutionConfiguration,
-    SolutionConfigurationProperties
+    SolutionConfigurationUpdate
   >;
   delete is ArmResourceDeleteSync<SolutionConfiguration>;
   listByWidget is ArmResourceListAtScope<SolutionConfiguration>;

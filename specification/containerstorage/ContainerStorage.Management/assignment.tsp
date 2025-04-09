@@ -37,11 +37,11 @@ scalar AssignmentId
 
 @doc("Assignment Properties")
 model Assignment {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Indicates if the assignment is in a usable state")
   status?: AssignmentStatus;
 
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Resource id for the assigned resource")
   id: AssignmentId;
 }
