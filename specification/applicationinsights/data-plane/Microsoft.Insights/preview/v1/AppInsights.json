@@ -940,6 +940,7 @@
     },
     "metricsResult": {
       "description": "A metric result.",
+      "type": "object",
       "properties": {
         "value": {
           "$ref": "#/definitions/metricsResultInfo"
@@ -953,12 +954,12 @@
         "start": {
           "description": "Start time of the metric.",
           "type": "string",
-          "format": "date_time"
+          "format": "date-time"
         },
         "end": {
           "description": "Start time of the metric.",
           "type": "string",
-          "format": "date_time"
+          "format": "date-time"
         },
         "interval": {
           "description": "The interval used to segment the metric data.",
@@ -985,12 +986,12 @@
         "start": {
           "description": "Start time of the metric segment (only when an interval was specified).",
           "type": "string",
-          "format": "date_time"
+          "format": "date-time"
         },
         "end": {
           "description": "Start time of the metric segment (only when an interval was specified).",
           "type": "string",
-          "format": "date_time"
+          "format": "date-time"
         },
         "segments": {
           "description": "Segmented metric data (if further segmented).",
@@ -1073,11 +1074,11 @@
       "description": "An events query result.",
       "type": "object",
       "properties": {
-        "@odata.context": {
+        "odata.context": {
           "description": "OData context metadata endpoint for this response",
           "type": "string"
         },
-        "@ai.messages": {
+        "ai.messages": {
           "description": "OData messages for this response.",
           "type": "array",
           "items": {
@@ -1097,7 +1098,7 @@
       "description": "An event query result.",
       "type": "object",
       "properties": {
-        "@ai.messages": {
+        "ai.messages": {
           "description": "OData messages for this response.",
           "type": "array",
           "items": {
@@ -1139,9 +1140,6 @@
             "additionalProperties": {
               "type": "object"
             }
-          },
-          "additionalProperties": {
-            "type": "object"
           }
         },
         "customMeasurements": {
@@ -1151,9 +1149,6 @@
             "additionalProperties": {
               "type": "object"
             }
-          },
-          "additionalProperties": {
-            "type": "object"
           }
         },
         "operation": {
@@ -1192,19 +1187,17 @@
     "eventsTraceResult": {
       "x-ms-discriminator-value": "trace",
       "description": "A trace result",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "trace": {
-              "$ref": "#/definitions/eventsTraceInfo"
-            }
-          }
         }
-      ]
+      ],
+      "properties":{
+        "trace": {
+          "$ref": "#/definitions/eventsTraceInfo"
+        }
+      }
     },
     "eventsTraceInfo": {
       "description": "The trace information",
@@ -1223,17 +1216,15 @@
     "eventsCustomEventResult": {
       "x-ms-discriminator-value": "customEvent",
       "description": "A custom event result",
+      "type": "object",
+      "properties": {
+        "customEvent": {
+          "$ref": "#/definitions/eventsCustomEventInfo"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "customEvent": {
-              "$ref": "#/definitions/eventsCustomEventInfo"
-            }
-          }
         }
       ]
     },
@@ -1250,17 +1241,15 @@
     "eventsPageViewResult": {
       "x-ms-discriminator-value": "pageView",
       "description": "A page view result",
+      "type": "object",
+      "properties": {
+        "pageView": {
+          "$ref": "#/definitions/eventsPageViewInfo"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "pageView": {
-              "$ref": "#/definitions/eventsPageViewInfo"
-            }
-          }
         }
       ]
     },
@@ -1289,20 +1278,18 @@
     "eventsBrowserTimingResult": {
       "x-ms-discriminator-value": "browserTiming",
       "description": "A browser timing result",
+      "type": "object",
+      "properties": {
+        "browserTiming": {
+          "$ref": "#/definitions/eventsBrowserTimingInfo"
+        },
+        "clientPerformance": {
+          "$ref": "#/definitions/eventsClientPerformanceInfo"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "browserTiming": {
-              "$ref": "#/definitions/eventsBrowserTimingInfo"
-            },
-            "clientPerformance": {
-              "$ref": "#/definitions/eventsClientPerformanceInfo"
-            }
-          }
         }
       ]
     },
@@ -1370,17 +1357,15 @@
     "eventsRequestResult": {
       "x-ms-discriminator-value": "request",
       "description": "A request result",
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/eventsRequestInfo"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "request": {
-              "$ref": "#/definitions/eventsRequestInfo"
-            }
-          }
         }
       ]
     },
@@ -1426,17 +1411,15 @@
     "eventsDependencyResult": {
       "x-ms-discriminator-value": "dependency",
       "description": "A dependency result",
+      "type": "object",
+      "properties": {
+        "dependency": {
+          "$ref": "#/definitions/eventsDependencyInfo"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dependency": {
-              "$ref": "#/definitions/eventsDependencyInfo"
-            }
-          }
         }
       ]
     },
@@ -1486,17 +1469,15 @@
     "eventsExceptionResult": {
       "x-ms-discriminator-value": "exception",
       "description": "An exception result",
+      "type": "object",
+      "properties": {
+        "exception": {
+          "$ref": "#/definitions/eventsExceptionInfo"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "exception": {
-              "$ref": "#/definitions/eventsExceptionInfo"
-            }
-          }
         }
       ]
     },
@@ -1633,17 +1614,15 @@
     "eventsAvailabilityResultResult": {
       "x-ms-discriminator-value": "availabilityResult",
       "description": "An availability result result",
+      "type": "object",
+      "properties": {
+        "availabilityResult": {
+          "$ref": "#/definitions/eventsAvailabilityResultInfo"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "availabilityResult": {
-              "$ref": "#/definitions/eventsAvailabilityResultInfo"
-            }
-          }
         }
       ]
     },
@@ -1689,17 +1668,15 @@
     "eventsPerformanceCounterResult": {
       "x-ms-discriminator-value": "performanceCounter",
       "description": "A performance counter result",
+      "type": "object",
+      "properties": {
+        "performanceCounter": {
+          "$ref": "#/definitions/eventsPerformanceCounterInfo"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "performanceCounter": {
-              "$ref": "#/definitions/eventsPerformanceCounterInfo"
-            }
-          }
         }
       ]
     },
@@ -1737,17 +1714,15 @@
     "eventsCustomMetricResult": {
       "x-ms-discriminator-value": "customMetric",
       "description": "A custom metric result",
+      "type": "object",
+      "properties": {
+        "customMetric": {
+          "$ref": "#/definitions/eventsCustomMetricInfo"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/eventsResultData"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "customMetric": {
-              "$ref": "#/definitions/eventsCustomMetricInfo"
-            }
-          }
         }
       ]
     },
@@ -2319,10 +2294,10 @@
         "innererror": {
           "description": "Inner error details if they exist.",
           "$ref": "#/definitions/errorInfo"
-        },
-        "additionalProperties": {
-          "type": "object"
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       },
       "required": [
         "code",
