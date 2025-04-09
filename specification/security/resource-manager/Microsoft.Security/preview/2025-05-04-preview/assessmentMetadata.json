@@ -324,7 +324,9 @@
               "Networking",
               "Data",
               "IdentityAndAccess",
-              "IoT"
+              "IoT",
+              "Container",
+              "AppServices"
             ],
             "x-ms-enum": {
               "name": "categories",
@@ -344,6 +346,12 @@
                 },
                 {
                   "value": "IoT"
+                },
+                {
+                  "value": "Container"
+                },
+                {
+                  "value": "AppServices"
                 }
               ]
             }
@@ -355,7 +363,8 @@
           "enum": [
             "Low",
             "Medium",
-            "High"
+            "High",
+            "Critical"
           ],
           "x-ms-enum": {
             "name": "severity",
@@ -369,54 +378,9 @@
               },
               {
                 "value": "High"
-              }
-            ]
-          }
-        },
-        "userImpact": {
-          "type": "string",
-          "description": "The user impact of the assessment",
-          "enum": [
-            "Low",
-            "Moderate",
-            "High"
-          ],
-          "x-ms-enum": {
-            "name": "userImpact",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Low"
               },
               {
-                "value": "Moderate"
-              },
-              {
-                "value": "High"
-              }
-            ]
-          }
-        },
-        "implementationEffort": {
-          "type": "string",
-          "description": "The implementation effort required to remediate this assessment",
-          "enum": [
-            "Low",
-            "Moderate",
-            "High"
-          ],
-          "x-ms-enum": {
-            "name": "implementationEffort",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Low"
-              },
-              {
-                "value": "Moderate"
-              },
-              {
-                "value": "High"
+                "value": "Critical"
               }
             ]
           }
@@ -476,9 +440,17 @@
           "type": "string",
           "description": "BuiltIn if the assessment based on built-in Azure Policy definition, Custom if the assessment based on custom Azure Policy definition",
           "enum": [
+            "Unknown",
             "BuiltIn",
+            "Custom",
             "CustomPolicy",
-            "CustomerManaged"
+            "CustomerManaged",
+            "BuiltInPolicy",
+            "VerifiedPartner",
+            "ManualBuiltInPolicy",
+            "ManualBuiltIn",
+            "ManualCustomPolicy",
+            "DynamicBuiltIn"
           ],
           "x-ms-enum": {
             "name": "assessmentType",
@@ -495,6 +467,30 @@
               {
                 "value": "CustomerManaged",
                 "description": "User assessments pushed directly by the user or other third party to Microsoft Defender for Cloud"
+              },
+              {
+                "value": "BuiltInPolicy",
+                "description": "Microsoft Defender for Cloud managed policies"
+              },
+              {
+                "value": "VerifiedPartner",
+                "description": "Third party assessments that are verified by Microsoft Defender for Cloud"
+              },
+              {
+                "value": "ManualBuiltInPolicy",
+                "description": "Microsoft Defender for Cloud managed policies that are manually created by the user"
+              },
+              {
+                "value": "ManualBuiltIn",
+                "description": "Microsoft Defender for Cloud managed assessments that are manually created by the user"
+              },
+              {
+                "value": "ManualCustomPolicy",
+                "description": "User defined policies that are manually created by the user"
+              },
+              {
+                "value": "DynamicBuiltIn",
+                "description": "Microsoft Defender for Cloud managed assessments that are dynamically created by the system"
               }
             ]
           }
