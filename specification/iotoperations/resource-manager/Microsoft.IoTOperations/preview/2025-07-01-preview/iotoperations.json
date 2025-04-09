@@ -3283,6 +3283,14 @@
             "create"
           ]
         },
+        "persistence": {
+          "$ref": "#/definitions/Persistence",
+          "description": "The persistence settings of the Broker.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -5081,6 +5089,20 @@
         "maxSize"
       ]
     },
+    "DynamicSettings": {
+      "type": "object",
+      "description": "Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH \nOptional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property \"aio-persistence\"",
+      "properties": {
+        "userPropertyKey": {
+          "type": "string",
+          "description": "The user property key to enable persistence."
+        },
+        "userPropertyValue": {
+          "type": "string",
+          "description": "The user property value to enable persistence."
+        }
+      }
+    },
     "EndpointType": {
       "type": "string",
       "description": "DataflowEndpoint Type properties",
@@ -5767,6 +5789,31 @@
           }
         ]
       }
+    },
+    "Persistence": {
+      "type": "object",
+      "description": "Disk persistence configuration.\n\nWhen persistence is enabled, certain items (non-performance-critical data) selected for persistence will reside only on disk. Below are the affected items: \n\n- Retained messages will be stored on disk only. \n- WILL messages will be stored on disk only. \n- DSS key/value pairs will be stored on disk only, except for performance-critical items like timed locks, which remain in both disk and memory for improved performance.\n\nOptional. Everything is in-memory if not set. \nNote: if configured, all MQTT session states are written to disk.",
+      "properties": {
+        "dynamicSettings": {
+          "$ref": "#/definitions/DynamicSettings",
+          "description": "dynamic settings of the persistence.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "maxSize": {
+          "type": "string",
+          "description": "The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template If a PVC template isn't specified Then local-path provisioner is requested with this size limit Required."
+        },
+        "persistentVolumeClaimSpec": {
+          "$ref": "#/definitions/VolumeClaimSpec",
+          "description": "Use the specified persistent volume claim template to mount a persistent volume Same object as in diskBackedMessageBuffer, but with a limitation that access modes field must be set to `ReadWriteOncePod`.\n\nIf unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class."
+        }
+      },
+      "required": [
+        "maxSize"
+      ]
     },
     "PrincipalDefinition": {
       "type": "object",
@@ -6495,8 +6542,33 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "claims": {
+          "type": "array",
+          "description": "Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.\n\nThis is an alpha field and requires enabling the DynamicResourceAllocation feature gate.\n\nThis field is immutable. It can only be set for containers.",
+          "items": {
+            "$ref": "#/definitions/VolumeClaimResourceRequirementsClaims"
+          },
+          "x-ms-identifiers": []
         }
       }
+    },
+    "VolumeClaimResourceRequirementsClaims": {
+      "type": "object",
+      "description": "VolumeClaimResourceRequirementsClaims properties",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource. This must match the name of a resource in spec.resourceClaims."
+        },
+        "resources": {
+          "$ref": "#/definitions/VolumeClaimResourceRequirements",
+          "description": "The amount of compute resources required."
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "VolumeClaimSpec": {
       "type": "object",

@@ -16,10 +16,8 @@ import "./models/dataflows/dataflowProfiles.tsp";
 import "./models/dataflows/dataflows.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
