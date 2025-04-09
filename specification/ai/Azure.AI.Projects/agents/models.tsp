@@ -52,8 +52,8 @@ model AgentConfigurationOptions {
 
 @doc("Options used when creating or updating an agent.")
 model AgentCreationOptions {
-  @doc("The name of the agent; used for display purposes and sent to the LLM to identify the agent.")
-  name: string;
+  @doc("The display name of the agent; used for display purposes and sent to the LLM to identify the agent.")
+  displayName: string;
 
   @doc("Configuation options for the agent.")
   configurationOptions: AgentConfigurationOptions;

@@ -118,7 +118,7 @@ interface Threads {
   Includes standard resource operations + custom collection-level
   and instance-level actions (complete, stream).
   """)
-@clientName("AgentsClient", "csharp")  
+@clientName("AgentsClient", "csharp")
 interface Agents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Creates a new Agent resource and returns it.")
@@ -189,6 +189,7 @@ interface Agents {
     {
       @doc("The options for the agent completing the run.")
       options: AgentConfigurationOptions;
+
       @doc("The inputs for the run.")
       inputs: RunInputs;
     },
@@ -204,6 +205,7 @@ interface Agents {
     {
       @doc("The options for the agent completing the run.")
       options: AgentConfigurationOptions;
+
       @doc("The inputs for the run.")
       inputs: RunInputs;
     },
