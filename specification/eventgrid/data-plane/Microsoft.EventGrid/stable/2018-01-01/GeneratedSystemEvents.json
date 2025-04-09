@@ -149,6 +149,145 @@
         }
       ]
     },
+    "AcsCallParticipantEventData": {
+      "description": "Schema of common properties of participant events",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ],
+      "properties": {
+        "user": {
+          "description": "The user of the call participant.",
+          "$ref": "#/definitions/AcsCallParticipantProperties"
+        },
+        "displayName": {
+          "description": "The display name of the participant.",
+          "type": "string"
+        },
+        "participantId": {
+          "description": "The Id of the participant.",
+          "type": "string"
+        },
+        "userAgent": {
+          "description": "The user agent of the participant. ",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallParticipantProperties": {
+      "description": "Schema of calling event participant user",
+      "type": "object",
+      "properties": {
+        "communicationIdentifier": {
+          "description": "The communication identifier of the call ended by",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "role": {
+          "description": "The role of participant user.",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallingEventProperties": {
+      "description": "Schema of common properties of all calling events",
+      "type": "object",
+      "properties": {
+        "startedBy": {
+          "description": "The call participant who initiated the call.",
+          "$ref": "#/definitions/AcsCallParticipantProperties"
+        },
+        "serverCallId": {
+          "description": "The callId of the server",
+          "type": "string"
+        },
+        "group": {
+          "description": "The group metadata",
+          "$ref": "#/definitions/AcsCallGroupProperties"
+        },
+        "room": {
+          "description": "The room metadata",
+          "$ref": "#/definitions/AcsCallRoomProperties"
+        },
+        "isTwoParty": {
+          "description": "Is two-party in calling event.",
+          "type": "boolean"
+        },
+        "correlationId": {
+          "description": "The correlation ID of the calling event",
+          "type": "string"
+        },
+        "isRoomsCall": {
+          "description": "Is calling event a room call.",
+          "type": "boolean"
+        }
+      },
+      "requried": [
+        "startedBy"
+      ]
+    },
+    "AcsCallGroupProperties": {
+      "description": "Schema of calling event group properties",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Group Id. Format is Guid as string.",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallRoomProperties": {
+      "description": "Schema of calling event room properties",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Room Id. Format is Guid as string.",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallEndedByProperties": {
+      "description": "Schema of calling event endedby properties",
+      "type": "object",
+      "properties": {
+        "communicationIdentifier": {
+          "description": "The communication identifier of the call ended by",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
+        },
+        "type": {
+          "description": "The type of the call ended by.",
+          "type": "string",
+          "enum": [],
+          "x-ms-enum": {
+            "name": "AcsCallEndedParticipantKind",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name of the call ended by.",
+          "type": "string"
+        }
+      }
+    },
+    "AcsCallEndReasonProperties": {
+      "description": "Schema of calling event reason properties",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Reason code for ending the call.",
+          "type": "integer"
+        },
+        "subCode": {
+          "description": "Reason subcode for ending the call.",
+          "type": "integer"
+        },
+        "phrase": {
+          "description": "Reason for ending the call.",
+          "type": "string"
+        }
+      }
+    },
     "AcsChatMessageEventBaseProperties": {
       "type": "object",
       "description": "Schema of common properties of all chat message events",
@@ -229,6 +368,58 @@
         }
       ]
     },
+    "AcsCallParticipantAddedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantAdded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantEventData"
+        }
+      ],
+      "type": "object"
+    },
+    "AcsCallParticipantRemovedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallParticipantRemoved event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallParticipantEventData"
+        }
+      ],
+      "type": "object",
+      "properties": {
+      }
+    },
+    "AcsCallStartedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallStarted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ],
+      "type": "object"
+    },
+    "AcsCallEndedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.CallEnded event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsCallingEventProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "endedBy": {
+          "description": "The communication identifier of the user who was disconnected",
+          "$ref": "#/definitions/AcsCallEndedByProperties"
+        },
+        "reason": {
+          "description": "The reason for ending the call.",
+          "$ref": "#/definitions/AcsCallEndReasonProperties"
+        },
+        "callDurationInSeconds": {
+          "description": "Duration of the call in seconds.",
+          "type": "number"
+        }
+      }
+    },
     "AcsChatMessageReceivedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.",
@@ -252,6 +443,56 @@
         {
           "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
+      ]
+    },
+    "AcsChatAzureBotCommandReceivedInThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatAzureBotCommandReceivedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "messageBody"
+      ]
+    },
+    "AcsChatTypingIndicatorReceivedInThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorReceivedInThread event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The chat message metadata",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "messageBody"
       ]
     },
     "AcsChatMessageReceivedInThreadEventData": {
@@ -2432,6 +2673,8 @@
         }
       },
       "required": [
+        "deliveryStatus",
+        "deliveryStatusDetails",
         "deliveryAttempts"
       ],
       "allOf": [
@@ -2456,7 +2699,12 @@
           "type": "string",
           "description": "The identity of SMS message receiver"
         }
-      }
+      },
+      "required": [
+        "messageId",
+        "from",
+        "to"
+      ]
     },
     "AcsSmsReceivedEventData": {
       "type": "object",
@@ -2478,7 +2726,8 @@
         }
       },
       "required": [
-        "segmentCount"
+        "segmentCount",
+        "message"
       ],
       "allOf": [
         {
