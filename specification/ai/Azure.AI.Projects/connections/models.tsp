@@ -49,7 +49,7 @@ model ConnectionWithApiKeyAuth extends Connection {
   @visibility(Lifecycle.Read)
   authType: AuthenticationType.apiKey;
 
-  @doc("Credentials will only be present for authType=ApiKey")
+  @doc("The credentials for api-key authentication")
   @visibility(Lifecycle.Read)
   credentials: CredentialsApiKeyAuth;
 }
@@ -80,7 +80,7 @@ model ConnectionWithSASAuth extends Connection {
   @visibility(Lifecycle.Read)
   authType: AuthenticationType.SAS;
 
-  @doc("Credentials will only be present for authType=ApiKey")
+  @doc("The credentials for SAS authentication")
   @visibility(Lifecycle.Read)
   credentials: CredentialsSASAuth;
 }

@@ -63,7 +63,7 @@
           {
             "name": "connectionType",
             "in": "query",
-            "description": "List connections of this specific type only",
+            "description": "List connections of this specific type",
             "required": false,
             "type": "string",
             "enum": [
@@ -132,7 +132,7 @@
           {
             "name": "defaultConnection",
             "in": "query",
-            "description": "List connections that are default connections only",
+            "description": "List connections that are default connections",
             "required": false,
             "type": "boolean"
           },
@@ -1722,7 +1722,7 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/CredentialsApiKeyAuth",
-          "description": "Credentials will only be present for authType=ApiKey",
+          "description": "The credentials for api-key authentication",
           "readOnly": true
         }
       },
@@ -1772,7 +1772,7 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/CredentialsSASAuth",
-          "description": "Credentials will only be present for authType=ApiKey",
+          "description": "The credentials for SAS authentication",
           "readOnly": true
         }
       },
