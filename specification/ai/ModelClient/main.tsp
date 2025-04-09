@@ -19,16 +19,16 @@ using Azure.Core;
   ]>
 )
 @service(#{ title: "AI Model Inference" })
-@versioned(AI.Model.Versions)
-namespace AI.Model;
+@versioned(Azure.AI.Inference.Versions)
+namespace Azure.AI.Inference;
 
-@doc("The AI.Model service versions.")
+@doc("The Azure.AI.Inference service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-05-01-preview version of the AI.Model service.")
+  @doc("The 2024-05-01-preview version of the Azure.AI.Inference service.")
   v2024_05_01_Preview: "2024-05-01-preview",
 
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2025-04-01 version of the AI.Model service.")
+  @doc("The 2025-04-01 version of the Azure.AI.Inference service.")
   v2025_04_01: "2025-04-01",
 }

@@ -13,7 +13,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-namespace AI.Model;
+namespace Azure.AI.Inference;
 
 @doc("""
   Gets chat completions for the provided chat messages.
