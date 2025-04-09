@@ -49,7 +49,7 @@ interface EvaluationResults
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Enable downloading json.")
-  @route("{name}/versions/{version}/credentials")
+  @route("evaluationResult/{name}/versions/{version}/credentials")
   @post
   FetchAssetCredentials is Azure.Core.Foundations.Operation<
     {
