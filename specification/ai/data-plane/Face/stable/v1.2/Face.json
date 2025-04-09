@@ -475,22 +475,65 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/CreateLivenessSessionContent.livenessOperationMode"
+            "name": "livenessOperationMode",
+            "in": "formData",
+            "description": "Type of liveness mode the client should follow.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Passive",
+              "PassiveActive"
+            ],
+            "x-ms-enum": {
+              "name": "LivenessOperationMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Passive",
+                  "value": "Passive",
+                  "description": "Utilizes a passive liveness technique that requires no additional actions from the user. Requires normal indoor lighting and high screen brightness for optimal performance. And thus, this mode has a narrow operational envelope and will not be suitable for scenarios that requires the end-user's to be in bright lighting conditions. Note: this is the only supported mode for the Mobile (iOS and Android) solution."
+                },
+                {
+                  "name": "PassiveActive",
+                  "value": "PassiveActive",
+                  "description": "This mode utilizes a hybrid passive or active liveness technique that necessitates user cooperation. It is optimized to require active motion only under suboptimal lighting conditions. Unlike the passive mode, this mode has no lighting restrictions, and thus offering a broader operational envelope. This mode is preferable on Web based solutions due to the lack of automatic screen brightness control available on browsers which hinders the Passive mode's operational envelope on Web based solutions."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/CreateLivenessSessionContent.deviceCorrelationIdSetInClient"
+            "name": "deviceCorrelationIdSetInClient",
+            "in": "formData",
+            "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body.",
+            "required": false,
+            "type": "boolean"
           },
           {
-            "$ref": "#/parameters/CreateLivenessSessionContent.enableSessionImage"
+            "name": "enableSessionImage",
+            "in": "formData",
+            "description": "Whether or not store the session image.",
+            "required": false,
+            "type": "boolean"
           },
           {
-            "$ref": "#/parameters/CreateLivenessSessionContent.livenessModelVersion"
-          },
-          {
-            "$ref": "#/parameters/LivenessSessionData.deviceCorrelationId"
-          },
-          {
-            "$ref": "#/parameters/LivenessSessionData.authTokenTimeToLiveInSeconds"
+            "name": "livenessModelVersion",
+            "in": "formData",
+            "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "2024-11-15"
+            ],
+            "x-ms-enum": {
+              "name": "LivenessModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "v2024_11_15",
+                  "value": "2024-11-15"
+                }
+              ]
+            }
           },
           {
             "name": "returnVerifyImageHash",
@@ -515,6 +558,23 @@
             "description": "The image stream for verify. Content-Disposition header field for this part must have filename.",
             "required": true,
             "type": "file"
+          },
+          {
+            "name": "deviceCorrelationId",
+            "in": "formData",
+            "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "authTokenTimeToLiveInSeconds",
+            "in": "formData",
+            "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 60,
+            "maximum": 86400
           }
         ],
         "responses": {
@@ -5256,60 +5316,6 @@
         "livenessOperationMode"
       ]
     },
-    "CreateLivenessWithVerifySessionContent": {
-      "type": "object",
-      "description": "Request of liveness with verify session creation.",
-      "properties": {
-        "livenessOperationMode": {
-          "$ref": "#/definitions/LivenessOperationMode",
-          "description": "Type of liveness mode the client should follow."
-        },
-        "deviceCorrelationIdSetInClient": {
-          "type": "boolean",
-          "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body."
-        },
-        "enableSessionImage": {
-          "type": "boolean",
-          "description": "Whether or not store the session image."
-        },
-        "livenessModelVersion": {
-          "$ref": "#/definitions/LivenessModel",
-          "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen"
-        },
-        "deviceCorrelationId": {
-          "type": "string",
-          "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null."
-        },
-        "authTokenTimeToLiveInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
-          "default": 600,
-          "minimum": 60,
-          "maximum": 86400
-        },
-        "returnVerifyImageHash": {
-          "type": "boolean",
-          "description": "Whether or not return the verify image hash."
-        },
-        "verifyConfidenceThreshold": {
-          "type": "number",
-          "format": "float",
-          "description": "Threshold for confidence of the face verification. Please refer to the documentation for more details. https://learn.microsoft.com/legal/cognitive-services/face/characteristics-and-limitations?context=%2Fazure%2Fai-services%2Fcomputer-vision%2Fcontext%2Fcontext#recognition-confidence-score",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "verifyImage": {
-          "type": "string",
-          "format": "byte",
-          "description": "The image stream for verify. Content-Disposition header field for this part must have filename."
-        }
-      },
-      "required": [
-        "livenessOperationMode",
-        "verifyImage"
-      ]
-    },
     "CreatePersonResult": {
       "type": "object",
       "description": "Response of create person.",
@@ -7121,91 +7127,6 @@
         "type": "string",
         "format": "binary"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "CreateLivenessSessionContent.deviceCorrelationIdSetInClient": {
-      "name": "deviceCorrelationIdSetInClient",
-      "in": "formData",
-      "description": "Whether or not to allow client to set their own 'deviceCorrelationId' via the Vision SDK. Default is false, and 'deviceCorrelationId' must be set in this request body.",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
-    "CreateLivenessSessionContent.enableSessionImage": {
-      "name": "enableSessionImage",
-      "in": "formData",
-      "description": "Whether or not store the session image.",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
-    "CreateLivenessSessionContent.livenessModelVersion": {
-      "name": "livenessModelVersion",
-      "in": "formData",
-      "description": "The model version used for liveness classification. This is an optional parameter, and if this is not specified, then the latest supported model version will be chosen",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "2024-11-15"
-      ],
-      "x-ms-enum": {
-        "name": "LivenessModel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2024_11_15",
-            "value": "2024-11-15"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "CreateLivenessSessionContent.livenessOperationMode": {
-      "name": "livenessOperationMode",
-      "in": "formData",
-      "description": "Type of liveness mode the client should follow.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "Passive",
-        "PassiveActive"
-      ],
-      "x-ms-enum": {
-        "name": "LivenessOperationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Passive",
-            "value": "Passive",
-            "description": "Utilizes a passive liveness technique that requires no additional actions from the user. Requires normal indoor lighting and high screen brightness for optimal performance. And thus, this mode has a narrow operational envelope and will not be suitable for scenarios that requires the end-user's to be in bright lighting conditions. Note: this is the only supported mode for the Mobile (iOS and Android) solution."
-          },
-          {
-            "name": "PassiveActive",
-            "value": "PassiveActive",
-            "description": "This mode utilizes a hybrid passive or active liveness technique that necessitates user cooperation. It is optimized to require active motion only under suboptimal lighting conditions. Unlike the passive mode, this mode has no lighting restrictions, and thus offering a broader operational envelope. This mode is preferable on Web based solutions due to the lack of automatic screen brightness control available on browsers which hinders the Passive mode's operational envelope on Web based solutions."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "LivenessSessionData.authTokenTimeToLiveInSeconds": {
-      "name": "authTokenTimeToLiveInSeconds",
-      "in": "formData",
-      "description": "Seconds the session should last for. Range is 60 to 86400 seconds. Default value is 600.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 600,
-      "minimum": 60,
-      "maximum": 86400,
-      "x-ms-parameter-location": "method"
-    },
-    "LivenessSessionData.deviceCorrelationId": {
-      "name": "deviceCorrelationId",
-      "in": "formData",
-      "description": "Unique Guid per each end-user device. This is to provide rate limiting and anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this request, this 'deviceCorrelationId' must be null.",
-      "required": false,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
