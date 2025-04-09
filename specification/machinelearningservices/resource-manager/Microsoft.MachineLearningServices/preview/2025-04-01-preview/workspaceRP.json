@@ -4432,7 +4432,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
             }
           },
           "default": {
@@ -4458,7 +4458,7 @@
         "tags": [
           "ManagedNetwork"
         ],
-        "summary": "Get API for managed network settings of a machine learning workspace.",
+        "summary": "List API for managed network settings of a machine learning workspace.",
         "operationId": "ManagedNetworkSettings_List",
         "produces": [
           "application/json"
@@ -4496,6 +4496,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/listManagedNetwork.json"
+          }
         }
       }
     }
@@ -6968,7 +6973,10 @@
       "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Inactive",
-        "Active"
+        "Active",
+        "Provisioning",
+        "Deleting",
+        "Failed"
       ],
       "type": "string",
       "x-ms-enum": {
