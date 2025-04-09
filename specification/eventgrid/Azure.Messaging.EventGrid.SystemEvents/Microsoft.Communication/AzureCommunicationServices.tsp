@@ -47,10 +47,10 @@ model AcsCallStartedEventData
 model AcsCallEndedEventData
   extends AcsCallingEventProperties {
   /** The communication identifier of the user who was disconnected */
-  endedBy?: AcsCallingEventEndedByProperties;
+  endedBy?: AcsCallEndedByProperties;
 
-  /** The reason for the call ended event. */
-  reason?: AcsCallingEventReasonProperties;
+  /** The reason for ending the call. */
+  reason?: AcsCallEndReasonProperties;
 
   /** Duration of the call in seconds. */
   callDurationInSeconds?: float64;
@@ -85,12 +85,8 @@ model AcsChatAzureBotCommandReceivedInThreadEventData
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorReceivedInThread event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatTypingIndicatorReceivedInThreadEventData
-  extends AcsChatEventInThreadBaseProperties {
-  /** The communication identifier of the sender */
-  senderCommunicationIdentifier: CommunicationIdentifierModel;
-
-  /** The display name of the sender */
-  senderDisplayName?: string;
+  extends AcsChatMessageEventInThreadBaseProperties {
+  ...AcsChatMessageBaseEventData;
 }
 
 /** Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceivedInThread event. */
@@ -1012,7 +1008,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallParticipantEventProperties extends AcsCallingEventProperties {
   /** The user of the call participant */
-  user?: AcsCallParticipantUserProperties;
+  user?: AcsCallParticipantProperties;
 
   /** The display name of the participant. */
   displayName?: string;
@@ -1026,7 +1022,7 @@ model AcsCallParticipantEventProperties extends AcsCallingEventProperties {
 
 /** Schema of common properties of all participant event user */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallParticipantUserProperties {
+model AcsCallParticipantProperties {
   /** The communication identifier of the participant user */
   communicationIdentifier?: CommunicationIdentifierModel;
 
@@ -1037,17 +1033,17 @@ model AcsCallParticipantUserProperties {
 /** Schema of common properties of all calling events */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallingEventProperties {
-  /** The call participant who initialted the call. */
-  startedBy: AcsCallParticipantUserProperties;
+  /** The call participant who initiated the call. */
+  startedBy: AcsCallParticipantProperties;
 
   /** The call id of the server */
   serverCallId?: string;
 
   /** The group metadata */
-  group?: AcsCallingEventGroupProperties;
+  group?: AcsCallGroupProperties;
 
   /** The room metadata */
-  room?: AcsCallingEventRoomProperties;
+  room?: AcsCallRoomProperties;
 
   /** Is two-party in calling event. */
   isTwoParty?: boolean;
@@ -1061,23 +1057,23 @@ model AcsCallingEventProperties {
 
 /** Schema of calling event group properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallingEventGroupProperties {
+model AcsCallGroupProperties {
   /** Group Id.*/
   id?: string;
 }
 
 /** Schema of calling event room properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallingEventRoomProperties {
+model AcsCallRoomProperties {
   /** Room Id.*/
   id?: string;
 }
 
 /** Schema of calling event endedby properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallingEventEndedByProperties {
+model AcsCallEndedByProperties {
   /** The communication identifier of the call ended by */
-  endedBy: CommunicationIdentifierModel;
+  communicationIdentifier: CommunicationIdentifierModel;
 
   /** The type of call ended by. */
   type: AcsCallEndedParticipantKind;
@@ -1088,7 +1084,7 @@ model AcsCallingEventEndedByProperties {
 
 /** Schema of calling event reason properties */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-model AcsCallingEventReasonProperties {
+model AcsCallEndReasonProperties {
   /** Reason code for ending the call. */
   code?: int;
 

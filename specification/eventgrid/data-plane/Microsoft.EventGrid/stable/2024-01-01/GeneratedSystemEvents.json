@@ -172,7 +172,7 @@
       "properties": {
         "user": {
           "description": "The user of the call participant.",
-          "$ref": "#/definitions/AcsCallParticipantUserProperties"
+          "$ref": "#/definitions/AcsCallParticipantProperties"
         },
         "displayName": {
           "description": "The display name of the participant.",
@@ -188,7 +188,7 @@
         }
       }
     },
-    "AcsCallParticipantUserProperties": {
+    "AcsCallParticipantProperties": {
       "description": "Schema of calling event participant user",
       "type": "object",
       "properties": {
@@ -207,8 +207,8 @@
       "type": "object",
       "properties": {
         "startedBy": {
-          "description": "The call participant who initialized the call.",
-          "$ref": "#/definitions/AcsCallParticipantUserProperties"
+          "description": "The call participant who initiated the call.",
+          "$ref": "#/definitions/AcsCallParticipantProperties"
         },
         "serverCallId": {
           "description": "The callId of the server",
@@ -216,11 +216,11 @@
         },
         "group": {
           "description": "The group metadata",
-          "$ref": "#/definitions/AcsCallingEventGroupProperties"
+          "$ref": "#/definitions/AcsCallGroupProperties"
         },
         "room": {
           "description": "The room metadata",
-          "$ref": "#/definitions/AcsCallingEventRoomProperties"
+          "$ref": "#/definitions/AcsCallRoomProperties"
         },
         "isTwoParty": {
           "description": "Is two-party in calling event.",
@@ -239,7 +239,7 @@
         "startedBy"
       ]
     },
-    "AcsCallingEventGroupProperties": {
+    "AcsCallGroupProperties": {
       "description": "Schema of calling event group properties",
       "type": "object",
       "properties": {
@@ -249,7 +249,7 @@
         }
       }
     },
-    "AcsCallingEventRoomProperties": {
+    "AcsCallRoomProperties": {
       "description": "Schema of calling event room properties",
       "type": "object",
       "properties": {
@@ -259,11 +259,11 @@
         }
       }
     },
-    "AcsCallingEventEndedByProperties": {
+    "AcsCallEndedByProperties": {
       "description": "Schema of calling event endedby properties",
       "type": "object",
       "properties": {
-        "endedBy": {
+        "communicationIdentifier": {
           "description": "The communication identifier of the call ended by",
           "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
@@ -282,7 +282,7 @@
         }
       }
     },
-    "AcsCallingEventReasonProperties": {
+    "AcsCallEndReasonProperties": {
       "description": "Schema of calling event reason properties",
       "type": "object",
       "properties": {
@@ -428,11 +428,11 @@
       "properties": {
         "endedBy": {
           "description": "The communication identifier of the user who was disconnected",
-          "$ref": "#/definitions/AcsCallingEventEndedByProperties"
+          "$ref": "#/definitions/AcsCallEndedByProperties"
         },
         "reason": {
-          "description": "The reason for the call ended event.",
-          "$ref": "#/definitions/AcsCallingEventReasonProperties"
+          "description": "The reason for ending the call.",
+          "$ref": "#/definitions/AcsCallEndReasonProperties"
         },
         "callDurationInSeconds": {
           "description": "Duration of the call in seconds.",
@@ -494,21 +494,24 @@
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatTypingIndicatorSent event.",
       "properties": {
-        "senderCommunicationIdentifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The communication identifier of the sender"
-        },
-        "senderDisplayName": {
+        "messageBody": {
           "type": "string",
-          "description": "The display name of the sender"
+          "description": "The body of the chat message"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The chat message metadata",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
-        "senderCommunicationIdentifier"
+        "messageBody"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AcsChatEventInThreadBaseProperties"
+          "$ref": "#/definitions/AcsChatMessageEventInThreadBaseProperties"
         }
       ]
     },
