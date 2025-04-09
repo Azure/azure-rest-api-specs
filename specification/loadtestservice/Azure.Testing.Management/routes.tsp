@@ -16,6 +16,7 @@ namespace Azure.Testing.Management;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface Workspaces extends TrackedResourceOperations<Workspace, WorkspaceProperties> {
+interface Workspaces
+  extends TrackedResourceOperations<Workspace, WorkspaceProperties> {
   checkNameAvailability is checkGlobalNameAvailability;
 }

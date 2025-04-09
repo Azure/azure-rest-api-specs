@@ -15,7 +15,7 @@ namespace Azure.Testing.Shared;
 enum Versions {
   @doc("Version 1.0")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v1_0: "2025-06-01-preview"
+  v1_0: "2025-06-01-preview",
 }
 
 @doc("An Azure Testing workspace is the parent resource for most of the other testing service resources.")
@@ -63,7 +63,7 @@ model TestingWorkspace {
   ...WorkspaceAdditionalProperties;
 }
 
-@doc("The Azure Testing workspace additional dynamic properties.")
+@doc("The Azure Testing workspace additional properties.")
 model WorkspaceAdditionalProperties {
   @visibility(Lifecycle.Read)
   @doc("The Web Testing workspace data plane URI.")
@@ -81,10 +81,10 @@ union WorkspaceState {
   string,
 
   @doc("The workspace is Active.")
-  "Active",
+  Active: "Active",
 
   @doc("The workspace is Inactive.")
-  "Inactive",
+  Inactive: "Inactive",
 }
 
 @doc("The Azure Testing workspace kind.")
@@ -92,7 +92,7 @@ union WorkspaceKind {
   string,
 
   @doc("The workspace is of kind - WebTesting.")
-  WebTesting: "WebTesting"
+  WebTesting: "WebTesting",
 }
 
 @doc("The Azure subscription state.")
@@ -100,19 +100,19 @@ union SubscriptionState {
   string,
 
   @doc("The subscription state is Registered.")
-  "Registered",
+  Registered: "Registered",
 
   @doc("The subscription state is Warned.")
-  "Warned",
+  Warned: "Warned",
 
   @doc("The subscription state is Suspended.")
-  "Suspended",
+  Suspended: "Suspended",
 
   @doc("The subscription state is Deleted.")
-  "Deleted",
+  Deleted: "Deleted",
 
   @doc("The subscription state is Unregistered.")
-  "Unregistered",
+  Unregistered: "Unregistered",
 }
 
 @doc("The enablement status of a feature.")

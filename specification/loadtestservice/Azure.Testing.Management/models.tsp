@@ -16,12 +16,11 @@ model Workspace is TrackedResource<WorkspaceProperties> {
 
 @doc("The Azure Testing workspace resource properties.")
 model WorkspaceProperties {
-  @doc("The workspace additional dynamic properties.")
-  additionalProperties?: WorkspaceAdditionalProperties;
-
   @visibility(Lifecycle.Read)
   @doc("The status of the last resource operation.")
   provisioningState?: ProvisioningState;
+
+  ...WorkspaceAdditionalProperties;
 }
 
 @doc("The status of the last resource operation.")

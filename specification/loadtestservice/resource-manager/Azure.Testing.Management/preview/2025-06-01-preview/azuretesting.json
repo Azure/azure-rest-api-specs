@@ -450,68 +450,6 @@
     }
   },
   "definitions": {
-    "Azure.Testing.Shared.WorkspaceAdditionalProperties": {
-      "type": "object",
-      "description": "The Azure Testing workspace additional dynamic properties.",
-      "properties": {
-        "webTestingDataplaneUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The Web Testing workspace data plane URI.",
-          "readOnly": true
-        },
-        "regionalAffinity": {
-          "type": "string",
-          "description": "This property sets the connection region for Testing client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          }
-        },
-        "localAuth": {
-          "type": "string",
-          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          }
-        }
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the last resource operation.",
@@ -611,14 +549,66 @@
       "type": "object",
       "description": "The Azure Testing workspace resource properties.",
       "properties": {
-        "additionalProperties": {
-          "$ref": "#/definitions/Azure.Testing.Shared.WorkspaceAdditionalProperties",
-          "description": "The workspace additional dynamic properties."
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last resource operation.",
           "readOnly": true
+        },
+        "webTestingDataplaneUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The Web Testing workspace data plane URI.",
+          "readOnly": true
+        },
+        "regionalAffinity": {
+          "type": "string",
+          "description": "This property sets the connection region for Testing client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "localAuth": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
         }
       }
     },
@@ -644,9 +634,55 @@
       "type": "object",
       "description": "The updatable properties of the Workspace.",
       "properties": {
-        "additionalProperties": {
-          "$ref": "#/definitions/Azure.Testing.Shared.WorkspaceAdditionalProperties",
-          "description": "The workspace additional dynamic properties."
+        "regionalAffinity": {
+          "type": "string",
+          "description": "This property sets the connection region for Testing client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "localAuth": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
         }
       }
     }
