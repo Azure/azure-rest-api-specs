@@ -55,6 +55,19 @@ interface Evaluations {
     Evaluation
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates an evaluation run for agent continuous evaluation.")
+  @route("runs:agent")
+  @post
+  createAgentRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Agent evaluation to be run")
+      @body
+      evaluation: Evaluation;
+    },
+    Evaluation
+  >;
+
   // Evaluation Private APIs
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Check annotation supported by the service.")

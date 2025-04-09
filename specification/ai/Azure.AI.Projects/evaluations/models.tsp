@@ -113,6 +113,14 @@ model Evaluation {
   @visibility(Lifecycle.Read)
   id: string;
 
+  @doc("Identifier of the agent thread.")
+  @visibility(Lifecycle.Read)
+  agentThreadId?: string;
+
+  @doc("Identifier of the agent run.")
+  @visibility(Lifecycle.Read)
+  agentRunId?: string;
+
   @doc("Data for evaluation.")
   data: InputData;
 
