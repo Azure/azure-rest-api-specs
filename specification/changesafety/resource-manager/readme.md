@@ -79,6 +79,7 @@ directive:
       - $.definitions.RetrieveNextStagesResponseItem.properties.parameterValues
       - $.definitions.StageMapProperties.properties.parameters
       - $.definitions.StageMapPropertiesUpdate.properties.parameters
+      - $.definitions.OperationContent.properties.properties
 ```
 
 ---
