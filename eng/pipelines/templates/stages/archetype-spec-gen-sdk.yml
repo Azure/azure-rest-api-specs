@@ -78,12 +78,8 @@ extends:
                 Exit 1
               }
               if (('$(Build.Reason)' -ne 'PullRequest') -and ('${{ parameters.SpecBatchTypes }}' -eq '')) {
-                if ('${{ parameters.ApiVersion }}' -eq '') {
-                  Write-Host "##vso[task.logissue type=error]Api version parameter is empty. Ensure it is set when trigger the pipeline."
-                  Exit 1
-                }
-                if (('${{ parameters.SdkReleaseType }}' -eq 'stable') -and ('${{ parameters.ApiVersion}}' -contains 'preview')) {
-                  Write-Host "##vso[task.logissue type=error]'SdkReleaseType' must be set to 'beta' for the preview API specifications."
+                if (('${{ parameters.SdkReleaseType }}' -eq 'stable') -and ('${{ parameters.ApiVersion}}' -match 'preview')) {
+                  Write-Host "##vso[task.logissue type=error]'SDK release type' must be set to 'beta' for the preview API specifications."
                   Exit 1
                 }
               }
@@ -131,19 +127,21 @@ extends:
           - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
             parameters:
               Paths:
-              - '/*'
-              - '!sdk/**/test-recordings/*'
-              - '!sdk/**/recordings/*'
-              - '!sdk/**/SessionRecords/*'
-              - '!sdk/**/session-records/*'
+                - '/*'
+                - '!sdk/**/test-recordings/*'
+                - '!sdk/**/recordings/*'
+                - '!sdk/**/SessionRecords/*'
+                - '!sdk/**/session-records/*'
               Repositories:
-              - Name: $(SpecRepoOwner)/$(SpecRepoName)
-                Commitish: $(SpecRepoCommit)
-                WorkingDirectory: $(SpecRepoDirectory)
-              - Name: $(SdkRepoOwner)/$(SdkRepoName)
-                Commitish: ${{ parameters.SdkRepoCommit }}
-                WorkingDirectory: $(SdkRepoDirectory)
+                - Name: $(SpecRepoOwner)/$(SpecRepoName)
+                  Commitish: $(SpecRepoCommit)
+                  WorkingDirectory: $(SpecRepoDirectory)
+                - Name: $(SdkRepoOwner)/$(SdkRepoName)
+                  Commitish: ${{ parameters.SdkRepoCommit }}
+                  WorkingDirectory: $(SdkRepoDirectory)
               SkipCheckoutNone: true
+              ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
+                TokenToUseForAuth: $(azuresdk-github-pat)
 
           - task: NodeTool@0
             inputs:
