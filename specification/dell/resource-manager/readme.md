@@ -30,33 +30,6 @@ openapi-subtype: rpaas
 tag: package-2025-03-21-preview
 ```
 
-### Tag: package-2022-06-09-preview
-
-These settings apply only when `--tag=package-2022-06-09-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-06-09-preview'
-input-file:
-  - Dell.Storage/preview/2022-06-09-preview/dellstorage.json
-```
-
-### Tag: package-2024-08-28-preview
-
-These settings apply only when `--tag=package-2024-08-28-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-08-28-preview'
-input-file:
-  - Dell.Storage/preview/2024-08-28-preview/Dell.Storage.json
-```
-
-### Tag: package-2025-02-11-preview
-
-These settings apply only when `--tag=package-2025-02-11-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-02-11-preview'
-input-file:
-  - Dell.Storage/preview/2025-02-11-preview/Dell.Storage.json
-```
-
 ### Tag: package-2025-03-21-preview
 
 These settings apply only when `--tag=package-2025-03-21-preview` is specified on the command line.
