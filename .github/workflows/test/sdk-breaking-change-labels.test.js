@@ -417,16 +417,17 @@ describe("sdk-breaking-change-labels", () => {
         },
       });
 
-      // Call function and expect it to throw
-      await expect(
-        getLabelAndActionImpl({
-          ado_build_id: inputs.ado_build_id,
-          ado_project_url: inputs.ado_project_url,
-          head_sha: inputs.head_sha,
-          github: mockGithub,
-          core: mockCore,
-        }),
-      ).rejects.toThrow();
-    });
+      // Start the async operation that will retry
+      const promise = getLabelAndActionImpl({
+        ado_build_id: inputs.ado_build_id,
+        ado_project_url: inputs.ado_project_url,
+        head_sha: inputs.head_sha,
+        github: mockGithub,
+        core: mockCore,
+      });
+
+      // Now expect the promise to reject
+      await expect(promise).rejects.toThrow("Network error");
+    }, 10000);
   });
 });
