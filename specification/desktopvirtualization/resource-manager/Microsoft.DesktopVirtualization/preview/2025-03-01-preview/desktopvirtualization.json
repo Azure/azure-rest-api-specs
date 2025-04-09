@@ -2882,6 +2882,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/controlSessionHostProvisioning": {
+      "post": {
+        "tags": [
+          "SessionHostManagement"
+        ],
+        "operationId": "ControlSessionHostProvisioning_Post",
+        "description": "Control provisioning of a hostpool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "hostPoolProvisioningControlParameter",
+            "description": "Object containing control action for hostpool provisioning.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostPoolProvisioningControlParameter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successfully controlled hostpool provisioning.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostUpdateStatuses/default": {
       "get": {
         "tags": [
@@ -2913,6 +2971,43 @@
             "description": "Successfully retrieved the session host update status.",
             "schema": {
               "$ref": "#/definitions/SessionHostManagementUpdateStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/sessionHostProvisioningStatuses/default": {
+      "get": {
+        "tags": [
+          "SessionHostManagement"
+        ],
+        "operationId": "SessionHostManagementsProvisioningStatuses_Get",
+        "description": "Get the session host provisioning status for a given hostpool.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the session host provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostManagementProvisioningStatus"
             }
           },
           "default": {
@@ -5953,6 +6048,52 @@
         "update": {
           "$ref": "#/definitions/HostPoolUpdateConfigurationProperties",
           "description": "Parameters for a hostpool update."
+        },
+        "provisioning": {
+          "$ref": "#/definitions/SessionHostProvisioningConfigurationProperties",
+          "description": "Parameters that apply when session hosts are provisioned."
+        },
+        "failedSessionHostCleanupPolicy": {
+          "description": "The policy that should be applied when the Session Host provisioning operation fails.",
+          "enum": [
+            "KeepAll",
+            "KeepOne",
+            "KeepNone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FailedSessionHostCleanupPolicySHC",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SessionHostProvisioningConfigurationProperties": {
+      "description": "The configuration for session host provisioning operations.",
+      "type": "object",
+      "properties": {
+        "setDrainMode": {
+          "type": "boolean",
+          "description": "Whether the session host should be set in drain mode following provisioning."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the number of session hosts to exist in the Host Pool.",
+          "minimum": 1
+        },
+        "canaryPolicy": {
+          "enum": [
+            "Auto",
+            "Never",
+            "Always"
+          ],
+          "type": "string",
+          "description": "Policy on whether a Canary VM should be provisioned during a session host provisioning operation.",
+          "x-ms-enum": {
+            "name": "CanaryPolicy",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5978,6 +6119,23 @@
         "update": {
           "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties",
           "description": "Parameters for a hostpool update."
+        },
+        "provisioning": {
+          "$ref": "#/definitions/SessionHostProvisioningConfigurationPatchProperties",
+          "description": "Parameters that apply when session hosts are provisioned."
+        },
+        "failedSessionHostCleanupPolicy": {
+          "description": "The policy that should be applied when the Session Host provisioning operation fails.",
+          "enum": [
+            "KeepAll",
+            "KeepOne",
+            "KeepNone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FailedSessionHostCleanupPolicySHC",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6035,6 +6193,35 @@
           "type": "string",
           "description": "Log off message sent to user for logoff.",
           "maxLength": 260
+        }
+      }
+    },
+    "SessionHostProvisioningConfigurationPatchProperties": {
+      "description": "The configuration for session host provisioning operations.",
+      "type": "object",
+      "properties": {
+        "setDrainMode": {
+          "type": "boolean",
+          "description": "Whether the session host should be set in drain mode following provisioning."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the number of session hosts to exist in the Host Pool.",
+          "minimum": 1
+        },
+        "canaryPolicy": {
+          "enum": [
+            "Auto",
+            "Never",
+            "Always"
+          ],
+          "type": "string",
+          "description": "Policy on whether a Canary VM should be provisioned during a session host provisioning operation.",
+          "x-ms-enum": {
+            "name": "CanaryPolicy",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6130,6 +6317,38 @@
         }
       }
     },
+    "HostPoolProvisioningControlParameter": {
+      "description": "Represents properties for a hostpool provisioning control request.",
+      "type": "object",
+      "required": [
+        "action"
+      ],
+      "properties": {
+        "action": {
+          "enum": [
+            "Cancel"
+          ],
+          "x-ms-enum": {
+            "name": "HostPoolProvisioningAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Cancel",
+                "description": "Cancel the hostpool provisioning."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "Action types for controlling hostpool provisioning.",
+          "x-nullable": false
+        },
+        "cancelMessage": {
+          "type": "string",
+          "description": "The cancel message sent to the user on the session host.",
+          "maxLength": 260
+        }
+      }
+    },
     "SessionHostManagementUpdateStatus": {
       "description": "The current status of the session host update async operation.",
       "type": "object",
@@ -6200,6 +6419,75 @@
         }
       }
     },
+    "SessionHostManagementProvisioningStatus": {
+      "description": "The current status of the session host provisioning async operation.",
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status. Current defined values are < Scheduled | ValidatingSessionHostProvisioning | Cancelling | ProvisioningSessionHosts > | Succeeded | Failed | Canceled",
+          "type": "string"
+        },
+        "percentComplete": {
+          "description": "Percent of the operation that is complete.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "description": "The start time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "error": {
+          "description": "If present, details of the operation error.",
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The custom properties of the SessionHost Provisioning Status.",
+          "$ref": "#/definitions/SessionHostManagementProvisioningStatusProperties"
+        }
+      }
+    },
+    "SessionHostManagementProvisioningStatusProperties": {
+      "description": "Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.",
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "type": "string",
+          "description": "The Log Analytics."
+        },
+        "progress": {
+          "description": "Progress information on the sessionHostManagement operation.",
+          "$ref": "#/definitions/SessionHostManagementProvisioningOperationProgress"
+        },
+        "scheduledDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp that the update is scheduled for."
+        },
+        "sessionHostManagement": {
+          "description": "SessionHostManagement properties used for the operation.",
+          "$ref": "#/definitions/SessionHostManagement"
+        }
+      }
+    },
     "SessionHostManagementOperationType": {
       "enum": [
         "InitiateSessionHostUpdate",
@@ -6239,6 +6527,37 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of sessionHosts rollback failed in the sessionHostManagement operation."
+        }
+      }
+    },
+    "SessionHostManagementProvisioningOperationProgress": {
+      "type": "object",
+      "description": "SessionHostManagement Provisioning Operation Progress information.",
+      "properties": {
+        "executionStartTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Time that the sessionHostManagement operation was created."
+        },
+        "sessionHostsInProgress": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of sessionHosts in progress in the sessionHostManagement provisioning operation."
+        },
+        "sessionHostsCompleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of sessionHosts completed in the sessionHostManagement provisioning operation."
+        },
+        "finalSessionHostsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The final instance count of the host pool for this provisioning operation."
+        },
+        "initialSessionHostsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The initial instance count of the host pool for this provisioning operation."
         }
       }
     },
@@ -6591,7 +6910,7 @@
           "description": "The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6"
         },
         "diskInfo": {
-          "$ref": "#/definitions/DiskInfoPatchProperties",
+          "$ref": "#/definitions/DiskInfoProperties",
           "description": "Disk information."
         },
         "customConfigurationScriptUrl": {
@@ -6625,9 +6944,20 @@
     "DiskInfoProperties": {
       "description": "Disk information.",
       "type": "object",
-      "required": [
-        "type"
-      ],
+      "properties": {
+        "managedDisk": {
+          "$ref": "#/definitions/ManagedDiskProperties",
+          "description": "The managed disk parameters."
+        },
+        "diffDiskSettings": {
+          "$ref": "#/definitions/DiffDiskProperties",
+          "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine."
+        }
+      }
+    },
+    "ManagedDiskProperties": {
+      "description": "Managed Disk information.",
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -6658,36 +6988,48 @@
         }
       }
     },
-    "DiskInfoPatchProperties": {
-      "description": "Disk information.",
+    "DiffDiskProperties": {
+      "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
       "type": "object",
       "properties": {
-        "type": {
+        "option": {
           "type": "string",
           "enum": [
-            "Standard_LRS",
-            "Premium_LRS",
-            "StandardSSD_LRS"
+            "Local"
           ],
           "x-ms-enum": {
-            "name": "VirtualMachineDiskType",
+            "name": "DiffDiskOption",
             "modelAsString": true,
             "values": [
               {
-                "value": "Standard_LRS",
-                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
-              },
-              {
-                "value": "Premium_LRS",
-                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
-              },
-              {
-                "value": "StandardSSD_LRS",
-                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+                "value": "Local",
+                "description": "Operating system disk local setting"
               }
             ]
           },
-          "description": "The disk type used by virtual machine in hostpool session host."
+          "description": "Specifies the ephemeral disk settings for operating system disk."
+        },
+        "Placement": {
+          "type": "string",
+          "enum": [
+            "CacheDisk",
+            "ResourceDisk"
+          ],
+          "x-ms-enum": {
+            "name": "DiffDiskPlacement",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CacheDisk",
+                "description": "Cache disk placement"
+              },
+              {
+                "value": "ResourceDisk",
+                "description": "Resource disk placement"
+              }
+            ]
+          },
+          "description": "Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'"
         }
       }
     },
