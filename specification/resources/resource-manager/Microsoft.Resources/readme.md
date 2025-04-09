@@ -88,7 +88,7 @@ suppressions:
   reason: Change resources cannot be created or named by end users
 - code: AvoidAdditionalProperties
   from: changes.json
-  where: $.definitions.ChangesDictionary.additionalProperties
+  where: $.definitions.ChangesDictionary
   reason: Change properties including the dictionary of individual property changes are dynamic types. Where clause is not working on all parent fields using this property bag, hence we're suppressing the entire file for now.
 ```
 
