@@ -2565,7 +2565,6 @@
     },
     "AutoImportJob": {
       "description": "An auto import job instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
-      "x-ms-azure-resource": true,
       "type": "object",
       "allOf": [
         {
@@ -2604,12 +2603,7 @@
               ],
               "x-ms-enum": {
                 "modelAsString": true
-              },
-              "x-ms-mutability": [
-                "read",
-                "create",
-                "update"
-              ]
+              }
             },
             "autoImportPrefixes": {
               "type": "array",
@@ -2623,7 +2617,7 @@
               ]
             },
             "conflictResolutionMode": {
-              "description": "How the auto import job will handle conflicts. For example, if the auto import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the auto import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the auto import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or is currently released. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/ for a thorough explanation of these resolution modes.",
+              "description": "How the auto import job will handle conflicts. For example, if the auto import job is trying to bring in a directory, but a file is at that path, how it handles it. Fail indicates that the auto import job should stop immediately and not do anything with the conflict. Skip indicates that it should pass over the conflict. OverwriteIfDirty causes the auto import job to delete and re-import the file or directory if it is a conflicting type, is dirty, or is currently released. OverwriteAlways extends OverwriteIfDirty to include releasing files that had been restored but were not dirty. Please reference https://learn.microsoft.com/en-us/azure/azure-managed-lustre/blob-integration#conflict-resolution-mode for a thorough explanation of these resolution modes.",
               "type": "string",
               "default": "Skip",
               "enum": [
@@ -2652,7 +2646,7 @@
             },
             "maximumErrors": {
               "type": "integer",
-              "format": "int32",
+              "format": "int64",
               "description": "Total non-conflict-oriented errors (e.g., OS errors) Import will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately on any error.",
               "x-ms-mutability": [
                 "read",
@@ -2696,76 +2690,75 @@
                   "readOnly": true,
                   "description": "Total number of blobs walked during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "rateOfBlobWalk": {
                   "readOnly": true,
                   "description": "Rate of blobs walked during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "totalBlobsImported": {
                   "readOnly": true,
                   "description": "Total number of blobs imported during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "rateOfBlobImport": {
                   "readOnly": true,
                   "description": "Rate of blob import during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "importedFiles": {
                   "readOnly": true,
                   "description": "Number of files imported during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "importedDirectories": {
                   "readOnly": true,
                   "description": "Number of directories imported during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "importedSymlinks": {
                   "readOnly": true,
                   "description": "Number of symlinks imported during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "preexistingFiles": {
                   "readOnly": true,
                   "description": "Number of preexisting files during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "preexistingDirectories": {
                   "readOnly": true,
                   "description": "Number of preexisting directories during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "preexistingSymlinks": {
                   "readOnly": true,
                   "description": "Number of preexisting symlinks during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "totalErrors": {
                   "readOnly": true,
                   "description": "Total errors encountered during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "totalConflicts": {
                   "readOnly": true,
                   "description": "Total conflicts encountered during full scan.",
                   "type": "integer",
-                  "format": "int32"
+                  "format": "int64"
                 },
                 "blobSyncEvents": {
-                  "x-ms-client-flatten": true,
                   "description": "The storage account blob change feed status of the auto import job.",
                   "type": "object",
                   "readOnly": true,
@@ -2774,67 +2767,67 @@
                       "readOnly": true,
                       "description": "Number of files imported during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "importedDirectories": {
                       "readOnly": true,
                       "description": "Number of directories imported during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "importedSymlinks": {
                       "readOnly": true,
                       "description": "Number of symlinks imported during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "preexistingFiles": {
                       "readOnly": true,
                       "description": "Number of preexisting files during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "preexistingDirectories": {
                       "readOnly": true,
                       "description": "Number of preexisting directories during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "preexistingSymlinks": {
                       "readOnly": true,
                       "description": "Number of preexisting symlinks during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "totalBlobsImported": {
                       "readOnly": true,
                       "description": "Total number of blobs imported during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "rateOfBlobImport": {
                       "readOnly": true,
-                      "description": "Rate of blob import during auto import.",
+                      "description": "Rate of blob import per second during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "totalErrors": {
                       "readOnly": true,
                       "description": "Total errors encountered during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "totalConflicts": {
                       "readOnly": true,
                       "description": "Total conflicts encountered during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "deletions": {
                       "readOnly": true,
                       "description": "Number of deletions during auto import.",
                       "type": "integer",
-                      "format": "int32"
+                      "format": "int64"
                     },
                     "lastChangeFeedEventConsumedTime": {
                       "readOnly": true,
@@ -2889,16 +2882,17 @@
     "AutoImportJobsListResult": {
       "description": "Result of the request to list auto import jobs. It contains a list of auto import jobs and a URL link to get the next set of results.",
       "properties": {
-        "nextLink": {
-          "description": "URL to get the next set of auto import job list results, if there are any.",
-          "type": "string"
-        },
         "value": {
           "description": "List of auto import jobs.",
           "items": {
             "$ref": "#/definitions/AutoImportJob"
           },
           "type": "array"
+        },
+        "nextLink": {
+          "description": "URL to get the next set of auto import job list results, if there are any.",
+          "type": "string",
+          "format": "uri"
         }
       },
       "type": "object"
