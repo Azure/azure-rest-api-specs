@@ -4343,7 +4343,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
             }
           },
           "202": {
@@ -4484,7 +4484,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsDtoBasicResourcePaginatedResult"
+              "$ref": "#/definitions/ManagedNetworkListResult"
             }
           },
           "default": {
@@ -6292,20 +6292,71 @@
         }
       }
     },
-    "ManagedNetworkSettingsDtoBasicResourcePaginatedResult": {
+    "ManagedNetworkListResult": {
+      "description": "List of outbound rules for the managed network of a machine learning workspace.",
       "type": "object",
       "properties": {
-        "continuationToken": {
-          "type": "string"
-        },
         "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
           "type": "string"
         },
         "value": {
+          "description": "The list of machine learning workspaces. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning workspaces.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
           }
+        }
+      }
+    },
+    "ManagedNetworkSettingsProperties": {
+      "description": "The properties of the managed network settings of a machine learning workspace.",
+      "type": "object",
+      "properties": {
+        "managedNetwork": {
+          "description": "Managed Network settings for a machine learning workspace.",
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        },
+        "provisioningState": {
+          "description": "The current deployment state of the managed network resource. The provisioningState is to indicate states for resource provisioning.",
+          "$ref": "#/definitions/ManagedNetworkProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ManagedNetworkProvisioningState": {
+      "enum": [
+        "Deferred",
+        "InitialProvisioning",
+        "Provisioning",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Deleted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedNetworkProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ManagedNetworkSettingsPropertiesBasicResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of the managed network settings of a machine learning workspace.",
+          "$ref": "#/definitions/ManagedNetworkSettingsProperties"
         }
       }
     },
