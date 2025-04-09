@@ -73,9 +73,6 @@ union ProvisioningState {
   @doc("Resource was successfully provisioned.") Succeeded: "Succeeded",
   @doc("Resource failed to provision.") Failed: "Failed",
 
-  @doc("Resource was provisioned with warning.")
-  ProvisionedWithWarning: "ProvisionedWithWarning",
-
   string,
 }
 
@@ -204,7 +201,7 @@ union PoolAlignTarget {
 
 @doc("Indicates which pool properties to align on.")
 @added(APIVersions.v2025_03_01_preview)
-model PoolAlignTargets {
+model PoolAlignBody {
   @doc("The targets to align on.")
   targets: Array<PoolAlignTarget>;
 }

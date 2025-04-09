@@ -1119,7 +1119,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PoolAlignTargets"
+              "$ref": "#/definitions/PoolAlignBody"
             }
           }
         ],
@@ -1937,7 +1937,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PoolAlignTargets"
+              "$ref": "#/definitions/PoolAlignBody"
             }
           }
         ],
@@ -7559,6 +7559,22 @@
         "autoStartEnableStatus"
       ]
     },
+    "PoolAlignBody": {
+      "type": "object",
+      "description": "Indicates which pool properties to align on.",
+      "properties": {
+        "targets": {
+          "type": "array",
+          "description": "The targets to align on.",
+          "items": {
+            "$ref": "#/definitions/PoolAlignTarget"
+          }
+        }
+      },
+      "required": [
+        "targets"
+      ]
+    },
     "PoolAlignTarget": {
       "type": "string",
       "description": "Possible values for the pool align target.",
@@ -7576,22 +7592,6 @@
           }
         ]
       }
-    },
-    "PoolAlignTargets": {
-      "type": "object",
-      "description": "Indicates which pool properties to align on.",
-      "properties": {
-        "targets": {
-          "type": "array",
-          "description": "The targets to align on.",
-          "items": {
-            "$ref": "#/definitions/PoolAlignTarget"
-          }
-        }
-      },
-      "required": [
-        "targets"
-      ]
     },
     "PoolHealthStatus": {
       "type": "string",
@@ -7944,8 +7944,7 @@
         "Updating",
         "Deleting",
         "Succeeded",
-        "Failed",
-        "ProvisionedWithWarning"
+        "Failed"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -7975,11 +7974,6 @@
             "name": "Failed",
             "value": "Failed",
             "description": "Resource failed to provision."
-          },
-          {
-            "name": "ProvisionedWithWarning",
-            "value": "ProvisionedWithWarning",
-            "description": "Resource was provisioned with warning."
           }
         ]
       }

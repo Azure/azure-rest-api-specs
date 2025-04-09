@@ -31,7 +31,7 @@ interface DevBoxes {
   @added(APIVersions.v2025_04_01_preview)
   alignPool is DevCenterOps.LongRunningResourceAction<
     Pool,
-    PoolAlignTargets,
+    PoolAlignBody,
     OperationStatus
   >;
 
@@ -223,7 +223,7 @@ interface DevBoxes {
   @added(APIVersions.v2025_03_01_preview)
   alignDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
-    PoolAlignTargets,
+    PoolAlignBody,
     OperationStatus
   >;
 
