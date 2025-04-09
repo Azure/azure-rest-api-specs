@@ -25,6 +25,22 @@ using Azure.ClientGenerator.Core;
   "expiresOn",
   "autorest"
 );
+@@clientName(ApiManagementGatewayTokenNearExpiryEventData.gatewayInfo,
+  "gateway",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenNearExpiryEventData.tokenInfo,
+  "token",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenExpiredEventData.gatewayInfo,
+  "gateway",
+  "autorest"
+);
+@@clientName(ApiManagementGatewayTokenExpiredEventData.tokenInfo,
+  "token",
+  "autorest"
+);
 @@clientName(AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",
   "autorest"
