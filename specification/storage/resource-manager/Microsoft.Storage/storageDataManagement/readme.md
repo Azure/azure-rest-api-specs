@@ -48,6 +48,8 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}/connectors/{connectorName}"].patch.parameters[5].schema.properties.properties
 ```
 
+### Tag: package-2025-05-01-preview
+
 ```yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
   - preview/2025-01-01-preview/connectors.json
@@ -59,7 +61,6 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}/connectors/{connectorName}"].patch.parameters[5].schema.properties.properties
 ```
-
 
 ## Code Generation
 
