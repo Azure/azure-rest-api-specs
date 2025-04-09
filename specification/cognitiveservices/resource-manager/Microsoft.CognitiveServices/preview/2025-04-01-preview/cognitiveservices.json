@@ -8851,19 +8851,34 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         },
-        "etag": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
           "type": "string",
-          "readOnly": true,
-          "description": "Resource Etag."
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         },
         "properties": {
           "$ref": "#/definitions/ProjectProperties",
-          "description": "Properties of Cognitive Services account."
+          "description": "Properties of Cognitive Services project."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/AzureEntityResource"
         }
       ]
     },
