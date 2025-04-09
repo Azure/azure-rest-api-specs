@@ -51,8 +51,8 @@ union ResultType {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model AssetCredentialRequest {
-  @doc("Data URI")
-  DataUri: string;
+  @doc("Blob URI")
+  BlobUri: string;
 }
 
 @doc("Asset Credential Response")
