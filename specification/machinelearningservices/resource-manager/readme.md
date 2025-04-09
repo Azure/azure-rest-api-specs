@@ -51,7 +51,11 @@ suppressions:
     reason: Service already using response pattern without provisioning state for all previous existing outbound rules APIs.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}].put
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
+  - code: ProvisioningStateMustBeReadOnly
+    reason: This provisioningState property is marked as readOnly. 
+       However, the definition of the enum is not marked as readOnly and is the reason this suppression is needed
+    where:
+      - $.definitions["ManagedNetworkSettingsPropertiesBasicResource"].properties.properties.properties["provisioningState"]
 ```
 
 ### Tag: package-preview-2025-01
