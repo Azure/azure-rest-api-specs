@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/streams";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp"; // e.g. ChatMessage, Agent, Thread
 import "./runs/runs.tsp"; // e.g. RunInputs etc.
 import "./streaming/streaming.tsp";
@@ -11,6 +12,7 @@ using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
+using Azure.ClientGenerator.Core;
 using Streams;
 
 namespace Azure.AI.Projects;
@@ -116,6 +118,7 @@ interface Threads {
   Includes standard resource operations + custom collection-level
   and instance-level actions (complete, stream).
   """)
+@clientName("AgentsClient", "csharp")
 interface Agents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Creates a new Agent resource and returns it.")
@@ -123,7 +126,8 @@ interface Agents {
   @route("/agents")
   createAgent is Operation<
     {
-      ...AgentOptions;
+      @doc("The options for agent creation.")
+      options: AgentCreationOptions;
     },
     Agent
   >;
@@ -177,69 +181,47 @@ interface Agents {
   @route("/agents")
   listAgents is Operation<NoRequest, Agent[]>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @Rest.action("stream")
-  streamByAgent is AgentOperations.ResourceAction<
-    Agent,
-    {
-      ...RunInputs;
-    },
-    Streams.Stream<StreamingUpdate>
-  >;
-}
-
-@doc("""
-  RUNS
-  
-  Interface is rooted at /runs.
-  Includes standard resource operations + custom collection-level
-  and instance-level actions (complete, stream).
-  """)
-interface Runs {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates and waits for a run to finish, returning the completed Run (including its outputs).")
   @post
-  @route("/runs")
-  @doc("Creates a new run.")
-  createRun is Azure.Core.Foundations.Operation<
+  @route("/agents/runs/run")
+  run is Azure.Core.Foundations.Operation<
     {
-      ...RunInputs;
+      @doc("The options for the agent completing the run.")
+      options: AgentConfigurationOptions;
+
+      @doc("The inputs for the run.")
+      inputs: RunInputs;
     },
     Run
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  @Rest.action("stream")
+  @post
+  @route("/agents/runs/stream")
+  stream is Azure.Core.Foundations.Operation<
+    {
+      @doc("The options for the agent completing the run.")
+      options: AgentConfigurationOptions;
+
+      @doc("The inputs for the run.")
+      inputs: RunInputs;
+    },
+    Streams.Stream<StreamingUpdate>
   >;
 
   @doc("""
     Retrieves an existing run by its ID.
-    @route("/run/{run_id}")
+    @route("/agents/runs/{run_id}")
     """)
   @get
   getRun is AgentOperations.ResourceRead<Run>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates and waits for a run to finish, returning the completed Run (including its outputs).")
-  @post
-  @route("/runs/execute")
-  createAndExecuteRun is Azure.Core.Foundations.Operation<
-    {
-      ...RunInputs;
-    },
-    Run
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @doc("""
-    Create and stream run.
-    @route("/run/stream")
-    """)
-  @post
-  createAndStreamRun is AgentOperations.ResourceCollectionAction<
-    Run,
-    Run,
-    Streams.Stream<StreamingUpdate>
-  >;
-
   @doc("""
     Lists all run records, each containing runInputs and runOutputs.
-    @route("/runs")
+    @route("/agents/runs")
     """)
   @get
   listRuns is AgentOperations.ResourceList<Run>;
