@@ -1,9 +1,6 @@
 // @ts-check
 
-// Ignore code coverage since code is simple but hard to mock
-/* v8 ignore start */
-
-import { execRoot } from "./exec.js";
+import { buildCmd, exec } from "./exec.js";
 
 /**
  * @typedef {import('./types.js').ILogger} ILogger
@@ -14,15 +11,16 @@ import { execRoot } from "./exec.js";
  * @param {string} headCommitish
  * @param {Object} [options]
  * @param {string} [options.args]
+ * @param {string} [options.cwd] Current working directory. Default: process.cwd().
  * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
 export async function diff(baseCommitish, headCommitish, options = {}) {
-  const { args, logger } = options;
+  const { args, cwd, logger } = options;
 
-  return await execGit(`diff ${args} ${baseCommitish} ${headCommitish}`, {
-    logger: logger,
-  });
+  const cmd = buildCmd("diff", args, baseCommitish, headCommitish);
+
+  return await execGit(cmd, { cwd, logger });
 }
 
 /**
@@ -30,15 +28,16 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
  * @param {string} path
  * @param {Object} [options]
  * @param {string} [options.args]
+ * @param {string} [options.cwd] Current working directory.  Default process.cwd().
  * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
 export async function lsTree(treeIsh, path, options = {}) {
-  const { args, logger } = options;
+  const { args, cwd, logger } = options;
 
-  return await execGit(`ls-tree ${args} ${treeIsh} ${path}`, {
-    logger: logger,
-  });
+  const cmd = buildCmd("ls-tree", args, treeIsh, path);
+
+  return await execGit(cmd, { cwd, logger });
 }
 
 /**
@@ -46,24 +45,32 @@ export async function lsTree(treeIsh, path, options = {}) {
  * @param {string} path
  * @param {Object} [options]
  * @param {string} [options.args]
+ * @param {string} [options.cwd] Current working directory. Default: process.cwd().
  * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
 export async function show(treeIsh, path, options = {}) {
-  const { args, logger } = options;
+  const { args, cwd, logger } = options;
 
-  return await execGit(`show ${args} ${treeIsh}:${path}`, { logger: logger });
+  const cmd = buildCmd("show", args, `${treeIsh}:${path}`);
+
+  return await execGit(cmd, { cwd, logger });
 }
 
 /**
  * @param {string} args
  * @param {Object} [options]
+ * @param {string} [options.cwd] Current working directory. Default: process.cwd().
  * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
-async function execGit(args, options) {
+async function execGit(args, options = {}) {
+  const { cwd, logger } = options;
+
   // Ensure that git displays filenames as they are (without escaping)
   const defaultConfig = "-c core.quotepath=off";
 
-  return await execRoot(`git ${defaultConfig} ${args}`, options);
+  const cmd = buildCmd("git", defaultConfig, args);
+
+  return await exec(cmd, { cwd, logger });
 }
