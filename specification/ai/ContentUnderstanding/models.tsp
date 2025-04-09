@@ -320,6 +320,9 @@ model ContentSpan {
   length: int32;
 }
 
+@doc("Encoded string expression that describes positions in the content.")
+scalar SourceExpression extends string;
+
 @doc("Field extracted from the content.")
 @discriminator("type")
 model ContentField {
@@ -335,7 +338,7 @@ model ContentField {
   confidence?: float32;
 
   @doc("Encoded source that identifies the position of the field value in the content.")
-  source?: string;
+  source?: SourceExpression;
 }
 
 @doc("String field extracted from the content.")

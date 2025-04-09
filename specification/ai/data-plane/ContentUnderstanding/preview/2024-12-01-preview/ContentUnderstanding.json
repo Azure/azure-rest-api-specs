@@ -1205,7 +1205,7 @@
           "maximum": 1
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the field value in the content."
         }
       },
@@ -1296,7 +1296,7 @@
           "description": "Barcode value."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the barcode in the content."
         },
         "span": {
@@ -1439,7 +1439,7 @@
           "description": "Content of the caption."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the caption in the content."
         },
         "span": {
@@ -1548,7 +1548,7 @@
           "description": "Figure identifier."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the figure in the content."
         },
         "span": {
@@ -1588,7 +1588,7 @@
           "description": "Content of the footnote."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the footnote in the content."
         },
         "span": {
@@ -1620,7 +1620,7 @@
           "description": "LaTex expression describing the formula."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the formula in the content."
         },
         "span": {
@@ -1673,7 +1673,7 @@
           "description": "Line text."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the line in the content."
         },
         "span": {
@@ -1769,7 +1769,7 @@
           "description": "Paragraph text."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the paragraph in the content."
         },
         "span": {
@@ -1823,7 +1823,7 @@
           "x-ms-identifiers": []
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the table in the content."
         },
         "span": {
@@ -1925,7 +1925,7 @@
           "description": "Content of the table cell."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the table cell in the content."
         },
         "span": {
@@ -1955,7 +1955,7 @@
           "description": "Word text."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the word in the content."
         },
         "span": {
@@ -2176,7 +2176,7 @@
           "description": "Confidence of predicting the face."
         },
         "source": {
-          "type": "string",
+          "$ref": "#/definitions/SourceExpression",
           "description": "Encoded source that identifies the position of the face in the content."
         }
       }
@@ -2418,6 +2418,10 @@
           }
         ]
       }
+    },
+    "SourceExpression": {
+      "type": "string",
+      "description": "Encoded string expression that describes positions in the content."
     },
     "StringField": {
       "type": "object",
