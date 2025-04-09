@@ -46,3 +46,11 @@ using Microsoft.ServiceNetworking;
   "TrafficControllerProvisioningState",
   "csharp"
 );
+@@clientName(Versions.v2023_11_01,
+  "$DO_NOT_NORMALIZE$V2023_11_01",
+  "javascript"
+);
+@@clientName(Versions.v2025_05_01,
+  "$DO_NOT_NORMALIZE$V2025_05_01",
+  "javascript"
+);
