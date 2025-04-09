@@ -1060,7 +1060,8 @@
             "in": "query",
             "description": "Optional. Specified maximum number of containers that can be included in the list.",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -2501,7 +2502,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}": {
       "get": {
         "operationId": "FileServices_GetServiceProperties",
         "tags": [
@@ -2527,6 +2528,13 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -2576,6 +2584,13 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.",
@@ -2612,7 +2627,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/shares": {
       "get": {
         "operationId": "FileShares_List",
         "tags": [
@@ -2638,6 +2653,13 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$maxpagesize",
@@ -2698,7 +2720,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/shares/{shareName}": {
       "get": {
         "operationId": "FileShares_Get",
         "tags": [
@@ -2724,6 +2746,13 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "shareName",
@@ -2803,6 +2832,13 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "shareName",
@@ -2895,6 +2931,13 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "shareName",
             "in": "path",
             "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
@@ -2969,6 +3012,13 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "shareName",
             "in": "path",
             "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
@@ -3013,7 +3063,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/lease": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/shares/{shareName}/lease": {
       "post": {
         "operationId": "FileShares_Lease",
         "tags": [
@@ -3039,6 +3089,13 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "shareName",
@@ -3096,7 +3153,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/restore": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/shares/{shareName}/restore": {
       "post": {
         "operationId": "FileShares_Restore",
         "tags": [
@@ -3122,6 +3179,13 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "shareName",
@@ -3160,7 +3224,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/usages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages": {
       "get": {
         "operationId": "FileServices_ListServiceUsages",
         "tags": [
@@ -3186,6 +3250,13 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "The name of the FileServiceProperties",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$maxpagesize",
@@ -3220,7 +3291,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/usages/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages/{fileServiceUsagesName}": {
       "get": {
         "operationId": "FileServices_GetServiceUsage",
         "tags": [
@@ -3246,6 +3317,20 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "FileServicesName",
+            "in": "path",
+            "description": "The name of the FileServiceProperties",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileServiceUsagesName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -5288,7 +5373,8 @@
             "in": "query",
             "description": "Optional, a maximum number of queues that should be included in a list queue response",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -8529,7 +8615,7 @@
         "properties": {
           "$ref": "#/definitions/FileServiceUsageProperties",
           "description": "File service usage in storage account including account limits, file share limits and constants used in recommendations and bursting formula.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": false
         }
       },
       "allOf": [
@@ -10838,6 +10924,16 @@
             "$ref": "#/definitions/ObjectReplicationPolicyRule"
           },
           "x-ms-identifiers": []
+        },
+        "metrics": {
+          "type": "object",
+          "description": "Optional. The object replication policy metrics feature options.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Indicates whether object replication metrics feature is enabled for the policy."
+            }
+          }
         }
       },
       "required": [
@@ -13040,7 +13136,7 @@
         "properties": {
           "$ref": "#/definitions/StorageTaskAssignmentProperties",
           "description": "Properties of the storage task assignment.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": false
         }
       },
       "required": [

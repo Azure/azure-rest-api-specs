@@ -53,6 +53,7 @@ using Azure.Core;
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(FileServiceProperties.properties);
+@@clientName(FileServiceProperties, "FileService", "csharp");
 
 @@clientName(FileShares.create::parameters.resource, "fileShare");
 @@clientName(FileShares.update::parameters.properties, "fileShare");
@@ -60,7 +61,6 @@ using Azure.Core;
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(FileShare.properties);
 
-// @@clientName(QueueServicePropertiesOperationGroup, "QueueServiceProperties");
 @@clientName(QueueServices.setServiceProperties::parameters.resource,
   "parameters"
 );
@@ -481,7 +481,6 @@ using Azure.Core;
   "NetworkSecurityPerimeterProvisioningIssueType",
   "csharp"
 );
-@@clientName(FileServiceProperties, "FileService", "csharp");
 @@clientName(FileShareItem, "FileShareData", "csharp");
 
 @@clientName(RestorePolicyProperties, "RestorePolicy", "csharp");
@@ -609,4 +608,11 @@ using Azure.Core;
 @@alternateType(Usages.listByLocation::parameters.location,
   azureLocation,
   "csharp"
+);
+
+@@OpenAPI.extension(FileServiceUsage.properties, "x-ms-client-flatten", false);
+
+@@OpenAPI.extension(StorageTaskAssignment.properties,
+  "x-ms-client-flatten",
+  false
 );

@@ -4831,6 +4831,16 @@ model ObjectReplicationPolicyProperties {
    */
   @OpenAPI.extension("x-ms-identifiers", [])
   rules?: ObjectReplicationPolicyRule[];
+
+  /**
+   * Optional. The object replication policy metrics feature options.
+   */
+  metrics?: {
+    /**
+     * Indicates whether object replication metrics feature is enabled for the policy.
+     */
+    enabled?: boolean;
+  };
 }
 
 /**
