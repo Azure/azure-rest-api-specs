@@ -21,7 +21,7 @@ model GalleryInVMAccessControlProfileVersion
     Resource = GalleryInVMAccessControlProfileVersion,
     KeyName = "inVMAccessControlProfileVersionName",
     SegmentName = "versions",
-    NamePattern = "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    NamePattern = ""
   >;
 }
 
