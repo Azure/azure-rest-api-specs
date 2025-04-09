@@ -23,21 +23,32 @@ model EntitiesTaskParameters is PreBuiltTaskParameters {
   /** (Optional) parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes). */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
-  /** (Optional) request parameter that limits the output to the requested entity types included in this list. We will apply inclusionList before exclusionList */
-  @added(Versions.v2024_11_01)
-  inclusionList?: Array<EntityCategory>;
+  .
+  .
+  
+  /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance entity detection. */
+  @added(Versions.v2025_05_15_preview)
+  entitySynonyms?: EntitySynonyms;
+}
 
-  /** (Optional) request parameter that filters out any entities that are included the excludeList. When a user specifies an excludeList, they cannot get a prediction returned with an entity in that list. We will apply inclusionList before exclusionList */
-  @added(Versions.v2024_11_01)
-  exclusionList?: Array<EntityCategory>;
+/** Object that allows the user to provide synonyms for context words that to enhance entity detection. */
+@added(Versions.v2025_05_15_preview)
+model EntitySynonyms {
+  /** The entity name */
+  entityType: EntityCategory;
 
-  /** (Optional) describes the type of overlap policy to apply to the ner output. */
-  @added(Versions.v2024_11_01)
-  overlapPolicy?: BaseEntityOverlapPolicy;
+  /** The entity synonyms */
+  synonyms: Array<EntitySynonym>;
+}
 
-  /** (Optional) request parameter that allows the user to provide settings for running the inference. */
-  @added(Versions.v2024_11_01)
-  inferenceOptions?: EntityInferenceOptions;
+/** The entity synonyms used to enhance entity detection */
+@added(Versions.v2025_05_15_preview)
+model EntitySynonym {
+  /** The synonym to be used for context */
+  synonym: string;
+  
+  /** The language the synonym */
+  language?: string;
 }
 
 /** An object representing the task definition for an Entities Recognition task. */

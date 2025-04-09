@@ -2344,6 +2344,10 @@
         "inferenceOptions": {
           "$ref": "#/definitions/EntityInferenceOptions",
           "description": "(Optional) request parameter that allows the user to provide settings for running the inference."
+        },
+        "entitySynonyms": {
+          "$ref": "#/definitions/EntitySynonyms",
+          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance entity detection."
         }
       }
     },
@@ -2974,6 +2978,45 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionLROResults"
+    },
+    "EntitySynonym": {
+      "type": "object",
+      "description": "The entity synonyms used to enhance entity detection",
+      "properties": {
+        "synonym": {
+          "type": "string",
+          "description": "The synonym to be used for context"
+        },
+        "language": {
+          "type": "string",
+          "description": "The language the synonym"
+        }
+      },
+      "required": [
+        "synonym"
+      ]
+    },
+    "EntitySynonyms": {
+      "type": "object",
+      "description": "Object that allows the user to provide synonyms for context words that to enhance entity detection.",
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/EntityCategory",
+          "description": "The entity name"
+        },
+        "synonyms": {
+          "type": "array",
+          "description": "The entity synonyms",
+          "items": {
+            "$ref": "#/definitions/EntitySynonym"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "entityType",
+        "synonyms"
+      ]
     },
     "EntityTag": {
       "type": "object",
