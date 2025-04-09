@@ -1,7 +1,7 @@
 import path from "path";
 import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
 
 export class FolderStructureRule implements Rule {
@@ -100,6 +100,51 @@ export class FolderStructureRule implements Rule {
       ) {
         errorOutput += `Invalid folder structure: TypeSpec for data-plane specs or shared code must be in a folder NOT ending with '.Management'`;
         success = false;
+      }
+    }
+
+    // Ensure specs only import files from same folder under "specification"
+    stdOutput += "imports:\n";
+
+    const teamFolder = path.join(...folderStruct.slice(0, 2));
+    stdOutput += `  ${teamFolder}\n`;
+
+    const teamFolderResolved = path.resolve(gitRoot, teamFolder);
+
+    const tsps = await host.globby("**/*.tsp", { cwd: teamFolderResolved });
+
+    for (const tsp of tsps) {
+      const tspResolved = path.resolve(teamFolderResolved, tsp);
+
+      const pattern = /^\s*import\s+['"]([^'"]+)['"]\s*;\s*$/gm;
+      const text = await host.readFile(tspResolved);
+      const imports = [...text.matchAll(pattern)].map((m) => m[1]);
+
+      // The path specified in the import must either start with "./" or "../", or be an absolute path.
+      // The path should either point to a directory, or have an extension of either ".tsp" or ".js".
+      // https://typespec.io/docs/language-basics/imports/
+      //
+      // We don't bother checking if the path has an extension of ".tsp" or ".js", because a directory
+      // is also valid, and a directory could be named anything.  We only care if the path is under
+      // $teamFolder, so we just treat anything that looks like a relative or absolute path,
+      // as a path.
+      const fileImports = imports.filter(
+        (i) => i.startsWith("./") || i.startsWith("../") || path.isAbsolute(i),
+      );
+
+      stdOutput += `    ${tsp}: ${JSON.stringify(fileImports)}\n`;
+
+      for (const fileImport of fileImports) {
+        const fileImportResolved = path.resolve(path.dirname(tspResolved), fileImport);
+
+        const relative = path.relative(teamFolderResolved, fileImportResolved);
+
+        if (relative.startsWith("..")) {
+          errorOutput +=
+            `Invalid folder structure: '${tsp}' imports '${fileImport}', ` +
+            `which is outside '${path.relative(gitRoot, teamFolder)}'`;
+          success = false;
+        }
       }
     }
 

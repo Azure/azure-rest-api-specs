@@ -1,5 +1,5 @@
-import { readFile } from "fs/promises";
-import { globby } from "globby";
+import { readFile as readFileImpl } from "fs/promises";
+import { globby, Options as GlobbyOptions } from "globby";
 import { join } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
@@ -27,7 +27,11 @@ export class TsvRunnerHost implements TsvHost {
   }
 
   readTspConfig(folder: string): Promise<string> {
-    return readFile(join(folder, "tspconfig.yaml"), "utf-8");
+    return readFileImpl(join(folder, "tspconfig.yaml"), "utf-8");
+  }
+
+  readFile(path: string): Promise<string> {
+    return readFileImpl(path, "utf-8");
   }
 
   runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]> {
@@ -42,8 +46,8 @@ export class TsvRunnerHost implements TsvHost {
     return gitDiffTopSpecFolder(host, folder);
   }
 
-  globby(patterns: string[]): Promise<string[]> {
-    return globby(patterns);
+  globby(patterns: string | string[], options?: GlobbyOptions): Promise<string[]> {
+    return globby(patterns, options);
   }
 
   getSuppressions(path: string): Promise<Suppression[]> {
