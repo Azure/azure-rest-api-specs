@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-10-27",
+    "version": "2025-03-01-preview",
     "title": "appliances",
     "description": "The appliances Rest API spec."
   },
@@ -290,6 +290,9 @@
         "x-ms-examples": {
           "Create/Update Appliance": {
             "$ref": "./examples/AppliancesCreate_Update.json"
+          },
+          "Start proxy update operation": {
+            "$ref": "./examples/AppliancesUpdateProxy.json"
           }
         }
       },
@@ -569,6 +572,63 @@
         "modelAsString": true
       }
     },
+    "DnsConfiguration": {
+      "description": "Contains DNS information about the Appliance",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the DNS configuration.",
+          "type": "string"
+        }
+      }
+    },
+    "Event": {
+      "description": "Event contains information about customer driven, platform driven, or unplanned events that occurred on the Appliance",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Code is used to break down the event further to identify why it occurred.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": " Message is intended to be actionable and should be used to inform the user of the event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "severity": {
+          "description": " Severity is the classification of the event to relay the importance of the event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status is used to represent the outcome of the event.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "description": "Timestamp is the time the event occurred",
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64"
+        },
+        "type": {
+          "description": "The type of event is used to classify how the event was initiated ",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GatewayConfiguration": {
+      "description": "Contains Arc Gateway information about the Appliance",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the Arc Gateway configuration.",
+          "type": "string"
+        }
+      }
+    },
     "HybridConnectionConfig": {
       "description": "Contains the REP (rendezvous endpoint) and “Listener” access token from notification service (NS).",
       "type": "object",
@@ -624,6 +684,31 @@
         }
       }
     },
+    "NetworkProfile": {
+      "description": "Contains network information about the Appliance",
+      "type": "object",
+      "properties": {
+        "dnsConfiguration": {
+          "$ref": "#/definitions/DnsConfiguration"
+        },
+        "gatewayConfiguration": {
+          "$ref": "#/definitions/GatewayConfiguration"
+        },
+        "proxyConfiguration": {
+          "$ref": "#/definitions/ProxyConfiguration"
+        }
+      }
+    },
+    "ProxyConfiguration": {
+      "description": "Contains proxy information about the Appliance",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Version of the proxy configuration.",
+          "type": "string"
+        }
+      }
+    },
     "SSHKey": {
       "description": "Appliance SSHKey definition.",
       "type": "object",
@@ -664,6 +749,7 @@
         "SSHCustomerUser",
         "ManagementCAKey",
         "LogsKey",
+        "UserManagementKey",
         "ScopedAccessKey"
       ],
       "x-ms-enum": {
@@ -1003,6 +1089,15 @@
           },
           "default": "AKSEdge"
         },
+        "events": {
+          "description": "A list of events that occurred on the Appliance to relay information to the user.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Event"
+          },
+          "x-ms-identifiers": []
+        },
         "infrastructureConfig": {
           "description": "Contains infrastructure information about the Appliance",
           "type": "object",
@@ -1022,6 +1117,9 @@
             }
           }
         },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile"
+        },
         "provisioningState": {
           "description": "The current deployment or provisioning state, which only appears in the response.",
           "type": "string",
@@ -1032,7 +1130,7 @@
           "type": "string"
         },
         "status": {
-          "description": "Appliance’s health and state of connection to on-prem",
+          "description": "Appliance’s health and state of connection to on-prem. This list of values is not exhaustive.",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1066,6 +1164,18 @@
             "UpgradeComplete",
             "UpgradeClusterExtensionFailedToDelete",
             "UpgradeFailed",
+            "NetworkProxyUpdatePreparing",
+            "NetworkProxyUpdating",
+            "NetworkProxyUpdateComplete",
+            "NetworkProxyUpdateFailed",
+            "NetworkDNSUpdatePreparing",
+            "NetworkDNSUpdating",
+            "NetworkDNSUpdateComplete",
+            "NetworkDNSUpdateFailed",
+            "ArcGatewayUpdatePreparing",
+            "ArcGatewayUpdating",
+            "ArcGatewayUpdateComplete",
+            "ArcGatewayUpdateFailed",
             "Offline",
             "None"
           ],
