@@ -1148,6 +1148,10 @@
         "activeHoursConfiguration": {
           "description": "Active hours configuration settings for Dev Boxes created in this pool.",
           "$ref": "#/definitions/ActiveHoursConfiguration"
+        },
+        "devBoxTunnelEnableStatus": {
+          "description": "Indicates whether Dev Box Tunnel is enabled for a the pool.",
+          "$ref": "#/definitions/DevBoxTunnelEnableStatus"
         }
       }
     },
@@ -1478,6 +1482,18 @@
           "type": "string",
           "description": "A message describing the error."
         }
+      }
+    },
+    "DevBoxTunnelEnableStatus":{
+      "description": "Indicates whether Dev Box Tunnel is enabled.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DevBoxTunnelEnableStatus",
+        "modelAsString": true
       }
     },
     "NetworkConnection": {

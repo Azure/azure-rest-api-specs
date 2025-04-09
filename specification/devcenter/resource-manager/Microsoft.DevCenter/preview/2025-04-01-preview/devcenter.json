@@ -5693,8 +5693,8 @@
     "UserCustomizationsEnableStatus": {
       "description": "Indicates whether user customizations are enabled.",
       "enum": [
-        "Enabled",
-        "Disabled"
+        "Disabled",
+        "Enabled"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -5705,8 +5705,8 @@
     "DevBoxAutoDeleteEnableStatus": {
       "description": "Indicates whether auto delete is enabled.",
       "enum": [
-        "Enabled",
-        "Disabled"
+        "Disabled",
+        "Enabled"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -5717,24 +5717,12 @@
     "AzureAiServicesEnableStatus": {
       "description": "Indicates whether Azure AI services are enabled for a project.",
       "enum": [
-        "Enabled",
-        "Disabled"
+        "Disabled",
+        "Enabled"
       ],
       "type": "string",
       "x-ms-enum": {
         "name": "AzureAiServicesEnableStatus",
-        "modelAsString": true
-      }
-    },
-    "DevBoxTunnelEnableStatus": {
-      "description": "Indicates whether Dev Box Tunnel is enabled for a project.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "DevBoxTunnelEnableStatus",
         "modelAsString": true
       }
     },
@@ -5890,6 +5878,22 @@
         "customizationSettings": {
           "$ref": "#/definitions/ProjectCustomizationSettings",
           "description": "Settings to be used for customizations."
+        },
+        "devBoxAutoDeleteSettings": {
+          "description": "Dev Box Auto Delete settings.",
+          "$ref": "#/definitions/DevBoxAutoDeleteSettings"
+        },
+        "azureAiServicesSettings": {
+          "description": "Indicates whether Azure AI services are enabled for a project.",
+          "$ref": "#/definitions/AzureAiServicesSettings"
+        },
+        "serverlessGpuSessionsSettings": {
+          "$ref": "#/definitions/ServerlessGpuSessionsSettings",
+          "description": "Settings to be used for serverless GPU."
+        },
+        "workspaceStorageSettings": {
+          "description": "Settings to be used for workspace storage.",
+          "$ref": "#/definitions/WorkspaceStorageSettings"
         }
       }
     },
@@ -5938,7 +5942,61 @@
           "items": {
             "$ref": "#/definitions/ProjectCustomizationManagedIdentity"
           }
+        },
+        "userCustomizationsEnableStatus": {
+          "description": "Indicates whether user customizations are enabled.",
+          "$ref": "#/definitions/UserCustomizationsEnableStatus"
         }
+      }
+    },
+    "ServerlessGpuSessionsSettings": {
+      "description": "Represents settings for serverless GPU access.",
+      "type": "object",
+      "properties": {
+        "serverlessGpuSessionsEnableStatus": {
+          "description": "The property indicates whether serverless GPU access is enabled on the project.",
+          "$ref": "#/definitions/ServerlessGpuSessionsEnableStatus"
+        },
+        "maxConcurrentSessionsPerProject": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "When specified, limits the maximum number of concurrent sessions across all pools in the project."
+        }
+      }
+    },
+    "WorkspaceStorageSettings": {
+      "description": "Settings to be used for workspace storage.",
+      "type": "object",
+      "properties": {
+        "workspaceStorageEnableStatus": {
+          "description": "Indicates whether workspace storage is enabled.",
+          "$ref": "#/definitions/WorkspaceStorageEnableStatus"
+        }
+      }
+    },
+    "ServerlessGpuSessionsEnableStatus":{
+      "description": "Indicates whether serverless GPU session access is enabled.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ServerlessGpuSessionsEnableStatus",
+        "modelAsString": true
+      }
+    },
+    "WorkspaceStorageEnableStatus": {
+      "description": "Indicates whether workspace storage is enabled.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "WorkspaceStorageEnableStatus",
+        "modelAsString": true
       }
     },
     "ProjectProperties": {
@@ -6142,30 +6200,58 @@
       "description": "Represents policies to enforce configuration settings on a project.",
       "type": "object",
       "properties": {
-        "userCustomizationsEnableStatus": {
-          "description": "The property indicates whether user customizations are enabled.",
-          "$ref": "#/definitions/UserCustomizationsEnableStatus"
-        },
-        "devBoxAutoDeleteConfiguration": {
-          "description": "A property containing the configuration for auto delete of Dev Boxes for a project.",
-          "$ref": "#/definitions/DevBoxAutoDeleteConfiguration"
-        },
-        "azureAiServicesConfiguration": {
+        "azureAiServicesFeatureStatus": {
           "description": "The property indicates the Azure AI services settings on a project.",
-          "$ref": "#/definitions/AzureAiServicesConfiguration"
+          "$ref": "#/definitions/FeatureStateModifiable"
         },
-        "devBoxTunnelEnableStatus": {
-          "description": "The property indicates whether DevBox tunnel is enabled.",
-          "$ref": "#/definitions/DevBoxTunnelEnableStatus"
+        "devBoxAutoDeleteFeatureStatus": {
+          "description": "Indicates whether the setting is configurable at Project scope.",
+          "$ref": "#/definitions/FeatureStateModifiable"
+        },
+        "devBoxLimitsFeatureStatus": {
+          "description": "Indicates whether DevBox limits are configurable at Project scope.",
+          "$ref": "#/definitions/FeatureStateModifiable"
+        },
+        "devBoxTunnelFeatureStatus": {
+          "description": "Indicates whether DevBox tunnel settings are configurable at Pool scope.",
+          "$ref": "#/definitions/FeatureStateModifiable"
+        },
+        "projectCatalogFeatureStatus": {
+          "description": "Indicates whether project catalogs are configurable at Project scope.",
+          "$ref": "#/definitions/FeatureStateModifiable"
+        },
+        "serverlessGpuSessionsFeatureStatus": {
+          "description": "Indicates whether serverless GPU sessions are configurable at Project scope.",
+          "$ref": "#/definitions/FeatureStateModifiable"
+        },
+        "userCustomizationsFeatureStatus": {
+          "description": "Indicates whether user customizations is configurable at Project scope.",
+          "$ref": "#/definitions/FeatureStateModifiable"
+        },
+        "workspaceStorageFeatureStatus": {
+          "description": "Indicates whether workspace storage is configurable at Project scope.",
+          "$ref": "#/definitions/FeatureStateModifiable"
         }
       }
     },
-    "DevBoxAutoDeleteConfiguration": {
-      "description": "Represents policy to auto delete inactive dev boxes.",
+    "FeatureStateModifiable": {
+      "description": "Feature enablement status.",
+      "enum": [
+        "FeatureNotModifiable",
+        "FeatureModifiable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureStateModifiable",
+        "modelAsString": true
+      }
+    },
+    "DevBoxAutoDeleteSettings": {
+      "description": "Settings controlling the auto deletion of inactive dev boxes.",
       "type": "object",
       "properties": {
         "enableStatus": {
-          "description": "The property indicates whether the projects have auto delete enabled.",
+          "description": "The property indicates whether auto delete is enabled.",
           "$ref": "#/definitions/DevBoxAutoDeleteEnableStatus"
         },
         "inactiveThreshold": {
@@ -6178,7 +6264,7 @@
         }
       }
     },
-    "AzureAiServicesConfiguration": {
+    "AzureAiServicesSettings": {
       "description": "Represents policy to enforce Azure AI services on a project.",
       "type": "object",
       "properties": {
