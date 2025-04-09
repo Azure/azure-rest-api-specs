@@ -998,7 +998,7 @@ model AcsChatMessageEventBaseProperties extends AcsChatEventBaseProperties {
 
   /** The type of the message */
   type: string;
-  AcsCallParticipantAddedEventData
+
   /** The version of the message */
   @madeRequired(ServiceApiVersions.v2024_01_01)
   version: int64;
@@ -1076,7 +1076,7 @@ model AcsCallEndedByProperties {
   communicationIdentifier: CommunicationIdentifierModel;
 
   /** The type of call ended by. */
-  type: string;
+  type: AcsCallEndedParticipantKind;
 
   /** The name of the call ended by. */
   name: string;
@@ -1535,6 +1535,17 @@ union AcsRouterUpdatedWorkerProperty {
 
   /** ChannelConfigurations */
   "ChannelConfigurations",
+
+  string,
+}
+
+/** Call ended participant kind. */
+union AcsCallEndedParticipantKind {
+  /** Participant */
+  "Participant",
+
+  /** MicrosoftInternal */
+  "MicrosoftInternal",
 
   string,
 }
