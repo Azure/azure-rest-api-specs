@@ -91,11 +91,12 @@ Write-Host "Latest commit id from main branch: $latestCommitId"
 $currentCommitId = git rev-parse HEAD
 Write-Host "Current commit id: $currentCommitId"
 
-# If there is any added tspconfig.yaml file, then it is a migration PR
+# [Maybe we just use tag] If there is any added tspconfig.yaml file and existing readme file, then it is a migration PR
 # Why I choose this criterion is because I want to differiate it from 
 # 1. TypeSpec exists before and this PR is just to change the existing TypeSpec
-# 2. Customers don't delete any existing swagger files for wrong
-# 3. The generated swagger file has the same name as before
+# 2. Customers don't delete any existing swagger files or don't change any existing readme
+# 3. The generated swagger file has the same name as before 
+# 4. This is a new service starting from TypeSpec
 # I also considered "if previous swagger doesn't have auto-generated x-typespec-generated and current swagger has it", but if user doesn't change the readme file, how do we know which one is the current swagger?
 $addedConfigurationFiles = Get-AddedConfigurationFiles $latestCommitId $currentCommitId
 if ($addedConfigurationFiles.Count -gt 0) {
