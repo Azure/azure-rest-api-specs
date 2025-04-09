@@ -6311,13 +6311,30 @@
         }
       }
     },
+    "ManagedNetworkSettingsEx": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        }
+      ],
+      "properties": {
+        "changeableIsolationModes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IsolationMode"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "ManagedNetworkSettingsProperties": {
       "description": "The properties of the managed network settings of a machine learning workspace.",
       "type": "object",
       "properties": {
         "managedNetwork": {
           "description": "Managed Network settings for a machine learning workspace.",
-          "$ref": "#/definitions/ManagedNetworkSettings"
+          "$ref": "#/definitions/ManagedNetworkSettingsEx"
         },
         "provisioningState": {
           "description": "The current deployment state of the managed network resource. The provisioningState is to indicate states for resource provisioning.",
