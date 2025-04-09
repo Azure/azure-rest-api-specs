@@ -709,24 +709,22 @@ alias ListTemplatesQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
 }>;
 
-alias ListConversationsQueryParams = 
-ListQueryParametersTrait<{
+alias ListConversationsQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
-  
-  @query 
+
+  @query
   @doc("The participant user ID")
   participantId?: string;
-  
-  @query 
+
+  @query
   @doc("The id of channel")
   channelId?: uuid;
 }>;
 
-alias ListConversationThreadQueryParams = 
-ListQueryParametersTrait<{
+alias ListConversationThreadQueryParams = ListQueryParametersTrait<{
   ...CommonListParams;
-  
-  @query 
+
+  @query
   @doc("The participant user ID")
   participantId?: string;
 }>;
@@ -765,7 +763,7 @@ model Message {
 @doc("Advanced Messaging conversation participant.")
 model ConversationParticipant {
   @key("participantId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Participant Identifier.")
   id: string; // 8:acs:xxx
 
@@ -830,7 +828,7 @@ model SendConversationMessageResult {
 @doc("Request payload for creating a conversation.")
 model CreateConversationRequest {
   @key
-  @visibility("create")
+  @visibility(Lifecycle.Create)
   @doc("The conversation details.")
   conversation: Conversation;
 
@@ -851,7 +849,7 @@ model CreateConversationResult {
 @clientName("CommunicationConversation")
 model Conversation {
   @key("conversationId")
-  @visibility("read") // this model is only used as a parameter
+  @visibility(Lifecycle.Read) // this model is only used as a parameter
   @doc("The conversation ID.")
   id: string;
 
@@ -924,7 +922,7 @@ model UpdateParticipantsResult {
 @doc("The conversation message as returned from the service.")
 model ConversationMessageItem {
   @key("messageId")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Message ID.")
   id: string;
 
@@ -958,16 +956,14 @@ model Contact {
 
 @added(Versions.c2025_04_01_Preview)
 @doc("Communication Contact.")
-model CommunicationContact extends Contact
-{
+model CommunicationContact extends Contact {
   @doc("Contact type is communication.")
   kind: MessagePlatformKind.communication;
 }
 
 @added(Versions.c2025_04_01_Preview)
 @doc("Bot Contact.")
-model BotContact extends Contact
-{
+model BotContact extends Contact {
   @doc("Contact type is bot.")
   kind: MessagePlatformKind.bot;
 
@@ -977,8 +973,7 @@ model BotContact extends Contact
 
 @added(Versions.c2025_04_01_Preview)
 @doc("WhatsApp Contact.")
-model WhatsAppContact extends Contact
-{
+model WhatsAppContact extends Contact {
   @doc("Contact type is whatsApp.")
   kind: MessagePlatformKind.whatsApp;
 }
@@ -1020,52 +1015,52 @@ model GetConversationThreadAnalysisResult {
 
 @added(Versions.c2025_04_01_Preview)
 @discriminator("kind")
-@withoutOmittedProperties("to"|"channelRegistrationId")
+@withoutOmittedProperties("to" | "channelRegistrationId")
 @doc("Details of the conversation message content.")
 model ConversationMessageContent {
-  ...NotificationContent
+  ...NotificationContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
-@withoutOmittedProperties("to"|"channelRegistrationId")
+@withoutOmittedProperties("to" | "channelRegistrationId")
 @doc("A request to send a text conversation message.")
 model TextConversationMessageContent extends ConversationMessageContent {
-  ...TextNotificationContent
+  ...TextNotificationContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
-@withoutOmittedProperties("to"|"channelRegistrationId")
+@withoutOmittedProperties("to" | "channelRegistrationId")
 @doc("A request to send an image conversation message.")
 model ImageConversationMessageContent extends ConversationMessageContent {
-  ...ImageNotificationContent
+  ...ImageNotificationContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
-@withoutOmittedProperties("to"|"channelRegistrationId")
+@withoutOmittedProperties("to" | "channelRegistrationId")
 @doc("A request to send a document conversation message.")
 model DocumentConversationMessageContent extends ConversationMessageContent {
-  ...DocumentNotificationContent
+  ...DocumentNotificationContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
-@withoutOmittedProperties("to"|"channelRegistrationId")
+@withoutOmittedProperties("to" | "channelRegistrationId")
 @doc("A request to send a video conversation message.")
 model VideoConversationMessageContent extends ConversationMessageContent {
-  ...VideoNotificationContent
+  ...VideoNotificationContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
-@withoutOmittedProperties("to"|"channelRegistrationId")
+@withoutOmittedProperties("to" | "channelRegistrationId")
 @doc("A request to send an audio conversation message.")
-model AudioConversationMessageContent  extends ConversationMessageContent {
-  ...AudioNotificationContent
+model AudioConversationMessageContent extends ConversationMessageContent {
+  ...AudioNotificationContent;
 }
 
 @added(Versions.c2025_04_01_Preview)
-@withoutOmittedProperties("to"|"channelRegistrationId")
+@withoutOmittedProperties("to" | "channelRegistrationId")
 @doc("A request to send a template conversation message.")
 model TemplateConversationMessageContent extends ConversationMessageContent {
-  ...TemplateNotificationContent
+  ...TemplateNotificationContent;
 }
 
 @doc("Azure Communication Messages Versions")
