@@ -1,0 +1,80 @@
+{
+  "operationId": "Connectors_ListByStorageAccount",
+  "title": "ListConnectorsByStorageAccount",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "storageAccountName": "teststorageaccount",
+    "api-version": "2025-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Private.StorageDataManagementRP/connectors/testconnector",
+            "name": "testconnector1",
+            "type": "Private.StorageDataManagementRP/connectors",
+            "location": "eastus",
+            "properties": {
+              "uniqueId": "12345678-1234-1234-1234-12345678912",
+              "state": "Active",
+              "creationTime": "2023-04-01T00:00:00Z",
+              "description": "Example connector",
+              "dataSourceType": "AWS_S3",
+              "source": {
+                "type": "Bucket",
+                "connection": {
+                  "type": "PrivateLink",
+                  "privateEndpointName": "AZURE-STORAGE-CONNECT-123e4567-e89b-12d3-a456-426614174000",
+                  "privateLinkId": "/subscriptions/xxxxxx/resourceGroups/rg-name/providers/Microsoft.Network/privateEndpoints/pe-name",
+                  "privateLinkGroupId": "group-1",
+                  "requestMessage": "Requesting access to the private link service.",
+                  "endpoint": "https://private-endpoint.example.com",
+                  "tlsVerification": "Perform"
+                },
+                "authProperties": {
+                  "type": "AccessKey",
+                  "accessKeyId": "exampleKeyId",
+                  "signingRegion": "us-west-2"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Private.StorageDataManagementRP/connectors/Jill",
+            "name": "testconnector2",
+            "type": "Private.StorageDataManagementRP/connectors",
+            "location": "westus",
+            "properties": {
+              "uniqueId": "12345678-1234-1234-1234-12345678912",
+              "state": "Active",
+              "creationTime": "2023-04-01T00:00:00Z",
+              "description": "Example connector",
+              "dataSourceType": "AWS_S3",
+              "source": {
+                "type": "Bucket",
+                "connection": {
+                  "type": "PrivateLink",
+                  "privateEndpointName": "AZURE-STORAGE-CONNECT-123e4567-e89b-12d3-a456-426614174000",
+                  "privateLinkId": "/subscriptions/xxxxxx/resourceGroups/rg-name/providers/Microsoft.Network/privateEndpoints/pe-name",
+                  "privateLinkGroupId": "group-1",
+                  "requestMessage": "Requesting access to the private link service.",
+                  "endpoint": "https://private-endpoint.example.com",
+                  "tlsVerification": "Perform"
+                },
+                "authProperties": {
+                  "type": "AccessKey",
+                  "accessKeyId": "exampleKeyId",
+                  "signingRegion": "us-west-2"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

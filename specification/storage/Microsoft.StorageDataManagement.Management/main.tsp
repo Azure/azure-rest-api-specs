@@ -21,6 +21,9 @@ namespace Microsoft.Storage;
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-01-01-preview`,
+
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  v2025_05_01_preview: "2025-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

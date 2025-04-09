@@ -93,6 +93,33 @@ model EndpointConnection extends Connection {
   tlsVerification?: TlsVerification = TlsVerification.Perform;
 }
 
+@doc("Details related to PrivateLink based connection")
+@added(Versions.v2025_05_01_preview)
+model PrivateLinkConnection extends Connection {
+  @visibility(Lifecycle.Read)
+  type: ConnectionType.PrivateLink;
+
+  @doc("The name of the system created Private Endpoint.")
+  @visibility(Lifecycle.Read)
+  privateEndpointName?: string;
+
+  @doc("The ID of the backing PrivateLink.")
+  privateLinkId: string;
+
+  @doc("The privateLinkGroupId.")
+  privateLinkGroupId?: string;
+
+  @doc("The requestMessage of the backing PrivateLink.")
+  requestMessage: string;
+
+  @doc("Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname .")
+  @minLength(4)
+  endpoint: string;
+
+  @doc("Options - Perform or Skip (default: Perform)  If this is set to “Skip”, Azure Storage will not verify the certificate chain of TLS connections to a root CA. Set this to “Skip” if the backing data store uses a self-signed cert. Ignored if the endpoint field does not use HTTPS.")
+  tlsVerification?: TlsVerification = TlsVerification.Perform;
+}
+
 // Auth Properties
 @discriminator("type")
 @doc("The auth properties for bucket connection.")
