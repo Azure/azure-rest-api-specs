@@ -5,4 +5,4 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.DependencyMap, "DependencyMapMgmt", "python");
 
-@@clientName(Microsoft.DependencyMap, "DependencyMapMgmtClient", "java");
+@@clientName(Microsoft.DependencyMap, "DependencyMapManagementClient", "java");
