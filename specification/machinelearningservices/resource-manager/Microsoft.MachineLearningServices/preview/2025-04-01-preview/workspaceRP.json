@@ -4335,7 +4335,7 @@
             "name": "body",
             "description": "The Managed Network Settings object of the workspace.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
             }
           }
         ],
@@ -6343,7 +6343,11 @@
       "x-ms-enum": {
         "name": "ManagedNetworkProvisioningState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ]
     },
     "ManagedNetworkSettingsPropertiesBasicResource": {
       "type": "object",
