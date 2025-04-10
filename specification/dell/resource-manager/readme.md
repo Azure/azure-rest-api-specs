@@ -28,6 +28,9 @@ These are the global settings for the Dell.Storage.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-03-21-preview
+
+directive:
+  - suppression-file: ./suppression.json
 ```
 
 ### Tag: package-2025-03-21-preview
