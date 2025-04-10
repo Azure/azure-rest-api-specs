@@ -292,3 +292,9 @@ using Microsoft.Compute;
 @@clientName(LogAnalyticsOperationGroup.exportThrottledRequests::parameters.body,
   "parameters"
 );
+
+// @@clientName(VirtualMachineScaleSetExtension.vmName, "name");
+@@clientName(VirtualMachineScaleSetExtension.vmType, "type");
+
+// @@clientName(VirtualMachineScaleSetVMExtension.vmName, "name");
+@@clientName(VirtualMachineScaleSetVMExtension.vmType, "type");

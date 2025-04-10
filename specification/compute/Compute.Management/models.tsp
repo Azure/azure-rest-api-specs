@@ -2350,7 +2350,7 @@ model VirtualMachineScaleSetStorageProfile {
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  diskControllerType?: DiskControllerTypes;
+  diskControllerType?: string;
 }
 
 /**
@@ -3680,7 +3680,7 @@ model VirtualMachineScaleSetUpdateStorageProfile {
   dataDisks?: VirtualMachineScaleSetDataDisk[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  diskControllerType?: DiskControllerTypes;
+  diskControllerType?: string;
 }
 
 /**
