@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 
@@ -19,11 +18,11 @@ model DeidentificationJob {
   @maxLength(36)
   @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
-  @clientName("jobName", "java")
+  @clientName("jobName", "csharp,java")
   name: string;
 
   @doc("Operation to perform on the input documents.")
-  @clientName("operationType", "java")
+  @clientName("operationType", "csharp,java")
   operation?: DeidentificationOperationType = DeidentificationOperationType.Surrogate;
 
   @doc("Storage location to perform the operation on.")

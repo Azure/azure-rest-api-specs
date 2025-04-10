@@ -16,6 +16,6 @@ namespace HealthDataAIServices.DeidServices {
   @@clientName(DeidentifyTextRequest.body, "content", "csharp");
   @@clientName(Azure.Core.Foundations.OperationState,
     "operationStatus",
-    "java"
+    "csharp,java"
   );
 }
