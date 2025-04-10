@@ -6204,7 +6204,7 @@ model ListSkillsetsResult {
 /**
  * The type of the skill names.
  */
-#suppress "@azure-tools/typespec-azure-core/property-name-conflict"
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict"
 @added(Versions.v2025_03_01_preview)
 model SkillNames {
   /**
