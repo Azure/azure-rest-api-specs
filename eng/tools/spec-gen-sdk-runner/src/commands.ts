@@ -290,8 +290,10 @@ function parseArguments(): SpecGenSdkCmdInput {
   const workingFolder: string = path.resolve(
     getArgumentValue(args, "--wf", path.join(localSpecRepoPath, "..")),
   );
+
+  // Set runMode to "release" by default
   let runMode = "release";
-  const batchType: string = getArgumentValue(args, "--bt", "");
+  const batchType: string = getArgumentValue(args, "--batch-type", "");
   const pullRequestNumber: string = getArgumentValue(args, "--pr-number", "");
   if (!batchType) {
     runMode = "batch";
