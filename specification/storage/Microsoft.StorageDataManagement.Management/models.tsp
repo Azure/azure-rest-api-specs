@@ -62,10 +62,10 @@ model BucketSource extends Source {
 
   @doc("Details for how to connect to the backing data store.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  connection: Connection;
+  connection: BucketConnection;
 
   @doc("Details for how to authenticate to the backing data store.")
-  authProperties: AuthProperties;
+  authProperties: BucketAuthProperties;
 
   @doc("The host to use when computing the signature for requests to the backing data store. If not provided, defaults to what is provided in the endpoint for the connection.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -75,15 +75,15 @@ model BucketSource extends Source {
 // Connection Properties
 @discriminator("type")
 @doc("Details related to the type of bucket connection")
-model Connection {
+model BucketConnection {
   @doc("Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created.")
-  type: ConnectionType;
+  type: BucketConnectionType;
 }
 
 @doc("Details related to endpoint based bucket connection")
-model EndpointConnection extends Connection {
+model EndpointBucketConnection extends BucketConnection {
   @visibility(Lifecycle.Read)
-  type: ConnectionType.Endpoint;
+  type: BucketConnectionType.Endpoint;
 
   @doc("Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname .")
   @minLength(4)
@@ -95,9 +95,9 @@ model EndpointConnection extends Connection {
 
 @doc("Details related to PrivateLink based connection")
 @added(Versions.v2025_05_01_preview)
-model PrivateLinkConnection extends Connection {
+model PrivateLinkBucketConnection extends BucketConnection {
   @visibility(Lifecycle.Read)
-  type: ConnectionType.PrivateLink;
+  type: BucketConnectionType.PrivateLink;
 
   @doc("The name of the system created Private Endpoint.")
   @visibility(Lifecycle.Read)
@@ -123,15 +123,15 @@ model PrivateLinkConnection extends Connection {
 // Auth Properties
 @discriminator("type")
 @doc("The auth properties for bucket connection.")
-model AuthProperties {
+model BucketAuthProperties {
   @doc("The auth type for bucket connection.")
-  type: AuthType;
+  type: BucketAuthType;
 }
 
 @doc("The access key properties for bucket connection.")
-model AccessKeyProperties extends AuthProperties {
+model BucketAccessKeyProperties extends BucketAuthProperties {
   @visibility(Lifecycle.Read)
-  type: AuthType.AccessKey;
+  type: BucketAuthType.AccessKey;
 
   @doc("Access key ID for the backing data store.")
   @minLength(3)

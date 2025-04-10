@@ -9,7 +9,14 @@
     "api-version": "2025-01-01-preview"
   },
   "responses": {
-    "200": {},
-    "204": {}
+    "204": {},
+    "202": {
+      "status": "Accepted",
+      "message": "The resource operation has been received and is being processed.",
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/xxxx/resourceGroups/rg-name/providers/Private.StorageDataManagementRP/operations/operation-98765",
+        "Retry-After": 30
+      }
+    }
   }
 }
