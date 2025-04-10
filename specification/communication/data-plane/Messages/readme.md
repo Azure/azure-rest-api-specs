@@ -66,7 +66,7 @@ title:
 
 These settings apply only when `--tag=package-2025-01-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-01-15--preview'
+```yaml $(tag) == 'package-2025-01-15-preview'
 input-file:
   - preview/2025-01-15-preview/communicationservicesmessages.json
 title:
