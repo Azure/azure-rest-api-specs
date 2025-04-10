@@ -244,3 +244,132 @@ model EvaluationUpload {
   @doc("Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}'}")
   outputs?: Record<string>;
 }
+
+// TODO: This is from Agent API v2 but host in evaluation API for now
+@doc("Agent API v2, enum for author role.")
+union AuthorRoleEnum {
+  string,
+
+  @doc("User role.")
+  user: "user",
+
+  @doc("Agent role.")
+  agent: "agent",
+
+  @doc("System role.")
+  system: "system",
+
+  @doc("Tool role.")
+  tool: "tool",
+
+  @doc("Developer role.")
+  developer: "developer",
+
+  @doc("Unknown role.")
+  unknown_role: "unknown",
+}
+
+// TODO: This is from Agent API v2 but host in evaluation API for now
+@doc("Text content for completion message.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model TextContent {
+  @doc("Type of the content.")
+  type: "text";
+
+  @doc("Text content.")
+  text: string;
+}
+
+// TODO: This is from Agent API v2 but host in evaluation API for now
+@doc("Agent API v2, completion message for agent run.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model CompletionsMessage {
+  @doc("Identifier of user.")
+  @visibility(Lifecycle.Read)
+  userId?: string;
+
+  @doc("Identifier of agent.")
+  @visibility(Lifecycle.Read)
+  agentId?: string;
+
+  @doc("Identifier of message.")
+  @visibility(Lifecycle.Read)
+  messageId?: string;
+
+  @doc("Identifier of completion.")
+  @visibility(Lifecycle.Read)
+  completionId?: string;
+
+  @doc("Identifier of thread.")
+  @visibility(Lifecycle.Read)
+  threadId?: string;
+
+  @doc("Identifier of run.")
+  @visibility(Lifecycle.Read)
+  runId?: string;
+
+  @doc("Role of the author.")
+  @visibility(Lifecycle.Read)
+  role: AuthorRoleEnum;
+
+  @doc("Content of the message.")
+  @visibility(Lifecycle.Read)
+  content: TextContent[];
+
+  @doc("Name of the author.")
+  @visibility(Lifecycle.Read)
+  authorName?: string;
+
+  @doc("Timestamp of when the message was created.")
+  @visibility(Lifecycle.Read)
+  createdAt?: utcDateTime;
+
+  @doc("Timestamp of when the message was completed.")
+  @visibility(Lifecycle.Read)
+  completedAt?: utcDateTime;
+}
+
+@doc("Evaluation Definition for agent run.")
+// @resource("runs")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluation {
+  // @doc("Identifier of the evaluation.")
+  // @key("name")
+  // @visibility(Lifecycle.Read)
+  // id: string;
+
+  @doc("Identifier of the agent thread.")
+  @visibility(Lifecycle.Read)
+  threadId?: string;
+
+  @doc("Identifier of the agent run.")
+  @visibility(Lifecycle.Read)
+  tunId?: string;
+
+  @doc("Identifier of the agent completion, which is the combination of Thread ID and Run ID.")
+  @visibility(Lifecycle.Read)
+  completionId?: string;
+
+  @doc("Evaluators to be used for the evaluation.")
+  @visibility(Lifecycle.Read)
+  evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Conversation history passed to the agent, including all previous messages in the chat, including all agents' tool calls and tool results, and with the system message. The actual query that an evaluation will trigger for is the last message in the conversation.")
+  @visibility(Lifecycle.Read)
+  query: CompletionsMessage[];
+
+  @doc("Agent's direct response to the query from the conversation, including all tool calls, results, and agent's formatted responses.")
+  @visibility(Lifecycle.Read)
+  response: CompletionsMessage[];
+
+  @doc("Tools that were used in the conversation.")
+  @visibility(Lifecycle.Read)
+  toolDefinitions: AgentToolDefinition[];
+
+  @doc("Optional and temporary way to pass the app insights connection string to the evaluator.")
+  @visibility(Lifecycle.Read)
+  appInsightsConnectionString?: string;
+}

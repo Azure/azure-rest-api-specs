@@ -63,9 +63,9 @@ interface Evaluations {
     {
       @doc("Agent evaluation to be run")
       @body
-      evaluation: Evaluation;
+      evaluation: AgentEvaluation;
     },
-    Evaluation
+    AgentEvaluation
   >;
 
   // Evaluation Private APIs
