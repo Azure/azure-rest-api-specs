@@ -138,3 +138,9 @@ model BlobReferenceForConsumption {
   @doc("Credential info to access the storage account.")
   credential: SasCredential;
 }
+
+@doc("Represents a reference to a blob for consumption")
+model AssetCredentialResponse {
+  @doc("Credential info to access the storage account.")
+  blobReferenceForConsumption: BlobReferenceForConsumption;
+}
