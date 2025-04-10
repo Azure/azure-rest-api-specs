@@ -19,6 +19,11 @@
       "identity": {
         "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
       },
+      "indexerPermissionOptions": [
+        "userIds",
+        "groupIds",
+        "azureRbacScope"
+      ],
       "dataChangeDetectionPolicy": {
         "highWaterMarkColumnName": "metadata_storage_last_modified",
         "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy"
@@ -46,6 +51,11 @@
         "name": "tempdatasource",
         "description": "My Azure Blob data source.",
         "type": "azureblob",
+        "indexerPermissionOptions": [
+          "userIds",
+          "groupIds",
+          "azureRbacScope"
+        ],
         "credentials": {
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
         },

@@ -27,9 +27,9 @@
     "/agents('{agentName}')": {
       "put": {
         "tags": [
-          "Agents"
+          "KnowledgeAgents"
         ],
-        "operationId": "Agents_CreateOrUpdate",
+        "operationId": "KnowledgeAgents_CreateOrUpdate",
         "description": "Creates a new agent or updates an agent if it already exists.",
         "parameters": [
           {
@@ -40,7 +40,7 @@
             "description": "The name of the agent to create or update."
           },
           {
-            "name": "agent",
+            "name": "KnowledgeAgent",
             "in": "body",
             "required": true,
             "schema": {
@@ -87,10 +87,10 @@
       },
       "delete": {
         "tags": [
-          "Agents"
+          "KnowledgeAgents"
         ],
-        "operationId": "Agents_Delete",
-        "description": "Deletes an agent.",
+        "operationId": "KnowledgeAgents_Delete",
+        "description": "Deletes an existing agent.",
         "parameters": [
           {
             "name": "agentName",
@@ -130,9 +130,9 @@
       },
       "get": {
         "tags": [
-          "Agents"
+          "KnowledgeAgents"
         ],
-        "operationId": "Agents_Get",
+        "operationId": "KnowledgeAgents_Get",
         "description": "Retrieves an agent definition.",
         "parameters": [
           {
@@ -169,18 +169,11 @@
     "/agents": {
       "get": {
         "tags": [
-          "Agents"
+          "KnowledgeAgents"
         ],
-        "operationId": "Agents_List",
+        "operationId": "KnowledgeAgents_List",
         "description": "Lists all agents available for a search service.",
         "parameters": [
-          {
-            "name": "$select",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Selects which top-level properties of the agents to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties."
-          },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
           },
@@ -201,17 +194,20 @@
               "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       },
       "post": {
         "tags": [
-          "Agents"
+          "KnowledgeAgents"
         ],
-        "operationId": "Agents_Create",
+        "operationId": "KnowledgeAgents_Create",
         "description": "Creates a new agent.",
         "parameters": [
           {
-            "name": "agent",
+            "name": "KnowledgeAgent",
             "in": "body",
             "required": true,
             "schema": {
@@ -228,48 +224,9 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "Succesfully created an agent",
             "schema": {
               "$ref": "#/definitions/KnowledgeAgent"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/agents('{agentName}')/toolinstructions": {
-      "get": {
-        "tags": [
-          "Agents"
-        ],
-        "operationId": "KnowledgeAgents_GetToolInstructions",
-        "description": "Retrieves tool instructions for a specific agent.",
-        "parameters": [
-          {
-            "name": "agentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the agent to retrieve tool instructions for."
-          },
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "The tool instructions are successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/KnowledgeAgentToolInstructions"
             }
           },
           "default": {
@@ -284,10 +241,10 @@
     "/agents('{agentName}')/retrieve": {
       "post": {
         "tags": [
-          "Agents"
+          "KnowledgeAgents"
         ],
         "operationId": "KnowledgeAgents_Retrieve",
-        "description": "Processes retrieval requests for a specific agent.",
+        "description": "KnowledgeAgent retrieves relevant data from backing stores.",
         "parameters": [
           {
             "name": "agentName",
@@ -714,20 +671,20 @@
         }
       }
     },
-    "/indexers('{indexerName}')/search.refreshdocs": {
+    "/indexers('{indexerName}')/search.resync": {
       "post": {
         "tags": [
           "Indexers"
         ],
-        "operationId": "Indexers_RefreshDocs",
+        "operationId": "Indexers_Resync",
         "x-ms-examples": {
-          "SearchServiceRefreshDocs": {
-            "$ref": "./examples/SearchServiceRefreshDocs.json"
+          "SearchServiceResync": {
+            "$ref": "./examples/SearchServiceResync.json"
           }
         },
-        "description": "Refreshes specific documents in the datasource to be selectively re-ingested by the indexer.",
+        "description": "Resync selective options from the datasource to be re-ingested by the indexer.",
         "externalDocs": {
-          "url": "https://aka.ms/refresh-documents"
+          "url": "https://learn.microsoft.com/rest/api/searchservice/Resync-Indexer"
         },
         "parameters": [
           {
@@ -735,7 +692,28 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the indexer to refresh documents for."
+            "description": "The name of the indexer to resync for."
+          },
+          {
+            "name": "indexerResync",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "x-ms-client-name": "IndexerResyncBody",
+              "properties": {
+                "options": {
+                  "type": "array",
+                  "x-ms-client-name": "options",
+                  "x-nullable": true,
+                  "items": {
+                    "$ref": "#/definitions/IndexerResyncOption",
+                    "x-nullable": false
+                  },
+                  "description": "Re-sync options that have been pre-defined from data source."
+                }
+              }
+            }
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -7971,34 +7949,28 @@
     "IndexerPermissionOption": {
       "type": "string",
       "enum": [
-        "none",
         "userIds",
         "groupIds",
-        "roles"
+        "azureRbacScope"
       ],
       "x-ms-enum": {
         "name": "IndexerPermissionOption",
         "modelAsString": true,
         "values": [
           {
-            "value": "none",
-            "name": "None",
-            "description": "No permission to index."
-          },
-          {
             "value": "userIds",
             "name": "UserIds",
-            "description": "Acls user ids permission to index."
+            "description": "Indexer to ingest ACL userIds from data source to index."
           },
           {
             "value": "groupIds",
             "name": "GroupIds",
-            "description": "Acls group ids permission to index."
+            "description": "Indexer to ingest ACL groupIds from data source to index."
           },
           {
-            "value": "roles",
-            "name": "Roles",
-            "description": "RBAC roles permission to index."
+            "value": "azureRbacScope",
+            "name": "AzureRbacScope",
+            "description": "Indexer to ingest Azure RBAC scope from data source to index."
           }
         ]
       },
@@ -8145,6 +8117,24 @@
       },
       "description": "Defines the type of a datasource."
     },
+    "IndexerResyncOption": {
+      "type": "string",
+      "enum": [
+        "permissions"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerResyncOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "permissions",
+            "name": "Permissions",
+            "description": "Indexer to re-ingest pre-selected permissions data from data source to index."
+          }
+        ]
+      },
+      "description": "Options with various types of permission data to index."
+    },
     "SearchIndexerDataSource": {
       "type": "object",
       "properties": {
@@ -8178,6 +8168,7 @@
         },
         "indexerPermissionOptions": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/IndexerPermissionOption",
             "x-nullable": false
@@ -9142,7 +9133,7 @@
       "type": "string",
       "enum": [
         "resetDocs",
-        "refreshDocs"
+        "resync"
       ],
       "x-ms-enum": {
         "name": "IndexerExecutionStatusDetail",
@@ -9154,9 +9145,9 @@
             "description": "Indicates that the reset that occurred was for a call to ResetDocs."
           },
           {
-            "value": "refreshDocs",
-            "name": "RefreshDocs",
-            "description": "Indicates that the refresh that occurred was for a call to RefreshDocs."
+            "value": "resync",
+            "name": "Resync",
+            "description": "Indicates to selectively resync based on option(s) from data source."
           }
         ]
       },
@@ -9206,31 +9197,15 @@
           "readOnly": true,
           "description": "The list of datasource document ids that have been reset. The datasource document id is the unique identifier for the data in the datasource. The indexer will prioritize selectively re-ingesting these ids."
         },
-        "refreshDocsInitialChangeTrackingState": {
+        "resyncInitialChangeTrackingState": {
           "type": "string",
           "readOnly": true,
-          "description": "Change tracking state used when indexing starts on select, refresh documents in the datasource."
+          "description": "Change tracking state used when indexing starts on selective options from the datasource."
         },
-        "refreshDocsFinalChangeTrackingState": {
+        "resyncFinalChangeTrackingState": {
           "type": "string",
           "readOnly": true,
-          "description": "Change tracking state value when indexing finishes on select, refresh documents in the datasource."
-        },
-        "refreshDocumentKeys": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "The list of document keys that have been refreshed. The document key is the document's unique identifier for the data in the search index. The indexer will prioritize selectively re-ingesting these keys."
-        },
-        "refreshDatasourceDocumentIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "description": "The list of datasource document ids that have been refreshed. The datasource document id is the unique identifier for the data in the datasource. The indexer will prioritize selectively re-ingesting these ids."
+          "description": "Change tracking state value when indexing finishes on selective options from the datasource."
         }
       },
       "description": "Represents all of the state that defines and dictates the indexer's current execution."
@@ -9240,7 +9215,7 @@
       "enum": [
         "indexingAllDocs",
         "indexingResetDocs",
-        "indexingRefreshDocs"
+        "indexingResync"
       ],
       "x-ms-enum": {
         "name": "IndexingMode",
@@ -9257,9 +9232,9 @@
             "description": "The indexer is indexing selective, reset documents in the datasource. The documents being indexed are defined on indexer status."
           },
           {
-            "value": "indexingRefreshDocs",
-            "name": "IndexingRefreshDocs",
-            "description": "The indexer is indexing selective, refresh documents in the datasource. The documents being indexed are defined on indexer status."
+            "value": "indexingResync",
+            "name": "IndexingResync",
+            "description": "The indexer is resyncing and indexing selective option(s) from the datasource."
           }
         ]
       },
@@ -11726,7 +11701,7 @@
           "description": "Controls whether it is allowable for an object to contain additional keys / values that were not defined in the JSON Schema. Default is false."
         }
       }
-    },    
+    },
     "WebApiSkill": {
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
