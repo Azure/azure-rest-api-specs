@@ -896,7 +896,7 @@ model AnalyzeConversationJobsInput {
 
   /** Optional duration in seconds after which the job will be canceled if not completed. */
   @added(Versions.v2025_05_15_preview)
-  cancelAfter?: float32;
+  cancelAfterSeconds?: int32;
 }
 
 /** Base class for a long-running conversation input task. */
