@@ -3897,12 +3897,12 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek: DayOfWeek[];
+  daysOfWeek?: DayOfWeek[];
 
   /**
    * Starting time for ramp up period.
    */
-  rampUpStartTime: Time;
+  rampUpStartTime?: Time;
 
   /**
    * The desired startup behavior during the ramp up period for personal vms in the hostpool.
@@ -3940,7 +3940,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Starting time for peak period.
    */
-  peakStartTime: Time;
+  peakStartTime?: Time;
 
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
@@ -3973,7 +3973,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Starting time for ramp down period.
    */
-  rampDownStartTime: Time;
+  rampDownStartTime?: Time;
 
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
@@ -4006,7 +4006,7 @@ model ScalingPlanPersonalScheduleProperties {
   /**
    * Starting time for off-peak period.
    */
-  offPeakStartTime: Time;
+  offPeakStartTime?: Time;
 
   /**
    * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
@@ -4217,7 +4217,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Set of days of the week on which this schedule is active.
    */
-  daysOfWeek: DayOfWeek[];
+  daysOfWeek?: DayOfWeek[];
 
   /**
    * The desired scaling method to be used to scale the hosts in the assigned host pool.
@@ -4234,7 +4234,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Starting time for ramp up period.
    */
-  rampUpStartTime: Time;
+  rampUpStartTime?: Time;
 
   /**
    * Load balancing algorithm for ramp up period.
@@ -4253,12 +4253,12 @@ model ScalingPlanPooledScheduleProperties {
    */
   @maxValue(100)
   @minValue(1)
-  rampUpCapacityThresholdPct: int32;
+  rampUpCapacityThresholdPct?: int32;
 
   /**
    * Starting time for peak period.
    */
-  peakStartTime: Time;
+  peakStartTime?: Time;
 
   /**
    * Load balancing algorithm for peak period.
@@ -4268,7 +4268,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Starting time for ramp down period.
    */
-  rampDownStartTime: Time;
+  rampDownStartTime?: Time;
 
   /**
    * Load balancing algorithm for ramp down period.
@@ -4287,7 +4287,7 @@ model ScalingPlanPooledScheduleProperties {
    */
   @maxValue(100)
   @minValue(1)
-  rampDownCapacityThresholdPct: int32;
+  rampDownCapacityThresholdPct?: int32;
 
   /**
    * Should users be logged off forcefully from hosts.
@@ -4312,7 +4312,7 @@ model ScalingPlanPooledScheduleProperties {
   /**
    * Starting time for off-peak period.
    */
-  offPeakStartTime: Time;
+  offPeakStartTime?: Time;
 
   /**
    * Load balancing algorithm for off-peak period.
