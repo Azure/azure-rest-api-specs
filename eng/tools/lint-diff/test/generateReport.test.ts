@@ -9,7 +9,7 @@ import {
   getPathSegment,
   compareLintDiffViolations,
 } from "../src/generateReport.js";
-import { Source, LintDiffViolation, BeforeAfter, AutorestRunResult } from "../src/types.js";
+import { Source, LintDiffViolation, BeforeAfter, AutorestRunResult } from "../src/lintdiff-types.js";
 import { isWindows } from "./test-util.js";
 
 describe("iconFor", () => {
