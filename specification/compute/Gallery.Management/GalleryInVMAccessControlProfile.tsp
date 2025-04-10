@@ -21,10 +21,9 @@ model GalleryInVMAccessControlProfile
     Resource = GalleryInVMAccessControlProfile,
     KeyName = "inVMAccessControlProfileName",
     SegmentName = "inVMAccessControlProfiles",
-    NamePattern = "^[a-zA-Z0-9]+([-._]?[a-zA-Z0-9]+)*$"
+    NamePattern = ""
   >;
 }
-@@maxLength(GalleryInVMAccessControlProfile.name, 80);
 
 @armResourceOperations
 interface GalleryInVMAccessControlProfiles {

@@ -2632,3 +2632,4 @@ model ProxyResourceShared<
   "The uri to fetch the next page of shared galleries. Call ListNext() with this to fetch the next page of shared galleries."
 );
 @@doc(SharedGalleryList.value, "A list of shared galleries.");
+@@OpenAPI.extension(SharedGalleryList.value, "x-ms-identifiers", #["name"]);
