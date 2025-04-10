@@ -67,7 +67,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
   }
 
   logMessage("ending group logging", LogLevel.EndGroup);
-  logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
+  logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPathText);
 
   return statusCode;
 }
@@ -86,21 +86,24 @@ export async function generateSdkForSpecPr(): Promise<number> {
   let shouldLabelBreakingChange = false;
   let breakingChangeLabel = "";
   let executionReport;
+  let changedSpecPathText = "";
   for (const changedSpec of changedSpecs) {
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
       continue;
     }
     pushedSpecConfigCount = 0;
+    changedSpecPathText = "";
     if (changedSpec.typespecProject) {
       specGenSdkCommand.push("--tsp-config-relative-path", changedSpec.typespecProject);
+      changedSpecPathText = changedSpec.typespecProject;
       pushedSpecConfigCount++;
     }
     if (changedSpec.readmeMd) {
       specGenSdkCommand.push("--readme-relative-path", changedSpec.readmeMd);
+      changedSpecPathText = changedSpecPathText + " " + changedSpec.readmeMd;
       pushedSpecConfigCount++;
     }
-    const changedSpecPathText = `${changedSpec.typespecProject} ${changedSpec.readmeMd}`;
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
 
@@ -128,14 +131,15 @@ export async function generateSdkForSpecPr(): Promise<number> {
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
+    logIssuesToPipeline(executionReport?.vsoLogPath, changedSpecPathText);
   }
   // Process the breaking change label artifacts
-  statusCode = processBreakingChangeLabelArtifacts(
-    commandInput,
-    shouldLabelBreakingChange,
-    breakingChangeLabel,
-  );
+  statusCode =
+    processBreakingChangeLabelArtifacts(
+      commandInput,
+      shouldLabelBreakingChange,
+      breakingChangeLabel,
+    ) || statusCode;
   return statusCode;
 }
 
@@ -205,7 +209,7 @@ export async function generateSdkForBatchSpecs(runMode: string): Promise<number>
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
-    logIssuesToPipeline(executionReport.vsoLogPath, specConfigPath);
+    logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPath);
   }
   if (failedCount > 0) {
     markdownContent += `${failedContent}\n`;
@@ -248,7 +252,7 @@ function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
   // Read the execution report to determine if the generation was successful
   const executionReportPath = path.join(
     commandInput.workingFolder,
-    `${commandInput.sdkRepoName}_tmp/execution-report.json`,
+    `${commandInput.sdkLanguage}_tmp/execution-report.json`,
   );
   return JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
 }
@@ -291,10 +295,13 @@ function parseArguments(): SpecGenSdkCmdInput {
     localSpecRepoPath,
     localSdkRepoPath,
     sdkRepoName,
+    sdkLanguage: sdkRepoName.replace("-pr", ""),
     isTriggeredByPipeline: getArgumentValue(args, "--tr", "false"),
     tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
     readmePath: getArgumentValue(args, "--readme-relative-path", ""),
     prNumber: getArgumentValue(args, "--pr-number", ""),
+    apiVersion: getArgumentValue(args, "--api-version", ""),
+    sdkReleaseType: getArgumentValue(args, "--sdk-release-type", ""),
     specCommitSha: getArgumentValue(args, "--commit", "HEAD"),
     specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
     headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),
@@ -341,6 +348,12 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
   }
   if (commandInput.headBranch) {
     specGenSdkCommand.push("--head-branch", commandInput.headBranch);
+  }
+  if (commandInput.apiVersion) {
+    specGenSdkCommand.push("--api-version", commandInput.apiVersion);
+  }
+  if (commandInput.sdkReleaseType) {
+    specGenSdkCommand.push("--sdk-release-type", commandInput.sdkReleaseType);
   }
   return specGenSdkCommand;
 }
@@ -460,7 +473,7 @@ function processBreakingChangeLabelArtifacts(
         breakingChangeLabelArtifactFileName,
       ),
       JSON.stringify({
-        language: commandInput.sdkRepoName,
+        language: commandInput.sdkLanguage,
         labelAction: shouldLabelBreakingChange,
       }),
     );
