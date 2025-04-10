@@ -23,6 +23,7 @@ options:
     generate-sample-project: false
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-dell"
+    package-name: azure-mgmt-dell
     namespace: "azure.mgmt.dell"
     flavor: "azure"
     generate-test: true
@@ -37,7 +38,13 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
+    generate-examples: true
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-ts":
+    experimentalExtensibleEnums: true
+    package-dir: "sdk/dell"
+    packageDetails:
+      name: "@azure/arm-dell"
