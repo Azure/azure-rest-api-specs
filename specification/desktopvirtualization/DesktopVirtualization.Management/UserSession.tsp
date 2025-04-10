@@ -8,6 +8,7 @@ import "./SessionHost.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -69,62 +70,27 @@ interface UserSessions {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = UserSessionList
-  >;
-
-  @get
-  @action("userSessions")
-  listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
-    HostPool,
-    void,
-    UserSessionList,
-    Parameters = {
-      /**
-       * OData filter expression. Valid properties for filtering are userprincipalname and sessionstate.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
-    }
+    Response = ArmResponse<UserSessionList>
   >;
 
   /**
    * Disconnect a userSession.
    */
-  disconnect is ArmResourceActionSync<
-    UserSession,
-    void,
-    {
-      @statusCode _: 200;
-    }
-  >;
+  disconnect is ArmResourceActionSync<UserSession, void, OkResponse>;
 
   /**
    * Send a message to a user.
    */
   sendMessage is ArmResourceActionSync<
     UserSession,
-    Request = {
-      @bodyRoot sendMessage?: SendMessage;
+    {
+      /**
+       * Object containing message includes title and message body
+       */
+      @bodyRoot
+      sendMessage?: SendMessage;
     },
-    Response = OkResponse
+    OkResponse
   >;
 }
 

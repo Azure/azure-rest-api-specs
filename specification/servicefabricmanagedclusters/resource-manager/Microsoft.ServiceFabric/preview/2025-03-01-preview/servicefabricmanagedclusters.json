@@ -43,16 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "Applications"
-    },
-    {
-      "name": "ApplicationTypes"
-    },
-    {
-      "name": "ApplicationTypeVersions"
-    },
-    {
-      "name": "Services"
+      "name": "ManagedClusterCodeVersionResults"
     },
     {
       "name": "ManagedClusterVersion"
@@ -64,22 +55,19 @@
       "name": "ManagedClusters"
     },
     {
-      "name": "FaultSimulation"
+      "name": "ApplicationTypeResources"
     },
     {
-      "name": "ManagedAzResiliencyStatus"
+      "name": "ApplicationTypeVersionResources"
     },
     {
-      "name": "ManagedApplyMaintenanceWindow"
+      "name": "ApplicationResources"
     },
     {
-      "name": "ManagedMaintenanceWindowStatus"
+      "name": "ServiceResources"
     },
     {
       "name": "NodeTypes"
-    },
-    {
-      "name": "NodeTypeSkus"
     }
   ],
   "paths": {
@@ -89,8 +77,7 @@
         "tags": [
           "Operations"
         ],
-        "summary": "Lists all of the available Service Fabric resource provider API operations.",
-        "description": "Get the list of available Service Fabric resource provider API operations.",
+        "description": "List the operations for the provider",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -100,7 +87,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -124,9 +111,8 @@
       "get": {
         "operationId": "ManagedClusterVersion_ListByEnvironment",
         "tags": [
-          "ManagedClusterVersion"
+          "ManagedClusterCodeVersionResults"
         ],
-        "summary": "Gets the list of Service Fabric cluster code versions available for the specified environment.",
         "description": "Gets all available code versions for Service Fabric cluster resources by environment.",
         "parameters": [
           {
@@ -136,34 +122,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The location for the cluster code versions. This is different from cluster location.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "environment",
             "in": "path",
-            "description": "The operating system of the cluster.",
+            "description": "environments",
             "required": true,
-            "type": "string",
-            "enum": [
-              "Windows"
-            ],
-            "x-ms-enum": {
-              "name": "ManagedClusterVersionEnvironment",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Windows",
-                  "value": "Windows",
-                  "description": "Indicates os is Windows."
-                }
-              ]
-            },
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -194,9 +160,8 @@
       "get": {
         "operationId": "ManagedClusterVersion_GetByEnvironment",
         "tags": [
-          "ManagedClusterVersion"
+          "ManagedClusterCodeVersionResults"
         ],
-        "summary": "Gets information about a Service Fabric cluster code version available for the specified environment.",
         "description": "Gets information about an available Service Fabric cluster code version by environment.",
         "parameters": [
           {
@@ -206,42 +171,21 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The location for the cluster code versions. This is different from cluster location.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "environment",
             "in": "path",
-            "description": "The operating system of the cluster.",
+            "description": "environments",
             "required": true,
-            "type": "string",
-            "enum": [
-              "Windows"
-            ],
-            "x-ms-enum": {
-              "name": "ManagedClusterVersionEnvironment",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Windows",
-                  "value": "Windows",
-                  "description": "Indicates os is Windows."
-                }
-              ]
-            },
-            "x-ms-parameter-location": "method"
+            "type": "string"
           },
           {
             "name": "clusterVersion",
             "in": "path",
-            "description": "The cluster code version.",
+            "description": "The name of the ManagedClusterCodeVersionResult",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -285,8 +229,7 @@
             "in": "path",
             "description": "operation identifier.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -296,14 +239,12 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
-          },
-          "204": {
-            "description": "No Content. For Delete operation results."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -339,8 +280,7 @@
             "in": "path",
             "description": "operation identifier.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -373,7 +313,6 @@
         "tags": [
           "ManagedClusterVersion"
         ],
-        "summary": "Gets the list of Service Fabric cluster code versions available for the specified location.",
         "description": "Gets all available code versions for Service Fabric cluster resources by location.",
         "parameters": [
           {
@@ -383,12 +322,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The location for the cluster code versions. This is different from cluster location.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -421,7 +355,6 @@
         "tags": [
           "ManagedClusterVersion"
         ],
-        "summary": "Gets information about a Service Fabric managed cluster code version available in the specified location.",
         "description": "Gets information about an available Service Fabric managed cluster code version.",
         "parameters": [
           {
@@ -431,20 +364,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The location for the cluster code versions. This is different from cluster location.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "clusterVersion",
             "in": "path",
-            "description": "The cluster code version.",
+            "description": "The name of the ManagedClusterCodeVersionResult",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -483,12 +410,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The location for the cluster code versions. This is different from cluster location.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -530,20 +452,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "location",
-            "in": "path",
-            "description": "The location for the cluster code versions. This is different from cluster location.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "name": "vmSize",
             "in": "path",
             "description": "VM Size name.",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -739,14 +655,14 @@
               "$ref": "#/definitions/ManagedCluster"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -766,8 +682,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ManagedCluster"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -852,14 +767,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -888,7 +803,7 @@
       "get": {
         "operationId": "ApplicationTypes_List",
         "tags": [
-          "ApplicationTypes"
+          "ApplicationTypeResources"
         ],
         "description": "Gets all application type name resources created or in the process of being created in the Service Fabric managed cluster resource.",
         "parameters": [
@@ -937,7 +852,7 @@
       "get": {
         "operationId": "ApplicationTypes_Get",
         "tags": [
-          "ApplicationTypes"
+          "ApplicationTypeResources"
         ],
         "description": "Get a Service Fabric application type name resource created or in the process of being created in the Service Fabric managed cluster resource.",
         "parameters": [
@@ -988,7 +903,7 @@
       "put": {
         "operationId": "ApplicationTypes_CreateOrUpdate",
         "tags": [
-          "ApplicationTypes"
+          "ApplicationTypeResources"
         ],
         "description": "Create or update a Service Fabric managed application type name resource with the specified name.",
         "parameters": [
@@ -1048,7 +963,7 @@
       "patch": {
         "operationId": "ApplicationTypes_Update",
         "tags": [
-          "ApplicationTypes"
+          "ApplicationTypeResources"
         ],
         "description": "Updates the tags of an application type resource of a given managed cluster.",
         "parameters": [
@@ -1108,7 +1023,7 @@
       "delete": {
         "operationId": "ApplicationTypes_Delete",
         "tags": [
-          "ApplicationTypes"
+          "ApplicationTypeResources"
         ],
         "description": "Delete a Service Fabric managed application type name resource with the specified name.",
         "parameters": [
@@ -1140,14 +1055,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1176,7 +1091,7 @@
       "get": {
         "operationId": "ApplicationTypeVersions_ListByApplicationTypes",
         "tags": [
-          "ApplicationTypeVersions"
+          "ApplicationTypeVersionResources"
         ],
         "description": "Gets all application type version resources created or in the process of being created in the Service Fabric managed application type name resource.",
         "parameters": [
@@ -1232,7 +1147,7 @@
       "get": {
         "operationId": "ApplicationTypeVersions_Get",
         "tags": [
-          "ApplicationTypeVersions"
+          "ApplicationTypeVersionResources"
         ],
         "description": "Get a Service Fabric managed application type version resource created or in the process of being created in the Service Fabric managed application type name resource.",
         "parameters": [
@@ -1290,7 +1205,7 @@
       "put": {
         "operationId": "ApplicationTypeVersions_CreateOrUpdate",
         "tags": [
-          "ApplicationTypeVersions"
+          "ApplicationTypeVersionResources"
         ],
         "description": "Create or update a Service Fabric managed application type version resource with the specified name.",
         "parameters": [
@@ -1347,14 +1262,14 @@
               "$ref": "#/definitions/ApplicationTypeVersionResource"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1371,15 +1286,14 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ApplicationTypeVersionResource"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ApplicationTypeVersions_Update",
         "tags": [
-          "ApplicationTypeVersions"
+          "ApplicationTypeVersionResources"
         ],
         "description": "Updates the tags of an application type version resource of a given managed cluster.",
         "parameters": [
@@ -1446,7 +1360,7 @@
       "delete": {
         "operationId": "ApplicationTypeVersions_Delete",
         "tags": [
-          "ApplicationTypeVersions"
+          "ApplicationTypeVersionResources"
         ],
         "description": "Delete a Service Fabric managed application type version resource with the specified name.",
         "parameters": [
@@ -1485,14 +1399,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1521,7 +1435,7 @@
       "get": {
         "operationId": "Applications_List",
         "tags": [
-          "Applications"
+          "ApplicationResources"
         ],
         "description": "Gets all managed application resources created or in the process of being created in the Service Fabric cluster resource.",
         "parameters": [
@@ -1570,7 +1484,7 @@
       "get": {
         "operationId": "Applications_Get",
         "tags": [
-          "Applications"
+          "ApplicationResources"
         ],
         "description": "Get a Service Fabric managed application resource created or in the process of being created in the Service Fabric cluster resource.",
         "parameters": [
@@ -1621,7 +1535,7 @@
       "put": {
         "operationId": "Applications_CreateOrUpdate",
         "tags": [
-          "Applications"
+          "ApplicationResources"
         ],
         "description": "Create or update a Service Fabric managed application resource with the specified name.",
         "parameters": [
@@ -1671,14 +1585,14 @@
               "$ref": "#/definitions/ApplicationResource"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1698,15 +1612,14 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ApplicationResource"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Applications_Update",
         "tags": [
-          "Applications"
+          "ApplicationResources"
         ],
         "description": "Updates the tags of an application resource of a given managed cluster.",
         "parameters": [
@@ -1766,7 +1679,7 @@
       "delete": {
         "operationId": "Applications_Delete",
         "tags": [
-          "Applications"
+          "ApplicationResources"
         ],
         "description": "Delete a Service Fabric managed application resource with the specified name.",
         "parameters": [
@@ -1798,14 +1711,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1834,7 +1747,7 @@
       "post": {
         "operationId": "Applications_ReadUpgrade",
         "tags": [
-          "Applications"
+          "ApplicationResources"
         ],
         "description": "Get the status of the latest application upgrade. It will query the cluster to find the status of the latest application upgrade.",
         "parameters": [
@@ -1866,14 +1779,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1899,7 +1812,7 @@
       "post": {
         "operationId": "Applications_ResumeUpgrade",
         "tags": [
-          "Applications"
+          "ApplicationResources"
         ],
         "description": "Send a request to resume the current application upgrade. This will resume the application upgrade from where it was paused.",
         "parameters": [
@@ -1940,14 +1853,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1973,7 +1886,7 @@
       "get": {
         "operationId": "Services_ListByApplications",
         "tags": [
-          "Services"
+          "ServiceResources"
         ],
         "description": "Gets all service resources created or in the process of being created in the Service Fabric managed application resource.",
         "parameters": [
@@ -2029,7 +1942,7 @@
       "get": {
         "operationId": "Services_Get",
         "tags": [
-          "Services"
+          "ServiceResources"
         ],
         "description": "Get a Service Fabric service resource created or in the process of being created in the Service Fabric managed application resource.",
         "parameters": [
@@ -2087,7 +2000,7 @@
       "put": {
         "operationId": "Services_CreateOrUpdate",
         "tags": [
-          "Services"
+          "ServiceResources"
         ],
         "description": "Create or update a Service Fabric managed service resource with the specified name.",
         "parameters": [
@@ -2144,14 +2057,14 @@
               "$ref": "#/definitions/ServiceResource"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2171,15 +2084,14 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ServiceResource"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Services_Update",
         "tags": [
-          "Services"
+          "ServiceResources"
         ],
         "description": "Updates the tags of a service resource of a given managed cluster.",
         "parameters": [
@@ -2246,7 +2158,7 @@
       "delete": {
         "operationId": "Services_Delete",
         "tags": [
-          "Services"
+          "ServiceResources"
         ],
         "description": "Delete a Service Fabric managed service resource with the specified name.",
         "parameters": [
@@ -2285,14 +2197,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2321,7 +2233,7 @@
       "post": {
         "operationId": "Applications_StartRollback",
         "tags": [
-          "Applications"
+          "ApplicationResources"
         ],
         "description": "Send a request to start a rollback of the current application upgrade. This will start rolling back the application to the previous version.",
         "parameters": [
@@ -2353,14 +2265,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2386,7 +2298,7 @@
       "post": {
         "operationId": "managedApplyMaintenanceWindow_Post",
         "tags": [
-          "ManagedApplyMaintenanceWindow"
+          "ManagedClusters"
         ],
         "description": "Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.",
         "parameters": [
@@ -2429,8 +2341,7 @@
       "post": {
         "operationId": "ManagedClusters_GetFaultSimulation",
         "tags": [
-          "ManagedClusters",
-          "FaultSimulation"
+          "ManagedClusters"
         ],
         "description": "Gets a fault simulation by the simulationId.",
         "parameters": [
@@ -2485,7 +2396,7 @@
       "post": {
         "operationId": "managedMaintenanceWindowStatus_Get",
         "tags": [
-          "ManagedMaintenanceWindowStatus"
+          "ManagedClusters"
         ],
         "description": "Action to get Maintenance Window Status of the Service Fabric Managed Clusters.",
         "parameters": [
@@ -2531,7 +2442,7 @@
       "post": {
         "operationId": "managedAzResiliencyStatus_Get",
         "tags": [
-          "ManagedAzResiliencyStatus"
+          "ManagedClusters"
         ],
         "description": "Action to get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.",
         "parameters": [
@@ -2577,8 +2488,7 @@
       "post": {
         "operationId": "ManagedClusters_ListFaultSimulation",
         "tags": [
-          "ManagedClusters",
-          "FaultSimulation"
+          "ManagedClusters"
         ],
         "description": "Gets the list of recent fault simulations for the cluster.",
         "parameters": [
@@ -2777,14 +2687,14 @@
               "$ref": "#/definitions/NodeType"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2822,8 +2732,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/NodeType"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -2877,14 +2786,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2904,8 +2813,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/NodeType"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -2944,14 +2852,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3021,14 +2929,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3095,14 +3003,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3128,8 +3036,7 @@
       "post": {
         "operationId": "NodeTypes_GetFaultSimulation",
         "tags": [
-          "NodeTypes",
-          "FaultSimulation"
+          "NodeTypes"
         ],
         "description": "Gets a fault simulation by the simulationId.",
         "parameters": [
@@ -3191,8 +3098,7 @@
       "post": {
         "operationId": "NodeTypes_ListFaultSimulation",
         "tags": [
-          "NodeTypes",
-          "FaultSimulation"
+          "NodeTypes"
         ],
         "description": "Gets the list of recent fault simulations for the node type.",
         "parameters": [
@@ -3289,14 +3195,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3366,14 +3272,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3443,14 +3349,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3476,7 +3382,7 @@
       "get": {
         "operationId": "NodeTypeSkus_List",
         "tags": [
-          "NodeTypeSkus"
+          "NodeTypes"
         ],
         "description": "Get a Service Fabric node type supported SKUs.",
         "parameters": [
@@ -3573,14 +3479,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3606,8 +3512,7 @@
       "post": {
         "operationId": "NodeTypes_StartFaultSimulation",
         "tags": [
-          "NodeTypes",
-          "FaultSimulation"
+          "NodeTypes"
         ],
         "description": "Starts a fault simulation on the node type.",
         "parameters": [
@@ -3645,16 +3550,23 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FaultSimulation"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3671,8 +3583,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/FaultSimulation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3681,8 +3592,7 @@
       "post": {
         "operationId": "NodeTypes_StopFaultSimulation",
         "tags": [
-          "NodeTypes",
-          "FaultSimulation"
+          "NodeTypes"
         ],
         "description": "Stops a fault simulation on the node type.",
         "parameters": [
@@ -3720,16 +3630,23 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FaultSimulation"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3746,8 +3663,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/FaultSimulation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3756,8 +3672,7 @@
       "post": {
         "operationId": "ManagedClusters_StartFaultSimulation",
         "tags": [
-          "ManagedClusters",
-          "FaultSimulation"
+          "ManagedClusters"
         ],
         "description": "Starts a fault simulation on the cluster.",
         "parameters": [
@@ -3788,16 +3703,23 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FaultSimulation"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3814,8 +3736,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/FaultSimulation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3824,8 +3745,7 @@
       "post": {
         "operationId": "ManagedClusters_StopFaultSimulation",
         "tags": [
-          "ManagedClusters",
-          "FaultSimulation"
+          "ManagedClusters"
         ],
         "description": "Stops a fault simulation on the cluster.",
         "parameters": [
@@ -3856,16 +3776,23 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FaultSimulation"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3882,8 +3809,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/FaultSimulation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4017,29 +3943,14 @@
           "description": "The application resource properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "identity": {
           "$ref": "#/definitions/ManagedIdentity",
           "description": "Describes the managed identities for an Azure resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4106,26 +4017,11 @@
           "$ref": "#/definitions/ApplicationTypeResourceProperties",
           "description": "The application type name properties",
           "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4182,26 +4078,11 @@
           "$ref": "#/definitions/ApplicationTypeVersionResourceProperties",
           "description": "The properties of the application type version resource.",
           "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4264,8 +4145,7 @@
         "maxUnusedVersionsToKeep": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of unused versions per application type to keep.",
-          "minimum": 0
+          "description": "Number of unused versions per application type to keep."
         }
       },
       "required": [
@@ -4295,8 +4175,7 @@
         },
         "forceRestart": {
           "type": "boolean",
-          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
-          "default": false
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
         },
         "rollingUpgradeMonitoringPolicy": {
           "$ref": "#/definitions/RollingUpgradeMonitoringPolicy",
@@ -4376,28 +4255,6 @@
         ]
       }
     },
-    "AvailableOperationDisplay": {
-      "type": "object",
-      "description": "Operation supported by the Service Fabric resource provider",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "The name of the provider."
-        },
-        "resource": {
-          "type": "string",
-          "description": "The resource on which the operation is performed"
-        },
-        "operation": {
-          "type": "string",
-          "description": "The operation that can be performed."
-        },
-        "description": {
-          "type": "string",
-          "description": "Operation description"
-        }
-      }
-    },
     "AveragePartitionLoadScalingTrigger": {
       "type": "object",
       "description": "Represents a scaling trigger related to an average load of a metric/resource of a partition.",
@@ -4475,6 +4332,19 @@
       ],
       "x-ms-discriminator-value": "AverageServiceLoadTrigger"
     },
+    "Azure.ResourceManager.ArmResponse<FaultSimulation>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/FaultSimulation",
+          "description": "The body type of the operation request or response."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "AzureActiveDirectory": {
       "type": "object",
       "description": "The settings to enable AAD authentication on the cluster.",
@@ -4526,16 +4396,12 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n\nIn large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.",
-          "default": 0,
-          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyApplications": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy applications over the total number of application instances in the cluster, excluding applications of application types that are included in the ApplicationTypeHealthPolicyMap.\nThe computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.",
-          "default": 0,
-          "minimum": 0,
           "maximum": 100
         }
       },
@@ -4550,13 +4416,11 @@
       "properties": {
         "healthCheckWaitDuration": {
           "type": "string",
-          "description": "The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.",
-          "x-ms-format": "duration-constant"
+          "description": "The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "healthCheckStableDuration": {
           "type": "string",
-          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.",
-          "x-ms-format": "duration-constant"
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "healthCheckRetryTimeout": {
           "type": "string",
@@ -4665,21 +4529,18 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.",
-          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.",
-          "minimum": 0,
           "maximum": 100
         },
         "maxPercentDeltaUnhealthyApplications": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of applications health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.\nNOTE: This value will overwrite the value specified in properties.UpgradeDescription.HealthPolicy.MaxPercentUnhealthyApplications",
-          "minimum": 0,
           "maximum": 100
         }
       },
@@ -4693,8 +4554,7 @@
       "properties": {
         "forceRestart": {
           "type": "boolean",
-          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
-          "default": false
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
         },
         "healthPolicy": {
           "$ref": "#/definitions/ClusterHealthPolicy",
@@ -4734,6 +4594,54 @@
             "name": "outbound",
             "value": "outbound",
             "description": "Outbound direction."
+          }
+        ]
+      }
+    },
+    "DiskType": {
+      "type": "string",
+      "description": "Managed data disk type. Specifies the storage account type for the managed disk",
+      "enum": [
+        "Standard_LRS",
+        "StandardSSD_LRS",
+        "Premium_LRS",
+        "PremiumV2_LRS",
+        "StandardSSD_ZRS",
+        "Premium_ZRS"
+      ],
+      "x-ms-enum": {
+        "name": "DiskType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
+          },
+          {
+            "name": "StandardSSD_LRS",
+            "value": "StandardSSD_LRS",
+            "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
+          },
+          {
+            "name": "PremiumV2_LRS",
+            "value": "PremiumV2_LRS",
+            "description": "Premium SSD V2 locally redundant storage. Best for production and performance sensitive workloads that consistently require low latency and high IOPS and throughput."
+          },
+          {
+            "name": "StandardSSD_ZRS",
+            "value": "StandardSSD_ZRS",
+            "description": "Standard SSD zone redundant storage. Best for web servers, lightly used enterprise applications and dev/test that need storage resiliency against zone failures."
+          },
+          {
+            "name": "Premium_ZRS",
+            "value": "Premium_ZRS",
+            "description": "Premium SSD zone redundant storage. Best for production workloads that need storage resiliency against zone failures."
           }
         ]
       }
@@ -4950,9 +4858,7 @@
           "items": {
             "$ref": "#/definitions/FaultSimulation"
           },
-          "x-ms-identifiers": [
-            "simulationId"
-          ]
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -5262,8 +5168,9 @@
         },
         "etag": {
           "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\",",
-          "readOnly": true
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true,
+          "x-ms-client-name": "eTag"
         },
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -5313,24 +5220,17 @@
       "type": "object",
       "description": "The result of the Service Fabric runtime versions",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identification of the result"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the result"
-        },
-        "type": {
-          "type": "string",
-          "description": "The result resource type"
-        },
         "properties": {
           "$ref": "#/definitions/ManagedClusterVersionDetails",
           "description": "The detail of the Service Fabric runtime version result",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ManagedClusterListResult": {
       "type": "object",
@@ -5502,8 +5402,7 @@
         },
         "zonalResiliency": {
           "type": "boolean",
-          "description": "Indicates if the cluster has zone resiliency.",
-          "default": false
+          "description": "Indicates if the cluster has zone resiliency."
         },
         "applicationTypeVersionsCleanupPolicy": {
           "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
@@ -5674,52 +5573,16 @@
           "readOnly": true
         },
         "type": {
-          "$ref": "#/definitions/ManagedIdentityType",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentityType",
           "description": "The type of managed identity for the resource."
         },
         "userAssignedIdentities": {
           "type": "object",
           "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
+            "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
           }
         }
-      }
-    },
-    "ManagedIdentityType": {
-      "type": "string",
-      "description": "The type of managed identity for the resource.",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned, UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedIdentityType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "Indicates that no identity is associated with the resource."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "Indicates that system assigned identity is associated with the resource."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "Indicates that user assigned identity is associated with the resource."
-          },
-          {
-            "name": "SystemAssigned, UserAssigned",
-            "value": "SystemAssigned, UserAssigned",
-            "description": "Indicates that both system assigned and user assigned identity are associated with the resource."
-          }
-        ]
       }
     },
     "ManagedMaintenanceWindowStatus": {
@@ -5846,24 +5709,14 @@
         "properties": {
           "$ref": "#/definitions/VMSize",
           "description": "VM Size properties.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "VM Size id.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "VM Size name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "VM Size type.",
-          "readOnly": true
+          "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ManagedVMSizesResult": {
       "type": "object",
@@ -6115,7 +5968,8 @@
         },
         "operationStatus": {
           "$ref": "#/definitions/SfmcOperationStatus",
-          "description": "Current or latest asynchronous operation status on the node type"
+          "description": "Current or latest asynchronous operation status on the node type",
+          "readOnly": true
         }
       }
     },
@@ -6210,53 +6064,8 @@
           "description": "Disk size for the managed disk attached to the vms on the node type in GBs."
         },
         "dataDiskType": {
-          "type": "string",
-          "description": "Managed data disk type. Specifies the storage account type for the managed disk",
-          "default": "StandardSSD_LRS",
-          "enum": [
-            "Standard_LRS",
-            "StandardSSD_LRS",
-            "Premium_LRS",
-            "PremiumV2_LRS",
-            "StandardSSD_ZRS",
-            "Premium_ZRS"
-          ],
-          "x-ms-enum": {
-            "name": "DiskType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Standard_LRS",
-                "value": "Standard_LRS",
-                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
-              },
-              {
-                "name": "StandardSSD_LRS",
-                "value": "StandardSSD_LRS",
-                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
-              },
-              {
-                "name": "Premium_LRS",
-                "value": "Premium_LRS",
-                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
-              },
-              {
-                "name": "PremiumV2_LRS",
-                "value": "PremiumV2_LRS",
-                "description": "Premium SSD V2 locally redundant storage. Best for production and performance sensitive workloads that consistently require low latency and high IOPS and throughput."
-              },
-              {
-                "name": "StandardSSD_ZRS",
-                "value": "StandardSSD_ZRS",
-                "description": "Standard SSD zone redundant storage. Best for web servers, lightly used enterprise applications and dev/test that need storage resiliency against zone failures."
-              },
-              {
-                "name": "Premium_ZRS",
-                "value": "Premium_ZRS",
-                "description": "Premium SSD zone redundant storage. Best for production workloads that need storage resiliency against zone failures."
-              }
-            ]
-          }
+          "$ref": "#/definitions/DiskType",
+          "description": "Managed data disk type. Specifies the storage account type for the managed disk"
         },
         "dataDiskLetter": {
           "type": "string",
@@ -6319,7 +6128,7 @@
           "type": "array",
           "description": "Set of extensions that should be installed onto the virtual machines.",
           "items": {
-            "$ref": "#/definitions/VMSSExtension"
+            "$ref": "#/definitions/VmssExtension"
           },
           "x-ms-identifiers": [
             "name"
@@ -6331,13 +6140,11 @@
         },
         "isStateless": {
           "type": "boolean",
-          "description": "Indicates if the node type can only host Stateless workloads.",
-          "default": false
+          "description": "Indicates if the node type can only host Stateless workloads."
         },
         "multiplePlacementGroups": {
           "type": "boolean",
-          "description": "Indicates if scale set associated with the node type can be composed of multiple placement groups.",
-          "default": false
+          "description": "Indicates if scale set associated with the node type can be composed of multiple placement groups."
         },
         "frontendConfigurations": {
           "type": "array",
@@ -6367,8 +6174,7 @@
         },
         "enableEncryptionAtHost": {
           "type": "boolean",
-          "description": "Enable or disable the Host Encryption for the virtual machines on the node type. This will enable the encryption for all the disks including Resource/Temp disk at host itself. Default: The Encryption at host will be disabled unless this property is set to true for the resource.",
-          "default": false
+          "description": "Enable or disable the Host Encryption for the virtual machines on the node type. This will enable the encryption for all the disks including Resource/Temp disk at host itself. Default: The Encryption at host will be disabled unless this property is set to true for the resource."
         },
         "provisioningState": {
           "$ref": "#/definitions/ManagedResourceProvisioningState",
@@ -6733,54 +6539,6 @@
         ]
       }
     },
-    "OperationListResult": {
-      "type": "object",
-      "description": "Describes the result of the request to list Service Fabric resource provider operations.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The OperationResult items on this page",
-          "items": {
-            "$ref": "#/definitions/OperationResult"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "OperationResult": {
-      "type": "object",
-      "description": "Available operation list result",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the operation."
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "Indicates whether the operation is a data action"
-        },
-        "display": {
-          "$ref": "#/definitions/AvailableOperationDisplay",
-          "description": "The object that represents the operation."
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin result"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      }
-    },
     "OsType": {
       "type": "string",
       "description": "Cluster operating system, the default will be Windows",
@@ -6804,7 +6562,8 @@
       "description": "Describes how the service is partitioned.",
       "properties": {
         "partitionScheme": {
-          "$ref": "#/definitions/PartitionScheme"
+          "$ref": "#/definitions/PartitionScheme",
+          "description": "Enumerates the ways that a service can be partitioned."
         }
       },
       "discriminator": "partitionScheme",
@@ -7082,28 +6841,23 @@
         },
         "healthCheckWaitDuration": {
           "type": "string",
-          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "healthCheckStableDuration": {
           "type": "string",
-          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "healthCheckRetryTimeout": {
           "type": "string",
-          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "upgradeTimeout": {
           "type": "string",
-          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "upgradeDomainTimeout": {
           "type": "string",
-          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\".",
-          "x-ms-format": "duration-constant"
+          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         }
       },
       "required": [
@@ -7130,7 +6884,8 @@
       "description": "Describes the mechanism for performing a scaling operation.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/ServiceScalingMechanismKind"
+          "$ref": "#/definitions/ServiceScalingMechanismKind",
+          "description": "Enumerates the ways that a service can be partitioned."
         }
       },
       "discriminator": "kind",
@@ -7161,7 +6916,8 @@
       "description": "Describes the trigger for performing a scaling operation.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/ServiceScalingTriggerKind"
+          "$ref": "#/definitions/ServiceScalingTriggerKind",
+          "description": "Enumerates the ways that a service can be partitioned."
         }
       },
       "discriminator": "kind",
@@ -7405,7 +7161,8 @@
       "description": "Describes the policy to be used for placement of a Service Fabric service.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ServicePlacementPolicyType"
+          "$ref": "#/definitions/ServicePlacementPolicyType",
+          "description": "The type of placement policy for a service fabric service. Following are the possible values."
         }
       },
       "discriminator": "type",
@@ -7518,27 +7275,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceResourceProperties",
-          "description": "The service resource properties."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The service resource properties.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -7707,21 +7450,18 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy services.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services.",
-          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyPartitionsPerService": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy partitions per service.\n\nThe percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.\nIf the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.\nThe computation rounds up to tolerate one failure on small numbers of partitions.",
-          "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyReplicasPerPartition": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum allowed percentage of unhealthy replicas per partition.\n\nThe percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.\nIf the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.\nThe computation rounds up to tolerate one failure on small numbers of replicas.",
-          "minimum": 0,
           "maximum": 100
         }
       },
@@ -7904,23 +7644,19 @@
         },
         "replicaRestartWaitDuration": {
           "type": "string",
-          "description": "The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format \"hh:mm:ss\".",
-          "x-ms-format": "duration-constant"
+          "description": "The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format \"hh:mm:ss\"."
         },
         "quorumLossWaitDuration": {
           "type": "string",
-          "description": "The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format \"hh:mm:ss\".",
-          "x-ms-format": "duration-constant"
+          "description": "The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format \"hh:mm:ss\"."
         },
         "standByReplicaKeepDuration": {
           "type": "string",
-          "description": "The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format \"hh:mm:ss\".",
-          "x-ms-format": "duration-constant"
+          "description": "The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format \"hh:mm:ss\"."
         },
         "servicePlacementTimeLimit": {
           "type": "string",
-          "description": "The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format \"hh:mm:ss\".",
-          "x-ms-format": "duration-constant"
+          "description": "The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format \"hh:mm:ss\"."
         }
       },
       "allOf": [
@@ -7969,8 +7705,7 @@
           "type": "string",
           "description": "Azure resource identifier."
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "Subnet": {
       "type": "object",
@@ -8056,104 +7791,6 @@
           }
         ]
       }
-    },
-    "UserAssignedIdentity": {
-      "type": "object",
-      "description": "User assigned identity.",
-      "properties": {
-        "principalId": {
-          "type": "string",
-          "description": "The principal id of user assigned identity.",
-          "readOnly": true
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The client id of user assigned identity.",
-          "readOnly": true
-        }
-      }
-    },
-    "VMSSExtension": {
-      "type": "object",
-      "description": "Specifies set of extensions that should be installed onto the virtual machines.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the extension."
-        },
-        "properties": {
-          "$ref": "#/definitions/VMSSExtensionProperties",
-          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "name",
-        "properties"
-      ]
-    },
-    "VMSSExtensionProperties": {
-      "type": "object",
-      "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
-      "properties": {
-        "publisher": {
-          "type": "string",
-          "description": "The name of the extension handler publisher."
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler."
-        },
-        "autoUpgradeMinorVersion": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
-        },
-        "settings": {
-          "type": "object",
-          "description": "Json formatted public settings for the extension."
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
-        },
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
-        },
-        "provisionAfterExtensions": {
-          "type": "array",
-          "description": "Collection of extension names after which this extension needs to be provisioned.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "The provisioning state, which only appears in the response.",
-          "readOnly": true
-        },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
-        },
-        "setupOrder": {
-          "type": "array",
-          "description": "Indicates the setup order for the extension.",
-          "items": {
-            "$ref": "#/definitions/VmssExtensionSetupOrder"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "publisher",
-        "type",
-        "typeHandlerVersion"
-      ]
     },
     "VMSize": {
       "type": "object",
@@ -8324,53 +7961,8 @@
           "description": "Disk size for each vm in the node type in GBs."
         },
         "diskType": {
-          "type": "string",
-          "description": "Managed data disk type. Specifies the storage account type for the managed disk",
-          "default": "StandardSSD_LRS",
-          "enum": [
-            "Standard_LRS",
-            "StandardSSD_LRS",
-            "Premium_LRS",
-            "PremiumV2_LRS",
-            "StandardSSD_ZRS",
-            "Premium_ZRS"
-          ],
-          "x-ms-enum": {
-            "name": "DiskType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Standard_LRS",
-                "value": "Standard_LRS",
-                "description": "Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access."
-              },
-              {
-                "name": "StandardSSD_LRS",
-                "value": "StandardSSD_LRS",
-                "description": "Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test."
-              },
-              {
-                "name": "Premium_LRS",
-                "value": "Premium_LRS",
-                "description": "Premium SSD locally redundant storage. Best for production and performance sensitive workloads."
-              },
-              {
-                "name": "PremiumV2_LRS",
-                "value": "PremiumV2_LRS",
-                "description": "Premium SSD V2 locally redundant storage. Best for production and performance sensitive workloads that consistently require low latency and high IOPS and throughput."
-              },
-              {
-                "name": "StandardSSD_ZRS",
-                "value": "StandardSSD_ZRS",
-                "description": "Standard SSD zone redundant storage. Best for web servers, lightly used enterprise applications and dev/test that need storage resiliency against zone failures."
-              },
-              {
-                "name": "Premium_ZRS",
-                "value": "Premium_ZRS",
-                "description": "Premium SSD zone redundant storage. Best for production workloads that need storage resiliency against zone failures."
-              }
-            ]
-          }
+          "$ref": "#/definitions/DiskType",
+          "description": "Managed data disk type. Specifies the storage account type for the managed disk"
         },
         "diskLetter": {
           "type": "string",
@@ -8383,6 +7975,90 @@
         "diskSizeGB",
         "diskType",
         "diskLetter"
+      ]
+    },
+    "VmssExtension": {
+      "type": "object",
+      "description": "Specifies set of extensions that should be installed onto the virtual machines.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "properties": {
+          "$ref": "#/definitions/VmssExtensionProperties",
+          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
+    },
+    "VmssExtensionProperties": {
+      "type": "object",
+      "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension.",
+          "additionalProperties": {}
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
+          "additionalProperties": {}
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "description": "Collection of extension names after which this extension needs to be provisioned.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response.",
+          "readOnly": true
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
+        },
+        "setupOrder": {
+          "type": "array",
+          "description": "Indicates the setup order for the extension.",
+          "items": {
+            "$ref": "#/definitions/VmssExtensionSetupOrder"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "publisher",
+        "type",
+        "typeHandlerVersion"
       ]
     },
     "VmssExtensionSetupOrder": {

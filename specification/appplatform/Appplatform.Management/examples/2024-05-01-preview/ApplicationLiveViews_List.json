@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.AppPlatform/Spring/applicationLiveViews",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/applicationLiveViews/default",
+            "properties": {
+              "components": [
+                {
+                  "name": "app-live-view-server",
+                  "instances": [
+                    {
+                      "name": "app-live-view-server-name",
+                      "status": "Running"
+                    }
+                  ],
+                  "resourceRequests": {
+                    "cpu": "1",
+                    "instanceCount": 1,
+                    "memory": "1Gi"
+                  }
+                },
+                {
+                  "name": "app-live-view-connector",
+                  "instances": [
+                    {
+                      "name": "app-live-view-connector-name1",
+                      "status": "Starting"
+                    }
+                  ],
+                  "resourceRequests": {
+                    "cpu": "500m",
+                    "instanceCount": 1,
+                    "memory": "500Mi"
+                  }
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2021-08-11T03:16:03.944Z",
+              "createdBy": "sample-user",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-11T03:17:03.944Z",
+              "lastModifiedBy": "sample-user",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApplicationLiveViews_List",
+  "title": "ApplicationLiveViews_List"
+}

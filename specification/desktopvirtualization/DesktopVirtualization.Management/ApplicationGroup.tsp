@@ -1,14 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./CustomOperations.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -22,46 +21,8 @@ model ApplicationGroup
     SegmentName = "applicationGroups",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
-  ...ManagedServiceIdentityProperty;
-  ...etagProperty;
-  ...ResourceKindProperty;
-  ...ManagedByProperty;
-  ...ResourcePlanProperty;
-  ...ResourceSkuProperty;
 }
 
-@armResourceOperations
-interface StartMenuItems {
-  /**
-   * List start menu items in the given application group.
-   */
-  @get
-  @action("startMenuItems")
-  list is Azure.ResourceManager.ArmResourceActionSync<
-    ApplicationGroup,
-    void,
-    StartMenuItemList,
-    Parameters = {
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
-    }
-  >;
-}
 @armResourceOperations
 interface ApplicationGroups {
   /**
@@ -80,13 +41,7 @@ interface ApplicationGroups {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ApplicationGroup,
-    ApplicationGroupPatch,
-    Request = {
-      /**
-       * The AppGroup properties to be updated
-       */
-      @bodyRoot applicationGroup?: ApplicationGroupPatch;
-    }
+    PatchModel = ApplicationGroupPatch
   >;
 
   /**
@@ -124,7 +79,7 @@ interface ApplicationGroups {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = ApplicationGroupList
+    Response = ArmResponse<ApplicationGroupList>
   >;
 
   /**
@@ -139,17 +94,49 @@ interface ApplicationGroups {
       @query("$filter")
       $filter?: string;
     },
-    Response = ApplicationGroupList
+    Response = ArmResponse<ApplicationGroupList>
+  >;
+
+  /**
+   * List start menu items in the given application group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("startMenuItems")
+  @operationId("StartMenuItems_List")
+  list is ArmResourceActionSync<
+    ApplicationGroup,
+    void,
+    ArmResponse<StartMenuItemList>,
+    Parameters = {
+      /**
+       * Number of items per page.
+       */
+      @query("pageSize")
+      pageSize?: int32;
+
+      /**
+       * Indicates whether the collection is descending.
+       */
+      @query("isDescending")
+      isDescending?: boolean;
+
+      /**
+       * Initial number of items to skip.
+       */
+      @query("initialSkip")
+      initialSkip?: int32;
+    }
   >;
 }
 
-@@Azure.ClientGenerator.Core.clientName(ApplicationGroups.createOrUpdate::parameters.resource,
-  "applicationGroup"
-);
-@@maxLength(ApplicationGroup.name, 64);
-@@minLength(ApplicationGroup.name, 3);
+@@maxLength(ApplicationGroup.name, 255);
+@@minLength(ApplicationGroup.name, 1);
 @@doc(ApplicationGroup.name, "The name of the application group");
 @@doc(ApplicationGroup.properties, "Detailed properties for ApplicationGroup");
 @@doc(ApplicationGroups.createOrUpdate::parameters.resource,
+  "Object containing ApplicationGroup definitions."
+);
+@@doc(ApplicationGroups.update::parameters.properties,
   "Object containing ApplicationGroup definitions."
 );

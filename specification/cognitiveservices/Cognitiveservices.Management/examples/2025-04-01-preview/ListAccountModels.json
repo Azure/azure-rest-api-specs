@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "accountName": "accountName",
+    "api-version": "2025-04-01-preview",
+    "location": "location",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ada.1",
+            "format": "OpenAI",
+            "baseModel": {
+              "name": "ada",
+              "format": "OpenAI",
+              "version": "1"
+            },
+            "capabilities": {
+              "fineTune": "true"
+            },
+            "deprecation": {
+              "fineTune": "2024-01-01T00:00:00Z",
+              "inference": "2024-01-01T00:00:00Z"
+            },
+            "maxCapacity": 10,
+            "version": "1"
+          },
+          {
+            "name": "davinci",
+            "format": "OpenAI",
+            "capabilities": {
+              "fineTune": "true"
+            },
+            "deprecation": {
+              "fineTune": "2024-01-01T00:00:00Z",
+              "inference": "2024-01-01T00:00:00Z"
+            },
+            "maxCapacity": 10,
+            "version": "1"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Accounts_ListModels",
+  "title": "List AccountModels"
+}

@@ -1,0 +1,808 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Devices;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union CertificatePurpose {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  clientAuthentication: "clientAuthentication",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  serverAuthentication: "serverAuthentication",
+}
+
+/**
+ * Current state of the provisioning service.
+ */
+union State {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Activating: "Activating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Deleted: "Deleted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ActivationFailed: "ActivationFailed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  DeletionFailed: "DeletionFailed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Transitioning: "Transitioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Suspending: "Suspending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Suspended: "Suspended",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Resuming: "Resuming",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  FailingOver: "FailingOver",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  FailoverFailed: "FailoverFailed",
+}
+
+/**
+ * Whether requests from Public Network are allowed
+ */
+union PublicNetworkAccess {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
+}
+
+/**
+ * The status of a private endpoint connection
+ */
+union PrivateLinkServiceConnectionStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Rejected: "Rejected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disconnected: "Disconnected",
+}
+
+/**
+ * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
+ */
+union IotHubAuthenticationType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  KeyBased: "KeyBased",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  UserAssigned: "UserAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  SystemAssigned: "SystemAssigned",
+}
+
+/**
+ * Allocation policy to be used by this provisioning service.
+ */
+union AllocationPolicy {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Hashed: "Hashed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  GeoLatency: "GeoLatency",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Static: "Static",
+}
+
+/**
+ * Rights that this key has.
+ */
+union AccessRightsDescription {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ServiceConfig: "ServiceConfig",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  EnrollmentRead: "EnrollmentRead",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  EnrollmentWrite: "EnrollmentWrite",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  DeviceConnect: "DeviceConnect",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  RegistrationStatusRead: "RegistrationStatusRead",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  RegistrationStatusWrite: "RegistrationStatusWrite",
+}
+
+/**
+ * Sku name.
+ */
+union IotDpsSku {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  S1: "S1",
+}
+
+/**
+ * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+ */
+union ManagedServiceIdentityType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  SystemAssigned: "SystemAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  UserAssigned: "UserAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
+}
+
+/**
+ * specifies the reason a name is unavailable
+ */
+union NameUnavailabilityReason {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Invalid: "Invalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  AlreadyExists: "AlreadyExists",
+}
+
+/**
+ * The desired action for requests captured by this rule.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum IpFilterActionType {
+  Accept,
+  Reject,
+}
+
+/**
+ * Target for requests captured by this rule.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum IpFilterTargetType {
+  all,
+  serviceApi,
+  deviceApi,
+}
+
+/**
+ * Error details.
+ */
+@error
+model ErrorDetails {
+  /**
+   * The error code.
+   */
+  @visibility(Lifecycle.Read)
+  code?: int32;
+
+  /**
+   * The HTTP status code.
+   */
+  @visibility(Lifecycle.Read)
+  httpStatusCode?: string;
+
+  /**
+   * The error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * The error details.
+   */
+  @visibility(Lifecycle.Read)
+  details?: string;
+}
+
+/**
+ * The description of an X509 CA Certificate.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model CertificateProperties {
+  /**
+   * The certificate's subject name.
+   */
+  @visibility(Lifecycle.Read)
+  subject?: string;
+
+  /**
+   * The certificate's expiration date and time.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expiry?: utcDateTime;
+
+  /**
+   * The certificate's thumbprint.
+   */
+  @visibility(Lifecycle.Read)
+  thumbprint?: string;
+
+  /**
+   * Determines whether certificate has been verified.
+   */
+  isVerified?: boolean;
+
+  /**
+   * base-64 representation of X509 certificate .cer file or just .pem file content.
+   */
+  certificate?: bytes;
+
+  /**
+   * The certificate's creation date and time.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  created?: utcDateTime;
+
+  /**
+   * The certificate's last update date and time.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updated?: utcDateTime;
+}
+
+/**
+ * the service specific properties of a provisioning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope
+ */
+model IotDpsPropertiesDescription {
+  /**
+   * Current state of the provisioning service.
+   */
+  state?: State;
+
+  /**
+   * Whether requests from Public Network are allowed
+   */
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  /**
+   * The IP filter rules.
+   */
+  ipFilterRules?: IpFilterRule[];
+
+  /**
+   * Private endpoint connections created on this IotHub
+   */
+  privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * The ARM provisioning state of the provisioning service.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  provisioningState?: string;
+
+  /**
+   * List of IoT hubs associated with this provisioning service.
+   */
+  iotHubs?: IotHubDefinitionDescription[];
+
+  /**
+   * Allocation policy to be used by this provisioning service.
+   */
+  allocationPolicy?: AllocationPolicy;
+
+  /**
+   * Service endpoint for provisioning service.
+   */
+  @visibility(Lifecycle.Read)
+  serviceOperationsHostName?: string;
+
+  /**
+   * Device endpoint for this provisioning service.
+   */
+  @visibility(Lifecycle.Read)
+  deviceProvisioningHostName?: string;
+
+  /**
+   * Unique identifier of this provisioning service.
+   */
+  @visibility(Lifecycle.Read)
+  idScope?: string;
+
+  /**
+   * List of authorization keys for a provisioning service.
+   */
+  authorizationPolicies?: SharedAccessSignatureAuthorizationRuleAccessRightsDescription[];
+
+  /**
+   * Optional.
+   * Indicates if the DPS instance has Data Residency enabled, removing the cross geo-pair disaster recovery.
+   */
+  enableDataResidency?: boolean;
+
+  /**
+   * Portal endpoint to enable CORS for this provisioning service.
+   */
+  portalOperationsHostName?: string;
+}
+
+/**
+ * The IP filter rules for a provisioning Service.
+ */
+model IpFilterRule {
+  /**
+   * The name of the IP filter rule.
+   */
+  filterName: string;
+
+  /**
+   * The desired action for requests captured by this rule.
+   */
+  action: IpFilterActionType;
+
+  /**
+   * A string that contains the IP address range in CIDR notation for the rule.
+   */
+  ipMask: string;
+
+  /**
+   * Target for requests captured by this rule.
+   */
+  target?: IpFilterTargetType;
+}
+
+/**
+ * The properties of a private endpoint connection
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model PrivateEndpointConnectionProperties {
+  /**
+   * The private endpoint property of a private endpoint connection
+   */
+  privateEndpoint?: PrivateEndpoint;
+
+  /**
+   * The current state of a private endpoint connection
+   */
+  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
+}
+
+/**
+ * The private endpoint property of a private endpoint connection
+ */
+model PrivateEndpoint {
+  /**
+   * The resource identifier.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+}
+
+/**
+ * The current state of a private endpoint connection
+ */
+model PrivateLinkServiceConnectionState {
+  /**
+   * The status of a private endpoint connection
+   */
+  status: PrivateLinkServiceConnectionStatus;
+
+  /**
+   * The description for the current state of a private endpoint connection
+   */
+  description: string;
+
+  /**
+   * Actions required for a private endpoint connection
+   */
+  actionsRequired?: string;
+}
+
+/**
+ * Description of the IoT hub.
+ */
+model IotHubDefinitionDescription {
+  /**
+   * flag for applying allocationPolicy or not for a given iot hub.
+   */
+  applyAllocationPolicy?: boolean;
+
+  /**
+   * weight to apply for a given iot h.
+   */
+  allocationWeight?: int32;
+
+  /**
+   * Host name of the IoT hub.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Connection string of the IoT hub.
+   */
+  connectionString?: string;
+
+  /**
+   * ARM region of the IoT hub.
+   */
+  location: string;
+
+  /**
+   * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
+   */
+  authenticationType?: IotHubAuthenticationType;
+
+  /**
+   * The selected user-assigned identity resource Id associated with IoT Hub. This is required when authenticationType is UserAssigned.
+   */
+  selectedUserAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/**
+ * Description of the shared access key.
+ */
+model SharedAccessSignatureAuthorizationRuleAccessRightsDescription {
+  /**
+   * Name of the key.
+   */
+  keyName: string;
+
+  /**
+   * Primary SAS key value.
+   */
+  primaryKey?: string;
+
+  /**
+   * Secondary SAS key value.
+   */
+  secondaryKey?: string;
+
+  /**
+   * Rights that this key has.
+   */
+  rights: AccessRightsDescription;
+}
+
+/**
+ * List of possible provisioning service SKUs.
+ */
+model IotDpsSkuInfo {
+  /**
+   * Sku name.
+   */
+  name?: IotDpsSku;
+
+  /**
+   * Pricing tier name of the provisioning service.
+   */
+  @visibility(Lifecycle.Read)
+  tier?: string;
+
+  /**
+   * The number of units to provision
+   */
+  capacity?: int64;
+}
+
+/**
+ * Managed service identity (system assigned and/or user assigned identities)
+ */
+model ManagedServiceIdentity {
+  /**
+   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @visibility(Lifecycle.Read)
+  @format("uuid")
+  principalId?: string;
+
+  /**
+   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @visibility(Lifecycle.Read)
+  @format("uuid")
+  tenantId?: string;
+
+  /**
+   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+   */
+  type: ManagedServiceIdentityType;
+
+  /**
+   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
+ * The common properties of an Azure resource.
+ */
+model Resource {
+  /**
+   * The resource identifier.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The resource name.
+   */
+  @visibility(Lifecycle.Read)
+  @pattern("^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$")
+  name?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The resource location.
+   */
+  location: string;
+
+  /**
+   * The resource group of the resource.
+   */
+  resourcegroup?: string;
+
+  /**
+   * The subscription id of the resource.
+   */
+  subscriptionid?: string;
+
+  /**
+   * The resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+}
+
+/**
+ * A container holding only the Tags for a resource, allowing the user to update the tags on a Provisioning Service instance.
+ */
+model TagsResource {
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+}
+
+/**
+ * The JSON-serialized array of Certificate objects.
+ */
+model CertificateListDescription {
+  /**
+   * The array of Certificate objects.
+   */
+  value?: CertificateResponse[];
+}
+
+/**
+ * Result of a long running operation.
+ */
+model AsyncOperationResult {
+  /**
+   * current status of a long running operation.
+   */
+  status?: string;
+
+  /**
+   * Error message containing code, description and details
+   */
+  error?: ErrorMessage;
+}
+
+/**
+ * Error response containing message and code.
+ */
+model ErrorMessage {
+  /**
+   * standard error code
+   */
+  code?: string;
+
+  /**
+   * standard error description
+   */
+  message?: string;
+
+  /**
+   * detailed summary of error
+   */
+  details?: string;
+}
+
+/**
+ * List of available SKUs.
+ */
+model IotDpsSkuDefinitionListResult is Azure.Core.Page<IotDpsSkuDefinition>;
+
+/**
+ * Available SKUs of tier and units.
+ */
+model IotDpsSkuDefinition {
+  /**
+   * Sku name.
+   */
+  name?: IotDpsSku;
+}
+
+/**
+ * Description of the response of the verification code.
+ */
+model VerificationCodeResponse {
+  /**
+   * Name of certificate.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Request etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * The resource identifier.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  properties?: VerificationCodeResponseProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model VerificationCodeResponseProperties {
+  /**
+   * Verification code.
+   */
+  verificationCode?: string;
+
+  /**
+   * Certificate subject.
+   */
+  subject?: string;
+
+  /**
+   * Code expiry.
+   */
+  expiry?: string;
+
+  /**
+   * Certificate thumbprint.
+   */
+  thumbprint?: string;
+
+  /**
+   * Indicate if the certificate is verified by owner of private key.
+   */
+  isVerified?: boolean;
+
+  /**
+   * base-64 representation of X509 certificate .cer file or just .pem file content.
+   */
+  certificate?: bytes;
+
+  /**
+   * Certificate created time.
+   */
+  created?: string;
+
+  /**
+   * Certificate updated time.
+   */
+  updated?: string;
+}
+
+/**
+ * The JSON-serialized leaf certificate
+ */
+model VerificationCodeRequest {
+  /**
+   * base-64 representation of X509 certificate .cer file or just .pem file content.
+   */
+  certificate?: string;
+}
+
+/**
+ * Input values for operation results call.
+ */
+model OperationInputs {
+  /**
+   * The name of the Provisioning Service to check.
+   */
+  name: string;
+}
+
+/**
+ * Description of name availability.
+ */
+model NameAvailabilityInfo {
+  /**
+   * specifies if a name is available or not
+   */
+  nameAvailable?: boolean;
+
+  /**
+   * specifies the reason a name is unavailable
+   */
+  reason?: NameUnavailabilityReason;
+
+  /**
+   * message containing a detailed reason name is unavailable
+   */
+  message?: string;
+}
+
+/**
+ * List of shared access keys.
+ */
+model SharedAccessSignatureAuthorizationRuleListResult
+  is Azure.Core.Page<SharedAccessSignatureAuthorizationRuleAccessRightsDescription>;
+
+/**
+ * The available private link resources for a provisioning service
+ */
+model PrivateLinkResources {
+  /**
+   * The list of available private link resources for a provisioning service
+   */
+  value?: GroupIdInformation[];
+}
+
+/**
+ * The properties for a group information object
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model GroupIdInformationProperties {
+  /**
+   * The group id
+   */
+  groupId?: string;
+
+  /**
+   * The required members for a specific group id
+   */
+  requiredMembers?: string[];
+
+  /**
+   * The required DNS zones for a specific group id
+   */
+  requiredZoneNames?: string[];
+}
+
+/**
+ * The JSON-serialized X509 Certificate.
+ */
+model CertificateBodyDescription {
+  /**
+   * Base-64 representation of the X509 leaf certificate .cer file or just .pem file content.
+   */
+  certificate?: string;
+
+  /**
+   * True indicates that the certificate will be created in verified state and proof of possession will not be required.
+   */
+  isVerified?: boolean;
+}

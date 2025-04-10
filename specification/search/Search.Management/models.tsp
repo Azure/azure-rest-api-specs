@@ -1,0 +1,1544 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Search;
+
+/**
+ * The name of the feature offered in this region.
+ */
+union FeatureName {
+  string,
+
+  /**
+   * Supports Grok feature.
+   */
+  Grok: "Grok",
+
+  /**
+   * Supports Image Vectorization feature.
+   */
+  ImageVectorization: "ImageVectorization",
+
+  /**
+   * Supports Document Intelligence feature.
+   */
+  DocumentIntelligence: "DocumentIntelligence",
+
+  /**
+   * Supports Query Rewrite feature.
+   */
+  QueryRewrite: "QueryRewrite",
+
+  /**
+   * Supports S3 feature.
+   */
+  S3: "S3",
+
+  /**
+   * Supports Storage Optimized feature.
+   */
+  StorageOptimized: "StorageOptimized",
+
+  /**
+   * Supports Semantic Search feature.
+   */
+  SemanticSearch: "SemanticSearch",
+
+  /**
+   * Supports Mega Store feature.
+   */
+  MegaStore: "MegaStore",
+
+  /**
+   * Supports Availability Zones feature.
+   */
+  AvailabilityZones: "AvailabilityZones",
+}
+
+/**
+ * The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'
+ */
+union SkuName {
+  string,
+
+  /**
+   * Free tier, with no SLA guarantees and a subset of the features offered on billable tiers.
+   */
+  Free: "free",
+
+  /**
+   * Billable tier for a dedicated service having up to 3 replicas.
+   */
+  Basic: "basic",
+
+  /**
+   * Billable tier for a dedicated service having up to 12 partitions and 12 replicas.
+   */
+  Standard: "standard",
+
+  /**
+   * Similar to 'standard', but with more capacity per search unit.
+   */
+  Standard2: "standard2",
+
+  /**
+   *  The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity').
+   */
+  Standard3: "standard3",
+
+  /**
+   * Billable tier for a dedicated service that supports 1TB per partition, up to 12 partitions.
+   */
+  StorageOptimizedL1: "storage_optimized_l1",
+
+  /**
+   * Billable tier for a dedicated service that supports 2TB per partition, up to 12 partitions.
+   */
+  StorageOptimizedL2: "storage_optimized_l2",
+}
+
+/**
+ * Configure this property to support the search service using either the default compute or Azure Confidential Compute.
+ */
+union ComputeType {
+  string,
+
+  /**
+   * Create the service with the default compute.
+   */
+  Default: "default",
+
+  /**
+   * Create the service with Azure Confidential Compute.
+   */
+  Confidential: "confidential",
+}
+
+/**
+ * This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.
+ */
+union PublicNetworkAccess {
+  string,
+
+  /**
+   * The search service is accessible from traffic originating from the public internet.
+   */
+  Enabled: "enabled",
+
+  /**
+   * The search service is not accessible from traffic originating from the public internet. Access is only permitted over approved private endpoint connections.
+   */
+  Disabled: "disabled",
+}
+
+/**
+ * Possible origins of inbound traffic that can bypass the rules defined in the 'ipRules' section.
+ */
+union SearchBypass {
+  string,
+
+  /**
+   * Indicates that no origin can bypass the rules defined in the 'ipRules' section. This is the default.
+   */
+  None: "None",
+
+  /**
+   * Indicates that requests originating from the Azure portal can bypass the rules defined in the 'ipRules' section.
+   */
+  AzurePortal: "AzurePortal",
+
+  /**
+   * Indicates that requests originating from Azure trusted services can bypass the rules defined in the 'ipRules' section.
+   */
+  AzureServices: "AzureServices",
+}
+
+/**
+ * A specific data exfiltration scenario that is disabled for the service.
+ */
+union SearchDisabledDataExfiltrationOption {
+  string,
+
+  /**
+   * Indicates that all data exfiltration scenarios are disabled.
+   */
+  All: "All",
+}
+
+/**
+ * Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.
+ */
+union SearchSemanticSearch {
+  string,
+
+  /**
+   * Indicates that semantic reranker is disabled for the search service. This is the default.
+   */
+  disabled: "disabled",
+
+  /**
+   * Enables semantic reranker on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of semantic ranking requests and is offered at no extra charge. This is the default for newly provisioned search services.
+   */
+  free: "free",
+
+  /**
+   * Enables semantic reranker on a search service as a billable feature, with higher throughput and volume of semantically reranked queries.
+   */
+  standard: "standard",
+}
+
+/**
+ * The provisioning state of the private link service connection. Valid values are Updating, Deleting, Failed, Succeeded, Incomplete, or Canceled.
+ */
+union PrivateLinkServiceConnectionProvisioningState {
+  string,
+
+  /**
+   * The private link service connection is in the process of being created along with other resources for it to be fully functional.
+   */
+  Updating: "Updating",
+
+  /**
+   * The private link service connection is in the process of being deleted.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * The private link service connection has failed to be provisioned or deleted.
+   */
+  Failed: "Failed",
+
+  /**
+   * The private link service connection has finished provisioning and is ready for approval.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Provisioning request for the private link service connection resource has been accepted but the process of creation has not commenced yet.
+   */
+  Incomplete: "Incomplete",
+
+  /**
+   * Provisioning request for the private link service connection resource has been canceled.
+   */
+  Canceled: "Canceled",
+}
+
+/**
+ * Status of the shared private link resource. Valid values are Pending, Approved, Rejected or Disconnected.
+ */
+union SharedPrivateLinkResourceStatus {
+  string,
+
+  /**
+   * The shared private link resource has been created and is pending approval.
+   */
+  Pending: "Pending",
+
+  /**
+   * The shared private link resource is approved and is ready for use.
+   */
+  Approved: "Approved",
+
+  /**
+   * The shared private link resource has been rejected and cannot be used.
+   */
+  Rejected: "Rejected",
+
+  /**
+   * The shared private link resource has been removed from the service.
+   */
+  Disconnected: "Disconnected",
+}
+
+/**
+ * The provisioning state of the shared private link resource. Valid values are Updating, Deleting, Failed, Succeeded or Incomplete.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+union SharedPrivateLinkResourceProvisioningState {
+  string,
+
+  /**
+   * The shared private link resource is in the process of being created along with other resources for it to be fully functional.
+   */
+  Updating: "Updating",
+
+  /**
+   * The shared private link resource is in the process of being deleted.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * The shared private link resource has failed to be provisioned or deleted.
+   */
+  Failed: "Failed",
+
+  /**
+   * The shared private link resource has finished provisioning and is ready for approval.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Provisioning request for the shared private link resource has been accepted but the process of creation has not commenced yet.
+   */
+  Incomplete: "Incomplete",
+}
+
+/**
+ * The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an identity created by the system and a set of user assigned identities. The type 'None' will remove all identities from the service.
+ */
+union IdentityType {
+  string,
+
+  /**
+   * Indicates that any identity associated with the search service needs to be removed.
+   */
+  None: "None",
+
+  /**
+   * Indicates that system-assigned identity for the search service will be enabled.
+   */
+  SystemAssigned: "SystemAssigned",
+
+  /**
+   * Indicates that one or more user assigned identities will be assigned to the search service.
+   */
+  UserAssigned: "UserAssigned",
+
+  /**
+   * Indicates that system-assigned identity for the search service will be enabled along with the assignment of one or more user assigned identities.
+   */
+  `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
+}
+
+/**
+ * The reason why the name is not available. 'Invalid' indicates the name provided does not match the naming requirements (incorrect length, unsupported characters, etc.). 'AlreadyExists' indicates that the name is already in use and is therefore unavailable.
+ */
+union UnavailableNameReason {
+  string,
+
+  /**
+   * The search service name doesn't match naming requirements.
+   */
+  Invalid: "Invalid",
+
+  /**
+   * The search service name is already assigned to a different search service.
+   */
+  AlreadyExists: "AlreadyExists",
+}
+
+/**
+ * The current status of the long running asynchronous shared private link resource operation.
+ */
+union SharedPrivateLinkResourceAsyncOperationResult {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Running: "Running",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum AdminKeyKind {
+  /**
+   * The primary API key for the search service.
+   */
+  Primary: "primary",
+
+  /**
+   * The secondary API key for the search service.
+   */
+  Secondary: "secondary",
+}
+
+/**
+ * Applicable only for the standard3 SKU. You can set this property to enable up to 3 high density partitions that allow up to 1000 indexes, which is much higher than the maximum indexes allowed for any other SKU. For the standard3 SKU, the value is either 'default' or 'highDensity'. For all other SKUs, this value must be 'default'.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum HostingMode {
+  /**
+   * The limit on number of indexes is determined by the default limits for the SKU.
+   */
+  Default: "default",
+
+  /**
+   * Only application for standard3 SKU, where the search service can have up to 1000 indexes.
+   */
+  HighDensity: "highDensity",
+}
+
+/**
+ * The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. 'stopped': The search service is in a subscription that's disabled. If your service is in the degraded, disabled, or error states, it means the Azure AI Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum SearchServiceStatus {
+  /**
+   * The search service is running and no provisioning operations are underway.
+   */
+  Running: "running",
+
+  /**
+   * The search service is being provisioned or scaled up or down.
+   */
+  Provisioning: "provisioning",
+
+  /**
+   * The search service is being deleted.
+   */
+  Deleting: "deleting",
+
+  /**
+   * The search service is degraded because underlying search units are not healthy.
+   */
+  Degraded: "degraded",
+
+  /**
+   * The search service is disabled and all API requests will be rejected.
+   */
+  Disabled: "disabled",
+
+  /**
+   * The search service is in error state, indicating either a failure to provision or to be deleted.
+   */
+  Error: "error",
+
+  /**
+   * The search service is in a subscription that's disabled.
+   */
+  Stopped: "stopped",
+}
+
+/**
+ * The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'Succeeded' or 'Failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'Succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+enum ProvisioningState {
+  /**
+   * The last provisioning operation has completed successfully.
+   */
+  Succeeded,
+
+  /**
+   * The search service is being provisioned or scaled up or down.
+   */
+  Provisioning,
+
+  /**
+   * The last provisioning operation has failed.
+   */
+  Failed,
+}
+
+/**
+ * Describes how a search service should enforce compliance if it finds objects that aren't encrypted with the customer-managed key.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum SearchEncryptionWithCmk {
+  /**
+   * No enforcement of customer-managed key encryption will be made. Only the built-in service-managed encryption is used.
+   */
+  Disabled,
+
+  /**
+   * Search service will be marked as non-compliant if one or more objects aren't encrypted with a customer-managed key.
+   */
+  Enabled,
+
+  /**
+   * Enforcement policy is not explicitly specified, with the behavior being the same as if it were set to 'Disabled'.
+   */
+  Unspecified,
+}
+
+/**
+ * Returns the status of search service compliance with respect to non-CMK-encrypted objects. If a service has more than one unencrypted object, and enforcement is enabled, the service is marked as noncompliant.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum SearchEncryptionComplianceStatus {
+  /**
+   * Indicates that the search service is compliant, either because the number of non-CMK-encrypted objects is zero or enforcement is disabled.
+   */
+  Compliant,
+
+  /**
+   * Indicates that the search service has more than one non-CMK-encrypted objects.
+   */
+  NonCompliant,
+}
+
+/**
+ * Describes what response the data plane API of a search service would send for requests that failed authentication.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum AadAuthFailureMode {
+  /**
+   * Indicates that requests that failed authentication should be presented with an HTTP status code of 403 (Forbidden).
+   */
+  Http403: "http403",
+
+  /**
+   * Indicates that requests that failed authentication should be presented with an HTTP status code of 401 (Unauthorized) and present a Bearer Challenge.
+   */
+  Http401WithBearerChallenge: "http401WithBearerChallenge",
+}
+
+/**
+ * Status of the the private link service connection. Valid values are Pending, Approved, Rejected, or Disconnected.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum PrivateLinkServiceConnectionStatus {
+  /**
+   * The private endpoint connection has been created and is pending approval.
+   */
+  Pending,
+
+  /**
+   * The private endpoint connection is approved and is ready for use.
+   */
+  Approved,
+
+  /**
+   * The private endpoint connection has been rejected and cannot be used.
+   */
+  Rejected,
+
+  /**
+   * The private endpoint connection has been removed from the service.
+   */
+  Disconnected,
+}
+
+/**
+ * Describes additional properties for this operation.
+ */
+model OperationProperties {
+  /**
+   * Specifications of the service for this operation.
+   */
+  @visibility(Lifecycle.Read)
+  serviceSpecification?: OperationServiceSpecification;
+}
+
+/**
+ * Specifications of the service for this operation.
+ */
+model OperationServiceSpecification {
+  /**
+   * Specifications of metrics for this operation.
+   */
+  @visibility(Lifecycle.Read)
+  metricSpecifications?: OperationMetricsSpecification[];
+
+  /**
+   * Specifications of logs for this operation.
+   */
+  @visibility(Lifecycle.Read)
+  logSpecifications?: OperationLogsSpecification[];
+}
+
+/**
+ * Specifications of one type of metric for this operation.
+ */
+model OperationMetricsSpecification {
+  /**
+   * The name of the metric specification.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The display name of the metric specification.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The display description of the metric specification.
+   */
+  @visibility(Lifecycle.Read)
+  displayDescription?: string;
+
+  /**
+   * The unit for the metric specification.
+   */
+  @visibility(Lifecycle.Read)
+  unit?: string;
+
+  /**
+   * The type of aggregation for the metric specification.
+   */
+  @visibility(Lifecycle.Read)
+  aggregationType?: string;
+
+  /**
+   * Dimensions for the metric specification.
+   */
+  @visibility(Lifecycle.Read)
+  dimensions?: OperationMetricDimension[];
+
+  /**
+   * Availabilities for the metric specification.
+   */
+  @visibility(Lifecycle.Read)
+  availabilities?: OperationAvailability[];
+}
+
+/**
+ * Describes a particular dimension for the metric specification.
+ */
+model OperationMetricDimension {
+  /**
+   * The name of the dimension.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The display name of the dimension.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+}
+
+/**
+ * Describes a particular availability for the metric specification.
+ */
+model OperationAvailability {
+  /**
+   * The time grain for the dimension.
+   */
+  @visibility(Lifecycle.Read)
+  timeGrain?: string;
+
+  /**
+   * The blob duration for the dimension.
+   */
+  @visibility(Lifecycle.Read)
+  blobDuration?: string;
+}
+
+/**
+ * Specifications of one type of log for this operation.
+ */
+model OperationLogsSpecification {
+  /**
+   * The name of the log specification.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The display name of the log specification.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The blob duration for the log specification.
+   */
+  @visibility(Lifecycle.Read)
+  blobDuration?: string;
+}
+
+/**
+ * Contains information about an API error.
+ */
+@error
+model CloudError {
+  /**
+   * Describes a particular API error with an error code and a message.
+   */
+  error?: CloudErrorBody;
+
+  /**
+   * A brief description of the error that hints at what went wrong (for details/debugging information refer to the 'error.message' property).
+   */
+  message?: string;
+}
+
+/**
+ * Describes a particular API error with an error code and a message.
+ */
+model CloudErrorBody {
+  /**
+   * An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases.
+   */
+  code?: string;
+
+  /**
+   * A message that describes the error in detail and provides debugging information.
+   */
+  message?: string;
+
+  /**
+   * The target of the particular error (for example, the name of the property in error).
+   */
+  target?: string;
+
+  /**
+   * Contains nested errors that are related to this error.
+   */
+  details?: CloudErrorBody[];
+}
+
+/**
+ * The response containing a list of features and SKUs offered in various regions.
+ */
+model OfferingsListResult is Azure.Core.Page<OfferingsByRegion>;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model OfferingsByRegion {
+  /**
+   * The name of the region.
+   */
+  regionName?: string;
+
+  /**
+   * The list of features offered in this region.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  features?: FeatureOffering[];
+
+  /**
+   * The list of SKUs offered in this region.
+   */
+  skus?: SkuOffering[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model FeatureOffering {
+  /**
+   * The name of the feature offered in this region.
+   */
+  name?: FeatureName;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model SkuOffering {
+  /**
+   * Defines the SKU of a search service, which determines billing rate and capacity limits.
+   */
+  sku?: Sku;
+
+  /**
+   * The limits associated with this SKU offered in this region.
+   */
+  limits?: SkuOfferingLimits;
+}
+
+/**
+ * Defines the SKU of a search service, which determines billing rate and capacity limits.
+ */
+model Sku {
+  /**
+   * The SKU of the search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'
+   */
+  name?: SkuName;
+}
+
+/**
+ * The limits associated with this SKU offered in this region.
+ */
+model SkuOfferingLimits {
+  /**
+   * The maximum number of indexes available for this SKU.
+   */
+  indexes?: int32;
+
+  /**
+   * The maximum number of indexers available for this SKU.
+   */
+  indexers?: int32;
+
+  /**
+   * The maximum storage size in Gigabytes available for this SKU per partition.
+   */
+  partitionStorageInGigabytes?: float32;
+
+  /**
+   * The maximum vector storage size in Gigabytes available for this SKU per partition.
+   */
+  partitionVectorStorageInGigabytes?: float32;
+
+  /**
+   * The maximum number of search units available for this SKU.
+   */
+  searchUnits?: int32;
+
+  /**
+   * The maximum number of replicas available for this SKU.
+   */
+  replicas?: int32;
+
+  /**
+   * The maximum number of partitions available for this SKU.
+   */
+  partitions?: int32;
+}
+
+/**
+ * Response containing the primary and secondary admin API keys for a given Azure AI Search service.
+ */
+model AdminKeyResult {
+  /**
+   * The primary admin API key of the search service.
+   */
+  @visibility(Lifecycle.Read)
+  primaryKey?: string;
+
+  /**
+   * The secondary admin API key of the search service.
+   */
+  @visibility(Lifecycle.Read)
+  secondaryKey?: string;
+}
+
+/**
+ * Describes an API key for a given Azure AI Search service that conveys read-only permissions on the docs collection of an index.
+ */
+model QueryKey {
+  /**
+   * The name of the query API key. Query names are optional, but assigning a name can help you remember how it's used.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The value of the query API key.
+   */
+  @visibility(Lifecycle.Read)
+  key?: string;
+}
+
+/**
+ * Response containing the query API keys for a given Azure AI Search service.
+ */
+model ListQueryKeysResult is Azure.Core.Page<QueryKey>;
+
+/**
+ * Properties of the search service.
+ */
+model SearchServiceProperties {
+  /**
+   * The number of replicas in the search service. If specified, it must be a value between 1 and 12 inclusive for standard SKUs or between 1 and 3 inclusive for basic SKU.
+   */
+  @maxValue(12)
+  @minValue(1)
+  replicaCount?: int32 = 1;
+
+  /**
+   * The number of partitions in the search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs. For 'standard3' services with hostingMode set to 'highDensity', the allowed values are between 1 and 3.
+   */
+  @maxValue(12)
+  @minValue(1)
+  partitionCount?: int32 = 1;
+
+  /**
+   * The endpoint of the Azure AI Search service.
+   */
+  endpoint?: url;
+
+  /**
+   * Applicable only for the standard3 SKU. You can set this property to enable up to 3 high density partitions that allow up to 1000 indexes, which is much higher than the maximum indexes allowed for any other SKU. For the standard3 SKU, the value is either 'default' or 'highDensity'. For all other SKUs, this value must be 'default'.
+   */
+  hostingMode?: HostingMode = HostingMode.Default;
+
+  /**
+   * Configure this property to support the search service using either the default compute or Azure Confidential Compute.
+   */
+  computeType?: ComputeType;
+
+  /**
+   * This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.
+   */
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
+
+  /**
+   * The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. 'stopped': The search service is in a subscription that's disabled. If your service is in the degraded, disabled, or error states, it means the Azure AI Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.
+   */
+  @visibility(Lifecycle.Read)
+  status?: SearchServiceStatus;
+
+  /**
+   * The details of the search service status.
+   */
+  @visibility(Lifecycle.Read)
+  statusDetails?: string;
+
+  /**
+   * The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'Succeeded' or 'Failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'Succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Network specific rules that determine how the Azure AI Search service may be reached.
+   */
+  networkRuleSet?: NetworkRuleSet;
+
+  /**
+   * A list of data exfiltration scenarios that are explicitly disallowed for the search service. Currently, the only supported value is 'All' to disable all possible data export scenarios with more fine grained controls planned for the future.
+   */
+  disabledDataExfiltrationOptions?: SearchDisabledDataExfiltrationOption[];
+
+  /**
+   * Specifies any policy regarding encryption of resources (such as indexes) using customer manager keys within a search service.
+   */
+  encryptionWithCmk?: EncryptionWithCmk;
+
+  /**
+   * When set to true, calls to the search service will not be permitted to utilize API keys for authentication. This cannot be set to true if 'dataPlaneAuthOptions' are defined.
+   */
+  disableLocalAuth?: boolean;
+
+  /**
+   * Defines the options for how the data plane API of a search service authenticates requests. This cannot be set if 'disableLocalAuth' is set to true.
+   */
+  authOptions?: DataPlaneAuthOptions;
+
+  /**
+   * Sets options that control the availability of semantic search. This configuration is only possible for certain Azure AI Search SKUs in certain locations.
+   */
+  semanticSearch?: SearchSemanticSearch;
+
+  /**
+   * The list of private endpoint connections to the Azure AI Search service.
+   */
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * The list of shared private link resources managed by the Azure AI Search service.
+   */
+  @visibility(Lifecycle.Read)
+  sharedPrivateLinkResources?: SharedPrivateLinkResource[];
+
+  /**
+   * A system generated property representing the service's etag that can be for optimistic concurrency control during updates.
+   */
+  @visibility(Lifecycle.Read)
+  eTag?: string;
+
+  /**
+   * Indicates whether or not the search service has an upgrade available.
+   */
+  @visibility(Lifecycle.Read)
+  upgradeAvailable?: boolean;
+
+  /**
+   * The date and time the search service was last upgraded. This field will be null until the service gets upgraded for the first time.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  serviceUpgradeDate?: utcDateTime;
+}
+
+/**
+ * Network specific rules that determine how the Azure AI Search service may be reached.
+ */
+model NetworkRuleSet {
+  /**
+   * A list of IP restriction rules that defines the inbound network(s) with allowing access to the search service endpoint. At the meantime, all other public IP networks are blocked by the firewall. These restriction rules are applied only when the 'publicNetworkAccess' of the search service is 'enabled'; otherwise, traffic over public interface is not allowed even with any public IP rules, and private endpoint connections would be the exclusive access method.
+   */
+  ipRules?: IpRule[];
+
+  /**
+   * Possible origins of inbound traffic that can bypass the rules defined in the 'ipRules' section.
+   */
+  bypass?: SearchBypass;
+}
+
+/**
+ * The IP restriction rule of the Azure AI Search service.
+ */
+model IpRule {
+  /**
+   * Value corresponding to a single IPv4 address (eg., 123.1.2.3) or an IP range in CIDR format (eg., 123.1.2.3/24) to be allowed.
+   */
+  value?: string;
+}
+
+/**
+ * Describes a policy that determines how resources within the search service are to be encrypted with customer managed keys.
+ */
+model EncryptionWithCmk {
+  /**
+   * Describes how a search service should enforce compliance if it finds objects that aren't encrypted with the customer-managed key.
+   */
+  enforcement?: SearchEncryptionWithCmk;
+
+  /**
+   * Returns the status of search service compliance with respect to non-CMK-encrypted objects. If a service has more than one unencrypted object, and enforcement is enabled, the service is marked as noncompliant.
+   */
+  @visibility(Lifecycle.Read)
+  encryptionComplianceStatus?: SearchEncryptionComplianceStatus;
+}
+
+/**
+ * Defines the options for how the search service authenticates a data plane request. This cannot be set if 'disableLocalAuth' is set to true.
+ */
+model DataPlaneAuthOptions {
+  /**
+   * Indicates that only the API key can be used for authentication.
+   */
+  apiKeyOnly?: Record<unknown>;
+
+  /**
+   * Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication.
+   */
+  aadOrApiKey?: DataPlaneAadOrApiKeyAuthOption;
+}
+
+/**
+ * Indicates that either the API key or an access token from a Microsoft Entra ID tenant can be used for authentication.
+ */
+model DataPlaneAadOrApiKeyAuthOption {
+  /**
+   * Describes what response the data plane API of a search service would send for requests that failed authentication.
+   */
+  aadAuthFailureMode?: AadAuthFailureMode;
+}
+
+/**
+ * Describes the properties of an existing private endpoint connection to the search service.
+ */
+model PrivateEndpointConnectionProperties {
+  /**
+   * The private endpoint resource from Microsoft.Network provider.
+   */
+  privateEndpoint?: PrivateEndpointConnectionPropertiesPrivateEndpoint;
+
+  /**
+   * Describes the current state of an existing Azure Private Link service connection to the private endpoint.
+   */
+  privateLinkServiceConnectionState?: PrivateEndpointConnectionPropertiesPrivateLinkServiceConnectionState;
+
+  /**
+   * The group ID of the Azure resource for which the private link service is for.
+   */
+  groupId?: string;
+
+  /**
+   * The provisioning state of the private link service connection. Valid values are Updating, Deleting, Failed, Succeeded, Incomplete, or Canceled.
+   */
+  provisioningState?: PrivateLinkServiceConnectionProvisioningState;
+}
+
+/**
+ * The private endpoint resource from Microsoft.Network provider.
+ */
+model PrivateEndpointConnectionPropertiesPrivateEndpoint {
+  /**
+   * The resource ID of the private endpoint resource from Microsoft.Network provider.
+   */
+  id?: string;
+}
+
+/**
+ * Describes the current state of an existing Azure Private Link service connection to the private endpoint.
+ */
+model PrivateEndpointConnectionPropertiesPrivateLinkServiceConnectionState {
+  /**
+   * Status of the the private link service connection. Valid values are Pending, Approved, Rejected, or Disconnected.
+   */
+  status?: PrivateLinkServiceConnectionStatus;
+
+  /**
+   * The description for the private link service connection state.
+   */
+  description?: string;
+
+  /**
+   * A description of any extra actions that may be required.
+   */
+  actionsRequired?: string = "None";
+}
+
+/**
+ * Common fields that are returned in the response for all Azure Resource Manager resources
+ */
+model Resource {
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Describes the properties of an existing shared private link resource managed by the Azure AI Search service.
+ */
+model SharedPrivateLinkResourceProperties {
+  /**
+   * The resource ID of the resource the shared private link resource is for.
+   */
+  privateLinkResourceId?: string;
+
+  /**
+   * The group ID from the provider of resource the shared private link resource is for.
+   */
+  groupId?: string;
+
+  /**
+   * The message for requesting approval of the shared private link resource.
+   */
+  requestMessage?: string;
+
+  /**
+   * Optional. Can be used to specify the Azure Resource Manager location of the resource for which a shared private link is being created. This is only required for those resources whose DNS configuration are regional (such as Azure Kubernetes Service).
+   */
+  resourceRegion?: string;
+
+  /**
+   * Status of the shared private link resource. Valid values are Pending, Approved, Rejected or Disconnected.
+   */
+  status?: SharedPrivateLinkResourceStatus;
+
+  /**
+   * The provisioning state of the shared private link resource. Valid values are Updating, Deleting, Failed, Succeeded or Incomplete.
+   */
+  provisioningState?: SharedPrivateLinkResourceProvisioningState;
+}
+
+/**
+ * Details about the search service identity. A null value indicates that the search service has no identity assigned.
+ */
+model Identity {
+  /**
+   * The principal ID of the system-assigned identity of the search service.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The tenant ID of the system-assigned identity of the search service.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an identity created by the system and a set of user assigned identities. The type 'None' will remove all identities from the service.
+   */
+  type: IdentityType;
+
+  /**
+   * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  userAssignedIdentities?: Record<UserAssignedManagedIdentity>;
+}
+
+/**
+ * The details of the user assigned managed identity assigned to the search service.
+ */
+model UserAssignedManagedIdentity {
+  /**
+   * The principal ID of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The client ID of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  clientId?: string;
+}
+
+/**
+ * The parameters used to update an Azure AI Search service.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model SearchServiceUpdate extends Resource {
+  /**
+   * Properties of the search service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SearchServiceProperties;
+
+  /**
+   * The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service.
+   */
+  sku?: Sku;
+
+  /**
+   * The geographic location of the resource. This must be one of the supported and registered Azure geo regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  /**
+   * Tags to help categorize the resource in the Azure portal.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * Details about the search service identity. A null value indicates that the search service has no identity assigned.
+   */
+  identity?: Identity;
+
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+}
+
+/**
+ * Response containing a list of supported Private Link Resources.
+ */
+@pagedResult
+model PrivateLinkResourcesResult {
+  /**
+   * The list of supported Private Link Resources.
+   */
+  @visibility(Lifecycle.Read)
+  @items
+  value?: PrivateLinkResource[];
+}
+
+/**
+ * Describes a supported private link resource for the Azure AI Search service.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model PrivateLinkResource extends Resource {
+  /**
+   * Describes the properties of a supported private link resource for the Azure AI Search service.
+   */
+  @visibility(Lifecycle.Read)
+  properties?: PrivateLinkResourceProperties;
+}
+
+/**
+ * Describes the properties of a supported private link resource for the Azure AI Search service. For a given API version, this represents the 'supported' groupIds when creating a shared private link resource.
+ */
+model PrivateLinkResourceProperties {
+  /**
+   * The group ID of the private link resource.
+   */
+  @visibility(Lifecycle.Read)
+  groupId?: string;
+
+  /**
+   * The list of required members of the private link resource.
+   */
+  @visibility(Lifecycle.Read)
+  requiredMembers?: string[];
+
+  /**
+   * The list of required DNS zone names of the private link resource.
+   */
+  @visibility(Lifecycle.Read)
+  requiredZoneNames?: string[];
+
+  /**
+   * The list of resources that are onboarded to private link service, that are supported by Azure AI Search.
+   */
+  @visibility(Lifecycle.Read)
+  shareablePrivateLinkResourceTypes?: ShareablePrivateLinkResourceType[];
+}
+
+/**
+ * Describes an resource type that has been onboarded to private link service, supported by Azure AI Search.
+ */
+model ShareablePrivateLinkResourceType {
+  /**
+   * The name of the resource type that has been onboarded to private link service, supported by Azure AI Search.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Describes the properties of a resource type that has been onboarded to private link service, supported by Azure AI Search.
+   */
+  @visibility(Lifecycle.Read)
+  properties?: ShareablePrivateLinkResourceProperties;
+}
+
+/**
+ * Describes the properties of a resource type that has been onboarded to private link service, supported by Azure AI Search.
+ */
+model ShareablePrivateLinkResourceProperties {
+  /**
+   * The resource provider type for the resource that has been onboarded to private link service, supported by Azure AI Search.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The resource provider group id for the resource that has been onboarded to private link service, supported by Azure AI Search.
+   */
+  @visibility(Lifecycle.Read)
+  groupId?: string;
+
+  /**
+   * The description of the resource type that has been onboarded to private link service, supported by Azure AI Search.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
+}
+
+/**
+ * Input of check name availability API.
+ */
+model CheckNameAvailabilityInput {
+  /**
+   * The search service name to validate. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length.
+   */
+  name: string;
+
+  /**
+   * The type of the resource whose name is to be validated. This value must always be 'searchServices'.
+   */
+  type: "searchServices";
+}
+
+/**
+ * Output of check name availability API.
+ */
+model CheckNameAvailabilityOutput {
+  /**
+   * A value indicating whether the name is available.
+   */
+  @visibility(Lifecycle.Read)
+  nameAvailable?: boolean;
+
+  /**
+   * The reason why the name is not available. 'Invalid' indicates the name provided does not match the naming requirements (incorrect length, unsupported characters, etc.). 'AlreadyExists' indicates that the name is already in use and is therefore unavailable.
+   */
+  @visibility(Lifecycle.Read)
+  reason?: UnavailableNameReason;
+
+  /**
+   * A message that explains why the name is invalid and provides resource naming requirements. Available only if 'Invalid' is returned in the 'reason' property.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+}
+
+/**
+ * Response containing the quota usage information for all the supported SKUs of Azure AI Search.
+ */
+model QuotaUsagesListResult is Azure.Core.Page<QuotaUsageResult>;
+
+/**
+ * Describes the quota usage for a particular SKU.
+ */
+model QuotaUsageResult {
+  /**
+   * The resource ID of the quota usage SKU endpoint for Microsoft.Search provider.
+   */
+  id?: string;
+
+  /**
+   * The unit of measurement for the search SKU.
+   */
+  unit?: string;
+
+  /**
+   * The currently used up value for the particular search SKU.
+   */
+  currentValue?: int32;
+
+  /**
+   * The quota limit for the particular search SKU.
+   */
+  limit?: int32;
+
+  /**
+   * The name of the SKU supported by Azure AI Search.
+   */
+  @visibility(Lifecycle.Read)
+  name?: QuotaUsageResultName;
+}
+
+/**
+ * The name of the SKU supported by Azure AI Search.
+ */
+model QuotaUsageResultName {
+  /**
+   * The SKU name supported by Azure AI Search.
+   */
+  value?: string;
+
+  /**
+   * The localized string value for the SKU name.
+   */
+  localizedValue?: string;
+}
+
+/**
+ * The properties of a network security perimeter configuration.
+ */
+model NetworkSecurityPerimeterConfigurationProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The perimeter for a network security perimeter configuration.
+   */
+  networkSecurityPerimeter?: NSPConfigPerimeter;
+
+  /**
+   * The resource association for the network security perimeter.
+   */
+  resourceAssociation?: NSPConfigAssociation;
+
+  /**
+   * The profile for a network security perimeter configuration.
+   */
+  profile?: NSPConfigProfile;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  provisioningIssues?: NSPProvisioningIssue[];
+}
+
+/**
+ * The perimeter for a network security perimeter configuration.
+ */
+model NSPConfigPerimeter {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  id?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  perimeterGuid?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+}
+
+/**
+ * The resource association for the network security perimeter.
+ */
+model NSPConfigAssociation {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  name?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  accessMode?: string;
+}
+
+/**
+ * The profile for a network security perimeter configuration.
+ */
+model NSPConfigProfile {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  name?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  accessRulesVersion?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  accessRules?: NSPConfigAccessRule[];
+}
+
+/**
+ * An access rule for a network security perimeter configuration.
+ */
+model NSPConfigAccessRule {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  name?: string;
+
+  /**
+   * The properties for the access rules in a network security perimeter configuration.
+   */
+  properties?: NSPConfigAccessRuleProperties;
+}
+
+/**
+ * The properties for the access rules in a network security perimeter configuration.
+ */
+model NSPConfigAccessRuleProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  direction?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  addressPrefixes?: string[];
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  fullyQualifiedDomainNames?: string[];
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  subscriptions?: string[];
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  networkSecurityPerimeters?: NSPConfigNetworkSecurityPerimeterRule[];
+}
+
+/**
+ * The network security perimeter properties present in a configuration rule.
+ */
+model NSPConfigNetworkSecurityPerimeterRule {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  id?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  perimeterGuid?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+}
+
+/**
+ * An object to describe any issues with provisioning network security perimeters to a search service.
+ */
+model NSPProvisioningIssue {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  name?: string;
+
+  /**
+   * The properties to describe any issues with provisioning network security perimeters to a search service.
+   */
+  properties?: NSPProvisioningIssueProperties;
+}
+
+/**
+ * The properties to describe any issues with provisioning network security perimeters to a search service.
+ */
+model NSPProvisioningIssueProperties {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  issueType?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  severity?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  description?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  suggestedResourceIds?: string[];
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  suggestedAccessRules?: string[];
+}
+
+/**
+ * The details of a long running asynchronous shared private link resource operation.
+ */
+model AsyncOperationResult {
+  /**
+   * The current status of the long running asynchronous shared private link resource operation.
+   */
+  status?: SharedPrivateLinkResourceAsyncOperationResult;
+}

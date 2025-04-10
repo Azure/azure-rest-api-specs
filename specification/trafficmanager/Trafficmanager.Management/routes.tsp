@@ -1,0 +1,41 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "./models.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ProfilesOperationGroup {
+  /**
+   * Checks the availability of a Traffic Manager Relative DNS name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Profiles_CheckTrafficManagerRelativeDnsNameAvailability")
+  @autoRoute
+  @action("checkTrafficManagerNameAvailability")
+  checkTrafficManagerRelativeDnsNameAvailability is ArmProviderActionSync<
+    Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
+    Response = TrafficManagerNameAvailability
+  >;
+  /**
+   * Checks the availability of a Traffic Manager Relative DNS name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Profiles_checkTrafficManagerNameAvailabilityV2")
+  @autoRoute
+  checkTrafficManagerNameAvailabilityV2 is ArmProviderActionSync<
+    Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
+    Response = TrafficManagerNameAvailability,
+    Scope = SubscriptionActionScope,
+    Parameters = {}
+  >;
+}

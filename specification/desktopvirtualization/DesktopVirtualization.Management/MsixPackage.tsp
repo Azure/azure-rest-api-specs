@@ -3,82 +3,79 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./HostPool.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
  * Schema for MSIX Package properties.
  */
-// Manually switched@subscriptionResource
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-@parentResource(HostPool)
-model MSIXPackage
-  is Azure.ResourceManager.ProxyResource<MSIXPackageProperties, false> {
+@subscriptionResource
+model MsixPackage
+  is Azure.ResourceManager.ProxyResource<MsixPackageProperties, false> {
   ...ResourceNameParameter<
-    Resource = MSIXPackage,
+    Resource = MsixPackage,
     KeyName = "msixPackageFullName",
     SegmentName = "msixPackages",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
 @armResourceOperations
-interface MSIXPackages {
+interface MsixPackages {
   /**
    * Get a msixpackage.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
-  @OpenAPI.operationId("MSIXPackages_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("MSIXPackages_Get")
   get is ArmResourceRead<
-    MSIXPackage,
-    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+    MsixPackage,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
    * Create or update a MSIX package.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
-  @OpenAPI.operationId("MSIXPackages_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("MSIXPackages_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
-    MSIXPackage,
-    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+    MsixPackage,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
    * Update an  MSIX Package.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
-  @OpenAPI.operationId("MSIXPackages_Update")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  update is Azure.ResourceManager.ArmCustomPatchSync<
-    MSIXPackage,
-    MSIXPackagePatch,
-    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+  @operationId("MSIXPackages_Update")
+  update is ArmCustomPatchSync<
+    MsixPackage,
+    PatchModel = MsixPackagePatch,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
    * Remove an MSIX Package.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
-  @OpenAPI.operationId("MSIXPackages_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("MSIXPackages_Delete")
   delete is ArmResourceDeleteSync<
-    MSIXPackage,
-    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+    MsixPackage,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
 
   /**
    * List MSIX packages in hostpool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "casing issue"
-  @OpenAPI.operationId("MSIXPackages_List")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("MSIXPackages_List")
   list is ArmResourceListByParent<
-    MSIXPackage,
-    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
+    MsixPackage,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
        * Number of items per page.
@@ -98,16 +95,19 @@ interface MSIXPackages {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = MSIXPackageList
+    Response = ArmResponse<MsixPackageList>
   >;
 }
 
-@@maxLength(MSIXPackage.name, 100);
-@@minLength(MSIXPackage.name, 3);
-@@doc(MSIXPackage.name,
+@@maxLength(MsixPackage.name, 100);
+@@minLength(MsixPackage.name, 3);
+@@doc(MsixPackage.name,
   "The version specific package full name of the MSIX package within specified hostpool"
 );
-@@doc(MSIXPackage.properties, "Detailed properties for MSIX Package");
-@@doc(MSIXPackages.createOrUpdate::parameters.resource,
+@@doc(MsixPackage.properties, "Detailed properties for MSIX Package");
+@@doc(MsixPackages.createOrUpdate::parameters.resource,
   "Object containing  MSIX Package definitions."
+);
+@@doc(MsixPackages.update::parameters.properties,
+  "Object containing MSIX Package definitions."
 );

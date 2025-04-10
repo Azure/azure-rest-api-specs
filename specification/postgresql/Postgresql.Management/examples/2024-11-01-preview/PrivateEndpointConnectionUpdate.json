@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "parameters": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Approved by johndoe@contoso.com",
+          "status": "Approved"
+        }
+      }
+    },
+    "privateEndpointConnectionName": "private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+    "resourceGroupName": "Default",
+    "serverName": "test-svr",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateEndpointConnections",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/Default/providers/Microsoft.DBforPostgreSQL/flexibleServers/test-svr/privateEndpointConnections/private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+        "properties": {
+          "groupIds": [
+            "postgresqlServer"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by johndoe@contoso.com",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Ready"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateEndpointConnections",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/Default/providers/Microsoft.DBforPostgreSQL/flexibleServers/test-svr/privateEndpointConnections/private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+        "properties": {
+          "groupIds": [
+            "postgresqlServer"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by johndoe@contoso.com",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Ready"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-11-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-11-01-preview"
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnection_Update",
+  "title": "Approve or reject a private endpoint connection with a given name."
+}

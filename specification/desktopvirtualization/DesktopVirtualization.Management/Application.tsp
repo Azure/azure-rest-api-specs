@@ -8,6 +8,7 @@ import "./ApplicationGroup.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -40,16 +41,7 @@ interface Applications {
    * Update an application.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    Application,
-    ApplicationPatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot application?: ApplicationPatch;
-    }
-  >;
+  update is ArmCustomPatchSync<Application, PatchModel = ApplicationPatch>;
 
   /**
    * Remove an application.
@@ -80,7 +72,7 @@ interface Applications {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = ApplicationList
+    Response = ArmResponse<ApplicationList>
   >;
 }
 
@@ -91,5 +83,8 @@ interface Applications {
 );
 @@doc(Application.properties, "Detailed properties for Application");
 @@doc(Applications.createOrUpdate::parameters.resource,
+  "Object containing Application definitions."
+);
+@@doc(Applications.update::parameters.properties,
   "Object containing Application definitions."
 );

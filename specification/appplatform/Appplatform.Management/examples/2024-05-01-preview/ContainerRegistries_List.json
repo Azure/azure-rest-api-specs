@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "my-service",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/my-service/containerRegistries?$page=2",
+        "value": [
+          {
+            "name": "my-container-registry",
+            "type": "Microsoft.AppPlatform/Spring/containerRegistries",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/my-service/containerRegistries/my-container-registry",
+            "properties": {
+              "credentials": {
+                "type": "BasicAuth",
+                "server": "myServer",
+                "username": "myUsername"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2021-08-11T03:16:03.944Z",
+              "createdBy": "sample-user",
+              "createdByType": "User",
+              "lastModifiedAt": "2021-08-11T03:17:03.944Z",
+              "lastModifiedBy": "sample-user",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ContainerRegistries_List",
+  "title": "ContainerRegistries_List"
+}

@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "parameters": {
+      "location": "eastus2",
+      "properties": {
+        "links": [
+          {
+            "name": "uplink_lhcp1",
+            "bandwidthMHz": 2,
+            "centerFrequencyMHz": 2250,
+            "direction": "Uplink",
+            "polarization": "LHCP"
+          },
+          {
+            "name": "downlink_rhcp1",
+            "bandwidthMHz": 15,
+            "centerFrequencyMHz": 8160,
+            "direction": "Downlink",
+            "polarization": "RHCP"
+          }
+        ],
+        "noradId": "36411",
+        "titleLine": "CONTOSO_SAT",
+        "tleLine1": "1 27424U 02022A   22167.05119303  .00000638  00000+0  15103-3 0  9994",
+        "tleLine2": "2 27424  98.2477 108.9546 0000928  92.9194 327.0802 14.57300770 69982"
+      }
+    },
+    "resourceGroupName": "contoso-Rgp",
+    "spacecraftName": "CONTOSO_SAT",
+    "subscriptionId": "c1be1141-a7c9-4aac-9608-3c2e2f1152c3"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "CONTOSO_SAT",
+        "type": "Microsoft.Orbital/spacecrafts",
+        "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Orbital/spacecrafts/CONTOSO_SAT",
+        "location": "eastus2",
+        "properties": {
+          "links": [
+            {
+              "name": "uplink_lhcp1",
+              "authorizations": [
+                {
+                  "expirationDate": "2023-06-02",
+                  "groundStation": "EASTUS2_0"
+                }
+              ],
+              "bandwidthMHz": 2,
+              "centerFrequencyMHz": 2250,
+              "direction": "Uplink",
+              "polarization": "LHCP"
+            },
+            {
+              "name": "downlink_rhcp1",
+              "authorizations": [
+                {
+                  "expirationDate": "2023-06-02",
+                  "groundStation": "EASTUS2_0"
+                }
+              ],
+              "bandwidthMHz": 15,
+              "centerFrequencyMHz": 8160,
+              "direction": "Downlink",
+              "polarization": "RHCP"
+            }
+          ],
+          "noradId": "36411",
+          "provisioningState": "updating",
+          "titleLine": "CONTOSO_SAT",
+          "tleLine1": "1 27424U 02022A   22167.05119303  .00000638  00000+0  15103-3 0  9994",
+          "tleLine2": "2 27424  98.2477 108.9546 0000928  92.9194 327.0802 14.57300770 69982"
+        },
+        "tags": null
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Microsoft.Orbital/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-11-01"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "CONTOSO_SAT",
+        "type": "Microsoft.Orbital/spacecrafts",
+        "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Orbital/spacecrafts/CONTOSO_SAT",
+        "location": "eastus2",
+        "properties": {
+          "links": [
+            {
+              "name": "uplink_lhcp1",
+              "authorizations": [
+                {
+                  "expirationDate": "2023-06-02",
+                  "groundStation": "EASTUS2_0"
+                }
+              ],
+              "bandwidthMHz": 2,
+              "centerFrequencyMHz": 2250,
+              "direction": "Uplink",
+              "polarization": "LHCP"
+            },
+            {
+              "name": "downlink_rhcp1",
+              "authorizations": [
+                {
+                  "expirationDate": "2023-06-02",
+                  "groundStation": "EASTUS2_0"
+                }
+              ],
+              "bandwidthMHz": 15,
+              "centerFrequencyMHz": 8160,
+              "direction": "Downlink",
+              "polarization": "RHCP"
+            }
+          ],
+          "noradId": "36411",
+          "provisioningState": "creating",
+          "titleLine": "CONTOSO_SAT",
+          "tleLine1": "1 27424U 02022A   22167.05119303  .00000638  00000+0  15103-3 0  9994",
+          "tleLine2": "2 27424  98.2477 108.9546 0000928  92.9194 327.0802 14.57300770 69982"
+        },
+        "tags": null
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Microsoft.Orbital/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-11-01"
+      }
+    }
+  },
+  "operationId": "Spacecrafts_CreateOrUpdate",
+  "title": "Create a spacecraft"
+}

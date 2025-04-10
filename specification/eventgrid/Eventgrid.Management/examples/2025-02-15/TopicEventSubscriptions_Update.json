@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2025-02-15",
+    "eventSubscriptionName": "exampleEventSubscriptionName1",
+    "eventSubscriptionUpdateParameters": {
+      "destination": {
+        "endpointType": "WebHook",
+        "properties": {
+          "endpointUrl": "https://requestb.in/15ksip71"
+        }
+      },
+      "filter": {
+        "isSubjectCaseSensitive": true,
+        "subjectBeginsWith": "existingPrefix",
+        "subjectEndsWith": "newSuffix"
+      },
+      "labels": [
+        "label1",
+        "label2"
+      ]
+    },
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+    "topicName": "exampleTopic1"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "exampleEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/topics/eventSubscriptions",
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1/eventSubscriptions/exampleEventSubscriptionName1",
+        "properties": {
+          "destination": {
+            "endpointType": "WebHook",
+            "properties": {
+              "endpointBaseUrl": "https://requestb.in/15ksip71"
+            }
+          },
+          "eventDeliverySchema": "EventGridSchema",
+          "filter": {
+            "isSubjectCaseSensitive": true,
+            "subjectBeginsWith": "existingPrefix",
+            "subjectEndsWith": "newSuffix"
+          },
+          "labels": [
+            "label1",
+            "label2"
+          ],
+          "provisioningState": "Succeeded",
+          "retryPolicy": {
+            "eventTimeToLiveInMinutes": 1440,
+            "maxDeliveryAttempts": 30
+          },
+          "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1"
+        }
+      }
+    }
+  },
+  "operationId": "TopicEventSubscriptions_Update",
+  "title": "TopicEventSubscriptions_Update"
+}

@@ -3,11 +3,11 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./HostPool.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -21,12 +21,6 @@ model ScalingPlan
     SegmentName = "scalingPlans",
     NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
   >;
-  ...ManagedServiceIdentityProperty;
-  ...etagProperty;
-  ...ResourceKindProperty;
-  ...ManagedByProperty;
-  ...ResourcePlanProperty;
-  ...ResourceSkuProperty;
 }
 
 @armResourceOperations
@@ -45,16 +39,7 @@ interface ScalingPlans {
    * Update a scaling plan.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    ScalingPlan,
-    ScalingPlanPatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot scalingPlan?: ScalingPlanPatch;
-    }
-  >;
+  update is ArmCustomPatchSync<ScalingPlan, PatchModel = ScalingPlanPatch>;
 
   /**
    * Remove a scaling plan.
@@ -85,7 +70,7 @@ interface ScalingPlans {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = ScalingPlanList
+    Response = ArmResponse<ScalingPlanList>
   >;
 
   /**
@@ -112,44 +97,17 @@ interface ScalingPlans {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = ScalingPlanList
-  >;
-
-  /**
-   * List scaling plan associated with hostpool.
-   */
-  @get
-  @action("scalingPlans")
-  listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
-    HostPool,
-    void,
-    ScalingPlanList,
-    Parameters = {
-      /**
-       * Number of items per page.
-       */
-      @query("pageSize")
-      pageSize?: int32;
-
-      /**
-       * Indicates whether the collection is descending.
-       */
-      @query("isDescending")
-      isDescending?: boolean;
-
-      /**
-       * Initial number of items to skip.
-       */
-      @query("initialSkip")
-      initialSkip?: int32;
-    }
+    Response = ArmResponse<ScalingPlanList>
   >;
 }
 
-@@maxLength(ScalingPlan.name, 64);
-@@minLength(ScalingPlan.name, 3);
+@@maxLength(ScalingPlan.name, 255);
+@@minLength(ScalingPlan.name, 1);
 @@doc(ScalingPlan.name, "The name of the scaling plan.");
 @@doc(ScalingPlan.properties, "Detailed properties for scaling plan.");
 @@doc(ScalingPlans.create::parameters.resource,
+  "Object containing scaling plan definitions."
+);
+@@doc(ScalingPlans.update::parameters.properties,
   "Object containing scaling plan definitions."
 );

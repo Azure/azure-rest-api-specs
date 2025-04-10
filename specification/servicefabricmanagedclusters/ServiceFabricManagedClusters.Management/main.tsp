@@ -4,64 +4,50 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.10.8
- * Date: 2025-02-19T19:06:29.541Z
+ * Version: 0.10.14
+ * Date: 2025-04-10T09:54:24.514Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
-import "./back-compat.tsp";
-import "./client.tsp";
-import "./ApplicationResource.tsp";
-import "./ApplicationTypeResource.tsp";
-import "./ApplicationTypeVersionResource.tsp";
-import "./ServiceResource.tsp";
 import "./ManagedClusterCodeVersionResult.tsp";
 import "./ManagedVMSize.tsp";
 import "./ManagedCluster.tsp";
+import "./ApplicationTypeResource.tsp";
+import "./ApplicationTypeVersionResource.tsp";
+import "./ApplicationResource.tsp";
+import "./ServiceResource.tsp";
 import "./NodeType.tsp";
-import "./Operations.tsp";
+import "./routes.tsp";
+import "./legacy.tsp";
 
+using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
  * Service Fabric Managed Clusters Management Client
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Custom operations spec definition for backwards compatibility"
 @armProviderNamespace
 @service(#{ title: "ServiceFabricManagedClustersManagementClient" })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.ServiceFabric;
-
-@armResourceOperations
-interface Operations {
-  /**
-   * Get the list of available Service Fabric resource provider API operations.
-   */
-  @summary("Lists all of the available Service Fabric resource provider API operations.")
-  @route("/providers/Microsoft.ServiceFabric/operations")
-  @get
-  @armResourceList(OperationListResult)
-  list(
-    ...ApiVersionParameter,
-  ): ArmResponse<OperationListResult> | ErrorResponse;
-}
 
 /**
  * The available API versions.
  */
 enum Versions {
   /**
-   * The 2024-11-01-preview API version.
+   * The 2025-03-01-preview API version.
    */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_11_01_preview: "2024-11-01-preview",
-
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_03_01_preview: "2025-03-01-preview",
 }
+
+interface Operations extends Azure.ResourceManager.Operations {}

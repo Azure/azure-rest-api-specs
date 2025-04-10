@@ -4,18 +4,18 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./HostPool.tsp";
-import "./CustomOperations.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
- * Schema for SessionHostManagement properties.
+ * Represents a SessionHostManagement definition.
  */
-@parentResource(HostPool)
 @singleton("default")
+@parentResource(HostPool)
 model SessionHostManagement
   is Azure.ResourceManager.ProxyResource<
     SessionHostManagementProperties,
@@ -23,42 +23,12 @@ model SessionHostManagement
   > {
   ...ResourceNameParameter<
     Resource = SessionHostManagement,
-    KeyName = "sessionHostManagements",
-    NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
+    KeyName = "sessionHostManagement",
+    SegmentName = "sessionHostManagements",
+    NamePattern = ""
   >;
 }
 
-@armResourceOperations
-interface InitiateSessionHostUpdate {
-  /**
-   * Initiates a hostpool update or schedule an update for the future.
-   */
-  @action("initiateSessionHostUpdate")
-  post is ArmResourceActionSync<
-    SessionHostManagement,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot updateSessionHostsRequestBody?: UpdateSessionHostsRequestBody;
-    },
-    Response = void
-  >;
-}
-
-@armResourceOperations
-interface ControlSessionHostUpdate {
-  /**
-   * Control actions on a session host update.
-   */
-  @action("controlSessionHostUpdate")
-  post is ArmResourceActionNoResponseContentAsync<
-    SessionHostManagement,
-    HostPoolUpdateControlParameter
-  >;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
 @armResourceOperations
 interface SessionHostManagements {
   /**
@@ -77,27 +47,72 @@ interface SessionHostManagements {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SessionHostManagement,
-    Response = SessionHostManagement,
-    Request = {
-      /**
-       * The properties to be updated.
-       */
-      @bodyRoot sessionHostManagement?: SessionHostManagementPatch;
-    }
+    PatchModel = SessionHostManagementPatch
   >;
 
   /**
-   * List SessionHostManagements.
+   * List SessionHostManagements by hostPool.
    */
   listByHostPool is ArmResourceListByParent<
     SessionHostManagement,
-    Response = SessionHostManagementList
+    Response = ArmResponse<SessionHostManagementList>
+  >;
+
+  /**
+   * Initiates a hostpool update or schedule an update for the future.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("initiateSessionHostUpdate")
+  @operationId("InitiateSessionHostUpdate_Post")
+  post is ArmResourceActionSync<
+    SessionHostManagement,
+    {
+      /**
+       * Object containing the definition for properties to be used in the sessionHostUpdate validation.
+       */
+      @bodyRoot
+      updateSessionHostsRequestBody?: UpdateSessionHostsRequestBody;
+    },
+    NoContentResponse
+  >;
+
+  /**
+   * Control update of a hostpool.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @action("controlSessionHostUpdate")
+  @operationId("ControlSessionHostUpdate_Post")
+  controlSessionHostUpdatePost is ArmResourceActionAsyncBase<
+    SessionHostManagement,
+    HostPoolUpdateControlParameter,
+    ArmAcceptedLroResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SessionHostManagement>
+  >;
+
+  /**
+   * Get the session host update status for a given hostpool.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("default")
+  @operationId("SessionHostManagementsUpdateStatus_Get")
+  sessionHostManagementsUpdateStatusGet is ArmResourceActionSync<
+    SessionHostManagement,
+    void,
+    ArmResponse<SessionHostManagementUpdateStatus>
   >;
 }
 
-@@maxLength(SessionHostManagement.name, 24);
-@@minLength(SessionHostManagement.name, 3);
-@@doc(SessionHostManagement.name, "The name of the sessionHostManagement");
+@@doc(SessionHostManagement.name, "");
 @@doc(SessionHostManagement.properties,
   "Detailed properties for SessionHostManagement"
+);
+@@doc(SessionHostManagements.createOrUpdate::parameters.resource,
+  "Object containing SessionHostManagement definitions."
+);
+@@doc(SessionHostManagements.update::parameters.properties,
+  "Object containing SessionHostManagement definitions."
+);
+@@doc(SessionHostManagements.controlSessionHostUpdatePost::parameters.body,
+  "Object containing control action for hostpool update."
 );

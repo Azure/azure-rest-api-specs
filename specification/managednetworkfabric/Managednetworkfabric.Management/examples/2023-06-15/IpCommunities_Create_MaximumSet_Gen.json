@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "annotation": "annotation",
+        "ipCommunityRules": [
+          {
+            "action": "Permit",
+            "communityMembers": [
+              "1:1"
+            ],
+            "sequenceNumber": 4155123341,
+            "wellKnownCommunities": [
+              "Internet"
+            ]
+          }
+        ]
+      },
+      "tags": {
+        "keyId": "KeyValue"
+      }
+    },
+    "ipCommunityName": "example-ipcommunity",
+    "resourceGroupName": "example-rg",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-ipcommunity",
+        "type": "microsoft.managednetworkfabric/ipcommunities",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipCommunities/example-ipcommunity",
+        "location": "eastus",
+        "properties": {
+          "administrativeState": "Enabled",
+          "annotation": "annotation",
+          "configurationState": "Succeeded",
+          "ipCommunityRules": [
+            {
+              "action": "Permit",
+              "communityMembers": [
+                "1:1"
+              ],
+              "sequenceNumber": 4155123341,
+              "wellKnownCommunities": [
+                "Internet"
+              ]
+            }
+          ],
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdAt": "2023-06-11T18:26:17.611Z",
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-11T18:26:17.611Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "keyId": "KeyValue"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "example-ipcommunity",
+        "type": "microsoft.managednetworkfabric/ipcommunities",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipCommunities/example-ipcommunity",
+        "location": "eastus",
+        "properties": {
+          "administrativeState": "Enabled",
+          "annotation": "annotation",
+          "configurationState": "Succeeded",
+          "ipCommunityRules": [
+            {
+              "action": "Permit",
+              "communityMembers": [
+                "1:1"
+              ],
+              "sequenceNumber": 4155123341,
+              "wellKnownCommunities": [
+                "Internet"
+              ]
+            }
+          ],
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdAt": "2023-06-11T18:26:17.611Z",
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-11T18:26:17.611Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "keyId": "KeyValue"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "IpCommunities_Create",
+  "title": "IpCommunities_Create_MaximumSet_Gen"
+}

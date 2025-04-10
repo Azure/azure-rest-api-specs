@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "nextLink",
+        "value": [
+          {
+            "name": "example-deviceSku",
+            "type": "microsoft.managednetworkfabric/networkDeviceSkus",
+            "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/providers/Microsoft.ManagedNetworkFabric/networkDeviceSkus/example-deviceSku",
+            "properties": {
+              "interfaces": [
+                {
+                  "identifier": "HundredGigE0/0",
+                  "interfaceType": "type1",
+                  "supportedConnectorTypes": [
+                    {
+                      "connectorType": "Optical",
+                      "maxSpeedInMbps": 100
+                    }
+                  ]
+                }
+              ],
+              "manufacturer": "Arista",
+              "model": "model1",
+              "provisioningState": "Succeeded",
+              "supportedRoleTypes": [
+                "CE"
+              ],
+              "supportedVersions": [
+                {
+                  "isDefault": "True",
+                  "vendorFirmwareVersion": "11.2",
+                  "vendorOsVersion": "2.0",
+                  "version": "1.0.0"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2023-06-11T16:55:43.467Z",
+              "createdBy": "email@address.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2023-06-11T16:55:43.467Z",
+              "lastModifiedBy": "user@mail.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkDeviceSkus_ListBySubscription",
+  "title": "NetworkDeviceSkus_ListBySubscription_MaximumSet_Gen"
+}

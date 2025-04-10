@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01",
+    "body": {
+      "appLocation": "eastus",
+      "databaseType": "HANA",
+      "dbMemory": 1024,
+      "dbScaleMethod": "ScaleUp",
+      "deploymentType": "ThreeTier",
+      "environment": "Prod",
+      "highAvailabilityType": "AvailabilityZone",
+      "sapProduct": "S4HANA",
+      "saps": 75000
+    },
+    "location": "centralus",
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "applicationServerInstanceCount": 6,
+        "applicationServerVmSku": "Standard_E8ds_v4",
+        "centralServerInstanceCount": 2,
+        "centralServerVmSku": "Standard_E4ds_v4",
+        "databaseInstanceCount": 2,
+        "dbVmSku": "Standard_M64s",
+        "deploymentType": "ThreeTier"
+      }
+    }
+  },
+  "operationId": "SAPSizingRecommendations",
+  "title": "SAPSizingRecommendations_S4HANA_DistributedHA_AvZone"
+}

@@ -2,19 +2,20 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./HostPool.tsp";
 import "./models.tsp";
+import "./HostPool.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
- * Schema for ActiveSessionHostConfiguration properties.
+ * Represents a ActiveSessionHostConfiguration definition. This has all of the sessionHostConfiguration properties except provisioningState
  */
-@parentResource(HostPool)
 @singleton("default")
+@parentResource(HostPool)
 model ActiveSessionHostConfiguration
   is Azure.ResourceManager.ProxyResource<
     ActiveSessionHostConfigurationProperties,
@@ -22,35 +23,29 @@ model ActiveSessionHostConfiguration
   > {
   ...ResourceNameParameter<
     Resource = ActiveSessionHostConfiguration,
+    KeyName = "activeSessionHostConfiguration",
     SegmentName = "activeSessionHostConfigurations",
-    NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
+    NamePattern = ""
   >;
 }
 
 @armResourceOperations
 interface ActiveSessionHostConfigurations {
   /**
-   * Get a ActiveSessionHostConfiguration.
+   * Get the ActiveSessionHostConfiguration for the hostPool that is currently being used for update operations.
    */
   get is ArmResourceRead<ActiveSessionHostConfiguration>;
 
   /**
-   * Operation to list the ActiveSessionHostConfigurations associated with the HostPool
+   * List activeSessionHostConfigurations.
    */
-  @action("activeSessionHostConfigurations")
-  @get
-  listByHostPool is Azure.ResourceManager.ArmResourceActionSync<
-    HostPool,
-    void,
-    ActiveSessionHostConfigurationList
+  listByHostPool is ArmResourceListByParent<
+    ActiveSessionHostConfiguration,
+    Response = ArmResponse<ActiveSessionHostConfigurationList>
   >;
 }
 
-@@maxLength(ActiveSessionHostConfiguration.name, 24);
-@@minLength(ActiveSessionHostConfiguration.name, 3);
-@@doc(ActiveSessionHostConfiguration.name,
-  "The name of the ActiveSessionHostConfiguration within the specified ActiveSessionHostConfiguration group"
-);
+@@doc(ActiveSessionHostConfiguration.name, "");
 @@doc(ActiveSessionHostConfiguration.properties,
-  "Detailed properties for ActiveSessionHostConfiguration"
+  "Detailed properties for SessionHostConfiguration"
 );

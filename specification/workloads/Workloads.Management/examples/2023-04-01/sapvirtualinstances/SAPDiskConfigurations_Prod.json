@@ -1,0 +1,256 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01",
+    "body": {
+      "appLocation": "eastus",
+      "databaseType": "HANA",
+      "dbVmSku": "Standard_M32ts",
+      "deploymentType": "ThreeTier",
+      "environment": "Prod",
+      "sapProduct": "S4HANA"
+    },
+    "location": "centralus",
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "volumeConfigurations": {
+          "backup": {
+            "recommendedConfiguration": {
+              "count": 2,
+              "sizeGB": 256,
+              "sku": {
+                "name": "Premium_LRS"
+              }
+            },
+            "supportedConfigurations": [
+              {
+                "diskTier": "P10",
+                "iopsReadWrite": 500,
+                "maximumSupportedDiskCount": 6,
+                "mbpsReadWrite": 100,
+                "minimumSupportedDiskCount": 0,
+                "sizeGB": 128,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              {
+                "diskTier": "P15",
+                "iopsReadWrite": 1100,
+                "maximumSupportedDiskCount": 6,
+                "mbpsReadWrite": 125,
+                "minimumSupportedDiskCount": 0,
+                "sizeGB": 256,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              {
+                "diskTier": "P20",
+                "iopsReadWrite": 2300,
+                "maximumSupportedDiskCount": 6,
+                "mbpsReadWrite": 150,
+                "minimumSupportedDiskCount": 0,
+                "sizeGB": 512,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              }
+            ]
+          },
+          "hana/data": {
+            "recommendedConfiguration": {
+              "count": 4,
+              "sizeGB": 128,
+              "sku": {
+                "name": "Premium_LRS"
+              }
+            },
+            "supportedConfigurations": [
+              {
+                "diskTier": "P10",
+                "iopsReadWrite": 500,
+                "maximumSupportedDiskCount": 5,
+                "mbpsReadWrite": 100,
+                "minimumSupportedDiskCount": 4,
+                "sizeGB": 128,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              }
+            ]
+          },
+          "hana/log": {
+            "recommendedConfiguration": {
+              "count": 3,
+              "sizeGB": 128,
+              "sku": {
+                "name": "Premium_LRS"
+              }
+            },
+            "supportedConfigurations": [
+              {
+                "diskTier": "P10",
+                "iopsReadWrite": 500,
+                "maximumSupportedDiskCount": 5,
+                "mbpsReadWrite": 100,
+                "minimumSupportedDiskCount": 3,
+                "sizeGB": 128,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              }
+            ]
+          },
+          "hana/shared": {
+            "recommendedConfiguration": {
+              "count": 1,
+              "sizeGB": 256,
+              "sku": {
+                "name": "Premium_LRS"
+              }
+            },
+            "supportedConfigurations": [
+              {
+                "diskTier": "P15",
+                "iopsReadWrite": 1100,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 125,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 256,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              {
+                "diskTier": "P20",
+                "iopsReadWrite": 2300,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 150,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 512,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              {
+                "diskTier": "P30",
+                "iopsReadWrite": 5000,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 200,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 1024,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              {
+                "diskTier": "P40",
+                "iopsReadWrite": 7500,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 250,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 2048,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              {
+                "diskTier": "P50",
+                "iopsReadWrite": 7500,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 250,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 4096,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              }
+            ]
+          },
+          "os": {
+            "recommendedConfiguration": {
+              "count": 1,
+              "sizeGB": 64,
+              "sku": {
+                "name": "Premium_LRS"
+              }
+            },
+            "supportedConfigurations": [
+              {
+                "diskTier": "P6",
+                "iopsReadWrite": 240,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 50,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 64,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              {
+                "diskTier": "P10",
+                "iopsReadWrite": 500,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 100,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 128,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              }
+            ]
+          },
+          "usr/sap": {
+            "recommendedConfiguration": {
+              "count": 1,
+              "sizeGB": 128,
+              "sku": {
+                "name": "Premium_LRS"
+              }
+            },
+            "supportedConfigurations": [
+              {
+                "diskTier": "P10",
+                "iopsReadWrite": 500,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 100,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 128,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              {
+                "diskTier": "P10",
+                "iopsReadWrite": 1100,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 125,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 256,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              },
+              {
+                "diskTier": "P10",
+                "iopsReadWrite": 2300,
+                "maximumSupportedDiskCount": 1,
+                "mbpsReadWrite": 150,
+                "minimumSupportedDiskCount": 1,
+                "sizeGB": 512,
+                "sku": {
+                  "name": "Premium_LRS"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "SAPDiskConfigurations",
+  "title": "SAPDiskConfigurations_Prod"
+}

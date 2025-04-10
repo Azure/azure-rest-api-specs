@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "firewallRuleName": "rule1",
+    "parameters": {
+      "properties": {
+        "endIpAddress": "255.255.255.255",
+        "startIpAddress": "0.0.0.0"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "serverName": "testserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule1",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/testserver/firewallRules/rule1",
+        "properties": {
+          "endIpAddress": "255.255.255.255",
+          "startIpAddress": "0.0.0.0"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "rule1",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/servers/testserver/firewallRules/rule1",
+        "properties": {
+          "endIpAddress": "255.255.255.255",
+          "startIpAddress": "0.0.0.0"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-11-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-11-01-preview"
+      }
+    }
+  },
+  "operationId": "FirewallRules_CreateOrUpdate",
+  "title": "FirewallRuleCreate"
+}

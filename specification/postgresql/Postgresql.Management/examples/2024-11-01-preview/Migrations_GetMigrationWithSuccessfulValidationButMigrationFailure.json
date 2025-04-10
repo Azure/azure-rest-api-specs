@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "migrationMode": "Offline",
+    "migrationName": "testmigrationwithsuccessfulvalidationbutmigrationfailure",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "targetDbServerName": "testtarget"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testmigrationwithsuccessfulvalidationbutmigrationfailure",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigrationwithsuccessfulvalidationbutmigrationfailure",
+        "location": "eastus2",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {
+                "testdb6": {
+                  "appliedChanges": 0,
+                  "cdcDeleteCounter": 0,
+                  "cdcInsertCounter": 0,
+                  "cdcUpdateCounter": 0,
+                  "databaseName": "testdb6",
+                  "endedOn": "2023-08-21T13:09:53.2526436Z",
+                  "fullLoadCompletedTables": 0,
+                  "fullLoadErroredTables": 0,
+                  "fullLoadLoadingTables": 0,
+                  "fullLoadQueuedTables": 0,
+                  "incomingChanges": 0,
+                  "latency": 0,
+                  "message": "Collation/Encoding not Supported Error:  User defined Collations are present in the source database. Please drop them before retrying the migration.",
+                  "migrationState": "Failed",
+                  "startedOn": "2023-08-21T13:09:52.9226008Z"
+                }
+              },
+              "validationDetails": {
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "address_standardizer",
+                    "endedOn": "2023-08-21T13:04:24.5659891+00:00",
+                    "startedOn": "2023-08-21T13:04:24.5659891+00:00",
+                    "summary": [
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  }
+                ],
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "status": "Succeeded",
+                "validationEndTimeInUtc": "2023-08-21T13:04:24.5659891Z",
+                "validationStartTimeInUtc": "2023-08-21T13:04:21.6230786Z"
+              }
+            },
+            "error": "testdb6: Collation/Encoding not Supported Error:  User defined Collations are present in the source database. Please drop them before retrying the migration. ",
+            "state": "Failed"
+          },
+          "dbsToMigrate": [
+            "testdb6"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "da52db29-cfeb-4670-a1ad-683edb14c621",
+          "migrationMode": "Offline",
+          "migrationOption": "ValidateAndMigrate",
+          "migrationWindowEndTimeInUtc": "2023-08-21T13:04:24.5659891Z",
+          "migrationWindowStartTimeInUtc": "2023-08-21T13:04:24.5659891Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "sourceDbServerMetadata": {
+            "location": "eastus2",
+            "sku": {},
+            "storageMb": 102400
+          },
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/source-rg/providers/Microsoft.DBforPostgreSQL/servers/testsource",
+          "targetDbServerMetadata": {
+            "location": "East US 2",
+            "sku": {
+              "name": "Standard_D2ds_v4",
+              "tier": "Standard_D2ds_v4"
+            },
+            "storageMb": 131072
+          },
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/testtarget"
+        }
+      }
+    }
+  },
+  "operationId": "Migrations_Get",
+  "title": "Migrations_GetMigrationWithSuccessfulValidationButMigrationFailure"
+}

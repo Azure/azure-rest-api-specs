@@ -1,0 +1,48 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./BatchAccount.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Batch;
+/**
+ * Contains the information for a detector.
+ */
+@parentResource(BatchAccount)
+model DetectorResponse
+  is Azure.ResourceManager.ProxyResource<DetectorResponseProperties> {
+  ...ResourceNameParameter<
+    Resource = DetectorResponse,
+    KeyName = "detectorId",
+    SegmentName = "detectors",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface DetectorResponses {
+  /**
+   * Gets information about the given detector for a given Batch account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("BatchAccount_GetDetector")
+  getDetector is ArmResourceRead<DetectorResponse>;
+
+  /**
+   * Gets information about the detectors available for a given Batch account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("BatchAccount_ListDetectors")
+  listDetectors is ArmResourceListByParent<DetectorResponse>;
+}
+
+@@doc(DetectorResponse.name, "The name of the detector.");
+@@doc(DetectorResponse.properties,
+  "The properties associated with the detector."
+);

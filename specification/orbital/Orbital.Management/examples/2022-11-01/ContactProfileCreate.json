@@ -1,0 +1,240 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "contactProfileName": "CONTOSO-CP",
+    "parameters": {
+      "location": "eastus2",
+      "properties": {
+        "autoTrackingConfiguration": "disabled",
+        "eventHubUri": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.EventHub/namespaces/contosoHub/eventhubs/contosoHub",
+        "links": [
+          {
+            "name": "contoso-uplink",
+            "channels": [
+              {
+                "name": "contoso-uplink-channel",
+                "bandwidthMHz": 2,
+                "centerFrequencyMHz": 2250,
+                "endPoint": {
+                  "endPointName": "ContosoTest_Uplink",
+                  "ipAddress": "10.1.0.4",
+                  "port": "50000",
+                  "protocol": "TCP"
+                }
+              }
+            ],
+            "direction": "Uplink",
+            "eirpdBW": 45,
+            "gainOverTemperature": 0,
+            "polarization": "LHCP"
+          },
+          {
+            "name": "contoso-downlink",
+            "channels": [
+              {
+                "name": "contoso-downlink-channel",
+                "bandwidthMHz": 15,
+                "centerFrequencyMHz": 8160,
+                "endPoint": {
+                  "endPointName": "ContosoTest_Downlink",
+                  "ipAddress": "10.1.0.5",
+                  "port": "50001",
+                  "protocol": "UDP"
+                }
+              }
+            ],
+            "direction": "Downlink",
+            "eirpdBW": 0,
+            "gainOverTemperature": 25,
+            "polarization": "RHCP"
+          }
+        ],
+        "minimumElevationDegrees": 5,
+        "minimumViableContactDuration": "PT1M",
+        "networkConfiguration": {
+          "subnetId": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Network/virtualNetworks/contoso-vnet/subnets/orbital-delegated-subnet"
+        },
+        "thirdPartyConfigurations": [
+          {
+            "missionConfiguration": "Ksat_MissionConfiguration",
+            "providerName": "KSAT"
+          },
+          {
+            "missionConfiguration": "Viasat_Configuration",
+            "providerName": "VIASAT"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "contoso-Rgp",
+    "subscriptionId": "c1be1141-a7c9-4aac-9608-3c2e2f1152c3"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "CONTOSO-CP",
+        "type": "Microsoft.Orbital/contactProfiles",
+        "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Orbital/contactProfiles/CONTOSO-CP",
+        "location": "eastus2",
+        "properties": {
+          "autoTrackingConfiguration": "disabled",
+          "eventHubUri": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.EventHub/namespaces/contosoHub/eventhubs/contosoHub",
+          "links": [
+            {
+              "name": "contoso-uplink",
+              "channels": [
+                {
+                  "name": "contoso-uplink-channel",
+                  "bandwidthMHz": 2,
+                  "centerFrequencyMHz": 2250,
+                  "decodingConfiguration": null,
+                  "demodulationConfiguration": null,
+                  "encodingConfiguration": null,
+                  "endPoint": {
+                    "endPointName": "ContosoTest_Uplink",
+                    "ipAddress": "10.1.0.4",
+                    "port": "50000",
+                    "protocol": "TCP"
+                  },
+                  "modulationConfiguration": null
+                }
+              ],
+              "direction": "Uplink",
+              "eirpdBW": 45,
+              "gainOverTemperature": 0,
+              "polarization": "LHCP"
+            },
+            {
+              "name": "contoso-downlink",
+              "channels": [
+                {
+                  "name": "contoso-downlink-channel",
+                  "bandwidthMHz": 15,
+                  "centerFrequencyMHz": 8160,
+                  "decodingConfiguration": null,
+                  "demodulationConfiguration": null,
+                  "encodingConfiguration": null,
+                  "endPoint": {
+                    "endPointName": "ContosoTest_Downlink",
+                    "ipAddress": "10.1.0.5",
+                    "port": "50001",
+                    "protocol": "UDP"
+                  },
+                  "modulationConfiguration": null
+                }
+              ],
+              "direction": "Downlink",
+              "eirpdBW": 0,
+              "gainOverTemperature": 25,
+              "polarization": "RHCP"
+            }
+          ],
+          "minimumElevationDegrees": 5,
+          "minimumViableContactDuration": "PT1M",
+          "networkConfiguration": {
+            "subnetId": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Network/virtualNetworks/contoso-vnet/subnets/orbital-delegated-subnet"
+          },
+          "provisioningState": "updating",
+          "thirdPartyConfigurations": [
+            {
+              "missionConfiguration": "Ksat_MissionConfiguration",
+              "providerName": "KSAT"
+            },
+            {
+              "missionConfiguration": "Viasat_Configuration",
+              "providerName": "VIASAT"
+            }
+          ]
+        },
+        "tags": null
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Microsoft.Orbital/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-11-01"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "CONTOSO-CP",
+        "type": "Microsoft.Orbital/contactProfiles",
+        "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Orbital/contactProfiles/CONTOSO-CP",
+        "location": "eastus2",
+        "properties": {
+          "autoTrackingConfiguration": "disabled",
+          "eventHubUri": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.EventHub/namespaces/contosoHub/eventhubs/contosoHub",
+          "links": [
+            {
+              "name": "contoso-uplink",
+              "channels": [
+                {
+                  "name": "contoso-uplink-channel",
+                  "bandwidthMHz": 2,
+                  "centerFrequencyMHz": 2250,
+                  "decodingConfiguration": null,
+                  "demodulationConfiguration": null,
+                  "encodingConfiguration": null,
+                  "endPoint": {
+                    "endPointName": "ContosoTest_Uplink",
+                    "ipAddress": "10.1.0.4",
+                    "port": "50000",
+                    "protocol": "TCP"
+                  },
+                  "modulationConfiguration": null
+                }
+              ],
+              "direction": "Uplink",
+              "eirpdBW": 45,
+              "gainOverTemperature": 0,
+              "polarization": "LHCP"
+            },
+            {
+              "name": "contoso-downlink",
+              "channels": [
+                {
+                  "name": "contoso-downlink-channel",
+                  "bandwidthMHz": 15,
+                  "centerFrequencyMHz": 8160,
+                  "decodingConfiguration": null,
+                  "demodulationConfiguration": null,
+                  "encodingConfiguration": null,
+                  "endPoint": {
+                    "endPointName": "ContosoTest_Downlink",
+                    "ipAddress": "10.1.0.5",
+                    "port": "50001",
+                    "protocol": "UDP"
+                  },
+                  "modulationConfiguration": null
+                }
+              ],
+              "direction": "Downlink",
+              "eirpdBW": 0,
+              "gainOverTemperature": 25,
+              "polarization": "RHCP"
+            }
+          ],
+          "minimumElevationDegrees": 5,
+          "minimumViableContactDuration": "PT1M",
+          "networkConfiguration": {
+            "subnetId": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Network/virtualNetworks/contoso-vnet/subnets/orbital-delegated-subnet"
+          },
+          "provisioningState": "succeeded",
+          "thirdPartyConfigurations": [
+            {
+              "missionConfiguration": "Ksat_MissionConfiguration",
+              "providerName": "KSAT"
+            },
+            {
+              "missionConfiguration": "Viasat_Configuration",
+              "providerName": "VIASAT"
+            }
+          ]
+        },
+        "tags": null
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Microsoft.Orbital/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-11-01"
+      }
+    }
+  },
+  "operationId": "ContactProfiles_CreateOrUpdate",
+  "title": "Create a contact profile"
+}

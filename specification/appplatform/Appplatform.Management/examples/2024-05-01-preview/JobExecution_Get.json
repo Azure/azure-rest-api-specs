@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "jobExecutionName": "test-job-execution",
+    "jobName": "test-job",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-job-execution",
+        "endTime": "2024-03-01T05:13:10+00:00",
+        "jobSnapshot": {
+          "triggerConfig": {
+            "timeoutInSeconds": 3600,
+            "triggerType": "Manual"
+          }
+        },
+        "startTime": "2024-03-01T05:11:58+00:00",
+        "status": "Completed",
+        "template": {
+          "args": [
+            "arg1"
+          ],
+          "environmentVariables": [
+            {
+              "name": "key1",
+              "value": "value1"
+            },
+            {
+              "name": "env2",
+              "value": "value2"
+            },
+            {
+              "name": "secretKey1"
+            }
+          ],
+          "resourceRequests": {
+            "cpu": "1",
+            "memory": "2Gi"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "JobExecution_Get",
+  "title": "JobExecution_Get"
+}

@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01",
+    "inventoryItemName": "testItem",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "vcenterName": "ContosoVCenter"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testItem",
+        "type": "Microsoft.ConnectedVMwarevSphere/VCenters/InventoryItems",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter/InventoryItems/testItem",
+        "properties": {
+          "changeTrackingEnabled": false,
+          "changeTrackingSupported": true,
+          "computerName": "test",
+          "diskEnabledUuid": "yes",
+          "folderPath": "ArcVMwareCriticalInfra",
+          "instanceUuid": "4662d845-43de-4d06-babf-5c6025d142d0",
+          "inventoryType": "VirtualMachine",
+          "ipAddresses": [
+            "10.150.176.63",
+            "2404:f801:4800:14:250:56ff:feb7:87eb"
+          ],
+          "maxSnapshots": -1,
+          "memorySizeMB": 1024,
+          "moName": "testvm",
+          "moRefId": "vm-64813",
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "deviceKey": 4000,
+                "ipAddresses": [
+                  "10.150.176.63",
+                  "2404:f801:4800:14:250:56ff:feb7:87eb",
+                  "fe80::250:56ff:feb7:87eb"
+                ],
+                "label": "Network adapter 1",
+                "macAddress": "00:50:56:b7:87:eb",
+                "networkMoName": "VM Network",
+                "networkMoRefId": "network-18983",
+                "nicType": "vmxnet3"
+              }
+            ]
+          },
+          "numCPUs": 1,
+          "numberOfSnapshots": 0,
+          "osName": "Ubuntu Linux (64-bit)",
+          "osType": "Linux",
+          "powerState": "poweredOn",
+          "smbiosUuid": "4237d0ab-2e02-7c0a-7fa2-b0d5920be6a3",
+          "storageProfile": {
+            "disks": [
+              {
+                "controllerType": "ParaVirtualSCSIController",
+                "deviceKey": 2001,
+                "diskMode": "persistent",
+                "diskSizeGB": 4,
+                "diskType": "flat",
+                "eagerlyScrub": false,
+                "fileName": "[15TbShared] test/test.vmdk",
+                "label": "Hard disk 1",
+                "thinProvisioned": false,
+                "unitNumber": 1,
+                "uuid": "6000C298-8430-3ae6-9dba-6802029a1aa8"
+              }
+            ]
+          },
+          "toolsRunningStatus": "guestToolsRunning",
+          "toolsVersion": "12389",
+          "toolsVersionStatus": "guestToolsUnmanaged"
+        }
+      }
+    }
+  },
+  "operationId": "InventoryItems_Get",
+  "title": "GetInventoryItem"
+}

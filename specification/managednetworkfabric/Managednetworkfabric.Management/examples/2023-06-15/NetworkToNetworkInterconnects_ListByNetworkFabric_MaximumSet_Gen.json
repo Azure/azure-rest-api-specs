@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15",
+    "networkFabricName": "example-fabric",
+    "resourceGroupName": "example-rg",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "nextLink",
+        "value": [
+          {
+            "name": "example-nni",
+            "type": "microsoft.managedNetworkFabric/networkFabrics/networkToNetworkInterconnects",
+            "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric/networkToNetworkInterconnects/example-nni",
+            "properties": {
+              "administrativeState": "Enabled",
+              "configurationState": "Succeeded",
+              "egressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
+              "exportRoutePolicy": {
+                "exportIpv4RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy",
+                "exportIpv6RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy"
+              },
+              "importRoutePolicy": {
+                "importIpv4RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy",
+                "importIpv6RoutePolicyId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy"
+              },
+              "ingressAclId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
+              "isManagementType": "True",
+              "layer2Configuration": {
+                "interfaces": [
+                  "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-networkDevice/networkInterfaces/example-networkInterface"
+                ],
+                "mtu": 1500
+              },
+              "nniType": "CE",
+              "npbStaticRouteConfiguration": {
+                "bfdConfiguration": {
+                  "administrativeState": "Enabled",
+                  "intervalInMilliSeconds": 300,
+                  "multiplier": 25
+                },
+                "ipv4Routes": [
+                  {
+                    "nextHop": [
+                      "21.20.20.20"
+                    ],
+                    "prefix": "20.0.0.12/30"
+                  }
+                ],
+                "ipv6Routes": [
+                  {
+                    "nextHop": [
+                      "4FFE:FFFF:0:CD30::ac"
+                    ],
+                    "prefix": "3FFE:FFFF:0:CD30::ac/127"
+                  }
+                ]
+              },
+              "optionBLayer3Configuration": {
+                "fabricASN": 17,
+                "peerASN": 61234,
+                "primaryIpv4Prefix": "10.0.0.12/30",
+                "primaryIpv6Prefix": "4FFE:FFFF:0:CD30::a8/127",
+                "secondaryIpv4Prefix": "40.0.0.14/30",
+                "secondaryIpv6Prefix": "6FFE:FFFF:0:CD30::ac/127",
+                "vlanId": 1234
+              },
+              "provisioningState": "Accepted",
+              "useOptionB": "True"
+            },
+            "systemData": {
+              "createdAt": "2023-06-07T09:53:31.314Z",
+              "createdBy": "user@mail.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2023-06-07T09:53:31.314Z",
+              "lastModifiedBy": "user@mail.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkToNetworkInterconnects_ListByNetworkFabric",
+  "title": "NetworkToNetworkInterconnects_ListByNetworkFabric_MaximumSet_Gen"
+}

@@ -1,12 +1,12 @@
 {
   "operationId": "LoadTests_ListOutboundNetworkDependenciesEndpoints",
-  "title": "Lists the endpoints that agents may call as part of load testing.",
   "parameters": {
+    "api-version": "2022-12-01",
     "loadTestName": "sampleloadtest",
     "resourceGroupName": "default-azureloadtest-japaneast",
-    "api-version": "2022-12-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
+  "title": "Lists the endpoints that agents may call as part of load testing.",
   "responses": {
     "200": {
       "body": {
@@ -15,8 +15,8 @@
             "category": "Azure Batch",
             "endpoints": [
               {
-                "domainName": "sampleacct.japaneast.batch.azure.com",
                 "description": "Applicable to job manager tasks, tasks that use job scoped authentication, or any task that makes calls to Batch.",
+                "domainName": "sampleacct.japaneast.batch.azure.com",
                 "endpointDetails": [
                   {
                     "port": 443
@@ -24,8 +24,8 @@
                 ]
               },
               {
-                "domainName": "japaneast.service.batch.azure.com",
                 "description": "Applicable to all Azure Batch pools.",
+                "domainName": "japaneast.service.batch.azure.com",
                 "endpointDetails": [
                   {
                     "port": 443
@@ -38,8 +38,8 @@
             "category": "Azure Storage",
             "endpoints": [
               {
-                "domainName": "autostorageaccountname.blob.core.windows.net",
                 "description": "AutoStorage endpoint for this Batch account. Applicable to all Azure Batch pools under this account.",
+                "domainName": "autostorageaccountname.blob.core.windows.net",
                 "endpointDetails": [
                   {
                     "port": 443
@@ -47,8 +47,8 @@
                 ]
               },
               {
+                "description": "Applicable to all Azure Batch pools.",
                 "domainName": "*.blob.core.windows.net",
-                "description": "Applicable to all Azure Batch pools.",
                 "endpointDetails": [
                   {
                     "port": 443
@@ -56,8 +56,8 @@
                 ]
               },
               {
+                "description": "Applicable to all Azure Batch pools.",
                 "domainName": "*.table.core.windows.net",
-                "description": "Applicable to all Azure Batch pools.",
                 "endpointDetails": [
                   {
                     "port": 443
@@ -65,8 +65,8 @@
                 ]
               },
               {
-                "domainName": "*.queue.core.windows.net",
                 "description": "Applicable to all Azure Batch pools.",
+                "domainName": "*.queue.core.windows.net",
                 "endpointDetails": [
                   {
                     "port": 443
@@ -79,8 +79,8 @@
             "category": "Microsoft Package Repository",
             "endpoints": [
               {
-                "domainName": "packages.microsoft.com",
                 "description": "Only applicable to pools containing a Mount Configuration. Learn about Mount Configurations in Batch at https://docs.microsoft.com/azure/batch/virtual-file-mount.",
+                "domainName": "packages.microsoft.com",
                 "endpointDetails": [
                   {
                     "port": 443
@@ -93,8 +93,8 @@
             "category": "Azure Key Vault",
             "endpoints": [
               {
-                "domainName": "*.vault.azure.net",
                 "description": "Only applicable to pools containing a Disk Encryption Configuration and whose VM size does not support encryption at host. Learn more about disk encryption in Azure Batch at https://docs.microsoft.com/azure/batch/disk-encryption. Learn more about encryption at host and supported VM sizes at https://docs.microsoft.com/azure/virtual-machines/disks-enable-host-based-encryption-portal.",
+                "domainName": "*.vault.azure.net",
                 "endpointDetails": [
                   {
                     "port": 443

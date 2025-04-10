@@ -1,0 +1,154 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "administratorLogin": "cloudsa",
+        "administratorLoginPassword": "password",
+        "backup": {
+          "backupRetentionDays": 7,
+          "geoRedundantBackup": "Disabled"
+        },
+        "cluster": {
+          "clusterSize": 2
+        },
+        "createMode": "Create",
+        "highAvailability": {
+          "mode": "Disabled"
+        },
+        "network": {
+          "publicNetworkAccess": "Disabled"
+        },
+        "storage": {
+          "autoGrow": "Disabled",
+          "storageSizeGB": 256,
+          "tier": "P15"
+        },
+        "version": "16"
+      },
+      "sku": {
+        "name": "Standard_D4s_v3",
+        "tier": "GeneralPurpose"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "serverName": "pgtestcluster",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pgtestcluster",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestcluster",
+        "location": "westus",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "backup": {
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2024-10-10T18:40:39.0450727+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "cluster": {
+            "clusterSize": 2
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "highAvailability": {
+            "mode": "Disabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled"
+          },
+          "privateEndpointConnections": [],
+          "replica": {
+            "replicationState": "Active",
+            "role": "Primary"
+          },
+          "replicationRole": "Primary",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Disabled",
+            "iops": 1100,
+            "storageSizeGB": 256,
+            "tier": "P15"
+          },
+          "version": "16"
+        },
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2024-10-10T18:31:50.7304820Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "pgtestcluster",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestcluster",
+        "location": "westus",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "backup": {
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2024-10-10T18:40:39.0450727+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "cluster": {
+            "clusterSize": 2
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "highAvailability": {
+            "mode": "Disabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Disabled"
+          },
+          "privateEndpointConnections": [],
+          "replica": {
+            "replicationState": "Active",
+            "role": "Primary"
+          },
+          "replicationRole": "Primary",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Disabled",
+            "iops": 1100,
+            "storageSizeGB": 256,
+            "tier": "P15"
+          },
+          "version": "16"
+        },
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2024-10-10T18:31:50.7304820Z"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "Servers_Create",
+  "title": "ClusterCreate"
+}

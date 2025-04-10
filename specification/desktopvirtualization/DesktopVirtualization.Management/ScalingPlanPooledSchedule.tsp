@@ -8,6 +8,7 @@ import "./ScalingPlan.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -45,13 +46,7 @@ interface ScalingPlanPooledSchedules {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ScalingPlanPooledSchedule,
-    ScalingPlanPooledSchedulePatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot scalingPlanSchedule?: ScalingPlanPooledSchedulePatch;
-    }
+    PatchModel = ScalingPlanPooledSchedulePatch
   >;
 
   /**
@@ -83,7 +78,7 @@ interface ScalingPlanPooledSchedules {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = ScalingPlanPooledScheduleList
+    Response = ArmResponse<ScalingPlanPooledScheduleList>
   >;
 }
 
@@ -94,5 +89,8 @@ interface ScalingPlanPooledSchedules {
   "Detailed properties for ScalingPlanPooledSchedule"
 );
 @@doc(ScalingPlanPooledSchedules.create::parameters.resource,
+  "Object containing ScalingPlanPooledSchedule definitions."
+);
+@@doc(ScalingPlanPooledSchedules.update::parameters.properties,
   "Object containing ScalingPlanPooledSchedule definitions."
 );

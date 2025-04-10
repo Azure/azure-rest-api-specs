@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15",
+    "body": {
+      "tags": {
+        "keyID": "keyValue"
+      }
+    },
+    "networkRackName": "example-rack",
+    "resourceGroupName": "example-rg",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-rack",
+        "type": "microsoft.managednetworkfabric/networkRacks",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkRacks/example-rack",
+        "location": "eastuseuap",
+        "properties": {
+          "annotation": "annotation",
+          "networkDevices": [
+            "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-networkDevice"
+          ],
+          "networkFabricId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-networkFabric",
+          "networkRackType": "Aggregate",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2023-06-11T06:00:50.441Z",
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-11T06:00:50.441Z",
+          "lastModifiedBy": "user@email.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "keyID": "keyValue"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "NetworkRacks_Update",
+  "title": "NetworkRacks_Update_MaximumSet_Gen"
+}

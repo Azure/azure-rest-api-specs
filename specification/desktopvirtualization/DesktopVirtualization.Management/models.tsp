@@ -3,227 +3,168 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DesktopVirtualization;
 
 /**
- * The type of management for the hostpool
+ * Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints
  */
-union ManagementType {
+union PublicNetworkAccess {
   string,
-
-  /**
-   * Automated management of the hostpool
-   */
-  Automated: "Automated",
-
-  /**
-   * Standard management of the hostpool
-   */
-  Standard: "Standard",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
 }
 
 /**
- * Action types for controlling hostpool update.
+ * The private endpoint connection status.
  */
-union HostPoolUpdateAction {
+union PrivateEndpointServiceConnectionStatus {
   string,
-
-  /**
-   * Start the hostpool update.
-   */
-  Start: "Start",
-
-  /**
-   * Pause the hostpool update.
-   */
-  Pause: "Pause",
-
-  /**
-   * Cancel the hostpool update.
-   */
-  Cancel: "Cancel",
-
-  /**
-   * Retry the hostpool update.
-   */
-  Retry: "Retry",
-
-  /**
-   * Resume the hostpool update
-   */
-  Resume: "Resume",
-}
-
-/**
- * Provisioning state of the Session Host Configuration.
- */
-union ProvisioningStateSHC {
-  string,
-
-  /**
-   *  Provisioning Successful
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Provisioning Failed
-   */
-  Failed: "Failed",
-
-  /**
-   * Provisioning was Canceled
-   */
-  Canceled: "Canceled",
-
-  /**
-   * Provisioning in Progress
-   */
-  Provisioning: "Provisioning",
-}
-
-/**
- * The security type used by virtual machine in hostpool session host. Default is Standard.
- */
-union VirtualMachineSecurityType {
-  string,
-
-  /**
-   * Standard security protocol. No additional parameters
-   */
-  Standard: "Standard",
-
-  /**
-   * TrustedLaunch allows for secure boot and vTpm
-   */
-  TrustedLaunch: "TrustedLaunch",
-
-  /**
-   * Confidential Virtual Machine security protocol
-   */
-  ConfidentialVM: "ConfidentialVM",
-}
-
-/**
- * The type of domain join done by the virtual machine.
- */
-union DomainJoinType {
-  string,
-
-  /**
-   * Using microsoft active directory.
-   */
-  ActiveDirectory: "ActiveDirectory",
-
-  /**
-   * Using microsoft azure active directory.
-   */
-  AzureActiveDirectory: "AzureActiveDirectory",
-}
-
-/**
- * The type of image session hosts use in the hostpool.
- */
-union type {
-  string,
-
-  /**
-   * Using default marketplace images offered by Azure Marketplace.
-   */
-  Marketplace: "Marketplace",
-
-  /**
-   * Using a custom image.
-   */
-  Custom: "Custom",
-}
-/**
- * The disk type used by virtual machine in hostpool session host.
- */
-union VirtualMachineDiskType {
-  string,
-
-  /**
-   * Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access.
-   */
-  Standard_LRS: "Standard_LRS",
-
-  /**
-   * Premium SSD locally redundant storage. Best for production and performance sensitive workloads.
-   */
-  Premium_LRS: "Premium_LRS",
-
-  /**
-   * Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test.
-   */
-  StandardSSD_LRS: "StandardSSD_LRS",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Rejected: "Rejected",
 }
 
 /**
  * The current provisioning state.
  */
-union ProvisioningState {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+union PrivateEndpointConnectionProvisioningState {
   string,
-
-  /**
-   *  Provisioning Successful
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
-
-  /**
-   * Provisioning in Progress
-   */
-  Provisioning: "Provisioning",
-
-  /**
-   * Provisioning Failed
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Creating: "Creating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
-
-  /**
-   * Provisioning was Canceled
-   */
-  Canceled: "Canceled",
 }
 
 /**
- * Is package timestamped so it can ignore the certificate expiry date
+ * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
  */
-union packageTimestamped {
+union ManagedServiceIdentityType {
   string,
-
-  /**
-   * Package is timestamped
-   */
-  Timestamped: "Timestamped",
-
-  /**
-   * Package is not timestamped, use certificate expiry date
-   */
-  NotTimestamped: "NotTimestamped",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  SystemAssigned: "SystemAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  UserAssigned: "UserAssigned",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  `SystemAssigned,UserAssigned`: "SystemAssigned,UserAssigned",
 }
 
 /**
- * Parameter indicating how the health check should behave if this package fails staging
+ * HostPool type for desktop.
  */
-union failHealthCheckOnStagingFailure {
+union ScalingHostPoolType {
   string,
 
   /**
-   * Health Check will report unhealthy
+   * Users get a new (random) SessionHost every time it connects to the HostPool.
    */
-  Unhealthy: "Unhealthy",
+  Pooled: "Pooled",
 
   /**
-   * Health Check will report NeedsAssistance
+   * Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost.
    */
-  NeedsAssistance: "NeedsAssistance",
+  Personal: "Personal",
+}
+
+/**
+ * The desired scaling method to be used to scale the hosts in the assigned host pool.
+ */
+union ScalingMethod {
+  string,
 
   /**
-   * Health Check will not report failure
+   * Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size.
    */
-  DoNotFail: "DoNotFail",
+  PowerManage: "PowerManage",
+
+  /**
+   * Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property.
+   */
+  CreateDeletePowerManage: "CreateDeletePowerManage",
+}
+
+/**
+ * Load balancing algorithm for ramp up period.
+ */
+union SessionHostLoadBalancingAlgorithm {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  BreadthFirst: "BreadthFirst",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  DepthFirst: "DepthFirst",
+}
+
+/**
+ * Specifies when to stop hosts during ramp down period.
+ */
+union StopHostsWhen {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ZeroSessions: "ZeroSessions",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ZeroActiveSessions: "ZeroActiveSessions",
+}
+
+/**
+ * The desired startup behavior during the ramp up period for personal vms in the hostpool.
+ */
+union StartupBehavior {
+  string,
+
+  /**
+   * Session hosts will not be started by the service. This setting depends on Start VM on Connect to be enabled to start the session hosts.
+   */
+  None: "None",
+
+  /**
+   * Session hosts with an assigned user will be started during Ramp Up
+   */
+  WithAssignedUser: "WithAssignedUser",
+
+  /**
+   * All personal session hosts in the hostpool will be started during ramp up.
+   */
+  All: "All",
+}
+
+/**
+ * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
+ */
+union SetStartVMOnConnect {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enable: "Enable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disable: "Disable",
+}
+
+/**
+ * Action to be taken after a user disconnect during the ramp up period.
+ */
+union SessionHandlingOperation {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  None: "None",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Deallocate: "Deallocate",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Hibernate: "Hibernate",
 }
 
 /**
@@ -231,16 +172,34 @@ union failHealthCheckOnStagingFailure {
  */
 union ApplicationGroupType {
   string,
-
-  /**
-   * Application group is Remote and can launch individual applications without a Desktop.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   RemoteApp: "RemoteApp",
-
-  /**
-   * Application Group delivers a full expected Desktop experience
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Desktop: "Desktop",
+}
+
+/**
+ * Resource Type of Application.
+ */
+union RemoteApplicationType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  InBuilt: "InBuilt",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  MsixApplication: "MsixApplication",
+}
+
+/**
+ * Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all.
+ */
+union CommandLineSetting {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  DoNotAllow: "DoNotAllow",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Allow: "Allow",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Require: "Require",
 }
 
 /**
@@ -270,15 +229,9 @@ union HostPoolType {
  */
 union PersonalDesktopAssignmentType {
   string,
-
-  /**
-   * Automatically assigns an available personal desktop to the user.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Automatic: "Automatic",
-
-  /**
-   * Manually assigns a specific personal desktop to the user.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Direct: "Direct",
 }
 
@@ -287,25 +240,13 @@ union PersonalDesktopAssignmentType {
  */
 union LoadBalancerType {
   string,
-
-  /**
-   * Uses BreadthFirst algorithm for load balancing.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   BreadthFirst: "BreadthFirst",
-
-  /**
-   * Uses DepthFirst algorithm for load balancing.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   DepthFirst: "DepthFirst",
-
-  /**
-   * Maintains persistent connections.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Persistent: "Persistent",
-
-  /**
-   * Maintains multiple persistents connections.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   MultiplePersistent: "MultiplePersistent",
 }
 
@@ -314,21 +255,23 @@ union LoadBalancerType {
  */
 union RegistrationTokenOperation {
   string,
-
-  /**
-   * Delete operation
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Delete: "Delete",
-
-  /**
-   * No Operation
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   None: "None",
-
-  /**
-   * Update Operation
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Update: "Update",
+}
+
+/**
+ * The type of management for this hostpool, Automated or Standard. The default value is Automated.
+ */
+union ManagementType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Automated: "Automated",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Standard: "Standard",
 }
 
 /**
@@ -336,25 +279,13 @@ union RegistrationTokenOperation {
  */
 union SSOSecretType {
   string,
-
-  /**
-   * The SSO Secret is a Shared Key.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SharedKey: "SharedKey",
-
-  /**
-   * The SSO Secret is a Certificate.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Certificate: "Certificate",
-
-  /**
-   * The SSO Secret is a SharedKey that is stored in KeyVault.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   SharedKeyInKeyVault: "SharedKeyInKeyVault",
-
-  /**
-   * The SSO Secret is a Certificate that is stored in KeyVault.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   CertificateInKeyVault: "CertificateInKeyVault",
 }
 
@@ -365,45 +296,33 @@ union PreferredAppGroupType {
   string,
 
   /**
-   *  Internal Use Only
+   * This value is read only, it is not accepted on input.
    */
   None: "None",
 
   /**
-   * Use Desktop Application Group
+   * Users access the full Windows desktop from a session host. Available with pooled or personal host pools.
    */
   Desktop: "Desktop",
 
   /**
-   * Use RailApplications (RemoteApp)
+   * Users access individual applications you select and publish to the application group. Available with pooled host pools only.
    */
   RailApplications: "RailApplications",
 }
 
 /**
- * Enabled to allow this resource to be access from the public network
+ * Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints
  */
 union HostpoolPublicNetworkAccess {
   string,
-
-  /**
-   * Allows this resource to be accessed from the public network
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enabled: "Enabled",
-
-  /**
-   * Prevents this resource from being accessed from the public network
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
-
-  /**
-   * Allows SessionHosts to be accessed from the public network
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EnabledForSessionHostsOnly: "EnabledForSessionHostsOnly",
-
-  /**
-   * Allows Clients to be accessed from the public network
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   EnabledForClientsOnly: "EnabledForClientsOnly",
 }
 
@@ -425,347 +344,210 @@ union SessionHostComponentUpdateType {
 }
 
 /**
- * The private endpoint connection status.
- */
-union PrivateEndpointServiceConnectionStatus {
-  string,
-
-  /**
-   * Connection is Pending
-   */
-  Pending: "Pending",
-
-  /**
-   * Connection was Approved
-   */
-  Approved: "Approved",
-
-  /**
-   * Connection was rejected
-   */
-  Rejected: "Rejected",
-}
-
-/**
- * The current provisioning state.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-union PrivateEndpointConnectionProvisioningState {
-  string,
-
-  /**
-   * Provisioning was successful
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * A PrivateEndpointConnection is being created
-   */
-  Creating: "Creating",
-
-  /**
-   * A PrivateEndpointConnection is being deleted
-   */
-  Deleting: "Deleting",
-
-  /**
-   * Provisioning failed
-   */
-  Failed: "Failed",
-}
-
-/**
- * Managed Private UDP Connection Settings
+ * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
  */
 union ManagedPrivateUDP {
   string,
-
-  /**
-   * AVD-wide settings are used to determine connection availability
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Default: "Default",
-
-  /**
-   * UDP will attempt this connection type when making connections.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enabled: "Enabled",
-
-  /**
-   * UDP will not attempt this connection type when making connections
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
 }
 
 /**
- * Direct UDP Connection Settings
+ * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
  */
 union DirectUDP {
   string,
-
-  /**
-   * AVD-wide settings are used to determine connection availability
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Default: "Default",
-
-  /**
-   * UDP will attempt this connection type when making connections.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enabled: "Enabled",
-
-  /**
-   * UDP will not attempt this connection type when making connections
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
 }
 
 /**
- * Public UDP Connection Settings
+ * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
  */
 union PublicUDP {
   string,
-
-  /**
-   * AVD-wide settings are used to determine connection availability
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Default: "Default",
-
-  /**
-   * UDP will attempt this connection type when making connections.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enabled: "Enabled",
-
-  /**
-   * UDP will not attempt this connection type when making connections
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
 }
 
 /**
- * Relay UDP Connection Settings
+ * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
  */
 union RelayUDP {
   string,
-
-  /**
-   * AVD-wide settings are used to determine connection availability
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Default: "Default",
-
-  /**
-   * UDP will attempt this connection type when making connections.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Enabled: "Enabled",
-
-  /**
-   * UDP will not attempt this connection type when making connections
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Disabled: "Disabled",
 }
 
 /**
- * HostPool type for desktop.
+ * Action types for controlling hostpool update.
  */
-union ScalingHostPoolType {
+union HostPoolUpdateAction {
   string,
 
   /**
-   * Users get a new (random) SessionHost every time it connects to the HostPool.
+   * Start the hostpool update.
    */
-  Pooled: "Pooled",
+  Start: "Start",
 
   /**
-   * Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost.
+   * Pause the hostpool update.
    */
-  Personal: "Personal",
+  Pause: "Pause",
+
+  /**
+   * Cancel the hostpool update.
+   */
+  Cancel: "Cancel",
+
+  /**
+   * Retry the hostpool update.
+   */
+  Retry: "Retry",
+
+  /**
+   * Resume the hostpool update.
+   */
+  Resume: "Resume",
 }
 
 /**
- * Load balancing algorithm for ramp up period.
+ * Provisioning state of the Session Host Configuration.
  */
-union SessionHostLoadBalancingAlgorithm {
+union ProvisioningStateSHC {
   string,
-
-  /**
-   * Breadth First Algorithm for Load Balancing
-   */
-  BreadthFirst: "BreadthFirst",
-
-  /**
-   * Depth First Algorithm for Load Balancing
-   */
-  DepthFirst: "DepthFirst",
-}
-
-/**
- * Specifies when to stop hosts during ramp down period.
- */
-union StopHostsWhen {
-  string,
-
-  /**
-   * Zero Total Sessions
-   */
-  ZeroSessions: "ZeroSessions",
-
-  /**
-   * Zero Active Sessions
-   */
-  ZeroActiveSessions: "ZeroActiveSessions",
-}
-
-/**
- * Enabled to allow this resource to be access from the public network
- */
-union PublicNetworkAccess {
-  string,
-
-  /**
-   * This resource is accessible from the public network.
-   */
-  Enabled: "Enabled",
-
-  /**
-   * This resource is not accessible from the public network.
-   */
-  Disabled: "Disabled",
-}
-
-/**
- * Resource Type of Application.
- */
-union RemoteApplicationType {
-  string,
-
-  /**
-   * Built-in applications
-   */
-  InBuilt: "InBuilt",
-
-  /**
-   * Imported MSIX application packages
-   */
-  MsixApplication: "MsixApplication",
-}
-
-/**
- * Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all.
- */
-union CommandLineSetting {
-  string,
-
-  /**
-   * Cannot be launched with command line arguments.
-   */
-  DoNotAllow: "DoNotAllow",
-
-  /**
-   * Can optionally be launched with command line arguments.
-   */
-  Allow: "Allow",
-
-  /**
-   * Required to be launched with command line arguments.
-   */
-  Require: "Require",
-}
-
-/**
- * Possible device architectures that an app attach package can be configured for
- */
-union AppAttachPackageArchitectures {
-  string,
-
-  /**
-   * ARM 32-bit
-   */
-  ARM: "ARM",
-
-  /**
-   * ARM 64-bit
-   */
-  ARM64: "ARM64",
-
-  /**
-   * 32-bit x86
-   */
-  x86: "x86",
-
-  /**
-   * 64-bit
-   */
-  x64: "x64",
-
-  /**
-   * Any architecture can be used
-   */
-  Neutral: "Neutral",
-
-  /**
-   * X86 Compiled Hybrid Portable Executable for ARM64
-   */
-  x86a64: "x86a64",
-
-  /**
-   * Select all listed applications, no filters
-   */
-  ALL: "ALL",
-}
-
-/**
- * Operation status for SessionHostManagementUpdate.
- */
-union SessionHostManagementUpdateOperationStatus {
-  string,
-
-  /**
-   * The operation has an error.
-   */
-  Error: "Error",
-
-  /**
-   * The operation is scheduled.
-   */
-  Scheduled: "Scheduled",
-
-  /**
-   * The operation is currently updating Session Hosts.
-   */
-  UpdatingSessionHosts: "UpdatingSessionHosts",
-
-  /**
-   * The operation is validating the update.
-   */
-  ValidatingSessionHostUpdate: "ValidatingSessionHostUpdate",
-
-  /**
-   * The operation is paused.
-   */
-  Paused: "Paused",
-
-  /**
-   * The operation is pausing.
-   */
-  Pausing: "Pausing",
-
-  /**
-   * Canceling the operation.
-   */
-  Cancelling: "Cancelling",
-
-  /**
-   * The operation succeeded.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
-
-  /**
-   * The operation failed.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Provisioning: "Provisioning",
+}
+
+/**
+ * The disk type used by virtual machine in hostpool session host.
+ */
+union VirtualMachineDiskType {
+  string,
 
   /**
-   * The operation is canceled
+   * Standard HDD locally redundant storage. Best for backup, non-critical, and infrequent access.
    */
-  Cancelled: "Cancelled",
+  Standard_LRS: "Standard_LRS",
+
+  /**
+   * Premium SSD locally redundant storage. Best for production and performance sensitive workloads.
+   */
+  Premium_LRS: "Premium_LRS",
+
+  /**
+   * Standard SSD locally redundant storage. Best for web servers, lightly used enterprise applications and dev/test.
+   */
+  StandardSSD_LRS: "StandardSSD_LRS",
+}
+
+/**
+ * The type of image session hosts use in the hostpool.
+ */
+union Type {
+  string,
+
+  /**
+   * Using default marketplace images offered by Azure Marketplace.
+   */
+  Marketplace: "Marketplace",
+
+  /**
+   * Using a custom image.
+   */
+  Custom: "Custom",
+}
+
+/**
+ * The type of domain join done by the virtual machine.
+ */
+union DomainJoinType {
+  string,
+
+  /**
+   * Using microsoft active directory.
+   */
+  ActiveDirectory: "ActiveDirectory",
+
+  /**
+   * Using microsoft azure active directory.
+   */
+  AzureActiveDirectory: "AzureActiveDirectory",
+}
+
+/**
+ * The security type used by virtual machine in hostpool session host. Default is Standard.
+ */
+union VirtualMachineSecurityType {
+  string,
+
+  /**
+   * Standard security protocol. No additional parameters
+   */
+  Standard: "Standard",
+
+  /**
+   * TrustedLaunch allows for secure boot adn vTPM
+   */
+  TrustedLaunch: "TrustedLaunch",
+
+  /**
+   * Confidential Virtual Machine security protocol
+   */
+  ConfidentialVM: "ConfidentialVM",
+}
+
+/**
+ * Application type of application.
+ */
+union ApplicationType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  RemoteApp: "RemoteApp",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Desktop: "Desktop",
+}
+
+/**
+ * State of user session.
+ */
+union SessionState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disconnected: "Disconnected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  LogOff: "LogOff",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  UserProfileDiskMounted: "UserProfileDiskMounted",
 }
 
 /**
@@ -840,30 +622,15 @@ union Status {
  */
 union UpdateState {
   string,
-
-  /**
-   * Update is initializing
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Initial: "Initial",
-
-  /**
-   * Update is pending
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Pending: "Pending",
-
-  /**
-   * Update has started
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Started: "Started",
-
-  /**
-   * Update has succeeded
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Succeeded: "Succeeded",
-
-  /**
-   * Update has failed
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Failed: "Failed",
 }
 
@@ -924,7 +691,7 @@ union HealthCheckName {
   MetaDataServiceCheck: "MetaDataServiceCheck",
 
   /**
-   * Verifies that the AppAttachService is healthy (there were no issues during package staging). The AppAttachService is used to enable the staging/registration (and eventual de-registration/destaging) of MSIX apps that have been set up by the tenant admin. This checks whether the component had any failures during package staging. Failures in staging will prevent some MSIX apps from working properly for the end user. If this check fails, it is non fatal and the machine still can service connections, main issue may be certain apps will not work for end-users. (Currently Enabled)
+   * Verifies that the AppAttachService is healthy (there were no issues during package staging). The AppAttachService is used to enable the staging/registration (and eventual deregistration/destaging) of MSIX apps that have been set up by the tenant admin. This checks whether the component had any failures during package staging. Failures in staging will prevent some MSIX apps from working properly for the end user. If this check fails, it is non fatal and the machine still can service connections, main issue may be certain apps will not work for end-users. (Currently Enabled)
    */
   AppAttachHealthCheck: "AppAttachHealthCheck",
 }
@@ -957,124 +724,95 @@ union HealthCheckResult {
 }
 
 /**
- * Application type of application.
+ * Possible device architectures that an app attach package can be configured for
  */
-union ApplicationType {
+union AppAttachPackageArchitectures {
   string,
-
-  /**
-   * Remote Applications (non-desktop)
-   */
-  RemoteApp: "RemoteApp",
-
-  /**
-   * Desktop Applications
-   */
-  Desktop: "Desktop",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ARM: "ARM",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ARM64: "ARM64",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  x86: "x86",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  x64: "x64",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Neutral: "Neutral",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  x86a64: "x86a64",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ALL: "ALL",
 }
 
 /**
- * State of user session.
+ * The current provisioning state.
  */
-union SessionState {
+union ProvisioningState {
   string,
-
-  /**
-   * SessionState is unknown
-   */
-  Unknown: "Unknown",
-
-  /**
-   * Session is active
-   */
-  Active: "Active",
-
-  /**
-   * Session is disconnected
-   */
-  Disconnected: "Disconnected",
-
-  /**
-   * Session is pending connection
-   */
-  Pending: "Pending",
-
-  /**
-   * Session is logging off
-   */
-  LogOff: "LogOff",
-
-  /**
-   * Session has mounted user profile disk
-   */
-  UserProfileDiskMounted: "UserProfileDiskMounted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
 }
 
 /**
- * The desired startup behavior during the ramp up period for personal vms in the hostpool.
+ * Is package timestamped so it can ignore the certificate expiry date
  */
-union StartupBehavior {
+union PackageTimestamped {
   string,
-
-  /**
-   * Session hosts will not be started by the service. This setting depends on Start VM on Connect to be enabled to start the session hosts.
-   */
-  None: "None",
-
-  /**
-   * Session hosts with an assigned user will be started during Ramp Up
-   */
-  WithAssignedUser: "WithAssignedUser",
-
-  /**
-   * All personal session hosts in the hostpool will be started during ramp up.
-   */
-  All: "All",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Timestamped: "Timestamped",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  NotTimestamped: "NotTimestamped",
 }
 
 /**
- * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
+ * Parameter indicating how the health check should behave if this package fails staging
  */
-union SetStartVMOnConnect {
+union FailHealthCheckOnStagingFailure {
   string,
-
-  /**
-   * Start VM on Connect is enabled
-   */
-  Enable: "Enable",
-
-  /**
-   * Start VM on Connect is disabled, must use rampUpAutoStartHosts or turn on manually
-   */
-  Disable: "Disable",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unhealthy: "Unhealthy",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  NeedsAssistance: "NeedsAssistance",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  DoNotFail: "DoNotFail",
 }
 
 /**
- * Action to be taken after a user disconnect during the ramp up period.
+ * Hostpool update fault type.
  */
-union SessionHandlingOperation {
+union FaultType {
   string,
 
   /**
-   * No action will be taken after disconnect
+   * Fault caused by service error.
    */
-  None: "None",
+  ServiceError: "ServiceError",
 
   /**
-   * Session Host will be deallocated after disconnect
+   * Fault caused by user error.
    */
-  Deallocate: "Deallocate",
+  UserError: "UserError",
+}
 
-  /**
-   * Session Host will hibernate after disconnect
-   */
-  Hibernate: "Hibernate",
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union OperationTypeSHM {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  InitiateSessionHostUpdate: "InitiateSessionHostUpdate",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ValidateSessionHostUpdate: "ValidateSessionHostUpdate",
 }
 
 /**
- * Day of the week. Modeled as string
+ * Day of the week.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum DayOfWeek {
   Monday,
   Tuesday,
@@ -1152,7 +890,6 @@ model ServiceSpecification {
   /**
    * Specifications of the Log for Azure Monitoring
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -1203,1031 +940,30 @@ model CloudErrorProperties {
 }
 
 /**
- * List of App Attach Package definitions.
+ * Schema for Workspace properties.
  */
-model AppAttachPackageList is Azure.Core.Page<AppAttachPackage>;
-
-/**
- * Schema for App Attach Package properties.
- */
-model AppAttachPackageProperties {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model WorkspaceProperties {
   /**
-   * The provisioning state of the App Attach Package.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
-  /**
-   * Detailed properties for App Attach Package
-   */
-  image?: AppAttachPackageInfoProperties;
-
-  /**
-   * List of Hostpool resource Ids.
-   */
-  hostPoolReferences?: string[];
-
-  /**
-   * URL path to certificate name located in keyVault
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "URL is a valid acronym"
-  keyVaultURL?: string;
-
-  /**
-   * Parameter indicating how the health check should behave if this package fails staging
-   */
-  failHealthCheckOnStagingFailure?: failHealthCheckOnStagingFailure;
-
-  /**
-   * Specific name of package owner, is "AppAttach" for native app attach packages
-   */
-  packageOwnerName?: string;
-
-  /**
-   * Lookback url to third party control plane, is null for native app attach packages
-   */
-  packageLookbackUrl?: url;
-
-  /**
-   * Field that can be populated with custom data and filtered on in list GET calls
-   */
-  customData?: string;
-}
-
-/**
- * Schema for Import Package Information properties.
- */
-model AppAttachPackageInfoProperties {
-  /**
-   * Alias of App Attach Package. Assigned at import time
-   */
-  packageAlias?: string;
-
-  /**
-   * VHD/CIM image path on Network Share.
-   */
-  imagePath?: string;
-
-  /**
-   * Package Name from appxmanifest.xml.
-   */
-  packageName?: string;
-
-  /**
-   * Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name.
-   */
-  packageFamilyName?: string;
-
-  /**
-   * Package Full Name from appxmanifest.xml.
-   */
-  packageFullName?: string;
-
-  /**
-   * User friendly Name to be displayed in the portal.
-   */
-  displayName?: string;
-
-  /**
-   * Relative Path to the package inside the image.
-   */
-  packageRelativePath?: string;
-
-  /**
-   * Specifies how to register Package in feed.
-   */
-  isRegularRegistration?: boolean;
-
-  /**
-   * Make this version of the package the active one across the hostpool.
-   */
-  isActive?: boolean;
-
-  /**
-   * List of package dependencies.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  packageDependencies?: MsixPackageDependencies[];
-
-  /**
-   * Package version found in the appxmanifest.xml.
-   */
-  version?: string;
-
-  /**
-   * Date Package was last updated, found in the appxmanifest.xml.
-   */
-  lastUpdated?: utcDateTime;
-
-  /**
-   * List of package applications.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  packageApplications?: MsixPackageApplications[];
-
-  /**
-   * Certificate name found in the appxmanifest.xml.
-   */
-  certificateName?: string;
-
-  /**
-   * Date certificate expires, found in the appxmanifest.xml.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  certificateExpiry?: utcDateTime;
-
-  /**
-   * Is package timestamped so it can ignore the certificate expiry date
-   */
-  isPackageTimestamped?: packageTimestamped;
-}
-
-/**
- * Schema for MSIX Package Dependencies properties.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model MsixPackageDependencies {
-  /**
-   * Name of package dependency.
-   */
-  dependencyName?: string;
-
-  /**
-   * Name of dependency publisher.
-   */
-  publisher?: string;
-
-  /**
-   * Dependency version required.
-   */
-  minVersion?: string;
-}
-
-/**
- * Schema for MSIX Package Application properties.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model MsixPackageApplications {
-  /**
-   * Package Application Id, found in appxmanifest.xml.
-   */
-  appId?: string;
-
-  /**
-   * Description of Package Application.
-   */
-  description?: string;
-
-  /**
-   * Used to activate Package Application. Consists of Package Name and ApplicationID. Found in appxmanifest.xml.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is a valid acronym"
-  appUserModelID?: string;
-
-  /**
-   * User friendly name.
-   */
-  friendlyName?: string;
-
-  /**
-   * User friendly name.
-   */
-  iconImageName?: string;
-
-  /**
-   * the icon a 64 bit string as a byte array.
-   */
-  rawIcon?: bytes;
-
-  /**
-   * the icon a 64 bit string as a byte array.
-   */
-  rawPng?: bytes;
-}
-
-/**
- * Network information.
- */
-model NetworkInfoProperties {
-  /**
-   * The resource ID of the subnet.
-   */
-  subnetId: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
-   */
-  securityGroupId?: string;
-}
-
-/**
- * Network information.
- */
-model NetworkInfoPatchProperties {
-  /**
-   * The resource ID of the subnet.
-   */
-  subnetId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
-   */
-  securityGroupId?: string;
-}
-
-/**
- * Disk information.
- */
-model DiskInfoProperties {
-  /**
-   * The disk type used by virtual machine in hostpool session host.
-   */
-  type: VirtualMachineDiskType;
-}
-
-/**
- * Disk information.
- */
-model DiskInfoPatchProperties {
-  /**
-   * The disk type used by virtual machine in hostpool session host.
-   */
-  type?: VirtualMachineDiskType;
-}
-
-/**
- * Marketplace image information.
- */
-model MarketplaceInfoProperties {
-  /**
-   * The offer of the image.
-   */
-  offer: string;
-
-  /**
-   * The publisher of the image.
-   */
-  publisher: string;
-
-  /**
-   * The SKU of the image.
-   */
-  sku: string;
-
-  /**
-   * The version of the image.
-   */
-  exactVersion: string;
-}
-
-/**
- * Marketplace image information.
- */
-model MarketplaceInfoPatchProperties {
-  /**
-   * The offer of the image.
-   */
-  offer?: string;
-
-  /**
-   * The publisher of the image.
-   */
-  publisher?: string;
-
-  /**
-   * The SKU of the image.
-   */
-  sku?: string;
-
-  /**
-   * The version of the image.
-   */
-  exactVersion?: string;
-}
-
-/**
- * Custom image information.
- */
-model CustomInfoProperties {
-  /**
-   * The resource ID of the image.
-   */
-  resourceId: Azure.Core.armResourceIdentifier;
-}
-
-/**
- * Custom image information.
- */
-model CustomInfoPatchProperties {
-  /**
-   * The resource ID of the image.
-   */
-  resourceId?: Azure.Core.armResourceIdentifier;
-}
-
-/**
- * Credentials kept in the keyvault.
- */
-model KeyVaultCredentialsProperties {
-  /**
-   * The uri to access the secret that the username is stored in.
-   */
-  usernameKeyVaultSecretUri: url;
-
-  /**
-   * The uri to access the secret that the password is stored in.
-   */
-  passwordKeyVaultSecretUri: url;
-}
-
-/**
- * Credentials kept in the keyvault.
- */
-model KeyVaultCredentialsPatchProperties {
-  /**
-   * The uri to access the secret that the username is stored in.
-   */
-  usernameKeyVaultSecretUri?: url;
-
-  /**
-   * The uri to access the secret that the password is stored in.
-   */
-  passwordKeyVaultSecretUri?: url;
-}
-
-/**
- * Active directory info. Only one should be populated based on the join type.
- */
-model ActiveDirectoryInfoProperties {
-  /**
-   * Credentials needed to create the virtual machine.
-   */
-  domainCredentials: KeyVaultCredentialsProperties;
-
-  /**
-   * The organizational unit(OU) path.
-   */
-  ouPath: string;
-
-  /**
-   * The domain a virtual machine connected to a hostpool will join.
-   */
-  domainName?: string;
-}
-
-/**
- * Active directory info. Only one should be populated based on the join type
- */
-model ActiveDirectoryInfoPatchProperties {
-  /**
-   * Credentials needed to create the virtual machine.
-   */
-  domainCredentials?: KeyVaultCredentialsPatchProperties;
-}
-
-/**
- * Azure Active directory info. Only one should be populated based on the join type
- */
-model AzureActiveDirectoryInfoProperties {
-  /**
-   * The Mobile Device Management(MDM) guid.
-   */
-  mdmProviderGuid: string;
-}
-
-/**
- * Domain configurations of session hosts.
- */
-model DomainInfoProperties {
-  /**
-   * The type of domain join done by the virtual machine.
-   */
-  joinType: DomainJoinType;
-
-  /**
-   * Active directory info. Only one should be populated based on the join type.
-   */
-  activeDirectoryInfo?: ActiveDirectoryInfoProperties;
-
-  /**
-   * Azure active directory info. Only one should be populated based on the join type.
-   */
-  azureActiveDirectoryInfo?: AzureActiveDirectoryInfoProperties;
-}
-
-/**
- * Domain configurations of session hosts.
- */
-model DomainInfoPatchProperties {
-  /**
-   * Active directory info. Only one should be populated based on the join type.
-   */
-  activeDirectoryInfo?: ActiveDirectoryInfoPatchProperties;
-}
-
-/**
- * Image configurations of session host in a HostPool
- */
-model ImageInfoProperties {
-  /**
-   * The type of image session hosts use in the hostpool.
-   */
-  type: type;
-
-  /**
-   * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
-   */
-  marketplaceInfo?: MarketplaceInfoProperties;
-
-  /**
-   * The values to uniquely identify a custom image. Only one should be populated based on the image type.
-   */
-  customInfo?: CustomInfoProperties;
-}
-
-/**
- * Image configurations of session host in a HostPool
- */
-model ImageInfoPatchProperties {
-  /**
-   * The type of image session hosts use in the hostpool.
-   */
-  type?: type;
-
-  /**
-   * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
-   */
-  marketplaceInfo?: MarketplaceInfoPatchProperties;
-
-  /**
-   * The values to uniquely identify a custom image. Only one should be populated based on the image type.
-   */
-  customInfo?: CustomInfoPatchProperties;
-}
-
-/**
- * Security Information.
- */
-model SecurityInfoProperties {
-  /**
-   * The security type used by virtual machine in hostpool session host. Default is Standard.
-   */
-  type?: VirtualMachineSecurityType = VirtualMachineSecurityType.Standard;
-
-  /**
-   * Whether to use secureBoot on the virtual machine.
-   */
-  secureBootEnabled?: boolean;
-
-  /**
-   * Whether to use vTpm on the virtual machine.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "vTpm is acronym in service"
-  vTpmEnabled?: boolean;
-}
-
-/**
- * Security Information.
- */
-model SecurityInfoPatchProperties {
-  /**
-   * The security type used by virtual machine in hostpool session host. Default is Standard.
-   */
-  type?: VirtualMachineSecurityType;
-
-  /**
-   * Whether to use secureBoot on the virtual machine.
-   */
-  secureBootEnabled?: boolean;
-
-  /**
-   * Whether to use vTpm on the virtual machine.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "vTpm is an acronym used by service"
-  vTpmEnabled?: boolean;
-}
-
-/**
- * Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor
- */
-model BootDiagnosticsInfoProperties {
-  /**
-   * Whether boot diagnostics should be enabled on the Virtual Machine.
-   */
-  enabled?: boolean;
-
-  /**
-   * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
-   */
-  storageUri?: url;
-}
-
-/**
- * Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor
- */
-model BootDiagnosticsInfoPatchProperties {
-  /**
-   * Whether boot diagnostics should be enabled on the Virtual Machine.
-   */
-  enabled?: boolean;
-
-  /**
-   * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
-   */
-  storageUri?: url;
-}
-
-/**
- * List of ActiveSessionHostConfiguration definitions.
- */
-model ActiveSessionHostConfigurationList
-  is Azure.Core.Page<ActiveSessionHostConfiguration>;
-
-/**
- * Represents a ActiveSessionHostConfiguration definition. This has all of the sessionHostConfiguration properties except provisioningState
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model ActiveSessionHostConfigurationProperties {
-  /**
-   * The timestamp of the last update.
-   */
-  @visibility(Lifecycle.Read)
-  version?: utcDateTime;
-
-  /**
-   * Friendly name to describe this version of the SessionHostConfiguration
-   */
-  @maxLength(260)
-  friendlyName?: string;
-
-  /**
-   * Hashtable that lists key/value pair tags to apply to the VMs
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Already implemented with Record"
-  vmTags?: Record<string>;
-
-  /**
-   * The Location for the session host to be created in. It will default to the location of the hostpool if not provided.
-   */
-  vmLocation?: string;
-
-  /**
-   * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
-   */
-  vmResourceGroup?: string;
-
-  /**
-   * The prefix that should be associated with session host names
-   */
-  @maxLength(11)
-  vmNamePrefix: string;
-
-  /**
-   * Value for availability zones to be used by the session host. Should be from [1,2,3].
-   */
-  availabilityZones?: int32[];
-
-  /**
-   * Network information.
-   */
-  networkInfo: NetworkInfoProperties;
-
-  /**
-   * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
-   */
-  vmSizeId: string;
-
-  /**
-   * Disk information.
-   */
-  diskInfo: DiskInfoProperties;
-
-  /**
-   * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
-   */
-  customConfigurationScriptUrl?: url;
-
-  /**
-   * Image configurations of the HostPool.
-   */
-  imageInfo: ImageInfoProperties;
-
-  /**
-   * Domain configurations of session hosts.
-   */
-  domainInfo: DomainInfoProperties;
-
-  /**
-   * Security information.
-   */
-  securityInfo?: SecurityInfoProperties;
-
-  /**
-   * Local Admin credentials for session hosts.
-   */
-  vmAdminCredentials: KeyVaultCredentialsProperties;
-
-  /**
-   * Boot Diagnostics information.
-   */
-  bootDiagnosticsInfo?: BootDiagnosticsInfoProperties;
-}
-
-/**
- * The configurations of a hostpool update.
- */
-model HostPoolUpdateConfigurationProperties {
-  /**
-   * Whether not to save original disk. False by default.
-   */
-  deleteOriginalVm?: boolean;
-
-  /**
-   * The maximum number of virtual machines to be removed during hostpool update.
-   */
-  @minValue(1)
-  maxVmsRemoved: int32;
-
-  /**
-   * Grace period before logging off users in minutes.
-   */
-  logOffDelayMinutes: int32;
-
-  /**
-   * Log off message sent to user for logoff. Default value is an empty string.
-   */
-  @maxLength(260)
-  logOffMessage?: string = "";
-}
-
-/**
- * The configurations of a hostpool update.
- */
-model HostPoolUpdateConfigurationPatchProperties {
-  /**
-   * Whether not to save original disk. False by default.
-   */
-  deleteOriginalVm?: boolean;
-
-  /**
-   * The maximum number of virtual machines to be removed during hostpool update.
-   */
-  @minValue(1)
-  maxVmsRemoved?: int32;
-
-  /**
-   * Grace period before logging off users in minutes.
-   */
-  logOffDelayMinutes?: int32;
-
-  /**
-   * Log off message sent to user for logoff. Default value is an empty string.
-   */
-  @maxLength(260)
-  logOffMessage?: string;
-}
-
-/**
- * Session Host Managements of HostPool.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by our service"
-model SessionHostManagementProperties {
-  /**
-   * Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true.
-   */
-  scheduledDateTimeZone: string;
-
-  /**
-   * Parameters for a hostpool update.
-   */
-  update: HostPoolUpdateConfigurationProperties;
-}
-
-/**
- * Represents a SessionHostManagementPatch definition.
- */
-model SessionHostManagementPatchProperties {
-  /**
-   * Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true.
-   */
-  scheduledDateTimeZone?: string;
-
-  /**
-   * Parameters for a hostpool update.
-   */
-  update?: HostPoolUpdateConfigurationPatchProperties;
-}
-/**
- * List of ApplicationGroup definitions.
- */
-model ApplicationGroupList is Azure.Core.Page<ApplicationGroup>;
-
-/**
- * Schema for ApplicationGroup properties.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model ApplicationGroupProperties {
-  /**
-   * ObjectId of ApplicationGroup. (internal use)
+   * ObjectId of Workspace. (internal use)
    */
   @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
-   * Description of ApplicationGroup.
+   * Description of Workspace.
    */
   description?: string;
 
   /**
-   * Friendly name of ApplicationGroup.
+   * Friendly name of Workspace.
    */
   friendlyName?: string;
 
   /**
-   * HostPool arm path of ApplicationGroup.
+   * List of applicationGroup resource Ids.
    */
-  hostPoolArmPath: string;
-
-  /**
-   * Workspace arm path of ApplicationGroup.
-   */
-  @visibility(Lifecycle.Read)
-  workspaceArmPath?: string;
-
-  /**
-   * Resource Type of ApplicationGroup.
-   */
-  applicationGroupType: ApplicationGroupType;
-
-  /**
-   * Is cloud pc resource.
-   */
-  @visibility(Lifecycle.Read)
-  cloudPcResource?: boolean;
-
-  /**
-   * Boolean representing whether the applicationGroup is show in the feed.
-   */
-  showInFeed?: boolean;
-}
-
-/**
- * The resource model definition containing the full set of allowed properties for a resource. Except properties bag, there cannot be a top level property outside of this set.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ResourceModelWithAllowedPropertySet
-  extends Azure.ResourceManager.Foundations.TrackedResource {
-  /**
-   * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  managedBy?: string;
-
-  /**
-   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. E.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  @pattern("^[-\\w\\._,\\(\\)]+$")
-  kind?: string;
-
-  /**
-   * The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Resource Identity
-   */
-  identity?: ResourceModelWithAllowedPropertySetIdentity;
-
-  /**
-   * Selected image SKU
-   */
-  sku?: ResourceModelWithAllowedPropertySetSku;
-
-  /**
-   * Selected user purchase plan
-   */
-  plan?: ResourceModelWithAllowedPropertySetPlan;
-}
-
-/**
- * The resource model definition containing the full set of allowed properties for a resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Standard Common Type"
-model ResourceModelWithAllowedPropertySetIdentity extends Identity {}
-
-/**
- * Identity for the resource.
- */
-model Identity {
-  /**
-   * The principal ID of resource identity. The value must be an UUID.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The tenant ID of resource. The value must be an UUID.
-   */
-  @visibility(Lifecycle.Read)
-  tenantId?: string;
-
-  /**
-   * The identity type.
-   */
-  type?: "SystemAssigned";
-}
-
-/**
- * Resource model definition representing SKU and Properties
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Standard Common Type"
-model ResourceModelWithAllowedPropertySetSku extends Sku {}
-
-/**
- * The resource model definition representing SKU
- */
-model Sku {
-  /**
-   * The name of the SKU. E.g. P3. It is typically a letter+number code
-   */
-  name: string;
-
-  /**
-   * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
-   */
-  tier?: SkuTier;
-
-  /**
-   * The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code.
-   */
-  size?: string;
-
-  /**
-   * If the service has different generations of hardware, for the same SKU, then that can be captured here.
-   */
-  family?: string;
-
-  /**
-   * If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
-   */
-  capacity?: int32;
-}
-
-/**
- * Resource model definition representing Plan and Properties
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Standard Common Type"
-model ResourceModelWithAllowedPropertySetPlan extends Plan {}
-
-/**
- * Plan for the resource.
- */
-model Plan {
-  /**
-   * A user defined name of the 3rd Party Artifact that is being procured.
-   */
-  name: string;
-
-  /**
-   * The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic
-   */
-  publisher: string;
-
-  /**
-   * The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding.
-   */
-  product: string;
-
-  /**
-   * A publisher provided promotion code as provisioned in Data Market for the said product/artifact.
-   */
-  promotionCode?: string;
-
-  /**
-   * The version of the desired product/artifact.
-   */
-  version?: string;
-}
-
-/**
- * List of HostPool definitions.
- */
-model HostPoolList is Azure.Core.Page<HostPool>;
-
-/**
- * Properties of HostPool.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model HostPoolProperties {
-  /**
-   * ObjectId of HostPool. (internal use)
-   */
-  @visibility(Lifecycle.Read)
-  objectId?: string;
-
-  /**
-   * Friendly name of HostPool.
-   */
-  friendlyName?: string;
-
-  /**
-   * Description of HostPool.
-   */
-  description?: string;
-
-  /**
-   * HostPool type for desktop.
-   */
-  hostPoolType: HostPoolType;
-
-  /**
-   * PersonalDesktopAssignment type for HostPool.
-   */
-  personalDesktopAssignmentType?: PersonalDesktopAssignmentType;
-
-  /**
-   * Custom rdp property of HostPool.
-   */
-  customRdpProperty?: string;
-
-  /**
-   * The max session limit of HostPool.
-   */
-  maxSessionLimit?: int32;
-
-  /**
-   * The type of the load balancer.
-   */
-  loadBalancerType: LoadBalancerType;
-
-  /**
-   * The ring number of HostPool.
-   */
-  ring?: int32;
-
-  /**
-   * Is validation environment.
-   */
-  validationEnvironment?: boolean;
-
-  /**
-   * The registration info of HostPool.
-   */
-  registrationInfo?: RegistrationInfo;
-
-  /**
-   * VM template for sessionhosts configuration within hostpool.
-   */
-  vmTemplate?: string;
-
-  /**
-   * List of applicationGroup links.
-   */
-  @visibility(Lifecycle.Read)
   applicationGroupReferences?: string[];
-
-  /**
-   * List of App Attach Package links.
-   */
-  @visibility(Lifecycle.Read)
-  appAttachPackageReferences?: string[];
-
-  /**
-   * URL to customer ADFS server for signing WVD SSO certificates.
-   */
-  ssoadfsAuthority?: string;
-
-  /**
-   * ClientId for the registered Relying Party used to issue WVD SSO certificates.
-   */
-  ssoClientId?: string;
-
-  /**
-   * Path to Azure KeyVault storing the secret used for communication to ADFS.
-   */
-  ssoClientSecretKeyVaultPath?: string;
-
-  /**
-   * The type of single sign on Secret Type.
-   */
-  ssoSecretType?: SSOSecretType;
-
-  /**
-   * The type of preferred application group type, default to Desktop Application Group
-   */
-  preferredAppGroupType: PreferredAppGroupType;
-
-  /**
-   * The flag to turn on/off StartVMOnConnect feature.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a valid acronym"
-  startVMOnConnect?: boolean;
 
   /**
    * Is cloud pc resource.
@@ -2238,119 +974,25 @@ model HostPoolProperties {
   /**
    * Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints
    */
-  publicNetworkAccess?: HostpoolPublicNetworkAccess;
-
-  /**
-   * The session host configuration for updating agent, monitoring agent, and stack component.
-   */
-  agentUpdate?: AgentUpdateProperties;
+  publicNetworkAccess?: PublicNetworkAccess;
 
   /**
    * List of private endpoint connection associated with the specified resource
    */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
-
-  /**
-   * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  managedPrivateUDP?: ManagedPrivateUDP;
-
-  /**
-   * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  directUDP?: DirectUDP;
-
-  /**
-   * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  publicUDP?: PublicUDP;
-
-  /**
-   * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
-  relayUDP?: RelayUDP;
-
-  /**
-   * The type of management for this hostpool, Automated or Standard. The default value is Automated.
-   */
-  managementType?: ManagementType;
-}
-
-/**
- * Represents a RegistrationInfo definition.
- */
-model RegistrationInfo {
-  /**
-   * Expiration time of registration token.
-   */
-  expirationTime?: utcDateTime;
-
-  /**
-   * The registration token base64 encoded string.
-   */
-  token?: string;
-
-  /**
-   * The type of resetting the token.
-   */
-  registrationTokenOperation?: RegistrationTokenOperation;
-}
-
-/**
- * The session host configuration for updating agent, monitoring agent, and stack component.
- */
-model AgentUpdateProperties {
-  /**
-   * The type of maintenance for session host components.
-   */
-  type?: SessionHostComponentUpdateType;
-
-  /**
-   * Whether to use localTime of the virtual machine.
-   */
-  useSessionHostLocalTime?: boolean;
-
-  /**
-   * Time zone for maintenance as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0. Must be set if useLocalTime is true.
-   */
-  maintenanceWindowTimeZone?: string;
-
-  /**
-   * List of maintenance windows. Maintenance windows are 2 hours long.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  maintenanceWindows?: MaintenanceWindowProperties[];
-}
-
-/**
- * Maintenance window starting hour and day of week.
- */
-model MaintenanceWindowProperties {
-  /**
-   * The update start hour of the day. (0 - 23)
-   */
-  hour?: int32;
-
-  /**
-   * Day of the week.
-   */
-  dayOfWeek?: DayOfWeek;
 }
 
 /**
  * The private endpoint connection resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateEndpointConnection
-  extends Azure.ResourceManager.CommonTypes.Resource {
+model PrivateEndpointConnection extends Resource {
   /**
    * Resource properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateEndpointConnectionProperties;
 }
 
@@ -2413,14 +1055,259 @@ model PrivateLinkServiceConnectionState {
 }
 
 /**
- * List of scaling plan definitions.
+ * Common fields that are returned in the response for all Azure Resource Manager resources
  */
-model ScalingPlanList is Azure.Core.Page<ScalingPlan>;
+model Resource {
+  /**
+   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+   */
+  @visibility(Lifecycle.Read)
+  id?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: SystemData;
+}
+
+/**
+ * The resource model definition containing the full set of allowed properties for a resource. Except properties bag, there cannot be a top level property outside of this set.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model ResourceModelWithAllowedPropertySet extends TrackedResource {
+  /**
+   * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  managedBy?: string;
+
+  /**
+   * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. E.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[-\\w\\._,\\(\\)]+$")
+  kind?: string;
+
+  /**
+   * The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Managed service identity (system assigned and/or user assigned identities)
+   */
+  identity?: ManagedServiceIdentity;
+
+  /**
+   * The resource model definition representing SKU
+   */
+  sku?: Sku;
+
+  /**
+   * Plan for the resource.
+   */
+  plan?: Plan;
+}
+
+/**
+ * Managed service identity (system assigned and/or user assigned identities)
+ */
+model ManagedServiceIdentity {
+  /**
+   * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @visibility(Lifecycle.Read)
+  @format("uuid")
+  principalId?: string;
+
+  /**
+   * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @visibility(Lifecycle.Read)
+  @format("uuid")
+  tenantId?: string;
+
+  /**
+   * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+   */
+  type: ManagedServiceIdentityType;
+
+  /**
+   * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
+ * The resource model definition representing SKU
+ */
+model Sku {
+  /**
+   * The name of the SKU. E.g. P3. It is typically a letter+number code
+   */
+  name: string;
+
+  /**
+   * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
+   */
+  tier?: SkuTier;
+
+  /**
+   * The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code.
+   */
+  size?: string;
+
+  /**
+   * If the service has different generations of hardware, for the same SKU, then that can be captured here.
+   */
+  family?: string;
+
+  /**
+   * If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
+   */
+  capacity?: int32;
+}
+
+/**
+ * Plan for the resource.
+ */
+model Plan {
+  /**
+   * A user defined name of the 3rd Party Artifact that is being procured.
+   */
+  name: string;
+
+  /**
+   * The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic
+   */
+  publisher: string;
+
+  /**
+   * The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding.
+   */
+  product: string;
+
+  /**
+   * A publisher provided promotion code as provisioned in Data Market for the said product/artifact.
+   */
+  promotionCode?: string;
+
+  /**
+   * The version of the desired product/artifact.
+   */
+  version?: string;
+}
+
+/**
+ * Workspace properties that can be patched.
+ */
+model WorkspacePatch {
+  /**
+   * tags to be updated
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * Detailed properties for Workspace
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: WorkspacePatchProperties;
+}
+
+/**
+ * Workspace properties that can be patched.
+ */
+model WorkspacePatchProperties {
+  /**
+   * Description of Workspace.
+   */
+  description?: string;
+
+  /**
+   * Friendly name of Workspace.
+   */
+  friendlyName?: string;
+
+  /**
+   * List of applicationGroup links.
+   */
+  applicationGroupReferences?: string[];
+
+  /**
+   * Enabled to allow this resource to be access from the public network
+   */
+  publicNetworkAccess?: PublicNetworkAccess;
+}
+
+/**
+ * List of private endpoint connection associated with the specified storage account
+ */
+model PrivateEndpointConnectionListResultWithSystemData
+  is Azure.Core.Page<PrivateEndpointConnectionWithSystemData>;
+
+/**
+ * A private link resource
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model PrivateLinkResource extends Resource {
+  /**
+   * Resource properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: PrivateLinkResourceProperties;
+}
+
+/**
+ * Properties of a private link resource.
+ */
+model PrivateLinkResourceProperties {
+  /**
+   * The private link resource group id.
+   */
+  @visibility(Lifecycle.Read)
+  groupId?: string;
+
+  /**
+   * The private link resource required member names.
+   */
+  @visibility(Lifecycle.Read)
+  requiredMembers?: string[];
+
+  /**
+   * The private link resource Private link DNS zone name.
+   */
+  requiredZoneNames?: string[];
+}
+
+/**
+ * List of Workspace definitions.
+ */
+model WorkspaceList is Azure.Core.Page<Workspace>;
 
 /**
  * Scaling plan properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ScalingPlanProperties {
   /**
    * ObjectId of scaling plan. (internal use)
@@ -2454,15 +1341,13 @@ model ScalingPlanProperties {
   exclusionTag?: string;
 
   /**
-   * List of ScalingPlanPooledSchedule definitions.
+   * List of Pooled ScalingSchedule definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
   schedules?: ScalingSchedule[];
 
   /**
    * List of ScalingHostPoolReference definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["hostPoolArmPath"])
   hostPoolReferences?: ScalingHostPoolReference[];
 }
 
@@ -2481,6 +1366,16 @@ model ScalingSchedule {
   daysOfWeek?: DayOfWeek[];
 
   /**
+   * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   */
+  scalingMethod?: ScalingMethod;
+
+  /**
+   * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   */
+  createDelete?: CreateDeleteProperties;
+
+  /**
    * Starting time for ramp up period.
    */
   rampUpStartTime?: Time;
@@ -2494,7 +1389,6 @@ model ScalingSchedule {
    * Minimum host percentage for ramp up period.
    */
   @maxValue(100)
-  @minValue(0)
   rampUpMinimumHostsPct?: int32;
 
   /**
@@ -2528,7 +1422,6 @@ model ScalingSchedule {
    * Minimum host percentage for ramp down period.
    */
   @maxValue(100)
-  @minValue(0)
   rampDownMinimumHostsPct?: int32;
 
   /**
@@ -2570,6 +1463,33 @@ model ScalingSchedule {
 }
 
 /**
+ * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+ */
+model CreateDeleteProperties {
+  /**
+   * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
+   */
+  rampUpMaximumHostPoolSize?: int32;
+
+  /**
+   * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
+   */
+  @maxValue(59)
+  rampUpMinimumHostPoolSize?: int32;
+
+  /**
+   * Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.
+   */
+  rampDownMaximumHostPoolSize?: int32;
+
+  /**
+   * Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.
+   */
+  @maxValue(59)
+  rampDownMinimumHostPoolSize?: int32;
+}
+
+/**
  * The time for a scaling action to occur.
  */
 model Time {
@@ -2577,14 +1497,12 @@ model Time {
    * The hour.
    */
   @maxValue(23)
-  @minValue(0)
   hour: int32;
 
   /**
    * The minute.
    */
   @maxValue(59)
-  @minValue(0)
   minute: int32;
 }
 
@@ -2604,35 +1522,632 @@ model ScalingHostPoolReference {
 }
 
 /**
- * List of Workspace definitions.
+ * Scaling plan properties that can be patched.
  */
-model WorkspaceList is Azure.Core.Page<Workspace>;
+model ScalingPlanPatch {
+  /**
+   * tags to be updated
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * Detailed properties for scaling plan
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: ScalingPlanPatchProperties;
+}
 
 /**
- * Schema for Workspace properties.
+ * Scaling plan properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model WorkspaceProperties {
+model ScalingPlanPatchProperties {
   /**
-   * ObjectId of Workspace. (internal use)
+   * Description of scaling plan.
+   */
+  description?: string;
+
+  /**
+   * User friendly name of scaling plan.
+   */
+  friendlyName?: string;
+
+  /**
+   * Timezone of the scaling plan.
+   */
+  timeZone?: string;
+
+  /**
+   * Exclusion tag for scaling plan.
+   */
+  exclusionTag?: string;
+
+  /**
+   * List Pooled ScalingSchedule definitions.
+   */
+  schedules?: ScalingSchedule[];
+
+  /**
+   * List of ScalingHostPoolReference definitions.
+   */
+  hostPoolReferences?: ScalingHostPoolReference[];
+}
+
+/**
+ * List of scaling plan definitions.
+ */
+model ScalingPlanList is Azure.Core.Page<ScalingPlan>;
+
+/**
+ * A ScalingPlanPooledSchedule.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model ScalingPlanPooledScheduleProperties {
+  /**
+   * Name of the ScalingPlanPooledSchedule.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Set of days of the week on which this schedule is active.
+   */
+  daysOfWeek: DayOfWeek[];
+
+  /**
+   * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   */
+  scalingMethod?: ScalingMethod;
+
+  /**
+   * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   */
+  createDelete?: CreateDeleteProperties;
+
+  /**
+   * Starting time for ramp up period.
+   */
+  rampUpStartTime: Time;
+
+  /**
+   * Load balancing algorithm for ramp up period.
+   */
+  rampUpLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+
+  /**
+   * Minimum host percentage for ramp up period.
+   */
+  @maxValue(100)
+  rampUpMinimumHostsPct?: int32;
+
+  /**
+   * Capacity threshold for ramp up period.
+   */
+  @maxValue(100)
+  @minValue(1)
+  rampUpCapacityThresholdPct: int32;
+
+  /**
+   * Starting time for peak period.
+   */
+  peakStartTime: Time;
+
+  /**
+   * Load balancing algorithm for peak period.
+   */
+  peakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+
+  /**
+   * Starting time for ramp down period.
+   */
+  rampDownStartTime: Time;
+
+  /**
+   * Load balancing algorithm for ramp down period.
+   */
+  rampDownLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+
+  /**
+   * Minimum host percentage for ramp down period.
+   */
+  @maxValue(100)
+  rampDownMinimumHostsPct?: int32;
+
+  /**
+   * Capacity threshold for ramp down period.
+   */
+  @maxValue(100)
+  @minValue(1)
+  rampDownCapacityThresholdPct: int32;
+
+  /**
+   * Should users be logged off forcefully from hosts.
+   */
+  rampDownForceLogoffUsers?: boolean;
+
+  /**
+   * Specifies when to stop hosts during ramp down period.
+   */
+  rampDownStopHostsWhen?: StopHostsWhen;
+
+  /**
+   * Number of minutes to wait to stop hosts during ramp down period.
+   */
+  rampDownWaitTimeMinutes?: int32;
+
+  /**
+   * Notification message for users during ramp down period.
+   */
+  rampDownNotificationMessage?: string;
+
+  /**
+   * Starting time for off-peak period.
+   */
+  offPeakStartTime: Time;
+
+  /**
+   * Load balancing algorithm for off-peak period.
+   */
+  offPeakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+}
+
+/**
+ * ScalingPlanPooledSchedule properties that can be patched.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model ScalingPlanPooledSchedulePatch extends Resource {
+  /**
+   * Detailed properties for ScalingPlanPooledSchedule
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: ScalingPlanPooledSchedulePatchProperties;
+}
+
+/**
+ * A ScalingPlanPooledSchedule.
+ */
+model ScalingPlanPooledSchedulePatchProperties {
+  /**
+   * Name of the ScalingPlanPooledSchedule.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Set of days of the week on which this schedule is active.
+   */
+  daysOfWeek?: DayOfWeek[];
+
+  /**
+   * The desired scaling method to be used to scale the hosts in the assigned host pool.
+   */
+  scalingMethod?: ScalingMethod;
+
+  /**
+   * The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.
+   */
+  createDelete?: CreateDeleteProperties;
+
+  /**
+   * Starting time for ramp up period.
+   */
+  rampUpStartTime?: Time;
+
+  /**
+   * Load balancing algorithm for ramp up period.
+   */
+  rampUpLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+
+  /**
+   * Minimum host percentage for ramp up period.
+   */
+  @maxValue(100)
+  rampUpMinimumHostsPct?: int32;
+
+  /**
+   * Capacity threshold for ramp up period.
+   */
+  @maxValue(100)
+  @minValue(1)
+  rampUpCapacityThresholdPct?: int32;
+
+  /**
+   * Starting time for peak period.
+   */
+  peakStartTime?: Time;
+
+  /**
+   * Load balancing algorithm for peak period.
+   */
+  peakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+
+  /**
+   * Starting time for ramp down period.
+   */
+  rampDownStartTime?: Time;
+
+  /**
+   * Load balancing algorithm for ramp down period.
+   */
+  rampDownLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+
+  /**
+   * Minimum host percentage for ramp down period.
+   */
+  @maxValue(100)
+  rampDownMinimumHostsPct?: int32;
+
+  /**
+   * Capacity threshold for ramp down period.
+   */
+  @maxValue(100)
+  @minValue(1)
+  rampDownCapacityThresholdPct?: int32;
+
+  /**
+   * Should users be logged off forcefully from hosts.
+   */
+  rampDownForceLogoffUsers?: boolean;
+
+  /**
+   * Specifies when to stop hosts during ramp down period.
+   */
+  rampDownStopHostsWhen?: StopHostsWhen;
+
+  /**
+   * Number of minutes to wait to stop hosts during ramp down period.
+   */
+  rampDownWaitTimeMinutes?: int32;
+
+  /**
+   * Notification message for users during ramp down period.
+   */
+  rampDownNotificationMessage?: string;
+
+  /**
+   * Starting time for off-peak period.
+   */
+  offPeakStartTime?: Time;
+
+  /**
+   * Load balancing algorithm for off-peak period.
+   */
+  offPeakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
+}
+
+/**
+ * List of ScalingPlanPooledSchedule definitions.
+ */
+model ScalingPlanPooledScheduleList
+  is Azure.Core.Page<ScalingPlanPooledSchedule>;
+
+/**
+ * A ScalingPlanPersonalSchedule.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model ScalingPlanPersonalScheduleProperties {
+  /**
+   * Set of days of the week on which this schedule is active.
+   */
+  daysOfWeek: DayOfWeek[];
+
+  /**
+   * Starting time for ramp up period.
+   */
+  rampUpStartTime: Time;
+
+  /**
+   * The desired startup behavior during the ramp up period for personal vms in the hostpool.
+   */
+  rampUpAutoStartHosts?: StartupBehavior;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
+   */
+  rampUpStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the ramp up period.
+   */
+  rampUpActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period.
+   */
+  rampUpMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the ramp up period.
+   */
+  rampUpActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period.
+   */
+  rampUpMinutesToWaitOnLogoff?: int32;
+
+  /**
+   * Starting time for peak period.
+   */
+  peakStartTime: Time;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
+   */
+  peakStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the peak period.
+   */
+  peakActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period.
+   */
+  peakMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the peak period.
+   */
+  peakActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period.
+   */
+  peakMinutesToWaitOnLogoff?: int32;
+
+  /**
+   * Starting time for ramp down period.
+   */
+  rampDownStartTime: Time;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
+   */
+  rampDownStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the ramp down period.
+   */
+  rampDownActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period.
+   */
+  rampDownMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the ramp down period.
+   */
+  rampDownActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period.
+   */
+  rampDownMinutesToWaitOnLogoff?: int32;
+
+  /**
+   * Starting time for off-peak period.
+   */
+  offPeakStartTime: Time;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
+   */
+  offPeakStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the off-peak period.
+   */
+  offPeakActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period.
+   */
+  offPeakMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the off-peak period.
+   */
+  offPeakActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.
+   */
+  offPeakMinutesToWaitOnLogoff?: int32;
+}
+
+/**
+ * ScalingPlanPersonalSchedule properties that can be patched.
+ */
+model ScalingPlanPersonalSchedulePatch {
+  /**
+   * Detailed properties for ScalingPlanPersonalSchedule
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: ScalingPlanPersonalSchedulePatchProperties;
+}
+
+/**
+ * A ScalingPlanPersonalSchedule.
+ */
+model ScalingPlanPersonalSchedulePatchProperties {
+  /**
+   * Set of days of the week on which this schedule is active.
+   */
+  daysOfWeek?: DayOfWeek[];
+
+  /**
+   * Starting time for ramp up period.
+   */
+  rampUpStartTime?: Time;
+
+  /**
+   * The desired startup behavior during the ramp up period for personal vms in the hostpool.
+   */
+  rampUpAutoStartHosts?: StartupBehavior;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
+   */
+  rampUpStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the ramp up period.
+   */
+  rampUpActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period.
+   */
+  rampUpMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the ramp up period.
+   */
+  rampUpActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period.
+   */
+  rampUpMinutesToWaitOnLogoff?: int32;
+
+  /**
+   * Starting time for peak period.
+   */
+  peakStartTime?: Time;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
+   */
+  peakStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the peak period.
+   */
+  peakActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period.
+   */
+  peakMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the peak period.
+   */
+  peakActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period.
+   */
+  peakMinutesToWaitOnLogoff?: int32;
+
+  /**
+   * Starting time for ramp down period.
+   */
+  rampDownStartTime?: Time;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
+   */
+  rampDownStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the ramp down period.
+   */
+  rampDownActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period.
+   */
+  rampDownMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the ramp down period.
+   */
+  rampDownActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period.
+   */
+  rampDownMinutesToWaitOnLogoff?: int32;
+
+  /**
+   * Starting time for off-peak period.
+   */
+  offPeakStartTime?: Time;
+
+  /**
+   * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
+   */
+  offPeakStartVMOnConnect?: SetStartVMOnConnect;
+
+  /**
+   * Action to be taken after a user disconnect during the off-peak period.
+   */
+  offPeakActionOnDisconnect?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period.
+   */
+  offPeakMinutesToWaitOnDisconnect?: int32;
+
+  /**
+   * Action to be taken after a logoff during the off-peak period.
+   */
+  offPeakActionOnLogoff?: SessionHandlingOperation;
+
+  /**
+   * The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.
+   */
+  offPeakMinutesToWaitOnLogoff?: int32;
+}
+
+/**
+ * List of ScalingPlanPersonalSchedule definitions.
+ */
+model ScalingPlanPersonalScheduleList
+  is Azure.Core.Page<ScalingPlanPersonalSchedule>;
+
+/**
+ * Schema for ApplicationGroup properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model ApplicationGroupProperties {
+  /**
+   * ObjectId of ApplicationGroup. (internal use)
    */
   @visibility(Lifecycle.Read)
   objectId?: string;
 
   /**
-   * Description of Workspace.
+   * Description of ApplicationGroup.
    */
   description?: string;
 
   /**
-   * Friendly name of Workspace.
+   * Friendly name of ApplicationGroup.
    */
   friendlyName?: string;
 
   /**
-   * List of applicationGroup resource Ids.
+   * HostPool arm path of ApplicationGroup.
    */
-  applicationGroupReferences?: string[];
+  hostPoolArmPath: string;
+
+  /**
+   * Workspace arm path of ApplicationGroup.
+   */
+  @visibility(Lifecycle.Read)
+  workspaceArmPath?: string;
+
+  /**
+   * Resource Type of ApplicationGroup.
+   */
+  applicationGroupType: ApplicationGroupType;
 
   /**
    * Is cloud pc resource.
@@ -2641,86 +2156,27 @@ model WorkspaceProperties {
   cloudPcResource?: boolean;
 
   /**
-   * Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints
+   * Boolean representing whether the applicationGroup is show in the feed.
    */
-  publicNetworkAccess?: PublicNetworkAccess;
-
-  /**
-   * List of private endpoint connection associated with the specified resource
-   */
-  @visibility(Lifecycle.Read)
-  privateEndpointConnections?: PrivateEndpointConnection[];
-}
-
-/**
- * Schema for updatable App Attach Package properties.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model AppAttachPackagePatch extends Azure.ResourceManager.CommonTypes.Resource {
-  /**
-   * tags to be updated
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags are a valid record"
-  tags?: Record<string>;
-
-  /**
-   * Detailed properties for App Attach Package
-   */
-  properties?: AppAttachPackagePatchProperties;
-}
-
-/**
- * Schema for patchable fields on an App Attach Package.
- */
-model AppAttachPackagePatchProperties {
-  /**
-   * Detailed properties for App Attach Package
-   */
-  image?: AppAttachPackageInfoProperties;
-
-  /**
-   * List of Hostpool resource Ids.
-   */
-  hostPoolReferences?: Azure.Core.armResourceIdentifier[];
-
-  /**
-   * URL path to certificate name located in keyVault
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "URL is a valid acronym"
-  keyVaultURL?: string;
-
-  /**
-   * Parameter indicating how the health check should behave if this package fails staging
-   */
-  failHealthCheckOnStagingFailure?: failHealthCheckOnStagingFailure;
-
-  /**
-   * Lookback url to third party control plane, is null for native app attach packages
-   */
-  packageLookbackUrl?: url;
-
-  /**
-   * Field that can be populated with custom data and filtered on in list GET calls
-   */
-  customData?: string;
+  showInFeed?: boolean;
 }
 
 /**
  * ApplicationGroup properties that can be patched.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model ApplicationGroupPatch extends Azure.ResourceManager.CommonTypes.Resource {
+model ApplicationGroupPatch extends Resource {
   /**
    * tags to be updated
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags are a valid record"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
    * ApplicationGroup properties that can be patched.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApplicationGroupPatchProperties;
 }
 
@@ -2745,14 +2201,62 @@ model ApplicationGroupPatchProperties {
 }
 
 /**
- * List of Application definitions.
+ * List of ApplicationGroup definitions.
  */
-model ApplicationList is Azure.Core.Page<Application>;
+model ApplicationGroupList is Azure.Core.Page<ApplicationGroup>;
+
+/**
+ * List of StartMenuItem definitions.
+ */
+model StartMenuItemList is Azure.Core.Page<StartMenuItem>;
+
+/**
+ * Represents a StartMenuItem definition.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model StartMenuItem extends Resource {
+  /**
+   * Detailed properties for StartMenuItem
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: StartMenuItemProperties;
+}
+
+/**
+ * Schema for StartMenuItem properties.
+ */
+model StartMenuItemProperties {
+  /**
+   * Alias of StartMenuItem.
+   */
+  appAlias?: string;
+
+  /**
+   * Path to the file of StartMenuItem.
+   */
+  filePath?: string;
+
+  /**
+   * Command line arguments for StartMenuItem.
+   */
+  commandLineArguments?: string;
+
+  /**
+   * Path to the icon.
+   */
+  iconPath?: string;
+
+  /**
+   * Index of the icon.
+   */
+  iconIndex?: int32;
+}
 
 /**
  * Schema for Application properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by our service"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model ApplicationProperties {
   /**
    * ObjectId of Application. (internal use)
@@ -2836,8 +2340,16 @@ model ApplicationProperties {
  */
 model ApplicationPatch {
   /**
+   * tags to be updated
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
    * Detailed properties for Application
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApplicationPatchProperties;
 }
 
@@ -2902,24 +2414,14 @@ model ApplicationPatchProperties {
 }
 
 /**
- * List of SessionHostManagement definitions.
+ * List of Application definitions.
  */
-model SessionHostManagementList is Azure.Core.Page<SessionHostManagement>;
-
-/**
- * List of SessionHostConfiguration definitions.
- */
-model SessionHostConfigurationList is Azure.Core.Page<SessionHostConfiguration>;
-
-/**
- * List of Desktop definitions.
- */
-model DesktopList is Azure.Core.Page<Desktop>;
+model ApplicationList is Azure.Core.Page<Application>;
 
 /**
  * Schema for Desktop properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by our service"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model DesktopProperties {
   /**
    * ObjectId of Desktop. (internal use)
@@ -2951,33 +2453,20 @@ model DesktopProperties {
 }
 
 /**
- * SessionHostManagement properties that can be patched.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model SessionHostManagementPatch {
-  /**
-   * Detailed properties for SessionHostManagement
-   */
-  properties?: SessionHostManagementPatchProperties;
-}
-
-/**
- * SessionHostConfiguration properties that can be patched.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model SessionHostConfigurationPatch {
-  /**
-   * Detailed properties for SessionHostConfiguration
-   */
-  properties?: SessionHostConfigurationPatchProperties;
-}
-/**
  * Desktop properties that can be patched.
  */
 model DesktopPatch {
   /**
+   * tags to be updated
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
    * Detailed properties for Desktop
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DesktopPatchProperties;
 }
 
@@ -2997,101 +2486,244 @@ model DesktopPatchProperties {
 }
 
 /**
- * List of StartMenuItem definitions.
+ * List of Desktop definitions.
  */
-model StartMenuItemList is Azure.Core.Page<StartMenuItem>;
+model DesktopList is Azure.Core.Page<Desktop>;
 
 /**
- * Represents a StartMenuItem definition.
+ * Properties of HostPool.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model StartMenuItem extends Azure.ResourceManager.CommonTypes.Resource {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model HostPoolProperties {
   /**
-   * Detailed properties for StartMenuItem
+   * ObjectId of HostPool. (internal use)
    */
-  properties?: StartMenuItemProperties;
+  @visibility(Lifecycle.Read)
+  objectId?: string;
+
+  /**
+   * Friendly name of HostPool.
+   */
+  friendlyName?: string;
+
+  /**
+   * Description of HostPool.
+   */
+  description?: string;
+
+  /**
+   * HostPool type for desktop.
+   */
+  hostPoolType: HostPoolType;
+
+  /**
+   * PersonalDesktopAssignment type for HostPool.
+   */
+  personalDesktopAssignmentType?: PersonalDesktopAssignmentType;
+
+  /**
+   * Custom rdp property of HostPool.
+   */
+  customRdpProperty?: string;
+
+  /**
+   * The max session limit of HostPool.
+   */
+  maxSessionLimit?: int32;
+
+  /**
+   * The type of the load balancer.
+   */
+  loadBalancerType: LoadBalancerType;
+
+  /**
+   * The ring number of HostPool.
+   */
+  ring?: int32;
+
+  /**
+   * Is validation environment.
+   */
+  validationEnvironment?: boolean;
+
+  /**
+   * The registration info of HostPool. This is not returned on GET. In order to get the registration token use the retrieveRegistrationToken or listRegistrationTokens POST calls.
+   */
+  registrationInfo?: RegistrationInfo;
+
+  /**
+   * VM template for sessionhosts configuration within hostpool.
+   */
+  vmTemplate?: string;
+
+  /**
+   * The type of management for this hostpool, Automated or Standard. The default value is Automated.
+   */
+  managementType?: ManagementType;
+
+  /**
+   * List of applicationGroup links.
+   */
+  @visibility(Lifecycle.Read)
+  applicationGroupReferences?: string[];
+
+  /**
+   * List of App Attach Package links.
+   */
+  @visibility(Lifecycle.Read)
+  appAttachPackageReferences?: string[];
+
+  /**
+   * URL to customer ADFS server for signing WVD SSO certificates.
+   */
+  ssoadfsAuthority?: string;
+
+  /**
+   * ClientId for the registered Relying Party used to issue WVD SSO certificates.
+   */
+  ssoClientId?: string;
+
+  /**
+   * Path to Azure KeyVault storing the secret used for communication to ADFS.
+   */
+  ssoClientSecretKeyVaultPath?: string;
+
+  /**
+   * The type of single sign on Secret Type.
+   */
+  ssoSecretType?: SSOSecretType;
+
+  /**
+   * The type of preferred application group type, default to Desktop Application Group
+   */
+  preferredAppGroupType: PreferredAppGroupType;
+
+  /**
+   * The flag to turn on/off StartVMOnConnect feature.
+   */
+  startVMOnConnect?: boolean;
+
+  /**
+   * Is cloud pc resource.
+   */
+  @visibility(Lifecycle.Read)
+  cloudPcResource?: boolean;
+
+  /**
+   * Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints
+   */
+  publicNetworkAccess?: HostpoolPublicNetworkAccess;
+
+  /**
+   * The session host configuration for updating agent, monitoring agent, and stack component.
+   */
+  agentUpdate?: AgentUpdateProperties;
+
+  /**
+   * List of private endpoint connection associated with the specified resource
+   */
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   */
+  managedPrivateUDP?: ManagedPrivateUDP;
+
+  /**
+   * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   */
+  directUDP?: DirectUDP;
+
+  /**
+   * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   */
+  publicUDP?: PublicUDP;
+
+  /**
+   * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
+   */
+  relayUDP?: RelayUDP;
 }
 
 /**
- * Schema for StartMenuItem properties.
+ * Represents a RegistrationInfo definition.  This is not returned on HostPool GET. In order to get the registration token use the retrieveRegistrationToken or listRegistrationTokens POST calls.
  */
-model StartMenuItemProperties {
+model RegistrationInfo {
   /**
-   * Alias of StartMenuItem.
+   * Expiration time of registration token.
    */
-  appAlias?: string;
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expirationTime?: utcDateTime;
 
   /**
-   * Path to the file of StartMenuItem.
+   * The registration token base64 encoded string.
    */
-  filePath?: string;
+  token?: string;
 
   /**
-   * Command line arguments for StartMenuItem.
+   * The type of resetting the token.
    */
-  commandLineArguments?: string;
-
-  /**
-   * Path to the icon.
-   */
-  iconPath?: string;
-
-  /**
-   * Index of the icon.
-   */
-  iconIndex?: int32;
+  registrationTokenOperation?: RegistrationTokenOperation;
 }
 
 /**
- * Object containing the definition for properties to be used for a sessionHostUpdate operation.
+ * The session host configuration for updating agent, monitoring agent, and stack component.
  */
-model UpdateSessionHostsRequestBody {
+model AgentUpdateProperties {
   /**
-   * The timestamp that the update validation is scheduled for. If none is provided, the update will be executed immediately
+   * The type of maintenance for session host components.
    */
-  scheduledDateTime?: utcDateTime;
+  type?: SessionHostComponentUpdateType;
 
   /**
-   * The timeZone as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid.
+   * Whether to use localTime of the virtual machine.
    */
-  scheduledDateTimeZone?: string;
+  useSessionHostLocalTime?: boolean;
 
   /**
-   * settings for management information for the hostpool update operation. If none is provided the update will use the settings saved in the sessionHostManagement object.
+   * Time zone for maintenance as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0. Must be set if useLocalTime is true.
    */
-  update?: HostPoolUpdateConfigurationPatchProperties;
+  maintenanceWindowTimeZone?: string;
+
+  /**
+   * List of maintenance windows. Maintenance windows are 2 hours long.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  maintenanceWindows?: MaintenanceWindowProperties[];
 }
 
 /**
- * Object containing control action for hostpool update.
+ * Maintenance window starting hour and day of week.
  */
-model HostPoolUpdateControlParameter {
+model MaintenanceWindowProperties {
   /**
-   * Action types for controlling hostpool update.
+   * The update start hour of the day. (0 - 23)
    */
-  action: HostPoolUpdateAction;
+  hour?: int32;
 
   /**
-   * The cancel message sent to the user on the session host. This is can only be specified if the action is 'Cancel'.
+   * Day of the week.
    */
-  @maxLength(260)
-  cancelMessage?: string;
+  dayOfWeek?: DayOfWeek;
 }
+
 /**
  * HostPool properties that can be patched.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model HostPoolPatch extends Azure.ResourceManager.CommonTypes.Resource {
+model HostPoolPatch extends Resource {
   /**
    * tags to be updated
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags are a valid record"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 
   /**
    * HostPool properties that can be patched.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: HostPoolPatchProperties;
 }
 
@@ -3140,7 +2772,7 @@ model HostPoolPatchProperties {
   validationEnvironment?: boolean;
 
   /**
-   * The registration info of HostPool.
+   * The registration info of HostPool.  This is not returned on GET. In order to get the registration token use the retrieveRegistrationToken or listRegistrationTokens POST calls.
    */
   registrationInfo?: RegistrationInfoPatch;
 
@@ -3177,7 +2809,6 @@ model HostPoolPatchProperties {
   /**
    * The flag to turn on/off StartVMOnConnect feature.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a valid acronym"
   startVMOnConnect?: boolean;
 
   /**
@@ -3193,35 +2824,32 @@ model HostPoolPatchProperties {
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   managedPrivateUDP?: ManagedPrivateUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   directUDP?: DirectUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   publicUDP?: PublicUDP;
 
   /**
    * Default: AVD-wide settings are used to determine connection availability, Enabled: UDP will attempt this connection type when making connections. This means that this connection is possible, but is not guaranteed, as there are other factors that may prevent this connection type, Disabled: UDP will not attempt this connection type when making connections
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "UDP is a valid acronym"
   relayUDP?: RelayUDP;
 }
 
 /**
- * Represents a RegistrationInfo definition.
+ * Represents a RegistrationInfo definition.  This is not returned on HostPool GET. In order to get the registration token use the retrieveRegistrationToken or listRegistrationTokens POST calls.
  */
 model RegistrationInfoPatch {
   /**
    * Expiration time of registration token.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expirationTime?: utcDateTime;
 
   /**
@@ -3272,39 +2900,1514 @@ model MaintenanceWindowPatchProperties {
 }
 
 /**
- * Represents URI referring to MSIX Image
+ * List of HostPool definitions.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "URI is a valid acronym"
-model MSIXImageURI {
+model HostPoolList is Azure.Core.Page<HostPool>;
+
+/**
+ * Session host Managements of HostPool.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model SessionHostManagementProperties {
+  /**
+   * Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true.
+   */
+  scheduledDateTimeZone: string;
+
+  /**
+   * Parameters for a hostpool update.
+   */
+  update: HostPoolUpdateConfigurationProperties;
+}
+
+/**
+ * The configurations of a hostpool update.
+ */
+model HostPoolUpdateConfigurationProperties {
+  /**
+   * Whether not to save original disk. False by default.
+   */
+  deleteOriginalVm?: boolean;
+
+  /**
+   * The maximum number of virtual machines to be removed during hostpool update.
+   */
+  @minValue(1)
+  maxVmsRemoved: int32;
+
+  /**
+   * Grace period before logging off users in minutes.
+   */
+  logOffDelayMinutes: int32;
+
+  /**
+   * Log off message sent to user for logoff. Default value is an empty string.
+   */
+  @maxLength(260)
+  logOffMessage?: string = "";
+}
+
+/**
+ * Represents a SessionHostManagementPatch definition.
+ */
+model SessionHostManagementPatch {
+  /**
+   * Detailed properties for SessionHostManagementPatch
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SessionHostManagementPatchProperties;
+}
+
+/**
+ * Session host Managements of HostPool.
+ */
+model SessionHostManagementPatchProperties {
+  /**
+   * Time zone for sessionHostManagement operations as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid. Must be set if useLocalTime is true.
+   */
+  scheduledDateTimeZone?: string;
+
+  /**
+   * Parameters for a hostpool update.
+   */
+  update?: HostPoolUpdateConfigurationPatchProperties;
+}
+
+/**
+ * The configurations of a hostpool update.
+ */
+model HostPoolUpdateConfigurationPatchProperties {
+  /**
+   * Whether not to save original disk. False by default.
+   */
+  deleteOriginalVm?: boolean;
+
+  /**
+   * The maximum number of virtual machines to be removed during hostpool update.
+   */
+  @minValue(1)
+  maxVmsRemoved?: int32;
+
+  /**
+   * Grace period before logging off users in minutes.
+   */
+  logOffDelayMinutes?: int32;
+
+  /**
+   * Log off message sent to user for logoff.
+   */
+  @maxLength(260)
+  logOffMessage?: string;
+}
+
+/**
+ * List of SessionHostManagement definitions.
+ */
+model SessionHostManagementList is Azure.Core.Page<SessionHostManagement>;
+
+/**
+ * Object containing the definition for properties to be used for a sessionHostUpdate operation.
+ */
+model UpdateSessionHostsRequestBody {
+  /**
+   * The timestamp that the update validation is scheduled for. If none is provided, the update will be executed immediately
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledDateTime?: utcDateTime;
+
+  /**
+   * The timeZone as defined in https://docs.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid.
+   */
+  scheduledDateTimeZone?: string;
+
+  /**
+   * settings for management information for the hostpool update operation. If none is provided the update will use the settings saved in the sessionHostManagement object.
+   */
+  update?: HostPoolUpdateConfigurationPatchProperties;
+}
+
+/**
+ * Represents properties for a hostpool update control request.
+ */
+model HostPoolUpdateControlParameter {
+  /**
+   * Action types for controlling hostpool update.
+   */
+  action: HostPoolUpdateAction;
+
+  /**
+   * The cancel message sent to the user on the session host. This is can only be specified if the action is 'Cancel'.
+   */
+  @maxLength(260)
+  cancelMessage?: string;
+}
+
+/**
+ * The current status of the session host update async operation.
+ */
+model SessionHostManagementUpdateStatus {
+  /**
+   * Fully qualified ID for the async operation.
+   */
+  id?: string;
+
+  /**
+   * Name of the async operation.
+   */
+  name?: string;
+
+  /**
+   * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
+   */
+  status: string;
+
+  /**
+   * Percent of the operation that is complete.
+   */
+  @maxValue(100)
+  percentComplete?: float32;
+
+  /**
+   * The start time of the operation.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
+
+  /**
+   * The end time of the operation.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
+
+  /**
+   * If present, details of the operation error.
+   */
+  error?: ErrorDetail;
+
+  /**
+   * The custom properties of the SessionHost Update Status.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SessionHostManagementUpdateStatusProperties;
+}
+
+/**
+ * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
+ */
+model SessionHostManagementUpdateStatusProperties {
+  /**
+   * The Log Analytics.
+   */
+  correlationId?: string;
+
+  /**
+   * Progress information on the sessionHostManagement operation.
+   */
+  progress?: SessionHostManagementOperationProgress;
+
+  /**
+   * The timestamp that the update is scheduled for.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  scheduledDateTime?: utcDateTime;
+
+  /**
+   * SessionHostManagement properties used for the operation.
+   */
+  sessionHostManagement?: SessionHostManagement;
+}
+
+/**
+ * SessionHostManagement Operation Progress information.
+ */
+model SessionHostManagementOperationProgress {
+  /**
+   * Time that the sessionHostManagement operation was created.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  executionStartTime?: utcDateTime;
+
+  /**
+   * The number of sessionHosts to be started in the sessionHostManagement operation.
+   */
+  totalSessionHosts?: int32;
+
+  /**
+   * The number of sessionHosts in progress in the sessionHostManagement operation.
+   */
+  sessionHostsInProgress?: int32;
+
+  /**
+   * The number of sessionHosts completed in the sessionHostManagement operation.
+   */
+  sessionHostsCompleted?: int32;
+
+  /**
+   * The number of sessionHosts rollback failed in the sessionHostManagement operation.
+   */
+  sessionHostsRollbackFailed?: int32;
+}
+
+/**
+ * Session host configurations of HostPool.
+ */
+model SessionHostConfigurationProperties {
+  /**
+   * The timestamp of the last update.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  version?: utcDateTime;
+
+  /**
+   * Friendly name to describe this version of the SessionHostConfiguration.
+   */
+  @maxLength(260)
+  friendlyName?: string;
+
+  /**
+   * Provisioning state of the Session Host Configuration.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateSHC;
+
+  /**
+   * Hashtable that lists key/value pair tags to apply to the VMs
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  vmTags?: Record<string>;
+
+  /**
+   * The Location for the session host to be created in. It will default to the location of the hostpool if not provided.
+   */
+  vmLocation?: string;
+
+  /**
+   * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
+   */
+  vmResourceGroup?: string;
+
+  /**
+   * The prefix that should be associated with session host names
+   */
+  @maxLength(11)
+  vmNamePrefix: string;
+
+  /**
+   * Value for availability zones to be used by the session host. Should be from [1,2,3].
+   */
+  availabilityZones?: int32[];
+
+  /**
+   * Network information.
+   */
+  networkInfo: NetworkInfoProperties;
+
+  /**
+   * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
+   */
+  vmSizeId: string;
+
+  /**
+   * Disk information.
+   */
+  diskInfo: DiskInfoProperties;
+
+  /**
+   * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
+   */
+  customConfigurationScriptUrl?: url;
+
+  /**
+   * Image configurations of HostPool.
+   */
+  imageInfo: ImageInfoProperties;
+
+  /**
+   * Domain configurations of session hosts.
+   */
+  domainInfo: DomainInfoProperties;
+
+  /**
+   * Security information.
+   */
+  securityInfo?: SecurityInfoProperties;
+
+  /**
+   * Local Admin credentials for session hosts.
+   */
+  vmAdminCredentials: KeyVaultCredentialsProperties;
+
+  /**
+   * Boot Diagnostics information.
+   */
+  bootDiagnosticsInfo?: BootDiagnosticsInfoProperties;
+}
+
+/**
+ * Network information.
+ */
+model NetworkInfoProperties {
+  /**
+   * The resource ID of the subnet.
+   */
+  subnetId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
+   */
+  securityGroupId?: string;
+}
+
+/**
+ * Disk information.
+ */
+model DiskInfoProperties {
+  /**
+   * The disk type used by virtual machine in hostpool session host.
+   */
+  type: VirtualMachineDiskType;
+}
+
+/**
+ * Image configurations of session host in a HostPool.
+ */
+model ImageInfoProperties {
+  /**
+   * The type of image session hosts use in the hostpool.
+   */
+  type: Type;
+
+  /**
+   * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
+   */
+  marketplaceInfo?: MarketplaceInfoProperties;
+
+  /**
+   * The values to uniquely identify a custom image. Only one should be populated based on the image type.
+   */
+  customInfo?: CustomInfoProperties;
+}
+
+/**
+ * Marketplace image information.
+ */
+model MarketplaceInfoProperties {
+  /**
+   * The offer of the image.
+   */
+  offer: string;
+
+  /**
+   * The publisher of the image.
+   */
+  publisher: string;
+
+  /**
+   * The sku of the image.
+   */
+  sku: string;
+
+  /**
+   * The exact version of the image.
+   */
+  exactVersion: string;
+}
+
+/**
+ * Custom image information.
+ */
+model CustomInfoProperties {
+  /**
+   * The resource id of the custom image.
+   */
+  resourceId: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * Domain configurations of session hosts.
+ */
+model DomainInfoProperties {
+  /**
+   * The type of domain join done by the virtual machine.
+   */
+  joinType: DomainJoinType;
+
+  /**
+   * Active directory info. Only one should be populated based on the join type.
+   */
+  activeDirectoryInfo?: ActiveDirectoryInfoProperties;
+
+  /**
+   * Azure active directory info. Only one should be populated based on the join type.
+   */
+  azureActiveDirectoryInfo?: AzureActiveDirectoryInfoProperties;
+}
+
+/**
+ * Active directory info. Only one should be populated based on the join type.
+ */
+model ActiveDirectoryInfoProperties {
+  /**
+   * Credentials needed to create the virtual machine.
+   */
+  domainCredentials: KeyVaultCredentialsProperties;
+
+  /**
+   * The organizational unit(OU) path.
+   */
+  ouPath: string;
+
+  /**
+   * The domain a virtual machine connected to a hostpool will join.
+   */
+  domainName?: string;
+}
+
+/**
+ * Credentials kept in the keyvault.
+ */
+model KeyVaultCredentialsProperties {
+  /**
+   * The uri to access the secret that the username is stored in.
+   */
+  usernameKeyVaultSecretUri: url;
+
+  /**
+   * The uri to access the secret that the password is stored in.
+   */
+  passwordKeyVaultSecretUri: url;
+}
+
+/**
+ * Azure Active directory info. Only one should be populated based on the join type.
+ */
+model AzureActiveDirectoryInfoProperties {
+  /**
+   * The Mobile Device Management(MDM) guid.
+   */
+  mdmProviderGuid: string;
+}
+
+/**
+ * Security information.
+ */
+model SecurityInfoProperties {
+  /**
+   * The security type used by virtual machine in hostpool session host. Default is Standard.
+   */
+  type?: VirtualMachineSecurityType;
+
+  /**
+   * Whether to use secureBoot on the virtual machine.
+   */
+  secureBootEnabled?: boolean;
+
+  /**
+   * Whether to use vTPM on the virtual machine.
+   */
+  vTpmEnabled?: boolean;
+}
+
+/**
+ * Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor.
+ */
+model BootDiagnosticsInfoProperties {
+  /**
+   * Whether boot diagnostics should be enabled on the Virtual Machine.
+   */
+  enabled?: boolean;
+
+  /**
+   * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
+   */
+  storageUri?: url;
+}
+
+/**
+ * Represents a SessionHostConfigurationPatch definition.
+ */
+model SessionHostConfigurationPatch {
+  /**
+   * Detailed properties for SessionHostConfigurationPatch
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SessionHostConfigurationPatchProperties;
+}
+
+/**
+ * Session host configurations of HostPool.
+ */
+model SessionHostConfigurationPatchProperties {
+  /**
+   * Friendly name to describe this version of the SessionHostConfiguration.
+   */
+  @maxLength(260)
+  friendlyName?: string;
+
+  /**
+   * Hashtable that lists key/value pair tags to apply to the VMs
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  vmTags?: Record<string>;
+
+  /**
+   * The Location for the session host to be created in
+   */
+  vmLocation?: string;
+
+  /**
+   * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
+   */
+  vmResourceGroup?: string;
+
+  /**
+   * The prefix that should be associated with session host names
+   */
+  @maxLength(11)
+  vmNamePrefix?: string;
+
+  /**
+   * Value for availability zones to be used by the session host. Should be from [1,2,3].
+   */
+  availabilityZones?: int32[];
+
+  /**
+   * Network information.
+   */
+  networkInfo?: NetworkInfoPatchProperties;
+
+  /**
+   * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
+   */
+  vmSizeId?: string;
+
+  /**
+   * Disk information.
+   */
+  diskInfo?: DiskInfoPatchProperties;
+
+  /**
+   * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
+   */
+  customConfigurationScriptUrl?: url;
+
+  /**
+   * Image configurations of HostPool.
+   */
+  imageInfo?: ImageInfoPatchProperties;
+
+  /**
+   * Domain configurations of session hosts.
+   */
+  domainInfo?: DomainInfoPatchProperties;
+
+  /**
+   * Security information.
+   */
+  securityInfo?: SecurityInfoPatchProperties;
+
+  /**
+   * Local Admin credentials for session hosts.
+   */
+  vmAdminCredentials?: KeyVaultCredentialsPatchProperties;
+
+  /**
+   * Boot Diagnostics information.
+   */
+  bootDiagnosticsInfo?: BootDiagnosticsInfoPatchProperties;
+}
+
+/**
+ * Network information.
+ */
+model NetworkInfoPatchProperties {
+  /**
+   * The resource ID of the subnet.
+   */
+  subnetId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The resource ID of the security group. Any allowable/open ports should be specified in the Network Security Group(NSG).
+   */
+  securityGroupId?: string;
+}
+
+/**
+ * Disk information.
+ */
+model DiskInfoPatchProperties {
+  /**
+   * The disk type used by virtual machine in hostpool session host.
+   */
+  type?: VirtualMachineDiskType;
+}
+
+/**
+ * Image configurations of session host in a HostPool.
+ */
+model ImageInfoPatchProperties {
+  /**
+   * The type of image session hosts use in the hostpool.
+   */
+  type?: Type;
+
+  /**
+   * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
+   */
+  marketplaceInfo?: MarketplaceInfoPatchProperties;
+
+  /**
+   * The values to uniquely identify a custom image. Only one should be populated based on the image type.
+   */
+  customInfo?: CustomInfoPatchProperties;
+}
+
+/**
+ * Marketplace image information.
+ */
+model MarketplaceInfoPatchProperties {
+  /**
+   * The offer of the image.
+   */
+  offer?: string;
+
+  /**
+   * The publisher of the image.
+   */
+  publisher?: string;
+
+  /**
+   * The sku of the image.
+   */
+  sku?: string;
+
+  /**
+   * The exact version of the image.
+   */
+  exactVersion?: string;
+}
+
+/**
+ * Custom image information.
+ */
+model CustomInfoPatchProperties {
+  /**
+   * The resource id of the custom image.
+   */
+  resourceId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * Domain configurations of session hosts.
+ */
+model DomainInfoPatchProperties {
+  /**
+   * Active directory info. Only one should be populated based on the join type.
+   */
+  activeDirectoryInfo?: ActiveDirectoryInfoPatchProperties;
+}
+
+/**
+ * Active directory info. Only one should be populated based on the join type.
+ */
+model ActiveDirectoryInfoPatchProperties {
+  /**
+   * Credentials needed to create the virtual machine.
+   */
+  domainCredentials?: KeyVaultCredentialsPatchProperties;
+}
+
+/**
+ * Credentials kept in the keyvault.
+ */
+model KeyVaultCredentialsPatchProperties {
+  /**
+   * The uri to access the secret that the username is stored in.
+   */
+  usernameKeyVaultSecretUri?: url;
+
+  /**
+   * The uri to access the secret that the password is stored in.
+   */
+  passwordKeyVaultSecretUri?: url;
+}
+
+/**
+ * Security information.
+ */
+model SecurityInfoPatchProperties {
+  /**
+   * The security type used by virtual machine in hostpool session host.
+   */
+  type?: VirtualMachineSecurityType;
+
+  /**
+   * Whether to use secureBoot on the virtual machine.
+   */
+  secureBootEnabled?: boolean;
+
+  /**
+   * Whether to use vTPM on the virtual machine.
+   */
+  vTpmEnabled?: boolean;
+}
+
+/**
+ * Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor.
+ */
+model BootDiagnosticsInfoPatchProperties {
+  /**
+   * Whether boot diagnostics should be enabled on the Virtual Machine.
+   */
+  enabled?: boolean;
+
+  /**
+   * Uri of the storage account to use for placing the console output and screenshot. <br><br>If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
+   */
+  storageUri?: string;
+}
+
+/**
+ * List of SessionHostConfiguration definitions.
+ */
+model SessionHostConfigurationList is Azure.Core.Page<SessionHostConfiguration>;
+
+/**
+ * Session host configurations of HostPool.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model ActiveSessionHostConfigurationProperties {
+  /**
+   * The timestamp of the last update.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  version?: utcDateTime;
+
+  /**
+   * Friendly name to describe this version of the SessionHostConfiguration.
+   */
+  @maxLength(260)
+  friendlyName?: string;
+
+  /**
+   * Hashtable that lists key/value pair tags to apply to the VMs
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  vmTags?: Record<string>;
+
+  /**
+   * The Location for the session host to be created in. It will default to the location of the hostpool if not provided.
+   */
+  vmLocation?: string;
+
+  /**
+   * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
+   */
+  vmResourceGroup?: string;
+
+  /**
+   * The prefix that should be associated with session host names
+   */
+  @maxLength(11)
+  vmNamePrefix: string;
+
+  /**
+   * Value for availability zones to be used by the session host. Should be from [1,2,3].
+   */
+  availabilityZones?: int32[];
+
+  /**
+   * Network information.
+   */
+  networkInfo: NetworkInfoProperties;
+
+  /**
+   * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
+   */
+  vmSizeId: string;
+
+  /**
+   * Disk information.
+   */
+  diskInfo: DiskInfoProperties;
+
+  /**
+   * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
+   */
+  customConfigurationScriptUrl?: url;
+
+  /**
+   * Image configurations of HostPool.
+   */
+  imageInfo: ImageInfoProperties;
+
+  /**
+   * Domain configurations of session hosts.
+   */
+  domainInfo: DomainInfoProperties;
+
+  /**
+   * Security information.
+   */
+  securityInfo?: SecurityInfoProperties;
+
+  /**
+   * Local Admin credentials for session hosts.
+   */
+  vmAdminCredentials: KeyVaultCredentialsProperties;
+
+  /**
+   * Boot Diagnostics information.
+   */
+  bootDiagnosticsInfo?: BootDiagnosticsInfoProperties;
+}
+
+/**
+ * List of ActiveSessionHostConfiguration definitions.
+ */
+model ActiveSessionHostConfigurationList
+  is Azure.Core.Page<ActiveSessionHostConfiguration>;
+
+/**
+ * List of RegistrationToken definitions.
+ */
+model RegistrationTokenList {
+  /**
+   * List of RegistrationToken definitions.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  value?: RegistrationTokenMinimal[];
+
+  /**
+   * Link to the next page of results.
+   */
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Represents a Minimal set of properties for RegistrationToken definition.
+ */
+model RegistrationTokenMinimal {
+  /**
+   * Expiration time of registration token.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expirationTime?: utcDateTime;
+
+  /**
+   * The registration token base64 encoded string.
+   */
+  token?: string;
+}
+
+/**
+ * List of UserSession definitions.
+ */
+model UserSessionList is Azure.Core.Page<UserSession>;
+
+/**
+ * Schema for UserSession properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model UserSessionProperties {
+  /**
+   * ObjectId of user session. (internal use)
+   */
+  @visibility(Lifecycle.Read)
+  objectId?: string;
+
+  /**
+   * The user principal name.
+   */
+  userPrincipalName?: string;
+
+  /**
+   * Application type of application.
+   */
+  applicationType?: ApplicationType;
+
+  /**
+   * State of user session.
+   */
+  sessionState?: SessionState;
+
+  /**
+   * The active directory user name.
+   */
+  activeDirectoryUserName?: string;
+
+  /**
+   * The timestamp of the user session create.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createTime?: utcDateTime;
+}
+
+/**
+ * Schema for SessionHost properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model SessionHostProperties {
+  /**
+   * Number of active sessions on SessionHost.
+   */
+  activeSessions?: int32;
+
+  /**
+   * Number of disconnected sessions on SessionHost.
+   */
+  disconnectedSessions?: int32;
+
+  /**
+   * Number of pending sessions on SessionHost.
+   */
+  pendingSessions?: int32;
+
+  /**
+   * ObjectId of SessionHost. (internal use)
+   */
+  @visibility(Lifecycle.Read)
+  objectId?: string;
+
+  /**
+   * Last heart beat from SessionHost.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastHeartBeat?: utcDateTime;
+
+  /**
+   * Number of sessions on SessionHost.
+   */
+  sessions?: int32;
+
+  /**
+   * Version of agent on SessionHost.
+   */
+  agentVersion?: string;
+
+  /**
+   * Allow a new session.
+   */
+  allowNewSession?: boolean;
+
+  /**
+   * Virtual Machine Id of SessionHost's underlying virtual machine.
+   */
+  @visibility(Lifecycle.Read)
+  virtualMachineId?: string;
+
+  /**
+   * Resource Id of SessionHost's underlying virtual machine.
+   */
+  @visibility(Lifecycle.Read)
+  resourceId?: string;
+
+  /**
+   * User assigned to SessionHost.
+   */
+  assignedUser?: string;
+
+  /**
+   * Friendly name of SessionHost
+   */
+  friendlyName?: string;
+
+  /**
+   * Status for a SessionHost.
+   */
+  status?: Status;
+
+  /**
+   * The timestamp of the status.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  statusTimestamp?: utcDateTime;
+
+  /**
+   * The version of the OS on the session host.
+   */
+  osVersion?: string;
+
+  /**
+   * The version of the side by side stack on the session host.
+   */
+  sxSStackVersion?: string;
+
+  /**
+   * Update state of a SessionHost.
+   */
+  updateState?: UpdateState;
+
+  /**
+   * The timestamp of the last update.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdateTime?: utcDateTime;
+
+  /**
+   * The error message.
+   */
+  updateErrorMessage?: string;
+
+  /**
+   * The last time update was completed.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastSessionHostUpdateTime?: utcDateTime;
+
+  /**
+   * SessionHostConfiguration version reference at the time the update is initiated, in the format of date time. Example: 2024-04-26T04:56:45Z
+   */
+  @visibility(Lifecycle.Read)
+  sessionHostConfiguration?: string;
+
+  /**
+   * List of SessionHostHealthCheckReports
+   */
+  @visibility(Lifecycle.Read)
+  sessionHostHealthCheckResults?: SessionHostHealthCheckReport[];
+}
+
+/**
+ * The report for session host information.
+ */
+model SessionHostHealthCheckReport {
+  /**
+   * Represents the name of the health check operation performed.
+   */
+  @visibility(Lifecycle.Read)
+  healthCheckName?: HealthCheckName;
+
+  /**
+   * Represents the Health state of the health check we performed.
+   */
+  @visibility(Lifecycle.Read)
+  healthCheckResult?: HealthCheckResult;
+
+  /**
+   * Additional detailed information on the failure.
+   */
+  @visibility(Lifecycle.Read)
+  additionalFailureDetails?: SessionHostHealthCheckFailureDetails;
+}
+
+/**
+ * Contains details on the failure.
+ */
+model SessionHostHealthCheckFailureDetails {
+  /**
+   * Failure message: hints on what is wrong and how to recover.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * Error code corresponding for the failure.
+   */
+  @visibility(Lifecycle.Read)
+  errorCode?: int32;
+
+  /**
+   * The timestamp of the last update.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastHealthCheckDateTime?: utcDateTime;
+}
+
+/**
+ * SessionHost properties that can be patched.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model SessionHostPatch extends Resource {
+  /**
+   * Detailed properties for SessionHost
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: SessionHostPatchProperties;
+}
+
+/**
+ * SessionHost properties that can be patched.
+ */
+model SessionHostPatchProperties {
+  /**
+   * Allow a new session.
+   */
+  allowNewSession?: boolean;
+
+  /**
+   * User assigned to SessionHost.
+   */
+  assignedUser?: string;
+
+  /**
+   * Friendly name of SessionHost
+   */
+  friendlyName?: string;
+}
+
+/**
+ * List of SessionHost definitions.
+ */
+model SessionHostList is Azure.Core.Page<SessionHost>;
+
+/**
+ * Schema for MSIX Package properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model MsixPackageProperties {
+  /**
+   * VHD/CIM image path on Network Share.
+   */
+  imagePath?: string;
+
+  /**
+   * Package Name from appxmanifest.xml.
+   */
+  packageName?: string;
+
+  /**
+   * Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name.
+   */
+  packageFamilyName?: string;
+
+  /**
+   * User friendly Name to be displayed in the portal.
+   */
+  displayName?: string;
+
+  /**
+   * Relative Path to the package inside the image.
+   */
+  packageRelativePath?: string;
+
+  /**
+   * Specifies how to register Package in feed.
+   */
+  isRegularRegistration?: boolean;
+
+  /**
+   * Make this version of the package the active one across the hostpool.
+   */
+  isActive?: boolean;
+
+  /**
+   * List of package dependencies.
+   */
+  packageDependencies?: MsixPackageDependencies[];
+
+  /**
+   * Package Version found in the appxmanifest.xml.
+   */
+  version?: string;
+
+  /**
+   * Date Package was last updated, found in the appxmanifest.xml.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdated?: utcDateTime;
+
+  /**
+   * List of package applications.
+   */
+  packageApplications?: MsixPackageApplications[];
+}
+
+/**
+ * Schema for MSIX Package Dependencies properties.
+ */
+model MsixPackageDependencies {
+  /**
+   * Name of the package dependency. For Msix packages, this is the other packages this package depends upon, for APP-V packages this is the locations of the user and deployment config files
+   */
+  dependencyName?: string;
+
+  /**
+   * Name of dependency publisher.
+   */
+  publisher?: string;
+
+  /**
+   * Dependency version required.
+   */
+  minVersion?: string;
+}
+
+/**
+ * Schema for MSIX Package Application properties.
+ */
+model MsixPackageApplications {
+  /**
+   * Package Application Id, found in appxmanifest.xml.
+   */
+  appId?: string;
+
+  /**
+   * Description of Package Application.
+   */
+  description?: string;
+
+  /**
+   * Used to activate Package Application. Consists of Package Name and ApplicationID. Found in appxmanifest.xml.
+   */
+  appUserModelID?: string;
+
+  /**
+   * User friendly name.
+   */
+  friendlyName?: string;
+
+  /**
+   * User friendly name.
+   */
+  iconImageName?: string;
+
+  /**
+   * the icon a 64 bit string as a byte array.
+   */
+  rawIcon?: bytes;
+
+  /**
+   * the icon a 64 bit string as a byte array.
+   */
+  rawPng?: bytes;
+}
+
+/**
+ * MSIX Package properties that can be patched.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model MsixPackagePatch extends Resource {
+  /**
+   * Detailed properties for MSIX Package
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: MsixPackagePatchProperties;
+}
+
+/**
+ * MSIX Package properties that can be patched.
+ */
+model MsixPackagePatchProperties {
+  /**
+   * Set a version of the package to be active across hostpool.
+   */
+  isActive?: boolean;
+
+  /**
+   * Set Registration mode. Regular or Delayed.
+   */
+  isRegularRegistration?: boolean;
+
+  /**
+   * Display name for MSIX Package.
+   */
+  displayName?: string;
+}
+
+/**
+ * List of MSIX Package definitions.
+ */
+model MsixPackageList is Azure.Core.Page<MsixPackage>;
+
+/**
+ * Information to import app attach package
+ */
+model ImportPackageInfoRequest {
   /**
    * URI to Image
    */
-  uri?: url;
+  path?: string;
+
+  /**
+   * Possible device architectures that an app attach package can be configured for
+   */
+  packageArchitecture?: AppAttachPackageArchitectures;
+}
+
+/**
+ * List of App Attach Package definitions.
+ */
+model AppAttachPackageList is Azure.Core.Page<AppAttachPackage>;
+
+/**
+ * Schema for App Attach Package properties.
+ */
+model AppAttachPackageProperties {
+  /**
+   * The provisioning state of the App Attach Package.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Detailed properties for App Attach Package
+   */
+  image?: AppAttachPackageInfoProperties;
+
+  /**
+   * List of Hostpool resource Ids.
+   */
+  hostPoolReferences?: string[];
+
+  /**
+   * URL of keyvault location to store certificate
+   */
+  keyVaultURL?: string;
+
+  /**
+   * Parameter indicating how the health check should behave if this package fails staging
+   */
+  failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailure;
+
+  /**
+   * Specific name of package owner, is "AppAttach" for native app attach packages
+   */
+  packageOwnerName?: string;
+
+  /**
+   * Lookback url to third party control plane, is null for native app attach packages
+   */
+  packageLookbackUrl?: url;
+
+  /**
+   * Field that can be populated with custom data and filtered on in list GET calls
+   */
+  customData?: string;
+}
+
+/**
+ * Schema for Import Package Information properties.
+ */
+model AppAttachPackageInfoProperties {
+  /**
+   * Alias of App Attach Package. Assigned at import time
+   */
+  packageAlias?: string;
+
+  /**
+   * VHD/CIM/APP-V image path on Network Share.
+   */
+  imagePath?: string;
+
+  /**
+   * Package Name from appxmanifest.xml.
+   */
+  packageName?: string;
+
+  /**
+   * Identifier not including the package version, for Msix packages it is the family name from the appxmanifest.xml.
+   */
+  packageFamilyName?: string;
+
+  /**
+   * Identifier including the package version, for Msix packages it is the full name from the appxmanifest.xml.
+   */
+  packageFullName?: string;
+
+  /**
+   * User friendly Name to be displayed in the portal.
+   */
+  displayName?: string;
+
+  /**
+   * Relative Path to the package inside the image.
+   */
+  packageRelativePath?: string;
+
+  /**
+   * Specifies how to register Package in feed.
+   */
+  isRegularRegistration?: boolean;
+
+  /**
+   * Make this version of the package the active one across the hostpool.
+   */
+  isActive?: boolean;
+
+  /**
+   * List of package dependencies.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  packageDependencies?: MsixPackageDependencies[];
+
+  /**
+   * Package Version found in the appxmanifest.xml.
+   */
+  version?: string;
+
+  /**
+   * Date the package source was last updated, for Msix packages this is found in the appxmanifest.xml.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdated?: utcDateTime;
+
+  /**
+   * List of package applications.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  packageApplications?: MsixPackageApplications[];
+
+  /**
+   * Certificate name found in the appxmanifest.xml.
+   */
+  certificateName?: string;
+
+  /**
+   * Date certificate expires, found in the appxmanifest.xml.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  certificateExpiry?: utcDateTime;
+
+  /**
+   * Is package timestamped so it can ignore the certificate expiry date
+   */
+  isPackageTimestamped?: PackageTimestamped;
+}
+
+/**
+ * Represents URI referring to MSIX Image
+ */
+model MsixImageURI {
+  /**
+   * URI to Image
+   */
+  uri?: string;
 }
 
 /**
  * List of MSIX package properties retrieved from MSIX Image expansion.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
 model ExpandMsixImageList is Azure.Core.Page<ExpandMsixImage>;
 
 /**
  * Represents the definition of contents retrieved after expanding the MSIX Image.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model ExpandMsixImage extends Azure.ResourceManager.CommonTypes.Resource {
+model ExpandMsixImage extends Resource {
   /**
    * Detailed properties for ExpandMsixImage
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ExpandMsixImageProperties;
 }
 
 /**
  * Schema for Expand MSIX Image properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
 model ExpandMsixImageProperties {
   /**
    * Alias of MSIX Package.
@@ -3354,23 +4457,22 @@ model ExpandMsixImageProperties {
   /**
    * List of package dependencies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["dependencyName"])
   packageDependencies?: MsixPackageDependencies[];
 
   /**
-   * Package version found in the appxmanifest.xml.
+   * Package Version found in the appxmanifest.xml.
    */
   version?: string;
 
   /**
    * Date Package was last updated, found in the appxmanifest.xml.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated?: utcDateTime;
 
   /**
    * List of package applications.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["appId"])
   packageApplications?: MsixPackageApplications[];
 
   /**
@@ -3381,333 +4483,60 @@ model ExpandMsixImageProperties {
   /**
    * Date certificate expires, found in the appxmanifest.xml.
    */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   certificateExpiry?: utcDateTime;
 }
 
 /**
- * Information to import app attach package
- */
-model ImportPackageInfoRequest {
-  /**
-   * URI to Image
-   */
-  path?: string;
-
-  /**
-   * Possible device architectures that an app attach package can be configured for
-   */
-  packageArchitecture?: AppAttachPackageArchitectures;
-}
-
-/**
- * List of RegistrationToken definitions.
- */
-model RegistrationTokenList {
-  /**
-   * List of RegistrationToken definitions.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #[])
-  value?: RegistrationTokenMinimal[];
-
-  /**
-   * Link to the next page of results.
-   */
-  @visibility(Lifecycle.Read)
-  nextLink?: string;
-}
-
-/**
- * Represents a Minimal set of properties for RegistrationToken definition.
- */
-model RegistrationTokenMinimal {
-  /**
-   * Expiration time of registration token.
-   */
-  expirationTime?: utcDateTime;
-
-  /**
-   * The registration token base64 encoded string.
-   */
-  token?: string;
-}
-
-/**
- * List of private endpoint connection associated with the specified HostPool
- */
-model PrivateEndpointConnectionListResultWithSystemData
-  is Azure.Core.Page<PrivateEndpointConnectionWithSystemData>;
-
-/**
- * A list of private link resources
- */
-model PrivateLinkResourceListResult is Azure.Core.Page<PrivateLinkResource>;
-
-/**
- * A private link resource
+ * Schema for patchable App Attach Package properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
+model AppAttachPackagePatch extends Resource {
   /**
-   * Resource properties.
+   * tags to be updated
    */
-  properties?: PrivateLinkResourceProperties;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * Detailed properties for App Attach Package
+   */
+  properties?: AppAttachPackagePatchProperties;
 }
 
 /**
- * Properties of a private link resource.
+ * Schema for patchable fields on an App Attach Package.
  */
-model PrivateLinkResourceProperties {
+model AppAttachPackagePatchProperties {
   /**
-   * The private link resource group id.
+   * Detailed properties for App Attach Package
    */
-  @visibility(Lifecycle.Read)
-  groupId?: string;
-
-  /**
-   * The private link resource required member names.
-   */
-  @visibility(Lifecycle.Read)
-  requiredMembers?: string[];
+  image?: AppAttachPackageInfoProperties;
 
   /**
-   * The private link resource Private link DNS zone name.
+   * List of Hostpool resource Ids.
    */
-  requiredZoneNames?: string[];
-}
-
-/**
- * List of SessionHost definitions.
- */
-model SessionHostList is Azure.Core.Page<SessionHost>;
-
-/**
- * Schema for SessionHost properties.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model SessionHostProperties {
-  /**
-   * ObjectId of SessionHost. (internal use)
-   */
-  @visibility(Lifecycle.Read)
-  objectId?: string;
+  hostPoolReferences?: Azure.Core.armResourceIdentifier[];
 
   /**
-   * Last heart beat from SessionHost.
+   * URL of keyvault location to store certificate
    */
-  lastHeartBeat?: utcDateTime;
+  keyVaultURL?: string;
 
   /**
-   * Number of sessions on SessionHost.
+   * Parameter indicating how the health check should behave if this package fails staging
    */
-  sessions?: int32;
+  failHealthCheckOnStagingFailure?: FailHealthCheckOnStagingFailure;
 
   /**
-   * Version of agent on SessionHost.
+   * Lookback url to third party control plane, should be null for first party packages
    */
-  agentVersion?: string;
+  packageLookbackUrl?: url;
 
   /**
-   * Allow a new session.
+   * Field that can be populated with custom data and filtered on in list GET calls
    */
-  allowNewSession?: boolean;
-
-  /**
-   * Virtual Machine Id of SessionHost's underlying virtual machine.
-   */
-  @visibility(Lifecycle.Read)
-  virtualMachineId?: string;
-
-  /**
-   * Resource Id of SessionHost's underlying virtual machine.
-   */
-  @visibility(Lifecycle.Read)
-  resourceId?: string;
-
-  /**
-   * User assigned to SessionHost.
-   */
-  assignedUser?: string;
-
-  /**
-   * Friendly name of SessionHost
-   */
-  friendlyName?: string;
-
-  /**
-   * Status for a SessionHost.
-   */
-  status?: Status;
-
-  /**
-   * The timestamp of the status.
-   */
-  @visibility(Lifecycle.Read)
-  statusTimestamp?: utcDateTime;
-
-  /**
-   * The version of the OS on the session host.
-   */
-  osVersion?: string;
-
-  /**
-   * The version of the side by side stack on the session host.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "SxS is a valid acronym"
-  sxSStackVersion?: string;
-
-  /**
-   * Update state of a SessionHost.
-   */
-  updateState?: UpdateState;
-
-  /**
-   * The timestamp of the last update.
-   */
-  @visibility(Lifecycle.Read)
-  lastUpdateTime?: utcDateTime;
-
-  /**
-   * The error message.
-   */
-  updateErrorMessage?: string;
-
-  /**
-   * The last time update was completed.
-   */
-  @visibility(Lifecycle.Read)
-  lastSessionHostUpdateTime?: utcDateTime;
-
-  /**
-   * SessionHostConfiguration version reference at the time the update is initiated, in the format of date time. Example: 2024-04-26T04:56:45Z
-   */
-  @visibility(Lifecycle.Read)
-  sessionHostConfiguration?: string;
-
-  /**
-   * List of SessionHostHealthCheckReports
-   */
-  @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["healthCheckName"])
-  sessionHostHealthCheckResults?: SessionHostHealthCheckReport[];
-}
-
-/**
- * The report for session host information.
- */
-model SessionHostHealthCheckReport {
-  /**
-   * Represents the name of the health check operation performed.
-   */
-  @visibility(Lifecycle.Read)
-  healthCheckName?: HealthCheckName;
-
-  /**
-   * Represents the Health state of the health check we performed.
-   */
-  @visibility(Lifecycle.Read)
-  healthCheckResult?: HealthCheckResult;
-
-  /**
-   * Additional detailed information on the failure.
-   */
-  @visibility(Lifecycle.Read)
-  additionalFailureDetails?: SessionHostHealthCheckFailureDetails;
-}
-
-/**
- * Contains details on the failure.
- */
-model SessionHostHealthCheckFailureDetails {
-  /**
-   * Failure message: hints on what is wrong and how to recover.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-
-  /**
-   * Error code corresponding for the failure.
-   */
-  @visibility(Lifecycle.Read)
-  errorCode?: int32;
-
-  /**
-   * The timestamp of the last update.
-   */
-  @visibility(Lifecycle.Read)
-  lastHealthCheckDateTime?: utcDateTime;
-}
-
-/**
- * SessionHost properties that can be patched.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model SessionHostPatch extends Azure.ResourceManager.CommonTypes.Resource {
-  /**
-   * Detailed properties for SessionHost
-   */
-  properties?: SessionHostPatchProperties;
-}
-
-/**
- * SessionHost properties that can be patched.
- */
-model SessionHostPatchProperties {
-  /**
-   * Allow a new session.
-   */
-  allowNewSession?: boolean;
-
-  /**
-   * User assigned to SessionHost.
-   */
-  assignedUser?: string;
-
-  /**
-   * Friendly name of SessionHost
-   */
-  friendlyName?: string;
-}
-
-/**
- * List of UserSession definitions.
- */
-model UserSessionList is Azure.Core.Page<UserSession>;
-
-/**
- * Schema for UserSession properties.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model UserSessionProperties {
-  /**
-   * ObjectId of user session. (internal use)
-   */
-  @visibility(Lifecycle.Read)
-  objectId?: string;
-
-  /**
-   * The user principal name.
-   */
-  userPrincipalName?: string;
-
-  /**
-   * Application type of application.
-   */
-  applicationType?: ApplicationType;
-
-  /**
-   * State of user session.
-   */
-  sessionState?: SessionState;
-
-  /**
-   * The active directory user name.
-   */
-  activeDirectoryUserName?: string;
-
-  /**
-   * The timestamp of the user session create.
-   */
-  createTime?: utcDateTime;
+  customData?: string;
 }
 
 /**
@@ -3726,1024 +4555,26 @@ model SendMessage {
 }
 
 /**
- * Scaling plan properties that can be patched.
+ * Hostpool update fault information.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model ScalingPlanPatch {
+model HostPoolUpdateFault {
   /**
-   * tags to be updated
+   * Hostpool update fault type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record type is valid for tags"
-  tags?: Record<string>;
+  faultType?: FaultType;
 
   /**
-   * Detailed properties for scaling plan
+   * Hostpool update fault code.
    */
-  properties?: ScalingPlanPatchProperties;
+  faultCode?: string;
+
+  /**
+   * Hostpool update fault text.
+   */
+  faultText?: string;
+
+  /**
+   * Hostpool update fault context.
+   */
+  faultContext?: string;
 }
-
-/**
- * Scaling plan properties.
- */
-model ScalingPlanPatchProperties {
-  /**
-   * Description of scaling plan.
-   */
-  description?: string;
-
-  /**
-   * User friendly name of scaling plan.
-   */
-  friendlyName?: string;
-
-  /**
-   * Timezone of the scaling plan.
-   */
-  timeZone?: string;
-
-  /**
-   * Exclusion tag for scaling plan.
-   */
-  exclusionTag?: string;
-
-  /**
-   * List of ScalingSchedule definitions.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
-  schedules?: ScalingSchedule[];
-
-  /**
-   * List of ScalingHostPoolReference definitions.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["hostPoolArmPath"])
-  hostPoolReferences?: ScalingHostPoolReference[];
-}
-
-/**
- * List of ScalingPlanPersonalSchedule definitions.
- */
-model ScalingPlanPersonalScheduleList
-  is Azure.Core.Page<ScalingPlanPersonalSchedule>;
-
-/**
- * A ScalingPlanPersonalSchedule.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model ScalingPlanPersonalScheduleProperties {
-  /**
-   * Set of days of the week on which this schedule is active.
-   */
-  daysOfWeek: DayOfWeek[];
-
-  /**
-   * Starting time for ramp up period.
-   */
-  rampUpStartTime: Time;
-
-  /**
-   * The desired startup behavior during the ramp up period for personal vms in the hostpool.
-   */
-  rampUpAutoStartHosts?: StartupBehavior;
-
-  /**
-   * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampUpStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
-
-  /**
-   * Action to be taken after a user disconnect during the ramp up period.
-   */
-  rampUpActionOnDisconnect?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period.
-   */
-  @minValue(0)
-  rampUpMinutesToWaitOnDisconnect?: int32;
-
-  /**
-   * Action to be taken after a logoff during the ramp up period.
-   */
-  rampUpActionOnLogoff?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period.
-   */
-  @minValue(0)
-  rampUpMinutesToWaitOnLogoff?: int32;
-
-  /**
-   * Starting time for peak period.
-   */
-  peakStartTime: Time;
-
-  /**
-   * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  peakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
-
-  /**
-   * Action to be taken after a user disconnect during the peak period.
-   */
-  peakActionOnDisconnect?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period.
-   */
-  @minValue(0)
-  peakMinutesToWaitOnDisconnect?: int32;
-
-  /**
-   * Action to be taken after a logoff during the peak period.
-   */
-  peakActionOnLogoff?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period.
-   */
-  @minValue(0)
-  peakMinutesToWaitOnLogoff?: int32;
-
-  /**
-   * Starting time for ramp down period.
-   */
-  rampDownStartTime: Time;
-
-  /**
-   * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampDownStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
-
-  /**
-   * Action to be taken after a user disconnect during the ramp down period.
-   */
-  rampDownActionOnDisconnect?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period.
-   */
-  @minValue(0)
-  rampDownMinutesToWaitOnDisconnect?: int32;
-
-  /**
-   * Action to be taken after a logoff during the ramp down period.
-   */
-  rampDownActionOnLogoff?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period.
-   */
-  @minValue(0)
-  rampDownMinutesToWaitOnLogoff?: int32;
-
-  /**
-   * Starting time for off-peak period.
-   */
-  offPeakStartTime: Time;
-
-  /**
-   * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  offPeakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
-
-  /**
-   * Action to be taken after a user disconnect during the off-peak period.
-   */
-  offPeakActionOnDisconnect?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period.
-   */
-  @minValue(0)
-  offPeakMinutesToWaitOnDisconnect?: int32;
-
-  /**
-   * Action to be taken after a logoff during the off-peak period.
-   */
-  offPeakActionOnLogoff?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.
-   */
-  @minValue(0)
-  offPeakMinutesToWaitOnLogoff?: int32;
-}
-
-/**
- * ScalingPlanPersonalSchedule properties that can be patched.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model ScalingPlanPersonalSchedulePatchProperties {
-  /**
-   * Set of days of the week on which this schedule is active.
-   */
-  daysOfWeek?: DayOfWeek[];
-
-  /**
-   * Starting time for ramp up period.
-   */
-  rampUpStartTime?: Time;
-
-  /**
-   * The desired startup behavior during the ramp up period for personal vms in the hostpool.
-   */
-  rampUpAutoStartHosts?: StartupBehavior;
-
-  /**
-   * The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampUpStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
-
-  /**
-   * Action to be taken after a user disconnect during the ramp up period.
-   */
-  rampUpActionOnDisconnect?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period.
-   */
-  @minValue(0)
-  rampUpMinutesToWaitOnDisconnect?: int32;
-
-  /**
-   * Action to be taken after a logoff during the ramp up period.
-   */
-  rampUpActionOnLogoff?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period.
-   */
-  @minValue(0)
-  rampUpMinutesToWaitOnLogoff?: int32;
-
-  /**
-   * Starting time for peak period.
-   */
-  peakStartTime?: Time;
-
-  /**
-   * The desired configuration of Start VM On Connect for the hostpool during the peak phase.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  peakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
-
-  /**
-   * Action to be taken after a user disconnect during the peak period.
-   */
-  peakActionOnDisconnect?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the peak period.
-   */
-  @minValue(0)
-  peakMinutesToWaitOnDisconnect?: int32;
-
-  /**
-   * Action to be taken after a logoff during the peak period.
-   */
-  peakActionOnLogoff?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user logs off during the peak period.
-   */
-  @minValue(0)
-  peakMinutesToWaitOnLogoff?: int32;
-
-  /**
-   * Starting time for ramp down period.
-   */
-  rampDownStartTime?: Time;
-
-  /**
-   * The desired configuration of Start VM On Connect for the hostpool during the ramp down phase.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  rampDownStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
-
-  /**
-   * Action to be taken after a user disconnect during the ramp down period.
-   */
-  rampDownActionOnDisconnect?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp down period.
-   */
-  @minValue(0)
-  rampDownMinutesToWaitOnDisconnect?: int32;
-
-  /**
-   * Action to be taken after a logoff during the ramp down period.
-   */
-  rampDownActionOnLogoff?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp down period.
-   */
-  @minValue(0)
-  rampDownMinutesToWaitOnLogoff?: int32;
-
-  /**
-   * Starting time for off-peak period.
-   */
-  offPeakStartTime?: Time;
-
-  /**
-   * The desired configuration of Start VM On Connect for the hostpool during the off-peak phase.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is valid acronym"
-  offPeakStartVMOnConnect?: SetStartVMOnConnect = SetStartVMOnConnect.Enable;
-
-  /**
-   * Action to be taken after a user disconnect during the off-peak period.
-   */
-  offPeakActionOnDisconnect?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user disconnects during the off-peak period.
-   */
-  @minValue(0)
-  offPeakMinutesToWaitOnDisconnect?: int32;
-
-  /**
-   * Action to be taken after a logoff during the off-peak period.
-   */
-  offPeakActionOnLogoff?: SessionHandlingOperation;
-
-  /**
-   * The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.
-   */
-  @minValue(0)
-  offPeakMinutesToWaitOnLogoff?: int32;
-}
-
-/**
- * ScalingPlanPersonalSchedule properties that can be patched.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model ScalingPlanPersonalSchedulePatch {
-  /**
-   * Detailed properties for ScalingPlanPersonalSchedule
-   */
-  properties?: ScalingPlanPersonalSchedulePatchProperties;
-}
-
-/**
- * List of ScalingPlanPooledSchedule definitions.
- */
-model ScalingPlanPooledScheduleList
-  is Azure.Core.Page<ScalingPlanPooledSchedule>;
-
-/**
- * A ScalingPlanPooledSchedule.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model ScalingPlanPooledScheduleProperties {
-  /**
-   * Name of the ScalingPlanPooledSchedule
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Service already uses this property"
-  name?: string;
-
-  /**
-   * Set of days of the week on which this schedule is active.
-   */
-  daysOfWeek: DayOfWeek[];
-
-  /**
-   * Starting time for ramp up period.
-   */
-  rampUpStartTime: Time;
-
-  /**
-   * Load balancing algorithm for ramp up period.
-   */
-  rampUpLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
-
-  /**
-   * Minimum host percentage for ramp up period.
-   */
-  @maxValue(100)
-  @minValue(0)
-  rampUpMinimumHostsPct?: int32;
-
-  /**
-   * Capacity threshold for ramp up period.
-   */
-  @maxValue(100)
-  @minValue(1)
-  rampUpCapacityThresholdPct: int32;
-
-  /**
-   * Starting time for peak period.
-   */
-  peakStartTime: Time;
-
-  /**
-   * Load balancing algorithm for peak period.
-   */
-  peakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
-
-  /**
-   * Starting time for ramp down period.
-   */
-  rampDownStartTime: Time;
-
-  /**
-   * Load balancing algorithm for ramp down period.
-   */
-  rampDownLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
-
-  /**
-   * Minimum host percentage for ramp down period.
-   */
-  @maxValue(100)
-  @minValue(0)
-  rampDownMinimumHostsPct?: int32;
-
-  /**
-   * Capacity threshold for ramp down period.
-   */
-  @maxValue(100)
-  @minValue(1)
-  rampDownCapacityThresholdPct: int32;
-
-  /**
-   * Should users be logged off forcefully from hosts.
-   */
-  rampDownForceLogoffUsers?: boolean;
-
-  /**
-   * Specifies when to stop hosts during ramp down period.
-   */
-  rampDownStopHostsWhen?: StopHostsWhen;
-
-  /**
-   * Number of minutes to wait to stop hosts during ramp down period.
-   */
-  rampDownWaitTimeMinutes?: int32;
-
-  /**
-   * Notification message for users during ramp down period.
-   */
-  rampDownNotificationMessage?: string;
-
-  /**
-   * Starting time for off-peak period.
-   */
-  offPeakStartTime: Time;
-
-  /**
-   * Load balancing algorithm for off-peak period.
-   */
-  offPeakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
-}
-
-/**
- * A ScalingPlanPooledSchedule that can be patched.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model ScalingPlanPooledSchedulePatchProperties {
-  /**
-   * Name of the ScalingPlanPooledSchedule
-   */
-  name?: string;
-
-  /**
-   * Set of days of the week on which this schedule is active.
-   */
-  daysOfWeek?: DayOfWeek[];
-
-  /**
-   * Starting time for ramp up period.
-   */
-  rampUpStartTime?: Time;
-
-  /**
-   * Load balancing algorithm for ramp up period.
-   */
-  rampUpLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
-
-  /**
-   * Minimum host percentage for ramp up period.
-   */
-  @maxValue(100)
-  @minValue(0)
-  rampUpMinimumHostsPct?: int32;
-
-  /**
-   * Capacity threshold for ramp up period.
-   */
-  @maxValue(100)
-  @minValue(1)
-  rampUpCapacityThresholdPct?: int32;
-
-  /**
-   * Starting time for peak period.
-   */
-  peakStartTime?: Time;
-
-  /**
-   * Load balancing algorithm for peak period.
-   */
-  peakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
-
-  /**
-   * Starting time for ramp down period.
-   */
-  rampDownStartTime?: Time;
-
-  /**
-   * Load balancing algorithm for ramp down period.
-   */
-  rampDownLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
-
-  /**
-   * Minimum host percentage for ramp down period.
-   */
-  @maxValue(100)
-  @minValue(0)
-  rampDownMinimumHostsPct?: int32;
-
-  /**
-   * Capacity threshold for ramp down period.
-   */
-  @maxValue(100)
-  @minValue(1)
-  rampDownCapacityThresholdPct?: int32;
-
-  /**
-   * Should users be logged off forcefully from hosts.
-   */
-  rampDownForceLogoffUsers?: boolean;
-
-  /**
-   * Specifies when to stop hosts during ramp down period.
-   */
-  rampDownStopHostsWhen?: StopHostsWhen;
-
-  /**
-   * Number of minutes to wait to stop hosts during ramp down period.
-   */
-  rampDownWaitTimeMinutes?: int32;
-
-  /**
-   * Notification message for users during ramp down period.
-   */
-  rampDownNotificationMessage?: string;
-
-  /**
-   * Starting time for off-peak period.
-   */
-  offPeakStartTime?: Time;
-
-  /**
-   * Load balancing algorithm for off-peak period.
-   */
-  offPeakLoadBalancingAlgorithm?: SessionHostLoadBalancingAlgorithm;
-}
-
-/**
- * ScalingPlanPooledSchedule properties that can be patched.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model ScalingPlanPooledSchedulePatch
-  extends Azure.ResourceManager.CommonTypes.Resource {
-  /**
-   * Detailed properties for ScalingPlanPooledSchedule
-   */
-  properties?: ScalingPlanPooledSchedulePatchProperties;
-}
-
-/**
- * Workspace properties that can be patched.
- */
-/** A patch model */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-model WorkspacePatch {
-  /**
-   * tags to be updated
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags can be Record"
-  tags?: Record<string>;
-
-  /**
-   * Detailed properties for Workspace
-   */
-  properties?: WorkspacePatchProperties;
-}
-
-/**
- * Workspace properties that can be patched.
- */
-model WorkspacePatchProperties {
-  /**
-   * Description of Workspace.
-   */
-  description?: string;
-
-  /**
-   * Friendly name of Workspace.
-   */
-  friendlyName?: string;
-
-  /**
-   * List of applicationGroup links.
-   */
-  applicationGroupReferences?: string[];
-
-  /**
-   * Enabled to allow this resource to be access from the public network
-   */
-  publicNetworkAccess?: PublicNetworkAccess;
-}
-
-/**
- * Session host configurations of HostPool.
- */
-model SessionHostConfigurationProperties {
-  /**
-   * The timestamp of the last update.
-   */
-  @visibility(Lifecycle.Read)
-  version?: utcDateTime;
-
-  /**
-   * Friendly name to describe this version of the SessionHostConfiguration.
-   */
-  @maxLength(260)
-  friendlyName?: string;
-
-  /**
-   * Provisioning state of the Session Host Configuration.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningStateSHC;
-
-  /**
-   * Hashtable that lists key/value pair tags to apply to the VMs
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Already implemented with Record"
-  vmTags?: Record<string>;
-
-  /**
-   * The Location for the session host to be created in. It will default to the location of the hostpool if not provided
-   */
-  vmLocation?: string;
-
-  /**
-   * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
-   */
-  vmResourceGroup?: string;
-
-  /**
-   * The prefix that should be associated with session host names
-   */
-  @maxLength(11)
-  vmNamePrefix: string;
-
-  /**
-   * Value for availability zones to be used by the session host. Should be from [1,2,3].
-   */
-  availabilityZones?: int32[];
-
-  /**
-   * Network information.
-   */
-  networkInfo: NetworkInfoProperties;
-
-  /**
-   * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
-   */
-  vmSizeId: string;
-
-  /**
-   * Disk Information
-   */
-  diskInfo: DiskInfoProperties;
-
-  /**
-   * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
-   */
-  customConfigurationScriptUrl?: url;
-
-  /**
-   * Image configurations of HostPool.
-   */
-  imageInfo: ImageInfoProperties;
-
-  /**
-   * Domain configurations of session hosts.
-   */
-  domainInfo: DomainInfoProperties;
-
-  /**
-   * Security Information
-   */
-  securityInfo?: SecurityInfoProperties;
-
-  /**
-   * Local Admin credentials for session hosts."
-   */
-  vmAdminCredentials: KeyVaultCredentialsProperties;
-
-  /**
-   * Boot Diagnostics Information
-   */
-  bootDiagnosticsInfo?: BootDiagnosticsInfoProperties;
-}
-
-/**
- * Session host configurations of HostPool.
- */
-model SessionHostConfigurationPatchProperties {
-  /**
-   * Friendly name to describe this version of the SessionHostConfiguration.
-   */
-  @maxLength(260)
-  friendlyName?: string;
-
-  /**
-   * Hashtable that lists key/value pair tags to apply to the VMs
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Already implemented with Record"
-  vmTags?: Record<string>;
-
-  /**
-   * The Location for the session host to be created in. It will default to the location of the hostpool if not provided
-   */
-  vmLocation?: string;
-
-  /**
-   * The ResourceGroup for the session hosts to be created in. It will default to the ResourceGroup of the hostpool if not provided.
-   */
-  vmResourceGroup?: string;
-
-  /**
-   * The prefix that should be associated with session host names
-   */
-  @maxLength(11)
-  vmNamePrefix?: string;
-
-  /**
-   * Value for availability zones to be used by the session host. Should be from [1,2,3].
-   */
-  availabilityZones?: int32[];
-
-  /**
-   * Network information.
-   */
-  networkInfo?: NetworkInfoPatchProperties;
-
-  /**
-   * The id of the size of a virtual machine connected to a hostpool. Example: Standard_D2as_v6
-   */
-  vmSizeId?: string;
-
-  /**
-   * Disk Information
-   */
-  diskInfo?: DiskInfoPatchProperties;
-
-  /**
-   * The uri to the storage blob containing the arm template to be run on the virtual machine after provisioning.
-   */
-  customConfigurationScriptUrl?: url;
-
-  /**
-   * Image configurations of HostPool.
-   */
-  imageInfo?: ImageInfoPatchProperties;
-
-  /**
-   * Domain configurations of session hosts.
-   */
-  domainInfo?: DomainInfoPatchProperties;
-
-  /**
-   * Security Information
-   */
-  securityInfo?: SecurityInfoPatchProperties;
-
-  /**
-   * Local Admin credentials for session hosts."
-   */
-  vmAdminCredentials?: KeyVaultCredentialsPatchProperties;
-
-  /**
-   * Boot Diagnostics Information
-   */
-  bootDiagnosticsInfo?: BootDiagnosticsInfoPatchProperties;
-}
-
-/**
- * The current status of the session host update async operation.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-model SessionHostManagementUpdateStatusProperties {
-  /**
-   * The Log Analytics.
-   */
-  correlationId?: string;
-
-  /**
-   * Progress information on the sessionHostManagement operation.
-   */
-  progress?: SessionHostManagementOperationProgress;
-
-  /**
-   * The timestamp that the update is scheduled for.
-   */
-  scheduledDateTime?: utcDateTime;
-
-  /**
-   * SessionHostManagement properties used for the operation.
-   */
-  sessionHostManagement?: SessionHostManagement;
-}
-
-/**
- * SessionHostManagement Operation Progress information.
- */
-model SessionHostManagementOperationProgress {
-  /**
-   * Time that the sessionHostManagement operation was created.
-   */
-  executionStartTime?: utcDateTime;
-
-  /**
-   * The number of sessionHosts to be started in the sessionHostManagement operation.
-   */
-  totalSessionHosts?: int32;
-
-  /**
-   * The number of sessionHosts in progress in the sessionHostManagement operation
-   */
-  sessionHostsInProgress?: int32;
-
-  /**
-   * The number of sessionHosts completed in the sessionHostManagement operation.
-   */
-  sessionHostsCompleted?: int32;
-
-  /**
-   * The number of sessionHosts rollback failed in the sessionHostManagement operation.
-   */
-  sessionHostsRollbackFailed?: int32;
-}
-/**
- * List of MSIX Package definitions.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model MSIXPackageList is Azure.Core.Page<MSIXPackage>;
-
-/**
- * Schema for MSIX Package properties.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Not supported by service"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model MSIXPackageProperties {
-  /**
-   * VHD/CIM image path on Network Share.
-   */
-  imagePath?: string;
-
-  /**
-   * Package Name from appxmanifest.xml.
-   */
-  packageName?: string;
-
-  /**
-   * Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name.
-   */
-  packageFamilyName?: string;
-
-  /**
-   * User friendly Name to be displayed in the portal.
-   */
-  displayName?: string;
-
-  /**
-   * Relative Path to the package inside the image.
-   */
-  packageRelativePath?: string;
-
-  /**
-   * Specifies how to register Package in feed.
-   */
-  isRegularRegistration?: boolean;
-
-  /**
-   * Make this version of the package the active one across the hostpool.
-   */
-  isActive?: boolean;
-
-  /**
-   * List of package dependencies.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["dependencyName"])
-  packageDependencies?: MsixPackageDependencies[];
-
-  /**
-   * Package version found in the appxmanifest.xml.
-   */
-  version?: string;
-
-  /**
-   * Date Package was last updated, found in the appxmanifest.xml.
-   */
-  lastUpdated?: utcDateTime;
-
-  /**
-   * List of package applications.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["appId"])
-  packageApplications?: MsixPackageApplications[];
-}
-
-/**
- * MSIX Package properties that can be patched.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Some properties can't be patched"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model MSIXPackagePatch extends Azure.ResourceManager.CommonTypes.Resource {
-  /**
-   * Detailed properties for MSIX Package
-   */
-  properties?: MSIXPackagePatchProperties;
-}
-
-/**
- * MSIX Package properties that can be patched.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
-model MSIXPackagePatchProperties {
-  /**
-   * Set a version of the package to be active across hostpool.
-   */
-  isActive?: boolean;
-
-  /**
-   * Set Registration mode. Regular or Delayed.
-   */
-  isRegularRegistration?: boolean;
-
-  /**
-   * Display name for MSIX Package.
-   */
-  displayName?: string;
-}
-
-/**
- * Model used only to spread in the standard `eTag` envelope property for a resource
- *
- * @example
- *
- * ```typespec
- * model Foo is TrackedResource<FooProperties> {
- *   // Only have standard Succeeded, Failed, Cancelled states
- *   ...EntityTagProperty;
- * }
- * ```
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "common types use etag instead of eTag"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
-model etagProperty {
-  @doc("If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")
-  @visibility(Lifecycle.Read)
-  etag?: string;
-}
-
-/**
- * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
-model StatusProperty {
-  /**
-   * Operation status. Current defined values are < Error | Scheduled | UpdatingSessionHosts | ValidatingSessionHostUpdate | Paused | Pausing | Cancelling > | Succeeded | Failed | Canceled
-   */
-  status: SessionHostManagementUpdateOperationStatus;
-}
-
-/**
- * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "It is a valid property"
-model UpdateStatusProperty {
-  /**
-   * Properties bag to hold custom RP properties for sessionHostManagement Update Statuses.
-   */
-  properties?: SessionHostManagementUpdateStatusProperties;
-}
-
-/**
- * A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
- */
-model ResourceProviderOperationListResult
-  is Azure.Core.Page<ResourceProviderOperation>;

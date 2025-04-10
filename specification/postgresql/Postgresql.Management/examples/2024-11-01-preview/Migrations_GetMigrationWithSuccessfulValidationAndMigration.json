@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "migrationMode": "Offline",
+    "migrationName": "testmigrationwithsuccessfulvalidationandmigration",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "targetDbServerName": "testtarget"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testmigrationwithsuccessfulvalidationandmigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigrationwithsuccessfulvalidationandmigration",
+        "location": "eastus",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {
+                "testdb3": {
+                  "appliedChanges": 0,
+                  "cdcDeleteCounter": 0,
+                  "cdcInsertCounter": 0,
+                  "cdcUpdateCounter": 0,
+                  "databaseName": "testdb3",
+                  "endedOn": "2023-10-12T05:55:49.6813037Z",
+                  "fullLoadCompletedTables": 10,
+                  "fullLoadErroredTables": 0,
+                  "fullLoadLoadingTables": 0,
+                  "fullLoadQueuedTables": 0,
+                  "incomingChanges": 0,
+                  "latency": 0,
+                  "migrationState": "Succeeded",
+                  "startedOn": "2023-10-12T05:55:28.9955656Z"
+                }
+              },
+              "validationDetails": {
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "testdb3",
+                    "endedOn": "2023-10-12T05:54:29.8948914Z",
+                    "startedOn": "2023-10-12T05:54:29.5531609Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  }
+                ],
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "SourceVersionValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "ServerParametersValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "status": "Succeeded",
+                "validationEndTimeInUtc": "2023-10-12T05:55:00.4998326Z",
+                "validationStartTimeInUtc": "2023-10-12T05:54:28.0774816Z"
+              }
+            },
+            "state": "Succeeded"
+          },
+          "dbsToMigrate": [
+            "testdb3"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "f2354e72-2828-4a19-ad20-b4cd9e2673c1",
+          "migrationMode": "Offline",
+          "migrationOption": "ValidateAndMigrate",
+          "migrationWindowEndTimeInUtc": "2023-10-12T05:57:30.7364856Z",
+          "migrationWindowStartTimeInUtc": "2023-10-12T05:54:15.9991596Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "triggerCutover": "True"
+        }
+      }
+    }
+  },
+  "operationId": "Migrations_Get",
+  "title": "Migrations_GetMigrationWithSuccessfulValidationAndMigration"
+}

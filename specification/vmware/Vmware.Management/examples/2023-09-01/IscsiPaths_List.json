@@ -1,0 +1,27 @@
+{
+  "operationId": "IscsiPaths_ListByPrivateCloud",
+  "parameters": {
+    "api-version": "2023-09-01",
+    "privateCloudName": "cloud1",
+    "resourceGroupName": "group1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "IscsiPaths_ListByPrivateCloud",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Microsoft.AVS/privateClouds/iscsiPaths",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/iscsiPaths/default",
+            "properties": {
+              "networkBlock": "192.168.0.0/24",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

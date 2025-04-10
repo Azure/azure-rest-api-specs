@@ -8,13 +8,14 @@ import "./HostPool.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
- * Schema for SessionHostConfiguration properties.
+ * Represents a SessionHostConfiguration definition.
  */
-@parentResource(HostPool)
 @singleton("default")
+@parentResource(HostPool)
 model SessionHostConfiguration
   is Azure.ResourceManager.ProxyResource<
     SessionHostConfigurationProperties,
@@ -22,12 +23,12 @@ model SessionHostConfiguration
   > {
   ...ResourceNameParameter<
     Resource = SessionHostConfiguration,
-    KeyName = "SessionHostConfigurations",
-    NamePattern = "^[A-Za-z0-9@.\\-_ ]*$"
+    KeyName = "sessionHostConfiguration",
+    SegmentName = "sessionHostConfigurations",
+    NamePattern = ""
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Service doesn't allow delete"
 @armResourceOperations
 interface SessionHostConfigurations {
   /**
@@ -36,39 +37,35 @@ interface SessionHostConfigurations {
   get is ArmResourceRead<SessionHostConfiguration>;
 
   /**
-   * Update a SessionHostConfiguration.
-   */
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    SessionHostConfiguration,
-    SessionHostConfigurationPatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot sessionHostConfiguration?: SessionHostConfigurationPatch;
-    }
-  >;
-
-  /**
    * Create or update a SessionHostConfiguration.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SessionHostConfiguration>;
 
   /**
-   * List SessionHostConfigurations.
+   * Update a SessionHostConfiguration.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    SessionHostConfiguration,
+    PatchModel = SessionHostConfigurationPatch
+  >;
+
+  /**
+   * List sessionHostConfigurations.
    */
   listByHostPool is ArmResourceListByParent<
     SessionHostConfiguration,
-    Response = SessionHostConfigurationList
+    Response = ArmResponse<SessionHostConfigurationList>
   >;
 }
 
-@@maxLength(SessionHostConfiguration.name, 24);
-@@minLength(SessionHostConfiguration.name, 3);
-@@doc(SessionHostConfiguration.name,
-  "The name of the SessionHostConfiguration"
-);
+@@doc(SessionHostConfiguration.name, "");
 @@doc(SessionHostConfiguration.properties,
   "Detailed properties for SessionHostConfiguration"
+);
+@@doc(SessionHostConfigurations.createOrUpdate::parameters.resource,
+  "Object containing SessionHostConfiguration definitions."
+);
+@@doc(SessionHostConfigurations.update::parameters.properties,
+  "Object containing SessionHostConfiguration definitions."
 );

@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "Referer": [
+      "https://management.azure.com/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/addresses/TestAddressName1?api-version=2024-02-01"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "addressName": "TestAddressName1",
+    "api-version": "2024-02-01",
+    "resourceGroupName": "YourResourceGroupName",
+    "subscriptionId": "eb5dc900-6186-49d8-b7d7-febd866fdc1d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestAddressName1",
+        "type": "Microsoft.EdgeOrder/addresses",
+        "id": "/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/addresses/TestAddressName1",
+        "location": "eastus",
+        "properties": {
+          "addressClassification": "Shipping",
+          "addressValidationStatus": "Valid",
+          "contactDetails": {
+            "contactName": "XXXX XXXX",
+            "emailList": [
+              "xxxx@xxxx.xxx"
+            ],
+            "phone": "0000000000",
+            "phoneExtension": ""
+          },
+          "shippingAddress": {
+            "addressType": "None",
+            "city": "San Francisco",
+            "companyName": "Microsoft",
+            "country": "US",
+            "postalCode": "94107",
+            "stateOrProvince": "CA",
+            "streetAddress1": "16 TOWNSEND ST",
+            "streetAddress2": "UNIT 1"
+          }
+        },
+        "systemData": {
+          "createdAt": "0001-01-01T05:30:00+05:30",
+          "lastModifiedAt": "0001-01-01T05:30:00+05:30"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "Addresses_Get",
+  "title": "GetAddressByName"
+}

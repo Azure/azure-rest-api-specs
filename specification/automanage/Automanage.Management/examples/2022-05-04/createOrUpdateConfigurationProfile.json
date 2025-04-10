@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2022-05-04",
+    "configurationProfileName": "customConfigurationProfile",
+    "parameters": {
+      "location": "East US",
+      "properties": {
+        "configuration": {
+          "Antimalware/Enable": false,
+          "AzureSecurityCenter/Enable": true,
+          "Backup/Enable": false,
+          "BootDiagnostics/Enable": true,
+          "ChangeTrackingAndInventory/Enable": true,
+          "GuestConfiguration/Enable": true,
+          "LogAnalytics/Enable": true,
+          "UpdateManagement/Enable": true,
+          "VMInsights/Enable": true
+        }
+      },
+      "tags": {
+        "Organization": "Administration"
+      }
+    },
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "customConfigurationProfile",
+        "type": "Microsoft.Automanage/configurationProfiles",
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile",
+        "location": "East US",
+        "properties": {
+          "configuration": {
+            "Antimalware/Enable": false,
+            "AzureSecurityCenter/Enable": true,
+            "Backup/Enable": false,
+            "BootDiagnostics/Enable": true,
+            "ChangeTrackingAndInventory/Enable": true,
+            "GuestConfiguration/Enable": true,
+            "LogAnalytics/Enable": true,
+            "UpdateManagement/Enable": true,
+            "VMInsights/Enable": true
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "Organization": "Administration"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "customConfigurationProfile",
+        "type": "Microsoft.Automanage/configurationProfiles",
+        "id": "/subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Automanage/configurationProfiles/customConfigurationProfile",
+        "location": "East US",
+        "properties": {
+          "configuration": {
+            "Antimalware/Enable": false,
+            "AzureSecurityCenter/Enable": true,
+            "Backup/Enable": false,
+            "BootDiagnostics/Enable": true,
+            "ChangeTrackingAndInventory/Enable": true,
+            "GuestConfiguration/Enable": true,
+            "LogAnalytics/Enable": true,
+            "UpdateManagement/Enable": true,
+            "VMInsights/Enable": true
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "user1@outlook.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-14T02:03:01.1974346Z",
+          "lastModifiedBy": "user2@outlook.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "Organization": "Administration"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ConfigurationProfiles_CreateOrUpdate",
+  "title": "Create or update configuration profile"
+}

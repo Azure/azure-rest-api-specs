@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "migrationName": "testmigration",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "dbsToMigrate": [
+          "db1",
+          "db2",
+          "db3",
+          "db4"
+        ],
+        "migrationMode": "Offline",
+        "overwriteDbsInTarget": "True",
+        "secretParameters": {
+          "adminCredentials": {
+            "sourceServerPassword": "xxxxxxxx",
+            "targetServerPassword": "xxxxxxxx"
+          }
+        },
+        "sourceDbServerFullyQualifiedDomainName": "testsourcefqdn.example.com",
+        "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+        "targetDbServerFullyQualifiedDomainName": "test-target-fqdn.example.com"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "targetDbServerName": "testtarget"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testmigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
+        "location": "westus",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps"
+            },
+            "error": "",
+            "state": "InProgress"
+          },
+          "dbsToMigrate": [
+            "db1",
+            "db2",
+            "db3",
+            "db4"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "migrationWindowStartTimeInUtc": "2024-10-10T16:05:58.895Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "sourceDbServerFullyQualifiedDomainName": "testsourcefqdn.example.com",
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+          "startDataMigration": "False",
+          "targetDbServerFullyQualifiedDomainName": "test-target-fqdn.example.com",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "triggerCutover": "False"
+        },
+        "tags": {
+          "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testmigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
+        "location": "westus",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps"
+            },
+            "error": "",
+            "state": "InProgress"
+          },
+          "dbsToMigrate": [
+            "db1",
+            "db2",
+            "db3",
+            "db4"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "migrationWindowStartTimeInUtc": "2024-10-10T16:05:58.895Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "sourceDbServerFullyQualifiedDomainName": "testsourcefqdn.example.com",
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+          "startDataMigration": "False",
+          "targetDbServerFullyQualifiedDomainName": "test-target-fqdn.example.com",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "triggerCutover": "False"
+        },
+        "tags": {
+          "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    }
+  },
+  "operationId": "Migrations_Create",
+  "title": "Migrations Create with fully qualified domain name"
+}

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-02-15",
+    "eventSubscriptionName": "examplesubscription1",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+    "topicName": "exampleTopic1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "header1",
+            "type": "Static",
+            "properties": {
+              "isSecret": false,
+              "value": "NormalValue"
+            }
+          },
+          {
+            "name": "header2",
+            "type": "Dynamic",
+            "properties": {
+              "sourceField": "data.foo"
+            }
+          },
+          {
+            "name": "header3",
+            "type": "Static",
+            "properties": {
+              "isSecret": true,
+              "value": "mySecretValue"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "TopicEventSubscriptions_GetDeliveryAttributes",
+  "title": "TopicEventSubscriptions_GetDeliveryAttributes"
+}

@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15",
+    "resourceGroupName": "example-rg",
+    "routePolicyName": "example-routePolicy",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-routePolicy",
+        "type": "microsoft.managednetworkfabric/routePolicies",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/routePolicies/example-routePolicy",
+        "location": "eastus",
+        "properties": {
+          "addressFamilyType": "IPv4",
+          "administrativeState": "Enabled",
+          "annotation": "annotation",
+          "configurationState": "Succeeded",
+          "defaultAction": "Deny",
+          "networkFabricId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+          "provisioningState": "Accepted",
+          "statements": [
+            {
+              "action": {
+                "actionType": "Permit",
+                "ipCommunityProperties": {
+                  "add": {
+                    "ipCommunityIds": [
+                      "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipCommunities/example-ipCommunity"
+                    ]
+                  },
+                  "delete": {
+                    "ipCommunityIds": [
+                      "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipCommunities/example-ipCommunity"
+                    ]
+                  },
+                  "set": {
+                    "ipCommunityIds": [
+                      "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipCommunities/example-ipCommunity"
+                    ]
+                  }
+                },
+                "ipExtendedCommunityProperties": {
+                  "add": {
+                    "ipExtendedCommunityIds": [
+                      "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/example-ipExtendedCommunity"
+                    ]
+                  },
+                  "delete": {
+                    "ipExtendedCommunityIds": [
+                      "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/example-ipExtendedCommunity"
+                    ]
+                  },
+                  "set": {
+                    "ipExtendedCommunityIds": [
+                      "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/example-ipExtendedCommunity"
+                    ]
+                  }
+                },
+                "localPreference": 20
+              },
+              "annotation": "annotation",
+              "condition": {
+                "type": "Or",
+                "ipCommunityIds": [
+                  "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipCommunities/example-ipCommunity"
+                ],
+                "ipExtendedCommunityIds": [
+                  "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/example-ipExtendedCommunity"
+                ],
+                "ipPrefixId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/ipPrefixes/example-ipPrefix"
+              },
+              "sequenceNumber": 7
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2023-06-11T17:48:22.837Z",
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-11T17:48:22.837Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "keyID": "keyValue"
+        }
+      }
+    }
+  },
+  "operationId": "RoutePolicies_Get",
+  "title": "RoutePolicies_Get_MaximumSet_Gen"
+}

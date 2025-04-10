@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2022-06-01",
+    "resourceGroup": "myResourceGroup",
+    "subscriptionId": "xxxx-xxxx-xxxx-xxxx"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "",
+        "value": [
+          {
+            "name": "myFluidRelayServer",
+            "type": "Microsoft.FluidRelay/fluidRelayServers",
+            "id": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourceGroups/myResourceGroup/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer",
+            "location": "west-us",
+            "properties": {
+              "fluidRelayEndpoints": {
+                "ordererEndpoints": [
+                  "https://www.contoso.org/orderer"
+                ],
+                "serviceEndpoints": [
+                  "https://www.afd.contoso.org"
+                ],
+                "storageEndpoints": [
+                  "https://www.contoso.org/storage"
+                ]
+              },
+              "frsTenantId": "yyyy-yyyy-yyyyy-yyyy",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FluidRelayServers_ListByResourceGroup",
+  "title": "List all Fluid Relay servers in a resource group"
+}

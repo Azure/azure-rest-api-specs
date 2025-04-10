@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "resourceGroupName": "TestGroup",
+    "serverName": "testserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "db1",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/databases",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/testserver/databases/db1",
+            "properties": {
+              "charset": "utf8",
+              "collation": "en_US.utf8"
+            }
+          },
+          {
+            "name": "db2",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/databases",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/testserver/databases/db2",
+            "properties": {
+              "charset": "utf8",
+              "collation": "en_US.utf8"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Databases_ListByServer",
+  "title": "List databases in a server"
+}

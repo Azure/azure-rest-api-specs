@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview",
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Web/sites/test-app"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "authType": "secret",
+              "daprProperties": {
+                "bindingComponentDirection": "input",
+                "componentType": "bindings",
+                "metadata": [
+                  {
+                    "name": "containerName",
+                    "description": "The name of the container to be used for Dapr state.",
+                    "required": "true"
+                  }
+                ],
+                "runtimeVersion": "1.10",
+                "version": "v1"
+              },
+              "targetType": "MICROSOFT.STORAGE/STORAGEACCOUNTS/BLOBSERVICES"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Linkers_ListDaprConfigurations",
+  "title": "GetDaprConfigurations"
+}

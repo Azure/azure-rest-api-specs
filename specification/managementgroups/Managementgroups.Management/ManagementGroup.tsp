@@ -1,0 +1,182 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Management;
+/**
+ * The management group details.
+ */
+@tenantResource
+model ManagementGroup
+  is Azure.ResourceManager.ProxyResource<ManagementGroupProperties> {
+  ...ResourceNameParameter<
+    Resource = ManagementGroup,
+    KeyName = "groupId",
+    SegmentName = "managementGroups",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface ManagementGroups {
+  /**
+   * Get the details of the management group.
+   *
+   */
+  get is ArmResourceRead<
+    ManagementGroup,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
+      /**
+       * The $expand=children query string parameter allows clients to request inclusion of children in the response payload.  $expand=path includes the path from the root group to the current group.  $expand=ancestors includes the ancestor Ids of the current group.
+       */
+      @query("$expand")
+      $expand?: ManagementGroupExpandType;
+
+      /**
+       * The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload. Note that  $expand=children must be passed up if $recurse is set to true.
+       */
+      @query("$recurse")
+      $recurse?: boolean;
+
+      /**
+       * A filter which allows the exclusion of subscriptions from results (i.e. '$filter=children.childType ne Subscription')
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
+       */
+      @header
+      `Cache-Control`?: string = "no-cache";
+    }
+  >;
+
+  /**
+   * Create or update a management group.
+   * If a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.
+   *
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ManagementGroup,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
+      /**
+       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
+       */
+      @header
+      `Cache-Control`?: string = "no-cache";
+    },
+    Response = ArmResourceUpdatedResponse<ManagementGroup> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: AzureAsyncOperationResults;
+    })
+  >;
+
+  /**
+   * Update a management group.
+   *
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    ManagementGroup,
+    PatchModel = PatchManagementGroupRequest,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
+      /**
+       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
+       */
+      @header
+      `Cache-Control`?: string = "no-cache";
+    }
+  >;
+
+  /**
+   * Delete management group.
+   * If a management group contains child resources, the request will fail.
+   *
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ManagementGroup,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
+      /**
+       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
+       */
+      @header
+      `Cache-Control`?: string = "no-cache";
+    },
+    Response = (ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: AzureAsyncOperationResults;
+    }) | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * List all entities that descend from a management group.
+   *
+   */
+  @get
+  @action("descendants")
+  getDescendants is ArmResourceActionSync<
+    ManagementGroup,
+    void,
+    ArmResponse<ResourceListResult<DescendantInfo>>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Parameters = {
+      /**
+       * Page continuation token is only used if a previous operation returned a partial result.
+       * If a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.
+       *
+       */
+      @query("$skiptoken")
+      $skiptoken?: string;
+
+      /**
+       * Number of elements to return when retrieving results. Passing this in will override $skipToken.
+       */
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+
+  /**
+   * Gets all the hierarchy settings defined at the Management Group level. Settings can only be set on the root Management Group of the hierarchy.
+   *
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @get
+  @action("settings")
+  @operationId("HierarchySettings_List")
+  list is ArmResourceActionSync<
+    ManagementGroup,
+    void,
+    ArmResponse<HierarchySettingsList>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+}
+
+@@doc(ManagementGroup.name, "Management Group ID.");
+@@doc(ManagementGroup.properties,
+  "The generic properties of a management group."
+);
+@@doc(ManagementGroups.createOrUpdate::parameters.resource,
+  "Management group creation parameters."
+);
+@@doc(ManagementGroups.update::parameters.properties,
+  "Management group patch parameters."
+);

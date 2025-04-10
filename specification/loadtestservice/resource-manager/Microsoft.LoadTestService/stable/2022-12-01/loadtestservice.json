@@ -43,10 +43,10 @@
       "name": "Operations"
     },
     {
-      "name": "LoadTests"
+      "name": "LoadTestResources"
     },
     {
-      "name": "Quotas"
+      "name": "QuotaResources"
     }
   ],
   "paths": {
@@ -90,7 +90,7 @@
       "get": {
         "operationId": "LoadTests_ListBySubscription",
         "tags": [
-          "LoadTests"
+          "LoadTestResources"
         ],
         "description": "List LoadTestResource resources by subscription ID",
         "parameters": [
@@ -129,7 +129,7 @@
       "get": {
         "operationId": "Quotas_List",
         "tags": [
-          "Quotas"
+          "QuotaResources"
         ],
         "description": "List quotas for a given subscription Id.",
         "parameters": [
@@ -171,7 +171,7 @@
       "get": {
         "operationId": "Quotas_Get",
         "tags": [
-          "Quotas"
+          "QuotaResources"
         ],
         "description": "Get the available quota for a quota bucket per region per subscription.",
         "parameters": [
@@ -217,7 +217,7 @@
       "post": {
         "operationId": "Quotas_CheckAvailability",
         "tags": [
-          "Quotas"
+          "QuotaResources"
         ],
         "description": "Check Quota Availability on quota bucket per region per subscription.",
         "parameters": [
@@ -238,14 +238,13 @@
             "type": "string"
           },
           {
-            "name": "QuotaBucketRequest",
+            "name": "body",
             "in": "body",
             "description": "The content of the action request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QuotaBucketRequest"
-            },
-            "x-ms-client-name": "body"
+            }
           }
         ],
         "responses": {
@@ -273,7 +272,7 @@
       "get": {
         "operationId": "LoadTests_ListByResourceGroup",
         "tags": [
-          "LoadTests"
+          "LoadTestResources"
         ],
         "description": "List LoadTestResource resources by resource group",
         "parameters": [
@@ -315,7 +314,7 @@
       "get": {
         "operationId": "LoadTests_Get",
         "tags": [
-          "LoadTests"
+          "LoadTestResources"
         ],
         "description": "Get a LoadTestResource",
         "parameters": [
@@ -359,7 +358,7 @@
       "put": {
         "operationId": "LoadTests_CreateOrUpdate",
         "tags": [
-          "LoadTests"
+          "LoadTestResources"
         ],
         "description": "Create a LoadTestResource",
         "parameters": [
@@ -380,14 +379,13 @@
             "type": "string"
           },
           {
-            "name": "LoadTestResource",
+            "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
-            },
-            "x-ms-client-name": "resource"
+            }
           }
         ],
         "responses": {
@@ -434,7 +432,7 @@
       "patch": {
         "operationId": "LoadTests_Update",
         "tags": [
-          "LoadTests"
+          "LoadTestResources"
         ],
         "description": "Update a LoadTestResource",
         "parameters": [
@@ -455,14 +453,13 @@
             "type": "string"
           },
           {
-            "name": "LoadTestResourcePatchRequestBody",
+            "name": "properties",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadTestResourceUpdate"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -475,10 +472,6 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -510,7 +503,7 @@
       "delete": {
         "operationId": "LoadTests_Delete",
         "tags": [
-          "LoadTests"
+          "LoadTestResources"
         ],
         "description": "Delete a LoadTestResource",
         "parameters": [
@@ -571,7 +564,7 @@
       "get": {
         "operationId": "LoadTests_ListOutboundNetworkDependenciesEndpoints",
         "tags": [
-          "LoadTests"
+          "LoadTestResources"
         ],
         "description": "Lists the endpoints that agents may call as part of load testing.",
         "parameters": [
@@ -686,13 +679,12 @@
       "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/type",
+          "$ref": "#/definitions/Type",
           "description": "Managed identity type to use for accessing encryption key Url."
         },
         "resourceId": {
           "type": "string",
-          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId.",
-          "x-nullable": true
+          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId."
         }
       }
     },
@@ -810,7 +802,7 @@
       "description": "The type used for update operations of the LoadTestResource.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -840,6 +832,70 @@
           "$ref": "#/definitions/EncryptionProperties",
           "description": "CMK Encryption property."
         }
+      }
+    },
+    "ManagedServiceIdentity": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedServiceIdentityType",
+          "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed)."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned,UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          },
+          {
+            "name": "SystemAssigned,UserAssigned",
+            "value": "SystemAssigned,UserAssigned"
+          }
+        ]
       }
     },
     "OutboundEnvironmentEndpoint": {
@@ -904,20 +960,17 @@
         "currentUsage": {
           "type": "integer",
           "format": "int32",
-          "description": "Current quota usage of the quota bucket.",
-          "minimum": 0
+          "description": "Current quota usage of the quota bucket."
         },
         "currentQuota": {
           "type": "integer",
           "format": "int32",
-          "description": "Current quota limit of the quota bucket.",
-          "minimum": 0
+          "description": "Current quota limit of the quota bucket."
         },
         "newQuota": {
           "type": "integer",
           "format": "int32",
-          "description": "New quota limit of the quota bucket.",
-          "minimum": 0
+          "description": "New quota limit of the quota bucket."
         },
         "dimensions": {
           "$ref": "#/definitions/QuotaBucketRequestPropertiesDimensions",
@@ -985,14 +1038,12 @@
         "limit": {
           "type": "integer",
           "format": "int32",
-          "description": "Current quota limit of the quota bucket.",
-          "minimum": 0
+          "description": "Current quota limit of the quota bucket."
         },
         "usage": {
           "type": "integer",
           "format": "int32",
-          "description": "Current quota usage of the quota bucket.",
-          "minimum": 0
+          "description": "Current quota usage of the quota bucket."
         },
         "provisioningState": {
           "$ref": "#/definitions/ResourceState",
@@ -1038,7 +1089,7 @@
       },
       "readOnly": true
     },
-    "type": {
+    "Type": {
       "type": "string",
       "description": "Managed identity type to use for accessing encryption key Url.",
       "enum": [
@@ -1046,7 +1097,7 @@
         "UserAssigned"
       ],
       "x-ms-enum": {
-        "name": "type",
+        "name": "Type",
         "modelAsString": true,
         "values": [
           {

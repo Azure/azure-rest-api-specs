@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2019-11-01",
+    "parameters": {
+      "properties": {
+        "enabledState": "Enabled"
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    },
+    "profileName": "MyProfile",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MyProfile",
+        "type": "Microsoft.Network/NetworkExperimentprofiles",
+        "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile",
+        "location": "WestUs",
+        "properties": {
+          "enabledState": "Enabled",
+          "resourceState": "Creating"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "MyProfile",
+        "type": "Microsoft.Network/NetworkExperimentprofiles",
+        "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile",
+        "location": "WestUs",
+        "properties": {
+          "enabledState": "Enabled",
+          "resourceState": "Creating"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "NetworkExperimentProfiles_Update",
+  "title": "Updates an Experiment"
+}

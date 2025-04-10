@@ -1,0 +1,59 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./StorageSyncService.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.StorageSync;
+/**
+ * Sync Group object.
+ */
+@parentResource(StorageSyncService)
+model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
+  ...ResourceNameParameter<
+    Resource = SyncGroup,
+    KeyName = "syncGroupName",
+    SegmentName = "syncGroups",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface SyncGroups {
+  /**
+   * Get a given SyncGroup.
+   */
+  get is ArmResourceRead<SyncGroup>;
+
+  /**
+   * Create a new SyncGroup.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  create is ArmResourceCreateOrReplaceSync<
+    SyncGroup,
+    Response = ArmResourceUpdatedResponse<SyncGroup>
+  >;
+
+  /**
+   * Delete a given SyncGroup.
+   */
+  delete is ArmResourceDeleteSync<SyncGroup>;
+
+  /**
+   * Get a SyncGroup List.
+   */
+  listByStorageSyncService is ArmResourceListByParent<
+    SyncGroup,
+    Response = ArmResponse<SyncGroupArray>
+  >;
+}
+
+@@doc(SyncGroup.name, "Name of Sync Group resource.");
+@@doc(SyncGroup.properties, "SyncGroup properties.");
+@@doc(SyncGroups.create::parameters.resource, "Sync Group Body");

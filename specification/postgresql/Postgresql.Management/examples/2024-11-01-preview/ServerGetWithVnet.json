@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "resourceGroupName": "testrg",
+    "serverName": "pgtestsvc4",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pgtestsvc4",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
+        "location": "westus",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "availabilityZone": "1",
+          "backup": {
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-05-26T01:16:58.3723361+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "fullyQualifiedDomainName": "c7d7483a8ceb.test-private-dns-zone.postgres.database.azure.com",
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "standbyAvailabilityZone": "2",
+            "state": "Healthy"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "minorVersion": "6",
+          "network": {
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com",
+            "publicNetworkAccess": "Disabled"
+          },
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Disabled",
+            "iops": 2300,
+            "storageSizeGB": 512,
+            "tier": "P20"
+          },
+          "version": "12"
+        },
+        "sku": {
+          "name": "Standard_D4s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "ElasticServer": "1"
+        }
+      }
+    }
+  },
+  "operationId": "Servers_Get",
+  "title": "ServerGetWithVnet"
+}

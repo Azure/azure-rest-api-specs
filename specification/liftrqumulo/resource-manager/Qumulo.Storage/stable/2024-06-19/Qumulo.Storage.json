@@ -3,6 +3,7 @@
   "info": {
     "title": "Qumulo.Storage",
     "version": "2024-06-19",
+    "description": "// FIXME: (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -42,7 +43,7 @@
       "name": "Operations"
     },
     {
-      "name": "FileSystems"
+      "name": "FileSystemResources"
     }
   ],
   "paths": {
@@ -89,7 +90,7 @@
       "get": {
         "operationId": "FileSystems_ListBySubscription",
         "tags": [
-          "FileSystems"
+          "FileSystemResources"
         ],
         "description": "List FileSystemResource resources by subscription ID",
         "parameters": [
@@ -131,7 +132,7 @@
       "get": {
         "operationId": "FileSystems_ListByResourceGroup",
         "tags": [
-          "FileSystems"
+          "FileSystemResources"
         ],
         "description": "List FileSystemResource resources by resource group",
         "parameters": [
@@ -176,7 +177,7 @@
       "get": {
         "operationId": "FileSystems_Get",
         "tags": [
-          "FileSystems"
+          "FileSystemResources"
         ],
         "description": "Get a FileSystemResource",
         "parameters": [
@@ -202,7 +203,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+              "$ref": "#/definitions/FileSystemResource"
             }
           },
           "default": {
@@ -224,7 +225,7 @@
       "put": {
         "operationId": "FileSystems_CreateOrUpdate",
         "tags": [
-          "FileSystems"
+          "FileSystemResources"
         ],
         "description": "Create a FileSystemResource",
         "parameters": [
@@ -251,7 +252,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+              "$ref": "#/definitions/FileSystemResource"
             }
           }
         ],
@@ -259,13 +260,13 @@
           "200": {
             "description": "Resource 'FileSystemResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+              "$ref": "#/definitions/FileSystemResource"
             }
           },
           "201": {
             "description": "Resource 'FileSystemResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+              "$ref": "#/definitions/FileSystemResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -302,7 +303,7 @@
       "patch": {
         "operationId": "FileSystems_Update",
         "tags": [
-          "FileSystems"
+          "FileSystemResources"
         ],
         "description": "Update a FileSystemResource",
         "parameters": [
@@ -329,7 +330,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceUpdate"
+              "$ref": "#/definitions/FileSystemResourceUpdate"
             }
           }
         ],
@@ -337,7 +338,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+              "$ref": "#/definitions/FileSystemResource"
             }
           },
           "default": {
@@ -359,7 +360,7 @@
       "delete": {
         "operationId": "FileSystems_Delete",
         "tags": [
-          "FileSystems"
+          "FileSystemResources"
         ],
         "description": "Delete a FileSystemResource",
         "parameters": [
@@ -385,11 +386,6 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -427,6 +423,26 @@
     }
   },
   "definitions": {
+    "FileSystemResource": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileSystemResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "FileSystemResourceListResult": {
       "type": "object",
       "description": "The response of a FileSystemResource list operation.",
@@ -435,7 +451,7 @@
           "type": "array",
           "description": "The FileSystemResource items on this page",
           "items": {
-            "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            "$ref": "#/definitions/FileSystemResource"
           }
         },
         "nextLink": {
@@ -448,7 +464,163 @@
         "value"
       ]
     },
-    "LiftrBase.MarketplaceDetails": {
+    "FileSystemResourceProperties": {
+      "type": "object",
+      "description": "Properties specific to the Qumulo File System resource",
+      "properties": {
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetails",
+          "description": "Marketplace details"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
+        },
+        "storageSku": {
+          "type": "string",
+          "description": "Storage Sku"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/UserDetails",
+          "description": "User Details"
+        },
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        },
+        "clusterLoginUrl": {
+          "type": "string",
+          "description": "File system Id of the resource"
+        },
+        "privateIPs": {
+          "type": "array",
+          "description": "Private IPs of the resource",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adminPassword": {
+          "type": "string",
+          "description": "Initial administrator password of the resource"
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "Availability zone"
+        }
+      },
+      "required": [
+        "marketplaceDetails",
+        "storageSku",
+        "userDetails",
+        "delegatedSubnetId",
+        "adminPassword"
+      ]
+    },
+    "FileSystemResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the FileSystemResource.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/FileSystemResourceUpdateProperties",
+          "description": "The updatable properties of the FileSystemResource."
+        }
+      }
+    },
+    "FileSystemResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the FileSystemResource.",
+      "properties": {
+        "marketplaceDetails": {
+          "$ref": "#/definitions/MarketplaceDetails",
+          "description": "Marketplace details"
+        },
+        "userDetails": {
+          "$ref": "#/definitions/UserDetails",
+          "description": "User Details"
+        },
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        }
+      }
+    },
+    "ManagedServiceIdentity": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedServiceIdentityType",
+          "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed)."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ManagedServiceIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned,UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedServiceIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned"
+          },
+          {
+            "name": "SystemAssigned,UserAssigned",
+            "value": "SystemAssigned,UserAssigned"
+          }
+        ]
+      }
+    },
+    "MarketplaceDetails": {
       "type": "object",
       "description": "MarketplaceDetails of Qumulo FileSystem resource",
       "properties": {
@@ -473,7 +645,7 @@
           "description": "Term Unit"
         },
         "marketplaceSubscriptionStatus": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
           "description": "Marketplace subscription status",
           "readOnly": true
         }
@@ -483,7 +655,7 @@
         "offerId"
       ]
     },
-    "LiftrBase.MarketplaceSubscriptionStatus": {
+    "MarketplaceSubscriptionStatus": {
       "type": "string",
       "description": "Marketplace subscription status of the file system resource",
       "enum": [
@@ -519,7 +691,7 @@
         ]
       }
     },
-    "LiftrBase.ProvisioningState": {
+    "ProvisioningState": {
       "type": "string",
       "description": "Provisioning State of the File system resource",
       "enum": [
@@ -580,127 +752,13 @@
       },
       "readOnly": true
     },
-    "LiftrBase.Storage.FileSystemResource": {
-      "type": "object",
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "LiftrBase.Storage.FileSystemResourceProperties": {
-      "type": "object",
-      "description": "Properties specific to the Qumulo File System resource",
-      "properties": {
-        "marketplaceDetails": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
-          "description": "Marketplace details"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/LiftrBase.ProvisioningState",
-          "description": "Provisioning State of the resource",
-          "readOnly": true
-        },
-        "storageSku": {
-          "type": "string",
-          "description": "Storage Sku"
-        },
-        "userDetails": {
-          "$ref": "#/definitions/LiftrBase.UserDetails",
-          "description": "User Details"
-        },
-        "delegatedSubnetId": {
-          "type": "string",
-          "description": "Delegated subnet id for Vnet injection"
-        },
-        "clusterLoginUrl": {
-          "type": "string",
-          "description": "File system Id of the resource"
-        },
-        "privateIPs": {
-          "type": "array",
-          "description": "Private IPs of the resource",
-          "items": {
-            "type": "string"
-          }
-        },
-        "adminPassword": {
-          "type": "string",
-          "description": "Initial administrator password of the resource",
-          "x-ms-secret": true
-        },
-        "availabilityZone": {
-          "type": "string",
-          "description": "Availability zone"
-        }
-      },
-      "required": [
-        "marketplaceDetails",
-        "storageSku",
-        "userDetails",
-        "delegatedSubnetId",
-        "adminPassword"
-      ]
-    },
-    "LiftrBase.Storage.FileSystemResourceUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the FileSystemResource.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceUpdateProperties",
-          "description": "The updatable properties of the FileSystemResource."
-        }
-      }
-    },
-    "LiftrBase.Storage.FileSystemResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the FileSystemResource.",
-      "properties": {
-        "marketplaceDetails": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
-          "description": "Marketplace details"
-        },
-        "userDetails": {
-          "$ref": "#/definitions/LiftrBase.UserDetails",
-          "description": "User Details"
-        },
-        "delegatedSubnetId": {
-          "type": "string",
-          "description": "Delegated subnet id for Vnet injection"
-        }
-      }
-    },
-    "LiftrBase.UserDetails": {
+    "UserDetails": {
       "type": "object",
       "description": "User Details of Qumulo FileSystem resource",
       "properties": {
         "email": {
           "type": "string",
-          "description": "User Email",
-          "x-ms-secret": true
+          "description": "User Email"
         }
       },
       "required": [

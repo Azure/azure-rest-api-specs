@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01",
+    "offerId": "offid",
+    "offerType": "virtualmachine",
+    "parameters": {
+      "properties": {
+        "accepted": false,
+        "licenseTextLink": "test.licenseLink",
+        "marketplaceTermsLink": "test.marketplaceTermsLink",
+        "plan": "planid",
+        "privacyPolicyLink": "test.privacyPolicyLink",
+        "product": "offid",
+        "publisher": "pubid",
+        "retrieveDatetime": "2017-08-15T11:33:07.12132Z",
+        "signature": "ASDFSDAFWEFASDGWERLWER"
+      }
+    },
+    "planId": "planid",
+    "publisherId": "pubid",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "description": "OK. The request was successfully processed and the terms were accepted or acceptance revoked as per the request body.",
+      "body": {
+        "name": "planid",
+        "type": "Microsoft.MarketplaceOrdering/offertypes",
+        "id": "id",
+        "properties": {
+          "accepted": true,
+          "licenseTextLink": "test.licenseLink",
+          "marketplaceTermsLink": "test.marketplaceTermsLink",
+          "plan": "planid",
+          "privacyPolicyLink": "test.privacyPolicyLink",
+          "product": "offid",
+          "publisher": "pubid",
+          "retrieveDatetime": "2017-08-15T11:33:07.12132Z",
+          "signature": "ASDFSDAFWEFASDGWERLWER"
+        }
+      }
+    }
+  },
+  "operationId": "MarketplaceAgreements_Create",
+  "title": "SetMarketplaceTerms"
+}

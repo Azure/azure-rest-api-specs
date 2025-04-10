@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2024-04-13",
+    "clusterName": "kustoCluster",
+    "parameters": {
+      "properties": {
+        "baseImageName": "Python3_10_8",
+        "requirementsFileContent": "Requests",
+        "language": "Python"
+      }
+    },
+    "resourceGroupName": "kustorptest",
+    "sandboxCustomImageName": "customImage2",
+    "subscriptionId": "12345678-1234-1234-1234-123456789098"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "kustoCluster/customImage2",
+        "type": "Microsoft.Kusto/Clusters/SandboxCustomImages",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/SandboxCustomImages/customImage2",
+        "properties": {
+          "baseImageName": "Python3_10_8",
+          "provisioningState": "Accepted",
+          "requirementsFileContent": "Requests",
+          "language": "Python"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f12?api-version=2021-02-01"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "kustoCluster/customImage2",
+        "type": "Microsoft.Kusto/Clusters/SandboxCustomImages",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/Clusters/kustoCluster/SandboxCustomImages/customImage2",
+        "properties": {
+          "baseImageName": "Python3_10_8",
+          "provisioningState": "Creating",
+          "requirementsFileContent": "Requests",
+          "language": "Python"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f12?api-version=2021-02-01"
+      }
+    }
+  },
+  "operationId": "SandboxCustomImages_CreateOrUpdate",
+  "title": "KustoSandboxCustomImagesCreateOrUpdateWithManagedBaseImage"
+}

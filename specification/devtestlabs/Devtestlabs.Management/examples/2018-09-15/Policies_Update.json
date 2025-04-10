@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "name": "{policyName}",
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "policy": {
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    },
+    "policySetName": "{policySetName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{labName}",
+        "type": "Microsoft.DevTestLab/labs/policies",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies/{policyName}",
+        "location": "{location}",
+        "properties": {
+          "description": "{policyDescription}",
+          "createdDate": "2018-10-01T18:40:48.1739018-07:00",
+          "evaluatorType": "{policyEvaluatorType}",
+          "factData": "{policyFactData}",
+          "factName": "{policyFactName}",
+          "provisioningState": "Succeeded",
+          "status": "{policyStatus}",
+          "threshold": "{policyThreshold}",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        }
+      },
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  },
+  "operationId": "Policies_Update",
+  "title": "Policies_Update"
+}

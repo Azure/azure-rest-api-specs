@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2022-07-01",
+    "jobName": "job1",
+    "parameters": {
+      "properties": {
+        "correlationData": {
+          "Key 2": "Value 2",
+          "key1": "value1"
+        },
+        "input": {
+          "@odata.type": "#Microsoft.Media.JobInputAsset",
+          "assetName": "job1-InputAsset"
+        },
+        "outputs": [
+          {
+            "@odata.type": "#Microsoft.Media.JobOutputAsset",
+            "assetName": "job1-OutputAsset"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "contosoresources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "transformName": "exampleTransform"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "job1",
+        "type": "Microsoft.Media/mediaservices/transforms/jobs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job1",
+        "properties": {
+          "correlationData": {
+            "Key 2": "Value 2",
+            "key1": "value1"
+          },
+          "created": "2022-10-17T23:14:33.6140749Z",
+          "input": {
+            "@odata.type": "#Microsoft.Media.JobInputAsset",
+            "assetName": "job1-InputAsset",
+            "files": [],
+            "inputDefinitions": []
+          },
+          "lastModified": "2022-10-17T23:14:33.6140749Z",
+          "outputs": [
+            {
+              "@odata.type": "#Microsoft.Media.JobOutputAsset",
+              "assetName": "job1-OutputAsset",
+              "label": "BuiltInStandardEncoderPreset_0",
+              "progress": 0,
+              "state": "Queued"
+            }
+          ],
+          "priority": "Normal",
+          "state": "Queued"
+        },
+        "systemData": {
+          "createdAt": "2022-10-17T23:14:33.6140749Z",
+          "createdBy": "contoso@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-10-17T23:14:33.6140749Z",
+          "lastModifiedBy": "contoso@microsoft.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Jobs_Create",
+  "title": "Create a Job"
+}

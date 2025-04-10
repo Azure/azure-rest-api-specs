@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "name": "{vmName}",
+    "api-version": "2018-09-15",
+    "applyArtifactsRequest": {
+      "artifacts": [
+        {
+          "artifactId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/artifactSources/public repo/artifacts/windows-restart"
+        }
+      ]
+    },
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.DevTestLabs/locations/{location}"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_ApplyArtifacts",
+  "title": "VirtualMachines_ApplyArtifacts"
+}

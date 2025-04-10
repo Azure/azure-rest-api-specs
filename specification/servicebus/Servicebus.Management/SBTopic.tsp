@@ -1,0 +1,85 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./SBNamespace.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ServiceBus;
+/**
+ * Description of topic resource.
+ */
+@parentResource(SBNamespace)
+model SBTopic is Azure.ResourceManager.ProxyResource<SBTopicProperties> {
+  ...ResourceNameParameter<
+    Resource = SBTopic,
+    KeyName = "topicName",
+    SegmentName = "topics",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface SBTopics {
+  /**
+   * Returns a description for the specified topic.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Topics_Get")
+  get is ArmResourceRead<SBTopic>;
+
+  /**
+   * Creates a topic in the specified namespace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("Topics_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    SBTopic,
+    Response = ArmResourceUpdatedResponse<SBTopic>
+  >;
+
+  /**
+   * Deletes a topic from the specified namespace and resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Topics_Delete")
+  delete is ArmResourceDeleteSync<SBTopic>;
+
+  /**
+   * Gets all the topics in a namespace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("Topics_ListByNamespace")
+  listByNamespace is ArmResourceListByParent<
+    SBTopic,
+    Parameters = {
+      /**
+       * Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.
+       */
+      @maxValue(1000)
+      @query("$skip")
+      $skip?: int32;
+
+      /**
+       * May be used to limit the number of results to the most recent N usageDetails.
+       */
+      @maxValue(1000)
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+    }
+  >;
+}
+
+@@minLength(SBTopic.name, 1);
+@@doc(SBTopic.name, "The topic name.");
+@@doc(SBTopic.properties, "Properties of topic resource.");
+@@doc(SBTopics.createOrUpdate::parameters.resource,
+  "Parameters supplied to create a topic resource."
+);

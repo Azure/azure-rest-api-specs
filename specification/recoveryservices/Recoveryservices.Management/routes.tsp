@@ -1,0 +1,58 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "./models.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.RecoveryServices;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface RecoveryServicesOperationGroup {
+  /**
+   * API to check for resource name availability.
+   * A name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type
+   * or if one or more such resources exist, each of these must be GC'd and their time of deletion be more than 24 Hours Ago
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("""
+    API to check for resource name availability.
+    A name is available if no other resource exists that has the same SubscriptionId, Resource Name and Type
+    or if one or more such resources exist, each of these must be GC'd and their time of deletion be more than 24 Hours Ago
+    """)
+  @operationId("RecoveryServices_CheckNameAvailability")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability")
+  @post
+  checkNameAvailability(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * Contains information about Resource type and Resource name
+     */
+    @bodyRoot
+    input: CheckNameAvailabilityParameters,
+  ): ArmResponse<CheckNameAvailabilityResult> | ErrorResponse;
+
+  /**
+   * API to get details about capabilities provided by Microsoft.RecoveryServices RP
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("API to get details about capabilities provided by Microsoft.RecoveryServices RP")
+  @operationId("RecoveryServices_Capabilities")
+  @autoRoute
+  capabilities is ArmProviderActionSync<
+    Request = ResourceCapabilities,
+    Response = CapabilitiesResponse,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
+  >;
+}

@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15",
+    "body": {
+      "properties": {
+        "annotation": "annotation1",
+        "mtu": 6000
+      },
+      "tags": {
+        "keyID": "keyValue"
+      }
+    },
+    "l2IsolationDomainName": "example-l2Domain",
+    "resourceGroupName": "example-rg",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-l2domain",
+        "type": "microsoft.managednetworkfabric/l2IsolationDomains",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l2IsolationDomains/example-l2domain",
+        "location": "eastus",
+        "properties": {
+          "administrativeState": "Enabled",
+          "annotation": "annotation1",
+          "configurationState": "Succeeded",
+          "mtu": 1500,
+          "networkFabricId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-fabric",
+          "provisioningState": "Accepted",
+          "vlanId": 501
+        },
+        "systemData": {
+          "createdAt": "2023-06-05T17:42:03.977Z",
+          "createdBy": "user@mail.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-05T17:42:03.978Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "keyID": "keyValue"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "L2IsolationDomains_Update",
+  "title": "L2IsolationDomains_Update_MaximumSet_Gen"
+}

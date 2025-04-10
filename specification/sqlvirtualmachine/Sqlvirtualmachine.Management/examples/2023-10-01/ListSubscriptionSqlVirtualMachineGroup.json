@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testvmgroup",
+            "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/",
+            "location": "northeurope",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "sqlImageOffer": "SQL2017-WS2016",
+              "sqlImageSku": "Enterprise",
+              "wsfcDomainProfile": {
+                "clusterBootstrapAccount": "testrpadmin",
+                "clusterOperatorAccount": "testrp@testdomain.com",
+                "clusterSubnetType": "MultiSubnet",
+                "domainFqdn": "testdomain.com",
+                "isSqlServiceAccountGmsa": false,
+                "ouPath": "OU=WSCluster,DC=testdomain,DC=com",
+                "sqlServiceAccount": "sqlservice@testdomain.com",
+                "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+              }
+            },
+            "tags": {
+              "mytag": "myval"
+            }
+          },
+          {
+            "name": "testvmgroup1",
+            "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg1/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/",
+            "location": "northeurope",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "sqlImageOffer": "SQL2016-WS2016",
+              "sqlImageSku": "Enterprise",
+              "wsfcDomainProfile": {
+                "clusterBootstrapAccount": "testrpadmin",
+                "clusterOperatorAccount": "testrp@testdomain.com",
+                "clusterSubnetType": "MultiSubnet",
+                "domainFqdn": "testdomain.com",
+                "isSqlServiceAccountGmsa": false,
+                "ouPath": "OU=WSCluster,DC=testdomain,DC=com",
+                "sqlServiceAccount": "sqlservice@testdomain.com",
+                "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+              }
+            },
+            "tags": {
+              "mytag": "myval"
+            }
+          },
+          {
+            "name": "testvmgroup2",
+            "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg2/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/",
+            "location": "northeurope",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "sqlImageOffer": "SQL2016-WS2016",
+              "sqlImageSku": "Enterprise",
+              "wsfcDomainProfile": {
+                "clusterBootstrapAccount": "testrpadmin",
+                "clusterOperatorAccount": "testrp@testdomain.com",
+                "clusterSubnetType": "MultiSubnet",
+                "domainFqdn": "testdomain.com",
+                "isSqlServiceAccountGmsa": false,
+                "ouPath": "OU=WSCluster,DC=testdomain,DC=com",
+                "sqlServiceAccount": "sqlservice@testdomain.com",
+                "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+              }
+            },
+            "tags": {
+              "mytag": "myval"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SqlVirtualMachineGroups_List",
+  "title": "Gets all SQL virtual machine groups in a subscription."
+}

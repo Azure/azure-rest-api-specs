@@ -8,6 +8,7 @@ import "./ApplicationGroup.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -34,16 +35,7 @@ interface Desktops {
    * Update a desktop.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    Desktop,
-    DesktopPatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot desktop?: DesktopPatch;
-    }
-  >;
+  update is ArmCustomPatchSync<Desktop, PatchModel = DesktopPatch>;
 
   /**
    * List desktops.
@@ -69,7 +61,7 @@ interface Desktops {
       @query("initialSkip")
       initialSkip?: int32;
     },
-    Response = DesktopList
+    Response = ArmResponse<DesktopList>
   >;
 }
 
@@ -79,3 +71,6 @@ interface Desktops {
   "The name of the desktop within the specified desktop group"
 );
 @@doc(Desktop.properties, "Detailed properties for Desktop");
+@@doc(Desktops.update::parameters.properties,
+  "Object containing Desktop definitions."
+);

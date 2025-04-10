@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "resourceGroupName": "testrg",
+    "serverName": "sourcepgservername",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "pgtestsvc5rep",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc5rep",
+            "location": "westus",
+            "properties": {
+              "administratorLogin": "cloudsa",
+              "authConfig": {
+                "activeDirectoryAuth": "Disabled",
+                "passwordAuth": "Enabled"
+              },
+              "availabilityZone": "2",
+              "backup": {
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2021-05-27T00:28:17.7279547+00:00",
+                "geoRedundantBackup": "Disabled"
+              },
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "fullyQualifiedDomainName": "pgtestsvc5rep.postgres.database.azure.com",
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "minorVersion": "6",
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "replica": {
+                "capacity": 0,
+                "replicationState": "Active",
+                "role": "AsyncReplica"
+              },
+              "replicaCapacity": 0,
+              "replicationRole": "AsyncReplica",
+              "state": "Ready",
+              "storage": {
+                "autoGrow": "Disabled",
+                "iops": 2300,
+                "storageSizeGB": 512,
+                "tier": "P20"
+              },
+              "version": "12"
+            },
+            "sku": {
+              "name": "Standard_D4s_v3",
+              "tier": "GeneralPurpose"
+            },
+            "tags": {
+              "ElasticServer": "1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Replicas_ListByServer",
+  "title": "ReplicasListByServer"
+}

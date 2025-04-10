@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "problemClassificationsClassificationInput": {
+      "issueSummary": "Can not connect to Windows VM"
+    },
+    "problemServiceName": "serviceId1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "problemClassificationResults": [
+          {
+            "description": "Problem classification description",
+            "problemClassificationId": "problemClassificationId1",
+            "problemId": "problemId1",
+            "relatedService": {
+              "displayName": "SQL Server in VM - Linux",
+              "resourceTypes": [
+                "MICROSOFT.CLASSICCOMPUTE/VIRTUALMACHINES",
+                "MICROSOFT.COMPUTE/VIRTUALMACHINES"
+              ],
+              "serviceId": "/providers/Microsoft.Support/services/40ef020e-8ae7-8d57-b538-9153c47cee69"
+            },
+            "serviceId": "serviceId1",
+            "title": "Problem classification title"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProblemClassificationsNoSubscription_classifyProblems",
+  "title": "Classify list of problemClassifications for a specified Azure service"
+}

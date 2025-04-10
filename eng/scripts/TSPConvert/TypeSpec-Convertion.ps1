@@ -58,6 +58,7 @@ $RPList | ForEach-Object {
             if ($LASTEXITCODE) {
                 Write-Output "Failed to run convertion tool on $_."
                 $FailConvertRPlist += $_
+                # Remove folder failed some how
                 Remove-Item -Path $TSPFolderPath -Recurse -Force
             }
             else {
@@ -99,6 +100,7 @@ $FailCompileRPlist = Join-Path $testResultsFolder  "FailCompileRPlist.txt"
 New-Item -Path $FailCompileRPlist -ItemType File
 
 $SuccessConvertRPlist | Out-File -FilePath $SuccessConvertRPlistPath
+#Besides this file, all other logs below are not cached.
 $FailConvertRPlist | Out-File -FilePath $FailConvertRPlist
 $SuccessCompileRPlist | Out-File -FilePath $SuccessCompileRPlist
 $FailCompileRPlist | Out-File -FilePath $FailCompileRPlist

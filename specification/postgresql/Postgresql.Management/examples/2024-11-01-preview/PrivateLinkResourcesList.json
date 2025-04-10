@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "resourceGroupName": "Default",
+    "serverName": "test-svr",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "plr",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateLinkResources",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/Default/providers/Microsoft.DBforPostgreSQL/flexibleServers/test-svr/privateLinkResources/plr",
+            "properties": {
+              "groupId": "postgresqlServer",
+              "requiredMembers": [
+                "postgresqlServer"
+              ],
+              "requiredZoneNames": [
+                "privatelink.meru.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_ListByServer",
+  "title": "Gets private link resources for PostgreSQL."
+}

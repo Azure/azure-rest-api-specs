@@ -1,0 +1,253 @@
+{
+  "parameters": {
+    "accessControlListName": "example-acl",
+    "api-version": "2023-06-15",
+    "body": {
+      "properties": {
+        "aclsUrl": "https://microsoft.com/a",
+        "annotation": "annotation",
+        "configurationType": "File",
+        "defaultAction": "Permit",
+        "dynamicMatchConfigurations": [
+          {
+            "ipGroups": [
+              {
+                "name": "example-ipGroup",
+                "ipAddressType": "IPv4",
+                "ipPrefixes": [
+                  "10.20.3.1/20"
+                ]
+              }
+            ],
+            "portGroups": [
+              {
+                "name": "example-portGroup",
+                "ports": [
+                  "100-200"
+                ]
+              }
+            ],
+            "vlanGroups": [
+              {
+                "name": "example-vlanGroup",
+                "vlans": [
+                  "20-30"
+                ]
+              }
+            ]
+          }
+        ],
+        "matchConfigurations": [
+          {
+            "actions": [
+              {
+                "type": "Count",
+                "counterName": "example-counter"
+              }
+            ],
+            "ipAddressType": "IPv4",
+            "matchConditions": [
+              {
+                "dscpMarkings": [
+                  "32"
+                ],
+                "etherTypes": [
+                  "0x1"
+                ],
+                "fragments": [
+                  "0xff00-0xffff"
+                ],
+                "ipCondition": {
+                  "type": "SourceIP",
+                  "ipGroupNames": [
+                    "example-ipGroup"
+                  ],
+                  "ipPrefixValues": [
+                    "10.20.20.20/12"
+                  ],
+                  "prefixType": "Prefix"
+                },
+                "ipLengths": [
+                  "4094-9214"
+                ],
+                "portCondition": {
+                  "flags": [
+                    "established"
+                  ],
+                  "layer4Protocol": "TCP",
+                  "portGroupNames": [
+                    "example-portGroup"
+                  ],
+                  "portType": "SourcePort",
+                  "ports": [
+                    "1-20"
+                  ]
+                },
+                "protocolTypes": [
+                  "TCP"
+                ],
+                "ttlValues": [
+                  "23"
+                ],
+                "vlanMatchCondition": {
+                  "innerVlans": [
+                    "30"
+                  ],
+                  "vlanGroupNames": [
+                    "example-vlanGroup"
+                  ],
+                  "vlans": [
+                    "20-30"
+                  ]
+                }
+              }
+            ],
+            "matchConfigurationName": "example-match",
+            "sequenceNumber": 123
+          }
+        ]
+      },
+      "tags": {
+        "keyID": "KeyValue"
+      }
+    },
+    "resourceGroupName": "example-rg",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-acl",
+        "type": "microsoft.managednetworkfabric/accessControlLists",
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
+        "location": "eastUs",
+        "properties": {
+          "aclsUrl": "https://ACL-Storage-URL",
+          "administrativeState": "Enabled",
+          "annotation": "annotation",
+          "configurationState": "Succeeded",
+          "configurationType": "File",
+          "defaultAction": "Permit",
+          "dynamicMatchConfigurations": [
+            {
+              "ipGroups": [
+                {
+                  "name": "example-ipGroup",
+                  "ipAddressType": "IPv4",
+                  "ipPrefixes": [
+                    "10.20.3.1/20"
+                  ]
+                }
+              ],
+              "portGroups": [
+                {
+                  "name": "example-portGroup",
+                  "ports": [
+                    "100-200"
+                  ]
+                }
+              ],
+              "vlanGroups": [
+                {
+                  "name": "example-vlanGroup",
+                  "vlans": [
+                    "20-30"
+                  ]
+                }
+              ]
+            }
+          ],
+          "lastSyncedTime": "2023-06-17T08:56:23.203Z",
+          "matchConfigurations": [
+            {
+              "actions": [
+                {
+                  "type": "Count",
+                  "counterName": "example-counter"
+                }
+              ],
+              "ipAddressType": "IPv4",
+              "matchConditions": [
+                {
+                  "dscpMarkings": [
+                    "32"
+                  ],
+                  "etherTypes": [
+                    "0x1"
+                  ],
+                  "fragments": [
+                    "0xff00-0xffff"
+                  ],
+                  "ipCondition": {
+                    "type": "SourceIP",
+                    "ipGroupNames": [
+                      "example-ipGroup"
+                    ],
+                    "ipPrefixValues": [
+                      "10.20.20.20/12"
+                    ],
+                    "prefixType": "Prefix"
+                  },
+                  "ipLengths": [
+                    "4094-9214"
+                  ],
+                  "portCondition": {
+                    "flags": [
+                      "established"
+                    ],
+                    "layer4Protocol": "TCP",
+                    "portGroupNames": [
+                      "example-portGroup"
+                    ],
+                    "portType": "SourcePort",
+                    "ports": [
+                      "1-20"
+                    ]
+                  },
+                  "protocolTypes": [
+                    "TCP"
+                  ],
+                  "ttlValues": [
+                    "23"
+                  ],
+                  "vlanMatchCondition": {
+                    "innerVlans": [
+                      "30"
+                    ],
+                    "vlanGroupNames": [
+                      "example-vlanGroup"
+                    ],
+                    "vlans": [
+                      "20-30"
+                    ]
+                  }
+                }
+              ],
+              "matchConfigurationName": "example-match",
+              "sequenceNumber": 123
+            }
+          ],
+          "provisioningState": "Accepted"
+        },
+        "systemData": {
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "keyID": "KeyValue"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "AccessControlLists_Update",
+  "title": "AccessControlLists_Update_MaximumSet_Gen"
+}

@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "apiName": "servicebus",
+    "integrationServiceEnvironmentName": "testIntegrationServiceEnvironment",
+    "resourceGroup": "testResourceGroup",
+    "subscriptionId": "f34b22a3-2202-4fb1-b040-1332bd928c84"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "servicebus",
+        "type": "Microsoft.Logic/integrationServiceEnvironments/managedApis",
+        "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/managedApis/servicebus",
+        "location": "northeurope",
+        "properties": {
+          "name": "servicebus",
+          "capabilities": [
+            "actions"
+          ],
+          "connectionParameters": {
+            "connectionString": {
+              "type": "securestring",
+              "uiDefinition": {
+                "description": "Azure Service Bus Connection String",
+                "constraints": {
+                  "required": "true"
+                },
+                "displayName": "Connection String",
+                "tooltip": "Provide Azure Service Bus Connection String"
+              }
+            }
+          },
+          "generalInformation": {
+            "description": "Connect to Azure Service Bus to send and receive messages. You can perform actions such as send to queue, send to topic, receive from queue, receive from subscription, etc.",
+            "displayName": "Service Bus",
+            "iconUrl": "https://cpgeneralstore.blob.core.windows.net/officialicons/servicebus/icon_1.0.1206.1574.png",
+            "releaseTag": "Production",
+            "tier": "Standard"
+          },
+          "integrationServiceEnvironment": {
+            "name": "testIntegrationServiceEnvironment",
+            "type": "Microsoft.Logic/integrationServiceEnvironments",
+            "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment"
+          },
+          "metadata": {
+            "brandColor": "#c4d5ff",
+            "source": "marketplace"
+          },
+          "provisioningState": "Succeeded",
+          "runtimeUrls": [
+            "https://flow-weiroa6odksti-db-apim-runtime.northeurope.environments.microsoftazurelogicapps.net/apim/servicebus"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "IntegrationServiceEnvironmentManagedApis_Get",
+  "title": "Gets the integration service environment managed Apis"
+}

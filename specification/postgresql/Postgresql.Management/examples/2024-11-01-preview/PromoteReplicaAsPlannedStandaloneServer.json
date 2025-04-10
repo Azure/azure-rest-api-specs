@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "parameters": {
+      "properties": {
+        "replica": {
+          "promoteMode": "standalone",
+          "promoteOption": "planned"
+        }
+      }
+    },
+    "resourceGroupName": "testResourceGroup",
+    "serverName": "pgtestsvc4-replica",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pgtestsvc4-replica",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4-replica",
+        "location": "westus",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "availabilityZone": "1",
+          "backup": {
+            "backupRetentionDays": 20,
+            "earliestRestoreDate": "2021-05-26T01:16:58.3723361+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "fullyQualifiedDomainName": "pgtestsvc4-replica.postgres.database.azure.com",
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "standbyAvailabilityZone": "2",
+            "state": "Healthy"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "minorVersion": "6",
+          "network": {
+            "delegatedSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet",
+            "privateDnsZoneArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/privateDnsZones/test-private-dns-zone.postgres.database.azure.com",
+            "publicNetworkAccess": "Disabled"
+          },
+          "replica": {
+            "capacity": 0,
+            "role": "None"
+          },
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 5000,
+            "storageSizeGB": 1024,
+            "tier": "P30"
+          },
+          "version": "12"
+        },
+        "sku": {
+          "name": "Standard_D8s_v3",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "ElasticServer": "1"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-11-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-11-01-preview"
+      }
+    }
+  },
+  "operationId": "Servers_Update",
+  "title": "Promote a replica server as a Standalone server as planned, i.e. it will wait for replication to complete."
+}

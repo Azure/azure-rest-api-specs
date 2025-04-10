@@ -1,0 +1,140 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./SyncGroup.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.StorageSync;
+/**
+ * Cloud Endpoint object.
+ */
+@parentResource(SyncGroup)
+model CloudEndpoint
+  is Azure.ResourceManager.ProxyResource<CloudEndpointProperties> {
+  ...ResourceNameParameter<
+    Resource = CloudEndpoint,
+    KeyName = "cloudEndpointName",
+    SegmentName = "cloudEndpoints",
+    NamePattern = ""
+  >;
+}
+
+@armResourceOperations
+interface CloudEndpoints {
+  /**
+   * Get a given CloudEndpoint.
+   */
+  get is ArmResourceRead<CloudEndpoint>;
+
+  /**
+   * Create a new CloudEndpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  create is ArmResourceCreateOrReplaceAsync<
+    CloudEndpoint,
+    Response = ArmResourceUpdatedResponse<CloudEndpoint> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Delete a given CloudEndpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    CloudEndpoint,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Get a CloudEndpoint List.
+   */
+  listBySyncGroup is ArmResourceListByParent<
+    CloudEndpoint,
+    Response = ArmResponse<CloudEndpointArray>
+  >;
+
+  /**
+   * Pre Backup a given CloudEndpoint.
+   */
+  @action("prebackup")
+  preBackup is ArmResourceActionAsync<CloudEndpoint, BackupRequest, OkResponse>;
+
+  /**
+   * Post Backup a given CloudEndpoint.
+   */
+  @action("postbackup")
+  postBackup is ArmResourceActionAsync<
+    CloudEndpoint,
+    BackupRequest,
+    ArmResponse<PostBackupResponse>
+  >;
+
+  /**
+   * Pre Restore a given CloudEndpoint.
+   */
+  @action("prerestore")
+  preRestore is ArmResourceActionAsync<
+    CloudEndpoint,
+    PreRestoreRequest,
+    OkResponse
+  >;
+
+  /**
+   * Restore Heartbeat a given CloudEndpoint.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CloudEndpoints_restoreheartbeat")
+  restoreheartbeat is ArmResourceActionSync<CloudEndpoint, void, OkResponse>;
+
+  /**
+   * Post Restore a given CloudEndpoint.
+   */
+  @action("postrestore")
+  postRestore is ArmResourceActionAsync<
+    CloudEndpoint,
+    PostRestoreRequest,
+    OkResponse
+  >;
+
+  /**
+   * Triggers detection of changes performed on Azure File share connected to the specified Azure File Sync Cloud Endpoint.
+   */
+  triggerChangeDetection is ArmResourceActionAsync<
+    CloudEndpoint,
+    TriggerChangeDetectionParameters,
+    OkResponse
+  >;
+
+  /**
+   * Get the AFS file share metadata signing certificate public keys.
+   */
+  @get
+  afsShareMetadataCertificatePublicKeys is ArmResourceActionSync<
+    CloudEndpoint,
+    void,
+    ArmResponse<CloudEndpointAfsShareMetadataCertificatePublicKeys>
+  >;
+}
+
+@@doc(CloudEndpoint.name, "Name of Cloud Endpoint object.");
+@@doc(CloudEndpoint.properties, "Cloud Endpoint properties.");
+@@doc(CloudEndpoints.create::parameters.resource,
+  "Body of Cloud Endpoint resource."
+);
+@@doc(CloudEndpoints.preBackup::parameters.body, "Body of Backup request.");
+@@doc(CloudEndpoints.postBackup::parameters.body, "Body of Backup request.");
+@@doc(CloudEndpoints.preRestore::parameters.body,
+  "Body of Cloud Endpoint object."
+);
+@@doc(CloudEndpoints.postRestore::parameters.body,
+  "Body of Cloud Endpoint object."
+);
+@@doc(CloudEndpoints.triggerChangeDetection::parameters.body,
+  "Trigger Change Detection Action parameters."
+);

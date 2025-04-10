@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2022-07-01",
+    "parameters": {
+      "properties": {
+        "description": "Example transform to illustrate update.",
+        "outputs": [
+          {
+            "preset": {
+              "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
+              "presetName": "H264MultipleBitrate720p"
+            },
+            "relativePriority": "High"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "contosoresources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "transformName": "transformToUpdate"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "transformToUpdate",
+        "type": "Microsoft.Media/mediaservices/transforms",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/transformToUpdate",
+        "properties": {
+          "description": "Example transform to illustrate update.",
+          "created": "2022-10-17T23:14:32.1435128Z",
+          "lastModified": "2022-10-17T23:14:32.1455494Z",
+          "outputs": [
+            {
+              "onError": "StopProcessingJob",
+              "preset": {
+                "@odata.type": "#Microsoft.Media.BuiltInStandardEncoderPreset",
+                "presetName": "H264MultipleBitrate720p"
+              },
+              "relativePriority": "High"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2022-10-17T23:14:32.1435128Z",
+          "createdBy": "contoso@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-10-17T23:14:32.1455494Z",
+          "lastModifiedBy": "contoso@microsoft.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "Transforms_Update",
+  "title": "Update a Transform."
+}

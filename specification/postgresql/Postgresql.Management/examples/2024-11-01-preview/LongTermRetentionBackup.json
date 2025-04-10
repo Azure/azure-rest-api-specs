@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "parameters": {
+      "backupSettings": {
+        "backupName": "backup1"
+      },
+      "targetDetails": {
+        "sasUriList": [
+          "sasuri"
+        ]
+      }
+    },
+    "resourceGroupName": "rgLongTermRetention",
+    "serverName": "pgsqlltrtestserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "backupMetadata": "backupmetadata",
+          "dataTransferredInBytes": 23,
+          "datasourceSizeInBytes": 23,
+          "endTime": "2023-04-13T01:32:30.128Z",
+          "percentComplete": 100,
+          "startTime": "2023-04-13T01:32:30.128Z",
+          "status": "Running"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/azureAsyncOperation/ffc80e91-03db-4534-b5de-bacb77aa6a81?api-version=2024-11-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/operationResults/ffc80e91-03db-4534-b5de-bacb77aa6a81?api-version=2024-11-01-preview"
+      }
+    }
+  },
+  "operationId": "FlexibleServer_StartLtrBackup",
+  "title": "Sample_ExecuteBackup"
+}

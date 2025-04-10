@@ -8,6 +8,7 @@ import "./ApplicationTypeResource.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -15,47 +16,46 @@ namespace Microsoft.ServiceFabric;
  */
 @parentResource(ApplicationTypeResource)
 model ApplicationTypeVersionResource
-  is Azure.ResourceManager.ProxyResource<ApplicationTypeVersionResourceProperties> {
+  is Azure.ResourceManager.TrackedResource<ApplicationTypeVersionResourceProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationTypeVersionResource,
     KeyName = "version",
     SegmentName = "versions",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /**
-   * The geo-location where the resource lives
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  location?: string;
 }
 
 @armResourceOperations
-interface ApplicationTypeVersions {
+interface ApplicationTypeVersionResources {
   /**
    * Get a Service Fabric managed application type version resource created or in the process of being created in the Service Fabric managed application type name resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApplicationTypeVersions_Get")
   get is ArmResourceRead<ApplicationTypeVersionResource>;
 
   /**
    * Create or update a Service Fabric managed application type version resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @operationId("ApplicationTypeVersions_CreateOrUpdate")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApplicationTypeVersionResource,
-    Response = ArmResourceUpdatedResponse<ApplicationTypeVersionResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationTypeVersionResource>> & {
+    Response = ArmResourceUpdatedResponse<ApplicationTypeVersionResource> | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: ApplicationTypeVersionResource;
-    })
+    }),
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Updates the tags of an application type version resource of a given managed cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
+  @operationId("ApplicationTypeVersions_Update")
   update is ArmCustomPatchSync<
     ApplicationTypeVersionResource,
     PatchModel = ApplicationTypeVersionUpdateParameters
@@ -64,14 +64,15 @@ interface ApplicationTypeVersions {
   /**
    * Delete a Service Fabric managed application type version resource with the specified name.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
-    ApplicationTypeVersionResource,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
-  >;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApplicationTypeVersions_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<ApplicationTypeVersionResource>;
 
   /**
    * Gets all application type version resources created or in the process of being created in the Service Fabric managed application type name resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApplicationTypeVersions_ListByApplicationTypes")
   listByApplicationTypes is ArmResourceListByParent<
     ApplicationTypeVersionResource,
     Response = ArmResponse<ApplicationTypeVersionResourceList>
@@ -82,43 +83,9 @@ interface ApplicationTypeVersions {
 @@doc(ApplicationTypeVersionResource.properties,
   "The properties of the application type version resource."
 );
-@@doc(ApplicationTypeVersions.createOrUpdate::parameters.resource,
+@@doc(ApplicationTypeVersionResources.createOrUpdate::parameters.resource,
   "The application type version resource."
 );
-@@doc(ApplicationTypeVersions.update::parameters.properties,
+@@doc(ApplicationTypeVersionResources.update::parameters.properties,
   "The application type version resource updated tags."
 );
-
-/**
- * The properties of the application type version resource.
- */
-model ApplicationTypeVersionResourceProperties {
-  /**
-   * The current deployment or provisioning state, which only appears in the response
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Day 0 property, keep as string for backwards compatibility"
-  @visibility(Lifecycle.Read)
-  provisioningState?: string;
-
-  /**
-   * The URL to the application package
-   */
-  appPackageUrl: string;
-}
-
-/**
- * The list of application type version resources for the specified application type name resource.
- */
-model ApplicationTypeVersionResourceList
-  is Azure.Core.Page<ApplicationTypeVersionResource>;
-
-/**
- * Application type version update request
- */
-model ApplicationTypeVersionUpdateParameters {
-  /**
-   * Application type version update parameters
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
-  tags?: Record<string>;
-}

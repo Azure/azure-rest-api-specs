@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "properties": {
+              "authType": "systemAssignedIdentity",
+              "clientType": "none",
+              "names": [
+                {
+                  "description": "App configuration endpoint",
+                  "value": "AZURE_APPCONFIGURATION_ENDPOINT"
+                },
+                {
+                  "description": "The scopes required for the token.",
+                  "value": "AZURE_APPCONFIGURATION_SCOPE"
+                }
+              ],
+              "targetService": "MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES"
+            }
+          },
+          {
+            "properties": {
+              "authType": "userAssignedIdentity",
+              "clientType": "none",
+              "names": [
+                {
+                  "description": "App configuration endpoint",
+                  "value": "AZURE_APPCONFIGURATION_ENDPOINT"
+                },
+                {
+                  "description": "The client(application) ID of the user identity.",
+                  "value": "AZURE_APPCONFIGURATION_CLIENTID"
+                },
+                {
+                  "description": "The scopes required for getting token.",
+                  "value": "AZURE_APPCONFIGURATION_SCOPE"
+                }
+              ],
+              "targetService": "MICROSOFT.APPCONFIGURATION/CONFIGURATIONSTORES"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ConfigurationNames_List",
+  "title": "GetConfigurationNames"
+}

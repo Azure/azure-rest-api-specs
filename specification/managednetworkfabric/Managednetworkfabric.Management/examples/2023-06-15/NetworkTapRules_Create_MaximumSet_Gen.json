@@ -1,0 +1,361 @@
+{
+  "parameters": {
+    "api-version": "2023-06-15",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "annotation": "annotation",
+        "configurationType": "File",
+        "dynamicMatchConfigurations": [
+          {
+            "ipGroups": [
+              {
+                "name": "example-ipGroup1",
+                "ipAddressType": "IPv4",
+                "ipPrefixes": [
+                  "10.10.10.10/30"
+                ]
+              }
+            ],
+            "portGroups": [
+              {
+                "name": "example-portGroup1",
+                "ports": [
+                  "100-200"
+                ]
+              },
+              {
+                "name": "example-portGroup2",
+                "ports": [
+                  "900",
+                  "1000-2000"
+                ]
+              }
+            ],
+            "vlanGroups": [
+              {
+                "name": "exmaple-vlanGroup",
+                "vlans": [
+                  "10",
+                  "100-200"
+                ]
+              }
+            ]
+          }
+        ],
+        "matchConfigurations": [
+          {
+            "actions": [
+              {
+                "type": "Drop",
+                "destinationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup",
+                "isTimestampEnabled": "True",
+                "matchConfigurationName": "match1",
+                "truncate": "100"
+              }
+            ],
+            "ipAddressType": "IPv4",
+            "matchConditions": [
+              {
+                "encapsulationType": "None",
+                "ipCondition": {
+                  "type": "SourceIP",
+                  "ipGroupNames": [
+                    "example-ipGroup"
+                  ],
+                  "ipPrefixValues": [
+                    "10.10.10.10/20"
+                  ],
+                  "prefixType": "Prefix"
+                },
+                "portCondition": {
+                  "layer4Protocol": "TCP",
+                  "portGroupNames": [
+                    "example-portGroup1"
+                  ],
+                  "portType": "SourcePort",
+                  "ports": [
+                    "100"
+                  ]
+                },
+                "protocolTypes": [
+                  "TCP"
+                ],
+                "vlanMatchCondition": {
+                  "innerVlans": [
+                    "11-20"
+                  ],
+                  "vlanGroupNames": [
+                    "exmaple-vlanGroup"
+                  ],
+                  "vlans": [
+                    "10"
+                  ]
+                }
+              }
+            ],
+            "matchConfigurationName": "config1",
+            "sequenceNumber": 10
+          }
+        ],
+        "pollingIntervalInSeconds": 30,
+        "tapRulesUrl": "https://microsoft.com/a"
+      },
+      "tags": {
+        "keyID": "keyValue"
+      }
+    },
+    "networkTapRuleName": "example-tapRule",
+    "resourceGroupName": "example-rg",
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "example-tapRule",
+        "type": "microsoft.managednetworkfabric/networkTapRules",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-tapRule",
+        "location": "eastuseuap",
+        "properties": {
+          "administrativeState": "Enabled",
+          "annotation": "annotation",
+          "configurationState": "Succeeded",
+          "configurationType": "File",
+          "dynamicMatchConfigurations": [
+            {
+              "ipGroups": [
+                {
+                  "name": "example-ipGroup1",
+                  "ipPrefixes": [
+                    "10.10.10.10/30"
+                  ]
+                }
+              ],
+              "portGroups": [
+                {
+                  "name": "example-portGroup1",
+                  "ports": [
+                    "100-200"
+                  ]
+                },
+                {
+                  "name": "example-portGroup2",
+                  "ports": [
+                    "900",
+                    "1000-2000"
+                  ]
+                }
+              ],
+              "vlanGroups": [
+                {
+                  "name": "exmaple-vlanGroup",
+                  "vlans": [
+                    "10",
+                    "100-200"
+                  ]
+                }
+              ]
+            }
+          ],
+          "lastSyncedTime": "2023-06-12T07:11:22.485Z",
+          "matchConfigurations": [
+            {
+              "actions": [
+                {
+                  "type": "Drop",
+                  "destinationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup",
+                  "isTimestampEnabled": "True",
+                  "matchConfigurationName": "match1",
+                  "truncate": "100"
+                }
+              ],
+              "ipAddressType": "IPv4",
+              "matchConditions": [
+                {
+                  "encapsulationType": "None",
+                  "ipCondition": {
+                    "type": "SourceIP",
+                    "ipGroupNames": [
+                      "example-ipGroup"
+                    ],
+                    "ipPrefixValues": [
+                      "10.10.10.10/20"
+                    ],
+                    "prefixType": "Prefix"
+                  },
+                  "portCondition": {
+                    "layer4Protocol": "TCP",
+                    "portGroupNames": [
+                      "example-portGroup1"
+                    ],
+                    "portType": "SourcePort",
+                    "ports": [
+                      "100"
+                    ]
+                  },
+                  "protocolTypes": [
+                    "TCP"
+                  ],
+                  "vlanMatchCondition": {
+                    "innerVlans": [
+                      "11-20"
+                    ],
+                    "vlanGroupNames": [
+                      "exmaple-vlanGroup"
+                    ],
+                    "vlans": [
+                      "10"
+                    ]
+                  }
+                }
+              ],
+              "matchConfigurationName": "config1",
+              "sequenceNumber": 10
+            }
+          ],
+          "networkTapId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTaps/example-tap",
+          "pollingIntervalInSeconds": 30,
+          "provisioningState": "Accepted",
+          "tapRulesUrl": "https://microsoft.com/a"
+        },
+        "systemData": {
+          "createdAt": "2023-06-12T07:11:22.488Z",
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-12T07:11:22.488Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "keyID": "keyValue"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "example-tapRule",
+        "type": "microsoft.managednetworkfabric/networkTapRules",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-tapRule",
+        "location": "eastuseuap",
+        "properties": {
+          "administrativeState": "Enabled",
+          "annotation": "annotation",
+          "configurationState": "Succeeded",
+          "configurationType": "File",
+          "dynamicMatchConfigurations": [
+            {
+              "ipGroups": [
+                {
+                  "name": "example-ipGroup1",
+                  "ipPrefixes": [
+                    "10.10.10.10/30"
+                  ]
+                }
+              ],
+              "portGroups": [
+                {
+                  "name": "example-portGroup1",
+                  "ports": [
+                    "100-200"
+                  ]
+                },
+                {
+                  "name": "example-portGroup2",
+                  "ports": [
+                    "900",
+                    "1000-2000"
+                  ]
+                }
+              ],
+              "vlanGroups": [
+                {
+                  "name": "exmaple-vlanGroup",
+                  "vlans": [
+                    "10",
+                    "100-200"
+                  ]
+                }
+              ]
+            }
+          ],
+          "lastSyncedTime": "2023-06-12T07:11:22.485Z",
+          "matchConfigurations": [
+            {
+              "actions": [
+                {
+                  "type": "Drop",
+                  "destinationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/neighborGroups/example-neighborGroup",
+                  "isTimestampEnabled": "True",
+                  "matchConfigurationName": "match1",
+                  "truncate": "100"
+                }
+              ],
+              "ipAddressType": "IPv4",
+              "matchConditions": [
+                {
+                  "encapsulationType": "None",
+                  "ipCondition": {
+                    "type": "SourceIP",
+                    "ipGroupNames": [
+                      "example-ipGroup"
+                    ],
+                    "ipPrefixValues": [
+                      "10.10.10.10/20"
+                    ],
+                    "prefixType": "Prefix"
+                  },
+                  "portCondition": {
+                    "layer4Protocol": "TCP",
+                    "portGroupNames": [
+                      "example-portGroup1"
+                    ],
+                    "portType": "SourcePort",
+                    "ports": [
+                      "100"
+                    ]
+                  },
+                  "protocolTypes": [
+                    "TCP"
+                  ],
+                  "vlanMatchCondition": {
+                    "innerVlans": [
+                      "11-20"
+                    ],
+                    "vlanGroupNames": [
+                      "exmaple-vlanGroup"
+                    ],
+                    "vlans": [
+                      "10"
+                    ]
+                  }
+                }
+              ],
+              "matchConfigurationName": "config1",
+              "sequenceNumber": 10
+            }
+          ],
+          "networkTapId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTaps/example-tap",
+          "pollingIntervalInSeconds": 30,
+          "provisioningState": "Accepted",
+          "tapRulesUrl": "https://microsoft.com/a"
+        },
+        "systemData": {
+          "createdAt": "2023-06-12T07:11:22.488Z",
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-06-12T07:11:22.488Z",
+          "lastModifiedBy": "user@mail.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "keyID": "keyValue"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "NetworkTapRules_Create",
+  "title": "NetworkTapRules_Create_MaximumSet_Gen"
+}

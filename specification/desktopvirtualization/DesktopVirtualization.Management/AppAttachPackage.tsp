@@ -4,8 +4,10 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
+using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -26,36 +28,38 @@ interface AppAttachPackages {
   /**
    * Get an app attach package.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppAttachPackage_Get")
   get is ArmResourceRead<AppAttachPackage>;
 
   /**
    * Create or update an App Attach package.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppAttachPackage_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<AppAttachPackage>;
 
   /**
    * Update an App Attach Package
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
+  @operationId("AppAttachPackage_Update")
   update is ArmCustomPatchSync<
     AppAttachPackage,
-    AppAttachPackagePatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot appAttachPackagePatch?: AppAttachPackagePatch;
-    }
+    PatchModel = AppAttachPackagePatch
   >;
 
   /**
    * Remove an App Attach Package.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppAttachPackage_Delete")
   delete is ArmResourceDeleteSync<
     AppAttachPackage,
     Parameters = {
       /**
-       * Allows force delete
+       * Force flag to delete App Attach package.
        */
       @query("force")
       force?: boolean;
@@ -65,40 +69,47 @@ interface AppAttachPackages {
   /**
    * List App Attach packages in resource group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppAttachPackage_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AppAttachPackage,
     Parameters = {
       /**
-       * OData filter expression. Valid properties for filtering are package name and host pool.
+       * OData filter expression. Valid properties for filtering are package name, host pool, package owner name, and custom data.
        */
       @query("$filter")
       $filter?: string;
     },
-    Response = AppAttachPackageList
+    Response = ArmResponse<AppAttachPackageList>
   >;
 
   /**
    * List App Attach packages in subscription.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AppAttachPackage_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     AppAttachPackage,
     Parameters = {
       /**
-       * OData filter expression. Valid properties for filtering are package name, host pool, and resource group.
+       * OData filter expression. Valid properties for filtering are package name, resource group, host pool, package owner name, and custom data.
        */
       @query("$filter")
       $filter?: string;
     },
-    Response = AppAttachPackageList
+    Response = ArmResponse<AppAttachPackageList>
   >;
 }
 
 @@maxLength(AppAttachPackage.name, 100);
 @@minLength(AppAttachPackage.name, 3);
-@@doc(AppAttachPackage.name, "The name of the App Attach package");
+@@doc(AppAttachPackage.name, "The name of the App Attach package arm object");
 @@doc(AppAttachPackage.properties,
   "Detailed properties for App Attach Package"
 );
 @@doc(AppAttachPackages.createOrUpdate::parameters.resource,
   "Object containing App Attach Package definitions."
+);
+@@doc(AppAttachPackages.update::parameters.properties,
+  "Object containing App Attach Package definition."
 );

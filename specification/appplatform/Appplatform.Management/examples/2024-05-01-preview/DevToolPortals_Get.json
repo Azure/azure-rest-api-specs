@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "devToolPortalName": "default",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.AppPlatform/Spring/applicationLiveViews",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/applicationLiveViews/default",
+        "properties": {
+          "components": [
+            {
+              "name": "server",
+              "instances": [
+                {
+                  "name": "dev-tool-portal-server-name",
+                  "status": "Running"
+                }
+              ],
+              "resourceRequests": {
+                "cpu": "1",
+                "instanceCount": 1,
+                "memory": "1Gi"
+              }
+            }
+          ],
+          "features": {
+            "applicationAccelerator": {
+              "route": "create",
+              "state": "Enabled"
+            },
+            "applicationLiveView": {
+              "route": "appliveview",
+              "state": "Enabled"
+            }
+          },
+          "provisioningState": "Succeeded",
+          "public": true,
+          "ssoProperties": {
+            "clientId": "00000000-0000-0000-0000-000000000000",
+            "metadataUrl": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration",
+            "scopes": [
+              "openid"
+            ]
+          },
+          "url": "aaa.com"
+        },
+        "systemData": {
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "DevToolPortals_Get",
+  "title": "DevToolPortals_Get"
+}

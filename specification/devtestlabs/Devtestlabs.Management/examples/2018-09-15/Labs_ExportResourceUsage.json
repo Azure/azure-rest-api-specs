@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "name": "{labName}",
+    "api-version": "2018-09-15",
+    "exportResourceUsageParameters": {
+      "blobStorageAbsoluteSasUri": "https://invalid.blob.core.windows.net/export.blob?sv=2015-07-08&sig={sas}&sp=rcw",
+      "usageStartDate": "2020-12-01T00:00:00Z"
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.DevTestLabs/locations/{location}"
+      }
+    }
+  },
+  "operationId": "Labs_ExportResourceUsage",
+  "title": "Labs_ExportResourceUsage"
+}

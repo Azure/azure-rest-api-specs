@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "certificateName": "testCertificate",
+    "integrationAccountName": "testIntegrationAccount",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testCertificate",
+        "type": "Microsoft.Logic/integrationAccounts/certificates",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationAccounts/IntegrationAccount9472/certificates/testCertificate",
+        "properties": {
+          "changedTime": "2017-03-06T20:42:21.051317Z",
+          "createdTime": "2017-03-06T20:42:21.0510202Z",
+          "key": {
+            "keyName": "<keyName>",
+            "keyVault": {
+              "name": "<keyVaultName>",
+              "type": "Microsoft.KeyVault/vaults",
+              "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testResourceGroup/providers/microsoft.keyvault/vaults/<keyVaultName>"
+            },
+            "keyVersion": "87d9764197604449b9b8eb7bd8710868"
+          },
+          "publicCertificate": "<publicCertificate>"
+        }
+      }
+    }
+  },
+  "operationId": "IntegrationAccountCertificates_Get",
+  "title": "Get certificate by name"
+}

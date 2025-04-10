@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "artifactSourceName": "{artifactSourceName}",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{artifactName}",
+            "type": "Microsoft.DevTestLab/labs/artifactSources/artifacts",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/artifactSources/{artifactSourceName}/artifacts/{artifactName}",
+            "location": "{location}",
+            "properties": {
+              "description": "Sample artifact description.",
+              "filePath": "{artifactsPath}/{artifactName}",
+              "parameters": {
+                "uri": {
+                  "type": "string",
+                  "description": "Sample parameter 1 description.",
+                  "defaultValue": "https://{labStorageAccount}.blob.core.windows.net/{artifactName}/...",
+                  "displayName": "Sample Parameter 1"
+                }
+              },
+              "publisher": "Microsoft",
+              "targetOsType": "Windows",
+              "title": "Sample Artifact Title"
+            },
+            "tags": {
+              "MyTag": "MyValue"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Artifacts_List",
+  "title": "Artifacts_List"
+}

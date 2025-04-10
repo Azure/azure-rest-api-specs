@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-02-15",
+    "channelName": "exampleChannelName1",
+    "partnerNamespaceName": "examplePartnerNamespaceName1",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleChannelName1",
+        "type": "Microsoft.EventGrid/partnerNamespaces/channels",
+        "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/partnerNamespaces/examplePartnerNamespaceName1/changes/exampleChannelName1",
+        "properties": {
+          "channelType": "PartnerTopic",
+          "expirationTimeIfNotActivatedUtc": "2021-10-21T22:50:25.410433Z",
+          "messageForActivation": "Example message to approver",
+          "partnerTopicInfo": {
+            "name": "examplePartnerTopic1",
+            "azureSubscriptionId": "5b4b650e-28b9-4790-b3ab-ddbd88d727c4",
+            "resourceGroupName": "examplerg2",
+            "source": "ContosoCorp.Accounts.User1"
+          },
+          "provisioningState": "Succeeded",
+          "readinessState": "NeverActivated"
+        }
+      }
+    }
+  },
+  "operationId": "Channels_Get",
+  "title": "Channels_Get"
+}

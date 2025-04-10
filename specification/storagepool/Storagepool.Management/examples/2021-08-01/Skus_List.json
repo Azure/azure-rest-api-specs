@@ -1,0 +1,138 @@
+{
+  "parameters": {
+    "api-version": "2021-08-01",
+    "location": "eastus",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "Standard_V1",
+            "apiVersion": "2021-08-01",
+            "capabilities": [
+              {
+                "name": "MaxNumberOfDisks",
+                "value": "1"
+              }
+            ],
+            "locationInfo": {
+              "location": "eastus",
+              "zoneDetails": [
+                {
+                  "name": [
+                    "2"
+                  ],
+                  "capabilities": [
+                    {
+                      "name": "DiskPool.CapabilityA",
+                      "value": "True"
+                    }
+                  ]
+                },
+                {
+                  "name": [
+                    "1"
+                  ],
+                  "capabilities": [
+                    {
+                      "name": "DiskPool.CapabilityA",
+                      "value": "True"
+                    },
+                    {
+                      "name": "DiskPool.CapabilityB",
+                      "value": "True"
+                    }
+                  ]
+                }
+              ],
+              "zones": [
+                "2",
+                "1"
+              ]
+            },
+            "resourceType": "diskPools",
+            "restrictions": [
+              {
+                "type": "Location",
+                "reasonCode": "NotAvailableForSubscription",
+                "restrictionInfo": {
+                  "locations": [
+                    "FranceSouth"
+                  ]
+                },
+                "values": [
+                  "FranceSouth"
+                ]
+              },
+              {
+                "type": "Zone",
+                "reasonCode": "NotAvailableForSubscription",
+                "restrictionInfo": {
+                  "locations": [
+                    "FranceCentral"
+                  ],
+                  "zones": [
+                    "2",
+                    "3",
+                    "1"
+                  ]
+                },
+                "values": [
+                  "FranceCentral"
+                ]
+              }
+            ],
+            "tier": "Standard"
+          },
+          {
+            "name": "Standard_V1",
+            "capabilities": [
+              {
+                "name": "MaxNumberOfDisks",
+                "value": "1"
+              }
+            ],
+            "locationInfo": {
+              "location": "eastus",
+              "zoneDetails": [
+                {
+                  "name": [
+                    "2"
+                  ],
+                  "capabilities": [
+                    {
+                      "name": "UltraSSDAvailable",
+                      "value": "True"
+                    }
+                  ]
+                },
+                {
+                  "name": [
+                    "1"
+                  ],
+                  "capabilities": [
+                    {
+                      "name": "UltraSSDAvailable",
+                      "value": "True"
+                    }
+                  ]
+                }
+              ],
+              "zones": [
+                "2",
+                "1"
+              ]
+            },
+            "resourceType": "diskPools",
+            "tier": "Standard"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ResourceSkus_List",
+  "title": "List Disk Pool Skus"
+}

@@ -8,6 +8,7 @@ import "./HostPool.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -37,13 +38,8 @@ interface SessionHosts {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SessionHost,
-    SessionHostPatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot sessionHost?: SessionHostPatch;
-
+    PatchModel = SessionHostPatch,
+    Parameters = {
       /**
        * Force flag to update assign, unassign or reassign personal desktop.
        */
@@ -93,16 +89,21 @@ interface SessionHosts {
       /**
        * The path to the VM.
        */
-      @query("vmPath")
       @maxLength(1092)
       @minLength(3)
       @pattern("^[A-Z][a-z][0-9][@./-_ ]*$")
+      @query("vmPath")
       vmPath?: string;
     },
-    Response = SessionHostList
+    Response = ArmResponse<SessionHostList>
   >;
 
-  retryProvisioning is ArmResourceActionNoContentSync<SessionHost, void>;
+  /**
+   * Retry provisioning on a SessionHost.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SessionHost_RetryProvisioning")
+  retryProvisioning is ArmResourceActionSync<SessionHost, void, OkResponse>;
 }
 
 @@maxLength(SessionHost.name, 48);
@@ -111,3 +112,6 @@ interface SessionHosts {
   "The name of the session host within the specified host pool"
 );
 @@doc(SessionHost.properties, "Detailed properties for SessionHost");
+@@doc(SessionHosts.update::parameters.properties,
+  "Object containing SessionHost definitions."
+);

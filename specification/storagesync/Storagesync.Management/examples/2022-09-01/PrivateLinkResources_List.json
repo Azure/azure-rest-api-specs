@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01",
+    "monitor": "true",
+    "resourceGroupName": "res6977",
+    "storageSyncServiceName": "sss2527",
+    "subscriptionId": "52b8da2f-61e0-4a1f-8dde-336911f367fb"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "afs",
+            "type": "Microsoft.StorageSync/storageSyncServices/privateLinkResources",
+            "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/res6977/providers/Microsoft.StorageSync/storageSyncServices/sss2527/privateLinkResources/afs",
+            "properties": {
+              "groupId": "afs",
+              "requiredMembers": [
+                "management",
+                "sync.primary",
+                "sync.secondary"
+              ],
+              "requiredZoneNames": [
+                "privatelink.afs.azure.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_ListByStorageSyncService",
+  "title": "PrivateLinkResources_List"
+}

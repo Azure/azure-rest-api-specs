@@ -1,0 +1,168 @@
+{
+  "parameters": {
+    "accountName": "contosomedia",
+    "api-version": "2023-01-01",
+    "resourceGroupName": "contosorg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "PolicyWithClearKeyOptionAndTokenRestriction",
+            "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithClearKeyOptionAndTokenRestriction",
+            "properties": {
+              "description": "A policy with one ClearKey option and Open Restriction.",
+              "created": "2017-12-01T00:00:00Z",
+              "lastModified": "2017-11-01T00:00:00Z",
+              "options": [
+                {
+                  "name": null,
+                  "configuration": {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicyClearKeyConfiguration"
+                  },
+                  "policyOptionId": "a3448d09-567a-4642-8309-d17e846be59f",
+                  "restriction": {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicyTokenRestriction",
+                    "alternateVerificationKeys": [],
+                    "audience": "urn:test",
+                    "issuer": "http://testacs",
+                    "openIdConnectDiscoveryDocument": null,
+                    "primaryVerificationKey": {
+                      "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
+                      "keyValue": ""
+                    },
+                    "requiredClaims": [
+                      {
+                        "claimType": "urn:microsoft:azure:mediaservices:contentkeyidentifier",
+                        "claimValue": null
+                      },
+                      {
+                        "claimType": "DRM",
+                        "claimValue": "Widevine"
+                      }
+                    ],
+                    "restrictionTokenType": "Jwt"
+                  }
+                }
+              ],
+              "policyId": "8352435b-ebea-4681-aae7-e19277771f64"
+            }
+          },
+          {
+            "name": "PolicyWithMultipleOptions",
+            "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithMultipleOptions",
+            "properties": {
+              "description": "A policy with multiple options.",
+              "created": "2015-12-01T00:00:00Z",
+              "lastModified": "2016-12-02T00:00:00Z",
+              "options": [
+                {
+                  "name": null,
+                  "configuration": {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicyClearKeyConfiguration"
+                  },
+                  "policyOptionId": "caf1e28c-8288-4301-8c46-c0f9312c512f",
+                  "restriction": {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicyTokenRestriction",
+                    "alternateVerificationKeys": [],
+                    "audience": "urn:test",
+                    "issuer": "http://testacs",
+                    "openIdConnectDiscoveryDocument": null,
+                    "primaryVerificationKey": {
+                      "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
+                      "keyValue": ""
+                    },
+                    "requiredClaims": [
+                      {
+                        "claimType": "urn:microsoft:azure:mediaservices:contentkeyidentifier",
+                        "claimValue": null
+                      },
+                      {
+                        "claimType": "DRM",
+                        "claimValue": "Widevine"
+                      }
+                    ],
+                    "restrictionTokenType": "Jwt"
+                  }
+                },
+                {
+                  "name": null,
+                  "configuration": {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicyWidevineConfiguration",
+                    "widevineTemplate": "{\"allowed_track_types\":\"SD_HD\",\"content_key_specs\":[{\"track_type\":\"SD\",\"security_level\":1,\"required_output_protection\":{\"hdcp\":\"HDCP_V2\"}}],\"policy_overrides\":{\"can_play\":true,\"can_persist\":true,\"can_renew\":false}}"
+                  },
+                  "policyOptionId": "da346259-0cd6-4609-89dc-15ac131bd92f",
+                  "restriction": {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicyOpenRestriction"
+                  }
+                }
+              ],
+              "policyId": "ed7f3d1b-cfa7-4181-b966-e0b3027eec3a"
+            }
+          },
+          {
+            "name": "PolicyWithPlayReadyOptionAndOpenRestriction",
+            "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithPlayReadyOptionAndOpenRestriction",
+            "properties": {
+              "description": "A policy with one PlayReady option and Open Restriction.",
+              "created": "2012-11-01T00:00:00Z",
+              "lastModified": "2012-11-01T00:00:00Z",
+              "options": [
+                {
+                  "name": null,
+                  "configuration": {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyConfiguration",
+                    "licenses": [
+                      {
+                        "allowTestDevices": false,
+                        "beginDate": null,
+                        "contentKeyLocation": {
+                          "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyContentEncryptionKeyFromHeader"
+                        },
+                        "contentType": "Unspecified",
+                        "expirationDate": null,
+                        "gracePeriod": null,
+                        "licenseType": "NonPersistent",
+                        "playRight": {
+                          "agcAndColorStripeRestriction": null,
+                          "allowPassingVideoContentToUnknownOutput": "NotAllowed",
+                          "analogVideoOpl": null,
+                          "compressedDigitalAudioOpl": null,
+                          "compressedDigitalVideoOpl": null,
+                          "digitalVideoOnlyContentRestriction": false,
+                          "explicitAnalogTelevisionOutputRestriction": null,
+                          "firstPlayExpiration": null,
+                          "imageConstraintForAnalogComponentVideoRestriction": false,
+                          "imageConstraintForAnalogComputerMonitorRestriction": false,
+                          "scmsRestriction": null,
+                          "uncompressedDigitalAudioOpl": null,
+                          "uncompressedDigitalVideoOpl": null
+                        },
+                        "relativeBeginDate": null,
+                        "relativeExpirationDate": null,
+                        "securityLevel": "SL2000"
+                      }
+                    ],
+                    "responseCustomData": "testCustomData"
+                  },
+                  "policyOptionId": "294a833f-f128-48be-9edf-8d1bb5b35ff3",
+                  "restriction": {
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicyOpenRestriction"
+                  }
+                }
+              ],
+              "policyId": "a9bacd1d-60f5-4af3-8d2b-cf46ca5c9b04"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ContentKeyPolicies_List",
+  "title": "Lists all Content Key Policies"
+}
