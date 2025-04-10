@@ -480,7 +480,7 @@ model AnalyzeConversationAuthoringDeploymentResource {
    * Represents the AOAI resource assigned for data generation.
    */
   @added(Versions.v2025_05_15_preview)
-  assignedAoaiResource?: AnalyzeConversationAuthoringDataGenerationConnectionInfo
+  assignedAoaiResource?: AnalyzeConversationAuthoringDataGenerationConnectionInfo;
 }
 
 /**
@@ -1980,11 +1980,11 @@ model ExportedModelOptions {
 /**
  * Represents the connection kind for Azure OpenAI deployment.
  */
-@added(Versions.v2025_05_15_preview)
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@added(Versions.v2025_05_15_preview)
 union AnalyzeConversationAuthoringDataGenerationConnectionKind {
   string,
-  AzureOpenAI: "AzureOpenAI"
+  AzureOpenAI: "AzureOpenAI",
 }
 
 /**
