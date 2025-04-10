@@ -194,7 +194,6 @@ extends:
                 --lang $(SdkRepoName) \
                 --commit $(SpecRepoCommit) \
                 --spec-repo-url ${{ parameters.SpecRepoUrl }} \
-                --tr true \
                 $optional_params || true # return true always to suppress exit error logging
             displayName: 'Generate SDK'
 
