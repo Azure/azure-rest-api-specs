@@ -252,6 +252,29 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspCon
   }
 }
 
+// ----- TS data plane sub rules -----
+export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*rest$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
+export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+  constructor() {
+    super(
+      "packageDetails.name",
+      "package-details.name",
+      new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/),
+    );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
 // ----- Go data plane sub rules -----
 export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -406,9 +429,47 @@ export class TspConfigCsharpAzPackageDirectorySubRule extends TspconfigEmitterOp
   }
 }
 
-export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigSubRuleBase {
+  protected emitterName: string;
   constructor() {
-    super("@azure-tools/typespec-csharp", "namespace", "{package-dir}");
+    super("namespace", "{package-dir}");
+    this.emitterName = "@azure-tools/typespec-csharp";
+  }
+  protected validate(config: any): RuleResult {
+    let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
+    for (const segment of this.keyToValidate.split(".")) {
+      if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
+        option = option![segment];
+      else
+        return this.createFailedResult(
+          `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+          `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+        );
+    }
+
+    if (option === undefined)
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+      );
+
+    const packageDir = config?.options?.[this.emitterName]?.["package-dir"];
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (
+      this.validateValue(actualValue, this.expectedValue) ||
+      (packageDir !== undefined && this.validateValue(actualValue, packageDir))
+    ) {
+      return { success: true };
+    }
+
+    return this.createFailedResult(
+      `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}" or "${packageDir}"`,
+      `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}" or "${packageDir}"`,
+    );
+  }
+
+  public getPathOfKeyToValidate() {
+    return `options.${this.emitterName}.${this.keyToValidate}`;
   }
 }
 
@@ -433,6 +494,8 @@ export const defaultRules = [
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
+  new TspConfigTsDpPackageDirectorySubRule(),
+  new TspConfigTsDpPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),

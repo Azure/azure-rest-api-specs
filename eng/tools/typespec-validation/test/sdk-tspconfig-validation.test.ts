@@ -6,6 +6,8 @@ import {
   TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule,
   TspConfigTsMgmtModularPackageDirectorySubRule,
   TspConfigTsMgmtModularPackageNameMatchPatternSubRule,
+  TspConfigTsDpPackageDirectorySubRule,
+  TspConfigTsDpPackageNameMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoMgmtPackageDirectorySubRule,
   TspConfigGoMgmtModuleEqualStringSubRule,
@@ -241,6 +243,36 @@ const mixTsManagementPackageNameTestCases = {
   subRules: [new TspConfigTsMgmtModularPackageNameMatchPatternSubRule()],
 };
 
+const tsDpPackageDirTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "package-dir",
+  "arm-rest",
+  "aaa-",
+  [new TspConfigTsDpPackageDirectorySubRule()],
+);
+
+const tsDpPackageNameTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-ts",
+  "",
+  "packageDetails.name",
+  "@azure-rest/aaa-bbb",
+  "@azure/aaa-bbb",
+  [new TspConfigTsDpPackageNameMatchPatternSubRule()],
+);
+
+const mixTsDpPackageNameTestCases = {
+  description: `Validate @azure-tools/typespec-ts's mix options: package-details/packageDetails with different values`,
+  folder: "",
+  tspconfigContent: createEmitterOptionExample(
+    "",
+    { key: "packageDetails.name", value: "@azure/azure-rest-aaa-bbb" },
+    { key: "package-details.name", value: "@azure/aaa-bbb" },
+  ),
+  success: false,
+  subRules: [new TspConfigTsDpPackageNameMatchPatternSubRule()],
+};
+
 const goManagementServiceDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-go",
   managementTspconfigFolder,
@@ -458,6 +490,42 @@ const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
   [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
 );
 
+const csharpAzNamespaceWithPackageDirTestCases: Case[] = [
+  {
+    description: `Validate csharp\'s option: namespace is equal {package-dir} and package-dir exists`,
+    folder: "",
+    tspconfigContent: createEmitterOptionExample(
+      "@azure-tools/typespec-csharp",
+      { key: "namespace", value: "{package-dir}" },
+      { key: "package-dir", value: "Azure.AAA" },
+    ),
+    success: true,
+    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
+  },
+  {
+    description: `Validate csharp\'s option: namespace is equal package-dir`,
+    folder: "",
+    tspconfigContent: createEmitterOptionExample(
+      "@azure-tools/typespec-csharp",
+      { key: "namespace", value: "Azure.AAA" },
+      { key: "package-dir", value: "Azure.AAA" },
+    ),
+    success: true,
+    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
+  },
+  {
+    description: `Validate csharp\'s option: namespace is not equal package-dir`,
+    folder: "",
+    tspconfigContent: createEmitterOptionExample(
+      "@azure-tools/typespec-csharp",
+      { key: "namespace", value: "namespace" },
+      { key: "package-dir", value: "Azure.AAA" },
+    ),
+    success: false,
+    subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
+  },
+];
+
 const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-csharp",
   "",
@@ -514,6 +582,9 @@ describe("tspconfig", function () {
     ...tsManagementPackageNameTestCases,
     mixTsManagementExperimentalExtensibleEnumsTestCases,
     mixTsManagementPackageNameTestCases,
+    ...tsDpPackageDirTestCases,
+    ...tsDpPackageNameTestCases,
+    mixTsDpPackageNameTestCases,
     // go
     ...goManagementServiceDirTestCases,
     ...goManagementPackageDirTestCases,
@@ -544,6 +615,7 @@ describe("tspconfig", function () {
     ...csharpAzNamespaceTestCases,
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtPackageDirTestCases,
+    ...csharpAzNamespaceWithPackageDirTestCases,
     // suppression
     ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
