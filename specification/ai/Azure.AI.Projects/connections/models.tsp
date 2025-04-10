@@ -16,10 +16,6 @@ namespace Azure.AI.Projects;
 @added(Versions.v2025_05_01)
 model Connection {
 
-  @doc("The authentication type used by the connection")
-  @visibility(Lifecycle.Read)
-  authType: AuthenticationType;
-
   @doc("The name of the resource")
   @visibility(Lifecycle.Read)
   @key("name")
@@ -37,80 +33,73 @@ model Connection {
   @visibility(Lifecycle.Read)
   isDefault: boolean;
 
+  @doc("The credentials used by the connection")
+  @visibility(Lifecycle.Read)
+  credentials: BaseCredentials;
+
   @doc("Metadata of the connection")
   @visibility(Lifecycle.Read)
   metadata: Record<string>;
 }
 
-@doc("A connection with API key authentication")
-model ConnectionWithApiKeyAuth extends Connection {
+@doc("A base class for connection credentials")
+@discriminator("authType")
+model BaseCredentials {
 
-  @doc("The authentication type used by the connection")
+  @doc("The type of credential used by the connection")
   @visibility(Lifecycle.Read)
-  authType: AuthenticationType.apiKey;
+  authType: CredentialType;
+}
 
-  @doc("The credentials for API-key authentication")
+@doc("API Key Credential definition")
+model ApiKeyCredentials extends BaseCredentials {
+
+  @doc("The credentail type")
   @visibility(Lifecycle.Read)
-  credentials?: CredentialsApiKeyAuth;
+  authType: CredentialType.apiKey;
+
+  @doc("API Key")
+  @visibility(Lifecycle.Read)
+  apiKey?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("A connection with EntraID authentication (aka `Entra ID passthrough`)")
-model ConnectionWithEntraIDAuth extends Connection {
+@doc("Entra ID credential definition")
+model EntraIDCredentials extends BaseCredentials {
 
-  @doc("The authentication type used by the connection")
+  @doc("The credential type")
   @visibility(Lifecycle.Read)
-  authType: AuthenticationType.entraId;
+  authType: CredentialType.entraId;
+}
+
+@doc("Custom credential defintion")
+model CustomCredential extends BaseCredentials {
+
+  @doc("The credential type ")
+  @visibility(Lifecycle.Read)
+  authType: CredentialType.custom;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("A connection with custom authentication")
-model ConnectionWithCustomAuth extends Connection {
+@doc("Shared Access Signature (SAS) credential definition")
+model SASCredentials extends BaseCredentials {
 
-  @doc("The authentication type used by the connection")
+  @doc("The credential type")
   @visibility(Lifecycle.Read)
-  authType: AuthenticationType.custom;
+  authType: CredentialType.SAS;
+
+  @doc("SAS token")
+  @visibility(Lifecycle.Read)
+  sasToken?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("A connection with Shared Access Signature (SAS) authentication")
-model ConnectionWithSASAuth extends Connection {
+@doc("Credentials that do not require authentication")
+model NoAuthenticationCredentials extends BaseCredentials {
 
-  @doc("The authentication type used by the connection")
+  @doc("The credential type ")
   @visibility(Lifecycle.Read)
-  authType: AuthenticationType.SAS;
-
-  @doc("The credentials for SAS authentication")
-  @visibility(Lifecycle.Read)
-  credentials?: CredentialsSASAuth;
+  authType: CredentialType.None;
 }
-
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("A connection with no authentication")
-model ConnectionWithNoAuth extends Connection {
-
-  @doc("The authentication type used by the connection")
-  @visibility(Lifecycle.Read)
-  authType: AuthenticationType.None;
-}
-
-@doc("The credentials needed for API key authentication")
-model CredentialsApiKeyAuth {
-
-  @doc("The API key")
-  @visibility(Lifecycle.Read)
-  key: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("The credentials needed for Shared Access Signatures (SAS) authentication")
-model CredentialsSASAuth {
-
-  @doc("The Shared Access Signatures (SAS) token")
-  @visibility(Lifecycle.Read)
-  SAS: string;
-}
-
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
 @doc("The Type (or category) of the connection")
@@ -145,22 +134,22 @@ union ConnectionType {
   Custom: "CustomKeys",
 }
 
-@doc("The authentication type used by the connection")
-union AuthenticationType {
+@doc("The credential type used by the connection")
+union CredentialType {
   string,
 
-  @doc("API Key authentication")
+  @doc("API Key credential")
   apiKey: "ApiKey",
 
-  @doc("Entra ID authentication (formerly known as AAD)")
+  @doc("Entra ID credential (formerly known as AAD)")
   entraId: "AAD",
 
-  @doc("Shared Access Signature (SAS) authentication")
+  @doc("Shared Access Signature (SAS) credential")
   SAS: "SAS",
 
-  @doc("Custom authentication")
+  @doc("Custom credential")
   custom: "CustomKeys",
 
-  @doc("No authentication")
+  @doc("No credential")
   None: "None",
 }
