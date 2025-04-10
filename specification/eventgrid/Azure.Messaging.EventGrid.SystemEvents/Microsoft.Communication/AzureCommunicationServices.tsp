@@ -1037,7 +1037,7 @@ model AcsCallingEventProperties {
   startedBy: AcsCallParticipantProperties;
 
   /** The call id of the server */
-  serverCallId?: string;
+  serverCallId: string;
 
   /** The group metadata */
   group?: AcsCallGroupProperties;
@@ -1049,7 +1049,7 @@ model AcsCallingEventProperties {
   isTwoParty?: boolean;
 
   /** The correlationId of calling event */
-  correlationId?: string;
+  correlationId: string;
 
   /** Is the calling event a room call. */
   isRoomsCall?: boolean;
