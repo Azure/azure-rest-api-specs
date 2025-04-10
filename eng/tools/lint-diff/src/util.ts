@@ -1,6 +1,9 @@
 import { access, constants, readFile } from "node:fs/promises";
 import { dirname, join } from "path";
 
+// Use createRequire because Node 16 does not directly support
+// import.meta.resolve
+// https://nodejs.org/docs/latest-v16.x/api/esm.html#importmetaresolvespecifier-parent
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 
