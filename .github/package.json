@@ -6,13 +6,6 @@
     "@azure-tools/specs-workflows": "file:./workflows"
   },
   "scripts": {
-    "lint": "npm run lint:eslint && npm run lint:tsc",
-    "lint:eslint": "eslint",
-    "lint:tsc": "tsc && echo 'Type checking completed successfully'",
-    "prettier": "prettier \"**/*.js\" --check",
-    "prettier:debug": "prettier \"**/*.js\" --check ---log-level debug",
-    "prettier:write": "prettier \"**/*.js\" --write",
-    "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose"
+    "test:ci": "npm run test:ci --prefix shared && npm run test:ci --prefix workflows"
   }
 }
