@@ -610,9 +610,13 @@ using Azure.Core;
   "csharp"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
 @@OpenAPI.extension(FileServiceUsage.properties, "x-ms-client-flatten", false);
 
+#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
 @@OpenAPI.extension(StorageTaskAssignment.properties,
   "x-ms-client-flatten",
   false
 );
+
+@@visibility(FileServiceUsage.properties, "read");
