@@ -1,16 +1,16 @@
 // @ts-check
 
 // For now, treat all paths as posix, since this is the format returned from git commands
-import { dirname, join } from "path/posix";
 import {
   example,
   getChangedFiles,
   readme,
   resourceManager,
   swagger,
-} from "../../src/changed-files.js";
-import { lsTree, show } from "../../src/git.js";
-import { getInputFiles } from "../../src/readme.js";
+} from "@azure-tools/specs-shared/changed-files";
+import { lsTree, show } from "@azure-tools/specs-shared/git";
+import { getInputFiles } from "@azure-tools/specs-shared/readme";
+import { dirname, join } from "path/posix";
 import { CoreLogger } from "./core-logger.js";
 
 /**

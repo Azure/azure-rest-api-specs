@@ -1,6 +1,5 @@
 // @ts-check
-
-import { sdkLabels } from "../../src/sdk-types.js";
+import { sdkLabels } from "@azure-tools/specs-shared/sdk-types";
 import { extractInputs } from "./context.js";
 import { getIssueNumber } from "./issues.js";
 import { LabelAction } from "./label.js";
