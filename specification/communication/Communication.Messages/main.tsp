@@ -8,11 +8,12 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
+#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme" ""
 @useAuth(
   AadOauth2Auth<["https://communication.azure.com/.default"]> | ApiKeyAuth<
     ApiKeyLocation.header,
     "Authorization"
-  >
+  > | BearerAuth
 )
 @service(#{ title: "CommunicationMessagesClient" })
 @server(
