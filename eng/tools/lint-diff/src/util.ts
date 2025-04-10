@@ -1,11 +1,6 @@
 import { access, constants, readFile } from "node:fs/promises";
 import { dirname, join } from "path";
-
-// Use createRequire because Node 16 does not directly support
-// import.meta.resolve
-// https://nodejs.org/docs/latest-v16.x/api/esm.html#importmetaresolvespecifier-parent
-import { createRequire } from "node:module";
-const require = createRequire(import.meta.url);
+import { fileURLToPath } from "url";
 
 /**
  * Enumerate files in a directory that match the given string ending
@@ -48,7 +43,7 @@ export async function getDependencyVersion(dependenciesDir: string): Promise<str
 // TODO: This should probably be moved to another more general location
 export async function getPathToDependency(dependency: string): Promise<string> {
   // Example: /home/user/foo/node_modules/@autorest/bar/dist/index.js
-  const entrypoint = require.resolve(dependency);
+  const entrypoint = fileURLToPath(import.meta.resolve(dependency));
 
   // Walk up directory tree to first folder containing "package.json"
   let currentDir = dirname(entrypoint);
