@@ -11446,72 +11446,6 @@
       "default": "h6",
       "description": "The depth of headers in the markdown output. Default is h6."
     },
-    "DocumentIntelligenceLayoutSkillExtractionOptions": {
-      "type": "string",
-      "enum": [
-        "images",
-        "locationMetadata"
-      ],
-      "x-ms-enum": {
-        "name": "DocumentIntelligenceLayoutSkillExtractionOptions",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "images",
-            "name": "Images",
-            "description": "Specify that image content should be extracted from the document."
-          },
-          {
-            "value": "locationMetadata",
-            "name": "LocationMetadata",
-            "description": "Specify that location metadata should be extracted from the document."
-          }       
-        ]
-      },
-      "description": "Controls the cardinality of the content extracted from the document by the skill."
-    },
-    "DocumentIntelligenceLayoutSkillChunkingProperties": {
-      "type": "object",
-      "description": "Controls the cardinality for chunking the content.",
-      "properties": {
-        "unit": {
-          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkingUnit",
-          "x-nullable": true,
-          "description": "The unit of the chunk."
-        },
-        "maximumLength": {
-          "type": "integer",
-          "format": "int32",
-          "x-nullable": true,
-          "description": "The maximum chunk length in characters. Default is 500."
-        },
-        "overlapLength": {
-          "type": "integer",
-          "format": "int32",
-          "x-nullable": true,
-          "description": "The length of overlap provided between two text chunks. Default is 0."
-        }
-      }
-    },    
-    "DocumentIntelligenceLayoutSkillChunkingUnit": {
-      "type": "string",
-      "enum": [
-        "characters"
-      ],
-      "x-ms-enum": {
-        "name": "DocumentIntelligenceLayoutSkillChunkingUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "characters",
-            "name": "Characters",
-            "description": "Specifies chunk by characters."
-          }
-        ]
-      },
-      "default": "characters",
-      "description": "Controls the cardinality of the chunk unit. Default is 'characters'"
-    },    
     "ChatCompletionSkill": {
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.ChatCompletionSkill",
@@ -11702,6 +11636,72 @@
         }
       }
     },
+    "DocumentIntelligenceLayoutSkillExtractionOptions": {
+      "type": "string",
+      "enum": [
+        "images",
+        "locationMetadata"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentIntelligenceLayoutSkillExtractionOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "images",
+            "name": "Images",
+            "description": "Specify that image content should be extracted from the document."
+          },
+          {
+            "value": "locationMetadata",
+            "name": "LocationMetadata",
+            "description": "Specify that location metadata should be extracted from the document."
+          }       
+        ]
+      },
+      "description": "Controls the cardinality of the content extracted from the document by the skill."
+    },
+    "DocumentIntelligenceLayoutSkillChunkingProperties": {
+      "type": "object",
+      "description": "Controls the cardinality for chunking the content.",
+      "properties": {
+        "unit": {
+          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkingUnit",
+          "x-nullable": true,
+          "description": "The unit of the chunk."
+        },
+        "maximumLength": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The maximum chunk length in characters. Default is 500."
+        },
+        "overlapLength": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The length of overlap provided between two text chunks. Default is 0."
+        }
+      }
+    },    
+    "DocumentIntelligenceLayoutSkillChunkingUnit": {
+      "type": "string",
+      "enum": [
+        "characters"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentIntelligenceLayoutSkillChunkingUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "characters",
+            "name": "Characters",
+            "description": "Specifies chunk by characters."
+          }
+        ]
+      },
+      "default": "characters",
+      "description": "Controls the cardinality of the chunk unit. Default is 'characters'"
+    },    
     "WebApiSkill": {
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
