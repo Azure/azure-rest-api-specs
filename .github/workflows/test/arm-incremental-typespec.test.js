@@ -1,5 +1,5 @@
+import * as changedFiles from "@azure-tools/specs-shared/changed-files";
 import * as git from "@azure-tools/specs-shared/git";
-import * as changedFiles from "@azure-tools/specs-shared/sdk-types";
 import {
   contosoReadme,
   swaggerHandWritten,
