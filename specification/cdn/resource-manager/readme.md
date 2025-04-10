@@ -63,6 +63,49 @@ input-file:
   - Microsoft.Cdn/preview/2025-01-01-preview/afdx.json
   - Microsoft.Cdn/preview/2025-01-01-preview/cdn.json
   - Microsoft.Cdn/preview/2025-01-01-preview/cdnwebapplicationfirewall.json
+suppressions:
+  - code: ResourceNameRestriction
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: PutResponseCodes
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: LroErrorContent
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: DeleteResponseCodes
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: PostResponseCodes
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: PatchBodyParametersSchema
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+    - code: OperationsApiSchemaUsesCommonTypes
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: ProvisioningStateValidation
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: XmsEnumValidation
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: SystemDataDefinitionsCommonTypes
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: XmsParameterLocation
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: MissingTypeObject
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
+  - code: AvoidAdditionalProperties
+    from: cdn.json
+    reason: API is for Classic CDN SKU, which is under active deprecation.
 ```
 
 ### Tag: package-2024-09
@@ -323,3 +366,13 @@ See configuration in [readme.node.md](./readme.node.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## Surpressing LintDiff Errors
+
+``` yaml
+suppressions:
+  - code: TrackedResourcesMustHavePut
+    from:
+      - Microsoft.AzureLargeInstance/stable/2024-04-10/azurelargeinstance.json
+      - Microsoft.AzureLargeInstance/preview/2023-07-20-preview/azurelargeinstance.json
+    reason: In ALI api versions prior to 2024-08-01-preview, the PUT methods are not supported. 
