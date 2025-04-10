@@ -1,13 +1,17 @@
 // @ts-check
 
 /**
+ * @typedef {Object} RetryOptions
+ * @property {number} [maxRetries] Default: 3
+ * @property {number} [initialDelayMs] Default: 1000
+ * @property {number} [maxDelayMs] - Default: 10000
+ * @property {Function} [logger] - Default: console.log
+ */
+
+/**
  * Retry a function with exponential backoff
  * @param {Function} fn - Function to retry
- * @param {Object} [options]
- * @param {number} [options.maxRetries] Default: 3
- * @param {number} [options.initialDelayMs] Default: 1000
- * @param {number} [options.maxDelayMs] - Default: 10000
- * @param {Function} [options.logger] - Default: console.log
+ * @param {RetryOptions} [options] - Retry options
  * @returns {Promise<any>} - Result of the function
  */
 export async function retry(fn, options = {}) {
@@ -49,11 +53,7 @@ export async function retry(fn, options = {}) {
  * Fetch with retry functionality
  * @param {string} url - URL to fetch
  * @param {Object} [options] - Fetch options
- * @param {Object} [retryOptions]
- * @param {number} [retryOptions.maxRetries] Default: 3
- * @param {number} [retryOptions.initialDelayMs] Default: 1000
- * @param {number} [retryOptions.maxDelayMs] - Default: 10000
- * @param {Function} [retryOptions.logger] - Default: console.log
+ * @param {RetryOptions} [retryOptions] - Retry options
  * @returns {Promise<Response>} - Fetch response
  */
 export async function fetchWithRetry(url, options = {}, retryOptions = {}) {
