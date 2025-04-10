@@ -1,4 +1,4 @@
-import { test, describe, expect } from "vitest";
+import { test, describe, expect, vi } from "vitest";
 import {
   iconFor,
   getLine,
@@ -272,6 +272,10 @@ describe("compareLintDiffViolations", () => {
 });
 
 describe("generateReport", () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   test("fails if new violations include an error", async ({ expect }) => {
     const afterViolation = {
       extensionName: "@microsoft.azure/openapi-validator",
