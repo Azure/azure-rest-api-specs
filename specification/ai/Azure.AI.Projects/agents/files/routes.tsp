@@ -45,6 +45,7 @@ op listFiles is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
+#suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
 @post
 @route("/files")
 op uploadFile is Azure.Core.Foundations.Operation<
