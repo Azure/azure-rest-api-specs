@@ -17,6 +17,7 @@ namespace ClientForAzureHealthInsights;
 interface RadiologyInsightsClient {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
   inferRadiologyInsights is AzureHealthInsights.RadiologyInsights.createJob;
 }
 

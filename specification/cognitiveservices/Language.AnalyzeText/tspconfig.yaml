@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/textanalytics"
+    default: "sdk/cognitivelanguage"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -14,9 +14,8 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Language/{version-status}/{version}/analyzetext.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Language.AnalyzeText"
+    package-dir: "Azure.AI.Language.Text"
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.AI.Language.Text"
     flavor: azure
-    generate-protocol-methods: true

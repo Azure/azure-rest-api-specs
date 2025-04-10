@@ -2,7 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/translation"
   "dependencies":
-    "additionalDirectories": []
     default: ""
 emit:
   - "@azure-tools/typespec-autorest"
@@ -25,7 +24,7 @@ options:
   "@azure-tools/typespec-python":
     flavor: azure
     package-dir: "azure-ai-translation-document"
-    package-name: "azure-ai-translation-document"
+    namespace: "azure.ai.translation.document"
     package-mode: dataplane
     package-version: "1.1.0b1"
     generate-sample-project: false
@@ -36,12 +35,13 @@ options:
     namespace: com.azure.ai.translation.document
     partial-update: true
     generate-tests: false
+    custom-types-subpackage: "implementation.models"
+    custom-types: "TranslationError,InnerTranslationError,TranslationErrorCode"
     flavor: azure
-    stream-style-serialization: false
-    generate-sample-project: false
+    api-version: "2024-05-01"
   "@azure-tools/typespec-ts":
     package-dir: "ai-translation-document-rest"
-    generateMetadata: false
+    generateMetadata: true
     generateTest: false
     packageDetails:
       name: "@azure-rest/ai-translation-document"

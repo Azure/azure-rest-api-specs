@@ -1,0 +1,169 @@
+{
+  "parameters": {
+    "api-version": "2024-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "mySapMonitor"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.workloads/monitors/mySapMonitor/alerts/myAlert",
+            "name": "myAlert",
+            "type": "Microsoft.workloads/monitors/alerts",
+            "systemData": {
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "createdAt": "2021-08-19T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "templateName": "saphana-cpu-memory-health",
+              "alertRuleResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/scheduledqueryrules/myAlert",
+              "providerType": "SapHana",
+              "providerNames": [
+                "hana-provider-1",
+                "hana-provider-2"
+              ],
+              "alertRuleProperties": {
+                "status": "Enabled",
+                "severity": 3,
+                "actionGroups": [
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/actiongroups/actiongroup1",
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/actiongroups/actiongroup2"
+                ],
+                "threshold": 80,
+                "thresholdOperator": "GreaterThan",
+                "windowSize": 15,
+                "evaluationFrequency": 5,
+                "failingPeriodsToAlert": 3,
+                "failingPeriodsOperator": "GreaterThan",
+                "muteActionsDuration": 0,
+                "autoMitigate": "Disable",
+                "dimension": "CPU",
+                "alertQueryParameters": [
+                  {
+                    "name": "providerInstance",
+                    "value": ""
+                  },
+                  {
+                    "name": "workType",
+                    "value": ""
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.workloads/monitors/mySapMonitor/alerts/myAlert2",
+            "name": "myAlert2",
+            "type": "Microsoft.workloads/monitors/alerts",
+            "systemData": {
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "createdAt": "2021-08-19T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "templateName": "saphana-cpu-memory-health",
+              "alertRuleResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/scheduledqueryrules/myAlert2",
+              "providerType": "SapHana",
+              "providerNames": [
+                "hana-provider-1",
+                "hana-provider-2"
+              ],
+              "alertRuleProperties": {
+                "status": "Enabled",
+                "severity": 3,
+                "actionGroups": [
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/actiongroups/actiongroup1",
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/actiongroups/actiongroup2"
+                ],
+                "threshold": 80,
+                "thresholdOperator": "GreaterThan",
+                "windowSize": 15,
+                "evaluationFrequency": 5,
+                "failingPeriodsToAlert": 3,
+                "failingPeriodsOperator": "GreaterThan",
+                "muteActionsDuration": 0,
+                "autoMitigate": "Disable",
+                "dimension": "Memory",
+                "alertQueryParameters": [
+                  {
+                    "name": "providerInstance",
+                    "value": ""
+                  },
+                  {
+                    "name": "workType",
+                    "value": ""
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.workloads/monitors/mySapMonitor/alerts/myAlert3",
+            "name": "myAlert3",
+            "type": "Microsoft.workloads/monitors/alerts",
+            "systemData": {
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "createdAt": "2021-08-19T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "templateName": "saphana-cpu-memory-health",
+              "alertRuleResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/scheduledqueryrules/myAlert3",
+              "providerType": "SapHana",
+              "providerNames": [
+                "hana-provider-1",
+                "hana-provider-2"
+              ],
+              "alertRuleProperties": {
+                "status": "Enabled",
+                "severity": 3,
+                "actionGroups": [
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/actiongroups/actiongroup1",
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.insights/actiongroups/actiongroup2"
+                ],
+                "threshold": 80,
+                "thresholdOperator": "GreaterThan",
+                "windowSize": 15,
+                "evaluationFrequency": 5,
+                "failingPeriodsToAlert": 3,
+                "failingPeriodsOperator": "GreaterThan",
+                "muteActionsDuration": 0,
+                "autoMitigate": "Disable",
+                "dimension": "CPU",
+                "alertQueryParameters": [
+                  {
+                    "name": "providerInstance",
+                    "value": ""
+                  },
+                  {
+                    "name": "workType",
+                    "value": ""
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "nextLink": "http://example.com/codeflow?start=1&length=6"
+      }
+    }
+  },
+  "operationId": "Alerts_List",
+  "title": "List all Alerts in a subscription"
+}

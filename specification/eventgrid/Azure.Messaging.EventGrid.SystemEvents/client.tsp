@@ -16,7 +16,6 @@ import "./Microsoft.HealthcareApis/client.tsp";
 import "./Microsoft.KeyVault/client.tsp";
 import "./Microsoft.MachineLearningServices/client.tsp";
 import "./Microsoft.Maps/client.tsp";
-import "./Microsoft.Media/client.tsp";
 import "./Microsoft.PolicyInsights/client.tsp";
 import "./Microsoft.ResourceNotifications/client.tsp";
 import "./Microsoft.Resources/client.tsp";

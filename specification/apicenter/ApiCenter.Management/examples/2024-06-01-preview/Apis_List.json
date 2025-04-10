@@ -1,0 +1,49 @@
+{
+  "operationId": "Apis_List",
+  "title": "Apis_ListByWorkspace",
+  "parameters": {
+    "resourceGroupName": "contoso-resources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "serviceName": "contoso",
+    "workspaceName": "default",
+    "api-version": "2024-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.ApiCenter/services/environments",
+            "id": "/subscriptions/a200340d-6b82-494d-9dbf-687ba6e33f9e/resourceGroups/contoso-resources/providers/Microsoft.ApiCenter/services/contoso/workspaces/default/apis/echo-api",
+            "name": "echo-api",
+            "systemData": {
+              "createdAt": "2023-07-03T18:27:09.128871Z",
+              "lastModifiedAt": "2023-07-03T18:27:09.1288716Z"
+            },
+            "properties": {
+              "title": "Echo API",
+              "description": "A simple HTTP request/response service.",
+              "lifecycleStage": "design",
+              "kind": "rest",
+              "termsOfService": {
+                "url": "https://contoso.com/terms-of-service"
+              },
+              "license": {
+                "url": "https://contoso.com/license"
+              },
+              "externalDocumentation": [
+                {
+                  "title": "Onboarding docs",
+                  "url": "https://docs.contoso.com"
+                }
+              ],
+              "customProperties": {
+                "author": "John Doe"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

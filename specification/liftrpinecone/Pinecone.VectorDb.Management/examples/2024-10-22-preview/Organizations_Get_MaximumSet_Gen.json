@@ -1,0 +1,76 @@
+{
+  "title": "Organizations_Get_MaximumSet",
+  "operationId": "Organizations_Get",
+  "parameters": {
+    "api-version": "2024-10-22-preview",
+    "subscriptionId": "76a38ef6-c8c1-4f0d-bfe0-00ec782c8077",
+    "resourceGroupName": "rgopenapi",
+    "organizationname": "example-organization-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "marketplace": {
+            "subscriptionId": "76a38ef6-c8c1-4f0d-bfe0-00ec782c8077",
+            "subscriptionStatus": "PendingFulfillmentStart",
+            "offerDetails": {
+              "publisherId": "4d194daf-fa20-46a8-bfb4-5b7d96cae009",
+              "offerId": "013124d0-bf05-4eab-a6bb-01fa83870642",
+              "planId": "62dda065-5acd-4ac5-b418-8610beed92a2",
+              "planName": "Freemium",
+              "termUnit": "der",
+              "termId": "a2b7ce01-f06d-4874-9f77-6ea4a4875c16"
+            }
+          },
+          "user": {
+            "firstName": "Jimmy",
+            "lastName": "McExample",
+            "emailAddress": "example.user@example.com",
+            "upn": "example.user@example.com",
+            "phoneNumber": "555-555-5555"
+          },
+          "provisioningState": "Succeeded",
+          "partnerProperties": {
+            "displayName": "My Example Organization"
+          },
+          "singleSignOnProperties": {
+            "type": "Saml",
+            "state": "Initial",
+            "enterpriseAppId": "44d3fb26-d8d5-41ff-9b9a-769737f22f13",
+            "url": "https://login.pinecone.io/?sso=true&connection=dfwgsqzkbrjqrglcsa",
+            "aadDomains": [
+              "exampledomain"
+            ]
+          }
+        },
+        "identity": {
+          "principalId": "98b0f658-9ee0-4376-9f04-cf211154716c",
+          "tenantId": "b118e9e0-4179-41b7-a978-a205cd312e56",
+          "type": "None",
+          "userAssignedIdentities": {
+            "ident904655400": {
+              "principalId": "e6beb013-1d4f-4bc7-b6be-33f05f942ae2",
+              "clientId": "7d5610d7-5c8c-4360-98e5-1ae67a4b6ebe"
+            }
+          }
+        },
+        "tags": {
+          "my-tag": "tag.value"
+        },
+        "location": "us-east",
+        "id": "/subscriptions/76a38ef6-c8c1-4f0d-bfe0-00ec782c8077/resourceGroups/rgopenapi/providers/Pinecone/organizations/example-organization-name",
+        "name": "example-organization-name",
+        "type": "Pinecone.Management/organization",
+        "systemData": {
+          "createdBy": "a8006d37-bf85-4ab3-bf9d-2fb4702a1cfb",
+          "createdByType": "User",
+          "createdAt": "2024-10-22T20:59:36.290Z",
+          "lastModifiedBy": "a8006d37-bf85-4ab3-bf9d-2fb4702a1cfb",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-10-22T20:59:36.290Z"
+        }
+      }
+    }
+  }
+}

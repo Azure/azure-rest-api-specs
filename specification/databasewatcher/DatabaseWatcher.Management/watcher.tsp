@@ -10,9 +10,7 @@ import "./sqlVmTarget.tsp";
 import "./sharedPrivateLinkResource.tsp";
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-common-types-version" "Using invalid versions of ManagedIdentity"
-@service({
-  title: "Microsoft.DatabaseWatcher",
-})
+@service(#{ title: "Microsoft.DatabaseWatcher" })
 @versioned(Microsoft.DatabaseWatcher.Versions)
 @armProviderNamespace
 namespace Microsoft.DatabaseWatcher;
@@ -44,6 +42,12 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_10_01_preview: "2024-10-01-preview",
+
+  @doc("The 2025-01-02 version.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_01_02: "2025-01-02",
 }
 @doc("The DatabaseWatcherProviderHub resource.")
 model Watcher is TrackedResource<WatcherProperties> {
@@ -54,7 +58,8 @@ model Watcher is TrackedResource<WatcherProperties> {
   @segment("watchers")
   name: string;
 
-  ...Legacy.ManagedServiceIdentityV4Property;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 
 @doc("The RP specific properties of the resource.")
@@ -63,16 +68,15 @@ model WatcherProperties {
   datastore?: Datastore;
 
   @doc("The monitoring collection status of the watcher.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: WatcherStatus;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The provisioning state of the resource watcher.")
   provisioningState?: DatabaseWatcherProvisioningState;
 
   @doc("The resource ID of a user-assigned managed identity that will be assigned to a new alert rule.")
   @added(Versions.v2024_07_19_preview)
-  @added(Versions.v2024_10_01_preview)
   defaultAlertRuleIdentityResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -82,7 +86,7 @@ model WatcherProperties {
 
 @doc("The properties of a data store.")
 model Datastore {
-  @doc("The Azure ResourceId of an Azure Data Explorer cluster.")
+  @doc("The Azure resource ID of an Azure Data Explorer cluster.")
   adxClusterResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
@@ -153,9 +157,7 @@ interface Watchers {
   @armResourceAction(Watcher)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   start(
     ...ResourceInstanceParameters<Watcher>,
@@ -169,9 +171,7 @@ interface Watchers {
   @extension("x-ms-long-running-operation", true)
   @extension(
     "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
+    #{ `final-state-via`: "azure-async-operation" }
   )
   stop(
     ...ResourceInstanceParameters<Watcher>,

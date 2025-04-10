@@ -22,6 +22,7 @@ interface Apis {
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cannot model with standard operations"
   @doc("List a collection of APIs across workspaces.")
   @route("/apis")
