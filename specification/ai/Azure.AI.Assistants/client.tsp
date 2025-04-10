@@ -251,10 +251,7 @@ using Azure.AI.Assistants;
 @@clientName(CreateRunOptions.`model`, "OverrideModelName", "csharp");
 @@clientName(CreateRunOptions.instructions, "OverrideInstructions", "csharp");
 @@clientName(CreateRunOptions.tools, "OverrideTools", "csharp");
-@@clientName(CreateAndRunThreadOptions.`model`,
-  "OverrideModelName",
-  "csharp"
-);
+@@clientName(CreateAndRunThreadOptions.`model`, "OverrideModelName", "csharp");
 @@clientName(CreateAndRunThreadOptions.instructions,
   "OverrideInstructions",
   "csharp"
