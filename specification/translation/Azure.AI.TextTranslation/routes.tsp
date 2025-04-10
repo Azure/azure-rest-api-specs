@@ -4,8 +4,6 @@ import "./models-languages.tsp";
 import "./models-translate.tsp";
 import "./models-transliterate.tsp";
 
-using Azure.Core;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace TextTranslation;
@@ -15,7 +13,6 @@ op CustomOperation<
   TBody,
   TParams,
   TResponse,
-  Traits = {},
   TError = ErrorResponse
 >(
   ...TParams,
@@ -31,7 +28,7 @@ op CustomOperation<
 ): TResponse | TError;
 
 @doc("Defines Text Translation custom Operations which doesn't have any content in the request")
-op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
+op CustomGetOperation<TParams, TResponse, TError = ErrorResponse>(
   ...TParams,
 
   @doc("Mandatory API version parameter")
@@ -47,7 +44,6 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 op getSupportedLanguages is CustomGetOperation<
   GetSupportedLanguagesParameters,
   GetSupportedLanguagesResult,
-  {},
   ErrorResponse
 >;
 
@@ -60,7 +56,6 @@ op translate is CustomOperation<
   TranslateBodyDetails[],
   TranslateParameters,
   TranslationResult,
-  {},
   ErrorResponse
 >;
 
@@ -73,6 +68,5 @@ op transliterate is CustomOperation<
   InputTextItem[],
   TransliterateParameters,
   TransliterateResult,
-  {},
   ErrorResponse
 >;

@@ -5,7 +5,6 @@ import "./models-shared.tsp";
 import "./models-transliterate.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
