@@ -6,6 +6,8 @@
     "@azure-tools/specs-workflows": "file:./workflows"
   },
   "scripts": {
+    "lint": "npm run lint --prefix shared && npm run lint --prefix workflows",
+    "prettier": "npm run prettier --prefix shared && npm run prettier --prefix workflows",
     "test:ci": "npm run test:ci --prefix shared && npm run test:ci --prefix workflows"
   }
 }
