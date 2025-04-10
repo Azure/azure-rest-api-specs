@@ -1,7 +1,7 @@
 // @ts-check
 
 /**
- * @typedef {import('../../src/types.js').ILogger} ILogger
+ * @typedef {import('@azure-tools/specs-shared/types').ILogger} ILogger
  */
 
 /**

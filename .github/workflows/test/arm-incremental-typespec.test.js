@@ -1,11 +1,11 @@
-import { describe, expect, it, vi } from "vitest";
-import * as changedFiles from "../../src/changed-files.js";
-import * as git from "../../src/git.js";
+import * as changedFiles from "@azure-tools/specs-shared/changed-files";
+import * as git from "@azure-tools/specs-shared/git";
 import {
   contosoReadme,
   swaggerHandWritten,
   swaggerTypeSpecGenerated,
-} from "../../test/examples.js";
+} from "@azure-tools/specs-shared/test/examples";
+import { describe, expect, it, vi } from "vitest";
 import incrementalTypeSpec from "../src/arm-incremental-typespec.js";
 import { createMockCore } from "./mocks.js";
 
