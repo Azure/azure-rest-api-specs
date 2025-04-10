@@ -23,7 +23,7 @@ These are the global settings for the storage data management.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-01-01-preview
+tag: package-2025-05-01-preview
 ```
 
 ### Tag: package-2025-01-01-preview
