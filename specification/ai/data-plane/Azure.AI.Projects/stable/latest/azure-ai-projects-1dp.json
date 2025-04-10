@@ -1104,47 +1104,22 @@
     }
   },
   "definitions": {
-    "AuthenticationType": {
-      "type": "string",
-      "description": "The authentication type used by the connection",
-      "enum": [
-        "ApiKey",
-        "AAD",
-        "SAS",
-        "CustomKeys",
-        "None"
+    "ApiKeyCredentials": {
+      "type": "object",
+      "description": "API Key Credential definition",
+      "properties": {
+        "apiKey": {
+          "type": "string",
+          "description": "API Key",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCredentials"
+        }
       ],
-      "x-ms-enum": {
-        "name": "AuthenticationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "apiKey",
-            "value": "ApiKey",
-            "description": "API Key authentication"
-          },
-          {
-            "name": "entraId",
-            "value": "AAD",
-            "description": "Entra ID authentication (formerly known as AAD)"
-          },
-          {
-            "name": "SAS",
-            "value": "SAS",
-            "description": "Shared Access Signature (SAS) authentication"
-          },
-          {
-            "name": "custom",
-            "value": "CustomKeys",
-            "description": "Custom authentication"
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No authentication"
-          }
-        ]
-      }
+      "x-ms-discriminator-value": "ApiKey"
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -1231,6 +1206,21 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
+    "BaseCredentials": {
+      "type": "object",
+      "description": "A base class for connection credentials",
+      "properties": {
+        "authType": {
+          "$ref": "#/definitions/CredentialType",
+          "description": "The type of credential used by the connection",
+          "readOnly": true
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
+    },
     "BlobReferenceForConsumption": {
       "type": "object",
       "description": "Represents a reference to a blob for consumption",
@@ -1259,9 +1249,8 @@
       "description": "Response from the list and get connections operations",
       "properties": {
         "authType": {
-          "$ref": "#/definitions/AuthenticationType",
-          "description": "The authentication type used by the connection",
-          "readOnly": true
+          "type": "string",
+          "description": "Discriminator property for Connection."
         },
         "name": {
           "type": "string",
@@ -1283,6 +1272,11 @@
           "description": "Whether the connection is tagged as the default connection of its type",
           "readOnly": true
         },
+        "credentials": {
+          "$ref": "#/definitions/BaseCredentials",
+          "description": "The credentials used by the connection",
+          "readOnly": true
+        },
         "metadata": {
           "type": "object",
           "description": "Metadata of the connection",
@@ -1299,6 +1293,7 @@
         "type",
         "target",
         "isDefault",
+        "credentials",
         "metadata"
       ]
     },
@@ -1368,70 +1363,6 @@
         ]
       }
     },
-    "ConnectionWithApiKeyAuth": {
-      "type": "object",
-      "description": "A connection with API key authentication",
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/CredentialsApiKeyAuth",
-          "description": "The credentials for API-key authentication",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Connection"
-        }
-      ],
-      "x-ms-discriminator-value": "ApiKey"
-    },
-    "ConnectionWithCustomAuth": {
-      "type": "object",
-      "description": "A connection with custom authentication",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Connection"
-        }
-      ],
-      "x-ms-discriminator-value": "CustomKeys"
-    },
-    "ConnectionWithEntraIDAuth": {
-      "type": "object",
-      "description": "A connection with EntraID authentication (aka `Entra ID passthrough`)",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Connection"
-        }
-      ],
-      "x-ms-discriminator-value": "AAD"
-    },
-    "ConnectionWithNoAuth": {
-      "type": "object",
-      "description": "A connection with no authentication",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Connection"
-        }
-      ],
-      "x-ms-discriminator-value": "None"
-    },
-    "ConnectionWithSASAuth": {
-      "type": "object",
-      "description": "A connection with Shared Access Signature (SAS) authentication",
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/CredentialsSASAuth",
-          "description": "The credentials for SAS authentication",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Connection"
-        }
-      ],
-      "x-ms-discriminator-value": "SAS"
-    },
     "CosmosDBIndex": {
       "type": "object",
       "description": "CosmosDB Vector Store Index Definition",
@@ -1466,33 +1397,57 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
-    "CredentialsApiKeyAuth": {
-      "type": "object",
-      "description": "The credentials needed for API key authentication",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The API key",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "key"
-      ]
+    "CredentialType": {
+      "type": "string",
+      "description": "The credential type used by the connection",
+      "enum": [
+        "ApiKey",
+        "AAD",
+        "SAS",
+        "CustomKeys",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "CredentialType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "apiKey",
+            "value": "ApiKey",
+            "description": "API Key credential"
+          },
+          {
+            "name": "entraId",
+            "value": "AAD",
+            "description": "Entra ID credential (formerly known as AAD)"
+          },
+          {
+            "name": "SAS",
+            "value": "SAS",
+            "description": "Shared Access Signature (SAS) credential"
+          },
+          {
+            "name": "custom",
+            "value": "CustomKeys",
+            "description": "Custom credential"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No credential"
+          }
+        ]
+      }
     },
-    "CredentialsSASAuth": {
+    "CustomCredential": {
       "type": "object",
-      "description": "The credentials needed for Shared Access Signatures (SAS) authentication",
-      "properties": {
-        "SAS": {
-          "type": "string",
-          "description": "The Shared Access Signatures (SAS) token",
-          "readOnly": true
+      "description": "Custom credential defintion",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCredentials"
         }
-      },
-      "required": [
-        "SAS"
-      ]
+      ],
+      "x-ms-discriminator-value": "CustomKeys"
     },
     "DatasetType": {
       "type": "string",
@@ -1639,6 +1594,16 @@
         "modelDeploymentName",
         "embeddingField"
       ]
+    },
+    "EntraIDCredentials": {
+      "type": "object",
+      "description": "Entra ID credential definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCredentials"
+        }
+      ],
+      "x-ms-discriminator-value": "AAD"
     },
     "FileDatasetVersion": {
       "type": "object",
@@ -1874,6 +1839,16 @@
       ],
       "x-ms-discriminator-value": "ModelDeployment"
     },
+    "NoAuthenticationCredentials": {
+      "type": "object",
+      "description": "Credentials that do not require authentication",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCredentials"
+        }
+      ],
+      "x-ms-discriminator-value": "None"
+    },
     "PagedConnection": {
       "type": "object",
       "description": "Paged collection of Connection items",
@@ -2061,6 +2036,23 @@
           }
         ]
       }
+    },
+    "SASCredentials": {
+      "type": "object",
+      "description": "Shared Access Signature (SAS) credential definition",
+      "properties": {
+        "sasToken": {
+          "type": "string",
+          "description": "SAS token",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseCredentials"
+        }
+      ],
+      "x-ms-discriminator-value": "SAS"
     },
     "SasCredential": {
       "type": "object",
