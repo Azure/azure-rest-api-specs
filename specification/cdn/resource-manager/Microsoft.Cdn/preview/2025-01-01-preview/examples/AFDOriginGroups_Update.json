@@ -18,7 +18,14 @@
           "probeProtocol": "NotSet",
           "probeIntervalInSeconds": 10
         },
-        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+        "authentication": {
+          "type": "UserAssignedIdentity",
+          "userAssignedIdentity": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id-1"
+          },
+          "scope": "https://www.contoso.com/.default"
+        }
       }
     }
   },
@@ -41,6 +48,13 @@
             "probeIntervalInSeconds": 10
           },
           "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "authentication": {
+            "type": "UserAssignedIdentity",
+            "userAssignedIdentity": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id-1"
+            },
+            "scope": "https://www.contoso.com/.default"
+          },
           "provisioningState": "Succeeded",
           "deploymentStatus": "NotStarted"
         }
@@ -48,7 +62,7 @@
     },
     "202": {
       "headers": {
-        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2024-09-01"
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-01-01-preview"
       },
       "body": {
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
@@ -67,6 +81,13 @@
             "probeIntervalInSeconds": 10
           },
           "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5,
+          "authentication": {
+            "type": "UserAssignedIdentity",
+            "userAssignedIdentity": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id-1"
+            },
+            "scope": "https://www.contoso.com/.default"
+          },
           "provisioningState": "Updating",
           "deploymentStatus": "NotStarted"
         }
