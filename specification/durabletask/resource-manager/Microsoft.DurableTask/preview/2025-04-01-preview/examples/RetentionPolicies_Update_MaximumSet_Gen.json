@@ -1,0 +1,65 @@
+{
+  "title": "RetentionPolicies_Update_MaximumSet",
+  "operationId": "RetentionPolicies_Update",
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "194D3C1E-462F-4738-9025-092A628C06EB",
+    "resourceGroupName": "rgdurabletask",
+    "schedulerName": "testscheduler",
+    "retentionPolicyName": "default",
+    "properties": {
+      "properties": {
+        "retentionPolicies": [
+          {
+            "retentionPeriodInDays": 30
+          },
+          {
+            "retentionPeriodInDays": 10,
+            "orchestrationState": "Failed"
+          },
+          {
+            "retentionPeriodInDays": 24,
+            "orchestrationState": "Completed"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "retentionPolicies": [
+            {
+              "retentionPeriodInDays": 30
+            },
+            {
+              "retentionPeriodInDays": 10,
+              "orchestrationState": "Failed"
+            },
+            {
+              "retentionPeriodInDays": 24,
+              "orchestrationState": "Completed"
+            }
+          ]
+        },
+        "id": "/subscriptions/194D3C1E-462F-4738-9025-092A628C06EB/resourceGroups/rgdurabletask/providers/Microsoft.DurableTask/schedulers/testscheduler/retentionPolicies/default",
+        "name": "default",
+        "type": "Microsoft.DurableTask/schedulers/retentionPolicies",
+        "systemData": {
+          "createdBy": "tenmbevaunjzikxowqexrsx",
+          "createdByType": "User",
+          "createdAt": "2024-04-17T15:34:17.365Z",
+          "lastModifiedBy": "xfvdcegtj",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-04-17T15:34:17.366Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
