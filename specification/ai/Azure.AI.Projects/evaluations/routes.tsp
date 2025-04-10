@@ -63,6 +63,7 @@ interface Evaluations {
   @useAuth(BearerAuth)
   @added(Versions.v2025_05_15_preview)
   @removed(Versions.v_latest)
+  @access(Access.internal)
   op checkAnnotation(
     @doc("Api Version.")
     @query apiVersion: string
