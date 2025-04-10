@@ -30,7 +30,9 @@ openapi-subtype: rpaas
 tag: package-2025-03-21-preview
 
 directive:
-  - suppression-file: ./suppression.json
+  - suppress: InlineModel
+    where: $.definitions['LiftrBase.Storage.ManagedServiceIdentityUpdate'].properties.userAssignedIdentities.additionalProperties
+    reason: "Inline model under additionalProperties is intentional due to ARM identity pattern. Cannot be converted to a named model."
 ```
 
 ### Tag: package-2025-03-21-preview
