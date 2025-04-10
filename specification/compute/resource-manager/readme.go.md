@@ -57,6 +57,7 @@ directive:
   - from: ComputeRP.json
     where: $.definitions.RestorePointSourceVMStorageProfile.dataDisks
     transform: delete $["x-ms-client-name"]
+```
 
 ### Go multi-api
 
