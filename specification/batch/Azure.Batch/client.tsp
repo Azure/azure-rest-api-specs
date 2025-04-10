@@ -114,3 +114,15 @@ interface BatchClient {
   "getNodeFilePropertiesInternal",
   "csharp"
 );
+
+/* PYTHON OVERRIDES */
+@@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "python");
+@@clientName(BatchClient.getTaskFileProperties,
+  "getTaskFilePropertiesInternal",
+  "python"
+);
+@@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "python");
+@@clientName(BatchClient.getNodeFileProperties,
+  "getNodeFilePropertiesInternal",
+  "python"
+);
