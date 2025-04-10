@@ -8302,6 +8302,23 @@
         }
       }
     },
+    "FullTextPolicy": {
+      "type": "object",
+      "description": "Cosmos DB FullText Policy",
+      "properties": {
+        "defaultLanguage": {
+          "type": "string",
+          "description": "The default language for a full text index."
+        },
+        "fullTextPaths": {
+          "description": "List of FullText Paths",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FullTextPath"
+          }
+        }
+      }
+    },
     "ExcludedPath": {
       "type": "object",
       "properties": {
@@ -8440,6 +8457,25 @@
         "dataType",
         "distanceFunction",
         "dimensions"
+      ]
+    },
+    "FullTextPath": {
+      "type": "object",
+      "description": "Represents the full text path settings for the full text index.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "A string containing the path of the full text index."
+        },
+        "language": {
+          "description": "A string containing the language of the full text index.",
+          "type": "string"
+         }        
+        }
+      },
+      "required": [
+        "path",
+        "language"      
       ]
     },
     "CompositePathList": {
