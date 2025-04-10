@@ -40,7 +40,7 @@ model DeidentificationJob {
   @doc("Current status of a job.")
   @visibility(Lifecycle.Read)
   @pollingOperationParameter
-  status: OperationState;
+  status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when job fails in it's entirety.")
   @visibility(Lifecycle.Read)
@@ -67,12 +67,6 @@ model DeidentificationJob {
   @doc("Summary of a job. Exists only when the job is completed.")
   @visibility(Lifecycle.Read)
   summary?: DeidentificationJobSummary;
-}
-
-@doc("Operation states for a de-identification job.")
-@clientName("OperationStatus", "java")
-union OperationState {
-  Azure.Core.Foundations.OperationState,
 }
 
 @doc("Summary metrics of a job.")
@@ -114,7 +108,7 @@ model DeidentificationDocumentDetails {
   output?: DeidentificationDocumentLocation;
 
   @doc("Status of the document.")
-  status: OperationState;
+  status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when document fails.")
   error?: Azure.Core.Foundations.Error;
