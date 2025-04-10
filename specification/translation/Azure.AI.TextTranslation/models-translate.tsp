@@ -13,7 +13,6 @@ namespace TextTranslation;
 
 @doc("Request body parameters for the translate API.")
 model TranslateBodyParameters {
-
   @doc("""
     Details of the translate request
     """)
@@ -138,81 +137,80 @@ model TranslateParameters {
 @doc("Translate targets parameters")
 model TranslateTarget {
   @doc("""
-  Specifies the language of the output text. The target language must be one of the supported languages included 
-  in the translation scope. It's possible to translate to multiple languages simultaneously by including 
-  multiple string values in the targetsLanguage array.
-  """)
+    Specifies the language of the output text. The target language must be one of the supported languages included 
+    in the translation scope. It's possible to translate to multiple languages simultaneously by including 
+    multiple string values in the targetsLanguage array.
+    """)
   language: string[];
 
   @doc("""
-  Specifies the script of the translated text.
-  """)
+    Specifies the script of the translated text.
+    """)
   script?: string;
 
   @doc("""
-  Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
-  complete element. Possible values are: plain (default) or html.
-  """)
+    Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
+    complete element. Possible values are: plain (default) or html.
+    """)
   textType?: TextType = "Plain";
 
   @doc("""
-  Specifies how profanities should be treated in translations.
-  Possible values are: NoAction (default), Marked or Deleted.
-  """)
+    Specifies how profanities should be treated in translations.
+    Possible values are: NoAction (default), Marked or Deleted.
+    """)
   profanityAction?: ProfanityAction = ProfanityAction.NoAction;
 
   @doc("""
-  Specifies how profanities should be marked in translations.
-  Possible values are: Asterisk (default) or Tag. 
-  """)
+    Specifies how profanities should be marked in translations.
+    Possible values are: Asterisk (default) or Tag. 
+    """)
   profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
   @doc("""
-  Model that should be used for translation.
-  """)
+    Model that should be used for translation.
+    """)
   deploymentNameModel?: string;
 
   @doc("""
-  In the case where a custom system is being used, specifies that the service is allowed to fall back to a
-  general system when a custom system doesn't exist. 
-  In the case where a Large Language Model is being used, specifies that the service is allowed to fall
-  back to a Small Language Model if an error occurs.
-  Possible values are: true (default) or false.
-  
-  allowFallback=false specifies that the translation should only use systems trained for the category specified 
-  by the request. If a translation for language X to language Y requires chaining through a pivot language E, 
-  then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. 
-  If no system is found with the specific category, the request will return a 400 status code. allowFallback=true 
-  specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
-  """)
+    In the case where a custom system is being used, specifies that the service is allowed to fall back to a
+    general system when a custom system doesn't exist. 
+    In the case where a Large Language Model is being used, specifies that the service is allowed to fall
+    back to a Small Language Model if an error occurs.
+    Possible values are: true (default) or false.
+    
+    allowFallback=false specifies that the translation should only use systems trained for the category specified 
+    by the request. If a translation for language X to language Y requires chaining through a pivot language E, 
+    then all the systems in the chain (X → E and E → Y) will need to be custom and have the same category. 
+    If no system is found with the specific category, the request will return a 400 status code. allowFallback=true 
+    specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
+    """)
   allowFallback?: boolean = true;
 
   @doc("""
-  Defines complexity of LLM prompts to provide high accuracy translation.
-  """)
+    Defines complexity of LLM prompts to provide high accuracy translation.
+    """)
   grade?: string;
 
   @doc("""
-  Desired tone of target translation.
-  """)
+    Desired tone of target translation.
+    """)
   tone?: string;
 
   @doc("""
-  Desired gender of target translation.
-  """)
+    Desired gender of target translation.
+    """)
   gender?: string;
 
   @doc("""
-  Reference dataset ID having sentence pair to generate adaptive customized translation.
-  """)
+    Reference dataset ID having sentence pair to generate adaptive customized translation.
+    """)
   adaptiveDatasetIds?: string[];
 
   @doc("""
-  Reference sentence pairs to generate adaptive results.
-  """)
+    Reference sentence pairs to generate adaptive results.
+    """)
   @maxItems(5)
   referenceTextPairs?: ReferenceSentencePair[];
-
 }
 
 @doc("Request body parameters for the translate API.")
@@ -230,7 +228,7 @@ model TranslateBodyDetails {
   @doc("""
     Translation target parameters.
     """)
-  targets: TranslateTarget
+  targets: TranslateTarget;
 }
 
 @doc("Reference sentence pair.")
