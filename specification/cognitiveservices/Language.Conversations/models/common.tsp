@@ -1169,10 +1169,10 @@ model ConversationalAIAnalysis {
   id: string;
 
   /** The intent classification results for this conversation. */
-  intents: Array<ConversationalAIIntent>;
+  intents: ConversationalAIIntent[];
 
   /** Global entities that are matched but not associated with any specific intent. */
-  entities?: Array<ConversationalAIEntity>;
+  entities?: ConversationalAIEntity[];
 }
 
 /** The intent classification result for this conversation. */
