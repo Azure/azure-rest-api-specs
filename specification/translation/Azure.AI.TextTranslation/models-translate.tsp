@@ -149,12 +149,6 @@ model TranslateTarget {
   script?: string;
 
   @doc("""
-    Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
-    complete element. Possible values are: plain (default) or html.
-    """)
-  textType?: TextType = "Plain";
-
-  @doc("""
     Specifies how profanities should be treated in translations.
     Possible values are: NoAction (default), Marked or Deleted.
     """)
@@ -167,9 +161,16 @@ model TranslateTarget {
   profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
   @doc("""
-    Model that should be used for translation.
+    Default is ‘general’, which uses NMT system.
+    ‘abc-inc-gpt-4o’, and ‘abc-inc-gpt-4o-mini’ are examples of deployment names which use GPT-4o uses or 
+    GPT-4o-mini model. ‘gpt-4o’ uses GPT-4o model. 
+
+    ‘<custom model id>’ uses the custom NMT model tuned by customer.
+    ‘best’ system determines which is the best model to use for the request. This intelligence could be introduced
+    in future. Customer should have deployed it in their resource.
+
     """)
-  deploymentNameModel?: string;
+  deploymentNameModel?: string = "general";
 
   @doc("""
     In the case where a custom system is being used, specifies that the service is allowed to fall back to a
@@ -189,17 +190,17 @@ model TranslateTarget {
   @doc("""
     Defines complexity of LLM prompts to provide high accuracy translation.
     """)
-  grade?: string;
+  grade?: string = "basic";
 
   @doc("""
-    Desired tone of target translation.
+    Desired tone of target translation. Default is 'informal'
     """)
-  tone?: string;
+  tone?: string = "informal";
 
   @doc("""
     Desired gender of target translation.
     """)
-  gender?: string;
+  gender?: string = "neutral";
 
   @doc("""
     Reference dataset ID having sentence pair to generate adaptive customized translation.
@@ -224,6 +225,22 @@ model TranslateBodyDetails {
     Specifies the script of the input text.
     """)
   script?: string;
+
+  @doc("""
+    Specifies the language of the input text. Find which languages are available to translate by 
+    looking up supported languages using the translation scope. If the language parameter isn't 
+    specified, automatic language detection is applied to determine the source language.
+    
+    You must use the language parameter rather than autodetection when using the dynamic dictionary feature. 
+    Note: the dynamic dictionary feature is case-sensitive.
+    """)
+  language?: string;
+
+  @doc("""
+    Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
+    complete element. Possible values are: plain (default) or html.
+    """)
+  textType?: TextType = "Plain";
 
   @doc("""
     Translation target parameters.
