@@ -993,7 +993,7 @@ model BatchNodeCounts {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The number of Compute Nodes in the upgradingOS state.")
-  @clientName("upgradingOs")
+  @clientName("upgradingOs", "!go")
   upgradingOS: int32;
 }
 
@@ -1037,7 +1037,7 @@ model BatchPoolResourceStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The average CPU usage across all Compute Nodes in the Pool (percentage per node).")
-  @clientName("avgCpuPercentage")
+  @clientName("avgCpuPercentage", "!go")
   avgCPUPercentage: float32;
 
   @doc("The average memory usage in GiB across all Compute Nodes in the Pool.")
@@ -1954,7 +1954,7 @@ model VirtualMachineConfiguration {
   imageReference: ImageReference;
 
   @doc("The SKU of the Batch Compute Node agent to be provisioned on Compute Nodes in the Pool. The Batch Compute Node agent is a program that runs on each Compute Node in the Pool, and provides the command-and-control interface between the Compute Node and the Batch service. There are different implementations of the Compute Node agent, known as SKUs, for different operating systems. You must specify a Compute Node agent SKU which matches the selected Image reference. To get the list of supported Compute Node agent SKUs along with their list of verified Image references, see the 'List supported Compute Node agent SKUs' operation.")
-  @clientName("nodeAgentSkuId")
+  @clientName("nodeAgentSkuId", "!go")
   nodeAgentSKUId: string;
 
   @doc("Windows operating system settings on the virtual machine. This property must not be specified if the imageReference property specifies a Linux OS Image.")
@@ -2019,7 +2019,7 @@ model DataDisk {
   caching?: CachingType;
 
   @doc("The initial disk size in gigabytes.")
-  @clientName("diskSizeGb")
+  @clientName("diskSizeGb", "!go")
   diskSizeGB: int32;
 
   @doc("The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\".")
@@ -2136,7 +2136,7 @@ model NetworkConfiguration {
   endpointConfiguration?: BatchPoolEndpointConfiguration;
 
   @doc("The Public IPAddress configuration for Compute Nodes in the Batch Pool.")
-  @clientName("publicIpAddressConfiguration")
+  @clientName("publicIpAddressConfiguration", "!go")
   publicIPAddressConfiguration?: PublicIpAddressConfiguration;
 
   @doc("Whether this pool should enable accelerated networking. Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.")
@@ -2147,7 +2147,7 @@ model NetworkConfiguration {
 @doc("The endpoint configuration for a Pool.")
 model BatchPoolEndpointConfiguration {
   @doc("A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.")
-  @clientName("inboundNatPools")
+  @clientName("inboundNatPools", "!go")
   inboundNATPools: InboundNatPool[];
 }
 
@@ -2449,11 +2449,11 @@ model BatchJobScheduleStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
-  @clientName("userCpuTime")
+  @clientName("userCpuTime", "!go")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
-  @clientName("kernelCpuTime")
+  @clientName("kernelCpuTime", "!go")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
