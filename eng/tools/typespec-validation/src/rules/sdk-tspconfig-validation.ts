@@ -455,17 +455,17 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigSubRu
 
     const packageDir = config?.options?.[this.emitterName]?.["package-dir"];
     const actualValue = option as unknown as undefined | string | boolean;
-    if (packageDir !== undefined) {
-      this.expectedValue = packageDir;
-    }
-    if (!this.validateValue(actualValue, this.expectedValue)) {
-      return this.createFailedResult(
-        `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
-        `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
-      );
+    if (
+      this.validateValue(actualValue, this.expectedValue) ||
+      (packageDir !== undefined && this.validateValue(actualValue, packageDir))
+    ) {
+      return { success: true };
     }
 
-    return { success: true };
+    return this.createFailedResult(
+      `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}" or "${packageDir}"`,
+      `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}" or "${packageDir}"`,
+    );
   }
 
   public getPathOfKeyToValidate() {
