@@ -1,10 +1,104 @@
 import "../tools/models.tsp";
-
 import "@typespec/versioning";
 
 namespace Azure.AI.Projects.Agents;
 
 using TypeSpec.Versioning;
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | array is intentional (OpenAPI 3 can handle oneOf)."
+@doc("Represents the message content for creating a new message. It can be either a simple text string or a list of typed content blocks (text, image_file, image_url).")
+union MessageInputContent {
+  @doc("A plain text message if rich content is not needed.")
+  text: string,
+
+  @doc("A list of typed content blocks for richer messages, such as text blocks, image-file references, or external image-URL references.")
+  blocks: MessageInputContentBlock[],
+}
+
+@doc("Specifies the kind of content block within a message. Could be text, an image file, an external image URL, or an unknown future type.")
+union MessageBlockType {
+  @doc("Indicates a block containing text content.")
+  text: "text",
+
+  @doc("Indicates a block referencing an internally uploaded image file.")
+  image_file: "image_file",
+
+  @doc("Indicates a block referencing an external image URL.")
+  image_url: "image_url",
+
+  @doc("A future or unrecognized block type (fallback).")
+  string,
+}
+
+@doc("Defines a single content block when creating a message. The 'type' field determines whether it is text, an image file, or an external image URL, etc.")
+@discriminator("type")
+model MessageInputContentBlock {
+  @doc("Specifies which kind of content block this is (text, image_file, image_url, etc.).")
+  type: MessageBlockType;
+}
+
+@doc("A text block in a new message, containing plain text content.")
+model MessageInputTextBlock extends MessageInputContentBlock {
+  @doc("Must be 'text' for a text block.")
+  type: "text";
+
+  @doc("The plain text content for this block.")
+  text: string;
+}
+
+@doc("An image-file block in a new message, referencing an internally uploaded image by file ID.")
+model MessageInputImageFileBlock extends MessageInputContentBlock {
+  @doc("Must be 'image_file' for an internally uploaded image block.")
+  type: "image_file";
+
+  @doc("Information about the referenced image file, including file ID and optional detail level.")
+  @encodedName("application/json", "image_file")
+  imageFile: MessageImageFileParam;
+}
+
+@doc("An image-URL block in a new message, referencing an external image by URL.")
+model MessageInputImageUrlBlock extends MessageInputContentBlock {
+  @doc("Must be 'image_url' for an externally hosted image block.")
+  type: "image_url";
+
+  @doc("Information about the external image URL, including the URL and optional detail level.")
+  @encodedName("application/json", "image_url")
+  imageUrl: MessageImageUrlParam;
+}
+
+@doc("Specifies an image's detail level. Can be 'auto', 'low', 'high', or an unknown future value.")
+union ImageDetailLevel {
+  @doc("Automatically select an appropriate detail level.")
+  auto: "auto",
+
+  @doc("Use a lower detail level to reduce bandwidth or cost.")
+  low: "low",
+
+  @doc("Use a higher detail level—potentially more resource-intensive.")
+  high: "high",
+
+  @doc("A future or unrecognized detail level (fallback).")
+  string,
+}
+
+@doc("Defines how an internally uploaded image file is referenced when creating an image-file block.")
+model MessageImageFileParam {
+  @doc("The ID of the previously uploaded image file.")
+  @encodedName("application/json", "file_id")
+  fileId: string;
+
+  @doc("Optional detail level for the image (auto, low, or high).")
+  detail?: ImageDetailLevel;
+}
+
+@doc("Defines how an external image URL is referenced when creating an image-URL block.")
+model MessageImageUrlParam {
+  @doc("The publicly accessible URL of the external image.")
+  url: string;
+
+  @doc("Optional detail level for the image (auto, low, or high). Defaults to 'auto' if not specified.")
+  detail?: ImageDetailLevel;
+}
 
 /** A single message within an agent thread, as provided during that thread's creation for its initial state. */
 model ThreadMessageOptions {
@@ -18,10 +112,12 @@ model ThreadMessageOptions {
    */
   role: MessageRole;
 
-  /** The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via
-   * a separate call to the create message API.
+  /**
+   * The content of the initial message. This may be:
+   *  - A basic string, if you only need text, or
+   *  - An array of typed content blocks (text, image_file, image_url, etc.)
    */
-  content: string;
+  content: MessageInputContent;
 
   /** A list of files attached to the message, and the tools they should be added to. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
