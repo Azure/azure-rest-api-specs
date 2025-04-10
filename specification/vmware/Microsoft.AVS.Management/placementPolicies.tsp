@@ -49,7 +49,7 @@ interface PlacementPolicies {
   ): ArmResponse<PlacementPolicy> | {
     ...AcceptedResponse;
     ...Azure.Core.Foundations.RetryAfterHeader;
-    ...LocationHeader;
+    ...ArmLroLocationHeader;
 
     @bodyRoot
     @doc("The updatd placement policy.")
