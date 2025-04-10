@@ -1,0 +1,30 @@
+{
+  "name": "@azure-tools/apiview-automation-client",
+  "private": true,
+  "type": "module",
+  "main": "dist/src/index.js",
+  "bin": {
+    "tsv": "cmd/tsv.js"
+  },
+  "dependencies": {
+    "commander": "^13.1.0",
+    "dotenv": "^16.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitest/coverage-v8": "^3.0.7",
+    "cross-env": "^7.0.3",
+    "typescript": "~5.8.2",
+    "vitest": "^3.0.7"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose",
+    "cli:dev": "npm run build && node cmd/tsv.js",
+    "cli:prod": "npm run build && cross-env NODE_ENV=production node cmd/tsv.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
