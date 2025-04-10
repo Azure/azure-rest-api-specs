@@ -5,6 +5,7 @@ import {
   getFile,
   getDocUrl,
   getFileLink,
+  generateReport,
   getPathSegment,
   compareLintDiffViolations,
 } from "../src/generateReport.js";
@@ -267,5 +268,105 @@ describe("compareLintDiffViolations", () => {
 
     const actual = compareLintDiffViolations(a, b);
     expect(actual).toEqual(1);
+  });
+});
+
+describe("generateReport", () => {
+  test("fails if new violations include an error", async ({ expect }) => {
+    const afterViolation = {
+      extensionName: "@microsoft.azure/openapi-validator",
+      level: "error",
+      code: "SomeCode",
+      message: "Some Message",
+      source: [
+        {
+          document:
+            "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+          position: { line: 1, colomn: 1 },
+        } as Source,
+      ],
+      details: {},
+    };
+
+    const beforeResult = {
+      error: null,
+      stdout: "",
+      stderr: "",
+      rootPath: "",
+      readme: "file1.md",
+      tag: "",
+    } as AutorestRunResult;
+    const afterResult = {
+      error: null,
+      stdout: JSON.stringify(afterViolation),
+      stderr: "",
+      rootPath: "",
+      readme: "file1.md",
+      tag: "",
+    } as AutorestRunResult;
+
+    const runCorrelations = new Map<string, BeforeAfter>([
+      ["file1.md", { before: beforeResult, after: afterResult }],
+    ]);
+
+    const actual = await generateReport(
+      runCorrelations,
+      new Set<string>([
+        "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+      ]),
+      "/tmp/outFile",
+      "baseBranch",
+      "compareSha",
+    );
+    expect(actual).toBe(false);
+  });
+
+  test("passes if new violations do not include an error (warnings only)", async ({ expect }) => {
+    const afterViolation = {
+      extensionName: "@microsoft.azure/openapi-validator",
+      level: "warning",
+      code: "SomeCode",
+      message: "Some Message",
+      source: [
+        {
+          document:
+            "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+          position: { line: 1, colomn: 1 },
+        } as Source,
+      ],
+      details: {},
+    };
+
+    const beforeResult = {
+      error: null,
+      stdout: "",
+      stderr: "",
+      rootPath: "",
+      readme: "file1.md",
+      tag: "",
+    } as AutorestRunResult;
+    const afterResult = {
+      error: null,
+      stdout: JSON.stringify(afterViolation),
+      stderr: "",
+      rootPath: "",
+      readme: "file1.md",
+      tag: "",
+    } as AutorestRunResult;
+
+    const runCorrelations = new Map<string, BeforeAfter>([
+      ["file1.md", { before: beforeResult, after: afterResult }],
+    ]);
+
+    const actual = await generateReport(
+      runCorrelations,
+      new Set<string>([
+        "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+      ]),
+      "/tmp/outFile",
+      "baseBranch",
+      "compareSha",
+    );
+    expect(actual).toBe(true);
   });
 });
