@@ -4,9 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
@@ -14,17 +12,21 @@ using Azure.Core;
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://ml.azure.com/.default"],
+      scopes: ["https://cognitiveservices.azure.com/.default"],
     }
   ]>
 )
 @service(#{ title: "AI Model Inference" })
-@versioned(AI.Model.Versions)
-namespace AI.Model;
+@versioned(Azure.AI.Inference.Versions)
+namespace Azure.AI.Inference;
 
-@doc("The AI.Model service versions.")
+@doc("The Azure.AI.Inference service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-05-01-preview version of the AI.Model service.")
+  @doc("The 2024-05-01-preview version of the Azure.AI.Inference service.")
   v2024_05_01_Preview: "2024-05-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @doc("The 2025-04-01 version of the Azure.AI.Inference service.")
+  v2025_04_01: "2025-04-01",
 }

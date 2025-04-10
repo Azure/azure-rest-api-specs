@@ -4,7 +4,7 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace AI.Model;
+namespace Azure.AI.Inference;
 
 @doc("""
   The configuration information for an image embeddings request.

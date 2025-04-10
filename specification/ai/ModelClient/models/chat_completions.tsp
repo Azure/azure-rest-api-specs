@@ -2,12 +2,11 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 using Azure.ClientGenerator.Core;
 
-namespace AI.Model;
+namespace Azure.AI.Inference;
 
 @doc("""
   The configuration information for a chat completions request.
@@ -204,6 +203,39 @@ model CompletionsUsage {
 
   @doc("The total number of tokens processed for the completions request and response.")
   total_tokens: int32;
+
+  @doc("Breakdown of tokens used in a completion.")
+  completion_tokens_details?: CompletionsUsageDetails;
+
+  @doc("Breakdown of tokens used in the prompt/chat history.")
+  prompt_tokens_details?: PromptUsageDetails;
+}
+
+@doc("A breakdown of tokens used in a completion.")
+model CompletionsUsageDetails {
+  @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
+  audio_tokens: int32;
+
+  @doc("The number of tokens corresponding to reasoning.")
+  @added(Azure.AI.Inference.Versions.v2025_04_01)
+  @visibility(Lifecycle.Read)
+  reasoning_tokens: int32;
+
+  @doc("The total number of tokens processed for the completions request and response.")
+  @visibility(Lifecycle.Read)
+  total_tokens: int32;
+}
+
+@doc("A breakdown of tokens used in the prompt/chat history.")
+model PromptUsageDetails {
+  @doc("The number of tokens corresponding to audio input.")
+  @visibility(Lifecycle.Read)
+  audio_tokens: int32;
+
+  @doc("The total number of tokens cached.")
+  @visibility(Lifecycle.Read)
+  cached_tokens: int32;
 }
 
 @doc("""
@@ -446,6 +478,11 @@ model StreamingChatResponseMessageUpdate {
     completions request to resolve as configured.
     """)
   toolCalls?: StreamingChatResponseToolCallUpdate[];
+
+  @doc("The reasoning content the model used for generating the response")
+  @added(Azure.AI.Inference.Versions.v2025_04_01)
+  @visibility(Lifecycle.Read)
+  reasoning_content?: string;
 }
 
 @doc("A representation of a chat message as received in a response.")
@@ -463,6 +500,12 @@ model ChatResponseMessage {
     completions request to resolve as configured.
     """)
   toolCalls?: ChatCompletionsToolCall[];
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The reasoning content the model used for generating the response")
+  @added(Azure.AI.Inference.Versions.v2025_04_01)
+  @visibility(Lifecycle.Read)
+  reasoning_content?: string;
 }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."

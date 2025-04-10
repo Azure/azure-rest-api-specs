@@ -11,9 +11,8 @@ import "./models/image_embeddings.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
 
-namespace AI.Model;
+namespace Azure.AI.Inference;
 
 @doc("""
   Gets chat completions for the provided chat messages.
@@ -78,9 +77,17 @@ op getImageEmbeddings is Azure.Core.RpcOperation<
   Returns information about the AI model.
   The method makes a REST API call to the `/info` route on the given endpoint.
   This method will only work when using Serverless API or Managed Compute endpoint.
-  It will not work for GitHub Models endpoint or Azure OpenAI endpoint.
+  It will not work for Azure OpenAI endpoints.
   """)
 @actionSeparator("/")
 @route("info")
 @get
-op getModelInfo is Azure.Core.RpcOperation<{}, ModelInfo>;
+op getModelInfo is Azure.Core.RpcOperation<
+  {
+    @doc("The model deployment name you want information from.")
+    @query
+    @added(Azure.AI.Inference.Versions.v2025_04_01)
+    `model`?: string;
+  },
+  ModelInfo
+>;
