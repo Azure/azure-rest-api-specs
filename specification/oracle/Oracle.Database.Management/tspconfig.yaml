@@ -2,8 +2,6 @@ parameters:
   "service-dir":
     default: "sdk/oracledatabase"
   "dependencies":
-    # "additionalDirectories":
-    #   - "specification/oracle/models"
     default: ""
 
 emit:
@@ -27,6 +25,9 @@ options:
     package-details:
       name: "@azure/arm-oracledatabase"
     flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/oracle/models"
 
 linter:
   extends:
