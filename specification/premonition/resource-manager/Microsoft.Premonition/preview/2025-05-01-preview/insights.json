@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Premonition Insights",
-    "version": "2025-04-01-preview",
+    "version": "2025-05-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1450,19 +1450,48 @@
       "type": "object",
       "description": "Result for a metagenomic analysis",
       "properties": {
+        "totalNumberOfBasePairs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The sum of number of base pairs in all samples"
+        },
+        "totalNumberOfReads": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The sum of number of reads in all samples"
+        },
+        "readsType": {
+          "$ref": "#/definitions/ReadsType",
+          "description": "The sum of number of base pairs in all samples"
+        },
+        "averageReadDuplicationFraction": {
+          "type": "number",
+          "format": "double",
+          "description": "Average fraction of duplicate reads in all samples"
+        },
+        "minReadLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum read length accross all samples"
+        },
+        "maxReadLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum read length accross all samples"
+        },
         "taxonomyVersion": {
           "$ref": "#/definitions/TaxonomyVersion",
           "description": "The version of taxonomy database used"
-        },
-        "totalReads": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of base pairs read"
         }
       },
       "required": [
-        "taxonomyVersion",
-        "totalReads"
+        "totalNumberOfBasePairs",
+        "totalNumberOfReads",
+        "readsType",
+        "averageReadDuplicationFraction",
+        "minReadLength",
+        "maxReadLength",
+        "taxonomyVersion"
       ],
       "allOf": [
         {
@@ -1486,6 +1515,30 @@
         }
       ],
       "x-ms-discriminator-value": "Metagenomics"
+    },
+    "ReadsType": {
+      "type": "string",
+      "description": "Valid reads types",
+      "enum": [
+        "short",
+        "long"
+      ],
+      "x-ms-enum": {
+        "name": "ReadsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "short",
+            "value": "short",
+            "description": "Short reads"
+          },
+          {
+            "name": "long",
+            "value": "long",
+            "description": "Long reads"
+          }
+        ]
+      }
     },
     "Sample": {
       "type": "object",

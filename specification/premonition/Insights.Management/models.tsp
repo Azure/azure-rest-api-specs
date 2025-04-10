@@ -147,7 +147,7 @@ union AnalysisState {
 union AnalysisKind {
   string,
 
-  @doc("Metagenomics analysis: identify the sources of genetic material in a sample")
+  @doc("Metagenomic analysis: identify the sources of genetic material in a sample")
   Metagenomics: "Metagenomics",
 }
 
@@ -158,7 +158,7 @@ model AnalysisSettings {
   kind: AnalysisKind;
 }
 
-@doc("Settings for a Metagenomics analysis")
+@doc("Settings for a metagenomic analysis")
 model MetagenomicsAnalysisSettings extends AnalysisSettings {
   kind: AnalysisKind.Metagenomics;
 
@@ -176,13 +176,38 @@ model AnalysisResult {
   files?: Array<string>;
 }
 
-@doc("Result for a Metagenomics analysis")
+@doc("Result for a metagenomic analysis")
 model MetagenomicsAnalysisResult extends AnalysisResult {
   kind: AnalysisKind.Metagenomics;
+
+  @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
+  @doc("The sum of number of base pairs in all samples")
+  totalNumberOfBasePairs: int64;
+
+  @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
+  @doc("The sum of number of reads in all samples")
+  totalNumberOfReads: int64;
+
+  @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
+  @doc("The sum of number of base pairs in all samples")
+  readsType: ReadsType;
+
+  @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
+  @doc("Average fraction of duplicate reads in all samples")
+  averageReadDuplicationFraction: float64;
+
+  @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
+  @doc("Minimum read length accross all samples")
+  minReadLength: int32;
+
+  @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
+  @doc("Maximum read length accross all samples")
+  maxReadLength: int32;
 
   @doc("The version of taxonomy database used")
   taxonomyVersion: TaxonomyVersion;
 
+  @removed(Microsoft.Premonition.Versions.v2025_05_01_preview)
   @doc("The number of base pairs read")
   totalReads: int32;
 }
@@ -198,12 +223,24 @@ union TaxonomyVersion {
   Latest: "Latest",
 }
 
+@added(Microsoft.Premonition.Versions.v2025_05_01_preview)
+@doc("Valid reads types")
+union ReadsType {
+  string,
+
+  @doc("Short reads")
+  short: "short",
+
+  @doc("Long reads")
+  long: "long",
+}
+
 @doc("Request to identify the sources of genetic material in a sample")
 model IdentifyRequest {
   @doc("The name for the new analysis")
   @pattern("^[\\w\\-]{3,24}$")
   name: string;
 
-  @doc("The settings for Metagenomics analysis")
+  @doc("The settings for metagenomic analysis")
   settings: MetagenomicsAnalysisSettings;
 }
