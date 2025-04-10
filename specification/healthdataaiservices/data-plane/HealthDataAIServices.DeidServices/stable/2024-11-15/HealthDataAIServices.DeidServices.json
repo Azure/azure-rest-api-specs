@@ -682,7 +682,7 @@
           "description": "Location for the output."
         },
         "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "$ref": "#/definitions/OperationState",
           "description": "Status of the document."
         },
         "error": {
@@ -773,7 +773,7 @@
           "description": "Customization parameters to override default service behaviors."
         },
         "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "$ref": "#/definitions/OperationState",
           "description": "Current status of a job.",
           "readOnly": true
         },
@@ -883,6 +883,10 @@
           "description": "Result of the \"Tag\" operation. Only available for \"Tag\" Operation."
         }
       }
+    },
+    "OperationState": {
+      "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+      "x-nullable": false
     },
     "PagedDeidentificationDocumentDetails": {
       "type": "object",
