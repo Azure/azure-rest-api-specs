@@ -12,7 +12,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace AI.Model;
+namespace Azure.AI.Inference;
 
 @doc("""
   Gets chat completions for the provided chat messages.
@@ -86,7 +86,7 @@ op getModelInfo is Azure.Core.RpcOperation<
   {
     @doc("The model deployment name you want information from.")
     @query
-    @added(AI.Model.Versions.v2025_04_01)
+    @added(Azure.AI.Inference.Versions.v2025_04_01)
     `model`?: string;
   },
   ModelInfo
