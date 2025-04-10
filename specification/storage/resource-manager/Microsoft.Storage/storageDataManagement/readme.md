@@ -46,7 +46,6 @@ suppressions:
 
 These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
 
-
 ```yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
   - preview/2025-05-01-preview/connectors.json
