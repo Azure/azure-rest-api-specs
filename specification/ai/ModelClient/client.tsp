@@ -5,7 +5,6 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@useDependency(AI.Model.Versions.v2024_05_01_Preview)
 namespace Customizations; // The actual name here doesn't matter and is here for organization purposes only
 
 // Are these needed?
