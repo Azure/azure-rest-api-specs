@@ -39,3 +39,14 @@ model DevBoxNameParameter {
   @path
   devBoxName: string;
 }
+
+@doc("The Dev Box addon name path parameter.")
+@added(APIVersions.v2025_04_01_preview)
+model DevBoxAddOnNameParameter {
+  @doc("The name of the Dev Box addon.")
+  @maxLength(63)
+  @minLength(3)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+  @path
+  addOnName: string;
+}
