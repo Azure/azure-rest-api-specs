@@ -654,27 +654,12 @@
       "description": "Triage resource data structure.",
       "type": "object",
       "x-ms-azure-resource": true,
+       "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/ResiliencyReviews/{reviewId}/providers/Microsoft.Advisor/triageRecommendation/{recommendationId}\".",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name E.g. \"{guid}\".",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type E.g. \"Microsoft.Advisor/resiliencyReviews\".",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/triageResourceProperties",
           "description": "Triage resource properties.",
