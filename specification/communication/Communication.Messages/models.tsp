@@ -1018,6 +1018,7 @@ model GetConversationThreadAnalysisResult {
 @withoutOmittedProperties("to" | "channelRegistrationId")
 @doc("Details of the conversation message content.")
 model ConversationMessageContent {
+  #suppress "@azure-tools/typespec-azure-core/spread-discriminated-model" ""
   ...NotificationContent;
 }
 

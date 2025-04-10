@@ -16,6 +16,7 @@ namespace ClientForAcsMessages;
 })
 interface NotificationMessagesClient
   extends Azure.Communication.MessagesService.NotificationMessagesOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" ""
   @access(Access.internal, "csharp")
   @clientName("downloadMediaInternal", "csharp")
   downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;
@@ -28,6 +29,7 @@ interface NotificationMessagesClient
 interface MessageTemplateClient
   extends Azure.Communication.MessagesService.TemplateOperations {}
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @added(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview)
 @client({
   name: "ConversationAdministrationClient",
@@ -35,12 +37,12 @@ interface MessageTemplateClient
 })
 interface ConversationAdministrationClient
   extends Azure.Communication.MessagesService.ConversationAdministrationOperations {
-    listConversations is Azure.Communication.MessagesService.ConversationThreadOperations.listConversations;
-    listMessages is Azure.Communication.MessagesService.ConversationThreadOperations.listMessages;
-    addParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.addParticipants;
-    removeParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.removeParticipants;
-    analyzeConversation is Azure.Communication.MessagesService.ConversationThreadOperations.analyzeConversation;
-  }
+  listConversations is Azure.Communication.MessagesService.ConversationThreadOperations.listConversations;
+  listMessages is Azure.Communication.MessagesService.ConversationThreadOperations.listMessages;
+  addParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.addParticipants;
+  removeParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.removeParticipants;
+  analyzeConversation is Azure.Communication.MessagesService.ConversationThreadOperations.analyzeConversation;
+}
 
 @added(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview)
 @client({

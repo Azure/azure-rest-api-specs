@@ -48,6 +48,7 @@ interface StreamOperations {
 
 @added(Versions.c2025_04_01_Preview)
 interface ConversationAdministrationOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   @tag("ConversationAdministration")
   @doc("Creates a new conversation. This is only for create operation.")
   @createsResource(Conversation)
@@ -68,6 +69,7 @@ interface ConversationAdministrationOperations {
   @added(Versions.c2025_04_01_Preview)
   deleteConversation is Operations.ResourceDelete<Conversation>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
   @tag("ConversationAdministration")
   @doc("Terminates a specific conversation.")
   @added(Versions.c2025_04_01_Preview)
