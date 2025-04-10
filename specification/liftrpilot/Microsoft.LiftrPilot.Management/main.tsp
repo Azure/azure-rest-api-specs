@@ -85,7 +85,7 @@ interface Organizations {
 model PilotProxyResource is ProxyResource<PilotProxyResourceProperties> {
   @key("pilotProxyResourceName")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
-  @segment("pilotProxyResource")
+  @segment("pilotProxyResources")
   @minLength(1)
   @maxLength(50)
   @doc("Name of the PilotProxyResource")
