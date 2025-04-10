@@ -27,9 +27,23 @@ These are the global settings for the computeschedule.
 ```yaml
 openapi-subtype: rpaas
 openapi-type: arm
-tag: package-2024-10-01
+tag: package-2025-05-01
 ```
- 
+
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
+  - Microsoft.ComputeSchedule/stable/2025-05-01/computeschedule.json
+suppressions:  
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we don't want copy VMextensionProperties type here and update when dependency changes
+    from: computeschedule.json
+    where: $.definitions.VirtualMachineExtensionData.properties.properties
+```
+
 ### Tag: package-2024-10-01
 
 These settings apply only when `--tag=package-2024-10-01` is specified on the command line.

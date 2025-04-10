@@ -134,6 +134,43 @@ model Resources {
   ids: Array<armResourceIdentifier>;
 }
 
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+@doc("struct for VMExtension data")
+model VirtualMachineExtensionData {
+  @doc("name of VM extension")
+  name: string;
+
+  @doc("location of VM extension")
+  location?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "this is created as record because we don't want copy VMextensionProperties type here and update this everytime there a new property added in underlying type in compute"
+  @doc("properties for VM extension e.g. publisher, version etc, value can dynamic int32,string, bool etc.")
+  properties: Record<unknown>; //map with key as string and value type can be dynamic (string, int32)
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags are simple key/value pair where key and value is of type string"
+  @doc("Resource tags for creates/updates")
+  tags?: Record<string>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+@doc("Resource creation data model")
+model ResourceProvisionPayload {
+  @doc("baseProfile, Resource properties that common across all resources ")
+  baseProfile?: string;
+
+  @doc("resourceOverrides, properties per resource that needs to be overwritted from baseProfile")
+  resourceOverrides?: Array<string>;
+
+  @doc("vmExtensions, array of Virtual machine extensions to be added to all the VMs created in this request")
+  vmExtensions?: Array<VirtualMachineExtensionData>;
+
+  @doc("Number of resources to be created")
+  resourceCount: int32;
+
+  @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
+  resourcePrefix?: string;
+}
+
 @doc("The retry policy for the user request")
 model RetryPolicy {
   @doc("Retry count for user request")
@@ -283,8 +320,9 @@ model SubmitDeallocateRequest {
   @doc("The resources for the request")
   resources: Resources;
 
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("The response from a deallocate request")
@@ -316,8 +354,9 @@ model SubmitStartRequest {
   @doc("The resources for the request")
   resources: Resources;
 
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string; //making it optional in API version, we want to leverage ARM correlationID for tracking
 }
 
 @doc("The response from a start request")
@@ -349,8 +388,9 @@ model SubmitHibernateRequest {
   @doc("The resources for the request")
   resources: Resources;
 
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("The response from a Hibernate request")
@@ -379,8 +419,9 @@ model ExecuteDeallocateRequest {
   @doc("The resources for the request")
   resources: Resources;
 
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
@@ -391,8 +432,9 @@ model ExecuteHibernateRequest {
   @doc("The resources for the request")
   resources: Resources;
 
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("The ExecuteStartRequest request for executeStart operations")
@@ -403,8 +445,73 @@ model ExecuteStartRequest {
   @doc("The resources for the request")
   resources: Resources;
 
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
+}
+
+@doc("The ExecuteCreateRequest request for create operations")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model ExecuteCreateRequest {
+  @doc("resource creation payload")
+  resourceConfigParameters: ResourceProvisionPayload;
+
+  @doc("The execution parameters for the request")
+  executionParameters?: ExecutionParameters;
+
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @doc("CorrelationId item")
+  correlationid?: string;
+}
+
+@doc("The response from a create request")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model CreateResourceOperationResponse {
+  @doc("The description of the operation response")
+  description: string;
+
+  @doc("The type of resources used in the create request eg virtual machines")
+  type: string;
+
+  @doc("The location of the start request eg westus")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: azureLocation;
+
+  @extension("x-ms-identifiers", #["resourceId"])
+  @doc("The results from the start request if no errors exist")
+  results?: Array<ResourceOperation>;
+}
+
+@doc("The response from a delete request")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model DeleteResourceOperationResponse {
+  @doc("The description of the operation response")
+  description: string;
+
+  @doc("The type of resources used in the delete request eg virtual machines")
+  type: string;
+
+  @doc("The location of the start request eg westus")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location: azureLocation;
+
+  @extension("x-ms-identifiers", #["resourceId"])
+  @doc("The results from the start request if no errors exist")
+  results?: Array<ResourceOperation>;
+}
+
+@doc("The ExecuteDeleteRequest request for delete operations")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model ExecuteDeleteRequest {
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
+
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+  @doc("CorrelationId item")
+  correlationid?: string;
 }
 
 // ----------- GetOperationStatus ---------
@@ -413,8 +520,9 @@ model GetOperationStatusRequest {
   @doc("The list of operation ids to get the status of")
   operationIds: Array<string>;
 
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("This is the response from a get operations status request")
@@ -430,8 +538,9 @@ model CancelOperationsRequest {
   @doc("The list of operation ids to cancel operations on")
   operationIds: Array<string>;
 
+  @madeOptional(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
   @doc("CorrelationId item")
-  correlationid: string;
+  correlationid?: string;
 }
 
 @doc("This is the response from a cancel operations request")
