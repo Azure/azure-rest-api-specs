@@ -43,7 +43,7 @@ export async function getDependencyVersion(dependenciesDir: string): Promise<str
 // TODO: This should probably be moved to another more general location
 export async function getPathToDependency(dependency: string): Promise<string> {
   // Example: /home/user/foo/node_modules/@autorest/bar/dist/index.js
-  const entrypoint = fileURLToPath(import.meta.resolve(dependency));
+  const entrypoint = require.resolve(dependency);
 
   // Walk up directory tree to first folder containing "package.json"
   let currentDir = dirname(entrypoint);
