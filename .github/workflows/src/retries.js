@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * Retry a function with exponential backoff
  * @param {Function} fn - Function to retry
