@@ -140,8 +140,7 @@ model SubResourceReadOnly {
    * Resource Id
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "id")
-  identifier?: string;
+  id?: Azure.Core.armResourceIdentifier;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
