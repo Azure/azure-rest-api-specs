@@ -1186,10 +1186,10 @@ model ConversationalAIIntent {
   type: string;
 
   /** The ranges of conversation items where this intent was identified. */
-  conversationItemRanges: Array<ConversationItemRange>;
+  conversationItemRanges: ConversationItemRange[];
 
   /** The entities associated with this intent. */
-  entities: Array<ConversationalAIEntity>;
+  entities: ConversationalAIEntity[];
 }
 
 /** The ranges of conversation items where this intent was identified. */
@@ -1228,10 +1228,10 @@ model ConversationalAIEntity {
   conversationItemIndex?: int32;
 
   /** Entity resolution details, if available. */
-  resolutions?: Array<BaseResolution>;
+  resolutions?: BaseResolution[];
 
   /** Additional entity metadata. */
-  extraInformation?: Array<BaseExtraInformation>;
+  extraInformation?: BaseExtraInformation[];
 }
 
 /** The results of a Conversation task. */
