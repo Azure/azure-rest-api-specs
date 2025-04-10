@@ -77,7 +77,8 @@ alias VirtualMachineScaleSetPath = {
   ...KeysOf<ResourceNameParameter<
     VirtualMachineScaleSet,
     SegmentName = "virtualMachineScaleSets",
-    KeyName = "virtualMachineScaleSetName"
+    KeyName = "virtualMachineScaleSetName",
+    NamePattern = ""
   >>;
 };
 

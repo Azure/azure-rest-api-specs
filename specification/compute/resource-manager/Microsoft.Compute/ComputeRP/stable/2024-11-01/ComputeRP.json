@@ -7600,8 +7600,7 @@
             "in": "path",
             "description": "The name of the VirtualMachineScaleSet",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "type": "string"
           },
           {
             "name": "$filter",
@@ -20794,7 +20793,7 @@
           ]
         },
         "diskControllerType": {
-          "type": "string",
+          "$ref": "#/definitions/DiskControllerTypes",
           "description": "Specifies the disk controller type configured for the virtual machines in the scale set. Minimum api-version: 2022-08-01"
         }
       }
@@ -21188,7 +21187,7 @@
           ]
         },
         "diskControllerType": {
-          "type": "string",
+          "$ref": "#/definitions/DiskControllerTypes",
           "description": "Specifies the disk controller type configured for the virtual machines in the scale set. **Note:** You need to deallocate the virtual machines in the scale set before updating its disk controller type based on the upgrade mode configured for the scale set. Minimum api-version: 2022-08-01"
         }
       }
