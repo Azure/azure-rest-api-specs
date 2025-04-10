@@ -1444,7 +1444,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{ImmutabilityPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default": {
       "get": {
         "operationId": "BlobContainers_GetImmutabilityPolicy",
         "tags": [
@@ -1479,13 +1479,6 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 63
-          },
-          {
-            "name": "ImmutabilityPolicyName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "if-match",
@@ -1556,13 +1549,6 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 63
-          },
-          {
-            "name": "ImmutabilityPolicyName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "if-match",
@@ -1647,13 +1633,6 @@
             "maxLength": 63
           },
           {
-            "name": "ImmutabilityPolicyName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "if-match",
             "in": "header",
             "description": "The entity state (ETag) version of the immutability policy to update. A value of \"*\" can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied.",
@@ -1689,7 +1668,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{ImmutabilityPolicyName}/extend": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extend": {
       "post": {
         "operationId": "BlobContainers_ExtendImmutabilityPolicy",
         "tags": [
@@ -1724,13 +1703,6 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 63
-          },
-          {
-            "name": "ImmutabilityPolicyName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "if-match",
@@ -1777,7 +1749,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{ImmutabilityPolicyName}/lock": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lock": {
       "post": {
         "operationId": "BlobContainers_LockImmutabilityPolicy",
         "tags": [
@@ -1812,13 +1784,6 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 63
-          },
-          {
-            "name": "ImmutabilityPolicyName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "if-match",
@@ -2502,7 +2467,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default": {
       "get": {
         "operationId": "FileServices_GetServiceProperties",
         "tags": [
@@ -2528,13 +2493,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -2584,13 +2542,6 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "parameters",
             "in": "body",
             "description": "The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.",
@@ -2627,7 +2578,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/shares": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares": {
       "get": {
         "operationId": "FileShares_List",
         "tags": [
@@ -2653,13 +2604,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "$maxpagesize",
@@ -2720,7 +2664,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/shares/{shareName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}": {
       "get": {
         "operationId": "FileShares_Get",
         "tags": [
@@ -2746,13 +2690,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "shareName",
@@ -2832,13 +2769,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "shareName",
@@ -2931,13 +2861,6 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "shareName",
             "in": "path",
             "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
@@ -3012,13 +2935,6 @@
             "pattern": "^[a-z0-9]+$"
           },
           {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "shareName",
             "in": "path",
             "description": "The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
@@ -3063,7 +2979,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/shares/{shareName}/lease": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/lease": {
       "post": {
         "operationId": "FileShares_Lease",
         "tags": [
@@ -3089,13 +3005,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "shareName",
@@ -3153,7 +3062,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/shares/{shareName}/restore": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/restore": {
       "post": {
         "operationId": "FileShares_Restore",
         "tags": [
@@ -3179,13 +3088,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "shareName",
@@ -3224,7 +3126,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/usages": {
       "get": {
         "operationId": "FileServices_ListServiceUsages",
         "tags": [
@@ -3250,13 +3152,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "The name of the FileServiceProperties",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "$maxpagesize",
@@ -3291,7 +3186,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages/{fileServiceUsagesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/usages/default": {
       "get": {
         "operationId": "FileServices_GetServiceUsage",
         "tags": [
@@ -3317,20 +3212,6 @@
             "minLength": 3,
             "maxLength": 24,
             "pattern": "^[a-z0-9]+$"
-          },
-          {
-            "name": "FileServicesName",
-            "in": "path",
-            "description": "The name of the FileServiceProperties",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fileServiceUsagesName",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -7324,9 +7205,9 @@
           "description": "Properties of the blob container.",
           "x-ms-client-flatten": true
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "Resource Etag.",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -8615,6 +8496,7 @@
         "properties": {
           "$ref": "#/definitions/FileServiceUsageProperties",
           "description": "File service usage in storage account including account limits, file share limits and constants used in recommendations and bursting formula.",
+          "readOnly": true,
           "x-ms-client-flatten": false
         }
       },
@@ -8685,9 +8567,9 @@
           "description": "Properties of the file share.",
           "x-ms-client-flatten": true
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "Resource Etag.",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },
@@ -9175,9 +9057,9 @@
           "description": "The properties of an ImmutabilityPolicy of a blob container.",
           "x-ms-client-flatten": true
         },
-        "etag": {
+        "eTag": {
           "type": "string",
-          "description": "Resource Etag.",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
           "readOnly": true
         }
       },

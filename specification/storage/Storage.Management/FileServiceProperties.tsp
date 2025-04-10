@@ -15,6 +15,7 @@ namespace Microsoft.Storage;
  * The properties of File services in storage account.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+@singleton("default")
 @parentResource(StorageAccount)
 model FileServiceProperties
   is Azure.ResourceManager.ProxyResource<FileServicePropertiesProperties> {

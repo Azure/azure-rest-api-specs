@@ -23,16 +23,9 @@ model BlobContainer
     SegmentName = "containers",
     NamePattern = ""
   >;
-  ...BlobEtag;
+  ...EntityTagProperty;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-model BlobEtag {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  @doc("Resource Etag.")
-  @visibility("read")
-  etag?: string;
-}
 @armResourceOperations
 interface BlobContainers {
   /**

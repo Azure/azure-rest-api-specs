@@ -22,15 +22,9 @@ model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
     SegmentName = "shares",
     NamePattern = ""
   >;
-  ...FileServiceEtag;
+  ...EntityTagProperty;
 }
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-model FileServiceEtag {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  @doc("Resource Etag.")
-  @visibility("read")
-  etag?: string;
-}
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" ""
 @armResourceOperations
 interface FileShares {

@@ -155,7 +155,7 @@ using Azure.Core;
   "EnableVersionLevelImmutability",
   "csharp"
 );
-@@alternateType(BlobContainer.etag, eTag, "csharp");
+@@alternateType(BlobContainer.eTag, eTag, "csharp");
 @@clientName(BlobServiceProperties, "BlobService", "csharp");
 @@clientName(ContainerProperties.deleted, "IsDeleted", "csharp");
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
@@ -304,8 +304,8 @@ using Azure.Core;
 @@clientName(ManagementPolicy, "StorageAccountManagementPolicy", "csharp");
 @@clientName(FileShareProperties.enabledProtocols, "enabledProtocol", "csharp");
 @@clientName(FileShareProperties.deleted, "IsDeleted", "csharp");
-@@alternateType(FileShare.etag, eTag, "csharp");
-@@alternateType(ImmutabilityPolicy.etag, eTag, "csharp");
+@@alternateType(FileShare.eTag, eTag, "csharp");
+@@alternateType(ImmutabilityPolicy.eTag, eTag, "csharp");
 @@clientName(SignedIdentifier, "StorageSignedIdentifier", "csharp");
 @@clientName(EnabledProtocols, "FileShareEnabledProtocol", "csharp");
 @@clientName(ShareAccessTier, "FileShareAccessTier", "csharp");

@@ -15,6 +15,7 @@ namespace Microsoft.Storage;
 /**
  * The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
  */
+@singleton("default")
 @parentResource(BlobContainer)
 model ImmutabilityPolicy
   is Azure.ResourceManager.ProxyResource<ImmutabilityPolicyProperty, false> {
@@ -24,15 +25,9 @@ model ImmutabilityPolicy
     SegmentName = "immutabilityPolicies",
     NamePattern = ""
   >;
-  ...ImmutabilityPolicyEtag;
+  ...EntityTagProperty;
 }
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-model ImmutabilityPolicyEtag {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
-  @doc("Resource Etag.")
-  @visibility("read")
-  etag?: string;
-}
+
 @armResourceOperations
 interface ImmutabilityPolicies {
   /**
