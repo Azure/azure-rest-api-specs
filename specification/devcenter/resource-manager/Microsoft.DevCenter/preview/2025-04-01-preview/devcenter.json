@@ -341,6 +341,277 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets": {
+      "get": {
+        "tags": [
+          "EncryptionSets"
+        ],
+        "description": "Lists all encryption sets in the devcenter.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "EncryptionSets_List",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionSetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EncryptionSets_List": {
+            "$ref": "./examples/DevCenterEncryptionSets_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}": {
+      "get": {
+        "tags": [
+          "EncryptionSets"
+        ],
+        "description": "Gets a devcenter encryption set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterEncryptionSetNameParameter"
+          }
+        ],
+        "operationId": "EncryptionSets_Get",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevCenterEncryptionSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EncryptionSets_Get": {
+            "$ref": "./examples/DevCenterEncryptionSets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EncryptionSets"
+        ],
+        "description": "Creates or updates a devcenter encryption set resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterEncryptionSetNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Represents a devcenter encryption set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevCenterEncryptionSet"
+            }
+          }
+        ],
+        "operationId": "EncryptionSets_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevCenterEncryptionSet"
+            }
+          },
+          "201": {
+            "description": "Created. The request will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DevCenterEncryptionSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EncryptionSets_Create": {
+            "$ref": "./examples/DevCenterEncryptionSets_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EncryptionSets"
+        ],
+        "description": "Partially updates a devcenter encryption set.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterEncryptionSetNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updatable devcenter encryption set properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EncryptionSetUpdate"
+            }
+          }
+        ],
+        "operationId": "EncryptionSets_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DevCenterEncryptionSet"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EncryptionSets_Update": {
+            "$ref": "./examples/DevCenterEncryptionSets_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EncryptionSets"
+        ],
+        "description": "Deletes a devcenter encryption set",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterEncryptionSetNameParameter"
+          }
+        ],
+        "operationId": "EncryptionSets_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EncryptionSets_Delete": {
+            "$ref": "./examples/DevCenterEncryptionSets_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/projectPolicies": {
       "get": {
         "tags": [
@@ -799,6 +1070,12 @@
           },
           "Projects_CreateOrUpdateWithLimitsPerDev": {
             "$ref": "./examples/Projects_PutWithMaxDevBoxPerUser.json"
+          },
+          "Projects_CreateOrUpdateWithCustomizationSettings": {
+            "$ref": "./examples/Projects_PutWithCustomizationSettings.json"
+          },
+          "Projects_CreateOrUpdateWithCustomizationSettings_SystemIdentity": {
+            "$ref": "./examples/Projects_PutWithCustomizationSettings_SystemIdentity.json"
           }
         }
       },
@@ -4360,6 +4637,429 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "List Image Definitions in the catalog.",
+        "operationId": "DevCenterCatalogImageDefinitions_ListByDevCenterCatalog",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ImageDefinitions_ListByDevCenterCatalog": {
+            "$ref": "./examples/ImageDefinitions_ListByDevCenterCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets an Image Definition from the catalog",
+        "operationId": "DevCenterCatalogImageDefinitions_GetByDevCenterCatalog",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageDefinitions_GetByDevCenterCatalog": {
+            "$ref": "./examples/ImageDefinitions_GetByDevCenterCatalog.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/getErrorDetails": {
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets Image Definition error details",
+        "operationId": "DevCenterCatalogImageDefinitions_GetErrorDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageDefinitionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "vdi.json#/definitions/CatalogResourceValidationErrorDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenterImageDefinitions_GetErrorDetails": {
+            "$ref": "./examples/DevCenterImageDefinitions_GetErrorDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/buildImage": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Builds an image for the specified Image Definition.",
+        "operationId": "DevCenterCatalogImageDefinitions_BuildImage",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DevCenterCatalogImageDefinitions_BuildImage": {
+            "$ref": "./examples/DevCenterImageDefinitions_BuildImage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Lists builds for a specified image definition.",
+        "operationId": "DevCenterCatalogImageDefinitionBuilds_ListByImageDefinition",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionBuildListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenterImageDefinitionBuilds_ListByImageDefinition": {
+            "$ref": "./examples/DevCenterImageDefinitions_ListImageBuildsByImageDefinition.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets a build for a specified image definition.",
+        "operationId": "DevCenterCatalogImageDefinitionBuild_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionBuild"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenterImageDefinitionBuilds_GetByImageDefinition": {
+            "$ref": "./examples/DevCenterImageDefinitions_GetImageBuild.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/cancel": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/DevCenterNameParameter"
+        },
+        {
+          "$ref": "#/parameters/CatalogNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Cancels the specified build for an image definition.",
+        "operationId": "DevCenterCatalogImageDefinitionBuild_Cancel",
+        "parameters": [],
+        "responses": {
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "DevCenterImageDefinitionBuilds_CancelByImageDefinition": {
+            "$ref": "./examples/DevCenterImageDefinitions_CancelImageBuild.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/catalogs/{catalogName}/imageDefinitions/{imageDefinitionName}/builds/{buildName}/getBuildDetails": {
+      "post": {
+        "tags": [
+          "Image Definitions"
+        ],
+        "description": "Gets Build details",
+        "operationId": "DevCenterCatalogImageDefinitionBuild_GetBuildDetails",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DevCenterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CatalogNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageDefinitionBuildNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageDefinitionBuildDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenterCatalogImageDefinitionBuild_GetErrorDetails": {
+            "$ref": "./examples/DevCenterImageDefinitions_GetImageBuildDetails.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/catalogs/{catalogName}/imageDefinitions": {
       "parameters": [
         {
@@ -4852,6 +5552,68 @@
         }
       }
     },
+    "DevCenterEncryptionSet": {
+      "description": "Represents a devcenter encryption set resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DevCenterEncryptionSetProperties",
+          "description": "Properties of a devcenter encryption set."
+        },
+        "identity": {
+          "description": "Managed identity properties",
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      }
+    },
+    "DevCenterEncryptionSetProperties": {
+      "description": "Properties of the devcenter encryption set.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DevCenterEncryptionSetUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "DevCenterEncryptionSetUpdateProperties": {
+      "description": "Properties of the devcenter encryption set. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "devboxDisksEncryptionEnableStatus": {
+          "description": "Devbox disk encryption enable or disable status. Indicates if Devbox disks encryption using DevCenter CMK is enabled or not.",
+          "$ref": "#/definitions/DevboxDisksEncryptionEnableStatus"
+        },
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "description": "Key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        }
+      }
+    },
+    "DevboxDisksEncryptionEnableStatus": {
+      "description": "Devbox disk encryption enable or disable status. Indicates if Devbox disks encryption is enabled or not.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DevboxDisksEncryptionEnableStatus",
+        "modelAsString": true
+      }
+    },
     "DevCenterProjectCatalogSettings": {
       "type": "object",
       "description": "Project catalog settings for project catalogs under a project associated to this dev center.",
@@ -4928,6 +5690,42 @@
         "modelAsString": true
       }
     },
+    "UserCustomizationsEnableStatus": {
+      "description": "Indicates whether user customizations are enabled.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "UserCustomizationsEnableStatus",
+        "modelAsString": true
+      }
+    },
+    "DevBoxAutoDeleteEnableStatus": {
+      "description": "Indicates whether auto delete is enabled.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DevBoxAutoDeleteEnableStatus",
+        "modelAsString": true
+      }
+    },
+    "AzureAiServicesEnableStatus": {
+      "description": "Indicates whether Azure AI services are enabled for a project.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AzureAiServicesEnableStatus",
+        "modelAsString": true
+      }
+    },
     "Encryption": {
       "type": "object",
       "properties": {
@@ -4968,6 +5766,26 @@
         }
       }
     },
+    "EncryptionSetUpdate": {
+      "description": "The devcenter encryption set resource for partial updates. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DevCenterEncryptionSetUpdateProperties",
+          "description": "Properties of a Dev Center encryption set to be updated."
+        },
+        "identity": {
+          "description": "Managed identity properties",
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity"
+        }
+      }
+    },
     "DevCenterListResult": {
       "description": "Result of the list devcenters operation",
       "type": "object",
@@ -4978,6 +5796,25 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DevCenter"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EncryptionSetListResult": {
+      "description": "Result of the list devcenter encryption set operation",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevCenterEncryptionSet"
           }
         },
         "nextLink": {
@@ -5037,6 +5874,26 @@
         "catalogSettings": {
           "$ref": "#/definitions/ProjectCatalogSettings",
           "description": "Settings to be used when associating a project with a catalog."
+        },
+        "customizationSettings": {
+          "$ref": "#/definitions/ProjectCustomizationSettings",
+          "description": "Settings to be used for customizations."
+        },
+        "devBoxAutoDeleteSettings": {
+          "description": "Dev Box Auto Delete settings.",
+          "$ref": "#/definitions/DevBoxAutoDeleteSettings"
+        },
+        "azureAiServicesSettings": {
+          "description": "Indicates whether Azure AI services are enabled for a project.",
+          "$ref": "#/definitions/AzureAiServicesSettings"
+        },
+        "serverlessGpuSessionsSettings": {
+          "$ref": "#/definitions/ServerlessGpuSessionsSettings",
+          "description": "Settings to be used for serverless GPU."
+        },
+        "workspaceStorageSettings": {
+          "description": "Settings to be used for workspace storage.",
+          "$ref": "#/definitions/WorkspaceStorageSettings"
         }
       }
     },
@@ -5051,6 +5908,95 @@
             "$ref": "#/definitions/CatalogItemType"
           }
         }
+      }
+    },
+    "ProjectCustomizationManagedIdentity": {
+      "description": "A reference to a Managed Identity that is attached to the Project.",
+      "type": "object",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "enum": [
+            "systemAssignedIdentity",
+            "userAssignedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "ProjectCustomizationIdentityType",
+            "modelAsString": true
+          },
+          "description": "Values can be systemAssignedIdentity or userAssignedIdentity"
+        },
+        "identityResourceId": {
+          "type": "string",
+          "description": "Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
+        }
+      }
+    },
+    "ProjectCustomizationSettings": {
+      "description": "Settings to be used for customizations.",
+      "type": "object",
+      "properties": {
+        "identities": {
+          "description": "The identities that can to be used in customization scenarios; e.g., to clone a repository.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectCustomizationManagedIdentity"
+          }
+        },
+        "userCustomizationsEnableStatus": {
+          "description": "Indicates whether user customizations are enabled.",
+          "$ref": "#/definitions/UserCustomizationsEnableStatus"
+        }
+      }
+    },
+    "ServerlessGpuSessionsSettings": {
+      "description": "Represents settings for serverless GPU access.",
+      "type": "object",
+      "properties": {
+        "serverlessGpuSessionsEnableStatus": {
+          "description": "The property indicates whether serverless GPU access is enabled on the project.",
+          "$ref": "#/definitions/ServerlessGpuSessionsEnableStatus"
+        },
+        "maxConcurrentSessionsPerProject": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "description": "When specified, limits the maximum number of concurrent sessions across all pools in the project."
+        }
+      }
+    },
+    "WorkspaceStorageSettings": {
+      "description": "Settings to be used for workspace storage.",
+      "type": "object",
+      "properties": {
+        "workspaceStorageEnableStatus": {
+          "description": "Indicates whether workspace storage is enabled.",
+          "$ref": "#/definitions/WorkspaceStorageEnableStatus"
+        }
+      }
+    },
+    "ServerlessGpuSessionsEnableStatus": {
+      "description": "Indicates whether serverless GPU session access is enabled.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ServerlessGpuSessionsEnableStatus",
+        "modelAsString": true
+      }
+    },
+    "WorkspaceStorageEnableStatus": {
+      "description": "Indicates whether workspace storage is enabled.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "WorkspaceStorageEnableStatus",
+        "modelAsString": true
       }
     },
     "ProjectProperties": {
@@ -5242,6 +6188,34 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProjectPolicyUpdateProperties",
           "description": "Properties of an project policy to be updated."
+        }
+      }
+    },
+    "DevBoxAutoDeleteSettings": {
+      "description": "Settings controlling the auto deletion of inactive dev boxes.",
+      "type": "object",
+      "properties": {
+        "enableStatus": {
+          "description": "The property indicates whether auto delete is enabled.",
+          "$ref": "#/definitions/DevBoxAutoDeleteEnableStatus"
+        },
+        "inactiveThreshold": {
+          "description": "ISO8601 duration required for the dev box to not be inactive prior to it being scheduled for deletion.  ISO8601 format PT[n]H[n]M[n]S.",
+          "type": "string"
+        },
+        "gracePeriod": {
+          "description": "ISO8601 duration required for the dev box to be marked for deletion prior to it being deleted. ISO8601 format PT[n]H[n]M[n]S.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureAiServicesSettings": {
+      "description": "Represents policy to enforce Azure AI services on a project.",
+      "type": "object",
+      "properties": {
+        "azureAiServicesEnableStatus": {
+          "description": "The property indicates whether Azure AI services is enabled.",
+          "$ref": "#/definitions/AzureAiServicesEnableStatus"
         }
       }
     },
@@ -6699,7 +7673,91 @@
           "description": "Indicates if automatic image builds will be triggered for image definition updates",
           "$ref": "#/definitions/AutoImageBuildStatus",
           "readOnly": true
+        },
+        "tasks": {
+          "description": "Tasks to run at Dev Box provisioning time.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskInstance"
+          }
+        },
+        "userTasks": {
+          "description": "Tasks to run when a user first logs into a Dev Box.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationTaskInstance"
+          }
+        },
+        "extends": {
+          "description": "Another Image Definition that this one extends.",
+          "$ref": "#/definitions/ImageDefinitionReference"
         }
+      }
+    },
+    "ImageDefinitionReference": {
+      "type": "object",
+      "description": "A reference to an Image Definition.",
+      "required": [
+        "imageDefinition"
+      ],
+      "properties": {
+        "imageDefinition": {
+          "type": "string",
+          "description": "Name of the referenced Image Definition."
+        },
+        "parameters": {
+          "description": "Parameters for the referenced Image Definition.",
+          "$ref": "#/definitions/DefinitionParameters"
+        }
+      }
+    },
+    "CustomizationTaskInstance": {
+      "type": "object",
+      "description": "A customization task to run.",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the task."
+        },
+        "parameters": {
+          "description": "Parameters for the task.",
+          "$ref": "#/definitions/DefinitionParameters"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name to help differentiate multiple instances of the same task."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout, in seconds. Overrides any timeout provided on the task definition."
+        },
+        "condition": {
+          "type": "string",
+          "description": "The condition that needs to be met to run the task."
+        }
+      }
+    },
+    "DefinitionParameters": {
+      "description": "Parameters for the definition task.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
       }
     },
     "LatestImageBuild": {
@@ -7009,6 +8067,17 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$",
       "minLength": 3,
       "maxLength": 26
+    },
+    "DevCenterEncryptionSetNameParameter": {
+      "name": "encryptionSetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the devcenter encryption set.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,25}$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "ProjectPolicyNameParameter": {
       "name": "projectPolicyName",
