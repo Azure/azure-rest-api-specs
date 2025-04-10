@@ -193,7 +193,7 @@ model AnalyzeTextJobsInput {
 
   /** Optional duration in seconds after which the job will be canceled if not completed. */
   @added(Versions.v2025_05_15_preview)
-  cancelAfterSeconds?: int32;
+  cancelAfter?: float32;
 }
 
 /** The input object for the prebuilt/default result. */
