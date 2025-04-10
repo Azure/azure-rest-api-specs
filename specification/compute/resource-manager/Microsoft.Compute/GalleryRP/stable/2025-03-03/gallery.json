@@ -1415,12 +1415,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery in which the Script Definition is to be created."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "#/parameters/GalleryScriptNameParameter"
@@ -1479,12 +1474,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery in which the Script Definition is to be updated."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "#/parameters/GalleryScriptNameParameter"
@@ -1537,12 +1527,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery from which the Script Definitions are to be retrieved."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "#/parameters/GalleryScriptNameParameter"
@@ -1585,12 +1570,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery in which the Script Definition is to be deleted."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "#/parameters/GalleryScriptNameParameter"
@@ -1646,12 +1626,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery in which the Script Definition resides."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "#/parameters/GalleryScriptNameParameter"
@@ -1713,12 +1688,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery in which the Script Definition resides."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "#/parameters/GalleryScriptNameParameter"
@@ -1790,12 +1760,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery in which the Script Definition resides."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "#/parameters/GalleryScriptNameParameter"
@@ -1844,12 +1809,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery in which the Script Definition resides."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "#/parameters/GalleryScriptNameParameter"
@@ -2199,12 +2159,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery from which Script Definitions are to be listed."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -2249,12 +2204,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "galleryName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
-            "description": "The name of the Gallery in which the Script Definition resides."
+            "$ref": "#/parameters/GalleryNameParameter"
           },
           {
             "$ref": "#/parameters/GalleryScriptNameParameter"
@@ -5470,6 +5420,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The name of the resource group."
+    },
+    "GalleryNameParameter": {
+        "name": "galleryName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$",
+        "description": "The name of the Gallery from which Script Definitions are to be listed."
     },
     "GalleryODataExpandQueryParameter": {
       "name": "$expand",
