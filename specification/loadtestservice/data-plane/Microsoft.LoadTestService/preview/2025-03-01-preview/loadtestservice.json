@@ -5955,11 +5955,6 @@
           "description": "The URI pointing to the entity that created the test run.",
           "readOnly": true
         },
-        "insights": {
-          "$ref": "#/definitions/TestRunInsights",
-          "description": "The insights from the test run.",
-          "readOnly": true
-        },
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
@@ -6271,51 +6266,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "TestRunInsightColumn": {
-      "type": "object",
-      "description": "Represents a column of the test run insight",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the column."
-        },
-        "dataType": {
-          "type": "string",
-          "description": "The data type of the column."
-        }
-      },
-      "required": [
-        "name",
-        "dataType"
-      ]
-    },
-    "TestRunInsights": {
-      "type": "object",
-      "description": "Represents insights derived from the test run.",
-      "properties": {
-        "columns": {
-          "type": "object",
-          "description": "The columns of the insights.",
-          "additionalProperties": {
-            "$ref": "#/definitions/TestRunInsightColumn"
-          }
-        },
-        "rows": {
-          "type": "array",
-          "description": "The rows of the insights.",
-          "items": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "columns"
-      ]
     },
     "TestRunOutputArtifacts": {
       "type": "object",

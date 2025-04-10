@@ -332,7 +332,7 @@ union TestKind {
 @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
 union CreatedByType {
   string,
-
+  
   @doc("Entity was created by a user.")
   "User",
 
@@ -345,7 +345,7 @@ union CreatedByType {
 
   @added(APIVersions.v2025_03_01_preview)
   @doc("Entity was created by GitHub Workflows.")
-  "GitHubWorkflows",
+  "GitHubWorkflows"
 }
 
 @doc("Test file info.")
@@ -915,15 +915,10 @@ model TestRun {
   @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
   createdByType?: CreatedByType;
 
+  @visibility("read")
   @added(APIVersions.v2025_03_01_preview)
   @doc("The URI pointing to the entity that created the test run.")
-  @visibility(Lifecycle.Read)
   createdByUri?: url;
-
-  @added(APIVersions.v2025_03_01_preview)
-  @doc("The insights from the test run.")
-  @visibility(Lifecycle.Read)
-  insights?: TestRunInsights;
 
   ...SystemMetaData;
 }
@@ -1024,24 +1019,6 @@ model TestRunStatistics {
   @doc("Send network bytes.")
   @visibility(Lifecycle.Read)
   sentKBytesPerSec?: float64;
-}
-
-@doc("Represents insights derived from the test run.")
-model TestRunInsights {
-  @doc("The columns of the insights.")
-  columns: Record<TestRunInsightColumn>;
-
-  @doc("The rows of the insights.")
-  rows?: Record<string>[];
-}
-
-@doc("Represents a column of the test run insight")
-model TestRunInsightColumn {
-  @doc("Name of the column.")
-  name: string;
-
-  @doc("The data type of the column.")
-  dataType: string;
 }
 
 @doc("Collection of test run artifacts")
@@ -1471,6 +1448,7 @@ union OperationKind {
 @doc("Status of a long running operation.")
 @resource("operations")
 model OperationStatus {
+
   @doc("The state of the operation.")
   status: Foundations.OperationState;
 
@@ -1480,7 +1458,7 @@ model OperationStatus {
   @doc("Error object that describes the error when status is \"Failed\".")
   error?: Foundations.Error;
 
-  ...OperationIdPathParameter;
+  ...OperationIdPathParameter
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
