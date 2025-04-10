@@ -49,9 +49,13 @@ export async function generateReport(
   newViolations.sort(compareLintDiffViolations);
   existingViolations.sort(compareLintDiffViolations);
 
-  if (newViolations.length > 0) {
-    // New violations fail the build
+  if (newViolations.some((v) => isFailure(v.level))) {
+    // New violations with level error or fatal fail the build. If all new
+    // violations are warnings, the build passes.
     pass = false;
+  }
+
+  if (newViolations.length > 0) {
     outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
     if (newViolations.length > 50) {
       outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
