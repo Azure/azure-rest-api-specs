@@ -832,7 +832,7 @@ model CreateConversationRequest {
   @doc("The conversation details.")
   conversation: Conversation;
 
-  @doc("An intial message within the conversation.")
+  @doc("An initial message within the conversation.")
   initialMessage?: Message;
 }
 
