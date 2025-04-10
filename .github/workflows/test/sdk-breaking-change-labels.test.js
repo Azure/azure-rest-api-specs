@@ -424,6 +424,7 @@ describe("sdk-breaking-change-labels", () => {
         head_sha: inputs.head_sha,
         github: mockGithub,
         core: mockCore,
+        // Change default retry delay from 1000ms to 1ms to reduce test time
         retryOptions: { initialDelayMs: 1 },
       });
 
