@@ -9,7 +9,7 @@ import {
   compareLintDiffViolations,
 } from "../src/generateReport.js";
 
-import { Source, LintDiffViolation } from "../src/types.js";
+import { Source, LintDiffViolation } from "../src/lintdiff-types.js";
 
 describe("iconFor", () => {
   test.each([

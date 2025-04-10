@@ -3,7 +3,7 @@ import { kebabCase } from "change-case";
 import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
 import { getPathToDependency, getDependencyVersion, relativizePath } from "./util.js";
 import { getViolations, isFailure, isWarning } from "./correlateResults.js";
-import { AutorestRunResult, BeforeAfter, LintDiffViolation } from "./types.js";
+import { AutorestRunResult, BeforeAfter, LintDiffViolation } from "./lintdiff-types.js";
 
 const LIMIT_50_MESSAGE = "Only 50 items are listed, please refer to log for more details.";
 
