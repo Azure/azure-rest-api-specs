@@ -27,7 +27,24 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-preview-2024-12-01
+tag: package-2025-04-15
+```
+
+### Tag: package-2025-04-15
+
+These settings apply only when `--tag=package-2025-04-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-15'
+input-file:
+  - Microsoft.DocumentDB/stable/2025-04-15/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2025-04-15/managedCassandra.json
+  - Microsoft.DocumentDB/stable/2025-04-15/mongorbac.json
+  - Microsoft.DocumentDB/stable/2025-04-15/notebook.json
+  - Microsoft.DocumentDB/stable/2025-04-15/privateEndpointConnection.json
+  - Microsoft.DocumentDB/stable/2025-04-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2025-04-15/rbac.json
+  - Microsoft.DocumentDB/stable/2025-04-15/restorable.json
+  - Microsoft.DocumentDB/stable/2025-04-15/services.json
 ```
 
 ### Tag: package-preview-2024-12-01
