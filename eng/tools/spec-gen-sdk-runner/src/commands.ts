@@ -295,7 +295,7 @@ function parseArguments(): SpecGenSdkCmdInput {
   let runMode = "release";
   const batchType: string = getArgumentValue(args, "--batch-type", "");
   const pullRequestNumber: string = getArgumentValue(args, "--pr-number", "");
-  if (!batchType) {
+  if (batchType) {
     runMode = "batch";
   } else if (pullRequestNumber) {
     runMode = "spec-pull-request";
