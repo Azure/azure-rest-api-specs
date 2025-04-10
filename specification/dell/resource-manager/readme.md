@@ -51,8 +51,6 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
@@ -62,8 +60,3 @@ swagger-to-sdk:
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
-
-directive:
-  - suppress: InlineModel
-    where: $.definitions.LiftrBase.Storage.ManagedServiceIdentityUpdate.properties.userAssignedIdentities.additionalProperties
-    reason: "Inline model in additionalProperties is intentional and aligns with standard ARM identity pattern. Cannot refactor into a named model."
