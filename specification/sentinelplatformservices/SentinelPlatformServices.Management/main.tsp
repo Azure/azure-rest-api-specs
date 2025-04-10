@@ -34,6 +34,8 @@ model SentinelPlatformService
   @path
   @segment("sentinelPlatformServices")
   name: string;
+
+  ...ManagedServiceIdentityProperty;
 }
 
 @doc("SentinelPlatformServices properties")

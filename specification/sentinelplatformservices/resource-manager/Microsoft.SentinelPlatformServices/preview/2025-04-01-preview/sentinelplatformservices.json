@@ -79,6 +79,12 @@
           },
           "Operations_List_MinimumSet": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          },
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -118,6 +124,12 @@
         "x-ms-examples": {
           "SentinelPlatformServices_ListBySubscription_MaximumSet": {
             "$ref": "./examples/SentinelPlatformServices_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "SentinelPlatformServices_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/SentinelPlatformServices_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "SentinelPlatformServices_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/SentinelPlatformServices_ListBySubscription_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -160,6 +172,12 @@
         "x-ms-examples": {
           "SentinelPlatformServices_ListByResourceGroup_MaximumSet": {
             "$ref": "./examples/SentinelPlatformServices_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "SentinelPlatformServices_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/SentinelPlatformServices_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "SentinelPlatformServices_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/SentinelPlatformServices_ListByResourceGroup_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -209,6 +227,9 @@
         },
         "x-ms-examples": {
           "SentinelPlatformServices_Get_MaximumSet": {
+            "$ref": "./examples/SentinelPlatformServices_Get_MaximumSet_Gen.json"
+          },
+          "SentinelPlatformServices_Get_MaximumSet_Gen": {
             "$ref": "./examples/SentinelPlatformServices_Get_MaximumSet_Gen.json"
           }
         }
@@ -270,6 +291,9 @@
         "x-ms-examples": {
           "SentinelPlatformServices_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/SentinelPlatformServices_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "SentinelPlatformServices_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/SentinelPlatformServices_CreateOrUpdate_MaximumSet_Gen.json"
           }
         }
       },
@@ -324,6 +348,9 @@
         "x-ms-examples": {
           "SentinelPlatformServices_Update_MaximumSet": {
             "$ref": "./examples/SentinelPlatformServices_Update_MaximumSet_Gen.json"
+          },
+          "SentinelPlatformServices_Update_MaximumSet_Gen": {
+            "$ref": "./examples/SentinelPlatformServices_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -369,12 +396,38 @@
         "x-ms-examples": {
           "SentinelPlatformServices_Delete_MaximumSet": {
             "$ref": "./examples/SentinelPlatformServices_Delete_MaximumSet_Gen.json"
+          },
+          "SentinelPlatformServices_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/SentinelPlatformServices_Delete_MaximumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource.",
@@ -443,6 +496,10 @@
         "properties": {
           "$ref": "#/definitions/SentinelPlatformServicesProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -476,6 +533,10 @@
       "type": "object",
       "description": "The type used for update operations of the SentinelPlatformService.",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
