@@ -88,7 +88,7 @@ union AccessType {
 
 @doc("Identity Set resource definition")
 model IdentitySetResource is TrackedResource<IdentitySetResourceProperties> {
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,64}$")
   @key
   @segment("identitySets")
   @doc("The name of the Identity Set resource.")
