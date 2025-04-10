@@ -6177,11 +6177,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "configurationPolicies": {
-          "description": "Configuration Policies part of this project policy.",
-          "type": "object",
-          "$ref": "#/definitions/ConfigurationPolicies"
         }
       }
     },
@@ -6194,56 +6189,6 @@
           "$ref": "#/definitions/ProjectPolicyUpdateProperties",
           "description": "Properties of an project policy to be updated."
         }
-      }
-    },
-    "ConfigurationPolicies": {
-      "description": "Represents policies to enforce configuration settings on a project.",
-      "type": "object",
-      "properties": {
-        "azureAiServicesFeatureStatus": {
-          "description": "The property indicates the Azure AI services settings on a project.",
-          "$ref": "#/definitions/FeatureStateModifiable"
-        },
-        "devBoxAutoDeleteFeatureStatus": {
-          "description": "Indicates whether the setting is configurable at Project scope.",
-          "$ref": "#/definitions/FeatureStateModifiable"
-        },
-        "devBoxLimitsFeatureStatus": {
-          "description": "Indicates whether DevBox limits are configurable at Project scope.",
-          "$ref": "#/definitions/FeatureStateModifiable"
-        },
-        "devBoxTunnelFeatureStatus": {
-          "description": "Indicates whether DevBox tunnel settings are configurable at Pool scope.",
-          "$ref": "#/definitions/FeatureStateModifiable"
-        },
-        "projectCatalogFeatureStatus": {
-          "description": "Indicates whether project catalogs are configurable at Project scope.",
-          "$ref": "#/definitions/FeatureStateModifiable"
-        },
-        "serverlessGpuSessionsFeatureStatus": {
-          "description": "Indicates whether serverless GPU sessions are configurable at Project scope.",
-          "$ref": "#/definitions/FeatureStateModifiable"
-        },
-        "userCustomizationsFeatureStatus": {
-          "description": "Indicates whether user customizations is configurable at Project scope.",
-          "$ref": "#/definitions/FeatureStateModifiable"
-        },
-        "workspaceStorageFeatureStatus": {
-          "description": "Indicates whether workspace storage is configurable at Project scope.",
-          "$ref": "#/definitions/FeatureStateModifiable"
-        }
-      }
-    },
-    "FeatureStateModifiable": {
-      "description": "Feature enablement status.",
-      "enum": [
-        "FeatureNotModifiable",
-        "FeatureModifiable"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "FeatureStateModifiable",
-        "modelAsString": true
       }
     },
     "DevBoxAutoDeleteSettings": {
