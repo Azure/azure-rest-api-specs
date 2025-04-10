@@ -62,7 +62,8 @@ interface Datasets
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get download sas for dataset version.")
   @post
-  @route("/datasets/{name}/versions/{version}/credentials")
+  @Rest.action("credentials")
+  @Rest.actionSeparator("/")
   getCredentials is ServicePatterns.VersionedResourceAction<
     DatasetVersion,
     {},
