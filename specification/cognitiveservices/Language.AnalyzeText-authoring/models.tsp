@@ -229,7 +229,7 @@ model TextAnalysisAuthoringProjectMetadata {
    * The project storage account resource ID.
    */
   @added(Versions.v2025_05_15_preview)
-  storageAccountResourceId: string;
+  storageAccountResourceId?: string;
 
   /**
    * The storage container name.
