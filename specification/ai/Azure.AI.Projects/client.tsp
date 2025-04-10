@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "./evaluations/client.tsp";
 
 using Azure.ClientGenerator.Core;
 
