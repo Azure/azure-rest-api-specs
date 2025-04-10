@@ -1,16 +1,14 @@
 {
   "parameters": {
-    "api-version": "2024-03-03",
-    "galleryName": "myGalleryName",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    "api-version": "2024-03-03",
+    "galleryName": "myGalleryName"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myGalleryName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/communityGalleries/myGalleryName",
-        "location": "West US",
         "properties": {
           "description": "This is the gallery description.",
           "identifier": {
@@ -18,16 +16,16 @@
           },
           "provisioningState": "Succeeded",
           "sharingProfile": {
+            "permissions": "Community",
             "communityGalleryInfo": {
-              "communityGalleryEnabled": true,
+              "publisherUri": "uri",
+              "publisherContact": "pir@microsoft.com",
               "eula": "eula",
               "publicNames": [
                 "GalleryPublicName"
               ],
-              "publisherContact": "pir@microsoft.com",
-              "publisherUri": "uri"
-            },
-            "permissions": "Community"
+              "communityGalleryEnabled": true
+            }
           },
           "sharingStatus": {
             "aggregatedState": "Succeeded",
@@ -39,7 +37,9 @@
               }
             ]
           }
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
       }
     }
   },

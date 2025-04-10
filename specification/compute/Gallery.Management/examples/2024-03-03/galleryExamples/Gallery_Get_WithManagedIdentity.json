@@ -1,14 +1,13 @@
 {
   "parameters": {
-    "api-version": "2024-03-03",
-    "galleryName": "myGalleryName",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    "api-version": "2024-03-03",
+    "galleryName": "myGalleryName"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myGalleryName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
         "identity": {
           "type": "SystemAssigned, UserAssigned",
@@ -16,19 +15,20 @@
           "tenantId": "00000000-0000-0000-0000-000000000000",
           "userAssignedIdentities": {
             "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
-              "clientId": "00000000-0000-0000-0000-000000000000",
-              "principalId": "00000000-0000-0000-0000-000000000000"
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
             }
           }
         },
-        "location": "West US",
         "properties": {
           "description": "This is the gallery description.",
           "identifier": {
             "uniqueName": "{subscription-id}-MYGALLERYNAME"
           },
           "provisioningState": "Succeeded"
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
       }
     }
   },

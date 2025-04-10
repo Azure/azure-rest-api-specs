@@ -1,33 +1,33 @@
 {
   "parameters": {
-    "api-version": "2024-03-03",
+    "subscriptionId": "{subscription-id}",
     "location": "myLocation",
-    "publicGalleryName": "publicGalleryName",
-    "subscriptionId": "{subscription-id}"
+    "api-version": "2024-03-03",
+    "publicGalleryName": "publicGalleryName"
   },
   "responses": {
     "200": {
       "body": {
+        "location": "myLocation",
         "name": "publicGalleryName",
         "type": "Microsoft.Compute/locations/communityGallery",
         "identifier": {
           "uniqueId": "/CommunityGalleries/publicGalleryName"
         },
-        "location": "myLocation",
         "properties": {
           "artifactTags": {
             "ShareTag-CommunityGallery": "CommunityGallery"
           },
+          "disclaimer": "https://test-uri.com",
           "communityMetadata": {
+            "publisherUri": "https://test-uri.com",
+            "publisherContact": "sameple@email.com",
             "eula": "https://test-uri.com",
-            "privacyStatementUri": "https://test-uri.com",
             "publicNames": [
               "prefix-xxxxx"
             ],
-            "publisherContact": "sameple@email.com",
-            "publisherUri": "https://test-uri.com"
-          },
-          "disclaimer": "https://test-uri.com"
+            "privacyStatementUri": "https://test-uri.com"
+          }
         }
       }
     }

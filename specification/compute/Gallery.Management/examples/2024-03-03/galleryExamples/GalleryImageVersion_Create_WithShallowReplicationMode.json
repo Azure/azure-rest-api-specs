@@ -1,188 +1,188 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-03-03",
+    "galleryName": "myGalleryName",
     "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "1.0.0",
     "galleryImageVersion": {
       "location": "West US",
       "properties": {
         "publishingProfile": {
-          "replicationMode": "Shallow",
           "targetRegions": [
             {
               "name": "West US",
-              "excludeFromLatest": false,
-              "regionalReplicaCount": 1
+              "regionalReplicaCount": 1,
+              "excludeFromLatest": false
             }
-          ]
-        },
-        "safetyProfile": {
-          "allowDeletionOfReplicatedLocations": false,
-          "blockDeletionBeforeEndOfLife": false
+          ],
+          "replicationMode": "Shallow"
         },
         "storageProfile": {
           "source": {
             "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
           }
+        },
+        "safetyProfile": {
+          "allowDeletionOfReplicatedLocations": false,
+          "blockDeletionBeforeEndOfLife": false
         }
       }
-    },
-    "galleryImageVersionName": "1.0.0",
-    "galleryName": "myGalleryName",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "1.0.0",
         "id": "/providers/Microsoft.Compute/locations/westus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
-        "location": "West US",
         "properties": {
-          "provisioningState": "Updating",
           "publishingProfile": {
-            "publishedDate": "2018-01-01T00:00:00Z",
-            "replicaCount": 1,
-            "replicationMode": "Shallow",
-            "storageAccountType": "Standard_LRS",
             "targetRegions": [
               {
                 "name": "West US",
-                "excludeFromLatest": false,
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS",
+            "replicationMode": "Shallow"
+          },
+          "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+            },
+            "osDiskImage": {
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
               }
             ]
           },
           "safetyProfile": {
             "allowDeletionOfReplicatedLocations": false,
-            "blockDeletionBeforeEndOfLife": false,
+            "reportedForPolicyViolation": true,
             "policyViolations": [
               {
                 "category": "ImageFlaggedUnsafe",
                 "details": "This is the policy violation details."
               }
             ],
-            "reportedForPolicyViolation": true
+            "blockDeletionBeforeEndOfLife": false
           },
-          "storageProfile": {
-            "dataDiskImages": [
-              {
-                "hostCaching": "None",
-                "lun": 1,
-                "sizeInGB": 10
-              }
-            ],
-            "osDiskImage": {
-              "hostCaching": "ReadOnly",
-              "sizeInGB": 10
-            },
-            "source": {
-              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
-            }
-          }
-        }
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
       }
     },
     "201": {
       "body": {
-        "name": "1.0.0",
         "id": "/providers/Microsoft.Compute/locations/westus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
-        "location": "West US",
         "properties": {
-          "provisioningState": "Creating",
           "publishingProfile": {
-            "publishedDate": "2018-01-01T00:00:00Z",
-            "replicaCount": 1,
-            "replicationMode": "Shallow",
-            "storageAccountType": "Standard_LRS",
             "targetRegions": [
               {
                 "name": "West US",
-                "excludeFromLatest": false,
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS",
+            "replicationMode": "Shallow"
+          },
+          "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+            },
+            "osDiskImage": {
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
               }
             ]
           },
           "safetyProfile": {
             "allowDeletionOfReplicatedLocations": false,
-            "blockDeletionBeforeEndOfLife": false,
+            "reportedForPolicyViolation": true,
             "policyViolations": [
               {
                 "category": "ImageFlaggedUnsafe",
                 "details": "This is the policy violation details."
               }
             ],
-            "reportedForPolicyViolation": true
+            "blockDeletionBeforeEndOfLife": false
           },
-          "storageProfile": {
-            "dataDiskImages": [
-              {
-                "hostCaching": "None",
-                "lun": 1,
-                "sizeInGB": 10
-              }
-            ],
-            "osDiskImage": {
-              "hostCaching": "ReadOnly",
-              "sizeInGB": 10
-            },
-            "source": {
-              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
-            }
-          }
-        }
+          "provisioningState": "Creating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
       }
     },
     "202": {
       "body": {
-        "name": "1.0.0",
         "id": "/providers/Microsoft.Compute/locations/westus/Galleries/myGalleryName/Images/myGalleryImageName/Versions/1.0.0",
-        "location": "West US",
         "properties": {
-          "provisioningState": "Updating",
           "publishingProfile": {
-            "publishedDate": "2018-01-01T00:00:00Z",
-            "replicaCount": 1,
-            "replicationMode": "Shallow",
-            "storageAccountType": "Standard_LRS",
             "targetRegions": [
               {
                 "name": "West US",
-                "excludeFromLatest": false,
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "excludeFromLatest": false
+              }
+            ],
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS",
+            "replicationMode": "Shallow"
+          },
+          "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+            },
+            "osDiskImage": {
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
               }
             ]
           },
           "safetyProfile": {
             "allowDeletionOfReplicatedLocations": false,
-            "blockDeletionBeforeEndOfLife": false,
+            "reportedForPolicyViolation": true,
             "policyViolations": [
               {
                 "category": "ImageFlaggedUnsafe",
                 "details": "This is the policy violation details."
               }
             ],
-            "reportedForPolicyViolation": true
+            "blockDeletionBeforeEndOfLife": false
           },
-          "storageProfile": {
-            "dataDiskImages": [
-              {
-                "hostCaching": "None",
-                "lun": 1,
-                "sizeInGB": 10
-              }
-            ],
-            "osDiskImage": {
-              "hostCaching": "ReadOnly",
-              "sizeInGB": 10
-            },
-            "source": {
-              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
-            }
-          }
-        }
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "1.0.0"
       }
     }
   },

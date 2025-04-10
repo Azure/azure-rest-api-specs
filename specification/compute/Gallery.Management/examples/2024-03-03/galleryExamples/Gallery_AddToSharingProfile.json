@@ -1,9 +1,11 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-03-03",
     "galleryName": "myGalleryName",
-    "resourceGroupName": "myResourceGroup",
     "sharingUpdate": {
+      "operationType": "Add",
       "groups": [
         {
           "type": "Subscriptions",
@@ -18,14 +20,13 @@
             "c24c76aa-8897-4027-9b03-8f7928b54ff6"
           ]
         }
-      ],
-      "operationType": "Add"
-    },
-    "subscriptionId": "{subscription-id}"
+      ]
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "operationType": "Add",
         "groups": [
           {
             "type": "Subscriptions",
@@ -40,12 +41,15 @@
               "c24c76aa-8897-4027-9b03-8f7928b54ff6"
             ]
           }
-        ],
-        "operationType": "Add"
+        ]
       }
     },
     "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/share?api-version=2024-03-03"
+      },
       "body": {
+        "operationType": "Add",
         "groups": [
           {
             "type": "Subscriptions",
@@ -60,11 +64,7 @@
               "c24c76aa-8897-4027-9b03-8f7928b54ff6"
             ]
           }
-        ],
-        "operationType": "Add"
-      },
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/share?api-version=2024-03-03"
+        ]
       }
     }
   },

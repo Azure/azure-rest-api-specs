@@ -1,31 +1,29 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-03-03",
+    "galleryName": "myGalleryName",
     "gallery": {
       "location": "West US",
       "properties": {
         "description": "This is the gallery description.",
         "sharingProfile": {
+          "permissions": "Community",
           "communityGalleryInfo": {
-            "eula": "eula",
-            "publicNamePrefix": "PirPublic",
+            "publisherUri": "uri",
             "publisherContact": "pir@microsoft.com",
-            "publisherUri": "uri"
-          },
-          "permissions": "Community"
+            "eula": "eula",
+            "publicNamePrefix": "PirPublic"
+          }
         }
       }
-    },
-    "galleryName": "myGalleryName",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myGalleryName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
-        "location": "West US",
         "properties": {
           "description": "This is the gallery description.",
           "identifier": {
@@ -33,22 +31,22 @@
           },
           "provisioningState": "Updating",
           "sharingProfile": {
+            "permissions": "Community",
             "communityGalleryInfo": {
-              "eula": "eula",
-              "publicNamePrefix": "PirPublic",
+              "publisherUri": "uri",
               "publisherContact": "pir@microsoft.com",
-              "publisherUri": "uri"
-            },
-            "permissions": "Community"
+              "eula": "eula",
+              "publicNamePrefix": "PirPublic"
+            }
           }
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
       }
     },
     "201": {
       "body": {
-        "name": "myGalleryName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
-        "location": "West US",
         "properties": {
           "description": "This is the gallery description.",
           "identifier": {
@@ -56,22 +54,22 @@
           },
           "provisioningState": "Creating",
           "sharingProfile": {
+            "permissions": "Community",
             "communityGalleryInfo": {
-              "eula": "eula",
-              "publicNamePrefix": "PirPublic",
+              "publisherUri": "uri",
               "publisherContact": "pir@microsoft.com",
-              "publisherUri": "uri"
-            },
-            "permissions": "Community"
+              "eula": "eula",
+              "publicNamePrefix": "PirPublic"
+            }
           }
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
       }
     },
     "202": {
       "body": {
-        "name": "myGalleryName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
-        "location": "West US",
         "properties": {
           "description": "This is the gallery description.",
           "identifier": {
@@ -79,15 +77,17 @@
           },
           "provisioningState": "Updating",
           "sharingProfile": {
+            "permissions": "Community",
             "communityGalleryInfo": {
-              "eula": "eula",
-              "publicNamePrefix": "PirPublic",
+              "publisherUri": "uri",
               "publisherContact": "pir@microsoft.com",
-              "publisherUri": "uri"
-            },
-            "permissions": "Community"
+              "eula": "eula",
+              "publicNamePrefix": "PirPublic"
+            }
           }
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
       }
     }
   },

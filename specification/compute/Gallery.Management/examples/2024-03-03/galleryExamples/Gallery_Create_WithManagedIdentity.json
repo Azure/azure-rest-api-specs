@@ -1,26 +1,25 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-03-03",
+    "galleryName": "myGalleryName",
     "gallery": {
+      "location": "West US",
       "identity": {
         "type": "SystemAssigned, UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
         }
       },
-      "location": "West US",
       "properties": {
         "description": "This is the gallery description."
       }
-    },
-    "galleryName": "myGalleryName",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myGalleryName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
         "identity": {
           "type": "SystemAssigned, UserAssigned",
@@ -30,19 +29,19 @@
             "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
           }
         },
-        "location": "West US",
         "properties": {
           "description": "This is the gallery description.",
           "identifier": {
             "uniqueName": "{subscription-id}-MYGALLERYNAME"
           },
           "provisioningState": "Updating"
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
       }
     },
     "201": {
       "body": {
-        "name": "myGalleryName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
         "identity": {
           "type": "SystemAssigned, UserAssigned",
@@ -52,7 +51,6 @@
             "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
           }
         },
-        "location": "West US",
         "properties": {
           "description": "This is the gallery description.",
           "identifier": {
@@ -62,12 +60,13 @@
           "softDeletePolicy": {
             "isSoftDeleteEnabled": true
           }
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
       }
     },
     "202": {
       "body": {
-        "name": "myGalleryName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
         "identity": {
           "type": "SystemAssigned, UserAssigned",
@@ -77,7 +76,6 @@
             "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {}
           }
         },
-        "location": "West US",
         "properties": {
           "description": "This is the gallery description.",
           "identifier": {
@@ -87,7 +85,9 @@
           "softDeletePolicy": {
             "isSoftDeleteEnabled": true
           }
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
       }
     }
   },

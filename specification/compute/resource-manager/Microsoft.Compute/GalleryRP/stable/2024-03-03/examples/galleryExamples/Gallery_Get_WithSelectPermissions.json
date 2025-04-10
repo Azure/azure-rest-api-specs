@@ -1,19 +1,18 @@
 {
   "parameters": {
-    "$select": "Permissions",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-03-03",
     "galleryName": "myGalleryName",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    "$select": "Permissions"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myGalleryName",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName",
-        "location": "West US",
         "properties": {
           "sharingProfile": {
+            "permissions": "Groups",
             "groups": [
               {
                 "type": "Subscriptions",
@@ -28,10 +27,11 @@
                   "c24c76aa-8897-4027-9b03-8f7928b54ff6"
                 ]
               }
-            ],
-            "permissions": "Groups"
+            ]
           }
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryName"
       }
     }
   },

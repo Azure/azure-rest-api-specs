@@ -1,54 +1,54 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-03-03",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
     "galleryImage": {
       "properties": {
+        "osType": "Windows",
+        "osState": "Generalized",
+        "hyperVGeneration": "V2",
         "allowUpdateImage": true,
         "features": [
           {
             "name": "SecurityType",
-            "startsAtVersion": "2.0.0",
-            "value": "TrustedLaunch"
+            "value": "TrustedLaunch",
+            "startsAtVersion": "2.0.0"
           }
         ],
-        "hyperVGeneration": "V2",
         "identifier": {
-          "offer": "myOfferName",
           "publisher": "myPublisherName",
+          "offer": "myOfferName",
           "sku": "mySkuName"
-        },
-        "osState": "Generalized",
-        "osType": "Windows"
+        }
       }
-    },
-    "galleryImageName": "myGalleryImageName",
-    "galleryName": "myGalleryName",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myGalleryImageName",
-        "location": "West US",
         "properties": {
+          "osType": "Windows",
+          "osState": "Generalized",
+          "hyperVGeneration": "V2",
           "features": [
             {
               "name": "SecurityType",
-              "startsAtVersion": "2.0.0",
-              "value": "TrustedLaunch"
+              "value": "TrustedLaunch",
+              "startsAtVersion": "2.0.0"
             }
           ],
-          "hyperVGeneration": "V2",
           "identifier": {
-            "offer": "myOfferName",
             "publisher": "myPublisherName",
+            "offer": "myOfferName",
             "sku": "mySkuName"
           },
-          "osState": "Generalized",
-          "osType": "Windows",
           "provisioningState": "Updating"
-        }
+        },
+        "location": "West US",
+        "name": "myGalleryImageName"
       }
     }
   },

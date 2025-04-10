@@ -1,12 +1,12 @@
 {
   "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-03-03",
     "galleryName": "myGalleryName",
-    "resourceGroupName": "myResourceGroup",
     "sharingUpdate": {
       "operationType": "EnableCommunity"
-    },
-    "subscriptionId": "{subscription-id}"
+    }
   },
   "responses": {
     "200": {
@@ -15,11 +15,11 @@
       }
     },
     "202": {
-      "body": {
-        "operationType": "EnableCommunity"
-      },
       "headers": {
         "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/share?api-version=2024-03-03"
+      },
+      "body": {
+        "operationType": "EnableCommunity"
       }
     }
   },

@@ -1,35 +1,35 @@
 {
   "parameters": {
-    "api-version": "2024-03-03",
-    "galleryImageName": "myGalleryImageName",
+    "subscriptionId": "{subscription-id}",
     "location": "myLocation",
+    "api-version": "2024-03-03",
     "publicGalleryName": "publicGalleryName",
-    "subscriptionId": "{subscription-id}"
+    "galleryImageName": "myGalleryImageName"
   },
   "responses": {
     "200": {
       "body": {
+        "properties": {
+          "osType": "Windows",
+          "osState": "Generalized",
+          "hyperVGeneration": "V1",
+          "identifier": {
+            "publisher": "myPublisherName",
+            "offer": "myOfferName",
+            "sku": "mySkuName"
+          },
+          "privacyStatementUri": "https://test-uri.com",
+          "eula": "https://test-uri.com",
+          "artifactTags": {
+            "ShareTag-CommunityGallery": "CommunityGallery"
+          },
+          "disclaimer": "https://test-uri.com"
+        },
+        "location": "myLocation",
         "name": "myGalleryImageName",
         "type": "Microsoft.Compute/locations/communityGalleryImage",
         "identifier": {
           "uniqueId": "/CommunityGalleries/publicGalleryName/Images/myGalleryImageName"
-        },
-        "location": "myLocation",
-        "properties": {
-          "artifactTags": {
-            "ShareTag-CommunityGallery": "CommunityGallery"
-          },
-          "disclaimer": "https://test-uri.com",
-          "eula": "https://test-uri.com",
-          "hyperVGeneration": "V1",
-          "identifier": {
-            "offer": "myOfferName",
-            "publisher": "myPublisherName",
-            "sku": "mySkuName"
-          },
-          "osState": "Generalized",
-          "osType": "Windows",
-          "privacyStatementUri": "https://test-uri.com"
         }
       }
     }

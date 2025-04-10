@@ -1,83 +1,83 @@
 {
   "parameters": {
-    "$expand": "ReplicationStatus",
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
     "api-version": "2024-03-03",
+    "galleryName": "myGalleryName",
     "galleryApplicationName": "myGalleryApplicationName",
     "galleryApplicationVersionName": "1.0.0",
-    "galleryName": "myGalleryName",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    "$expand": "ReplicationStatus"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "1.0.0",
         "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/applications/myGalleryApplicationName/versions/1.0.0",
-        "location": "West US",
         "properties": {
-          "provisioningState": "Succeeded",
           "publishingProfile": {
-            "advancedSettings": {
-              "timeout": "300",
-              "user": "root"
+            "source": {
+              "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}"
             },
-            "customActions": [
-              {
-                "name": "myCustomAction",
-                "description": "This is the custom action description.",
-                "parameters": [
-                  {
-                    "name": "myCustomActionParameter",
-                    "type": "String",
-                    "description": "This is the description of the parameter",
-                    "defaultValue": "default value of parameter.",
-                    "required": false
-                  }
-                ],
-                "script": "myCustomActionScript"
-              }
-            ],
-            "enableHealthCheck": false,
-            "endOfLifeDate": "2019-07-01T07:00:00+00:00",
-            "excludeFromLatest": false,
             "manageActions": {
               "install": "powershell -command \"Expand-Archive -Path package.zip -DestinationPath C:\\package\"",
               "remove": "del C:\\package "
             },
-            "publishedDate": "2019-06-21T17:13:57.5972568+00:00",
-            "replicaCount": 1,
+            "enableHealthCheck": false,
             "settings": {
-              "configFileName": "configuration.cfg",
-              "packageFileName": "package.zip"
+              "packageFileName": "package.zip",
+              "configFileName": "configuration.cfg"
             },
-            "source": {
-              "mediaLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/package.zip?{sasKey}"
+            "advancedSettings": {
+              "timeout": "300",
+              "user": "root"
             },
-            "storageAccountType": "Standard_LRS",
             "targetRegions": [
               {
                 "name": "West US",
-                "excludeFromLatest": false,
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "excludeFromLatest": false
               }
-            ]
-          },
-          "replicationStatus": {
-            "aggregatedState": "Completed",
-            "summary": [
+            ],
+            "replicaCount": 1,
+            "excludeFromLatest": false,
+            "publishedDate": "2019-06-21T17:13:57.5972568+00:00",
+            "endOfLifeDate": "2019-07-01T07:00:00+00:00",
+            "storageAccountType": "Standard_LRS",
+            "customActions": [
               {
-                "progress": 100,
-                "region": "West US",
-                "state": "Completed",
-                "details": ""
+                "name": "myCustomAction",
+                "script": "myCustomActionScript",
+                "description": "This is the custom action description.",
+                "parameters": [
+                  {
+                    "name": "myCustomActionParameter",
+                    "required": false,
+                    "type": "String",
+                    "defaultValue": "default value of parameter.",
+                    "description": "This is the description of the parameter"
+                  }
+                ]
               }
             ]
           },
           "safetyProfile": {
             "allowDeletionOfReplicatedLocations": false
-          }
-        }
+          },
+          "replicationStatus": {
+            "aggregatedState": "Completed",
+            "summary": [
+              {
+                "region": "West US",
+                "state": "Completed",
+                "details": "",
+                "progress": 100
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "location": "West US",
+        "name": "1.0.0"
       }
     }
   },

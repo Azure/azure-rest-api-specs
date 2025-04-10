@@ -1,26 +1,26 @@
 {
   "parameters": {
-    "api-version": "2024-03-03",
-    "galleryName": "myGalleryName",
+    "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "{subscription-id}"
+    "api-version": "2024-03-03",
+    "galleryName": "myGalleryName"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "http://svchost:99/subscriptions/subscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/inVMAccessControlProfiles?$skiptoken=token/Subscriptions/subscriptionId/ResourceGroups/myResourceGroup/galleries/myGalleryName/inVMAccessControlProfiles/myInVMAccessControlProfileName",
         "value": [
           {
-            "name": "myInVMAccessControlProfileName",
             "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/inVMAccessControlProfiles/myInVMAccessControlProfileName",
-            "location": "West US",
             "properties": {
-              "applicableHostEndpoint": "WireServer",
               "osType": "Linux",
+              "applicableHostEndpoint": "WireServer",
               "provisioningState": "Succeeded"
-            }
+            },
+            "location": "West US",
+            "name": "myInVMAccessControlProfileName"
           }
-        ]
+        ],
+        "nextLink": "http://svchost:99/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/inVMAccessControlProfiles?$skiptoken={token}/Subscriptions/{subscriptionId}/ResourceGroups/myResourceGroup/galleries/myGalleryName/inVMAccessControlProfiles/myInVMAccessControlProfileName"
       }
     }
   },
