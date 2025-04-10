@@ -11367,10 +11367,10 @@
           },
           "description": "Controls the cardinality of the content extracted from the document by the skill"    
         },
-        "chunkProperties": {
-          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkProperties",
+        "chunkingProperties": {
+          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkingProperties",
           "x-nullable": true,
-          "description": "Controls the cardinality for chunking the content."       
+          "description": "Controls the cardinality for chunking the content."
         }            
       },
       "externalDocs": {
@@ -11474,7 +11474,7 @@
     "DocumentIntelligenceLayoutSkillExtractionOptions": {
       "type": "string",
       "enum": [
-        "image",
+        "images",
         "locationMetadata"
       ],
       "x-ms-enum": {
@@ -11482,8 +11482,8 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "image",
-            "name": "Image",
+            "value": "images",
+            "name": "Images",
             "description": "Specify that image content should be extracted from the document."
           },
           {
@@ -11495,12 +11495,12 @@
       },
       "description": "Controls the cardinality of the content extracted from the document by the skill."
     },
-    "DocumentIntelligenceLayoutSkillChunkProperties": {
+    "DocumentIntelligenceLayoutSkillChunkingProperties": {
       "type": "object",
       "description": "Controls the cardinality for chunking the content.",
       "properties": {
         "unit": {
-          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkUnit",
+          "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkingUnit",
           "x-nullable": true,
           "description": "The unit of the chunk."
         },
@@ -11518,13 +11518,13 @@
         }
       }
     },    
-    "DocumentIntelligenceLayoutSkillChunkUnit": {
+    "DocumentIntelligenceLayoutSkillChunkingUnit": {
       "type": "string",
       "enum": [
         "characters"
       ],
       "x-ms-enum": {
-        "name": "DocumentIntelligenceLayoutSkillChunkUnit",
+        "name": "DocumentIntelligenceLayoutSkillChunkingUnit",
         "modelAsString": true,
         "values": [
           {
@@ -11726,7 +11726,7 @@
           "description": "Controls whether it is allowable for an object to contain additional keys / values that were not defined in the JSON Schema. Default is false."
         }
       }
-    },
+    },    
     "WebApiSkill": {
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
