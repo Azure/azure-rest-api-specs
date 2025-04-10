@@ -4211,6 +4211,7 @@ model ScalingPlanPooledScheduleProperties {
    * Name of the ScalingPlanPooledSchedule
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Service already uses this property"
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
@@ -4327,6 +4328,7 @@ model ScalingPlanPooledSchedulePatchProperties {
   /**
    * Name of the ScalingPlanPooledSchedule
    */
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
