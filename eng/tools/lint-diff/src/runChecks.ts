@@ -3,7 +3,7 @@ import { exec, ExecException } from "node:child_process";
 
 import { getOpenapiType } from "./markdown-utils.js";
 import { getPathToDependency } from "./util.js";
-import { AutorestRunResult } from "./lintdiff-types.js";
+import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
 
@@ -79,6 +79,24 @@ export async function executeCommand(
       },
     );
   });
+}
+
+export function getAutorestErrors(runResult: AutorestRunResult): AutoRestMessage[] {
+  const errors = [];
+  const lines = (runResult.stdout + runResult.stderr).split("\n").map((line) => line.trim());
+
+  for (const line of lines) {
+    // AutoRest messages are JSON objects that start with the string '{"level":'
+    // Non-AutoRest messages will start with things like '{"pluginName"'
+    if (line.startsWith('{"level":')) {
+      const error = JSON.parse(line) as AutoRestMessage;
+      if (error.level === "error" || error.level === "fatal") {
+        errors.push(error);
+      }
+    }
+  }
+
+  return errors;
 }
 
 export function logAutorestExecutionErrors(runResult: AutorestRunResult) {

@@ -1,7 +1,7 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { pathExists } from "./util.js";
 import { getRunList } from "./processChanges.js";
-import { runChecks } from "./runChecks.js";
+import { runChecks, getAutorestErrors } from "./runChecks.js";
 import { correlateRuns } from "./correlateResults.js";
 import { generateReport } from "./generateReport.js";
 
@@ -116,9 +116,16 @@ async function runLintDiff(
   const beforeChecks = await runChecks(beforePath, beforeList);
   const afterChecks = await runChecks(afterPath, afterList);
 
+  const autoRestErrors = afterChecks
+    .map((result) => {
+      return { result, errors: getAutorestErrors(result) };
+    })
+    .filter((result) => result.errors.length > 0);
+
   const runCorrelations = await correlateRuns(beforePath, beforeChecks, afterChecks);
 
   const pass = await generateReport(
+    autoRestErrors,
     runCorrelations,
     affectedSwaggers,
     outFile,
