@@ -123,7 +123,7 @@ suppressions:
     reason: This is a property used across all API versions. changing it would be a breaking change, and is required for the SDK.
   - code: NOT_LATEST_API_VERSION_IN_DEFAULT_TAG
     from: assessmentMetadata.json
-    reason: API updates for Assessmets and AssessmentMetadata only, cannot replace default tag.
+    reason: API updates for Assessments and AssessmentMetadata only, cannot replace default tag.
   ```
 
 ### Tag: package-2025-03
