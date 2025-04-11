@@ -4,10 +4,10 @@
 
 Configuration for generating Translation Text SDK.
 
-The current release is `release_3_0`.
+The current release is `package-2025-05-01-preview`.
 
 ``` yaml
-tag: release_3_0
+tag: package-2025-05-01-preview
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -19,6 +19,15 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_3_0'
 input-file: stable/3.0/openapi.json
+```
+
+### Release 2025-05-01-preview
+These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-05-01-preview'
+version: package-2025-05-01-preview
+input-file:
+  - preview/2025-05-01-preview/openapi.json
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
