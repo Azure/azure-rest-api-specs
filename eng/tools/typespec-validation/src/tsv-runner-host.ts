@@ -1,6 +1,6 @@
 import { readFile as readFileImpl } from "fs/promises";
 import { globby, Options as GlobbyOptions } from "globby";
-import { join } from "path";
+import { dirname, join } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 import { RuleResult } from "./rule-result.js";
@@ -10,7 +10,7 @@ import {
   gitDiffTopSpecFolder,
   isDirectory,
   normalizePath,
-  runCmd,
+  runFile,
 } from "./utils.js";
 
 export class TsvRunnerHost implements TsvHost {
@@ -34,8 +34,31 @@ export class TsvRunnerHost implements TsvHost {
     return readFileImpl(path, "utf-8");
   }
 
-  runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]> {
-    return runCmd(cmd, cwd);
+  runFile(file: string, args: string[], cwd?: string): Promise<[Error | null, string, string]> {
+    return runFile(file, args, cwd);
+  }
+
+  runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]> {
+    const [file, defaultArgs] =
+      process.platform === "win32"
+        ? [
+            // Only way I could find to run "npm" on Windows, without using the shell (e.g. "cmd /c npm ...")
+            //
+            // "node.exe", ["--", "npm-cli.js", ...args]
+            //
+            // The "--" MUST come BEFORE "npm-cli.js", to ensure args are sent to the script unchanged.
+            // If the "--" comes after "npm-cli.js", the args sent to the script will be ["--", ...args],
+            // which is NOT equivalent, and can break if args itself contains another "--".
+
+            // example: "C:\Program Files\nodejs\node.exe"
+            process.execPath,
+
+            // example: "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"
+            ["--", join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js")],
+          ]
+        : ["npm", []];
+
+    return this.runFile(file, [...defaultArgs, ...args], cwd);
   }
 
   normalizePath(folder: string): string {
