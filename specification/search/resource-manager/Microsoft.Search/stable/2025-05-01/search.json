@@ -1396,7 +1396,7 @@
           "200": {
             "description": "Successfully retrieved the list of configurations.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
             }
           },
           "default": {
@@ -1428,14 +1428,7 @@
             "$ref": "#/parameters/SearchServiceNameParameter"
           },
           {
-            "name": "nspConfigName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
-            "minLength": 38,
-            "maxLength": 100,
-            "description": "The network security configuration name."
+            "$ref": "#/parameters/NspConfigNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1448,7 +1441,7 @@
           "200": {
             "description": "Successfully retrieved the configuration.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+              "$ref": "../../../../../common-types/resource-management/v5/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
             }
           },
           "default": {
@@ -1475,14 +1468,7 @@
             "$ref": "#/parameters/SearchServiceNameParameter"
           },
           {
-            "name": "nspConfigName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
-            "minLength": 38,
-            "maxLength": 100,
-            "description": "The network security configuration name."
+            "$ref": "#/parameters/NspConfigNameParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2856,24 +2842,8 @@
       "type": "object",
       "description": "The list of user identities associated with the search service. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
       "additionalProperties": {
-        "$ref": "#/definitions/UserAssignedManagedIdentity"
+        "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
       }
-    },
-    "UserAssignedManagedIdentity": {
-      "properties": {
-        "principalId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The principal ID of user assigned identity."
-        },
-        "clientId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The client ID of user assigned identity."
-        }
-      },
-      "type": "object",
-      "description": "The details of the user assigned managed identity assigned to the search service."
     },
     "QuotaUsagesListResult": {
       "type": "object",
@@ -2933,220 +2903,6 @@
         }
       },
       "description": "Describes the quota usage for a particular SKU."
-    },
-    "NetworkSecurityPerimeterConfiguration": {
-      "description": "Network security perimeter configuration for a server.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationListResult": {
-      "description": "A list of network security perimeter configurations for a server.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationProperties": {
-      "description": "The properties of a network security perimeter configuration.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        },
-        "networkSecurityPerimeter": {
-          "$ref": "#/definitions/NSPConfigPerimeter"
-        },
-        "resourceAssociation": {
-          "$ref": "#/definitions/NSPConfigAssociation"
-        },
-        "profile": {
-          "$ref": "#/definitions/NSPConfigProfile"
-        },
-        "provisioningIssues": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NSPProvisioningIssue"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "NSPConfigAccessRule": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/NSPConfigAccessRuleProperties"
-        }
-      },
-      "description": "An access rule for a network security perimeter configuration."
-    },
-    "NSPConfigAccessRuleProperties": {
-      "type": "object",
-      "properties": {
-        "direction": {
-          "type": "string"
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "fullyQualifiedDomainNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "subscriptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "networkSecurityPerimeters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
-          }
-        }
-      },
-      "description": "The properties for the access rules in a network security perimeter configuration."
-    },
-    "NSPConfigAssociation": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "accessMode": {
-          "type": "string"
-        }
-      },
-      "description": "The resource association for the network security perimeter."
-    },
-    "NSPConfigNetworkSecurityPerimeterRule": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "perimeterGuid": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "description": "The network security perimeter properties present in a configuration rule."
-    },
-    "NSPConfigPerimeter": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "perimeterGuid": {
-          "type": "string"
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "description": "The perimeter for a network security perimeter configuration."
-    },
-    "NSPConfigProfile": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "accessRulesVersion": {
-          "type": "string"
-        },
-        "accessRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NSPConfigAccessRule"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "description": "The profile for a network security perimeter configuration."
-    },
-    "NSPProvisioningIssue": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/NSPProvisioningIssueProperties"
-        }
-      },
-      "description": "An object to describe any issues with provisioning network security perimeters to a search service."
-    },
-    "NSPProvisioningIssueProperties": {
-      "type": "object",
-      "properties": {
-        "issueType": {
-          "type": "string"
-        },
-        "severity": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "suggestedResourceIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "suggestedAccessRules": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "description": "The properties to describe any issues with provisioning network security perimeters to a search service."
     }
   },
   "parameters": {
@@ -3234,6 +2990,16 @@
       "type": "string",
       "description": "The unique SKU name that identifies a billable tier.",
       "x-ms-parameter-location": "method"
+    },
+    "NspConfigNameParameter": {
+      "name": "nspConfigName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$",
+      "minLength": 38,
+      "maxLength": 100,
+      "description": "The network security perimeter configuration name."
     }
   }
 }
