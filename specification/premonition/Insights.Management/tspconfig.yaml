@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "sdk/premonition"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -6,6 +9,44 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/insights.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-premonition"
+    package-name: "{package-dir}"
+    namespace: "azure.mgmt.premonition"
+    package-pprint-name: "Microsoft Premonition Insights"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.ResourceManager.Premonition"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-premonition"
+    generate-metadata: true
+    generate-test: true
+    experimentalExtensibleEnums: true
+    package-details:
+      name: "@azure/arm-premonition"
+      description: "Microsoft Premonition Insights"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-premonition"
+    namespace: com.azure.premonition
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/premonition"
+    package-dir: "armpremonition"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    generate-examples: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
