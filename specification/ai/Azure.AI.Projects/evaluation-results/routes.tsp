@@ -67,4 +67,17 @@ interface EvaluationResults
     },
     AssetCredentialResponse
   >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get the jailbreak dataset with type.")
+  @route("/runs:agents/{completionId}")
+  @get
+  getAgentEvaluationResults is Azure.Core.Foundations.Operation<
+    {
+      @doc("Agent run completion id.")
+      @path
+      completionId: string;
+    },
+    Array<AgentEvaluationResult>
+  >;
 }
