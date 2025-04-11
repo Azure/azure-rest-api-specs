@@ -13,6 +13,7 @@
         "@odata.etag": "0x1234568AE7E58A1",
         "name": "preview-test",
         "defaultScoringProfile": "stringFieldBoost",
+        "permissionFilterOption": "enabled",
         "fields": [
           {
             "name": "id",
@@ -170,6 +171,18 @@
             "retrievable": true,
             "stored": true,
             "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "permissionFilters",
+            "type": "Collection(Edm.String)",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
             "facetable": true,
             "key": false,
             "synonymMaps": []

@@ -114,6 +114,15 @@
           "filterable": true,
           "sortable": true,
           "facetable": true
+        },
+        {
+          "name": "permissionFilters",
+          "type": "Collection(Edm.String)",
+          "retrievable": true,
+          "filterable": true,
+          "sortable": false,
+          "facetable": true,
+          "permissionFilter": "userIds"
         }
       ],
       "scoringProfiles": [
@@ -360,6 +369,7 @@
           }
         ]
       },
+      "permissionFilterOption": "enabled",
       "@odata.etag": "0x1234568AE7E58A1"
     }
   },
@@ -368,6 +378,7 @@
       "body": {
         "name": "temp-preview-test",
         "defaultScoringProfile": "stringFieldBoost",
+        "permissionFilterOption": "enabled",
         "fields": [
           {
             "name": "id",
@@ -525,6 +536,18 @@
             "retrievable": true,
             "stored": true,
             "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "permissionFilters",
+            "type": "Collection(Edm.String)",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
             "facetable": true,
             "key": false,
             "synonymMaps": []
@@ -790,6 +813,7 @@
       "body": {
         "name": "temp-preview-test",
         "defaultScoringProfile": "stringFieldBoost",
+        "permissionFilterOption": "enabled",
         "fields": [
           {
             "name": "id",
@@ -947,6 +971,18 @@
             "retrievable": true,
             "stored": true,
             "sortable": true,
+            "facetable": true,
+            "key": false,
+            "synonymMaps": []
+          },
+          {
+            "name": "permissionFilters",
+            "type": "Collection(Edm.String)",
+            "searchable": true,
+            "filterable": true,
+            "retrievable": true,
+            "stored": true,
+            "sortable": false,
             "facetable": true,
             "key": false,
             "synonymMaps": []

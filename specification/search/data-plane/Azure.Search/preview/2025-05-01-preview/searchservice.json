@@ -9331,9 +9331,10 @@
           "enum": [
             "userIds",
             "groupIds",
-            "roles"
+            "azureRbacScope"
           ],
-          "description": "A value indicating whether the field should be used as a permission filter."
+          "description": "A value indicating whether the field should be used as a permission filter.",
+          "x-nullable": true
         },
         "analyzer": {
           "externalDocs": {
@@ -9933,21 +9934,14 @@
           "x-ms-client-name": "VectorSearch",
           "x-nullable": true
         },
-        "assetProfiles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AssetProfile"
-          },
-          "description": "Defines configurations to use with asset serving."
-        },
-        "permissionFiltering": {
+        "permissionFilterOption": {
           "type": "string",
           "enum": [
             "enabled",
-            "disabled",
-            "null"
+            "disabled"
           ],
-          "description": "A value indicating whether permission filtering is enabled for the index."
+          "description": "A value indicating whether permission filtering is enabled for the index.",
+          "x-nullable": true
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
