@@ -1293,7 +1293,7 @@ directive:
     reason: The tool compared the stable API version and mistakenly scanned out that this model was not newly added, more details see https://github.com/Azure/azure-openapi-validator/issues/773
   - suppress: AvoidAdditionalProperties
     from: managedClusters.json
-    where: $.definitions.NamespaceProperties
+    where: $.definitions.NamespaceProperties.labels
     reason: Users are required to enter custom key-value pairs, similar to the allowed "user-defined tags", except that in the Kubernetes world, this attribute is referred to as labels.
   - suppress: AvoidAdditionalProperties
     from: managedClusters.json
