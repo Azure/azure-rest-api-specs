@@ -11,7 +11,9 @@ param (
   [ValidateNotNullOrEmpty()]
   [string] $ServiceListFilePath,
   [Parameter(Position = 1)]
-  [string] $SpecRepoRootDirectory
+  [string] $SpecRepoRootDirectory,
+  [Parameter(Position = 2)]
+  [bool] $NeedConvert = $true
 )
 
 $RPList = @()
@@ -52,14 +54,24 @@ $RPList | ForEach-Object {
         }
             Push-Location $TSPFolderPath
             $readmeFilePath = Join-Path $serviceFolder "resource-manager" "readme.md"
-            $output = Invoke-Expression "tsp-client convert --swagger-readme $readmeFilePath --arm --fully-compatible" 2>&1 | Out-String
+
+            $configContent = Get-Content -Path $readmeFilePath -Raw
+            $tagPattern = 'tag:\s*([^`]+)```'
+            $matches = [regex]::Matches($configContent, $tagPattern)
+            $defaultTag = $matches[0].Groups[1].Value;
+            # Tag regex pattern
+            # $inputPattern = '### Tag: $searchTag\s*```yaml \$(tag) == "$searchTag"\s*input-file:\s*([^`]+)```'
+
+
+            if ($NeedConvert){
+                $output = Invoke-Expression "tsp-client convert --swagger-readme $readmeFilePath --arm --fully-compatible" 2>&1 | Out-String
             # Write-Output "Command Output:"
             # Write-Output $output
             if ($LASTEXITCODE) {
                 Write-Output "Failed to run convertion tool on $_."
                 $FailConvertRPlist += $_
                 # Remove folder failed some how
-                Remove-Item -Path $TSPFolderPath -Recurse -Force
+                # Remove-Item -Path $TSPFolderPath -Recurse -Force
             }
             else {
                 Write-Output "Successfully run convertion tool on $_."
@@ -84,6 +96,8 @@ $RPList | ForEach-Object {
                 }
             }
             Pop-Location
+            }
+            
     }
 
 $currentDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
@@ -92,17 +106,16 @@ New-Item -Path $testResultsFolder -ItemType Directory
 Push-Location $testResultsFolder
 $SuccessConvertRPlistPath = Join-Path $testResultsFolder  "SuccessConvertRPlist.txt"
 New-Item -Path $SuccessConvertRPlistPath -ItemType File
-$FailConvertRPlist = Join-Path $testResultsFolder  "FailConvertRPlist.txt"
-New-Item -Path $FailConvertRPlist -ItemType File
-$SuccessCompileRPlist = Join-Path $testResultsFolder  "SuccessCompileRPlist.txt"
-New-Item -Path $SuccessCompileRPlist -ItemType File
-$FailCompileRPlist = Join-Path $testResultsFolder  "FailCompileRPlist.txt"
-New-Item -Path $FailCompileRPlist -ItemType File
+$FailConvertRPlistPath = Join-Path $testResultsFolder  "FailConvertRPlist.txt"
+New-Item -Path $FailConvertRPlistPath -ItemType File
+$SuccessCompileRPlistPath = Join-Path $testResultsFolder  "SuccessCompileRPlist.txt"
+New-Item -Path $SuccessCompileRPlistPath -ItemType File
+$FailCompileRPlistPath = Join-Path $testResultsFolder  "FailCompileRPlist.txt"
+New-Item -Path $FailCompileRPlistPath -ItemType File
 
 $SuccessConvertRPlist | Out-File -FilePath $SuccessConvertRPlistPath
-#Besides this file, all other logs below are not cached.
-$FailConvertRPlist | Out-File -FilePath $FailConvertRPlist
-$SuccessCompileRPlist | Out-File -FilePath $SuccessCompileRPlist
-$FailCompileRPlist | Out-File -FilePath $FailCompileRPlist
+$FailConvertRPlist | Out-File -FilePath $FailConvertRPlistPath
+$SuccessCompileRPlist | Out-File -FilePath $SuccessCompileRPlistPath
+$FailCompileRPlist | Out-File -FilePath $FailCompileRPlistPath
 
 exit 0
