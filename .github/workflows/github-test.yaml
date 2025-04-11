@@ -34,8 +34,8 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: Setup Node 20 and install runtime deps
-        if: ${{ matrix.folder }} == ".github"
+      - if: ${{ matrix.folder == '.github' }}
+        name: Setup Node 20 and install runtime deps
         uses: ./.github/actions/setup-node-install-deps
         with:
           # actions/github-script@v7 uses Node 20
@@ -43,8 +43,8 @@ jobs:
           install-command: npm ci --omit dev
           working-directory: ./${{ matrix.folder }}
 
-      - name: Verify all modules are importable
-        if: ${{ matrix.folder }} == ".github"
+      - if: ${{ matrix.folder == '.github' }}
+        name: Verify all modules are importable
         uses: actions/github-script@v7
         with:
           script: |
