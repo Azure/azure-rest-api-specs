@@ -98,7 +98,8 @@
             "description": "Number of objects to return per page.",
             "required": false,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "x-ms-client-name": "maxPageSize"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -816,7 +817,7 @@
         },
         "kind": {
           "$ref": "#/definitions/CommunicationMessageKind",
-          "description": "The type discriminator describing a notification type."
+          "description": "The type discriminator describing a message type."
         }
       },
       "discriminator": "kind",
