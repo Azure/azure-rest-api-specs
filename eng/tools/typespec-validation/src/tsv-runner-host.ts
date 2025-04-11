@@ -43,10 +43,18 @@ export class TsvRunnerHost implements TsvHost {
       process.platform === "win32"
         ? [
             // Only way I could find to run "npm" on Windows, without using the shell (e.g. "cmd /c npm ...")
-            // "C:\Program Files\nodejs\node.exe"
+            //
+            // "node.exe", ["--", "npm-cli.js", ...args]
+            //
+            // The "--" MUST come BEFORE "npm-cli.js", to ensure args are sent to the script unchanged.
+            // If the "--" comes after "npm-cli.js", the args sent to the script will be ["--", ...args],
+            // which is NOT equivalent, and can break if args itself contains another "--".
+
+            // example: "C:\Program Files\nodejs\node.exe"
             process.execPath,
-            // ["C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js", "--"]
-            [join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js"), "--"],
+
+            // example: "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"
+            [join("--", dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js")],
           ]
         : ["npm", []];
 
