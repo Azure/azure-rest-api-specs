@@ -241,6 +241,7 @@ model TranslateBodyDetails {
     """)
   textType?: TextType = "Plain";
 
+  @added(APIVersion.v2025_05_01_preview)
   @doc("""
     Translation target parameters.
     """)
@@ -365,6 +366,48 @@ model TranslationText {
     An object giving the translated text in the script specified by the toScript parameter.
     """)
   transliteration?: TransliteratedText;
+
+  @removed(APIVersion.v2025_05_01_preview)
+  @doc("""
+    Alignment information.
+    """)
+  alignment?: TranslatedTextAlignment;
+
+  @removed(APIVersion.v2025_05_01_preview)
+  @doc("""
+    Sentence boundaries in the input and output texts.
+    """)
+  sentLen?: SentenceBoundaries;
+}
+
+@removed(APIVersion.v2025_05_01_preview)
+@doc("Alignment information object.")
+model TranslatedTextAlignment {
+  @doc("""
+    Maps input text to translated text. The alignment information is only provided when the request 
+    parameter includeAlignment is true. Alignment is returned as a string value of the following 
+    format: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]]. 
+    The colon separates start and end index, the dash separates the languages, and space separates the words. 
+    One word may align with zero, one, or multiple words in the other language, and the aligned words may 
+    be non-contiguous. When no alignment information is available, the alignment element will be empty.
+    """)
+  proj: string;
+}
+
+@removed(APIVersion.v2025_05_01_preview)
+@doc("An object returning sentence boundaries in the input and output texts.")
+model SentenceBoundaries {
+  @doc("""
+    An integer array representing the lengths of the sentences in the input text. 
+    The length of the array is the number of sentences, and the values are the length of each sentence.
+    """)
+  srcSentLen: int32[];
+
+  @doc("""
+    An integer array representing the lengths of the sentences in the translated text. 
+    The length of the array is the number of sentences, and the values are the length of each sentence.
+    """)
+  transSentLen: int32[];
 }
 
 @doc("Input text in the default script of the source language. ")

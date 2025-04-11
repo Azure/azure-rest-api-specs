@@ -531,6 +531,32 @@
         "referenceTextPairsTarget"
       ]
     },
+    "SentenceBoundaries": {
+      "type": "object",
+      "description": "An object returning sentence boundaries in the input and output texts.",
+      "properties": {
+        "srcSentLen": {
+          "type": "array",
+          "description": "An integer array representing the lengths of the sentences in the input text. \nThe length of the array is the number of sentences, and the values are the length of each sentence.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "transSentLen": {
+          "type": "array",
+          "description": "An integer array representing the lengths of the sentences in the translated text. \nThe length of the array is the number of sentences, and the values are the length of each sentence.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "srcSentLen",
+        "transSentLen"
+      ]
+    },
     "SourceDictionaryLanguage": {
       "type": "object",
       "description": "Properties ot the source dictionary language",
@@ -668,15 +694,10 @@
               }
             ]
           }
-        },
-        "targets": {
-          "$ref": "#/definitions/TranslateTarget",
-          "description": "Translation target parameters."
         }
       },
       "required": [
-        "text",
-        "targets"
+        "text"
       ]
     },
     "TranslateBodyParameters": {
@@ -809,6 +830,19 @@
         "language"
       ]
     },
+    "TranslatedTextAlignment": {
+      "type": "object",
+      "description": "Alignment information object.",
+      "properties": {
+        "proj": {
+          "type": "string",
+          "description": "Maps input text to translated text. The alignment information is only provided when the request \nparameter includeAlignment is true. Alignment is returned as a string value of the following \nformat: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]]. \nThe colon separates start and end index, the dash separates the languages, and space separates the words. \nOne word may align with zero, one, or multiple words in the other language, and the aligned words may \nbe non-contiguous. When no alignment information is available, the alignment element will be empty."
+        }
+      },
+      "required": [
+        "proj"
+      ]
+    },
     "TranslatedTextItem": {
       "type": "object",
       "description": "Element containing the translated text",
@@ -889,6 +923,14 @@
         "transliteration": {
           "$ref": "#/definitions/TransliteratedText",
           "description": "An object giving the translated text in the script specified by the toScript parameter."
+        },
+        "alignment": {
+          "$ref": "#/definitions/TranslatedTextAlignment",
+          "description": "Alignment information."
+        },
+        "sentLen": {
+          "$ref": "#/definitions/SentenceBoundaries",
+          "description": "Sentence boundaries in the input and output texts."
         }
       },
       "required": [
