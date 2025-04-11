@@ -9,6 +9,7 @@ import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
+import { fileExists } from "./utils.js";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -23,7 +24,7 @@ export async function main() {
   const folder = parsedArgs.positionals[0];
   const absolutePath = host.normalizePath(folder);
 
-  if (!(await host.checkFileExists(absolutePath))) {
+  if (!(await fileExists(absolutePath))) {
     console.log(`Folder ${absolutePath} does not exist`);
     process.exit(1);
   }

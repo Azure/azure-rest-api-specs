@@ -4,6 +4,7 @@ import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
 import { Suppression } from "suppressions";
+import { fileExists } from "../utils.js";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -18,7 +19,7 @@ export abstract class TspconfigSubRuleBase {
   }
 
   public async execute(host: TsvHost, folder: string): Promise<RuleResult> {
-    const tspconfigExists = await host.checkFileExists(join(folder, "tspconfig.yaml"));
+    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
       return this.createFailedResult(
         `Failed to find ${join(folder, "tspconfig.yaml")}`,

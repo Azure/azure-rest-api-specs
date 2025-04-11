@@ -27,7 +27,7 @@ export async function runFile(file: string, args: string[], cwd?: string) {
   return [err, stdout, stderr] as [Error | null, string, string];
 }
 
-export async function checkFileExists(file: string) {
+export async function fileExists(file: string) {
   return access(file)
     .then(() => true)
     .catch(() => false);

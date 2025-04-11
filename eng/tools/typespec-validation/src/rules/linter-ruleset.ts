@@ -3,6 +3,7 @@ import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { fileExists } from "../utils.js";
 
 // Maps deprecated rulesets to the replacement rulesets
 const deprecatedRulesets = new Map<string, string>([
@@ -31,8 +32,8 @@ export class LinterRulesetRule implements Rule {
       config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
     stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
 
-    const mainTspExists = await host.checkFileExists(join(folder, "main.tsp"));
-    const clientTspExists = await host.checkFileExists(join(folder, "client.tsp"));
+    const mainTspExists = await fileExists(join(folder, "main.tsp"));
+    const clientTspExists = await fileExists(join(folder, "client.tsp"));
     let files = [];
     if (mainTspExists) {
       files.push("main.tsp");

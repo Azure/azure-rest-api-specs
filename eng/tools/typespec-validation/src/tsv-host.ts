@@ -3,7 +3,6 @@ import { Suppression } from "suppressions";
 import { RuleResult } from "./rule-result.js";
 
 export interface TsvHost {
-  checkFileExists(file: string): Promise<boolean>;
   isDirectory(path: string): Promise<boolean>;
   gitOperation(folder: string): IGitOperation;
   readTspConfig(folder: string): Promise<string>;

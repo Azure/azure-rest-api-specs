@@ -6,7 +6,6 @@ import { getSuppressions as getSuppressionsImpl, Suppression } from "suppression
 import { RuleResult } from "./rule-result.js";
 import { IGitOperation, TsvHost } from "./tsv-host.js";
 import {
-  checkFileExists,
   gitDiffTopSpecFolder,
   isDirectory,
   normalizePath,
@@ -14,10 +13,6 @@ import {
 } from "./utils.js";
 
 export class TsvRunnerHost implements TsvHost {
-  checkFileExists(file: string): Promise<boolean> {
-    return checkFileExists(file);
-  }
-
   isDirectory(path: string) {
     return isDirectory(path);
   }

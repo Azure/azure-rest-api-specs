@@ -3,6 +3,7 @@ import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
+import { fileExists } from "../utils.js";
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
@@ -15,7 +16,7 @@ export class FolderStructureRule implements Rule {
     const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
 
     stdOutput += `folder: ${folder}\n`;
-    if (!(await host.checkFileExists(folder))) {
+    if (!(await fileExists(folder))) {
       return {
         success: false,
         stdOutput: stdOutput,
@@ -62,16 +63,16 @@ export class FolderStructureRule implements Rule {
     }
 
     // Verify tspconfig, main.tsp, examples/
-    const mainExists = await host.checkFileExists(path.join(folder, "main.tsp"));
-    const clientExists = await host.checkFileExists(path.join(folder, "client.tsp"));
-    const tspConfigExists = await host.checkFileExists(path.join(folder, "tspconfig.yaml"));
+    const mainExists = await fileExists(path.join(folder, "main.tsp"));
+    const clientExists = await fileExists(path.join(folder, "client.tsp"));
+    const tspConfigExists = await fileExists(path.join(folder, "tspconfig.yaml"));
 
     if (!mainExists && !clientExists) {
       errorOutput += `Invalid folder structure: Spec folder must contain main.tsp or client.tsp.`;
       success = false;
     }
 
-    if (mainExists && !(await host.checkFileExists(path.join(folder, "examples")))) {
+    if (mainExists && !(await fileExists(path.join(folder, "examples")))) {
       errorOutput += `Invalid folder structure: Spec folder with main.tsp must contain examples folder.`;
       success = false;
     }
