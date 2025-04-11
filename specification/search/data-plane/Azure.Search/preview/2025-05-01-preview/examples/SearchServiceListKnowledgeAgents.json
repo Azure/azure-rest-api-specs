@@ -1,0 +1,43 @@
+{
+    "operationId": "KnowledgeAgents_List",
+    "title": "SearchServiceListKnowledgeAgents",
+    "parameters": {
+      "endpoint": "https://previewexampleservice.search.windows.net",
+      "api-version": "2025-05-01-preview",
+      "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "value": [
+            {
+              "@odata.etag": "0x1234568AE7E58A1",
+              "name": "preview-test",
+              "targetIndexes": [
+                {
+                  "indexName": "preview-test"
+                }
+              ],
+              "models": [
+                {
+                  "kind": "azureOpenAI",
+                  "perRequestTokenLimit": 0,
+                  "azureOpenAIParameters": {
+                    "resourceUri": "https://test-sample.openai.azure.com",
+                    "deploymentId": "myDeployment",
+                    "apiKey": "<redacted>",
+                    "modelName": "gpt-4o-mini"
+                  }
+                }
+              ],
+              "requestLimits": {
+                "outputTokenLimit": 100000,
+                "maxRuntimeInSeconds": 60,
+                "maxDegreesOfParallelism": 3
+              }
+            }
+          ]
+        }
+      }
+    }
+  }

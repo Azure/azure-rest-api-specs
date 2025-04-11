@@ -1,0 +1,131 @@
+{
+    "operationId": "KnowledgeAgents_Retrieve",
+    "title": "KnowledgeAgentRetrieve",
+    "parameters": {
+      "endpoint": "https://previewexampleservice.search.windows.net",
+      "agentName": "temp-preview-test",
+      "api-version": "2025-05-01-preview",
+      "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+      "retrievalRequest": {
+        "messages": [
+          {
+            "role": "text",
+            "content": [
+              {
+                "text": "hello world",
+                "type": "text"
+              }
+            ]
+          }
+        ],
+        "targetIndexParams": [
+          {
+            "indexName": "preview-test",
+            "filterAddOn": "foo eq bar",
+            "rerankerThreshold": 2.5,
+            "includeReferenceSourceData": true
+          }
+        ]
+      }
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "response": [
+            {
+              "role": "tool",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "[{...}]"
+                }
+              ]
+            },
+            {
+              "role": "tool",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "[{...}]"
+                }
+              ]
+            }
+          ],
+          "activity": [
+            {
+              "type": "ModelQueryPlanning",
+              "id": 0,
+              "inputTokens": 11,
+              "outputTokens": 22
+            },
+            {
+              "type": "AzureSearchQuery",
+              "id": 1,
+              "targetIndex": "preview-test",
+              "query": {
+                "search": "hello world",
+                "filter": "foo eq bar"
+              },
+              "queryTime": "1/01/2025 12:12:12 AM",
+              "count": 2,
+              "elapsedMs": 1234
+            },
+            {
+              "type": "AzureSearchQuery",
+              "id": 2,
+              "targetIndex": "preview-test",
+              "query": {
+                "search": "hello world",
+                "filter": "foo eq bar"
+              },
+              "queryTime": "1/01/2025 12:12:12 AM",
+              "count": 2,
+              "elapsedMs": 1234
+            }
+          ],
+          "references": [
+            {
+              "type": "AzureSearchDoc",
+              "id": "83dd7d40",
+              "activitySource": 1,
+              "docKey": "id",
+              "sourceData": {
+                "title": "high_doc",
+                "content": "hello world"
+              }
+            },
+            {
+              "type": "AzureSearchDoc",
+              "id": "83dd7d41",
+              "activitySource": 1,
+              "docKey": "id",
+              "sourceData": {
+                "title": "low_doc",
+                "content": "goodbye world"
+              }
+            },
+            {
+              "type": "AzureSearchDoc",
+              "id": "83dd7d42",
+              "activitySource": 2,
+              "docKey": "id",
+              "sourceData": {
+                "title": "high_doc",
+                "content": "hello world"
+              }
+            },
+            {
+              "type": "AzureSearchDoc",
+              "id": "83dd7d43",
+              "activitySource": 2,
+              "docKey": "id",
+              "sourceData": {
+                "title": "low_doc",
+                "content": "goodbye world"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }

@@ -2468,10 +2468,10 @@
           }
         },
         "requestLimits": {
-          "type": "object",
           "$ref": "#/definitions/KnowledgeAgentRequestLimits"
         }
-      }
+      },
+      "required": [ "name", "models", "targetIndexes" ]
     },
     "KnowledgeAgentTargetIndex": {
       "type": "object",
@@ -2480,25 +2480,22 @@
           "type": "string",
           "description": "The name of the target index."
         }
-      }
+      },
+      "required": [ "indexName" ]
     },
     "KnowledgeAgentRequestLimits": {
       "type": "object",
       "properties": {
-        "modelTokenLimit": {
-          "type": "integer",
-          "description": "The token limit for the model."
-        },
-        "rankerTokenLimit": {
+        "rerankerTokenLimit": {
           "type": "integer",
           "description": "The token limit for the ranker."
         },
-        "outputTokensLimit": {
+        "outputTokenLimit": {
           "type": "integer",
           "description": "The token limit for the output."
         },
         "maxRuntimeInSeconds": {
-          "type": "string",
+          "type": "integer",
           "description": "The maximum runtime in seconds."
         },
         "maxDegreesOfParallelism": {
@@ -2508,33 +2505,20 @@
       },
       "description": "Guardrails to limit how much resources are utilized for a single agent retrieval request."
     },
-    "KnowledgeAgentAzureOpenAIModel": {
-      "type": "object",
-      "x-ms-discriminator-value": "azureOpenAI",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentModel"
-        }
-      ],
-      "properties": {
-        "azureOpenAIParameters": {
-          "x-ms-client-name": "AzureOpenAIParameters",
-          "$ref": "#/definitions/AzureOpenAIParameters",
-          "description": "Contains the parameters specific to Azure OpenAI model endpoint"
-        }
-      },
-      "description": "Specifies the Azure OpenAI resource used to do query planning"
-    },
     "ListKnowledgeAgentsResult": {
       "type": "object",
       "properties": {
         "value": {
+          "x-ms-client-name": "KnowledgeAgents",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KnowledgeAgent"
           }
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "KnowledgeAgentModel": {
       "type": "object",
@@ -2542,14 +2526,18 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/KnowledgeAgentModelKind",
-          "description": "The type of AI model",
+          "description": "The type of AI model.",
           "x-nullable": false
+        },
+        "perRequestTokenLimit": {
+          "type": "integer",
+          "description": "An upper bound on the number of tokens to send to a model for one retrieval request."
         }
       },
       "required": [
         "kind"
       ],
-      "description": "Specifies the vectorization method to be used during query time."
+      "description": "Specifies the connection parameters for the model to use for query planning."
     },
     "KnowledgeAgentModelKind": {
       "type": "string",
@@ -2569,71 +2557,41 @@
       },
       "description": "The AI model to be used for query planning."
     },
-    "KnowledgeAgentToolInstructions": {
+    "KnowledgeAgentAzureOpenAIModel": {
       "type": "object",
+      "x-ms-discriminator-value": "azureOpenAI",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentModel"
+        }
+      ],
       "properties": {
-        "description": {
-          "type": "string"
+        "azureOpenAIParameters": {
+          "x-ms-client-name": "AzureOpenAIParameters",
+          "$ref": "#/definitions/AzureOpenAIParameters",
+          "description": "Contains the parameters specific to Azure OpenAI model endpoint."
         }
       },
-      "required": [
-        "description"
-      ]
+      "required": [ "azureOpenAIParameters" ],
+      "description": "Specifies the Azure OpenAI resource used to do query planning."
     },
     "KnowledgeAgentRetrievalRequest": {
       "type": "object",
       "properties": {
-        "message": {
-          "type": "string",
-          "description": "A simple flat string input. Mutually exclusive with messages."
-        },
         "messages": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "role": {
-                "type": "string",
-                "description": "The role of the message sender."
-              },
-              "content": {
-                "type": "string",
-                "description": "The content of the message. Mutually exclusive with multimodalContent."
-              },
-              "multimodalContent": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "description": "The type of the message content."
-                    },
-                    "text": {
-                      "type": "string",
-                      "description": "The text of a string message content."
-                    },
-                    "image": {
-                      "type": "object",
-                      "properties": {
-                        "url": {
-                          "type": "string",
-                          "description": "The url of the image"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "required": [ "role" ]
+            "$ref": "#/definitions/KnowledgeAgentMessage"
           }
         },
-        "includeReferenceSourceData": {
-          "type": "boolean",
-          "description": "Whether to include the source data in the response references."
+        "targetIndexParams": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentIndexParams"
+          }
         }
       },
+      "required": [ "messages" ],
       "description": "The input contract for the retrieval request."
     },
     "KnowledgeAgentRetrievalResponse": {
@@ -2642,39 +2600,7 @@
         "response": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "role": {
-                "type": "string",
-                "description": "The role of the tool response."
-              },
-              "content": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "description": "The type of the message content."
-                    },
-                    "text": {
-                      "type": "string",
-                      "description": "The text of a string message content."
-                    },
-                    "image": {
-                      "type": "object",
-                      "properties": {
-                        "url": {
-                          "type": "string",
-                          "description": "The url of the image"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "required": [ "role", "content" ]
+            "$ref": "#/definitions/KnowledgeAgentMessage"
           }
         },
         "activity": {
@@ -2693,6 +2619,125 @@
         }
       },
       "description": "The output contract for the retrieval response."
+    },
+    "KnowledgeAgentIndexParams": {
+      "type": "object",
+      "properties": {
+        "indexName": {
+          "type": "string",
+          "description": "The name of the index the params apply to."
+        },
+        "filterAddOn": {
+          "type": "string",
+          "description": "A filter condition applied to the index (e.g., 'State eq VA')."
+        },
+        "rerankerThreshold": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 4,
+          "description": "A threshold for reranking results (range: 0-4)."
+        },
+        "includeReferenceSourceData": {
+          "type": "boolean",
+          "description": "Indicates whether reference source data should be included."
+        }
+      }
+    },
+    "KnowledgeAgentMessage": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "The role of the tool response."
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeAgentMessageContent"
+          }
+        }
+      },
+      "required": [ "role", "content" ],
+      "description": "The natural language message style object."
+    },
+    "KnowledgeAgentMessageContent": {
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/KnowledgeAgentMessageContentType",
+          "description": "The type of the message",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Specifies the type of the message content."
+    },
+    "KnowledgeAgentMessageContentType": {
+      "type": "string",
+      "enum": [
+        "text",
+        "image"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeAgentMessageContentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "text",
+            "name": "Text",
+            "description": "Text message content kind."
+          },
+          {
+            "value": "image",
+            "name": "Image",
+            "description": "Image message content kind."
+          }
+        ]
+      },
+      "description": "The type of message content."
+    },
+    "KnowledgeAgentMessageTextContent": {
+      "type": "object",
+      "x-ms-discriminator-value": "text",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentMessageContent"
+        }
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [ "text" ],
+      "description": "Text message type."
+    },
+    "KnowledgeAgentMessageImageContent": {
+      "type": "object",
+      "x-ms-discriminator-value": "image",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeAgentMessageContent"
+        }
+      ],
+      "properties": {
+        "image": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The url of the image."
+            }
+          },
+          "required": [ "url" ]
+        }
+      },
+      "required": [ "image" ],
+      "description": "Text message type."
     },
     "KnowledgeAgentActivityRecord": {
       "type": "object",
@@ -2726,7 +2771,7 @@
           "properties": {
             "search": {
               "type": "string",
-              "description": "The search string"
+              "description": "The search string."
             }
           },
           "description": "The query details for the retrieval activity."
@@ -2735,7 +2780,7 @@
           "type": "integer",
           "description": "The count of documents retrieved."
         },
-        "ellapsedMs": {
+        "elapsedMs": {
           "type": "integer",
           "description": "The elapsed time in milliseconds for the retrieval activity."
         }
@@ -2757,7 +2802,7 @@
           "type": "integer",
           "description": "The number of output tokens for the LLM query planning activity."
         },
-        "ellapsedMs": {
+        "elapsedMs": {
           "type": "integer",
           "description": "The elapsed time in milliseconds for the model activity."
         }
@@ -2775,7 +2820,7 @@
           "type": "integer",
           "description": "The number of input tokens for the semantic ranker activity."
         },
-        "ellapsedMs": {
+        "elapsedMs": {
           "type": "integer",
           "description": "The elapsed time in milliseconds for the model activity."
         }
@@ -2813,38 +2858,12 @@
           "type": "string",
           "description": "The document key for the reference."
         },
-        "slices": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "charOffsets": {
-                "type": "array",
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "type": "integer"
-                  }
-                },
-                "description": "Optional character offsets within retrieved field."
-              },
-              "pointer": {
-                "type": "string",
-                "description": "Json pointer describing where in the document the data came from"
-              },
-              "sasUri": {
-                "type": "string",
-                "description": "The SAS URI for the Azure Search asset reference."
-              }
-            }
-          }
-        },
         "sourceData": {
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": true
         }
       },
-      "description": "Represents an Azure Search reference."
+      "description": "Represents an Azure Search document reference."
     },
     "AnalyzeRequest": {
       "type": "object",
