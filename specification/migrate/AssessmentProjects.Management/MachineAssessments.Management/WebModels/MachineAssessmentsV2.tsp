@@ -62,4 +62,7 @@ model MachineAssessmentSettings is AssessmentSettings {
     environment.
     """)
   vmUptime?: VmUptime;
+
+  @doc("Gets or sets the Azure VM security options.")
+  azureVmSecurityOptions?: AzureVmSecurityType[];
 }
