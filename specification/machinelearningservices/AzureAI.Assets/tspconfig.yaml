@@ -24,26 +24,6 @@ options:
     packageDetails:
       name: "@azure/ai-resources-autogen"
     flavor: azure
-  "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-machinelearning"
-    namespace: "com.azure.resourcemanager.machinelearning"
-    flavor: azure
-  "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/machinelearning"
-    package-dir: "az.armmachinelearning"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    fix-const-stuttering: true
-    flavor: "azure"
-    generate-samples: true
-    generate-fakes: true
-    head-as-boolean: true
-    inject-spans: true
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.MachineLearning"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
