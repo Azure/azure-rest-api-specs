@@ -1,0 +1,526 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2025-05-04-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Security/assessmentMetadata": {
+      "get": {
+        "x-ms-examples": {
+          "List security assessment metadata": {
+            "$ref": "./examples/AssessmentsMetadata/ListAssessmentsMetadata_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Get metadata information on all assessment types",
+        "operationId": "AssessmentsMetadata_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security assessment metadata": {
+            "$ref": "./examples/AssessmentsMetadata/GetAssessmentsMetadata_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Get metadata information on an assessment type",
+        "operationId": "AssessmentsMetadata_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata": {
+      "get": {
+        "x-ms-examples": {
+          "List security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/ListAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Get metadata information on all assessment types in a specific subscription",
+        "operationId": "AssessmentsMetadataSubscription_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentMetadata/{assessmentMetadataName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/GetAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Get metadata information on an assessment type in a specific subscription",
+        "operationId": "AssessmentsMetadataSubscription_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/CreateAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Create metadata information on an assessment type in a specific subscription",
+        "operationId": "AssessmentsMetadataSubscription_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/SecurityAssessmentMetadata"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/DeleteAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Delete metadata information on an assessment type in a specific subscription, will cause the deletion of all the assessments of that type in that subscription",
+        "operationId": "AssessmentsMetadataSubscription_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SecurityAssessmentMetadataList": {
+      "type": "object",
+      "description": "List of security assessment metadata",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAssessmentMetadata"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "SecurityAssessmentMetadata": {
+      "type": "object",
+      "description": "Security assessment metadata",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecurityAssessmentMetadataProperties": {
+      "type": "object",
+      "description": "Describes properties of an assessment metadata.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "User friendly display name of the assessment"
+        },
+        "policyDefinitionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource ID of the policy definition that turns this assessment calculation on"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human readable description of the assessment"
+        },
+        "remediationDescription": {
+          "type": "string",
+          "description": "Human readable description of what you should do to mitigate this security issue"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The categories of resource that is at risk when the assessment is unhealthy",
+            "enum": [
+              "Compute",
+              "Networking",
+              "Data",
+              "IdentityAndAccess",
+              "IoT",
+              "Container",
+              "AppServices"
+            ],
+            "x-ms-enum": {
+              "name": "categories",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Compute"
+                },
+                {
+                  "value": "Networking"
+                },
+                {
+                  "value": "Data"
+                },
+                {
+                  "value": "IdentityAndAccess"
+                },
+                {
+                  "value": "IoT"
+                },
+                {
+                  "value": "Container"
+                },
+                {
+                  "value": "AppServices"
+                }
+              ]
+            }
+          }
+        },
+        "severity": {
+          "type": "string",
+          "description": "The severity level of the assessment",
+          "enum": [
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "severity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              },
+              {
+                "value": "Critical"
+              }
+            ]
+          }
+        },
+        "threats": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Threats impact of the assessment",
+            "enum": [
+              "accountBreach",
+              "dataExfiltration",
+              "dataSpillage",
+              "maliciousInsider",
+              "elevationOfPrivilege",
+              "threatResistance",
+              "missingCoverage",
+              "denialOfService"
+            ],
+            "x-ms-enum": {
+              "name": "threats",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "accountBreach"
+                },
+                {
+                  "value": "dataExfiltration"
+                },
+                {
+                  "value": "dataSpillage"
+                },
+                {
+                  "value": "maliciousInsider"
+                },
+                {
+                  "value": "elevationOfPrivilege"
+                },
+                {
+                  "value": "threatResistance"
+                },
+                {
+                  "value": "missingCoverage"
+                },
+                {
+                  "value": "denialOfService"
+                }
+              ]
+            }
+          }
+        },
+        "preview": {
+          "type": "boolean",
+          "description": "True if this assessment is in preview release status"
+        },
+        "assessmentType": {
+          "type": "string",
+          "description": "BuiltIn if the assessment based on built-in Azure Policy definition, Custom if the assessment based on custom Azure Policy definition",
+          "enum": [
+            "Unknown",
+            "BuiltIn",
+            "Custom",
+            "CustomPolicy",
+            "CustomerManaged",
+            "BuiltInPolicy",
+            "VerifiedPartner",
+            "ManualBuiltInPolicy",
+            "ManualBuiltIn",
+            "ManualCustomPolicy",
+            "DynamicBuiltIn"
+          ],
+          "x-ms-enum": {
+            "name": "assessmentType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "BuiltIn",
+                "description": "Microsoft Defender for Cloud managed assessments"
+              },
+              {
+                "value": "CustomPolicy",
+                "description": "User defined policies that are automatically ingested from Azure Policy to Microsoft Defender for Cloud"
+              },
+              {
+                "value": "CustomerManaged",
+                "description": "User assessments pushed directly by the user or other third party to Microsoft Defender for Cloud"
+              },
+              {
+                "value": "BuiltInPolicy",
+                "description": "Microsoft Defender for Cloud managed policies"
+              },
+              {
+                "value": "VerifiedPartner",
+                "description": "Third party assessments that are verified by Microsoft Defender for Cloud"
+              },
+              {
+                "value": "ManualBuiltInPolicy",
+                "description": "Microsoft Defender for Cloud managed policies that are manually created by the user"
+              },
+              {
+                "value": "ManualBuiltIn",
+                "description": "Microsoft Defender for Cloud managed assessments that are manually created by the user"
+              },
+              {
+                "value": "ManualCustomPolicy",
+                "description": "User defined policies that are manually created by the user"
+              },
+              {
+                "value": "DynamicBuiltIn",
+                "description": "Microsoft Defender for Cloud managed assessments that are dynamically created by the system"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "displayName",
+        "severity",
+        "assessmentType"
+      ]
+    }
+  },
+  "parameters": {
+    "AssessmentsMetadataName": {
+      "name": "assessmentMetadataName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Assessment Key - Unique key for the assessment type",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityAssessmentMetadata": {
+      "name": "assessmentMetadata",
+      "in": "body",
+      "required": true,
+      "description": "AssessmentMetadata object",
+      "schema": {
+        "$ref": "#/definitions/SecurityAssessmentMetadata"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

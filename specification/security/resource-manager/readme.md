@@ -106,6 +106,26 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2025-05-04-preview
+
+These settings apply only when `--tag=package-preview-2025-05-04-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-05-04-preview'
+input-file:
+  - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
+  - Microsoft.Security/preview/2025-05-04-preview/assessments.json
+suppressions:
+  - code: OperationsAPIImplementation
+    from: assessmentMetadata.json
+    reason: Suppression of OperationsAPI as it doesn't apply to this specific file.
+  - code: AvoidAdditionalProperties
+    from: assessments.json
+    reason: This is a property used across all API versions. changing it would be a breaking change, and is required for the SDK.
+  - code: NOT_LATEST_API_VERSION_IN_DEFAULT_TAG
+    from: assessmentMetadata.json
+    reason: API updates for Assessments and AssessmentMetadata only, cannot replace default tag.
+  ```
+
 ### Tag: package-2025-03
 These settings apply only when `--tag=package-2025-03` is specified on the command line.
 
