@@ -702,8 +702,8 @@ model MessageTemplateItem {
 alias CommonListParams = {
   @doc("Number of objects to return per page.")
   @query
-  @clientName("maxPageSize")
-  maxpagesize?: int32;
+  @renamedFrom(Versions.c2025_04_01_Preview, "maxpagesize")
+  maxPageSize?: int32;
 };
 
 alias ListTemplatesQueryParams = ListQueryParametersTrait<{
