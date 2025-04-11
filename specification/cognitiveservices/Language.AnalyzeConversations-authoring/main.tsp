@@ -8,7 +8,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./routes.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 /**
@@ -59,4 +58,10 @@ enum Versions {
    */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_11_15_preview: "2024-11-15-preview",
+
+  /**
+   * The 2025-05-15-preview API version.
+   */
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2025_05_15_preview: "2025-05-15-preview",
 }
