@@ -37,6 +37,12 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
   - Microsoft.SentinelPlatformServices/preview/2025-04-01-preview/sentinelplatformservices.json
+
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: sentinelplatformservices.json
+    where: $.definitions["Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
+    reason: Swagger Lint Diff false positive
 ```
 
 ---
