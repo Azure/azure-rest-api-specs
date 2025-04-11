@@ -30,9 +30,26 @@ openapi-subtype: rpaas
 tag: package-2022-12-01
 ```
 
+### Tag: package-2025-07-01-preview
+These settings apply only when `--tag=2025-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01-preview'
+input-file:
+  - Azure.Testing.Management/preview/2025-07-01-preview/playwrightservice.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: playwrightservice.json
+    reason: Seems like a tool bug, as the operations are generated automatically from the TrackedResourceOperations in the TypeSpec which should OmitDefaults for Patch. We want the default property values to be visible for other operations like Put and Get if they're not explicitly set by the end-user.
+  - code: DeleteResponseCodes
+    from: playwrightservice.json
+    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/workspaces/{workspaceName}"].delete
+```
+
 ### Tag: package-2024-12-01-preview
 
-These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-12-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
