@@ -45,7 +45,6 @@ op listFiles is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/no-operation-id" "non-standard operations"
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
 #suppress "@azure-tools/typespec-azure-core/byos" "mirrored API"
-#suppress "deprecated" "Legacy multipart TO MIGRATE NEXT SPRINT"
 @post
 @route("/files")
 op uploadFile is Azure.Core.Foundations.Operation<
@@ -54,22 +53,25 @@ op uploadFile is Azure.Core.Foundations.Operation<
     @header
     contentType: "multipart/form-data";
 
-    @doc("The file data, in bytes.")
-    @clientName("Data", "csharp")
-    file: bytes;
-
-    @doc("The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.")
-    purpose: FilePurpose;
-
-    /*
-     * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
-     *            in the multipart Content-Disposition header for the data section and can be provided independently of
-     *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
-     *            file input, like curl does) but should remain configurable when using a stream or other data source
-     *            lacking an a priori name.
-     */
-    @doc("The name of the file.")
-    filename?: string;
+    /** Multipart body */
+    @multipartBody body: {
+      @doc("The file data, in bytes.")
+      @clientName("Data", "csharp")
+      file: HttpPart<File>;
+  
+      @doc("The intended purpose of the uploaded file. Use `assistants` for Agents and Message files, `vision` for Agents image file inputs, `batch` for Batch API, and `fine-tune` for Fine-tuning.")
+      purpose: HttpPart<FilePurpose>;
+  
+      /*
+       * Spec note: filename is not documented as a distinct option but functionally should be one. The value is encoded
+       *            in the multipart Content-Disposition header for the data section and can be provided independently of
+       *            any specific data source like a file. It can be inferred in some circumstances (as when using direct
+       *            file input, like curl does) but should remain configurable when using a stream or other data source
+       *            lacking an a priori name.
+       */
+      @doc("The name of the file.")
+      filename?: HttpPart<string>;
+    };
   },
   OpenAIFile
 >;
