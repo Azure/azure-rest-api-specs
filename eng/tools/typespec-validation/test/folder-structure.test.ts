@@ -1,9 +1,21 @@
-import { describe, it } from "vitest";
+import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
 
+import * as utils from "../src/utils.js";
+
 describe("folder-structure", function () {
+  let fileExistsSpy: MockInstance;
+
+  beforeEach(() => {
+    fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+  });
+
+  afterEach(() => {
+    fileExistsSpy.mockReset();
+  });
+
   it("should fail if tspconfig has incorrect extension", async function () {
     let host = new TsvTestHost();
     host.globby = async () => {
@@ -138,14 +150,15 @@ describe("folder-structure", function () {
     host.normalizePath = () => {
       return "/gitroot";
     };
-    host.checkFileExists = async (file: string) => {
+    
+    fileExistsSpy.mockImplementation(async (file: string) => {
       if (file.includes("main.tsp")) {
         return false;
       } else if (file.includes("client.tsp")) {
         return false;
       }
       return true;
-    };
+    });
 
     const result = await new FolderStructureRule().execute(
       host,
@@ -164,14 +177,15 @@ describe("folder-structure", function () {
     host.normalizePath = () => {
       return "/gitroot";
     };
-    host.checkFileExists = async (file: string) => {
+
+    fileExistsSpy.mockImplementation(async (file: string) => {
       if (file.includes("main.tsp")) {
         return true;
       } else if (file.includes("examples")) {
         return false;
       }
       return true;
-    };
+    });
 
     const result = await new FolderStructureRule().execute(
       host,
@@ -190,12 +204,13 @@ describe("folder-structure", function () {
     host.normalizePath = () => {
       return "/gitroot";
     };
-    host.checkFileExists = async (file: string) => {
+
+    fileExistsSpy.mockImplementation(async (file: string) => {
       if (file.includes("tspconfig.yaml")) {
         return false;
       }
       return true;
-    };
+    });
 
     const result = await new FolderStructureRule().execute(
       host,

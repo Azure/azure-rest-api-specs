@@ -1,10 +1,22 @@
-import { describe, it } from "vitest";
+import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 import { join } from "path";
 import { LinterRulesetRule } from "../src/rules/linter-ruleset.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
 
+import * as utils from "../src/utils.js";
+
 describe("linter-ruleset", function () {
+  let fileExistsSpy: MockInstance;
+
+  beforeEach(() => {
+    fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+  });
+
+  afterEach(() => {
+    fileExistsSpy.mockReset();
+  });
+
   it("succeeds with default config", async function () {
     const host = new TsvTestHost();
     const result = await new LinterRulesetRule().execute(host, TsvTestHost.folder);
@@ -41,12 +53,16 @@ linter:
 
   it("succeeds with client.tsp/data-plane", async function () {
     const host = new TsvTestHost();
-    host.checkFileExists = async (file: string) => file === join(TsvTestHost.folder, "client.tsp");
     host.readTspConfig = async (_folder: string) => `
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 `;
+
+    fileExistsSpy.mockImplementation(
+      async (file: string) => file === join(TsvTestHost.folder, "client.tsp")
+    );
+
     const result = await new LinterRulesetRule().execute(host, TsvTestHost.folder);
     assert(result.success);
   });

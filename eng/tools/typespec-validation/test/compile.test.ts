@@ -1,14 +1,26 @@
 import path from "path";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
 import { RuleResult } from "../src/rule-result.js";
 import { CompileRule } from "../src/rules/compile.js";
 import { TsvHost } from "../src/tsv-host.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 
+import * as utils from "../src/utils.js";
+
 const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
 
 describe("compile", function () {
+  let fileExistsSpy: MockInstance;
+
+  beforeEach(() => {
+    fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+  });
+
+  afterEach(() => {
+    fileExistsSpy.mockReset();
+  });
+
   it("should succeed if project can compile", async function () {
     const host = new TsvTestHost();
 
