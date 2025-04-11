@@ -34,6 +34,7 @@ alias ListEvaluationResultsParameters = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
+@visibility("internal")
 interface EvaluationResults
   extends ServicePatterns.VersionedOperations<
       EvaluationResult,
