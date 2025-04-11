@@ -1,6 +1,11 @@
 import { test, describe, expect } from "vitest";
 
-import { AutorestRunResult, LintDiffViolation, Source, BeforeAfter } from "../src/types.js";
+import {
+  AutorestRunResult,
+  LintDiffViolation,
+  Source,
+  BeforeAfter,
+} from "../src/lintdiff-types.js";
 import {
   getViolations,
   getLintDiffViolations,

@@ -3,15 +3,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientNamespace(Neon.Postgres,
-  "com.azure.resourcemanager.neonpostgres",
-  "java"
-);
-@@clientNamespace(LiftrBase, "com.azure.resourcemanager.neonpostgres", "java");
-@@clientNamespace(LiftrBase.Data,
-  "com.azure.resourcemanager.neonpostgres",
-  "java"
-);
 @@clientName(Neon.Postgres, "NeonPostgresMgmtClient", "python");
 @@clientName(Neon.Postgres, "NeonPostgresManagementClient", "java");
 @@clientName(Neon.Postgres.OrganizationResource, "NeonOrganization", "csharp");
