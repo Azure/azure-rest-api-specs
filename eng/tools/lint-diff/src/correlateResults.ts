@@ -1,7 +1,7 @@
 import { basename, join } from "path";
 import { readFile } from "fs/promises";
 import { relativizePath, pathExists } from "./util.js";
-import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./types.js";
+import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./lintdiff-types.js";
 import { getDefaultTag } from "./markdown-utils.js";
 
 export async function correlateRuns(
