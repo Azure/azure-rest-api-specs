@@ -8,7 +8,8 @@ export interface TsvHost {
   gitOperation(folder: string): IGitOperation;
   readTspConfig(folder: string): Promise<string>;
   readFile(path: string): Promise<string>;
-  runCmd(cmd: string, cwd?: string): Promise<[Error | null, string, string]>;
+  runFile(file: string, args: string[], cwd?: string): Promise<[Error | null, string, string]>;
+  runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]>;
   normalizePath(folder: string): string;
   gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult>;
   globby(patterns: string | string[], options?: GlobbyOptions): Promise<string[]>;
