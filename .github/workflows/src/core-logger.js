@@ -1,7 +1,7 @@
 // @ts-check
 
 /**
- * @typedef {import('../../shared/src/types.js').ILogger} ILogger
+ * @typedef {import('../../shared/src/logger.js').ILogger} ILogger
  */
 
 /**
@@ -23,6 +23,13 @@ export class CoreLogger {
    */
   debug(message) {
     this.#core.debug(message);
+  }
+
+  /**
+   * @param {string} message
+   */
+  error(message) {
+    this.#core.error(message);
   }
 
   /**
