@@ -63,7 +63,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-typescript
 ```
 
@@ -86,10 +85,6 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-## Typescript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## 
 

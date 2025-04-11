@@ -83,10 +83,6 @@ See configuration in [readme.python.md](./readme.python.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
 ## Suppression
 
 ```yaml
