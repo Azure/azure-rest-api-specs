@@ -1,0 +1,84 @@
+{
+  "title": "CreateOrUpdateMetric_Sum",
+  "operationId": "CreateOrUpdateMetric",
+  "parameters": {
+    "experimentMetricId": "sum_revenue",
+    "api-version": "2025-05-31-preview",
+    "If-Match": "vxexdn",
+    "If-None-Match": "ijchzdh",
+    "If-Unmodified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "If-Modified-Since": "Thu, 22 Aug 2024 02:02:11 GMT",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "resource": {
+      "displayName": "Total revenue [USD]",
+      "description": "The total revenue in USD. Refund transactions contribute negatively to this metric.",
+      "lifecycle": "Active",
+      "categories": [
+        "Monetization",
+        "Important"
+      ],
+      "desiredDirection": "Increase",
+      "definition": {
+        "type": "Sum",
+        "value": {
+          "eventName": "Transaction",
+          "eventProperty": "Revenue"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "sum_revenue",
+        "displayName": "Total revenue [USD]",
+        "description": "The total revenue in USD. Refund transactions contribute negatively to this metric.",
+        "lifecycle": "Active",
+        "categories": [
+          "Monetization",
+          "Important"
+        ],
+        "desiredDirection": "Increase",
+        "definition": {
+          "type": "Sum",
+          "value": {
+            "eventName": "Transaction",
+            "eventProperty": "Revenue"
+          }
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "ETag",
+        "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "sum_revenue",
+        "displayName": "Total revenue [USD]",
+        "description": "The total revenue in USD. Refund transactions contribute negatively to this metric.",
+        "lifecycle": "Active",
+        "categories": [
+          "Monetization",
+          "Important"
+        ],
+        "desiredDirection": "Increase",
+        "definition": {
+          "type": "Sum",
+          "value": {
+            "eventName": "Transaction",
+            "eventProperty": "Revenue"
+          }
+        },
+        "eTag": "ckswkavwgassdlocwuzxz",
+        "lastModifiedAt": "2024-08-28T20:27:13.652Z"
+      }
+    }
+  }
+}
