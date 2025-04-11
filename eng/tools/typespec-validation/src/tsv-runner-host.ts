@@ -54,7 +54,7 @@ export class TsvRunnerHost implements TsvHost {
             process.execPath,
 
             // example: "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"
-            [join("--", dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js")],
+            ["--", join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js")],
           ]
         : ["npm", []];
 
