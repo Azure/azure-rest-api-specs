@@ -317,7 +317,7 @@ op createOrUpdateMetric is Operations.ResourceCreateOrUpdate<ExperimentMetric>;
 
 @doc("Validates an experiment metric definition.")
 @action("validate")
-op validateMetric is Operations.ResourceAction<
+op validateMetric is Operations.ResourceCollectionAction<
   ExperimentMetric,
   BodyParameter<ExperimentMetric, "Experiment metric input to validate">,
   ExperimentMetricValidationResult,

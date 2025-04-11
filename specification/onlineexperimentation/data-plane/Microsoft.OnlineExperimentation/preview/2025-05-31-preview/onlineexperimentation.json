@@ -364,23 +364,13 @@
         }
       }
     },
-    "/experiment-metrics/{experimentMetricId}:validate": {
+    "/experiment-metrics:validate": {
       "post": {
         "operationId": "ValidateMetric",
         "description": "Validates an experiment metric definition.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "experimentMetricId",
-            "in": "path",
-            "description": "Identifier for this experiment metric. Must start with a lowercase letter and contain only lowercase letters, numbers, and underscores.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 50,
-            "pattern": "^[a-z_][a-z0-9_]*$"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
