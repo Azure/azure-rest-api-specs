@@ -54,10 +54,6 @@ export class TsvTestHost implements TsvHost {
     return this.runFile(file, [...defaultArgs, ...args], cwd);
   }
 
-  async checkFileExists(_file: string): Promise<boolean> {
-    return true;
-  }
-
   async isDirectory(_path: string): Promise<boolean> {
     return true;
   }

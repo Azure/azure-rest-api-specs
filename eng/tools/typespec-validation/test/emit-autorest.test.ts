@@ -1,13 +1,28 @@
-import { describe, it } from "vitest";
 import { join } from "path";
+import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 import { EmitAutorestRule } from "../src/rules/emit-autorest.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
 
+import * as utils from "../src/utils.js";
+
 describe("emit-autorest", function () {
+  let fileExistsSpy: MockInstance;
+
+  beforeEach(() => {
+    fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+  });
+
+  afterEach(() => {
+    fileExistsSpy.mockReset();
+  });
+
   it("should succeed if no main.tsp", async function () {
     let host = new TsvTestHost();
-    host.checkFileExists = async (file: string) => file != join(TsvTestHost.folder, "main.tsp");
+
+    fileExistsSpy.mockImplementation(
+      async (file: string) => file != join(TsvTestHost.folder, "main.tsp"),
+    );
 
     const result = await new EmitAutorestRule().execute(host, TsvTestHost.folder);
 
