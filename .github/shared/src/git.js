@@ -3,7 +3,7 @@
 import { execFile } from "./exec.js";
 
 /**
- * @typedef {import('./types.js').ILogger} ILogger
+ * @typedef {import('./logger.js').ILogger} ILogger
  */
 
 /**
