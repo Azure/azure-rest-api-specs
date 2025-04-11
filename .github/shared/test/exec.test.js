@@ -1,13 +1,11 @@
-import { EOL } from "os";
 import { describe, expect, it } from "vitest";
 import { execFile } from "../src/exec.js";
 import { createMockLogger } from "./mocks.js";
 
 describe("execFile", () => {
-  const str = "test";
   const file = "node";
-  const args = ["-e", `console.log("${str}")`];
-  const expected = `${str}${EOL}`;
+  const args = ["-e", `console.log("test")`];
+  const expected = "test\n";
 
   it.each([{}, { logger: createMockLogger() }])(
     "exec succeeds with default buffer (options: %o)",
