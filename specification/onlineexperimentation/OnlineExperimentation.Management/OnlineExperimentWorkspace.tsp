@@ -19,7 +19,10 @@ model OnlineExperimentWorkspace
     SegmentName = "workspaces"
   >;
   ...ManagedServiceIdentityProperty;
-  ...ResourceSkuProperty;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The common types sku doesn't support Developer tier."
+  @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+  sku?: OnlineExperimentationWorkspaceSku;
 }
 
 @armResourceOperations
