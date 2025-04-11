@@ -605,6 +605,60 @@
         }
       }
     },
+    "/datasets/{name}/versions/{version}/credentials": {
+      "post": {
+        "operationId": "Datasets_GetCredentials",
+        "description": "Get download sas for dataset version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the DatasetVersion to operate on.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters for the action",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetCredentialResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/datasets/{name}/versions/{version}/startPendingUpload": {
       "post": {
         "operationId": "Datasets_StartPendingUploadVersion",
@@ -1402,6 +1456,19 @@
         }
       ],
       "x-ms-discriminator-value": "ApiKey"
+    },
+    "AssetCredentialResponse": {
+      "type": "object",
+      "description": "Represents a reference to a blob for consumption",
+      "properties": {
+        "blobReferenceForConsumption": {
+          "$ref": "#/definitions/BlobReferenceForConsumption",
+          "description": "Credential info to access the storage account."
+        }
+      },
+      "required": [
+        "blobReferenceForConsumption"
+      ]
     },
     "AttackStrategy": {
       "type": "string",
