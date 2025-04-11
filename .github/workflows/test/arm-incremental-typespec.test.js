@@ -57,7 +57,7 @@ describe("incrementalTypeSpec", () => {
       "HEAD^",
       specDir,
       expect.objectContaining({
-        args: "-r --name-only",
+        args: ["-r", "--name-only"],
       }),
     );
   });
@@ -145,7 +145,7 @@ describe("incrementalTypeSpec", () => {
     expect(lsTreeSpy).toBeCalledWith(
       "HEAD^",
       specDir,
-      expect.objectContaining({ args: "-r --name-only" }),
+      expect.objectContaining({ args: ["-r", "--name-only"] }),
     );
   });
 
@@ -197,7 +197,7 @@ describe("incrementalTypeSpec", () => {
       "HEAD^",
       specDir,
       expect.objectContaining({
-        args: "-r --name-only",
+        args: ["-r", "--name-only"],
       }),
     );
   });
@@ -235,7 +235,7 @@ describe("incrementalTypeSpec", () => {
     expect(lsTreeSpy).toHaveBeenCalledWith(
       "HEAD^",
       specDir,
-      expect.objectContaining({ args: "-r --name-only" }),
+      expect.objectContaining({ args: ["-r", "--name-only"] }),
     );
   });
 
@@ -261,7 +261,7 @@ describe("incrementalTypeSpec", () => {
     expect(lsTreeSpy).toHaveBeenCalledWith(
       "HEAD^",
       specDir,
-      expect.objectContaining({ args: "-r --name-only" }),
+      expect.objectContaining({ args: ["-r", "--name-only"] }),
     );
   });
 });
