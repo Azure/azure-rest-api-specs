@@ -1,5 +1,5 @@
-import { sdkLabels } from "@azure-tools/specs-shared/sdk-types";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { sdkLabels } from "../../shared/src/sdk-types.js";
 import { LabelAction } from "../src/label.js";
 import {
   getLabelAndAction,
