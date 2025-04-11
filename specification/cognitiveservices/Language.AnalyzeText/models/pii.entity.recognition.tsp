@@ -21,7 +21,7 @@ model AnalyzeTextPiiEntitiesRecognitionInput extends AnalyzeTextTask {
 
 /** Supported parameters for a PII Entities Recognition task. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PiiTaskParameters is PreBuiltTaskParameters {
+model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   /** Domain for PII task */
   domain?: PiiDomain = PiiDomain.none;
 

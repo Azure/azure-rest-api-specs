@@ -451,8 +451,20 @@ model TaskParameters {
   loggingOptOut?: boolean = false;
 }
 
+/** Base parameters object for a text analysis task. with logging Opt out*/
+model TaskParametersLoggingOptOut {
+  /** logging opt out */
+  loggingOptOut?: boolean = true;
+}
+
 /** Parameters object for a text analysis task using pre-built models. */
 model PreBuiltTaskParameters is TaskParameters {
+  /** model version */
+  modelVersion?: string = "latest";
+}
+
+/** Parameters object for a text analysis task using pre-built models. */
+model PreBuiltTaskParametersLoggingOptOut is TaskParametersLoggingOptOut {
   /** model version */
   modelVersion?: string = "latest";
 }
