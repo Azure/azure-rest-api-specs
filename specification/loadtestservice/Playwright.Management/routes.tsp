@@ -9,6 +9,9 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
 interface PlaywrightWorkspaces
-  extends TrackedResourceOperations<PlaywrightWorkspace, PlaywrightWorkspaceProperties> {
+  extends TrackedResourceOperations<
+      PlaywrightWorkspace,
+      PlaywrightWorkspaceProperties
+    > {
   checkNameAvailability is checkGlobalNameAvailability;
 }

@@ -44,7 +44,7 @@ suppressions:
     from: playwright.json
     reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/workspaces/{workspaceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/playwrightWorkspaces/{playwrightWorkspaceName}"].delete
 ```
 
 ### Tag: package-2024-12-01-preview
