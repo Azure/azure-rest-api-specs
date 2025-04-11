@@ -1,4 +1,5 @@
 import { ParseArgsConfig, parseArgs } from "node:util";
+import { stat } from "node:fs/promises";
 import { Suppression } from "suppressions";
 import { CompileRule } from "./rules/compile.js";
 import { EmitAutorestRule } from "./rules/emit-autorest.js";
@@ -28,7 +29,7 @@ export async function main() {
     console.log(`Folder ${absolutePath} does not exist`);
     process.exit(1);
   }
-  if (!(await host.isDirectory(absolutePath))) {
+  if (!(await stat(absolutePath)).isDirectory()) {
     console.log(`Please run TypeSpec Validation on a directory path`);
     process.exit(1);
   }

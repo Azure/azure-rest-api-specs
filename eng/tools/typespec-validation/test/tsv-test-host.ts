@@ -54,10 +54,6 @@ export class TsvTestHost implements TsvHost {
     return this.runFile(file, [...defaultArgs, ...args], cwd);
   }
 
-  async isDirectory(_path: string): Promise<boolean> {
-    return true;
-  }
-
   normalizePath(folder: string): string {
     return normalizePath(folder, this.path);
   }

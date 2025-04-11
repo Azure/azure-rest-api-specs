@@ -33,10 +33,6 @@ export async function fileExists(file: string) {
     .catch(() => false);
 }
 
-export async function isDirectory(path: string) {
-  return (await stat(path)).isDirectory();
-}
-
 export function normalizePath(folder: string, path: PlatformPath = defaultPath) {
   return path
     .resolve(folder)

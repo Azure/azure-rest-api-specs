@@ -5,18 +5,9 @@ import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 import { RuleResult } from "./rule-result.js";
 import { IGitOperation, TsvHost } from "./tsv-host.js";
-import {
-  gitDiffTopSpecFolder,
-  isDirectory,
-  normalizePath,
-  runFile,
-} from "./utils.js";
+import { gitDiffTopSpecFolder, normalizePath, runFile } from "./utils.js";
 
 export class TsvRunnerHost implements TsvHost {
-  isDirectory(path: string) {
-    return isDirectory(path);
-  }
-
   gitOperation(folder: string): IGitOperation {
     return simpleGit(folder);
   }
