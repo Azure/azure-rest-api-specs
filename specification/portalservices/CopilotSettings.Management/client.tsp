@@ -6,4 +6,5 @@ using Microsoft.PortalServices;
 
 @@clientName(Microsoft.PortalServices,
   "PortalServicesManagementClient",
-  "java");
+  "java"
+);
