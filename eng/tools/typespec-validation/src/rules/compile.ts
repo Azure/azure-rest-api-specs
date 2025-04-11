@@ -4,7 +4,7 @@ import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
-import { filterAsync, npmFile } from "../utils.js";
+import { filterAsync } from "../utils.js";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -16,8 +16,7 @@ export class CompileRule implements Rule {
     let errorOutput = "";
 
     if (await host.checkFileExists(path.join(folder, "main.tsp"))) {
-      let [err, stdout, stderr] = await host.runFile(
-        npmFile,
+      let [err, stdout, stderr] = await host.runNpm(
         ["exec", "--no", "--", "tsp", "compile", "--list-files", "--warn-as-error", folder],
       );
 
@@ -170,8 +169,7 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (await host.checkFileExists(clientTsp)) {
-      let [err, stdout, stderr] = await host.runFile(
-        npmFile,
+      let [err, stdout, stderr] = await host.runNpm(
         ["exec", "--no", "--", "tsp", "compile", "--no-emit", "--warn-as-error", clientTsp]
       );
       if (err) {

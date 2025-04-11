@@ -36,12 +36,20 @@ export class TsvTestHost implements TsvHost {
     };
   }
 
-  async runFile(file: string, args: string[], cwd: string): Promise<[Error | null, string, string]> {
+  async runFile(file: string, args: string[], cwd?: string): Promise<[Error | null, string, string]> {
     let err = null;
     let stdout = `default ${file} ${args.join(" ")} at ${cwd}`;
     let stderr = "";
 
     return [err, stdout, stderr];
+  }
+
+  async runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]> {
+    const [file, defaultArgs] = process.platform === "win32" ?
+      ["cmd.exe", ["/c", "npm"]] :
+      ["npm", []];
+
+    return this.runFile(file, [...defaultArgs, ...args], cwd);
   }
 
   async checkFileExists(_file: string): Promise<boolean> {

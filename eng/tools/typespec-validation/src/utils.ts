@@ -11,9 +11,6 @@ export async function filterAsync<T>(
   return array.filter((_, index) => filterResults[index]);
 }
 
-/** "npm.cmd" or "npm", based on platform */
-export const npmFile: string = process.platform === "win32" ? "npm.cmd" : "npm";
-
 export async function runFile(file: string, args: string[], cwd?: string) {
   console.log(`run command:${file} ${args.join(' ')}`);
   const { err, stdout, stderr } = (await new Promise((res) =>

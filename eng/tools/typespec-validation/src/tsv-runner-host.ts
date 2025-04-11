@@ -34,8 +34,16 @@ export class TsvRunnerHost implements TsvHost {
     return readFileImpl(path, "utf-8");
   }
 
-  runFile(file: string, args: string[], cwd: string): Promise<[Error | null, string, string]> {
+  runFile(file: string, args: string[], cwd?: string): Promise<[Error | null, string, string]> {
     return runFile(file, args, cwd);
+  }
+
+  runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]> {
+    const [file, defaultArgs] = process.platform === "win32" ?
+      ["cmd.exe", ["/c", "npm"]] :
+      ["npm", []];
+
+      return this.runFile(file, [...defaultArgs, ...args], cwd);
   }
 
   normalizePath(folder: string): string {
