@@ -1469,10 +1469,7 @@
           "description": "Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'."
         },
         "@search.documentDebugInfo": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentDebugInfo"
-          },
+          "$ref": "#/definitions/DocumentDebugInfo",
           "readOnly": true,
           "x-ms-client-name": "DocumentDebugInfo",
           "x-nullable": true,
@@ -1780,7 +1777,7 @@
         "perDocumentVectorLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched."
+          "description": "Controls how many vectors can be matched from each document in a vector search query. Setting it to 1 ensures at most one vector per document is matched, guaranteeing results come from distinct documents. Setting it to 0 (unlimited) allows multiple relevant vectors from the same document to be matched. Default is 0."
         }
       },
       "required": [
@@ -3360,16 +3357,22 @@
       "readOnly": true,
       "description": "Contains debugging information specific to query rewrites."
     },
-    "QueryResultDocumentInnerHits": {
+    "InnerHitsDebugInfo": {
       "type": "object",
       "additionalProperties": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/QueryResultDocumentInnerHit"
-        }
+        "$ref": "#/definitions/NestedFieldInnerHitsDebugInfo",
+        "readOnly": true
       },
       "readOnly": true,
-      "description": "Detailed scoring information for individual elements of a complex collection that matched the search request."
+      "description": "Detailing scoring information for all individual elements of all complex collection that matched the search request."
+    },
+    "NestedFieldInnerHitsDebugInfo": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/QueryResultDocumentInnerHit"
+      },
+      "readOnly": true,
+      "description": "Detailed scoring information for individual elements of a specific complex collection that matched the search request."
     },
     "QueryResultDocumentInnerHit": {
       "type": "object",
