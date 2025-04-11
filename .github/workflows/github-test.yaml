@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            ${{ matrix.folder }}
+            .github
 
       - name: Setup Node 20 and install runtime deps
         if: ${{ matrix.folder }} == ".github"
