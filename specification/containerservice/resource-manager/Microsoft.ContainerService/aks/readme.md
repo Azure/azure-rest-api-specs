@@ -1293,6 +1293,10 @@ directive:
     reason: The tool compared the stable API version and mistakenly scanned out that this model was not newly added, more details see https://github.com/Azure/azure-openapi-validator/issues/773
   - suppress: AvoidAdditionalProperties
     from: managedClusters.json
-    where: $.definitions.NamespaceProperties
-    reason: Users are required to enter custom key-value pairs, similar to the allowed "user-defined tags", except that in the Kubernetes world, this attribute is referred to as labels/annotations
+    where: $.definitions.NamespaceProperties.properties.labels
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
+    where: $.definitions.NamespaceProperties.properties.annotations
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
 ```
