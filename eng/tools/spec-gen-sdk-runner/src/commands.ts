@@ -146,13 +146,13 @@ export async function generateSdkForSpecPr(): Promise<number> {
 /**
  * Generate SDKs for batch specs.
  */
-export async function generateSdkForBatchSpecs(runMode: string): Promise<number> {
+export async function generateSdkForBatchSpecs(batchType: string): Promise<number> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
   // Construct the spec-gen-sdk command
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
-  // Get the spec paths based on the run mode
-  const specConfigPaths = getSpecPaths(runMode, commandInput.localSpecRepoPath);
+  // Get the spec paths based on the batch run type
+  const specConfigPaths = getSpecPaths(batchType, commandInput.localSpecRepoPath);
 
   // Prepare variables
   let statusCode = 0;
@@ -290,13 +290,24 @@ function parseArguments(): SpecGenSdkCmdInput {
   const workingFolder: string = path.resolve(
     getArgumentValue(args, "--wf", path.join(localSpecRepoPath, "..")),
   );
+
+  // Set runMode to "release" by default
+  let runMode = "release";
+  const batchType: string = getArgumentValue(args, "--batch-type", "");
+  const pullRequestNumber: string = getArgumentValue(args, "--pr-number", "");
+  if (batchType) {
+    runMode = "batch";
+  } else if (pullRequestNumber) {
+    runMode = "spec-pull-request";
+  }
+
   return {
     workingFolder,
     localSpecRepoPath,
     localSdkRepoPath,
     sdkRepoName,
     sdkLanguage: sdkRepoName.replace("-pr", ""),
-    isTriggeredByPipeline: getArgumentValue(args, "--tr", "false"),
+    runMode,
     tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
     readmePath: getArgumentValue(args, "--readme-relative-path", ""),
     prNumber: getArgumentValue(args, "--pr-number", ""),
@@ -328,11 +339,11 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
     commandInput.sdkRepoName,
     "-c",
     commandInput.specCommitSha,
-    "-t",
-    commandInput.isTriggeredByPipeline,
+    "--rm",
+    commandInput.runMode,
   );
   if (commandInput.specRepoHttpsUrl) {
-    specGenSdkCommand.push("--spec-repo-url", commandInput.specRepoHttpsUrl);
+    specGenSdkCommand.push("--spec-repo-https-url", commandInput.specRepoHttpsUrl);
   }
   if (commandInput.prNumber) {
     specGenSdkCommand.push("--pr-number", commandInput.prNumber);
@@ -359,14 +370,14 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
 }
 
 /**
- * Get the spec paths based on the run mode.
- * @param runMode The run mode.
+ * Get the spec paths based on the batch run type.
+ * @param batchType The batch run type.
  * @param specRepoPath The specification repository path.
  * @returns The spec paths.
  */
-function getSpecPaths(runMode: string, specRepoPath: string): string[] {
+function getSpecPaths(batchType: string, specRepoPath: string): string[] {
   const specConfigPaths: string[] = [];
-  switch (runMode) {
+  switch (batchType) {
     case "all-specs": {
       specConfigPaths.push(
         ...getAllTypeSpecPaths(specRepoPath),
