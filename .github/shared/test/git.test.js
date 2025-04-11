@@ -15,7 +15,7 @@ describe("git", () => {
       const expected = ".github\n";
 
       await expect(
-        lsTree("HEAD", ".github", { args: "--full-tree --name-only" }),
+        lsTree("HEAD", ".github", { args: ["--full-tree", "--name-only"] }),
       ).resolves.toBe(expected);
     });
 
@@ -28,38 +28,54 @@ describe("git", () => {
 
   describe("mocked", () => {
     it("diff", async () => {
-      const execSpy = vi.spyOn(exec, "exec").mockResolvedValue("test diff");
+      const execSpy = vi.spyOn(exec, "execFile").mockResolvedValue("test diff");
 
       await expect(diff("HEAD^", "HEAD")).resolves.toBe("test diff");
 
       expect(execSpy).toBeCalledWith(
-        "git -c core.quotepath=off diff HEAD^ HEAD",
+        "git",
+        ["-c", "core.quotepath=off", "diff", "HEAD^", "HEAD"],
         expect.anything(),
       );
     });
 
     it("lsTree", async () => {
-      const execSpy = vi.spyOn(exec, "exec").mockResolvedValue("test lstree");
+      const execSpy = vi
+        .spyOn(exec, "execFile")
+        .mockResolvedValue("test lstree");
 
       await expect(
         lsTree("HEAD", "specification/contosowidgetmanager"),
       ).resolves.toBe("test lstree");
 
       expect(execSpy).toBeCalledWith(
-        "git -c core.quotepath=off ls-tree HEAD specification/contosowidgetmanager",
+        "git",
+        [
+          "-c",
+          "core.quotepath=off",
+          "ls-tree",
+          "HEAD",
+          "specification/contosowidgetmanager",
+        ],
         expect.anything(),
       );
     });
 
     it("show", async () => {
-      const execSpy = vi.spyOn(exec, "exec").mockResolvedValue("test show");
+      const execSpy = vi.spyOn(exec, "execFile").mockResolvedValue("test show");
 
       await expect(
         show("HEAD", "specification/contosowidgetmanager/cspell.yaml"),
       ).resolves.toBe("test show");
 
       expect(execSpy).toBeCalledWith(
-        "git -c core.quotepath=off show HEAD:specification/contosowidgetmanager/cspell.yaml",
+        "git",
+        [
+          "-c",
+          "core.quotepath=off",
+          "show",
+          "HEAD:specification/contosowidgetmanager/cspell.yaml",
+        ],
         expect.anything(),
       );
     });

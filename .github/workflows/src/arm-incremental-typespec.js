@@ -110,7 +110,7 @@ export default async function incrementalTypeSpec({ core }) {
   // Ensure that each changed spec dir contained at least one typespec-generated swagger in the base commitish
   for (const changedSpecDir of changedSpecDirs) {
     const specFilesBaseBranch = await lsTree("HEAD^", changedSpecDir, {
-      args: "-r --name-only",
+      args: ["-r", "--name-only"],
       ...options,
     });
 
