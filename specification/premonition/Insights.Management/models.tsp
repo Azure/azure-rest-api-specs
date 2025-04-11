@@ -181,15 +181,15 @@ model MetagenomicsAnalysisResult extends AnalysisResult {
   kind: AnalysisKind.Metagenomics;
 
   @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
-  @doc("The sum of number of base pairs in all samples")
+  @doc("Number of base pairs in all samples")
   totalNumberOfBasePairs: int64;
 
   @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
-  @doc("The sum of number of reads in all samples")
+  @doc("Sum of number of reads in all samples")
   totalNumberOfReads: int64;
 
   @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
-  @doc("The sum of number of base pairs in all samples")
+  @doc("Type of the reads, either 'short' or 'long'")
   readsType: ReadsType;
 
   @added(Microsoft.Premonition.Versions.v2025_05_01_preview)
