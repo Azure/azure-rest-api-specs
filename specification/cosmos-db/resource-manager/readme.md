@@ -994,6 +994,9 @@ directive:
   - suppress: MissingSegmentsInNestedResourceListOperation
     from: cassandrarbac.json
     reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ArmResourcePropertiesBag
+    from: cassandrarbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api    
   - suppress: DeleteResponseCodes
     from: gremlinrbac.json
     reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
@@ -1006,6 +1009,9 @@ directive:
   - suppress: MissingSegmentsInNestedResourceListOperation
     from: gremlinrbac.json
     reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ArmResourcePropertiesBag
+    from: gremlinrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api    
   - suppress: DeleteResponseCodes
     from: mongoMIrbac.json
     reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
@@ -1018,6 +1024,9 @@ directive:
   - suppress: MissingSegmentsInNestedResourceListOperation
     from: mongoMIrbac.json
     reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ArmResourcePropertiesBag
+    from: mongoMIrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api    
   - suppress: PutResponseCodes
     from: dataTransferService.json
     reason: Suppressing errors for existing APIs
