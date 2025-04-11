@@ -399,6 +399,59 @@ model AnalyzeConversationTaskResult {
   kind: AnalyzeConversationTaskResultsKind;
 }
 
+/** A conversational AI task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model ConversationalAITask extends AnalyzeConversationTask {
+  /** Task kind. */
+  kind: AnalyzeConversationTaskKind.ConversationalAI;
+
+  /** The input ConversationItem and its optional parameters */
+  analysisInput: ConversationalAIAnalysisInput;
+
+  /** Input parameters necessary for a Conversation language understanding task. */
+  parameters: ConversationalAIInputParameters;
+}
+
+/** The input ConversationItem and its optional parameters */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model ConversationalAIAnalysisInput {
+  /** List of multiple conversations */
+  conversations: AIConversation[];
+}
+
+/** The Conversations for ai conversation analysis */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model AIConversation {
+  /** The ID of the conversation. */
+  id: string;
+
+  /** Default modality for all conversation items. */
+  modality: InputModality;
+
+  /** Default language for all conversation items in BCP 47 language representation. */
+  language: string;
+
+  /** List of conversation items. */
+  conversationItems: ConversationalAIItem[];
+}
+
+/** List of conversation items. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model ConversationalAIItem {
+  /** The ID of a conversation item. */
+  id: string;
+
+  /** The participant ID of a conversation item. */
+  participantId: string;
+
+  /** The text input */
+  text: string;
+}
+
 /** The input for a conversation language understanding task. */
 model ConversationalTask extends AnalyzeConversationTask {
   /** Task kind. */
@@ -840,6 +893,10 @@ model AnalyzeConversationJobsInput {
 
   /** Set of tasks to execute on the input conversation. */
   tasks: Array<AnalyzeConversationLROTask>;
+
+  /** Optional duration in seconds after which the job will be canceled if not completed. */
+  @added(Versions.v2025_05_15_preview)
+  cancelAfter?: float32;
 }
 
 /** Base class for a long-running conversation input task. */
@@ -1044,6 +1101,20 @@ model ConversationRequestStatistics is RequestStatistics {
 @added(Versions.v2023_04_01)
 model ConversationItemLevelTiming is AudioTiming;
 
+/** Input parameters base for a Conversation task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model ConversationalAIInputParameters {
+  /** The name of the project to use. */
+  projectName: string;
+
+  /** The name of the deployment to use. */
+  deploymentName: string;
+
+  /** Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets. */
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
+}
+
 /** Input parameters necessary for a Conversation task. */
 model ConversationTaskParameters {
   /** The name of the project to use. */
@@ -1066,6 +1137,101 @@ model ConversationTaskParameters {
 
   /** A dictionary representing the parameters for each target project. */
   targetProjectParameters?: Record<AnalysisParameters>;
+}
+
+/** The results of a ConversationalAI task. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model ConversationalAITaskResult extends AnalyzeConversationTaskResult {
+  /** The results of a Conversational AI task. */
+  kind: AnalyzeConversationTaskResultsKind.ConversationalAIResult;
+
+  /** Represents the conversational analysis response. */
+  result: ConversationalAIResult;
+}
+
+/** Represents the conversational analysis response. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model ConversationalAIResult {
+  /** Multiple multi-turn conversations analyzed. */
+  conversations: ConversationalAIAnalysis[];
+
+  /** Any warnings encountered during processing. */
+  warnings?: string[];
+}
+
+/** Multiple multi-turn conversations analyzed. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model ConversationalAIAnalysis {
+  /** The ID of the conversation. */
+  id: string;
+
+  /** The intent classification results for this conversation. */
+  intents: ConversationalAIIntent[];
+
+  /** Global entities that are matched but not associated with any specific intent. */
+  entities?: ConversationalAIEntity[];
+}
+
+/** The intent classification result for this conversation. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model ConversationalAIIntent {
+  /** The name of the detected intent. */
+  name: string;
+
+  /** The type of intent, either "action" or "question". */
+  type: string;
+
+  /** The ranges of conversation items where this intent was identified. */
+  conversationItemRanges: ConversationItemRange[];
+
+  /** The entities associated with this intent. */
+  entities: ConversationalAIEntity[];
+}
+
+/** The ranges of conversation items where this intent was identified. */
+@added(Versions.v2025_05_15_preview)
+model ConversationItemRange {
+  /** The starting index of the intent occurrence within the conversation. */
+  offset: int32;
+
+  /** The number of continuous conversation items for this intent. */
+  count: int32;
+}
+
+/** The entity associated with this intent. */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2025_05_15_preview)
+model ConversationalAIEntity {
+  /** The entity name or category. */
+  name: string;
+
+  /** The detected text of the entity. */
+  text: string;
+
+  /** The confidence score of the entity detection (0.0 to 1.0). */
+  confidenceScore: float32;
+
+  /** The starting index of the entity in the query. */
+  offset: int32;
+
+  /** The length of the detected entity text. */
+  length: int32;
+
+  /** The ID of the conversation item where the entity appears. */
+  conversationItemId: string;
+
+  /** The index of the conversation item where the entity appears. */
+  conversationItemIndex?: int32;
+
+  /** Entity resolution details, if available. */
+  resolutions?: BaseResolution[];
+
+  /** Additional entity metadata. */
+  extraInformation?: BaseExtraInformation[];
 }
 
 /** The results of a Conversation task. */
