@@ -7,8 +7,8 @@ import { vi } from "vitest";
  */
 export function createMockLogger() {
   return {
-    debug: vi.fn(),
-    info: vi.fn(),
+    debug: console.debug,
+    info: console.log,
     isDebug: vi.fn().mockReturnValue(false),
   };
 }

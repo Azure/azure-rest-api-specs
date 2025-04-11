@@ -1,9 +1,19 @@
 {
+  "name": "@azure-tools/specs-shared",
   "private": "true",
   "type": "module",
+  "exports": {
+    "./changed-files": "./src/changed-files.js",
+    "./equality": "./src/equality.js",
+    "./exec": "./src/exec.js",
+    "./git": "./src/git.js",
+    "./readme": "./src/readme.js",
+    "./sdk-types": "./src/sdk-types.js",
+    "./types": "./src/types.js"
+  },
   "_comments": {
     "dependencies": "Runtime dependencies must be kept to an absolute minimum for performance, ideally with no transitive dependencies",
-    "dependencies2": "All runtime and dev dependencies in this file, must be a superset of shared/package.json"
+    "dependencies2": "All runtime and dev dependencies in this file, must be a subset of ../package.json"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.9.3",
@@ -12,9 +22,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
-    "@octokit/webhooks-types": "^7.5.1",
     "@tsconfig/node20": "^20.1.4",
-    "@types/github-script": "github:actions/github-script",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^3.0.7",

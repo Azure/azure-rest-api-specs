@@ -2,16 +2,17 @@
 
 import child_process from "child_process";
 import { promisify } from "util";
-const execImpl = promisify(child_process.exec);
+const execFileImpl = promisify(child_process.execFile);
 
 /**
- * @param {string} command
+ * @param {string} file
+ * @param {string[]} args
  * @param {Object} [options]
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {import('./types.js').ILogger} [options.logger]
  * @param {number} [options.maxBuffer]
  */
-export async function exec(command, options = {}) {
+export async function execFile(file, args, options = {}) {
   const {
     cwd,
     logger,
@@ -20,10 +21,11 @@ export async function exec(command, options = {}) {
     maxBuffer = 16 * 1024 * 1024,
   } = options;
 
-  logger?.info(`exec("${command}")`);
+  logger?.info(`execFile("${file}", ${JSON.stringify(args)})`);
 
   // TODO: Handle errors
-  const result = await execImpl(command, {
+  // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
+  const result = await execFileImpl(file, args, {
     cwd,
     maxBuffer,
   });
@@ -32,24 +34,4 @@ export async function exec(command, options = {}) {
   logger?.debug(`stderr: '${result.stderr}'`);
 
   return result.stdout;
-}
-
-/**
- * Joins a list of arguments to build a command-line without extra spaces.
- * Ignores null, undefined, and elements that convert to empty or all-whitespace.
- *
- * @param {any[]} args
- * @returns string
- */
-export function buildCmd(...args) {
-  return (
-    args
-      // Exclude null and undefined
-      .filter((arg) => arg !== null && arg !== undefined)
-      // Convert to string
-      .map((arg) => String(arg))
-      // Exclude empty and all-whitespace
-      .filter((str) => str.trim() !== "")
-      .join(" ")
-  );
 }
