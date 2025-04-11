@@ -5,15 +5,15 @@
   "exports": {
     "./changed-files": "./src/changed-files.js",
     "./equality": "./src/equality.js",
+    "./exec": "./src/exec.js",
     "./git": "./src/git.js",
     "./readme": "./src/readme.js",
     "./sdk-types": "./src/sdk-types.js",
-    "./types": "./src/types.js",
-    "./test/examples": "./test/examples.js",
-    "./test/mocks": "./test/mocks.js"
+    "./types": "./src/types.js"
   },
   "_comments": {
-    "dependencies": "Runtime dependencies must be kept to an absolute minimum for performance, ideally with no transitive dependencies"
+    "dependencies": "Runtime dependencies must be kept to an absolute minimum for performance, ideally with no transitive dependencies",
+    "dependencies2": "All runtime and dev dependencies in this file, must be a subset of ../package.json"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^11.9.3",
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@tsconfig/node20": "^20.1.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^3.0.7",
