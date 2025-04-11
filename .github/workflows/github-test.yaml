@@ -70,6 +70,6 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-report-${{ matrix.os }}
+          name: code-coverage-report-${{ matrix.os }}-${{ matrix.folder }}
           path: ./${{ matrix.folder }}/coverage
           if-no-files-found: ignore
