@@ -16,6 +16,6 @@ using Azure.ClientGenerator.Core;
 @@access(Azure.AI.Projects.Content, Access.internal);
 @@access(Azure.AI.Projects.AnnotationDTO, Access.internal);
 @@access(Azure.AI.Projects.EvaluationUpload, Access.internal);
-@@access(Azure.AI.Projects.EvaluationTarget.target, Access.internal);
+@@access(Azure.AI.Projects.Evaluation.target, Access.internal);
 
 
