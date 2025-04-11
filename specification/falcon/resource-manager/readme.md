@@ -27,7 +27,16 @@ These are the global settings for the falcon.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-10-14-preview
+tag: package-2025-03-26-preview
+```
+
+### Tag: package-2025-03-26-preview
+
+These settings apply only when `--tag=package-2025-03-26-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-26-preview'
+input-file:
+  - Microsoft.Falcon/preview/2025-03-26-preview/falcon.json
 ```
 
 ### Tag: package-2024-10-14-preview

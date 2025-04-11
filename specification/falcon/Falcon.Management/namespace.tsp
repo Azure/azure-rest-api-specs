@@ -1,12 +1,12 @@
 import "@typespec/rest";
-import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using Versioning;
 
 namespace Microsoft.Falcon;
 
@@ -54,13 +54,21 @@ model NamespaceProperties {
   icmPublicId: string;
 
   /** The PME group used to provide access and JIT to resources.
+   *  i.e. TM-Falcon.
+   */
+  @added(Versions.v2025_03_26_preview)
+  adminGroup: string;
+
+  /** The PME group used to provide access and JIT to resources.
    *  i.e. TM-Falcon replace Falcon with your team name.
    */
+  @removed(Versions.v2025_03_26_preview)
+  @renamedFrom(Versions.v2025_03_26_preview, "adminGroup")
   @pattern(
     "TM-[a-zA-Z0-9-]+",
     "Must start with TM- and followed by a string consisting of letters, numbers, and dashes."
   )
-  adminGroup: string;
+  oldAdminGroup: string;
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
