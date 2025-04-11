@@ -10,10 +10,12 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@doc("Response from the listSecrets operation")
+@doc("Response from the list and get connections operations")
 @resource("connections")
+@discriminator("authType")
 @added(Versions.v2025_05_01)
 model Connection {
+
   @doc("The name of the resource")
   @visibility(Lifecycle.Read)
   @key("name")
@@ -27,13 +29,76 @@ model Connection {
   @visibility(Lifecycle.Read)
   target: string;
 
-  @doc("The authentication type used by the connection")
+  @doc("Whether the connection is tagged as the default connection of its type")
   @visibility(Lifecycle.Read)
-  authType: AuthenticationType;
+  isDefault: boolean;
+
+  @doc("The credentials used by the connection")
+  @visibility(Lifecycle.Read)
+  credentials: BaseCredentials;
 
   @doc("Metadata of the connection")
   @visibility(Lifecycle.Read)
   metadata: Record<string>;
+}
+
+@doc("A base class for connection credentials")
+@discriminator("authType")
+model BaseCredentials {
+
+  @doc("The type of credential used by the connection")
+  @visibility(Lifecycle.Read)
+  authType: CredentialType;
+}
+
+@doc("API Key Credential definition")
+model ApiKeyCredentials extends BaseCredentials {
+
+  @doc("The credentail type")
+  @visibility(Lifecycle.Read)
+  authType: CredentialType.apiKey;
+
+  @doc("API Key")
+  @visibility(Lifecycle.Read)
+  apiKey?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Entra ID credential definition")
+model EntraIDCredentials extends BaseCredentials {
+
+  @doc("The credential type")
+  @visibility(Lifecycle.Read)
+  authType: CredentialType.entraId;
+}
+
+@doc("Custom credential defintion")
+model CustomCredential extends BaseCredentials {
+
+  @doc("The credential type ")
+  @visibility(Lifecycle.Read)
+  authType: CredentialType.custom;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Shared Access Signature (SAS) credential definition")
+model SASCredentials extends BaseCredentials {
+
+  @doc("The credential type")
+  @visibility(Lifecycle.Read)
+  authType: CredentialType.SAS;
+
+  @doc("SAS token")
+  @visibility(Lifecycle.Read)
+  sasToken?: string;
+}
+
+@doc("Credentials that do not require authentication")
+model NoAuthenticationCredentials extends BaseCredentials {
+
+  @doc("The credential type ")
+  @visibility(Lifecycle.Read)
+  authType: CredentialType.None;
 }
 
 // https://learn.microsoft.com/rest/api/azureml/workspace-connections/list-secrets?view=rest-azureml-2024-04-01&tabs=HTTP#ConnectionType
@@ -44,8 +109,11 @@ union ConnectionType {
   @doc("Azure OpenAI Service")
   AzureOpenAI: "AzureOpenAI", //TODO: In Python this results in .AZURE_OPEN_AI. How do I make it .AZURE_OPENAI?
 
-  @doc("Azure Blob Storage")
+  @doc("Azure Blob Storage, with specified container")
   AzureBlobStorage: "AzureBlob",
+
+  @doc("Azure Blob Storage, with container not specified (used by Assistants)")
+  AzureStorageAccount: "AzureStorageAccount",
 
   @doc("Azure AI Search")
   AzureAISearch: "CognitiveSearch",
@@ -56,6 +124,9 @@ union ConnectionType {
   @doc("Generic connection that uses API Key authentication")
   APIKey: "ApiKey",
 
+  @doc("Application Configuration")
+  ApplicationConfiguration: "AppConfig",
+
   @doc("Application Insights")
   ApplicationInsights: "AppInsights",
 
@@ -63,22 +134,22 @@ union ConnectionType {
   Custom: "CustomKeys",
 }
 
-@doc("The authentication type used by the connection")
-union AuthenticationType {
+@doc("The credential type used by the connection")
+union CredentialType {
   string,
 
-  @doc("API Key authentication")
+  @doc("API Key credential")
   apiKey: "ApiKey",
 
-  @doc("Entra ID authentication (formerly known as AAD)")
+  @doc("Entra ID credential (formerly known as AAD)")
   entraId: "AAD",
 
-  @doc("Shared Access Signature (SAS) authentication")
+  @doc("Shared Access Signature (SAS) credential")
   SAS: "SAS",
 
-  @doc("Custom authentication")
+  @doc("Custom credential")
   custom: "CustomKeys",
 
-  @doc("No authentication")
+  @doc("No credential")
   None: "None",
 }
