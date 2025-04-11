@@ -10,7 +10,7 @@ import {
   gitDiffTopSpecFolder,
   isDirectory,
   normalizePath,
-  runCmd,
+  runFile,
 } from "./utils.js";
 
 export class TsvRunnerHost implements TsvHost {
@@ -34,8 +34,8 @@ export class TsvRunnerHost implements TsvHost {
     return readFileImpl(path, "utf-8");
   }
 
-  runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]> {
-    return runCmd(cmd, cwd);
+  runFile(file: string, args: string[], cwd: string): Promise<[Error | null, string, string]> {
+    return runFile(file, args, cwd);
   }
 
   normalizePath(folder: string): string {

@@ -36,9 +36,9 @@ export class TsvTestHost implements TsvHost {
     };
   }
 
-  async runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]> {
+  async runFile(file: string, args: string[], cwd: string): Promise<[Error | null, string, string]> {
     let err = null;
-    let stdout = `default ${cmd} at ${cwd}`;
+    let stdout = `default ${file} ${args.join(" ")} at ${cwd}`;
     let stderr = "";
 
     return [err, stdout, stderr];
@@ -58,7 +58,7 @@ export class TsvTestHost implements TsvHost {
 
   async gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult> {
     let success = true;
-    let stdout = `Running git diff on folder ${folder}, running default cmd ${host.runCmd("", "")}`;
+    let stdout = `Running git diff on folder ${folder}, running default cmd ${host.runFile("", [], "")}`;
     let stderr = "";
 
     return {
