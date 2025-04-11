@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-12-15-preview",
+    "version": "2025-04-15-preview",
     "title": "EventGridManagementClient",
     "description": "Azure EventGrid Management Client"
   },
@@ -13766,6 +13766,9 @@
     },
     "Filter": {
       "description": "This is the base type that represents a filter. To configure a filter, do not directly instantiate an object of this class. Instead, instantiate\r\nan object of a derived class such as BoolEqualsFilter, NumberInFilter etc depending on the type of the key based on\r\nwhich you want to filter.",
+      "required": [
+        "operatorType"
+      ],
       "type": "object",
       "properties": {
         "operatorType": {
@@ -13802,9 +13805,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "operatorType"
-      ],
       "discriminator": "operatorType"
     },
     "Subscription": {
@@ -15073,7 +15073,7 @@
           "description": "Topic spaces configuration information for the namespace resource"
         },
         "isZoneRedundant": {
-          "description": "This is an optional property and it allows the user to specify if the namespace resource supports zone-redundancy capability or not. If this\r\nproperty is not specified explicitly by the user, its default value depends on the following conditions:\r\n  a. For Availability Zones enabled regions - The default property value would be true.\r\n  b. For non-Availability Zones enabled regions - The default property value would be false.\r\nOnce specified, this property cannot be updated.",
+          "description": "This is an optional property and it allows the user to specify if the namespace resource supports zone-redundancy capability or not. If this\r\nproperty is not specified explicitly by the user, its default value depends on the following conditions:\r\n    a. For Availability Zones enabled regions - The default property value would be true.\r\n    b. For non-Availability Zones enabled regions - The default property value would be false.\r\nOnce specified, this property cannot be updated.",
           "type": "boolean"
         },
         "publicNetworkAccess": {
@@ -15298,6 +15298,10 @@
         "customJwtAuthentication": {
           "$ref": "#/definitions/CustomJwtAuthenticationSettings",
           "description": "Custom JWT authentication settings for namespace resource."
+        },
+        "webhookAuthentication": {
+          "$ref": "#/definitions/WebhookAuthenticationSettings",
+          "description": "Authentication settings for a webhook endpoint within a Namespace resource."
         }
       }
     },
@@ -17423,7 +17427,7 @@
           "type": "string"
         },
         "topicTemplates": {
-          "description": "The topic filters in the topic space.\r\nExample: \"topicTemplates\": [ \r\n        \"devices/foo/bar\",\r\n        \"devices/topic1/+\",\r\n        \"devices/${principal.name}/${principal.attributes.keyName}\" ].",
+          "description": "The topic filters in the topic space.\r\nExample: \"topicTemplates\": [ \r\n              \"devices/foo/bar\",\r\n              \"devices/topic1/+\",\r\n              \"devices/${principal.name}/${principal.attributes.keyName}\" ].",
           "type": "array",
           "items": {
             "type": "string"
@@ -17784,6 +17788,63 @@
             "$ref": "#/definitions/EncodedIssuerCertificateInfo"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "CustomWebhookAuthenticationManagedIdentity": {
+      "description": "The identity configuration required for authenticating a custom webhook.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used. Can be either 'SystemAssigned' or 'UserAssigned'.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomWebhookAuthenticationManagedIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentity": {
+          "description": "The user identity associated with the resource.",
+          "type": "string"
+        }
+      }
+    },
+    "WebhookAuthenticationSettings": {
+      "description": "Authentication settings for a webhook endpoint within a Namespace resource.",
+      "required": [
+        "azureActiveDirectoryApplicationIdOrUri",
+        "azureActiveDirectoryTenantId",
+        "endpointUrl",
+        "identity"
+      ],
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/CustomWebhookAuthenticationManagedIdentity",
+          "description": "The identity configuration required for authenticating a custom webhook."
+        },
+        "endpointUrl": {
+          "description": "The URL endpoint where the Event Grid service sends authenticated webhook requests using the specified managed identity.",
+          "type": "string"
+        },
+        "endpointBaseUrl": {
+          "description": "The base URL endpoint where the Event Grid service sends authenticated webhook requests using the specified managed identity.",
+          "type": "string"
+        },
+        "azureActiveDirectoryApplicationIdOrUri": {
+          "description": "Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
+          "type": "string"
+        },
+        "azureActiveDirectoryTenantId": {
+          "description": "Azure Active Directory Tenant ID to get the access token that will be included as the bearer token in delivery requests.",
+          "type": "string"
         }
       }
     },
