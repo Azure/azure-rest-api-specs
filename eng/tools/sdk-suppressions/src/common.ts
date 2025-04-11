@@ -40,22 +40,3 @@ export function parseYamlContent(yamlContent: string, path: string): {
   };
   
 }
-
-// // Promisify the exec function
-// const execAsync = promisify(exec);
-
-// export async function runGitCommand(command: string): Promise<string> {
-//   try {
-//     const { stdout, stderr } = await execAsync(command);
-
-//     if (stderr) {
-//       console.error("Error Output:", stderr);
-//     //   throw new Error(stderr);
-//     }
-
-//     return stdout.trim();
-//   } catch (error:any) {
-//     console.error("Error details:", error.stderr || error);
-//     throw error;
-//   }
-// }
