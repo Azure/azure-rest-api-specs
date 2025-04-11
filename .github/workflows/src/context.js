@@ -130,14 +130,22 @@ export async function extractInputs(github, context, core) {
         core.info(
           `listPullRequestsAssociatedWithCommit(${head_owner}, ${head_repo}, ${head_sha})`,
         );
-        const pullRequests = await github.paginate(
-          github.rest.repos.listPullRequestsAssociatedWithCommit,
-          {
-            owner: head_owner,
-            repo: head_repo,
-            commit_sha: head_sha,
-            per_page: PER_PAGE_MAX,
-          },
+        const pullRequests = (
+          await github.paginate(
+            github.rest.repos.listPullRequestsAssociatedWithCommit,
+            {
+              owner: head_owner,
+              repo: head_repo,
+              commit_sha: head_sha,
+              per_page: PER_PAGE_MAX,
+            },
+          )
+        ).filter(
+          // Only include PRs to the same repo as the triggering workflow.
+          //
+          // Other unique keys like "full_name" should also work, but "id" is the safest since it's
+          // supposed to be guaranteed unique and never change (repos can be renamed or change owners).
+          (pr) => pr.base.repo.id === payload.workflow_run.repository.id,
         );
 
         if (pullRequests.length === 0) {
@@ -238,22 +246,38 @@ export async function extractInputs(github, context, core) {
         `Could not extract build ID or project URL from check run details URL: ${checkRun.details_url}`,
       );
     }
-    if (
-      !context.payload.repository ||
-      !context.payload.repository.owner ||
-      !context.payload.repository.owner.login ||
-      !context.payload.repository.name
-    ) {
-      throw new Error(
-        `Could not extract repository owner or name from context payload: ${JSON.stringify(context.payload.repository)}`,
+
+    const payload =
+      /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
+        context.payload
       );
-    }
+    const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
-      owner: context.payload.repository.owner.login,
-      repo: context.payload.repository.name,
+      owner: repositoryInfo.owner,
+      repo: repositoryInfo.repo,
       head_sha: checkRun.head_sha,
       ado_build_id: match[2],
       ado_project_url: match[1],
+      issue_number: NaN,
+      run_id: NaN,
+    };
+  } else if (
+    context.eventName === "check_suite" &&
+    context.payload.action === "completed"
+  ) {
+    const payload =
+      /** @type {import("@octokit/webhooks-types").CheckSuiteCompletedEvent} */ (
+        context.payload
+      );
+
+    const repositoryInfo = getRepositoryInfo(payload.repository);
+    inputs = {
+      owner: repositoryInfo.owner,
+      repo: repositoryInfo.repo,
+      head_sha: payload.check_suite.head_sha,
+
+      // These are NaN today because the only consumer of this event needs only
+      // the head_sha
       issue_number: NaN,
       run_id: NaN,
     };
@@ -265,4 +289,26 @@ export async function extractInputs(github, context, core) {
 
   core.info(`inputs: ${JSON.stringify(inputs)}`);
   return inputs;
+}
+
+/**
+ * @param {import("@octokit/webhooks-types").Repository | undefined} repository
+ * @returns {{ owner: string, repo: string }}
+ */
+function getRepositoryInfo(repository) {
+  if (
+    !repository ||
+    !repository.owner ||
+    !repository.owner.login ||
+    !repository.name
+  ) {
+    throw new Error(
+      `Could not extract repository owner or name from context payload: ${JSON.stringify(repository)}`,
+    );
+  }
+
+  return {
+    owner: repository.owner.login,
+    repo: repository.name,
+  };
 }
