@@ -171,7 +171,8 @@ interface AutoUpgradeProfileOperations {
     void,
     GenerateResponse,
     BaseParameters<AutoUpgradeProfile>,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = GenerateResponse> &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
+      ArmLroLocationHeader<FinalResult = GenerateResponse> &
       IfMatchParameters<AutoUpgradeProfile>
   >;
 }
