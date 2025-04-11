@@ -101,3 +101,27 @@ interface RadiologyInsightsClient {
   "ClinicalDocumentContent",
   "csharp, java"
 );
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips76, "MIPS_76", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips76, "MIPS_76", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips147, "MIPS_147", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips195, "MIPS_195", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips360, "MIPS_360", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips364, "MIPS_364", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips405, "MIPS_405", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips406, "MIPS_406", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips436, "MIPS_436", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mips145, "MIPS_145", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad36, "ACRAD_36", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad37, "ACRAD_37", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad38, "ACRAD_38", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad39, "ACRAD_39", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad40, "ACRAD_40", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad41, "ACRAD_41", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Acrad42, "ACRAD_42", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Mednax55, "MEDNAX_55", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Msn13, "MSN_13", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Msn15, "MSN_15", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Qmm26, "QMM_26", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Qmm17, "QMM_17", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Qmm18, "QMM_18", "java");
+@@clientName(AzureHealthInsights.QualityMeasureType.Qmm19, "QMM_19", "java");
