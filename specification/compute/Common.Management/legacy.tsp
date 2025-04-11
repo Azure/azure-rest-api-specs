@@ -12,6 +12,24 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Legacy {
+  interface Operations {
+    #suppress "@azure-tools/typespec-azure-core/no-private-usage"
+    @tag("Operations")
+    @autoRoute
+    @Azure.ResourceManager.Private.armUpdateProviderNamespace
+    @doc("List the operations for the provider")
+    @segment("operations")
+    @get
+    list(
+      ...ApiVersionParameter,
+
+      @path
+      @segment("providers")
+      @doc("The provider namespace (this parameter will not show up in operations).")
+      provider: "Microsoft.ThisWillBeReplaced",
+    ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Microsoft.Compute.CloudError;
+  }
+
   interface LegacyOperations<
     ParentParameters extends {},
     ResourceTypeParameter extends {},
