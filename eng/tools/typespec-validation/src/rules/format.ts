@@ -14,7 +14,7 @@ export class FormatRule implements Rule {
     let [err, stdout, stderr] = await host.runFile(
       "npm",
       // Format parent folder to include shared files
-      ["exec", "--no", "--", "tsp", "format", '"../**/*.tsp"'],
+      ["exec", "--no", "--", "tsp", "format", "../**/*.tsp"],
       folder,
     );
     if (err) {
