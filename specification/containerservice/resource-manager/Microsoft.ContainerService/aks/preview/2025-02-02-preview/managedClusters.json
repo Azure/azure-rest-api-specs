@@ -9562,7 +9562,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Configure Advanced Networking Security features on Cilium clusters. When the flag is set to true, FQDN policies will be enabled by default unless advancedNetworkPolicies is explicitly set to a different value. If not specified, the default is false."
+          "description": "Configure Advanced Networking Security features on Cilium clusters. See individual fields for their default values."
         },
         "advancedNetworkPolicies": {
           "type": "string",
@@ -9590,7 +9590,30 @@
             ]
           },
           "title": "Enable advanced network policies",
-          "description": "This allows users to configure Layer 7 network policies (FQDN, HTTP, Kafka). Policies themselves must be configured via the Cilium Network Policy resources, see https://docs.cilium.io/en/latest/security/policy/index.html. This can be enabled only on cilium-based clusters. If not specified, the default value is L7 if enabled is set to true otherwise it defaults to None"
+          "description": "This allows users to configure Layer 7 network policies (FQDN, HTTP, Kafka). Policies themselves must be configured via the Cilium Network Policy resources, see https://docs.cilium.io/en/latest/security/policy/index.html. This can be enabled only on cilium-based clusters. If not specified, the default value is FQDN if security.enabled is set to true."
+        },
+        "transitEncryption": {
+          "type": "string",
+          "enum": [
+            "WireGuard",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "transitEncryption",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "WireGuard",
+                "description": "Enable WireGuard encryption for cluster traffic"
+              },
+              {
+                "value": "None",
+                "description": "Disable WireGuard encryption for cluster traffic"
+              }
+            ]
+          },
+          "title": "Configures pod-to-pod encryption",
+          "description": "This can be enabled only on Cilium-based clusters. If not specified, the default value is None."
         }
       }
     },
