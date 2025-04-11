@@ -9,7 +9,7 @@ const execFileImpl = promisify(child_process.execFile);
  * @param {string[]} args
  * @param {Object} [options]
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
- * @param {import('./types.js').ILogger} [options.logger]
+ * @param {import('./logger.js').ILogger} [options.logger]
  * @param {number} [options.maxBuffer]
  */
 export async function execFile(file, args, options = {}) {
