@@ -8,9 +8,9 @@ import {
   readme,
   resourceManager,
   swagger,
-} from "../../src/changed-files.js";
-import { lsTree, show } from "../../src/git.js";
-import { getInputFiles } from "../../src/readme.js";
+} from "../../shared/src/changed-files.js";
+import { lsTree, show } from "../../shared/src/git.js";
+import { getInputFiles } from "../../shared/src/readme.js";
 import { CoreLogger } from "./core-logger.js";
 
 /**
