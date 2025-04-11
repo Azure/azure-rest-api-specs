@@ -26,11 +26,7 @@ model AssessedMachineV2 is ProxyResource<AssessedMachineV2Properties> {
 model AssessedMachineV2Properties
   is AssessedWorkloadProperties<
     Linkages,
-    Recommendations<
-      MigrationIssues,
-      MigrationSuitability,
-      Skus<MigrationSuitability>
-    >
+    MachineAssessmentRecommendation
   > {
   @doc("The assessed machine extended details.")
   @visibility(Lifecycle.Read)
@@ -133,3 +129,19 @@ model AssessedMachineNetworkAdaptersV3 is AssessedNetworkAdaptersV3 {
   @visibility(Lifecycle.Read)
   displayName?: string;
 }
+
+@doc("Machine Assessment Recommendation with additional properties.")
+ model MachineAssessmentRecommendation is Recommendations<
+   MigrationIssues,
+   MigrationSuitability,
+   Skus<MigrationSuitability>
+ > {
+   @doc("VM Security Suitability Results.")
+   @visibility(Lifecycle.Read)
+   @OpenAPI.extension("x-ms-identifiers", #[])
+   vmSecuritySuitabilityResults?: VmSecuritySuitability[];
+ 
+   @doc("Recommended security type for the VM.")
+   @visibility(Lifecycle.Read)
+   recommendedVmSecurityType?: AzureVmSecurityType;
+ }
