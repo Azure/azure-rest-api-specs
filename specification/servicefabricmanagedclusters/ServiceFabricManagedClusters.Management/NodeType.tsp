@@ -142,7 +142,7 @@ interface NodeTypes {
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     NodeType,
-    FaultSimulationContent,
+    FaultSimulationContentWrapper,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader
