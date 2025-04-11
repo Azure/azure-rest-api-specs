@@ -10,6 +10,11 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/{service-name}/copilotSettings/{version-status}/{version}/copilotSettings.json"
     use-read-only-status-schema: true
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-portalservices"
+    namespace: com.azure.resourcemanager.portalservices
+    service-name: Portal Services
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
