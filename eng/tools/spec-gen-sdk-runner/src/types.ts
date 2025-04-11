@@ -9,6 +9,7 @@ export interface SpecGenSdkCmdInput {
   tspConfigPath?: string;
   readmePath?: string;
   sdkRepoName: string;
+  sdkLanguage: string;
   apiVersion?: string;
   prNumber?: string;
   sdkReleaseType?: string;
