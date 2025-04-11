@@ -28,7 +28,7 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2024-06
+tag: package-2024-05
 ```
 
 ### Tag: package-preview-2024-06
@@ -97,6 +97,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2024-06-01-preview/definitions.json
   - Microsoft.ApiManagement/preview/2024-06-01-preview/operationStatuses.json
 ```
+
 ### Tag: package-2024-05
 
 These settings apply only when `--tag=package-2024-05` is specified on the command line.
