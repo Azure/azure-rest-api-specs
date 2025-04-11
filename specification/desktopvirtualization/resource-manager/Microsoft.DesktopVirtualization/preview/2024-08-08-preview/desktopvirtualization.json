@@ -1981,6 +1981,7 @@
           {
             "name": "msixImageURI",
             "in": "body",
+            "description": "Represents URI referring to MSIX Image",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MSIXImageURI"
@@ -2041,6 +2042,7 @@
           {
             "name": "importPackageInfoRequest",
             "in": "body",
+            "description": "Information to import app attach package",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImportPackageInfoRequest"
@@ -2625,12 +2627,6 @@
         "responses": {
           "200": {
             "description": "Resource 'PrivateEndpointConnectionWithSystemData' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnectionWithSystemData' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
             }
@@ -4224,6 +4220,7 @@
           {
             "name": "sendMessage",
             "in": "body",
+            "description": "Represents message sent to a UserSession.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/SendMessage"
@@ -5699,12 +5696,6 @@
         "responses": {
           "200": {
             "description": "Resource 'PrivateEndpointConnectionWithSystemData' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnectionWithSystemData' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionWithSystemData"
             }
@@ -9602,14 +9593,7 @@
           "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period.",
           "minimum": 0
         }
-      },
-      "required": [
-        "daysOfWeek",
-        "rampUpStartTime",
-        "peakStartTime",
-        "rampDownStartTime",
-        "offPeakStartTime"
-      ]
+      }
     },
     "ScalingPlanPooledSchedule": {
       "type": "object",
@@ -9672,7 +9656,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the ScalingPlanPooledSchedule"
+          "description": "Name of the ScalingPlanPooledSchedule",
+          "readOnly": true
         },
         "daysOfWeek": {
           "type": "array",
@@ -9766,7 +9751,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the ScalingPlanPooledSchedule"
+          "description": "Name of the ScalingPlanPooledSchedule",
+          "readOnly": true
         },
         "daysOfWeek": {
           "type": "array",
@@ -9852,16 +9838,7 @@
           "$ref": "#/definitions/SessionHostLoadBalancingAlgorithm",
           "description": "Load balancing algorithm for off-peak period."
         }
-      },
-      "required": [
-        "daysOfWeek",
-        "rampUpStartTime",
-        "rampUpCapacityThresholdPct",
-        "peakStartTime",
-        "rampDownStartTime",
-        "rampDownCapacityThresholdPct",
-        "offPeakStartTime"
-      ]
+      }
     },
     "ScalingPlanProperties": {
       "type": "object",

@@ -47,7 +47,10 @@ interface WorkspaceOps
 @armResourceOperations
 interface CustomPrivateEndpointConnection {
   getByHostPool is HostPoolOps.Read<PrivateEndpointConnectionWithSystemData>;
-  updateByHostPool is HostPoolOps.CreateOrUpdateSync<PrivateEndpointConnectionWithSystemData>;
+  updateByHostPool is HostPoolOps.CreateOrUpdateSync<
+    PrivateEndpointConnectionWithSystemData,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionWithSystemData>
+  >;
   deleteByHostPool is HostPoolOps.DeleteSync<PrivateEndpointConnectionWithSystemData>;
   @segment("privateEndpointConnections")
   listByHostPool is HostPoolOps.List<
@@ -74,7 +77,11 @@ interface CustomPrivateEndpointConnection {
     Response = PrivateEndpointConnectionListResultWithSystemData
   >;
   getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnectionWithSystemData>;
-  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<PrivateEndpointConnectionWithSystemData>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<
+    PrivateEndpointConnectionWithSystemData,
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionWithSystemData>
+  >;
   deleteByWorkspace is WorkspaceOps.DeleteSync<PrivateEndpointConnectionWithSystemData>;
   @segment("privateEndpointConnections")
   listByWorkspace is WorkspaceOps.List<
