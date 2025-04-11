@@ -75,12 +75,6 @@
               "$ref": "#/definitions/CopyJobGetResults"
             }
           },
-          "201": {
-            "description": "Successful CreateJob response",
-            "schema": {
-              "$ref": "#/definitions/CopyJobGetResults"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -361,7 +355,8 @@
         },
         "connectionStringKeyVaultUri": {
           "type": "string",
-          "description": "URI of Azure KeyVault secret containing connection string."
+          "description": "URI of Azure KeyVault secret containing connection string.",
+          "pattern": "^https?:\/\/[^/$.?# ]+.[^ ]*$"
         }
       }
     },
@@ -371,7 +366,8 @@
       "properties": {
         "endpointUrl": {
           "type": "string",
-          "description": "Azure Blob container endpoint."
+          "description": "Azure Blob container endpoint.",
+          "pattern": "^https?:\/\/[^/$.?# ]+.[^ ]*$"
         }
       },
       "required": [
@@ -621,8 +617,8 @@
           "type": "string",
           "enum": [
             "CassandraRUToCassandraRU",
-            "CassandraRUToBlobStorage",
-            "BlobStorageToCassandraRU",
+            "CassandraRUToAzureBlobStorage",
+            "AzureBlobStorageToCassandraRU",
             "MongoRUToMongoRU",
             "MongoRUToMongoVCore",
             "NoSqlRUToNoSqlRU"
@@ -918,7 +914,6 @@
       "type": "object",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "type": "object",
           "$ref": "#/definitions/CopyJobProperties"
         }
