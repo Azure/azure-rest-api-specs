@@ -1,7 +1,7 @@
 // @ts-check
 
 /**
- * @typedef {import('../../src/types.js').ILogger} ILogger
+ * @typedef {import('../../shared/src/types.js').ILogger} ILogger
  */
 
 /**
