@@ -5,7 +5,7 @@ import {
   contosoReadme,
   swaggerHandWritten,
   swaggerTypeSpecGenerated,
-} from "../../shared/src/test/examples.js";
+} from "../../shared/test/examples.js";
 import incrementalTypeSpec from "../src/arm-incremental-typespec.js";
 import { createMockCore } from "./mocks.js";
 
