@@ -53,7 +53,7 @@ export async function generateReport(
   const dependencyVersion = await getDependencyVersion(
     await getPathToDependency("@microsoft.azure/openapi-validator"),
   );
-  outputMarkdown = `| Compared specs ([v${dependencyVersion}](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/${dependencyVersion})) | new version | base version |\n`;
+  outputMarkdown += `| Compared specs ([v${dependencyVersion}](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/${dependencyVersion})) | new version | base version |\n`;
   outputMarkdown += `| --- | --- | --- |\n`;
 
   // Compared Specs | New Version | Base Version
