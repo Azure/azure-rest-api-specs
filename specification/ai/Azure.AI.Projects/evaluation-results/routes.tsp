@@ -7,6 +7,9 @@ import "../common/models.tsp";
 import "./models.tsp";
 import "../servicepatterns.tsp";
 import "../main.tsp";
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -34,7 +37,7 @@ alias ListEvaluationResultsParameters = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
-@visibility("internal")
+@visibility(Access.internal)
 interface EvaluationResults
   extends ServicePatterns.VersionedOperations<
       EvaluationResult,
