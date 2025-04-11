@@ -10,10 +10,10 @@ import {
   swagger,
 } from "../src/changed-files.js";
 import * as git from "../src/git.js";
-import { ConsoleLogger } from "../src/logger.js";
+import { consoleLogger } from "../src/logger.js";
 
 describe("changedFiles", () => {
-  it.each([{}, { logger: new ConsoleLogger() }])(
+  it.each([{}, { logger: consoleLogger }])(
     `getChangedFiles(%o)`,
     async (options) => {
       const files = [
