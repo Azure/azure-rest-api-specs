@@ -1,5 +1,5 @@
 import { execFile } from "child_process";
-import { access, stat } from "fs/promises";
+import { access } from "fs/promises";
 import defaultPath, { PlatformPath } from "path";
 import { TsvHost } from "./tsv-host.js";
 
