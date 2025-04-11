@@ -9,7 +9,12 @@ import {
   getPathSegment,
   compareLintDiffViolations,
 } from "../src/generateReport.js";
-import { Source, LintDiffViolation, BeforeAfter, AutorestRunResult } from "../src/lintdiff-types.js";
+import {
+  Source,
+  LintDiffViolation,
+  BeforeAfter,
+  AutorestRunResult,
+} from "../src/lintdiff-types.js";
 import { isWindows } from "./test-util.js";
 
 describe("iconFor", () => {
@@ -314,6 +319,7 @@ describe("generateReport", () => {
     ]);
 
     const actual = await generateReport(
+      [],
       runCorrelations,
       new Set<string>([
         "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
@@ -365,6 +371,7 @@ describe("generateReport", () => {
       ]);
 
       const actual = await generateReport(
+        [],
         runCorrelations,
         new Set<string>([
           "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
