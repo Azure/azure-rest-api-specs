@@ -190,6 +190,10 @@ model AnalyzeTextJobsInput {
   /** Default language to use for records requesting automatic language detection. */
   @added(Versions.v2024_11_15_preview)
   defaultLanguage?: string;
+
+  /** Optional duration in seconds after which the job will be canceled if not completed. */
+  @added(Versions.v2025_05_15_preview)
+  cancelAfter?: float32;
 }
 
 /** The input object for the prebuilt/default result. */
@@ -447,8 +451,20 @@ model TaskParameters {
   loggingOptOut?: boolean = false;
 }
 
+/** Base parameters object for a text analysis task. with logging Opt out */
+model TaskParametersLoggingOptOut {
+  /** logging opt out */
+  loggingOptOut?: boolean = true;
+}
+
 /** Parameters object for a text analysis task using pre-built models. */
 model PreBuiltTaskParameters is TaskParameters {
+  /** model version */
+  modelVersion?: string = "latest";
+}
+
+/** Parameters object for a text analysis task using pre-built models. */
+model PreBuiltTaskParametersLoggingOptOut is TaskParametersLoggingOptOut {
   /** model version */
   modelVersion?: string = "latest";
 }

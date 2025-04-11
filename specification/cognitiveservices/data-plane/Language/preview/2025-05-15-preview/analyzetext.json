@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "version": "2024-11-15-preview",
+    "version": "2025-05-15-preview",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\\\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "x-typespec-generated": [
       {
@@ -730,6 +730,11 @@
         "defaultLanguage": {
           "type": "string",
           "description": "Default language to use for records requesting automatic language detection."
+        },
+        "cancelAfter": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional duration in seconds after which the job will be canceled if not completed."
         }
       },
       "required": [
@@ -2339,6 +2344,10 @@
         "inferenceOptions": {
           "$ref": "#/definitions/EntityInferenceOptions",
           "description": "(Optional) request parameter that allows the user to provide settings for running the inference."
+        },
+        "entitySynonyms": {
+          "$ref": "#/definitions/EntitySynonyms",
+          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance entity detection."
         }
       }
     },
@@ -2969,6 +2978,45 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionLROResults"
+    },
+    "EntitySynonym": {
+      "type": "object",
+      "description": "The entity synonyms used to enhance entity detection",
+      "properties": {
+        "synonym": {
+          "type": "string",
+          "description": "The synonym to be used for context"
+        },
+        "language": {
+          "type": "string",
+          "description": "The language the synonym"
+        }
+      },
+      "required": [
+        "synonym"
+      ]
+    },
+    "EntitySynonyms": {
+      "type": "object",
+      "description": "Object that allows the user to provide synonyms for context words that to enhance entity detection.",
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/EntityCategory",
+          "description": "The entity name"
+        },
+        "synonyms": {
+          "type": "array",
+          "description": "The entity synonyms",
+          "items": {
+            "$ref": "#/definitions/EntitySynonym"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "entityType",
+        "synonyms"
+      ]
     },
     "EntityTag": {
       "type": "object",
@@ -7144,6 +7192,10 @@
         "redactionPolicy": {
           "$ref": "#/definitions/BaseRedactionPolicy",
           "description": "RedactionPolicy to be used on the input."
+        },
+        "valueExclusionPolicy": {
+          "$ref": "#/definitions/ValueExclusionPolicy",
+          "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service"
         }
       }
     },
@@ -8806,6 +8858,28 @@
           }
         ]
       }
+    },
+    "ValueExclusionPolicy": {
+      "type": "object",
+      "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service",
+      "properties": {
+        "caseSensitive": {
+          "type": "boolean",
+          "description": "Option to make the values excluded values case sensitive",
+          "default": false
+        },
+        "excludedValues": {
+          "type": "array",
+          "description": "List of words and terms that should be excluded from detection by the PII detection service",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "caseSensitive",
+        "excludedValues"
+      ]
     },
     "VolumeMetadata": {
       "type": "object",

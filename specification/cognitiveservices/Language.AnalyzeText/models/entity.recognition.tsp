@@ -38,6 +38,30 @@ model EntitiesTaskParameters is PreBuiltTaskParameters {
   /** (Optional) request parameter that allows the user to provide settings for running the inference. */
   @added(Versions.v2024_11_01)
   inferenceOptions?: EntityInferenceOptions;
+
+  /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance entity detection. */
+  @added(Versions.v2025_05_15_preview)
+  entitySynonyms?: EntitySynonyms;
+}
+
+/** Object that allows the user to provide synonyms for context words that to enhance entity detection. */
+@added(Versions.v2025_05_15_preview)
+model EntitySynonyms {
+  /** The entity name */
+  entityType: EntityCategory;
+
+  /** The entity synonyms */
+  synonyms: Array<EntitySynonym>;
+}
+
+/** The entity synonyms used to enhance entity detection */
+@added(Versions.v2025_05_15_preview)
+model EntitySynonym {
+  /** The synonym to be used for context */
+  synonym: string;
+
+  /** The language the synonym */
+  language?: string;
 }
 
 /** An object representing the task definition for an Entities Recognition task. */
