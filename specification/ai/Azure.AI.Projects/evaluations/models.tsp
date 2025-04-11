@@ -371,6 +371,19 @@ model AgentEvaluationResult {
   additionalDetails?: Record<string>;
 }
 
+@doc("Long running operation response for agent evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentLongRunningOperationResponse {
+  @doc("URI for the long running operation.")
+  @visibility(Lifecycle.Read)
+  location: string;
+
+  @doc("Result of the long running operation.")
+  @visibility(Lifecycle.Read)
+  operationResult?: unknown;
+}
+
 @doc("Definition for agent tools.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
