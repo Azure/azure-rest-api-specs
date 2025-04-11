@@ -24,6 +24,11 @@ union SdnAppliancePlacement {
    * T2 device
    */
   T2: "T2",
+
+  /**
+   * Across T2 device
+   */
+  AcrossT2: "AcrossT2",
 }
 
 /**
