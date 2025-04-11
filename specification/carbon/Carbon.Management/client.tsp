@@ -6,50 +6,47 @@ using Azure.ResourceManager.CommonTypes;
 using Microsoft.Carbon;
 
 @@clientName(CarbonEmissionTopItemMonthlySummaryData,
-    "CarbonEmissionTopItemMonthlySummary",
-    "csharp"
+  "CarbonEmissionTopItemMonthlySummary",
+  "csharp"
 );
 @@clientName(CarbonEmissionTopItemsSummaryData,
-    "CarbonEmissionTopItemsSummary",
-    "csharp"
+  "CarbonEmissionTopItemsSummary",
+  "csharp"
 );
-@@clientName(CarbonEmissionData,
-    "CarbonEmission",
-    "csharp"
-);
+@@clientName(CarbonEmissionData, "CarbonEmission", "csharp");
 @@clientName(CarbonEmissionItemDetailData,
-    "CarbonEmissionItemDetail",
-    "csharp"
+  "CarbonEmissionItemDetail",
+  "csharp"
 );
 @@clientName(CarbonEmissionMonthlySummaryData,
-    "CarbonEmissionMonthlySummary",
-    "csharp"
+  "CarbonEmissionMonthlySummary",
+  "csharp"
 );
 @@clientName(CarbonEmissionOverallSummaryData,
-    "CarbonEmissionOverallSummary",
-    "csharp"
+  "CarbonEmissionOverallSummary",
+  "csharp"
 );
 @@clientName(ResourceGroupCarbonEmissionTopItemsSummaryData,
-    "ResourceGroupCarbonEmissionTopItemsSummary",
-    "csharp"
+  "ResourceGroupCarbonEmissionTopItemsSummary",
+  "csharp"
 );
 @@clientName(ResourceCarbonEmissionItemDetailData,
-    "ResourceCarbonEmissionItemDetail",
-    "csharp"
+  "ResourceCarbonEmissionItemDetail",
+  "csharp"
 );
 @@clientName(ResourceCarbonEmissionTopItemMonthlySummaryData,
-    "ResourceCarbonEmissionTopItemMonthlySummary",
-    "csharp"
+  "ResourceCarbonEmissionTopItemMonthlySummary",
+  "csharp"
 );
 @@clientName(ResourceCarbonEmissionTopItemsSummaryData,
-    "ResourceCarbonEmissionTopItemsSummary",
-    "csharp"
+  "ResourceCarbonEmissionTopItemsSummary",
+  "csharp"
 );
 @@clientName(ResourceGroupCarbonEmissionItemDetailData,
-    "ResourceGroupCarbonEmissionItemDetail",
-    "csharp"
+  "ResourceGroupCarbonEmissionItemDetail",
+  "csharp"
 );
 @@clientName(ResourceGroupCarbonEmissionTopItemMonthlySummaryData,
-    "ResourceGroupCarbonEmissionTopItemMonthlySummary",
-    "csharp"
+  "ResourceGroupCarbonEmissionTopItemMonthlySummary",
+  "csharp"
 );
