@@ -1,6 +1,6 @@
 import { readFile as readFileImpl } from "fs/promises";
 import { globby, Options as GlobbyOptions } from "globby";
-import { join } from "path";
+import { dirname, join } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 import { RuleResult } from "./rule-result.js";
@@ -40,7 +40,8 @@ export class TsvRunnerHost implements TsvHost {
 
   runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]> {
     const [file, defaultArgs] = process.platform === "win32" ?
-      ["cmd.exe", ["/c", "npm"]] :
+      // "C:\Program Files\nodejs\node.exe", ["C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"]
+      [process.execPath, [join(dirname(process.execPath), 'node_modules', 'npm', 'bin', 'npm-cli.js')]] :
       ["npm", []];
 
       return this.runFile(file, [...defaultArgs, ...args], cwd);

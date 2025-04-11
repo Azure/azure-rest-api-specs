@@ -1,5 +1,5 @@
 import { Options as GlobbyOptions } from "globby";
-import defaultPath, { PlatformPath } from "path";
+import defaultPath, { dirname, join, PlatformPath } from "path";
 import { Suppression } from "suppressions";
 import { RuleResult } from "../src/rule-result.js";
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
@@ -46,7 +46,8 @@ export class TsvTestHost implements TsvHost {
 
   async runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]> {
     const [file, defaultArgs] = process.platform === "win32" ?
-      ["cmd.exe", ["/c", "npm"]] :
+      // "C:\Program Files\nodejs\node.exe", ["C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"]
+      [process.execPath, [join(dirname(process.execPath), 'node_modules', 'npm', 'bin', 'npm-cli.js')]] :
       ["npm", []];
 
     return this.runFile(file, [...defaultArgs, ...args], cwd);
