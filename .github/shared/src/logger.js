@@ -52,3 +52,6 @@ export class ConsoleLogger {
     return this.#isDebug;
   }
 }
+
+// Singleton logger with isDebug=false
+export const consoleLogger = new ConsoleLogger();
