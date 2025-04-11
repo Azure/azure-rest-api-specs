@@ -161,7 +161,6 @@ model BlobReferenceForConsumption {
   credential: SasCredential;
 }
 
-
 // Asset Download Models
 @doc("Asset Credential Request")
 @added(Versions.v2025_05_15_preview)
@@ -171,14 +170,6 @@ model AssetCredentialRequest {
   BlobUri: string;
 }
 
-@doc("Asset Credential Response")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
-model AssetCredentialResponse {
-  @doc("Blob Reference for Consumption")
-  BlobReferenceForConsumption: BlobReferenceForConsumption;
-}
-
 @doc("Blob Reference Credential Type")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
@@ -186,7 +177,7 @@ union BlobReferenceCredentialType {
   string,
 
   @doc("Shared Access Signature")
-  SAS: "SAS";
+  SAS: "SAS",
 }
 
 @doc("SAS Credential")
@@ -198,4 +189,9 @@ model SASCredential {
 
   @doc("Full SAS URI, including the storage, container/blob path and SAS token")
   SASUri: string;
+}
+@doc("Represents a reference to a blob for consumption")
+model AssetCredentialResponse {
+  @doc("Credential info to access the storage account.")
+  blobReferenceForConsumption: BlobReferenceForConsumption;
 }

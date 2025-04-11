@@ -19,16 +19,24 @@ alias ConnectionOperations = Azure.Core.ResourceOperations<ConnectionServiceTrai
 
 @added(Versions.v2025_05_01)
 interface Connections {
-  @doc("Get a connection by name.")
+  @doc("Get a connection by name, without populating connection credentials")
   get is ConnectionOperations.ResourceRead<Connection>;
 
-  @doc("List all connections in the project")
+  @doc("Get a connection by name, with its connection credentials")
+  @Rest.actionSeparator("/")
+  @Rest.action("withCredentials")
+  getWithCredentials is ConnectionOperations.ResourceRead<Connection>;
+  @doc("List all connections in the project, without populating connection credentials")
   list is ConnectionOperations.ResourceList<
     Connection,
     ListQueryParametersTrait<{
-      @doc("Specific type of connection to return in list")
+      @doc("List connections of this specific type")
       @query("connectionType")
       connectionType?: ConnectionType;
+
+      @doc("List connections that are default connections")
+      @query("defaultConnection")
+      defaultConnection?: boolean;
 
       ...StandardListQueryParameters;
     }>
