@@ -71,5 +71,3 @@ interface EvaluationResults
     AssetCredentialResponse
   >;
 }
-
-@@access(Azure.AI.Projects.EvaluationResults, Access.internal);

@@ -14,5 +14,8 @@ using Azure.ClientGenerator.Core;
 
 // Models to not be exposed in generated client
 
+@@access(Azure.AI.Projects.EvaluationUpload, Access.internal);
 @@access(Azure.AI.Projects.EvaluationResult, Access.internal);
 @@access(Azure.AI.Projects.ResultType, Access.internal);
+@@access(Azure.AI.Projects.AssetCredentialRequest, Access.internal);
+@@access(Azure.AI.Projects.AssetCredentialResponse, Access.internal);
