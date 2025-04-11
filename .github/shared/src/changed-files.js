@@ -24,7 +24,7 @@ export async function getChangedFiles(options = {}) {
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
   const result = await diff(baseCommitish, headCommitish, {
-    args: "--name-only",
+    args: ["--name-only"],
     cwd,
     logger: logger,
   });
