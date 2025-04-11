@@ -4,9 +4,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 namespace Microsoft.IoTOperations;
 
 /**
@@ -56,9 +55,190 @@ model BrokerProperties {
   @doc("Memory profile of Broker.")
   memoryProfile?: BrokerMemoryProfile = BrokerMemoryProfile.Medium;
 
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @doc("The persistence settings of the Broker.")
+  @added(Versions.`2025-07-01-preview`)
+  persistence?: Persistence;
+
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+@doc("""
+  Disk persistence configuration.
+  
+  When persistence is enabled, certain items (non-performance-critical data) selected for persistence will reside only on disk. Below are the affected items: 
+  
+  - Retained messages will be stored on disk only. 
+  - WILL messages will be stored on disk only. 
+  - DSS key/value pairs will be stored on disk only, except for performance-critical items like timed locks, which remain in both disk and memory for improved performance.
+  
+  Optional. Everything is in-memory if not set. 
+  Note: if configured, all MQTT session states are written to disk.
+  """)
+@added(Versions.`2025-07-01-preview`)
+model Persistence {
+  @doc("Dynamic settings of the persistence.")
+  dynamicSettings?: DynamicPersistenceSettings;
+
+  @doc("The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template If a PVC template isn't specified Then local-path provisioner is requested with this size limit Required.")
+  maxSize: string;
+
+  @doc("""
+    Use the specified persistent volume claim template to mount a persistent volume Same object as in diskBackedMessageBuffer, but with a limitation that access modes field must be set to `ReadWriteOncePod`.
+    
+    If unset, a default PVC with default properties will be used. Among other things this PVC will use the cluster default storage class, which may or may not be using a local path provisioner. User is opting in to sub-optimal behavior if they leave this unset or set it without the storage class field, and their cluster default is not a local path class.
+    """)
+  persistentVolumeClaimSpec?: VolumeClaimSpec = #{
+    accessModes: #["ReadWriteOncePod"],
+  };
+
+  @doc("Controls which topic's retained messages should be persisted to disk.")
+  retain?: TopicRetainmentPolicy;
+
+  @doc("Controls which keys should be persisted to disk for the state store")
+  stateStore?: StateStoreRetainmentPolicy;
+
+  @doc("Custom policy, required if mode is Custom Subscriber queues from all groups are persisted to disk (logical OR)")
+  subscriberQueue?: SubscriberQueueRetainmentPolicy;
+}
+
+@added(Versions.`2025-07-01-preview`)
+union RetainmentPolicyMode {
+  string,
+
+  @doc("Persist all 'retain' messages.")
+  All: "All",
+
+  @doc("Persist no messages.")
+  None: "None",
+
+  @doc("Persist only the specified topics.")
+  Custom: "Custom",
+}
+
+@doc("Retainment policy properties")
+@added(Versions.`2025-07-01-preview`)
+@discriminator("mode")
+model TopicRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentPolicyMode;
+}
+
+@doc("Custom Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+model CustomTopicRetainmentPolicy extends TopicRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentPolicyMode.Custom;
+
+  @doc("Settings for the retainment policy.")
+  retainSettings?: TopicRetainmentSettings;
+}
+
+@doc("Retainment settings properties")
+@added(Versions.`2025-07-01-preview`)
+model TopicRetainmentSettings {
+  @doc("List of topics under which retained messages would be persisted to disk Wildcards # and + supported")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  topics?: string[];
+
+  @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)")
+  dynamic?: DynamicRetainmentSettings;
+}
+
+@doc("Dynamic settings of the persistence.")
+@added(Versions.`2025-07-01-preview`)
+model DynamicRetainmentSettings {
+  @doc("The mode of the retainment policy.")
+  mode?: OperationalMode;
+}
+
+@doc("State Store Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+@discriminator("mode")
+model StateStoreRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentPolicyMode;
+
+  @doc("Settings for the retainment policy.")
+  stateStoreSettings?: StateStoreRetainmentSettings;
+}
+
+@doc("Custom State Store Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+model CustomStateStoreRetainmentPolicy extends StateStoreRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentPolicyMode.Custom;
+
+  @doc("Settings for the retainment policy.")
+  stateStoreSettings?: StateStoreRetainmentSettings;
+}
+
+@doc("State Store Retainment settings properties")
+@added(Versions.`2025-07-01-preview`)
+model StateStoreRetainmentSettings {
+  @doc("List of key and key type to persist to disk")
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  stateStoreResources?: StateStoreRetainmentResources[];
+
+  @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)")
+  dynamic?: DynamicRetainmentSettings;
+}
+
+@doc("State Store Retainment resources properties")
+@added(Versions.`2025-07-01-preview`)
+model StateStoreRetainmentResources {
+  @doc("The key to persist to disk")
+  keyType: string;
+
+  @doc("List of keys to persist to disk, required")
+  keys: string[];
+}
+@doc("""
+  Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH 
+  Optional, default shown If customer specify a user property, it will work to enable persistence dynamically, in addition to the default user property "aio-persistence"
+  """)
+@added(Versions.`2025-07-01-preview`)
+model DynamicPersistenceSettings {
+  @doc("The user property key to enable persistence.")
+  userPropertyKey?: string;
+
+  @doc("The user property value to enable persistence.")
+  userPropertyValue?: string;
+}
+@doc("Subscriber Queue Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+@discriminator("mode")
+model SubscriberQueueRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentPolicyMode;
+
+  @doc("Settings for the retainment policy.")
+  subscriberQueueSettings?: SubscriberQueueRetainmentSettings;
+}
+
+@doc("Custom Subscriber Queue Retainment Policy")
+@added(Versions.`2025-07-01-preview`)
+model CustomSubscriberQueueRetainmentPolicy extends SubscriberQueueRetainmentPolicy {
+  @doc("The mode of the retainment policy.")
+  mode: RetainmentPolicyMode.Custom;
+
+  @doc("Settings for the retainment policy.")
+  subscriberQueueSettings?: SubscriberQueueRetainmentSettings;
+}
+
+@doc("Subscriber Queue Retainment settings properties")
+@added(Versions.`2025-07-01-preview`)
+model SubscriberQueueRetainmentSettings {
+  @doc("List of client IDs of the subscribers, wildcard * supported")
+  subscriberClientIds?: string[];
+
+  @doc("Controls if MQTT clients can request for disk persistence via `MQTTv5` user property Works in addition to other groups (logical OR)")
+  dynamic?: DynamicRetainmentSettings;
+
+  @doc("List of topics under which messages would be persisted to disk for each subscriber Wildcards # and + supported")
+  topics?: string[];
 }
 
 @doc("Broker Advanced Settings")
@@ -209,6 +389,27 @@ model VolumeClaimResourceRequirements {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")
   requests?: Record<string>;
+
+  @doc("""
+    Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.
+    
+    This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.
+    
+    This field is immutable. It can only be set for containers.
+    """)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @added(Versions.`2025-07-01-preview`)
+  claims?: VolumeClaimResourceRequirementsClaims[];
+}
+
+@doc("VolumeClaimResourceRequirementsClaims properties")
+@added(Versions.`2025-07-01-preview`)
+model VolumeClaimResourceRequirementsClaims {
+  @doc("Name of the resource. This must match the name of a resource in spec.resourceClaims.")
+  name: string;
+
+  @doc("The amount of compute resources required.")
+  resources?: VolumeClaimResourceRequirements;
 }
 
 @doc("VolumeClaimSpecSelector properties")

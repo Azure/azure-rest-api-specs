@@ -16,10 +16,8 @@ import "./models/dataflows/dataflowProfiles.tsp";
 import "./models/dataflows/dataflows.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
-using Azure.Core;
 using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -40,6 +38,11 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-04-01`,
+
+  /** 2025-07-01-preview */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2025-07-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
