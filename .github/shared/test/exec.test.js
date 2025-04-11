@@ -5,8 +5,8 @@ import { createMockLogger } from "./mocks.js";
 
 describe("execFile", () => {
   const str = "test";
-  const file = "echo";
-  const args = [str];
+  const file = process.platform === "win32" ? "cmd.exe" : "echo";
+  const args = process.platform === "win32" ? ["/c", "echo", str] : [str];
   const expected = `${str}${EOL}`;
 
   it.each([{}, { logger: createMockLogger() }])(
