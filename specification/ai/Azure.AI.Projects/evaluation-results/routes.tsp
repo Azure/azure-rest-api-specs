@@ -7,6 +7,7 @@ import "../common/models.tsp";
 import "./models.tsp";
 import "../servicepatterns.tsp";
 import "../main.tsp";
+import "../evaluations/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -66,5 +67,18 @@ interface EvaluationResults
       AssetCredentialRequest: AssetCredentialRequest;
     },
     AssetCredentialResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get agent evaluation results.")
+  @route("/runs:agents/{completionId}")
+  @get
+  getAgentEvaluationResults is Azure.Core.Foundations.Operation<
+    {
+      @doc("Agent run completion id.")
+      @path
+      completionId: string;
+    },
+    Array<AgentEvaluationResult>
   >;
 }
