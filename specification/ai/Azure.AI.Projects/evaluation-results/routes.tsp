@@ -7,6 +7,7 @@ import "../common/models.tsp";
 import "./models.tsp";
 import "../servicepatterns.tsp";
 import "../main.tsp";
+import "../evaluations/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -69,7 +70,7 @@ interface EvaluationResults
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get the jailbreak dataset with type.")
+  @doc("Get agent evaluation results.")
   @route("/runs:agents/{completionId}")
   @get
   getAgentEvaluationResults is Azure.Core.Foundations.Operation<

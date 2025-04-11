@@ -113,14 +113,6 @@ model Evaluation {
   @visibility(Lifecycle.Read)
   id: string;
 
-  @doc("Identifier of the agent thread.")
-  @visibility(Lifecycle.Read)
-  agentThreadId?: string;
-
-  @doc("Identifier of the agent run.")
-  @visibility(Lifecycle.Read)
-  agentRunId?: string;
-
   @doc("Data for evaluation.")
   data: InputData;
 
@@ -245,7 +237,7 @@ model EvaluationUpload {
   outputs?: Record<string>;
 }
 
-// TODO: This is from Agent API v2 but host in evaluation API for now
+// TODO: model from agent API v2
 @doc("Agent API v2, enum for author role.")
 union AuthorRoleEnum {
   string,
@@ -269,7 +261,7 @@ union AuthorRoleEnum {
   unknown_role: "unknown",
 }
 
-// TODO: This is from Agent API v2 but host in evaluation API for now
+// TODO: model from agent API v2
 @doc("Text content for completion message.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
@@ -281,7 +273,7 @@ model TextContent {
   text: string;
 }
 
-// TODO: This is from Agent API v2 but host in evaluation API for now
+// TODO: model from agent API v2
 @doc("Agent API v2, completion message for agent run.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
@@ -332,7 +324,6 @@ model CompletionsMessage {
 }
 
 @doc("Evaluation result for agent run.")
-// @resource("runs")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model AgentEvaluationResult {
@@ -394,22 +385,16 @@ model AgentToolDefinition {
 }
 
 @doc("Evaluation definition for agent run.")
-// @resource("runs")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model AgentEvaluation {
-  // @doc("Identifier of the evaluation.")
-  // @key("name")
-  // @visibility(Lifecycle.Read)
-  // id: string;
-
   @doc("Identifier of the agent thread.")
   @visibility(Lifecycle.Read)
   threadId?: string;
 
   @doc("Identifier of the agent run.")
   @visibility(Lifecycle.Read)
-  tunId?: string;
+  runId?: string;
 
   @doc("Identifier of the agent completion, which is the combination of Thread ID and Run ID.")
   @visibility(Lifecycle.Read)
