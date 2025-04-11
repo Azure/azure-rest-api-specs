@@ -2700,6 +2700,11 @@
       "description": "Managed Network settings for a machine learning workspace.",
       "type": "object",
       "properties": {
+        "enableNetworkMonitor": {
+          "description": "A flag to indicate if  monitoring needs to be enabled for the managed network.",
+          "type": "boolean",
+          "default": false
+        },
         "isolationMode": {
           "description": "Isolation mode for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/IsolationMode"
@@ -2723,7 +2728,27 @@
         "firewallSku": {
           "description": "Firewall Sku used for FQDN Rules",
           "$ref": "#/definitions/FirewallSku"
+        },
+        "managedNetworkKind": {
+          "description": "Kind of the managed network",
+          "$ref": "#/definitions/ManagedNetworkKind"
+        },
+        "firewallPublicIpAddress": {
+          "description": "Public IP address assigned to the Azure Firewall.",
+          "type": "string"
         }
+      }
+    },
+    "ManagedNetworkKind": {
+      "description": "The Kind of the managed network.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedNetworkKind",
+        "modelAsString": true
       }
     },
     "ManagedNetworkProvisionOptions": {
@@ -2787,9 +2812,41 @@
         },
         "type": {
           "$ref": "#/definitions/RuleType"
+        },
+        "errorInformation": {
+          "description": "Error information about an outbound rule of a machine learning workspace incase if RuleStatus is failed.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "parentRuleNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "discriminator": "type"
+    },
+    "ManagedNetworkSettingsBasicResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Managed Network settings for a machine learning workspace.",
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        }
+      }
     },
     "PrivateEndpointOutboundRule": {
       "description": "Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
@@ -2911,7 +2968,10 @@
       "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Inactive",
-        "Active"
+        "Active",
+        "Provisioning",
+        "Deleting",
+        "Failed"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3704,4 +3764,3 @@
     }
   }
 }
-
