@@ -3,10 +3,14 @@
 import { execFile } from "./exec.js";
 
 /**
+ * @typedef {import('./logger.js').ILogger} ILogger
+ */
+
+/**
  * @typedef {Object} GitOptions
  * @property {string[]} [args]
  * @property {string} [cwd] Current working directory. Default: process.cwd().
- * @property {import('./logger.js').ILogger} [logger]
+ * @property {ILogger} [logger]
  */
 
 /**
@@ -68,7 +72,7 @@ export async function status(options = {}) {
  * @param {string[]} args
  * @param {Object} [options]
  * @param {string} [options.cwd] Current working directory. Default: process.cwd().
- * @param {import('./logger.js').ILogger} [options.logger]
+ * @param {ILogger} [options.logger]
  * @returns {Promise<string>}
  */
 async function execGit(args, options = {}) {
