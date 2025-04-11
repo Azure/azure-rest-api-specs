@@ -647,7 +647,7 @@
             "description": "Deleted the Target Directory"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Describes the error if the operation is not successful.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -743,6 +743,153 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/TargetDirectoryStatusResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/transfers/{transferId}": {
+      "get": {
+        "description": "Retrieves transfer details using a system-generated TransferId.",
+        "operationId": "Transfers_GetById",
+        "x-ms-examples": {
+          "GetTransferById": {
+            "$ref": "./examples/getTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Cancels the transfer using the system-generated TransferId.",
+        "operationId": "Transfers_CancelById",
+        "x-ms-examples": {
+          "GetTransferById": {
+            "$ref": "./examples/cancelTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "The request has succeeded with no response body."
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/transfers/default": {
+      "put": {
+        "description": "Transfers subscription billing ownership to the destination email.",
+        "operationId": "Transfers_SendExport",
+        "x-ms-examples": {
+          "CreateTransfer": {
+            "$ref": "./examples/createTransfer.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Transfer creation request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "201": {
+            "description": "Transfer creation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "Transfers_GetLatestBySubscriptionId",
+        "x-ms-examples": {
+          "GetLatestTransferBySubscriptionId": {
+            "$ref": "./examples/getLatestTransferBySubscriptionId.json"
+          }
+        },
+        "description": "Get transfer details by subscription id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
             }
           },
           "default": {
@@ -1373,6 +1520,162 @@
           "format": "date-time"
         }
       }
+    },
+    "ProxyResourceWithTags": {
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "description": "Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TransferDetails": {
+      "description": "The response details for the transfer",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResourceWithTags"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TransferProperties"
+        }
+      }
+    },
+    "TransferProperties": {
+      "description": "Details of the transfer resource.",
+      "type": "object",
+      "properties": {
+        "transferId": {
+          "description": "The unique identifier for the transfer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "description": "The timestamp when the transfer was last updated (in UTC).",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "description": "The expiration timestamp of the transfer (in UTC).",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "transferStatus": {
+          "description": "The current status of the transfer.",
+          "type": "string",
+          "enum": [
+            "Pending",
+            "InProgress",
+            "Completed",
+            "CompletedWithError",
+            "Failed",
+            "Canceled",
+            "Declined",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "transferStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "recipientEmailId": {
+          "description": "The email ID of the user to whom the transfer request was sent.",
+          "type": "string"
+        },
+        "initiatorEmailId": {
+          "description": "The email ID of the user who sent the transfer request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "transferServiceOwnership": {
+          "description": "Indicates whether the transfer service ownership is enabled.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "transferServiceOwnership",
+            "modelAsString": true
+          }
+        },
+        "detailedTransferStatus": {
+          "description": "Detailed transfer status.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "productType": {
+                "description": "Type of product that is transferred.",
+                "type": "string",
+                "readOnly": true
+              },
+              "productId": {
+                "description": "The ID of the product that is transferred.",
+                "type": "string",
+                "readOnly": true
+              },
+              "productName": {
+                "description": "The name of the product that is transferred.",
+                "type": "string",
+                "readOnly": true
+              },
+              "skuDescription": {
+                "description": "The SKU of the product that is transferred.",
+                "type": "string",
+                "readOnly": true
+              },
+              "transferStatus": {
+                "description": "Transfer status.",
+                "type": "string",
+                "enum": [
+                  "NotStarted",
+                  "InProgress",
+                  "Completed",
+                  "Failed"
+                ],
+                "x-ms-enum": {
+                  "name": "productTransferStatus",
+                  "modelAsString": true
+                },
+                "readOnly": true
+              }
+            }
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the transfer.",
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "transferProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -1427,6 +1730,14 @@
       "schema": {
         "$ref": "#/definitions/TargetDirectoryRequest"
       }
+    },
+    "transferIdParameter": {
+      "name": "transferId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "Transfer Id."
     }
   },
   "security": [
