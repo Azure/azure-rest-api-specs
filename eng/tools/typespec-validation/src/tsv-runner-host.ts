@@ -39,13 +39,18 @@ export class TsvRunnerHost implements TsvHost {
   }
 
   runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]> {
-    const [file, defaultArgs] = process.platform === "win32" ?
-      // Only way I could find to run "npm" on Windows, without using the shell (e.g. "cmd /c npm ...")
-      // "C:\Program Files\nodejs\node.exe", ["C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"]
-      [process.execPath, [join(dirname(process.execPath), 'node_modules', 'npm', 'bin', 'npm-cli.js')]] :
-      ["npm", []];
+    const [file, defaultArgs] =
+      process.platform === "win32"
+        ? [
+            // Only way I could find to run "npm" on Windows, without using the shell (e.g. "cmd /c npm ...")
+            // "C:\Program Files\nodejs\node.exe"
+            process.execPath,
+            // ["C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js", "--"]
+            [join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js"), "--"],
+          ]
+        : ["npm", []];
 
-      return this.runFile(file, [...defaultArgs, ...args], cwd);
+    return this.runFile(file, [...defaultArgs, ...args], cwd);
   }
 
   normalizePath(folder: string): string {
