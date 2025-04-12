@@ -309,6 +309,57 @@ union AzureVmSecuritySuitabilityDetail {
   @doc("DiskSizeLarge Azure Vm Security Suitability Detail")
   DiskSizeLarge: "DiskSizeLarge",
 
+  @doc("Azure does not support VM with OS disk size greater than 4TB.")
+  AllDiskSizeExceeds4TB: "AllDiskSizeExceeds4TB",
+
+  @doc("Azure does not support VM with OS disk size greater than 4TB. If OS disk size is less than 4TB, proceed with migration.")
+  AnyDiskSizeExceeds4TB: "AnyDiskSizeExceeds4TB",
+
+  @doc("Azure does not support VM with any disk size greater than 4TB. Please proceed only if you know the OS disk size is less than 4TB.")
+  AnyDiskSizeExceeds4TBConditional: "AnyDiskSizeExceeds4TBConditional",
+
+  @doc("The VM is not ready to be migrated to Azure because the OS is not supported.")
+  OSNotSupported: "OSNotSupported",
+
+  @doc("The VM is ready to be migrated to Azure with standard VM security type.")
+  StandardReady: "StandardReady",
+
+  @doc("The VM is ready to be migrated to Azure with Trusted launch VM security type.")
+  TVMReady: "TVMReady",
+
+  @doc("The VM is not ready to be migrated to Azure with standard VM security type because the OS is not supported.")
+  StandardNotReadyOSNotSupported: "StandardNotReadyOSNotSupported",
+
+  @doc("The VM is not ready to be migrated to Azure with Trusted launch VM security type because the OS is not supported for Trusted launch VM. Get more information [here].")
+  TVMNotReadyOSNotSupported: "TVMNotReadyOSNotSupported",
+
+  @doc("The VM is not ready to be migrated to Azure with standard VM security type. Azure does not support OS disk size greater than 2TB for VMs with BIOS boot type.")
+  StandardNotReady2TBBiosBoot: "StandardNotReady2TBBiosBoot",
+
+  @doc("The VM is not ready to be migrated to Azure with Trusted launch VM security type. Azure does not support OS disk size greater than 2TB for VMs with BIOS boot type.")
+  AllDiskSizeExceeds2TB: "AllDiskSizeExceeds2TB",
+
+  @doc("The VM readiness is unknown. Azure does not support OS disk size greater than 2TB for VMs with BIOS boot type. Please proceed with migration only if OS disk size is less than 2TB.")
+  DiskSize2TBConditionalReadyBiosBoot: "DiskSize2TBConditionalReadyBiosBoot",
+
+  @doc("The VM cannot be migrated to Trusted launch VM because the OS is not supported. Learn more [here].")
+  TVMCannotMigrateOSNotSupported: "TVMCannotMigrateOSNotSupported",
+
+  @doc("The VM cannot be migrated to Azure because the OS is not supported.")
+  StandardCannotMigrateOSNotSupported: "StandardCannotMigrateOSNotSupported",
+
+  @doc("The VM can be migrated to Azure with standard VM security type.")
+  StandardCanMigrate: "StandardCanMigrate",
+
+  @doc("The VM can be migrated to Trusted launch VM. Currently, Azure Migrate does not support migration to Trusted launch for VM with BIOS boot type. You can convert the VM post-migration to Trusted Launch VM. The steps are mentioned in this documentation.")
+  TVMCanMigrateConditional: "TVMCanMigrateConditional",
+
+  @doc("Readiness is marked as unknown because the OS name cannot be read.")
+  OSNameCannotBeRead: "OSNameCannotBeRead",
+
+  @doc("Migration to Trusted Launch VM is not supported for BIOS boot type VMs at this time.")
+  TVMNotSupportedForBiosBoot: "TVMNotSupportedForBiosBoot",
+
   string,
 }
 
@@ -362,6 +413,21 @@ union AzureVmSecurityType {
   CVM: "CVM",
 
   string,
+}
+
+@doc("VM Security Suitability")
+model VmSecuritySuitability {
+  @doc("Gets and sets the security type for this secure VM.")
+  @visibility(Lifecycle.Read)
+  vmSecurityType: AzureVmSecurityType;
+
+  @doc("Gets the suitability for this secure VM.")
+  @visibility(Lifecycle.Read)
+  securitySuitability: CloudSuitabilityCommon;
+
+  @doc("Gets the security suitability details for this VM.")
+  @visibility(Lifecycle.Read)
+  securitySuitabilityDetails: AzureVmSecuritySuitabilityDetail[];
 }
 
 @doc("Azure Disk Type")
