@@ -3,7 +3,7 @@ import { dirname, join } from "path";
 import { simpleGit } from "simple-git";
 import { RuleResult } from "./rule-result.js";
 import { IGitOperation, TsvHost } from "./tsv-host.js";
-import { gitDiffTopSpecFolder, normalizePath, runFile } from "./utils.js";
+import { gitDiffTopSpecFolder, runFile } from "./utils.js";
 
 export class TsvRunnerHost implements TsvHost {
   gitOperation(folder: string): IGitOperation {
@@ -35,10 +35,6 @@ export class TsvRunnerHost implements TsvHost {
         : ["npm", []];
 
     return this.runFile(file, [...defaultArgs, ...args], cwd);
-  }
-
-  normalizePath(folder: string): string {
-    return normalizePath(folder);
   }
 
   gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult> {

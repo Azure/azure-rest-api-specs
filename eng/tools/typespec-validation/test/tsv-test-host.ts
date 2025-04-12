@@ -2,7 +2,6 @@ import { Options as GlobbyOptions } from "globby";
 import defaultPath, { dirname, join, PlatformPath } from "path";
 import { RuleResult } from "../src/rule-result.js";
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
-import { normalizePath } from "../src/utils.js";
 
 export { IGitOperation } from "../src/tsv-host.js";
 
@@ -59,10 +58,6 @@ export class TsvTestHost implements TsvHost {
         : ["npm", []];
 
     return this.runFile(file, [...defaultArgs, ...args], cwd);
-  }
-
-  normalizePath(folder: string): string {
-    return normalizePath(folder, this.path);
   }
 
   async gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult> {
