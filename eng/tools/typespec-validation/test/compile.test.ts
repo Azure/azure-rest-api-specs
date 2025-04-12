@@ -19,6 +19,7 @@ const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/
 describe("compile", function () {
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
   });
 
   afterEach(() => {
