@@ -1,4 +1,3 @@
-import { readFile as readFileImpl } from "fs/promises";
 import { globby, Options as GlobbyOptions } from "globby";
 import { dirname, join } from "path";
 import { simpleGit } from "simple-git";
@@ -11,11 +10,6 @@ export class TsvRunnerHost implements TsvHost {
   gitOperation(folder: string): IGitOperation {
     return simpleGit(folder);
   }
-
-  readTspConfig(folder: string): Promise<string> {
-    return readFileImpl(join(folder, "tspconfig.yaml"), "utf-8");
-  }
-
 
   runFile(file: string, args: string[], cwd?: string): Promise<[Error | null, string, string]> {
     return runFile(file, args, cwd);

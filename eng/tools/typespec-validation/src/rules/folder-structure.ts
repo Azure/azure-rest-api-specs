@@ -4,7 +4,7 @@ import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
-import { fileExists } from "../utils.js";
+import { fileExists, readTspConfig } from "../utils.js";
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
@@ -84,7 +84,7 @@ export class FolderStructureRule implements Rule {
     }
 
     if (tspConfigExists) {
-      const configText = await host.readTspConfig(folder);
+      const configText = await readTspConfig(folder);
       const config = yamlParse(configText);
       const rpFolder =
         config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];

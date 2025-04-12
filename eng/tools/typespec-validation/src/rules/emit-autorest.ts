@@ -3,7 +3,7 @@ import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
-import { fileExists } from "../utils.js";
+import { fileExists, readTspConfig } from "../utils.js";
 
 export class EmitAutorestRule implements Rule {
   readonly name = "EmitAutorest";
@@ -19,7 +19,7 @@ export class EmitAutorestRule implements Rule {
     stdOutput += `mainTspExists: ${mainTspExists}\n`;
 
     if (mainTspExists) {
-      const configText = await host.readTspConfig(folder);
+      const configText = await readTspConfig(folder);
       const config = yamlParse(configText);
 
       const emit = config?.emit;

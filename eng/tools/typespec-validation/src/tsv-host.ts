@@ -4,7 +4,6 @@ import { RuleResult } from "./rule-result.js";
 
 export interface TsvHost {
   gitOperation(folder: string): IGitOperation;
-  readTspConfig(folder: string): Promise<string>;
   runFile(file: string, args: string[], cwd?: string): Promise<[Error | null, string, string]>;
   runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]>;
   normalizePath(folder: string): string;

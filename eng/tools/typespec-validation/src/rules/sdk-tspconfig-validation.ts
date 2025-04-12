@@ -4,7 +4,7 @@ import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
 import { Suppression } from "suppressions";
-import { fileExists } from "../utils.js";
+import { fileExists, readTspConfig } from "../utils.js";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -28,7 +28,7 @@ export abstract class TspconfigSubRuleBase {
 
     let config = undefined;
     try {
-      const configText = await host.readTspConfig(folder);
+      const configText = await readTspConfig(folder);
       config = yamlParse(configText);
     } catch (error) {
       return this.createFailedResult(

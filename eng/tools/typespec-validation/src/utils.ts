@@ -1,6 +1,6 @@
 import { execFile } from "child_process";
-import { access } from "fs/promises";
-import defaultPath, { PlatformPath } from "path";
+import { access, readFile } from "fs/promises";
+import defaultPath, { join, PlatformPath } from "path";
 import { TsvHost } from "./tsv-host.js";
 
 export async function filterAsync<T>(
@@ -31,6 +31,10 @@ export async function fileExists(file: string) {
   return access(file)
     .then(() => true)
     .catch(() => false);
+}
+
+export async function readTspConfig(folder: string) {
+  return readFile(join(folder, "tspconfig.yaml"), "utf-8");
 }
 
 export function normalizePath(folder: string, path: PlatformPath = defaultPath) {

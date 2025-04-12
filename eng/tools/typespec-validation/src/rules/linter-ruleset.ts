@@ -3,7 +3,7 @@ import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
-import { fileExists } from "../utils.js";
+import { fileExists, readTspConfig } from "../utils.js";
 
 // Maps deprecated rulesets to the replacement rulesets
 const deprecatedRulesets = new Map<string, string>([
@@ -25,7 +25,7 @@ export class LinterRulesetRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
 
-    const configText = await host.readTspConfig(folder);
+    const configText = await readTspConfig(folder);
     const config = yamlParse(configText);
 
     const rpFolder =

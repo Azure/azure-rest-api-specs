@@ -2,6 +2,7 @@ import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { readTspConfig } from "../utils.js";
 
 export class FlavorAzureRule implements Rule {
   readonly name = "FlavorAzure";
@@ -13,7 +14,7 @@ export class FlavorAzureRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
 
-    const configText = await host.readTspConfig(folder);
+    const configText = await readTspConfig(folder);
     const config = yamlParse(configText);
 
     const options = config?.options;
