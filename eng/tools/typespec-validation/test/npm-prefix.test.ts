@@ -1,12 +1,14 @@
 import { strict as assert } from "node:assert";
 import path from "path";
-import { describe, it } from "vitest";
+import { describe, it, vi } from "vitest";
 import { NpmPrefixRule } from "../src/rules/npm-prefix.js";
 import { IGitOperation, TsvTestHost } from "./tsv-test-host.js";
 
+import * as utils from "../src/utils.js";
+
 describe("npm-prefix", function () {
   it("should succeed if node returns inconsistent drive letter capitalization", async function () {
-    let host = new TsvTestHost(path.win32);
+    let host = new TsvTestHost();
     host.runFile = async (_file: string, args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
       if (args.includes("prefix")) {
         return [null, `C:${path.sep}Git${path.sep}azure-rest-api-specs`, ""];
@@ -31,6 +33,8 @@ describe("npm-prefix", function () {
         },
       };
     };
+
+    vi.spyOn(utils, "normalizePath").mockImplementation((folder) => utils.normalizePathImpl(folder, path.win32));
 
     const result = await new NpmPrefixRule().execute(host, TsvTestHost.folder);
 
