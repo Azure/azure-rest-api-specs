@@ -1,3 +1,4 @@
+import { readFile } from "fs/promises";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
@@ -94,7 +95,7 @@ export class CompileRule implements Rule {
           const tspGeneratedSwaggers = await filterAsync(
             allSwaggers,
             async (swaggerPath: string) => {
-              const swaggerText = await host.readFile(swaggerPath);
+              const swaggerText = await readFile(swaggerPath, { encoding: "utf8" });
               const swaggerObj = JSON.parse(swaggerText);
               return (
                 swaggerObj["info"]?.["x-typespec-generated"] ||

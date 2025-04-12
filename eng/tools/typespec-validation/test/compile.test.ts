@@ -1,5 +1,11 @@
-import path from "path";
 import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
+
+vi.mock("fs/promises", () => ({
+  readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
+}));
+
+import path from "path";
+import * as fsPromises from "fs/promises";
 import { RuleResult } from "../src/rule-result.js";
 import { CompileRule } from "../src/rules/compile.js";
 import { TsvHost } from "../src/tsv-host.js";
@@ -18,7 +24,7 @@ describe("compile", function () {
   });
 
   afterEach(() => {
-    fileExistsSpy.mockReset();
+    vi.clearAllMocks();
   });
 
   it("should succeed if project can compile", async function () {
@@ -44,8 +50,9 @@ describe("compile", function () {
 
     // ensure handwritten swaggers are ignored
     host.globby = async () => [swaggerPath, handwrittenSwaggerPath];
-    host.readFile = async (path) =>
-      path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}";
+    vi.mocked(fsPromises.readFile).mockImplementation(async (path) =>
+      path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}",
+    );
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: true,
@@ -111,11 +118,11 @@ describe("compile", function () {
       swaggerPath.replace("2023", "2024"),
     ];
 
-    host.readFile = async (path) => {
-      return path.includes("2024")
+    vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
+      return path.toString().includes("2024")
         ? '{"info": {"x-typespec-generated": true}}'
         : '{"info": {"x-cadl-generated": true}}';
-    };
+    });
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: false,
@@ -137,11 +144,11 @@ describe("compile", function () {
       swaggerPath.replace("2023", "2024"),
     ];
 
-    host.readFile = async (path) => {
-      return path.includes("2024")
+    vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
+      return path.toString().includes("2024")
         ? '{"info": {"x-typespec-generated": true}}'
         : '{"info": {"x-cadl-generated": true}}';
-    };
+    });
 
     host.getSuppressions = async (path) => {
       return path.includes("2023") || path.includes("2024")
@@ -229,7 +236,7 @@ describe("compile", function () {
         [],
         ""
       )}`;
-      
+
       return {
         success: false,
         stdOutput: stdOut,

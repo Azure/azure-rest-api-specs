@@ -1,3 +1,4 @@
+import { readFile } from "fs/promises";
 import path from "path";
 import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
@@ -118,7 +119,7 @@ export class FolderStructureRule implements Rule {
       const tspResolved = path.resolve(teamFolderResolved, tsp);
 
       const pattern = /^\s*import\s+['"]([^'"]+)['"]\s*;\s*$/gm;
-      const text = await host.readFile(tspResolved);
+      const text = await readFile(tspResolved, { encoding: "utf8" });
       const imports = [...text.matchAll(pattern)].map((m) => m[1]);
 
       // The path specified in the import must either start with "./" or "../", or be an absolute path.
