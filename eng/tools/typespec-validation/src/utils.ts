@@ -1,19 +1,11 @@
 import { execFile } from "child_process";
 import { access, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
-import { TsvHost } from "./tsv-host.js";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
-
-export async function filterAsync<T>(
-  array: T[],
-  asyncPredicate: (item: T, index: number, array: T[]) => Promise<boolean>,
-): Promise<T[]> {
-  const filterResults = await Promise.all(array.map(asyncPredicate));
-  return array.filter((_, index) => filterResults[index]);
-}
+import { TsvHost } from "./tsv-host.js";
 
 export async function runFile(file: string, args: string[], cwd?: string) {
-  console.log(`run command:${file} ${args.join(' ')}`);
+  console.log(`run command:${file} ${args.join(" ")}`);
   const { err, stdout, stderr } = (await new Promise((res) =>
     // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
     execFile(
