@@ -43,6 +43,10 @@ export async function getSuppressions(path: string): Promise<Suppression[]> {
 }
 
 export function normalizePath(folder: string, path: PlatformPath = defaultPath) {
+  return normalizePathImpl(folder, path);
+}
+
+export function normalizePathImpl(folder: string, path: PlatformPath = defaultPath) {
   return path
     .resolve(folder)
     .split(path.sep)
