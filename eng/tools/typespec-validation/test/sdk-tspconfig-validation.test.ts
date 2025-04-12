@@ -30,6 +30,7 @@ import {
   TspConfigPythonDpPackageDirectorySubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
 import { TsvTestHost } from "./tsv-test-host.js";
+import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
 import { strictEqual } from "node:assert";
 import { stringify } from "yaml";
@@ -505,17 +506,18 @@ options:
 ];
 
 describe("tspconfig", function () {
-
   let fileExistsSpy: MockInstance;
+  let readTspConfigSpy: MockInstance;
 
   beforeEach(() => {
     fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+    readTspConfigSpy = vi.spyOn(utils, "readTspConfig").mockResolvedValue(contosoTspConfig);
   });
 
   afterEach(() => {
     fileExistsSpy.mockReset();
+    readTspConfigSpy.mockReset();
   });
-
 
   it.each([
     // common
@@ -562,7 +564,7 @@ describe("tspconfig", function () {
     ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
     let host = new TsvTestHost();
-    host.readTspConfig = async (_folder: string) => c.tspconfigContent;
+    readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
     host.getSuppressions = async (_path: string) => [
       {
         tool: "TypeSpecValidation",

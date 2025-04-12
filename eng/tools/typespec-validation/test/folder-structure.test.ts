@@ -4,6 +4,7 @@ vi.mock("fs/promises", () => ({
   readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
 }));
 
+import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
@@ -12,9 +13,11 @@ import * as utils from "../src/utils.js";
 
 describe("folder-structure", function () {
   let fileExistsSpy: MockInstance;
+  let readTspConfigSpy: MockInstance;
 
   beforeEach(() => {
     fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+    readTspConfigSpy = vi.spyOn(utils, "readTspConfig").mockResolvedValue(contosoTspConfig);
   });
 
   afterEach(() => {
@@ -234,11 +237,11 @@ describe("folder-structure", function () {
     host.normalizePath = () => {
       return "/gitroot";
     };
-    host.readTspConfig = async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(async (_folder: string) => `
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
-`;
+`);
 
     const result = await new FolderStructureRule().execute(
       host,
@@ -256,11 +259,11 @@ options:
     host.normalizePath = () => {
       return "/gitroot";
     };
-    host.readTspConfig = async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(async (_folder: string) => `
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
-`;
+`);
 
     const result = await new FolderStructureRule().execute(
       host,
@@ -278,11 +281,11 @@ options:
     host.normalizePath = () => {
       return "/gitroot";
     };
-    host.readTspConfig = async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(async (_folder: string) => `
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
-`;
+`);
 
     const result = await new FolderStructureRule().execute(
       host,
@@ -301,11 +304,11 @@ options:
     host.normalizePath = () => {
       return "/gitroot";
     };
-    host.readTspConfig = async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(async (_folder: string) => `
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
-`;
+`);
 
     const result = await new FolderStructureRule().execute(
       host,

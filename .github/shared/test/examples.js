@@ -11,54 +11,53 @@ export const swaggerTypeSpecGenerated = JSON.stringify({
 export const contosoTspConfig = `
 parameters:
   "service-dir":
-    default: "sdk/contoso"
+    default: "sdk/contosowidgetmanager"
+  "dependencies":
+    default: ""
 emit:
   - "@azure-tools/typespec-autorest"
-options:
-  "@azure-tools/typespec-autorest":
-    use-read-only-status-schema: true
-    emitter-output-dir: "{project-root}/.."
-    azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/contoso.json"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.Contoso"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
-  "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-contoso"
-    namespace: "azure.mgmt.contoso"
-    generate-test: true
-    generate-sample: true
-    flavor: "azure"
-  "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-contoso"
-    namespace: "com.azure.resourcemanager.contoso"
-    service-name: "contoso"
-    flavor: azure
-  "@azure-tools/typespec-ts":
-    package-dir: "arm-contoso"
-    azure-sdk-for-js: true
-    is-modular-library: true
-    generate-metadata: true
-    flavor: "azure"
-    experimental-extensible-enums: true
-    package-details:
-      name: "@azure/arm-contoso"
-  "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/contoso"
-    package-dir: "armcontoso"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    fix-const-stuttering: true
-    flavor: "azure"
-    generate-samples: true
-    generate-fakes: true
-    head-as-boolean: true
-    inject-spans: true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}/.."
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/widgets.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-contoso-widgetmanager"
+    namespace: "azure.contoso.widgetmanager"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Template.Contoso"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "contosowidgetmanager-rest"
+    package-details:
+      name: "@azure-rest/contoso-widgetmanager-rest"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-contoso-widgetmanager"
+    namespace: com.azure.contoso.widgetmanager
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/contosowidget"
+    package-dir: "azmanager"
+    module-version: "0.0.1"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"
 `;
 
 export const contosoReadme = `

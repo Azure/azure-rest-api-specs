@@ -18,6 +18,7 @@ describe("emit-autorest", function () {
 
   afterEach(() => {
     fileExistsSpy.mockReset();
+    readTspConfigSpy.mockReset();
   });
 
   it("should succeed if no main.tsp", async function () {
@@ -55,11 +56,11 @@ emit:
 
   it("should fail if no emit", async function () {
     let host = new TsvTestHost();
-    host.readTspConfig = async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(async (_folder: string) => `
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-`;
+`);
 
     const result = await new EmitAutorestRule().execute(host, TsvTestHost.folder);
 
@@ -68,10 +69,10 @@ linter:
 
   it("should fail if no emit autorest", async function () {
     let host = new TsvTestHost();
-    host.readTspConfig = async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(async (_folder: string) => `
 emit:
 - foo
-`;
+`);
 
     const result = await new EmitAutorestRule().execute(host, TsvTestHost.folder);
 
