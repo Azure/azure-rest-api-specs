@@ -9,7 +9,7 @@ export class FlavorAzureRule implements Rule {
 
   readonly description = "Client emitters must set 'flavor:azure'";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(_host: TsvHost, folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";

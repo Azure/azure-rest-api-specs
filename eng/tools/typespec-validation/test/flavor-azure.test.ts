@@ -54,12 +54,12 @@ describe("flavor-azure", function () {
 
     it(`should succeed if ${emitter} flavor is "azure"`, async function () {
       let host = new TsvTestHost();
-      host.readTspConfig = async (_folder: string) => `
+      readTspConfigSpy.mockImplementation(async (_folder: string) => `
       options:
         "${emitter}":
           package-dir: "foo"
           flavor: azure
-      `;
+      `);
       const result = await new FlavorAzureRule().execute(host, TsvTestHost.folder);
       assert(result.success);
     });
@@ -72,7 +72,7 @@ describe("flavor-azure", function () {
       options:
         "${emitter}":
           azure-resource-provider-folder: "data-plane"
-      `;
+      `);
       const result = await new FlavorAzureRule().execute(host, TsvTestHost.folder);
       assert(result.success);
     });

@@ -20,7 +20,7 @@ export class LinterRulesetRule implements Rule {
   readonly description =
     "Ensures each spec includes the correct linter ruleset (data-plane or management-plane)";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(_host: TsvHost, folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";

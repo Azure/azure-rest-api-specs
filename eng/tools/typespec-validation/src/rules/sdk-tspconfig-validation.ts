@@ -18,7 +18,7 @@ export abstract class TspconfigSubRuleBase {
     this.expectedValue = expectedValue;
   }
 
-  public async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  public async execute(_host: TsvHost, folder: string): Promise<RuleResult> {
     const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
       return this.createFailedResult(
