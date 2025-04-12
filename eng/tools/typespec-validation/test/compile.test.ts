@@ -148,7 +148,7 @@ describe("compile", function () {
         : '{"info": {"x-cadl-generated": true}}';
     });
 
-    host.getSuppressions = async (path) => {
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async (path) => {
       return path.includes("2023") || path.includes("2024")
         ? [
             {
@@ -160,7 +160,7 @@ describe("compile", function () {
             },
           ]
         : [];
-    };
+    });
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: true,
@@ -174,7 +174,7 @@ describe("compile", function () {
       return [null, swaggerPath, ""];
     };
 
-    host.getSuppressions = async () => [
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async () => [
       {
         tool: "TypeSpecValidation",
         rules: ["Compile"],
@@ -182,7 +182,7 @@ describe("compile", function () {
         paths: ["**/*"],
         reason: "test reason",
       },
-    ];
+    ]);
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).rejects.toThrow(
       "Invalid path",

@@ -2,6 +2,7 @@ import { execFile } from "child_process";
 import { access, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
 import { TsvHost } from "./tsv-host.js";
+import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 
 export async function filterAsync<T>(
   array: T[],
@@ -35,6 +36,10 @@ export async function fileExists(file: string) {
 
 export async function readTspConfig(folder: string) {
   return readFile(join(folder, "tspconfig.yaml"), "utf-8");
+}
+
+export async function getSuppressions(path: string): Promise<Suppression[]> {
+  return getSuppressionsImpl("TypeSpecValidation", path);
 }
 
 export function normalizePath(folder: string, path: PlatformPath = defaultPath) {

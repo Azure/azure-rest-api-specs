@@ -565,7 +565,7 @@ describe("tspconfig", function () {
   ])(`$description`, async (c: Case) => {
     let host = new TsvTestHost();
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
-    host.getSuppressions = async (_path: string) => [
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
       {
         tool: "TypeSpecValidation",
         paths: ["tspconfig.yaml"],
@@ -573,7 +573,7 @@ describe("tspconfig", function () {
         rules: ["SdkTspConfigValidation"],
         subRules: c.ignoredKeyPaths,
       },
-    ];
+    ]);
 
     fileExistsSpy.mockImplementation(async (file: string) => {
       return file === join(c.folder, "tspconfig.yaml");

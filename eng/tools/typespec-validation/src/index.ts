@@ -10,7 +10,7 @@ import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
 import { TsvRunnerHost } from "./tsv-runner-host.js";
-import { fileExists } from "./utils.js";
+import { fileExists, getSuppressions } from "./utils.js";
 
 export async function main() {
   const host = new TsvRunnerHost();
@@ -35,7 +35,7 @@ export async function main() {
   }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
 
-  const suppressions: Suppression[] = await host.getSuppressions(absolutePath);
+  const suppressions: Suppression[] = await getSuppressions(absolutePath);
 
   // Suppressions for the whole tool must have no rules or sub-rules
   const toolSuppressions = suppressions.filter((s) => !s.rules?.length && !s.subRules?.length);

@@ -1,7 +1,6 @@
 import { globby, Options as GlobbyOptions } from "globby";
 import { dirname, join } from "path";
 import { simpleGit } from "simple-git";
-import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 import { RuleResult } from "./rule-result.js";
 import { IGitOperation, TsvHost } from "./tsv-host.js";
 import { gitDiffTopSpecFolder, normalizePath, runFile } from "./utils.js";
@@ -48,9 +47,5 @@ export class TsvRunnerHost implements TsvHost {
 
   globby(patterns: string | string[], options?: GlobbyOptions): Promise<string[]> {
     return globby(patterns, options);
-  }
-
-  getSuppressions(path: string): Promise<Suppression[]> {
-    return getSuppressionsImpl("TypeSpecValidation", path);
   }
 }

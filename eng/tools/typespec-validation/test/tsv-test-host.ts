@@ -81,8 +81,4 @@ export class TsvTestHost implements TsvHost {
   async globby(patterns: string | string[], _options?: GlobbyOptions): Promise<string[]> {
     return Promise.resolve(Array.isArray(patterns) ? patterns : [patterns]);
   }
-
-  async getSuppressions(_path: string): Promise<Suppression[]> {
-    return Promise.resolve([]);
-  }
 }

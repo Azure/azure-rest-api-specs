@@ -5,7 +5,7 @@ import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
-import { fileExists, filterAsync } from "../utils.js";
+import { fileExists, filterAsync, getSuppressions } from "../utils.js";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -110,7 +110,7 @@ export class CompileRule implements Rule {
           const suppressedSwaggers = await filterAsync(
             tspGeneratedSwaggers,
             async (swaggerPath: string) => {
-              const suppressions = await host.getSuppressions(swaggerPath);
+              const suppressions = await getSuppressions(swaggerPath);
 
               const extraSwaggerSuppressions = suppressions.filter(
                 (s) => s.rules?.includes(this.name) && s.subRules?.includes("ExtraSwagger"),

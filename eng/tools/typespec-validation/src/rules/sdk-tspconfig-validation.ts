@@ -4,7 +4,7 @@ import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
 import { Suppression } from "suppressions";
-import { fileExists, readTspConfig } from "../utils.js";
+import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -468,7 +468,7 @@ export class SdkTspConfigValidationRule implements Rule {
 
   async execute(host: TsvHost, folder: string): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
-    const suppressions = await host.getSuppressions(tspConfigPath);
+    const suppressions = await getSuppressions(tspConfigPath);
     this.setSuppressedKeyPaths(suppressions);
 
     const failedResults = [];
