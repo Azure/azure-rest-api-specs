@@ -1,4 +1,4 @@
-name: TypeSpec Validation - Test
+name: sdk-suppressions - Test
 
 on:
   push:
@@ -12,18 +12,18 @@ on:
       - tsconfig.json
       - .github/shared
       - .github/workflows/_reusable-eng-tools-test.yaml
-      - .github/workflows/typespec-validation-test.yaml
+      - .github/workflows/sdk-suppressions-test.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
-      - eng/tools/suppressions/**
-      - eng/tools/typespec-validation/**
+      - eng/tools/sdk-suppressions/**
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  typespec-validation:
+  sdkSuppressions:
+    name: sdk-suppressions
     uses: ./.github/workflows/_reusable-eng-tools-test.yaml
     with:
-      package: typespec-validation
+      package: sdk-suppressions
