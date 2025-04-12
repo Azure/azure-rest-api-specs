@@ -16,8 +16,8 @@ export class CompileRule implements Rule {
     let errorOutput = "";
 
     if (await host.checkFileExists(path.join(folder, "main.tsp"))) {
-      let [err, stdout, stderr] = await host.runCmd(
-        `npm exec --no -- tsp compile --list-files --warn-as-error ${folder}`,
+      let [err, stdout, stderr] = await host.runNpm(
+        ["exec", "--no", "--", "tsp", "compile", "--list-files", "--warn-as-error", folder],
       );
 
       stdOutput += stdout;
@@ -169,8 +169,8 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (await host.checkFileExists(clientTsp)) {
-      let [err, stdout, stderr] = await host.runCmd(
-        `npm exec --no -- tsp compile --no-emit --warn-as-error ${clientTsp}`,
+      let [err, stdout, stderr] = await host.runNpm(
+        ["exec", "--no", "--", "tsp", "compile", "--no-emit", "--warn-as-error", clientTsp]
       );
       if (err) {
         success = false;

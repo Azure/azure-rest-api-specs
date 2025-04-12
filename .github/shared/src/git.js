@@ -3,16 +3,20 @@
 import { execFile } from "./exec.js";
 
 /**
- * @typedef {import('./types.js').ILogger} ILogger
+ * @typedef {import('./logger.js').ILogger} ILogger
+ */
+
+/**
+ * @typedef {Object} GitOptions
+ * @property {string[]} [args]
+ * @property {string} [cwd] Current working directory. Default: process.cwd().
+ * @property {ILogger} [logger]
  */
 
 /**
  * @param {string} baseCommitish
  * @param {string} headCommitish
- * @param {Object} [options]
- * @param {string[]} [options.args]
- * @param {string} [options.cwd] Current working directory. Default: process.cwd().
- * @param {ILogger} [options.logger]
+ * @param {GitOptions} [options]
  * @returns {Promise<string>}
  */
 export async function diff(baseCommitish, headCommitish, options = {}) {
@@ -27,10 +31,7 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
 /**
  * @param {string} treeIsh
  * @param {string} path
- * @param {Object} [options]
- * @param {string[]} [options.args]
- * @param {string} [options.cwd] Current working directory.  Default process.cwd().
- * @param {ILogger} [options.logger]
+ * @param {GitOptions} [options]
  * @returns {Promise<string>}
  */
 export async function lsTree(treeIsh, path, options = {}) {
@@ -42,16 +43,26 @@ export async function lsTree(treeIsh, path, options = {}) {
 /**
  * @param {string} treeIsh
  * @param {string} path
- * @param {Object} [options]
- * @param {string[]} [options.args]
- * @param {string} [options.cwd] Current working directory. Default: process.cwd().
- * @param {ILogger} [options.logger]
+ * @param {GitOptions} [options]
  * @returns {Promise<string>}
  */
 export async function show(treeIsh, path, options = {}) {
   const { args = [], cwd, logger } = options;
 
   return await execGit(["show", ...args, `${treeIsh}:${path}`], {
+    cwd,
+    logger,
+  });
+}
+
+/**
+ * @param {GitOptions} [options]
+ * @returns {Promise<string>}
+ */
+export async function status(options = {}) {
+  const { args = [], cwd, logger } = options;
+
+  return await execGit(["status", ...args], {
     cwd,
     logger,
   });

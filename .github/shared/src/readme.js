@@ -6,7 +6,7 @@ import { marked } from "marked";
 /**
  * @param {string} markdown
  * @param {Object} [options]
- * @param {import('./types.js').ILogger} [options.logger]
+ * @param {import('./logger.js').ILogger} [options.logger]
  * @returns {Promise<Set<string>>} All input files for all tags
  */
 export async function getInputFiles(markdown, options = {}) {
