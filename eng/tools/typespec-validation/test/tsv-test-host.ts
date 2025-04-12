@@ -1,6 +1,5 @@
 import { Options as GlobbyOptions } from "globby";
 import defaultPath, { dirname, join, PlatformPath } from "path";
-import { Suppression } from "suppressions";
 import { RuleResult } from "../src/rule-result.js";
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
 import { normalizePath } from "../src/utils.js";
