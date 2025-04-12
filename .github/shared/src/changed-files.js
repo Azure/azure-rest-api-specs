@@ -7,7 +7,7 @@ import { diff } from "./git.js";
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
- * @param {import('./types.js').ILogger} [options.logger]
+ * @param {import('./logger.js').ILogger} [options.logger]
  * @returns {Promise<string[]>} List of changed files, using posix paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {

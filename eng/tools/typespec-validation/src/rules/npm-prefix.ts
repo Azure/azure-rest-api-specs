@@ -1,5 +1,5 @@
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
 
 export class NpmPrefixRule implements Rule {
@@ -22,7 +22,7 @@ export class NpmPrefixRule implements Rule {
     }
 
     const actual_npm_prefix = host.normalizePath(
-      (await host.runCmd(`npm prefix`, folder))[1].trim(),
+      (await host.runNpm(["prefix"], folder))[1].trim(),
     );
 
     let success = true;

@@ -2,7 +2,7 @@
 
 import { describe, expect, it, vi } from "vitest";
 import * as exec from "../src/exec.js";
-import { diff, lsTree, show } from "../src/git.js";
+import { diff, lsTree, show, status } from "../src/git.js";
 
 describe("git", () => {
   describe("e2e", () => {
@@ -23,6 +23,13 @@ describe("git", () => {
       await expect(
         show("HEAD", ".github/shared/package.json"),
       ).resolves.toContain("scripts");
+    });
+
+    it("status", async () => {
+      // example: "## main...origin/main"
+      await expect(
+        status({ args: ["-b", "--porcelain", "does-not-exist"] }),
+      ).resolves.toContain("##");
     });
   });
 
@@ -75,6 +82,29 @@ describe("git", () => {
           "core.quotepath=off",
           "show",
           "HEAD:specification/contosowidgetmanager/cspell.yaml",
+        ],
+        expect.anything(),
+      );
+    });
+
+    it("status", async () => {
+      const execSpy = vi
+        .spyOn(exec, "execFile")
+        .mockResolvedValue("test status");
+
+      await expect(
+        status({ args: ["-b", "--porcelain", "does-not-exist"] }),
+      ).resolves.toBe("test status");
+
+      expect(execSpy).toBeCalledWith(
+        "git",
+        [
+          "-c",
+          "core.quotepath=off",
+          "status",
+          "-b",
+          "--porcelain",
+          "does-not-exist",
         ],
         expect.anything(),
       );
