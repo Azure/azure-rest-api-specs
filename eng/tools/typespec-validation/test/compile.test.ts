@@ -42,11 +42,7 @@ describe("compile", function () {
       // ensure examples are skipped
       `${swaggerPath.replace("foo.json", "examples/example.json")}\n`;
 
-    host.runFile = async (
-      _file: string,
-      _args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => {
+    host.runFile = async (_file: string, _args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
       return [null, compileOutput, ""];
     };
 
@@ -63,12 +59,8 @@ describe("compile", function () {
 
   it("should fail if no emitter was configured", async function () {
     let host = new TsvTestHost();
-    host.runFile = async (
-      file: string,
-      args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => {
-      if ([file, ...args].join(" ").includes("tsp compile")) {
+    host.runFile = async (file: string, args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+      if ([file, ...args].join(' ').includes("tsp compile")) {
         return [null, "no emitter was configured", ""];
       } else {
         return [null, "", ""];
@@ -82,12 +74,8 @@ describe("compile", function () {
 
   it("should fail if no output was generated", async function () {
     let host = new TsvTestHost();
-    host.runFile = async (
-      file: string,
-      args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => {
-      if ([file, ...args].join(" ").includes("tsp compile")) {
+    host.runFile = async (file: string, args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+      if ([file, ...args].join(' ').includes("tsp compile")) {
         return [null, "no output was generated", ""];
       } else {
         return [null, "", ""];
@@ -101,11 +89,11 @@ describe("compile", function () {
 
   it("should throw if output has no generated swaggers", async function () {
     let host = new TsvTestHost();
-    host.runFile = async (
-      _file: string,
-      _args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => [null, "not-swagger", ""];
+    host.runFile = async (_file: string, _args: string[], _cwd: string): Promise<[Error | null, string, string]> => [
+      null,
+      "not-swagger",
+      "",
+    ];
 
     await expect(
       new CompileRule().execute(host, TsvTestHost.folder),
@@ -117,11 +105,7 @@ describe("compile", function () {
   it("should fail if extra swaggers", async function () {
     const host = new TsvTestHost();
 
-    host.runFile = async (
-      _file: string,
-      _args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => {
+    host.runFile = async (_file: string, _args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
       return [null, swaggerPath, ""];
     };
 
@@ -147,11 +131,7 @@ describe("compile", function () {
   it("supports suppressions", async function () {
     const host = new TsvTestHost();
 
-    host.runFile = async (
-      _file: string,
-      _args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => {
+    host.runFile = async (_file: string, _args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
       return [null, swaggerPath, ""];
     };
 
@@ -190,11 +170,7 @@ describe("compile", function () {
   it("throws on invalid suppressions", async function () {
     const host = new TsvTestHost();
 
-    host.runFile = async (
-      _file: string,
-      _args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => {
+    host.runFile = async (_file: string, _args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
       return [null, swaggerPath, ""];
     };
 
@@ -215,12 +191,8 @@ describe("compile", function () {
 
   it("should skip git diff check if compile fails", async function () {
     let host = new TsvTestHost();
-    host.runFile = async (
-      file: string,
-      args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => {
-      if ([file, ...args].join(" ").includes("tsp compile")) {
+    host.runFile = async (file: string, args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+      if ([file, ...args].join(' ').includes("tsp compile")) {
         return [
           { name: "compilation_error", message: "compilation error" },
           "running tsp compile",
@@ -233,7 +205,7 @@ describe("compile", function () {
       let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runFile(
         "",
         [],
-        "",
+        ""
       )}`;
       return {
         success: true,
@@ -250,11 +222,7 @@ describe("compile", function () {
   it("should fail if git diff fails", async function () {
     let host = new TsvTestHost();
 
-    host.runFile = async (
-      _file: string,
-      _args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => {
+    host.runFile = async (_file: string, _args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
       return [null, swaggerPath, ""];
     };
 
@@ -264,7 +232,7 @@ describe("compile", function () {
       let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runFile(
         "",
         [],
-        "",
+        ""
       )}`;
 
       return {
@@ -283,11 +251,7 @@ describe("compile", function () {
   it("should succeed if git diff succeeds", async function () {
     let host = new TsvTestHost();
 
-    host.runFile = async (
-      _file: string,
-      _args: string[],
-      _cwd: string,
-    ): Promise<[Error | null, string, string]> => {
+    host.runFile = async (_file: string, _args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
       return [null, swaggerPath, ""];
     };
 
