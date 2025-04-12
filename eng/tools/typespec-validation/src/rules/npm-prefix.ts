@@ -1,6 +1,7 @@
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
+import { normalizePath } from "../utils.js";
 
 export class NpmPrefixRule implements Rule {
   readonly name = "NpmPrefix";
@@ -12,7 +13,7 @@ export class NpmPrefixRule implements Rule {
     let expected_npm_prefix: string | undefined;
     try {
       // If spec folder is inside a git repo, returns repo root
-      expected_npm_prefix = host.normalizePath(await git.revparse("--show-toplevel"));
+      expected_npm_prefix = normalizePath(await git.revparse("--show-toplevel"));
     } catch (err) {
       // If spec folder is outside git repo, or if problem running git, throws error
       return {
@@ -21,7 +22,7 @@ export class NpmPrefixRule implements Rule {
       };
     }
 
-    const actual_npm_prefix = host.normalizePath(
+    const actual_npm_prefix = normalizePath(
       (await host.runNpm(["prefix"], folder))[1].trim(),
     );
 
