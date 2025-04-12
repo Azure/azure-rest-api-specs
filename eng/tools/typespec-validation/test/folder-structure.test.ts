@@ -1,4 +1,9 @@
 import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
+
+vi.mock("fs/promises", () => ({
+  readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
+}));
+
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
@@ -13,7 +18,7 @@ describe("folder-structure", function () {
   });
 
   afterEach(() => {
-    fileExistsSpy.mockReset();
+    vi.clearAllMocks();
   });
 
   it("should fail if tspconfig has incorrect extension", async function () {
