@@ -844,19 +844,19 @@
             "description": "Transfer creation request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TransferProperties"
+              "$ref": "#/definitions/TransferDetails"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Transfer details for a successful query.",
+            "description": "Successfully retrieved the transfer details for the query.",
             "schema": {
               "$ref": "#/definitions/TransferDetails"
             }
           },
           "201": {
-            "description": "Transfer creation is in progress.",
+            "description": "Transfer has been successfully created.",
             "schema": {
               "$ref": "#/definitions/TransferDetails"
             }
@@ -1067,7 +1067,7 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true,
           "enum": [
-            "Accepted",
+            "Pending",
             "Succeeded",
             "Failed"
           ],
@@ -1664,10 +1664,9 @@
           "description": "The provisioning state of the transfer.",
           "type": "string",
           "enum": [
-            "InProgress",
+            "Created",
             "Succeeded",
-            "Failed",
-            "Canceled"
+            "Failed"
           ],
           "x-ms-enum": {
             "name": "transferProvisioningState",
