@@ -8312,7 +8312,7 @@
       "properties": {
         "defaultLanguage": {
           "type": "string",
-          "description": "The default language for a full text index."
+          "description": "The default language for a full text paths."
         },
         "fullTextPaths": {
           "description": "List of FullText Paths",
@@ -8465,20 +8465,19 @@
     },
     "FullTextPath": {
       "type": "object",
-      "description": "Represents the full text path settings for the full text index.",
+      "description": "Represents the full text path specification.",
       "properties": {
         "path": {
           "type": "string",
-          "description": "A string containing the path of the full text index."
+          "description": "The path to the full text field in the document."
         },
         "language": {
-          "description": "A string containing the language of the full text index.",
+          "description": "The language of the full text field in the document.",
           "type": "string"
         }
       },
       "required": [
-        "path",
-        "language"
+        "path"
       ]
     },
     "CompositePathList": {
