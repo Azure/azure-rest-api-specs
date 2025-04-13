@@ -5568,7 +5568,7 @@
         },
         "identity": {
           "description": "Managed identity properties",
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -5598,6 +5598,7 @@
         },
         "keyEncryptionKeyUrl": {
           "type": "string",
+          "format": "uri",
           "description": "Key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
         }
       }
@@ -5928,6 +5929,7 @@
         },
         "identityResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
         }
       }
