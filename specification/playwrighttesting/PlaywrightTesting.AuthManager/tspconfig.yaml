@@ -7,8 +7,6 @@ parameters:
   "service-dir":
     default: "sdk/playwrighttesting"
   "dependencies":
-    "additionalDirectories":
-      - "specification/playwrighttesting/PlaywrightTesting.Shared/"
     default: ""
 options:
   "@azure-tools/typespec-autorest":
@@ -18,17 +16,16 @@ options:
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-microsoftplaywrighttesting"
-    package-name: "{package-dir}"
-    # emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    namespace: "azure.developer.microsoftplaywrighttesting"
     package-mode: azure-dataplane
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "microsoft-playwright-testing-rest"
     title: Microsoft Playwright Testing
     description: Microsoft Playwright Testing Client
-    generateMetadata: true
-    generateTest: false
-    packageDetails:
+    generate-metadata: true
+    generate-test: false
+    package-details:
       name: "@azure-rest/microsoft-playwright-testing"
       description: "This package contains Microsoft Playwright Testing client library."
       version: 1.0.0
@@ -46,3 +43,6 @@ options:
     generate-tests: false
     service-name: Microsoft Playwright Testing
     flavor: azure
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/playwrighttesting/PlaywrightTesting.Shared/"
