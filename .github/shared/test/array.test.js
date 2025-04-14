@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from "vitest";
 import { filterAsync, mapAsync } from "../src/array.js";
-import { sleep } from "./sleep.js";
+import { sleep } from "../src/sleep.js";
 
 describe("array", () => {
   it("filterAsync", async () => {
