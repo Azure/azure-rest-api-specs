@@ -112,7 +112,7 @@ interface ManagedClusters {
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
-    FaultSimulationContent,
+    FaultSimulationContentWrapper,
     never,
     LroHeaders = ArmLroLocationHeader<FinalResult = FaultSimulation> &
       ArmAsyncOperationHeader
