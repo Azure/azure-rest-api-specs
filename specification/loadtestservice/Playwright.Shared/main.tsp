@@ -23,6 +23,8 @@ enum Versions {
 model Workspace {
   @key("workspaceId")
   @doc("The workspace id.")
+  @maxLength(64)
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
   id: uuid;
 
