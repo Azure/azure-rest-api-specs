@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/api/projects/<project-name>",
+        "description": "Project endpoint. In the form \"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/<your-project-name>\" if you want to explicitly\nspecify the Foundry Project name.",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -229,8 +229,8 @@
         }
       }
     },
-    "/connections/{name}/withCredentials": {
-      "get": {
+    "/connections/{name}:getWithCredentials": {
+      "post": {
         "operationId": "Connections_GetWithCredentials",
         "description": "Get a connection by name, with its connection credentials",
         "parameters": [
@@ -589,6 +589,60 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/datasets/{name}/versions/{version}/credentials": {
+      "post": {
+        "operationId": "Datasets_GetCredentials",
+        "description": "Get download sas for dataset version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the DatasetVersion to operate on.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Parameters for the action",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetCredentialResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1402,6 +1456,19 @@
         }
       ],
       "x-ms-discriminator-value": "ApiKey"
+    },
+    "AssetCredentialResponse": {
+      "type": "object",
+      "description": "Represents a reference to a blob for consumption",
+      "properties": {
+        "blobReferenceForConsumption": {
+          "$ref": "#/definitions/BlobReferenceForConsumption",
+          "description": "Credential info to access the storage account."
+        }
+      },
+      "required": [
+        "blobReferenceForConsumption"
+      ]
     },
     "AttackStrategy": {
       "type": "string",
