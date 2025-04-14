@@ -1,21 +1,29 @@
 // @ts-check
 
 import { describe, expect, it } from "vitest";
-import { filterAsync } from "../src/array.js";
+import { filterAsync, mapAsync } from "../src/array.js";
+import { sleep } from "./sleep.js";
 
-describe("filterAsync", () => {
-  it("filters items based on async predicate", async () => {
-    const input = [1, 2, 3, 4, 5, 6];
+describe("array", () => {
+  it("filterAsync", async () => {
+    const input = [1, 2, 3];
 
     const result = await filterAsync(input, async (item, index) => {
-      return item % 2 === 0 || index % 3 === 0;
+      await sleep(index);
+      return item === 1 || index === 1;
     });
 
-    expect(result).toEqual([1, 2, 4, 6]);
+    expect(result).toEqual([1, 2]);
   });
 
-  it("works with empty array", async () => {
-    const result = await filterAsync([], async () => true);
-    expect(result).toEqual([]);
+  it("mapAsync", async () => {
+    const input = [1, 2, 3];
+
+    const result = await mapAsync(input, async (item, index) => {
+      await sleep(index);
+      return item * index;
+    });
+
+    expect(result).toEqual([0, 2, 6]);
   });
 });

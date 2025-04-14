@@ -2,12 +2,21 @@
 
 /**
  * @template T
- * @param {T[]} array - The array to filter.
+ * @param {T[]} array
  * @param {(item: T, index: number, array: T[]) => Promise<boolean>} asyncPredicate
- *   - An async function that returns true to keep the item.
- * @returns {Promise<T[]>} A promise that resolves to the filtered array.
+ * @returns {Promise<T[]>}
  */
 export async function filterAsync(array, asyncPredicate) {
-  const filterResults = await Promise.all(array.map(asyncPredicate));
-  return array.filter((_, index) => filterResults[index]);
+  const results = await mapAsync(array, asyncPredicate);
+  return array.filter((_, i) => results[i]);
+}
+
+/**
+ * @template T,U
+ * @param {T[]} array
+ * @param {(item: T, index: number, array: T[]) => Promise<U>} asyncMapper
+ * @returns {Promise<U[]>}
+ */
+export async function mapAsync(array, asyncMapper) {
+  return Promise.all(array.map(asyncMapper));
 }
