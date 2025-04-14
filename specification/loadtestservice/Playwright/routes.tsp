@@ -4,7 +4,9 @@ import "../Playwright.Shared";
 import "./models.tsp";
 
 using Azure.Core;
+using Azure.Core.Traits;
 using TypeSpec.Http;
+using Playwright.Shared;
 
 namespace Playwright;
 

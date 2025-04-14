@@ -1,9 +1,11 @@
 // Models ////////////////////
 
 import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
 import "../Playwright.Shared";
 
 using Azure.Core;
+using TypeSpec.Rest;
 using Playwright.Shared;
 
 namespace Playwright;

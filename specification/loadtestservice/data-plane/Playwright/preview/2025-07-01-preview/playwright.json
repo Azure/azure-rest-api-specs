@@ -65,7 +65,9 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -114,7 +116,9 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -171,7 +175,9 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "name": "accessTokenId",
@@ -179,7 +185,9 @@
             "description": "The access-token id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -231,7 +239,9 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "name": "accessTokenId",
@@ -239,7 +249,9 @@
             "description": "The access-token id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -313,7 +325,9 @@
             "description": "The workspace id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "name": "accessTokenId",
@@ -321,7 +335,9 @@
             "description": "The access-token id.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -450,6 +466,8 @@
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The access-token id.",
+          "maxLength": 64,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
         "name": {
@@ -681,6 +699,8 @@
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The workspace id.",
+          "maxLength": 64,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
         "resourceId": {
