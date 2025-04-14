@@ -281,7 +281,7 @@ describe("generateLintDiffReport", () => {
     vi.restoreAllMocks();
   });
 
-  test.skipIf(isWindows)("fails if new violations include an error", async ({ expect }) => {
+  test.skipIf(isWindows())("fails if new violations include an error", async ({ expect }) => {
     const afterViolation = {
       extensionName: "@microsoft.azure/openapi-validator",
       level: "error",
@@ -330,7 +330,7 @@ describe("generateLintDiffReport", () => {
     expect(actual).toBe(false);
   });
 
-  test.skipIf(isWindows)(
+  test.skipIf(isWindows())(
     "passes if new violations do not include an error (warnings only)",
     async ({ expect }) => {
       const afterViolation = {

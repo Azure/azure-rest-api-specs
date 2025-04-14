@@ -362,7 +362,7 @@ describe("getNewItems", () => {
 });
 
 describe("relativizePath", () => {
-  test.skipIf(isWindows).sequential("relativizes path correctly", () => {
+  test.skipIf(isWindows()).sequential("relativizes path correctly", () => {
     expect(relativizePath("/path/to/specification/service/file.json")).toEqual(
       "/specification/service/file.json",
     );
@@ -376,7 +376,7 @@ describe("relativizePath", () => {
     expect(relativizePath("")).toEqual("");
   });
 
-  test.skipIf(isWindows).sequential("uses the last instance of from", () => {
+  test.skipIf(isWindows()).sequential("uses the last instance of from", () => {
     expect(
       relativizePath("/path/to/specification/another/specification/service/file.json"),
     ).toEqual("/specification/service/file.json");
