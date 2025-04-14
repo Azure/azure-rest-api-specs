@@ -1,8 +1,7 @@
-import defaultPath, { PlatformPath } from "path";
-import { Suppression } from "suppressions";
+import { Options as GlobbyOptions } from "globby";
+import defaultPath, { dirname, join, PlatformPath } from "path";
 import { RuleResult } from "../src/rule-result.js";
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
-import { normalizePath } from "../src/utils.js";
 
 export { IGitOperation } from "../src/tsv-host.js";
 
@@ -35,29 +34,35 @@ export class TsvTestHost implements TsvHost {
     };
   }
 
-  async runCmd(cmd: string, cwd: string): Promise<[Error | null, string, string]> {
+  async runFile(
+    file: string,
+    args: string[],
+    cwd?: string,
+  ): Promise<[Error | null, string, string]> {
     let err = null;
-    let stdout = `default ${cmd} at ${cwd}`;
+    let stdout = `default ${file} ${args.join(" ")} at ${cwd}`;
     let stderr = "";
 
     return [err, stdout, stderr];
   }
 
-  async checkFileExists(_file: string): Promise<boolean> {
-    return true;
-  }
+  async runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]> {
+    const [file, defaultArgs] =
+      process.platform === "win32"
+        ? // Only way I could find to run "npm" on Windows, without using the shell (e.g. "cmd /c npm ...")
+          // "C:\Program Files\nodejs\node.exe", ["C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"]
+          [
+            process.execPath,
+            [join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js")],
+          ]
+        : ["npm", []];
 
-  async isDirectory(_path: string): Promise<boolean> {
-    return true;
-  }
-
-  normalizePath(folder: string): string {
-    return normalizePath(folder, this.path);
+    return this.runFile(file, [...defaultArgs, ...args], cwd);
   }
 
   async gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult> {
     let success = true;
-    let stdout = `Running git diff on folder ${folder}, running default cmd ${host.runCmd("", "")}`;
+    let stdout = `Running git diff on folder ${folder}, running default cmd ${host.runFile("", [], "")}`;
     let stderr = "";
 
     return {
@@ -67,28 +72,7 @@ export class TsvTestHost implements TsvHost {
     };
   }
 
-  async readTspConfig(_folder: string): Promise<string> {
-    // Sample config that should cause all rules to succeed
-    return `
-emit:
-  - "@azure-tools/typespec-autorest"
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
-options:
-  "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
-    emitter-output-dir: "{project-root}/.."
-    examples-directory: "examples"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
-`;
-  }
-
-  async globby(patterns: string[]): Promise<string[]> {
-    return Promise.resolve(patterns);
-  }
-
-  async getSuppressions(_path: string): Promise<Suppression[]> {
-    return Promise.resolve([]);
+  async globby(patterns: string | string[], _options?: GlobbyOptions): Promise<string[]> {
+    return Promise.resolve(Array.isArray(patterns) ? patterns : [patterns]);
   }
 }

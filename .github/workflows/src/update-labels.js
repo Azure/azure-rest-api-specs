@@ -1,6 +1,5 @@
 // @ts-check
 
-import { RequestError } from "@octokit/request-error";
 import { extractInputs } from "../src/context.js";
 import { PER_PAGE_MAX } from "./github.js";
 
@@ -98,6 +97,18 @@ export async function updateLabelsImpl({
   core.info(`labelsToAdd: ${JSON.stringify(labelsToAdd)}`);
   core.info(`labelsToRemove: ${JSON.stringify(labelsToRemove)}`);
 
+  if (
+    (labelsToAdd.length > 0 || labelsToRemove.length > 0) &&
+    Number.isNaN(issue_number)
+  ) {
+    throw new Error(
+      `Invalid value for 'issue_number':${issue_number}. Expected an 'issue-number' artifact created by the workflow run.`,
+    );
+  }
+
+  const pullRequestUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
+  core.info(`pull request url: ${pullRequestUrl}`);
+
   if (labelsToAdd.length > 0) {
     await github.rest.issues.addLabels({
       owner: owner,
@@ -118,7 +129,11 @@ export async function updateLabelsImpl({
           name: name,
         });
       } catch (error) {
-        if (error instanceof RequestError && error.status === 404) {
+        if (
+          error instanceof Error &&
+          "status" in error &&
+          error.status === 404
+        ) {
           core.info(`Ignoring error: ${error.status} - ${error.message}`);
         } else {
           throw error;

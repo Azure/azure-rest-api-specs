@@ -29,12 +29,14 @@ options:
     generate-tests: false
     generate-samples: false
     customization-class: customization/src/main/java/OpenAICustomizations.java
+    custom-types-subpackage: "implementation.models"
+    custom-types: "UploadFileRequest"
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "openai"
-    generateMetadata: false
-    generateTest: false
-    isModularLibrary: true
-    packageDetails:
+    generate-metadata: false
+    generate-test: false
+    is-modular-library: true
+    package-details:
       name: "@azure/openai"
     flavor: azure
