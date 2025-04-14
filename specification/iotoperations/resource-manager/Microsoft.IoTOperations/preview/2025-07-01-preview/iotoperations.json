@@ -5408,6 +5408,11 @@
           "$ref": "#/definitions/SchemaRegistryRef",
           "description": "The reference to the Schema Registry for this AIO Instance."
         },
+        "secretProviderClassRef": {
+          "$ref": "#/definitions/SecretProviderClassID",
+          "description": "The reference to the AIO Secret provider class.",
+          "readOnly": true
+        },
         "features": {
           "type": "object",
           "description": "The features of the AIO Instance.",
@@ -6159,6 +6164,18 @@
       "required": [
         "resourceId"
       ]
+    },
+    "SecretProviderClassID": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SecretSyncController/azureKeyVaultSecretProviderClasses"
+          }
+        ]
+      }
     },
     "SelfCheck": {
       "type": "object",

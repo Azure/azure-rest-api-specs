@@ -1,6 +1,8 @@
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
+
 
 namespace Microsoft.IoTOperations;
 
@@ -227,5 +229,13 @@ scalar SchemaRegistryID
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.DeviceRegistry/schemaRegistries",
+    }
+  ]>;
+
+@added(Versions.`2025-07-01-preview`)
+scalar SecretProviderClassID
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SecretSyncController/azureKeyVaultSecretProviderClasses",
     }
   ]>;

@@ -54,6 +54,11 @@ model InstanceProperties {
   @doc("The reference to the Schema Registry for this AIO Instance.")
   schemaRegistryRef: SchemaRegistryRef;
 
+  @doc("The reference to the AIO Secret provider class.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.`2025-07-01-preview`)
+  secretProviderClassRef?: SecretProviderClassID;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
   @doc("The features of the AIO Instance.")
   @added(Versions.`2025-04-01`)
