@@ -1563,6 +1563,12 @@
           "type": "string",
           "readOnly": true
         },
+        "createdTime": {
+          "description": "The timestamp when the transfer was created (in UTC).",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
         "lastModifiedTime": {
           "description": "The timestamp when the transfer was last updated (in UTC).",
           "type": "string",
@@ -1601,6 +1607,20 @@
         "initiatorEmailId": {
           "description": "The email ID of the user who sent the transfer request.",
           "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the transfer.",
+          "type": "string",
+          "enum": [
+            "Canceled",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "transferProvisioningState",
+            "modelAsString": true
+          },
           "readOnly": true
         },
         "transferServiceOwnership": {
@@ -1657,20 +1677,6 @@
                 "readOnly": true
               }
             }
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "description": "The provisioning state of the transfer.",
-          "type": "string",
-          "enum": [
-            "Created",
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "transferProvisioningState",
-            "modelAsString": true
           },
           "readOnly": true
         }
