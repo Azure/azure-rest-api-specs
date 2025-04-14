@@ -224,7 +224,9 @@
         }
       },
       "required": [
-        "startedBy"
+        "startedBy",
+        "serverCallId",
+        "correlationId"
       ]
     },
     "AcsCallGroupProperties": {
@@ -263,7 +265,7 @@
             "MicrosoftInternal"
           ],
           "x-ms-enum": {
-            "name": "AcsCallEndedParticipantKind",
+            "name": "AcsCallEndedByKind",
             "modelAsString": true,
             "values": [
               {
@@ -373,7 +375,9 @@
         }
       },
       "required": [
-        "senderCommunicationIdentifier"
+        "messageId",
+        "senderCommunicationIdentifier",
+        "type"
       ],
       "allOf": [
         {

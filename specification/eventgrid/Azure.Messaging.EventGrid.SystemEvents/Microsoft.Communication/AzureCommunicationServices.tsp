@@ -1037,7 +1037,7 @@ model AcsCallingEventProperties {
   startedBy: AcsCallParticipantProperties;
 
   /** The call id of the server */
-  serverCallId?: string;
+  serverCallId: string;
 
   /** The group metadata */
   group?: AcsCallGroupProperties;
@@ -1049,7 +1049,7 @@ model AcsCallingEventProperties {
   isTwoParty?: boolean;
 
   /** The correlationId of calling event */
-  correlationId?: string;
+  correlationId: string;
 
   /** Is the calling event a room call. */
   isRoomsCall?: boolean;
@@ -1076,7 +1076,7 @@ model AcsCallEndedByProperties {
   communicationIdentifier: CommunicationIdentifierModel;
 
   /** The type of call ended by. */
-  type: AcsCallEndedParticipantKind;
+  type: AcsCallEndedByKind;
 
   /** The name of the call ended by. */
   name: string;
@@ -1540,7 +1540,7 @@ union AcsRouterUpdatedWorkerProperty {
 }
 
 /** Call ended participant kind. */
-union AcsCallEndedParticipantKind {
+union AcsCallEndedByKind {
   /** Participant */
   "Participant",
 
