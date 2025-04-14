@@ -49,5 +49,5 @@ model MachineAssessmentOptionsOutboundEdgeGroup
   azureOfferCode: AzureOffer[];
 
   @doc("Gets or sets the Azure VM security options.")
-  azureVmSecurityOptions: AzureVmSecurityType[];
+  azureVmSecurityOptions?: AzureVmSecurityType[];
 }
