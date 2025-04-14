@@ -1,13 +1,24 @@
-import { access, stat } from "fs/promises";
-import { exec } from "child_process";
-import defaultPath, { PlatformPath } from "path";
+import { execFile } from "child_process";
+import { access, readFile } from "fs/promises";
+import defaultPath, { join, PlatformPath } from "path";
 import { TsvHost } from "./tsv-host.js";
+import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 
-export async function runCmd(cmd: string, cwd?: string) {
-  console.log(`run command:${cmd}`);
+export async function filterAsync<T>(
+  array: T[],
+  asyncPredicate: (item: T, index: number, array: T[]) => Promise<boolean>,
+): Promise<T[]> {
+  const filterResults = await Promise.all(array.map(asyncPredicate));
+  return array.filter((_, index) => filterResults[index]);
+}
+
+export async function runFile(file: string, args: string[], cwd?: string) {
+  console.log(`run command:${file} ${args.join(' ')}`);
   const { err, stdout, stderr } = (await new Promise((res) =>
-    exec(
-      cmd,
+    // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
+    execFile(
+      file,
+      args,
       { encoding: "utf8", maxBuffer: 1024 * 1024 * 64, cwd: cwd },
       (err: unknown, stdout: unknown, stderr: unknown) =>
         res({ err: err, stdout: stdout, stderr: stderr }),
@@ -17,17 +28,25 @@ export async function runCmd(cmd: string, cwd?: string) {
   return [err, stdout, stderr] as [Error | null, string, string];
 }
 
-export async function checkFileExists(file: string) {
+export async function fileExists(file: string) {
   return access(file)
     .then(() => true)
     .catch(() => false);
 }
 
-export async function isDirectory(path: string) {
-  return (await stat(path)).isDirectory();
+export async function readTspConfig(folder: string) {
+  return readFile(join(folder, "tspconfig.yaml"), "utf-8");
+}
+
+export async function getSuppressions(path: string): Promise<Suppression[]> {
+  return getSuppressionsImpl("TypeSpecValidation", path);
 }
 
 export function normalizePath(folder: string, path: PlatformPath = defaultPath) {
+  return normalizePathImpl(folder, path);
+}
+
+export function normalizePathImpl(folder: string, path: PlatformPath = defaultPath) {
   return path
     .resolve(folder)
     .split(path.sep)

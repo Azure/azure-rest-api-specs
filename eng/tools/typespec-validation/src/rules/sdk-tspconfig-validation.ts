@@ -4,6 +4,7 @@ import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
 import { Suppression } from "suppressions";
+import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -17,8 +18,8 @@ export abstract class TspconfigSubRuleBase {
     this.expectedValue = expectedValue;
   }
 
-  public async execute(host: TsvHost, folder: string): Promise<RuleResult> {
-    const tspconfigExists = await host.checkFileExists(join(folder, "tspconfig.yaml"));
+  public async execute(_host: TsvHost, folder: string): Promise<RuleResult> {
+    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
       return this.createFailedResult(
         `Failed to find ${join(folder, "tspconfig.yaml")}`,
@@ -27,7 +28,7 @@ export abstract class TspconfigSubRuleBase {
 
     let config = undefined;
     try {
-      const configText = await host.readTspConfig(folder);
+      const configText = await readTspConfig(folder);
       config = yamlParse(configText);
     } catch (error) {
       return this.createFailedResult(
@@ -189,36 +190,45 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
 }
 
 // ----- TS management modular sub rules -----
-export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-ts", "generateMetadata", true);
+// NOTE: this is only used when TS emitter is migrating to the new option style
+//       will be deleted when the migration is done
+class TspConfigTsOptionMigrationSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
+  private oldOptionStyleSubRule: TspconfigEmitterOptionsSubRuleBase & {
+    validateOption(config: any): RuleResult;
+  };
+  private newOptionStyleSubRule: TspconfigEmitterOptionsSubRuleBase & {
+    validateOption(config: any): RuleResult;
+  };
+  constructor(oldOptionName: string, newOptionName: string, expectedValue: ExpectedValueType) {
+    class PrivateOptionStyleSubRule extends TspconfigEmitterOptionsSubRuleBase {
+      constructor(optionName: string, expectedValue: ExpectedValueType) {
+        super("@azure-tools/typespec-ts", optionName, expectedValue);
+      }
+      public validateOption(config: any): RuleResult {
+        return this.validate(config);
+      }
+    }
+
+    // the parameters are not used, but are required to be passed to the super constructor
+    super("", "", "");
+    this.oldOptionStyleSubRule = new PrivateOptionStyleSubRule(oldOptionName, expectedValue);
+    this.newOptionStyleSubRule = new PrivateOptionStyleSubRule(newOptionName, expectedValue);
   }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+
+  protected validate(config: any): RuleResult {
+    var newResult = this.newOptionStyleSubRule.validateOption(config);
+    // if success == true, then the option is found and passes validation
+    // if success == false, and "Failed to find" is not in errorOutput, then the option is found but fails validation
+    if (newResult.success || !newResult.errorOutput?.includes("Failed to find")) return newResult;
+
+    var oldResult = this.oldOptionStyleSubRule.validateOption(config);
+    return oldResult;
   }
 }
 
-export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "hierarchyClient", false);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-ts", "experimentalExtensibleEnums", true);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-ts", "enableOperationGroup", true);
+    super("experimentalExtensibleEnums", "experimental-extensible-enums", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -234,13 +244,9 @@ export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmit
   }
 }
 
-export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
-    super(
-      "@azure-tools/typespec-ts",
-      "packageDetails.name",
-      new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
-    );
+    super("packageDetails.name", "package-details.name", new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/));
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -425,10 +431,7 @@ export class TspConfigCsharpMgmtPackageDirectorySubRule extends TspconfigEmitter
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
-  new TspConfigTsMgmtModularGenerateMetadataTrueSubRule(),
-  new TspConfigTsMgmtModularHierarchyClientFalseSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
-  new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
@@ -465,7 +468,7 @@ export class SdkTspConfigValidationRule implements Rule {
 
   async execute(host: TsvHost, folder: string): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
-    const suppressions = await host.getSuppressions(tspConfigPath);
+    const suppressions = await getSuppressions(tspConfigPath);
     this.setSuppressedKeyPaths(suppressions);
 
     const failedResults = [];
