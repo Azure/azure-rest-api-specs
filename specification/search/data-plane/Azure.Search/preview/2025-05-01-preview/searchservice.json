@@ -238,54 +238,6 @@
         }
       }
     },
-    "/agents('{agentName}')/retrieve": {
-      "post": {
-        "tags": [
-          "KnowledgeAgents"
-        ],
-        "operationId": "KnowledgeAgents_Retrieve",
-        "description": "KnowledgeAgent retrieves relevant data from backing stores.",
-        "parameters": [
-          {
-            "name": "agentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the agent to process retrieval requests for."
-          },
-          {
-            "name": "retrievalRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KnowledgeAgentRetrievalRequest"
-            },
-            "description": "The retrieval request to process."
-          },
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "200": {
-            "description": "The retrieval response is successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/KnowledgeAgentRetrievalResponse"
-            }
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/datasources('{dataSourceName}')": {
       "put": {
         "tags": [
@@ -2003,59 +1955,6 @@
         }
       }
     },
-    "/indexes('{indexName}')/search.permissionFiltering": {
-      "post": {
-        "tags": [
-          "Indexes"
-        ],
-        "operationId": "Indexes_PermissionFiltering",
-        "externalDocs": {
-          "url": "https://learn.microsoft.com/rest/api/searchservice/document-permission-filtering"
-        },
-        "x-ms-examples": {
-          "SearchIndexPermissionFiltering": {
-            "$ref": "./examples/SearchIndexPermissionFiltering.json"
-          }
-        },
-        "description": "Enable or disable document-level permission filtering.",
-        "parameters": [
-          {
-            "name": "indexName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the index for which to set permission filtering."
-          },
-          {
-            "name": "permissionFilteringSetting",
-            "in": "body",
-            "description": "The value for the permission filtering setting.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SearchIndexPermissionFilteringSetting"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
-          }
-        ],
-        "x-ms-request-id": "request-id",
-        "responses": {
-          "204": {
-            "description": ""
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/indexes('{indexName}')/search.analyze": {
       "post": {
         "tags": [
@@ -2479,6 +2378,21 @@
         "indexName": {
           "type": "string",
           "description": "The name of the target index."
+        },
+        "defaultRerankerThreshold": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 4,
+          "description": "A threshold for reranking results (range: 0-4)."
+        },
+        "defaultIncludeReferenceSourceData": {
+          "type": "boolean",
+          "description": "Indicates whether reference source data should be included."
+        },
+        "defaultMaxDocsForReranker": {
+          "type": "integer",
+          "description": "Limits the number of documents considered for ranking."
         }
       },
       "required": [ "indexName" ]
@@ -2486,21 +2400,13 @@
     "KnowledgeAgentRequestLimits": {
       "type": "object",
       "properties": {
-        "rerankerTokenLimit": {
-          "type": "integer",
-          "description": "The token limit for the ranker."
-        },
-        "outputTokenLimit": {
-          "type": "integer",
-          "description": "The token limit for the output."
-        },
         "maxRuntimeInSeconds": {
           "type": "integer",
           "description": "The maximum runtime in seconds."
         },
-        "maxDegreesOfParallelism": {
+        "maxOutputSize": {
           "type": "integer",
-          "description": "The maximum degrees of parallelism."
+          "description": "Limits the maximum size of the content in the output."
         }
       },
       "description": "Guardrails to limit how much resources are utilized for a single agent retrieval request."
@@ -2528,10 +2434,6 @@
           "$ref": "#/definitions/KnowledgeAgentModelKind",
           "description": "The type of AI model.",
           "x-nullable": false
-        },
-        "perRequestTokenLimit": {
-          "type": "integer",
-          "description": "An upper bound on the number of tokens to send to a model for one retrieval request."
         }
       },
       "required": [
@@ -2574,296 +2476,6 @@
       },
       "required": [ "azureOpenAIParameters" ],
       "description": "Specifies the Azure OpenAI resource used to do query planning."
-    },
-    "KnowledgeAgentRetrievalRequest": {
-      "type": "object",
-      "properties": {
-        "messages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeAgentMessage"
-          }
-        },
-        "targetIndexParams": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeAgentIndexParams"
-          }
-        }
-      },
-      "required": [ "messages" ],
-      "description": "The input contract for the retrieval request."
-    },
-    "KnowledgeAgentRetrievalResponse": {
-      "type": "object",
-      "properties": {
-        "response": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeAgentMessage"
-          }
-        },
-        "activity": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeAgentActivityRecord"
-          },
-          "description": "The activity records for tracking progress and billing implications."
-        },
-        "references": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeAgentReference"
-          },
-          "description": "The references for the retrieval data used in the response."
-        }
-      },
-      "description": "The output contract for the retrieval response."
-    },
-    "KnowledgeAgentIndexParams": {
-      "type": "object",
-      "properties": {
-        "indexName": {
-          "type": "string",
-          "description": "The name of the index the params apply to."
-        },
-        "filterAddOn": {
-          "type": "string",
-          "description": "A filter condition applied to the index (e.g., 'State eq VA')."
-        },
-        "rerankerThreshold": {
-          "type": "number",
-          "format": "float",
-          "minimum": 0,
-          "maximum": 4,
-          "description": "A threshold for reranking results (range: 0-4)."
-        },
-        "includeReferenceSourceData": {
-          "type": "boolean",
-          "description": "Indicates whether reference source data should be included."
-        }
-      }
-    },
-    "KnowledgeAgentMessage": {
-      "type": "object",
-      "properties": {
-        "role": {
-          "type": "string",
-          "description": "The role of the tool response."
-        },
-        "content": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeAgentMessageContent"
-          }
-        }
-      },
-      "required": [ "role", "content" ],
-      "description": "The natural language message style object."
-    },
-    "KnowledgeAgentMessageContent": {
-      "type": "object",
-      "discriminator": "type",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/KnowledgeAgentMessageContentType",
-          "description": "The type of the message",
-          "x-nullable": false
-        }
-      },
-      "required": [
-        "type"
-      ],
-      "description": "Specifies the type of the message content."
-    },
-    "KnowledgeAgentMessageContentType": {
-      "type": "string",
-      "enum": [
-        "text",
-        "image"
-      ],
-      "x-ms-enum": {
-        "name": "KnowledgeAgentMessageContentType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "text",
-            "name": "Text",
-            "description": "Text message content kind."
-          },
-          {
-            "value": "image",
-            "name": "Image",
-            "description": "Image message content kind."
-          }
-        ]
-      },
-      "description": "The type of message content."
-    },
-    "KnowledgeAgentMessageTextContent": {
-      "type": "object",
-      "x-ms-discriminator-value": "text",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentMessageContent"
-        }
-      ],
-      "properties": {
-        "text": {
-          "type": "string"
-        }
-      },
-      "required": [ "text" ],
-      "description": "Text message type."
-    },
-    "KnowledgeAgentMessageImageContent": {
-      "type": "object",
-      "x-ms-discriminator-value": "image",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentMessageContent"
-        }
-      ],
-      "properties": {
-        "image": {
-          "type": "object",
-          "properties": {
-            "url": {
-              "type": "string",
-              "description": "The url of the image."
-            }
-          },
-          "required": [ "url" ]
-        }
-      },
-      "required": [ "image" ],
-      "description": "Text message type."
-    },
-    "KnowledgeAgentActivityRecord": {
-      "type": "object",
-      "discriminator": "type",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "The ID of the activity record."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the activity record."
-        }
-      },
-      "required": [ "id", "type" ],
-      "description": "Base type for activity records."
-    },
-    "KnowledgeAgentSearchActivityRecord": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
-        }
-      ],
-      "properties": {
-        "targetIndex": {
-          "type": "string",
-          "description": "The target index for the retrieval activity."
-        },
-        "query": {
-          "type": "object",
-          "properties": {
-            "search": {
-              "type": "string",
-              "description": "The search string."
-            }
-          },
-          "description": "The query details for the retrieval activity."
-        },
-        "count": {
-          "type": "integer",
-          "description": "The count of documents retrieved."
-        },
-        "elapsedMs": {
-          "type": "integer",
-          "description": "The elapsed time in milliseconds for the retrieval activity."
-        }
-      },
-      "description": "Represents a retrieval activity record."
-    },
-    "KnowledgeAgentModelQueryPlanningActivityRecord": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
-        }
-      ],
-      "properties": {
-        "inputTokens": {
-          "type": "integer",
-          "description": "The number of input tokens for the LLM query planning activity."
-        },
-        "outputTokens": {
-          "type": "integer",
-          "description": "The number of output tokens for the LLM query planning activity."
-        },
-        "elapsedMs": {
-          "type": "integer",
-          "description": "The elapsed time in milliseconds for the model activity."
-        }
-      },
-      "description": "Represents an LLM query planning activity record."
-    },
-    "KnowledgeAgentSemanticRankerActivityRecord": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentActivityRecord"
-        }
-      ],
-      "properties": {
-        "inputTokens": {
-          "type": "integer",
-          "description": "The number of input tokens for the semantic ranker activity."
-        },
-        "elapsedMs": {
-          "type": "integer",
-          "description": "The elapsed time in milliseconds for the model activity."
-        }
-      },
-      "description": "Represents a semantic ranker activity record."
-    },
-    "KnowledgeAgentReference": {
-      "type": "object",
-      "discriminator": "type",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the reference."
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the reference."
-        },
-        "activitySource": {
-          "type": "integer",
-          "description": "The source activity ID for the reference."
-        }
-      },
-      "required": [ "type", "id", "activitySource" ],
-      "description": "Base type for references."
-    },
-    "KnowledgeAgentAzureSearchDocReference": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgentReference"
-        }
-      ],
-      "properties": {
-        "docKey": {
-          "type": "string",
-          "description": "The document key for the reference."
-        },
-        "sourceData": {
-          "type": "object",
-          "additionalProperties": true
-        }
-      },
-      "description": "Represents an Azure Search document reference."
     },
     "AnalyzeRequest": {
       "type": "object",
@@ -4369,26 +3981,26 @@
       },
       "description": "Represents classes of characters on which a token filter can operate."
     },
-    "RankingOrder": {
+	 "RankingOrder": {
       "type": "string",
       "enum": [
-        "rerankerscore",
-        "boostedrerankerscore"
+        "BoostedRerankerScore",
+        "RerankerScore"
       ],
       "x-ms-enum": {
         "name": "RankingOrder",
         "modelAsString": true,
         "values": [
           {
-            "value": "rerankerscore",
+            "value": "BoostedRerankerScore",
+            "name": "BoostedRerankerScore",
+            "description": "Sets sort order as BoostedRerankerScore"
+          },
+		  {
+            "value": "RerankerScore",
             "name": "ReRankerScore",
             "description": "Sets sort order as ReRankerScore"
           },
-          {
-            "value": "boostedrerankerscore",
-            "name": "BoostedRerankerScore",
-            "description": "Sets sort order as BoostedRerankerScore"
-          }
         ]
       },
       "description": "Represents score to use for sort order of documents."
@@ -7040,144 +6652,6 @@
       },
       "description": "Contains configuration options related to vector search."
     },
-    "AssetProfile": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "externalDocs": {
-            "url": "https://learn.microsoft.com/rest/api/searchservice/Naming-rules"
-          },
-          "type": "string",
-          "description": "The name to associate with this particular asset profile.",
-          "x-nullable": false
-        },
-        "assetType": {
-          "type": "string",
-          "enum": [
-            "path"
-          ],
-          "x-ms-enum": {
-            "name": "AssetType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "path",
-                "name": "Path",
-                "description": "The part of the Url path after the first compoenet, which is determined by the container name configured in asset store."
-              }
-            ]
-          },
-          "description": "The asset type determines how to locate an asset in the asset store."
-        },
-        "servingType": {
-          "type": "string",
-          "enum": [
-            "sasUrl"
-          ],
-          "x-ms-enum": {
-            "name": "ServingType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "sasUrl",
-                "name": "SasUrl",
-                "description": "A secure URL that grants restricted access to a resource, allowing users to perform specific actions for a limited period without exposing the account key."
-              }
-            ]
-          },
-          "description": "The serving type determines how to serve assets to API callers."
-        },
-        "servingOptions": {
-          "type": "object",
-          "properties": {
-            "sasExpiry": {
-              "type": "string",
-              "pattern": "^P(?=\\d|T\\d)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+S)?)?$",
-              "example": "PT1H",
-              "default": "PT1H",
-              "description": "Specifies the duration for which the generated SAS URL will remain valid, formatted as an ISO 8601 duration."
-            }
-          }
-        },
-        "assetStore": {
-          "$ref": "#/definitions/SearchAssetStore",
-          "description": "The definition of an asset store that stores the assets."
-        }
-      }
-    },
-    "SearchAssetStoreType": {
-      "type": "string",
-      "enum": [
-        "azureblob"
-      ],
-      "x-ms-enum": {
-        "name": "SearchAssetStoreType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "azureblob",
-            "name": "AzureBlob",
-            "description": "Indicates an Azure Blob asset store."
-          }
-        ]
-      },
-      "description": "Defines the type of an asset store."
-    },
-    "AssetStoreCredentials": {
-      "type": "object",
-      "properties": {
-        "connectionString": {
-          "externalDocs": {
-            "url": "https://to-be-created"
-          },
-          "type": "string",
-          "description": "The connection string for the asset store. Set to `<unchanged>` (with brackets) if you don't want the connection string updated. Set to `<redacted>` if you want to remove the connection string value from the assset store."
-        }
-      },
-      "description": "Represents credentials that can be used to connect to an asset store."
-    },
-    "SearchAssetStoreContainer": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the container in the asset store that will be used to store assets."
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "The container in the asset store that will be used to store assets."
-    },
-    "SearchAssetStore": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/SearchAssetStoreType",
-          "description": "The type of the asset store."
-        },
-        "credentials": {
-          "$ref": "#/definitions/AssetStoreCredentials",
-          "description": "Credentials for the asset store."
-        },
-        "container": {
-          "$ref": "#/definitions/SearchAssetStoreContainer",
-          "description": "The data container for the asset store."
-        },
-        "identity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "x-nullable": true,
-          "description": "An explicit managed identity to use for this asset store. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If \"none\" is specified, the value of this property is cleared."
-        }
-      },
-      "required": [
-        "name",
-        "type",
-        "credentials",
-        "container"
-      ],
-      "description": "Represents an asset store definition."
-    },
     "VectorSearchProfile": {
       "type": "object",
       "properties": {
@@ -7635,7 +7109,9 @@
       "enum": [
         "text-embedding-ada-002",
         "text-embedding-3-large",
-        "text-embedding-3-small"
+        "text-embedding-3-small",
+        "gpt-4o",
+        "gpt-4o-mini"
       ],
       "x-ms-enum": {
         "name": "AzureOpenAIModelName",
@@ -7970,7 +7446,7 @@
       "enum": [
         "userIds",
         "groupIds",
-        "azureRbacScope"
+        "rbacScope"
       ],
       "x-ms-enum": {
         "name": "IndexerPermissionOption",
@@ -7987,8 +7463,8 @@
             "description": "Indexer to ingest ACL groupIds from data source to index."
           },
           {
-            "value": "azureRbacScope",
-            "name": "AzureRbacScope",
+            "value": "rbacScope",
+            "name": "RbacScope",
             "description": "Indexer to ingest Azure RBAC scope from data source to index."
           }
         ]
@@ -8870,11 +8346,6 @@
           "readOnly": true,
           "description": "The outcome of this indexer execution."
         },
-        "currentState": {
-          "$ref": "#/definitions/IndexerCurrentState",
-          "readOnly": true,
-          "description": "All of the state that defines and dictates the indexer's current execution."
-        },
         "errorMessage": {
           "type": "string",
           "readOnly": true,
@@ -8945,94 +8416,6 @@
       ],
       "description": "Represents the result of an individual indexer execution."
     },
-    "PermissionIndexerExecutionResult": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/IndexerExecutionStatus",
-          "readOnly": true,
-          "description": "The outcome of this indexer execution."
-        },
-        "statusDetail": {
-          "$ref": "#/definitions/IndexerExecutionStatusDetail",
-          "readOnly": true,
-          "description": "The outcome of this indexer execution."
-        },
-        "currentState": {
-          "$ref": "#/definitions/IndexerCurrentState",
-          "readOnly": true,
-          "description": "All of the state that defines and dictates the indexer's current execution."
-        },
-        "errorMessage": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The error message indicating the top-level error, if any."
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The start time of this indexer execution."
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "x-nullable": true,
-          "description": "The end time of this indexer execution, if the execution has already completed."
-        },
-        "errors": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchIndexerError"
-          },
-          "description": "The item-level indexing errors."
-        },
-        "warnings": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchIndexerWarning"
-          },
-          "description": "The item-level indexing warnings."
-        },
-        "itemsProcessed": {
-          "x-ms-client-name": "ItemCount",
-          "type": "integer",
-          "format": "int32",
-          "x-nullable": false,
-          "readOnly": true,
-          "description": "The number of items that were processed during this indexer execution. This includes both successfully processed items and items where indexing was attempted but failed."
-        },
-        "itemsFailed": {
-          "x-ms-client-name": "FailedItemCount",
-          "type": "integer",
-          "format": "int32",
-          "x-nullable": false,
-          "readOnly": true,
-          "description": "The number of items that failed to be indexed during this indexer execution."
-        },
-        "initialTrackingState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Change tracking state with which an indexer execution started."
-        },
-        "finalTrackingState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Change tracking state with which an indexer execution finished."
-        }
-      },
-      "required": [
-        "status",
-        "errors",
-        "warnings",
-        "itemsProcessed",
-        "itemsFailed"
-      ],
-      "description": "Represents the result of an individual permission indexer execution."
-    },
     "IndexerExecutionStatus": {
       "type": "string",
       "enum": [
@@ -9091,23 +8474,15 @@
           },
           "description": "History of the recent indexer executions, sorted in reverse chronological order."
         },
-        "lastPermissionRefreshResult": {
-          "$ref": "#/definitions/PermissionIndexerExecutionResult",
-          "readOnly": true,
-          "description": "The result of the most recent or an in-progress indexer execution for permission."
-        },
-        "permissionRefreshHistory": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/PermissionIndexerExecutionResult"
-          },
-          "description": "History of the recent indexer executions for permission, sorted in reverse chronological order."
-        },
         "limits": {
           "$ref": "#/definitions/SearchIndexerLimits",
           "readOnly": true,
           "description": "The execution limits for the indexer."
+        },
+        "currentState": {
+          "$ref": "#/definitions/IndexerCurrentState",
+          "readOnly": true,
+          "description": "All of the state that defines and dictates the indexer's current execution."
         }
       },
       "required": [
@@ -9180,22 +8555,22 @@
           "readOnly": true,
           "description": "The mode the indexer is running in."
         },
-        "allDocsInitialChangeTrackingState": {
+        "allDocsInitialTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state used when indexing starts on all documents in the datasource."
         },
-        "allDocsFinalChangeTrackingState": {
+        "allDocsFinalTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state value when indexing finishes on all documents in the datasource."
         },
-        "resetDocsInitialChangeTrackingState": {
+        "resetDocsInitialTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state used when indexing starts on select, reset documents in the datasource."
         },
-        "resetDocsFinalChangeTrackingState": {
+        "resetDocsFinalTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state value when indexing finishes on select, reset documents in the datasource."
@@ -9216,12 +8591,12 @@
           "readOnly": true,
           "description": "The list of datasource document ids that have been reset. The datasource document id is the unique identifier for the data in the datasource. The indexer will prioritize selectively re-ingesting these ids."
         },
-        "resyncInitialChangeTrackingState": {
+        "resyncInitialTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state used when indexing starts on selective options from the datasource."
         },
-        "resyncFinalChangeTrackingState": {
+        "resyncFinalTrackingState": {
           "type": "string",
           "readOnly": true,
           "description": "Change tracking state value when indexing finishes on selective options from the datasource."
@@ -9283,23 +8658,6 @@
         }
       }
     },
-    "SearchIndexPermissionFilteringSetting": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string",
-          "enum": [
-            "enabled",
-            "disabled"
-          ],
-          "description": "The setting for document-level permission filtering."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "Contains the setting for the document-level permission filtering feature."
-    },
     "SearchField": {
       "type": "object",
       "properties": {
@@ -9350,10 +8708,31 @@
           "enum": [
             "userIds",
             "groupIds",
-            "azureRbacScope"
+            "rbacScope"
           ],
           "description": "A value indicating whether the field should be used as a permission filter.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "PermissionFilter",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "userIds",
+                "name": "UserIds",
+                "description": "Field represents user IDs that should be used to filter document access on queries."
+              },
+              {
+                "value": "groupIds",
+                "name": "GroupIds",
+                "description": "Field represents group IDs that should be used to filter document access on queries."
+              },
+              {
+                "value": "rbacScope",
+                "name": "RbacScope",
+                "description": "Field represents an RBAC scope that should be used to filter document access on queries."
+              }
+            ]
+          }
         },
         "analyzer": {
           "externalDocs": {
@@ -9417,12 +8796,6 @@
             "type": "string"
           },
           "description": "A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields."
-        },
-        "assetProfile": {
-          "x-ms-client-name": "assetProfileName",
-          "type": "string",
-          "description": "The name of the asset profile that specifies configuration to use when serving assets.",
-          "x-nullable": true
         },
         "fields": {
           "type": "array",
@@ -10153,10 +9526,6 @@
           "$ref": "#/definitions/SearchIndexerIndexProjections",
           "description": "Definition of additional projections to secondary search index(es)."
         },
-        "assetProjections": {
-          "$ref": "#/definitions/SearchIndexerAssetProjections",
-          "description": "Definition of additional projections to asset store(s)."
-        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -10441,62 +9810,6 @@
         ]
       },
       "description": "Defines behavior of the index projections in relation to the rest of the indexer."
-    },
-    "SearchIndexerAssetProjections": {
-      "type": "object",
-      "properties": {
-        "selectors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchIndexerAssetProjectionSelector"
-          },
-          "description": "A list of projections to be performed to asset store(s)."
-        }
-      },
-      "required": [
-        "selectors"
-      ],
-      "description": "Definition of additional projections to asset store(s)."
-    },
-    "SearchIndexerAssetProjectionSelector": {
-      "type": "object",
-      "properties": {
-        "targetIndexName": {
-          "type": "string",
-          "description": "The name of the search index that assets are associated with."
-        },
-        "targetIndexAssetProfileName": {
-          "type": "string",
-          "description": "The name of the asset profile to be used in the projection."
-        },
-        "mappings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SearchIndexerAssetProjectionMappingEntry"
-          },
-          "description": "The mappings for the projection."
-        }
-      },
-      "required": [
-        "targetIndexName",
-        "targetIndexAssetProfileName",
-        "mappings"
-      ],
-      "description": "Description for what assets and where to store in the asset store."
-    },
-    "SearchIndexerAssetProjectionMappingEntry":{
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the mapping."        
-        },
-        "source": {
-          "type": "string",
-          "description": "Source of assets to project."
-        }
-      },
-      "description": "Specifies what assets to be projected to asset store."
     },
     "DefaultCognitiveServicesAccount": {
       "type": "object",
@@ -14560,7 +13873,7 @@
           "x-nullable": false,
           "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
         },
-        "rankingOrder": {
+		 "rankingOrder": {
           "$ref": "#/definitions/RankingOrder",
           "x-nullable": true,
           "description": "Specifies the score type to be used for the sort order of the search results."
@@ -14568,7 +13881,7 @@
         "flightingOptIn": {
           "default": false,
           "type": "boolean",
-          "description": "Determines how which semantic or query rewrite models to use during model flighting/upgrades."
+          "description": "Determines which semantic or query rewrite models to use during model flighting/upgrades."
         }
       },
       "required": [

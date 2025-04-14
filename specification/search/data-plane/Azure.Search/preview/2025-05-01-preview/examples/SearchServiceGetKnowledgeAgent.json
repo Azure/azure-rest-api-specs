@@ -1,40 +1,42 @@
 {
-    "operationId": "KnowledgeAgents_Get",
-    "title": "SearchServiceGetKnowledgeAgent",
-    "parameters": {
-      "endpoint": "https://previewexampleservice.search.windows.net",
-      "agentName": "preview-test",
-      "api-version": "2025-05-01-preview",
-      "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "@odata.etag": "0x1234568AE7E58A1",
-          "name": "preview-test",
-          "targetIndexes": [
-            {
-              "indexName": "preview-test"
-            }
-          ],
-          "models": [
-            {
-              "kind": "azureOpenAI",
-              "perRequestTokenLimit": 0,
-              "azureOpenAIParameters": {
-                "resourceUri": "https://test-sample.openai.azure.com",
-                "deploymentId": "myDeployment",
-                "apiKey": "<redacted>",
-                "modelName": "gpt-4o-mini"
-              }
-            }
-          ],
-          "requestLimits": {
-            "outputTokenLimit": 100000,
-            "maxRuntimeInSeconds": 60,
-            "maxDegreesOfParallelism": 3
+  "operationId": "KnowledgeAgents_Get",
+  "title": "SearchServiceGetKnowledgeAgent",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "agentName": "preview-test",
+    "api-version": "2025-05-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "preview-test",
+        "targetIndexes": [
+          {
+            "indexName": "preview-test",
+            "defaultRerankerThreshold": 2.5,
+            "defaultIncludeReferenceSourceData": true,
+            "defaultMaxDocsPerRequest": 50
           }
+        ],
+        "models": [
+          {
+            "kind": "azureOpenAI",
+            "perRequestTokenLimit": 0,
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com",
+              "deploymentId": "myDeployment",
+              "apiKey": "<redacted>",
+              "modelName": "gpt-4o-mini"
+            }
+          }
+        ],
+        "requestLimits": {
+          "maxRuntimeInSeconds": 60,
+          "maxOutputSize": 100000
         }
       }
     }
   }
+}

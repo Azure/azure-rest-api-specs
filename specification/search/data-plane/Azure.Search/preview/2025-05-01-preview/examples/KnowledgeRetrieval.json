@@ -1,6 +1,6 @@
 {
-  "operationId": "KnowledgeAgents_Retrieve",
-  "title": "KnowledgeAgentRetrieve",
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeRetrieval",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
     "agentName": "temp-preview-test",
@@ -22,6 +22,7 @@
         {
           "indexName": "preview-test",
           "filterAddOn": "foo eq bar",
+          "maxDocsPerRequest": 50,
           "rerankerThreshold": 2.5,
           "includeReferenceSourceData": true
         }
