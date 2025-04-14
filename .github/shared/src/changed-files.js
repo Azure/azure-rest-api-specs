@@ -7,7 +7,7 @@ import { diff } from "./git.js";
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
- * @param {import('./types.js').ILogger} [options.logger]
+ * @param {import('./logger.js').ILogger} [options.logger]
  * @returns {Promise<string[]>} List of changed files, using posix paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
@@ -24,7 +24,7 @@ export async function getChangedFiles(options = {}) {
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
   const result = await diff(baseCommitish, headCommitish, {
-    args: "--name-only",
+    args: ["--name-only"],
     cwd,
     logger: logger,
   });
