@@ -138,7 +138,7 @@ model AssessedMachineNetworkAdaptersV3 is AssessedNetworkAdaptersV3 {
  > {
    @doc("VM Security Suitability Results.")
    @visibility(Lifecycle.Read)
-   @OpenAPI.extension("x-ms-identifiers", #[])
+   @extension("x-ms-identifiers", #[])
    vmSecuritySuitabilityResults?: VmSecuritySuitability[];
  
    @doc("Recommended security type for the VM.")
