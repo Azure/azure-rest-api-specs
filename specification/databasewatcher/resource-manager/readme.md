@@ -77,7 +77,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell
@@ -85,10 +84,6 @@ swagger-to-sdk:
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
