@@ -28,7 +28,7 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
-  v2_preview: "2024-11-01-preview",
+  v2_preview: "2024-11-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
