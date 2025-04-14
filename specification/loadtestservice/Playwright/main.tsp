@@ -5,21 +5,21 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "../PlaywrightTesting.Shared";
+import "../Playwright.Shared";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Microsoft.PlaywrightTesting.Shared;
+using Playwright.Shared;
 
 @server(
   "{endpoint}",
-  "Microsoft Azure Playwright Service API Endpoint",
+  "Playwright Service API Endpoint",
   {
     @doc("""
-      Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:
+      Supported Playwright Service API Endpoints (protocol and hostname, for example:
         https://{region}.api.playwright.microsoft.com).
       """)
     endpoint: string,
@@ -46,28 +46,26 @@ using Microsoft.PlaywrightTesting.Shared;
     ]>
   ]
 )
-@service(#{ title: "Microsoft PlaywrightTesting AuthManager Service API" })
-@versioned(Microsoft.PlaywrightTesting.AuthManager.Versions)
-namespace Microsoft.PlaywrightTesting.AuthManager;
+@service(#{ title: "Playwright Service API" })
+@versioned(Playwright.Versions)
+namespace Playwright;
 
-@doc("The PlaywrightTesting Auth Manager service version.")
+@doc("Playwright Service API Versions.")
 enum Versions {
-  @doc("Version 2024-12-01")
+  @doc("Version 2025-07-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Microsoft.PlaywrightTesting.Shared.Versions.v1_0)
-  `2024-12-01`,
+  @useDependency(Playwright.Shared.Versions.v1_0)
+  `2025-07-01-preview`,
 }
 
 // Models ////////////////////
 
-@doc("Model of an access-token linked to an account.")
+@doc("Model of an access-token linked to a workspace.")
 @resource("access-tokens")
-@parentResource(Account)
+@parentResource(Workspace)
 model AccessToken {
   @key("accessTokenId")
   @doc("The access-token id.")
-  @maxLength(64)
-  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
   id: uuid;
 
@@ -106,7 +104,7 @@ union AccessTokenState {
   Expired: "Expired",
 }
 
-@doc("The os to configure for remote test runs.")
+@doc("The os to configure for remote script runs.")
 union OS {
   string,
 
@@ -127,30 +125,26 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 interface AccessTokens {
   // AccessToken Operations
-  @doc("Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @doc("Creates an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
   createOrReplace is Operations.ResourceCreateOrReplace<AccessToken>;
 
-  @doc("Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @doc("Gets an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
   get is Operations.ResourceRead<AccessToken>;
 
-  @doc("Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @doc("Deletes an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.")
   delete is Operations.ResourceDelete<AccessToken>;
 
-  @doc("Lists access-tokens for the given account id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.")
+  @doc("Lists access-tokens for the given workspace id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.")
   list is Operations.ResourceList<AccessToken>;
 }
 
 alias GetBrowsersParams = {
   @path
-  @doc("The account id.")
-  accountId: string;
+  @doc("The workspace id.")
+  workspaceId: string;
 
   @query
-  @doc("The run id provided by client for corresponding remote test run.")
-  runId?: string;
-
-  @query
-  @doc("The os provided by client for remote test runs.")
+  @doc("The os provided by client for remote script runs.")
   os?: OS = OS.Linux;
 };
 
@@ -159,19 +153,19 @@ alias GetBrowsersResponse = {
   _: 302;
 
   @header
-  @doc("The redirect target URL to run test on remote browsers.")
+  @doc("The redirect target URL to run script on remote browsers.")
   location: url;
 };
 
-interface Accounts {
-  // Accounts Operations
+interface Workspaces {
+  // Workspaces Operations
 
-  @doc("Get details of the Azure resource mapped to an account for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.")
-  get is Operations.ResourceRead<Account>;
+  @doc("Get details of the Azure resource mapped to a workspace for the given workspace id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  get is Operations.ResourceRead<Workspace>;
 
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
-  @doc("Gets remote browsers corresponding to given account id and redirects the client for running Playwright tests. Authorization required is Bearer JWT Access token provided by EntraID or Microsoft Playwright Testing Service.")
-  @route("/accounts/{accountId}/browsers")
+  @doc("Gets remote browsers corresponding to given workspace id and redirects the client for executing Playwright scripts. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.")
+  @route("/workspaces/{workspaceId}/browsers")
   getBrowsers is RpcOperation<
     GetBrowsersParams,
     GetBrowsersResponse,

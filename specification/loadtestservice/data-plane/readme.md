@@ -27,6 +27,14 @@ tag: package-2022-11-01
 title: LoadTestingClient
 ```
 
+### Tag: package-2025-07-01-preview
+These settings apply only when `--tag=2025-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07-01-preview'
+input-file:
+  - Playwright/preview/2025-07-01-preview/playwright.json
+```
+
 ### Tag: package-2024-07-01-preview
 
 These settings apply only when `--tag=package-2024-07-01-preview` is specified on the command line.
