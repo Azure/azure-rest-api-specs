@@ -1582,25 +1582,6 @@
           "format": "date-time",
           "readOnly": true
         },
-        "transferStatus": {
-          "description": "The current status of the transfer.",
-          "type": "string",
-          "enum": [
-            "Pending",
-            "InProgress",
-            "Completed",
-            "CompletedWithError",
-            "Failed",
-            "Canceled",
-            "Declined",
-            "Expired"
-          ],
-          "x-ms-enum": {
-            "name": "transferStatus",
-            "modelAsString": true
-          },
-          "readOnly": true
-        },
         "recipientEmailId": {
           "description": "The email ID of the user to whom the transfer request was sent.",
           "type": "string"
@@ -1611,7 +1592,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "description": "The provisioning state of the transfer.",
+          "description": "The current status of the transfer.",
           "type": "string",
           "enum": [
             "Pending",
