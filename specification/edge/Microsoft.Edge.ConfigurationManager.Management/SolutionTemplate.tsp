@@ -34,6 +34,9 @@ model SolutionTemplateProperties {
   @doc("State of resource")
   state?: ResourceState;
 
+  @doc("Flag to enable external validation")
+  enableExternalValidation?: boolean;
+
   @doc("Provisioning state of resource")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;

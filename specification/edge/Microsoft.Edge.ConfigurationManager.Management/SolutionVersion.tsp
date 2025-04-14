@@ -59,6 +59,10 @@ model SolutionVersionProperties {
   @Azure.ResourceManager.identifiers(#[])
   solutionDependencies?: SolutionDependency[];
 
+  @doc("Error Details if any failure is there")
+  @visibility(Lifecycle.Read)
+  errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail;
+
   @doc("Provisioning state of resource")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;

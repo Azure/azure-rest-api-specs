@@ -28,6 +28,7 @@ import "./Execution.tsp";
 import "./Diagnostics.tsp";
 import "./Context.tsp";
 import "./SiteReference.tsp";
+import "./EventGridFilters.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
