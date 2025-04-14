@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ConsoleLogger } from "../src/logger";
+import { consoleLogger, ConsoleLogger } from "../src/logger";
 
-describe("ConsoleLogger", () => {
+describe("logger", () => {
   let debugSpy, errorSpy, logSpy;
 
   beforeEach(() => {
@@ -16,9 +16,11 @@ describe("ConsoleLogger", () => {
     logSpy.mockRestore();
   });
 
-  it.each([false, true])("isDebug=%s", (isDebug) => {
-    const logger = new ConsoleLogger(isDebug);
-
+  it.each([
+    ["consoleLogger", consoleLogger, false],
+    ["new ConsoleLogger(isDebug: false)", new ConsoleLogger(false), false],
+    ["new ConsoleLogger(isDebug: true)", new ConsoleLogger(true), true],
+  ])("%s", (_name, logger, isDebug) => {
     expect(logger.isDebug()).toBe(isDebug);
 
     logger.info("test info");
