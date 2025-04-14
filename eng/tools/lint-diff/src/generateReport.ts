@@ -2,7 +2,8 @@ import { writeFile } from "node:fs/promises";
 import { kebabCase } from "change-case";
 import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
 import { getPathToDependency, getDependencyVersion, relativizePath } from "./util.js";
-import { getViolations, isFailure, isWarning } from "./correlateResults.js";
+import { getViolations } from "./correlateResults.js";
+import { isFailure, isWarning } from "./util.js";
 import {
   AutorestRunResult,
   AutoRestMessage,
@@ -12,8 +13,7 @@ import {
 
 const LIMIT_50_MESSAGE = "Only 50 items are listed, please refer to log for more details.";
 
-export async function generateReport(
-  autoRestErrors: { result: AutorestRunResult; errors: AutoRestMessage[] }[],
+export async function generateLintDiffReport(
   runCorrelations: Map<string, BeforeAfter>,
   affectedSwaggers: Set<string>,
   outFile: string,
@@ -21,32 +21,7 @@ export async function generateReport(
   compareSha: string,
 ): Promise<boolean> {
   let pass = true;
-
   let outputMarkdown = "";
-
-  if (autoRestErrors.length > 0) {
-    pass = false;
-
-    console.error("LintDiff detected AutoRest errors");
-    outputMarkdown += "**AutoRest errors:**\n\n";
-    for (const { result, errors } of autoRestErrors) {
-      console.log(`AutoRest errors for ${result.readme} (${result.tag})`);
-
-      outputMarkdown += "Readme: " + result.readme + "\n";
-      outputMarkdown += "Tag: " + result.tag + "\n";
-      outputMarkdown += "Errors:\n";
-      outputMarkdown += "| Level | Message |\n";
-      outputMarkdown += "| ----- | ------- |\n";
-      for (const error of errors) {
-        const { level, message } = error;
-        console.log(`  ${level}: ${message}`);
-
-        outputMarkdown += `| ${level} | ${message.replace(/\n/g, "<br />")} |\n`;
-      }
-
-      outputMarkdown += "\n\n";
-    }
-  }
 
   // See unifiedPipelineHelper.ts:386
   // Compared specs (link to npm package: @microsoft.azure/openapi-validator/v/<version>)
@@ -128,6 +103,36 @@ export async function generateReport(
   await writeFile(outFile, outputMarkdown);
 
   return pass;
+}
+
+export async function generateAutoRestErrorReport(
+  autoRestErrors: { result: AutorestRunResult; errors: AutoRestMessage[] }[],
+  outFile: string,
+) {
+  let outputMarkdown = "";
+
+  console.error("LintDiff detected AutoRest errors");
+  outputMarkdown += "**AutoRest errors:**\n\n";
+  for (const { result, errors } of autoRestErrors) {
+    console.log(`AutoRest errors for ${result.readme} (${result.tag})`);
+
+    outputMarkdown += "Readme: " + result.readme + "\n";
+    outputMarkdown += "Tag: " + result.tag + "\n";
+    outputMarkdown += "Errors:\n";
+    outputMarkdown += "| Level | Message |\n";
+    outputMarkdown += "| ----- | ------- |\n";
+    for (const error of errors) {
+      const { level, message } = error;
+      console.log(`  ${level}: ${message}`);
+
+      outputMarkdown += `| ${iconFor(level)} ${level} | ${message.replace(/\n/g, "<br />")} |\n`;
+    }
+
+    outputMarkdown += "\n\n";
+  }
+
+  console.log(`Writing output to ${outFile}`);
+  await writeFile(outFile, outputMarkdown);
 }
 
 /**

@@ -1,13 +1,13 @@
 import { test, describe, expect, vi, afterEach } from "vitest";
 import {
-  iconFor,
-  getLine,
-  getFile,
-  getDocUrl,
-  getFileLink,
-  generateReport,
-  getPathSegment,
   compareLintDiffViolations,
+  generateLintDiffReport,
+  getDocUrl,
+  getFile,
+  getFileLink,
+  getLine,
+  getPathSegment,
+  iconFor,
 } from "../src/generateReport.js";
 import {
   Source,
@@ -276,7 +276,7 @@ describe("compareLintDiffViolations", () => {
   });
 });
 
-describe("generateReport", () => {
+describe("generateLintDiffReport", () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
@@ -318,8 +318,7 @@ describe("generateReport", () => {
       ["file1.md", { before: beforeResult, after: afterResult }],
     ]);
 
-    const actual = await generateReport(
-      [],
+    const actual = await generateLintDiffReport(
       runCorrelations,
       new Set<string>([
         "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
@@ -370,8 +369,7 @@ describe("generateReport", () => {
         ["file1.md", { before: beforeResult, after: afterResult }],
       ]);
 
-      const actual = await generateReport(
-        [],
+      const actual = await generateLintDiffReport(
         runCorrelations,
         new Set<string>([
           "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",

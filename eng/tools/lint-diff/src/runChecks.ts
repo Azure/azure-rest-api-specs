@@ -2,10 +2,14 @@ import { join } from "path";
 import { exec, ExecException } from "node:child_process";
 
 import { getOpenapiType } from "./markdown-utils.js";
-import { getPathToDependency } from "./util.js";
+import { getPathToDependency, isFailure } from "./util.js";
 import { AutoRestMessage, AutorestRunResult } from "./lintdiff-types.js";
 
 const MAX_EXEC_BUFFER = 64 * 1024 * 1024;
+
+// AutoRest messages are JSON objects that start with the string '{"level":'
+// Non-AutoRest messages will start with things like '{"pluginName"'
+const AUTOREST_ERROR_PREFIX = '{"level":';
 
 export async function runChecks(
   path: string,
@@ -86,11 +90,9 @@ export function getAutorestErrors(runResult: AutorestRunResult): AutoRestMessage
   const lines = (runResult.stdout + runResult.stderr).split("\n").map((line) => line.trim());
 
   for (const line of lines) {
-    // AutoRest messages are JSON objects that start with the string '{"level":'
-    // Non-AutoRest messages will start with things like '{"pluginName"'
-    if (line.startsWith('{"level":')) {
+    if (line.startsWith(AUTOREST_ERROR_PREFIX)) {
       const error = JSON.parse(line) as AutoRestMessage;
-      if (error.level === "error" || error.level === "fatal") {
+      if (isFailure(error.level)) {
         errors.push(error);
       }
     }
