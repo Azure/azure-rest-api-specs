@@ -28,7 +28,7 @@ model Workspace {
 
   @doc("Fully-qualified Azure resource id for the workspace.")
   @visibility(Lifecycle.Read)
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
   @doc("The workspace name.")
   @visibility(Lifecycle.Read)
