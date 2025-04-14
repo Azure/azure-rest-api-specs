@@ -44,24 +44,27 @@ interface Connections {
     }>
   >;
 
-  /*
   @doc("List all connections in the project, with their connection credentials")
   @TypeSpec.Http.post
-  @Rest.actionSeparator("/")
   @Rest.action("withCredentials")
-  listWithCredentials is ConnectionOperations.ResourceList<
+  listWithCredentials is ConnectionOperations.ResourceCollectionAction<
     Connection,
-    ListQueryParametersTrait<{
+    {
       @doc("List connections of this specific type")
       @query("connectionType")
       connectionType?: ConnectionType;
-
+ 
       @doc("List connections that are default connections")
       @query("defaultConnection")
       defaultConnection?: boolean;
-
+ 
       ...StandardListQueryParameters;
-    }>
+    },
+    Internal.ConnectionPaged
   >;
-  */
 }
+
+namespace Internal {
+  model ConnectionPaged is Azure.Core.Page<Connection>;
+}
+
