@@ -18,7 +18,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2023-07-01"
+default-api-version: "2019-05-01"
 batch:
   - tag: package-2025-03-preview-only
   - tag: package-2024-11-preview-only
