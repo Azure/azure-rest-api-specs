@@ -6,5 +6,10 @@ using Microsoft.PortalServices;
 
 // java
 @@clientName(Microsoft.PortalServices,
-  "PortalServicesManagementClient",
+  "PortalServicesCopilotMgmtClient",
   "java");
+
+@@clientName(Microsoft.PortalServices,
+  "PortalServicesCopilotMgmtClient",
+  "python"
+);
