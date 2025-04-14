@@ -4250,7 +4250,7 @@
         },
         "x-ms-examples": {
           "Post OutboundRules": {
-            "$ref": "./examples/ManagedNetwork/postOutboundRules.json"
+            "$ref": "./examples/ManagedNetwork/postOutboundRulesV2.json"
           }
         }
       }
@@ -4372,7 +4372,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Patch ManagedNetworkSettings": {
-            "$ref": "./examples/ManagedNetwork/patchManagedNetwork.json"
+            "$ref": "./examples/ManagedNetwork/patchManagedNetworkV2.json"
           }
         }
       },
@@ -4448,7 +4448,7 @@
         },
         "x-ms-examples": {
           "Put ManagedNetworkSettings": {
-            "$ref": "./examples/ManagedNetwork/createOrUpdateManagedNetwork.json"
+            "$ref": "./examples/ManagedNetwork/createOrUpdateManagedNetworkV2.json"
           }
         }
       }
@@ -4496,7 +4496,7 @@
         },
         "x-ms-examples": {
           "List ManagedNetworkSettings": {
-            "$ref": "./examples/ManagedNetwork/listManagedNetwork.json"
+            "$ref": "./examples/ManagedNetwork/listManagedNetworkV2.json"
           }
         }
       }
@@ -5932,7 +5932,7 @@
           "$ref": "#/definitions/FirewallSku"
         },
         "managedNetworkKind": {
-          "description": "Kind of the managed network",
+          "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
           "$ref": "#/definitions/ManagedNetworkKind"
         },
         "firewallPublicIpAddress": {
@@ -5942,7 +5942,7 @@
       }
     },
     "ManagedNetworkKind": {
-      "description": "The Kind of the managed network.",
+      "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
       "enum": [
         "V1",
         "V2"
