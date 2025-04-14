@@ -48,15 +48,15 @@ model EntityLinkingResult is PreBuiltResult {
   /** Response by document */
   @typeChangedFrom(
     Versions.v2024_11_15_preview,
-    Array<LinkedEntitiesDocumentResult>
+    LinkedEntitiesDocumentResult[]
   )
-  documents: Array<EntityLinkingResultWithDetectedLanguage>;
+  documents: EntityLinkingResultWithDetectedLanguage[];
 }
 
 /** Entity linking document result. */
 model LinkedEntitiesDocumentResult is DocumentResult {
   /** Recognized well known entities in the document. */
-  entities: Array<LinkedEntity>;
+  entities: LinkedEntity[];
 }
 
 /** Entity linking document result with auto language detection. */
@@ -72,7 +72,7 @@ model LinkedEntity {
   name: string;
 
   /** List of instances this entity appears in the text. */
-  matches: Array<Match>;
+  matches: Match[];
 
   /** Language used in the data source. */
   language: string;

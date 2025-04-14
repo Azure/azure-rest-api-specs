@@ -77,19 +77,19 @@ model HealthcareResult is PreBuiltResult {
   /** List of result objects for the processed Healthcare documents. */
   @typeChangedFrom(
     Versions.v2024_11_15_preview,
-    Array<HealthcareEntitiesDocumentResult>
+    HealthcareEntitiesDocumentResult[]
   )
-  documents: Array<HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
+  documents: HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage[];
 }
 
 /** Result object for the processed Healthcare document. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 model HealthcareEntitiesDocumentResult is DocumentResult {
   /** Healthcare entities. */
-  entities: Array<HealthcareEntity>;
+  entities: HealthcareEntity[];
 
   /** Healthcare entity relations. */
-  relations: Array<HealthcareRelation>;
+  relations: HealthcareRelation[];
 
   /** JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html. */
   @added(Versions.v2024_11_01)
@@ -127,7 +127,7 @@ model HealthcareEntity {
   name?: string;
 
   /** Entity references in known data sources. */
-  links?: Array<HealthcareEntityLink>;
+  links?: HealthcareEntityLink[];
 }
 
 /** Healthcare Entity Category. */
@@ -259,7 +259,7 @@ model HealthcareRelation {
   relationType: relationType;
 
   /** The entities in the relation. */
-  entities: Array<HealthcareRelationEntity>;
+  entities: HealthcareRelationEntity[];
 
   /** Confidence score between 0 and 1 of the extracted relation. */
   @added(Versions.v2023_04_01)

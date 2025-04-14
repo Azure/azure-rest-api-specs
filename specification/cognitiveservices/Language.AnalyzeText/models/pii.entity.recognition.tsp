@@ -26,14 +26,14 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   domain?: PiiDomain = PiiDomain.none;
 
   /** Enumeration of PII categories to be returned in the response. */
-  piiCategories?: Array<PiiCategory>;
+  piiCategories?: PiiCategory[];
 
   /** StringIndexType to be used for analysis. */
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   /** Enumeration of PII categories to be excluded in the response. */
   @added(Versions.v2024_11_15_preview)
-  excludePiiCategories?: Array<PiiCategoriesExclude>;
+  excludePiiCategories?: PiiCategoriesExclude[];
 
   /** RedactionPolicy to be used on the input. */
   @added(Versions.v2024_11_15_preview)
@@ -51,7 +51,7 @@ model ValueExclusionPolicy {
   caseSensitive: boolean = false;
 
   /** List of words and terms that should be excluded from detection by the PII detection service */
-  excludedValues: Array<string>;
+  excludedValues: string[];
 }
 
 /** The abstract base class for RedactionPolicy. */
@@ -127,9 +127,9 @@ model PiiResult is PreBuiltResult {
   /** Response by document */
   @typeChangedFrom(
     Versions.v2024_11_15_preview,
-    Array<PiiEntitiesDocumentResult>
+    PiiEntitiesDocumentResult[]
   )
-  documents: Array<PiiResultWithDetectedLanguage>;
+  documents: PiiResultWithDetectedLanguage[];
 }
 
 /** PII domains. */
@@ -150,7 +150,7 @@ model PiiEntityWithTags is Entity {
   type?: string;
 
   /** List of entity tags. Tags are to express some similarities/affinity between entities. */
-  tags?: Array<EntityTag>;
+  tags?: EntityTag[];
 
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
   mask?: string;
@@ -169,8 +169,8 @@ model PiiEntitiesDocumentResult is DocumentResult {
   redactedText: string;
 
   /** Recognized entities in the document. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, Array<Entity>)
-  entities: Array<PiiEntityWithTags>;
+  @typeChangedFrom(Versions.v2024_11_15_preview, Entity[])
+  entities: PiiEntityWithTags[];
 }
 
 /** Contains the PII results with detected language. */
