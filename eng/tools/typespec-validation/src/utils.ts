@@ -4,14 +4,6 @@ import defaultPath, { join, PlatformPath } from "path";
 import { TsvHost } from "./tsv-host.js";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 
-export async function filterAsync<T>(
-  array: T[],
-  asyncPredicate: (item: T, index: number, array: T[]) => Promise<boolean>,
-): Promise<T[]> {
-  const filterResults = await Promise.all(array.map(asyncPredicate));
-  return array.filter((_, index) => filterResults[index]);
-}
-
 export async function runFile(file: string, args: string[], cwd?: string) {
   console.log(`run command:${file} ${args.join(' ')}`);
   const { err, stdout, stderr } = (await new Promise((res) =>

@@ -5,7 +5,8 @@ import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
-import { fileExists, filterAsync, getSuppressions } from "../utils.js";
+import { fileExists, getSuppressions } from "../utils.js";
+import { filterAsync } from "@azure-tools/specs-shared/array";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
