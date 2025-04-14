@@ -583,7 +583,7 @@
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessions",
         "summary": "Lists sessions for /detectLivenessWithVerify/SingleModal.",
-        "description": "List sessions from the last sessionId greater than the \"start\".\n\nThe result should be ordered by sessionId in ascending order.",
+        "description": "List sessions from the last sessionId greater than the 'start'.\n\nThe result should be ordered by sessionId in ascending order.",
         "parameters": [
           {
             "name": "start",
@@ -6972,32 +6972,13 @@
         "verifyConfidenceThreshold": {
           "type": "number",
           "format": "float",
-          "description": "Threshold for confidence of the face verification.",
+          "description": "Threshold for confidence of the face verification. Please refer to the documentation for more details. https://learn.microsoft.com/legal/cognitive-services/face/characteristics-and-limitations?context=%2Fazure%2Fai-services%2Fcomputer-vision%2Fcontext%2Fcontext#recognition-confidence-score",
           "minimum": 0,
           "maximum": 1
         }
       },
       "required": [
         "livenessOperationMode"
-      ]
-    },
-    "CreateLivenessWithVerifySessionMultipartContent": {
-      "type": "object",
-      "description": "Request of liveness with verify session creation.",
-      "properties": {
-        "Parameters": {
-          "$ref": "#/definitions/CreateLivenessWithVerifySessionJsonContent",
-          "description": "The parameters for creating session."
-        },
-        "VerifyImage": {
-          "type": "string",
-          "format": "byte",
-          "description": "The image stream for verify. Content-Disposition header field for this part must have filename."
-        }
-      },
-      "required": [
-        "Parameters",
-        "VerifyImage"
       ]
     },
     "CreateLivenessWithVerifySessionResult": {
