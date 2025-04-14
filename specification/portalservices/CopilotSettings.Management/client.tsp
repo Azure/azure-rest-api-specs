@@ -7,7 +7,8 @@ using Microsoft.PortalServices;
 // java
 @@clientName(Microsoft.PortalServices,
   "PortalServicesCopilotMgmtClient",
-  "java");
+  "java"
+);
 
 @@clientName(Microsoft.PortalServices,
   "PortalServicesCopilotMgmtClient",
