@@ -26,7 +26,7 @@ interface Connections {
   @TypeSpec.Http.post
   //@Rest.actionSeparator("/")
   //@Rest.action("withCredentials")
-  getWithCredentials is ConnectionOperations.ResourceAction<Connection, {}, Connection>;
+  withCredentials is ConnectionOperations.ResourceAction<Connection, {}, Connection>;
 
   @doc("List all connections in the project, without populating connection credentials")
   list is ConnectionOperations.ResourceList<
