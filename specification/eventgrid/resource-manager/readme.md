@@ -51,22 +51,22 @@ suppressions:
   - code: PatchBodyParametersSchema
     reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
     from: EventGrid.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties.schema.topicSpacesConfiguration.schema.properties.clientAuthentication.schema.properties.webhookAuthentication.schema.properties.identity
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties.properties.topicSpacesConfiguration.properties.clientAuthentication.properties.webhookAuthentication.properties.identity
 
   - code: PatchBodyParametersSchema
     reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
     from: EventGrid.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties.schema.topicSpacesConfiguration.schema.properties.clientAuthentication.schema.properties.webhookAuthentication.schema.properties.endpointUrl
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties.properties.topicSpacesConfiguration.properties.clientAuthentication.properties.webhookAuthentication.properties.endpointUrl
 
   - code: PatchBodyParametersSchema
     reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
     from: EventGrid.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties.schema.topicSpacesConfiguration.schema.properties.clientAuthentication.schema.properties.webhookAuthentication.schema.properties.azureActiveDirectoryTenantId
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties.properties.topicSpacesConfiguration.properties.clientAuthentication.properties.webhookAuthentication.properties.azureActiveDirectoryTenantId
 
   - code: PatchBodyParametersSchema
     reason: This is false positive as this property will not be present by default. Only when used, this property will be required.
     from: EventGrid.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties.schema.topicSpacesConfiguration.schema.properties.clientAuthentication.schema.properties.webhookAuthentication.schema.properties.azureActiveDirectoryApplicationIdOrUri
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties.properties.topicSpacesConfiguration.properties.clientAuthentication.properties.webhookAuthentication.properties.azureActiveDirectoryApplicationIdOrUri
 
   - code:  PatchBodyParametersSchema
     reason: This is false positive as this property is already part of previous preview version and cannot be changed.
@@ -331,12 +331,17 @@ suppressions:
   - code: ProvisioningStateMustBeReadOnly
     reason: This is a false positive. The property is from an existing preview version and cannot be made readOnly.
     from: EventGrid.json
-    where: $.definitions["NetworkSecurityPerimeterConfigurationProperties"].properties.provisioningState
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"].get.responses["200"].schema.properties.properties.properties.provisioningState
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: This is a false positive. The property is from an existing preview version and cannot be made readOnly.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"].post.responses["200"].schema.properties.properties.properties.provisioningState
 
   - code:  PathForResourceAction
     reason: This route definition is defined by NSP for all partner services and the right integration with NSP relies on that. We cannot change this as we don't own the contract here and in order for the NSP integration to work, we need to adhere to NSP requirements in this route defintion.
     from: EventGrid.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"].post
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile"]
 ```
 
 ### Tag: package-2025-02
