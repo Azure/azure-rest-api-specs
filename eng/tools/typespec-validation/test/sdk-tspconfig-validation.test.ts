@@ -29,7 +29,6 @@ import {
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
-import { TsvTestHost } from "./tsv-test-host.js";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
 import { strictEqual } from "node:assert";
@@ -563,7 +562,6 @@ describe("tspconfig", function () {
     // suppression
     ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
-    let host = new TsvTestHost();
     readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
     vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
       {
@@ -580,7 +578,7 @@ describe("tspconfig", function () {
     });
 
     const rule = new SdkTspConfigValidationRule(c.subRules);
-    const result = await rule.execute(host, c.folder);
+    const result = await rule.execute(c.folder);
     strictEqual(result.success, true);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
