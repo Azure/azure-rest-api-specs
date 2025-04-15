@@ -1,6 +1,14 @@
 // @ts-check
 
 import { describe, expect, it, vi } from "vitest";
+
+vi.mock("simple-git", () => ({
+  simpleGit: vi.fn().mockReturnValue({
+    diff: vi.fn().mockResolvedValue(""),
+  }),
+}));
+
+import * as simpleGit from "simple-git";
 import * as exec from "../src/exec.js";
 import { diff, lsTree, show, status } from "../src/git.js";
 
@@ -44,17 +52,12 @@ describe("git", () => {
 
   describe("mocked", () => {
     it("diff", async () => {
-      const execResult = { stdout: "test diff", stderr: "" };
+      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("test diff");
 
-      const execSpy = vi.spyOn(exec, "execFile").mockResolvedValue(execResult);
-
-      await expect(diff("HEAD^", "HEAD")).resolves.toBe(execResult);
-
-      expect(execSpy).toBeCalledWith(
-        "git",
-        ["-c", "core.quotepath=off", "diff", "HEAD^", "HEAD"],
-        expect.anything(),
-      );
+      await expect(diff("HEAD^", "HEAD")).resolves.toEqual({
+        stdout: "test diff",
+        stderr: "",
+      });
     });
 
     it("lsTree", async () => {

@@ -1,5 +1,6 @@
 // @ts-check
 
+import { simpleGit } from "simple-git";
 import { execFile } from "./exec.js";
 
 /**
@@ -25,11 +26,14 @@ import { execFile } from "./exec.js";
  */
 export async function diff(baseCommitish, headCommitish, options = {}) {
   const { args = [], cwd, logger } = options;
+  const allArgs = [...args, baseCommitish, headCommitish];
 
-  return await execGit(["diff", ...args, baseCommitish, headCommitish], {
-    cwd,
-    logger,
-  });
+  logger?.info(`diff(${JSON.stringify(allArgs)})`);
+
+  const git = simpleGit(cwd);
+  const diff = await git.diff(allArgs);
+
+  return { stdout: diff, stderr: "" };
 }
 
 /**
