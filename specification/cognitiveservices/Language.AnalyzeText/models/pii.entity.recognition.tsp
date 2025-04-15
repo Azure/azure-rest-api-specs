@@ -58,7 +58,7 @@ model EntitySynonyms {
   synonyms: EntitySynonym[];
 }
 
-/** The entity synonyms used to enhance entity detection */
+/** The entity synonyms used to enhance pii entity detection */
 @added(Versions.v2025_05_15_preview)
 model EntitySynonym {
   /** The synonym to be used for context */
