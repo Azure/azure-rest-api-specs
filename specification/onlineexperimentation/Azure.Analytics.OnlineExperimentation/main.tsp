@@ -246,13 +246,13 @@ model ExperimentMetric {
 
 @doc("The diagnostic error codes.")
 union DiagnosticCode {
-  @doc("The metric definition does not conform to the JSON schema.")
+  @doc("The metric definition does not conform to the required schema.")
   FailedSchemaValidation: "FailedSchemaValidation",
 
-  @doc("The KQL filter condition provided is invalid.")
+  @doc("The filter condition is invalid.")
   InvalidEventCondition: "InvalidEventCondition",
 
-  @doc("The KQL filter condition is valid but not currently supported.")
+  @doc("The filter condition is valid but not currently supported.")
   UnsupportedEventCondition: "UnsupportedEventCondition",
 
   @doc("""
