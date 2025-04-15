@@ -125,10 +125,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(
-    Versions.v2024_11_15_preview,
-    PiiEntitiesDocumentResult[]
-  )
+  @typeChangedFrom(Versions.v2024_11_15_preview, PiiEntitiesDocumentResult[])
   documents: PiiResultWithDetectedLanguage[];
 }
 

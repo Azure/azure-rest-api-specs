@@ -46,10 +46,7 @@ model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
 /** Entity linking result. */
 model EntityLinkingResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(
-    Versions.v2024_11_15_preview,
-    LinkedEntitiesDocumentResult[]
-  )
+  @typeChangedFrom(Versions.v2024_11_15_preview, LinkedEntitiesDocumentResult[])
   documents: EntityLinkingResultWithDetectedLanguage[];
 }
 

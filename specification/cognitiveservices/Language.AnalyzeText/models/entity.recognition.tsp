@@ -60,7 +60,7 @@ model EntitySynonym {
   /** The synonym to be used for context */
   synonym: string;
 
-  /** The 2 letter ISO 639-1 language the synonym  */
+  /** The 2 letter ISO 639-1 language the synonym */
   language?: string;
 }
 

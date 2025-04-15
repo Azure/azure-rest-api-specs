@@ -56,10 +56,7 @@ model CustomSingleLabelClassificationLROTask extends AnalyzeTextLROTask {
 /** Contains the custom label classification results. */
 model CustomLabelClassificationResult is CustomResult {
   /** Response by document */
-  @typeChangedFrom(
-    Versions.v2024_11_15_preview,
-    ClassificationDocumentResult[]
-  )
+  @typeChangedFrom(Versions.v2024_11_15_preview, ClassificationDocumentResult[])
   documents: ClassificationDocumentResultWithDetectedLanguage[];
 }
 
