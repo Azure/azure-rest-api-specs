@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-preview-2025-05-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-05-01-preview'
 input-file:
   - Microsoft.DocumentDB/preview/2025-05-01-preview/chaosFault.json
+  - Microsoft.DocumentDB/preview/2025-05-01-preview/copyJobs.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/dataTransferService.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/managedCassandra.json
@@ -50,6 +51,9 @@ input-file:
   - Microsoft.DocumentDB/preview/2025-05-01-preview/services.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/tablerbac.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/throughputpool.json
+  - Microsoft.DocumentDB/preview/2025-05-01-preview/cassandrarbac.json
+  - Microsoft.DocumentDB/preview/2025-05-01-preview/mongoMIrbac.json
+  - Microsoft.DocumentDB/preview/2025-05-01-preview/gremlinrbac.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/fleet.json
 ```
 
@@ -980,6 +984,51 @@ directive:
   - suppress: MissingSegmentsInNestedResourceListOperation
     from: tablerbac.json
     reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: DeleteResponseCodes
+    from: cassandrarbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: PutResponseCodes
+    from: cassandrarbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: cassandrarbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: MissingSegmentsInNestedResourceListOperation
+    from: cassandrarbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ArmResourcePropertiesBag
+    from: cassandrarbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api    
+  - suppress: DeleteResponseCodes
+    from: gremlinrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: PutResponseCodes
+    from: gremlinrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: gremlinrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: MissingSegmentsInNestedResourceListOperation
+    from: gremlinrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ArmResourcePropertiesBag
+    from: gremlinrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api    
+  - suppress: DeleteResponseCodes
+    from: mongoMIrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: PutResponseCodes
+    from: mongoMIrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: mongoMIrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: MissingSegmentsInNestedResourceListOperation
+    from: mongoMIrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api
+  - suppress: ArmResourcePropertiesBag
+    from: mongoMIrbac.json
+    reason: Suppressing errors to conform to existing cosmosdb SQL rbac api    
   - suppress: PutResponseCodes
     from: dataTransferService.json
     reason: Suppressing errors for existing APIs
