@@ -55,7 +55,7 @@ directive:
     transform: delete $["x-ms-client-name"]
     reason: https://github.com/Azure/typespec-azure/issues/2517
   - from: ComputeRP.json
-    where: $.definitions.RestorePointSourceVMStorageProfile.dataDisks
+    where: $.definitions.RestorePointSourceVMStorageProfile.properties.dataDisks
     transform: delete $["x-ms-client-name"]
 ```
 
