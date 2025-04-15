@@ -1,16 +1,16 @@
-import _ from "lodash";
-import { writeFileSync } from "fs";
-import { sdkLabels, SdkName } from "./sdk.js";
-import {
-  SdkSuppressionsYml,
-  SdkSuppressionsSection,
-  sdkSuppressionsFileName,
-  SdkPackageSuppressionsEntry,
-  validateSdkSuppressionsFile,
-} from "./sdkSuppressions.js";
-import { parseYamlContent } from "./common.js";
 import { show, status } from "@azure-tools/specs-shared/git";
 import { consoleLogger } from "@azure-tools/specs-shared/logger";
+import { writeFileSync } from "fs";
+import _ from "lodash";
+import { parseYamlContent } from "./common.js";
+import { sdkLabels, SdkName } from "./sdk.js";
+import {
+  SdkPackageSuppressionsEntry,
+  sdkSuppressionsFileName,
+  SdkSuppressionsSection,
+  SdkSuppressionsYml,
+  validateSdkSuppressionsFile,
+} from "./sdkSuppressions.js";
 
 /**
  *
@@ -72,7 +72,7 @@ export async function getSdkSuppressionsFileContent(
   path: string,
 ): Promise<string | object | undefined | null> {
   try {
-    const suppressionFileContent = (await show(ref, path, { logger: consoleLogger })).stdout;
+    const suppressionFileContent = (await show(ref, path, { logger: consoleLogger }));
     console.log(`Found content in ${ref}#${path}`);
     return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
@@ -194,7 +194,7 @@ export async function updateSdkSuppressionsLabels(
   outputFile?: string,
 ): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
   try {
-    const result = (await status({ logger: consoleLogger })).stdout;
+    const result = (await status({ logger: consoleLogger }));
     console.log("Git status:", result);
   } catch (err) {
     console.error("Error running git command:", err);
