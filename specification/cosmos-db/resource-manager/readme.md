@@ -50,6 +50,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2025-05-01-preview/services.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/tablerbac.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/throughputpool.json
+  - Microsoft.DocumentDB/preview/2025-05-01-preview/fleet.json
 ```
 
 ### Tag: package-preview-2024-12-01
