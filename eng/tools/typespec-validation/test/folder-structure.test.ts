@@ -1,4 +1,4 @@
-import { mockAll } from "./mocks.js";
+import { mockAll, mockFolder } from "./mocks.js";
 mockAll();
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
@@ -8,8 +8,6 @@ import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 
 import * as utils from "../src/utils.js";
-
-const folder = "specification/foo/Foo";
 
 describe("folder-structure", function () {
   let fileExistsSpy: MockInstance;
@@ -31,7 +29,7 @@ describe("folder-structure", function () {
       return ["/foo/bar/tspconfig.yml"];
     });
 
-    const result = await new FolderStructureRule().execute(folder);
+    const result = await new FolderStructureRule().execute(mockFolder);
     assert(result.errorOutput);
     assert(result.errorOutput.includes("Invalid config file"));
   });
