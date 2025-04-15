@@ -1,19 +1,35 @@
-import { describe, it } from "vitest";
-import { NpmPrefixRule } from "../src/rules/npm-prefix.js";
-import { IGitOperation, TsvTestHost } from "./tsv-test-host.js";
 import { strict as assert } from "node:assert";
 import path from "path";
+import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
+import { NpmPrefixRule } from "../src/rules/npm-prefix.js";
+import { IGitOperation, TsvTestHost } from "./tsv-test-host.js";
+
+import * as utils from "../src/utils.js";
 
 describe("npm-prefix", function () {
+  let runNpmSpy: MockInstance;
+
+  beforeEach(() => {
+    runNpmSpy = vi
+      .spyOn(utils, "runNpm")
+      .mockImplementation(async (args, cwd) => [null, `runNpm ${args.join(" ")} at ${cwd}`, ""]);
+  });
+
+  afterEach(() => {
+    runNpmSpy.mockReset();
+  });
+
   it("should succeed if node returns inconsistent drive letter capitalization", async function () {
-    let host = new TsvTestHost(path.win32);
-    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("npm prefix")) {
-        return [null, `C:${path.sep}Git${path.sep}azure-rest-api-specs`, ""];
-      } else {
-        return [null, "", ""];
-      }
-    };
+    let host = new TsvTestHost();
+    runNpmSpy.mockImplementation(
+      async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        if (args.includes("prefix")) {
+          return [null, `C:${path.sep}Git${path.sep}azure-rest-api-specs`, ""];
+        } else {
+          return [null, "", ""];
+        }
+      },
+    );
     host.gitOperation = (_folder: string): IGitOperation => {
       return {
         status: () => {
@@ -32,6 +48,10 @@ describe("npm-prefix", function () {
       };
     };
 
+    vi.spyOn(utils, "normalizePath").mockImplementation((folder) =>
+      utils.normalizePathImpl(folder, path.win32),
+    );
+
     const result = await new NpmPrefixRule().execute(host, TsvTestHost.folder);
 
     assert(result.success);
@@ -39,13 +59,15 @@ describe("npm-prefix", function () {
 
   it("should fail if npm prefix mismatch", async function () {
     let host = new TsvTestHost();
-    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("npm prefix")) {
-        return [null, "/Git/azure-rest-api-specs/specification/foo", ""];
-      } else {
-        return [null, "", ""];
-      }
-    };
+    runNpmSpy.mockImplementation(
+      async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        if (args.includes("prefix")) {
+          return [null, "/Git/azure-rest-api-specs/specification/foo", ""];
+        } else {
+          return [null, "", ""];
+        }
+      },
+    );
     host.gitOperation = (_folder: string): IGitOperation => {
       return {
         status: () => {

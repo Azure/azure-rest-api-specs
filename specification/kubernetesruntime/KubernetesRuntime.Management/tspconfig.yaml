@@ -18,11 +18,10 @@ options:
     package-dir: "Azure.ResourceManager.ContainerOrchestratorRuntime"
     flavor: azure
     clear-output-folder: true
-    use-write-core: true
     namespace: "{package-dir}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-containerorchestratorruntime"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.containerorchestratorruntime"
     flavor: "azure"
     generate-test: true
     generate-sample: true
@@ -30,15 +29,14 @@ options:
     "service-dir": kubernetesruntime
     is-modular-library: true
     generate-metadata: true
-    hierarchy-client: false
     experimental-extensible-enums: true
-    enable-operation-group: true
     package-dir: "arm-containerorchestratorruntime"
     flavor: "azure"
     package-details:
       name: "@azure/arm-containerorchestratorruntime"
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-containerorchestratorruntime"
+    namespace: "com.azure.resourcemanager.containerorchestratorruntime"
     service-name: "Container Orchestrator Runtime"
     flavor: "azure"
 
