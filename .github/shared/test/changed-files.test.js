@@ -10,10 +10,10 @@ import {
   swagger,
 } from "../src/changed-files.js";
 import * as git from "../src/git.js";
-import { createMockLogger } from "./mocks.js";
+import { consoleLogger } from "../src/logger.js";
 
 describe("changedFiles", () => {
-  it.each([{}, { logger: createMockLogger() }])(
+  it.each([{}, { logger: consoleLogger }])(
     `getChangedFiles(%o)`,
     async (options) => {
       const files = [
@@ -23,7 +23,10 @@ describe("changedFiles", () => {
         "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
       ];
 
-      vi.spyOn(git, "diff").mockResolvedValue(files.join("\n"));
+      vi.spyOn(git, "diff").mockResolvedValue({
+        stdout: files.join("\n"),
+        stderr: "",
+      });
 
       await expect(getChangedFiles(options)).resolves.toEqual(files);
     },

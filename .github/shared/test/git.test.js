@@ -2,64 +2,123 @@
 
 import { describe, expect, it, vi } from "vitest";
 import * as exec from "../src/exec.js";
-import { diff, lsTree, show } from "../src/git.js";
+import { diff, lsTree, show, status } from "../src/git.js";
 
 describe("git", () => {
   describe("e2e", () => {
     it("diff", async () => {
-      await expect(diff("HEAD", "HEAD")).resolves.toBe("");
+      await expect(diff("HEAD", "HEAD")).resolves.toEqual({
+        stdout: "",
+        stderr: "",
+      });
     });
 
     it("lsTree", async () => {
       // lsTree always uses "\n" in output, even on windows
-      const expected = ".github\n";
+      const expected = { stdout: ".github\n", stderr: "" };
 
       await expect(
-        lsTree("HEAD", ".github", { args: "--full-tree --name-only" }),
-      ).resolves.toBe(expected);
+        lsTree("HEAD", ".github", { args: ["--full-tree", "--name-only"] }),
+      ).resolves.toEqual(expected);
     });
 
     it("show", async () => {
       await expect(
         show("HEAD", ".github/shared/package.json"),
-      ).resolves.toContain("scripts");
+      ).resolves.toEqual({
+        stdout: expect.stringContaining("scripts"),
+        stderr: "",
+      });
+    });
+
+    it("status", async () => {
+      // example: "## main...origin/main"
+      await expect(
+        status({ args: ["-b", "--porcelain", "does-not-exist"] }),
+      ).resolves.toEqual({
+        stdout: expect.stringContaining("##"),
+        stderr: "",
+      });
     });
   });
 
   describe("mocked", () => {
     it("diff", async () => {
-      const execSpy = vi.spyOn(exec, "exec").mockResolvedValue("test diff");
+      const execResult = { stdout: "test diff", stderr: "" };
 
-      await expect(diff("HEAD^", "HEAD")).resolves.toBe("test diff");
+      const execSpy = vi.spyOn(exec, "execFile").mockResolvedValue(execResult);
+
+      await expect(diff("HEAD^", "HEAD")).resolves.toBe(execResult);
 
       expect(execSpy).toBeCalledWith(
-        "git -c core.quotepath=off diff HEAD^ HEAD",
+        "git",
+        ["-c", "core.quotepath=off", "diff", "HEAD^", "HEAD"],
         expect.anything(),
       );
     });
 
     it("lsTree", async () => {
-      const execSpy = vi.spyOn(exec, "exec").mockResolvedValue("test lstree");
+      const execResult = { stdout: "test lstree", stderr: "" };
+
+      const execSpy = vi.spyOn(exec, "execFile").mockResolvedValue(execResult);
 
       await expect(
         lsTree("HEAD", "specification/contosowidgetmanager"),
-      ).resolves.toBe("test lstree");
+      ).resolves.toBe(execResult);
 
       expect(execSpy).toBeCalledWith(
-        "git -c core.quotepath=off ls-tree HEAD specification/contosowidgetmanager",
+        "git",
+        [
+          "-c",
+          "core.quotepath=off",
+          "ls-tree",
+          "HEAD",
+          "specification/contosowidgetmanager",
+        ],
         expect.anything(),
       );
     });
 
     it("show", async () => {
-      const execSpy = vi.spyOn(exec, "exec").mockResolvedValue("test show");
+      const execResult = { stdout: "test show", stderr: "" };
+
+      const execSpy = vi.spyOn(exec, "execFile").mockResolvedValue(execResult);
 
       await expect(
         show("HEAD", "specification/contosowidgetmanager/cspell.yaml"),
-      ).resolves.toBe("test show");
+      ).resolves.toBe(execResult);
 
       expect(execSpy).toBeCalledWith(
-        "git -c core.quotepath=off show HEAD:specification/contosowidgetmanager/cspell.yaml",
+        "git",
+        [
+          "-c",
+          "core.quotepath=off",
+          "show",
+          "HEAD:specification/contosowidgetmanager/cspell.yaml",
+        ],
+        expect.anything(),
+      );
+    });
+
+    it("status", async () => {
+      const execResult = { stdout: "test status", stderr: "" };
+
+      const execSpy = vi.spyOn(exec, "execFile").mockResolvedValue(execResult);
+
+      await expect(
+        status({ args: ["-b", "--porcelain", "does-not-exist"] }),
+      ).resolves.toBe(execResult);
+
+      expect(execSpy).toBeCalledWith(
+        "git",
+        [
+          "-c",
+          "core.quotepath=off",
+          "status",
+          "-b",
+          "--porcelain",
+          "does-not-exist",
+        ],
         expect.anything(),
       );
     });
