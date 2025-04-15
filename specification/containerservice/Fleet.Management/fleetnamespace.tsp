@@ -14,7 +14,7 @@ namespace Microsoft.ContainerService;
 
 @doc("A fleet namespace.")
 @resource("namespaces")
-@added(Versions.v2025_03_01_naar)
+@added(Versions.v2025_03_02_naar)
 @parentResource(Fleet)
 model FleetNamespace is TrackedResource<FleetNamespaceProperties> {
   @doc("The name of the fleet namespace resource.")
@@ -117,7 +117,7 @@ union EgressPolicy {
 }
 
 @doc("The profile of the fleet namespace.")
-@added(Versions.v2025_03_01_naar)
+@added(Versions.v2025_03_02_naar)
 model FleetNamespaceProfile {
   @doc("Action if Kubernetes namespace with the same name already exists.")
   adoptionPolicy?: AdoptionPolicy;
@@ -140,7 +140,7 @@ model FleetNamespaceProfile {
   defaultNetworkPolicy?: NetworkPolicy;
 }
 
-@added(Versions.v2025_03_01_naar)
+@added(Versions.v2025_03_02_naar)
 @doc("Status information for the fleet namespace.")
 model FleetNamespaceStatus {
   @visibility("read")
@@ -153,7 +153,7 @@ model FleetNamespaceStatus {
 }
 
 @doc("A fleet namespace.")
-@added(Versions.v2025_03_01_naar)
+@added(Versions.v2025_03_02_naar)
 model FleetNamespaceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
@@ -168,7 +168,7 @@ model FleetNamespaceProperties {
   status?: FleetNamespaceStatus;
 }
 
-@added(Versions.v2025_03_01_naar)
+@added(Versions.v2025_03_02_naar)
 @armResourceOperations
 interface FleetNamespaces {
   get is ArmResourceRead<FleetNamespace>;
