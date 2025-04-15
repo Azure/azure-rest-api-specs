@@ -105,9 +105,7 @@ interface Evaluations {
   ): {
     @statusCode statusCode: 202;
     @doc("The operation results.")
-    @added(Versions.v2025_05_15_preview)
-    @removed(Versions.v_latest)
-    @body OperationResults: OperationResultMetric;
+    @body operationResults: Record<unknown>
   };
 
   // Upload API set

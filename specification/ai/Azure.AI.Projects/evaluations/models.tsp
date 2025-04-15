@@ -237,22 +237,3 @@ model EvaluationUpload {
   outputs?: Record<string>;
 }
 
-@doc("Represents the operation result metric.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
-model OperationResultMetric {
-  @doc("The annotation task or operation.")
-  operation: string;
-
-  @doc("The status of the operation.")
-  status: string;
-
-  @doc("The error code associated with the operation.")
-  errorCode: string;
-
-  @doc("The partner identifier.")
-  partnerId: string;
-
-  @doc("The reason for failure, if any.")
-  failureReason: string;
-}

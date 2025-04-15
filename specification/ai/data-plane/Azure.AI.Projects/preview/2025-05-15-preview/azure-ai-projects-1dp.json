@@ -1314,7 +1314,8 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "#/definitions/OperationResultMetric"
+              "type": "object",
+              "additionalProperties": {}
             }
           }
         }
@@ -3938,39 +3939,6 @@
         }
       ],
       "x-ms-discriminator-value": "None"
-    },
-    "OperationResultMetric": {
-      "type": "object",
-      "description": "Represents the operation result metric.",
-      "properties": {
-        "operation": {
-          "type": "string",
-          "description": "The annotation task or operation."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the operation."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "The error code associated with the operation."
-        },
-        "partnerId": {
-          "type": "string",
-          "description": "The partner identifier."
-        },
-        "failureReason": {
-          "type": "string",
-          "description": "The reason for failure, if any."
-        }
-      },
-      "required": [
-        "operation",
-        "status",
-        "errorCode",
-        "partnerId",
-        "failureReason"
-      ]
     },
     "PagedConnection": {
       "type": "object",
