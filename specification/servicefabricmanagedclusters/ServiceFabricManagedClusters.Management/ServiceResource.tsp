@@ -141,19 +141,19 @@ model ServiceResourcePropertiesBase {
   /**
    * A list that describes the correlation of the service with other services.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   correlationScheme?: ServiceCorrelation[];
 
   /**
    * The service load metrics is given as an array of ServiceLoadMetric objects.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serviceLoadMetrics?: ServiceLoadMetric[];
 
   /**
    * A list that describes the correlation of the service with other services.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   servicePlacementPolicies?: ServicePlacementPolicy[];
 
   /**
@@ -164,7 +164,7 @@ model ServiceResourcePropertiesBase {
   /**
    * Scaling policies for this service.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scalingPolicies?: ScalingPolicy[];
 }
 

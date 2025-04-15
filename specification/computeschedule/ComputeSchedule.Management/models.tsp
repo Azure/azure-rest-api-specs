@@ -260,7 +260,7 @@ model OperationErrorsResult {
   @doc("The completion time of the operation if the operation was completed")
   completedAt?: offsetDateTime;
 
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("A list of errors associated with the operationid")
   operationErrors?: Array<OperationErrorDetails>;
 
@@ -299,7 +299,7 @@ model DeallocateResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the deallocate request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -332,7 +332,7 @@ model StartResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -365,7 +365,7 @@ model HibernateResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("The results from the Hibernate request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -419,7 +419,7 @@ model GetOperationStatusRequest {
 
 @doc("This is the response from a get operations status request")
 model GetOperationStatusResponse {
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("An array of resource operations based on their operation ids")
   results: Array<ResourceOperation>;
 }
@@ -436,7 +436,7 @@ model CancelOperationsRequest {
 
 @doc("This is the response from a cancel operations request")
 model CancelOperationsResponse {
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
 }
@@ -450,7 +450,7 @@ model GetOperationErrorsRequest {
 
 @doc("This is the response from a get operations errors request")
 model GetOperationErrorsResponse {
-  @extension("x-ms-identifiers", #["operationId"])
+  @identifiers(#["operationId"])
   @doc("An array of operationids and their corresponding errors if any")
   results: Array<OperationErrorsResult>;
 }
