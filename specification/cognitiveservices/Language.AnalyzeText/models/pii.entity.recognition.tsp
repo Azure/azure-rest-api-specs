@@ -42,6 +42,30 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
   @added(Versions.v2025_05_15_preview)
   valueExclusionPolicy?: ValueExclusionPolicy;
+
+  /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
+  @added(Versions.v2025_05_15_preview)
+  entitySynonyms?: EntitySynonyms;
+}
+
+/** Object that allows the user to provide synonyms for context words that to enhance pii entity detection. */
+@added(Versions.v2025_05_15_preview)
+model EntitySynonyms {
+  /** The entity name */
+  entityType: EntityCategory;
+
+  /** The entity synonyms */
+  synonyms: EntitySynonym[];
+}
+
+/** The entity synonyms used to enhance entity detection */
+@added(Versions.v2025_05_15_preview)
+model EntitySynonym {
+  /** The synonym to be used for context */
+  synonym: string;
+
+  /** The 2 letter ISO 639-1 language the synonym */
+  language?: string;
 }
 
 /** Policy for specific words and terms that should be excluded from detection by the PII detection service */

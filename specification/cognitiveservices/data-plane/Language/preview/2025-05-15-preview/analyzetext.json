@@ -2344,10 +2344,6 @@
         "inferenceOptions": {
           "$ref": "#/definitions/EntityInferenceOptions",
           "description": "(Optional) request parameter that allows the user to provide settings for running the inference."
-        },
-        "entitySynonyms": {
-          "$ref": "#/definitions/EntitySynonyms",
-          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance entity detection."
         }
       }
     },
@@ -2998,7 +2994,7 @@
     },
     "EntitySynonyms": {
       "type": "object",
-      "description": "Object that allows the user to provide synonyms for context words that to enhance entity detection.",
+      "description": "Object that allows the user to provide synonyms for context words that to enhance pii entity detection.",
       "properties": {
         "entityType": {
           "$ref": "#/definitions/EntityCategory",
@@ -7196,6 +7192,10 @@
         "valueExclusionPolicy": {
           "$ref": "#/definitions/ValueExclusionPolicy",
           "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service"
+        },
+        "entitySynonyms": {
+          "$ref": "#/definitions/EntitySynonyms",
+          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection."
         }
       }
     },
