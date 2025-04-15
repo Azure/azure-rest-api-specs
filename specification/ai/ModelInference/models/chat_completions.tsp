@@ -801,7 +801,9 @@ model ChatCompletionsAudio {
 }
 
 @doc("""
-  User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+  User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
+  These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
+  [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
   """)
 model UserSecurityContext {
   @doc("The name of the application. Sensitive personal information should not be included in this field.")
@@ -821,13 +823,13 @@ model UserSecurityContext {
     """)
   @minLength(36)
   @maxLength(36)
-  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")    
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   end_user_tenant_id?: string;
 
   @doc("""
     Captures the original client's IP address, accepting both IPv4 and IPv6 formats.
     """)
   @minLength(2)
-  @maxLength(45)    
+  @maxLength(45)
   source_ip?: string;
 }
