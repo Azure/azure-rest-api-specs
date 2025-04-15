@@ -1,31 +1,29 @@
-import { execFile } from "child_process";
+import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
+import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { access, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
-import { TsvHost } from "./tsv-host.js";
+import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 
-export async function filterAsync<T>(
-  array: T[],
-  asyncPredicate: (item: T, index: number, array: T[]) => Promise<boolean>,
-): Promise<T[]> {
-  const filterResults = await Promise.all(array.map(asyncPredicate));
-  return array.filter((_, index) => filterResults[index]);
-}
-
-export async function runFile(file: string, args: string[], cwd?: string) {
-  console.log(`run command:${file} ${args.join(' ')}`);
-  const { err, stdout, stderr } = (await new Promise((res) =>
-    // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
-    execFile(
-      file,
-      args,
-      { encoding: "utf8", maxBuffer: 1024 * 1024 * 64, cwd: cwd },
-      (err: unknown, stdout: unknown, stderr: unknown) =>
-        res({ err: err, stdout: stdout, stderr: stderr }),
-    ),
-  )) as any;
-
-  return [err, stdout, stderr] as [Error | null, string, string];
+// Wraps execNpm() to return error (and coalesce stdout and stderr) instead of throwing
+export async function runNpm(
+  args: string[],
+  cwd?: string,
+): Promise<[Error | null, string, string]> {
+  try {
+    const { stdout, stderr } = await execNpm(args, {
+      logger: new ConsoleLogger(),
+      maxBuffer: 64 * 1024 * 1024,
+      cwd,
+    });
+    return [null, stdout, stderr];
+  } catch (error) {
+    if (isExecError(error)) {
+      return [error, error.stdout ?? "", error.stderr ?? ""];
+    } else {
+      throw error;
+    }
+  }
 }
 
 export async function fileExists(file: string) {
@@ -54,8 +52,8 @@ export function normalizePathImpl(folder: string, path: PlatformPath = defaultPa
     .replace(/^([a-z]):/, (_match, driveLetter) => driveLetter.toUpperCase() + ":");
 }
 
-export async function gitDiffTopSpecFolder(host: TsvHost, folder: string) {
-  const git = host.gitOperation(folder);
+export async function gitDiffTopSpecFolder(folder: string) {
+  const git = simpleGit(folder);
   let topSpecFolder = folder.replace(/(^.*specification\/[^\/]*)(.*)/, "$1");
   let stdOutput = `Running git diff on folder ${topSpecFolder}`;
   let gitStatus = await git.status(["--porcelain", topSpecFolder]);
