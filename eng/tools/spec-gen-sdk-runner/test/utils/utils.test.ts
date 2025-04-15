@@ -3,6 +3,9 @@ import {
   findFilesRecursive,
   findReadmeFiles,
   getRelativePathFromSpecification,
+  getArgumentValue,
+  mapToObject,
+  objectToMap
 } from "../../src/utils.js";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -62,6 +65,14 @@ describe("Utils", () => {
       expect(results).toEqual([]);
     });
   });
+ 
+  describe("getArgumentValue", () => {
+    test('return the argument value', () => {
+      const args = ['--batch-type', 'all-specs', '--pr-number', '9527'];
+      const result = getArgumentValue(args, '--batch-type', '');
+      expect(result).toBe('all-specs');
+    });
+  });
 
   describe("getRelativePathFromSpecification", () => {
     test("extracts path from specification folder", () => {
@@ -87,6 +98,34 @@ describe("Utils", () => {
     test("handles empty path", () => {
       const result = getRelativePathFromSpecification("");
       expect(result).toBe("");
+    });
+  });
+
+  describe("mapToObject", () => {
+    test("converts Map to Object correctly", () => {
+      const map = new Map([["key1", "value1"], ["key2", "value2"]]);
+      const result = mapToObject(map);
+      expect(result).toEqual({ key1: "value1", key2: "value2" });
+    });
+
+    test("handles empty Map", () => {
+      const map = new Map();
+      const result = mapToObject(map);
+      expect(result).toEqual({});
+    });
+  });
+
+  describe("objectToMap", () => {
+    test("converts Object to Map correctly", () => {
+      const obj = { key1: "value1", key2: "value2" };
+      const result = objectToMap(obj);
+      expect(result).toEqual(new Map([["key1", "value1"], ["key2", "value2"]]));
+    });
+
+    test("handles empty Object", () => {
+      const obj = {};
+      const result = objectToMap(obj);
+      expect(result).toEqual(new Map());
     });
   });
 });
