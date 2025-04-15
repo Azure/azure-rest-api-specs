@@ -1,14 +1,31 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+vi.mock("fs/promises", () => ({
+  readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
+}));
+
+import * as fsPromises from "fs/promises";
 import path from "path";
-import { describe, expect, it } from "vitest";
 import { RuleResult } from "../src/rule-result.js";
 import { CompileRule } from "../src/rules/compile.js";
 import { TsvHost } from "../src/tsv-host.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 
+import * as utils from "../src/utils.js";
+
 const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
 
 describe("compile", function () {
+  beforeEach(() => {
+    vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("should succeed if project can compile", async function () {
     const host = new TsvTestHost();
 
@@ -32,8 +49,9 @@ describe("compile", function () {
 
     // ensure handwritten swaggers are ignored
     host.globby = async () => [swaggerPath, handwrittenSwaggerPath];
-    host.readFile = async (path) =>
-      path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}";
+    vi.mocked(fsPromises.readFile).mockImplementation(async (path) =>
+      path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}",
+    );
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: true,
@@ -99,11 +117,11 @@ describe("compile", function () {
       swaggerPath.replace("2023", "2024"),
     ];
 
-    host.readFile = async (path) => {
-      return path.includes("2024")
+    vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
+      return path.toString().includes("2024")
         ? '{"info": {"x-typespec-generated": true}}'
         : '{"info": {"x-cadl-generated": true}}';
-    };
+    });
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: false,
@@ -125,13 +143,13 @@ describe("compile", function () {
       swaggerPath.replace("2023", "2024"),
     ];
 
-    host.readFile = async (path) => {
-      return path.includes("2024")
+    vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
+      return path.toString().includes("2024")
         ? '{"info": {"x-typespec-generated": true}}'
         : '{"info": {"x-cadl-generated": true}}';
-    };
+    });
 
-    host.getSuppressions = async (path) => {
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async (path) => {
       return path.includes("2023") || path.includes("2024")
         ? [
             {
@@ -143,7 +161,7 @@ describe("compile", function () {
             },
           ]
         : [];
-    };
+    });
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: true,
@@ -157,7 +175,7 @@ describe("compile", function () {
       return [null, swaggerPath, ""];
     };
 
-    host.getSuppressions = async () => [
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async () => [
       {
         tool: "TypeSpecValidation",
         rules: ["Compile"],
@@ -165,7 +183,7 @@ describe("compile", function () {
         paths: ["**/*"],
         reason: "test reason",
       },
-    ];
+    ]);
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).rejects.toThrow(
       "Invalid path",
@@ -217,7 +235,7 @@ describe("compile", function () {
         [],
         ""
       )}`;
-      
+
       return {
         success: false,
         stdOutput: stdOut,
