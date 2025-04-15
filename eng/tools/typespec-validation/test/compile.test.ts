@@ -275,7 +275,7 @@ describe("compile", function () {
 
     host.globby = async () => [swaggerPath];
 
-    host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
+    host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
       let stdOut = `Running git diff on folder ${folder}`;
       return {
         success: true,
