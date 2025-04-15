@@ -252,8 +252,7 @@ interface Agents {
   @route("/agents/runs/run")
   run is Azure.Core.Foundations.Operation<
     {
-      @doc("The inputs for the run.")
-      inputs: RunInputs;
+      ...RunInputs;
     },
     Run
   >;
@@ -265,8 +264,7 @@ interface Agents {
   @route("/agents/runs/stream")
   stream is Azure.Core.Foundations.Operation<
     {
-      @doc("The inputs for the run.")
-      inputs: RunInputs;
+      ...RunInputs;
     },
     Streams.Stream<StreamingUpdate>
   >;
@@ -284,4 +282,25 @@ interface Agents {
     """)
   @get
   listRuns is AgentOperations.ResourceList<Run>;
+}
+
+@doc("""
+  RUNS
+  
+  The interface is rooted at /runs.
+  Provides operations to manage and retrieve run-related data.
+  """)
+interface Runs {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @doc("Lists the inputs for a specific run by its ID.")
+  @get
+  @route("/runs/{runId}/listInputs")
+  listRunInputs is Operation<
+    {
+      @doc("The ID of the run.")
+      @path
+      runId: string;
+    },
+    RunInputs
+  >;
 }

@@ -8,7 +8,7 @@ using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
-@doc("The possible values for roles attributed to messages in a thread.")
+@doc("The possible values for roles attributed to messages in a conversation.")
 union MessageRole {
   string,
 

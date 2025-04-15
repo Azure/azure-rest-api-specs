@@ -253,16 +253,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "inputs": {
-                  "$ref": "#/definitions/RunInputs",
-                  "description": "The inputs for the run."
-                }
-              },
-              "required": [
-                "inputs"
-              ]
+              "$ref": "#/definitions/RunInputs"
             }
           }
         ],
@@ -301,16 +292,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "inputs": {
-                  "$ref": "#/definitions/RunInputs",
-                  "description": "The inputs for the run."
-                }
-              },
-              "required": [
-                "inputs"
-              ]
+              "$ref": "#/definitions/RunInputs"
             }
           }
         ],
@@ -2208,6 +2190,44 @@
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/runs/{runId}/listInputs": {
+      "get": {
+        "operationId": "Runs_ListRunInputs",
+        "description": "Lists the inputs for a specific run by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The ID of the run.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RunInputs"
             }
           },
           "default": {
