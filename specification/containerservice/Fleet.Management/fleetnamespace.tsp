@@ -14,7 +14,7 @@ namespace Microsoft.ContainerService;
 
 @doc("A fleet namespace.")
 @resource("namespaces")
-@added(Versions.v2025_03_01)
+@added(Versions.v2025_03_01_naar)
 @parentResource(Fleet)
 model FleetNamespace is TrackedResource<FleetNamespaceProperties> {
   @doc("The name of the fleet namespace resource.")
@@ -32,14 +32,13 @@ model FleetNamespace is TrackedResource<FleetNamespaceProperties> {
 
 @doc("Action if Kubernetes namespace with the same name already exists.")
 union AdoptionPolicy {
-  // If k8s namespace already exists, do not take over the existing namespace to be managed by ARM
+  @doc("If k8s namespace already exists, do not take over the existing namespace to be managed by ARM.")
   Never: "Never",
 
-  // If there is an identical namespace, take over the existing namespace to be managed by ARM
+  @doc("If there is an identical namespace, take over the existing namespace to be managed by ARM.")
   IfIdentical: "IfIdentical",
 
-  // Always take over the existing namespace to be managed by ARM, even if it is not identical
-  // This will overwrite the existing namespace
+  @doc("Always take over the existing namespace to be managed by ARM, even if it is not identical.")
   Always: "Always",
 
   string,
@@ -47,10 +46,10 @@ union AdoptionPolicy {
 
 @doc("Delete options of a namespace.")
 union DeletePolicy {
-  // Delete ARM resource but keep k8s namespace
+  @doc("Delete ARM resource but keep k8s namespace.")
   Keep: "Keep",
 
-  // Delete both ARM resource and k8s namespace
+  @doc("Delete both ARM resource and k8s namespace.")
   Delete: "Delete",
 
   string,
@@ -97,10 +96,10 @@ model NetworkPolicy {
 
 @doc("The ingress policy options for a namespace.")
 union IngressPolicy {
-  // Allow all ingress traffic to the namespace
+  @doc("Allow all ingress traffic to the namespace.")
   AllowAll: "AllowAll",
 
-  // Deny all ingress traffic to the namespace
+  @doc("Deny all ingress traffic to the namespace.")
   DenyAll: "DenyAll",
 
   string,
@@ -108,16 +107,17 @@ union IngressPolicy {
 
 @doc("The egress policy options for a namespace.")
 union EgressPolicy {
-  // Allow all egress traffic from the namespace
+  @doc("Allow all egress traffic from the namespace.")
   AllowAll: "AllowAll",
 
-  // Deny all egress traffic from the namespace
+  @doc("Deny all egress traffic from the namespace")
   DenyAll: "DenyAll",
 
   string,
 }
 
 @doc("The profile of the fleet namespace.")
+@added(Versions.v2025_03_01_naar)
 model FleetNamespaceProfile {
   @doc("Action if Kubernetes namespace with the same name already exists.")
   adoptionPolicy?: AdoptionPolicy;
@@ -126,25 +126,34 @@ model FleetNamespaceProfile {
   deletePolicy?: DeletePolicy;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
-  @added(Versions.v2025_03_01)
   @doc("The labels for the fleet namespace.")
   labels?: Record<string>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Records is the most semantically correct choice for this use-case"
-  @added(Versions.v2025_03_01)
   @doc("The annotations for the fleet namespace.")
   annotations?: Record<string>;
 
-  @added(Versions.v2025_03_01)
   @doc("The default resource quota for the fleet namespace.")
   defaultResourceQuota?: ResourceQuota;
 
-  @added(Versions.v2025_03_01)
   @doc("The default network policy for the fleet namespace.")
   defaultNetworkPolicy?: NetworkPolicy;
 }
 
+@added(Versions.v2025_03_01_naar)
+@doc("Status information for the fleet namespace.")
+model FleetNamespaceStatus {
+  @visibility("read")
+  @doc("The last operation ID for the fleet namespace")
+  lastOperationId?: string;
+
+  @visibility("read")
+  @doc("The last operation error of the fleet namespace")
+  lastOperationError?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
 @doc("A fleet namespace.")
+@added(Versions.v2025_03_01_naar)
 model FleetNamespaceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
@@ -153,9 +162,13 @@ model FleetNamespaceProperties {
   @visibility("read")
   @doc("The profile of the fleet namespace.")
   fleetNamespaceProfile?: FleetNamespaceProfile;
+
+  @visibility("read")
+  @doc("Status information of the last operation for fleet namespace.")
+  status?: FleetNamespaceStatus;
 }
 
-@added(Versions.v2025_03_01)
+@added(Versions.v2025_03_01_naar)
 @armResourceOperations
 interface FleetNamespaces {
   get is ArmResourceRead<FleetNamespace>;
