@@ -1,3 +1,4 @@
+import { filterAsync } from "@azure-tools/specs-shared/array";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path, { basename, dirname, normalize } from "path";
@@ -6,7 +7,6 @@ import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
-import { filterAsync } from "@azure-tools/specs-shared/array";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -18,9 +18,16 @@ export class CompileRule implements Rule {
     let errorOutput = "";
 
     if (await fileExists(path.join(folder, "main.tsp"))) {
-      let [err, stdout, stderr] = await runNpm(
-        ["exec", "--no", "--", "tsp", "compile", "--list-files", "--warn-as-error", folder],
-      );
+      let [err, stdout, stderr] = await runNpm([
+        "exec",
+        "--no",
+        "--",
+        "tsp",
+        "compile",
+        "--list-files",
+        "--warn-as-error",
+        folder,
+      ]);
 
       stdOutput += stdout;
 
@@ -171,9 +178,16 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (await fileExists(clientTsp)) {
-      let [err, stdout, stderr] = await runNpm(
-        ["exec", "--no", "--", "tsp", "compile", "--no-emit", "--warn-as-error", clientTsp]
-      );
+      let [err, stdout, stderr] = await runNpm([
+        "exec",
+        "--no",
+        "--",
+        "tsp",
+        "compile",
+        "--no-emit",
+        "--warn-as-error",
+        clientTsp,
+      ]);
       if (err) {
         success = false;
         errorOutput += err.message;
