@@ -3,8 +3,6 @@ import { RuleResult } from "./rule-result.js";
 
 export interface TsvHost {
   gitOperation(folder: string): IGitOperation;
-  runFile(file: string, args: string[], cwd?: string): Promise<[Error | null, string, string]>;
-  runNpm(args: string[], cwd?: string): Promise<[Error | null, string, string]>;
   gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult>;
   globby(patterns: string | string[], options?: GlobbyOptions): Promise<string[]>;
 }
