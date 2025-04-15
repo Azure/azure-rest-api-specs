@@ -49,7 +49,7 @@ interface Occurrences {
   cancel is ArmResourceActionSync<
     Occurrence,
     CancelOccurrenceRequest,
-    Occurrence
+    ResourceOperationResponse
   >;
-  delay is ArmResourceActionSync<Occurrence, DelayRequest, Occurrence>;
+  delay is ArmResourceActionSync<Occurrence, DelayRequest, ResourceOperationResponse>;
 }

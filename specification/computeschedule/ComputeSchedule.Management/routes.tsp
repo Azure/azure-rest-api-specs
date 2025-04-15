@@ -135,7 +135,7 @@ interface ScheduledActions {
   cancelNextOccurrence is ArmResourceActionSync<
     ScheduledAction,
     CancelOccurrenceRequest,
-    Occurrence
+    ResourceOperationResponse
   >;
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
   triggerManualOccurrence is ArmResourceActionSync<

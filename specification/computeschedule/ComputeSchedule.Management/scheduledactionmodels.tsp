@@ -35,10 +35,10 @@ model ScheduledActionsSchedule {
   requestedDaysOfTheMonth: DayOfTheMonth[];
 
   @doc("The execution parameters the scheduled action is supposed to follow")
-  executionParameters: ExecutionParameters;
+  executionParameters?: ExecutionParameters;
 
   @doc("The type of deadline the scheduled action is supposed to follow for the schedule")
-  deadlineType: DeadlineType;
+  deadlineType?: DeadlineType = DeadlineType.InitiateAt;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)

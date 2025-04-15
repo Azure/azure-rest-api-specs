@@ -828,7 +828,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Occurrence"
+              "$ref": "#/definitions/ResourceOperationResponse"
             }
           },
           "default": {
@@ -1144,7 +1144,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Occurrence"
+              "$ref": "#/definitions/ResourceOperationResponse"
             }
           },
           "default": {
@@ -1203,7 +1203,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Occurrence"
+              "$ref": "#/definitions/ResourceOperationResponse"
             }
           },
           "default": {
@@ -3099,8 +3099,35 @@
           "description": "The execution parameters the scheduled action is supposed to follow"
         },
         "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
-          "description": "The type of deadline the scheduled action is supposed to follow for the schedule"
+          "type": "string",
+          "description": "The type of deadline the scheduled action is supposed to follow for the schedule",
+          "default": "InitiateAt",
+          "enum": [
+            "Unknown",
+            "InitiateAt",
+            "CompleteBy"
+          ],
+          "x-ms-enum": {
+            "name": "DeadlineType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Default value of Unknown."
+              },
+              {
+                "name": "InitiateAt",
+                "value": "InitiateAt",
+                "description": "Initiate the operation at the given deadline."
+              },
+              {
+                "name": "CompleteBy",
+                "value": "CompleteBy",
+                "description": "Complete the operation by the given deadline."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -3108,9 +3135,7 @@
         "timeZone",
         "requestedWeekDays",
         "requestedMonths",
-        "requestedDaysOfTheMonth",
-        "executionParameters",
-        "deadlineType"
+        "requestedDaysOfTheMonth"
       ]
     },
     "ScheduledActionsScheduleUpdate": {
@@ -3152,8 +3177,35 @@
           "description": "The execution parameters the scheduled action is supposed to follow"
         },
         "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
-          "description": "The type of deadline the scheduled action is supposed to follow for the schedule"
+          "type": "string",
+          "description": "The type of deadline the scheduled action is supposed to follow for the schedule",
+          "default": "InitiateAt",
+          "enum": [
+            "Unknown",
+            "InitiateAt",
+            "CompleteBy"
+          ],
+          "x-ms-enum": {
+            "name": "DeadlineType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Default value of Unknown."
+              },
+              {
+                "name": "InitiateAt",
+                "value": "InitiateAt",
+                "description": "Initiate the operation at the given deadline."
+              },
+              {
+                "name": "CompleteBy",
+                "value": "CompleteBy",
+                "description": "Complete the operation by the given deadline."
+              }
+            ]
+          }
         }
       }
     },
