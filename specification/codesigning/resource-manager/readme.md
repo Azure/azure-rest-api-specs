@@ -60,7 +60,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-cli-extensions
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-typescript
@@ -73,10 +72,6 @@ See configuration in [readme.az.md](./readme.az.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
 
 ## CSharp
 
