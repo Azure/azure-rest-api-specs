@@ -2,7 +2,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 parameters:
   "service-dir":
-    default: "sdk/liftrhyperexecute"
+    default: "sdk/lambdatesthyperexecute"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -15,6 +15,28 @@ options:
     flavor: azure
     clear-output-folder: true
     namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-lambdatesthyperexecute"
+    namespace: "azure.mgmt.lambdatesthyperexecute"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-lambdatesthyperexecute"
+    flavor: azure
+    namespace: "com.azure.resourcemanager.lambdatesthyperexecute"
+    service-name: "LambdaTest HyperExecute"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/lambdatesthyperexecute"
+    package-dir: "armlambdatesthyperexecute"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    remove-unreferenced-types: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
