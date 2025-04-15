@@ -827,8 +827,16 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply on the operation."
-          },
+             "description": "The expand expression to apply on the operation. ",
+             "enum": [
+               "properties",
+               "properties/ImageDeprecationStatus"
+             ],
+             "x-ms-enum": {
+               "name": "expand",
+               "modelAsString": true
+             }
+           },
           {
             "name": "$top",
             "in": "query",
