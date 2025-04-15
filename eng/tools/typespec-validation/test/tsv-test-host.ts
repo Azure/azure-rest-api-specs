@@ -1,4 +1,3 @@
-import { Options as GlobbyOptions } from "globby";
 import defaultPath, { PlatformPath } from "path";
 import { RuleResult } from "../src/rule-result.js";
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
@@ -44,9 +43,5 @@ export class TsvTestHost implements TsvHost {
       stdOutput: stdout,
       errorOutput: stderr,
     };
-  }
-
-  async globby(patterns: string | string[], _options?: GlobbyOptions): Promise<string[]> {
-    return Promise.resolve(Array.isArray(patterns) ? patterns : [patterns]);
   }
 }
