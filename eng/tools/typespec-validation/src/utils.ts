@@ -1,30 +1,8 @@
-import { execFile, execNpm, isExecError } from "@azure-tools/specs-shared/exec";
+import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { access, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
-
-const defaultExecOptions = { logger: new ConsoleLogger(), maxBuffer: 64 * 1024 * 1024 };
-
-export async function runFile(
-  file: string,
-  args: string[],
-  cwd?: string,
-): Promise<[Error | null, string, string]> {
-  try {
-    const { stdout, stderr } = await execFile(file, args, {
-      ...defaultExecOptions,
-      cwd,
-    });
-    return [null, stdout, stderr];
-  } catch (error) {
-    if (isExecError(error)) {
-      return [error, error.stdout ?? "", error.stderr ?? ""];
-    } else {
-      throw error;
-    }
-  }
-}
 
 export async function runNpm(
   args: string[],
@@ -32,7 +10,8 @@ export async function runNpm(
 ): Promise<[Error | null, string, string]> {
   try {
     const { stdout, stderr } = await execNpm(args, {
-      ...defaultExecOptions,
+      logger: new ConsoleLogger(),
+      maxBuffer: 64 * 1024 * 1024,
       cwd,
     });
     return [null, stdout, stderr];

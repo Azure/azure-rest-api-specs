@@ -2,7 +2,6 @@ import { Options as GlobbyOptions } from "globby";
 import defaultPath, { PlatformPath } from "path";
 import { RuleResult } from "../src/rule-result.js";
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
-import { runFile } from "../src/utils.js";
 
 export { IGitOperation } from "../src/tsv-host.js";
 
@@ -35,9 +34,9 @@ export class TsvTestHost implements TsvHost {
     };
   }
 
-  async gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult> {
+  async gitDiffTopSpecFolder(_host: TsvHost, folder: string): Promise<RuleResult> {
     let success = true;
-    let stdout = `Running git diff on folder ${folder}, running default cmd ${runFile("", [], "")}`;
+    let stdout = `Running git diff on folder ${folder}}`;
     let stderr = "";
 
     return {

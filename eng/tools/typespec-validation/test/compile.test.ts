@@ -224,11 +224,7 @@ describe("compile", function () {
       },
     );
     host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}, running default cmd ${utils.runFile(
-        "",
-        [],
-        "",
-      )}`;
+      let stdOut = `Running git diff on folder ${folder}`;
       return {
         success: true,
         stdOutput: stdOut,
@@ -253,11 +249,7 @@ describe("compile", function () {
     host.globby = async () => [swaggerPath];
 
     host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}, running default cmd ${utils.runFile(
-        "",
-        [],
-        "",
-      )}`;
+      let stdOut = `Running git diff on folder ${folder}`;
 
       return {
         success: false,
@@ -284,11 +276,7 @@ describe("compile", function () {
     host.globby = async () => [swaggerPath];
 
     host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}, running default cmd ${utils.runFile(
-        "",
-        [],
-        "",
-      )}`;
+      let stdOut = `Running git diff on folder ${folder}`;
       return {
         success: true,
         stdOutput: stdOut,
