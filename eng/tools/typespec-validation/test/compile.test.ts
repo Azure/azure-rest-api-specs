@@ -10,7 +10,11 @@ vi.mock("globby", () => ({
 
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
-    status: vi.fn(),
+    status: vi.fn().mockResolvedValue({
+      modified: [],
+      not_added: [],
+      isClean: () => true,
+    }),
   }),
 }));
 
