@@ -62,11 +62,16 @@ export async function lsTree(treeIsh, path, options = {}) {
  */
 export async function show(treeIsh, path, options = {}) {
   const { args = [], cwd, logger } = options;
+  const allArgs = [...args, `${treeIsh}:${path}`];
 
-  return await execGit(["show", ...args, `${treeIsh}:${path}`], {
-    cwd,
-    logger,
-  });
+  logger?.info(`show(${JSON.stringify(allArgs)})`);
+
+  const git = simpleGit(cwd);
+  const result = await git.show(allArgs);
+
+  logger?.debug(`result: ${result}`);
+
+  return result;
 }
 
 /**

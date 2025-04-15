@@ -6,6 +6,7 @@ vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
     diff: vi.fn().mockResolvedValue(""),
     raw: vi.fn().mockResolvedValue(""),
+    show: vi.fn().mockResolvedValue(""),
   }),
 }));
 
@@ -32,24 +33,11 @@ describe("git", () => {
   });
 
   it("show", async () => {
-    const execSpy = vi
-      .spyOn(exec, "execFile")
-      .mockResolvedValue({ stdout: "test show", stderr: "" });
+    vi.mocked(simpleGit.simpleGit().show).mockResolvedValue("test show");
 
     await expect(
       show("HEAD", "specification/contosowidgetmanager/cspell.yaml"),
     ).resolves.toBe("test show");
-
-    expect(execSpy).toBeCalledWith(
-      "git",
-      [
-        "-c",
-        "core.quotepath=off",
-        "show",
-        "HEAD:specification/contosowidgetmanager/cspell.yaml",
-      ],
-      expect.anything(),
-    );
   });
 
   it("status", async () => {
