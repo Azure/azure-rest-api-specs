@@ -41,13 +41,12 @@ input-file:
   - preview/2025-07-01-preview/playwrightservice.json
 suppressions:
   - code: PatchBodyParametersSchema
-  from: ./**/playwrightservice.json
-  reason: Seems like a tool bug, as the operations are generated automatically from the TrackedResourceOperations in the TypeSpec which should OmitDefaults for Patch. We want the default property values to be visible for other operations like Put and Get if they're not explicitly set by the end-user.
-  
-- code: DeleteResponseCodes
-  from: ./**/playwrightservice.json
-  reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
-  where:
+    from: playwrightservice.json
+    reason: Seems like a tool bug, as the operations are generated automatically from the TrackedResourceOperations in the TypeSpec which should OmitDefaults for Patch. We want the default property values to be visible for other operations like Put and Get if they're not explicitly set by the end-user.
+  - code: DeleteResponseCodes
+    from: playwrightservice.json
+    reason: Seems like a tool bug, as default operations with codes are generated from the TrackedResourceOperations in the TypeSpec.
+    where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/playwrightWorkspaces/{playwrightWorkspaceName}"].delete
 ```
 
