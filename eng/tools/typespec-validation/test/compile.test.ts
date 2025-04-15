@@ -4,7 +4,12 @@ vi.mock("fs/promises", () => ({
   readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
 }));
 
+vi.mock("globby", () => ({
+  globby: vi.fn().mockResolvedValue([]),
+}));
+
 import * as fsPromises from "fs/promises";
+import * as globby from "globby";
 import path from "path";
 import { RuleResult } from "../src/rule-result.js";
 import { CompileRule } from "../src/rules/compile.js";
@@ -55,7 +60,7 @@ describe("compile", function () {
     );
 
     // ensure handwritten swaggers are ignored
-    host.globby = async () => [swaggerPath, handwrittenSwaggerPath];
+    vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath, handwrittenSwaggerPath]);
     vi.mocked(fsPromises.readFile).mockImplementation(async (path) =>
       path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}",
     );
@@ -126,11 +131,11 @@ describe("compile", function () {
     );
 
     // Simulate extra swagger
-    host.globby = async () => [
+    vi.mocked(globby.globby).mockImplementation(async () => [
       swaggerPath,
       swaggerPath.replace("2022", "2023"),
       swaggerPath.replace("2023", "2024"),
-    ];
+    ]);
 
     vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
       return path.toString().includes("2024")
@@ -154,11 +159,11 @@ describe("compile", function () {
     );
 
     // Simulate extra swagger
-    host.globby = async () => [
+    vi.mocked(globby.globby).mockImplementation(async () => [
       swaggerPath,
       swaggerPath.replace("2022", "2023"),
       swaggerPath.replace("2023", "2024"),
-    ];
+    ]);
 
     vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
       return path.toString().includes("2024")
@@ -246,7 +251,7 @@ describe("compile", function () {
       },
     );
 
-    host.globby = async () => [swaggerPath];
+    vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath]);
 
     host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
       let stdOut = `Running git diff on folder ${folder}`;
@@ -273,7 +278,7 @@ describe("compile", function () {
       },
     );
 
-    host.globby = async () => [swaggerPath];
+    vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath]);
 
     host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
       let stdOut = `Running git diff on folder ${folder}`;
