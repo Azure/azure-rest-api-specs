@@ -2,7 +2,6 @@ import { join } from "path";
 import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
 import { Suppression } from "suppressions";
 import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
 
@@ -18,7 +17,7 @@ export abstract class TspconfigSubRuleBase {
     this.expectedValue = expectedValue;
   }
 
-  public async execute(_host: TsvHost, folder: string): Promise<RuleResult> {
+  public async execute(folder: string): Promise<RuleResult> {
     const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
       return this.createFailedResult(
@@ -466,7 +465,7 @@ export class SdkTspConfigValidationRule implements Rule {
     this.subRules = subRules;
   }
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
     const suppressions = await getSuppressions(tspConfigPath);
     this.setSuppressedKeyPaths(suppressions);
@@ -476,7 +475,7 @@ export class SdkTspConfigValidationRule implements Rule {
     for (const subRule of this.subRules) {
       // TODO: support wildcard
       if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
-      const result = await subRule.execute(host, folder!);
+      const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
       success &&= result.success;
     }

@@ -1,20 +1,20 @@
 import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path from "path";
+import { simpleGit } from "simple-git";
 import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
-import { TsvHost } from "../tsv-host.js";
 import { fileExists, normalizePath, readTspConfig } from "../utils.js";
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
-    const gitRoot = normalizePath(await host.gitOperation(folder).revparse("--show-toplevel"));
+    const gitRoot = normalizePath(await simpleGit(folder).revparse("--show-toplevel"));
     const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
 
     stdOutput += `folder: ${folder}\n`;

@@ -1,13 +1,12 @@
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
-import { TsvHost } from "../tsv-host.js";
-import { runNpm } from "../utils.js";
+import { gitDiffTopSpecFolder, runNpm } from "../utils.js";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
   readonly description = "Format TypeSpec";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
@@ -36,7 +35,7 @@ export class FormatRule implements Rule {
     errorOutput += stderr;
 
     if (success) {
-      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      const gitDiffResult = await gitDiffTopSpecFolder(folder);
       stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;
