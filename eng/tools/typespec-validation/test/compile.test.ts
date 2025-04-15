@@ -8,13 +8,17 @@ vi.mock("globby", () => ({
   globby: vi.fn().mockResolvedValue([]),
 }));
 
+vi.mock("simple-git", () => ({
+  simpleGit: vi.fn().mockResolvedValue({
+    status: vi.fn(),
+  }),
+}));
+
 import * as fsPromises from "fs/promises";
 import * as globby from "globby";
 import path from "path";
 import { RuleResult } from "../src/rule-result.js";
 import { CompileRule } from "../src/rules/compile.js";
-import { TsvHost } from "../src/tsv-host.js";
-import { TsvTestHost } from "./tsv-test-host.js";
 
 import * as utils from "../src/utils.js";
 
@@ -22,11 +26,21 @@ const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
 
 describe("compile", function () {
+  let gitDiffTopSpecFolderSpy: MockInstance;
   let runNpmSpy: MockInstance;
 
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
     vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+    gitDiffTopSpecFolderSpy = vi
+      .spyOn(utils, "gitDiffTopSpecFolder")
+      .mockImplementation(async (folder) => {
+        return {
+          success: true,
+          stdOutput: `Running git diff on folder ${folder}}`,
+          errorOutput: "",
+        };
+      });
     runNpmSpy = vi
       .spyOn(utils, "runNpm")
       .mockImplementation(async (args, cwd) => [null, `runNpm ${args.join(" ")} at ${cwd}`, ""]);
@@ -37,8 +51,6 @@ describe("compile", function () {
   });
 
   it("should succeed if project can compile", async function () {
-    const host = new TsvTestHost();
-
     const compileOutput =
       // header, not a filename
       "header\n" +
@@ -65,13 +77,12 @@ describe("compile", function () {
       path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}",
     );
 
-    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute("specification/foo/Foo")).resolves.toMatchObject({
       success: true,
     });
   });
 
   it("should fail if no emitter was configured", async function () {
-    let host = new TsvTestHost();
     runNpmSpy.mockImplementation(
       async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
         if (args.join(" ").includes("tsp compile")) {
@@ -82,13 +93,12 @@ describe("compile", function () {
       },
     );
 
-    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute("specification/foo/Foo")).resolves.toMatchObject({
       success: false,
     });
   });
 
   it("should fail if no output was generated", async function () {
-    let host = new TsvTestHost();
     runNpmSpy.mockImplementation(
       async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
         if (args.join(" ").includes("tsp compile")) {
@@ -99,13 +109,12 @@ describe("compile", function () {
       },
     );
 
-    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute("specification/foo/Foo")).resolves.toMatchObject({
       success: false,
     });
   });
 
   it("should throw if output has no generated swaggers", async function () {
-    let host = new TsvTestHost();
     runNpmSpy.mockImplementation(
       async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => [
         null,
@@ -115,15 +124,13 @@ describe("compile", function () {
     );
 
     await expect(
-      new CompileRule().execute(host, TsvTestHost.folder),
+      new CompileRule().execute("specification/foo/Foo"),
     ).rejects.toThrowErrorMatchingInlineSnapshot(
       `[Error: No generated swaggers found in output of 'tsp compile']`,
     );
   });
 
   it("should fail if extra swaggers", async function () {
-    const host = new TsvTestHost();
-
     runNpmSpy.mockImplementation(
       async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
         return [null, swaggerPath, ""];
@@ -143,15 +150,13 @@ describe("compile", function () {
         : '{"info": {"x-cadl-generated": true}}';
     });
 
-    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute("specification/foo/Foo")).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current"),
     });
   });
 
   it("supports suppressions", async function () {
-    const host = new TsvTestHost();
-
     runNpmSpy.mockImplementation(
       async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
         return [null, swaggerPath, ""];
@@ -185,14 +190,12 @@ describe("compile", function () {
         : [];
     });
 
-    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute("specification/foo/Foo")).resolves.toMatchObject({
       success: true,
     });
   });
 
   it("throws on invalid suppressions", async function () {
-    const host = new TsvTestHost();
-
     runNpmSpy.mockImplementation(
       async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
         return [null, swaggerPath, ""];
@@ -209,13 +212,12 @@ describe("compile", function () {
       },
     ]);
 
-    await expect(new CompileRule().execute(host, TsvTestHost.folder)).rejects.toThrow(
+    await expect(new CompileRule().execute("specification/foo/Foo")).rejects.toThrow(
       "Invalid path",
     );
   });
 
   it("should skip git diff check if compile fails", async function () {
-    let host = new TsvTestHost();
     runNpmSpy.mockImplementation(
       async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
         if (args.join(" ").includes("tsp compile")) {
@@ -228,23 +230,14 @@ describe("compile", function () {
         return [null, "", ""];
       },
     );
-    host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}`;
-      return {
-        success: true,
-        stdOutput: stdOut,
-      };
-    };
 
-    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute("specification/foo/Foo")).resolves.toMatchObject({
       success: false,
       stdOutput: expect.not.stringContaining("Running git diff"),
     });
   });
 
   it("should fail if git diff fails", async function () {
-    let host = new TsvTestHost();
-
     runNpmSpy.mockImplementation(
       async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
         return [null, swaggerPath, ""];
@@ -253,7 +246,7 @@ describe("compile", function () {
 
     vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath]);
 
-    host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
+    gitDiffTopSpecFolderSpy.mockImplementation(async (folder: string): Promise<RuleResult> => {
       let stdOut = `Running git diff on folder ${folder}`;
 
       return {
@@ -261,17 +254,15 @@ describe("compile", function () {
         stdOutput: stdOut,
         errorOutput: `Files generated: ${folder}/bar`,
       };
-    };
+    });
 
-    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute("specification/foo/Foo")).resolves.toMatchObject({
       success: false,
       stdOutput: expect.stringContaining("Running git diff"),
     });
   });
 
   it("should succeed if git diff succeeds", async function () {
-    let host = new TsvTestHost();
-
     runNpmSpy.mockImplementation(
       async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
         return [null, swaggerPath, ""];
@@ -280,15 +271,15 @@ describe("compile", function () {
 
     vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath]);
 
-    host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
+    gitDiffTopSpecFolderSpy.mockImplementation(async (folder: string): Promise<RuleResult> => {
       let stdOut = `Running git diff on folder ${folder}`;
       return {
         success: true,
         stdOutput: stdOut,
       };
-    };
+    });
 
-    await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute("specification/foo/Foo")).resolves.toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("Running git diff"),
     });

@@ -5,15 +5,14 @@ import pc from "picocolors";
 import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
-import { TsvHost } from "../tsv-host.js";
-import { fileExists, getSuppressions, runNpm } from "../utils.js";
+import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
 import { filterAsync } from "@azure-tools/specs-shared/array";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
   readonly description = "Compile TypeSpec";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
@@ -184,7 +183,7 @@ export class CompileRule implements Rule {
     }
 
     if (success) {
-      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      const gitDiffResult = await gitDiffTopSpecFolder(folder);
       stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;
