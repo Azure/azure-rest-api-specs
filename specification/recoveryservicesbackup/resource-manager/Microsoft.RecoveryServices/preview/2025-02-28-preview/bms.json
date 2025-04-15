@@ -2057,6 +2057,9 @@
           },
           "Get Azure IaasVm Enhanced Protection Policy Details": {
             "$ref": "./examples/AzureIaasVm/V2Policy/v2-Get-Policy.json"
+          },
+          "Get Sap Hana DB Instance Workload Protection Policy Details": {
+            "$ref": "./examples/AzureWorkload/ProtectionPolicies_Get_SapHanaDBInstance.json"
           }
         }
       },
@@ -2133,6 +2136,9 @@
           },
           "Create or Update Enhanced Azure Vm Protection Policy with daily backup": {
             "$ref": "./examples/AzureIaasVm/V2Policy/IaaS_v2_daily.json"
+          },
+          "Create or Update Sap Hana DB Instance Workload Protection Policy": {
+            "$ref": "./examples/AzureWorkload/ProtectionPolicies_CreateOrUpdate_SapHanaDBInstance.json"
           },
           "Create or Update Full Azure Workload Protection Policy": {
             "$ref": "./examples/AzureWorkload/ProtectionPolicies_CreateOrUpdate_Complex.json"
@@ -5404,6 +5410,20 @@
           "type": "string",
           "x-ms-enum": {
             "name": "WorkloadType",
+            "modelAsString": true
+          }
+        },
+        "vmWorkloadPolicyType": {
+          "description": "Type of workload for the backup management",
+          "enum": [
+            "Invalid",
+            "SnapshotV1",
+            "SnapshotV2",
+            "Streaming"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "VMWorkloadPolicyType",
             "modelAsString": true
           }
         },
