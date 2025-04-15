@@ -1169,14 +1169,7 @@
       "type": "object",
       "properties": {
         "countryRegion": {
-          "type": "object",
-          "description": "Represents a country or region, containing related details.",
-          "properties": {
-            "name": {
-              "description": "name of country/region",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/CountryRegion"
         },
         "adminDistricts": {
           "description": "adminDistrict array.",
@@ -1497,14 +1490,7 @@
           "type": "object",
           "properties": {
             "countryRegion": {
-              "type": "object",
-              "description": "Represents a country or region, containing related details.",
-              "properties": {
-                "ISO": {
-                  "description": "ISO of country/region represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/CountryRegion"
             },
             "adminDistricts": {
               "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
@@ -1743,6 +1729,20 @@
         "shortName": {
           "type": "string",
           "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA. This is only available for the US, Canada, and Mexico."
+        }
+      }
+    },
+    "CountryRegion": {
+      "type": "object",
+      "description": "Represents a country or region, containing related details.",
+      "properties": {
+        "name": {
+          "description": "name of country/region",
+          "type": "string"
+        },
+        "ISO": {
+          "description": "ISO of country/region represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)",
+          "type": "string"
         }
       }
     },
