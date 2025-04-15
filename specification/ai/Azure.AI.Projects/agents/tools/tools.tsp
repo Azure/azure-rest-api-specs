@@ -41,8 +41,8 @@ model AgentToolDefinition {
   };
 }
 
-@doc("Options for a function-based tool behavior.")
-model FunctionToolOptions extends AgentToolOptions {
+@doc("Definitions for a function-based tool behavior.")
+model FunctionToolDefinition extends AgentToolDefinition {
   @doc("Indicates this tool is function-based.")
   type: "Function";
 

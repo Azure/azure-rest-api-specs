@@ -35,8 +35,11 @@ model JSONAny {
   objectValue?: Record<JSONAny>;
 }
 
-@doc("Options used when completing a run.")
+@doc("Options used when creating and an agent or completing a run without an existing agent.")
 model AgentConfigurationOptions {
+  @doc("The display name of the agent; used for display purposes and sent to the LLM to identify the agent.")
+  displayName: string;
+
   @doc("The model definition for this agent. This is optional (not needed) when doing a run using persistent agent.")
   agentModel?: AgentModel;
 
@@ -48,15 +51,6 @@ model AgentConfigurationOptions {
 
   @doc("How the agent should choose among provided tools.")
   toolChoice?: ToolChoiceBehavior;
-}
-
-@doc("Options used when creating or updating an agent.")
-model AgentCreationOptions {
-  @doc("The display name of the agent; used for display purposes and sent to the LLM to identify the agent.")
-  displayName: string;
-
-  @doc("Configuation options for the agent.")
-  configurationOptions: AgentConfigurationOptions;
 }
 
 @Rest.resource("agents")
@@ -73,8 +67,8 @@ model Agent {
   @doc("Arbitrary metadata associated with this agent.")
   metadata?: Record<string>;
 
-  @doc("Options that were used to create this agent.")
-  creationOptions: AgentCreationOptions;
+  @doc("Configuration options for this agent.")
+  configurationOptions: AgentConfigurationOptions;
 }
 
 @discriminator("provider")
