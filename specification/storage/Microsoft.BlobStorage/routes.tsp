@@ -876,10 +876,6 @@ namespace Storage.Blob {
           ...IfTagsParameter;
         },
         {
-          ...EtagResponseHeader;
-          ...LastModifiedResponseHeader;
-          ...BlobSequenceNumberResponseHeader;
-          ...DateResponseHeader;
         }
       >;
 
