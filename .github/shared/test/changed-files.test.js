@@ -28,7 +28,7 @@ describe("changedFiles", () => {
     `getChangedFiles(%o)`,
     async (options) => {
       const files = [
-        ".github/src/git.js",
+        ".github/src/changed-files.js",
         "specification/contosowidgetmanager/Contoso.Management/main.tsp",
         "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso.json",
         "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
