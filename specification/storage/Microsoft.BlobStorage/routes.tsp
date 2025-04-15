@@ -259,9 +259,6 @@ namespace Storage.Blob {
         ...IfModifiedSinceParameter;
       },
       {
-        ...EtagResponseHeader;
-        ...LastModifiedResponseHeader;
-        ...DateResponseHeader;
       }
     >;
 
