@@ -17,6 +17,7 @@ export function mockGlobby() {
 export function mockSimpleGit() {
   vi.mock("simple-git", () => ({
     simpleGit: vi.fn().mockReturnValue({
+      revparse: vi.fn().mockResolvedValue(""),
       status: vi.fn().mockResolvedValue({
         modified: [],
         not_added: [],
