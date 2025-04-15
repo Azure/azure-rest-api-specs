@@ -46,7 +46,6 @@ These settings apply only when `--tag=package-2025-04` is specified on the comma
 input-file:
   - Microsoft.ContainerRegistry/stable/2025-04-01/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
-tag: package-2025-03-preview
 ```
 
 ### Tag: package-2025-03-preview-only
