@@ -96,7 +96,7 @@ interface ScheduledActions {
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ScheduledAction>;
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
-  update is ArmResourcePatchSync<ScheduledAction, AutoActionProperties>;
+  update is ArmResourcePatchSync<ScheduledAction, ScheduledActionProperties>;
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
   delete is ArmResourceDeleteWithoutOkAsync<ScheduledAction>;
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)

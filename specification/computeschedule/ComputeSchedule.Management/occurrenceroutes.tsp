@@ -15,10 +15,31 @@ using OpenAPI;
 namespace Microsoft.ComputeSchedule;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@renamedFrom(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`, "Occurrences")
+@armResourceOperations
+interface OccurrencesOld {
+  get is ArmResourceRead<OccurrenceOld>;
+  listByAutoAction is ArmResourceListByParent<OccurrenceOld>;
+
+  listResources is ArmResourceActionSync<
+    OccurrenceOld,
+    void,
+    OccurrenceResourceListResponse
+  >;
+  cancel is ArmResourceActionSync<
+    OccurrenceOld,
+    CancelOccurrenceRequest,
+    OccurrenceOld
+  >;
+  delay is ArmResourceActionSync<OccurrenceOld, DelayRequestOld, OccurrenceOld>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @armResourceOperations
 interface Occurrences {
   get is ArmResourceRead<Occurrence>;
-  listByAutoAction is ArmResourceListByParent<Occurrence>;
+  listByScheduledAction is ArmResourceListByParent<Occurrence>;
 
   listResources is ArmResourceActionSync<
     Occurrence,

@@ -18,33 +18,31 @@ namespace Microsoft.ComputeSchedule;
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("The type of resource being targeted")
 union ResourceType {
-  @doc("Resources defined in the auto action are Virtual Machines")
+  @doc("Resources defined are Virtual Machines")
   VirtualMachine: "VirtualMachine",
 
-  @doc("Resources defined in the auto action are Virtual Machines Scale Sets")
+  @doc("Resources defined are Virtual Machines Scale Sets")
   VirtualMachineScaleSet: "VirtualMachineScaleSet",
 
   string,
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("Specify which action user wants to be performed on the resources")
 union ActionType {
-  @doc("Auto action should perform a start action on the specified resources")
+  @doc("Perform a start action on the specified resources")
   Start: "Start",
 
-  @doc("Auto action should perform a deallocate action on the specified resources")
+  @doc("Perform a deallocate action on the specified resources")
   Deallocate: "Deallocate",
 
-  @doc("Auto action should perform hibernate and deallocate on the specified resources")
+  @doc("Perform hibernate and deallocate on the specified resources")
   Hibernate: "Hibernate",
 
   string,
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("Representation of the possible selection of days in a week in a gregorian calendar")
 union WeekDay {
   @doc("Monday weekday.")
@@ -128,6 +126,7 @@ union Month {
 scalar DayOfTheMonth extends int32;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("Specify the schedule in which the auto action is supposed to follow")
 model AutoActionSchedule {
   @doc("The time the auto action is supposed to run on")
@@ -218,6 +217,7 @@ model NotificationProperties {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 scalar ValidAutoActionResourceId
   extends armResourceIdentifier<[
     {
@@ -229,6 +229,7 @@ scalar ValidAutoActionResourceId
   ]>;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @parentResource(AutoAction)
 @doc("Represents an auto action resource metadata.")
 model AutoActionResource {
@@ -252,6 +253,7 @@ union ProvisioningState {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("Auto action properties")
 model AutoActionProperties {
   @doc("The type of resource the auto action is targeting")
@@ -284,9 +286,11 @@ model AutoActionProperties {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 model AutoActionResourceListResponse is Azure.Core.Page<AutoActionResource>;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("Request model to attach a list of auto action resources.")
 model AutoActionResourceAttachRequest {
   @doc("List of resources to be attached/patched")
@@ -295,6 +299,7 @@ model AutoActionResourceAttachRequest {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("Request model to detach a list of auto action resources.")
 model AutoActionResourceDetachRequest {
   @doc("List of resources to be detached")
@@ -302,6 +307,7 @@ model AutoActionResourceDetachRequest {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("Request model perform a resource operation in a list of resources")
 model AutoActionResourcePatchRequest {
   @doc("The list of resources we watch to patch")
@@ -323,6 +329,7 @@ union ResourceOperationStatus {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("The response from auto action resource requests, which contains the status of each resource")
 model AutoActionResourceOperationResponse {
   @doc("The total number of resources operated on")
@@ -334,12 +341,14 @@ model AutoActionResourceOperationResponse {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("The auto action resource")
 model AutoAction is TrackedResource<AutoActionProperties> {
   ...ResourceNameParameter<AutoAction>;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
 @doc("The auto action extension")
 model AutoActionResources is ExtensionResource<AutoActionProperties> {
   ...ResourceNameParameter<AutoActionResources>;

@@ -47,54 +47,9 @@
     },
     {
       "name": "Occurrences"
-    },
-    {
-      "name": "AutoActions"
-    },
-    {
-      "name": "AutoActionsExtension"
     }
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.ComputeSchedule/autoActionResources": {
-      "get": {
-        "operationId": "AutoActionsExtension_ListByVms",
-        "tags": [
-          "AutoActionsExtension"
-        ],
-        "description": "List AutoActionResources resources by parent",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoActionResourcesListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AutoActionsExtension_ListByVms_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActionsExtension_ListByVms_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/{resourceUri}/providers/Microsoft.ComputeSchedule/scheduledActionResources": {
       "get": {
         "operationId": "ScheduledActionExtension_ListByVms",
@@ -126,11 +81,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ScheduledActionExtension_ListByVms_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActionExtension_ListByVms_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -162,53 +112,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/autoActions": {
-      "get": {
-        "operationId": "AutoActions_ListBySubscription",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "List AutoAction resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoActionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AutoActions_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_ListBySubscription_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -253,14 +156,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesCancelOperations_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesCancelOperations_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesCancelOperations_MinimumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesCancelOperations_MinimumSet_Gen.json"
           }
         }
       }
@@ -307,14 +202,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteDeallocate_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDeallocate_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesExecuteDeallocate_MinimumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDeallocate_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -359,14 +246,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteHibernate_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteHibernate_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesExecuteHibernate_MinimumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteHibernate_MinimumSet_Gen.json"
           }
         }
       }
@@ -413,14 +292,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteStart_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesExecuteStart_MinimumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -465,14 +336,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesGetOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationStatus_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesGetOperationStatus_MinimumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -519,14 +382,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesSubmitDeallocate_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitDeallocate_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesSubmitDeallocate_MinimumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitDeallocate_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -571,14 +426,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesSubmitHibernate_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitHibernate_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesSubmitHibernate_MinimumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitHibernate_MinimumSet_Gen.json"
           }
         }
       }
@@ -625,14 +472,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesSubmitStart_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitStart_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesSubmitStart_MinimumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesSubmitStart_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -664,989 +503,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ScheduledActions_ListBySubscription_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_ListBySubscription_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions": {
-      "get": {
-        "operationId": "AutoActions_ListByResourceGroup",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "List AutoAction resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoActionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AutoActions_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_ListByResourceGroup_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}": {
-      "get": {
-        "operationId": "AutoActions_Get",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "Get a AutoAction",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoAction"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AutoActions_Get_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "AutoActions_CreateOrUpdate",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "Create a AutoAction",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AutoAction"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'AutoAction' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/AutoAction"
-            }
-          },
-          "201": {
-            "description": "Resource 'AutoAction' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/AutoAction"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AutoActions_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "AutoActions_Update",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "Update a AutoAction",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AutoActionUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoAction"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AutoActions_Update_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_Update_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "AutoActions_Delete",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "Delete a AutoAction",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "AutoActions_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_Delete_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/attachResources": {
-      "post": {
-        "operationId": "AutoActions_AttachResources",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AutoActionResourceAttachRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoActionResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AutoActions_AttachResources_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_AttachResources_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/cancelNextOccurrence": {
-      "post": {
-        "operationId": "AutoActions_CancelNextOccurrence",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CancelOccurrenceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Occurrence"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AutoActions_CancelNextOccurrence_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_CancelNextOccurrence_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/detachResources": {
-      "post": {
-        "operationId": "AutoActions_DetachResources",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AutoActionResourceDetachRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoActionResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AutoActions_DetachResources_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_DetachResources_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/disable": {
-      "post": {
-        "operationId": "AutoActions_Disable",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AutoActions_Disable_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_Disable_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/enable": {
-      "post": {
-        "operationId": "AutoActions_Enable",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AutoActions_Enable_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_Enable_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/listResources": {
-      "post": {
-        "operationId": "AutoActions_ListResources",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoActionResourceListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "AutoActions_ListResources_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_ListResources_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/occurrences": {
-      "get": {
-        "operationId": "Occurrences_ListByAutoAction",
-        "tags": [
-          "Occurrences"
-        ],
-        "description": "List Occurrence resources by AutoAction",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OccurrenceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Occurrences_ListByAutoAction_MaximumSet_Gen": {
-            "$ref": "./examples/Occurrences_ListByAutoAction_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/occurrences/{occurrenceId}": {
-      "get": {
-        "operationId": "Occurrences_Get",
-        "tags": [
-          "Occurrences"
-        ],
-        "description": "Get a Occurrence",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "occurrenceId",
-            "in": "path",
-            "description": "The name of the Occurrence",
-            "required": true,
-            "type": "string",
-            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Occurrence"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Occurrences_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Occurrences_Get_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/occurrences/{occurrenceId}/cancel": {
-      "post": {
-        "operationId": "Occurrences_Cancel",
-        "tags": [
-          "Occurrences"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "occurrenceId",
-            "in": "path",
-            "description": "The name of the Occurrence",
-            "required": true,
-            "type": "string",
-            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CancelOccurrenceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Occurrence"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Occurrences_Cancel_MaximumSet_Gen": {
-            "$ref": "./examples/Occurrences_Cancel_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/occurrences/{occurrenceId}/delay": {
-      "post": {
-        "operationId": "Occurrences_Delay",
-        "tags": [
-          "Occurrences"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "occurrenceId",
-            "in": "path",
-            "description": "The name of the Occurrence",
-            "required": true,
-            "type": "string",
-            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DelayRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Occurrence"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Occurrences_Delay_MaximumSet_Gen": {
-            "$ref": "./examples/Occurrences_Delay_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/occurrences/{occurrenceId}/listResources": {
-      "post": {
-        "operationId": "Occurrences_ListResources",
-        "tags": [
-          "Occurrences"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "occurrenceId",
-            "in": "path",
-            "description": "The name of the Occurrence",
-            "required": true,
-            "type": "string",
-            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/OccurrenceResourceListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Occurrences_ListResources_MaximumSet_Gen": {
-            "$ref": "./examples/Occurrences_ListResources_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/patchResources": {
-      "post": {
-        "operationId": "AutoActions_PatchResources",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AutoActionResourcePatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoActionResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AutoActions_PatchResources_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_PatchResources_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}/triggerManualOccurrence": {
-      "post": {
-        "operationId": "AutoActions_TriggerManualOccurrence",
-        "tags": [
-          "AutoActions"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "autoActionName",
-            "in": "path",
-            "description": "The name of the AutoAction",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Occurrence"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AutoActions_TriggerManualOccurrence_MaximumSet_Gen": {
-            "$ref": "./examples/AutoActions_TriggerManualOccurrence_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1681,11 +537,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ScheduledActions_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_ListByResourceGroup_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -1724,11 +575,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_Get_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_Get_MaximumSet_Gen.json"
           }
         }
       },
@@ -1797,12 +643,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ScheduledActions_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "ScheduledActions_Update",
@@ -1847,11 +688,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_Update_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_Update_MaximumSet_Gen.json"
           }
         }
       },
@@ -1905,12 +741,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ScheduledActions_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_Delete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/attachResources": {
@@ -1957,11 +788,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_AttachResources_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_AttachResources_MaximumSet_Gen.json"
           }
         }
       }
@@ -2011,11 +837,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_CancelNextOccurrence_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_CancelNextOccurrence_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -2064,11 +885,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_DetachResources_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_DetachResources_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -2105,11 +921,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_Disable_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_Disable_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -2145,11 +956,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_Enable_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_Enable_MaximumSet_Gen.json"
           }
         }
       }
@@ -2193,11 +999,272 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ScheduledActions_ListResources_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_ListResources_MaximumSet_Gen.json"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences": {
+      "get": {
+        "operationId": "Occurrences_ListByScheduledAction",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "List Occurrence resources by ScheduledAction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OccurrenceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences/{occurrenceId}": {
+      "get": {
+        "operationId": "Occurrences_Get",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "Get a Occurrence",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "occurrenceId",
+            "in": "path",
+            "description": "The name of the Occurrence",
+            "required": true,
+            "type": "string",
+            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Occurrence"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences/{occurrenceId}/cancel": {
+      "post": {
+        "operationId": "Occurrences_Cancel",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "occurrenceId",
+            "in": "path",
+            "description": "The name of the Occurrence",
+            "required": true,
+            "type": "string",
+            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelOccurrenceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Occurrence"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences/{occurrenceId}/delay": {
+      "post": {
+        "operationId": "Occurrences_Delay",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "occurrenceId",
+            "in": "path",
+            "description": "The name of the Occurrence",
+            "required": true,
+            "type": "string",
+            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DelayRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Occurrence"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/scheduledActions/{scheduledActionName}/occurrences/{occurrenceId}/listResources": {
+      "post": {
+        "operationId": "Occurrences_ListResources",
+        "tags": [
+          "Occurrences"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scheduledActionName",
+            "in": "path",
+            "description": "The name of the ScheduledAction",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "occurrenceId",
+            "in": "path",
+            "description": "The name of the Occurrence",
+            "required": true,
+            "type": "string",
+            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OccurrenceResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2246,11 +1313,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_PatchResources_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_PatchResources_MaximumSet_Gen.json"
-          }
         }
       }
     },
@@ -2290,11 +1352,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_TriggerManualOccurrence_MaximumSet_Gen": {
-            "$ref": "./examples/ScheduledActions_TriggerManualOccurrence_MaximumSet_Gen.json"
-          }
         }
       }
     }
@@ -2315,426 +1372,20 @@
           {
             "name": "Start",
             "value": "Start",
-            "description": "Auto action should perform a start action on the specified resources"
+            "description": "Perform a start action on the specified resources"
           },
           {
             "name": "Deallocate",
             "value": "Deallocate",
-            "description": "Auto action should perform a deallocate action on the specified resources"
+            "description": "Perform a deallocate action on the specified resources"
           },
           {
             "name": "Hibernate",
             "value": "Hibernate",
-            "description": "Auto action should perform hibernate and deallocate on the specified resources"
+            "description": "Perform hibernate and deallocate on the specified resources"
           }
         ]
       }
-    },
-    "AutoAction": {
-      "type": "object",
-      "description": "The auto action resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AutoActionProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "AutoActionListResult": {
-      "type": "object",
-      "description": "The response of a AutoAction list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AutoAction items on this page",
-          "items": {
-            "$ref": "#/definitions/AutoAction"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AutoActionProperties": {
-      "type": "object",
-      "description": "Auto action properties",
-      "properties": {
-        "resourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The type of resource the auto action is targeting"
-        },
-        "actionType": {
-          "$ref": "#/definitions/ActionType",
-          "description": "The action the auto action should perform in the resources"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time which the auto action is supposed to start running"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the auto action is supposed to stop scheduling"
-        },
-        "schedule": {
-          "$ref": "#/definitions/AutoActionSchedule",
-          "description": "The schedule the auto action is supposed to follow"
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "The notification settings for the auto action",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "Tell if the auto action is disabled or not",
-          "default": false
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last provisioning operation performed on the resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "resourceType",
-        "actionType",
-        "startTime",
-        "schedule",
-        "notificationSettings"
-      ]
-    },
-    "AutoActionPropertiesUpdate": {
-      "type": "object",
-      "description": "Auto action properties",
-      "properties": {
-        "resourceType": {
-          "$ref": "#/definitions/ResourceType",
-          "description": "The type of resource the auto action is targeting"
-        },
-        "actionType": {
-          "$ref": "#/definitions/ActionType",
-          "description": "The action the auto action should perform in the resources"
-        },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time which the auto action is supposed to start running"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time when the auto action is supposed to stop scheduling"
-        },
-        "schedule": {
-          "$ref": "#/definitions/AutoActionScheduleUpdate",
-          "description": "The schedule the auto action is supposed to follow"
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "The notification settings for the auto action",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        },
-        "disabled": {
-          "type": "boolean",
-          "description": "Tell if the auto action is disabled or not",
-          "default": false
-        }
-      }
-    },
-    "AutoActionResource": {
-      "type": "object",
-      "description": "Represents an auto action resource metadata.",
-      "properties": {
-        "resourceId": {
-          "$ref": "#/definitions/ValidAutoActionResourceId",
-          "description": "The ARM Id of the resource."
-        },
-        "notificationSettings": {
-          "type": "array",
-          "description": "The desired notification settings for the specified resource.",
-          "items": {
-            "$ref": "#/definitions/NotificationProperties"
-          },
-          "x-ms-identifiers": [
-            "destination"
-          ]
-        }
-      },
-      "required": [
-        "resourceId"
-      ]
-    },
-    "AutoActionResourceAttachRequest": {
-      "type": "object",
-      "description": "Request model to attach a list of auto action resources.",
-      "properties": {
-        "resources": {
-          "type": "array",
-          "description": "List of resources to be attached/patched",
-          "items": {
-            "$ref": "#/definitions/AutoActionResource"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        }
-      },
-      "required": [
-        "resources"
-      ]
-    },
-    "AutoActionResourceDetachRequest": {
-      "type": "object",
-      "description": "Request model to detach a list of auto action resources.",
-      "properties": {
-        "resources": {
-          "type": "array",
-          "description": "List of resources to be detached",
-          "items": {
-            "$ref": "#/definitions/ValidAutoActionResourceId"
-          }
-        }
-      },
-      "required": [
-        "resources"
-      ]
-    },
-    "AutoActionResourceListResponse": {
-      "type": "object",
-      "description": "Paged collection of AutoActionResource items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AutoActionResource items on this page",
-          "items": {
-            "$ref": "#/definitions/AutoActionResource"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AutoActionResourceOperationResponse": {
-      "type": "object",
-      "description": "The response from auto action resource requests, which contains the status of each resource",
-      "properties": {
-        "totalResources": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of resources operated on"
-        },
-        "resourcesStatuses": {
-          "type": "array",
-          "description": "The resource status of for each resource",
-          "items": {
-            "$ref": "#/definitions/ResourceStatus"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        }
-      },
-      "required": [
-        "totalResources",
-        "resourcesStatuses"
-      ]
-    },
-    "AutoActionResourcePatchRequest": {
-      "type": "object",
-      "description": "Request model perform a resource operation in a list of resources",
-      "properties": {
-        "resources": {
-          "type": "array",
-          "description": "The list of resources we watch to patch",
-          "items": {
-            "$ref": "#/definitions/AutoActionResource"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        }
-      },
-      "required": [
-        "resources"
-      ]
-    },
-    "AutoActionResources": {
-      "type": "object",
-      "description": "The auto action extension",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AutoActionProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AutoActionResourcesListResult": {
-      "type": "object",
-      "description": "The response of a AutoActionResources list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AutoActionResources items on this page",
-          "items": {
-            "$ref": "#/definitions/AutoActionResources"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "AutoActionSchedule": {
-      "type": "object",
-      "description": "Specify the schedule in which the auto action is supposed to follow",
-      "properties": {
-        "scheduledTime": {
-          "type": "string",
-          "format": "time",
-          "description": "The time the auto action is supposed to run on"
-        },
-        "timeZone": {
-          "type": "string",
-          "description": "The timezone the scheduled time is specified on"
-        },
-        "requestedWeekDays": {
-          "type": "array",
-          "description": "The week days the auto action is supposed to run on",
-          "items": {
-            "$ref": "#/definitions/WeekDay"
-          }
-        },
-        "requestedMonths": {
-          "type": "array",
-          "description": "The months the auto action is supposed to run on",
-          "items": {
-            "$ref": "#/definitions/Month"
-          }
-        },
-        "requestedDaysOfTheMonth": {
-          "type": "array",
-          "description": "The days of the month the auto action is supposed to run on. If empty, it means it will run on every day of the month.",
-          "items": {
-            "$ref": "#/definitions/DayOfTheMonth"
-          }
-        },
-        "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters the auto action is supposed to follow"
-        },
-        "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
-          "description": "The type of deadline the auto action is supposed to follow for the schedule"
-        }
-      },
-      "required": [
-        "scheduledTime",
-        "timeZone",
-        "requestedWeekDays",
-        "requestedMonths",
-        "requestedDaysOfTheMonth",
-        "executionParameters",
-        "deadlineType"
-      ]
-    },
-    "AutoActionScheduleUpdate": {
-      "type": "object",
-      "description": "Specify the schedule in which the auto action is supposed to follow",
-      "properties": {
-        "scheduledTime": {
-          "type": "string",
-          "format": "time",
-          "description": "The time the auto action is supposed to run on"
-        },
-        "timeZone": {
-          "type": "string",
-          "description": "The timezone the scheduled time is specified on"
-        },
-        "requestedWeekDays": {
-          "type": "array",
-          "description": "The week days the auto action is supposed to run on",
-          "items": {
-            "$ref": "#/definitions/WeekDay"
-          }
-        },
-        "requestedMonths": {
-          "type": "array",
-          "description": "The months the auto action is supposed to run on",
-          "items": {
-            "$ref": "#/definitions/Month"
-          }
-        },
-        "requestedDaysOfTheMonth": {
-          "type": "array",
-          "description": "The days of the month the auto action is supposed to run on. If empty, it means it will run on every day of the month.",
-          "items": {
-            "$ref": "#/definitions/DayOfTheMonth"
-          }
-        },
-        "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters the auto action is supposed to follow"
-        },
-        "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
-          "description": "The type of deadline the auto action is supposed to follow for the schedule"
-        }
-      }
-    },
-    "AutoActionUpdate": {
-      "type": "object",
-      "description": "The auto action resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AutoActionPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -2976,7 +1627,7 @@
           "type": "array",
           "description": "The resources that should be delayed. If empty, the delay will apply to the all resources in the occurrence occurrence.",
           "items": {
-            "$ref": "#/definitions/ValidAutoActionResourceId"
+            "$ref": "#/definitions/ValidScheduledActionResourceId"
           }
         }
       },
@@ -4083,12 +2734,12 @@
           {
             "name": "VirtualMachine",
             "value": "VirtualMachine",
-            "description": "Resources defined in the auto action are Virtual Machines"
+            "description": "Resources defined are Virtual Machines"
           },
           {
             "name": "VirtualMachineScaleSet",
             "value": "VirtualMachineScaleSet",
-            "description": "Resources defined in the auto action are Virtual Machines Scale Sets"
+            "description": "Resources defined are Virtual Machines Scale Sets"
           }
         ]
       }
@@ -4626,21 +3277,6 @@
         "resources",
         "correlationid"
       ]
-    },
-    "ValidAutoActionResourceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.Compute/virtualMachines"
-          },
-          {
-            "type": "Microsoft.Compute/virtualMachineScaleSets"
-          }
-        ]
-      }
     },
     "ValidScheduledActionResourceId": {
       "type": "string",
