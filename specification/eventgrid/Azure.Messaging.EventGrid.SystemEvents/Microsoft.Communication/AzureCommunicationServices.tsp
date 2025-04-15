@@ -1086,10 +1086,10 @@ model AcsCallEndedByProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsCallEndReasonProperties {
   /** Reason code for ending the call. */
-  code?: int;
+  code?: int32;
 
   /** Reason subcode for ending the call. */
-  subCode?: int;
+  subCode?: int32;
 
   /** Reason for the ending the call. */
   phrase?: string;
