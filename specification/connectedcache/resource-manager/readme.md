@@ -53,7 +53,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-go
   - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_connectedcache']
