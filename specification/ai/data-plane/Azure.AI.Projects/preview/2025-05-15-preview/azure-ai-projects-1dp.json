@@ -1290,6 +1290,36 @@
         }
       }
     },
+    "/evaluations/operations/{operationId}": {
+      "get": {
+        "operationId": "Evaluations_OperationResults",
+        "description": "Poll for the operation results.",
+        "parameters": [
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "Api Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID for the polling operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultMetric"
+            }
+          }
+        }
+      }
+    },
     "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
@@ -3908,6 +3938,39 @@
         }
       ],
       "x-ms-discriminator-value": "None"
+    },
+    "OperationResultMetric": {
+      "type": "object",
+      "description": "Represents the operation result metric.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The annotation task or operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "The error code associated with the operation."
+        },
+        "partnerId": {
+          "type": "string",
+          "description": "The partner identifier."
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "The reason for failure, if any."
+        }
+      },
+      "required": [
+        "operation",
+        "status",
+        "errorCode",
+        "partnerId",
+        "failureReason"
+      ]
     },
     "PagedConnection": {
       "type": "object",

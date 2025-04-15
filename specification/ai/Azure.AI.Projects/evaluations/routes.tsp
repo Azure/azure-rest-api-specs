@@ -90,6 +90,26 @@ interface Evaluations {
     @body fileContentResult: string;
   };
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Poll for the operation results.")
+  @route("/operations/{operationId}")
+  @get
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v_latest)
+  op operationResults(
+    @doc("Api Version.")
+    @query apiVersion: string,
+    @doc("Operation ID for the polling operation.")
+    @path operationId: string,
+  ): {
+    @statusCode statusCode: 202;
+    @doc("The operation results.")
+    @added(Versions.v2025_05_15_preview)
+    @removed(Versions.v_latest)
+    @body OperationResults: OperationResultMetric;
+  };
+
   // Upload API set
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Upload the result to an evaluation run.")
