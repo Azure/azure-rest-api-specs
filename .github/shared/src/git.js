@@ -27,9 +27,11 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
   logger?.info(`diff(${JSON.stringify(allArgs)})`);
 
   const git = simpleGit(cwd);
-  const diff = await git.diff(allArgs);
+  const result = await git.diff(allArgs);
 
-  return { stdout: diff, stderr: "" };
+  logger?.debug(result);
+
+  return result;
 }
 
 /**
