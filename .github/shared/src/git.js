@@ -7,6 +7,10 @@ import { execFile } from "./exec.js";
  */
 
 /**
+ * @typedef {import('./exec.js').ExecResult} ExecResult
+ */
+
+/**
  * @typedef {Object} GitOptions
  * @property {string[]} [args]
  * @property {string} [cwd] Current working directory. Default: process.cwd().
@@ -17,7 +21,7 @@ import { execFile } from "./exec.js";
  * @param {string} baseCommitish
  * @param {string} headCommitish
  * @param {GitOptions} [options]
- * @returns {Promise<string>}
+ * @returns {Promise<ExecResult>}
  */
 export async function diff(baseCommitish, headCommitish, options = {}) {
   const { args = [], cwd, logger } = options;
@@ -32,7 +36,7 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
  * @param {string} treeIsh
  * @param {string} path
  * @param {GitOptions} [options]
- * @returns {Promise<string>}
+ * @returns {Promise<ExecResult>}
  */
 export async function lsTree(treeIsh, path, options = {}) {
   const { args = [], cwd, logger } = options;
@@ -44,7 +48,7 @@ export async function lsTree(treeIsh, path, options = {}) {
  * @param {string} treeIsh
  * @param {string} path
  * @param {GitOptions} [options]
- * @returns {Promise<string>}
+ * @returns {Promise<ExecResult>}
  */
 export async function show(treeIsh, path, options = {}) {
   const { args = [], cwd, logger } = options;
@@ -57,7 +61,7 @@ export async function show(treeIsh, path, options = {}) {
 
 /**
  * @param {GitOptions} [options]
- * @returns {Promise<string>}
+ * @returns {Promise<ExecResult>}
  */
 export async function status(options = {}) {
   const { args = [], cwd, logger } = options;
@@ -73,7 +77,7 @@ export async function status(options = {}) {
  * @param {Object} [options]
  * @param {string} [options.cwd] Current working directory. Default: process.cwd().
  * @param {ILogger} [options.logger]
- * @returns {Promise<string>}
+ * @returns {Promise<ExecResult>}
  */
 async function execGit(args, options = {}) {
   const { cwd, logger } = options;
