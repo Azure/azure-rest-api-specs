@@ -1,9 +1,13 @@
 import { describe, it, vi } from "vitest";
 
 vi.mock("simple-git", () => ({
-  simpleGit: vi.fn().mockResolvedValue({
-    revparse: vi.fn(),
-    status: vi.fn(),
+  simpleGit: vi.fn().mockReturnValue({
+    revparse: vi.fn().mockResolvedValue(""),
+    status: vi.fn().mockResolvedValue({
+      modified: [],
+      not_added: [],
+      isClean: () => true,
+    }),
   }),
 }));
 
