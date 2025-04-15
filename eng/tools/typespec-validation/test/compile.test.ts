@@ -9,7 +9,7 @@ vi.mock("globby", () => ({
 }));
 
 vi.mock("simple-git", () => ({
-  simpleGit: vi.fn().mockResolvedValue({
+  simpleGit: vi.fn().mockReturnValue({
     status: vi.fn(),
   }),
 }));

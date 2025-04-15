@@ -1,9 +1,18 @@
-import { describe, it } from "vitest";
-import { gitDiffTopSpecFolder, normalizePath } from "../src/utils.js";
+import { describe, it, vi } from "vitest";
+
+vi.mock("simple-git", () => ({
+  simpleGit: vi.fn().mockResolvedValue({
+    revparse: vi.fn(),
+    status: vi.fn(),
+  }),
+}));
+
 import { strict as assert } from "node:assert";
-import process from "process";
 import path from "path";
-import { TsvTestHost } from "./tsv-test-host.js";
+import process from "process";
+import { gitDiffTopSpecFolder, normalizePath } from "../src/utils.js";
+
+const folder = "specification/foo/Foo";
 
 describe("util", function () {
   describe("normalize", function () {
@@ -32,7 +41,7 @@ describe("util", function () {
   });
   describe("gitDiff", function () {
     it("should succeed if git diff produces no output", async function () {
-      const result = await gitDiffTopSpecFolder(new TsvTestHost(), TsvTestHost.folder);
+      const result = await gitDiffTopSpecFolder(folder);
       assert(result.success);
     });
   });
