@@ -425,16 +425,16 @@ directive:
     reason: False alarm, Export is a proxy resource
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: costmanagement.exports.json
-    reason: False alarm, Export is a proxy resource  
+    reason: False alarm, Export is a proxy resource
   - suppress: R3023
-    from: costmanagement.generatedetailedcostreport.json    
+    from: costmanagement.generatedetailedcostreport.json
     reason: 'API change needed, Operations API must be implemented for operations'
   - suppress: R4018
-    from: costmanagement.json    
+    from: costmanagement.json
     reason: 'API change needed, Response schema of OperatioAPI does not match Arm Schema'
   - suppress: R4037
     from: costmanagement.generatedetailedcostreport.json
-    reason: 'This needs api change - MissingTypeObject' 
+    reason: 'This needs api change - MissingTypeObject'
   - suppress: R4009
     from: costmanagement.exports.json
     reason: API change needed, we do not yet support systemdata
@@ -460,7 +460,7 @@ directive:
   - suppress: EnumInsteadOfBoolean
     from: costmanagement.json
     where: $.definitions.ForecastDefinition.properties.includeActualCost
-    reason: 'API change needed'    
+    reason: 'API change needed'
   - suppress: R2059
     from: costmanagement.json
     where: $.paths
@@ -468,7 +468,7 @@ directive:
   - suppress: R3023
     from: costmanagement.json
     where: $.paths
-    reason: operations API for Microsoft.Billing are defined in Microsoft.Billing    
+    reason: operations API for Microsoft.Billing are defined in Microsoft.Billing
   - suppress: XmsResourceInPutResponse
     from: costmanagement.json
     where: '$.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}"].put'
@@ -496,15 +496,15 @@ directive:
   - suppress: EnumInsteadOfBoolean
     from: costmanagement.json
     where: $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
-    reason: 'false alarm '  
+    reason: 'false alarm '
   - suppress: EnumInsteadOfBoolean
     from: costmanagement.json
     where: $.definitions.KpiProperties.properties.enabled
-    reason: 'false alarm ' 
+    reason: 'false alarm '
   - suppress: EnumInsteadOfBoolean
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
-    reason: 'false alarm ' 
+    reason: 'false alarm '
   - suppress: DeleteOperationResponses
     from: costmanagement.budgets.json
     reason: 'Consistent with delete api from other versions, modifying it will be a breaking change'
@@ -556,7 +556,7 @@ directive:
   - suppress: RequiredReadOnlySystemData
     from: settings.json
     reason: 'Settings does not return system data and will consider adding it in the future or upcoming api version'
-        
+
 ```
 
 ### Tag: package-2018-08-preview

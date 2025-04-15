@@ -176,6 +176,12 @@
           "ExportCreateOrUpdateByBillingAccount": {
             "$ref": "./examples/ExportCreateOrUpdateByBillingAccount.json"
           },
+          "ExportCreateOrUpdateByBillingAccountMonthly": {
+            "$ref": "./examples/ExportCreateOrUpdateByBillingAccountMonthly.json"
+          },
+          "ExportCreateOrUpdateByBillingAccountCustom": {
+            "$ref": "./examples/ExportCreateOrUpdateByBillingAccountCustom.json"
+          },
           "ExportCreateOrUpdateByDepartment": {
             "$ref": "./examples/ExportCreateOrUpdateByDepartment.json"
           },
@@ -519,7 +525,7 @@
           }
         },
         "compressionMode": {
-          "description": "Allow customers to select compress data(gzip, snappy) for exports. This setting will enable destination file compression scheme at runtime. By default set to None.",
+          "description": "Allow customers to select compress data for exports. This setting will enable destination file compression scheme at runtime. By default set to None. Gzip is for csv and snappy for parquet.",
           "type": "string",
           "enum": [
             "gzip",
@@ -737,11 +743,11 @@
       }
     },
     "ExportDatasetConfiguration": {
-      "description": "The export dataset configuration. Allows columns to be selected for the export. If not provided then the export will include all available columns.",
+      "description": "This is on path to deprecation and will not be supported going forward.",
       "type": "object",
       "properties": {
         "columns": {
-          "description": "This is on path to deprecation and will not be supported going forward.",
+          "description": "Array of column names to be included in the export. If not provided then the export will include all available columns. The available columns can vary by customer channel (see examples).",
           "type": "array",
           "items": {
             "type": "string"
@@ -764,7 +770,7 @@
       }
     },
     "ExportTimePeriod": {
-      "description": "The date range for data in the export. This should only be specified with timeFrame set to 'Custom'. The maximum date range is 1 month.",
+      "description": "The date range for data in the export. This should only be specified with timeFrame set to 'Custom'. The maximum date range is 1 calendar month.",
       "type": "object",
       "properties": {
         "from": {
@@ -875,12 +881,12 @@
           "type": "string",
           "format": "date-time"
         },
-        "manifestFile": {
-          "description": "The manifest file location(URI location) for the exported files.",
-          "type": "string"
-        },
         "fileName": {
           "description": "The name of the exported file.",
+          "type": "string"
+        },
+        "manifestFile": {
+          "description": "The manifest file location(URI location) for the exported files.",
           "type": "string"
         },
         "runSettings": {
@@ -894,7 +900,7 @@
       }
     },
     "ExportSuspensionContext": {
-      "description": "The properties of the export suspension context. This is not populated currently.",
+      "description": "The properties of the export run. This is not populated currently.",
       "type": "object",
       "properties": {
         "suspensionCode": {
