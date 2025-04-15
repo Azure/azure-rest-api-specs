@@ -1,4 +1,12 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+vi.mock("simple-git", () => ({
+  simpleGit: vi.fn().mockReturnValue({
+    diff: vi.fn().mockResolvedValue(""),
+  }),
+}));
+
+import * as simpleGit from "simple-git";
 import {
   dataPlane,
   example,
@@ -9,10 +17,13 @@ import {
   specification,
   swagger,
 } from "../src/changed-files.js";
-import * as git from "../src/git.js";
 import { consoleLogger } from "../src/logger.js";
 
 describe("changedFiles", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it.each([{}, { logger: consoleLogger }])(
     `getChangedFiles(%o)`,
     async (options) => {
@@ -23,7 +34,7 @@ describe("changedFiles", () => {
         "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
       ];
 
-      vi.spyOn(git, "diff").mockResolvedValue(files.join("\n"));
+      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(files.join("\n"));
 
       await expect(getChangedFiles(options)).resolves.toEqual(files);
     },

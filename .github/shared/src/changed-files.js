@@ -1,6 +1,6 @@
 // @ts-check
 
-import { diff } from "./git.js";
+import { simpleGit } from "simple-git";
 
 /**
  * @param {Object} [options]
@@ -18,16 +18,14 @@ export async function getChangedFiles(options = {}) {
     logger,
   } = options;
 
+  const git = simpleGit(cwd);
+
   // TODO: If we need to filter based on status, instead of passing an argument to `--diff-filter,
   // consider using "--name-status" instead of "--name-only", and return an array of objects like
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await diff(baseCommitish, headCommitish, {
-    args: ["--name-only"],
-    cwd,
-    logger: logger,
-  });
+  const result = await git.diff(["--name-only", baseCommitish, headCommitish]);
 
   const files = result.trim().split("\n");
 
