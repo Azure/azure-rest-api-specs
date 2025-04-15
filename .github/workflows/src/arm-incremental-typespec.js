@@ -8,9 +8,9 @@ import {
   readme,
   resourceManager,
   swagger,
-} from "../../src/changed-files.js";
-import { lsTree, show } from "../../src/git.js";
-import { getInputFiles } from "../../src/readme.js";
+} from "../../shared/src/changed-files.js";
+import { lsTree, show } from "../../shared/src/git.js";
+import { getInputFiles } from "../../shared/src/readme.js";
 import { CoreLogger } from "./core-logger.js";
 
 /**
@@ -18,7 +18,10 @@ import { CoreLogger } from "./core-logger.js";
  * @returns {Promise<boolean>}
  */
 export default async function incrementalTypeSpec({ core }) {
-  const options = { logger: new CoreLogger(core) };
+  const options = {
+    cwd: process.env.GITHUB_WORKSPACE,
+    logger: new CoreLogger(core),
+  };
 
   const changedFiles = await getChangedFiles(options);
 
@@ -35,7 +38,7 @@ export default async function incrementalTypeSpec({ core }) {
     /** @type string */
     let swaggerText;
     try {
-      swaggerText = await show("HEAD", file, options);
+      swaggerText = (await show("HEAD", file, options)).stdout;
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
         // To simplify logic, if PR deletes a swagger file, it's not "incremental typespec"
@@ -70,7 +73,7 @@ export default async function incrementalTypeSpec({ core }) {
 
     let readmeText;
     try {
-      readmeText = await show("HEAD", readmeFile, options);
+      readmeText = (await show("HEAD", readmeFile, options)).stdout;
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
         // To simplify logic, if PR deletes a readme file, it's not "incremental typespec"
@@ -106,10 +109,12 @@ export default async function incrementalTypeSpec({ core }) {
 
   // Ensure that each changed spec dir contained at least one typespec-generated swagger in the base commitish
   for (const changedSpecDir of changedSpecDirs) {
-    const specFilesBaseBranch = await lsTree("HEAD^", changedSpecDir, {
-      args: "-r --name-only",
-      ...options,
-    });
+    const specFilesBaseBranch = (
+      await lsTree("HEAD^", changedSpecDir, {
+        args: ["-r", "--name-only"],
+        ...options,
+      })
+    ).stdout;
 
     // Filter files to only include RM swagger files
     const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
@@ -126,7 +131,7 @@ export default async function incrementalTypeSpec({ core }) {
     let containsTypeSpecGeneratedSwagger = false;
     // TODO: Add lint rule to prevent using "for...in" instead of "for...of"
     for (const file of specRmSwaggerFilesBaseBranch) {
-      const baseSwagger = await show("HEAD^", file, options);
+      const baseSwagger = (await show("HEAD^", file, options)).stdout;
       const baseSwaggerObj = JSON.parse(baseSwagger);
       if (baseSwaggerObj["info"]?.["x-typespec-generated"]) {
         core.info(
