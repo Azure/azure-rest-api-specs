@@ -1,4 +1,4 @@
-import { mockAll } from "./mocks.js";
+import { mockAll, mockFolder } from "./mocks.js";
 mockAll();
 
 import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
@@ -11,7 +11,6 @@ import { CompileRule } from "../src/rules/compile.js";
 
 import * as utils from "../src/utils.js";
 
-const folder = "specification/foo/Foo";
 const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
 
@@ -67,7 +66,7 @@ describe("compile", function () {
       path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}",
     );
 
-    await expect(new CompileRule().execute(folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: true,
     });
   });
@@ -83,7 +82,7 @@ describe("compile", function () {
       },
     );
 
-    await expect(new CompileRule().execute(folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
     });
   });
@@ -99,7 +98,7 @@ describe("compile", function () {
       },
     );
 
-    await expect(new CompileRule().execute(folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
     });
   });
@@ -113,7 +112,7 @@ describe("compile", function () {
       ],
     );
 
-    await expect(new CompileRule().execute(folder)).rejects.toThrowErrorMatchingInlineSnapshot(
+    await expect(new CompileRule().execute(mockFolder)).rejects.toThrowErrorMatchingInlineSnapshot(
       `[Error: No generated swaggers found in output of 'tsp compile']`,
     );
   });
@@ -138,7 +137,7 @@ describe("compile", function () {
         : '{"info": {"x-cadl-generated": true}}';
     });
 
-    await expect(new CompileRule().execute(folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current"),
     });
@@ -178,7 +177,7 @@ describe("compile", function () {
         : [];
     });
 
-    await expect(new CompileRule().execute(folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: true,
     });
   });
@@ -200,7 +199,7 @@ describe("compile", function () {
       },
     ]);
 
-    await expect(new CompileRule().execute(folder)).rejects.toThrow("Invalid path");
+    await expect(new CompileRule().execute(mockFolder)).rejects.toThrow("Invalid path");
   });
 
   it("should skip git diff check if compile fails", async function () {
@@ -217,7 +216,7 @@ describe("compile", function () {
       },
     );
 
-    await expect(new CompileRule().execute(folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
       stdOutput: expect.not.stringContaining("Running git diff"),
     });
@@ -242,7 +241,7 @@ describe("compile", function () {
       };
     });
 
-    await expect(new CompileRule().execute(folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: false,
       stdOutput: expect.stringContaining("Running git diff"),
     });
@@ -265,7 +264,7 @@ describe("compile", function () {
       };
     });
 
-    await expect(new CompileRule().execute(folder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("Running git diff"),
     });
