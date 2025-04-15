@@ -11,11 +11,14 @@ vi.mock("simple-git", () => ({
 import * as simpleGit from "simple-git";
 import * as exec from "../src/exec.js";
 import { diff, lsTree, show, status } from "../src/git.js";
+import { ConsoleLogger } from "../src/logger.js";
+
+const gitOpts = { logger: new ConsoleLogger(/*isDebug*/ true) };
 
 describe("git", () => {
   describe("e2e", () => {
     it("diff", async () => {
-      await expect(diff("HEAD", "HEAD")).resolves.toBe("");
+      await expect(diff("HEAD", "HEAD", gitOpts)).resolves.toBe("");
     });
 
     it("lsTree", async () => {
@@ -45,7 +48,7 @@ describe("git", () => {
     it("diff", async () => {
       vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("test diff");
 
-      await expect(diff("HEAD^", "HEAD")).resolves.toBe("test diff");
+      await expect(diff("HEAD^", "HEAD", gitOpts)).resolves.toBe("test diff");
     });
 
     it("lsTree", async () => {

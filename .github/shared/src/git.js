@@ -29,7 +29,7 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
   const git = simpleGit(cwd);
   const result = await git.diff(allArgs);
 
-  logger?.debug(result);
+  logger?.debug(`result: ${result}`);
 
   return result;
 }
