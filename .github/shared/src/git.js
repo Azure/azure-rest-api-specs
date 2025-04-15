@@ -1,7 +1,6 @@
 // @ts-check
 
 import { simpleGit } from "simple-git";
-import { execFile } from "./exec.js";
 
 /**
  * @typedef {import('./logger.js').ILogger} ILogger
@@ -81,29 +80,12 @@ export async function show(treeIsh, path, options = {}) {
 export async function status(options = {}) {
   const { args = [], cwd, logger } = options;
 
-  return await execGit(["status", ...args], {
-    cwd,
-    logger,
-  });
-}
+  logger?.info(`status(${JSON.stringify(args)})`);
 
-/**
- * @param {string[]} args
- * @param {Object} [options]
- * @param {string} [options.cwd] Current working directory. Default: process.cwd().
- * @param {ILogger} [options.logger]
- * @returns {Promise<string>}
- */
-async function execGit(args, options = {}) {
-  const { cwd, logger } = options;
+  const git = simpleGit(cwd);
+  const result = await git.raw(["status", ...args]);
 
-  // Ensure that git displays filenames as they are (without escaping)
-  const defaultArgs = ["-c", "core.quotepath=off"];
+  logger?.debug(`result: ${result}`);
 
-  return (
-    await execFile("git", [...defaultArgs, ...args], {
-      cwd,
-      logger,
-    })
-  ).stdout;
+  return result;
 }

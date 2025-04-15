@@ -32,7 +32,7 @@ describe("git.e2e", () => {
   it("status", async () => {
     // example: "## main...origin/main"
     await expect(
-      status({ args: ["-b", "--porcelain", "does-not-exist"] }),
+      status({ args: ["-b", "--porcelain", "--", "does-not-exist"] }),
     ).resolves.toContain("##");
   });
 });

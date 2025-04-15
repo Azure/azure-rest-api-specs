@@ -1,23 +1,27 @@
 // @ts-check
 
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
     diff: vi.fn().mockResolvedValue(""),
     raw: vi.fn().mockResolvedValue(""),
     show: vi.fn().mockResolvedValue(""),
+    status: vi.fn().mockResolvedValue(""),
   }),
 }));
 
 import * as simpleGit from "simple-git";
-import * as exec from "../src/exec.js";
 import { diff, lsTree, show, status } from "../src/git.js";
 import { ConsoleLogger } from "../src/logger.js";
 
 const gitOpts = { logger: new ConsoleLogger(/*isDebug*/ true) };
 
 describe("git", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("diff", async () => {
     vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("test diff");
 
@@ -41,25 +45,10 @@ describe("git", () => {
   });
 
   it("status", async () => {
-    const execSpy = vi
-      .spyOn(exec, "execFile")
-      .mockResolvedValue({ stdout: "test status", stderr: "" });
+    vi.mocked(simpleGit.simpleGit().raw).mockResolvedValue("test status");
 
     await expect(
       status({ args: ["-b", "--porcelain", "does-not-exist"] }),
     ).resolves.toBe("test status");
-
-    expect(execSpy).toBeCalledWith(
-      "git",
-      [
-        "-c",
-        "core.quotepath=off",
-        "status",
-        "-b",
-        "--porcelain",
-        "does-not-exist",
-      ],
-      expect.anything(),
-    );
   });
 });
