@@ -4,6 +4,7 @@ import { access, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
 
+// Wraps execNpm() to return error (and coalesce stdout and stderr) instead of throwing
 export async function runNpm(
   args: string[],
   cwd?: string,
