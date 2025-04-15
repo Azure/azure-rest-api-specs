@@ -22,7 +22,9 @@ export class NpmPrefixRule implements Rule {
       };
     }
 
-    const actual_npm_prefix = normalizePath((await runNpm(["prefix"], folder))[1].trim());
+    const actual_npm_prefix = normalizePath(
+      (await runNpm(["prefix"], folder))[1].trim(),
+    );
 
     let success = true;
     let stdOutput =
