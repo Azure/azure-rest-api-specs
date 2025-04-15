@@ -3,6 +3,7 @@ import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { access, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
+import { TsvHost } from "./tsv-host.js";
 
 // Wraps execNpm() to return error (and coalesce stdout and stderr) instead of throwing
 export async function runNpm(
