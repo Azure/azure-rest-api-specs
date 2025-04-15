@@ -33,23 +33,8 @@ describe("npm-prefix", function () {
         }
       },
     );
-    vi.mocked(simpleGit.simpleGit).mockImplementation((_folder) => {
-      return {
-        status: () => {
-          return Promise.resolve({
-            modified: [],
-            not_added: [],
-            isClean: () => true,
-          });
-        },
-        diff: () => {
-          return Promise.resolve("");
-        },
-        revparse: () => {
-          return Promise.resolve("c:/Git/azure-rest-api-specs");
-        },
-      };
-    });
+
+    vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("c:/Git/azure-rest-api-specs");
 
     vi.spyOn(utils, "normalizePath").mockImplementation((folder) =>
       utils.normalizePathImpl(folder, path.win32),
