@@ -1,16 +1,16 @@
-import { show, status } from "@azure-tools/specs-shared/git";
-import { consoleLogger } from "@azure-tools/specs-shared/logger";
-import { writeFileSync } from "fs";
 import _ from "lodash";
-import { parseYamlContent } from "./common.js";
+import { writeFileSync } from "fs";
 import { sdkLabels, SdkName } from "./sdk.js";
 import {
-  SdkPackageSuppressionsEntry,
-  sdkSuppressionsFileName,
-  SdkSuppressionsSection,
   SdkSuppressionsYml,
+  SdkSuppressionsSection,
+  sdkSuppressionsFileName,
+  SdkPackageSuppressionsEntry,
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
+import { parseYamlContent } from "./common.js";
+import { show, status } from "@azure-tools/specs-shared/git";
+import { consoleLogger } from "@azure-tools/specs-shared/logger";
 
 /**
  *
