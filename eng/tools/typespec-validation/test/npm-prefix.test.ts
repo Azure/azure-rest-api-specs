@@ -55,23 +55,7 @@ describe("npm-prefix", function () {
         }
       },
     );
-    vi.mocked(simpleGit.simpleGit).mockImplementation((_folder: string): IGitOperation => {
-      return {
-        status: () => {
-          return Promise.resolve({
-            modified: [],
-            not_added: [],
-            isClean: () => true,
-          });
-        },
-        diff: () => {
-          return Promise.resolve("");
-        },
-        revparse: () => {
-          return Promise.resolve("/Git/azure-rest-api-specs");
-        },
-      };
-    });
+    vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("/Git/azure-rest-api-specs");
 
     const result = await new NpmPrefixRule().execute(mockFolder);
 
