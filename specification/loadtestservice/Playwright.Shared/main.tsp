@@ -19,7 +19,7 @@ enum Versions {
 }
 
 @doc("Playwright workspace is the parent resource for most of the other service resources.")
-@resource("workspaces")
+@resource("playwrightworkspaces")
 model Workspace {
   @key("workspaceId")
   @doc("The workspace id.")
