@@ -2723,7 +2723,27 @@
         "firewallSku": {
           "description": "Firewall Sku used for FQDN Rules",
           "$ref": "#/definitions/FirewallSku"
+        },
+        "managedNetworkKind": {
+          "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+          "$ref": "#/definitions/ManagedNetworkKind"
+        },
+        "firewallPublicIpAddress": {
+          "description": "Public IP address assigned to the Azure Firewall.",
+          "type": "string"
         }
+      }
+    },
+    "ManagedNetworkKind": {
+      "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedNetworkKind",
+        "modelAsString": true
       }
     },
     "ManagedNetworkProvisionOptions": {
@@ -2787,6 +2807,24 @@
         },
         "type": {
           "$ref": "#/definitions/RuleType"
+        },
+        "errorInformation": {
+          "description": "Error information about an outbound rule of a machine learning workspace if RuleStatus is failed.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "parentRuleNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "discriminator": "type"
@@ -2911,7 +2949,10 @@
       "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Inactive",
-        "Active"
+        "Active",
+        "Provisioning",
+        "Deleting",
+        "Failed"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3704,4 +3745,3 @@
     }
   }
 }
-
