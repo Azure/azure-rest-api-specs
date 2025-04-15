@@ -5,8 +5,7 @@ import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 import { EmitAutorestRule } from "../src/rules/emit-autorest.js";
 
 import * as utils from "../src/utils.js";
-
-const folder = "specification/foo/Foo";
+import { mockFolder } from "./mocks.js";
 
 describe("emit-autorest", function () {
   let fileExistsSpy: MockInstance;
@@ -23,57 +22,57 @@ describe("emit-autorest", function () {
   });
 
   it("should succeed if no main.tsp", async function () {
-    fileExistsSpy.mockImplementation(async (file: string) => file != join(folder, "main.tsp"));
+    fileExistsSpy.mockImplementation(async (file: string) => file != join(mockFolder, "main.tsp"));
 
-    const result = await new EmitAutorestRule().execute(folder);
+    const result = await new EmitAutorestRule().execute(mockFolder);
 
     assert(result.success);
   });
 
   it("should succeed if emits autorest", async function () {
     readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+      async (_mockFolder: string) => `
 emit:
   - "@azure-tools/typespec-autorest"
 `,
     );
 
-    const result = await new EmitAutorestRule().execute(folder);
+    const result = await new EmitAutorestRule().execute(mockFolder);
 
     assert(result.success);
   });
 
   it("should fail if config is empty", async function () {
-    readTspConfigSpy.mockImplementation(async (_folder: string) => "");
+    readTspConfigSpy.mockImplementation(async (_mockFolder: string) => "");
 
-    const result = await new EmitAutorestRule().execute(folder);
+    const result = await new EmitAutorestRule().execute(mockFolder);
 
     assert(!result.success);
   });
 
   it("should fail if no emit", async function () {
     readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+      async (_mockFolder: string) => `
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 `,
     );
 
-    const result = await new EmitAutorestRule().execute(folder);
+    const result = await new EmitAutorestRule().execute(mockFolder);
 
     assert(!result.success);
   });
 
   it("should fail if no emit autorest", async function () {
     readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+      async (_mockFolder: string) => `
 emit:
 - foo
 `,
     );
 
-    const result = await new EmitAutorestRule().execute(folder);
+    const result = await new EmitAutorestRule().execute(mockFolder);
 
     assert(!result.success);
   });

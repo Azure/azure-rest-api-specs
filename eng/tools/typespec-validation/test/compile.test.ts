@@ -1,22 +1,7 @@
+import { mockAll } from "./mocks.js";
+mockAll();
+
 import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
-
-vi.mock("fs/promises", () => ({
-  readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
-}));
-
-vi.mock("globby", () => ({
-  globby: vi.fn().mockResolvedValue([]),
-}));
-
-vi.mock("simple-git", () => ({
-  simpleGit: vi.fn().mockReturnValue({
-    status: vi.fn().mockResolvedValue({
-      modified: [],
-      not_added: [],
-      isClean: () => true,
-    }),
-  }),
-}));
 
 import * as fsPromises from "fs/promises";
 import * as globby from "globby";
