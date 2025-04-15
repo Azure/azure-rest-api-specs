@@ -21,6 +21,8 @@ $SuccessConvertRPlist = @()
 $FailConvertRPlist = @()
 $SuccessCompileRPlist = @()
 $FailCompileRPlist = @()
+$MultiVersionlist = @()
+$IllegalRPList = @()
 
 if (Test-Path $ServiceListFilePath) {
     Get-Content $ServiceListFilePath | ForEach-Object {
@@ -55,23 +57,58 @@ $RPList | ForEach-Object {
             Push-Location $TSPFolderPath
             $readmeFilePath = Join-Path $serviceFolder "resource-manager" "readme.md"
 
+            # Tag analyze
             $configContent = Get-Content -Path $readmeFilePath -Raw
-            $tagPattern = 'tag:\s*([^`]+)```'
-            $matches = [regex]::Matches($configContent, $tagPattern)
-            $defaultTag = $matches[0].Groups[1].Value;
-            # Tag regex pattern
-            # $inputPattern = '### Tag: $searchTag\s*```yaml \$(tag) == "$searchTag"\s*input-file:\s*([^`]+)```'
-
+            $tagPattern = 'tag:\s*([^\r\n]+)'
+            $matchesResult = [regex]::Matches($configContent, $tagPattern)
+            $defaultTag = $matchesResult[0].Groups[1].Value.Trim()
+            $inputPattern = "yaml \$\(tag\) == '$defaultTag'\s*input-file:\s*([^``]+)``````"
+            $matchesResult = [regex]::Matches($configContent, $inputPattern)
+            $tagContent = $matchesResult[0].Groups[1].Value
+            $apiPattern = "/(stable|preview)/([a-z0-9-]+)/(.*).json"
+            $matchesResult = [regex]::Matches($tagContent, $apiPattern)
+            $inputFiles = @()
+            $stableFlag = $false
+            $previewFlag = $false
+            foreach ($match in $matchesResult) {
+                if ($match.value.Contains("stable")) {
+                    $stableFlag = $true
+                }elseif ($match.value.Contains("preview")) {
+                    $previewFlag = $true
+                }
+                $inputFiles += $match
+            }
+            if ($stableFlag -and $previewFlag) {
+                Write-Output "Both stable and preview versions found in $readmeFilePath"
+                $MultiVersionlist += $_
+            }
+            else {
+                $versionPattern = "\d{4}-\d{2}-\d{2}"
+                $versions = @()
+                foreach ($file in $inputFiles) {
+                    $matchesResult = [regex]::Matches($file, $versionPattern)
+                    if ($matchesResult[0].Value -notin $versions) {
+                        $versions += $matchesResult[0].Value
+                    }
+                }
+                if ($versions.Count -gt 1) {
+                    $MultiVersionlist += $_
+                }
+            }
 
             if ($NeedConvert){
                 $output = Invoke-Expression "tsp-client convert --swagger-readme $readmeFilePath --arm --fully-compatible" 2>&1 | Out-String
-            # Write-Output "Command Output:"
-            # Write-Output $output
+                if ($output.Contains("Resource schema not the same as defined in common-type")){
+                    $IllegalRPList += $_
+                    Write-Output "Illegal RP: $_"
+                }
+                # Write-Output "Command Output:"
+                # Write-Output $output
             if ($LASTEXITCODE) {
                 Write-Output "Failed to run convertion tool on $_."
                 $FailConvertRPlist += $_
-                # Remove folder failed some how
-                # Remove-Item -Path $TSPFolderPath -Recurse -Force
+                Pop-Location
+                Remove-Item -Path $TSPFolderPath -Recurse -Force
             }
             else {
                 Write-Output "Successfully run convertion tool on $_."
@@ -112,10 +149,18 @@ $SuccessCompileRPlistPath = Join-Path $testResultsFolder  "SuccessCompileRPlist.
 New-Item -Path $SuccessCompileRPlistPath -ItemType File
 $FailCompileRPlistPath = Join-Path $testResultsFolder  "FailCompileRPlist.txt"
 New-Item -Path $FailCompileRPlistPath -ItemType File
+$MultiVersionlistPath = Join-Path $testResultsFolder  "MultiVersionlist.txt"
+New-Item -Path $MultiVersionlistPath -ItemType File
+$IllegalRPListPath = Join-Path $testResultsFolder  "IllegalRPList.txt"
+New-Item -Path $IllegalRPListPath -ItemType File
 
 $SuccessConvertRPlist | Out-File -FilePath $SuccessConvertRPlistPath
 $FailConvertRPlist | Out-File -FilePath $FailConvertRPlistPath
 $SuccessCompileRPlist | Out-File -FilePath $SuccessCompileRPlistPath
 $FailCompileRPlist | Out-File -FilePath $FailCompileRPlistPath
+$MultiVersionlist | Out-File -FilePath $MultiVersionlistPath
+$IllegalRPList | Out-File -FilePath $IllegalRPListPath
+
+Pop-Location
 
 exit 0
