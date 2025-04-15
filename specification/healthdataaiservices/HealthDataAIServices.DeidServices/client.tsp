@@ -14,4 +14,8 @@ namespace HealthDataAIServices.DeidServices {
   @@access(listJobDocuments, Access.internal, "csharp,python");
   @@access(listJobs, Access.internal, "csharp,python");
   @@clientName(DeidentifyTextRequest.body, "content", "csharp");
+  @@clientName(Azure.Core.Foundations.OperationState,
+    "operationStatus",
+    "java"
+  );
 }
