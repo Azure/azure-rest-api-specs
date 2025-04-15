@@ -1,7 +1,7 @@
 import { join, dirname, sep } from "path";
 import { readFile, readdir } from "fs/promises";
 import { pathExists } from "./util.js";
-import { specification } from "../../../../.github/src/changed-files.js";
+import { specification } from "@azure-tools/specs-shared/changed-files";
 
 import {
   getAllTags,
