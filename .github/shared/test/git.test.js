@@ -35,7 +35,9 @@ describe("git", () => {
 
   describe("mocked", () => {
     it("diff", async () => {
-      const execSpy = vi.spyOn(exec, "execFile").mockResolvedValue("test diff");
+      const execSpy = vi
+        .spyOn(exec, "execFile")
+        .mockResolvedValue({ stdout: "test diff", stderr: "" });
 
       await expect(diff("HEAD^", "HEAD")).resolves.toBe("test diff");
 
@@ -49,7 +51,7 @@ describe("git", () => {
     it("lsTree", async () => {
       const execSpy = vi
         .spyOn(exec, "execFile")
-        .mockResolvedValue("test lstree");
+        .mockResolvedValue({ stdout: "test lstree", stderr: "" });
 
       await expect(
         lsTree("HEAD", "specification/contosowidgetmanager"),
@@ -69,7 +71,9 @@ describe("git", () => {
     });
 
     it("show", async () => {
-      const execSpy = vi.spyOn(exec, "execFile").mockResolvedValue("test show");
+      const execSpy = vi
+        .spyOn(exec, "execFile")
+        .mockResolvedValue({ stdout: "test show", stderr: "" });
 
       await expect(
         show("HEAD", "specification/contosowidgetmanager/cspell.yaml"),
@@ -90,7 +94,7 @@ describe("git", () => {
     it("status", async () => {
       const execSpy = vi
         .spyOn(exec, "execFile")
-        .mockResolvedValue("test status");
+        .mockResolvedValue({ stdout: "test status", stderr: "" });
 
       await expect(
         status({ args: ["-b", "--porcelain", "does-not-exist"] }),
