@@ -5,7 +5,7 @@ import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
-import { fileExists, getSuppressions } from "../utils.js";
+import { fileExists, getSuppressions, runNpm } from "../utils.js";
 import { filterAsync } from "@azure-tools/specs-shared/array";
 
 export class CompileRule implements Rule {
@@ -18,7 +18,7 @@ export class CompileRule implements Rule {
     let errorOutput = "";
 
     if (await fileExists(path.join(folder, "main.tsp"))) {
-      let [err, stdout, stderr] = await host.runNpm(
+      let [err, stdout, stderr] = await runNpm(
         ["exec", "--no", "--", "tsp", "compile", "--list-files", "--warn-as-error", folder],
       );
 
@@ -171,7 +171,7 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (await fileExists(clientTsp)) {
-      let [err, stdout, stderr] = await host.runNpm(
+      let [err, stdout, stderr] = await runNpm(
         ["exec", "--no", "--", "tsp", "compile", "--no-emit", "--warn-as-error", clientTsp]
       );
       if (err) {

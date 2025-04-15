@@ -1,6 +1,7 @@
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { TsvHost } from "../tsv-host.js";
+import { runNpm } from "../utils.js";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
@@ -11,7 +12,7 @@ export class FormatRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
 
-    let [err, stdout, stderr] = await host.runNpm(
+    let [err, stdout, stderr] = await runNpm(
       // Format parent folder to include shared files
       ["exec", "--no", "--", "tsp", "format", "../**/*.tsp"],
       folder,
@@ -23,7 +24,7 @@ export class FormatRule implements Rule {
     stdOutput += stdout;
     errorOutput += stderr;
 
-    [err, stdout, stderr] = await host.runNpm(
+    [err, stdout, stderr] = await runNpm(
       ["exec", "--no", "--", "prettier", "--write", "tspconfig.yaml"],
       folder,
     );

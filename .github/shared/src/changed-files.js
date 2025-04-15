@@ -29,7 +29,7 @@ export async function getChangedFiles(options = {}) {
     logger: logger,
   });
 
-  const files = result.trim().split("\n");
+  const files = result.stdout.trim().split("\n");
 
   logger?.info("Changed Files:");
   for (const file of files) {
