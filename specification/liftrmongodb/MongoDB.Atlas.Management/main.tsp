@@ -65,18 +65,18 @@ model BaseResourceProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@doc("Partner's specific Properties")
+@doc("MongoDB specific Properties")
 model PartnerProperties {
-  @doc("Organization Id in partner's system")
+  @doc("Organization Id in MongoDB system")
   organizationId?: string;
 
-  @doc("Redirect URL for the partner")
+  @doc("Redirect URL for the MongoDB")
   redirectUrl?: string;
 
-  @doc("Organization name in partner's system")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$")
-  @minLength(1)
-  @maxLength(50)
+  @doc("Organization name in MongoDB system")
+  @pattern("^[a-zA-Z0-9 _\\-().,:@+&',]{1,64}$")
+  @minLength(1) // Minimum length constraint
+  @maxLength(64) // Maximum length constraint
   organizationName: string;
 }
 
@@ -84,7 +84,7 @@ model PartnerProperties {
  * BaseResourceProperties contains Marketplace, useDetail related properties*/
 @doc("Properties specific to Organization")
 model OrganizationProperties is BaseResourceProperties {
-  @doc("partner properties")
+  @doc("MongoDB properties")
   partnerProperties?: PartnerProperties;
 }
 

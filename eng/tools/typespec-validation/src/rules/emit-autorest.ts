@@ -3,22 +3,23 @@ import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
+import { fileExists, readTspConfig } from "../utils.js";
 
 export class EmitAutorestRule implements Rule {
   readonly name = "EmitAutorest";
 
   readonly description = 'Must emit "@azure-tools/typespec-autorest" by default';
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(_host: TsvHost, folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
 
-    const mainTspExists = await host.checkFileExists(join(folder, "main.tsp"));
+    const mainTspExists = await fileExists(join(folder, "main.tsp"));
     stdOutput += `mainTspExists: ${mainTspExists}\n`;
 
     if (mainTspExists) {
-      const configText = await host.readTspConfig(folder);
+      const configText = await readTspConfig(folder);
       const config = yamlParse(configText);
 
       const emit = config?.emit;

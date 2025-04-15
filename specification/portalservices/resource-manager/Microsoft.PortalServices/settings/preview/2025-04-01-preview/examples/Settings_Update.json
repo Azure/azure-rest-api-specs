@@ -1,0 +1,56 @@
+{
+  "operationId": "Settings_Update",
+  "title": "Update tenant-level Azure Portal Settings",
+  "parameters": {
+    "name": "default",
+    "api-version": "2025-04-01-preview",
+    "properties": {
+      "properties": {
+        "feedbackControlPolicy": {
+          "connectedExperiences": "Disabled",
+          "policyAllowFeedback": "Disabled",
+          "policyAllowSurvey": "Disabled",
+          "policyAllowScreenshot": "Enabled",
+          "policyAllowContact": "Disabled",
+          "policyAllowContent": "Disabled"
+        },
+        "multiFactorAuthentication": {
+          "portalEnforcement": "OptOut",
+          "portalJustification": "Justification for opting out of MFA enforcement",
+          "portalEnforcementDate": "2025-03-15T00:00:00Z",
+          "armEnforcementDate": "2025-10-15T00:00:00Z",
+          "armJustification": "Justification for postponing MFA enforcement"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "feedbackControlPolicy": {
+            "connectedExperiences": "Disabled",
+            "policyAllowFeedback": "Disabled",
+            "policyAllowSurvey": "Disabled",
+            "policyAllowScreenshot": "Enabled",
+            "policyAllowContact": "Disabled",
+            "policyAllowContent": "Disabled",
+            "policyEmailCollectionDefault": "Enabled",
+            "policyScreenshotDefault": "Disabled",
+            "policyContentSamplesDefault": "Enabled"
+          },
+          "multiFactorAuthentication": {
+            "portalEnforcement": "OptOut",
+            "portalJustification": "Justification for opting out of MFA enforcement",
+            "portalEnforcementDate": "2025-03-15T00:00:00Z",
+            "armEnforcementDate": "2025-10-15T00:00:00Z",
+            "armJustification": "Justification for postponing MFA enforcement"
+          }
+        },
+        "id": "/providers/Microsoft.PortalServices/settings/default",
+        "name": "default",
+        "type": "Microsoft.PortalServices/settings"
+      }
+    }
+  }
+}
