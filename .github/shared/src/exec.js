@@ -1,16 +1,47 @@
 // @ts-check
 
 import child_process from "child_process";
+import { dirname, join } from "path";
 import { promisify } from "util";
 const execFileImpl = promisify(child_process.execFile);
 
 /**
+ * @typedef {Object} ExecOptions
+ * @property {string} [cwd] Current working directory.  Default: process.cwd().
+ * @property {import('./logger.js').ILogger} [logger]
+ * @property {number} [maxBuffer] Max bytes allowed on stdout or stderr.  Default: 16 * 1024 * 1024.
+ */
+
+/**
+ * @typedef {Object} ExecResult
+ * @property {string} stdout
+ * @property {string} stderr
+ */
+
+/**
+ * @typedef {Error & { stdout?: string, stderr?: string, code?: number }} ExecError
+ */
+
+/**
+ * Checks whether an unknown error object is an ExecError.
+ * @param {unknown} error
+ * @returns {error is ExecError}
+ */
+export function isExecError(error) {
+  if (!(error instanceof Error)) return false;
+
+  const e = /** @type {ExecError} */ (error);
+  return typeof e.stdout === "string" || typeof e.stderr === "string";
+}
+
+/**
+ * Wraps `child_process.execFile()`, adding logging and a larger default maxBuffer.
+ *
  * @param {string} file
  * @param {string[]} args
- * @param {Object} [options]
- * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
- * @param {import('./logger.js').ILogger} [options.logger]
- * @param {number} [options.maxBuffer]
+ * @param {ExecOptions} [options]
+ * @returns {Promise<ExecResult>}
+ * @throws {ExecError}
  */
 export async function execFile(file, args, options = {}) {
   const {
@@ -23,15 +54,59 @@ export async function execFile(file, args, options = {}) {
 
   logger?.info(`execFile("${file}", ${JSON.stringify(args)})`);
 
-  // TODO: Handle errors
-  // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
-  const result = await execFileImpl(file, args, {
-    cwd,
-    maxBuffer,
-  });
+  try {
+    // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
+    const result = await execFileImpl(file, args, {
+      cwd,
+      maxBuffer,
+    });
 
-  logger?.debug(`stdout: '${result.stdout}'`);
-  logger?.debug(`stderr: '${result.stderr}'`);
+    logger?.debug(`stdout: '${result.stdout}'`);
+    logger?.debug(`stderr: '${result.stderr}'`);
 
-  return result.stdout;
+    return result;
+  } catch (error) {
+    logger?.debug(`error: '${JSON.stringify(error)}'`);
+    throw error;
+  }
+}
+
+/**
+ * Calls `execFile()` with appropriate arguments to run `npm` on all platforms
+ *
+ * @param {string[]} args
+ * @param {ExecOptions} [options]
+ * @returns {Promise<ExecResult>}
+ * @throws {ExecError}
+ */
+export async function execNpm(args, options = {}) {
+  const { file, defaultArgs } =
+    process.platform === "win32"
+      ? {
+          // Only way I could find to run "npm" on Windows, without using the shell (e.g. "cmd /c npm ...")
+          //
+          // "node.exe", ["--", "npm-cli.js", ...args]
+          //
+          // The "--" MUST come BEFORE "npm-cli.js", to ensure args are sent to the script unchanged.
+          // If the "--" comes after "npm-cli.js", the args sent to the script will be ["--", ...args],
+          // which is NOT equivalent, and can break if args itself contains another "--".
+
+          // example: "C:\Program Files\nodejs\node.exe"
+          file: process.execPath,
+
+          // example: "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"
+          defaultArgs: [
+            "--",
+            join(
+              dirname(process.execPath),
+              "node_modules",
+              "npm",
+              "bin",
+              "npm-cli.js",
+            ),
+          ],
+        }
+      : { file: "npm", defaultArgs: [] };
+
+  return await execFile(file, [...defaultArgs, ...args], options);
 }

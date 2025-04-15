@@ -72,7 +72,7 @@ export async function getSdkSuppressionsFileContent(
   path: string,
 ): Promise<string | object | undefined | null> {
   try {
-    const suppressionFileContent = await show(ref, path, { logger: consoleLogger });
+    const suppressionFileContent = (await show(ref, path, { logger: consoleLogger })).stdout;
     console.log(`Found content in ${ref}#${path}`);
     return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
@@ -194,7 +194,7 @@ export async function updateSdkSuppressionsLabels(
   outputFile?: string,
 ): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
   try {
-    const result = await status({ logger: consoleLogger });
+    const result = (await status({ logger: consoleLogger })).stdout;
     console.log("Git status:", result);
   } catch (err) {
     console.error("Error running git command:", err);
