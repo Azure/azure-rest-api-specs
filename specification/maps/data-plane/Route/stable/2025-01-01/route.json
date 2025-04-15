@@ -1510,13 +1510,7 @@
               "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "shortName": {
-                    "type": "string",
-                    "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA. This is only available for the US, Canada, and Mexico."
-                  }
-                }
+                "$ref": "#/definitions/AdminDistrictTruck"
               }
             }
           }
@@ -1739,6 +1733,16 @@
         "tollDistanceInMeters": {
           "description": "The total distance, measured in meters, along the route that includes toll roads.",
           "type": "number"
+        }
+      }
+    },
+    "AdminDistrictTruck": {
+      "description": "The subdivision name in the country or region for an address. This element is typically treated as the first order administrative subdivision, but in some cases it also contains the second, third, or fourth order subdivision in a country, dependency, or region.",
+      "type": "object",
+      "properties": {
+        "shortName": {
+          "type": "string",
+          "description": "The short name for the corresponding adminDistrict field, \nFor adminDistrict[0], this could be short name of state such as WA. This is only available for the US, Canada, and Mexico."
         }
       }
     },
