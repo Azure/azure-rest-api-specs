@@ -1,14 +1,41 @@
+import { afterEach, beforeEach, describe, expect, it, MockInstance, vi } from "vitest";
+
+vi.mock("fs/promises", () => ({
+  readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
+}));
+
+vi.mock("globby", () => ({
+  globby: vi.fn().mockResolvedValue([]),
+}));
+
+import * as fsPromises from "fs/promises";
+import * as globby from "globby";
 import path from "path";
-import { describe, expect, it } from "vitest";
 import { RuleResult } from "../src/rule-result.js";
 import { CompileRule } from "../src/rules/compile.js";
 import { TsvHost } from "../src/tsv-host.js";
 import { TsvTestHost } from "./tsv-test-host.js";
 
+import * as utils from "../src/utils.js";
+
 const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
 
 describe("compile", function () {
+  let runNpmSpy: MockInstance;
+
+  beforeEach(() => {
+    vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+    runNpmSpy = vi
+      .spyOn(utils, "runNpm")
+      .mockImplementation(async (args, cwd) => [null, `runNpm ${args.join(" ")} at ${cwd}`, ""]);
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("should succeed if project can compile", async function () {
     const host = new TsvTestHost();
 
@@ -26,14 +53,17 @@ describe("compile", function () {
       // ensure examples are skipped
       `${swaggerPath.replace("foo.json", "examples/example.json")}\n`;
 
-    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      return [null, compileOutput, ""];
-    };
+    runNpmSpy.mockImplementation(
+      async (_args: string[], _cwd?: string): Promise<[Error | null, string, string]> => {
+        return [null, compileOutput, ""];
+      },
+    );
 
     // ensure handwritten swaggers are ignored
-    host.globby = async () => [swaggerPath, handwrittenSwaggerPath];
-    host.readFile = async (path) =>
-      path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}";
+    vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath, handwrittenSwaggerPath]);
+    vi.mocked(fsPromises.readFile).mockImplementation(async (path) =>
+      path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}",
+    );
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: true,
@@ -42,13 +72,15 @@ describe("compile", function () {
 
   it("should fail if no emitter was configured", async function () {
     let host = new TsvTestHost();
-    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("tsp compile")) {
-        return [null, "no emitter was configured", ""];
-      } else {
-        return [null, "", ""];
-      }
-    };
+    runNpmSpy.mockImplementation(
+      async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        if (args.join(" ").includes("tsp compile")) {
+          return [null, "no emitter was configured", ""];
+        } else {
+          return [null, "", ""];
+        }
+      },
+    );
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: false,
@@ -57,13 +89,15 @@ describe("compile", function () {
 
   it("should fail if no output was generated", async function () {
     let host = new TsvTestHost();
-    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("tsp compile")) {
-        return [null, "no output was generated", ""];
-      } else {
-        return [null, "", ""];
-      }
-    };
+    runNpmSpy.mockImplementation(
+      async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        if (args.join(" ").includes("tsp compile")) {
+          return [null, "no output was generated", ""];
+        } else {
+          return [null, "", ""];
+        }
+      },
+    );
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: false,
@@ -72,11 +106,13 @@ describe("compile", function () {
 
   it("should throw if output has no generated swaggers", async function () {
     let host = new TsvTestHost();
-    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => [
-      null,
-      "not-swagger",
-      "",
-    ];
+    runNpmSpy.mockImplementation(
+      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => [
+        null,
+        "not-swagger",
+        "",
+      ],
+    );
 
     await expect(
       new CompileRule().execute(host, TsvTestHost.folder),
@@ -88,22 +124,24 @@ describe("compile", function () {
   it("should fail if extra swaggers", async function () {
     const host = new TsvTestHost();
 
-    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      return [null, swaggerPath, ""];
-    };
+    runNpmSpy.mockImplementation(
+      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        return [null, swaggerPath, ""];
+      },
+    );
 
     // Simulate extra swagger
-    host.globby = async () => [
+    vi.mocked(globby.globby).mockImplementation(async () => [
       swaggerPath,
       swaggerPath.replace("2022", "2023"),
       swaggerPath.replace("2023", "2024"),
-    ];
+    ]);
 
-    host.readFile = async (path) => {
-      return path.includes("2024")
+    vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
+      return path.toString().includes("2024")
         ? '{"info": {"x-typespec-generated": true}}'
         : '{"info": {"x-cadl-generated": true}}';
-    };
+    });
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: false,
@@ -114,24 +152,26 @@ describe("compile", function () {
   it("supports suppressions", async function () {
     const host = new TsvTestHost();
 
-    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      return [null, swaggerPath, ""];
-    };
+    runNpmSpy.mockImplementation(
+      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        return [null, swaggerPath, ""];
+      },
+    );
 
     // Simulate extra swagger
-    host.globby = async () => [
+    vi.mocked(globby.globby).mockImplementation(async () => [
       swaggerPath,
       swaggerPath.replace("2022", "2023"),
       swaggerPath.replace("2023", "2024"),
-    ];
+    ]);
 
-    host.readFile = async (path) => {
-      return path.includes("2024")
+    vi.mocked(fsPromises.readFile).mockImplementation(async (path) => {
+      return path.toString().includes("2024")
         ? '{"info": {"x-typespec-generated": true}}'
         : '{"info": {"x-cadl-generated": true}}';
-    };
+    });
 
-    host.getSuppressions = async (path) => {
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async (path) => {
       return path.includes("2023") || path.includes("2024")
         ? [
             {
@@ -143,7 +183,7 @@ describe("compile", function () {
             },
           ]
         : [];
-    };
+    });
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).resolves.toMatchObject({
       success: true,
@@ -153,11 +193,13 @@ describe("compile", function () {
   it("throws on invalid suppressions", async function () {
     const host = new TsvTestHost();
 
-    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      return [null, swaggerPath, ""];
-    };
+    runNpmSpy.mockImplementation(
+      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        return [null, swaggerPath, ""];
+      },
+    );
 
-    host.getSuppressions = async () => [
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async () => [
       {
         tool: "TypeSpecValidation",
         rules: ["Compile"],
@@ -165,7 +207,7 @@ describe("compile", function () {
         paths: ["**/*"],
         reason: "test reason",
       },
-    ];
+    ]);
 
     await expect(new CompileRule().execute(host, TsvTestHost.folder)).rejects.toThrow(
       "Invalid path",
@@ -174,21 +216,20 @@ describe("compile", function () {
 
   it("should skip git diff check if compile fails", async function () {
     let host = new TsvTestHost();
-    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("tsp compile")) {
-        return [
-          { name: "compilation_error", message: "compilation error" },
-          "running tsp compile",
-          "compilation failure",
-        ];
-      }
-      return [null, "", ""];
-    };
-    host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runCmd(
-        "",
-        "",
-      )}`;
+    runNpmSpy.mockImplementation(
+      async (args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        if (args.join(" ").includes("tsp compile")) {
+          return [
+            { name: "compilation_error", message: "compilation error" },
+            "running tsp compile",
+            "compilation failure",
+          ];
+        }
+        return [null, "", ""];
+      },
+    );
+    host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
+      let stdOut = `Running git diff on folder ${folder}`;
       return {
         success: true,
         stdOutput: stdOut,
@@ -204,17 +245,17 @@ describe("compile", function () {
   it("should fail if git diff fails", async function () {
     let host = new TsvTestHost();
 
-    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      return [null, swaggerPath, ""];
-    };
+    runNpmSpy.mockImplementation(
+      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        return [null, swaggerPath, ""];
+      },
+    );
 
-    host.globby = async () => [swaggerPath];
+    vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath]);
 
-    host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runCmd(
-        "",
-        "",
-      )}`;
+    host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
+      let stdOut = `Running git diff on folder ${folder}`;
+
       return {
         success: false,
         stdOutput: stdOut,
@@ -231,17 +272,16 @@ describe("compile", function () {
   it("should succeed if git diff succeeds", async function () {
     let host = new TsvTestHost();
 
-    host.runCmd = async (_cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      return [null, swaggerPath, ""];
-    };
+    runNpmSpy.mockImplementation(
+      async (_args: string[], _cwd: string): Promise<[Error | null, string, string]> => {
+        return [null, swaggerPath, ""];
+      },
+    );
 
-    host.globby = async () => [swaggerPath];
+    vi.mocked(globby.globby).mockImplementation(async () => [swaggerPath]);
 
-    host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runCmd(
-        "",
-        "",
-      )}`;
+    host.gitDiffTopSpecFolder = async (_host: TsvHost, folder: string): Promise<RuleResult> => {
+      let stdOut = `Running git diff on folder ${folder}`;
       return {
         success: true,
         stdOutput: stdOut,
