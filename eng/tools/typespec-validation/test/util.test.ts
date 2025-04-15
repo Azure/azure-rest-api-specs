@@ -1,4 +1,4 @@
-import { mockSimpleGit } from "./mocks.js";
+import { mockFolder, mockSimpleGit } from "./mocks.js";
 mockSimpleGit();
 
 import { strict as assert } from "node:assert";
@@ -6,8 +6,6 @@ import path from "path";
 import process from "process";
 import { describe, it } from "vitest";
 import { gitDiffTopSpecFolder, normalizePath } from "../src/utils.js";
-
-const folder = "specification/foo/Foo";
 
 describe("util", function () {
   describe("normalize", function () {
@@ -36,7 +34,7 @@ describe("util", function () {
   });
   describe("gitDiff", function () {
     it("should succeed if git diff produces no output", async function () {
-      const result = await gitDiffTopSpecFolder(folder);
+      const result = await gitDiffTopSpecFolder(mockFolder);
       assert(result.success);
     });
   });
