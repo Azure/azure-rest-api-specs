@@ -40,6 +40,6 @@ interface Evaluations {
       @body
       evaluation: Evaluation;
     },
-    Evaluation
+    ResourceCreatedResponse<Evaluation>
   >;
 }
