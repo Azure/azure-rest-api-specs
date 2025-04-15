@@ -23,10 +23,7 @@ describe("changedFiles", () => {
         "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
       ];
 
-      vi.spyOn(git, "diff").mockResolvedValue({
-        stdout: files.join("\n"),
-        stderr: "",
-      });
+      vi.spyOn(git, "diff").mockResolvedValue(files.join("\n"));
 
       await expect(getChangedFiles(options)).resolves.toEqual(files);
     },

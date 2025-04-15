@@ -38,7 +38,7 @@ export default async function incrementalTypeSpec({ core }) {
     /** @type string */
     let swaggerText;
     try {
-      swaggerText = (await show("HEAD", file, options)).stdout;
+      swaggerText = await show("HEAD", file, options);
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
         // To simplify logic, if PR deletes a swagger file, it's not "incremental typespec"
@@ -73,7 +73,7 @@ export default async function incrementalTypeSpec({ core }) {
 
     let readmeText;
     try {
-      readmeText = (await show("HEAD", readmeFile, options)).stdout;
+      readmeText = await show("HEAD", readmeFile, options);
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
         // To simplify logic, if PR deletes a readme file, it's not "incremental typespec"
@@ -109,12 +109,10 @@ export default async function incrementalTypeSpec({ core }) {
 
   // Ensure that each changed spec dir contained at least one typespec-generated swagger in the base commitish
   for (const changedSpecDir of changedSpecDirs) {
-    const specFilesBaseBranch = (
-      await lsTree("HEAD^", changedSpecDir, {
-        args: ["-r", "--name-only"],
-        ...options,
-      })
-    ).stdout;
+    const specFilesBaseBranch = await lsTree("HEAD^", changedSpecDir, {
+      args: ["-r", "--name-only"],
+      ...options,
+    });
 
     // Filter files to only include RM swagger files
     const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
@@ -131,7 +129,7 @@ export default async function incrementalTypeSpec({ core }) {
     let containsTypeSpecGeneratedSwagger = false;
     // TODO: Add lint rule to prevent using "for...in" instead of "for...of"
     for (const file of specRmSwaggerFilesBaseBranch) {
-      const baseSwagger = (await show("HEAD^", file, options)).stdout;
+      const baseSwagger = await show("HEAD^", file, options);
       const baseSwaggerObj = JSON.parse(baseSwagger);
       if (baseSwaggerObj["info"]?.["x-typespec-generated"]) {
         core.info(
