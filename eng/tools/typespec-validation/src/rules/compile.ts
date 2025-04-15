@@ -1,4 +1,5 @@
 import { readFile } from "fs/promises";
+import { globby } from "globby";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
@@ -87,7 +88,7 @@ export class CompileRule implements Rule {
             "**",
             outputFilename,
           );
-          const allSwaggers = (await host.globby(pattern, { ignore: ["**/examples/**"] })).map(
+          const allSwaggers = (await globby(pattern, { ignore: ["**/examples/**"] })).map(
             // Globby always returns posix paths
             (p) => normalize(p),
           );

@@ -1,4 +1,5 @@
 import { readFile } from "fs/promises";
+import { globby } from "globby";
 import path from "path";
 import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
@@ -25,7 +26,7 @@ export class FolderStructureRule implements Rule {
       };
     }
 
-    const tspConfigs = await host.globby([`${folder}/**tspconfig.*`]);
+    const tspConfigs = await globby([`${folder}/**tspconfig.*`]);
     stdOutput += `config files: ${JSON.stringify(tspConfigs)}\n`;
     tspConfigs.forEach((file: string) => {
       if (!file.endsWith("tspconfig.yaml")) {
@@ -113,7 +114,7 @@ export class FolderStructureRule implements Rule {
 
     const teamFolderResolved = path.resolve(gitRoot, teamFolder);
 
-    const tsps = await host.globby("**/*.tsp", { cwd: teamFolderResolved });
+    const tsps = await globby("**/*.tsp", { cwd: teamFolderResolved });
 
     for (const tsp of tsps) {
       const tspResolved = path.resolve(teamFolderResolved, tsp);
