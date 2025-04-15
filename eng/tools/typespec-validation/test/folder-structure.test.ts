@@ -1,27 +1,10 @@
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
-
-vi.mock("fs/promises", () => ({
-  readFile: vi.fn().mockResolvedValue('{"info": {"x-typespec-generated": true}}'),
-}));
-
-vi.mock("globby", () => ({
-  globby: vi.fn().mockResolvedValue([]),
-}));
-
-vi.mock("simple-git", () => ({
-  simpleGit: vi.fn().mockReturnValue({
-    revparse: vi.fn().mockResolvedValue(""),
-    status: vi.fn().mockResolvedValue({
-      modified: [],
-      not_added: [],
-      isClean: () => true,
-    }),
-  }),
-}));
+import { mockAll } from "./mocks.js";
+mockAll();
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import * as globby from "globby";
 import { strict as assert } from "node:assert";
+import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 
 import * as utils from "../src/utils.js";
