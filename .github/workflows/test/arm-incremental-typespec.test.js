@@ -28,7 +28,9 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    const showSpy = vi.spyOn(git, "show").mockResolvedValue(swaggerHandWritten);
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockResolvedValue({ stdout: swaggerHandWritten, stderr: "" });
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
@@ -44,10 +46,12 @@ describe("incrementalTypeSpec", () => {
 
     const showSpy = vi
       .spyOn(git, "show")
-      .mockResolvedValue(swaggerTypeSpecGenerated);
+      .mockResolvedValue({ stdout: swaggerTypeSpecGenerated, stderr: "" });
 
     // "git ls-tree" returns "" if the spec folder doesn't exist in the base branch
-    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue("");
+    const lsTreeSpy = vi
+      .spyOn(git, "lsTree")
+      .mockResolvedValue({ stdout: "", stderr: "" });
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
@@ -100,7 +104,9 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([readmePath]);
 
-    const showSpy = vi.spyOn(git, "show").mockResolvedValue("");
+    const showSpy = vi
+      .spyOn(git, "show")
+      .mockResolvedValue({ stdout: "", stderr: "" });
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
@@ -129,13 +135,17 @@ describe("incrementalTypeSpec", () => {
 
     vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([swaggerPath]);
 
-    const showSpy = vi
-      .spyOn(git, "show")
-      .mockImplementation((treeIsh) =>
-        treeIsh == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
-      );
+    const showSpy = vi.spyOn(git, "show").mockImplementation((treeIsh) => {
+      return {
+        stdout:
+          treeIsh == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
+        stderr: "",
+      };
+    });
 
-    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
+    const lsTreeSpy = vi
+      .spyOn(git, "lsTree")
+      .mockResolvedValue({ stdout: swaggerPath, stderr: "" });
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
@@ -184,9 +194,11 @@ describe("incrementalTypeSpec", () => {
 
     const showSpy = vi
       .spyOn(git, "show")
-      .mockResolvedValue(swaggerTypeSpecGenerated);
+      .mockResolvedValue({ stdout: swaggerTypeSpecGenerated, stderr: "" });
 
-    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
+    const lsTreeSpy = vi
+      .spyOn(git, "lsTree")
+      .mockResolvedValue({ stdout: swaggerPath, stderr: "" });
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
 
@@ -217,15 +229,17 @@ describe("incrementalTypeSpec", () => {
       .spyOn(git, "show")
       .mockImplementation(async (_treeIsh, path) => {
         if (path === swaggerPath) {
-          return swaggerTypeSpecGenerated;
+          return { stdout: swaggerTypeSpecGenerated, stderr: "" };
         } else if (path === readmePath) {
-          return contosoReadme;
+          return { stdout: contosoReadme, stderr: "" };
         } else {
           throw new Error("does not exist");
         }
       });
 
-    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
+    const lsTreeSpy = vi
+      .spyOn(git, "lsTree")
+      .mockResolvedValue({ stdout: swaggerPath, stderr: "" });
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
 
@@ -250,9 +264,11 @@ describe("incrementalTypeSpec", () => {
 
     const showSpy = vi
       .spyOn(git, "show")
-      .mockResolvedValue(swaggerTypeSpecGenerated);
+      .mockResolvedValue({ stdout: swaggerTypeSpecGenerated, stderr: "" });
 
-    const lsTreeSpy = vi.spyOn(git, "lsTree").mockResolvedValue(swaggerPath);
+    const lsTreeSpy = vi
+      .spyOn(git, "lsTree")
+      .mockResolvedValue({ stdout: swaggerPath, stderr: "" });
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
 

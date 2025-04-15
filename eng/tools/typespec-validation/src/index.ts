@@ -9,11 +9,9 @@ import { FormatRule } from "./rules/format.js";
 import { LinterRulesetRule } from "./rules/linter-ruleset.js";
 import { NpmPrefixRule } from "./rules/npm-prefix.js";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
-import { TsvRunnerHost } from "./tsv-runner-host.js";
 import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
 export async function main() {
-  const host = new TsvRunnerHost();
   const args = process.argv.slice(2);
   const options = {
     folder: {
@@ -60,7 +58,7 @@ export async function main() {
   for (let i = 0; i < rules.length; i++) {
     const rule = rules[i];
     console.log("\nExecuting rule: " + rule.name);
-    const result = await rule.execute(host, absolutePath);
+    const result = await rule.execute(absolutePath);
     if (result.stdOutput) console.log(result.stdOutput);
     if (!result.success) {
       success = false;
