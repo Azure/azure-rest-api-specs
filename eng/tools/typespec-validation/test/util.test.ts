@@ -1,19 +1,10 @@
-import { describe, it, vi } from "vitest";
-
-vi.mock("simple-git", () => ({
-  simpleGit: vi.fn().mockReturnValue({
-    revparse: vi.fn().mockResolvedValue(""),
-    status: vi.fn().mockResolvedValue({
-      modified: [],
-      not_added: [],
-      isClean: () => true,
-    }),
-  }),
-}));
+import { mockSimpleGit } from "./mocks.js";
+mockSimpleGit();
 
 import { strict as assert } from "node:assert";
 import path from "path";
 import process from "process";
+import { describe, it } from "vitest";
 import { gitDiffTopSpecFolder, normalizePath } from "../src/utils.js";
 
 const folder = "specification/foo/Foo";
