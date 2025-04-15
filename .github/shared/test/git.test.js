@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from "vitest";
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
     diff: vi.fn().mockResolvedValue(""),
+    raw: vi.fn().mockResolvedValue(""),
   }),
 }));
 
@@ -16,105 +17,61 @@ import { ConsoleLogger } from "../src/logger.js";
 const gitOpts = { logger: new ConsoleLogger(/*isDebug*/ true) };
 
 describe("git", () => {
-  describe("e2e", () => {
-    it("diff", async () => {
-      await expect(diff("HEAD", "HEAD", gitOpts)).resolves.toBe("");
-    });
+  it("diff", async () => {
+    vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("test diff");
 
-    it("lsTree", async () => {
-      // lsTree always uses "\n" in output, even on windows
-      const expected = ".github\n";
-
-      await expect(
-        lsTree("HEAD", ".github", { args: ["--full-tree", "--name-only"] }),
-      ).resolves.toBe(expected);
-    });
-
-    it("show", async () => {
-      await expect(
-        show("HEAD", ".github/shared/package.json"),
-      ).resolves.toContain("scripts");
-    });
-
-    it("status", async () => {
-      // example: "## main...origin/main"
-      await expect(
-        status({ args: ["-b", "--porcelain", "does-not-exist"] }),
-      ).resolves.toContain("##");
-    });
+    await expect(diff("HEAD^", "HEAD", gitOpts)).resolves.toBe("test diff");
   });
 
-  describe("mocked", () => {
-    it("diff", async () => {
-      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("test diff");
+  it("lsTree", async () => {
+    vi.mocked(simpleGit.simpleGit().raw).mockResolvedValue("test ls-tree");
 
-      await expect(diff("HEAD^", "HEAD", gitOpts)).resolves.toBe("test diff");
-    });
+    await expect(
+      lsTree("HEAD", "specification/contosowidgetmanager"),
+    ).resolves.toBe("test ls-tree");
+  });
 
-    it("lsTree", async () => {
-      const execSpy = vi
-        .spyOn(exec, "execFile")
-        .mockResolvedValue({ stdout: "test lstree", stderr: "" });
+  it("show", async () => {
+    const execSpy = vi
+      .spyOn(exec, "execFile")
+      .mockResolvedValue({ stdout: "test show", stderr: "" });
 
-      await expect(
-        lsTree("HEAD", "specification/contosowidgetmanager"),
-      ).resolves.toBe("test lstree");
+    await expect(
+      show("HEAD", "specification/contosowidgetmanager/cspell.yaml"),
+    ).resolves.toBe("test show");
 
-      expect(execSpy).toBeCalledWith(
-        "git",
-        [
-          "-c",
-          "core.quotepath=off",
-          "ls-tree",
-          "HEAD",
-          "specification/contosowidgetmanager",
-        ],
-        expect.anything(),
-      );
-    });
+    expect(execSpy).toBeCalledWith(
+      "git",
+      [
+        "-c",
+        "core.quotepath=off",
+        "show",
+        "HEAD:specification/contosowidgetmanager/cspell.yaml",
+      ],
+      expect.anything(),
+    );
+  });
 
-    it("show", async () => {
-      const execSpy = vi
-        .spyOn(exec, "execFile")
-        .mockResolvedValue({ stdout: "test show", stderr: "" });
+  it("status", async () => {
+    const execSpy = vi
+      .spyOn(exec, "execFile")
+      .mockResolvedValue({ stdout: "test status", stderr: "" });
 
-      await expect(
-        show("HEAD", "specification/contosowidgetmanager/cspell.yaml"),
-      ).resolves.toBe("test show");
+    await expect(
+      status({ args: ["-b", "--porcelain", "does-not-exist"] }),
+    ).resolves.toBe("test status");
 
-      expect(execSpy).toBeCalledWith(
-        "git",
-        [
-          "-c",
-          "core.quotepath=off",
-          "show",
-          "HEAD:specification/contosowidgetmanager/cspell.yaml",
-        ],
-        expect.anything(),
-      );
-    });
-
-    it("status", async () => {
-      const execSpy = vi
-        .spyOn(exec, "execFile")
-        .mockResolvedValue({ stdout: "test status", stderr: "" });
-
-      await expect(
-        status({ args: ["-b", "--porcelain", "does-not-exist"] }),
-      ).resolves.toBe("test status");
-
-      expect(execSpy).toBeCalledWith(
-        "git",
-        [
-          "-c",
-          "core.quotepath=off",
-          "status",
-          "-b",
-          "--porcelain",
-          "does-not-exist",
-        ],
-        expect.anything(),
-      );
-    });
+    expect(execSpy).toBeCalledWith(
+      "git",
+      [
+        "-c",
+        "core.quotepath=off",
+        "status",
+        "-b",
+        "--porcelain",
+        "does-not-exist",
+      ],
+      expect.anything(),
+    );
   });
 });

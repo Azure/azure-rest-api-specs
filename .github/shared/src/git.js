@@ -42,8 +42,16 @@ export async function diff(baseCommitish, headCommitish, options = {}) {
  */
 export async function lsTree(treeIsh, path, options = {}) {
   const { args = [], cwd, logger } = options;
+  const allArgs = [...args, treeIsh, path];
 
-  return await execGit(["ls-tree", ...args, treeIsh, path], { cwd, logger });
+  logger?.info(`lsTree(${JSON.stringify(allArgs)})`);
+
+  const git = simpleGit(cwd);
+  const result = await git.raw(["ls-tree", ...allArgs]);
+
+  logger?.debug(`result: ${result}`);
+
+  return result;
 }
 
 /**
