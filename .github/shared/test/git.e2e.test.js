@@ -1,12 +1,24 @@
 // @ts-check
 
-import { describe, expect, it } from "vitest";
+import debug from "debug";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { diff, lsTree, show, status } from "../src/git.js";
 import { ConsoleLogger } from "../src/logger.js";
 
 const gitOpts = { logger: new ConsoleLogger(/*isDebug*/ true) };
 
 describe("git.e2e", () => {
+  let oldDebug;
+
+  beforeEach(() => {
+    oldDebug = debug.disable();
+    debug.enable("simple-git");
+  });
+
+  afterEach(() => {
+    debug.enable(oldDebug);
+  });
+
   it("diff", async () => {
     await expect(diff("HEAD", "HEAD", gitOpts)).resolves.toBe("");
   });
