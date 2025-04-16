@@ -27,7 +27,11 @@ export async function getChangedFiles(options = {}) {
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish]);
+  const result = await simpleGit(cwd).diff([
+    "--name-only",
+    baseCommitish,
+    headCommitish,
+  ]);
 
   const files = result.trim().split("\n");
 
