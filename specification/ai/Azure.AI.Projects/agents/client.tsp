@@ -26,6 +26,7 @@ namespace Azure.AI.Projects.Agents {
   @@clientName(FileDeletionStatus, "InternalFileDeletionStatus", "csharp");
   @@access(deleteFile, Access.internal, "csharp");
   @@clientName(deleteFile, "InternalDeleteFile", "csharp");
+  @@access(uploadFile, Access.internal, "python, java, javascript");
   @@access(listThreads, Access.internal, "csharp");
   @@clientName(Threads, "InternalGetThreads", "csharp");
 
