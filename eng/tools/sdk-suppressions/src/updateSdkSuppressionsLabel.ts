@@ -27,16 +27,15 @@ debug.enable("simple-git");
  * on the other hand that the sdkName list will return an empty array if it does not have a suppression file or if the file is blank.
  */
 export async function getSdkSuppressionsSdkNames(
-  prChangeFiles: string,
+  prChangeFiles: string[],
   baseCommitHash: string,
   headCommitHash: string,
 ): Promise<SdkName[]> {
   console.log(
     `Will compare base commit: ${baseCommitHash} and head commit: ${headCommitHash} to get different SDK.`,
   );
-  const filesChangedPaths = prChangeFiles.split(" ");
-  console.log(`The pr origin changed files: ${filesChangedPaths.join(", ")}`);
-  let suppressionFileList = filterSuppressionList(filesChangedPaths);
+  console.log(`The pr origin changed files: ${prChangeFiles.join(", ")}`);
+  let suppressionFileList = filterSuppressionList(prChangeFiles);
   console.log(`Will compare sdk-suppression.yaml files: ${suppressionFileList.join(", ")}`);
   let sdkNameList: SdkName[] = [];
   if (suppressionFileList.length > 0) {
@@ -199,7 +198,7 @@ export function getSdkNamesWithChangedSuppressions(
  */
 export async function updateSdkSuppressionsLabels(
   prLabels: string,
-  prChangeFiles: string,
+  prChangeFiles: string[],
   baseCommitHash: string,
   headCommitHash: string,
   outputFile?: string,
