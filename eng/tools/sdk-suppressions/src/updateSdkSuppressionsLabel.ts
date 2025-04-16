@@ -1,4 +1,5 @@
 import _ from "lodash";
+import debug from "debug";
 import { writeFileSync } from "fs";
 import { simpleGit } from "simple-git";
 import { sdkLabels, SdkName } from "./sdk.js";
@@ -10,6 +11,8 @@ import {
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
 import { parseYamlContent } from "./common.js";
+
+debug.enable("simple-git");
 
 /**
  *

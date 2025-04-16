@@ -52,7 +52,6 @@ jobs:
       - name: Run Get suppressions label script
         id: run-suppressions-script
         env:
-          DEBUG: simple-git
           OUTPUT_FILE: "output.json"
           GITHUB_PULL_REQUEST_CHANGE_FILES: ${{ steps.get-changedFiles.outputs.changedFiles }}
           GITHUB_PULL_REQUEST_LABELS: ${{ steps.fetch-pullRequest-context.outputs.prLabels }}
