@@ -1,5 +1,7 @@
 import _ from "lodash";
+import debug from "debug";
 import { writeFileSync } from "fs";
+import { simpleGit } from "simple-git";
 import { sdkLabels, SdkName } from "./sdk.js";
 import {
   SdkSuppressionsYml,
@@ -9,8 +11,9 @@ import {
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
 import { parseYamlContent } from "./common.js";
-import { show, status } from "@azure-tools/specs-shared/git";
-import { consoleLogger } from "@azure-tools/specs-shared/logger";
+ 
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 /**
  *
@@ -72,7 +75,7 @@ export async function getSdkSuppressionsFileContent(
   path: string,
 ): Promise<string | object | undefined | null> {
   try {
-    const suppressionFileContent = (await show(ref, path, { logger: consoleLogger })).stdout;
+    const suppressionFileContent = await simpleGit().show([`${ref}:${path}`]);
     console.log(`Found content in ${ref}#${path}`);
     return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
@@ -194,7 +197,7 @@ export async function updateSdkSuppressionsLabels(
   outputFile?: string,
 ): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
   try {
-    const result = (await status({ logger: consoleLogger })).stdout;
+    const result = await simpleGit().raw("status");
     console.log("Git status:", result);
   } catch (err) {
     console.error("Error running git command:", err);
