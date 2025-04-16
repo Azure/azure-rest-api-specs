@@ -72,7 +72,6 @@ union ProvisioningState {
   @doc("Resource is being deleted.") Deleting: "Deleting",
   @doc("Resource was successfully provisioned.") Succeeded: "Succeeded",
   @doc("Resource failed to provision.") Failed: "Failed",
-
   string,
 }
 
