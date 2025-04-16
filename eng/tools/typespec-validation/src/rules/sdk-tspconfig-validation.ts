@@ -111,18 +111,18 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     this.emitterName = emitterName;
   }
 
-  protected validate(config: any): RuleResult {
+  protected tryFindOption(config: any): Record<string, any> | undefined {
     let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
     for (const segment of this.keyToValidate.split(".")) {
       if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
         option = option![segment];
-      else
-        return this.createFailedResult(
-          `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
-          `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
-        );
+      else return undefined;
     }
+    return option;
+  }
 
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
     if (option === undefined)
       return this.createFailedResult(
         `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
@@ -434,16 +434,7 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitt
     super("@azure-tools/typespec-csharp", "namespace", "{package-dir}");
   }
   override validate(config: any): RuleResult {
-    let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
-    for (const segment of this.keyToValidate.split(".")) {
-      if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
-        option = option![segment];
-      else
-        return this.createFailedResult(
-          `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
-          `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
-        );
-    }
+    const option = this.tryFindOption(config);
 
     if (option === undefined)
       return this.createFailedResult(
