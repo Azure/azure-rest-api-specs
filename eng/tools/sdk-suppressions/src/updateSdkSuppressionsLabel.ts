@@ -10,7 +10,6 @@ import {
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
 import { parseYamlContent } from "./common.js";
-import { consoleLogger } from "@azure-tools/specs-shared/logger";
 
 /**
  *
