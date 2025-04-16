@@ -23,9 +23,15 @@ interface Connections {
   get is ConnectionOperations.ResourceRead<Connection>;
 
   @doc("Get a connection by name, with its connection credentials")
+  @TypeSpec.Http.post
   @Rest.actionSeparator("/")
   @Rest.action("withCredentials")
-  getWithCredentials is ConnectionOperations.ResourceRead<Connection>;
+  getWithCredentials is ConnectionOperations.ResourceAction<
+    Connection,
+    {},
+    Connection
+  >;
+
   @doc("List all connections in the project, without populating connection credentials")
   list is ConnectionOperations.ResourceList<
     Connection,
@@ -41,4 +47,28 @@ interface Connections {
       ...StandardListQueryParameters;
     }>
   >;
+
+  @doc("List all connections in the project, with their connection credentials")
+  @TypeSpec.Http.post
+  @Rest.actionSeparator("/")
+  @Rest.action("withCredentials")
+  listWithCredentials is ConnectionOperations.ResourceCollectionAction<
+    Connection,
+    {
+      @doc("List connections of this specific type")
+      @query("connectionType")
+      connectionType?: ConnectionType;
+
+      @doc("List connections that are default connections")
+      @query("defaultConnection")
+      defaultConnection?: boolean;
+
+      ...StandardListQueryParameters;
+    },
+    Internal.ConnectionPaged
+  >;
+}
+
+namespace Internal {
+  model ConnectionPaged is Azure.Core.Page<Connection>;
 }
