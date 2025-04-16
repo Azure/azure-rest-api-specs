@@ -30,7 +30,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const { getChangedFiles } = await import('${{ github.workspace }}/.github/workflows/src/changed-files.js');
+            const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.js');
             return await getChangedFiles();
 
       - name: Get GitHub PullRequest Context
