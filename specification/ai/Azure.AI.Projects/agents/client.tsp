@@ -26,9 +26,9 @@ namespace Azure.AI.Projects.Agents {
   @@clientName(FileDeletionStatus, "InternalFileDeletionStatus", "csharp");
   @@access(deleteFile, Access.internal, "csharp");
   @@clientName(deleteFile, "InternalDeleteFile", "csharp");
-  @@access(uploadFile, Access.internal, "python, java, javascript");
   @@access(listThreads, Access.internal, "csharp");
   @@clientName(Threads, "InternalGetThreads", "csharp");
+  @@access(uploadFile, Access.internal, "python, java, javascript");
 
   // In addition to top-level response value containers, trivial intermediate structure -- levels of single-use model
   // hierarchy that don't convey explanatory or functional benefit to consumers of the surface -- should also be
