@@ -15,7 +15,7 @@ using Azure.Core.Traits;
 namespace Azure.AI.Projects;
 
 @doc("Evaluation Result resource Definition")
-@Rest.resource("evaluationResults")
+@Rest.resource("evaluationresults")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model EvaluationResult {
@@ -35,14 +35,14 @@ union ResultType {
   string,
 
   @doc("Benchmark result")
-  Benchmark: "Benchmark";
+  Benchmark: "Benchmark",
 
   @doc("Evaluations Result")
-  Evaluation: "Evaluation";
+  Evaluation: "Evaluation",
 
   @doc("Red Team Result")
-  Redteam: "Redteam";
+  Redteam: "Redteam",
 
   @doc("Simulation Result")
-  Simulation: "Simulation";
+  Simulation: "Simulation",
 }
