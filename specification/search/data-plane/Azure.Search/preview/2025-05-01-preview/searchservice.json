@@ -2387,7 +2387,11 @@
           "description": "The description of the agent."
         }
       },
-      "required": [ "name", "models", "targetIndexes" ]
+      "required": [
+        "name",
+        "models",
+        "targetIndexes"
+      ]
     },
     "KnowledgeAgentTargetIndex": {
       "type": "object",
@@ -2412,7 +2416,9 @@
           "description": "Limits the number of documents considered for ranking."
         }
       },
-      "required": [ "indexName" ]
+      "required": [
+        "indexName"
+      ]
     },
     "KnowledgeAgentRequestLimits": {
       "type": "object",
@@ -2491,7 +2497,9 @@
           "description": "Contains the parameters specific to Azure OpenAI model endpoint."
         }
       },
-      "required": [ "azureOpenAIParameters" ],
+      "required": [
+        "azureOpenAIParameters"
+      ],
       "description": "Specifies the Azure OpenAI resource used to do query planning."
     },
     "AnalyzeRequest": {
@@ -3998,7 +4006,7 @@
       },
       "description": "Represents classes of characters on which a token filter can operate."
     },
-	 "RankingOrder": {
+    "RankingOrder": {
       "type": "string",
       "enum": [
         "BoostedRerankerScore",
@@ -4013,7 +4021,7 @@
             "name": "BoostedRerankerScore",
             "description": "Sets sort order as BoostedRerankerScore"
           },
-		  {
+          {
             "value": "RerankerScore",
             "name": "ReRankerScore",
             "description": "Sets sort order as ReRankerScore"
@@ -10670,7 +10678,7 @@
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillOutputFormat",
           "x-nullable": true,
           "description": "Controls the cardinality of the output format. Default is 'markdown'."
-        },        
+        },
         "outputMode": {
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillOutputMode",
           "x-nullable": true,
@@ -10687,19 +10695,19 @@
           "items": {
             "$ref": "#/definitions/DocumentIntelligenceLayoutSkillExtractionOptions"
           },
-          "description": "Controls the cardinality of the content extracted from the document by the skill"    
+          "description": "Controls the cardinality of the content extracted from the document by the skill"
         },
         "chunkingProperties": {
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkingProperties",
           "x-nullable": true,
           "description": "Controls the cardinality for chunking the content."
-        }            
+        }
       },
       "externalDocs": {
         "url": "https://learn.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
       },
       "description": "A skill that extracts content and layout information, via Azure AI Services, from files within the enrichment pipeline."
-    },    
+    },
     "DocumentIntelligenceLayoutSkillOutputMode": {
       "type": "string",
       "enum": [
@@ -10738,12 +10746,12 @@
             "value": "markdown",
             "name": "Markdown",
             "description": "Specify the format of the output as markdown."
-          }          
+          }
         ]
       },
       "default": "markdown",
       "description": "Controls the cardinality of the output format. Default is 'markdown'."
-    },    
+    },
     "DocumentIntelligenceLayoutSkillMarkdownHeaderDepth": {
       "type": "string",
       "enum": [
@@ -10930,7 +10938,7 @@
           "description": "An open dictionary for extended properties. Required if 'type' == 'json_schema'",
           "x-nullable": true,
           "properties": {
-            "name":{
+            "name": {
               "type": "string",
               "x-nullable": true,
               "description": "Name of the json schema the model will adhere to"
@@ -11002,7 +11010,7 @@
             "value": "locationMetadata",
             "name": "LocationMetadata",
             "description": "Specify that location metadata should be extracted from the document."
-          }       
+          }
         ]
       },
       "description": "Controls the cardinality of the content extracted from the document by the skill."
@@ -11029,7 +11037,7 @@
           "description": "The length of overlap provided between two text chunks. Default is 0."
         }
       }
-    },    
+    },
     "DocumentIntelligenceLayoutSkillChunkingUnit": {
       "type": "string",
       "enum": [
@@ -11048,7 +11056,7 @@
       },
       "default": "characters",
       "description": "Controls the cardinality of the chunk unit. Default is 'characters'"
-    },    
+    },
     "WebApiSkill": {
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
@@ -13894,7 +13902,7 @@
           "x-nullable": false,
           "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
         },
-		 "rankingOrder": {
+        "rankingOrder": {
           "$ref": "#/definitions/RankingOrder",
           "x-nullable": true,
           "description": "Specifies the score type to be used for the sort order of the search results."
