@@ -183,7 +183,7 @@ model PercentileMetricDefinition extends ExperimentMetricDefinition {
   @doc("The percentile to measure.")
   @minValueExclusive(0)
   @maxValueExclusive(100)
-  percentile: int32;
+  percentile: float64;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Union discriminator with different types are not supported in swagger v2"
