@@ -1,6 +1,4 @@
 import "./main.tsp";
-import "./main.tsp";
-import "./LiftrBase.Storage/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
