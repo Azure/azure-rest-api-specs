@@ -24,9 +24,9 @@ interface Connections {
 
   @doc("Get a connection by name, with its connection credentials")
   @TypeSpec.Http.post
-  //@Rest.actionSeparator("/")
-  //@Rest.action("withCredentials")
-  withCredentials is ConnectionOperations.ResourceAction<Connection, {}, Connection>;
+  @Rest.actionSeparator("/")
+  @Rest.action("withCredentials")
+  getWithCredentials is ConnectionOperations.ResourceAction<Connection, {}, Connection>;
 
   @doc("List all connections in the project, without populating connection credentials")
   list is ConnectionOperations.ResourceList<
@@ -46,6 +46,7 @@ interface Connections {
 
   @doc("List all connections in the project, with their connection credentials")
   @TypeSpec.Http.post
+  @Rest.actionSeparator("/")
   @Rest.action("withCredentials")
   listWithCredentials is ConnectionOperations.ResourceCollectionAction<
     Connection,
