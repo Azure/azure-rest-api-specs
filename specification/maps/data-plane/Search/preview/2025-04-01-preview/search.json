@@ -613,20 +613,20 @@
     "/geocode:autocomplete": {
       "get": {
         "summary": "Use to get ranked list of suggested entities based on a user's location and a partial query.",
-        "description": "**Autosuggest API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nGiven a request with a user’s location and a partial query (called a query prefix), the Azure Maps Autosuggest API returns a list of suggested entities which the user is most likely searching for. These entities are ranked from most to least likely. Requests can be called using user locations.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "description": "**Autocomplete API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nGiven a request with a user’s location and a partial query (called a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities which the user is most likely searching for. These entities are ranked from most to least likely. Requests can be called using user locations.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional details.\n\n",
         "operationId": "Search_GetAutocomplete",
         "produces": [
           "application/geo+json"
         ],
         "x-ms-examples": {
-          "Autosuggest API call to search for '1 Microsoft Way, Redmond'": {
-            "$ref": "./examples/AutosuggestDefault.json"
+          "Autocomplete API call to search for '1 Microsoft Way, Redmond'": {
+            "$ref": "./examples/AutocompleteDefault.json"
           },
-          "Autosuggest API call to search for 'Muir Woods', filtered by address type": {
-            "$ref": "./examples/AutosuggestAddress.json"
+          "Autocomplete API call to search for 'Muir Woods', filtered by address type": {
+            "$ref": "./examples/AutocompleteAddress.json"
           },
-          "Autosuggest API call to search for 'Muir Woods', filtered by place type": {
-            "$ref": "./examples/AutosuggestPlace.json"
+          "Autocomplete API call to search for 'Muir Woods', filtered by place type": {
+            "$ref": "./examples/AutocompletePlace.json"
           }
         },
         "parameters": [
@@ -679,7 +679,7 @@
                 "Place"
               ],
               "x-ms-enum": {
-                "name": "AutosuggestResultTypeEnum",
+                "name": "AutocompleteResultTypeEnum",
                 "modelAsString": true,
                 "values": [
                   {
@@ -710,7 +710,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutosuggestResponse"
+              "$ref": "#/definitions/AutocompleteResponse"
             },
             "headers": {
               "x-ms-request-id": {
@@ -1337,8 +1337,8 @@
         }
       }
     },
-    "AutosuggestResponse": {
-      "description": "This object is returned from a successful autosuggest call.",
+    "AutocompleteResponse": {
+      "description": "This object is returned from a successful autocomplete call.",
       "type": "object",
       "properties": {
         "type": {
@@ -1347,7 +1347,7 @@
         "features": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AutosuggestFeature"
+            "$ref": "#/definitions/AutocompleteFeature"
           }
         },
         "nextLink": {
@@ -1355,9 +1355,9 @@
         }
       }
     },
-    "AutosuggestFeature": {
+    "AutocompleteFeature": {
       "type": "object",
-      "description": "Features of Autosuggest Result",
+      "description": "Features of Autocomplete Result",
       "properties": {
         "type": {
           "type": "string",
@@ -1383,7 +1383,7 @@
             "Address"
           ],
           "x-ms-enum": {
-            "name": "AutosuggestResultType",
+            "name": "AutocompleteResultType",
             "modelAsString": true,
             "values": [
               {
@@ -1398,7 +1398,7 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/AutosuggestProperties"
+          "$ref": "#/definitions/AutocompleteProperties"
         }
       },
       "required": [
@@ -1407,8 +1407,8 @@
         "properties"
       ]
     },
-    "AutosuggestProperties": {
-      "description": "Properties of Autosuggest Result",
+    "AutocompleteProperties": {
+      "description": "Properties of Autocomplete Result",
       "type": "object",
       "properties": {
         "type": {
@@ -1418,7 +1418,7 @@
             "Address"
           ],
           "x-ms-enum": {
-            "name": "AutosuggestSubType",
+            "name": "AutocompleteSubType",
             "modelAsString": true,
             "values": [
               {
