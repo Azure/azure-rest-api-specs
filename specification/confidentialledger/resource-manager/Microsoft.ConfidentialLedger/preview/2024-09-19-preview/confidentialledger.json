@@ -238,12 +238,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful and ledger was created; response contains the Confidential Ledger",
-            "schema": {
-              "$ref": "#/definitions/ConfidentialLedger"
-            }
-          },
           "201": {
             "description": "The Confidential Ledger resource will be created asynchronously. Response contains the Confidential Ledger being provisioned",
             "schema": {
@@ -295,12 +289,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful and ledger was updated; response contains the Confidential Ledger",
-            "schema": {
-              "$ref": "#/definitions/ConfidentialLedger"
-            }
-          },
           "201": {
             "description": "The Confidential Ledger resource will be updated asynchronously. Check the provisioningState field to monitor the progress of your operation."
           },
@@ -942,7 +930,7 @@
       "required": true,
       "type": "string",
       "description": "Name of the Confidential Ledger",
-      "pattern": "^[a-zA-Z0-9]",
+      "pattern": "^[^-0-9][A-Za-z0-9-]{1,33}[A-Za-z0-9]$",
       "x-ms-parameter-location": "method"
     }
   }
