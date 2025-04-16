@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
   ]>
 )
 @service(#{
-  title: "Microsoft Cognitive Language Service - Question Answering",
+  title: "Microsoft Cognitive Language Service - Question Answering Authoring",
 })
 @versioned(Versions)
 @server(
@@ -36,7 +36,7 @@ using TypeSpec.Versioning;
     Endpoint: url,
   }
 )
-namespace Language.QuestionAnswering;
+namespace Language.QuestionAnswering.Authoring;
 
 /**
  * The available API versions.

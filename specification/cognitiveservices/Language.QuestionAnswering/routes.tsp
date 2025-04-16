@@ -17,7 +17,7 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias LanguageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
-interface QuestionAnsweringOperations {
+interface QuestionAnswering {
   /**
    * Answers the specified question using your knowledge base.
    */

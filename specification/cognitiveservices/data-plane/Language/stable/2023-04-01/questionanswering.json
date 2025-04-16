@@ -22,7 +22,9 @@
         "in": "path",
         "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -61,7 +63,7 @@
   "paths": {
     "/:query-knowledgebases": {
       "post": {
-        "operationId": "QuestionAnsweringOperations_GetAnswers",
+        "operationId": "QuestionAnswering_GetAnswers",
         "summary": "Answers the specified question using your knowledge base.",
         "description": "Answers the specified question using your knowledge base.",
         "parameters": [
@@ -121,7 +123,7 @@
     },
     "/:query-text": {
       "post": {
-        "operationId": "QuestionAnsweringOperations_GetAnswersFromText",
+        "operationId": "QuestionAnswering_GetAnswersFromText",
         "summary": "Answers the specified question using the provided text in the body.",
         "description": "Answers the specified question using the provided text in the body.",
         "parameters": [
