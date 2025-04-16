@@ -1,4 +1,4 @@
-import { test, describe, expect, vi, afterEach } from "vitest";
+import { test, describe, expect, vi } from "vitest";
 import {
   compareLintDiffViolations,
   generateLintDiffReport,
@@ -16,6 +16,15 @@ import {
   AutorestRunResult,
 } from "../src/lintdiff-types.js";
 import { isWindows } from "./test-util.js";
+
+vi.mock("../src/util.js", async () => {
+  const original = await vi.importActual("../src/util.js");
+  return {
+    ...original,
+    getDependencyVersion: vi.fn().mockResolvedValue("1.0.0"),
+    getPathToDependency: vi.fn().mockResolvedValue("path/to/dependency"),
+  };
+});
 
 describe("iconFor", () => {
   test.each([
@@ -277,10 +286,6 @@ describe("compareLintDiffViolations", () => {
 });
 
 describe("generateLintDiffReport", () => {
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
   test.skipIf(isWindows())("fails if new violations include an error", async ({ expect }) => {
     const afterViolation = {
       extensionName: "@microsoft.azure/openapi-validator",
