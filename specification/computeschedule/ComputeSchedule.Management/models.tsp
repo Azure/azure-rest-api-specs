@@ -404,7 +404,6 @@ model SubmitCreateRequest {
 
   @doc("CorrelationId item")
   correlationid?: string;
-
 }
 
 @doc("The SubmitDeleteRequest request for delete operations")
@@ -424,7 +423,6 @@ model SubmitDeleteRequest {
 
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
-
 }
 
 @doc("The response from a Hibernate request")
