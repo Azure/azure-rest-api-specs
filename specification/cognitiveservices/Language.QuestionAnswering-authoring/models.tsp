@@ -569,7 +569,7 @@ model UpdateSynonymsWithNoContentResponse {
 }
 
 /** Request payload for updating synonyms. */
-model SynonymAssests is Azure.Core.Page<WordAlterations>;
+model SynonymAssets is Azure.Core.Page<WordAlterations>;
 
 /**
  * Collection of word alterations.

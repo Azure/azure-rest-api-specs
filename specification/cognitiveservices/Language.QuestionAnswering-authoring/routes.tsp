@@ -254,7 +254,7 @@ interface QuestionAnsweringProjects {
        * All the synonyms of a project.
        */
       @bodyRoot
-      body: SynonymAssests;
+      body: SynonymAssets;
     },
     UpdateSynonymsWithNoContentResponse,
     {},
