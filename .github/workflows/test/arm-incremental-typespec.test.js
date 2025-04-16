@@ -46,7 +46,7 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", swaggerPath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
   });
 
   it("returns false if changed files add a new RP", async () => {
@@ -65,7 +65,7 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", swaggerPath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
 
     expect(rawSpy).toBeCalledWith([
       "ls-tree",
@@ -90,7 +90,7 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", swaggerPath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
   });
 
   it("returns false if readme deleted", async () => {
@@ -105,7 +105,7 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", readmePath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
   });
 
   it("returns false if readme contains no input-files", async () => {
@@ -118,7 +118,7 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", readmePath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
   });
 
   it("returns false if swagger cannot be parsed as JSON", async () => {
@@ -133,7 +133,7 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", swaggerPath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
   });
 
   it("returns false if tsp conversion", async () => {
@@ -145,8 +145,10 @@ describe("incrementalTypeSpec", () => {
 
     const showSpy = vi
       .mocked(simpleGit.simpleGit().show)
-      .mockImplementation(([treeIsh]) =>
-        treeIsh == "HEAD" ? swaggerTypeSpecGenerated : swaggerHandWritten,
+      .mockImplementation(async ([treePath]) =>
+        treePath.split(":")[0] == "HEAD"
+          ? swaggerTypeSpecGenerated
+          : swaggerHandWritten,
       );
 
     const lsTreeSpy = vi
@@ -155,8 +157,8 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(false);
 
-    expect(showSpy).toHaveBeenCalledWith(["HEAD", "--", swaggerPath]);
-    expect(showSpy).toHaveBeenCalledWith(["HEAD^", "--", swaggerPath]);
+    expect(showSpy).toHaveBeenCalledWith([`HEAD:${swaggerPath}`]);
+    expect(showSpy).toHaveBeenCalledWith([`HEAD^:${swaggerPath}`]);
 
     expect(lsTreeSpy).toBeCalledWith([
       "ls-tree",
@@ -179,7 +181,7 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).rejects.toThrowError();
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", swaggerPath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
   });
 
   it("throws if git show for readme returns unknown error", async () => {
@@ -194,7 +196,7 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).rejects.toThrowError();
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", readmePath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
   });
 
   it("returns true if changed files are incremental changes to an existing TypeSpec RP swagger", async () => {
@@ -214,8 +216,8 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", swaggerPath]);
-    expect(showSpy).toBeCalledWith(["HEAD^", "--", swaggerPath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${swaggerPath}`]);
+    expect(showSpy).toBeCalledWith([`HEAD^:${swaggerPath}`]);
 
     expect(lsTreeSpy).toBeCalledWith([
       "ls-tree",
@@ -239,8 +241,8 @@ describe("incrementalTypeSpec", () => {
 
     const showSpy = vi
       .mocked(simpleGit.simpleGit().show)
-      .mockImplementation(async (args) => {
-        const path = args[2];
+      .mockImplementation(async ([treePath]) => {
+        const path = treePath.split(":")[1];
         if (path === swaggerPath) {
           return swaggerTypeSpecGenerated;
         } else if (path === readmePath) {
@@ -256,8 +258,8 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
 
-    expect(showSpy).toBeCalledWith(["HEAD", "--", readmePath]);
-    expect(showSpy).toBeCalledWith(["HEAD^", "--", swaggerPath]);
+    expect(showSpy).toBeCalledWith([`HEAD:${readmePath}`]);
+    expect(showSpy).toBeCalledWith([`HEAD^:${swaggerPath}`]);
 
     expect(lsTreeSpy).toHaveBeenCalledWith([
       "ls-tree",
@@ -287,7 +289,7 @@ describe("incrementalTypeSpec", () => {
 
     await expect(incrementalTypeSpec({ core })).resolves.toBe(true);
 
-    expect(showSpy).toBeCalledWith(["HEAD^", "--", swaggerPath]);
+    expect(showSpy).toBeCalledWith([`HEAD^:${swaggerPath}`]);
 
     expect(lsTreeSpy).toHaveBeenCalledWith([
       "ls-tree",
