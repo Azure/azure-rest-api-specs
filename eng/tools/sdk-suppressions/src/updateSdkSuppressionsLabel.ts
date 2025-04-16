@@ -75,7 +75,7 @@ export async function getSdkSuppressionsFileContent(
   path: string,
 ): Promise<string | object | undefined | null> {
   try {
-    const suppressionFileContent = await simpleGit().show([ref, "--", path]);
+    const suppressionFileContent = await simpleGit().show([`${ref}:${path}`]);
     console.log(`Found content in ${ref}#${path}`);
     return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
