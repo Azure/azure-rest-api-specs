@@ -1,9 +1,13 @@
 import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import debug from "debug";
 import { access, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 // Wraps execNpm() to return error (and coalesce stdout and stderr) instead of throwing
 export async function runNpm(

@@ -1,7 +1,11 @@
+import debug from "debug";
 import { simpleGit } from "simple-git";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { normalizePath, runNpm } from "../utils.js";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 export class NpmPrefixRule implements Rule {
   readonly name = "NpmPrefix";
