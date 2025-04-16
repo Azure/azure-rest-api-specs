@@ -2,18 +2,12 @@
 // tsp compile main.tsp --emit @azure-tools/typespec-autorest
 
 import "@typespec/http";
-import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
 import "../Playwright.Shared";
 import "./routes.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.Core.Traits;
-using Playwright.Shared;
 
 @server(
   "{endpoint}",

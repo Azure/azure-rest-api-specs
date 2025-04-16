@@ -1,4 +1,4 @@
-# playwrighttesting
+# Microsoft Playwright Service
 
 > see https://aka.ms/autorest
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the playwright.
+These are the global settings for Microsoft Playwright Service.
 
 ```yaml
 title: PlaywrightServiceClient

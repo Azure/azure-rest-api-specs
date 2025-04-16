@@ -51,7 +51,7 @@
   },
   "tags": [],
   "paths": {
-    "/workspaces/{workspaceId}": {
+    "/playwrightworkspaces/{workspaceId}": {
       "get": {
         "operationId": "Workspaces_Get",
         "description": "Get details of the Azure resource mapped to a workspace for the given workspace id. Authorization required is Bearer JWT Access token provided by EntraID.",
@@ -102,7 +102,7 @@
         }
       }
     },
-    "/workspaces/{workspaceId}/access-tokens": {
+    "/playwrightworkspaces/{workspaceId}/access-tokens": {
       "get": {
         "operationId": "AccessTokens_List",
         "description": "Lists access-tokens for the given workspace id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.",
@@ -161,7 +161,7 @@
         }
       }
     },
-    "/workspaces/{workspaceId}/access-tokens/{accessTokenId}": {
+    "/playwrightworkspaces/{workspaceId}/access-tokens/{accessTokenId}": {
       "get": {
         "operationId": "AccessTokens_Get",
         "description": "Gets an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
@@ -186,6 +186,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
+            "minLength": 3,
             "maxLength": 64,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
@@ -250,6 +251,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
+            "minLength": 3,
             "maxLength": 64,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
@@ -336,6 +338,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
+            "minLength": 3,
             "maxLength": 64,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
@@ -374,7 +377,7 @@
         }
       }
     },
-    "/workspaces/{workspaceId}/browsers": {
+    "/playwrightworkspaces/{workspaceId}/browsers": {
       "get": {
         "operationId": "Workspaces_GetBrowsers",
         "description": "Gets remote browsers corresponding to given workspace id and redirects the client for executing Playwright scripts. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
@@ -466,6 +469,7 @@
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The access-token id.",
+          "minLength": 3,
           "maxLength": 64,
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true

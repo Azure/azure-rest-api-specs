@@ -60,7 +60,7 @@ interface Workspaces {
 
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
   @doc("Gets remote browsers corresponding to given workspace id and redirects the client for executing Playwright scripts. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.")
-  @route("/workspaces/{workspaceId}/browsers")
+  @route("/playwrightworkspaces/{workspaceId}/browsers")
   getBrowsers is RpcOperation<
     GetBrowsersParams,
     GetBrowsersResponse,

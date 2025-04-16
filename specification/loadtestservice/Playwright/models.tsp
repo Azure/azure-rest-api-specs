@@ -16,6 +16,7 @@ namespace Playwright;
 model AccessToken {
   @key("accessTokenId")
   @doc("The access-token id.")
+  @minLength(3)
   @maxLength(64)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
