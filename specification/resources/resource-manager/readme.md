@@ -50,15 +50,7 @@ tag: package-databoundaries-2024-08
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2024-03
-```
-
-``` yaml $(package-resources)
-tag: package-resources-2024-07
-```
-
-``` yaml $(package-resources)
-tag: package-resources-2024-11
+tag: package-resources-2025-03
 ```
 
 ``` yaml $(package-subscriptions)
@@ -267,6 +259,15 @@ These settings apply only when `--tag=package-resources-2024-11` is specified on
 ``` yaml $(tag) == 'package-resources-2024-11'
 input-file:
   - Microsoft.Resources/stable/2024-11-01/resources.json
+```
+
+### Tag: package-resources-2025-03
+
+These settings apply only when `--tag=package-resources-2025-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2025-03'
+input-file:
+  - Microsoft.Resources/stable/2025-03-01/resources.json
 ```
 
 ### Tag: package-2022-12
@@ -1663,6 +1664,38 @@ directive:
   - suppress: TrackedExtensionResourcesAreNotAllowed
     from: resources.json
     reason: "The deployments resource type is ProxyOnly."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.Provider
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.ProviderListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.ProviderResourceTypeListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.TagsListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.DeploymentOperation
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.DeploymentOperationsListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.OperationListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: resources.json
+    where: $.definitions.ProviderPermissionListResult
+    reason: "Historically some properties have not been returned for this model and reviewer said OK to suppress."
 ```
 
 ---
