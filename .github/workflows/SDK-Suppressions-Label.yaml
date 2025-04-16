@@ -31,7 +31,7 @@ jobs:
           result-encoding: string
           script: |
             const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.js');
-            return await getChangedFiles();
+            return (await getChangedFiles()).filter((f) => f.endsWith("sdk-suppressions.yaml"));
 
       - name: Get GitHub PullRequest Context
         uses: actions/github-script@v7
@@ -42,11 +42,11 @@ jobs:
             if (!pr) {
               throw new Error("This workflow must run in the context of a pull request.");
             }
-            console.log("This action trigger by ", context.eventName);
+            console.log("This action trigger by", context.eventName);
             core.setOutput("prLabels", pr.labels.map(label => label.name));
           result-encoding: string
 
-      - name: Run Get suppressions label script
+      - name: Run Get suppressions Label Script
         id: run-suppressions-script
         env:
           OUTPUT_FILE: "output.json"
