@@ -158,7 +158,7 @@ model ApplicationResourceProperties {
   /**
    * List of user assigned identities for the application, each mapped to a friendly name.
    */
-  @identifiers( #[])
+  @identifiers(#[])
   managedIdentities?: ApplicationUserAssignedIdentity[];
 }
 
