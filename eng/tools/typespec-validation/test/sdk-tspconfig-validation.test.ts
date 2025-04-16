@@ -492,7 +492,7 @@ const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
 
 const csharpAzNamespaceWithPackageDirTestCases: Case[] = [
   {
-    description: `Validate csharp\'s option: namespace is equal {package-dir} and package-dir exists`,
+    description: `Validate csharp\'s option: namespace is equal to {package-dir} and package-dir exists`,
     folder: "",
     tspconfigContent: createEmitterOptionExample(
       "@azure-tools/typespec-csharp",
