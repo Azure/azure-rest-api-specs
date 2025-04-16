@@ -514,7 +514,7 @@ const csharpAzNamespaceWithPackageDirTestCases: Case[] = [
     subRules: [new TspConfigCsharpAzNamespaceEqualStringSubRule()],
   },
   {
-    description: `Validate csharp\'s option: namespace is not equal package-dir`,
+    description: `Validate csharp\'s option: namespace is not equal to package-dir`,
     folder: "",
     tspconfigContent: createEmitterOptionExample(
       "@azure-tools/typespec-csharp",
