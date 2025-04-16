@@ -1,6 +1,10 @@
 // @ts-check
 
+import debug from "debug";
 import { simpleGit } from "simple-git";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 /**
  * @param {Object} [options]

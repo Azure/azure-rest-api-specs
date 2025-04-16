@@ -1,6 +1,7 @@
 // @ts-check
 
 // For now, treat all paths as posix, since this is the format returned from git commands
+import debug from "debug";
 import { dirname, join } from "path/posix";
 import { simpleGit } from "simple-git";
 import {
@@ -12,6 +13,9 @@ import {
 } from "../../shared/src/changed-files.js";
 import { getInputFiles } from "../../shared/src/readme.js";
 import { CoreLogger } from "./core-logger.js";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
