@@ -11,7 +11,8 @@ import {
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
 import { parseYamlContent } from "./common.js";
-
+ 
+// Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
 
 /**
@@ -196,7 +197,7 @@ export async function updateSdkSuppressionsLabels(
   outputFile?: string,
 ): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
   try {
-    const result = await simpleGit().status();
+    const result = await simpleGit().raw("status");
     console.log("Git status:", result);
   } catch (err) {
     console.error("Error running git command:", err);
