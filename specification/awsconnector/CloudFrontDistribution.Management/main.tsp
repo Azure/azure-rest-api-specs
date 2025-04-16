@@ -369,7 +369,7 @@ model Logging {
 @doc("Definition of OriginGroups")
 model OriginGroups {
   @doc("The items (origin groups) in a distribution.")
-  @identifiers( #[])
+  @identifiers(#[])
   items?: OriginGroup[];
 
   @doc("The number of origin groups.")

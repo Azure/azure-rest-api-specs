@@ -558,7 +558,7 @@ model ConnectionStringType {
   medium?: string;
 
   @doc("A list of connection string profiles to allow clients to group, filter and select connection string values based on structured metadata.")
-  @identifiers( #[])
+  @identifiers(#[])
   profiles?: ProfileType[];
 }
 
@@ -738,7 +738,7 @@ model AutonomousDatabaseBaseProperties {
 
   @doc("Customer Contacts.")
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  @identifiers( #[])
+  @identifiers(#[])
   customerContacts?: CustomerContact[];
 
   @doc("The quantity of data in the database, in terabytes.")

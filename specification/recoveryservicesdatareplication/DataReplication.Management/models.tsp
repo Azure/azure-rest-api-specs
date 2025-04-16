@@ -1328,7 +1328,7 @@ model TaskModel {
   /**
    * Gets or sets the list of children job models.
    */
-  @identifiers( #[])
+  @identifiers(#[])
   childrenJobs?: JobModel[];
 }
 

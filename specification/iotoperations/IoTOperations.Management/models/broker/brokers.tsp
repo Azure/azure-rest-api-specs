@@ -213,7 +213,7 @@ model VolumeClaimResourceRequirements {
 @doc("VolumeClaimSpecSelector properties")
 model VolumeClaimSpecSelector {
   @doc("MatchExpressions is a list of label selector requirements. The requirements are ANDed.")
-  @identifiers( #[])
+  @identifiers(#[])
   matchExpressions?: VolumeClaimSpecSelectorMatchExpressions[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"

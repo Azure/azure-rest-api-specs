@@ -76,7 +76,7 @@ model AwsS3BucketProperties {
   accessControl?: AccessControl;
 
   @doc("Specifies the configuration and any analyses for the analytics filter of an Amazon S3 bucket.")
-  @identifiers( #[])
+  @identifiers(#[])
   analyticsConfigurations?: AnalyticsConfiguration[];
 
   @doc("the Amazon Resource Name (ARN) of the specified bucket.")
