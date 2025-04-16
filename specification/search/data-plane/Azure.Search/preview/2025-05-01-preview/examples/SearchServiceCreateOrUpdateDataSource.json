@@ -12,14 +12,14 @@
     "Prefer": "return=representation",
     "dataSource": {
       "name": "tempdatasource",
-      "description": "My Azure Blob data source.",
-      "type": "azureblob",
+      "description": "My Azure Adls Gen2 data source.",
+      "type": "adlsgen2",
       "credentials": {
         "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
       },
       "container": {
-        "name": "doc-extraction-skillset",
-        "query": "E2E_Dsat"
+        "name": "adls-gen2-doc-extraction-acl",
+        "query": "folder_has_final_acl"
       },
       "identity": {
         "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
@@ -55,8 +55,8 @@
       "body": {
         "@odata.etag": "0x1234568AE7E58A1",
         "name": "tempdatasource",
-        "description": "My Azure Blob data source.",
-        "type": "azureblob",
+        "description": "My Azure Adls Gen2 data source.",
+        "type": "adlsgen2",
         "indexerPermissionOptions": [
           "userIds",
           "groupIds",
@@ -66,8 +66,8 @@
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
         },
         "container": {
-          "name": "doc-extraction-skillset",
-          "query": "E2E_Dsat"
+          "name": "adls-gen2-doc-extraction-acl",
+          "query": "folder_has_final_acl"
         },
         "dataChangeDetectionPolicy": {
           "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
@@ -96,8 +96,8 @@
       "body": {
         "@odata.etag": "0x1234568AE7E58A1",
         "name": "tempdatasource",
-        "description": "My Azure Blob data source.",
-        "type": "azureblob",
+        "description": "My Azure Adls Gen2 data source.",
+        "type": "adlsgen2",
         "indexerPermissionOptions": [
           "userIds",
           "groupIds",
@@ -107,8 +107,8 @@
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
         },
         "container": {
-          "name": "doc-extraction-skillset",
-          "query": "E2E_Dsat"
+          "name": "adls-gen2-doc-extraction-acl",
+          "query": "folder_has_final_acl"
         },
         "dataChangeDetectionPolicy": {
           "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",

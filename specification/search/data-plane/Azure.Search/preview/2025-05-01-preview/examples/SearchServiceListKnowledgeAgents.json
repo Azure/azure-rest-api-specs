@@ -12,19 +12,19 @@
         "value": [
           {
             "@odata.etag": "0x1234568AE7E58A1",
-            "name": "preview-test",
+            "name": "agent-preview-test",
+            "description": "Description of the agent.",
             "targetIndexes": [
               {
                 "indexName": "preview-test",
                 "defaultRerankerThreshold": 2.5,
                 "defaultIncludeReferenceSourceData": true,
-                "defaultMaxDocsPerRequest": 50
+                "defaultMaxDocsForReranker": 50
               }
             ],
             "models": [
               {
                 "kind": "azureOpenAI",
-                "perRequestTokenLimit": 0,
                 "azureOpenAIParameters": {
                   "resourceUri": "https://test-sample.openai.azure.com",
                   "deploymentId": "myDeployment",
@@ -36,6 +36,15 @@
             "requestLimits": {
               "maxRuntimeInSeconds": 60,
               "maxOutputSize": 100000
+            },
+            "encryptionKey": {
+              "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+              "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+              "keyVaultUri": "https://myKeyVault.vault.azure.net",
+              "accessCredentials": {
+                "applicationId": "00000000-0000-0000-0000-000000000000",
+                "applicationSecret": "<applicationSecret>"
+              }
             }
           }
         ]

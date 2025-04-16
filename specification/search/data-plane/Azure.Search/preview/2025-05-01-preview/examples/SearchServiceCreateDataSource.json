@@ -7,14 +7,14 @@
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "dataSource": {
       "name": "tempdatasource",
-      "description": "My Azure Blob data source.",
-      "type": "azureblob",
+      "description": "My Azure Adls Gen2 data source.",
+      "type": "adlsgen2",
       "credentials": {
         "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
       },
       "container": {
-        "name": "doc-extraction-skillset",
-        "query": "E2E_Dsat"
+        "name": "adls-gen2-doc-extraction-acl",
+        "query": "folder_has_final_acl"
       },
       "identity": {
         "@odata.type": "#Microsoft.Azure.Search.DataNoneIdentity"
@@ -49,8 +49,8 @@
     "201": {
       "body": {
         "name": "tempdatasource",
-        "description": "My Azure Blob data source.",
-        "type": "azureblob",
+        "description": "My Azure Adls Gen2 data source.",
+        "type": "adlsgen2",
         "indexerPermissionOptions": [
           "userIds",
           "groupIds",
@@ -60,8 +60,8 @@
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
         },
         "container": {
-          "name": "doc-extraction-skillset",
-          "query": "E2E_Dsat"
+          "name": "adls-gen2-doc-extraction-acl",
+          "query": "folder_has_final_acl"
         },
         "dataChangeDetectionPolicy": {
           "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
