@@ -42,6 +42,6 @@ interface RedTeams {
       @body
       RedTeam: RedTeam;
     },
-    RedTeam
+    ResourceCreatedResponse<RedTeam>
   >;
 }
