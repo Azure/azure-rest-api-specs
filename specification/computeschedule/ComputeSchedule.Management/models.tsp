@@ -390,6 +390,43 @@ model SubmitHibernateRequest {
   correlationid: string;
 }
 
+@doc("The SubmitCreateRequest request for create operations")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model SubmitCreateRequest {
+  @doc("The schedule for the request")
+  schedule: Schedule;
+
+  @doc("resource creation payload")
+  resourceConfigParameters: ResourceProvisionPayload;
+
+  @doc("The execution parameters for the request")
+  executionParameters?: ExecutionParameters;
+
+  @doc("CorrelationId item")
+  correlationid?: string;
+
+}
+
+@doc("The SubmitDeleteRequest request for delete operations")
+@added(Microsoft.ComputeSchedule.Versions.`2025-05-01`)
+model SubmitDeleteRequest {
+  @doc("The schedule for the request")
+  schedule: Schedule;
+
+  @doc("The execution parameters for the request")
+  executionParameters: ExecutionParameters;
+
+  @doc("The resources for the request")
+  resources: Resources;
+
+  @doc("CorrelationId item")
+  correlationid?: string;
+
+  @doc("Forced delete resource item")
+  forceDeletion?: boolean;
+
+}
+
 @doc("The response from a Hibernate request")
 model HibernateResourceOperationResponse {
   @doc("The description of the operation response")
@@ -451,7 +488,7 @@ model ExecuteCreateRequest {
   resourceConfigParameters: ResourceProvisionPayload;
 
   @doc("The execution parameters for the request")
-  executionParameters?: ExecutionParameters;
+  executionParameters: ExecutionParameters;
 
   @doc("CorrelationId item")
   correlationid?: string;
@@ -504,6 +541,9 @@ model ExecuteDeleteRequest {
 
   @doc("CorrelationId item")
   correlationid?: string;
+
+  @doc("Forced delete resource item")
+  forceDeletion?: boolean;
 }
 
 // ----------- GetOperationStatus ---------
