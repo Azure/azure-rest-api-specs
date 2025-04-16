@@ -236,3 +236,4 @@ model EvaluationUpload {
   @doc("Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}'}")
   outputs?: Record<string>;
 }
+

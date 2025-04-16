@@ -1291,6 +1291,37 @@
         }
       }
     },
+    "/evaluations/operations/{operationId}": {
+      "get": {
+        "operationId": "Evaluations_OperationResults",
+        "description": "Poll for the operation results.",
+        "parameters": [
+          {
+            "name": "apiVersion",
+            "in": "query",
+            "description": "Api Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID for the polling operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          }
+        }
+      }
+    },
     "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
