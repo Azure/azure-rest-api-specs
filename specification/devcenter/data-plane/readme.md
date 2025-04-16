@@ -45,6 +45,21 @@ directive:
     reason: DevBoxes and Environments are operations with multiple models.
 ```
 
+### Tag: package-2025-03-01-preview
+
+These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-01-preview'
+input-file:
+  - Microsoft.DevCenter/preview/2025-03-01-preview/devcenter.json
+
+directive:
+  - suppress: HostParametersValidation
+    reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen.
+  - suppress: OperationIdNounVerb
+    reason: DevBoxes and Environments are operations with multiple models.
+```
+
 ### Tag: package-2025-02-01
 
 These settings apply only when `--tag=package-2025-02-01` is specified on the command line.
