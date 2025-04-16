@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Azure.Management.PlaywrightService
-  output-folder: $(csharp-sdks-folder)/playwrightservice/Microsoft.Azure.Management.PlaywrightService/src/Generated
+  namespace: Microsoft.Azure.Management.Playwright
+  output-folder: $(csharp-sdks-folder)/playwright/Microsoft.Azure.Management.Playwright/src/Generated
 ```

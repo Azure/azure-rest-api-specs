@@ -6,20 +6,20 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: playwrightservice
-    namespace: azure.mgmt.playwrightservice
-    package-name: azure-mgmt-playwrightservice
-az-output-folder: $(azure-cli-extension-folder)/src/playwrightservice
-python-sdk-output-folder: "$(az-output-folder)/azext_playwrightservice/vendored_sdks/playwrightservice"
+    extensions: playwright
+    namespace: azure.mgmt.playwright
+    package-name: azure-mgmt-playwright
+az-output-folder: $(azure-cli-extension-folder)/src/playwright
+python-sdk-output-folder: "$(az-output-folder)/azext_playwright/vendored_sdks/playwright"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: playwrightservice
-  namespace: azure.mgmt.playwrightservice
-  package-name: azure-mgmt-playwrightservice
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/playwrightservice
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/playwrightservice"
+  extensions: playwright
+  namespace: azure.mgmt.playwright
+  package-name: azure-mgmt-playwright
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/playwright
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/playwright"
 ``` 
