@@ -27,7 +27,7 @@ These are the global settings for Search Client.
 ``` yaml
 title: SearchClient
 openapi-type: data-plane
-tag: package-2025-01
+tag: package-preview-2025-04
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -37,6 +37,15 @@ sdk-integration: true
 modelerfour:
   additional-checks: false
   lenient-model-deduplication: true
+```
+
+### Tag: package-preview-2025-04
+
+These settings apply only when `--tag=package-preview-2025-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2025-04'
+input-file:
+  - preview/2025-04-01-preview/search.json
 ```
 
 ### Tag: package-2025-01

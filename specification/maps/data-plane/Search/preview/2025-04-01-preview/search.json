@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Search Service",
-    "version": "2025-01-01",
+    "version": "2025-04-01-preview",
     "description": "Azure Maps Search REST APIs"
   },
   "host": "atlas.microsoft.com",
@@ -602,6 +602,121 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/GeocodingBatchResponse"
+            }
+          },
+          "default": {
+            "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
+          }
+        }
+      }
+    },
+    "/geocode:autocomplete": {
+      "get": {
+        "summary": "Use to get ranked list of suggested entities based on a user's location and a partial query.",
+        "description": "**Autosuggest API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nGiven a request with a user’s location and a partial query (called a query prefix), the Azure Maps Autosuggest API returns a list of suggested entities which the user is most likely searching for. These entities are ranked from most to least likely. Requests can be called using user locations.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "operationId": "Search_GetAutocomplete",
+        "produces": [
+          "application/geo+json"
+        ],
+        "x-ms-examples": {
+          "Autosuggest API call to search for '1 Microsoft Way, Redmond'": {
+            "$ref": "./examples/AutosuggestDefault.json"
+          },
+          "Autosuggest API call to search for 'Muir Woods', filtered by address type": {
+            "$ref": "./examples/AutosuggestAddress.json"
+          },
+          "Autosuggest API call to search for 'Muir Woods', filtered by place type": {
+            "$ref": "./examples/AutosuggestPlace.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/stable/2023-06-01/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "description": "Required. The user's query prefix.\n\nExample: \"1 Micro\" or \"Muir Woods\".\n",
+            "type": "string"
+          },
+          {
+            "name": "coordinates",
+            "in": "query",
+            "description": "Required if neither `coordinates` nor `bbox` are provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat\n\n**Note:** `coordinates` becomes a secondary signal if `bbox` is provided.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "collectionFormat": "csv",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/Bbox"
+          },
+          {
+            "$ref": "#/parameters/Top"
+          },
+          {
+            "name": "resultTypes",
+            "in": "query",
+            "description": "A comma separated list of returned entity types. The possible values are \n\n- Address\n- Place\n\nThese types are mutually inclusive. Place represents points of interest, like natural landmarks.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Address",
+                "Place"
+              ],
+              "x-ms-enum": {
+                "name": "AutosuggestResultTypeEnum",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "Address",
+                    "value": "Address"
+                  },
+                  {
+                    "name": "Place",
+                    "value": "Place"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/View"
+          },
+          {
+            "name": "countryRegion",
+            "in": "query",
+            "description": "Used to constrain entity suggestions to a single country denoted by a 2-letter country code abbreviation.\n\nExample: `DE`.\n",
+            "required": false,
+            "type": "string",
+            "default": "none"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutosuggestResponse"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1218,6 +1333,106 @@
         },
         "copyright": {
           "description": "The copyright string for the data provider",
+          "type": "string"
+        }
+      }
+    },
+    "AutosuggestResponse": {
+      "description": "This object is returned from a successful autosuggest call.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureCollectionType"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutosuggestFeature"
+          }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        }
+      }
+    },
+    "AutosuggestFeature": {
+      "type": "object",
+      "description": "Features of Autosuggest Result",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of a feature must be Feature.",
+          "enum": [
+            "Feature"
+          ],
+          "x-ms-enum": {
+            "name": "FeatureTypeEnum",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Feature"
+              }
+            ]
+          }
+        },
+        "resultType": {
+          "description": "Place or Address",
+          "type": "string",
+          "enum": [
+            "Place",
+            "Address"
+          ],
+          "x-ms-enum": {
+            "name": "AutosuggestResultType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Place",
+                "value": "Place"
+              },
+              {
+                "name": "Address",
+                "value": "Address"
+              }
+            ]
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/AutosuggestProperties"
+        }
+      },
+      "required": [
+        "type",
+        "resultType",
+        "properties"
+      ]
+    },
+    "AutosuggestProperties": {
+      "description": "Properties of Autosuggest Result",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "subtype",
+          "type": "string",
+          "enum": [
+            "Address"
+          ],
+          "x-ms-enum": {
+            "name": "AutosuggestSubType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Address",
+                "value": "Address"
+              }
+            ]
+          }
+        },
+        "address": {
+          "$ref": "#/definitions/Address"
+        },
+        "name": {
+          "description": "The name of the place. This field will not appear if the returned type is Address.",
           "type": "string"
         }
       }
