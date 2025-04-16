@@ -1421,6 +1421,39 @@
         }
       }
     },
+    "/providers/NewRelic.Observability/saas/getSaaSInfo": {
+      "post": {
+        "tags": [
+          "GetSaaSInfo"
+        ],
+        "operationId": "GetSaaSInfo",
+        "description": "Get the saas id from the marketplace token",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PublisherIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get SaaSInfo completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SaaSInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetSaaSInfo": {
+            "$ref": "./examples/GetSaaSInfo.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}": {
       "get": {
         "tags": [
@@ -2317,6 +2350,11 @@
       "properties": {},
       "description": "Location for NewRelic resource"
     },
+    "PublisherIdParameter": {
+      "type": "object",
+      "properties": {},
+      "description": "Publisher Id for NewRelic resource"
+    },
     "LogRules": {
       "type": "object",
       "properties": {
@@ -3078,6 +3116,16 @@
         }
       }
     },
+    "SaaSInfo": {
+      "type": "object",
+      "properties": {
+        "SaaSId": {
+          "type": "string",
+          "description": "The SaaS Id for Marketplace SaaS resource"
+        }
+      },
+      "description": "The saasinfo for the marketplace resource."
+    },
     "LinkedResource": {
       "description": "The definition of a linked resource.",
       "type": "object",
@@ -3548,6 +3596,14 @@
       "in": "query",
       "required": true,
       "description": "Location for NewRelic.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherIdParameter": {
+      "name": "publisherId",
+      "in": "query",
+      "required": true,
+      "description": "PublisherId for NewRelic resource.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
