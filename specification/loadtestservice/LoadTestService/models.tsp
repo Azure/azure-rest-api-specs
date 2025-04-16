@@ -332,7 +332,7 @@ union TestKind {
 @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
 union CreatedByType {
   string,
-  
+
   @doc("Entity was created by a user.")
   "User",
 
@@ -345,7 +345,7 @@ union CreatedByType {
 
   @added(APIVersions.v2025_03_01_preview)
   @doc("Entity was created by GitHub Workflows.")
-  "GitHubWorkflows"
+  "GitHubWorkflows",
 }
 
 @doc("Test file info.")
@@ -554,6 +554,9 @@ model AutoStopCriteria {
   @doc("Time window during which the error percentage should be evaluated in seconds.")
   @encode(DurationKnownEncoding.seconds, int32)
   errorRateTimeWindowInSeconds?: duration = duration.fromISO("PT60S");
+
+  @doc("Maximum number of virtual users per load testing engine, at which the test run should be automatically stopped.")
+  maximumVirtualUsersPerEngine?: int32 = 5000;
 }
 
 @doc("Configurations for the load test.")
@@ -1439,7 +1442,6 @@ union OperationKind {
 @doc("Status of a long running operation.")
 @resource("operations")
 model OperationStatus {
-
   @doc("The state of the operation.")
   status: Foundations.OperationState;
 
@@ -1449,7 +1451,7 @@ model OperationStatus {
   @doc("Error object that describes the error when status is \"Failed\".")
   error?: Foundations.Error;
 
-  ...OperationIdPathParameter
+  ...OperationIdPathParameter;
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
