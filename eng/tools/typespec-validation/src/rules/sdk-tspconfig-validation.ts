@@ -37,11 +37,7 @@ export abstract class TspconfigSubRuleBase {
     }
 
     const { shouldSkip, reason } = this.skip(config, folder);
-    if (shouldSkip)
-      return {
-        success: true,
-        stdOutput: `Validation skipped. ${reason}`,
-      };
+    if (shouldSkip) return { success: true, stdOutput: `Validation skipped. ${reason}` };
     return this.validate(config);
   }
 
@@ -66,10 +62,7 @@ export abstract class TspconfigSubRuleBase {
   }
 
   protected createFailedResult(error: string, action: string): RuleResult {
-    return {
-      success: false,
-      errorOutput: `- ${error}. ${action}.`,
-    };
+    return { success: false, errorOutput: `- ${error}. ${action}.` };
   }
 
   public abstract getPathOfKeyToValidate(): string;
@@ -166,9 +159,7 @@ function skipForNonModularOrDataPlaneInTsEmitter(config: any, folder: string): S
   // isModularLibrary is true by default
   const isModularClient = config?.options?.["@azure-tools/typespec-ts"]?.isModularLibrary !== false;
   const shouldRun = isManagementSdk(folder) && isModularClient;
-  const result: SkipResult = {
-    shouldSkip: !shouldRun,
-  };
+  const result: SkipResult = { shouldSkip: !shouldRun };
   if (result.shouldSkip)
     result.reason = "This rule is only applicable for management SDKs with modular client.";
   return result;
@@ -189,45 +180,9 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
 }
 
 // ----- TS management modular sub rules -----
-// NOTE: this is only used when TS emitter is migrating to the new option style
-//       will be deleted when the migration is done
-class TspConfigTsOptionMigrationSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
-  private oldOptionStyleSubRule: TspconfigEmitterOptionsSubRuleBase & {
-    validateOption(config: any): RuleResult;
-  };
-  private newOptionStyleSubRule: TspconfigEmitterOptionsSubRuleBase & {
-    validateOption(config: any): RuleResult;
-  };
-  constructor(oldOptionName: string, newOptionName: string, expectedValue: ExpectedValueType) {
-    class PrivateOptionStyleSubRule extends TspconfigEmitterOptionsSubRuleBase {
-      constructor(optionName: string, expectedValue: ExpectedValueType) {
-        super("@azure-tools/typespec-ts", optionName, expectedValue);
-      }
-      public validateOption(config: any): RuleResult {
-        return this.validate(config);
-      }
-    }
-
-    // the parameters are not used, but are required to be passed to the super constructor
-    super("", "", "");
-    this.oldOptionStyleSubRule = new PrivateOptionStyleSubRule(oldOptionName, expectedValue);
-    this.newOptionStyleSubRule = new PrivateOptionStyleSubRule(newOptionName, expectedValue);
-  }
-
-  protected validate(config: any): RuleResult {
-    var newResult = this.newOptionStyleSubRule.validateOption(config);
-    // if success == true, then the option is found and passes validation
-    // if success == false, and "Failed to find" is not in errorOutput, then the option is found but fails validation
-    if (newResult.success || !newResult.errorOutput?.includes("Failed to find")) return newResult;
-
-    var oldResult = this.oldOptionStyleSubRule.validateOption(config);
-    return oldResult;
-  }
-}
-
-export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("experimentalExtensibleEnums", "experimental-extensible-enums", true);
+    super("@azure-tools/typespec-ts", "experimental-extensible-enums", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -243,9 +198,13 @@ export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmit
   }
 }
 
-export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("packageDetails.name", "package-details.name", new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/));
+    super(
+      "@azure-tools/typespec-ts",
+      "package-details.name",
+      new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
+    );
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
