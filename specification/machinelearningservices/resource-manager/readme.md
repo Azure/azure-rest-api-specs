@@ -153,6 +153,16 @@ suppressions:
     reason: CMK is a short term and not violate the camel case rule.
     where:
       - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
+  - code: PutResponseCodes
+    reason: Service already using 202 response code for all the previous existing managed network APIs.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Service already using response pattern without provisioning state for all previous existing outbound rules APIs.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}].put
 ```
 
 ### Tag: package-preview-2025-01
