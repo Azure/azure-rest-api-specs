@@ -555,6 +555,7 @@ model AutoStopCriteria {
   @encode(DurationKnownEncoding.seconds, int32)
   errorRateTimeWindowInSeconds?: duration = duration.fromISO("PT60S");
 
+  @added(APIVersions.v2025_03_01_preview)
   @doc("Maximum number of virtual users per load testing engine, at which the test run should be automatically stopped.")
   maximumVirtualUsersPerEngine?: int32 = 5000;
 }

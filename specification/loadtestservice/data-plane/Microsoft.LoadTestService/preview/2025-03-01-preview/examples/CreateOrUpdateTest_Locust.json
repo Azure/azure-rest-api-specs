@@ -9,15 +9,15 @@
       "displayName": "Performance_LoadTest",
       "kind": "Locust",
       "loadTestConfiguration": {
-        "engineInstances": null,
+        "engineInstances": 6,
         "splitAllCSVs": false,
         "regionalLoadTestConfig": [
           {
-            "loadPercentage": 40,
+            "engineInstances": 4,
             "region": "northeurope"
           },
           {
-            "loadPercentage": 60,
+            "engineInstances": 2,
             "region": "westeurope"
           }
         ]
@@ -47,7 +47,8 @@
       "autoStopCriteria": {
         "autoStopDisabled": true,
         "errorRate": 70,
-        "errorRateTimeWindowInSeconds": 60
+        "errorRateTimeWindowInSeconds": 60,
+        "maximumVirtualUsersPerEngine": 5000
       },
       "secrets": {
         "secret1": {
@@ -77,15 +78,15 @@
         "displayName": "Performance_LoadTest",
         "kind": "Locust",
         "loadTestConfiguration": {
-          "engineInstances": null,
+          "engineInstances": 6,
           "splitAllCSVs": false,
           "regionalLoadTestConfig": [
             {
-              "loadPercentage": 40,
+              "engineInstances": 4,
               "region": "northeurope"
             },
             {
-              "loadPercentage": 60,
+              "engineInstances": 2,
               "region": "westeurope"
             }
           ]
@@ -117,7 +118,8 @@
         "autoStopCriteria": {
           "autoStopDisabled": true,
           "errorRate": 70,
-          "errorRateTimeWindowInSeconds": 60
+          "errorRateTimeWindowInSeconds": 60,
+          "maximumVirtualUsersPerEngine": 5000
         },
         "createdDateTime": "2021-12-05T16:43:46.072Z",
         "createdBy": "user@contoso.com",
@@ -179,15 +181,15 @@
         "displayName": "Performance_LoadTest",
         "kind": "Locust",
         "loadTestConfiguration": {
-          "engineInstances": null,
+          "engineInstances": 6,
           "splitAllCSVs": false,
           "regionalLoadTestConfig": [
             {
-              "loadPercentage": 40,
+              "engineInstances": 4,
               "region": "northeurope"
             },
             {
-              "loadPercentage": 60,
+              "engineInstances": 2,
               "region": "westeurope"
             }
           ]
@@ -208,7 +210,8 @@
         "autoStopCriteria": {
           "autoStopDisabled": true,
           "errorRate": 70,
-          "errorRateTimeWindowInSeconds": 60
+          "errorRateTimeWindowInSeconds": 60,
+          "maximumVirtualUsersPerEngine": 5000
         },
         "createdDateTime": "2021-12-05T16:43:46.072Z",
         "createdBy": "user@contoso.com",

@@ -67,7 +67,8 @@
             "autoStopCriteria": {
               "autoStopDisabled": true,
               "errorRate": 70,
-              "errorRateTimeWindowInSeconds": 60
+              "errorRateTimeWindowInSeconds": 60,
+              "maximumVirtualUsersPerEngine": 5000
             },
             "testArtifacts": {
               "inputArtifacts": {
@@ -166,15 +167,15 @@
             "endDateTime": "2021-12-05T16:43:48.125Z",
             "kind": "Locust",
             "loadTestConfiguration": {
-              "engineInstances": null,
+              "engineInstances": 6,
               "splitAllCSVs": false,
               "regionalLoadTestConfig": [
                 {
-                  "loadPercentage": 40,
+                  "engineInstances": 4,
                   "region": "northeurope"
                 },
                 {
-                  "loadPercentage": 60,
+                  "engineInstances": 2,
                   "region": "westeurope"
                 }
               ]
@@ -207,7 +208,8 @@
             "autoStopCriteria": {
               "autoStopDisabled": true,
               "errorRate": 70,
-              "errorRateTimeWindowInSeconds": 60
+              "errorRateTimeWindowInSeconds": 60,
+              "maximumVirtualUsersPerEngine": 5000
             },
             "testArtifacts": {
               "inputArtifacts": {
