@@ -3928,6 +3928,578 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}": {
+      "delete": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "The DELETE API for deleting a single outbound rule of the managed network associated with the machine learning workspace.",
+        "operationId": "OutboundRule_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete OutboundRule": {
+            "$ref": "./examples/ManagedNetwork/deleteRuleV2.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.",
+        "operationId": "OutboundRule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get OutboundRule": {
+            "$ref": "./examples/ManagedNetwork/getRuleV2.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "operationId": "OutboundRule_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate OutboundRule": {
+            "$ref": "./examples/ManagedNetwork/createOrUpdateRuleV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules": {
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "The GET API for retrieveing the list of outbound rules of the managed network associated with the machine learning workspace.",
+        "operationId": "OutboundRule_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List OutboundRules": {
+            "$ref": "./examples/ManagedNetwork/listRuleV2.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/batchOutboundRules": {
+      "post": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.",
+        "operationId": "OutboundRules_Post",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Managed Network Settings object of the workspace.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Post OutboundRules": {
+            "$ref": "./examples/ManagedNetwork/postOutboundRulesV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}": {
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "Get API for managed network settings of a machine learning workspace.",
+        "operationId": "ManagedNetworkSettings_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/getManagedNetworkV2.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "Patch API for managed network settings of a machine learning workspace.",
+        "operationId": "ManagedNetworkSettings_Patch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Managed Network Settings object of the workspace.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Patch ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/patchManagedNetworkV2.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "PUT API for managed network settings of a machine learning workspace.",
+        "operationId": "ManagedNetworkSettings_Put",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Managed Network Settings object of the workspace.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Put ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/createOrUpdateManagedNetworkV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks": {
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "List API for managed network settings of a machine learning workspace.",
+        "operationId": "ManagedNetworkSettings_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/listManagedNetworkV2.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5331,18 +5903,9 @@
       "type": "object",
       "properties": {
         "enableNetworkMonitor": {
-          "description": "Enable network monitoring for the managed network.",
-          "type": "boolean"
-        },
-        "firewallPublicIpAddress": {
-          "type": "string",
-          "description": "Public IP address assigned to the Azure Firewall.",
-          "readOnly": true,
-          "x-nullable": true
-        },
-        "firewallSku": {
-          "description": "Firewall Sku used for FQDN Rules",
-          "$ref": "#/definitions/FirewallSku"
+          "description": "A flag to indicate if monitoring needs to be enabled for the managed network.",
+          "type": "boolean",
+          "default": false
         },
         "isolationMode": {
           "description": "Isolation mode for the managed network of a machine learning workspace.",
@@ -5364,12 +5927,45 @@
           "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/ManagedNetworkProvisionStatus"
         },
-        "changeableIsolationModes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IsolationMode"
-          },
-          "readOnly": true
+        "firewallSku": {
+          "description": "Firewall Sku used for FQDN Rules",
+          "$ref": "#/definitions/FirewallSku"
+        },
+        "managedNetworkKind": {
+          "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+          "$ref": "#/definitions/ManagedNetworkKind"
+        },
+        "firewallPublicIpAddress": {
+          "type": "string",
+          "description": "Public IP address assigned to the Azure Firewall.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "ManagedNetworkKind": {
+      "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedNetworkKind",
+        "modelAsString": true
+      }
+    },
+    "ManagedNetworkSettingsBasicResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Managed Network settings for a machine learning workspace.",
+          "$ref": "#/definitions/ManagedNetworkSettings"
         }
       }
     },
@@ -5643,6 +6239,22 @@
           "description": "Category of a managed network Outbound Rule of a machine learning workspace.",
           "$ref": "#/definitions/RuleCategory"
         },
+        "status": {
+          "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
+          "$ref": "#/definitions/RuleStatus"
+        },
+        "type": {
+          "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
+          "$ref": "#/definitions/RuleType"
+        },
+        "errorInformation": {
+          "description": "Error information about an outbound rule of a machine learning workspace if RuleStatus is failed.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
         "parentRuleNames": {
           "type": "array",
           "items": {
@@ -5652,14 +6264,6 @@
           "x-ms-mutability": [
             "read"
           ]
-        },
-        "status": {
-          "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
-          "$ref": "#/definitions/RuleStatus"
-        },
-        "type": {
-          "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
-          "$ref": "#/definitions/RuleType"
         }
       },
       "discriminator": "type"
@@ -5695,6 +6299,91 @@
           "items": {
             "$ref": "#/definitions/OutboundRuleBasicResource"
           }
+        }
+      }
+    },
+    "ManagedNetworkListResult": {
+      "description": "List of managed networks of a machine learning workspace.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of managed network settings of a workspace. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning workspaces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+          }
+        }
+      }
+    },
+    "ManagedNetworkSettingsEx": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        }
+      ],
+      "properties": {
+        "changeableIsolationModes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IsolationMode"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedNetworkSettingsProperties": {
+      "description": "The properties of the managed network settings of a machine learning workspace.",
+      "type": "object",
+      "properties": {
+        "managedNetwork": {
+          "description": "Managed Network settings for a machine learning workspace.",
+          "$ref": "#/definitions/ManagedNetworkSettingsEx"
+        },
+        "provisioningState": {
+          "description": "The current deployment state of the managed network resource. The provisioningState is to indicate states for resource provisioning.",
+          "$ref": "#/definitions/ManagedNetworkProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ManagedNetworkProvisioningState": {
+      "enum": [
+        "Deferred",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Deleted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedNetworkProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ]
+    },
+    "ManagedNetworkSettingsPropertiesBasicResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of the managed network settings of a machine learning workspace.",
+          "$ref": "#/definitions/ManagedNetworkSettingsProperties"
         }
       }
     },
@@ -6306,7 +6995,10 @@
       "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Inactive",
-        "Active"
+        "Active",
+        "Provisioning",
+        "Deleting",
+        "Failed"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -7473,6 +8165,15 @@
       "description": "Api version used by proxy call",
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ManagedNetworkNameParameter": {
+      "in": "path",
+      "name": "managedNetworkName",
+      "description": "Name of the managedNetwork associated with the workspace. Only 'default' is supported.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     }
   },
   "securityDefinitions": {
