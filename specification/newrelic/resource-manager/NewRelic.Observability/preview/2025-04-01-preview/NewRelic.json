@@ -1422,7 +1422,7 @@
       }
     },
     "/providers/NewRelic.Observability/saas/getSaaSInfo": {
-      "post": {
+      "get": {
         "tags": [
           "GetSaaSInfo"
         ],
@@ -1431,6 +1431,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/PublisherIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -3119,7 +3122,7 @@
     "SaaSInfo": {
       "type": "object",
       "properties": {
-        "SaaSId": {
+        "saaSId": {
           "type": "string",
           "description": "The SaaS Id for Marketplace SaaS resource"
         }
