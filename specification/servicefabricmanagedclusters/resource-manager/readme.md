@@ -32,7 +32,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2024-11-preview
+tag: package-2025-03-preview
 
 directive:
   - suppress: ListInOperationName
@@ -80,6 +80,15 @@ directive:
       - $.parameters.resourceGroupNameParameter.name
   - suppress: OperationsApiSchemaUsesCommonTypes
     reason: Common type operations api schema is not compatible with existing API spec. Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215)
+```
+
+### Tag: package-2025-03-preview
+
+These settings apply only when `--tag=package-2025-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-03-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2025-03-01-preview/servicefabricmanagedclusters.json
 ```
 
 ### Tag: package-2024-11-preview
