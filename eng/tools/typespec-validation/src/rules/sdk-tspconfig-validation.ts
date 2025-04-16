@@ -429,13 +429,11 @@ export class TspConfigCsharpAzPackageDirectorySubRule extends TspconfigEmitterOp
   }
 }
 
-export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigSubRuleBase {
-  protected emitterName: string;
+export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("namespace", "{package-dir}");
-    this.emitterName = "@azure-tools/typespec-csharp";
+    super("@azure-tools/typespec-csharp", "namespace", "{package-dir}");
   }
-  protected validate(config: any): RuleResult {
+  override validate(config: any): RuleResult {
     let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
     for (const segment of this.keyToValidate.split(".")) {
       if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
@@ -466,10 +464,6 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigSubRu
       `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}" or "${packageDir}"`,
       `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}" or the value of "package-dir" option or parameter`,
     );
-  }
-
-  public getPathOfKeyToValidate() {
-    return `options.${this.emitterName}.${this.keyToValidate}`;
   }
 }
 

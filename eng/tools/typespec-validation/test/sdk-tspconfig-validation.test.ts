@@ -247,7 +247,7 @@ const tsDpPackageDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-ts",
   "",
   "package-dir",
-  "arm-rest",
+  "arm--rest",
   "aaa-",
   [new TspConfigTsDpPackageDirectorySubRule()],
 );
