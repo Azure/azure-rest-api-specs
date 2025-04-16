@@ -5936,8 +5936,10 @@
           "$ref": "#/definitions/ManagedNetworkKind"
         },
         "firewallPublicIpAddress": {
+          "type": "string",
           "description": "Public IP address assigned to the Azure Firewall.",
-          "type": "string"
+          "readOnly": true,
+          "x-nullable": true
         }
       }
     },
@@ -6234,12 +6236,15 @@
       "type": "object",
       "properties": {
         "category": {
+          "description": "Category of a managed network Outbound Rule of a machine learning workspace.",
           "$ref": "#/definitions/RuleCategory"
         },
         "status": {
+          "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
           "$ref": "#/definitions/RuleStatus"
         },
         "type": {
+          "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
           "$ref": "#/definitions/RuleType"
         },
         "errorInformation": {
