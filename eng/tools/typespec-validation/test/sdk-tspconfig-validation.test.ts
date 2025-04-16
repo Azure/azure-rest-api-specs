@@ -1,4 +1,4 @@
-import { describe, it } from "vitest";
+import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 
 import {
   SdkTspConfigValidationRule,
@@ -31,10 +31,12 @@ import {
   TspconfigSubRuleBase,
   TspConfigPythonDpPackageDirectorySubRule,
 } from "../src/rules/sdk-tspconfig-validation.js";
-import { TsvTestHost } from "./tsv-test-host.js";
+import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { join } from "path";
 import { strictEqual } from "node:assert";
 import { stringify } from "yaml";
+
+import * as utils from "../src/utils.js";
 
 export function createParameterExample(...pairs: { key: string; value: string | boolean | {} }[]) {
   const obj: Record<string, any> = { parameters: {} };
@@ -571,6 +573,19 @@ options:
 ];
 
 describe("tspconfig", function () {
+  let fileExistsSpy: MockInstance;
+  let readTspConfigSpy: MockInstance;
+
+  beforeEach(() => {
+    fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+    readTspConfigSpy = vi.spyOn(utils, "readTspConfig").mockResolvedValue(contosoTspConfig);
+  });
+
+  afterEach(() => {
+    fileExistsSpy.mockReset();
+    readTspConfigSpy.mockReset();
+  });
+
   it.each([
     // common
     ...commonAzureServiceDirTestCases,
@@ -619,12 +634,8 @@ describe("tspconfig", function () {
     // suppression
     ...suppressSubRuleTestCases,
   ])(`$description`, async (c: Case) => {
-    let host = new TsvTestHost();
-    host.checkFileExists = async (file: string) => {
-      return file === join(c.folder, "tspconfig.yaml");
-    };
-    host.readTspConfig = async (_folder: string) => c.tspconfigContent;
-    host.getSuppressions = async (_path: string) => [
+    readTspConfigSpy.mockImplementation(async (_folder: string) => c.tspconfigContent);
+    vi.spyOn(utils, "getSuppressions").mockImplementation(async (_path: string) => [
       {
         tool: "TypeSpecValidation",
         paths: ["tspconfig.yaml"],
@@ -632,9 +643,14 @@ describe("tspconfig", function () {
         rules: ["SdkTspConfigValidation"],
         subRules: c.ignoredKeyPaths,
       },
-    ];
+    ]);
+
+    fileExistsSpy.mockImplementation(async (file: string) => {
+      return file === join(c.folder, "tspconfig.yaml");
+    });
+
     const rule = new SdkTspConfigValidationRule(c.subRules);
-    const result = await rule.execute(host, c.folder);
+    const result = await rule.execute(c.folder);
     strictEqual(result.success, true);
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
