@@ -65,7 +65,8 @@ interface Evaluations {
   @removed(Versions.v_latest)
   op checkAnnotation(
     @doc("Api Version.")
-    @query apiVersion: string
+    @query("api-version")
+    apiVersion: string
   ): {
       @statusCode statusCode: 200;
       @doc("List of supported annotation.")
@@ -81,7 +82,8 @@ interface Evaluations {
   @removed(Versions.v_latest)
   op submitAnnotation(
     @doc("Api Version.")
-    @query apiVersion: string,
+    @query("api-version")
+    apiVersion: string,
     @doc("Annotation data inputList of supported annotation.")
     @body annotationDTO: AnnotationDTO
   ): {
