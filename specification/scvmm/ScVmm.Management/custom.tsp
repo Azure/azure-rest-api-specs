@@ -1,3 +1,6 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
 using Http;
 using Rest;
 using Azure.ResourceManager;
