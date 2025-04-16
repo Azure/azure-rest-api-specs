@@ -24,7 +24,7 @@ export async function main() {
   if (args.length === 4) {
     const baseCommitHash: string = args[0];
     const headCommitHash: string = args[1];
-    const changeFiles: string[] = JSON.parse(args[2]);
+    const changeFiles: string[] = args[2]?.split(",") ?? [];
     const lables: string = args[3];
     const outputFile = process.env.OUTPUT_FILE as string;
     const changedLabels: { labelsToAdd: String[]; labelsToRemove: String[] } =
