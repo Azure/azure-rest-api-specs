@@ -49,7 +49,10 @@ interface EvaluationResults
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Enable downloading json.")
-  FetchAssetCredentials is ServicePatterns.VersionedResourceAction<
+  @post
+  @Rest.action("credentials")
+  @Rest.actionSeparator("/")
+  getCredentials is ServicePatterns.VersionedResourceAction<
     EvaluationResult,
     AssetCredentialRequest,
     AssetCredentialResponse
