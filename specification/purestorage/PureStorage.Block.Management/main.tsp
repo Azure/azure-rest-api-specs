@@ -24,11 +24,11 @@ enum Versions {
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v1_preview: "2024-10-01-preview",
 
-  @doc("Version 2 preview.")
+  @doc("Version 1 stable.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v2_preview)
+  @useDependency(LiftrBase.Versions.v1_stable)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
-  v2_preview: "2024-11-01",
+  v1_stable: "2024-11-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -48,7 +48,7 @@ interface Reservations
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<LimitDetails> | ErrorResponse;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v1_stable)
   @doc("Provides various statistics about resources billed via given reservation.")
   @armResourceAction(Reservation)
   @action("getBillingStatus")
@@ -57,7 +57,7 @@ interface Reservations
     ...ResourceInstanceParameters<Reservation>,
   ): ArmResponse<ReservationBillingStatus> | ErrorResponse;
 
-  @added(Versions.v2_preview)
+  @added(Versions.v1_stable)
   @doc("Provides a summarized report along with actions for resources billed via given reservation")
   @armResourceAction(Reservation)
   @action("getBillingReport")
@@ -67,7 +67,7 @@ interface Reservations
   ): ArmResponse<ReservationBillingUsageReport> | ErrorResponse;
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v1_stable)
 @doc("Represents a billing usage report, including overall status and detailed properties")
 model ReservationBillingUsageReport {
   @doc("Latest formatted billing report for this reservation")
@@ -81,7 +81,7 @@ model ReservationBillingUsageReport {
   overallStatusMessage: string;
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v1_stable)
 @doc("Represents an individual billing usage property")
 model BillingUsageProperty {
   @doc("Unique identifier for the billing usage property")
@@ -107,7 +107,7 @@ model BillingUsageProperty {
   subProperties?: BillingUsageProperty[];
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v1_stable)
 @doc("Severity levels for billing usage properties")
 union UsageSeverity {
   @doc("Indicates an alert condition")
@@ -125,7 +125,7 @@ union UsageSeverity {
   string,
 }
 
-@added(Versions.v2_preview)
+@added(Versions.v1_stable)
 @doc("Latest billing status for this reservation")
 model ReservationBillingStatus {
   @doc("Timestamp for the latest update of this billing status, in RFC 3339 format")
@@ -590,7 +590,7 @@ model AvsStorageContainerProperties {
   @doc("Name of the storage used.")
   @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$")
   @visibility(Lifecycle.Read)
-  @removed(Versions.v2_preview)
+  @removed(Versions.v1_stable)
   storageName?: string;
 
   @doc("Name of the storage container")
@@ -897,7 +897,7 @@ interface AvsVmVolumes {
   listByAvsVm is ArmResourceListByParent<AvsVmVolume>;
 }
 
-@removed(Versions.v2_preview)
+@removed(Versions.v1_stable)
 @doc("Azure Volume Group assigned to the volume.")
 model AzureProperties {
   @doc("Azure Volume Group ID assigned to the volume.")
