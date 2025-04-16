@@ -220,7 +220,7 @@ interface DevBoxes {
   @doc("Aligns a Dev Box to the pools current pool configuration.")
   @pollingOperation(OperationStatuses.get)
   @action("align")
-  @added(APIVersions.v2025_03_01_preview)
+  @added(APIVersions.v2025_04_01_preview)
   alignDevBox is DevCenterOps.LongRunningResourceAction<
     DevBox,
     PoolAlignBody,
@@ -240,7 +240,7 @@ interface DevBoxes {
 
   @doc("Lets a user set their own active hours for their Dev Box, overriding the defaults set at the pool level.")
   @action("setActiveHours")
-  @added(APIVersions.v2025_03_01_preview)
+  @added(APIVersions.v2025_04_01_preview)
   setActiveHours is StandardResourceOperations.ResourceAction<
     DevBox,
     {
