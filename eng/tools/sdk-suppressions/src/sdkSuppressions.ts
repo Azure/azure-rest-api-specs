@@ -5,7 +5,7 @@
  */
 
 import { Ajv } from "ajv";
-import { SdkName, sdkLabels } from "./sdk.js";
+import { SdkName, sdkLabels } from "@azure-tools/specs-shared/sdk-types";
 
 export const sdkSuppressionsFileName = "sdk-suppressions.yaml";
 

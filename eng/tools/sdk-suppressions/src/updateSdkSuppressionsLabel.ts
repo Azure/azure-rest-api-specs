@@ -2,7 +2,7 @@ import _ from "lodash";
 import debug from "debug";
 import { writeFileSync } from "fs";
 import { simpleGit } from "simple-git";
-import { sdkLabels, SdkName } from "./sdk.js";
+import { sdkLabels, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import {
   SdkSuppressionsYml,
   SdkSuppressionsSection,
@@ -11,7 +11,7 @@ import {
   validateSdkSuppressionsFile,
 } from "./sdkSuppressions.js";
 import { parseYamlContent } from "./common.js";
- 
+
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
 
@@ -29,9 +29,11 @@ debug.enable("simple-git");
 export async function getSdkSuppressionsSdkNames(
   prChangeFiles: string,
   baseCommitHash: string,
-  headCommitHash: string
+  headCommitHash: string,
 ): Promise<SdkName[]> {
-  console.log(`Will compare base commit: ${baseCommitHash} and head commit: ${headCommitHash} to get different SDK.`);
+  console.log(
+    `Will compare base commit: ${baseCommitHash} and head commit: ${headCommitHash} to get different SDK.`,
+  );
   const filesChangedPaths = prChangeFiles.split(" ");
   console.log(`The pr origin changed files: ${filesChangedPaths.join(", ")}`);
   let suppressionFileList = filterSuppressionList(filesChangedPaths);
@@ -39,8 +41,14 @@ export async function getSdkSuppressionsSdkNames(
   let sdkNameList: SdkName[] = [];
   if (suppressionFileList.length > 0) {
     for (const suppressionFile of suppressionFileList) {
-      let baseSuppressionContent = await getSdkSuppressionsFileContent(baseCommitHash, suppressionFile);
-      const headSuppressionContent = await getSdkSuppressionsFileContent(headCommitHash, suppressionFile);
+      let baseSuppressionContent = await getSdkSuppressionsFileContent(
+        baseCommitHash,
+        suppressionFile,
+      );
+      const headSuppressionContent = await getSdkSuppressionsFileContent(
+        headCommitHash,
+        suppressionFile,
+      );
 
       // if the head suppression file is present but anything is wrong like schema error with it return
       const validateSdkSuppressionsFileResult =
@@ -55,9 +63,9 @@ export async function getSdkSuppressionsSdkNames(
 
       console.log(
         `updateSdkSuppressionsLabels: Will compare base suppressions content:\n ` +
-        `${JSON.stringify(baseSuppressionContent)}\n ` + 
-        `and head suppressions content:\n ` +
-        `${JSON.stringify(headSuppressionContent)} to get different SDK.`,
+          `${JSON.stringify(baseSuppressionContent)}\n ` +
+          `and head suppressions content:\n ` +
+          `${JSON.stringify(headSuppressionContent)} to get different SDK.`,
       );
 
       sdkNameList = getSdkNamesWithChangedSuppressions(
@@ -89,11 +97,11 @@ function getSdksWithSuppressionsDefined(suppressions: SdkSuppressionsSection): S
 }
 
 /**
- * 
- * @param headSuppressionFile 
- * @param baseSuppressionFile 
+ *
+ * @param headSuppressionFile
+ * @param baseSuppressionFile
  * @returns SdkName[]
- * 
+ *
  * Analyze the suppression files across three dimensions: language, package, and breaking-change. Finally, determine the outermost sdkName.
  */
 
@@ -214,7 +222,7 @@ export async function updateSdkSuppressionsLabels(
 
   const result = processLabels(presentLabels, sdkNames);
 
-  if(outputFile){
+  if (outputFile) {
     writeFileSync(outputFile, JSON.stringify(result));
     console.log(`😊 JSON output saved to ${outputFile}`);
   }
@@ -223,20 +231,23 @@ export async function updateSdkSuppressionsLabels(
 }
 
 /**
- * 
- * @param presentLabels 
- * @param sdkNames 
+ *
+ * @param presentLabels
+ * @param sdkNames
  * @returns {labelsToAdd: String[], labelsToRemove: String[]}
- * 
+ *
  * Based on the various sdknames and existing labels, process the suppression label of PR.
- * 
- * Add logic:    If the breakingChangeSuppression label corresponding to an SDK in sdkNames is not in the current presentLabels list, 
+ *
+ * Add logic:    If the breakingChangeSuppression label corresponding to an SDK in sdkNames is not in the current presentLabels list,
  *               add the label to labelsToAdd.
- * Remove logic: If a label is in presentLabels and the corresponding breakingChangeSuppression is not in sdkNames 
+ * Remove logic: If a label is in presentLabels and the corresponding breakingChangeSuppression is not in sdkNames
  *               and there is no corresponding breakingChangeSuppressionApproved label, then the label is deleted.
  *               Otherwise, the label is not deleted.
  */
-export function processLabels(presentLabels: string[], sdkNames: string[]): { labelsToAdd: String[]; labelsToRemove: String[] } {
+export function processLabels(
+  presentLabels: string[],
+  sdkNames: string[],
+): { labelsToAdd: String[]; labelsToRemove: String[] } {
   // The sdkNames indicates whether any suppression files have been modified. If it is empty
   // then check if the suppression label was previously applied and remove it if so. Otherwise, no action is needed.
   let addSdkSuppressionsLabels: string[] = [];
@@ -245,33 +256,39 @@ export function processLabels(presentLabels: string[], sdkNames: string[]): { la
     const sdk = sdkLabels[sdkName as SdkName];
     const breakingChangeSuppression = sdk.breakingChangeSuppression;
     // If breakingChangeSuppression is not in the existing labels, add it to labelsToAdd
-    if (
-      breakingChangeSuppression &&
-      !presentLabels.includes(breakingChangeSuppression)
-    ) {
+    if (breakingChangeSuppression && !presentLabels.includes(breakingChangeSuppression)) {
       addSdkSuppressionsLabels.push(breakingChangeSuppression);
     }
   });
-  
-  presentLabels.forEach(label => {
+
+  presentLabels.forEach((label) => {
     // Check if it is a suppression label
-    const suppressionLabelExists = Object.values(sdkLabels).some(sdk => {
-      return sdk.breakingChangeSuppression === label; 
+    const suppressionLabelExists = Object.values(sdkLabels).some((sdk) => {
+      return sdk.breakingChangeSuppression === label;
     });
-  
+
     // If it is a suppression label
     if (suppressionLabelExists) {
       // Check if there is a corresponding approved label
-      const hasApprovedLabel = Object.values(sdkLabels).some(sdk => {
-        return sdk.breakingChangeSuppression === label && sdk.breakingChangeSuppressionApproved && presentLabels.includes(sdk.breakingChangeSuppressionApproved);
+      const hasApprovedLabel = Object.values(sdkLabels).some((sdk) => {
+        return (
+          sdk.breakingChangeSuppression === label &&
+          sdk.breakingChangeSuppressionApproved &&
+          presentLabels.includes(sdk.breakingChangeSuppressionApproved)
+        );
       });
       // If there is no corresponding approved label and there is no suppression label in sdkNames, delete it.
-      if (!hasApprovedLabel && !sdkNames.some(sdkName => sdkLabels[sdkName as SdkName].breakingChangeSuppression === label)) {
+      if (
+        !hasApprovedLabel &&
+        !sdkNames.some(
+          (sdkName) => sdkLabels[sdkName as SdkName].breakingChangeSuppression === label,
+        )
+      ) {
         removeSdkSuppressionsLabels.push(label);
       }
     }
   });
-  
+
   return {
     labelsToAdd: addSdkSuppressionsLabels,
     labelsToRemove: removeSdkSuppressionsLabels,
