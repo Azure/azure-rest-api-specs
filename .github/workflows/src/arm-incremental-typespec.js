@@ -44,7 +44,7 @@ export default async function incrementalTypeSpec({ core }) {
     /** @type string */
     let swaggerText;
     try {
-      swaggerText = await git.show(["HEAD", file]);
+      swaggerText = await git.show(["HEAD", "--", file]);
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
         // To simplify logic, if PR deletes a swagger file, it's not "incremental typespec"
@@ -79,7 +79,7 @@ export default async function incrementalTypeSpec({ core }) {
 
     let readmeText;
     try {
-      readmeText = await git.show(["HEAD", readmeFile]);
+      readmeText = await git.show(["HEAD", "--", readmeFile]);
     } catch (e) {
       if (e instanceof Error && e.message.includes("does not exist")) {
         // To simplify logic, if PR deletes a readme file, it's not "incremental typespec"
@@ -138,7 +138,7 @@ export default async function incrementalTypeSpec({ core }) {
     let containsTypeSpecGeneratedSwagger = false;
     // TODO: Add lint rule to prevent using "for...in" instead of "for...of"
     for (const file of specRmSwaggerFilesBaseBranch) {
-      const baseSwagger = await git.show(["HEAD^", file]);
+      const baseSwagger = await git.show(["HEAD^", "--", file]);
       const baseSwaggerObj = JSON.parse(baseSwagger);
       if (baseSwaggerObj["info"]?.["x-typespec-generated"]) {
         core.info(
