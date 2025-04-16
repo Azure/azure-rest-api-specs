@@ -255,7 +255,7 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspCon
 // ----- TS data plane sub rules -----
 export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*rest$/));
+    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*-rest$/));
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
