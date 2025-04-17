@@ -5,7 +5,8 @@ import {
   getRelativePathFromSpecification,
   getArgumentValue,
   mapToObject,
-  objectToMap
+  objectToMap,
+  normalizePath
 } from "../../src/utils.js";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -128,4 +129,20 @@ describe("Utils", () => {
       expect(result).toEqual(new Map());
     });
   });
+
+  describe("normalizePath", () => {
+    test("normalizePath in Windows", () => {
+      const path = "specification//contosowidgetmanager//Contoso.WidgetManager.Shared//main.tsp";
+      const convertPath = "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
+      const result = normalizePath(path);
+      expect(result).toEqual(convertPath);
+    });
+
+    test("normalizePath in Linux", () => {
+      const path = "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
+      const result = normalizePath(path);
+      expect(result).toEqual(path);
+    });
+  });
+  
 });
