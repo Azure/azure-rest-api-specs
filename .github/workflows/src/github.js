@@ -98,3 +98,25 @@ export const CheckConclusion = {
    */
   TIMED_OUT: "timed_out",
 };
+
+/**
+ * https://docs.github.com/en/rest/commits/statuses?apiVersion=2022-11-28#create-a-commit-status--parameters
+ */
+export const CommitStatusState = {
+  /**
+   * @type {"error"}
+   */
+  ERROR: "error",
+  /**
+   * @type {"failure"}
+   */
+  FAILURE: "failure",
+  /**
+   * @type {"pending"}
+   */
+  PENDING: "pending",
+  /**
+   * @type {"success"}
+   */
+  SUCCESS: "success",
+};

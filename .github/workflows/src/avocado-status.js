@@ -1,9 +1,13 @@
 // @ts-check
 
 import { extractInputs } from "./context.js";
-import { PER_PAGE_MAX } from "./github.js";
-
-const statusName = "[TEST IGNORE] Swagger Avocado";
+import {
+  CheckConclusion,
+  CheckStatus,
+  CommitStatusState,
+  PER_PAGE_MAX,
+} from "./github.js";
+import { Label } from "./label.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -12,8 +16,6 @@ const statusName = "[TEST IGNORE] Swagger Avocado";
  * @returns {Promise<void>}
  */
 export default async function setStatus({ github, context, core }) {
-  core.info("avocado-status.js:setStatus()");
-
   const { owner, repo, head_sha, issue_number } = await extractInputs(
     github,
     context,
@@ -57,7 +59,7 @@ export async function setStatusImpl({
   github,
   core,
 }) {
-  core.info("getStatusImpl()");
+  const statusName = "[TEST IGNORE] Swagger Avocado";
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
@@ -70,11 +72,11 @@ export async function setStatusImpl({
 
   core.info(`Labels: ${labelNames}`);
 
-  if (labelNames.includes("Approved-Avocado")) {
-    const description = "Found label 'Approved-Avocado'";
+  if (labelNames.includes(Label.APPROVED_AVOCADO)) {
+    const description = `Found label '${Label.APPROVED_AVOCADO}'`;
     core.info(description);
 
-    const state = "success";
+    const state = CheckConclusion.SUCCESS;
     core.info(`Setting status to '${state}'`);
 
     await github.rest.repos.createCommitStatus({
@@ -128,7 +130,7 @@ export async function setStatusImpl({
      */
     target_url = run.html_url;
 
-    if (run.conclusion === "failure") {
+    if (run.conclusion === CheckConclusion.FAILURE) {
       /**
        * Update target to point directly to the first failed job
        *
@@ -144,7 +146,9 @@ export async function setStatusImpl({
           per_page: PER_PAGE_MAX,
         },
       );
-      const failedJobs = jobs.filter((job) => job.conclusion === "failure");
+      const failedJobs = jobs.filter(
+        (job) => job.conclusion === CheckConclusion.FAILURE,
+      );
       const failedJob = failedJobs[0];
       if (failedJob?.html_url) {
         target_url = `${failedJob.html_url}?pr=${issue_number}`;
@@ -152,8 +156,11 @@ export async function setStatusImpl({
     }
   }
 
-  if (run?.status === "completed") {
-    const state = run.conclusion === "success" ? "success" : "failure";
+  if (run?.status === CheckStatus.COMPLETED) {
+    const state =
+      run.conclusion === CheckConclusion.SUCCESS
+        ? CheckConclusion.SUCCESS
+        : CheckConclusion.FAILURE;
 
     await github.rest.repos.createCommitStatus({
       owner,
@@ -169,7 +176,7 @@ export async function setStatusImpl({
       owner,
       repo,
       sha: head_sha,
-      state: "pending",
+      state: CommitStatusState.PENDING,
       context: statusName,
       target_url,
     });
