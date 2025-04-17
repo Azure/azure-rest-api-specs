@@ -661,7 +661,7 @@
         }
       }
     },
-    "/conversations/{conversationId}/messages": {
+    "/conversations/{conversationId}/message": {
       "get": {
         "operationId": "Messages_ListMessages",
         "description": "Lists chat messages, returning a collection of ChatMessage objects.",
@@ -672,20 +672,84 @@
           {
             "name": "conversationId",
             "in": "path",
-            "description": "The ID of the conversation.",
+            "description": "A unique identifier for this conversation.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ChatMessage"
-              },
-              "x-ms-identifiers": []
+              "$ref": "#/definitions/PagedChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/conversations/{conversationId}/message/{messageId}": {
+      "get": {
+        "operationId": "Messages_GetMessage",
+        "description": "Retrieves (reads) an existing chat message.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "A unique identifier for this conversation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "A unique identifier for this message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -702,6 +766,133 @@
           }
         }
       },
+      "put": {
+        "operationId": "Messages_UpdateMessage",
+        "description": "Updates an existing chat message (or creates if not found) and returns the updated message.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "A unique identifier for this conversation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "A unique identifier for this message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Messages_DeleteMessage",
+        "description": "Deletes a chat message. Returns 204 on success.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "A unique identifier for this conversation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "A unique identifier for this message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/{conversationId}/messages": {
       "post": {
         "operationId": "Messages_SendMessage",
         "description": "Creates (sends) a new chat message, returning the created ChatMessage.",
@@ -732,143 +923,6 @@
             "schema": {
               "$ref": "#/definitions/ChatMessage"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/conversations/{conversationId}/messages/{messageId}": {
-      "get": {
-        "operationId": "Messages_GetMessage",
-        "description": "Retrieves (reads) an existing chat message.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "conversationId",
-            "in": "path",
-            "description": "The ID of the conversation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "The ID of the message to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Messages_UpdateMessage",
-        "description": "Updates an existing chat message (or creates if not found) and returns the updated message.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "conversationId",
-            "in": "path",
-            "description": "The ID of the conversation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "The ID of the message to update.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The updated message data.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Messages_DeleteMessage",
-        "description": "Deletes a chat message. Returns 204 on success.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "conversationId",
-            "in": "path",
-            "description": "The ID of the conversation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "The ID of the message to delete.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4265,6 +4319,28 @@
         }
       ],
       "x-ms-discriminator-value": "OutputPath"
+    },
+    "PagedChatMessage": {
+      "type": "object",
+      "description": "Paged collection of ChatMessage items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ChatMessage items on this page",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "PagedConnection": {
       "type": "object",

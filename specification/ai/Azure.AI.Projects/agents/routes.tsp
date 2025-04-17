@@ -46,73 +46,17 @@ interface Messages {
     ChatMessage
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Retrieves (reads) an existing chat message.")
-  @get
-  @route("/conversations/{conversationId}/messages/{messageId}")
-  getMessage is Operation<
-    {
-      @doc("The ID of the conversation.")
-      @path
-      conversationId: string;
+  getMessage is AgentOperations.ResourceRead<ChatMessage>;
 
-      @doc("The ID of the message to retrieve.")
-      @path
-      messageId: string;
-    },
-    ChatMessage
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Updates an existing chat message (or creates if not found) and returns the updated message.")
-  @put
-  @route("/conversations/{conversationId}/messages/{messageId}")
-  updateMessage is Operation<
-    {
-      @doc("The ID of the conversation.")
-      @path
-      conversationId: string;
+  updateMessage is AgentOperations.ResourceCreateOrReplace<ChatMessage>;
 
-      @doc("The ID of the message to update.")
-      @path
-      messageId: string;
-
-      @doc("The updated message data.")
-      @body
-      body: ChatMessage;
-    },
-    ChatMessage
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Deletes a chat message. Returns 204 on success.")
-  @delete
-  @route("/conversations/{conversationId}/messages/{messageId}")
-  deleteMessage is Operation<
-    {
-      @doc("The ID of the conversation.")
-      @path
-      conversationId: string;
+  deleteMessage is AgentOperations.ResourceDelete<ChatMessage>;
 
-      @doc("The ID of the message to delete.")
-      @path
-      messageId: string;
-    },
-    void
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Lists chat messages, returning a collection of ChatMessage objects.")
-  @get
-  @route("/conversations/{conversationId}/messages")
-  listMessages is Operation<
-    {
-      @doc("The ID of the conversation.")
-      @path
-      conversationId: string;
-    },
-    ChatMessage[]
-  >;
+  listMessages is AgentOperations.ResourceList<ChatMessage>;
 }
 
 @doc("""
