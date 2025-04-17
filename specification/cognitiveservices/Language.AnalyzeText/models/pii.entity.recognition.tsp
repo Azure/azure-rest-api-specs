@@ -92,7 +92,7 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
 
-  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
+  /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will bce * as before. We allow specific ascii characters for redaction. */
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
 
@@ -233,7 +233,7 @@ union PiiCategoriesExclude {
   /** AR National Identity Number */
   ARNationalIdentityNumber: "ARNationalIdentityNumber",
 
-  /** AT Identity Card */
+  /** AT Bank Account Number */
   AUBankAccountNumber: "AUBankAccountNumber",
 
   /** AU Driver's License Number */
@@ -739,4 +739,31 @@ union PiiCategoriesExclude {
 
   /** Address */
   Address: "Address",
+
+  /** Date Of Birth */
+  DateOfBirth: "DateOfBirth",
+
+  /** Bank Account Number */
+  BankAccountNumber: "BankAccountNumber",
+
+  /** Passport Number */
+  PassportNumber: "PassportNumber",
+
+  /** Drivers License Number */
+  DriversLicenseNumber: "DriversLicenseNumber",
+  
+  /** Neighborhood*/
+  Neighborhood: "Neighborhood",
+  
+  /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held*/
+  SortCode: "SortCode",
+
+  /** PIN */
+  PIN: "PIN",
+  
+  /** VIN */
+  VIN: "VIN",
+  
+  /** License Plate*/
+  LicensePlate: "LicensePlate",
 }
