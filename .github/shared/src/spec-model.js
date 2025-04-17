@@ -40,7 +40,7 @@ const __dirname = dirname(__filename);
 export async function getSpecModel(folder, options = {}) {
   console.log(options);
 
-  const files = await readdir(join(__dirname, "..", "..", folder), {
+  const files = await readdir(join(__dirname, "..", "..", "..", folder), {
     recursive: true,
   });
   const readmes = files.filter(readme);
@@ -62,7 +62,7 @@ async function getReadme(path) {
   // TODO: Do not assume location is with respect to repo root, could be reading
   // files from a different root location (e.g. "before" state of repo in
   // another folder).
-  const content = await readFile(join(__dirname, "..", "..", path), {
+  const content = await readFile(join(__dirname, "..", "..", "..", path), {
     encoding: "utf8",
   });
 
@@ -125,7 +125,7 @@ async function getSwagger(path) {
   // files from a different root location (e.g. "before" state of repo in
   // another folder).
 
-  const fullPath = join(__dirname, "..", "..", path);
+  const fullPath = join(__dirname, "..", "..", "..", path);
 
   const content = await readFile(fullPath, { encoding: "utf8" });
 
