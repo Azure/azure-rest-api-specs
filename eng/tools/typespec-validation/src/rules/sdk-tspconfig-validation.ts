@@ -2,8 +2,8 @@ import { join } from "path";
 import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
 import { Suppression } from "suppressions";
+import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -17,8 +17,8 @@ export abstract class TspconfigSubRuleBase {
     this.expectedValue = expectedValue;
   }
 
-  public async execute(host: TsvHost, folder: string): Promise<RuleResult> {
-    const tspconfigExists = await host.checkFileExists(join(folder, "tspconfig.yaml"));
+  public async execute(folder: string): Promise<RuleResult> {
+    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
       return this.createFailedResult(
         `Failed to find ${join(folder, "tspconfig.yaml")}`,
@@ -27,7 +27,7 @@ export abstract class TspconfigSubRuleBase {
 
     let config = undefined;
     try {
-      const configText = await host.readTspConfig(folder);
+      const configText = await readTspConfig(folder);
       config = yamlParse(configText);
     } catch (error) {
       return this.createFailedResult(
@@ -225,36 +225,9 @@ class TspConfigTsOptionMigrationSubRuleBase extends TspconfigEmitterOptionsSubRu
   }
 }
 
-export class TspConfigTsMgmtModularGenerateMetadataTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
-  constructor() {
-    super("generateMetadata", "generate-metadata", true);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularHierarchyClientFalseSubRule extends TspConfigTsOptionMigrationSubRuleBase {
-  constructor() {
-    super("hierarchyClient", "hierarchy-client", false);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
 export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
   constructor() {
     super("experimentalExtensibleEnums", "experimental-extensible-enums", true);
-  }
-  protected skip(config: any, folder: string) {
-    return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
-  }
-}
-
-export class TspConfigTsMgmtModularEnableOperationGroupTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
-  constructor() {
-    super("enableOperationGroup", "enable-operation-group", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -457,10 +430,7 @@ export class TspConfigCsharpMgmtPackageDirectorySubRule extends TspconfigEmitter
 export const defaultRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzPackageDirectorySubRule(),
-  new TspConfigTsMgmtModularGenerateMetadataTrueSubRule(),
-  new TspConfigTsMgmtModularHierarchyClientFalseSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
-  new TspConfigTsMgmtModularEnableOperationGroupTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
@@ -495,9 +465,9 @@ export class SdkTspConfigValidationRule implements Rule {
     this.subRules = subRules;
   }
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
-    const suppressions = await host.getSuppressions(tspConfigPath);
+    const suppressions = await getSuppressions(tspConfigPath);
     this.setSuppressedKeyPaths(suppressions);
 
     const failedResults = [];
@@ -505,7 +475,7 @@ export class SdkTspConfigValidationRule implements Rule {
     for (const subRule of this.subRules) {
       // TODO: support wildcard
       if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
-      const result = await subRule.execute(host, folder!);
+      const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
       success &&= result.success;
     }

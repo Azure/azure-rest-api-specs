@@ -1,0 +1,139 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReports",
+  "title": "QueryCarbonEmission Top N Subscriptions monthly Report",
+  "parameters": {
+    "api-version": "2025-04-01",
+    "queryParameters": {
+      "reportType": "TopItemsMonthlySummaryReport",
+      "subscriptionList": [
+        "00000000-0000-0000-0000-000000000000",
+        "00000000-0000-0000-0000-000000000001,",
+        "00000000-0000-0000-0000-000000000002",
+        "00000000-0000-0000-0000-000000000003",
+        "00000000-0000-0000-0000-000000000004",
+        "00000000-0000-0000-0000-000000000005",
+        "00000000-0000-0000-0000-000000000006",
+        "00000000-0000-0000-0000-000000000007",
+        "00000000-0000-0000-0000-000000000008"
+      ],
+      "carbonScopeList": [
+        "Scope1",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2024-03-01",
+        "end": "2024-05-01"
+      },
+      "categoryType": "Subscription",
+      "topItems": 2
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for top n subscriptions monthly report.",
+      "body": {
+        "subscriptionAccessDecisionList": [
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000001",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000002",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000003",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000004",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000005",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000006",
+            "decision": "Denied"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000007",
+            "decision": "Denied"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000008",
+            "decision": "Denied",
+            "denialReason": "Carbon Optimization Reader permisison required"
+          }
+        ],
+        "value": [
+          {
+            "dataType": "TopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Subscription",
+            "date": "2024-05-01"
+          },
+          {
+            "dataType": "TopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Subscription",
+            "date": "2024-04-01"
+          },
+          {
+            "dataType": "TopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Subscription",
+            "date": "2024-03-01"
+          },
+          {
+            "dataType": "TopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "00000000-0000-0000-0000-000000000001",
+            "categoryType": "Subscription",
+            "date": "2024-05-01"
+          },
+          {
+            "dataType": "TopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "00000000-0000-0000-0000-000000000001",
+            "categoryType": "Subscription",
+            "date": "2024-04-01"
+          },
+          {
+            "dataType": "TopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "00000000-0000-0000-0000-000000000001",
+            "categoryType": "Subscription",
+            "date": "2024-03-01"
+          }
+        ]
+      }
+    }
+  }
+}
