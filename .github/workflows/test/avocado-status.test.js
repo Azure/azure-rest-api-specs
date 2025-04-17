@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { setStatusImpl } from "../src/avocado-status.js";
 
 import { createMockCore, createMockGithub } from "./mocks.js";
@@ -7,6 +7,10 @@ const core = createMockCore();
 const github = createMockGithub();
 
 describe("setStatusImpl", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("throws if inputs null", async () => {
     await expect(setStatusImpl({})).rejects.toThrow();
   });
