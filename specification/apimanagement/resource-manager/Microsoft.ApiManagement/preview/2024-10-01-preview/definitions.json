@@ -2502,32 +2502,23 @@
       "type": "object",
       "description": "Specifies client application secrets needed to authorize applications API calls",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ClientApplicationSecretsContractProperties",
-          "description": "Client application secrets entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ClientApplicationSecretsContractProperties": {
-      "type": "object",
-      "properties": {
-        "clientSecret": {
-          "type": "string",
-          "readOnly": true,
-          "x-ms-secret": true,
-          "description": "EntraID client application secret"
-        },
-        "expiresAt": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "EntraID client application secret expiration date."
+        "entra": {
+          "type": "object",
+          "description": "Microsoft EntraID client application secrets",
+          "properties": {
+            "clientSecret": {
+              "type": "string",
+              "readOnly": true,
+              "x-ms-secret": true,
+              "description": "EntraID client application secret"
+            },
+            "expiresAt": {
+              "type": "string",
+              "readOnly": true,
+              "format": "date-time",
+              "description": "EntraID client application secret expiration date."
+            }
+          }
         }
       }
     },
@@ -2572,10 +2563,6 @@
     "ClientApplicationProductLinkContractProperties": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the Client Application - Product link assignment."
-        },
         "productId": {
           "type": "string",
           "description": "The unique resource identifier of the Product."
