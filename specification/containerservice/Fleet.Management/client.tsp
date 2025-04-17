@@ -28,12 +28,8 @@ using Azure.ClientGenerator.Core;
 );
 #suppress "deprecated" "property flatten for SDK backward compatibility"
 @@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
-<<<<<<< HEAD
-);
-=======
 );
 @@clientName(Microsoft.ContainerService,
   "ContainerServiceFleetClient",
   "javascript"
 );
->>>>>>> main
