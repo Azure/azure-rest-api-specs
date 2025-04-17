@@ -1,0 +1,624 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.Kubernetes;
+
+/**
+ * Indicates the kind of Arc connected cluster based on host infrastructure.
+ */
+union ConnectedClusterKind {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ProvisionedCluster: "ProvisionedCluster",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  AWS: "AWS",
+}
+
+/**
+ * The current deployment state of connectedClusters.
+ */
+union ProvisioningState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Canceled: "Canceled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Provisioning: "Provisioning",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Updating: "Updating",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Deleting: "Deleting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Accepted: "Accepted",
+}
+
+/**
+ * Represents the connectivity status of the connected cluster.
+ */
+union ConnectivityStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Connecting: "Connecting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Connected: "Connected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Offline: "Offline",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Expired: "Expired",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  AgentNotInstalled: "AgentNotInstalled",
+}
+
+/**
+ * Property which describes the state of private link on a connected cluster resource.
+ */
+union PrivateLinkState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
+}
+
+/**
+ * Indicates whether Azure Hybrid Benefit is opted in
+ */
+union AzureHybridBenefit {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  True: "True",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  False: "False",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  NotApplicable: "NotApplicable",
+}
+
+/**
+ * Indicates whether the Arc agents on the be upgraded automatically to the latest version. Defaults to Enabled.
+ */
+union AutoUpgradeOptions {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Enabled: "Enabled",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Disabled: "Disabled",
+}
+
+/**
+ * The type of identity that last modified the resource.
+ */
+union LastModifiedByType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  User: "User",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Application: "Application",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ManagedIdentity: "ManagedIdentity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Key: "Key",
+}
+
+/**
+ * The mode of client authentication.
+ */
+union AuthenticationMethod {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Token: "Token",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  AAD: "AAD",
+}
+
+/**
+ * The type of identity used for the connected cluster. The type 'SystemAssigned, includes a system created identity. The type 'None' means no identity is assigned to the connected cluster.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum ResourceIdentityType {
+  None,
+  SystemAssigned,
+}
+
+/**
+ * Identity for the connected cluster.
+ */
+model ConnectedClusterIdentity {
+  /**
+   * The principal id of connected cluster identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The tenant id associated with the connected cluster. This property will only be provided for a system assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * The type of identity used for the connected cluster. The type 'SystemAssigned, includes a system created identity. The type 'None' means no identity is assigned to the connected cluster.
+   */
+  type: ResourceIdentityType = ResourceIdentityType.SystemAssigned;
+}
+
+/**
+ * Properties of the connected cluster.
+ */
+model ConnectedClusterProperties {
+  /**
+   * Base64 encoded public certificate used by the agent to do the initial handshake to the backend services in Azure.
+   */
+  agentPublicKeyCertificate: string;
+
+  /**
+   * The Kubernetes version of the connected cluster resource
+   */
+  @visibility(Lifecycle.Read)
+  kubernetesVersion?: string;
+
+  /**
+   * Number of nodes present in the connected cluster resource
+   */
+  @visibility(Lifecycle.Read)
+  totalNodeCount?: int32;
+
+  /**
+   * Number of CPU cores present in the connected cluster resource
+   */
+  @visibility(Lifecycle.Read)
+  totalCoreCount?: int32;
+
+  /**
+   * Version of the agent running on the connected cluster resource
+   */
+  @visibility(Lifecycle.Read)
+  agentVersion?: string;
+
+  /**
+   * Provisioning state of the connected cluster resource.
+   */
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The Kubernetes distribution running on this connected cluster.
+   */
+  distribution?: string;
+
+  /**
+   * The Kubernetes distribution version on this connected cluster.
+   */
+  distributionVersion?: string;
+
+  /**
+   * The infrastructure on which the Kubernetes cluster represented by this connected cluster is running on.
+   */
+  infrastructure?: string;
+
+  /**
+   * Connected cluster offering
+   */
+  @visibility(Lifecycle.Read)
+  offering?: string;
+
+  /**
+   * Expiration time of the managed identity certificate
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  managedIdentityCertificateExpirationTime?: utcDateTime;
+
+  /**
+   * Time representing the last instance when heart beat was received from the cluster
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastConnectivityTime?: utcDateTime;
+
+  /**
+   * Represents the connectivity status of the connected cluster.
+   */
+  @visibility(Lifecycle.Read)
+  connectivityStatus?: ConnectivityStatus;
+
+  /**
+   * Property which describes the state of private link on a connected cluster resource.
+   */
+  privateLinkState?: PrivateLinkState = PrivateLinkState.Disabled;
+
+  /**
+   * This is populated only if privateLinkState is enabled. The resource id of the private link scope this connected cluster is assigned to, if any.
+   */
+  privateLinkScopeResourceId?: string;
+
+  /**
+   * Indicates whether Azure Hybrid Benefit is opted in
+   */
+  azureHybridBenefit?: AzureHybridBenefit;
+
+  /**
+   * AAD profile for the connected cluster.
+   */
+  aadProfile?: AadProfile;
+
+  /**
+   * Arc agentry configuration for the provisioned cluster.
+   */
+  arcAgentProfile?: ArcAgentProfile;
+
+  /**
+   * Security profile for the connected cluster.
+   */
+  securityProfile?: SecurityProfile;
+
+  /**
+   * Open ID Connect (OIDC) Issuer Profile for the connected cluster.
+   */
+  oidcIssuerProfile?: OidcIssuerProfile;
+
+  /**
+   * Details of the gateway used by the Arc router for connectivity.
+   */
+  gateway?: Gateway;
+
+  /**
+   * Configuration settings for customizing the behavior of the connected cluster.
+   */
+  arcAgentryConfigurations?: ArcAgentryConfigurations[];
+
+  /**
+   * More properties related to the Connected Cluster
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  miscellaneousProperties?: Record<string>;
+}
+
+/**
+ * AAD Profile specifies attributes for Azure Active Directory integration.
+ */
+model AadProfile {
+  /**
+   * Whether to enable Azure RBAC for Kubernetes authorization.
+   */
+  enableAzureRBAC?: boolean;
+
+  /**
+   * The list of AAD group object IDs that will have admin role of the cluster.
+   */
+  adminGroupObjectIDs?: string[];
+
+  /**
+   * The AAD tenant ID to use for authentication. If not specified, will use the tenant of the deployment subscription.
+   */
+  tenantID?: string;
+}
+
+/**
+ * Defines the Arc Agent properties for the clusters.
+ */
+model ArcAgentProfile {
+  /**
+   * Version of the Arc agents to be installed on the cluster resource
+   */
+  desiredAgentVersion?: string;
+
+  /**
+   * Indicates whether the Arc agents on the be upgraded automatically to the latest version. Defaults to Enabled.
+   */
+  agentAutoUpgrade?: AutoUpgradeOptions = AutoUpgradeOptions.Enabled;
+
+  /**
+   * List of system extensions that are installed on the cluster resource.
+   */
+  systemComponents?: SystemComponent[];
+
+  /**
+   * List of arc agentry and system components errors on the cluster resource.
+   */
+  agentErrors?: AgentError[];
+
+  /**
+   * Represents the current state of the Arc agentry and its dependent components.
+   */
+  @visibility(Lifecycle.Read)
+  agentState?: string;
+}
+
+/**
+ * System extensions and its current versions installed on the cluster resource.
+ */
+model SystemComponent {
+  /**
+   * Type of the system extension
+   */
+  type?: string;
+
+  /**
+   * Version of the system extension to be installed on the cluster resource.
+   */
+  userSpecifiedVersion?: string;
+
+  /**
+   * Major Version of the system extension that is currently installed on the cluster resource.
+   */
+  majorVersion?: int32;
+
+  /**
+   * Version of the system extension that is currently installed on the cluster resource.
+   */
+  @visibility(Lifecycle.Read)
+  currentVersion?: string;
+}
+
+/**
+ * Agent Errors if any during agent or system component upgrade.
+ */
+model AgentError {
+  /**
+   * Agent error message.
+   */
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  /**
+   * Severity of the error message.
+   */
+  @visibility(Lifecycle.Read)
+  severity?: string;
+
+  /**
+   * Agent component where error message occured.
+   */
+  @visibility(Lifecycle.Read)
+  component?: string;
+
+  /**
+   * The timestamp of error occured (UTC).
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  time?: utcDateTime;
+}
+
+/**
+ * Security Profile specifies attributes for cluster security features.
+ */
+model SecurityProfile {
+  /**
+   * The workload identity feature webhook.
+   */
+  workloadIdentity?: SecurityProfileWorkloadIdentity;
+}
+
+/**
+ * The workload identity feature webhook.
+ */
+model SecurityProfileWorkloadIdentity {
+  /**
+   * Whether to enable or disable the workload identity Webhook
+   */
+  enabled?: boolean;
+}
+
+/**
+ * OIDC Issuer Profile specifies attributes for workload identity integration.
+ */
+model OidcIssuerProfile {
+  /**
+   * Whether to enable oidc issuer for workload identity integration.
+   */
+  enabled?: boolean;
+
+  /**
+   * The issuer url for hybrid clusters connected to Arc used for the workload identity feature.
+   */
+  @visibility(Lifecycle.Read)
+  issuerUrl?: string;
+
+  /**
+   * The issuer url for public cloud clusters - AKS, EKS, GKE - used for the workload identity feature.
+   */
+  selfHostedIssuerUrl?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model Gateway {
+  /**
+   * Indicates whether the gateway for arc router connectivity is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The resource ID of the gateway used for the Arc router feature.
+   */
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/gateways";
+    }
+  ]>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ArcAgentryConfigurations {
+  /**
+   * Specifies the name of the feature for the configuration setting.
+   */
+  feature?: string;
+
+  /**
+   * The configuration settings for the feature that do not contain any sensitive or secret information.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  settings?: Record<string>;
+
+  /**
+   * The configuration settings for the feature that contain any sensitive or secret information.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  protectedSettings?: Record<string>;
+}
+
+/**
+ * Common fields that are returned in the response for all Azure Resource Manager resources
+ */
+model Resource {
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Object containing updates for patch operations.
+ */
+model ConnectedClusterPatch {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
+  /**
+   * Describes the connected cluster resource properties that can be updated during PATCH operation.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  properties?: ConnectedClusterPatchProperties;
+}
+
+/**
+ * Properties which can be patched on the connected cluster resource.
+ */
+model ConnectedClusterPatchProperties {
+  /**
+   * Represents the distribution of the connected cluster
+   */
+  distribution?: string;
+
+  /**
+   * Represents the Kubernetes distribution version on this connected cluster.
+   */
+  distributionVersion?: string;
+
+  /**
+   * Indicates whether Azure Hybrid Benefit is opted in
+   */
+  azureHybridBenefit?: AzureHybridBenefit;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model ListClusterUserCredentialProperties {
+  /**
+   * The mode of client authentication.
+   */
+  authenticationMethod: AuthenticationMethod;
+
+  /**
+   * Boolean value to indicate whether the request is for client side proxy or not
+   */
+  clientProxy: boolean;
+}
+
+/**
+ * The list of credential result response.
+ */
+model CredentialResults {
+  /**
+   * Contains the REP (rendezvous endpoint) and “Sender” access token.
+   */
+  @visibility(Lifecycle.Read)
+  hybridConnectionConfig?: HybridConnectionConfig;
+
+  /**
+   * Base64-encoded Kubernetes configuration file.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  kubeconfigs?: CredentialResult[];
+}
+
+/**
+ * Contains the REP (rendezvous endpoint) and “Sender” access token.
+ */
+model HybridConnectionConfig {
+  /**
+   * Timestamp when this token will be expired.
+   */
+  @visibility(Lifecycle.Read)
+  expirationTime?: int64;
+
+  /**
+   * Name of the connection
+   */
+  @visibility(Lifecycle.Read)
+  hybridConnectionName?: string;
+
+  /**
+   * Name of the relay.
+   */
+  @visibility(Lifecycle.Read)
+  relay?: string;
+
+  /**
+   * Sender access token
+   */
+  @visibility(Lifecycle.Read)
+  token?: string;
+
+  /**
+   * TenantID of the relay
+   */
+  @visibility(Lifecycle.Read)
+  relayTid?: string;
+
+  /**
+   * Type of relay
+   */
+  @visibility(Lifecycle.Read)
+  relayType?: string;
+}
+
+/**
+ * The credential result response.
+ */
+model CredentialResult {
+  /**
+   * The name of the credential.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Base64-encoded Kubernetes configuration file.
+   */
+  @visibility(Lifecycle.Read)
+  value?: bytes;
+}
+
+/**
+ * The paginated list of connected Clusters
+ */
+model ConnectedClusterList is Azure.Core.Page<ConnectedCluster>;

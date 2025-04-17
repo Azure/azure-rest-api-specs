@@ -1,0 +1,134 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Kubernetes;
+/**
+ * Represents a connected cluster.
+ */
+@subscriptionResource
+model ConnectedCluster
+  is Azure.ResourceManager.TrackedResource<ConnectedClusterProperties, false> {
+  ...ResourceNameParameter<
+    Resource = ConnectedCluster,
+    KeyName = "clusterName",
+    SegmentName = "connectedClusters",
+    NamePattern = ""
+  >;
+
+  /**
+   * The identity of the connected cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity: ConnectedClusterIdentity;
+
+  /**
+   * The kind of connected cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  kind?: ConnectedClusterKind;
+}
+
+@armResourceOperations
+interface ConnectedClusters {
+  /**
+   * Returns the properties of the specified connected cluster, including name, identity, properties, and additional cluster details.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ConnectedCluster_Get")
+  get is ArmResourceRead<
+    ConnectedCluster,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
+
+  /**
+   * API to register a new Kubernetes cluster and create or replace a connected cluster tracked resource in Azure Resource Manager (ARM).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ConnectedCluster_CreateOrReplace")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
+    ConnectedCluster,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
+
+  /**
+   * API to update certain properties of the connected cluster resource
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @patch(#{ implicitOptionality: false })
+  @operationId("ConnectedCluster_Update")
+  update is ArmCustomPatchSync<
+    ConnectedCluster,
+    PatchModel = ConnectedClusterPatch,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
+
+  /**
+   * Delete a connected cluster, removing the tracked resource in Azure Resource Manager (ARM).
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("ConnectedCluster_Delete")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ConnectedCluster,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * API to enumerate registered connected K8s clusters under a Resource Group
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ConnectedCluster_ListByResourceGroup")
+  listByResourceGroup is ArmResourceListByParent<
+    ConnectedCluster,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ArmResponse<ConnectedClusterList>
+  >;
+
+  /**
+   * API to enumerate registered connected K8s clusters under a Subscription
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ConnectedCluster_ListBySubscription")
+  listBySubscription is ArmListBySubscription<
+    ConnectedCluster,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ArmResponse<ConnectedClusterList>
+  >;
+
+  /**
+   * Gets cluster user credentials of the connected cluster with a specified resource group and name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ConnectedCluster_ListClusterUserCredential")
+  listClusterUserCredential is ArmResourceActionSync<
+    ConnectedCluster,
+    ListClusterUserCredentialProperties,
+    ArmResponse<CredentialResults>,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+  >;
+}
+
+@@doc(ConnectedCluster.name,
+  "The name of the Kubernetes cluster on which get is called."
+);
+@@doc(ConnectedCluster.properties,
+  "Describes the connected cluster resource properties."
+);
+@@doc(ConnectedClusters.createOrReplace::parameters.resource,
+  "Parameters supplied to Create a Connected Cluster."
+);
+@@doc(ConnectedClusters.update::parameters.properties,
+  "Parameters supplied to update Connected Cluster."
+);
+@@doc(ConnectedClusters.listClusterUserCredential::parameters.body,
+  "ListClusterUserCredential properties"
+);
