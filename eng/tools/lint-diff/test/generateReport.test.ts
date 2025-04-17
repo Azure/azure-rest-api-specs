@@ -353,7 +353,20 @@ describe("generateLintDiffReport", () => {
       "compareSha",
     );
     expect(actual).toBe(false);
-    expect(await readFile(outFile, { encoding: "utf-8" })).toMatchSnapshot();
+    expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
+      "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
+      | --- | --- | --- |
+      | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+
+
+      **[must fix]The following errors/warnings are intorduced by current PR:**
+
+      | Rule | Message | Related RPC [For API reviewers] |
+      | ---- | ------- | ------------------------------- |
+      | :x: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
+
+      "
+    `);
   });
 
   test.skipIf(isWindows())(
@@ -407,7 +420,20 @@ describe("generateLintDiffReport", () => {
       );
       expect(actual).toBe(true);
       
-      expect(await readFile(outFile, { encoding: "utf-8" })).toMatchSnapshot();
+      expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
+        "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
+        | --- | --- | --- |
+        | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+
+
+        **[must fix]The following errors/warnings are intorduced by current PR:**
+
+        | Rule | Message | Related RPC [For API reviewers] |
+        | ---- | ------- | ------------------------------- |
+        | :warning: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
+
+        "
+      `);
     },
   );
 });
@@ -455,6 +481,27 @@ describe("generateAutoRestErrorReport", () => {
     await generateAutoRestErrorReport(autoRestErrors, outFile);
 
     const actual = await readFile(outFile, { encoding: "utf-8" });
-    expect(actual).toMatchSnapshot();
+    expect(actual).toMatchInlineSnapshot(`
+      "**AutoRest errors:**
+
+      Readme: readme.md
+      Tag: tag1
+      Errors:
+      | Level | Message |
+      | ----- | ------- |
+      | :x: error | Error message 1 |
+      | :warning: fatal | Fatal error message |
+
+
+      Readme: readme2.md
+      Tag: tag2
+      Errors:
+      | Level | Message |
+      | ----- | ------- |
+      | :x: error | Error message 2 |
+
+
+      "
+    `);
   });
 });
