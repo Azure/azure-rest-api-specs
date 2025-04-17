@@ -1060,7 +1060,12 @@ directive:
     from: managedCassandra.json
     where: $.definitions.BackupResource
     reason: Suppressing errors for existing APIs
-
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: fleet.json
+    reason: False alarm, faulty check. Both fleetAnalytics and fleetspace are proxy resource
+  - suppress: TrackedResourcePatchOperation
+    from: fleet.json
+    reason: False alarm, faulty check. Both fleetAnalytics and fleetspace are proxy resource
 ```
 
 ---
