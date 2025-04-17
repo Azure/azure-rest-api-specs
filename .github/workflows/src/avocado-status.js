@@ -103,7 +103,7 @@ export default async function getStatus({ github, context, core }) {
       const failedJobs = jobs.filter((job) => job.conclusion === "failure");
       const failedJob = failedJobs[0];
       if (failedJob?.html_url) {
-        target_url = failedJob.html_url;
+        target_url = `${failedJob.html_url}?pr=${issue_number}`;
       }
     }
   }
