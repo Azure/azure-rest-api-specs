@@ -77,12 +77,35 @@ export default async function getStatus({ github, context, core }) {
   const run = avocadoCodeRuns[0];
 
   if (run) {
-    // Update target to the "Analyze Code" run, which contains the meaningful output.
-    //
-    // TODO: Can we update to deep-link directly to the failure?
-    // Current: https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569
-    // Desired: ^+/job/40703679014?pr=18
+    /**
+     * Update target to the "Analyze Code" run, which contains the meaningful output.
+     *
+     * @example https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569
+     */
     target_url = run.html_url;
+
+    if (run.conclusion === "failure") {
+      /**
+       * Update target to point directly to the first failed job
+       *
+       * @example https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
+       */
+
+      const jobs = await github.paginate(
+        github.rest.actions.listJobsForWorkflowRun,
+        {
+          owner,
+          repo,
+          run_id: run.id,
+          per_page: PER_PAGE_MAX,
+        },
+      );
+      const failedJobs = jobs.filter((job) => job.conclusion === "failure");
+      const failedJob = failedJobs[0];
+      if (failedJob?.html_url) {
+        target_url = failedJob.html_url;
+      }
+    }
   }
 
   if (run?.status === "completed") {
