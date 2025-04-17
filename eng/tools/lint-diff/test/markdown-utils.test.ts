@@ -156,7 +156,7 @@ describe("getOpenapiType", () => {
     expect(openapiType).toEqual("data-plane");
   });
 
-  test.skipIf(isWindows)("openapi-type found but not valid", async () => {
+  test.skipIf(isWindows())("openapi-type found but not valid", async () => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/type-found-not-valid-readme.md",
@@ -166,7 +166,7 @@ describe("getOpenapiType", () => {
     expect(openapiType).toEqual("data-plane");
   });
 
-  test.skipIf(isWindows)("openapi-type not found, type arm", async () => {
+  test.skipIf(isWindows())("openapi-type not found, type arm", async () => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/resource-manager/inferred-resource-manager-readme.md",
@@ -174,7 +174,7 @@ describe("getOpenapiType", () => {
     const openApiType = await getOpenapiType(markdownFile);
     expect(openApiType).toEqual("arm");
   });
-  test.skipIf(isWindows)("openapi-type not found, type data-plane", async () => {
+  test.skipIf(isWindows())("openapi-type not found, type data-plane", async () => {
     const markdownFile = join(
       __dirname,
       "fixtures/getOpenapiType/specification/service1/data-plane/inferred-data-plane-readme.md",
