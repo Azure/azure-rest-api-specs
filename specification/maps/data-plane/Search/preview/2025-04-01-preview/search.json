@@ -282,6 +282,695 @@
         }
       },
       "x-ms-parameter-location": "method"
+    },
+    "ResultTypes": {
+      "name": "ResultTypes",
+      "in": "query",
+      "description": "The type of suggestion",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Address",
+          "RoadBlock",
+          "RoadIntersection",
+          "AdminDivision1",
+          "AdminDivision2",
+          "AdminDivision3",
+          "AdministrativeBuilding",
+          "Airport",
+          "AmusementPark",
+          "AncientSite",
+          "Aquarium",
+          "Archipelago",
+          "Basin",
+          "Battlefield",
+          "Bay",
+          "Beach",
+          "Bridge",
+          "BusinessStructure",
+          "Camp",
+          "Canal",
+          "Cave",
+          "Cemetery",
+          "Channel",
+          "Church",
+          "Cliff",
+          "Coast",
+          "CommunityCenter",
+          "Continent",
+          "CountryRegion",
+          "Crater",
+          "CulturalRegion",
+          "Dam",
+          "Delta",
+          "Desert",
+          "DrainageBasin",
+          "Dune",
+          "FerryTerminal",
+          "Forest",
+          "Fort",
+          "Garden",
+          "Geyser",
+          "Glacier",
+          "GolfCourse",
+          "HigherEducationFacility",
+          "HistoricalSite",
+          "Hospital",
+          "HotSpring",
+          "Ice",
+          "IndigenousPeoplesReserve",
+          "IndustrialStructure",
+          "Island",
+          "Isthmus",
+          "Lake",
+          "LandArea",
+          "Landform",
+          "LandmarkBuilding",
+          "Library",
+          "Lighthouse",
+          "Marina",
+          "Market",
+          "MedicalStructure",
+          "MetroStation",
+          "MilitaryBase",
+          "Mission",
+          "Monument",
+          "Mosque",
+          "Mountain",
+          "MountainRange",
+          "Museum",
+          "NauticalStructure",
+          "Neighborhood",
+          "Oasis",
+          "ObservationPoint",
+          "Ocean",
+          "OfficeBuilding",
+          "Park",
+          "Pass",
+          "Peninsula",
+          "Plain",
+          "Plateau",
+          "PlayingField",
+          "Pole",
+          "PoliticalUnit",
+          "PopulatedPlace",
+          "Postcode1",
+          "Promontory",
+          "RaceTrack",
+          "RailwayStation",
+          "Reef",
+          "Region",
+          "ReligiousStructure",
+          "Reserve",
+          "ResidentialStructure",
+          "River",
+          "Ruin",
+          "ScientificResearchBase",
+          "Sea",
+          "SeaplaneLandingArea",
+          "Shrine",
+          "SkiArea",
+          "Spring",
+          "Stadium",
+          "Temple",
+          "TouristStructure",
+          "Trail",
+          "TransportationStructure",
+          "Tunnel",
+          "Valley",
+          "Volcano",
+          "Wall",
+          "Waterfall",
+          "WaterFeature",
+          "Wetland",
+          "Zoo",
+          "FinancialStructure",
+          "Trailhead",
+          "AirportTerminal",
+          "MultiModalStation",
+          "FacilityStructure",
+          "ParkingStructure",
+          "Playground",
+          "Casino",
+          "Winery",
+          "Theater",
+          "TouristRailway",
+          "Walkway",
+          "FireStation",
+          "Port",
+          "Castle",
+          "GreaterPopulatedPlace",
+          "Postcode",
+          "StatisticalDistrict",
+          "Planet",
+          "Other"
+        ],
+        "x-ms-enum": {
+          "name": "AutocompleteResultTypeEnum",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "Address",
+              "value": "Address"
+            },
+            {
+              "name": "RoadBlock",
+              "value": "RoadBlock"
+            },
+            {
+              "name": "RoadIntersection",
+              "value": "RoadIntersection"
+            },
+            {
+              "name": "AdminDivision1",
+              "value": "AdminDivision1"
+            },
+            {
+              "name": "AdminDivision2",
+              "value": "AdminDivision2"
+            },
+            {
+              "name": "AdminDivision3",
+              "value": "AdminDivision3"
+            },
+            {
+              "name": "AdministrativeBuilding",
+              "value": "AdministrativeBuilding"
+            },
+            {
+              "name": "Airport",
+              "value": "Airport"
+            },
+            {
+              "name": "AmusementPark",
+              "value": "AmusementPark"
+            },
+            {
+              "name": "AncientSite",
+              "value": "AncientSite"
+            },
+            {
+              "name": "Aquarium",
+              "value": "Aquarium"
+            },
+            {
+              "name": "Archipelago",
+              "value": "Archipelago"
+            },
+            {
+              "name": "Basin",
+              "value": "Basin"
+            },
+            {
+              "name": "Battlefield",
+              "value": "Battlefield"
+            },
+            {
+              "name": "Bay",
+              "value": "Bay"
+            },
+            {
+              "name": "Beach",
+              "value": "Beach"
+            },
+            {
+              "name": "Bridge",
+              "value": "Bridge"
+            },
+            {
+              "name": "BusinessStructure",
+              "value": "BusinessStructure"
+            },
+            {
+              "name": "Camp",
+              "value": "Camp"
+            },
+            {
+              "name": "Canal",
+              "value": "Canal"
+            },
+            {
+              "name": "Cave",
+              "value": "Cave"
+            },
+            {
+              "name": "Cemetery",
+              "value": "Cemetery"
+            },
+            {
+              "name": "Channel",
+              "value": "Channel"
+            },
+            {
+              "name": "Church",
+              "value": "Church"
+            },
+            {
+              "name": "Cliff",
+              "value": "Cliff"
+            },
+            {
+              "name": "Coast",
+              "value": "Coast"
+            },
+            {
+              "name": "CommunityCenter",
+              "value": "CommunityCenter"
+            },
+            {
+              "name": "Continent",
+              "value": "Continent"
+            },
+            {
+              "name": "CountryRegion",
+              "value": "CountryRegion"
+            },
+            {
+              "name": "Crater",
+              "value": "Crater"
+            },
+            {
+              "name": "CulturalRegion",
+              "value": "CulturalRegion"
+            },
+            {
+              "name": "Dam",
+              "value": "Dam"
+            },
+            {
+              "name": "Delta",
+              "value": "Delta"
+            },
+            {
+              "name": "Desert",
+              "value": "Desert"
+            },
+            {
+              "name": "DrainageBasin",
+              "value": "DrainageBasin"
+            },
+            {
+              "name": "Dune",
+              "value": "Dune"
+            },
+            {
+              "name": "FerryTerminal",
+              "value": "FerryTerminal"
+            },
+            {
+              "name": "Forest",
+              "value": "Forest"
+            },
+            {
+              "name": "Fort",
+              "value": "Fort"
+            },
+            {
+              "name": "Garden",
+              "value": "Garden"
+            },
+            {
+              "name": "Geyser",
+              "value": "Geyser"
+            },
+            {
+              "name": "Glacier",
+              "value": "Glacier"
+            },
+            {
+              "name": "GolfCourse",
+              "value": "GolfCourse"
+            },
+            {
+              "name": "HigherEducationFacility",
+              "value": "HigherEducationFacility"
+            },
+            {
+              "name": "HistoricalSite",
+              "value": "HistoricalSite"
+            },
+            {
+              "name": "Hospital",
+              "value": "Hospital"
+            },
+            {
+              "name": "HotSpring",
+              "value": "HotSpring"
+            },
+            {
+              "name": "Ice",
+              "value": "Ice"
+            },
+            {
+              "name": "IndigenousPeoplesReserve",
+              "value": "IndigenousPeoplesReserve"
+            },
+            {
+              "name": "IndustrialStructure",
+              "value": "IndustrialStructure"
+            },
+            {
+              "name": "Island",
+              "value": "Island"
+            },
+            {
+              "name": "Isthmus",
+              "value": "Isthmus"
+            },
+            {
+              "name": "Lake",
+              "value": "Lake"
+            },
+            {
+              "name": "LandArea",
+              "value": "LandArea"
+            },
+            {
+              "name": "Landform",
+              "value": "Landform"
+            },
+            {
+              "name": "LandmarkBuilding",
+              "value": "LandmarkBuilding"
+            },
+            {
+              "name": "Library",
+              "value": "Library"
+            },
+            {
+              "name": "Lighthouse",
+              "value": "Lighthouse"
+            },
+            {
+              "name": "Marina",
+              "value": "Marina"
+            },
+            {
+              "name": "Market",
+              "value": "Market"
+            },
+            {
+              "name": "MedicalStructure",
+              "value": "MedicalStructure"
+            },
+            {
+              "name": "MetroStation",
+              "value": "MetroStation"
+            },
+            {
+              "name": "MilitaryBase",
+              "value": "MilitaryBase"
+            },
+            {
+              "name": "Mission",
+              "value": "Mission"
+            },
+            {
+              "name": "Monument",
+              "value": "Monument"
+            },
+            {
+              "name": "Mosque",
+              "value": "Mosque"
+            },
+            {
+              "name": "Mountain",
+              "value": "Mountain"
+            },
+            {
+              "name": "MountainRange",
+              "value": "MountainRange"
+            },
+            {
+              "name": "Museum",
+              "value": "Museum"
+            },
+            {
+              "name": "NauticalStructure",
+              "value": "NauticalStructure"
+            },
+            {
+              "name": "Neighborhood",
+              "value": "Neighborhood"
+            },
+            {
+              "name": "Oasis",
+              "value": "Oasis"
+            },
+            {
+              "name": "ObservationPoint",
+              "value": "ObservationPoint"
+            },
+            {
+              "name": "Ocean",
+              "value": "Ocean"
+            },
+            {
+              "name": "OfficeBuilding",
+              "value": "OfficeBuilding"
+            },
+            {
+              "name": "Park",
+              "value": "Park"
+            },
+            {
+              "name": "Pass",
+              "value": "Pass"
+            },
+            {
+              "name": "Peninsula",
+              "value": "Peninsula"
+            },
+            {
+              "name": "Plain",
+              "value": "Plain"
+            },
+            {
+              "name": "Plateau",
+              "value": "Plateau"
+            },
+            {
+              "name": "PlayingField",
+              "value": "PlayingField"
+            },
+            {
+              "name": "Pole",
+              "value": "Pole"
+            },
+            {
+              "name": "PoliticalUnit",
+              "value": "PoliticalUnit"
+            },
+            {
+              "name": "PopulatedPlace",
+              "value": "PopulatedPlace"
+            },
+            {
+              "name": "Postcode1",
+              "value": "Postcode1"
+            },
+            {
+              "name": "Promontory",
+              "value": "Promontory"
+            },
+            {
+              "name": "RaceTrack",
+              "value": "RaceTrack"
+            },
+            {
+              "name": "RailwayStation",
+              "value": "RailwayStation"
+            },
+            {
+              "name": "Reef",
+              "value": "Reef"
+            },
+            {
+              "name": "Region",
+              "value": "Region"
+            },
+            {
+              "name": "ReligiousStructure",
+              "value": "ReligiousStructure"
+            },
+            {
+              "name": "Reserve",
+              "value": "Reserve"
+            },
+            {
+              "name": "ResidentialStructure",
+              "value": "ResidentialStructure"
+            },
+            {
+              "name": "River",
+              "value": "River"
+            },
+            {
+              "name": "Ruin",
+              "value": "Ruin"
+            },
+            {
+              "name": "ScientificResearchBase",
+              "value": "ScientificResearchBase"
+            },
+            {
+              "name": "Sea",
+              "value": "Sea"
+            },
+            {
+              "name": "SeaplaneLandingArea",
+              "value": "SeaplaneLandingArea"
+            },
+            {
+              "name": "Shrine",
+              "value": "Shrine"
+            },
+            {
+              "name": "SkiArea",
+              "value": "SkiArea"
+            },
+            {
+              "name": "Spring",
+              "value": "Spring"
+            },
+            {
+              "name": "Stadium",
+              "value": "Stadium"
+            },
+            {
+              "name": "Temple",
+              "value": "Temple"
+            },
+            {
+              "name": "TouristStructure",
+              "value": "TouristStructure"
+            },
+            {
+              "name": "Trail",
+              "value": "Trail"
+            },
+            {
+              "name": "TransportationStructure",
+              "value": "TransportationStructure"
+            },
+            {
+              "name": "Tunnel",
+              "value": "Tunnel"
+            },
+            {
+              "name": "Valley",
+              "value": "Valley"
+            },
+            {
+              "name": "Volcano",
+              "value": "Volcano"
+            },
+            {
+              "name": "Wall",
+              "value": "Wall"
+            },
+            {
+              "name": "Waterfall",
+              "value": "Waterfall"
+            },
+            {
+              "name": "WaterFeature",
+              "value": "WaterFeature"
+            },
+            {
+              "name": "Wetland",
+              "value": "Wetland"
+            },
+            {
+              "name": "Zoo",
+              "value": "Zoo"
+            },
+            {
+              "name": "FinancialStructure",
+              "value": "FinancialStructure"
+            },
+            {
+              "name": "Trailhead",
+              "value": "Trailhead"
+            },
+            {
+              "name": "AirportTerminal",
+              "value": "AirportTerminal"
+            },
+            {
+              "name": "MultiModalStation",
+              "value": "MultiModalStation"
+            },
+            {
+              "name": "FacilityStructure",
+              "value": "FacilityStructure"
+            },
+            {
+              "name": "ParkingStructure",
+              "value": "ParkingStructure"
+            },
+            {
+              "name": "Playground",
+              "value": "Playground"
+            },
+            {
+              "name": "Casino",
+              "value": "Casino"
+            },
+            {
+              "name": "Winery",
+              "value": "Winery"
+            },
+            {
+              "name": "Theater",
+              "value": "Theater"
+            },
+            {
+              "name": "TouristRailway",
+              "value": "TouristRailway"
+            },
+            {
+              "name": "Walkway",
+              "value": "Walkway"
+            },
+            {
+              "name": "FireStation",
+              "value": "FireStation"
+            },
+            {
+              "name": "Port",
+              "value": "Port"
+            },
+            {
+              "name": "Castle",
+              "value": "Castle"
+            },
+            {
+              "name": "GreaterPopulatedPlace",
+              "value": "GreaterPopulatedPlace"
+            },
+            {
+              "name": "Postcode",
+              "value": "Postcode"
+            },
+            {
+              "name": "StatisticalDistrict",
+              "value": "StatisticalDistrict"
+            },
+            {
+              "name": "Planet",
+              "value": "Planet"
+            },
+            {
+              "name": "Other",
+              "value": "Other"
+            }
+          ]
+        }
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -668,7 +1357,7 @@
             "$ref": "#/parameters/Top"
           },
           {
-            "name": "resultTypes",
+            "name": "resultTypeGroups",
             "in": "query",
             "description": "A comma separated list of returned entity types. The possible values are \n\n- Address\n- Place\n\nThese types are mutually inclusive. Place represents points of interest, like natural landmarks.",
             "type": "array",
@@ -679,7 +1368,7 @@
                 "Place"
               ],
               "x-ms-enum": {
-                "name": "AutocompleteResultTypeEnum",
+                "name": "AutocompleteResultTypeGroupsEnum",
                 "modelAsString": true,
                 "values": [
                   {
@@ -693,6 +1382,9 @@
                 ]
               }
             }
+          },
+          {
+            "$ref": "#/parameters/ResultTypes"
           },
           {
             "$ref": "#/parameters/View"
@@ -1375,7 +2067,20 @@
             ]
           }
         },
-        "resultType": {
+        "properties": {
+          "$ref": "#/definitions/AutocompleteProperties"
+        }
+      },
+      "required": [
+        "type",
+        "properties"
+      ]
+    },
+    "AutocompleteProperties": {
+      "description": "Properties of Autocomplete Result",
+      "type": "object",
+      "properties": {
+        "typeGroup": {
           "description": "Place or Address",
           "type": "string",
           "enum": [
@@ -1397,36 +2102,8 @@
             ]
           }
         },
-        "properties": {
-          "$ref": "#/definitions/AutocompleteProperties"
-        }
-      },
-      "required": [
-        "type",
-        "resultType",
-        "properties"
-      ]
-    },
-    "AutocompleteProperties": {
-      "description": "Properties of Autocomplete Result",
-      "type": "object",
-      "properties": {
         "type": {
-          "description": "subtype",
-          "type": "string",
-          "enum": [
-            "Address"
-          ],
-          "x-ms-enum": {
-            "name": "AutocompleteSubType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Address",
-                "value": "Address"
-              }
-            ]
-          }
+          "$ref": "#/definitions/ResultType"
         },
         "address": {
           "$ref": "#/definitions/Address"
@@ -1435,6 +2112,688 @@
           "description": "The name of the place. This field will not appear if the returned type is Address.",
           "type": "string"
         }
+      }
+    },
+    "ResultType": {
+      "description": "Type of suggestion",
+      "type": "string",
+      "enum": [
+        "Address",
+        "RoadBlock",
+        "RoadIntersection",
+        "AdminDivision1",
+        "AdminDivision2",
+        "AdminDivision3",
+        "AdministrativeBuilding",
+        "Airport",
+        "AmusementPark",
+        "AncientSite",
+        "Aquarium",
+        "Archipelago",
+        "Basin",
+        "Battlefield",
+        "Bay",
+        "Beach",
+        "Bridge",
+        "BusinessStructure",
+        "Camp",
+        "Canal",
+        "Cave",
+        "Cemetery",
+        "Channel",
+        "Church",
+        "Cliff",
+        "Coast",
+        "CommunityCenter",
+        "Continent",
+        "CountryRegion",
+        "Crater",
+        "CulturalRegion",
+        "Dam",
+        "Delta",
+        "Desert",
+        "DrainageBasin",
+        "Dune",
+        "FerryTerminal",
+        "Forest",
+        "Fort",
+        "Garden",
+        "Geyser",
+        "Glacier",
+        "GolfCourse",
+        "HigherEducationFacility",
+        "HistoricalSite",
+        "Hospital",
+        "HotSpring",
+        "Ice",
+        "IndigenousPeoplesReserve",
+        "IndustrialStructure",
+        "Island",
+        "Isthmus",
+        "Lake",
+        "LandArea",
+        "Landform",
+        "LandmarkBuilding",
+        "Library",
+        "Lighthouse",
+        "Marina",
+        "Market",
+        "MedicalStructure",
+        "MetroStation",
+        "MilitaryBase",
+        "Mission",
+        "Monument",
+        "Mosque",
+        "Mountain",
+        "MountainRange",
+        "Museum",
+        "NauticalStructure",
+        "Neighborhood",
+        "Oasis",
+        "ObservationPoint",
+        "Ocean",
+        "OfficeBuilding",
+        "Park",
+        "Pass",
+        "Peninsula",
+        "Plain",
+        "Plateau",
+        "PlayingField",
+        "Pole",
+        "PoliticalUnit",
+        "PopulatedPlace",
+        "Postcode1",
+        "Promontory",
+        "RaceTrack",
+        "RailwayStation",
+        "Reef",
+        "Region",
+        "ReligiousStructure",
+        "Reserve",
+        "ResidentialStructure",
+        "River",
+        "Ruin",
+        "ScientificResearchBase",
+        "Sea",
+        "SeaplaneLandingArea",
+        "Shrine",
+        "SkiArea",
+        "Spring",
+        "Stadium",
+        "Temple",
+        "TouristStructure",
+        "Trail",
+        "TransportationStructure",
+        "Tunnel",
+        "Valley",
+        "Volcano",
+        "Wall",
+        "Waterfall",
+        "WaterFeature",
+        "Wetland",
+        "Zoo",
+        "FinancialStructure",
+        "Trailhead",
+        "AirportTerminal",
+        "MultiModalStation",
+        "FacilityStructure",
+        "ParkingStructure",
+        "Playground",
+        "Casino",
+        "Winery",
+        "Theater",
+        "TouristRailway",
+        "Walkway",
+        "FireStation",
+        "Port",
+        "Castle",
+        "GreaterPopulatedPlace",
+        "Postcode",
+        "StatisticalDistrict",
+        "Planet",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "AutocompleteResultTypeEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Address",
+            "value": "Address"
+          },
+          {
+            "name": "RoadBlock",
+            "value": "RoadBlock"
+          },
+          {
+            "name": "RoadIntersection",
+            "value": "RoadIntersection"
+          },
+          {
+            "name": "AdminDivision1",
+            "value": "AdminDivision1"
+          },
+          {
+            "name": "AdminDivision2",
+            "value": "AdminDivision2"
+          },
+          {
+            "name": "AdminDivision3",
+            "value": "AdminDivision3"
+          },
+          {
+            "name": "AdministrativeBuilding",
+            "value": "AdministrativeBuilding"
+          },
+          {
+            "name": "Airport",
+            "value": "Airport"
+          },
+          {
+            "name": "AmusementPark",
+            "value": "AmusementPark"
+          },
+          {
+            "name": "AncientSite",
+            "value": "AncientSite"
+          },
+          {
+            "name": "Aquarium",
+            "value": "Aquarium"
+          },
+          {
+            "name": "Archipelago",
+            "value": "Archipelago"
+          },
+          {
+            "name": "Basin",
+            "value": "Basin"
+          },
+          {
+            "name": "Battlefield",
+            "value": "Battlefield"
+          },
+          {
+            "name": "Bay",
+            "value": "Bay"
+          },
+          {
+            "name": "Beach",
+            "value": "Beach"
+          },
+          {
+            "name": "Bridge",
+            "value": "Bridge"
+          },
+          {
+            "name": "BusinessStructure",
+            "value": "BusinessStructure"
+          },
+          {
+            "name": "Camp",
+            "value": "Camp"
+          },
+          {
+            "name": "Canal",
+            "value": "Canal"
+          },
+          {
+            "name": "Cave",
+            "value": "Cave"
+          },
+          {
+            "name": "Cemetery",
+            "value": "Cemetery"
+          },
+          {
+            "name": "Channel",
+            "value": "Channel"
+          },
+          {
+            "name": "Church",
+            "value": "Church"
+          },
+          {
+            "name": "Cliff",
+            "value": "Cliff"
+          },
+          {
+            "name": "Coast",
+            "value": "Coast"
+          },
+          {
+            "name": "CommunityCenter",
+            "value": "CommunityCenter"
+          },
+          {
+            "name": "Continent",
+            "value": "Continent"
+          },
+          {
+            "name": "CountryRegion",
+            "value": "CountryRegion"
+          },
+          {
+            "name": "Crater",
+            "value": "Crater"
+          },
+          {
+            "name": "CulturalRegion",
+            "value": "CulturalRegion"
+          },
+          {
+            "name": "Dam",
+            "value": "Dam"
+          },
+          {
+            "name": "Delta",
+            "value": "Delta"
+          },
+          {
+            "name": "Desert",
+            "value": "Desert"
+          },
+          {
+            "name": "DrainageBasin",
+            "value": "DrainageBasin"
+          },
+          {
+            "name": "Dune",
+            "value": "Dune"
+          },
+          {
+            "name": "FerryTerminal",
+            "value": "FerryTerminal"
+          },
+          {
+            "name": "Forest",
+            "value": "Forest"
+          },
+          {
+            "name": "Fort",
+            "value": "Fort"
+          },
+          {
+            "name": "Garden",
+            "value": "Garden"
+          },
+          {
+            "name": "Geyser",
+            "value": "Geyser"
+          },
+          {
+            "name": "Glacier",
+            "value": "Glacier"
+          },
+          {
+            "name": "GolfCourse",
+            "value": "GolfCourse"
+          },
+          {
+            "name": "HigherEducationFacility",
+            "value": "HigherEducationFacility"
+          },
+          {
+            "name": "HistoricalSite",
+            "value": "HistoricalSite"
+          },
+          {
+            "name": "Hospital",
+            "value": "Hospital"
+          },
+          {
+            "name": "HotSpring",
+            "value": "HotSpring"
+          },
+          {
+            "name": "Ice",
+            "value": "Ice"
+          },
+          {
+            "name": "IndigenousPeoplesReserve",
+            "value": "IndigenousPeoplesReserve"
+          },
+          {
+            "name": "IndustrialStructure",
+            "value": "IndustrialStructure"
+          },
+          {
+            "name": "Island",
+            "value": "Island"
+          },
+          {
+            "name": "Isthmus",
+            "value": "Isthmus"
+          },
+          {
+            "name": "Lake",
+            "value": "Lake"
+          },
+          {
+            "name": "LandArea",
+            "value": "LandArea"
+          },
+          {
+            "name": "Landform",
+            "value": "Landform"
+          },
+          {
+            "name": "LandmarkBuilding",
+            "value": "LandmarkBuilding"
+          },
+          {
+            "name": "Library",
+            "value": "Library"
+          },
+          {
+            "name": "Lighthouse",
+            "value": "Lighthouse"
+          },
+          {
+            "name": "Marina",
+            "value": "Marina"
+          },
+          {
+            "name": "Market",
+            "value": "Market"
+          },
+          {
+            "name": "MedicalStructure",
+            "value": "MedicalStructure"
+          },
+          {
+            "name": "MetroStation",
+            "value": "MetroStation"
+          },
+          {
+            "name": "MilitaryBase",
+            "value": "MilitaryBase"
+          },
+          {
+            "name": "Mission",
+            "value": "Mission"
+          },
+          {
+            "name": "Monument",
+            "value": "Monument"
+          },
+          {
+            "name": "Mosque",
+            "value": "Mosque"
+          },
+          {
+            "name": "Mountain",
+            "value": "Mountain"
+          },
+          {
+            "name": "MountainRange",
+            "value": "MountainRange"
+          },
+          {
+            "name": "Museum",
+            "value": "Museum"
+          },
+          {
+            "name": "NauticalStructure",
+            "value": "NauticalStructure"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood"
+          },
+          {
+            "name": "Oasis",
+            "value": "Oasis"
+          },
+          {
+            "name": "ObservationPoint",
+            "value": "ObservationPoint"
+          },
+          {
+            "name": "Ocean",
+            "value": "Ocean"
+          },
+          {
+            "name": "OfficeBuilding",
+            "value": "OfficeBuilding"
+          },
+          {
+            "name": "Park",
+            "value": "Park"
+          },
+          {
+            "name": "Pass",
+            "value": "Pass"
+          },
+          {
+            "name": "Peninsula",
+            "value": "Peninsula"
+          },
+          {
+            "name": "Plain",
+            "value": "Plain"
+          },
+          {
+            "name": "Plateau",
+            "value": "Plateau"
+          },
+          {
+            "name": "PlayingField",
+            "value": "PlayingField"
+          },
+          {
+            "name": "Pole",
+            "value": "Pole"
+          },
+          {
+            "name": "PoliticalUnit",
+            "value": "PoliticalUnit"
+          },
+          {
+            "name": "PopulatedPlace",
+            "value": "PopulatedPlace"
+          },
+          {
+            "name": "Postcode1",
+            "value": "Postcode1"
+          },
+          {
+            "name": "Promontory",
+            "value": "Promontory"
+          },
+          {
+            "name": "RaceTrack",
+            "value": "RaceTrack"
+          },
+          {
+            "name": "RailwayStation",
+            "value": "RailwayStation"
+          },
+          {
+            "name": "Reef",
+            "value": "Reef"
+          },
+          {
+            "name": "Region",
+            "value": "Region"
+          },
+          {
+            "name": "ReligiousStructure",
+            "value": "ReligiousStructure"
+          },
+          {
+            "name": "Reserve",
+            "value": "Reserve"
+          },
+          {
+            "name": "ResidentialStructure",
+            "value": "ResidentialStructure"
+          },
+          {
+            "name": "River",
+            "value": "River"
+          },
+          {
+            "name": "Ruin",
+            "value": "Ruin"
+          },
+          {
+            "name": "ScientificResearchBase",
+            "value": "ScientificResearchBase"
+          },
+          {
+            "name": "Sea",
+            "value": "Sea"
+          },
+          {
+            "name": "SeaplaneLandingArea",
+            "value": "SeaplaneLandingArea"
+          },
+          {
+            "name": "Shrine",
+            "value": "Shrine"
+          },
+          {
+            "name": "SkiArea",
+            "value": "SkiArea"
+          },
+          {
+            "name": "Spring",
+            "value": "Spring"
+          },
+          {
+            "name": "Stadium",
+            "value": "Stadium"
+          },
+          {
+            "name": "Temple",
+            "value": "Temple"
+          },
+          {
+            "name": "TouristStructure",
+            "value": "TouristStructure"
+          },
+          {
+            "name": "Trail",
+            "value": "Trail"
+          },
+          {
+            "name": "TransportationStructure",
+            "value": "TransportationStructure"
+          },
+          {
+            "name": "Tunnel",
+            "value": "Tunnel"
+          },
+          {
+            "name": "Valley",
+            "value": "Valley"
+          },
+          {
+            "name": "Volcano",
+            "value": "Volcano"
+          },
+          {
+            "name": "Wall",
+            "value": "Wall"
+          },
+          {
+            "name": "Waterfall",
+            "value": "Waterfall"
+          },
+          {
+            "name": "WaterFeature",
+            "value": "WaterFeature"
+          },
+          {
+            "name": "Wetland",
+            "value": "Wetland"
+          },
+          {
+            "name": "Zoo",
+            "value": "Zoo"
+          },
+          {
+            "name": "FinancialStructure",
+            "value": "FinancialStructure"
+          },
+          {
+            "name": "Trailhead",
+            "value": "Trailhead"
+          },
+          {
+            "name": "AirportTerminal",
+            "value": "AirportTerminal"
+          },
+          {
+            "name": "MultiModalStation",
+            "value": "MultiModalStation"
+          },
+          {
+            "name": "FacilityStructure",
+            "value": "FacilityStructure"
+          },
+          {
+            "name": "ParkingStructure",
+            "value": "ParkingStructure"
+          },
+          {
+            "name": "Playground",
+            "value": "Playground"
+          },
+          {
+            "name": "Casino",
+            "value": "Casino"
+          },
+          {
+            "name": "Winery",
+            "value": "Winery"
+          },
+          {
+            "name": "Theater",
+            "value": "Theater"
+          },
+          {
+            "name": "TouristRailway",
+            "value": "TouristRailway"
+          },
+          {
+            "name": "Walkway",
+            "value": "Walkway"
+          },
+          {
+            "name": "FireStation",
+            "value": "FireStation"
+          },
+          {
+            "name": "Port",
+            "value": "Port"
+          },
+          {
+            "name": "Castle",
+            "value": "Castle"
+          },
+          {
+            "name": "GreaterPopulatedPlace",
+            "value": "GreaterPopulatedPlace"
+          },
+          {
+            "name": "Postcode",
+            "value": "Postcode"
+          },
+          {
+            "name": "StatisticalDistrict",
+            "value": "StatisticalDistrict"
+          },
+          {
+            "name": "Planet",
+            "value": "Planet"
+          },
+          {
+            "name": "Other",
+            "value": "Other"
+          }
+        ]
       }
     }
   }
