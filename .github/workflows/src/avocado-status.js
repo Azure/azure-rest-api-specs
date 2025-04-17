@@ -32,14 +32,22 @@ export default async function getStatus({ github, context, core }) {
   });
   const labelNames = labels.map((label) => label.name);
 
+  core.info(`Labels: ${labelNames}`);
+
   if (labelNames.includes("Approved-Avocado")) {
+    const description = "Found label 'Approved-Avocado'";
+    core.info(description);
+
+    const state = "success";
+    core.info(`Setting status to '${state}'`);
+
     await github.rest.repos.createCommitStatus({
       owner,
       repo,
       sha: head_sha,
-      state: "success",
+      state,
       context: statusName,
-      description: "Found label 'Approved-Avocado'",
+      description,
       target_url,
     });
 
