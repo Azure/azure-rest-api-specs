@@ -17,6 +17,7 @@ options:
     generate-sample: true
   "@azure-tools/typespec-java":
     package-dir: "azure-resourcemanager-durabletask"
+    namespace: "com.azure.resourcemanager.durabletask"
     service-name: "Durable Task"
     flavor: azure
   "@azure-tools/typespec-go":
@@ -36,13 +37,10 @@ options:
     model-namespace: false
     namespace: "{package-dir}"
   "@azure-tools/typespec-ts":
-    azure-sdk-for-js: true
-    is-modular-library: true
-    generate-metadata: true
+    flavor: "azure"
     experimental-extensible-enums: true
     generate-sample: true
     package-dir: "arm-durabletask"
-    flavor: "azure"
     package-details:
       name: "@azure/arm-durabletask"
 linter:
