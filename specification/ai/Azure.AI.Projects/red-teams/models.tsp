@@ -21,76 +21,76 @@ namespace Azure.AI.Projects;
 union AttackStrategy {
   string,
 
-  @doc("Represents a default set of easy complexity attacks. Easy complexity attack strategies are defined as attacks that do not require any Large Language Model to convert or orchestrate.")
+  @doc("Represents a default set of easy complexity attacks. Easy complexity attacks require less effort, such as translation of a prompt into some encoding, and does not require any Large Language Model to convert or orchestrate.")
   Easy: "easy",
 
-  @doc("Represents a default set of moderate complexity attacks. Moderate complexity attack strategies are defined as attacks that require a Large Language Model to convert or orchestrate.")
+  @doc("Represents a default set of moderate complexity attacks. Moderate complexity attacks require having access to resources such as another generative AI model.")
   Moderate: "moderate",
 
-  @doc("Represents a default set of difficult complexity attacks. Difficult complexity attack strategies are defined as attacks that require a Large Language Model to convert or orchestrate.")
+  @doc("Represents a default set of difficult complexity attacks. Difficult complexity attacks include attacks that require access to significant resources and effort to execute an attack such as knowledge of search-based algorithms in addition to a generative AI model.")
   Difficult: "difficult",
 
-  @doc("Represents ASCII art, a graphic design technique that uses printable characters.")
+  @doc("Generates visual art using ASCII characters, often used for creative or obfuscation purposes.")
   AsciiArt: "ascii_art",
 
-  @doc("Represents ASCII smuggling, a technique for encoding or hiding data.")
+  @doc("Conceals data within ASCII characters, making it harder to detect.")
   AsciiSmuggler: "ascii_smuggler",
 
-  @doc("Represents the Atbash cipher, a substitution cipher that reverses the alphabet.")
+  @doc("Implements the Atbash cipher, a simple substitution cipher where each letter is mapped to its reverse.")
   Atbash: "atbash",
 
-  @doc("Represents Base64 encoding, a method for encoding binary data as text.")
+  @doc("Encodes binary data into a text format using Base64, commonly used for data transmission.")
   Base64: "base64",
 
-  @doc("Represents binary encoding, a representation of data in binary format.")
+  @doc("Converts text into binary code, representing data in a series of 0s and 1s.")
   Binary: "binary",
 
-  @doc("Represents the Caesar cipher, a substitution cipher that shifts characters.")
+  @doc("Applies the Caesar cipher, a substitution cipher that shifts characters by a fixed number of positions.")
   Caesar: "caesar",
 
-  @doc("Represents character space manipulation, a technique involving spacing between characters.")
+  @doc("Alters text by adding spaces between characters, often used for obfuscation.")
   CharacterSpace: "character_space",
 
-  @doc("Represents character swapping, a technique for rearranging characters in text.")
+  @doc("Injects specially crafted prompts to bypass AI safeguards, known as User Injected Prompt Attacks (UPIA).")
   Jailbreak: "jailbreak",
 
-  @doc("Represents ASCII attack, a technique for encoding or hiding data.")
+  @doc("Utilizes ANSI escape sequences to manipulate text appearance and behavior.")
   AnsiiAttack: "ansii_attack",
 
-  @doc("Represents character swapping, a technique for rearranging characters in text.")
+  @doc("Swaps characters within text to create variations or obfuscate the original content.")
   CharacterSwap: "character_swap",
 
-  @doc("Represents suffix appending, a technique for adding characters to the end of text.")
+  @doc("Appends an adversarial suffix to the prompt.")
   SuffixAppend: "suffix_append",
 
-  @doc("Represents string joining, a technique for concatenating strings.")
+  @doc("Joins multiple strings together, often used for concatenation or obfuscation.")
   StringJoin: "string_join",
 
-  @doc("Represents Unicode confusable characters, which are characters that look similar but are different.")
+  @doc("Uses Unicode characters that look similar to standard characters, creating visual confusion.")
   UnicodeConfusable: "unicode_confusable",
 
-  @doc("Represents Unicode substitution, a technique for replacing characters with similar-looking Unicode characters.")
+  @doc("Substitutes standard characters with Unicode equivalents, often for obfuscation.")
   UnicodeSubstitution: "unicode_substitution",
 
-  @doc("Represents the use of emojis in text, which can be used to convey emotions or ideas.")
+  @doc("Adds diacritical marks to characters, changing their appearance and sometimes their meaning.")
   Diacritic: "diacritic",
 
-  @doc("Represents flipping characters, a technique for reversing the order of characters.")
+  @doc("Flips characters from front to back, creating a mirrored effect.")
   Flip: "flip",
 
-  @doc("Represents leetspeak, a form of internet slang that replaces letters with similar-looking numbers or symbols.")
+  @doc("Transforms text into Leetspeak, a form of encoding that replaces letters with similar-looking numbers or symbols.")
   Leetspeak: "leetspeak",
 
-  @doc("Represents the ROT13 cipher, a substitution cipher that replaces a letter with the 13th letter after it in the alphabet.")
+  @doc("Applies the ROT13 cipher, a simple substitution cipher that shifts characters by 13 positions.")
   ROT13: "rot13",
 
-  @doc("Represents the morse code, a method for encoding text characters as sequences of dots and dashes.")
+  @doc("Encodes text into Morse code, using dots and dashes to represent characters.")
   Morse: "morse",
 
-  @doc("Represents the url encoding, a method for encoding special characters in URLs.")
+  @doc("Encodes text into URL format.")
   Url: "url",
 
-  @doc("Represents the baseline attack strategy, which is a standard or reference point for comparison.")
+  @doc("Represents the baseline direct adversarial probing, which is used by attack strategies as the attack objective.")
   Baseline: "baseline"
 }
 
