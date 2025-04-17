@@ -78,9 +78,11 @@ export default async function getStatus({ github, context, core }) {
 
   if (run) {
     // Update target to the "Analyze Code" run, which contains the meaningful output.
-    target_url =
-      `https://github.com/${context.repo.owner}/${context.repo.repo}` +
-      `/actions/runs/${run.id}`;
+    //
+    // TODO: Can we update to deep-link directly to the failure?
+    // Current: https://github.com/mikeharder/azure-rest-api-specs/actions/runs/14509047569
+    // Desired: ^+/job/40703679014?pr=18
+    target_url = run.url;
   }
 
   if (run?.status === "completed") {
