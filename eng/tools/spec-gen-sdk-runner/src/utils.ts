@@ -294,7 +294,7 @@ export function searchRelatedTypeSpecProjectBySharedLibrary(
       try {
         const peerFiles = fs.readdirSync(path.resolve(options.specRepoFolder, peerPath));
         if (peerFiles.some((file) => options.searchFileRegex.test(file.toLowerCase()))) {
-          result[peerPath] = sharedLibraries;
+          result[normalizePath(peerPath)] = sharedLibraries;
         }
       } catch {
         logMessage(`Error reading directory: ${peerPath}`, LogLevel.Warn);
@@ -443,4 +443,14 @@ export function objectToMap<T>(obj: Record<string, T>): Map<string, T> {
     map.set(key, value);
   }
   return map;
+}
+
+/**
+ * To ensure the path is consistent across both Windows and Linux environments
+ * Convert the path to POSIX style and remove any redundant slashes.
+ * @param p - The path to normalize
+ * @returns 
+ */
+export function normalizePath(p: string): string {
+  return p.replace(/\\/g, "/").replace(/\/+/g, "/");
 }
