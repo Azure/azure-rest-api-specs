@@ -56,7 +56,7 @@ model OccurrenceProperties {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @renamedFrom(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`, "Occurrence")
 @parentResource(AutoAction)
 model OccurrenceOld is ProxyResource<OccurrenceProperties> {
@@ -67,13 +67,13 @@ model OccurrenceOld is ProxyResource<OccurrenceProperties> {
   >;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @parentResource(ScheduledAction)
 model Occurrence is ProxyResource<OccurrenceProperties> {
   ...ResourceNameParameter<
     Occurrence,
     KeyName = "occurrenceId",
-    NamePattern = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+    NamePattern = "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}"
   >;
 }
 
@@ -96,7 +96,7 @@ model OccurrenceResource is ScheduledActionResource {
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @renamedFrom(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`, "DelayRequest")
 @doc("Request to ask for a delay in an occurrence")
 model DelayRequestOld {
@@ -107,7 +107,7 @@ model DelayRequestOld {
   resourceIds: Array<ValidAutoActionResourceId>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Request to ask for a delay in an occurrence")
 model DelayRequest {
   @doc("The amount of delay the occurrence should apply")

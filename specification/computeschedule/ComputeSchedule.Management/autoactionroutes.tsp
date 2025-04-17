@@ -17,7 +17,7 @@ using OpenAPI;
 namespace Microsoft.ComputeSchedule;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @armResourceOperations
 interface AutoActions {
   get is ArmResourceRead<AutoAction>;
@@ -64,7 +64,7 @@ interface AutoActions {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
-@removed(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @armResourceOperations
 interface AutoActionsExtension {
   listByVms is ArmResourceListByParent<AutoActionResources>;
