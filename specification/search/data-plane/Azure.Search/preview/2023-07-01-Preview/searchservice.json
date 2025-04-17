@@ -6136,7 +6136,7 @@
           "items": {
             "$ref": "#/definitions/VectorSearchAlgorithmConfiguration"
           },
-          "description": "Contains configuration options specific to the algorithm used during indexing time."
+          "description": "Contains configuration options specific to the algorithm used during indexing and/or querying."
         }
       },
       "description": "Contains configuration options related to vector search."
@@ -6180,7 +6180,7 @@
           "description": "Contains the parameters specific to hnsw algorithm."
         }
       },
-      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing time."
+      "description": "Contains configuration options specific to the hnsw approximate nearest neighbors algorithm used during indexing and querying. The hnsw algorithm offers a tunable trade-off between search speed and accuracy."
     },
     "HnswParameters": {
       "type": "object",
@@ -6210,7 +6210,7 @@
           "minimum": 100,
           "maximum": 1000,
           "default": 500,
-          "description": "The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. Increasing this parameter leads to diminishing returns.."
+          "description": "The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. At a certain point, increasing this parameter leads to diminishing returns."
         },
         "metric": {
           "$ref": "#/definitions/VectorSearchAlgorithmMetric",

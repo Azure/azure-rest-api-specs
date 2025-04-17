@@ -1,0 +1,323 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "environmentName": "testcontainerenv",
+    "api-version": "2024-08-02-preview",
+    "environmentEnvelope": {
+      "location": "East US",
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {}
+        }
+      },
+      "properties": {
+        "daprAIConnectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://northcentralus-0.in.applicationinsights.azure.com/",
+        "appLogsConfiguration": {
+          "logAnalyticsConfiguration": {
+            "customerId": "string",
+            "sharedKey": "string",
+            "dynamicJsonColumns": true
+          }
+        },
+        "appInsightsConfiguration": {
+          "connectionString": "InstrumentationKey=00000000-0000-0000-0000-000000000000;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/"
+        },
+        "openTelemetryConfiguration": {
+          "destinationsConfiguration": {
+            "dataDogConfiguration": {
+              "site": "string",
+              "key": "000000000000000000000000"
+            },
+            "otlpConfigurations": [
+              {
+                "name": "dashboard",
+                "endpoint": "dashboard.k8s.region.azurecontainerapps.io:80",
+                "insecure": true,
+                "headers": [
+                  {
+                    "key": "api-key",
+                    "value": "xxxxxxxxxxx"
+                  }
+                ]
+              }
+            ]
+          },
+          "tracesConfiguration": {
+            "includeDapr": true,
+            "destinations": [
+              "appInsights"
+            ]
+          },
+          "logsConfiguration": {
+            "destinations": [
+              "appInsights"
+            ]
+          },
+          "metricsConfiguration": {
+            "includeKeda": true,
+            "destinations": [
+              "dataDog"
+            ]
+          }
+        },
+        "zoneRedundant": true,
+        "vnetConfiguration": {
+          "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
+        },
+        "customDomainConfiguration": {
+          "dnsSuffix": "www.my-name.com",
+          "certificateValue": "Y2VydA==",
+          "certificatePassword": "1234"
+        },
+        "workloadProfiles": [
+          {
+            "name": "My-GP-01",
+            "enableFips": true,
+            "workloadProfileType": "GeneralPurpose",
+            "minimumCount": 3,
+            "maximumCount": 12
+          },
+          {
+            "name": "My-MO-01",
+            "workloadProfileType": "MemoryOptimized",
+            "minimumCount": 3,
+            "maximumCount": 6
+          },
+          {
+            "name": "My-CO-01",
+            "workloadProfileType": "ComputeOptimized",
+            "minimumCount": 3,
+            "maximumCount": 6
+          },
+          {
+            "name": "My-consumption-01",
+            "workloadProfileType": "Consumption"
+          }
+        ],
+        "peerAuthentication": {
+          "mtls": {
+            "enabled": true
+          }
+        },
+        "peerTrafficConfiguration": {
+          "encryption": {
+            "enabled": true
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv",
+        "name": "testcontainerenv",
+        "type": "Microsoft.App/managedEnvironments",
+        "location": "East US",
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentErrors": null,
+          "defaultDomain": "testcontainerenv.k4apps.io",
+          "staticIp": "1.2.3.4",
+          "appLogsConfiguration": {
+            "logAnalyticsConfiguration": {
+              "customerId": "string",
+              "dynamicJsonColumns": true
+            }
+          },
+          "openTelemetryConfiguration": {
+            "destinationsConfiguration": {
+              "dataDogConfiguration": {
+                "site": "datadoghq.com",
+                "key": null
+              },
+              "otlpConfigurations": [
+                {
+                  "name": "dashboard",
+                  "endpoint": "dashboard.k8s.region.azurecontainerapps.io:80",
+                  "insecure": true
+                }
+              ]
+            },
+            "tracesConfiguration": {
+              "destinations": [
+                "appInsights"
+              ]
+            },
+            "logsConfiguration": {
+              "destinations": [
+                "appInsights"
+              ]
+            },
+            "metricsConfiguration": {
+              "destinations": [
+                "dataDog"
+              ]
+            }
+          },
+          "zoneRedundant": true,
+          "vnetConfiguration": {
+            "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
+          },
+          "customDomainConfiguration": {
+            "customDomainVerificationId": "custom domain verification id",
+            "dnsSuffix": "www.my-name.com",
+            "subjectName": "CN=www.my-name.com",
+            "expirationDate": "2022-11-06T04:00:00Z",
+            "thumbprint": "CERTIFICATE_THUMBPRINT"
+          },
+          "eventStreamEndpoint": "testEndpoint",
+          "workloadProfiles": [
+            {
+              "name": "My-GP-01",
+              "enableFips": true,
+              "workloadProfileType": "GeneralPurpose",
+              "minimumCount": 3,
+              "maximumCount": 12
+            },
+            {
+              "name": "My-MO-01",
+              "workloadProfileType": "MemoryOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            },
+            {
+              "name": "My-CO-01",
+              "workloadProfileType": "ComputeOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            },
+            {
+              "name": "My-consumption-01",
+              "workloadProfileType": "Consumption"
+            }
+          ],
+          "appInsightsConfiguration": null,
+          "infrastructureResourceGroup": "capp-svc-testcontainerenv-eastus",
+          "peerAuthentication": {
+            "mtls": {
+              "enabled": true
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv",
+        "name": "testcontainerenv",
+        "type": "Microsoft.App/managedEnvironments",
+        "location": "East US",
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resources/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "InitializationInProgress",
+          "deploymentErrors": null,
+          "defaultDomain": "testcontainerenv.k4apps.io",
+          "staticIp": "1.2.3.4",
+          "appLogsConfiguration": {
+            "logAnalyticsConfiguration": {
+              "customerId": "string"
+            }
+          },
+          "openTelemetryConfiguration": {
+            "destinationsConfiguration": {
+              "dataDogConfiguration": {
+                "site": "datadoghq.com",
+                "key": null
+              },
+              "otlpConfigurations": [
+                {
+                  "name": "dashboard",
+                  "endpoint": "dashboard.k8s.region.azurecontainerapps.io:80",
+                  "insecure": true
+                }
+              ]
+            },
+            "tracesConfiguration": {
+              "destinations": [
+                "appInsights"
+              ]
+            },
+            "logsConfiguration": {
+              "destinations": [
+                "appInsights"
+              ]
+            },
+            "metricsConfiguration": {
+              "destinations": [
+                "dataDog"
+              ]
+            }
+          },
+          "zoneRedundant": true,
+          "vnetConfiguration": {
+            "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
+          },
+          "customDomainConfiguration": {
+            "customDomainVerificationId": "custom domain verification id",
+            "dnsSuffix": "www.my-name.com",
+            "subjectName": "CN=www.my-name.com",
+            "expirationDate": "2022-11-06T04:00:00Z",
+            "thumbprint": "CERTIFICATE_THUMBPRINT"
+          },
+          "eventStreamEndpoint": "testEndpoint",
+          "workloadProfiles": [
+            {
+              "name": "My-GP-01",
+              "enableFips": true,
+              "workloadProfileType": "GeneralPurpose",
+              "minimumCount": 3,
+              "maximumCount": 12
+            },
+            {
+              "name": "My-MO-01",
+              "workloadProfileType": "MemoryOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            },
+            {
+              "name": "My-CO-01",
+              "workloadProfileType": "ComputeOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            },
+            {
+              "name": "My-consumption-01",
+              "workloadProfileType": "Consumption"
+            }
+          ],
+          "appInsightsConfiguration": null,
+          "infrastructureResourceGroup": "capp-svc-testcontainerenv-eastus",
+          "peerAuthentication": {
+            "mtls": {
+              "enabled": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "jobName": "test-job"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test-job-execution",
+            "template": {
+              "args": [
+                "arg1"
+              ],
+              "environmentVariables": [
+                {
+                  "name": "key1",
+                  "value": "value1"
+                },
+                {
+                  "name": "env2",
+                  "value": "value2"
+                },
+                {
+                  "name": "secretKey1"
+                }
+              ],
+              "resourceRequests": {
+                "cpu": "1",
+                "memory": "2Gi"
+              }
+            },
+            "jobSnapshot": {
+              "triggerConfig": {
+                "triggerType": "Manual",
+                "timeoutInSeconds": 3600
+              }
+            },
+            "startTime": "2024-03-01T05:11:58+00:00",
+            "endTime": "2024-03-01T05:13:10+00:00",
+            "status": "Completed"
+          }
+        ]
+      }
+    }
+  }
+}

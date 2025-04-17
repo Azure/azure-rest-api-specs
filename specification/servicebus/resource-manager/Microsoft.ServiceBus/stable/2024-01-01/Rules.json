@@ -1,0 +1,449 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceBusManagementClient",
+    "description": "Azure Service Bus client",
+    "version": "2024-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions/{subscriptionName}/rules": {
+      "get": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "Rules_ListBySubscriptions",
+        "x-ms-examples": {
+          "RulesListBySubscriptions": {
+            "$ref": "./examples/Rules/RuleListBySubscription.json"
+          }
+        },
+        "description": "List all the rules within given topic-subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of Rules.",
+            "schema": {
+              "$ref": "#/definitions/RuleListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions/{subscriptionName}/rules/{ruleName}": {
+      "put": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "Rules_CreateOrUpdate",
+        "x-ms-examples": {
+          "RulesCreateOrUpdate": {
+            "$ref": "./examples/Rules/RuleCreate.json"
+          },
+          "RulesCreateSqlFilter": {
+            "$ref": "./examples/Rules/RuleCreate_SqlFilter.json"
+          },
+          "RulesCreateCorrelationFilter": {
+            "$ref": "./examples/Rules/RuleCreate_CorrelationFilter.json"
+          }
+        },
+        "description": "Creates a new rule and updates an existing rule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/RuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            },
+            "description": "Parameters supplied to create a rule."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rule created.",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rules"
+        ],
+        "operationId": "Rules_Delete",
+        "x-ms-examples": {
+          "RulesDelete": {
+            "$ref": "./examples/Rules/RuleDelete.json"
+          }
+        },
+        "description": "Deletes an existing rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Rule deleted."
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Rules_Get",
+        "x-ms-examples": {
+          "RulesGet": {
+            "$ref": "./examples/Rules/RuleGet.json"
+          }
+        },
+        "description": "Retrieves the description for the specified rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/TopicNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved rule description.",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Rule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Ruleproperties",
+          "description": "Properties of Rule resource"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v2/definitions.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Description of Rule Resource."
+    },
+    "Ruleproperties": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/Action",
+          "description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression."
+        },
+        "filterType": {
+          "$ref": "#/definitions/FilterType",
+          "description": "Filter type that is evaluated against a BrokeredMessage."
+        },
+        "sqlFilter": {
+          "$ref": "#/definitions/SqlFilter",
+          "description": "Properties of sqlFilter"
+        },
+        "correlationFilter": {
+          "$ref": "#/definitions/CorrelationFilter",
+          "description": "Properties of correlationFilter"
+        }
+      },
+      "description": "Description of Rule Resource."
+    },
+    "RuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          },
+          "description": "Result of the List Rules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of rules"
+        }
+      },
+      "description": "The response of the List rule operation."
+    },
+    "FilterType": {
+      "type": "string",
+      "enum": [
+        "SqlFilter",
+        "CorrelationFilter"
+      ],
+      "x-ms-enum": {
+        "name": "FilterType",
+        "modelAsString": false
+      },
+      "description": "Rule filter types"
+    },
+    "SqlFilter": {
+      "type": "object",
+      "properties": {
+        "sqlExpression": {
+          "type": "string",
+          "description": "The SQL expression. e.g. MyProperty='ABC'"
+        },
+        "compatibilityLevel": {
+          "format": "int32",
+          "type": "integer",
+          "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
+        },
+        "requiresPreprocessing": {
+          "type": "boolean",
+          "default": true,
+          "description": "Value that indicates whether the rule action requires preprocessing."
+        }
+      },
+      "description": "Represents a filter which is a composition of an expression and an action that is executed in the pub/sub pipeline."
+    },
+    "CorrelationFilter": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "dictionary object for custom filters"
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Identifier of the correlation."
+        },
+        "messageId": {
+          "type": "string",
+          "description": "Identifier of the message."
+        },
+        "to": {
+          "type": "string",
+          "description": "Address to send to."
+        },
+        "replyTo": {
+          "type": "string",
+          "description": "Address of the queue to reply to."
+        },
+        "label": {
+          "type": "string",
+          "description": "Application specific label."
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "Session identifier."
+        },
+        "replyToSessionId": {
+          "type": "string",
+          "description": "Session identifier to reply to."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "Content type of the message."
+        },
+        "requiresPreprocessing": {
+          "type": "boolean",
+          "default": true,
+          "description": "Value that indicates whether the rule action requires preprocessing."
+        }
+      },
+      "description": "Represents the correlation filter expression."
+    },
+    "Action": {
+      "type": "object",
+      "properties": {
+        "sqlExpression": {
+          "type": "string",
+          "description": "SQL expression. e.g. MyProperty='ABC'"
+        },
+        "compatibilityLevel": {
+          "format": "int32",
+          "type": "integer",
+          "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
+        },
+        "requiresPreprocessing": {
+          "type": "boolean",
+          "default": true,
+          "description": "Value that indicates whether the rule action requires preprocessing."
+        }
+      },
+      "description": "Represents the filter actions which are allowed for the transformation of a message that have been matched by a filter expression."
+    },
+    "SqlRuleAction": {
+      "type": "object",
+      "properties": {
+        "sqlExpression": {
+          "type": "string",
+          "description": "SQL expression. e.g. MyProperty='ABC'"
+        },
+        "compatibilityLevel": {
+          "format": "int32",
+          "type": "integer",
+          "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
+        },
+        "requiresPreprocessing": {
+          "type": "boolean",
+          "default": true,
+          "description": "Value that indicates whether the rule action requires preprocessing."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Action"
+        }
+      ],
+      "description": "Represents set of actions written in SQL language-based syntax that is performed against a ServiceBus.Messaging.BrokeredMessage "
+    }
+  },
+  "parameters": {}
+}

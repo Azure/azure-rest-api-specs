@@ -1,0 +1,736 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2023-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkTaps/{networkTapName}": {
+      "put": {
+        "tags": [
+          "NetworkTaps"
+        ],
+        "operationId": "NetworkTaps_Create",
+        "summary": "Create Network Tap.",
+        "description": "Creates a Network Tap.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkTapNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/NetworkTap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkTap"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkTap"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "NetworkTaps_Create_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkTaps_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkTaps"
+        ],
+        "operationId": "NetworkTaps_Get",
+        "summary": "Gets a Network Tap.",
+        "description": "Retrieves details of this Network Tap.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkTapNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkTap"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkTaps_Get_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkTaps_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkTaps"
+        ],
+        "operationId": "NetworkTaps_Update",
+        "summary": "Updates the Network Taps.",
+        "description": "API to update certain properties of the Network Tap resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkTapNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Network Tap properties to update.",
+            "schema": {
+              "$ref": "#/definitions/NetworkTapPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NetworkTap"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkTaps_Update_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkTaps_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkTaps"
+        ],
+        "operationId": "NetworkTaps_Delete",
+        "summary": "Deletes a Network Tap.",
+        "description": "Deletes Network Tap.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkTapNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkTaps_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkTaps_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkTaps": {
+      "get": {
+        "operationId": "NetworkTaps_ListByResourceGroup",
+        "summary": "List Network Taps by resource group.",
+        "description": "Displays Network Taps list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkTaps under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkTapsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkTaps_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkTaps_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/networkTaps": {
+      "get": {
+        "operationId": "NetworkTaps_ListBySubscription",
+        "summary": "List Network Taps by subscription.",
+        "description": "Displays Network Taps list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all NetworkTaps under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/NetworkTapsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkTaps_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkTaps_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkTaps/{networkTapName}/updateAdministrativeState": {
+      "post": {
+        "tags": [
+          "NetworkTaps"
+        ],
+        "operationId": "NetworkTaps_UpdateAdministrativeState",
+        "summary": "Updates administrative state of  Network Tap.",
+        "description": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkTapNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "./common.json#/definitions/UpdateAdministrativeState"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForDeviceUpdate"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForDeviceUpdate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkTaps_UpdateAdministrativeState_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkTaps_UpdateAdministrativeState_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkTaps/{networkTapName}/resync": {
+      "post": {
+        "tags": [
+          "NetworkTaps"
+        ],
+        "operationId": "NetworkTaps_Resync",
+        "summary": "Resync operation on the Network Tap.",
+        "description": "Implements the operation to the underlying resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkTapNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForStateUpdate"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonPostActionResponseForStateUpdate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "NetworkTaps_Resync_MaximumSet_Gen": {
+            "$ref": "./examples/NetworkTaps_Resync_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkTap": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkTapProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The Network Tap resource definition."
+    },
+    "NetworkTapProperties": {
+      "type": "object",
+      "description": "Network Tap Properties defines the properties of the resource.",
+      "required": [
+        "networkPacketBrokerId",
+        "destinations"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        }
+      ],
+      "properties": {
+        "networkPacketBrokerId": {
+          "description": "ARM resource ID of the Network Packet Broker.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "$ref": "./common.json#/definitions/NetworkFabricIdProperty"
+        },
+        "sourceTapRuleId": {
+          "type": "string",
+          "description": "Source Tap Rule Id. ARM Resource ID of the Network Tap Rule.",
+          "format": "arm-id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/networkTapRules"
+              }
+            ]
+          },
+          "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkTapRules/{networkTapRuleName}"
+        },
+        "destinations": {
+          "type": "array",
+          "description": "List of destinations to send the filter traffic.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "description": "Destination.",
+            "required": [
+              "name",
+              "destinationType",
+              "destinationId"
+            ],
+            "allOf": [
+              {
+                "$ref": "#/definitions/DestinationProperties"
+              }
+            ]
+          }
+        },
+        "pollingType": {
+          "type": "string",
+          "description": "Polling type.",
+          "minLength": 1,
+          "default": "Pull",
+          "enum": [
+            "Pull",
+            "Push"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PollingType"
+          },
+          "example": "Pull"
+        },
+        "configurationState": {
+          "description": "Gets the configurations state of the resource.",
+          "$ref": "./common.json#/definitions/ConfigurationState"
+        },
+        "provisioningState": {
+          "description": "Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of Network Tap provisioning.",
+          "$ref": "./common.json#/definitions/ProvisioningState"
+        },
+        "administrativeState": {
+          "description": "Administrative state of the resource. Example -Enabled/Disabled",
+          "$ref": "./common.json#/definitions/AdministrativeState"
+        }
+      }
+    },
+    "NetworkTapPatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "The NetworkFabric resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/NetworkTapPatchableParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/TagsUpdate"
+        }
+      ]
+    },
+    "NetworkTapPatchableParameters": {
+      "type": "object",
+      "description": "The Network Tap resource patch definition.",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource"
+        }
+      ],
+      "properties": {
+        "pollingType": {
+          "type": "string",
+          "description": "Polling type.",
+          "minLength": 1,
+          "default": "Pull",
+          "enum": [
+            "Pull",
+            "Push"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PollingType"
+          },
+          "example": "Pull"
+        },
+        "destinations": {
+          "type": "array",
+          "description": "List of destination properties to send the filter traffic.",
+          "items": {
+            "type": "object",
+            "description": "Destination.",
+            "allOf": [
+              {
+                "$ref": "#/definitions/DestinationProperties"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "NetworkTapsListResult": {
+      "type": "object",
+      "description": "List of NetworkTaps.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of NetworkTap resources.",
+          "items": {
+            "$ref": "#/definitions/NetworkTap"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "DestinationProperties": {
+      "type": "object",
+      "description": "The network tap destination properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Destination name.",
+          "minLength": 1
+        },
+        "destinationType": {
+          "type": "string",
+          "description": "Type of destination. Input can be IsolationDomain or Direct.",
+          "enum": [
+            "IsolationDomain",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DestinationType"
+          },
+          "example": "IsolationDomain"
+        },
+        "destinationId": {
+          "type": "string",
+          "description": "The destination Id. ARM Resource ID of either NNI or Internal Networks.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/networkToNetworkInterconnects"
+              },
+              {
+                "type": "Microsoft.ManagedNetworkFabric/l3IsolationDomains/internalNetworks"
+              }
+            ]
+          },
+          "example": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkToNetworkInterconnects/example-nni"
+        },
+        "isolationDomainProperties": {
+          "description": "Isolation Domain Properties.",
+          "$ref": "#/definitions/IsolationDomainProperties"
+        },
+        "destinationTapRuleId": {
+          "description": "ARM Resource ID of destination Tap Rule that contains match configurations.",
+          "$ref": "./common.json#/definitions/NetworkTapRuleIdProperty"
+        }
+      }
+    },
+    "IsolationDomainProperties": {
+      "type": "object",
+      "description": "Isolation Domain Properties.",
+      "properties": {
+        "encapsulation": {
+          "type": "string",
+          "description": "Type of encapsulation.",
+          "enum": [
+            "None",
+            "GRE"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Encapsulation"
+          },
+          "minLength": 1,
+          "example": "None"
+        },
+        "neighborGroupIds": {
+          "type": "array",
+          "description": "List of Neighbor Group IDs.",
+          "items": {
+            "description": "ARM Resource ID of the Neighbor Group .",
+            "$ref": "./common.json#/definitions/NeighborGroupIdProperty"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "NetworkTapNameParameter": {
+      "type": "string",
+      "description": "Name of the Network Tap.",
+      "in": "path",
+      "name": "networkTapName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

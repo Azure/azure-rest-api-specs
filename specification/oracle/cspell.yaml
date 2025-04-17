@@ -1,0 +1,56 @@
+# This file configures spell checking. Items in "words" were initially populated
+# with words that might be spelling errors. Review these words and take
+# appropriate action. For more information, see: https://aka.ms/ci-fix#spell-check
+
+# Spell checking is not case sensitive
+# Keep word lists in alphabetical order so the file is easier to manage
+import:
+  - ../../cspell.yaml
+words:
+  - adbbackupid
+  - adbscharsetname
+  - adbsncharsetname
+  - autonomousdbversionsname
+  - cloudexadatainfrastructurename
+  - cloudvmclustername
+  - dbcs
+  - dbnodeocid
+  - dbserverocid
+  - dbsystemshapename
+  - dnsprivateviewocid
+  - ecpu
+  - ecpus
+  - exacc
+  - exadata
+  - exadatainfra
+  - exaoverview
+  - ezconnect
+  - ezconnectplus
+  - iorm
+  - mtls
+  - ncharacter
+  - ocid
+  - ocids
+  - ocpu
+  - oltp
+  - ords
+  - reco
+  - tcps
+  - tpurgent
+  - vmbm
+  - vmdb
+  - vnic
+overrides:
+  - filename: '**/specification/oracle/resource-manager/Oracle.Database/**/*.json'
+    words:
+      - ecpus
+      - exadb
+      - exascale
+      - singlenode
+      - systemversionname
+  - filename: '**/specification/oracle/Oracle.Database.Management/**/*.tsp'
+    words:
+      - exadb
+      - exascale
+      - vmcluster
+

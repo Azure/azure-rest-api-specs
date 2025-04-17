@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "appName": "myapp"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "public": true,
+          "url": "myapp.myservice.private.azuremicroservices.io",
+          "provisioningState": "Succeeded",
+          "fqdn": "myapp.private.mydomain.com",
+          "httpsOnly": false,
+          "enableEndToEndTLS": false,
+          "vnetAddons": {
+            "publicEndpoint": true,
+            "publicEndpointUrl": "myapp.myservice.azuremicroservices.io"
+          },
+          "temporaryDisk": {
+            "sizeInGB": 2,
+            "mountPath": "/mytemporarydisk"
+          },
+          "persistentDisk": {
+            "sizeInGB": 2,
+            "usedInGB": 1,
+            "mountPath": "/mypersistentdisk"
+          },
+          "loadedCertificates": [
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/certificates/mycert1",
+              "loadTrustStore": false
+            },
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/certificates/mycert2",
+              "loadTrustStore": true
+            }
+          ],
+          "customPersistentDisks": [
+            {
+              "customPersistentDiskProperties": {
+                "type": "AzureFileVolume",
+                "mountPath": "/mypath1/mypath2",
+                "mountOptions": [
+                  "uid=0",
+                  "gid=0",
+                  "dir_mode=0777",
+                  "file_mode=0777"
+                ],
+                "shareName": "myFileShare"
+              },
+              "storageId": "myASCStorageID"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "sample-user",
+          "createdByType": "User",
+          "createdAt": "2021-08-11T03:16:03.944Z",
+          "lastModifiedBy": "sample-user",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-11T03:17:03.944Z"
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "principalid",
+          "tenantId": "tenantid",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "clientId1",
+              "principalId": "principalId1"
+            },
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/samplegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id2": {
+              "clientId": "clientId2",
+              "principalId": "principalId2"
+            }
+          }
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp",
+        "name": "myapp"
+      }
+    }
+  }
+}

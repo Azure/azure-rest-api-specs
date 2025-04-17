@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "environmentName": "testcontainerenv",
+    "api-version": "2024-03-01",
+    "environmentEnvelope": {
+      "location": "East US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1",
+        "name": "jlaw-demo1",
+        "type": "Microsoft.App/managedEnvironments",
+        "location": "North Central US",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentErrors": null,
+          "defaultDomain": "jlaw-demo1.k4apps.io",
+          "staticIp": "20.42.33.145",
+          "zoneRedundant": true,
+          "customDomainConfiguration": {
+            "customDomainVerificationId": "custom domain verification id",
+            "dnsSuffix": "www.my-name.com",
+            "subjectName": "CN=www.my-name.com",
+            "expirationDate": "2022-11-06T04:00:00Z",
+            "thumbprint": "CERTIFICATE_THUMBPRINT"
+          },
+          "eventStreamEndpoint": "testEndpoint",
+          "workloadProfiles": [
+            {
+              "name": "My-GP-01",
+              "workloadProfileType": "GeneralPurpose",
+              "minimumCount": 3,
+              "maximumCount": 12
+            },
+            {
+              "name": "My-MO-01",
+              "workloadProfileType": "MemoryOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            },
+            {
+              "name": "My-CO-01",
+              "workloadProfileType": "ComputeOptimized",
+              "minimumCount": 3,
+              "maximumCount": 6
+            },
+            {
+              "name": "My-consumption-01",
+              "workloadProfileType": "Consumption"
+            }
+          ],
+          "infrastructureResourceGroup": "capp-svc-jlaw-demo1-northcentralus"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/locations/eastus/managedEnvironmentOperationResults/62e4d893-d233-4005-988e-a428d9f77076?api-version=2024-03-01"
+      }
+    }
+  }
+}

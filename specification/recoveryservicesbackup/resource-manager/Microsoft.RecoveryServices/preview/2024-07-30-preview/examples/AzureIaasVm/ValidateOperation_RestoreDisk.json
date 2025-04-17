@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "vaultName": "testVault",
+    "fabricName": "Azure",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;testRG;testvmName",
+    "protectedItemName": "VM;iaasvmcontainerv2;testRG;testvmName",
+    "recoveryPointId": "348916168024334",
+    "api-version": "2024-07-30-preview",
+    "parameters": {
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testVault/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;testRG;testvmName/protectedItems/VM;iaasvmcontainerv2;testRG;testvmName/recoveryPoints/348916168024334",
+      "properties": {
+        "objectType": "ValidateIaasVMRestoreOperationRequest",
+        "restoreRequest": {
+          "recoveryPointId": "348916168024334",
+          "objectType": "IaasVMRestoreRequest",
+          "recoveryType": "RestoreDisks",
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1",
+          "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testingRg/providers/Microsoft.Storage/storageAccounts/testAccount",
+          "region": "southeastasia",
+          "createNewCloudService": true,
+          "originalStorageAccountOption": false,
+          "encryptionDetails": {
+            "encryptionEnabled": false
+          },
+          "identityInfo": {
+            "isSystemAssignedIdentity": false,
+            "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/asmaskarRG1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/asmaskartestmsi"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "validateOperationResponse": {
+          "validationResults": [
+            {
+              "code": "UserErrorCoreCountSubscriptionQuotaReached",
+              "message": "Core Count subscription quota has been reached.",
+              "recommendations": [
+                "Contact Azure support to increase the limits."
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

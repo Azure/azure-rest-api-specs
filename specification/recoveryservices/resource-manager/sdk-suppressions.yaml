@@ -1,0 +1,13 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-recoveryservices
+      breaking-changes:
+        - Renamed operation VaultsOperations.delete to VaultsOperations.begin_delete
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/recoveryservices/armrecoveryservices
+      breaking-changes:
+        - Operation `*VaultsClient.Delete` has been changed to LRO, use `*VaultsClient.BeginDelete` instead.
+  azure-sdk-for-js:
+    - package: '@azure/arm-recoveryservices'
+      breaking-changes:
+        - Removed operation Vaults.delete

@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "apiId": "echo-api;rev=3"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/echo-api;rev=3",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "echo-api;rev=3",
+        "properties": {
+          "displayName": "Service",
+          "apiRevision": "3",
+          "serviceUrl": "https://api.plexonline.com/DataSource/Service.asmx",
+          "path": "schulte",
+          "protocols": [
+            "https"
+          ],
+          "authenticationSettings": {
+            "oAuth2": {
+              "authorizationServerId": "authorizationServerId2283",
+              "scope": "oauth2scope2580"
+            },
+            "oAuth2AuthenticationSettings": [
+              {
+                "authorizationServerId": "authorizationServerId2283",
+                "scope": "oauth2scope2580"
+              },
+              {
+                "authorizationServerId": "authorizationServerId2284",
+                "scope": "oauth2scope2581"
+              }
+            ]
+          },
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "apiRevisionDescription": "fixed bug in contract"
+        }
+      }
+    }
+  }
+}

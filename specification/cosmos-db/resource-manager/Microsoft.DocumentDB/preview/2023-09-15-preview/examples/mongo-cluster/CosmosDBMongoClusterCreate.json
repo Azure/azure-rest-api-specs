@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "mongoClusterName": "myMongoCluster",
+    "api-version": "2023-09-15-preview",
+    "parameters": {
+      "location": "westus2",
+      "properties": {
+        "administratorLogin": "mongoAdmin",
+        "administratorLoginPassword": "password",
+        "serverVersion": "5.0",
+        "nodeGroupSpecs": [
+          {
+            "kind": "Shard",
+            "sku": "M30",
+            "diskSizeGB": 128,
+            "enableHa": true,
+            "nodeCount": 3
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
+        "name": "myMongoCluster",
+        "type": "/Microsoft.DocumentDB/mongoClusters",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "administratorLogin": "mongoAdmin",
+          "serverVersion": "5.0",
+          "nodeGroupSpecs": [
+            {
+              "kind": "Shard",
+              "sku": "M30",
+              "diskSizeGB": 128,
+              "enableHa": true,
+              "nodeCount": 3
+            }
+          ],
+          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
+          "earliestRestoreTime": "2023-01-13T20:07:35Z"
+        },
+        "location": "westus2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
+        "name": "myMongoCluster",
+        "type": "/Microsoft.DocumentDB/mongoClusters",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "provisioningState": "InProgress",
+          "administratorLogin": "mongoAdmin",
+          "serverVersion": "5.0",
+          "nodeGroupSpecs": [
+            {
+              "kind": "Shard",
+              "sku": "M30",
+              "diskSizeGB": 128,
+              "enableHa": true,
+              "nodeCount": 3
+            }
+          ],
+          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
+          "earliestRestoreTime": "2023-01-13T20:07:35Z"
+        },
+        "location": "westus2"
+      }
+    }
+  }
+}

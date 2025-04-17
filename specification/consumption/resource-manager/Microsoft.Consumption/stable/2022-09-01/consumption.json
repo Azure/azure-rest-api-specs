@@ -1905,6 +1905,29 @@
         }
       }
     },
+    "SavingsPlan": {
+      "type": "object",
+      "description": "The properties of the SavingsPlan.",
+      "properties": {
+        "term": {
+          "description": "SavingsPlan term",
+          "type": "string",
+          "readOnly": true
+        },
+        "marketPrice": {
+          "description": "SavingsPlan Market Price",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "effectivePrice": {
+          "description": "SavingsPlan Effective Price",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }
+      }
+    },
     "UsageDetail": {
       "type": "object",
       "discriminator": "kind",
@@ -4611,6 +4634,11 @@
         "offerId": {
           "description": "Offer Id",
           "type": "string",
+          "readOnly": true
+        },
+        "savingsPlan": {
+          "description": "SavingsPlan Details",
+          "$ref": "#/definitions/SavingsPlan",
           "readOnly": true
         }
       }

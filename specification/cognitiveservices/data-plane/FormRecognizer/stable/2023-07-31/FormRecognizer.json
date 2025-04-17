@@ -1986,13 +1986,6 @@
             "$ref": "#/definitions/DocumentLine"
           }
         },
-        "annotations": {
-          "description": "Extracted annotations from the page.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentAnnotation"
-          }
-        },
         "barcodes": {
           "description": "Extracted barcodes from the page.",
           "type": "array",
@@ -2107,47 +2100,6 @@
           "items": {
             "$ref": "#/definitions/DocumentSpan"
           }
-        }
-      }
-    },
-    "DocumentAnnotation": {
-      "description": "An annotation object that represents a visual annotation in the document, such as checks ✓ and crosses X.",
-      "type": "object",
-      "required": [
-        "kind",
-        "polygon",
-        "confidence"
-      ],
-      "properties": {
-        "kind": {
-          "description": "Annotation kind.",
-          "type": "string",
-          "enum": [
-            "check",
-            "cross"
-          ],
-          "x-ms-enum": {
-            "name": "DocumentAnnotationKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "check",
-                "description": "A visual check ✓."
-              },
-              {
-                "value": "cross",
-                "description": "A visual cross X."
-              }
-            ]
-          }
-        },
-        "polygon": {
-          "description": "Bounding polygon of the annotation.",
-          "$ref": "#/definitions/BoundingPolygon"
-        },
-        "confidence": {
-          "description": "Confidence of correctly extracting the annotation.",
-          "$ref": "#/definitions/Confidence"
         }
       }
     },

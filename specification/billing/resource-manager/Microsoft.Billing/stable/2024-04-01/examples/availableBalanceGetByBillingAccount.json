@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/availableBalance/default",
+        "name": "default",
+        "properties": {
+          "amount": {
+            "currency": "USD",
+            "value": 500
+          },
+          "paymentsOnAccount": [
+            {
+              "amount": {
+                "currency": "USD",
+                "value": 50
+              },
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx",
+              "billingProfileDisplayName": "Contoso Finance",
+              "invoiceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/invoices/G123456789",
+              "invoiceName": "G123456789",
+              "date": "2024-04-01T00:00:00.0000000Z",
+              "paymentMethodType": "CheckWire"
+            },
+            {
+              "amount": {
+                "currency": "USD",
+                "value": 150
+              },
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/yyyy-yyyy-yyy-yyy",
+              "billingProfileDisplayName": "Contoso Engineering",
+              "invoiceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/invoices/G987654321",
+              "invoiceName": "G987654321",
+              "date": "2023-01-01T00:00:00.0000000Z",
+              "paymentMethodType": "CheckWire"
+            }
+          ],
+          "totalPaymentsOnAccount": {
+            "currency": "USD",
+            "value": 200
+          }
+        },
+        "type": "Microsoft.Billing/billingAccounts/availableBalance"
+      }
+    }
+  }
+}

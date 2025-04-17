@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "resourceUri": "subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM",
+    "body": {
+      "properties": {
+        "provisioningAction": "install",
+        "credentials": {
+          "username": "tempuser",
+          "password": "<password>"
+        },
+        "httpProxyConfig": {
+          "httpsProxy": "http://192.1.2.3:8080"
+        },
+        "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default",
+        "name": "default",
+        "type": "Microsoft.ConnectedVMwarevSphere/VirtualMachineInstances/guestAgents",
+        "properties": {
+          "provisioningAction": "install",
+          "status": "connected",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.HybridCompute/machines/DemoVM/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default",
+        "name": "default",
+        "type": "Microsoft.ConnectedVMwarevSphere/VirtualMachineInstances/guestAgents",
+        "properties": {
+          "provisioningAction": "install",
+          "status": "connected",
+          "provisioningState": "Created"
+        }
+      }
+    }
+  }
+}

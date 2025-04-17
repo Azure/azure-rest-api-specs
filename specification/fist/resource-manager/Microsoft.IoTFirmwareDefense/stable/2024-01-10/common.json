@@ -1,0 +1,84 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-10",
+    "title": "IoT Firmware Defense",
+    "description": "The definitions and parameters in this swagger specification will be used to manage the IoT Firmware Defense resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "UrlToken": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "SAS URL for creating or accessing a blob file.",
+          "type": "string",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "description": "Url data for creating or accessing a blob file."
+    },
+    "PairedKey": {
+      "type": "object",
+      "description": "Details of a matching paired key or certificate.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the paired key or certificate."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type indicating whether the paired object is a key or certificate."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "FirmwareIdParameter": {
+      "name": "firmwareId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of the firmware.",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the firmware analysis workspace.",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

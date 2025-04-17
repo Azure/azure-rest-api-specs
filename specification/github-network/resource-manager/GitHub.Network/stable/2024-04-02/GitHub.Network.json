@@ -1,0 +1,510 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GitHub.Network client",
+    "version": "2024-04-02",
+    "description": "GitHub.Network Resource Provider REST API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "NetworkSettingsResources"
+    }
+  ],
+  "paths": {
+    "/providers/GitHub.Network/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "operationsList": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/GitHub.Network/networkSettings": {
+      "get": {
+        "operationId": "NetworkSettings_ListBySubscription",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Retrieves the properties of all GitHub.Network networkSettings resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "networkSettingsListBySub": {
+            "$ref": "./examples/NetworkSettings_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/GitHub.Network/networkSettings": {
+      "get": {
+        "operationId": "NetworkSettings_ListByResourceGroup",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Retrieves the properties of all GitHub.Network networkSettings resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "networkSettingsListGet": {
+            "$ref": "./examples/NetworkSettings_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/GitHub.Network/networkSettings/{networkSettingsName}": {
+      "get": {
+        "operationId": "NetworkSettings_Get",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Retrieves the properties of a GitHub.Network networkSettings resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkSettingsName",
+            "in": "path",
+            "description": "Name of the GitHub.Network resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "networkSettingsGet": {
+            "$ref": "./examples/NetworkSettings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkSettings_Create",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Creates a GitHub.Network networkSettings resource with the specified create parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkSettingsName",
+            "in": "path",
+            "description": "Name of the GitHub.Network resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "networkSettings",
+            "in": "body",
+            "description": "GitHub.Network networkSettings resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkSettingsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkSettingsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "networkSettingsCreate": {
+            "$ref": "./examples/NetworkSettings_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NetworkSettings_Update",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Updates the properties of an existing GitHub.Network networkSettings resource with the specified update parameters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkSettingsName",
+            "in": "path",
+            "description": "Name of the GitHub.Network resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "networkSettings",
+            "in": "body",
+            "description": "Parameters for updating the properties of the GitHub.Network resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "networkSettingsUpdate": {
+            "$ref": "./examples/NetworkSettings_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NetworkSettings_Delete",
+        "tags": [
+          "NetworkSettingsResources"
+        ],
+        "description": "Deletes an existing GitHub.Network networkSettings resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkSettingsName",
+            "in": "path",
+            "description": "Name of the GitHub.Network resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "networkSettingsDelete": {
+            "$ref": "./examples/NetworkSettings_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "NetworkSettingsResource": {
+      "type": "object",
+      "description": "GitHub.Network networkSettings resource. Represents the network settings needed for vnet injection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSettingsResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkSettingsResourceListResult": {
+      "type": "object",
+      "description": "The response of a NetworkSettingsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkSettingsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkSettingsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkSettingsResourceProperties": {
+      "type": "object",
+      "description": "NetworkSettings resource-specific properties.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Specifies a subnet ID for vnet-injection.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "businessId": {
+          "type": "string",
+          "description": "Specifies the GitHub business (enterprise/organization) ID associated to the Azure subscription.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The managed application provisioning state.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSettingsResourceUpdate": {
+      "type": "object",
+      "description": "GitHub.Network networkSettings resource. Represents the network settings needed for vnet injection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSettingsResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the managed application.",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The provisioning of the resource failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource was provisioned successfully."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The provisioning of the resource was cancelled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning is in progress."
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

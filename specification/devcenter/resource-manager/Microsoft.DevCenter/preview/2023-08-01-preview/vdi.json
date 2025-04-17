@@ -1,0 +1,1856 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-08-01-preview",
+    "title": "DevCenter",
+    "description": "DevCenter Management API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/skus": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "SKUs"
+        ],
+        "description": "Lists the Microsoft.DevCenter SKUs available in a subscription",
+        "operationId": "Skus_ListBySubscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Skus_ListBySubscription": {
+            "$ref": "./examples/Skus_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Pools"
+        ],
+        "description": "Lists pools for a project",
+        "operationId": "Pools_ListByProject",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PoolListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Pools_ListByProject": {
+            "$ref": "./examples/Pools_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PoolNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Pools"
+        ],
+        "description": "Gets a machine pool",
+        "operationId": "Pools_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Get": {
+            "$ref": "./examples/Pools_Get.json"
+          },
+          "Pools_GetUnhealthyStatus": {
+            "$ref": "./examples/Pools_GetUnhealthyStatus.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pools"
+        ],
+        "description": "Creates or updates a machine pool",
+        "operationId": "Pools_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Represents a machine pool",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "201": {
+            "description": "Created. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_CreateOrUpdate": {
+            "$ref": "./examples/Pools_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Pools"
+        ],
+        "description": "Partially updates a machine pool",
+        "operationId": "Pools_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Represents a machine pool",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PoolUpdate"
+            }
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Update": {
+            "$ref": "./examples/Pools_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Pools"
+        ],
+        "description": "Deletes a machine pool",
+        "operationId": "Pools_Delete",
+        "parameters": [],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Delete": {
+            "$ref": "./examples/Pools_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}/runHealthChecks": {
+      "post": {
+        "tags": [
+          "Pools"
+        ],
+        "description": "Triggers a refresh of the pool status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PoolNameParameter"
+          }
+        ],
+        "operationId": "Pools_RunHealthChecks",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Successfully initiated refresh."
+          },
+          "202": {
+            "description": "Accepted. Initiating pool status refresh."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_RefreshStatus": {
+            "$ref": "./examples/Pools_RunHealthChecks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PoolNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Lists schedules for a pool",
+        "operationId": "Schedules_ListByPool",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Schedules_ListByPool": {
+            "$ref": "./examples/Schedules_ListByPool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/ProjectNameParameter"
+        },
+        {
+          "$ref": "#/parameters/PoolNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ScheduleNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Gets a schedule resource.",
+        "operationId": "Schedules_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_GetByPool": {
+            "$ref": "./examples/Schedules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Creates or updates a Schedule.",
+        "operationId": "Schedules_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Represents a scheduled task",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "201": {
+            "description": "Created. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_CreateDailyShutdownPoolSchedule": {
+            "$ref": "./examples/Schedules_CreateDailyShutdownPoolSchedule.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Partially updates a Scheduled.",
+        "operationId": "Schedules_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Represents a scheduled task.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduleUpdate"
+            }
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_Update": {
+            "$ref": "./examples/Schedules_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Schedules"
+        ],
+        "description": "Deletes a Scheduled.",
+        "operationId": "Schedules_Delete",
+        "parameters": [],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_Delete": {
+            "$ref": "./examples/Schedules_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevCenter/networkConnections": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Network Connections"
+        ],
+        "description": "Lists network connections in a subscription",
+        "operationId": "NetworkConnections_ListBySubscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConnections_ListBySubscription": {
+            "$ref": "./examples/NetworkConnections_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Network Connections"
+        ],
+        "description": "Lists network connections in a resource group",
+        "operationId": "NetworkConnections_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConnections_ListByResourceGroup": {
+            "$ref": "./examples/NetworkConnections_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkConnectionName"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Network Connections"
+        ],
+        "description": "Gets a network connection resource",
+        "operationId": "NetworkConnections_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConnections_Get": {
+            "$ref": "./examples/NetworkConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Network Connections"
+        ],
+        "description": "Creates or updates a Network Connections resource",
+        "operationId": "NetworkConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Represents network connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkConnection"
+            }
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "Accepted. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConnection"
+            }
+          },
+          "201": {
+            "description": "Created. Operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConnections_CreateOrUpdate": {
+            "$ref": "./examples/NetworkConnections_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Network Connections"
+        ],
+        "description": "Partially updates a Network Connection",
+        "operationId": "NetworkConnections_Update",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Represents network connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkConnectionUpdate"
+            }
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NetworkConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConnections_Update": {
+            "$ref": "./examples/NetworkConnections_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Network Connections"
+        ],
+        "description": "Deletes a Network Connections resource",
+        "operationId": "NetworkConnections_Delete",
+        "parameters": [],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Resource has been deleted"
+          },
+          "202": {
+            "description": "Accepted. Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConnections_Delete": {
+            "$ref": "./examples/NetworkConnections_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkConnectionName"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Network Connections"
+        ],
+        "description": "Lists health check status details",
+        "operationId": "NetworkConnections_ListHealthDetails",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HealthCheckStatusDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConnections_ListHealthDetails": {
+            "$ref": "./examples/NetworkConnections_ListHealthDetails.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/healthChecks/latest": {
+      "get": {
+        "tags": [
+          "Network Connections"
+        ],
+        "description": "Gets health check status details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkConnectionName"
+          }
+        ],
+        "operationId": "NetworkConnections_GetHealthDetails",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HealthCheckStatusDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConnections_GetHealthDetails": {
+            "$ref": "./examples/NetworkConnections_GetHealthDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/runHealthChecks": {
+      "post": {
+        "tags": [
+          "Network Connection"
+        ],
+        "description": "Triggers a new health check run. The execution and health check result can be tracked via the network Connection health check details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkConnectionName"
+          }
+        ],
+        "operationId": "NetworkConnections_RunHealthChecks",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "responses": {
+          "200": {
+            "description": "OK. Successfully initiated health check."
+          },
+          "202": {
+            "description": "Accepted. Initiating health checks."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkConnections_RunHealthChecks": {
+            "$ref": "./examples/NetworkConnections_RunHealthChecks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/networkConnections/{networkConnectionName}/outboundNetworkDependenciesEndpoints": {
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "commonDefinitions.json#/parameters/TopParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkConnectionName"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Network Connection"
+        ],
+        "operationId": "NetworkConnections_ListOutboundNetworkDependenciesEndpoints",
+        "description": "Lists the endpoints that agents may call as part of Dev Box service administration. These FQDNs should be allowed for outbound access in order for the Dev Box service to function.",
+        "parameters": [],
+        "x-ms-examples": {
+          "ListOutboundNetworkDependencies": {
+            "$ref": "./examples/NetworkConnections_ListOutboundNetworkDependenciesEndpoints.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains a list of outbound network dependencies.",
+            "schema": {
+              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "commonDefinitions.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SkuListResult": {
+      "description": "Results of the Microsoft.DevCenter SKU list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "commonDefinitions.json#/definitions/DevCenterSku"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Pool": {
+      "description": "A pool of Virtual Machines.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Pool properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PoolProperties"
+        }
+      }
+    },
+    "PoolUpdateProperties": {
+      "description": "Properties of a Pool. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "devBoxDefinitionName": {
+          "description": "Name of a Dev Box definition in parent Project of this Pool",
+          "type": "string"
+        },
+        "networkConnectionName": {
+          "description": "Name of a Network Connection in parent Project of this Pool",
+          "type": "string"
+        },
+        "licenseType": {
+          "description": "Specifies the license type indicating the caller has already acquired licenses for the Dev Boxes that will be created.",
+          "$ref": "#/definitions/LicenseType"
+        },
+        "localAdministrator": {
+          "description": "Indicates whether owners of Dev Boxes in this pool are added as local administrators on the Dev Box.",
+          "$ref": "#/definitions/LocalAdminStatus"
+        },
+        "stopOnDisconnect": {
+          "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
+          "$ref": "#/definitions/StopOnDisconnectConfiguration"
+        },
+        "singleSignOnStatus": {
+          "description": "Indicates whether Dev Boxes in this pool are created with single sign on enabled. The also requires that single sign on be enabled on the tenant.",
+          "$ref": "#/definitions/SingleSignOnStatus"
+        }
+      }
+    },
+    "PoolProperties": {
+      "type": "object",
+      "description": "Properties of a Pool",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PoolUpdateProperties"
+        }
+      ],
+      "properties": {
+        "healthStatus": {
+          "description": "Overall health status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.",
+          "$ref": "#/definitions/HealthStatus",
+          "readOnly": true
+        },
+        "healthStatusDetails": {
+          "description": "Details on the Pool health status to help diagnose issues. This is only populated when the pool status indicates the pool is in a non-healthy state",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthStatusDetail"
+          },
+          "readOnly": true
+        },
+        "devBoxCount": {
+          "description": "Indicates the number of provisioned Dev Boxes in this pool.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "devBoxDefinitionName",
+        "networkConnectionName",
+        "licenseType",
+        "localAdministrator"
+      ]
+    },
+    "HealthStatus": {
+      "description": "Health status indicating whether a pool is available to create Dev Boxes.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Healthy",
+        "Warning",
+        "Unhealthy"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true
+      }
+    },
+    "HealthStatusDetail": {
+      "type": "object",
+      "description": "Pool health status detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the issue.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the issue, intended to be suitable for display in a user interface",
+          "readOnly": true
+        }
+      }
+    },
+    "LicenseType": {
+      "description": "License Types",
+      "enum": [
+        "Windows_Client"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "LicenseType",
+        "modelAsString": true
+      }
+    },
+    "LocalAdminStatus": {
+      "description": "Local Administrator enable or disable status. Indicates whether owners of Dev Boxes are added as local administrators on the Dev Box.",
+      "type": "string",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "LocalAdminStatus",
+        "modelAsString": true
+      }
+    },
+    "SingleSignOnStatus": {
+      "description": "SingleSignOn (SSO) enable or disable status. Indicates whether Dev Boxes in the Pool will have SSO enabled or disabled.",
+      "type": "string",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "SingleSignOnStatus",
+        "modelAsString": true
+      }
+    },
+    "StopOnDisconnectConfiguration": {
+      "type": "object",
+      "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
+      "properties": {
+        "status": {
+          "description": "Whether the feature to stop the Dev Box on disconnect once the grace period has lapsed is enabled.",
+          "$ref": "#/definitions/StopOnDisconnectEnableStatus"
+        },
+        "gracePeriodMinutes": {
+          "description": "The specified time in minutes to wait before stopping a Dev Box once disconnect is detected.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "StopOnDisconnectEnableStatus": {
+      "description": "Stop on disconnect enable or disable status. Indicates whether stop on disconnect to is either enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StopOnDisconnectEnableStatus",
+        "modelAsString": true
+      }
+    },
+    "PoolListResult": {
+      "description": "Results of the machine pool list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PoolUpdate": {
+      "description": "The pool properties for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PoolUpdateProperties",
+          "description": "Properties of a pool to be updated."
+        }
+      }
+    },
+    "ImageReference": {
+      "type": "object",
+      "description": "Image reference information",
+      "properties": {
+        "id": {
+          "description": "Image ID, or Image version ID. When Image ID is provided, its latest version will be used.",
+          "type": "string"
+        },
+        "exactVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The actual version of the image after use. When id references a gallery image latest version, this will indicate the actual version in use."
+        }
+      }
+    },
+    "ImageValidationStatus": {
+      "description": "Image validation status",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Succeeded",
+        "Failed",
+        "TimedOut"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ImageValidationStatus",
+        "modelAsString": true
+      }
+    },
+    "ImageValidationErrorDetails": {
+      "type": "object",
+      "description": "Image validation error details",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error."
+        }
+      }
+    },
+    "CatalogResourceValidationStatus": {
+      "description": "Catalog resource validation status",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CatalogResourceValidationStatus",
+        "modelAsString": true
+      }
+    },
+    "CatalogResourceValidationErrorDetails": {
+      "type": "object",
+      "description": "List of validator error details. Populated when changes are made to the resource or its dependent resources that impact the validity of the Catalog resource.",
+      "properties": {
+        "errors": {
+          "description": "Errors associated with resources synchronized from the catalog.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogErrorDetails"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "CatalogErrorDetails": {
+      "type": "object",
+      "description": "Catalog error details",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error."
+        }
+      }
+    },
+    "NetworkConnection": {
+      "type": "object",
+      "description": "Network related settings",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of a Network Connection",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkProperties"
+        }
+      }
+    },
+    "NetworkConnectionUpdate": {
+      "description": "The network connection properties for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkConnectionUpdateProperties",
+          "description": "Properties of a network connection resource to be updated."
+        }
+      }
+    },
+    "NetworkConnectionUpdateProperties": {
+      "description": "Properties of network connection. These properties can be updated after the resource has been created.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "The subnet to attach Virtual Machines to",
+          "type": "string"
+        },
+        "domainName": {
+          "description": "Active Directory domain name",
+          "type": "string"
+        },
+        "organizationUnit": {
+          "description": "Active Directory domain Organization Unit (OU)",
+          "type": "string"
+        },
+        "domainUsername": {
+          "description": "The username of an Active Directory account (user or service account) that has permissions to create computer objects in Active Directory. Required format: admin@contoso.com.",
+          "type": "string"
+        },
+        "domainPassword": {
+          "description": "The password for the account used to join domain",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "NetworkProperties": {
+      "description": "Network properties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkConnectionUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "healthCheckStatus": {
+          "description": "Overall health status of the network connection. Health checks are run on creation, update, and periodically to validate the network connection.",
+          "$ref": "#/definitions/HealthCheckStatus",
+          "readOnly": true
+        },
+        "networkingResourceGroupName": {
+          "description": "The name for resource group where NICs will be placed.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "domainJoinType": {
+          "description": "AAD Join type.",
+          "$ref": "#/definitions/DomainJoinType",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "subnetId",
+        "domainJoinType"
+      ]
+    },
+    "NetworkConnectionListResult": {
+      "description": "Result of the network connection list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DomainJoinType": {
+      "description": "Active Directory join type",
+      "enum": [
+        "HybridAzureADJoin",
+        "AzureADJoin"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DomainJoinType",
+        "modelAsString": true
+      }
+    },
+    "HealthCheckStatus": {
+      "description": "Health check status values",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Running",
+        "Passed",
+        "Warning",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "HealthCheckStatus",
+        "modelAsString": true
+      }
+    },
+    "HealthCheckStatusDetails": {
+      "description": "Health Check details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Health check status details properties.",
+          "$ref": "#/definitions/HealthCheckStatusDetailsProperties"
+        }
+      }
+    },
+    "HealthCheckStatusDetailsProperties": {
+      "description": "Health Check properties.",
+      "type": "object",
+      "properties": {
+        "startDateTime": {
+          "type": "string",
+          "description": "Start time of last execution of the health checks.",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endDateTime": {
+          "type": "string",
+          "description": "End time of last execution of the health checks.",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "healthChecks": {
+          "description": "Details for each health check item.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthCheck"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "HealthCheck": {
+      "description": "An individual health check item",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the health check item.",
+          "$ref": "#/definitions/HealthCheckStatus",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of this health check item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startDateTime": {
+          "description": "Start time of health check item.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endDateTime": {
+          "description": "End time of the health check item.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "errorType": {
+          "description": "The type of error that occurred during this health check.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action to fix the corresponding error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalDetails": {
+          "description": "Additional details about the health check or the recommended action.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HealthCheckStatusDetailsListResult": {
+      "description": "Result of the network health check list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthCheckStatusDetails"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OutboundEnvironmentEndpointCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          },
+          "x-ms-identifiers": [
+            "category"
+          ],
+          "description": "The collection of outbound network dependency endpoints returned by the listing operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "OutboundEnvironmentEndpoint": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of service that the agent connects to."
+        },
+        "endpoints": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/EndpointDependency"
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ],
+          "description": "The endpoints for this service for which the agent requires outbound access."
+        }
+      },
+      "description": "A collection of related endpoints from the same service for which the agent requires outbound access."
+    },
+    "EndpointDependency": {
+      "type": "object",
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Human-readable supplemental information about the dependency and when it is applicable."
+        },
+        "endpointDetails": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/EndpointDetail"
+          },
+          "description": "The list of connection details for this endpoint."
+        }
+      },
+      "description": "A domain name and connection details used to access a dependency."
+    },
+    "EndpointDetail": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The port an endpoint is connected to."
+        }
+      },
+      "description": "Details about the connection between the Batch service and the endpoint."
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "Represents a Schedule to execute a task.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of a Schedule resource",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScheduleProperties"
+        }
+      }
+    },
+    "ScheduleUpdate": {
+      "description": "The schedule properties for partial update. Properties not provided in the update request will not be changed.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "commonDefinitions.json#/definitions/TrackedResourceUpdate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScheduleUpdateProperties",
+          "description": "Properties of a schedule resource to be updated."
+        }
+      }
+    },
+    "ScheduleUpdateProperties": {
+      "description": "Updatable properties of a Schedule.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Supported type this scheduled task represents.",
+          "$ref": "#/definitions/ScheduledType"
+        },
+        "frequency": {
+          "description": "The frequency of this scheduled task.",
+          "$ref": "#/definitions/ScheduledFrequency"
+        },
+        "time": {
+          "description": "The target time to trigger the action. The format is HH:MM.",
+          "type": "string"
+        },
+        "timeZone": {
+          "description": "The IANA timezone id at which the schedule should execute.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Indicates whether or not this scheduled task is enabled.",
+          "$ref": "#/definitions/ScheduleEnableStatus"
+        }
+      }
+    },
+    "ScheduleProperties": {
+      "description": "The Schedule properties defining when and what to execute.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleUpdateProperties"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type",
+        "frequency",
+        "timeZone",
+        "time"
+      ]
+    },
+    "ScheduleListResult": {
+      "description": "Result of the schedule list operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Current page of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URL to get the next set of results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ScheduledType": {
+      "description": "The supported types for a scheduled task.",
+      "enum": [
+        "StopDevBox"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduledType",
+        "modelAsString": true
+      }
+    },
+    "ScheduledFrequency": {
+      "description": "The frequency of task execution.",
+      "enum": [
+        "Daily"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduledFrequency",
+        "modelAsString": true
+      }
+    },
+    "ScheduleEnableStatus": {
+      "description": "Schedule enable or disable status. Indicates whether the schedule applied to is either enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScheduleEnableStatus",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "PoolNameParameter": {
+      "name": "poolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the pool.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "NetworkConnectionName": {
+      "name": "networkConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Network Connection that can be applied to a Pool.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "ScheduleNameParameter": {
+      "name": "scheduleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the schedule that uniquely identifies it.",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[-\\w]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "The filter to apply to the operation. Example: '$filter=contains(name,'myName').",
+      "type": "string",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

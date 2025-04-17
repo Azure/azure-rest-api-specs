@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2024-08-01-preview",
+    "body": {
+      "purpose": "fine-tune",
+      "filename": "training_data_v21.jsonl",
+      "bytes": 2097152,
+      "mime_type": "application/json"
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://aoairesource.openai.azure.com/openai/uploads/runs/fine-tune-72a2792ef7d24ba7b82c7fe4a37e379f"
+      },
+      "body": {
+        "bytes": 2097152,
+        "filename": "training_data_v21.jsonl",
+        "purpose": "fine-tune",
+        "status": "pending",
+        "expires_at": 1646133327,
+        "file": {
+          "bytes": 140,
+          "purpose": "fine-tune",
+          "filename": "puppy.jsonl",
+          "id": "file-181a1cbdcdcf4677ada87f63a0928099",
+          "created_at": 1646126127,
+          "object": "file"
+        },
+        "id": "fine-tune-72a2792ef7d24ba7b82c7fe4a37e379f",
+        "created_at": 1646126127,
+        "object": "upload"
+      }
+    }
+  }
+}

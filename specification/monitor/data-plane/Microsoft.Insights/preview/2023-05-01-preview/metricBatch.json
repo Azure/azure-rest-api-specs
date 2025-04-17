@@ -23,17 +23,19 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{baseUrl}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "positionInOperation": "first",
     "parameters": [
       {
-        "name": "baseUrl",
+        "name": "endpoint",
         "description": "The regional endpoint to use, for example https://eastus.metrics.monitor.azure.com. The region should match the region of the requested resources. For global resources, the region should be 'global'.",
         "required": true,
         "type": "string",
         "in": "path",
-        "x-ms-skip-url-encoding": true
+        "format": "url",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
       }
     ]
   },
@@ -49,7 +51,7 @@
         "tags": [
           "Metrics"
         ],
-        "operationId": "Metrics_Batch",
+        "operationId": "MetricsBatch_Batch",
         "description": "Lists the metric values for multiple resources.",
         "parameters": [
           {
@@ -156,9 +158,8 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "format": "duration",
       "default": "PT1M",
-      "description": "The interval (i.e. timegrain) of the query.\n*Examples: PT15M, PT1H, P1D*",
+      "description": "The interval (i.e. timegrain) of the query in ISO 8601 duration format. Defaults to PT1M. Special case for 'FULL' value that returns single datapoint for entire time span requested.\n*Examples: PT15M, PT1H, P1D, FULL*",
       "x-ms-parameter-location": "method"
     },
     "MetricNamespaceParameter": {
@@ -308,8 +309,7 @@
               },
               "interval": {
                 "type": "string",
-                "format": "duration",
-                "description": "The interval (window size) for which the metric data was returned in. Follows the IS8601/RFC3339 duration format (e.g. 'P1D' for 1 day). This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+                "description": "The interval (window size) for which the metric data was returned in ISO 8601 duration format with a special case for 'FULL' value that returns single datapoint for entire time span requested (*Examples: PT15M, PT1H, P1D, FULL*). \nThis may be adjusted and different from what was originally requested if AutoAdjustTimegrain=true is specified."
               },
               "namespace": {
                 "type": "string",
@@ -326,7 +326,7 @@
               "value": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/Metric"
+                  "$ref": "../../../../common-types/v1/commonMonitoringTypes.json#/definitions/Metric"
                 },
                 "description": "The value of the collection."
               }
@@ -339,222 +339,6 @@
           }
         }
       }
-    },
-    "LocalizableString": {
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "The display name."
-        }
-      },
-      "description": "The localizable string class."
-    },
-    "MetricUnit": {
-      "type": "string",
-      "description": "The unit of the metric.",
-      "enum": [
-        "Count",
-        "Bytes",
-        "Seconds",
-        "CountPerSecond",
-        "BytesPerSecond",
-        "Percent",
-        "MilliSeconds",
-        "ByteSeconds",
-        "Unspecified",
-        "Cores",
-        "MilliCores",
-        "NanoCores",
-        "BitsPerSecond"
-      ],
-      "x-ms-enum": {
-        "name": "MetricUnit",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "Count",
-            "description": "Unit of raw quantity."
-          },
-          {
-            "value": "Bytes",
-            "description": "Unit of memory in bytes."
-          },
-          {
-            "value": "Seconds",
-            "description": "Unit of time in seconds."
-          },
-          {
-            "value": "CountPerSecond",
-            "description": "Rate unit of raw quantity per second."
-          },
-          {
-            "value": "BytesPerSecond",
-            "description": "Rate unit of memory in bytes per second."
-          },
-          {
-            "value": "Percent",
-            "description": "Percentage unit."
-          },
-          {
-            "value": "MilliSeconds",
-            "description": "Unit of time in 1/1000th of a second."
-          },
-          {
-            "value": "ByteSeconds",
-            "description": "Unit of data transfer or storage. It is the size of the data in bytes multiplied by the time it takes to transfer or store the data in seconds."
-          },
-          {
-            "value": "Unspecified",
-            "description": "No specified unit."
-          },
-          {
-            "value": "Cores",
-            "description": "Unit of processing power."
-          },
-          {
-            "value": "MilliCores",
-            "description": "Unit of processing power in 1/1000th of a CPU core."
-          },
-          {
-            "value": "NanoCores",
-            "description": "Unit of processing power in one billionth of a CPU core."
-          },
-          {
-            "value": "BitsPerSecond",
-            "description": "Rate unit of binary digits per second."
-          }
-        ]
-      }
-    },
-    "MetricValue": {
-      "type": "object",
-      "required": [
-        "timeStamp"
-      ],
-      "properties": {
-        "timeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp for the metric value in ISO 8601 format."
-        },
-        "average": {
-          "type": "number",
-          "format": "double",
-          "description": "The average value in the time range."
-        },
-        "minimum": {
-          "type": "number",
-          "format": "double",
-          "description": "The least value in the time range."
-        },
-        "maximum": {
-          "type": "number",
-          "format": "double",
-          "description": "The greatest value in the time range."
-        },
-        "total": {
-          "type": "number",
-          "format": "double",
-          "description": "The sum of all of the values in the time range."
-        },
-        "count": {
-          "type": "number",
-          "format": "double",
-          "description": "The number of samples in the time range. Can be used to determine the number of values that contributed to the average value."
-        }
-      },
-      "description": "Represents a metric value."
-    },
-    "MetadataValue": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "The name of the metadata."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the metadata."
-        }
-      },
-      "description": "Represents a metric metadata value."
-    },
-    "Metric": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The metric Id."
-        },
-        "name": {
-          "$ref": "#/definitions/LocalizableString",
-          "description": "The name and the display name of the metric, i.e. it is localizable string."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "Description of this metric"
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type of the metric resource."
-        },
-        "unit": {
-          "$ref": "#/definitions/MetricUnit",
-          "description": "The unit of the metric."
-        },
-        "timeseries": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesElement"
-          },
-          "description": "The time series returned when a data query is performed."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "'Success' or the error details on query failures for this metric."
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message encountered querying this specific metric."
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "displayDescription",
-        "type",
-        "unit",
-        "timeseries"
-      ],
-      "description": "The result data of a query."
-    },
-    "TimeSeriesElement": {
-      "type": "object",
-      "properties": {
-        "metadatavalues": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetadataValue"
-          },
-          "description": "The metadata values returned if filter was specified in the call."
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricValue"
-          },
-          "description": "An array of data points representing the metric values.  This is only returned if a result type of data is specified."
-        }
-      },
-      "description": "A time series result type. The discriminator value is always TimeSeries in this case."
     }
   }
 }

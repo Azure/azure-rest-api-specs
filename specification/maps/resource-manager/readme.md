@@ -28,18 +28,63 @@ These are the global settings for the Maps API.
 title: AzureMapsManagementClient
 description: Azure Maps
 openapi-type: arm
-tag: package-preview-2021-12
+tag: package-preview-2024-07
 ```
 
+### Tag: package-preview-2024-07
+
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-07'
+input-file:
+  - Microsoft.Maps/preview/2024-07-01-preview/maps-management.json
+```
+
+### Tag: package-preview-2024-01
+
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-01'
+input-file:
+  - Microsoft.Maps/preview/2024-01-01-preview/maps-management.json
+```
+
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - Microsoft.Maps/preview/2023-12-01-preview/maps-management.json
+```
+
+### Tag: package-preview-2023-08
+
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-08'
+input-file:
+  - Microsoft.Maps/preview/2023-08-01-preview/maps-management.json
+```
+
+### Tag: package-2023-06
+
+These settings apply only when `--tag=package-2023-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06'
+input-file:
+  - Microsoft.Maps/stable/2023-06-01/maps-management.json
+```
 
 ### Tag: package-preview-2021-12
 
 These settings apply only when `--tag=package-preview-2021-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-12'
+``` yaml $(tag) == 'package-preview-2021-12'
 input-file:
   - Microsoft.Maps/preview/2021-12-01-preview/maps-management.json
 ```
+
 ### Tag: package-preview-2021-07
 
 These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
@@ -96,27 +141,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-```
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Maps
-  output-folder: $(csharp-sdks-folder)/maps/Microsoft.Azure.Management.Maps/src/Generated
-  clear-output-folder: true
 ```
 
 ## Python
@@ -275,4 +306,6 @@ directive:
       - $.definitions.Dimension.properties.toBeExportedToShoebox
     from: maps-management.json
     reason: standard property being applied to all azure resources.
+  - suppress: MISSING_APIS_IN_DEFAULT_TAG
+    reason: ARM provides the specification for resource move operation. Hence, the operation has been removed from versions after 2018-05-01.
 ```

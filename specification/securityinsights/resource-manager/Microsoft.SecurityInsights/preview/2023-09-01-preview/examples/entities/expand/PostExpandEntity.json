@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "entityId": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
+    "parameters": {
+      "expansionId": "a77992f3-25e9-4d01-99a4-5ff606cc410a",
+      "startTime": "2019-04-25T00:00:00.000Z",
+      "endTime": "2019-05-26T00:00:00.000Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": {
+          "entities": [
+            {
+              "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1",
+              "name": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
+              "type": "Microsoft.SecurityInsights/entities",
+              "kind": "Ip",
+              "properties": {
+                "address": "13.89.108.248",
+                "friendlyName": "13.89.108.248"
+              }
+            }
+          ],
+          "edges": [
+            {
+              "targetEntityId": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/c1d60d86-5988-11eb-ae93-0242ac130002",
+              "additionalData": {
+                "EpochTimestamp": "1608289949",
+                "FirstSeen": "2021-09-01T11:12:29.597Z",
+                "Source": "Heartbeat"
+              }
+            }
+          ]
+        },
+        "metaData": {
+          "aggregations": [
+            {
+              "entityKind": "Account",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}

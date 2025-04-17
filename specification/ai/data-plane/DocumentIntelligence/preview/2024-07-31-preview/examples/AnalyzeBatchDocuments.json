@@ -1,0 +1,28 @@
+{
+  "operationId": "DocumentModels_AnalyzeBatchDocuments",
+  "title": "Analyze Batch Documents",
+  "parameters": {
+    "endpoint": "https://myendpoint.cognitiveservices.azure.com",
+    "api-version": "2024-07-31-preview",
+    "modelId": "customModel",
+    "pages": "1-5",
+    "locale": "en-US",
+    "stringIndexType": "textElements",
+    "analyzeBatchRequest": {
+      "azureBlobSource": {
+        "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer?mySasToken",
+        "prefix": "trainingDocs/"
+      },
+      "resultContainerUrl": "https://myStorageAccount.blob.core.windows.net/myOutputContainer?mySasToken",
+      "resultPrefix": "trainingDocsResult/",
+      "overwriteExisting": true
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://myendpoint.cognitiveservices.azure.com/documentintelligence/documentModels/customModel/analyzeBatchResults/3b31320d-8bab-4f88-b19c-2322a7f11034?api-version=2024-02-29-preview"
+      }
+    }
+  }
+}

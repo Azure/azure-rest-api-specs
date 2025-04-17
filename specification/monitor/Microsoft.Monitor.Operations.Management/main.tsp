@@ -1,0 +1,1 @@
+import "./typespec/service.tsp";

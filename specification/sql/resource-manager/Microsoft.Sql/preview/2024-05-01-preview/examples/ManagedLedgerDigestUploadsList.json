@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "ledgertestrg",
+    "managedInstanceName": "ledgertestserver",
+    "databaseName": "testdb",
+    "ledgerDigestUploads": "current",
+    "api-version": "2024-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/ledgertestrg/providers/Microsoft.Sql/managedInstances/ledgertestserver/databases/testdb/current",
+            "name": "current",
+            "type": "Microsoft.Sql/managedInstances/databases/ledgerDigestUploads",
+            "properties": {
+              "digestStorageEndpoint": "https://mystorage.blob.core.windows.net",
+              "state": "Enabled"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

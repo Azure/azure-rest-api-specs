@@ -1,0 +1,67 @@
+{
+  "title": "Creates a completion for the provided AML index.",
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "2024-02-15-preview",
+    "deployment-id": "<deployment-id>",
+    "body": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "can you tell me how to care for a dog?"
+        }
+      ],
+      "data_sources": [
+        {
+          "type": "azure_ml_index",
+          "parameters": {
+            "project_resource_id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.MachineLearningServices/workspaces/{workspace-id}",
+            "name": "gm-cars",
+            "version": "5",
+            "authentication": {
+              "type": "access_token",
+              "access_token": "{access-token}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "chatcmpl-7R1nGnsXO8n4oi9UPz2f3UHdgAYMn",
+        "created": 1686676106,
+        "choices": [
+          {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+              "role": "assistant",
+              "content": "Content of the completion [doc1].",
+              "context": {
+                "citations": [
+                  {
+                    "content": "Citation content.",
+                    "title": "Citation Title",
+                    "file_path": "contoso.txt",
+                    "url": "https://contoso.blob.windows.net/container/contoso.txt",
+                    "chunk_id": "0"
+                  }
+                ],
+                "intents": [
+                  "dog care"
+                ]
+              }
+            }
+          }
+        ],
+        "usage": {
+          "completion_tokens": 557,
+          "prompt_tokens": 33,
+          "total_tokens": 590
+        }
+      }
+    }
+  }
+}

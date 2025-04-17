@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "type": "Microsoft.SecurityInsights/bookmarks",
+            "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+            "properties": {
+              "displayName": "My bookmark",
+              "createdBy": {
+                "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+                "email": "john@contoso.com",
+                "name": "john doe"
+              },
+              "updatedBy": {
+                "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+                "email": "john@contoso.com",
+                "name": "john doe"
+              },
+              "updated": "2021-09-01T13:15:30Z",
+              "created": "2021-09-01T13:15:30Z",
+              "notes": "Found a suspicious activity",
+              "labels": [
+                "Tag1",
+                "Tag2"
+              ],
+              "query": "SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)",
+              "queryResult": "Security Event query result",
+              "incidentInfo": {
+                "incidentId": "DDA55F97-170B-40B9-B8ED-CBFD05481E7D",
+                "severity": "Low",
+                "title": "New case 1",
+                "relationName": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0018"
+              },
+              "tactics": [
+                "Execution"
+              ],
+              "techniques": [
+                "T1609"
+              ],
+              "entityMappings": [
+                {
+                  "entityType": "Account",
+                  "fieldMappings": [
+                    {
+                      "identifier": "Fullname",
+                      "value": "johndoe@microsoft.com"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
