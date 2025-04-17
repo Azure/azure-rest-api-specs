@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -29,29 +30,31 @@ model ExperimentExecution
 /**
  * Model that represents the execution properties of an Experiment.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Unused property, avoids breaking changes in SDK."
 model ExperimentExecutionProperties {
   /**
    * The status of the execution.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * String that represents the start date time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startedAt?: utcDateTime;
 
   /**
    * String that represents the stop date time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stoppedAt?: utcDateTime;
 
   /**
    * Resource provisioning state. Not currently in use for executions.
    */
-  @visibility("read")
+  @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -62,25 +65,25 @@ model ExperimentExecutionDetails {
   /**
    * String of the resource type.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * String of the fully qualified resource ID.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
    * String of the resource name.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The properties of the experiment execution details.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   properties?: ExperimentExecutionDetailsProperties;
 }
 
@@ -92,43 +95,44 @@ model ExperimentExecutionDetailsProperties {
   /**
    * The status of the execution.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * String that represents the start date time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startedAt?: utcDateTime;
 
   /**
    * String that represents the stop date time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stoppedAt?: utcDateTime;
 
   /**
    * Resource provisioning state. Not currently in use for executions.
    */
-  @visibility("read")
+  @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   /**
    * The reason why the execution failed.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   failureReason?: string;
 
   /**
    * String that represents the last action date time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   lastActionAt?: utcDateTime;
 
   /**
    * The information of the experiment run.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   runInformation?: ExperimentExecutionDetailsPropertiesRunInformation;
 }
 
@@ -139,8 +143,8 @@ model ExperimentExecutionDetailsPropertiesRunInformation {
   /**
    * The steps of the experiment run.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["stepName"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["stepName"])
   steps?: StepStatus[];
 }
 
@@ -151,26 +155,26 @@ model StepStatus {
   /**
    * The name of the step.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stepName?: string;
 
   /**
    * The id of the step.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   stepId?: string;
 
   /**
    * The value of the status of the step.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * The array of branches.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["branchName"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["branchName"])
   branches?: BranchStatus[];
 }
 
@@ -181,26 +185,26 @@ model BranchStatus {
   /**
    * The name of the branch status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   branchName?: string;
 
   /**
    * The id of the branch status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   branchId?: string;
 
   /**
    * The status of the branch.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * The array of actions.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", ["actionId"])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["actionId"])
   actions?: ActionStatus[];
 }
 
@@ -211,38 +215,38 @@ model ActionStatus {
   /**
    * The name of the action status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actionName?: string;
 
   /**
    * The id of the action status.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   actionId?: string;
 
   /**
    * The status of the action.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * String that represents the start time of the action.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
   /**
    * String that represents the end time of the action.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   endTime?: utcDateTime;
 
   /**
    * The array of targets.
    */
-  @visibility("read")
-  @OpenAPI.extension("x-ms-identifiers", [])
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
   targets?: ExperimentExecutionActionTargetDetailsProperties[];
 }
 
@@ -253,31 +257,31 @@ model ExperimentExecutionActionTargetDetailsProperties {
   /**
    * The status of the execution.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   status?: string;
 
   /**
    * The target for the action.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   /**
    * String that represents the failed date time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetFailedTime?: utcDateTime;
 
   /**
    * String that represents the completed date time.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   targetCompletedTime?: utcDateTime;
 
   /**
    * The error of the action.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   error?: ExperimentExecutionActionTargetDetailsError;
 }
 
@@ -288,13 +292,13 @@ model ExperimentExecutionActionTargetDetailsError {
   /**
    * The error code.
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   /**
    * The error message
    */
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   message?: string;
 }
 

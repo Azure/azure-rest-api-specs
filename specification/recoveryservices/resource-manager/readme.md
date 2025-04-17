@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2024-10
+tag: package-2025-02-01
 ```
 
 ### Validations
@@ -40,6 +40,30 @@ azure-validator: true
 model-validator: true
 semantic-validator: true
 message-format: json
+```
+
+### Tag: package-2025-02-01
+
+These settings apply only when `--tag=package-2025-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-02-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2025-02-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2025-02-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2025-02-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2025-02-01/vaultusages.json
+```
+
+### Tag: package-2025-01-01
+
+These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2025-01-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2025-01-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2025-01-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2025-01-01/vaultusages.json
 ```
 
 ### Tag: package-2024-10
@@ -449,7 +473,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

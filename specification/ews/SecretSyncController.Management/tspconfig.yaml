@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/edgeworkloadsecurity"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,6 +12,12 @@ options:
     emit-common-types-schema: never
     # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
     arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.SecretsStoreExtension"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
