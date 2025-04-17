@@ -32,7 +32,7 @@ describe("setStatusImpl", () => {
         repo: "test-repo",
         head_sha: "test-head-sha",
         issue_number: 123,
-        target_url: "https://test.com/target_url",
+        target_url: "https://test.com/set_status_url",
         github,
         core,
       }),
@@ -45,18 +45,33 @@ describe("setStatusImpl", () => {
       state: CommitStatusState.SUCCESS,
       context: "[TEST IGNORE] Swagger Avocado",
       description: "Found label 'Approved-Avocado'",
-      target_url: "https://test.com/target_url",
+      target_url: "https://test.com/set_status_url",
     });
   });
 
   it.each([
-    [CheckStatus.COMPLETED, CheckConclusion.SUCCESS, CommitStatusState.SUCCESS],
-    [CheckStatus.COMPLETED, CheckConclusion.FAILURE, CommitStatusState.FAILURE],
-    [CheckStatus.IN_PROGRESS, null, CommitStatusState.PENDING],
-    [null, null, CommitStatusState.PENDING],
+    [
+      CheckStatus.COMPLETED,
+      CheckConclusion.SUCCESS,
+      CommitStatusState.SUCCESS,
+      "https://test.com/workflow_run_html_url",
+    ],
+    [
+      CheckStatus.COMPLETED,
+      CheckConclusion.FAILURE,
+      CommitStatusState.FAILURE,
+      "https://test.com/job_html_url?pr=123",
+    ],
+    [
+      CheckStatus.IN_PROGRESS,
+      null,
+      CommitStatusState.PENDING,
+      "https://test.com/workflow_run_html_url",
+    ],
+    [null, null, CommitStatusState.PENDING, "https://test.com/set_status_url"],
   ])(
-    "(%s, %s) => %s",
-    async (checkStatus, checkConclusion, commitStatusState) => {
+    "(%s, %s, %s) => %s",
+    async (checkStatus, checkConclusion, commitStatusState, targetUrl) => {
       if (checkStatus) {
         github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
           data: [
@@ -91,17 +106,11 @@ describe("setStatusImpl", () => {
           repo: "test-repo",
           head_sha: "test-head-sha",
           issue_number: 123,
-          target_url: "https://test.com/target_url",
+          target_url: "https://test.com/set_status_url",
           github,
           core,
         }),
       ).resolves.toBeUndefined();
-
-      const expectedTargetUrl = checkStatus
-        ? checkConclusion === CheckConclusion.FAILURE
-          ? "https://test.com/job_html_url?pr=123"
-          : "https://test.com/workflow_run_html_url"
-        : "https://test.com/target_url";
 
       expect(github.rest.repos.createCommitStatus).toBeCalledWith({
         owner: "test-owner",
@@ -109,7 +118,7 @@ describe("setStatusImpl", () => {
         sha: "test-head-sha",
         state: commitStatusState,
         context: "[TEST IGNORE] Swagger Avocado",
-        target_url: expectedTargetUrl,
+        target_url: targetUrl,
       });
     },
   );
