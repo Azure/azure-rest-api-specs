@@ -457,7 +457,7 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents the metadata of the assigned Azure resources.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2025_05_01)
   assignedResources: AnalyzeConversationAuthoringDeploymentResource[];
 }
 
@@ -465,6 +465,7 @@ model AnalyzeConversationAuthoringProjectDeployment {
  * Represents an Azure resource assigned to a deployment.
  */
 @clientName("ConversationAuthoringDeploymentResource", "csharp")
+@added(Versions.v2025_05_01)
 model AnalyzeConversationAuthoringDeploymentResource {
   /**
    * Represents the Azure resource Id.
@@ -496,7 +497,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
   /**
    * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2025_05_01)
   @removed(Versions.v2025_05_15_preview)
   assignedResourceIds?: string[];
 
@@ -511,6 +512,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
  * Represents the options for deleting a project deployment.
  */
 @clientName("ConversationAuthoringDeleteDeploymentDetails", "csharp")
+@added(Versions.v2025_05_01)
 model AnalyzeConversationAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
@@ -1055,7 +1057,7 @@ model AnalyzeConversationAuthoringLoadSnapshotJobState {
 /**
  * Represents the assigned deployment resources.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("ConversationAuthoringAssignedDeploymentResources", "csharp")
 model AnalyzeConversationAuthoringAssignedDeploymentResources {
   /**
@@ -1072,7 +1074,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResources {
 /**
  * Represents the assigned deployment resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("ConversationAuthoringAssignedDeploymentResource", "csharp")
 @resource("resources")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
@@ -1094,7 +1096,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
 /**
  * Represents the options for assigning Azure resources to a project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("ConversationAuthoringAssignDeploymentResourcesDetails", "csharp")
 model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
   /**
@@ -1108,6 +1110,7 @@ model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
  * Represents metadata for the Azure resource..
  */
 @clientName("ConversationAuthoringResourceMetadata", "csharp")
+@added(Versions.v2025_05_01)
 model AnalyzeConversationAuthoringResourceMetadata {
   /**
    * Represents the Azure resource ID.
@@ -1128,7 +1131,7 @@ model AnalyzeConversationAuthoringResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("ConversationAuthoringUnassignDeploymentResourcesDetails", "csharp")
 model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
   /**
@@ -1140,7 +1143,7 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a deployment resources job.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("ConversationAuthoringDeploymentResourcesState", "csharp")
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
@@ -1255,7 +1258,7 @@ model AnalyzeConversationAuthoringProjectDeletionJobState {
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName(
   "ConversationAuthoringAssignedResourceDeploymentsMetadata",
   "csharp"
@@ -1275,7 +1278,7 @@ model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
 /**
  * Represents the metadata for assigned deployments for a project.
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("ConversationAuthoringAssignedProjectDeploymentsMetadata", "csharp")
 @resource("authoring/analyze-conversations/projects/global/deployments/resources")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
@@ -1295,7 +1298,7 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
 /**
  * Represents the metadata for an assigned deployment
  */
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2025_05_01)
 @clientName("ConversationAuthoringAssignedProjectDeploymentMetadata", "csharp")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
