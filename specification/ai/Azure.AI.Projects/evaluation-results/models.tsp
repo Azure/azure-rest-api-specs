@@ -15,7 +15,7 @@ using Azure.Core.Traits;
 namespace Azure.AI.Projects;
 
 @doc("Evaluation Result resource Definition")
-@Rest.resource("evaluationResult")
+@Rest.resource("evaluationResults")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model EvaluationResult {
