@@ -754,72 +754,72 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * Indicates whether the system has custom casts defined.
    */
-  hasCustomCasts: BoolValue;
+  hasCustomCasts?: BoolValue;
 
   /**
    * Indicates whether the system has custom full-text search (FTS) parsers defined.
    */
-  hasCustomFtsParsers: BoolValue;
+  hasCustomFtsParsers?: BoolValue;
 
   /**
    * Indicates whether the system has custom full-text search (FTS) templates defined.
    */
-  hasCustomFtsTemplates: BoolValue;
+  hasCustomFtsTemplates?: BoolValue;
 
   /**
    * Specifies the TLS version used by the system.
    */
-  tlsVersion: TlsVersion;
+  tlsVersion?: TlsVersion;
 
   /**
    * Specifies the PostgreSQL authentication method used by the system.
    */
-  pgSqlAuthMethod: PgSqlAuthenticationMethod;
+  pgSqlAuthMethod?: PgSqlAuthenticationMethod;
 
   /**
    * Indicates whether the system supports SSL connections.
    */
-  supportsSsl: BoolValue;
+  supportsSsl?: BoolValue;
 
   /**
    * Indicates whether the system supports IPv6 connections.
    */
-  supportsIpv6Connections: BoolValue;
+  supportsIpv6Connections?: BoolValue;
 
   /**
    * Indicates whether the system supports IPv4 connections.
    */
-  supportsIpv4Connections: BoolValue;
+  supportsIpv4Connections?: BoolValue;
 
   /**
    * The number of compute IOPS (Input/Output Operations Per Second) collected.
    */
-  computeIopsCollected: int32;
+  computeIopsCollected?: int32;
 
   /**
    * The number of storage IOPS (Input/Output Operations Per Second) collected.
    */
-  storageIopsCollected: int32;
+  storageIopsCollected?: int32;
 
   /**
    * The storage throughput collected, measured in units per second.
    */
-  storageThroughPutCollected: int32;
+  storageThroughPutCollected?: int32;
 
   /**
    * Indicates whether read replica functionality is enabled.
    */
-  isReadReplicaEnabled: BoolValue;
+  isReadReplicaEnabled?: BoolValue;
 
   /**
    * The number of read replicas configured for the system.
    */
-  readReplicaCount: int32;
+  readReplicaCount?: int32;
 
   /**
    * Indicates whether disaster recovery (DR) functionality is enabled.
    */
-  isDrEnabled: BoolValue;
+  isDrEnabled?: BoolValue;
 
   /**
    * Resource tags
@@ -928,72 +928,72 @@ model PgsqlInstanceResourcePatch {
   /**
    * Indicates whether the system has custom casts defined.
    */
-  hasCustomCasts: BoolValue;
+  hasCustomCasts?: BoolValue;
 
   /**
    * Indicates whether the system has custom full-text search (FTS) parsers defined.
    */
-  hasCustomFtsParsers: BoolValue;
+  hasCustomFtsParsers?: BoolValue;
 
   /**
    * Indicates whether the system has custom full-text search (FTS) templates defined.
    */
-  hasCustomFtsTemplates: BoolValue;
+  hasCustomFtsTemplates?: BoolValue;
 
   /**
    * Specifies the TLS version used by the system.
    */
-  tlsVersion: TlsVersion;
+  tlsVersion?: TlsVersion;
 
   /**
    * Specifies the PostgreSQL authentication method used by the system.
    */
-  pgSqlAuthMethod: PgSqlAuthenticationMethod;
+  pgSqlAuthMethod?: PgSqlAuthenticationMethod;
 
   /**
    * Indicates whether the system supports SSL connections.
    */
-  supportsSsl: BoolValue;
+  supportsSsl?: BoolValue;
 
   /**
    * Indicates whether the system supports IPv6 connections.
    */
-  supportsIpv6Connections: BoolValue;
+  supportsIpv6Connections?: BoolValue;
 
   /**
    * Indicates whether the system supports IPv4 connections.
    */
-  supportsIpv4Connections: BoolValue;
+  supportsIpv4Connections?: BoolValue;
 
   /**
    * The number of compute IOPS (Input/Output Operations Per Second) collected.
    */
-  computeIopsCollected: int32;
+  computeIopsCollected?: int32;
 
   /**
    * The number of storage IOPS (Input/Output Operations Per Second) collected.
    */
-  storageIopsCollected: int32;
+  storageIopsCollected?: int32;
 
   /**
    * The storage throughput collected, measured in units per second.
    */
-  storageThroughPutCollected: int32;
+  storageThroughPutCollected?: int32;
 
   /**
    * Indicates whether read replica functionality is enabled.
    */
-  isReadReplicaEnabled: BoolValue;
+  isReadReplicaEnabled?: BoolValue;
 
   /**
    * The number of read replicas configured for the system.
    */
-  readReplicaCount: int32;
+  readReplicaCount?: int32;
 
   /**
    * Indicates whether disaster recovery (DR) functionality is enabled.
    */
-  isDrEnabled: BoolValue;
+  isDrEnabled?: BoolValue;
 
   /**
    * Resource tags
