@@ -8,80 +8,79 @@ using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using Azure.Core;
 
-@versioned(Microsoft.PlaywrightTesting.Shared.Versions)
-namespace Microsoft.PlaywrightTesting.Shared;
+@versioned(Playwright.Shared.Versions)
+namespace Playwright.Shared;
 
-@doc("The PlaywrightTesting Accounts Model Version.")
+@doc("Playwright workspace model version.")
 enum Versions {
   @doc("Version 1.0")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v1_0,
+  v1_0: "2025-07-01-preview",
 }
 
-@doc("An account is a parent resource for most of the other service resources. It's directly mapped to an Azure resource.")
-@resource("accounts")
-model Account {
-  @key("accountId")
-  @doc("The account id.")
+@doc("Playwright workspace is the parent resource for most of the other service resources.")
+@resource("playwrightworkspaces")
+model Workspace {
+  @key("workspaceId")
+  @doc("The workspace id.")
   @maxLength(64)
-  @pattern("[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+")
+  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   @visibility(Lifecycle.Read)
-  id: string;
+  id: uuid;
 
-  @doc("The fully-qualified Azure resource id for the account.")
+  @doc("Fully-qualified Azure resource id for the workspace.")
   @visibility(Lifecycle.Read)
-  resourceId: string;
+  resourceId: armResourceIdentifier;
 
-  @doc("The account name.")
+  @doc("The workspace name.")
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("The state of account - Active | Inactive")
+  @doc("The state of workspace - Active | Inactive")
   @visibility(Lifecycle.Read)
-  state: AccountState;
+  state: ResourceState;
 
-  @doc("The Azure subscription id for the account.")
+  @doc("Azure subscription id for the workspace.")
   @visibility(Lifecycle.Read)
   subscriptionId: uuid;
 
-  @doc("The Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
+  @doc("Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted")
   @visibility(Lifecycle.Read)
   subscriptionState: SubscriptionState;
 
-  @doc("The Azure tenant id of the account.")
+  @doc("Azure tenant id for the workspace.")
   @visibility(Lifecycle.Read)
   tenantId: uuid;
 
-  @doc("The account resource location in Azure, for eg. eastus, southeastasia.")
+  @doc("Azure location of the workspace, for eg. eastus, southeastasia.")
   @visibility(Lifecycle.Read)
   location: string;
 
-  @doc("This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
+  ...WorkspaceAdditionalProperties;
+}
+
+@doc("The additional properties of a workspace.")
+model WorkspaceAdditionalProperties {
   @visibility(Lifecycle.Read)
+  @doc("The workspace data plane URI.")
+  dataplaneUri?: url;
+
+  @doc("This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
   regionalAffinity?: EnablementStatus = EnablementStatus.Enabled;
 
-  @doc("When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.")
-  @visibility(Lifecycle.Read)
-  scalableExecution?: EnablementStatus = EnablementStatus.Enabled;
-
-  @doc("When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.")
-  @visibility(Lifecycle.Read)
-  reporting?: EnablementStatus = EnablementStatus.Enabled;
-
   @doc("When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.")
-  @visibility(Lifecycle.Read)
   localAuth?: EnablementStatus = EnablementStatus.Disabled;
 }
 
-@doc("The account state.")
-union AccountState {
+@doc("The Azure resource state.")
+union ResourceState {
   string,
 
-  @doc("The account is Active.")
-  "Active",
+  @doc("The resource is Active.")
+  Active: "Active",
 
-  @doc("The account is Inactive.")
-  "Inactive",
+  @doc("The resource is Inactive.")
+  Inactive: "Inactive",
 }
 
 @doc("The Azure subscription state.")
@@ -89,19 +88,19 @@ union SubscriptionState {
   string,
 
   @doc("The subscription state is Registered.")
-  "Registered",
+  Registered: "Registered",
 
   @doc("The subscription state is Warned.")
-  "Warned",
+  Warned: "Warned",
 
   @doc("The subscription state is Suspended.")
-  "Suspended",
+  Suspended: "Suspended",
 
   @doc("The subscription state is Deleted.")
-  "Deleted",
+  Deleted: "Deleted",
 
   @doc("The subscription state is Unregistered.")
-  "Unregistered",
+  Unregistered: "Unregistered",
 }
 
 @doc("The enablement status of a feature.")
