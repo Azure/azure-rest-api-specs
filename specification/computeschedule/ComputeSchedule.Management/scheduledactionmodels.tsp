@@ -37,8 +37,8 @@ model ScheduledActionsSchedule {
   @doc("The execution parameters the scheduled action is supposed to follow")
   executionParameters?: ExecutionParameters;
 
-  @doc("The type of deadline the scheduled action is supposed to follow for the schedule")
-  deadlineType?: DeadlineType = DeadlineType.InitiateAt;
+  @doc("The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt.")
+  deadlineType?: DeadlineType;
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
