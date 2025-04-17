@@ -90,7 +90,6 @@ export default async function getStatus({ github, context, core }) {
       sha: head_sha,
       state: "pending",
       context: statusName,
-      description: "Check is running...",
       target_url,
     });
   }
