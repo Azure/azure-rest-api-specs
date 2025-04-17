@@ -149,14 +149,15 @@ union ResourceEncryptionType {
   string,
 
   /**
-   * Microsoft Managed key
+   * Microsoft managed keys (Default)
    */
-  ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY: "ENCRYPTION_AT_REST_WITH_MICROSOFT_KEY",
+  "Microsoft-managed keys (MMK)",
 
   /**
-   * Customer Managed key
+   * Customer managed keys
+   * (CMK) - Only UserAssigned identity is supported
    */
-  ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY: "ENCRYPTION_AT_REST_WITH_CUSTOMER_KEY",
+  "Customer-managed keys (CMK)",
 }
 
 /**

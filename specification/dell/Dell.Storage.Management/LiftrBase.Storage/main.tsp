@@ -69,6 +69,11 @@ model FileSystemResourceProperties {
   smartConnectFqdn?: string;
 
   /**
+   * OneFS url
+   */
+  oneFsUrl?: string;
+
+  /**
    * DellReferenceNumber of the resource
    */
   dellReferenceNumber: string;
