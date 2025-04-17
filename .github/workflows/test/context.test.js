@@ -84,8 +84,10 @@ describe("extractInputs", () => {
       extractInputs(null, context, createMockCore()),
     ).resolves.toEqual(expected);
 
+    // TODO: Add tests for new supported actions
+
     // Action not yet supported
-    context.payload.action = "synchronize";
+    context.payload.action = "assigned";
     await expect(
       extractInputs(null, context, createMockCore()),
     ).rejects.toThrow();
