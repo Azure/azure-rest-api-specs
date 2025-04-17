@@ -1604,6 +1604,8 @@
       "description": "Strategies for attacks.",
       "enum": [
         "easy",
+        "moderate",
+        "difficult",
         "ascii_art",
         "ascii_smuggler",
         "atbash",
@@ -1611,7 +1613,20 @@
         "binary",
         "caesar",
         "character_space",
-        "jailbreak"
+        "jailbreak",
+        "ansii_attack",
+        "character_swap",
+        "suffix_append",
+        "string_join",
+        "unicode_confusable",
+        "unicode_substitution",
+        "diacritic",
+        "flip",
+        "leetspeak",
+        "rot13",
+        "morse",
+        "url",
+        "baseline"
       ],
       "x-ms-enum": {
         "name": "AttackStrategy",
@@ -1621,6 +1636,16 @@
             "name": "Easy",
             "value": "easy",
             "description": "Represents a default set of easy complexity attacks. Easy complexity attack strategies are defined as attacks that do not require any Large Language Model to convert or orchestrate."
+          },
+          {
+            "name": "Moderate",
+            "value": "moderate",
+            "description": "Represents a default set of moderate complexity attacks. Moderate complexity attack strategies are defined as attacks that require a Large Language Model to convert or orchestrate."
+          },
+          {
+            "name": "Difficult",
+            "value": "difficult",
+            "description": "Represents a default set of difficult complexity attacks. Difficult complexity attack strategies are defined as attacks that require a Large Language Model to convert or orchestrate."
           },
           {
             "name": "AsciiArt",
@@ -1661,6 +1686,71 @@
             "name": "Jailbreak",
             "value": "jailbreak",
             "description": "Represents character swapping, a technique for rearranging characters in text."
+          },
+          {
+            "name": "AnsiiAttack",
+            "value": "ansii_attack",
+            "description": "Represents ASCII attack, a technique for encoding or hiding data."
+          },
+          {
+            "name": "CharacterSwap",
+            "value": "character_swap",
+            "description": "Represents character swapping, a technique for rearranging characters in text."
+          },
+          {
+            "name": "SuffixAppend",
+            "value": "suffix_append",
+            "description": "Represents suffix appending, a technique for adding characters to the end of text."
+          },
+          {
+            "name": "StringJoin",
+            "value": "string_join",
+            "description": "Represents string joining, a technique for concatenating strings."
+          },
+          {
+            "name": "UnicodeConfusable",
+            "value": "unicode_confusable",
+            "description": "Represents Unicode confusable characters, which are characters that look similar but are different."
+          },
+          {
+            "name": "UnicodeSubstitution",
+            "value": "unicode_substitution",
+            "description": "Represents Unicode substitution, a technique for replacing characters with similar-looking Unicode characters."
+          },
+          {
+            "name": "Diacritic",
+            "value": "diacritic",
+            "description": "Represents the use of emojis in text, which can be used to convey emotions or ideas."
+          },
+          {
+            "name": "Flip",
+            "value": "flip",
+            "description": "Represents flipping characters, a technique for reversing the order of characters."
+          },
+          {
+            "name": "Leetspeak",
+            "value": "leetspeak",
+            "description": "Represents leetspeak, a form of internet slang that replaces letters with similar-looking numbers or symbols."
+          },
+          {
+            "name": "ROT13",
+            "value": "rot13",
+            "description": "Represents the ROT13 cipher, a substitution cipher that replaces a letter with the 13th letter after it in the alphabet."
+          },
+          {
+            "name": "Morse",
+            "value": "morse",
+            "description": "Represents the morse code, a method for encoding text characters as sequences of dots and dashes."
+          },
+          {
+            "name": "Url",
+            "value": "url",
+            "description": "Represents the url encoding, a method for encoding special characters in URLs."
+          },
+          {
+            "name": "Baseline",
+            "value": "baseline",
+            "description": "Represents the baseline attack strategy, which is a standard or reference point for comparison."
           }
         ]
       }
@@ -2775,7 +2865,7 @@
           "format": "int32",
           "description": "Number of simulation rounds."
         },
-        "attackStrategy": {
+        "attackStrategies": {
           "type": "array",
           "description": "List of attack strategies or nested lists of attack strategies.",
           "items": {
@@ -2819,9 +2909,8 @@
       },
       "required": [
         "id",
-        "scanName",
         "numTurns",
-        "attackStrategy",
+        "attackStrategies",
         "simulationOnly",
         "riskCategories"
       ]

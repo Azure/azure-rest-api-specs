@@ -24,6 +24,12 @@ union AttackStrategy {
   @doc("Represents a default set of easy complexity attacks. Easy complexity attack strategies are defined as attacks that do not require any Large Language Model to convert or orchestrate.")
   Easy: "easy",
 
+  @doc("Represents a default set of moderate complexity attacks. Moderate complexity attack strategies are defined as attacks that require a Large Language Model to convert or orchestrate.")
+  Moderate: "moderate",
+
+  @doc("Represents a default set of difficult complexity attacks. Difficult complexity attack strategies are defined as attacks that require a Large Language Model to convert or orchestrate.")
+  Difficult: "difficult",
+
   @doc("Represents ASCII art, a graphic design technique that uses printable characters.")
   AsciiArt: "ascii_art",
 
@@ -47,6 +53,45 @@ union AttackStrategy {
 
   @doc("Represents character swapping, a technique for rearranging characters in text.")
   Jailbreak: "jailbreak",
+
+  @doc("Represents ASCII attack, a technique for encoding or hiding data.")
+  AnsiiAttack: "ansii_attack",
+
+  @doc("Represents character swapping, a technique for rearranging characters in text.")
+  CharacterSwap: "character_swap",
+
+  @doc("Represents suffix appending, a technique for adding characters to the end of text.")
+  SuffixAppend: "suffix_append",
+
+  @doc("Represents string joining, a technique for concatenating strings.")
+  StringJoin: "string_join",
+
+  @doc("Represents Unicode confusable characters, which are characters that look similar but are different.")
+  UnicodeConfusable: "unicode_confusable",
+
+  @doc("Represents Unicode substitution, a technique for replacing characters with similar-looking Unicode characters.")
+  UnicodeSubstitution: "unicode_substitution",
+
+  @doc("Represents the use of emojis in text, which can be used to convey emotions or ideas.")
+  Diacritic: "diacritic",
+
+  @doc("Represents flipping characters, a technique for reversing the order of characters.")
+  Flip: "flip",
+
+  @doc("Represents leetspeak, a form of internet slang that replaces letters with similar-looking numbers or symbols.")
+  Leetspeak: "leetspeak",
+
+  @doc("Represents the ROT13 cipher, a substitution cipher that replaces a letter with the 13th letter after it in the alphabet.")
+  ROT13: "rot13",
+
+  @doc("Represents the morse code, a method for encoding text characters as sequences of dots and dashes.")
+  Morse: "morse",
+
+  @doc("Represents the url encoding, a method for encoding special characters in URLs.")
+  Url: "url",
+
+  @doc("Represents the baseline attack strategy, which is a standard or reference point for comparison.")
+  Baseline: "baseline"
 }
 
 @doc("Risk category for the attack objective.")
@@ -88,13 +133,13 @@ model RedTeam {
   id: string;
 
   @doc("Name of the red-team scan.")
-  scanName: string;
+  scanName?: string;
 
   @doc("Number of simulation rounds.")
   numTurns: int32;
 
   @doc("List of attack strategies or nested lists of attack strategies.")
-  attackStrategy: AttackStrategy[];
+  attackStrategies: AttackStrategy[];
 
   @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
   simulationOnly: boolean;
