@@ -7,7 +7,7 @@
     "clientApplicationId": "testAppId",
     "parameters": {
       "properties": {
-        "displayName": "Test Application",
+        "name": "Test Application",
         "description": "This is just an example application",
         "ownerId": "/users/userId"
       }
@@ -15,6 +15,20 @@
   },
   "responses": {
     "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId",
+        "type": "Microsoft.ApiManagement/service/clientApplications",
+        "name": "testAppId",
+        "properties": {
+          "name": "Test Application",
+          "ownerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/userId",
+          "state": "active",
+          "description": "This is just an example application",
+          "entraApplicationId": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "201": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId",
         "type": "Microsoft.ApiManagement/service/clientApplications",
