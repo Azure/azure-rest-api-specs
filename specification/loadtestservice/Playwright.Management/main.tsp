@@ -6,6 +6,7 @@ import "../Playwright.Shared";
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations is an independent service"
 @armProviderNamespace("Microsoft.LoadTestService")
 @service(#{ title: "Playwright Service Management API" })
 @doc("Playwright service provides access to Playwright workspace resource and it's operations.")

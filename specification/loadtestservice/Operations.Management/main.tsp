@@ -8,7 +8,7 @@ using Azure.ResourceManager;
 @service(#{ title: "Operations API" })
 @doc("Operations API is an ARM RPC requirement.")
 @versioned(Versions)
-namespace Operations;
+namespace Operations.Management;
 
 @doc("Operations API Versions.")
 enum Versions {
