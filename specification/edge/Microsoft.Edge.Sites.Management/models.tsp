@@ -2,12 +2,15 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
+import "./main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
 
@@ -19,11 +22,21 @@ model SiteProperties {
   @doc("Description of Site resource")
   description?: string;
 
+  @removed(Versions.v2025_03_01_preview)
+  @doc("AddressResource ArmId of Site resource")
+  addressResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.EdgeOrder/addresses";
+    }
+  ]>;
+
+  @added(Versions.v2025_03_01_preview)
   @doc("Physical address of the site")
   siteAddress?: SiteAddressProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("Key-value pairs for labeling the site resource.")
+  @added(Versions.v2025_03_01_preview)
   labels?: Record<string>;
 
   @doc("Provisioning state of last operation")
@@ -31,6 +44,7 @@ model SiteProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
+@added(Versions.v2025_03_01_preview)
 @doc("Site address properties")
 model SiteAddressProperties {
   @doc("First line of the street address")
@@ -60,10 +74,20 @@ model SiteUpdateProperties {
   @doc("Description of Site resource")
   description?: string;
 
+  @removed(Versions.v2025_03_01_preview)
+  @doc("AddressResource ArmId of Site resource")
+  addressResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.EdgeOrder/addresses";
+    }
+  ]>;
+
+  @added(Versions.v2025_03_01_preview)
   @doc("Physical address of the site")
   siteAddress?: SiteAddressProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  @added(Versions.v2025_03_01_preview)
   @doc("Key-value pairs for labeling the site resource.")
   labels?: Record<string>;
 }

@@ -3,11 +3,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/versioning";
+import "./main.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
 
@@ -57,6 +60,7 @@ interface SitesByServiceGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom operation for tenant scope"
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites")
   @doc("list Site at SG scope")
+  @added(Versions.v2025_03_01_preview)
   listByServiceGroup(
     ...ApiVersionParameter,
 
@@ -68,6 +72,7 @@ interface SitesByServiceGroup {
 
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @doc("Get Site at SG scope")
+  @added(Versions.v2025_03_01_preview)
   get(
     ...ApiVersionParameter,
 
@@ -86,6 +91,7 @@ interface SitesByServiceGroup {
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @put
   @doc("create or update Site at SG scope")
+  @added(Versions.v2025_03_01_preview)
   createOrUpdate(
     ...ApiVersionParameter,
 
@@ -111,6 +117,7 @@ interface SitesByServiceGroup {
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @patch
   @doc("update Site at SG scope")
+  @added(Versions.v2025_03_01_preview)
   update(
     ...ApiVersionParameter,
 
@@ -133,6 +140,7 @@ interface SitesByServiceGroup {
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @delete
   @doc("delete Site at SG scope")
+  @added(Versions.v2025_03_01_preview)
   delete(
     ...ApiVersionParameter,
 
