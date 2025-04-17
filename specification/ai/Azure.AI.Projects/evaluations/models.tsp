@@ -79,6 +79,48 @@ model Evaluation {
   evaluators: Record<EvaluatorConfiguration>;
 }
 
+@doc("Definition for sampling strategy.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model SamplingConfiguration {
+  @doc("Name of the sampling strategy.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Percentage of sampling per hour.")
+  @visibility(Lifecycle.Read)
+  samplingPercent: float;
+
+  @doc("Maximum request rate per hour.")
+  @visibility(Lifecycle.Read)
+  maxRequestRate: float;
+}
+
+@doc("Evaluation request for agent run.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluationRequest {
+  @doc("Identifier of the agent thread. This field is mandatory for agent API v1, but will be ignored by agent API v2.")
+  @visibility(Lifecycle.Read)
+  threadId?: string;
+
+  @doc("Identifier of the agent run.")
+  @visibility(Lifecycle.Read)
+  runId: string;
+
+  @doc("Evaluators to be used for the evaluation.")
+  @visibility(Lifecycle.Read)
+  evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Sampling configuration for the evaluation.")
+  @visibility(Lifecycle.Read)
+  samplingConfiguration?: SamplingConfiguration;
+
+  @doc("Optional and temporary way to pass the app insights connection string to the evaluator.")
+  @visibility(Lifecycle.Read)
+  appInsightsConnectionString?: string;
+}
+
 @doc("Evaluation result for agent run.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
@@ -103,11 +145,7 @@ model AgentEvaluationResult {
   @visibility(Lifecycle.Read)
   version?: string;
 
-  @doc("The unique identifier for the completion.")
-  @visibility(Lifecycle.Read)
-  responseId?: string;
-
-  @doc("Identifies message sent to or received from Generative AI model or agent.")
+  @doc("Internal message Id for object mapping between the host service and evaluation package.")
   @visibility(Lifecycle.Read)
   messageId?: string;
 
@@ -117,7 +155,7 @@ model AgentEvaluationResult {
 
   @doc("The unique identifier of the run.")
   @visibility(Lifecycle.Read)
-  runId?: string;
+  runId: string;
 
   @doc("A string explaining why there was an error, if applicable.")
   @visibility(Lifecycle.Read)
@@ -138,46 +176,4 @@ model AgentLongRunningOperationResponse {
   @doc("Result of the long running operation.")
   @visibility(Lifecycle.Read)
   operationResult?: unknown;
-}
-
-@doc("Definition for sampling strategy.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
-model SamplingConfiguration {
-  @doc("Name of the sampling strategy.")
-  @visibility(Lifecycle.Read)
-  name: string;
-
-  @doc("Percentage of sampling per hour.")
-  @visibility(Lifecycle.Read)
-  samplingPercent: float;
-
-  @doc("Maximum request rate per hour.")
-  @visibility(Lifecycle.Read)
-  maxRequestRate: float;
-}
-
-@doc("Evaluation request for agent run.")
-@added(Versions.v2025_05_15_preview)
-@removed(Versions.v_latest)
-model AgentEvaluationRequest {
-  @doc("Identifier of the agent thread.")
-  @visibility(Lifecycle.Read)
-  threadId?: string;
-
-  @doc("Identifier of the agent run.")
-  @visibility(Lifecycle.Read)
-  runId: string;
-
-  @doc("Evaluators to be used for the evaluation.")
-  @visibility(Lifecycle.Read)
-  evaluators: Record<EvaluatorConfiguration>;
-
-  @doc("Sampling configuration for the evaluation.")
-  @visibility(Lifecycle.Read)
-  samplingConfiguration?: SamplingConfiguration;
-
-  @doc("Optional and temporary way to pass the app insights connection string to the evaluator.")
-  @visibility(Lifecycle.Read)
-  appInsightsConnectionString?: string;
 }
