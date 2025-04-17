@@ -391,10 +391,7 @@
           }
         },
         "description": "Creates an Azure Cosmos DB FleetAnalytics under a fleet.",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
+        "x-ms-long-running-operation": false,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
@@ -423,13 +420,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual FleetAnalytics.",
-            "schema": {
-              "$ref": "#/definitions/FleetAnalyticsResource"
-            }
-          },
-          "201": {
-            "description": "The fleetAnalytics is being created or updated asynchronously. Poll for status=Succeeded to find when the operation completes.",
+            "description": "Completed synchronously. The FleetAnalytics properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/FleetAnalyticsResource"
             }
