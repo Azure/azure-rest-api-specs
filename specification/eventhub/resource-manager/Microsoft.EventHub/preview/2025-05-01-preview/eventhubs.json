@@ -3,7 +3,7 @@
   "info": {
     "title": "EventHubManagementClient",
     "description": "Azure Event Hubs client",
-    "version": "2025-05-01-preview"
+    "version": "2024-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -350,6 +350,10 @@
                 "modelAsString": false
               }
             },
+            "userMetadata": {
+              "type": "string",
+              "description": "Gets and Sets Metadata of User."
+            },
             "captureDescription": {
               "$ref": "#/definitions/CaptureDescription",
               "description": "Properties of capture description"
@@ -390,11 +394,36 @@
       },
       "description": "The result of the List EventHubs operation."
     },
+    "CaptureIdentity": {
+      "type": "object",
+      "description": "A value that indicates whether capture description is enabled.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of Azure Active Directory Managed Identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "CaptureIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "ARM ID of Managed User Identity. This property is required is the type is UserAssignedIdentity. If type is SystemAssigned, then the System Assigned Identity Associated with the namespace will be used."
+        }
+      }
+    },
     "Destination": {
       "properties": {
         "name": {
           "type": "string",
           "description": "Name for capture destination"
+        },
+        "identity": {
+          "$ref": "#/definitions/CaptureIdentity"
         },
         "properties": {
           "x-ms-client-flatten": true,
