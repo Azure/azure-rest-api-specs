@@ -111,7 +111,7 @@ namespace Azure.AI.Projects.ServicePatterns {
         @Http.path
         version: string;
 
-        @doc("The definition of the {name} to create", TEntityType)
+        @doc("The definition of the {name} to create or update", TEntityType)
         @Http.bodyRoot
         body: TEntityType;
       },
