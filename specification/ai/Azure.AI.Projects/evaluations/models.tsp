@@ -424,11 +424,7 @@ model AgentEvaluation {
 
   @doc("Identifier of the agent run.")
   @visibility(Lifecycle.Read)
-  runId?: string;
-
-  @doc("Identifier of the agent completion, which is the combination of Thread ID and Run ID.")
-  @visibility(Lifecycle.Read)
-  completionId?: string;
+  runId: string;
 
   @doc("Evaluators to be used for the evaluation.")
   @visibility(Lifecycle.Read)
@@ -437,18 +433,6 @@ model AgentEvaluation {
   @doc("Sampling configuration for the evaluation.")
   @visibility(Lifecycle.Read)
   samplingConfiguration?: SamplingConfiguration;
-
-  @doc("Conversation history passed to the agent, including all previous messages in the chat, including all agents' tool calls and tool results, and with the system message. The actual query that an evaluation will trigger for is the last message in the conversation.")
-  @visibility(Lifecycle.Read)
-  query: CompletionsMessage[];
-
-  @doc("Agent's direct response to the query from the conversation, including all tool calls, results, and agent's formatted responses.")
-  @visibility(Lifecycle.Read)
-  response: CompletionsMessage[];
-
-  @doc("Tools that were used in the conversation.")
-  @visibility(Lifecycle.Read)
-  toolDefinitions: AgentToolDefinition[];
 
   @doc("Optional and temporary way to pass the app insights connection string to the evaluator.")
   @visibility(Lifecycle.Read)
