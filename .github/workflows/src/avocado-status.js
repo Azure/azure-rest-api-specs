@@ -71,7 +71,9 @@ export default async function getStatus({ github, context, core }) {
         new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
     );
 
-  // Sorted by "updated_at" descending, so most recent run is at index 0
+  // Sorted by "updated_at" descending, so most recent run is at index 0.
+  // If "avocadoCodeRuns.length === 0", run will be "undefined", which the following
+  // code must handle.
   const run = avocadoCodeRuns[0];
 
   if (run) {
