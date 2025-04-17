@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft PlaywrightTesting AuthManager Service API",
-    "version": "2024-12-01",
+    "title": "Playwright Service API",
+    "version": "2025-07-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Supported Azure Playwright Service API Endpoints (protocol and hostname, for example:\n  https://{region}.api.playwright.microsoft.com).",
+        "description": "Supported Playwright Service API Endpoints (protocol and hostname, for example:\n  https://{region}.api.playwright.microsoft.com).",
         "required": true,
         "type": "string"
       }
@@ -51,22 +51,23 @@
   },
   "tags": [],
   "paths": {
-    "/accounts/{accountId}": {
+    "/playwrightworkspaces/{workspaceId}": {
       "get": {
-        "operationId": "Accounts_Get",
-        "description": "Get details of the Azure resource mapped to an account for the given account id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "operationId": "Workspaces_Get",
+        "description": "Get details of the Azure resource mapped to a workspace for the given workspace id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "accountId",
+            "name": "workspaceId",
             "in": "path",
-            "description": "The account id.",
+            "description": "The workspace id.",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "maxLength": 64,
-            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -76,7 +77,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Microsoft.PlaywrightTesting.Shared.Account"
+              "$ref": "#/definitions/Shared.Workspace"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -98,30 +99,26 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Accounts_Get": {
-            "$ref": "./examples/Accounts_Get.json"
-          }
         }
       }
     },
-    "/accounts/{accountId}/access-tokens": {
+    "/playwrightworkspaces/{workspaceId}/access-tokens": {
       "get": {
         "operationId": "AccessTokens_List",
-        "description": "Lists access-tokens for the given account id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Lists access-tokens for the given workspace id. It can use OData query params like $select, $filter, $orderby, $top and $skip. The default page size is 10. Use nextLink in response to fetch more objects in the list. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "accountId",
+            "name": "workspaceId",
             "in": "path",
-            "description": "The account id.",
+            "description": "The workspace id.",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "maxLength": 64,
-            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -164,22 +161,23 @@
         }
       }
     },
-    "/accounts/{accountId}/access-tokens/{accessTokenId}": {
+    "/playwrightworkspaces/{workspaceId}/access-tokens/{accessTokenId}": {
       "get": {
         "operationId": "AccessTokens_Get",
-        "description": "Gets an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Gets an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "accountId",
+            "name": "workspaceId",
             "in": "path",
-            "description": "The account id.",
+            "description": "The workspace id.",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "maxLength": 64,
-            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "name": "accessTokenId",
@@ -188,6 +186,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
+            "minLength": 3,
             "maxLength": 64,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
@@ -230,19 +229,20 @@
       },
       "put": {
         "operationId": "AccessTokens_CreateOrReplace",
-        "description": "Creates an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Creates an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "accountId",
+            "name": "workspaceId",
             "in": "path",
-            "description": "The account id.",
+            "description": "The workspace id.",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "maxLength": 64,
-            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "name": "accessTokenId",
@@ -251,6 +251,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
+            "minLength": 3,
             "maxLength": 64,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
@@ -315,19 +316,20 @@
       },
       "delete": {
         "operationId": "AccessTokens_Delete",
-        "description": "Deletes an access-token for the account with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "description": "Deletes an access-token for the workspace with given access-token id. Authorization required is Bearer JWT Access token provided by EntraID.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "accountId",
+            "name": "workspaceId",
             "in": "path",
-            "description": "The account id.",
+            "description": "The workspace id.",
             "required": true,
             "type": "string",
+            "format": "uuid",
             "maxLength": 64,
-            "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+"
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
           {
             "name": "accessTokenId",
@@ -336,6 +338,7 @@
             "required": true,
             "type": "string",
             "format": "uuid",
+            "minLength": 3,
             "maxLength": 64,
             "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
           },
@@ -374,32 +377,25 @@
         }
       }
     },
-    "/accounts/{accountId}/browsers": {
+    "/playwrightworkspaces/{workspaceId}/browsers": {
       "get": {
-        "operationId": "Accounts_GetBrowsers",
-        "description": "Gets remote browsers corresponding to given account id and redirects the client for running Playwright tests. Authorization required is Bearer JWT Access token provided by EntraID or Microsoft Playwright Testing Service.",
+        "operationId": "Workspaces_GetBrowsers",
+        "description": "Gets remote browsers corresponding to given workspace id and redirects the client for executing Playwright scripts. Authorization required is Bearer JWT Access token provided by EntraID or Playwright Service.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "accountId",
+            "name": "workspaceId",
             "in": "path",
-            "description": "The account id.",
+            "description": "The workspace id.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "runId",
-            "in": "query",
-            "description": "The run id provided by client for corresponding remote test run.",
-            "required": false,
             "type": "string"
           },
           {
             "name": "os",
             "in": "query",
-            "description": "The os provided by client for remote test runs.",
+            "description": "The os provided by client for remote script runs.",
             "required": false,
             "type": "string",
             "default": "Linux",
@@ -435,7 +431,7 @@
               "location": {
                 "type": "string",
                 "format": "uri",
-                "description": "The redirect target URL to run test on remote browsers."
+                "description": "The redirect target URL to run script on remote browsers."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -458,8 +454,8 @@
           }
         },
         "x-ms-examples": {
-          "Accounts_GetBrowsers": {
-            "$ref": "./examples/Accounts_GetBrowsers.json"
+          "Workspaces_GetBrowsers": {
+            "$ref": "./examples/Workspaces_GetBrowsers.json"
           }
         }
       }
@@ -468,11 +464,12 @@
   "definitions": {
     "AccessToken": {
       "type": "object",
-      "description": "Model of an access-token linked to an account.",
+      "description": "Model of an access-token linked to a workspace.",
       "properties": {
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The access-token id.",
+          "minLength": 3,
           "maxLength": 64,
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
@@ -612,193 +609,52 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
-    "Microsoft.PlaywrightTesting.Shared.Account": {
+    "PagedAccessToken": {
       "type": "object",
-      "description": "An account is a parent resource for most of the other service resources. It's directly mapped to an Azure resource.",
+      "description": "Paged collection of AccessToken items",
       "properties": {
-        "id": {
+        "value": {
+          "type": "array",
+          "description": "The AccessToken items on this page",
+          "items": {
+            "$ref": "#/definitions/AccessToken"
+          }
+        },
+        "nextLink": {
           "type": "string",
-          "description": "The account id.",
-          "maxLength": 64,
-          "pattern": "[A-Za-z0-9]+(_[A-Za-z0-9]+)*(-[A-Za-z0-9]+)+",
-          "readOnly": true
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "The fully-qualified Azure resource id for the account.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The account name.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/Microsoft.PlaywrightTesting.Shared.AccountState",
-          "description": "The state of account - Active | Inactive",
-          "readOnly": true
-        },
-        "subscriptionId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The Azure subscription id for the account.",
-          "readOnly": true
-        },
-        "subscriptionState": {
-          "$ref": "#/definitions/Microsoft.PlaywrightTesting.Shared.SubscriptionState",
-          "description": "The Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted",
-          "readOnly": true
-        },
-        "tenantId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The Azure tenant id of the account.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The account resource location in Azure, for eg. eastus, southeastasia.",
-          "readOnly": true
-        },
-        "regionalAffinity": {
-          "type": "string",
-          "description": "This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          },
-          "readOnly": true
-        },
-        "scalableExecution": {
-          "type": "string",
-          "description": "When enabled, Playwright client workers can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing test completion durations.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          },
-          "readOnly": true
-        },
-        "reporting": {
-          "type": "string",
-          "description": "When enabled, this feature allows the workspace to upload and display test results, including artifacts like traces and screenshots, in the Playwright portal. This enables faster and more efficient troubleshooting.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          },
-          "readOnly": true
-        },
-        "localAuth": {
-          "type": "string",
-          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EnablementStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "The feature is Enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "The feature is Disabled."
-              }
-            ]
-          },
-          "readOnly": true
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "id",
-        "resourceId",
-        "name",
-        "state",
-        "subscriptionId",
-        "subscriptionState",
-        "tenantId",
-        "location"
+        "value"
       ]
     },
-    "Microsoft.PlaywrightTesting.Shared.AccountState": {
+    "Shared.ResourceState": {
       "type": "string",
-      "description": "The account state.",
+      "description": "The Azure resource state.",
       "enum": [
         "Active",
         "Inactive"
       ],
       "x-ms-enum": {
-        "name": "AccountState",
+        "name": "ResourceState",
         "modelAsString": true,
         "values": [
           {
             "name": "Active",
             "value": "Active",
-            "description": "The account is Active."
+            "description": "The resource is Active."
           },
           {
             "name": "Inactive",
             "value": "Inactive",
-            "description": "The account is Inactive."
+            "description": "The resource is Inactive."
           }
         ]
       }
     },
-    "Microsoft.PlaywrightTesting.Shared.SubscriptionState": {
+    "Shared.SubscriptionState": {
       "type": "string",
       "description": "The Azure subscription state.",
       "enum": [
@@ -840,25 +696,119 @@
         ]
       }
     },
-    "PagedAccessToken": {
+    "Shared.Workspace": {
       "type": "object",
-      "description": "Paged collection of AccessToken items",
+      "description": "Playwright workspace is the parent resource for most of the other service resources.",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AccessToken items on this page",
-          "items": {
-            "$ref": "#/definitions/AccessToken"
-          }
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The workspace id.",
+          "maxLength": 64,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
         },
-        "nextLink": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully-qualified Azure resource id for the workspace.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The workspace name.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/Shared.ResourceState",
+          "description": "The state of workspace - Active | Inactive",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Azure subscription id for the workspace.",
+          "readOnly": true
+        },
+        "subscriptionState": {
+          "$ref": "#/definitions/Shared.SubscriptionState",
+          "description": "Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted",
+          "readOnly": true
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Azure tenant id for the workspace.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure location of the workspace, for eg. eastus, southeastasia.",
+          "readOnly": true
+        },
+        "dataplaneUri": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The workspace data plane URI.",
+          "readOnly": true
+        },
+        "regionalAffinity": {
+          "type": "string",
+          "description": "This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
+        },
+        "localAuth": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          }
         }
       },
       "required": [
-        "value"
+        "id",
+        "resourceId",
+        "name",
+        "state",
+        "subscriptionId",
+        "subscriptionState",
+        "tenantId",
+        "location"
       ]
     }
   },
