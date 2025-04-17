@@ -31,7 +31,7 @@ These settings apply only when `--tag=2025-07-01-preview` is specified on the co
 
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
-  - Playwright/preview/2025-07-01-preview/playwright.json
+  - playwright/preview/2025-07-01-preview/playwright.json
 suppressions:
   - code: ValidResponseCodeRequired
     from: playwright.json
