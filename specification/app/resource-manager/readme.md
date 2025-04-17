@@ -129,6 +129,15 @@ input-file:
   - Microsoft.App/preview/2025-02-02-preview/SourceControls.json
   - Microsoft.App/preview/2025-02-02-preview/Subscriptions.json
   - Microsoft.App/preview/2025-02-02-preview/Usages.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: CommonDefinitions.json
+    reason: |
+      Do not introduce breaking changes in GA services 
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: LogicAppsExtension.json
+    reason: |
+      Do not introduce breaking changes in GA services 
 ```
 
 ### Tag: package-preview-2024-10
