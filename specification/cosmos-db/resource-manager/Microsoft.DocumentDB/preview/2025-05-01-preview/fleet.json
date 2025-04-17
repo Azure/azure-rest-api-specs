@@ -640,13 +640,13 @@
         }
       },
       "patch": {
-        "operationId": "Fleetspace_Updated",
+        "operationId": "Fleetspace_Update",
         "x-ms-examples": {
           "CosmosDB Fleetspace Update": {
             "$ref": "./examples/fleet/CosmosDBFleetspaceUpdate.json"
           }
         },
-        "description": "Update the properties if an existing Azure Cosmos DB fleetspace under a fleet.",
+        "description": "Update the properties of an existing Azure Cosmos DB fleetspace under a fleet.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -1116,6 +1116,13 @@
         },
         "resourceType": {
           "type": "string",
+          "enum": [
+            "StorageAnalytics",
+            "FabricLakehouse"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
           "description": "The type of the fleet analytics resource."
         },
         "resourceLocationId": {
@@ -1169,7 +1176,13 @@
         },
         "fleetspaceApiKind": {
           "type": "string",
-          "description": "The kind of API this fleetspace belongs to."
+          "enum": [
+            "NoSQL"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "description": "The kind of API this fleetspace belongs to. Acceptable values: 'NoSQL'"
         },
         "throughputPoolConfiguration": {
           "type": "object",
@@ -1191,11 +1204,14 @@
                 "GeneralPurpose",
                 "BusinessCritical"
               ],
-              "description": "Service Tier for the fleetspace. General Purpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region."
+              "x-ms-enum": {
+                "modelAsString": true
+              },
+              "description": "Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region."
             },
             "dataRegions": {
               "type": "array",
-              "description": "List of data regions assigned to the fleetspace.",
+              "description": "List of data regions assigned to the fleetspace. Eg [westus2]",
               "items": {
                 "type": "string"
               },
