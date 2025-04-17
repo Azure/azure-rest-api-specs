@@ -30,6 +30,11 @@
           "KnowledgeAgents"
         ],
         "operationId": "KnowledgeAgents_CreateOrUpdate",
+        "x-ms-examples": {
+          "SearchServiceCreateOrUpdateKnowledgeAgent": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeAgent.json"
+          }
+        },
         "description": "Creates a new agent or updates an agent if it already exists.",
         "parameters": [
           {
@@ -90,6 +95,11 @@
           "KnowledgeAgents"
         ],
         "operationId": "KnowledgeAgents_Delete",
+        "x-ms-examples": {
+          "SearchServiceDeleteKnowledgeAgent": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeAgent.json"
+          }
+        },
         "description": "Deletes an existing agent.",
         "parameters": [
           {
@@ -133,6 +143,11 @@
           "KnowledgeAgents"
         ],
         "operationId": "KnowledgeAgents_Get",
+        "x-ms-examples": {
+          "SearchServiceGetKnowledgeAgent": {
+            "$ref": "./examples/SearchServiceGetKnowledgeAgent.json"
+          }
+        },
         "description": "Retrieves an agent definition.",
         "parameters": [
           {
@@ -172,6 +187,11 @@
           "KnowledgeAgents"
         ],
         "operationId": "KnowledgeAgents_List",
+        "x-ms-examples": {
+          "SearchServiceListKnowledgeAgents": {
+            "$ref": "./examples/SearchServiceListKnowledgeAgents.json"
+          }
+        },
         "description": "Lists all agents available for a search service.",
         "parameters": [
           {
@@ -204,6 +224,11 @@
           "KnowledgeAgents"
         ],
         "operationId": "KnowledgeAgents_Create",
+        "x-ms-examples": {
+          "SearchServiceCreateKnowledgeAgent": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeAgent.json"
+          }
+        },
         "description": "Creates a new agent.",
         "parameters": [
           {
@@ -224,7 +249,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Successfully created an agent",
+            "description": "Succesfully created an agent",
             "schema": {
               "$ref": "#/definitions/KnowledgeAgent"
             }
@@ -647,24 +672,17 @@
             "description": "The name of the indexer to resync for."
           },
           {
-            "name": "indexerResync",
+            "name": "indexerResyncOptions",
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "x-ms-client-name": "IndexerResyncBody",
-              "properties": {
-                "options": {
-                  "type": "array",
-                  "x-ms-client-name": "options",
-                  "x-nullable": true,
-                  "items": {
-                    "$ref": "#/definitions/IndexerResyncOption",
-                    "x-nullable": false
-                  },
-                  "description": "Re-sync options that have been pre-defined from data source."
-                }
-              }
+              "type": "array",
+              "x-nullable": true,
+              "items": {
+                "$ref": "#/definitions/IndexerResyncOption",
+                "x-nullable": false
+              },
+              "description": "Re-sync options that have been pre-defined from data source."
             }
           },
           {
@@ -2387,11 +2405,7 @@
           "description": "The description of the agent."
         }
       },
-      "required": [
-        "name",
-        "models",
-        "targetIndexes"
-      ]
+      "required": [ "name", "models", "targetIndexes" ]
     },
     "KnowledgeAgentTargetIndex": {
       "type": "object",
@@ -2416,9 +2430,7 @@
           "description": "Limits the number of documents considered for ranking."
         }
       },
-      "required": [
-        "indexName"
-      ]
+      "required": [ "indexName" ]
     },
     "KnowledgeAgentRequestLimits": {
       "type": "object",
@@ -4006,7 +4018,7 @@
       },
       "description": "Represents classes of characters on which a token filter can operate."
     },
-    "RankingOrder": {
+	 "RankingOrder": {
       "type": "string",
       "enum": [
         "BoostedRerankerScore",
@@ -7271,7 +7283,7 @@
           "description": "Specifies the properties of the AML vectorizer."
         }
       },
-      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog for generating the vector embedding of a query string."
+      "description": "Specifies an Azure Machine Learning endpoint deployed via the Azure AI Studio Model Catalog for generating the vector embedding of a query string."
     },
     "AMLParameters": {
       "type": "object",
@@ -7306,8 +7318,8 @@
           "description": "(Optional for token authentication). The region the AML service is deployed in."
         },
         "modelName": {
-          "$ref": "#/definitions/AIFoundryModelCatalogName",
-          "description": "The name of the embedding model from the Azure AI Foundry Catalog that is deployed at the provided endpoint."
+          "$ref": "#/definitions/AIStudioModelCatalogName",
+          "description": "The name of the embedding model from the Azure AI Studio Catalog that is deployed at the provided endpoint."
         }
       },
       "required": [
@@ -7315,7 +7327,7 @@
       ],
       "description": "Specifies the properties for connecting to an AML vectorizer."
     },
-    "AIFoundryModelCatalogName": {
+    "AIStudioModelCatalogName": {
       "type": "string",
       "enum": [
         "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
@@ -7326,7 +7338,7 @@
         "Cohere-embed-v3-multilingual"
       ],
       "x-ms-enum": {
-        "name": "AIFoundryModelCatalogName",
+        "name": "AIStudioModelCatalogName",
         "modelAsString": true,
         "values": [
           {
@@ -7355,7 +7367,7 @@
           }
         ]
       },
-      "description": "The name of the embedding model from the Azure AI Foundry Catalog that will be called."
+      "description": "The name of the embedding model from the Azure AI Studio Catalog that will be called."
     },
     "VectorSearchVectorizerKind": {
       "type": "string",
@@ -7387,7 +7399,7 @@
           {
             "value": "aml",
             "name": "AML",
-            "description": "Generate embeddings using an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog at query time."
+            "description": "Generate embeddings using an Azure Machine Learning endpoint deployed via the Azure AI Studio Model Catalog at query time."
           }
         ]
       },
@@ -8370,6 +8382,11 @@
           "$ref": "#/definitions/IndexerExecutionStatusDetail",
           "readOnly": true,
           "description": "The outcome of this indexer execution."
+        },
+        "mode": {
+          "$ref": "#/definitions/IndexingMode",
+          "readOnly": true,
+          "description": "The mode the indexer is running in."
         },
         "errorMessage": {
           "type": "string",
@@ -10678,7 +10695,7 @@
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillOutputFormat",
           "x-nullable": true,
           "description": "Controls the cardinality of the output format. Default is 'markdown'."
-        },
+        },        
         "outputMode": {
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillOutputMode",
           "x-nullable": true,
@@ -10695,19 +10712,19 @@
           "items": {
             "$ref": "#/definitions/DocumentIntelligenceLayoutSkillExtractionOptions"
           },
-          "description": "Controls the cardinality of the content extracted from the document by the skill"
+          "description": "Controls the cardinality of the content extracted from the document by the skill"    
         },
         "chunkingProperties": {
           "$ref": "#/definitions/DocumentIntelligenceLayoutSkillChunkingProperties",
           "x-nullable": true,
           "description": "Controls the cardinality for chunking the content."
-        }
+        }            
       },
       "externalDocs": {
         "url": "https://learn.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
       },
       "description": "A skill that extracts content and layout information, via Azure AI Services, from files within the enrichment pipeline."
-    },
+    },    
     "DocumentIntelligenceLayoutSkillOutputMode": {
       "type": "string",
       "enum": [
@@ -10746,12 +10763,12 @@
             "value": "markdown",
             "name": "Markdown",
             "description": "Specify the format of the output as markdown."
-          }
+          }          
         ]
       },
       "default": "markdown",
       "description": "Controls the cardinality of the output format. Default is 'markdown'."
-    },
+    },    
     "DocumentIntelligenceLayoutSkillMarkdownHeaderDepth": {
       "type": "string",
       "enum": [
@@ -10984,7 +11001,7 @@
           },
           "description": "An array of the property names that are required to be part of the model's response. All properties must be included for structured outputs."
         },
-        "additionalParameters": {
+        "additionalProperties": {
           "type": "boolean",
           "default": false,
           "description": "Controls whether it is allowable for an object to contain additional keys / values that were not defined in the JSON Schema. Default is false."
@@ -11010,7 +11027,7 @@
             "value": "locationMetadata",
             "name": "LocationMetadata",
             "description": "Specify that location metadata should be extracted from the document."
-          }
+          }       
         ]
       },
       "description": "Controls the cardinality of the content extracted from the document by the skill."
@@ -11037,7 +11054,7 @@
           "description": "The length of overlap provided between two text chunks. Default is 0."
         }
       }
-    },
+    },    
     "DocumentIntelligenceLayoutSkillChunkingUnit": {
       "type": "string",
       "enum": [
@@ -11056,7 +11073,7 @@
       },
       "default": "characters",
       "description": "Controls the cardinality of the chunk unit. Default is 'characters'"
-    },
+    },    
     "WebApiSkill": {
       "type": "object",
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
@@ -13902,7 +13919,7 @@
           "x-nullable": false,
           "description": "Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set."
         },
-        "rankingOrder": {
+		 "rankingOrder": {
           "$ref": "#/definitions/RankingOrder",
           "x-nullable": true,
           "description": "Specifies the score type to be used for the sort order of the search results."
