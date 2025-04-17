@@ -452,7 +452,7 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitt
     }
 
     return this.createFailedResult(
-      `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}" or "${packageDir}"`,
+      `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}" or the value of "package-dir" option or parameter`,
       `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}" or the value of "package-dir" option or parameter`,
     );
   }
