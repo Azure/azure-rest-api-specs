@@ -3,14 +3,16 @@
  */
 export interface SpecGenSdkCmdInput {
   workingFolder: string;
-  isTriggeredByPipeline: string;
+  runMode: string;
   localSpecRepoPath: string;
   localSdkRepoPath: string;
   tspConfigPath?: string;
   readmePath?: string;
   sdkRepoName: string;
+  sdkLanguage: string;
   apiVersion?: string;
   prNumber?: string;
+  sdkReleaseType?: string;
   specCommitSha: string;
   specRepoHttpsUrl: string;
   headRepoHttpsUrl?: string;
