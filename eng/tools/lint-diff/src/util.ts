@@ -80,3 +80,11 @@ export function relativizePath(path: string, from: string = `/specification/`): 
 
   return path.substring(indexOfBy);
 }
+
+export function isFailure(level: string) {
+  return ["error", "fatal"].includes(level.toLowerCase());
+}
+
+export function isWarning(level: string) {
+  return level.toLowerCase() === "warning";
+}
