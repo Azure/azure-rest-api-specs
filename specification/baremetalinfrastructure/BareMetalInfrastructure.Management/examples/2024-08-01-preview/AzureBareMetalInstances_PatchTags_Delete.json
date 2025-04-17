@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "azureBareMetalInstanceName": "myABMInstance",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "f0f4887f-d13c-4943-a8ba-d7da28d2a3fd",
+    "tagsParameter": {
+      "tags": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myABMInstance",
+        "type": "Microsoft.BareMetalInfrastructure/bareMetalInstances",
+        "id": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/myABMInstance",
+        "location": "westus",
+        "properties": {
+          "azureBareMetalInstanceId": "23415635-4d7e-41dc-9598-8194f22c24e1",
+          "hardwareProfile": {
+            "azureBareMetalInstanceSize": "S72",
+            "hardwareType": "Cisco_UCS"
+          },
+          "hwRevision": "Rev 3",
+          "networkProfile": {
+            "circuitId": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit",
+            "networkInterfaces": [
+              {
+                "ipAddress": "100.100.100.100"
+              }
+            ]
+          },
+          "osProfile": {
+            "computerName": "myComputerName",
+            "osType": "SUSE",
+            "sshPublicKey": "AAAAB3NzaC1yc2EAAAABJQAAAQB/nAmOjTmezNUDKYvEeIRf2YnwM9/uUG1d0BYsc8/tRtx+RGi7N2lUbp728MXGwdnL9od4cItzky/zVdLZE2cycOa18xBK9cOWmcKS0A8FYBxEQWJ/q9YVUgZbFKfYGaGQxsER+A0w/fX8ALuk78ktP31K69LcQgxIsl7rNzxsoOQKJ/CIxOGMMxczYTiEoLvQhapFQMs3FL96didKr/QbrfB1WT6s3838SEaXfgZvLef1YB2xmfhbT9OXFE3FXvh2UPBfN+ffE7iiayQf/2XR+8j4N4bW30DiPtOQLGUrH1y5X/rpNZNlWW2+jGIxqZtgWg7lTy3mXy5x836Sj/6L",
+            "version": "12 SP1"
+          },
+          "partnerNodeId": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/myABMInstance2",
+          "powerState": "started",
+          "provisioningState": "Succeeded",
+          "proximityPlacementGroup": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
+          "storageProfile": {
+            "nfsIpAddress": "200.200.200.200"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-20T23:10:22.6828621Z",
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-07-21T08:01:22.0000000Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "AzureBareMetalInstances_Update",
+  "title": "Delete Tags field of an Azure Bare Metal Instance"
+}

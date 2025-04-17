@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "azureBareMetalInstanceName": "myABMInstance",
+    "forceState": {
+      "state": "active"
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "00000000-0000-0000-0000-0000000000001",
+        "error": {
+          "code": "",
+          "message": ""
+        },
+        "startTime": "2023-08-01T21:17:24.9052926Z",
+        "status": "InProgress"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/provide/Mircorosft.BareMetalInfrastructure/locations/eastus/operationStatus/00000000-0000-0000-0000-000000000001?api-version=2023-11-01-preview",
+        "x-ms-correlation-request-id": "00000000-0000-0000-0000-000000000000",
+        "x-ms-request-id": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  "operationId": "AzureBareMetalInstances_Restart",
+  "title": "Restart an Azure Bare Metal Instance"
+}

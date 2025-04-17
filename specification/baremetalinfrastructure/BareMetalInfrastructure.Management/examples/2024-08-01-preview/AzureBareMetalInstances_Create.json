@@ -1,0 +1,139 @@
+{
+  "operationId": "AzureBareMetalInstances_Create",
+  "parameters": {
+    "api-version": "2024-08-01-preview",
+    "azureBareMetalInstanceName": "myBMIInstance",
+    "requestBodyParameters": {
+      "location": "westus",
+      "properties": {
+        "azureBareMetalInstanceId": "23415635-4d7e-41dc-9598-8194f22c24e1",
+        "hardwareProfile": {
+          "azureBareMetalInstanceSize": "S72",
+          "hardwareType": "Cisco_UCS"
+        },
+        "hwRevision": "Rev 3",
+        "networkProfile": {
+          "circuitId": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit",
+          "networkInterfaces": [
+            {
+              "ipAddress": "100.100.100.100"
+            }
+          ]
+        },
+        "osProfile": {
+          "computerName": "myComputerName",
+          "osType": "SUSE",
+          "sshPublicKey": "{ssh-rsa public key}",
+          "version": "12 SP1"
+        },
+        "powerState": "started",
+        "proximityPlacementGroup": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
+        "storageProfile": {
+          "nfsIpAddress": "200.200.200.200"
+        }
+      },
+      "tags": {
+        "testkey": "testvalue"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "f0f4887f-d13c-4943-a8ba-d7da28d2a3fd"
+  },
+  "title": "AzureBareMetalInstances_Create",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myBMIInstance",
+        "type": "Microsoft.BareMetalInfrastructure/bareMetalInstances",
+        "id": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/myBMIInstance",
+        "location": "westus",
+        "properties": {
+          "azureBareMetalInstanceId": "23415635-4d7e-41dc-9598-8194f22c24e1",
+          "hardwareProfile": {
+            "azureBareMetalInstanceSize": "S72",
+            "hardwareType": "Cisco_UCS"
+          },
+          "hwRevision": "Rev 3",
+          "networkProfile": {
+            "circuitId": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit",
+            "networkInterfaces": [
+              {
+                "ipAddress": "100.100.100.100"
+              }
+            ]
+          },
+          "osProfile": {
+            "computerName": "myComputerName",
+            "osType": "SUSE",
+            "sshPublicKey": "{ssh-rsa public key}",
+            "version": "12 SP1"
+          },
+          "powerState": "started",
+          "provisioningState": "Succeeded",
+          "proximityPlacementGroup": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
+          "storageProfile": {
+            "nfsIpAddress": "200.200.200.200"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-20T23:10:22.6828621Z",
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-07-21T08:01:22.0000000Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "testkey": "testvalue"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myBMIInstance",
+        "type": "Microsoft.BareMetalInfrastructure/bareMetalInstances",
+        "id": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.BareMetalInfrastructure/bareMetalInstances/myBMIInstance",
+        "location": "westus",
+        "properties": {
+          "azureBareMetalInstanceId": "23415635-4d7e-41dc-9598-8194f22c24e1",
+          "hardwareProfile": {
+            "azureBareMetalInstanceSize": "S72",
+            "hardwareType": "Cisco_UCS"
+          },
+          "hwRevision": "Rev 3",
+          "networkProfile": {
+            "circuitId": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit",
+            "networkInterfaces": [
+              {
+                "ipAddress": "100.100.100.100"
+              }
+            ]
+          },
+          "osProfile": {
+            "computerName": "myComputerName",
+            "osType": "SUSE",
+            "sshPublicKey": "{ssh-rsa public key}",
+            "version": "12 SP1"
+          },
+          "powerState": "started",
+          "provisioningState": "Succeeded",
+          "proximityPlacementGroup": "/subscriptions/f0f4887f-d13c-4943-a8ba-d7da28d2a3fd/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup",
+          "storageProfile": {
+            "nfsIpAddress": "200.200.200.200"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-12-20T23:10:22.6828621Z",
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-07-21T08:01:22.0000000Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "testkey": "testvalue"
+        }
+      }
+    }
+  }
+}
