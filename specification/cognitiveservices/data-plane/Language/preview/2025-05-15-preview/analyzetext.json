@@ -1431,7 +1431,7 @@
       "properties": {
         "redactionCharacter": {
           "type": "string",
-          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will bce * as before. We allow specific ascii characters for redaction.",
           "default": "*",
           "enum": [
             "!",
@@ -5009,7 +5009,16 @@
         "IPAddress",
         "Date",
         "Person",
-        "Address"
+        "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VIN",
+        "LicensePlate"
       ],
       "x-ms-enum": {
         "name": "PiiCategoriesExclude",
@@ -5028,7 +5037,7 @@
           {
             "name": "AUBankAccountNumber",
             "value": "AUBankAccountNumber",
-            "description": "AT Identity Card"
+            "description": "AT Bank Account Number"
           },
           {
             "name": "AUDriversLicenseNumber",
@@ -5869,6 +5878,51 @@
             "name": "Address",
             "value": "Address",
             "description": "Address"
+          },
+          {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VIN",
+            "value": "VIN",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
           }
         ]
       }
@@ -6048,6 +6102,15 @@
         "Date",
         "Person",
         "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VIN",
+        "LicensePlate",
         "All",
         "Default"
       ],
@@ -6068,7 +6131,7 @@
           {
             "name": "AUBankAccountNumber",
             "value": "AUBankAccountNumber",
-            "description": "AT Identity Card"
+            "description": "AT Bank Account Number"
           },
           {
             "name": "AUDriversLicenseNumber",
@@ -6909,6 +6972,51 @@
             "name": "Address",
             "value": "Address",
             "description": "Address"
+          },
+          {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VIN",
+            "value": "VIN",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
           },
           {
             "name": "All",

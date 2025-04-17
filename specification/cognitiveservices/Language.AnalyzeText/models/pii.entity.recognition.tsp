@@ -740,30 +740,39 @@ union PiiCategoriesExclude {
   /** Address */
   Address: "Address",
 
+  @added(Versions.v2025_05_15_preview)
   /** Date Of Birth */
   DateOfBirth: "DateOfBirth",
 
+  @added(Versions.v2025_05_15_preview)
   /** Bank Account Number */
   BankAccountNumber: "BankAccountNumber",
 
+  @added(Versions.v2025_05_15_preview)
   /** Passport Number */
   PassportNumber: "PassportNumber",
 
+  @added(Versions.v2025_05_15_preview)
   /** Drivers License Number */
   DriversLicenseNumber: "DriversLicenseNumber",
   
+  @added(Versions.v2025_05_15_preview)
   /** Neighborhood*/
   Neighborhood: "Neighborhood",
   
+  @added(Versions.v2025_05_15_preview)
   /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held*/
   SortCode: "SortCode",
 
+  @added(Versions.v2025_05_15_preview)
   /** PIN */
   PIN: "PIN",
   
+  @added(Versions.v2025_05_15_preview)
   /** VIN */
   VIN: "VIN",
   
+  @added(Versions.v2025_05_15_preview)
   /** License Plate*/
   LicensePlate: "LicensePlate",
 }
