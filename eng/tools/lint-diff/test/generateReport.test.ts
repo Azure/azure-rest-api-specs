@@ -1,6 +1,7 @@
-import { test, describe, expect, vi } from "vitest";
+import { beforeEach, test, describe, expect, vi } from "vitest";
 import {
   compareLintDiffViolations,
+  generateAutoRestErrorReport,
   generateLintDiffReport,
   getDocUrl,
   getFile,
@@ -14,8 +15,20 @@ import {
   LintDiffViolation,
   BeforeAfter,
   AutorestRunResult,
+  AutoRestMessage,
 } from "../src/lintdiff-types.js";
 import { isWindows } from "./test-util.js";
+
+import { vol } from "memfs";
+
+vi.mock("node:fs/promises", async () => {
+  const memfs = await vi.importActual("memfs") as typeof import("memfs");
+  return {
+    ...memfs.fs.promises,
+  };
+});
+
+import { readFile } from "fs/promises";
 
 vi.mock("../src/util.js", async () => {
   const original = await vi.importActual("../src/util.js");
@@ -286,6 +299,12 @@ describe("compareLintDiffViolations", () => {
 });
 
 describe("generateLintDiffReport", () => {
+  beforeEach(() => {
+    vol.reset();
+
+    // Seed current filesystem so that "." exists.
+    vol.mkdirSync(".", { recursive: true });
+  });
   test.skipIf(isWindows())("fails if new violations include an error", async ({ expect }) => {
     const afterViolation = {
       extensionName: "@microsoft.azure/openapi-validator",
@@ -323,16 +342,18 @@ describe("generateLintDiffReport", () => {
       ["file1.md", { before: beforeResult, after: afterResult }],
     ]);
 
+    const outFile = "test-output.md";
     const actual = await generateLintDiffReport(
       runCorrelations,
       new Set<string>([
         "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
       ]),
-      "/tmp/outFile",
+      outFile,
       "baseBranch",
       "compareSha",
     );
     expect(actual).toBe(false);
+    expect(await readFile(outFile, { encoding: "utf-8" })).toMatchSnapshot();
   });
 
   test.skipIf(isWindows())(
@@ -374,16 +395,66 @@ describe("generateLintDiffReport", () => {
         ["file1.md", { before: beforeResult, after: afterResult }],
       ]);
 
+      const outFile = "test-output.md";
       const actual = await generateLintDiffReport(
         runCorrelations,
         new Set<string>([
           "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
         ]),
-        "/tmp/outFile",
+        outFile,
         "baseBranch",
         "compareSha",
       );
       expect(actual).toBe(true);
+      
+      expect(await readFile(outFile, { encoding: "utf-8" })).toMatchSnapshot();
     },
   );
+});
+
+describe("generateAutoRestErrorReport", () => {
+  beforeEach(() => {
+    vol.reset();
+
+    // Seed current filesystem so that "." exists.
+    vol.mkdirSync(".", { recursive: true });
+  });
+
+  test("generates a report with errors", async () => {
+    const autoRestErrors = [
+      {
+        result: {
+          readme: "readme.md",
+          tag: "tag1",
+          rootPath: "dummy/rootPath",
+          error: null,
+          stdout: "dummy stdout",
+          stderr: "dummy stderr",
+        },
+        errors: [
+          { level: "error", message: "Error message 1" } as AutoRestMessage,
+          { level: "fatal", message: "Fatal error message" } as AutoRestMessage,
+        ],
+      },
+      {
+        result: {
+          readme: "readme2.md",
+          tag: "tag2",
+          rootPath: "dummy/rootPath",
+          error: null,
+          stdout: "dummy stdout",
+          stderr: "dummy stderr",
+        },
+        errors: [
+          { level: "error", message: "Error message 2" } as AutoRestMessage,
+        ],
+      },
+    ];
+
+    const outFile = "autorest-error-report.md";
+    await generateAutoRestErrorReport(autoRestErrors, outFile);
+
+    const actual = await readFile(outFile, { encoding: "utf-8" });
+    expect(actual).toMatchSnapshot();
+  });
 });
