@@ -75,7 +75,7 @@
         "tags": [
           "Fleets"
         ],
-        "operationId": "Fleet_ListByGroup",
+        "operationId": "Fleet_ListByResourceGroup",
         "x-ms-examples": {
           "CosmosDB Fleet List by Resource Group": {
             "$ref": "./examples/fleet/CosmosDBFleetList.json"
@@ -84,7 +84,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "description": "Lists all the fleets under the subscription.",
+        "description": "Lists all the fleets under the specified subscription and resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -256,7 +256,10 @@
           }
         },
         "description": "Deletes an existing Azure Cosmos DB Fleet.",
-        "x-ms-long-running-operation": false,
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -272,11 +275,21 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Completed synchronously. The fleet properties were retrieved successfully."
+          "202": {
+            "description": "The Fleet delete operation will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
           },
           "204": {
-            "description": "The specified Throughput Pool does not exist in the subscription."
+            "description": "The specified Fleet does not exist in the subscription."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1172,10 +1185,13 @@
               "format": "int32",
               "description": "Maximum throughput for the pool."
             },
-            "billingType": {
-              "type": "integer",
-              "format": "int32",
-              "description": "Billing type for the fleetspace."
+            "serviceTier": {
+              "type": "string",
+              "enum": [
+                "GeneralPurpose",
+                "BusinessCritical"
+              ],
+              "description": "Service Tier for the fleetspace. General Purpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region."
             },
             "dataRegions": {
               "type": "array",
@@ -1254,7 +1270,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Cosmos DB fleet name.",
+      "description": "Cosmos DB fleet name. Needs to be unique under a subscription.",
       "minLength": 3,
       "maxLength": 50,
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
@@ -1276,7 +1292,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Cosmos DB fleetspace name.",
+      "description": "Cosmos DB fleetspace name. Needs to be unique under a fleet.",
       "minLength": 3,
       "maxLength": 50,
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
