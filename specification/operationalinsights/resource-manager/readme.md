@@ -361,7 +361,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
-  - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
   - repo: azure-powershell

@@ -146,7 +146,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
-  - repo: azure-sdk-for-java
 ```
 
 ## Python

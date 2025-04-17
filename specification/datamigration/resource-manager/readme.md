@@ -596,7 +596,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```

@@ -62,7 +62,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-typescript
 ```
