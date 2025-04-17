@@ -2245,7 +2245,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringAssignDeploymentResourcesJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResourcesJobState"
             }
           },
           "default": {
@@ -2295,7 +2295,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextAnalysisAuthoringUnassignDeploymentResourcesJobState"
+              "$ref": "#/definitions/TextAnalysisAuthoringDeploymentResourcesJobState"
             }
           },
           "default": {
@@ -3215,58 +3215,6 @@
         ]
       }
     },
-    "TextAnalysisAuthoringAssignDeploymentResourcesJobState": {
-      "type": "object",
-      "description": "Represents the state of a assign deployment resources job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
     "TextAnalysisAuthoringAssignDeploymentResourcesOptions": {
       "type": "object",
       "description": "Represents the options for assigning Azure resources to a project.",
@@ -3901,6 +3849,58 @@
       "required": [
         "resourceId",
         "region"
+      ]
+    },
+    "TextAnalysisAuthoringDeploymentResourcesJobState": {
+      "type": "object",
+      "description": "Represents the state of a deployment resources job.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The job ID.",
+          "readOnly": true
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date time of the job."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last date time the job was updated."
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date time of the job."
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "The job status."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings that were encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "errors": {
+          "type": "array",
+          "description": "The errors encountered while executing the job.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "jobId",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "status"
       ]
     },
     "TextAnalysisAuthoringDocumentEntityLabelEvaluationResult": {
@@ -6064,58 +6064,6 @@
         "lastUpdatedDateTime",
         "status",
         "result"
-      ]
-    },
-    "TextAnalysisAuthoringUnassignDeploymentResourcesJobState": {
-      "type": "object",
-      "description": "Represents the state of a unassign deployment resources job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
       ]
     },
     "TextAnalysisAuthoringUnassignDeploymentResourcesOptions": {
