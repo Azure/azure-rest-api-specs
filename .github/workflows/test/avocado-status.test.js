@@ -49,15 +49,18 @@ describe("setStatusImpl", () => {
     });
   });
 
-  it.each([CheckConclusion.SUCCESS, CheckConclusion.FAILURE])(
-    "sets state to code run conclusion: %s",
-    async (state) => {
+  it.each([
+    [CheckStatus.COMPLETED, CheckConclusion.SUCCESS, CommitStatusState.SUCCESS],
+    [CheckStatus.COMPLETED, CheckConclusion.FAILURE, CommitStatusState.FAILURE],
+  ])(
+    "(%s, %s) => %s",
+    async (checkStatus, checkConclusion, commitStatusState) => {
       github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
         data: [
           {
             name: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-            status: CheckStatus.COMPLETED,
-            conclusion: state,
+            status: checkStatus,
+            conclusion: checkConclusion,
             updated_at: "2025-01-01",
             html_url: "https://test.com/workflow_run_html_url",
           },
@@ -66,7 +69,10 @@ describe("setStatusImpl", () => {
 
       github.rest.actions.listJobsForWorkflowRun.mockResolvedValue({
         data: [
-          { conclusion: state, html_url: "https://test.com/job_html_url" },
+          {
+            conclusion: checkConclusion,
+            html_url: "https://test.com/job_html_url",
+          },
         ],
       });
 
@@ -86,10 +92,10 @@ describe("setStatusImpl", () => {
         owner: "test-owner",
         repo: "test-repo",
         sha: "test-head-sha",
-        state,
+        state: commitStatusState,
         context: "[TEST IGNORE] Swagger Avocado",
         target_url:
-          state === CheckConclusion.SUCCESS
+          commitStatusState === CommitStatusState.SUCCESS
             ? "https://test.com/workflow_run_html_url"
             : "https://test.com/job_html_url?pr=123",
       });
