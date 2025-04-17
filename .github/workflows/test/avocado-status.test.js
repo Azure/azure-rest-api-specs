@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { setStatusImpl } from "../src/avocado-status.js";
 
+import { CheckConclusion } from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 const core = createMockCore();
@@ -83,7 +84,7 @@ describe("setStatusImpl", () => {
         state,
         context: "[TEST IGNORE] Swagger Avocado",
         target_url:
-          state === "success"
+          state === CheckConclusion.SUCCESS
             ? "https://test.com/workflow_run_html_url"
             : "https://test.com/job_html_url?pr=123",
       });
