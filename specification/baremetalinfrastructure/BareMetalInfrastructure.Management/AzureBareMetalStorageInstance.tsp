@@ -78,3 +78,21 @@ interface AzureBareMetalStorageInstances {
 @@doc(AzureBareMetalStorageInstances.update::parameters.properties,
   "Request body that only contains the Tags and Identity Field"
 );
+@@summary(AzureBareMetalStorageInstances.listByResourceGroup,
+  "Gets a list of Azure Bare Metal Storage instances in the specified subscription and resource group."
+);
+@@summary(AzureBareMetalStorageInstances.listBySubscription,
+  "Gets a list of Azure Bare Metal Storage instances in the specified subscription."
+);
+@@summary(AzureBareMetalStorageInstances.get,
+  "Gets an Azure Bare Metal Storage instance."
+);
+@@summary(AzureBareMetalStorageInstances.create,
+  "Create an azure bare metal storage resource."
+);
+@@summary(AzureBareMetalStorageInstances.update,
+  "Patches the Tags field of a Azure BareMetalStorage instance."
+);
+@@summary(AzureBareMetalStorageInstances.delete,
+  "Delete an AzureBareMetalStorageInstance."
+);

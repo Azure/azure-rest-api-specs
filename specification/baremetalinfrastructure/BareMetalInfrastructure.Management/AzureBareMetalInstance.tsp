@@ -97,3 +97,16 @@ interface AzureBareMetalInstances {
 @@doc(AzureBareMetalInstances.update::parameters.properties,
   "Request body that only contains the new Tags field"
 );
+@@summary(AzureBareMetalInstances.listBySubscription,
+  "Returns a list of Azure Bare Metal Instances in the specified subscription."
+);
+@@summary(AzureBareMetalInstances.listByResourceGroup,
+  "Gets a list of Azure Bare Metal Instances in the specified subscription and resource group."
+);
+@@summary(AzureBareMetalInstances.get, "Gets an Azure Bare Metal Instance.");
+@@summary(AzureBareMetalInstances.update,
+  "Patches the Tags field of a Azure Bare Metal Instance."
+);
+@@summary(AzureBareMetalInstances.restart, "Restart a Bare Metal Instance.");
+@@summary(AzureBareMetalInstances.shutdown, "Shutdown a Bare Metal Instance.");
+@@summary(AzureBareMetalInstances.start, "Start a Bare Metal Instance.");
