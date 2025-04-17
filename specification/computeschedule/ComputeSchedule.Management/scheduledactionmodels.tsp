@@ -16,7 +16,7 @@ using OpenAPI;
 
 namespace Microsoft.ComputeSchedule;
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Specify the schedule in which the scheduled action is supposed to follow")
 model ScheduledActionsSchedule {
   @doc("The time the scheduled action is supposed to run on")
@@ -41,7 +41,7 @@ model ScheduledActionsSchedule {
   deadlineType?: DeadlineType = DeadlineType.InitiateAt;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 scalar ValidScheduledActionResourceId
   extends armResourceIdentifier<[
@@ -53,7 +53,7 @@ scalar ValidScheduledActionResourceId
     }
   ]>;
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @parentResource(ScheduledAction)
 @doc("Represents an scheduled action resource metadata.")
 model ScheduledActionResource {
@@ -65,10 +65,10 @@ model ScheduledActionResource {
   notificationSettings?: Array<NotificationProperties>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Request model to attach a list of scheduled action resources.")
 model ResourceAttachRequest {
   @doc("List of resources to be attached/patched")
@@ -76,14 +76,14 @@ model ResourceAttachRequest {
   resources: Array<ScheduledActionResource>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Request model to detach a list of scheduled action resources.")
 model ResourceDetachRequest {
   @doc("List of resources to be detached")
   resources: Array<ValidScheduledActionResourceId>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Request model perform a resource operation in a list of resources")
 model ResourcePatchRequest {
   @doc("The list of resources we watch to patch")
@@ -91,7 +91,7 @@ model ResourcePatchRequest {
   resources: Array<ScheduledActionResource>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The request to cancel an occurrence.")
 model CancelOccurrenceRequest {
@@ -99,7 +99,7 @@ model CancelOccurrenceRequest {
   resourceIds: Array<ValidScheduledActionResourceId>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The status of a resource after a resource level operation was performed")
 model ResourceStatus {
@@ -113,7 +113,7 @@ model ResourceStatus {
   error?: Azure.Core.Foundations.Error;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
 model ResourceOperationResponse {
   @doc("The total number of resources operated on")
@@ -125,7 +125,7 @@ model ResourceOperationResponse {
 }
 
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Scheduled action properties")
 model ScheduledActionProperties {
   @doc("The type of resource the scheduled action is targeting")
@@ -157,7 +157,7 @@ model ScheduledActionProperties {
   provisioningState?: ProvisioningState;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
 model ScheduledActionResourceOperationResponse {
   @doc("The total number of resources operated on")
@@ -168,13 +168,13 @@ model ScheduledActionResourceOperationResponse {
   resourcesStatuses: Array<ResourceStatus>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The scheduled action resource")
 model ScheduledAction is TrackedResource<ScheduledActionProperties> {
   ...ResourceNameParameter<ScheduledAction>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-01-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The scheduled action extension")
 model ScheduledActionResources is ExtensionResource<ScheduledActionProperties> {
   ...ResourceNameParameter<ScheduledActionResources>;
