@@ -3,6 +3,8 @@
 import { extractInputs } from "./context.js";
 import { PER_PAGE_MAX } from "./github.js";
 
+const statusName = "[TEST IGNORE] Swagger Avocado";
+
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
@@ -35,19 +37,12 @@ export default async function getStatus({ github, context, core }) {
       repo,
       sha: head_sha,
       state: "success",
-      context: "[TEST IGNORE] Swagger Avocado",
-      description: "Succeeded due to label 'Approved-Avocado'",
+      context: statusName,
+      description: "Found label 'Approved-Avocado'",
       target_url,
     });
     return;
   }
-
-  // TODO
-  // - Get status of check avocado-code
-  // - If success, set status to success
-  // - If fail, get status of label Approved-Avocado
-  // - If label, set status to neutral
-  // - If no label, set status to failed
 
   const workflowRuns = await github.paginate(
     github.rest.actions.listWorkflowRunsForRepo,
@@ -65,13 +60,38 @@ export default async function getStatus({ github, context, core }) {
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  await github.rest.repos.createCommitStatus({
-    owner,
-    repo,
-    sha: head_sha,
-    state: "pending",
-    context: "[TEST IGNORE] Swagger Avocado",
-    description: "Check is running...",
-    target_url,
-  });
+  const wfName = "[TEST-IGNORE] Swagger Avocado - Analyze Code";
+  const avocadoCodeRuns = workflowRuns
+    .filter((wf) => wf.name == wfName)
+    // Sort by "updated_at" descending
+    .sort(
+      (a, b) =>
+        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
+    );
+
+  // Sorted by "updated_at" descending, so most recent run is at index 0
+  const run = avocadoCodeRuns[0];
+
+  if (run?.status === "completed") {
+    const state = run.conclusion === "success" ? "success" : "failure";
+
+    await github.rest.repos.createCommitStatus({
+      owner,
+      repo,
+      sha: head_sha,
+      state,
+      context: statusName,
+      target_url,
+    });
+  } else {
+    await github.rest.repos.createCommitStatus({
+      owner,
+      repo,
+      sha: head_sha,
+      state: "pending",
+      context: statusName,
+      description: "Check is running...",
+      target_url,
+    });
+  }
 }
