@@ -22,7 +22,6 @@ jobs:
   avocado-status:
     name: "[TEST-IGNORE] Swagger Avocado - Set Status"
 
-    # Filter to only label "Approved-Avocado"
     if: |
       github.event_name == 'workflow_run' ||
       (github.event_name == 'pull_request_target' &&
