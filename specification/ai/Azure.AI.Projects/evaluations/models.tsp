@@ -78,3 +78,106 @@ model Evaluation {
   @doc("Evaluators to be used for the evaluation.")
   evaluators: Record<EvaluatorConfiguration>;
 }
+
+@doc("Evaluation result for agent run.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluationResult {
+  @doc("Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion.")
+  @visibility(Lifecycle.Read)
+  evaluator: string;
+
+  @doc("Score of the given evaluator. No restriction on range.")
+  @visibility(Lifecycle.Read)
+  score: float32;
+
+  @doc("Status of the evaluation result. Options: Success, Failure, NotApplicable.")
+  @visibility(Lifecycle.Read)
+  status: string;
+
+  @doc("Reasoning for the evaluation result.")
+  @visibility(Lifecycle.Read)
+  reason?: string;
+
+  @doc("Version of the evaluator that was used to evaluate the agent's completion.")
+  @visibility(Lifecycle.Read)
+  version?: string;
+
+  @doc("The unique identifier for the completion.")
+  @visibility(Lifecycle.Read)
+  responseId?: string;
+
+  @doc("Identifies message sent to or received from Generative AI model or agent.")
+  @visibility(Lifecycle.Read)
+  messageId?: string;
+
+  @doc("The unique identifier of the thread.")
+  @visibility(Lifecycle.Read)
+  threadId?: string;
+
+  @doc("The unique identifier of the run.")
+  @visibility(Lifecycle.Read)
+  runId?: string;
+
+  @doc("A string explaining why there was an error, if applicable.")
+  @visibility(Lifecycle.Read)
+  error?: string;
+
+  @doc("Additional properties relevant to the evaluator. These will differ between evaluators.")
+  additionalDetails?: Record<string>;
+}
+
+@doc("Long running operation response for agent evaluation.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentLongRunningOperationResponse {
+  @doc("URI for the long running operation.")
+  @visibility(Lifecycle.Read)
+  location: string;
+
+  @doc("Result of the long running operation.")
+  @visibility(Lifecycle.Read)
+  operationResult?: unknown;
+}
+
+@doc("Definition for sampling strategy.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model SamplingConfiguration {
+  @doc("Name of the sampling strategy.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Percentage of sampling per hour.")
+  @visibility(Lifecycle.Read)
+  samplingPercent: float;
+
+  @doc("Maximum request rate per hour.")
+  @visibility(Lifecycle.Read)
+  maxRequestRate: float;
+}
+
+@doc("Evaluation request for agent run.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluationRequest {
+  @doc("Identifier of the agent thread.")
+  @visibility(Lifecycle.Read)
+  threadId?: string;
+
+  @doc("Identifier of the agent run.")
+  @visibility(Lifecycle.Read)
+  runId: string;
+
+  @doc("Evaluators to be used for the evaluation.")
+  @visibility(Lifecycle.Read)
+  evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Sampling configuration for the evaluation.")
+  @visibility(Lifecycle.Read)
+  samplingConfiguration?: SamplingConfiguration;
+
+  @doc("Optional and temporary way to pass the app insights connection string to the evaluator.")
+  @visibility(Lifecycle.Read)
+  appInsightsConnectionString?: string;
+}
