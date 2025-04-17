@@ -31,6 +31,7 @@ These settings apply only when `--tag=release_2025_05_15_preview` is specified o
 
 ``` yaml $(tag) == 'release_2025-05-15-preview'
 input-file:
+  - preview/2025-05-15-preview/analyzeconversations.json
   - preview/2025-05-15-preview/analyzetext.json
   - preview/2025-05-15-preview/analyzeconversations-authoring.json
   - preview/2025-05-15-preview/analyzetext-authoring.json
