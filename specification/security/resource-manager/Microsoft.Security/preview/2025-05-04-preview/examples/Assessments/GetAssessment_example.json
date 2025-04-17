@@ -21,6 +21,31 @@
             "cause": "OffByPolicy",
             "description": "The effective policy for the assessment was evaluated to off - use Microsoft.Authorization/policyAssignments to turn this assessment on"
           },
+          "risk": {
+            "attackPathsReferences": [],
+            "isContextualRisk": true,
+            "riskFactors": [
+              "Exposure to the Internet",
+              "Sensitive Data",
+              "Critical Resource"
+            ],
+            "paths": [
+              {
+                "id": "14caae95be8a4e6da0b049ecb53bc880",
+                "nodes": [
+                  {
+                    "id": "14caae95be8a4e6da0b049ecb53bc880",
+                    "nodePropertiesLabel": [
+                      "exposedToInternet",
+                      "containsSensitiveData"
+                    ]
+                  }
+                ],
+                "edges": []
+              }
+            ],
+            "level": "Critical"
+          },
           "additionalData": {
             "linkedWorkspaceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myLaWorkspace"
           }
