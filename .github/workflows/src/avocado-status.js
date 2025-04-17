@@ -18,7 +18,8 @@ export default async function getStatus({ github, context, core }) {
     core,
   );
 
-  const target_url =
+  // Default target is this run itself
+  let target_url =
     `https://github.com/${context.repo.owner}/${context.repo.repo}` +
     `/actions/runs/${context.runId}`;
 
@@ -41,6 +42,7 @@ export default async function getStatus({ github, context, core }) {
       description: "Found label 'Approved-Avocado'",
       target_url,
     });
+
     return;
   }
 
@@ -72,6 +74,13 @@ export default async function getStatus({ github, context, core }) {
   // Sorted by "updated_at" descending, so most recent run is at index 0
   const run = avocadoCodeRuns[0];
 
+  if (run) {
+    // Update target to the "Analyze Code" run, which contains the meaningful output.
+    target_url =
+      `https://github.com/${context.repo.owner}/${context.repo.repo}` +
+      `/actions/runs/${run.id}`;
+  }
+
   if (run?.status === "completed") {
     const state = run.conclusion === "success" ? "success" : "failure";
 
@@ -84,6 +93,7 @@ export default async function getStatus({ github, context, core }) {
       target_url,
     });
   } else {
+    // Run was not found (not started), or not completed
     await github.rest.repos.createCommitStatus({
       owner,
       repo,
