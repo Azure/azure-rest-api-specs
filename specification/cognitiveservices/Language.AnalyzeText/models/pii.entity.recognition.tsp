@@ -740,39 +740,39 @@ union PiiCategoriesExclude {
   /** Address */
   Address: "Address",
 
-  @added(Versions.v2025_05_15_preview)
   /** Date Of Birth */
+  @added(Versions.v2025_05_15_preview)
   DateOfBirth: "DateOfBirth",
 
-  @added(Versions.v2025_05_15_preview)
   /** Bank Account Number */
+  @added(Versions.v2025_05_15_preview)
   BankAccountNumber: "BankAccountNumber",
 
-  @added(Versions.v2025_05_15_preview)
   /** Passport Number */
+  @added(Versions.v2025_05_15_preview)
   PassportNumber: "PassportNumber",
 
-  @added(Versions.v2025_05_15_preview)
   /** Drivers License Number */
+  @added(Versions.v2025_05_15_preview)
   DriversLicenseNumber: "DriversLicenseNumber",
-  
+
+  /** Neighborhood */
   @added(Versions.v2025_05_15_preview)
-  /** Neighborhood*/
   Neighborhood: "Neighborhood",
-  
+
+  /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
   @added(Versions.v2025_05_15_preview)
-  /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held*/
   SortCode: "SortCode",
 
-  @added(Versions.v2025_05_15_preview)
   /** PIN */
+  @added(Versions.v2025_05_15_preview)
   PIN: "PIN",
-  
-  @added(Versions.v2025_05_15_preview)
+
   /** VIN */
-  VIN: "VIN",
-  
   @added(Versions.v2025_05_15_preview)
-  /** License Plate*/
+  VIN: "VIN",
+
+  /** License Plate */
+  @added(Versions.v2025_05_15_preview)
   LicensePlate: "LicensePlate",
 }
