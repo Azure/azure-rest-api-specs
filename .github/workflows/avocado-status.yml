@@ -7,6 +7,10 @@ on:
   # branch and repo -- which simplifies implementation.
   pull_request_target:
     types:
+      # Run workflow on default types, to update status as quickly as possible.
+      - opened
+      - synchronize
+      - reopened
       # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
       - labeled
       - unlabeled
