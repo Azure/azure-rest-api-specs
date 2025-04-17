@@ -66,6 +66,10 @@ model AutoUpgradeProfileProperties {
     By default, this is set to False.
     """)
   disabled?: boolean;
+
+  @doc("The status of the auto upgrade profile.")
+  @added(Versions.v2025_03_01)
+  autoUpgradeProfileStatus?: AutoUpgradeProfileStatus;
 }
 
 @doc("Configuration of how auto upgrade will be run.")
@@ -123,4 +127,60 @@ interface AutoUpgradeProfiles {
   >;
 
   listByFleet is ArmResourceListByParent<AutoUpgradeProfile>;
+}
+
+@doc("AutoUpgradeProfileStatus is the status of an auto upgrade profile.")
+@added(Versions.v2025_03_01)
+model AutoUpgradeProfileStatus {
+  @doc("The UTC time of the last attempt to automatically create and start an UpdateRun as triggered by the release of new versions.")
+  @visibility(Lifecycle.Read)
+  lastTriggeredAt?: utcDateTime;
+
+  @doc("The status of the last AutoUpgrade trigger.")
+  @visibility(Lifecycle.Read)
+  lastTriggerStatus?: AutoUpgradeLastTriggerStatus;
+
+  @doc("The error details of the last trigger.")
+  @visibility(Lifecycle.Read)
+  lastTriggerError?: Azure.ResourceManager.Foundations.ErrorDetail; // https://github.com/Azure/azure-rest-api-specs/blob/1de0b5315d62e1b40052bad2c9a2f2c89d84ff0f/specification/common-types/resource-management/v5/types.json#L260
+
+  @doc("The target Kubernetes version or node image versions of the last trigger.")
+  @visibility(Lifecycle.Read)
+  lastTriggerUpgradeVersions?: string[];
+}
+
+@doc("AutoUpgradeLastTriggerStatus is the status of the last AutoUpgrade trigger (attempt to automatically create and start UpdateRun when there are new released versions) of an auto upgrade profile.")
+@added(Versions.v2025_03_01)
+union AutoUpgradeLastTriggerStatus {
+  string,
+
+  @doc("The last AutoUpgrade trigger was succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("The last AutoUpgrade trigger failed.")
+  Failed: "Failed",
+}
+
+@added(Versions.v2025_03_01)
+@armResourceOperations
+interface AutoUpgradeProfileOperations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "use azure-async instead"
+  @useFinalStateVia("azure-async-operation")
+  generateUpdateRun is Azure.ResourceManager.ArmResourceActionAsync<
+    AutoUpgradeProfile,
+    void,
+    GenerateResponse,
+    BaseParameters<AutoUpgradeProfile>,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = GenerateResponse> &
+      ArmLroLocationHeader<FinalResult = GenerateResponse> &
+      IfMatchParameters<AutoUpgradeProfile>
+  >;
+}
+
+@added(Versions.v2025_03_01)
+@doc("GenerateResponse is the response of a generate request.")
+model GenerateResponse {
+  @visibility(Lifecycle.Read)
+  @doc("The ARM resource id of the generated UpdateRun. e.g.: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}'.")
+  id: string;
 }

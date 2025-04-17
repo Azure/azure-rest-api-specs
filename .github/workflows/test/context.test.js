@@ -198,7 +198,7 @@ describe("extractInputs", () => {
     });
   });
 
-  it.each([0, 1, 2])(
+  it.each([0, 1, 2, 3])(
     "workflow_run:completed:pull_request (fork repo, %s PRs)",
     async (numPullRequests) => {
       const context = {
@@ -216,6 +216,7 @@ describe("extractInputs", () => {
             head_sha: "abc123",
             id: 456,
             repository: {
+              id: 1234,
               name: "TestRepoName",
               owner: {
                 login: "TestRepoOwnerLogin",
@@ -231,7 +232,28 @@ describe("extractInputs", () => {
         async (args) => {
           console.log(JSON.stringify(args));
           return {
-            data: [{ number: 123 }, { number: 124 }].slice(0, numPullRequests),
+            data: [
+              {
+                base: {
+                  repo: { id: 1234 },
+                },
+                number: 123,
+              },
+              // Ensure PRs to other repos are excluded
+              {
+                base: {
+                  repo: { id: 4567 },
+                },
+                number: 1,
+              },
+              // Multiple PRs to triggering repo still causes an error (TODO: #33418)
+              {
+                base: {
+                  repo: { id: 1234 },
+                },
+                number: 124,
+              },
+            ].slice(0, numPullRequests),
           };
         },
       );
@@ -266,7 +288,8 @@ describe("extractInputs", () => {
         });
 
         expect(github.rest.search.issuesAndPullRequests).toHaveBeenCalled();
-      } else if (numPullRequests === 1) {
+      } else if (numPullRequests === 1 || numPullRequests === 2) {
+        // Second PR is to a different repo, so expect same behavior with or without it
         await expect(
           extractInputs(github, context, createMockCore()),
         ).resolves.toEqual({
@@ -277,6 +300,7 @@ describe("extractInputs", () => {
           run_id: 456,
         });
       } else {
+        // Multiple PRs to triggering repo still causes an error (TODO: #33418)
         await expect(
           extractInputs(github, context, createMockCore()),
         ).rejects.toThrow("Unexpected number of pull requests");
@@ -465,5 +489,33 @@ describe("extractInputs", () => {
     await expect(
       extractInputs(github, context, createMockCore()),
     ).rejects.toThrow("from context payload");
+  });
+});
+
+it("check_run:completed", async () => {
+  const context = {
+    eventName: "check_suite",
+    payload: {
+      action: "completed",
+      check_suite: {
+        head_sha: "head_sha",
+      },
+      repository: {
+        name: "TestRepoName",
+        owner: {
+          login: "TestRepoOwnerLogin",
+        },
+      },
+    },
+  };
+
+  await expect(
+    extractInputs(createMockGithub(), context, createMockCore()),
+  ).resolves.toEqual({
+    owner: "TestRepoOwnerLogin",
+    repo: "TestRepoName",
+    head_sha: "head_sha",
+    issue_number: NaN,
+    run_id: NaN,
   });
 });
