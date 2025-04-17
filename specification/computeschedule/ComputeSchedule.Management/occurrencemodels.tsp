@@ -57,7 +57,10 @@ model OccurrenceProperties {
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@renamedFrom(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`, "Occurrence")
+@renamedFrom(
+  Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`,
+  "Occurrence"
+)
 @parentResource(AutoAction)
 model OccurrenceOld is ProxyResource<OccurrenceProperties> {
   ...ResourceNameParameter<
@@ -97,7 +100,10 @@ model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@renamedFrom(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`, "DelayRequest")
+@renamedFrom(
+  Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`,
+  "DelayRequest"
+)
 @doc("Request to ask for a delay in an occurrence")
 model DelayRequestOld {
   @doc("The amount of delay the occurrence should apply")

@@ -41,7 +41,6 @@ model ScheduledActionsSchedule {
   deadlineType?: DeadlineType = DeadlineType.InitiateAt;
 }
 
-
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 scalar ValidScheduledActionResourceId
   extends armResourceIdentifier<[
@@ -91,14 +90,12 @@ model ResourcePatchRequest {
   resources: Array<ScheduledActionResource>;
 }
 
-
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The request to cancel an occurrence.")
 model CancelOccurrenceRequest {
   @doc("The resources the cancellation should act on. If no resource is passed in the list, Scheduled Action will cancel the occurrence for all resources.")
   resourceIds: Array<ValidScheduledActionResourceId>;
 }
-
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The status of a resource after a resource level operation was performed")
@@ -123,7 +120,6 @@ model ResourceOperationResponse {
   @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
-
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("Scheduled action properties")

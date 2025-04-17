@@ -16,7 +16,10 @@ namespace Microsoft.ComputeSchedule;
 
 @added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @removed(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@renamedFrom(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`, "Occurrences")
+@renamedFrom(
+  Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`,
+  "Occurrences"
+)
 @armResourceOperations
 interface OccurrencesOld {
   get is ArmResourceRead<OccurrenceOld>;
@@ -51,5 +54,9 @@ interface Occurrences {
     CancelOccurrenceRequest,
     ResourceOperationResponse
   >;
-  delay is ArmResourceActionSync<Occurrence, DelayRequest, ResourceOperationResponse>;
+  delay is ArmResourceActionSync<
+    Occurrence,
+    DelayRequest,
+    ResourceOperationResponse
+  >;
 }
