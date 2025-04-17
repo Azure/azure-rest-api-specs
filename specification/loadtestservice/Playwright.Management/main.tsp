@@ -15,7 +15,7 @@ namespace Playwright.Management;
 
 @doc("Playwright service Management API Versions.")
 enum Versions {
-  /** 2025-06-01-preview version */
+  /** 2025-07-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Playwright.Shared.Versions.v1_0)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
