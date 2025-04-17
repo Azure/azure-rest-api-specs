@@ -352,8 +352,8 @@
           {
             "name": "template",
             "in": "body",
-            "description": "Properties used to start a job instance.",
-            "required": true,
+            "description": "Properties used to start a job execution.",
+            "required": false,
             "schema": {
               "$ref": "#/definitions/JobExecutionTemplate"
             }
@@ -931,7 +931,7 @@
       }
     },
     "JobExecution": {
-      "description": "Container Apps Jobs execution.",
+      "description": "Container Apps Job execution.",
       "type": "object",
       "properties": {
         "name": {
@@ -943,40 +943,47 @@
           "type": "string"
         },
         "type": {
-          "description": "Job Type.",
+          "description": "Job execution type",
           "type": "string"
         },
-        "status": {
-          "description": "Current running State of the job",
-          "enum": [
-            "Running",
-            "Processing",
-            "Stopped",
-            "Degraded",
-            "Failed",
-            "Unknown",
-            "Succeeded"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "JobExecutionRunningState",
-            "modelAsString": true
-          }
-        },
-        "startTime": {
-          "description": "Job execution start time.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "endTime": {
-          "description": "Job execution end time.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "template": {
-          "description": "Job's execution container.",
-          "$ref": "#/definitions/JobExecutionTemplate"
+        "properties": {
+          "description": "Container Apps Job execution specific properties.",
+          "type": "object",
+          "properties": {
+            "status": {
+              "description": "Current running State of the job",
+              "enum": [
+                "Running",
+                "Processing",
+                "Stopped",
+                "Degraded",
+                "Failed",
+                "Unknown",
+                "Succeeded"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "JobExecutionRunningState",
+                "modelAsString": true
+              }
+            },
+            "startTime": {
+              "description": "Job execution start time.",
+              "format": "date-time",
+              "type": "string"
+            },
+            "endTime": {
+              "description": "Job execution end time.",
+              "format": "date-time",
+              "type": "string"
+            },
+            "template": {
+              "description": "Job's execution container.",
+              "$ref": "#/definitions/JobExecutionTemplate"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },

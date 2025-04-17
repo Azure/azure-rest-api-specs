@@ -1,0 +1,23 @@
+{
+  "operationId": "GetSchemaPropertiesByContent",
+  "title": "Get Schema Properties By Content",
+  "parameters": {
+    "endpoint": "mynamespace.servicebus.windows.net",
+    "groupName": "sample-sr-group",
+    "schemaName": "sample-json-schema",
+    "schemaContent": "{\"title\":\"Person\",\"type\":\"object\",\"properties\":{\"firstName\":{\"type\":\"string\",},\"lastName\":{\"type\":\"string\",},\"age\":{\"type\":\"integer\",\"minimum\":0}}}",
+    "api-version": "2022-10"
+  },
+  "responses": {
+    "204": {
+      "headers": {
+        "Location": "https://sample-namespace.servicebus.windows.net/$schemagroups/sample-sr-group/schemas/sample-json-schema/versions/3?api-version=2022-10",
+        "Schema-Id": "b489dc4916744e3db72dda8f9693f342",
+        "Schema-Id-Location": "https://sample-namespace.servicebus.windows.net/$schemagroups?api-version=2022-10&schema-id=b489dc4916744e3db72dda8f9693f342",
+        "Schema-Group-Name": "sample-sr-group",
+        "Schema-Name": "sample-json-schema",
+        "Schema-Version": 4
+      }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "keywords": "exampledata",
+      "filter": {
+        "and": [
+          {
+            "objectType": "Files"
+          },
+          {
+            "entityType": "azure_blob_path"
+          }
+        ]
+      },
+      "limit": 10,
+      "orderby": [
+        {
+          "name": "ASC"
+        },
+        {
+          "updateTime": "DESC"
+        }
+      ],
+      "facets": [
+        {
+          "facet": "assetType",
+          "count": 0,
+          "sort": {
+            "count": "desc"
+          }
+        },
+        {
+          "facet": "classification",
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        },
+        {
+          "facet": "contactId",
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        },
+        {
+          "facet": "label",
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        },
+        {
+          "facet": "term",
+          "count": 10,
+          "sort": {
+            "count": "desc"
+          }
+        }
+      ]
+    },
+    "api-version": "2024-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.count": 2,
+        "@search.count.approximate": false,
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "bfecbcc3-1838-45fe-96d6-112de8a170f9",
+            "qualifiedName": "https://exampleaccount.blob.core.windows.net/examplepath/exampledata1.txt",
+            "name": "exampledata1.txt",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_blob_path",
+            "classification": [],
+            "label": [],
+            "assetType": [
+              "Azure Blob Storage"
+            ],
+            "term": [],
+            "contact": []
+          },
+          {
+            "@search.score": 1.0,
+            "id": "14d857b9-e2c1-4118-8bfa-12e53ae6ce7f",
+            "qualifiedName": "https://exampleaccount.blob.core.windows.net/examplepath/exampledata2.txt",
+            "name": "exampledata2.txt",
+            "description": null,
+            "owner": null,
+            "entityType": "azure_blob_path",
+            "classification": [],
+            "label": [],
+            "assetType": [
+              "Azure Blob Storage"
+            ],
+            "term": [],
+            "contact": []
+          }
+        ]
+      }
+    }
+  },
+  "title": "Discovery_Query",
+  "operationId": "Discovery_Query"
+}

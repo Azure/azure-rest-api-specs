@@ -1,0 +1,187 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-05-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/maintenanceWindowOptions/current": {
+      "get": {
+        "tags": [
+          "MaintenanceWindowOptions"
+        ],
+        "description": "Gets a list of available maintenance windows.",
+        "operationId": "MaintenanceWindowOptions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database to get maintenance windows options for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maintenanceWindowOptionsName",
+            "in": "query",
+            "description": "Maintenance window options name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of maintenance windows options.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindowOptions"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of available maintenance windows for a selected database.": {
+            "$ref": "./examples/GetMaintenanceWindowOptions.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MaintenanceWindowOptions": {
+      "description": "Maintenance window options.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceWindowOptionsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MaintenanceWindowOptionsProperties": {
+      "description": "Maintenance window options properties.",
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "description": "Whether maintenance windows are enabled for the database.",
+          "type": "boolean"
+        },
+        "maintenanceWindowCycles": {
+          "description": "Available maintenance cycles e.g. {Saturday, 0, 48*60}, {Wednesday, 0, 24*60}.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowTimeRange"
+          }
+        },
+        "minDurationInMinutes": {
+          "format": "int32",
+          "description": "Minimum duration of maintenance window.",
+          "type": "integer"
+        },
+        "defaultDurationInMinutes": {
+          "format": "int32",
+          "description": "Default duration for maintenance window.",
+          "type": "integer"
+        },
+        "minCycles": {
+          "format": "int32",
+          "description": "Minimum number of maintenance windows cycles to be set on the database.",
+          "type": "integer"
+        },
+        "timeGranularityInMinutes": {
+          "format": "int32",
+          "description": "Time granularity in minutes for maintenance windows.",
+          "type": "integer"
+        },
+        "allowMultipleMaintenanceWindowsPerCycle": {
+          "description": "Whether we allow multiple maintenance windows per cycle.",
+          "type": "boolean"
+        }
+      }
+    },
+    "MaintenanceWindowTimeRange": {
+      "description": "Maintenance window time range.",
+      "type": "object",
+      "properties": {
+        "dayOfWeek": {
+          "description": "Day of maintenance window.",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "Start time minutes offset from 12am.",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Duration of maintenance window in minutes.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/consumption/armconsumption'
+      breaking-changes:
+        - Field `Etag`, `Tags` of struct `CreditSummary` has been removed
+        - Field `MarketplaceCharges` of struct `LegacyChargeSummaryProperties` has been removed
+        - Type of `ModernReservationRecommendation.Properties` has been changed from `*ModernReservationRecommendationProperties` to `ModernReservationRecommendationPropertiesClassification`
+  azure-sdk-for-js:
+    - package: '@azure/arm-consumption'
+      breaking-changes:
+        - Class ConsumptionManagementClient has a new signature
+        - Interface BudgetFilter no longer has parameter not
+        - Interface LegacyChargeSummary no longer has parameter marketplaceCharges
+        - Operation ReservationRecommendationDetails.get has a new signature
+        - Parameter scope of interface ModernReservationRecommendation is now required
+  azure-sdk-for-python:
+    - package: azure-mgmt-consumption
+      breaking-changes:
+        - The 'Amount' method 'validate' was deleted or renamed in the current version
+        - The 'AmountWithExchangeRate' method 'validate' was deleted or renamed in the current version
+        - The 'Balance' method 'validate' was deleted or renamed in the current version
+        - The 'BalancePropertiesAdjustmentDetailsItem' method 'validate' was deleted or renamed in the current version
+        - The 'BalancePropertiesNewPurchasesDetailsItem' method 'validate' was deleted or renamed in the current version
+        - The 'Budget' method 'validate' was deleted or renamed in the current version
+        - The 'BudgetComparisonExpression' method 'validate' was deleted or renamed in the current version
+        - The 'BudgetFilter' method 'validate' was deleted or renamed in the current version
+        - The 'BudgetFilterProperties' method 'validate' was deleted or renamed in the current version
+        - The 'BudgetOperatorType' enum had its value 'IN_ENUM' deleted or renamed in the current version
+        - The 'BudgetTimePeriod' method 'validate' was deleted or renamed in the current version
+        - The 'BudgetsListResult' method 'validate' was deleted or renamed in the current version
+        - The 'ChargeSummary' method 'validate' was deleted or renamed in the current version
+        - The 'ChargesListResult' method 'validate' was deleted or renamed in the current version
+        - The 'CreditBalanceSummary' method 'validate' was deleted or renamed in the current version
+        - The 'CreditSummary' method 'validate' was deleted or renamed in the current version
+        - The 'CurrentSpend' method 'validate' was deleted or renamed in the current version
+        - The 'DownloadProperties' method 'validate' was deleted or renamed in the current version
+        - The 'ErrorDetails' method 'validate' was deleted or renamed in the current version
+        - The 'ErrorResponse' method 'validate' was deleted or renamed in the current version
+        - The 'EventSummary' method 'validate' was deleted or renamed in the current version
+        - The 'Events' method 'validate' was deleted or renamed in the current version
+        - The 'ForecastSpend' method 'validate' was deleted or renamed in the current version
+        - The 'HighCasedErrorDetails' method 'validate' was deleted or renamed in the current version
+        - The 'HighCasedErrorResponse' method 'validate' was deleted or renamed in the current version
+        - The 'LegacyChargeSummary' method 'validate' was deleted or renamed in the current version
+        - The 'LegacyReservationRecommendation' method 'validate' was deleted or renamed in the current version
+        - The 'LegacyReservationRecommendationProperties' method 'validate' was deleted or renamed in the current version
+        - The 'LegacyReservationTransaction' method 'validate' was deleted or renamed in the current version
+        - The 'LegacySharedScopeReservationRecommendationProperties' method 'validate' was deleted or renamed in the current version
+        - The 'LegacySingleScopeReservationRecommendationProperties' method 'validate' was deleted or renamed in the current version
+        - The 'LegacyUsageDetail' method 'validate' was deleted or renamed in the current version
+        - The 'LotSummary' method 'validate' was deleted or renamed in the current version
+        - The 'Lots' method 'validate' was deleted or renamed in the current version
+        - The 'ManagementGroupAggregatedCostResult' method 'validate' was deleted or renamed in the current version
+        - The 'Marketplace' method 'validate' was deleted or renamed in the current version
+        - The 'MarketplacesListResult' method 'validate' was deleted or renamed in the current version
+        - The 'MeterDetails' method 'validate' was deleted or renamed in the current version
+        - The 'MeterDetailsResponse' method 'validate' was deleted or renamed in the current version
+        - The 'ModernChargeSummary' method 'validate' was deleted or renamed in the current version
+        - The 'ModernReservationRecommendation' method 'validate' was deleted or renamed in the current version
+        - The 'ModernReservationTransaction' method 'validate' was deleted or renamed in the current version
+        - The 'ModernReservationTransactionsListResult' method 'validate' was deleted or renamed in the current version
+        - The 'ModernUsageDetail' method 'validate' was deleted or renamed in the current version
+        - The 'Notification' method 'validate' was deleted or renamed in the current version
+        - The 'Operation' method 'validate' was deleted or renamed in the current version
+        - The 'OperationDisplay' method 'validate' was deleted or renamed in the current version
+        - The 'OperationListResult' method 'validate' was deleted or renamed in the current version
+        - The 'PriceSheetProperties' method 'validate' was deleted or renamed in the current version
+        - The 'PriceSheetResult' method 'validate' was deleted or renamed in the current version
+        - The 'ProxyResource' method 'validate' was deleted or renamed in the current version
+        - The 'Reseller' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationDetail' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationDetailsListResult' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationRecommendation' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationRecommendationDetailsCalculatedSavingsProperties' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationRecommendationDetailsModel' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationRecommendationDetailsResourceProperties' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationRecommendationDetailsSavingsProperties' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationRecommendationDetailsUsageProperties' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationRecommendationsListResult' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationSummariesListResult' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationSummary' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationTransaction' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationTransactionResource' method 'validate' was deleted or renamed in the current version
+        - The 'ReservationTransactionsListResult' method 'validate' was deleted or renamed in the current version
+        - The 'Resource' method 'validate' was deleted or renamed in the current version
+        - The 'ResourceAttributes' method 'validate' was deleted or renamed in the current version
+        - The 'SkuProperty' method 'validate' was deleted or renamed in the current version
+        - The 'Tag' method 'validate' was deleted or renamed in the current version
+        - The 'TagsResult' method 'validate' was deleted or renamed in the current version
+        - The 'UsageDetail' method 'validate' was deleted or renamed in the current version
+        - The 'UsageDetailsListResult' method 'validate' was deleted or renamed in the current version
+        - The model or publicly exposed class 'CreditSummary' had its instance variable 'e_tag' deleted or renamed in the current version
+        - The model or publicly exposed class 'LegacyChargeSummary' had its instance variable 'marketplace_charges' deleted or renamed in the current version

@@ -1,0 +1,737 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectorDefinitions": {
+      "get": {
+        "x-ms-examples": {
+          "Get all data connector definitions.": {
+            "$ref": "./examples/dataConnectorDefinitions/GetDataConnectorDefinitions.json"
+          }
+        },
+        "tags": [
+          "ConnectorDefinitions"
+        ],
+        "description": "Gets all data connector definitions.",
+        "operationId": "DataConnectorDefinitions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorDefinitionArmCollectionWrapper"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectorDefinitions/{dataConnectorDefinitionName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get customize data connector definition": {
+            "$ref": "./examples/dataConnectorDefinitions/GetCustomizableDataConnectoeDefinitionById.json"
+          }
+        },
+        "tags": [
+          "ConnectorDefinitions"
+        ],
+        "description": "Gets a data connector definition.",
+        "operationId": "DataConnectorDefinitions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/dataConnectorDefinitionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create data connector definition": {
+            "$ref": "./examples/dataConnectorDefinitions/CreateCustomizableDataConnectorDefinition.json"
+          }
+        },
+        "tags": [
+          "ConnectorDefinitions"
+        ],
+        "description": "Creates or updates the data connector definition.",
+        "operationId": "DataConnectorDefinitions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/dataConnectorDefinitionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "connectorDefinitionInput",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectorDefinition"
+            },
+            "description": "The data connector definition",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorDefinition"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete data connector definition": {
+            "$ref": "./examples/dataConnectorDefinitions/DeleteDataConnectorDefinitionById.json"
+          }
+        },
+        "tags": [
+          "ConnectorDefinitions"
+        ],
+        "description": "Delete the data connector definition.",
+        "operationId": "DataConnectorDefinitions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/dataConnectorDefinitionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConnectorDefinitionsAvailability": {
+      "description": "The exposure status of the connector to the customers.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/AvailabilityStatus"
+        },
+        "isPreview": {
+          "description": "Gets or sets a value indicating whether the connector is preview.",
+          "type": "boolean"
+        }
+      }
+    },
+    "AvailabilityStatus": {
+      "description": "The exposure status of the connector to the customers. Available values are 0-4 (0=None, 1=Available, 2=FeatureFlag, 3=Internal).",
+      "type": "integer",
+      "format": "int32"
+    },
+    "ConnectivityCriterion": {
+      "description": "The criteria by which we determine whether the connector is connected or not.\r\nFor Example, use a KQL query to check if  the expected data type is flowing).",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Gets or sets the type of connectivity.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the queries for checking connectivity.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ConnectorDataType": {
+      "description": "The data type which is created by the connector,\r\nincluding a query indicated when was the last time that data type was received in the workspace.",
+      "required": [
+        "lastDataReceivedQuery",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the data type to show in the graph.",
+          "type": "string"
+        },
+        "lastDataReceivedQuery": {
+          "description": "Gets or sets the query to indicate when relevant data was last received in the workspace.",
+          "type": "string"
+        }
+      }
+    },
+    "DataConnectorDefinition": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "required": [
+        "kind"
+      ],
+      "description": "An Azure resource, which encapsulate the entire info requires to display a data connector page in Azure portal,\r\nand the info required to define data connections.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DataConnectorDefinitionKind",
+          "description": "The data connector kind",
+          "type": "string"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "DataConnectorDefinitionKind": {
+      "description": "The kind of the data connector definitions",
+      "enum": [
+        "Customizable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorDefinitionKind",
+        "values": [
+          {
+            "value": "Customizable"
+          }
+        ]
+      }
+    },
+    "DataConnectorDefinitionArmCollectionWrapper": {
+      "type": "object",
+      "description": "Encapsulate the data connector definition object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnectorDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomizableConnectorDefinition": {
+      "description": "Connector definition for kind 'Customizable'.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorDefinition"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomizableConnectorDefinitionProperties",
+          "description": "Customizable properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Customizable"
+    },
+    "CustomizableConnectorDefinitionProperties": {
+      "description": "The UiConfig for 'Customizable' connector definition kind.",
+      "type": "object",
+      "required": [
+        "connectorUiConfig"
+      ],
+      "properties": {
+        "createdTimeUtc": {
+          "format": "date-time",
+          "description": "Gets or sets the connector definition created date in UTC format.",
+          "type": "string"
+        },
+        "lastModifiedUtc": {
+          "format": "date-time",
+          "description": "Gets or sets the connector definition last modified date in UTC format.",
+          "type": "string"
+        },
+        "connectorUiConfig": {
+          "$ref": "#/definitions/CustomizableConnectorUiConfig"
+        },
+        "connectionsConfig": {
+          "$ref": "#/definitions/CustomizableConnectionsConfig"
+        }
+      }
+    },
+    "CustomizableConnectionsConfig": {
+      "description": "The UiConfig for 'Customizable' connector definition kind.",
+      "required": [
+        "templateSpecVersion",
+        "templateSpecName"
+      ],
+      "type": "object",
+      "properties": {
+        "templateSpecName": {
+          "description": "Gets or sets the template name. The template includes ARM templates that can be created by the connector, usually it will be the dataConnectors ARM templates.",
+          "type": "string"
+        },
+        "templateSpecVersion": {
+          "description": "Gets or sets the template version.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomizableConnectorUiConfig": {
+      "description": "The UiConfig for 'Customizable' connector definition kind.",
+      "required": [
+        "dataTypes",
+        "descriptionMarkdown",
+        "graphQueries",
+        "instructionSteps",
+        "permissions",
+        "publisher",
+        "sampleQueries",
+        "title",
+        "connectivityCriteria"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets custom connector id. optional field.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Gets or sets the connector blade title.",
+          "type": "string"
+        },
+        "publisher": {
+          "description": "Gets or sets the connector publisher name.",
+          "type": "string"
+        },
+        "descriptionMarkdown": {
+          "description": "Gets or sets the connector description in markdown format.",
+          "type": "string"
+        },
+        "graphQueriesTableName": {
+          "description": "Gets or sets the name of the table the connector will insert the data to.\r\nThis name can be used in other queries by specifying {{graphQueriesTableName}} placeholder\r\n in Query and LastDataReceivedQuery values.",
+          "type": "string"
+        },
+        "graphQueries": {
+          "description": "Gets or sets the graph queries to show the current data volume over time.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GraphQuery"
+          },
+          "x-ms-identifiers": []
+        },
+        "sampleQueries": {
+          "description": "Gets or sets the sample queries for the connector.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SampleQuery"
+          },
+          "x-ms-identifiers": []
+        },
+        "dataTypes": {
+          "description": "Gets or sets the data types to check for last data received.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorDataType"
+          },
+          "x-ms-identifiers": []
+        },
+        "connectivityCriteria": {
+          "description": "Gets or sets the way the connector checks whether the connector is connected.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectivityCriterion"
+          },
+          "x-ms-identifiers": []
+        },
+        "availability": {
+          "$ref": "#/definitions/ConnectorDefinitionsAvailability"
+        },
+        "permissions": {
+          "$ref": "#/definitions/ConnectorDefinitionsPermissions"
+        },
+        "instructionSteps": {
+          "description": "Gets or sets the instruction steps to enable the connector.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstructionStep"
+          },
+          "x-ms-identifiers": []
+        },
+        "logo": {
+          "description": "Gets or sets the connector logo to be used when displaying the connector within Azure Sentinel's connector's gallery.\r\nThe logo value should be in SVG format.",
+          "type": "string"
+        },
+        "isConnectivityCriteriasMatchSome": {
+          "description": "Gets or sets a value indicating whether to use 'OR'(SOME) or 'AND' between ConnectivityCriteria items.",
+          "type": "boolean"
+        }
+      }
+    },
+    "CustomPermissionDetails": {
+      "description": "The Custom permissions required for the connector.",
+      "required": [
+        "description",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the custom permissions name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Gets or sets the custom permissions description.",
+          "type": "string"
+        }
+      }
+    },
+    "GraphQuery": {
+      "description": "The graph query to show the volume of data arriving into the workspace over time.",
+      "required": [
+        "baseQuery",
+        "legend",
+        "metricName"
+      ],
+      "type": "object",
+      "properties": {
+        "metricName": {
+          "description": "Gets or sets the metric name that the query is checking. For example: 'Total data receive'.",
+          "type": "string"
+        },
+        "legend": {
+          "description": "Gets or sets the legend for the graph.",
+          "type": "string"
+        },
+        "baseQuery": {
+          "description": "Gets or sets the base query for the graph.\r\nThe base query is wrapped by Sentinel UI infra with a KQL query, that measures the volume over time.",
+          "type": "string"
+        }
+      }
+    },
+    "InstructionStep": {
+      "description": "Instruction steps to enable the connector.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Gets or sets the instruction step title.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Gets or sets the instruction step description.",
+          "type": "string"
+        },
+        "instructions": {
+          "description": "Gets or sets the instruction step details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstructionStepDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "innerSteps": {
+          "description": "Gets or sets the inner instruction steps details.\r\nFoe Example: instruction step 1 might contain inner instruction steps: [instruction step 1.1, instruction step 1.2].",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstructionStep"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "InstructionStepDetails": {
+      "description": "Instruction step details, to be displayed in the Instructions steps section in the connector's page in Sentinel Portal.",
+      "required": [
+        "parameters",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "Gets or sets the instruction type parameters settings.",
+          "type": "object"
+        },
+        "type": {
+          "description": "Gets or sets the instruction type name.",
+          "type": "string"
+        }
+      }
+    },
+    "ConnectorDefinitionsPermissions": {
+      "description": "The required Permissions for the connector.",
+      "type": "object",
+      "properties": {
+        "tenant": {
+          "description": "Gets or sets the required tenant permissions for the connector.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "licenses": {
+          "description": "Gets or sets the required licenses for the user to create connections.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceProvider": {
+          "description": "Gets or sets the resource provider permissions required for the user to create connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorDefinitionsResourceProvider"
+          },
+          "x-ms-identifiers": []
+        },
+        "customs": {
+          "description": "Gets or sets the customs permissions required for the user to create connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomPermissionDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProviderPermissionsScope": {
+      "description": "The scope on which the user should have permissions, in order to be able to create connections.",
+      "enum": [
+        "Subscription",
+        "ResourceGroup",
+        "Workspace"
+      ],
+      "type": "string",
+      "example": "Subscription",
+      "x-ms-enum": {
+        "name": "ProviderPermissionsScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Subscription"
+          },
+          {
+            "value": "ResourceGroup"
+          },
+          {
+            "value": "Workspace"
+          }
+        ]
+      }
+    },
+    "ConnectorDefinitionsResourceProvider": {
+      "description": "The resource provider details include the required permissions for the user to create connections.\r\nThe user should have the required permissions(Read\\Write, ..) in the specified scope ProviderPermissionsScope against the specified resource provider.",
+      "required": [
+        "permissionsDisplayText",
+        "provider",
+        "providerDisplayName",
+        "requiredPermissions",
+        "scope"
+      ],
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Gets or sets the provider name.",
+          "type": "string"
+        },
+        "permissionsDisplayText": {
+          "description": "Gets or sets the permissions description text.",
+          "type": "string"
+        },
+        "providerDisplayName": {
+          "description": "Gets or sets the permissions provider display name.",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/definitions/ProviderPermissionsScope"
+        },
+        "requiredPermissions": {
+          "$ref": "#/definitions/ResourceProviderRequiredPermissions"
+        }
+      }
+    },
+    "ResourceProviderRequiredPermissions": {
+      "description": "Required permissions for the connector resource provider that define in ResourceProviders.\r\nFor more information about the permissions see <see href=\"https://docs.microsoft.com/en-us/azure/role-based-access-control/role-definitions#actions-format\">here</see>.",
+      "type": "object",
+      "properties": {
+        "read": {
+          "description": "Gets or sets a value indicating whether the permission is read action (GET).",
+          "type": "boolean"
+        },
+        "write": {
+          "description": "Gets or sets a value indicating whether the permission is write action (PUT or PATCH).",
+          "type": "boolean"
+        },
+        "delete": {
+          "description": "Gets or sets a value indicating whether the permission is delete action (DELETE).",
+          "type": "boolean"
+        },
+        "action": {
+          "description": "Gets or sets a value indicating whether the permission is custom actions (POST).",
+          "type": "boolean"
+        }
+      }
+    },
+    "SampleQuery": {
+      "description": "The sample queries for the connector.",
+      "required": [
+        "description",
+        "query"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Gets or sets the  sample query description.",
+          "type": "string"
+        },
+        "query": {
+          "description": "Gets or sets the KQL sample query.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "dataConnectorDefinitionName": {
+      "in": "path",
+      "name": "dataConnectorDefinitionName",
+      "description": "The data connector definition name.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z0-9A-Z-_]*$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

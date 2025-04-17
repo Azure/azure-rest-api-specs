@@ -23,6 +23,22 @@
           "facetable": false
         },
         {
+          "name": "descriptionEmbedding",
+          "type": "Collection(Edm.Single)",
+          "searchable": true,
+          "filterable": false,
+          "retrievable": true,
+          "sortable": false,
+          "facetable": false,
+          "key": false,
+          "indexAnalyzer": null,
+          "searchAnalyzer": null,
+          "analyzer": null,
+          "synonymMaps": [],
+          "dimensions": 1536,
+          "vectorSearchConfiguration": "myHnswProfile"
+        },
+        {
           "name": "description_fr",
           "type": "Edm.String",
           "filterable": false,
@@ -153,6 +169,18 @@
             }
           }
         ]
+      },
+      "vectorSearch": {
+        "algorithmConfigurations": [
+          {
+            "name": "myHnsw",
+            "kind": "hnsw",
+            "hnswParameters": {
+              "m": 4,
+              "metric": "cosine"
+            }
+          }
+        ]
       }
     }
   },
@@ -202,6 +230,22 @@
             "searchAnalyzer": null,
             "analyzer": null,
             "synonymMaps": []
+          },
+          {
+            "name": "descriptionEmbedding",
+            "type": "Collection(Edm.Single)",
+            "searchable": true,
+            "filterable": false,
+            "retrievable": true,
+            "sortable": false,
+            "facetable": false,
+            "key": false,
+            "indexAnalyzer": null,
+            "searchAnalyzer": null,
+            "analyzer": null,
+            "synonymMaps": [],
+            "dimensions": 1536,
+            "vectorSearchConfiguration": "myHnswProfile"
           },
           {
             "name": "description_fr",
@@ -419,6 +463,18 @@
                     "fieldName": "category"
                   }
                 ]
+              }
+            }
+          ]
+        },
+        "vectorSearch": {
+          "algorithmConfigurations": [
+            {
+              "name": "myHnsw",
+              "kind": "hnsw",
+              "hnswParameters": {
+                "m": 4,
+                "metric": "cosine"
               }
             }
           ]

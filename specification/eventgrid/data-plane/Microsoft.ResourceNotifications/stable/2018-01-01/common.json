@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of the common properties for Azure Resource Notifications (ARN) System topics",
+    "description": "Describes the schema of the the common properties across all topic types published by ARN to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "ResourceNotificationsResourceUpdatedDetails": {
+      "description": "Describes the schema of the properties under resource info which are common across all ARN system topic events",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "id of the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "type": {
+          "description": "the type of the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "location": {
+          "description": "the location of the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "tags": {
+          "description": "the tags on the resource for which the event is being emitted",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "properties in the payload of the resource for which the event is being emitted",
+          "type": "object",
+          "additionalProperties": {
+            "description": "properties in the payload of the resource for which the event is being emitted"
+          }
+        }
+      }
+    },
+    "ResourceNotificationsOperationalDetails": {
+      "description": "details of operational info",
+      "type": "object",
+      "properties": {
+        "resourceEventTime": {
+          "description": "Date and Time when resource was updated",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ResourceNotificationsResourceUpdatedEventData": {
+      "description": "Describes the schema of the common properties across all ARN system topic events",
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "description": "resourceInfo details for update event",
+          "$ref": "#/definitions/ResourceNotificationsResourceUpdatedDetails",
+          "x-ms-client-name": "resourceDetails"
+        },
+        "operationalInfo": {
+          "description": "details about operational info",
+          "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
+          "x-ms-client-name": "operationalDetails"
+        },
+        "apiVersion": {
+          "description": "api version of the resource properties bag",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceNotificationsResourceDeletedDetails": {
+      "description": "Describes the schema of the properties under resource info which are common across all ARN system topic delete events",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "id of the resource for which the event is being emitted",
+          "type": "string",
+          "format": "arm-id"
+        },
+        "name": {
+          "description": "name of the resource for which the event is being emitted",
+          "type": "string"
+        },
+        "type": {
+          "description": "the type of the resource for which the event is being emitted",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceNotificationsResourceDeletedEventData": {
+      "description": "Describes the schema of the common properties across all ARN system topic delete events",
+      "type": "object",
+      "properties": {
+        "resourceInfo": {
+          "description": "resourceInfo details for delete event",
+          "$ref": "#/definitions/ResourceNotificationsResourceDeletedDetails",
+          "x-ms-client-name": "resourceDetails"
+        },
+        "operationalInfo": {
+          "description": "details about operational info",
+          "$ref": "#/definitions/ResourceNotificationsOperationalDetails",
+          "x-ms-client-name": "operationalDetails"
+        }
+      }
+    }
+  }
+}

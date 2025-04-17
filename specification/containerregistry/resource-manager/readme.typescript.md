@@ -17,4 +17,20 @@ typescript:
   package-name: "@azure/arm-containerregistry"
   output-folder: "$(typescript-sdks-folder)/sdk/containerregistry/arm-containerregistry"
   generate-metadata: true
+
+directive:
+  - from: containerregistry_build.json
+    where: $.definitions.IdentityProperties.properties
+    transform: >
+      $.principalId['readOnly'] = true;
+      $.tenantId['readOnly'] = true;
+  - from: containerregistry_build.json
+    where: $.definitions.UserIdentityProperties.properties
+    transform: >
+      $.principalId['readOnly'] = true;
+      $.clientId['readOnly'] = true;
+  - from: containerregistry_build.json
+    where: $.definitions.ErrorResponse
+    transform: >
+      $['x-ms-client-name'] = 'ErrorResponseForContainerRegistry';
 ```

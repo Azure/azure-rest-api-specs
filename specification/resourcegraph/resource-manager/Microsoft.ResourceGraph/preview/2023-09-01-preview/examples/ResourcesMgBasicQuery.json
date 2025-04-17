@@ -1,0 +1,49 @@
+{
+  "title": "Basic Query",
+  "description": "A simple management groups scoped resources query.",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "query": {
+      "managementGroups": [
+        "e927f598-c1d4-4f72-8541-95d83a6a4ac8",
+        "ProductionMG"
+      ],
+      "query": "Resources | project id, name, type, location, tags | limit 3"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 3,
+        "count": 3,
+        "resultTruncated": "false",
+        "facets": [],
+        "data": [
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Network/networkInterfaces/myNetworkInterface",
+            "name": "myNetworkInterface",
+            "type": "microsoft.network/networkinterfaces",
+            "location": "centralus",
+            "tags": {
+              "tag1": "Value1"
+            }
+          },
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Network/virtualNetworks/myVnet",
+            "name": "myVnet",
+            "type": "microsoft.network/virtualnetworks",
+            "location": "westus",
+            "tags": {}
+          },
+          {
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Network/publicIPAddresses/myPublicIp",
+            "name": "myPublicIp",
+            "type": "microsoft.network/publicipaddresses",
+            "location": "westus",
+            "tags": {}
+          }
+        ]
+      }
+    }
+  }
+}

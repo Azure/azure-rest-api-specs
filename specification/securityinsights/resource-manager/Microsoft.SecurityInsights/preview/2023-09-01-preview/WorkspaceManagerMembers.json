@@ -1,0 +1,310 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerMembers/": {
+      "get": {
+        "x-ms-examples": {
+          "Get all workspace manager members": {
+            "$ref": "./examples/workspaceManagerMembers/GetAllWorkspaceManagerMembers.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerMember"
+        ],
+        "description": "Gets all workspace manager members that exist for the given Sentinel workspace manager",
+        "operationId": "WorkspaceManagerMembers_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerMembersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/workspaceManagerMembers/{workspaceManagerMemberName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a workspace manager member": {
+            "$ref": "./examples/workspaceManagerMembers/GetWorkspaceManagerMember.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerMember"
+        ],
+        "description": "Gets a workspace manager member",
+        "operationId": "WorkspaceManagerMembers_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerMemberName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerMember"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or Update a workspace manager member": {
+            "$ref": "./examples/workspaceManagerMembers/CreateOrUpdateWorkspaceManagerMember.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerMember"
+        ],
+        "description": "Creates or updates a workspace manager member",
+        "operationId": "WorkspaceManagerMembers_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerMemberName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerMember"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, created or updated an instance",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerMember"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceManagerMember"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a workspace manager member": {
+            "$ref": "./examples/workspaceManagerMembers/DeleteWorkspaceManagerMember.json"
+          }
+        },
+        "tags": [
+          "workspaceManagerMember"
+        ],
+        "description": "Deletes a workspace manager member",
+        "operationId": "WorkspaceManagerMembers_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceManagerMemberName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkspaceManagerMemberProperties": {
+      "description": "The workspace manager member properties",
+      "properties": {
+        "targetWorkspaceResourceId": {
+          "description": "Fully qualified resource ID of the target Sentinel workspace joining the given Sentinel workspace manager",
+          "type": "string"
+        },
+        "targetWorkspaceTenantId": {
+          "description": "Tenant id of the target Sentinel workspace joining the given Sentinel workspace manager",
+          "type": "string"
+        }
+      },
+      "required": [
+        "targetWorkspaceResourceId",
+        "targetWorkspaceTenantId"
+      ],
+      "type": "object"
+    },
+    "WorkspaceManagerMember": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
+        }
+      ],
+      "description": "The workspace manager member",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceManagerMemberProperties",
+          "description": "The workspace manager member object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WorkspaceManagerMembersList": {
+      "description": "List of workspace manager members",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of workspace manager members",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of workspace manager members",
+          "items": {
+            "$ref": "#/definitions/WorkspaceManagerMember"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "WorkspaceManagerMemberName": {
+      "description": "The name of the workspace manager member",
+      "in": "path",
+      "name": "workspaceManagerMemberName",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceManagerMember": {
+      "description": "The workspace manager member object",
+      "in": "body",
+      "name": "workspaceManagerMember",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WorkspaceManagerMember"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

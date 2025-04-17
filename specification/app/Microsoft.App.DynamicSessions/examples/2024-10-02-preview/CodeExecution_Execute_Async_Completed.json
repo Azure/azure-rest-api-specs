@@ -1,0 +1,37 @@
+{
+  "title": "CodeExecution_Execute_Async_Completed",
+  "operationId": "CodeExecution_Execute",
+  "headers": {
+    "operation-id": "testExecutionId"
+  },
+  "parameters": {
+    "api-version": "2024-10-02-preview",
+    "identifier": "testSessionIdentifier",
+    "codeExecutionRequest": {
+      "codeInputType": "Inline",
+      "executionType": "Asynchronous",
+      "code": "print(7*9)",
+      "timeoutInSeconds": 60
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-id": "testExecutionId",
+        "Operation-Location": "operation-location-uri"
+      },
+      "body": {
+        "id": "testExecutionId",
+        "identifier": "testSessionIdentifier",
+        "executionType": "Asynchronous",
+        "status": "Succeeded",
+        "result": {
+          "stdout": "63/n",
+          "stderr": "",
+          "executionResult": "",
+          "executionTimeInMilliseconds": 4
+        }
+      }
+    }
+  }
+}

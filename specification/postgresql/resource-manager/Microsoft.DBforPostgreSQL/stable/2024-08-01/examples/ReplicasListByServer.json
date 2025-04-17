@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "serverName": "sourcepgservername",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-08-01",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "sku": {
+              "name": "Standard_D4s_v3",
+              "tier": "GeneralPurpose"
+            },
+            "properties": {
+              "fullyQualifiedDomainName": "pgtestsvc5rep.postgres.database.azure.com",
+              "version": "12",
+              "minorVersion": "6",
+              "administratorLogin": "cloudsa",
+              "state": "Ready",
+              "availabilityZone": "2",
+              "storage": {
+                "storageSizeGB": 512,
+                "autoGrow": "Disabled",
+                "tier": "P20",
+                "iops": 2300
+              },
+              "dataEncryption": {
+                "type": "SystemManaged"
+              },
+              "authConfig": {
+                "activeDirectoryAuth": "Disabled",
+                "passwordAuth": "Enabled"
+              },
+              "backup": {
+                "backupRetentionDays": 7,
+                "geoRedundantBackup": "Disabled",
+                "earliestRestoreDate": "2021-05-27T00:28:17.7279547+00:00"
+              },
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled"
+              },
+              "maintenanceWindow": {
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "replicationRole": "AsyncReplica",
+              "replicaCapacity": 0,
+              "replica": {
+                "role": "AsyncReplica",
+                "capacity": 0,
+                "replicationState": "Active"
+              }
+            },
+            "location": "westus",
+            "tags": {
+              "ElasticServer": "1"
+            },
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc5rep",
+            "name": "pgtestsvc5rep",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+          }
+        ]
+      }
+    }
+  }
+}

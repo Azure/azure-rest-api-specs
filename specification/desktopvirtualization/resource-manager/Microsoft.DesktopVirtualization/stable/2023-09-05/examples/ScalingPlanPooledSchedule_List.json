@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
+    "resourceGroupName": "resourceGroup1",
+    "scalingPlanName": "scalingPlan1",
+    "api-version": "2023-09-05",
+    "pageSize": 10,
+    "isDescending": true,
+    "initialSkip": 0
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "scalingPlanScheduleWeekdays1",
+            "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/scalingPlan1/pooledSchedules/scalingPlanScheduleWeekdays1",
+            "type": "Microsoft.DesktopVirtualization/scalingPlans/pooledSchedules",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "daysOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "rampUpStartTime": {
+                "hour": 6,
+                "minute": 0
+              },
+              "rampUpLoadBalancingAlgorithm": "DepthFirst",
+              "rampUpMinimumHostsPct": 20,
+              "rampUpCapacityThresholdPct": 80,
+              "peakStartTime": {
+                "hour": 8,
+                "minute": 0
+              },
+              "peakLoadBalancingAlgorithm": "BreadthFirst",
+              "rampDownStartTime": {
+                "hour": 18,
+                "minute": 0
+              },
+              "rampDownLoadBalancingAlgorithm": "DepthFirst",
+              "rampDownMinimumHostsPct": 20,
+              "rampDownCapacityThresholdPct": 50,
+              "rampDownForceLogoffUsers": true,
+              "rampDownWaitTimeMinutes": 30,
+              "rampDownNotificationMessage": "message",
+              "offPeakStartTime": {
+                "hour": 20,
+                "minute": 0
+              },
+              "offPeakLoadBalancingAlgorithm": "DepthFirst"
+            }
+          },
+          {
+            "name": "scalingPlanScheduleWeekends1",
+            "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/scalingPlan1/pooledSchedules/scalingPlanScheduleWeekends1",
+            "type": "Microsoft.DesktopVirtualization/scalingPlans/pooledSchedules",
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+            },
+            "properties": {
+              "daysOfWeek": [
+                "Saturday",
+                "Sunday"
+              ],
+              "rampUpStartTime": {
+                "hour": 6,
+                "minute": 0
+              },
+              "rampUpLoadBalancingAlgorithm": "DepthFirst",
+              "rampUpMinimumHostsPct": 10,
+              "rampUpCapacityThresholdPct": 90,
+              "peakStartTime": {
+                "hour": 8,
+                "minute": 0
+              },
+              "peakLoadBalancingAlgorithm": "BreadthFirst",
+              "rampDownStartTime": {
+                "hour": 18,
+                "minute": 0
+              },
+              "rampDownLoadBalancingAlgorithm": "DepthFirst",
+              "rampDownMinimumHostsPct": 0,
+              "rampDownCapacityThresholdPct": 100,
+              "rampDownForceLogoffUsers": true,
+              "rampDownWaitTimeMinutes": 30,
+              "rampDownNotificationMessage": "message",
+              "offPeakStartTime": {
+                "hour": 20,
+                "minute": 0
+              },
+              "offPeakLoadBalancingAlgorithm": "DepthFirst"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

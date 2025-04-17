@@ -26,7 +26,7 @@ These are the global settings for the Web PubSub Service API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2023-07-01
+tag: package-2024-12-01
 ```
 
 ### Suppression
@@ -40,14 +40,32 @@ directive:
 ```
 
 
+### Tag: package-2024-12-01
+
+These settings apply only when `--tag=package-2024-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-12-01'
+input-file:
+  - WebPubSub/stable/2024-12-01/webpubsub.json
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - WebPubSub/stable/2024-01-01/webpubsub.json
+```
 ### Tag: package-2023-07-01
 
 These settings apply only when `--tag=package-2023-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07-01'
+``` yaml $(tag) == 'package-2023-07-01'
 input-file:
   - WebPubSub/stable/2023-07-01/webpubsub.json
 ```
+
 ### Tag: package-2022-11-01
 
 These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
@@ -97,7 +115,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-net
 ```
 
 ## C#

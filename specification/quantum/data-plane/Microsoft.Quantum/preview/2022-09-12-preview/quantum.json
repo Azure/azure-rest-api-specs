@@ -8,7 +8,14 @@
       "email": "azqengg@microsoft.com"
     }
   },
-  "host": "quantum.azure.com",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{azureRegion}.quantum.azure.com",
+    "parameters": [
+      {
+        "$ref": "#/parameters/azureRegionParameter"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -1252,6 +1259,15 @@
     }
   },
   "parameters": {
+    "azureRegionParameter": {
+      "name": "azureRegion",
+      "description": "Supported Azure regions for Azure Quantum Services. For example, \"eastus\"",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "in": "path"
+    },
     "apiVersionParameter": {
       "name": "api-version",
       "in": "query",

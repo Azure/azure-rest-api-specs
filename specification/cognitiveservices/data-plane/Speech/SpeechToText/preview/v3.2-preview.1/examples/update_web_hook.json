@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "Endpoint": "https://westus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "id": "2e856efe-ef53-465a-a632-6a084c1d349d",
+    "webHookUpdate": {
+      "properties": {
+        "secret": "$CREDENTIAL_PLACEHOLDER$"
+      },
+      "events": {
+        "evaluationCreation": true,
+        "evaluationProcessing": true,
+        "evaluationCompletion": true,
+        "evaluationDeletion": true
+      },
+      "webUrl": "https://contoso.com/call/me/back",
+      "displayName": "TranscriptionCompletionWebHook",
+      "description": "I registered this URL to get a POST request for each completed transcription.",
+      "customProperties": {
+        "key": "value"
+      }
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "displayName": "TranscriptionCompletionWebHook",
+        "self": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d",
+        "links": {
+          "ping": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d:test",
+          "test": "https://westus.api.cognitive.microsoft.com/speechtotext/v3.2-preview1/webhooks/2e856efe-ef53-465a-a632-6a084c1d349d:ping"
+        },
+        "properties": {
+          "apiVersion": "v3.2-preview1",
+          "secret": "$CREDENTIAL_PLACEHOLDER$"
+        },
+        "webUrl": "https://contoso.com/call/me/back",
+        "events": {
+          "transcriptionCompletion": true
+        },
+        "description": "I registered this URL to get a POST request for each completed transcription.",
+        "createdDateTime": "2018-11-11T00:00:00Z",
+        "lastActionDateTime": "2018-11-28T00:00:00Z",
+        "status": "Succeeded"
+      }
+    }
+  }
+}

@@ -1,0 +1,493 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this API specification will be used to manage mobile network resources",
+    "version": "2024-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}": {
+      "delete": {
+        "tags": [
+          "MobileNetwork"
+        ],
+        "operationId": "MobileNetworks_Delete",
+        "description": "Deletes the specified mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete mobile network": {
+            "$ref": "./examples/MobileNetworkDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "MobileNetwork"
+        ],
+        "operationId": "MobileNetworks_Get",
+        "description": "Gets information about the specified mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting mobile network resource.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get mobile network": {
+            "$ref": "./examples/MobileNetworkGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MobileNetwork"
+        ],
+        "operationId": "MobileNetworks_CreateOrUpdate",
+        "description": "Creates or updates a mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            },
+            "description": "Parameters supplied to the create or update mobile network operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting mobile network resource.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting mobile network resource.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create mobile network": {
+            "$ref": "./examples/MobileNetworkCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "MobileNetwork"
+        ],
+        "operationId": "MobileNetworks_UpdateTags",
+        "description": "Updates mobile network tags and managed identity.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/IdentityAndTagsObject"
+            },
+            "description": "Parameters supplied to update mobile network tags and/or identity."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting mobile network resource.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update mobile network tags": {
+            "$ref": "./examples/MobileNetworkUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/mobileNetworks": {
+      "get": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_ListBySubscription",
+        "description": "Lists all the mobile networks in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of mobile network resources.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List mobile networks in a subscription": {
+            "$ref": "./examples/MobileNetworkListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks": {
+      "get": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_ListByResourceGroup",
+        "description": "Lists all the mobile networks in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of mobile network resources.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List mobile networks in resource group": {
+            "$ref": "./examples/MobileNetworkListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/listSimGroups": {
+      "post": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_ListSimGroups",
+        "description": "Gets all the SIM groups assigned to a mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/MobileNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of SIM group resources.",
+            "schema": {
+              "$ref": "./simGroup.json#/definitions/SimGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SIM groups in a mobile network": {
+            "$ref": "./examples/SimGroupListByMobileNetwork.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MobileNetwork": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MobileNetworkPropertiesFormat",
+          "description": "Mobile network properties."
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity used to retrieve any private keys used for SUPI concealment from Azure key vault."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Mobile network resource."
+    },
+    "MobileNetworkPropertiesFormat": {
+      "type": "object",
+      "description": "Mobile network properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the mobile network resource."
+        },
+        "publicLandMobileNetworkIdentifier": {
+          "$ref": "./ts29571.json#/definitions/PlmnId",
+          "description": "The unique public land mobile network identifier for the network. If both 'publicLandMobileNetworks' and 'publicLandMobileNetworkIdentifier' are specified, then the 'publicLandMobileNetworks' will take precedence."
+        },
+        "publicLandMobileNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/publicLandMobileNetwork"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "A list of public land mobile networks including their identifiers. If both 'publicLandMobileNetworks' and 'publicLandMobileNetworkIdentifier' are specified, then the 'publicLandMobileNetworks' will take precedence.",
+          "x-ms-identifiers": [
+            "mcc",
+            "mnc"
+          ]
+        },
+        "serviceKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The mobile network resource identifier"
+        }
+      },
+      "required": [
+        "publicLandMobileNetworkIdentifier"
+      ]
+    },
+    "publicLandMobileNetwork": {
+      "type": "object",
+      "description": "Configuration relating to a particular PLMN",
+      "properties": {
+        "homeNetworkPublicKeys": {
+          "type": "object",
+          "description": "Configuration relating to SUPI concealment.",
+          "properties": {
+            "profileA": {
+              "$ref": "#/definitions/homeNetworkPublicKeys",
+              "description": "This provides a mapping to identify which public key has been used for SUPI concealment using the Profile A Protection Scheme."
+            },
+            "profileB": {
+              "$ref": "#/definitions/homeNetworkPublicKeys",
+              "description": "This provides a mapping to identify which public key has been used for SUPI concealment using the Profile B Protection Scheme."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./ts29571.json#/definitions/PlmnId"
+        }
+      ]
+    },
+    "homeNetworkPublicKeys": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/homeNetworkPublicKey"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "homeNetworkPublicKey": {
+      "type": "object",
+      "description": "A key used for SUPI concealment.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 255,
+          "description": "The Home Network Public Key Identifier determines which public key was used to generate the SUCI sent to the AMF. See TS 23.003 Section 2.2B Section 5."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of Azure Key Vault secret containing the private key, versioned or unversioned. For example: https://contosovault.vault.azure.net/secrets/mySuciPrivateKey/562a4bb76b524a1493a6afe8e536ee78."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "MobileNetworkListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MobileNetwork"
+          },
+          "description": "A list of mobile networks in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for mobile networks API service call."
+    }
+  }
+}

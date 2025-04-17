@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "machineName": "myMachine",
+    "licenseProfileName": "default",
+    "api-version": "2023-06-20-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Machines/myMachine/licenseProfiles/default",
+        "name": "default",
+        "type": "Microsoft.HybridCompute/machines/licenseProfiles",
+        "location": "eastus2euap",
+        "tags": null,
+        "properties": {
+          "esuProfile": {
+            "assignedLicense": "{LicenseResourceId}",
+            "esuEligibility": "Eligible",
+            "serverType": "Standard",
+            "esuKeyState": "Inactive",
+            "esuKeys": [
+              {
+                "sku": "skuNumber1",
+                "licenseStatus": "licenseStatus1"
+              },
+              {
+                "sku": "skuNumber2",
+                "licenseStatus": "licenseStatus2"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

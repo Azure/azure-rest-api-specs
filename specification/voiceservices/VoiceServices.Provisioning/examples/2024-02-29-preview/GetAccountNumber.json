@@ -1,0 +1,34 @@
+{
+  "title": "Get a Number from an Account.",
+  "operationId": "Accounts_GetNumber",
+  "parameters": {
+    "api-version": "2024-02-29-preview",
+    "accountName": "contoso",
+    "telephoneNumber": "+15105850321"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "telephoneNumber": "+15105850321",
+        "accountName": "contoso",
+        "serviceDetails": {
+          "teamsOperatorConnect": {
+            "enabled": true,
+            "assignmentStatus": "assigned",
+            "configuration": {
+              "usage": "CallingUserAssignment",
+              "choosableCapabilities": [
+                "InboundCalling"
+              ]
+            }
+          }
+        },
+        "configuration": {
+          "customSipHeader": "contoso-commsgw"
+        },
+        "serviceProvisioningStatus": "synced",
+        "serviceProvisioningErrors": []
+      }
+    }
+  }
+}

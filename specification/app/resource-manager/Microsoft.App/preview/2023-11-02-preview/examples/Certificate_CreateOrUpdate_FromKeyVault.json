@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "environmentName": "testcontainerenv",
+    "certificateName": "certificate-firendly-name",
+    "api-version": "2023-11-02-preview",
+    "certificateEnvelope": {
+      "location": "East US",
+      "properties": {
+        "certificateKeyVaultProperties": {
+          "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/microsoft.managedidentity/userassignedidentities/test-user-mi",
+          "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/certificates/certName"
+        },
+        "certificateType": "ServerSSLCertificate"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificate-firendly-name",
+        "type": "Microsoft.App/ManagedEnvironments/Certificates",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "subjectName": "my-subject-name.company.country.net",
+          "subjectAlternativeNames": [
+            "CN=my-subject-name.com"
+          ],
+          "certificateKeyVaultProperties": {
+            "identity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test-rg/providers/microsoft.managedidentity/userassignedidentities/test-user-mi",
+            "keyVaultUrl": "https://xxxxxxxx.vault.azure.net/certificates/certName"
+          },
+          "issuer": "Issuer Name",
+          "issueDate": "2021-11-06T04:00:00Z",
+          "expirationDate": "2022-11-06T04:00:00Z",
+          "thumbprint": "CERTIFICATE_THUMBPRINT",
+          "valid": true,
+          "certificateType": "ServerSSLCertificate"
+        }
+      }
+    }
+  }
+}

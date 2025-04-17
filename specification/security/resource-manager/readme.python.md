@@ -36,13 +36,23 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 clear-output-folder: true
-default-api-version: "2023-01-01"
+default-api-version: "2024-08-01"
 multiapi: true
 batch:
+  - tag: package-2024-08
+  - tag: package-2024-04
+  - tag: package-2024-01
+  - tag: package-2023-11-15
+  - tag: package-preview-2023-10
+  - tag: package-preview-2023-09
+  - tag: package-2023-05
+  - tag: package-preview-2023-05
   - tag: package-preview-2023-03-only
-  - tag: package-preview-2023-02
+  - tag: package-preview-2023-02-15-only
+  - tag: package-preview-2023-02-only
   - tag: package-preview-2023-01-only
   - tag: package-2023-01
+  - tag: package-preview-2022-12
   - tag: package-preview-2022-08
   - tag: package-preview-2022-07
   - tag: package-2022-05
@@ -57,7 +67,6 @@ batch:
   - tag: package-2021-06-only
   - tag: package-2021-05-preview-only
   - tag: package-2021-01-only
-  - tag: package-2021-01-preview-only
   - tag: package-2020-07-preview-only
   - tag: package-2020-01-python-only
   - tag: package-2020-01-preview-python-only
@@ -74,6 +83,87 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/
 perform-load: false
+clear-output-folder: false
+```
+
+### Tag: package-2024-08 and python
+
+These settings apply only when `--tag=package-2024-08 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-08' && $(python)
+namespace: azure.mgmt.security.v2024_08_01
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2024_08_01
+```
+
+### Tag: package-2024-04 and python
+
+These settings apply only when `--tag=package-2024-04 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-04' && $(python)
+namespace: azure.mgmt.security.v2024_04_01
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2024_04_01
+```
+
+### Tag: package-2024-01 and python
+
+These settings apply only when `--tag=package-2024-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-01' && $(python)
+namespace: azure.mgmt.security.v2024_01_01
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2024_01_01
+```
+
+### Tag: package-2023-11-15 and python
+
+These settings apply only when `--tag=package-2023-11-15 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-11-15' && $(python)
+namespace: azure.mgmt.security.v2023_11_15
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_11_15
+```
+
+### Tag: package-preview-2023-10 and python
+
+These settings apply only when `--tag=package-preview-2023-10 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-10' && $(python)
+namespace: azure.mgmt.security.v2023_10_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_10_01_preview
+```
+
+### Tag: package-preview-2023-09 and python
+
+These settings apply only when `--tag=package-preview-2023-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-09' && $(python)
+namespace: azure.mgmt.security.v2023_09_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_09_01_preview
+```
+
+### Tag: package-2023-05 and python
+
+These settings apply only when `--tag=package-2023-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2023-05' && $(python)
+namespace: azure.mgmt.security.v2023_05_01
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_05_01
+```
+
+### Tag: package-preview-2023-05 and python
+
+These settings apply only when `--tag=package-preview-2023-05 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-05' && $(python)
+namespace: azure.mgmt.security.v2023_05_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_05_01_preview
 ```
 
 ### Tag: package-preview-2023-03-only and python
@@ -86,12 +176,22 @@ namespace: azure.mgmt.security.v2023_03_01_preview
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_03_01_preview
 ```
 
-### Tag: package-preview-2023-02 and python
+### Tag: package-preview-2023-02-15-only and python
 
-These settings apply only when `--tag=package-preview-2023-02 --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-02-15-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-preview-2023-02' && $(python)
+``` yaml $(tag) == 'package-preview-2023-02-15-only' && $(python)
+namespace: azure.mgmt.security.v2023_02_15_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_02_15_preview
+```
+
+### Tag: package-preview-2023-02-only and python
+
+These settings apply only when `--tag=package-preview-2023-02-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2023-02-only' && $(python)
 namespace: azure.mgmt.security.v2023_02_01_preview
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_02_01_preview
 ```
@@ -104,6 +204,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-preview-2023-01-only' && $(python)
 namespace: azure.mgmt.security.v2023_01_01_preview
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2023_01_01_preview
+```
+
+### Tag: package-preview-2022-12 and python
+
+These settings apply only when `--tag=package-preview-2022-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-12' && $(python)
+namespace: azure.mgmt.security.v2022_12_01_preview
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2022_12_01_preview
 ```
 
 ### Tag: package-preview-2022-08 and python
@@ -254,16 +364,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2021-01-only' && $(python)
 namespace: azure.mgmt.security.v2021_01_01
 output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2021_01_01
-```
-
-### Tag: package-2021-01-preview-only and python
-
-These settings apply only when `--tag=package-2021-01-preview-only --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2021-01-preview-only' && $(python)
-namespace: azure.mgmt.security.v2021_01_15_preview
-output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security/v2021_01_15_preview
 ```
 
 ### Tag: package-2020-07-preview-only and python

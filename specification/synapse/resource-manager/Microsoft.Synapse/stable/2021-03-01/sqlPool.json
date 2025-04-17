@@ -459,63 +459,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/move": {
-      "post": {
-        "operationId": "SqlPools_Rename",
-        "summary": "Rename a SQL pool",
-        "description": "Rename a SQL pool.",
-        "tags": [
-          "SqlPools"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "type": "string",
-            "in": "path",
-            "name": "sqlPoolName",
-            "description": "SQL pool name",
-            "required": true
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The resource move definition for renaming this Sql pool.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceMoveDefinition"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully renamed the Sql pool"
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 DatabaseNameInUse - Database already exists. Choose a different database name.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 409 InvalidOperationForDatabaseInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship."
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Rename a SQL Analytics pool": {
-            "$ref": "./examples/RenameSqlPool.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/metadataSync/config": {
       "get": {
         "operationId": "SqlPoolMetadataSyncConfigs_Get",
@@ -7006,19 +6949,6 @@
           "$ref": "#/definitions/SqlPoolVulnerabilityAssessmentScanExportProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ResourceMoveDefinition": {
-      "description": "Contains the information necessary to perform a resource move (rename).",
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The target ID for the resource",
-          "type": "string"
         }
       }
     },

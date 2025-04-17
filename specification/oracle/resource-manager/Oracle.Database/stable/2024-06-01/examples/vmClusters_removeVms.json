@@ -1,0 +1,102 @@
+{
+  "operationId": "CloudVmClusters_removeVms",
+  "title": "CloudVmClusters_removeVms",
+  "parameters": {
+    "api-version": "2024-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg000",
+    "cloudvmclustername": "cluster1",
+    "body": {
+      "dbServers": [
+        "ocid1..aaaa"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/cloudVmClusters/cluster1",
+        "type": "Oracle.Database/cloudVmClusters",
+        "location": "eastus",
+        "tags": {
+          "tagK1": "tagV1"
+        },
+        "properties": {
+          "ocid": "ocid1..aaaa",
+          "listenerPort": 1050,
+          "nodeCount": 100,
+          "storageSizeInGbs": 1000,
+          "dataStorageSizeInTbs": 10,
+          "dbNodeStorageSizeInGbs": 100,
+          "memorySizeInGbs": 1000,
+          "timeCreated": "2023-10-22T02:18:35.683Z",
+          "lifecycleDetails": "success",
+          "timeZone": "UTC",
+          "zoneId": "ocid1..aaaa",
+          "hostname": "hostname1",
+          "domain": "domain1",
+          "cpuCoreCount": 10,
+          "ocpuCount": 100,
+          "clusterName": "cluster1",
+          "dataStoragePercentage": 80,
+          "isLocalBackupEnabled": false,
+          "cloudExadataInfrastructureId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/cloudExadataInfrastructures/infra1",
+          "isSparseDiskgroupEnabled": false,
+          "sshPublicKeys": [
+            "ssh-key 1"
+          ],
+          "licenseModel": "LicenseIncluded",
+          "scanListenerPortTcp": 1050,
+          "scanListenerPortTcpSsl": 1025,
+          "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1",
+          "giVersion": "19.0.0.0",
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "backupSubnetCidr": "172.17.5.0/24",
+          "systemVersion": "v1",
+          "diskRedundancy": "High",
+          "scanIpIds": [
+            "10.0.0.1"
+          ],
+          "vipIds": [
+            "10.0.1.3"
+          ],
+          "scanDnsName": "dbdns1",
+          "scanDnsRecordId": "scandns1",
+          "shape": "EXADATA.X9M",
+          "provisioningState": "Succeeded",
+          "ociUrl": "https://fake",
+          "dataCollectionOptions": {
+            "isDiagnosticsEventsEnabled": false,
+            "isHealthMonitoringEnabled": false,
+            "isIncidentLogsEnabled": false
+          },
+          "displayName": "cluster 1",
+          "iormConfigCache": {
+            "dbPlans": [
+              {
+                "dbName": "db1",
+                "flashCacheLimit": "none",
+                "share": 32
+              }
+            ],
+            "lifecycleDetails": "Disabled",
+            "lifecycleState": "Disabled",
+            "objective": "LowLatency"
+          },
+          "lastUpdateHistoryEntryId": "none",
+          "dbServers": [
+            "ocid1..aaaa"
+          ],
+          "compartmentId": "ocid1..aaaaaa",
+          "subnetOcid": "ocid1..aaaaaa"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 10000000,
+        "Location": "eastus"
+      }
+    }
+  }
+}

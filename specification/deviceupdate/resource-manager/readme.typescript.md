@@ -9,4 +9,10 @@ typescript:
   package-name: "@azure/arm-deviceupdate"
   output-folder: "$(typescript-sdks-folder)/sdk/deviceupdate/arm-deviceupdate"
   generate-metadata: true
+
+directive:
+- from: deviceupdate.json
+  where: $.definitions.Account
+  transform: >
+    $.properties.properties.properties.sku["x-ms-enum"].name = "Sku"
 ```

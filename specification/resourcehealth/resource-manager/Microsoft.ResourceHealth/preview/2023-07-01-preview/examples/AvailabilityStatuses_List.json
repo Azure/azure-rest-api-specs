@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "resourceUri": "resourceUri",
+    "api-version": "2023-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines/rhctes tenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/current",
+            "name": "current",
+            "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+            "location": "eastus",
+            "properties": {
+              "availabilityState": "Unavailable",
+              "title": "Unavailable",
+              "summary": "We're sorry, we couldn't automatically recover your virtual machine",
+              "reasonType": "Unplanned",
+              "context": "Platform Initiated",
+              "category": "Unplanned",
+              "reasonChronicity": "Persistent",
+              "detailedStatus": "Disk problems are preventing us from automatically recovering your virtual machine",
+              "occuredTime": "2016-03-29T09:12:00Z",
+              "reportedTime": "2016-05-04T14:11:29.7598931Z",
+              "rootCauseAttributionTime": "2016-03-29T09:13:00Z",
+              "resolutionETA": "2016-03-29T09:37:00Z",
+              "serviceImpactingEvents": [
+                {
+                  "eventStartTime": "2016-05-02T19:23:13.7115125Z",
+                  "eventStatusLastModifiedTime": "2016-05-02T19:27:04.9543491Z",
+                  "correlationId": "b56d0180-2d6c-4f7b-b750-c1eca681874c",
+                  "status": {
+                    "value": "Resolved"
+                  },
+                  "incidentProperties": {
+                    "title": "Virtual Machines - West Europe [West Europe]",
+                    "service": "Virtual Machines",
+                    "region": "East US",
+                    "incidentType": "outage"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines/rhctes tenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/2016-03-28+16%3a23%3a00Z",
+            "name": "2016-03-28+16%3a23%3a00Z",
+            "type": "Microsoft.ResourceHealth/AvailabilityStatuses",
+            "location": "eastus",
+            "properties": {
+              "availabilityState": "Available",
+              "summary": "This virtual machine is running normally",
+              "reasonChronicity": "Persistent",
+              "detailedStatus": "There aren’t any known Azure platform problems affecting this virtual machine",
+              "occuredTime": "2016-03-28T16:23:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

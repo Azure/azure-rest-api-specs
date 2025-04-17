@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "location": "eastus",
+    "api-version": "2024-03-01-preview",
+    "spotPlacementRecommenderInput": {
+      "desiredLocations": [
+        "eastus",
+        "eastus2"
+      ],
+      "desiredSizes": [
+        {
+          "sku": "Standard_D2_v2"
+        }
+      ],
+      "desiredCount": 1,
+      "availabilityZones": true
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "desiredLocations": [
+          "eastus",
+          "eastus2"
+        ],
+        "desiredSizes": [
+          {
+            "sku": "Standard_D2_v2"
+          }
+        ],
+        "desiredCount": 1,
+        "availabilityZones": true,
+        "placementScores": [
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus",
+            "availabilityZone": "1",
+            "score": "High",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus",
+            "availabilityZone": "2",
+            "score": "High",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus",
+            "availabilityZone": "3",
+            "score": "High",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus2",
+            "availabilityZone": "1",
+            "score": "DataNotFoundOrStale",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus2",
+            "availabilityZone": "2",
+            "score": "High",
+            "isQuotaAvailable": true
+          },
+          {
+            "sku": "Standard_D2_v2",
+            "region": "eastus2",
+            "availabilityZone": "3",
+            "score": "High",
+            "isQuotaAvailable": true
+          }
+        ]
+      },
+      "headers": {
+        "x-ms-request-id": "57b891ab-1fb7-4f5a-b002-71eb6854961f",
+        "location": "https://management.azure.com/subscriptions/be23ca13-8eb4-4d0e-be10-b00451817956/providers/Microsoft.Compute/locations/eastus/diagnostics/spotplacementrecommender/generate?api-version=2024-02-01-preview"
+      }
+    }
+  }
+}

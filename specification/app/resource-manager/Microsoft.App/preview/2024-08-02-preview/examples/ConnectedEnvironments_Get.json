@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "connectedEnvironmentName": "examplekenv",
+    "api-version": "2024-08-02-preview",
+    "kind": "kubernetes",
+    "location": "East US",
+    "extendedLocation": {
+      "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+      "type": "CustomLocation"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/examplekenv",
+        "name": "examplekenv",
+        "type": "Microsoft.App/connectedEnvironments",
+        "location": "North Central US",
+        "extendedLocation": {
+          "name": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
+          "type": "CustomLocation"
+        },
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentErrors": null,
+          "defaultDomain": "examplekenv.k4apps.io",
+          "staticIp": "20.42.33.145",
+          "customDomainConfiguration": {
+            "customDomainVerificationId": "custom domain verification id",
+            "dnsSuffix": "www.my-name.com",
+            "subjectName": "CN=www.my-name.com",
+            "expirationDate": "2022-11-06T04:00:00Z",
+            "thumbprint": "CERTIFICATE_THUMBPRINT"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01",
+    "billingAccountName": "10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "expand": "Participants"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/agreements/ABC123",
+            "name": "ABC123",
+            "properties": {
+              "acceptanceMode": "ClickToAccept",
+              "agreementLink": "https://contoso.com",
+              "displayName": "Microsoft Customer Agreement",
+              "effectiveDate": "2018-11-01T00:00:00Z",
+              "expirationDate": "2019-11-01T00:00:00Z",
+              "participants": [
+                {
+                  "email": "abc@contoso.com",
+                  "status": "Accepted",
+                  "statusDate": "2018-11-01T00:00:00Z"
+                },
+                {
+                  "email": "xtz@contoso.com",
+                  "status": "Declined",
+                  "statusDate": "2018-11-02T00:00:00Z"
+                }
+              ],
+              "status": "Active",
+              "leadBillingAccountName": "20000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31"
+            },
+            "type": "Microsoft.Billing/billingAccounts/agreements"
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/agreements/DEF456",
+            "name": "DEF456",
+            "properties": {
+              "acceptanceMode": "ESignEmbedded",
+              "agreementLink": "https://contoso.com",
+              "displayName": "Microsoft Customer Agreement",
+              "effectiveDate": "2018-12-05T00:00:00Z",
+              "expirationDate": "2019-12-05T00:00:00Z",
+              "participants": [
+                {
+                  "email": "abc@contoso.com",
+                  "status": "Pending",
+                  "statusDate": "2018-12-05T00:00:00Z"
+                }
+              ],
+              "status": "PendingSignature",
+              "leadBillingAccountName": "20000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31"
+            },
+            "type": "Microsoft.Billing/billingAccounts/agreements"
+          }
+        ]
+      }
+    }
+  }
+}

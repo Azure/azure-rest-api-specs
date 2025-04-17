@@ -1,0 +1,398 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "containerAppName": "testcontainerapp0",
+    "api-version": "2024-03-01",
+    "containerAppEnvelope": {
+      "location": "East US",
+      "properties": {
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+        "workloadProfileName": "My-GP-01",
+        "configuration": {
+          "ingress": {
+            "external": true,
+            "targetPort": 3000,
+            "customDomains": [
+              {
+                "name": "www.my-name.com",
+                "bindingType": "SniEnabled",
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+              },
+              {
+                "name": "www.my-other-name.com",
+                "bindingType": "SniEnabled",
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+              }
+            ],
+            "traffic": [
+              {
+                "weight": 100,
+                "revisionName": "testcontainerapp0-ab1234",
+                "label": "production"
+              }
+            ],
+            "ipSecurityRestrictions": [
+              {
+                "name": "Allow work IP A subnet",
+                "description": "Allowing all IP's within the subnet below to access containerapp",
+                "ipAddressRange": "192.168.1.1/32",
+                "action": "Allow"
+              },
+              {
+                "name": "Allow work IP B subnet",
+                "description": "Allowing all IP's within the subnet below to access containerapp",
+                "ipAddressRange": "192.168.1.1/8",
+                "action": "Allow"
+              }
+            ],
+            "stickySessions": {
+              "affinity": "sticky"
+            },
+            "clientCertificateMode": "accept",
+            "corsPolicy": {
+              "allowedOrigins": [
+                "https://a.test.com",
+                "https://b.test.com"
+              ],
+              "allowedMethods": [
+                "GET",
+                "POST"
+              ],
+              "allowedHeaders": [
+                "HEADER1",
+                "HEADER2"
+              ],
+              "exposeHeaders": [
+                "HEADER3",
+                "HEADER4"
+              ],
+              "maxAge": 1234,
+              "allowCredentials": true
+            },
+            "additionalPortMappings": [
+              {
+                "external": true,
+                "targetPort": 1234
+              },
+              {
+                "external": false,
+                "targetPort": 2345,
+                "exposedPort": 3456
+              }
+            ]
+          },
+          "dapr": {
+            "enabled": true,
+            "appPort": 3000,
+            "appProtocol": "http",
+            "httpReadBufferSize": 30,
+            "httpMaxRequestSize": 10,
+            "logLevel": "debug",
+            "enableApiLogging": true
+          },
+          "maxInactiveRevisions": 10,
+          "service": {
+            "type": "redis"
+          }
+        },
+        "template": {
+          "containers": [
+            {
+              "image": "repo/testcontainerapp0:v1",
+              "name": "testcontainerapp0",
+              "probes": [
+                {
+                  "type": "Liveness",
+                  "httpGet": {
+                    "path": "/health",
+                    "port": 8080,
+                    "httpHeaders": [
+                      {
+                        "name": "Custom-Header",
+                        "value": "Awesome"
+                      }
+                    ]
+                  },
+                  "initialDelaySeconds": 3,
+                  "periodSeconds": 3
+                }
+              ]
+            }
+          ],
+          "initContainers": [
+            {
+              "image": "repo/testcontainerapp0:v4",
+              "name": "testinitcontainerApp0",
+              "resources": {
+                "cpu": 0.5,
+                "memory": "1Gi"
+              },
+              "command": [
+                "/bin/sh"
+              ],
+              "args": [
+                "-c",
+                "while true; do echo hello; sleep 10;done"
+              ]
+            }
+          ],
+          "scale": {
+            "minReplicas": 1,
+            "maxReplicas": 5,
+            "rules": [
+              {
+                "name": "httpscalingrule",
+                "custom": {
+                  "type": "http",
+                  "metadata": {
+                    "concurrentRequests": "50"
+                  }
+                }
+              }
+            ]
+          },
+          "serviceBinds": [
+            {
+              "serviceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/redisService",
+              "name": "redisService"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerapp0",
+        "name": "testcontainerapp0",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "workloadProfileName": "My-GP-01",
+          "latestRevisionFqdn": "testcontainerapp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestReadyRevisionName": "testcontainerapp0-pjxhsye",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerapp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "transport": "auto",
+              "customDomains": [
+                {
+                  "name": "www.my-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+                },
+                {
+                  "name": "www.my-other-name.com",
+                  "bindingType": "SniEnabled",
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+                }
+              ],
+              "traffic": [
+                {
+                  "weight": 80,
+                  "revisionName": "testcontainerapp0-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerapp0-ab4321",
+                  "label": "staging"
+                }
+              ],
+              "ipSecurityRestrictions": [
+                {
+                  "name": "Allow work IP A subnet",
+                  "description": "Allowing all IP's within the subnet below to access containerapp",
+                  "ipAddressRange": "192.168.1.1/32",
+                  "action": "Allow"
+                },
+                {
+                  "name": "Allow work IP B subnet",
+                  "description": "Allowing all IP's within the subnet below to access containerapp",
+                  "ipAddressRange": "192.168.1.1/8",
+                  "action": "Allow"
+                }
+              ],
+              "stickySessions": {
+                "affinity": "sticky"
+              }
+            },
+            "dapr": {
+              "enabled": true,
+              "appPort": 3000,
+              "appProtocol": "http",
+              "httpReadBufferSize": 30
+            }
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerapp0:v4",
+                "name": "testcontainerapp0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "httpGet": {
+                      "path": "/health",
+                      "port": 8080,
+                      "httpHeaders": [
+                        {
+                          "name": "Custom-Header",
+                          "value": "Awesome"
+                        }
+                      ]
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ]
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerapp0:v4",
+                "name": "testinitcontainerApp0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "eventStreamEndpoint": "testEndpoint"
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerapp0",
+        "name": "testcontainerapp0",
+        "type": "Microsoft.App/containerApps",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "InProgress",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "latestRevisionFqdn": "testcontainerapp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "configuration": {
+            "ingress": {
+              "fqdn": "testcontainerapp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "external": true,
+              "targetPort": 3000,
+              "transport": "auto",
+              "traffic": [
+                {
+                  "weight": 80,
+                  "revisionName": "testcontainerapp0-ab1234"
+                },
+                {
+                  "weight": 20,
+                  "revisionName": "testcontainerapp0-ab4321",
+                  "label": "staging"
+                }
+              ]
+            },
+            "dapr": {
+              "enabled": true,
+              "appPort": 3000,
+              "appProtocol": "http",
+              "httpReadBufferSize": 30
+            }
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerapp0:v4",
+                "name": "testcontainerapp0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "httpGet": {
+                      "path": "/health",
+                      "port": 8080,
+                      "httpHeaders": [
+                        {
+                          "name": "Custom-Header",
+                          "value": "Awesome"
+                        }
+                      ]
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ]
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerapp0:v4",
+                "name": "testinitcontainerApp0",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ],
+            "scale": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "eventStreamEndpoint": "testEndpoint"
+        }
+      }
+    }
+  }
+}

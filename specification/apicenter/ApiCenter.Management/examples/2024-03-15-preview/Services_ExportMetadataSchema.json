@@ -1,0 +1,27 @@
+{
+  "operationId": "Services_ExportMetadataSchema",
+  "title": "Services_ExportMetadataSchema",
+  "parameters": {
+    "resourceGroupName": "contoso-resources",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "serviceName": "contoso",
+    "assignedTo": "api",
+    "api-version": "2024-03-15-preview",
+    "payload": {
+      "assignedTo": "api"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "format": "json-schema",
+        "value": "{\"type\":\"object\",\"properties\":{ ... }}"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://..."
+      }
+    }
+  }
+}

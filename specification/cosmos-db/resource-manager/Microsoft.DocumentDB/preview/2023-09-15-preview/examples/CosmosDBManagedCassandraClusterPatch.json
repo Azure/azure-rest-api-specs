@@ -1,0 +1,166 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "cassandra-prod-rg",
+    "api-version": "2023-09-15-preview",
+    "clusterName": "cassandra-prod",
+    "body": {
+      "tags": {
+        "owner": "mike"
+      },
+      "properties": {
+        "externalSeedNodes": [
+          {
+            "ipAddress": "10.52.221.2"
+          },
+          {
+            "ipAddress": "10.52.221.3"
+          },
+          {
+            "ipAddress": "10.52.221.4"
+          }
+        ],
+        "externalGossipCertificates": [
+          {
+            "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+          }
+        ],
+        "hoursBetweenBackups": 12,
+        "authenticationMethod": "None"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DocumentDB/locations/westus/operationsStatus/318653d0-3da5-4814-b8f6-429f2af0b2a4?api-version=2023-09-15-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod",
+        "name": "cassandra-prod",
+        "type": "Microsoft.DocumentDB/cassandraClusters",
+        "location": "West US",
+        "tags": {
+          "owner": "mike"
+        },
+        "properties": {
+          "provisioningState": "Updating",
+          "delegatedManagementSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management",
+          "cassandraVersion": "3.11",
+          "hoursBetweenBackups": 24,
+          "authenticationMethod": "Cassandra",
+          "externalSeedNodes": [
+            {
+              "ipAddress": "10.52.221.2"
+            },
+            {
+              "ipAddress": "10.52.221.3"
+            },
+            {
+              "ipAddress": "10.52.221.4"
+            }
+          ],
+          "clusterNameOverride": "ClusterNameIllegalForAzureResource",
+          "seedNodes": [
+            {
+              "ipAddress": "10.52.221.2"
+            },
+            {
+              "ipAddress": "10.52.221.3"
+            },
+            {
+              "ipAddress": "10.52.221.4"
+            },
+            {
+              "ipAddress": "192.168.12.2"
+            },
+            {
+              "ipAddress": "192.168.12.3"
+            },
+            {
+              "ipAddress": "192.168.12.4"
+            }
+          ],
+          "clientCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "externalGossipCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "gossipCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cassandra-prod-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-prod",
+        "name": "cassandra-prod",
+        "type": "Microsoft.DocumentDB/cassandraClusters",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "delegatedManagementSubnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/customer-vnet-rg/providers/Microsoft.Network/virtualNetworks/customer-vnet/subnets/management",
+          "cassandraVersion": "3.11",
+          "hoursBetweenBackups": 24,
+          "authenticationMethod": "Cassandra",
+          "externalSeedNodes": [
+            {
+              "ipAddress": "10.52.221.2"
+            },
+            {
+              "ipAddress": "10.52.221.3"
+            },
+            {
+              "ipAddress": "10.52.221.4"
+            }
+          ],
+          "clusterNameOverride": "ClusterNameIllegalForAzureResource",
+          "seedNodes": [
+            {
+              "ipAddress": "10.52.221.2"
+            },
+            {
+              "ipAddress": "10.52.221.3"
+            },
+            {
+              "ipAddress": "10.52.221.4"
+            },
+            {
+              "ipAddress": "192.168.12.2"
+            },
+            {
+              "ipAddress": "192.168.12.3"
+            },
+            {
+              "ipAddress": "192.168.12.4"
+            }
+          ],
+          "clientCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "externalGossipCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ],
+          "gossipCertificates": [
+            {
+              "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

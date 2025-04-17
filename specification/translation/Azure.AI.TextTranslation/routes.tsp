@@ -24,12 +24,12 @@ op CustomOperation<
 
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing spec"
   @doc("Defines the content of the request")
-  @body
-  requestBody: TBody,
+  @bodyRoot
+  body: TBody,
 
   @doc("Mandatory API version parameter")
   @query("api-version")
-  apiVersion: string
+  apiVersion: string,
 ): TResponse | TError;
 
 @doc("Defines Text Translation custom Operations which doesn't have any content in the request")
@@ -38,7 +38,7 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 
   @doc("Mandatory API version parameter")
   @query("api-version")
-  apiVersion: string
+  apiVersion: string,
 ): TResponse | TError;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
@@ -46,9 +46,9 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 @route("languages")
 @summary("Gets the set of languages currently supported by other operations of the Translator.")
 @doc("Gets the set of languages currently supported by other operations of the Translator.")
-op getLanguages is CustomGetOperation<
-  GetLanguageParameters,
-  GetLanguagesResult,
+op getSupportedLanguages is CustomGetOperation<
+  GetSupportedLanguagesParameters,
+  GetSupportedLanguagesResult,
   {},
   ErrorResponse
 >;

@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testrg",
+    "targetDbServerName": "testtarget",
+    "migrationName": "testmigration",
+    "migrationMode": "Online",
+    "parameters": {
+      "properties": {
+        "cancel": "True"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "currentStatus": {
+            "state": "Canceled",
+            "currentSubStateDetails": {
+              "currentSubState": "Completed"
+            }
+          },
+          "migrationMode": "Online",
+          "migrationWindowEndTimeInUtc": "2023-05-15T07:23:56.3260822Z",
+          "sourceDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/servers/testsource",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget",
+          "dbsToMigrate": [
+            "postgres"
+          ],
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "overwriteDbsInTarget": "True",
+          "migrationWindowStartTimeInUtc": "2023-05-15T07:22:57.7001251Z",
+          "migrateRoles": "False",
+          "sourceDbServerMetadata": {
+            "location": "eastasia",
+            "sku": {
+              "name": "B_Gen5_2",
+              "tier": "Basic"
+            }
+          },
+          "targetDbServerMetadata": {
+            "location": "East Asia",
+            "sku": {
+              "name": "Standard_D2ds_v4",
+              "tier": "Standard_D2ds_v4"
+            }
+          }
+        },
+        "location": "westus",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBForPostgreSql/flexibleServers/testtarget/migrations/testmigration",
+        "name": "testmigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations"
+      }
+    }
+  }
+}
