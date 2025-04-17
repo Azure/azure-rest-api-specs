@@ -1,15 +1,16 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { setStatusImpl } from "../src/avocado-status.js";
 
 import { CheckConclusion } from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
-const core = createMockCore();
-const github = createMockGithub();
-
 describe("setStatusImpl", () => {
-  afterEach(() => {
-    vi.clearAllMocks();
+  let core;
+  let github;
+
+  beforeEach(() => {
+    core = createMockCore();
+    github = createMockGithub();
   });
 
   it("throws if inputs null", async () => {
