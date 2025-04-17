@@ -1,7 +1,11 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { setStatusImpl } from "../src/avocado-status.js";
 
-import { CheckConclusion } from "../src/github.js";
+import {
+  CheckConclusion,
+  CheckStatus,
+  CommitStatusState,
+} from "../src/github.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 
 describe("setStatusImpl", () => {
@@ -38,21 +42,21 @@ describe("setStatusImpl", () => {
       owner: "test-owner",
       repo: "test-repo",
       sha: "test-head-sha",
-      state: "success",
+      state: CommitStatusState.SUCCESS,
       context: "[TEST IGNORE] Swagger Avocado",
       description: "Found label 'Approved-Avocado'",
       target_url: "https://test.com/target_url",
     });
   });
 
-  it.each(["success", "failure"])(
+  it.each([CheckConclusion.SUCCESS, CheckConclusion.FAILURE])(
     "sets state to code run conclusion: %s",
     async (state) => {
       github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
         data: [
           {
             name: "[TEST-IGNORE] Swagger Avocado - Analyze Code",
-            status: "completed",
+            status: CheckStatus.COMPLETED,
             conclusion: state,
             updated_at: "2025-01-01",
             html_url: "https://test.com/workflow_run_html_url",
