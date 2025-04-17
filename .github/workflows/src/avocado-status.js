@@ -5,12 +5,14 @@ import { PER_PAGE_MAX } from "./github.js";
 
 const statusName = "[TEST IGNORE] Swagger Avocado";
 
+// TODO: Add tests
+/* v8 ignore start */
 /**
  * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<void>}
  */
-export default async function getStatus({ github, context, core }) {
-  core.info("avocado-status.js:getStatus()");
+export default async function setStatus({ github, context, core }) {
+  core.info("avocado-status.js:setStatus()");
 
   const { owner, repo, head_sha, issue_number } = await extractInputs(
     github,
@@ -22,6 +24,40 @@ export default async function getStatus({ github, context, core }) {
   let target_url =
     `https://github.com/${context.repo.owner}/${context.repo.repo}` +
     `/actions/runs/${context.runId}`;
+
+  return await setStatusImpl({
+    owner,
+    repo,
+    head_sha,
+    issue_number,
+    target_url,
+    github,
+    core,
+  });
+}
+/* v8 ignore stop */
+
+/**
+ * @param {Object} params
+ * @param {string} params.owner
+ * @param {string} params.repo
+ * @param {string} params.head_sha
+ * @param {number} params.issue_number
+ * @param {string} params.target_url
+ * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
+ * @param {typeof import("@actions/core")} params.core
+ * @returns {Promise<void>}
+ */
+export async function setStatusImpl({
+  owner,
+  repo,
+  head_sha,
+  issue_number,
+  target_url,
+  github,
+  core,
+}) {
+  core.info("getStatusImpl()");
 
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {

@@ -33,6 +33,7 @@ export function createMockGithub() {
         get: vi.fn(),
       },
       repos: {
+        createCommitStatus: vi.fn(),
         listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
           data: [],
         }),
