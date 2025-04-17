@@ -75,9 +75,13 @@ interface EvaluationResults
   @get
   getAgentEvaluationResults is Azure.Core.Foundations.Operation<
     {
-      @doc("Agent run completion id.")
+      @doc("Agent run id.")
       @path
-      completionId: string;
+      runId: string;
+
+      @doc("Agent thread id.")
+      @query
+      threadId?: string;
     },
     Array<AgentEvaluationResult>
   >;

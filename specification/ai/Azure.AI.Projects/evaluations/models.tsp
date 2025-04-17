@@ -397,6 +397,23 @@ model AgentToolDefinition {
   description: string;
 }
 
+@doc("Definition for sampling strategy.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model SamplingConfiguration {
+  @doc("Name of the sampling strategy.")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Percentage of sampling per hour.")
+  @visibility(Lifecycle.Read)
+  samplingPercent: float;
+
+  @doc("Maximum request rate per hour.")
+  @visibility(Lifecycle.Read)
+  maxRequestRate: float;
+}
+
 @doc("Evaluation definition for agent run.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
@@ -416,6 +433,10 @@ model AgentEvaluation {
   @doc("Evaluators to be used for the evaluation.")
   @visibility(Lifecycle.Read)
   evaluators: Record<EvaluatorConfiguration>;
+
+  @doc("Sampling configuration for the evaluation.")
+  @visibility(Lifecycle.Read)
+  samplingConfiguration?: SamplingConfiguration;
 
   @doc("Conversation history passed to the agent, including all previous messages in the chat, including all agents' tool calls and tool results, and with the system message. The actual query that an evaluation will trigger for is the last message in the conversation.")
   @visibility(Lifecycle.Read)
