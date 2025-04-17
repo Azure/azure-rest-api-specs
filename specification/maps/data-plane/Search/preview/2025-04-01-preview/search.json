@@ -613,8 +613,8 @@
     "/geocode:autocomplete": {
       "get": {
         "summary": "Use to get ranked list of suggested entities based on a user's location and a partial query.",
-        "description": "**Autocomplete API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nGiven a request with a user’s location and a partial query (called a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities which the user is most likely searching for. These entities are ranked from most to least likely. Requests can be called using user locations.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional details.\n\n",
-        "operationId": "Search_GetAutocomplete",
+        "description": "**Autocomplete API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nGiven a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely. Requests can be called using user locations.\n\n",
+        "operationId": "Search_GetGeocodeAutocomplete",
         "produces": [
           "application/geo+json"
         ],
@@ -622,11 +622,17 @@
           "Autocomplete API call to search for '1 Microsoft Way, Redmond'": {
             "$ref": "./examples/AutocompleteDefault.json"
           },
-          "Autocomplete API call to search for 'Muir Woods', filtered by address type": {
+          "Autocomplete API call to search for 'Muir Woods', filtered by address typeGroup": {
             "$ref": "./examples/AutocompleteAddress.json"
           },
-          "Autocomplete API call to search for 'Muir Woods', filtered by place type": {
+          "Autocomplete API call to search for 'Muir Woods', filtered by place typeGroup": {
             "$ref": "./examples/AutocompletePlace.json"
+          },
+          "Autocomplete API call to search for 'Muir Woods', filtered by park types": {
+            "$ref": "./examples/AutocompleteParkResultType.json"
+          },
+          "Autocomplete API call to search for 'Muir Woods', filtered by park and populated place type, place typeGroup": {
+            "$ref": "./examples/AutocompleteParkAndPopulatedPlaceResultType.json"
           }
         },
         "parameters": [
@@ -647,19 +653,7 @@
             "type": "string"
           },
           {
-            "name": "coordinates",
-            "in": "query",
-            "description": "Required if neither `coordinates` nor `bbox` are provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat\n\n**Note:** `coordinates` becomes a secondary signal if `bbox` is provided.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            },
-            "minItems": 2,
-            "maxItems": 2,
-            "collectionFormat": "csv",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/Coordinates"
           },
           {
             "$ref": "#/parameters/Bbox"
@@ -670,7 +664,7 @@
           {
             "name": "resultTypeGroups",
             "in": "query",
-            "description": "A comma separated list of returned entity types. The possible values are \n\n- Address\n- Place\n\nThese types are mutually inclusive. Place represents points of interest, like natural landmarks.",
+            "description": "A comma separated list of returned entity type groups. The possible values are \n\n- Address\n- Place\n\nPlace represents points of interest, like natural landmarks.",
             "type": "array",
             "items": {
               "type": "string",
@@ -695,9 +689,9 @@
             }
           },
           {
-            "name": "ResultTypes",
+            "name": "resultTypes",
             "in": "query",
-            "description": "Specify entity types that you want in the response. Only the types you specify will be returned.\nDefault value is all possible entities.\nA comma separated list of entity types selected from [AutocompleteResultTypeEnum](#autocompleteresulttypeenum).",
+            "description": "A comma separated list of returned entity types. Possible values are defined in [AutocompleteResultTypeEnum](#autocompleteresulttypeenum).\nDefault value is all possible entities.\n",
             "required": false,
             "type": "array",
             "items": {
@@ -710,7 +704,7 @@
           {
             "name": "countryRegion",
             "in": "query",
-            "description": "Used to constrain entity suggestions to a single country denoted by a 2-letter country code abbreviation.\n\nExample: `DE`.\n",
+            "description": "Signal for the autocomplete result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR./\n\n",
             "required": false,
             "type": "string",
             "default": "none"
