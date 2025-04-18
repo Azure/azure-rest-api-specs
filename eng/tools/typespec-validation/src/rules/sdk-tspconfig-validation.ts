@@ -221,12 +221,12 @@ export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOption
   }
 }
 
-export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
-      "packageDetails.name",
+      "@azure-tools/typespec-ts",
       "package-details.name",
-      new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/),
+      new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
     );
   }
   protected skip(_: any, folder: string) {
