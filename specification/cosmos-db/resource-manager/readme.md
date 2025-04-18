@@ -54,6 +54,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2025-05-01-preview/cassandrarbac.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/mongoMIrbac.json
   - Microsoft.DocumentDB/preview/2025-05-01-preview/gremlinrbac.json
+  - Microsoft.DocumentDB/preview/2025-05-01-preview/fleet.json
 ```
 
 ### Tag: package-preview-2024-12-01
@@ -1059,7 +1060,12 @@ directive:
     from: managedCassandra.json
     where: $.definitions.BackupResource
     reason: Suppressing errors for existing APIs
-
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: fleet.json
+    reason: False alarm, faulty check. Both fleetAnalytics and fleetspace are proxy resource
+  - suppress: TrackedResourcePatchOperation
+    from: fleet.json
+    reason: False alarm, faulty check. Both fleetAnalytics and fleetspace are proxy resource
 ```
 
 ---

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetAnalytics/storageAnalytics",
+            "name": "storageAnalytics",
+            "type": "Microsoft.DocumentDB/fleetAnalytics",
+            "location": "West US",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceType": "StorageAnalytics",
+              "resourceLocationId": "/subscriptions/d1eb41bc-1b7f-4404-bd2a-868c222852d/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAccount1"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetAnalytics/fabricLakehouse",
+            "name": "fabricLakehouse",
+            "type": "Microsoft.DocumentDB/fleetAnalytics",
+            "location": "West US",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceType": "FabricLakehouse",
+              "resourceLocationId": "/tenantId/72f988bf-86f1-41af-91ab-2d7cd011db47/workspace/testFabricWorkspace/lakehouse/testLakehouse"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

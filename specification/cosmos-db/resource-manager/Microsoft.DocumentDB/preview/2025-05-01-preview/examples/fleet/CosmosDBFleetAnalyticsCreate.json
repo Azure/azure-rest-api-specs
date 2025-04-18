@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1",
+    "fleetAnalyticsName": "storageAnalytics",
+    "body": {
+      "properties": {
+        "resourceType": "StorageAnalytics",
+        "resourceLocationId": "/subscriptions/d1eb41bc-1b7f-4404-bd2a-868c222852d/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAccount1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetAnalytics/storageAnalytics",
+        "name": "storageAnalytics",
+        "type": "Microsoft.DocumentDB/fleetAnalytics",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceType": "StorageAnalytics",
+          "resourceLocationId": "/subscriptions/d1eb41bc-1b7f-4404-bd2a-868c222852d/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAccount1"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetAnalytics/storageAnalytics",
+        "name": "storageAnalytics",
+        "type": "Microsoft.DocumentDB/fleetAnalytics",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceType": "StorageAnalytics",
+          "resourceLocationId": "/subscriptions/d1eb41bc-1b7f-4404-bd2a-868c222852d/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAccount1"
+        }
+      }
+    }
+  }
+}
