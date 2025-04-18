@@ -1,10 +1,8 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../Playwright.Shared";
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Playwright.Shared;
 
 namespace Playwright.Management;
 
@@ -19,7 +17,15 @@ model PlaywrightWorkspaceProperties {
   @doc("The status of the last resource operation.")
   provisioningState?: ProvisioningState;
 
-  ...WorkspaceAdditionalProperties;
+  @visibility(Lifecycle.Read)
+  @doc("The workspace data plane URI.")
+  dataplaneUri?: url;
+
+  @doc("This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.")
+  regionalAffinity?: EnablementStatus = EnablementStatus.Enabled;
+
+  @doc("When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.")
+  localAuth?: EnablementStatus = EnablementStatus.Disabled;
 }
 
 @doc("The status of the last resource operation.")
@@ -35,4 +41,15 @@ union ProvisioningState {
 
   @doc("Request accepted for processing..")
   Accepted: "Accepted",
+}
+
+@doc("The enablement status of a feature.")
+union EnablementStatus {
+  string,
+
+  @doc("The feature is Enabled.")
+  Enabled: "Enabled",
+
+  @doc("The feature is Disabled.")
+  Disabled: "Disabled",
 }
