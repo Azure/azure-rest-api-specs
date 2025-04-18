@@ -516,6 +516,9 @@ model CommonPostActionResponseForDeviceROCommands {
 
   @doc("Predefined link containing Device RO Command output.")
   outputUrl?: string;
+
+  @doc("Device RO command Response limited to 4000 characters.")
+  deviceConfigurationPreview?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is a valid resource name."
