@@ -4984,6 +4984,32 @@
         "method"
       ]
     },
+    "DataflowEndpointOtel": {
+      "type": "object",
+      "description": "OpenTelemetry endpoint properties",
+      "properties": {
+        "metricIntervalSec": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of seconds to wait before sending metrics to the Otel collector."
+        },
+        "host": {
+          "type": "string",
+          "description": "Host of the OpenTelemetry in the form of <host>:<port>."
+        },
+        "batching": {
+          "$ref": "#/definitions/BatchingConfiguration",
+          "description": "Batching configuration."
+        },
+        "tls": {
+          "$ref": "#/definitions/TlsProperties",
+          "description": "TLS configuration."
+        }
+      },
+      "required": [
+        "host"
+      ]
+    },
     "DataflowEndpointProperties": {
       "type": "object",
       "description": "DataflowEndpoint Resource properties. NOTE - Only one type of endpoint is supported for one Resource",
@@ -5015,6 +5041,10 @@
         "mqttSettings": {
           "$ref": "#/definitions/DataflowEndpointMqtt",
           "description": "Broker endpoint."
+        },
+        "otelSettings": {
+          "$ref": "#/definitions/DataflowEndpointOtel",
+          "description": "OpenTelemetry endpoint."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -5427,7 +5457,8 @@
         "Eventhub",
         "EventGrid",
         "LocalMq",
-        "FabricRT"
+        "FabricRT",
+        "Otel"
       ],
       "x-ms-enum": {
         "name": "EndpointType",
@@ -5482,6 +5513,11 @@
             "name": "FabricRT",
             "value": "FabricRT",
             "description": "FabricRT Type"
+          },
+          {
+            "name": "Otel",
+            "value": "Otel",
+            "description": "OpenTelemetry Type"
           }
         ]
       }
@@ -5696,6 +5732,14 @@
           "additionalProperties": {
             "$ref": "#/definitions/InstanceFeature"
           }
+        },
+        "adrNamespace": {
+          "type": "string",
+          "description": "The Azure Device Registry Namespace used by Assets, Discovered Assets and devices",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [

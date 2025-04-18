@@ -1,14 +1,14 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
-
+import "./dataflowEndpointOtel.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
+
 
 /** ******************* */
 /**
@@ -56,6 +56,10 @@ model DataflowEndpointProperties {
   @doc("Broker endpoint.")
   mqttSettings?: DataflowEndpointMqtt;
 
+  @doc("OpenTelemetry endpoint.")
+  @added(Versions.`2025-07-01-preview`)
+  otelSettings?: DataflowEndpointOtel;
+
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -98,6 +102,10 @@ union EndpointType {
   @added(Versions.`2025-07-01-preview`)
   @doc("FabricRT Type")
   FabricRT: "FabricRT",
+
+  @added(Versions.`2025-07-01-preview`)
+  @doc("OpenTelemetry Type")
+  Otel: "Otel",
 }
 
 @doc("Azure Data Explorer endpoint properties")
