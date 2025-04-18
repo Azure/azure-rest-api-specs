@@ -55,32 +55,6 @@ interface Evaluations {
     Evaluation
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates an evaluation run for agent continuous evaluation.")
-  @route("runs:agents")
-  @post
-  createAgentRun is Azure.Core.Foundations.Operation<
-    {
-      @doc("Agent evaluation with synchronous run")
-      @body
-      evaluation: AgentEvaluation;
-    },
-    Array<AgentEvaluationResult>
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates an evaluation run for agent continuous evaluation.")
-  @route("runs:agents/submit")
-  @post
-  createAgentRunAsync is Azure.Core.Foundations.Operation<
-    {
-      @doc("Agent evaluation with asynchronous run")
-      @body
-      evaluation: AgentEvaluation;
-    },
-    AgentLongRunningOperationResponse
-  >;
-
   // Evaluation Private APIs
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Check annotation supported by the service.")

@@ -7,7 +7,6 @@ import "../common/models.tsp";
 import "./models.tsp";
 import "../servicepatterns.tsp";
 import "../main.tsp";
-import "../evaluations/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -61,7 +60,7 @@ interface EvaluationResults
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get agent evaluation results.")
-  @route("/runs:agents/{runId}")
+  @route("/runs:runAgent/{runId}")
   @get
   getAgentEvaluationResults is Azure.Core.Foundations.Operation<
     {
