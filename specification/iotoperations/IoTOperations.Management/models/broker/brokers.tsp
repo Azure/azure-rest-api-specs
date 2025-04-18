@@ -220,7 +220,8 @@ model SubscriberQueueRetainmentPolicy {
 
 @doc("Custom Subscriber Queue Retainment Policy")
 @added(Versions.`2025-07-01-preview`)
-model CustomSubscriberQueueRetainmentPolicy extends SubscriberQueueRetainmentPolicy {
+model CustomSubscriberQueueRetainmentPolicy
+  extends SubscriberQueueRetainmentPolicy {
   @doc("The mode of the retainment policy.")
   mode: RetainmentPolicyMode.Custom;
 

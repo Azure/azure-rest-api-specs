@@ -3,7 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-
 namespace Microsoft.IoTOperations;
 
 @doc("A string with a minimum length of 1.")
