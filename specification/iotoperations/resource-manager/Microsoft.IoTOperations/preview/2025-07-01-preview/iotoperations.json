@@ -65,6 +65,9 @@
     },
     {
       "name": "DataflowEndpoint"
+    },
+    {
+      "name": "Skynet"
     }
   ],
   "paths": {
@@ -2543,6 +2546,256 @@
         "x-ms-examples": {
           "Dataflow_Delete": {
             "$ref": "./examples/Dataflow_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/skynets": {
+      "get": {
+        "operationId": "Skynet_ListByResourceGroup",
+        "tags": [
+          "Skynet"
+        ],
+        "description": "List SkynetResource resources by InstanceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkynetResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/skynets/{skynetName}": {
+      "get": {
+        "operationId": "Skynet_Get",
+        "tags": [
+          "Skynet"
+        ],
+        "description": "Get a SkynetResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "skynetName",
+            "in": "path",
+            "description": "Name of Instance skynet resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkynetResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Skynet_CreateOrUpdate",
+        "tags": [
+          "Skynet"
+        ],
+        "description": "Create a SkynetResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "skynetName",
+            "in": "path",
+            "description": "Name of Instance skynet resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkynetResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SkynetResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SkynetResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'SkynetResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SkynetResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Skynet_Delete",
+        "tags": [
+          "Skynet"
+        ],
+        "description": "Delete a SkynetResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "skynetName",
+            "in": "path",
+            "description": "Name of Instance skynet resource",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6067,6 +6320,78 @@
       },
       "readOnly": true
     },
+    "RemoteSupportAccessLevels": {
+      "type": "string",
+      "description": "SkynetAccessLevels allowed",
+      "enum": [
+        "Diagnose",
+        "DiagnoseAndRepair"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportAccessLevels",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Diagnose",
+            "value": "Diagnose",
+            "description": "Diagnose access level"
+          },
+          {
+            "name": "DiagnoseAndRepair",
+            "value": "DiagnoseAndRepair",
+            "description": "Diagnose And Repair Access Level"
+          }
+        ]
+      }
+    },
+    "RemoteSupportActivationState": {
+      "type": "string",
+      "description": "Represents the activation state of Skynet.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportActivationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Remote Support is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Remote Support is disabled."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Remote Support has Expired."
+          }
+        ]
+      }
+    },
+    "RemoteSupportProperties": {
+      "type": "object",
+      "description": "RemoteSupport properties",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/RemoteSupportActivationState",
+          "description": "Activation state of Skynet."
+        },
+        "accessLevel": {
+          "$ref": "#/definitions/RemoteSupportAccessLevels",
+          "description": "Access level for Skynet."
+        },
+        "expirationTimestamp": {
+          "type": "string",
+          "description": "Expiration timestamp for Skynet."
+        }
+      }
+    },
     "RetainmentPolicyMode": {
       "type": "string",
       "enum": [
@@ -6310,6 +6635,68 @@
           }
         ]
       }
+    },
+    "SkynetProperties": {
+      "type": "object",
+      "description": "Skynet Resource properties",
+      "properties": {
+        "remoteSupport": {
+          "$ref": "#/definitions/RemoteSupportProperties",
+          "description": "Remote Support Settings For Skynet."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "SkynetResource": {
+      "type": "object",
+      "description": "Instance skynet resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SkynetProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SkynetResourceListResult": {
+      "type": "object",
+      "description": "The response of a SkynetResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SkynetResource items on this page",
+          "items": {
+            "$ref": "#/definitions/SkynetResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SourceSerializationFormat": {
       "type": "string",
