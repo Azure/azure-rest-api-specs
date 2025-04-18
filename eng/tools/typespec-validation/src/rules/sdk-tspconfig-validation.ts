@@ -226,7 +226,7 @@ export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspconfigEmitte
     super(
       "@azure-tools/typespec-ts",
       "package-details.name",
-      new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
+      new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/),
     );
   }
   protected skip(_: any, folder: string) {
