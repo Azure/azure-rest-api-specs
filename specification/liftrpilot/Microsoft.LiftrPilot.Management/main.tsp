@@ -35,6 +35,13 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
   v2025_04_03_preview: "2025-04-03-preview",
+
+  /** 2025-04-18-preview version (new) */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @useDependency(LiftrBase.Versions.v1_preview)
+  v2025_04_18_preview: "2025-04-18-preview",
 }
 
 /** These properties will be sent to your endpoints registered with Liftr during CRUD on resource.
@@ -79,7 +86,7 @@ interface Organizations {
   listBySubscription is ArmListBySubscription<OrganizationResource>;
 }
 
-@added(Versions.v2025_04_03_preview)
+@added(Versions.v2025_04_18_preview)
 @doc("Liftr-Pilot tracked resource")
 @parentResource(OrganizationResource)
 model PilotProxyResource is ProxyResource<PilotProxyResourceProperties> {
@@ -93,7 +100,7 @@ model PilotProxyResource is ProxyResource<PilotProxyResourceProperties> {
   name: string;
 }
 
-@added(Versions.v2025_04_03_preview)
+@added(Versions.v2025_04_18_preview)
 @doc("The properties of PilotProxyResource")
 model PilotProxyResourceProperties {
   @doc("Description of the proxy resource")
@@ -104,7 +111,7 @@ model PilotProxyResourceProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@added(Versions.v2025_04_03_preview)
+@added(Versions.v2025_04_18_preview)
 @armResourceOperations
 interface PilotProxyResources {
   get is ArmResourceRead<PilotProxyResource>;
