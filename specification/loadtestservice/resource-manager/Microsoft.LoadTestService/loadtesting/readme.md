@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-12-01-preview'
 input-file:
-  - Microsoft.LoadTestService/preview/2024-12-01-preview/loadtestservice.json
+  - preview/2024-12-01-preview/loadtestservice.json
 
 directive:
   - where:
@@ -59,7 +59,7 @@ These settings apply only when `--tag=package-2023-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-12-01-preview'
 input-file:
-  - Microsoft.LoadTestService/preview/2023-12-01-preview/loadtestservice.json
+  - preview/2023-12-01-preview/loadtestservice.json
 ```
 
 ### Tag: package-2022-12-01
@@ -68,7 +68,7 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-12-01'
 input-file:
-  - Microsoft.LoadTestService/stable/2022-12-01/loadtestservice.json
+  - stable/2022-12-01/loadtestservice.json
 ```
 
 ### Tag: package-2022-04-15-preview
@@ -77,7 +77,7 @@ These settings apply only when `--tag=package-2022-04-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-04-15-preview'
 input-file:
-  - Microsoft.LoadTestService/preview/2022-04-15-preview/loadtestservice.json
+  - preview/2022-04-15-preview/loadtestservice.json
 ```
 ### Tag: package-2021-12-01-preview
 
@@ -85,7 +85,7 @@ These settings apply only when `--tag=package-2021-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-12-01-preview'
 input-file:
-  - Microsoft.LoadTestService/preview/2021-12-01-preview/loadtestservice.json
+  - preview/2021-12-01-preview/loadtestservice.json
 ```
 
 # Code Generation
