@@ -10,8 +10,7 @@ using Azure.Core.Traits;
 namespace Language.QuestionAnswering.Authoring;
 
 /** The secret key for your Azure AI Language resource. */
-model AzureKey
-  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+alias AzureKey = ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 /**
  * These are the [Azure Active Directory OAuth2](https://learn.microsoft.com/azure/active-directory/develop/v1-overview) Flows.
@@ -22,14 +21,13 @@ model AzureKey
  * To implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
-model AADToken
-  is OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit;
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
-      scopes: ["https://cognitiveservices.azure.com/.default"];
-    }
-  ]>;
+alias AADToken = OAuth2Auth<[
+  {
+    type: OAuth2FlowType.implicit;
+    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+    scopes: ["https://cognitiveservices.azure.com/.default"];
+  }
+]>;
 
 alias CommonListParams = {
   /** The maximum number of resources to return from the collection. */
