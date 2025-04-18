@@ -3,7 +3,6 @@
 
 import "@typespec/http";
 import "@typespec/versioning";
-import "../Playwright.Shared";
 import "./routes.tsp";
 
 using TypeSpec.Http;
@@ -49,6 +48,5 @@ namespace Playwright;
 enum Versions {
   @doc("Version 2025-07-01-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Playwright.Shared.Versions.v1_0)
   `2025-07-01-preview`,
 }

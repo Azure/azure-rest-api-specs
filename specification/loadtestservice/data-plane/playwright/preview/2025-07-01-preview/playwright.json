@@ -77,7 +77,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Shared.Workspace"
+              "$ref": "#/definitions/Workspace"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -635,7 +635,7 @@
         "value"
       ]
     },
-    "Shared.ResourceState": {
+    "ResourceState": {
       "type": "string",
       "description": "The Azure resource state.",
       "enum": [
@@ -659,7 +659,7 @@
         ]
       }
     },
-    "Shared.SubscriptionState": {
+    "SubscriptionState": {
       "type": "string",
       "description": "The Azure subscription state.",
       "enum": [
@@ -701,7 +701,7 @@
         ]
       }
     },
-    "Shared.Workspace": {
+    "Workspace": {
       "type": "object",
       "description": "Playwright workspace is the parent resource for most of the other service resources.",
       "properties": {
@@ -724,7 +724,7 @@
           "readOnly": true
         },
         "state": {
-          "$ref": "#/definitions/Shared.ResourceState",
+          "$ref": "#/definitions/ResourceState",
           "description": "The state of workspace - Active | Inactive",
           "readOnly": true
         },
@@ -734,7 +734,7 @@
           "readOnly": true
         },
         "subscriptionState": {
-          "$ref": "#/definitions/Shared.SubscriptionState",
+          "$ref": "#/definitions/SubscriptionState",
           "description": "Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted",
           "readOnly": true
         },
@@ -746,12 +746,6 @@
         "location": {
           "type": "string",
           "description": "Azure location of the workspace, for eg. eastus, southeastasia.",
-          "readOnly": true
-        },
-        "dataplaneUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The workspace data plane URI.",
           "readOnly": true
         },
         "regionalAffinity": {
@@ -777,7 +771,8 @@
                 "description": "The feature is Disabled."
               }
             ]
-          }
+          },
+          "readOnly": true
         },
         "localAuth": {
           "type": "string",
@@ -802,7 +797,8 @@
                 "description": "The feature is Disabled."
               }
             ]
-          }
+          },
+          "readOnly": true
         }
       },
       "required": [
