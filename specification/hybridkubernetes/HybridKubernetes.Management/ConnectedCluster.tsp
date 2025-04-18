@@ -45,7 +45,7 @@ interface ConnectedClusters {
   @operationId("ConnectedCluster_Get")
   get is ArmResourceRead<
     ConnectedCluster,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -55,7 +55,7 @@ interface ConnectedClusters {
   @operationId("ConnectedCluster_CreateOrReplace")
   createOrReplace is ArmResourceCreateOrReplaceAsync<
     ConnectedCluster,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -67,7 +67,7 @@ interface ConnectedClusters {
   update is ArmCustomPatchSync<
     ConnectedCluster,
     PatchModel = ConnectedClusterPatch,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -78,7 +78,7 @@ interface ConnectedClusters {
   @operationId("ConnectedCluster_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedCluster,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
@@ -89,8 +89,7 @@ interface ConnectedClusters {
   @operationId("ConnectedCluster_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ConnectedCluster,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<ConnectedClusterList>
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -98,11 +97,7 @@ interface ConnectedClusters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedCluster_ListBySubscription")
-  listBySubscription is ArmListBySubscription<
-    ConnectedCluster,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<ConnectedClusterList>
-  >;
+  listBySubscription is ArmListBySubscription<ConnectedCluster>;
 
   /**
    * Gets cluster user credentials of the connected cluster with a specified resource group and name.
@@ -113,7 +108,7 @@ interface ConnectedClusters {
     ConnectedCluster,
     ListClusterUserCredentialProperties,
     ArmResponse<CredentialResults>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 }
 
@@ -131,4 +126,21 @@ interface ConnectedClusters {
 );
 @@doc(ConnectedClusters.listClusterUserCredential::parameters.body,
   "ListClusterUserCredential properties"
+);
+@@summary(ConnectedClusters.listBySubscription,
+  "Lists all connected clusters in the given Subscription"
+);
+@@summary(ConnectedClusters.get,
+  "Get the properties of the specified connected cluster."
+);
+@@summary(ConnectedClusters.createOrReplace,
+  "Register a new Kubernetes cluster with Azure Resource Manager."
+);
+@@summary(ConnectedClusters.update, "Updates a connected cluster.");
+@@summary(ConnectedClusters.delete, "Delete a connected cluster.");
+@@summary(ConnectedClusters.listClusterUserCredential,
+  "Gets cluster user credentials of a connected cluster"
+);
+@@summary(ConnectedClusters.listByResourceGroup,
+  "Lists all connected clusters in the given Resource Group"
 );

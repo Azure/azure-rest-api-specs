@@ -1,154 +1,156 @@
 {
   "parameters": {
-    "subscriptionId": "1bfbb5d0-917e-4346-9026-1d3b344417f5",
-    "resourceGroupName": "k8sc-rg",
-    "clusterName": "testCluster",
-    "api-version": "2024-12-01-preview",
     "ConnectedCluster": {
-      "location": "East US",
-      "tags": {},
       "identity": {
         "type": "SystemAssigned"
       },
       "kind": "ProvisionedCluster",
+      "location": "East US",
       "properties": {
-        "agentPublicKeyCertificate": "",
-        "azureHybridBenefit": "NotApplicable",
-        "distribution": "AKS",
-        "distributionVersion": "1.0",
         "aadProfile": {
-          "enableAzureRBAC": true,
           "adminGroupObjectIDs": [
             "56f988bf-86f1-41af-91ab-2d7cd011db47"
           ],
+          "enableAzureRBAC": true,
           "tenantID": "82f988bf-86f1-41af-91ab-2d7cd011db47"
         },
-        "oidcIssuerProfile": {
-          "enabled": true
-        },
+        "agentPublicKeyCertificate": "",
         "arcAgentProfile": {
-          "desiredAgentVersion": "0.1.0",
           "agentAutoUpgrade": "Enabled",
+          "desiredAgentVersion": "0.1.0",
           "systemComponents": [
             {
               "type": "Strato",
-              "userSpecifiedVersion": "0.1.1",
-              "majorVersion": 0
+              "majorVersion": 0,
+              "userSpecifiedVersion": "0.1.1"
             }
           ]
+        },
+        "azureHybridBenefit": "NotApplicable",
+        "distribution": "AKS",
+        "distributionVersion": "1.0",
+        "oidcIssuerProfile": {
+          "enabled": true
         }
-      }
-    }
+      },
+      "tags": {}
+    },
+    "api-version": "2024-12-01-preview",
+    "clusterName": "testCluster",
+    "resourceGroupName": "k8sc-rg",
+    "subscriptionId": "1bfbb5d0-917e-4346-9026-1d3b344417f5"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/1bfbb5d0-917e-4346-9026-1d3b344417f5/resourceGroups/akkeshar/providers/Microsoft.Kubernetes/connectedClusters/connectedCluster1",
         "name": "connectedCluster1",
         "type": "Microsoft.Kubernetes/connectedClusters",
-        "location": "East US",
-        "tags": {},
-        "systemData": {
-          "createdBy": "sikasire@microsoft.com",
-          "createdByType": "User",
-          "createdAt": "2020-12-17T07:06:33.9173186Z",
-          "lastModifiedBy": "sikasire@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-12-17T07:06:33.9173186Z"
-        },
+        "id": "/subscriptions/1bfbb5d0-917e-4346-9026-1d3b344417f5/resourceGroups/akkeshar/providers/Microsoft.Kubernetes/connectedClusters/connectedCluster1",
         "identity": {
           "type": "SystemAssigned"
         },
         "kind": "ProvisionedCluster",
+        "location": "East US",
         "properties": {
-          "agentPublicKeyCertificate": "",
-          "kubernetesVersion": "1.17.0",
-          "totalNodeCount": 2,
-          "agentVersion": "0.1.0",
-          "provisioningState": "Succeeded",
-          "distribution": "AKS",
-          "distributionVersion": "1.0",
-          "azureHybridBenefit": "NotApplicable",
           "aadProfile": {
-            "enableAzureRBAC": true,
             "adminGroupObjectIDs": [
               "56f988bf-86f1-41af-91ab-2d7cd011db47"
             ],
+            "enableAzureRBAC": true,
             "tenantID": "82f988bf-86f1-41af-91ab-2d7cd011db47"
           },
+          "agentPublicKeyCertificate": "",
+          "agentVersion": "0.1.0",
+          "arcAgentProfile": {
+            "agentAutoUpgrade": "Enabled",
+            "agentState": "Succeeded",
+            "desiredAgentVersion": "0.1.0",
+            "systemComponents": [
+              {
+                "type": "Strato",
+                "currentVersion": "0.1.0",
+                "majorVersion": 0,
+                "userSpecifiedVersion": "0.1.1"
+              }
+            ]
+          },
+          "azureHybridBenefit": "NotApplicable",
+          "distribution": "AKS",
+          "distributionVersion": "1.0",
+          "kubernetesVersion": "1.17.0",
           "oidcIssuerProfile": {
             "enabled": true,
             "issuerUrl": "https://oidcdiscovery-northamerica-endpoint-gbcge4adgqebgxev.z01.azurefd.net/885hc665-0g4a-4a4b-732b-e4950new3bed/"
           },
-          "arcAgentProfile": {
-            "desiredAgentVersion": "0.1.0",
-            "agentAutoUpgrade": "Enabled",
-            "agentState": "Succeeded",
-            "systemComponents": [
-              {
-                "type": "Strato",
-                "userSpecifiedVersion": "0.1.1",
-                "currentVersion": "0.1.0",
-                "majorVersion": 0
-              }
-            ]
-          }
-        }
+          "provisioningState": "Succeeded",
+          "totalNodeCount": 2
+        },
+        "systemData": {
+          "createdAt": "2020-12-17T07:06:33.9173186Z",
+          "createdBy": "sikasire@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-17T07:06:33.9173186Z",
+          "lastModifiedBy": "sikasire@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/1bfbb5d0-917e-4346-9026-1d3b344417f5/resourceGroups/akkeshar/providers/Microsoft.Kubernetes/connectedClusters/connectedCluster1",
         "name": "connectedCluster1",
         "type": "Microsoft.Kubernetes/connectedClusters",
-        "location": "East US",
-        "tags": {},
-        "systemData": {
-          "createdBy": "sikasire@microsoft.com",
-          "createdByType": "User",
-          "createdAt": "2020-12-17T07:06:33.9173186Z",
-          "lastModifiedBy": "sikasire@microsoft.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-12-17T07:06:33.9173186Z"
-        },
+        "id": "/subscriptions/1bfbb5d0-917e-4346-9026-1d3b344417f5/resourceGroups/akkeshar/providers/Microsoft.Kubernetes/connectedClusters/connectedCluster1",
         "identity": {
           "type": "SystemAssigned"
         },
+        "location": "East US",
         "properties": {
-          "agentPublicKeyCertificate": "",
-          "kubernetesVersion": "1.17.0",
-          "totalNodeCount": 2,
-          "agentVersion": "0.1.0",
-          "provisioningState": "Accepted",
-          "distribution": "AKS",
-          "distributionVersion": "1.0",
-          "azureHybridBenefit": "NotApplicable",
           "aadProfile": {
-            "enableAzureRBAC": true,
             "adminGroupObjectIDs": [
               "56f988bf-86f1-41af-91ab-2d7cd011db47"
             ],
+            "enableAzureRBAC": true,
             "tenantID": "82f988bf-86f1-41af-91ab-2d7cd011db47"
           },
+          "agentPublicKeyCertificate": "",
+          "agentVersion": "0.1.0",
+          "arcAgentProfile": {
+            "agentAutoUpgrade": "Enabled",
+            "agentState": "Succeeded",
+            "desiredAgentVersion": "0.1.0",
+            "systemComponents": [
+              {
+                "type": "Strato",
+                "currentVersion": "0.1.0",
+                "majorVersion": 0,
+                "userSpecifiedVersion": "0.1.1"
+              }
+            ]
+          },
+          "azureHybridBenefit": "NotApplicable",
+          "distribution": "AKS",
+          "distributionVersion": "1.0",
+          "kubernetesVersion": "1.17.0",
           "oidcIssuerProfile": {
             "enabled": true,
             "issuerUrl": "https://oidcdiscovery-northamerica-endpoint-gbcge4adgqebgxev.z01.azurefd.net/885hc665-0g4a-4a4b-732b-e4950new3bed/"
           },
-          "arcAgentProfile": {
-            "desiredAgentVersion": "0.1.0",
-            "agentAutoUpgrade": "Enabled",
-            "agentState": "Succeeded",
-            "systemComponents": [
-              {
-                "type": "Strato",
-                "userSpecifiedVersion": "0.1.1",
-                "currentVersion": "0.1.0",
-                "majorVersion": 0
-              }
-            ]
-          }
-        }
+          "provisioningState": "Accepted",
+          "totalNodeCount": 2
+        },
+        "systemData": {
+          "createdAt": "2020-12-17T07:06:33.9173186Z",
+          "createdBy": "sikasire@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-12-17T07:06:33.9173186Z",
+          "lastModifiedBy": "sikasire@microsoft.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
       }
     }
-  }
+  },
+  "operationId": "ConnectedCluster_CreateOrReplace",
+  "title": "CreateCluster_KindExample"
 }
