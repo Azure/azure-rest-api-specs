@@ -20,7 +20,7 @@ model ImageGenerationsOptions {
   prompt: string;
 
   @doc("""
-    Optional. The prompt to use for the negative image generation. Read the model documentation 
+    Optional. The prompt to use for the negative image generation. Read the model documentation
     to understand to prompt the model and get specific results. If the model doesn't support
     negative prompts, a 422 error is returned.
     """)
@@ -127,12 +127,16 @@ union ImageGenerationOutputFormat {
 @added(ModelInference.Versions.v2025_05_01_Preview)
 model ImageGenerationPrompt {
   @doc("""
-    The input image encoded in base64 string as a data URL. 
+    The input image encoded in base64 string as a data URL.
     Example: `data:image/{format};base64,{data}`."
     """)
   image: string;
 
-  @doc("The URL of the image to use as guidance for the image generation process.")
+  @doc("""
+    The degree at which the generation process uses the image prompt as guidance. 1 indicates
+    a generation process that fully follows the input image. 0 a generation a process that doesn't
+    take into consideration the prompt image.
+    """)
   strength?: int32 = 1;
 }
 

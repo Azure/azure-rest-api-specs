@@ -1341,12 +1341,15 @@ components:
         image:
           type: string
           description: |-
-            The input image encoded in base64 string as a data URL. 
+            The input image encoded in base64 string as a data URL.
             Example: `data:image/{format};base64,{data}`."
         strength:
           type: integer
           format: int32
-          description: The URL of the image to use as guidance for the image generation process.
+          description: |-
+            The degree at which the generation process uses the image prompt as guidance. 1 indicates
+            a generation process that fully follows the input image. 0 a generation a process that doesn't
+            take into consideration the prompt image.
           default: 1
       description: Represents an image to use for guidance during the generation.
     ImageGenerationQuality:
@@ -1396,7 +1399,7 @@ components:
         negative_prompt:
           type: string
           description: |-
-            Optional. The prompt to use for the negative image generation. Read the model documentation 
+            Optional. The prompt to use for the negative image generation. Read the model documentation
             to understand to prompt the model and get specific results. If the model doesn't support
             negative prompts, a 422 error is returned.
         image_prompt:
