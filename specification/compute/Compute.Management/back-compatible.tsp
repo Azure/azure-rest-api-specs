@@ -4,9 +4,6 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ComputeOperationValue.display);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(VirtualMachineScaleSetNetworkConfiguration.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."

@@ -1446,59 +1446,6 @@ enum IntervalInMins {
 }
 
 /**
- * Describes the properties of a Compute Operation value.
- */
-model ComputeOperationValue {
-  /**
-   * The origin of the compute operation.
-   */
-  @visibility(Lifecycle.Read)
-  origin?: string;
-
-  /**
-   * The name of the compute operation.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Describes the properties of a Compute Operation Value Display.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  display?: ComputeOperationValueDisplay;
-}
-
-/**
- * Describes the properties of a Compute Operation Value Display.
- */
-model ComputeOperationValueDisplay {
-  /**
-   * The display name of the compute operation.
-   */
-  @visibility(Lifecycle.Read)
-  operation?: string;
-
-  /**
-   * The display name of the resource the operation applies to.
-   */
-  @visibility(Lifecycle.Read)
-  resource?: string;
-
-  /**
-   * The description of the operation.
-   */
-  @visibility(Lifecycle.Read)
-  description?: string;
-
-  /**
-   * The resource provider for the operation.
-   */
-  @visibility(Lifecycle.Read)
-  provider?: string;
-}
-
-/**
  * The List Usages operation response.
  */
 model ListUsagesResult is Azure.Core.Page<Usage>;

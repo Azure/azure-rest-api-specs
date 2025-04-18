@@ -13049,53 +13049,6 @@
       },
       "x-nullable": false
     },
-    "ComputeOperationValue": {
-      "type": "object",
-      "description": "Describes the properties of a Compute Operation value.",
-      "properties": {
-        "origin": {
-          "type": "string",
-          "description": "The origin of the compute operation.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the compute operation.",
-          "readOnly": true
-        },
-        "display": {
-          "$ref": "#/definitions/ComputeOperationValueDisplay",
-          "description": "Describes the properties of a Compute Operation Value Display.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ComputeOperationValueDisplay": {
-      "type": "object",
-      "description": "Describes the properties of a Compute Operation Value Display.",
-      "properties": {
-        "operation": {
-          "type": "string",
-          "description": "The display name of the compute operation.",
-          "readOnly": true
-        },
-        "resource": {
-          "type": "string",
-          "description": "The display name of the resource the operation applies to.",
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the operation.",
-          "readOnly": true
-        },
-        "provider": {
-          "type": "string",
-          "description": "The resource provider for the operation.",
-          "readOnly": true
-        }
-      }
-    },
     "ConsistencyModeTypes": {
       "type": "string",
       "description": "ConsistencyMode of the RestorePoint. Can be specified in the input while creating a restore point. For now, only CrashConsistent is accepted as a valid input. Please refer to https://aka.ms/RestorePoints for more details.",
