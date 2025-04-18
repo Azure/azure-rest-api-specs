@@ -2643,7 +2643,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DiagnosticResource"
+              "$ref": "#/definitions/Diagnostics.DiagnosticResource"
             }
           },
           "default": {
@@ -2696,7 +2696,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DiagnosticResource"
+              "$ref": "#/definitions/Diagnostics.DiagnosticResource"
             }
           }
         ],
@@ -2704,13 +2704,13 @@
           "200": {
             "description": "Resource 'DiagnosticResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DiagnosticResource"
+              "$ref": "#/definitions/Diagnostics.DiagnosticResource"
             }
           },
           "201": {
             "description": "Resource 'DiagnosticResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/DiagnosticResource"
+              "$ref": "#/definitions/Diagnostics.DiagnosticResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -5387,12 +5387,33 @@
         "dataSources"
       ]
     },
-    "DiagnosticProperties": {
+    "DiagnosticResourceListResult": {
+      "type": "object",
+      "description": "The response of a DiagnosticResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DiagnosticResource items on this page",
+          "items": {
+            "$ref": "#/definitions/Diagnostics.DiagnosticResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Diagnostics.DiagnosticProperties": {
       "type": "object",
       "description": "Diagnostic Resource properties",
       "properties": {
         "remoteSupport": {
-          "$ref": "#/definitions/RemoteSupportProperties",
+          "$ref": "#/definitions/Diagnostics.RemoteSupportProperties",
           "description": "Remote Support Settings For Diagnostic."
         },
         "provisioningState": {
@@ -5402,12 +5423,12 @@
         }
       }
     },
-    "DiagnosticResource": {
+    "Diagnostics.DiagnosticResource": {
       "type": "object",
       "description": "Instance diagnostic resource",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DiagnosticProperties",
+          "$ref": "#/definitions/Diagnostics.DiagnosticProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -5428,26 +5449,77 @@
         }
       ]
     },
-    "DiagnosticResourceListResult": {
-      "type": "object",
-      "description": "The response of a DiagnosticResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The DiagnosticResource items on this page",
-          "items": {
-            "$ref": "#/definitions/DiagnosticResource"
+    "Diagnostics.RemoteSupportAccessLevels": {
+      "type": "string",
+      "description": "DiagnosticAccessLevels allowed",
+      "enum": [
+        "Diagnose",
+        "DiagnoseAndRepair"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportAccessLevels",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Diagnose",
+            "value": "Diagnose",
+            "description": "Diagnose access level"
+          },
+          {
+            "name": "DiagnoseAndRepair",
+            "value": "DiagnoseAndRepair",
+            "description": "Diagnose And Repair Access Level"
           }
+        ]
+      }
+    },
+    "Diagnostics.RemoteSupportActivationState": {
+      "type": "string",
+      "description": "Represents the activation state of Diagnostic.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "RemoteSupportActivationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Remote Support is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Remote Support is disabled."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Remote Support has Expired."
+          }
+        ]
+      }
+    },
+    "Diagnostics.RemoteSupportProperties": {
+      "type": "object",
+      "description": "RemoteSupport properties",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/Diagnostics.RemoteSupportActivationState",
+          "description": "Activation state of Diagnostic."
         },
-        "nextLink": {
+        "accessLevel": {
+          "$ref": "#/definitions/Diagnostics.RemoteSupportAccessLevels",
+          "description": "Access level for Diagnostic."
+        },
+        "expirationTimestamp": {
           "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "Expiration timestamp for Diagnostic."
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "DiagnosticsLogs": {
       "type": "object",
@@ -6449,78 +6521,6 @@
         ]
       },
       "readOnly": true
-    },
-    "RemoteSupportAccessLevels": {
-      "type": "string",
-      "description": "DiagnosticAccessLevels allowed",
-      "enum": [
-        "Diagnose",
-        "DiagnoseAndRepair"
-      ],
-      "x-ms-enum": {
-        "name": "RemoteSupportAccessLevels",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Diagnose",
-            "value": "Diagnose",
-            "description": "Diagnose access level"
-          },
-          {
-            "name": "DiagnoseAndRepair",
-            "value": "DiagnoseAndRepair",
-            "description": "Diagnose And Repair Access Level"
-          }
-        ]
-      }
-    },
-    "RemoteSupportActivationState": {
-      "type": "string",
-      "description": "Represents the activation state of Diagnostic.",
-      "enum": [
-        "Enabled",
-        "Disabled",
-        "Expired"
-      ],
-      "x-ms-enum": {
-        "name": "RemoteSupportActivationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Remote Support is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Remote Support is disabled."
-          },
-          {
-            "name": "Expired",
-            "value": "Expired",
-            "description": "Remote Support has Expired."
-          }
-        ]
-      }
-    },
-    "RemoteSupportProperties": {
-      "type": "object",
-      "description": "RemoteSupport properties",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/RemoteSupportActivationState",
-          "description": "Activation state of Diagnostic."
-        },
-        "accessLevel": {
-          "$ref": "#/definitions/RemoteSupportAccessLevels",
-          "description": "Access level for Diagnostic."
-        },
-        "expirationTimestamp": {
-          "type": "string",
-          "description": "Expiration timestamp for Diagnostic."
-        }
-      }
     },
     "RetainmentPolicyMode": {
       "type": "string",

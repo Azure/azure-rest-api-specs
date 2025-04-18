@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 
 using Azure.ResourceManager;
 
-namespace Microsoft.IoTOperations;
+namespace Microsoft.IoTOperations.Diagnostics;
 
 @doc("Instance diagnostic resource")
 @parentResource(InstanceResource)
