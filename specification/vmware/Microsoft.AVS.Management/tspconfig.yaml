@@ -18,20 +18,15 @@ options:
     omit-unreachable-types: true
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    clear-output-folder: true
+    is-modular-library: true
+    experimental-extensible-enums: true
     package-dir: "arm-avs"
     flavor: "azure"
-    packageDetails:
+    package-details:
       name: "@azure/arm-avs"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-avs"
-    package-name: "{package-dir}"
+    namespace: "azure.mgmt.avs"
     flavor: "azure"
     generate-test: true
     generate-sample: true

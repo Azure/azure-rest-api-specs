@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-2024-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-12'
 input-file:
-  - Microsoft.HybridConnectivity/PublicCloud/stable/2024-12-01/publicCloud.json
   - Microsoft.HybridConnectivity/stable/2024-12-01/hybridconnectivity.json
 ```
 
@@ -101,7 +100,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

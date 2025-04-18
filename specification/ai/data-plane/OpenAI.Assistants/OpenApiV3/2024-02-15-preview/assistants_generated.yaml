@@ -55,7 +55,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -192,6 +192,7 @@ paths:
                 file:
                   type: string
                   format: binary
+                  description: The file data (not filename) to upload.
                 purpose:
                   allOf:
                     - $ref: '#/components/schemas/FilePurpose'
@@ -202,6 +203,10 @@ paths:
               required:
                 - file
                 - purpose
+            encoding:
+              purpose:
+                contentType: text/plain
+        description: The file data to upload and its purpose.
   /files/{fileId}:
     delete:
       operationId: deleteFile
@@ -252,10 +257,10 @@ paths:
         '200':
           description: The request has succeeded.
           content:
-            application/json:
+            application/octet-stream:
               schema:
                 type: string
-                format: byte
+                format: binary
   /threads:
     post:
       operationId: createThread
@@ -415,7 +420,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -575,7 +580,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -741,7 +746,7 @@ paths:
         - name: before
           in: query
           required: false
-          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          description: A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.
           schema:
             type: string
           explode: false
@@ -2412,6 +2417,7 @@ components:
         - 2024-07-01-preview
         - 2024-09-01-preview
         - 2024-10-01-preview
+        - 2025-01-01-preview
       description: The known set of supported API versions.
     SubmitToolOutputsAction:
       type: object

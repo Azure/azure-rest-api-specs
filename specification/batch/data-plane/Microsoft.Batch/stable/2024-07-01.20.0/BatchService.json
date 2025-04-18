@@ -281,6 +281,7 @@
     },
     "/poolusagemetrics": {
       "get": {
+        "deprecated": true,
         "tags": [
           "Pools"
         ],
@@ -294,7 +295,7 @@
           }
         },
         "summary": "Lists the usage metrics, aggregated by Pool across individual time intervals, for the specified Account.",
-        "description": "If you do not specify a $filter clause including a poolId, the response includes all Pools that existed in the Account in the time range of the returned aggregation intervals. If you do not specify a $filter clause including a startTime or endTime these filters default to the start and end times of the last aggregation interval currently available; that is, only the last aggregation interval is returned.",
+        "description": "Warning: This operation has been deprecated and will be removed after September 30, 2024. Please see https://azure.microsoft.com/updates?id=azure-batch-pool-list-usage-metrics-api-will-be-retired-on-30-september-2024 for more information.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -12186,7 +12187,7 @@
         },
         "authenticationTokenSettings": {
           "title": "The settings for an authentication token that the Task can use to perform Batch service operations.",
-          "description": "If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.",
+          "description": "Warning: This object is deprecated and will be removed after September 30, 2024. Please see https://azure.microsoft.com/updates?id=azure-batch-task-authentication-token-will-be-retired-on-30-september-2024 for more information",
           "$ref": "#/definitions/AuthenticationTokenSettings"
         },
         "allowLowPriorityNode": {
@@ -15413,7 +15414,7 @@
         },
         "authenticationTokenSettings": {
           "title": "The settings for an authentication token that the Task can use to perform Batch service operations.",
-          "description": "If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.",
+          "description": "Warning: This object is deprecated and will be removed after September 30, 2024. Please see https://azure.microsoft.com/updates?id=azure-batch-task-authentication-token-will-be-retired-on-30-september-2024 for more information",
           "$ref": "#/definitions/AuthenticationTokenSettings"
         }
       },
@@ -15509,7 +15510,7 @@
         },
         "authenticationTokenSettings": {
           "title": "The settings for an authentication token that the Task can use to perform Batch service operations.",
-          "description": "If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job.",
+          "description": "Warning: This object is deprecated and will be removed after September 30, 2024. Please see https://azure.microsoft.com/updates?id=azure-batch-task-authentication-token-will-be-retired-on-30-september-2024 for more information",
           "$ref": "#/definitions/AuthenticationTokenSettings"
         }
       },

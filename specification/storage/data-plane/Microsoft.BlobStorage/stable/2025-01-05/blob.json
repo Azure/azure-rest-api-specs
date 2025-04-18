@@ -60,6 +60,162 @@
   },
   "tags": [],
   "paths": {
+    "": {
+      "get": {
+        "operationId": "GetProperties",
+        "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SetProperties",
+        "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
+        "consumes": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "GetUserDelegationKey",
+        "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KeyInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDelegationKey"
+            },
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      }
+    },
     "/{containerName}": {
       "get": {
         "operationId": "Container_GetProperties",
@@ -105,11 +261,6 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag contains a value that you can use to perform operations conditionally."
@@ -142,11 +293,6 @@
                     }
                   ]
                 }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
               "x-ms-default-encryption-scope": {
                 "type": "string",
@@ -242,11 +388,6 @@
               "x-ms-meta": {
                 "type": "string",
                 "description": "The metadata headers."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -344,33 +485,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The ETag contains a value that you can use to perform operations conditionally."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
+            "description": "The request has succeeded and a new resource has been created as a result."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -428,21 +543,23 @@
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "The body of the request.",
+            "name": "name",
+            "in": "formData",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "formData",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "file"
+              "type": "string"
             },
             "headers": {
               "x-ms-request-id": {
@@ -520,24 +637,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -642,14 +742,6 @@
             "x-ms-client-name": "rangeGetContentCrc64"
           },
           {
-            "name": "x-ms-structured-body",
-            "in": "header",
-            "description": "Specifies the response content should be returned as a structured message and specifies the message schema version and properties.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "structuredBodyType"
-          },
-          {
             "name": "x-ms-encryption-key",
             "in": "header",
             "description": "Optional.  Version 2019-07-07 and later.  Specifies the encryption key to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key.",
@@ -715,10 +807,6 @@
               "type": "file"
             },
             "headers": {
-              "Accept-Ranges": {
-                "type": "string",
-                "description": "Indicates that the service supports requests for partial blob content."
-              },
               "Cache-Control": {
                 "type": "string",
                 "description": "This header is returned if it was previously specified for the blob."
@@ -747,11 +835,6 @@
               "Content-Range": {
                 "type": "string",
                 "description": "Indicates the range of bytes returned in the event that the client requested a subset of the blob by setting the 'Range' request header."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
                 "type": "string",
@@ -810,11 +893,6 @@
                     }
                   ]
                 }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
               "x-ms-copy-completion-time": {
                 "type": "string",
@@ -1017,23 +1095,9 @@
                 "type": "string",
                 "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
               },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
-              },
-              "x-ms-structured-body": {
-                "type": "string",
-                "description": "Indicates the response body contains a structured message and specifies the message schema version and properties."
-              },
-              "x-ms-structured-content-length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
               },
               "x-ms-tag-count": {
                 "type": "integer",
@@ -1084,11 +1148,6 @@
               "Content-Range": {
                 "type": "string",
                 "description": "Indicates the range of bytes returned in the event that the client requested a subset of the blob by setting the 'Range' request header."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
                 "type": "string",
@@ -1147,11 +1206,6 @@
                     }
                   ]
                 }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
               "x-ms-content-crc64": {
                 "type": "string",
@@ -1358,23 +1412,9 @@
                 "type": "string",
                 "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
               },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
-              },
-              "x-ms-structured-body": {
-                "type": "string",
-                "description": "Indicates the response body contains a structured message and specifies the message schema version and properties."
-              },
-              "x-ms-structured-content-length": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The length of the blob/file content inside the message body when the response body is returned as a structured message. Will always be smaller than Content-Length."
               },
               "x-ms-tag-count": {
                 "type": "integer",
@@ -1445,16 +1485,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -1696,11 +1726,6 @@
                   ]
                 }
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -1844,11 +1869,6 @@
               "x-ms-meta": {
                 "type": "string",
                 "description": "The metadata headers."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -1954,11 +1974,6 @@
                   ]
                 }
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -2102,11 +2117,6 @@
               "x-ms-meta": {
                 "type": "string",
                 "description": "The metadata headers."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -2259,24 +2269,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2413,10 +2406,6 @@
           "200": {
             "description": "The request has succeeded.",
             "headers": {
-              "Accept-Ranges": {
-                "type": "string",
-                "description": "Indicates that the service supports requests for partial blob content."
-              },
               "Cache-Control": {
                 "type": "string",
                 "description": "This header is returned if it was previously specified for the blob."
@@ -2441,11 +2430,6 @@
               "Content-MD5": {
                 "type": "string",
                 "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
               "ETag": {
                 "type": "string",
@@ -2646,11 +2630,6 @@
                     }
                   ]
                 }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
               "x-ms-copy-completion-time": {
                 "type": "string",
@@ -2890,11 +2869,6 @@
                   ]
                 }
               },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
@@ -2921,198 +2895,6 @@
     }
   },
   "x-ms-paths": {
-    "/?restype=service&comp=properties": {
-      "get": {
-        "operationId": "GetProperties",
-        "description": "Retrieves properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/StorageServiceProperties"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "SetProperties",
-        "description": "Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
-        "consumes": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StorageServiceProperties"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      }
-    },
-    "/?restype=service&comp=userdelegationkey": {
-      "post": {
-        "operationId": "GetUserDelegationKey",
-        "description": "Retrieves a user delegation key for the Blob service. This is only a valid operation when using bearer token authentication.",
-        "produces": [
-          "application/xml",
-          "application/json"
-        ],
-        "consumes": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/KeyInfo"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UserDelegationKey"
-            },
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      }
-    },
     "/{containerName}?restype=container&comp=metadata": {
       "put": {
         "operationId": "Container_SetMetadata",
@@ -3173,33 +2955,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The ETag contains a value that you can use to perform operations conditionally."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3299,16 +3055,6 @@
                     }
                   ]
                 }
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -3437,16 +3183,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -3516,16 +3252,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -3595,16 +3321,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -3719,16 +3435,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -3827,19 +3533,9 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -3928,16 +3624,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -4027,19 +3713,9 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -4130,11 +3806,6 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
@@ -4143,11 +3814,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "Approximate time remaining in the lease period, in seconds."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -4245,19 +3911,9 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -4420,16 +4076,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -4599,16 +4245,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -4705,19 +4341,9 @@
                   ]
                 }
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-is-hns-enabled": {
                 "type": "boolean",
                 "description": "Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-sku-name": {
                 "type": "string",
@@ -4881,16 +4507,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -5025,38 +4641,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The ETag contains a value that you can use to perform operations conditionally."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The date/time that the container was last modified."
-              },
-              "x-ms-blob-sequence-number": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -5186,11 +4771,6 @@
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-immutability-policy-mode": {
                 "type": "string",
                 "description": "Indicates the immutability policy mode of the blob.",
@@ -5225,11 +4805,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -5308,16 +4883,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -5405,19 +4970,9 @@
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-legal-hold": {
                 "type": "boolean",
                 "description": "Specifies the legal hold status to set on the blob."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -5557,49 +5112,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "ETag": {
-                "type": "string",
-                "description": "The ETag contains a value that you can use to perform operations conditionally."
-              },
-              "Last-Modified": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-encryption-key-sha256": {
-                "type": "string",
-                "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
-              },
-              "x-ms-encryption-scope": {
-                "type": "string",
-                "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-request-server-encrypted": {
-                "type": "boolean",
-                "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
-              },
-              "x-ms-version-id": {
-                "type": "string",
-                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
-              }
-            }
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -5708,19 +5221,9 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -5821,16 +5324,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -5932,19 +5425,9 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -6054,19 +5537,9 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-lease-id": {
                 "type": "string",
                 "description": "Uniquely identifies a blobs' lease"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -6169,20 +5642,10 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-lease-time": {
                 "type": "integer",
                 "format": "int32",
                 "description": "Approximate time remaining in the lease period, in seconds."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -6337,16 +5800,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -6725,11 +6178,6 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-copy-id": {
                 "type": "string",
                 "description": "String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy."
@@ -6769,11 +6217,6 @@
                     }
                   ]
                 }
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-version-id": {
                 "type": "string",
@@ -7136,11 +6579,6 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -7188,11 +6626,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-version-id": {
                 "type": "string",
@@ -7276,16 +6709,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -7514,34 +6937,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
+            "description": "The request has succeeded."
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
-            }
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -7646,19 +7045,9 @@
                   ]
                 }
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-is-hns-enabled": {
                 "type": "boolean",
                 "description": "Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-sku-name": {
                 "type": "string",
@@ -7802,16 +7191,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -7927,16 +7306,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -8327,11 +7696,6 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-encryption-key-sha256": {
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
@@ -8339,11 +7703,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -8598,11 +7957,6 @@
                 "format": "int64",
                 "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -8614,11 +7968,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -8827,19 +8176,9 @@
                 "format": "int64",
                 "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -9115,11 +8454,6 @@
                 "format": "int64",
                 "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -9131,11 +8465,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -9283,16 +8612,6 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -9451,16 +8770,6 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -9621,16 +8930,6 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -9780,16 +9079,6 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The current sequence number for a page blob. This header is not returned for block blobs or append blobs."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -9891,11 +9180,6 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-copy-id": {
                 "type": "string",
                 "description": "String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy."
@@ -9935,11 +9219,6 @@
                     }
                   ]
                 }
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -10230,11 +9509,6 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-encryption-key-sha256": {
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
@@ -10242,11 +9516,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -10488,11 +9757,6 @@
                 "format": "int32",
                 "description": "The number of committed blocks present in the blob. This header is returned only for append blobs."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -10504,11 +9768,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -10787,11 +10046,6 @@
                 "format": "int32",
                 "description": "The number of committed blocks present in the blob. This header is returned only for append blobs."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -10803,11 +10057,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -10917,16 +10166,6 @@
               "x-ms-blob-sealed": {
                 "type": "boolean",
                 "description": "If this blob has been sealed"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -11309,23 +10548,6 @@
             "x-ms-client-name": "transactionalContentCrc64"
           },
           {
-            "name": "x-ms-structured-body",
-            "in": "header",
-            "description": "Required if the request body is a structured message. Specifies the message schema version and properties.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "structuredBodyType"
-          },
-          {
-            "name": "x-ms-structured-content-length",
-            "in": "header",
-            "description": "Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length.",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "x-ms-client-name": "structuredContentLength"
-          },
-          {
             "name": "x-ms-blob-type",
             "in": "header",
             "description": "The type of the blob.",
@@ -11361,11 +10583,6 @@
                 "type": "string",
                 "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
               },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag contains a value that you can use to perform operations conditionally."
@@ -11375,11 +10592,6 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-encryption-key-sha256": {
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
@@ -11388,18 +10600,9 @@
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
               },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
-              },
-              "x-ms-structured-body": {
-                "type": "string",
-                "description": "Indicates the response body contains a structured message and specifies the message schema version and properties."
               },
               "x-ms-version-id": {
                 "type": "string",
@@ -11845,11 +11048,6 @@
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-encryption-key-sha256": {
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
@@ -11857,11 +11055,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -11921,7 +11114,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
-            "format": "base64url",
+            "format": "base64",
             "x-ms-client-name": "blockId"
           },
           {
@@ -12013,23 +11206,6 @@
             "x-ms-client-name": "encryptionScope"
           },
           {
-            "name": "x-ms-structured-body",
-            "in": "header",
-            "description": "Required if the request body is a structured message. Specifies the message schema version and properties.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "structuredBodyType"
-          },
-          {
-            "name": "x-ms-structured-content-length",
-            "in": "header",
-            "description": "Required if the request body is a structured message. Specifies the length of the blob/file content inside the message body. Will always be smaller than Content-Length.",
-            "required": false,
-            "type": "integer",
-            "format": "int64",
-            "x-ms-client-name": "structuredContentLength"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -12051,16 +11227,6 @@
                 "type": "string",
                 "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
               },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -12073,18 +11239,9 @@
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
               },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
                 "description": "The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise."
-              },
-              "x-ms-structured-body": {
-                "type": "string",
-                "description": "Indicates the response body contains a structured message and specifies the message schema version and properties."
               }
             }
           },
@@ -12133,7 +11290,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
-            "format": "base64url",
+            "format": "base64",
             "x-ms-client-name": "blockId"
           },
           {
@@ -12300,11 +11457,6 @@
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-content-crc64": {
                 "type": "string",
                 "description": "This response header is returned so that the client can check for the integrity of the copied content."
@@ -12316,11 +11468,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -12718,11 +11865,6 @@
                 "type": "string",
                 "description": "If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity."
               },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag contains a value that you can use to perform operations conditionally."
@@ -12731,11 +11873,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "The date/time that the container was last modified."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
               },
               "x-ms-content-crc64": {
                 "type": "string",
@@ -12748,11 +11885,6 @@
               "x-ms-encryption-scope": {
                 "type": "string",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-request-server-encrypted": {
                 "type": "boolean",
@@ -12884,11 +12016,6 @@
               "$ref": "#/definitions/BlockList"
             },
             "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
               "ETag": {
                 "type": "string",
                 "description": "The ETag contains a value that you can use to perform operations conditionally."
@@ -12902,16 +12029,6 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -12966,21 +12083,23 @@
             "x-ms-client-name": "contentLength"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "The body of the request.",
+            "name": "name",
+            "in": "formData",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "formData",
+            "required": true,
+            "type": "file"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "file"
+              "type": "string"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -13099,16 +12218,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -13216,18 +12325,6 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ListContainersSegmentResponse"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              }
             }
           },
           "default": {
@@ -13316,19 +12413,9 @@
                   ]
                 }
               },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
               "x-ms-is-hns-enabled": {
                 "type": "boolean",
                 "description": "Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               },
               "x-ms-sku-name": {
                 "type": "string",
@@ -13424,16 +12511,6 @@
                 "type": "string",
                 "format": "date-time-rfc7231",
                 "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -14482,10 +13559,6 @@
         "exposedHeaders",
         "maxAgeInSeconds"
       ]
-    },
-    "DateResponseHeader": {
-      "type": "object",
-      "description": "The Date response header"
     },
     "DeleteSnapshotsOptionType": {
       "type": "string",

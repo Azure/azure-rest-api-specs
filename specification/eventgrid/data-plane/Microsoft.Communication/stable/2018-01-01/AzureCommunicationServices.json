@@ -1560,6 +1560,10 @@
           "description": "The received message content",
           "type": "string"
         },
+        "messageId": {
+          "description": "Message ID. Format is Guid as string.",
+          "type": "string"
+        },
         "channelType": {
           "description": "The received message channel Kind",
           "type": "string",
@@ -1578,11 +1582,20 @@
             ]
           }
         },
+        "messageType": {
+          "description": "WhatsApp Message Type",
+          "type": "string"
+        },
         "media": {
           "description": "The received message media content",
           "$ref": "#/definitions/AcsMessageMediaContent",
           "type": "object",
           "x-ms-client-name": "mediaContent"
+        },
+        "reaction": {
+          "description": "The received message reaction content",
+          "$ref": "#/definitions/AcsMessageReactionContent",
+          "type": "object"
         },
         "context": {
           "description": "The received message context",
@@ -1601,6 +1614,9 @@
           "x-ms-client-name": "interactiveContent"
         }
       },
+      "required": [
+        "messageType"
+      ],
       "x-ms-examples": {
         "snapshotCreatedCloudEventsSchema": {
           "$ref": "./examples/cloud-events-schema/advanced_message_received.json"
@@ -1709,7 +1725,11 @@
           "$ref": "#/definitions/AcsMessageChannelEventError",
           "type": "object"
         }
-      }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
     },
     "AcsChatThreadEventBaseProperties": {
       "description": "Schema of common properties of all chat thread events",
@@ -2249,8 +2269,33 @@
         "caption": {
           "description": "The caption for the media object, if supported and provided",
           "type": "string"
+        },
+        "animated": {
+          "description": "Set to true if the sticker is animated; false otherwise.",
+          "type": "boolean"
         }
-      }
+      },
+      "required": [
+        "mimeType",
+        "id"
+      ]
+    },
+    "AcsMessageReactionContent": {
+      "description": "Message Reaction Content",
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "WhatsApp message ID of message you want to apply the emoji to.",
+          "type": "string"
+        },
+        "emoji": {
+          "description": "Unicode escape sequence of the emoji.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "messageId"
+      ]
     },
     "AcsMessageContext": {
       "description": "Message Context",
