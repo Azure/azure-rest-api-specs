@@ -55,8 +55,19 @@ directive:
     transform: delete $["x-ms-client-name"]
     reason: https://github.com/Azure/typespec-azure/issues/2517
   - from: ComputeRP.json
-    where: $.definitions.RestorePointSourceVMStorageProfile.properties.dataDisks
-    transform: delete $["x-ms-client-name"]
+    where: $.definitions.VirtualMachineScaleSetStorageProfile.properties.diskControllerType
+    transform: >
+      delete $["$ref"];
+      $["type"] = "string";
+  - from: ComputeRP.json
+    where: $.definitions.VirtualMachineScaleSetUpdateStorageProfile.properties.diskControllerType
+    transform: >
+      delete $["$ref"];
+      $["type"] = "string";
+  - from: swagger-document
+    where: "$.definitions.Operation"
+    transform: >
+      $["x-ms-client-name"] = "OperationValue";
 ```
 
 ### Go multi-api
