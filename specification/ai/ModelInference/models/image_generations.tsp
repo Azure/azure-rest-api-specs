@@ -137,7 +137,7 @@ model ImageGenerationPrompt {
     a generation process that fully follows the input image. 0 a generation a process that doesn't
     take into consideration the prompt image.
     """)
-  strength?: int32 = 1;
+  strength?: float32 = 1;
 }
 
 @doc("The quality of the image to generate.")
