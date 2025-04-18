@@ -1,9 +1,9 @@
 {
-  "operationId": "KnowledgeAgents_Retrieve",
+  "operationId": "KnowledgeRetrieval_Retrieve",
   "title": "KnowledgeAgentRetrieve",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
-    "agentName": "temp-preview-test",
+    "agentName": "agent-preview-test",
     "api-version": "2025-05-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "retrievalRequest": {
@@ -22,6 +22,7 @@
         {
           "indexName": "preview-test",
           "filterAddOn": "foo eq bar",
+          "maxDocsForReranker": 50,
           "rerankerThreshold": 2.5,
           "includeReferenceSourceData": true
         }
@@ -32,15 +33,6 @@
     "200": {
       "body": {
         "response": [
-          {
-            "role": "tool",
-            "content": [
-              {
-                "type": "text",
-                "text": "[{...}]"
-              }
-            ]
-          },
           {
             "role": "tool",
             "content": [
@@ -75,7 +67,7 @@
             "id": 2,
             "targetIndex": "preview-test",
             "query": {
-              "search": "hello world",
+              "search": "hello world two",
               "filter": "foo eq bar"
             },
             "queryTime": "2025-01-01T00:08:45.045Z",
@@ -88,8 +80,9 @@
             "type": "AzureSearchDoc",
             "id": "83dd7d40",
             "activitySource": 1,
-            "docKey": "id",
+            "docKey": "myDocKey1",
             "sourceData": {
+              "id": "myDocKey1",
               "title": "high_doc",
               "content": "hello world"
             }
@@ -98,28 +91,9 @@
             "type": "AzureSearchDoc",
             "id": "83dd7d41",
             "activitySource": 1,
-            "docKey": "id",
+            "docKey": "myDocKey2",
             "sourceData": {
-              "title": "low_doc",
-              "content": "goodbye world"
-            }
-          },
-          {
-            "type": "AzureSearchDoc",
-            "id": "83dd7d42",
-            "activitySource": 2,
-            "docKey": "id",
-            "sourceData": {
-              "title": "high_doc",
-              "content": "hello world"
-            }
-          },
-          {
-            "type": "AzureSearchDoc",
-            "id": "83dd7d43",
-            "activitySource": 2,
-            "docKey": "id",
-            "sourceData": {
+              "id": "myDocKey2",
               "title": "low_doc",
               "content": "goodbye world"
             }
