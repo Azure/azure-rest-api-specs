@@ -613,7 +613,7 @@
     "/geocode:autocomplete": {
       "get": {
         "summary": "Use to get ranked list of suggested entities based on a user's location and a partial query.",
-        "description": "**Autocomplete API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nGiven a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely. Requests can be called using user locations.\n\n",
+        "description": "**Autocomplete API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nGiven a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.\n\n",
         "operationId": "Search_GetGeocodeAutocomplete",
         "produces": [
           "application/geo+json"
@@ -624,6 +624,9 @@
           },
           "Autocomplete API call to search for 'Muir Woods', filtered by address typeGroup": {
             "$ref": "./examples/AutocompleteAddress.json"
+          },
+          "Autocomplete API call to search for 'Muir Woods', filtered by roadblock type, address typeGroup": {
+            "$ref": "./examples/AutocompleteRoadBlockAddressResultType.json"
           },
           "Autocomplete API call to search for 'Muir Woods', filtered by place typeGroup": {
             "$ref": "./examples/AutocompletePlace.json"
@@ -664,7 +667,7 @@
           {
             "name": "resultTypeGroups",
             "in": "query",
-            "description": "A comma separated list of returned entity type groups. The possible values are \n\n- Address\n- Place\n\nPlace represents points of interest, like natural landmarks.",
+            "description": "A comma separated list of returned entity type groups. The possible values are \n\n- Address\n- Place\n\nPlaces includes non-address entities, such as cities, postcodes, landmarks, populated places, etc.",
             "type": "array",
             "items": {
               "type": "string",
@@ -704,7 +707,7 @@
           {
             "name": "countryRegion",
             "in": "query",
-            "description": "Signal for the autocomplete result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR./\n\n",
+            "description": "Signal for the autocomplete result to an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that is specified e.g. FR./ Only results in the specified country/region will be returned.\n\n",
             "required": false,
             "type": "string",
             "default": "none"
@@ -1393,23 +1396,23 @@
       "type": "object",
       "properties": {
         "typeGroup": {
-          "description": "Place or Address",
+          "description": "Address or Place",
           "type": "string",
           "enum": [
-            "Place",
-            "Address"
+            "Address",
+            "Place"
           ],
           "x-ms-enum": {
             "name": "AutocompleteTypeGroupsEnum",
             "modelAsString": true,
             "values": [
               {
-                "name": "Place",
-                "value": "Place"
-              },
-              {
                 "name": "Address",
                 "value": "Address"
+              },
+              {
+                "name": "Place",
+                "value": "Place"
               }
             ]
           }
