@@ -56,7 +56,12 @@ model VirtualMachine
   @visibility(Lifecycle.Read)
   managedBy?: string;
 
-  ...Azure.ResourceManager.EntityTagProperty;
+  /**
+   * Etag is property returned in Create/Update/Get response of the VM, so that customer can supply it in the header to ensure optimistic updates.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Placement section specifies the user-defined constraints for virtual machine hardware placement. This property cannot be changed once VM is provisioned. Minimum api-version: 2024-11-01.

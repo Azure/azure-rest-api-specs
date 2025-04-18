@@ -2567,8 +2567,7 @@ model VirtualMachineScaleSetDataDisk {
   /**
    * Specifies the Read-Write IOPS for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
    */
-  @encodedName("application/json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int64;
+  diskIOPSReadWrite?: int64;
 
   /**
    * Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
@@ -5141,8 +5140,7 @@ model DataDisk {
    * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "diskIOPSReadWrite")
-  diskIopsReadWrite?: int64;
+  diskIOPSReadWrite?: int64;
 
   /**
    * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
@@ -7755,7 +7753,7 @@ model RestorePointSourceVMStorageProfile {
   /**
    * Gets the OS disk of the VM captured at the time of the restore point creation.
    */
-  osDisk?: RestorePointSourceVmosDisk;
+  osDisk?: RestorePointSourceVMOSDisk;
 
   /**
    * Gets the data disks of the VM captured at the time of the restore point creation.
@@ -7773,7 +7771,7 @@ model RestorePointSourceVMStorageProfile {
 /**
  * Describes an Operating System disk.
  */
-model RestorePointSourceVmosDisk {
+model RestorePointSourceVMOSDisk {
   /**
    * Gets the Operating System type.
    */

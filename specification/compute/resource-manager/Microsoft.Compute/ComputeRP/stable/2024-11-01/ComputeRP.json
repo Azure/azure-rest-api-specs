@@ -13187,8 +13187,7 @@
           "type": "integer",
           "format": "int64",
           "description": "Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.",
-          "readOnly": true,
-          "x-ms-client-name": "diskIopsReadWrite"
+          "readOnly": true
         },
         "diskMBpsReadWrite": {
           "type": "integer",
@@ -16667,32 +16666,7 @@
         }
       }
     },
-    "RestorePointSourceVMStorageProfile": {
-      "type": "object",
-      "description": "Describes the storage profile.",
-      "properties": {
-        "osDisk": {
-          "$ref": "#/definitions/RestorePointSourceVmosDisk",
-          "description": "Gets the OS disk of the VM captured at the time of the restore point creation."
-        },
-        "dataDisks": {
-          "type": "array",
-          "description": "Gets the data disks of the VM captured at the time of the restore point creation.",
-          "items": {
-            "$ref": "#/definitions/RestorePointSourceVMDataDisk"
-          },
-          "x-ms-identifiers": [
-            "lun"
-          ]
-        },
-        "diskControllerType": {
-          "$ref": "#/definitions/DiskControllerTypes",
-          "description": "Gets the disk controller type of the VM captured at the time of the restore point creation.",
-          "readOnly": true
-        }
-      }
-    },
-    "RestorePointSourceVmosDisk": {
+    "RestorePointSourceVMOSDisk": {
       "type": "object",
       "description": "Describes an Operating System disk.",
       "properties": {
@@ -16733,6 +16707,31 @@
         "writeAcceleratorEnabled": {
           "type": "boolean",
           "description": "Shows true if the disk is write-accelerator enabled.",
+          "readOnly": true
+        }
+      }
+    },
+    "RestorePointSourceVMStorageProfile": {
+      "type": "object",
+      "description": "Describes the storage profile.",
+      "properties": {
+        "osDisk": {
+          "$ref": "#/definitions/RestorePointSourceVMOSDisk",
+          "description": "Gets the OS disk of the VM captured at the time of the restore point creation."
+        },
+        "dataDisks": {
+          "type": "array",
+          "description": "Gets the data disks of the VM captured at the time of the restore point creation.",
+          "items": {
+            "$ref": "#/definitions/RestorePointSourceVMDataDisk"
+          },
+          "x-ms-identifiers": [
+            "lun"
+          ]
+        },
+        "diskControllerType": {
+          "$ref": "#/definitions/DiskControllerTypes",
+          "description": "Gets the disk controller type of the VM captured at the time of the restore point creation.",
           "readOnly": true
         }
       }
@@ -18273,9 +18272,9 @@
           "description": "ManagedBy is set to Virtual Machine Scale Set(VMSS) flex ARM resourceID, if the VM is part of the VMSS. This property is used by platform for internal resource group delete optimization.",
           "readOnly": true
         },
-        "eTag": {
+        "etag": {
           "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "description": "Etag is property returned in Create/Update/Get response of the VM, so that customer can supply it in the header to ensure optimistic updates.",
           "readOnly": true
         },
         "placement": {
@@ -19752,9 +19751,9 @@
           "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine Scale Set."
         },
-        "eTag": {
+        "etag": {
           "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "description": "Etag is property returned in Create/Update/Get response of the VMSS, so that customer can supply it in the header to ensure optimistic updates",
           "readOnly": true
         }
       },
@@ -19801,8 +19800,7 @@
         "diskIOPSReadWrite": {
           "type": "integer",
           "format": "int64",
-          "description": "Specifies the Read-Write IOPS for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.",
-          "x-ms-client-name": "diskIopsReadWrite"
+          "description": "Specifies the Read-Write IOPS for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB."
         },
         "diskMBpsReadWrite": {
           "type": "integer",

@@ -23,8 +23,6 @@ model DiskRestorePoint
   >;
 }
 
-model DiskRestorePointListResult is Azure.Core.Page<DiskRestorePoint>;
-
 alias VMRestorePointPath = {
   ...Azure.ResourceManager.Legacy.BasePath;
 
@@ -73,7 +71,7 @@ interface DiskRestorePoints {
   @operationId("DiskRestorePoint_ListByRestorePoint")
   listByRestorePoint is DiskRestorePointsOps.List<
     DiskRestorePoint,
-    Response = ArmResponse<DiskRestorePointListResult>
+    Response = ArmResponse<DiskRestorePointList>
   >;
 
   /** Grants access to a diskRestorePoint. */

@@ -271,10 +271,6 @@ using Microsoft.Compute;
   "parameters"
 );
 @@clientName(AvailabilitySetSkuTypes, "AvailabilitySetSkuType", "java");
-@@clientName(RestorePointSourceVmosDisk,
-  "RestorePointSourceVMOSDisk",
-  "python"
-);
 @@clientName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
 );
