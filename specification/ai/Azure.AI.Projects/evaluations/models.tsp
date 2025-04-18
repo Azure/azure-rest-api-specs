@@ -100,13 +100,13 @@ model SamplingConfiguration {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model AgentEvaluationRequest {
-  @doc("Identifier of the agent thread. This field is mandatory for agent API v1, but will be ignored by agent API v2.")
-  @visibility(Lifecycle.Read)
-  threadId?: string;
-
   @doc("Identifier of the agent run.")
   @visibility(Lifecycle.Read)
   runId: string;
+
+  @doc("Identifier of the agent thread. This field is mandatory currently, but it will be optional in the future.")
+  @visibility(Lifecycle.Read)
+  threadId?: string;
 
   @doc("Evaluators to be used for the evaluation.")
   @visibility(Lifecycle.Read)
@@ -116,7 +116,7 @@ model AgentEvaluationRequest {
   @visibility(Lifecycle.Read)
   samplingConfiguration?: SamplingConfiguration;
 
-  @doc("Optional and temporary way to pass the app insights connection string to the evaluator.")
+  @doc("Optional and temporary way to pass the AppInsights connection string to the evaluator. When this string is not null, the evaluation results will be logged to Azure AppInsights.")
   @visibility(Lifecycle.Read)
   appInsightsConnectionString?: string;
 }
