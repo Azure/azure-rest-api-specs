@@ -121,6 +121,50 @@ model AgentEvaluationRequest {
   appInsightsConnectionString?: string;
 }
 
+@doc("Evaluation result for agent run.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluationResult {
+  @doc("Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion.")
+  @visibility(Lifecycle.Read)
+  evaluator: string;
+
+  @doc("Score of the given evaluator. No restriction on range.")
+  @visibility(Lifecycle.Read)
+  score: float32;
+
+  @doc("Status of the evaluation result. Options: Success, Failure, NotApplicable.")
+  @visibility(Lifecycle.Read)
+  status: string;
+
+  @doc("Reasoning for the evaluation result.")
+  @visibility(Lifecycle.Read)
+  reason?: string;
+
+  @doc("Version of the evaluator that was used to evaluate the agent's completion.")
+  @visibility(Lifecycle.Read)
+  version?: string;
+
+  @doc("Internal message Id for object mapping between the host service and evaluation package.")
+  @visibility(Lifecycle.Read)
+  messageId?: string;
+
+  @doc("The unique identifier of the thread.")
+  @visibility(Lifecycle.Read)
+  threadId?: string;
+
+  @doc("The unique identifier of the run.")
+  @visibility(Lifecycle.Read)
+  runId: string;
+
+  @doc("A string explaining why there was an error, if applicable.")
+  @visibility(Lifecycle.Read)
+  error?: string;
+
+  @doc("Additional properties relevant to the evaluator. These will differ between evaluators.")
+  additionalDetails?: Record<string>;
+}
+
 @doc("Long running operation response for agent evaluation.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
