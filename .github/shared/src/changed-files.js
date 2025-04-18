@@ -1,13 +1,17 @@
 // @ts-check
 
-import { diff } from "./git.js";
+import debug from "debug";
+import { simpleGit } from "simple-git";
+
+// Enable simple-git debug logging to improve console output
+debug.enable("simple-git");
 
 /**
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
  * @param {string} [options.headCommitish] Default: "HEAD".
- * @param {import('./types.js').ILogger} [options.logger]
+ * @param {import('./logger.js').ILogger} [options.logger]
  * @returns {Promise<string[]>} List of changed files, using posix paths, relative to options.cwd. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
@@ -23,11 +27,11 @@ export async function getChangedFiles(options = {}) {
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await diff(baseCommitish, headCommitish, {
-    args: ["--name-only"],
-    cwd,
-    logger: logger,
-  });
+  const result = await simpleGit(cwd).diff([
+    "--name-only",
+    baseCommitish,
+    headCommitish,
+  ]);
 
   const files = result.trim().split("\n");
 
