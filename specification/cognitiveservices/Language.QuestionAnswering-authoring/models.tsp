@@ -9,6 +9,28 @@ using Azure.Core.Traits;
 
 namespace Language.QuestionAnswering.Authoring;
 
+/** The secret key for your Azure AI Language resource. */
+model AzureKey
+  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+
+/**
+ * These are the [Azure Active Directory OAuth2](https://learn.microsoft.com/azure/active-directory/develop/v1-overview) Flows.
+ * When paired with [Azure role-based access](https://learn.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs.
+ * Azure role-based access controls are used to designate access to one or more Azure Language resource account or sub-resources. Any user, group, or service principal can be granted access
+ * via a  built-in role or a custom role composed of one or more permissions to Azure Language REST APIs.
+ *
+ * To implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth).
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model AADToken
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      scopes: ["https://cognitiveservices.azure.com/.default"];
+    }
+  ]>;
+
 alias CommonListParams = {
   /** The maximum number of resources to return from the collection. */
   @query("top")
@@ -278,12 +300,12 @@ union UpdateOperationKind {
  * Represents the project.
  */
 @resource("authoring/query-knowledgebases/projects")
-model ProjectMetadata {
+model QuestionAnsweringProjectMetadata {
   /**
    * Name of the project.
    */
   @key("projectName")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @maxLength(100)
   projectName: string;
 
@@ -447,7 +469,7 @@ model QuestionAnsweringAuthoringProjectDeletionJobState {
  * Job state represents the job metadata and any errors.
  */
 @resource("sources/jobs")
-@parentResource(ProjectMetadata)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QuestionAnsweringAuthoringUpdateSourcesJobState {
   ...QuestionAnsweringAuthoringJobState;
 }
@@ -456,7 +478,7 @@ model QuestionAnsweringAuthoringUpdateSourcesJobState {
  * Job state represents the job metadata and any errors.
  */
 @resource("qnas/jobs")
-@parentResource(ProjectMetadata)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QuestionAnsweringAuthoringUpdateQnasJobState {
   ...QuestionAnsweringAuthoringJobState;
 }
@@ -465,7 +487,7 @@ model QuestionAnsweringAuthoringUpdateQnasJobState {
  * Export job status, project metadata, and assets.
  */
 @resource("export/jobs")
-@parentResource(ProjectMetadata)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QuestionAnsweringAuthoringExportJobState {
   ...QuestionAnsweringAuthoringJobState;
   ...ExportJobResultUrl;
@@ -475,7 +497,7 @@ model QuestionAnsweringAuthoringExportJobState {
  * Import job status, project metadata, and assets.
  */
 @resource("import/jobs")
-@parentResource(ProjectMetadata)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QuestionAnsweringAuthoringImportJobState {
   ...QuestionAnsweringAuthoringJobState;
 }
@@ -575,7 +597,7 @@ model SynonymAssets is Azure.Core.Page<WordAlterations>;
  * Collection of word alterations.
  */
 @resource("synonyms")
-@parentResource(ProjectMetadata)
+@parentResource(QuestionAnsweringProjectMetadata)
 model WordAlterations {
   /**
    * Collection of word alterations.
@@ -597,7 +619,7 @@ model ImportQnaRecord {
  * QnA Record with last updated date-time.
  */
 @resource("qnas")
-@parentResource(ProjectMetadata)
+@parentResource(QuestionAnsweringProjectMetadata)
 model RetrieveQnaRecord {
   ...QnaRecord;
   ...LastUpdatedDateTimeParameter;
@@ -611,7 +633,7 @@ model QnaRecord {
    * Unique ID for the QnA.
    */
   @key
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   id: int32;
 
   /**
@@ -631,6 +653,8 @@ model QnaRecord {
   /**
    * List of questions associated with the answer.
    */
+  @minItems(1)
+  @maxItems(100)
   questions?: string[];
 
   /**
@@ -664,6 +688,7 @@ model QnaDialog {
   /**
    * List of prompts associated with the answer.
    */
+  @maxItems(20)
   prompts?: QnaPrompt[];
 }
 
@@ -754,7 +779,7 @@ model SourceDisplayNameParameter {
  * Project deployment details.
  */
 @resource("deployments")
-@parentResource(ProjectMetadata)
+@parentResource(QuestionAnsweringProjectMetadata)
 model ProjectDeployment {
   /**
    * Name of the deployment.
@@ -774,7 +799,7 @@ model ProjectDeployment {
  * Custom source record with last updated date-time.
  */
 @resource("sources")
-@parentResource(ProjectMetadata)
+@parentResource(QuestionAnsweringProjectMetadata)
 model QnaSourceRecord {
   ...QnaSourceMetadata;
   ...LastUpdatedDateTimeParameter;
@@ -796,7 +821,7 @@ model QnaSourceMetadata {
    * the complete URL if it's a 'url' source.
    */
   @key
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   source: string;
 
   /**
@@ -812,7 +837,7 @@ model QnaSourceMetadata {
   /**
    * Content structure type for sources.
    */
-  contentStructureKind?: SourceContentStructureKind;
+  contentStructureKind?: SourceContentStructureKind = SourceContentStructureKind.unstructured;
 }
 
 /**
@@ -912,7 +937,8 @@ model NoContentResponse is Response<204>;
 model AddFeedBackNoContentResponse is NoContentResponse;
 
 alias ExportJobOkResponse = TypeSpec.Http.OkResponse &
-  QuestionAnsweringAuthoringExportJobState;
+  QuestionAnsweringAuthoringExportJobState &
+  Foundations.LongRunningStatusLocation;
 
 alias ExportJobAcceptedResponse = TypeSpec.Http.AcceptedResponse &
   Foundations.LongRunningStatusLocation;

@@ -3,9 +3,32 @@ import "@typespec/http";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
+using TypeSpec.Http;
 
 @versioned(Language.QuestionAnswering.Versions)
 namespace Language.QuestionAnswering;
+
+/** The secret key for your Azure AI Language resource. */
+model AzureKey
+  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+
+/**
+ * These are the [Azure Active Directory OAuth2](https://learn.microsoft.com/azure/active-directory/develop/v1-overview) Flows.
+ * When paired with [Azure role-based access](https://learn.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs.
+ * Azure role-based access controls are used to designate access to one or more Azure Language resource account or sub-resources. Any user, group, or service principal can be granted access
+ * via a  built-in role or a custom role composed of one or more permissions to Azure Language REST APIs.
+ *
+ * To implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth).
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
+model AADToken
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      scopes: ["https://cognitiveservices.azure.com/.default"];
+    }
+  ]>;
 
 /**
  * Type of ranker to be used.
@@ -311,7 +334,7 @@ model ShortAnswerOptions {
   /**
    * Enable or disable Answer Span prediction.
    */
-  enable: true;
+  enable: boolean;
 
   /**
    * Minimum threshold score required to include an answer span, value ranges from 0

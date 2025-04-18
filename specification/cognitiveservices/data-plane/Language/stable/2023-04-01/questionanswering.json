@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Question Answering",
     "version": "2023-04-01",
-    "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms.  The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering. Further\ndocumentation can be found in <a\nhref=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
+    "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms.  The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -36,27 +36,29 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
+      "AzureKey": []
     },
     {
-      "OAuth2Auth": [
+      "AADToken": [
         "https://cognitiveservices.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    },
-    "OAuth2Auth": {
+    "AADToken": {
       "type": "oauth2",
+      "description": "These are the [Azure Active Directory OAuth2](https://learn.microsoft.com/azure/active-directory/develop/v1-overview) Flows.\nWhen paired with [Azure role-based access](https://learn.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs.\nAzure role-based access controls are used to designate access to one or more Azure Language resource account or sub-resources. Any user, group, or service principal can be granted access\nvia a  built-in role or a custom role composed of one or more permissions to Azure Language REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth).",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "https://cognitiveservices.azure.com/.default": ""
       }
+    },
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "The secret key for your Azure AI Language resource.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
     }
   },
   "tags": [],
@@ -64,7 +66,6 @@
     "/:query-knowledgebases": {
       "post": {
         "operationId": "QuestionAnswering_GetAnswers",
-        "summary": "Answers the specified question using your knowledge base.",
         "description": "Answers the specified question using your knowledge base.",
         "parameters": [
           {
@@ -124,7 +125,6 @@
     "/:query-text": {
       "post": {
         "operationId": "QuestionAnswering_GetAnswersFromText",
-        "summary": "Answers the specified question using the provided text in the body.",
         "description": "Answers the specified question using the provided text in the body.",
         "parameters": [
           {
@@ -169,6 +169,34 @@
     }
   },
   "definitions": {
+    "AADToken": {
+      "type": "object",
+      "description": "These are the [Azure Active Directory OAuth2](https://learn.microsoft.com/azure/active-directory/develop/v1-overview) Flows.\nWhen paired with [Azure role-based access](https://learn.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs.\nAzure role-based access controls are used to designate access to one or more Azure Language resource account or sub-resources. Any user, group, or service principal can be granted access\nvia a  built-in role or a custom role composed of one or more permissions to Azure Language REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth).",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OAuth2 authentication",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "type": "array",
+          "description": "Supported OAuth2 flows",
+          "items": {}
+        },
+        "defaultScopes": {
+          "type": "array",
+          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
+          "items": {}
+        }
+      },
+      "required": [
+        "type",
+        "flows",
+        "defaultScopes"
+      ]
+    },
     "AnswerSpan": {
       "type": "object",
       "description": "Answer span object of QnA.",
@@ -328,6 +356,41 @@
           }
         }
       }
+    },
+    "AzureKey": {
+      "type": "object",
+      "description": "The secret key for your Azure AI Language resource.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "API key authentication",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "in": {
+          "type": "string",
+          "description": "location of the API key",
+          "enum": [
+            "header"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the API key",
+          "enum": [
+            "Ocp-Apim-Subscription-Key"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type",
+        "in",
+        "name"
+      ]
     },
     "Error": {
       "type": "object",
@@ -841,10 +904,7 @@
       "properties": {
         "enable": {
           "type": "boolean",
-          "description": "Enable or disable Answer Span prediction.",
-          "enum": [
-            true
-          ]
+          "description": "Enable or disable Answer Span prediction."
         },
         "confidenceScoreThreshold": {
           "type": "number",

@@ -21,7 +21,6 @@ interface QuestionAnswering {
   /**
    * Answers the specified question using your knowledge base.
    */
-  @summary("Answers the specified question using your knowledge base.")
   @route("/:query-knowledgebases")
   @post
   getAnswers is RpcOperation<
@@ -52,7 +51,6 @@ interface QuestionAnswering {
   /**
    * Answers the specified question using the provided text in the body.
    */
-  @summary("Answers the specified question using the provided text in the body.")
   @route("/:query-text")
   @post
   getAnswersFromText is RpcOperation<

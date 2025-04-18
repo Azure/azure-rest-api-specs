@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Question Answering Authoring",
     "version": "2023-04-01",
-    "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms.  The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering. Further\ndocumentation can be found in <a\nhref=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
+    "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms.  The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -36,27 +36,29 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
+      "AzureKey": []
     },
     {
-      "OAuth2Auth": [
+      "AADToken": [
         "https://cognitiveservices.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    },
-    "OAuth2Auth": {
+    "AADToken": {
       "type": "oauth2",
+      "description": "These are the [Azure Active Directory OAuth2](https://learn.microsoft.com/azure/active-directory/develop/v1-overview) Flows.\nWhen paired with [Azure role-based access](https://learn.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs.\nAzure role-based access controls are used to designate access to one or more Azure Language resource account or sub-resources. Any user, group, or service principal can be granted access\nvia a  built-in role or a custom role composed of one or more permissions to Azure Language REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth).",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "https://cognitiveservices.azure.com/.default": ""
       }
+    },
+    "AzureKey": {
+      "type": "apiKey",
+      "description": "The secret key for your Azure AI Language resource.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
     }
   },
   "tags": [],
@@ -64,7 +66,6 @@
     "/authoring/query-knowledgebases/projects": {
       "get": {
         "operationId": "QuestionAnsweringProjects_ListProjects",
-        "summary": "Gets all projects for a user.",
         "description": "Gets all projects for a user.",
         "parameters": [
           {
@@ -99,7 +100,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedProjectMetadata"
+              "$ref": "#/definitions/PagedQuestionAnsweringProjectMetadata"
             }
           },
           "default": {
@@ -128,7 +129,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetProjectDetails",
-        "summary": "Get the requested project metadata.",
         "description": "Get the requested project metadata.",
         "parameters": [
           {
@@ -147,7 +147,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
             }
           },
           "default": {
@@ -171,7 +171,6 @@
       },
       "patch": {
         "operationId": "QuestionAnsweringProjects_CreateProject",
-        "summary": "Create or update a project.",
         "description": "Create or update a project.",
         "parameters": [
           {
@@ -191,7 +190,7 @@
             "description": "Parameters needed to create the project.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateProjectOptionsCreateOrUpdate"
+              "$ref": "#/definitions/CreateProjectOptions"
             }
           }
         ],
@@ -199,13 +198,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/ProjectMetadata"
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
             }
           },
           "default": {
@@ -229,7 +228,6 @@
       },
       "delete": {
         "operationId": "QuestionAnsweringProjects_DeleteProject",
-        "summary": "Delete the project.",
         "description": "Delete the project.",
         "parameters": [
           {
@@ -282,7 +280,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/:export": {
       "post": {
         "operationId": "QuestionAnsweringProjects_Export",
-        "summary": "Export project metadata and assets.",
         "description": "Export project metadata and assets.",
         "parameters": [
           {
@@ -363,6 +360,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/QuestionAnsweringAuthoringExportJobState"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "202": {
@@ -399,7 +403,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/:import": {
       "post": {
         "operationId": "QuestionAnsweringProjects_Import",
-        "summary": "Import project assets.",
         "description": "Import project assets.",
         "parameters": [
           {
@@ -522,7 +525,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/deployments": {
       "get": {
         "operationId": "QuestionAnsweringProjects_ListDeployments",
-        "summary": "List all deployments of a project.",
         "description": "List all deployments of a project.",
         "parameters": [
           {
@@ -594,7 +596,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
       "put": {
         "operationId": "QuestionAnsweringProjects_DeployProject",
-        "summary": "Deploy project to production.",
         "description": "Deploy project to production.",
         "parameters": [
           {
@@ -654,7 +655,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetDeployStatus",
-        "summary": "Gets the status of a Deploy job.",
         "description": "Gets the status of a Deploy job.",
         "parameters": [
           {
@@ -713,7 +713,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetExportStatus",
-        "summary": "Gets the status of an Export job, once job completes, returns the project\nmetadata, and assets.",
         "description": "Gets the status of an Export job, once job completes, returns the project\nmetadata, and assets.",
         "parameters": [
           {
@@ -765,7 +764,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/feedback": {
       "post": {
         "operationId": "QuestionAnsweringProjects_AddFeedback",
-        "summary": "Update Active Learning feedback.",
         "description": "Update Active Learning feedback.",
         "parameters": [
           {
@@ -816,7 +814,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetImportStatus",
-        "summary": "Gets the status of an Import job.",
         "description": "Gets the status of an Import job.",
         "parameters": [
           {
@@ -868,7 +865,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/qnas": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetQnas",
-        "summary": "Gets all the QnAs of a project.",
         "description": "Gets all the QnAs of a project.",
         "parameters": [
           {
@@ -945,7 +941,6 @@
       },
       "patch": {
         "operationId": "QuestionAnsweringProjects_UpdateQnas",
-        "summary": "Updates the QnAs of a project.",
         "description": "Updates the QnAs of a project.",
         "parameters": [
           {
@@ -1007,7 +1002,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetUpdateQnasStatus",
-        "summary": "Gets the status of update QnAs job.",
         "description": "Gets the status of update QnAs job.",
         "parameters": [
           {
@@ -1059,7 +1053,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/sources": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetSources",
-        "summary": "Gets all the sources of a project.",
         "description": "Gets all the sources of a project.",
         "parameters": [
           {
@@ -1129,7 +1122,6 @@
       },
       "patch": {
         "operationId": "QuestionAnsweringProjects_UpdateSources",
-        "summary": "Updates the sources of a project.",
         "description": "Updates the sources of a project.",
         "parameters": [
           {
@@ -1195,7 +1187,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetUpdateSourcesStatus",
-        "summary": "Gets the status of update sources job.",
         "description": "Gets the status of update sources job.",
         "parameters": [
           {
@@ -1247,7 +1238,6 @@
     "/authoring/query-knowledgebases/projects/{projectName}/synonyms": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetSynonyms",
-        "summary": "Gets all the synonyms of a project.",
         "description": "Gets all the synonyms of a project.",
         "parameters": [
           {
@@ -1317,7 +1307,6 @@
       },
       "put": {
         "operationId": "QuestionAnsweringProjects_UpdateSynonyms",
-        "summary": "Updates all the synonyms of a project.",
         "description": "Updates all the synonyms of a project.",
         "parameters": [
           {
@@ -1368,7 +1357,6 @@
     "/authoring/query-knowledgebases/projects/deletion-jobs/{jobId}": {
       "get": {
         "operationId": "QuestionAnsweringProjects_GetDeleteStatus",
-        "summary": "Gets the status of a Project delete job.",
         "description": "Gets the status of a Project delete job.",
         "parameters": [
           {
@@ -1411,6 +1399,34 @@
     }
   },
   "definitions": {
+    "AADToken": {
+      "type": "object",
+      "description": "These are the [Azure Active Directory OAuth2](https://learn.microsoft.com/azure/active-directory/develop/v1-overview) Flows.\nWhen paired with [Azure role-based access](https://learn.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs.\nAzure role-based access controls are used to designate access to one or more Azure Language resource account or sub-resources. Any user, group, or service principal can be granted access\nvia a  built-in role or a custom role composed of one or more permissions to Azure Language REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth).",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OAuth2 authentication",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "type": "array",
+          "description": "Supported OAuth2 flows",
+          "items": {}
+        },
+        "defaultScopes": {
+          "type": "array",
+          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
+          "items": {}
+        }
+      },
+      "required": [
+        "type",
+        "flows",
+        "defaultScopes"
+      ]
+    },
     "AcceptedResponse": {
       "type": "object",
       "description": "The request has been accepted for processing, but processing has not yet completed."
@@ -1539,6 +1555,41 @@
         }
       }
     },
+    "AzureKey": {
+      "type": "object",
+      "description": "The secret key for your Azure AI Language resource.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "API key authentication",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "in": {
+          "type": "string",
+          "description": "location of the API key",
+          "enum": [
+            "header"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the API key",
+          "enum": [
+            "Ocp-Apim-Subscription-Key"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type",
+        "in",
+        "name"
+      ]
+    },
     "CreateProjectOptions": {
       "type": "object",
       "description": "Parameters needed to create the project.",
@@ -1563,28 +1614,6 @@
       "required": [
         "language"
       ]
-    },
-    "CreateProjectOptionsCreateOrUpdate": {
-      "type": "object",
-      "description": "Parameters needed to create the project.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the project."
-        },
-        "language": {
-          "type": "string",
-          "description": "Language of the text records. This is BCP-47 representation of a language. For\nexample, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for\nEnglish as default."
-        },
-        "multilingualResource": {
-          "type": "boolean",
-          "description": "Set to true to enable creating knowledgebases in different languages for the\nsame resource."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "Configurable settings of the Project."
-        }
-      }
     },
     "Error": {
       "type": "object",
@@ -1841,7 +1870,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Unique ID for the QnA.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "answer": {
           "type": "string",
@@ -1857,6 +1889,8 @@
         "questions": {
           "type": "array",
           "description": "List of questions associated with the answer.",
+          "minItems": 1,
+          "maxItems": 100,
           "items": {
             "type": "string"
           }
@@ -2109,15 +2143,15 @@
         "value"
       ]
     },
-    "PagedProjectMetadata": {
+    "PagedQnaSourceRecord": {
       "type": "object",
-      "description": "Paged collection of ProjectMetadata items",
+      "description": "Paged collection of QnaSourceRecord items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ProjectMetadata items on this page",
+          "description": "The QnaSourceRecord items on this page",
           "items": {
-            "$ref": "#/definitions/ProjectMetadata"
+            "$ref": "#/definitions/QnaSourceRecord"
           },
           "x-ms-identifiers": []
         },
@@ -2131,15 +2165,15 @@
         "value"
       ]
     },
-    "PagedQnaSourceRecord": {
+    "PagedQuestionAnsweringProjectMetadata": {
       "type": "object",
-      "description": "Paged collection of QnaSourceRecord items",
+      "description": "Paged collection of QuestionAnsweringProjectMetadata items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The QnaSourceRecord items on this page",
+          "description": "The QuestionAnsweringProjectMetadata items on this page",
           "items": {
-            "$ref": "#/definitions/QnaSourceRecord"
+            "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
           },
           "x-ms-identifiers": []
         },
@@ -2215,52 +2249,6 @@
         "deploymentName"
       ]
     },
-    "ProjectMetadata": {
-      "type": "object",
-      "description": "Represents the project.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "Name of the project.",
-          "maxLength": 100,
-          "readOnly": true
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the project."
-        },
-        "language": {
-          "type": "string",
-          "description": "Language of the text records. This is BCP-47 representation of a language. For\nexample, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for\nEnglish as default."
-        },
-        "multilingualResource": {
-          "type": "boolean",
-          "description": "Resource enabled for multiple languages across projects or not."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "Configurable settings of the Project."
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Project creation date-time."
-        },
-        "lastModifiedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project last modified date-time."
-        },
-        "lastDeployedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Represents the project last deployment date-time."
-        }
-      },
-      "required": [
-        "projectName"
-      ]
-    },
     "ProjectSettings": {
       "type": "object",
       "description": "Configurable settings of the Project.",
@@ -2282,6 +2270,7 @@
         "prompts": {
           "type": "array",
           "description": "List of prompts associated with the answer.",
+          "maxItems": 20,
           "items": {
             "$ref": "#/definitions/QnaPrompt"
           },
@@ -2322,7 +2311,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Unique ID for the QnA.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "answer": {
           "type": "string",
@@ -2338,6 +2330,8 @@
         "questions": {
           "type": "array",
           "description": "List of questions associated with the answer.",
+          "minItems": 1,
+          "maxItems": 100,
           "items": {
             "type": "string"
           }
@@ -2381,6 +2375,7 @@
           "description": "Unique source identifier. Name of the file if it's a 'file' source; otherwise,\nthe complete URL if it's a 'url' source.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -2394,8 +2389,23 @@
           "description": "Supported source types."
         },
         "contentStructureKind": {
-          "$ref": "#/definitions/SourceContentStructureKind",
-          "description": "Content structure type for sources."
+          "type": "string",
+          "description": "Content structure type for sources.",
+          "default": "unstructured",
+          "enum": [
+            "unstructured"
+          ],
+          "x-ms-enum": {
+            "name": "SourceContentStructureKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "unstructured",
+                "value": "unstructured",
+                "description": "Unstructured."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -2419,6 +2429,7 @@
           "description": "Unique source identifier. Name of the file if it's a 'file' source; otherwise,\nthe complete URL if it's a 'url' source.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -2432,8 +2443,23 @@
           "description": "Supported source types."
         },
         "contentStructureKind": {
-          "$ref": "#/definitions/SourceContentStructureKind",
-          "description": "Content structure type for sources."
+          "type": "string",
+          "description": "Content structure type for sources.",
+          "default": "unstructured",
+          "enum": [
+            "unstructured"
+          ],
+          "x-ms-enum": {
+            "name": "SourceContentStructureKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "unstructured",
+                "value": "unstructured",
+                "description": "Unstructured."
+              }
+            ]
+          }
         },
         "lastUpdatedDateTime": {
           "type": "string",
@@ -2760,6 +2786,56 @@
         "status"
       ]
     },
+    "QuestionAnsweringProjectMetadata": {
+      "type": "object",
+      "description": "Represents the project.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "Name of the project.",
+          "maxLength": 100,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the project."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the text records. This is BCP-47 representation of a language. For\nexample, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for\nEnglish as default."
+        },
+        "multilingualResource": {
+          "type": "boolean",
+          "description": "Resource enabled for multiple languages across projects or not."
+        },
+        "settings": {
+          "$ref": "#/definitions/ProjectSettings",
+          "description": "Configurable settings of the Project."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Project creation date-time."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last modified date-time."
+        },
+        "lastDeployedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Represents the project last deployment date-time."
+        }
+      },
+      "required": [
+        "projectName"
+      ]
+    },
     "RefreshSourceOptions": {
       "type": "object",
       "description": "Boolean flag used to refresh data from the Source.",
@@ -2778,7 +2854,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Unique ID for the QnA.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "answer": {
           "type": "string",
@@ -2794,6 +2873,8 @@
         "questions": {
           "type": "array",
           "description": "List of questions associated with the answer.",
+          "minItems": 1,
+          "maxItems": 100,
           "items": {
             "type": "string"
           }
@@ -3012,6 +3093,7 @@
           "description": "Unique source identifier. Name of the file if it's a 'file' source; otherwise,\nthe complete URL if it's a 'url' source.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -3025,8 +3107,23 @@
           "description": "Supported source types."
         },
         "contentStructureKind": {
-          "$ref": "#/definitions/SourceContentStructureKind",
-          "description": "Content structure type for sources."
+          "type": "string",
+          "description": "Content structure type for sources.",
+          "default": "unstructured",
+          "enum": [
+            "unstructured"
+          ],
+          "x-ms-enum": {
+            "name": "SourceContentStructureKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "unstructured",
+                "value": "unstructured",
+                "description": "Unstructured."
+              }
+            ]
+          }
         },
         "refresh": {
           "type": "boolean",
