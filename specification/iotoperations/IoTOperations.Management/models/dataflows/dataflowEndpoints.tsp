@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
@@ -81,6 +82,22 @@ union EndpointType {
 
   @doc("Broker Type")
   Mqtt: "Mqtt",
+
+  @added(Versions.`2025-07-01-preview`)
+  @doc("Eventhub Type")
+  Eventhub: "Eventhub",
+  
+  @added(Versions.`2025-07-01-preview`)
+  @doc("EventGrid Type")
+  EventGrid: "EventGrid",
+  
+  @added(Versions.`2025-07-01-preview`)
+  @doc("LocalMq Type")
+  LocalMq: "LocalMq",
+  
+  @added(Versions.`2025-07-01-preview`)
+  @doc("FabricRT Type")
+  FabricRT: "FabricRT",
 }
 
 @doc("Azure Data Explorer endpoint properties")
