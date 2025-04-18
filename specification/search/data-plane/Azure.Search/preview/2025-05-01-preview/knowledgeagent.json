@@ -275,6 +275,8 @@
       "description": "Base type for activity records."
     },
     "KnowledgeAgentSearchActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "AzureSearchQuery",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentActivityRecord"
@@ -291,9 +293,18 @@
             "search": {
               "type": "string",
               "description": "The search string."
+            },
+            "filter": {
+              "type": "string",
+              "description": "The filter string."
             }
           },
           "description": "The query details for the retrieval activity."
+        },
+        "queryTime":{
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
         },
         "count": {
           "type": "integer",
@@ -307,6 +318,8 @@
       "description": "Represents a retrieval activity record."
     },
     "KnowledgeAgentModelQueryPlanningActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "ModelQueryPlanning",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentActivityRecord"
@@ -329,6 +342,8 @@
       "description": "Represents an LLM query planning activity record."
     },
     "KnowledgeAgentSemanticRankerActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "AzureSearchSemanticRanker",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentActivityRecord"
@@ -371,6 +386,8 @@
       "description": "Base type for references."
     },
     "KnowledgeAgentAzureSearchDocReference": {
+      "type": "object",
+      "x-ms-discriminator-value": "AzureSearchDoc",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeAgentReference"
