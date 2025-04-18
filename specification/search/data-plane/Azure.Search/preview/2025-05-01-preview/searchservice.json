@@ -9388,7 +9388,11 @@
             "disabled"
           ],
           "description": "A value indicating whether permission filtering is enabled for the index.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "SearchIndexPermissionFilterOption",
+            "modelAsString": true
+          }
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
@@ -9463,6 +9467,7 @@
       "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
     "ListIndexStatsSummary": {
+      "type": "object",
       "properties": {
         "value": {
           "x-ms-client-name": "IndexesStatistics",
@@ -9480,6 +9485,7 @@
       "description": "Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service."
     },
     "IndexStatisticsSummary": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -10885,6 +10891,7 @@
         },
         "maxTokens": {
           "type": "integer",
+          "format": "int32",
           "x-nullable": true,
           "description": "Maximum number of tokens to generate."
         },
@@ -10896,6 +10903,7 @@
         },
         "seed": {
           "type": "integer",
+          "format": "int32",
           "x-nullable": true,
           "description": "Random seed for controlling deterministic outputs. If omitted, randomization is used."
         },
@@ -10953,7 +10961,11 @@
             "jsonSchema"
           ],
           "description": "Specifies how the LLM should format the response. Possible values: 'text' (plain string), 'json_object' (arbitrary JSON), or 'json_schema' (adheres to provided schema).",
-          "default": "text"
+          "default": "text",
+          "x-ms-enum": {
+            "name": "ChatCompletionResponseFormatType",
+            "modelAsString": true
+          }
         },
         "jsonSchemaProperties": {
           "type": "object",
