@@ -293,6 +293,101 @@
         }
       ]
     },
+    "RiskLevel": {
+      "type": "string",
+      "description": "The risk level",
+      "enum": [
+        "Unknown",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "RiskLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Low"
+          },
+          {
+            "value": "Medium"
+          },
+          {
+            "value": "High"
+          }
+        ]
+      }
+    },
+    "Path": {
+      "type": "object",
+      "description": "Represents a path that composes the risk",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Path ID"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeIdentifier"
+          },
+          "description": "Path Nodes"
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdgeIdentifiers"
+          },
+          "description": "Path Edges"
+        }
+      },
+      "required": [
+        "id",
+        "nodes",
+        "edges"
+      ]
+    },
+    "NodeIdentifier": {
+      "type": "object",
+      "description": "Represents a node in the path",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the node"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the node"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "EdgeIdentifiers": {
+      "type": "object",
+      "description": "Represents an edge in the path",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The source node of the edge"
+        },
+        "target": {
+          "type": "string",
+          "description": "The target node of the edge"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the edge"
+        }
+      },
+      "required": [
+        "source",
+        "target",
+        "type"
+      ]
+    },
     "SecurityAssessmentMetadataProperties": {
       "type": "object",
       "description": "Describes properties of an assessment metadata.",
@@ -542,6 +637,35 @@
               }
             ]
           }
+        },
+        "riskFactors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The factors of the risk adding base factor"
+        },
+        "level": {
+          "$ref": "#/definitions/RiskLevel",
+          "description": "The risk level"
+        },
+        "attackPathsReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The attack paths references of the risk"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Path"
+          },
+          "description": "The paths that compose the risk"
+        },
+        "isContextualRisk": {
+          "type": "boolean",
+          "description": "Indicates if the risk is contextual or static"
         }
       },
       "required": [
