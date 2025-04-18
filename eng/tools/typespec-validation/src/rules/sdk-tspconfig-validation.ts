@@ -2,7 +2,6 @@ import { join } from "path";
 import { parse as yamlParse } from "yaml";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
 import { Suppression } from "suppressions";
 import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
 
@@ -18,7 +17,7 @@ export abstract class TspconfigSubRuleBase {
     this.expectedValue = expectedValue;
   }
 
-  public async execute(_host: TsvHost, folder: string): Promise<RuleResult> {
+  public async execute(folder: string): Promise<RuleResult> {
     const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists)
       return this.createFailedResult(
@@ -112,18 +111,18 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     this.emitterName = emitterName;
   }
 
-  protected validate(config: any): RuleResult {
+  protected tryFindOption(config: any): Record<string, any> | undefined {
     let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
     for (const segment of this.keyToValidate.split(".")) {
       if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
         option = option![segment];
-      else
-        return this.createFailedResult(
-          `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
-          `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
-        );
+      else return undefined;
     }
+    return option;
+  }
 
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
     if (option === undefined)
       return this.createFailedResult(
         `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
@@ -250,6 +249,29 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspCon
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
+  }
+}
+
+// ----- TS data plane sub rules -----
+export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*-rest$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
+export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+  constructor() {
+    super(
+      "packageDetails.name",
+      "package-details.name",
+      new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/),
+    );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
   }
 }
 
@@ -411,6 +433,29 @@ export class TspConfigCsharpAzNamespaceEqualStringSubRule extends TspconfigEmitt
   constructor() {
     super("@azure-tools/typespec-csharp", "namespace", "{package-dir}");
   }
+  override validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
+
+    if (option === undefined)
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}"`,
+      );
+
+    const packageDir = config?.options?.[this.emitterName]?.["package-dir"];
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (
+      this.validateValue(actualValue, this.expectedValue) ||
+      (packageDir !== undefined && this.validateValue(actualValue, packageDir))
+    ) {
+      return { success: true };
+    }
+
+    return this.createFailedResult(
+      `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}" or the value of "package-dir" option or parameter`,
+      `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}" or the value of "package-dir" option or parameter`,
+    );
+  }
 }
 
 export class TspConfigCsharpAzClearOutputFolderTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
@@ -434,6 +479,8 @@ export const defaultRules = [
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularPackageDirectorySubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
+  new TspConfigTsDpPackageDirectorySubRule(),
+  new TspConfigTsDpPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
   new TspConfigGoMgmtPackageDirectorySubRule(),
   new TspConfigGoMgmtModuleEqualStringSubRule(),
@@ -466,7 +513,7 @@ export class SdkTspConfigValidationRule implements Rule {
     this.subRules = subRules;
   }
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
     const suppressions = await getSuppressions(tspConfigPath);
     this.setSuppressedKeyPaths(suppressions);
@@ -476,7 +523,7 @@ export class SdkTspConfigValidationRule implements Rule {
     for (const subRule of this.subRules) {
       // TODO: support wildcard
       if (this.suppressedKeyPaths.has(subRule.getPathOfKeyToValidate())) continue;
-      const result = await subRule.execute(host, folder!);
+      const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
       success &&= result.success;
     }
