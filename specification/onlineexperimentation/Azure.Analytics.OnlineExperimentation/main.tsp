@@ -277,24 +277,13 @@ model DiagnosticDetail {
 }
 
 @doc("The result of validating an experiment metric.")
-union ValidationResult {
-  @doc("The experiment metric is valid.")
-  Valid: "Valid",
-
-  @doc("The experiment metric is invalid.")
-  Invalid: "Invalid",
-
-  string,
-}
-
-@doc("The result of validating an experiment metric.")
 model ExperimentMetricValidationResult {
+  @doc("Indicates whether the experiment metric is valid.")
+  isValid: boolean;
+
   @doc("Diagnostic details from the validation process.")
   @visibility(Lifecycle.Read)
   diagnostics: DiagnosticDetail[];
-
-  @doc("Indicates whether the experiment metric is valid.")
-  result: ValidationResult;
 }
 
 alias ServiceTraits = Traits.NoRepeatableRequests &

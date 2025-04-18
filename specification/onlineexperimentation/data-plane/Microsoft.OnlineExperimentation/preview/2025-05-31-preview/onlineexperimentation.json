@@ -796,6 +796,10 @@
       "type": "object",
       "description": "The result of validating an experiment metric.",
       "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Indicates whether the experiment metric is valid."
+        },
         "diagnostics": {
           "type": "array",
           "description": "Diagnostic details from the validation process.",
@@ -804,15 +808,11 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        },
-        "result": {
-          "$ref": "#/definitions/ValidationResult",
-          "description": "Indicates whether the experiment metric is valid."
         }
       },
       "required": [
-        "diagnostics",
-        "result"
+        "isValid",
+        "diagnostics"
       ]
     },
     "LifecycleStage": {
@@ -965,30 +965,6 @@
         }
       ],
       "x-ms-discriminator-value": "UserRate"
-    },
-    "ValidationResult": {
-      "type": "string",
-      "description": "The result of validating an experiment metric.",
-      "enum": [
-        "Valid",
-        "Invalid"
-      ],
-      "x-ms-enum": {
-        "name": "ValidationResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Valid",
-            "value": "Valid",
-            "description": "The experiment metric is valid."
-          },
-          {
-            "name": "Invalid",
-            "value": "Invalid",
-            "description": "The experiment metric is invalid."
-          }
-        ]
-      }
     }
   },
   "parameters": {
