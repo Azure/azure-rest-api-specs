@@ -132,4 +132,3 @@ interface Skynet {
   delete is ArmResourceDeleteWithoutOkAsync<SkynetResource>;
   listByResourceGroup is ArmResourceListByParent<SkynetResource>;
 }
-
