@@ -179,9 +179,21 @@ export async function getCheckRuns(github, context, checkRunName, ref) {
     per_page: PER_PAGE_MAX,
   });
 
-  // completed_at will never be null because status is "completed"
   /* v8 ignore next */
-  return result.sort(invert(byDate((run) => run.completed_at)));
+  return result.sort(
+    invert(
+      byDate((run) => {
+        if (run.completed_at === null) {
+          // completed_at should never be null because status is "completed"
+          throw new Error(
+            `Unexpected value of run.completed_at: '${run.completed_at}'`,
+          );
+        } else {
+          return run.completed_at;
+        }
+      }),
+    ),
+  );
 }
 
 /**
