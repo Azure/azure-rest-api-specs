@@ -1384,6 +1384,16 @@
           ],
           "description": "The list of IP address rules."
         },
+        "serviceTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MHSMServiceTagRule"
+          },
+          "x-ms-identifiers": [
+            "tag"
+          ],
+          "description": "The list of service tags."
+        },
         "virtualNetworkRules": {
           "type": "array",
           "items": {
@@ -1406,6 +1416,19 @@
         "value"
       ],
       "description": "A rule governing the accessibility of a managed HSM pool from a specific IP address or IP range.",
+      "type": "object"
+    },
+    "MHSMServiceTagRule": {
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "Name of the service tag."
+        }
+      },
+      "required": [
+        "tag"
+      ],
+      "description": "A rule governing the accessibility of a managed hsm pool from a specific service tags.",
       "type": "object"
     },
     "MHSMVirtualNetworkRule": {
