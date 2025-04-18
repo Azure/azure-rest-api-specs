@@ -70,7 +70,7 @@ model AgentEvaluationResult {
   threadId?: string;
 
   @doc("The unique identifier of the run.")
-  runId?: string;
+  runId: string;
 
   @doc("A string explaining why there was an error, if applicable.")
   error?: string;
