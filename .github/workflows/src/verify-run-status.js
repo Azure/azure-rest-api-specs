@@ -1,3 +1,4 @@
+import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
 import { PER_PAGE_MAX } from "./github.js";
 
@@ -22,9 +23,11 @@ export async function verifyRunStatus({ github, context, core }) {
     throw new Error("CHECK_RUN_NAME is not set");
   }
 
+  const commitStatusName = process.env.COMMIT_STATUS_NAME;
   const workflowName = process.env.WORKFLOW_NAME;
-  if (!workflowName) {
-    throw new Error("WORKFLOW_NAME is not set");
+
+  if (!commitStatusName && !workflowName) {
+    throw new Error("Neither COMMIT_STATUS nor WORKFLOW_NAME is not set");
   }
 
   if (!SUPPORTED_EVENTS.some((e) => e === context.eventName)) {
@@ -48,6 +51,7 @@ export async function verifyRunStatus({ github, context, core }) {
     context,
     core,
     checkRunName,
+    commitStatusName,
     workflowName,
   });
 }
@@ -59,13 +63,15 @@ export async function verifyRunStatus({ github, context, core }) {
  * @param {import('github-script').AsyncFunctionArguments["context"]} params.context
  * @param {import('github-script').AsyncFunctionArguments["core"]} params.core
  * @param {string} params.checkRunName
- * @param {string} params.workflowName
+ * @param {string} [params.commitStatusName]
+ * @param {string} [params.workflowName]
  */
 export async function verifyRunStatusImpl({
   github,
   context,
   core,
   checkRunName,
+  commitStatusName,
   workflowName,
 }) {
   if (context.eventName == "check_run") {
@@ -112,42 +118,48 @@ export async function verifyRunStatusImpl({
   );
   core.debug(`Check run: ${JSON.stringify(checkRun)}`);
 
-  let workflowRun;
-  if (context.eventName == "workflow_run") {
-    workflowRun = context.payload.workflow_run;
-  } else {
-    const workflowRuns = await getWorkflowRuns(
-      github,
-      context,
-      workflowName,
-      head_sha,
+  if (commitStatusName) {
+    core.info(`commitStatusName: ${commitStatusName}`);
+  }
+
+  if (workflowName) {
+    let workflowRun;
+    if (context.eventName == "workflow_run") {
+      workflowRun = context.payload.workflow_run;
+    } else {
+      const workflowRuns = await getWorkflowRuns(
+        github,
+        context,
+        workflowName,
+        head_sha,
+      );
+      if (workflowRuns.length === 0) {
+        core.notice(
+          `No completed workflow run with name: ${workflowName}. Not enough information to judge success or failure. Ending with success status.`,
+        );
+        return;
+      }
+
+      // Use the most recent workflow run
+      workflowRun = workflowRuns[0];
+    }
+
+    core.info(
+      `Workflow run name: ${workflowRun.name}, conclusion: ${workflowRun.conclusion}, URL: ${workflowRun.html_url}`,
     );
-    if (workflowRuns.length === 0) {
-      core.notice(
-        `No completed workflow run with name: ${workflowName}. Not enough information to judge success or failure. Ending with success status.`,
+    core.debug(`Workflow run: ${JSON.stringify(workflowRun)}`);
+
+    if (checkRun.conclusion !== workflowRun.conclusion) {
+      core.setFailed(
+        `Check run conclusion (${checkRun.conclusion}) does not match workflow run conclusion (${workflowRun.conclusion})`,
       );
       return;
     }
 
-    // Use the most recent workflow run
-    workflowRun = workflowRuns[0];
-  }
-
-  core.info(
-    `Workflow run name: ${workflowRun.name}, conclusion: ${workflowRun.conclusion}, URL: ${workflowRun.html_url}`,
-  );
-  core.debug(`Workflow run: ${JSON.stringify(workflowRun)}`);
-
-  if (checkRun.conclusion !== workflowRun.conclusion) {
-    core.setFailed(
-      `Check run conclusion (${checkRun.conclusion}) does not match workflow run conclusion (${workflowRun.conclusion})`,
+    core.notice(
+      `Conclusions match for check run ${checkRunName} and workflow run ${workflowName}`,
     );
-    return;
   }
-
-  core.notice(
-    `Conclusions match for check run ${checkRunName} and workflow run ${workflowName}`,
-  );
 }
 
 /**
@@ -167,11 +179,9 @@ export async function getCheckRuns(github, context, checkRunName, ref) {
     per_page: PER_PAGE_MAX,
   });
 
-  // a and b will never be null because status is "completed"
+  // completed_at will never be null because status is "completed"
   /* v8 ignore next */
-  return result.sort((a, b) =>
-    compareDatesDescending(a.completed_at || "", b.completed_at || ""),
-  );
+  return result.sort(invert(byDate((run) => run.completed_at)));
 }
 
 /**
@@ -195,15 +205,5 @@ export async function getWorkflowRuns(github, context, workflowName, ref) {
 
   return result
     .filter((run) => run.name === workflowName)
-    .sort((a, b) => compareDatesDescending(a.updated_at, b.updated_at));
-}
-
-/**
- * Compares two date strings in descending order.
- * @param {string} a date string of the form "YYYY-MM-DDTHH:mm:ssZ"
- * @param {string} b date string of the form "YYYY-MM-DDTHH:mm:ssZ"
- * @returns
- */
-export function compareDatesDescending(a, b) {
-  return new Date(b).getTime() - new Date(a).getTime();
+    .sort(invert(byDate((run) => run.updated_at)));
 }
