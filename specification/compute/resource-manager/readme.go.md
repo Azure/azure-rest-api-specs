@@ -64,6 +64,10 @@ directive:
     transform: >
       delete $["$ref"];
       $["type"] = "string";
+  - from: swagger-document
+    where: "$.definitions.Operation"
+    transform: >
+      $["x-ms-client-name"] = "OperationValue";
 ```
 
 ### Go multi-api
