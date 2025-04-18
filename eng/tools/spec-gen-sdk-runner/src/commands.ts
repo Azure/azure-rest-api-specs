@@ -265,7 +265,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
  * @param commandInput - The command input.
  * @returns the execution report JSON
  */
-function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
+export function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
   // Read the execution report to determine if the generation was successful
   const executionReportPath = path.join(
     commandInput.workingFolder,
@@ -279,7 +279,10 @@ function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
  * @param packageName - The package name.
  * @param installationInstructions - The installation instructions.
  */
-function setPipelineVariables(packageName: string, installationInstructions: string = ""): void {
+export function setPipelineVariables(
+  packageName: string,
+  installationInstructions: string = "",
+): void {
   const branchName = `sdkauto/${packageName?.replace("/", "_")}`;
   const prTitle = `[AutoPR ${packageName}]`;
   const prBody = installationInstructions;
@@ -291,7 +294,7 @@ function setPipelineVariables(packageName: string, installationInstructions: str
  * Parse the arguments.
  * @returns The spec-gen-sdk command input.
  */
-function parseArguments(): SpecGenSdkCmdInput {
+export function parseArguments(): SpecGenSdkCmdInput {
   const __filename: string = fileURLToPath(import.meta.url);
   const __dirname: string = path.dirname(__filename);
 
@@ -342,7 +345,7 @@ function parseArguments(): SpecGenSdkCmdInput {
  * @param commandInput The command input.
  * @returns The spec-gen-sdk command.
  */
-function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
+export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
   const specGenSdkCommand = [];
   specGenSdkCommand.push(
     "spec-gen-sdk",
@@ -392,7 +395,7 @@ function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): string[] {
  * @param specRepoPath The specification repository path.
  * @returns The spec paths.
  */
-function getSpecPaths(batchType: string, specRepoPath: string): string[] {
+export function getSpecPaths(batchType: string, specRepoPath: string): string[] {
   const specConfigPaths: string[] = [];
   switch (batchType) {
     case "all-specs": {
@@ -425,7 +428,7 @@ function getSpecPaths(batchType: string, specRepoPath: string): string[] {
  * @param logPath - The vso log file path.
  * @param specConfigDisplayText - The display text for the spec configuration.
  */
-function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): void {
+export function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): void {
   let vsoLogs: VsoLogs;
   try {
     const logContent = JSON.parse(fs.readFileSync(logPath, "utf8"));
@@ -460,7 +463,7 @@ function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): vo
  * @param executionReport - The spec-gen-sdk execution report.
  * @returns [flag of lable breaking change, breaking change label].
  */
-function getBreakingChangeInfo(executionReport: any): [boolean, string] {
+export function getBreakingChangeInfo(executionReport: any): [boolean, string] {
   let breakingChangeLabel = "";
   for (const packageInfo of executionReport.packages) {
     breakingChangeLabel = packageInfo.breakingChangeLabel;
@@ -470,7 +473,7 @@ function getBreakingChangeInfo(executionReport: any): [boolean, string] {
   }
   return [false, breakingChangeLabel];
 }
-
+// { shouldLabelBreakingChange: true, breakingChangeLabel: "breaking-change" }
 /**
  * Generate the spec-gen-sdk artifacts.
  * @param commandInput - The command input.
