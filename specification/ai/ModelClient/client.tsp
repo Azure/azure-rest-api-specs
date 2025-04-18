@@ -29,12 +29,13 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.getChatCompletions, Access.internal);
 @@access(AI.Model.getEmbeddings, Access.internal);
 @@access(AI.Model.getImageEmbeddings, Access.internal);
-@@access(AI.Model.getModelInfo, Access.internal, "python");
+@@access(AI.Model.getModelInfo, Access.internal, "python,java");
 
 // Since we made all operator methods internal, we need to explicity
 // say we still want the models they use to be public, since they will be used by hand-written operator methods.
 @@access(AI.Model.ChatChoice, Access.public);
 @@access(AI.Model.ChatCompletions, Access.public);
+@@access(AI.Model.ChatCompletionsOptions, Access.public, "java");
 @@access(AI.Model.ChatCompletionsToolCall, Access.public);
 @@access(AI.Model.ChatCompletionsToolDefinition, Access.public);
 @@access(AI.Model.ChatCompletionsNamedToolChoice, Access.public);
@@ -73,6 +74,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@access(AI.Model.EmbeddingItem, Access.public);
 @@access(AI.Model.EmbeddingsResult, Access.public);
 @@access(AI.Model.EmbeddingsUsage, Access.public);
+@@access(AI.Model.ExtraParameters, Access.public, "java");
 @@access(AI.Model.FunctionCall, Access.public);
 @@access(AI.Model.FunctionDefinition, Access.public);
 @@access(AI.Model.ModelInfo, Access.public);
