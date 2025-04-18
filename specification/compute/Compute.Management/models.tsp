@@ -7760,9 +7760,8 @@ model RestorePointSourceVMStorageProfile {
   /**
    * Gets the data disks of the VM captured at the time of the restore point creation.
    */
-  @encodedName("application/json", "dataDisks")
   @identifiers(#["lun"])
-  dataDiskList?: RestorePointSourceVMDataDisk[];
+  dataDisks?: RestorePointSourceVMDataDisk[];
 
   /**
    * Gets the disk controller type of the VM captured at the time of the restore point creation.
