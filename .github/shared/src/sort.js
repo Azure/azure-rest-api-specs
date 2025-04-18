@@ -2,29 +2,35 @@
 
 /**
  * Returns a comparator that compares values by a date string in ascending order.
- * null, undefined, and non-parseable strings are treated as the oldest date.
+ * Throws if the value returned by getDate() is null, undefined, or cannot be
+ * parsed as a date.
  *
  * @template T
- * @param {(item: T) => string | null | undefined} getDate
+ * @param {(item: T) => string} getDate
  * @returns {(a: T, b: T) => number}
  */
 export function byDate(getDate) {
   return (a, b) => {
-    // Map null and undefined to "", since Date.parse() requires a defined string
-    const stringA = getDate(a) ?? "";
-    const stringB = getDate(b) ?? "";
-
-    // Date.parse() returns NaN for "", and any string that can't be parsed as a date
-    const parsedA = Date.parse(stringA);
-    const parsedB = Date.parse(stringB);
-
-    // Map NaN to -Infinifty, so it's treated as the oldest date
-    const timeA = Number.isNaN(parsedA) ? -Infinity : parsedA;
-    const timeB = Number.isNaN(parsedB) ? -Infinity : parsedB;
-
     // Sort ascending to match JS default
-    return timeA - timeB;
+    return parseDate(getDate(a)) - parseDate(getDate(b));
   };
+}
+
+/**
+ * Parses a string to a date, throwing if null, undefined, or cannot be parsed.
+ *
+ * @param {string} s
+ * @returns {number}
+ */
+function parseDate(s) {
+  // Date.parse() returns NaN for null, undefined, or strings that cannot be parsed.
+  const parsed = Date.parse(s);
+
+  if (Number.isNaN(parsed)) {
+    throw new Error(`Unable to parse '${s}' to a valid date`);
+  }
+
+  return parsed;
 }
 
 /**
