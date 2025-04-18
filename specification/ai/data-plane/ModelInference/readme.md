@@ -39,3 +39,15 @@ suppressions:
     reason: OpenAI compatible API, which uses unixTimeStamp
 ```
 
+### Release 2025-05-01
+
+These settings apply only when `--tag=2025-05-01` is specified on the command line.
+
+```yaml $(tag) == '2025-05-01'
+input-file:
+  - stable/2025-05-01/openapi.json
+suppressions:
+  - code: IntegerTypeMustHaveFormat
+    from: openapi.json
+    reason: OpenAI compatible API, which uses unixTimeStamp
+```
