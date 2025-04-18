@@ -58,7 +58,7 @@ These settings apply only when `--tag=2025-05-01-preview` is specified on the co
 
 ```yaml $(tag) == '2025-05-01-preview'
 input-file:
-  - stable/2025-05-01-preview/openapi.json
+  - preview/2025-05-01-preview/openapi.json
 suppressions:
   - code: IntegerTypeMustHaveFormat
     from: openapi.json
