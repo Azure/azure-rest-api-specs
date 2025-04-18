@@ -1,0 +1,34 @@
+{
+  "title": "Generate a simple image based on a prompt",
+  "operationId": "GetImageGenerations",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "input": [
+        {
+          "prompt": "An image of a cat",
+          "size": "1024x1024",
+          "model": "Stable-Image-Ultra"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "cknxthfa",
+        "data": [
+          {
+            "image": "<base64 encoded image data>",
+            "seed": 42
+          }
+        ],
+        "object": "image.generation",
+        "model": "Stable-Image-Ultra",
+        "usage": {
+          "image_generations": 1
+        }
+      }
+    }
+  }
+}

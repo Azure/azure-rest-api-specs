@@ -131,6 +131,15 @@ model ChatCompletionsOptions {
     """)
   modalities?: ChatCompletionsModality[];
 
+  @doc("""
+    User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
+    These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
+    [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+    """)
+  @added(ModelInference.Versions.v2025_05_01)
+  @clientName("UserSecurityContext", "csharp")
+  user_security_context?: UserSecurityContext;
+
   ...Record<unknown>;
 }
 @doc("The modalities that the model is allowed to use for the chat completions response.")
@@ -790,4 +799,39 @@ model ChatCompletionsAudio {
   @doc("The transcript of the audio file.")
   @visibility(Lifecycle.Read)
   transcript: string;
+}
+
+@doc("""
+  User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
+  These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
+  [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+  """)
+@added(ModelInference.Versions.v2025_05_01)
+model UserSecurityContext {
+  @doc("The name of the application. Sensitive personal information should not be included in this field.")
+  @maxLength(100)
+  application_name?: string;
+
+  @doc("""
+    This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field.
+    """)
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  end_user_id?: string;
+
+  @doc("""
+    The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multi tenant.
+    """)
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  end_user_tenant_id?: string;
+
+  @doc("""
+    Captures the original client's IP address, accepting both IPv4 and IPv6 formats.
+    """)
+  @minLength(2)
+  @maxLength(45)
+  source_ip?: string;
 }
