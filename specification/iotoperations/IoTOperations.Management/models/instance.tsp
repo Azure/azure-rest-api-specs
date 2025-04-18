@@ -63,6 +63,11 @@ model InstanceProperties {
   @doc("The features of the AIO Instance.")
   @added(Versions.`2025-04-01`)
   features?: Record<InstanceFeature>;
+
+  @doc("The Azure Device Registry Namespace used by Assets, Discovered Assets and devices")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @added(Versions.`2025-07-01-preview`)
+  adrNamespace?: string;
 }
 
 @doc("The features of the AIO Instance.")
