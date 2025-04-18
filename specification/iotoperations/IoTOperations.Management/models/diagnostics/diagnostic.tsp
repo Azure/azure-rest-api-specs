@@ -6,36 +6,30 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
 
-/** ******************* */
-/**
- * skynet resource type model details.
- */
-@doc("Instance skynet resource")
+@doc("Instance diagnostic resource")
 @parentResource(InstanceResource)
 @added(Versions.`2025-07-01-preview`)
-model SkynetResource is ProxyResource<SkynetProperties> {
-  @doc("Name of Instance skynet resource")
+model DiagnosticResource is ProxyResource<DiagnosticProperties> {
+  @doc("Name of Instance diagnostic resource")
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
-  @key("skynetName")
+  @key("diagnosticName")
   @path
   @minLength(3)
   @maxLength(63)
-  @segment("skynets")
+  @segment("diagnostics")
   name: string;
 
-  // Extended location is not included in ProxyResource yet
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   extendedLocation: ExtendedLocation;
 }
 
-@doc("Represents the activation state of Skynet.")
+@doc("Represents the activation state of Diagnostic.")
 @added(Versions.`2025-07-01-preview`)
 union RemoteSupportActivationState {
   string,
@@ -50,7 +44,7 @@ union RemoteSupportActivationState {
   Expired: "Expired",
 }
 
-@doc("SkynetAccessLevels allowed")
+@doc("DiagnosticAccessLevels allowed")
 @added(Versions.`2025-07-01-preview`)
 union RemoteSupportAccessLevels {
   string,
@@ -65,20 +59,20 @@ union RemoteSupportAccessLevels {
 @doc("RemoteSupport properties")
 @added(Versions.`2025-07-01-preview`)
 model RemoteSupportProperties {
-  @doc("Activation state of Skynet.")
+  @doc("Activation state of Diagnostic.")
   state?: RemoteSupportActivationState;
 
-  @doc("Access level for Skynet.")
+  @doc("Access level for Diagnostic.")
   accessLevel?: RemoteSupportAccessLevels;
 
-  @doc("Expiration timestamp for Skynet.")
+  @doc("Expiration timestamp for Diagnostic.")
   expirationTimestamp?: string;
 }
 
-@doc("Skynet Resource properties")
+@doc("Diagnostic Resource properties")
 @added(Versions.`2025-07-01-preview`)
-model SkynetProperties {
-  @doc("Remote Support Settings For Skynet.")
+model DiagnosticProperties {
+  @doc("Remote Support Settings For Diagnostic.")
   remoteSupport?: RemoteSupportProperties;
 
   @visibility(Lifecycle.Read)

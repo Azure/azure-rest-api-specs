@@ -14,7 +14,7 @@ import "./models/broker/listeners.tsp";
 import "./models/dataflows/dataflowEndpoints.tsp";
 import "./models/dataflows/dataflowProfiles.tsp";
 import "./models/dataflows/dataflows.tsp";
-import "./models/skynet.tsp";
+import "./models/diagnostics/diagnostic.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -126,9 +126,9 @@ interface DataflowEndpoint {
 
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
-interface Skynet {
-  get is ArmResourceRead<SkynetResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<SkynetResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<SkynetResource>;
-  listByResourceGroup is ArmResourceListByParent<SkynetResource>;
+interface Diagnostic {
+  get is ArmResourceRead<DiagnosticResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiagnosticResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<DiagnosticResource>;
+  listByResourceGroup is ArmResourceListByParent<DiagnosticResource>;
 }

@@ -67,7 +67,7 @@
       "name": "DataflowEndpoint"
     },
     {
-      "name": "Skynet"
+      "name": "Diagnostic"
     }
   ],
   "paths": {
@@ -2554,13 +2554,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/skynets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/diagnostics": {
       "get": {
-        "operationId": "Skynet_ListByResourceGroup",
+        "operationId": "Diagnostic_ListByResourceGroup",
         "tags": [
-          "Skynet"
+          "Diagnostic"
         ],
-        "description": "List SkynetResource resources by InstanceResource",
+        "description": "List DiagnosticResource resources by InstanceResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2586,7 +2586,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SkynetResourceListResult"
+              "$ref": "#/definitions/DiagnosticResourceListResult"
             }
           },
           "default": {
@@ -2601,13 +2601,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/skynets/{skynetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/diagnostics/{diagnosticName}": {
       "get": {
-        "operationId": "Skynet_Get",
+        "operationId": "Diagnostic_Get",
         "tags": [
-          "Skynet"
+          "Diagnostic"
         ],
-        "description": "Get a SkynetResource",
+        "description": "Get a DiagnosticResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2629,9 +2629,9 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "skynetName",
+            "name": "diagnosticName",
             "in": "path",
-            "description": "Name of Instance skynet resource",
+            "description": "Name of Instance diagnostic resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2643,7 +2643,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SkynetResource"
+              "$ref": "#/definitions/DiagnosticResource"
             }
           },
           "default": {
@@ -2655,11 +2655,11 @@
         }
       },
       "put": {
-        "operationId": "Skynet_CreateOrUpdate",
+        "operationId": "Diagnostic_CreateOrUpdate",
         "tags": [
-          "Skynet"
+          "Diagnostic"
         ],
-        "description": "Create a SkynetResource",
+        "description": "Create a DiagnosticResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2681,9 +2681,9 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "skynetName",
+            "name": "diagnosticName",
             "in": "path",
-            "description": "Name of Instance skynet resource",
+            "description": "Name of Instance diagnostic resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2696,21 +2696,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SkynetResource"
+              "$ref": "#/definitions/DiagnosticResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'SkynetResource' update operation succeeded",
+            "description": "Resource 'DiagnosticResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SkynetResource"
+              "$ref": "#/definitions/DiagnosticResource"
             }
           },
           "201": {
-            "description": "Resource 'SkynetResource' create operation succeeded",
+            "description": "Resource 'DiagnosticResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SkynetResource"
+              "$ref": "#/definitions/DiagnosticResource"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2737,11 +2737,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Skynet_Delete",
+        "operationId": "Diagnostic_Delete",
         "tags": [
-          "Skynet"
+          "Diagnostic"
         ],
-        "description": "Delete a SkynetResource",
+        "description": "Delete a DiagnosticResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2763,9 +2763,9 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "name": "skynetName",
+            "name": "diagnosticName",
             "in": "path",
-            "description": "Name of Instance skynet resource",
+            "description": "Name of Instance diagnostic resource",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -5387,6 +5387,68 @@
         "dataSources"
       ]
     },
+    "DiagnosticProperties": {
+      "type": "object",
+      "description": "Diagnostic Resource properties",
+      "properties": {
+        "remoteSupport": {
+          "$ref": "#/definitions/RemoteSupportProperties",
+          "description": "Remote Support Settings For Diagnostic."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "DiagnosticResource": {
+      "type": "object",
+      "description": "Instance diagnostic resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiagnosticProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DiagnosticResourceListResult": {
+      "type": "object",
+      "description": "The response of a DiagnosticResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DiagnosticResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DiagnosticResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "DiagnosticsLogs": {
       "type": "object",
       "description": "Diagnostic Log properties",
@@ -6390,7 +6452,7 @@
     },
     "RemoteSupportAccessLevels": {
       "type": "string",
-      "description": "SkynetAccessLevels allowed",
+      "description": "DiagnosticAccessLevels allowed",
       "enum": [
         "Diagnose",
         "DiagnoseAndRepair"
@@ -6414,7 +6476,7 @@
     },
     "RemoteSupportActivationState": {
       "type": "string",
-      "description": "Represents the activation state of Skynet.",
+      "description": "Represents the activation state of Diagnostic.",
       "enum": [
         "Enabled",
         "Disabled",
@@ -6448,15 +6510,15 @@
       "properties": {
         "state": {
           "$ref": "#/definitions/RemoteSupportActivationState",
-          "description": "Activation state of Skynet."
+          "description": "Activation state of Diagnostic."
         },
         "accessLevel": {
           "$ref": "#/definitions/RemoteSupportAccessLevels",
-          "description": "Access level for Skynet."
+          "description": "Access level for Diagnostic."
         },
         "expirationTimestamp": {
           "type": "string",
-          "description": "Expiration timestamp for Skynet."
+          "description": "Expiration timestamp for Diagnostic."
         }
       }
     },
@@ -6703,68 +6765,6 @@
           }
         ]
       }
-    },
-    "SkynetProperties": {
-      "type": "object",
-      "description": "Skynet Resource properties",
-      "properties": {
-        "remoteSupport": {
-          "$ref": "#/definitions/RemoteSupportProperties",
-          "description": "Remote Support Settings For Skynet."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "SkynetResource": {
-      "type": "object",
-      "description": "Instance skynet resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SkynetProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "Edge location of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "extendedLocation"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "SkynetResourceListResult": {
-      "type": "object",
-      "description": "The response of a SkynetResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SkynetResource items on this page",
-          "items": {
-            "$ref": "#/definitions/SkynetResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "SourceSerializationFormat": {
       "type": "string",
