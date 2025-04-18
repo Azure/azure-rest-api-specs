@@ -45,7 +45,7 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an evaluation run for agent continuous evaluation.")
-  @route("runs:agents")
+  @route("runs:runAgent")
   @post
   createAgentEvaluation is Azure.Core.Foundations.Operation<
     {
@@ -53,6 +53,6 @@ interface Evaluations {
       @body
       evaluation: AgentEvaluationRequest;
     },
-    Array<AgentEvaluationResult>
+    AgentLongRunningOperationResponse
   >;
 }
