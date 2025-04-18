@@ -45,26 +45,13 @@ interface Evaluations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates an evaluation run for agent continuous evaluation.")
-  @route("agents/runs")
+  @route("runs:agents")
   @post
   createAgentEvaluation is Azure.Core.Foundations.Operation<
     {
       @doc("Agent evaluation with asynchronous run")
       @body
       evaluation: AgentEvaluationRequest;
-    },
-    AgentLongRunningOperationResponse
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get agent evaluation run results.")
-  @route("agents/runs/{runId}")
-  @get
-  getAgentEvaluationResults is Azure.Core.Foundations.Operation<
-    {
-      @doc("For agent API v1, it's the agent run completion Id, which is `[thread_id]:[run_id]`; for agent API v2, it's only the run_id.")
-      @path
-      runId: string;
     },
     Array<AgentEvaluationResult>
   >;
