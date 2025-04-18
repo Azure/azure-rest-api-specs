@@ -2,8 +2,6 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 using Azure.ClientGenerator.Core;
@@ -136,6 +134,7 @@ model ChatCompletionsOptions {
     These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
     [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
     """)
+  @added(ModelInference.Versions.v2025_05_01)
   @clientName("UserSecurityContext", "csharp")
   user_security_context?: UserSecurityContext;
 
@@ -805,6 +804,7 @@ model ChatCompletionsAudio {
   These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
   [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
   """)
+@added(ModelInference.Versions.v2025_05_01)
 model UserSecurityContext {
   @doc("The name of the application. Sensitive personal information should not be included in this field.")
   @maxLength(100)

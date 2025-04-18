@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: AI Model Inference
-  version: '2025-04-01'
+  version: '2025-05-01'
 tags: []
 paths:
   /chat/completions:
@@ -506,6 +506,13 @@ components:
           description: |-
             The modalities that the model is allowed to use for the chat completions response. The default modality
             is `text`. Indicating an unsupported modality combination results in an 422 error.
+        user_security_context:
+          allOf:
+            - $ref: '#/components/schemas/UserSecurityContext'
+          description: |-
+            User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
+            These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
+            [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
       additionalProperties: {}
       description: |-
         The configuration information for a chat completions request.
@@ -1410,6 +1417,34 @@ components:
           description: Updates to the function call requested by the AI model.
           readOnly: true
       description: An update to the function tool call information requested by the AI model.
+    UserSecurityContext:
+      type: object
+      properties:
+        application_name:
+          type: string
+          maxLength: 100
+          description: The name of the application. Sensitive personal information should not be included in this field.
+        end_user_id:
+          type: string
+          minLength: 36
+          maxLength: 36
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: This identifier is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field.
+        end_user_tenant_id:
+          type: string
+          minLength: 36
+          maxLength: 36
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          description: The Microsoft 365 tenant ID the end user belongs to. It's required when the generative AI application is multi tenant.
+        source_ip:
+          type: string
+          minLength: 2
+          maxLength: 45
+          description: Captures the original client's IP address, accepting both IPv4 and IPv6 formats.
+      description: |-
+        User security context contains several parameters that describe the AI application itself, and the end user that interacts with the AI application. 
+        These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. 
+        [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
     Versions:
       type: string
       enum:
