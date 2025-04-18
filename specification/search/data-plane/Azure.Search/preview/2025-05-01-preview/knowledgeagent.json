@@ -136,6 +136,7 @@
         },
         "maxDocsForReranker": {
           "type": "integer",
+          "format": "int32",
           "description": "Limits the number of documents considered for ranking."
         },
         "rerankerThreshold": {
@@ -261,6 +262,7 @@
       "properties": {
         "id": {
           "type": "integer",
+          "format": "int32",
           "description": "The ID of the activity record."
         },
         "type": {
@@ -308,10 +310,12 @@
         },
         "count": {
           "type": "integer",
+          "format": "int32",
           "description": "The count of documents retrieved."
         },
         "elapsedMs": {
           "type": "integer",
+          "format": "int32",
           "description": "The elapsed time in milliseconds for the retrieval activity."
         }
       },
@@ -328,14 +332,17 @@
       "properties": {
         "inputTokens": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of input tokens for the LLM query planning activity."
         },
         "outputTokens": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of output tokens for the LLM query planning activity."
         },
         "elapsedMs": {
           "type": "integer",
+          "format": "int32",
           "description": "The elapsed time in milliseconds for the model activity."
         }
       },
@@ -352,10 +359,12 @@
       "properties": {
         "inputTokens": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of input tokens for the semantic ranker activity."
         },
         "elapsedMs": {
           "type": "integer",
+          "format": "int32",
           "description": "The elapsed time in milliseconds for the model activity."
         }
       },
@@ -412,7 +421,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
     },
     "ClientRequestIdParameter": {
       "name": "x-ms-client-request-id",
@@ -432,6 +442,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "format": "url",
       "x-ms-skip-url-encoding": true,
       "description": "The endpoint URL of the search service.",
       "x-ms-parameter-location": "client"
