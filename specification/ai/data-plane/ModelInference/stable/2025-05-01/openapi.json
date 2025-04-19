@@ -37,7 +37,7 @@
     },
     {
       "OAuth2Auth": [
-        "https://ml.azure.com/.default"
+        "https://cognitiveservices.azure.com/.default"
       ]
     }
   ],
@@ -52,7 +52,7 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
       "scopes": {
-        "https://ml.azure.com/.default": ""
+        "https://cognitiveservices.azure.com/.default": ""
       }
     }
   },
@@ -129,6 +129,17 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Chat completion with audio content": {
+            "$ref": "./examples/GetChatCompletions_AudioModality_Gen.json"
+          },
+          "Chat completion with multiple parameters and chat history": {
+            "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
+          },
+          "Simple chat completion": {
+            "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -202,6 +213,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create text embeddings": {
+            "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
+          },
+          "Create text embeddings with dimension, encoding, and input type": {
+            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
           }
         }
       }
@@ -277,6 +296,14 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Create image embeddings from text and image pair, and encoding format": {
+            "$ref": "./examples/GetImageEmbeddings_MaximumSet_Gen.json"
+          },
+          "Generate image embeddings": {
+            "$ref": "./examples/GetImageEmbeddings_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -314,6 +341,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get model information": {
+            "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
+          },
+          "Get model information for a model deployment": {
+            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
           }
         }
       }
