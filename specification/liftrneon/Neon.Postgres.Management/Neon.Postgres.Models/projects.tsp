@@ -55,14 +55,14 @@ model ProjectProperties {
   branch?: BranchProperties;
 
   @doc("Roles associated with the project")
-  @Azure.ResourceManager.identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   roles?: NeonRoleProperties[];
 
   @doc("Neon Databases associated with the project")
-  @Azure.ResourceManager.identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   databases?: NeonDatabaseProperties[];
 
   @doc("Endpoints associated with the project")
-  @Azure.ResourceManager.identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   endpoints?: EndpointProperties[];
 }
