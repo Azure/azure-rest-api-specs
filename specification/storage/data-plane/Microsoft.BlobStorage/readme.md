@@ -116,9 +116,9 @@ input-file:
 
 These settings apply only when `--tag=package-2025-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-07'
+```yaml $(tag) == 'package-2025-07'
 input-file:
-- stable/2025-07-05/blob.json
+  - stable/2025-07-05/blob.json
 ```
 
 ### Suppression
@@ -140,7 +140,11 @@ suppressions:
   - code: LroExtension
     from: blob.json
     reason: Legacy operations not defined as lro
-  - code: XMS_EXAMPLE_NOTFOUND_ERROR
+```
+
+```yaml
+directive:
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: blob.json
-    reason: XML examples are not supported
+    reason: Service uses XML, not JSON, so cannot validate.
 ```
