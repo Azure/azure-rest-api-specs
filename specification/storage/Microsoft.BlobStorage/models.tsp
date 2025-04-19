@@ -230,6 +230,7 @@ model ContainerItem {
   @Xml.name("Properties") properties: ContainerProperties;
 
   /** The metadata of the container. */
+  #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
   @Xml.name("Metadata") metadata?: Record<string>;
 }
 
@@ -737,6 +738,7 @@ union RehydratePriority {
 
 /** The blob metadata. */
 // TODO: check if this needs an unwrapped decorator
+#suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
 model BlobMetadata is Record<string> {
   /** Whether the blob metadata is encrypted. */
@@ -756,6 +758,7 @@ model BlobTag {
 }
 
 /** The object replication metadata. */
+#suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
 @Xml.name("OrMetadata")
 model ObjectReplicationMetadata is Record<string>;
 
@@ -2036,6 +2039,7 @@ alias MetadataHeaders = {
 // NOTE: this does not explicitly let emitters know that this is a special type of header used for collection of object replication headers. Logic should be handwritten to handle this.
 alias ObjectReplicationHeaders = {
   /** Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed). */
+  #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Existing API"
   @header("x-ms-or") objectReplicationRules?: Record<string>;
 };
 
@@ -2132,7 +2136,7 @@ alias MultipartBodyParameter = {
   @multipartBody body: {
     name: HttpPart<string>;
     body: HttpPart<bytes>;
-  }
+  };
 };
 
 alias IsHierarchicalNamespaceEnabled = {
