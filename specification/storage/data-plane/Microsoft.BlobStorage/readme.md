@@ -150,4 +150,6 @@ directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: blob.json
     reason: Service uses XML, not JSON, so cannot validate.
+  - suppress: ValidFormats
+    reason: Properly specifying parameter format.
 ```
