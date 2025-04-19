@@ -29,6 +29,8 @@ interface QuestionAnswering {
        * The name of the project to use.
        */
       @query("projectName")
+      @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       projectName: string;
 
       /**

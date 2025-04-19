@@ -71,6 +71,7 @@ interface QuestionAnsweringProjects {
        * The name of the project to use.
        */
       @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
     },
@@ -97,6 +98,7 @@ interface QuestionAnsweringProjects {
        * The name of the project to use.
        */
       @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
@@ -137,6 +139,7 @@ interface QuestionAnsweringProjects {
        * The name of the project to use.
        */
       @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
@@ -181,6 +184,7 @@ interface QuestionAnsweringProjects {
        * The name of the project to use.
        */
       @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
@@ -229,6 +233,7 @@ interface QuestionAnsweringProjects {
        * The name of the project to use.
        */
       @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
@@ -265,6 +270,7 @@ interface QuestionAnsweringProjects {
        * The name of the project to use.
        */
       @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
@@ -307,6 +313,7 @@ interface QuestionAnsweringProjects {
        * The name of the project to use.
        */
       @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
@@ -338,6 +345,7 @@ interface QuestionAnsweringProjects {
        * The name of the project to use.
        */
       @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
