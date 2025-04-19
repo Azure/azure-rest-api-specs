@@ -147,4 +147,7 @@ directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: blob.json
     reason: Service uses XML, not JSON, so cannot validate.
+  - suppress: MULTIPLE_BODY_PARAMETERS
+    from: blob.json
+    reason: These are multipart requests defined in typespec, the swagger is generated through typespec-autorest.
 ```
