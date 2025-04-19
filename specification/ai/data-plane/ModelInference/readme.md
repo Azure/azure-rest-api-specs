@@ -50,6 +50,12 @@ suppressions:
   - code: IntegerTypeMustHaveFormat
     from: openapi.json
     reason: OpenAI compatible API, which uses unixTimeStamp
+  - code: PropertyType
+    from: openapi.json
+    reason: External API shape is defined in OpenAPI 3.0 as oneOf. 2.0 doesn't support union.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    reason: OpenAI compatible API, which uses boolean.
 ```
 
 ### Release 2025-05-01-preview
@@ -63,5 +69,11 @@ suppressions:
   - code: IntegerTypeMustHaveFormat
     from: openapi.json
     reason: OpenAI compatible API, which uses unixTimeStamp
+  - code: PropertyType
+    from: openapi.json
+    reason: External API shape is defined in OpenAPI 3.0 as oneOf. 2.0 doesn't support union.
+  - code: EnumInsteadOfBoolean
+    from: openapi.json
+    reason: OpenAI compatible API, which uses boolean.
 ```
 
