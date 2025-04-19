@@ -41,7 +41,6 @@ namespace Storage.Blob {
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
     @header("Content-Type")
     contentType: ResponseMediaType;
-
   }) | TError;
 
   /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
@@ -258,8 +257,7 @@ namespace Storage.Blob {
         ...MetadataHeaders;
         ...IfModifiedSinceParameter;
       },
-      {
-      }
+      {}
     >;
 
     /** gets the permissions for the specified container. The permissions indicate whether container data may be accessed publicly. */
@@ -872,8 +870,7 @@ namespace Storage.Blob {
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
         },
-        {
-        }
+        {}
       >;
 
       /** Set the immutability policy of a blob */
@@ -957,8 +954,7 @@ namespace Storage.Blob {
           ...ConditionalRequestHeaders;
           ...IfTagsParameter;
         },
-        {
-        }
+        {}
       >;
 
       /** The Acquire Lease operation requests a new lease on a blob. The lease lock duration can be 15 to 60 seconds, or can be infinite. */

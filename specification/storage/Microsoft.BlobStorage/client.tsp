@@ -16,17 +16,25 @@ model BlobServiceClientParameters {
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container.Blob, "Azure.Storage.Blobs");
-@@clientNamespace(Storage.Blob.Container.Blob.AppendBlob, "Azure.Storage.Blobs");
+@@clientNamespace(Storage.Blob.Container.Blob.AppendBlob,
+  "Azure.Storage.Blobs"
+);
 @@clientNamespace(Storage.Blob.Container.Blob.BlockBlob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container.Blob.PageBlob, "Azure.Storage.Blobs");
 
 @@clientName(Storage.Blob, "BlobServiceClient", "rust");
 @@clientName(Storage.Blob.Container, "BlobContainerClient", "rust");
 @@clientName(Storage.Blob.Container.Blob, "BlobClient", "rust");
-@@clientName(Storage.Blob.Container.Blob.AppendBlob, "AppendBlobClient", "rust");
+@@clientName(Storage.Blob.Container.Blob.AppendBlob,
+  "AppendBlobClient",
+  "rust"
+);
 @@clientName(Storage.Blob.Container.Blob.BlockBlob, "BlockBlobClient", "rust");
 @@clientName(Storage.Blob.Container.Blob.PageBlob, "PageBlobClient", "rust");
-@@clientName(Storage.Blob.Container.Blob.setHttpHeaders, "SetProperties", "rust");
+@@clientName(Storage.Blob.Container.Blob.setHttpHeaders,
+  "SetProperties",
+  "rust"
+);
 
 @@clientInitialization(Storage.Blob.Container,
   {

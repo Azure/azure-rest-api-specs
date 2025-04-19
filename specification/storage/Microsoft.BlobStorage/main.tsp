@@ -17,9 +17,7 @@ using Azure.Core;
     }
   ]>
 )
-@service(#{
-  title: "Azure Storage Blob service",
-})
+@service(#{ title: "Azure Storage Blob service" })
 @server(
   "{url}",
   "The host name of the blob storage account, e.g. accountName.blob.core.windows.net",
