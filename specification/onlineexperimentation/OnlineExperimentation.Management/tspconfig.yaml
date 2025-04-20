@@ -1,0 +1,49 @@
+parameters:
+  "service-dir":
+    default: "sdk/onlineexperimentation"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/OnlineExperimentWorkspace.json"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.OnlineExperimentation"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-onlineexperimentation"
+    namespace: "azure.mgmt.onlineexperimentation"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-onlineexperimentation"
+    namespace: "com.azure.resourcemanager.onlineexperimentation"
+    service-name: "onlineexperimentation"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-onlineexperimentation"
+    is-modular-library: true
+    generate-metadata: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-onlineexperimentation"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/onlineexperimentation"
+    package-dir: "armonlineexperimentation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

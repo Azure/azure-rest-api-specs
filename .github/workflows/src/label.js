@@ -15,3 +15,10 @@ export const LabelAction = Object.freeze({
   Remove: "remove",
 });
 // @ts-check
+
+export const Label = {
+  /**
+   * @type {"Approved-Avocado"}
+   */
+  APPROVED_AVOCADO: "Approved-Avocado",
+};
