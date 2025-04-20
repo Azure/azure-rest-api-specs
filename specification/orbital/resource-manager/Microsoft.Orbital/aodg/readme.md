@@ -1,5 +1,7 @@
 # orbital
 
+Trivial change to validate LintDiff behavior.
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for orbital.
