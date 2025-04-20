@@ -90,7 +90,7 @@ union HasTablesWithOids {
 }
 
 /**
- * Represents the presence of Oids in Tables under a DB.
+ * Represents the presence of custom data types in a DB.
  */
 union HasCustomDataTypes {
   @doc("The Database has custom data types.")
@@ -103,7 +103,7 @@ union HasCustomDataTypes {
 }
 
 /**
- * Represents the presence of Oids in Tables under a DB.
+ * Represents an Enum with boolean values.
  */
 union BoolValue {
   @doc("Represents a true boolean value.")
