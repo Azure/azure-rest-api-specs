@@ -126,7 +126,10 @@ function createEmitterOptionTestCases(
   cases.push({
     description: `Validate ${language}'s option:${key} with invalid value ${invalidValue}`,
     folder,
-    tspconfigContent: createEmitterOptionExample(emitterName, { key: key, value: invalidValue }),
+    tspconfigContent: createEmitterOptionExample(emitterName, {
+      key: key,
+      value: invalidValue,
+    }),
     success: false,
     subRules,
   });

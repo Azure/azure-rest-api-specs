@@ -37,7 +37,11 @@ export abstract class TspconfigSubRuleBase {
     }
 
     const { shouldSkip, reason } = this.skip(config, folder);
-    if (shouldSkip) return { success: true, stdOutput: `Validation skipped. ${reason}` };
+    if (shouldSkip)
+      return {
+        success: true,
+        stdOutput: `Validation skipped. ${reason}`,
+      };
     return this.validate(config);
   }
 
@@ -62,7 +66,10 @@ export abstract class TspconfigSubRuleBase {
   }
 
   protected createFailedResult(error: string, action: string): RuleResult {
-    return { success: false, errorOutput: `- ${error}. ${action}.` };
+    return {
+      success: false,
+      errorOutput: `- ${error}. ${action}.`,
+    };
   }
 
   public abstract getPathOfKeyToValidate(): string;
@@ -159,7 +166,9 @@ function skipForNonModularOrDataPlaneInTsEmitter(config: any, folder: string): S
   // isModularLibrary is true by default
   const isModularClient = config?.options?.["@azure-tools/typespec-ts"]?.isModularLibrary !== false;
   const shouldRun = isManagementSdk(folder) && isModularClient;
-  const result: SkipResult = { shouldSkip: !shouldRun };
+  const result: SkipResult = {
+    shouldSkip: !shouldRun,
+  };
   if (result.shouldSkip)
     result.reason = "This rule is only applicable for management SDKs with modular client.";
   return result;
