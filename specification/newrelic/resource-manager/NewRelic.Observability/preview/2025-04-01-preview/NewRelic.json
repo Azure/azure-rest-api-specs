@@ -2939,10 +2939,6 @@
     "SaaSData": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "saas guid id"
-        },
         "saaSResourceId": {
           "type": "string",
           "description": "saas resource id"
@@ -2958,7 +2954,12 @@
           "description": "saas Id"
         }
       },
-      "description": "Response of get SaaSInfo Operation."
+      "description": "Response of get SaaSInfo Operation.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "PlanDataResource": {
       "type": "object",
