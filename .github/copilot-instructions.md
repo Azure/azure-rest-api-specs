@@ -41,9 +41,9 @@
         - Generate a title and description based on the changes. Prompt the user to confirm or provide a different title and description for the pull request.
         - Prompt user to select the the target branch for pull request.  Default target branch is "main".
         - Create pull requet for changes in TypeSpec project, target branch, title and descriptions
-    - Get pull request details and show check status if pull request number is nto 0
-    - Get pull request comments and check if there is any action item for the user.
-- Step 6: Verify target lifecycle of API specification.
+- Step 6: Get TypeSpec pull request details for current branch and show the details of the pull request.
+- Step 7: Get pull request comments and check if there is any action item for the user.
+- Step 8: Verify target lifecycle of API specification.
     - Target lifecycle is the lifecycle of the API specification. Show below list of options and prompt user to select one of the options.
         - Target lifecycle options:
             - Private Preview
@@ -51,11 +51,7 @@
             - GA
         - SDK needs to be generated and released only if target life sycle is Public Preview or GA.
         - If target lifecycle is Private Preview, then inform user that SDK generation and release is not required for Private Preview.
-- Step 7: Check SDK release readiness for TypeSpec API specification.
-    - Prompt user with a yes or no question to confirm if their TypeSpec API specification is ready for SDK generation and release or they have more API specification changes to be done.
-        - If user confirms, then proceed with the next steps.
-        - If user does not confirm, then inform user that SDK release process can be rerun when API specification is ready for SDK generation.
-- Step 8: Create release plan work item
+- Step 9: Create release plan work item before generating the SDK or get a URL for existing release plan work item.
     - Prompt user to provide the following details for the release plan work item:
         - Service Tree ID for the Service
         - Service Name
@@ -66,6 +62,3 @@
     - Check if there is a release plan work item in Azure DevOps for TytpeSpec API specification for given product, service and API version.
         - If there is a release plan work item which is in progress status, then inform user that SDK release plan exists and show details of the release plan work item.
     - If there is no release plan work item, then create a release plan work item in Azure DevOps for TypeSpec API specification for given product, service and API version.
-
-
-
