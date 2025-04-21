@@ -132,6 +132,14 @@ using Microsoft.EventGrid.SystemEvents;
   "AcsChatMessageEventInThreadBase",
   "javascript"
 );
+@@clientName(AcsCallingEventProperties,
+  "AcsCallingEvent",
+  "javascript"
+);
+@@clientName(AcsCallParticipantEventProperties,
+  "AcsCallParticipantEvent",
+  "javascript"
+);
 @@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
   "EventGridMqttClientCreatedOrUpdatedEventData",
   "javascript"
