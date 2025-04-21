@@ -34,6 +34,11 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
   - Microsoft.LoadTestService/preview/2025-03-01-preview/loadtestservice.json
+
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: loadtestservice.json
+    reason: Typespec generated definitions contain anonymous types. This is a bug in the tool(https://github.com/Azure/typespec-azure/issues/2290).
 ```
 
 ### Tag: package-2024-12-01-preview
