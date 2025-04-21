@@ -444,7 +444,7 @@ model NodeTypeProperties {
   securityType?: SecurityType;
 
   /**
-   * Specifies the security type of the nodeType. Only Standard and TrustedLaunch are currently supported.
+   * Specifies the SecurityType of the node type. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
    */
   securityEncryptionType?: SecurityEncryptionType;
 
@@ -1193,12 +1193,12 @@ union SecurityEncryptionType {
   /**
    * For encryption of the managed disk along with VMGuestState blob.
    */
-  TrustedLaunch: "DiskWithVMGuestState",
+  DiskWithVMGuestState: "DiskWithVMGuestState",
 
   /**
    * For encryption of just the VMGuestState blob.
    */
-  Standard: "VMGuestStateOnly",
+  VMGuestStateOnly: "VMGuestStateOnly",
 
 }
 

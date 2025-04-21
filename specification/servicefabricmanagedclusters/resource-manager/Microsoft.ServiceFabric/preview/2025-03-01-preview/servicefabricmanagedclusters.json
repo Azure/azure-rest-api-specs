@@ -6474,7 +6474,7 @@
         },
         "securityEncryptionType": {
           "$ref": "#/definitions/SecurityEncryptionType",
-          "description": "Specifies the security type of the nodeType. Only Standard and TrustedLaunch are currently supported."
+          "description": "Specifies the SecurityType of the node type. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set."
         },
         "secureBootEnabled": {
           "type": "boolean",
@@ -7198,12 +7198,12 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "TrustedLaunch",
+            "name": "DiskWithVMGuestState",
             "value": "DiskWithVMGuestState",
             "description": "For encryption of the managed disk along with VMGuestState blob."
           },
           {
-            "name": "Standard",
+            "name": "VMGuestStateOnly",
             "value": "VMGuestStateOnly",
             "description": "For encryption of just the VMGuestState blob."
           }
