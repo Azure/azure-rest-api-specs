@@ -47,6 +47,7 @@ interface WorkspaceOps
 @armResourceOperations
 interface CustomPrivateEndpointConnection {
   getByHostPool is HostPoolOps.Read<PrivateEndpointConnectionWithSystemData>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing usage of status code"
   updateByHostPool is HostPoolOps.CreateOrUpdateSync<
     PrivateEndpointConnectionWithSystemData,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionWithSystemData>
@@ -77,7 +78,7 @@ interface CustomPrivateEndpointConnection {
     Response = PrivateEndpointConnectionListResultWithSystemData
   >;
   getByWorkspace is WorkspaceOps.Read<PrivateEndpointConnectionWithSystemData>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing usage of status code"
   updateByWorkspace is WorkspaceOps.CreateOrUpdateSync<
     PrivateEndpointConnectionWithSystemData,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnectionWithSystemData>
