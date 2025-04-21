@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -572,3 +573,16 @@ model StorageTaskPreviewActionIfCondition {
    */
   condition?: string;
 }
+
+@@doc(StorageTaskAssignmentsListResult.value,
+  "List of Storage Task Assignment Resource IDs associated with this Storage Task."
+);
+@@doc(StorageTaskReportInstance.properties,
+  "Storage task execution report for a run instance."
+);
+@@OpenAPI.extension(StorageTaskAssignmentsListResult.value,
+  "x-ms-identifiers",
+  #[]
+);
+@@visibility(Azure.Core.Page.value, Lifecycle.Read);
+@@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);

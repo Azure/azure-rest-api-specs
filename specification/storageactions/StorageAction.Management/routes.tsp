@@ -28,3 +28,7 @@ interface StorageTasksOperationGroup {
     Parameters = LocationParameter
   >;
 }
+
+@@doc(StorageTasksOperationGroup.previewActions::parameters.body,
+  "The parameters to preview action condition."
+);
