@@ -113,13 +113,48 @@ model AgentEvaluationRequest {
   appInsightsConnectionString?: string;
 }
 
-@doc("Long running operation response for agent evaluation.")
+@doc("Result for the agent evaluation evaluator run.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
-model AgentLongRunningOperationResponse {
-  @doc("URI for the long running operation.")
-  location: string;
+model AgentEvaluationResult {
+  @doc("Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion.")
+  evaluator: string;
 
-  @doc("Result of the long running operation.")
-  operationResult?: unknown;
+  @doc("Score of the given evaluator. No restriction on range.")
+  score: float32;
+
+  @doc("Status of the evaluator result. Options: Running, Succeeded, Failed, NotApplicable.")
+  status: string;
+
+  @doc("Reasoning for the evaluation result.")
+  reason?: string;
+
+  @doc("Version of the evaluator that was used to evaluate the agent's completion.")
+  version?: string;
+
+  @doc("The unique identifier of the thread.")
+  threadId?: string;
+
+  @doc("The unique identifier of the run.")
+  runId: string;
+
+  @doc("A string explaining why there was an error, if applicable.")
+  error?: string;
+
+  @doc("Additional properties relevant to the evaluator. These will differ between evaluators.")
+  additionalDetails?: Record<string>;
+}
+
+@doc("Evaluation response for agent evaluation run.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AgentEvaluation {
+  @doc("Identifier of the agent evaluation run.")
+  id: string;
+
+  @doc("Status of the agent evaluation. Options: Running, Succeeded, Failed.")
+  status: string;
+
+  @doc("The agent evaluation results.")
+  results?: Array<AgentEvaluationResult>;
 }
