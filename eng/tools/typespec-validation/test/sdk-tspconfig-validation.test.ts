@@ -453,7 +453,7 @@ const pythonDpFlavorTestCases = createEmitterOptionTestCases(
   "",
   "flavor",
   "azure",
-  "azure-",
+  "aaa",
   [new TspConfigPythonDpFlavorEqualAzureSubRule()],
 );
 
