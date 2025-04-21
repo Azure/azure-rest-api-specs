@@ -439,12 +439,17 @@ model NodeTypeProperties {
   vmSetupActions?: VmSetupAction[];
 
   /**
-   * Specifies the security type of the nodeType. Only Standard and TrustedLaunch are currently supported
+   * Specifies the security type of the nodeType. Supported values include Standard, TrustedLaunch and ConfidentialVM.
    */
   securityType?: SecurityType;
 
   /**
-   * Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch SecurityType
+   * Specifies the security type of the nodeType. Only Standard and TrustedLaunch are currently supported.
+   */
+  securityEncryptionType?: SecurityEncryptionType;
+
+  /**
+   * Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch and ConfidentialVM SecurityType.
    */
   secureBootEnabled?: boolean;
 
@@ -1172,6 +1177,29 @@ union SecurityType {
    * Standard is the default security type for all machines.
    */
   Standard: "Standard",
+
+  /**
+   * ConfidentialVM provides hardware-based encryption, trusted execution environment (TEE) and isolation of the VM memory & CPU from host.
+   */
+  ConfidentialVM: "ConfidentialVM",
+}
+
+/**
+ * Specifies the securityEncryptionType type of the nodeType. Only DiskWithVMGuestState and VMGuestStateOnly are currently supported
+ */
+union SecurityEncryptionType {
+  string,
+
+  /**
+   * For encryption of the managed disk along with VMGuestState blob.
+   */
+  TrustedLaunch: "DiskWithVMGuestState",
+
+  /**
+   * For encryption of just the VMGuestState blob.
+   */
+  Standard: "VMGuestStateOnly",
+
 }
 
 /**
