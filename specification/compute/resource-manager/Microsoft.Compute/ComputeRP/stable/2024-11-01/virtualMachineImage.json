@@ -827,6 +827,15 @@
         "extendedLocation": {
           "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine."
+        },
+        "hyperVGeneration": {
+          "$ref": "./computeRPCommon.json#/definitions/HyperVGenerationType"
+        },
+        "architecture": {
+          "$ref": "#/definitions/ArchitectureType"
+        },
+        "imageDeprecationStatus": {
+          "$ref": "#/definitions/ImageDeprecationStatus"
         }
       },
       "required": [
@@ -1034,14 +1043,14 @@
           "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine."
         },
-        {
+        "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineImageProperties"
         }
       },
       "required": [
-      "name",
-      "location"
+        "name",
+        "location"
       ],
       "allOf": [
         {
