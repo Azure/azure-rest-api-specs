@@ -166,7 +166,6 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   // Get the spec paths based on the batch run type
   const specConfigPaths = getSpecPaths(batchType, commandInput.localSpecRepoPath);
-
   // Prepare variables
   let statusCode = 0;
   let markdownContent = "\n";

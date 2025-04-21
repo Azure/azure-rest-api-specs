@@ -48,6 +48,7 @@ export function findFilesRecursive(directory: string, fileName: string): string[
 }
 
 export function findReadmeFiles(directory: string): string[] {
+  console.log('directory', directory)
   return findFilesRecursive(directory, "readme.md");
 }
 

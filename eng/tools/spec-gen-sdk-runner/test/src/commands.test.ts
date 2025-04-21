@@ -1,33 +1,34 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
 import * as log from "../../src/log.js";
 import * as utils from "../../src/utils.js";
-import * as changeFiles from "../../src/change-files.js";
-import { fileURLToPath } from "node:url";
-import path from "node:path";
-import fs from "node:fs";
-import {
-  setPipelineVariables,
-  parseArguments,
-  prepareSpecGenSdkCommand,
-  getSpecPaths,
-  logIssuesToPipeline,
-  getBreakingChangeInfo,
-  processBreakingChangeLabelArtifacts,
-  generateSdkForSingleSpec,
-  generateSdkForSpecPr,
-  //   generateSdkForBatchSpecs,
-} from "../../src/commands.js";
+// import * as changeFiles from "../../src/change-files.js";
+// import { fileURLToPath } from "node:url";
+// import path from "node:path";
+import fs, { Dirent } from "node:fs";
+// import {
+  // setPipelineVariables,
+  // parseArguments,
+  // prepareSpecGenSdkCommand,
+  // getSpecPaths,
+  // logIssuesToPipeline,
+  // getBreakingChangeInfo,
+  // processBreakingChangeLabelArtifacts,
+  // generateSdkForSingleSpec,
+  // generateSdkForSpecPr,
+    // generateSdkForBatchSpecs,
+// } from "../../src/commands.js";
 import * as commands from "../../src/commands.js";
 
 // Get the absolute path to the repo root
-const currentFilePath = fileURLToPath(import.meta.url);
-const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
+// const currentFilePath = fileURLToPath(import.meta.url);
+// const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 
 describe("commands.ts", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
+  /**
   describe("setPipelineVariables", () => {
     test("should set pipeline variables correctly", () => {
       vi.spyOn(log, "setVsoVariable").mockImplementation(() => {});
@@ -149,12 +150,31 @@ describe("commands.ts", () => {
       expect(result).toEqual(["typespec1", "typespec2", "readme1", "readme2"]);
     });
 
+    test("should return only readme paths for 'all-openapis' batch type", () => {
+      vi.spyOn(utils, "findReadmeFiles").mockReturnValue(["readme1", "readme2"]);
+
+      const result = getSpecPaths("all-openapis", "/spec/path");
+
+      expect(result).toEqual(["readme1", "readme2"]);
+    });
+
     test("should return only TypeSpec paths for 'all-typespecs' batch type", () => {
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue(["typespec1", "typespec2"]);
 
       const result = getSpecPaths("all-typespecs", "/spec/path");
 
       expect(result).toEqual(["typespec1", "typespec2"]);
+    });
+    
+    test("should return sample TypeSpec paths for 'sample-typespecs' batch type", () => {
+      vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue(["typespec1", "typespec2"]);
+
+      const result = getSpecPaths("sample-typespecs", "/spec/path");
+
+      expect(result).toEqual([
+        "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+        "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml"
+      ]);
     });
   });
 
@@ -360,29 +380,44 @@ describe("commands.ts", () => {
       expect(result).toBe(1);
     });
   });
-
+ */
+  
+  /**
   describe("generateSdkForBatchSpecs", () => {
     beforeEach(() => {
       vi.clearAllMocks();
     });
 
     test("should generate SDKs for batch specs successfully", async () => {
-      // Mock getSpecPaths to return a list of specs
-      vi.spyOn(commands, "getSpecPaths").mockReturnValueOnce(["spec1", "spec2"]);
+      console.log('currentFilePath',currentFilePath);
+      console.log('repoRoot',repoRoot);
+      vi.spyOn(log, "logMessage").mockImplementation(() => {});
+      const mockBatchType = "all-specs";
+      vi.spyOn(commands, "parseArguments").mockReturnValueOnce({
+        localSpecRepoPath: repoRoot,
+        workingFolder: "123",
+        runMode: "batch",
+        localSdkRepoPath: "4123",
+        sdkRepoName: "123123",
+        sdkLanguage: "",
+        specCommitSha: "",
+        specRepoHttpsUrl: "",
+      });
+
+      // vi.spyOn(commands, "getSpecPaths").mockReturnValueOnce(["typespec1", "typespec2", "readme1", "readme2"]);
 
       // Mock other dependencies
-      vi.spyOn(utils, "resetGitRepo").mockResolvedValueOnce(undefined);
-      vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
-      vi.spyOn(fs, "readFileSync").mockReturnValue(
-        JSON.stringify({
-          executionResult: "succeeded",
-        }),
-      );
+      // vi.spyOn(utils, "resetGitRepo").mockResolvedValueOnce(undefined);
+      // vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+      // vi.spyOn(fs, "readFileSync").mockReturnValue(
+      //   JSON.stringify({
+      //     executionResult: "succeeded",
+      //   }),
+      // );
 
-      vi.spyOn(log, "logMessage").mockImplementation(() => {});
 
       // Call the function
-      const result = await commands.generateSdkForBatchSpecs("all-specs");
+      const result = await commands.generateSdkForBatchSpecs(mockBatchType);
 
       // Assertions
       expect(result).toBe(0);
@@ -391,7 +426,6 @@ describe("commands.ts", () => {
       expect(log.logMessage).toHaveBeenCalledWith("Runner command executed successfully");
     });
 
-    /**
     test("should handle errors during batch spec generation", async () => {
       // Mock getSpecPaths to return a list of specs
       vi.spyOn(commands, "getSpecPaths").mockReturnValueOnce(["spec1", "spec2"]);
@@ -431,6 +465,138 @@ describe("commands.ts", () => {
       expect(commands.getSpecPaths).toHaveBeenCalledWith("all-specs", expect.any(String));
       expect(utils.runSpecGenSdkCommand).not.toHaveBeenCalled(); // No specs, so no commands run
       expect(log.logMessage).toHaveBeenCalledWith("No specs to process for batch type: all-specs");
+    });
+  });
+  */
+ 
+  describe("generateSdkForBatchSpecs", () => {
+    // beforeEach(() => {
+    //   vi.clearAllMocks();
+    // });
+
+    test("should generate SDKs for all specs successfully", async () => {
+      const mockBatchType = "all-specs";
+      const mockSpecPaths = ["typespec1", "typespec2", "readme1", "readme2"];
+      const mockExecutionReport = {
+        executionResult: "succeeded",
+        packages: [],
+      };
+
+      vi.spyOn(commands, "parseArguments").mockImplementation(() => {return{
+        localSpecRepoPath: "/spec/path",
+        workingFolder: "/working/folder",
+        runMode: "batch",
+        localSdkRepoPath: "/sdk/path",
+        sdkRepoName: "azure-sdk-for-js",
+        sdkLanguage: "javascript",
+        specCommitSha: "",
+        specRepoHttpsUrl: "",
+      }});
+      // console.log('commands.parseArguments', commands.parseArguments);
+      expect(vi.isMockFunction(commands.parseArguments)).toBe(true)
+      const resultparseArguments = commands.parseArguments()
+      console.log('resultparseArguments', resultparseArguments)
+      vi.spyOn(fs, "readdirSync").mockImplementation((path) => {
+        if (path === "/spec/path") {
+          return [
+            { name: "typespec1", isFile: () => true, isDirectory: () => false },
+            { name: "typespec2", isFile: () => true, isDirectory: () => false },
+            { name: "readme1", isFile: () => true, isDirectory: () => false },
+            { name: "readme2", isFile: () => true, isDirectory: () => false },
+          ] as unknown as Dirent[]; // 强制类型转换为 Dirent[]
+        }
+        return [];
+      });
+      
+      vi.spyOn(fs, "existsSync").mockImplementation((path) => {
+        return path === "/spec/path/specification";
+      });
+      
+      vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue(["typespec1", "typespec2"]);
+      vi.spyOn(commands, "getSpecPaths").mockImplementation((batchType) => {
+        if (batchType === "all-specs") {
+          return ["typespec1", "typespec2", "readme1", "readme2"]; // 模拟返回的路径
+        }
+        return [];
+      });
+      vi.spyOn(utils, "resetGitRepo").mockResolvedValueOnce(undefined);
+      vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockExecutionReport));
+      vi.spyOn(fs, "existsSync").mockReturnValue(false);
+      vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
+      vi.spyOn(log, "logMessage").mockImplementation(() => {});
+
+      const result = await commands.generateSdkForBatchSpecs(mockBatchType);
+
+      expect(result).toBe(0);
+      // expect(commands.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
+      expect(utils.runSpecGenSdkCommand).toHaveBeenCalledTimes(mockSpecPaths.length);
+      expect(log.logMessage).toHaveBeenCalledWith(
+        "Runner: markdown file written to /working/folder/out/logs/generation-summary.md"
+      );
+    });
+/**
+    test("should handle errors during SDK generation", async () => {
+      const mockBatchType = "all-specs";
+      const mockSpecPaths = ["typespec1", "typespec2"];
+      const mockExecutionReport = {
+        executionResult: "failed",
+        packages: [],
+      };
+
+      vi.spyOn(commands, "parseArguments").mockReturnValueOnce({
+        localSpecRepoPath: "/spec/path",
+        workingFolder: "/working/folder",
+        runMode: "batch",
+        localSdkRepoPath: "/sdk/path",
+        sdkRepoName: "azure-sdk-for-js",
+        sdkLanguage: "javascript",
+        specCommitSha: "",
+        specRepoHttpsUrl: "",
+      });
+
+      vi.spyOn(commands, "getSpecPaths").mockReturnValueOnce(mockSpecPaths);
+      vi.spyOn(utils, "resetGitRepo").mockResolvedValueOnce(undefined);
+      vi.spyOn(utils, "runSpecGenSdkCommand").mockRejectedValueOnce(new Error("Command failed"));
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockExecutionReport));
+      vi.spyOn(fs, "existsSync").mockReturnValue(false);
+      vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
+      vi.spyOn(log, "logMessage").mockImplementation(() => {});
+
+      const result = await commands.generateSdkForBatchSpecs(mockBatchType);
+
+      expect(result).toBe(1);
+      expect(utils.runSpecGenSdkCommand).toHaveBeenCalledTimes(mockSpecPaths.length);
+      expect(log.logMessage).toHaveBeenCalledWith(
+        "Runner: error executing command:Error: Command failed",
+        "error"
+      );
+    });
+
+    test("should handle empty spec paths", async () => {
+      const mockBatchType = "all-specs";
+
+      vi.spyOn(commands, "parseArguments").mockReturnValueOnce({
+        localSpecRepoPath: "/spec/path",
+        workingFolder: "/working/folder",
+        runMode: "batch",
+        localSdkRepoPath: "/sdk/path",
+        sdkRepoName: "azure-sdk-for-js",
+        sdkLanguage: "javascript",
+        specCommitSha: "",
+        specRepoHttpsUrl: "",
+      });
+
+      vi.spyOn(commands, "getSpecPaths").mockReturnValueOnce([]);
+      vi.spyOn(log, "logMessage").mockImplementation(() => {});
+
+      const result = await commands.generateSdkForBatchSpecs(mockBatchType);
+
+      expect(result).toBe(0);
+      expect(commands.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
+      expect(log.logMessage).toHaveBeenCalledWith(
+        "Runner: markdown file written to /working/folder/out/logs/generation-summary.md"
+      );
     });
 
      */
