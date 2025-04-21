@@ -636,6 +636,12 @@
           },
           "Autocomplete API call to search for 'Muir Woods', filtered by park and populated place resultTypes, place resultTypeGroups": {
             "$ref": "./examples/AutocompleteParkAndPopulatedPlaceResultType.json"
+          },
+          "Autocomplete API call to search for '1 Microsoft Way, Redmond', place resultTypeGroups, and return empty result": {
+            "$ref": "./examples/AutocompleteNullResult.json"
+          },
+          "Autocomplete API call to search with invalid coordinates format, and return error message": {
+            "$ref": "./examples/AutocompleteErrorMessage.json"
           }
         },
         "parameters": [
@@ -681,11 +687,13 @@
                 "values": [
                   {
                     "name": "Address",
-                    "value": "Address"
+                    "value": "Address",
+                    "description": "A specific address location, which can be further categorized into resultTypes such as RoadIntersection and RoadBlock."
                   },
                   {
                     "name": "Place",
-                    "value": "Place"
+                    "value": "Place",
+                    "description": "All non-address general place or location, such as cities, postcodes, landmarks, populated places."
                   }
                 ]
               }
@@ -1146,6 +1154,7 @@
           "type": "string"
         },
         "countryRegion": {
+          "description": "Country or region with its name and ISO code.",
           "type": "object",
           "properties": {
             "ISO": {
