@@ -42,6 +42,10 @@ If one or multiple validation error/warning suppression(s) is detected in your P
 [Swagger-Suppression-Process](https://aka.ms/pr-suppressions) 
 to get approval.
 
+### Release planner
+
+A [release plan](https://aka.ms/azsdkdocs/release-plans) should have been created, please do so if you have not. A release plan well help guide you through the REST API and SDK creation process. 
+
 ## ❔Got questions? Need additional info?? We are here to help!
 
 <details>
