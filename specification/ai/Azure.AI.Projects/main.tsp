@@ -34,7 +34,10 @@ namespace Azure.AI {
   "Azure AI",
   {
     @doc("""
-      Project endpoint in the form of: https://<aiservices-id>.services.ai.azure.com/api/projects/<project-name>
+      Project endpoint. In the form "https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/_project"
+      if your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form 
+      "https://<your-ai-services-account-name>.services.ai.azure.com/api/projects/<your-project-name>" if you want to explicitly
+      specify the Foundry Project name.
       """)
     endpoint: url,
   }
