@@ -41,6 +41,8 @@
         - Generate a title and description based on the changes. Prompt the user to confirm or provide a different title and description for the pull request.
         - Prompt user to select the the target branch for pull request.  Default target branch is "main".
         - Create pull requet for changes in TypeSpec project, target branch, title and descriptions
+    - Get pull request details and show check status if pull request number is nto 0
+    - Get pull request comments and check if there is any action item for the user.
 - Step 6: Verify target lifecycle of API specification.
     - Target lifecycle is the lifecycle of the API specification. Show below list of options and prompt user to select one of the options.
         - Target lifecycle options:
