@@ -2939,6 +2939,10 @@
     "SaaSData": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "saas guid id"
+        },
         "saaSResourceId": {
           "type": "string",
           "description": "saas resource id"
@@ -2946,15 +2950,11 @@
       },
       "description": "SaaS details"
     },
-    "saasId": {
-      "type": "string",
-      "description": "SaaS resource guid Id"
-    },
     "SaaSInfo": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/saasId",
+          "$ref": "#/definitions/SaaSData",
           "description": "saas Id"
         }
       },
