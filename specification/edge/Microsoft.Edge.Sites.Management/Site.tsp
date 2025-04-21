@@ -110,7 +110,7 @@ interface SitesByServiceGroup {
     resource: Site,
   ): ArmResourceUpdatedResponse<Site> | ArmResourceCreatedResponse<
     Site,
-    ArmAsyncOperationHeader<Site> & Azure.Core.Foundations.RetryAfterHeader
+    ArmAsyncOperationHeader<FinalResult=Site> & Azure.Core.Foundations.RetryAfterHeader
   > | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "custom PATCH call"
