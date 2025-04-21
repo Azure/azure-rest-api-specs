@@ -303,7 +303,7 @@ model QuestionAnsweringProjectMetadata {
    * Name of the project.
    */
   @key("projectName")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   @maxLength(100)
   @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
   projectName: string;
