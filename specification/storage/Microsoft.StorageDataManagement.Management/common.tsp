@@ -37,7 +37,7 @@ union State {
 }
 
 @doc("The auth type supported for bucket connection.")
-union BucketAuthType {
+union AuthType {
   @doc("Access Key auth type")
   AccessKey: "AccessKey",
 
@@ -45,7 +45,7 @@ union BucketAuthType {
 }
 
 @doc("The connection type for bucket connection")
-union BucketConnectionType {
+union ConnectionType {
   @doc("Endpoint connection type")
   Endpoint: "Endpoint",
 

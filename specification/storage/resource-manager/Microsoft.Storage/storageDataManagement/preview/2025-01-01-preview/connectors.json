@@ -502,6 +502,112 @@
     }
   },
   "definitions": {
+    "AccessKeyProperties": {
+      "type": "object",
+      "description": "The access key properties for bucket connection.",
+      "properties": {
+        "accessKeyId": {
+          "type": "string",
+          "description": "Access key ID for the backing data store.",
+          "minLength": 3
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret access key. Redacted when read via a Get or List API.",
+          "minLength": 3,
+          "x-ms-secret": true
+        },
+        "signingRegion": {
+          "type": "string",
+          "description": "Region to use in the signing algorithm.  If not provided, defaults to us-east-1."
+        }
+      },
+      "required": [
+        "accessKeyId",
+        "secretAccessKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessKey"
+    },
+    "AccessKeyPropertiesUpdate": {
+      "type": "object",
+      "description": "The access key properties for bucket connection.",
+      "properties": {
+        "accessKeyId": {
+          "type": "string",
+          "description": "Access key ID for the backing data store.",
+          "minLength": 3
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret access key. Redacted when read via a Get or List API.",
+          "minLength": 3,
+          "x-ms-secret": true
+        },
+        "signingRegion": {
+          "type": "string",
+          "description": "Region to use in the signing algorithm.  If not provided, defaults to us-east-1."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessKey"
+    },
+    "AuthProperties": {
+      "type": "object",
+      "description": "The auth properties for bucket connection.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AuthType",
+          "description": "The auth type for bucket connection."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "AuthPropertiesUpdate": {
+      "type": "object",
+      "description": "The auth properties for bucket connection.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AuthType",
+          "description": "The auth type for bucket connection."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "AuthType": {
+      "type": "string",
+      "description": "The auth type supported for bucket connection.",
+      "enum": [
+        "AccessKey"
+      ],
+      "x-ms-enum": {
+        "name": "AuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AccessKey",
+            "value": "AccessKey",
+            "description": "Access Key auth type"
+          }
+        ]
+      }
+    },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
@@ -551,150 +657,12 @@
       },
       "readOnly": true
     },
-    "BucketAccessKeyProperties": {
-      "type": "object",
-      "description": "The access key properties for bucket connection.",
-      "properties": {
-        "accessKeyId": {
-          "type": "string",
-          "description": "Access key ID for the backing data store.",
-          "minLength": 3
-        },
-        "secretAccessKey": {
-          "type": "string",
-          "format": "password",
-          "description": "Secret access key. Redacted when read via a Get or List API.",
-          "minLength": 3,
-          "x-ms-secret": true
-        },
-        "signingRegion": {
-          "type": "string",
-          "description": "Region to use in the signing algorithm.  If not provided, defaults to us-east-1."
-        }
-      },
-      "required": [
-        "accessKeyId",
-        "secretAccessKey"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/BucketAuthProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "AccessKey"
-    },
-    "BucketAccessKeyPropertiesUpdate": {
-      "type": "object",
-      "description": "The access key properties for bucket connection.",
-      "properties": {
-        "accessKeyId": {
-          "type": "string",
-          "description": "Access key ID for the backing data store.",
-          "minLength": 3
-        },
-        "secretAccessKey": {
-          "type": "string",
-          "format": "password",
-          "description": "Secret access key. Redacted when read via a Get or List API.",
-          "minLength": 3,
-          "x-ms-secret": true
-        },
-        "signingRegion": {
-          "type": "string",
-          "description": "Region to use in the signing algorithm.  If not provided, defaults to us-east-1."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BucketAuthPropertiesUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "AccessKey"
-    },
-    "BucketAuthProperties": {
-      "type": "object",
-      "description": "The auth properties for bucket connection.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/BucketAuthType",
-          "description": "The auth type for bucket connection."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "BucketAuthPropertiesUpdate": {
-      "type": "object",
-      "description": "The auth properties for bucket connection.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/BucketAuthType",
-          "description": "The auth type for bucket connection."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "BucketAuthType": {
-      "type": "string",
-      "description": "The auth type supported for bucket connection.",
-      "enum": [
-        "AccessKey"
-      ],
-      "x-ms-enum": {
-        "name": "BucketAuthType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AccessKey",
-            "value": "AccessKey",
-            "description": "Access Key auth type"
-          }
-        ]
-      }
-    },
-    "BucketConnection": {
-      "type": "object",
-      "description": "Details related to the type of bucket connection",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/BucketConnectionType",
-          "description": "Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "BucketConnectionType": {
-      "type": "string",
-      "description": "The connection type for bucket connection",
-      "enum": [
-        "Endpoint"
-      ],
-      "x-ms-enum": {
-        "name": "BucketConnectionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Endpoint",
-            "value": "Endpoint",
-            "description": "Endpoint connection type"
-          }
-        ]
-      }
-    },
     "BucketSource": {
       "type": "object",
       "description": "The properties of the backing data store.",
       "properties": {
         "connection": {
-          "$ref": "#/definitions/BucketConnection",
+          "$ref": "#/definitions/Connection",
           "description": "Details for how to connect to the backing data store.",
           "x-ms-mutability": [
             "read",
@@ -702,7 +670,7 @@
           ]
         },
         "authProperties": {
-          "$ref": "#/definitions/BucketAuthProperties",
+          "$ref": "#/definitions/AuthProperties",
           "description": "Details for how to authenticate to the backing data store."
         },
         "hostOverride": {
@@ -730,7 +698,7 @@
       "description": "The properties of the backing data store.",
       "properties": {
         "authProperties": {
-          "$ref": "#/definitions/BucketAuthPropertiesUpdate",
+          "$ref": "#/definitions/AuthPropertiesUpdate",
           "description": "Details for how to authenticate to the backing data store."
         }
       },
@@ -740,6 +708,38 @@
         }
       ],
       "x-ms-discriminator-value": "Bucket"
+    },
+    "Connection": {
+      "type": "object",
+      "description": "Details related to the type of bucket connection",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ConnectionType",
+          "description": "Type of the connection - Endpoint or PrivateLink. Controls the type of the connection object. Not mutable once the Storage Connector is created."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ConnectionType": {
+      "type": "string",
+      "description": "The connection type for bucket connection",
+      "enum": [
+        "Endpoint"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Endpoint",
+            "value": "Endpoint",
+            "description": "Endpoint connection type"
+          }
+        ]
+      }
     },
     "Connector": {
       "type": "object",
@@ -959,7 +959,7 @@
         ]
       }
     },
-    "EndpointBucketConnection": {
+    "EndpointConnection": {
       "type": "object",
       "description": "Details related to endpoint based bucket connection",
       "properties": {
@@ -999,7 +999,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BucketConnection"
+          "$ref": "#/definitions/Connection"
         }
       ],
       "x-ms-discriminator-value": "Endpoint"
