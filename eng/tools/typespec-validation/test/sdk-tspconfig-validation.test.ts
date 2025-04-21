@@ -362,7 +362,7 @@ const pythonManagementNamespaceTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   managementTspconfigFolder,
   "namespace",
-  "azure-mgmt-aaa",
+  "azure.mgmt.aaa",
   "azure-aaa",
   [new TspConfigPythonMgmtNamespaceSubRule()],
 );
