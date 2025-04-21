@@ -421,15 +421,6 @@ export class TspConfigPythonDpPackageNameEqualStringSubRule extends TspconfigEmi
   }
 }
 
-export class TspConfigPythonDpFlavorEqualAzureSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "flavor", "azure");
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
-  }
-}
-
 // ----- Python azure sub rules -----
 export class TspConfigPythonAzGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {

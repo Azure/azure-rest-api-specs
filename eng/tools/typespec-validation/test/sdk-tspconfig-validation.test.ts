@@ -23,7 +23,6 @@ import {
   TspConfigPythonMgmtPackageDirectorySubRule,
   TspConfigPythonMgmtNamespaceSubRule,
   TspConfigPythonDpPackageNameEqualStringSubRule,
-  TspConfigPythonDpFlavorEqualAzureSubRule,
   TspConfigPythonAzGenerateTestTrueSubRule,
   TspConfigPythonAzGenerateSampleTrueSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
@@ -458,15 +457,6 @@ const pythonDpPackageNameTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpPackageNameEqualStringSubRule()],
 );
 
-const pythonDpFlavorTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-python",
-  "",
-  "flavor",
-  "azure",
-  "aaa",
-  [new TspConfigPythonDpFlavorEqualAzureSubRule()],
-);
-
 const pythonAzGenerateTestTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   "",
@@ -634,7 +624,6 @@ describe("tspconfig", function () {
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpPackageDirTestCases,
     ...pythonDpPackageNameTestCases,
-    ...pythonDpFlavorTestCases,
     ...pythonAzGenerateTestTestCases,
     ...pythonAzGenerateSampleTestCases,
     // csharp
