@@ -1,15 +1,43 @@
-import { test, describe, expect } from "vitest";
+import { beforeEach, test, describe, expect, vi } from "vitest";
 import {
-  iconFor,
-  getLine,
-  getFile,
-  getDocUrl,
-  getFileLink,
-  getPathSegment,
   compareLintDiffViolations,
+  generateAutoRestErrorReport,
+  generateLintDiffReport,
+  getDocUrl,
+  getFile,
+  getFileLink,
+  getLine,
+  getPathSegment,
+  iconFor,
 } from "../src/generateReport.js";
+import {
+  Source,
+  LintDiffViolation,
+  BeforeAfter,
+  AutorestRunResult,
+  AutoRestMessage,
+} from "../src/lintdiff-types.js";
+import { isWindows } from "./test-util.js";
 
-import { Source, LintDiffViolation } from "../src/types.js";
+import { vol } from "memfs";
+
+vi.mock("node:fs/promises", async () => {
+  const memfs = await vi.importActual("memfs") as typeof import("memfs");
+  return {
+    ...memfs.fs.promises,
+  };
+});
+
+import { readFile } from "fs/promises";
+
+vi.mock("../src/util.js", async () => {
+  const original = await vi.importActual("../src/util.js");
+  return {
+    ...original,
+    getDependencyVersion: vi.fn().mockResolvedValue("1.0.0"),
+    getPathToDependency: vi.fn().mockResolvedValue("path/to/dependency"),
+  };
+});
 
 describe("iconFor", () => {
   test.each([
@@ -267,5 +295,213 @@ describe("compareLintDiffViolations", () => {
 
     const actual = compareLintDiffViolations(a, b);
     expect(actual).toEqual(1);
+  });
+});
+
+describe("generateLintDiffReport", () => {
+  beforeEach(() => {
+    vol.reset();
+
+    // Seed current filesystem so that "." exists.
+    vol.mkdirSync(".", { recursive: true });
+  });
+  test.skipIf(isWindows())("fails if new violations include an error", async ({ expect }) => {
+    const afterViolation = {
+      extensionName: "@microsoft.azure/openapi-validator",
+      level: "error",
+      code: "SomeCode",
+      message: "Some Message",
+      source: [
+        {
+          document:
+            "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+          position: { line: 1, colomn: 1 },
+        } as Source,
+      ],
+      details: {},
+    };
+
+    const beforeResult = {
+      error: null,
+      stdout: "",
+      stderr: "",
+      rootPath: "",
+      readme: "file1.md",
+      tag: "",
+    } as AutorestRunResult;
+    const afterResult = {
+      error: null,
+      stdout: JSON.stringify(afterViolation),
+      stderr: "",
+      rootPath: "",
+      readme: "file1.md",
+      tag: "",
+    } as AutorestRunResult;
+
+    const runCorrelations = new Map<string, BeforeAfter>([
+      ["file1.md", { before: beforeResult, after: afterResult }],
+    ]);
+
+    const outFile = "test-output.md";
+    const actual = await generateLintDiffReport(
+      runCorrelations,
+      new Set<string>([
+        "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+      ]),
+      outFile,
+      "baseBranch",
+      "compareSha",
+    );
+    expect(actual).toBe(false);
+    expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
+      "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
+      | --- | --- | --- |
+      | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+
+
+      **[must fix]The following errors/warnings are intorduced by current PR:**
+
+      | Rule | Message | Related RPC [For API reviewers] |
+      | ---- | ------- | ------------------------------- |
+      | :x: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
+
+      "
+    `);
+  });
+
+  test.skipIf(isWindows())(
+    "passes if new violations do not include an error (warnings only)",
+    async ({ expect }) => {
+      const afterViolation = {
+        extensionName: "@microsoft.azure/openapi-validator",
+        level: "warning",
+        code: "SomeCode",
+        message: "Some Message",
+        source: [
+          {
+            document:
+              "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+            position: { line: 1, colomn: 1 },
+          } as Source,
+        ],
+        details: {},
+      };
+
+      const beforeResult = {
+        error: null,
+        stdout: "",
+        stderr: "",
+        rootPath: "",
+        readme: "file1.md",
+        tag: "",
+      } as AutorestRunResult;
+      const afterResult = {
+        error: null,
+        stdout: JSON.stringify(afterViolation),
+        stderr: "",
+        rootPath: "",
+        readme: "file1.md",
+        tag: "",
+      } as AutorestRunResult;
+
+      const runCorrelations = new Map<string, BeforeAfter>([
+        ["file1.md", { before: beforeResult, after: afterResult }],
+      ]);
+
+      const outFile = "test-output.md";
+      const actual = await generateLintDiffReport(
+        runCorrelations,
+        new Set<string>([
+          "specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
+        ]),
+        outFile,
+        "baseBranch",
+        "compareSha",
+      );
+      expect(actual).toBe(true);
+      
+      expect(await readFile(outFile, { encoding: "utf-8" })).toMatchInlineSnapshot(`
+        "| Compared specs ([v1.0.0](https://www.npmjs.com/package/@microsoft.azure/openapi-validator/v/1.0.0)) | new version | base version |
+        | --- | --- | --- |
+        | default | [default](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/file1.md) | [default](https://github.com/Azure/azure-rest-api-specs/blob/baseBranch/file1.md) |
+
+
+        **[must fix]The following errors/warnings are intorduced by current PR:**
+
+        | Rule | Message | Related RPC [For API reviewers] |
+        | ---- | ------- | ------------------------------- |
+        | :warning: [SomeCode](https://github.com/Azure/azure-openapi-validator/blob/main/docs/some-code.md) | Some Message<br />Location: [Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1](https://github.com/Azure/azure-rest-api-specs/blob/compareSha/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json#L1) |  |
+
+        "
+      `);
+    },
+  );
+});
+
+describe("generateAutoRestErrorReport", () => {
+  beforeEach(() => {
+    vol.reset();
+
+    // Seed current filesystem so that "." exists.
+    vol.mkdirSync(".", { recursive: true });
+  });
+
+  test("generates a report with errors", async () => {
+    const autoRestErrors = [
+      {
+        result: {
+          readme: "readme.md",
+          tag: "tag1",
+          rootPath: "dummy/rootPath",
+          error: null,
+          stdout: "dummy stdout",
+          stderr: "dummy stderr",
+        },
+        errors: [
+          { level: "error", message: "Error message 1" } as AutoRestMessage,
+          { level: "fatal", message: "Fatal error message" } as AutoRestMessage,
+        ],
+      },
+      {
+        result: {
+          readme: "readme2.md",
+          tag: "tag2",
+          rootPath: "dummy/rootPath",
+          error: null,
+          stdout: "dummy stdout",
+          stderr: "dummy stderr",
+        },
+        errors: [
+          { level: "error", message: "Error message 2" } as AutoRestMessage,
+        ],
+      },
+    ];
+
+    const outFile = "autorest-error-report.md";
+    await generateAutoRestErrorReport(autoRestErrors, outFile);
+
+    const actual = await readFile(outFile, { encoding: "utf-8" });
+    expect(actual).toMatchInlineSnapshot(`
+      "**AutoRest errors:**
+
+      Readme: readme.md
+      Tag: tag1
+      Errors:
+      | Level | Message |
+      | ----- | ------- |
+      | :x: error | Error message 1 |
+      | :warning: fatal | Fatal error message |
+
+
+      Readme: readme2.md
+      Tag: tag2
+      Errors:
+      | Level | Message |
+      | ----- | ------- |
+      | :x: error | Error message 2 |
+
+
+      "
+    `);
   });
 });

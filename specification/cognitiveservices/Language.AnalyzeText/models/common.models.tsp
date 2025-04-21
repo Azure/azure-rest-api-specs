@@ -190,6 +190,10 @@ model AnalyzeTextJobsInput {
   /** Default language to use for records requesting automatic language detection. */
   @added(Versions.v2024_11_15_preview)
   defaultLanguage?: string;
+
+  /** Optional duration in seconds after which the job will be canceled if not completed. */
+  @added(Versions.v2025_05_15_preview)
+  cancelAfter?: float32;
 }
 
 /** The input object for the prebuilt/default result. */
