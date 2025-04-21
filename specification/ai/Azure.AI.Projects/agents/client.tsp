@@ -267,7 +267,8 @@ namespace Azure.AI.Projects.Agents {
   @@clientName(CreateAndRunThreadOptions.assistantId, "agentId", "python");
 
   @@clientName(RunStepOpenAPIToolCall, "RunStepOpenApiToolCall", "java");
-
+  @@clientName(RunStepOpenAPIToolCall.openAPI, "openApi", "java");
+  
 
   // From https://platform.openai.com/docs/agents/how-it-works
   // "Note that deleting an AgentFile doesn’t delete the original File object, it simply deletes the association
