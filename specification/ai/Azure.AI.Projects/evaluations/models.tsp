@@ -93,6 +93,13 @@ model SamplingConfiguration {
   maxRequestRate: float;
 }
 
+@doc("The redaction configuration will allow the user to control what is redacted.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model RedactionConfiguration {
+  redactScoreProperties?: boolean;
+}
+
 @doc("Evaluation request for agent run.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
@@ -108,6 +115,9 @@ model AgentEvaluationRequest {
 
   @doc("Sampling configuration for the evaluation.")
   samplingConfiguration?: SamplingConfiguration;
+
+  @doc("Redaction configuration for the evaluation.")
+  redactionConfiguration?: RedactionConfiguration;
 
   @doc("Optional and temporary way to pass the AppInsights connection string to the evaluator. When this string is not null, the evaluation results will be logged to Azure AppInsights.")
   appInsightsConnectionString?: string;
