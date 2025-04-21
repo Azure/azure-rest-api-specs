@@ -127,7 +127,7 @@ union DomainJoinType {
 /**
  * The type of image session hosts use in the hostpool.
  */
-union type {
+union imagetype {
   string,
 
   /**
@@ -1668,7 +1668,7 @@ model ImageInfoProperties {
   /**
    * The type of image session hosts use in the hostpool.
    */
-  type: type;
+  type: imagetype;
 
   /**
    * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
@@ -1688,7 +1688,7 @@ model ImageInfoPatchProperties {
   /**
    * The type of image session hosts use in the hostpool.
    */
-  type?: type;
+  type?: imagetype;
 
   /**
    * The values to uniquely identify a marketplace image. Only one should be populated based on the image type.
