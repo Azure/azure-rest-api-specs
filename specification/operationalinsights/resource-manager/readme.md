@@ -66,6 +66,7 @@ input-file:
   - Microsoft.OperationalInsights/stable/2025-02-01/Usages.json
   - Microsoft.OperationalInsights/stable/2025-02-01/WorkspacePurge.json
   - Microsoft.OperationalInsights/stable/2025-02-01/Workspaces.json
+  - Microsoft.OperationalInsights/stable/2025-02-01/WorkspacesFailover.json
 ```
 
 ### Tag: package-2023-09
