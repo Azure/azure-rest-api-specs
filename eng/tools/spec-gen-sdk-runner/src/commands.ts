@@ -271,6 +271,7 @@ function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
     commandInput.workingFolder,
     `${commandInput.sdkRepoName}_tmp/execution-report.json`,
   );
+  console.log(`##vso[task.setVariable variable=GeneratedSDK.ExecutionReportPath]${executionReportPath}`);
   return JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
 }
 
