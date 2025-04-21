@@ -1366,12 +1366,6 @@
               "$ref": "#/definitions/GalleryScript"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/GalleryScript"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1427,6 +1421,16 @@
           },
           "202": {
             "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Geo-location (region) of the resource."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Link to the async operation's status."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/GalleryScript"
             }
@@ -1590,22 +1594,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/GalleryScriptVersion"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/GalleryScriptVersion"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "Geo-location (region) of the resource."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "Link to the async operation's status."
-              }
             }
           },
           "default": {
