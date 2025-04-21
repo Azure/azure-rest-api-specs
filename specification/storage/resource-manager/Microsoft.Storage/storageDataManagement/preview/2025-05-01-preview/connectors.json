@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Storage Data Management Resource Provider",
-    "version": "2025-01-01-preview",
+    "version": "2025-05-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -727,7 +727,8 @@
       "type": "string",
       "description": "The connection type for bucket connection",
       "enum": [
-        "Endpoint"
+        "Endpoint",
+        "PrivateLink"
       ],
       "x-ms-enum": {
         "name": "ConnectionType",
@@ -737,6 +738,11 @@
             "name": "Endpoint",
             "value": "Endpoint",
             "description": "Endpoint connection type"
+          },
+          {
+            "name": "PrivateLink",
+            "value": "PrivateLink",
+            "description": "PrivateLink connection type"
           }
         ]
       }
@@ -1003,6 +1009,70 @@
         }
       ],
       "x-ms-discriminator-value": "Endpoint"
+    },
+    "PrivateLinkConnection": {
+      "type": "object",
+      "description": "Details related to PrivateLink based connection",
+      "properties": {
+        "privateEndpointName": {
+          "type": "string",
+          "description": "The name of the system created Private Endpoint.",
+          "readOnly": true
+        },
+        "privateLinkId": {
+          "type": "string",
+          "description": "The ID of the backing PrivateLink."
+        },
+        "privateLinkGroupId": {
+          "type": "string",
+          "description": "The privateLinkGroupId."
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "The requestMessage of the backing PrivateLink."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint to connect to, including the protocol (http vs https), the host name, the port if applicable (defaulting to 80 or 443), and the path if applicable. Samples: https://203.0.113.1:9000/AllowSelfSignedCerts Bucket: https://data.contoso.com/bucketname .",
+          "minLength": 4
+        },
+        "tlsVerification": {
+          "type": "string",
+          "description": "Options - Perform or Skip (default: Perform)  If this is set to “Skip”, Azure Storage will not verify the certificate chain of TLS connections to a root CA. Set this to “Skip” if the backing data store uses a self-signed cert. Ignored if the endpoint field does not use HTTPS.",
+          "default": "Perform",
+          "enum": [
+            "Perform",
+            "AllowSelfSignedCerts"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVerification",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Perform",
+                "value": "Perform",
+                "description": "Perform TLS Verification"
+              },
+              {
+                "name": "AllowSelfSignedCerts",
+                "value": "AllowSelfSignedCerts",
+                "description": "Use AllowSelfSignedCerts as TlsVerification"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "privateLinkId",
+        "requestMessage",
+        "endpoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Connection"
+        }
+      ],
+      "x-ms-discriminator-value": "PrivateLink"
     },
     "ProvisioningState": {
       "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",

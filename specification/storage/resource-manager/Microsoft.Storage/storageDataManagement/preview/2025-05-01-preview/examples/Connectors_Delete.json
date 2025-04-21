@@ -1,23 +1,15 @@
 {
-  "operationId": "Connectors_TestExistingConnection",
-  "title": "ExistingConnectionTest",
+  "operationId": "Connectors_Delete",
+  "title": "DeleteConnector",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "testrg",
     "storageAccountName": "teststorageaccount",
-    "api-version": "2025-01-01-preview",
     "connectorName": "testconnector",
-    "body": {
-      "uniqueId": "12345"
-    }
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
-    "200": {
-      "body": {
-        "storageConnectorMethodName": "TestExistingConnection",
-        "storageConnectorRequestId": "request-id-123"
-      }
-    },
+    "204": {},
     "202": {
       "status": "Accepted",
       "message": "The resource operation has been received and is being processed.",
