@@ -170,7 +170,6 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   // Get the spec paths based on the batch run type
   const specConfigPaths = getSpecPaths(batchType, commandInput.localSpecRepoPath);
-
   // Prepare variables
   let statusCode = 0;
   let markdownContent = "\n";
@@ -295,6 +294,13 @@ export function setPipelineVariables(
  * @returns The spec-gen-sdk command input.
  */
 export function parseArguments(): SpecGenSdkCmdInput {
+  // --scp /mnt/vss/_work/1/s/azure-rest-api-specs 
+  // --sdp /mnt/vss/_work/1/s/azure-sdk-for-go 
+  // --wf /mnt/vss/_work/1/s 
+  // --lang azure-sdk-for-go 
+  // --commit 4f8a82159c81d23b1d77726ed0e8dab2e069cdaf 
+  // --spec-repo-url https://github.com/Azure/azure-rest-api-specs 
+  // --pr-number 34043
   const __filename: string = fileURLToPath(import.meta.url);
   const __dirname: string = path.dirname(__filename);
 
