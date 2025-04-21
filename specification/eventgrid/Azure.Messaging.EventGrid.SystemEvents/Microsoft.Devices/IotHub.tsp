@@ -93,8 +93,7 @@ model DeviceConnectionStateEventProperties {
 /** Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry). */
 model DeviceTelemetryEventProperties {
   /** The content of the message from the device. */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of body is object"
-  body: Record<unknown>;
+  body: Record<{}>;
 
   /** Application properties are user-defined strings that can be added to the message. These fields are optional. */
   properties: Record<string>;

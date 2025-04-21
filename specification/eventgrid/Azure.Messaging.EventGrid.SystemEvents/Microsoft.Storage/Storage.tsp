@@ -409,7 +409,6 @@ namespace Microsoft.EventGrid.SystemEvents {
     identity?: string;
 
     /** For service use only. Diagnostic data occasionally included by the Azure Storage service. This property should be ignored by event consumers. */
-    #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Type is Object in swagger"
-    storageDiagnostics: Record<unknown>;
+    storageDiagnostics: Record<{}>;
   };
 }
