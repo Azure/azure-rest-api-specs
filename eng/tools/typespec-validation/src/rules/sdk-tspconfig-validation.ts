@@ -528,10 +528,15 @@ export class SdkTspConfigValidationRule implements Rule {
       success &&= result.success;
     }
 
+    const stdOutputFailedResults =
+      failedResults.length > 0
+        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\n Please see https://aka.ms/azsdk/spec-gen-sdk-config for more info.`
+        : "";
+
     // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
     return {
       success: true,
-      stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${failedResults.map((r) => r.errorOutput).join("\n")}`,
+      stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
 
