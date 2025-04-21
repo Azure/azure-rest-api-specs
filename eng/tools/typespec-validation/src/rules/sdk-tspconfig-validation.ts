@@ -395,7 +395,7 @@ export class TspConfigPythonMgmtPackageDirectorySubRule extends TspconfigEmitter
 
 export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-python", "namespace", new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/));
+    super("@azure-tools/typespec-python", "namespace", new RegExp(/^azure\.mgmt(\.[a-z]+){1,2}$/));
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
