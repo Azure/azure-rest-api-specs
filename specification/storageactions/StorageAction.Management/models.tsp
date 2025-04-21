@@ -7,6 +7,7 @@ import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.StorageActions;
