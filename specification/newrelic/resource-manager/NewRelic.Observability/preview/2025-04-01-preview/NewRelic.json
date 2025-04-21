@@ -1440,7 +1440,7 @@
           "200": {
             "description": "Get SaaSInfo completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SaaSData"
+              "$ref": "#/definitions/SaaSInfo"
             }
           },
           "default": {
@@ -2945,6 +2945,23 @@
         }
       },
       "description": "SaaS details"
+    },
+    "saasId": {
+      "type": "string",
+      "description": "SaaS resource guid Id"
+    },
+    "SaaSInfo": {
+      "type": "object",
+      "properties": {
+        "saasId": {
+          "$ref": "#/definitions/saasId",
+          "description": "saas Id"
+        }
+      },
+      "description": "Response of get SaaSInfo Operation.",
+      "required": [
+        "saasId"
+      ]
     },
     "PlanDataResource": {
       "type": "object",
