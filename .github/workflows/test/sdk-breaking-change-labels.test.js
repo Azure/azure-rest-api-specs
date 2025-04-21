@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { sdkLabels } from "../../src/sdk-types.js";
+import { sdkLabels } from "../../shared/src/sdk-types.js";
 import { LabelAction } from "../src/label.js";
 import {
   getLabelAndAction,

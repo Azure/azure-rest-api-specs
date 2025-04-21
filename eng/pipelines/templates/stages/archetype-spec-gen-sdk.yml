@@ -171,7 +171,7 @@ extends:
               fi
 
               if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
-                optional_params="$optional_params --rm ${{ parameters.SpecBatchTypes }}"
+                optional_params="$optional_params --batch-type ${{ parameters.SpecBatchTypes }}"
                 sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
               fi
 
@@ -194,7 +194,6 @@ extends:
                 --lang $(SdkRepoName) \
                 --commit $(SpecRepoCommit) \
                 --spec-repo-url ${{ parameters.SpecRepoUrl }} \
-                --tr true \
                 $optional_params || true # return true always to suppress exit error logging
             displayName: 'Generate SDK'
 
