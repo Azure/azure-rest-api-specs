@@ -56,7 +56,7 @@ interface LoadTestAdministration {
   @doc("""
     Clone the given test with optional overrides applied to the clone test.
     """)
-  @pollingOperation(Operations.getOperationStatus)
+  @pollingOperation(Operations.getStatus)
   @finalOperation(LoadTestAdministration.getTest)
   @added(APIVersions.v2025_03_01_preview)
   @action("clone")
@@ -466,7 +466,7 @@ interface Operations {
   @added(APIVersions.v2025_03_01_preview)
   @summary("Get the status of a long running operation.")
   @doc("Get the status of a long running operation.")
-  getOperationStatus is StandardResourceOperations.ResourceRead<OperationStatus>;
+  getStatus is StandardResourceOperations.ResourceRead<OperationStatus>;
 }
 
 // NOTE(mitsha): In clients.tsp, when we use `op is <Op>` syntax, it removes all the decorators defined on the interface
