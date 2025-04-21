@@ -70,19 +70,19 @@ model DeidentificationJob {
 @doc("Summary metrics of a job.")
 model DeidentificationJobSummary {
   @doc("Number of documents that have completed.")
-  @clientName("successfulCount", "java")
+  @clientName("successfulCount", "csharp,java")
   successful: int32;
 
   @doc("Number of documents that have failed.")
-  @clientName("failedCount", "java")
+  @clientName("failedCount", "csharp,java")
   failed: int32;
 
   @doc("Number of documents that have been canceled.")
-  @clientName("canceledCount", "java")
+  @clientName("canceledCount", "csharp,java")
   canceled: int32;
 
   @doc("Number of documents total.")
-  @clientName("totalCount", "java")
+  @clientName("totalCount", "csharp,java")
   total: int32;
 
   @doc("Number of bytes processed.")
@@ -100,11 +100,11 @@ model DeidentificationDocumentDetails {
   id: string;
 
   @doc("Location for the input.")
-  @clientName("inputLocation", "java")
+  @clientName("inputLocation", "csharp,java")
   input: DeidentificationDocumentLocation;
 
   @doc("Location for the output.")
-  @clientName("outputLocation", "java")
+  @clientName("outputLocation", "csharp,java")
   output?: DeidentificationDocumentLocation;
 
   @doc("Status of the document.")
