@@ -173,6 +173,7 @@ model Error {
   /**
    * The error object.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" ""
   error?: ErrorError;
 }
 
@@ -276,6 +277,22 @@ model HealthBotKey {
 model BotResponseList is Azure.Core.Page<HealthBot>;
 
 /**
+ * Available operations of the service.
+ */
+model AvailableOperations {
+  /**
+   * Collection of available operation details.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  value: OperationDetail[];
+
+  /**
+   * URL client should use to fetch the next page (per server side paging).
+   * It's null for now, added for future use.
+   */
+  nextLink?: string;
+}
+/**
  * Operation detail payload
  */
 model OperationDetail {
@@ -302,7 +319,35 @@ model OperationDetail {
   /**
    * Additional properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   properties?: Record<unknown>;
+}
+
+/**
+ * Localized display information for and operation.
+ */
+model OperationDisplay {
+  /** 
+  The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
+   */
+  @visibility(Lifecycle.Read)
+  provider?: string;
+
+  /** 
+    The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
+     */
+  @visibility(Lifecycle.Read)
+  resource?: string;
+
+  /** 
+    The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
+     */
+  @visibility(Lifecycle.Read)
+  operation?: string;
+
+  /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**

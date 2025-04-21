@@ -53,7 +53,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all the available Azure Health Bot operations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -63,13 +63,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/AvailableOperations"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -77,9 +77,6 @@
           "Get Operations": {
             "$ref": "./examples/GetOperations.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -108,7 +105,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -150,7 +147,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -202,7 +199,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -275,7 +272,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -338,6 +335,10 @@
               "$ref": "#/definitions/HealthBot"
             },
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -348,7 +349,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -356,7 +357,11 @@
           "BotUpdate": {
             "$ref": "./examples/ResourceUpdatePatch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Bots_Delete",
@@ -409,7 +414,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -462,7 +467,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -511,7 +516,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -524,6 +529,27 @@
     }
   },
   "definitions": {
+    "AvailableOperations": {
+      "type": "object",
+      "description": "Available operations of the service.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of available operation details.",
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL client should use to fetch the next page (per server side paging).\nIt's null for now, added for future use."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "BotResponseList": {
       "type": "object",
       "description": "The list of Azure Health Bot operation response.",
@@ -545,15 +571,59 @@
         "value"
       ]
     },
+    "Error": {
+      "type": "object",
+      "description": "The resource management error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorError",
+          "description": "The error object."
+        }
+      }
+    },
+    "ErrorError": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "HealthBot": {
       "type": "object",
       "description": "Azure Health Bot resource definition",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/HealthBotProperties",
-          "description": "The set of properties specific to Azure Health Bot resource.",
-          "x-ms-client-flatten": true
-        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SKU of the Azure Health Bot."
@@ -561,6 +631,11 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the Azure Health Bot."
+        },
+        "properties": {
+          "$ref": "#/definitions/HealthBotProperties",
+          "description": "The set of properties specific to Azure Health Bot resource.",
+          "x-ms-client-flatten": false
         }
       },
       "required": [
@@ -585,6 +660,32 @@
           "description": "The value of the key."
         }
       }
+    },
+    "HealthBotKeyVaultProperties": {
+      "type": "object",
+      "description": "Properties of the key vault.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key vault key."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key vault key."
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Uri of the key vault."
+        },
+        "userIdentity": {
+          "type": "string",
+          "description": "The user assigned identity (ARM resource id) that has access to the key."
+        }
+      },
+      "required": [
+        "keyName",
+        "keyVaultUri"
+      ]
     },
     "HealthBotKeysResponse": {
       "type": "object",
@@ -615,7 +716,7 @@
           "readOnly": true
         },
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
+          "$ref": "#/definitions/HealthBotKeyVaultProperties",
           "description": "KeyVault properties for the resource encryption."
         }
       }
@@ -684,31 +785,58 @@
         }
       }
     },
-    "KeyVaultProperties": {
+    "OperationDetail": {
       "type": "object",
-      "description": "Properties of the key vault.",
+      "description": "Operation detail payload",
       "properties": {
-        "keyName": {
+        "name": {
           "type": "string",
-          "description": "The name of the key vault key."
+          "description": "Name of the operation"
         },
-        "keyVersion": {
-          "type": "string",
-          "description": "The version of the key vault key."
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
         },
-        "keyVaultUri": {
-          "type": "string",
-          "description": "The Uri of the key vault."
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
         },
-        "userIdentity": {
+        "origin": {
           "type": "string",
-          "description": "The user assigned identity (ARM resource id) that has access to the key."
+          "description": "Origin of the operation"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties.",
+          "additionalProperties": {}
         }
-      },
-      "required": [
-        "keyName",
-        "keyVaultUri"
-      ]
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Localized display information for and operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
+          "readOnly": true
+        }
+      }
     },
     "ResourceIdentityType": {
       "type": "string",

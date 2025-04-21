@@ -21,6 +21,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Azure.ResourceManager.Private;
 /**
  * Azure Health Bot is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.
  */
@@ -43,4 +44,29 @@ enum Versions {
   v2024_02_01: "2024-02-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+/**
+ * This is the interface that implements the standard Azure Resource Manager operation that returns
+ * all supported RP operations. You should have exactly one declaration for each
+ * Azure Resource Manager service. It implements
+ *   GET "/providers/Microsoft.ContosoProviderHub/operations"
+ */
+interface Operations {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  @tag("Operations")
+  @autoRoute
+  @armUpdateProviderNamespace
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  list(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.ThisWillBeReplaced",
+  ): ArmResponse<AvailableOperations> | Error;
+}
+
+@@doc(Operations.list, "Lists all the available Azure Health Bot operations.");

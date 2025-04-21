@@ -13,7 +13,11 @@ namespace Microsoft.HealthBot;
 /**
  * Azure Health Bot resource definition
  */
-model HealthBot is Azure.ResourceManager.TrackedResource<HealthBotProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+@Azure.ResourceManager.Private.armResourceInternal(HealthBotProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model HealthBot extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = HealthBot,
     KeyName = "botName",
@@ -31,7 +35,16 @@ model HealthBot is Azure.ResourceManager.TrackedResource<HealthBotProperties> {
    * The identity of the Azure Health Bot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
   identity?: Identity;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" ""
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" ""
+  @doc("The set of properties specific to Azure Health Bot resource.")
+  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
+  properties?: HealthBotProperties;
 }
 
 @armResourceOperations
@@ -41,25 +54,37 @@ interface HealthBots {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Bots_Get")
-  get is ArmResourceRead<HealthBot>;
+  get is ArmResourceRead<HealthBot, Error = Error>;
 
   /**
    * Create a new Azure Health Bot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Bots_Create")
-  create is ArmResourceCreateOrReplaceAsync<HealthBot>;
+  create is ArmResourceCreateOrReplaceAsync<
+    HealthBot,
+    Error = Error,
+    Response = ArmResourceUpdatedResponse<HealthBot> | ArmResourceCreatedResponse<
+      HealthBot,
+      ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
+  >;
 
   /**
    * Patch a HealthBot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem"
   @patch(#{ implicitOptionality: false })
   @operationId("Bots_Update")
   update is ArmCustomPatchAsync<
     HealthBot,
     PatchModel = HealthBotUpdateParameters,
-    Response = ArmResponse<HealthBot> | ArmResourceCreatedResponse<HealthBot>
+    Error = Error,
+    Response = ArmResponse<HealthBot> | ArmResourceCreatedResponse<
+      HealthBot,
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -70,7 +95,8 @@ interface HealthBots {
   @operationId("Bots_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     HealthBot,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = Error
   >;
 
   /**
@@ -80,7 +106,8 @@ interface HealthBots {
   @operationId("Bots_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     HealthBot,
-    Response = ArmResponse<BotResponseList>
+    Response = ArmResponse<BotResponseList>,
+    Error = Error
   >;
 
   /**
@@ -90,7 +117,8 @@ interface HealthBots {
   @operationId("Bots_List")
   list is ArmListBySubscription<
     HealthBot,
-    Response = ArmResponse<BotResponseList>
+    Response = ArmResponse<BotResponseList>,
+    Error = Error
   >;
 
   /**
@@ -101,7 +129,8 @@ interface HealthBots {
   listSecrets is ArmResourceActionSync<
     HealthBot,
     void,
-    ArmResponse<HealthBotKeysResponse>
+    ArmResponse<HealthBotKeysResponse>,
+    Error = Error
   >;
 
   /**
@@ -112,7 +141,8 @@ interface HealthBots {
   regenerateApiJwtSecret is ArmResourceActionSync<
     HealthBot,
     void,
-    ArmResponse<HealthBotKey>
+    ArmResponse<HealthBotKey>,
+    Error = Error
   >;
 }
 
