@@ -661,32 +661,6 @@
         }
       }
     },
-    "HealthBotKeyVaultProperties": {
-      "type": "object",
-      "description": "Properties of the key vault.",
-      "properties": {
-        "keyName": {
-          "type": "string",
-          "description": "The name of the key vault key."
-        },
-        "keyVersion": {
-          "type": "string",
-          "description": "The version of the key vault key."
-        },
-        "keyVaultUri": {
-          "type": "string",
-          "description": "The Uri of the key vault."
-        },
-        "userIdentity": {
-          "type": "string",
-          "description": "The user assigned identity (ARM resource id) that has access to the key."
-        }
-      },
-      "required": [
-        "keyName",
-        "keyVaultUri"
-      ]
-    },
     "HealthBotKeysResponse": {
       "type": "object",
       "description": "Health Bot Keys Response.",
@@ -716,7 +690,7 @@
           "readOnly": true
         },
         "keyVaultProperties": {
-          "$ref": "#/definitions/HealthBotKeyVaultProperties",
+          "$ref": "#/definitions/KeyVaultProperties",
           "description": "KeyVault properties for the resource encryption."
         }
       }
@@ -784,6 +758,32 @@
           }
         }
       }
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "description": "Properties of the key vault.",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key vault key."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key vault key."
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Uri of the key vault."
+        },
+        "userIdentity": {
+          "type": "string",
+          "description": "The user assigned identity (ARM resource id) that has access to the key."
+        }
+      },
+      "required": [
+        "keyName",
+        "keyVaultUri"
+      ]
     },
     "OperationDetail": {
       "type": "object",
