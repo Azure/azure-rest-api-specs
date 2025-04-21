@@ -62,7 +62,7 @@ export async function getLabelAndActionImpl({
   let issue_number = NaN;
   let labelAction;
   let labelName = "";
-  const artifactName = "spec-gen-sdk-breaking-change-artifact";
+  const artifactName = "spec-gen-sdk-artifact";
   const artifactFileName = artifactName + ".json";
   const apiUrl = `${ado_project_url}/_apis/build/builds/${ado_build_id}/artifacts?artifactName=${artifactName}&api-version=7.0`;
   core.info(`Calling Azure DevOps API to get the artifact: ${apiUrl}`);
