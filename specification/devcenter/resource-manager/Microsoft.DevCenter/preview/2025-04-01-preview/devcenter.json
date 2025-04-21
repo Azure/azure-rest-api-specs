@@ -5703,28 +5703,48 @@
         "modelAsString": true
       }
     },
-    "DevBoxAutoDeleteEnableStatus": {
-      "description": "Indicates whether auto delete is enabled.",
+    "DevBoxDeleteMode": {
+      "description": "Indicates possible values for Dev Box delete mode.",
       "enum": [
-        "Disabled",
-        "Enabled"
+        "Manual",
+        "Auto"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "DevBoxAutoDeleteEnableStatus",
-        "modelAsString": true
+        "name": "DevBoxDeleteMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Manual",
+            "description": "Dev Boxes will not be deleted automatically, and user must manually delete. This is the default."
+          },
+          {
+            "value": "Auto",
+            "description": "Dev Boxes will be deleted automatically according to configured settings."
+          }
+        ]
       }
     },
-    "AzureAiServicesEnableStatus": {
+    "AzureAiServicesMode": {
       "description": "Indicates whether Azure AI services are enabled for a project.",
       "enum": [
         "Disabled",
-        "Enabled"
+        "AutoDeploy"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "AzureAiServicesEnableStatus",
-        "modelAsString": true
+        "name": "AzureAiServicesMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "Azure AI services are disabled for this project."
+          },
+          {
+            "value": "AutoDeploy",
+            "description": "Azure AI services are enabled for this project and necessary resources will be automatically setup."
+          }
+        ]
       }
     },
     "Encryption": {
@@ -5955,9 +5975,9 @@
       "description": "Represents settings for serverless GPU access.",
       "type": "object",
       "properties": {
-        "serverlessGpuSessionsEnableStatus": {
+        "serverlessGpuSessionsMode": {
           "description": "The property indicates whether serverless GPU access is enabled on the project.",
-          "$ref": "#/definitions/ServerlessGpuSessionsEnableStatus"
+          "$ref": "#/definitions/ServerlessGpuSessionsMode"
         },
         "maxConcurrentSessionsPerProject": {
           "type": "integer",
@@ -5971,34 +5991,54 @@
       "description": "Settings to be used for workspace storage.",
       "type": "object",
       "properties": {
-        "workspaceStorageEnableStatus": {
+        "workspaceStorageMode": {
           "description": "Indicates whether workspace storage is enabled.",
-          "$ref": "#/definitions/WorkspaceStorageEnableStatus"
+          "$ref": "#/definitions/WorkspaceStorageMode"
         }
       }
     },
-    "ServerlessGpuSessionsEnableStatus": {
+    "ServerlessGpuSessionsMode": {
       "description": "Indicates whether serverless GPU session access is enabled.",
       "enum": [
         "Disabled",
-        "Enabled"
+        "AutoDeploy"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ServerlessGpuSessionsEnableStatus",
-        "modelAsString": true
+        "name": "ServerlessGpuSessionsMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "Serverless GPU session access is disabled."
+          },
+          {
+            "value": "AutoDeploy",
+            "description": "Serverless GPU session access is enabled and necessary resources will be automatically setup."
+          }
+        ]
       }
     },
-    "WorkspaceStorageEnableStatus": {
+    "WorkspaceStorageMode": {
       "description": "Indicates whether workspace storage is enabled.",
       "enum": [
         "Disabled",
-        "Enabled"
+        "AutoDeploy"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "WorkspaceStorageEnableStatus",
-        "modelAsString": true
+        "name": "WorkspaceStorageMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Disabled",
+            "description": "Workspace storage is disabled."
+          },
+          {
+            "value": "AutoDeploy",
+            "description": "Workspace storage is enabled and necessary resources will be automatically setup."
+          }
+        ]
       }
     },
     "ProjectProperties": {
@@ -6197,9 +6237,9 @@
       "description": "Settings controlling the auto deletion of inactive dev boxes.",
       "type": "object",
       "properties": {
-        "enableStatus": {
-          "description": "The property indicates whether auto delete is enabled.",
-          "$ref": "#/definitions/DevBoxAutoDeleteEnableStatus"
+        "deleteMode": {
+          "description": "Indicates the delete mode for Dev Boxes within this project.",
+          "$ref": "#/definitions/DevBoxDeleteMode"
         },
         "inactiveThreshold": {
           "description": "ISO8601 duration required for the dev box to not be inactive prior to it being scheduled for deletion.  ISO8601 format PT[n]H[n]M[n]S.",
@@ -6212,12 +6252,12 @@
       }
     },
     "AzureAiServicesSettings": {
-      "description": "Represents policy to enforce Azure AI services on a project.",
+      "description": "Configures Azure AI related services for the project.",
       "type": "object",
       "properties": {
-        "azureAiServicesEnableStatus": {
+        "azureAiServicesMode": {
           "description": "The property indicates whether Azure AI services is enabled.",
-          "$ref": "#/definitions/AzureAiServicesEnableStatus"
+          "$ref": "#/definitions/AzureAiServicesMode"
         }
       }
     },
