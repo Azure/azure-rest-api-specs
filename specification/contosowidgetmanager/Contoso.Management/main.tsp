@@ -17,7 +17,7 @@ using Azure.ResourceManager;
 @versioned(Microsoft.Contoso.Versions)
 namespace Microsoft.Contoso;
 
-/** The available API versions. */
+/** The available API version. */
 enum Versions {
   /** 2021-10-01-preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
