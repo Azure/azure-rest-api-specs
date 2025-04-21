@@ -21,6 +21,7 @@ import {
   TspConfigGoDpServiceDirMatchPatternSubRule,
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigPythonMgmtPackageDirectorySubRule,
+  TspConfigPythonMgmtNamespaceSubRule,
   TspConfigPythonDpPackageNameEqualStringSubRule,
   TspConfigPythonDpFlavorEqualAzureSubRule,
   TspConfigPythonAzGenerateTestTrueSubRule,
@@ -412,6 +413,15 @@ const pythonManagementPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonMgmtPackageDirectorySubRule()],
 );
 
+const pythonManagementNamespaceTestCases = createEmitterOptionTestCases(
+  "@azure-tools/typespec-python",
+  managementTspconfigFolder,
+  "namespace",
+  "azure-mgmt-aaa",
+  "azure-aaa",
+  [new TspConfigPythonMgmtNamespaceSubRule()],
+);
+
 const pythonManagementGenerateTestTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   managementTspconfigFolder,
@@ -619,6 +629,7 @@ describe("tspconfig", function () {
     ...javaManagementPackageDirTestCases,
     // python
     ...pythonManagementPackageDirTestCases,
+    ...pythonManagementNamespaceTestCases,
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpPackageDirTestCases,
