@@ -1,31 +1,25 @@
-import { beforeEach, vi, test, describe, expect } from "vitest";
+import { afterEach, beforeEach, vi, test, describe, expect } from "vitest";
 import { vol } from "memfs";
 
 import { getAffectedReadmes, readFileList } from "../src/processChanges.js";
-import { afterEach } from "node:test";
 import { isWindows } from "./test-util.js";
 
 // These tests are in a separate module because fs mocking is difficult to undo
 
-vi.mock("node:fs", () => {
-  const memfs = require("memfs");
-  return {
-    ...memfs.fs,
-  };
-});
-vi.mock("node:fs/promises", () => {
-  const memfs = require("memfs");
+vi.mock("node:fs/promises", async () => {
+  const memfs = await vi.importActual("memfs") as typeof import("memfs");
   return {
     ...memfs.fs.promises,
   };
 });
+
 
 describe("getAffectedReadmes", () => {
   beforeEach(() => {
     vol.reset();
   });
 
-  test.skipIf(isWindows)("includes expected changed file", async () => {
+  test.skipIf(isWindows())("includes expected changed file", async () => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/b/readme.md": "b",
@@ -49,7 +43,7 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).not.toContain(["specification/b/readme.md"]);
   });
 
-  test.skipIf(isWindows)("includes files up the heirarchy", async () => {
+  test.skipIf(isWindows())("includes files up the heirarchy", async () => {
     const files = {
       "./specification/a/readme.md": "a",
       "./specification/a/b/c/readme.md": "c",
@@ -61,7 +55,7 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).toEqual(["specification/a/b/c/readme.md", "specification/a/readme.md"]);
   });
 
-  test.skipIf(isWindows)("lists reademe files in folders with affected swagger files", async () => {
+  test.skipIf(isWindows())("lists reademe files in folders with affected swagger files", async () => {
     const files = {
       "./specification/service1/readme.md": "a",
       "./specification/service1/b/c/swagger.json": "{}",
@@ -75,7 +69,7 @@ describe("getAffectedReadmes", () => {
     expect(affectedReadmes).toEqual(["specification/service1/readme.md"]);
   });
 
-  test.skipIf(isWindows)("excludes files outside of specification/", async () => {
+  test.skipIf(isWindows())("excludes files outside of specification/", async () => {
     const files = {
       "./repo-root/specification/a/readme.md": "a",
       "./repo-root/specification/b/readme.md": "b",

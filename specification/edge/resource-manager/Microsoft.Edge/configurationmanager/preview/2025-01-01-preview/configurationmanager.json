@@ -11947,6 +11947,11 @@
           "description": "Resolved configuration values",
           "readOnly": true
         },
+        "targetLevelConfiguration": {
+          "type": "string",
+          "description": "Configuration on the line level across all solution template versions",
+          "readOnly": true
+        },
         "specification": {
           "type": "object",
           "description": "App components spec",
@@ -11955,6 +11960,11 @@
         "reviewId": {
           "type": "string",
           "description": "Review id of resolved config for this solution version",
+          "readOnly": true
+        },
+        "externalValidationId": {
+          "type": "string",
+          "description": "External validation id",
           "readOnly": true
         },
         "state": {
@@ -12565,6 +12575,10 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "Error Details if any failure is there"
         },
+        "externalValidationId": {
+          "type": "string",
+          "description": "External validation id"
+        },
         "validationStatus": {
           "$ref": "#/definitions/ValidationStatus",
           "description": "Validation Status of external validation"
@@ -12572,6 +12586,7 @@
       },
       "required": [
         "solutionVersionId",
+        "externalValidationId",
         "validationStatus"
       ]
     },

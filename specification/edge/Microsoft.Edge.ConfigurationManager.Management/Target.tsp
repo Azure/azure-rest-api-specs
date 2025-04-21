@@ -63,6 +63,9 @@ model UpdateExternalValidationStatusParameter {
   @doc("Error Details if any failure is there")
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail;
 
+  @doc("External validation id")
+  externalValidationId: string;
+
   @doc("Validation Status of external validation")
   validationStatus: ValidationStatus;
 }

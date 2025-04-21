@@ -7,7 +7,13 @@
     "resourceGroupName": "rgopenapi",
     "healthModelName": "model1",
     "resource": {
-      "properties": {},
+      "properties": {
+        "discovery": {
+          "scope": "/providers/Microsoft.Management/serviceGroups/myServiceGroup",
+          "identity": "SystemAssigned",
+          "addRecommendedSignals": "Enabled"
+        }
+      },
       "identity": {
         "type": "SystemAssigned, UserAssigned",
         "userAssignedIdentities": {
@@ -24,8 +30,13 @@
     "200": {
       "body": {
         "properties": {
-          "dataplaneEndpoint": "rkzm",
-          "provisioningState": "Succeeded"
+          "dataplaneEndpoint": "https://model1-23dfkljdf.eastus2.healthmodels.azure.com",
+          "provisioningState": "Succeeded",
+          "discovery": {
+            "scope": "/providers/Microsoft.Management/serviceGroups/myServiceGroup",
+            "identity": "SystemAssigned",
+            "addRecommendedSignals": "Enabled"
+          }
         },
         "identity": {
           "principalId": "b3f9c5a0-7c5b-4a5a-8b7a-3b5fddc1b0a1",
@@ -61,8 +72,13 @@
       },
       "body": {
         "properties": {
-          "dataplaneEndpoint": "rkzm",
-          "provisioningState": "Succeeded"
+          "dataplaneEndpoint": "https://model1-23dfkljdf.eastus2.healthmodels.azure.com",
+          "provisioningState": "Succeeded",
+          "discovery": {
+            "scope": "/providers/Microsoft.Management/serviceGroups/myServiceGroup",
+            "identity": "SystemAssigned",
+            "addRecommendedSignals": "Enabled"
+          }
         },
         "identity": {
           "principalId": "b3f9c5a0-7c5b-4a5a-8b7a-3b5fddc1b0a1",

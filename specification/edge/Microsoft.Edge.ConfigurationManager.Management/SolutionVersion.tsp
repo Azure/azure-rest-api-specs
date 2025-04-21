@@ -35,6 +35,10 @@ model SolutionVersionProperties {
   @visibility(Lifecycle.Read)
   configuration?: string;
 
+  @doc("Configuration on the line level across all solution template versions")
+  @visibility(Lifecycle.Read)
+  targetLevelConfiguration?: string;
+
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
   @doc("App components spec")
@@ -43,6 +47,10 @@ model SolutionVersionProperties {
   @doc("Review id of resolved config for this solution version")
   @visibility(Lifecycle.Read)
   reviewId?: string;
+
+  @doc("External validation id")
+  @visibility(Lifecycle.Read)
+  externalValidationId?: string;
 
   @doc("State of solution instance")
   @visibility(Lifecycle.Read)

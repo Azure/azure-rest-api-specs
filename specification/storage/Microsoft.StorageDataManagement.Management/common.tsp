@@ -49,6 +49,10 @@ union ConnectionType {
   @doc("Endpoint connection type")
   Endpoint: "Endpoint",
 
+  @doc("PrivateLink connection type")
+  @added(Versions.v2025_05_01_preview)
+  PrivateLink: "PrivateLink",
+
   string,
 }
 

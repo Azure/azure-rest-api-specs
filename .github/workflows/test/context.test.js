@@ -84,8 +84,23 @@ describe("extractInputs", () => {
       extractInputs(null, context, createMockCore()),
     ).resolves.toEqual(expected);
 
-    // Action not yet supported
+    context.payload.action = "opened";
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).resolves.toEqual(expected);
+
     context.payload.action = "synchronize";
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).resolves.toEqual(expected);
+
+    context.payload.action = "reopened";
+    await expect(
+      extractInputs(null, context, createMockCore()),
+    ).resolves.toEqual(expected);
+
+    // Action not yet supported
+    context.payload.action = "assigned";
     await expect(
       extractInputs(null, context, createMockCore()),
     ).rejects.toThrow();
