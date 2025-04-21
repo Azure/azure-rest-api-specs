@@ -910,7 +910,7 @@ model TestRun {
   @doc("The type of the entity that created the test run. (E.x. User, ScheduleTrigger, etc).")
   createdByType?: CreatedByType;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @added(APIVersions.v2025_03_01_preview)
   @doc("The URI pointing to the entity that created the test run.")
   createdByUri?: url;
