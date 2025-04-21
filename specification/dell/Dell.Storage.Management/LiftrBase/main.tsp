@@ -140,6 +140,11 @@ model MarketplaceDetails {
    * End Date of the subscription
    */
   endDate?: string;
+
+  /**
+   * Term Unit
+   */
+  termUnit?: string;
 }
 
 /**
