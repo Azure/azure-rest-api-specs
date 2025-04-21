@@ -91,7 +91,7 @@ union AttackStrategy {
   Url: "url",
 
   @doc("Represents the baseline direct adversarial probing, which is used by attack strategies as the attack objective.")
-  Baseline: "baseline"
+  Baseline: "baseline",
 }
 
 @doc("Risk category for the attack objective.")
