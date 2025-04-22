@@ -1199,7 +1199,6 @@ union SecurityEncryptionType {
    * For encryption of just the VMGuestState blob.
    */
   VMGuestStateOnly: "VMGuestStateOnly",
-
 }
 
 /**
