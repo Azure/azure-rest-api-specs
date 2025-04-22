@@ -11,7 +11,6 @@ using Azure.AI.Agents;
 // operation that exposes the underlying data directly.
 
 @@clientName(Agent, "PersistentAgent", "csharp, java");
-@@clientName(AgentObject, "PersistentAgentObject", "csharp,java");
 @@clientName(AgentsApiResponseFormat, "PersistentAgentsApiResponseFormat", "csharp,java");
 @@clientName(AgentsApiResponseFormatMode, "PersistentAgentsApiResponseFormatMode", "csharp,java");
 @@clientName(AgentsApiToolChoiceOptionMode, "PersistentAgentsApiToolChoiceOptionMode", "csharp,java");
@@ -20,7 +19,6 @@ using Azure.AI.Agents;
 @@clientName(AgentStreamEvent, "PersistentAgentStreamEvent", "csharp,java");
 @@clientName(AgentThread, "PersistentAgentThread", "csharp,java");
 @@clientName(AgentThreadCreationOptions, "PersistentAgentThreadCreationOptions", "csharp,java");
-@@clientName(AgentThreadObject, "PersistentAgentThreadObject", "csharp,java");
 
 @@clientName(AgentDeletionStatus, "InternalAgentDeletionStatus", "csharp");
 @@access(deleteAgent, Access.internal, "csharp");
