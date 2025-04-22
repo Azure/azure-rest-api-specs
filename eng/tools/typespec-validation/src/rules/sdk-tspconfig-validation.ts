@@ -189,45 +189,9 @@ export class TspConfigJavaAzPackageDirectorySubRule extends TspconfigEmitterOpti
 }
 
 // ----- TS management modular sub rules -----
-// NOTE: this is only used when TS emitter is migrating to the new option style
-//       will be deleted when the migration is done
-class TspConfigTsOptionMigrationSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
-  private oldOptionStyleSubRule: TspconfigEmitterOptionsSubRuleBase & {
-    validateOption(config: any): RuleResult;
-  };
-  private newOptionStyleSubRule: TspconfigEmitterOptionsSubRuleBase & {
-    validateOption(config: any): RuleResult;
-  };
-  constructor(oldOptionName: string, newOptionName: string, expectedValue: ExpectedValueType) {
-    class PrivateOptionStyleSubRule extends TspconfigEmitterOptionsSubRuleBase {
-      constructor(optionName: string, expectedValue: ExpectedValueType) {
-        super("@azure-tools/typespec-ts", optionName, expectedValue);
-      }
-      public validateOption(config: any): RuleResult {
-        return this.validate(config);
-      }
-    }
-
-    // the parameters are not used, but are required to be passed to the super constructor
-    super("", "", "");
-    this.oldOptionStyleSubRule = new PrivateOptionStyleSubRule(oldOptionName, expectedValue);
-    this.newOptionStyleSubRule = new PrivateOptionStyleSubRule(newOptionName, expectedValue);
-  }
-
-  protected validate(config: any): RuleResult {
-    var newResult = this.newOptionStyleSubRule.validateOption(config);
-    // if success == true, then the option is found and passes validation
-    // if success == false, and "Failed to find" is not in errorOutput, then the option is found but fails validation
-    if (newResult.success || !newResult.errorOutput?.includes("Failed to find")) return newResult;
-
-    var oldResult = this.oldOptionStyleSubRule.validateOption(config);
-    return oldResult;
-  }
-}
-
-export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("experimentalExtensibleEnums", "experimental-extensible-enums", true);
+    super("@azure-tools/typespec-ts", "experimental-extensible-enums", true);
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -243,9 +207,13 @@ export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmit
   }
 }
 
-export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
-    super("packageDetails.name", "package-details.name", new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/));
+    super(
+      "@azure-tools/typespec-ts",
+      "package-details.name",
+      new RegExp(/^\@azure\/arm(?:-[a-z]+)+$/),
+    );
   }
   protected skip(config: any, folder: string) {
     return skipForNonModularOrDataPlaneInTsEmitter(config, folder);
@@ -262,10 +230,10 @@ export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOption
   }
 }
 
-export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspConfigTsOptionMigrationSubRuleBase {
+export class TspConfigTsDpPackageNameMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
-      "packageDetails.name",
+      "@azure-tools/typespec-ts",
       "package-details.name",
       new RegExp(/^\@azure-rest\/[a-z]+(?:-[a-z]+)*$/),
     );
@@ -393,6 +361,15 @@ export class TspConfigPythonMgmtPackageDirectorySubRule extends TspconfigEmitter
   }
 }
 
+export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "namespace", new RegExp(/^azure\.mgmt(\.[a-z]+){1,2}$/));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 // ----- Python data plane sub rules -----
 export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -403,13 +380,16 @@ export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOp
   }
 }
 
-// ----- Python azure sub rules -----
-export class TspConfigPythonAzPackageNameEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigPythonDpPackageNameEqualStringSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "package-name", "{package-dir}");
   }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
 }
 
+// ----- Python azure sub rules -----
 export class TspConfigPythonAzGenerateTestTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-python", "generate-test", true);
@@ -493,8 +473,9 @@ export const defaultRules = [
   new TspConfigGoDpPackageDirectoryMatchPatternSubRule(),
   new TspConfigGoDpModuleMatchPatternSubRule(),
   new TspConfigPythonMgmtPackageDirectorySubRule(),
+  new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpPackageDirectorySubRule(),
-  new TspConfigPythonAzPackageNameEqualStringSubRule(),
+  new TspConfigPythonDpPackageNameEqualStringSubRule(),
   new TspConfigPythonAzGenerateTestTrueSubRule(),
   new TspConfigPythonAzGenerateSampleTrueSubRule(),
   new TspConfigCsharpAzPackageDirectorySubRule(),
@@ -528,10 +509,15 @@ export class SdkTspConfigValidationRule implements Rule {
       success &&= result.success;
     }
 
+    const stdOutputFailedResults =
+      failedResults.length > 0
+        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\n Please see https://aka.ms/azsdk/spec-gen-sdk-config for more info.`
+        : "";
+
     // NOTE: to avoid huge impact on existing PRs, we always return true with info/warning messages.
     return {
       success: true,
-      stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${failedResults.map((r) => r.errorOutput).join("\n")}`,
+      stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
 
