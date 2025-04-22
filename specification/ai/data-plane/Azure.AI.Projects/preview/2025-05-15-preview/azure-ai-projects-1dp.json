@@ -717,7 +717,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The definition of the DatasetVersion to create",
+            "description": "The definition of the DatasetVersion to create or update",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DatasetVersionUpdate"
@@ -1467,7 +1467,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The definition of the Index to create",
+            "description": "The definition of the Index to create or update",
             "required": true,
             "schema": {
               "$ref": "#/definitions/IndexUpdate"
@@ -1720,6 +1720,8 @@
       "description": "Strategies for attacks.",
       "enum": [
         "easy",
+        "moderate",
+        "difficult",
         "ascii_art",
         "ascii_smuggler",
         "atbash",
@@ -1727,7 +1729,20 @@
         "binary",
         "caesar",
         "character_space",
-        "jailbreak"
+        "jailbreak",
+        "ansii_attack",
+        "character_swap",
+        "suffix_append",
+        "string_join",
+        "unicode_confusable",
+        "unicode_substitution",
+        "diacritic",
+        "flip",
+        "leetspeak",
+        "rot13",
+        "morse",
+        "url",
+        "baseline"
       ],
       "x-ms-enum": {
         "name": "AttackStrategy",
@@ -1736,47 +1751,122 @@
           {
             "name": "Easy",
             "value": "easy",
-            "description": "Represents a default set of easy complexity attacks. Easy complexity attack strategies are defined as attacks that do not require any Large Language Model to convert or orchestrate."
+            "description": "Represents a default set of easy complexity attacks. Easy complexity attacks require less effort, such as translation of a prompt into some encoding, and does not require any Large Language Model to convert or orchestrate."
+          },
+          {
+            "name": "Moderate",
+            "value": "moderate",
+            "description": "Represents a default set of moderate complexity attacks. Moderate complexity attacks require having access to resources such as another generative AI model."
+          },
+          {
+            "name": "Difficult",
+            "value": "difficult",
+            "description": "Represents a default set of difficult complexity attacks. Difficult complexity attacks include attacks that require access to significant resources and effort to execute an attack such as knowledge of search-based algorithms in addition to a generative AI model."
           },
           {
             "name": "AsciiArt",
             "value": "ascii_art",
-            "description": "Represents ASCII art, a graphic design technique that uses printable characters."
+            "description": "Generates visual art using ASCII characters, often used for creative or obfuscation purposes."
           },
           {
             "name": "AsciiSmuggler",
             "value": "ascii_smuggler",
-            "description": "Represents ASCII smuggling, a technique for encoding or hiding data."
+            "description": "Conceals data within ASCII characters, making it harder to detect."
           },
           {
             "name": "Atbash",
             "value": "atbash",
-            "description": "Represents the Atbash cipher, a substitution cipher that reverses the alphabet."
+            "description": "Implements the Atbash cipher, a simple substitution cipher where each letter is mapped to its reverse."
           },
           {
             "name": "Base64",
             "value": "base64",
-            "description": "Represents Base64 encoding, a method for encoding binary data as text."
+            "description": "Encodes binary data into a text format using Base64, commonly used for data transmission."
           },
           {
             "name": "Binary",
             "value": "binary",
-            "description": "Represents binary encoding, a representation of data in binary format."
+            "description": "Converts text into binary code, representing data in a series of 0s and 1s."
           },
           {
             "name": "Caesar",
             "value": "caesar",
-            "description": "Represents the Caesar cipher, a substitution cipher that shifts characters."
+            "description": "Applies the Caesar cipher, a substitution cipher that shifts characters by a fixed number of positions."
           },
           {
             "name": "CharacterSpace",
             "value": "character_space",
-            "description": "Represents character space manipulation, a technique involving spacing between characters."
+            "description": "Alters text by adding spaces between characters, often used for obfuscation."
           },
           {
             "name": "Jailbreak",
             "value": "jailbreak",
-            "description": "Represents character swapping, a technique for rearranging characters in text."
+            "description": "Injects specially crafted prompts to bypass AI safeguards, known as User Injected Prompt Attacks (UPIA)."
+          },
+          {
+            "name": "AnsiiAttack",
+            "value": "ansii_attack",
+            "description": "Utilizes ANSI escape sequences to manipulate text appearance and behavior."
+          },
+          {
+            "name": "CharacterSwap",
+            "value": "character_swap",
+            "description": "Swaps characters within text to create variations or obfuscate the original content."
+          },
+          {
+            "name": "SuffixAppend",
+            "value": "suffix_append",
+            "description": "Appends an adversarial suffix to the prompt."
+          },
+          {
+            "name": "StringJoin",
+            "value": "string_join",
+            "description": "Joins multiple strings together, often used for concatenation or obfuscation."
+          },
+          {
+            "name": "UnicodeConfusable",
+            "value": "unicode_confusable",
+            "description": "Uses Unicode characters that look similar to standard characters, creating visual confusion."
+          },
+          {
+            "name": "UnicodeSubstitution",
+            "value": "unicode_substitution",
+            "description": "Substitutes standard characters with Unicode equivalents, often for obfuscation."
+          },
+          {
+            "name": "Diacritic",
+            "value": "diacritic",
+            "description": "Adds diacritical marks to characters, changing their appearance and sometimes their meaning."
+          },
+          {
+            "name": "Flip",
+            "value": "flip",
+            "description": "Flips characters from front to back, creating a mirrored effect."
+          },
+          {
+            "name": "Leetspeak",
+            "value": "leetspeak",
+            "description": "Transforms text into Leetspeak, a form of encoding that replaces letters with similar-looking numbers or symbols."
+          },
+          {
+            "name": "ROT13",
+            "value": "rot13",
+            "description": "Applies the ROT13 cipher, a simple substitution cipher that shifts characters by 13 positions."
+          },
+          {
+            "name": "Morse",
+            "value": "morse",
+            "description": "Encodes text into Morse code, using dots and dashes to represent characters."
+          },
+          {
+            "name": "Url",
+            "value": "url",
+            "description": "Encodes text into URL format."
+          },
+          {
+            "name": "Baseline",
+            "value": "baseline",
+            "description": "Represents the baseline direct adversarial probing, which is used by attack strategies as the attack objective."
           }
         ]
       }
@@ -3074,7 +3164,7 @@
           "format": "int32",
           "description": "Number of simulation rounds."
         },
-        "attackStrategy": {
+        "attackStrategies": {
           "type": "array",
           "description": "List of attack strategies or nested lists of attack strategies.",
           "items": {
@@ -3118,9 +3208,8 @@
       },
       "required": [
         "id",
-        "scanName",
         "numTurns",
-        "attackStrategy",
+        "attackStrategies",
         "simulationOnly",
         "riskCategories"
       ]
