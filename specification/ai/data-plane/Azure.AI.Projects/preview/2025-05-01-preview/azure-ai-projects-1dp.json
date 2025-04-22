@@ -98,7 +98,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentOptions"
+              "$ref": "#/definitions/AgentConfigurationOptions"
             }
           }
         ],
@@ -224,59 +224,6 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/agents/{agentId}:stream": {
-      "post": {
-        "operationId": "Agents_StreamByAgent",
-        "description": "Resource action operation template.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "agentId",
-            "in": "path",
-            "description": "A unique identifier for the agent.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunInputs"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -435,6 +382,585 @@
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
               }
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations": {
+      "get": {
+        "operationId": "Conversations_ListConversations",
+        "description": "Lists all conversations, returning an array of Conversation items.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Conversation"
+              },
+              "x-ms-identifiers": []
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Conversations_CreateConversation",
+        "description": "Creates a new Conversation and returns it.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Conversation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Conversation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/{conversationId}": {
+      "get": {
+        "operationId": "Conversations_GetConversation",
+        "description": "Retrieves an existing conversation by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The identifier of the Conversation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Conversation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Conversations_UpdateConversation",
+        "description": "Updates or replaces a conversation by its ID, returning the updated Conversation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The identifier of the Conversation to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The updated Conversation resource data.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Conversation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Conversation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Conversations_DeleteConversation",
+        "description": "Deletes a conversation, returning 204 on success.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The ID of the conversation to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/{conversationId}/message": {
+      "get": {
+        "operationId": "Messages_ListMessages",
+        "description": "Lists chat messages, returning a collection of ChatMessage objects.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "A unique identifier for this conversation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/conversations/{conversationId}/message/{messageId}": {
+      "get": {
+        "operationId": "Messages_GetMessage",
+        "description": "Retrieves (reads) an existing chat message.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "A unique identifier for this conversation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "A unique identifier for this message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Messages_UpdateMessage",
+        "description": "Updates an existing chat message (or creates if not found) and returns the updated message.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "A unique identifier for this conversation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "A unique identifier for this message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Messages_DeleteMessage",
+        "description": "Deletes a chat message. Returns 204 on success.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "A unique identifier for this conversation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "A unique identifier for this message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/{conversationId}/messages": {
+      "post": {
+        "operationId": "Messages_SendMessage",
+        "description": "Creates (sends) a new chat message, returning the created ChatMessage.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The ID of the conversation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The message to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/runs": {
+      "post": {
+        "operationId": "Agents_Run",
+        "description": "Creates and waits for a run to finish, returning the completed Run (including its outputs).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunInputs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Run"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/runs/{runId}/listInputs": {
+      "get": {
+        "operationId": "Agents_ListRunInputs",
+        "description": "Lists the inputs for a specific run by its ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "description": "The ID of the run.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RunInputs"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/runs/stream": {
+      "post": {
+        "operationId": "Agents_Stream",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunInputs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1683,8 +2209,8 @@
     },
     "/runs": {
       "get": {
-        "operationId": "Runs_ListRuns",
-        "description": "Lists all run records, each containing runInputs and runOutputs.\n@route(\"/runs\")",
+        "operationId": "Agents_ListRuns",
+        "description": "Lists all run records, each containing runInputs and runOutputs.\n@route(\"/agents/runs\")",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1723,49 +2249,12 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "post": {
-        "operationId": "Runs_CreateRun",
-        "description": "Creates a new run.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunInputs"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Run"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
       }
     },
     "/runs/{runId}": {
       "get": {
-        "operationId": "Runs_GetRun",
-        "description": "Retrieves an existing run by its ID.\n@route(\"/run/{run_id}\")",
+        "operationId": "Agents_GetRun",
+        "description": "Retrieves an existing run by its ID.\n@route(\"/conversations/runs/{run_id}\")",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1787,567 +2276,6 @@
             "schema": {
               "$ref": "#/definitions/Run"
             },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/runs/execute": {
-      "post": {
-        "operationId": "Runs_CreateAndExecuteRun",
-        "description": "Creates and waits for a run to finish, returning the completed Run (including its outputs).",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RunInputs"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Run"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/runs:createAndStreamRun": {
-      "post": {
-        "operationId": "Runs_CreateAndStreamRun",
-        "description": "Create and stream run.\n@route(\"/run/stream\")",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Run"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/threads": {
-      "get": {
-        "operationId": "Threads_ListThreads",
-        "description": "Lists all threads, returning an array of Thread items.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Thread"
-              },
-              "x-ms-identifiers": []
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "Threads_CreateThread",
-        "description": "Creates a new Thread and returns it.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Thread"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Thread"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/threads/{threadId}": {
-      "get": {
-        "operationId": "Threads_GetThread",
-        "description": "Retrieves an existing thread by its ID.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "The identifier of the Thread.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Thread"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Threads_UpdateThread",
-        "description": "Updates or replaces a thread by its ID, returning the updated Thread.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "The identifier of the Thread to update.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The updated Thread resource data.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Thread"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Thread"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Threads_DeleteThread",
-        "description": "Deletes a thread, returning 204 on success.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "The ID of the thread to delete.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/threads/{threadId}/message": {
-      "get": {
-        "operationId": "Messages_ListMessages",
-        "description": "Lists chat messages, returning a collection of ChatMessage objects.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "A unique identifier for this thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedChatMessage"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post": {
-        "operationId": "Messages_SendMessage",
-        "description": "Creates (sends) a new chat message, returning the created ChatMessage.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "A unique identifier for this thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of ChatMessage"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/threads/{threadId}/message/{messageId}": {
-      "get": {
-        "operationId": "Messages_GetMessage",
-        "description": "Retrieves (reads) an existing chat message.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "A unique identifier for this thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "A unique identifier for this message.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Messages_UpdateMessage",
-        "description": "Updates an existing chat message (or creates if not found) and returns the updated message.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "A unique identifier for this thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "A unique identifier for this message.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The resource instance.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/ChatMessage"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Messages_DeleteMessage",
-        "description": "Deletes a chat message. Returns 204 on success.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "threadId",
-            "in": "path",
-            "description": "A unique identifier for this thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "messageId",
-            "in": "path",
-            "description": "A unique identifier for this message.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
             "headers": {
               "x-ms-client-request-id": {
                 "type": "string",
@@ -2445,21 +2373,31 @@
             "type": "string"
           }
         },
-        "name": {
+        "configurationOptions": {
+          "$ref": "#/definitions/AgentConfigurationOptions",
+          "description": "Configuration options for this agent."
+        }
+      },
+      "required": [
+        "agentId",
+        "configurationOptions"
+      ]
+    },
+    "AgentConfigurationOptions": {
+      "type": "object",
+      "description": "Options used when creating and an agent or completing a run without an existing agent.",
+      "properties": {
+        "displayName": {
           "type": "string",
-          "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
+          "description": "The display name of the agent; used for display purposes and sent to the LLM to identify the agent."
         },
         "agentModel": {
           "$ref": "#/definitions/AgentModel",
-          "description": "The model definition for this agent."
+          "description": "The model definition for this agent. This is optional (not needed) when doing a run using persistent agent."
         },
         "instructions": {
-          "type": "array",
-          "description": "Instructions provided to guide how this agent operates.",
-          "items": {
-            "$ref": "#/definitions/DeveloperMessage"
-          },
-          "x-ms-identifiers": []
+          "type": "string",
+          "description": "Instructions provided to guide how this agent operates."
         },
         "tools": {
           "type": "array",
@@ -2475,8 +2413,7 @@
         }
       },
       "required": [
-        "agentId",
-        "agentModel"
+        "displayName"
       ]
     },
     "AgentMessage": {
@@ -2524,43 +2461,6 @@
       "required": [
         "id",
         "provider"
-      ]
-    },
-    "AgentOptions": {
-      "type": "object",
-      "description": "Options used when creating or updating an Agent.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the agent; used for display purposes and sent to the LLM to identify the agent."
-        },
-        "agentModel": {
-          "$ref": "#/definitions/AgentModel",
-          "description": "The model definition for this agent."
-        },
-        "instructions": {
-          "type": "array",
-          "description": "Instructions provided to guide how this agent operates.",
-          "items": {
-            "$ref": "#/definitions/DeveloperMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "tools": {
-          "type": "array",
-          "description": "A list of tool definitions available to the agent.",
-          "items": {
-            "$ref": "#/definitions/AgentToolDefinition"
-          },
-          "x-ms-identifiers": []
-        },
-        "toolChoice": {
-          "$ref": "#/definitions/ToolChoiceBehavior",
-          "description": "How the agent should choose among provided tools."
-        }
-      },
-      "required": [
-        "agentModel"
       ]
     },
     "AgentToolDefinition": {
@@ -3085,9 +2985,9 @@
           "type": "string",
           "description": "A unique run ID, if this message was generated by a run process."
         },
-        "threadId": {
+        "conversationId": {
           "type": "string",
-          "description": "The thread to which this message belongs.",
+          "description": "The conversation to which this message belongs.",
           "readOnly": true
         },
         "role": {
@@ -3154,7 +3054,7 @@
       "discriminator": "role",
       "required": [
         "messageId",
-        "threadId",
+        "conversationId",
         "role",
         "content"
       ]
@@ -3169,7 +3069,7 @@
         },
         "tId": {
           "type": "string",
-          "description": "The thread ID."
+          "description": "The conversation ID."
         },
         "d": {
           "$ref": "#/definitions/StreamingOperation",
@@ -3372,6 +3272,56 @@
         }
       ],
       "x-ms-discriminator-value": "contentFilter"
+    },
+    "Conversation": {
+      "type": "object",
+      "description": "Represents a chat conversation, which can contain multiple messages.",
+      "properties": {
+        "conversationId": {
+          "type": "string",
+          "description": "A unique identifier for this conversation.",
+          "readOnly": true
+        },
+        "messages": {
+          "type": "array",
+          "description": "A list of messages in this conversation.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "conversationId",
+        "messages"
+      ]
+    },
+    "ConversationUpdate": {
+      "type": "object",
+      "description": "Streaming update for a conversation.",
+      "properties": {
+        "tId": {
+          "type": "string",
+          "description": "The conversation ID."
+        },
+        "d": {
+          "$ref": "#/definitions/StreamingOperation",
+          "description": "The delta operation applied to the conversation."
+        },
+        "u": {
+          "$ref": "#/definitions/CompletionUsage",
+          "description": "Usage metrics update."
+        }
+      },
+      "required": [
+        "tId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StreamingUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "conversation"
     },
     "CosmosDBIndex": {
       "type": "object",
@@ -3842,9 +3792,9 @@
       ],
       "x-ms-discriminator-value": "uri_folder"
     },
-    "FunctionToolOptions": {
+    "FunctionToolDefinition": {
       "type": "object",
-      "description": "Options for a function-based tool behavior.",
+      "description": "Definitions for a function-based tool behavior.",
       "properties": {
         "name": {
           "type": "string",
@@ -3868,7 +3818,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AgentToolOptions"
+          "$ref": "#/definitions/AgentToolDefinition"
         }
       ],
       "x-ms-discriminator-value": "Function"
@@ -4199,7 +4149,7 @@
     },
     "MessageRole": {
       "type": "string",
-      "description": "The possible values for roles attributed to messages in a thread.",
+      "description": "The possible values for roles attributed to messages in a conversation.",
       "enum": [
         "user",
         "assistant"
@@ -4755,10 +4705,6 @@
       "type": "object",
       "description": "An agent-generated run record, including both the requested inputs and the final outputs.",
       "properties": {
-        "agentId": {
-          "type": "string",
-          "description": "Unique identifier for the agent responsible for the run."
-        },
         "runId": {
           "type": "string",
           "description": "Unique identifier for this run.",
@@ -4778,14 +4724,6 @@
           "$ref": "#/definitions/RunInputs",
           "description": "The inputs that were used to start this run."
         },
-        "runOutputs": {
-          "$ref": "#/definitions/RunOutputs",
-          "description": "The final outcome of this run, including status, output messages, token usage."
-        },
-        "options": {
-          "$ref": "#/definitions/RunOptions",
-          "description": "Optional configuration for run generation."
-        },
         "userId": {
           "type": "string",
           "description": "Identifier for the user making the request."
@@ -4793,24 +4731,53 @@
         "store": {
           "type": "boolean",
           "description": "Flag indicating whether to store the run and associated messages."
+        },
+        "status": {
+          "$ref": "#/definitions/RunOutputsStatus",
+          "description": "Final status of the run request. Known values: 'inProgress', 'incomplete', 'cancelled', 'failed', 'completed' - or custom string."
+        },
+        "output": {
+          "type": "array",
+          "description": "List of output messages generated by the agent.",
+          "items": {
+            "$ref": "#/definitions/ChatMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionUsage",
+          "description": "Token usage details for this run."
+        },
+        "incompleteDetails": {
+          "type": "object",
+          "description": "Details about why the response is incomplete, if applicable.",
+          "properties": {
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "reason"
+          ]
         }
       },
       "required": [
-        "agentId",
         "runId",
         "createdAt",
         "completedAt",
         "runInputs",
-        "runOutputs"
+        "status",
+        "output",
+        "usage"
       ]
     },
     "RunInputs": {
       "type": "object",
       "description": "Parameters for creating a new run request.",
       "properties": {
-        "agent": {
-          "$ref": "#/definitions/Agent",
-          "description": "The agent responsible for generating the run."
+        "agentId": {
+          "type": "string",
+          "description": "Unique identifier for the agent responsible for the run. This is optional (not needeed) when doing a run using ephemeral agent."
         },
         "input": {
           "type": "array",
@@ -4820,9 +4787,9 @@
           },
           "x-ms-identifiers": []
         },
-        "threadId": {
+        "conversationId": {
           "type": "string",
-          "description": "Optional identifier for an existing conversation thread."
+          "description": "Optional identifier for an existing conversation."
         },
         "metadata": {
           "type": "object",
@@ -4838,10 +4805,13 @@
         "userId": {
           "type": "string",
           "description": "Identifier for the user making the request."
+        },
+        "agentConfiguration": {
+          "$ref": "#/definitions/AgentConfigurationOptions",
+          "description": "The agent configuration when not using a previously created agent."
         }
       },
       "required": [
-        "agent",
         "input"
       ]
     },
@@ -4863,7 +4833,7 @@
           "$ref": "#/definitions/RunOutputsStatus",
           "description": "Final status of the run request. Known values: 'inProgress', 'incomplete', 'cancelled', 'failed', 'completed' - or custom string."
         },
-        "messages": {
+        "output": {
           "type": "array",
           "description": "List of output messages generated by the agent.",
           "items": {
@@ -4890,7 +4860,7 @@
       },
       "required": [
         "status",
-        "messages",
+        "output",
         "usage"
       ]
     },
@@ -4946,7 +4916,7 @@
         },
         "tId": {
           "type": "string",
-          "description": "The thread ID."
+          "description": "The conversation ID."
         },
         "d": {
           "$ref": "#/definitions/StreamingOperation",
@@ -5114,7 +5084,7 @@
           "description": "The type of the streaming update.",
           "enum": [
             "run",
-            "thread",
+            "conversation",
             "chat_message",
             "ai_content"
           ],
@@ -5178,56 +5148,6 @@
       ],
       "x-ms-discriminator-value": "text"
     },
-    "Thread": {
-      "type": "object",
-      "description": "Represents a chat thread, which can contain multiple messages.",
-      "properties": {
-        "threadId": {
-          "type": "string",
-          "description": "A unique identifier for this thread.",
-          "readOnly": true
-        },
-        "messages": {
-          "type": "array",
-          "description": "A list of messages in this thread.",
-          "items": {
-            "$ref": "#/definitions/ChatMessage"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "threadId",
-        "messages"
-      ]
-    },
-    "ThreadUpdate": {
-      "type": "object",
-      "description": "Streaming update for a thread.",
-      "properties": {
-        "tId": {
-          "type": "string",
-          "description": "The thread ID."
-        },
-        "d": {
-          "$ref": "#/definitions/StreamingOperation",
-          "description": "The delta operation applied to the thread."
-        },
-        "u": {
-          "$ref": "#/definitions/CompletionUsage",
-          "description": "Usage metrics update."
-        }
-      },
-      "required": [
-        "tId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/StreamingUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "thread"
-    },
     "ToolCallContent": {
       "type": "object",
       "description": "A structured chat content item describing a tool call request.",
@@ -5274,6 +5194,10 @@
       "type": "object",
       "description": "A tool message within a chat, always with the 'tool' role.",
       "properties": {
+        "toolCallId": {
+          "type": "string",
+          "description": "The ID of the tool call to which this result pertains."
+        },
         "content": {
           "type": "array",
           "description": "The contents of the tool message.",
@@ -5284,6 +5208,7 @@
         }
       },
       "required": [
+        "toolCallId",
         "content"
       ],
       "allOf": [
@@ -5297,18 +5222,11 @@
       "type": "object",
       "description": "A structured chat content item describing a tool result.",
       "properties": {
-        "toolCallId": {
-          "type": "string",
-          "description": "The ID of the tool call to which this result pertains."
-        },
         "results": {
           "$ref": "#/definitions/JSONAny",
           "description": "The results returned from the tool, using JSONAny instead of `unknown`."
         }
       },
-      "required": [
-        "toolCallId"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/AIContent"

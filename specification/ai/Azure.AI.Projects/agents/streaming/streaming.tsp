@@ -58,7 +58,7 @@ model StreamingUpdate {
   d?: StreamingOperation;
 
   @doc("The type of the streaming update.")
-  type: "run" | "thread" | "chat_message" | "ai_content" | string;
+  type: "run" | "conversation" | "chat_message" | "ai_content" | string;
 }
 
 @doc("Streaming update for a run.")
@@ -69,7 +69,7 @@ model RunUpdate extends StreamingUpdate {
   @doc("The run ID.")
   rId: string;
 
-  @doc("The thread ID.")
+  @doc("The conversation ID.")
   tId: string;
 
   @doc("The delta operation applied to the run.")
@@ -79,15 +79,15 @@ model RunUpdate extends StreamingUpdate {
   u?: CompletionUsage;
 }
 
-@doc("Streaming update for a thread.")
-model ThreadUpdate extends StreamingUpdate {
+@doc("Streaming update for a conversation.")
+model ConversationUpdate extends StreamingUpdate {
   @doc("The update type for the streaming payload.")
-  type: "thread";
+  type: "conversation";
 
-  @doc("The thread ID.")
+  @doc("The conversation ID.")
   tId: string;
 
-  @doc("The delta operation applied to the thread.")
+  @doc("The delta operation applied to the conversation.")
   d?: StreamingOperation;
 
   @doc("Usage metrics update.")
@@ -102,7 +102,7 @@ model ChatMessageUpdate extends StreamingUpdate {
   @doc("The message ID.")
   mId: string;
 
-  @doc("The thread ID.")
+  @doc("The conversation ID.")
   tId: string;
 
   @doc("The delta operation applied to the message.")

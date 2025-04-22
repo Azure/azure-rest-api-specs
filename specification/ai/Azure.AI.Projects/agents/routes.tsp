@@ -2,7 +2,8 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/streams";
-import "./models.tsp"; // e.g. ChatMessage, Agent, Thread
+import "@azure-tools/typespec-client-generator-core";
+import "./models.tsp"; // e.g. ChatMessage, Agent, Conversation
 import "./runs/runs.tsp"; // e.g. RunInputs etc.
 import "./streaming/streaming.tsp";
 
@@ -11,6 +12,7 @@ using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Foundations;
+using Azure.ClientGenerator.Core;
 using Streams;
 
 namespace Azure.AI.Projects;
@@ -23,16 +25,26 @@ alias AgentOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 @doc("""
   MESSAGES
   
-  The interface is rooted at /messages.
-  Each standard resource operation will produce REST endpoints
-  like GET /messages/{name}, POST /messages, etc.
-  The "name" or "id" parameter is inferred from Azure Core's naming patterns
-  for resource operations.
+  The interface is rooted at /conversations/{conversationId}/messages.
   """)
 interface Messages {
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Creates (sends) a new chat message, returning the created ChatMessage.")
-  sendMessage is AgentOperations.ResourceCreateWithServiceProvidedName<ChatMessage>;
+  @post
+  @route("/conversations/{conversationId}/messages")
+  sendMessage is Operation<
+    {
+      @doc("The ID of the conversation.")
+      @path
+      conversationId: string;
+
+      @doc("The message to create.")
+      @body
+      body: ChatMessage;
+    },
+    ChatMessage
+  >;
 
   @doc("Retrieves (reads) an existing chat message.")
   getMessage is AgentOperations.ResourceRead<ChatMessage>;
@@ -48,65 +60,65 @@ interface Messages {
 }
 
 @doc("""
-  THREADS
+  CONVERSATIONS
   
-  Interface is rooted at /threads.
+  Interface is rooted at /conversations.
   """)
-interface Threads {
+interface Conversations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("Creates a new Thread and returns it.")
+  @doc("Creates a new Conversation and returns it.")
   @post
-  @route("/threads")
-  createThread is Operation<Thread, Thread>;
+  @route("/conversations")
+  createConversation is Operation<Conversation, Conversation>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("Retrieves an existing thread by its ID.")
+  @doc("Retrieves an existing conversation by its ID.")
   @get
-  @route("/threads/{threadId}")
-  getThread is Operation<
+  @route("/conversations/{conversationId}")
+  getConversation is Operation<
     {
-      @doc("The identifier of the Thread.")
+      @doc("The identifier of the Conversation.")
       @path
-      threadId: string;
+      conversationId: string;
     },
-    Thread
+    Conversation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("Updates or replaces a thread by its ID, returning the updated Thread.")
+  @doc("Updates or replaces a conversation by its ID, returning the updated Conversation.")
   @put
-  @route("/threads/{threadId}")
-  updateThread is Operation<
+  @route("/conversations/{conversationId}")
+  updateConversation is Operation<
     {
-      @doc("The identifier of the Thread to update.")
+      @doc("The identifier of the Conversation to update.")
       @path
-      threadId: string;
+      conversationId: string;
 
-      @doc("The updated Thread resource data.")
+      @doc("The updated Conversation resource data.")
       @body
-      body: Thread;
+      body: Conversation;
     },
-    Thread
+    Conversation
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("Deletes a thread, returning 204 on success.")
+  @doc("Deletes a conversation, returning 204 on success.")
   @delete
-  @route("/threads/{threadId}")
-  deleteThread is Operation<
+  @route("/conversations/{conversationId}")
+  deleteConversation is Operation<
     {
-      @doc("The ID of the thread to delete.")
+      @doc("The ID of the conversation to delete.")
       @path
-      threadId: string;
+      conversationId: string;
     },
     void
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
-  @doc("Lists all threads, returning an array of Thread items.")
+  @doc("Lists all conversations, returning an array of Conversation items.")
   @get
-  @route("/threads")
-  listThreads is Operation<NoRequest, Thread[]>;
+  @route("/conversations")
+  listConversations is Operation<NoRequest, Conversation[]>;
 }
 
 @doc("""
@@ -116,6 +128,7 @@ interface Threads {
   Includes standard resource operations + custom collection-level
   and instance-level actions (complete, stream).
   """)
+@clientName("AgentsClient", "csharp")
 interface Agents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Creates a new Agent resource and returns it.")
@@ -123,7 +136,7 @@ interface Agents {
   @route("/agents")
   createAgent is Operation<
     {
-      ...AgentOptions;
+      ...AgentConfigurationOptions;
     },
     Agent
   >;
@@ -177,70 +190,53 @@ interface Agents {
   @route("/agents")
   listAgents is Operation<NoRequest, Agent[]>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @Rest.action("stream")
-  streamByAgent is AgentOperations.ResourceAction<
-    Agent,
-    {
-      ...RunInputs;
-    },
-    Streams.Stream<StreamingUpdate>
-  >;
-}
-
-@doc("""
-  RUNS
-  
-  Interface is rooted at /runs.
-  Includes standard resource operations + custom collection-level
-  and instance-level actions (complete, stream).
-  """)
-interface Runs {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Creates and waits for a run to finish, returning the completed Run (including its outputs).")
   @post
-  @route("/runs")
-  @doc("Creates a new run.")
-  createRun is Azure.Core.Foundations.Operation<
+  @route("/conversations/runs")
+  run is Azure.Core.Foundations.Operation<
     {
       ...RunInputs;
     },
     Run
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
+  @Rest.action("stream")
+  @post
+  @route("/conversations/runs/stream")
+  stream is Azure.Core.Foundations.Operation<
+    {
+      ...RunInputs;
+    },
+    Streams.Stream<StreamingUpdate>
   >;
 
   @doc("""
     Retrieves an existing run by its ID.
-    @route("/run/{run_id}")
+    @route("/conversations/runs/{run_id}")
     """)
   @get
   getRun is AgentOperations.ResourceRead<Run>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Creates and waits for a run to finish, returning the completed Run (including its outputs).")
-  @post
-  @route("/runs/execute")
-  createAndExecuteRun is Azure.Core.Foundations.Operation<
-    {
-      ...RunInputs;
-    },
-    Run
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/no-response-body"
-  @doc("""
-    Create and stream run.
-    @route("/run/stream")
-    """)
-  @post
-  createAndStreamRun is AgentOperations.ResourceCollectionAction<
-    Run,
-    Run,
-    Streams.Stream<StreamingUpdate>
-  >;
-
   @doc("""
     Lists all run records, each containing runInputs and runOutputs.
-    @route("/runs")
+    @route("/agents/runs")
     """)
   @get
   listRuns is AgentOperations.ResourceList<Run>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
+  @doc("Lists the inputs for a specific run by its ID.")
+  @get
+  @route("/conversations/runs/{runId}/listInputs")
+  listRunInputs is Operation<
+    {
+      @doc("The ID of the run.")
+      @path
+      runId: string;
+    },
+    RunInputs
+  >;
 }
