@@ -32,6 +32,10 @@ directive:
   - suppress: AvoidAdditionalProperties
     where:
       - $.definitions.SiteProperties.properties.labels
+    from: sites.json
+    reason: labels describe user defined tags to be used on Sites.
+  - suppress: AvoidAdditionalProperties
+    where:
       - $.definitions.SiteUpdateProperties.properties.lables
     from: sites.json
     reason: labels describe user defined tags to be used on Sites.
