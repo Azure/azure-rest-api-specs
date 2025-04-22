@@ -7,3 +7,8 @@ using Azure.ClientGenerator.Core;
   "PortalServicesCopilotMgmtClient",
   "python"
 );
+
+@@clientName(Microsoft.PortalServices,
+  "PortalServicesCopilotMgmtClient",
+  "java"
+);
