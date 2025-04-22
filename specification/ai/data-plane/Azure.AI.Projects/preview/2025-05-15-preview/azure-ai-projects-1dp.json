@@ -635,64 +635,6 @@
           }
         }
       },
-      "put": {
-        "operationId": "Datasets_CreateVersion",
-        "description": "Create a new or replace an existing DatasetVersion with the given version id",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The specific version id of the DatasetVersion to create or replace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The definition of the DatasetVersion to create",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DatasetVersion"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DatasetVersion"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/DatasetVersion"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
       "patch": {
         "operationId": "Datasets_CreateOrUpdateVersion",
         "description": "Create a new or update an existing DatasetVersion with the given version id",
@@ -1367,64 +1309,6 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Index"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "Indexes_CreateVersion",
-        "description": "Create a new or replace an existing Index with the given version id",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The specific version id of the Index to create or replace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The definition of the Index to create",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Index"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Index"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Index"
             }
