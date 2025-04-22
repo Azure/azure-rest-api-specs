@@ -506,9 +506,9 @@
           }
         }
       },
-      "put": {
-        "operationId": "Datasets_CreateVersion",
-        "description": "Create a new or replace an existing DatasetVersion with the given version id",
+      "patch": {
+        "operationId": "Datasets_CreateOrUpdateVersion",
+        "description": "Create a new or update an existing DatasetVersion with the given version id",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -530,10 +530,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The definition of the DatasetVersion to create",
+            "description": "The definition of the DatasetVersion to create or update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatasetVersion"
+              "$ref": "#/definitions/DatasetVersionUpdate"
             }
           }
         ],
@@ -1057,9 +1057,9 @@
           }
         }
       },
-      "put": {
-        "operationId": "EvaluationResults_CreateVersion",
-        "description": "Create a new or replace an existing EvaluationResult with the given version id",
+      "patch": {
+        "operationId": "EvaluationResults_CreateOrUpdateVersion",
+        "description": "Create a new or update an existing EvaluationResult with the given version id",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1081,10 +1081,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The definition of the EvaluationResult to create",
+            "description": "The definition of the EvaluationResult to create or update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EvaluationResult"
+              "$ref": "#/definitions/EvaluationResultUpdate"
             }
           }
         ],
@@ -1829,9 +1829,9 @@
           }
         }
       },
-      "put": {
-        "operationId": "Indexes_CreateVersion",
-        "description": "Create a new or replace an existing Index with the given version id",
+      "patch": {
+        "operationId": "Indexes_CreateOrUpdateVersion",
+        "description": "Create a new or update an existing Index with the given version id",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1853,10 +1853,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The definition of the Index to create",
+            "description": "The definition of the Index to create or update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Index"
+              "$ref": "#/definitions/IndexUpdate"
             }
           }
         ],
@@ -2787,6 +2787,26 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
+    "AzureAISearchIndexUpdate": {
+      "type": "object",
+      "description": "Azure AI Search Index Definition",
+      "properties": {
+        "connectionName": {
+          "type": "string",
+          "description": "Name of connection to Azure AI Search"
+        },
+        "indexName": {
+          "type": "string",
+          "description": "Name of index in Azure AI Search resource to attach"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureSearch"
+    },
     "BaseCredentials": {
       "type": "object",
       "description": "A base class for connection credentials",
@@ -3010,6 +3030,34 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
+    "CosmosDBIndexUpdate": {
+      "type": "object",
+      "description": "CosmosDB Vector Store Index Definition",
+      "properties": {
+        "connectionName": {
+          "type": "string",
+          "description": "Name of connection to CosmosDB"
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the CosmosDB Database"
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Name of CosmosDB Container"
+        },
+        "embeddingConfiguration": {
+          "$ref": "#/definitions/EmbeddingConfigurationUpdate",
+          "description": "Embedding model configuration"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
+    },
     "CredentialType": {
       "type": "string",
       "description": "The credential type used by the connection",
@@ -3173,6 +3221,40 @@
         "version"
       ]
     },
+    "DatasetVersionUpdate": {
+      "type": "object",
+      "description": "DatasetVersion Definition",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/DatasetType",
+          "description": "Dataset type"
+        },
+        "stage": {
+          "type": "string",
+          "description": "Asset stage",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "Deployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -3227,6 +3309,20 @@
         "modelDeploymentName",
         "embeddingField"
       ]
+    },
+    "EmbeddingConfigurationUpdate": {
+      "type": "object",
+      "description": "Embedding configuration class",
+      "properties": {
+        "modelDeploymentName": {
+          "type": "string",
+          "description": "Deployment name of embedding model. It can point to a model deployment either in the parent AIServices or a connection."
+        },
+        "embeddingField": {
+          "type": "string",
+          "description": "Embedding field"
+        }
+      }
     },
     "EntraIDCredentials": {
       "type": "object",
@@ -3366,6 +3462,40 @@
         "name",
         "version"
       ]
+    },
+    "EvaluationResultUpdate": {
+      "type": "object",
+      "description": "Evaluation Result resource Definition",
+      "properties": {
+        "ResultType": {
+          "$ref": "#/definitions/ResultType",
+          "description": "Type of Evaluation result"
+        },
+        "BlobUri": {
+          "type": "string",
+          "description": "Blob URI"
+        },
+        "stage": {
+          "type": "string",
+          "description": "Asset stage",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "EvaluationTarget": {
       "type": "object",
@@ -3577,12 +3707,38 @@
       ],
       "x-ms-discriminator-value": "uri_file"
     },
+    "FileDatasetVersionUpdate": {
+      "type": "object",
+      "description": "FileDatasetVersion Definition",
+      "properties": {
+        "openAIPurpose": {
+          "type": "string",
+          "description": "Indicates OpenAI Purpose. FileDatasets created with this field will be compatible with OpenAI-specific features"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetVersionUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_file"
+    },
     "FolderDatasetVersion": {
       "type": "object",
       "description": "FileDatasetVersion Definition",
       "allOf": [
         {
           "$ref": "#/definitions/DatasetVersion"
+        }
+      ],
+      "x-ms-discriminator-value": "uri_folder"
+    },
+    "FolderDatasetVersionUpdate": {
+      "type": "object",
+      "description": "FileDatasetVersion Definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetVersionUpdate"
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
@@ -3666,6 +3822,40 @@
           }
         ]
       }
+    },
+    "IndexUpdate": {
+      "type": "object",
+      "description": "Index resource Definition",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IndexType",
+          "description": "Type of index"
+        },
+        "stage": {
+          "type": "string",
+          "description": "Asset stage",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
     },
     "InputData": {
       "type": "object",
@@ -3840,6 +4030,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/Index"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedAzureSearch"
+    },
+    "ManagedAzureAISearchIndexUpdate": {
+      "type": "object",
+      "description": "Managed Azure AI Search Index Definition",
+      "properties": {
+        "vectorStoreId": {
+          "type": "string",
+          "description": "Vector store id of managed index"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/IndexUpdate"
         }
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
