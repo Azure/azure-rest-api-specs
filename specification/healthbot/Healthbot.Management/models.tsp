@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.HealthBot;
 
@@ -279,17 +280,20 @@ model BotResponseList is Azure.Core.Page<HealthBot>;
 /**
  * Available operations of the service.
  */
+@pagedResult
 model AvailableOperations {
   /**
    * Collection of available operation details.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @items
   value: OperationDetail[];
 
   /**
    * URL client should use to fetch the next page (per server side paging).
    * It's null for now, added for future use.
    */
+  @nextLink
   nextLink?: string;
 }
 /**
