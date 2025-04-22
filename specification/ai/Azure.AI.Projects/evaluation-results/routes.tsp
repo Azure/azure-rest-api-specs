@@ -60,7 +60,7 @@ interface EvaluationResults
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get agent evaluation results.")
-  @route("/runs:runAgent/{runId}")
+  @route("/runs/agents/{runId}")
   @get
   getAgentEvaluationResults is Azure.Core.Foundations.Operation<
     {
