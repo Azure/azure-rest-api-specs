@@ -1431,7 +1431,7 @@
       "properties": {
         "redactionCharacter": {
           "type": "string",
-          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will bce * as before. We allow specific ascii characters for redaction.",
           "default": "*",
           "enum": [
             "!",
@@ -2974,6 +2974,45 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionLROResults"
+    },
+    "EntitySynonym": {
+      "type": "object",
+      "description": "The entity synonyms used to enhance pii entity detection",
+      "properties": {
+        "synonym": {
+          "type": "string",
+          "description": "The synonym to be used for context"
+        },
+        "language": {
+          "type": "string",
+          "description": "The 2 letter ISO 639-1 language the synonym"
+        }
+      },
+      "required": [
+        "synonym"
+      ]
+    },
+    "EntitySynonyms": {
+      "type": "object",
+      "description": "Object that allows the user to provide synonyms for context words that to enhance pii entity detection.",
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/EntityCategory",
+          "description": "The entity name"
+        },
+        "synonyms": {
+          "type": "array",
+          "description": "The entity synonyms",
+          "items": {
+            "$ref": "#/definitions/EntitySynonym"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "entityType",
+        "synonyms"
+      ]
     },
     "EntityTag": {
       "type": "object",
@@ -4970,7 +5009,16 @@
         "IPAddress",
         "Date",
         "Person",
-        "Address"
+        "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VIN",
+        "LicensePlate"
       ],
       "x-ms-enum": {
         "name": "PiiCategoriesExclude",
@@ -4989,7 +5037,7 @@
           {
             "name": "AUBankAccountNumber",
             "value": "AUBankAccountNumber",
-            "description": "AT Identity Card"
+            "description": "AT Bank Account Number"
           },
           {
             "name": "AUDriversLicenseNumber",
@@ -5830,6 +5878,51 @@
             "name": "Address",
             "value": "Address",
             "description": "Address"
+          },
+          {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VIN",
+            "value": "VIN",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
           }
         ]
       }
@@ -6009,6 +6102,15 @@
         "Date",
         "Person",
         "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VIN",
+        "LicensePlate",
         "All",
         "Default"
       ],
@@ -6029,7 +6131,7 @@
           {
             "name": "AUBankAccountNumber",
             "value": "AUBankAccountNumber",
-            "description": "AT Identity Card"
+            "description": "AT Bank Account Number"
           },
           {
             "name": "AUDriversLicenseNumber",
@@ -6870,6 +6972,51 @@
             "name": "Address",
             "value": "Address",
             "description": "Address"
+          },
+          {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VIN",
+            "value": "VIN",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
           },
           {
             "name": "All",
@@ -7069,7 +7216,7 @@
         "loggingOptOut": {
           "type": "boolean",
           "description": "logging opt out",
-          "default": false
+          "default": true
         },
         "modelVersion": {
           "type": "string",
@@ -7149,6 +7296,14 @@
         "redactionPolicy": {
           "$ref": "#/definitions/BaseRedactionPolicy",
           "description": "RedactionPolicy to be used on the input."
+        },
+        "valueExclusionPolicy": {
+          "$ref": "#/definitions/ValueExclusionPolicy",
+          "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service"
+        },
+        "entitySynonyms": {
+          "$ref": "#/definitions/EntitySynonyms",
+          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection."
         }
       }
     },
@@ -8811,6 +8966,28 @@
           }
         ]
       }
+    },
+    "ValueExclusionPolicy": {
+      "type": "object",
+      "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service",
+      "properties": {
+        "caseSensitive": {
+          "type": "boolean",
+          "description": "Option to make the values excluded values case sensitive",
+          "default": false
+        },
+        "excludedValues": {
+          "type": "array",
+          "description": "List of words and terms that should be excluded from detection by the PII detection service",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "caseSensitive",
+        "excludedValues"
+      ]
     },
     "VolumeMetadata": {
       "type": "object",
