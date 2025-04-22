@@ -1,8 +1,7 @@
 import { join } from "path";
 import { parse as yamlParse } from "yaml";
-import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
+import { Rule } from "../rule.js";
 import { fileExists, readTspConfig } from "../utils.js";
 
 // Maps deprecated rulesets to the replacement rulesets
@@ -20,7 +19,7 @@ export class LinterRulesetRule implements Rule {
   readonly description =
     "Ensures each spec includes the correct linter ruleset (data-plane or management-plane)";
 
-  async execute(_host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";

@@ -3640,7 +3640,7 @@
             "description": "parameters describing the fault simulation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FaultSimulationContent"
+              "$ref": "#/definitions/FaultSimulationContentWrapper"
             }
           }
         ],
@@ -3783,7 +3783,7 @@
             "description": "parameters describing the fault simulation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FaultSimulationContent"
+              "$ref": "#/definitions/FaultSimulationContentWrapper"
             }
           }
         ],
@@ -4897,6 +4897,19 @@
       "discriminator": "faultKind",
       "required": [
         "faultKind"
+      ]
+    },
+    "FaultSimulationContentWrapper": {
+      "type": "object",
+      "description": "Fault Simulation Request for Start action.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/FaultSimulationContent",
+          "description": "Parameters for Fault Simulation start action."
+        }
+      },
+      "required": [
+        "parameters"
       ]
     },
     "FaultSimulationDetails": {
