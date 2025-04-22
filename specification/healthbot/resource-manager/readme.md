@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.HealthBot/stable/2024-02-01/openapi.json
+  - Microsoft.HealthBot/stable/2024-02-01/healthbot.json
 ```
 
 ### Tag: package-2023-05-01
