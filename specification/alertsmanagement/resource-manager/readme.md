@@ -41,6 +41,9 @@ directive:
   - suppress: GuidUsage
     reason: The IDs of investigation entities are GUIDs.
     from: Issues.json
+    where:
+     - $.definitions.FetchInvestigationResultParameters.properties.investigationId.format
+     - $.definitions.InvestigationMetadata.properties.id.format
 ```
 
 ``` yaml
