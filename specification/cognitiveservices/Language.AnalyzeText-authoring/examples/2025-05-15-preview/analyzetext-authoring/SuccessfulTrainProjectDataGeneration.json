@@ -1,0 +1,34 @@
+{
+  "operationId": "TextAuthoringProject_Train_DataGeneration",
+  "title": "SuccessfulTrainProject",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2025-05-15-preview",
+    "projectName": "LoanAgreements",
+    "body": {
+      "modelLabel": "model1",
+      "trainingConfigVersion": "2024-11-15",
+      "evaluationOptions": {
+        "kind": "percentage",
+        "testingSplitPercentage": 20,
+        "trainingSplitPercentage": 80
+      },
+      "dataGenerationSettings": {
+        "enableDataGeneration": true,
+        "dataGenerationConnectionInfo": {
+          "kind": "azureOpenAI",
+          "resourceId": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/resource-group-name/providers/Microsoft.CognitiveServices/accounts/aoai-account-name",
+          "deploymentName": "model-deployment-name"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "{Endpoint}/language/authoring/analyze-text/projects/LoanAgreements/train/jobs/4d37982f-fded-4c2c-afe3-15953b5919b6_637858368000000000?api-version=2025-05-15-preview"
+      }
+    }
+  }
+}

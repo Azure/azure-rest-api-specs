@@ -1,0 +1,848 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.OnlineExperimentation management service",
+    "version": "2025-05-31-preview",
+    "description": "Microsoft.OnlineExperimentation Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "OnlineExperimentWorkspaces"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.OnlineExperimentation/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Online Experiment Workspaces operations.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OnlineExperimentation/workspaces": {
+      "get": {
+        "operationId": "OnlineExperimentWorkspaces_ListBySubscription",
+        "tags": [
+          "OnlineExperimentWorkspaces"
+        ],
+        "description": "Gets all experiment workspaces in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OnlineExperimentWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Online Experiment Workspaces in a subscription.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OnlineExperimentation/workspaces": {
+      "get": {
+        "operationId": "OnlineExperimentWorkspaces_ListByResourceGroup",
+        "tags": [
+          "OnlineExperimentWorkspaces"
+        ],
+        "description": "Gets all experiment workspaces in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OnlineExperimentWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List OnlineExperimentWorkspaces in a resource group.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OnlineExperimentation/workspaces/{workspaceName}": {
+      "get": {
+        "operationId": "OnlineExperimentWorkspaces_Get",
+        "tags": [
+          "OnlineExperimentWorkspaces"
+        ],
+        "description": "Gets an experiment workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the OnlineExperimentWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OnlineExperimentWorkspace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a single OnlineExperimentWorkspace.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "OnlineExperimentWorkspaces_CreateOrUpdate",
+        "tags": [
+          "OnlineExperimentWorkspaces"
+        ],
+        "description": "Create an experiment workspace, or update an existing workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the OnlineExperimentWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineExperimentWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'OnlineExperimentWorkspace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OnlineExperimentWorkspace"
+            }
+          },
+          "201": {
+            "description": "Resource 'OnlineExperimentWorkspace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/OnlineExperimentWorkspace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an OnlineExperimentWorkspace with Free sku and customer managed key.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_CreateOrUpdateWithEncryption.json"
+          },
+          "Create or update an OnlineExperimentWorkspace with Free sku.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "OnlineExperimentWorkspaces_Update",
+        "tags": [
+          "OnlineExperimentWorkspaces"
+        ],
+        "description": "Patch an experiment workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the OnlineExperimentWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnlineExperimentWorkspaceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OnlineExperimentWorkspace"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an Online Experiment Workspace with customer managed encryption key.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_UpdateWithEncryption.json"
+          },
+          "Update an Online Experiment Workspace.": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "OnlineExperimentWorkspaces_Delete",
+        "tags": [
+          "OnlineExperimentWorkspaces"
+        ],
+        "description": "Deletes an experiment workspace",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the OnlineExperimentWorkspace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9](?!.*---)[a-z0-9-]{1,53}[a-z0-9]"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an Online Experiment Workspace": {
+            "$ref": "./examples/OnlineExperimentWorkspaces_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "allOf": [
+              {
+                "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity"
+              }
+            ],
+            "type": "object",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CustomerManagedKeyEncryption": {
+      "type": "object",
+      "description": "Customer-managed key encryption properties for the resource.",
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
+        },
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        }
+      }
+    },
+    "KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentityType",
+          "description": "The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
+        },
+        "federatedClientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "application client identity to use for accessing key encryption key Url in a different tenant. Ex: f83c6b1b-4d34-47e4-bb34-9d83df58b540"
+        }
+      }
+    },
+    "KeyEncryptionKeyIdentityType": {
+      "type": "string",
+      "description": "The type of identity to use.",
+      "enum": [
+        "SystemAssignedIdentity",
+        "UserAssignedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "KeyEncryptionKeyIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssignedIdentity",
+            "value": "SystemAssignedIdentity",
+            "description": "System assigned identity"
+          },
+          {
+            "name": "UserAssignedIdentity",
+            "value": "UserAssignedIdentity",
+            "description": "User assigned identity"
+          }
+        ]
+      }
+    },
+    "OnlineExperimentWorkspace": {
+      "type": "object",
+      "description": "An online experiment workspace resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OnlineExperimentWorkspaceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/OnlineExperimentationWorkspaceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "OnlineExperimentWorkspaceListResult": {
+      "type": "object",
+      "description": "The response of a OnlineExperimentWorkspace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OnlineExperimentWorkspace items on this page",
+          "items": {
+            "$ref": "#/definitions/OnlineExperimentWorkspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OnlineExperimentWorkspaceProperties": {
+      "type": "object",
+      "description": "The properties of an online experiment workspace.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The Id of the workspace.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state for the resource",
+          "readOnly": true
+        },
+        "logAnalyticsWorkspaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        },
+        "logsExporterStorageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "appConfigurationResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of App Configuration with which this online experiment workspace is tied for experimentation. This is a required field for creating an online experiment workspace.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppConfiguration/configurationStores"
+              }
+            ]
+          }
+        },
+        "encryption": {
+          "$ref": "#/definitions/ResourceEncryptionConfiguration",
+          "description": "The encryption configuration for the online experiment workspace resource."
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The data plane endpoint for the online experiment workspace resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "logAnalyticsWorkspaceResourceId",
+        "logsExporterStorageAccountResourceId",
+        "appConfigurationResourceId"
+      ]
+    },
+    "OnlineExperimentWorkspacePropertiesUpdate": {
+      "type": "object",
+      "description": "The properties of an online experiment workspace.",
+      "properties": {
+        "logAnalyticsWorkspaceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of the Log Analytics workspace which online experiment workspace uses for generating experiment analysis results.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        },
+        "logsExporterStorageAccountResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource identifier of storage account where logs are exported from Log Analytics workspace. Online Experiment workspace uses it generating experiment analysis results.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "encryption": {
+          "$ref": "#/definitions/ResourceEncryptionConfiguration",
+          "description": "The encryption configuration for the online experiment workspace resource."
+        }
+      }
+    },
+    "OnlineExperimentWorkspaceUpdate": {
+      "type": "object",
+      "description": "An online experiment workspace resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OnlineExperimentWorkspacePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/OnlineExperimentationWorkspaceSkuUpdate",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "OnlineExperimentationWorkspaceSku": {
+      "type": "object",
+      "description": "The SKU (Stock Keeping Unit) assigned to this resource.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/OnlineExperimentationWorkspaceSkuName",
+          "description": "The name of the SKU. Ex - F0, P0. It is typically a letter+number code"
+        },
+        "tier": {
+          "$ref": "#/definitions/OnlineExperimentationWorkspaceSkuTier",
+          "description": "The name of the SKU tier",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "OnlineExperimentationWorkspaceSkuName": {
+      "type": "string",
+      "description": "The allowed SKU names for the online experimentation workspace.",
+      "enum": [
+        "F0",
+        "S0",
+        "P0",
+        "D0"
+      ],
+      "x-ms-enum": {
+        "name": "OnlineExperimentationWorkspaceSkuName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "F0",
+            "value": "F0",
+            "description": "The Free service sku name."
+          },
+          {
+            "name": "S0",
+            "value": "S0",
+            "description": "The Standard service sku name."
+          },
+          {
+            "name": "P0",
+            "value": "P0",
+            "description": "The Premium service sku name."
+          },
+          {
+            "name": "D0",
+            "value": "D0",
+            "description": "The Developer service sku name."
+          }
+        ]
+      }
+    },
+    "OnlineExperimentationWorkspaceSkuTier": {
+      "type": "string",
+      "description": "The allowed SKU tiers for the online experimentation workspace.",
+      "enum": [
+        "Free",
+        "Standard",
+        "Premium",
+        "Developer"
+      ],
+      "x-ms-enum": {
+        "name": "OnlineExperimentationWorkspaceSkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "The Free service tier."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "The Standard service tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "The Premium service tier."
+          },
+          {
+            "name": "Developer",
+            "value": "Developer",
+            "description": "The Developer service tier."
+          }
+        ]
+      }
+    },
+    "OnlineExperimentationWorkspaceSkuUpdate": {
+      "type": "object",
+      "description": "The SKU (Stock Keeping Unit) assigned to this resource.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/OnlineExperimentationWorkspaceSkuName",
+          "description": "The name of the SKU. Ex - F0, P0. It is typically a letter+number code"
+        }
+      }
+    },
+    "ResourceEncryptionConfiguration": {
+      "type": "object",
+      "description": "The encryption configuration for the online experiment workspace resource.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/CustomerManagedKeyEncryption",
+          "description": "All Customer-managed key encryption properties for the resource."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
