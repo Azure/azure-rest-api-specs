@@ -104,7 +104,7 @@ interface Evaluations {
     @doc("Operation ID for the polling operation.")
     @path operationId: string,
   ): {
-    @statusCode statusCode: 202;
+    @statusCode statusCode: 200;
     @doc("The operation results.")
     @body operationResults: Record<unknown>
   };
