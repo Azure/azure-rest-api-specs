@@ -1,7 +1,7 @@
 import { basename, join } from "path";
 import { readFile } from "fs/promises";
-import { relativizePath, pathExists } from "./util.js";
-import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./types.js";
+import { relativizePath, pathExists, isFailure, isWarning } from "./util.js";
+import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./lintdiff-types.js";
 import { getDefaultTag } from "./markdown-utils.js";
 
 export async function correlateRuns(
@@ -144,14 +144,6 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
   }
 
   return violations;
-}
-
-export function isFailure(level: string) {
-  return ["error", "fatal"].includes(level.toLowerCase());
-}
-
-export function isWarning(level: string) {
-  return level.toLowerCase() === "warning";
 }
 
 // This logic is duplicated from momentOfTruthPostProcessing.ts:140

@@ -1,9 +1,7 @@
-import "@typespec/http";
 import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 
@@ -102,9 +100,11 @@ model DeidentificationDocumentDetails {
   id: string;
 
   @doc("Location for the input.")
+  @clientName("inputLocation", "java")
   input: DeidentificationDocumentLocation;
 
   @doc("Location for the output.")
+  @clientName("outputLocation", "java")
   output?: DeidentificationDocumentLocation;
 
   @doc("Status of the document.")
