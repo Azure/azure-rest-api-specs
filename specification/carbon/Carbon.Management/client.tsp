@@ -52,3 +52,7 @@ using Microsoft.Carbon;
 );
 @@clientName(Microsoft.Carbon, "CarbonOptimizationMgmt", "python");
 @@clientName(Microsoft.Carbon, "CarbonOptimizationManagementClient", "java");
+@@clientName(Microsoft.Carbon,
+  "CarbonOptimizationManagementClient",
+  "javascript"
+);
