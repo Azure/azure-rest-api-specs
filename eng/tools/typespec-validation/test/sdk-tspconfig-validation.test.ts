@@ -21,7 +21,8 @@ import {
   TspConfigGoDpServiceDirMatchPatternSubRule,
   TspConfigJavaAzPackageDirectorySubRule,
   TspConfigPythonMgmtPackageDirectorySubRule,
-  TspConfigPythonAzPackageNameEqualStringSubRule,
+  TspConfigPythonMgmtNamespaceSubRule,
+  TspConfigPythonDpPackageNameEqualStringSubRule,
   TspConfigPythonAzGenerateTestTrueSubRule,
   TspConfigPythonAzGenerateSampleTrueSubRule,
   TspConfigCsharpAzPackageDirectorySubRule,
@@ -357,13 +358,13 @@ const pythonManagementPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonMgmtPackageDirectorySubRule()],
 );
 
-const pythonManagementPackageNameTestCases = createEmitterOptionTestCases(
+const pythonManagementNamespaceTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   managementTspconfigFolder,
-  "package-name",
-  "{package-dir}",
-  "aaa",
-  [new TspConfigPythonAzPackageNameEqualStringSubRule()],
+  "namespace",
+  "azure.mgmt.aaa",
+  "azure-aaa",
+  [new TspConfigPythonMgmtNamespaceSubRule()],
 );
 
 const pythonManagementGenerateTestTestCases = createEmitterOptionTestCases(
@@ -393,13 +394,13 @@ const pythonDpPackageDirTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpPackageDirectorySubRule()],
 );
 
-const pythonAzPackageNameTestCases = createEmitterOptionTestCases(
+const pythonDpPackageNameTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-python",
   "",
   "package-name",
   "{package-dir}",
   "aaa",
-  [new TspConfigPythonAzPackageNameEqualStringSubRule()],
+  [new TspConfigPythonDpPackageNameEqualStringSubRule()],
 );
 
 const pythonAzGenerateTestTestCases = createEmitterOptionTestCases(
@@ -559,11 +560,11 @@ describe("tspconfig", function () {
     ...javaManagementPackageDirTestCases,
     // python
     ...pythonManagementPackageDirTestCases,
-    ...pythonManagementPackageNameTestCases,
+    ...pythonManagementNamespaceTestCases,
     ...pythonManagementGenerateTestTestCases,
     ...pythonManagementGenerateSampleTestCases,
     ...pythonDpPackageDirTestCases,
-    ...pythonAzPackageNameTestCases,
+    ...pythonDpPackageNameTestCases,
     ...pythonAzGenerateTestTestCases,
     ...pythonAzGenerateSampleTestCases,
     // csharp
