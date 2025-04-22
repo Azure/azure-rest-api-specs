@@ -308,7 +308,7 @@
               "excel"
             ],
             "x-ms-enum": {
-              "name": "ImportExportFormat",
+              "name": "format",
               "modelAsString": true,
               "values": [
                 {
@@ -432,7 +432,7 @@
               "excel"
             ],
             "x-ms-enum": {
-              "name": "ImportExportFormat",
+              "name": "format",
               "modelAsString": true,
               "values": [
                 {
@@ -1469,6 +1469,7 @@
         "synonyms": {
           "type": "array",
           "description": "Collection of synonyms.",
+          "maxItems": 10000,
           "items": {
             "$ref": "#/definitions/WordAlterations"
           },
@@ -1768,36 +1769,6 @@
         }
       }
     },
-    "ImportExportFormat": {
-      "type": "string",
-      "description": "Knowledge base Import or Export format.",
-      "enum": [
-        "json",
-        "tsv",
-        "excel"
-      ],
-      "x-ms-enum": {
-        "name": "ImportExportFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "json",
-            "value": "json",
-            "description": "Export or Import QnA assets in JSON format."
-          },
-          {
-            "name": "tsv",
-            "value": "tsv",
-            "description": "Export or Import knowledge base replica including all assets and metadata in\nExcel format."
-          },
-          {
-            "name": "excel",
-            "value": "excel",
-            "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
-          }
-        ]
-      }
-    },
     "ImportJobOptions": {
       "type": "object",
       "description": "Project assets the needs to be imported.",
@@ -2012,53 +1983,6 @@
         "code",
         "message"
       ]
-    },
-    "JobStatus": {
-      "type": "string",
-      "description": "Job Status.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed",
-        "cancelled",
-        "cancelling",
-        "partiallyCompleted"
-      ],
-      "x-ms-enum": {
-        "name": "JobStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "notStarted",
-            "value": "notStarted"
-          },
-          {
-            "name": "running",
-            "value": "running"
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded"
-          },
-          {
-            "name": "failed",
-            "value": "failed"
-          },
-          {
-            "name": "cancelled",
-            "value": "cancelled"
-          },
-          {
-            "name": "cancelling",
-            "value": "cancelling"
-          },
-          {
-            "name": "partiallyCompleted",
-            "value": "partiallyCompleted"
-          }
-        ]
-      }
     },
     "LastUpdatedDateTimeParameter": {
       "type": "object",
@@ -2339,7 +2263,7 @@
           "description": "URI location for the file or url."
         },
         "sourceKind": {
-          "$ref": "#/definitions/SourceKind",
+          "$ref": "#/definitions/sourceKind",
           "description": "Supported source types."
         },
         "contentStructureKind": {
@@ -2350,7 +2274,7 @@
             "unstructured"
           ],
           "x-ms-enum": {
-            "name": "SourceContentStructureKind",
+            "name": "sourceContentStructureKind",
             "modelAsString": true,
             "values": [
               {
@@ -2393,7 +2317,7 @@
           "description": "URI location for the file or url."
         },
         "sourceKind": {
-          "$ref": "#/definitions/SourceKind",
+          "$ref": "#/definitions/sourceKind",
           "description": "Supported source types."
         },
         "contentStructureKind": {
@@ -2404,7 +2328,7 @@
             "unstructured"
           ],
           "x-ms-enum": {
-            "name": "SourceContentStructureKind",
+            "name": "sourceContentStructureKind",
             "modelAsString": true,
             "values": [
               {
@@ -2452,7 +2376,7 @@
           "description": "The last date time the job was updated."
         },
         "status": {
-          "$ref": "#/definitions/JobStatus",
+          "$ref": "#/definitions/jobStatus",
           "description": "Job Status."
         },
         "errors": {
@@ -2501,7 +2425,7 @@
           "description": "The last date time the job was updated."
         },
         "status": {
-          "$ref": "#/definitions/JobStatus",
+          "$ref": "#/definitions/jobStatus",
           "description": "Job Status."
         },
         "errors": {
@@ -2545,7 +2469,7 @@
           "description": "The last date time the job was updated."
         },
         "status": {
-          "$ref": "#/definitions/JobStatus",
+          "$ref": "#/definitions/jobStatus",
           "description": "Job Status."
         },
         "errors": {
@@ -2589,7 +2513,7 @@
           "description": "The last date time the job was updated."
         },
         "status": {
-          "$ref": "#/definitions/JobStatus",
+          "$ref": "#/definitions/jobStatus",
           "description": "Job Status."
         },
         "errors": {
@@ -2633,7 +2557,7 @@
           "description": "The last date time the job was updated."
         },
         "status": {
-          "$ref": "#/definitions/JobStatus",
+          "$ref": "#/definitions/jobStatus",
           "description": "Job Status."
         },
         "errors": {
@@ -2677,7 +2601,7 @@
           "description": "The last date time the job was updated."
         },
         "status": {
-          "$ref": "#/definitions/JobStatus",
+          "$ref": "#/definitions/jobStatus",
           "description": "Job Status."
         },
         "errors": {
@@ -2721,7 +2645,7 @@
           "description": "The last date time the job was updated."
         },
         "status": {
-          "$ref": "#/definitions/JobStatus",
+          "$ref": "#/definitions/jobStatus",
           "description": "Job Status."
         },
         "errors": {
@@ -2859,24 +2783,6 @@
         "id"
       ]
     },
-    "SourceContentStructureKind": {
-      "type": "string",
-      "description": "Content structure type for sources.",
-      "enum": [
-        "unstructured"
-      ],
-      "x-ms-enum": {
-        "name": "SourceContentStructureKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "unstructured",
-            "value": "unstructured",
-            "description": "Unstructured."
-          }
-        ]
-      }
-    },
     "SourceDisplayNameParameter": {
       "type": "object",
       "description": "Friendly name of the Source parameter.",
@@ -2887,30 +2793,6 @@
           "minLength": 1,
           "maxLength": 200
         }
-      }
-    },
-    "SourceKind": {
-      "type": "string",
-      "description": "Supported source types.",
-      "enum": [
-        "file",
-        "url"
-      ],
-      "x-ms-enum": {
-        "name": "SourceKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "file",
-            "value": "file",
-            "description": "File Source."
-          },
-          {
-            "name": "url",
-            "value": "url",
-            "description": "URI Source."
-          }
-        ]
       }
     },
     "SuggestedQuestion": {
@@ -2973,36 +2855,6 @@
         "value"
       ]
     },
-    "UpdateOperationKind": {
-      "type": "string",
-      "description": "Update operation type for assets.",
-      "enum": [
-        "add",
-        "delete",
-        "replace"
-      ],
-      "x-ms-enum": {
-        "name": "UpdateOperationKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "add",
-            "value": "add",
-            "description": "Add operation."
-          },
-          {
-            "name": "delete",
-            "value": "delete",
-            "description": "Delete operation."
-          },
-          {
-            "name": "replace",
-            "value": "replace",
-            "description": "Replace operation."
-          }
-        ]
-      }
-    },
     "UpdateQnaOptions": {
       "type": "array",
       "description": "A list of QnAs to be updated.",
@@ -3016,7 +2868,7 @@
       "description": "QnA record to be updated.",
       "properties": {
         "op": {
-          "$ref": "#/definitions/UpdateOperationKind",
+          "$ref": "#/definitions/updateOperationKind",
           "description": "Update operation type for assets."
         },
         "value": {
@@ -3054,7 +2906,7 @@
           "description": "URI location for the file or url."
         },
         "sourceKind": {
-          "$ref": "#/definitions/SourceKind",
+          "$ref": "#/definitions/sourceKind",
           "description": "Supported source types."
         },
         "contentStructureKind": {
@@ -3065,7 +2917,7 @@
             "unstructured"
           ],
           "x-ms-enum": {
-            "name": "SourceContentStructureKind",
+            "name": "sourceContentStructureKind",
             "modelAsString": true,
             "values": [
               {
@@ -3092,7 +2944,7 @@
       "description": "Source to be updated.",
       "properties": {
         "op": {
-          "$ref": "#/definitions/UpdateOperationKind",
+          "$ref": "#/definitions/updateOperationKind",
           "description": "Update operation type for assets."
         },
         "value": {
@@ -3116,6 +2968,7 @@
         "alterations": {
           "type": "array",
           "description": "Collection of word alterations.",
+          "maxItems": 20,
           "items": {
             "type": "string"
           },
@@ -3129,6 +2982,155 @@
       "required": [
         "alterations"
       ]
+    },
+    "format": {
+      "type": "string",
+      "description": "Knowledge base Import or Export format.",
+      "enum": [
+        "json",
+        "tsv",
+        "excel"
+      ],
+      "x-ms-enum": {
+        "name": "format",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "json",
+            "value": "json",
+            "description": "Export or Import QnA assets in JSON format."
+          },
+          {
+            "name": "tsv",
+            "value": "tsv",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nExcel format."
+          },
+          {
+            "name": "excel",
+            "value": "excel",
+            "description": "Export or Import knowledge base replica including all assets and metadata in\nTsv format."
+          }
+        ]
+      }
+    },
+    "jobStatus": {
+      "type": "string",
+      "description": "Job Status.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "cancelling",
+        "partiallyCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "jobStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notStarted",
+            "value": "notStarted"
+          },
+          {
+            "name": "running",
+            "value": "running"
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded"
+          },
+          {
+            "name": "failed",
+            "value": "failed"
+          },
+          {
+            "name": "cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "cancelling",
+            "value": "cancelling"
+          },
+          {
+            "name": "partiallyCompleted",
+            "value": "partiallyCompleted"
+          }
+        ]
+      }
+    },
+    "sourceContentStructureKind": {
+      "type": "string",
+      "description": "Content structure type for sources.",
+      "enum": [
+        "unstructured"
+      ],
+      "x-ms-enum": {
+        "name": "sourceContentStructureKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "unstructured",
+            "value": "unstructured",
+            "description": "Unstructured."
+          }
+        ]
+      }
+    },
+    "sourceKind": {
+      "type": "string",
+      "description": "Supported source types.",
+      "enum": [
+        "file",
+        "url"
+      ],
+      "x-ms-enum": {
+        "name": "sourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "file",
+            "value": "file",
+            "description": "File Source."
+          },
+          {
+            "name": "url",
+            "value": "url",
+            "description": "URI Source."
+          }
+        ]
+      }
+    },
+    "updateOperationKind": {
+      "type": "string",
+      "description": "Update operation type for assets.",
+      "enum": [
+        "add",
+        "delete",
+        "replace"
+      ],
+      "x-ms-enum": {
+        "name": "updateOperationKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "add",
+            "value": "add",
+            "description": "Add operation."
+          },
+          {
+            "name": "delete",
+            "value": "delete",
+            "description": "Delete operation."
+          },
+          {
+            "name": "replace",
+            "value": "replace",
+            "description": "Replace operation."
+          }
+        ]
+      }
     }
   },
   "parameters": {

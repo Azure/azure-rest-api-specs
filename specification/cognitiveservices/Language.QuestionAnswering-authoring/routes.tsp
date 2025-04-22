@@ -106,7 +106,7 @@ interface QuestionAnsweringProjects {
        * Knowledge base Import or Export format.
        */
       @query("format")
-      format?: ImportExportFormat = ImportExportFormat.json;
+      format?: format = format.json;
 
       /**
        * Kind of the asset of the project.
@@ -147,7 +147,7 @@ interface QuestionAnsweringProjects {
        * Knowledge base Import or Export format.
        */
       @query("format")
-      format?: ImportExportFormat = ImportExportFormat.json;
+      format?: format = format.json;
 
       /**
        * Kind of the asset of the project.

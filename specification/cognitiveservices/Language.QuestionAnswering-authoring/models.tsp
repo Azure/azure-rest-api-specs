@@ -1,7 +1,9 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
 
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
@@ -184,7 +186,7 @@ union InnerErrorCode {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @lroStatus
-union JobStatus {
+union jobStatus {
   string,
   notStarted: "notStarted",
   running: "running",
@@ -205,7 +207,7 @@ union JobStatus {
 /**
  * Knowledge base Import or Export format.
  */
-union ImportExportFormat {
+union format {
   string,
 
   /**
@@ -246,7 +248,7 @@ union AssestKind {
 /**
  * Supported source types.
  */
-union SourceKind {
+union sourceKind {
   string,
 
   /**
@@ -263,7 +265,7 @@ union SourceKind {
 /**
  * Content structure type for sources.
  */
-union SourceContentStructureKind {
+union sourceContentStructureKind {
   string,
 
   /**
@@ -275,7 +277,7 @@ union SourceContentStructureKind {
 /**
  * Update operation type for assets.
  */
-union UpdateOperationKind {
+union updateOperationKind {
   string,
 
   /**
@@ -529,7 +531,7 @@ model QuestionAnsweringAuthoringJobState {
   /**
    * Job Status.
    */
-  status: JobStatus;
+  status: jobStatus;
 
   /**
    * The errors encountered while executing the job.
@@ -574,6 +576,7 @@ model Assets {
   /**
    * Collection of synonyms.
    */
+  @maxItems(10000)
   synonyms?: WordAlterations[];
 
   /**
@@ -603,6 +606,7 @@ model WordAlterations {
    */
   @key
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @maxItems(20)
   alterations: string[];
 }
 
@@ -831,12 +835,12 @@ model QnaSourceMetadata {
   /**
    * Supported source types.
    */
-  sourceKind: SourceKind;
+  sourceKind: sourceKind;
 
   /**
    * Content structure type for sources.
    */
-  contentStructureKind?: SourceContentStructureKind = SourceContentStructureKind.unstructured;
+  contentStructureKind?: sourceContentStructureKind = sourceContentStructureKind.unstructured;
 }
 
 /**
@@ -846,7 +850,7 @@ model UpdateSourceRecord {
   /**
    * Update operation type for assets.
    */
-  `op`: UpdateOperationKind;
+  `op`: updateOperationKind;
 
   /**
    * Update source record.
@@ -882,7 +886,7 @@ model UpdateQnaRecord {
   /**
    * Update operation type for assets.
    */
-  `op`: UpdateOperationKind;
+  `op`: updateOperationKind;
 
   /**
    * QnA record.
