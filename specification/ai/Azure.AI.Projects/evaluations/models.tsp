@@ -166,6 +166,6 @@ model AgentEvaluation {
   @doc("Status of the agent evaluation. Options: Running, Succeeded, Failed.")
   status: string;
 
-  @doc("The agent evaluation results.")
-  results?: Array<AgentEvaluationResult>;
+  @doc("The agent evaluation result.")
+  result?: Array<AgentEvaluationResult>;
 }
