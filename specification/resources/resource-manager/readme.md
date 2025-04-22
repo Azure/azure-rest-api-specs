@@ -85,10 +85,6 @@ tag: package-changes-2022-05
 tag: package-snapshots-2022-11
 ```
 
-``` yaml $(package-bicep)
-tag: package-bicep-2023-11
-```
-
 ### Tag: package-policy-2025-03-stable
 
 These settings apply only when `--tag=package-policy-2025-03-stable` is specified on the command line.
@@ -163,15 +159,6 @@ These settings apply only when `--tag=package-policy-2024-04` is specified on th
 ```yaml $(tag) == 'package-policy-2024-04'
 input-file:
   - Microsoft.Authorization/stable/2024-04-01/policyAssignments.json
-```
-
-### Tag: package-bicep-2023-11
-
-These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-bicep-2023-11'
-input-file:
-  - Microsoft.Resources/stable/2023-11-01/bicepClient.json
 ```
 
 ### Tag: package-policy-2023-04
@@ -1749,5 +1736,4 @@ batch:
   - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
-  - package-bicep: true
 ```
