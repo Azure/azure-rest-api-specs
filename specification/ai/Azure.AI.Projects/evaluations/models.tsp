@@ -97,6 +97,7 @@ model SamplingConfiguration {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
 model RedactionConfiguration {
+  @doc("Redact score properties. If not specified, the default is to redact in production.")
   redactScoreProperties?: boolean;
 }
 
