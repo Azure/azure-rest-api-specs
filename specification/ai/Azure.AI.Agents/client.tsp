@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.AI.Agents;
 
 @@clientName(Azure.AI.Agents, "AgentsClient", "python, javascript");
-@@clientName(Azure.AI.Agents.Persistent, "PersistentAgentsClient", "csharp, java");
+@@clientName(Azure.AI.Agents, "PersistentAgentsClient", "csharp, java");
 
 // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
 // operation that exposes the underlying data directly.
