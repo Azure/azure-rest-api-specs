@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./CustomLocation.tsp";
 import "./ResourceSyncRule.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -44,3 +45,4 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+@@doc(Operations.list, "Lists all available Custom Locations operations.");

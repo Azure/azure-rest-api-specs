@@ -74,3 +74,12 @@ interface ResourceSyncRules {
 @@doc(ResourceSyncRules.update::parameters.properties,
   "The updatable fields of an existing Resource Sync Rule."
 );
+@@summary(ResourceSyncRules.listByCustomLocationID,
+  "Lists all Resource Sync Rules in a Custom Location."
+);
+@@summary(ResourceSyncRules.get, "Gets a Resource Sync Rule.");
+@@summary(ResourceSyncRules.createOrUpdate,
+  "Creates or updates a Resource Sync Rule."
+);
+@@summary(ResourceSyncRules.update, "Updates a Resource Sync Rule.");
+@@summary(ResourceSyncRules.delete, "Deletes a Resource Sync Rule.");

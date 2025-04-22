@@ -218,7 +218,8 @@ model PatchableCustomLocations {
  * EnabledResourceType definition.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model EnabledResourceType extends ProxyResource {
+model EnabledResourceType
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * The set of properties for EnabledResourceType specific to a Custom Location
    */

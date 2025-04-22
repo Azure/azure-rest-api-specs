@@ -1,9 +1,6 @@
 {
   "parameters": {
     "api-version": "2021-08-31-preview",
-    "subscriptionId": "11111111-2222-3333-4444-555555555555",
-    "resourceGroupName": "testresourcegroup",
-    "resourceName": "customLocation01",
     "childResourceName": "resourceSyncRule01",
     "parameters": {
       "properties": {
@@ -12,26 +9,22 @@
       "tags": {
         "tier": "testing"
       }
-    }
+    },
+    "resourceGroupName": "testresourcegroup",
+    "resourceName": "customLocation01",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ExtendedLocation/customLocations/customLocation01/resourceSyncRules/resourceSyncRule01",
         "name": "resourceSyncRule01",
         "type": "Microsoft.ExtendedLocation/customLocations/resourceSyncRules",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ExtendedLocation/customLocations/customLocation01/resourceSyncRules/resourceSyncRule01",
         "location": "West US",
-        "tags": {
-          "tier": "testing"
-        },
         "properties": {
-          "provisioningState": "Patching",
-          "targetResourceGroup": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/",
           "priority": 999,
+          "provisioningState": "Patching",
           "selector": {
-            "matchLabels": {
-              "key1": "value1"
-            },
             "matchExpressions": [
               {
                 "key": "key4",
@@ -40,18 +33,27 @@
                   "value4"
                 ]
               }
-            ]
-          }
+            ],
+            "matchLabels": {
+              "key1": "value1"
+            }
+          },
+          "targetResourceGroup": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/"
         },
         "systemData": {
+          "createdAt": "2021-07-16T23:17:11.7353229Z",
           "createdBy": "string",
           "createdByType": "Application",
-          "createdAt": "2021-07-16T23:17:11.7353229Z",
+          "lastModifiedAt": "2021-07-16T23:28:00.5870852Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "Application",
-          "lastModifiedAt": "2021-07-16T23:28:00.5870852Z"
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "tier": "testing"
         }
       }
     }
-  }
+  },
+  "operationId": "ResourceSyncRules_Update",
+  "title": "Update Resource Sync Rule"
 }

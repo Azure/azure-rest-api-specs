@@ -106,3 +106,21 @@ interface CustomLocations {
 @@doc(CustomLocations.findTargetResourceGroup::parameters.body,
   "Parameters of the find target resource group request."
 );
+@@summary(CustomLocations.update, "Updates a Custom Location.");
+@@summary(CustomLocations.findTargetResourceGroup,
+  "Gets matching target resource group for resource sync."
+);
+@@summary(CustomLocations.listByResourceGroup,
+  "Gets a list of Custom Locations in the specified subscription and resource group."
+);
+@@summary(CustomLocations.listBySubscription,
+  "Gets a list of Custom Locations in a subscription."
+);
+@@summary(CustomLocations.get, "Gets a Custom Location.");
+@@summary(CustomLocations.createOrUpdate,
+  "Creates or updates a Custom Location."
+);
+@@summary(CustomLocations.delete, "Deletes a Custom Location.");
+@@summary(CustomLocations.listEnabledResourceTypes,
+  "Gets the list of Enabled Resource Types."
+);

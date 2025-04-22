@@ -1,4 +1,3 @@
-import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -33,3 +32,12 @@ using Microsoft.ExtendedLocation;
 @@clientName(ResourceSyncRules.update::parameters.properties, "parameters");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ResourceSyncRule.properties);
+#suppress "@azure-tools/typespec-azure-core/no-openapi"
+@@OpenAPI.extension(CustomLocations.update::parameters.properties,
+  "x-ms-client-flatten",
+  true
+);
+@@OpenAPI.extension(ResourceSyncRules.update::parameters.properties,
+  "x-ms-client-flatten",
+  true
+);
