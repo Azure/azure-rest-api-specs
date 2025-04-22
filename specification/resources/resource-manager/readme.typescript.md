@@ -15,7 +15,6 @@ batch:
   - package-policy: true
   - package-links: true
   - package-managedapplications: true
-  - package-templatespecs: true
   - package-subscriptions: true
   - package-changes: true
   - package-deploymentstacks: true
@@ -74,12 +73,6 @@ typescript:
 typescript:
   package-name: "@azure/arm-managedapplications"
   output-folder: "$(typescript-sdks-folder)/sdk/managedapplications/arm-managedapplications"
-```
-
-```yaml $(typescript) && $(package-templatespecs) && !$(profile-content)
-typescript:
-  package-name: "@azure/arm-templatespecs"
-  output-folder: "$(typescript-sdks-folder)/sdk/templatespecs/arm-templatespecs"
 ```
 
 ```yaml $(typescript) && $(package-subscriptions) && !$(profile-content)

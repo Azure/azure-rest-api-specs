@@ -84,14 +84,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-``` yaml $(go) && $(track2) && $(package-templatespecs)
-license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/resources/armtemplatespecs
-module: github.com/Azure/azure-sdk-for-go/$(module-name)
-output-folder: $(go-sdk-folder)/$(module-name)
-azure-arm: true
-```
-
 ``` yaml $(go) && $(track2) && $(package-changes)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/resources/armchanges

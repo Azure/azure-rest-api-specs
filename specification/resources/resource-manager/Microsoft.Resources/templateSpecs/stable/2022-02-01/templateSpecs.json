@@ -3,7 +3,7 @@
   "info": {
     "title": "TemplateSpecsClient",
     "description": "The APIs listed in this specification can be used to manage Template Spec resources through the Azure Resource Manager.",
-    "version": "2019-06-01-preview"
+    "version": "2022-02-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -550,6 +550,162 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Resources/builtInTemplateSpecs/{templateSpecName}": {
+      "get": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_GetBuiltIn",
+        "description": "Gets a built-in Template Spec with a given name.",
+        "x-ms-examples": {
+          "TemplateSpecs_GetBuiltIn": {
+            "$ref": "./examples/BuiltInTemplateSpecsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecExpandParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the built-in Template Spec.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpec"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/builtInTemplateSpecs/": {
+      "get": {
+        "tags": [
+          "TemplateSpecs"
+        ],
+        "operationId": "TemplateSpecs_ListBuiltIns",
+        "description": "Lists built-in Template Specs.",
+        "x-ms-examples": {
+          "TemplateSpecs_ListBuiltIns": {
+            "$ref": "./examples/BuiltInTemplateSpecsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateSpecExpandParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of built-in Template Specs.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/builtInTemplateSpecs/{templateSpecName}/versions": {
+      "get": {
+        "tags": [
+          "TemplateSpecVersions"
+        ],
+        "operationId": "TemplateSpecVersions_ListBuiltIns",
+        "description": "Lists all the Template Spec versions in the specified built-in Template Spec.",
+        "x-ms-examples": {
+          "TemplateSpecVersions_ListBuiltIns": {
+            "$ref": "./examples/BuiltInTemplateSpecVersionsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of built-in Template Spec versions.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/builtInTemplateSpecs/{templateSpecName}/versions/{templateSpecVersion}": {
+      "get": {
+        "tags": [
+          "TemplateSpecVersions"
+        ],
+        "operationId": "TemplateSpecVersions_GetBuiltIn",
+        "description": "Gets a Template Spec version from a specific built-in Template Spec.",
+        "x-ms-examples": {
+          "TemplateSpecVersions_GetBuiltIn": {
+            "$ref": "./examples/BuiltInTemplateSpecVersionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateSpecNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the built-in Template Spec version.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/TemplateSpecsError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -601,6 +757,10 @@
           "maxLength": 64,
           "description": "Template Spec display name."
         },
+        "metadata": {
+          "type": "object",
+          "description": "The Template Spec metadata. Metadata is an open-ended object and is typically a collection of key-value pairs."
+        },
         "versions": {
           "type": "object",
           "readOnly": true,
@@ -612,6 +772,7 @@
       }
     },
     "TemplateSpecsListResult": {
+      "type": "object",
       "description": "List of Template Specs.",
       "properties": {
         "value": {
@@ -688,7 +849,7 @@
           "readOnly": true,
           "type": "object",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
     },
@@ -731,25 +892,37 @@
       "type": "object",
       "description": "Template Spec Version properties.",
       "properties": {
-        "artifacts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TemplateSpecArtifact"
-          },
-          "description": "An array of Template Spec artifacts."
-        },
         "description": {
           "type": "string",
           "maxLength": 4096,
           "description": "Template Spec version description."
         },
-        "template": {
+        "linkedTemplates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedTemplateArtifact"
+          },
+          "description": "An array of linked template artifacts.",
+          "x-ms-identifiers": [
+            "path"
+          ]
+        },
+        "metadata": {
           "type": "object",
-          "description": "The Azure Resource Manager template content."
+          "description": "The version metadata. Metadata is an open-ended object and is typically a collection of key-value pairs."
+        },
+        "mainTemplate": {
+          "type": "object",
+          "description": "The main Azure Resource Manager template content."
+        },
+        "uiFormDefinition": {
+          "type": "object",
+          "description": "The Azure Resource Manager template UI definition content."
         }
       }
     },
     "TemplateSpecVersionsListResult": {
+      "type": "object",
       "description": "List of Template Specs versions",
       "properties": {
         "value": {
@@ -766,55 +939,22 @@
         }
       }
     },
-    "TemplateSpecArtifact": {
+    "LinkedTemplateArtifact": {
       "type": "object",
-      "discriminator": "kind",
-      "description": "Represents a Template Spec artifact.",
+      "description": "Represents a Template Spec artifact containing an embedded Azure Resource Manager template for use as a linked template.",
       "properties": {
         "path": {
           "type": "string",
           "description": "A filesystem safe relative path of the artifact."
         },
-        "kind": {
-          "type": "string",
-          "description": "The kind of artifact.",
-          "enum": [
-            "template"
-          ],
-          "x-ms-enum": {
-            "name": "TemplateSpecArtifactKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "template",
-                "description": "The artifact represents an embedded Azure Resource Manager template."
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "kind",
-        "path"
-      ]
-    },
-    "TemplateSpecTemplateArtifact": {
-      "type": "object",
-      "x-ms-discriminator-value": "template",
-      "description": "Represents a Template Spec artifact containing an embedded Azure Resource Manager template.",
-      "properties": {
         "template": {
           "type": "object",
           "description": "The Azure Resource Manager template."
         }
       },
       "required": [
-        "template"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TemplateSpecArtifact"
-        }
+        "template",
+        "path"
       ]
     },
     "TemplateSpecVersionInfo": {
@@ -841,9 +981,10 @@
       }
     },
     "TemplateSpecsError": {
+      "type": "object",
       "properties": {
         "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       },
       "description": "Template Specs error response."

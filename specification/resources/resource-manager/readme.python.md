@@ -81,11 +81,6 @@ batch:
   - tag: package-deploymentscripts-2020-10
   - tag: package-deploymentscripts-2019-10-preview
   - multiapiscript-deploymentscripts: true
-  - tag: package-templatespecs-2022-02
-  - tag: package-templatespecs-2021-05
-  - tag: package-templatespecs-2021-03-preview
-  - tag: package-templatespecs-2019-06-preview
-  - multiapiscript-templatespecs: true
   - tag: package-deploymentstacks-2024-03
   - tag: package-deploymentstacks-2022-08-preview
   - multiapiscript-deploymentstacks: true
@@ -147,15 +142,6 @@ clear-output-folder: false
 package-name: azure-mgmt-resource#deploymentscripts
 multiapiscript: true
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts
-perform-load: false
-clear-output-folder: false
-```
-
-
-```yaml $(multiapiscript-templatespecs)
-package-name: azure-mgmt-resource#templatespecs
-multiapiscript: true
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs
 perform-load: false
 clear-output-folder: false
 ```
@@ -748,47 +734,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 default-api-version: "2023-08-01"
 namespace: azure.mgmt.resource.deploymentscripts.v2023_08_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts/v2023_08_01
-```
-
-### Tag: package-templatespecs-2019-06-preview and python
-
-These settings apply only when `--tag=package-templatespecs-2019-06-preview` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
-namespace: azure.mgmt.resource.templatespecs.v2019_06_01_preview
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2019_06_01_preview
-```
-
-### Tag: package-templatespecs-2021-03-preview and python
-
-These settings apply only when `--tag=package-templatespecs-2021-03-preview` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-templatespecs-2021-03-preview'
-namespace: azure.mgmt.resource.templatespecs.v2021_03_01_preview
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_03_01_preview
-```
-
-### Tag: package-templatespecs-2021-05 and python
-
-These settings apply only when `--tag=package-templatespecs-2021-05` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-templatespecs-2021-05'
-namespace: azure.mgmt.resource.templatespecs.v2021_05_01
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2021_05_01
-```
-
-### Tag: package-templatespecs-2022-02 and python
-
-These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-templatespecs-2022-02'
-default-api-version: "2022-02-01"
-namespace: azure.mgmt.resource.templatespecs.v2022_02_01
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2022_02_01
 ```
 
 ### Tag: package-deploymentstacks-2022-08-preview and python

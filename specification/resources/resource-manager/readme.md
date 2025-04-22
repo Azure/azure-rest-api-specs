@@ -69,10 +69,6 @@ tag: package-managedapplications-2018-06
 tag: package-deploymentscripts-2023-08
 ```
 
-``` yaml $(package-templatespecs)
-tag: package-templatespecs-2022-02
-```
-
 ``` yaml $(package-deploymentstacks)
 tag: package-deploymentstacks-2024-03
 ```
@@ -737,42 +733,6 @@ override-info:
   title: PolicyClient
 ```
 
-### Tag: package-templatespecs-2022-02
-
-These settings apply only when `--tag=package-templatespecs-2022-02` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2022-02'
-input-file:
-- Microsoft.Resources/stable/2022-02-01/templateSpecs.json
-```
-
-### Tag: package-templatespecs-2021-05
-
-These settings apply only when `--tag=package-templatespecs-2021-05` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2021-05'
-input-file:
-- Microsoft.Resources/stable/2021-05-01/templateSpecs.json
-```
-
-### Tag: package-templatespecs-2021-03-preview
-
-These settings apply only when `--tag=package-templatespecs-2021-03-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2021-03-preview'
-input-file:
-- Microsoft.Resources/preview/2021-03-01-preview/templateSpecs.json
-```
-
-### Tag: package-templatespecs-2019-06-preview
-
-These settings apply only when `--tag=package-templatespecs-2019-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
-input-file:
-- Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
-```
-
 ### Tag: package-deploymentstacks-2022-08-preview
 
 These settings apply only when `--tag=package-deploymentstacks-2022-08-preview` is specified on the command line.
@@ -1275,26 +1235,6 @@ directive:
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: OperationsAPI will come from Resources
-  - suppress: OperationsAPIImplementation
-    from: templateSpecs.json
-    where: $.paths
-    reason: OperationsAPI will come from Resources
-  - suppress: R3006
-    from: templateSpecs.json
-    where:
-      - $.definitions.TemplateSpec.properties
-      - $.definitions.TemplateSpecVersion.properties
-      - $.definitions.TemplateSpecUpdateModel.properties
-      - $.definitions.TemplateSpecVersionUpdateModel.properties
-    reason: Currently systemData is not allowed
-  - suppress: TrackedResourceListByImmediateParent
-    from: templateSpecs.json
-    where: $.definitions
-    reason: Tooling issue
-  - suppress: TrackedResourceListByResourceGroup
-    from: templateSpecs.json
-    where: $.definitions.TemplateSpecVersion
-    reason: Tooling issue
   - from: deploymentStacks.json
     suppress: TrackedResourcePatchOperation
     where: $.definitions
@@ -1745,7 +1685,6 @@ batch:
   - package-links: true
   - package-managedapplications: true
   - package-deploymentscripts: true
-  - package-templatespecs: true
   - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
