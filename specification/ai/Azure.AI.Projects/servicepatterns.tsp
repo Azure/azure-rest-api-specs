@@ -73,29 +73,6 @@ namespace Azure.AI.Projects.ServicePatterns {
     */
 
     @doc(
-      "Create a new or replace an existing {name} with the given version id",
-      TEntityType
-    )
-    @Http.put
-    createVersion is Azure.Core.Foundations.ResourceOperation<
-      TEntityType,
-      {
-        @doc(
-          "The specific version id of the {name} to create or replace.",
-          TEntityType
-        )
-        @Rest.segment("versions")
-        @Http.path
-        version: string;
-
-        @doc("The definition of the {name} to create", TEntityType)
-        @Http.bodyRoot
-        body: TEntityType;
-      },
-      Azure.Core.Foundations.ResourceCreatedOrOkResponse<TEntityType>
-    >;
-
-    @doc(
       "Create a new or update an existing {name} with the given version id",
       TEntityType
     )
