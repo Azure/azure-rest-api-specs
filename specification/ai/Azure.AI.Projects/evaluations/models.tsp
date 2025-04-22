@@ -82,7 +82,7 @@ model Evaluation {
 @doc("Definition for sampling strategy.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
-model SamplingConfiguration {
+model AgentEvaluationSamplingConfiguration {
   @doc("Name of the sampling strategy.")
   name: string;
 
@@ -96,7 +96,7 @@ model SamplingConfiguration {
 @doc("The redaction configuration will allow the user to control what is redacted.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v_latest)
-model RedactionConfiguration {
+model AgentEvaluationRedactionConfiguration {
   @doc("Redact score properties. If not specified, the default is to redact in production.")
   redactScoreProperties?: boolean;
 }
@@ -115,10 +115,10 @@ model AgentEvaluationRequest {
   evaluators: Record<EvaluatorConfiguration>;
 
   @doc("Sampling configuration for the evaluation.")
-  samplingConfiguration?: SamplingConfiguration;
+  samplingConfiguration?: AgentEvaluationSamplingConfiguration;
 
   @doc("Redaction configuration for the evaluation.")
-  redactionConfiguration?: RedactionConfiguration;
+  redactionConfiguration?: AgentEvaluationRedactionConfiguration;
 
   @doc("Optional and temporary way to pass the AppInsights connection string to the evaluator. When this string is not null, the evaluation results will be logged to Azure AppInsights.")
   appInsightsConnectionString?: string;
