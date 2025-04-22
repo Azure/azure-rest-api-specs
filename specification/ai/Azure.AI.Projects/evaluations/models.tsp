@@ -89,7 +89,7 @@ model SamplingConfiguration {
   @doc("Percentage of sampling per hour (0-100).")
   samplingPercent: float;
 
-  @doc("Maximum request rate per hour (0 to 10,000).")
+  @doc("Maximum request rate per hour (0 to 1000).")
   maxRequestRate: float;
 }
 
