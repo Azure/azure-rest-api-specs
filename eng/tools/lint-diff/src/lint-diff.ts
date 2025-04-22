@@ -1,9 +1,9 @@
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { pathExists } from "./util.js";
 import { getRunList } from "./processChanges.js";
-import { runChecks } from "./runChecks.js";
+import { runChecks, getAutorestErrors } from "./runChecks.js";
 import { correlateRuns } from "./correlateResults.js";
-import { generateReport } from "./generateReport.js";
+import { generateAutoRestErrorReport, generateLintDiffReport } from "./generateReport.js";
 
 function usage() {
   console.log("TODO: Write up usage");
@@ -116,9 +116,24 @@ async function runLintDiff(
   const beforeChecks = await runChecks(beforePath, beforeList);
   const afterChecks = await runChecks(afterPath, afterList);
 
+  // If afterChecks has AutoRest errors, fail the run.
+  const autoRestErrors = afterChecks
+    .map((result) => {
+      return { result, errors: getAutorestErrors(result) };
+    })
+    .filter((result) => result.errors.length > 0);
+  if (autoRestErrors.length > 0) {
+    generateAutoRestErrorReport(autoRestErrors, outFile);
+    console.log("AutoRest errors found. See workflow summary for details.");
+
+    process.exitCode = 1;
+    console.error(`AutoRest errors found. See workflow summary report in ${outFile} for details.`);
+    return;
+  }
+
   const runCorrelations = await correlateRuns(beforePath, beforeChecks, afterChecks);
 
-  const pass = await generateReport(
+  const pass = await generateLintDiffReport(
     runCorrelations,
     affectedSwaggers,
     outFile,
