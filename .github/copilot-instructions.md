@@ -16,23 +16,24 @@
     - If a branch already exists and if it is not same as current branch then prompt user to run command `git checkout <branch name>` to switch to the branch.
 
 ### Steps to generate and release SDK from TypeSpec API specification
-- Verify if the user has a TypeSpec project path for API specification.
-    - If not, then prompt user to create a TypeSpec for API specification.
-    - If user has a TypeSpec project path, then prompt user to provide TypeSpec project name and  then verify if the path is a valid TypeSpec project.
-- Run TypeSpec validation and make sure there are no TypeSpec validation
+- Check if main.tsp and tspconfig.yaml is open in editor and use the parent path of the main.tsp or tspconfig.yaml as default TypeSpec project root path.
+- If a TypeSpec project root path is not available, then prompt user to select the TypeSpec project root path.
+- Run TypeSpec validation and make sure there are no TypeSpec validation errors.
     - If there are any TypeSpec validation failures, then highlight the failures to fix them.
-- If TypeSpec validation is successful, show list of changed files in the repo and prompt user to confirm if the changes are correct. 
+    - Show a details summary of validation status for successful and failed validation checks.
+        - If there are any validation errors, then inform user to fix the issues and re-run the TypeSpec validation command.
+        - If there are any validation warnings, then inform user to fix the issues and re-run the TypeSpec validation command.
+        - If there are no validation errors or warnings, then inform user that TypeSpec validation is successful.
+- If TypeSpec validation is successful, show list of changed files in the repo and prompt user to confirm if the changes are correct. Ignore uncommitted changes in .github folder and .vscode folder.
     - If the user confirms, then proceed with the next steps.
         - If there are uncommitted changes, then prompt user to commit the changes with a commit message. 
             - Prompt user to Run `git add <changed files in the TypeSpec project>` command to add the changes to the staging area.
             - Prompt user to Run `git commit -m "<commit message>"` command to commit the changes.
     - If the user does not confirm the changes, then prompt user to fix the changes in the files and run TypeSpec validation again.
-- Next step is to Verify that the user has a GitHub account and is logged in to GitHub account using GitHub CLI `gh auth login`.
-    - if GitHub login fails then prompt user to make sure to install GitHub CLI and login to GitHub account using `gh auth login` command.
-    - If user is logged in to GitHub account, then proceed with the next steps.
-- Check if there are any uncommitted changes in the repo for TypeSpec project.    
+- Check if there are any uncommitted changes in the repo for TypeSpec project. Ignore uncommitted changes in .github folder and .vscode folder.
     - Push the changes to GitHub remote. Make sure that remote branch name is not "main".
         - Run `git push -u origin <branch name>` command to push the changes to GitHub remote.
+        - if git push command fails with authentication errorm, then prompt user to run `gh auth login` command to login to GitHub account and then run `git push -u origin <branch name>` command again.
 - Check if a pull request already exists for the current branch. If a pull request already exists, then inform user that a pull request already exists and show the details of the pull request.
     - If a pull request exists, then show the status of the pull request.
         - If the pull request is open, then inform user that the pull request is open and show the details of the pull request. Show the check status of the pull request
@@ -68,9 +69,7 @@
             - If target lifecycle is Private Preview, then inform user that SDK generation and release is not required for Private Preview.
     - Prompt user to provide the following details for the release plan work item:
         - Service Tree ID for the Service
-        - Service Name
         - Product Service tree ID for the Product
-        - Product Name
         - Expected release timeline in Month and Year (e.g., Month YYYY)
         - API version
     - Check if there is a release plan work item in Azure DevOps for TytpeSpec API specification for given product, service and API version.
