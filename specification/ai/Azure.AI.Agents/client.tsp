@@ -9,6 +9,19 @@ using Azure.AI.Agents;
 
 // Trivial response value containers should treat these containers as internal details and instead surface a shimmed
 // operation that exposes the underlying data directly.
+
+@@clientName(Agent, "PersistentAgent", "csharp, java");
+@@clientName(AgentObject, "PersistentAgentObject", "csharp,java");
+@@clientName(AgentsApiResponseFormat, "PersistentAgentsApiResponseFormat", "csharp,java");
+@@clientName(AgentsApiResponseFormatMode, "PersistentAgentsApiResponseFormatMode", "csharp,java");
+@@clientName(AgentsApiToolChoiceOptionMode, "PersistentAgentsApiToolChoiceOptionMode", "csharp,java");
+@@clientName(AgentsNamedToolChoice, "PersistentAgentsNamedToolChoice", "csharp,java");
+@@clientName(AgentsNamedToolChoiceType, "PersistentAgentsNamedToolChoiceType", "csharp,java");
+@@clientName(AgentStreamEvent, "PersistentAgentStreamEvent", "csharp,java");
+@@clientName(AgentThread, "PersistentAgentThread", "csharp,java");
+@@clientName(AgentThreadCreationOptions, "PersistentAgentThreadCreationOptions", "csharp,java");
+@@clientName(AgentThreadObject, "PersistentAgentThreadObject", "csharp,java");
+
 @@clientName(AgentDeletionStatus, "InternalAgentDeletionStatus", "csharp");
 @@access(deleteAgent, Access.internal, "csharp");
 @@clientName(deleteAgent, "InternalDeleteAgent", "csharp");
