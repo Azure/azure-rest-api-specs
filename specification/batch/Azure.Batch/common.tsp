@@ -393,7 +393,7 @@ alias CommonParameters = {
   @clientName("timeOutInSeconds", "java")
   @clientName("timeOutInSeconds", "csharp")
   @clientName("timeOutInSeconds", "javascript")
-  @clientName("timeout", "python")
+  @clientName("timeout", "go,python")
   timeOut?: int32 = 30;
 
   @doc("""
