@@ -223,8 +223,11 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create or Update Session Pool": {
-            "$ref": "./examples/SessionPools_CreateOrUpdate.json"
+          "Create or Update Session Pool with lifecycle type Timed": {
+            "$ref": "./examples/SessionPools_LifecycleTimed_CreateOrUpdate.json"
+          },
+          "Create or Update Session Pool with lifecycle OnContainerExit Timed": {
+            "$ref": "./examples/SessionPools_LifecycleOnContainerExit_CreateOrUpdate.json"
           }
         }
       },
@@ -382,19 +385,35 @@
       "description": "Dynamic pool configuration.",
       "type": "object",
       "properties": {
-        "executionType": {
-          "description": "The execution type of the session pool.",
+        "lifecycleConfiguration": {
+          "description": "The lifecycle configuration of a session in the dynamic session pool",
+          "$ref": "#/definitions/LifecycleConfiguration"
+        }
+      }
+    },
+    "LifecycleConfiguration": {
+      "description": "The lifecycle configuration properties of a session in the dynamic session pool",
+      "type": "object",
+      "properties": {
+        "lifecycleType": {
+          "description": "The lifecycle type of the session pool.",
           "enum": [
-            "Timed"
+            "Timed",
+            "OnContainerExit"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ExecutionType",
+            "name": "LifecycleType",
             "modelAsString": true
           }
         },
         "cooldownPeriodInSeconds": {
-          "description": "The cooldown period of a session in seconds.",
+          "description": "The cooldown period of a session in seconds when the lifecycle type is 'Timed'.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxAlivePeriodInSeconds": {
+          "description": "The maximum alive period of a session in seconds when the lifecycle type is 'OnContainerExit'.",
           "type": "integer",
           "format": "int32"
         }
@@ -476,6 +495,16 @@
         "resources": {
           "$ref": "#/definitions/SessionContainerResources",
           "description": "Container resource requirements."
+        },
+        "probes": {
+          "description": "List of probes for the container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionProbe"
+          },
+          "x-ms-identifiers": [
+            "type"
+          ]
         }
       }
     },
@@ -529,6 +558,131 @@
             "name": "SessionNetworkStatus",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "SessionProbe": {
+      "description": "Session probe configuration.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Denotes the type of probe. Can be Liveness or Startup, Readiness probe is not supported in sessions. Type must be unique for each probe within the context of a list of probes (SessionProbes).",
+          "type": "string",
+          "enum": [
+            "Liveness",
+            "Startup"
+          ],
+          "x-ms-enum": {
+            "name": "SessionProbeType",
+            "modelAsString": true
+          }
+        },
+        "httpGet": {
+          "description": "HTTPGet specifies the http request to perform.",
+          "type": "object",
+          "required": [
+            "port"
+          ],
+          "properties": {
+            "host": {
+              "description": "Host name to connect to, defaults to the pod IP. You probably want to set \"Host\" in httpHeaders instead.",
+              "type": "string"
+            },
+            "httpHeaders": {
+              "description": "Custom headers to set in the request. HTTP allows repeated headers.",
+              "type": "array",
+              "items": {
+                "description": "HTTPHeader describes a custom header to be used in HTTP probes",
+                "type": "object",
+                "required": [
+                  "name",
+                  "value"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "The header field name",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "The header field value",
+                    "type": "string"
+                  }
+                }
+              },
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "path": {
+              "description": "Path to access on the HTTP server.",
+              "type": "string"
+            },
+            "port": {
+              "description": "Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "scheme": {
+              "description": "Scheme to use for connecting to the host. Defaults to HTTP.",
+              "enum": [
+                "HTTP",
+                "HTTPS"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "Scheme",
+                "modelAsString": true
+              }
+            }
+          }
+        },
+        "tcpSocket": {
+          "description": "TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported.",
+          "type": "object",
+          "required": [
+            "port"
+          ],
+          "properties": {
+            "host": {
+              "description": "Optional: Host name to connect to, defaults to the pod IP.",
+              "type": "string"
+            },
+            "port": {
+              "description": "Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "failureThreshold": {
+          "description": "Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1. Maximum value is 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "initialDelaySeconds": {
+          "description": "Number of seconds after the container has started before liveness probes are initiated. Minimum value is 1. Maximum value is 60.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "periodSeconds": {
+          "description": "How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1. Maximum value is 240.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "successThreshold": {
+          "description": "Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1. Maximum value is 10.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "terminationGracePeriodSeconds": {
+          "description": "Optional duration in seconds the pod needs to terminate gracefully upon probe failure. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. If this value is nil, the pod's terminationGracePeriodSeconds will be used. Otherwise, this value overrides the value provided by the pod spec. Value must be non-negative integer. The value zero indicates stop immediately via the kill signal (no opportunity to shut down). This is an alpha field and requires enabling ProbeTerminationGracePeriod feature gate. Maximum value is 3600 seconds (1 hour)",
+          "type": "integer",
+          "format": "int64"
+        },
+        "timeoutSeconds": {
+          "description": "Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. Maximum value is 240.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -688,6 +842,18 @@
       "description": "Container App session pool updatable properties.",
       "type": "object",
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
         "identity": {
           "description": "Managed identities needed by a session pool to interact with other Azure services to not maintain any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"

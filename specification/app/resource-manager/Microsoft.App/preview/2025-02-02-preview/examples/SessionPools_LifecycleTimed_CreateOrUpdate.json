@@ -18,8 +18,10 @@
           "readySessionInstances": 100
         },
         "dynamicPoolConfiguration": {
-          "executionType": "Timed",
-          "cooldownPeriodInSeconds": 600
+          "lifecycleConfiguration": {
+            "lifecycleType": "OnContainerExit",
+            "maxAlivePeriodInSeconds": 86400
+          }
         },
         "customContainerTemplate": {
           "containers": [
@@ -78,8 +80,10 @@
             "readySessionInstances": 100
           },
           "dynamicPoolConfiguration": {
-            "executionType": "Timed",
-            "cooldownPeriodInSeconds": 600
+            "lifecycleConfiguration": {
+              "lifecycleType": "Timed",
+              "maxAlivePeriodInSeconds": 600
+            }
           },
           "customContainerTemplate": {
             "containers": [
@@ -136,8 +140,10 @@
             "readySessionInstances": 100
           },
           "dynamicPoolConfiguration": {
-            "executionType": "Timed",
-            "cooldownPeriodInSeconds": 600
+            "lifecycleConfiguration": {
+              "lifecycleType": "Timed",
+              "maxAlivePeriodInSeconds": 600
+            }
           },
           "customContainerTemplate": {
             "containers": [
@@ -185,4 +191,3 @@
     }
   }
 }
-
