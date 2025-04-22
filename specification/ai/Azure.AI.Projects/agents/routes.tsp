@@ -193,7 +193,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates and waits for a run to finish, returning the completed Run (including its outputs).")
   @post
-  @route("/agents/runs/run")
+  @route("/conversations/runs")
   run is Azure.Core.Foundations.Operation<
     {
       ...RunInputs;
@@ -205,7 +205,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-response-body"
   @Rest.action("stream")
   @post
-  @route("/agents/runs/stream")
+  @route("/conversations/runs/stream")
   stream is Azure.Core.Foundations.Operation<
     {
       ...RunInputs;
@@ -215,7 +215,7 @@ interface Agents {
 
   @doc("""
     Retrieves an existing run by its ID.
-    @route("/agents/runs/{run_id}")
+    @route("/conversations/runs/{run_id}")
     """)
   @get
   getRun is AgentOperations.ResourceRead<Run>;
@@ -226,19 +226,11 @@ interface Agents {
     """)
   @get
   listRuns is AgentOperations.ResourceList<Run>;
-}
 
-@doc("""
-  RUNS
-  
-  The interface is rooted at /runs.
-  Provides operations to manage and retrieve run-related data.
-  """)
-interface Runs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We want a custom operation name/shape."
   @doc("Lists the inputs for a specific run by its ID.")
   @get
-  @route("/runs/{runId}/listInputs")
+  @route("/conversations/runs/{runId}/listInputs")
   listRunInputs is Operation<
     {
       @doc("The ID of the run.")
