@@ -252,7 +252,7 @@ function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
   // Read the execution report to determine if the generation was successful
   const executionReportPath = path.join(
     commandInput.workingFolder,
-    `${commandInput.sdkLanguage}_tmp/execution-report.json`,
+    `${commandInput.sdkRepoName}_tmp/execution-report.json`,
   );
   return JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
 }
