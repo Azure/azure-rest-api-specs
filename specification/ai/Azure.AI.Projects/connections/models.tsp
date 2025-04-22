@@ -105,7 +105,7 @@ union ConnectionType {
   @doc("Azure Blob Storage, with specified container")
   AzureBlobStorage: "AzureBlob",
 
-  @doc("Azure Blob Storage, with container not specified (used by Assistants)")
+  @doc("Azure Blob Storage, with container not specified (used by Agents)")
   AzureStorageAccount: "AzureStorageAccount",
 
   @doc("Azure AI Search")
