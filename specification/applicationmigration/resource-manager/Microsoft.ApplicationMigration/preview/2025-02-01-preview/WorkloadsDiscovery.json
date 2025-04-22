@@ -1619,6 +1619,30 @@
         }
       }
     },
+    "BoolValue": {
+      "type": "string",
+      "description": "Represents an Enum with boolean values.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "BoolValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "Represents a true boolean value."
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "Represents a false boolean value."
+          }
+        ]
+      }
+    },
     "Collation": {
       "type": "object",
       "description": "Represents a Collation in PostgreSQL.",
@@ -2044,7 +2068,7 @@
     },
     "HasCustomDataTypes": {
       "type": "string",
-      "description": "Represents the presence of Oids in Tables under a DB.",
+      "description": "Represents the presence of custom data types in a DB.",
       "enum": [
         "true",
         "false"
@@ -2256,6 +2280,36 @@
         ]
       }
     },
+    "PgSqlAuthenticationMethod": {
+      "type": "string",
+      "description": "Represents the Auth method.",
+      "enum": [
+        "UNKNOWN",
+        "MD5",
+        "SCRAM_SHA_256"
+      ],
+      "x-ms-enum": {
+        "name": "PgSqlAuthenticationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "UNKNOWN Authentication method version."
+          },
+          {
+            "name": "MD5",
+            "value": "MD5",
+            "description": "MD5 Auth."
+          },
+          {
+            "name": "SCRAM_SHA_256",
+            "value": "SCRAM_SHA_256",
+            "description": "SCRAM_SHA_256 Auth."
+          }
+        ]
+      }
+    },
     "PgsqlDatabase": {
       "type": "object",
       "description": "The PGSQLDatabase resource definition.",
@@ -2363,6 +2417,15 @@
           "$ref": "#/definitions/HasCustomDataTypes",
           "description": "Whether the database has custom data types."
         },
+        "storageSizeInMb": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets storage size of PGSQL database."
+        },
+        "hasSuperUserCreatedObjects": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Gets or sets hasSuperUserCreatedObjects of PGSQL database."
+        },
         "errorCount": {
           "type": "integer",
           "format": "int64",
@@ -2450,6 +2513,15 @@
         "hasCustomDataTypes": {
           "$ref": "#/definitions/HasCustomDataTypes",
           "description": "Whether the database has custom data types."
+        },
+        "storageSizeInMb": {
+          "type": "number",
+          "format": "float",
+          "description": "Gets or sets storage size of PGSQL database."
+        },
+        "hasSuperUserCreatedObjects": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Gets or sets hasSuperUserCreatedObjects of PGSQL database."
         },
         "errorCount": {
           "type": "integer",
@@ -2648,6 +2720,66 @@
           "format": "int64",
           "description": "The maximum number of connections allowed in the instance"
         },
+        "hasCustomCasts": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom casts defined."
+        },
+        "hasCustomFtsParsers": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) parsers defined."
+        },
+        "hasCustomFtsTemplates": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) templates defined."
+        },
+        "tlsVersion": {
+          "$ref": "#/definitions/TlsVersion",
+          "description": "Specifies the TLS version used by the system."
+        },
+        "pgSqlAuthMethod": {
+          "$ref": "#/definitions/PgSqlAuthenticationMethod",
+          "description": "Specifies the PostgreSQL authentication method used by the system."
+        },
+        "supportsSsl": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system supports SSL connections."
+        },
+        "supportsIpv6Connections": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system supports IPv6 connections."
+        },
+        "supportsIpv4Connections": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system supports IPv4 connections."
+        },
+        "computeIopsCollected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of compute IOPS (Input/Output Operations Per Second) collected."
+        },
+        "storageIopsCollected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of storage IOPS (Input/Output Operations Per Second) collected."
+        },
+        "storageThroughPutCollected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The storage throughput collected, measured in units per second."
+        },
+        "isReadReplicaEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether read replica functionality is enabled."
+        },
+        "readReplicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of read replicas configured for the system."
+        },
+        "isDrEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether disaster recovery (DR) functionality is enabled."
+        },
         "tags": {
           "type": "array",
           "description": "Resource tags",
@@ -2762,6 +2894,66 @@
           "type": "integer",
           "format": "int64",
           "description": "The maximum number of connections allowed in the instance"
+        },
+        "hasCustomCasts": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom casts defined."
+        },
+        "hasCustomFtsParsers": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) parsers defined."
+        },
+        "hasCustomFtsTemplates": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system has custom full-text search (FTS) templates defined."
+        },
+        "tlsVersion": {
+          "$ref": "#/definitions/TlsVersion",
+          "description": "Specifies the TLS version used by the system."
+        },
+        "pgSqlAuthMethod": {
+          "$ref": "#/definitions/PgSqlAuthenticationMethod",
+          "description": "Specifies the PostgreSQL authentication method used by the system."
+        },
+        "supportsSsl": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system supports SSL connections."
+        },
+        "supportsIpv6Connections": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system supports IPv6 connections."
+        },
+        "supportsIpv4Connections": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether the system supports IPv4 connections."
+        },
+        "computeIopsCollected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of compute IOPS (Input/Output Operations Per Second) collected."
+        },
+        "storageIopsCollected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of storage IOPS (Input/Output Operations Per Second) collected."
+        },
+        "storageThroughPutCollected": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The storage throughput collected, measured in units per second."
+        },
+        "isReadReplicaEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether read replica functionality is enabled."
+        },
+        "readReplicaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of read replicas configured for the system."
+        },
+        "isDrEnabled": {
+          "$ref": "#/definitions/BoolValue",
+          "description": "Indicates whether disaster recovery (DR) functionality is enabled."
         },
         "tags": {
           "type": "array",
@@ -3036,6 +3228,48 @@
             "type": "string"
           }
         }
+      }
+    },
+    "TlsVersion": {
+      "type": "string",
+      "description": "Represents the TLS version.",
+      "enum": [
+        "UNKNOWN",
+        "Tls1_0",
+        "Tls1_1",
+        "Tls1_2",
+        "Tls1_3"
+      ],
+      "x-ms-enum": {
+        "name": "TlsVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "UNKNOWN TLS version."
+          },
+          {
+            "name": "Tls1_0",
+            "value": "Tls1_0",
+            "description": "TLS version 1.0."
+          },
+          {
+            "name": "Tls1_1",
+            "value": "Tls1_1",
+            "description": "TLS version 1.1."
+          },
+          {
+            "name": "Tls1_2",
+            "value": "Tls1_2",
+            "description": "TLS version 1.2."
+          },
+          {
+            "name": "Tls1_3",
+            "value": "Tls1_3",
+            "description": "TLS version 1.3."
+          }
+        ]
       }
     }
   },
