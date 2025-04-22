@@ -625,6 +625,128 @@
       }
     },
     "/threads": {
+      "get": {
+        "operationId": "ListThreads",
+        "description": "Gets a list of threads that were previously created.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "ListSortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ascending",
+                  "value": "asc",
+                  "description": "Specifies an ascending sort order."
+                },
+                {
+                  "name": "descending",
+                  "value": "desc",
+                  "description": "Specifies a descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested list of threads.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/AssistantThread"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
       "post": {
         "operationId": "CreateThread",
         "description": "Creates a new thread. Threads contain messages and can be run by assistants.",
@@ -3239,7 +3361,8 @@
         "fabric_dataagent",
         "sharepoint_grounding",
         "azure_ai_search",
-        "bing_custom_search"
+        "bing_custom_search",
+        "connected_agent"
       ],
       "x-ms-enum": {
         "name": "AssistantsNamedToolChoiceType",
@@ -3284,6 +3407,11 @@
             "name": "bingCustomSearch",
             "value": "bing_custom_search",
             "description": "Tool type `bing_custom_search`"
+          },
+          {
+            "name": "connectedAgent",
+            "value": "connected_agent",
+            "description": "Tool type `connected_agent`"
           }
         ]
       }
@@ -3581,6 +3709,49 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "ConnectedAgentDetails": {
+      "type": "object",
+      "description": "Information for connecting one agent to another as a tool",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the child agent."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the agent to be called."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what the agent does, used by the model to choose when and how to call the agent."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description"
+      ]
+    },
+    "ConnectedAgentToolDefinition": {
+      "type": "object",
+      "description": "The input definition information for a connected agent tool which defines a domain specific sub-agent",
+      "properties": {
+        "connected_agent": {
+          "$ref": "#/definitions/ConnectedAgentDetails",
+          "description": "The sub-agent to connect",
+          "x-ms-client-name": "connectedAgent"
+        }
+      },
+      "required": [
+        "connected_agent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "connected_agent"
     },
     "CreateAndRunThreadOptions": {
       "type": "object",

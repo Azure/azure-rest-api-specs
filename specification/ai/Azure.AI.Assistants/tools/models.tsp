@@ -99,6 +99,16 @@ model BingCustomSearchToolDefinition extends ToolDefinition {
   bingCustomSearch: SearchConfigurationList;
 }
 
+@doc("The input definition information for a connected agent tool which defines a domain specific sub-agent")
+model ConnectedAgentToolDefinition extends ToolDefinition {
+  @doc("The object type, which is always 'connected_agent'.")
+  type: "connected_agent";
+
+  @doc("The sub-agent to connect")
+  @encodedName("application/json", "connected_agent")
+  connectedAgent: ConnectedAgentDetails;
+}
+
 // Definition details: File Search
 
 /**
@@ -563,6 +573,7 @@ union AssistantsApiToolChoiceOptionMode {
   /** The model can pick between generating a message or calling a function. */
   auto: "auto",
 }
+
 /** Specifies a tool the model should use. Use to force the model to call a specific tool. */
 model AssistantsNamedToolChoice {
   /** the type of tool. If type is `function`, the function name must be set. */
@@ -599,6 +610,9 @@ union AssistantsNamedToolChoiceType {
 
   /** Tool type `bing_custom_search` */
   bingCustomSearch: "bing_custom_search",
+
+  /** Tool type `connected_agent` */
+  connectedAgent: "connected_agent",
 }
 
 /** The function name that will be used, if using the `function` tool */
@@ -631,6 +645,20 @@ model SearchConfigurationList {
   @maxItems(1)
   @encodedName("application/json", "search_configurations")
   searchConfigurations: SearchConfiguration[];
+}
+
+/**
+ * Information for connecting one agent to another as a tool
+ */
+model ConnectedAgentDetails {
+  @doc("The identifier of the child agent.")
+  id: string;
+
+  @doc("The name of the agent to be called.")
+  name: string;
+
+  @doc("A description of what the agent does, used by the model to choose when and how to call the agent.")
+  description: string;
 }
 
 /**

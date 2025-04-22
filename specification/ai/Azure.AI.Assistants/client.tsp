@@ -32,6 +32,8 @@ using Azure.AI.Assistants;
 @@clientName(FileDeletionStatus, "InternalFileDeletionStatus", "csharp");
 @@access(deleteFile, Access.internal, "csharp");
 @@clientName(deleteFile, "InternalDeleteFile", "csharp");
+@@access(listThreads, Access.internal, "csharp");
+@@clientName(listThreads, "InternalGetThreads", "csharp");
 @@access(uploadFile, Access.internal, "python, java, javascript");
 
 // In addition to top-level response value containers, trivial intermediate structure -- levels of single-use model
