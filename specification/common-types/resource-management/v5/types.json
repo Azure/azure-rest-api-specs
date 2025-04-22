@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Common types",
-    "version": "v5"
+    "version": "5.0"
   },
   "paths": {},
   "definitions": {
@@ -26,6 +26,7 @@
     },
     "AzureEntityResource": {
       "type": "object",
+      "title": "Entity Resource",
       "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
       "properties": {
         "etag": {
@@ -93,20 +94,6 @@
         "message": {
           "type": "string",
           "description": "Detailed reason why the given name is not available."
-        }
-      }
-    },
-    "EncryptionProperties": {
-      "type": "object",
-      "description": "Configuration of key for data encryption",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/EncryptionStatus",
-          "description": "Indicates whether or not the encryption is enabled for container registry."
-        },
-        "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
-          "description": "Key vault properties."
         }
       }
     },
@@ -194,6 +181,7 @@
     },
     "ErrorResponse": {
       "type": "object",
+      "title": "Error response",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
       "properties": {
         "error": {
@@ -246,32 +234,6 @@
         }
       }
     },
-    "LocationData": {
-      "type": "object",
-      "description": "Metadata pertaining to the geographic location of the resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "A canonical name for the geographic or physical location.",
-          "maxLength": 256
-        },
-        "city": {
-          "type": "string",
-          "description": "The city or locality where the resource is located."
-        },
-        "district": {
-          "type": "string",
-          "description": "The district, state, or province where the resource is located."
-        },
-        "countryOrRegion": {
-          "type": "string",
-          "description": "The country or region where the resource is located"
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
     "LocationResourceParameter": {
       "type": "object",
       "description": "The default location parameter type.",
@@ -288,6 +250,7 @@
     },
     "Operation": {
       "type": "object",
+      "title": "REST API Operation",
       "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
       "properties": {
         "name": {
@@ -485,6 +448,7 @@
     },
     "ProxyResource": {
       "type": "object",
+      "title": "Proxy Resource",
       "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
       "allOf": [
         {
@@ -494,6 +458,7 @@
     },
     "Resource": {
       "type": "object",
+      "title": "Resource",
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "properties": {
         "id": {
@@ -513,7 +478,7 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "$ref": "#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         }
@@ -635,40 +600,9 @@
         ]
       }
     },
-    "SystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "$ref": "#/definitions/createdByType",
-          "description": "The type of identity that created the resource."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/createdByType",
-          "description": "The type of identity that last modified the resource."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
-    },
     "TrackedResource": {
       "type": "object",
+      "title": "Tracked Resource",
       "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
@@ -730,6 +664,78 @@
             "description": "The entity was created by a key."
           }
         ]
+      }
+    },
+    "encryptionProperties": {
+      "type": "object",
+      "description": "Configuration of key for data encryption",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/EncryptionStatus",
+          "description": "Indicates whether or not the encryption is enabled for container registry."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Key vault properties."
+        }
+      }
+    },
+    "locationData": {
+      "type": "object",
+      "description": "Metadata pertaining to the geographic location of the resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A canonical name for the geographic or physical location.",
+          "maxLength": 256
+        },
+        "city": {
+          "type": "string",
+          "description": "The city or locality where the resource is located."
+        },
+        "district": {
+          "type": "string",
+          "description": "The district, state, or province where the resource is located."
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "The country or region where the resource is located"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "systemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "$ref": "#/definitions/createdByType",
+          "description": "The type of identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/createdByType",
+          "description": "The type of identity that last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
       }
     }
   },
@@ -818,6 +824,7 @@
       "required": true,
       "type": "string",
       "format": "uuid",
+      "minLength": 1,
       "x-ms-parameter-location": "client"
     },
     "TenantIdParameter": {

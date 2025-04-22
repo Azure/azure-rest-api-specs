@@ -2,18 +2,18 @@
   "swagger": "2.0",
   "info": {
     "title": "Common types",
-    "version": "v6"
+    "version": "6.0"
   },
   "paths": {},
   "definitions": {
     "PrivateEndpoint": {
       "type": "object",
-      "description": "The Private Endpoint resource.",
+      "description": "The private endpoint resource.",
       "properties": {
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource identifier for private endpoint",
+          "description": "The resource identifier of the private endpoint",
           "readOnly": true
         }
       }
@@ -44,10 +44,13 @@
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "URL to get the next set of operation list results (if there are any).",
           "readOnly": true
         }
@@ -134,7 +137,7 @@
           {
             "name": "Pending",
             "value": "Pending",
-            "description": "Connectionaiting for approval or rejection"
+            "description": "Connection waiting for approval or rejection"
           },
           {
             "name": "Approved",
@@ -175,10 +178,13 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "URL to get the next set of operation list results (if there are any).",
           "readOnly": true
         }

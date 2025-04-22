@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Common types",
-    "version": "v6"
+    "version": "6.0"
   },
   "paths": {},
   "definitions": {
@@ -133,16 +133,16 @@
       "type": "object",
       "description": "User assigned identity properties",
       "properties": {
-        "clientId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The client ID of the assigned identity.",
-          "readOnly": true
-        },
         "principalId": {
           "type": "string",
           "format": "uuid",
           "description": "The principal ID of the assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The client ID of the assigned identity.",
           "readOnly": true
         }
       }
