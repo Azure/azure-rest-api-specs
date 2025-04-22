@@ -27,7 +27,16 @@ These are the global settings for the neon service.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-03-01-preview
+tag: package-2025-03-01
+```
+
+### Tag: package-2025-03-01
+
+These settings apply only when `--tag=package-2025-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-01'
+input-file:
+  - Neon.Postgres/stable/2025-03-01/neon.json
 ```
 
 ### Tag: package-2025-03-01-preview

@@ -10,7 +10,10 @@
     "build": "tsc --build",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose",
-    "clean": "rm -rf dist && rm -rf node_modules"
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "prettier": "prettier \"**/*.js\" --check",
+    "prettier:debug": "prettier \"**/*.js\" --check ---log-level debug",
+    "prettier:write": "prettier \"**/*.js\" --write"
   },
   "engines": {
     "node": ">= 20.0.0"
@@ -18,8 +21,9 @@
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@azure-tools/openapi-tools-common": "^1.2.2",
+    "@azure-tools/specs-shared": "file:../../../.github/shared",
     "@azure/openapi-markdown": "^0.9.4",
-    "@microsoft.azure/openapi-validator": "2.2.3",
+    "@microsoft.azure/openapi-validator": "2.2.4",
     "@types/js-yaml": "^3.12.10",
     "autorest": "3.6.1",
     "axios": "^1.8.3",
@@ -33,6 +37,7 @@
     "execa": "^9.5.2",
     "memfs": "^4.17.0",
     "typescript": "~5.6.2",
-    "vitest": "^3.0.2"
+    "vitest": "^3.0.2",
+    "prettier": "~3.5.3"
   }
 }
