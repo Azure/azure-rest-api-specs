@@ -27,7 +27,7 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
-  v2021_10_01_preview: "2024-11-18-preview",
+  v2024_11_18_preview: "2024-11-18-preview",
 }
 
 @doc("User details for an organization")
@@ -88,6 +88,7 @@ model OrganizationProperties is BaseResourceProperties {
   partnerProperties?: PartnerProperties;
 }
 
+@doc("The resource model definition for an Azure Organization")
 model OrganizationResource
   is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
   @key("organizationName")
