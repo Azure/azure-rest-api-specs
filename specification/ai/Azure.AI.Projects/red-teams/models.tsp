@@ -122,6 +122,32 @@ union RiskCategory {
   UngroundedAttributes: "UngroundedAttributes",
 }
 
+@doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+model AzureOpenAIModelConfiguration extends TargetConfig {
+  @visibility(Lifecycle.Read)
+  type: "AzureAOAIModel";
+
+  @doc("Endpoint targetURI for AOAI model.")
+  AzureEndpoint: string;
+
+  @doc("API Key for AOAI model.")
+  apiKey: string;
+
+  @doc("Deployment name for AOAI model.")
+  azureDeployment: string;
+}
+
+@doc("Abstract class for target configuration.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v_latest)
+@discriminator("type")
+model TargetConfig {
+  @doc("Type of the model configuration.")
+  type: string;
+}
+
 @doc("Red team details.")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
@@ -159,4 +185,7 @@ model RedTeam {
   @doc("Status of the red-team. It is set by service and is read-only.")
   @visibility(Lifecycle.Read)
   status?: string;
+
+  @doc("Target configuration for the red-team run.")
+  targetConfig: TargetConfig;
 }

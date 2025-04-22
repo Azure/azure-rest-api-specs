@@ -1972,6 +1972,35 @@
       ],
       "x-ms-discriminator-value": "AzureSearch"
     },
+    "AzureOpenAIModelConfiguration": {
+      "type": "object",
+      "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
+      "properties": {
+        "AzureEndpoint": {
+          "type": "string",
+          "description": "Endpoint targetURI for AOAI model."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "API Key for AOAI model."
+        },
+        "azureDeployment": {
+          "type": "string",
+          "description": "Deployment name for AOAI model."
+        }
+      },
+      "required": [
+        "AzureEndpoint",
+        "apiKey",
+        "azureDeployment"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetConfig"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureAOAIModel"
+    },
     "BaseCredentials": {
       "type": "object",
       "description": "A base class for connection credentials",
@@ -3204,6 +3233,10 @@
           "type": "string",
           "description": "Status of the red-team. It is set by service and is read-only.",
           "readOnly": true
+        },
+        "targetConfig": {
+          "$ref": "#/definitions/TargetConfig",
+          "description": "Target configuration for the red-team run."
         }
       },
       "required": [
@@ -3211,7 +3244,8 @@
         "numTurns",
         "attackStrategies",
         "simulationOnly",
-        "riskCategories"
+        "riskCategories",
+        "targetConfig"
       ]
     },
     "RiskCategory": {
@@ -3343,6 +3377,20 @@
         "name",
         "size",
         "tier"
+      ]
+    },
+    "TargetConfig": {
+      "type": "object",
+      "description": "Abstract class for target configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the model configuration."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     }
   },
