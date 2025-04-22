@@ -14,18 +14,20 @@
             "name": "myProject",
             "type": "Microsoft.CognitiveServices/accounts/projects",
             "location": "westus",
-            "sku": {
-              "name": "F0"
-            },
-            "kind": "Emotion",
             "tags": {
               "Owner": "felixwa",
               "ExpiredDate": "2017/09/01"
             },
             "etag": "W/\"datetime'2017-04-10T04%3A42%3A19.7067387Z'\"",
             "properties": {
-              "endpoint": "https://westus.api.cognitive.microsoft.com/emotion/v1.0",
-              "provisioningState": "Succeeded"
+              "provisioningState": "Succeeded",
+              "displayName": "myProject1",
+              "description": "This is my project 1",
+              "endpoints": {
+                "OpenAI Language Model Instance API": "https://customSubDomainName.openai.azure.com/",
+                "OpenAI Dall-E API": "https://customSubDomainName.openai.azure.com/"
+              },
+              "isDefault": true
             }
           },
           {
@@ -33,15 +35,17 @@
             "name": "myProject-2",
             "type": "Microsoft.CognitiveServices/accounts/projects",
             "location": "westus",
-            "sku": {
-              "name": "S0"
-            },
-            "kind": "Face",
             "tags": {},
             "etag": "W/\"datetime'2017-04-07T04%3A32%3A38.9187216Z'\"",
             "properties": {
-              "endpoint": "https://westus.api.cognitive.microsoft.com/face/v1.0",
-              "provisioningState": "Succeeded"
+              "provisioningState": "Succeeded",
+              "displayName": "myProject2",
+              "description": "This is my project 2",
+              "endpoints": {
+                "OpenAI Language Model Instance API": "https://customSubDomainName2.openai.azure.com/",
+                "OpenAI Dall-E API": "https://customSubDomainName2.openai.azure.com/"
+              },
+              "isDefault": false
             }
           }
         ]
